@@ -1,0 +1,2136 @@
+{
+  "version": 1,
+  "level": "frontier-26",
+  "scope": [
+    "thm-the-category-of-binary-words-is-monoidal",
+    "thm-the-module-endofunctor-category-is-strict-monoidal",
+    "thm-mac-lane-strictification",
+    "thm-a-monoidal-category-equivalent-to-a-strict-one-satisfies-coherence",
+    "thm-mac-lane-coherence-in-the-canonical-map-form",
+    "thm-unbracketed-tensor-strings-are-well-defined-expressions",
+    "thm-the-monoid-object-axioms-may-be-written-without-associators",
+    "thm-the-word-category-is-the-free-monoidal-category-on-one-generator",
+    "cor-coherence-follows-from-freeness",
+    "fs-every-diagram-in-a-monoidal-category-commutes",
+    "fs-every-monoidal-category-is-isomorphic-to-a-strict-one",
+    "fs-every-monoidal-category-is-monoidally-equivalent-to-a-skeletal-strict-one",
+    "fs-coherence-says-that-any-two-parallel-morphisms-in-a-monoidal-category-are-equal",
+    "fs-strictification-requires-the-axiom-of-choice",
+    "ex-the-two-routes-around-the-pentagon-are-equal",
+    "ex-the-canonical-map-between-two-bracketings-of-a-five-fold-product",
+    "ex-the-word-category-on-words-of-length-three",
+    "ex-strictification-of-a-cartesian-monoidal-category-computed",
+    "cex-two-formally-distinct-words-that-become-the-same-object",
+    "ex-a-monoid-object-written-with-and-without-associators"
+  ],
+  "contracts": {
+    "thm-the-category-of-binary-words-is-monoidal": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-the-category-of-binary-words",
+          "source_section": "Definition",
+          "quote": "The **binary words** are generated recursively from:\n\n- the empty word $e_0$;\n- the one-letter word $(-)$;\n- if $v$ and $w$ are binary words, a new word $(v\\square w)$.\n\nTheir **length** is defined recursively by\n$$|e_0|=0,\\qquad |(-)|=1,\\qquad |v\\square w|=|v|+|w|.$$\n\nThe **category of binary words** $W$ has these words as objects. For objects\n$v,w$,\n$$W(v,w)=\\begin{cases}\\{\\ast_{v,w}\\},& |v|=|w|,\\\\ \\varnothing,& |v|\\ne|w|.\\end{cases}$$\n\nComposition and identities are forced by this rule: when the hom-collection is\nnonempty there is exactly one possible composite and exactly one possible\nidentity arrow. Thus $W$ is a category in the sense of [[def-category]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **monoidal category** is a category $\\mathcal C$ equipped with:\n\n- a bifunctor $\\otimes:\\mathcal C\\times\\mathcal C\\to\\mathcal C$\n  ([[def-product-category]], [[def-functor-and-contravariant-functor]]);\n- an object $\\mathbf 1$ of $\\mathcal C$;\n- natural isomorphisms ([[def-natural-isomorphism]])\n  $$\\alpha_{X,Y,Z}:((X\\otimes Y)\\otimes Z)\\longrightarrow X\\otimes(Y\\otimes Z),$$\n  $$\\lambda_X:(\\mathbf 1\\otimes X)\\longrightarrow X,\\qquad \\rho_X:(X\\otimes\\mathbf 1)\\longrightarrow X,$$\n\nsuch that the following two equations hold for all objects\n$W,X,Y,Z\\in\\mathcal C$.\n\nThe **pentagon axiom** is\n\n$$\\alpha_{W,X,Y\\otimes Z}\\circ\\alpha_{W\\otimes X,Y,Z}=(1_W\\otimes\\alpha_{X,Y,Z})\\circ\\alpha_{W,X\\otimes Y,Z}\\circ(\\alpha_{W,X,Y}\\otimes1_Z).$$\n\nThe **triangle axiom** is\n\n$$(1_X\\otimes\\lambda_Y)\\circ\\alpha_{X,\\mathbf 1,Y}=\\rho_X\\otimes1_Y.$$\n\nThis page imposes no further axiom. In particular, the equality\n$\\lambda_{\\mathbf 1}=\\rho_{\\mathbf 1}$ is not built into the definition; it is\nderived later on this page.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $f:v\\to v'$ and $g:w\\to w'$ exist in $W$, then $|v|=|v'|$ and $|w|=|w'|$, so $|v\\square w|=|v'\\square w'|$. Define $f\\otimes g$ to be the unique morphism $v\\square w\\to v'\\square w'$. Because all such morphisms are unique when they exist, this tensor preserves identities and composition automatically.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For words $u,v,w$, the source and target of\n$$((u\\square v)\\square w)\\longrightarrow u\\square(v\\square w),\\qquad e_0\\square u\\longrightarrow u,\\qquad u\\square e_0\\longrightarrow u$$\nhave the same lengths, so [L1] gives unique arrows $\\alpha_{u,v,w}$, $\\lambda_u$, and $\\rho_u$. Their reverse arrows also exist uniquely, so these are isomorphisms.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two sides of the pentagon are morphisms in $W$ from one fourfold word to another of length $|u|+|v|+|w|+|z|$. By [L1] there is only one such morphism, so the pentagon commutes. The same uniqueness argument gives the triangle identity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.1 supply exactly the data required in [L2], so $W$ is monoidal.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The category of binary words is monoidal, the theorem is a structural monoidal-construction claim and does not split off a separate empty-family branch beyond using the unit object uniformly."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The category of binary words is monoidal, no denominator, zero divisor, or zero-parameter boundary appears beyond the ordinary length accounting already built into the definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The category of binary words is monoidal, there is no separate singleton case to audit beyond the general uniqueness argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The category of binary words is monoidal, no further degenerate configuration remains once equal-length arrows are the only arrows."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The category of binary words is monoidal, there is no endpoint-equality branch distinct from the general source-target equal-length check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The category of binary words is monoidal, the proof makes no arbitrary selection from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The category of binary words is monoidal, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The category of binary words is monoidal, the claim is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the proof risk is the uniqueness-based collapse of the monoidal axioms. Steps 1.1-2.1 explicitly build tensor, associator, and unitors from equal-length arrows, and the pentagon and triangle commute because W has exactly one morphism between fixed equal-length words."
+      }
+    },
+    "thm-the-module-endofunctor-category-is-strict-monoidal": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-the-category-of-right-module-endofunctors",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal category\n([[def-monoidal-category]]).\n\nThe **category of right-module endofunctors** $\\mathcal C'$ has:\n\n- objects given by pairs $(F,c)$ where $F:\\mathcal C\\to\\mathcal C$ is a functor\n  ([[def-functor-and-contravariant-functor]]) and\n  $$c_{X,Y}:F(X)\\otimes Y\\longrightarrow F(X\\otimes Y)$$\n  is a natural isomorphism ([[def-natural-isomorphism]]) in $X$ and $Y$ such\n  that\n  $$F(\\alpha_{X,Y,Z})\\circ c_{X\\otimes Y,Z}\\circ(c_{X,Y}\\otimes1_Z)=c_{X,Y\\otimes Z}\\circ\\alpha_{F(X),Y,Z}$$\n  and\n  $$F(\\rho_X)\\circ c_{X,\\mathbf 1}=\\rho_{F(X)};$$\n- morphisms $(F,c)\\to(G,d)$ given by natural transformations\n  $\\theta:F\\Rightarrow G$ ([[def-natural-transformation]]) satisfying\n  $$\\theta_{X\\otimes Y}\\circ c_{X,Y}=d_{X,Y}\\circ(\\theta_X\\otimes1_Y)$$\n  for all objects $X,Y$.\n\nIdentities and composition are inherited from natural transformations: the\nidentity transformation satisfies the compatibility equation immediately, and\nif $\\theta:(F,c)\\Rightarrow(G,d)$ and $\\eta:(G,d)\\Rightarrow(H,e)$ are\ncompatible, then substituting their two equations shows that\n$\\eta\\circ\\theta$ is compatible as well. Associativity and the identity laws\nare therefore inherited from vertical composition of natural transformations.\n\nThus an object of $\\mathcal C'$ is an endofunctor equipped with a coherent way\nto slide a tensor factor on the right through the functor.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-strict-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **strict monoidal category** is a monoidal category\n$(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$\n([[def-monoidal-category]]) in which\n\n$$((X\\otimes Y)\\otimes Z)=X\\otimes(Y\\otimes Z),\\qquad \\mathbf 1\\otimes X=X,\\qquad X\\otimes\\mathbf 1=X$$\n\nas literal equalities of objects, and the constraint isomorphisms are identities:\n\n$$\\alpha_{X,Y,Z}=1_{X\\otimes(Y\\otimes Z)},\\qquad \\lambda_X=1_X,\\qquad \\rho_X=1_X.$$\n\nThus a strict monoidal category does not merely identify the two bracketings up\nto a specified isomorphism; it makes them equal on the nose.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For objects $(F,c)$ and $(G,d)$ of $\\mathcal C'$, define $(F,c)\\otimes(G,d):=(FG,e)$ with $e_{X,Y}:=F(d_{X,Y})\\circ c_{G(X),Y}$. The axioms from [L1] for $c$ and $d$ imply the same associativity and unit equations for $e$, so $(FG,e)$ is again an object of $\\mathcal C'$. For morphisms $\\theta:(F,c)\\Rightarrow(F',c')$ and $\\eta:(G,d)\\Rightarrow(G',d')$, define $(\\theta\\otimes\\eta)_X:=\\theta_{G'(X)}\\circ F(\\eta_X)=F'(\\eta_X)\\circ\\theta_{G(X)}$. The equality is naturality, and the module-compatibility equation follows from the corresponding equations for $\\theta$ and $\\eta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\mathbf I$ be the identity functor on $\\mathcal C$ with structure map $i_{X,Y}=1_{X\\otimes Y}$. Then $(\\mathbf I,i)$ is an object of $\\mathcal C'$ and acts as a two-sided unit for the tensor just defined.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Composition of endofunctors is literally associative and unital, so $((F\\otimes G)\\otimes H)=FGH=F\\otimes(G\\otimes H)$ and $\\mathbf I\\otimes F=F=F\\otimes\\mathbf I$ as equalities of objects. The induced structure maps agree term by term from the definition in step 1.1, so the associator and unitors are identities.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 verifies the strictness clause of [L2], so $\\mathcal C'$ is\nstrict monoidal under composition.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The right-module endofunctor category is strict monoidal, the theorem is a category-level construction and not a separate empty-input case analysis."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The right-module endofunctor category is strict monoidal, no zero-value or denominator boundary occurs."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The right-module endofunctor category is strict monoidal, the unit functor is handled uniformly rather than as a separate singleton branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The right-module endofunctor category is strict monoidal, no additional degenerate configuration remains once the composition formulas are fixed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The right-module endofunctor category is strict monoidal, there is no endpoint-style boundary distinct from the associativity and unit equations already checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The right-module endofunctor category is strict monoidal, the proof uses only explicit constructions and no arbitrary choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The right-module endofunctor category is strict monoidal, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The right-module endofunctor category is strict monoidal, the claim is not a biconditional."
+        }
+      ]
+    },
+    "thm-mac-lane-strictification": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-the-category-of-right-module-endofunctors",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal category\n([[def-monoidal-category]]).\n\nThe **category of right-module endofunctors** $\\mathcal C'$ has:\n\n- objects given by pairs $(F,c)$ where $F:\\mathcal C\\to\\mathcal C$ is a functor\n  ([[def-functor-and-contravariant-functor]]) and\n  $$c_{X,Y}:F(X)\\otimes Y\\longrightarrow F(X\\otimes Y)$$\n  is a natural isomorphism ([[def-natural-isomorphism]]) in $X$ and $Y$ such\n  that\n  $$F(\\alpha_{X,Y,Z})\\circ c_{X\\otimes Y,Z}\\circ(c_{X,Y}\\otimes1_Z)=c_{X,Y\\otimes Z}\\circ\\alpha_{F(X),Y,Z}$$\n  and\n  $$F(\\rho_X)\\circ c_{X,\\mathbf 1}=\\rho_{F(X)};$$\n- morphisms $(F,c)\\to(G,d)$ given by natural transformations\n  $\\theta:F\\Rightarrow G$ ([[def-natural-transformation]]) satisfying\n  $$\\theta_{X\\otimes Y}\\circ c_{X,Y}=d_{X,Y}\\circ(\\theta_X\\otimes1_Y)$$\n  for all objects $X,Y$.\n\nIdentities and composition are inherited from natural transformations: the\nidentity transformation satisfies the compatibility equation immediately, and\nif $\\theta:(F,c)\\Rightarrow(G,d)$ and $\\eta:(G,d)\\Rightarrow(H,e)$ are\ncompatible, then substituting their two equations shows that\n$\\eta\\circ\\theta$ is compatible as well. Associativity and the identity laws\nare therefore inherited from vertical composition of natural transformations.\n\nThus an object of $\\mathcal C'$ is an endofunctor equipped with a coherent way\nto slide a tensor factor on the right through the functor.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-module-endofunctor-category-is-strict-monoidal",
+          "source_section": "Statement",
+          "quote": "For every monoidal category $\\mathcal C$, the category $\\mathcal C'$ of\n[[def-the-category-of-right-module-endofunctors]] is a strict monoidal category\nunder composition of endofunctors.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-monoidal-equivalence",
+          "source_section": "Definition",
+          "quote": "A **monoidal equivalence** from $\\mathcal C$ to $\\mathcal D$ is a strong\nmonoidal functor $F:\\mathcal C\\to\\mathcal D$\n([[def-lax-strong-and-strict-monoidal-functor]]) together with:\n\n- a strong monoidal functor $G:\\mathcal D\\to\\mathcal C$;\n- monoidal natural isomorphisms\n  $$\\eta:1_{\\mathcal C}\\Rightarrow GF,\\qquad \\varepsilon:FG\\Rightarrow1_{\\mathcal D}$$\n  ([[def-monoidal-natural-transformation]]).\n\nHere $GF$ and $FG$ carry the composite strong monoidal structures of\n[[thm-monoidal-functors-compose-and-laxness-is-preserved]], and each identity\nfunctor carries the strict monoidal structure whose binary and unit maps are\nidentities. Thus both displayed transformations are between specified lax\nmonoidal functors.\n\nThus the underlying functor $F$ is an equivalence of categories in the sense of\n[[def-equivalence-and-adjoint-equivalence-of-categories]], but the monoidal\nquasi-inverse $G$ is part of the data and not a canonical construction. By\n[[thm-every-equivalence-can-be-made-an-adjoint-equivalence]], one may choose the\nunderlying equivalence data so that the triangle identities also hold, but that\nextra choice is not built into the base definition here.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-fully-faithful-split-essentially-surjective-characterises-equivalence",
+          "source_section": "Statement",
+          "quote": "A functor $F:\\mathcal C\\to\\mathcal D$ is an equivalence exactly when it is fully\nfaithful and split essentially surjective. No choice principle is needed because\nthe splitting is part of the data.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-every-equivalence-can-be-made-an-adjoint-equivalence",
+          "source_section": "Statement",
+          "quote": "Every equivalence of categories admits a choice of unit and counit satisfying\nthe triangle identities, and hence can be equipped as an adjoint equivalence.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "prop-fully-faithful-functors-reflect-isomorphisms",
+          "source_section": "Statement",
+          "quote": "If $F:\\mathcal C\\to\\mathcal D$ is fully faithful and $F(f)$ is an isomorphism,\nthen $f$ is an isomorphism.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each object $X$ of $\\mathcal C$, put $L(X)=(X\\otimes-,\\alpha_{X,-,-})$. The pentagon and triangle axioms of $\\mathcal C$ are exactly the coherence and unit equations required in [L1], so $L(X)$ is an object of $\\mathcal C'$. For a morphism $f:X\\to Y$, define $L(f)_Z=f\\otimes1_Z$. Naturality of the associator shows that $L(f)$ is a morphism in $\\mathcal C'$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The functor $L$ is split essentially surjective. For an object $(F,c)$ of $\\mathcal C'$, let $X:=F(\\mathbf 1)$ and define $\\phi_Y:=F(\\lambda_Y)\\circ c_{\\mathbf 1,Y}:X\\otimes Y\\to F(Y)$. Each $\\phi_Y$ is an isomorphism because both factors are, and naturality of $c$ together with its coherence equations makes $\\phi:L(X)\\Rightarrow(F,c)$ a morphism in $\\mathcal C'$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The unit comparison for $L$ is the natural isomorphism $(L_0)_Z=\\lambda_Z^{-1}:Z\\to\\mathbf 1\\otimes Z$, and the binary comparison $L_2(X,Y):L(X)\\otimes L(Y)\\Rightarrow L(X\\otimes Y)$ has component $\\alpha^{-1}_{X,Y,Z}:X\\otimes(Y\\otimes Z)\\to(X\\otimes Y)\\otimes Z$. The same pentagon and triangle identities show these are morphisms in $\\mathcal C'$, so $L$ is strong monoidal into the strict monoidal target of [L2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The functor $L$ is faithful. If $L(f)=L(g)$, then their components at the unit object agree, and composing with the right unitors gives $f=\\rho_Y\\circ L(f)_{\\mathbf 1}\\circ\\rho_X^{-1}=\\rho_Y\\circ L(g)_{\\mathbf 1}\\circ\\rho_X^{-1}=g$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The functor $L$ is full. Given a morphism $\\theta:L(X)\\Rightarrow L(Y)$ in $\\mathcal C'$, define $f=\\rho_Y\\circ\\theta_{\\mathbf 1}\\circ\\rho_X^{-1}:X\\to Y$. The compatibility equation from [L1], evaluated at $(\\mathbf 1,Z)$, identifies $\\theta_Z$ with $f\\otimes1_Z$ after the unitors are inserted, so $\\theta=L(f)$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By steps 2.2-3.1 and [L4], the underlying functor of $L$ is an equivalence of categories. By [L5], choose an adjoint-equivalence quasi-inverse $G:\\mathcal C'\\to\\mathcal C$ with natural isomorphisms $\\eta:1_{\\mathcal C}\\Rightarrow GL$ and $\\varepsilon:LG\\Rightarrow1_{\\mathcal C'}$.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "step 1.2",
+            "step 2.2",
+            "step 3.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Use full faithfulness of $L$ to define the binary comparison $G_2(A,B):G(A)\\otimes G(B)\\to G(A\\otimes B)$ as the unique morphism whose image under $L$ is $$\\varepsilon_{A\\otimes B}^{-1}\\circ(\\varepsilon_A\\otimes\\varepsilon_B)\\circ L_2(GA,GB)^{-1}.$$ Define $G_0:\\mathbf1_{\\mathcal C}\\to G(\\mathbf1_{\\mathcal C'})$ uniquely by $$L(G_0)=\\varepsilon_{\\mathbf1_{\\mathcal C'}}^{-1}\\circ L_0^{-1}.$$ Naturality of $\\varepsilon$ and $L_2$ makes the displayed images natural in $A,B$, so faithfulness of $L$ makes $G_2$ natural. Both comparisons are isomorphisms by [L6].",
+          "step": "5.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "L6",
+            "step 2.1",
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Apply the faithful functor $L$ to the associativity and unit diagrams for $G_2,G_0$. By their defining formulas, the images reduce to the coherence diagrams for the strong monoidal functor $L$ together with naturality of $\\varepsilon$, so they commute. Thus $G$ is strong monoidal, and the defining equations in step 5.1 say exactly that $\\varepsilon$ is monoidal. The triangle identity $\\varepsilon L\\circ L\\eta=1_L$ gives $L\\eta=(\\varepsilon L)^{-1}$; since the inverse of a monoidal natural isomorphism is monoidal, faithfulness of $L$ then verifies the binary and unit equations for $\\eta$. Hence $\\eta$ is monoidal. The data $(L,G,\\eta,\\varepsilon)$ therefore satisfy [L3], so $L$ is a monoidal equivalence to the strict monoidal category $\\mathcal C'$.",
+          "step": "6.1",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Given monoidal category contains its unit object, and step 2.1 uses the identity endofunctor as the unit of the nonempty strict target."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Mac Lane strictification, no zero denominator or zero-parameter branch occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly constructs the unit comparison L_0, and step 5.1 explicitly transports the unit comparison G_0 for the quasi-inverse."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement imposes no size or nontriviality condition on the monoidal category; steps 1.1--6.1 use only its coherence data and include one-object monoidal categories."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Mac Lane strictification, there is no endpoint-equality boundary independent of the naturality and unit equations already used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 gives the explicit preimage F(1) for every target object; step 4.1 then invokes the split-equivalence and adjoint-equivalence theorems to choose coherent quasi-inverse data, while step 5.1 uses uniqueness from full faithfulness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Mac Lane strictification, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Mac Lane strictification, the claim is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "session-terminal-resolution",
+        "notes": "Checked against Etingof--Gelaki--Nikshych--Ostrik, Theorem 2.8.5 and Remark 2.4.10. The fullness formula correctly uses right unitors. Because the local definition requires explicit monoidal quasi-inverse data, steps 4.1--6.1 transport a strong monoidal structure to an adjoint quasi-inverse; the comparison formulas are typed, naturality is checked through faithful L, epsilon is monoidal by construction, and the triangle identity gives L eta=(epsilon L)^(-1), proving eta monoidal by faithfulness."
+      }
+    },
+    "thm-a-monoidal-category-equivalent-to-a-strict-one-satisfies-coherence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-canonical-morphism-between-parenthesised-words",
+          "source_section": "Definition",
+          "quote": "Let $u$ and $v$ be parenthesised tensor words on the same ordered letters\n$x_1,\\dots,x_n$ ([[def-parenthesised-tensor-word]]) and let\n$E_u,E_v:\\mathcal C^n\\to\\mathcal C$ be their evaluation functors in a monoidal\ncategory $\\mathcal C$ ([[def-monoidal-category]]).\n\nA **canonical morphism** from $u$ to $v$ is a natural transformation\n$E_u\\Rightarrow E_v$ ([[def-natural-transformation]]) belonging to the smallest\nclass closed under:\n\n- identities $1_{E_u}$;\n- the associator, left unitor, and right unitor of $\\mathcal C$, together with\n  their inverses, whenever their source and target are evaluation functors of\n  parenthesised words;\n- tensoring a canonical morphism with an identity natural transformation on the\n  left or right, whenever the resulting source and target still come from\n  parenthesised words;\n- vertical composition of canonical morphisms.\n\nThus a canonical morphism is built only from the structural isomorphisms\n$\\alpha,\\lambda,\\rho$, their inverses, identities, tensoring with identities,\nand composition. No arbitrary morphism of $\\mathcal C$ is canonical merely\nbecause its source and target happen to be tensor products of the same objects.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-monoidal-equivalence",
+          "source_section": "Definition",
+          "quote": "A **monoidal equivalence** from $\\mathcal C$ to $\\mathcal D$ is a strong\nmonoidal functor $F:\\mathcal C\\to\\mathcal D$\n([[def-lax-strong-and-strict-monoidal-functor]]) together with:\n\n- a strong monoidal functor $G:\\mathcal D\\to\\mathcal C$;\n- monoidal natural isomorphisms\n  $$\\eta:1_{\\mathcal C}\\Rightarrow GF,\\qquad \\varepsilon:FG\\Rightarrow1_{\\mathcal D}$$\n  ([[def-monoidal-natural-transformation]]).\n\nHere $GF$ and $FG$ carry the composite strong monoidal structures of\n[[thm-monoidal-functors-compose-and-laxness-is-preserved]], and each identity\nfunctor carries the strict monoidal structure whose binary and unit maps are\nidentities. Thus both displayed transformations are between specified lax\nmonoidal functors.\n\nThus the underlying functor $F$ is an equivalence of categories in the sense of\n[[def-equivalence-and-adjoint-equivalence-of-categories]], but the monoidal\nquasi-inverse $G$ is part of the data and not a canonical construction. By\n[[thm-every-equivalence-can-be-made-an-adjoint-equivalence]], one may choose the\nunderlying equivalence data so that the triangle identities also hold, but that\nextra choice is not built into the base definition here.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-fully-faithful-split-essentially-surjective-characterises-equivalence",
+          "source_section": "Statement",
+          "quote": "A functor $F:\\mathcal C\\to\\mathcal D$ is an equivalence exactly when it is fully\nfaithful and split essentially surjective. No choice principle is needed because\nthe splitting is part of the data.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-strict-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **strict monoidal category** is a monoidal category\n$(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$\n([[def-monoidal-category]]) in which\n\n$$((X\\otimes Y)\\otimes Z)=X\\otimes(Y\\otimes Z),\\qquad \\mathbf 1\\otimes X=X,\\qquad X\\otimes\\mathbf 1=X$$\n\nas literal equalities of objects, and the constraint isomorphisms are identities:\n\n$$\\alpha_{X,Y,Z}=1_{X\\otimes(Y\\otimes Z)},\\qquad \\lambda_X=1_X,\\qquad \\rho_X=1_X.$$\n\nThus a strict monoidal category does not merely identify the two bracketings up\nto a specified isomorphism; it makes them equal on the nose.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $F$ is strong monoidal, applying $F$ to any generator listed in [L1] and then using the structure isomorphisms of $F$ again yields a canonical morphism in $\\mathcal D$ between the corresponding parenthesised tensor words in the images of the objects. Therefore $F$ sends canonical composites in $\\mathcal C$ to canonical composites in $\\mathcal D$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the strict target $\\mathcal D$, [L4] makes every canonical morphism between the same source and target the identity of the common tensor object. Hence the images under $F$ of any two canonical morphisms in $\\mathcal C$ with the same source and target are equal.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2] and [L3], the underlying functor of $F$ is faithful. So equality after applying $F$ implies equality before applying $F$. Therefore any two canonical morphisms in $\\mathcal C$ with the same source and target are equal.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A monoidal category equivalent to a strict one satisfies coherence, the theorem is a transport-of-structure argument rather than an empty-input branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A monoidal category equivalent to a strict one satisfies coherence, no zero-value or denominator boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A monoidal category equivalent to a strict one satisfies coherence, there is no separate singleton branch beyond the general canonical-map transport."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A monoidal category equivalent to a strict one satisfies coherence, the only collapse considered is the strict target's on-the-nose bracketing equality already built into the theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A monoidal category equivalent to a strict one satisfies coherence, there is no endpoint-style boundary distinct from the source-target equality of canonical maps."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A monoidal category equivalent to a strict one satisfies coherence, the proof uses only the given equivalence data and no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A monoidal category equivalent to a strict one satisfies coherence, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A monoidal category equivalent to a strict one satisfies coherence, the claim is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the proof risk is transporting canonical morphisms through a monoidal equivalence. Step 1.1 sends the canonical generators to canonical morphisms in the strict target, step 2.1 collapses them there to identities, and step 3.1 pulls equality back by faithfulness."
+      }
+    },
+    "thm-mac-lane-coherence-in-the-canonical-map-form": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-canonical-morphism-between-parenthesised-words",
+          "source_section": "Definition",
+          "quote": "Let $u$ and $v$ be parenthesised tensor words on the same ordered letters\n$x_1,\\dots,x_n$ ([[def-parenthesised-tensor-word]]) and let\n$E_u,E_v:\\mathcal C^n\\to\\mathcal C$ be their evaluation functors in a monoidal\ncategory $\\mathcal C$ ([[def-monoidal-category]]).\n\nA **canonical morphism** from $u$ to $v$ is a natural transformation\n$E_u\\Rightarrow E_v$ ([[def-natural-transformation]]) belonging to the smallest\nclass closed under:\n\n- identities $1_{E_u}$;\n- the associator, left unitor, and right unitor of $\\mathcal C$, together with\n  their inverses, whenever their source and target are evaluation functors of\n  parenthesised words;\n- tensoring a canonical morphism with an identity natural transformation on the\n  left or right, whenever the resulting source and target still come from\n  parenthesised words;\n- vertical composition of canonical morphisms.\n\nThus a canonical morphism is built only from the structural isomorphisms\n$\\alpha,\\lambda,\\rho$, their inverses, identities, tensoring with identities,\nand composition. No arbitrary morphism of $\\mathcal C$ is canonical merely\nbecause its source and target happen to be tensor products of the same objects.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-mac-lane-strictification",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a monoidal category. Then the assignment\n$$L(X)=\\bigl(X\\otimes -,\\,\\alpha_{X,-,-}\\bigr)$$\ndefines a strong monoidal functor $L:\\mathcal C\\to\\mathcal C'$ from\n$\\mathcal C$ to the strict monoidal category $\\mathcal C'$ of\n[[def-the-category-of-right-module-endofunctors]], and $L$ is a monoidal\nequivalence. Consequently every monoidal category is monoidally equivalent to a\nstrict monoidal category.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-a-monoidal-category-equivalent-to-a-strict-one-satisfies-coherence",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a monoidal category and let\n$F:\\mathcal C\\to\\mathcal D$ be a monoidal equivalence to a strict monoidal\ncategory $\\mathcal D$. Then any two canonical morphisms in $\\mathcal C$ with\nthe same source and target are equal.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a consecutive block $x_i,\\dots,x_{i+m-1}$, let $r_{i,0}:=\\mathbf 1$, $r_{i,1}:=x_i$, and, for $m\\ge1$, let $r_{i,m+1}:=(r_{i,m}\\otimes x_{i+m})$. We claim that every parenthesised tensor word $w$ whose ordered letters are exactly this block admits a canonical natural isomorphism $\\kappa_w:E_w\\Rightarrow E_{r_{i,m}}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The claim is proved recursively. For a word containing no letters, repeated unitors give a canonical map to $r_{i,0}=\\mathbf 1$; for a one-letter word, repeated unitors give a canonical map to that actual letter $r_{i,1}=x_i$. For $w=(a\\otimes b)$, suppose $a$ contains the first $p$ letters $x_i,\\dots,x_{i+p-1}$ and $b$ contains the next $q$ letters $x_{i+p},\\dots,x_{i+p+q-1}$. Recursion gives $\\kappa_a:E_a\\Rightarrow E_{r_{i,p}}$ and $\\kappa_b:E_b\\Rightarrow E_{r_{i+p,q}}$. Their tensor is canonical, and repeated associators and unitors give a canonical isomorphism $E_{r_{i,p}\\otimes r_{i+p,q}}\\Rightarrow E_{r_{i,p+q}}$. The composite is $\\kappa_w$, and every step uses only the generators allowed in [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the given words $u$ and $v$, define $\\theta_{u,v}:=\\kappa_v^{-1}\\circ\\kappa_u:E_u\\Rightarrow E_v$. This is a canonical natural isomorphism.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [L2], the ambient monoidal category is equivalent to a strict one, so [L3] applies. Hence any two canonical morphisms from $u$ to $v$ are equal. Since step 3.1 produced one such morphism, it is the unique canonical natural isomorphism $E_u\\Rightarrow E_v$.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the base word w = 1 explicitly before the general recursive tensor step, so the zero-letter case is covered."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Mac Lane coherence in canonical-map form, no zero denominator or zero-parameter boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the base word w = x_i explicitly before the recursive tensor case, so the single-letter case is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Mac Lane coherence in canonical-map form, no additional degenerate branch remains once source and target are parenthesisations of the same ordered word."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Mac Lane coherence in canonical-map form, there is no endpoint-style boundary distinct from the common source-target condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Mac Lane coherence in canonical-map form, the proof uses a fixed normal form and explicit recursive constructions, not an arbitrary choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Mac Lane coherence in canonical-map form, the statement gives one theorem and an equivalent reformulation, not a separately proved biconditional with forward and reverse branches."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Mac Lane coherence in canonical-map form, the statement gives one theorem and an equivalent reformulation, not a separately proved biconditional with forward and reverse branches."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the proof risk is the recursive normal-form construction and the empty/one-letter base cases. Step 2.1 handles those base words explicitly, step 3.1 builds the canonical map via the right-associated normal form, and step 4.1 uses strictification plus transported coherence for uniqueness."
+      }
+    },
+    "thm-unbracketed-tensor-strings-are-well-defined-expressions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "rem-unbracketed-tensor-strings-are-not-yet-defined",
+          "source_section": "Remark",
+          "quote": "Before coherence is proved, an unbracketed expression\n$A_1\\otimes\\cdots\\otimes A_n$ with $n\\geq3$ has no meaning by itself on this\npage. A two-fold product is already defined by the tensor bifunctor; for three\nor more factors, what is defined is a parenthesised tensor word and its\nevaluation functor from [[def-parenthesised-tensor-word]].\n\nSo later pages that write an unbracketed string must depend on the coherence\npage that licenses suppressing the parentheses. On the present page, every\ntriple or longer tensor expression is written with its brackets shown.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-mac-lane-coherence-in-the-canonical-map-form",
+          "source_section": "Statement",
+          "quote": "Let $u$ and $v$ be parenthesised tensor words on the same ordered letters\n$x_1,\\dots,x_n$. Then there exists a unique canonical natural isomorphism\n$E_u\\Rightarrow E_v$. Equivalently, any two canonical morphisms from $u$ to $v$\nare equal.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n=0$, interpret the empty tensor string as the unit object; for $n=1$, as $A_1$; and for $n\\ge2$, choose any parenthesised tensor word $w$ on the letters $x_1,\\dots,x_n$ and evaluate it at $(A_1,\\dots,A_n)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $w'$ is another such parenthesisation, [L2] gives a unique canonical natural isomorphism $w\\Rightarrow w'$, and evaluating at $(A_1,\\dots,A_n)$ yields a unique canonical isomorphism between the two resulting objects of $\\mathcal C$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore suppressing brackets does not change the resulting tensor object except by a unique canonical identification. This discharges the warning of [L1]: after coherence, the notation $A_1\\otimes\\cdots\\otimes A_n$ is well defined.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly interprets the empty tensor string as the unit object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Unbracketed tensor strings are well defined after coherence, no zero denominator or zero-parameter case appears beyond the empty-string convention already handled."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly interprets the one-letter tensor string as A_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Unbracketed tensor strings are well defined after coherence, no further degenerate branch remains once the expression is a parenthesised tensor word on an ordered list."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Unbracketed tensor strings are well defined after coherence, there is no endpoint-style equality branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Unbracketed tensor strings are well defined after coherence, the proof uses only an explicit temporary choice of parenthesisation, and step 2.1 proves independence from that choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Unbracketed tensor strings are well defined after coherence, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Unbracketed tensor strings are well defined after coherence, the claim is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the proof risk is the temporary choice of parenthesisation together with the n=0 and n=1 branches. Step 1.1 fixes the empty string as the unit and the one-letter string as A_1, and step 2.1 uses coherence to prove independence of the chosen parenthesisation."
+      }
+    },
+    "thm-the-monoid-object-axioms-may-be-written-without-associators": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-monoid-object-and-comonoid-object-in-a-monoidal-category",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **monoid object** in $\\mathcal C$ is an object $M$ together with morphisms\n\n$$\\mu:M\\otimes M\\longrightarrow M,\\qquad \\eta:\\mathbf 1\\longrightarrow M,$$\n\nsuch that\n\n$$\\mu\\circ(\\mu\\otimes1_M)=\\mu\\circ(1_M\\otimes\\mu)\\circ\\alpha_{M,M,M},$$\n\n$$\\mu\\circ(\\eta\\otimes1_M)=\\lambda_M,\\qquad \\mu\\circ(1_M\\otimes\\eta)=\\rho_M.$$\n\nA **comonoid object** in $\\mathcal C$ is an object $C$ together with morphisms\n\n$$\\Delta:C\\longrightarrow C\\otimes C,\\qquad \\varepsilon:C\\longrightarrow\\mathbf 1,$$\n\nsuch that\n\n$$(\\alpha_{C,C,C})\\circ(\\Delta\\otimes1_C)\\circ\\Delta=(1_C\\otimes\\Delta)\\circ\\Delta,$$\n\n$$(\\varepsilon\\otimes1_C)\\circ\\Delta=\\lambda_C^{-1},\\qquad (1_C\\otimes\\varepsilon)\\circ\\Delta=\\rho_C^{-1}.$$\n\nThe associator and unitors are written explicitly because this page does not\nyet identify different bracketings automatically.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-mac-lane-strictification",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a monoidal category. Then the assignment\n$$L(X)=\\bigl(X\\otimes -,\\,\\alpha_{X,-,-}\\bigr)$$\ndefines a strong monoidal functor $L:\\mathcal C\\to\\mathcal C'$ from\n$\\mathcal C$ to the strict monoidal category $\\mathcal C'$ of\n[[def-the-category-of-right-module-endofunctors]], and $L$ is a monoidal\nequivalence. Consequently every monoidal category is monoidally equivalent to a\nstrict monoidal category.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-unbracketed-tensor-strings-are-well-defined-expressions",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a monoidal category and let $A_1,\\dots,A_n$ be objects of\n$\\mathcal C$. After coherence, the unbracketed tensor string\n$A_1\\otimes\\cdots\\otimes A_n$ is a well-defined expression: for $n\\ge2$, any two\nparenthesisations of that string are canonically and uniquely identified.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a strictification of $\\mathcal C$ as in [L2]. Applying the strong monoidal functor of that equivalence to the diagrams from [L1] transports the monoid-object structure of $M$ to a monoid-object structure on its image in a strict monoidal category.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the strict target, the associator and unitors are identities, so the transported axioms become exactly the displayed unbracketed equalities.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L3], those unbracketed composites denote definite maps back in the original category and do not depend on which brackets were suppressed. Hence the monoid-object axioms may be written in the simplified form without changing their content.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The monoid-object axioms may be written without associators, the claim is about rewriting fixed axioms, not an empty-domain branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The monoid-object axioms may be written without associators, no zero-value or denominator boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The monoid-object axioms may be written without associators, the unit equations are part of the main claim itself rather than a separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The monoid-object axioms may be written without associators, no further degenerate configuration remains once a monoid object is given."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The monoid-object axioms may be written without associators, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The monoid-object axioms may be written without associators, the only choice is the explicit strictification from the theorem already given on the page."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The monoid-object axioms may be written without associators, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The monoid-object axioms may be written without associators, the claim is not a biconditional."
+        }
+      ]
+    },
+    "thm-the-word-category-is-the-free-monoidal-category-on-one-generator": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-the-category-of-binary-words",
+          "source_section": "Definition",
+          "quote": "The **binary words** are generated recursively from:\n\n- the empty word $e_0$;\n- the one-letter word $(-)$;\n- if $v$ and $w$ are binary words, a new word $(v\\square w)$.\n\nTheir **length** is defined recursively by\n$$|e_0|=0,\\qquad |(-)|=1,\\qquad |v\\square w|=|v|+|w|.$$\n\nThe **category of binary words** $W$ has these words as objects. For objects\n$v,w$,\n$$W(v,w)=\\begin{cases}\\{\\ast_{v,w}\\},& |v|=|w|,\\\\ \\varnothing,& |v|\\ne|w|.\\end{cases}$$\n\nComposition and identities are forced by this rule: when the hom-collection is\nnonempty there is exactly one possible composite and exactly one possible\nidentity arrow. Thus $W$ is a category in the sense of [[def-category]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-category-of-binary-words-is-monoidal",
+          "source_section": "Statement",
+          "quote": "The category $W$ of [[def-the-category-of-binary-words]] is monoidal with tensor\nproduct $v\\otimes w:=v\\square w$, unit object $e_0$, and structural\nisomorphisms given by the unique arrows between binary words of the same\nlength.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-lax-strong-and-strict-monoidal-functor",
+          "source_section": "Definition",
+          "quote": "Let\n$(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ and\n$(\\mathcal D,\\boxtimes,\\mathbf 1',\\alpha',\\lambda',\\rho')$\nbe monoidal categories ([[def-monoidal-category]]).\n\nA **lax monoidal functor** is a functor\n$F:\\mathcal C\\to\\mathcal D$ ([[def-functor-and-contravariant-functor]])\ntogether with natural transformations ([[def-natural-transformation]])\n\n$$F_{2;X,Y}:F(X)\\boxtimes F(Y)\\longrightarrow F(X\\otimes Y),$$\n\nand\n\nthe morphism\n\n$$F_0:\\mathbf 1'\\longrightarrow F(\\mathbf 1),$$\n\nsuch that, for all $X,Y,Z$,\n\n$$F(\\alpha_{X,Y,Z})\\circ F_{2;X\\otimes Y,Z}\\circ(F_{2;X,Y}\\boxtimes1_{F(Z)})=F_{2;X,Y\\otimes Z}\\circ(1_{F(X)}\\boxtimes F_{2;Y,Z})\\circ\\alpha'_{F(X),F(Y),F(Z)},$$\n\n$$F(\\lambda_X)\\circ F_{2;\\mathbf 1,X}\\circ(F_0\\boxtimes1_{F(X)})=\\lambda'_{F(X)},$$\n\n$$F(\\rho_X)\\circ F_{2;X,\\mathbf 1}\\circ(1_{F(X)}\\boxtimes F_0)=\\rho'_{F(X)}.$$\n\nA lax monoidal functor is **strong monoidal** when the natural transformation\n$F_2$ is a natural isomorphism ([[def-natural-isomorphism]])—equivalently,\nevery component $F_{2;X,Y}$ is an isomorphism—and $F_0$ is an isomorphism.\n\nA strong monoidal functor is **strict monoidal** when the functor preserves the\nunit and tensor on the nose and every structure map above is an identity.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-mac-lane-coherence-in-the-canonical-map-form",
+          "source_section": "Statement",
+          "quote": "Let $u$ and $v$ be parenthesised tensor words on the same ordered letters\n$x_1,\\dots,x_n$. Then there exists a unique canonical natural isomorphism\n$E_u\\Rightarrow E_v$. Equivalently, any two canonical morphisms from $u$ to $v$\nare equal.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $T_b$ recursively on objects by $T_b(e_0)=\\mathbf 1_{\\mathcal B}$, $T_b((-))=b$, and $T_b(v\\square w)=T_b(v)\\otimes T_b(w)$. If $u:v\\to w$ is the unique morphism of $W$, then $v$ and $w$ have the same length, so [L4] gives a unique canonical isomorphism $T_b(v)\\to T_b(w)$; define $T_b(u)$ to be that morphism. Because identities and composites in $W$ are themselves the unique arrows between equal-length words, uniqueness in [L4] makes $T_b$ a functor.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The recursive object formula already matches the tensor and unit of $W$, and the same canonical comparison maps from [L4] provide the invertible structural maps required by [L3]. Thus $T_b$ is a strong monoidal functor.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $S:W\\to\\mathcal B$ be another strong monoidal functor with $S((-))=b$. Build isomorphisms $\\sigma_v:S(v)\\to T_b(v)$ recursively: for $e_0$, use the inverse of the unit map of $S$; for $(-)$, use $1_b$; and for $v\\square w$, use the inverse of the binary structure isomorphism of $S$ followed by $\\sigma_v\\otimes\\sigma_w$.",
+          "step": "2.2",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since every morphism in $W$ is unique when it exists, the family $\\sigma_v$ is automatically natural, and the same recursion forces compatibility with the monoidal structure maps. Uniqueness of the recursion makes $\\sigma:S\\Rightarrow T_b$ the unique monoidal natural isomorphism fixing the generator.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes T_b(e_0)=1, and step 2.2 uses the inverse unit map of S at e_0, so the empty-word case is handled explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The word category is the free monoidal category on one generator, no zero denominator or zero-parameter boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes T_b((-))=b, and step 2.2 fixes sigma_{(-)}=1_b, so the one-generator case is handled explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The word category is the free monoidal category on one generator, no further degenerate branch remains once binary words and their unique arrows are fixed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The word category is the free monoidal category on one generator, there is no endpoint-style boundary distinct from the recursive source-target data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The word category is the free monoidal category on one generator, the proof is a recursive construction from the chosen object b and uses no arbitrary choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The word category is the free monoidal category on one generator, the claim is a universal-property statement rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The word category is the free monoidal category on one generator, the claim is a universal-property statement rather than a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the proof risk is the recursive universal property and the action on unique equal-length arrows. Step 1.1 defines T_b on objects and on morphisms via the coherence theorem, and steps 2.2-3.1 recursively build the unique monoidal natural isomorphism with the e_0 and (-) cases handled explicitly."
+      }
+    },
+    "cor-coherence-follows-from-freeness": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-the-category-of-binary-words",
+          "source_section": "Definition",
+          "quote": "The **binary words** are generated recursively from:\n\n- the empty word $e_0$;\n- the one-letter word $(-)$;\n- if $v$ and $w$ are binary words, a new word $(v\\square w)$.\n\nTheir **length** is defined recursively by\n$$|e_0|=0,\\qquad |(-)|=1,\\qquad |v\\square w|=|v|+|w|.$$\n\nThe **category of binary words** $W$ has these words as objects. For objects\n$v,w$,\n$$W(v,w)=\\begin{cases}\\{\\ast_{v,w}\\},& |v|=|w|,\\\\ \\varnothing,& |v|\\ne|w|.\\end{cases}$$\n\nComposition and identities are forced by this rule: when the hom-collection is\nnonempty there is exactly one possible composite and exactly one possible\nidentity arrow. Thus $W$ is a category in the sense of [[def-category]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-word-category-is-the-free-monoidal-category-on-one-generator",
+          "source_section": "Statement",
+          "quote": "Let $W$ be the binary-word category and let $b$ be an object of a monoidal\ncategory $\\mathcal B$. Recursive evaluation of binary words at $b$ defines a\nstrong monoidal functor $T_b:W\\to\\mathcal B$ with $T_b((-))=b$ and\n$T_b(e_0)=\\mathbf 1_{\\mathcal B}$; for the unique arrow between two words of\nthe same length, $T_b$ uses the canonical comparison isomorphism between the\ncorresponding parenthesised tensor powers of $b$. If $S:W\\to\\mathcal B$ is any\nother strong monoidal functor with $S((-))=b$, then there is a unique\nmonoidal natural isomorphism $S\\Rightarrow T_b$ whose component at $(-)$ is\n$1_b$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $v$ and $w$ have the same length, [L1] gives a unique arrow $u_{v,w}:v\\to w$ in $W$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the image $T_b(u_{v,w})$ is exactly the canonical comparison isomorphism between the two parenthesised tensor powers represented by $v$ and $w$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the unique formal arrow of $W$ between $v$ and $w$ is carried by evaluation to the canonical comparison map between the corresponding tensor powers of $b$. This is precisely the canonical-map formulation in the one-generator setting.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus the free-word presentation recovers the canonical-map presentation of coherence for tensor powers of one chosen object.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The free-word formulation implies the canonical-map formulation, the corollary is about images of unique arrows in W and does not split into a separate empty-word argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The free-word formulation implies the canonical-map formulation, no zero-value or denominator boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The free-word formulation implies the canonical-map formulation, the one-generator context is part of the global setup, not a separate boundary branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The free-word formulation implies the canonical-map formulation, no additional degenerate configuration remains beyond equal-length words in W."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The free-word formulation implies the canonical-map formulation, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The free-word formulation implies the canonical-map formulation, the proof uses only the given free extension and no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The free-word formulation implies the canonical-map formulation, the claim is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The free-word formulation implies the canonical-map formulation, the claim is not stated as a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the proof risk is whether the evaluated W-arrow is exactly the canonical comparison map. After the reader repair, step 2.1 uses the freeness theorem's explicit morphism clause, so no extra inference remains between the formal arrow and the canonical comparison isomorphism."
+      }
+    },
+    "fs-every-diagram-in-a-monoidal-category-commutes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "rem-every-diagram-commutes-is-false-as-stated",
+          "source_section": "Remark",
+          "quote": "Mac Lane's coherence theorem is not the slogan that every diagram in a monoidal\ncategory commutes. The theorem speaks only about diagrams whose arrows are\ncanonical in the sense of [[def-canonical-morphism-between-parenthesised-words]]\nand whose vertices are formal parenthesisations of one ordered tensor word.\n\nThe warning matters because formally different vertices can evaluate to the same\nobject in a particular monoidal category. Once that happens, one may insert a\nnoncanonical endomorphism of that object, and there is no reason for the\nresulting square or polygon to commute. So the theorem is about formal\nstructural maps, not arbitrary parallel arrows.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-a-category-with-finite-products-is-monoidal",
+          "source_section": "Statement",
+          "quote": "If a category $\\mathcal C$ has binary products and a terminal object, then\n$\\mathcal C$ is monoidal with tensor product $\\times$ and unit object any\nterminal object $1$. Dually, if $\\mathcal C$ has binary coproducts and an\ninitial object, then $\\mathcal C$ is monoidal with tensor product $\\sqcup$ and\nunit object any initial object.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $A=\\{0,1\\}$ in the cartesian monoidal category of sets supplied by [L2], and let $c:A\\to A$ be the constant-zero map. Consider the square with all four vertices $A$, top edge $c$, and the other three edges $1_A$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The composite along the top and right edges is $c$, while the composite along the left and bottom edges is $1_A$. These maps differ because $c(1)=0\\ne1=1_A(1)$, so the square does not commute.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This noncanonical square lies outside the scope described in [L1] and is a diagram in a monoidal category that does not commute. Therefore the claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Every diagram in a monoidal category commutes, the refutation is logical and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Every diagram in a monoidal category commutes, no zero-value boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Every diagram in a monoidal category commutes, there is no separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Every diagram in a monoidal category commutes, no additional degenerate configuration remains beyond the overstrong slogan itself."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Every diagram in a monoidal category commutes, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Every diagram in a monoidal category commutes, the refutation uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every diagram in a monoidal category commutes, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every diagram in a monoidal category commutes, the claim is not a biconditional."
+        }
+      ]
+    },
+    "fs-every-monoidal-category-is-isomorphic-to-a-strict-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-mac-lane-strictification",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a monoidal category. Then the assignment\n$$L(X)=\\bigl(X\\otimes -,\\,\\alpha_{X,-,-}\\bigr)$$\ndefines a strong monoidal functor $L:\\mathcal C\\to\\mathcal C'$ from\n$\\mathcal C$ to the strict monoidal category $\\mathcal C'$ of\n[[def-the-category-of-right-module-endofunctors]], and $L$ is a monoidal\nequivalence. Consequently every monoidal category is monoidally equivalent to a\nstrict monoidal category.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-strictification-gives-equivalence-and-never-isomorphism",
+          "source_section": "Remark",
+          "quote": "[[thm-mac-lane-strictification]] proves that every monoidal category is\n**equivalent** to a strict one, not that it is already strict after a harmless\nrenaming of objects. This is exactly the distinction highlighted by\n[[rem-isbells-argument-that-isomorphic-objects-cannot-simply-be-identified]]:\nforcing specified isomorphisms to become identities can change the category.\n\nThe same boundary also separates strictness from skeletality. A\n[[def-skeletal-category-and-skeleton|skeletal]] category is one in which\nisomorphic objects are equal; a skeleton of a given category is a full\nskeletal subcategory obtained by choosing one representative from each\nisomorphism class. Strictification instead builds an equivalent monoidal\ncategory functorially from the original one. Passing to a skeleton and\nstrictifying are different operations, and they need not be achievable\nsimultaneously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-a-category-with-finite-products-is-monoidal",
+          "source_section": "Statement",
+          "quote": "If a category $\\mathcal C$ has binary products and a terminal object, then\n$\\mathcal C$ is monoidal with tensor product $\\times$ and unit object any\nterminal object $1$. Dually, if $\\mathcal C$ has binary coproducts and an\ninitial object, then $\\mathcal C$ is monoidal with tensor product $\\sqcup$ and\nunit object any initial object.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose a strict monoidal isomorphism $F:\\mathbf{Set}\\to\\mathcal D$ existed with $\\mathcal D$ strict. Strict preservation and strict associativity in $\\mathcal D$ would give $$F((A\\times B)\\times C)=(F(A)\\otimes F(B))\\otimes F(C)=F(A)\\otimes(F(B)\\otimes F(C))=F(A\\times(B\\times C)).$$ Since $F$ is injective on objects, this would force $(A\\times B)\\times C=A\\times(B\\times C)$ as literal sets for all $A,B,C$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "assume-contra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For nonempty sets under the usual ordered-pair construction, these two nested cartesian products are not literally equal: their elements have different bracketed pair shapes. This contradicts step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus cartesian $\\mathbf{Set}$ is not strictly monoidally isomorphic to a strict monoidal category, even though [L1] supplies a monoidal equivalence to one. Therefore the claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 2.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is isomorphic to a strict one, the refutation is a scope distinction and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is isomorphic to a strict one, no zero-value boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is isomorphic to a strict one, there is no separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is isomorphic to a strict one, no further degenerate branch remains beyond the distinction between equivalence and isomorphism."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is isomorphic to a strict one, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is isomorphic to a strict one, the refutation uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is isomorphic to a strict one, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is isomorphic to a strict one, the claim is not a biconditional."
+        }
+      ]
+    },
+    "fs-every-monoidal-category-is-monoidally-equivalent-to-a-skeletal-strict-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-skeletal-category-and-skeleton",
+          "source_section": "Definition",
+          "quote": "A category is **skeletal** when isomorphic objects are equal\n([[def-isomorphism-groupoid-and-connected-category]]).\n\nA **skeleton** of a category $\\mathcal C$ is a full subcategory\n$\\mathcal S\\subseteq\\mathcal C$ ([[def-subcategory-and-full-subcategory]]) that\nis skeletal and contains an object isomorphic to every object of $\\mathcal C$.\nThus a skeleton contains exactly one object from each isomorphism class, once\nthe representative objects have been selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-strictification-gives-equivalence-and-never-isomorphism",
+          "source_section": "Remark",
+          "quote": "[[thm-mac-lane-strictification]] proves that every monoidal category is\n**equivalent** to a strict one, not that it is already strict after a harmless\nrenaming of objects. This is exactly the distinction highlighted by\n[[rem-isbells-argument-that-isomorphic-objects-cannot-simply-be-identified]]:\nforcing specified isomorphisms to become identities can change the category.\n\nThe same boundary also separates strictness from skeletality. A\n[[def-skeletal-category-and-skeleton|skeletal]] category is one in which\nisomorphic objects are equal; a skeleton of a given category is a full\nskeletal subcategory obtained by choosing one representative from each\nisomorphism class. Strictification instead builds an equivalent monoidal\ncategory functorially from the original one. Passing to a skeleton and\nstrictifying are different operations, and they need not be achievable\nsimultaneously.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], adding the word \"skeletal\" strengthens the strictification target by requiring equality of all isomorphic objects there.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "But [L2] states that this stronger simultaneous requirement can fail even though ordinary strictification succeeds.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Hence the claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is monoidally equivalent to a skeletal strict one, the refutation is a strengthening argument and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is monoidally equivalent to a skeletal strict one, no zero-value boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is monoidally equivalent to a skeletal strict one, there is no separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is monoidally equivalent to a skeletal strict one, no additional degenerate branch remains once the strict-plus-skeletal strengthening is identified."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is monoidally equivalent to a skeletal strict one, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is monoidally equivalent to a skeletal strict one, the refutation uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is monoidally equivalent to a skeletal strict one, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every monoidal category is monoidally equivalent to a skeletal strict one, the claim is not a biconditional."
+        }
+      ]
+    },
+    "fs-coherence-says-that-any-two-parallel-morphisms-in-a-monoidal-category-are-equal": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "rem-the-exact-scope-of-the-coherence-statement",
+          "source_section": "Remark",
+          "quote": "[[thm-mac-lane-coherence-in-the-canonical-map-form]] compares only\nparenthesisations of one ordered list of tensor factors. Its arrows are the\ncanonical morphisms built from $\\alpha,\\lambda,\\rho$ and their inverses. The\ntheorem therefore says nothing about arbitrary parallel morphisms of a monoidal\ncategory.\n\nIt also says nothing about reordering tensor factors. As soon as braidings or\nsymmetries enter, the comparison maps are no longer generated just by\nassociators and unitors, and that is a later page's subject rather than this\none's.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If the claim were true, the theorem would identify every parallel pair in the category, with no restriction on how those morphisms were built.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "That contradicts [L1], which records the theorem's actual quantifiers and restricts it to canonical structural morphisms.",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Coherence says that any two parallel morphisms in a monoidal category are equal, the refutation is a quantifier correction and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Coherence says that any two parallel morphisms in a monoidal category are equal, no zero-value boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Coherence says that any two parallel morphisms in a monoidal category are equal, there is no separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Coherence says that any two parallel morphisms in a monoidal category are equal, no additional degenerate configuration remains beyond the false quantifier widening."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Coherence says that any two parallel morphisms in a monoidal category are equal, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Coherence says that any two parallel morphisms in a monoidal category are equal, the refutation uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Coherence says that any two parallel morphisms in a monoidal category are equal, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Coherence says that any two parallel morphisms in a monoidal category are equal, the claim is not a biconditional."
+        }
+      ]
+    },
+    "fs-strictification-requires-the-axiom-of-choice": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "rem-the-choice-cost-of-strictification",
+          "source_section": "Remark",
+          "quote": "The construction in [[thm-mac-lane-strictification]] chooses nothing: from a\ngiven monoidal category $\\mathcal C$ it builds the right-module endofunctor\ncategory $\\mathcal C'$ and the functor $L:\\mathcal C\\to\\mathcal C'$ directly.\nSo the strictification theorem itself is a ZF statement.\n\nChoice can enter through a separate operation: passing from an arbitrary\ncategory to a [[def-skeletal-category-and-skeleton|skeleton]] by selecting one\nrepresentative from each isomorphism class. Being skeletal is a property and\ndoes not itself require a selection; it is the construction of a skeleton for\na given category that may carry this set-theoretic cost. Consequently any\nargument that combines strictification with a chosen skeleton must account for\nthat additional choice, while strictification alone does not incur it.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If strictification itself required choice, then the theorem's own construction would already depend on selecting representatives.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "But [L1] states that the selection occurs only in the stronger skeletal refinement, not in strictification itself.",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Strictification requires the axiom of choice, the refutation is a scope separation and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Strictification requires the axiom of choice, no zero-value boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Strictification requires the axiom of choice, there is no separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Strictification requires the axiom of choice, no additional degenerate branch remains once strictification is separated from skeletal replacement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Strictification requires the axiom of choice, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 identifies the only relevant choice issue and places it in the stronger skeletal refinement, not in the strictification theorem itself."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Strictification requires the axiom of choice, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Strictification requires the axiom of choice, the claim is not a biconditional."
+        }
+      ]
+    },
+    "ex-the-two-routes-around-the-pentagon-are-equal": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-mac-lane-coherence-in-the-canonical-map-form",
+          "source_section": "Statement",
+          "quote": "Let $u$ and $v$ be parenthesised tensor words on the same ordered letters\n$x_1,\\dots,x_n$. Then there exists a unique canonical natural isomorphism\n$E_u\\Rightarrow E_v$. Equivalently, any two canonical morphisms from $u$ to $v$\nare equal.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "One route around the pentagon is the composite $((A\\otimes B)\\otimes C)\\otimes D \\xrightarrow{\\alpha_{A\\otimes B,C,D}} (A\\otimes B)\\otimes(C\\otimes D) \\xrightarrow{\\alpha_{A,B,C\\otimes D}} A\\otimes(B\\otimes(C\\otimes D))$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The other route is the composite $((A\\otimes B)\\otimes C)\\otimes D \\xrightarrow{\\alpha_{A,B,C}\\otimes1_D} (A\\otimes(B\\otimes C))\\otimes D \\xrightarrow{\\alpha_{A,B\\otimes C,D}} A\\otimes((B\\otimes C)\\otimes D) \\xrightarrow{1_A\\otimes\\alpha_{B,C,D}} A\\otimes(B\\otimes(C\\otimes D))$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both composites are canonical morphisms with the same source and target, so [L1] makes them equal.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The two routes around the pentagon are equal, the example starts with four named objects and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The two routes around the pentagon are equal, no zero-value or denominator boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The two routes around the pentagon are equal, there is no separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The two routes around the pentagon are equal, the example already fixes the generic fourfold tensor-word shape and does not split off a degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The two routes around the pentagon are equal, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The two routes around the pentagon are equal, the proof uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The two routes around the pentagon are equal, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The two routes around the pentagon are equal, the claim is not a biconditional."
+        }
+      ]
+    },
+    "ex-the-canonical-map-between-two-bracketings-of-a-five-fold-product": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-mac-lane-coherence-in-the-canonical-map-form",
+          "source_section": "Statement",
+          "quote": "Let $u$ and $v$ be parenthesised tensor words on the same ordered letters\n$x_1,\\dots,x_n$. Then there exists a unique canonical natural isomorphism\n$E_u\\Rightarrow E_v$. Equivalently, any two canonical morphisms from $u$ to $v$\nare equal.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply the outer associator to obtain $((A\\otimes(B\\otimes C))\\otimes(D\\otimes E)) \\xrightarrow{\\alpha_{A,B\\otimes C,D\\otimes E}} A\\otimes((B\\otimes C)\\otimes(D\\otimes E))$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply $1_A\\otimes\\alpha_{B,C,D\\otimes E}$ to the result of step 1.1 and get $A\\otimes((B\\otimes C)\\otimes(D\\otimes E)) \\to A\\otimes(B\\otimes(C\\otimes(D\\otimes E)))=v$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The composite of steps 1.1 and 2.1 is therefore a canonical map $u\\to v$. Any other chain of associators with the same endpoints is equal to it by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A canonical map between two bracketings of a five-fold product, the example starts with five named objects and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A canonical map between two bracketings of a five-fold product, no zero-value or denominator boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A canonical map between two bracketings of a five-fold product, there is no separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A canonical map between two bracketings of a five-fold product, the example already fixes one generic fivefold bracketing pair and does not split off a degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A canonical map between two bracketings of a five-fold product, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A canonical map between two bracketings of a five-fold product, the proof uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A canonical map between two bracketings of a five-fold product, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A canonical map between two bracketings of a five-fold product, the claim is not a biconditional."
+        }
+      ]
+    },
+    "ex-the-word-category-on-words-of-length-three": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-the-category-of-binary-words",
+          "source_section": "Definition",
+          "quote": "The **binary words** are generated recursively from:\n\n- the empty word $e_0$;\n- the one-letter word $(-)$;\n- if $v$ and $w$ are binary words, a new word $(v\\square w)$.\n\nTheir **length** is defined recursively by\n$$|e_0|=0,\\qquad |(-)|=1,\\qquad |v\\square w|=|v|+|w|.$$\n\nThe **category of binary words** $W$ has these words as objects. For objects\n$v,w$,\n$$W(v,w)=\\begin{cases}\\{\\ast_{v,w}\\},& |v|=|w|,\\\\ \\varnothing,& |v|\\ne|w|.\\end{cases}$$\n\nComposition and identities are forced by this rule: when the hom-collection is\nnonempty there is exactly one possible composite and exactly one possible\nidentity arrow. Thus $W$ is a category in the sense of [[def-category]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-category-of-binary-words-is-monoidal",
+          "source_section": "Statement",
+          "quote": "The category $W$ of [[def-the-category-of-binary-words]] is monoidal with tensor\nproduct $v\\otimes w:=v\\square w$, unit object $e_0$, and structural\nisomorphisms given by the unique arrows between binary words of the same\nlength.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A unit-free length-three word must be obtained by combining exactly three copies of $(-)$ with two binary operations. Up to the placement of brackets, the only possibilities are $((-\\square-)\\square-)$ and $(-\\square(-\\square-))$. Words of length three containing one or more copies of $e_0$ also exist, but are outside this unit-free subcollection.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "These two words have the same length, so there is exactly one morphism between them in each direction. In the monoidal structure of [L2], those are the associator and its inverse at the generator.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus the unit-free part of the length-three slice of $W$ is the basic coherence picture: two bracketings and one canonical comparison each way.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The word category on words of length three, the example fixes length three from the outset and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The word category on words of length three, no zero-value boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The word category on words of length three, the example explicitly excludes the length-one case by fixing length three."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The word category on words of length three, there is no further degenerate branch once the length is fixed to three."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The word category on words of length three, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The word category on words of length three, the proof uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The word category on words of length three, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The word category on words of length three, the claim is not a biconditional."
+        }
+      ]
+    },
+    "ex-strictification-of-a-cartesian-monoidal-category-computed": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-a-category-with-finite-products-is-monoidal",
+          "source_section": "Statement",
+          "quote": "If a category $\\mathcal C$ has binary products and a terminal object, then\n$\\mathcal C$ is monoidal with tensor product $\\times$ and unit object any\nterminal object $1$. Dually, if $\\mathcal C$ has binary coproducts and an\ninitial object, then $\\mathcal C$ is monoidal with tensor product $\\sqcup$ and\nunit object any initial object.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-mac-lane-strictification",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a monoidal category. Then the assignment\n$$L(X)=\\bigl(X\\otimes -,\\,\\alpha_{X,-,-}\\bigr)$$\ndefines a strong monoidal functor $L:\\mathcal C\\to\\mathcal C'$ from\n$\\mathcal C$ to the strict monoidal category $\\mathcal C'$ of\n[[def-the-category-of-right-module-endofunctors]], and $L$ is a monoidal\nequivalence. Consequently every monoidal category is monoidally equivalent to a\nstrict monoidal category.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the tensor product is $\\times$, so the strictification formula from [L2] becomes $L(X)(Y)=X\\times Y$. Its right-module structure map at $(Y,Z)$ is the cartesian associator $(X\\times Y)\\times Z\\to X\\times(Y\\times Z)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The binary comparison $L(X)\\otimes L(Y)\\Rightarrow L(X\\times Y)$ therefore has component the inverse reassociation $X\\times(Y\\times Z)\\to(X\\times Y)\\times Z$, and the unit comparison is $Z\\to1\\times Z$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "So in the cartesian case the abstract strictification is completely explicit: it packages ordinary reassociation maps of products into a strict monoidal category of endofunctors.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Strictification of a cartesian monoidal category computed, the example starts with a category with finite products and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Strictification of a cartesian monoidal category computed, no zero-value or denominator boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Strictification of a cartesian monoidal category computed, there is no separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Strictification of a cartesian monoidal category computed, no additional degenerate branch remains once the tensor is fixed to finite products."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Strictification of a cartesian monoidal category computed, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Strictification of a cartesian monoidal category computed, the proof uses the explicit strictification formula and no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Strictification of a cartesian monoidal category computed, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Strictification of a cartesian monoidal category computed, the claim is not a biconditional."
+        }
+      ]
+    },
+    "cex-two-formally-distinct-words-that-become-the-same-object": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-strict-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **strict monoidal category** is a monoidal category\n$(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$\n([[def-monoidal-category]]) in which\n\n$$((X\\otimes Y)\\otimes Z)=X\\otimes(Y\\otimes Z),\\qquad \\mathbf 1\\otimes X=X,\\qquad X\\otimes\\mathbf 1=X$$\n\nas literal equalities of objects, and the constraint isomorphisms are identities:\n\n$$\\alpha_{X,Y,Z}=1_{X\\otimes(Y\\otimes Z)},\\qquad \\lambda_X=1_X,\\qquad \\rho_X=1_X.$$\n\nThus a strict monoidal category does not merely identify the two bracketings up\nto a specified isomorphism; it makes them equal on the nose.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-every-diagram-commutes-is-false-as-stated",
+          "source_section": "Remark",
+          "quote": "Mac Lane's coherence theorem is not the slogan that every diagram in a monoidal\ncategory commutes. The theorem speaks only about diagrams whose arrows are\ncanonical in the sense of [[def-canonical-morphism-between-parenthesised-words]]\nand whose vertices are formal parenthesisations of one ordered tensor word.\n\nThe warning matters because formally different vertices can evaluate to the same\nobject in a particular monoidal category. Once that happens, one may insert a\nnoncanonical endomorphism of that object, and there is no reason for the\nresulting square or polygon to commute. So the theorem is about formal\nstructural maps, not arbitrary parallel arrows.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the two formal vertices $x$ and $(x\\otimes\\mathbf 1)$ both evaluate to the single object $*$ of $\\mathcal M$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Consider the square all of whose vertices are $*$, whose top edge is $u$, and whose other three edges are $1$. The clockwise composite is $u$, while the counterclockwise composite is $1$, so the square does not commute because $u\\ne1$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This realizes the mechanism described in [L2]: formally distinct words can collapse to one object, and a noncanonical endomorphism then breaks the blanket slogan. Hence the slogan is false.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Two formally distinct words can become the same object, the counterexample fixes a concrete one-object strict monoidal category and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Two formally distinct words can become the same object, no zero-value or denominator boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 works exactly because the witness category has one object, so the single-object boundary is the mechanism of the counterexample rather than a missing case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Two formally distinct words can become the same object, the witness is deliberately minimal but not degenerate in a way that invalidates the argument; the nonidentity endomorphism u keeps the square noncommutative."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Two formally distinct words can become the same object, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Two formally distinct words can become the same object, the witness category is given explicitly and no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Two formally distinct words can become the same object, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Two formally distinct words can become the same object, the claim is not a biconditional."
+        }
+      ]
+    },
+    "ex-a-monoid-object-written-with-and-without-associators": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-monoid-object-and-comonoid-object-in-a-monoidal-category",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **monoid object** in $\\mathcal C$ is an object $M$ together with morphisms\n\n$$\\mu:M\\otimes M\\longrightarrow M,\\qquad \\eta:\\mathbf 1\\longrightarrow M,$$\n\nsuch that\n\n$$\\mu\\circ(\\mu\\otimes1_M)=\\mu\\circ(1_M\\otimes\\mu)\\circ\\alpha_{M,M,M},$$\n\n$$\\mu\\circ(\\eta\\otimes1_M)=\\lambda_M,\\qquad \\mu\\circ(1_M\\otimes\\eta)=\\rho_M.$$\n\nA **comonoid object** in $\\mathcal C$ is an object $C$ together with morphisms\n\n$$\\Delta:C\\longrightarrow C\\otimes C,\\qquad \\varepsilon:C\\longrightarrow\\mathbf 1,$$\n\nsuch that\n\n$$(\\alpha_{C,C,C})\\circ(\\Delta\\otimes1_C)\\circ\\Delta=(1_C\\otimes\\Delta)\\circ\\Delta,$$\n\n$$(\\varepsilon\\otimes1_C)\\circ\\Delta=\\lambda_C^{-1},\\qquad (1_C\\otimes\\varepsilon)\\circ\\Delta=\\rho_C^{-1}.$$\n\nThe associator and unitors are written explicitly because this page does not\nyet identify different bracketings automatically.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-monoid-object-axioms-may-be-written-without-associators",
+          "source_section": "Statement",
+          "quote": "Let $(M,\\mu,\\eta)$ be a monoid object in a monoidal category. Then, after the\ncoherence identification of unbracketed tensor strings, its axioms may be\nwritten as\n$$\\mu\\circ(\\mu\\otimes1_M)=\\mu\\circ(1_M\\otimes\\mu),$$\n$$\\mu\\circ(\\eta\\otimes1_M)=1_M,\\qquad \\mu\\circ(1_M\\otimes\\eta)=1_M,$$\nwithout displaying associators or unitors.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The explicit associativity axiom is $\\mu\\circ(\\mu\\otimes1_M)=\\mu\\circ(1_M\\otimes\\mu)\\circ\\alpha_{M,M,M}$, and the unit axioms are $\\mu\\circ(\\eta\\otimes1_M)=\\lambda_M$ and $\\mu\\circ(1_M\\otimes\\eta)=\\rho_M$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L2], the same relations may be written as $\\mu(\\mu\\otimes1_M)=\\mu(1_M\\otimes\\mu)$ and $\\mu(\\eta\\otimes1_M)=1_M=\\mu(1_M\\otimes\\eta)$, with the bracket suppressions understood canonically.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus the two notations express the same monoid-object structure; the second is shorter only because coherence has already absorbed the bracket changes.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A monoid object written with and without associators, the example begins with a given monoid object and has no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A monoid object written with and without associators, no zero-value or denominator boundary appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A monoid object written with and without associators, the unit equations are part of the main example itself rather than a separate singleton boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A monoid object written with and without associators, no further degenerate branch remains once a monoid object is given."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A monoid object written with and without associators, there is no endpoint-style branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A monoid object written with and without associators, the proof uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A monoid object written with and without associators, the claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A monoid object written with and without associators, the claim is not a biconditional."
+        }
+      ]
+    }
+  }
+}

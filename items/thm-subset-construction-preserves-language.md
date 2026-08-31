@@ -2,7 +2,7 @@
 id: thm-subset-construction-preserves-language
 kind: theorem
 title: "The subset construction preserves the recognized language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-subset-construction-state-invariant, def-dfa-acceptance-and-recognize
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-31
 sources:
   scraped: []
   references:

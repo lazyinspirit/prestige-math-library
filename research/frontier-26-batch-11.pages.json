@@ -1,0 +1,228 @@
+[
+  {
+    "order": 599,
+    "id": "robust-machine-models-and-universal-computation",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Robust Machine Models and Universal Computation",
+    "companion": "robust-machine-models-and-universal-computation-examples",
+    "requires": [
+      "turing-machines-configurations-and-computation"
+    ],
+    "items": [
+      {
+        "id": "def-effective-encoding-of-turing-machines",
+        "kind": "definition",
+        "title": "A fixed effective binary encoding of deterministic one-tape Turing machines",
+        "deps": [
+          "def-deterministic-one-tape-turing-machine",
+          "def-effective-binary-encoding-and-decoder",
+          "lem-finite-tuples-admit-effective-prefix-free-encodings"
+        ]
+      },
+      {
+        "id": "lem-machine-encoding-is-injective-and-decodable",
+        "kind": "lemma",
+        "title": "The chosen machine coding is injective and has a total decoder",
+        "strategy": "Encode each machine by a finite tuple listing its tape alphabet, state set, designated states, and transition instructions in a canonical order. Distinct machines have different canonical tuples, so the resulting binary codes differ. A decoder first parses the tuple code, then checks the recovered data against the one-tape machine shape and reconstructs the unique machine when the checks pass, returning a malformed-code marker otherwise.",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "def-effective-binary-encoding-and-decoder",
+          "lem-finite-tuples-admit-effective-prefix-free-encodings"
+        ]
+      },
+      {
+        "id": "thm-stay-put-moves-can-be-eliminated",
+        "kind": "theorem",
+        "title": "Stay-put moves can be eliminated from fixed-tape Turing-machine models",
+        "strategy": "Replace every transition that leaves one or more heads stationary by a bounded macro through fresh states: carry out the required symbol updates, move temporarily to neighboring cells when needed, and return any would-be stationary head to its original position before resuming the simulated state. Because the number of tapes is fixed, only finitely many local macros are needed. The transformed machine preserves accept, reject, diverge, and output behavior.",
+        "deps": [
+          "def-multitape-and-nondeterministic-machines",
+          "def-language-recognized-and-decided",
+          "def-partial-function-computed-by-a-machine"
+        ]
+      },
+      {
+        "id": "thm-one-way-and-two-way-tapes-are-equivalent",
+        "kind": "theorem",
+        "title": "One-way and two-way infinite tape conventions are equivalent",
+        "strategy": "A one-way machine is a special case of a two-way machine. For the converse, encode the two-way tape cells 0, 1, -1, 2, -2, ... along a single right-infinite tape, keep the origin fixed by a local marker convention, and translate each left or right move on the simulated two-way tape into a finite update of the one-way encoding. Any temporary stationary housekeeping can be normalized using stay-put elimination, so recognizability and computed partial functions are preserved.",
+        "deps": [
+          "thm-stay-put-moves-can-be-eliminated",
+          "def-language-recognized-and-decided",
+          "def-partial-function-computed-by-a-machine"
+        ]
+      },
+      {
+        "id": "thm-multitape-machines-have-one-tape-simulations",
+        "kind": "theorem",
+        "title": "Every fixed multitape Turing machine has an equivalent one-tape simulation",
+        "strategy": "Represent the k simulated tapes as k blocks on one tape, separated by markers, and mark the scanned symbol in each block by a dotted copy of the symbol. One simulation cycle first scans the whole tape to read the marked symbols, uses the finite control to determine the simulated transition, then scans back to rewrite symbols and move the markers, shifting a block right when fresh blank space is needed. The one-tape simulator accepts, rejects, diverges, and outputs exactly when the original multitape machine does.",
+        "deps": [
+          "def-multitape-and-nondeterministic-machines",
+          "def-language-recognized-and-decided",
+          "def-partial-function-computed-by-a-machine",
+          "thm-stay-put-moves-can-be-eliminated"
+        ]
+      },
+      {
+        "id": "lem-multitape-simulation-has-quadratic-time-overhead",
+        "kind": "lemma",
+        "title": "The standard one-tape simulation of a fixed multitape machine has quadratic overhead",
+        "strategy": "After t simulated steps, each simulated head can only have visited O(t) cells, so the block encoding on the single tape has length O(t). Each simulated step requires O(t) time for a reading pass, an update pass, and occasional O(t) local shifts to create new blank cells. Summing O(1) + O(2) + ... + O(t) yields O(t^2) total time.",
+        "deps": [
+          "thm-multitape-machines-have-one-tape-simulations"
+        ]
+      },
+      {
+        "id": "thm-nondeterministic-and-deterministic-recognizability-agree",
+        "kind": "theorem",
+        "title": "Deterministic and nondeterministic Turing machines recognize the same languages",
+        "strategy": "Simulate the nondeterministic machine by a deterministic multitape machine that stores a finite description of every live branch and explores the computation tree level by level. When a branch forks, the simulator duplicates its description; when a branch halts and accepts, the simulator accepts immediately. Every finite accepting branch is reached after finitely many levels, and the deterministic multitape simulator can then be collapsed to one tape by the multitape simulation theorem.",
+        "deps": [
+          "def-nondeterministic-accepting-computation",
+          "def-language-recognized-and-decided",
+          "thm-multitape-machines-have-one-tape-simulations",
+          "thm-stay-put-moves-can-be-eliminated"
+        ]
+      },
+      {
+        "id": "def-random-access-and-register-machine-programs",
+        "kind": "definition",
+        "title": "Register programs and RAM programs with unbounded natural-number memory",
+        "deps": [
+          "def-function",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "thm-ram-register-and-turing-computability-agree",
+        "kind": "theorem",
+        "title": "RAM/register computation and Turing computation agree",
+        "strategy": "To simulate a Turing machine on a RAM/register machine, encode tape symbols as natural numbers, store the current head position in a distinguished register, and represent the finitely many nonblank tape cells by addressed memory entries. For the converse, simulate a RAM/register program by a multitape Turing machine using work tapes for registers and scratch data, a tape encoding the sparse memory as address-value pairs, and the finite control for the program counter. Then collapse the multitape simulator to one tape.",
+        "deps": [
+          "def-random-access-and-register-machine-programs",
+          "def-language-recognized-and-decided",
+          "def-partial-function-computed-by-a-machine",
+          "thm-multitape-machines-have-one-tape-simulations"
+        ]
+      },
+      {
+        "id": "def-universal-turing-machine",
+        "kind": "definition",
+        "title": "A universal Turing machine relative to a fixed machine encoding",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "def-partial-function-computed-by-a-machine"
+        ]
+      },
+      {
+        "id": "lem-step-by-step-interpreter-for-machine-codes",
+        "kind": "lemma",
+        "title": "A fixed interpreter can execute one encoded machine step",
+        "strategy": "Given an encoded machine and an encoded current configuration, first decode the machine table and configuration data. If the decoded state is halting, return the same halting configuration. Otherwise find the unique instruction matching the current state and scanned symbol, update the encoded tape and head position according to the one-step configuration rule, and re-encode the successor configuration. Malformed inputs are rejected by the decoder rather than silently simulated.",
+        "deps": [
+          "lem-machine-encoding-is-injective-and-decodable",
+          "def-turing-machine-configuration",
+          "def-one-step-configuration-relation",
+          "def-halting-computation-and-divergence"
+        ]
+      },
+      {
+        "id": "thm-existence-of-a-universal-turing-machine",
+        "kind": "theorem",
+        "title": "A universal Turing machine exists for the chosen coding",
+        "strategy": "Build a multitape interpreter with separate work tapes for the encoded machine, the encoded simulated configuration, and scratch computations. Iterate the one-step interpreter from the previous lemma until the simulated machine halts, then copy the simulated output to the main tape in the library's standard output convention. Finally convert the multitape interpreter to an equivalent one-tape machine.",
+        "deps": [
+          "def-universal-turing-machine",
+          "def-partial-function-computed-by-a-machine",
+          "lem-step-by-step-interpreter-for-machine-codes",
+          "thm-multitape-machines-have-one-tape-simulations"
+        ]
+      },
+      {
+        "id": "cor-effective-enumeration-of-turing-machines",
+        "kind": "corollary",
+        "title": "Turing machines admit an effective enumeration",
+        "strategy": "Enumerate all binary strings in shortlex order, run the total decoder for the chosen machine coding on each string, and output the machine whenever the decoder returns a well-formed machine. Every machine eventually appears because it has a code, and duplicates can be suppressed using injectivity.",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "lem-machine-encoding-is-injective-and-decodable"
+        ]
+      },
+      {
+        "id": "def-church-turing-thesis",
+        "kind": "definition",
+        "title": "The Church-Turing thesis",
+        "deps": [
+          "def-partial-function-computed-by-a-machine"
+        ]
+      },
+      {
+        "id": "rem-model-equivalence-supports-but-does-not-prove-the-thesis",
+        "kind": "remark",
+        "title": "Model-equivalence theorems support but do not prove the Church-Turing thesis",
+        "deps": [
+          "def-church-turing-thesis",
+          "thm-one-way-and-two-way-tapes-are-equivalent",
+          "thm-nondeterministic-and-deterministic-recognizability-agree",
+          "thm-ram-register-and-turing-computability-agree",
+          "thm-existence-of-a-universal-turing-machine"
+        ]
+      },
+      {
+        "id": "fs-universality-decides-halting",
+        "kind": "false-statement",
+        "title": "FALSE: universality decides halting",
+        "strategy": "Refute the claim with a machine that ignores its input and moves right forever. A universal machine on the encoded pair of that machine and an input must faithfully reproduce the nonhalting run, so universality alone does not produce a terminating yes-or-no halting decider.",
+        "deps": [
+          "def-universal-turing-machine",
+          "def-halting-computation-and-divergence",
+          "thm-existence-of-a-universal-turing-machine"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 600,
+    "id": "robust-machine-models-and-universal-computation-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Robust Machine Models and Universal Computation: Examples and Counterexamples",
+    "requires": [
+      "robust-machine-models-and-universal-computation"
+    ],
+    "items": [
+      {
+        "id": "ex-stay-put-moves-can-be-eliminated",
+        "kind": "example",
+        "title": "Replacing a stay-put transition by a right-left macro",
+        "strategy": "Take a machine with an instruction that writes a symbol, leaves the head in place, and changes state. Replace it by two instructions through a fresh state: perform the write and move right, then move left while restoring the intended control state. Check that the transformed machine reaches the same next configuration before continuing.",
+        "deps": [
+          "thm-stay-put-moves-can-be-eliminated",
+          "def-turing-machine-configuration"
+        ]
+      },
+      {
+        "id": "ex-effective-enumeration-of-turing-machines",
+        "kind": "example",
+        "title": "Listing the first few well-formed machine codes in shortlex order",
+        "strategy": "Enumerate binary strings by increasing length and lexicographic order, decode each with the fixed machine decoder, discard malformed words, and record the first several successful decodings. This makes the enumeration procedure concrete and shows where duplicate suppression uses injectivity.",
+        "deps": [
+          "cor-effective-enumeration-of-turing-machines",
+          "lem-machine-encoding-is-injective-and-decodable"
+        ]
+      },
+      {
+        "id": "cex-universality-decides-halting",
+        "kind": "counterexample",
+        "title": "A universal machine diverges on a looping machine/input pair",
+        "strategy": "Let M ignore its input and move right forever. For any input w, the universal machine on the encoded pair <M,w> must reproduce that endless computation, so it cannot halt with a yes-or-no decision about whether M halts on w.",
+        "deps": [
+          "fs-universality-decides-halting",
+          "thm-existence-of-a-universal-turing-machine"
+        ]
+      }
+    ]
+  }
+]

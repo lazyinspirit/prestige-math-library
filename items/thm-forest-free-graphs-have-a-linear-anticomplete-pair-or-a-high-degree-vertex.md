@@ -2,7 +2,7 @@
 id: thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex
 kind: theorem
 title: "Every forest-free graph has a linear anticomplete pair or a linear-degree vertex"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

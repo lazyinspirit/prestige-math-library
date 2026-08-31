@@ -1,0 +1,58 @@
+{
+  "batch": "11",
+  "opened": [
+    "cex-universality-decides-halting",
+    "cor-effective-enumeration-of-turing-machines",
+    "def-church-turing-thesis",
+    "def-effective-encoding-of-turing-machines",
+    "def-random-access-and-register-machine-programs",
+    "def-universal-turing-machine",
+    "ex-effective-enumeration-of-turing-machines",
+    "ex-stay-put-moves-can-be-eliminated",
+    "fs-universality-decides-halting",
+    "lem-machine-encoding-is-injective-and-decodable",
+    "lem-multitape-simulation-has-quadratic-time-overhead",
+    "lem-step-by-step-interpreter-for-machine-codes",
+    "rem-model-equivalence-supports-but-does-not-prove-the-thesis",
+    "robust-machine-models-and-universal-computation",
+    "robust-machine-models-and-universal-computation-examples",
+    "thm-existence-of-a-universal-turing-machine",
+    "thm-multitape-machines-have-one-tape-simulations",
+    "thm-nondeterministic-and-deterministic-recognizability-agree",
+    "thm-one-way-and-two-way-tapes-are-equivalent",
+    "thm-ram-register-and-turing-computability-agree",
+    "thm-stay-put-moves-can-be-eliminated"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "def-universal-turing-machine",
+      "location": "Definition",
+      "defect": "ill-formed",
+      "evidence": "It quantifies over “every binary input word w.” But def-effective-encoding-of-turing-machines defines the input alphabet as “Σ_s:={1,…,s},” while def-halting-computation-and-divergence fixes an input as “w∈Σ*.” In particular, binary symbol 0 is excluded from Σ_s for every coded machine. Thus “M diverges on input w” is not defined by the library’s computation semantics for the quantified choice w=0; a compatible encoding of each machine’s input words, or a restriction on w, is missing.",
+      "severity": "fatal"
+    },
+    {
+      "id": "cex-universality-decides-halting",
+      "location": "Counterexample, step 1.1",
+      "defect": "ill-formed",
+      "evidence": "The step asserts that M_loop “has an infinite run on input 0.” For the chosen coding, def-effective-encoding-of-turing-machines sets every machine’s input alphabet to Σ_s={1,…,s}, whereas def-halting-computation-and-divergence defines runs only for w∈Σ*. Therefore 0 is not an input word of M_loop under the current definitions, so this is not a valid machine/input instance.",
+      "severity": "fatal"
+    },
+    {
+      "id": "fs-universality-decides-halting",
+      "location": "Refutation, step 1.1",
+      "defect": "ill-formed",
+      "evidence": "The proof says that M_loop diverges “in particular on w=0.” Under def-effective-encoding-of-turing-machines, coded machines have input alphabet Σ_s={1,…,s}; def-halting-computation-and-divergence only defines a computation on w∈Σ*. Hence w=0 is outside the machine’s input language and the asserted divergence, and thus the counterinstance used in steps 2.1–3.1, is undefined.",
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-multitape-simulation-has-quadratic-time-overhead",
+      "location": "Statement",
+      "defect": "false-claim",
+      "evidence": "The claimed space bound is c_M(|w|+t) for every t≥0. At w=ε and t=0 this is 0 cells. Yet its cited simulator encoding explicitly has “k simulated tapes as marked blocks,” and proof step 1.1 itself bounds each represented tape interval by |w|+j+1, so the initial configuration has at least one explicitly represented marked blank cell. Step 2.1 drops this necessary additive constant when it concludes c'_M(|w|+j). No positive c_M can make the stated zero-cell bound hold at this endpoint.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Read every scoped item and page once, plus the direct model, configuration, encoding, and computation dependencies needed to test their claims. No limitation."
+}

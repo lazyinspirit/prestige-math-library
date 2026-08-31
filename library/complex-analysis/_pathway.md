@@ -33,6 +33,7 @@ parts:
       - bloch-schottky-and-picard
       - the-riemann-mapping-theorem
       - simply-connected-plane-domains
+      - analytic-continuation-and-monodromy
 ---
 
 ## holomorphic-functions
@@ -50,8 +51,9 @@ derivative estimates, residues, and zero-pole counting. Poisson, Dirichlet, Hart
 pseudoconvexity, Runge-Mittag-Leffler, Gamma, and Weierstrass extend that control to
 boundary values, approximation, principal parts, growth, and special functions; Montel,
 Schwarz-Pick, Bloch, Schottky, Picard, and Riemann mapping complete the conformal side.
-The new simply-connected page then identifies the planar equivalences behind the theory:
-zero periods and homotopy-invariant integrals match primitives and harmonic conjugates,
-trivial fundamental group matches null homology and connected spherical complement,
-contractibility closes the circle, and winding number becomes the degree invariant for
-loops in $\mathbb C^\times$.
+The simply connected and analytic-continuation pages close the part by globalizing local
+germs: zero periods, primitives, harmonic conjugates, and winding number describe when
+holomorphic data continues consistently, monodromy makes continuation path-independent on
+simply connected domains, and the resulting germ space becomes a Riemann surface for
+examples such as $\log$ and $z^{1/n}$ while natural boundaries show where continuation
+stops.

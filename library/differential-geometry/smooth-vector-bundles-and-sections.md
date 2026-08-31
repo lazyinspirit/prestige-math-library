@@ -1,0 +1,19 @@
+---
+page: smooth-vector-bundles-and-sections
+title: "Smooth Vector Bundles and Sections"
+status: draft
+items: [def-smooth-fibre-bundle-and-local-trivialization, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, prop-a-vector-bundle-projection-is-a-surjective-submersion, def-vector-bundle-chart-and-transition-function, lem-vector-bundle-transition-functions-satisfy-the-cocycle-identities, thm-vector-bundle-construction-from-a-smooth-cocycle, prop-isomorphic-cocycles-define-isomorphic-vector-bundles, def-restriction-of-a-vector-bundle, prop-the-zero-section-is-a-smooth-embedding, prop-the-total-space-of-a-rank-r-bundle-has-dimension-dim-m-plus-r, def-smooth-section-local-section-and-support, def-local-frame-and-global-frame-of-a-vector-bundle, prop-local-frames-and-local-trivializations-are-equivalent-data, cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame, prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components, prop-smooth-sections-form-a-module-over-smooth-functions, lem-every-vector-in-a-fibre-extends-to-a-compactly-supported-smooth-section, lem-locally-finite-linear-combinations-of-sections-are-smooth, def-vector-bundle-map-over-a-smooth-base-map, prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices, prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism, def-vector-subbundle, prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles, def-pullback-vector-bundle-as-a-fibre-product, thm-the-pullback-fibre-product-is-a-smooth-vector-bundle, prop-pullback-is-functorial-up-to-canonical-bundle-isomorphism, def-whitney-sum-of-vector-bundles, thm-whitney-sums-are-smooth-vector-bundles, def-dual-and-hom-vector-bundles, thm-dual-and-hom-transition-functions-define-smooth-bundles, prop-sections-of-hom-are-the-same-as-smooth-fibrewise-linear-maps, prop-bundle-maps-over-f-are-sections-of-the-pulled-back-hom-bundle, def-quotient-vector-bundle-by-a-subbundle, thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle, prop-the-canonical-map-to-a-quotient-bundle-is-a-smooth-bundle-map, def-smooth-bundle-metric, thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric, prop-orthogonal-complements-of-subbundles-are-smooth-subbundles, cor-every-vector-subbundle-has-a-smooth-complement, cor-every-short-exact-sequence-of-smooth-vector-bundles-splits, def-normal-and-conormal-bundles-of-an-embedded-submanifold, prop-normal-and-conormal-bundles-are-smooth-vector-bundles, prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle, cor-every-smooth-manifold-admits-a-riemannian-metric, prop-a-vector-bundle-section-with-surjective-vertical-differential-at-every-zero-has-a-submanifold-zero-set]
+examples: [fs-every-vector-bundle-is-globally-trivial, fs-a-fibrewise-linear-continuous-bundle-map-is-automatically-smooth, fs-the-fibrewise-quotient-of-a-vector-bundle-by-arbitrary-varying-subspaces-is-a-vector-bundle, fs-a-short-exact-sequence-of-vector-bundles-has-a-canonical-splitting, fs-the-orthogonal-normal-bundle-of-a-submanifold-is-defined-without-a-metric, fs-the-pullback-bundle-is-the-set-theoretic-inverse-image-of-the-total-space]
+---
+
+This page turns finite-rank smooth vector bundles into usable global objects.
+It starts from local triviality and transition functions, constructs bundles
+from cocycles, and then moves through sections, frames, bundle maps, pullbacks,
+Whitney sums, quotient bundles, bundle metrics, complements, and the normal and
+conormal bundles of an embedded submanifold.
+
+The two main traps on this page are kept explicit. First, smoothness and local
+triviality are always checked in honest bundle charts rather than by fibrewise
+set theory. Second, the image of a bundle map over a non-identity base map
+belongs naturally in a pullback bundle, not naively in the original target over
+its old base.

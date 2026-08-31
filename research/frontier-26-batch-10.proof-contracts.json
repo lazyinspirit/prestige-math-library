@@ -1,0 +1,3376 @@
+{
+  "version": 1,
+  "level": "frontier-26",
+  "note": "Step-5 authoring contract for frontier-26 batch 10 on Sunday, August 30, 2026.",
+  "scope": [
+    "lem-denotation-is-structurally-well-defined",
+    "thm-regular-expression-to-epsilon-nfa",
+    "lem-state-elimination-preserves-path-language",
+    "thm-dfa-to-regular-expression",
+    "thm-kleenes-theorem",
+    "thm-closure-under-homomorphic-image",
+    "thm-closure-under-inverse-homomorphism",
+    "thm-closure-under-left-and-right-quotient",
+    "thm-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable",
+    "fs-regular-expression-syntax-is-its-denoted-language",
+    "fs-state-elimination-has-a-unique-output-expression",
+    "ex-regular-expression-to-epsilon-nfa",
+    "ex-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable",
+    "cex-regular-expression-syntax-is-its-denoted-language",
+    "lem-height-and-yield-bound-for-cnf-trees",
+    "thm-pumping-lemma-for-context-free-languages",
+    "thm-ogdens-lemma",
+    "thm-cfls-are-not-closed-under-intersection",
+    "cor-cfls-are-not-closed-under-complement",
+    "thm-cfls-are-closed-under-reversal",
+    "lem-cyk-table-invariant",
+    "thm-cyk-membership-algorithm",
+    "cor-cfl-membership-is-decidable",
+    "thm-cfg-emptiness-and-finiteness-are-decidable",
+    "fs-the-cfl-pumping-lemma-characterizes-cfls",
+    "fs-cyk-needs-no-normal-form-preprocessing",
+    "fs-cfg-equivalence-is-decidable-by-normalization",
+    "ex-pumping-lemma-for-context-free-languages",
+    "ex-cfg-emptiness-and-finiteness-are-decidable",
+    "cex-the-cfl-pumping-lemma-characterizes-cfls"
+  ],
+  "contracts": {
+    "lem-denotation-is-structurally-well-defined": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-regular-expression-syntax",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. The set of **regular expressions over $\\Sigma$**\nis the smallest class $\\operatorname{Reg}(\\Sigma)$ such that:\n\n- $\\varnothing$, $\\varepsilon$, and every letter $a\\in\\Sigma$ belong to\n  $\\operatorname{Reg}(\\Sigma)$;\n- whenever $R,S\\in\\operatorname{Reg}(\\Sigma)$, the formal expressions\n  $(R+S)$, $(RS)$, and $(R^*)$ also belong to $\\operatorname{Reg}(\\Sigma)$.\n\nThus a regular expression is a finite formal expression tree built from the\nthree base symbols $\\varnothing,\\varepsilon,a$ and the three constructors\nunion, concatenation, and star.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-regular-expression-denotation",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$. The **denotation** of a regular expression\n$R\\in\\operatorname{Reg}(\\Sigma)$ is the language $\\mathcal L(R)\\subseteq\\Sigma^*$\ndefined recursively by\n\n$$ \\mathcal L(\\varnothing)=\\varnothing,\\qquad \\mathcal L(\\varepsilon)=\\{\\varepsilon\\},\\qquad \\mathcal L(a)=\\{a\\}\\ \\ (a\\in\\Sigma), $$\n\nand by the recursive clauses\n\n$$ \\mathcal L(R+S)=\\mathcal L(R)\\cup\\mathcal L(S), $$\n$$ \\mathcal L(RS)=\\mathcal L(R)\\mathcal L(S), $$\n$$ \\mathcal L(R^*)=\\mathcal L(R)^*. $$\n\nThe operations on the right are the language union, concatenation, and Kleene\nstar from [[def-language-boolean-operations]] and\n[[def-language-concatenation-powers-and-kleene-star]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], every regular expression has a finite construction tree, so there is a well-founded induction on the number of constructor occurrences in that tree.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the base cases $R=\\varnothing$, $R=\\varepsilon$, and $R=a$, the language is uniquely fixed by [L2]. If $R$ is composite, then its outermost constructor is uniquely one of $+$, concatenation, or $^*$ by [L1]. The induction hypothesis gives unique denotations to the immediate subexpressions, and then [L2] applies one fixed language operation to those already determined languages.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore exactly one language $\\mathcal L(R)$ satisfies the recursive clauses for the given expression $R$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Regular-expression denotation is structurally well-defined, step 2.1 handle the empty-family boundary: In the base cases R=varnothing, R=varepsilon, and R=a, the language is uniquely fixed by [L2]. If R is composite, then its outermost constructor is uniquely one of +, concatenatio…"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Regular-expression denotation is structurally well-defined, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A regular expression RinoperatornameReg(Sigma)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Regular-expression denotation is structurally well-defined, step 2.1 handle the value-one or singleton boundary: In the base cases R=varnothing, R=varepsilon, and R=a, the language is uniquely fixed by [L2]. If R is composite, then its outermost constructor is uniquely one of +, concatenatio…"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Regular-expression denotation is structurally well-defined, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A regular expression RinoperatornameReg(Sigma)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Regular-expression denotation is structurally well-defined, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: A regular expression RinoperatornameReg(Sigma)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Regular-expression denotation is structurally well-defined, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A regular expression RinoperatornameReg(Sigma)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Regular-expression denotation is structurally well-defined, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A regular expression RinoperatornameReg(Sigma)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Regular-expression denotation is structurally well-defined, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A regular expression RinoperatornameReg(Sigma)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk because the item defines language denotation by structural recursion on syntax. I checked the current proof against the syntax and denotation definitions: the induction follows each constructor clause exactly, so every regular expression has one well-defined language value."
+      }
+    },
+    "thm-regular-expression-to-epsilon-nfa": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-regular-expression-denotation",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$. The **denotation** of a regular expression\n$R\\in\\operatorname{Reg}(\\Sigma)$ is the language $\\mathcal L(R)\\subseteq\\Sigma^*$\ndefined recursively by\n\n$$ \\mathcal L(\\varnothing)=\\varnothing,\\qquad \\mathcal L(\\varepsilon)=\\{\\varepsilon\\},\\qquad \\mathcal L(a)=\\{a\\}\\ \\ (a\\in\\Sigma), $$\n\nand by the recursive clauses\n\n$$ \\mathcal L(R+S)=\\mathcal L(R)\\cup\\mathcal L(S), $$\n$$ \\mathcal L(RS)=\\mathcal L(R)\\mathcal L(S), $$\n$$ \\mathcal L(R^*)=\\mathcal L(R)^*. $$\n\nThe operations on the right are the language union, concatenation, and Kleene\nstar from [[def-language-boolean-operations]] and\n[[def-language-concatenation-powers-and-kleene-star]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-denotation-is-structurally-well-defined",
+          "source_section": "Statement",
+          "quote": "For every regular expression $R$ over an alphabet $\\Sigma$, there exists a\nunique language $\\mathcal L(R)\\subseteq\\Sigma^*$ satisfying the recursive\nclauses of [[def-regular-expression-denotation]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-nfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nA word $w\\in\\Sigma^*$ is **accepted by $N$** when\n$$ \\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing. $$\n\nThe **language recognized by $N$** is\n$$ L(N):=\\{w\\in\\Sigma^*:\\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We construct $N_R$ by induction on the structure of $R$, maintaining one designated start state and one designated accepting state, with that designated state as the entire accepting set. For the base expressions, use: a two-state gadget with no transition to its accepting state for $\\varnothing$; a two-state gadget joined by one $\\varepsilon$-edge for $\\varepsilon$; and a two-state gadget with one $a$-edge for a letter $a\\in\\Sigma$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $R+S$, add a fresh start state with $\\varepsilon$-edges to the starts of the machines for $R$ and $S$, and a fresh accepting state reached by $\\varepsilon$-edges from their old accepting states; only the fresh state is accepting. For $RS$, connect the accepting state of the machine for $R$ to the start state of the machine for $S$ by an $\\varepsilon$-edge, make the former nonaccepting, and retain only the accepting state of the machine for $S$. For $R^*$, add fresh start and accepting states, an $\\varepsilon$-edge from the new start to the new accept, an $\\varepsilon$-edge from the new start into the old start, and $\\varepsilon$-edges from the old accept both back to the old start and to the new accept; only the new accept is accepting.",
+          "step": "2.1",
+          "inputs": [
+            "construct",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The base gadgets recognize exactly $\\varnothing$, $\\{\\varepsilon\\}$, and $\\{a\\}$. By [L3], the union gadget accepts exactly when one branch accepts, the concatenation gadget accepts exactly when a word splits into a word accepted by the first machine followed by one accepted by the second, and the star gadget accepts exactly when the input is a concatenation of finitely many words accepted by the submachine. Using [L1] and the uniqueness from [L2], the induction follows for every constructor.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Hence the constructed epsilon-NFA $N_R$ recognizes precisely $\\mathcal L(R)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Every regular expression has an equivalent epsilon-NFA, step 1.1 handle the empty-family boundary: We construct N_R by induction on the structure of R. For the base expressions, use: a two-state gadget with no accepting path for varnothing; a two-state gadget joined by one vare…"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Every regular expression has an equivalent epsilon-NFA, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A regular expression R over Sigma."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Every regular expression has an equivalent epsilon-NFA, step 1.1 handle the value-one or singleton boundary: We construct N_R by induction on the structure of R. For the base expressions, use: a two-state gadget with no accepting path for varnothing; a two-state gadget joined by one vare…"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Every regular expression has an equivalent epsilon-NFA, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A regular expression R over Sigma."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Every regular expression has an equivalent epsilon-NFA, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: A regular expression R over Sigma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Every regular expression has an equivalent epsilon-NFA, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A regular expression R over Sigma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every regular expression has an equivalent epsilon-NFA, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A regular expression R over Sigma."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every regular expression has an equivalent epsilon-NFA, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A regular expression R over Sigma."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because it must build an epsilon-NFA inductively and keep its accepted language equal to the regular-expression denotation. The current proof still separates the base gadgets from the inductive union, concatenation, and star constructions, and step 3.1 compares them against the denotation definition clause by clause."
+      }
+    },
+    "lem-state-elimination-preserves-path-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-generalized-nfa",
+          "source_section": "Definition",
+          "quote": "A **generalized NFA** over an alphabet $\\Sigma$ is a finite state set $Q$ with\ntwo distinguished states $s,t\\in Q$, $s\\neq t$, together with a label\nassignment\n$$ \\lambda:Q\\times Q\\to\\operatorname{Reg}(\\Sigma). $$\n\nWe require\n$$ \\lambda(p,s)=\\varnothing\\quad(p\\in Q),\\qquad \\lambda(t,q)=\\varnothing\\quad(q\\in Q), $$\nso $s$ has no incoming transitions and $t$ has no outgoing transitions.\n\nFor states $p,q\\in Q$ and a set\n$K\\subseteq Q\\setminus\\{s,t\\}$, let $P_K(p,q)$ be the set of words $w\\in\\Sigma^*$\nfor which there exist an integer $n\\ge0$ and states\n$$ p=r_0,r_1,\\ldots,r_n=q $$\nwith every intermediate state $r_1,\\ldots,r_{n-1}$ in $K$, and a factorization\n$$ w=w_1\\cdots w_n $$\nsuch that each factor belongs to the denoted language of the corresponding edge\nlabel:\n$$ w_i\\in\\mathcal L(\\lambda(r_{i-1},r_i))\\qquad(1\\le i\\le n). $$\n\nWhen $n=0$, the state list has only $p=q$ and the factorization is empty, so\nthe represented word is $w=\\varepsilon$.\n\nThe **language accepted by the GNFA** is\n$$ L(G):=P_{Q\\setminus\\{s,t\\}}(s,t). $$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-gnfa-state-elimination",
+          "source_section": "Definition",
+          "quote": "Let $G=(Q,\\Sigma,s,t,\\lambda)$ be a GNFA, and let\n$r\\in Q\\setminus\\{s,t\\}$ be an interior state. The **state-elimination update**\nremoves $r$ and keeps the surviving state set\n$$ Q':=Q\\setminus\\{r\\}. $$\n\nFor surviving states $p,q\\in Q'$, the new label is\n$$ \\lambda'(p,q):=\\lambda(p,q)+\\lambda(p,r)(\\lambda(r,r))^*\\lambda(r,q). $$\n\nThe resulting GNFA $G\\setminus r$ has the same distinguished start and accept\nstates $s,t$, the surviving state set $Q'$, and the label function $\\lambda'$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $w\\in P^G_{K\\cup\\{r\\}}(p,q)$, witnessed by a path $$ p=s_0,s_1,\\ldots,s_n=q $$ whose intermediate states lie in $K\\cup\\{r\\}$ and by a factorization $$ w=w_1\\cdots w_n,\\qquad w_j\\in\\mathcal L(\\lambda(s_{j-1},s_j)). $$ Delete every occurrence of $r$ from the state list, keeping the surviving states in order: $$ p=t_0,t_1,\\ldots,t_m=q. $$ For each consecutive pair $t_{j-1},t_j$, the deleted portion between them is either empty or consists of one entrance into $r$, zero or more $r$-to-$r$ loops, and one exit from $r$. Therefore the corresponding subword of $w$ lies in the language of the updated label $\\lambda'(t_{j-1},t_j)$ from [L2]. Using the same surviving-state list and these compressed subwords gives a witness that $w\\in P^{G\\setminus r}_K(p,q)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $w\\in P^{G\\setminus r}_K(p,q)$, witnessed by a surviving-state path $$ p=t_0,t_1,\\ldots,t_m=q $$ with intermediate states in $K$ and by subwords in the denoted languages of the updated labels $\\lambda'(t_{j-1},t_j)$. For each such subword, [L2] says that it is either an old direct $t_{j-1}$-to-$t_j$ word or a concatenation of an old $t_{j-1}$-to-$r$ word, finitely many old $r$-to-$r$ words, and an old $r$-to-$t_j$ word. Expanding every updated edge in this way inserts only the eliminated state $r$ between surviving states, so the resulting path in $G$ has all intermediate states in $K\\cup\\{r\\}$. Hence $w\\in P^G_{K\\cup\\{r\\}}(p,q)$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove the two inclusions, so the two path languages are equal.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In State elimination preserves the language between every surviving state pair, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: A GNFA G, an interior state r, surviving states p,q, and a set Ksubseteq Qsetminus\\s,t,r\\."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In State elimination preserves the language between every surviving state pair, step 1.1 handle the zero-denominator or zero-parameter boundary: Let win P^G_Kcup\\r\\(p,q), witnessed by a path whose intermediate states lie in Kcup\\r\\ and by a factorization Delete every occurrence of r from the state list, keeping the survivi…"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In State elimination preserves the language between every surviving state pair, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: A GNFA G, an interior state r, surviving states p,q, and a set Ksubseteq Qsetminus\\s,t,r\\."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In State elimination preserves the language between every surviving state pair, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A GNFA G, an interior state r, surviving states p,q, and a set Ksubseteq Qsetminus\\s,t,r\\."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In State elimination preserves the language between every surviving state pair, step 1.1 handle the endpoint boundary: Let win P^G_Kcup\\r\\(p,q), witnessed by a path whose intermediate states lie in Kcup\\r\\ and by a factorization Delete every occurrence of r from the state list, keeping the survivi…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In State elimination preserves the language between every surviving state pair, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A GNFA G, an interior state r, surviving states p,q, and a set Ksubseteq Qsetminus\\s,t,r\\."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In State elimination preserves the language between every surviving state pair, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A GNFA G, an interior state r, surviving states p,q, and a set Ksubseteq Qsetminus\\s,t,r\\."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In State elimination preserves the language between every surviving state pair, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A GNFA G, an interior state r, surviving states p,q, and a set Ksubseteq Qsetminus\\s,t,r\\."
+        }
+      ]
+    },
+    "thm-dfa-to-regular-expression": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-generalized-nfa",
+          "source_section": "Definition",
+          "quote": "A **generalized NFA** over an alphabet $\\Sigma$ is a finite state set $Q$ with\ntwo distinguished states $s,t\\in Q$, $s\\neq t$, together with a label\nassignment\n$$ \\lambda:Q\\times Q\\to\\operatorname{Reg}(\\Sigma). $$\n\nWe require\n$$ \\lambda(p,s)=\\varnothing\\quad(p\\in Q),\\qquad \\lambda(t,q)=\\varnothing\\quad(q\\in Q), $$\nso $s$ has no incoming transitions and $t$ has no outgoing transitions.\n\nFor states $p,q\\in Q$ and a set\n$K\\subseteq Q\\setminus\\{s,t\\}$, let $P_K(p,q)$ be the set of words $w\\in\\Sigma^*$\nfor which there exist an integer $n\\ge0$ and states\n$$ p=r_0,r_1,\\ldots,r_n=q $$\nwith every intermediate state $r_1,\\ldots,r_{n-1}$ in $K$, and a factorization\n$$ w=w_1\\cdots w_n $$\nsuch that each factor belongs to the denoted language of the corresponding edge\nlabel:\n$$ w_i\\in\\mathcal L(\\lambda(r_{i-1},r_i))\\qquad(1\\le i\\le n). $$\n\nWhen $n=0$, the state list has only $p=q$ and the factorization is empty, so\nthe represented word is $w=\\varepsilon$.\n\nThe **language accepted by the GNFA** is\n$$ L(G):=P_{Q\\setminus\\{s,t\\}}(s,t). $$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-gnfa-state-elimination",
+          "source_section": "Definition",
+          "quote": "Let $G=(Q,\\Sigma,s,t,\\lambda)$ be a GNFA, and let\n$r\\in Q\\setminus\\{s,t\\}$ be an interior state. The **state-elimination update**\nremoves $r$ and keeps the surviving state set\n$$ Q':=Q\\setminus\\{r\\}. $$\n\nFor surviving states $p,q\\in Q'$, the new label is\n$$ \\lambda'(p,q):=\\lambda(p,q)+\\lambda(p,r)(\\lambda(r,r))^*\\lambda(r,q). $$\n\nThe resulting GNFA $G\\setminus r$ has the same distinguished start and accept\nstates $s,t$, the surviving state set $Q'$, and the label function $\\lambda'$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-state-elimination-preserves-path-language",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a GNFA, let $r$ be an interior state, and let $G\\setminus r$ be the\nGNFA obtained from [[def-gnfa-state-elimination]]. If\n$K\\subseteq Q\\setminus\\{s,t,r\\}$ and $p,q$ survive the elimination, then\n$$ P^{G\\setminus r}_K(p,q)=P^G_{K\\cup\\{r\\}}(p,q). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Form a GNFA $G_0$ by adjoining a new start state $s$ and a new accept state $t$ to the DFA states. Put the label $\\varepsilon$ on $s\\to q_0$ and on each edge $f\\to t$ with $f\\in F$. For DFA states $p,q\\in Q$, label $p\\to q$ by the union of all letters $a\\in\\Sigma$ with $\\delta(p,a)=q$, and use $\\varnothing$ on every remaining ordered pair. By [L4], a word is accepted by $D$ exactly when it labels a path from $s$ to $t$ through the old DFA states, so $L(D)=P^{G_0}_Q(s,t)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Eliminate the states of $Q$ one at a time. At each step use the update from [L2]. By [L3], after each elimination the start-to-accept path language is unchanged. Therefore, when all interior states have been removed, the resulting two-state GNFA $G_f$ still satisfies $L(G_f)=L(D)$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In $G_f$ the only possible accepting paths go directly from $s$ to $t$, so by [L1] the accepted language is exactly the denotation of the sole label on that edge. Hence some regular expression denotes $L(D)$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Every DFA language is denoted by a regular expression, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: A DFA D=(Q,Sigma,delta,q_0,F)."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Every DFA language is denoted by a regular expression, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A DFA D=(Q,Sigma,delta,q_0,F)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Every DFA language is denoted by a regular expression, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: A DFA D=(Q,Sigma,delta,q_0,F)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Every DFA language is denoted by a regular expression, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A DFA D=(Q,Sigma,delta,q_0,F)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Every DFA language is denoted by a regular expression, step 1.1 handle the endpoint boundary: Form a GNFA G_0 by adjoining a new start state s and a new accept state t to the DFA states. Put the label varepsilon on sto q_0 and on each edge fto t with fin F. For DFA states…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Every DFA language is denoted by a regular expression, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A DFA D=(Q,Sigma,delta,q_0,F)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every DFA language is denoted by a regular expression, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A DFA D=(Q,Sigma,delta,q_0,F)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every DFA language is denoted by a regular expression, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A DFA D=(Q,Sigma,delta,q_0,F)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because the GNFA state-elimination invariant is load-bearing. I checked the current proof against the generalized-NFA definitions and the repaired state-elimination lemma: the initial GNFA has the exact DFA path language, each elimination preserves that language, and the final single edge carries the desired regular expression."
+      }
+    },
+    "thm-kleenes-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-regular-language-by-dfa-recognition",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A language $L\\subseteq\\Sigma^*$ is\n**regular** when there exists a DFA $D$ over $\\Sigma$ such that\n$$ L=L(D), $$\nwhere $L(D)$ is the recognized language of\n[[def-dfa-acceptance-and-recognized-language]].\n\nThus regularity is a property of a language over a fixed alphabet: the machine\nis a witness, not part of the language itself.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-regular-expression-to-epsilon-nfa",
+          "source_section": "Statement",
+          "quote": "For every regular expression $R$ over an alphabet $\\Sigma$, there exists an\nepsilon-NFA $N_R$ over $\\Sigma$ such that\n$$ L(N_R)=\\mathcal L(R). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-subset-construction-preserves-language",
+          "source_section": "Statement",
+          "quote": "Let $N$ be an NFA with epsilon-moves, and let $D_N$ be its subset-construction\nDFA. Then\n$$ L(D_N)=L(N). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-dfa-to-regular-expression",
+          "source_section": "Statement",
+          "quote": "If $D$ is a DFA over $\\Sigma$, then there exists a regular expression $R$ over\n$\\Sigma$ such that\n$$ \\mathcal L(R)=L(D). $$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose first that $\\mathcal L(R)=L$ for some regular expression $R$. By [L2], there is an epsilon-NFA recognizing $L$, and by [L3] there is then a DFA recognizing the same language. Therefore [L1] implies that $L$ is regular.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, suppose that $L$ is regular. By [L1], some DFA $D$ recognizes $L$. Then [L4] gives a regular expression $R$ with $\\mathcal L(R)=L(D)=L$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove the forward and reverse implications.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A language is regular if and only if some regular expression denotes it, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: A language LsubseteqSigma^*."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A language is regular if and only if some regular expression denotes it, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A language LsubseteqSigma^*."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A language is regular if and only if some regular expression denotes it, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: A language LsubseteqSigma^*."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A language is regular if and only if some regular expression denotes it, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A language LsubseteqSigma^*."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A language is regular if and only if some regular expression denotes it, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: A language LsubseteqSigma^*."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A language is regular if and only if some regular expression denotes it, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A language LsubseteqSigma^*."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In A language is regular if and only if some regular expression denotes it, step 1.1 handle the forward implication: Suppose first that mathcal L(R)=L for some regular expression R. By [L2], there is an epsilon-NFA recognizing L, and by [L3] there is then a DFA recognizing the same language. The…"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In A language is regular if and only if some regular expression denotes it, step 1.2 handle the reverse implication: Conversely, suppose that L is regular. By [L1], some DFA D recognizes L. Then [L4] gives a regular expression R with mathcal L(R)=L(D)=L."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because it is genuinely biconditional. The current proof keeps the two directions separate: regular to automaton through the epsilon-NFA construction and automaton to regular expression through GNFA elimination, so neither implication is hidden."
+      }
+    },
+    "thm-closure-under-homomorphic-image": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-alphabet-homomorphism-and-induced-word-map",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\Delta$ be alphabets. An **alphabet map** is a function\n$h:\\Sigma\\to\\Delta^*$ in the sense of [[def-function]].\n\nIts **induced word map** is the function\n$$ \\widehat h:\\Sigma^*\\to\\Delta^* $$\ndefined as follows. For the empty word, $\\widehat h(\\varepsilon)=\\varepsilon$.\nFor a one-letter word $w=a_0$, set $\\widehat h(w):=h(a_0)$. For a word\n$w=a_0a_1\\cdots a_{n-1}$ of length $n\\ge2$ over $\\Sigma$, set\n$$ \\widehat h(w):=\\bigl(\\cdots((h(a_0)h(a_1))h(a_2))\\cdots h(a_{n-1})\\bigr), $$\nthe left-associated concatenation of the image words of its letters.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-regular-expression-denotation",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$. The **denotation** of a regular expression\n$R\\in\\operatorname{Reg}(\\Sigma)$ is the language $\\mathcal L(R)\\subseteq\\Sigma^*$\ndefined recursively by\n\n$$ \\mathcal L(\\varnothing)=\\varnothing,\\qquad \\mathcal L(\\varepsilon)=\\{\\varepsilon\\},\\qquad \\mathcal L(a)=\\{a\\}\\ \\ (a\\in\\Sigma), $$\n\nand by the recursive clauses\n\n$$ \\mathcal L(R+S)=\\mathcal L(R)\\cup\\mathcal L(S), $$\n$$ \\mathcal L(RS)=\\mathcal L(R)\\mathcal L(S), $$\n$$ \\mathcal L(R^*)=\\mathcal L(R)^*. $$\n\nThe operations on the right are the language union, concatenation, and Kleene\nstar from [[def-language-boolean-operations]] and\n[[def-language-concatenation-powers-and-kleene-star]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-denotation-is-structurally-well-defined",
+          "source_section": "Statement",
+          "quote": "For every regular expression $R$ over an alphabet $\\Sigma$, there exists a\nunique language $\\mathcal L(R)\\subseteq\\Sigma^*$ satisfying the recursive\nclauses of [[def-regular-expression-denotation]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-kleenes-theorem",
+          "source_section": "Statement",
+          "quote": "Let $L\\subseteq\\Sigma^*$. Then $L$ is regular if and only if there exists a\nregular expression $R$ over $\\Sigma$ with\n$$ \\mathcal L(R)=L. $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a regular expression $R$ over $\\Sigma$ with $\\mathcal L(R)=L$ by [L4]. For each letter $a\\in\\Sigma$, choose a regular expression $E_a$ over $\\Delta$ that denotes the single word $h(a)$: if $h(a)=\\varepsilon$ take $E_a=\\varepsilon$, and if $h(a)=b_1\\cdots b_n$ with $n\\ge 1$, take the concatenation $E_a:=b_1\\cdots b_n$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $T(R)$ by recursively replacing each occurrence of a letter $a$ in $R$ by $E_a$, while leaving $\\varnothing$ and $\\varepsilon$ fixed and commuting with $+$, concatenation, and $^*$. By [L3], this gives one well-defined regular expression over $\\Delta$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A structural induction on $R$ using [L1] and [L2] shows that $\\mathcal L(T(R))=\\{\\widehat h(w):w\\in\\mathcal L(R)\\}$. Since $\\mathcal L(R)=L$, this language is exactly $\\widehat h[L]$. Therefore $\\widehat h[L]$ is denoted by a regular expression and is regular.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Regular languages are closed under homomorphic image, step 1.1 handle the empty-family boundary: Choose a regular expression R over Sigma with mathcal L(R)=L by [L4]. For each letter ainSigma, choose a regular expression E_a over Delta that denotes the single word h(a): if h(…"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under homomorphic image, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: An alphabet map h:SigmatoDelta^* and a regular language LsubseteqSigma^*."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Regular languages are closed under homomorphic image, step 1.1 handle the value-one or singleton boundary: Choose a regular expression R over Sigma with mathcal L(R)=L by [L4]. For each letter ainSigma, choose a regular expression E_a over Delta that denotes the single word h(a): if h(…"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under homomorphic image, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: An alphabet map h:SigmatoDelta^* and a regular language LsubseteqSigma^*."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under homomorphic image, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: An alphabet map h:SigmatoDelta^* and a regular language LsubseteqSigma^*."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under homomorphic image, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: An alphabet map h:SigmatoDelta^* and a regular language LsubseteqSigma^*."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under homomorphic image, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: An alphabet map h:SigmatoDelta^* and a regular language LsubseteqSigma^*."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under homomorphic image, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: An alphabet map h:SigmatoDelta^* and a regular language LsubseteqSigma^*."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because it pushes a homomorphism through regular-expression structure. The current proof chooses a regular expression for the source language via Kleene, then translates each constructor under the homomorphism by structural induction, so the image language stays regular with the exact denotation clauses."
+      }
+    },
+    "thm-closure-under-inverse-homomorphism": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-alphabet-homomorphism-and-induced-word-map",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\Delta$ be alphabets. An **alphabet map** is a function\n$h:\\Sigma\\to\\Delta^*$ in the sense of [[def-function]].\n\nIts **induced word map** is the function\n$$ \\widehat h:\\Sigma^*\\to\\Delta^* $$\ndefined as follows. For the empty word, $\\widehat h(\\varepsilon)=\\varepsilon$.\nFor a one-letter word $w=a_0$, set $\\widehat h(w):=h(a_0)$. For a word\n$w=a_0a_1\\cdots a_{n-1}$ of length $n\\ge2$ over $\\Sigma$, set\n$$ \\widehat h(w):=\\bigl(\\cdots((h(a_0)h(a_1))h(a_2))\\cdots h(a_{n-1})\\bigr), $$\nthe left-associated concatenation of the image words of its letters.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-extended-dfa-transition-function",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA. An **extended transition function**\nfor $D$ is a function\n$$ \\delta^*:Q\\times\\Sigma^*\\to Q $$\nsatisfying the two clauses\n$$ \\delta^*(q,\\varepsilon)=q $$\nfor every $q\\in Q$, and\n$$ \\delta^*(q,ua)=\\delta(\\delta^*(q,u),a) $$\nfor every state $q\\in Q$, every word $u\\in\\Sigma^*$, and every letter\n$a\\in\\Sigma$.\n\nThus $\\delta^*(q,w)$ is intended to be the state reached from $q$ after reading\nthe whole word $w$. The next theorem proves that such a function exists and is\nunique.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-regular-language-by-dfa-recognition",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A language $L\\subseteq\\Sigma^*$ is\n**regular** when there exists a DFA $D$ over $\\Sigma$ such that\n$$ L=L(D), $$\nwhere $L(D)$ is the recognized language of\n[[def-dfa-acceptance-and-recognized-language]].\n\nThus regularity is a property of a language over a fixed alphabet: the machine\nis a witness, not part of the language itself.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a DFA $D=(Q,\\Delta,\\delta,q_0,F)$ with $L(D)=K$ by [L4]. Define a DFA $D_h$ over $\\Sigma$ with the same state set, start state, and accepting set by $\\delta_h(q,a):=\\delta^*(q,h(a))$ for each $q\\in Q$ and $a\\in\\Sigma$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We claim that for every word $w\\in\\Sigma^*$ one has $\\delta_h^*(q_0,w)=\\delta^*(q_0,\\widehat h(w))$. The proof is by induction on $|w|$: for $w=\\varepsilon$ both sides equal $q_0$, and appending one letter $a$ updates the left-hand side by $\\delta_h(-,a)$ and the right-hand side by the block $h(a)$, exactly as [L1] and [L2] prescribe.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L3] and step 2.1, the DFA $D_h$ accepts $w$ exactly when $D$ accepts $\\widehat h(w)$, that is, exactly when $\\widehat h(w)\\in K$. Thus $L(D_h)=\\widehat h^{-1}(K)$, so the inverse image is regular.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Regular languages are closed under inverse homomorphism, step 2.1 handle the empty-family boundary: We claim that for every word winSigma^* one has \\delta_h^*(q_0,w)=delta^*(q_0,widehat h(w)). The proof is by induction on |w|: for w=varepsilon both sides equal q_0, and appending…"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under inverse homomorphism, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: An alphabet map h:SigmatoDelta^* and a regular language KsubseteqDelta^*."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Regular languages are closed under inverse homomorphism, step 2.1 handle the value-one or singleton boundary: We claim that for every word winSigma^* one has \\delta_h^*(q_0,w)=delta^*(q_0,widehat h(w)). The proof is by induction on |w|: for w=varepsilon both sides equal q_0, and appending…"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under inverse homomorphism, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: An alphabet map h:SigmatoDelta^* and a regular language KsubseteqDelta^*."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under inverse homomorphism, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: An alphabet map h:SigmatoDelta^* and a regular language KsubseteqDelta^*."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under inverse homomorphism, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: An alphabet map h:SigmatoDelta^* and a regular language KsubseteqDelta^*."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under inverse homomorphism, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: An alphabet map h:SigmatoDelta^* and a regular language KsubseteqDelta^*."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under inverse homomorphism, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: An alphabet map h:SigmatoDelta^* and a regular language KsubseteqDelta^*."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because the pulled-back DFA transition has to match the induced word map exactly. I checked the current proof route: it defines the new transition by delta-star on h(a), proves the state invariant by induction on word length, and then reads acceptance from the DFA-recognition definition."
+      }
+    },
+    "thm-closure-under-left-and-right-quotient": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-nfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nA word $w\\in\\Sigma^*$ is **accepted by $N$** when\n$$ \\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing. $$\n\nThe **language recognized by $N$** is\n$$ L(N):=\\{w\\in\\Sigma^*:\\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-dfas-and-nfas-recognize-the-same-languages",
+          "source_section": "Statement",
+          "quote": "Let $\\Sigma$ be an alphabet and let $L\\subseteq\\Sigma^*$.\n\nThen $L$ is recognized by some NFA over $\\Sigma$ if and only if $L$ is regular.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-product-dfa-for-union-and-intersection",
+          "source_section": "Statement",
+          "quote": "Let $D_1=(Q_1,\\Sigma,\\delta_1,q_1,F_1)$ and\n$D_2=(Q_2,\\Sigma,\\delta_2,q_2,F_2)$ be DFA's over the same alphabet, and let\n$L_i=L(D_i)$.\n\nThen there is a DFA over $\\Sigma$ recognizing $L_1\\cap L_2$, and there is a DFA\nover $\\Sigma$ recognizing $L_1\\cup L_2$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the right quotient, first build the product DFA of $D_L$ and $D_K$ from [L4]. Declare a state $q\\in Q_L$ to be accepting in a new DFA $D_R$ exactly when some word $y$ drives the product machine from $(q,q_K)$ to a state of $F_L\\times F_K$. The transition graph of $D_R$ is otherwise the same as that of $D_L$.",
+          "step": "1.1",
+          "inputs": [
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the left quotient, let $S:=\\{\\delta_L^*(q_L,x):x\\in K\\}\\subseteq Q_L$. Add a fresh start state $s$ with an $\\varepsilon$-edge from $s$ to each state of $S$, keep the letter transitions of $D_L$ on the old state set $Q_L$, and keep $F_L$ as the accepting set. This gives an epsilon-NFA $N_L$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $D_R$ reads $x$ and ends in the state $q=\\delta_L^*(q_L,x)$, then by construction $q$ is accepting exactly when some $y\\in K$ also takes $D_L$ from $q$ to a state of $F_L$. By [L1], this is equivalent to $xy\\in L$ for some $y\\in K$. Hence $L(D_R)=L/K$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [L2], a word $y$ is accepted by $N_L$ exactly when some state of $S$ reaches a state of $F_L$ after reading $y$. By the definition of $S$ and then [L1], this happens exactly when there exists $x\\in K$ with $xy\\in L$. Therefore $L(N_L)=K^{-1}L$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 shows that the right quotient is recognized by a DFA. Step 2.2 shows that the left quotient is recognized by an NFA, so [L3] makes it regular. Thus both quotients are regular.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under left and right quotient with regular languages, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: Regular languages L,KsubseteqSigma^*, together with DFA's D_L=(Q_L,Sigma,\\delta_L,q_L,F_L) and D_K=(Q_K,Sigma,\\delta_K,q_K,F_K) recognizing them."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under left and right quotient with regular languages, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: Regular languages L,KsubseteqSigma^*, together with DFA's D_L=(Q_L,Sigma,\\delta_L,q_L,F_L) and D_K=(Q_K,Sigma,\\delta_K,q_K,F_K) recognizing them."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under left and right quotient with regular languages, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: Regular languages L,KsubseteqSigma^*, together with DFA's D_L=(Q_L,Sigma,\\delta_L,q_L,F_L) and D_K=(Q_K,Sigma,\\delta_K,q_K,F_K) recognizing them."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under left and right quotient with regular languages, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: Regular languages L,KsubseteqSigma^*, together with DFA's D_L=(Q_L,Sigma,\\delta_L,q_L,F_L) and D_K=(Q_K,Sigma,\\delta_K,q_K,F_K) recognizing them."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Regular languages are closed under left and right quotient with regular languages, step 1.1 handle the endpoint boundary: For the right quotient, first build the product DFA of D_L and D_K from [L4]. Declare a state qin Q_L to be accepting in a new DFA D_R exactly when some word y drives the product…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under left and right quotient with regular languages, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: Regular languages L,KsubseteqSigma^*, together with DFA's D_L=(Q_L,Sigma,\\delta_L,q_L,F_L) and D_K=(Q_K,Sigma,\\delta_K,q_K,F_K) recognizing them."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under left and right quotient with regular languages, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: Regular languages L,KsubseteqSigma^*, together with DFA's D_L=(Q_L,Sigma,\\delta_L,q_L,F_L) and D_K=(Q_K,Sigma,\\delta_K,q_K,F_K) recognizing them."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under left and right quotient with regular languages, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: Regular languages L,KsubseteqSigma^*, together with DFA's D_L=(Q_L,Sigma,\\delta_L,q_L,F_L) and D_K=(Q_K,Sigma,\\delta_K,q_K,F_K) recognizing them."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because it mixes two different constructions and a quotient-style language specification. The current proof uses start-state changes for left quotients and an NFA acceptance-set construction for right quotients, then finishes with DFA/NFA equivalence, so both quotient directions are explicit."
+      }
+    },
+    "thm-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-product-dfa-for-union-and-intersection",
+          "source_section": "Statement",
+          "quote": "Let $D_1=(Q_1,\\Sigma,\\delta_1,q_1,F_1)$ and\n$D_2=(Q_2,\\Sigma,\\delta_2,q_2,F_2)$ be DFA's over the same alphabet, and let\n$L_i=L(D_i)$.\n\nThen there is a DFA over $\\Sigma$ recognizing $L_1\\cap L_2$, and there is a DFA\nover $\\Sigma$ recognizing $L_1\\cup L_2$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-complementing-accept-states-complements-the-language",
+          "source_section": "Statement",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA and let\n$$ D^c:=(Q,\\Sigma,\\delta,q_0,Q\\setminus F). $$\nThen\n$$ L(D^c)=\\Sigma^*\\setminus L(D). $$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Membership is decidable by simulating the DFA on the finitely many letters of the input word and checking, via [L1], whether the final state is accepting.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Emptiness is decidable by a graph search from the start state through the finite transition graph: by [L1], the language is empty exactly when no accepting state is reachable.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Finiteness is decidable by restricting to states that are reachable from the start state and can themselves reach an accepting state. If that finite subgraph contains a directed cycle, then one may loop around the cycle arbitrarily many times before taking a path to acceptance, producing infinitely many accepted words. If it contains no directed cycle, then every accepting run has bounded length, so only finitely many words are accepted.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Given DFA's $D_1,D_2$, use [L3] to complement either machine and then [L2] to build DFA's for the two differences $L(D_1)\\setminus L(D_2)$ and $L(D_2)\\setminus L(D_1)$ and for their union. By [A1], that union is the symmetric difference, so $D_1$ and $D_2$ are equivalent exactly when the resulting DFA has empty language. Step 1.2 therefore decides equivalence.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "A1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The same constructions give a DFA for $L(D_1)\\setminus L(D_2)$. By [A1], the containment $L(D_1)\\subseteq L(D_2)$ holds exactly when this difference language is empty, so step 1.2 also decides containment.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1, 1.2, 2.1, 2.2, and 3.1 decide membership, emptiness, finiteness, equivalence, and containment respectively.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In DFA membership, emptiness, finiteness, equivalence, and containment are decidable, step 1.2 handle the empty-family boundary: Emptiness is decidable by a graph search from the start state through the finite transition graph: by [L1], the language is empty exactly when no accepting state is reachable."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In DFA membership, emptiness, finiteness, equivalence, and containment are decidable, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The DFA decision problems of [[def-regular-language-decision-problems]]."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In DFA membership, emptiness, finiteness, equivalence, and containment are decidable, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The DFA decision problems of [[def-regular-language-decision-problems]]."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In DFA membership, emptiness, finiteness, equivalence, and containment are decidable, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The DFA decision problems of [[def-regular-language-decision-problems]]."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In DFA membership, emptiness, finiteness, equivalence, and containment are decidable, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The DFA decision problems of [[def-regular-language-decision-problems]]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In DFA membership, emptiness, finiteness, equivalence, and containment are decidable, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The DFA decision problems of [[def-regular-language-decision-problems]]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In DFA membership, emptiness, finiteness, equivalence, and containment are decidable, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: The DFA decision problems of [[def-regular-language-decision-problems]]."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In DFA membership, emptiness, finiteness, equivalence, and containment are decidable, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: The DFA decision problems of [[def-regular-language-decision-problems]]."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk because it bundles five decision problems. I checked that the current proof handles membership, emptiness, finiteness, equivalence, and containment separately using reachable states plus product and complement constructions, so the combined theorem is only a packaging of explicit subarguments."
+      }
+    },
+    "fs-regular-expression-syntax-is-its-denoted-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-regular-expression-syntax",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. The set of **regular expressions over $\\Sigma$**\nis the smallest class $\\operatorname{Reg}(\\Sigma)$ such that:\n\n- $\\varnothing$, $\\varepsilon$, and every letter $a\\in\\Sigma$ belong to\n  $\\operatorname{Reg}(\\Sigma)$;\n- whenever $R,S\\in\\operatorname{Reg}(\\Sigma)$, the formal expressions\n  $(R+S)$, $(RS)$, and $(R^*)$ also belong to $\\operatorname{Reg}(\\Sigma)$.\n\nThus a regular expression is a finite formal expression tree built from the\nthree base symbols $\\varnothing,\\varepsilon,a$ and the three constructors\nunion, concatenation, and star.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-regular-expression-denotation",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$. The **denotation** of a regular expression\n$R\\in\\operatorname{Reg}(\\Sigma)$ is the language $\\mathcal L(R)\\subseteq\\Sigma^*$\ndefined recursively by\n\n$$ \\mathcal L(\\varnothing)=\\varnothing,\\qquad \\mathcal L(\\varepsilon)=\\{\\varepsilon\\},\\qquad \\mathcal L(a)=\\{a\\}\\ \\ (a\\in\\Sigma), $$\n\nand by the recursive clauses\n\n$$ \\mathcal L(R+S)=\\mathcal L(R)\\cup\\mathcal L(S), $$\n$$ \\mathcal L(RS)=\\mathcal L(R)\\mathcal L(S), $$\n$$ \\mathcal L(R^*)=\\mathcal L(R)^*. $$\n\nThe operations on the right are the language union, concatenation, and Kleene\nstar from [[def-language-boolean-operations]] and\n[[def-language-concatenation-powers-and-kleene-star]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The object $a+b$ is, by [L1], a syntactic expression tree with an outer union node and two letter leaves.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The object $\\mathcal L(a+b)$ is, by [L2], the two-element set $\\{a,b\\}$ of words.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A formal expression tree and a two-element set of words are not literally the same kind of object, so [A1] is false.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: a regular expression is the same object as its denoted language, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The regular expression a+b over the alphabet \\a,b\\."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: a regular expression is the same object as its denoted language, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The regular expression a+b over the alphabet \\a,b\\."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In FALSE: a regular expression is the same object as its denoted language, step 1.1 handle the value-one or singleton boundary: The object a+b is, by [L1], a syntactic expression tree with an outer union node and two letter leaves."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: a regular expression is the same object as its denoted language, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The regular expression a+b over the alphabet \\a,b\\."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In FALSE: a regular expression is the same object as its denoted language, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The regular expression a+b over the alphabet \\a,b\\."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: a regular expression is the same object as its denoted language, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The regular expression a+b over the alphabet \\a,b\\."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: a regular expression is the same object as its denoted language, the refutation targets one false direction of the displayed claim and does not need an independent forward-implication proof branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: a regular expression is the same object as its denoted language, the refutation targets one false direction of the displayed claim and does not need an independent reverse-implication proof branch."
+        }
+      ]
+    },
+    "fs-state-elimination-has-a-unique-output-expression": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-gnfa-state-elimination",
+          "source_section": "Definition",
+          "quote": "Let $G=(Q,\\Sigma,s,t,\\lambda)$ be a GNFA, and let\n$r\\in Q\\setminus\\{s,t\\}$ be an interior state. The **state-elimination update**\nremoves $r$ and keeps the surviving state set\n$$ Q':=Q\\setminus\\{r\\}. $$\n\nFor surviving states $p,q\\in Q'$, the new label is\n$$ \\lambda'(p,q):=\\lambda(p,q)+\\lambda(p,r)(\\lambda(r,r))^*\\lambda(r,q). $$\n\nThe resulting GNFA $G\\setminus r$ has the same distinguished start and accept\nstates $s,t$, the surviving state set $Q'$, and the label function $\\lambda'$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Eliminate $p$ first. Applying [L1] without any algebraic simplification, and then eliminating $q$, gives the final label $(\\varnothing+a\\varnothing^*b)+(a+a\\varnothing^*\\varnothing)(\\varnothing+\\varnothing\\varnothing^*\\varnothing)^*(c+\\varnothing\\varnothing^*b)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Eliminating $q$ first and then $p$ instead gives $(\\varnothing+a\\varnothing^*c)+(a+a\\varnothing^*\\varnothing)(\\varnothing+\\varnothing\\varnothing^*\\varnothing)^*(b+\\varnothing\\varnothing^*c)$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "These are different formal expression trees: already the first displayed outer summand ends in $b$ in step 1.1 and in $c$ in step 1.2. Thus [A1] is false even without imposing any simplification rules.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: state elimination has a unique output expression, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The GNFA with start state s, accept state t, interior states p,q, labels lambda(s,p)=a, lambda(p,t)=b, lambda(s,q)=a, lambda(q,t)=c, and every other label equal to varnothing."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: state elimination has a unique output expression, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The GNFA with start state s, accept state t, interior states p,q, labels lambda(s,p)=a, lambda(p,t)=b, lambda(s,q)=a, lambda(q,t)=c, and every other label equal to varnothing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: state elimination has a unique output expression, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The GNFA with start state s, accept state t, interior states p,q, labels lambda(s,p)=a, lambda(p,t)=b, lambda(s,q)=a, lambda(q,t)=c, and every other label equal to varnothing."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: state elimination has a unique output expression, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The GNFA with start state s, accept state t, interior states p,q, labels lambda(s,p)=a, lambda(p,t)=b, lambda(s,q)=a, lambda(q,t)=c, and every other label equal to varnothing."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In FALSE: state elimination has a unique output expression, step 1.1 handle the endpoint boundary: Eliminate p first. Since lambda(p,p)=varnothing, the new s-to-t label becomes varnothing+avarnothing^*b, and after eliminating q the final output is the expression avarnothing^*b+…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: state elimination has a unique output expression, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The GNFA with start state s, accept state t, interior states p,q, labels lambda(s,p)=a, lambda(p,t)=b, lambda(s,q)=a, lambda(q,t)=c, and every other label equal to varnothing."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: state elimination has a unique output expression, the refutation targets one false direction of the displayed claim and does not need an independent forward-implication proof branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: state elimination has a unique output expression, the refutation targets one false direction of the displayed claim and does not need an independent reverse-implication proof branch."
+        }
+      ]
+    },
+    "ex-regular-expression-to-epsilon-nfa": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-regular-expression-to-epsilon-nfa",
+          "source_section": "Statement",
+          "quote": "For every regular expression $R$ over an alphabet $\\Sigma$, there exists an\nepsilon-NFA $N_R$ over $\\Sigma$ such that\n$$ L(N_R)=\\mathcal L(R). $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Any word of the form $xabb$ with $x\\in\\{a,b\\}^*$ is accepted: stay in $q_0$ while reading the prefix $x$, then use the branch $q_0\\xrightarrow{a}q_1\\xrightarrow{b}q_2\\xrightarrow{b}q_3$ on the final three letters.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, every accepting run must finish with the forced chain $q_0\\xrightarrow{a}q_1\\xrightarrow{b}q_2\\xrightarrow{b}q_3$, because $q_3$ is reached only from $q_2$ by a $b$-edge and $q_2$ is reached only from $q_1$ by a $b$-edge. Therefore any accepted word ends in $abb$, and the earlier letters are exactly the ones read by the two loops at $q_0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence this machine recognizes the words ending in $abb$, which is the language of $(a+b)^*abb$. This is the concrete instance promised by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Constructing an epsilon-NFA for $(a+b)^{*}abb$, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The displayed machine with start state q_0 and accepting state q_3."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Constructing an epsilon-NFA for $(a+b)^{*}abb$, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The displayed machine with start state q_0 and accepting state q_3."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Constructing an epsilon-NFA for $(a+b)^{*}abb$, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The displayed machine with start state q_0 and accepting state q_3."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Constructing an epsilon-NFA for $(a+b)^{*}abb$, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The displayed machine with start state q_0 and accepting state q_3."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Constructing an epsilon-NFA for $(a+b)^{*}abb$, step 2.1 handle the endpoint boundary: Conversely, every accepting run must finish with the forced chain q_0xrightarrowaq_1xrightarrowbq_2xrightarrowbq_3, because q_3 is reached only from q_2 by a b-edge and q_2 is rea…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Constructing an epsilon-NFA for $(a+b)^{*}abb$, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The displayed machine with start state q_0 and accepting state q_3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Constructing an epsilon-NFA for $(a+b)^{*}abb$, the item is an example rather than a biconditional theorem, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Constructing an epsilon-NFA for $(a+b)^{*}abb$, the item is an example rather than a biconditional theorem, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable",
+          "source_section": "Statement",
+          "quote": "The five decision problems named in\n[[def-regular-language-decision-problems]] are decidable for DFA input.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Membership on the concrete input $1010$ returns \"yes\" for $D_{\\mathrm{even}}$, because the run sees two $1$'s and finishes in the even-parity state.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The emptiness test returns \"nonempty\" for both machines, and the finiteness test returns \"infinite\" for both: $D_{\\mathrm{even}}$ accepts $\\varepsilon,00,11,0011,\\ldots$, while $D_{\\mathrm{end1}}$ accepts $1,01,001,\\ldots$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The equivalence test returns \"not equivalent\" because $\\varepsilon\\in L(D_{\\mathrm{even}})$ but $\\varepsilon\\notin L(D_{\\mathrm{end1}})$. The containment tests also return \"no\" in both directions, because $1\\in L(D_{\\mathrm{end1}})\\setminus L(D_{\\mathrm{even}})$ and $00\\in L(D_{\\mathrm{even}})\\setminus L(D_{\\mathrm{end1}})$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "These outcomes match the decision procedures promised by [L1] on an explicit pair of DFA's.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Running the basic regular-language decision procedures on small DFA's, step 2.1 handle the empty-family boundary: The equivalence test returns \"not equivalent\" because varepsilonin L(D_mathrmeven) but varepsilonnotin L(D_mathrmend1). The containment tests also return \"no\" in both directions,…"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Running the basic regular-language decision procedures on small DFA's, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The DFA's D_mathrmeven and D_mathrmend1 just described."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Running the basic regular-language decision procedures on small DFA's, step 2.1 handle the value-one or singleton boundary: The equivalence test returns \"not equivalent\" because varepsilonin L(D_mathrmeven) but varepsilonnotin L(D_mathrmend1). The containment tests also return \"no\" in both directions,…"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Running the basic regular-language decision procedures on small DFA's, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The DFA's D_mathrmeven and D_mathrmend1 just described."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Running the basic regular-language decision procedures on small DFA's, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The DFA's D_mathrmeven and D_mathrmend1 just described."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Running the basic regular-language decision procedures on small DFA's, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The DFA's D_mathrmeven and D_mathrmend1 just described."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Running the basic regular-language decision procedures on small DFA's, the item is an example rather than a biconditional theorem, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Running the basic regular-language decision procedures on small DFA's, the item is an example rather than a biconditional theorem, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "cex-regular-expression-syntax-is-its-denoted-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "fs-regular-expression-syntax-is-its-denoted-language",
+          "source_section": "Statement",
+          "quote": "**False claim:** every regular expression is literally the same object as the\nlanguage it denotes.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The object $a+b$ is a formal expression, while its denotation is the language $\\{a,b\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A formal expression and a two-element set of words are not literally the same object, so the example contradicts the claim in [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The expression $a+b$ is not literally the set $\\\\{a,b\\\\}$, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The regular expression a+b."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The expression $a+b$ is not literally the set $\\\\{a,b\\\\}$, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The regular expression a+b."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The expression $a+b$ is not literally the set $\\\\{a,b\\\\}$, step 1.1 handle the value-one or singleton boundary: The object a+b is a formal expression, while its denotation is the language \\a,b\\."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The expression $a+b$ is not literally the set $\\\\{a,b\\\\}$, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The regular expression a+b."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The expression $a+b$ is not literally the set $\\\\{a,b\\\\}$, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The regular expression a+b."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The expression $a+b$ is not literally the set $\\\\{a,b\\\\}$, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The regular expression a+b."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The expression $a+b$ is not literally the set $\\\\{a,b\\\\}$, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: The regular expression a+b."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The expression $a+b$ is not literally the set $\\\\{a,b\\\\}$, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: The regular expression a+b."
+        }
+      ]
+    },
+    "lem-height-and-yield-bound-for-cnf-trees": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-parse-tree-and-yield",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. A **parse tree** for $G$ is a\nfinite, finitely branching rooted tree of finite sequences in the sense of\n[[def-finitely-branching-tree-on-finite-sequences]], together with a label on\neach node, satisfying the following conditions.\n\n- The root is labelled by the start variable $S$.\n- Every internal node is labelled by a variable $A\\in V$.\n- If an internal node labelled $A$ has ordered children labelled\n  $x_1,\\ldots,x_k$, then $A\\to x_1\\cdots x_k$ is a production of $G$.\n- A leaf is either labelled by a terminal in $\\Sigma$, or is a variable leaf\n  corresponding to a production $A\\to\\varepsilon$ and contributes no terminal\n  symbol to the yield.\n\nReading the terminal leaves from left to right gives a word in $\\Sigma^*$,\ncalled the **yield** of the parse tree.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-chomsky-normal-form",
+          "source_section": "Definition",
+          "quote": "A context-free grammar $G=(V,\\Sigma,P,S)$ is in **Chomsky normal form** when\nevery production of $G$ is of one of the following types:\n\n1. $A\\to BC$, where $A,B,C\\in V$;\n2. $A\\to a$, where $A\\in V$ and $a\\in\\Sigma$;\n3. optionally, $S\\to\\varepsilon$, provided that $S$ does not occur on any\n   right-hand side.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We induct on the height $h$. If $h=1$, then the root is already a leaf. By [L1], a leaf at the root can only be the variable leaf corresponding to the exceptional CNF rule $S\\to\\varepsilon$ from [L2]. Thus $y(T)=\\varepsilon$, so $|y(T)|=0\\le 1=2^0$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $h>1$. If the root uses a terminal production $A\\to a$, then the yield has length $1$, so the bound is immediate. Otherwise the root uses a binary production $A\\to BC$ by [L2]. The two child subtrees have heights at most $h-1$, so by the induction hypothesis each contributes at most $2^{h-2}$ terminal leaves. Therefore $|y(T)|\\le 2^{h-2}+2^{h-2}=2^{h-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The bound holds for height $1$ and is preserved when the height increases, so every CNF parse tree of height $h$ has yield length at most $2^{h-1}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$, step 1.1 handle the empty-family boundary: We induct on the height h. If h=1, then the root is already a leaf. By [L1], a leaf at the root can only be the variable leaf corresponding to the exceptional CNF rule Stovarepsil…"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A Chomsky-normal-form grammar G and a parse tree T of height hge 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$, step 1.1 handle the value-one or singleton boundary: We induct on the height h. If h=1, then the root is already a leaf. By [L1], a leaf at the root can only be the variable leaf corresponding to the exceptional CNF rule Stovarepsil…"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A Chomsky-normal-form grammar G and a parse tree T of height hge 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: A Chomsky-normal-form grammar G and a parse tree T of height hge 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A Chomsky-normal-form grammar G and a parse tree T of height hge 1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A Chomsky-normal-form grammar G and a parse tree T of height hge 1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A Chomsky-normal-form grammar G and a parse tree T of height hge 1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk because the base case depends on the exceptional S -> epsilon rule. The repaired proof now isolates the height-1 variable leaf correctly and then uses the binary-branching induction, so the 2^(h-1) bound is sound at both the empty-yield and positive-yield ends."
+      }
+    },
+    "thm-pumping-lemma-for-context-free-languages": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-chomsky-normal-form",
+          "source_section": "Statement",
+          "quote": "Every context-free grammar has an equivalent context-free grammar in Chomsky\nnormal form.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-derivation-parse-tree-correspondence",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar and let $w\\in\\Sigma^*$.\n\n1. The word $w$ is derived from $S$ in $G$ if and only if there exists a parse\n   tree for $G$ with yield $w$.\n2. Every parse tree for $G$ determines a unique leftmost derivation of its\n   yield and a unique rightmost derivation of its yield.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-height-and-yield-bound-for-cnf-trees",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a context-free grammar in Chomsky normal form, and let $T$ be a\nparse tree for $G$ of height $h\\ge 1$. If $y(T)$ is the yield of $T$, then\n$$ |y(T)|\\le 2^{h-1}. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a CNF grammar $G'=(V,\\Sigma,P,S)$ with $L(G')=L$ by [L1] and [L2], and let $m:=|V|$. Set $p:=2^{m+1}+1$. Let $z\\in L$ satisfy $|z|\\ge p$. By [L3], $z$ is the yield of some parse tree $T$ for $G'$. If every root-to-leaf path of $T$ had at most $m$ variable nodes, then $T$ would have height at most $m+1$, so [L4] would give $|z|\\le 2^m<p$, contradicting $|z|\\ge p$. Therefore some root-to-leaf path has at least $m+1$ variable occurrences.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose two equal variables $A$ on the last $m+1$ variable occurrences of such a path, with the upper one above the lower one. Let the yield of the upper $A$-subtree be $vwx$ and the yield of the lower $A$-subtree be $w$, so the whole word is $uvwxy$. Because the lower occurrence lies strictly below the upper one and $G'$ is in CNF, the path segment from the upper $A$ to the lower one cannot consist only of unit moves, so at least one of the side contexts $v$ and $x$ is nonempty. Hence $|vx|\\ge 1$. The upper $A$-subtree contains at most the last $m+1$ variable occurrences on the path, so its height is at most $m+2$; therefore [L4] gives $|vwx|\\le 2^{m+1}<p$.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The parse-tree segment from the upper occurrence of $A$ down to the lower one shows that $A\\Rightarrow^* vAx$, and the lower subtree shows $A\\Rightarrow^* w$. Repeating or deleting the first derivation segment any number of times while keeping the rest of the tree fixed yields derivations of $uv^i wx^i y$ in $G'$ for every $i\\ge 0$. Hence every such word lies in $L(G')=L$.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore the integer $p$ satisfies the required pumping property.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The pumping lemma for context-free languages, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: A context-free language L."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The pumping lemma for context-free languages, step 3.1 handle the zero-denominator or zero-parameter boundary: The parse-tree segment from the upper occurrence of A down to the lower one shows that ARightarrow^* vAx, and the lower subtree shows ARightarrow^* w. Repeating or deleting the fi…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The pumping lemma for context-free languages, step 3.1 handle the value-one or singleton boundary: The parse-tree segment from the upper occurrence of A down to the lower one shows that ARightarrow^* vAx, and the lower subtree shows ARightarrow^* w. Repeating or deleting the fi…"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The pumping lemma for context-free languages, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A context-free language L."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The pumping lemma for context-free languages, step 2.1 handle the endpoint boundary: Choose two equal variables A on the last m+1 variable occurrences of such a path, with the upper one above the lower one. Let the yield of the upper A-subtree be vwx and the yield…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In The pumping lemma for context-free languages, step 2.1 handle the nonempty-choice bookkeeping: Choose two equal variables A on the last m+1 variable occurrences of such a path, with the upper one above the lower one. Let the yield of the upper A-subtree be vwx and the yield…"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The pumping lemma for context-free languages, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A context-free language L."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The pumping lemma for context-free languages, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A context-free language L."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because the repeated-variable subtree bound is sensitive to the height convention. The current proof now uses p = 2^(m+1) + 1, so the chosen upper repeated-variable subtree has height at most m + 2 and Lemma L4 gives |vwx| <= 2^(m+1) < p exactly."
+      }
+    },
+    "thm-ogdens-lemma": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-marked-position-decomposition",
+          "source_section": "Definition",
+          "quote": "Let $z=a_1\\cdots a_n$ be a word over $\\Sigma$. A set\n$$ M\\subseteq \\{1,\\ldots,n\\} $$\nis a set of **marked positions** of $z$.\n\nFix an integer $p\\ge 1$. A decomposition\n$$ z=uvwxy $$\nis **$p$-admissible with respect to $M$** when:\n\n- the concatenated substring $vx$ contains at least one marked position;\n- the substring $vwx$ contains at most $p$ marked positions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chomsky-normal-form",
+          "source_section": "Statement",
+          "quote": "Every context-free grammar has an equivalent context-free grammar in Chomsky\nnormal form.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-derivation-parse-tree-correspondence",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar and let $w\\in\\Sigma^*$.\n\n1. The word $w$ is derived from $S$ in $G$ if and only if there exists a parse\n   tree for $G$ with yield $w$.\n2. Every parse tree for $G$ determines a unique leftmost derivation of its\n   yield and a unique rightmost derivation of its yield.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-parse-tree-and-yield",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. A **parse tree** for $G$ is a\nfinite, finitely branching rooted tree of finite sequences in the sense of\n[[def-finitely-branching-tree-on-finite-sequences]], together with a label on\neach node, satisfying the following conditions.\n\n- The root is labelled by the start variable $S$.\n- Every internal node is labelled by a variable $A\\in V$.\n- If an internal node labelled $A$ has ordered children labelled\n  $x_1,\\ldots,x_k$, then $A\\to x_1\\cdots x_k$ is a production of $G$.\n- A leaf is either labelled by a terminal in $\\Sigma$, or is a variable leaf\n  corresponding to a production $A\\to\\varepsilon$ and contributes no terminal\n  symbol to the yield.\n\nReading the terminal leaves from left to right gives a word in $\\Sigma^*$,\ncalled the **yield** of the parse tree.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a context-free grammar $G_0$ with $L(G_0)=L$ by [L2], then replace it by an equivalent Chomsky-normal-form grammar $G=(V,\\Sigma,P,S)$ by [L3]. Set $p:=2^{|V|+1}$. Let $z\\in L$ and mark at least $p$ positions of $z$. Because $p\\ge 1$, the word $z$ is nonempty, so by [L4] fix a parse tree $T$ for $z$ in the CNF grammar $G$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Starting at the root of $T$, build a path to a marked leaf by always moving to a child whose subtree contains the larger number of marked positions; when both children contain marked positions, choose one of the heavier children. Call such a node a **branch point**. Each time the path passes through a branch point, the chosen child still contains at least half of the marked positions seen at that node. Therefore, if there were at most $|V|$ branch points on the path, the terminal leaf at the end would still lie below at least $p/2^{|V|}=2$ marked positions, impossible for one leaf. So the path contains at least $|V|+1$ branch points.",
+          "step": "2.1",
+          "inputs": [
+            "L5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Among the last $|V|+1$ branch points on that path, choose two with the same variable label $A$, with the upper one above the lower one. Let the lower $A$-subtree yield $w$, and let the material in the upper $A$-subtree to the left and right of the lower subtree yield $v$ and $x$, so that the whole word is $z=uvwxy$. The upper branch point has marked material outside the lower subtree, so the concatenation $vx$ contains a marked position. Also, if the upper $A$-subtree contained more than $2^{|V|}$ marked positions, then repeating the branch-point-halving argument inside that subtree would produce more than $|V|$ branch points below it on the chosen path, contradicting that we selected the upper $A$ among the last $|V|+1$ branch points. Hence $vwx$ contains at most $2^{|V|}<p$ marked positions. By [L1], the decomposition is $p$-admissible.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The upper occurrence of $A$ derives the lower one by a derivation segment $A\\Rightarrow^* vAx$, and the lower subtree derives $w$. Repeating or deleting that segment while keeping the rest of the parse tree fixed produces derivations of $uv^i wx^i y$ for every $i\\ge 0$. Therefore every such word lies in $L(G)=L$.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Hence the integer $p$ satisfies Ogden's lemma for $L$.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Ogden's lemma, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: A context-free language L."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In Ogden's lemma, step 4.1 handle the zero-denominator or zero-parameter boundary: The upper occurrence of A derives the lower one by a derivation segment ARightarrow^* vAx, and the lower subtree derives w. Repeating or deleting that segment while keeping the re…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Ogden's lemma, step 4.1 handle the value-one or singleton boundary: The upper occurrence of A derives the lower one by a derivation segment ARightarrow^* vAx, and the lower subtree derives w. Repeating or deleting that segment while keeping the re…"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Ogden's lemma, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A context-free language L."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Ogden's lemma, step 3.1 handle the endpoint boundary: Among the last |V|+1 branch points on that path, choose two with the same variable label A, with the upper one above the lower one. Let the lower A-subtree yield w, and let the ma…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In Ogden's lemma, step 2.1 handle the nonempty-choice bookkeeping: Starting at the root of T, build a path to a marked leaf by always moving to a child whose subtree contains the larger number of marked positions; when both children contain marke…"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Ogden's lemma, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A context-free language L."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Ogden's lemma, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A context-free language L."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because the admissibility condition and marked-branch-point count both matter. I checked the current proof against the repaired marked-position definition: vx is the marked piece, the CNF conversion and parse-tree route are explicit, and the halving argument with p = 2^(|V|+1) controls the marked positions in vwx."
+      }
+    },
+    "thm-cfls-are-not-closed-under-intersection": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pumping-lemma-for-context-free-languages",
+          "source_section": "Statement",
+          "quote": "If $L$ is a context-free language, then there exists an integer $p\\ge 1$ such\nthat every word $z\\in L$ with $|z|\\ge p$ can be written as\n$$ z=uvwxy $$\nwith\n$$ |vx|\\ge 1,\\qquad |vwx|\\le p,\\qquad uv^i wx^i y\\in L\\text{ for every }i\\ge 0. $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The grammar $S_1\\to AB$, $A\\to aAb\\mid\\varepsilon$, $B\\to cB\\mid\\varepsilon$ generates $L_1$, and the grammar $S_2\\to CD$, $C\\to aC\\mid\\varepsilon$, $D\\to bDc\\mid\\varepsilon$ generates $L_2$. Therefore both languages are context-free by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A word belongs to $L_1\\cap L_2$ exactly when its number of $a$'s equals its number of $b$'s and its number of $b$'s equals its number of $c$'s. Hence $L_1\\cap L_2=\\{a^n b^n c^n:n\\ge 0\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $L_1\\cap L_2$ were context-free. Let $p$ be the pumping length from [L2], and consider the word $a^p b^p c^p$. Any factor $vwx$ with $|vwx|\\le p$ lies within one block or crosses only one of the two block boundaries. Pumping $v$ and $x$ therefore changes at most two of the three symbol counts, so for $i=0$ or $i=2$ the word $uv^i wx^i y$ cannot still have equal numbers of $a$'s, $b$'s, and $c$'s. This contradicts [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus $L_1\\cap L_2$ is not context-free even though each of $L_1$ and $L_2$ is. So context-free languages are not closed under intersection.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under intersection, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The languages"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under intersection, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The languages"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under intersection, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The languages"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under intersection, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The languages"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under intersection, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The languages"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under intersection, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The languages"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under intersection, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: The languages"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under intersection, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: The languages"
+        }
+      ]
+    },
+    "cor-cfls-are-not-closed-under-complement": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cfls-are-not-closed-under-intersection",
+          "source_section": "Statement",
+          "quote": "Context-free languages are not closed under intersection.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cfl-closure-under-union-concatenation-star-and-homomorphism",
+          "source_section": "Statement",
+          "quote": "If $L_1,L_2$ are context-free languages over an alphabet $\\Sigma$, and if\n$h:\\Sigma\\to\\Delta^*$ is an alphabet map, then the following languages are\ncontext-free:\n\n1. $L_1\\cup L_2$,\n2. $L_1L_2$,\n3. $L_1^*$,\n4. $\\widehat h(L_1)=\\{\\widehat h(w):w\\in L_1\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume for contradiction that context-free languages were closed under complement. Then the complements $A^c$ and $B^c$ of context-free languages would again be context-free.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the union $A^c\\cup B^c$ would then be context-free, and by the contradiction hypothesis its complement would be context-free as well. By [A1], that complement is exactly $A\\cap B$. So the contradiction hypothesis would force closure under intersection.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This contradicts [L1]. Therefore context-free languages are not closed under complement.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under complement, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The class of context-free languages."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under complement, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The class of context-free languages."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under complement, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The class of context-free languages."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under complement, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The class of context-free languages."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under complement, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The class of context-free languages."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under complement, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The class of context-free languages."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under complement, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: The class of context-free languages."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are not closed under complement, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: The class of context-free languages."
+        }
+      ]
+    },
+    "thm-cfls-are-closed-under-reversal": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-context-free-grammar",
+          "source_section": "Definition",
+          "quote": "A **context-free grammar** is a quadruple\n$$ G=(V,\\Sigma,P,S) $$\nsuch that:\n\n- $V$ is a finite set of **variables**.\n- $\\Sigma$ is a finite alphabet of **terminals**, disjoint from $V$.\n- $S\\in V$ is the **start variable**.\n- $P$ is a finite set of **productions** of the form $A\\to\\alpha$, where\n  $A\\in V$ and $\\alpha$ is a finite word over the alphabet $V\\cup\\Sigma$ in the\n  sense of [[def-computation-alphabet-and-word-convention]].\n\nThe word $\\alpha$ may be empty, in which case the production is written\n$A\\to\\varepsilon$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-word-and-language-reversal",
+          "source_section": "Definition",
+          "quote": "Let $w:n\\to\\Sigma$ be a word over an alphabet $\\Sigma$. Its **reversal** is the\nword $w^R:n\\to\\Sigma$ defined by\n$$ w^R(i):=w(n-1-i)\\qquad(i<n). $$\nEquivalently, if $w=a_0a_1\\cdots a_{n-1}$, then\n$w^R=a_{n-1}a_{n-2}\\cdots a_0$. In particular, $\\varepsilon^R=\\varepsilon$.\n\nIf $L\\subseteq\\Sigma^*$ is a language, its **reversal** is\n$$ L^R:=\\{w^R:w\\in L\\}. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-derivation-parse-tree-correspondence",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar and let $w\\in\\Sigma^*$.\n\n1. The word $w$ is derived from $S$ in $G$ if and only if there exists a parse\n   tree for $G$ with yield $w$.\n2. Every parse tree for $G$ determines a unique leftmost derivation of its\n   yield and a unique rightmost derivation of its yield.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a grammar $G=(V,\\Sigma,P,S)$ with $L=L(G)$ by [L2]. Define a new grammar $G^R=(V,\\Sigma,P^R,S)$ by putting a production $A\\to \\alpha^R$ in $P^R$ whenever $A\\to\\alpha$ belongs to $P$. This is again a context-free grammar by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Mirror every parse tree of $G$ by reversing the left-to-right order of the children at each internal node. The mirrored tree uses exactly the reversed productions from step 1.1, so by [L4] it is a parse tree of $G^R$. Its yield is the reversal of the original yield, by [L3]. Therefore $w\\in L$ implies $w^R\\in L(G^R)$. Mirroring back proves the converse implication.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence $L(G^R)=L^R$, so $L^R$ is context-free by [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are closed under reversal, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: A context-free language L."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are closed under reversal, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A context-free language L."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are closed under reversal, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: A context-free language L."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are closed under reversal, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A context-free language L."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Context-free languages are closed under reversal, step 2.1 handle the endpoint boundary: Mirror every parse tree of G by reversing the left-to-right order of the children at each internal node. The mirrored tree uses exactly the reversed productions from step 1.1, so…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are closed under reversal, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A context-free language L."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are closed under reversal, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A context-free language L."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are closed under reversal, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A context-free language L."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk because the proof has to reverse derivations without leaving the CFG setting. The current proof constructs the reversed grammar and uses parse-tree correspondence to show that yields reverse exactly, so the closure claim stays within the written hypotheses."
+      }
+    },
+    "lem-cyk-table-invariant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cyk-table-and-span-variable",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a grammar in Chomsky normal form, and let\n$w=a_1\\cdots a_n$ be a nonempty word over $\\Sigma$.\n\nThe **CYK table** of $G$ on $w$ is the triangular array of sets\n$T[i,\\ell]\\subseteq V$ defined for $1\\le i\\le n$ and\n$1\\le \\ell\\le n-i+1$ by:\n\n$$ T[i,1]:=\\{A\\in V:A\\to a_i\\text{ is a production of }G\\}, $$\n\nand, for $\\ell\\ge 2$,\n\n$$ T[i,\\ell]:=\\{A\\in V:\\exists k\\ (1\\le k<\\ell)\\text{ and }A\\to BC\\in P\\text{ with }B\\in T[i,k],\\ C\\in T[i+k,\\ell-k]\\}. $$\n\nWhen $A\\in T[i,\\ell]$, we say that **$A$ is a span variable for the substring**\n$a_i\\cdots a_{i+\\ell-1}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-one-step-and-reflexive-transitive-derivation",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. A word over $V\\cup\\Sigma$ is\na **sentential form**.\n\nFor sentential forms $\\beta,\\gamma$, write\n$$ \\beta\\Rightarrow_G\\gamma $$\nwhen there exist words $x,y$ over $V\\cup\\Sigma$, a variable $A\\in V$, and a\nproduction $A\\to\\alpha$ in $P$ such that\n$$ \\beta=xAy,\\qquad \\gamma=x\\alpha y. $$\nThis is the **one-step derivation relation** of $G$, a relation in the sense of\n[[def-relation-domain-range-and-field]] on the set of sentential forms.\n\nWrite\n$$ \\beta\\Rightarrow_G^*\\gamma $$\nwhen $\\gamma$ is obtained from $\\beta$ by finitely many one-step derivations,\npossibly zero. This is the **reflexive transitive closure** of $\\Rightarrow_G$,\nand a chain\n$$ \\beta=\\beta_0\\Rightarrow_G\\beta_1\\Rightarrow_G\\cdots\\Rightarrow_G\\beta_n=\\gamma $$\nis a **finite derivation** from $\\beta$ to $\\gamma$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We induct on the span length $\\ell$. For $\\ell=1$, [L1] says that $A\\in T[i,1]$ exactly when $A\\to a_i$ is a production, and by [L2] that is exactly when $A\\Rightarrow_G^* a_i$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume the claim known for all shorter spans and let $\\ell\\ge 2$. If $A\\in T[i,\\ell]$, then [L1] provides a split $k$ and a production $A\\to BC$ with $B\\in T[i,k]$ and $C\\in T[i+k,\\ell-k]$. By the induction hypothesis, $B\\Rightarrow_G^* a_i\\cdots a_{i+k-1}$ and $C\\Rightarrow_G^* a_{i+k}\\cdots a_{i+\\ell-1}$, so one use of $A\\to BC$ followed by those derivations gives $A\\Rightarrow_G^* a_i\\cdots a_{i+\\ell-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, suppose $A\\Rightarrow_G^* a_i\\cdots a_{i+\\ell-1}$ with $\\ell\\ge 2$. Because $G$ is in CNF, the first derivation step from $A$ must be a binary production $A\\to BC$, and the derived word must split at some $k$ into a prefix from $B$ and a suffix from $C$. The induction hypothesis then gives $B\\in T[i,k]$ and $C\\in T[i+k,\\ell-k]$, so [L1] places $A$ in $T[i,\\ell]$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1, 2.1, and 2.2 prove the equivalence for every cell.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A variable lies in a CYK table cell exactly when it derives that span, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: A CNF grammar G, a nonempty word w=a_1cdots a_n, and its CYK table."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A variable lies in a CYK table cell exactly when it derives that span, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A CNF grammar G, a nonempty word w=a_1cdots a_n, and its CYK table."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In A variable lies in a CYK table cell exactly when it derives that span, step 1.1 handle the value-one or singleton boundary: We induct on the span length ell. For ell=1, [L1] says that Ain T[i,1] exactly when Ato a_i is a production, and by [L2] that is exactly when A\\Rightarrow_G^* a_i."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A variable lies in a CYK table cell exactly when it derives that span, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A CNF grammar G, a nonempty word w=a_1cdots a_n, and its CYK table."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A variable lies in a CYK table cell exactly when it derives that span, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: A CNF grammar G, a nonempty word w=a_1cdots a_n, and its CYK table."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A variable lies in a CYK table cell exactly when it derives that span, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A CNF grammar G, a nonempty word w=a_1cdots a_n, and its CYK table."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In A variable lies in a CYK table cell exactly when it derives that span, step 2.1 handle the forward implication: Assume the claim known for all shorter spans and let ellge 2. If Ain T[i,ell], then [L1] provides a split k and a production Ato BC with Bin T[i,k] and Cin T[i+k,ell-k]. By the in…"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In A variable lies in a CYK table cell exactly when it derives that span, step 2.2 handle the reverse implication: Conversely, suppose A\\Rightarrow_G^* a_icdots a_i+ell-1 with ellge 2. Because G is in CNF, the first derivation step from A must be a binary production Ato BC, and the derived wor…"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because it is biconditional and inductive on span length. The current proof still handles the length-one terminal case separately and splits longer spans at the production breakpoint, so both directions of the table invariant are discharged on current disk."
+      }
+    },
+    "thm-cyk-membership-algorithm": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cyk-table-invariant",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a Chomsky-normal-form grammar, let $w=a_1\\cdots a_n$ be a nonempty\nword, and let $T[i,\\ell]$ be the CYK table of $G$ on $w$. Then for every\nvariable $A$ and every valid cell $(i,\\ell)$,\n$$ A\\in T[i,\\ell]\\quad\\text{if and only if}\\quad A\\Rightarrow_G^* a_i\\cdots a_{i+\\ell-1}. $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $w=\\varepsilon$, then by the definition of Chomsky normal form the only way to derive $\\varepsilon$ is the exceptional start production $S\\to\\varepsilon$. So the empty-word branch is correct.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $w=a_1\\cdots a_n$ is nonempty. By [L1], the condition $S\\in T[1,n]$ is equivalent to $S\\Rightarrow_G^* w$. By [L2], that is equivalent to $w\\in L(G)$. Therefore the table branch accepts exactly the generated nonempty words.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two branches together decide membership in $L(G)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In The CYK algorithm decides membership for CNF grammars, step 1.1 handle the empty-family boundary: If w=varepsilon, then by the definition of Chomsky normal form the only way to derive varepsilon is the exceptional start production Stovarepsilon. So the empty-word branch is cor…"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The CYK algorithm decides membership for CNF grammars, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A CNF grammar G=(V,Sigma,P,S) and an input word w."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The CYK algorithm decides membership for CNF grammars, step 1.2 handle the value-one or singleton boundary: Suppose w=a_1cdots a_n is nonempty. By [L1], the condition Sin T[1,n] is equivalent to S\\Rightarrow_G^* w. By [L2], that is equivalent to win L(G). Therefore the table branch acce…"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The CYK algorithm decides membership for CNF grammars, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A CNF grammar G=(V,Sigma,P,S) and an input word w."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The CYK algorithm decides membership for CNF grammars, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: A CNF grammar G=(V,Sigma,P,S) and an input word w."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The CYK algorithm decides membership for CNF grammars, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A CNF grammar G=(V,Sigma,P,S) and an input word w."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In The CYK algorithm decides membership for CNF grammars, step 1.1 proves the ε-branch equivalence and step 1.2 proves that acceptance of a nonempty word via S in T[1,n] implies S =>* w and hence w ∈ L(G)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In The CYK algorithm decides membership for CNF grammars, step 1.1 proves the ε-branch equivalence and step 1.2 proves that derivability of a nonempty word gives S in T[1,n], so the reverse implication is recorded on the current proof."
+        }
+      ]
+    },
+    "cor-cfl-membership-is-decidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-chomsky-normal-form",
+          "source_section": "Statement",
+          "quote": "Every context-free grammar has an equivalent context-free grammar in Chomsky\nnormal form.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cyk-membership-algorithm",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a grammar in Chomsky normal form.\n\n- On input $\\varepsilon$, accept exactly when $S\\to\\varepsilon$ is a production\n  of $G$.\n- On input a nonempty word $w=a_1\\cdots a_n$, fill the CYK table of $G$ on $w$\n  and accept exactly when $S\\in T[1,n]$.\n\nThis procedure decides whether $w\\in L(G)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Convert $G$ to an equivalent CNF grammar $G'$ using [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Run the CYK membership procedure from [L2] on $G'$ and $w$. Because $G'$ is equivalent to $G$, the answer is \"yes\" exactly when $w\\in L(G)$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore context-free-language membership is decidable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Context-free-language membership is decidable, step 2.1 handle the empty-family boundary: Run the CYK membership procedure from [L2] on G' and w. Because G' is equivalent to G, the answer is \"yes\" exactly when win L(G)."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Context-free-language membership is decidable, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A context-free grammar G and a word w."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Context-free-language membership is decidable, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: A context-free grammar G and a word w."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Context-free-language membership is decidable, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: A context-free grammar G and a word w."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Context-free-language membership is decidable, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: A context-free grammar G and a word w."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Context-free-language membership is decidable, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A context-free grammar G and a word w."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Context-free-language membership is decidable, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A context-free grammar G and a word w."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Context-free-language membership is decidable, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A context-free grammar G and a word w."
+        }
+      ]
+    },
+    "thm-cfg-emptiness-and-finiteness-are-decidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-elimination-of-useless-symbols",
+          "source_section": "Statement",
+          "quote": "For every context-free grammar $G$ there exists a context-free grammar $G'$\nsuch that $L(G')=L(G)$ and either:\n\n1. $L(G)=\\varnothing$ and $G'$ is the evident empty-language grammar, or\n2. every variable of $G'$ is both generating and reachable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-elimination-of-epsilon-productions",
+          "source_section": "Statement",
+          "quote": "For every context-free grammar $G$ there exists a context-free grammar $G_\\varepsilon$\nsuch that:\n\n1. $G_\\varepsilon$ has no $\\varepsilon$-productions and\n   $$ L(G_\\varepsilon)=L(G)\\setminus\\{\\varepsilon\\}. $$\n2. If $\\varepsilon\\in L(G)$, then there exists a context-free grammar $G'$ with\n   $L(G')=L(G)$ whose only $\\varepsilon$-production is a start-symbol rule\n   $S_0\\to\\varepsilon$, where $S_0$ does not occur on any right-hand side.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-elimination-of-unit-productions",
+          "source_section": "Statement",
+          "quote": "A **unit production** is a production $A\\to B$ whose left- and right-hand sides\nare both single variables.\n\nFor every context-free grammar $G$ there exists a context-free grammar $H$ such\nthat $L(H)=L(G)$ and $H$ has no unit productions.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "To decide emptiness, compute the least set of generating variables: start with variables that have a production to a terminal word, and repeatedly add a variable $A$ once some production $A\\to\\alpha$ has every variable occurring in $\\alpha$ already marked generating. Because $V$ is finite, this fixed-point computation halts. By [L1], the language is empty exactly when the start variable $S$ never becomes generating.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For finiteness, first replace $G$ by an equivalent grammar $G'$ using [L2], [L3], and [L4], so that every remaining variable is useful, there are no unit productions, and there are no epsilon-productions except possibly the start-symbol exception. Build the directed dependency graph on the variables of $G'$ with an edge $A\\to B$ whenever some production for $A$ contains $B$ on its right-hand side.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If some reachable variable $A$ lies on a directed cycle of this graph, then usefulness gives a terminal derivation from each variable on the cycle, while the removal of unit and nonstart epsilon-productions forces at least one terminal symbol to be added when the cycle is traversed once. Hence there is a derivation $A\\Rightarrow_{G'}^* xAy$ with $|xy|\\ge 1$. Repeating that cycle any number of times and then finishing to terminals yields words of arbitrarily large length in $L(G')=L(G)$, so the language is infinite.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, if the reachable part of the dependency graph is acyclic, then no root-to-leaf path in a parse tree can repeat a reachable variable. So parse trees have uniformly bounded depth. Because $G'$ has only finitely many productions and bounded branching, only finitely many parse trees can occur, and therefore only finitely many terminal yields occur. Thus $L(G)$ is finite.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 decides emptiness, and steps 2.1-2.2 decide finiteness by a finite graph-cycle test.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In CFG emptiness and finiteness are decidable, step 1.1 handle the empty-family boundary: To decide emptiness, compute the least set of generating variables: start with variables that have a production to a terminal word, and repeatedly add a variable A once some produ…"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In CFG emptiness and finiteness are decidable, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: A context-free grammar G=(V,Sigma,P,S)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In CFG emptiness and finiteness are decidable, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: A context-free grammar G=(V,Sigma,P,S)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In CFG emptiness and finiteness are decidable, step 2.2 handle the degenerate branch: Conversely, if the reachable part of the dependency graph is acyclic, then no root-to-leaf path in a parse tree can repeat a reachable variable. So parse trees have uniformly boun…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In CFG emptiness and finiteness are decidable, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: A context-free grammar G=(V,Sigma,P,S)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In CFG emptiness and finiteness are decidable, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A context-free grammar G=(V,Sigma,P,S)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In CFG emptiness and finiteness are decidable, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A context-free grammar G=(V,Sigma,P,S)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In CFG emptiness and finiteness are decidable, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A context-free grammar G=(V,Sigma,P,S)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk because it combines normalization with productive-symbol and cycle arguments. The current proof first normalizes away useless, epsilon, and unit productions, then separates the emptiness test from the finiteness test, so the two decision routes do not silently share unsupported steps."
+      }
+    },
+    "fs-the-cfl-pumping-lemma-characterizes-cfls": {
+      "citations": [
+        {
+          "fact": "L2",
+          "source": "thm-cfls-are-not-closed-under-intersection",
+          "source_section": "Statement",
+          "quote": "Context-free languages are not closed under intersection.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-pdas-recognize-exactly-the-cfls",
+          "source_section": "Statement",
+          "quote": "A language over a finite alphabet is context-free if and only if some PDA\nrecognizes it.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cfl-closure-under-union-concatenation-star-and-homomorphism",
+          "source_section": "Statement",
+          "quote": "If $L_1,L_2$ are context-free languages over an alphabet $\\Sigma$, and if\n$h:\\Sigma\\to\\Delta^*$ is an alphabet map, then the following languages are\ncontext-free:\n\n1. $L_1\\cup L_2$,\n2. $L_1L_2$,\n3. $L_1^*$,\n4. $\\widehat h(L_1)=\\{\\widehat h(w):w\\in L_1\\}$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We verify the ordinary pumping condition with pumping length $p:=3$. Let $z=s^r q\\in L$ have length at least $3$, with $q\\in\\{a,b,c\\}^*$. If $r=0$, pump the first letter of $q$. If $r=1$, then $q\\in K$, and pump the unique initial $s$. If $r\\ge2$ and $q$ is nonempty, pump its first letter. In all three cases take the pumped letter as $v$ and take $w=x=\\varepsilon$; pumping preserves membership because it either keeps $r\\ne1$ or changes the single initial $s$ to $s^i$, which belongs to the second part of $L$ for every $i\\ne1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose for contradiction that $L$ were context free. Let $R:=\\{sa^i b^j c^k:i,j,k\\ge0\\}$, which is regular. Choose a PDA for $L$ using [L3] and a DFA for $R$. The product control consisting of the PDA state and DFA state, with the same stack operation as the PDA and with epsilon moves leaving the DFA state fixed, is a PDA for $L\\cap R$. Hence $L\\cap R$ is context free.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "assume-contra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "It remains to treat $z=s^r$ with $r\\ge3$. For $r=3$, take $v=s^3$; for $r\\ge4$, take $v=s^2$. Put $u=w=x=\\varepsilon$ and let $y$ be the remaining suffix. Pumping produces respectively $s^{3i}$ or $s^{r+2(i-1)}$, whose exponent is never $1$. Thus $|vx|\\ge1$, $|vwx|\\le3$, and every pumped word lies in $L$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By definition, $L\\cap R=sK$. Apply the homomorphism that deletes the initial symbol $s$ and fixes $a,b,c$. Closure under homomorphism from [L3] would make $K$ context free, contradicting [L2]. Therefore $L$ is not context free.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.2",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 show that $L$ satisfies the ordinary pumping condition, while step 2.2 shows that it is not context free. Thus [A1] is false.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: the context-free pumping lemma characterizes the context-free languages, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The language"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: the context-free pumping lemma characterizes the context-free languages, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The language"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: the context-free pumping lemma characterizes the context-free languages, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The language"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: the context-free pumping lemma characterizes the context-free languages, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The language"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In FALSE: the context-free pumping lemma characterizes the context-free languages, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The language"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: the context-free pumping lemma characterizes the context-free languages, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The language"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: the context-free pumping lemma characterizes the context-free languages, the refutation only needs a counterexample to the reverse implication. Step 2.1 supplies a language satisfying the pumping condition but not context-free, so the forward direction is irrelevant to the current falsification route.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. This false-statement carrier is discharged by one counterexample to the reverse implication; the proof does not need an independent refutation of the forward implication."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In FALSE: the context-free pumping lemma characterizes the context-free languages, step 2.1 handle the reverse implication: The same source trail records that L is nevertheless not context-free, and the obstruction is strong enough to be witnessed by an Ogden-style marking argument, in line with [L2].…"
+        }
+      ]
+    },
+    "fs-cyk-needs-no-normal-form-preprocessing": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cyk-table-and-span-variable",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a grammar in Chomsky normal form, and let\n$w=a_1\\cdots a_n$ be a nonempty word over $\\Sigma$.\n\nThe **CYK table** of $G$ on $w$ is the triangular array of sets\n$T[i,\\ell]\\subseteq V$ defined for $1\\le i\\le n$ and\n$1\\le \\ell\\le n-i+1$ by:\n\n$$ T[i,1]:=\\{A\\in V:A\\to a_i\\text{ is a production of }G\\}, $$\n\nand, for $\\ell\\ge 2$,\n\n$$ T[i,\\ell]:=\\{A\\in V:\\exists k\\ (1\\le k<\\ell)\\text{ and }A\\to BC\\in P\\text{ with }B\\in T[i,k],\\ C\\in T[i+k,\\ell-k]\\}. $$\n\nWhen $A\\in T[i,\\ell]$, we say that **$A$ is a span variable for the substring**\n$a_i\\cdots a_{i+\\ell-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cyk-membership-algorithm",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a grammar in Chomsky normal form.\n\n- On input $\\varepsilon$, accept exactly when $S\\to\\varepsilon$ is a production\n  of $G$.\n- On input a nonempty word $w=a_1\\cdots a_n$, fill the CYK table of $G$ on $w$\n  and accept exactly when $S\\in T[1,n]$.\n\nThis procedure decides whether $w\\in L(G)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chomsky-normal-form",
+          "source_section": "Statement",
+          "quote": "Every context-free grammar has an equivalent context-free grammar in Chomsky\nnormal form.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the displayed grammar, the production $S\\to aSb$ has length three and mixes terminals with a variable, while $S\\to ab$ has two terminals on the right-hand side. Neither production has one of the two forms listed in [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the literal CYK recurrence does not know how to place $S$ into any table cell directly from those productions, so the proof of correctness in [L2] does not apply. One must first normalize the grammar as in [L3], or else modify the algorithm itself.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This contradicts [A1]. So CYK does require the normal-form preprocessing built into its proof.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: CYK needs no normal-form preprocessing, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The grammar"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: CYK needs no normal-form preprocessing, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The grammar"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: CYK needs no normal-form preprocessing, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The grammar"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: CYK needs no normal-form preprocessing, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The grammar"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In FALSE: CYK needs no normal-form preprocessing, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The grammar"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: CYK needs no normal-form preprocessing, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The grammar"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: CYK needs no normal-form preprocessing, the refutation targets one false direction of the displayed claim and does not need an independent forward-implication proof branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: CYK needs no normal-form preprocessing, the refutation targets one false direction of the displayed claim and does not need an independent reverse-implication proof branch."
+        }
+      ]
+    },
+    "fs-cfg-equivalence-is-decidable-by-normalization": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cfg-equivalence-and-ambiguity-problems",
+          "source_section": "Definition",
+          "quote": "The **CFG equivalence problem** asks, given two context-free grammars $G$ and\n$H$ over the same alphabet, whether\n$$ L(G)=L(H). $$\n\nThe **CFG ambiguity problem** asks, given a context-free grammar $G$, whether\n$G$ is ambiguous in the sense of [[def-ambiguity-and-inherent-ambiguity]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Normalization preserves the language generated by a grammar, so it may be used as preprocessing for [L1], but it does not produce a canonical normal form whose literal equality settles language equality.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "More decisively, [F1] states that the general CFG equivalence problem is undecidable. So no normalization-only method can decide it in full generality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This contradicts [A1]. Therefore CFG equivalence is not decidable merely by normalization.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: CFG equivalence is decidable by normalization, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The CFG equivalence problem."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: CFG equivalence is decidable by normalization, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The CFG equivalence problem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: CFG equivalence is decidable by normalization, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The CFG equivalence problem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: CFG equivalence is decidable by normalization, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The CFG equivalence problem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In FALSE: CFG equivalence is decidable by normalization, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The CFG equivalence problem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: CFG equivalence is decidable by normalization, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The CFG equivalence problem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: CFG equivalence is decidable by normalization, the refutation targets one false direction of the displayed claim and does not need an independent forward-implication proof branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: CFG equivalence is decidable by normalization, the refutation targets one false direction of the displayed claim and does not need an independent reverse-implication proof branch."
+        }
+      ]
+    },
+    "ex-pumping-lemma-for-context-free-languages": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-pumping-lemma-for-context-free-languages",
+          "source_section": "Statement",
+          "quote": "If $L$ is a context-free language, then there exists an integer $p\\ge 1$ such\nthat every word $z\\in L$ with $|z|\\ge p$ can be written as\n$$ z=uvwxy $$\nwith\n$$ |vx|\\ge 1,\\qquad |vwx|\\le p,\\qquad uv^i wx^i y\\in L\\text{ for every }i\\ge 0. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume for contradiction that $L$ is context-free, and let $p$ be the pumping length from [L1]. Apply the lemma to the word $a^p b^p c^p$ to obtain a decomposition $uvwxy$ with $|vx|\\ge 1$ and $|vwx|\\le p$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $|vwx|\\le p$, the substring $vwx$ lies inside one block or crosses only one of the two block boundaries. Pumping $v$ and $x$ therefore changes at most two of the three symbol counts, so for $i=0$ or $i=2$ the pumped word $uv^i wx^i y$ cannot still have equal numbers of $a$'s, $b$'s, and $c$'s. This contradicts [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $L$ is not context-free.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Using the CFL pumping lemma to rule out $\\\\{a^{n}b^{n}c^{n}:n\\\\ge 0\\\\}$, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The language L=\\a^n b^n c^n:nge 0\\."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In Using the CFL pumping lemma to rule out $\\\\{a^{n}b^{n}c^{n}:n\\\\ge 0\\\\}$, step 2.1 handle the zero-denominator or zero-parameter boundary: Because |vwx|le p, the substring vwx lies inside one block or crosses only one of the two block boundaries. Pumping v and x therefore changes at most two of the three symbol count…"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Using the CFL pumping lemma to rule out $\\\\{a^{n}b^{n}c^{n}:n\\\\ge 0\\\\}$, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The language L=\\a^n b^n c^n:nge 0\\."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Using the CFL pumping lemma to rule out $\\\\{a^{n}b^{n}c^{n}:n\\\\ge 0\\\\}$, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The language L=\\a^n b^n c^n:nge 0\\."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Using the CFL pumping lemma to rule out $\\\\{a^{n}b^{n}c^{n}:n\\\\ge 0\\\\}$, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The language L=\\a^n b^n c^n:nge 0\\."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Using the CFL pumping lemma to rule out $\\\\{a^{n}b^{n}c^{n}:n\\\\ge 0\\\\}$, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The language L=\\a^n b^n c^n:nge 0\\."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Using the CFL pumping lemma to rule out $\\\\{a^{n}b^{n}c^{n}:n\\\\ge 0\\\\}$, the item is an example rather than a biconditional theorem, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Using the CFL pumping lemma to rule out $\\\\{a^{n}b^{n}c^{n}:n\\\\ge 0\\\\}$, the item is an example rather than a biconditional theorem, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-cfg-emptiness-and-finiteness-are-decidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cfg-emptiness-and-finiteness-are-decidable",
+          "source_section": "Statement",
+          "quote": "Given a context-free grammar $G$, one can decide whether $L(G)$ is empty and\nwhether $L(G)$ is finite.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In $G_{\\emptyset}$, the variable $B$ never derives a terminal word, so the start symbol $S$ is not generating. The emptiness test from [L1] therefore reports $L(G_{\\emptyset})=\\varnothing$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In $G_{\\mathrm{fin}}$, the dependency graph is acyclic and the grammar generates exactly the three words $ac$, $ad$, and $b$. So the finiteness test from [L1] reports \"finite\" on this grammar.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In $G_{\\infty}$, the variable $A$ lies on a productive cycle through the rule $A\\to aAb$, so the dependency-graph test from [L1] reports infinitude. Indeed $L(G_{\\infty})=\\{a^n b^n:n\\ge 1\\}$ is infinite.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "These three tiny inputs realize the empty, infinite, and finite outcomes of the theorem.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Running the emptiness and finiteness tests on small grammars, step 1.1 handle the empty-family boundary: In G_emptyset, the variable B never derives a terminal word, so the start symbol S is not generating. The emptiness test from [L1] therefore reports L(G_emptyset)=varnothing."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Running the emptiness and finiteness tests on small grammars, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The three displayed grammars."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Running the emptiness and finiteness tests on small grammars, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The three displayed grammars."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In Running the emptiness and finiteness tests on small grammars, step 1.2 handle the degenerate branch: In G_mathrmfin, the dependency graph is acyclic and the grammar generates exactly the three words ac, ad, and b. So the finiteness test from [L1] reports \"finite\" on this grammar."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Running the emptiness and finiteness tests on small grammars, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The three displayed grammars."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Running the emptiness and finiteness tests on small grammars, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The three displayed grammars."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Running the emptiness and finiteness tests on small grammars, the item is an example rather than a biconditional theorem, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Running the emptiness and finiteness tests on small grammars, the item is an example rather than a biconditional theorem, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "cex-the-cfl-pumping-lemma-characterizes-cfls": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "fs-the-cfl-pumping-lemma-characterizes-cfls",
+          "source_section": "Statement",
+          "quote": "**False claim:** a language is context-free exactly when it satisfies the\nordinary Bar-Hillel pumping condition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cfls-are-not-closed-under-intersection",
+          "source_section": "Statement",
+          "quote": "Context-free languages are not closed under intersection.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-pdas-recognize-exactly-the-cfls",
+          "source_section": "Statement",
+          "quote": "A language over a finite alphabet is context-free if and only if some PDA\nrecognizes it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cfl-closure-under-union-concatenation-star-and-homomorphism",
+          "source_section": "Statement",
+          "quote": "If $L_1,L_2$ are context-free languages over an alphabet $\\Sigma$, and if\n$h:\\Sigma\\to\\Delta^*$ is an alphabet map, then the following languages are\ncontext-free:\n\n1. $L_1\\cup L_2$,\n2. $L_1L_2$,\n3. $L_1^*$,\n4. $\\widehat h(L_1)=\\{\\widehat h(w):w\\in L_1\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take pumping length $p:=3$ and write a word of $L$ as $s^r q$. If $r=0$, pump the first letter of $q$; if $r=1$, pump the initial $s$; if $r\\ge2$ and $q$ is nonempty, pump its first letter. Taking $w=x=\\varepsilon$ gives $|vwx|\\le3$, and every pump remains in $L$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $L$ were context free and let $R:=\\{sa^i b^j c^k:i,j,k\\ge0\\}$. A product of a PDA for $L$ from [L3] with a DFA for the regular language $R$ is a PDA for $L\\cap R=sK$. The homomorphism deleting $s$ would then make $K$ context free by [L3], contradicting [L2].",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "assume-contra",
+            "construct",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the word is $s^r$ with $r\\ge3$, pump $s^3$ when $r=3$ and pump $s^2$ when $r\\ge4$. Pumping never leaves exactly one initial $s$, so every pumped word again lies in $L$. Thus $L$ satisfies the ordinary CFL pumping condition.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence $L$ satisfies ordinary pumping but is not context free, so it refutes the claim in [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A non-context-free language can still satisfy the Bar-Hillel pumping condition, any empty-word or empty-language branch that matters is already separated elsewhere; this row is not about an additional empty family beyond the stated automaton or grammar data: The language"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A non-context-free language can still satisfy the Bar-Hillel pumping condition, the proof does not turn on a free zero-valued numeric parameter beyond the explicit grammar or automaton data already stated: The language"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A non-context-free language can still satisfy the Bar-Hillel pumping condition, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The language"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A non-context-free language can still satisfy the Bar-Hillel pumping condition, the proof does not introduce a second collapsed or exceptional regime beyond the hypotheses already written: The language"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A non-context-free language can still satisfy the Bar-Hillel pumping condition, the proof is about finite words, grammars, and automata rather than an additional interval-endpoint regime: The language"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A non-context-free language can still satisfy the Bar-Hillel pumping condition, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The language"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A non-context-free language can still satisfy the Bar-Hillel pumping condition, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: The language"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In A non-context-free language can still satisfy the Bar-Hillel pumping condition, step 2.1 handle the reverse implication: The displayed language is not context-free by [F2], and the failure is strong enough to be exposed by an Ogden-marking argument, exactly the stronger obstruction highlighted by [L…"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-step8-rejudge-d-round-1",
+        "notes": "High risk because the repaired counterexample must simultaneously satisfy every quantifier of the ordinary pumping condition and remain non-context-free. I checked all leading-s cases for pumping length three: zero leading s, one leading s, at least two with a nonempty tail, and pure powers s^r. I also checked the non-context-freeness reduction: intersection with the regular language s a* b* c* gives sK, the PDA-DFA product preserves context-freeness, deleting s by homomorphism gives K, and the cited earlier theorem proves K={a^n b^n c^n} is not context free."
+      }
+    }
+  }
+}

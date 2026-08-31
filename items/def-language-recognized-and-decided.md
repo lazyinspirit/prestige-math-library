@@ -2,7 +2,7 @@
 id: def-language-recognized-and-decided
 kind: definition
 title: "Languages recognized and decided by a Turing machine"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps:
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-31
 sources:
   scraped: []
   references:

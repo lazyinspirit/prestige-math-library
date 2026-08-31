@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 27407c551593 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 7109d6fac420 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 3655 |
+| defects caught before publication | 3989 |
 | now mechanically prevented | 233 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -340,6 +340,39 @@
 | overstrong-title-or-statement |  | 1 |  |  |  |  |
 | false-boundary-disposition | 1 |  |  |  |  |  |
 | invalid-witness |  |  |  |  | 1 |  |
+
+## frontier-26 — 334 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross | 7-judge | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|---|
+| other | 9 | 12 | 28 | 24 |  |  |
+| invalid-inference | 23 | 16 |  | 20 | 5 | 4 |
+| false-claim | 5 | 11 |  |  | 4 |  |
+| missing-choice-scope | 4 |  |  |  | 16 |  |
+| contract-mismatch | 19 |  |  |  |  |  |
+| missing-hypothesis | 1 | 9 |  |  | 5 | 3 |
+| ill-typed-construction | 2 | 1 |  | 7 | 1 | 4 |
+| ill-formed | 1 | 8 |  |  | 6 |  |
+| citation-inaccurate |  |  |  | 9 | 1 | 4 |
+| undefined-notation | 1 |  |  | 1 | 7 | 3 |
+| false-or-overstrong-statement | 2 |  |  |  | 8 |  |
+| ill-typed-claim | 1 |  |  | 3 | 5 |  |
+| false-computation | 1 |  |  |  | 6 | 1 |
+| invalid-witness | 3 |  |  |  | 2 |  |
+| citation-misattributed |  | 5 |  |  |  |  |
+| citation-missing | 3 |  |  |  | 2 |  |
+| invalid-refutation |  |  |  |  | 4 |  |
+| citation-inflated |  |  |  |  | 1 | 2 |
+| false-boundary-disposition | 1 | 1 |  |  |  |  |
+| unsupported-inference | 1 |  |  |  |  |  |
+| unsupported-universal-property | 1 |  |  |  |  |  |
+| arithmetic-error | 1 |  |  |  |  |  |
+| unlicensed-inference |  | 1 |  |  |  |  |
+| overstrong-title-or-statement |  | 1 |  |  |  |  |
+| missing-case | 1 |  |  |  |  |  |
+| false-or-overstrong-title |  |  |  |  | 1 |  |
+| citation-truncated |  |  |  |  |  | 1 |
+| missing-map |  |  |  |  |  | 1 |
 
 ## pre-frontier-13 — 3 row(s)
 

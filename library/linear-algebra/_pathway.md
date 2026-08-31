@@ -34,8 +34,10 @@ parts:
       - matrix-norms-condition-numbers-and-numerical-stability
       - exterior-powers-orientation-and-hodge-duality
       - direct-matrix-factorisations-lu-cholesky-and-qr
+      - matrix-differentiation-and-first-order-spectral-perturbation
       - the-moore-penrose-pseudoinverse-and-regularised-least-squares
       - eigenvalue-iterations-and-the-qr-algorithm
+      - krylov-subspaces-arnoldi-and-gmres
 ---
 
 ## spaces-and-linear-maps
@@ -72,9 +74,10 @@ makes least squares and spectral arguments possible.
 An eigenvalue is a characteristic-polynomial root, and the minimal polynomial, generalized
 eigenspaces, Jordan form, scalar-change comparisons, Schur form, singular values, norms,
 conditioning, and exterior powers organize similarity, orthogonality, and perturbation.
-LU, Cholesky, and QR provide the stable factorization layer. The new pseudoinverse page
-turns SVD geometry into orthogonal projections, minimum-norm least squares, QR formulas,
-Tikhonov regularization, spectral filters, and the fixed-rank continuity boundary. The
-new iteration page adds power, inverse, Rayleigh-quotient, and subspace iterations, then
-reduces matrices to Hessenberg or tridiagonal form so shifted QR and Wilkinson deflation
-become the final eigenvalue algorithms.
+LU, Cholesky, QR, the pseudoinverse, and regularized least squares add the factorization
+and inverse-problem layer, while classical eigenvalue iterations explain how those
+structures are computed. The added pages close the part on local sensitivity and
+large-scale computation: matrix differentials give Fréchet derivative rules, simple
+eigenpair, projector, and singular-value formulas, and sharp failure modes at defective
+or crossing spectra, and Krylov, Arnoldi, Ritz, and GMRES turn polynomial approximation
+into matrix-free solvers with exact-arithmetic termination and restart caveats.

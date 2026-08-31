@@ -1,0 +1,450 @@
+[
+  {
+    "order": 587,
+    "id": "regular-expressions-and-kleenes-theorem",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Regular Expressions and Kleene's Theorem",
+    "companion": "regular-expressions-and-kleenes-theorem-examples",
+    "requires": [
+      "nondeterministic-finite-automata-and-subset-construction"
+    ],
+    "items": [
+      {
+        "id": "def-regular-expression-syntax",
+        "kind": "definition",
+        "title": "Regular expression syntax over an alphabet",
+        "deps": [
+          "def-computation-alphabet-and-word-convention"
+        ]
+      },
+      {
+        "id": "def-regular-expression-denotation",
+        "kind": "definition",
+        "title": "The language denoted by a regular expression",
+        "deps": [
+          "def-regular-expression-syntax",
+          "def-language-over-an-alphabet",
+          "def-language-boolean-operations",
+          "def-language-concatenation-powers-and-kleene-star"
+        ]
+      },
+      {
+        "id": "lem-denotation-is-structurally-well-defined",
+        "kind": "lemma",
+        "title": "Regular-expression denotation is structurally well-defined",
+        "strategy": "Induct on the construction rank of the expression. The base symbols have fixed denotations, and every nonatomic expression has one uniquely determined outer constructor, so the recursive clauses for union, concatenation, and star assign exactly one language.",
+        "deps": [
+          "def-regular-expression-syntax",
+          "def-regular-expression-denotation"
+        ]
+      },
+      {
+        "id": "thm-regular-expression-to-epsilon-nfa",
+        "kind": "theorem",
+        "title": "Every regular expression has an equivalent epsilon-NFA",
+        "strategy": "Use the Thompson construction. Build base epsilon-NFA's for the symbols $\\emptyset$, $\\varepsilon$, and each letter, and combine them recursively by the standard parallel, sequential, and looping gadgets for union, concatenation, and star. An induction on the expression structure shows that the constructed machine recognizes exactly the denoted language.",
+        "deps": [
+          "def-regular-expression-denotation",
+          "lem-denotation-is-structurally-well-defined",
+          "def-nfa-with-epsilon-moves",
+          "def-nfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "def-generalized-nfa",
+        "kind": "definition",
+        "title": "Generalized NFA's and their accepted languages",
+        "deps": [
+          "def-regular-expression-denotation",
+          "def-deterministic-finite-automaton",
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "def-gnfa-state-elimination",
+        "kind": "definition",
+        "title": "The GNFA state-elimination update",
+        "deps": [
+          "def-generalized-nfa",
+          "def-language-boolean-operations",
+          "def-language-concatenation-powers-and-kleene-star"
+        ]
+      },
+      {
+        "id": "lem-state-elimination-preserves-path-language",
+        "kind": "lemma",
+        "title": "State elimination preserves the language between every surviving state pair",
+        "strategy": "Fix a state $r$ to eliminate. Any path from $p$ to $q$ in the old GNFA either avoids $r$ altogether or reaches $r$, loops there zero or more times, and then exits to $q$. The updated label $R_{p,q} + R_{p,r}R_{r,r}^{*}R_{r,q}$ therefore captures exactly the old $p$-to-$q$ path language.",
+        "deps": [
+          "def-generalized-nfa",
+          "def-gnfa-state-elimination",
+          "lem-denotation-is-structurally-well-defined"
+        ]
+      },
+      {
+        "id": "thm-dfa-to-regular-expression",
+        "kind": "theorem",
+        "title": "Every DFA language is denoted by a regular expression",
+        "strategy": "Turn the DFA into a GNFA with a unique start source, a unique accept sink, and one regular-expression label on every ordered state pair. Eliminate the interior states one at a time, using the state-elimination lemma to preserve the path language after each step. When only the start and accept states remain, the sole label is a regular expression for the original language.",
+        "deps": [
+          "def-generalized-nfa",
+          "def-gnfa-state-elimination",
+          "lem-state-elimination-preserves-path-language",
+          "def-dfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "thm-kleenes-theorem",
+        "kind": "theorem",
+        "title": "A language is regular if and only if some regular expression denotes it",
+        "strategy": "For one direction, convert the regular expression to an epsilon-NFA and then determinize it. For the other, start from a DFA for the language and apply the GNFA state-elimination construction to obtain an equivalent regular expression. The two constructions match the two usual descriptions of regularity.",
+        "deps": [
+          "thm-regular-expression-to-epsilon-nfa",
+          "thm-subset-construction-preserves-language",
+          "thm-dfa-to-regular-expression",
+          "def-regular-language-by-dfa-recognition"
+        ]
+      },
+      {
+        "id": "thm-closure-under-homomorphic-image",
+        "kind": "theorem",
+        "title": "Regular languages are closed under homomorphic image",
+        "strategy": "Let $L$ be regular and choose a regular expression $R$ for $L$ by Kleene's theorem. Replace each letter $a$ occurring in $R$ by a regular expression denoting the word $h(a)$, and recurse through the expression tree. A structural induction shows that the new expression denotes exactly $h(L)$.",
+        "deps": [
+          "def-alphabet-homomorphism-and-induced-word-map",
+          "def-regular-expression-denotation",
+          "lem-denotation-is-structurally-well-defined",
+          "thm-kleenes-theorem"
+        ]
+      },
+      {
+        "id": "thm-closure-under-inverse-homomorphism",
+        "kind": "theorem",
+        "title": "Regular languages are closed under inverse homomorphism",
+        "strategy": "Let $M$ be a DFA for a regular language over $\\Delta$, and let $h : \\Sigma^{*} \\to \\Delta^{*}$ be the induced word map. Build a DFA over $\\Sigma$ whose transition on a letter $a$ from state $q$ is the state reached by $M$ after reading the whole word $h(a)$. Induction on the input length shows that the new machine accepts exactly the preimage $h^{-1}(L(M))$.",
+        "deps": [
+          "def-alphabet-homomorphism-and-induced-word-map",
+          "def-dfa-acceptance-and-recognized-language",
+          "def-extended-dfa-transition-function",
+          "def-regular-language-by-dfa-recognition"
+        ]
+      },
+      {
+        "id": "thm-closure-under-left-and-right-quotient",
+        "kind": "theorem",
+        "title": "Regular languages are closed under left and right quotient with regular languages",
+        "strategy": "For the right quotient $L / K$, start from a DFA for $L$ and mark exactly those states from which some word of $K$ can reach an old accept state; the underlying transition graph is unchanged. For the left quotient $K^{-1}L$, keep the same transitions but let an NFA begin in any state reachable from the original start state by some word of $K$. Both constructions recognize precisely the corresponding quotient language.",
+        "deps": [
+          "def-dfa-acceptance-and-recognized-language",
+          "def-nfa-acceptance-and-recognized-language",
+          "cor-dfas-and-nfas-recognize-the-same-languages",
+          "thm-product-dfa-for-union-and-intersection"
+        ]
+      },
+      {
+        "id": "def-regular-language-decision-problems",
+        "kind": "definition",
+        "title": "Membership, emptiness, finiteness, equivalence, and containment for regular languages",
+        "deps": [
+          "def-language-over-an-alphabet",
+          "def-language-boolean-operations",
+          "def-dfa-acceptance-and-recognized-language",
+          "def-regular-language-by-dfa-recognition"
+        ]
+      },
+      {
+        "id": "thm-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable",
+        "kind": "theorem",
+        "title": "DFA membership, emptiness, finiteness, equivalence, and containment are decidable",
+        "strategy": "Membership is decided by simulating the DFA on the input word. Emptiness is a reachability check for accepting states, and infinitude is detected by a reachable cycle lying on some path to acceptance. Equivalence reduces to emptiness of the symmetric difference, and containment $L(A) \\subseteq L(B)$ reduces to emptiness of $L(A) \\setminus L(B)$.",
+        "deps": [
+          "def-regular-language-decision-problems",
+          "def-dfa-acceptance-and-recognized-language",
+          "thm-product-dfa-for-union-and-intersection",
+          "thm-complementing-accept-states-complements-the-language"
+        ]
+      },
+      {
+        "id": "fs-regular-expression-syntax-is-its-denoted-language",
+        "kind": "false-statement",
+        "title": "FALSE: a regular expression is the same object as its denoted language",
+        "strategy": "Refute the claim by separating syntax from denotation. A regular expression is a finite formal expression tree, while its denotation is a set of words. Distinct expressions can denote the same language, so syntax and meaning cannot literally be identical objects.",
+        "deps": [
+          "def-regular-expression-syntax",
+          "def-regular-expression-denotation"
+        ]
+      },
+      {
+        "id": "fs-state-elimination-has-a-unique-output-expression",
+        "kind": "false-statement",
+        "title": "FALSE: state elimination has a unique output expression",
+        "strategy": "Refute the claim with a small automaton that has at least two eliminable interior states. Eliminating them in different orders yields syntactically different regular expressions, even though each resulting expression denotes the same language.",
+        "deps": [
+          "def-gnfa-state-elimination",
+          "thm-dfa-to-regular-expression"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 588,
+    "id": "regular-expressions-and-kleenes-theorem-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Regular Expressions and Kleene's Theorem: Examples and Counterexamples",
+    "requires": [
+      "regular-expressions-and-kleenes-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-regular-expression-to-epsilon-nfa",
+        "kind": "example",
+        "title": "Constructing an epsilon-NFA for $(a+b)^{*}abb$",
+        "strategy": "Apply the recursive regular-expression-to-epsilon-NFA construction to the star part and then to the trailing concatenation by $a$, $b$, and $b$. Record the fresh start and final states at each stage so the final machine visibly accepts exactly the words ending in $abb$.",
+        "deps": [
+          "thm-regular-expression-to-epsilon-nfa"
+        ]
+      },
+      {
+        "id": "ex-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable",
+        "kind": "example",
+        "title": "Running the basic regular-language decision procedures on small DFA's",
+        "strategy": "Use one DFA for even parity of $1$'s and one DFA for strings ending in $1$. Simulate membership on a concrete input, check emptiness and infinitude by the reachability and cycle criteria, witness nonequivalence by a word in the symmetric difference, and test containment by checking whether the difference language is empty.",
+        "deps": [
+          "thm-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable"
+        ]
+      },
+      {
+        "id": "cex-regular-expression-syntax-is-its-denoted-language",
+        "kind": "counterexample",
+        "title": "The expression $a+b$ is not literally the set $\\{a,b\\}$",
+        "strategy": "Use the regular expression $a+b$. As syntax it is a tree with a union node and two letter leaves, while its denotation is the two-element language $\\{a,b\\}$. The two objects have different types and can therefore not be equal.",
+        "deps": [
+          "fs-regular-expression-syntax-is-its-denoted-language"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 595,
+    "id": "context-free-pumping-ogden-and-parsing",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Context-Free Pumping, Ogden's Lemma, and Parsing",
+    "companion": "context-free-pumping-ogden-and-parsing-examples",
+    "requires": [
+      "pushdown-automata-and-context-free-languages",
+      "finite-counting-and-binomial-coefficients"
+    ],
+    "items": [
+      {
+        "id": "lem-height-and-yield-bound-for-cnf-trees",
+        "kind": "lemma",
+        "title": "A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$",
+        "strategy": "Induct on the tree height. A CNF internal node has at most two variable children, so each increase in height can at most double the number of leaves that contribute terminals to the yield. Therefore a sufficiently long CNF derivation tree must contain a root-to-leaf path with more variable nodes than there are grammar variables.",
+        "deps": [
+          "def-parse-tree-and-yield",
+          "def-chomsky-normal-form",
+          "def-nat-power"
+        ]
+      },
+      {
+        "id": "thm-pumping-lemma-for-context-free-languages",
+        "kind": "theorem",
+        "title": "The pumping lemma for context-free languages",
+        "strategy": "Convert the grammar to Chomsky normal form and choose a long enough derived word that its parse tree has a root-to-leaf path longer than the number of variables. Two equal variables then repeat along that path. The subtree between them yields the decomposition $uvwxy$ with $|vwx|$ bounded and at least one of $v,x$ nonempty, and repeating the middle derivation pumps the language.",
+        "deps": [
+          "lem-height-and-yield-bound-for-cnf-trees",
+          "thm-chomsky-normal-form",
+          "thm-derivation-parse-tree-correspondence",
+          "def-language-generated-by-a-cfg"
+        ]
+      },
+      {
+        "id": "def-marked-position-decomposition",
+        "kind": "definition",
+        "title": "Marked positions and admissible Ogden decompositions",
+        "deps": [
+          "def-computation-alphabet-and-word-convention"
+        ]
+      },
+      {
+        "id": "thm-ogdens-lemma",
+        "kind": "theorem",
+        "title": "Ogden's lemma",
+        "strategy": "Mark sufficiently many positions in a derived word and choose a parse tree with a path to a marked leaf that meets enough branching nodes. Along that path, two equal variables repeat with the marked positions trapped in the intervening subtree. Pumping the repeated derivation yields the Ogden decomposition while preserving the marked-position bounds.",
+        "deps": [
+          "def-marked-position-decomposition",
+          "def-context-free-grammar",
+          "def-parse-tree-and-yield",
+          "thm-derivation-parse-tree-correspondence"
+        ]
+      },
+      {
+        "id": "thm-cfls-are-not-closed-under-intersection",
+        "kind": "theorem",
+        "title": "Context-free languages are not closed under intersection",
+        "strategy": "Use the context-free languages $L_{1}=\\{a^{n}b^{n}c^{m}:n,m\\ge 0\\}$ and $L_{2}=\\{a^{m}b^{n}c^{n}:m,n\\ge 0\\}$. Their intersection is $\\{a^{n}b^{n}c^{n}:n\\ge 0\\}$, which the context-free pumping lemma excludes. Therefore the class of context-free languages cannot be closed under intersection.",
+        "deps": [
+          "def-language-generated-by-a-cfg",
+          "thm-cfl-closure-under-union-concatenation-star-and-homomorphism",
+          "thm-pumping-lemma-for-context-free-languages"
+        ]
+      },
+      {
+        "id": "cor-cfls-are-not-closed-under-complement",
+        "kind": "corollary",
+        "title": "Context-free languages are not closed under complement",
+        "strategy": "If context-free languages were closed under complement, then De Morgan's law together with the already-established closure under union would imply closure under intersection. This contradicts the nonclosure-under-intersection theorem.",
+        "deps": [
+          "thm-cfls-are-not-closed-under-intersection",
+          "thm-cfl-closure-under-union-concatenation-star-and-homomorphism"
+        ]
+      },
+      {
+        "id": "thm-cfls-are-closed-under-reversal",
+        "kind": "theorem",
+        "title": "Context-free languages are closed under reversal",
+        "strategy": "Given a CFG, reverse the right-hand side of every production. Induction on derivations, or equivalently on parse trees read from right to left, shows that the new grammar generates exactly the reversals of the old generated words.",
+        "deps": [
+          "def-context-free-grammar",
+          "def-language-generated-by-a-cfg",
+          "def-word-and-language-reversal",
+          "thm-derivation-parse-tree-correspondence"
+        ]
+      },
+      {
+        "id": "def-cyk-table-and-span-variable",
+        "kind": "definition",
+        "title": "The CYK parsing table and span variables",
+        "deps": [
+          "def-context-free-grammar",
+          "def-chomsky-normal-form",
+          "def-computation-alphabet-and-word-convention"
+        ]
+      },
+      {
+        "id": "lem-cyk-table-invariant",
+        "kind": "lemma",
+        "title": "A variable lies in a CYK table cell exactly when it derives that span",
+        "strategy": "Induct on the span length. For spans of length $1$, the table records exactly the terminal productions. For longer spans, a variable is inserted precisely when some production $A \\to BC$ has a split point whose left and right substrings are already derived by $B$ and $C$, matching the inductive structure of CNF derivations.",
+        "deps": [
+          "def-cyk-table-and-span-variable",
+          "def-one-step-and-reflexive-transitive-derivation"
+        ]
+      },
+      {
+        "id": "thm-cyk-membership-algorithm",
+        "kind": "theorem",
+        "title": "The CYK algorithm decides membership for CNF grammars",
+        "strategy": "Fill the CYK table from shorter spans to longer spans. By the CYK invariant, the start variable appears in the top cell exactly when it derives the entire input word. The algorithm therefore accepts precisely the strings generated by the grammar.",
+        "deps": [
+          "lem-cyk-table-invariant",
+          "def-language-generated-by-a-cfg"
+        ]
+      },
+      {
+        "id": "cor-cfl-membership-is-decidable",
+        "kind": "corollary",
+        "title": "Context-free-language membership is decidable",
+        "strategy": "Given a CFG and an input word, first convert the grammar to an equivalent Chomsky-normal-form grammar, handling the $\\varepsilon$ case separately. Then run the CYK algorithm on the normalized grammar.",
+        "deps": [
+          "thm-chomsky-normal-form",
+          "thm-cyk-membership-algorithm"
+        ]
+      },
+      {
+        "id": "thm-cfg-emptiness-and-finiteness-are-decidable",
+        "kind": "theorem",
+        "title": "CFG emptiness and finiteness are decidable",
+        "strategy": "Emptiness is decided by computing the generating and reachable variables and checking whether the start symbol survives. For finiteness, first remove useless symbols, $\\varepsilon$-productions, and unit productions, then inspect the variable-dependency graph: the language is infinite exactly when a productive variable repeats along some cycle $A \\Rightarrow^{*} xAy$.",
+        "deps": [
+          "def-language-generated-by-a-cfg",
+          "thm-elimination-of-useless-symbols",
+          "thm-elimination-of-epsilon-productions",
+          "thm-elimination-of-unit-productions"
+        ]
+      },
+      {
+        "id": "def-cfg-equivalence-and-ambiguity-problems",
+        "kind": "definition",
+        "title": "The CFG equivalence and ambiguity problems",
+        "deps": [
+          "def-language-generated-by-a-cfg",
+          "def-ambiguity-and-inherent-ambiguity"
+        ]
+      },
+      {
+        "id": "fs-the-cfl-pumping-lemma-characterizes-cfls",
+        "kind": "false-statement",
+        "title": "FALSE: the context-free pumping lemma characterizes the context-free languages",
+        "strategy": "Refute the claim by exhibiting a language that satisfies the Bar-Hillel pumping condition but is nevertheless not context free. Ogden's lemma is strictly stronger, so this page's counterexample is routed through an Ogden-style non-context-freeness proof instead of pretending the ordinary pumping lemma is sufficient.",
+        "deps": [
+          "thm-pumping-lemma-for-context-free-languages",
+          "thm-ogdens-lemma"
+        ]
+      },
+      {
+        "id": "fs-cyk-needs-no-normal-form-preprocessing",
+        "kind": "false-statement",
+        "title": "FALSE: CYK needs no normal-form preprocessing",
+        "strategy": "Refute the claim from the statement of the algorithm itself: the CYK recurrence assumes productions of the forms $A \\to a$ and $A \\to BC$. Arbitrary context-free grammars must therefore be converted to a suitable normal form, or the recurrence no longer matches the grammar's derivations.",
+        "deps": [
+          "def-cyk-table-and-span-variable",
+          "thm-cyk-membership-algorithm",
+          "thm-chomsky-normal-form"
+        ]
+      },
+      {
+        "id": "fs-cfg-equivalence-is-decidable-by-normalization",
+        "kind": "false-statement",
+        "title": "FALSE: CFG equivalence is decidable by normalization",
+        "strategy": "Refute the claim by separating normalization from canonicity. Converting two grammars to normal form preserves their languages, but it does not produce a unique representative, and the same-language question remains one of the standard undecidable problems for context-free grammars.",
+        "deps": [
+          "def-cfg-equivalence-and-ambiguity-problems"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 596,
+    "id": "context-free-pumping-ogden-and-parsing-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Context-Free Pumping, Ogden's Lemma, and Parsing: Examples and Counterexamples",
+    "requires": [
+      "context-free-pumping-ogden-and-parsing"
+    ],
+    "items": [
+      {
+        "id": "ex-pumping-lemma-for-context-free-languages",
+        "kind": "example",
+        "title": "Using the CFL pumping lemma to rule out $\\{a^{n}b^{n}c^{n}:n\\ge 0\\}$",
+        "strategy": "Choose the witness word $a^{n}b^{n}c^{n}$ for an arbitrary pumping length $n$. Because the middle block $vwx$ is short, it cannot cover both the initial $a$'s and the final $c$'s. Pumping down or up therefore destroys one of the three equal counts, so the language is not context free.",
+        "deps": [
+          "thm-pumping-lemma-for-context-free-languages"
+        ]
+      },
+      {
+        "id": "ex-cfg-emptiness-and-finiteness-are-decidable",
+        "kind": "example",
+        "title": "Running the emptiness and finiteness tests on small grammars",
+        "strategy": "First use a grammar whose start symbol is never generating to illustrate emptiness. Then use a cleaned grammar with a productive cycle $A \\Rightarrow^{*} aAb$ to witness infinitude, contrasting it with a grammar whose dependency graph is acyclic and therefore generates only finitely many words.",
+        "deps": [
+          "thm-cfg-emptiness-and-finiteness-are-decidable"
+        ]
+      },
+      {
+        "id": "cex-the-cfl-pumping-lemma-characterizes-cfls",
+        "kind": "counterexample",
+        "title": "A non-context-free language can still satisfy the Bar-Hillel pumping condition",
+        "strategy": "Use the classical language $L = \\{a^{i}b^{j}c^{k} : i,j,k\\text{ are pairwise distinct}\\}$. The ordinary CFL pumping lemma does not rule out $L$, but Ogden's lemma does; this shows that satisfying the weaker pumping condition does not characterize context-freeness.",
+        "deps": [
+          "fs-the-cfl-pumping-lemma-characterizes-cfls",
+          "thm-ogdens-lemma"
+        ]
+      }
+    ]
+  }
+]

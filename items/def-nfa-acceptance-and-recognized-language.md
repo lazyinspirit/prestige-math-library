@@ -2,7 +2,7 @@
 id: def-nfa-acceptance-and-recognized-language
 kind: definition
 title: "Acceptance of a word by an NFA and the recognized language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-extended-nfa-transition, def-language-over-an-alphabet]
 verification:
   precheck: n/a
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

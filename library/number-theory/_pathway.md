@@ -23,6 +23,7 @@ parts:
       - quadratic-reciprocity-and-the-jacobi-symbol
       - sums-of-two-squares
       - lagrange-four-square-theorem
+      - average-orders-divisor-sums-and-representation-counts
 ---
 
 ## divisibility-and-primes
@@ -54,10 +55,11 @@ sums, irreducible-polynomial counts, and square detection by $\mathbf 1 * \lambd
 ## quadratic-residues
 
 Quadratic residues ask which classes modulo an odd prime are squares, and the Legendre
-symbol, Euler's criterion, Gauss's lemma and quadratic reciprocity answer that question in
-a multiplicative language extended by the Jacobi symbol. The same congruence tools settle
-sums of two squares: primes $p\equiv1\pmod4$ are represented, the Brahmagupta-Fibonacci
-identity multiplies representations, and primes $3\pmod4$ must occur to even exponent.
-Euler's four-square identity and a minimal-descent argument then show every prime, hence
-every nonnegative integer, is a sum of four squares. Congruences modulo $8$ isolate the
-sharper three-square obstruction $4^a(8m+7)$.
+symbol, Euler's criterion, Gauss's lemma, quadratic reciprocity, and the Jacobi symbol
+give the multiplicative answer. The same congruence tools settle sums of squares: primes
+$p\equiv1\pmod4$ are represented, Brahmagupta-Fibonacci multiplies representations,
+primes $3\pmod4$ occur to even exponent, and four-square descent proves every
+nonnegative integer is a sum of four squares while congruences modulo $8$ isolate the
+three-square obstruction $4^a(8m+7)$. The added average-order page turns these functions
+into asymptotics: Dirichlet hyperbola gives summatory formulas for $\tau$, $\sigma$, and
+$\varphi$, coprime-pair density $6/\pi^2$, and mean order $\pi$ for $r_2$.

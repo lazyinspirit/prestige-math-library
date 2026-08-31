@@ -2,7 +2,7 @@
 id: def-turing-machine-configuration
 kind: definition
 title: "Configurations of a deterministic one-tape Turing machine"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps:
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-31
 sources:
   scraped: []
   references:

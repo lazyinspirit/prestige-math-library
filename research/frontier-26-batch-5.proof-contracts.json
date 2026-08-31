@@ -1,0 +1,1363 @@
+{
+  "version": 1,
+  "level": "frontier-26",
+  "scope": [
+    "lem-harmonic-sum-asymptotic",
+    "thm-dirichlet-hyperbola-method",
+    "thm-divisor-counting-summatory-estimate",
+    "lem-summatory-logarithm-asymptotic",
+    "cor-average-order-of-divisor-counting-function",
+    "thm-divisor-sum-summatory-estimate",
+    "cor-average-order-of-divisor-sum-function",
+    "thm-euler-totient-summatory-estimate",
+    "cor-average-order-of-euler-totient",
+    "thm-coprime-pair-counting-asymptotic",
+    "cor-asymptotic-density-of-coprime-pairs",
+    "lem-normalized-two-square-count-is-multiplicative",
+    "thm-two-square-representation-count",
+    "cor-average-order-of-two-square-representations",
+    "ex-dirichlet-hyperbola-lattice-decomposition",
+    "ex-divisor-summatory-error-table"
+  ],
+  "contracts": {
+    "lem-harmonic-sum-asymptotic": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Integral comparison on each unit interval bounds the reciprocal term between consecutive logarithmic increments.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The shifted harmonic-minus-log sequence is nonnegative, increasing, and bounded, so it converges.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The defining Euler-Mascheroni sequence has the same limit and differs from that limit by at most 1/N.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Replacing N by floor(x) transfers the integer estimate to all real x >= 1 with O(1/x) error.",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The harmonic sum is log x plus gamma plus O(1/x), the summation range n ≤ x is nonempty because the statement assumes x ≥ 1, so the initial term 1/1 is always present. The proof then passes through N = floor(x) with N ≥ 1 throughout.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. The hypothesis x ≥ 1 forces floor(x) ≥ 1, so the harmonic sum never has an empty index range."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The harmonic sum is log x plus gamma plus O(1/x), step 1.1 integrates 1/t only on intervals [n,n+1] and [n-1,n] with n ≥ 1, so the variable denominator t never approaches 0 in the written proof. The statement also begins at x ≥ 1.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. Every integral in step 1.1 is over t ≥ 1, so the denominator t is strictly positive whenever 1/t appears."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The harmonic sum is log x plus gamma plus O(1/x), step 4.1 handle the value-one or singleton boundary: For the given real x, let N:=lfloor xrfloor. Then Nle x<N+1, so 0lelog x-log N=log(x/N)lelog(1+1/N)\\le1/N. Combining this with step 3.1 yields because Nge x/2 for every x\\ge1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The harmonic sum is log x plus gamma plus O(1/x), step 3.1 handle the degenerate branch: Let L:=\\lim_NE_N. Since and 0lelog(1+1/N)\\le1/N by step 1.1, the sequence in [[def-euler-mascheroni-constant]] has the same limit L. Therefore L=gamma, and"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The harmonic sum is log x plus gamma plus O(1/x), step 4.1 handle the endpoint boundary: For the given real x, let N:=lfloor xrfloor. Then Nle x<N+1, so 0lelog x-log N=log(x/N)lelog(1+1/N)\\le1/N. Combining this with step 3.1 yields because Nge x/2 for every x\\ge1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The harmonic sum is log x plus gamma plus O(1/x), every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1 and an integer N\\ge1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The harmonic sum is log x plus gamma plus O(1/x), the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1 and an integer N\\ge1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The harmonic sum is log x plus gamma plus O(1/x), the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1 and an integer N\\ge1."
+        }
+      ]
+    },
+    "thm-dirichlet-hyperbola-method": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The summatory convolution expands to the finite lattice sum over ab <= x.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Every lattice point lies in one hyperbola arm, and the overlap rectangle must be subtracted once.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Each arm rewrites through the summatory functions F and G, and the overlap factors as F(U)G(V).",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Dirichlet's hyperbola method, the divisor and lattice-point sums run over positive integers with x ≥ 1 and U,V ≥ 1, so the domains a ≤ U and b ≤ V are never empty. Step 2.1 partitions the same nonempty region ab ≤ x = UV.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. The stated hypotheses x ≥ 1 and U,V ≥ 1 keep both summation regions nonempty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Dirichlet's hyperbola method for summatory convolutions, the stated positivity hypotheses keep the displayed denominators and parameters away from zero: Arithmetic functions f,g, a real x\\ge1, and reals U,V\\ge1 with UV=x."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Dirichlet's hyperbola method for summatory convolutions, step 3.1 handle the value-one or singleton boundary: For fixed ale U, the inner sum over b is exactly G(x/a), and for fixed ble V the inner sum over a is exactly F(x/b). The overlap sum factors as Substituting these identities into…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In Dirichlet's hyperbola method for summatory convolutions, step 2.1 handle the degenerate branch: Every lattice point (a,b) with able x=UV lies in at least one of the regions ale U or ble V, for otherwise a>U and b>V would give ab>UV=x. Therefore"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Dirichlet's hyperbola method for summatory convolutions, step 3.1 handle the endpoint boundary: For fixed ale U, the inner sum over b is exactly G(x/a), and for fixed ble V the inner sum over a is exactly F(x/b). The overlap sum factors as Substituting these identities into…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Dirichlet's hyperbola method for summatory convolutions, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: Arithmetic functions f,g, a real x\\ge1, and reals U,V\\ge1 with UV=x."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Dirichlet's hyperbola method for summatory convolutions, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: Arithmetic functions f,g, a real x\\ge1, and reals U,V\\ge1 with UV=x."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Dirichlet's hyperbola method for summatory convolutions, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: Arithmetic functions f,g, a real x\\ge1, and reals U,V\\ge1 with UV=x."
+        }
+      ]
+    },
+    "thm-divisor-counting-summatory-estimate": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The hyperbola identity turns the divisor-counting sum into twice a floor sum minus the square overlap.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Each floor term is x/a plus O(1), so the floor sum becomes x times the harmonic sum plus O(N).",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The harmonic asymptotic at N and the relation N^2 ~ x convert the main term to x log x + 2 gamma x.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Subtracting the overlap N^2 produces the constant (2 gamma - 1)x and the O(sqrt x) remainder.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x), the outer range 1 ≤ a ≤ N is nonempty because x ≥ 1 gives N = floor(sqrt x) ≥ 1. The theorem never quantifies over an optional empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. Since x ≥ 1, the auxiliary integer N = floor(sqrt x) is at least 1, so the summation range is never empty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x), the stated positivity hypotheses keep the displayed denominators and parameters away from zero: A real x\\ge1 and N:=lfloorsqrt xrfloor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x), step 1.1 handle the value-one or singleton boundary: By [[prop-divisor-functions-under-dirichlet-convolution]], tau=\\mathbf1*\\mathbf1. Applying [[thm-dirichlet-hyperbola-method]] with f=g=\\mathbf1 and U=V=sqrt x gives"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x), step 1.1 handle the degenerate branch: By [[prop-divisor-functions-under-dirichlet-convolution]], tau=\\mathbf1*\\mathbf1. Applying [[thm-dirichlet-hyperbola-method]] with f=g=\\mathbf1 and U=V=sqrt x gives"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x), step 3.1 handle the endpoint boundary: By [[lem-harmonic-sum-asymptotic]], \\sum_a=1^N1/a=log N+gamma+O(1/N). Also N^2le x<(N+1)^2, so x=N^2+O(N) and log N=\\frac12log x+O(1/N). Substituting these into step 2.1 gives"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x), every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1 and N:=lfloorsqrt xrfloor."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x), the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1 and N:=lfloorsqrt xrfloor."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x), the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1 and N:=lfloorsqrt xrfloor."
+        }
+      ]
+    },
+    "lem-summatory-logarithm-asymptotic": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Monotonicity of log bounds the finite sum between two adjacent logarithmic integrals.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The antiderivative t log t - t evaluates those integrals and yields the N log N - N main term.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Replacing N by floor(x) converts the integer asymptotic to all real x >= 1 with O(log x) error.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The summatory logarithm is x log x minus x plus O(log x), the sum from n = 1 to N is nonempty because x ≥ 1 implies N = floor(x) ≥ 1. The proof never branches on an optional empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. The hypothesis x ≥ 1 forces floor(x) ≥ 1, so the summation range is nonempty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The summatory logarithm is x log x minus x plus O(log x), the stated positivity hypotheses keep the displayed denominators and parameters away from zero: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The summatory logarithm is x log x minus x plus O(log x), step 3.1 handle the value-one or singleton boundary: Since Nle x<N+1, one has N=x+O(1) and therefore Nlog N=xlog x+O(log x). Substituting this into step 2.1 and using \\sum_nle xlog n=\\sum_n=1^Nlog n proves"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The summatory logarithm is x log x minus x plus O(log x), step 2.1 handle the degenerate branch: By [[thm-algebra-of-derivatives]] and [[thm-logarithm-derivative-and-integral]], the function G(t):=tlog t-t satisfies for every t>0. Therefore [[thm-ftc-second-part]] yields for…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The summatory logarithm is x log x minus x plus O(log x), step 3.1 handle the endpoint boundary: Since Nle x<N+1, one has N=x+O(1) and therefore Nlog N=xlog x+O(log x). Substituting this into step 2.1 and using \\sum_nle xlog n=\\sum_n=1^Nlog n proves"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The summatory logarithm is x log x minus x plus O(log x), every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The summatory logarithm is x log x minus x plus O(log x), the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The summatory logarithm is x log x minus x plus O(log x), the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1 and N:=lfloor xrfloor."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: the load-bearing step is differentiating G(t)=t log t - t. The proof now cites the actual derivative product rule through thm-algebra-of-derivatives, so FTC applies to the correct antiderivative and the passage from N to floor(x) is unchanged."
+      }
+    },
+    "cor-average-order-of-divisor-counting-function": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The tau summatory asymptotic and the summatory logarithm asymptotic have the same x log x main term.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The ratio of the two summatory functions tends to 1, so log n is an average order of tau.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The average order of tau is log n, the quantified sums and divisor ranges stay nonempty under the stated positivity hypotheses: A real x\\ge1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The average order of tau is log n, the stated positivity hypotheses keep the displayed denominators and parameters away from zero: A real x\\ge1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The average order of tau is log n, step 2.1 handle the value-one or singleton boundary: The two sums differ by 2gamma x+O(sqrt x), while the comparison sum is xlog x+O(x) and is therefore eventually positive. Hence By [[def-summatory-function-and-average-order]], thi…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The average order of tau is log n, step 2.1 handle the degenerate branch: The two sums differ by 2gamma x+O(sqrt x), while the comparison sum is xlog x+O(x) and is therefore eventually positive. Hence By [[def-summatory-function-and-average-order]], thi…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The average order of tau is log n, step 1.1 handle the endpoint boundary: By [[thm-divisor-counting-summatory-estimate]] and [[lem-summatory-logarithm-asymptotic]],"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The average order of tau is log n, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The average order of tau is log n, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The average order of tau is log n, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1."
+        }
+      ]
+    },
+    "thm-divisor-sum-summatory-estimate": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Summing the divisor formula for sigma and reindexing n = dm yields a double sum over d <= floor(x/m).",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The inner arithmetic progression contributes y_m^2/2 plus an O(y_m) term.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Replacing y_m by x/m + O(1) and summing uses the Basel value and harmonic growth.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Substituting the summed estimates gives the pi^2 x^2 / 12 main term and O(x log x) error.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x), the ranges 1 ≤ m ≤ M and 1 ≤ d ≤ y_m are nonempty because x ≥ 1 implies M = floor(x) ≥ 1 and every y_m = floor(x/m) is at least 1. The proof does not hide an empty-family branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. The positivity hypothesis x ≥ 1 keeps both the outer and inner divisor ranges nonempty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x), the stated positivity hypotheses keep the displayed denominators and parameters away from zero: A real x\\ge1, an integer M:=lfloor xrfloor, and y_m:=lfloor x/mrfloor for 1le mle M."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x), step 1.1 handle the value-one or singleton boundary: By [[prop-divisor-functions-under-dirichlet-convolution]], sigma(n)=\\sum_dmid n d. Summing over nle x and writing each such n as dm gives"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x), step 2.1 handle the degenerate branch: For each m, Therefore"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x), step 3.1 handle the endpoint boundary: Since y_m=x/m+O(1) uniformly in m, one has y_m^2=x^2/m^2+O(x/m)+O(1). Summing and using [[cor-basel-sum-by-residues]] together with [[lem-harmonic-sum-asymptotic]] gives"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x), every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1, an integer M:=lfloor xrfloor, and y_m:=lfloor x/mrfloor for 1le mle M."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x), the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1, an integer M:=lfloor xrfloor, and y_m:=lfloor x/mrfloor for 1le mle M."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x), the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1, an integer M:=lfloor xrfloor, and y_m:=lfloor x/mrfloor for 1le mle M."
+        }
+      ]
+    },
+    "cor-average-order-of-divisor-sum-function": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The proposed average order has an exact summatory function with main term pi^2 x^2 / 12.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Comparing that exact sum with the summatory sigma theorem gives asymptotic equality of summatory functions.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The average order of sigma is (pi squared over 6)n, the quantified sums and divisor ranges stay nonempty under the stated positivity hypotheses: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The average order of sigma is (pi squared over 6)n, the stated positivity hypotheses keep the displayed denominators and parameters away from zero: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The average order of sigma is (pi squared over 6)n, step 1.1 handle the value-one or singleton boundary: The comparison sum is exact:"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The average order of sigma is (pi squared over 6)n, step 2.1 handle the degenerate branch: By [[thm-divisor-sum-summatory-estimate]], \\sum_nle xsigma(n)=pi^2x^2/12+O(xlog x). Comparing this with step 1.1 shows that the ratio of the two summatory functions tends to 1, an…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The average order of sigma is (pi squared over 6)n, step 1.1 handle the endpoint boundary: The comparison sum is exact:"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The average order of sigma is (pi squared over 6)n, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The average order of sigma is (pi squared over 6)n, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The average order of sigma is (pi squared over 6)n, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1 and N:=lfloor xrfloor."
+        }
+      ]
+    },
+    "thm-euler-totient-summatory-estimate": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Mobius inversion gives both the divisor formula for phi and the divisor sum identity for mu.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Summing the divisor formula yields the double sum for the totient summatory function and the finite identity for sum mu(d)/d^2.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The Basel tail bound and the harmonic estimate identify the truncated Mobius square-sum as 6/pi^2 plus O((log x)/x).",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Estimating the inner arithmetic progression and inserting the square-sum asymptotic yields 3x^2/pi^2 + O(x log x).",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The summatory totient function is 3 over pi squared times x squared plus O(x log x), the divisor and summatory ranges are nonempty because x ≥ 1 and every auxiliary index d or m is taken over positive integers. The written proof never branches on an optional empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. Every displayed sum is indexed over positive integers with d ≤ x or m ≤ x/d, so the relevant ranges stay nonempty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The summatory totient function is 3 over pi squared times x squared plus O(x log x), the denominators d, m, and y_d are all positive in the written proof: d and m are positive integers, x ≥ 1, and for d ≤ x one has y_d = floor(x/d) ≥ 1 before step 3.1 uses 1/y_d.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. The proof uses 1/d, 1/m^2, and 1/y_d only for positive integer indices, with y_d ≥ 1 whenever d ≤ x and x ≥ 1."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The summatory totient function is 3 over pi squared times x squared plus O(x log x), step 4.1 handle the value-one or singleton boundary: For each dle x, Therefore step 2.1 becomes Using step 3.1 and [[lem-harmonic-sum-asymptotic]] now yields"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The summatory totient function is 3 over pi squared times x squared plus O(x log x), step 1.1 handle the degenerate branch: By [[thm-sum-of-totients-over-divisors]], one has \\sum_dmid nvarphi(d)=n=operatornameid_1(n), where operatornameid_1 is from [[def-divisor-power-sum-functions]]. Applying [[cor-cl…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The summatory totient function is 3 over pi squared times x squared plus O(x log x), step 4.1 handle the endpoint boundary: For each dle x, Therefore step 2.1 becomes Using step 3.1 and [[lem-harmonic-sum-asymptotic]] now yields"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The summatory totient function is 3 over pi squared times x squared plus O(x log x), every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1 and, for each positive integer dle x, the integer y_d:=lfloor x/drfloor."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The summatory totient function is 3 over pi squared times x squared plus O(x log x), the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1 and, for each positive integer dle x, the integer y_d:=lfloor x/drfloor."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The summatory totient function is 3 over pi squared times x squared plus O(x log x), the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1 and, for each positive integer dle x, the integer y_d:=lfloor x/drfloor."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: the risky point is the Basel tail bound inside the Mobius square-sum. Step 3.1 now states the tail estimate only for the positive integers Y=y_d and uses 1/(m(m-1)) telescoping plus 1/y_d <= 2d/x to obtain the required O((log x)/x) error."
+      }
+    },
+    "cor-average-order-of-euler-totient": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The linear comparison function 6n/pi^2 has an exact summatory main term 3x^2/pi^2.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Comparing with the totient summatory theorem gives asymptotic equality and hence the average order.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The average order of Euler's totient is 6n over pi squared, the quantified sums and divisor ranges stay nonempty under the stated positivity hypotheses: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The average order of Euler's totient is 6n over pi squared, the stated positivity hypotheses keep the displayed denominators and parameters away from zero: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The average order of Euler's totient is 6n over pi squared, step 1.1 handle the value-one or singleton boundary: The comparison sum satisfies"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The average order of Euler's totient is 6n over pi squared, step 2.1 handle the degenerate branch: By [[thm-euler-totient-summatory-estimate]], \\sum_nle xvarphi(n)=3x^2/pi^2+O(xlog x). Comparing with step 1.1 shows that the two summatory functions are asymptotic, with the compa…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The average order of Euler's totient is 6n over pi squared, step 1.1 handle the endpoint boundary: The comparison sum satisfies"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The average order of Euler's totient is 6n over pi squared, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The average order of Euler's totient is 6n over pi squared, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The average order of Euler's totient is 6n over pi squared, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1 and N:=lfloor xrfloor."
+        }
+      ]
+    },
+    "thm-coprime-pair-counting-asymptotic": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Partitioning coprime pairs by their maximum coordinate rewrites the count as 2 sum phi(m) - 1.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The totient summatory theorem at N = floor(x) gives the 6x^2/pi^2 main term and O(x log x) error.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Ordered coprime pairs in a box have asymptotic density 6 over pi squared, the quantified sums and divisor ranges stay nonempty under the stated positivity hypotheses: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Ordered coprime pairs in a box have asymptotic density 6 over pi squared, the stated positivity hypotheses keep the displayed denominators and parameters away from zero: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Ordered coprime pairs in a box have asymptotic density 6 over pi squared, step 1.1 handle the value-one or singleton boundary: Since a,ble x is equivalent to a,ble N, the count is unchanged if x is replaced by N. For m=1 there is exactly one coprime pair with max(a,b)=1, namely (1,1). For m\\ge2, the copri…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In Ordered coprime pairs in a box have asymptotic density 6 over pi squared, step 1.1 handle the degenerate branch: Since a,ble x is equivalent to a,ble N, the count is unchanged if x is replaced by N. For m=1 there is exactly one coprime pair with max(a,b)=1, namely (1,1). For m\\ge2, the copri…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Ordered coprime pairs in a box have asymptotic density 6 over pi squared, step 1.1 handle the endpoint boundary: Since a,ble x is equivalent to a,ble N, the count is unchanged if x is replaced by N. For m=1 there is exactly one coprime pair with max(a,b)=1, namely (1,1). For m\\ge2, the copri…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Ordered coprime pairs in a box have asymptotic density 6 over pi squared, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Ordered coprime pairs in a box have asymptotic density 6 over pi squared, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1 and N:=lfloor xrfloor."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Ordered coprime pairs in a box have asymptotic density 6 over pi squared, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1 and N:=lfloor xrfloor."
+        }
+      ]
+    },
+    "cor-asymptotic-density-of-coprime-pairs": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The coprime-pair count equals 6n^2/pi^2 plus an O(n log n) error.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Dividing by n^2 turns the count asymptotic into the proportion limit 6/pi^2.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The proportion of pairs in {1,...,n}^2 that are coprime tends to 6 over pi squared, the quantified sums and divisor ranges stay nonempty under the stated positivity hypotheses: A positive integer n."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The proportion of pairs in 1,...,n^2 that are coprime tends to 6 over pi squared, the normalization by n^2 is taken only for positive integers n, exactly as the statement says. Step 2.1 therefore never divides by 0.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. The statement begins with positive integers n, so the denominator n^2 in step 2.1 is strictly positive."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The proportion of pairs in {1,...,n}^2 that are coprime tends to 6 over pi squared, step 2.1 handle the value-one or singleton boundary: Dividing by the total number n^2 of ordered pairs gives and the error term tends to 0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The proportion of pairs in {1,...,n}^2 that are coprime tends to 6 over pi squared, step 2.1 handle the degenerate branch: Dividing by the total number n^2 of ordered pairs gives and the error term tends to 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The proportion of pairs in {1,...,n}^2 that are coprime tends to 6 over pi squared, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: A positive integer n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The proportion of pairs in {1,...,n}^2 that are coprime tends to 6 over pi squared, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A positive integer n."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The proportion of pairs in {1,...,n}^2 that are coprime tends to 6 over pi squared, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A positive integer n."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The proportion of pairs in {1,...,n}^2 that are coprime tends to 6 over pi squared, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A positive integer n."
+        }
+      ]
+    },
+    "lem-normalized-two-square-count-is-multiplicative": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The four ordered-sign representations of 1 give f(1)=1.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The 3 mod 4 prime-divisor obstruction gives the zero case, and Hackman K.III.1 gives the 2-power and odd-prime-power values when every 3 mod 4 exponent is even.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For coprime inputs, the disjoint prime supports make the prime-power formula multiplicative, so f(mn)=f(m)f(n).",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Collecting the f(1), prime-power, and coprime-product cases proves the full statement.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The normalized two-square count is multiplicative with the expected prime-power values, the quantified sums and divisor ranges stay nonempty under the stated positivity hypotheses: A natural exponent a, a prime p\\equiv1\\pmod4, a prime q\\equiv3\\pmod4, and coprime positive integers m,n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The normalized two-square count is multiplicative with the expected prime-power values, step 2.1 handle the zero-denominator or zero-parameter boundary: Write a positive integer N as where the p_i\\equiv1\\pmod4, the q_j\\equiv3\\pmod4, and all listed primes are distinct. If some b_j is odd and N=x^2+y^2, write N=q_j^2k+1M with q_jnmi…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The normalized two-square count is multiplicative with the expected prime-power values, step 1.1 handle the value-one or singleton boundary: The ordered-sign representations of 1 are (\\pm1,0) and (0,\\pm1), so r_2(1)=4 and therefore f(1)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The normalized two-square count is multiplicative with the expected prime-power values, step 3.1 handle the degenerate branch: Let f(n):=r_2(n)/4. If gcd(m,n)=1, the prime supports of m and n are disjoint. If step 2.1 gives f(m)=0 or f(n)=0, then some prime q\\equiv3\\pmod4 has odd exponent in one factor, h…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The normalized two-square count is multiplicative with the expected prime-power values, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: A natural exponent a, a prime p\\equiv1\\pmod4, a prime q\\equiv3\\pmod4, and coprime positive integers m,n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The normalized two-square count is multiplicative with the expected prime-power values, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A natural exponent a, a prime p\\equiv1\\pmod4, a prime q\\equiv3\\pmod4, and coprime positive integers m,n."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The normalized two-square count is multiplicative with the expected prime-power values, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A natural exponent a, a prime p\\equiv1\\pmod4, a prime q\\equiv3\\pmod4, and coprime positive integers m,n."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The normalized two-square count is multiplicative with the expected prime-power values, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A natural exponent a, a prime p\\equiv1\\pmod4, a prime q\\equiv3\\pmod4, and coprime positive integers m,n."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: the live risks were the 2-power argument and the zero case for an odd 3 mod 4 exponent. Step 1.1 now only fixes f(1)=1, step 2.1 proves the odd-exponent obstruction from the published divisor lemma and uses Hackman only for the even-exponent count formula, and step 3.1 derives multiplicativity from disjoint prime supports."
+      }
+    },
+    "thm-two-square-representation-count": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The divisor sum g(n) = sum_{d|n} chi_4(d) is multiplicative because coprime divisors split uniquely and chi_4 factors on odd residue classes.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Direct calculation gives the prime-power values of g for 2, one-mod-four primes, and three-mod-four primes.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The previous lemma and the prime-power determination theorem identify r_2/4 with g.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Interpreting the divisor sum by residue classes converts g(n) to d_1(n) - d_3(n).",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The divisor formula for the two-square representation count, the divisor sum is taken over the positive divisors of a positive integer n, so the set of divisors always contains 1 and is never empty. The argument is about a fixed positive integer rather than an optional family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. Because n is a positive integer, the divisor set in the statement and in step 1.1 always contains 1."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The divisor formula for the two-square representation count, step 2.1 handle the zero-denominator or zero-parameter boundary: The prime-power values of g are immediate from the definition: g(2^a)=1 because only the divisor 1 contributes; if p\\equiv1\\pmod4, then every divisor p^j is 1 modulo 4, so g(p^a)=…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The divisor formula for the two-square representation count, step 2.1 handle the value-one or singleton boundary: The prime-power values of g are immediate from the definition: g(2^a)=1 because only the divisor 1 contributes; if p\\equiv1\\pmod4, then every divisor p^j is 1 modulo 4, so g(p^a)=…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The divisor formula for the two-square representation count, step 1.1 handle the degenerate branch: Put g(n):=\\sum_dmid n\\chi_4(d). If gcd(m,n')=1, every positive divisor of mn' is uniquely of the form ab with amid m and bmid n'; because odd residue classes modulo 4 multiply and…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The divisor formula for the two-square representation count, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: A positive integer n, coprime positive integers m,n', and a prime-power input."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The divisor formula for the two-square representation count, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A positive integer n, coprime positive integers m,n', and a prime-power input."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The divisor formula for the two-square representation count, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A positive integer n, coprime positive integers m,n', and a prime-power input."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The divisor formula for the two-square representation count, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A positive integer n, coprime positive integers m,n', and a prime-power input."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: the proof risk is matching multiplicativity on both sides of the divisor formula. Step 2.1 computes the chi_4 prime-power values directly, and the repaired normalized-count lemma now gives the same prime-power data for r_2/4, so the multiplicative-functions theorem identifies the two functions."
+      }
+    },
+    "cor-average-order-of-two-square-representations": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The divisor formula and the hyperbola method rewrite the summatory r_2 count into one bounded-sum arm, one weighted harmonic arm, and the overlap.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The partial sums of chi_4 are uniformly bounded, so both the first arm and the overlap are O(N), and the second arm is x times a truncated chi_4/b sum plus O(N).",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The truncated chi_4/b sum is a Gregory-Leibniz partial sum and differs from pi/4 by O(1/N).",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Substituting the bounded-arm and Gregory-Leibniz estimates yields pi x + O(sqrt x), and comparing with the constant function pi gives the average order.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The average order of the two-square representation count is pi, the summatory range n ≤ x is nonempty because the statement assumes x ≥ 1, and the auxiliary integer N = floor(sqrt x) is therefore at least 1. The proof never branches on an empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. The hypothesis x ≥ 1 forces N = floor(sqrt x) ≥ 1, so the relevant summation ranges are nonempty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The average order of the two-square representation count is pi, the stated positivity hypotheses keep the displayed denominators and parameters away from zero: A real x\\ge1, N:=lfloorsqrt xrfloor, and G(y):=\\sum_nle y\\chi_4(n)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The average order of the two-square representation count is pi, step 4.1 handle the value-one or singleton boundary: Substituting step 3.1 into step 2.1 and then into step 1.1 yields Since \\sum_nle xpi=pilfloor xrfloor=pi x+O(1), [[def-summatory-function-and-average-order]] now says that the con…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The average order of the two-square representation count is pi, step 2.1 handle the degenerate branch: The values of \\chi_4 repeat as 1,0,-1,0, so every complete block of length 4 has sum 0 and every initial partial block has sum 0 or 1. Hence G(y)=O(1) uniformly in y, and step 1.1…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The average order of the two-square representation count is pi, step 4.1 handle the endpoint boundary: Substituting step 3.1 into step 2.1 and then into step 1.1 yields Since \\sum_nle xpi=pilfloor xrfloor=pi x+O(1), [[def-summatory-function-and-average-order]] now says that the con…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The average order of the two-square representation count is pi, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A real x\\ge1, N:=lfloorsqrt xrfloor, and G(y):=\\sum_nle y\\chi_4(n)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The average order of the two-square representation count is pi, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A real x\\ge1, N:=lfloorsqrt xrfloor, and G(y):=\\sum_nle y\\chi_4(n)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The average order of the two-square representation count is pi, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A real x\\ge1, N:=lfloorsqrt xrfloor, and G(y):=\\sum_nle y\\chi_4(n)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: the proof risk is the bounded partial sums of chi_4 and the hyperbola error term. The period-4 pattern gives G(y)=O(1), Gregory-Leibniz supplies sum chi_4(b)/b = pi/4 + O(1/N), and substituting into the hyperbola formula yields pi x + O(sqrt x)."
+      }
+    },
+    "ex-dirichlet-hyperbola-lattice-decomposition": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For tau = 1 * 1, the hyperbola theorem specializes to floor-valued summatory functions.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Evaluating the two arms and the overlap at x = 12, U = 3, V = 4 gives 22, 25, and 12.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The hyperbola identity matches the direct total 35 for the divisor-counting sum up to 12.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A small lattice decomposition for Dirichlet's hyperbola method, the quantified sums and divisor ranges stay nonempty under the stated positivity hypotheses: The value x=12 and the split U=3, V=4."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A small lattice decomposition for Dirichlet's hyperbola method, the only quotients are 12/a and 12/b inside explicit sums with a ∈ {1,2,3} and b ∈ {1,2,3,4}. The worked example therefore has no zero denominator branch at all.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-7",
+            "reason": "The detector is inapplicable on current bytes. The example fixes x = 12, U = 3, and V = 4, so every denominator a or b ranges over positive integers only."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In A small lattice decomposition for Dirichlet's hyperbola method, step 3.1 handle the value-one or singleton boundary: Hence the hyperbola identity gives \\sum_n\\le12tau(n)=22+25-12=35. This matches the direct total 1+2+2+3+2+4+2+4+3+4+2+6=35."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In A small lattice decomposition for Dirichlet's hyperbola method, step 2.1 handle the degenerate branch: The two arm sums are and the overlap is F(3)G(4)=3\\cdot4=12."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A small lattice decomposition for Dirichlet's hyperbola method, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: The value x=12 and the split U=3, V=4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A small lattice decomposition for Dirichlet's hyperbola method, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The value x=12 and the split U=3, V=4."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A small lattice decomposition for Dirichlet's hyperbola method, the item is an example rather than a biconditional theorem, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A small lattice decomposition for Dirichlet's hyperbola method, the item is an example rather than a biconditional theorem, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-divisor-summatory-error-table": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Direct divisor counting gives the exact cumulative tau values at x = 5, 10, 20, and 50.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substituting those exact values into E(x) produces the residual and scaled-residual columns.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The observed scaled residuals remain on the sqrt(x) scale predicted by the theorem.",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The divisor summatory estimate through several small values, the quantified sums and divisor ranges stay nonempty under the stated positivity hypotheses: The definition of E(x) above."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The divisor summatory estimate through several small values, the stated positivity hypotheses keep the displayed denominators and parameters away from zero: The definition of E(x) above."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The divisor summatory estimate through several small values, step 1.1 handle the value-one or singleton boundary: The exact divisor sums are obtained by direct counting: \\sum_n\\le5tau(n)=10, \\sum_n\\le10tau(n)=27, \\sum_n\\le20tau(n)=66, and \\sum_n\\le50tau(n)=207."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The divisor summatory estimate through several small values, step 2.1 handle the degenerate branch: Substituting these four values into the displayed definition of E(x) produces the residual column and then the scaled residual column E(x)/sqrt x."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The divisor summatory estimate through several small values, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: The definition of E(x) above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The divisor summatory estimate through several small values, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The definition of E(x) above."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The divisor summatory estimate through several small values, the item is an example rather than a biconditional theorem, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The divisor summatory estimate through several small values, the item is an example rather than a biconditional theorem, so there is no separate reverse implication to discharge."
+        }
+      ]
+    }
+  }
+}

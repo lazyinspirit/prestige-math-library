@@ -101,15 +101,17 @@ const ENUMS = {
     // truncated, missing and corrupted have four different detectors and four
     // different fixes, and the collapsed `dependency_citation` hid truncation
     // for a whole run.
-    'invalid-inference', 'citation-inflated', 'citation-truncated', 'citation-missing',
+    'invalid-inference', 'citation-inaccurate', 'citation-inflated',
+    'citation-truncated', 'citation-missing',
     'citation-misattributed', 'citation-corrupted', 'false-or-overstrong-statement',
     'false-or-overstrong-title', 'missing-hypothesis', 'missing-choice-scope',
     'invalid-witness', 'false-boundary-disposition', 'arithmetic-error',
-    'undefined-notation', 'ill-typed-construction',
+    'undefined-notation', 'ill-typed-claim', 'ill-typed-construction',
     // Legacy Step-6/frontier-23 spellings still present in current ledgers.
-    'false-claim', 'ill-formed', 'false-computation',
+    'false-claim', 'ill-formed', 'false-computation', 'contract-mismatch',
     'overstrong-title-or-statement', 'invalid-refutation', 'missing-map',
-    'missing-case',
+    'missing-case', 'unlicensed-inference', 'unsupported-inference',
+    'unsupported-universal-property',
     // richness
     'scope-drop', 'scope-loss', 'false-decline', 'deferral-without-destination',
     'thin-harvest', 'unsourced-locator',
@@ -132,8 +134,26 @@ const ENUMS = {
 const OPTIONAL_ENUMS = {
   introduced_at_stage: STAGES,
   should_have_caught: STAGES,
-  repair_cost: ['none', 'inline-fix', 'repair+rejudge', 'rewrite', 'rescope', 'blocker', 'tool-change', 'run-restart'],
+  repair_cost: ['none', 'inline-fix', 'repair+rejudge', 'rewrite', 'rescope',
+    'blocker', 'tool-change', 'run-restart', 'contract-sync'],
 };
+const CURRENT_STEP6_LOCATION_EXACT = new Set([
+  // Current Step-6 evidence names section labels and contract loci directly.
+  'Definition',
+  'Statement',
+  'Remark',
+  'Definition opening sentence',
+  'Statement and Refutation',
+  'contract-row empty',
+  'proof-contract entry',
+  'statement-and-proof',
+  'title-and-statement',
+]);
+const CURRENT_STEP6_LOCATION_RE = [
+  /^proof-step \d+(?:\.\d+)*$/,
+  /^proof-steps \d+(?:\.\d+)*-\d+(?:\.\d+)*$/,
+  /^verification step \d+(?:\.\d+)*$/,
+];
 const FRONTIER20_LEGACY_LOCATION_EXACT = new Set([
   'carrier',
   'definition-display',
@@ -174,16 +194,21 @@ function loadLedger(path = ledgerPath) {
   });
 }
 
-function locationAllowed(row) {
+function locationAllowed(row, { allowFrontier20Legacy = true } = {}) {
   if (ENUMS.location.includes(row.location)) return true;
-  if (row.run !== 'frontier-20') return false;
+  if (CURRENT_STEP6_LOCATION_EXACT.has(row.location)) return true;
+  if (CURRENT_STEP6_LOCATION_RE.some((re) => re.test(row.location))) return true;
+  if (!allowFrontier20Legacy || row.run !== 'frontier-20') return false;
   return FRONTIER20_LEGACY_LOCATION_EXACT.has(row.location)
     || FRONTIER20_LEGACY_LOCATION_RE.some((re) => re.test(row.location));
 }
 
-function fallbackSubclassNote(row) {
+function fallbackSubclassNote(row, { allowFrontier20Legacy = true } = {}) {
   if (typeof row.subclass_note === 'string' && row.subclass_note.trim()) return row.subclass_note.trim();
-  if (row.subclass !== 'other' || row.run !== 'frontier-20' || !FRONTIER20_LEGACY_OTHER_NOTE_IDS.has(row.defect_id)) return '';
+  if (!allowFrontier20Legacy
+    || row.subclass !== 'other'
+    || row.run !== 'frontier-20'
+    || !FRONTIER20_LEGACY_OTHER_NOTE_IDS.has(row.defect_id)) return '';
   if (!Array.isArray(row.evidence)) return '';
   for (const entry of row.evidence) {
     if (typeof entry?.note === 'string' && entry.note.trim()) return entry.note.trim();
@@ -191,16 +216,16 @@ function fallbackSubclassNote(row) {
   return '';
 }
 
-function validateRow(row, ids) {
+function validateRow(row, ids, opts = {}) {
   const errs = [];
   if (row.__parse_error) return [`unparseable jsonl at ${row.__parse_error}`];
   for (const f of MANDATORY) if (row[f] === undefined || row[f] === null || row[f] === '') errs.push(`${row.defect_id ?? '(no id)'}: missing ${f}`);
   for (const [f, dom] of Object.entries(ENUMS)) if (row[f] !== undefined
-    && (f !== 'location' ? !dom.includes(row[f]) : !locationAllowed(row))) {
+    && (f !== 'location' ? !dom.includes(row[f]) : !locationAllowed(row, opts))) {
     errs.push(`${row.defect_id}: ${f} "${row[f]}" outside the closed enum`);
   }
   for (const [f, dom] of Object.entries(OPTIONAL_ENUMS)) if (row[f] !== undefined && !dom.includes(row[f])) errs.push(`${row.defect_id}: ${f} "${row[f]}" outside the closed enum`);
-  if (row.subclass === 'other' && !fallbackSubclassNote(row)) errs.push(`${row.defect_id}: subclass "other" requires subclass_note`);
+  if (row.subclass === 'other' && !fallbackSubclassNote(row, opts)) errs.push(`${row.defect_id}: subclass "other" requires subclass_note`);
   if (row.prevention && !['mechanical', 'brief', 'process', 'none'].includes(row.prevention.kind)) errs.push(`${row.defect_id}: prevention.kind invalid`);
   if (row.adjudication_ref && !Array.isArray(row.adjudication_ref)) errs.push(`${row.defect_id}: adjudication_ref must be an array`);
   if (row.evidence && row.evidence.some((e) => !e?.path)) errs.push(`${row.defect_id}: evidence entries need a path`);
@@ -307,7 +332,7 @@ if (cmd === 'append') {
     const existing = loadLedger();
     const ids = new Set(existing.map((r) => r.defect_id));
     const errs = [];
-    for (const row of rows) errs.push(...validateRow(row, ids));
+    for (const row of rows) errs.push(...validateRow(row, ids, { allowFrontier20Legacy: false }));
     if (errs.length) {
       console.error(`defect-ledger: ${errs.length} invalid row(s); nothing appended`);
       for (const e of errs) console.error(`  ${e}`);

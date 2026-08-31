@@ -2,7 +2,7 @@
 id: def-partial-function-computed-by-a-machine
 kind: definition
 title: "Partial functions computed by a machine under fixed encodings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ deps:
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

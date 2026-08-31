@@ -165,6 +165,109 @@ test('validate accepts legacy step-6 location vocabulary when evidence already c
   assert.equal(r.status, 0, r.stderr);
 });
 
+test('validate accepts the current step-6 frontier-26 vocabulary already present on disk', () => {
+  const dir = fixture([
+    row({
+      defect_id: 'f26-b-t6-01',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      subclass: 'contract-mismatch',
+      location: 'proof-contract entry',
+      repair_cost: 'contract-sync',
+    }),
+    row({
+      defect_id: 'f26-b-t6-02',
+      run: 'frontier-26',
+      subclass: 'unsupported-inference',
+      location: 'proof-step 2.1',
+    }),
+    row({
+      defect_id: 'f26-b-t6-14',
+      run: 'frontier-26',
+      subclass: 'ill-typed-claim',
+      location: 'statement-and-proof',
+    }),
+    row({
+      defect_id: 'f26-b-t6-19',
+      run: 'frontier-26',
+      subclass: 'unsupported-universal-property',
+      location: 'statement-and-proof',
+    }),
+    row({
+      defect_id: 'f26-b-t7-01',
+      run: 'frontier-26',
+      location: 'Definition',
+    }),
+    row({
+      defect_id: 'f26-b-t9-01',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'Definition opening sentence',
+      subclass: 'undefined-notation',
+    }),
+    row({
+      defect_id: 'f26-b-t9-02',
+      run: 'frontier-26',
+      location: 'verification step 1.1',
+      subclass: 'arithmetic-error',
+    }),
+    row({
+      defect_id: 'f26-b-t9-04',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'proof-step 1.1',
+      subclass: 'invalid-inference',
+    }),
+    row({
+      defect_id: 'f26-b-read9-01',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'contract-row empty',
+      subclass: 'false-boundary-disposition',
+    }),
+    row({
+      defect_id: 'f26-b-ref7-01',
+      run: 'frontier-26',
+      location: 'Statement',
+      subclass: 'false-claim',
+    }),
+    row({
+      defect_id: 'f26-b-ref9-02',
+      run: 'frontier-26',
+      location: 'Statement and Refutation',
+      subclass: 'unlicensed-inference',
+    }),
+    row({
+      defect_id: 'f26-b-ref9-03',
+      run: 'frontier-26',
+      location: 'title-and-statement',
+      subclass: 'missing-hypothesis',
+    }),
+    row({
+      defect_id: 'f26-b-g9-01',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'proof-steps 1.1-2.1',
+      subclass: 'invalid-inference',
+    }),
+    row({
+      defect_id: 'f26-b-g9-02',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'proof-steps 1.1-3.1',
+      subclass: 'invalid-inference',
+    }),
+    row({
+      defect_id: 'f26-b-r9-01',
+      run: 'frontier-26',
+      location: 'Statement',
+      subclass: 'citation-inaccurate',
+    }),
+  ], []);
+  const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 0, r.stderr);
+});
+
 test('validate still rejects malformed proof-step legacy locations', () => {
   const dir = fixture([
     row({
@@ -176,6 +279,35 @@ test('validate still rejects malformed proof-step legacy locations', () => {
   const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
   assert.notEqual(r.status, 0);
   assert.match(r.stderr, /outside the closed enum/);
+});
+
+test('append accepts current step-6 detail vocabulary for new rows', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ledger-append-'));
+  mkdirSync(join(dir, 'research'));
+  writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'), '');
+  const incoming = [{
+    ...row({
+      defect_id: 'r9-D001',
+      run: 'frontier-26',
+      subclass: 'contract-mismatch',
+      severity: 'nonfatal',
+      location: 'proof-contract entry',
+      repair_cost: 'contract-sync',
+    }),
+  }, {
+    ...row({
+      defect_id: 'r9-D002',
+      run: 'frontier-26',
+      subclass: 'citation-inaccurate',
+      location: 'Statement',
+    }),
+  }];
+  writeFileSync(join(dir, 'rows.json'), JSON.stringify(incoming));
+  const appended = spawnSync(process.execPath, [TOOL, 'append', '--file', join(dir, 'rows.json')],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(appended.status, 0, appended.stderr);
+  const validated = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(validated.status, 0, validated.stderr);
 });
 
 test('append remains strict for new rows with legacy-shaped locations or missing subclass_note', () => {

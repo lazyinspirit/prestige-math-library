@@ -18,17 +18,18 @@ parts:
       - product-measures-and-the-fubini-tonelli-theorems
       - signed-and-complex-measures-hahn-and-jordan
       - the-radon-nikodym-theorem-and-lebesgue-decomposition
+      - the-lp-spaces-holder-minkowski-and-riesz-fischer
 ---
 
 ## sigma-algebras-and-borel-sets
 
 A sigma-algebra is the closure needed for countable additivity, and outer measure plus
-Caratheodory build Lebesgue measure and the measurable-function/integration calculus.
+Caratheodory build Lebesgue measure and the measurable-function and integration calculus.
 Convergence theorems, Lebesgue-Stieltjes measures, Riemann comparison, Egorov-Lusin-Vitali
-phenomena, and product measures extend that calculus to approximation, modes of
-convergence, and iterated integration, while signed and complex measures remove positivity
-through Hahn and Jordan decompositions and total variation. The new closing page then
-splits sigma-finite signed measures into absolutely continuous and singular parts,
-produces Radon-Nikodym densities with almost-everywhere uniqueness, and records the
-derivative calculus: integration, additivity, chain and reciprocal rules, polar
-decomposition, and the three-part decomposition of finite Borel measures on $\mathbb R$.
+phenomena, product measures, signed measures, and Radon-Nikodym/Lebesgue decomposition
+extend that calculus to approximation, modes of convergence, iterated integration,
+densities, and total variation. The closing $L^p$ page packages the resulting normed
+spaces in the quotient-by-null-functions convention: Hölder and Minkowski control
+integrability, Riesz-Fischer gives completeness, subsequence and in-measure consequences
+connect back to convergence, exponent comparisons recover inclusion theorems, norm limits
+recover the essential supremum, and the $0<p<1$ appendix marks where convexity fails.

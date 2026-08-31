@@ -1,0 +1,629 @@
+[
+  {
+    "order": 168.009,
+    "id": "krylov-subspaces-arnoldi-and-gmres",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Krylov Subspaces, Arnoldi and GMRES",
+    "companion": "krylov-subspaces-arnoldi-and-gmres-examples",
+    "requires": [
+      "eigenvalue-iterations-and-the-qr-algorithm"
+    ],
+    "items": [
+      {
+        "id": "def-krylov-subspace-of-a-matrix-and-start-vector",
+        "kind": "definition",
+        "title": "The Krylov subspace $K_m(A,b)=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}$",
+        "deps": [
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "def-grade-and-relative-minimal-polynomial-of-a-start-vector",
+        "kind": "definition",
+        "title": "The grade of a start vector and its relative minimal polynomial",
+        "deps": [
+          "def-krylov-subspace-of-a-matrix-and-start-vector"
+        ]
+      },
+      {
+        "id": "prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector",
+        "kind": "proposition",
+        "title": "The Krylov subspace consists exactly of vectors of the form $p(A)b$ with $\\deg p<m$",
+        "strategy": "Every generator $A^jb$ is already a polynomial image of $b$, so every linear combination is one as well. Conversely, expanding a polynomial of degree less than $m$ expresses $p(A)b$ as a combination of $b,Ab,\\dots,A^{m-1}b$.",
+        "deps": [
+          "def-krylov-subspace-of-a-matrix-and-start-vector"
+        ]
+      },
+      {
+        "id": "thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise",
+        "kind": "theorem",
+        "title": "The dimensions of the Krylov spaces grow by one until the grade and then stabilize",
+        "strategy": "Before the grade, the relative minimal polynomial has not yet appeared, so no nontrivial relation among $b,Ab,\\dots,A^{m-1}b$ exists and the dimension must rise by one. At the grade, one polynomial relation appears, and multiplying it by further powers of $A$ shows that every later Krylov vector stays in the same space.",
+        "deps": [
+          "def-grade-and-relative-minimal-polynomial-of-a-start-vector",
+          "prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector"
+        ]
+      },
+      {
+        "id": "cor-for-invertible-a-the-exact-solution-enters-the-krylov-space-at-the-grade",
+        "kind": "corollary",
+        "title": "If $A$ is invertible, the exact solution of $Ax=b$ lies in the Krylov space at the grade",
+        "strategy": "At the grade there is a polynomial $q$ with $q(A)b=0$ and nonzero constant term, because otherwise the relation would factor through $A$ and contradict minimality. Rearranging gives $A^{-1}b$ as another polynomial in $A$ applied to $b$, so the exact solution belongs to that Krylov space.",
+        "deps": [
+          "def-grade-and-relative-minimal-polynomial-of-a-start-vector",
+          "thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "def-arnoldi-process",
+        "kind": "definition",
+        "title": "The Arnoldi process for building an orthonormal basis of a Krylov subspace",
+        "deps": [
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "def-inner-product-norm"
+        ]
+      },
+      {
+        "id": "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+        "kind": "theorem",
+        "title": "Before breakdown, Arnoldi produces an orthonormal Krylov basis and the factorization $AQ_m=Q_{m+1}\\bar H_m$ with $\\bar H_m$ upper Hessenberg",
+        "strategy": "Each Arnoldi step subtracts the orthogonal projections of $Av_j$ onto the previously built basis and then normalizes the residual. Induction shows that the columns remain orthonormal, span the growing Krylov spaces, and that the coefficients of those projections assemble into an upper Hessenberg matrix giving the displayed factorization.",
+        "deps": [
+          "def-arnoldi-process",
+          "prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector",
+          "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices"
+        ]
+      },
+      {
+        "id": "prop-lucky-arnoldi-breakdown-is-equivalent-to-krylov-invariance",
+        "kind": "proposition",
+        "title": "Exact Arnoldi breakdown is equivalent to invariance of the current Krylov space",
+        "strategy": "If the next Arnoldi residual vanishes, then $Av_m$ already lies in the span of the earlier Arnoldi vectors, so the whole current Krylov space is $A$-invariant. Conversely, if the current Krylov space is $A$-invariant, then the Arnoldi step has no component orthogonal to it and the next normalization constant is zero.",
+        "deps": [
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise"
+        ]
+      },
+      {
+        "id": "def-ritz-values-and-ritz-vectors-from-arnoldi",
+        "kind": "definition",
+        "title": "Ritz values and Ritz vectors extracted from the Arnoldi Hessenberg reduction",
+        "deps": [
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum"
+        ]
+      },
+      {
+        "id": "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair",
+        "kind": "proposition",
+        "title": "An Arnoldi Ritz pair has residual norm controlled by the last Hessenberg subdiagonal entry",
+        "strategy": "Write a Ritz vector as $u=Q_my$ where $y$ is an eigenvector of the projected Hessenberg matrix $H_m$. Inserting $u$ into the Arnoldi factorization leaves only the last Arnoldi basis vector times the scalar $h_{m+1,m}e_m^*y$, which is therefore the full residual.",
+        "deps": [
+          "def-ritz-values-and-ritz-vectors-from-arnoldi",
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization"
+        ]
+      },
+      {
+        "id": "def-gmres-iterate",
+        "kind": "definition",
+        "title": "The GMRES iterate as the residual minimizer over an affine Krylov space",
+        "deps": [
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem",
+        "kind": "theorem",
+        "title": "Arnoldi reduces GMRES to a least-squares problem for the small Hessenberg matrix",
+        "strategy": "Parameterize the affine space $x_0+K_m(A,r_0)$ as $x_0+Q_my$ using the Arnoldi basis built from the normalized residual. The residual then becomes $r_0-AQ_my=Q_{m+1}(\\beta e_1-\\bar H_my)$, so orthonormality of $Q_{m+1}$ turns the large residual minimization into the smaller Hessenberg least-squares problem.",
+        "deps": [
+          "def-gmres-iterate",
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "thm-least-squares-solutions-and-normal-equation"
+        ]
+      },
+      {
+        "id": "cor-gmres-minimizes-the-residual-over-the-affine-krylov-space",
+        "kind": "corollary",
+        "title": "GMRES minimizes the residual norm over the affine Krylov space $x_0+K_m(A,r_0)$",
+        "strategy": "The defining Hessenberg least-squares problem is exactly the residual norm written in Arnoldi coordinates. Solving that least-squares problem therefore produces the unique residual-minimizing point in the affine Krylov space whenever the minimizer is unique, and in any case a residual-minimizing iterate.",
+        "deps": [
+          "def-gmres-iterate",
+          "thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem"
+        ]
+      },
+      {
+        "id": "cor-unrestarted-gmres-residual-norms-are-nonincreasing",
+        "kind": "corollary",
+        "title": "For unrestarted GMRES, the residual norms are nonincreasing",
+        "strategy": "Each Krylov space is contained in the next one, so each later GMRES step minimizes over a larger affine space. A minimum over a larger feasible set cannot exceed the earlier minimum.",
+        "deps": [
+          "cor-gmres-minimizes-the-residual-over-the-affine-krylov-space"
+        ]
+      },
+      {
+        "id": "prop-gmres-residuals-are-polynomials-in-a-applied-to-the-initial-residual",
+        "kind": "proposition",
+        "title": "The GMRES residual has the form $r_m=p_m(A)r_0$ with $p_m(0)=1$ and $\\deg p_m\\le m$",
+        "strategy": "Every GMRES correction lies in $K_m(A,r_0)$, so it has the form $q_{m-1}(A)r_0$. Substituting into $r_m=r_0-Aq_{m-1}(A)r_0$ gives the polynomial form with $p_m(z)=1-zq_{m-1}(z)$, and the residual-minimizing property selects the polynomial with smallest resulting norm.",
+        "deps": [
+          "prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector",
+          "cor-gmres-minimizes-the-residual-over-the-affine-krylov-space"
+        ]
+      },
+      {
+        "id": "thm-unrestarted-gmres-terminates-in-at-most-the-relative-grade-in-exact-arithmetic",
+        "kind": "theorem",
+        "title": "In exact arithmetic, unrestarted GMRES terminates no later than the relative grade",
+        "strategy": "At the relative grade, the exact solution already lies in the affine Krylov space, so the residual-minimization problem has a zero residual candidate. GMRES therefore attains zero residual by that step, and it cannot need more iterations in exact arithmetic.",
+        "deps": [
+          "cor-for-invertible-a-the-exact-solution-enters-the-krylov-space-at-the-grade",
+          "cor-gmres-minimizes-the-residual-over-the-affine-krylov-space",
+          "def-grade-and-relative-minimal-polynomial-of-a-start-vector"
+        ]
+      },
+      {
+        "id": "prop-diagonalizable-gmres-residual-bound-keeps-the-eigenvector-conditioning-factor",
+        "kind": "proposition",
+        "title": "For a diagonalizable matrix, the GMRES residual bound carries the eigenvector-conditioning factor $\\kappa(V)$",
+        "strategy": "Write $A=V\\Lambda V^{-1}$ and use the residual-polynomial representation $r_m=p_m(A)r_0$. Then $p_m(A)=Vp_m(\\Lambda)V^{-1}$, so the norm is bounded by $\\kappa(V)$ times the largest value of $|p_m|$ on the spectrum. The polynomial constraint $p_m(0)=1$ is the same one inherited from GMRES.",
+        "deps": [
+          "prop-gmres-residuals-are-polynomials-in-a-applied-to-the-initial-residual"
+        ]
+      },
+      {
+        "id": "def-restarted-gmres-m",
+        "kind": "definition",
+        "title": "Restarted GMRES$(m)$ as repeated GMRES cycles on fixed-size Krylov spaces",
+        "deps": [
+          "def-gmres-iterate"
+        ]
+      },
+      {
+        "id": "prop-restarted-gmres-preserves-cyclewise-minimization-but-not-full-termination",
+        "kind": "proposition",
+        "title": "Restarted GMRES preserves cyclewise residual minimization but loses the unrestarted finite-termination guarantee",
+        "strategy": "Inside each cycle, restarted GMRES is just ordinary GMRES on the current residual, so the same affine-space minimization applies on that cycle. After restart the accumulated Krylov information is discarded, so the global unrestarted polynomial and finite-termination argument no longer apply in general.",
+        "deps": [
+          "def-restarted-gmres-m",
+          "cor-gmres-minimizes-the-residual-over-the-affine-krylov-space",
+          "thm-unrestarted-gmres-terminates-in-at-most-the-relative-grade-in-exact-arithmetic"
+        ]
+      },
+      {
+        "id": "def-matrix-free-access-model-for-krylov-methods",
+        "kind": "definition",
+        "title": "The matrix-free access model for Krylov methods",
+        "deps": [
+          "def-matrix-product-and-identity-matrix"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 168.01,
+    "id": "krylov-subspaces-arnoldi-and-gmres-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Krylov Subspaces, Arnoldi and GMRES: Examples and Counterexamples",
+    "requires": [
+      "krylov-subspaces-arnoldi-and-gmres"
+    ],
+    "items": [
+      {
+        "id": "ex-a-krylov-chain-with-early-stabilisation-and-its-relative-minimal-polynomial",
+        "kind": "example",
+        "title": "A Krylov chain can stabilize early when the start vector has a short relative minimal polynomial",
+        "strategy": "Use a matrix and start vector for which $A^2b$ is already a combination of $b$ and $Ab$. The first relation exhibits the relative minimal polynomial directly and makes the stabilization of the Krylov spaces visible.",
+        "deps": [
+          "thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise"
+        ]
+      },
+      {
+        "id": "ex-arnoldi-factorization-by-hand-for-a-three-step-krylov-chain",
+        "kind": "example",
+        "title": "A hand calculation of Arnoldi shows the Hessenberg factorization entry by entry",
+        "strategy": "Start from a small nonsymmetric matrix and a normalized vector, perform three Arnoldi steps, and record the orthogonalization coefficients. The resulting columns and coefficients display $AQ_m=Q_{m+1}\\bar H_m$ concretely.",
+        "deps": [
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization"
+        ]
+      },
+      {
+        "id": "ex-lucky-arnoldi-breakdown-on-an-invariant-krylov-space",
+        "kind": "example",
+        "title": "Lucky breakdown occurs when the current Krylov space is already invariant",
+        "strategy": "Choose a start vector that lies in a small invariant subspace. Arnoldi reaches that subspace exactly, the next orthogonalized residual vanishes, and the breakdown is visibly a convergence event rather than a numerical failure.",
+        "deps": [
+          "prop-lucky-arnoldi-breakdown-is-equivalent-to-krylov-invariance"
+        ]
+      },
+      {
+        "id": "ex-a-ritz-pair-and-its-residual-from-a-small-arnoldi-run",
+        "kind": "example",
+        "title": "A Ritz pair from Arnoldi has a residual given by the last Hessenberg column entry",
+        "strategy": "Compute a short Arnoldi reduction, solve the projected eigenproblem, and lift one eigenvector back to the original space. The residual is then read off from the final subdiagonal entry and the last component of the projected eigenvector.",
+        "deps": [
+          "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair"
+        ]
+      },
+      {
+        "id": "ex-gmres-on-a-small-nonsymmetric-system",
+        "kind": "example",
+        "title": "GMRES on a small nonsymmetric system becomes a two- or three-dimensional least-squares problem",
+        "strategy": "Build the first Arnoldi basis from the initial residual, solve the small Hessenberg least-squares problem explicitly, and compare the resulting iterate with direct elimination. The affine-space minimization is visible numerically.",
+        "deps": [
+          "thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem"
+        ]
+      },
+      {
+        "id": "cex-gmres-can-stagnate-on-a-nonnormal-matrix-with-moderate-conditioning",
+        "kind": "counterexample",
+        "title": "A nonnormal matrix can make GMRES stagnate even when ordinary conditioning is not extreme",
+        "strategy": "Use a matrix whose spectrum bends around the origin and compare its GMRES residual history with a more favorable example. The residual decrease becomes slow because the admissible residual polynomials cannot stay small on that spectral set, even though the matrix is not wildly ill conditioned.",
+        "deps": [
+          "prop-diagonalizable-gmres-residual-bound-keeps-the-eigenvector-conditioning-factor"
+        ]
+      },
+      {
+        "id": "ex-restarted-gmres-versus-full-gmres-on-the-same-system",
+        "kind": "example",
+        "title": "Restarted GMRES can need more cycles than unrestarted GMRES on the same system",
+        "strategy": "Choose a system that unrestarted GMRES solves once the relevant Krylov space is reached, then restart with a smaller window. Each cycle still minimizes its own residual, but the restart visibly discards information and delays exact termination.",
+        "deps": [
+          "prop-restarted-gmres-preserves-cyclewise-minimization-but-not-full-termination"
+        ]
+      },
+      {
+        "id": "ex-matrix-free-gmres-for-a-sparse-operator",
+        "kind": "example",
+        "title": "Matrix-free GMRES only needs repeated applications of the operator to vectors",
+        "strategy": "Present a sparse difference operator through a routine that computes $Av$ without assembling the matrix. Arnoldi and GMRES then use only those products plus inner products and vector updates, illustrating the matrix-free model directly.",
+        "deps": [
+          "def-matrix-free-access-model-for-krylov-methods",
+          "def-restarted-gmres-m"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.000021,
+    "id": "matrix-differentiation-and-first-order-spectral-perturbation",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Matrix Differentiation and First-order Spectral Perturbation",
+    "companion": "matrix-differentiation-and-first-order-spectral-perturbation-examples",
+    "requires": [
+      "the-inverse-function-theorem-completed",
+      "the-moore-penrose-pseudoinverse-and-regularised-least-squares"
+    ],
+    "items": [
+      {
+        "id": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+        "kind": "definition",
+        "title": "The real Frechet derivative on real and complex matrix spaces with the Frobenius norm",
+        "deps": [
+          "def-frobenius-matrix-norm"
+        ]
+      },
+      {
+        "id": "prop-matrix-differentials-obey-sum-product-and-adjoint-rules",
+        "kind": "proposition",
+        "title": "Matrix differentials obey the sum rule, product rule, and adjoint rule",
+        "strategy": "Expand $(A+tH)(B+tK)$ and $(A+tH)^*$ to first order and collect the linear terms. The remainder terms are quadratic in $t$, so they vanish after dividing by $t$ in the Frechet-derivative limit.",
+        "deps": [
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+        ]
+      },
+      {
+        "id": "thm-derivative-of-matrix-inversion",
+        "kind": "theorem",
+        "title": "On the invertible locus, $D\\operatorname{inv}(A)[H]=-A^{-1}HA^{-1}$",
+        "strategy": "Differentiate the identity $A(A^{-1})=I$ using the product rule. Solving the resulting linear equation for the derivative of $A^{-1}$ yields the stated formula.",
+        "deps": [
+          "prop-matrix-differentials-obey-sum-product-and-adjoint-rules",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "thm-determinant-differential-and-jacobis-formula",
+        "kind": "theorem",
+        "title": "The determinant differential is $D\\det(A)[H]=\\operatorname{tr}(\\operatorname{adj}(A)H)$ at every matrix, and Jacobi's formula holds on the invertible locus",
+        "strategy": "View the determinant as a multilinear function of the columns and isolate the first-order term produced by replacing one column at a time by the perturbation column. On invertible matrices, substitute $\\operatorname{adj}(A)=\\det(A)A^{-1}$ to obtain Jacobi's logarithmic form.",
+        "deps": [
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "thm-derivative-of-matrix-inversion",
+          "def-trace-of-a-square-matrix",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "prop-differentials-of-trace-and-frobenius-linear-functionals",
+        "kind": "proposition",
+        "title": "Trace and Frobenius-linear matrix functionals differentiate by inspection",
+        "strategy": "For a linear functional, the increment already equals its first-order term, so the derivative is the same linear map. The Frobenius inner-product identification rewrites these linear maps as gradients of the same shape as the input matrix.",
+        "deps": [
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "def-trace-of-a-square-matrix",
+          "def-frobenius-matrix-norm"
+        ]
+      },
+      {
+        "id": "prop-gradient-of-a-quadratic-matrix-form",
+        "kind": "proposition",
+        "title": "Matrix quadratic forms have the expected first derivative and Hessian",
+        "strategy": "Expand the quadratic expression at $A+tH$, collect the linear and quadratic terms in $t$, and then identify the coefficients with the Frechet derivative and second derivative under the Frobenius inner product.",
+        "deps": [
+          "prop-matrix-differentials-obey-sum-product-and-adjoint-rules",
+          "prop-differentials-of-trace-and-frobenius-linear-functionals"
+        ]
+      },
+      {
+        "id": "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional",
+        "kind": "theorem",
+        "title": "The Frobenius least-squares objective has gradient $A^*(Ax-b)$ and Hessian $A^*A$ in the vector variable",
+        "strategy": "Write $f(x)=\\frac12\\|Ax-b\\|_2^2$ as the quadratic form of the residual and differentiate using the adjoint and quadratic-form rules. Differentiating once more leaves the constant linear map $A^*A$ as the Hessian.",
+        "deps": [
+          "prop-gradient-of-a-quadratic-matrix-form",
+          "thm-least-squares-solutions-and-normal-equation",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+        ]
+      },
+      {
+        "id": "def-compatible-left-and-right-eigenvectors-for-a-simple-eigenvalue",
+        "kind": "definition",
+        "title": "Compatible left and right eigenvectors for a simple eigenvalue",
+        "deps": [
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "cor-a-simple-eigenvalue-has-one-dimensional-eigenspace",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+        ]
+      },
+      {
+        "id": "prop-simple-eigenvalues-admit-left-right-normalization",
+        "kind": "proposition",
+        "title": "For a simple eigenvalue, left and right eigenvectors pair nontrivially and may be normalized by $y^*x=1$",
+        "strategy": "If $y^*x=0$ for every left eigenvector $y$, then the right eigenvector would lie in the range of $A-\\lambda I$, contradicting one-dimensionality of the eigenspace at a simple eigenvalue. Once one nonzero pairing is found, scale one vector to make the pairing equal to one.",
+        "deps": [
+          "def-compatible-left-and-right-eigenvectors-for-a-simple-eigenvalue"
+        ]
+      },
+      {
+        "id": "def-condition-number-of-a-simple-eigenvalue",
+        "kind": "definition",
+        "title": "The normwise condition number of a simple eigenvalue",
+        "deps": [
+          "prop-simple-eigenvalues-admit-left-right-normalization",
+          "def-inner-product-norm"
+        ]
+      },
+      {
+        "id": "def-simple-spectral-projector",
+        "kind": "definition",
+        "title": "The simple spectral projector $P=xy^*/(y^*x)$",
+        "deps": [
+          "prop-simple-eigenvalues-admit-left-right-normalization"
+        ]
+      },
+      {
+        "id": "prop-simple-spectral-projector-is-scale-invariant",
+        "kind": "proposition",
+        "title": "The simple spectral projector is unchanged by nonzero rescalings of the left and right eigenvectors",
+        "strategy": "Rescaling $x$ and $y$ multiplies the numerator and denominator of $xy^*/(y^*x)$ by the same nonzero scalar factor. The quotient is therefore unchanged.",
+        "deps": [
+          "def-simple-spectral-projector"
+        ]
+      },
+      {
+        "id": "def-reduced-resolvent-or-group-inverse-at-a-simple-eigenvalue",
+        "kind": "definition",
+        "title": "The reduced resolvent, or group inverse, on the complementary invariant subspace of a simple eigenvalue",
+        "deps": [
+          "def-simple-spectral-projector",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "prop-reduced-resolvent-identities-for-a-simple-eigenvalue",
+        "kind": "proposition",
+        "title": "The reduced resolvent satisfies the standard projector and inverse identities on the complementary invariant subspace",
+        "strategy": "Split the space into the simple eigendirection and its complementary invariant subspace. On the eigendirection the reduced resolvent vanishes, while on the complement it is the inverse of $A-\\lambda I$; the projector identities follow by comparing the two summands.",
+        "deps": [
+          "def-reduced-resolvent-or-group-inverse-at-a-simple-eigenvalue",
+          "prop-simple-spectral-projector-is-scale-invariant"
+        ]
+      },
+      {
+        "id": "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing",
+        "kind": "theorem",
+        "title": "A simple eigenvalue and a gauge-fixed right eigenvector admit local $C^1$ branches in the underlying real matrix space",
+        "strategy": "Fix a base simple eigenpair and add one scalar gauge condition to the eigenvector equation so the unknowns are the eigenvalue and a normalized vector. The linearization is invertible precisely because the eigenspace is one-dimensional and the gauge removes the scaling freedom, so the parametrized implicit function theorem yields local $C^1$ branches.",
+        "deps": [
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "prop-simple-eigenvalues-admit-left-right-normalization",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity"
+        ]
+      },
+      {
+        "id": "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x",
+        "kind": "theorem",
+        "title": "Along a differentiable matrix path, a simple eigenvalue satisfies $\\lambda'=y^*A'x$ under the normalization $y^*x=1$",
+        "strategy": "Differentiate the eigenvalue equation $Ax=\\lambda x$ along the local eigenpair branch. Left-multiplying by the corresponding left eigenvector cancels the $Ax'$ term and the normalization leaves exactly the scalar $y^*A'x$.",
+        "deps": [
+          "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing",
+          "prop-simple-eigenvalues-admit-left-right-normalization"
+        ]
+      },
+      {
+        "id": "prop-simple-eigenvalue-condition-number-is-norm-x-norm-y-over-y-star-x",
+        "kind": "proposition",
+        "title": "The normwise condition number of a simple eigenvalue is $\\|x\\|_2\\|y\\|_2/|y^*x|$",
+        "strategy": "Apply the first-order eigenvalue formula to a perturbation direction of unit spectral norm and maximize the numerator with Cauchy-Schwarz. Equality is attained by a rank-one perturbation aligned with the left and right eigenvectors.",
+        "deps": [
+          "def-condition-number-of-a-simple-eigenvalue",
+          "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x"
+        ]
+      },
+      {
+        "id": "thm-derivative-of-the-simple-spectral-projector",
+        "kind": "theorem",
+        "title": "The derivative of the simple spectral projector is expressed by the reduced resolvent and the perturbation",
+        "strategy": "Differentiate the identities $P^2=P$, $AP=PA=\\lambda P$, and $Py=x$ in a normalized gauge. Solving the off-eigendirection part with the reduced resolvent yields the standard first-order projector formula with one reduced-resolvent factor on each side of the perturbation.",
+        "deps": [
+          "def-simple-spectral-projector",
+          "prop-reduced-resolvent-identities-for-a-simple-eigenvalue",
+          "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing"
+        ]
+      },
+      {
+        "id": "thm-gauge-fixed-simple-eigenvector-derivative-formula",
+        "kind": "theorem",
+        "title": "In a fixed gauge, the derivative of a simple right eigenvector is obtained by applying the reduced resolvent to the perturbation",
+        "strategy": "Differentiate $(A-\\lambda I)x=0$ together with the gauge condition. The right-hand side lies in the complementary invariant subspace, so applying the reduced resolvent solves uniquely for the component of $x'$ orthogonal to the gauge direction.",
+        "deps": [
+          "prop-reduced-resolvent-identities-for-a-simple-eigenvalue",
+          "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x",
+          "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing"
+        ]
+      },
+      {
+        "id": "cor-hermitian-simple-eigenpair-derivative-simplifications",
+        "kind": "corollary",
+        "title": "For a Hermitian simple eigenvalue, one may take $y=x$ and the first-order formulas simplify accordingly",
+        "strategy": "For a Hermitian matrix, left and right eigenvectors coincide after unit normalization. Substituting $y=x$ into the simple-eigenvalue, projector, and eigenvector derivative formulas gives the Hermitian special case directly.",
+        "deps": [
+          "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x",
+          "thm-gauge-fixed-simple-eigenvector-derivative-formula",
+          "def-self-adjoint-and-normal-endomorphism"
+        ]
+      },
+      {
+        "id": "thm-directional-derivative-of-a-simple-positive-singular-value",
+        "kind": "theorem",
+        "title": "If $\\sigma>0$ is a simple singular value with left and right singular vectors $u,v$, then its real directional derivative is $\\operatorname{Re}(u^*Hv)$",
+        "strategy": "Write the singular value equation as an eigenvalue problem for the Hermitian block matrix with eigenvalues $\\pm\\sigma$. The positive simple singular value corresponds to a simple Hermitian eigenvalue, so the Hermitian derivative formula transfers back to the stated singular-value derivative.",
+        "deps": [
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "thm-singular-value-decomposition",
+          "cor-hermitian-simple-eigenpair-derivative-simplifications"
+        ]
+      },
+      {
+        "id": "cex-a-defective-jordan-block-produces-square-root-eigenvalue-splitting",
+        "kind": "counterexample",
+        "title": "A defective Jordan block can split under perturbation at square-root scale",
+        "strategy": "Perturb the $2\\times2$ Jordan block $\\begin{pmatrix}\\lambda&1\\\\0&\\lambda\\end{pmatrix}$ by a small lower-left entry. The characteristic polynomial becomes $(z-\\lambda)^2-\\varepsilon$, so the two eigenvalues move by $\\pm\\sqrt\\varepsilon$ rather than linearly.",
+        "deps": [
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum"
+        ]
+      },
+      {
+        "id": "cex-an-ordered-eigenvector-branch-need-not-be-differentiable-through-a-crossing",
+        "kind": "counterexample",
+        "title": "An ordered eigenvector branch need not extend differentiably through an eigenvalue crossing",
+        "strategy": "Take a smooth Hermitian family whose two eigenvalues cross and track eigenvectors ordered by size. Any global ordering must swap the eigendirections at the crossing, so no single differentiable ordered eigenvector branch can pass through that point.",
+        "deps": [
+          "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.000022,
+    "id": "matrix-differentiation-and-first-order-spectral-perturbation-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Matrix Differentiation and First-order Spectral Perturbation: Examples and Counterexamples",
+    "requires": [
+      "matrix-differentiation-and-first-order-spectral-perturbation"
+    ],
+    "items": [
+      {
+        "id": "ex-the-inverse-derivative-of-a-two-by-two-matrix",
+        "kind": "example",
+        "title": "Differentiating the inverse of a $2\\times2$ matrix reproduces the closed formula entrywise",
+        "strategy": "Start from a symbolic invertible $2\\times2$ matrix and perturb it by a direction matrix. Comparing the direct first-order expansion of the inverse with $-A^{-1}HA^{-1}$ confirms the general rule in a concrete case.",
+        "deps": [
+          "thm-derivative-of-matrix-inversion"
+        ]
+      },
+      {
+        "id": "ex-determinant-differential-at-an-invertible-and-a-singular-matrix",
+        "kind": "example",
+        "title": "The adjugate formula still differentiates the determinant at a singular matrix, while Jacobi's inverse form does not",
+        "strategy": "Use one invertible matrix and one singular matrix, compute the directional derivative of the determinant directly, and compare it with the adjugate trace formula. The singular case shows why the inverse-based Jacobi expression has a smaller domain.",
+        "deps": [
+          "thm-determinant-differential-and-jacobis-formula"
+        ]
+      },
+      {
+        "id": "ex-the-gradient-and-hessian-of-a-small-least-squares-functional",
+        "kind": "example",
+        "title": "A small least-squares problem makes the gradient and Hessian formulas explicit",
+        "strategy": "Take a concrete rectangular matrix and right-hand side, expand $\\frac12\\|Ax-b\\|_2^2$ directly, and differentiate. The result matches $A^*(Ax-b)$ and the constant Hessian $A^*A$ entry by entry.",
+        "deps": [
+          "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional"
+        ]
+      },
+      {
+        "id": "ex-simple-nonnormal-eigenvalue-derivative-uses-left-and-right-eigenvectors",
+        "kind": "example",
+        "title": "For a nonnormal matrix, the simple eigenvalue derivative uses distinct left and right eigenvectors",
+        "strategy": "Choose a triangular matrix with a simple nonnormal eigenvalue, compute compatible left and right eigenvectors, and evaluate $y^*Hx$. The example shows why the Hermitian simplification cannot be used in the nonnormal case.",
+        "deps": [
+          "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x"
+        ]
+      },
+      {
+        "id": "ex-a-hermitian-simple-eigenvalue-derivative-is-a-rayleigh-quotient-direction",
+        "kind": "example",
+        "title": "For a Hermitian family, the first derivative of a simple eigenvalue is the corresponding Rayleigh quotient direction",
+        "strategy": "Diagonalize a small Hermitian matrix, perturb it in a chosen direction, and evaluate $x^*Hx$ with a unit eigenvector. The computed derivative agrees with the simplified Hermitian formula.",
+        "deps": [
+          "cor-hermitian-simple-eigenpair-derivative-simplifications"
+        ]
+      },
+      {
+        "id": "ex-two-gauge-choices-give-different-eigenvector-derivatives",
+        "kind": "example",
+        "title": "Different gauge choices change the eigenvector derivative but not the eigenvalue derivative or projector derivative",
+        "strategy": "Compute the derivative of a simple eigenvector under two normalizations, such as fixed first component and fixed left-right pairing. The resulting vectors differ by a multiple of the eigenvector, while the associated spectral projector derivative is unchanged.",
+        "deps": [
+          "thm-gauge-fixed-simple-eigenvector-derivative-formula",
+          "thm-derivative-of-the-simple-spectral-projector"
+        ]
+      },
+      {
+        "id": "ex-a-jordan-block-splits-by-a-square-root-perturbation",
+        "kind": "example",
+        "title": "A $2\\times2$ Jordan block splits into two eigenvalues separated by a square root",
+        "strategy": "Work through the defective Jordan-block perturbation explicitly, solve the quadratic characteristic polynomial, and compare the branch behavior with a hypothetical linear derivative. The mismatch makes the failure of ordinary differentiability visible.",
+        "deps": [
+          "cex-a-defective-jordan-block-produces-square-root-eigenvalue-splitting"
+        ]
+      },
+      {
+        "id": "ex-the-directional-derivative-of-a-simple-singular-value",
+        "kind": "example",
+        "title": "The directional derivative of a simple singular value is the real part of $u^*Hv$",
+        "strategy": "Choose a matrix with one simple positive singular value, compute its singular vectors, and perturb in a specified direction. Evaluating $\\operatorname{Re}(u^*Hv)$ matches the first-order change in the singular value.",
+        "deps": [
+          "thm-directional-derivative-of-a-simple-positive-singular-value"
+        ]
+      },
+      {
+        "id": "cex-an-eigenvector-branch-cannot-stay-differentiable-through-a-symmetric-crossing",
+        "kind": "counterexample",
+        "title": "At a symmetric crossing, an ordered eigenvector branch cannot remain differentiable",
+        "strategy": "Track the eigenvectors of a diagonal family whose two eigenvalues cross. Any rule that orders the eigenpairs by eigenvalue size forces a swap of eigendirections at the crossing, which destroys differentiability of the ordered branch.",
+        "deps": [
+          "cex-an-ordered-eigenvector-branch-need-not-be-differentiable-through-a-crossing"
+        ]
+      }
+    ]
+  }
+]

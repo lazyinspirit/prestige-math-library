@@ -61,6 +61,8 @@ parts:
       - pure-pairs-forests-and-path-antipath-classes
       - cographs-perfect-patterns-and-pure-pairs
       - the-five-cycle-and-erdos-hajnal
+      - star-expansions-and-erdos-hajnal
+      - iterative-sparsification-and-the-five-vertex-path
 ---
 
 ## counting
@@ -126,7 +128,8 @@ turns that into homogeneous sets, induced-copy estimates, regularity control, an
 structural decompositions used in the Erdos-Hajnal program. Bull-free graphs give an
 explicit narrowness-and-substitution route, while cograph and perfect-pattern arguments
 turn $\kappa$ bounds and pure blockade patterns into large clique-or-stable-set
-witnesses. The new five-cycle page adds the first concrete forbidden graph beyond bull:
-comb extraction from bounded-degree induced subgraphs yields a polynomial bound on
-$\kappa(G)=\alpha(G)\omega(G)$ for $C_5$-free graphs, and the established equivalence then
-converts that bound into the Erdős-Hajnal property.
+witnesses. The added pages push that program further in two directions: star-expansion
+arguments transfer Erdős-Hajnal from forests to the star-expansion of $P_4$, hence to
+$C_6$, $C_7$, and the hatted five-cycle, while iterative sparsification proves that
+$P_5$ is nice and then upgrades nice blockades to the polynomial Rödl property and
+finally to the Erdős-Hajnal property for $P_5$ and $\overline{P_5}$.

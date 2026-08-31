@@ -2,7 +2,7 @@
 id: cor-dfas-and-nfas-recognize-the-same-languages
 kind: corollary
 title: "DFAs and NFAs recognize the same languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-every-dfa-is-an-nfa, thm-subset-construction-preserves-language, def
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

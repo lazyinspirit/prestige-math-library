@@ -2,7 +2,7 @@
 id: def-nfa-with-epsilon-moves
 kind: definition
 title: "Nondeterministic finite automata with epsilon-moves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-deterministic-finite-automaton, def-power-set]
 verification:
   precheck: n/a
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

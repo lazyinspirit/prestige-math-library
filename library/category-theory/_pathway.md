@@ -25,6 +25,7 @@ parts:
       - subobject-lattices-generators-and-the-grothendieck-axioms
       - monoidal-categories-and-monoidal-functors
       - exactness-and-the-member-calculus
+      - strictification-and-mac-lanes-coherence-theorem
       - the-diagram-lemmas-in-an-abelian-category
 ---
 
@@ -50,11 +51,12 @@ completion then supply the standard structural consequences.
 ## reflections-and-monads
 
 Reflective subcategories and the adjoint functor theorems explain when completeness and
-size hypotheses force left adjoints, while monads and comonads package algebra and Beck
-identifies the monadic cases. Kan extensions and density turn presheaves into free
-cocompletions, and abelian categories add kernels, cokernels, subobject structure,
-Grothendieck axioms, projectives, injectives, and the diagram-lemma exactness calculus.
-The new monoidal page closes the algebraic side: finite products, endofunctor
-composition, and tensor products furnish monoidal categories; monoid objects recover
-ordinary monoids, rings, and monads; and lax monoidal functors transport that structure
-while bracketed tensor words keep coherence issues explicit.
+size hypotheses force left adjoints, while monads, comonads, and Beck turn adjunction
+data into algebraic structure. Kan extensions and density identify presheaves as free
+cocompletions, abelian categories add kernels, cokernels, subobjects, Grothendieck
+axioms, projectives, injectives, and exactness lemmas, and monoidal categories organize
+tensor products and monoid objects. The strictification page closes the part by
+separating equivalence from isomorphism: every monoidal category is monoidally
+equivalent to a strict one, canonical rebracketings therefore agree, and coherence is
+exactly the well-definedness of parenthesised tensor expressions and monoid-object
+axioms.

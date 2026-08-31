@@ -1,0 +1,1719 @@
+{
+  "version": 1,
+  "level": "frontier-26",
+  "note": "Step-5 authoring contract for frontier-26 batch 11 on Monday, August 31, 2026.",
+  "scope": [
+    "lem-machine-encoding-is-injective-and-decodable",
+    "thm-stay-put-moves-can-be-eliminated",
+    "thm-one-way-and-two-way-tapes-are-equivalent",
+    "thm-multitape-machines-have-one-tape-simulations",
+    "lem-multitape-simulation-has-quadratic-time-overhead",
+    "thm-nondeterministic-and-deterministic-recognizability-agree",
+    "thm-ram-register-and-turing-computability-agree",
+    "lem-step-by-step-interpreter-for-machine-codes",
+    "thm-existence-of-a-universal-turing-machine",
+    "cor-effective-enumeration-of-turing-machines",
+    "fs-universality-decides-halting",
+    "ex-stay-put-moves-can-be-eliminated",
+    "ex-effective-enumeration-of-turing-machines",
+    "cex-universality-decides-halting"
+  ],
+  "contracts": {
+    "lem-machine-encoding-is-injective-and-decodable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], each coded machine $M$ has one definite description tuple $\\operatorname{Desc}(M)$ of some fixed length $3+3(m-2)n$, and $\\ulcorner M\\urcorner$ is exactly the tuple code of that tuple.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "A total decoder first uses [L2] to parse the unary arity header and then exactly that many self-delimiting entries. If the parse fails or leaves unread bits, it returns the malformed token; otherwise it recovers one finite tuple of binary words.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\ulcorner M\\urcorner=\\ulcorner N\\urcorner$, then the global injectivity in [L2] gives equality of the decoded tuples, including their arities, so $\\operatorname{Desc}(M)=\\operatorname{Desc}(N)$. By [L1], that common tuple records the same values of $m$, $s$, $n$, and every transition triple for both machines. Hence $M=N$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The decoder then checks the shape demanded by [L1]: every entry must be a canonical binary numeral; the tuple must have length $3+3(m-2)n$ for the recovered first three numerals; one must have $m\\ge 3$, $n\\ge 1$, and $0\\le s<n$; and every transition entry must lie in $Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If any check fails, the decoder returns the malformed token. If all checks pass, those data determine one coded deterministic one-tape machine.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 proves injectivity, and steps 1.2 and 2.2 produce a total decoder. Therefore the chosen machine coding is injective and effectively decodable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The chosen machine coding is injective and has a total decoder, the claim fixes the objects it works with rather than a variable family whose empty instance would change the argument: The fixed coding scheme ulcorner Murcorner from [[def-effective-encoding-of-turing-machines]]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The chosen machine coding is injective and has a total decoder, steps 1.2 and 2.2 handle the zero-denominator or zero-parameter boundary: A total decoder first applies the tuple decoder from [L2]. If the input is not a valid tuple code, it returns the malformed token immediately. Otherwise it recovers one finite tup…"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The chosen machine coding is injective and has a total decoder, the proof does not need a further singleton, unit, or value-one split beyond the cases already built into the written argument: The fixed coding scheme ulcorner Murcorner from [[def-effective-encoding-of-turing-machines]]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The chosen machine coding is injective and has a total decoder, step 2.2 handle the degenerate branch: The decoder then checks the shape demanded by [L1]: the tuple must have length 3+3(m-2)n for the recovered first three numerals, must satisfy mge 3, nge 1, and 0le s<n, and every…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The chosen machine coding is injective and has a total decoder, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: The fixed coding scheme ulcorner Murcorner from [[def-effective-encoding-of-turing-machines]]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The chosen machine coding is injective and has a total decoder, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The fixed coding scheme ulcorner Murcorner from [[def-effective-encoding-of-turing-machines]]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The chosen machine coding is injective and has a total decoder, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: The fixed coding scheme ulcorner Murcorner from [[def-effective-encoding-of-turing-machines]]."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The chosen machine coding is injective and has a total decoder, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: The fixed coding scheme ulcorner Murcorner from [[def-effective-encoding-of-turing-machines]]."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk because injectivity depends on the exact description tuple and the prefix-free tuple encoder. I checked the current proof against the coding definition and the tuple-encoding lemma: lexicographic ordering fixes the transition list uniquely, and the decoder reconstructs the exact machine data block by block."
+      }
+    },
+    "thm-stay-put-moves-can-be-eliminated": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-multitape-and-nondeterministic-machines",
+          "source_section": "Definition",
+          "quote": "Fix finite alphabets $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$ with\n$\\sqcup\\in\\Gamma$, and a finite state set $Q$ with distinct states\n$q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$.\n\nFor an integer $k\\ge 1$, a **deterministic $k$-tape Turing machine** has the same finite control data as\nthe one-tape model, but carries $k$ right-infinite tapes and $k$ head\npositions. Its transition function has the form\n$$ \\delta_k:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma^k\\to Q\\times\\Gamma^k\\times\\{L,R\\}^k. $$\nSo one step reads one symbol from each tape, writes one symbol on each tape,\nand moves each head left or right.\n\nA **nondeterministic one-tape Turing machine** has the same data\n$(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}})$ as the\ndeterministic model, but replaces the transition function by a finite-valued\ntransition map\n$$ \\Delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\to \\mathcal P_{\\mathrm{fin}}(Q\\times\\Gamma\\times\\{L,R\\}), $$\nwhere each $\\Delta(q,a)$ is a finite set of allowed next instructions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-language-recognized-and-decided",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic one-tape Turing machine with input alphabet\n$\\Sigma$, and let $L\\subseteq\\Sigma^*$ be a language\n([[def-language-over-an-alphabet]]).\n\nWe say that **$M$ recognizes $L$** if for every input word $w\\in\\Sigma^*$,\n$$ w\\in L \\quad\\Longleftrightarrow\\quad M \\text{ has an accepting computation on } w. $$\n\nWe say that **$M$ decides $L$** if $M$ recognizes $L$ and halts on every input\n$w\\in\\Sigma^*$.\n\nEquivalently, $M$ decides $L$ exactly when every input has either an accepting\nor rejecting computation history and\n$$ w\\in L \\iff M \\text{ accepts } w,\\qquad w\\notin L \\iff M \\text{ rejects } w. $$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-partial-function-computed-by-a-machine",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be sets, let\n$$ e_X:X\\to\\{0,1\\}^*,\\qquad e_Y:Y\\to\\{0,1\\}^* $$\nbe effective binary encodings in the sense of\n[[def-effective-binary-encoding-and-decoder]], let\n$$ M=(Q,\\{0,1\\},\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nbe a deterministic one-tape Turing machine, and let\n$$ f:D\\to Y $$\nbe a function with domain $D\\subseteq X$.\n\nThe machine $M$ **computes the partial function $f$ under the fixed encodings\n$e_X,e_Y$** if:\n\n- for every $x\\in D$, the computation of $M$ on input $e_X(x)$ halts and its\n  final configuration outputs the binary word $e_Y(f(x))$, and\n- for every $x\\in X\\setminus D$, the computation of $M$ on input $e_X(x)$\n  diverges.\n\nThus the machine's input and output are ordinary finite binary words, while the\nmathematical function lives on the underlying sets $X$ and $Y$ through the\nchosen encodings.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Before simulation, $\\widehat M$ uses a finite preprocessing routine to place virtual cell $j$ of every tape at physical cell $2j$. On the first tape it shifts the finite input symbols to the even cells and writes `#` in the intervening odd cells; every blank work tape starts with a tagged blank at cell $0$. Tagged copies of all simulated symbols at physical cell $0$ let the control detect the left boundary. Heads on tapes not currently being prepared execute harmless right-then-left bounces, and the finite routine is padded to return every head to cell $0$. Thus preprocessing uses only left/right moves, terminates on every finite input, and begins each simulated step with every head on an even cell.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Consider one transition of $M$ that writes $b_1,\\dots,b_k$, requests $D_i\\in\\{L,R,S\\}$, and has next state $p$. Replace it by a two-step macro through a fresh auxiliary state that remembers $p$ and the requested directions. In the first microstep, $\\widehat M$ writes $b_i$ at the scanned even cell—using its tagged copy at physical cell $0$—and moves head $i$ by $R$ for $D_i\\in\\{R,S\\}$, by $L$ for a nonboundary $D_i=L$, and by $R$ for a boundary-clamped $D_i=L$. In the second microstep, each scanned odd cell is treated as a spacer whether it already contains `#` or is a fresh blank, and is written as `#`; head $i$ then moves $R$ for virtual $R$ and $L$ in the other three cases. The net displacements $RR,RL,LL,RL$ represent virtual right, stay, nonboundary left, and clamped left, respectively. Because $k$ and the alphabets are fixed, the finitely many tuples of spacer symbols and direction cases fit in a finite transition table.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "After step 2.1, every traversed odd cell is a separator, each $b_i$ occupies the correct even cell, origin symbols remain tagged, and every head is on the even cell encoding its simulated successor position. Hence the represented virtual configuration is exactly the one-step result of $M$, including left-boundary clamping and moves into previously unrepresented blank cells.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the macro to every source transition. If its remembered state $p$ is halting, $\\widehat M$ postpones entering that state while a finite routine copies the first tape's even cells cell-for-cell to ordinary cells $0,1,\\ldots$, removes the origin tag, preserves internal blanks, and erases all separators and later encoded cells; unused tape heads execute harmless bounces during this cleanup. Only then does it enter the corresponding halting state. By step 3.1, induction on simulated steps gives the same acceptance, rejection, divergence, and exact first-tape output on the original unencoded input.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Therefore the matching behavior in step 4.1 means, by [F1], that $\\widehat M$ preserves every recognized or decided language and every computed partial function.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 preprocesses empty input into a tagged blank at physical cell 0 and terminates, so the two-step simulation begins with a valid encoding."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement excludes k=0, and steps 1.1--2.1 treat physical cell 0 with tagged symbols so its clamped-left behavior is preserved."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For k=1, the preprocessing and the four displacement macros in steps 1.1--2.1 specialize directly to the standard one-tape stay-put elimination."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles fresh blank odd cells as spacers and writes their separator on first traversal, so moves into previously unused blank regions preserve the encoding."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1--3.1 preserve a tagged physical origin and implement source left-at-zero as a right-then-left macro with net displacement zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Stay-put moves can be eliminated from fixed-tape Turing-machine models, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A fixed integer kge 1 and a deterministic k-tape machine variant M as in the statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Stay-put moves can be eliminated from fixed-tape Turing-machine models, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A fixed integer kge 1 and a deterministic k-tape machine variant M as in the statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Stay-put moves can be eliminated from fixed-tape Turing-machine models, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A fixed integer kge 1 and a deterministic k-tape machine variant M as in the statement."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "session-terminal-resolution",
+        "notes": "Checked against Georgia Tech CS 4510 Lecture 10 and the local simultaneous k-tape semantics. Doubling virtual cells resolves the parity conflict when some tapes stay and others move. Preprocessing coordinates unused heads with harmless bounces; physical cell 0 retains a boundary tag; fresh blank odd cells are materialized as separators; all four net displacements are correct; halting is postponed through exact cell-for-cell first-tape decoding; and F1 explicitly supplies the multitape recognition/output convention."
+      }
+    },
+    "thm-one-way-and-two-way-tapes-are-equivalent": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-stay-put-moves-can-be-eliminated",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. Let $M$ be a deterministic $k$-tape Turing machine variant whose\ntransition table is allowed to use the move set $\\{L,R,S\\}$. Then there exists\na deterministic $k$-tape Turing machine $\\widehat M$ using only the move set\n$\\{L,R\\}$ such that, on every input, $\\widehat M$ has the same accept, reject,\ndiverge, and output behavior as $M$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-language-recognized-and-decided",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic one-tape Turing machine with input alphabet\n$\\Sigma$, and let $L\\subseteq\\Sigma^*$ be a language\n([[def-language-over-an-alphabet]]).\n\nWe say that **$M$ recognizes $L$** if for every input word $w\\in\\Sigma^*$,\n$$ w\\in L \\quad\\Longleftrightarrow\\quad M \\text{ has an accepting computation on } w. $$\n\nWe say that **$M$ decides $L$** if $M$ recognizes $L$ and halts on every input\n$w\\in\\Sigma^*$.\n\nEquivalently, $M$ decides $L$ exactly when every input has either an accepting\nor rejecting computation history and\n$$ w\\in L \\iff M \\text{ accepts } w,\\qquad w\\notin L \\iff M \\text{ rejects } w. $$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-partial-function-computed-by-a-machine",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be sets, let\n$$ e_X:X\\to\\{0,1\\}^*,\\qquad e_Y:Y\\to\\{0,1\\}^* $$\nbe effective binary encodings in the sense of\n[[def-effective-binary-encoding-and-decoder]], let\n$$ M=(Q,\\{0,1\\},\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nbe a deterministic one-tape Turing machine, and let\n$$ f:D\\to Y $$\nbe a function with domain $D\\subseteq X$.\n\nThe machine $M$ **computes the partial function $f$ under the fixed encodings\n$e_X,e_Y$** if:\n\n- for every $x\\in D$, the computation of $M$ on input $e_X(x)$ halts and its\n  final configuration outputs the binary word $e_Y(f(x))$, and\n- for every $x\\in X\\setminus D$, the computation of $M$ on input $e_X(x)$\n  diverges.\n\nThus the machine's input and output are ordinary finite binary words, while the\nmathematical function lives on the underlying sets $X$ and $Y$ through the\nchosen encodings.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Given a right-infinite-tape machine, let a two-way simulator use tagged copies of tape symbols at cell $0$, so it can recognize the simulated boundary. Every ordinary move is copied directly except a simulated left move at cell $0$: after performing the write, the simulator moves right in a fresh auxiliary state and then left without changing the intervening symbol, thereby returning to cell $0$ in the requested next state. If that next state is halting, it is postponed until the return move; before any halt, a finite sweep removes the origin tag. Hence the two-way simulator never visits a negative cell and has exactly the source machine's accept, reject, divergence, and output behavior.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the converse, enlarge the one-way simulator's finite alphabet by ordered pairs, marked copies, and special origin symbols. It converts ordinary contiguous input into a folded representation by finitely many sweeps: cell $0$ stores the two-way origin, while cell $n\\ge1$ stores the ordered pair of symbols at $+n$ and $-n$, initially with every negative component blank. Exactly one stored symbol or pair component is marked to record the simulated head. Because every configuration has finite tape support and one head position, initialization terminates and every folded encoding has finite support.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A simulated move changes only one stored symbol and the marked component. Moving right from $+n$ to $+(n+1)$ or left from $-n$ to $-(n+1)$ shifts the mark one cell to the right; moving left from $+n$ to $+(n-1)$ or right from $-n$ to $-(n-1)$ shifts it one cell to the left; and the four boundary transitions through the origin move the mark between cell $0$ and cell $1$. Thus one deterministic one-tape machine can update the folded representation by a finite local macro for each source transition.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Induction on simulated steps shows that the folded machine represents the current two-way configuration exactly. On a simulated halt it postpones its own halting state and scans the finite folded encoding. If every negative component is blank, it copies the nonnegative components cell-for-cell to cells $0,1,\\ldots$, preserving internal blanks, and erases all auxiliary cells. If some negative component is nonblank, the source has no ordinary-word output by [F1]; the simulator likewise leaves a fixed malformed pattern consisting of a blank cell $0$ followed by a nonblank auxiliary marker. It then enters the corresponding halting state. Thus it preserves acceptance, rejection, divergence, and whether—and which—ordinary word is output. If a local macro uses stay-put housekeeping, [L1] removes it without changing behavior.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.2",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Combining steps 1.1 and 3.1, the two conventions have identical behavior on every input; by [F1], they therefore recognize and decide the same languages and compute the same partial functions.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 initializes empty input with a blank origin and blank pair components, and step 3.1 decodes an all-blank output correctly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly distinguish the origin cell 0: clamped left moves bounce in the first direction, while crossings between 0 and +/-1 are encoded in the reverse direction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles all four transitions between the origin and the paired cell representing positions +1 and -1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 separates valid ordinary-word outputs from halting two-way tapes with a nonblank negative component, preserving the no-output-word case rather than silently discarding it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the one-way left endpoint without visiting a negative cell, and step 2.1 handles every folded crossing through the two-way origin."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In One-way and two-way infinite tape conventions are equivalent, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The one-way and two-way tape conventions described in the statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 construct the two-way simulation of every clamped one-way machine, including boundary bounces and origin-tag cleanup."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2--3.1 construct the folded one-way simulator and preserve halting, divergence, and the precise ordinary-word output convention."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "session-terminal-resolution",
+        "notes": "Checked against Rich, Automata Theory and Applications, Theorem 17.5, and the local clamped-boundary/output definitions. The one-way-to-two-way direction now uses an explicit right-then-left bounce at tagged cell 0; the converse uses the standard paired-cell fold with all origin crossings explicit. Initialization is finite, valid outputs are decoded cell-for-cell, and a nonblank negative cell remains a no-output-word case rather than being discarded."
+      }
+    },
+    "thm-multitape-machines-have-one-tape-simulations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-multitape-and-nondeterministic-machines",
+          "source_section": "Definition",
+          "quote": "Fix finite alphabets $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$ with\n$\\sqcup\\in\\Gamma$, and a finite state set $Q$ with distinct states\n$q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$.\n\nFor an integer $k\\ge 1$, a **deterministic $k$-tape Turing machine** has the same finite control data as\nthe one-tape model, but carries $k$ right-infinite tapes and $k$ head\npositions. Its transition function has the form\n$$ \\delta_k:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma^k\\to Q\\times\\Gamma^k\\times\\{L,R\\}^k. $$\nSo one step reads one symbol from each tape, writes one symbol on each tape,\nand moves each head left or right.\n\nA **nondeterministic one-tape Turing machine** has the same data\n$(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}})$ as the\ndeterministic model, but replaces the transition function by a finite-valued\ntransition map\n$$ \\Delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\to \\mathcal P_{\\mathrm{fin}}(Q\\times\\Gamma\\times\\{L,R\\}), $$\nwhere each $\\Delta(q,a)$ is a finite set of allowed next instructions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-language-recognized-and-decided",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic one-tape Turing machine with input alphabet\n$\\Sigma$, and let $L\\subseteq\\Sigma^*$ be a language\n([[def-language-over-an-alphabet]]).\n\nWe say that **$M$ recognizes $L$** if for every input word $w\\in\\Sigma^*$,\n$$ w\\in L \\quad\\Longleftrightarrow\\quad M \\text{ has an accepting computation on } w. $$\n\nWe say that **$M$ decides $L$** if $M$ recognizes $L$ and halts on every input\n$w\\in\\Sigma^*$.\n\nEquivalently, $M$ decides $L$ exactly when every input has either an accepting\nor rejecting computation history and\n$$ w\\in L \\iff M \\text{ accepts } w,\\qquad w\\notin L \\iff M \\text{ rejects } w. $$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-partial-function-computed-by-a-machine",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be sets, let\n$$ e_X:X\\to\\{0,1\\}^*,\\qquad e_Y:Y\\to\\{0,1\\}^* $$\nbe effective binary encodings in the sense of\n[[def-effective-binary-encoding-and-decoder]], let\n$$ M=(Q,\\{0,1\\},\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nbe a deterministic one-tape Turing machine, and let\n$$ f:D\\to Y $$\nbe a function with domain $D\\subseteq X$.\n\nThe machine $M$ **computes the partial function $f$ under the fixed encodings\n$e_X,e_Y$** if:\n\n- for every $x\\in D$, the computation of $M$ on input $e_X(x)$ halts and its\n  final configuration outputs the binary word $e_Y(f(x))$, and\n- for every $x\\in X\\setminus D$, the computation of $M$ on input $e_X(x)$\n  diverges.\n\nThus the machine's input and output are ordinary finite binary words, while the\nmathematical function lives on the underlying sets $X$ and $Y$ through the\nchosen encodings.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-stay-put-moves-can-be-eliminated",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. Let $M$ be a deterministic $k$-tape Turing machine variant whose\ntransition table is allowed to use the move set $\\{L,R,S\\}$. Then there exists\na deterministic $k$-tape Turing machine $\\widehat M$ using only the move set\n$\\{L,R\\}$ such that, on every input, $\\widehat M$ has the same accept, reject,\ndiverge, and output behavior as $M$.",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Enlarge the simulator's finite tape alphabet by fresh delimiters and marked copies of the simulated symbols. On its ordinary input, $S_M$ first makes finitely many sweeps to write $k$ blocks separated by `#_1,\\dots,#_{k-1}`. A block records the simulated tape prefix from cell $0$ through at least both its head and its rightmost nonblank cell, and exactly one recorded symbol is marked to indicate the head. The first block initially records the input (or one marked blank for empty input), and every other block initially consists of one marked blank. Thus initialization terminates and the encoding invariant represents the entire finite-support contents and head position of every simulated tape.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In one simulation cycle, the one-tape machine $S_M$ first scans once from left to right, reads the $k$ marked symbols, and stores in its finite control the unique transition of $M$ determined by the current state and those symbols.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The machine then makes finitely many return sweeps, rewrites each old marked symbol, and places its new mark at the simulated successor head position. A left move from simulated cell $0$ leaves the mark at that cell, matching the library's clamped left boundary. If a right move leaves the recorded prefix, $S_M$ shifts the delimiter and the entire encoded suffix following that block one cell right (or extends the last block into the blank suffix) and inserts a marked blank cell. These operations preserve all later blocks and restore the invariant from step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "construct",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "After the passes from steps 2.1 and 3.1, the encoding represents precisely the next $k$-tape configuration of $M$. If the simulated state is halting, $S_M$ postpones entering its own halting state while it copies the first block cell-for-cell, with the mark removed and internal blank cells preserved, to tape cells beginning at $0$, and erases every later cell, delimiter, and auxiliary symbol. It then enters the corresponding halting state. Hence its final tape is exactly the simulated first tape, not merely a compaction of its nonblank symbols. Induction on simulated steps now proves identical acceptance, rejection, divergence, and first-tape output on every original input.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "If one chooses a local implementation of step 3.1 that temporarily uses stay-put head motions during block maintenance, [L2] converts that implementation to an equivalent one-tape machine using only the library's standard left/right move convention.",
+          "step": "4.2",
+          "inputs": [
+            "L2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Hence the matching behavior in step 4.1 means, by [F1], that $S_M$ recognizes and decides the same languages and computes the same partial functions as $M$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly initializes empty input as one marked blank in the first block and one marked blank in every work-tape block."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement requires k>=1, excluding a zero-tape machine, while step 1.1 separately handles tapes whose contents are entirely blank."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For k=1, step 1.1 gives a single marked block with no delimiters, and the same scan, extension, and exact-output arguments in steps 2.1--4.1 apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 represents an all-blank tape by a marked cell 0, and step 3.1 preserves that representation through clamped left moves and rightward extension."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles both tape-prefix endpoints: a left move at cell 0 is clamped, and a right move beyond the recorded prefix shifts the complete encoded suffix before inserting a blank cell."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Every fixed multitape Turing machine has an equivalent one-tape simulation, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A fixed integer kge 1 and a deterministic k-tape Turing machine M."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every fixed multitape Turing machine has an equivalent one-tape simulation, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A fixed integer kge 1 and a deterministic k-tape Turing machine M."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every fixed multitape Turing machine has an equivalent one-tape simulation, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A fixed integer kge 1 and a deterministic k-tape Turing machine M."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "session-terminal-resolution",
+        "notes": "Checked against MIT 18.404J Lecture 6 and the local right-infinite, clamped-boundary machine semantics. The marked-block invariant now records every head and rightmost nonblank cell; extension shifts the delimiter and entire later suffix; left moves at cell 0 clamp; empty input is initialized; and final cleanup copies the first block cell-for-cell, preserving internal blanks and exact output. F1 explicitly extends the one-tape recognition and partial-function clauses to the multitape first-output-tape convention."
+      }
+    },
+    "lem-multitape-simulation-has-quadratic-time-overhead": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-multitape-machines-have-one-tape-simulations",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. For every deterministic $k$-tape Turing machine $M$, there is a\ndeterministic one-tape Turing machine $S_M$ that, on every input, has the same\naccept, reject, diverge, and output behavior as $M$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "After $j$ steps of $M$, each simulated head has moved by at most $j$ cells from its initial position, so tape $i$ can have visited only the cells in an interval of length at most $|w|+j+1$. Therefore the explicit block for tape $i$ in the encoding from [L1] has length $O(|w|+j+1)$, with an implied constant depending only on the fixed machine $M$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Summing over the fixed number $k$ of tapes, and absorbing the fixed delimiter overhead, the whole one-tape encoding after $j$ simulated steps has length at most $c'_M(|w|+j+1)$ for some constant $c'_M>0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "One simulation cycle of $S_M$ at stage $j$ performs a constant number of full sweeps across that length-$O(|w|+j+1)$ encoding and, when needed, one local shift of a suffix of the same order. Hence the time for the $j$th simulated step is at most $c''_M(|w|+j+1)$ for some constant $c''_M>0$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Summing the estimate from step 3.1 for $j=0,1,\\dots,t-1$ gives $$ \\sum_{j=0}^{t-1} c''_M(|w|+j+1)\\le c''_M t(|w|+1)+c''_M\\frac{t(t-1)}2\\le c_M(|w|+t+1)^2 $$ for a suitable constant $c_M$. Together with step 2.1, this proves the claimed linear space bound and quadratic time bound.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In The standard one-tape simulation of a fixed multitape machine has quadratic overhead, steps 1.1 and 4.1 handle the empty-family boundary: After j steps of M, each simulated head has moved by at most j cells from its initial position, so tape i can have visited only the cells in an interval of length at most |w|+j+1.…"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The standard one-tape simulation of a fixed multitape machine has quadratic overhead, step 4.1 handle the zero-denominator or zero-parameter boundary: Summing the estimate from step 3.1 for j=0,1,dots,t-1 gives for a suitable constant c_M. Together with step 2.1, this proves the claimed linear space bound and quadratic time boun…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The standard one-tape simulation of a fixed multitape machine has quadratic overhead, steps 3.1 and 4.1 handle the value-one or singleton boundary: One simulation cycle of S_M at stage j performs a constant number of full sweeps across that length-O(|w|+j+1) encoding and, when needed, one local shift of a suffix of the same o…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In The standard one-tape simulation of a fixed multitape machine has quadratic overhead, step 3.1 handle the degenerate branch: One simulation cycle of S_M at stage j performs a constant number of full sweeps across that length-O(|w|+j+1) encoding and, when needed, one local shift of a suffix of the same o…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The standard one-tape simulation of a fixed multitape machine has quadratic overhead, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: A fixed deterministic k-tape Turing machine M, its standard one-tape simulator S_M, an input word w, and an integer tge 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The standard one-tape simulation of a fixed multitape machine has quadratic overhead, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: A fixed deterministic k-tape Turing machine M, its standard one-tape simulator S_M, an input word w, and an integer tge 0."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The standard one-tape simulation of a fixed multitape machine has quadratic overhead, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: A fixed deterministic k-tape Turing machine M, its standard one-tape simulator S_M, an input word w, and an integer tge 0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The standard one-tape simulation of a fixed multitape machine has quadratic overhead, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: A fixed deterministic k-tape Turing machine M, its standard one-tape simulator S_M, an input word w, and an integer tge 0."
+        }
+      ]
+    },
+    "thm-nondeterministic-and-deterministic-recognizability-agree": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nondeterministic-accepting-computation",
+          "source_section": "Definition",
+          "quote": "Fix a nondeterministic one-tape Turing machine\n$N=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\Delta)$ and an\ninput word $w\\in\\Sigma^*$.\n\nA **configuration of $N$** is a triple $(q,h,t)$ with $q\\in Q$, head position\n$h\\in\\mathbb N$, and finite-support tape content $t:\\mathbb N\\to\\Gamma$, just\nas in [[def-turing-machine-configuration]]. It is **accepting** when\n$q=q_{\\mathrm{acc}}$ and **rejecting** when $q=q_{\\mathrm{rej}}$, as in\n[[def-initial-accepting-and-rejecting-configurations]].\n\nFor configurations $C=(q,h,t)$ and $C'=(q',h',t')$ of $N$, write\n$$ C\\vdash_N C' $$\nwhen $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$ and there exists an allowed\ninstruction\n$$ (p,b,D)\\in\\Delta(q,t(h)) $$\nsuch that $C'$ is obtained from $C$ by the same local rewrite and head-move\nrecipe used in [[def-one-step-configuration-relation]], with $q'=p$.\n\nAn **accepting computation** of $N$ on input $w$ is a finite list of\nconfigurations\n$$ C_0,C_1,\\dots,C_n $$\nsuch that $C_0=(q_0,0,t_w)$, where $t_w$ is the input tape defined in the same\nway as for deterministic machines, each $C_i\\vdash_N C_{i+1}$ for $0\\le i<n$,\nand $C_n$ is accepting.\n\nWe say that **$N$ accepts $w$** if such an accepting computation exists.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-recognized-and-decided",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic one-tape Turing machine with input alphabet\n$\\Sigma$, and let $L\\subseteq\\Sigma^*$ be a language\n([[def-language-over-an-alphabet]]).\n\nWe say that **$M$ recognizes $L$** if for every input word $w\\in\\Sigma^*$,\n$$ w\\in L \\quad\\Longleftrightarrow\\quad M \\text{ has an accepting computation on } w. $$\n\nWe say that **$M$ decides $L$** if $M$ recognizes $L$ and halts on every input\n$w\\in\\Sigma^*$.\n\nEquivalently, $M$ decides $L$ exactly when every input has either an accepting\nor rejecting computation history and\n$$ w\\in L \\iff M \\text{ accepts } w,\\qquad w\\notin L \\iff M \\text{ rejects } w. $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-multitape-machines-have-one-tape-simulations",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. For every deterministic $k$-tape Turing machine $M$, there is a\ndeterministic one-tape Turing machine $S_M$ that, on every input, has the same\naccept, reject, diverge, and output behavior as $M$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-stay-put-moves-can-be-eliminated",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. Let $M$ be a deterministic $k$-tape Turing machine variant whose\ntransition table is allowed to use the move set $\\{L,R,S\\}$. Then there exists\na deterministic $k$-tape Turing machine $\\widehat M$ using only the move set\n$\\{L,R\\}$ such that, on every input, $\\widehat M$ has the same accept, reject,\ndiverge, and output behavior as $M$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If a deterministic one-tape Turing machine recognizes $L$, then the same transition graph viewed as a nondeterministic machine with singleton choice sets also recognizes $L$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, suppose a nondeterministic one-tape machine $N$ recognizes $L$. Build a deterministic multitape machine $D$ that, on input $w$, enumerates all finite branch-choice strings of lengths $0,1,2,\\dots$. For each choice string $\\alpha$ of length $d$, the machine $D$ simulates $N$ on $w$ for $d$ steps, following at the $r$th branching point the $\\alpha_r$th available transition when that transition exists and abandoning $\\alpha$ otherwise.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], $N$ accepts $w$ exactly when some finite accepting branch exists. If such a branch has length $d$, its sequence of local branch choices is one of the strings tested in step 1.2, so $D$ eventually finds it and accepts. If no accepting branch exists, every tested choice string fails to end in acceptance, so $D$ never accepts. Thus $D$ recognizes the same language as $N$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Any temporary stay-put moves introduced while $D$ manages its work tapes can be removed by [L4], and then [L3] yields a deterministic one-tape machine recognizing the same language as $D$.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1 and 3.1 prove that nondeterministic and deterministic one-tape machines recognize exactly the same languages, in the sense of [L2].",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Deterministic and nondeterministic Turing machines recognize the same languages, step 2.1 handle the empty-family boundary: By [L1], N accepts w exactly when some finite accepting branch exists. If such a branch has length d, its sequence of local branch choices is one of the strings tested in step 1.2…"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In Deterministic and nondeterministic Turing machines recognize the same languages, step 1.2 handle the zero-denominator or zero-parameter boundary: Conversely, suppose a nondeterministic one-tape machine N recognizes L. Build a deterministic multitape machine D that, on input w, enumerates all finite branch-choice strings of…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Deterministic and nondeterministic Turing machines recognize the same languages, step 1.1 handle the value-one or singleton boundary: If a deterministic one-tape Turing machine recognizes L, then the same transition graph viewed as a nondeterministic machine with singleton choice sets also recognizes L."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In Deterministic and nondeterministic Turing machines recognize the same languages, step 2.1 handle the degenerate branch: By [L1], N accepts w exactly when some finite accepting branch exists. If such a branch has length d, its sequence of local branch choices is one of the strings tested in step 1.2…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Deterministic and nondeterministic Turing machines recognize the same languages, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: A language L over some fixed input alphabet."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In Deterministic and nondeterministic Turing machines recognize the same languages, steps 1.2 and 2.1 handle the nonempty-choice bookkeeping: Conversely, suppose a nondeterministic one-tape machine N recognizes L. Build a deterministic multitape machine D that, on input w, enumerates all finite branch-choice strings of…"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In Deterministic and nondeterministic Turing machines recognize the same languages, steps 1.1 and 4.1 handle the forward implication: If a deterministic one-tape Turing machine recognizes L, then the same transition graph viewed as a nondeterministic machine with singleton choice sets also recognizes L."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In Deterministic and nondeterministic Turing machines recognize the same languages, steps 1.2, 3.1, and 4.1 handle the reverse implication: Conversely, suppose a nondeterministic one-tape machine N recognizes L. Build a deterministic multitape machine D that, on input w, enumerates all finite branch-choice strings of…"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk because the deterministic simulation has to search all branches without changing recognizability. The current proof still encodes branch choices on work tapes, simulates them systematically, and then uses the multitape and stay-put theorems only to convert that search into the standard deterministic one-tape model."
+      }
+    },
+    "thm-ram-register-and-turing-computability-agree": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-random-access-and-register-machine-programs",
+          "source_section": "Definition",
+          "quote": "A **register-memory state** is a function\n$$ R:\\mathbb N\\to\\mathbb N $$\nwith finite support, so only finitely many registers hold nonzero values\n([[def-function]], [[def-natural-numbers]]).\n\nA **register program** is a finite instruction list with a program counter,\nacting on such states by instructions of the following kinds:\n\n- assignment of constants or copies, such as $R_i:=0$ and $R_i:=R_j$;\n- successor and predecessor-type updates, such as $R_i:=R_j+1$ and\n  $R_i:=\\max(R_j-1,0)$;\n- conditional branches testing whether a named register is zero;\n- halting instructions for accept, reject, or output.\n\nA **RAM program** is such a program together with indirect-addressing\ninstructions\n$$ R_i:=R_{R_j},\\qquad R_{R_i}:=R_j, $$\nso the content of one register may be used as the address of another. On this\npage, the phrase **RAM/register program** refers to this unbounded-memory\nmodel; a pure register program is the special case without indirect addressing.\n\nFor binary input $w=b_0\\cdots b_{\\ell-1}$, the standard initial memory layout\nis\n$$ R(0)=\\ell,\\qquad R(i+1)=b_i\\ \\ (0\\le i<\\ell),\\qquad R(j)=0\\ \\ (j>\\ell). $$\nA halting memory state **outputs** the binary word $u=c_0\\cdots c_{m-1}$ when\n$$ R(0)=m,\\qquad R(i+1)=c_i\\ \\ (0\\le i<m),\\qquad R(j)=0\\ \\ (j>m). $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-recognized-and-decided",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic one-tape Turing machine with input alphabet\n$\\Sigma$, and let $L\\subseteq\\Sigma^*$ be a language\n([[def-language-over-an-alphabet]]).\n\nWe say that **$M$ recognizes $L$** if for every input word $w\\in\\Sigma^*$,\n$$ w\\in L \\quad\\Longleftrightarrow\\quad M \\text{ has an accepting computation on } w. $$\n\nWe say that **$M$ decides $L$** if $M$ recognizes $L$ and halts on every input\n$w\\in\\Sigma^*$.\n\nEquivalently, $M$ decides $L$ exactly when every input has either an accepting\nor rejecting computation history and\n$$ w\\in L \\iff M \\text{ accepts } w,\\qquad w\\notin L \\iff M \\text{ rejects } w. $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-partial-function-computed-by-a-machine",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be sets, let\n$$ e_X:X\\to\\{0,1\\}^*,\\qquad e_Y:Y\\to\\{0,1\\}^* $$\nbe effective binary encodings in the sense of\n[[def-effective-binary-encoding-and-decoder]], let\n$$ M=(Q,\\{0,1\\},\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nbe a deterministic one-tape Turing machine, and let\n$$ f:D\\to Y $$\nbe a function with domain $D\\subseteq X$.\n\nThe machine $M$ **computes the partial function $f$ under the fixed encodings\n$e_X,e_Y$** if:\n\n- for every $x\\in D$, the computation of $M$ on input $e_X(x)$ halts and its\n  final configuration outputs the binary word $e_Y(f(x))$, and\n- for every $x\\in X\\setminus D$, the computation of $M$ on input $e_X(x)$\n  diverges.\n\nThus the machine's input and output are ordinary finite binary words, while the\nmathematical function lives on the underlying sets $X$ and $Y$ through the\nchosen encodings.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-multitape-machines-have-one-tape-simulations",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. For every deterministic $k$-tape Turing machine $M$, there is a\ndeterministic one-tape Turing machine $S_M$ that, on every input, has the same\naccept, reject, diverge, and output behavior as $M$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M$ be a deterministic one-tape Turing machine. A RAM/register program can simulate $M$ by storing the current state and head position in distinguished registers and storing the finitely many nonblank tape cells in addressed memory entries. One program macro reads the currently addressed tape symbol, consults the finite transition table of $M$, updates that symbol and the control registers, and increments or decrements the stored head position according to the chosen transition.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $P$ be a RAM/register program. Build a deterministic multitape Turing machine $N_P$ whose work tapes store the program counter, the finitely many currently nonzero memory entries as a sorted list of address-value pairs, and scratch data for arithmetic and list maintenance. Each instruction type from [L1] is implemented by a finite Turing-machine subroutine: copy and arithmetic operate on binary numerals on work tapes, indirect addressing searches the address-value list, and zero entries are inserted or deleted so that the stored list remains finite.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induction on the number of simulated steps shows that the RAM/register program from step 1.1 reproduces the full computation of $M$ on every binary input, including acceptance, rejection, divergence, and final output. Hence every Turing-recognizable language and every Turing-computable partial function is RAM/register realizable.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Again by induction on computation length, the multitape machine $N_P$ from step 1.2 reproduces exactly the accept, reject, divergence, and output behavior of $P$ on the standard input layout.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L4], $N_P$ has an equivalent deterministic one-tape simulation. Combining this with steps 2.1 and 2.2, the RAM/register and deterministic Turing-machine models recognize the same languages in the sense of [L2] and compute the same partial functions in the sense of [L3].",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In RAM/register computation and Turing computation agree, steps 1.2 and 2.2 handle the empty-family boundary: Conversely, let P be a RAM/register program. Build a deterministic multitape Turing machine N_P whose work tapes store the program counter, the finitely many currently nonzero mem…"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In RAM/register computation and Turing computation agree, step 2.1 handle the zero-denominator or zero-parameter boundary: Induction on the number of simulated steps shows that the RAM/register program from step 1.1 reproduces the full computation of M on every binary input, including acceptance, reje…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In RAM/register computation and Turing computation agree, step 1.1 handle the value-one or singleton boundary: Let M be a deterministic one-tape Turing machine. A RAM/register program can simulate M by storing the current state and head position in distinguished registers and storing the f…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In RAM/register computation and Turing computation agree, step 2.2 handle the degenerate branch: Again by induction on computation length, the multitape machine N_P from step 1.2 reproduces exactly the accept, reject, divergence, and output behavior of P on the standard input…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In RAM/register computation and Turing computation agree, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: The RAM/register model fixed in [[def-random-access-and-register-machine-programs]] and the deterministic Turing-machine model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In RAM/register computation and Turing computation agree, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The RAM/register model fixed in [[def-random-access-and-register-machine-programs]] and the deterministic Turing-machine model."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In RAM/register computation and Turing computation agree, steps 1.1, 2.1, and 3.1 handle the forward implication: Let M be a deterministic one-tape Turing machine. A RAM/register program can simulate M by storing the current state and head position in distinguished registers and storing the f…"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In RAM/register computation and Turing computation agree, steps 1.2, 2.2, and 3.1 handle the reverse implication: Conversely, let P be a RAM/register program. Build a deterministic multitape Turing machine N_P whose work tapes store the program counter, the finitely many currently nonzero mem…"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because it is a two-direction simulation theorem across three machine models. I checked that the current proof keeps the RAM-to-Turing and Turing-to-register constructions separate and uses the multitape simulation theorem only as the common normalization step, so the computability agreement is not collapsed into one unsupported claim."
+      }
+    },
+    "lem-step-by-step-interpreter-for-machine-codes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-machine-encoding-is-injective-and-decodable",
+          "source_section": "Statement",
+          "quote": "The coding $\\ulcorner M\\urcorner$ fixed in\n[[def-effective-encoding-of-turing-machines]] is injective on coded\ndeterministic one-tape Turing machines, and it has a total decoder that either\nreconstructs the unique coded machine or reports malformed input.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-turing-machine-configuration",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nA **configuration** of $M$ is a triple\n$$ C=(q,h,t) $$\nwhere $q\\in Q$ is the current state, $h\\in\\mathbb N$ is the current head\nposition, and $t:\\mathbb N\\to\\Gamma$ is a tape content in the sense of\n[[def-tape-finite-support-convention]].\n\nThe symbol currently scanned in $C$ is $t(h)$. The configuration is\n**nonhalting** when $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$.\n\nFor later encoding arguments it is convenient to write a configuration as a\nfinite word over the alphabet $Q\\cup\\Gamma$: if\n$r=\\max(\\{h\\}\\cup\\operatorname{supp}(t))$, and $a_i:=t(i)$ for $0\\le i\\le r$,\nthen the associated **configuration word** is\n$$ a_0a_1\\cdots a_{h-1}\\,q\\,a_h\\cdots a_r. $$\nThe state symbol is inserted immediately before the scanned tape symbol, and\nthe word is long enough to include the head position even when the scanned cell\nis blank.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-one-step-configuration-relation",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nLet $C=(q,h,t)$ and $C'=(q',h',t')$ be configurations of $M$.\n\nWe say that **$C'$ follows $C$ in one step**, and write\n$$ C\\vdash_M C', $$\nwhen $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$ and, writing\n$$ \\delta(q,t(h))=(p,b,D), $$\none has:\n\n- $q'=p$,\n- $t'(h)=b$,\n- $t'(i)=t(i)$ for every $i\\ne h$,\n- if $D=R$, then $h'=h+1$,\n- if $D=L$ and $h>0$, then $h'=h-1$,\n- if $D=L$ and $h=0$, then $h'=0$.\n\nSo one step changes only the scanned tape cell, updates the state, and moves\nthe head one cell right or one cell left, except that the left boundary clamps\nthe head at cell $0$.",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Construct $I_{\\mathrm{step}}$ as a one-tape machine that uses marked tape symbols and repeated finite sweeps to maintain delimited work zones. On input $z$, it first parses $z=1^\\ell0xy$ with $|x|=\\ell$: it marks the initial $\\ell$ ones, copies exactly the next $\\ell$ bits into the machine-code zone, and copies the remaining suffix into the configuration-code zone. A missing separator or fewer than $\\ell$ following bits is malformed. These marking, copying, comparison, and delimiter operations require only finite control and repeated one-tape sweeps.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The interpreter applies the concrete finite parser from [L1] to the machine-code zone $x$. It then parses $y$ block-by-block using $c(w)=1^{|w|}0w$: the first recovered block gives $r$, the next two give $q$ and $h$, and the next $r+1$ blocks give $a_0,\\dots,a_r$. It rejects a missing or truncated block, any block that is not a canonical numeral $\\operatorname{bin}(j)$, and any unread bits after these $r+4$ blocks. It also checks the configuration conditions from [L2]: $q<m$, $h\\le r$, every $a_j<n$, and $a_r\\ne0$ whenever $r>h$. Each check is a finite comparison of delimited binary words and is performed by the same marking-and-sweep method. If the pair parse, machine parse, configuration parse, or any check fails, $I_{\\mathrm{step}}$ erases its tape and halts with output $\\varepsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the recovered state is accepting or rejecting, then [L2] says the configuration is halting. In that case $I_{\\mathrm{step}}$ copies the unchanged configuration code to the leftmost output zone, erases the other zones, and halts.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Otherwise the configuration is nonhalting. The interpreter scans the decoded transition table to find the entry for $(q,a_h)$, replaces $a_h$ by the recorded symbol $b$, and updates the state and head position exactly by [L3], including the clamp at cell $0$. If the new head position is $r+1$, it appends a blank block so that the scanned cell is represented. It then removes precisely the trailing blank blocks whose indices exceed both the new head position and the last nonblank cell, recomputes the new value of $r$, and re-encodes every numeral canonically. All of these are finite scans of the delimited table and work zones.",
+          "step": "3.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [L3], step 3.2 produces exactly the canonical code of the unique one-step successor. Steps 1.1 and 2.1 halt with $\\varepsilon$ on every malformed input, while steps 3.1 and 3.2 cover the halting and nonhalting valid configurations. Thus the single fixed deterministic one-tape machine just constructed has exactly the behavior claimed.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 rejects an empty machine or configuration code through the concrete parsers, while the Statement deliberately uses the empty word only as the fixed malformed-output word. A valid configuration code always contains r+4 blocks."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 accepts canonical bin(0) for r, q, h, and blank symbols, and step 3.2 explicitly applies the left-boundary clamp when h=0. If r=h=0, the sole scanned blank block remains represented."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In step 2.1, the configuration parser reads exactly r+1 tape blocks, so r=0 gives one block rather than an empty list; it also accepts the allowed one-symbol tape alphabet n=1. Steps 3.1 and 3.2 still exhaust the state cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover every malformed outer pair, machine code, and configuration code. On valid input, steps 3.1 and 3.2 separately cover halting states and the complementary nonhalting states."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.2 checks both tape endpoints: a left move at h=0 is clamped to cell 0, while a right move from h=r appends a blank block when the new scanned position is r+1. Canonical trailing blanks are then trimmed without deleting the scanned cell."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every parser, comparison, transition-table lookup, and canonicalization in steps 1.1 through 3.2 is deterministic. The proof makes no arbitrary choice from a merely nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way existence claim for an interpreter with specified behavior, not a biconditional, so there is no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not characterize all one-tape transformations or assert a converse to the interpreter construction, so there is no reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Manually checked against Zach, Sections 14.4 and 15.2-15.3. The proof now constructs the outer pair parser and implements the concrete machine decoder by finite one-tape marking sweeps, rather than treating an abstract total decoder as automatically computable. It checks canonical numerals, both tape endpoints, exact trailing support, and a fixed malformed output."
+      }
+    },
+    "thm-existence-of-a-universal-turing-machine": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-universal-turing-machine",
+          "source_section": "Definition",
+          "quote": "Fix the machine coding $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nEncode a pair of binary words $(x,y)$ by the self-delimiting binary word\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $v=a_1\\cdots a_\\ell$ is a finite word whose symbols are natural numbers,\nwrite\n$$ \\widehat v:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nA deterministic one-tape Turing machine $U$ with input alphabet $\\{0,1\\}$ is a **universal Turing machine\nfor the chosen coding** if, for every coded deterministic one-tape machine\n$M=(m,s,n,\\tau)$, every input word $w\\in\\Sigma_s^*$, and every output word\n$u$ of $M$, the following hold:\n\n- if $M$ halts on input $w$ with output $u$, then $U$ halts on input\n  $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$ with output $\\widehat u$;\n- if $M$ diverges on input $w$, then $U$ diverges on input\n  $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-partial-function-computed-by-a-machine",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be sets, let\n$$ e_X:X\\to\\{0,1\\}^*,\\qquad e_Y:Y\\to\\{0,1\\}^* $$\nbe effective binary encodings in the sense of\n[[def-effective-binary-encoding-and-decoder]], let\n$$ M=(Q,\\{0,1\\},\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nbe a deterministic one-tape Turing machine, and let\n$$ f:D\\to Y $$\nbe a function with domain $D\\subseteq X$.\n\nThe machine $M$ **computes the partial function $f$ under the fixed encodings\n$e_X,e_Y$** if:\n\n- for every $x\\in D$, the computation of $M$ on input $e_X(x)$ halts and its\n  final configuration outputs the binary word $e_Y(f(x))$, and\n- for every $x\\in X\\setminus D$, the computation of $M$ on input $e_X(x)$\n  diverges.\n\nThus the machine's input and output are ordinary finite binary words, while the\nmathematical function lives on the underlying sets $X$ and $Y$ through the\nchosen encodings.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-step-by-step-interpreter-for-machine-codes",
+          "source_section": "Statement",
+          "quote": "For a binary word $w$, write\n$$ c(w):=1^{|w|}0w. $$\nFor binary words $x,y$, write\n$$\\langle x,y\\rangle:=1^{|x|}0xy;$$\nthe unary prefix determines the length of $x$, after which the unread suffix is\n$y$.\nEncode a configuration of a coded machine $M=(m,s,n,\\tau)$ by the binary word\n$$ \\ulcorner C\\urcorner:=c(\\operatorname{bin}(r))\\,c(\\operatorname{bin}(q))\\,c(\\operatorname{bin}(h))\\,c(\\operatorname{bin}(a_0))\\cdots c(\\operatorname{bin}(a_r)), $$\nwhere $C=(q,h,t)$, where $r=\\max(\\{h\\}\\cup\\operatorname{supp}(t))$, and where\n$a_j=t(j)$ for $0\\le j\\le r$. Then there is a deterministic one-tape Turing\nmachine $I_{\\mathrm{step}}$ with input alphabet $\\{0,1\\}$ that, on input\n$\\langle\\ulcorner M\\urcorner,\\ulcorner C\\urcorner\\rangle$, returns\n$\\ulcorner C\\urcorner$ when $C$ is halting and returns the code of the unique\none-step successor of $C$ when $C$ is nonhalting. On malformed inputs it halts\nwith the empty word $\\varepsilon$ as a fixed malformed-code output.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-multitape-machines-have-one-tape-simulations",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. For every deterministic $k$-tape Turing machine $M$, there is a\ndeterministic one-tape Turing machine $S_M$ that, on every input, has the same\naccept, reject, diverge, and output behavior as $M$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Build a deterministic multitape machine $W$ that, on input $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$, first decodes the coded machine $M=(m,s,n,\\tau)$ from the first component and the input word $w\\in\\Sigma_s^*$ from the second component block-by-block. It then copies $\\ulcorner M\\urcorner$ to one work tape, constructs the encoded initial configuration of $M$ on input $w$ on a second work tape, and reserves a third work tape for running the one-step interpreter from [L3].",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The machine $W$ now iterates the interpreter from [L3]. Before each cycle it checks whether the current code represents an accepting or rejecting configuration and stops the iteration if so; otherwise it replaces that code by the one-step successor returned by the interpreter. This state check, rather than equality of successive codes, detects halting.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Induction on the number of interpreter cycles shows that the maintained configuration code is always the code of the current configuration of $M$ on input $w$. Therefore, if $M$ halts with output $u$, then $W$ eventually reaches the halting configuration code, decodes the represented output word $u$, writes its binary code $\\widehat u$ in its own output convention, and halts. If $M$ diverges, the iteration never reaches a halting configuration code, so $W$ diverges as well. Thus $W$ has exactly the behavior required by [L1] and [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Finally, [L4] converts the deterministic multitape interpreter $W$ into an equivalent deterministic one-tape machine. By step 3.1, that one-tape machine is universal for the chosen coding.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In A universal Turing machine exists for the chosen coding, steps 1.1 and 3.1 handle the empty-family boundary: Build a deterministic multitape machine W that, on input langleulcorner Murcorner,widehat wrangle, first decodes the coded machine M=(m,s,n,tau) from the first component and the i…"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In A universal Turing machine exists for the chosen coding, steps 2.1 and 3.1 handle the zero-denominator or zero-parameter boundary: The machine W now iterates the interpreter from [L3]. At each cycle it replaces the current configuration code by the next configuration code returned by the interpreter. Because…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In A universal Turing machine exists for the chosen coding, step 3.1 handle the value-one or singleton boundary: Induction on the number of interpreter cycles shows that the maintained configuration code is always the code of the current configuration of M on input w. Therefore, if M halts w…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In A universal Turing machine exists for the chosen coding, step 3.1 handle the degenerate branch: Induction on the number of interpreter cycles shows that the maintained configuration code is always the code of the current configuration of M on input w. Therefore, if M halts w…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A universal Turing machine exists for the chosen coding, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: The coding and pairing conventions fixed in [[def-universal-turing-machine]]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A universal Turing machine exists for the chosen coding, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The coding and pairing conventions fixed in [[def-universal-turing-machine]]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A universal Turing machine exists for the chosen coding, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: The coding and pairing conventions fixed in [[def-universal-turing-machine]]."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A universal Turing machine exists for the chosen coding, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: The coding and pairing conventions fixed in [[def-universal-turing-machine]]."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical because universality has to be well-typed across varying machine input alphabets and outputs. The repaired proof now decodes the binary code of the simulated input word, reconstructs the initial configuration of the coded machine, iterates the step interpreter, and re-encodes the simulated output as widehat u, so the theorem matches def-universal-turing-machine and def-partial-function-computed-by-a-machine exactly."
+      }
+    },
+    "cor-effective-enumeration-of-turing-machines": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-machine-encoding-is-injective-and-decodable",
+          "source_section": "Statement",
+          "quote": "The coding $\\ulcorner M\\urcorner$ fixed in\n[[def-effective-encoding-of-turing-machines]] is injective on coded\ndeterministic one-tape Turing machines, and it has a total decoder that either\nreconstructs the unique coded machine or reports malformed input.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Enumerate all binary words in shortlex order and run the total decoder from [L2] on each word. Whenever the decoder reports malformed input, output nothing; whenever it returns a coded machine, output that machine.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], every coded machine $M$ has some binary code $\\ulcorner M\\urcorner$, and shortlex enumeration eventually reaches that code. At that stage the decoder returns $M$, so every coded machine appears somewhere in the output stream.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By injectivity in [L2], two different binary words cannot decode to the same coded machine. Therefore the procedure from step 1.1 lists each coded deterministic one-tape Turing machine exactly once and gives an effective enumeration.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Turing machines admit an effective enumeration, step 1.1 handle the empty-family boundary: Enumerate all binary words in shortlex order and run the total decoder from [L2] on each word. Whenever the decoder reports malformed input, output nothing; whenever it returns a…"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Turing machines admit an effective enumeration, the stated hypotheses already keep the displayed denominators or parameters away from zero, so no separate zero branch is left open: The fixed coding of deterministic one-tape Turing machines."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Turing machines admit an effective enumeration, step 3.1 handle the value-one or singleton boundary: By injectivity in [L2], two different binary words cannot decode to the same coded machine. Therefore the procedure from step 1.1 lists each coded deterministic one-tape Turing ma…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In Turing machines admit an effective enumeration, steps 1.1 and 2.1 handle the degenerate branch: Enumerate all binary words in shortlex order and run the total decoder from [L2] on each word. Whenever the decoder reports malformed input, output nothing; whenever it returns a…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Turing machines admit an effective enumeration, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: The fixed coding of deterministic one-tape Turing machines."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Turing machines admit an effective enumeration, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The fixed coding of deterministic one-tape Turing machines."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Turing machines admit an effective enumeration, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: The fixed coding of deterministic one-tape Turing machines."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Turing machines admit an effective enumeration, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: The fixed coding of deterministic one-tape Turing machines."
+        }
+      ]
+    },
+    "fs-universality-decides-halting": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-universal-turing-machine",
+          "source_section": "Definition",
+          "quote": "Fix the machine coding $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nEncode a pair of binary words $(x,y)$ by the self-delimiting binary word\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $v=a_1\\cdots a_\\ell$ is a finite word whose symbols are natural numbers,\nwrite\n$$ \\widehat v:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nA deterministic one-tape Turing machine $U$ with input alphabet $\\{0,1\\}$ is a **universal Turing machine\nfor the chosen coding** if, for every coded deterministic one-tape machine\n$M=(m,s,n,\\tau)$, every input word $w\\in\\Sigma_s^*$, and every output word\n$u$ of $M$, the following hold:\n\n- if $M$ halts on input $w$ with output $u$, then $U$ halts on input\n  $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$ with output $\\widehat u$;\n- if $M$ diverges on input $w$, then $U$ diverges on input\n  $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-halting-computation-and-divergence",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ and\nan input word $w\\in\\Sigma^*$.\n\nA **finite computation history** of $M$ on input $w$ is a finite list of\nconfigurations\n$$ C_0,C_1,\\dots,C_n $$\nsuch that $C_0=I_M(w)$ and\n$$ C_i\\vdash_M C_{i+1}\\qquad(0\\le i<n). $$\n\nSuch a history is:\n\n- **accepting** if $C_n$ is an accepting configuration,\n- **rejecting** if $C_n$ is a rejecting configuration,\n- **halting** if it is accepting or rejecting.\n\nWe say that **$M$ halts on $w$** if there exists a halting computation history\nof $M$ on $w$.\n\nWe say that **$M$ diverges on $w$** if there is no halting computation history\nof $M$ on $w$.\n\nFor a halting configuration $C=(q,h,t)$ and a word $u=a_0\\cdots a_{m-1}$ over\n$\\Gamma\\setminus\\{\\sqcup\\}$, we say that **$C$ outputs $u$** when\n$$ t(i)=\\begin{cases} a_i,&0\\le i<m,\\\\ \\sqcup,&i\\ge m. \\end{cases} $$\nSo the tape contains exactly $u$ followed by blanks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-existence-of-a-universal-turing-machine",
+          "source_section": "Statement",
+          "quote": "There exists a deterministic one-tape Turing machine universal for the coding\nfixed in [[def-universal-turing-machine]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M_{\\mathrm{loop}}=(3,0,1,\\tau_{\\mathrm{loop}})$, where the unique transition is $\\tau_{\\mathrm{loop}}(0,0)=(0,0,1)$. Its input alphabet is empty, so its unique input word is $\\varepsilon$. On that input the machine keeps state $0$ forever, moves right at every step, and never reaches a halting state. Hence it has no halting computation history on $\\varepsilon$, so by [L2] it diverges on $\\varepsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L3], there exists at least one universal machine $U$. By [L1], the run of $U$ on the coded input $\\langle\\ulcorner M_{\\mathrm{loop}}\\urcorner,\\widehat\\varepsilon\\rangle$ must reproduce the divergence from step 1.1. Hence $U$ does not halt on that instance.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A machine that fails to halt on some instance does not decide a yes-or-no halting problem on all instances. Step 2.1 therefore contradicts the false claim [A1].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: universality decides halting, the claim fixes the objects it works with rather than a variable family whose empty instance would change the argument: The false claim above."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In FALSE: universality decides halting, steps 1.1 and 2.1 handle the zero-denominator or zero-parameter boundary: Let M_mathrmloop=(3,0,1,\\tau_mathrmloop), where the unique transition is \\tau_mathrmloop(0,0)=(0,0,1). Its input alphabet is empty, so its unique input word is varepsilon. On that…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In FALSE: universality decides halting, step 3.1 handle the value-one or singleton boundary: A machine that fails to halt on some instance does not decide a yes-or-no halting problem on all instances. Step 2.1 therefore contradicts the false claim [A1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In FALSE: universality decides halting, step 1.1 handle the degenerate branch: Let M_mathrmloop=(3,0,1,\\tau_mathrmloop), where the unique transition is \\tau_mathrmloop(0,0)=(0,0,1). Its input alphabet is empty, so its unique input word is varepsilon. On that…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In FALSE: universality decides halting, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: The false claim above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: universality decides halting, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The false claim above."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: universality decides halting, the refutation targets one false direction of the displayed claim and does not need an independent forward-implication proof branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: universality decides halting, the refutation targets one false direction of the displayed claim and does not need an independent reverse-implication proof branch."
+        }
+      ]
+    },
+    "ex-stay-put-moves-can-be-eliminated": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-stay-put-moves-can-be-eliminated",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. Let $M$ be a deterministic $k$-tape Turing machine variant whose\ntransition table is allowed to use the move set $\\{L,R,S\\}$. Then there exists\na deterministic $k$-tape Turing machine $\\widehat M$ using only the move set\n$\\{L,R\\}$ such that, on every input, $\\widehat M$ has the same accept, reject,\ndiverge, and output behavior as $M$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-turing-machine-configuration",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nA **configuration** of $M$ is a triple\n$$ C=(q,h,t) $$\nwhere $q\\in Q$ is the current state, $h\\in\\mathbb N$ is the current head\nposition, and $t:\\mathbb N\\to\\Gamma$ is a tape content in the sense of\n[[def-tape-finite-support-convention]].\n\nThe symbol currently scanned in $C$ is $t(h)$. The configuration is\n**nonhalting** when $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$.\n\nFor later encoding arguments it is convenient to write a configuration as a\nfinite word over the alphabet $Q\\cup\\Gamma$: if\n$r=\\max(\\{h\\}\\cup\\operatorname{supp}(t))$, and $a_i:=t(i)$ for $0\\le i\\le r$,\nthen the associated **configuration word** is\n$$ a_0a_1\\cdots a_{h-1}\\,q\\,a_h\\cdots a_r. $$\nThe state symbol is inserted immediately before the scanned tape symbol, and\nthe word is long enough to include the head position even when the scanned cell\nis blank.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $C=(q_0,h,t)$ be any configuration with $t(h)=1$. The original transition sends $C$ in one step to the configuration $(q_1,h,t')$, where $t'$ agrees with $t$ away from $h$ and satisfies $t'(h)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under the replacement macro, the first step writes `0` at cell $h$ and moves the head to $h+1$, entering state $r$. The second step leaves the symbol at cell $h+1$ unchanged, moves the head back to $h$, and enters state $q_1$. So after the two-step macro the transformed machine is also in configuration $(q_1,h,t')$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus the concrete macro produces exactly the same next configuration as the stay-put transition. This is the local pattern asserted abstractly by [L1], and [L2] explains why matching state, head position, and tape contents is enough.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Replacing a stay-put transition by a right-left macro, the claim fixes the objects it works with rather than a variable family whose empty instance would change the argument: The source transition and the replacement macro displayed above."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In Replacing a stay-put transition by a right-left macro, step 2.1 handle the zero-denominator or zero-parameter boundary: Under the replacement macro, the first step writes `0` at cell h and moves the head to h+1, entering state r. The second step leaves the symbol at cell h+1 unchanged, moves the he…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Replacing a stay-put transition by a right-left macro, steps 1.1 and 2.1 handle the value-one or singleton boundary: Let C=(q_0,h,t) be any configuration with t(h)=1. The original transition sends C in one step to the configuration (q_1,h,t'), where t' agrees with t away from h and satisfies t'(…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In Replacing a stay-put transition by a right-left macro, steps 1.1 and 2.1 handle the degenerate branch: Let C=(q_0,h,t) be any configuration with t(h)=1. The original transition sends C in one step to the configuration (q_1,h,t'), where t' agrees with t away from h and satisfies t'(…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Replacing a stay-put transition by a right-left macro, step 2.1 handle the endpoint boundary: Under the replacement macro, the first step writes `0` at cell h and moves the head to h+1, entering state r. The second step leaves the symbol at cell h+1 unchanged, moves the he…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Replacing a stay-put transition by a right-left macro, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The source transition and the replacement macro displayed above."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Replacing a stay-put transition by a right-left macro, the item is an example rather than a biconditional theorem, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Replacing a stay-put transition by a right-left macro, the item is an example rather than a biconditional theorem, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-effective-enumeration-of-turing-machines": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-effective-enumeration-of-turing-machines",
+          "source_section": "Statement",
+          "quote": "The coded deterministic one-tape Turing machines of\n[[def-effective-encoding-of-turing-machines]] can be effectively enumerated.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-machine-encoding-is-injective-and-decodable",
+          "source_section": "Statement",
+          "quote": "The coding $\\ulcorner M\\urcorner$ fixed in\n[[def-effective-encoding-of-turing-machines]] is injective on coded\ndeterministic one-tape Turing machines, and it has a total decoder that either\nreconstructs the unique coded machine or reports malformed input.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each tuple $D_i$ has the correct length $6=3+3(3-2)\\cdot 1$, satisfies $m=3\\ge 3$, $n=1\\ge 1$, and $0\\le s=0<1$, and records a transition entry with target state in $\\{0,1,2\\}$, tape symbol $0$, and move bit in $\\{0,1\\}$. So each $E(D_i)$ is a well-formed machine code.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Any well-formed machine description tuple has arity $3+3(m-2)n\\ge 6$, with equality only when $m=3$ and $n=1$; then necessarily $s=0$. Under the fixed encoder, the unary arity header makes every larger-arity code longer than these shortest valid codes. For arity six, shortlex compares the self-delimiting canonical entries in order: target $0$ with move $0$, target $0$ with move $1$, and target $1$ with move $0$ give $E(D_1),E(D_2),E(D_3)$ respectively.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [L2], decoding $E(D_i)$ recovers exactly the machine described by $D_i$. Reading off the single transition triple of each tuple gives the three concrete machines described in the example statement.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the shortlex enumeration from [L1] begins by listing these three machines, each exactly once. This shows concretely what the effective enumeration does at its first successful decodings.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Listing the first few well-formed machine codes in shortlex order, step 3.1 handle the empty-family boundary: Therefore the shortlex enumeration from [L1] begins by listing these three machines, each exactly once. This shows concretely what the effective enumeration does at its first succ…"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In Listing the first few well-formed machine codes in shortlex order, steps 1.1 and 2.1 handle the zero-denominator or zero-parameter boundary: Each tuple D_i has the correct length 6=3+3(3-2)cdot 1, satisfies m=3ge 3, n=1ge 1, and 0le s=0<1, and records a transition entry with target state in \\0,1,2\\, tape symbol 0, and…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Listing the first few well-formed machine codes in shortlex order, steps 1.1 and 2.1 handle the value-one or singleton boundary: Each tuple D_i has the correct length 6=3+3(3-2)cdot 1, satisfies m=3ge 3, n=1ge 1, and 0le s=0<1, and records a transition entry with target state in \\0,1,2\\, tape symbol 0, and…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In Listing the first few well-formed machine codes in shortlex order, step 2.1 handle the degenerate branch: Any well-formed machine description tuple has length 3+3(m-2)nge 6, with equality only when m=3 and n=1; then necessarily s=0. Among those minimal six-entry tuples, the only varia…"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Listing the first few well-formed machine codes in shortlex order, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: The three description tuples D_1,D_2,D_3 above and the shortlex ordering of binary words."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Listing the first few well-formed machine codes in shortlex order, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The three description tuples D_1,D_2,D_3 above and the shortlex ordering of binary words."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Listing the first few well-formed machine codes in shortlex order, the item is an example rather than a biconditional theorem, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Listing the first few well-formed machine codes in shortlex order, the item is an example rather than a biconditional theorem, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk because the shortlex witness list is easy to get wrong at the first successful codes. The repaired example now uses the actual first three length-six description tuples, checks that no shorter well-formed code exists, and then decodes each tuple against the machine-encoding lemma."
+      }
+    },
+    "cex-universality-decides-halting": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "fs-universality-decides-halting",
+          "source_section": "Statement",
+          "quote": "**False claim:** every universal Turing machine decides, for each coded\nmachine $M$ and each input word $w$ for $M$, whether $M$ halts on input $w$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-existence-of-a-universal-turing-machine",
+          "source_section": "Statement",
+          "quote": "There exists a deterministic one-tape Turing machine universal for the coding\nfixed in [[def-universal-turing-machine]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The machine $M_{\\mathrm{loop}}$ has an infinite run on its unique input $\\varepsilon$, because its only action is to move right forever and it never enters a halting state.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the universality clause recalled in the counterexample statement, the universal machine $U$ must reproduce that same infinite run on the coded input $\\langle\\ulcorner M_{\\mathrm{loop}}\\urcorner,\\widehat\\varepsilon\\rangle$. So $U$ diverges on this input rather than halting with a yes-or-no answer.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the coded input $\\langle\\ulcorner M_{\\mathrm{loop}}\\urcorner,\\widehat\\varepsilon\\rangle$ is a counterexample to the claim in [L1]. The existence assertion [L2] shows that this is a genuine instance in the chosen coding scheme.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A universal machine diverges on a looping machine/input pair, the claim fixes the objects it works with rather than a variable family whose empty instance would change the argument: The looping machine M_mathrmloop, a universal machine U, and the coded input langleulcorner M_mathrmloopurcorner,widehatvarepsilonrangle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In A universal machine diverges on a looping machine/input pair, step 2.1 handle the zero-denominator or zero-parameter boundary: By the universality clause recalled in the counterexample statement, the universal machine U must reproduce that same infinite run on the coded input langleulcorner M_mathrmloopur…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In A universal machine diverges on a looping machine/input pair, step 3.1 handle the value-one or singleton boundary: Therefore the coded input langleulcorner M_mathrmloopurcorner,widehatvarepsilonrangle is a counterexample to the claim in [L1]. The existence assertion [L2] shows that this is a g…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In A universal machine diverges on a looping machine/input pair, step 1.1 handle the degenerate branch: The machine M_mathrmloop has an infinite run on its unique input varepsilon, because its only action is to move right forever and it never enters a halting state."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A universal machine diverges on a looping machine/input pair, the argument is not about an additional first-versus-last or interval-endpoint regime beyond the domain already stated: The looping machine M_mathrmloop, a universal machine U, and the coded input langleulcorner M_mathrmloopurcorner,widehatvarepsilonrangle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A universal machine diverges on a looping machine/input pair, every choice used by the proof is explicit or canonical from the stated data, so no hidden arbitrary choice from a bare nonempty set remains: The looping machine M_mathrmloop, a universal machine U, and the coded input langleulcorner M_mathrmloopurcorner,widehatvarepsilonrangle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A universal machine diverges on a looping machine/input pair, the top-level claim is one-way rather than a biconditional, so there is no separate forward implication to discharge: The looping machine M_mathrmloop, a universal machine U, and the coded input langleulcorner M_mathrmloopurcorner,widehatvarepsilonrangle."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A universal machine diverges on a looping machine/input pair, the top-level claim is one-way rather than a biconditional, so there is no separate reverse implication to discharge: The looping machine M_mathrmloop, a universal machine U, and the coded input langleulcorner M_mathrmloopurcorner,widehatvarepsilonrangle."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk because the counterexample only works if the machine/input pair is valid for the chosen coding. The repaired counterexample now uses the empty-alphabet looping machine on its unique input epsilon and feeds the universal machine the encoded pair <code(M_loop), widehat epsilon>, so the divergence witness is fully typed on current disk."
+      }
+    }
+  }
+}

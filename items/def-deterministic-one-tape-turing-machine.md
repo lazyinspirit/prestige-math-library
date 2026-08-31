@@ -2,7 +2,7 @@
 id: def-deterministic-one-tape-turing-machine
 kind: definition
 title: "Deterministic one-tape Turing machines with designated accept and reject states"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps:
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

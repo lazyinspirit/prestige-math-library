@@ -1,0 +1,237 @@
+[
+  {
+    "order": 348.003,
+    "id": "average-orders-divisor-sums-and-representation-counts",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Average Orders Divisor Sums and Representation Counts",
+    "companion": "average-orders-divisor-sums-and-representation-counts-examples",
+    "requires": [
+      "sums-of-two-squares",
+      "arithmetic-functions-and-dirichlet-convolution-examples"
+    ],
+    "items": [
+      {
+        "id": "def-summatory-function-and-average-order",
+        "kind": "definition",
+        "title": "Summatory functions and average orders",
+        "deps": [
+          "def-arithmetic-function"
+        ]
+      },
+      {
+        "id": "def-euler-mascheroni-constant",
+        "kind": "definition",
+        "title": "The Euler-Mascheroni constant",
+        "deps": [
+          "def-natural-logarithm"
+        ]
+      },
+      {
+        "id": "lem-harmonic-sum-asymptotic",
+        "kind": "lemma",
+        "title": "The harmonic sum is log x plus gamma plus O(1/x)",
+        "strategy": "Compare each unit interval with the integral of 1/t, identify the monotone remainder defining gamma, and bound the tail by an integral of x^{-2}.",
+        "deps": [
+          "def-euler-mascheroni-constant",
+          "thm-logarithm-derivative-and-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-additivity-over-subintervals",
+          "thm-monotone-convergence"
+        ]
+      },
+      {
+        "id": "thm-dirichlet-hyperbola-method",
+        "kind": "theorem",
+        "title": "Dirichlet's hyperbola method for summatory convolutions",
+        "strategy": "Expand the summatory convolution as the finite lattice sum over ab <= x, split the lattice points into the arms a <= U and b <= V, and subtract the overlap rectangle counted twice.",
+        "deps": [
+          "def-summatory-function-and-average-order",
+          "def-dirichlet-convolution",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "thm-divisor-counting-summatory-estimate",
+        "kind": "theorem",
+        "title": "The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x)",
+        "strategy": "Use tau = 1 * 1, apply the hyperbola identity with U = V = sqrt x, and keep the floor and overlap terms until the final O(sqrt x) estimate is collected.",
+        "deps": [
+          "lem-harmonic-sum-asymptotic",
+          "thm-dirichlet-hyperbola-method",
+          "prop-divisor-functions-under-dirichlet-convolution"
+        ]
+      },
+      {
+        "id": "lem-summatory-logarithm-asymptotic",
+        "kind": "lemma",
+        "title": "The summatory logarithm is x log x minus x plus O(log x)",
+        "strategy": "Write the sum as log(floor x !), compare it with the integral of log t on [1,N] and [1,N+1], and evaluate the antiderivative t log t - t by the product rule and the FTC.",
+        "deps": [
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-additivity-over-subintervals",
+          "thm-product-rule",
+          "thm-ftc-second-part"
+        ]
+      },
+      {
+        "id": "cor-average-order-of-divisor-counting-function",
+        "kind": "corollary",
+        "title": "The average order of tau is log n",
+        "strategy": "Compare the summatory tau estimate with the summatory logarithm asymptotic and match the common x log x main term.",
+        "deps": [
+          "def-summatory-function-and-average-order",
+          "thm-divisor-counting-summatory-estimate",
+          "lem-summatory-logarithm-asymptotic"
+        ]
+      },
+      {
+        "id": "thm-divisor-sum-summatory-estimate",
+        "kind": "theorem",
+        "title": "The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x)",
+        "strategy": "Rewrite sum_{n <= x} sigma(n) by exchanging divisor and quotient roles, replace the inner consecutive sum by y^2/2 + O(y) with y = floor(x/d), and split the result into Basel and harmonic pieces.",
+        "deps": [
+          "prop-divisor-functions-under-dirichlet-convolution",
+          "lem-harmonic-sum-asymptotic",
+          "cor-basel-sum-by-residues"
+        ]
+      },
+      {
+        "id": "cor-average-order-of-divisor-sum-function",
+        "kind": "corollary",
+        "title": "The average order of sigma is (pi squared over 6)n",
+        "strategy": "Sum the linear comparison function exactly and compare its leading term with the summatory sigma estimate.",
+        "deps": [
+          "def-summatory-function-and-average-order",
+          "thm-divisor-sum-summatory-estimate"
+        ]
+      },
+      {
+        "id": "thm-euler-totient-summatory-estimate",
+        "kind": "theorem",
+        "title": "The summatory totient function is 3 over pi squared times x squared plus O(x log x)",
+        "strategy": "Recover phi(n) = sum_{d|n} mu(d)(n/d) from the published divisor-sum theorem and Mobius inversion, reverse the finite order of summation, and use the same consecutive-sum expansion together with Basel and harmonic estimates.",
+        "deps": [
+          "cor-classical-mobius-inversion",
+          "thm-sum-of-totients-over-divisors",
+          "def-divisor-power-sum-functions",
+          "lem-harmonic-sum-asymptotic",
+          "cor-basel-sum-by-residues"
+        ]
+      },
+      {
+        "id": "cor-average-order-of-euler-totient",
+        "kind": "corollary",
+        "title": "The average order of Euler's totient is 6n over pi squared",
+        "strategy": "Sum the linear comparison function and compare its leading term with the totient summatory estimate.",
+        "deps": [
+          "def-summatory-function-and-average-order",
+          "thm-euler-totient-summatory-estimate"
+        ]
+      },
+      {
+        "id": "thm-coprime-pair-counting-asymptotic",
+        "kind": "theorem",
+        "title": "Ordered coprime pairs in a box have asymptotic density 6 over pi squared",
+        "strategy": "Partition the coprime pairs by their maximum coordinate: m = 1 contributes one pair, and each m > 1 contributes 2 phi(m); then apply the summatory totient estimate.",
+        "deps": [
+          "def-coprime",
+          "thm-euler-totient-summatory-estimate"
+        ]
+      },
+      {
+        "id": "cor-asymptotic-density-of-coprime-pairs",
+        "kind": "corollary",
+        "title": "The proportion of pairs in {1,...,n}^2 that are coprime tends to 6 over pi squared",
+        "strategy": "Divide the preceding asymptotic by n^2 and let n tend to infinity.",
+        "deps": [
+          "thm-coprime-pair-counting-asymptotic"
+        ]
+      },
+      {
+        "id": "def-two-square-representation-function",
+        "kind": "definition",
+        "title": "The two-square representation function r_2",
+        "deps": [
+          "def-arithmetic-function",
+          "def-sum-of-two-squares-representation"
+        ]
+      },
+      {
+        "id": "lem-normalized-two-square-count-is-multiplicative",
+        "kind": "lemma",
+        "title": "The normalized two-square count is multiplicative with the expected prime-power values",
+        "strategy": "Use the odd-to-even doubling bijection for powers of 2, the prime-power representation facts and prime uniqueness for odd primes, and the primitive product/factorization bijection to make r_2/4 multiplicative and compute its prime-power cases.",
+        "deps": [
+          "def-two-square-representation-function",
+          "def-multiplicative-arithmetic-function",
+          "def-coprime",
+          "prop-odd-two-square-representations-correspond-under-doubling",
+          "lem-coprime-primitive-two-square-products-remain-primitive",
+          "lem-two-square-representations-of-prime-powers",
+          "thm-uniqueness-of-two-square-representation-of-a-prime"
+        ]
+      },
+      {
+        "id": "thm-two-square-representation-count",
+        "kind": "theorem",
+        "title": "The divisor formula for the two-square representation count",
+        "strategy": "Let g(n) = sum_{d|n} chi_4(d), prove directly that g is multiplicative by splitting divisors of coprime products, compute its three prime-power cases, and compare with the normalized r_2 lemma.",
+        "deps": [
+          "def-coprime",
+          "def-divides-in-z",
+          "def-multiplicative-arithmetic-function",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-normalized-two-square-count-is-multiplicative",
+          "thm-multiplicative-functions-determined-by-prime-powers"
+        ]
+      },
+      {
+        "id": "cor-average-order-of-two-square-representations",
+        "kind": "corollary",
+        "title": "The average order of the two-square representation count is pi",
+        "strategy": "Apply the hyperbola method to the divisor formula for r_2, use the periodic bounded partial sums of chi_4, and identify the odd harmonic difference with the Gregory-Leibniz series for pi/4.",
+        "deps": [
+          "def-summatory-function-and-average-order",
+          "thm-dirichlet-hyperbola-method",
+          "thm-two-square-representation-count",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 348.004,
+    "id": "average-orders-divisor-sums-and-representation-counts-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Average Orders Divisor Sums and Representation Counts — Examples",
+    "companion": "average-orders-divisor-sums-and-representation-counts",
+    "requires": [
+      "average-orders-divisor-sums-and-representation-counts"
+    ],
+    "items": [
+      {
+        "id": "ex-dirichlet-hyperbola-lattice-decomposition",
+        "kind": "example",
+        "title": "A small lattice decomposition for Dirichlet's hyperbola method",
+        "strategy": "Choose a small x, list the lattice points ab <= x, split them into the two hyperbola arms and their overlap, and verify the exact counting identity.",
+        "deps": [
+          "thm-dirichlet-hyperbola-method",
+          "prop-divisor-functions-under-dirichlet-convolution"
+        ]
+      },
+      {
+        "id": "ex-divisor-summatory-error-table",
+        "kind": "example",
+        "title": "The divisor summatory estimate through several small values",
+        "strategy": "Compute sum_{n <= x} tau(n), compare it with x log x + (2 gamma - 1)x, and tabulate the residual at the sqrt x scale.",
+        "deps": [
+          "thm-divisor-counting-summatory-estimate"
+        ]
+      }
+    ]
+  }
+]
