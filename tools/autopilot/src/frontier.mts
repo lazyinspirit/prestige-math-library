@@ -172,7 +172,7 @@ export function waves(repo: string, { categories = null }: { categories?: string
  * requested subjects and pulls in every unbuilt prerequisite pair they need.
  */
 export function nextBuildableSet(repo: string, {
-  priorities = [], maxPairs = 14,
+  priorities = [], maxPairs = 24,
 }: { priorities?: string[]; maxPairs?: number } = {}): any {
   if (!Number.isInteger(maxPairs) || maxPairs < 1) throw new Error('maxPairs must be a positive integer');
   const spec = loadPlan(repo);

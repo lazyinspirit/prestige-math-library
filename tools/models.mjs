@@ -84,7 +84,7 @@ export const MODEL_PROFILES = Object.freeze({
 export const LANES = Object.freeze({
   agentic: 'gpt54',
   secondary: 'gpt54',
-  partition: 'luna',
+  partition: 'terra',
   adjudication: 'sol',
 });
 

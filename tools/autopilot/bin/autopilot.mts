@@ -146,7 +146,7 @@ function writeDriftArtifacts(run: string, pages: string[]) {
     '  backward, and record `drift-minted`. This run then builds that pair.',
     '- **More than three pages need minting:** the run is aimed above its own',
     '  foundations. Drop the originals and record `drift-rescoped`, naming the',
-    '  dependency pairs to build instead — at most 14 pairs total.',
+    '  dependency pairs to build instead — at most 24 pairs total.',
     '',
     'You run BEFORE any Beta, so all three cost one Alpha pass and no authored work.',
     '',
@@ -230,7 +230,7 @@ switch (cmd) {
   case 'frontier': {
     if (has('next')) {
       const priorities = (opt('priorities') ?? opt('categories') ?? '').split(',').map((s: string) => s.trim()).filter(Boolean);
-      const maxPairs = Number(opt('max-pairs', '14'));
+      const maxPairs = Number(opt('max-pairs', '24'));
       const next = nextBuildableSet(repo, { priorities, maxPairs });
       console.log(`${next.pages.length} A/B pair(s) selected for the next dependency-closed run (cap ${maxPairs})`);
       if (priorities.length) console.log(`equal-priority subjects: ${priorities.join(', ')}`);
@@ -276,8 +276,8 @@ switch (cmd) {
     let pages;
     if (pairsArg === 'next') {
       const priorities = (opt('priorities') ?? opt('categories') ?? '').split(',').map((s: string) => s.trim()).filter(Boolean);
-      const maxPairs = Number(opt('max-pairs', '14'));
-      if (maxPairs > 14) die('plan --pairs next: --max-pairs cannot exceed the pipeline ceiling of 14');
+      const maxPairs = Number(opt('max-pairs', '24'));
+      if (maxPairs > 24) die('plan --pairs next: --max-pairs cannot exceed the pipeline ceiling of 24');
       const next = nextBuildableSet(repo, { priorities, maxPairs });
       if (next.unknownPriorities.length) die(`unknown or empty priority subject(s): ${next.unknownPriorities.join(', ')}`);
       pages = next.pages.map((p: any) => p.id);

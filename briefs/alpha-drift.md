@@ -18,7 +18,7 @@ spec. Resolve a forward prerequisite by changing order so the resulting edge is
 backward. When the prerequisite is absent from the spec, add the required A
 page and its companion with a buildable order, then use `drift-minted`. If more
 than three pages must be minted, rescope to the prerequisite pairs instead;
-the replacement set may contain at most 14 pairs. `drift-blocked` stops the
+the replacement set may contain at most 24 pairs. `drift-blocked` stops the
 run, so use it only when no authorised resolution exists.
 
 Your writable scope is `research/plan-spec.json` and the task-named drift

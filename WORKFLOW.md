@@ -24,7 +24,7 @@ into a bounded next-run scope: named subjects are equal priorities,
 dependencies from other subjects are pulled in automatically, and output is in
 topological run waves. `plan --pairs next` uses the same selector. `plan`
 refuses a pair set unless each `requires` target is published or built by that
-run; its `next` selector is capped at the pipeline's 14-pair ceiling. The
+run; its `next` selector is capped at the pipeline's 24-pair ceiling. The
 read-only `frontier --next` preview may use a larger explicit `--max-pairs` to
 inspect a longer dependency-closed roadmap. `--allow-unbuildable` records an
 intentional stage-1 stop. Planning writes
@@ -33,9 +33,9 @@ drift-review inputs.
 
 ```bash
 autopilot frontier [--categories category-a,category-b]
-autopilot frontier --next --priorities category-a,category-b [--max-pairs 14]
+autopilot frontier --next --priorities category-a,category-b [--max-pairs 24]
 autopilot plan --run <run> --pairs <a-page-id,...>
-autopilot plan --run <run> --pairs next --priorities category-a,category-b [--max-pairs 14]
+autopilot plan --run <run> --pairs next --priorities category-a,category-b [--max-pairs 24]
 autopilot doctor --run <run>
 autopilot start --run <run> --detach
 autopilot status [--run <run>]
@@ -69,7 +69,8 @@ stages.
 ## Ownership
 
 `tools/models.mjs` owns model IDs, runners, stage-selectable profiles, and
-judge-lineup resolution.
+judge-lineup resolution. Step 2's partitioning Alpha runs on `gpt-5.6-terra`
+at `high` reasoning effort.
 `tools/dispatch.mjs` owns role caps, effort, web access, sandbox enforcement,
 provider isolation, session handling, and output capture. The current judge
 lineup is the singleton `gpt-5.6-terra` lane. Stage profiles route Step-5

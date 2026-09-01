@@ -39,7 +39,7 @@ const cap = Number(opt('cap') ?? 2);
 // The owner's cap on a rescoped run (2026-08-24). A rescope replaces the run's
 // pair set wholesale, and without a ceiling a densely-blocked track could
 // expand it without bound.
-const maxPairs = Number(opt('max-pairs') ?? 14);
+const maxPairs = Number(opt('max-pairs') ?? 24);
 // More than this many mintings means the run is aimed above its own
 // foundations, and the owner's ruling is to build the foundations instead.
 const MINT_RESCOPE_THRESHOLD = 3;
