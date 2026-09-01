@@ -1,0 +1,2788 @@
+{
+  "version": 1,
+  "level": "frontier-28",
+  "note": "Step-5 authoring contract for frontier-28 batch 7 on Tuesday, September 1, 2026.",
+  "scope": [
+    "thm-the-inverse-braiding-is-a-braiding",
+    "thm-the-braiding-is-compatible-with-the-unit-constraints",
+    "thm-in-a-strict-braided-monoidal-category-the-braiding-satisfies-the-yang-baxter-equation",
+    "thm-in-the-presence-of-the-symmetry-axiom-one-hexagon-implies-the-other",
+    "thm-the-cartesian-swap-braiding-is-a-symmetry",
+    "thm-the-double-braiding-center-is-symmetric",
+    "thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one",
+    "thm-the-two-strand-braid-group-is-infinite-cyclic",
+    "thm-the-symmetric-group-has-the-coxeter-presentation",
+    "thm-the-braid-group-surjects-onto-the-symmetric-group",
+    "cex-the-braid-category-is-braided-but-not-symmetric",
+    "thm-symmetric-coherence",
+    "cor-unbracketed-and-unordered-tensor-strings-are-well-defined-in-a-symmetric-monoidal-category",
+    "thm-braided-coherence-fails-in-the-symmetric-form",
+    "fs-every-diagram-built-from-the-associator-and-the-braiding-commutes",
+    "thm-the-braid-category-is-the-free-strict-braided-monoidal-category-on-one-generator",
+    "thm-braided-coherence-via-underlying-braids",
+    "cor-two-canonical-braided-composites-agree-exactly-when-their-underlying-braids-agree",
+    "fs-every-braided-monoidal-category-is-equivalent-to-a-strict-commutative-one",
+    "thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category",
+    "cor-monoid-objects-in-a-symmetric-monoidal-category-form-a-symmetric-monoidal-category",
+    "ex-the-swap-braiding-on-sets",
+    "ex-the-braid-group-on-three-strands",
+    "ex-the-hexagon-checked-for-cartesian-products",
+    "ex-the-sign-braiding-on-supervector-spaces",
+    "ex-the-two-strand-braiding-in-the-braid-category-has-infinite-order",
+    "ex-two-canonical-maps-with-different-underlying-braids",
+    "ex-commutative-monoid-objects-in-sets-are-ordinary-commutative-monoids"
+  ],
+  "contracts": {
+    "thm-the-inverse-braiding-is-a-braiding": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-braiding",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **braiding** on $\\mathcal C$ is a natural isomorphism\n\n$$c_{X,Y}:X\\otimes Y\\longrightarrow Y\\otimes X$$\n\nnatural in both variables ([[def-natural-isomorphism]]) such that, for all\nobjects $X,Y,Z$,\n\n$$\\alpha_{Y,Z,X}\\circ c_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(1_Y\\otimes c_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(c_{X,Y}\\otimes1_Z),$$\n\nand\n\n$$\\alpha_{Z,X,Y}^{-1}\\circ c_{X\\otimes Y,Z}\\circ\\alpha_{X,Y,Z}^{-1}=(c_{X,Z}\\otimes1_Y)\\circ\\alpha_{X,Z,Y}^{-1}\\circ(1_X\\otimes c_{Y,Z}).$$\n\nThese are the two **hexagon identities**. The invertibility of each\n$c_{X,Y}$ is part of the data, not a consequence of the hexagons.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because [L1] says each $c_{X,Y}$ is an isomorphism, the family $c'_{X,Y}=c_{Y,X}^{-1}$ is well defined. Inverting the naturality square for $c$ and swapping the variable names shows that $c'$ is natural in both variables.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute $c'_{X,Y}=c_{Y,X}^{-1}$ into the first hexagon for $c'$. After reversing the arrows, this equation is exactly the second hexagon for $c$ from [L1] with the object names permuted. Hence the first hexagon holds for $c'$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The same calculation with the roles of the two hexagons reversed shows that the second hexagon for $c'$ is the first hexagon for $c$ written backwards. Therefore $c'$ satisfies both hexagon identities and is a braiding.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement is componentwise in ordered pairs of objects, so there is no separate empty-index instance beyond the written argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The inverse braiding is again a braiding has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The inverse braiding is again a braiding has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The inverse braiding is again a braiding has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The inverse braiding is again a braiding is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The inverse braiding is again a braiding does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The inverse braiding is again a braiding is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The inverse braiding is again a braiding is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-the-braiding-is-compatible-with-the-unit-constraints": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-braiding",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **braiding** on $\\mathcal C$ is a natural isomorphism\n\n$$c_{X,Y}:X\\otimes Y\\longrightarrow Y\\otimes X$$\n\nnatural in both variables ([[def-natural-isomorphism]]) such that, for all\nobjects $X,Y,Z$,\n\n$$\\alpha_{Y,Z,X}\\circ c_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(1_Y\\otimes c_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(c_{X,Y}\\otimes1_Z),$$\n\nand\n\n$$\\alpha_{Z,X,Y}^{-1}\\circ c_{X\\otimes Y,Z}\\circ\\alpha_{X,Y,Z}^{-1}=(c_{X,Z}\\otimes1_Y)\\circ\\alpha_{X,Z,Y}^{-1}\\circ(1_X\\otimes c_{Y,Z}).$$\n\nThese are the two **hexagon identities**. The invertibility of each\n$c_{X,Y}$ is part of the data, not a consequence of the hexagons.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The present hypotheses are exactly those of [F1], so the two displayed unit-compatibility identities hold for every object $X$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the morphisms $c_{\\mathbf 1,X}$ and $c_{X,\\mathbf 1}$ are isomorphisms. Step 1.1 therefore gives $$c_{\\mathbf 1,X}=\\rho_X^{-1}\\lambda_X,\\qquad c_{X,\\mathbf 1}=\\lambda_X^{-1}\\rho_X.$$ These two formulas are inverse to each other, so $c_{\\mathbf 1,X}=c_{X,\\mathbf 1}^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The braiding is compatible with the unit constraints has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The braiding is compatible with the unit constraints has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The braiding is compatible with the unit constraints has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The braiding is compatible with the unit constraints has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The braiding is compatible with the unit constraints is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The braiding is compatible with the unit constraints does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The braiding is compatible with the unit constraints is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The braiding is compatible with the unit constraints is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-in-a-strict-braided-monoidal-category-the-braiding-satisfies-the-yang-baxter-equation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-braided-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **braided monoidal category** is a monoidal category together with a chosen\nbraiding in the sense of [[def-braiding]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-strict-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **strict monoidal category** is a monoidal category\n$(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$\n([[def-monoidal-category]]) in which\n\n$$((X\\otimes Y)\\otimes Z)=X\\otimes(Y\\otimes Z),\\qquad \\mathbf 1\\otimes X=X,\\qquad X\\otimes\\mathbf 1=X$$\n\nas literal equalities of objects, and the constraint isomorphisms are identities:\n\n$$\\alpha_{X,Y,Z}=1_{X\\otimes(Y\\otimes Z)},\\qquad \\lambda_X=1_X,\\qquad \\rho_X=1_X.$$\n\nThus a strict monoidal category does not merely identify the two bracketings up\nto a specified isomorphism; it makes them equal on the nose.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], both hexagon identities from [L1] lose all associators. They become $c_{X,Y\\otimes Z}=(1_Y\\otimes c_{X,Z})\\circ(c_{X,Y}\\otimes1_Z)$ and $c_{X\\otimes Y,Z}=(c_{X,Z}\\otimes1_Y)\\circ(1_X\\otimes c_{Y,Z})$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Naturality of $c_{X,-}$ with respect to the morphism $c_{Y,Z}:Y\\otimes Z\\to Z\\otimes Y$ gives $$(c_{Y,Z}\\otimes1_X)\\circ c_{X,Y\\otimes Z}=c_{X,Z\\otimes Y}\\circ(1_X\\otimes c_{Y,Z}).$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Expand the left-hand occurrence of $c_{X,Y\\otimes Z}$ in step 2.1 by the first formula of step 1.1, and expand $c_{X,Z\\otimes Y}$ by the same formula with $Y$ and $Z$ interchanged. This yields $$(c_{Y,Z}\\otimes1_X)\\circ(1_Y\\otimes c_{X,Z})\\circ(c_{X,Y}\\otimes1_Z)=(1_Z\\otimes c_{X,Y})\\circ(c_{X,Z}\\otimes1_Y)\\circ(1_X\\otimes c_{Y,Z}),$$ which is the stated Yang-Baxter relation. The special case $X=Y=Z$ is the displayed braid equation.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In a strict braided monoidal category the braiding satisfies the Yang-Baxter equation has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In a strict braided monoidal category the braiding satisfies the Yang-Baxter equation has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In a strict braided monoidal category the braiding satisfies the Yang-Baxter equation has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In a strict braided monoidal category the braiding satisfies the Yang-Baxter equation has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In a strict braided monoidal category the braiding satisfies the Yang-Baxter equation is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In a strict braided monoidal category the braiding satisfies the Yang-Baxter equation does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In a strict braided monoidal category the braiding satisfies the Yang-Baxter equation is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In a strict braided monoidal category the braiding satisfies the Yang-Baxter equation is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-in-the-presence-of-the-symmetry-axiom-one-hexagon-implies-the-other": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-symmetric-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **symmetric monoidal category** is a braided monoidal category\n([[def-braided-monoidal-category]]) whose braiding $c$ satisfies\n\n$$c_{Y,X}\\circ c_{X,Y}=1_{X\\otimes Y}$$\n\nfor all objects $X,Y$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume first that the given hexagon is $$\\alpha_{Y,Z,X}\\circ c_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(1_Y\\otimes c_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(c_{X,Y}\\otimes1_Z).$$ Inverting this equality gives $$\\alpha_{X,Y,Z}^{-1}\\circ c_{X,Y\\otimes Z}^{-1}\\circ\\alpha_{Y,Z,X}^{-1}=(c_{X,Y}^{-1}\\otimes1_Z)\\circ\\alpha_{Y,X,Z}^{-1}\\circ(1_Y\\otimes c_{X,Z}^{-1}).$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Replace $(X,Y,Z)$ in step 1.1 by $(Z,X,Y)$. By [L1], the symmetry equation implies $c_{U,V}^{-1}=c_{V,U}$ for all objects $U,V$. After that substitution, step 1.1 becomes $$\\alpha_{Z,X,Y}^{-1}\\circ c_{X\\otimes Y,Z}\\circ\\alpha_{X,Y,Z}^{-1}=(c_{X,Z}\\otimes1_Y)\\circ\\alpha_{X,Z,Y}^{-1}\\circ(1_X\\otimes c_{Y,Z}),$$ which is exactly the second braiding hexagon.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If instead the second hexagon is given, the same argument with the roles of the two hexagons reversed proves the first. Hence under the symmetry axiom either hexagon implies the other.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In the presence of symmetry, one hexagon implies the other has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In the presence of symmetry, one hexagon implies the other has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In the presence of symmetry, one hexagon implies the other has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In the presence of symmetry, one hexagon implies the other has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In the presence of symmetry, one hexagon implies the other is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In the presence of symmetry, one hexagon implies the other does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In the presence of symmetry, one hexagon implies the other is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In the presence of symmetry, one hexagon implies the other is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-the-cartesian-swap-braiding-is-a-symmetry": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-a-category-with-finite-products-is-monoidal",
+          "source_section": "Statement",
+          "quote": "If a category $\\mathcal C$ has binary products and a terminal object, then\n$\\mathcal C$ is monoidal with tensor product $\\times$ and unit object any\nterminal object $1$. Dually, if $\\mathcal C$ has binary coproducts and an\ninitial object, then $\\mathcal C$ is monoidal with tensor product $\\sqcup$ and\nunit object any initial object.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-symmetric-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **symmetric monoidal category** is a braided monoidal category\n([[def-braided-monoidal-category]]) whose braiding $c$ satisfies\n\n$$c_{Y,X}\\circ c_{X,Y}=1_{X\\otimes Y}$$\n\nfor all objects $X,Y$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-braiding",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **braiding** on $\\mathcal C$ is a natural isomorphism\n\n$$c_{X,Y}:X\\otimes Y\\longrightarrow Y\\otimes X$$\n\nnatural in both variables ([[def-natural-isomorphism]]) such that, for all\nobjects $X,Y,Z$,\n\n$$\\alpha_{Y,Z,X}\\circ c_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(1_Y\\otimes c_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(c_{X,Y}\\otimes1_Z),$$\n\nand\n\n$$\\alpha_{Z,X,Y}^{-1}\\circ c_{X\\otimes Y,Z}\\circ\\alpha_{X,Y,Z}^{-1}=(c_{X,Z}\\otimes1_Y)\\circ\\alpha_{X,Z,Y}^{-1}\\circ(1_X\\otimes c_{Y,Z}).$$\n\nThese are the two **hexagon identities**. The invertibility of each\n$c_{X,Y}$ is part of the data, not a consequence of the hexagons.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each pair $X,Y$, the two coordinate projections from $X\\times Y$ define a unique morphism $\\tau_{X,Y}:X\\times Y\\to Y\\times X$ with first projection $\\pi_2$ and second projection $\\pi_1$. The same universal property defines its inverse $\\tau_{Y,X}$, so the family is a natural isomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "To check the first hexagon, compare both composites from $X\\times(Y\\times Z)$ to $(Y\\times Z)\\times X$ after composing with the three product projections. Each route sends $(x,y,z)$ to $(y,z,x)$, so the two maps are equal. The second hexagon is the same coordinate permutation written on $((X\\times Y)\\times Z)$ and is checked in the same way.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Swapping twice returns every pair to itself, so $\\tau_{Y,X}\\circ\\tau_{X,Y}=1_{X\\times Y}$. By [L2], the cartesian swap braiding is therefore a symmetry.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The cartesian swap braiding is a symmetry has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The cartesian swap braiding is a symmetry has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The cartesian swap braiding is a symmetry has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The cartesian swap braiding is a symmetry has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cartesian swap braiding is a symmetry is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cartesian swap braiding is a symmetry does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cartesian swap braiding is a symmetry is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The cartesian swap braiding is a symmetry is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-the-double-braiding-center-is-symmetric": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-braided-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **braided monoidal category** is a monoidal category together with a chosen\nbraiding in the sense of [[def-braiding]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-symmetric-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **symmetric monoidal category** is a braided monoidal category\n([[def-braided-monoidal-category]]) whose braiding $c$ satisfies\n\n$$c_{Y,X}\\circ c_{X,Y}=1_{X\\otimes Y}$$\n\nfor all objects $X,Y$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-the-braiding-is-compatible-with-the-unit-constraints",
+          "source_section": "Statement",
+          "quote": "Let $c$ be a braiding on a monoidal category $\\mathcal C$. Then for every\nobject $X$,\n\n$$\\rho_X\\circ c_{\\mathbf 1,X}=\\lambda_X,\\qquad \\lambda_X\\circ c_{X,\\mathbf 1}=\\rho_X,$$\n\nand consequently\n\n$$c_{\\mathbf 1,X}=c_{X,\\mathbf 1}^{-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-mac-lane-coherence-in-the-canonical-map-form",
+          "source_section": "Statement",
+          "quote": "Let $u$ and $v$ be parenthesised tensor words on the same ordered letters\n$x_1,\\dots,x_n$. Then there exists a unique canonical natural isomorphism\n$E_u\\Rightarrow E_v$. Equivalently, any two canonical morphisms from $u$ to $v$\nare equal.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The tensor unit belongs to $\\mathcal Z_2(\\mathcal C)$: for every $Y$, [L3] gives $c_{Y,\\mathbf 1}^{-1}=c_{\\mathbf 1,Y}$, hence $c_{Y,\\mathbf 1}\\circ c_{\\mathbf 1,Y}=1_{\\mathbf 1\\otimes Y}$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $X$ and $Y$ lie in $\\mathcal Z_2(\\mathcal C)$, and let $Z$ be arbitrary. By [L4], the canonical associators in the two hexagons may be suppressed after transporting both sides between the same parenthesised source and target. In that coherent notation, the hexagons give $$c_{Z,X\\otimes Y}\\circ c_{X\\otimes Y,Z}=(1_X\\otimes c_{Z,Y})(c_{Z,X}\\otimes1_Y)(c_{X,Z}\\otimes1_Y)(1_X\\otimes c_{Y,Z}).$$",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Transparency of $X$ gives $(c_{Z,X}\\otimes1_Y)(c_{X,Z}\\otimes1_Y)=1_{X\\otimes Z}\\otimes1_Y$. Substituting this into step 1.2 leaves $$(1_X\\otimes c_{Z,Y})(1_X\\otimes c_{Y,Z})=1_X\\otimes(c_{Z,Y}\\circ c_{Y,Z}),$$ which is the identity by transparency of $Y$. Hence $X\\otimes Y$ lies in $\\mathcal Z_2(\\mathcal C)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because the subcategory is full and is closed under tensor product by step 2.1 and under the unit by step 1.1, tensor products of its morphisms and the ambient associator and unitors all remain in it. The ambient braiding also restricts to it. For central objects $X,Y$, their defining condition says $c_{Y,X}\\circ c_{X,Y}=1_{X\\otimes Y}$. By the definition in [L2], the restricted braiding is therefore a symmetry. Thus $\\mathcal Z_2(\\mathcal C)$ is symmetric monoidal.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The double-braiding center is a symmetric monoidal subcategory has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The double-braiding center is a symmetric monoidal subcategory has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The double-braiding center is a symmetric monoidal subcategory has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The double-braiding center is a symmetric monoidal subcategory has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The double-braiding center is a symmetric monoidal subcategory is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The double-braiding center is a symmetric monoidal subcategory does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The double-braiding center is a symmetric monoidal subcategory is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The double-braiding center is a symmetric monoidal subcategory is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-mac-lane-strictification",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a monoidal category. Then the assignment\n$$L(X)=\\bigl(X\\otimes -,\\,\\alpha_{X,-,-}\\bigr)$$\ndefines a strong monoidal functor $L:\\mathcal C\\to\\mathcal C'$ from\n$\\mathcal C$ to the strict monoidal category $\\mathcal C'$ of\n[[def-the-category-of-right-module-endofunctors]], and $L$ is a monoidal\nequivalence. Consequently every monoidal category is monoidally equivalent to a\nstrict monoidal category.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-monoidal-equivalence",
+          "source_section": "Definition",
+          "quote": "A **monoidal equivalence** from $\\mathcal C$ to $\\mathcal D$ is a strong\nmonoidal functor $F:\\mathcal C\\to\\mathcal D$\n([[def-lax-strong-and-strict-monoidal-functor]]) together with:\n\n- a strong monoidal functor $G:\\mathcal D\\to\\mathcal C$;\n- monoidal natural isomorphisms\n  $$\\eta:1_{\\mathcal C}\\Rightarrow GF,\\qquad \\varepsilon:FG\\Rightarrow1_{\\mathcal D}$$\n  ([[def-monoidal-natural-transformation]]).\n\nHere $GF$ and $FG$ carry the composite strong monoidal structures of\n[[thm-monoidal-functors-compose-and-laxness-is-preserved]], and each identity\nfunctor carries the strict monoidal structure whose binary and unit maps are\nidentities. Thus both displayed transformations are between specified lax\nmonoidal functors.\n\nThus the underlying functor $F$ is an equivalence of categories in the sense of\n[[def-equivalence-and-adjoint-equivalence-of-categories]], but the monoidal\nquasi-inverse $G$ is part of the data and not a canonical construction. By\n[[thm-every-equivalence-can-be-made-an-adjoint-equivalence]], one may choose the\nunderlying equivalence data so that the triangle identities also hold, but that\nextra choice is not built into the base definition here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-braided-monoidal-functor",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,c)$ and $(\\mathcal D,c')$ be braided monoidal categories\n([[def-braided-monoidal-category]]). A **braided monoidal functor**\n$F:\\mathcal C\\to\\mathcal D$ is a strong monoidal functor\n([[def-lax-strong-and-strict-monoidal-functor]]) with structure isomorphisms\n\n$$J_{X,Y}:F(X)\\otimes F(Y)\\overset{\\cong}\\longrightarrow F(X\\otimes Y),\\qquad J_0:\\mathbf 1_{\\mathcal D}\\overset{\\cong}\\longrightarrow F(\\mathbf 1_{\\mathcal C}),$$\n\nsuch that for all objects $X,Y$,\n\n$$J_{Y,X}\\circ c'_{F(X),F(Y)}=F(c_{X,Y})\\circ J_{X,Y}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] and [L2] to obtain a monoidal equivalence $F:\\mathcal C\\to\\mathcal D$ with $\\mathcal D$ strict. By [F1], the braiding $c$ transports across the full strong monoidal equivalence to a braiding $c^{\\mathrm{str}}$ on $\\mathcal D$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "F1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The transported braiding is characterized by the compatibility square $$J_{Y,X}\\circ c^{\\mathrm{str}}_{F(X),F(Y)}=F(c_{X,Y})\\circ J_{X,Y}.$$ Thus [L3] makes $F$ braided monoidal, and $\\mathcal C$ is braided-monoidally equivalent to the strict braided monoidal category $(\\mathcal D,c^{\\mathrm{str}})$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every braided monoidal category is monoidally equivalent to a strict braided one has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every braided monoidal category is monoidally equivalent to a strict braided one has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every braided monoidal category is monoidally equivalent to a strict braided one has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every braided monoidal category is monoidally equivalent to a strict braided one has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every braided monoidal category is monoidally equivalent to a strict braided one is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every braided monoidal category is monoidally equivalent to a strict braided one does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every braided monoidal category is monoidally equivalent to a strict braided one is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every braided monoidal category is monoidally equivalent to a strict braided one is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-step8-preflight-b-1",
+        "notes": "The risk is transporting the braiding across strictification. The current proof invokes the exact braided strictification result from the cited source and records the compatibility square that makes the strictification equivalence braided monoidal."
+      }
+    },
+    "thm-the-two-strand-braid-group-is-infinite-cyclic": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-braid-group-by-the-artin-presentation",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$, the **braid group** $B_n$ is the group with generators\n$\\sigma_1,\\dots,\\sigma_{n-1}$ and relations\n\n$$\\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\qquad(1\\le i\\le n-2),$$\n\n$$\\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\qquad(1\\le i,j\\le n-1,\\ |i-j|>1).$$\n\nEquivalently,\n\n$$B_n=\\langle \\sigma_1,\\dots,\\sigma_{n-1}\\mid \\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\ (1\\le i\\le n-2),\\ \\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\ (1\\le i,j\\le n-1,\\ |i-j|>1)\\rangle,$$\n\ninterpreted in the sense of [[def-group-presentation]] and\n[[def-relators-relations-and-finite-presentations]].\n\nFor $n=0$ and $n=1$, there are no generators, and $B_n$ is the trivial group\ngiven by the empty presentation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-free-groups-are-torsion-free",
+          "source_section": "Statement",
+          "quote": "Every free group is torsion-free: if $g$ is not the identity and $n\\geq 1$ is\na natural number, then $g^n$ is not the identity. Equivalently, every\nnonidentity element has infinite order in the sense of\n[[def-order-in-a-group]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "Let $\\langle X\\mid R\\rangle$ be a presentation, let $H$ be a group, and let\n$u:X\\to H$ be a function. If the evaluation of every $r\\in R$ under $u$ is\n$e_H$, then there is a unique homomorphism\n\n$$\\overline u:\\langle X\\mid R\\rangle\\longrightarrow H$$\n\nwith $\\overline u([x])=u(x)$ for every $x\\in X$. Moreover, $\\overline u$ is\nsurjective if and only if $u(X)$ generates $H$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the presentation of $B_2$ has one generator and no defining relator, so every element of $B_2$ is a power of $\\sigma_1$. Thus $B_2$ is cyclic.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With no relators present, the presented group is the free group on one generator. By [L2], that generator has infinite order, so $\\sigma_1^m\\neq1$ for every nonzero integer $m$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the cyclic group $B_2=\\langle\\sigma_1\\rangle$ is infinite, so it is infinite cyclic.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two-strand braid group is infinite cyclic has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The two-strand braid group is infinite cyclic has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The two-strand braid group is infinite cyclic has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The two-strand braid group is infinite cyclic has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The two-strand braid group is infinite cyclic is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two-strand braid group is infinite cyclic does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The two-strand braid group is infinite cyclic is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The two-strand braid group is infinite cyclic is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-the-symmetric-group-has-the-coxeter-presentation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-finite-symmetric-group-and-permutation-notation",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, so that $n=\\{0,1,\\dots,n-1\\}$ ([[def-natural-numbers]]). The\n**symmetric group on $n$ letters** is\n\n$$S_n:=\\operatorname{Sym}(n)=\\operatorname{Sym}(\\{0,1,\\dots,n-1\\}),$$\n\nthe group of all bijections of $n$ under composition ([[def-symmetric-group]]),\nwith the composition convention\n\n$$(\\sigma\\tau)(i):=(\\sigma\\circ\\tau)(i)=\\sigma(\\tau(i))\\qquad(i\\in n),$$\n\nso that in a product the right-hand factor acts first. An element of $S_n$ is\nnamed by either of the two notations below.\n\n**One-line notation.** For $\\sigma\\in S_n$, its **one-line form** is the list of\nits values in order of their arguments,\n\n$$\\sigma=[\\sigma(0),\\sigma(1),\\dots,\\sigma(n-1)].$$\n\nThis list has length $n$ and its entries are $0,1,\\dots,n-1$, each occurring\nonce, because $\\sigma$ is a bijection of $n$. Conversely, a list\n$[b_0,b_1,\\dots,b_{n-1}]$ whose entries are $0,1,\\dots,n-1$ each occurring once\nis the one-line form of exactly one element of $S_n$, namely the map sending\neach $i\\in n$ to $b_i$: that map is injective because the entries are distinct,\nand surjective because every element of $n$ occurs among them. So one-line\nnotation is a bijection from $S_n$ to the arrangements of $0,1,\\dots,n-1$ in a\nlist. For $n=0$ the one-line form of the unique element of $S_0$ is the empty\nlist.\n\n**Cycle notation.** For distinct $a_0,a_1,\\dots,a_{k-1}\\in n$ with $k\\ge2$, the\nsymbol $(a_0\\,a_1\\,\\cdots\\,a_{k-1})$ denotes the element of $S_n$ that sends\n$a_i$ to $a_{i+1}$ for each $i<k-1$, sends $a_{k-1}$ to $a_0$, and fixes every\nelement of $n$ outside $\\{a_0,\\dots,a_{k-1}\\}$ ([[def-symmetric-group]]); it is\ncalled a **$k$-cycle**, and a $2$-cycle is a **transposition**. Writing cycle\nsymbols side by side means composing them, so $(a\\,b)(c\\,d)$ is\n$(a\\,b)\\circ(c\\,d)$, and the empty juxtaposition of cycle symbols is the\nidentity $\\operatorname{id}$.\n\nUnlike one-line notation, cycle notation does not name each permutation once:\nthe symbol may be started at any of its entries, so\n\n$$(a_0\\,a_1\\,\\cdots\\,a_{k-1})=(a_1\\,\\cdots\\,a_{k-1}\\,a_0)$$\n\nand each $k$-cycle is written by exactly $k$ symbols of this shape. A cycle\nsymbol also does not record $n$, which must be supplied by the context.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n\\ge2$, [F1] is exactly the displayed presentation on the conventional labels $1,\\ldots,n$, and [L1] transports those generators to permutations of the library's underlying set $n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $n=0$ and $n=1$, there are no adjacent transpositions and $S_n$ is the trivial group, so the empty presentation applies.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The symmetric group has the Coxeter presentation has no separate empty-domain branch beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 records the n=0 trivial-group case explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 records the n=1 trivial-group case explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The symmetric group has the Coxeter presentation has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The symmetric group has the Coxeter presentation is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The symmetric group has the Coxeter presentation does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The symmetric group has the Coxeter presentation is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The symmetric group has the Coxeter presentation is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-the-braid-group-surjects-onto-the-symmetric-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-braid-group-by-the-artin-presentation",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$, the **braid group** $B_n$ is the group with generators\n$\\sigma_1,\\dots,\\sigma_{n-1}$ and relations\n\n$$\\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\qquad(1\\le i\\le n-2),$$\n\n$$\\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\qquad(1\\le i,j\\le n-1,\\ |i-j|>1).$$\n\nEquivalently,\n\n$$B_n=\\langle \\sigma_1,\\dots,\\sigma_{n-1}\\mid \\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\ (1\\le i\\le n-2),\\ \\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\ (1\\le i,j\\le n-1,\\ |i-j|>1)\\rangle,$$\n\ninterpreted in the sense of [[def-group-presentation]] and\n[[def-relators-relations-and-finite-presentations]].\n\nFor $n=0$ and $n=1$, there are no generators, and $B_n$ is the trivial group\ngiven by the empty presentation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-adjacent-transpositions-generate-the-symmetric-group",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, $S_n$ is generated by the adjacent transpositions\n$s_j=(j\\ j+1)$, $1\\le j<n$. For $n=0,1$, the empty set generates the trivial\ngroup $S_n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-the-symmetric-group-has-the-coxeter-presentation",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, the symmetric group $S_n$ has the presentation\n\n$$S_n=\\langle s_1,\\dots,s_{n-1}\\mid s_i^2=1,\\ s_is_{i+1}s_i=s_{i+1}s_is_{i+1},\\ s_is_j=s_js_i\\ (|i-j|>1)\\rangle,$$\n\nwhere, after relabelling the underlying set $n=\\{0,\\ldots,n-1\\}$ as\n$\\{1,\\ldots,n\\}$, $s_i$ corresponds to the adjacent transposition\n$(i\\ i+1)$. For\n$n=0,1$, the trivial group has the empty presentation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "Let $\\langle X\\mid R\\rangle$ be a presentation, let $H$ be a group, and let\n$u:X\\to H$ be a function. If the evaluation of every $r\\in R$ under $u$ is\n$e_H$, then there is a unique homomorphism\n\n$$\\overline u:\\langle X\\mid R\\rangle\\longrightarrow H$$\n\nwith $\\overline u([x])=u(x)$ for every $x\\in X$. Moreover, $\\overline u$ is\nsurjective if and only if $u(X)$ generates $H$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L3], the adjacent transpositions in $S_n$ satisfy the braid relations and the distant-commutativity relations from [L1]. Therefore [L4] extends the assignment $\\sigma_i\\mapsto(i\\ i+1)$ to a homomorphism $\\pi_n:B_n\\to S_n$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The image of $\\pi_n$ contains every adjacent transposition, so [L2] makes $\\pi_n$ surjective.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The braid group surjects onto the symmetric group has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The braid group surjects onto the symmetric group has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The braid group surjects onto the symmetric group has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The braid group surjects onto the symmetric group has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The braid group surjects onto the symmetric group is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The braid group surjects onto the symmetric group does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The braid group surjects onto the symmetric group is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The braid group surjects onto the symmetric group is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-the-braid-category-is-braided-but-not-symmetric": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-the-braid-category",
+          "source_section": "Definition",
+          "quote": "The **braid category** $\\mathcal B$ is the category defined as follows.\n\n- Its objects are the natural numbers $0,1,2,\\dots$.\n- For $m\\neq n$, there are no morphisms $m\\to n$.\n- For each $n$, the endomorphism group $\\operatorname{End}_{\\mathcal B}(n)$ is\n  the braid group $B_n$ from [[def-braid-group-by-the-artin-presentation]].\n\nComposition is the group multiplication in each $B_n$. The tensor product on\nobjects is addition. On morphisms, juxtaposition is the homomorphism\n$B_m\\times B_n\\to B_{m+n}$ sending the first block generators\n$\\sigma_i$ to $\\sigma_i$ and the second block generators $\\sigma_j$ to\n$\\sigma_{m+j}$. The Artin relations show directly that this is well defined,\nstrictly associative, and unital. Thus $\\mathcal B$ is a strict monoidal\ncategory ([[def-strict-monoidal-category]]).\n\nThe **standard block crossing** $\\beta_{m,n}$ moves the first $m$ strands over\nthe last $n$ strands. Isotopy of braid diagrams, equivalently the Artin braid\nrelations, gives naturality and the two block hexagons, so these crossings form\na braiding ([[def-braided-monoidal-category]]). Under this convention\n$\\beta_{1,1}=\\sigma_1\\in B_2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-two-strand-braid-group-is-infinite-cyclic",
+          "source_section": "Statement",
+          "quote": "The braid group $B_2$ is cyclic, generated by $\\sigma_1$, and $\\sigma_1$ has\ninfinite order. Hence $B_2$ is an infinite cyclic group.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], $\\mathcal B$ is a braided monoidal category. Its braiding on the generating object $1\\otimes1=2$ is the crossing braid $\\sigma_1\\in B_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], $\\sigma_1$ has infinite order, so in particular $\\sigma_1^2\\neq1_{2}$. Therefore the square of the braiding on $1\\otimes1$ is not the identity.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A symmetric braiding must square to the identity on every tensor product. Step 2.1 shows that this fails in $\\mathcal B$, so $\\mathcal B$ is braided but not symmetric.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The braid category is braided but not symmetric has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The braid category is braided but not symmetric has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The braid category is braided but not symmetric has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The braid category is braided but not symmetric has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The braid category is braided but not symmetric is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The braid category is braided but not symmetric does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The braid category is braided but not symmetric is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The braid category is braided but not symmetric is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-symmetric-coherence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-symmetric-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **symmetric monoidal category** is a braided monoidal category\n([[def-braided-monoidal-category]]) whose braiding $c$ satisfies\n\n$$c_{Y,X}\\circ c_{X,Y}=1_{X\\otimes Y}$$\n\nfor all objects $X,Y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-in-the-presence-of-the-symmetry-axiom-one-hexagon-implies-the-other",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a monoidal category equipped with a natural isomorphism\n$c_{X,Y}:X\\otimes Y\\to Y\\otimes X$ that satisfies one of the two braiding\nhexagons. If moreover\n\n$$c_{Y,X}\\circ c_{X,Y}=1_{X\\otimes Y}$$\n\nfor all $X,Y$, then the other hexagon also holds. In particular, in a\nsymmetric monoidal category either hexagon may be taken as the coherence axiom.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal C,c)$ be a braided monoidal category. Then there exists a strict\nmonoidal category $\\mathcal D$, a braiding $c^{\\mathrm{str}}$ on $\\mathcal D$,\nand a monoidal equivalence $F:\\mathcal C\\to\\mathcal D$ such that $F$ is a\nbraided monoidal functor.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-the-symmetric-group-has-the-coxeter-presentation",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, the symmetric group $S_n$ has the presentation\n\n$$S_n=\\langle s_1,\\dots,s_{n-1}\\mid s_i^2=1,\\ s_is_{i+1}s_i=s_{i+1}s_is_{i+1},\\ s_is_j=s_js_i\\ (|i-j|>1)\\rangle,$$\n\nwhere, after relabelling the underlying set $n=\\{0,\\ldots,n-1\\}$ as\n$\\{1,\\ldots,n\\}$, $s_i$ corresponds to the adjacent transposition\n$(i\\ i+1)$. For\n$n=0,1$, the trivial group has the empty presentation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-parenthesised-tensor-word",
+          "source_section": "Definition",
+          "quote": "Fix symbols $x_1,\\dots,x_n$. A **parenthesised tensor word** on these letters is\nformed recursively by:\n\n- each $x_i$ is a word;\n- the unit symbol $\\mathbf 1$ is a word;\n- if $u$ and $v$ are words, then $(u\\otimes v)$ is a word;\n\nsubject to the condition that, after deleting every $\\mathbf 1$ and every pair\nof parentheses, the letters $x_1,\\dots,x_n$ appear exactly once and in that\norder.\n\nIf $\\mathcal C$ is a monoidal category ([[def-monoidal-category]]), each such\nword determines an **evaluation functor**\n$E_u:\\mathcal C^n\\to\\mathcal C$ recursively:\n\n- $E_{x_i}$ is the $i$th projection;\n- $E_{\\mathbf 1}$ is the constant functor at the unit object;\n- $E_{(u\\otimes v)}$ is the composite of $(E_u,E_v):\\mathcal C^n\\to\\mathcal C\\times\\mathcal C$\n  with the tensor bifunctor.\n\nThese evaluation functors are the only tensor expressions regarded as defined on\nthis page before coherence is proved.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L3], choose a braided monoidal equivalence from $\\mathcal C$ to a strict braided monoidal category $\\mathcal D$. Because the braiding of $\\mathcal C$ is involutive, the transported braiding on $\\mathcal D$ is also involutive, so $\\mathcal D$ is strict symmetric.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the strict symmetric category $\\mathcal D$, every canonical map between two tensor words with the same ordered letters is built from adjacent swaps of neighboring factors. By [F1] and [L4], the resulting composite depends only on the permutation carrying the source word to the target word, not on the chosen decomposition of that permutation into adjacent transpositions.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Transport this canonical map back across the equivalence chosen in step 1.1. Faithfulness of an equivalence preserves uniqueness, so the resulting canonical map in $\\mathcal C$ depends only on the same permutation. Hence any two canonical symmetric composites with the same source, target, and underlying permutation are equal.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Symmetric coherence has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Symmetric coherence has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Symmetric coherence has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Symmetric coherence has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Symmetric coherence is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Symmetric coherence does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Symmetric coherence is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Symmetric coherence is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "The risk is whether equality depends only on the underlying permutation and not on a chosen braid word. The current theorem keeps a fixed ordered list of letters, passes to a strict symmetric model, and then uses the Coxeter relations to show the canonical composite depends only on the induced permutation."
+      }
+    },
+    "cor-unbracketed-and-unordered-tensor-strings-are-well-defined-in-a-symmetric-monoidal-category": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-symmetric-coherence",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a symmetric monoidal category. For any two parenthesised\ntensor words built from the same finite list of objects, possibly in different\norders, there is a unique canonical natural isomorphism between them determined\nonly by the induced permutation of the letters. Canonical symmetric composites\ntherefore depend only on the underlying permutation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Any two written forms of the same labelled tensor expression differ only by a choice of brackets and a permutation of the listed occurrences.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], those two parenthesised reorderings are canonically and uniquely isomorphic. Therefore suppressing both the brackets and the order does not change the resulting labelled tensor expression except by that unique canonical identification.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Unbracketed and unordered tensor strings are well defined in a symmetric monoidal category has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Unbracketed and unordered tensor strings are well defined in a symmetric monoidal category has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Unbracketed and unordered tensor strings are well defined in a symmetric monoidal category has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Unbracketed and unordered tensor strings are well defined in a symmetric monoidal category has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Unbracketed and unordered tensor strings are well defined in a symmetric monoidal category is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Unbracketed and unordered tensor strings are well defined in a symmetric monoidal category does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Unbracketed and unordered tensor strings are well defined in a symmetric monoidal category is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Unbracketed and unordered tensor strings are well defined in a symmetric monoidal category is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-braided-coherence-fails-in-the-symmetric-form": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-the-braid-category",
+          "source_section": "Definition",
+          "quote": "The **braid category** $\\mathcal B$ is the category defined as follows.\n\n- Its objects are the natural numbers $0,1,2,\\dots$.\n- For $m\\neq n$, there are no morphisms $m\\to n$.\n- For each $n$, the endomorphism group $\\operatorname{End}_{\\mathcal B}(n)$ is\n  the braid group $B_n$ from [[def-braid-group-by-the-artin-presentation]].\n\nComposition is the group multiplication in each $B_n$. The tensor product on\nobjects is addition. On morphisms, juxtaposition is the homomorphism\n$B_m\\times B_n\\to B_{m+n}$ sending the first block generators\n$\\sigma_i$ to $\\sigma_i$ and the second block generators $\\sigma_j$ to\n$\\sigma_{m+j}$. The Artin relations show directly that this is well defined,\nstrictly associative, and unital. Thus $\\mathcal B$ is a strict monoidal\ncategory ([[def-strict-monoidal-category]]).\n\nThe **standard block crossing** $\\beta_{m,n}$ moves the first $m$ strands over\nthe last $n$ strands. Isotopy of braid diagrams, equivalently the Artin braid\nrelations, gives naturality and the two block hexagons, so these crossings form\na braiding ([[def-braided-monoidal-category]]). Under this convention\n$\\beta_{1,1}=\\sigma_1\\in B_2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-two-strand-braid-group-is-infinite-cyclic",
+          "source_section": "Statement",
+          "quote": "The braid group $B_2$ is cyclic, generated by $\\sigma_1$, and $\\sigma_1$ has\ninfinite order. Hence $B_2$ is an infinite cyclic group.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take $X:=1$ in the braid category. By [L1], the canonical braiding on $X\\otimes X$ is $\\sigma_1$, so its even powers are the endomorphisms $\\sigma_1^{2m}$ of the object $2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the elements $1,\\sigma_1^2,\\sigma_1^4,\\dots$ are pairwise distinct in $B_2$. Therefore the canonical endomorphisms $1,c_{X,X}^2,c_{X,X}^4,\\dots$ are pairwise distinct in this braided monoidal category.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If every formal diagram built from associators and braidings commuted in every braided monoidal category, then the morphisms in step 2.1 would all agree. They do not, so the symmetric-form coherence slogan fails in the braided setting.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Braided coherence fails in the symmetric form has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Braided coherence fails in the symmetric form has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Braided coherence fails in the symmetric form has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Braided coherence fails in the symmetric form has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Braided coherence fails in the symmetric form is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Braided coherence fails in the symmetric form does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Braided coherence fails in the symmetric form is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Braided coherence fails in the symmetric form is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-diagram-built-from-the-associator-and-the-braiding-commutes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-braided-coherence-fails-in-the-symmetric-form",
+          "source_section": "Statement",
+          "quote": "There exists a braided monoidal category in which the canonical endomorphisms\n\n$$1,\\ c_{X,X}^2,\\ c_{X,X}^4,\\dots$$\n\nof $X\\otimes X$ are pairwise distinct. Consequently the symmetric slogan\n\"every diagram built from associators and braidings commutes\" is false for\nbraided monoidal categories.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If the displayed claim were true, then any two canonical endomorphisms of the same tensor word built from associators and braidings would agree.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The morphisms $1,c_{X,X}^2,c_{X,X}^4,\\dots$ from [L1] are all such canonical endomorphisms of $X\\otimes X$, yet [L1] says they are pairwise distinct in a specific braided monoidal category. This contradicts step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: every diagram built from the associator and the braiding commutes has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: every diagram built from the associator and the braiding commutes has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "FALSE: every diagram built from the associator and the braiding commutes has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: every diagram built from the associator and the braiding commutes has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: every diagram built from the associator and the braiding commutes is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: every diagram built from the associator and the braiding commutes does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: every diagram built from the associator and the braiding commutes is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: every diagram built from the associator and the braiding commutes is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-the-braid-category-is-the-free-strict-braided-monoidal-category-on-one-generator": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-braided-monoidal-functor",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,c)$ and $(\\mathcal D,c')$ be braided monoidal categories\n([[def-braided-monoidal-category]]). A **braided monoidal functor**\n$F:\\mathcal C\\to\\mathcal D$ is a strong monoidal functor\n([[def-lax-strong-and-strict-monoidal-functor]]) with structure isomorphisms\n\n$$J_{X,Y}:F(X)\\otimes F(Y)\\overset{\\cong}\\longrightarrow F(X\\otimes Y),\\qquad J_0:\\mathbf 1_{\\mathcal D}\\overset{\\cong}\\longrightarrow F(\\mathbf 1_{\\mathcal C}),$$\n\nsuch that for all objects $X,Y$,\n\n$$J_{Y,X}\\circ c'_{F(X),F(Y)}=F(c_{X,Y})\\circ J_{X,Y}.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-the-braid-category",
+          "source_section": "Definition",
+          "quote": "The **braid category** $\\mathcal B$ is the category defined as follows.\n\n- Its objects are the natural numbers $0,1,2,\\dots$.\n- For $m\\neq n$, there are no morphisms $m\\to n$.\n- For each $n$, the endomorphism group $\\operatorname{End}_{\\mathcal B}(n)$ is\n  the braid group $B_n$ from [[def-braid-group-by-the-artin-presentation]].\n\nComposition is the group multiplication in each $B_n$. The tensor product on\nobjects is addition. On morphisms, juxtaposition is the homomorphism\n$B_m\\times B_n\\to B_{m+n}$ sending the first block generators\n$\\sigma_i$ to $\\sigma_i$ and the second block generators $\\sigma_j$ to\n$\\sigma_{m+j}$. The Artin relations show directly that this is well defined,\nstrictly associative, and unital. Thus $\\mathcal B$ is a strict monoidal\ncategory ([[def-strict-monoidal-category]]).\n\nThe **standard block crossing** $\\beta_{m,n}$ moves the first $m$ strands over\nthe last $n$ strands. Isotopy of braid diagrams, equivalently the Artin braid\nrelations, gives naturality and the two block hexagons, so these crossings form\na braiding ([[def-braided-monoidal-category]]). Under this convention\n$\\beta_{1,1}=\\sigma_1\\in B_2$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-in-a-strict-braided-monoidal-category-the-braiding-satisfies-the-yang-baxter-equation",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a strict braided monoidal category. Then for all objects\n$X,Y,Z$,\n\n$$(c_{Y,Z}\\otimes1_X)\\circ(1_Y\\otimes c_{X,Z})\\circ(c_{X,Y}\\otimes1_Z) =(1_Z\\otimes c_{X,Y})\\circ(c_{X,Z}\\otimes1_Y)\\circ(1_X\\otimes c_{Y,Z}).$$\n\nIn particular, when $X=Y=Z$, both sides are endomorphisms of $X\\otimes X\\otimes\nX$, and the relation becomes\n\n$$(c\\otimes1)(1\\otimes c)(c\\otimes1)=(1\\otimes c)(c\\otimes1)(1\\otimes c).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "Let $\\langle X\\mid R\\rangle$ be a presentation, let $H$ be a group, and let\n$u:X\\to H$ be a function. If the evaluation of every $r\\in R$ under $u$ is\n$e_H$, then there is a unique homomorphism\n\n$$\\overline u:\\langle X\\mid R\\rangle\\longrightarrow H$$\n\nwith $\\overline u([x])=u(x)$ for every $x\\in X$. Moreover, $\\overline u$ is\nsurjective if and only if $u(X)$ generates $H$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $F_X(n):=X^{\\otimes n}$ on objects, with $F_X(0):=\\mathbf 1$. For each generator $\\sigma_i\\in B_n$, define $F_X(\\sigma_i)$ to be the morphism\n$$1_X^{\\otimes(i-1)}\\otimes c_{X,X}\\otimes1_X^{\\otimes(n-i-1)}:X^{\\otimes n}\\to X^{\\otimes n},$$\nwhere the braiding acts only on the $i$th and $(i+1)$st tensor factors.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L3], the neighboring generators from step 1.1 satisfy the braid relation. Local braidings on disjoint tensor factors commute because in a strict monoidal category they act on separate coordinates. Therefore the Artin relations of $B_n$ hold, and [L4] extends the assignment of step 1.1 uniquely to a homomorphism $B_n\\to\\operatorname{Aut}(X^{\\otimes n})$ for every $n$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The family from step 2.1 defines a functor $\\mathcal B\\to\\mathcal C$ because morphisms exist only between equal objects in $\\mathcal B$, and group multiplication in each $B_n$ is respected by the constructed homomorphism. By construction $F_X(m+n)=F_X(m)\\otimes F_X(n)$ on objects, the tensor of braids is sent to juxtaposition of local braidings, and the standard braiding $\\beta_{m,n}$ of $\\mathcal B$ is sent to the corresponding block braiding in $\\mathcal C$. Hence $F_X$ is strict braided monoidal.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Any strict braided monoidal functor $\\mathcal B\\to\\mathcal C$ sending $1$ to $X$ must send $n=1^{\\otimes n}$ to $X^{\\otimes n}$ and each generator $\\sigma_i$ to the local braiding on the $i$th and $(i+1)$st factors. Since the $\\sigma_i$ generate every $B_n$, such a functor must equal $F_X$. Therefore $F_X$ is unique.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The braid category is the free strict braided monoidal category on one generator has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The braid category is the free strict braided monoidal category on one generator has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The braid category is the free strict braided monoidal category on one generator has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The braid category is the free strict braided monoidal category on one generator has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The braid category is the free strict braided monoidal category on one generator is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The braid category is the free strict braided monoidal category on one generator does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The braid category is the free strict braided monoidal category on one generator is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The braid category is the free strict braided monoidal category on one generator is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "The risk is extending the generator assignment to each braid group and proving uniqueness of the functor. The current proof checks the Artin relations on local braidings, uses von Dyck to obtain the B_n-actions, and then shows every strict braided monoidal functor is forced on objects and braid generators."
+      }
+    },
+    "thm-braided-coherence-via-underlying-braids": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal C,c)$ be a braided monoidal category. Then there exists a strict\nmonoidal category $\\mathcal D$, a braiding $c^{\\mathrm{str}}$ on $\\mathcal D$,\nand a monoidal equivalence $F:\\mathcal C\\to\\mathcal D$ such that $F$ is a\nbraided monoidal functor.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-braid-category-is-the-free-strict-braided-monoidal-category-on-one-generator",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a strict braided monoidal category and let $X$ be an\nobject of $\\mathcal C$. Then there is a unique strict braided monoidal functor\n\n$$F_X:\\mathcal B\\longrightarrow\\mathcal C$$\n\nfrom the braid category $\\mathcal B$ such that $F_X(1)=X$. Thus $\\mathcal B$\nis the free strict braided monoidal category on one generator.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-braided-monoidal-functor",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,c)$ and $(\\mathcal D,c')$ be braided monoidal categories\n([[def-braided-monoidal-category]]). A **braided monoidal functor**\n$F:\\mathcal C\\to\\mathcal D$ is a strong monoidal functor\n([[def-lax-strong-and-strict-monoidal-functor]]) with structure isomorphisms\n\n$$J_{X,Y}:F(X)\\otimes F(Y)\\overset{\\cong}\\longrightarrow F(X\\otimes Y),\\qquad J_0:\\mathbf 1_{\\mathcal D}\\overset{\\cong}\\longrightarrow F(\\mathbf 1_{\\mathcal C}),$$\n\nsuch that for all objects $X,Y$,\n\n$$J_{Y,X}\\circ c'_{F(X),F(Y)}=F(c_{X,Y})\\circ J_{X,Y}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], replace the given braided monoidal category by a braided-monoidally equivalent strict one. Equality may be checked there because an equivalence is faithful on morphisms.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the strict model, every formal canonical endomorphism of $X^{\\otimes n}$ is built only from the local braidings of adjacent copies of $X$, together with identities, tensoring, and composition. Reading those local crossings before interpretation gives a braid word and hence an element of $B_n$. By [L2], interpreting the formal composite is exactly applying the unique strict braided monoidal functor from the braid category that sends the generating object to $X$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the two formal canonical composites have the same underlying braid, then step 2.1 identifies their interpretations as the images of the same morphism in the free braid category under the same braided functor. Hence they are equal in the strict model, and therefore equal in the original braided category by step 1.1 and [L3].",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Braided coherence is controlled by underlying braids has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Braided coherence is controlled by underlying braids has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Braided coherence is controlled by underlying braids has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Braided coherence is controlled by underlying braids has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Braided coherence is controlled by underlying braids is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Braided coherence is controlled by underlying braids does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Braided coherence is controlled by underlying braids is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Braided coherence is controlled by underlying braids is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-two-canonical-braided-composites-agree-exactly-when-their-underlying-braids-agree": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-braided-coherence-via-underlying-braids",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a braided monoidal category and let $X$ be an object of\n$\\mathcal C$. Each **formal canonical composite** on $X^{\\otimes n}$ built\nfrom associators, unitors, braidings, and their inverses has an underlying\nbraid in $B_n$. If two such formal composites have equal underlying braids,\nthen their interpreted morphisms in $\\mathcal C$ are equal. Different formal\nbraids may, of course, have the same interpretation in a particular braided\ncategory.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-the-braid-category",
+          "source_section": "Definition",
+          "quote": "The **braid category** $\\mathcal B$ is the category defined as follows.\n\n- Its objects are the natural numbers $0,1,2,\\dots$.\n- For $m\\neq n$, there are no morphisms $m\\to n$.\n- For each $n$, the endomorphism group $\\operatorname{End}_{\\mathcal B}(n)$ is\n  the braid group $B_n$ from [[def-braid-group-by-the-artin-presentation]].\n\nComposition is the group multiplication in each $B_n$. The tensor product on\nobjects is addition. On morphisms, juxtaposition is the homomorphism\n$B_m\\times B_n\\to B_{m+n}$ sending the first block generators\n$\\sigma_i$ to $\\sigma_i$ and the second block generators $\\sigma_j$ to\n$\\sigma_{m+j}$. The Artin relations show directly that this is well defined,\nstrictly associative, and unital. Thus $\\mathcal B$ is a strict monoidal\ncategory ([[def-strict-monoidal-category]]).\n\nThe **standard block crossing** $\\beta_{m,n}$ moves the first $m$ strands over\nthe last $n$ strands. Isotopy of braid diagrams, equivalently the Artin braid\nrelations, gives naturality and the two block hexagons, so these crossings form\na braiding ([[def-braided-monoidal-category]]). Under this convention\n$\\beta_{1,1}=\\sigma_1\\in B_2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If the two underlying braids are equal, then [L1] says the two canonical composites agree in every braided monoidal category.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, suppose the two canonical composites agree in every braided monoidal category. Apply this to the braid category from [L2]. There the canonical composites are literally the corresponding braids, so equality of the composites forces equality of the underlying braids.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the two universal statements are equivalent.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Two canonical braided composites agree exactly when their underlying braids agree has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Two canonical braided composites agree exactly when their underlying braids agree has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Two canonical braided composites agree exactly when their underlying braids agree has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Two canonical braided composites agree exactly when their underlying braids agree has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Two canonical braided composites agree exactly when their underlying braids agree is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Two canonical braided composites agree exactly when their underlying braids agree does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the forward implication from equal braids to universal equality of canonical composites."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the reverse implication by evaluating the composites in the braid category."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-braided-monoidal-category-is-equivalent-to-a-strict-commutative-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cex-the-braid-category-is-braided-but-not-symmetric",
+          "source_section": "Statement refuted",
+          "quote": "Every braided monoidal category is symmetric.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal C,c)$ be a braided monoidal category. Then there exists a strict\nmonoidal category $\\mathcal D$, a braiding $c^{\\mathrm{str}}$ on $\\mathcal D$,\nand a monoidal equivalence $F:\\mathcal C\\to\\mathcal D$ such that $F$ is a\nbraided monoidal functor.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply the claim to the braid category from [L1]. Then there would exist a braided monoidal equivalence from $\\mathcal B$ to a strict braided category $\\mathcal D$ whose braiding is the identity.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A strict braided category with identity braiding is symmetric, because its braiding certainly squares to the identity. Transporting that symmetric structure back across the supposed braided equivalence would make $\\mathcal B$ symmetric as well.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 contradicts [L1], which says the braid category is not symmetric. Therefore the claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: every braided monoidal category is equivalent to a strict commutative one has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: every braided monoidal category is equivalent to a strict commutative one has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "FALSE: every braided monoidal category is equivalent to a strict commutative one has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: every braided monoidal category is equivalent to a strict commutative one has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: every braided monoidal category is equivalent to a strict commutative one is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: every braided monoidal category is equivalent to a strict commutative one does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: every braided monoidal category is equivalent to a strict commutative one is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: every braided monoidal category is equivalent to a strict commutative one is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-braided-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **braided monoidal category** is a monoidal category together with a chosen\nbraiding in the sense of [[def-braiding]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-monoid-object-and-comonoid-object-in-a-monoidal-category",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **monoid object** in $\\mathcal C$ is an object $M$ together with morphisms\n\n$$\\mu:M\\otimes M\\longrightarrow M,\\qquad \\eta:\\mathbf 1\\longrightarrow M,$$\n\nsuch that\n\n$$\\mu\\circ(\\mu\\otimes1_M)=\\mu\\circ(1_M\\otimes\\mu)\\circ\\alpha_{M,M,M},$$\n\n$$\\mu\\circ(\\eta\\otimes1_M)=\\lambda_M,\\qquad \\mu\\circ(1_M\\otimes\\eta)=\\rho_M.$$\n\nA **comonoid object** in $\\mathcal C$ is an object $C$ together with morphisms\n\n$$\\Delta:C\\longrightarrow C\\otimes C,\\qquad \\varepsilon:C\\longrightarrow\\mathbf 1,$$\n\nsuch that\n\n$$(\\alpha_{C,C,C})\\circ(\\Delta\\otimes1_C)\\circ\\Delta=(1_C\\otimes\\Delta)\\circ\\Delta,$$\n\n$$(\\varepsilon\\otimes1_C)\\circ\\Delta=\\lambda_C^{-1},\\qquad (1_C\\otimes\\varepsilon)\\circ\\Delta=\\rho_C^{-1}.$$\n\nThe associator and unitors are written explicitly because this page does not\nyet identify different bracketings automatically.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-the-monoid-object-axioms-may-be-written-without-associators",
+          "source_section": "Statement",
+          "quote": "Let $(M,\\mu,\\eta)$ be a monoid object in a monoidal category. Then, after the\ncoherence identification of unbracketed tensor strings, its axioms may be\nwritten as\n$$\\mu\\circ(\\mu\\otimes1_M)=\\mu\\circ(1_M\\otimes\\mu),$$\n$$\\mu\\circ(\\eta\\otimes1_M)=1_M,\\qquad \\mu\\circ(1_M\\otimes\\eta)=1_M,$$\nwithout displaying associators or unitors.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Using [L3], define on $A\\otimes B$ the multiplication and unit displayed in the statement. The formula is typed because $1_A\\otimes c_{B,A}\\otimes1_B$ rewrites $A\\otimes B\\otimes A\\otimes B$ as $A\\otimes A\\otimes B\\otimes B$, after which $\\mu_A\\otimes\\mu_B$ lands in $A\\otimes B$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The associativity and unit axioms for this multiplication are exactly the braided interchange identities proved in [F1]: one repeatedly moves the middle $B$-tensorand past the middle $A$-tensorand by the braiding, and the two possible threefold rearrangements agree because the hexagons express the Yang-Baxter compatibility needed for those moves. Hence $A\\otimes B$ is again a monoid object.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $f:A\\to A'$ and $g:B\\to B'$ are monoid morphisms, then $f\\otimes g$ preserves the units and multiplications because tensoring respects composition and the braiding is natural. Thus tensoring extends to morphisms. The ambient associator and unit object of $\\mathcal C$ are monoid morphisms by the same coherence computation recorded in [F1], so they supply the associator and unit data for $\\operatorname{Mon}(\\mathcal C)$. Therefore $\\operatorname{Mon}(\\mathcal C)$ is monoidal.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a braided monoidal category form a monoidal category has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a braided monoidal category form a monoidal category has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a braided monoidal category form a monoidal category has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a braided monoidal category form a monoidal category has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a braided monoidal category form a monoidal category is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a braided monoidal category form a monoidal category does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a braided monoidal category form a monoidal category is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a braided monoidal category form a monoidal category is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-monoid-objects-in-a-symmetric-monoidal-category-form-a-symmetric-monoidal-category": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-symmetric-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **symmetric monoidal category** is a braided monoidal category\n([[def-braided-monoidal-category]]) whose braiding $c$ satisfies\n\n$$c_{Y,X}\\circ c_{X,Y}=1_{X\\otimes Y}$$\n\nfor all objects $X,Y$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,c)$ be a braided monoidal category. Then\nthe category $\\operatorname{Mon}(\\mathcal C)$ of monoid objects in\n$\\mathcal C$ is monoidal. For monoid objects $(A,\\mu_A,\\eta_A)$ and\n$(B,\\mu_B,\\eta_B)$, the tensor product monoid has underlying object $A\\otimes\nB$, unit $\\eta_A\\otimes\\eta_B$, and multiplication\n\n$$\\mu_{A\\otimes B}=(\\mu_A\\otimes\\mu_B)\\circ(1_A\\otimes c_{B,A}\\otimes1_B),$$\n\nwith brackets suppressed by coherence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L2], $\\operatorname{Mon}(\\mathcal C)$ is already a monoidal category.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The ambient symmetry $c_{A,B}:A\\otimes B\\to B\\otimes A$ is a monoid morphism between the tensor-product monoids because the symmetry is involutive and natural, so it commutes with the braided interchange formula defining multiplication. Its square is the identity because it already is in $\\mathcal C$. Therefore these maps provide a symmetric braiding on $\\operatorname{Mon}(\\mathcal C)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a symmetric monoidal category form a symmetric monoidal category has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a symmetric monoidal category form a symmetric monoidal category has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a symmetric monoidal category form a symmetric monoidal category has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a symmetric monoidal category form a symmetric monoidal category has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a symmetric monoidal category form a symmetric monoidal category is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a symmetric monoidal category form a symmetric monoidal category does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a symmetric monoidal category form a symmetric monoidal category is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Monoid objects in a symmetric monoidal category form a symmetric monoidal category is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-the-swap-braiding-on-sets": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-the-cartesian-swap-braiding-is-a-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a category with finite products, regarded as a monoidal\ncategory under cartesian product. Then the swap maps\n\n$$\\tau_{X,Y}:X\\times Y\\longrightarrow Y\\times X,\\qquad \\tau_{X,Y}(x,y)=(y,x),$$\n\nform a braiding, and this braiding is symmetric.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The category $\\mathbf{Set}$ has finite products, namely cartesian products of sets.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore [L1] applies with $\\mathcal C=\\mathbf{Set}$, and the resulting braiding is exactly the swap map $(x,y)\\mapsto(y,x)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The swap map on sets is the cartesian braiding has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The swap map on sets is the cartesian braiding has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The swap map on sets is the cartesian braiding has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The swap map on sets is the cartesian braiding has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The swap map on sets is the cartesian braiding is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The swap map on sets is the cartesian braiding does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The swap map on sets is the cartesian braiding is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The swap map on sets is the cartesian braiding is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-the-braid-group-on-three-strands": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-braid-group-by-the-artin-presentation",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$, the **braid group** $B_n$ is the group with generators\n$\\sigma_1,\\dots,\\sigma_{n-1}$ and relations\n\n$$\\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\qquad(1\\le i\\le n-2),$$\n\n$$\\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\qquad(1\\le i,j\\le n-1,\\ |i-j|>1).$$\n\nEquivalently,\n\n$$B_n=\\langle \\sigma_1,\\dots,\\sigma_{n-1}\\mid \\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\ (1\\le i\\le n-2),\\ \\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\ (1\\le i,j\\le n-1,\\ |i-j|>1)\\rangle,$$\n\ninterpreted in the sense of [[def-group-presentation]] and\n[[def-relators-relations-and-finite-presentations]].\n\nFor $n=0$ and $n=1$, there are no generators, and $B_n$ is the trivial group\ngiven by the empty presentation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-braid-group-surjects-onto-the-symmetric-group",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge2$, the assignment $\\sigma_i\\mapsto(i\\ i+1)$ extends to a\nsurjective homomorphism\n\n$$\\pi_n:B_n\\longrightarrow S_n.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Specializing [L1] to $n=3$ leaves two generators and only one braid relation, because there is no pair $i,j$ with $|i-j|>1$ among $\\{1,2\\}$. This gives the displayed presentation of $B_3$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Specializing [L2] to $n=3$ gives the quotient map $B_3\\to S_3$ with $\\sigma_1\\mapsto(1\\,2)$ and $\\sigma_2\\mapsto(2\\,3)$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The braid group on three strands and its quotient to S_3 has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The braid group on three strands and its quotient to S_3 has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The braid group on three strands and its quotient to S_3 has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The braid group on three strands and its quotient to S_3 has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The braid group on three strands and its quotient to S_3 is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The braid group on three strands and its quotient to S_3 does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The braid group on three strands and its quotient to S_3 is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The braid group on three strands and its quotient to S_3 is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "The risk is the n=3 specialization and the quotient map to S_3. The current example specializes the Artin presentation to the unique braid relation on sigma_1 and sigma_2 and then applies the repaired surjection theorem to obtain the displayed quotient."
+      }
+    },
+    "ex-the-hexagon-checked-for-cartesian-products": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-the-cartesian-swap-braiding-is-a-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a category with finite products, regarded as a monoidal\ncategory under cartesian product. Then the swap maps\n\n$$\\tau_{X,Y}:X\\times Y\\longrightarrow Y\\times X,\\qquad \\tau_{X,Y}(x,y)=(y,x),$$\n\nform a braiding, and this braiding is symmetric.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write the source of the first hexagon as $X\\times(Y\\times Z)$ and evaluate the left-hand route on $(x,y,z)$. The inner swap sends $(x,(y,z))$ to $((y,z),x)$ after the evident rebracketing.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Evaluate the right-hand route: first swap $x$ past $y$, then swap $x$ past $z$. The result is again $(y,z,x)$ after the same rebracketing identifications.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since the two routes agree on every triple $(x,y,z)$, the first hexagon commutes in this cartesian case. The second hexagon is checked by the same coordinate calculation with the factors regrouped as $((x,y),z)$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hexagon checked for cartesian products has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hexagon checked for cartesian products has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The hexagon checked for cartesian products has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hexagon checked for cartesian products has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The hexagon checked for cartesian products is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The hexagon checked for cartesian products does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The hexagon checked for cartesian products is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The hexagon checked for cartesian products is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-the-sign-braiding-on-supervector-spaces": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-symmetric-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **symmetric monoidal category** is a braided monoidal category\n([[def-braided-monoidal-category]]) whose braiding $c$ satisfies\n\n$$c_{Y,X}\\circ c_{X,Y}=1_{X\\otimes Y}$$\n\nfor all objects $X,Y$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed map is natural and invertible: applying it twice multiplies a pure tensor by $(-1)^{|v||w|}(-1)^{|w||v|}=(-1)^{2|v||w|}=1$, so $c_{W,V}\\circ c_{V,W}=1_{V\\otimes W}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a triple tensor $u\\otimes v\\otimes w$, each route around a braiding hexagon contributes the sign $(-1)^{|u||v|+|u||w|}=(-1)^{|u|(|v|+|w|)}$, because moving $u$ past $v\\otimes w$ is the same as moving it past $v$ and then past $w$. Thus both hexagons commute.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L1], these two checks show that $\\mathbf{SVect}$ carries a symmetric braiding, namely the sign braiding.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Supervector spaces with the sign braiding has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Supervector spaces with the sign braiding has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Supervector spaces with the sign braiding has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Supervector spaces with the sign braiding has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Supervector spaces with the sign braiding is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Supervector spaces with the sign braiding does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Supervector spaces with the sign braiding is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Supervector spaces with the sign braiding is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-the-two-strand-braiding-in-the-braid-category-has-infinite-order": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-the-braid-category",
+          "source_section": "Definition",
+          "quote": "The **braid category** $\\mathcal B$ is the category defined as follows.\n\n- Its objects are the natural numbers $0,1,2,\\dots$.\n- For $m\\neq n$, there are no morphisms $m\\to n$.\n- For each $n$, the endomorphism group $\\operatorname{End}_{\\mathcal B}(n)$ is\n  the braid group $B_n$ from [[def-braid-group-by-the-artin-presentation]].\n\nComposition is the group multiplication in each $B_n$. The tensor product on\nobjects is addition. On morphisms, juxtaposition is the homomorphism\n$B_m\\times B_n\\to B_{m+n}$ sending the first block generators\n$\\sigma_i$ to $\\sigma_i$ and the second block generators $\\sigma_j$ to\n$\\sigma_{m+j}$. The Artin relations show directly that this is well defined,\nstrictly associative, and unital. Thus $\\mathcal B$ is a strict monoidal\ncategory ([[def-strict-monoidal-category]]).\n\nThe **standard block crossing** $\\beta_{m,n}$ moves the first $m$ strands over\nthe last $n$ strands. Isotopy of braid diagrams, equivalently the Artin braid\nrelations, gives naturality and the two block hexagons, so these crossings form\na braiding ([[def-braided-monoidal-category]]). Under this convention\n$\\beta_{1,1}=\\sigma_1\\in B_2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-two-strand-braid-group-is-infinite-cyclic",
+          "source_section": "Statement",
+          "quote": "The braid group $B_2$ is cyclic, generated by $\\sigma_1$, and $\\sigma_1$ has\ninfinite order. Hence $B_2$ is an infinite cyclic group.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the braiding on $2$ is the element $\\sigma_1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], all nonzero powers of $\\sigma_1$ are distinct from the identity. Hence the braiding on $2$ has infinite order.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two-strand braiding in the braid category has infinite order has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The two-strand braiding in the braid category has infinite order has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The two-strand braiding in the braid category has infinite order has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The two-strand braiding in the braid category has infinite order has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The two-strand braiding in the braid category has infinite order is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two-strand braiding in the braid category has infinite order does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The two-strand braiding in the braid category has infinite order is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The two-strand braiding in the braid category has infinite order is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-two-canonical-maps-with-different-underlying-braids": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-two-canonical-braided-composites-agree-exactly-when-their-underlying-braids-agree",
+          "source_section": "Statement",
+          "quote": "For a fixed object $X$ and a fixed tensor power $X^{\\otimes n}$, two canonical\nbraided endomorphisms of $X^{\\otimes n}$ agree in every braided monoidal\ncategory if and only if their underlying braids are equal in $B_n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-the-braid-category",
+          "source_section": "Definition",
+          "quote": "The **braid category** $\\mathcal B$ is the category defined as follows.\n\n- Its objects are the natural numbers $0,1,2,\\dots$.\n- For $m\\neq n$, there are no morphisms $m\\to n$.\n- For each $n$, the endomorphism group $\\operatorname{End}_{\\mathcal B}(n)$ is\n  the braid group $B_n$ from [[def-braid-group-by-the-artin-presentation]].\n\nComposition is the group multiplication in each $B_n$. The tensor product on\nobjects is addition. On morphisms, juxtaposition is the homomorphism\n$B_m\\times B_n\\to B_{m+n}$ sending the first block generators\n$\\sigma_i$ to $\\sigma_i$ and the second block generators $\\sigma_j$ to\n$\\sigma_{m+j}$. The Artin relations show directly that this is well defined,\nstrictly associative, and unital. Thus $\\mathcal B$ is a strict monoidal\ncategory ([[def-strict-monoidal-category]]).\n\nThe **standard block crossing** $\\beta_{m,n}$ moves the first $m$ strands over\nthe last $n$ strands. Isotopy of braid diagrams, equivalently the Artin braid\nrelations, gives naturality and the two block hexagons, so these crossings form\na braiding ([[def-braided-monoidal-category]]). Under this convention\n$\\beta_{1,1}=\\sigma_1\\in B_2$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two displayed composites have underlying braids $\\sigma_1\\sigma_2$ and $\\sigma_2\\sigma_1$ in $B_3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "These braids are not equal: their images in $S_3$ are $(1\\,2\\,3)$ and $(1\\,3\\,2)$, which are distinct permutations.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore [L1] implies that the two canonical composites do not agree. In particular, they are distinct endomorphisms of the object $3$ in the braid category from [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Two canonical maps with different underlying braids do not agree has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Two canonical maps with different underlying braids do not agree has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Two canonical maps with different underlying braids do not agree has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Two canonical maps with different underlying braids do not agree has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Two canonical maps with different underlying braids do not agree is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Two canonical maps with different underlying braids do not agree does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Two canonical maps with different underlying braids do not agree is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Two canonical maps with different underlying braids do not agree is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-commutative-monoid-objects-in-sets-are-ordinary-commutative-monoids": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-monoid-objects-in-a-cartesian-monoidal-category-are-monoids-in-the-ordinary-sense",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ have finite products and let $M$ be an object of $\\mathcal C$.\nWith the cartesian monoidal structure from\n[[thm-a-category-with-finite-products-is-monoidal]], a monoid object structure\non $M$ is exactly a multiplication morphism\n$\\mu:M\\times M\\to M$ and a unit morphism $e:1\\to M$ satisfying the ordinary\nassociativity and unit equations after the canonical product rebracketings are\ninserted. In particular, in $\\mathbf{Set}$ these are exactly ordinary monoids in\nthe sense of [[def-semigroup-and-monoid]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-monoid-objects-in-a-symmetric-monoidal-category-form-a-symmetric-monoidal-category",
+          "source_section": "Statement",
+          "quote": "If $\\mathcal C$ is a symmetric monoidal category, then\n$\\operatorname{Mon}(\\mathcal C)$ is symmetric monoidal under the tensor product\nof [[thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], a monoid object in $(\\mathbf{Set},\\times)$ is a set $M$ with a multiplication map $m:M\\times M\\to M$ and a unit element satisfying the usual associative and unital equations.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The symmetry on $\\mathbf{Set}$ is the swap map $(a,b)\\mapsto(b,a)$, so the categorical commutativity condition says $m(a,b)=m(b,a)$ for all $a,b\\in M$. By [L2], that is exactly the ordinary commutativity law.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Commutative monoid objects in sets are ordinary commutative monoids has no empty-domain or empty-family branch distinct from the proof written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Commutative monoid objects in sets are ordinary commutative monoids has no free numeric parameter for which the value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Commutative monoid objects in sets are ordinary commutative monoids has no distinct singleton or value-1 branch needing treatment separate from the written argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Commutative monoid objects in sets are ordinary commutative monoids has no additional collapsed or exceptional configuration beyond the hypotheses already handled in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Commutative monoid objects in sets are ordinary commutative monoids is not an interval, exact-sequence, or endpoint-sensitive statement requiring a separate endpoint discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Commutative monoid objects in sets are ordinary commutative monoids does not rely on an unstated arbitrary choice from a merely nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Commutative monoid objects in sets are ordinary commutative monoids is not stated as a biconditional, so there is no separate forward-direction proof obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Commutative monoid objects in sets are ordinary commutative monoids is not stated as a biconditional, so there is no separate reverse-direction proof obligation."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

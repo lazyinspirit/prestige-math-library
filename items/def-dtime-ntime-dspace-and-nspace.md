@@ -2,7 +2,7 @@
 id: def-dtime-ntime-dspace-and-nspace
 kind: definition
 title: "The classes DTIME, NTIME, DSPACE, and NSPACE"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-asymptotic-resource-comparison, def-time-and-space-constructible-function, def-multitape-and-nondeterministic-machines, def-nondeterministic-accepting-computation]
 justified_by: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

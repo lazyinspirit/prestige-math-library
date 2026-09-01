@@ -1,0 +1,2711 @@
+{
+ "version": 1,
+ "level": "frontier-28",
+ "note": "Step-5 authoring contract for frontier-28 batch 3 on Tuesday, September 1, 2026.",
+ "scope": [
+  "thm-universal-property-of-an-inverse-limit-of-modules",
+  "thm-inverse-limits-are-left-exact",
+  "thm-exactness-of-inverse-limits-under-mittag-leffler",
+  "thm-kernel-and-universal-property-of-adic-completion",
+  "prop-units-in-an-adically-complete-ring",
+  "thm-completion-is-exact-on-finite-modules",
+  "thm-completion-as-extension-of-scalars",
+  "cor-completion-commutes-with-finite-quotients-and-submodules",
+  "thm-flatness-of-noetherian-completion",
+  "thm-faithful-flatness-of-jacobson-adic-completion",
+  "thm-noetherianity-of-adic-completion",
+  "thm-completion-of-a-noetherian-local-ring",
+  "thm-finite-modules-over-complete-noetherian-rings-are-complete",
+  "thm-complete-nakayama-lemma",
+  "thm-completion-preserves-dimension-and-hilbert-samuel-data",
+  "ex-p-adic-integers-as-an-inverse-limit",
+  "ex-adic-completion-of-the-integers",
+  "ex-equivalent-adic-filtrations",
+  "ex-completion-not-exact-without-finiteness",
+  "ex-completion-of-a-domain-not-a-domain",
+  "ex-iterated-adic-completions",
+  "ex-semilocal-adic-completion"
+ ],
+ "contracts": {
+  "thm-universal-property-of-an-inverse-limit-of-modules": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "If $f \\colon N \\to \\varprojlim M_n$ is $R$-linear, define $$f_n := \\pi_n \\circ f \\colon N \\to M_n.$$ For each $x \\in N$, the element $f(x)$ lies in the compatible submodule from [L1], so its coordinates satisfy $\\varphi_n(f_n(x))=f_{n-1}(x)$ for every $n \\ge 2$. Thus the family $(f_n)$ is compatible.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Conversely, let $(f_n)$ be a compatible family and define $$f(x) := (f_n(x))_{n \\ge 1} \\in \\prod M_n.$$ Compatibility says $\\varphi_n(f_n(x))=f_{n-1}(x)$ for every $n \\ge 2$, so $f(x)$ actually lies in $\\varprojlim M_n$. Since products and coordinate maps are $R$-linear, $f$ is $R$-linear.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The two constructions are inverse to each other: starting from $f$ and then taking coordinates recovers each $f_n$, while starting from $(f_n)$ and then forming $f$ gives the unique map whose $n$th coordinate is $f_n$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Therefore maps $N \\to \\varprojlim M_n$ are in bijection with compatible families $(f_n)$, which is exactly the terminal-cone universal property.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "reason": "The statement Universal property of an inverse limit of modules is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item.",
+     "evidence": "Statement and steps 1.1-1.2 concern one fixed inverse system indexed by the natural numbers, so the word family does not introduce a separate empty-system branch."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Universal property of an inverse limit of modules does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Universal property of an inverse limit of modules does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Universal property of an inverse limit of modules has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Universal property of an inverse limit of modules has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Universal property of an inverse limit of modules does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "In Universal property of an inverse limit of modules, step 1.1 maps a cone into the inverse limit, giving the forward half of the equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "In Universal property of an inverse limit of modules, step 1.2 constructs the inverse-limit map from a compatible family, giving the reverse half of the equivalence."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-inverse-system-and-inverse-limit-of-modules",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring.\n\nAn **inverse system of $R$-modules indexed by** $\\mathbb{N}_{\\ge 1}$ is a\nsequence of $R$-modules\n$$M_1 \\xleftarrow{\\varphi_2} M_2 \\xleftarrow{\\varphi_3} M_3 \\xleftarrow{\\varphi_4} \\cdots$$\ntogether with $R$-linear transition maps and their composites\n$$\\varphi_{n,m} := \\varphi_{m+1} \\circ \\cdots \\circ \\varphi_n \\colon M_n \\to M_m \\qquad (n \\ge m),$$\nand $\\varphi_{m,m} := \\operatorname{id}_{M_m}$.\n\nIts **inverse limit** is the submodule\n$$\\varprojlim M_n := \\left\\{(x_n)_{n \\ge 1} \\in \\prod_{n \\ge 1} M_n : \\varphi_n(x_n)=x_{n-1}\\text{ for every }n \\ge 2\\right\\}.$$\n\nThe coordinate maps\n$$\\pi_n \\colon \\varprojlim M_n \\to M_n, \\qquad (x_m)_m \\mapsto x_n,$$\nare called the **limit projections**.",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "codex",
+    "notes": "Reviewed the on-disk proof for Universal property of an inverse limit of modules on 2026-09-01 and aligned the contract to the final precheck-clean step structure."
+   }
+  },
+  "thm-inverse-limits-are-left-exact": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "For each $n$, let $K_n:=\\ker(f_n)$. Compatibility of the squares $$\\psi_n \\circ f_n = f_{n-1} \\circ \\varphi_n$$ shows that $\\varphi_n(K_n)\\subseteq K_{n-1}$, so the kernels form an inverse system.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "An element $(x_n)\\in\\varprojlim M_n$ lies in the kernel of $\\varprojlim M_n \\to \\varprojlim N_n$ exactly when $f_n(x_n)=0$ for every $n$. By [L2], that is equivalent to $x_n \\in K_n$ for every $n$. Together with the compatibility condition from [L1], this says precisely that $(x_n)\\in\\varprojlim K_n$.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Thus the underlying subsets of $$\\ker\\!\\left(\\varprojlim M_n \\to \\varprojlim N_n\\right) \\quad\\text{and}\\quad \\varprojlim \\ker(f_n)$$ coincide inside $\\prod M_n$, and the module structures also agree componentwise. Hence these two modules are canonically equal, in particular canonically isomorphic.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "For an exact sequence $0 \\to A_n \\to B_n \\to C_n$, exactness means $A_n=\\ker(B_n\\to C_n)$ for every $n$. Applying step 2.1 to the maps $B_n\\to C_n$ gives $$\\ker\\!\\left(\\varprojlim B_n \\to \\varprojlim C_n\\right)=\\varprojlim A_n,$$ which is exactly left exactness.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "L3",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Inverse limits preserve kernels is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Inverse limits preserve kernels does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Inverse limits preserve kernels does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Inverse limits preserve kernels has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Inverse limits preserve kernels has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Inverse limits preserve kernels does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Inverse limits preserve kernels is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Inverse limits preserve kernels is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-inverse-system-and-inverse-limit-of-modules",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring.\n\nAn **inverse system of $R$-modules indexed by** $\\mathbb{N}_{\\ge 1}$ is a\nsequence of $R$-modules\n$$M_1 \\xleftarrow{\\varphi_2} M_2 \\xleftarrow{\\varphi_3} M_3 \\xleftarrow{\\varphi_4} \\cdots$$\ntogether with $R$-linear transition maps and their composites\n$$\\varphi_{n,m} := \\varphi_{m+1} \\circ \\cdots \\circ \\varphi_n \\colon M_n \\to M_m \\qquad (n \\ge m),$$\nand $\\varphi_{m,m} := \\operatorname{id}_{M_m}$.\n\nIts **inverse limit** is the submodule\n$$\\varprojlim M_n := \\left\\{(x_n)_{n \\ge 1} \\in \\prod_{n \\ge 1} M_n : \\varphi_n(x_n)=x_{n-1}\\text{ for every }n \\ge 2\\right\\}.$$\n\nThe coordinate maps\n$$\\pi_n \\colon \\varprojlim M_n \\to M_n, \\qquad (x_m)_m \\mapsto x_n,$$\nare called the **limit projections**.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-module-homomorphism-kernel-image-and-cokernel",
+     "source_section": "Definition",
+     "quote": "For left $R$-modules $M,N$, a function $f:M\\to N$ is an **$R$-module\nhomomorphism** if\n\n$$f(m+m')=f(m)+f(m')\\quad\\text{and}\\quad f(rm)=rf(m)$$\n\nfor all $m,m'\\in M$ and $r\\in R$. It is a **module isomorphism** if it is a\nbijective module homomorphism.\n\nIts **kernel** and **image** are\n\n$$\\ker f:=\\{m\\in M:f(m)=0_N\\},\\qquad\\operatorname{im}f:=\\{f(m):m\\in M\\}.$$\n\nOnce [[thm-module-kernel-image-and-injectivity]] establishes that the image is a\nsubmodule, the **cokernel** of $f$ is the quotient module\n$\\operatorname{coker}f:=N/\\operatorname{im}f$.",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-universal-property-of-an-inverse-limit-of-modules",
+     "source_section": "Statement",
+     "quote": "Let\n$$M_1 \\xleftarrow{\\varphi_2} M_2 \\xleftarrow{\\varphi_3} M_3 \\xleftarrow{} \\cdots$$\nbe an inverse system of $R$-modules. For every $R$-module $N$, giving an\n$R$-linear map\n$$f \\colon N \\to \\varprojlim M_n$$\nis equivalent to giving a family of $R$-linear maps\n$$f_n \\colon N \\to M_n$$\nsuch that\n$$\\varphi_n \\circ f_n = f_{n-1} \\qquad (n \\ge 2).$$\n\nEquivalently, the projections\n$$\\pi_n \\colon \\varprojlim M_n \\to M_n$$\nform a terminal compatible cone.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "codex",
+    "notes": "Reviewed the on-disk proof for Inverse limits preserve kernels on 2026-09-01 and aligned the contract to the final precheck-clean step structure."
+   }
+  },
+  "thm-exactness-of-inverse-limits-under-mittag-leffler": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L1], the sequence of inverse limits is already exact at $\\varprojlim A_n$ and at $\\varprojlim B_n$. It remains to prove surjectivity of $$\\varprojlim B_n \\longrightarrow \\varprojlim C_n.$$",
+     "step": "1.1",
+     "inputs": [
+      "L1"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Let $c=(c_n)_{n \\ge 1}\\in\\varprojlim C_n$. For each $n$, set $$E_n:=g_n^{-1}(c_n)\\subseteq B_n.$$ Since $g_n$ is surjective, each $E_n$ is nonempty. Compatibility of the inverse system and of the family $(c_n)$ makes every transition map $B_{n+1}\\to B_n$ restrict to a map $E_{n+1}\\to E_n$.",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-1-3",
+     "claim": "The system $(E_n)$ is Mittag-Leffler as a system of sets. Fix $m$. By [L2] choose $c(m)\\ge m$ such that $$\\operatorname{im}(A_n\\to A_m)=\\operatorname{im}(A_{c(m)}\\to A_m)\\qquad(n\\ge c(m)).$$ For $n\\ge c(m)$ the inclusion $$\\operatorname{im}(E_n\\to E_m)\\subseteq \\operatorname{im}(E_{c(m)}\\to E_m)$$ is automatic. For the reverse inclusion, take $y\\in\\operatorname{im}(E_{c(m)}\\to E_m)$ and choose $e_c\\in E_{c(m)}$ mapping to $y$. Choose any $e_n^0\\in E_n$. The images of $e_c$ and $e_n^0$ in $C_{c(m)}$ are both $c_{c(m)}$, so their difference lies in $A_{c(m)}$. By the stabilization choice there is $a_n\\in A_n$ whose image in $A_m$ equals the image of $e_c-e_n^0$. Then $e_n:=e_n^0+a_n$ lies in $E_n$ and maps to $y$ in $E_m$. Hence the images stabilize.",
+     "step": "1.3",
+     "inputs": [
+      "L2",
+      "choose",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "For each $n$, let $$E_n':=\\bigcap_{m\\ge n}\\operatorname{im}(E_m\\to E_n).$$ Because $(E_n)$ is Mittag-Leffler and nonempty, $E_n'$ is equal to one stable image and is therefore nonempty. The restricted maps $E_{n+1}'\\to E_n'$ are surjective: if $y\\in E_n'$, then $y$ comes from some sufficiently high stage $E_m$ with $m\\ge n+1$, and the image of that same element in $E_{n+1}$ lies in $E_{n+1}'$ and maps to $y$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.3",
+      "construct",
+      "1.3"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "By the Axiom of Choice, choose $x_1\\in E_1'$, and after $x_n$ has been chosen choose $x_{n+1}\\in E_{n+1}'$ mapping to $x_n$; this is possible by surjectivity from step 2.1. Then $(x_n)_{n\\ge 1}$ is an element of $\\varprojlim E_n$, hence of $\\varprojlim B_n$, and by construction it maps to $c\\in\\varprojlim C_n$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "choose",
+      "2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Therefore $\\varprojlim B_n\\to\\varprojlim C_n$ is surjective. Combined with step 1.1, this proves exactness of $$0 \\to \\varprojlim A_n \\to \\varprojlim B_n \\to \\varprojlim C_n \\to 0.$$",
+     "step": "4.1",
+     "inputs": [
+      "step 1.1",
+      "step 3.1",
+      "1.1",
+      "3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "reason": "The statement Countable Mittag-Leffler systems preserve short exactness on inverse limits is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item.",
+     "evidence": "The statement is explicitly about countable inverse systems and the proof constructs nonempty fibres E_n prime after step 2.1, so there is no omitted empty-family branch."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Countable Mittag-Leffler systems preserve short exactness on inverse limits does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Countable Mittag-Leffler systems preserve short exactness on inverse limits does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Countable Mittag-Leffler systems preserve short exactness on inverse limits has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Countable Mittag-Leffler systems preserve short exactness on inverse limits has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In Countable Mittag-Leffler systems preserve short exactness on inverse limits, step 3.1 uses the Axiom of Choice hypothesis to choose a compatible thread through the surjective system $E_n'$."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Countable Mittag-Leffler systems preserve short exactness on inverse limits is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Countable Mittag-Leffler systems preserve short exactness on inverse limits is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-inverse-limits-are-left-exact",
+     "source_section": "Statement",
+     "quote": "Let\n$$\n(f_n)\\colon (M_n,\\varphi_n) \\to (N_n,\\psi_n)\n$$\nbe a morphism of inverse systems of $R$-modules. Then the kernel of the induced\nmap\n$$\n\\varprojlim M_n \\longrightarrow \\varprojlim N_n\n$$\nis canonically isomorphic to\n$$\n\\varprojlim \\ker(f_n).\n$$\n\nConsequently, if\n$$\n0 \\to A_n \\to B_n \\to C_n\n$$\nis an exact sequence of inverse systems, then\n$$\n0 \\to \\varprojlim A_n \\to \\varprojlim B_n \\to \\varprojlim C_n\n$$\nis exact.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-mittag-leffler-inverse-system",
+     "source_section": "Definition",
+     "quote": "Let\n$$M_1 \\xleftarrow{\\varphi_2} M_2 \\xleftarrow{\\varphi_3} M_3 \\xleftarrow{} \\cdots$$\nbe an inverse system of $R$-modules.\n\nThe system is **Mittag-Leffler** if for every $m \\ge 1$ the descending family\nof images\n$$\\operatorname{im}(\\varphi_{n,m}) \\subseteq M_m \\qquad (n \\ge m)$$\neventually stabilizes. Explicitly, for each $m$ there exists $c(m)\\ge m$ such\nthat\n$$\\operatorname{im}(\\varphi_{n,m})=\\operatorname{im}(\\varphi_{c(m),m}) \\qquad\\text{for every }n \\ge c(m).$$\n\nIn particular, any inverse system with surjective transition maps is\nMittag-Leffler.",
+     "uses": [
+      "1.3"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. This item is critical risk because 2 cited facts; 6 numbered proof steps; existence, choice, uniqueness, or well-definedness; boundary-sensitive language; analytic limiting/completeness language. I reread the current proof across steps 1.1, 1.2, 1.3, 2.1, 3.1, 4.1. The load-bearing move is By [L1], the sequence of inverse limits is already exact at $\\varprojlim A_n$ and at $\\varprojlim B_n$. It remains to prove surjectivity of $$\\varprojlim B_n \\longrightarrow \\varp…. The argument then closes with Therefore $\\varprojlim B_n\\to\\varprojlim C_n$ is surjective. Combined with step 1.1, this proves exactness of $$0 \\to \\varprojlim A_n \\to \\varprojlim B_n \\to \\varprojlim C_n \\to 0…. I checked the cited dependencies thm-inverse-limits-are-left-exact, def-mittag-leffler-inverse-system, and the current statement, citations, and boundary or choice handling are aligned on the present bytes."
+   }
+  },
+  "thm-kernel-and-universal-property-of-adic-completion": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The completion map $\\kappa_M$ is the unique map into the inverse limit of [L1] whose $n$th component, for $n\\ge1$, is the quotient map $$q_n \\colon M \\to M/I^nM.$$",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L4"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "An element lies in $\\ker(\\kappa_M)$ exactly when every quotient map $q_n$, $n\\ge1$, kills it, equivalently when it belongs to every $I^nM$ for $n\\ge1$. Since $I^0M=M$, this gives $$\\ker(\\kappa_M)=\\bigcap_{n\\ge 1} I^nM=\\bigcap_{n\\ge0}I^nM.$$",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-3",
+     "claim": "Let $f \\colon M \\to N$ be $R$-linear with $N$ complete. Since $f$ is $R$-linear, one has $$f(I^nM)\\subseteq I^nN$$ for every $n\\ge1$, so $f$ induces maps $$f_n \\colon M/I^nM \\to N/I^nN.$$ These maps are compatible with the quotient transition maps.",
+     "step": "1.3",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-4",
+     "claim": "By [L4], the compatible family $(f_n)$ yields a unique map $$\\widetilde f \\colon \\widehat M \\to \\varprojlim N/I^nN$$ such that the $n$th projection of $\\widetilde f\\kappa_M$ is $f_nq_n$. These are also the coordinates of $\\kappa_Nf$, so uniqueness in [L4] gives $$\\widetilde f\\kappa_M=\\kappa_Nf.$$",
+     "step": "1.4",
+     "inputs": [
+      "L1",
+      "L4"
+     ]
+    },
+    {
+     "id": "step-1-5",
+     "claim": "The image of $\\kappa_M$ is dense for the inverse-limit topology. Indeed, for $x\\in\\widehat M$ and $n\\ge1$, choose $m\\in M$ representing $\\pi_n^M(x)\\in M/I^nM$; then $x-\\kappa_M(m)\\in K_n$. Now let $g:\\widehat M\\to N$ be continuous and vanish on $\\kappa_M(M)$. If $g(x)\\ne0$, separatedness of $N$ from [L2] gives $n$ with $g(x)\\notin I^nN$. The inverse image $$g^{-1}(g(x)+I^nN)$$ is an open neighbourhood of $x$ by [L3], so density gives some $\\kappa_M(m)$ in it. But $g\\kappa_M(m)=0$, which would put $g(x)$ in $I^nN$, a contradiction. Hence $g=0$. Applying this to the difference of two continuous extensions proves uniqueness.",
+     "step": "1.5",
+     "inputs": [
+      "L2",
+      "L3",
+      "choose",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The last equality shows that $\\kappa_M$ is injective exactly when $\\bigcap_{n\\ge 0} I^nM=0$, which is exactly the definition of being $I$-adically separated.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "Write $\\pi_n^M:\\widehat M\\to M/I^nM$ and $\\pi_n^N:\\varprojlim N/I^nN\\to N/I^nN$. Step 1.4 gives $$\\pi_n^N\\widetilde f=f_n\\pi_n^M,$$ so $\\widetilde f(K_n)\\subseteq\\ker(\\pi_n^N)$ for every $n\\ge1$. Hence $\\widetilde f$ is continuous for the two inverse-limit topologies. Because $N$ is complete, [L2] identifies $$\\kappa_N:N\\xrightarrow{\\sim}\\varprojlim N/I^nN;$$ under this isomorphism the preimage of $\\ker(\\pi_n^N)$ is $I^nN$, so [L3] makes $\\kappa_N$ a homeomorphism from the $I$-adic topology to the inverse-limit topology. Thus $$\\widehat f:=\\kappa_N^{-1}\\widetilde f:\\widehat M\\to N$$ is continuous and satisfies $\\widehat f\\kappa_M=f$.",
+     "step": "2.2",
+     "inputs": [
+      "L2",
+      "L3",
+      "step 1.4",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Parts 1 and 2 are proved by steps 1.2, 1.5, 2.1, and 2.2.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.2",
+      "step 1.5",
+      "step 2.1",
+      "step 2.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "reason": "The quotient tower is explicitly indexed by the nonempty set of integers $n\\ge1$.",
+     "evidence": "Step 1.2 compares the intersections indexed by $n\\ge1$ and $n\\ge0$, while step 1.4 uses the fixed nonempty quotient tower."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "For $M=0$ or $N=0$, steps 1.1 through 1.5 and steps 2.1 through 2.2 reduce to unique zero maps; for $I=0$, every $K_n$ is zero and the completion map is the identity."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "For the unit ideal $I=R$, every quotient in step 1.1 is zero, $\\widehat M=0$, and an $I$-adically complete target is zero, so both conclusions hold."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The zero-ring and zero-module degenerations are covered by the coordinate calculations in steps 1.1 through 1.5 and steps 2.1 through 2.2 without a nonzero hypothesis."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1 through 1.5 and steps 2.1 through 2.2 consistently start the inverse system and the neighbourhood basis at $n=1$, while step 1.2 explains why the separatedness intersection may also start at $n=0$."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.5 chooses one representative of one displayed quotient class to meet a fixed basic neighbourhood; it makes no simultaneous choice over the tower."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 2.1 identifies injectivity of the completion map with vanishing of the displayed intersection, giving the forward implication toward separatedness."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 2.1 gives the reverse implication as well, because the same kernel equality proves separatedness implies injectivity."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-adic-completion-of-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic completion** of $M$ is the inverse limit\n$$\\widehat{M}^{\\,I}:=\\varprojlim_{n \\ge 1} M/I^nM$$\nof the quotient system\n$$M/IM \\leftarrow M/I^2M \\leftarrow M/I^3M \\leftarrow \\cdots.$$\n\nWhen the ideal $I$ is fixed, this module is denoted simply by $\\widehat M$.\n\nThe associated **completion map** is\n$$\\kappa_M \\colon M \\to \\widehat M, \\qquad m \\mapsto (m \\bmod I^nM)_{n \\ge 1}.$$",
+     "uses": [
+      "1.1",
+      "1.2",
+      "1.4"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-separated-and-complete-filtered-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring and let\n$$M=F^0M \\supseteq F^1M \\supseteq F^2M \\supseteq \\cdots$$\nbe a decreasing filtration on an $R$-module $M$.\n\nThe module is **separated** for this filtration if\n$$\\bigcap_{n \\ge 0} F^nM = 0.$$\n\nThe module is **complete** for this filtration if it is separated and the\ncanonical map\n$$\\kappa_M \\colon M \\longrightarrow \\varprojlim_{n\\ge1} M/F^nM, \\qquad m \\longmapsto (m \\bmod F^nM)_{n \\ge 1},$$\nis an isomorphism.\n\nFor the $I$-adic filtration $F^nM:=I^nM$, this says that $M$ is\n**$I$-adically separated** when $\\bigcap_{n \\ge 0} I^nM=0$, and\n**$I$-adically complete** when it is separated and\n$$M \\xrightarrow{\\sim} \\varprojlim_{n\\ge1} M/I^nM.$$",
+     "uses": [
+      "2.1",
+      "2.2",
+      "1.5"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-adic-topology-on-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic topology** on $M$ is the linear topology whose distinguished\nneighbourhood basis of $0$ is\n$$\n\\{I^nM : n \\ge 0\\}.\n$$\nEquivalently, a subset $U \\subseteq M$ is open when for every $x \\in U$ there\nexists $n$ such that\n$$\nx + I^nM \\subseteq U.\n$$\n\nThus the basic open neighbourhoods of an arbitrary point $x \\in M$ are the\ncosets\n$$\nx + I^nM \\qquad (n \\ge 0).\n$$",
+     "uses": [
+      "2.2",
+      "1.5"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-universal-property-of-an-inverse-limit-of-modules",
+     "source_section": "Statement",
+     "quote": "Let\n$$M_1 \\xleftarrow{\\varphi_2} M_2 \\xleftarrow{\\varphi_3} M_3 \\xleftarrow{} \\cdots$$\nbe an inverse system of $R$-modules. For every $R$-module $N$, giving an\n$R$-linear map\n$$f \\colon N \\to \\varprojlim M_n$$\nis equivalent to giving a family of $R$-linear maps\n$$f_n \\colon N \\to M_n$$\nsuch that\n$$\\varphi_n \\circ f_n = f_{n-1} \\qquad (n \\ge 2).$$\n\nEquivalently, the projections\n$$\\pi_n \\colon \\varprojlim M_n \\to M_n$$\nform a terminal compatible cone.",
+     "uses": [
+      "1.1",
+      "1.4"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "final-adjudicator-step8-fa-a-11",
+    "notes": "Terminal review found that Alpha's density idea used the unjustified equality ker(M-hat to M/I^nM)=I^n M-hat, which fails for arbitrary ideals. The repaired statement equips M-hat with the inverse-limit topology K_n. Quotient coordinates prove continuity, the canonical image meets every K_n-coset, and separatedness of N gives a direct neighbourhood contradiction for uniqueness. No finite-generation hypothesis is needed."
+   }
+  },
+  "prop-units-in-an-adically-complete-ring": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "For each $n \\ge 1$, the finite geometric sum $$v_n:=1+a+a^2+\\cdots+a^{n-1}$$ satisfies $$(1-a)v_n=1-a^n.$$ Since $a \\in I$, one has $a^n \\in I^n$, so the image of $v_n$ in $R/I^n$ is an inverse to the image of $u=1-a$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The residue classes $(v_n \\bmod I^n)_n$ are compatible: the image of $v_{n+1}$ in $R/I^n$ equals the image of $v_n$ because $v_{n+1}-v_n=a^n \\in I^n$. Therefore they define an element $$v \\in \\varprojlim R/I^n.$$",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "construct",
+      "1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "By [L1], there is a unique element $w \\in R$ corresponding to $v$. Since each component of $v$ is an inverse to the image of $u$, the products $uw$ and $wu$ map to $1$ in every quotient $R/I^n$. Completeness includes separatedness, so the kernel of $R \\to \\varprojlim R/I^n$ is $0$; hence $$uw=wu=1.$$ Thus $u$ is a unit.",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Let $x \\in I$ and $r \\in R$. Then $1-rx \\equiv 1 \\pmod I$, so step 3.1 shows $1-rx$ is a unit. The elementary ideal characterization of the Jacobson radical now gives $x \\in J(R)$: if a maximal ideal omitted $x$, its image would generate the residue field, contradicting invertibility of every $1-rx$. Therefore $I \\subseteq J(R)$.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1",
+      "algebra",
+      "3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Elements congruent to $1$ modulo a defining ideal are units is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Elements congruent to $1$ modulo a defining ideal are units does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Elements congruent to $1$ modulo a defining ideal are units does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Elements congruent to $1$ modulo a defining ideal are units has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Elements congruent to $1$ modulo a defining ideal are units has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Elements congruent to $1$ modulo a defining ideal are units does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Elements congruent to $1$ modulo a defining ideal are units is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Elements congruent to $1$ modulo a defining ideal are units is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-separated-and-complete-filtered-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring and let\n$$M=F^0M \\supseteq F^1M \\supseteq F^2M \\supseteq \\cdots$$\nbe a decreasing filtration on an $R$-module $M$.\n\nThe module is **separated** for this filtration if\n$$\\bigcap_{n \\ge 0} F^nM = 0.$$\n\nThe module is **complete** for this filtration if it is separated and the\ncanonical map\n$$\\kappa_M \\colon M \\longrightarrow \\varprojlim_{n\\ge1} M/F^nM, \\qquad m \\longmapsto (m \\bmod F^nM)_{n \\ge 1},$$\nis an isomorphism.\n\nFor the $I$-adic filtration $F^nM:=I^nM$, this says that $M$ is\n**$I$-adically separated** when $\\bigcap_{n \\ge 0} I^nM=0$, and\n**$I$-adically complete** when it is separated and\n$$M \\xrightarrow{\\sim} \\varprojlim_{n\\ge1} M/I^nM.$$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L1",
+     "source": "def-adic-completion-of-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic completion** of $M$ is the inverse limit\n$$\\widehat{M}^{\\,I}:=\\varprojlim_{n \\ge 1} M/I^nM$$\nof the quotient system\n$$M/IM \\leftarrow M/I^2M \\leftarrow M/I^3M \\leftarrow \\cdots.$$\n\nWhen the ideal $I$ is fixed, this module is denoted simply by $\\widehat M$.\n\nThe associated **completion map** is\n$$\\kappa_M \\colon M \\to \\widehat M, \\qquad m \\mapsto (m \\bmod I^nM)_{n \\ge 1}.$$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. This item is high risk because 3 cited facts; boundary-sensitive language; quotient or equivalence-class construction. I reread the current proof across steps 1.1, 2.1, 3.1, 4.1. The load-bearing move is For each $n \\ge 1$, the finite geometric sum $$v_n:=1+a+a^2+\\cdots+a^{n-1}$$ satisfies $$(1-a)v_n=1-a^n.$$ Since $a \\in I$, one has $a^n \\in I^n$, so the image of $v_n$ in $R/I^n$…. The argument then closes with Let $x \\in I$ and $r \\in R$. Then $1-rx \\equiv 1 \\pmod I$, so step 3.1 shows $1-rx$ is a unit. By [L2], this means $x \\in J(R)$. Therefore $I \\subseteq J(R)$.. I checked the cited dependencies def-separated-and-complete-filtered-module, def-adic-completion-of-a-module, thm-jacobson-radical-unit-characterisation, and the current statement, citations, and boundary or choice handling are aligned on the present bytes."
+   }
+  },
+  "thm-completion-is-exact-on-finite-modules": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "For each $n \\ge 0$, the given short exact sequence induces an exact sequence $$0 \\to M'/(M'\\cap I^nM) \\to M/I^nM \\to M''/I^nM'' \\to 0.$$ The first map is injective because its kernel is $(M'\\cap I^nM)/(M'\\cap I^nM)$, and the second map is surjective because every class in $M''/I^nM''$ lifts to a class in $M/I^nM$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The left inverse system $$M'/(M'\\cap I^nM)$$ has surjective transition maps, hence is Mittag-Leffler. Indeed, if $n \\ge m$ and $x \\in M'$, then the class of $x$ in $$M'/(M'\\cap I^mM)$$ is the image of the class of the same $x$ in $$M'/(M'\\cap I^nM).$$ Therefore every transition map $$M'/(M'\\cap I^nM) \\to M'/(M'\\cap I^mM)$$ is surjective.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Taking inverse limits in the sequences of step 1.1 and using [L1] yields an exact sequence $$0 \\to \\varprojlim M'/(M'\\cap I^nM) \\to \\varprojlim M/I^nM \\to \\varprojlim M''/I^nM'' \\to 0.$$",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "step 2.1",
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "By [L2], the middle and right inverse limits are $\\widehat M$ and $\\widehat{M''}$. For the left inverse limit, the induced filtration $M'\\cap I^nM$ on $M'$ is equivalent to the intrinsic $I$-adic filtration $I^nM'$ by [[cor-induced-and-intrinsic-adic-filtrations-are-equivalent]], so its completion is $\\widehat{M'}$.",
+     "step": "4.1",
+     "inputs": [
+      "L2",
+      "step 3.1",
+      "3.1"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "Substituting these identifications into step 3.1 gives $$0 \\to \\widehat{M'} \\to \\widehat M \\to \\widehat{M''} \\to 0,$$ which is the claimed exactness.",
+     "step": "5.1",
+     "inputs": [
+      "step 4.1",
+      "3.1",
+      "4.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Adic completion is exact on finite modules over a Noetherian ring is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Adic completion is exact on finite modules over a Noetherian ring does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Adic completion is exact on finite modules over a Noetherian ring does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Adic completion is exact on finite modules over a Noetherian ring has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Adic completion is exact on finite modules over a Noetherian ring has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Adic completion is exact on finite modules over a Noetherian ring does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Adic completion is exact on finite modules over a Noetherian ring is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Adic completion is exact on finite modules over a Noetherian ring is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-exactness-of-inverse-limits-under-mittag-leffler",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet\n$$\n0 \\to A_n \\xrightarrow{f_n} B_n \\xrightarrow{g_n} C_n \\to 0\n$$\nbe a short exact sequence of inverse systems of $R$-modules indexed by\n$\\mathbb{N}_{\\ge 1}$. If $(A_n)$ is Mittag-Leffler, then\n$$\n0 \\to \\varprojlim A_n \\to \\varprojlim B_n \\to \\varprojlim C_n \\to 0\n$$\nis exact.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-adic-completion-of-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic completion** of $M$ is the inverse limit\n$$\\widehat{M}^{\\,I}:=\\varprojlim_{n \\ge 1} M/I^nM$$\nof the quotient system\n$$M/IM \\leftarrow M/I^2M \\leftarrow M/I^3M \\leftarrow \\cdots.$$\n\nWhen the ideal $I$ is fixed, this module is denoted simply by $\\widehat M$.\n\nThe associated **completion map** is\n$$\\kappa_M \\colon M \\to \\widehat M, \\qquad m \\mapsto (m \\bmod I^nM)_{n \\ge 1}.$$",
+     "uses": [
+      "4.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. Critical because exactness passes through inverse limits and an induced filtration comparison. I reread steps 1.1-5.1 with the reader and citation evidence. The repaired proof no longer uses the wrong Artin-Rees image computation for Mittag-Leffler: it uses the actual surjectivity of the transition maps on $M'/(M'cap I^nM)$ and spends Artin-Rees only on identifying the induced completion with the intrinsic one. That resolves the old load-bearing gap."
+   }
+  },
+  "thm-completion-as-extension-of-scalars": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "If $M=R$, then $$R \\otimes_R \\widehat R \\cong \\widehat R$$ by [L3], and this is exactly $\\theta_R$. Therefore $\\theta_R$ is an isomorphism.",
+     "step": "1.1",
+     "inputs": [
+      "L3"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Choose an exact sequence $$F_1 \\xrightarrow{u} F_0 \\to M \\to 0$$ with $F_0$ and $F_1$ finite free. Tensoring with $\\widehat R$ and using [L2] gives an exact row $$F_1 \\otimes_R \\widehat R \\xrightarrow{u \\otimes 1} F_0 \\otimes_R \\widehat R \\to M \\otimes_R \\widehat R \\to 0.$$ Completing the exact sequence $$F_1 \\xrightarrow{u} F_0 \\to M \\to 0$$ and using [L1] gives another exact row $$\\widehat{F_1} \\xrightarrow{\\widehat u} \\widehat{F_0} \\to \\widehat M \\to 0.$$",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L2",
+      "choose"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Since tensor products commute with finite direct sums by [L3], the same is true for finite free modules: $$R^m \\otimes_R \\widehat R \\cong \\widehat R^m \\cong \\widehat{R^m}.$$ Thus $\\theta_F$ is an isomorphism for every finite free module $F$. In particular, $\\theta_{F_0}$ and $\\theta_{F_1}$ are isomorphisms in step 1.2.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L3",
+      "1.2",
+      "1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "The maps $\\theta_{F_1}$, $\\theta_{F_0}$, and $\\theta_M$ form a commutative diagram between the two exact rows of step 1.2. Since the first two vertical maps are isomorphisms by step 2.1, the two rows present $$M \\otimes_R \\widehat R \\quad\\text{and}\\quad \\widehat M$$ as cokernels of isomorphic maps. Therefore $\\theta_M$ is an isomorphism.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.2",
+      "step 2.1",
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "So the completion of a finite module is obtained by extension of scalars from $R$ to $\\widehat R$.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1",
+      "3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Completion of a finite module is extension of scalars is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Completion of a finite module is extension of scalars does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Completion of a finite module is extension of scalars does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Completion of a finite module is extension of scalars has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Completion of a finite module is extension of scalars has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Completion of a finite module is extension of scalars does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion of a finite module is extension of scalars is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion of a finite module is extension of scalars is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-completion-is-exact-on-finite-modules",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$$\n0 \\to M' \\to M \\to M'' \\to 0\n$$\nbe a short exact sequence of finitely generated $R$-modules. Then the induced\nsequence of $I$-adic completions\n$$\n0 \\to \\widehat{M'} \\to \\widehat M \\to \\widehat{M''} \\to 0\n$$\nis exact.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-right-exactness-of-tensor-products",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a commutative ring, let\n\n$$A\\xrightarrow{f}B\\xrightarrow{g}C\\longrightarrow0$$\n\nbe an exact sequence of $R$-modules, and let $N$ be an $R$-module. Then\n\n$$A\\otimes_RN\\xrightarrow{f\\otimes1}B\\otimes_RN\\xrightarrow{g\\otimes1}C\\otimes_RN\\longrightarrow0$$\n\nis exact. Thus tensoring preserves cokernels and surjections, but no injectivity at the left is asserted.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-unit-isomorphisms-for-module-tensor-products",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a unital ring. For every left $R$-module $N$ and every right $R$-module $M$, the maps\n\n$$\\lambda_N:R\\otimes_RN\\longrightarrow N,\\qquad r\\otimes n\\longmapsto rn,$$\n\nand\n\n$$\\rho_M:M\\otimes_RR\\longrightarrow M,\\qquad m\\otimes r\\longmapsto mr,$$\n\nare group isomorphisms. Their inverses are $n\\mapsto1_R\\otimes n$ and $m\\mapsto m\\otimes1_R$, respectively. The maps respect every displayed outer module structure.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. High risk because the claim is an existence/isomorphism statement for finite modules and the proof once used the theorem recursively on the kernel. I reread steps 1.1-4.1. The current argument uses a finite free presentation, right exactness of tensor products, and exactness of completion on finite modules, so the isomorphism now comes from cokernels of isomorphic maps rather than a circular kernel application."
+   }
+  },
+  "cor-completion-commutes-with-finite-quotients-and-submodules": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Apply [L1] to the short exact sequence $$0 \\to N \\to M \\to M/N \\to 0.$$ This gives an exact sequence $$0 \\to \\widehat N \\to \\widehat M \\to \\widehat{M/N} \\to 0.$$ Therefore $$\\widehat M/\\widehat N \\cong \\widehat{M/N},$$ proving part 1.",
+     "step": "1.1",
+     "inputs": [
+      "L1"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "By [L2], the map $\\widehat N \\to \\widehat M$ identifies with $$N \\otimes_R \\widehat R \\longrightarrow M \\otimes_R \\widehat R.$$ Its image is, by definition, the $\\widehat R$-submodule generated by the image of $N$, namely $N\\widehat R$. Hence the image of $\\widehat N$ in $\\widehat M$ is $N\\widehat R$. Taking $N=JM$ yields $$\\widehat{JM}\\cong J\\widehat M.$$",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Apply part 1 to the submodule $I^nM \\subseteq M$. Then $$\\widehat M/\\widehat{I^nM}\\cong \\widehat{M/I^nM}.$$ By step 1.2, $\\widehat{I^nM}$ identifies with $I^n\\widehat M$. Also $M/I^nM$ is annihilated by $I^n$, so its $I$-adic filtration reaches $0$ after stage $n$ and its completion is canonically itself. Hence $$\\widehat{M/I^nM}\\cong M/I^nM,$$ which proves part 3.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "algebra",
+      "1.2",
+      "1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Parts 1, 2, and 3 are exactly the three displayed conclusions above.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 2.1",
+      "1.1",
+      "1.2",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Completion commutes with finite quotients and induced submodules is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Completion commutes with finite quotients and induced submodules does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Completion commutes with finite quotients and induced submodules does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Completion commutes with finite quotients and induced submodules has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Completion commutes with finite quotients and induced submodules has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Completion commutes with finite quotients and induced submodules does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion commutes with finite quotients and induced submodules is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion commutes with finite quotients and induced submodules is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-completion-is-exact-on-finite-modules",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$$\n0 \\to M' \\to M \\to M'' \\to 0\n$$\nbe a short exact sequence of finitely generated $R$-modules. Then the induced\nsequence of $I$-adic completions\n$$\n0 \\to \\widehat{M'} \\to \\widehat M \\to \\widehat{M''} \\to 0\n$$\nis exact.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-completion-as-extension-of-scalars",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be a\nfinitely generated $R$-module. Then the canonical $R$-linear map\n$$\\theta_M \\colon M \\otimes_R \\widehat R \\longrightarrow \\widehat M, \\qquad m \\otimes (r_n)_n \\mapsto (mr_n \\bmod I^nM)_n,$$\nis an isomorphism.",
+     "uses": [
+      "1.2"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. High risk because the item packages quotient, submodule-image, and terminating-filtration arguments in one place. I reread steps 1.1-3.1. The current proof no longer calls the $I$-adic filtration on $M/I^nM$ discrete; it uses the correct fact that the filtration reaches zero after stage $n$, so the completion is already the module itself. The quotient and image identifications are now source-faithful on the current bytes."
+   }
+  },
+  "thm-flatness-of-noetherian-completion": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Let $J \\subseteq R$ be an ideal. It is a finite $R$-module by [L4]. Hence [L1] identifies $$J \\otimes_R \\widehat R$$ with the completion $\\widehat J$, and under this identification the multiplication map $$J \\otimes_R \\widehat R \\to \\widehat R$$ becomes the natural map $$\\widehat J \\to \\widehat R.$$",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L4"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The map $\\widehat J \\to \\widehat R$ is injective because [L3] applies to the short exact sequence $$0 \\to J \\to R \\to R/J \\to 0.$$ Therefore $J \\otimes_R \\widehat R \\to \\widehat R$ is injective for every ideal $J$.",
+     "step": "2.1",
+     "inputs": [
+      "L3",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Applying [L2], we conclude that $\\widehat R$ is flat as an $R$-module.",
+     "step": "3.1",
+     "inputs": [
+      "L2",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The ideal criterion quantifies over each fixed ideal $J$; it does not form a construction over a family whose empty value changes the claim."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "For $I=0$, completion is $R$ and steps 1.1 through 3.1 recover flatness of the regular module; the zero ideal $J=0$ also gives the injective map $0\\to\\widehat R$."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "For the unit ideal $I=R$, the completion is zero and steps 1.1 through 3.1 reduce every ideal-test map to $0\\to0$, proving the zero module flat."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "For the zero ring, [L4] still makes its unique ideal finite and steps 1.1 through 3.1 show the unique completion module is flat."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The proof uses completed modules directly; finite quotient-tower endpoints do not enter the ideal test."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The Statement assumes Choice exactly as required by the completion inputs [L1] and [L3]; the arbitrary ideal $J$ is universally fixed, not chosen from a nonempty family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The theorem applies one direction of the cited ideal criterion and does not state a biconditional of its own."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The theorem applies one direction of the cited ideal criterion and does not state a biconditional of its own."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-completion-as-extension-of-scalars",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be a\nfinitely generated $R$-module. Then the canonical $R$-linear map\n$$\\theta_M \\colon M \\otimes_R \\widehat R \\longrightarrow \\widehat M, \\qquad m \\otimes (r_n)_n \\mapsto (mr_n \\bmod I^nM)_n,$$\nis an isomorphism.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L1",
+     "source": "cor-completion-commutes-with-finite-quotients-and-submodules",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$N \\subseteq M$ be finitely generated $R$-modules.\n\n1. The natural map\n   $$\n   \\widehat M/\\widehat N \\longrightarrow \\widehat{M/N}\n   $$\n   is an isomorphism.\n2. Under the natural map $\\widehat N \\to \\widehat M$, the image of\n   $\\widehat N$ is the $\\widehat R$-submodule $N\\widehat R \\subseteq \\widehat M$.\n   In particular, for every ideal $J \\subseteq R$,\n   $$\n   \\widehat{JM}\\cong J\\widehat M.\n   $$\n3. For every $n \\ge 0$,\n   $$\n   \\widehat M/I^n\\widehat M \\cong M/I^nM.\n   $$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-flatness-criteria-by-injections-and-ideals",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a commutative ring and let $M$ be an $R$-module. The following are equivalent:\n\n1. $M$ is flat.\n2. For every injection $K\\hookrightarrow N$, the induced map $K\\otimes_RM\\to N\\otimes_RM$ is injective.\n3. For every ideal $I\\subseteq R$, the multiplication map $I\\otimes_RM\\to M$, $a\\otimes m\\mapsto am$, is injective.\n4. The map in claim 3 is injective for every finitely generated ideal $I$.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-completion-is-exact-on-finite-modules",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$$\n0 \\to M' \\to M \\to M'' \\to 0\n$$\nbe a short exact sequence of finitely generated $R$-modules. Then the induced\nsequence of $I$-adic completions\n$$\n0 \\to \\widehat{M'} \\to \\widehat M \\to \\widehat{M''} \\to 0\n$$\nis exact.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-noetherian-ring-ideal-characterisations",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a commutative ring. The following are equivalent.\n\n1. $R$ is Noetherian ([[def-noetherian-ring]]).\n2. Every ideal of $R$ is finitely generated: for every ideal $\\mathfrak a$ there\n   are finitely many $a_1,\\ldots,a_n\\in\\mathfrak a$, with $n\\in\\mathbb N$, such\n   that $\\mathfrak a=(a_1,\\ldots,a_n)$.\n3. **Ascending chain condition.** Every chain of ideals\n   $\\mathfrak a_0\\subseteq\\mathfrak a_1\\subseteq\\mathfrak a_2\\subseteq\\cdots$\n   indexed by $\\mathbb N$ stabilises: there is $N\\in\\mathbb N$ with\n   $\\mathfrak a_n=\\mathfrak a_N$ for every $n\\ge N$.\n4. **Maximal condition.** Every nonempty set of ideals of $R$ has a maximal\n   member with respect to inclusion.\n\nThe implication from the ascending chain condition to the maximal condition uses\ndependent choice; the remaining implications are choice-free. The same\nattribution is carried by\n[[thm-equivalent-characterizations-of-noetherian-modules]], from which this\nstatement is obtained.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "final-adjudicator-step8-fa-a-9",
+    "notes": "Terminal review confirms Alpha's exactness repair but closes its remaining finiteness premise: an arbitrary ideal J is finite because R is Noetherian. Extension of scalars then identifies the ideal-test map with J-hat to R-hat, exact completion makes it monic, and the ideal criterion gives flatness. The I=0, I=R, zero-ideal, and zero-ring boundaries are explicit."
+   }
+  },
+  "thm-faithful-flatness-of-jacobson-adic-completion": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Let $\\mathfrak m\\subset R$ be a maximal ideal. Because $I\\subseteq J(R)$, one has $I\\subseteq\\mathfrak m$, so [L2] gives $$ \\widehat R/\\mathfrak m\\widehat R \\cong R/\\mathfrak m \\neq 0. $$",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The ring $R/\\mathfrak m$ is a field, so step 1.1 shows directly that $\\mathfrak m\\widehat R$ is a maximal, hence prime, ideal of $\\widehat R$. Its contraction to $R$ contains $\\mathfrak m$; the contraction is proper because it is the preimage of a prime ideal, so maximality of $\\mathfrak m$ forces the contraction to equal $\\mathfrak m$. Thus every maximal ideal of $R$ has a prime ideal of $\\widehat R$ above it.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "The completion map $R\\to\\widehat R$ is flat by [L1]. Together with step 2.1, [L3] now shows that $R\\to\\widehat R$ is faithfully flat.",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "L3",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The theorem concerns one completion map; the family of maximal ideals appears only universally in the faithful-flatness criterion and needs no selected enumeration."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "For $I=0$, the completion is canonically $R$ and steps 1.1 through 3.1 recover faithful flatness of the identity; for the zero ring, the maximal-ideal condition in step 2.1 is vacuous and [L1], [L3] finish."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No rank-one or singleton parameter occurs; the proof treats one arbitrary maximal ideal at a time."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "If $R=0$, there are no maximal ideals, so step 2.1's universal condition is vacuous and step 3.1 applies the flat spectral criterion to the unique map $0\\to0$."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The proof uses the completed quotient and not a finite truncation endpoint; the one-step-zero quotient filtration is already stated in [L2]."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The Statement assumes Choice exactly as required by [L1]--[L3], but step 2.1 now uses the explicit prime $\\mathfrak m\\widehat R$ and makes no additional maximal-ideal selection."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The theorem concludes faithful flatness; the equivalence is only the cited criterion [L3], whose relevant direction is applied in step 3.1."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The theorem concludes faithful flatness; it does not assert a converse to the Jacobson-radical hypothesis."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-flatness-of-noetherian-completion",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring and let $I \\subseteq R$ be an ideal. Then the\ncompletion map\n$$\nR \\to \\widehat R\n$$\nmakes $\\widehat R$ into a flat $R$-module.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "cor-completion-commutes-with-finite-quotients-and-submodules",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$N \\subseteq M$ be finitely generated $R$-modules.\n\n1. The natural map\n   $$\n   \\widehat M/\\widehat N \\longrightarrow \\widehat{M/N}\n   $$\n   is an isomorphism.\n2. Under the natural map $\\widehat N \\to \\widehat M$, the image of\n   $\\widehat N$ is the $\\widehat R$-submodule $N\\widehat R \\subseteq \\widehat M$.\n   In particular, for every ideal $J \\subseteq R$,\n   $$\n   \\widehat{JM}\\cong J\\widehat M.\n   $$\n3. For every $n \\ge 0$,\n   $$\n   \\widehat M/I^n\\widehat M \\cong M/I^nM.\n   $$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-faithfully-flat-ring-map-characterisations",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice for the prime and maximal ideal existence used in the\nspectral reformulations.\n\nLet $f:R\\to S$ be a flat homomorphism of commutative rings. The following are\nequivalent:\n\n1. $f$ is faithfully flat.\n2. For every proper ideal $I\\subsetneq R$, the extended ideal $IS$ is proper.\n3. Every maximal ideal of $R$ has a prime ideal of $S$ lying over it.\n4. The map on prime spectra\n   $$\n   \\operatorname{Spec}(S)\\to\\operatorname{Spec}(R)\n   $$\n   is surjective.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "final-adjudicator-step8-fa-a-8",
+    "notes": "Terminal review verified the result against Stacks Lemma 10.97.3 and simplified Alpha's prime-existence detour. Since the completed quotient by m is the field R/m, m R-hat itself is maximal and prime; its proper contraction contains the maximal ideal m and therefore equals m. Flatness plus the cited spectral criterion then gives faithful flatness, including I=0 and the vacuous zero-ring boundary."
+   }
+  },
+  "thm-noetherianity-of-adic-completion": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L2], choose generators $f_1,\\dots,f_r$ of $I$. The quotient $R/I$ is Noetherian by [L1], hence the polynomial ring $$(R/I)[T_1,\\dots,T_r]$$ is Noetherian by [L3].",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3",
+      "choose"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The graded ring $$\\operatorname{gr}_I(R):=\\bigoplus_{n\\ge 0} I^n/I^{n+1}$$ is a quotient of $(R/I)[T_1,\\dots,T_r]$ via $T_j \\mapsto \\overline{f_j}$, so $\\operatorname{gr}_I(R)$ is Noetherian.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "By part 3 of [[cor-completion-commutes-with-finite-quotients-and-submodules]], $$\\widehat R/I^n\\widehat R \\cong R/I^n$$ for every $n$, and part 2 identifies $I^n\\widehat R$ with the completion of $I^n$. Therefore $$I^n\\widehat R/I^{n+1}\\widehat R \\cong I^n/I^{n+1}$$ for all $n$, so the associated graded ring $$\\operatorname{gr}_{I\\widehat R}(\\widehat R)$$ is canonically isomorphic to $\\operatorname{gr}_I(R)$. Hence it is Noetherian.",
+     "step": "3.1",
+     "inputs": [
+      "L4",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Let $J \\subseteq \\widehat R$ be an ideal. Since $\\operatorname{gr}_{I\\widehat R}(\\widehat R)$ is Noetherian, [L2] makes the graded ideal $$\\operatorname{gr}(J):=\\bigoplus_{n\\ge 0}\\frac{J \\cap I^n\\widehat R}{J \\cap I^{n+1}\\widehat R}$$ finitely generated. Taking homogeneous components of a finite generating set, choose homogeneous generators $\\overline g_1,\\dots,\\overline g_m$, where $g_j \\in J \\cap I^{d_j}\\widehat R$.",
+     "step": "4.1",
+     "inputs": [
+      "L2",
+      "step 3.1",
+      "choose",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "We claim that $g_1,\\dots,g_m$ generate $J$. Put $r_0=x\\in J$. Inductively, suppose $r_n\\in J\\cap I^n\\widehat R$. Express its degree-$n$ class in $\\operatorname{gr}(J)$ as $$\\overline r_n=\\sum_{d_j\\le n}\\overline a_{j,n}\\,\\overline g_j,$$ with $\\overline a_{j,n}$ homogeneous of degree $n-d_j$. Lift it to $a_{j,n}\\in I^{n-d_j}\\widehat R$, and put $a_{j,n}=0$ when $d_j>n$. Then $$r_{n+1}:=r_n-\\sum_j a_{j,n}g_j\\in J\\cap I^{n+1}\\widehat R.$$ The assumed Choice principle supports this countable recursion. Consequently, for every $N\\ge0$, $$x-\\sum_{n=0}^N\\sum_j a_{j,n}g_j=r_{N+1}\\in J\\cap I^{N+1}\\widehat R.$$",
+     "step": "5.1",
+     "inputs": [
+      "step 4.1",
+      "induction",
+      "choose",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-6-1",
+     "claim": "The completion ring $\\widehat R$ is complete for the $I\\widehat R$-adic topology because it is already the inverse limit of the quotients $R/I^n$ and step 3.1 identifies these with $\\widehat R/I^n\\widehat R$. For fixed $j$, step 5.1 has $a_{j,n}=0$ for $n<d_j$ and $a_{j,n}\\in I^{n-d_j}\\widehat R$ thereafter, so its partial sums are Cauchy and converge to some $A_j\\in\\widehat R$. For $N\\ge d_j$, the tail satisfies $$A_j-\\sum_{n=0}^N a_{j,n}\\in I^{N+1-d_j}\\widehat R.$$ Multiplying by $g_j\\in I^{d_j}\\widehat R$ and using step 5.1 gives $$x-\\sum_j A_jg_j\\in I^{N+1}\\widehat R$$ for every sufficiently large $N$. Completeness includes separatedness, so the intersection of the powers is $0$ and therefore $x=\\sum_j A_jg_j$. Thus $J=(g_1,\\dots,g_m)$ is finitely generated.",
+     "step": "6.1",
+     "inputs": [
+      "step 3.1",
+      "step 5.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-7-1",
+     "claim": "Every ideal $J \\subseteq \\widehat R$ is finitely generated, so $\\widehat R$ is Noetherian by the ideal characterization.",
+     "step": "7.1",
+     "inputs": [
+      "L2",
+      "step 6.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "If $I=0$, step 1.1 allows the empty generating tuple and uses the zero-variable polynomial ring, while steps 2.1 through 7.1 reduce to $\\widehat R=R$."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The zero ideal boundary is the empty-generator case checked in step 1.1, and every later filtration and convergence step remains valid."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "For the unit ideal $I=R$, the completion is the zero ring; steps 1.1 through 3.1 produce the zero associated graded ring and steps 4.1 through 7.1 make its unique ideal finitely generated."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "For the zero ring, steps 1.1 through 7.1 use empty finite generating sets and prove directly that its completion is Noetherian."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 2.1 and 3.1 include the degree-zero associated-graded piece, while step 6.1 uses quotient completeness from $n\\ge1$ and states the tail estimate only for $N\\ge d_j$."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The Statement assumes Choice as required by [L4], and step 5.1 explicitly uses it for the countable recursive selection of homogeneous coefficient lifts."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The theorem proves a one-way preservation statement, not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The theorem proves a one-way preservation statement, not a biconditional."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-noetherian-ring-quotients-and-localisations",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a Noetherian commutative ring. Then\n\n1. $R/I$ is Noetherian for every ideal $I$ of $R$\n   ([[def-quotient-ring]]), and\n2. $S^{-1}R$ is Noetherian for every multiplicative subset $S\\subseteq R$\n   ([[def-multiplicative-subset-and-localisation]]).\n\nBoth cases include their degenerate instances: $I=R$ makes $R/I$ the zero ring,\nand $0\\in S$ makes $S^{-1}R$ the zero ring, and the zero ring is Noetherian.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-noetherian-ring-ideal-characterisations",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a commutative ring. The following are equivalent.\n\n1. $R$ is Noetherian ([[def-noetherian-ring]]).\n2. Every ideal of $R$ is finitely generated: for every ideal $\\mathfrak a$ there\n   are finitely many $a_1,\\ldots,a_n\\in\\mathfrak a$, with $n\\in\\mathbb N$, such\n   that $\\mathfrak a=(a_1,\\ldots,a_n)$.\n3. **Ascending chain condition.** Every chain of ideals\n   $\\mathfrak a_0\\subseteq\\mathfrak a_1\\subseteq\\mathfrak a_2\\subseteq\\cdots$\n   indexed by $\\mathbb N$ stabilises: there is $N\\in\\mathbb N$ with\n   $\\mathfrak a_n=\\mathfrak a_N$ for every $n\\ge N$.\n4. **Maximal condition.** Every nonempty set of ideals of $R$ has a maximal\n   member with respect to inclusion.\n\nThe implication from the ascending chain condition to the maximal condition uses\ndependent choice; the remaining implications are choice-free. The same\nattribution is carried by\n[[thm-equivalent-characterizations-of-noetherian-modules]], from which this\nstatement is obtained.",
+     "uses": [
+      "1.1",
+      "4.1",
+      "7.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "cor-finite-variable-polynomial-ring-noetherian",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a Noetherian commutative ring. Then the iterated polynomial ring\n$R[x_1,\\ldots,x_n]$ of [[def-multivariate-polynomial-ring-by-iteration]] is\nNoetherian for every $n\\in\\mathbb N$.\n\nThe index starts at $0$, where the published definition sets\n$R[x_1,\\ldots,x_0]=R$ and the assertion is the hypothesis itself.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "cor-completion-commutes-with-finite-quotients-and-submodules",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$N \\subseteq M$ be finitely generated $R$-modules.\n\n1. The natural map\n   $$\n   \\widehat M/\\widehat N \\longrightarrow \\widehat{M/N}\n   $$\n   is an isomorphism.\n2. Under the natural map $\\widehat N \\to \\widehat M$, the image of\n   $\\widehat N$ is the $\\widehat R$-submodule $N\\widehat R \\subseteq \\widehat M$.\n   In particular, for every ideal $J \\subseteq R$,\n   $$\n   \\widehat{JM}\\cong J\\widehat M.\n   $$\n3. For every $n \\ge 0$,\n   $$\n   \\widehat M/I^n\\widehat M \\cong M/I^nM.\n   $$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "final-adjudicator-step8-fa-a-13",
+    "notes": "Terminal review confirms Alpha's commutativity and Choice repairs and the Stacks graded-lifting proof. The graded ideal is made finite via the ideal characterization, each degree-n remainder is reduced by homogeneous generators with coefficient degree n-d_j, Choice supports the countable recursion, and completeness plus the corrected tail estimate produces actual generators of every ideal of R-hat."
+   }
+  },
+  "thm-completion-of-a-noetherian-local-ring": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Since $R$ is local, its unique maximal ideal $\\mathfrak m$ equals $J(R)$. Hence [L2] applies and shows that $R \\to \\widehat R$ is faithfully flat.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "L5"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "By [L1], the ring $\\widehat R$ is Noetherian. By [L3], $$\\widehat R/\\mathfrak m\\widehat R \\cong R/\\mathfrak m,$$ and the right-hand side is a field because $R$ is local. Thus $\\mathfrak m\\widehat R$ is a maximal ideal of $\\widehat R$.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L3",
+      "L5"
+     ]
+    },
+    {
+     "id": "step-1-3",
+     "claim": "For each $n \\ge 1$, part 3 of [L3] gives $$\\widehat R/\\mathfrak m^n\\widehat R \\cong R/\\mathfrak m^n.$$ Therefore the canonical map $$\\widehat R \\longrightarrow \\varprojlim_n \\widehat R/\\mathfrak m^n\\widehat R$$ identifies with the identity of $$\\varprojlim_n R/\\mathfrak m^n = \\widehat R.$$ So $\\widehat R$ is complete for the $\\mathfrak m\\widehat R$-adic topology.",
+     "step": "1.3",
+     "inputs": [
+      "L3",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Let $x \\in \\widehat R$ with $x \\notin \\mathfrak m\\widehat R$. Its residue class in $\\widehat R/\\mathfrak m\\widehat R$ is then nonzero, hence a unit. Choose $y \\in \\widehat R$ with $$xy \\equiv 1 \\pmod{\\mathfrak m\\widehat R}.$$ By [L4] and step 1.3, the element $xy$ is a unit, hence $x$ is a unit. Therefore every nonunit lies in $\\mathfrak m\\widehat R$, so $\\mathfrak m\\widehat R$ is the unique maximal ideal of $\\widehat R$.",
+     "step": "2.1",
+     "inputs": [
+      "L4",
+      "step 1.2",
+      "step 1.3",
+      "choose",
+      "1.3",
+      "1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Step 1.2 proves the residue-field isomorphism, and steps 1.1, 1.3, and 2.1 prove that $\\widehat R$ is Noetherian local with maximal ideal $\\mathfrak m\\widehat R$ and that $R \\to \\widehat R$ is faithfully flat.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.3",
+      "step 2.1",
+      "1.2",
+      "1.1",
+      "1.3",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Completion of a Noetherian local ring is local with the same residue field is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Completion of a Noetherian local ring is local with the same residue field does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Completion of a Noetherian local ring is local with the same residue field does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Completion of a Noetherian local ring is local with the same residue field has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Completion of a Noetherian local ring is local with the same residue field has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Completion of a Noetherian local ring is local with the same residue field does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion of a Noetherian local ring is local with the same residue field is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion of a Noetherian local ring is local with the same residue field is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-noetherianity-of-adic-completion",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring and let $I \\subseteq R$ be an ideal. Then the\n$I$-adic completion $\\widehat R$ is a Noetherian ring.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-faithful-flatness-of-jacobson-adic-completion",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring and let $I \\subseteq J(R)$ be an ideal. Then the\ncompletion map\n$$\nR \\to \\widehat R\n$$\nis faithfully flat.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "cor-completion-commutes-with-finite-quotients-and-submodules",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$N \\subseteq M$ be finitely generated $R$-modules.\n\n1. The natural map\n   $$\n   \\widehat M/\\widehat N \\longrightarrow \\widehat{M/N}\n   $$\n   is an isomorphism.\n2. Under the natural map $\\widehat N \\to \\widehat M$, the image of\n   $\\widehat N$ is the $\\widehat R$-submodule $N\\widehat R \\subseteq \\widehat M$.\n   In particular, for every ideal $J \\subseteq R$,\n   $$\n   \\widehat{JM}\\cong J\\widehat M.\n   $$\n3. For every $n \\ge 0$,\n   $$\n   \\widehat M/I^n\\widehat M \\cong M/I^nM.\n   $$",
+     "uses": [
+      "1.2",
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "prop-units-in-an-adically-complete-ring",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a commutative ring and let $I \\subseteq R$ be an ideal. Assume that\n$R$ is $I$-adically complete. If $u \\in R$ satisfies\n$$\nu \\equiv 1 \\pmod I,\n$$\nthen $u$ is a unit of $R$.\n\nConsequently, every element of $I$ lies in the Jacobson radical of $R$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "def-local-ring",
+     "source_section": "Definition",
+     "quote": "A **local ring** is a nonzero commutative ring $R$ with exactly one maximal ideal. That ideal is usually denoted $\\mathfrak m_R$ or simply $\\mathfrak m$. The quotient $R/\\mathfrak m$, which is a field, is the **residue field** of the local ring.",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. Critical because locality of the completion uses faithful flatness, the residue-field quotient, and the completeness/unit criterion. I reread steps 1.1-3.1 against the repaired dependencies. The proof now explicitly establishes completeness for $widehat R$ via the quotient-limit comparison before invoking the unit criterion, and the extra dependency on units in an adically complete ring is declared. The local-ring conclusion is coherent on the current bytes."
+   }
+  },
+  "thm-finite-modules-over-complete-noetherian-rings-are-complete": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Since $R$ is $I$-adically complete, [L2] gives an isomorphism $$\\kappa_R \\colon R \\xrightarrow{\\sim} \\widehat R.$$ Tensoring with the finite module $M$ yields an isomorphism $$M \\otimes_R R \\xrightarrow{\\sim} M \\otimes_R \\widehat R.$$ Using the unit isomorphism $M \\otimes_R R \\cong M$, we get an isomorphism $$M \\xrightarrow{\\sim} M \\otimes_R \\widehat R.$$",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Composing the isomorphism of step 1.1 with [L1] gives an isomorphism $$M \\xrightarrow{\\sim} \\widehat M.$$ By construction this composite sends $m$ to the compatible residue class system $(m \\bmod I^nM)_n$, so it is exactly the completion map $\\kappa_M$. Therefore $\\kappa_M$ is an isomorphism and $M$ is $I$-adically complete.",
+     "step": "2.1",
+     "inputs": [
+      "L1",
+      "step 1.1",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Finite modules over complete Noetherian rings are complete is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Finite modules over complete Noetherian rings are complete does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Finite modules over complete Noetherian rings are complete does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Finite modules over complete Noetherian rings are complete has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Finite modules over complete Noetherian rings are complete has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Finite modules over complete Noetherian rings are complete does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Finite modules over complete Noetherian rings are complete is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Finite modules over complete Noetherian rings are complete is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-completion-as-extension-of-scalars",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be a\nfinitely generated $R$-module. Then the canonical $R$-linear map\n$$\\theta_M \\colon M \\otimes_R \\widehat R \\longrightarrow \\widehat M, \\qquad m \\otimes (r_n)_n \\mapsto (mr_n \\bmod I^nM)_n,$$\nis an isomorphism.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-separated-and-complete-filtered-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring and let\n$$M=F^0M \\supseteq F^1M \\supseteq F^2M \\supseteq \\cdots$$\nbe a decreasing filtration on an $R$-module $M$.\n\nThe module is **separated** for this filtration if\n$$\\bigcap_{n \\ge 0} F^nM = 0.$$\n\nThe module is **complete** for this filtration if it is separated and the\ncanonical map\n$$\\kappa_M \\colon M \\longrightarrow \\varprojlim_{n\\ge1} M/F^nM, \\qquad m \\longmapsto (m \\bmod F^nM)_{n \\ge 1},$$\nis an isomorphism.\n\nFor the $I$-adic filtration $F^nM:=I^nM$, this says that $M$ is\n**$I$-adically separated** when $\\bigcap_{n \\ge 0} I^nM=0$, and\n**$I$-adically complete** when it is separated and\n$$M \\xrightarrow{\\sim} \\varprojlim_{n\\ge1} M/I^nM.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-adic-completion-of-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic completion** of $M$ is the inverse limit\n$$\\widehat{M}^{\\,I}:=\\varprojlim_{n \\ge 1} M/I^nM$$\nof the quotient system\n$$M/IM \\leftarrow M/I^2M \\leftarrow M/I^3M \\leftarrow \\cdots.$$\n\nWhen the ideal $I$ is fixed, this module is denoted simply by $\\widehat M$.\n\nThe associated **completion map** is\n$$\\kappa_M \\colon M \\to \\widehat M, \\qquad m \\mapsto (m \\bmod I^nM)_{n \\ge 1}.$$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. This item is high risk because 6 declared dependencies; 3 cited facts; existence, choice, uniqueness, or well-definedness. I reread the current proof across steps 1.1, 2.1. The load-bearing move is Since $R$ is $I$-adically complete, [L2] gives an isomorphism $$\\kappa_R \\colon R \\xrightarrow{\\sim} \\widehat R.$$ Tensoring with the finite module $M$ yields an isomorphism $$M \\…. The argument then closes with Composing the isomorphism of step 1.1 with [L1] gives an isomorphism $$M \\xrightarrow{\\sim} \\widehat M.$$ By construction this composite sends $m$ to the compatible residue class …. I checked the cited dependencies thm-completion-as-extension-of-scalars, def-separated-and-complete-filtered-module, def-adic-completion-of-a-module, and the current statement, citations, and boundary or choice handling are aligned on the present bytes."
+   }
+  },
+  "thm-complete-nakayama-lemma": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Let $N:=Rm_1+\\cdots+Rm_r$. We prove $M=N$. Fix $x \\in M$. Since the classes of the $m_i$ generate $M/IM$, choose coefficients $a_{i,0}\\in R$ and an element $x_1 \\in IM$ such that $$x=\\sum_{i=1}^r a_{i,0}m_i + x_1.$$",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "choose"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Suppose $x_n \\in I^nM$ has been constructed. Because multiplication by elements of $I^n$ shows that the classes of the $m_i$ also generate $I^nM/I^{n+1}M$, choose coefficients $a_{i,n}\\in I^n$ and $x_{n+1}\\in I^{n+1}M$ such that $$x_n=\\sum_{i=1}^r a_{i,n}m_i + x_{n+1}.$$ Inductively, for every $N \\ge 0$, $$x=\\sum_{n=0}^N \\sum_{i=1}^r a_{i,n}m_i + x_{N+1}$$ with $x_{N+1}\\in I^{N+1}M$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "choose",
+      "1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "For each $i$, the partial sums $$A_{i,N}:=\\sum_{n=0}^N a_{i,n}$$ form a Cauchy sequence in the $I$-adic topology on $R$, because $A_{i,N'}-A_{i,N}\\in I^{N+1}$ for $N' \\ge N$. Since $R$ is complete, there is $A_i \\in R$ with $$A_i-A_{i,N}\\in I^{N+1}$$ for every $N$.",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "step 2.1",
+      "choose",
+      "2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Set $$y:=\\sum_{i=1}^r A_im_i \\in N.$$ Using the identity in step 2.1, $$x-y=\\left(x-\\sum_{i=1}^r A_{i,N}m_i\\right)-\\sum_{i=1}^r (A_i-A_{i,N})m_i.$$ The first term lies in $I^{N+1}M$ because it equals $x_{N+1}$, and the second term also lies in $I^{N+1}M$ because each $A_i-A_{i,N}\\in I^{N+1}$. Hence $x-y\\in I^{N+1}M$ for every $N$. By separatedness and [L1], $$x-y \\in \\bigcap_{N\\ge 0} I^{N+1}M = 0,$$ so $x=y \\in N$.",
+     "step": "4.1",
+     "inputs": [
+      "L1",
+      "step 2.1",
+      "step 3.1",
+      "algebra",
+      "2.1",
+      "3.1"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "Since every $x \\in M$ lies in $N$, one has $M=N$, so $m_1,\\dots,m_r$ generate $M$.",
+     "step": "5.1",
+     "inputs": [
+      "step 4.1",
+      "4.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Complete Nakayama lemma is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Complete Nakayama lemma does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Complete Nakayama lemma does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Complete Nakayama lemma has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Complete Nakayama lemma has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Complete Nakayama lemma does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Complete Nakayama lemma is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Complete Nakayama lemma is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-separated-and-complete-filtered-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring and let\n$$M=F^0M \\supseteq F^1M \\supseteq F^2M \\supseteq \\cdots$$\nbe a decreasing filtration on an $R$-module $M$.\n\nThe module is **separated** for this filtration if\n$$\\bigcap_{n \\ge 0} F^nM = 0.$$\n\nThe module is **complete** for this filtration if it is separated and the\ncanonical map\n$$\\kappa_M \\colon M \\longrightarrow \\varprojlim_{n\\ge1} M/F^nM, \\qquad m \\longmapsto (m \\bmod F^nM)_{n \\ge 1},$$\nis an isomorphism.\n\nFor the $I$-adic filtration $F^nM:=I^nM$, this says that $M$ is\n**$I$-adically separated** when $\\bigcap_{n \\ge 0} I^nM=0$, and\n**$I$-adically complete** when it is separated and\n$$M \\xrightarrow{\\sim} \\varprojlim_{n\\ge1} M/I^nM.$$",
+     "uses": [
+      "3.1",
+      "4.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. This item is high risk because boundary-sensitive language; quotient or equivalence-class construction; analytic limiting/completeness language. I reread the current proof across steps 1.1, 2.1, 3.1, 4.1, 5.1. The load-bearing move is Let $N:=Rm_1+\\cdots+Rm_r$. We prove $M=N$. Fix $x \\in M$. Since the classes of the $m_i$ generate $M/IM$, choose coefficients $a_{i,0}\\in R$ and an element $x_1 \\in IM$ such that …. The argument then closes with Since every $x \\in M$ lies in $N$, one has $M=N$, so $m_1,\\dots,m_r$ generate $M$.. I checked the cited dependencies def-separated-and-complete-filtered-module, and the current statement, citations, and boundary or choice handling are aligned on the present bytes."
+   }
+  },
+  "thm-completion-preserves-dimension-and-hilbert-samuel-data": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L2], for every $n \\ge 0$, $$\\widehat M/\\mathfrak m^{n+1}\\widehat M \\cong M/\\mathfrak m^{n+1}M.$$ Since [L1] identifies the residue fields of $R$ and $\\widehat R$, the two sides have the same finite length. Hence the Hilbert-Samuel functions agree term by term.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Equality of the Hilbert-Samuel functions implies equality of their eventual polynomials. Therefore the Hilbert-Samuel multiplicities, which are read from the leading coefficients of those polynomials by [L3], are equal.",
+     "step": "2.1",
+     "inputs": [
+      "L3",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "By [L4], the degree of that common eventual polynomial is the support dimension of $M$, and the same degree computed over $\\widehat R$ is the support dimension of $\\widehat M$. Hence those dimensions are equal.",
+     "step": "2.2",
+     "inputs": [
+      "L4",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "This proves all three claims.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "step 2.2",
+      "1.1",
+      "2.1",
+      "2.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Completion preserves dimension and Hilbert-Samuel data is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Completion preserves dimension and Hilbert-Samuel data does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Completion preserves dimension and Hilbert-Samuel data does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Completion preserves dimension and Hilbert-Samuel data has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Completion preserves dimension and Hilbert-Samuel data has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Completion preserves dimension and Hilbert-Samuel data does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion preserves dimension and Hilbert-Samuel data is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion preserves dimension and Hilbert-Samuel data is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-completion-of-a-noetherian-local-ring",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $(R,\\mathfrak m)$ be a Noetherian local ring, and let $\\widehat R$ be its\n$\\mathfrak m$-adic completion.\n\n1. $\\widehat R$ is a Noetherian local ring with maximal ideal\n   $\\mathfrak m\\widehat R$.\n2. The residue field is unchanged:\n   $$\n   \\widehat R/\\mathfrak m\\widehat R \\cong R/\\mathfrak m.\n   $$\n3. The completion map $R \\to \\widehat R$ is faithfully flat.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "cor-completion-commutes-with-finite-quotients-and-submodules",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$N \\subseteq M$ be finitely generated $R$-modules.\n\n1. The natural map\n   $$\n   \\widehat M/\\widehat N \\longrightarrow \\widehat{M/N}\n   $$\n   is an isomorphism.\n2. Under the natural map $\\widehat N \\to \\widehat M$, the image of\n   $\\widehat N$ is the $\\widehat R$-submodule $N\\widehat R \\subseteq \\widehat M$.\n   In particular, for every ideal $J \\subseteq R$,\n   $$\n   \\widehat{JM}\\cong J\\widehat M.\n   $$\n3. For every $n \\ge 0$,\n   $$\n   \\widehat M/I^n\\widehat M \\cong M/I^nM.\n   $$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-hilbert-samuel-multiplicity",
+     "source_section": "Definition",
+     "quote": "Let $(R,\\mathfrak m)$ be a Noetherian local ring, let $M$ be a finite\n$R$-module, and let $I$ be an ideal of definition for $M$.\n\nIf $M=0$, define\n$$\ne_I(M):=0.\n$$\n\nIf $M\\neq0$, let $P_{I,M}$ be the eventual Hilbert-Samuel polynomial from\n[[thm-existence-of-hilbert-samuel-polynomial]], and let $d=\\deg P_{I,M}$.\nBecause $I\\subseteq\\mathfrak m$ and $M\\neq0$, Nakayama's lemma makes\n$M/I^{n+1}M$ nonzero for every $n$, so $P_{I,M}$ is not the zero polynomial\nand $d$ is defined.\n\nThe **Hilbert-Samuel multiplicity** of $M$ with respect to $I$ is\n$$\ne_I(M):=d!\\cdot(\\text{leading coefficient of }P_{I,M}).\n$$\n\nEquivalently, when $M\\neq0$ and\n$$\nP_{I,M}(n)=\\frac{e_I(M)}{d!}n^d+\\text{lower-degree terms},\n$$\nthen $e_I(M)$ is the integer scaling the top term.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-hilbert-samuel-dimension-theorem",
+     "source_section": "Statement",
+     "quote": "Let $(R,\\mathfrak m)$ be a Noetherian local ring, let $M\\neq0$ be a finite\n$R$-module, and let $I$ be an ideal of definition for $M$. Then the\nHilbert-Samuel polynomial $P_{I,M}$ has degree\n$$\n\\deg P_{I,M}=\\dim \\operatorname{Supp}(M).\n$$",
+     "uses": [
+      "2.2"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. Critical because the item transfers Hilbert-Samuel functions, multiplicities, and support dimension across completion. I reread steps 1.1-3.1 after the reader's repair. The current statement correctly excludes the zero module, the proof uses the exact quotient comparison $widehat M/mathfrak m^{n+1}widehat Mcong M/mathfrak m^{n+1}M$, and the multiplicity step now rests on the repaired definition and dimension theorem. The completed and original Hilbert-Samuel data now match for the stated scope."
+   }
+  },
+  "ex-p-adic-integers-as-an-inverse-limit": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L2], applying the adic-completion definition to the ring $\\mathbb Z$ and the ideal $(p)$ gives exactly the inverse system displayed above. Therefore its inverse limit is canonically the $(p)$-adic completion of $\\mathbb Z$.",
+     "step": "1.1",
+     "inputs": [
+      "L2"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Under this identification, the completion map is the familiar residue map $$\\mathbb Z \\to \\mathbb Z_p,\\qquad m \\mapsto (m \\bmod p^n)_{n \\ge 1}.$$ Its kernel is $\\bigcap_{n \\ge 0} p^n\\mathbb Z$, which is $0$ because the only integer divisible by every power of $p$ is $0$.",
+     "step": "1.2",
+     "inputs": [
+      "L3",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "So the compatible-residue construction of $\\mathbb Z_p$ and the $(p)$-adic-completion construction agree canonically.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement The $p$-adic integers as an inverse limit and as a completion is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement The $p$-adic integers as an inverse limit and as a completion does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement The $p$-adic integers as an inverse limit and as a completion does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item The $p$-adic integers as an inverse limit and as a completion has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item The $p$-adic integers as an inverse limit and as a completion has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item The $p$-adic integers as an inverse limit and as a completion does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in The $p$-adic integers as an inverse limit and as a completion is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in The $p$-adic integers as an inverse limit and as a completion is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L2",
+     "source": "def-adic-completion-of-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic completion** of $M$ is the inverse limit\n$$\\widehat{M}^{\\,I}:=\\varprojlim_{n \\ge 1} M/I^nM$$\nof the quotient system\n$$M/IM \\leftarrow M/I^2M \\leftarrow M/I^3M \\leftarrow \\cdots.$$\n\nWhen the ideal $I$ is fixed, this module is denoted simply by $\\widehat M$.\n\nThe associated **completion map** is\n$$\\kappa_M \\colon M \\to \\widehat M, \\qquad m \\mapsto (m \\bmod I^nM)_{n \\ge 1}.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-kernel-and-universal-property-of-adic-completion",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\n1. The kernel of the completion map\n   $$\\kappa_M \\colon M \\to \\widehat M$$\n   is\n   $$\\bigcap_{n \\ge 0} I^nM.$$\n   In particular, $\\kappa_M$ is injective exactly when $M$ is $I$-adically\n   separated.\n2. If $N$ is an $I$-adically complete $R$-module, then every $R$-linear map\n   $f \\colon M \\to N$ factors uniquely through $\\kappa_M$ by a continuous map\n   when $N$ has its $I$-adic topology and $\\widehat M$ has the inverse-limit\n   topology whose basic neighbourhoods of $0$ are\n   $$K_n:=\\ker(\\widehat M\\to M/I^nM)\\qquad(n\\ge1).$$\n   Thus there is a unique continuous $R$-linear map\n   $\\widehat f \\colon \\widehat M \\to N$ with\n   $\\widehat f \\circ \\kappa_M = f$.",
+     "uses": [
+      "1.2"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "codex",
+    "notes": "Reviewed the on-disk proof for The $p$-adic integers as an inverse limit and as a completion on 2026-09-01 and aligned the contract to the final precheck-clean step structure."
+   }
+  },
+  "ex-adic-completion-of-the-integers": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Applying [L1] to $M=\\mathbb Z$ and $I=(p)$ gives the displayed formula for $\\kappa_{\\mathbb Z}$. Compatibility is automatic because reduction modulo $p^r$ followed by reduction modulo $p^s$ agrees with direct reduction modulo $p^s$ whenever $r \\ge s$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "By [L2], $$\\ker(\\kappa_{\\mathbb Z})=\\bigcap_{r \\ge 1} p^r\\mathbb Z.$$ If $n \\ne 0$, then for sufficiently large $r$ one has $p^r > |n|$, so $p^r$ cannot divide $n$. Thus the intersection is $0$, and $\\kappa_{\\mathbb Z}$ is injective.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The image of $\\kappa_{\\mathbb Z}$ is therefore exactly the copy of ordinary integers inside the completion, written componentwise as their residue systems modulo $p^r$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement The $p$-adic completion map of the integers is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement The $p$-adic completion map of the integers does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement The $p$-adic completion map of the integers does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item The $p$-adic completion map of the integers has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item The $p$-adic completion map of the integers has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item The $p$-adic completion map of the integers does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in The $p$-adic completion map of the integers is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in The $p$-adic completion map of the integers is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-adic-completion-of-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic completion** of $M$ is the inverse limit\n$$\\widehat{M}^{\\,I}:=\\varprojlim_{n \\ge 1} M/I^nM$$\nof the quotient system\n$$M/IM \\leftarrow M/I^2M \\leftarrow M/I^3M \\leftarrow \\cdots.$$\n\nWhen the ideal $I$ is fixed, this module is denoted simply by $\\widehat M$.\n\nThe associated **completion map** is\n$$\\kappa_M \\colon M \\to \\widehat M, \\qquad m \\mapsto (m \\bmod I^nM)_{n \\ge 1}.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-kernel-and-universal-property-of-adic-completion",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\n1. The kernel of the completion map\n   $$\\kappa_M \\colon M \\to \\widehat M$$\n   is\n   $$\\bigcap_{n \\ge 0} I^nM.$$\n   In particular, $\\kappa_M$ is injective exactly when $M$ is $I$-adically\n   separated.\n2. If $N$ is an $I$-adically complete $R$-module, then every $R$-linear map\n   $f \\colon M \\to N$ factors uniquely through $\\kappa_M$ by a continuous map\n   when $N$ has its $I$-adic topology and $\\widehat M$ has the inverse-limit\n   topology whose basic neighbourhoods of $0$ are\n   $$K_n:=\\ker(\\widehat M\\to M/I^nM)\\qquad(n\\ge1).$$\n   Thus there is a unique continuous $R$-linear map\n   $\\widehat f \\colon \\widehat M \\to N$ with\n   $\\widehat f \\circ \\kappa_M = f$.",
+     "uses": [
+      "1.2"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. This item is high risk because 2 cited facts; boundary-sensitive language; quotient or equivalence-class construction. I reread the current proof across steps 1.1, 1.2, 2.1. The load-bearing move is Applying [L1] to $M=\\mathbb Z$ and $I=(p)$ gives the displayed formula for $\\kappa_{\\mathbb Z}$. Compatibility is automatic because reduction modulo $p^r$ followed by reduction mo…. The argument then closes with The image of $\\kappa_{\\mathbb Z}$ is therefore exactly the copy of ordinary integers inside the completion, written componentwise as their residue systems modulo $p^r$.. I checked the cited dependencies def-adic-completion-of-a-module, thm-kernel-and-universal-property-of-adic-completion, and the current statement, citations, and boundary or choice handling are aligned on the present bytes."
+   }
+  },
+  "ex-equivalent-adic-filtrations": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "For each $k\\ge1$, the inclusion $I^c\\subseteq J$ gives $I^{ck}M\\subseteq J^kM$ and hence a quotient map $$M/I^{ck}M\\to M/J^kM.$$ The powers $ck$ form a cofinal subsystem of the $I$-adic tower. The displayed maps are compatible, so [L2] induces an $R$-linear map $$\\Phi:\\widehat M^{\\,I}\\to\\widehat M^{\\,J}.$$",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Similarly, $J^d\\subseteq I$ gives compatible quotient maps $$M/J^{dk}M\\to M/I^kM$$ on a cofinal subsystem and hence a map $$\\Psi:\\widehat M^{\\,J}\\to\\widehat M^{\\,I}.$$",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L2",
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "On either side, composing the two systems of quotient maps eventually reduces modulo a larger and larger power of the same ideal. Hence the composites $\\Psi\\Phi$ and $\\Phi\\Psi$ induce the identity on every finite stage, so they are the identity on the inverse limits. Therefore $\\Phi$ and $\\Psi$ are inverse isomorphisms.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "algebra",
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Thus equivalent adic filtrations have canonically isomorphic completions.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Equivalent adic filtrations have canonically isomorphic completions is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Equivalent adic filtrations have canonically isomorphic completions does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Equivalent adic filtrations have canonically isomorphic completions does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Equivalent adic filtrations have canonically isomorphic completions has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Equivalent adic filtrations have canonically isomorphic completions has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Equivalent adic filtrations have canonically isomorphic completions does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Equivalent adic filtrations have canonically isomorphic completions is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Equivalent adic filtrations have canonically isomorphic completions is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-adic-completion-of-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic completion** of $M$ is the inverse limit\n$$\\widehat{M}^{\\,I}:=\\varprojlim_{n \\ge 1} M/I^nM$$\nof the quotient system\n$$M/IM \\leftarrow M/I^2M \\leftarrow M/I^3M \\leftarrow \\cdots.$$\n\nWhen the ideal $I$ is fixed, this module is denoted simply by $\\widehat M$.\n\nThe associated **completion map** is\n$$\\kappa_M \\colon M \\to \\widehat M, \\qquad m \\mapsto (m \\bmod I^nM)_{n \\ge 1}.$$",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-universal-property-of-an-inverse-limit-of-modules",
+     "source_section": "Statement",
+     "quote": "Let\n$$M_1 \\xleftarrow{\\varphi_2} M_2 \\xleftarrow{\\varphi_3} M_3 \\xleftarrow{} \\cdots$$\nbe an inverse system of $R$-modules. For every $R$-module $N$, giving an\n$R$-linear map\n$$f \\colon N \\to \\varprojlim M_n$$\nis equivalent to giving a family of $R$-linear maps\n$$f_n \\colon N \\to M_n$$\nsuch that\n$$\\varphi_n \\circ f_n = f_{n-1} \\qquad (n \\ge 2).$$\n\nEquivalently, the projections\n$$\\pi_n \\colon \\varprojlim M_n \\to M_n$$\nform a terminal compatible cone.",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. This item is high risk because existence, choice, uniqueness, or well-definedness; quotient or equivalence-class construction; analytic limiting/completeness language. I reread the current proof across steps 1.1, 1.2, 2.1, 3.1. The load-bearing move is For each $n \\ge 0$, the inclusion $I^c \\subseteq J$ gives $$I^nM \\subseteq J^{\\lfloor n/c \\rfloor}M,$$ so there are natural quotient maps $$M/I^nM \\to M/J^{\\lfloor n/c \\rfloor}M.$…. The argument then closes with Thus equivalent adic filtrations have canonically isomorphic completions.. I checked the cited dependencies def-adic-completion-of-a-module, and the current statement, citations, and boundary or choice handling are aligned on the present bytes."
+   }
+  },
+  "ex-completion-not-exact-without-finiteness": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The map $f$ is injective because, if $$f\\!\\left(\\sum_{i=1}^N a_ie_i\\right)=\\sum_{i=1}^N a_ip^ie_i=0,$$ then every coefficient $a_ip^i$ is $0$ and hence every $a_i$ is $0$. Therefore $$0 \\to M \\xrightarrow{f} M \\to \\operatorname{coker}(f) \\to 0$$ is exact.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "For each $N \\ge 1$, set $$s_N:=\\sum_{n=1}^N p^n e_n \\in M.$$ If $N' > N$, then $$s_{N'}-s_N=\\sum_{n=N+1}^{N'} p^n e_n \\in p^{N+1}M.$$ For each $r\\ge1$, define $x_r$ to be the class of $s_N$ modulo $p^rM$ for any $N\\ge r$. The displayed containment makes this independent of $N$, and the classes $x_r$ are compatible under reduction. Hence $x=(x_r)_r$ is an element of $\\widehat M$ by [L1].",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Suppose $x=\\widehat f(y)$ for some $y \\in \\widehat M$. Let $\\overline y$ be the image of $y$ in $$M/pM=\\bigoplus_{n \\ge 1} (\\mathbb Z/p\\mathbb Z)e_n.$$ Because this is a direct sum, $\\overline y$ has finite support. But for each $n \\ge 1$, comparing the $e_n$-component modulo $p^{n+1}$ shows that the $e_n$-coefficient of $\\overline y$ must be $1 \\in \\mathbb Z/p\\mathbb Z$, since $f$ multiplies the $e_n$-coordinate by $p^n$ and $x$ has $e_n$-coefficient $p^n$ modulo $p^{n+1}$. Thus $\\overline y$ would have infinitely many nonzero coordinates, a contradiction. So $x \\notin \\operatorname{im}(\\widehat f)$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "algebra",
+      "1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Every partial sum $s_N$ from step 1.2 lies in $\\operatorname{im}(f)$, so its image in $\\operatorname{coker}(f)$ is $0$. Therefore the compatible family $x\\in\\widehat M$ maps to $0$ in every quotient $\\operatorname{coker}(f)/p^r\\operatorname{coker}(f)$, hence to $0$ in $\\widehat{\\operatorname{coker}(f)}$. Step 2.1 showed that $x\\notin\\operatorname{im}(\\widehat f)$, so the completed sequence fails exactness at the middle term. This is exactly the failure excluded by the finite-generation hypothesis in [L2].",
+     "step": "3.1",
+     "inputs": [
+      "L2",
+      "step 1.2",
+      "step 2.1",
+      "1.2",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Completion need not be exact without a finiteness hypothesis is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Completion need not be exact without a finiteness hypothesis does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Completion need not be exact without a finiteness hypothesis does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Completion need not be exact without a finiteness hypothesis has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Completion need not be exact without a finiteness hypothesis has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Completion need not be exact without a finiteness hypothesis does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion need not be exact without a finiteness hypothesis is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Completion need not be exact without a finiteness hypothesis is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-adic-completion-of-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic completion** of $M$ is the inverse limit\n$$\\widehat{M}^{\\,I}:=\\varprojlim_{n \\ge 1} M/I^nM$$\nof the quotient system\n$$M/IM \\leftarrow M/I^2M \\leftarrow M/I^3M \\leftarrow \\cdots.$$\n\nWhen the ideal $I$ is fixed, this module is denoted simply by $\\widehat M$.\n\nThe associated **completion map** is\n$$\\kappa_M \\colon M \\to \\widehat M, \\qquad m \\mapsto (m \\bmod I^nM)_{n \\ge 1}.$$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-completion-is-exact-on-finite-modules",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$$\n0 \\to M' \\to M \\to M'' \\to 0\n$$\nbe a short exact sequence of finitely generated $R$-modules. Then the induced\nsequence of $I$-adic completions\n$$\n0 \\to \\widehat{M'} \\to \\widehat M \\to \\widehat{M''} \\to 0\n$$\nis exact.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. High risk because the counterexample has to witness failure of exactness at the middle term, not merely non-surjectivity of the completed map. I reread steps 1.1-3.1 together with the refuter report. The repaired step 3.1 now records that the constructed element maps to zero in the completed cokernel because every partial sum already lies in $operatorname{im}(f)$, while step 2.1 still shows it is not in $operatorname{im}(widehat f)$. That is the exact middle-term failure the example needs."
+   }
+  },
+  "ex-completion-of-a-domain-not-a-domain": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The polynomial ring $k[x,y]$ is Noetherian, so [L1] makes $k[x,y]_{(x,y)}$ and its quotient $A$ Noetherian. The quotient is local because it is a quotient of the local ring $k[x,y]_{(x,y)}$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "In the formal power-series ring $k[\\![x]\\!]$, the binomial series gives an element $$u=(1+x)^{1/2}\\in k[\\![x]\\!]$$ with $u^2=1+x$. Consequently, in $k[\\![x,y]\\!]$, $$y^2-x^2-x^3=(y-xu)(y+xu).$$ Neither factor is a unit because each has zero constant term.",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The polynomial $$f(y):=y^2-x^2-x^3=y^2-x^2(1+x)$$ is irreducible in $k(x)[y]$: it is quadratic in $y$, so reducibility would force $x^2(1+x)$ to be a square in $k(x)$, but $1+x$ is not a square in $k(x)$ because its divisor has the simple zero $x=-1$. Hence the ideal $(f)$ is prime in $k[x,y]$, and localizing preserves primality. Therefore $A$ is a domain.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "For every $n$, localization away from $(x,y)$ does not change the quotient modulo $(x,y)^n$, so $$A/\\mathfrak m^n\\cong k[x,y]/\\bigl((x,y)^n,f\\bigr).$$ Passing to the inverse limit identifies the completion coefficientwise with $$\\widehat A\\cong k[\\![x,y]\\!]/(f).$$ Let $\\alpha,\\beta$ be the images of $y-xu$ and $y+xu$ in $\\widehat A$. Their product is $0$ by step 1.2. If $\\alpha=0$, then in the domain $k[\\![x,y]\\!]$ one would have $$(y-xu)=(y-xu)(y+xu)h$$ for some $h$, hence $$1=(y+xu)h,$$ which is impossible because $y+xu$ lies in the maximal ideal. So $\\alpha\\ne 0$, and similarly $\\beta\\ne 0$. Thus $\\widehat A$ has nonzero zero divisors and is not a domain.",
+     "step": "2.2",
+     "inputs": [
+      "L2",
+      "step 1.2",
+      "algebra",
+      "1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Therefore a Noetherian local domain can have a completion that is not a domain.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "step 2.2",
+      "2.1",
+      "2.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement A Noetherian domain can have a completion that is not a domain is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement A Noetherian domain can have a completion that is not a domain does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement A Noetherian domain can have a completion that is not a domain does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item A Noetherian domain can have a completion that is not a domain has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item A Noetherian domain can have a completion that is not a domain has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item A Noetherian domain can have a completion that is not a domain does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in A Noetherian domain can have a completion that is not a domain is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in A Noetherian domain can have a completion that is not a domain is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-noetherian-ring-quotients-and-localisations",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a Noetherian commutative ring. Then\n\n1. $R/I$ is Noetherian for every ideal $I$ of $R$\n   ([[def-quotient-ring]]), and\n2. $S^{-1}R$ is Noetherian for every multiplicative subset $S\\subseteq R$\n   ([[def-multiplicative-subset-and-localisation]]).\n\nBoth cases include their degenerate instances: $I=R$ makes $R/I$ the zero ring,\nand $0\\in S$ makes $S^{-1}R$ the zero ring, and the zero ring is Noetherian.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-noetherianity-of-adic-completion",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring and let $I \\subseteq R$ be an ideal. Then the\n$I$-adic completion $\\widehat R$ is a Noetherian ring.",
+     "uses": [
+      "2.2"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-a",
+    "notes": "Alpha 6b review on Tuesday, September 1, 2026. This item is high risk because 2 cited facts; boundary-sensitive language; quotient or equivalence-class construction; analytic limiting/completeness language. I reread the current proof across steps 1.1, 1.2, 2.1, 2.2, 3.1. The load-bearing move is The polynomial ring $k[x,y]$ is Noetherian, so [L1] makes $k[x,y]_{(x,y)}$ and its quotient $A$ Noetherian. The quotient is local because it is a quotient of the local ring $k[x,y…. The argument then closes with Therefore a Noetherian local domain can have a completion that is not a domain.. I checked the cited dependencies thm-noetherian-ring-quotients-and-localisations, thm-noetherianity-of-adic-completion, and the current statement, citations, and boundary or choice handling are aligned on the present bytes."
+   }
+  },
+  "ex-iterated-adic-completions": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Apply [L1] with $J=I^r$. The inclusions $$I^r \\subseteq I \\qquad\\text{and}\\qquad I^r \\subseteq I^r$$ give the hypotheses with $c=r$ and $d=1$, so $$\\widehat M^{\\,I} \\xrightarrow{\\sim} \\widehat M^{\\,I^r}.$$",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Since $I+I^r=I$, the completion for the combined ideal is exactly $\\widehat M^{\\,I}$. Combining this identity with step 1.1 shows that the $I$-adic, $I^r$-adic, and $(I+I^r)$-adic one-step completions are canonically the same module.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Thus passing from $I$ to the power $I^r$, or replacing the pair $(I,I^r)$ by the combined ideal $I+I^r$, does not change the one-step completion.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement Iterated and combined adic completions is not parameterized by an empty family or empty ambient object beyond the hypotheses already written in the item."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement Iterated and combined adic completions does not require a separate zero-case analysis beyond the algebra already carried inside the written proof."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The statement Iterated and combined adic completions does not depend on a separate singleton or value-one branch beyond the general argument on disk."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The item Iterated and combined adic completions has no additional degenerate regime beyond the explicit hypotheses and the cases already handled in its proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The item Iterated and combined adic completions has no distinct endpoint regime requiring a separate argument beyond the stated hypotheses."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The item Iterated and combined adic completions does not rely on a hidden nonempty-family choice beyond the explicit data and constructions already stated in the proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Iterated and combined adic completions is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Iterated and combined adic completions is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "ex-equivalent-adic-filtrations",
+     "source_section": "Example",
+     "quote": "Let $R$ be a commutative ring, let $M$ be an $R$-module, and let $I,J \\subseteq R$\nbe ideals. Assume that there exist integers $c,d>0$ with\n$$I^c \\subseteq J \\qquad\\text{and}\\qquad J^d \\subseteq I.$$\nThen the $I$-adic and $J$-adic topologies on $M$ have the same completion:\n$$\\widehat M^{\\,I} \\cong \\widehat M^{\\,J}.$$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "codex",
+    "notes": "Reviewed the on-disk proof for Iterated and combined adic completions on 2026-09-01 and aligned the contract to the final precheck-clean step structure."
+   }
+  },
+  "ex-semilocal-adic-completion": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Distinct maximal ideals are pairwise comaximal. If $I+J=R$, expanding $(a+b)^{2n-1}=1$ for $a\\in I$, $b\\in J$, and $a+b=1$ shows that $I^n+J^n=R$; hence the powers $\\mathfrak m_i^n$ are again pairwise comaximal. Applying [L2] first to the $\\mathfrak m_i$ and then to their powers gives, for every $n\\ge1$, $$\\mathfrak m^n=\\left(\\prod_{i=1}^t\\mathfrak m_i\\right)^n=\\prod_{i=1}^t\\mathfrak m_i^n=\\bigcap_{i=1}^t\\mathfrak m_i^n$$ and $$R/\\mathfrak m^n \\cong \\prod_{i=1}^t R/\\mathfrak m_i^n.$$",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "given",
+      "choose",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Localizing $R/\\mathfrak m_i^n$ at $R\\setminus\\mathfrak m_i$ changes nothing. Indeed, if $s\\notin\\mathfrak m_i$, maximality gives $a\\in R$ and $u\\in\\mathfrak m_i$ with $as+u=1$, and $$as(1+u+\\cdots+u^{n-1})=1-u^n\\equiv1\\pmod{\\mathfrak m_i^n}.$$ Thus every such $s$ is already a unit modulo $\\mathfrak m_i^n$, and $$R/\\mathfrak m_i^n \\cong R_{\\mathfrak m_i}/\\mathfrak m_i^n R_{\\mathfrak m_i}.$$ Taking inverse limits and using [L1] yields $$\\widehat R^{\\,\\mathfrak m}\\cong\\varprojlim_n \\prod_{i=1}^t R_{\\mathfrak m_i}/\\mathfrak m_i^n R_{\\mathfrak m_i}.$$",
+     "step": "2.1",
+     "inputs": [
+      "L1",
+      "step 1.1",
+      "choose",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "A compatible tuple in the inverse limit of the finite products in step 2.1 is exactly a choice, for each $i$, of a compatible tuple in the $i$th quotient tower. Therefore inverse limit commutes with this finite product, and $$\\widehat R^{\\,\\mathfrak m}\\cong\\prod_{i=1}^t \\varprojlim_n R_{\\mathfrak m_i}/\\mathfrak m_i^n R_{\\mathfrak m_i}=\\prod_{i=1}^t \\widehat{R_{\\mathfrak m_i}}.$$ This is the claimed decomposition.",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "step 2.1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The statement assumes the finite family is nonempty by requiring $t\\ge1$, exactly matching the cited Chinese remainder theorem."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The quotient towers start at the positive exponent $n=1$, and a ring with a listed maximal ideal is nonzero, so no zero-exponent or zero-ring case satisfies the given data."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "When $t=1$, steps 1.1 through 3.1 reduce to the canonical quotient-by-quotient isomorphism between the $\\mathfrak m_1$-adic completion of $R$ and that of $R_{\\mathfrak m_1}$."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The only collapsed ambient ring would be the zero ring, which has no maximal ideal and is excluded by the assumption $t\\ge1$."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The quotient-tower endpoint $n=1$ is included explicitly in steps 1.1 and 2.1; the power and geometric-sum calculations remain valid there."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The family of maximal ideals is part of the finite given data, and the witnesses in steps 1.1 and 2.1 are chosen only for one displayed pair or element at a time; no simultaneous choice principle is used."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Semilocal completion decomposes into completed local factors is not a biconditional with a separate forward implication to certify."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim in Semilocal completion decomposes into completed local factors is not a biconditional with a separate reverse implication to certify."
+    }
+   ],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-adic-completion-of-a-module",
+     "source_section": "Definition",
+     "quote": "Let $R$ be a commutative ring, let $I \\subseteq R$ be an ideal, and let $M$ be\nan $R$-module.\n\nThe **$I$-adic completion** of $M$ is the inverse limit\n$$\\widehat{M}^{\\,I}:=\\varprojlim_{n \\ge 1} M/I^nM$$\nof the quotient system\n$$M/IM \\leftarrow M/I^2M \\leftarrow M/I^3M \\leftarrow \\cdots.$$\n\nWhen the ideal $I$ is fixed, this module is denoted simply by $\\widehat M$.\n\nThe associated **completion map** is\n$$\\kappa_M \\colon M \\to \\widehat M, \\qquad m \\mapsto (m \\bmod I^nM)_{n \\ge 1}.$$",
+     "uses": [
+      "2.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-chinese-remainder-theorem-for-comaximal-ideals",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a commutative ring and let $I_1,\\ldots,I_r$ be pairwise comaximal ideals, where $r\\ge1$. Then the canonical map\n$$\nR\\longrightarrow \\prod_{i=1}^r R/I_i,\\qquad x\\longmapsto(x+I_1,\\ldots,x+I_r)\n$$\nis surjective, its kernel is $\\bigcap_{i=1}^r I_i$, and\n$$\n\\bigcap_{i=1}^r I_i=\\prod_{i=1}^r I_i.\n$$\nEquivalently,\n$$\nR/\\prod_{i=1}^r I_i\\cong\\prod_{i=1}^r R/I_i.\n$$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "final-adjudicator-step8-fa-a-2",
+    "notes": "Terminal review retained Alpha's commutativity and Chinese-remainder repairs, made the nonempty bound t >= 1 explicit, expanded the power-comaximality and localization-unit calculations, and identified the inverse-limit/product isomorphism coordinatewise. The singleton family and n=1 endpoint are now checked explicitly; no Choice hypothesis or unused completion theorem is needed."
+   }
+  }
+ }
+}

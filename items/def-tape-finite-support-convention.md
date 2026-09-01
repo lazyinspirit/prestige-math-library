@@ -2,7 +2,7 @@
 id: def-tape-finite-support-convention
 kind: definition
 title: "Right-infinite tapes as finite-support functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ deps:
   - def-finite-cardinality
 justified_by: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

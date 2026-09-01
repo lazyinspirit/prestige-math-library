@@ -2,7 +2,7 @@
 id: rem-dual-of-l-infinity
 kind: remark
 title: "The dual of $\\ell^\\infty$ is $ba(2^{\\mathbb{N}})$, the finitely additive charges"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -12,7 +12,12 @@ aliases: []
 landmark: false
 short: "l-infinity dual is bigger than l^1"
 verification:
+  audited: 2026-09-01
   precheck: n/a
+  sources_checked:
+    date: 2026-09-01
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

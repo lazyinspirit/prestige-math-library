@@ -1,0 +1,327 @@
+[
+  {
+    "order": 111.025,
+    "id": "inverse-limits-and-noetherian-completion",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Inverse Limits and Noetherian Completion",
+    "companion": "inverse-limits-and-noetherian-completion-examples",
+    "requires": [
+      "flatness-and-faithful-flatness-examples"
+    ],
+    "items": [
+      {
+        "id": "def-filtration-and-adic-filtration",
+        "kind": "definition",
+        "title": "Filtered modules and the $I$-adic filtration",
+        "strategy": "Define a decreasing filtration once, then specialize to the $I$-adic filtration by the powers $I^nM$ built recursively from ideal-module products. This keeps the later completion and topology statements tied to one exact filtration convention.",
+        "deps": [
+          "def-product-of-an-ideal-and-a-module"
+        ]
+      },
+      {
+        "id": "def-adic-topology-on-a-module",
+        "kind": "definition",
+        "title": "The $I$-adic topology on a module",
+        "strategy": "Use the cosets of the filtration terms $I^nM$ as the distinguished neighbourhoods. This records the linear-topology convention without importing a separate abstract-topology page into the low completion spine.",
+        "deps": [
+          "def-filtration-and-adic-filtration"
+        ]
+      },
+      {
+        "id": "def-inverse-system-and-inverse-limit-of-modules",
+        "kind": "definition",
+        "title": "Inverse systems and inverse limits of modules",
+        "strategy": "Define a countable inverse system as a sequence of modules with transition maps, and define its inverse limit as the compatible-element submodule of the product. The elementwise compatibility condition is the concrete model used throughout this page.",
+        "deps": []
+      },
+      {
+        "id": "thm-universal-property-of-an-inverse-limit-of-modules",
+        "kind": "theorem",
+        "title": "Universal property of an inverse limit of modules",
+        "strategy": "Check componentwise that giving a compatible family of maps into the stages is equivalent to giving one map into the compatible-product submodule. This is the exact categorical property the later completion UMP reuses.",
+        "deps": [
+          "def-inverse-system-and-inverse-limit-of-modules"
+        ]
+      },
+      {
+        "id": "thm-inverse-limits-are-left-exact",
+        "kind": "theorem",
+        "title": "Inverse limits preserve kernels",
+        "strategy": "Realize the inverse limit as a kernel inside a product and use the module-theoretic compatibility of kernels with products. This isolates the always-true left-exact part before the later Mittag-Leffler right-exactness repair.",
+        "deps": [
+          "def-inverse-system-and-inverse-limit-of-modules",
+          "thm-universal-property-of-an-inverse-limit-of-modules",
+          "def-module-homomorphism-kernel-image-and-cokernel"
+        ]
+      },
+      {
+        "id": "def-mittag-leffler-inverse-system",
+        "kind": "definition",
+        "title": "Mittag-Leffler inverse systems",
+        "strategy": "Record the eventual stability of the images in each stage. Surjective transition systems are the model case, but the definition is stated at the exact generality needed for the completion exactness theorem.",
+        "deps": [
+          "def-inverse-system-and-inverse-limit-of-modules"
+        ]
+      },
+      {
+        "id": "thm-exactness-of-inverse-limits-under-mittag-leffler",
+        "kind": "theorem",
+        "title": "Countable Mittag-Leffler systems preserve short exactness on inverse limits",
+        "strategy": "The left-exact part is already available, so only surjectivity remains. The proof successively corrects lifts along the stable-image system; this is exactly the countable Mittag-Leffler argument the design chose instead of derived $\\varprojlim^1$ notation.",
+        "deps": [
+          "thm-inverse-limits-are-left-exact",
+          "def-mittag-leffler-inverse-system"
+        ]
+      },
+      {
+        "id": "def-separated-and-complete-filtered-module",
+        "kind": "definition",
+        "title": "Separated and complete filtered modules",
+        "strategy": "Define separatedness by the vanishing of the intersection of the filtration terms, and completeness by the canonical map to the inverse limit of the filtered quotients. This keeps 'complete' tied to compatible residue data and not to a Cauchy-sequence quotient.",
+        "deps": [
+          "def-filtration-and-adic-filtration",
+          "def-inverse-system-and-inverse-limit-of-modules"
+        ]
+      },
+      {
+        "id": "def-adic-completion-of-a-module",
+        "kind": "definition",
+        "title": "The $I$-adic completion of a module",
+        "strategy": "Specialize the inverse-limit construction to the quotients $M/I^nM$ and keep the canonical map $M \\to \\widehat M$ explicit. The completion is thus defined directly by compatible residue systems.",
+        "deps": [
+          "def-adic-topology-on-a-module",
+          "def-inverse-system-and-inverse-limit-of-modules"
+        ]
+      },
+      {
+        "id": "thm-kernel-and-universal-property-of-adic-completion",
+        "kind": "theorem",
+        "title": "Kernel and universal property of adic completion",
+      "strategy": "Compute the kernel coordinatewise, construct the extension from compatible quotient maps, and prove uniqueness using density for the inverse-limit topology and separatedness of the target.",
+      "deps": [
+        "def-adic-completion-of-a-module",
+        "def-adic-topology-on-a-module",
+        "def-separated-and-complete-filtered-module",
+          "thm-universal-property-of-an-inverse-limit-of-modules"
+        ]
+      },
+      {
+        "id": "prop-units-in-an-adically-complete-ring",
+        "kind": "proposition",
+        "title": "Elements congruent to $1$ modulo a defining ideal are units",
+        "strategy": "Solve the inverse problem componentwise modulo $I^n$ and then pass to the compatible limit. The Jacobson-radical conclusion is deduced from the published unit criterion rather than built into the definition.",
+        "deps": [
+          "def-adic-completion-of-a-module",
+          "def-separated-and-complete-filtered-module",
+          "thm-jacobson-radical-unit-characterisation"
+        ]
+      },
+      {
+        "id": "thm-completion-is-exact-on-finite-modules",
+        "kind": "theorem",
+        "title": "Adic completion is exact on finite modules over a Noetherian ring",
+        "strategy": "Apply the inverse-limit exactness theorem to the quotient short exact sequences after the CA-11 Artin-Rees bridge identifies the induced filtration on the submodule with the intrinsic adic one. This is the page's main finite-generation place where the Noetherian hypothesis is spent.",
+        "deps": [
+          "def-adic-completion-of-a-module",
+          "thm-exactness-of-inverse-limits-under-mittag-leffler",
+          "def-noetherian-ring",
+          "thm-artin-rees-lemma",
+          "cor-induced-and-intrinsic-adic-filtrations-are-equivalent"
+        ]
+      },
+      {
+        "id": "thm-completion-as-extension-of-scalars",
+        "kind": "theorem",
+        "title": "Completion of a finite module is extension of scalars",
+        "strategy": "Present the module by finite free modules, complete the presentation, and compare the resulting right-exact rows. This gives the intended tensor comparison without importing Tor or formal power series.",
+        "deps": [
+          "thm-completion-is-exact-on-finite-modules",
+          "thm-universal-property-of-module-tensor-products",
+          "thm-right-exactness-of-tensor-products",
+          "thm-unit-isomorphisms-for-module-tensor-products"
+        ]
+      },
+      {
+        "id": "cor-completion-commutes-with-finite-quotients-and-submodules",
+        "kind": "corollary",
+        "title": "Completion commutes with finite quotients and induced submodules",
+        "strategy": "Exactness identifies completed quotients immediately, and the submodule statement comes from comparing $I^nN$ with $N \\cap I^nM$ inside the same completed ambient module. This is the exact closure comparison the later flatness and local results need.",
+        "deps": [
+          "thm-completion-is-exact-on-finite-modules",
+          "thm-completion-as-extension-of-scalars",
+          "def-product-of-an-ideal-and-a-module"
+        ]
+      },
+      {
+        "id": "thm-flatness-of-noetherian-completion",
+        "kind": "theorem",
+        "title": "The completion of a Noetherian ring is flat",
+        "strategy": "Identify $J \\otimes_R \\widehat R$ with the completed ideal and then apply the published ideal criterion for flatness. This follows the design's elementary ideal-criterion route and avoids Tor.",
+      "deps": [
+        "thm-completion-as-extension-of-scalars",
+        "cor-completion-commutes-with-finite-quotients-and-submodules",
+        "thm-completion-is-exact-on-finite-modules",
+        "thm-noetherian-ring-ideal-characterisations",
+        "thm-flatness-criteria-by-injections-and-ideals"
+      ]
+      },
+      {
+        "id": "thm-faithful-flatness-of-jacobson-adic-completion",
+        "kind": "theorem",
+        "title": "Jacobson-adic completion is faithfully flat",
+        "strategy": "Combine flatness with the quotient comparison $\\widehat R/\\mathfrak m\\widehat R \\cong R/\\mathfrak m$ for maximal ideals containing $I$, so every maximal ideal survives in the completed spectrum. The final faithfulness step is exactly the batch-2 faithful-flatness criterion the design requires here.",
+        "deps": [
+          "thm-flatness-of-noetherian-completion",
+          "cor-completion-commutes-with-finite-quotients-and-submodules",
+          "thm-faithfully-flat-ring-map-characterisations"
+        ]
+      },
+      {
+        "id": "thm-noetherianity-of-adic-completion",
+        "kind": "theorem",
+        "title": "Completion of a Noetherian ring is Noetherian",
+        "strategy": "Follow the Stacks ideal-generation proof: work over the Noetherian quotient $R/I$, use the polynomial presentation of the associated graded ring, and lift generators back through completeness. This keeps the page on the chosen completion route without defining formal power series here.",
+        "deps": [
+          "def-noetherian-ring",
+          "thm-noetherian-ring-quotients-and-localisations",
+          "thm-noetherian-ring-ideal-characterisations",
+          "cor-finite-variable-polynomial-ring-noetherian",
+          "cor-completion-commutes-with-finite-quotients-and-submodules"
+        ]
+      },
+      {
+        "id": "thm-completion-of-a-noetherian-local-ring",
+        "kind": "theorem",
+        "title": "Completion of a Noetherian local ring is local with the same residue field",
+        "strategy": "Apply the Noetherian and faithfully flat completion theorems, then identify the maximal ideal and residue field by the quotient comparison modulo the maximal ideal. This packages the exact local consequence downstream pages actually consume.",
+        "deps": [
+          "thm-noetherianity-of-adic-completion",
+          "thm-faithful-flatness-of-jacobson-adic-completion",
+          "cor-completion-commutes-with-finite-quotients-and-submodules",
+          "prop-units-in-an-adically-complete-ring",
+          "def-local-ring"
+        ]
+      },
+      {
+        "id": "thm-finite-modules-over-complete-noetherian-rings-are-complete",
+        "kind": "theorem",
+        "title": "Finite modules over complete Noetherian rings are complete",
+        "strategy": "Use the scalar-extension description of completion together with the ring isomorphism $R \\cong \\widehat R$ coming from the ring's own completeness, then identify the resulting map $M \\to M \\otimes_R \\widehat R \\to \\widehat M$ with the canonical completion map.",
+        "deps": [
+          "def-separated-and-complete-filtered-module",
+          "def-adic-completion-of-a-module",
+          "thm-completion-as-extension-of-scalars"
+        ]
+      },
+      {
+        "id": "thm-complete-nakayama-lemma",
+        "kind": "theorem",
+        "title": "Complete Nakayama lemma",
+        "strategy": "Choose lifts of generators modulo $IM$ and iteratively correct the residual error through the higher powers of $I$. Completeness sums the corrections and separatedness forces the limit to be exact, so no a priori finite-generation hypothesis on $M$ is needed.",
+        "deps": [
+          "def-separated-and-complete-filtered-module"
+        ]
+      },
+      {
+        "id": "thm-completion-preserves-dimension-and-hilbert-samuel-data",
+        "kind": "theorem",
+        "title": "Completion preserves dimension and Hilbert-Samuel data",
+        "strategy": "Compare the finite quotients $M/I^{n+1}M$ with their completed counterparts, then use faithful flatness to match supports. The dimension and multiplicity transfer is the exact place where the batch-2 Hilbert-Samuel spine is consumed after the quotient comparison has been established here.",
+        "deps": [
+          "thm-completion-of-a-noetherian-local-ring",
+          "cor-completion-commutes-with-finite-quotients-and-submodules",
+          "thm-support-and-annihilator-of-a-finite-module",
+          "def-system-of-parameters-and-parameter-ideal",
+          "def-hilbert-samuel-multiplicity",
+          "thm-hilbert-samuel-dimension-theorem"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 111.026,
+    "id": "inverse-limits-and-noetherian-completion-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Inverse Limits and Noetherian Completion — Examples",
+    "companion": "inverse-limits-and-noetherian-completion",
+    "requires": [
+      "inverse-limits-and-noetherian-completion"
+    ],
+    "items": [
+      {
+        "id": "ex-p-adic-integers-as-an-inverse-limit",
+        "kind": "example",
+        "title": "The $p$-adic integers as an inverse limit and as a completion",
+        "strategy": "Take GT-17's compatible-residue model of the $p$-adic integers as already supplied and prove only the canonical comparison with the $(p)$-adic completion object used on this page. The example is deliberately about agreement of constructions, not a second construction from scratch.",
+        "deps": [
+          "def-inverse-system-and-inverse-limit-of-modules",
+          "def-adic-completion-of-a-module",
+          "thm-kernel-and-universal-property-of-adic-completion"
+        ]
+      },
+      {
+        "id": "ex-adic-completion-of-the-integers",
+        "kind": "example",
+        "title": "The $p$-adic completion map of the integers",
+        "strategy": "Write elements as compatible residue systems modulo $p^n$ and compute the image of an ordinary integer under the completion map. This gives the page's fully internal $\\mathbb Z$-based model independently of the GT-17 comparison example.",
+        "deps": [
+          "def-adic-completion-of-a-module",
+          "thm-kernel-and-universal-property-of-adic-completion"
+        ]
+      },
+      {
+        "id": "ex-equivalent-adic-filtrations",
+        "kind": "example",
+        "title": "Equivalent adic filtrations have canonically isomorphic completions",
+        "strategy": "Compare two cofinal adic filtrations by the mutual reduction maps on the quotient towers and then appeal to the inverse-limit universal property. This keeps the equivalence claim at the exact level of completion objects rather than as a vague topology remark.",
+        "deps": [
+          "def-adic-topology-on-a-module",
+          "def-adic-completion-of-a-module",
+          "thm-universal-property-of-an-inverse-limit-of-modules"
+        ]
+      },
+      {
+        "id": "ex-completion-not-exact-without-finiteness",
+        "kind": "example",
+        "title": "Completion need not be exact without a finiteness hypothesis",
+        "strategy": "Use the standard direct-sum example from the source and compute the induced topology on the image carefully enough to show that the completed sequence fails exactness. This is the load-bearing warning that the A-page exactness theorem is genuinely finite-module only.",
+        "deps": [
+          "thm-completion-is-exact-on-finite-modules",
+          "def-adic-completion-of-a-module"
+        ]
+      },
+      {
+        "id": "ex-completion-of-a-domain-not-a-domain",
+        "kind": "example",
+        "title": "A Noetherian domain can have a completion that is not a domain",
+        "strategy": "Record the sourced counterexample and analyze exactly which completed elements create zero divisors. The example is kept explicit because the pathology is one of the main reasons the page does not overclaim preservation results at the ring-theoretic level.",
+        "deps": [
+          "thm-noetherian-ring-quotients-and-localisations",
+          "thm-noetherianity-of-adic-completion"
+        ]
+      },
+      {
+        "id": "ex-iterated-adic-completions",
+        "kind": "example",
+        "title": "Powers of an ideal give the same one-step adic completion",
+        "strategy": "Compare completion first with respect to one ideal and then another against the completion for the combined ideal by chasing the compatible quotient systems. This is the exact source-backed example branch for the iterated-completion statements mentioned in the design notes.",
+        "deps": [
+          "def-adic-completion-of-a-module",
+          "ex-equivalent-adic-filtrations"
+        ]
+      },
+      {
+        "id": "ex-semilocal-adic-completion",
+        "kind": "example",
+        "title": "Semilocal completion decomposes into completed local factors",
+        "strategy": "Use Chinese remainders on the powers of a nonempty finite family of maximal ideals, identify each quotient with its localization, and commute the inverse limit with the finite product.",
+        "deps": [
+          "def-adic-completion-of-a-module",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals"
+        ]
+      }
+    ]
+  }
+]

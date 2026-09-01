@@ -1,0 +1,316 @@
+[
+  {
+    "order": 348.005,
+    "id": "chebyshev-bounds-and-mertens-theorems",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Chebyshev Bounds and Mertens Theorems",
+    "companion": "chebyshev-bounds-and-mertens-theorems-examples",
+    "requires": [
+      "average-orders-divisor-sums-and-representation-counts-examples",
+      "the-gamma-function"
+    ],
+    "items": [
+      {
+        "id": "def-prime-counting-function",
+        "kind": "definition",
+        "title": "The prime-counting function",
+        "deps": [
+          "def-prime"
+        ]
+      },
+      {
+        "id": "def-chebyshev-theta-function",
+        "kind": "definition",
+        "title": "Chebyshev's theta function",
+        "deps": [
+          "def-prime",
+          "def-natural-logarithm"
+        ]
+      },
+      {
+        "id": "def-chebyshev-psi-function",
+        "kind": "definition",
+        "title": "Chebyshev's psi function",
+        "deps": [
+          "def-von-mangoldt-function"
+        ]
+      },
+      {
+        "id": "lem-chebyshev-psi-prime-power-expansion",
+        "kind": "lemma",
+        "title": "Prime-power expansion of Chebyshev's psi function",
+        "strategy": "Expand the von Mangoldt sum by prime powers, then regroup the finitely many terms by their prime base to recover both the prime-power form of psi and the sum over theta(x^(1/k)).",
+        "deps": [
+          "def-chebyshev-psi-function",
+          "def-chebyshev-theta-function",
+          "def-von-mangoldt-function"
+        ]
+      },
+      {
+        "id": "lem-prime-counting-chebyshev-partial-summation",
+        "kind": "lemma",
+        "title": "Abel summation recovers the prime-counting function from theta",
+        "strategy": "Apply the published Abel-summation lemma to the prime-supported coefficients log p and the weight 1/log t, keeping the endpoint convention explicit so the integral identity is valid for every real x >= 2.",
+        "deps": [
+          "def-prime-counting-function",
+          "def-chebyshev-theta-function",
+          "lem-abel-summation-by-parts",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "lem-central-binomial-coefficient-bounds",
+        "kind": "lemma",
+        "title": "Central binomial coefficient bounds",
+        "strategy": "Use the full binomial row sum to bound the central term from above and the unimodality of the row to bound it from below by the average term.",
+        "deps": [
+          "def-binomial-coefficient",
+          "thm-binomial-theorem",
+          "lem-binomial-coefficients-symmetric-and-unimodal"
+        ]
+      },
+      {
+        "id": "lem-central-binomial-coefficient-prime-valuation",
+        "kind": "lemma",
+        "title": "Prime valuations in the central binomial coefficient",
+        "strategy": "Compute v_p(n!) by summing the multiples of p, p^2, and so on that occur in the factorial, then subtract the factorial valuations in the closed formula for the central binomial coefficient. This isolates the primes in (n, 2n] and supplies the logarithmic valuation bound used in Chebyshev's argument.",
+        "deps": [
+          "def-p-adic-valuation",
+          "lem-p-adic-valuation-basic",
+          "lem-p-adic-valuation-additive",
+          "thm-binomial-closed-formula",
+          "def-binomial-coefficient",
+          "def-prime",
+          "def-factorial-and-falling-factorial"
+        ]
+      },
+      {
+        "id": "thm-chebyshev-theta-linear-bounds",
+        "kind": "theorem",
+        "title": "Chebyshev's theta function has linear lower and upper bounds",
+        "strategy": "Compare the central binomial coefficient with the product of the primes it detects, iterate the resulting interval estimates on dyadic ranges, and keep the finite initial verification explicit instead of absorbing it into asymptotic notation.",
+        "deps": [
+          "def-chebyshev-theta-function",
+          "lem-central-binomial-coefficient-bounds",
+          "lem-central-binomial-coefficient-prime-valuation",
+          "thm-natural-logarithm-laws"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "lem-chebyshev-functions-prime-power-comparison",
+        "kind": "lemma",
+        "title": "Psi and theta differ by at most a square-root term",
+        "strategy": "Separate the k = 2 prime-power layer from the k >= 3 tail in the prime-power expansion of psi. The first pass uses only the trivial prime count, and the sharper O(sqrt x) form is then recovered from the linear upper bound for theta already proved on this page.",
+        "deps": [
+          "def-chebyshev-theta-function",
+          "def-chebyshev-psi-function",
+          "lem-chebyshev-psi-prime-power-expansion",
+          "thm-chebyshev-theta-linear-bounds"
+        ]
+      },
+      {
+        "id": "thm-chebyshev-prime-counting-bounds",
+        "kind": "theorem",
+        "title": "Chebyshev bounds for the prime-counting function",
+        "strategy": "Insert the two-sided theta bounds into the partial-summation identity for pi(x) and evaluate the resulting integral bounds directly, never replacing them by an asymptotic ratio one.",
+        "deps": [
+          "def-prime-counting-function",
+          "def-chebyshev-theta-function",
+          "lem-prime-counting-chebyshev-partial-summation",
+          "thm-chebyshev-theta-linear-bounds"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-bertrands-postulate",
+        "kind": "theorem",
+        "title": "Bertrand's postulate",
+        "strategy": "Factor the central binomial coefficient, isolate the primes in (n, 2n], bound the remaining small-prime contribution by the direct primorial estimate product_{p <= y} p <= 4^{y-1}, and retain the explicit finite residual verification as a visible final step.",
+        "deps": [
+          "def-prime",
+          "lem-central-binomial-coefficient-bounds",
+          "lem-central-binomial-coefficient-prime-valuation",
+          "thm-binomial-theorem",
+          "thm-binomial-closed-formula",
+          "thm-induction-principle",
+          "thm-natural-logarithm-laws"
+        ],
+        "landmark": true
+      },
+      {
+      "id": "lem-weighted-von-mangoldt-harmonic-estimate",
+      "kind": "lemma",
+      "title": "The von Mangoldt harmonic sum is log x plus O(1)",
+      "strategy": "Start from the divisor-sum identity for log n, reverse the finite order of summation, control the floor-error by psi(x) = O(x) from the Chebyshev bounds, and compare with the summatory-logarithm asymptotic.",
+      "deps": [
+        "def-von-mangoldt-function",
+        "thm-von-mangoldt-divisor-sum-identity",
+        "lem-summatory-logarithm-asymptotic",
+        "def-chebyshev-psi-function",
+        "lem-chebyshev-psi-prime-power-expansion",
+        "lem-chebyshev-functions-prime-power-comparison",
+        "thm-chebyshev-theta-linear-bounds"
+      ]
+      },
+      {
+        "id": "thm-first-mertens-theorem-for-primes",
+        "kind": "theorem",
+        "title": "Mertens' first theorem for primes",
+        "strategy": "Split the weighted von Mangoldt harmonic sum into the prime layer and the prime-power tail. The tail is absolutely bounded, so the prime layer alone inherits the log x main term.",
+        "deps": [
+          "def-prime",
+          "def-von-mangoldt-function",
+          "lem-weighted-von-mangoldt-harmonic-estimate",
+          "thm-natural-logarithm-laws"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "def-meissel-mertens-constant",
+        "kind": "definition",
+        "title": "The Meissel-Mertens constant",
+        "deps": [
+          "def-natural-logarithm"
+        ],
+        "justified_by": [
+          "thm-second-mertens-theorem-for-primes"
+        ]
+      },
+      {
+        "id": "thm-second-mertens-theorem-for-primes",
+        "kind": "theorem",
+        "title": "Mertens' second theorem for primes",
+        "strategy": "Apply Abel summation to the weighted prime sum from the first Mertens theorem, isolate a convergent remainder integral, and define the constant by the limit that remains.",
+        "deps": [
+          "def-meissel-mertens-constant",
+          "lem-abel-summation-by-parts",
+          "thm-first-mertens-theorem-for-primes",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws"
+        ],
+        "landmark": true
+      },
+      {
+      "id": "thm-third-mertens-theorem-for-primes",
+      "kind": "theorem",
+      "title": "Mertens' third theorem for primes",
+      "strategy": "Start from the source-verified weighted prime-power formula with the sum beginning at n = 2, convert it termwise to 1/(k p^k), compare it with the full logarithmic Euler-product series using an explicit O(1/log x) tail, and exponentiate the resulting formula with constant gamma.",
+      "deps": [
+        "def-euler-mascheroni-constant",
+        "def-von-mangoldt-function",
+        "thm-first-mertens-theorem-for-primes",
+        "thm-second-mertens-theorem-for-primes",
+        "thm-gamma-weierstrass-product",
+        "thm-log-one-plus-x-power-series",
+        "thm-natural-logarithm-laws"
+      ],
+        "landmark": true
+      },
+      {
+        "id": "cor-sum-of-reciprocals-of-primes-diverges",
+        "kind": "corollary",
+        "title": "The sum of the reciprocals of the primes diverges",
+        "strategy": "The second Mertens theorem gives the partial sums as log log x plus a bounded correction, and log log x tends to infinity.",
+        "deps": [
+          "thm-second-mertens-theorem-for-primes"
+        ]
+      },
+      {
+        "id": "cor-euler-prime-product-tends-to-zero",
+        "kind": "corollary",
+        "title": "Euler's prime product tends to zero",
+        "strategy": "Exponentiate the third Mertens asymptotic and use the positivity of the finite Euler factors to keep the limit and first-order rate on the same branch.",
+        "deps": [
+          "thm-third-mertens-theorem-for-primes"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 348.006,
+    "id": "chebyshev-bounds-and-mertens-theorems-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Chebyshev Bounds and Mertens Theorems — Examples",
+    "companion": "chebyshev-bounds-and-mertens-theorems",
+    "requires": [
+      "chebyshev-bounds-and-mertens-theorems"
+    ],
+    "items": [
+      {
+        "id": "ex-prime-counting-theta-and-psi-table",
+        "kind": "example",
+        "title": "A table of pi(x), theta(x), and psi(x)",
+        "strategy": "Tabulate the three functions through a moderate cutoff, mark each jump of psi by its prime power, and compare the observed gap psi - theta with the lemma's square-root scale.",
+        "deps": [
+          "def-prime-counting-function",
+          "def-chebyshev-theta-function",
+          "def-chebyshev-psi-function",
+          "lem-chebyshev-psi-prime-power-expansion",
+          "lem-chebyshev-functions-prime-power-comparison"
+        ]
+      },
+      {
+        "id": "ex-chebyshev-binomial-coefficient-estimate",
+        "kind": "example",
+        "title": "Factoring a central binomial coefficient to detect interval primes",
+        "strategy": "Factor one central binomial coefficient completely, identify exactly which primes from (n, 2n] it forces to appear, and compare the valuation data with the abstract binomial bounds.",
+        "deps": [
+          "lem-central-binomial-coefficient-bounds",
+          "lem-central-binomial-coefficient-prime-valuation"
+        ]
+      },
+      {
+        "id": "ex-bertrand-finite-range-verification",
+        "kind": "example",
+        "title": "The residual finite-range check for Bertrand's postulate",
+        "strategy": "Reproduce the source's explicit initial-range verification, recording the exact cutoff and the finite list or code that closes the leftover range after the asymptotic argument.",
+        "deps": [
+          "thm-bertrands-postulate"
+        ]
+      },
+      {
+        "id": "ex-first-and-second-mertens-numerics",
+        "kind": "example",
+        "title": "Numerics for the first and second Mertens theorems",
+        "strategy": "Compute the weighted and reciprocal prime sums side by side with their logarithmic main terms, keeping the data clearly separate from the proofs on the A page.",
+        "deps": [
+          "thm-first-mertens-theorem-for-primes",
+          "thm-second-mertens-theorem-for-primes"
+        ]
+      },
+      {
+        "id": "ex-third-mertens-product-numerics",
+        "kind": "example",
+        "title": "Numerics for the third Mertens theorem",
+        "strategy": "Compare the finite Euler product with e^(-gamma)/log x over a short range and show that the numerical agreement is evidence only, not a proof of the constant.",
+        "deps": [
+          "def-euler-mascheroni-constant",
+          "thm-third-mertens-theorem-for-primes"
+        ]
+      },
+      {
+        "id": "cex-chebyshev-bounds-do-not-give-the-prime-number-theorem",
+        "kind": "counterexample",
+        "title": "Two-sided Chebyshev bounds do not imply the prime number theorem",
+        "strategy": "Refute the inference by comparing any function trapped between two distinct positive multiples of x/log x with the much sharper ratio-one conclusion demanded by the prime number theorem.",
+        "deps": [
+          "thm-chebyshev-prime-counting-bounds"
+        ]
+      },
+      {
+        "id": "cex-shoups-product-bound-does-not-determine-mertens-constant",
+        "kind": "counterexample",
+        "title": "A Theta(1/log x) product bound does not determine the Mertens constant",
+        "strategy": "Explain abstractly why a Theta(1/log x) estimate leaves the multiplicative constant free, then compare that logical weakness with the exact e^(-gamma) factor proved on the A page.",
+        "deps": [
+          "thm-second-mertens-theorem-for-primes",
+          "thm-third-mertens-theorem-for-primes"
+        ]
+      }
+    ]
+  }
+]

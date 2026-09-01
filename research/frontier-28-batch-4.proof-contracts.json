@@ -1,0 +1,2202 @@
+{
+  "version": 1,
+  "level": "frontier-28",
+  "note": "Step-5 authoring contract for frontier-28 batch 4 on Tuesday, September 1, 2026.",
+  "scope": [
+    "thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p",
+    "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+    "prop-semifinite-measures-make-l-q-representatives-unique",
+    "lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p",
+    "lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures",
+    "lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu",
+    "lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities",
+    "lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q",
+    "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+    "thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity",
+    "cor-l-p-norm-recovery-by-unit-l-q-pairings",
+    "cor-ell-p-duality-by-counting-measure",
+    "ex-a-power-function-realises-the-duality-norm-on-unit-interval",
+    "ex-the-half-interval-integral-functional-has-norm-two-to-the-minus-one-over-q",
+    "ex-the-dual-of-ell-two-is-ell-two-by-the-counting-measure-pairing",
+    "cex-point-evaluation-at-zero-is-not-well-defined-on-l-p-of-unit-interval",
+    "cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality"
+  ],
+  "contracts": {
+    "thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used, but the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent:\n\n1. $f=g$ almost everywhere;\n2. for every measurable $A$,\n   $$\\int_A f\\,d\\mu=\\int_A g\\,d\\mu.$$\n\nFor integrable real or complex $h$, the notation in condition 2 means\n$\\int_A h\\,d\\mu:=\\int h\\chi_A\\,d\\mu$; the product is integrable because\n$|h\\chi_A|\\le|h|$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose measurable representatives $u$ of $[f]$ and $v$ of $g$. Then $u \\in \\mathcal L^p(\\mu)$; if $q<\\infty$ then $v\\in\\mathcal L^q(\\mu)$, while if $q=\\infty$ then $v$ is an essentially bounded representative. Thus [L2] gives $uv \\in L^1(\\mu)$ and $$\\left|\\int uv\\,d\\mu\\right|\\le \\|u\\|_p\\|v\\|_q=\\|[f]\\|_p\\|g\\|_q.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $u'$ is another representative of $[f]$, then $u=u'$ almost everywhere. Hence $uv=u'v$ almost everywhere. Since both products are integrable by step 1.1, [L3] gives $$\\int uv\\,d\\mu=\\int u'v\\,d\\mu,$$ so $\\Lambda_g([f])$ is well defined on the class $[f]$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $v'$ is another representative of $g$, then $v=v'$ almost everywhere. Hence $uv=uv'$ almost everywhere. Since both products are integrable by step 1.1, [L3] gives $$\\int uv\\,d\\mu=\\int uv'\\,d\\mu,$$ so $\\Lambda_g([f])$ is independent of the chosen representative of $g$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $[f],[h] \\in L^p(\\mu)$ and let $a,b \\in \\mathbb R$. Choose representatives $u,w$. By step 2.1 we may compute with representatives, and [L4] gives $$\\Lambda_g(a[f]+b[h])=\\int (au+bw)v\\,d\\mu =a\\int uv\\,d\\mu+b\\int wv\\,d\\mu =a\\Lambda_g([f])+b\\Lambda_g([h]).$$ The estimate from step 1.1 also shows $$|\\Lambda_g([f])|\\le\\|[f]\\|_p\\|g\\|_q,$$ so $\\Lambda_g$ is linear and bounded.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The estimate in step 3.1 holds for every $[f]$ with $\\|[f]\\|_p \\le 1$. Taking the supremum over the unit ball gives $$\\|\\Lambda_g\\|\\le\\|g\\|_q.$$ Thus $\\Lambda_g$ is a bounded linear functional on $L^p(\\mu)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$ do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$ do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$ do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$ have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$, step 1.1 applies Holder in the full conjugate-exponent range, including the $p=1$, $q=\\infty$ endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$ uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$ is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$ is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Critical because it has to descend an integral formula from representatives to $L^p$ classes before linearity and boundedness are asserted."
+      }
+    },
+    "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $1 \\le p < \\infty$, and let\n$q$ be conjugate to $p$. For each $g \\in L^q(\\mu)$, the formula\n$$\\Lambda_g([f]):=\\int fg\\,d\\mu$$\ndefines a bounded linear functional on $L^p(\\mu)$, and\n$$|\\Lambda_g([f])|\\le \\|[f]\\|_p\\|g\\|_q\\qquad([f]\\in L^p(\\mu)).$$\nIn particular,\n$$\\|\\Lambda_g\\|\\le\\|g\\|_q.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-conjugate-exponents",
+          "source_section": "Definition",
+          "quote": "Numbers $p,q \\in [1,\\infty]$ are **conjugate exponents** when\n\n$$\\frac1p+\\frac1q=1,$$\n\nwith the convention $1/\\infty:=0$. Thus the endpoint pairs $(1,\\infty)$ and\n$(\\infty,1)$ are conjugate, and if $1<p<\\infty$ then the conjugate of $p$ is\n\n$$q=\\frac{p}{p-1}.$$\n\nNo other endpoint pair is conjugate: $(1,1)$ gives $2$, while\n$(\\infty,\\infty)$ gives $0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-essential-supremum-is-attained-as-the-least-essential-bound",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable on a measure space $(X,\\mathcal A,\\mu)$,\nand suppose $\\|f\\|_\\infty<\\infty$. Then\n\n$$|f|\\le\\|f\\|_\\infty\\qquad\\mu\\text{-almost everywhere}.$$\n\nMoreover, if $M\\ge0$ and $|f|\\le M$ almost everywhere, then\n\n$$\\|f\\|_\\infty\\le M.$$\n\nSo $\\|f\\|_\\infty$ is the least essential bound of $|f|$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The upper bound $$\\|\\Lambda_g\\|\\le\\|g\\|_q$$ is exactly [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $g=0$ in $L^q(\\mu)$, then $\\Lambda_g=0$ by definition, so $\\|\\Lambda_g\\|=0=\\|g\\|_q$. Hence only the case $g\\ne0$ remains.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Assume $1<p<\\infty$. Choose a representative $u$ of $g$ and define $$s(x):=\\begin{cases}u(x)/|u(x)|,&u(x)\\ne0,\\\\0,&u(x)=0,\\end{cases} \\qquad f(x):=\\frac{|u(x)|^{q-1}s(x)}{\\|g\\|_q^{q-1}}.$$ Then $|f|^p=|u|^q/\\|g\\|_q^q$ by [L2], so $$\\|[f]\\|_p^p=\\frac{1}{\\|g\\|_q^q}\\int |u|^q\\,d\\mu=1.$$ Also $fu=|u|^q/\\|g\\|_q^{q-1}$, so $$\\Lambda_g([f])=\\frac{1}{\\|g\\|_q^{q-1}}\\int |u|^q\\,d\\mu=\\|g\\|_q.$$ Therefore $\\|\\Lambda_g\\|\\ge\\|g\\|_q$. Together with step 1.1, this gives $\\|\\Lambda_g\\|=\\|g\\|_q$.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Assume $p=1$, so $q=\\infty$, and assume $\\mu$ is semifinite. Put $M:=\\|g\\|_\\infty$. Step 2.1 leaves only $g\\ne0$, so $M>0$. Choose a representative $u$ of $g$, and define $$s(x):=\\begin{cases}1,&u(x)>0,\\\\-1,&u(x)<0,\\\\0,&u(x)=0.\\end{cases}$$ For $0<\\varepsilon<M$, [L3] gives a measurable set $E_\\varepsilon:=\\{|u|>M-\\varepsilon\\}$ of positive measure. By [L4], choose $F_\\varepsilon \\subseteq E_\\varepsilon$ with $0<\\mu(F_\\varepsilon)<\\infty$, and set $$f_\\varepsilon:=\\frac{s\\mathbf 1_{F_\\varepsilon}}{\\mu(F_\\varepsilon)}.$$ Then $\\|[f_\\varepsilon]\\|_1=1$ and $$\\Lambda_g([f_\\varepsilon])= \\frac{1}{\\mu(F_\\varepsilon)}\\int_{F_\\varepsilon}|u|\\,d\\mu\\ge M-\\varepsilon.$$ Hence $\\|\\Lambda_g\\|\\ge M-\\varepsilon$ for every $0<\\varepsilon<M$, so $\\|\\Lambda_g\\|\\ge M=\\|g\\|_\\infty$. Step 1.1 gives the reverse inequality, and therefore $\\|\\Lambda_g\\|=\\|g\\|_\\infty$.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 2.2 proves the strict-exponent case, and step 3.1 proves the $q=\\infty$ endpoint under semifiniteness. Together with steps 1.1 and 2.1, this proves the proposition.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite, step 2.1 isolates the zero-function case before dividing by $\\|g\\|_q^{q-1}$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite, step 3.1 handles the $q=\\infty$ endpoint and identifies the exact use of semifiniteness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Critical because the norm identity is the page landmark and the $q=\\infty$ endpoint is the first place where semifiniteness becomes load-bearing."
+      }
+    },
+    "prop-semifinite-measures-make-l-q-representatives-unique": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $1 \\le p < \\infty$, and let\n$q$ be conjugate to $p$. For $g \\in L^q(\\mu)$, let\n$$\\Lambda_g([f])=\\int fg\\,d\\mu.$$\nThen\n$$\\|\\Lambda_g\\|\\le\\|g\\|_q.$$\nIf $1<p<\\infty$, then equality holds:\n$$\\|\\Lambda_g\\|=\\|g\\|_q.$$\nIf $p=1$ and hence $q=\\infty$, the same equality holds provided $\\mu$ is\nsemifinite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. For $1\\le p<\\infty$, the rule\n   $$\\|[f]\\|_p:=\\|f\\|_p\\qquad([f]\\in L^p(\\mu))$$\n   is well defined on the quotient classes.\n2. For $p=\\infty$, the rule\n   $$\\|[f]\\|_\\infty:=\\|f\\|_\\infty\\qquad([f]\\in L^\\infty(\\mu))$$\n   is well defined.\n3. In either case, with the quotient vector-space operations of\n   [[prop-quotient-vector-space-operations-and-projection]], the resulting pair\n   $(L^p(\\mu),\\|\\cdot\\|_p)$ is a normed space in the sense of\n   [[def-norm-and-normed-space]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-essential-supremum-is-attained-as-the-least-essential-bound",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable on a measure space $(X,\\mathcal A,\\mu)$,\nand suppose $\\|f\\|_\\infty<\\infty$. Then\n\n$$|f|\\le\\|f\\|_\\infty\\qquad\\mu\\text{-almost everywhere}.$$\n\nMoreover, if $M\\ge0$ and $|f|\\le M$ almost everywhere, then\n\n$$\\|f\\|_\\infty\\le M.$$\n\nSo $\\|f\\|_\\infty$ is the least essential bound of $|f|$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $[f] \\in L^p(\\mu)$, the assumption gives [given, algebra]\n$$\\Lambda_{g-h}([f])=\\int f(g-h)\\,d\\mu=0.$$\nSo $\\Lambda_{g-h}$ is the zero functional on $L^p(\\mu)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] to $u=g-h$ yields [L1, step 1.1]\n$$\\|g-h\\|_q=\\|\\Lambda_{g-h}\\|=0.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $q<\\infty$, [L2] says that zero $L^q$ norm means the zero class, so [L2, L3, step 2.1]\n$g=h$ in $L^q(\\mu)$. If $q=\\infty$, then step 2.1 and [L3] give\n$g=h$ almost everywhere. In either case the representing class is unique.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a semifinite measure space, a representing $L^q$ function is unique do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a semifinite measure space, a representing $L^q$ function is unique do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a semifinite measure space, a representing $L^q$ function is unique do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a semifinite measure space, a representing $L^q$ function is unique have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In On a semifinite measure space, a representing $L^q$ function is unique, step 3.1 separates the finite-$q$ and $q=\\infty$ uniqueness arguments."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of On a semifinite measure space, a representing $L^q$ function is unique uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in On a semifinite measure space, a representing $L^q$ function is unique is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in On a semifinite measure space, a representing $L^q$ function is unique is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Short but load-bearing: both global duality theorems use this uniqueness result to glue local densities and to identify the final representative."
+      }
+    },
+    "lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used, but the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then\n$$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a measurable representative $u$ of $[f]$ and, for each $n \\ge 1$, [L1, L2, given, choose, construct]\nset\n$$E_n:=\\{|u|\\ge1/n\\}=\\{|u|^p\\ge n^{-p}\\}.$$\nSince $u \\in \\mathcal L^p(\\mu)$, [L2] gives\n$$\\mu(E_n)\\le n^p\\int |u|^p\\,d\\mu<\\infty.$$\nSo every $E_n$ has finite measure.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put [L3, step 1.1]\n$$S:=\\bigcup_{n=1}^\\infty E_n.$$\nBy step 1.1 and [L3], the set $S$ is sigma-finite.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $x \\notin S$, then $|u(x)|<1/n$ for every $n \\ge 1$, hence $u(x)=0$. [step 2.1, algebra]\nTherefore $u=0$ on $X \\setminus S$, so the class $[f]$ vanishes almost\neverywhere outside the sigma-finite set $S$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support, the Statement and step 1.1 keep the full finite-$p$ range explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Needed for the arbitrary-measure theorem; the main risk is forgetting that the argument must produce a sigma-finite support from the $L^p$ integrability alone."
+      }
+    },
+    "lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-linear-functional-on-l-p-and-its-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1 \\le p < \\infty$. A\nmap\n$$\\Lambda:L^p(\\mu)\\to\\mathbb R,$$\nis a **bounded linear functional** when it is linear and there exists\n$C \\in [0,\\infty)$ such that\n$$|\\Lambda([f])|\\le C\\|[f]\\|_p\\qquad([f]\\in L^p(\\mu)).$$\n\nIts **operator norm** is\n$$\\|\\Lambda\\|:=\\sup\\{\\,|\\Lambda([f])|:\\|[f]\\|_p\\le1\\,\\}.$$\n\nBecause $L^p(\\mu)$ is a normed space by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]],\nthe unit ball is nonempty and the displayed supremum is over a well-defined\nsubset of $[0,\\infty]$. When $\\Lambda$ is bounded, the defining inequality\nshows $\\|\\Lambda\\|\\le C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-signed-measure",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space. A **signed measure** on\n$(X,\\mathcal A)$ is a function\n$$\\nu:\\mathcal A\\longrightarrow \\overline{\\mathbb R}$$\nsuch that:\n\n1. $\\nu(\\varnothing)=0$;\n2. $\\nu$ takes at most one infinite sign: either $\\nu(E)\\neq-\\infty$ for every\n   $E\\in\\mathcal A$, or $\\nu(E)\\neq+\\infty$ for every $E\\in\\mathcal A$;\n3. for every pairwise disjoint sequence $(E_n)_{n\\in\\mathbb N}$ in\n   $\\mathcal A$,\n   the series on the right is defined in the extended reals and\n   $$\\nu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sum_{n=0}^\\infty \\nu(E_n)$$\n   ([[def-extended-reals]]).\n\nThe second and third clauses are load-bearing, not stylistic: together they\nrule out the undefined form $(+\\infty)+(-\\infty)$ and require the disjoint\nseries to exist before countable additivity is asserted.\n\nThe next proposition proves the extra fact that if\n$\\nu(\\bigcup_n E_n)$ is finite, then the real series $\\sum_n \\nu(E_n)$\nconverges absolutely in the sense of\n[[def-absolute-and-conditional-convergence]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every measurable $E \\subseteq X$, $$\\int |\\mathbf 1_E|^p\\,d\\mu=\\mu(E)\\le\\mu(X)<\\infty,$$ so $[\\mathbf 1_E] \\in L^p(\\mu)$ and $\\nu(E)$ is a finite scalar. Also $\\nu(\\varnothing)=\\Lambda(0)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $(E_n)$ be pairwise disjoint measurable sets, and put $$E:=\\bigcup_{n=1}^\\infty E_n,\\qquad s_N:=\\sum_{n=1}^N \\mathbf 1_{E_n}=\\mathbf 1_{\\bigcup_{n=1}^N E_n}.$$ Then $s_N \\to \\mathbf 1_E$ pointwise and $$|s_N-\\mathbf 1_E|^p=\\mathbf 1_{\\bigcup_{n>N}E_n}\\le \\mathbf 1_E.$$ Because $\\mu(X)<\\infty$, the majorant $\\mathbf 1_E$ is integrable, so [L3] gives $$\\|[s_N]-[\\mathbf 1_E]\\|_p^p=\\int |s_N-\\mathbf 1_E|^p\\,d\\mu\\longrightarrow0.$$",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $A,B \\in \\mathcal A$ are disjoint, then $\\mathbf 1_{A \\cup B}=\\mathbf 1_A+\\mathbf 1_B$. By linearity of $\\Lambda$, $$\\nu(A \\cup B)=\\Lambda([\\mathbf 1_A+\\mathbf 1_B]) =\\Lambda([\\mathbf 1_A])+\\Lambda([\\mathbf 1_B]) =\\nu(A)+\\nu(B).$$ So $\\nu$ is finitely additive on disjoint measurable sets.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By continuity of $\\Lambda$ from [L1], finite additivity from step 2.1, and the convergence from step 1.2, $$\\nu(E)=\\Lambda([\\mathbf 1_E])=\\lim_{N\\to\\infty}\\Lambda([s_N]) =\\lim_{N\\to\\infty}\\sum_{n=1}^N \\nu(E_n).$$ So $\\nu$ is countably additive. Together with step 1.1, [L2] shows that $\\nu$ is a finite signed measure.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In On a finite-measure space, a bounded functional on $L^p$ defines a finite signed or complex measure, step 1.1 explicitly checks $\\nu(\\varnothing)=0$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a finite-measure space, a bounded functional on $L^p$ defines a finite signed or complex measure do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a finite-measure space, a bounded functional on $L^p$ defines a finite signed or complex measure do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a finite-measure space, a bounded functional on $L^p$ defines a finite signed or complex measure have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement of On a finite-measure space, a bounded functional on $L^p$ defines a finite signed or complex measure has no extra endpoint branch beyond the range already fixed in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In On a finite-measure space, a bounded functional on $L^p$ defines a finite signed or complex measure, step 1.2 uses only the displayed disjoint sets and no hidden selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in On a finite-measure space, a bounded functional on $L^p$ defines a finite signed or complex measure is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in On a finite-measure space, a bounded functional on $L^p$ defines a finite signed or complex measure is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "This is the finite-measure carrier lemma where countable additivity can easily be waved through; the proof now records the actual $L^p$ convergence argument."
+      }
+    },
+    "lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu": {
+      "citations": [
+        {
+          "fact": "L2",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used, but the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-bounded-linear-functional-on-l-p-and-its-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1 \\le p < \\infty$. A\nmap\n$$\\Lambda:L^p(\\mu)\\to\\mathbb R,$$\nis a **bounded linear functional** when it is linear and there exists\n$C \\in [0,\\infty)$ such that\n$$|\\Lambda([f])|\\le C\\|[f]\\|_p\\qquad([f]\\in L^p(\\mu)).$$\n\nIts **operator norm** is\n$$\\|\\Lambda\\|:=\\sup\\{\\,|\\Lambda([f])|:\\|[f]\\|_p\\le1\\,\\}.$$\n\nBecause $L^p(\\mu)$ is a normed space by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]],\nthe unit ball is nonempty and the displayed supremum is over a well-defined\nsubset of $[0,\\infty]$. When $\\Lambda$ is bounded, the defining inequality\nshows $\\|\\Lambda\\|\\le C$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $E \\in \\mathcal A$ with $\\mu(E)=0$. Then $\\mathbf 1_E=0$ almost [L2, given] everywhere, so [L2] gives $$[\\mathbf 1_E]=[0]\\quad\\text{in }L^p(\\mu).$$",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying $\\Lambda$ and then [L3] yields [L3, step 1.1] $$\\nu(E)=\\Lambda([\\mathbf 1_E])=\\Lambda([0])=0.$$ Therefore $\\nu \\ll \\mu$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$ do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$, steps 1.1 and 2.1 treat the $\\mu(E)=0$ branch directly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$ do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$ have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement of The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$ has no extra endpoint branch beyond the range already fixed in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$ uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$ is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$ is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Short bridge lemma, but it must use the quotient meaning of $L^p$ rather than a pointwise argument on representatives."
+      }
+    },
+    "lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a finite measure space, let $1 \\le p < \\infty$,\nand let $\\Lambda:L^p(\\mu)\\to\\mathbb R$ be a bounded linear functional. Define\n$$\\nu(E):=\\Lambda([\\mathbf 1_E])\\qquad(E \\in \\mathcal A).$$\nThen $\\nu$ is a finite signed measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a finite measure space, let $1 \\le p < \\infty$,\nlet $\\Lambda:L^p(\\mu)\\to\\mathbb R$ be bounded, and let\n$$\\nu(E):=\\Lambda([\\mathbf 1_E])$$\nbe the finite signed measure from\n[[lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures]].\nThen $\\nu \\ll \\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-measurable-functions-admit-dominated-simple-approximations",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f : X \\to \\overline{\\mathbb{R}}$ be measurable. Then there is a sequence of\nsimple functions $s_k : X \\to \\mathbb{R}$ such that\n\n$$|s_k| \\le |f| \\qquad \\text{for every } k,$$\n\nand $s_k(x) \\to f(x)$ for every $x \\in X$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L2], choose $g \\in L^1(\\mu)$ such that $$\\nu(E)=\\int_E g\\,d\\mu\\qquad(E \\in \\mathcal A).$$ Since $\\nu(E)=\\Lambda([\\mathbf 1_E])$, this means $$\\Lambda([\\mathbf 1_E])=\\int \\mathbf 1_E g\\,d\\mu\\qquad(E \\in \\mathcal A).$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $u$ be bounded and measurable, with $|u| \\le M$. By [L3], choose simple functions $(s_n)$ such that $|s_n| \\le M$ for every $n$ and $s_n \\to u$ pointwise. Since $\\mu(X)<\\infty$, $$|s_n-u|^p\\le (2M)^p\\mathbf 1_X,$$ and the majorant is integrable. Therefore [L4] gives $$\\|[s_n]-[u]\\|_p^p=\\int |s_n-u|^p\\,d\\mu\\longrightarrow0,$$ so continuity of $\\Lambda$ yields $$\\Lambda([s_n])\\longrightarrow\\Lambda([u]).$$",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each simple approximant $s_n$, step 1.1 and linearity give $$\\Lambda([s_n])=\\int s_ng\\,d\\mu.$$ Thus the formula already holds for every simple function, and in particular for the chosen sequence $(s_n)$.",
+          "step": "2.1",
+          "inputs": [
+            "L5",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $g \\in L^1(\\mu)$ and $|(s_n-u)g| \\le 2M|g|$ with $2M|g| \\in L^1(\\mu)$, [L4] gives $$\\int s_ng\\,d\\mu\\longrightarrow\\int ug\\,d\\mu.$$ Combining this with step 1.2 and step 2.1 yields $$\\Lambda([u])=\\int ug\\,d\\mu.$$ So the Radon-Nikodym density represents $\\Lambda$ on every bounded measurable representative.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement of On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density has no extra endpoint branch beyond the range already fixed in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density, step 1.1 records the density furnished by the cited Radon-Nikodym theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "This item is deliberately narrowed to bounded representatives; the risk was overstating the full $L^p$ extension before the $L^q$ membership lemma is proved."
+      }
+    },
+    "lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a finite measure space, let $1 \\le p < \\infty$,\nand let $\\Lambda:L^p(\\mu)\\to\\mathbb R$ be a bounded linear functional. Then\nthere exists a density $g \\in L^1(\\mu)$ such that for every bounded measurable\nrepresentative $u$ with class $[u] \\in L^p(\\mu)$,\n$$\\Lambda([u])=\\int ug\\,d\\mu.$$\nIn particular the equality holds for every simple function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-conjugate-exponents",
+          "source_section": "Definition",
+          "quote": "Numbers $p,q \\in [1,\\infty]$ are **conjugate exponents** when\n\n$$\\frac1p+\\frac1q=1,$$\n\nwith the convention $1/\\infty:=0$. Thus the endpoint pairs $(1,\\infty)$ and\n$(\\infty,1)$ are conjugate, and if $1<p<\\infty$ then the conjugate of $p$ is\n\n$$q=\\frac{p}{p-1}.$$\n\nNo other endpoint pair is conjugate: $(1,1)$ gives $2$, while\n$(\\infty,\\infty)$ gives $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-essential-supremum-is-attained-as-the-least-essential-bound",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable on a measure space $(X,\\mathcal A,\\mu)$,\nand suppose $\\|f\\|_\\infty<\\infty$. Then\n\n$$|f|\\le\\|f\\|_\\infty\\qquad\\mu\\text{-almost everywhere}.$$\n\nMoreover, if $M\\ge0$ and $|f|\\le M$ almost everywhere, then\n\n$$\\|f\\|_\\infty\\le M.$$\n\nSo $\\|f\\|_\\infty$ is the least essential bound of $|f|$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $1 \\le p < \\infty$, and let\n$q$ be conjugate to $p$. For $g \\in L^q(\\mu)$, let\n$$\\Lambda_g([f])=\\int fg\\,d\\mu.$$\nThen\n$$\\|\\Lambda_g\\|\\le\\|g\\|_q.$$\nIf $1<p<\\infty$, then equality holds:\n$$\\|\\Lambda_g\\|=\\|g\\|_q.$$\nIf $p=1$ and hence $q=\\infty$, the same equality holds provided $\\mu$ is\nsemifinite.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume first $1<p<\\infty$. Choose a representative $u$ of $g$ and, for $k \\ge 1$, define $$u_k:=u\\mathbf 1_{\\{|u|\\le k\\}},\\qquad f_k:=|u_k|^{q-1}\\operatorname{sgn} u.$$ Each $f_k$ is bounded, so [L1] gives $$\\Lambda([f_k])=\\int f_kg\\,d\\mu=\\int |u_k|^q\\,d\\mu.$$ Also $|f_k|^p=|u_k|^q$ by [L2], hence $$\\int |u_k|^q\\,d\\mu=|\\Lambda([f_k])| \\le \\|\\Lambda\\|\\|[f_k]\\|_p =\\|\\Lambda\\|\\left(\\int |u_k|^q\\,d\\mu\\right)^{1/p}.$$ Therefore $$\\int |u_k|^q\\,d\\mu\\le\\|\\Lambda\\|^q\\qquad(k \\ge 1).$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume instead $p=1$, so $q=\\infty$. Put $M:=\\|\\Lambda\\|$ and let $u$ be a representative of $g$. Fix $t>M$ and set $E_t:=\\{|u|>t\\}$. If $\\mu(E_t)>0$, then $E_t$ has finite measure because $\\mu(X)<\\infty$, and $$f_t:=\\operatorname{sgn} u\\,\\mathbf 1_{E_t}$$ is bounded with $\\|[f_t]\\|_1=\\mu(E_t)$. By [L1], $$|\\Lambda([f_t])|=\\int_{E_t}|u|\\,d\\mu>t\\,\\mu(E_t)=t\\|[f_t]\\|_1,$$ contradicting the bound $|\\Lambda([f_t])|\\le M\\|[f_t]\\|_1$. Hence $\\mu(E_t)=0$ for every $t>M$, and [L4] gives $\\|g\\|_\\infty\\le M$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 and monotone convergence prove the strict-exponent case, while step 1.2 proves the endpoint case. Indeed, from step 1.1 the sequence $|u_k|^q$ increases pointwise to $|u|^q$, so [L3] gives $$\\int |u|^q\\,d\\mu=\\lim_{k\\to\\infty}\\int |u_k|^q\\,d\\mu\\le\\|\\Lambda\\|^q.$$ Thus in every case $g \\in L^q(\\mu)$ and $\\|g\\|_q\\le\\|\\Lambda\\|$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $[f] \\in L^p(\\mu)$ and choose a representative $w$. For each $n \\ge 1$, set $$w_n:=w\\mathbf 1_{\\{|w|\\le n\\}}.$$ Then each $w_n$ is bounded and $|w_n-w|^p \\le |w|^p$ with $|w_n-w|^p \\to 0$ pointwise, so dominated convergence gives $$\\|[w_n]-[f]\\|_p^p=\\int |w_n-w|^p\\,d\\mu\\longrightarrow0.$$ By step 2.1, $g \\in L^q(\\mu)$, so [L5] shows that $I_g([h]):=\\int hg\\,d\\mu$ is a bounded linear functional on $L^p(\\mu)$. Since [L1] gives $\\Lambda([w_n])=I_g([w_n])$ for every $n$, continuity of both functionals yields $$\\Lambda([f])=I_g([f])=\\int wg\\,d\\mu.$$ Thus the Radon-Nikodym density represents $\\Lambda$ on all of $L^p(\\mu)$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L5",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$ do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$ do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$ do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$ have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$, step 1.2 treats the $p=1$, $q=\\infty$ endpoint and step 2.1 closes the strict-exponent case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$ uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$ is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$ is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Critical because it closes the gap between an $L^1$ Radon-Nikodym density and the $L^q$ object needed for the actual duality theorem."
+      }
+    },
+    "thm-sigma-finite-duality-for-bounded-functionals-on-l-p": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a finite measure space, let $1 \\le p < \\infty$,\nlet $q$ be conjugate to $p$, and let $\\Lambda:L^p(\\mu)\\to\\mathbb R$ be a\nbounded linear functional. Let $g \\in L^1(\\mu)$ be the Radon-Nikodym density\nfrom\n[[lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities]].\nThen $g \\in L^q(\\mu)$ and\n$$\\|g\\|_q\\le\\|\\Lambda\\|.$$\nMoreover,\n$$\\Lambda([f])=\\int fg\\,d\\mu\\qquad([f]\\in L^p(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-semifinite-measures-make-l-q-representatives-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a semifinite measure space, let $1 \\le p < \\infty$,\nand let $q$ be conjugate to $p$. If $g,h \\in L^q(\\mu)$ satisfy\n$$\\int fg\\,d\\mu=\\int fh\\,d\\mu\\qquad([f]\\in L^p(\\mu)),$$\nthen $g=h$ in $L^q(\\mu)$. Equivalently, on a semifinite measure space a bounded\nfunctional on $L^p(\\mu)$ has at most one representing $L^q(\\mu)$ class.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $1 \\le p < \\infty$, and let\n$q$ be conjugate to $p$. For $g \\in L^q(\\mu)$, let\n$$\\Lambda_g([f])=\\int fg\\,d\\mu.$$\nThen\n$$\\|\\Lambda_g\\|\\le\\|g\\|_q.$$\nIf $1<p<\\infty$, then equality holds:\n$$\\|\\Lambda_g\\|=\\|g\\|_q.$$\nIf $p=1$ and hence $q=\\infty$, the same equality holds provided $\\mu$ is\nsemifinite.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L3], choose an increasing sequence $(X_n)$ of measurable sets with [L1, L3, given, choose, construct] $X=\\bigcup_n X_n$ and $\\mu(X_n)<\\infty$ for every $n$. For each $n$, let $\\Lambda_n$ be the bounded functional on $L^p(\\mu|_{X_n})$ defined by $$\\Lambda_n([u]):=\\Lambda([\\widetilde u]),$$ where $\\widetilde u$ is the extension of $u$ by $0$ outside $X_n$. Then $\\|\\Lambda_n\\| \\le \\|\\Lambda\\|$. Applying [L1] on $X_n$, choose $g_n \\in L^q(\\mu|_{X_n})$ such that $$\\Lambda_n([u])=\\int_{X_n} ug_n\\,d\\mu\\qquad([u]\\in L^p(\\mu|_{X_n}))$$ and $\\|g_n\\|_q \\le \\|\\Lambda\\|$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $m>n$, then both $g_n$ and $g_m|_{X_n}$ represent the same functional [L2, L3, step 1.1] $\\Lambda_n$ on the finite measure space $X_n$. Since finite measure implies semifinite, [L2] gives $$g_m=g_n\\quad\\mu\\text{-almost everywhere on }X_n.$$ Therefore the local densities are compatible on overlaps.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define a measurable function $g$ by setting $g=g_n$ almost everywhere on [L6, step 1.1, step 2.1, algebra] each $X_n$. This is consistent by step 2.1. If $q<\\infty$, then $$\\int_{X_n}|g|^q\\,d\\mu=\\int_{X_n}|g_n|^q\\,d\\mu\\le\\|\\Lambda\\|^q,$$ so monotone convergence gives $$\\int_X |g|^q\\,d\\mu=\\lim_{n\\to\\infty}\\int_{X_n}|g|^q\\,d\\mu\\le\\|\\Lambda\\|^q.$$ If $q=\\infty$, then for each $n$ there is a null set $N_n \\subseteq X_n$ with $|g_n| \\le \\|\\Lambda\\|$ on $X_n \\setminus N_n$; the union $N:=\\bigcup_n N_n$ is null, and $|g| \\le \\|\\Lambda\\|$ on $X \\setminus N$. Hence in every case $g \\in L^q(\\mu)$ and $\\|g\\|_q \\le \\|\\Lambda\\|$.",
+          "step": "3.1",
+          "inputs": [
+            "L6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $[f] \\in L^p(\\mu)$ and choose a representative $w$. [L4, L5, step 1.1, step 3.1, given, construct] Set $w_n:=w\\mathbf 1_{X_n}$. Then $$|w_n-w|^p=|w|^p\\mathbf 1_{X \\setminus X_n}\\le |w|^p,$$ and the right-hand side is integrable. Since $w_n \\to w$ pointwise, [L5] gives $$\\|[w_n]-[f]\\|_p^p=\\int |w_n-w|^p\\,d\\mu\\longrightarrow0.$$ For each $n$, step 1.1 gives $$\\Lambda([w_n])=\\Lambda_n([w|_{X_n}])=\\int_{X_n} wg_n\\,d\\mu=\\int w_ng\\,d\\mu.$$ By step 3.1 and [L4], the map $I_g([h])=\\int hg\\,d\\mu$ is a bounded linear functional on $L^p(\\mu)$. Taking limits in the last display yields $$\\Lambda([f])=I_g([f])=\\int wg\\,d\\mu.$$ So $g$ represents $\\Lambda$ on all of $L^p(\\mu)$.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "step 1.1",
+            "step 3.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $\\Lambda=\\Lambda_g$, [L2, L3, L4, step 4.1] [L4] gives $$\\|\\Lambda\\|=\\|\\Lambda_g\\|=\\|g\\|_q.$$ If $h \\in L^q(\\mu)$ also represents $\\Lambda$, then sigma-finite implies semifinite by [L3], so [L2] gives $h=g$ in $L^q(\\mu)$. Thus the representing class is unique.",
+          "step": "5.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function, step 3.1 covers both $q<\\infty$ and $q=\\infty$ when proving the global $L^q$ bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function, step 1.1 chooses an explicit sigma-finite exhaustion and the local representing densities attached to it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "This is the main theorem of the A page; the main risks are the glueing compatibility on overlaps and the final passage from truncated functions to all of $L^p$."
+      }
+    },
+    "thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity": {
+      "citations": [
+        {
+          "fact": "L0",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a sigma-finite measure space, let\n$1 \\le p < \\infty$, and let $q$ be conjugate to $p$. For every bounded linear\nfunctional $\\Lambda:L^p(\\mu)\\to\\mathbb R$ there exists a unique\n$g \\in L^q(\\mu)$ such that\n$$\\Lambda([f])=\\int fg\\,d\\mu\\qquad([f]\\in L^p(\\mu)).$$\nMoreover,\n$$\\|\\Lambda\\|=\\|g\\|_q.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-semifinite-measures-make-l-q-representatives-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a semifinite measure space, let $1 \\le p < \\infty$,\nand let $q$ be conjugate to $p$. If $g,h \\in L^q(\\mu)$ satisfy\n$$\\int fg\\,d\\mu=\\int fh\\,d\\mu\\qquad([f]\\in L^p(\\mu)),$$\nthen $g=h$ in $L^q(\\mu)$. Equivalently, on a semifinite measure space a bounded\nfunctional on $L^p(\\mu)$ has at most one representing $L^q(\\mu)$ class.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1 \\le p < \\infty$. For\nevery element $[f] \\in L^p(\\mu)$ there is a measurable sigma-finite set\n$S \\subseteq X$ such that $f=0$ almost everywhere on $X \\setminus S$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $1 \\le p < \\infty$, and let\n$q$ be conjugate to $p$. For $g \\in L^q(\\mu)$, let\n$$\\Lambda_g([f])=\\int fg\\,d\\mu.$$\nThen\n$$\\|\\Lambda_g\\|\\le\\|g\\|_q.$$\nIf $1<p<\\infty$, then equality holds:\n$$\\|\\Lambda_g\\|=\\|g\\|_q.$$\nIf $p=1$ and hence $q=\\infty$, the same equality holds provided $\\mu$ is\nsemifinite.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal S$ be the family of sigma-finite measurable subsets of $X$. For each $E \\in \\mathcal S$, define the restricted functional $$\\Lambda_E([u]):=\\Lambda([\\widetilde u])$$ on $L^p(\\mu|_E)$, where $\\widetilde u$ is extended by $0$ outside $E$. By [L1], there is a unique $g_E \\in L^q(\\mu|_E)$ such that $$\\Lambda_E([u])=\\int_E ug_E\\,d\\mu\\qquad([u]\\in L^p(\\mu|_E)),$$ and $$\\|g_E\\|_q=\\|\\Lambda_E\\|\\le\\|\\Lambda\\|.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+      "claim": "The empty set lies in $\\mathcal S$ and has $\\|g_\\varnothing\\|_q=0$, so the bounded set below is nonempty. Put $$s:=\\sup\\{\\,\\|g_E\\|_q^q:E \\in \\mathcal S\\,\\}\\le\\|\\Lambda\\|^q.$$ For each $n \\ge 1$, the definition of the supremum makes the family $$\\{E\\in\\mathcal S:\\|g_E\\|_q^q>s-2^{-n}\\}$$ nonempty. By [L0], choose one $E_n$ from each family. Because each $E_n$ is sigma-finite, the family of sequences $(E_{n,k})_{k\\ge1}$ of measurable finite-measure subsets of $E_n$ whose union is $E_n$ is nonempty. Using [L0] again, choose one such sequence for every $n$. Let $$Z:=\\bigcup_{n=1}^\\infty E_n.$$ The doubly indexed family $(E_{n,k})_{n,k\\ge1}$ has union $Z$, and a diagonal enumeration of it proves that $Z$ is sigma-finite. By [L1], there is a unique $g_Z \\in L^q(\\mu|_Z)$ representing $\\Lambda_Z$. Since $E_n \\subseteq Z$ and both $g_Z|_{E_n}$ and $g_{E_n}$ represent $\\Lambda_{E_n}$, uniqueness in [L1] gives $g_Z=g_{E_n}$ almost everywhere on $E_n$. Therefore $$\\|g_Z\\|_q^q\\ge \\|g_{E_n}\\|_q^q>s-2^{-n}\\qquad(n \\ge 1).$$ Since $Z\\in\\mathcal S$, the definition of $s$ also gives $\\|g_Z\\|_q^q\\le s$, and hence $\\|g_Z\\|_q^q=s$.",
+          "step": "2.1",
+          "inputs": [
+            "L0",
+            "L1",
+            "step 1.1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $g$ be the zero extension of a measurable representative of $g_Z$ from $Z$ to $X$. Since $q<\\infty$, step 2.1 gives $$\\int_X|g|^q\\,d\\mu=\\int_Z|g_Z|^q\\,d\\mu=s<\\infty,$$ so $g\\in L^q(\\mu)$ and $\\|g\\|_q^q=s$. Now let $E \\in \\mathcal S$. Then $Z \\cup E$ is sigma-finite, so [L1] supplies $g_{Z \\cup E}$. Uniqueness on $Z$ and on $E$ gives $$g_{Z \\cup E}=g_Z\\ \\text{a.e. on }Z,\\qquad g_{Z \\cup E}=g_E\\ \\text{a.e. on }E.$$ Therefore $$\\|g_{Z \\cup E}\\|_q^q =\\int_Z |g_Z|^q\\,d\\mu+\\int_{E \\setminus Z}|g_E|^q\\,d\\mu.$$ The left side is at most $s$ by definition of $s$, while the first term is $s$ by step 2.1. Hence $$\\int_{E \\setminus Z}|g_E|^q\\,d\\mu=0,$$ so $g_E=0$ almost everywhere on $E \\setminus Z$ and $g_E=g$ almost everywhere on $E \\cap Z$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $[f] \\in L^p(\\mu)$. By [L2], choose a sigma-finite measurable set $S \\subseteq X$ such that $f=0$ almost everywhere on $X \\setminus S$. Applying step 1.1 to $S$ gives $g_S \\in L^q(\\mu|_S)$ with $$\\Lambda([f])=\\Lambda_S([f|_S])=\\int_S fg_S\\,d\\mu.$$ Step 3.1 gives $g_S=g$ almost everywhere on $S$, so $$\\Lambda([f])=\\int_S fg\\,d\\mu=\\int_X fg\\,d\\mu.$$ Thus $g$ represents $\\Lambda$ on all of $L^p(\\mu)$.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 3.1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $h \\in L^q(\\mu)$ also represents $\\Lambda$, then $h-g \\in L^q(\\mu)$ and $q<\\infty$. By [L2], choose a sigma-finite measurable set $S$ such that $h-g=0$ almost everywhere on $X \\setminus S$. The restrictions of $h$ and $g$ to $S$ represent the same bounded functional on the sigma-finite space $S$, so [L1] gives $h=g$ almost everywhere on $S$. Together with the choice of $S$, this proves $h=g$ almost everywhere on $X$. Finally [L3] gives $$\\|\\Lambda\\|=\\|g\\|_q.$$ So the representing class is unique and has the correct norm.",
+          "step": "5.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 3.1",
+            "step 4.1",
+            "given",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+      "status": "checked",
+      "step": "2.1",
+      "evidence": "Step 2.1 notes that the empty sigma-finite set contributes the zero local density, so the supremum is taken over a nonempty bounded family."
+        },
+        {
+          "case": "zero",
+      "status": "checked",
+      "step": "2.1",
+      "evidence": "If the local-norm supremum is zero, the same near-maximizer construction remains nonempty and steps 2.1-3.1 produce the global zero density without division."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of For $1 < p < \\infty$, the same representation theorem holds on arbitrary measure spaces do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of For $1 < p < \\infty$, the same representation theorem holds on arbitrary measure spaces have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement of For $1 < p < \\infty$, the same representation theorem holds on arbitrary measure spaces has no extra endpoint branch beyond the range already fixed in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+      "evidence": "In For $1 < p < \\infty$, the same representation theorem holds on arbitrary measure spaces, step 2.1 uses Countable Choice both for the near-maximizing sigma-finite sets and for finite-measure exhaustions witnessing that their union $Z$ is sigma-finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in For $1 < p < \\infty$, the same representation theorem holds on arbitrary measure spaces is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in For $1 < p < \\infty$, the same representation theorem holds on arbitrary measure spaces is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+      "notes": "This is the subtle extension beyond sigma-finite spaces. Step 2.1 records both countable-choice uses needed to construct a sigma-finite near-maximizing union, and step 3.1 produces one global zero-extended representative rather than a density that depends on the test function."
+      }
+    },
+    "cor-l-p-norm-recovery-by-unit-l-q-pairings": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $1 \\le p < \\infty$, and let\n$q$ be conjugate to $p$. For $g \\in L^q(\\mu)$, let\n$$\\Lambda_g([f])=\\int fg\\,d\\mu.$$\nThen\n$$\\|\\Lambda_g\\|\\le\\|g\\|_q.$$\nIf $1<p<\\infty$, then equality holds:\n$$\\|\\Lambda_g\\|=\\|g\\|_q.$$\nIf $p=1$ and hence $q=\\infty$, the same equality holds provided $\\mu$ is\nsemifinite.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $g \\in L^q(\\mu)$ with $\\|g\\|_q \\le 1$, [L1, given] [L1] gives $$\\left|\\int fg\\,d\\mu\\right|=|\\Lambda_g([f])| \\le \\|\\Lambda_g\\|\\|f\\|_p \\le \\|f\\|_p.$$ Therefore the supremum is at most $\\|f\\|_p$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $f=0$, the displayed formula is immediate. Hence assume from now on $f \\ne 0$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume $1<p<\\infty$ and choose a representative $u$ of $f$. [given, choose, construct, algebra] Define $$g(x):=\\frac{|u(x)|^{p-1}\\operatorname{sgn} u(x)}{\\|f\\|_p^{p-1}}.$$ Then $$|g|^q=\\frac{|u|^p}{\\|f\\|_p^p},$$ so $\\|g\\|_q=1$. Also $$\\int ug\\,d\\mu=\\frac{1}{\\|f\\|_p^{p-1}}\\int |u|^p\\,d\\mu=\\|f\\|_p.$$ Hence the supremum is at least $\\|f\\|_p$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Assume $p=1$ and choose a representative $u$ of $f$. [given, choose, construct, algebra] Put $$g:=\\operatorname{sgn} u.$$ Then $g \\in L^\\infty(\\mu)$ with $\\|g\\|_\\infty \\le 1$, and $$\\int ug\\,d\\mu=\\int |u|\\,d\\mu=\\|f\\|_1.$$ So the supremum is at least $\\|f\\|_1$.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 gives the upper bound, while step 1.3 or step 1.4 gives a unit [step 1.1, step 1.3, step 1.4] $L^q$ function attaining it. Therefore the displayed supremum equals $\\|f\\|_p$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The $L^p$ norm is the supremum of pairings against unit $L^q$ functions do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The $L^p$ norm is the supremum of pairings against unit $L^q$ functions, step 1.2 isolates the zero vector case before constructing a norming function."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The $L^p$ norm is the supremum of pairings against unit $L^q$ functions do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The $L^p$ norm is the supremum of pairings against unit $L^q$ functions have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The $L^p$ norm is the supremum of pairings against unit $L^q$ functions, step 1.4 handles the $p=1$, $q=\\infty$ endpoint explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The $L^p$ norm is the supremum of pairings against unit $L^q$ functions uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The $L^p$ norm is the supremum of pairings against unit $L^q$ functions is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The $L^p$ norm is the supremum of pairings against unit $L^q$ functions is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The proof is short, but it has to keep the explicit norming vectors honest and separate the endpoint from the strict-exponent formula."
+      }
+    },
+    "cor-ell-p-duality-by-counting-measure": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a sigma-finite measure space, let\n$1 \\le p < \\infty$, and let $q$ be conjugate to $p$. For every bounded linear\nfunctional $\\Lambda:L^p(\\mu)\\to\\mathbb R$ there exists a unique\n$g \\in L^q(\\mu)$ such that\n$$\\Lambda([f])=\\int fg\\,d\\mu\\qquad([f]\\in L^p(\\mu)).$$\nMoreover,\n$$\\|\\Lambda\\|=\\|g\\|_q.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-ell-p-is-l-p-of-counting-measure",
+          "source_section": "Remark",
+          "quote": "On $(\\mathbb N,\\mathcal P(\\mathbb N),\\#)$ with counting measure, every function\n$f:\\mathbb N\\to\\mathbb R$ is measurable. Writing $a_k:=f(k)$, one has\n\n$$\\int |f|^p\\,d\\#=\\sum_{k=0}^\\infty |a_k|^p\\qquad(0<p<\\infty),$$\n\nby the counting-measure integral dictionary, so $\\mathcal L^p(\\#)$ is exactly\nthe usual sequence class $\\ell^p$. Also\n\n$$\\|f\\|_\\infty=\\sup_{k\\in\\mathbb N}|a_k|,$$\n\nbecause a subset of $\\mathbb N$ has counting measure zero only when it is empty.\nHence the quotient by almost-everywhere equality does nothing: for counting\nmeasure on $\\mathbb N$, equality almost everywhere means equality everywhere.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Counting measure on $\\mathbb N$ is sigma-finite because [L2, given] $$\\mathbb N=\\bigcup_{n=0}^\\infty \\{0,1,\\dots,n\\},$$ and each initial segment has finite counting measure. By [L2], we may therefore regard $\\Lambda$ as a bounded linear functional on $L^p(\\#)$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1], choose $g \\in L^q(\\#)$ such that [L1, L2, step 1.1, choose] $$\\Lambda(a)=\\int ag\\,d\\#\\qquad(a \\in \\ell^p).$$ By [L2], writing $b_n:=g(n)$ turns $g$ into a sequence $b=(b_n) \\in \\ell^q$, and the integral identity becomes $$\\Lambda(a)=\\sum_{n=0}^\\infty a_nb_n.$$ The same translation in [L2] turns uniqueness and norm equality from [L1] into uniqueness of $b$ and $\\|\\Lambda\\|=\\|b\\|_{\\ell^q}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$, step 1.1 gives the explicit exhaustion $\\mathbb N=\\bigcup_{n=0}^\\infty\\{0,1,\\dots,n\\}$, so the only indexed family used in the proof is exhibited directly rather than left with a hidden empty-family branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$ do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$ do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$ have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$, step 2.1 imports the whole $1 \\le p < \\infty$ range from the sigma-finite theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$ uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$ is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$ is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "This is a translation corollary; the risk is accidentally importing Hilbert-space language instead of the concrete counting-measure pairing."
+      }
+    },
+    "ex-a-power-function-realises-the-duality-norm-on-unit-interval": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $1 \\le p < \\infty$, and let\n$q$ be conjugate to $p$. For $g \\in L^q(\\mu)$, let\n$$\\Lambda_g([f])=\\int fg\\,d\\mu.$$\nThen\n$$\\|\\Lambda_g\\|\\le\\|g\\|_q.$$\nIf $1<p<\\infty$, then equality holds:\n$$\\|\\Lambda_g\\|=\\|g\\|_q.$$\nIf $p=1$ and hence $q=\\infty$, the same equality holds provided $\\mu$ is\nsemifinite.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $aq<1$, one has $1-aq>0$ and therefore $$\\int_0^1 x^{-aq}\\,dx=\\left[\\frac{x^{1-aq}}{1-aq}\\right]_0^1=(1-aq)^{-1}.$$ Hence $g \\in L^q(0,1)$ and $$\\|g\\|_q^q=\\int_0^1 x^{-aq}\\,dx=(1-aq)^{-1},\\qquad \\|g\\|_q=(1-aq)^{-1/q}.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The chosen function $f$ satisfies $$|f(x)|^p=(1-aq)x^{-aq}.$$ Step 1.1 therefore gives $$\\|[f]\\|_p^p=(1-aq)\\int_0^1 x^{-aq}\\,dx=1,$$ so $\\|[f]\\|_p=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Also $$f(x)g(x)=(1-aq)^{1/p}x^{-aq},$$ so another use of step 1.1 gives $$\\int_0^1 f(x)g(x)\\,dx=(1-aq)^{1/p}\\int_0^1 x^{-aq}\\,dx=(1-aq)^{1/p-1}=(1-aq)^{-1/q}.$$ By step 1.1 and [L1], this equals $\\|g\\|_q=\\|\\Lambda_g\\|$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of A power function on $(0,1]$ realizes the duality norm on the unit interval do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of A power function on $(0,1]$ realizes the duality norm on the unit interval do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of A power function on $(0,1]$ realizes the duality norm on the unit interval do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of A power function on $(0,1]$ realizes the duality norm on the unit interval have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In A power function on $(0,1]$ realizes the duality norm on the unit interval, the Statement and steps 1.1 and 2.1 make the threshold $aq<1$ explicit and compute exactly at that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of A power function on $(0,1]$ realizes the duality norm on the unit interval uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A power function on $(0,1]$ realizes the duality norm on the unit interval is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A power function on $(0,1]$ realizes the duality norm on the unit interval is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Concrete example; the only real risk is a normalization or improper-integral slip in the power exponents."
+      }
+    },
+    "ex-the-half-interval-integral-functional-has-norm-two-to-the-minus-one-over-q": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $1 \\le p < \\infty$, and let\n$q$ be conjugate to $p$. For $g \\in L^q(\\mu)$, let\n$$\\Lambda_g([f])=\\int fg\\,d\\mu.$$\nThen\n$$\\|\\Lambda_g\\|\\le\\|g\\|_q.$$\nIf $1<p<\\infty$, then equality holds:\n$$\\|\\Lambda_g\\|=\\|g\\|_q.$$\nIf $p=1$ and hence $q=\\infty$, the same equality holds provided $\\mu$ is\nsemifinite.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $g:=\\mathbf 1_{[0,1/2]}$. [given, construct] Then $$\\Lambda([f])=\\int_0^1 f(x)g(x)\\,dx=\\Lambda_g([f]),$$ so $\\Lambda$ is exactly the pairing functional associated to $g$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L1], if $q<\\infty$ then $$\\|g\\|_q^q=\\int_0^1 |g|^q\\,dx=\\int_0^{1/2}1\\,dx=\\frac12,$$ so $$\\|g\\|_q=2^{-1/q}.$$",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $q=\\infty$, then $|g| \\le 1$ everywhere and $g=1$ on a set of positive measure, so $\\|g\\|_\\infty=1=2^{-1/\\infty}$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] to step 1.1 and steps 1.2-1.3 gives $$\\|\\Lambda\\|=\\|\\Lambda_g\\|=\\|g\\|_q=2^{-1/q}.$$",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$ do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$ do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$ do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$ have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$, step 1.2 includes the $q=\\infty$ endpoint convention $2^{-1/\\infty}=1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$ uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$ is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$ is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "A short norm computation, but it has to record the $p=1$ endpoint convention rather than silently treating only finite $q$."
+      }
+    },
+    "ex-the-dual-of-ell-two-is-ell-two-by-the-counting-measure-pairing": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-ell-p-duality-by-counting-measure",
+          "source_section": "Statement",
+          "quote": "Let $1 \\le p < \\infty$ and let $q$ be conjugate to $p$. Every bounded linear\nfunctional $\\Lambda:\\ell^p\\to\\mathbb R$ is of the form\n$$\\Lambda(a)=\\sum_{n=0}^\\infty a_nb_n$$\nfor a unique sequence $b \\in \\ell^q$. Moreover,\n$$\\|\\Lambda\\|=\\|b\\|_{\\ell^q}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-ell-p-is-l-p-of-counting-measure",
+          "source_section": "Remark",
+          "quote": "On $(\\mathbb N,\\mathcal P(\\mathbb N),\\#)$ with counting measure, every function\n$f:\\mathbb N\\to\\mathbb R$ is measurable. Writing $a_k:=f(k)$, one has\n\n$$\\int |f|^p\\,d\\#=\\sum_{k=0}^\\infty |a_k|^p\\qquad(0<p<\\infty),$$\n\nby the counting-measure integral dictionary, so $\\mathcal L^p(\\#)$ is exactly\nthe usual sequence class $\\ell^p$. Also\n\n$$\\|f\\|_\\infty=\\sup_{k\\in\\mathbb N}|a_k|,$$\n\nbecause a subset of $\\mathbb N$ has counting measure zero only when it is empty.\nHence the quotient by almost-everywhere equality does nothing: for counting\nmeasure on $\\mathbb N$, equality almost everywhere means equality everywhere.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] with $p=q=2$. Then there is a unique sequence $b \\in \\ell^2$ such that $$\\Lambda(a)=\\sum_{n=0}^\\infty a_nb_n$$ for every $a \\in \\ell^2$, and $$\\|\\Lambda\\|=\\|b\\|_{\\ell^2}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The summation formula is exactly the counting-measure integral pairing from [L2], so this is the concrete $\\ell^2$ instance of the A-page theorem.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement of Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence has no extra endpoint branch beyond the range already fixed in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "This is a pure specialization item; the main risk is only notation drift between the counting-measure integral and the ordinary sequence pairing."
+      }
+    },
+    "cex-point-evaluation-at-zero-is-not-well-defined-on-l-p-of-unit-interval": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used, but the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $u:=0$ and $v:=\\mathbf 1_{\\{0\\}}$ on $[0,1]$. [given, construct]\nThen\n$$u(0)=0,\\qquad v(0)=1,$$\nso point evaluation at $0$ distinguishes these two representatives.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the set $\\{0\\}$ is null, so $u=v$ almost everywhere. [L1, L2, step 1.1]\nTherefore\n[L1] says that $u$ and $v$ define the same element of $L^p([0,1])$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A well-defined map on $L^p([0,1])$ cannot assign two different values to [L1, step 1.1, step 2.1]\nthe same class. Steps 1.1 and 2.1 show that evaluation at $0$ would have to do\nexactly that, so it does not descend to $L^p([0,1])$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Point evaluation at $0$ is not well defined on $L^p[0,1]$ do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In Point evaluation at $0$ is not well defined on $L^p[0,1]$, step 1.1 uses the zero representative and the singleton indicator to witness the failure."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Point evaluation at $0$ is not well defined on $L^p[0,1]$ do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of Point evaluation at $0$ is not well defined on $L^p[0,1]$ have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement of Point evaluation at $0$ is not well defined on $L^p[0,1]$ has no extra endpoint branch beyond the range already fixed in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Point evaluation at $0$ is not well defined on $L^p[0,1]$ uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Point evaluation at $0$ is not well defined on $L^p[0,1]$ is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Point evaluation at $0$ is not well defined on $L^p[0,1]$ is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Short but conceptually important: it shows why the quotient viewpoint is indispensable before any duality statement even makes sense."
+      }
+    },
+    "cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-countable-union-of-countable",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). Let\n$(A_n)_{n \\in \\mathbb{N}}$ be a family of at most countable sets\n([[def-countable]]) indexed by $\\mathbb{N}$. Then\n\n$$U = \\bigcup_{n \\in \\mathbb{N}} A_n$$\n\nis at most countable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-subset-of-countable",
+          "source_section": "Statement",
+          "quote": "Let $A$ be at most countable ([[def-countable]]) and let $B \\subseteq A$. Then\n$B$ is at most countable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-l-one-of-a-measure",
+          "source_section": "Definition",
+          "quote": "For a measure $\\mu$, write\n$$L^1(\\mu):=\\{f:X\\to\\mathbb C:\\ f \\text{ is integrable}\\}.$$\nHere **integrable** is the notion introduced in\n[[def-integrable-real-and-complex-functions-and-their-integrals]].\n\nOn this page $L^1(\\mu)$ is the class of integrable representatives. The later\nBanach-space page will pass to almost-everywhere equivalence classes.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used, but the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-l-infinity-on-a-measure-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. The class\n\n$$L^\\infty(\\mu):=\\{f:X\\to\\mathbb R : f \\text{ measurable and }\\|f\\|_\\infty<\\infty\\}$$\n\nof essentially bounded measurable functions is the page's $p=\\infty$ space. Its\nsize is measured by the essential-supremum functional of\n[[def-essential-supremum-with-respect-to-a-measure]].\n\nThe later theorem\n[[thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one]]\nproves that $L^\\infty(\\mu)$ is a real vector space under pointwise addition and\nscalar multiplication.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then\n$$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The family $\\mathcal A$ contains $\\varnothing$ and is closed under complements by definition. Let $(E_n)$ lie in $\\mathcal A$. If every $E_n$ is at most countable, then $\\bigcup_{n=1}^\\infty E_n$ is at most countable by [L1]. If some $E_j$ is cocountable, then $$X\\setminus\\bigcup_{n=1}^\\infty E_n\\subseteq X\\setminus E_j,$$ so [L1] makes the complement at most countable. Thus $\\mathcal A$ is a sigma-algebra on $X$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $\\mu$ satisfies $\\mu(\\varnothing)=0$. Let $(E_n)$ be pairwise disjoint in $\\mathcal A$. If two members $E_i,E_j$ were cocountable, then $$X=(X\\setminus E_i)\\cup(X\\setminus E_j)$$ would be at most countable by [L1], contradicting that $X$ is uncountable. So at most one $E_n$ is cocountable. If every $E_n$ is at most countable, then $\\bigcup_{n=1}^\\infty E_n$ is at most countable by [L1], and both sides of countable additivity are $0$. If some $E_j$ is cocountable, then $$X\\setminus\\bigcup_{n=1}^\\infty E_n\\subseteq X\\setminus E_j$$ is at most countable by [L1], so the union is cocountable and both sides of countable additivity are $+\\infty$. Hence $\\mu$ is a measure on $(X,\\mathcal A)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By definition of $\\mu$, a measurable set has finite $\\mu$-measure exactly when it is at most countable, and then its $\\mu$-measure is $0$. In particular, $X$ is measurable and $\\mu(X)=+\\infty$ because $X\\setminus X=\\varnothing$ is at most countable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $[f] \\in L^1(\\mu)$ and choose an integrable representative $u$. For each $n \\ge 1$, set $E_n:=\\{|u|\\ge1/n\\}$. By [L4], $$\\mu(E_n)\\le n\\int |u|\\,d\\mu<\\infty.$$ Step 3.1 therefore gives $\\mu(E_n)=0$, so each $E_n$ is at most countable. By [L1], $$\\{u\\ne0\\}=\\bigcup_{n=1}^\\infty E_n$$ is at most countable and hence null. Thus every element of $L^1(\\mu)$ is the zero class.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "step 3.1",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "The constant functions $0$ and $1$ are both in $L^\\infty(\\mu)$, but they do not define the same $L^\\infty$ class because $$\\{1\\ne0\\}=X,$$ and step 3.1 gives that $X$ is not null. Thus $L^\\infty(\\mu)$ contains at least two distinct classes.",
+          "step": "4.2",
+          "inputs": [
+            "L3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $L^1(\\mu)$ has only the zero class by step 4.1, its only bounded linear functional is the zero functional. Both $0$ and $1$ represent that zero functional, because $$\\int f\\cdot 0\\,d\\mu=0=\\int f\\cdot1\\,d\\mu$$ for the unique class $f=0$ in $L^1(\\mu)$. By step 4.2, those two $L^\\infty$ classes are distinct, so uniqueness fails. Therefore the $p=1$ representation theorem is false on this measure space.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality do not turn on a separate empty-set or empty-family branch beyond the hypotheses explicitly written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality do not require a separate zero-parameter or zero-object branch beyond what is already stated in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality do not hinge on a special value-one or singleton case beyond the hypotheses already named."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement and proof of The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality have no additional degenerate regime beyond the cases already spelled out in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality, the entire item is the explicit boundary witness for the $p=1$ endpoint and step 5.1 states the failure of uniqueness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality uses only explicit data from the hypotheses and no hidden selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality is not stated as a biconditional with a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality is not stated as a biconditional with a separate reverse direction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "This is the designed non-semifinite boundary witness; the proof has to construct the measure space, collapse $L^1$, and exhibit distinct $L^\\infty$ representatives."
+      }
+    }
+  }
+}

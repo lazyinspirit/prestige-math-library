@@ -20,6 +20,7 @@ parts:
       - the-radon-nikodym-theorem-and-lebesgue-decomposition
       - the-lp-spaces-holder-minkowski-and-riesz-fischer
       - density-separability-and-convolution-in-lp
+      - the-duality-of-lp-and-lq
 ---
 
 ## sigma-algebras-and-borel-sets
@@ -28,9 +29,9 @@ A sigma-algebra is the closure needed for countable additivity, and outer measur
 Caratheodory build Lebesgue measure, measurable functions, and integration. Convergence
 theorems, product and signed measures, and Radon-Nikodym/Lebesgue decomposition extend
 that calculus to iterated integration, densities, and total variation. The $L^p$ page
-then supplies Hölder, Minkowski, completeness, inclusion theorems, and
-essential-supremum limits. The added page turns that theory into Euclidean analysis:
-dense simple, step, compactly supported continuous, and smooth functions in finite $p$,
-separability under countably generated sigma-finite hypotheses, translation continuity,
-convolution and Young's inequality, and mollifier approximation, with the $L^\infty$
-endpoint failures kept explicit.
+then supplies Hölder, Minkowski, completeness, and essential-supremum limits. Density,
+separability, convolution, Young's inequality, and mollifier approximation turn those
+spaces into analytic working objects, with the $L^\infty$ endpoint failures kept explicit.
+The duality page then identifies bounded functionals on $L^p$ with integration against
+$L^q$, via the norm formula, finite-measure Radon-Nikodym, sigma-finite exhaustion, and
+the separate arbitrary-measure extension for $1<p<\infty$.

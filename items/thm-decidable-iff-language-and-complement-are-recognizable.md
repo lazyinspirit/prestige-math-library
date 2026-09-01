@@ -2,7 +2,7 @@
 id: thm-decidable-iff-language-and-complement-are-recognizable
 kind: theorem
 title: "A language is decidable if and only if it and its complement are recognizable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-decidable-and-recognizable-language, def-language-boolean-operations]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

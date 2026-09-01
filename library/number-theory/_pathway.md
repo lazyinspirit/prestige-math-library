@@ -24,6 +24,7 @@ parts:
       - sums-of-two-squares
       - lagrange-four-square-theorem
       - average-orders-divisor-sums-and-representation-counts
+      - chebyshev-bounds-and-mertens-theorems
 ---
 
 ## divisibility-and-primes
@@ -56,10 +57,10 @@ sums, irreducible-polynomial counts, and square detection by $\mathbf 1 * \lambd
 
 Quadratic residues ask which classes modulo an odd prime are squares, and the Legendre
 symbol, Euler's criterion, Gauss's lemma, quadratic reciprocity, and the Jacobi symbol
-give the multiplicative answer. The same congruence tools settle sums of squares: primes
-$p\equiv1\pmod4$ are represented, Brahmagupta-Fibonacci multiplies representations,
-primes $3\pmod4$ occur to even exponent, and four-square descent proves every
-nonnegative integer is a sum of four squares while congruences modulo $8$ isolate the
-three-square obstruction $4^a(8m+7)$. The added average-order page turns these functions
-into asymptotics: Dirichlet hyperbola gives summatory formulas for $\tau$, $\sigma$, and
-$\varphi$, coprime-pair density $6/\pi^2$, and mean order $\pi$ for $r_2$.
+give the multiplicative answer. The same congruence tools settle sums of squares,
+including the obstruction $4^a(8m+7)$ and Lagrange's four-square theorem. Average-order
+arguments then give summatory formulas for $\tau$, $\sigma$, and $\varphi$, density
+$6/\pi^2$ for coprime pairs, and mean order $\pi$ for $r_2$. The Chebyshev and Mertens
+page adds $\theta$ and $\psi$, finite proofs of Chebyshev bounds and Bertrand's postulate,
+and the three Mertens theorems, yielding divergence of $\sum 1/p$ and vanishing of the
+Euler prime product without the prime number theorem.

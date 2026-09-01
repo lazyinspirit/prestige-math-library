@@ -1,0 +1,777 @@
+[
+  {
+    "order": 71.015,
+    "id": "small-cancellation-and-dehn-algorithms",
+    "kind": "A",
+    "category": "group-theory",
+    "title": "Small Cancellation and Dehn Algorithms",
+    "companion": "small-cancellation-and-dehn-algorithms-examples",
+    "requires": [
+      "decision-problems-for-finitely-presented-groups-examples"
+    ],
+    "items": [
+      {
+        "id": "def-symmetrisation-of-a-relator-set",
+        "kind": "definition",
+        "title": "The symmetrisation of a relator set closes under inverses and cyclic conjugates",
+        "deps": [
+          "def-cyclically-reduced-word",
+          "def-group-presentation"
+        ]
+      },
+      {
+        "id": "lem-symmetrisation-has-the-same-normal-closure",
+        "kind": "lemma",
+        "title": "A relator set and its symmetrisation have the same normal closure",
+        "strategy": "Each added inverse or cyclic conjugate is already a consequence of the old relator inside the normal closure, and every old relator is still present after symmetrisation. Mutual containment then gives equality of the two normal closures.",
+        "deps": [
+          "def-symmetrisation-of-a-relator-set",
+          "def-normal-closure"
+        ]
+      },
+      {
+        "id": "def-piece-in-a-symmetrised-presentation",
+        "kind": "definition",
+        "title": "A piece is a common initial segment occurring in two distinct places of a symmetrised relator set",
+        "deps": [
+          "def-symmetrisation-of-a-relator-set",
+          "def-cyclically-reduced-word"
+        ]
+      },
+      {
+        "id": "def-small-cancellation-conditions-c-lambda-and-c-prime-lambda",
+        "kind": "definition",
+        "title": "The small-cancellation conditions C(lambda) and C prime(lambda)",
+        "deps": [
+          "def-piece-in-a-symmetrised-presentation"
+        ]
+      },
+      {
+        "id": "def-small-cancellation-condition-t-q",
+        "kind": "definition",
+        "title": "The condition T(q) forbids short cycles of pieces in the relator graph",
+        "deps": [
+          "def-symmetrisation-of-a-relator-set"
+        ]
+      },
+      {
+        "id": "lem-c-prime-lambda-implies-c-lambda",
+        "kind": "lemma",
+        "title": "C prime(lambda) implies C(lambda)",
+        "strategy": "If every piece is shorter than a lambda-fraction of the relator containing it, then any relator written as a product of n pieces has total length less than n lambda times that relator length. Rearranging yields the required lower bound on n.",
+        "deps": [
+          "def-small-cancellation-conditions-c-lambda-and-c-prime-lambda"
+        ]
+      },
+      {
+        "id": "def-van-kampen-diagram-boundary-label-and-area",
+        "kind": "definition",
+        "title": "Van Kampen diagrams, boundary labels, and diagram area for a presentation",
+        "deps": [
+          "def-group-presentation",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group",
+        "kind": "lemma",
+        "title": "The boundary label of a van Kampen diagram is trivial in the presented group",
+        "strategy": "Peel off 2-cells one at a time. Each boundary circuit contributes a conjugate of a defining relator or its inverse, so inducting on the number of faces places the outer boundary word in the normal closure of the relators.",
+        "deps": [
+          "def-van-kampen-diagram-boundary-label-and-area",
+          "def-normal-closure",
+          "def-group-presentation"
+        ]
+      },
+      {
+        "id": "thm-van-kampen-lemma",
+        "kind": "theorem",
+        "title": "A word is trivial in a presented group exactly when it bounds a finite van Kampen diagram",
+        "strategy": "One direction is the boundary-label lemma. For the converse, write a trivial word as a product of conjugates of relators by the normal-closure description, then glue one disc for each conjugate and identify paths to build a planar diagram with the required outer boundary word.",
+        "deps": [
+          "lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group",
+          "prop-normal-closure-is-products-of-conjugates"
+        ]
+      },
+      {
+        "id": "thm-diagram-area-agrees-with-algebraic-relator-area",
+        "kind": "theorem",
+        "title": "Minimal van Kampen area agrees with minimal algebraic relator area",
+        "strategy": "Translate a van Kampen diagram into a product of conjugates by reading off its 2-cells, and translate a minimal conjugate-factorisation into a glued disc diagram. The two constructions give opposite inequalities for the two minimisation problems, hence equality.",
+        "deps": [
+          "thm-van-kampen-lemma",
+          "def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation",
+          "lem-minimal-algebraic-relator-area-exists"
+        ]
+      },
+      {
+        "id": "def-reduced-van-kampen-diagram",
+        "kind": "definition",
+        "title": "A reduced van Kampen diagram has no cancellable adjacent faces",
+        "deps": [
+          "def-van-kampen-diagram-boundary-label-and-area"
+        ]
+      },
+      {
+        "id": "lem-minimal-area-diagrams-are-reduced",
+        "kind": "lemma",
+        "title": "A minimal-area van Kampen diagram is reduced",
+        "strategy": "If two adjacent faces cancel across an edge, delete the pair and reglue the complementary boundary paths. The new diagram has the same boundary word and strictly smaller area, contradicting minimality.",
+        "deps": [
+          "def-reduced-van-kampen-diagram",
+          "def-van-kampen-diagram-boundary-label-and-area"
+        ]
+      },
+      {
+        "id": "lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams",
+        "kind": "lemma",
+        "title": "Reduced C prime(1/6) diagrams satisfy the standard combinatorial curvature count",
+        "strategy": "Assign corner weights using the reduced-diagram and piece bounds, sum the resulting vertex and face deficits, and invoke Euler characteristic for a disc. The strict one-sixth inequality is what makes every internal face contribute negative curvature unless a large boundary arc is present.",
+        "deps": [
+          "def-small-cancellation-conditions-c-lambda-and-c-prime-lambda",
+          "def-reduced-van-kampen-diagram"
+        ]
+      },
+      {
+        "id": "thm-greendlinger-lemma-for-c-prime-one-sixth-presentations",
+        "kind": "theorem",
+        "title": "In a reduced C prime(1/6) null diagram, some face contributes more than half of its boundary to the outer boundary",
+        "strategy": "Apply the curvature count to a minimal reduced disc diagram. If no face met the boundary in more than half its perimeter, every face and interior vertex would contribute too little curvature to reach the disc total of two.",
+        "deps": [
+          "lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams",
+          "lem-minimal-area-diagrams-are-reduced"
+        ]
+      },
+      {
+        "id": "def-dehn-reduced-word-and-dehn-presentation",
+        "kind": "definition",
+        "title": "Dehn-reduced words and Dehn presentations",
+        "deps": [
+          "def-symmetrisation-of-a-relator-set",
+          "def-cyclically-reduced-word"
+        ]
+      },
+      {
+        "id": "lem-dehn-replacement-strictly-shortens-a-word",
+        "kind": "lemma",
+        "title": "A Dehn replacement shortens the word strictly",
+        "strategy": "The replacement swaps a subword longer than half of a cyclic conjugate of a relator for its complementary arc. Because the complementary arc is shorter than the removed arc, free reduction can only shorten the result further.",
+        "deps": [
+          "def-dehn-reduced-word-and-dehn-presentation"
+        ]
+      },
+      {
+        "id": "thm-dehn-algorithm-solves-the-word-problem",
+        "kind": "theorem",
+        "title": "Dehn's algorithm terminates and decides the word problem for a Dehn presentation",
+        "strategy": "Termination follows because every rewrite strictly shortens the word. For correctness, a nonempty trivial freely reduced word admits a Greendlinger subword, so the algorithm always finds a move; conversely every move preserves the represented group element, so reducing to the empty word is equivalent to triviality.",
+        "deps": [
+          "thm-greendlinger-lemma-for-c-prime-one-sixth-presentations",
+          "lem-dehn-replacement-strictly-shortens-a-word",
+          "thm-van-kampen-lemma"
+        ]
+      },
+      {
+        "id": "cor-finite-c-prime-one-sixth-presentations-have-solvable-word-problem",
+        "kind": "corollary",
+        "title": "Finite C prime(1/6) presentations have solvable word problem",
+        "strategy": "Greendlinger's lemma turns every finite strict C prime(1/6) presentation into a Dehn presentation, and the previous theorem supplies the decision procedure.",
+        "deps": [
+          "thm-dehn-algorithm-solves-the-word-problem",
+          "thm-greendlinger-lemma-for-c-prime-one-sixth-presentations"
+        ]
+      },
+      {
+        "id": "cor-linear-isoperimetric-bound-for-finite-c-prime-one-sixth-presentations",
+        "kind": "corollary",
+        "title": "Finite C prime(1/6) presentations satisfy a linear isoperimetric inequality",
+        "strategy": "Freely reduce the null word, apply Greendlinger to a minimal reduced diagram, remove one face to obtain a strictly shorter null word, and induct on boundary length to bound the area linearly.",
+        "deps": [
+          "thm-greendlinger-lemma-for-c-prime-one-sixth-presentations",
+          "thm-diagram-area-agrees-with-algebraic-relator-area",
+          "lem-minimal-area-diagrams-are-reduced"
+        ]
+      },
+      {
+        "id": "thm-torsion-theorem-for-c-prime-one-sixth-groups",
+        "kind": "theorem",
+        "title": "In a C prime(1/6) group, every nontrivial torsion element is conjugate to a power of a relator root",
+        "strategy": "Invoke the classical torsion theorem for symmetrised C'(1/6) presentations: every nontrivial finite-order element is conjugate to a power of a root of some defining relator.",
+        "deps": [
+          "def-group-power"
+        ]
+      },
+      {
+        "id": "cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free",
+        "kind": "corollary",
+        "title": "A C prime(1/6) presentation with no proper-power relators defines a torsion-free group",
+        "strategy": "The torsion theorem says that any torsion element is conjugate to a power coming from a defining relator root. If no defining relator is a proper power, that root contributes only the trivial finite-order case.",
+        "deps": [
+          "thm-torsion-theorem-for-c-prime-one-sixth-groups",
+          "def-group-power"
+        ]
+      },
+      {
+        "id": "fs-every-repeated-subword-is-a-piece",
+        "kind": "false-statement",
+        "title": "FALSE: every repeated subword of a relator is a piece",
+        "strategy": "A piece must occur as an initial segment of two distinct symmetrised occurrences, not merely appear twice somewhere inside one relator. A repeated interior subword with no distinct initial-segment occurrence gives the counterexample.",
+        "deps": [
+          "def-piece-in-a-symmetrised-presentation"
+        ]
+      },
+      {
+        "id": "fs-c-prime-one-sixth-means-every-relator-has-length-at-most-six",
+        "kind": "false-statement",
+        "title": "FALSE: C prime(1/6) means every relator has length at most six",
+        "strategy": "The one-sixth bound measures piece length as a fraction of each relator length. Long relators can satisfy the condition vacuously or by having all overlaps much shorter than one sixth of their lengths.",
+        "deps": [
+          "def-small-cancellation-conditions-c-lambda-and-c-prime-lambda"
+        ]
+      },
+      {
+        "id": "fs-greendlinger-lemma-applies-to-every-finitely-presented-group",
+        "kind": "false-statement",
+        "title": "FALSE: Greendlinger's lemma holds for every finite presentation",
+        "strategy": "Greendlinger's conclusion depends on the strict small-cancellation hypotheses. Presentations with long overlapping relators or no small-cancellation control admit null words whose minimal diagrams have no face contributing more than half its boundary.",
+        "deps": [
+          "thm-greendlinger-lemma-for-c-prime-one-sixth-presentations",
+          "def-group-presentation"
+        ]
+      },
+      {
+        "id": "fs-dehn-reduction-is-the-same-as-free-reduction",
+        "kind": "false-statement",
+        "title": "FALSE: Dehn reduction is just free reduction under another name",
+        "strategy": "Free reduction deletes adjacent inverse letters, while Dehn reduction replaces a long relator subword by the complementary shorter arc. A freely reduced trivial word in a Dehn presentation may still admit a Dehn move.",
+        "deps": [
+          "def-dehn-reduced-word-and-dehn-presentation"
+        ]
+      },
+      {
+        "id": "fs-no-proper-power-relators-alone-implies-torsion-free",
+        "kind": "false-statement",
+        "title": "FALSE: a presentation with no proper-power relators is automatically torsion-free",
+        "strategy": "The no-proper-power hypothesis controls only the final step of the small-cancellation torsion theorem. Without the C prime(1/6) hypothesis, torsion can still arise from other relator interactions.",
+        "deps": [
+          "cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free",
+          "def-group-power"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 71.016,
+    "id": "small-cancellation-and-dehn-algorithms-examples",
+    "kind": "B",
+    "category": "group-theory",
+    "title": "Small Cancellation and Dehn Algorithms — Examples",
+    "companion": "small-cancellation-and-dehn-algorithms",
+    "requires": [
+      "small-cancellation-and-dehn-algorithms"
+    ],
+    "items": [
+      {
+        "id": "ex-symmetrising-a-one-relator-presentation",
+        "kind": "example",
+        "title": "Symmetrising a one-relator presentation adds the cyclic conjugates and inverse cyclic conjugates",
+        "strategy": "Start from one cyclically reduced relator, list its cyclic conjugates and the cyclic conjugates of its inverse, and identify the duplicate terms that collapse in the symmetrised set.",
+        "deps": [
+          "def-symmetrisation-of-a-relator-set"
+        ]
+      },
+      {
+        "id": "ex-finding-pieces-and-checking-c-prime-one-sixth",
+        "kind": "example",
+        "title": "A concrete relator set with its pieces and a direct C prime(1/6) check",
+        "strategy": "List the distinct symmetrised occurrences, compute their common initial segments, and compare each piece length with one sixth of the corresponding relator lengths.",
+        "deps": [
+          "def-piece-in-a-symmetrised-presentation",
+          "def-small-cancellation-conditions-c-lambda-and-c-prime-lambda"
+        ]
+      },
+      {
+        "id": "ex-a-dehn-reduction-sequence",
+        "kind": "example",
+        "title": "A trivial word is reduced to the empty word by successive Dehn moves",
+        "strategy": "Choose a short symmetrised presentation and a null word containing a long relator subword at each stage. Perform the replacements explicitly until only the empty word remains.",
+        "deps": [
+          "thm-dehn-algorithm-solves-the-word-problem"
+        ]
+      },
+      {
+        "id": "ex-a-greendlinger-cell-in-a-van-kampen-diagram",
+        "kind": "example",
+        "title": "A minimal diagram exhibits the Greendlinger face covering more than half its boundary",
+        "strategy": "Draw a small reduced disc diagram for a null word in a strict C prime(1/6) presentation and measure the outer arc of the distinguished face directly.",
+        "deps": [
+          "thm-greendlinger-lemma-for-c-prime-one-sixth-presentations"
+        ]
+      },
+      {
+        "id": "ex-a-torsion-free-small-cancellation-group",
+        "kind": "example",
+        "title": "A strict C prime(1/6) presentation with no proper-power relators defines a torsion-free group",
+        "strategy": "Choose a presentation whose symmetrised relators have no nontrivial pieces or only very short ones, check the no-proper-power condition, and apply the torsion-free corollary.",
+        "deps": [
+          "cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free"
+        ]
+      },
+      {
+        "id": "cex-an-overlap-at-exactly-one-sixth-under-the-strict-convention",
+        "kind": "counterexample",
+        "title": "An overlap of exactly one sixth shows that the strict C prime(1/6) inequality is not cosmetic",
+        "strategy": "Build two relators with one common initial segment of length exactly one sixth of each relator. The example meets the weak boundary but fails the strict convention used on this page.",
+        "deps": [
+          "def-small-cancellation-conditions-c-lambda-and-c-prime-lambda"
+        ]
+      },
+      {
+        "id": "cex-a-no-proper-power-presentation-with-torsion-outside-small-cancellation",
+        "kind": "counterexample",
+        "title": "No proper-power relators alone do not prevent torsion outside small cancellation",
+        "strategy": "Use a classical torsion presentation whose defining relator is not a proper power but whose overlap pattern fails the small-cancellation hypothesis. The resulting group still contains finite-order elements.",
+        "deps": [
+          "fs-no-proper-power-relators-alone-implies-torsion-free"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 302.013,
+    "id": "inverse-systems-profinite-groups-and-completion",
+    "kind": "A",
+    "category": "group-theory",
+    "title": "Inverse Systems Profinite Groups and Completion",
+    "companion": "inverse-systems-profinite-groups-and-completion-examples",
+    "requires": [
+      "graphs-of-groups-and-bass-serre-theory-examples"
+    ],
+    "items": [
+      {
+        "id": "def-directed-set-and-inverse-system-of-groups",
+        "kind": "definition",
+        "title": "A directed set and an inverse system of groups indexed by it",
+        "deps": [
+          "def-directed-set-and-net",
+          "def-group-homomorphism"
+        ]
+      },
+      {
+        "id": "def-compatible-tuple-inverse-limit-of-groups",
+        "kind": "definition",
+        "title": "The inverse limit is the set of compatible tuples in the Cartesian product",
+        "deps": [
+          "def-directed-set-and-inverse-system-of-groups",
+          "def-cartesian-product"
+        ]
+      },
+      {
+        "id": "lem-compatible-tuples-form-a-subgroup",
+        "kind": "lemma",
+        "title": "Compatible tuples form a subgroup of the product group",
+        "strategy": "The identity tuple is compatible because every transition map is a homomorphism, and compatibility is preserved under coordinatewise products and inverses. Hence the defining equalities cut out a subgroup of the full product.",
+        "deps": [
+          "def-compatible-tuple-inverse-limit-of-groups",
+          "def-subgroup",
+          "def-group"
+        ]
+      },
+      {
+        "id": "def-coordinate-projections-from-an-inverse-limit",
+        "kind": "definition",
+        "title": "The inverse limit has its canonical coordinate projection maps",
+        "deps": [
+          "def-compatible-tuple-inverse-limit-of-groups"
+        ]
+      },
+      {
+        "id": "thm-concrete-inverse-limit-universal-property-in-groups",
+        "kind": "theorem",
+        "title": "The compatible-tuple construction satisfies the inverse-limit universal property in groups",
+        "strategy": "Given a cone into the system, send each element to the tuple of its coordinate images. Compatibility of the cone makes the tuple land in the inverse limit, and uniqueness is immediate because the coordinate projections detect equality of tuples.",
+        "deps": [
+          "def-compatible-tuple-inverse-limit-of-groups",
+          "def-coordinate-projections-from-an-inverse-limit",
+          "def-group-homomorphism"
+        ]
+      },
+      {
+        "id": "def-inverse-limit-topology-for-finite-discrete-groups",
+        "kind": "definition",
+        "title": "The inverse limit of finite groups carries the subspace topology from the product of discrete factors",
+        "deps": [
+          "def-compatible-tuple-inverse-limit-of-groups",
+          "def-product-topology",
+          "def-subspace-topology-top"
+        ]
+      },
+      {
+        "id": "lem-inverse-limit-of-finite-discrete-groups-is-a-closed-topological-subgroup",
+        "kind": "lemma",
+        "title": "The inverse limit of finite discrete groups is a closed topological subgroup of the full product",
+        "strategy": "Compatibility with one transition map is the preimage of the diagonal under a continuous map from the product to a discrete square. Intersecting those closed equalizer conditions over all comparable indices gives a closed subgroup, and the subspace topology inherits the group operations.",
+        "deps": [
+          "lem-compatible-tuples-form-a-subgroup",
+          "def-inverse-limit-topology-for-finite-discrete-groups",
+          "def-topological-group"
+        ]
+      },
+      {
+        "id": "thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected",
+        "kind": "theorem",
+        "title": "An inverse limit of finite discrete groups is Hausdorff, compact, and totally disconnected",
+        "strategy": "A product of finite discrete spaces is compact by Tychonoff and Hausdorff because each factor is compact Hausdorff. The inverse limit is a closed subspace of that product, so it is compact Hausdorff; its clopen cylinder basis then makes every connected component a singleton.",
+        "deps": [
+          "lem-inverse-limit-of-finite-discrete-groups-is-a-closed-topological-subgroup",
+          "thm-tychonoff",
+          "def-compact-space",
+          "def-hausdorff-space"
+        ]
+      },
+      {
+        "id": "def-profinite-group-by-inverse-limit",
+        "kind": "definition",
+        "title": "A profinite group is a topological group isomorphic to an inverse limit of finite discrete groups",
+        "deps": [
+          "thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected",
+          "def-topological-group"
+        ]
+      },
+      {
+        "id": "lem-kernels-of-finite-projections-form-an-open-normal-neighbourhood-basis",
+        "kind": "lemma",
+        "title": "The kernels of the finite coordinate projections form an open normal neighbourhood basis at the identity",
+        "strategy": "A basic neighbourhood in the product topology fixes only finitely many coordinates, so intersecting the kernels of those coordinates gives a smaller open subgroup. Normality comes from being the kernel of a homomorphism, and every identity neighbourhood contains one of these kernel intersections.",
+        "deps": [
+          "def-coordinate-projections-from-an-inverse-limit",
+          "def-inverse-limit-topology-for-finite-discrete-groups",
+          "def-profinite-group-by-inverse-limit",
+          "def-normal-subgroup",
+          "def-quotient-group"
+        ]
+      },
+      {
+        "id": "thm-continuity-into-an-inverse-limit-is-coordinatewise",
+        "kind": "theorem",
+        "title": "A map into an inverse limit is continuous exactly when all coordinate composites are continuous",
+        "strategy": "One direction is closure under composition. For the converse, the subspace topology is inherited from the product, and the product topology is initial with respect to the coordinate maps, so continuity of every coordinate composite is exactly the universal property of the ambient product topology.",
+        "deps": [
+          "def-coordinate-projections-from-an-inverse-limit",
+          "def-inverse-limit-topology-for-finite-discrete-groups",
+          "def-continuous-map-top"
+        ]
+      },
+      {
+        "id": "def-cofinal-subsystem",
+        "kind": "definition",
+        "title": "A cofinal subsystem meets every index eventually",
+        "deps": [
+          "def-directed-set-and-inverse-system-of-groups"
+        ]
+      },
+      {
+        "id": "thm-cofinal-subsystems-have-isomorphic-inverse-limits",
+        "kind": "theorem",
+        "title": "A cofinal subsystem has the same inverse limit up to canonical isomorphism",
+        "strategy": "Restriction of a compatible tuple gives one map. In the other direction, choose for each ambient index a dominating subsystem index and use compatibility to define the missing coordinate; cofinality makes the result independent of the choices, and the two constructions are inverse.",
+        "deps": [
+          "def-cofinal-subsystem",
+          "def-compatible-tuple-inverse-limit-of-groups",
+          "thm-concrete-inverse-limit-universal-property-in-groups"
+        ]
+      },
+      {
+        "id": "def-totally-disconnected-and-totally-separated-spaces",
+        "kind": "definition",
+        "title": "Totally disconnected spaces and totally separated spaces",
+        "deps": [
+          "def-topological-space",
+          "def-connected-component-and-quasicomponent",
+          "def-interior-closure-boundary-top"
+        ]
+      },
+      {
+        "id": "thm-compact-hausdorff-total-disconnectedness-and-total-separatedness-agree",
+        "kind": "theorem",
+        "title": "For compact Hausdorff spaces, total disconnectedness and total separatedness are equivalent",
+        "strategy": "Compact Hausdorff spaces identify quasicomponents with connected components. If all connected components are singletons, distinct points lie in distinct quasicomponents and are therefore separated by a clopen set; the converse is immediate because clopen separation forbids nontrivial connected subsets.",
+        "deps": [
+          "def-totally-disconnected-and-totally-separated-spaces",
+          "thm-quasicomponents-equal-components-in-a-compact-hausdorff-space",
+          "def-compact-space",
+          "def-hausdorff-space"
+        ]
+      },
+      {
+        "id": "thm-topological-characterisation-of-profinite-groups",
+        "kind": "theorem",
+        "title": "A topological group is profinite exactly when it is compact, Hausdorff, and totally disconnected, equivalently when a compact Hausdorff group has a basis of open normal subgroups with finite quotients",
+        "strategy": "One direction comes from presenting a profinite group as an inverse limit of finite discrete groups. Conversely, a compact Hausdorff totally disconnected group has a basis of finite-index open normal subgroups, and the canonical map to the inverse limit of the corresponding quotients is a topological isomorphism.",
+        "deps": [
+          "def-profinite-group-by-inverse-limit",
+          "thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected",
+          "lem-kernels-of-finite-projections-form-an-open-normal-neighbourhood-basis",
+          "thm-compact-hausdorff-total-disconnectedness-and-total-separatedness-agree",
+          "thm-continuity-into-an-inverse-limit-is-coordinatewise",
+          "def-topological-group"
+        ]
+      },
+      {
+        "id": "def-profinite-topology-on-an-abstract-group",
+        "kind": "definition",
+        "title": "The profinite topology on a group uses finite-index normal subgroups as an identity-neighbourhood basis",
+        "deps": [
+          "def-group",
+          "def-normal-subgroup",
+          "def-index"
+        ]
+      },
+      {
+        "id": "def-finite-residual-and-residually-finite-group",
+        "kind": "definition",
+        "title": "The finite residual is the intersection of the finite-index normal subgroups, and a group is residually finite when that intersection is trivial",
+        "deps": [
+          "def-profinite-topology-on-an-abstract-group",
+          "def-normal-subgroup"
+        ]
+      },
+      {
+        "id": "def-profinite-completion-of-an-abstract-group",
+        "kind": "definition",
+        "title": "The profinite completion is the inverse limit of the finite quotients G over N",
+        "deps": [
+          "def-directed-set-and-inverse-system-of-groups",
+          "def-profinite-topology-on-an-abstract-group",
+          "def-quotient-group"
+        ]
+      },
+      {
+        "id": "def-canonical-map-to-the-profinite-completion",
+        "kind": "definition",
+        "title": "The canonical map sends g to its coherent system of residue classes",
+        "deps": [
+          "def-profinite-completion-of-an-abstract-group"
+        ]
+      },
+      {
+        "id": "thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion",
+        "kind": "theorem",
+        "title": "The canonical map to the profinite completion has kernel equal to the finite residual and has dense image",
+        "strategy": "A group element maps to the identity tuple exactly when it lies in every finite-index normal subgroup, which is the finite residual. Density follows because a basic open set in the inverse limit fixes only finitely many quotient coordinates, and the Chinese-remainder style compatibility for the directed quotient system lets one choose an element of the abstract group matching those coordinates.",
+        "deps": [
+          "def-profinite-completion-of-an-abstract-group",
+          "def-canonical-map-to-the-profinite-completion",
+          "def-finite-residual-and-residually-finite-group"
+        ]
+      },
+      {
+        "id": "cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite",
+        "kind": "corollary",
+        "title": "The canonical map is injective exactly when the group is residually finite",
+        "strategy": "Injectivity means that the kernel of the canonical map is trivial, and the previous theorem identifies that kernel with the finite residual.",
+        "deps": [
+          "thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion",
+          "def-finite-residual-and-residually-finite-group"
+        ]
+      },
+      {
+        "id": "thm-universal-property-of-profinite-completion",
+        "kind": "theorem",
+        "title": "The profinite completion is initial among continuous homomorphisms from G to profinite groups",
+        "strategy": "Compose a continuous homomorphism from G into a profinite target with each finite quotient of the target coming from an open normal subgroup. Continuity for the profinite topology forces every such quotient map to factor through a finite quotient of G, and the inverse-limit universal property then assembles those compatible factors into one unique continuous map from the completion.",
+        "deps": [
+          "def-profinite-completion-of-an-abstract-group",
+          "def-canonical-map-to-the-profinite-completion",
+          "thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion",
+          "thm-topological-characterisation-of-profinite-groups",
+          "thm-continuity-into-an-inverse-limit-is-coordinatewise"
+        ]
+      },
+      {
+        "id": "thm-profinite-completion-is-functorial",
+        "kind": "theorem",
+        "title": "A homomorphism induces a continuous homomorphism of profinite completions",
+        "strategy": "Preimages of finite-index normal subgroups are finite-index normal, so a group homomorphism sends the defining cone of finite quotients of the source to a compatible cone over the target system. The universal property produces the induced completion map, and uniqueness proves functoriality under composition and identities.",
+        "deps": [
+          "thm-universal-property-of-profinite-completion",
+          "def-profinite-completion-of-an-abstract-group",
+          "def-canonical-map-to-the-profinite-completion"
+        ]
+      },
+      {
+        "id": "rem-malcev-finitely-generated-linear-groups-are-residually-finite",
+        "kind": "remark",
+        "title": "Malcev's theorem gives a canonical non-load-bearing source of residually finite groups",
+        "deps": [
+          "def-finite-residual-and-residually-finite-group",
+          "def-finitely-generated-group"
+        ]
+      },
+      {
+        "id": "thm-free-groups-are-residually-finite",
+        "kind": "theorem",
+        "title": "Free groups are residually finite",
+        "strategy": "Take a nontrivial reduced word and build a finite labeled quotient of the Cayley tree or a finite permutation action in which that word does not fix the basepoint. The corresponding kernel has finite index and omits the chosen element, so the finite residual is trivial.",
+        "deps": [
+          "def-finite-residual-and-residually-finite-group",
+          "thm-reduced-words-form-the-free-group",
+          "thm-free-groups-unique-up-to-unique-isomorphism",
+          "def-cyclically-reduced-word",
+          "lem-cyclic-reduction-normal-form"
+        ]
+      },
+      {
+        "id": "def-subgroup-separable-and-lerf",
+        "kind": "definition",
+        "title": "A subgroup is separable when it is closed in the profinite topology, and a group is LERF when every finitely generated subgroup is separable",
+        "deps": [
+          "def-profinite-topology-on-an-abstract-group",
+          "def-subgroup"
+        ]
+      },
+      {
+        "id": "thm-finitely-generated-free-groups-are-subgroup-separable",
+        "kind": "theorem",
+        "title": "Every finitely generated free group is subgroup separable",
+        "strategy": "Use Marshall Hall's subgroup-separability theorem for finitely generated subgroups of finitely generated free groups, then identify that conclusion with the library definition of LERF.",
+        "deps": [
+          "def-subgroup-separable-and-lerf"
+        ]
+      },
+      {
+        "id": "fs-an-inverse-limit-of-groups-may-be-empty",
+        "kind": "false-statement",
+        "title": "FALSE: an inverse limit of groups can be empty",
+        "strategy": "The identity element in each factor always forms a compatible tuple, so the inverse limit is never empty. The emptiness pathology belongs to more general inverse systems of sets, not to groups.",
+        "deps": [
+          "def-compatible-tuple-inverse-limit-of-groups",
+          "lem-compatible-tuples-form-a-subgroup"
+        ]
+      },
+      {
+        "id": "fs-projections-from-every-surjective-inverse-system-are-surjective-in-zf",
+        "kind": "false-statement",
+        "title": "FALSE: every inverse limit of surjective finite-group systems has surjective coordinate projections in ZF",
+        "strategy": "Existence of compatible lifts across an infinite tower can require a choice principle even when every transition map is surjective. The group inverse limit itself is nonempty, but a prescribed coordinate value need not extend without additional choice.",
+        "deps": [
+          "def-coordinate-projections-from-an-inverse-limit",
+          "thm-concrete-inverse-limit-universal-property-in-groups"
+        ]
+      },
+      {
+        "id": "fs-the-canonical-map-to-profinite-completion-is-always-injective",
+        "kind": "false-statement",
+        "title": "FALSE: the canonical map to the profinite completion is always injective",
+        "strategy": "Injectivity is exactly residual finiteness. Any group with a nontrivial finite residual, such as a classical non-residually-finite Baumslag-Solitar example, gives a direct counterexample.",
+        "deps": [
+          "thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion",
+          "def-finite-residual-and-residually-finite-group"
+        ]
+      },
+      {
+        "id": "fs-a-compact-hausdorff-group-is-profinite-without-total-disconnectedness",
+        "kind": "false-statement",
+        "title": "FALSE: every compact Hausdorff topological group is profinite",
+        "strategy": "Connected compact groups, such as the circle group, are compact and Hausdorff but cannot be inverse limits of finite discrete groups because profinite groups are totally disconnected.",
+        "deps": [
+          "thm-topological-characterisation-of-profinite-groups",
+          "thm-compact-hausdorff-total-disconnectedness-and-total-separatedness-agree"
+        ]
+      },
+      {
+        "id": "fs-two-groups-with-isomorphic-profinite-completions-are-isomorphic",
+        "kind": "false-statement",
+        "title": "FALSE: isomorphic profinite completions force the original groups to be isomorphic",
+        "strategy": "The completion functor forgets non-finite-quotient information. Distinct abstract groups can have the same finite quotients and therefore the same completion while remaining nonisomorphic.",
+        "deps": [
+          "def-profinite-completion-of-an-abstract-group",
+          "thm-profinite-completion-is-functorial"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 302.014,
+    "id": "inverse-systems-profinite-groups-and-completion-examples",
+    "kind": "B",
+    "category": "group-theory",
+    "title": "Inverse Systems Profinite Groups and Completion — Examples",
+    "companion": "inverse-systems-profinite-groups-and-completion",
+    "requires": [
+      "inverse-systems-profinite-groups-and-completion"
+    ],
+    "items": [
+      {
+        "id": "ex-an-eventually-constant-inverse-system",
+        "kind": "example",
+        "title": "An eventually constant inverse system has inverse limit equal to its stable value",
+        "strategy": "Project a compatible tuple to the stable coordinate, and construct the inverse map by transporting a chosen stable value to every index through a common upper bound in the directed set.",
+        "deps": [
+          "thm-concrete-inverse-limit-universal-property-in-groups",
+          "thm-cofinal-subsystems-have-isomorphic-inverse-limits"
+        ]
+      },
+      {
+        "id": "ex-the-profinite-completion-of-a-finite-group",
+        "kind": "example",
+        "title": "A finite group is canonically isomorphic to its profinite completion",
+        "strategy": "The finite group itself already appears as the final quotient in the inverse system of finite quotients, so the canonical map is injective, surjective, and topologically final in one step.",
+        "deps": [
+          "def-profinite-completion-of-an-abstract-group",
+          "thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion"
+        ]
+      },
+      {
+        "id": "ex-the-profinite-completion-of-the-integers",
+        "kind": "example",
+        "title": "The profinite completion of the integers is the inverse limit of the rings Z mod n",
+        "strategy": "The finite-index normal subgroups of Z are exactly nZ. Their quotients assemble into the standard inverse system of residue rings, and the canonical map sends an integer to its coherent residue classes.",
+        "deps": [
+          "def-profinite-completion-of-an-abstract-group",
+          "def-canonical-map-to-the-profinite-completion",
+          "thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion"
+        ]
+      },
+      {
+        "id": "ex-a-residually-finite-free-group",
+        "kind": "example",
+        "title": "A free group separates one nontrivial reduced word by a finite quotient",
+        "strategy": "Choose a nontrivial reduced word, build a finite quotient in which its image is still nontrivial, and point to the kernel as one explicit finite-index normal subgroup witnessing residual finiteness.",
+        "deps": [
+          "thm-free-groups-are-residually-finite"
+        ]
+      },
+      {
+        "id": "ex-a-dense-nonclosed-copy-of-a-group-in-its-completion",
+        "kind": "example",
+        "title": "The integers sit densely but not closedly inside their profinite completion",
+        "strategy": "Use the completion of Z. Density is the general theorem, while nonclosedness follows because a dense proper subset of a compact Hausdorff space cannot be closed.",
+        "deps": [
+          "thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion",
+          "ex-the-profinite-completion-of-the-integers"
+        ]
+      },
+      {
+        "id": "ex-a-non-residually-finite-baumslag-solitar-group",
+        "kind": "example",
+        "title": "A Baumslag-Solitar group gives a noninjective completion map",
+        "strategy": "Use the standard Baumslag-Solitar family with known failure of residual finiteness, then invoke the injective-if-and-only-if-residually-finite corollary to interpret that failure as a nontrivial completion kernel.",
+        "deps": [
+          "cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite",
+          "def-group-presentation"
+        ]
+      },
+      {
+        "id": "cex-same-finite-quotients-do-not-trivially-identify-abstract-groups",
+        "kind": "counterexample",
+        "title": "Nonisomorphic groups can share the same profinite completion",
+        "strategy": "Choose a standard pair of nonisomorphic groups with the same finite quotients. Their inverse systems of finite quotients are isomorphic, but the underlying abstract groups are not.",
+        "deps": [
+          "fs-two-groups-with-isomorphic-profinite-completions-are-isomorphic",
+          "def-profinite-completion-of-an-abstract-group"
+        ]
+      }
+    ]
+  }
+]

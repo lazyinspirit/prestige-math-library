@@ -1,0 +1,1079 @@
+{
+  "version": 1,
+  "level": "frontier-28",
+  "note": "Step-5 authoring contract for frontier-28 batch 9 on Tuesday, September 1, 2026.",
+  "scope": [
+    "lem-a-vertex-mixed-on-an-anticonnected-set-yields-opposite-adjacency-on-a-nonedge",
+    "lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph",
+    "lem-the-auxiliary-pattern-has-a-polynomial-homogeneous-set-under-the-source-hypotheses",
+    "lem-a-polynomial-homogeneous-set-in-the-auxiliary-pattern-yields-a-y-four-restricted-union",
+    "lem-star-or-special-vertex-obstructions-force-wonderfulness",
+    "lem-the-e-graph-and-the-bird-graph-are-wonderful",
+    "ex-the-e-graph-sits-inside-a-one-subdivided-star-and-deletes-to-the-five-vertex-path",
+    "ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit"
+  ],
+  "contracts": {
+    "lem-a-vertex-mixed-on-an-anticonnected-set-yields-opposite-adjacency-on-a-nonedge": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-anticonnected-graph-and-anticonnected-component",
+          "source_section": "Definition",
+          "quote": "A graph $G$ is **anticonnected**, or **co-connected**, when its complement $\\overline G$ is connected ([[def-connected-graph-and-connected-component]], [[def-graph-isomorphism-and-complement]]).\n\nAn **anticonnected component**, or **anticomponent**, of $G$ is a vertex set $A\\subseteq V(G)$ that is the vertex set of a connected component of $\\overline G$. Equivalently, $G[A]$ is anticonnected and $A$ is inclusion-maximal with that property ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nUnder the library convention, the null graph is not anticonnected, while a one-vertex graph is anticonnected.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], choose $p,q\\in A$ with $vp\\in E(G)$ and $vq\\notin E(G)$. Since $A$ is anticonnected, [L1] gives a path $p=x_0,x_1,\\dots,x_m=q$ in the complement graph $\\overline{G}[A]$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Along that path, the truth value of \"$vx_i\\in E(G)$\" changes from true at $i=0$ to false at $i=m$. Hence there exists $k<m$ such that $vx_k\\in E(G)$ and $vx_{k+1}\\notin E(G)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $x_kx_{k+1}$ is an edge of $\\overline{G}[A]$, it is a nonedge of $G$. Therefore $b:=x_k$ and $b':=x_{k+1}$ satisfy $bb'\\notin E(G)$, $vb\\in E(G)$, and $vb'\\notin E(G)$, which is the conclusion.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a vertex mixed on $A$, so $A$ already contains both a neighbour and a nonneighbour of the outside vertex and cannot be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free numeric parameter appears in the statement, so there is no value-0 branch to discharge separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses mixedness to choose both a neighbour and a nonneighbour in $A$, which excludes the singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Beyond emptiness and singleton size, the claim has no separate collapsed graph configuration; the path argument in the complement handles every anticonnected set uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is not an interval or boundary-point statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 make only explicit finite choices: witnesses from the mixed set and the first index where adjacency to $v$ changes along the complement path."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is existential, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is existential, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the load-bearing point is the empty/singleton boundary behind mixedness and the first adjacency flip along a complement path. The current hypotheses force both a neighbour and a nonneighbour in A, so |A| >= 2, and the complement path argument then produces adjacent path vertices with opposite adjacency to v."
+      }
+    },
+    "lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-a-vertex-mixed-on-an-anticonnected-set-yields-opposite-adjacency-on-a-nonedge",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite graph, let $A\\subseteq V(G)$ be anticonnected, and let\n$v\\in V(G)\\setminus A$ be mixed on $A$. Then there exist distinct vertices\n$b,b'\\in A$ such that\n\n$$bb'\\notin E(G),\\qquad vb\\in E(G),\\qquad vb'\\notin E(G).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-directional-and-weak-sparsity-between-vertex-sets",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$.\n\n- For disjoint nonempty sets $X,Y\\subseteq V(G)$, $X$ is **$c$-sparse to $Y$** when every $x\\in X$ has at most $c|Y|$\n  neighbours in $Y$.\n- For nonempty sets $X,Y\\subseteq V(G)$, the ordered pair $(X,Y)$ is **weakly $c$-sparse** when\n  $e_G(X,Y)\\le c|X||Y|$, with the ordered edge count of [[def-edge-density-between-vertex-sets]].\n- Such a pair $(X,Y)$ is **weakly $c$-dense** when it is weakly $c$-sparse in the\n  complement graph.\n\nThe directional notion need not be symmetric, while the weak notion is an\nedge-count and so is symmetric. For nonempty $X$, taking $Y=X$ makes weak sparsity the\nself-density condition discussed in [[def-edge-density-between-vertex-sets]].",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-h-plus-and-h-minus-for-two-special-vertices",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite graph and let $u,v\\in V(H)$ be distinct.\n\nThe graph $H^+$ is obtained from $H$ by adjoining a new vertex $w$ adjacent to\nboth $u$ and $v$, and also adjoining the edge $uv$ when it is not already\npresent.\n\nThe graph $H^-$ is obtained from $H$ by adjoining a new vertex $w$ adjacent to\nboth $u$ and $v$, and deleting the edge $uv$ when it is present.\n\nThus $H^+$ forces the distinguished pair $u,v$ to be adjacent, while $H^-$\nforces it to be nonadjacent, and in both cases the new vertex $w$ is adjacent\nexactly to $u$ and $v$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $i\\in[s]$, apply [L1] to choose nonadjacent vertices $b_i,b_i'\\in B_i$ with $vb_i\\in E(G)$ and $vb_i'\\notin E(G)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Now assume $J[\\{1,\\dots,q\\}]=F$ and $(q-1)\\eta<1$. Choose $x_1\\in B_1$ arbitrarily. Suppose $x_1,\\dots,x_{j-1}$ have been chosen with $2\\le j\\le q$, so that for all $1\\le i<k<j$ one has $x_ix_k\\in E(G)$ if and only if $ik\\in E(F)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume instead that $J[\\{1,\\dots,q\\}]=H$, that $12\\in E(H)$, and that $(q-1)\\eta<\\tfrac12$. Because $0<|N_G(v)\\cap B_i|$ for $i=1,2$, choose $x_1\\in B_1$ and $x_2\\in B_2$ adjacent to $v$. Since $12\\in E(H)=E(J[\\{1,\\dots,q\\}])$, the pair $(B_1,B_2)$ is complete, so $x_1x_2\\in E(G)$. Suppose now that $x_1,\\dots,x_{j-1}$ have been chosen with $3\\le j\\le q$ so that $vx_1,vx_2\\in E(G)$, $vx_i\\notin E(G)$ for $3\\le i<j$, and $x_ix_k\\in E(G)$ if and only if $ik\\in E(H)$ for all $1\\le i<k<j$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $X=\\{i_1,\\dots,i_t\\}$ be a clique in $J$. By definition of $J$, the pairs $(B_{i_r},B_{i_u})$ are complete for all $r\\ne u$, so every vertex chosen from one selected block is adjacent to every vertex chosen from another selected block. Together with step 1.1, this shows that on the vertex set $\\{v,b_{i_1},b_{i_1}',\\dots,b_{i_t},b_{i_t}'\\}$ the only nonedges are $vb_{i_r}'$ and $b_{i_r}b_{i_r}'$ for $r\\in[t]$. That is exactly the nonedge pattern of the complement of the $1$-subdivision of $K_{1,t}$, with $v$ as the complemented center, $b_{i_r}'$ as the subdivision vertex, and $b_{i_r}$ as the corresponding leaf.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For each $i<j$ with $ij\\notin E(F)=E(J[\\{1,\\dots,q\\}])$, the pair $(B_i,B_j)$ is not complete, so hypothesis 3 and [L3] imply that $x_i$ has at most $\\eta|B_j|$ neighbours in $B_j$. Therefore at most $(j-1)\\eta|B_j|$ vertices of $B_j$ violate one of the required nonadjacency conditions to the previously chosen vertices. Since $(q-1)\\eta<1$ and $j-1\\le q-1$, some vertex $x_j\\in B_j$ avoids all those forbidden sets. For such a choice, every required edge holds automatically because whenever $ij\\in E(F)=E(J)$ the pair $(B_i,B_j)$ is complete.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "L2",
+            "L3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By induction on $j$, steps 1.2 and 2.2 produce vertices $x_1,\\dots,x_q$ with $x_ix_j\\in E(G)$ if and only if $ij\\in E(F)$ for all distinct $i,j\\in[q]$. Hence $G[\\{x_1,\\dots,x_q\\}]$ is an induced copy of $F$. This proves assertion 2.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $j\\ge3$, hypothesis 2 gives fewer than $\\tfrac12|B_j|$ neighbours of $v$ in $B_j$, so more than $\\tfrac12|B_j|$ vertices of $B_j$ are nonadjacent to $v$. As in step 2.2, the nonedge requirements to the previously chosen $x_i$ exclude at most $(j-1)\\eta|B_j|<(q-1)\\eta|B_j|<\\tfrac12|B_j|$ further vertices. Hence some $x_j\\in B_j$ is simultaneously nonadjacent to $v$ and satisfies $x_ix_j\\in E(G)$ if and only if $ij\\in E(H)$ for every $i<j$. Inducting on $j$ produces vertices $x_1,\\dots,x_q$ such that the old vertices induce $H$, the new vertex $v$ is adjacent exactly to $x_1$ and $x_2$, and therefore $G[\\{v,x_1,\\dots,x_q\\}]$ is an induced copy of $H^+$ by [L4]. This proves assertion 3.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.3",
+            "L3",
+            "L4",
+            "discharge-construct",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every block in the statement is explicitly nonempty, and each asserted lifted configuration uses vertices chosen from named blocks."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 4.1 are written with the inequalities $(q-1)\\eta<1$ and $(q-1)\\eta<\\tfrac12$, so the extremal subcase $\\eta=0$ is covered automatically."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 already handles the clique-size-$1$ star lift, and steps 1.2 and 3.1 start the block-by-block embedding from the single chosen vertex $x_1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 uses the special assumption $12\\in E(H)$, which is exactly the only special-vertex degeneration that needs separate treatment in the lifted $H^+$ branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or boundary-value parameter is part of the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.2, and 4.1 record all actual finite selections of witnesses from the blocks."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Each clause is a one-way lifting implication, not the forward half of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Each clause is a one-way lifting implication, not the reverse half of an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the special-vertex lift needs a half-neighbour bound, not merely mixedness, once previously forbidden vertices are excluded. The current statement now requires 0 < |N_G(v) ∩ B_i| < |B_i|/2, and step 4.1 uses that exact inequality to leave a vertex nonadjacent to v after all sparse exclusions."
+      }
+    },
+    "lem-the-auxiliary-pattern-has-a-polynomial-homogeneous-set-under-the-source-hypotheses": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite graph, let $v\\in V(G)$, and let\n$B_1,\\dots,B_s\\subseteq V(G)\\setminus\\{v\\}$ be pairwise disjoint nonempty sets.\nAssume:\n\n1. each $B_i$ is anticonnected;\n2. $0<|N_G(v)\\cap B_i|<\\tfrac12|B_i|$ for each $i\\in[s]$; and\n3. for all distinct $i,j\\in[s]$, either $B_i$ is complete to $B_j$, or both\n   $B_i$ is $\\eta$-sparse to $B_j$ and $B_j$ is $\\eta$-sparse to $B_i$ for some\n   real $\\eta\\ge0$.\n\nLet $J$ be the graph on vertex set $[s]$ defined by\n\n$$ij\\in E(J)\\quad\\Longleftrightarrow\\quad B_i\\text{ is complete to }B_j.$$\n\nThen:\n\n1. if $X\\subseteq[s]$ is a clique of size $t$ in $J$, then $G$ contains an\n   induced copy of the complement of the $1$-subdivision of $K_{1,t}$;\n2. if $F$ is a graph on vertex set $[q]$ with $q\\le s$ and\n   $(q-1)\\eta<1$, and if $J[\\{1,\\dots,q\\}]=F$, then $G$ contains an induced copy\n   of $F$ with the vertex $i$ realized inside $B_i$ for every $i\\in[q]$;\n3. if $H$ is a graph on vertex set $[q]$ with $q\\le s$, with distinguished\n   vertices $1,2$ satisfying $12\\in E(H)$ and $(q-1)\\eta<\\tfrac12$, and if\n   $J[\\{1,\\dots,q\\}]=H$, then $G$ contains an induced copy of $H^+$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complete-graph-free-classes-are-erdos-hajnal",
+          "source_section": "Statement",
+          "quote": "For every positive integer $t$, the hereditary class of $K_t$-free finite graphs has the Erdős–Hajnal property.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-erdos-hajnal-property-and-constant",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a hereditary class of finite graphs ([[def-hereditary-graph-class]]). A real number $\\epsilon>0$ is an **Erdős–Hajnal constant** for $\\mathcal C$ if every nonempty $G\\in\\mathcal C$ satisfies\n$$\\operatorname{hom}(G)\\ge |V(G)|^\\epsilon,$$\nwhere the homogeneous number is that of [[def-homogeneous-set-and-homogeneous-number]] and the power is that of [[def-real-power]]. The class $\\mathcal C$ has the **Erdős–Hajnal property** if it has an Erdős–Hajnal constant.\n\nFor a finite graph $H$, we say that **$H$ has the Erdős–Hajnal property** when the hereditary class of $H$-free graphs has it. The same terminology applies to a finite family $\\mathcal F$ through its class of $\\mathcal F$-free graphs.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-homogeneous-set-and-homogeneous-number",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph. A vertex set $S\\subseteq V(G)$ is **homogeneous** if it is a clique or a stable set in $G$ ([[def-clique-stable-set-and-numbers]]). The **homogeneous number** of $G$ is\n$$\\operatorname{hom}(G):=\\max\\{\\omega(G),\\alpha(G)\\}.$$\n\nFor the null graph, the published conventions give $\\omega(G)=\\alpha(G)=0$, and hence $\\operatorname{hom}(G)=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[assume-case star] Assume condition 1, with $F_\\star$ an induced subgraph of the $1$-subdivision of $K_{1,t}$. If $J$ had a clique of size $t$, then [L1] would give an induced copy of the complement of that $1$-subdivision in $G$. Because complementation preserves induced-subgraph containment, $\\overline{F_\\star}$ would then occur as an induced subgraph of $G$. But $\\overline{F_\\star}\\in\\overline{\\mathcal F}$, contradicting that $G$ is $\\overline{\\mathcal F}$-free. So $J$ is $K_t$-free.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "contradiction: if $J$ had a $K_t$"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[assume-case special] Assume condition 2, and write $\\mathcal G:=\\{H\\}\\cup\\overline{\\mathcal F}$. By the Erdős-Hajnal property of $\\mathcal G$, [L3] gives an Erdős-Hajnal constant $\\epsilon>0$ for $\\mathcal G$. Put $c:=\\min\\{\\epsilon,\\tfrac12\\}\\in(0,1)$. Then every nonempty $\\mathcal G$-free graph $X$ satisfies $\\operatorname{hom}(X)\\ge |V(X)|^c$.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[assume-case star] By [L2] and [L3], the class of $K_t$-free graphs has an Erdős-Hajnal constant $\\epsilon>0$. Put $c:=\\min\\{\\epsilon,\\tfrac12\\}\\in(0,1)$. Since $s\\ge1$, the graph $J$ is nonempty, so applying the bound to the $K_t$-free graph $J$ from step 1.1 and then using [L4], $J$ has a clique or a stable set of size at least $|J|^c$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "[assume-case special] We claim that $J$ is $\\mathcal G$-free. If $J$ contained an induced copy of some $F\\in\\overline{\\mathcal F}$ with $r:=|V(F)|$, then $r\\le m\\le a$, so $(r-1)y^a\\le(r-1)2^{-a}\\le (r-1)2^{-r}<1$. Relabel the indices of that copy as $[r]$; [L1] then lifts it to an induced copy of $F$ in $G$, contradicting that $G$ is $\\overline{\\mathcal F}$-free. If $J$ contained an induced copy of $H$, relabel its indices as $[q]$. Since $q\\le m\\le a$ gives $(q-1)y^a<(q-1)2^{-a}\\le (q-1)2^{-q}<\\tfrac12$, [L1] lifts it to an induced copy of $H^+$ in $G$. Since $H^+$ is not $\\overline{\\mathcal F}$-free by hypothesis, that would again contradict the $\\overline{\\mathcal F}$-freeness of $G$. Hence $J$ is $\\mathcal G$-free.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "L1",
+            "contradiction: if $J$ contained a forbidden pattern"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[assume-case special] Since $s\\ge1$, applying step 1.2 to the nonempty $\\mathcal G$-free graph $J$ and then using [L4], we obtain a clique or a stable set in $J$ of size at least $|J|^c$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.2",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1 and 3.1 cover the two hypotheses in the Statement. In the star case, $c$ depends only on $t$; in the special case, it depends only on $\\mathcal G=\\{H\\}\\cup\\overline{\\mathcal F}$. Thus the chosen $c$ is independent of $a,y,G,v$, and the blocks, and $J$ has a clique or a stable set of size at least $|J|^c$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "cases-exhaustive"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement now assumes $s\\ge1$, so the auxiliary graph $J$ on $[s]$ is nonempty; steps 2.1 and 3.1 use this before applying an Erdős-Hajnal bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In the star case $a=0$ is allowed and gives $\\eta=y^0=1\\ge0$; the clique lift in step 1.1 has no numerical threshold. In the special case $a\\ge m\\ge q\\ge2$, so $a=0$ cannot occur."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the minimal star case $t=1$, and steps 2.2-3.1 cover the smallest special-vertex witness sizes allowed by $12\\in E(H)$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 is the degenerate obstruction case: if the auxiliary graph itself already contains a forbidden member of $\\overline{\\mathcal F}$ or the witness graph $H$, the proof closes immediately by lifting that pattern back to $G$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the endpoint bound $y<\\tfrac12$ through $(q-1)y^a<(q-1)2^{-a}\\le(q-1)2^{-q}<\\tfrac12$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This proof does not perform a fresh choice from an unspecified nonempty family; it only invokes previously proved lifting lemmas and Erdős-Hajnal constants."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts existence of a positive exponent, not one direction of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts existence of a positive exponent, not one direction of an equivalence."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "induced-complement-commutes",
+          "asserts": "Because complementation preserves induced-subgraph containment, $\\overline{F_\\star}$ would then occur as an induced subgraph of $G$.",
+          "checked_in": "step 1.1",
+          "max_vertices": 4
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: in the special-vertex case, the auxiliary graph must exclude every graph in {H} ∪ Fbar, so a must dominate the maximum order m of that whole family, not just q = |V(H)|. The current statement includes a >= m, and step 2.2 checks both (s-1)y^a < 1 for F in Fbar and (q-1)y^a < 1/2 for H before lifting them back to G."
+      }
+    },
+    "lem-a-polynomial-homogeneous-set-in-the-auxiliary-pattern-yields-a-y-four-restricted-union": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-c-sparse-and-c-restricted-vertex-set",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$ be real. A nonempty vertex set\n$X\\subseteq V(G)$ is **$c$-sparse** when\n\n$$\n|N_G(x)\\cap X|\\le c|X|\n$$\n\nfor every $x\\in X$, and it is **$c$-dense** when\n\n$$\n|(X\\setminus\\{x\\})\\setminus N_G(x)|\\le c|X|\n$$\n\nfor every $x\\in X$. Thus $c$-dense means that every vertex of $X$ has at most\n$c|X|$ non-neighbours inside $X$ other than itself.\n\nA set is **$c$-restricted** when it is $c$-sparse or $c$-dense. The condition is\ninternal to the induced subgraph $G[X]$ ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]), and the dense clause is the sparse clause read in the complement.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-directional-and-weak-sparsity-between-vertex-sets",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$.\n\n- For disjoint nonempty sets $X,Y\\subseteq V(G)$, $X$ is **$c$-sparse to $Y$** when every $x\\in X$ has at most $c|Y|$\n  neighbours in $Y$.\n- For nonempty sets $X,Y\\subseteq V(G)$, the ordered pair $(X,Y)$ is **weakly $c$-sparse** when\n  $e_G(X,Y)\\le c|X||Y|$, with the ordered edge count of [[def-edge-density-between-vertex-sets]].\n- Such a pair $(X,Y)$ is **weakly $c$-dense** when it is weakly $c$-sparse in the\n  complement graph.\n\nThe directional notion need not be symmetric, while the weak notion is an\nedge-count and so is symmetric. For nonempty $X$, taking $Y=X$ makes weak sparsity the\nself-density condition discussed in [[def-edge-density-between-vertex-sets]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $m$ be the common block size. Since $|I|\\ge y\\ell$, $\\ell\\ge y^{-a}$, and $r\\ge |I|^c$, we have $r^{-1}\\le |I|^{-c}\\le (y\\ell)^{-c}\\le y^{c(a-1)}\\le y^5$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Now suppose that $R$ is a stable set in $J$. For any $x\\in B_i\\subseteq S$, the neighbours of $x$ inside its own block contribute fewer than $m=r^{-1}|S|$ vertices. If $j\\in R\\setminus\\{i\\}$, then $ij\\notin E(J)$, so the pairs $(B_i,B_j)$ are mutually $y^a$-sparse and [L2] gives at most $y^a|B_j|$ neighbours of $x$ in $B_j$. Summing over all other selected blocks, $x$ has at most $r^{-1}|S|+y^a\\sum_{j\\in R\\setminus\\{i\\}} |B_j|\\le (r^{-1}+y^a)|S|$ neighbours in $S$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "First suppose that $R$ is a clique in $J$. Then [L3] makes every two distinct selected blocks complete. For any $x\\in B_i\\subseteq S$, the only possible nonneighbours of $x$ inside $S$ lie in $B_i$, so $x$ has fewer than $m=r^{-1}|S|$ nonneighbours in $S$. Step 1.1 gives $r^{-1}|S|\\le y^5|S|\\le y^4|S|$, so $S$ is $y^4$-dense and hence $y^4$-restricted by [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $a\\ge 5/c+1$ and $y<\\tfrac12$, step 1.1 yields $r^{-1}+y^a\\le y^5+y^a\\le y^5+y^5\\le y^4$. Hence every vertex of $S$ has at most $y^4|S|$ neighbours inside $S$, so $S$ is $y^4$-sparse and therefore $y^4$-restricted by [L1].",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 show that whether $R$ is a clique or a stable set, the union $S$ is $y^4$-restricted. Also $|S|=rm\\ge m$, so $S$ has at least the common block size.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses $|I|\\ge y\\ell$ with the blockade condition $\\ell\\ge1$ and $y>0$ to force $|I|>0$; then the hypothesis $r=|R|\\ge|I|^c$ gives $r>0$, so $S$ is a nonempty union of nonempty blocks."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypotheses force $y>0$ and $c>0$, so the proof has no value-0 boundary to split off."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Step 1.1 shows $r^{-1}\\le y^5<1$, so the proof operates only in the regime $r>1$ forced by the stated lower bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the only structural degeneration that matters here, namely when the homogeneous set is stable rather than complete."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the endpoint restriction $y<\\tfrac12$ to close the estimate $y^5+y^5\\le y^4$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary witness is chosen; the argument estimates the already given union of selected blocks."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way restrictedness estimate, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way restrictedness estimate, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-star-or-special-vertex-obstructions-force-wonderfulness": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-wonderful-finite-family",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs, and write\n\n$$\\overline{\\mathcal F}:=\\{\\overline H:H\\in\\mathcal F\\}$$\n\nfor its family of complements\n([[def-graph-isomorphism-and-complement]]).\n\nWe say that $\\mathcal F$ is **wonderful** if there exists a real constant\n$a\\ge 6$ such that the following holds for every $y\\in(0,\\tfrac12)$ and every\n$\\overline{\\mathcal F}$-free graph $G$\n([[def-h-free-and-family-free-graph]]).\n\nSuppose that $\\mathcal B=(B_1,\\dots,B_\\ell)$ is an $(\\ell,w)$-blockade in $G$\n([[def-blockade-length-and-width]]) with $\\ell\\ge y^{-a}$, that all blocks have\nthe same size, that every block $B_i$ is anticonnected\n([[def-anticonnected-graph-and-anticonnected-component]]), and that for every\ndistinct $i,j\\in[\\ell]$ either\n\n- $B_i$ is complete to $B_j$\n  ([[def-edges-between-sets-and-pure-mixed-pairs]]), or\n- $B_i$ is $y^a$-sparse to $B_j$ and $B_j$ is $y^a$-sparse to $B_i$\n  ([[def-directional-and-weak-sparsity-between-vertex-sets]]).\n\nThen at least one of the following conclusions holds:\n\n1. $G$ has a $y^4$-restricted induced subgraph of size at least $w$\n   ([[def-c-sparse-and-c-restricted-vertex-set]]).\n2. There exists $i\\in[\\ell]$ such that at most $y|V(G)|$ vertices\n   $v\\in V(G)\\setminus V(\\mathcal B)$ satisfy\n   $$0<|N_G(v)\\cap B_i|<\\frac12|B_i|.$$\n\nThis item fixes the symmetric reading of the source phrase \"complete or\n$y^a$-sparse\" that the later proof actually uses: when a pair of blocks is not\ncomplete, each block is sparse to the other.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-the-auxiliary-pattern-has-a-polynomial-homogeneous-set-under-the-source-hypotheses",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs. Assume one of the\nfollowing.\n\n1. There exist $F_\\star\\in\\mathcal F$ and an integer $t\\ge1$ such that\n   $F_\\star$ is an induced subgraph of the $1$-subdivision of $K_{1,t}$.\n2. There exist a graph $H$ on vertex set $[q]$ with $12\\in E(H)$, with\n   distinguished vertices $1,2$, such that $\\{H\\}\\cup\\overline{\\mathcal F}$ has\n   the Erdős-Hajnal property and $H^+$ is not $\\overline{\\mathcal F}$-free.\n   Let $m$ be the maximum order of a graph in\n   $\\{H\\}\\cup\\overline{\\mathcal F}$.\n\nThen there exists $c\\in(0,1)$, depending only on $t$ in condition 1 and only\non $\\{H\\}\\cup\\overline{\\mathcal F}$ in condition 2, with the following\nproperty.\n\nLet $a\\in\\mathbb R$, let $y\\in(0,\\tfrac12)$, let $G$ be a\n$\\overline{\\mathcal F}$-free graph, and let $s$ be a positive integer. Let\n$B_1,\\dots,B_s\\subseteq V(G)$ and $v\\in V(G)\\setminus\\bigcup_{i=1}^s B_i$\nsatisfy the hypotheses of\n[[lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph]]\nwith $\\eta:=y^a$, and let $J$ be the corresponding auxiliary graph on $[s]$.\nIn condition 2, assume also that $a\\ge m$.\n\nThen $J$ has a clique or a stable set of size at least $|J|^c$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-a-polynomial-homogeneous-set-in-the-auxiliary-pattern-yields-a-y-four-restricted-union",
+          "source_section": "Statement",
+          "quote": "Let $y\\in(0,\\tfrac12)$, let $c\\in(0,1)$, and let $a\\ge 5/c+1$. Let\n$\\mathcal B=(B_1,\\dots,B_\\ell)$ be a blockade in a finite graph $G$ such that:\n\n1. $\\ell\\ge y^{-a}$;\n2. all blocks have the same size;\n3. for every distinct $i,j\\in[\\ell]$, either $B_i$ is complete to $B_j$, or\n   both $B_i$ is $y^a$-sparse to $B_j$ and $B_j$ is $y^a$-sparse to $B_i$.\n\nLet $I\\subseteq[\\ell]$ satisfy $|I|\\ge y\\ell$, and let $J$ be the graph on $I$\ndefined by\n\n$$ij\\in E(J)\\quad\\Longleftrightarrow\\quad B_i\\text{ is complete to }B_j.$$\n\nIf $J$ has a clique or stable set $R\\subseteq I$ with $|R|=r\\ge |I|^c$, then\nthe induced subgraph on\n\n$$S:=\\bigcup_{i\\in R} B_i$$\n\nis $y^4$-restricted and has at least the common block size of the selected\nblocks.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $a_0:=1$ in case 1. In case 2, let $a_0$ be the maximum order of a graph in $\\{H\\}\\cup\\overline{\\mathcal F}$. By [L2], fix a constant $c\\in(0,1)$ suitable for the corresponding obstruction hypothesis, and then choose $a\\ge \\max\\{6,a_0,5/c+1\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $y\\in(0,\\tfrac12)$, let $G$ be a $\\overline{\\mathcal F}$-free graph, and let $\\mathcal B=(B_1,\\dots,B_\\ell)$ be an $(\\ell,w)$-blockade satisfying the hypotheses from [L1] for the constant $a$. For each outside vertex $x\\in V(G)\\setminus V(\\mathcal B)$, define $I(x):=\\{i\\in[\\ell]:0<|N_G(x)\\cap B_i|<\\tfrac12|B_i|\\}$. Suppose first that $|I(x)|\\le y\\ell$ for every such $x$. Then the number of pairs $(x,i)$ with $x\\in V(G)\\setminus V(\\mathcal B)$ and $i\\in I(x)$ is at most $y\\ell|V(G)\\setminus V(\\mathcal B)|\\le y\\ell|V(G)|$. Averaging over the $\\ell$ indices, some $i\\in[\\ell]$ is contained in at most $y|V(G)|$ of the sets $I(x)$. That is exactly the second conclusion from [L1].",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "It remains to consider the opposite case. Choose $v\\in V(G)\\setminus V(\\mathcal B)$ with $|I(v)|\\ge y\\ell$. Let $\\rho:[s]\\to I(v)$ be the increasing bijection, where $s=|I(v)|$, put $C_j:=B_{\\rho(j)}$, and form the auxiliary graph $J$ on $[s]$ by $ij\\in E(J)$ if and only if $C_i$ is complete to $C_j$. The reordered family of blocks still has equal size, still satisfies $s\\ge y\\ell$, and still satisfies the pairwise complete-or-mutually-$y^a$-sparse hypothesis. Therefore [L2] applies and gives a clique or stable set $R\\subseteq[s]$ with $|R|\\ge s^c$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $R':=\\rho(R)\\subseteq I(v)$. In the auxiliary graph on the original index set $I(v)$, the set $R'$ is a clique or stable set with $|R'|=|R|\\ge |I(v)|^c$. The original blockade $\\mathcal B$ has length $\\ell\\ge y^{-a}$, the subset $I(v)$ has size at least $y\\ell$, and $a\\ge5/c+1$. Thus [L3] applies to $\\mathcal B$, $I(v)$, and $R'$. It follows that $\\bigcup_{i\\in R'}B_i$ induces a $y^4$-restricted subgraph of $G$ whose size is at least the common block size, and therefore at least the width $w$ of $\\mathcal B$. This is the first conclusion from [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 1.2 gives the second wonderfulness outcome when no outside vertex belongs to many index sets $I(x)$, and step 3.1 gives the first outcome otherwise. Thus the constant $a$ from step 1.1 satisfies [L1], so $\\mathcal F$ is wonderful.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "step 3.1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 already covers the case with no outside vertices at all, because then every set $I(x)$ is absent and the averaging count is $0$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The live parameters satisfy $t\\ge1$, $q\\ge2$, $y\\in(0,\\tfrac12)$, and $a\\ge6$, so no value-0 branch is allowed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton exceptional case remains after the blockade hypotheses: the proof only uses the common block size and the lower bound $|I(v)|\\ge y\\ell$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the width-lower-bound degeneration explicitly by proving the restricted union has at least the common block size and therefore at least the original blockade width $w$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 both use the open interval hypothesis $y\\in(0,\\tfrac12)$ through the mixed-block threshold and the downstream $y^4$ estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses the quantitative constant $a$, and step 2.1 chooses the outside vertex $v$ and the auxiliary homogeneous set $R$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Wonderfulness is defined by a one-way implication from blockade hypotheses to one of two outcomes."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Wonderfulness is defined by a one-way implication from blockade hypotheses to one of two outcomes."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the proof must choose one exponent a large enough for the source obstruction size bound and for the restricted-union exponent 5/c + 1. The current step 1.1 takes a >= max{6, a_0, 5/c + 1}, step 2.1 works with the actual index sets I(x), and step 3.1 applies the auxiliary-pattern union lemma with those exact parameters."
+      }
+    },
+    "lem-the-e-graph-and-the-bird-graph-are-wonderful": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-star-or-special-vertex-obstructions-force-wonderfulness",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs. Assume one of the\nfollowing.\n\n1. There exist $F_\\star\\in\\mathcal F$ and an integer $t\\ge1$ such that\n   $F_\\star$ is an induced subgraph of the $1$-subdivision of $K_{1,t}$.\n2. There exist a graph $H$ on vertex set $[q]$ with $12\\in E(H)$, with\n   distinguished vertices $1,2$, such that $\\{H\\}\\cup\\overline{\\mathcal F}$ has\n   the Erdős-Hajnal property and $H^+$ is not $\\overline{\\mathcal F}$-free.\n\nThen $\\mathcal F$ is wonderful.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "Every finite graph $H$ with $|V(H)|\\le 5$ has the Erdős-Hajnal property.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-substitution-preserves-the-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "Let $H_1$ and $H_2$ be finite simple graphs with the Erdős–Hajnal property, let\n$v\\in V(H_1)$, and suppose the substitution $H=H_1[v\\to H_2]$ is defined\n([[def-substitution-of-a-graph-for-a-vertex]]). Then $H$ has the Erdős–Hajnal\nproperty.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-bird-graph-and-co-bird-graph",
+          "source_section": "Definition",
+          "quote": "The **Bird graph** is the graph on vertices\n\n$$\\{x_1,x_2,x_3,y,z,w\\}$$\n\nwith edge set\n\n$$\\{x_1x_2,x_2x_3,x_1x_3,x_1y,x_2z,yw\\}.$$\n\nSo $\\{x_1,x_2,x_3,y,z\\}$ spans the bull, and $w$ is a new leaf attached to the\nhorn vertex $y$. The **co-Bird graph** is the complement of the Bird graph.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-h-plus-and-h-minus-for-two-special-vertices",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite graph and let $u,v\\in V(H)$ be distinct.\n\nThe graph $H^+$ is obtained from $H$ by adjoining a new vertex $w$ adjacent to\nboth $u$ and $v$, and also adjoining the edge $uv$ when it is not already\npresent.\n\nThe graph $H^-$ is obtained from $H$ by adjoining a new vertex $w$ adjacent to\nboth $u$ and $v$, and deleting the edge $uv$ when it is present.\n\nThus $H^+$ forces the distinguished pair $u,v$ to be adjacent, while $H^-$\nforces it to be nonadjacent, and in both cases the new vertex $w$ is adjacent\nexactly to $u$ and $v$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the $E$-graph, take the $1$-subdivision of $K_{1,3}$ with center $c$, subdivision vertices $s_1,s_2,s_3$, and leaves $t_1,t_2,t_3$. On the six-vertex subset $\\{t_1,s_1,c,s_2,t_2,s_3\\}$, the induced edges are $t_1s_1$, $s_1c$, $cs_2$, $s_2t_2$, and $cs_3$, which is exactly the edge set of the $E$-graph from [[def-e-graph-and-co-e-graph]]. Thus $E$ is an induced subgraph of the $1$-subdivision of $K_{1,3}$, so [L1] makes $\\{E\\}$ wonderful.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the graph $H$ from [A1], the vertices $v_2$ and $v_5$ are adjacent to each other and both have the same neighbourhood outside $\\{v_2,v_5\\}$, namely $\\{v_1,v_3,v_4\\}$. Hence $\\{v_2,v_5\\}$ is a homogeneous clique. Let $Q$ be the five-vertex graph on $\\{x,v_1,v_3,v_4,v_6\\}$ with edge set $\\{xv_1,xv_3,xv_4,v_1v_3,v_1v_6,v_4v_6\\}$. Then $H$ is obtained from $Q$ by substituting $K_2$ for the vertex $x$. By [L2], both $Q$ and $K_2$ have the Erdős-Hajnal property, so [L3] gives the Erdős-Hajnal property for $H$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Form $H^+$ from [A1] by adjoining a new vertex $v$ adjacent to $v_1$ and $v_2$, and delete $v_3$. On the remaining six vertices $\\{v,v_1,v_2,v_4,v_5,v_6\\}$ the edge set is $\\{vv_1,vv_2,v_1v_2,v_1v_5,v_1v_6,v_2v_4,v_2v_5,v_4v_5,v_4v_6\\}$. Under the relabelling $x_1=v$, $x_2=v_6$, $x_3=v_5$, $y=v_4$, $z=v_2$, and $w=v_1$, the six missing edges are exactly $x_1x_2$, $x_1x_3$, $x_2x_3$, $x_1y$, $x_2z$, and $yw$, which are precisely the Bird edges. Therefore $H^+-v_3$ is co-Bird, so $H^+$ is not co-Bird-free.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 shows that $\\{H\\}\\cup\\{\\mathrm{co\\text{-}Bird}\\}$ has the Erdős-Hajnal property, and step 1.3 shows that $H^+$ is not co-Bird-free. Therefore [L1] applies to the singleton family $\\{\\mathrm{Bird}\\}$ and proves that Bird is wonderful. Together with step 1.1, this proves the statement.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns two explicit singleton forbidden families and explicit finite witness graphs, so there is no empty-family branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free parameter in the statement admits a value-0 case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes the concrete star-subdivision witness with three branches, and steps 1.2-2.1 fix the single six-vertex Bird witness graph used for the special-vertex branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the only structural degeneration in the Bird route, namely the two-vertex homogeneous clique that collapses $H$ to a five-vertex quotient."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This theorem has no interval parameter or endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All graphs and relabellings are explicit; the proof does not appeal to an arbitrary choice from a merely nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the Bird branch depends on two finite witness checks, namely that H has the Erdős-Hajnal property by substitution from a five-vertex graph and that H^+ - v_3 is co-Bird. The current proof records both constructions explicitly, and the reader/source verification confirmed the two graph isomorphism checks on the live bytes."
+      }
+    },
+    "ex-the-e-graph-sits-inside-a-one-subdivided-star-and-deletes-to-the-five-vertex-path": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-e-graph-and-co-e-graph",
+          "source_section": "Definition",
+          "quote": "The **$E$-graph** is the graph on vertices\n\n$$\\{p_1,p_2,p_3,p_4,p_5,q\\}$$\n\nwith edge set\n\n$$\\{p_1p_2,p_2p_3,p_3p_4,p_4p_5,p_3q\\}.$$\n\nThus $p_1p_2p_3p_4p_5$ is a five-vertex path and $q$ is a leaf attached to its\nmiddle vertex $p_3$. The **co-$E$ graph** is the complement of this graph.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the six-vertex subset $\\{t_1,s_1,c,s_2,t_2,s_3\\}$, the induced edges are $t_1s_1$, $s_1c$, $cs_2$, $s_2t_2$, and $cs_3$. Relabelling $p_1=t_1$, $p_2=s_1$, $p_3=c$, $p_4=s_2$, $p_5=t_2$, and $q=s_3$ turns this induced subgraph into the edge set from [L1]. Hence the selected subset is an induced copy of the $E$-graph.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Deleting the vertex $q=s_3$ from that induced copy leaves the five vertices $p_1,p_2,p_3,p_4,p_5$ with exactly the four path edges $p_1p_2,p_2p_3,p_3p_4,p_4p_5$. By [L2], this is $P_5$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses an explicit six-vertex induced subgraph of a fixed seven-vertex star subdivision, not an empty or variable family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no numeric parameter whose value 0 creates a special branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is exactly the single-vertex deletion check that turns the explicit $E$ witness into $P_5$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies directly that omitting the seventh star vertex leaves an induced six-vertex copy rather than introducing extra edges across the selected set."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every vertex of the witness graph is explicitly named; the example does not make an arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a direct example, not one implication of an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a direct example, not one implication of an if-and-only-if statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "Every finite graph $H$ with $|V(H)|\\le 5$ has the Erdős-Hajnal property.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-substitution-preserves-the-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "Let $H_1$ and $H_2$ be finite simple graphs with the Erdős–Hajnal property, let\n$v\\in V(H_1)$, and suppose the substitution $H=H_1[v\\to H_2]$ is defined\n([[def-substitution-of-a-graph-for-a-vertex]]). Then $H$ has the Erdős–Hajnal\nproperty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-h-plus-and-h-minus-for-two-special-vertices",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite graph and let $u,v\\in V(H)$ be distinct.\n\nThe graph $H^+$ is obtained from $H$ by adjoining a new vertex $w$ adjacent to\nboth $u$ and $v$, and also adjoining the edge $uv$ when it is not already\npresent.\n\nThe graph $H^-$ is obtained from $H$ by adjoining a new vertex $w$ adjacent to\nboth $u$ and $v$, and deleting the edge $uv$ when it is present.\n\nThus $H^+$ forces the distinguished pair $u,v$ to be adjacent, while $H^-$\nforces it to be nonadjacent, and in both cases the new vertex $w$ is adjacent\nexactly to $u$ and $v$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-bird-graph-and-co-bird-graph",
+          "source_section": "Definition",
+          "quote": "The **Bird graph** is the graph on vertices\n\n$$\\{x_1,x_2,x_3,y,z,w\\}$$\n\nwith edge set\n\n$$\\{x_1x_2,x_2x_3,x_1x_3,x_1y,x_2z,yw\\}.$$\n\nSo $\\{x_1,x_2,x_3,y,z\\}$ spans the bull, and $w$ is a new leaf attached to the\nhorn vertex $y$. The **co-Bird graph** is the complement of the Bird graph.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Outside the pair $\\{v_2,v_5\\}$, both vertices are adjacent exactly to $v_1,v_3,v_4$ and are nonadjacent to $v_6$. Hence $\\{v_2,v_5\\}$ is a homogeneous clique. Let $Q$ be the graph on $\\{x,v_1,v_3,v_4,v_6\\}$ with edges $\\{xv_1,xv_3,xv_4,v_1v_3,v_1v_6,v_4v_6\\}$. Replacing $x$ by the clique $\\{v_2,v_5\\}$ recovers all edges of $H$, so $H=Q[x\\to K_2]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In $H^-$, delete $v_6$. The remaining six vertices $\\{v,v_1,v_2,v_3,v_4,v_5\\}$ have edge set $\\{vv_1,vv_2,v_1v_3,v_1v_5,v_2v_3,v_2v_4,v_2v_5,v_3v_5,v_4v_5\\}$. Relabel them by $x_1=v_4$, $x_2=v$, $x_3=v_3$, $y=v_1$, $z=v_5$, and $w=v_2$. Again the only missing edges are $x_1x_2,x_1x_3,x_2x_3,x_1y,x_2z,yw$, so $H^--v_6$ is also co-Bird.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The graphs $Q$ and $K_2$ both have at most five vertices, so [L1] gives the Erdős-Hajnal property for each. By [L2], $H$ also has the Erdős-Hajnal property.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In $H^+$, delete $v_3$. The remaining six vertices $\\{v,v_1,v_2,v_4,v_5,v_6\\}$ have edge set $\\{vv_1,vv_2,v_1v_2,v_1v_5,v_1v_6,v_2v_4,v_2v_5,v_4v_5,v_4v_6\\}$. Relabel them by $x_1=v$, $x_2=v_6$, $x_3=v_5$, $y=v_4$, $z=v_2$, and $w=v_1$. Then the only missing edges are $x_1x_2,x_1x_3,x_2x_3,x_1y,x_2z,yw$, which are exactly the Bird edges. Therefore $H^+-v_3$ is co-Bird.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1-3.1 together with step 1.2 verify the finite witness data used in the Bird route: $H$ has the Erdős-Hajnal property, and both $H^+$ and $H^-$ contain induced co-Bird subgraphs.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is an explicit labelled six-vertex witness and never ranges over an empty family of candidates."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free numeric parameter appears in the example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the one-vertex deletion inside $H^-$, and step 3.1 checks the one-vertex deletion inside $H^+$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 isolates the two-vertex homogeneous clique that is the only quotient degeneration used in the substitution argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting parameter occurs here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All relabellings are explicit finite identifications, not arbitrary selections from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional statement."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

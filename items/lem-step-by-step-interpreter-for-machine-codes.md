@@ -2,7 +2,7 @@
 id: lem-step-by-step-interpreter-for-machine-codes
 kind: lemma
 title: "A fixed interpreter can execute one encoded machine step"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ deps: [def-effective-encoding-of-turing-machines,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

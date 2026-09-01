@@ -1,0 +1,2978 @@
+{
+  "version": 1,
+  "level": "frontier-28",
+  "note": "Step-5 authoring contract for frontier-28 batch 11 on Tuesday, September 1, 2026 (AEST).",
+  "scope": [
+    "thm-machine-acceptance-is-recognizable",
+    "lem-diagonal-self-application-machine",
+    "thm-machine-acceptance-is-undecidable",
+    "thm-halting-is-recognizable-and-undecidable",
+    "cor-nonhalting-is-not-recognizable",
+    "thm-an-unrecognizable-language-exists",
+    "thm-busy-beaver-dominates-every-total-computable-function",
+    "cor-busy-beaver-is-not-computable",
+    "thm-totality-is-not-recognizable",
+    "thm-machine-equivalence-is-undecidable",
+    "fs-undecidable-means-no-instance-can-be-answered",
+    "fs-diagonalization-needs-literal-source-self-reading",
+    "ex-diagonal-self-application-machine",
+    "ex-machine-equivalence-is-undecidable",
+    "cex-undecidable-means-no-instance-can-be-answered",
+    "thm-verifier-and-nondeterministic-definitions-of-np-agree",
+    "prop-p-is-contained-in-np-intersection-conp",
+    "lem-polynomial-reductions-compose",
+    "thm-polynomial-reductions-transfer-p-np-and-conp-membership",
+    "prop-an-np-complete-language-in-p-implies-p-equals-np",
+    "thm-sat-search-reduces-to-sat-decision",
+    "prop-np-is-contained-in-pspace-and-pspace-in-exp",
+    "fs-np-means-not-polynomial",
+    "fs-np-complete-means-known-not-in-p",
+    "ex-p-is-contained-in-np-intersection-conp",
+    "ex-np-is-contained-in-pspace-and-pspace-in-exp",
+    "cex-np-means-not-polynomial"
+  ],
+  "contracts": {
+    "thm-machine-acceptance-is-recognizable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-turing-machine-acceptance-problem",
+          "source_section": "Definition",
+          "quote": "Fix the chosen machine code $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nFor binary words $x,y$, write\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $w=a_1\\cdots a_\\ell\\in\\Sigma_s^*$, where each $a_i\\in\\{1,\\dots,s\\}$, put\n$$ \\widehat w:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nThe **Turing-machine acceptance problem** is the language\n$$ A_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ accepts } w\\bigr\\}. $$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-step-by-step-interpreter-for-machine-codes",
+          "source_section": "Statement",
+          "quote": "For a binary word $w$, write\n$$ c(w):=1^{|w|}0w. $$\nFor binary words $x,y$, write\n$$\\langle x,y\\rangle:=1^{|x|}0xy;$$\nthe unary prefix determines the length of $x$, after which the unread suffix is\n$y$.\nEncode a configuration of a coded machine $M=(m,s,n,\\tau)$ by the binary word\n$$ \\ulcorner C\\urcorner:=c(\\operatorname{bin}(r))\\,c(\\operatorname{bin}(q))\\,c(\\operatorname{bin}(h))\\,c(\\operatorname{bin}(a_0))\\cdots c(\\operatorname{bin}(a_r)), $$\nwhere $C=(q,h,t)$, where $r=\\max(\\{h\\}\\cup\\operatorname{supp}(t))$, and where\n$a_j=t(j)$ for $0\\le j\\le r$. Then there is a deterministic one-tape Turing\nmachine $I_{\\mathrm{step}}$ with input alphabet $\\{0,1\\}$ that, on input\n$\\langle\\ulcorner M\\urcorner,\\ulcorner C\\urcorner\\rangle$, returns\n$\\ulcorner C\\urcorner$ when $C$ is halting and returns the code of the unique\none-step successor of $C$ when $C$ is nonhalting. On malformed inputs it halts\nwith the empty word $\\varepsilon$ as a fixed malformed-code output.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-machine-descriptions-form-a-decidable-language",
+          "source_section": "Statement",
+          "quote": "Under the chosen encoding of [[def-effective-encoding-of-turing-machines]], the\nset of binary words that decode to well-formed deterministic one-tape Turing\nmachines is a decidable language.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Build a deterministic one-tape machine $R$ that, on input $z$, first parses $z$ as a candidate pair $\\langle x,y\\rangle$. If the pair parse fails, it rejects. It next runs the decider from [L4] on $x$; if $x$ is not a well-formed machine code, it rejects. If $x$ is valid, it uses [L2] to recover the coded machine $M=(m,s,n,\\tau)$. It then parses $y$ as a candidate word code $c(\\operatorname{bin}(\\ell))c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell))$, rejects if that parse fails, and also rejects if some recovered symbol $a_i$ lies outside the input alphabet $\\Sigma_s=\\{1,\\dots,s\\}$. From the recovered word $w=a_1\\cdots a_\\ell$, the machine writes the canonical initial configuration code of $M$ on input $w$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The machine $R$ now repeatedly invokes the one-step interpreter from [L3] on the pair consisting of the recovered code $x=\\ulcorner M\\urcorner$ and the current configuration code. After each return, it reads the decoded state component of that configuration code. If the state is accepting, $R$ accepts. If the state is rejecting, $R$ rejects. Otherwise it feeds the returned successor configuration back into the next interpreter call.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L3], each iteration in step 2.1 maintains exactly the current configuration of $M$ on $w$. Therefore $R$ accepts precisely when $M$ eventually reaches an accepting configuration on $w$, rejects when $M$ reaches a rejecting configuration, and diverges when $M$ diverges. By [L1] and [L5], this means that $R$ recognizes $A_{TM}$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The recognizability claim for A_TM does not turn on an empty family or vacuous quantifier; it is about arbitrary coded machine-input pairs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This proof never divides by or cases on a numeric zero parameter; it parses finite words and simulates machines."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton or unit-value split is load-bearing in the recognizer construction for A_TM."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 rejects malformed pair codes, malformed machine descriptions, and malformed word encodings before any simulation begins."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument has no interval, first/last endpoint, or boundary-of-domain dichotomy beyond malformed versus well formed input."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The machine R is built canonically from the given input word; no arbitrary witness is chosen from a merely nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level statement is one-way: it asserts recognizability of A_TM, not a biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a single recognizability conclusion, so there is no second implication direction to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the vulnerable point is the full parsing-and-simulation pipeline from a binary pair to the actual machine run. The current proof validates the machine code and input-word code first, writes the canonical initial configuration, and then uses the one-step interpreter to accept exactly when the simulated machine reaches an accepting state."
+      }
+    },
+    "lem-diagonal-self-application-machine": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-turing-machine-acceptance-problem",
+          "source_section": "Definition",
+          "quote": "Fix the chosen machine code $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nFor binary words $x,y$, write\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $w=a_1\\cdots a_\\ell\\in\\Sigma_s^*$, where each $a_i\\in\\{1,\\dots,s\\}$, put\n$$ \\widehat w:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nThe **Turing-machine acceptance problem** is the language\n$$ A_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ accepts } w\\bigr\\}. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Construct a deterministic one-tape machine $D_H$ with input alphabet $\\Sigma_2$ as follows. On input a word $y\\in\\Sigma_2^*$, first check whether every symbol is $1$ or $2$ and, if so, recover the unique binary word $x$ obtained by replacing $1$ by $0$ and $2$ by $1$. Use [L2] to decode $x$ as a candidate machine code. If $x$ is malformed or decodes to a machine whose input alphabet does not contain both symbols $1$ and $2$, reject. Otherwise form the coded pair $\\langle x,\\widehat{\\overline x}\\rangle$ and run $H$ on that binary input. If $H$ accepts, then loop forever; if $H$ rejects, then accept. This machine is effective because the recoding $x\\leftrightarrow\\overline x$, the machine-code decoder, and the call to $H$ are all effective, and [L3] guarantees that the call to $H$ halts.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $M$ be any coded deterministic one-tape Turing machine whose input alphabet contains $\\Sigma_2$, and put $x=\\ulcorner M\\urcorner$. On input $\\overline x$, the preliminary checks in step 1.1 succeed, and the query sent to $H$ is exactly $\\langle\\ulcorner M\\urcorner,\\widehat{\\overline x}\\rangle=\\langle\\ulcorner M\\urcorner,\\widehat{\\overline{\\ulcorner M\\urcorner}}\\rangle$. By [L1] and the correctness of the decider $H$ from [L3], $H$ accepts that query exactly when $M$ accepts $\\overline x$. Because $D_H$ does the opposite of $H$'s answer, $D_H$ accepts $\\overline x$ exactly when $M$ does not accept $\\overline x$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 is exactly the required diagonal property. Therefore the constructed machine $D_H$ exists.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 treats empty or otherwise invalid recoded inputs as malformed machine-code attempts and rejects them."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The diagonal lemma uses recoding and decider inversion, not any denominator or zero-sensitive arithmetic parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Nothing in the D_H construction depends on a separate value-one branch; the only alphabet requirement is containment of Sigma_2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 explicitly rejects malformed codes and machines whose input alphabets are too small for the recoded self-application word."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered interval or endpoint regime in this self-application construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 defines D_H by a fixed algorithm from H rather than by choosing an unspecified witness machine."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 proves that if H accepts the self-application query, then D_H accepts exactly when M does not accept the recoded description."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 also proves the converse direction of the diagonal equivalence because D_H flips H's correct yes/no answer on the same query."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: self-application only works if the recoded input stays inside the machine alphabet and the decider query is exactly the intended acceptance instance. The current construction decodes x from overline(x), rejects machines whose input alphabet omits 1 or 2, and flips H on the exact pair <x, widehat(overline(x))>."
+      }
+    },
+    "thm-machine-acceptance-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-diagonal-self-application-machine",
+          "source_section": "Statement",
+          "quote": "Assume that some deterministic one-tape Turing machine $H$ decides $A_{TM}$.\nFor a binary word $x=b_1\\cdots b_\\ell$, let $\\overline x$ be the word over\n$\\Sigma_2=\\{1,2\\}$ obtained by replacing each bit $0$ by $1$ and each bit $1$\nby $2$. Then there exists a deterministic one-tape Turing machine $D_H$ with\ninput alphabet $\\Sigma_2$ such that, for every coded deterministic one-tape\nTuring machine $M$ whose input alphabet contains $\\Sigma_2$,\n$$ D_H \\text{ accepts } \\overline{\\ulcorner M\\urcorner}\\iff M \\text{ does not accept } \\overline{\\ulcorner M\\urcorner}. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume for contradiction that $A_{TM}$ is decidable. Then [L1] gives a deterministic decider $H$ for $A_{TM}$. Apply [L2] to that $H$ and obtain the corresponding machine $D_H$. Because $D_H$ itself has input alphabet $\\Sigma_2$, the diagonal equivalence from [L2] applies to $M=D_H$.",
+          "step": "1.1",
+          "inputs": [
+            "assume-contra",
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $d=\\ulcorner D_H\\urcorner$, whose existence is guaranteed by [L3]. Substituting $M=D_H$ into [L2] yields $D_H \\text{ accepts } \\overline d\\iff D_H \\text{ does not accept } \\overline d$. That is impossible.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The contradiction in step 2.1 discharges the assumption from step 1.1. Therefore $A_{TM}$ is undecidable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "discharge-contradiction: the assumed decider for $A_{TM}$ cannot exist",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The contradiction concerns the special machine D_H and its recoded self-description, not an empty combinatorial family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or denominator appears in the undecidability contradiction for A_TM."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof does not branch on a singleton case; it uses the specific code d of D_H regardless of its bit length."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Malformed inputs are irrelevant here because the contradiction is derived from the valid code of the constructed machine D_H."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument is a self-reference contradiction, not a proof about interval endpoints or first/last positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 assumes a decider H and then constructs the specific diagonal machine D_H from that assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem's own claim is not biconditional; the internal equivalence is only the contradiction engine supplied by the lemma."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Undecidability is asserted as a one-way negation statement, so there is no reverse implication at the theorem level."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the contradiction needs the diagonal machine itself to satisfy the lemma's alphabet hypothesis. The current proof observes that D_H has input alphabet Sigma_2, so the diagonal equivalence applies to M = D_H and yields the impossible sentence \"D_H accepts overline(d) iff D_H does not accept overline(d)\"."
+      }
+    },
+    "thm-halting-is-recognizable-and-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-halting-problem",
+          "source_section": "Definition",
+          "quote": "Use the same pairing convention $\\langle x,y\\rangle$ and input-word code\n$\\widehat w$ as in [[def-turing-machine-acceptance-problem]]. The\n**halting problem** is the language\n$$ HALT_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ halts on } w\\bigr\\}. $$\n\nEquivalently, $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle\\in HALT_{TM}$ when\nthe computation of $M$ on $w$ has either an accepting or a rejecting halting\nhistory in the sense of [[def-halting-computation-and-divergence]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-step-by-step-interpreter-for-machine-codes",
+          "source_section": "Statement",
+          "quote": "For a binary word $w$, write\n$$ c(w):=1^{|w|}0w. $$\nFor binary words $x,y$, write\n$$\\langle x,y\\rangle:=1^{|x|}0xy;$$\nthe unary prefix determines the length of $x$, after which the unread suffix is\n$y$.\nEncode a configuration of a coded machine $M=(m,s,n,\\tau)$ by the binary word\n$$ \\ulcorner C\\urcorner:=c(\\operatorname{bin}(r))\\,c(\\operatorname{bin}(q))\\,c(\\operatorname{bin}(h))\\,c(\\operatorname{bin}(a_0))\\cdots c(\\operatorname{bin}(a_r)), $$\nwhere $C=(q,h,t)$, where $r=\\max(\\{h\\}\\cup\\operatorname{supp}(t))$, and where\n$a_j=t(j)$ for $0\\le j\\le r$. Then there is a deterministic one-tape Turing\nmachine $I_{\\mathrm{step}}$ with input alphabet $\\{0,1\\}$ that, on input\n$\\langle\\ulcorner M\\urcorner,\\ulcorner C\\urcorner\\rangle$, returns\n$\\ulcorner C\\urcorner$ when $C$ is halting and returns the code of the unique\none-step successor of $C$ when $C$ is nonhalting. On malformed inputs it halts\nwith the empty word $\\varepsilon$ as a fixed malformed-code output.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-machine-descriptions-form-a-decidable-language",
+          "source_section": "Statement",
+          "quote": "Under the chosen encoding of [[def-effective-encoding-of-turing-machines]], the\nset of binary words that decode to well-formed deterministic one-tape Turing\nmachines is a decidable language.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-halting-computation-and-divergence",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ and\nan input word $w\\in\\Sigma^*$.\n\nA **finite computation history** of $M$ on input $w$ is a finite list of\nconfigurations\n$$ C_0,C_1,\\dots,C_n $$\nsuch that $C_0=I_M(w)$ and\n$$ C_i\\vdash_M C_{i+1}\\qquad(0\\le i<n). $$\n\nSuch a history is:\n\n- **accepting** if $C_n$ is an accepting configuration,\n- **rejecting** if $C_n$ is a rejecting configuration,\n- **halting** if it is accepting or rejecting.\n\nWe say that **$M$ halts on $w$** if there exists a halting computation history\nof $M$ on $w$.\n\nWe say that **$M$ diverges on $w$** if there is no halting computation history\nof $M$ on $w$.\n\nFor a halting configuration $C=(q,h,t)$ and a word $u=a_0\\cdots a_{m-1}$ over\n$\\Gamma\\setminus\\{\\sqcup\\}$, we say that **$C$ outputs $u$** when\n$$ t(i)=\\begin{cases} a_i,&0\\le i<m,\\\\ \\sqcup,&i\\ge m. \\end{cases} $$\nSo the tape contains exactly $u$ followed by blanks.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Recognizability: build a deterministic one-tape machine $R$ that, on input $z$, first parses $z$ as a candidate pair $\\langle x,y\\rangle$. If the pair parse fails, it rejects. It next runs the decider from [L4] on $x$; if $x$ is not a well-formed machine code, it rejects. If $x$ is valid, it uses [L2] to recover the coded machine $M=(m,s,n,\\tau)$. It then parses $y$ as a candidate word code $c(\\operatorname{bin}(\\ell))c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell))$, rejects if that parse fails, and also rejects if some recovered symbol $a_i$ lies outside the input alphabet $\\Sigma_s=\\{1,\\dots,s\\}$. From the recovered word $w=a_1\\cdots a_\\ell$, the machine writes the canonical initial configuration code of $M$ on input $w$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Undecidability: if $HALT_{TM}$ were decidable, then by [L5] there would be a deterministic decider $K$ for $HALT_{TM}$. Given an input $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$ for $A_{TM}$, effectively build a machine $N_{M,w}$ that ignores its own input, simulates $M$ on $w$, halts and accepts if that simulation accepts, and otherwise loops forever. Then $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle\\in A_{TM}\\iff \\langle\\ulcorner N_{M,w}\\urcorner,\\widehat\\varepsilon\\rangle\\in HALT_{TM}$. Indeed, $N_{M,w}$ halts on the blank input exactly in the case that $M$ accepts $w$. So the assumed decider $K$ would decide $A_{TM}$, which [L7] forbids.",
+          "step": "1.2",
+          "inputs": [
+            "L5",
+            "L7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The machine $R$ now repeatedly invokes the one-step interpreter from [L3] on the pair consisting of the recovered code $x=\\ulcorner M\\urcorner$ and the current configuration code. After each return, it reads the decoded state component of that configuration code. If the state is accepting or rejecting, $R$ accepts. Otherwise it feeds the returned successor configuration back into the next interpreter call.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L3], each iteration in step 2.1 maintains exactly the current configuration of $M$ on $w$. Therefore $R$ accepts precisely when $M$ eventually reaches an accepting or rejecting configuration on $w$, and diverges when $M$ diverges. By [L1], [L5], and [L6], this means that $R$ recognizes $HALT_{TM}$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L5",
+            "L6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 3.1 and 1.2 prove recognizability and undecidability, respectively. Therefore $HALT_{TM}$ is recognizable and undecidable.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.2 uses the blank-input code widehat epsilon as the target halting instance for the reduction from A_TM."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The halting proof uses simulation and reduction only; no zero denominator or zero-index boundary changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-step or one-symbol branch is required for recognizability or undecidability of HALT_TM."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 rejects malformed pair inputs before any step simulation begins, so degenerate coding failures are handled explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This theorem is not organized around a first-versus-last endpoint split; it distinguishes halting from divergence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 effectively builds the specific machine N_{M,w} from each acceptance instance in the reduction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts two properties of HALT_TM, not a biconditional equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no top-level reverse implication to prove; recognizability and undecidability are paired conclusions."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the live risk was the old universal-machine citation, which was too weak for halting computations with no output word. The current proof no longer uses that shortcut: it parses valid HALT instances, step-simulates them with the fixed interpreter, accepts on either halting state, and keeps the standard reduction from A_TM for undecidability."
+      }
+    },
+    "cor-nonhalting-is-not-recognizable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-halting-is-recognizable-and-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $HALT_{TM}$ of [[def-halting-problem]] is recognizable but not\ndecidable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-decidable-iff-language-and-complement-are-recognizable",
+          "source_section": "Statement",
+          "quote": "For every language $L\\subseteq\\Sigma^*$, the following are equivalent:\n\n1. $L$ is decidable.\n2. Both $L$ and its complement $\\Sigma^*\\setminus L$ are recognizable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose for contradiction that the complement of $HALT_{TM}$ were recognizable. Then both $HALT_{TM}$ and its complement would be recognizable, by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "assume-contra",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] to step 1.1 would make $HALT_{TM}$ decidable. That contradicts the undecidability clause of [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the complement of $HALT_{TM}$ is not recognizable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "discharge-contradiction: simultaneous recognizability would decide $HALT_{TM}$"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This corollary is about the complement of HALT_TM, not about an empty family or empty witness set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-sensitive algebra or denominator appears in the recognizability contradiction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no unit or singleton branch in the complement-of-halting argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof works at the level of whole languages and does not introduce a malformed-instance edge case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint analysis occurs; the proof is a short contradiction via simultaneous recognizability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is selected from a nonempty set; the corollary only combines previously proved language facts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is not itself an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no second implication direction in the top-level claim that nonhalting is not recognizable."
+        }
+      ]
+    },
+    "thm-an-unrecognizable-language-exists": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-nonhalting-is-not-recognizable",
+          "source_section": "Statement",
+          "quote": "The complement of $HALT_{TM}$ is not recognizable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-halting-problem",
+          "source_section": "Definition",
+          "quote": "Use the same pairing convention $\\langle x,y\\rangle$ and input-word code\n$\\widehat w$ as in [[def-turing-machine-acceptance-problem]]. The\n**halting problem** is the language\n$$ HALT_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ halts on } w\\bigr\\}. $$\n\nEquivalently, $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle\\in HALT_{TM}$ when\nthe computation of $M$ on $w$ has either an accepting or a rejecting halting\nhistory in the sense of [[def-halting-computation-and-divergence]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], the complement of $HALT_{TM}$ is itself a language.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], that language is not recognizable, and [L3] identifies this as exactly the existence claim wanted.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proof exhibits a concrete language witness rather than arguing over an empty or vacuous collection."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numeric zero boundary appears in this existence argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness language is the complement of HALT_TM, not a singleton-value case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no malformed-input branch; the theorem simply reuses the already identified nonrecognizable language."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No first/last or interval-endpoint analysis belongs to this existence proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 chooses the explicit witness language, namely the complement of HALT_TM."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives an existential conclusion, not a biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication attached to the existence claim."
+        }
+      ]
+    },
+    "thm-busy-beaver-dominates-every-total-computable-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computable-and-partial-computable-function",
+          "source_section": "Definition",
+          "quote": "Fix effective encodings of sets $X$ and $Y$.\n\nA function\n$$ f:D\\to Y,\\qquad D\\subseteq X, $$\nis **partial computable** when some deterministic Turing machine computes it in\nthe sense of [[def-partial-function-computed-by-a-machine]].\n\nIf $D=X$, so the machine halts with the correct output on every input in $X$,\nthen $f$ is **computable** or **total computable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-partial-function-computed-by-a-machine",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be sets, let\n$$ e_X:X\\to\\{0,1\\}^*,\\qquad e_Y:Y\\to\\{0,1\\}^* $$\nbe effective binary encodings in the sense of\n[[def-effective-binary-encoding-and-decoder]], let\n$$ M=(Q,\\{0,1\\},\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nbe a deterministic one-tape Turing machine, and let\n$$ f:D\\to Y $$\nbe a function with domain $D\\subseteq X$.\n\nThe machine $M$ **computes the partial function $f$ under the fixed encodings\n$e_X,e_Y$** if:\n\n- for every $x\\in D$, the computation of $M$ on input $e_X(x)$ halts and its\n  final configuration outputs the binary word $e_Y(f(x))$, and\n- for every $x\\in X\\setminus D$, the computation of $M$ on input $e_X(x)$\n  diverges.\n\nThus the machine's input and output are ordinary finite binary words, while the\nmathematical function lives on the underlying sets $X$ and $Y$ through the\nchosen encodings.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-busy-beaver-function",
+          "source_section": "Definition",
+          "quote": "Fix the chosen machine code $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For $n\\in\\mathbb N$, let\n$BB(n)$ be the maximum number of steps taken by any coded deterministic\none-tape Turing machine $M$ such that:\n\n- the code length satisfies $|\\ulcorner M\\urcorner|\\le n$, and\n- $M$ halts on the empty input word $\\varepsilon$.\n\nIf no such machine exists, define $BB(n):=0$.\n\nThus\n$$ BB(n):=\\max\\bigl\\{\\operatorname{time}_M(\\varepsilon): |\\ulcorner M\\urcorner|\\le n,\\ M \\text{ halts on } \\varepsilon\\bigr\\}, $$\nwith the empty-set convention above.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose a deterministic machine $F$ that, on input $\\operatorname{bin}(n)$, halts with output $\\operatorname{bin}(f(n))$. For each $n\\in\\mathbb N$, build a new machine $P_n$ that has the binary digits of $n$ hard-wired into its finite control. On blank input, $P_n$ writes the binary numeral for $n$ onto its tape, runs the fixed machine $F$ on that input until $F$ halts with output $\\operatorname{bin}(f(n))$, and then performs a deterministic countdown routine that lasts exactly $f(n)+1$ further steps before halting. Therefore $P_n$ halts on the blank input, and its total running time is strictly greater than $f(n)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because only the hard-wired numeral for $n$ varies with $n$, [L3] implies that there are constants $a,b\\in\\mathbb N$ depending only on the fixed compiler scheme and on $F$ such that $|\\ulcorner P_n\\urcorner|\\le a+b\\,|\\operatorname{bin}(n)|$ for every $n$. Since $|\\operatorname{bin}(n)|\\le 1+\\log_2(n+1)$, there is some $N$ for which $a+b\\,|\\operatorname{bin}(n)|\\le n$ whenever $n\\ge N$. For those $n$, the machine $P_n$ is among the competitors counted by $BB(n)$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $n\\ge N$, then step 2.1 puts $P_n$ inside the size budget for $BB(n)$, and step 1.1 gives a halting time larger than $f(n)$. By [L2], the maximum $BB(n)$ is therefore at least that halting time, so $BB(n)\\ge f(n)$. Thus $BB$ eventually dominates $f$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domination theorem is about a function of n and explicit machines P_n, not an empty indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement is eventual in n >= N, so no separate zero case carries the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No isolated n=1 branch is needed; the argument is asymptotic and uniform for large n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 removes the empty-maximization concern for large n by exhibiting the halting competitor P_n inside the busy-beaver size budget."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 introduces the threshold N, and step 3.1 then proves the claimed inequality exactly on the regime n >= N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 explicitly constructs the machine family P_n from the chosen total computable function f."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way eventual domination statement, not an iff description of busy beaver growth."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication claiming that every eventually dominated function is computable."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the domination argument only works under the same canonical binary encoding that the constructed machines P_n write and hard-wire. The current statement and fact L1 now fix canonical binary numerals for both inputs and outputs of f, so the chosen machine F genuinely runs on bin(n) and the code-length estimate in step 2.1 is licensed."
+      }
+    },
+    "cor-busy-beaver-is-not-computable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-busy-beaver-dominates-every-total-computable-function",
+          "source_section": "Statement",
+          "quote": "For every total computable function $f:\\mathbb N\\to\\mathbb N$, with inputs and\noutputs encoded by their canonical binary numerals, there exists $N\\in\\mathbb\nN$ such that\n$$ n\\ge N\\implies BB(n)\\ge f(n). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-computable-and-partial-computable-function",
+          "source_section": "Definition",
+          "quote": "Fix effective encodings of sets $X$ and $Y$.\n\nA function\n$$ f:D\\to Y,\\qquad D\\subseteq X, $$\nis **partial computable** when some deterministic Turing machine computes it in\nthe sense of [[def-partial-function-computed-by-a-machine]].\n\nIf $D=X$, so the machine halts with the correct output on every input in $X$,\nthen $f$ is **computable** or **total computable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-busy-beaver-function",
+          "source_section": "Definition",
+          "quote": "Fix the chosen machine code $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For $n\\in\\mathbb N$, let\n$BB(n)$ be the maximum number of steps taken by any coded deterministic\none-tape Turing machine $M$ such that:\n\n- the code length satisfies $|\\ulcorner M\\urcorner|\\le n$, and\n- $M$ halts on the empty input word $\\varepsilon$.\n\nIf no such machine exists, define $BB(n):=0$.\n\nThus\n$$ BB(n):=\\max\\bigl\\{\\operatorname{time}_M(\\varepsilon): |\\ulcorner M\\urcorner|\\le n,\\ M \\text{ halts on } \\varepsilon\\bigr\\}, $$\nwith the empty-set convention above.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose for contradiction that $BB$ were computable in the sense of [L2]. Then the function $g(n):=BB(n)+1$ would also be total computable.",
+          "step": "1.1",
+          "inputs": [
+            "assume-contra",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] to the computable function $g$ yields an $N$ such that $BB(n)\\ge g(n)=BB(n)+1$ for every $n\\ge N$. That is impossible.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $BB$ is not computable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "discharge-contradiction: a computable busy beaver would dominate itself plus one"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This corollary compares BB to the explicit function BB+1; it is not about an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The contradiction uses eventual inequality BB(n) >= BB(n)+1, not a special zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate n=1 analysis is used in the noncomputability deduction."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no malformed or degenerate branch once BB is assumed computable and g is defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 uses the threshold N supplied by domination and derives the contradiction on all n >= N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The auxiliary function g(n)=BB(n)+1 is canonically defined; no arbitrary witness is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary states only that BB is not computable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of computability is asserted here."
+        }
+      ]
+    },
+    "thm-totality-is-not-recognizable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-nonhalting-is-not-recognizable",
+          "source_section": "Statement",
+          "quote": "The complement of $HALT_{TM}$ is not recognizable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-halting-problem",
+          "source_section": "Definition",
+          "quote": "Use the same pairing convention $\\langle x,y\\rangle$ and input-word code\n$\\widehat w$ as in [[def-turing-machine-acceptance-problem]]. The\n**halting problem** is the language\n$$ HALT_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ halts on } w\\bigr\\}. $$\n\nEquivalently, $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle\\in HALT_{TM}$ when\nthe computation of $M$ on $w$ has either an accepting or a rejecting halting\nhistory in the sense of [[def-halting-computation-and-divergence]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Given an input $z=\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$ for the complement of $HALT_{TM}$ from [L4], effectively build a machine $T_{M,w}$ with input alphabet $\\Sigma_1=\\{1\\}$ as follows. On input $x$, the machine simulates $M$ on $w$ for exactly $|x|$ steps. If the simulation has not halted by then, $T_{M,w}$ halts and accepts. If the simulation has halted within those $|x|$ steps, then $T_{M,w}$ enters an infinite loop. This construction is effective by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $M$ never halts on $w$, then every finite step-bounded simulation in step 1.1 remains nonhalting, so $T_{M,w}$ halts on every input $x$. Conversely, if $M$ halts on $w$ after exactly $t$ steps, then for every input $x$ with $|x|\\ge t$ the machine $T_{M,w}$ detects that halting event during its first $|x|$ simulated steps and therefore loops forever. Hence $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle\\notin HALT_{TM}\\iff \\ulcorner T_{M,w}\\urcorner\\in TOT_{TM}$.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose for contradiction that $TOT_{TM}$ were recognizable. Then, on input $z=\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$, one could compute $\\ulcorner T_{M,w}\\urcorner$ and run the assumed recognizer for $TOT_{TM}$ on that code. By step 2.1, this would recognize the complement of $HALT_{TM}$, contradicting [L1]. Therefore $TOT_{TM}$ is not recognizable, by [L3].",
+          "step": "3.1",
+          "inputs": [
+            "assume-contra",
+            "L1",
+            "L3",
+            "step 2.1",
+            "contradiction",
+            "discharge-contradiction: a recognizer for totality would recognize nonhalting"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proof reduces nonhalting to totality by a concrete machine transformation, not by an empty-family argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 defines T_{M,w} for every input length |x|, including the 0-step simulation on the empty input."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The construction uses the unary alphabet Sigma_1, but no separate length-one branch drives the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The key dichotomy is 'M halts on w' versus 'M never halts on w', not a malformed-code edge case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 handles the exact halting time t as the threshold beyond which every input length forces the looping branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 constructs the reduction machine T_{M,w} explicitly from the given coded pair."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem's own claim is a nonrecognizability statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No second implication direction appears in the top-level statement about TOT_TM."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the reduction must turn one nonhalting instance into a machine that halts on every unary input, while any halting source instance forces infinitely many nonhalting target inputs. The current T_{M,w} does exactly that by simulating M on w for |x| steps and halting iff no halting source computation appears within that bound."
+      }
+    },
+    "thm-machine-equivalence-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-recognized-and-decided",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic one-tape Turing machine with input alphabet\n$\\Sigma$, and let $L\\subseteq\\Sigma^*$ be a language\n([[def-language-over-an-alphabet]]).\n\nWe say that **$M$ recognizes $L$** if for every input word $w\\in\\Sigma^*$,\n$$ w\\in L \\quad\\Longleftrightarrow\\quad M \\text{ has an accepting computation on } w. $$\n\nWe say that **$M$ decides $L$** if $M$ recognizes $L$ and halts on every input\n$w\\in\\Sigma^*$.\n\nEquivalently, $M$ decides $L$ exactly when every input has either an accepting\nor rejecting computation history and\n$$ w\\in L \\iff M \\text{ accepts } w,\\qquad w\\notin L \\iff M \\text{ rejects } w. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-halting-is-recognizable-and-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $HALT_{TM}$ of [[def-halting-problem]] is recognizable but not\ndecidable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix once and for all a coded deterministic machine $A$ that accepts every input. Given an instance $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$ of $HALT_{TM}$, use [L2] to build a machine $E_{M,w}$ that ignores its own input, simulates $M$ on $w$, accepts every input if that simulation ever halts, and otherwise loops forever on every input.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $M$ halts on $w$, then every input to $E_{M,w}$ eventually triggers acceptance, so [L1] gives $L(E_{M,w})=\\Sigma^*$. If $M$ does not halt on $w$, then $E_{M,w}$ accepts no input at all, so $L(E_{M,w})=\\varnothing$. Therefore $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle\\in HALT_{TM}\\iff \\langle\\ulcorner E_{M,w}\\urcorner,\\ulcorner A\\urcorner\\rangle\\in EQ_{TM}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose for contradiction that $EQ_{TM}$ were decidable. Then step 2.1 would let that decider decide $HALT_{TM}$, contradicting [L3]. Hence $EQ_{TM}$ is undecidable, by [L4].",
+          "step": "3.1",
+          "inputs": [
+            "assume-contra",
+            "L3",
+            "L4",
+            "step 2.1",
+            "contradiction",
+            "discharge-contradiction: an equivalence decider would decide halting"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The undecidability proof compares two explicit languages, Sigma^* and the empty language, rather than an empty index set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numeric zero branch is mathematically decisive in the equivalence reduction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof does not split off a singleton or length-one case; it is uniform over all inputs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 handles the extreme language outcomes L(E_{M,w}) = Sigma^* and L(E_{M,w}) = emptyset, which are the degenerate equivalence cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Machine equivalence here is extensional and discrete, not an endpoint-sensitive argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 fixes the always-accept machine A and constructs E_{M,w} explicitly from each halting instance."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem concludes undecidability of EQ_TM; it does not state an iff at the theorem level."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication paired with the undecidability conclusion."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the reduction is only sound if E_{M,w} collapses to one of the two extremal languages Sigma^* or emptyset. The current construction ignores its own input, accepts every input once M halts on w, and otherwise loops on every input, so comparing E_{M,w} with the fixed accept-all machine A decides HALT exactly."
+      }
+    },
+    "fs-undecidable-means-no-instance-can-be-answered": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-turing-machine-acceptance-problem",
+          "source_section": "Definition",
+          "quote": "Fix the chosen machine code $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nFor binary words $x,y$, write\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $w=a_1\\cdots a_\\ell\\in\\Sigma_s^*$, where each $a_i\\in\\{1,\\dots,s\\}$, put\n$$ \\widehat w:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nThe **Turing-machine acceptance problem** is the language\n$$ A_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ accepts } w\\bigr\\}. $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M_{\\mathrm{yes}}$ be the machine that immediately enters its accepting state on every input. Then, by [L2], the specific coded pair $\\langle\\ulcorner M_{\\mathrm{yes}}\\urcorner,\\widehat 1\\rangle$ lies in $A_{TM}$, and this yes-answer is completely explicit.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 shows that at least one individual instance of $A_{TM}$ is easy to answer, while [L1] says the whole language is still undecidable. So undecidability cannot mean that every particular instance is beyond analysis; it means only that no single algorithm decides all instances.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses one explicit yes-instance, not an empty or vacuous case analysis."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter matters in the counterexample to this slogan."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses the one-symbol input word 1 as the transparent A_TM witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The point is not malformed coding; it is that an undecidable language can still contain obvious instances."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered endpoint or threshold argument in this short refutation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 gives a fully specified witness machine M_yes rather than appealing to an unspecified easy instance."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This false statement is not an iff; it is a single incorrect implication about undecidability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of the slogan being refuted."
+        }
+      ]
+    },
+    "fs-diagonalization-needs-literal-source-self-reading": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-diagonal-self-application-machine",
+          "source_section": "Statement",
+          "quote": "Assume that some deterministic one-tape Turing machine $H$ decides $A_{TM}$.\nFor a binary word $x=b_1\\cdots b_\\ell$, let $\\overline x$ be the word over\n$\\Sigma_2=\\{1,2\\}$ obtained by replacing each bit $0$ by $1$ and each bit $1$\nby $2$. Then there exists a deterministic one-tape Turing machine $D_H$ with\ninput alphabet $\\Sigma_2$ such that, for every coded deterministic one-tape\nTuring machine $M$ whose input alphabet contains $\\Sigma_2$,\n$$ D_H \\text{ accepts } \\overline{\\ulcorner M\\urcorner}\\iff M \\text{ does not accept } \\overline{\\ulcorner M\\urcorner}. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-existence-of-a-universal-turing-machine",
+          "source_section": "Statement",
+          "quote": "There exists a deterministic one-tape Turing machine universal for the coding\nfixed in [[def-universal-turing-machine]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L3], the data needed for self-reference are only a finite description string and a fixed interpreter for that string. Nothing in those items mentions any physical source file, manuscript, or external text artifact.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The actual diagonal step in [L2] uses the coded pair $\\langle\\ulcorner M\\urcorner,\\widehat{\\overline{\\ulcorner M\\urcorner}}\\rangle$, not a literal reading of source text. So the contradiction is carried entirely by effective encoding and simulation.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation turns on coded descriptions and interpreters, not on an empty boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero or denominator issue appears in the explanation of coded self-reference."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no separate one-symbol or singleton case in the source-reading refutation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The point is conceptual: self-reference is by code, not by a degenerate malformed input branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This argument has no endpoint or threshold structure at all."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Nothing is chosen from a nonempty set; the proof just reads off the fixed coding and simulation machinery already established."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted sentence is not a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse direction in the source-reading slogan."
+        }
+      ]
+    },
+    "ex-diagonal-self-application-machine": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-diagonal-self-application-machine",
+          "source_section": "Statement",
+          "quote": "Assume that some deterministic one-tape Turing machine $H$ decides $A_{TM}$.\nFor a binary word $x=b_1\\cdots b_\\ell$, let $\\overline x$ be the word over\n$\\Sigma_2=\\{1,2\\}$ obtained by replacing each bit $0$ by $1$ and each bit $1$\nby $2$. Then there exists a deterministic one-tape Turing machine $D_H$ with\ninput alphabet $\\Sigma_2$ such that, for every coded deterministic one-tape\nTuring machine $M$ whose input alphabet contains $\\Sigma_2$,\n$$ D_H \\text{ accepts } \\overline{\\ulcorner M\\urcorner}\\iff M \\text{ does not accept } \\overline{\\ulcorner M\\urcorner}. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Applying [L1] with $M=D_H$ itself gives $D_H \\text{ accepts } \\overline{\\ulcorner D_H\\urcorner}\\iff D_H \\text{ does not accept } \\overline{\\ulcorner D_H\\urcorner}$. So the special input is the recoded description $\\overline{\\ulcorner D_H\\urcorner}$, not an informal self-reference slogan.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The contradiction in step 1.1 is exactly the obstruction recorded in [L2]. This concrete trace is the diagonal core of the undecidability proof.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example traces the specific recoded self-description of D_H, not an empty input family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numeric zero branch changes the diagonal trace in this worked example."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is about the special word overline(ulcorner D_H urcorner), not a unit-size case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes the valid diagonal machine from the lemma, so malformed inputs are outside its scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint decomposition is present; the example is a single self-application trace."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness machine D_H is already fixed by the lemma; the example does not make an extra arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 spells out one direction of D_H accepts overline(code) iff D_H does not accept overline(code)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.1 simultaneously records the converse direction because the same displayed equivalence is traced on D_H's own recoded description."
+        }
+      ]
+    },
+    "ex-machine-equivalence-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-machine-equivalence-is-undecidable",
+          "source_section": "Statement",
+          "quote": "Let\n$$ EQ_{TM}:=\\bigl\\{\\langle\\ulcorner M_1\\urcorner,\\ulcorner M_2\\urcorner\\rangle : M_1 \\text{ and } M_2 \\text{ recognize the same language}\\bigr\\}. $$\nThen $EQ_{TM}$ is undecidable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-halting-is-recognizable-and-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $HALT_{TM}$ of [[def-halting-problem]] is recognizable but not\ndecidable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $M$ halts on $w$, then the simulation inside $E_{M,w}$ eventually terminates on every input, after which $E_{M,w}$ accepts that input. So [L1] gives $L(E_{M,w})=\\Sigma^*$, the same language recognized by an always-accept machine.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $M$ does not halt on $w$, then the simulation inside $E_{M,w}$ never terminates, so $E_{M,w}$ accepts no input at all. Again by [L1], $L(E_{M,w})=\\varnothing$, which is not the language of the always-accept machine. This sharp dichotomy is why deciding equivalence would decide halting, contradicting [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example distinguishes the all-accept language from the empty language, not an empty index family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-sensitive arithmetic or parameter split appears in the E_{M,w} example."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singled-out length-one branch in this language-equivalence illustration."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 treats the degenerate outcome L(E_{M,w}) = emptyset when the simulated machine never halts."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is not about endpoints; it is a two-case halting versus nonhalting split."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The reduction machine E_{M,w} is already fixed by the main theorem, so the example makes no new witness choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a construction; it does not state a top-level iff theorem of its own."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No second top-level implication direction needs to be discharged in this example item."
+        }
+      ]
+    },
+    "cex-undecidable-means-no-instance-can-be-answered": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-turing-machine-acceptance-problem",
+          "source_section": "Definition",
+          "quote": "Fix the chosen machine code $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nFor binary words $x,y$, write\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $w=a_1\\cdots a_\\ell\\in\\Sigma_s^*$, where each $a_i\\in\\{1,\\dots,s\\}$, put\n$$ \\widehat w:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nThe **Turing-machine acceptance problem** is the language\n$$ A_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ accepts } w\\bigr\\}. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "fs-undecidable-means-no-instance-can-be-answered",
+          "source_section": "Statement",
+          "quote": "If a language is undecidable, then no specific instance of it can ever be\nanswered correctly.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The machine $M_{\\mathrm{yes}}$ accepts the one-symbol input word $1$ on its first step. Therefore [L1] gives $\\langle\\ulcorner M_{\\mathrm{yes}}\\urcorner,\\widehat 1\\rangle\\in A_{TM}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This specific membership question has a completely transparent yes-answer, so it contradicts the slogan named in [L2]. Hence the slogan is false.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a concrete yes-instance, not an argument about emptiness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-length or zero-valued parameter controls this witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses the one-symbol input word 1 to produce the explicit member of A_TM."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Nothing degenerate or malformed is involved; the witness machine is intentionally trivial but valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no threshold or endpoint phenomenon in this short counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses the fully explicit immediate-accept machine M_yes as the witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted slogan is a one-direction claim, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of the statement-refuted section."
+        }
+      ]
+    },
+    "thm-verifier-and-nondeterministic-definitions-of-np-agree": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-np-by-verifiers",
+          "source_section": "Definition",
+          "quote": "The class **NP** is the set of languages\n$$ L\\subseteq\\{0,1\\}^* $$\nthat admit a polynomial-time verifier with polynomially bounded certificates in\nthe sense of [[def-polynomially-balanced-verifier]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dtime-ntime-dspace-and-nspace",
+          "source_section": "Definition",
+          "quote": "Let $t,s:\\mathbb N\\to\\mathbb N$.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DTIME$(t(n))$** when there exists\na deterministic multitape Turing machine deciding $L$ in time $O(t(n))$.\n\nA **nondeterministic $k$-tape Turing machine** is obtained from the deterministic\n$k$-tape model of [[def-multitape-and-nondeterministic-machines]] by replacing\nits transition function with a finite-valued transition map\n$$\\Delta_k:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma^k\\longrightarrow\\mathcal P_{\\mathrm{fin}}(Q\\times\\Gamma^k\\times\\{L,R\\}^k).$$\nOne branch chooses one instruction from the finite set at each step.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **NTIME$(t(n))$** when there exists\nsuch a nondeterministic $k$-tape machine $N$ for which:\n\n- every branch of $N$ on every input of length $n$ halts within $O(t(n))$\n  steps, and\n- some branch of $N$ accepts exactly on the words of $L$, in the same\n  existential sense as [[def-nondeterministic-accepting-computation]].\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DSPACE$(s(n))$** when a\ndeterministic multitape decider uses worst-case space $O(s(n))$. It belongs to\n**NSPACE$(s(n))$** when a nondeterministic multitape machine accepts exactly the\nwords in $L$, every branch halts, and the maximum number of visited cells over\nall branches and inputs of length $n$ is $O(s(n))$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-time-at-least-input-length-permits-complete-input-reading",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a $k$-tape machine that halts on every input of length $n$. If, on\nevery such input, the accepting or rejecting branch of $M$ scans each of the\nfirst $n$ input cells before halting, then\n$$ \\operatorname{Time}_M(n)\\ge n. $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume item 1. By [L1], choose a verifier relation $R$ and a polynomial certificate bound $p$. Let $D_R$ be a deterministic polynomial-time decider for the paired language $L_R=\\{\\langle x,u\\rangle:(x,u)\\in R\\}$. Build a nondeterministic machine $N$ that, on input $x$, first guesses a binary word $u$ of length at most $p(|x|)$ and then runs $D_R$ on $\\langle x,u\\rangle$, accepting exactly when $D_R$ accepts. Because every branch chooses at most $p(|x|)$ guessed bits and then performs one polynomial-time deterministic verification, every branch halts within polynomial time. Since $x\\in L$ exactly when some certificate $u$ makes $(x,u)\\in R$, the machine $N$ accepts exactly the words of $L$. Thus item 2 holds.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume item 2. By [L2], fix a nondeterministic machine $N$ and an exponent $k$ such that every branch on inputs of length $n$ halts within $cn^k$ steps for some constant $c$. Let $b$ be the maximum number of available nondeterministic choices in any one local configuration of $N$, and choose an integer $r\\ge 1$ with $2^r\\ge b$. An accepting branch is then determined by a finite sequence $d_1,\\dots,d_t$ of at most $cn^k$ choice numbers from $\\{0,\\dots,b-1\\}$. Encode that sequence as the binary word\n$$ u:=1^t0\\beta_1\\cdots\\beta_t, $$\nwhere each $\\beta_i$ is the $r$-bit binary expansion of $d_i$. The initial unary header recovers $t$, and then the decoder reads exactly $t$ consecutive blocks of length $r$, so this branch description is effectively decodable.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define a deterministic verifier for $L$ as follows. On input $\\langle x,u\\rangle$, first decode $u$ by reading its unary header and then the declared number of $r$-bit choice blocks; reject malformed encodings. Next simulate $N$ on $x$ while forcing those choices in order, reject if the certificate requests a nonexistent choice or ends before acceptance, and accept exactly when the forced run ends in an accepting state after consuming the full encoded branch description. Step 1.2 guarantees that $x\\in L$ yields some accepting-branch certificate, and any accepting certificate describes a genuine accepting branch. The certificate length is polynomial in $|x|$ because it has one unary header bit per simulated choice and each choice uses the fixed block length $r$, with at most $cn^k$ choices. The verifier runtime is therefore polynomial in $|x|+|u|$ because it only decodes $u$ and replays that many steps of $N$. Therefore item 1 holds by [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove both directions, so the verifier and nondeterministic definitions of NP agree. The lower bound in [L3] is compatible with these polynomial bounds: reading the whole input and certificate is already only linear in their lengths.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem compares two characterizations of NP; it does not hinge on an empty family of certificates or branches."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero denominator or special n=0 formula is needed to prove the equivalence of the two NP definitions."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof is uniform for polynomial certificate lengths and branch lengths, without a separate value-one split."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 constructs the certificate encoding, and step 2.1/3.1 reject malformed or incomplete branch descriptions rather than treating them as witnesses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no first-variable or last-stage endpoint phenomenon in the equivalence proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 turns a genuine accepting branch into a concrete encoded certificate, so the witness choice is explicitly represented."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves verifier-defined NP implies membership in some NTIME(n^k)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.1 prove the converse direction from NTIME(n^k) to the verifier definition of NP."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the converse NP direction needs a polynomially bounded certificate for an entire accepting branch, not an appeal to a fixed-arity tuple encoder. The current proof uses a unary header plus fixed-width choice blocks, then replays exactly that branch deterministically, keeping both certificate length and verifier runtime polynomial."
+      }
+    },
+    "prop-p-is-contained-in-np-intersection-conp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-p",
+          "source_section": "Definition",
+          "quote": "The class **P** is\n$$ P:=\\bigcup_{k\\ge 1}\\operatorname{DTIME}(n^k). $$\n\nThus a language belongs to $P$ exactly when some deterministic Turing machine\ndecides it in time bounded by a polynomial in the input length.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-np-by-verifiers",
+          "source_section": "Definition",
+          "quote": "The class **NP** is the set of languages\n$$ L\\subseteq\\{0,1\\}^* $$\nthat admit a polynomial-time verifier with polynomially bounded certificates in\nthe sense of [[def-polynomially-balanced-verifier]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-polynomially-balanced-verifier",
+          "source_section": "Definition",
+          "quote": "Fix the binary pairing\n$$ \\langle x,u\\rangle:=1^{|x|}0xu $$\nfor binary words $x,u\\in\\{0,1\\}^*$. Let $L\\subseteq\\{0,1\\}^*$ be a language.\nA **polynomial-time verifier with polynomially bounded certificates** for $L$\nconsists of:\n\n- a binary relation $R\\subseteq\\{0,1\\}^*\\times\\{0,1\\}^*$ whose paired language\n  $$ L_R:=\\{\\langle x,u\\rangle:(x,u)\\in R\\} $$\n  belongs to $P$, and\n- a polynomial $p$ such that\n  $$ x\\in L\\iff \\exists u\\in\\{0,1\\}^* \\text{ with } |u|\\le p(|x|) \\text{ and } (x,u)\\in R. $$\n\nAny such $u$ is called a **certificate** or **witness** for $x$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-conp",
+          "source_section": "Definition",
+          "quote": "The class **coNP** is\n$$ coNP:=\\bigl\\{L\\subseteq\\{0,1\\}^* : \\{0,1\\}^*\\setminus L\\in NP\\bigr\\}. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose a polynomial-time decider $D$ for $L$. Use the empty certificate $u=\\varepsilon$ and define the verifier relation $R_L$ by $(x,\\varepsilon)\\in R_L$ exactly when $D$ accepts $x$, with no other certificates allowed. Then the paired language for $R_L$ is decidable in polynomial time by running $D$ on the first component and checking that the second component is empty. Thus [L2] gives $L\\in NP$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Swap the accepting and rejecting halting states of $D$ to obtain a polynomial-time decider for the complement $\\{0,1\\}^*\\setminus L$. Repeating step 1.1 with the same empty-certificate idea shows that the complement belongs to $NP$. Therefore [L3] gives $L\\in coNP$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 show that every language in $P$ lies in $NP\\cap coNP$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 uses the empty certificate epsilon for the NP verifier, and step 2.1 repeats the same empty-certificate idea for the complement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The containment proof uses polynomial-time deciders and empty certificates, not a zero-valued arithmetic boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton-value or one-step split is needed to place P inside NP intersect coNP."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no malformed-instance branch; the proposition works with an arbitrary already-decided language L."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof has no interval or threshold endpoints to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness certificate is canonical, namely epsilon; no arbitrary element is chosen from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This proposition gives a containment, not a biconditional equality of classes."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse inclusion NP intersect coNP subseteq P is claimed here."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the only real boundary is the empty-certificate regime and the complement step. The current proof uses epsilon as the sole certificate for the deterministic decider, and the coNP half simply swaps the decider's accepting and rejecting states before repeating the same verifier construction."
+      }
+    },
+    "lem-polynomial-reductions-compose": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $h:=g\\circ f$. Because both $f$ and $g$ are total by [L1], the composite $h$ is also total.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every source word $x$, [L1] gives $x\\in A\\iff f(x)\\in B\\iff g(f(x))\\in C$. So $x\\in A\\iff h(x)\\in C$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The function $f$ runs in polynomial time and can output only polynomially many symbols, so the length of $f(x)$ is polynomially bounded in $|x|$. Running $g$ on that output therefore still takes polynomial time in $|x|$. Hence $h$ is a polynomial-time many-one reduction from $A$ to $C$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Composition of reductions is a statement about total functions f and g, not about an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero boundary or denominator appears in the proof that h = g composed with f is still polynomial-time."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no special one-element case; the proof is uniform for every source word x."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The reduction hypothesis already supplies total maps, so there is no undefined or malformed edge case left to resolve."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or threshold decomposition belongs to this compositional lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The composite h is determined canonically as g composed with f; no arbitrary witness is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts one closure property of reductions rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not claim that every reduction to C factors through B."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: composition must be stated for total functions on all binary words, not for maps whose types are the languages themselves. The current Given line now names witnesses to A <=_p B and B <=_p C in the library's full-domain sense, and step 3.1 uses the polynomial output-length bound of f to keep g o f polynomial-time."
+      }
+    },
+    "thm-polynomial-reductions-transfer-p-np-and-conp-membership": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-polynomial-reductions-compose",
+          "source_section": "Statement",
+          "quote": "If $A\\le_p B$ and $B\\le_p C$, then $A\\le_p C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-p",
+          "source_section": "Definition",
+          "quote": "The class **P** is\n$$ P:=\\bigcup_{k\\ge 1}\\operatorname{DTIME}(n^k). $$\n\nThus a language belongs to $P$ exactly when some deterministic Turing machine\ndecides it in time bounded by a polynomial in the input length.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-np-by-verifiers",
+          "source_section": "Definition",
+          "quote": "The class **NP** is the set of languages\n$$ L\\subseteq\\{0,1\\}^* $$\nthat admit a polynomial-time verifier with polynomially bounded certificates in\nthe sense of [[def-polynomially-balanced-verifier]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-polynomially-balanced-verifier",
+          "source_section": "Definition",
+          "quote": "Fix the binary pairing\n$$ \\langle x,u\\rangle:=1^{|x|}0xu $$\nfor binary words $x,u\\in\\{0,1\\}^*$. Let $L\\subseteq\\{0,1\\}^*$ be a language.\nA **polynomial-time verifier with polynomially bounded certificates** for $L$\nconsists of:\n\n- a binary relation $R\\subseteq\\{0,1\\}^*\\times\\{0,1\\}^*$ whose paired language\n  $$ L_R:=\\{\\langle x,u\\rangle:(x,u)\\in R\\} $$\n  belongs to $P$, and\n- a polynomial $p$ such that\n  $$ x\\in L\\iff \\exists u\\in\\{0,1\\}^* \\text{ with } |u|\\le p(|x|) \\text{ and } (x,u)\\in R. $$\n\nAny such $u$ is called a **certificate** or **witness** for $x$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-conp",
+          "source_section": "Definition",
+          "quote": "The class **coNP** is\n$$ coNP:=\\bigl\\{L\\subseteq\\{0,1\\}^* : \\{0,1\\}^*\\setminus L\\in NP\\bigr\\}. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $B\\in P$, and let $D_B$ be a polynomial-time decider for $B$ from [L3]. On input $x$, compute the fixed map $f(x)$ and then run $D_B$ on that output. By [L1], the answer is correct because $x\\in A$ iff $f(x)\\in B$, and the whole procedure is polynomial-time because both stages are. Thus $A\\in P$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $B\\in NP$. By [L4], choose a verifier relation $R_B$ and polynomial certificate bound $p$ for $B$. Using the fixed reduction map $f$, define a verifier for $A$ by declaring that $(x,u)$ is accepted exactly when $(f(x),u)\\in R_B$. The output length $|f(x)|$ is polynomial in $|x|$, so the bound $p(|f(x)|)$ is still polynomial in $|x|$. Correctness follows from $x\\in A\\iff f(x)\\in B\\iff \\exists u\\text{ with } |u|\\le p(|f(x)|) \\text{ and } (f(x),u)\\in R_B$. Therefore $A\\in NP$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume $B\\in coNP$. Then $B^c\\in NP$ by [L5]. The fixed reduction map $f$ also witnesses $A^c\\le_p B^c$, because $x\\in A^c\\iff x\\notin A\\iff f(x)\\notin B\\iff f(x)\\in B^c$. Applying step 1.2 to the reduction $A^c\\le_p B^c$ gives $A^c\\in NP$, and then [L5] yields $A\\in coNP$. The composition principle [L2] guarantees that chaining such transfers remains inside the same reduction class.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L5",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1, 1.2, and 2.1 prove the three transfer clauses.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement allows $A$ or $B$ to be empty. The fixed total reduction equivalence and steps 1.1-2.1 remain valid: when $B=\\varnothing$, necessarily $A=\\varnothing$, and the verifier and complement arguments require no positive-size language or certificate family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-sensitive arithmetic branch occurs in the backward-transfer proofs for P, NP, and coNP."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem is uniform for arbitrary source words and languages, with no separate value-one case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The reduction map is assumed total from the start, so undefined-target degeneration is excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or threshold regime appears in the transfer arguments."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses verifier data $R_B,p$ from $B\\in NP$ and reuses a certificate for $f(x)$ as a certificate for $x$; the reduction witness $f$ itself is fixed once in the Given block before all three cases."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem contains three one-way transfer clauses, not an iff classification of reduction targets."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse claim says that class membership of A forces class membership of B."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the transfer proof must preserve certificate bounds through f(x) and carry the same reduction across complements. The current NP step uses the verifier for B on f(x), notes that |f(x)| is polynomial in |x|, and the coNP step applies the same equivalence to A^c and B^c."
+      }
+    },
+    "prop-an-np-complete-language-in-p-implies-p-equals-np": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-np-hard-and-np-complete",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\{0,1\\}^*$ be a language.\n\n- $C$ is **NP-hard** when for every language $L\\in NP$ one has $L\\le_p C$.\n- $C$ is **NP-complete** when $C$ is NP-hard and $C\\in NP$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-polynomial-reductions-transfer-p-np-and-conp-membership",
+          "source_section": "Statement",
+          "quote": "Let $A,B\\subseteq\\{0,1\\}^*$ and suppose that $A\\le_p B$.\n\n1. If $B\\in P$, then $A\\in P$.\n2. If $B\\in NP$, then $A\\in NP$.\n3. If $B\\in coNP$, then $A\\in coNP$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-p-is-contained-in-np-intersection-conp",
+          "source_section": "Statement",
+          "quote": "Every language in $P$ belongs to both $NP$ and $coNP$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $L\\in NP$ be arbitrary. By [L1], because $C$ is NP-hard, there is a polynomial-time many-one reduction $L\\le_p C$. Then [L2] and the hypothesis $C\\in P$ give $L\\in P$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 shows $NP\\subseteq P$. By [L3], every language in $P$ also lies in $NP$, so $P\\subseteq NP$. Therefore $P=NP$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This proposition quantifies over languages in NP, not over an empty family or empty certificate set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or denominator appears in the P = NP consequence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no distinguished one-case; the proof works for an arbitrary language L in NP."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The argument uses the NP-hardness hypothesis of C, so there is no malformed or undefined branch to discharge."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No threshold or endpoint splitting is part of this class-collapse proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 begins with an arbitrary but fixed language L in NP and then uses the specific reduction from L to C."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is only the implication 'NP-complete in P implies P=NP'."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse 'P=NP implies every NP-complete language is in P' is not the proposition proved here."
+        }
+      ]
+    },
+    "thm-sat-search-reduces-to-sat-decision": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-search-version-of-an-np-relation",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\{0,1\\}^*$ be a language in $NP$, witnessed by a verifier\nrelation $R$ and a polynomial certificate bound $p$ as in\n[[def-polynomially-balanced-verifier]]. The **search problem attached to\n$R$** is:\n\n- input: a word $x\\in L$,\n- output: any certificate $u\\in\\{0,1\\}^*$ such that $|u|\\le p(|x|)$ and\n  $(x,u)\\in R$.\n\nEquivalently, it asks not merely whether a witness exists, but to produce one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-polynomially-balanced-verifier",
+          "source_section": "Definition",
+          "quote": "Fix the binary pairing\n$$ \\langle x,u\\rangle:=1^{|x|}0xu $$\nfor binary words $x,u\\in\\{0,1\\}^*$. Let $L\\subseteq\\{0,1\\}^*$ be a language.\nA **polynomial-time verifier with polynomially bounded certificates** for $L$\nconsists of:\n\n- a binary relation $R\\subseteq\\{0,1\\}^*\\times\\{0,1\\}^*$ whose paired language\n  $$ L_R:=\\{\\langle x,u\\rangle:(x,u)\\in R\\} $$\n  belongs to $P$, and\n- a polynomial $p$ such that\n  $$ x\\in L\\iff \\exists u\\in\\{0,1\\}^* \\text{ with } |u|\\le p(|x|) \\text{ and } (x,u)\\in R. $$\n\nAny such $u$ is called a **certificate** or **witness** for $x$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Query the $SAT$ oracle on $\\varphi$ itself. If the answer is \"no\", halt and report that no satisfying assignment exists. If the answer is \"yes\", initialize the current residual formula to $\\psi_0:=\\varphi$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $i=1,\\dots,n$, form the two residual formulas obtained from $\\psi_{i-1}$ by substituting $x_i=1$ and $x_i=0$. Query the oracle on the first one. If it is satisfiable, record $x_i=1$ and set $\\psi_i$ equal to that first residual formula. Otherwise record $x_i=0$ and set $\\psi_i$ equal to the second residual formula. At least one branch is satisfiable, because any satisfying assignment of $\\psi_{i-1}$ gives one of the two values to $x_i$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By induction on $i$, the maintained residual formula $\\psi_i$ is satisfiable and is obtained from $\\varphi$ by fixing the first $i$ variables to the recorded values. After the final stage, every variable has been assigned, so the recorded bits form a satisfying assignment for $\\varphi$. This is exactly the witness demanded in [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The algorithm makes at most $n+1$ oracle calls, and each intermediate substitution and formula rewrite is polynomial in $|\\varphi|$. Since the satisfying assignment itself has length $n\\le |\\varphi|$, this stays within the polynomial witness regime of [L2]. Therefore SAT search polynomial-time Turing reduces to SAT decision.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1 already cover the variable-free case: one oracle query settles satisfiability when no assignment bits need to be recorded."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The SAT self-reduction uses Boolean substitutions, not a zero denominator or numeric zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no separate one-variable proof branch; the loop in step 2.1 handles all variable counts uniformly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Unsatisfiable formulas are disposed of immediately in step 1.1 and are outside the search problem's output domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 iterates from the first variable x_1 through the last variable x_n, and step 3.1 closes the induction after the final assignment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 chooses the next assignment bit only after the SAT oracle certifies which residual branch remains satisfiable."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states the existence of an oracle reduction, not an iff relationship between search and decision."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reduction from decision to search is stated or needed here."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the self-reduction only works if each residual formula stays satisfiable after one variable is fixed. The current step 2.1 chooses the satisfiable branch by an oracle call at each stage, and step 3.1 inducts that the accumulated assignments extend to a satisfying assignment of the original formula."
+      }
+    },
+    "prop-np-is-contained-in-pspace-and-pspace-in-exp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-np-by-verifiers",
+          "source_section": "Definition",
+          "quote": "The class **NP** is the set of languages\n$$ L\\subseteq\\{0,1\\}^* $$\nthat admit a polynomial-time verifier with polynomially bounded certificates in\nthe sense of [[def-polynomially-balanced-verifier]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dtime-ntime-dspace-and-nspace",
+          "source_section": "Definition",
+          "quote": "Let $t,s:\\mathbb N\\to\\mathbb N$.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DTIME$(t(n))$** when there exists\na deterministic multitape Turing machine deciding $L$ in time $O(t(n))$.\n\nA **nondeterministic $k$-tape Turing machine** is obtained from the deterministic\n$k$-tape model of [[def-multitape-and-nondeterministic-machines]] by replacing\nits transition function with a finite-valued transition map\n$$\\Delta_k:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma^k\\longrightarrow\\mathcal P_{\\mathrm{fin}}(Q\\times\\Gamma^k\\times\\{L,R\\}^k).$$\nOne branch chooses one instruction from the finite set at each step.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **NTIME$(t(n))$** when there exists\nsuch a nondeterministic $k$-tape machine $N$ for which:\n\n- every branch of $N$ on every input of length $n$ halts within $O(t(n))$\n  steps, and\n- some branch of $N$ accepts exactly on the words of $L$, in the same\n  existential sense as [[def-nondeterministic-accepting-computation]].\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DSPACE$(s(n))$** when a\ndeterministic multitape decider uses worst-case space $O(s(n))$. It belongs to\n**NSPACE$(s(n))$** when a nondeterministic multitape machine accepts exactly the\nwords in $L$, every branch halts, and the maximum number of visited cells over\nall branches and inputs of length $n$ is $O(s(n))$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-worst-case-time-and-space-complexity",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic $k$-tape Turing machine. For an input word $w$, let\n$\\operatorname{time}_M(w)$ be the number of steps in the computation of $M$ on\n$w$ when that computation halts, and let $\\operatorname{space}_M(w)$ be the\ntotal number of tape cells that are ever visited during that computation across\nall $k$ tapes.\n\nIf $M$ halts on every input of length $n$, its **worst-case time complexity**\nand **worst-case space complexity** are the functions\n$$ \\operatorname{Time}_M(n):=\\max_{|w|=n}\\operatorname{time}_M(w),\\qquad \\operatorname{Space}_M(n):=\\max_{|w|=n}\\operatorname{space}_M(w). $$\n\nFor a nondeterministic machine $N$, define $\\operatorname{time}_N(w)$ and\n$\\operatorname{space}_N(w)$ as the maximum over all halting branches on input\n$w$, provided every branch halts. The worst-case functions\n$\\operatorname{Time}_N$ and $\\operatorname{Space}_N$ are then defined by the\nsame maxima over inputs of length $n$.\n\nWe say that a machine **runs in time at most $t(n)$** when its worst-case time\nis bounded by $t$, and **runs in space at most $s(n)$** when its worst-case\nspace is bounded by $s$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-exp-and-nexp",
+          "source_section": "Definition",
+          "quote": "The exponential-time classes are\n$$ EXP:=\\bigcup_{k\\ge 1}\\operatorname{DTIME}(2^{n^k}),\\qquad NEXP:=\\bigcup_{k\\ge 1}\\operatorname{NTIME}(2^{n^k}). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-turing-machine-configuration",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nA **configuration** of $M$ is a triple\n$$ C=(q,h,t) $$\nwhere $q\\in Q$ is the current state, $h\\in\\mathbb N$ is the current head\nposition, and $t:\\mathbb N\\to\\Gamma$ is a tape content in the sense of\n[[def-tape-finite-support-convention]].\n\nThe symbol currently scanned in $C$ is $t(h)$. The configuration is\n**nonhalting** when $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$.\n\nFor later encoding arguments it is convenient to write a configuration as a\nfinite word over the alphabet $Q\\cup\\Gamma$: if\n$r=\\max(\\{h\\}\\cup\\operatorname{supp}(t))$, and $a_i:=t(i)$ for $0\\le i\\le r$,\nthen the associated **configuration word** is\n$$ a_0a_1\\cdots a_{h-1}\\,q\\,a_h\\cdots a_r. $$\nThe state symbol is inserted immediately before the scanned tape symbol, and\nthe word is long enough to include the head position even when the scanned cell\nis blank.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-tape-finite-support-convention",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nA **tape content** for $M$ is a function\n$$ t:\\mathbb N\\to\\Gamma $$\n([[def-function]], [[def-natural-numbers]]) such that the support\n$$ \\operatorname{supp}(t):=\\{\\, n\\in\\mathbb N : t(n)\\ne\\sqcup \\,\\} $$\nis finite.\n\nThus the tape is indexed by the natural numbers, extends infinitely to the\nright, and is blank except at finitely many cells. If the head is instructed to\nmove left from cell $0$, it remains at cell $0$.\n\nFor an input word $w=a_0a_1\\cdots a_{m-1}\\in\\Sigma^*$, the **initial tape**\n$t_w:\\mathbb N\\to\\Gamma$ is defined by\n$$ t_w(i):=\\begin{cases} a_i,&0\\le i<m,\\\\ \\sqcup,&i\\ge m. \\end{cases} $$\nIts support is contained in $\\{0,\\dots,m-1\\}$ and is therefore finite.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "To prove $NP\\subseteq PSPACE$, let $L\\in NP$. By [L1], choose a verifier for $L$ with runtime bounded by a polynomial $q(n)$ and certificate length bounded by a polynomial $p(n)$. A deterministic decider for $L$ can enumerate all certificates $u$ of length at most $p(|x|)$ in lexicographic order, run the verifier on $(x,u)$, and accept as soon as one certificate succeeds. It stores only the input $x$, the current certificate $u$, and the verifier workspace, so the total space used is polynomial in $|x|$. Hence $L\\in PSPACE$ by [L2] and [L3].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "To prove $PSPACE\\subseteq EXP$, let $L\\in PSPACE$. Then by definition there exists $k\\ge 1$ and a deterministic machine $M$ deciding $L$ while using at most $cn^k$ tape cells on inputs of length $n$, for some constant $c$. Fix such an input length $n$. Because of [L5], a configuration of $M$ is determined by one of finitely many states, the head positions on the finitely many tapes, and the contents of at most $cn^k$ visited cells. Therefore the total number of possible configurations is at most $|Q|\\cdot (cn^k+1)^d\\cdot |\\Gamma|^{dcn^k}=2^{O(n^k)}$ for a constant $d$ depending only on the fixed number of tapes.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $M$ is deterministic and halts on every input, it cannot visit the same configuration twice on one accepting or rejecting run: a repeated configuration would force an infinite loop from that point onward. So the running time on inputs of length $n$ is bounded by the number of reachable configurations from step 1.2, hence by $2^{O(n^k)}$. Enlarging the exponent if necessary, there exists $m$ with $2^{O(n^k)}\\le 2^{n^m}$ for all sufficiently large $n$. Therefore $L\\in EXP$ by [L2] and [L4].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove $NP\\subseteq PSPACE\\subseteq EXP$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "statement defines PSPACE as a union over k >= 1, so the indexing family is explicitly nonempty and the empty-index ambiguity is excluded at the statement level."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero denominator or n=0 case is isolated; the proof uses asymptotic polynomial and exponential bounds."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no standalone one-case in the NP to PSPACE or PSPACE to EXP containments."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof counts configurations of a genuine decider M; it does not rely on malformed codes or degenerate partial behavior."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument is asymptotic and class-theoretic rather than an endpoint decomposition on a finite interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Certificate enumeration in step 1.1 is exhaustive and deterministic, so no arbitrary witness choice remains hidden."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition asserts two containments, not a biconditional equality of classes."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Neither reverse containment EXP subseteq PSPACE nor PSPACE subseteq NP is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the first inclusion depends on exhaustive certificate search using only polynomial space, and the second depends on a correct deterministic configuration bound. The current proof stores only one current certificate plus verifier workspace, then counts halting configurations as 2^{O(n^k)} and uses determinism to rule out repeats on terminating runs."
+      }
+    },
+    "fs-np-means-not-polynomial": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-p-is-contained-in-np-intersection-conp",
+          "source_section": "Statement",
+          "quote": "Every language in $P$ belongs to both $NP$ and $coNP$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-np-by-verifiers",
+          "source_section": "Definition",
+          "quote": "The class **NP** is the set of languages\n$$ L\\subseteq\\{0,1\\}^* $$\nthat admit a polynomial-time verifier with polynomially bounded certificates in\nthe sense of [[def-polynomially-balanced-verifier]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], any language already known to be in $P$ is automatically also in $NP$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 contradicts the slogan in the statement: a polynomial-time solvable language can still belong to $NP$. By [L2], NP is about efficiently verifiable yes-certificates, not about being known outside polynomial time.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation is conceptual and uses the inclusion P subseteq NP, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-sensitive parameter appears in the correction to this NP slogan."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no separate unit case in showing that polynomial-time languages can lie in NP."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The argument concerns class meaning, not degenerate or malformed instances."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No threshold or endpoint analysis belongs to this short refutation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen; the proof simply invokes the already proved containment of P in NP."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The slogan being corrected is a one-way misreading, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication in the false statement as written."
+        }
+      ]
+    },
+    "fs-np-complete-means-known-not-in-p": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-np-hard-and-np-complete",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\{0,1\\}^*$ be a language.\n\n- $C$ is **NP-hard** when for every language $L\\in NP$ one has $L\\le_p C$.\n- $C$ is **NP-complete** when $C$ is NP-hard and $C\\in NP$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-an-np-complete-language-in-p-implies-p-equals-np",
+          "source_section": "Statement",
+          "quote": "If some NP-complete language belongs to $P$, then $P=NP$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The definition quoted in [L1] contains no clause asserting $C\\notin P$. It says only that $C$ is in $NP$ and is hard for $NP$ under the chosen reductions.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $C\\notin P$ had already been proved, then [L1] would give a language in $NP\\setminus P$ and hence prove $P\\ne NP$. But [F1] records that this question remains unsolved. Conversely, [L2] says that finding $C\\in P$ would prove $P=NP$. Thus NP-completeness does not mean that exclusion from $P$ has already been proved; it identifies the consequence either kind of resolution would have.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This refutation is about the logical content of NP-completeness, not an empty witness or machine family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero branch or denominator occurs in the argument about NP-complete languages and P."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton case matters; the point is the definition of NP-complete itself."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no malformed-instance edge case in this logical clarification."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The refutation does not use an endpoint or threshold regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is selected from a nonempty set; the proof reads consequences directly from the definition and collapse proposition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement being corrected is a one-direction overclaim, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of the false statement."
+        }
+      ]
+    },
+    "ex-p-is-contained-in-np-intersection-conp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-p-is-contained-in-np-intersection-conp",
+          "source_section": "Statement",
+          "quote": "Every language in $P$ belongs to both $NP$ and $coNP$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A deterministic machine can decide $E$ by scanning the input once and toggling one parity bit in its finite control. At the end it accepts exactly when the parity is even. This runs in linear time, so $E\\in P$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] to step 1.1 gives $E\\in NP\\cap coNP$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 includes the empty binary word among even-length inputs, so the parity decider already covers the empty-string boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The even-length example is about parity of word length, not about a zero denominator or arithmetic singularity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 distinguishes odd and even parity, so one-symbol inputs are rejected as the first odd-length case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no malformed-input issue because every binary word has a well-defined parity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example uses a one-pass automaton-like scan rather than endpoint reasoning."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The language E is fixed explicitly and no witness must be chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example illustrates a containment theorem rather than proving a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse class equality is claimed in the even-length example."
+        }
+      ]
+    },
+    "ex-np-is-contained-in-pspace-and-pspace-in-exp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-search-version-of-an-np-relation",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\{0,1\\}^*$ be a language in $NP$, witnessed by a verifier\nrelation $R$ and a polynomial certificate bound $p$ as in\n[[def-polynomially-balanced-verifier]]. The **search problem attached to\n$R$** is:\n\n- input: a word $x\\in L$,\n- output: any certificate $u\\in\\{0,1\\}^*$ such that $|u|\\le p(|x|)$ and\n  $(x,u)\\in R$.\n\nEquivalently, it asks not merely whether a witness exists, but to produce one.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-np-is-contained-in-pspace-and-pspace-in-exp",
+          "source_section": "Statement",
+          "quote": "Let\n$$ PSPACE:=\\bigcup_{k\\ge 1}\\operatorname{DSPACE}(n^k). $$\nThen\n$$ NP\\subseteq PSPACE\\subseteq EXP. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Enumerate all binary certificates of lengths at most $n^k$ in lexicographic order and run the verifier on each until one succeeds. At every stage the algorithm stores only the input, the current certificate, and the verifier workspace, so the space usage is polynomial. This is the concrete mechanism behind the first inclusion in [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same procedure may test exponentially many candidate certificates before success or exhaustion, so its running time can be exponential even while its space stays polynomial. That is exactly the gap displayed by the chain in [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example discusses exhaustive certificate search up to length n^k, not an empty family of candidates."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-specific arithmetic branch appears in the space-versus-time illustration."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example does not separate a length-one candidate case from the general certificate search."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The verifier model is assumed valid throughout, so there is no malformed certificate-format edge case singled out here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The point is asymptotic growth in the number of candidate certificates, not a first/last endpoint split."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Certificate search is lexicographic and exhaustive, so no arbitrary choice from a nonempty witness set is hidden."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an example for containments, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse containment or equivalence is claimed in this example."
+        }
+      ]
+    },
+    "cex-np-means-not-polynomial": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-p-is-contained-in-np-intersection-conp",
+          "source_section": "Statement",
+          "quote": "Every language in $P$ belongs to both $NP$ and $coNP$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "fs-np-means-not-polynomial",
+          "source_section": "Statement",
+          "quote": "NP means \"not polynomial-time solvable.\"",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A one-pass parity scan decides $E$ in linear time, so $E\\in P$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], step 1.1 implies $E\\in NP$ as well. Therefore [L2] is false: this NP-language is already polynomial-time solvable.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 covers the empty binary word as an even-length string, so the parity counterexample includes the empty-input boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero denominator or singular arithmetic case appears in this parity-language counterexample."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 rejects one-symbol strings via the parity scan, showing immediately that the witness language is not all of NP or all of P."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every binary string has a defined length parity, so there is no malformed-instance branch to analyze."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample is discrete and does not rely on interval endpoints or thresholds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness language E is fixed explicitly; no noncanonical element is chosen from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false slogan is a one-way reading of NP, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication inside the statement-refuted section."
+        }
+      ]
+    }
+  }
+}

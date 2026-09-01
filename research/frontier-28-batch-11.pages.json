@@ -1,0 +1,451 @@
+[
+  {
+    "order": 603,
+    "id": "diagonalization-and-the-halting-problem",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Diagonalization and the Halting Problem",
+    "companion": "diagonalization-and-the-halting-problem-examples",
+    "requires": [
+      "decidable-recognizable-and-enumerable-languages"
+    ],
+    "items": [
+      {
+        "id": "def-turing-machine-acceptance-problem",
+        "kind": "definition",
+        "title": "The Turing-machine acceptance problem $A_{TM}$",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "lem-finite-tuples-admit-effective-prefix-free-encodings",
+          "def-computation-alphabet-and-word-convention"
+        ]
+      },
+      {
+        "id": "thm-machine-acceptance-is-recognizable",
+        "kind": "theorem",
+        "title": "The Turing-machine acceptance problem is recognizable",
+        "strategy": "Parse a coded pair $\\langle M,w\\rangle$. Reject malformed machine codes effectively, and otherwise run the published universal simulator for the decoded machine on input $w$. Accept exactly when the simulated computation reaches the accept state. Divergent or rejecting simulated runs never create false positives, so this semidecides precisely $A_{TM}$.",
+        "deps": [
+          "def-turing-machine-acceptance-problem",
+          "thm-existence-of-a-universal-turing-machine",
+          "prop-machine-descriptions-form-a-decidable-language",
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "lem-diagonal-self-application-machine",
+        "kind": "lemma",
+        "title": "A hypothetical decider for $A_{TM}$ yields a diagonal self-application machine",
+        "strategy": "Assume a decider $H$ for $A_{TM}$. Build one new machine $D_H$ that, on input $x$, first checks whether $x$ is a valid machine code, then asks $H$ about $\\langle x,x\\rangle$, and finally does the opposite of what $H$ predicts for that self-application instance: loop when $H$ says accept, and accept when $H$ says not accept. The machine is effective because the coding and pair decoder are effective.",
+        "deps": [
+          "def-turing-machine-acceptance-problem",
+          "def-effective-encoding-of-turing-machines",
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "thm-machine-acceptance-is-undecidable",
+        "kind": "theorem",
+        "title": "The Turing-machine acceptance problem is undecidable",
+        "strategy": "Assume $A_{TM}$ decidable. Apply the diagonal-machine lemma to the assumed decider and then feed the resulting machine its own code. The machine accepts its own code if and only if, by construction, it does not accept its own code. This contradiction rules out a decider for $A_{TM}$.",
+        "deps": [
+          "def-turing-machine-acceptance-problem",
+          "lem-diagonal-self-application-machine",
+          "def-decidable-and-recognizable-language",
+          "def-effective-encoding-of-turing-machines"
+        ]
+      },
+      {
+        "id": "def-halting-problem",
+        "kind": "definition",
+        "title": "The halting problem $HALT_{TM}$",
+        "deps": [
+          "def-turing-machine-acceptance-problem",
+          "def-effective-encoding-of-turing-machines",
+          "lem-finite-tuples-admit-effective-prefix-free-encodings",
+          "def-halting-computation-and-divergence"
+        ]
+      },
+      {
+        "id": "thm-halting-is-recognizable-and-undecidable",
+        "kind": "theorem",
+        "title": "The halting problem is recognizable and undecidable",
+        "strategy": "For recognizability, decode $\\langle M,w\\rangle$ and simulate $M$ on $w$, accepting as soon as the simulation reaches either halting state. For undecidability, map $\\langle M,w\\rangle$ to a machine $N_{M,w}$ that ignores its own input, simulates $M$ on $w$, halts if $M$ accepts, and loops otherwise. Then $\\langle M,w\\rangle \\in A_{TM}$ exactly when $\\langle N_{M,w},\\blank\\rangle \\in HALT_{TM}$, so a halting decider would decide $A_{TM}$.",
+        "deps": [
+          "def-halting-problem",
+          "def-effective-encoding-of-turing-machines",
+          "lem-step-by-step-interpreter-for-machine-codes",
+          "prop-machine-descriptions-form-a-decidable-language",
+          "thm-machine-acceptance-is-undecidable",
+          "def-decidable-and-recognizable-language",
+          "def-halting-computation-and-divergence"
+        ]
+      },
+      {
+        "id": "cor-nonhalting-is-not-recognizable",
+        "kind": "corollary",
+        "title": "The complement of the halting problem is not recognizable",
+        "strategy": "If nonhalting were also recognizable, then both $HALT_{TM}$ and its complement would be recognizable. The published characterization of decidability by simultaneous recognizability of a language and its complement would then make $HALT_{TM}$ decidable, contradicting the preceding theorem.",
+        "deps": [
+          "thm-halting-is-recognizable-and-undecidable",
+          "thm-decidable-iff-language-and-complement-are-recognizable"
+        ]
+      },
+      {
+        "id": "thm-an-unrecognizable-language-exists",
+        "kind": "theorem",
+        "title": "There exists a language that is not recognizable",
+        "strategy": "Use the complement of the halting problem as an explicit witness. The previous corollary already proves that this language is not recognizable, so the existence claim follows immediately.",
+        "deps": [
+          "cor-nonhalting-is-not-recognizable",
+          "def-halting-problem",
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "def-busy-beaver-function",
+        "kind": "definition",
+        "title": "The step-count busy beaver function relative to the chosen machine coding",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "def-halting-computation-and-divergence",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "thm-busy-beaver-dominates-every-total-computable-function",
+        "kind": "theorem",
+        "title": "The busy beaver function eventually dominates every total computable function",
+        "strategy": "Fix a total computable function $f$ and a machine computing it. For each large integer $n$, use the binary digits of $n$ inside a short machine description to build a machine $P_n$ whose blank-tape behavior is: reconstruct $n$, simulate the machine for $f$ on input $n$, then spend at least $f(n)$ steps before halting. Because the machine descriptions can hard-wire $n$ in $O(\\log n)$ bits, for all sufficiently large $n$ the constructed machine fits within the busy-beaver size budget for $n$, forcing $BB(n) \\ge f(n)$.",
+        "deps": [
+          "def-busy-beaver-function",
+          "def-computable-and-partial-computable-function",
+          "def-partial-function-computed-by-a-machine",
+          "def-effective-encoding-of-turing-machines"
+        ]
+      },
+      {
+        "id": "cor-busy-beaver-is-not-computable",
+        "kind": "corollary",
+        "title": "The busy beaver function is not computable",
+        "strategy": "If $BB$ were computable, then so would be the strictly larger total function $n \\mapsto BB(n)+1$. The domination theorem would then force $BB(n) \\ge BB(n)+1$ for all sufficiently large $n$, impossible. Hence $BB$ is not computable.",
+        "deps": [
+          "def-busy-beaver-function",
+          "thm-busy-beaver-dominates-every-total-computable-function",
+          "def-computable-and-partial-computable-function"
+        ]
+      },
+      {
+        "id": "thm-totality-is-not-recognizable",
+        "kind": "theorem",
+        "title": "Halting on every input is not recognizable",
+        "strategy": "Reduce the nonhalting language to totality. Given $\\langle M,w\\rangle$, build a machine $T_{M,w}$ that on input $x$ simulates $M$ on $w$ for exactly $|x|$ steps, halting if the simulation has still not halted by then and looping forever once the simulation is seen to halt. Then $T_{M,w}$ halts on every input exactly when $M$ never halts on $w$. If totality were recognizable, the complement of $HALT_{TM}$ would be recognizable as well, contradicting the previous corollary.",
+        "deps": [
+          "def-halting-problem",
+          "cor-nonhalting-is-not-recognizable",
+          "def-effective-encoding-of-turing-machines",
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "thm-machine-equivalence-is-undecidable",
+        "kind": "theorem",
+        "title": "Language equivalence of Turing machines is undecidable",
+        "strategy": "Interpret machine equivalence extensionally: two coded machines are equivalent when they recognize the same language. Reduce $HALT_{TM}$ to this problem by sending $\\langle M,w\\rangle$ to a machine $E_{M,w}$ that ignores its input, simulates $M$ on $w$, and accepts every input iff that simulation ever halts, while otherwise looping forever on every input. Then $E_{M,w}$ is language-equivalent to an always-accept machine exactly when $M$ halts on $w$, so an equivalence decider would decide the halting problem.",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "thm-halting-is-recognizable-and-undecidable",
+          "def-language-recognized-and-decided",
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "fs-undecidable-means-no-instance-can-be-answered",
+        "kind": "false-statement",
+        "title": "FALSE: undecidable means no individual instance can be answered",
+        "strategy": "Refute the claim with an easy specific instance inside an undecidable language. For example, if $M$ is a machine that immediately enters the accept state on every input, then the pair $\\langle M,0\\rangle$ is plainly in $A_{TM}$. Undecidability says there is no single algorithm deciding all instances, not that every particular instance is mysterious.",
+        "deps": [
+          "thm-machine-acceptance-is-undecidable",
+          "def-turing-machine-acceptance-problem"
+        ]
+      },
+      {
+        "id": "fs-diagonalization-needs-literal-source-self-reading",
+        "kind": "false-statement",
+        "title": "FALSE: diagonalization requires a machine to read its physical source text",
+        "strategy": "Refute the claim by pointing to the coding route already fixed in the library. Self-application is achieved by feeding a machine a finite description string of itself, together with a universal interpreter for that description. The diagonal contradiction uses effective encodings and simulation, not any literal reading of a manuscript or source file.",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "lem-diagonal-self-application-machine",
+          "thm-existence-of-a-universal-turing-machine"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 604,
+    "id": "diagonalization-and-the-halting-problem-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Diagonalization and the Halting Problem: Examples and Counterexamples",
+    "requires": [
+      "diagonalization-and-the-halting-problem"
+    ],
+    "items": [
+      {
+        "id": "ex-diagonal-self-application-machine",
+        "kind": "example",
+        "title": "Building the diagonal machine against a hypothetical acceptance decider",
+        "strategy": "Assume a black-box decider $H$ for $A_{TM}$. Work through the machine $D_H$ that queries $H$ on $\\langle x,x\\rangle$ and then does the opposite, and explicitly trace what happens on input $\\ulcorner D_H\\urcorner$.",
+        "deps": [
+          "lem-diagonal-self-application-machine",
+          "thm-machine-acceptance-is-undecidable"
+        ]
+      },
+      {
+        "id": "ex-machine-equivalence-is-undecidable",
+        "kind": "example",
+        "title": "Reducing halting to language equivalence by a machine that either accepts everything or loops forever",
+        "strategy": "Fix one coded pair $\\langle M,w\\rangle$ and build the machine $E_{M,w}$ from the main equivalence proof. Compare its recognized language in the two cases 'the simulation halts' and 'the simulation never halts' against the always-accept recognizer.",
+        "deps": [
+          "thm-machine-equivalence-is-undecidable",
+          "thm-halting-is-recognizable-and-undecidable"
+        ]
+      },
+      {
+        "id": "cex-undecidable-means-no-instance-can-be-answered",
+        "kind": "counterexample",
+        "title": "An immediate-accept machine gives an easy yes-instance inside an undecidable language",
+        "strategy": "Let $M$ be the machine that enters its accept state on the first step, regardless of input. Then $\\langle M,0\\rangle \\in A_{TM}$ is a completely transparent instance, even though $A_{TM}$ itself is undecidable.",
+        "deps": [
+          "fs-undecidable-means-no-instance-can-be-answered",
+          "def-turing-machine-acceptance-problem"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 619,
+    "id": "p-np-conp-and-polynomial-reductions",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "P, NP, coNP, and Polynomial Reductions",
+    "companion": "p-np-conp-and-polynomial-reductions-examples",
+    "requires": [
+      "resource-bounds-and-machine-invariance"
+    ],
+    "items": [
+      {
+        "id": "def-p",
+        "kind": "definition",
+        "title": "The class P",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace"
+        ]
+      },
+      {
+        "id": "def-polynomially-balanced-verifier",
+        "kind": "definition",
+        "title": "Polynomial-time verifiers with polynomially bounded certificates",
+        "deps": [
+          "def-p",
+          "def-worst-case-time-and-space-complexity"
+        ]
+      },
+      {
+        "id": "def-np-by-verifiers",
+        "kind": "definition",
+        "title": "The class NP via polynomial-time verifiers",
+        "deps": [
+          "def-polynomially-balanced-verifier",
+          "def-p"
+        ]
+      },
+      {
+        "id": "thm-verifier-and-nondeterministic-definitions-of-np-agree",
+        "kind": "theorem",
+        "title": "The verifier and nondeterministic definitions of NP agree",
+        "strategy": "For the easy direction, let a nondeterministic machine guess a certificate and run the verifier on it. For the converse, encode an accepting branch of a polynomial-time nondeterministic machine by the sequence of nondeterministic choices it makes. The time bound guarantees that this branch description has polynomial length, and a deterministic verifier can replay and locally check the branch in polynomial time.",
+        "deps": [
+          "def-np-by-verifiers",
+          "def-dtime-ntime-dspace-and-nspace",
+          "lem-time-at-least-input-length-permits-complete-input-reading"
+        ]
+      },
+      {
+        "id": "def-conp",
+        "kind": "definition",
+        "title": "The class coNP",
+        "deps": [
+          "def-np-by-verifiers"
+        ]
+      },
+      {
+        "id": "prop-p-is-contained-in-np-intersection-conp",
+        "kind": "proposition",
+        "title": "$P \\subseteq NP \\cap coNP$",
+        "strategy": "If $L \\in P$, a polynomial-time decider for $L$ is already a verifier for $L$ using the empty certificate. Swapping its accept and reject states gives a polynomial-time decider for the complement, so the same empty-certificate idea shows $\\overline{L} \\in NP$ as well. Hence $L \\in NP \\cap coNP$.",
+        "deps": [
+          "def-p",
+          "def-np-by-verifiers",
+          "def-conp",
+          "def-polynomially-balanced-verifier"
+        ]
+      },
+      {
+        "id": "def-polynomial-time-many-one-reduction",
+        "kind": "definition",
+        "title": "Polynomial-time many-one reductions",
+        "deps": [
+          "def-p",
+          "def-worst-case-time-and-space-complexity"
+        ]
+      },
+      {
+        "id": "lem-polynomial-reductions-compose",
+        "kind": "lemma",
+        "title": "Polynomial-time many-one reductions compose",
+        "strategy": "Compose the two reduction functions. Correctness is immediate from the two iff clauses, and polynomial time is preserved because the outer reduction is run on an output whose length is polynomially bounded in the original input length.",
+        "deps": [
+          "def-polynomial-time-many-one-reduction"
+        ]
+      },
+      {
+        "id": "thm-polynomial-reductions-transfer-p-np-and-conp-membership",
+        "kind": "theorem",
+        "title": "Polynomial-time many-one reductions transfer P-, NP-, and coNP-membership",
+        "strategy": "If $A \\le_p B$ via $f$, then a decider for $B$ yields a decider for $A$ by computing $f(x)$ and then deciding $B$. For NP, compose the verifier for $B$ with the reduction map; the reduction preserves yes-instances and its output length stays polynomial, so certificate lengths remain polynomial after substitution. The coNP case is the same argument applied to complements, since the same map witnesses $\\overline{A} \\le_p \\overline{B}$.",
+        "deps": [
+          "def-polynomial-time-many-one-reduction",
+          "lem-polynomial-reductions-compose",
+          "def-p",
+          "def-np-by-verifiers",
+          "def-conp",
+          "def-polynomially-balanced-verifier"
+        ]
+      },
+      {
+        "id": "def-np-hard-and-np-complete",
+        "kind": "definition",
+        "title": "NP-hard and NP-complete languages",
+        "deps": [
+          "def-np-by-verifiers",
+          "def-polynomial-time-many-one-reduction"
+        ]
+      },
+      {
+        "id": "prop-an-np-complete-language-in-p-implies-p-equals-np",
+        "kind": "proposition",
+        "title": "An NP-complete language in P forces $P=NP$",
+        "strategy": "Let $C$ be NP-complete and assume $C \\in P$. For any $L \\in NP$, completeness gives a polynomial-time many-one reduction $L \\le_p C$. The transfer theorem then yields $L \\in P$, so every NP language is in P and therefore $P=NP$.",
+        "deps": [
+          "def-np-hard-and-np-complete",
+          "thm-polynomial-reductions-transfer-p-np-and-conp-membership",
+          "prop-p-is-contained-in-np-intersection-conp"
+        ]
+      },
+      {
+        "id": "def-search-version-of-an-np-relation",
+        "kind": "definition",
+        "title": "The search problem attached to an NP verifier",
+        "deps": [
+          "def-polynomially-balanced-verifier",
+          "def-np-by-verifiers"
+        ]
+      },
+      {
+        "id": "thm-sat-search-reduces-to-sat-decision",
+        "kind": "theorem",
+        "title": "SAT search polynomial-time Turing reduces to SAT decision",
+        "strategy": "Fix a SAT decider $D$ and a satisfiable Boolean formula $\\varphi$ with variables $x_1,\\dots,x_n$. Query $D(\\varphi)$ once to rule out the unsatisfiable case. Then for $i=1,\\dots,n$, substitute $x_i=1$ into the current residual formula and ask whether the result is still satisfiable. If yes, keep that value; if not, set $x_i=0$ and continue with the other residual formula. Each query strictly shrinks the live variable set, so after at most $n+1$ oracle calls the collected bits form a satisfying assignment. This is a polynomial-time Turing reduction, not a many-one reduction.",
+        "deps": [
+          "def-search-version-of-an-np-relation",
+          "def-polynomially-balanced-verifier"
+        ]
+      },
+      {
+        "id": "def-exp-and-nexp",
+        "kind": "definition",
+        "title": "The classes EXP and NEXP",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace"
+        ]
+      },
+      {
+        "id": "prop-np-is-contained-in-pspace-and-pspace-in-exp",
+        "kind": "proposition",
+        "title": "$NP \\subseteq PSPACE \\subseteq EXP$",
+        "strategy": "Interpret PSPACE inside the proposition as the union of the deterministic polynomial-space classes. For $NP \\subseteq PSPACE$, use the verifier definition: enumerate candidate certificates lexicographically, reuse the same polynomial workspace for each check, and accept if any certificate verifies. For $PSPACE \\subseteq EXP$, note that a deterministic machine using $s(n)$ tape cells has only exponentially many configurations in $s(n)$, so a halting computation cannot exceed that exponential bound without repeating a configuration and looping. Thus polynomial space implies exponential time.",
+        "deps": [
+          "def-np-by-verifiers",
+          "def-exp-and-nexp",
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-worst-case-time-and-space-complexity",
+          "def-turing-machine-configuration",
+          "def-tape-finite-support-convention"
+        ]
+      },
+      {
+        "id": "fs-np-means-not-polynomial",
+        "kind": "false-statement",
+        "title": "FALSE: NP means not polynomial-time solvable",
+        "strategy": "Refute the slogan by observing that every language in P is automatically in NP. Any easy deterministic polynomial-time language is therefore an immediate counterexample.",
+        "deps": [
+          "def-np-by-verifiers",
+          "prop-p-is-contained-in-np-intersection-conp"
+        ]
+      },
+      {
+        "id": "fs-np-complete-means-known-not-in-p",
+        "kind": "false-statement",
+        "title": "FALSE: NP-complete means proven not to lie in P",
+        "strategy": "Refute the claim by contraposition of the standard consequence. If some NP-complete language were shown to lie in P, then the earlier proposition would force $P=NP$; the point is that NP-complete means 'as hard as every NP problem under the chosen reductions', not 'already proved outside P'.",
+        "deps": [
+          "def-np-hard-and-np-complete",
+          "prop-an-np-complete-language-in-p-implies-p-equals-np"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 620,
+    "id": "p-np-conp-and-polynomial-reductions-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "P, NP, coNP, and Polynomial Reductions: Examples and Counterexamples",
+    "requires": [
+      "p-np-conp-and-polynomial-reductions"
+    ],
+    "items": [
+      {
+        "id": "ex-p-is-contained-in-np-intersection-conp",
+        "kind": "example",
+        "title": "An even-length language sits in P, hence also in NP and coNP",
+        "strategy": "Take the language of binary strings of even length. A deterministic linear-time scan decides it, so the proposition places it in NP and in coNP as well. The example isolates the point that NP and coNP already contain many easy languages.",
+        "deps": [
+          "prop-p-is-contained-in-np-intersection-conp"
+        ]
+      },
+      {
+        "id": "ex-np-is-contained-in-pspace-and-pspace-in-exp",
+        "kind": "example",
+        "title": "Lexicographic certificate search uses polynomial space and exponential time",
+        "strategy": "For a verifier with certificate length at most $n^k$, scan all candidate certificates in lexicographic order. Store only the input, the current candidate, and the verifier workspace. This illustrates the $NP \\subseteq PSPACE$ argument and at the same time shows why the resulting deterministic algorithm may still take exponential time.",
+        "deps": [
+          "prop-np-is-contained-in-pspace-and-pspace-in-exp",
+          "def-search-version-of-an-np-relation"
+        ]
+      },
+      {
+        "id": "cex-np-means-not-polynomial",
+        "kind": "counterexample",
+        "title": "A regular parity language refutes 'NP means not polynomial'",
+        "strategy": "The language of binary strings of even length is decidable in linear time, hence belongs to P and therefore to NP. So NP cannot mean 'not polynomial-time solvable'.",
+        "deps": [
+          "fs-np-means-not-polynomial",
+          "prop-p-is-contained-in-np-intersection-conp"
+        ]
+      }
+    ]
+  }
+]

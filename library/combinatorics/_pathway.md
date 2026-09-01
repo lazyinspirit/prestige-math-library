@@ -65,6 +65,7 @@ parts:
       - iterative-sparsification-and-the-five-vertex-path
       - small-graph-erdos-hajnal-consequences
       - iterative-restriction-and-comb-extraction-lemmas
+      - leaf-reducibility-and-wonderful-families
 ---
 
 ## counting
@@ -126,12 +127,13 @@ degree and gives the five colour theorem.
 ## probability
 
 A finite probability space makes expectation a counting tool, and the probabilistic method
-turns that into homogeneous sets, induced-copy estimates, regularity control, and the
-structural decompositions used in the Erdos-Hajnal program. Bull-free, cograph,
-perfect-pattern, star-expansion, and iterative-sparsification arguments then produce
-large clique-or-stable-set witnesses for classes ranging from the bull and $C_5$ to
-$C_6$, $C_7$, the hatted five-cycle, $P_5$, and $\overline{P_5}$. The new pages close
-the finite and iterative seams: one records the single-graph consequences through five
-vertices and the resolved six-vertex prime $H$ cases, and the other isolates the
-sparse-pair, comb-extraction, and restriction lemmas that drive the later six-vertex
-endpoint theorems.
+turns that into homogeneous sets, induced-copy estimates, regularity control, sparse-pair
+decompositions, and the structural alternatives that drive the Erdos-Hajnal program.
+Modules, substitutions, quotient blockades, pure pairs, stars, combs, iterative
+restrictions, and sparsification then turn those probabilistic witnesses into explicit
+clique-or-stable-set structure for classes from the bull and $C_5$ through the small-graph
+and six-vertex prime cases. The leaf-reducibility and wonderful-family page closes the
+remaining obstruction step by introducing the auxiliary mixed-block pattern, lifting its
+large homogeneous sets back to restricted ambient subgraphs, and using that mechanism to
+prove the wonderfulness of the $E$ and Bird configurations that anchor the final
+leaf-reducible arguments.

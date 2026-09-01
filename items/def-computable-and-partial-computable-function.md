@@ -2,13 +2,14 @@
 id: def-computable-and-partial-computable-function
 kind: definition
 title: "Computable and partial computable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-partial-function-computed-by-a-machine]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

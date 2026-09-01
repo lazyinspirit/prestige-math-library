@@ -2,7 +2,7 @@
 id: def-worst-case-time-and-space-complexity
 kind: definition
 title: "Worst-case time and space complexity of a machine"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-language-recognized-and-decided, def-partial-function-computed-by-a-machine, def-multitape-and-nondeterministic-machines]
 justified_by: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

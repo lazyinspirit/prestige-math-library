@@ -2,7 +2,7 @@
 id: lem-time-at-least-input-length-permits-complete-input-reading
 kind: lemma
 title: "Any machine that fully reads every input of length n needs at least linear time"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-worst-case-time-and-space-complexity]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

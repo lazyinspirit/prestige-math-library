@@ -1,0 +1,636 @@
+# Step-6 Alpha
+
+The task determines whether this is group adjudication, cross-group closure, or
+a named repair. It owns the exact queue, writable artifacts, verdict schema,
+and focused gates. Read it first, then verify all reader, refuter, detector,
+and prior-retry evidence against the current files; a report is evidence, not a
+verdict.
+
+Work only in the task's live scope. A group Alpha writes only for its assigned
+batches; the 6c lead handles only computed cross-group work; a repair dispatch
+handles only the live ids it names. You may open dependencies outside that
+scope to test a claim. Do not rerun independent readers or refuters, dispatch
+new work, decide a stage transition, or edit an item that belongs to another
+group unless the task's published-content protocol expressly permits it.
+
+Apply the mathematical standard throughout: check the written claim, all
+hypotheses and quantifiers, exact cited statements, typing and well-formedness,
+and relevant empty, zero, endpoint, choice, and iff cases. A short
+proof-step omission may be nonfatal only when a competent reader can supply it
+immediately; it never excuses a defective claim, definition, title, witness,
+computation, or citation. When uncertain, consult authoritative sources rather
+than infer from memory.
+
+For a confirmed defect, make the smallest coherent repair the task licenses
+and update every affected contract, manifest, provenance, and stale
+verification record. Preserve stable item ids. Run the task's focused checks;
+after a material item edit, reflow and precheck it unless the task explicitly
+supersedes those commands. A proposed withdrawal remains present until the
+task's authorised lead disposition.
+
+Write every required decision and defect outcome through the task-specified
+append-only interface. Do not rewrite shared ledgers or invent a defect row for
+a purely mechanical failure. A clean decision needs evidence; an unresolved
+case is a named blocker.
+
+You neither judge nor stamp. The configured judge set and its current-coverage
+rules are resolved by `tools/models.mjs`; do not hard-code, substitute, or
+self-certify a judge outcome. Do not request permissions.
+
+
+---
+
+# This dispatch
+
+run: frontier-28
+role: alpha
+label: 6c-gate-audit-manifest-2
+
+# Step 6c repair — audit-manifest
+
+This file is the authority for repair cycle 2.
+Primary gate: `audit-manifest`
+Reason: ERROR unresolved: rem-the-p-equals-infinity-case-is-recorded-not-proved-here (frontier-28-batch-4) declares external_mention "rem-dual-of-l-infinity", which resolves to no published or in-run item
+Owning Alpha group: (repository-scoped or mixed)
+Live item ids: `rem-the-p-equals-infinity-case-is-recorded-not-proved-here`, `rem-dual-of-l-infinity`, `thm-machine-acceptance-is-recognizable`, `lem-step-by-step-interpreter-for-machine-codes`, `prop-machine-descriptions-form-a-decidable-language`, `def-decidable-and-recognizable-language`, `lem-diagonal-self-application-machine`, `thm-machine-acceptance-is-undecidable`, `thm-halting-is-recognizable-and-undecidable`, `cor-nonhalting-is-not-recognizable`, `thm-decidable-iff-language-and-complement-are-recognizable`, `thm-an-unrecognizable-language-exists`, `thm-busy-beaver-dominates-every-total-computable-function`, `def-computable-and-partial-computable-function`, `cor-busy-beaver-is-not-computable`, `thm-totality-is-not-recognizable`, `thm-machine-equivalence-is-undecidable`, `def-p`, `def-dtime-ntime-dspace-and-nspace`, `def-polynomially-balanced-verifier`, `def-worst-case-time-and-space-complexity`, `thm-verifier-and-nondeterministic-definitions-of-np-agree`, `lem-time-at-least-input-length-permits-complete-input-reading`, `def-polynomial-time-many-one-reduction`, `def-exp-and-nexp`, `prop-np-is-contained-in-pspace-and-pspace-in-exp`, `def-tape-finite-support-convention`
+Exhausted item ids — do not repair or re-review: (none)
+
+Repair only the live ids. Reproduce the primary gate from the current tree.
+Advisory failures are context only; they receive their own gate budget if they become primary.
+
+
+## Primary gate output
+
+```text
+# Audit manifest
+
+## Batches
+- frontier-28-batch-1: small-cancellation-and-dehn-algorithms, small-cancellation-and-dehn-algorithms-examples, inverse-systems-profinite-groups-and-completion, inverse-systems-profinite-groups-and-completion-examples
+- frontier-28-batch-2: rees-modules-artin-rees-and-hilbert-samuel-theory, rees-modules-artin-rees-and-hilbert-samuel-theory-examples, flatness-and-faithful-flatness, flatness-and-faithful-flatness-examples
+- frontier-28-batch-3: inverse-limits-and-noetherian-completion, inverse-limits-and-noetherian-completion-examples
+- frontier-28-batch-4: the-duality-of-lp-and-lq, the-duality-of-lp-and-lq-examples
+- frontier-28-batch-5: bounded-linear-operators-and-quotient-spaces, bounded-linear-operators-and-quotient-spaces-examples
+- frontier-28-batch-6: chebyshev-bounds-and-mertens-theorems, chebyshev-bounds-and-mertens-theorems-examples
+- frontier-28-batch-7: braided-and-symmetric-monoidal-categories, braided-and-symmetric-monoidal-categories-examples
+- frontier-28-batch-8: projective-and-injective-resolutions, projective-and-injective-resolutions-examples
+- frontier-28-batch-9: leaf-reducibility-and-wonderful-families, leaf-reducibility-and-wonderful-families-examples
+- frontier-28-batch-10: whitney-embedding-tubular-neighbourhoods-and-approximation, whitney-embedding-tubular-neighbourhoods-and-approximation-examples
+- frontier-28-batch-11: diagonalization-and-the-halting-problem, diagonalization-and-the-halting-problem-examples, p-np-conp-and-polynomial-reductions, p-np-conp-and-polynomial-reductions-examples
+
+## Edge summary
+- cross-batch: 5
+- published-backward: 438
+- same-batch: 644
+- unresolved: 24
+
+## Relationships to audit outside a single batch
+- [dependency; published-backward] def-symmetrisation-of-a-relator-set (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-cyclically-reduced-word (free-groups-and-presentations)
+- [dependency; published-backward] def-symmetrisation-of-a-relator-set (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-group-presentation (free-groups-and-presentations)
+- [dependency; published-backward] lem-symmetrisation-has-the-same-normal-closure (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-normal-closure (normal-subgroups-and-quotient-groups)
+- [dependency; published-backward] def-piece-in-a-symmetrised-presentation (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-cyclically-reduced-word (free-groups-and-presentations)
+- [dependency; published-backward] def-van-kampen-diagram-boundary-label-and-area (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-group-presentation (free-groups-and-presentations)
+- [dependency; published-backward] def-van-kampen-diagram-boundary-label-and-area (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-finite-cardinality (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-normal-closure (normal-subgroups-and-quotient-groups)
+- [dependency; published-backward] lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-group-presentation (free-groups-and-presentations)
+- [dependency; published-backward] thm-van-kampen-lemma (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> prop-normal-closure-is-products-of-conjugates (free-groups-and-presentations)
+- [dependency; published-backward] thm-diagram-area-agrees-with-algebraic-relator-area (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation (decision-problems-for-finitely-presented-groups)
+- [dependency; published-backward] thm-diagram-area-agrees-with-algebraic-relator-area (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> lem-minimal-algebraic-relator-area-exists (decision-problems-for-finitely-presented-groups)
+- [dependency; published-backward] def-dehn-reduced-word-and-dehn-presentation (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-cyclically-reduced-word (free-groups-and-presentations)
+- [dependency; published-backward] thm-torsion-theorem-for-c-prime-one-sixth-groups (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-group-power (monoids-groups-and-subgroups)
+- [dependency; published-backward] cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-group-power (monoids-groups-and-subgroups)
+- [dependency; published-backward] fs-greendlinger-lemma-applies-to-every-finitely-presented-group (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-group-presentation (free-groups-and-presentations)
+- [dependency; published-backward] fs-no-proper-power-relators-alone-implies-torsion-free (small-cancellation-and-dehn-algorithms, frontier-28-batch-1) -> def-group-power (monoids-groups-and-subgroups)
+- [dependency; published-backward] def-directed-set-and-inverse-system-of-groups (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-directed-set-and-net (nets-and-filters)
+- [dependency; published-backward] def-directed-set-and-inverse-system-of-groups (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-group-homomorphism (monoids-groups-and-subgroups)
+- [dependency; published-backward] def-compatible-tuple-inverse-limit-of-groups (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-cartesian-product (the-zfc-axioms-and-basic-set-constructions)
+- [dependency; published-backward] lem-compatible-tuples-form-a-subgroup (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-subgroup (monoids-groups-and-subgroups)
+- [dependency; published-backward] lem-compatible-tuples-form-a-subgroup (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-group (monoids-groups-and-subgroups)
+- [dependency; published-backward] thm-concrete-inverse-limit-universal-property-in-groups (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-group-homomorphism (monoids-groups-and-subgroups)
+- [dependency; published-backward] def-inverse-limit-topology-for-finite-discrete-groups (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-product-topology (subspaces-products-and-quotients)
+- [dependency; published-backward] def-inverse-limit-topology-for-finite-discrete-groups (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-subspace-topology-top (topological-spaces-and-continuity)
+- [dependency; published-backward] lem-inverse-limit-of-finite-discrete-groups-is-a-closed-topological-subgroup (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-topological-group (uniform-spaces)
+- [dependency; published-backward] thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> thm-tychonoff (compactness)
+- [dependency; published-backward] thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-compact-space (compactness)
+- [dependency; published-backward] thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-hausdorff-space (subspaces-products-and-quotients)
+- [dependency; published-backward] def-profinite-group-by-inverse-limit (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-topological-group (uniform-spaces)
+- [dependency; published-backward] lem-kernels-of-finite-projections-form-an-open-normal-neighbourhood-basis (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-normal-subgroup (normal-subgroups-and-quotient-groups)
+- [dependency; published-backward] lem-kernels-of-finite-projections-form-an-open-normal-neighbourhood-basis (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-quotient-group (normal-subgroups-and-quotient-groups)
+- [dependency; published-backward] thm-continuity-into-an-inverse-limit-is-coordinatewise (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-continuous-map-top (topological-spaces-and-continuity)
+- [dependency; published-backward] def-totally-disconnected-and-totally-separated-spaces (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-topological-space (topological-spaces-and-continuity)
+- [dependency; published-backward] def-totally-disconnected-and-totally-separated-spaces (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-connected-component-and-quasicomponent (connectedness)
+- [dependency; published-backward] def-totally-disconnected-and-totally-separated-spaces (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-interior-closure-boundary-top (topological-spaces-and-continuity)
+- [dependency; published-backward] thm-compact-hausdorff-total-disconnectedness-and-total-separatedness-agree (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> thm-quasicomponents-equal-components-in-a-compact-hausdorff-space (compactness)
+- [dependency; published-backward] thm-compact-hausdorff-total-disconnectedness-and-total-separatedness-agree (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-compact-space (compactness)
+- [dependency; published-backward] thm-compact-hausdorff-total-disconnectedness-and-total-separatedness-agree (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-hausdorff-space (subspaces-products-and-quotients)
+- [dependency; published-backward] thm-topological-characterisation-of-profinite-groups (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-topological-group (uniform-spaces)
+- [dependency; published-backward] def-profinite-topology-on-an-abstract-group (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-group (monoids-groups-and-subgroups)
+- [dependency; published-backward] def-profinite-topology-on-an-abstract-group (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-normal-subgroup (normal-subgroups-and-quotient-groups)
+- [dependency; published-backward] def-profinite-topology-on-an-abstract-group (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-index (cosets-and-lagranges-theorem)
+- [dependency; published-backward] def-finite-residual-and-residually-finite-group (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-normal-subgroup (normal-subgroups-and-quotient-groups)
+- [dependency; published-backward] def-profinite-completion-of-an-abstract-group (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-quotient-group (normal-subgroups-and-quotient-groups)
+- [dependency; published-backward] rem-malcev-finitely-generated-linear-groups-are-residually-finite (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-finitely-generated-group (cayley-graphs-word-metrics-and-quasi-isometry)
+- [dependency; published-backward] thm-free-groups-are-residually-finite (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> thm-reduced-words-form-the-free-group (free-groups-and-presentations)
+- [dependency; published-backward] thm-free-groups-are-residually-finite (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> thm-free-groups-unique-up-to-unique-isomorphism (free-groups-and-presentations)
+- [dependency; published-backward] thm-free-groups-are-residually-finite (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-cyclically-reduced-word (free-groups-and-presentations)
+- [dependency; published-backward] thm-free-groups-are-residually-finite (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> lem-cyclic-reduction-normal-form (free-groups-and-presentations)
+- [dependency; published-backward] def-subgroup-separable-and-lerf (inverse-systems-profinite-groups-and-completion, frontier-28-batch-1) -> def-subgroup (monoids-groups-and-subgroups)
+- [dependency; published-backward] ex-a-non-residually-finite-baumslag-solitar-group (inverse-systems-profinite-groups-and-completion-examples, frontier-28-batch-1) -> def-group-presentation (free-groups-and-presentations)
+- [dependency; published-backward] def-hilbert-function-and-hilbert-series (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> def-composition-series-and-length-of-a-module (chain-conditions-and-semisimple-modules)
+- [dependency; published-backward] thm-hilbert-serre-theorem (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> cor-length-is-additive-in-short-exact-sequences (chain-conditions-and-semisimple-modules)
+- [dependency; published-backward] lem-rees-module-finiteness-and-stable-filtrations (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> thm-finite-generation-and-finite-presentation-over-a-noetherian-ring (noetherian-rings-and-hilbert-basis)
+- [dependency; published-backward] lem-rees-module-finiteness-and-stable-filtrations (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> thm-noetherian-ring-ideal-characterisations (noetherian-rings-and-hilbert-basis)
+- [dependency; published-backward] thm-krull-intersection-theorem (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> lem-determinant-trick-for-nakayama (localisation-of-modules-and-support)
+- [dependency; published-backward] thm-krull-intersection-theorem (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> thm-jacobson-radical-unit-characterisation (localisation-of-modules-and-support)
+- [dependency; published-backward] def-hilbert-samuel-function-and-polynomial (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> def-composition-series-and-length-of-a-module (chain-conditions-and-semisimple-modules)
+- [dependency; published-backward] thm-dimension-and-parameters-for-modules (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> def-system-of-parameters-and-parameter-ideal (krull-dimension-and-height-theorems)
+- [dependency; published-backward] thm-dimension-and-parameters-for-modules (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> thm-dimension-as-minimal-number-of-radical-generators (krull-dimension-and-height-theorems)
+- [dependency; published-backward] thm-additivity-of-hilbert-samuel-multiplicity (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> cor-length-is-additive-in-short-exact-sequences (chain-conditions-and-semisimple-modules)
+- [dependency; published-backward] cor-parameter-ideal-multiplicity-positive (rees-modules-artin-rees-and-hilbert-samuel-theory, frontier-28-batch-2) -> cor-nakayama-generators-modulo-an-ideal (localisation-of-modules-and-support)
+- [dependency; published-backward] ex-hilbert-samuel-polynomial-of-a-dvr (rees-modules-artin-rees-and-hilbert-samuel-theory-examples, frontier-28-batch-2) -> thm-dvr-ideal-and-module-length (valuation-rings-and-discrete-valuation-rings)
+- [dependency; published-backward] ex-hilbert-samuel-finite-length-case (rees-modules-artin-rees-and-hilbert-samuel-theory-examples, frontier-28-batch-2) -> def-composition-series-and-length-of-a-module (chain-conditions-and-semisimple-modules)
+- [dependency; published-backward] thm-direct-sums-and-direct-summands-preserve-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> def-flat-and-faithfully-flat-modules-and-ring-maps (tensor-products-of-modules)
+- [dependency; published-backward] thm-direct-sums-and-direct-summands-preserve-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-tensor-products-commute-with-arbitrary-direct-sums (tensor-products-of-modules)
+- [dependency; published-backward] thm-direct-sums-and-direct-summands-preserve-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-unit-isomorphisms-for-module-tensor-products (tensor-products-of-modules)
+- [dependency; published-backward] thm-localisations-are-flat (flatness-and-faithful-flatness, frontier-28-batch-2) -> def-flat-and-faithfully-flat-modules-and-ring-maps (tensor-products-of-modules)
+- [dependency; published-backward] thm-localisations-are-flat (flatness-and-faithful-flatness, frontier-28-batch-2) -> def-localisation-at-a-prime-ideal (the-field-of-fractions-and-localisation)
+- [dependency; published-backward] thm-localisations-are-flat (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-localisation-of-modules-is-exact (localisation-of-modules-and-support)
+- [dependency; published-backward] thm-localisations-are-flat (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-localisation-of-modules-is-tensor-product (localisation-of-modules-and-support)
+- [dependency; published-backward] thm-flatness-is-local (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-flatness-criteria-by-injections-and-ideals (tensor-products-of-modules)
+- [dependency; published-backward] thm-equational-criterion-for-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> def-flat-and-faithfully-flat-modules-and-ring-maps (tensor-products-of-modules)
+- [dependency; published-backward] thm-equational-criterion-for-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-tensor-products-commute-with-arbitrary-direct-sums (tensor-products-of-modules)
+- [dependency; published-backward] thm-equational-criterion-for-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-unit-isomorphisms-for-module-tensor-products (tensor-products-of-modules)
+- [dependency; published-backward] thm-equational-criterion-for-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-flatness-criteria-by-injections-and-ideals (tensor-products-of-modules)
+- [dependency; published-backward] cor-flat-quotients-and-idempotent-ideals (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-flatness-criteria-by-injections-and-ideals (tensor-products-of-modules)
+- [dependency; published-backward] cor-flat-quotients-and-idempotent-ideals (flatness-and-faithful-flatness, frontier-28-batch-2) -> cor-local-rings-have-only-trivial-idempotents (the-field-of-fractions-and-localisation)
+- [dependency; published-backward] thm-faithful-flatness-detected-by-nonzero-modules-and-fibres (flatness-and-faithful-flatness, frontier-28-batch-2) -> def-flat-and-faithfully-flat-modules-and-ring-maps (tensor-products-of-modules)
+- [dependency; published-backward] thm-faithful-flatness-detected-by-nonzero-modules-and-fibres (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-flatness-criteria-by-injections-and-ideals (tensor-products-of-modules)
+- [dependency; published-backward] thm-faithfully-flat-ring-map-characterisations (flatness-and-faithful-flatness, frontier-28-batch-2) -> def-flat-and-faithfully-flat-modules-and-ring-maps (tensor-products-of-modules)
+- [dependency; published-backward] cor-faithfully-flat-ring-maps-are-injective (flatness-and-faithful-flatness, frontier-28-batch-2) -> def-flat-and-faithfully-flat-modules-and-ring-maps (tensor-products-of-modules)
+- [dependency; published-backward] thm-faithfully-flat-descent-of-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> def-flat-and-faithfully-flat-modules-and-ring-maps (tensor-products-of-modules)
+- [dependency; published-backward] thm-faithfully-flat-descent-of-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> prop-extension-of-scalars-preserves-flat-modules (tensor-products-of-modules)
+- [dependency; published-backward] thm-faithfully-flat-descent-of-flatness (flatness-and-faithful-flatness, frontier-28-batch-2) -> prop-transitivity-of-flatness-under-change-of-rings (tensor-products-of-modules)
+- [dependency; published-backward] thm-local-criterion-for-flatness-ideal-form (flatness-and-faithful-flatness, frontier-28-batch-2) -> cor-nakayama-generators-modulo-an-ideal (localisation-of-modules-and-support)
+- [dependency; published-backward] thm-local-criterion-for-flatness-ideal-form (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-nakayama-lemma (localisation-of-modules-and-support)
+- [dependency; published-backward] thm-local-criterion-for-flatness-ideal-form (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-finite-generation-and-finite-presentation-over-a-noetherian-ring (noetherian-rings-and-hilbert-basis)
+- [dependency; published-backward] thm-local-criterion-for-flatness-ideal-form (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-right-exactness-of-tensor-products (tensor-products-of-modules)
+- [dependency; published-backward] thm-local-criterion-for-flatness-ideal-form (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-unit-isomorphisms-for-module-tensor-products (tensor-products-of-modules)
+- [dependency; published-backward] thm-finite-flat-modules-over-local-rings-are-free (flatness-and-faithful-flatness, frontier-28-batch-2) -> cor-nakayama-generators-modulo-an-ideal (localisation-of-modules-and-support)
+- [dependency; published-backward] thm-finite-flat-modules-over-local-rings-are-free (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-finite-generation-and-finite-presentation-over-a-noetherian-ring (noetherian-rings-and-hilbert-basis)
+- [dependency; published-backward] cor-finite-flat-noetherian-modules-are-projective (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-projective-module-characterizations (free-modules-and-exact-sequences)
+- [dependency; published-backward] cor-finite-flat-noetherian-modules-are-projective (flatness-and-faithful-flatness, frontier-28-batch-2) -> thm-finite-generation-and-finite-presentation-over-a-noetherian-ring (noetherian-rings-and-hilbert-basis)
+- [dependency; published-backward] ex-polynomial-algebras-are-faithfully-flat (flatness-and-faithful-flatness-examples, frontier-28-batch-2) -> cor-free-modules-are-projective-and-flat (tensor-products-of-modules)
+- [dependency; published-backward] ex-fraction-field-flat-not-projective (flatness-and-faithful-flatness-examples, frontier-28-batch-2) -> thm-projective-modules-are-flat (tensor-products-of-modules)
+- [dependency; published-backward] ex-nonflat-quotient-module (flatness-and-faithful-flatness-examples, frontier-28-batch-2) -> thm-flatness-criteria-by-injections-and-ideals (tensor-products-of-modules)
+- [dependency; published-backward] def-filtration-and-adic-filtration (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> def-product-of-an-ideal-and-a-module (tensor-products-of-modules)
+- [dependency; published-backward] thm-inverse-limits-are-left-exact (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> def-module-homomorphism-kernel-image-and-cokernel (modules-and-module-homomorphisms)
+- [dependency; published-backward] prop-units-in-an-adically-complete-ring (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-jacobson-radical-unit-characterisation (localisation-of-modules-and-support)
+- [dependency; published-backward] thm-completion-is-exact-on-finite-modules (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> def-noetherian-ring (chain-conditions-and-semisimple-modules)
+- [dependency; cross-batch] thm-completion-is-exact-on-finite-modules (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-artin-rees-lemma (rees-modules-artin-rees-and-hilbert-samuel-theory)
+- [dependency; cross-batch] thm-completion-is-exact-on-finite-modules (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> cor-induced-and-intrinsic-adic-filtrations-are-equivalent (rees-modules-artin-rees-and-hilbert-samuel-theory)
+- [dependency; published-backward] thm-completion-as-extension-of-scalars (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-universal-property-of-module-tensor-products (tensor-products-of-modules)
+- [dependency; published-backward] thm-completion-as-extension-of-scalars (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-right-exactness-of-tensor-products (tensor-products-of-modules)
+- [dependency; published-backward] thm-completion-as-extension-of-scalars (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-unit-isomorphisms-for-module-tensor-products (tensor-products-of-modules)
+- [dependency; published-backward] cor-completion-commutes-with-finite-quotients-and-submodules (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> def-product-of-an-ideal-and-a-module (tensor-products-of-modules)
+- [dependency; published-backward] thm-flatness-of-noetherian-completion (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-flatness-criteria-by-injections-and-ideals (tensor-products-of-modules)
+- [dependency; cross-batch] thm-faithful-flatness-of-jacobson-adic-completion (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-faithfully-flat-ring-map-characterisations (flatness-and-faithful-flatness)
+- [dependency; published-backward] thm-noetherianity-of-adic-completion (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> def-noetherian-ring (chain-conditions-and-semisimple-modules)
+- [dependency; published-backward] thm-noetherianity-of-adic-completion (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-noetherian-ring-quotients-and-localisations (noetherian-rings-and-hilbert-basis)
+- [dependency; published-backward] thm-noetherianity-of-adic-completion (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-noetherian-ring-ideal-characterisations (noetherian-rings-and-hilbert-basis)
+- [dependency; published-backward] thm-noetherianity-of-adic-completion (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> cor-finite-variable-polynomial-ring-noetherian (noetherian-rings-and-hilbert-basis)
+- [dependency; published-backward] thm-completion-of-a-noetherian-local-ring (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> def-local-ring (the-field-of-fractions-and-localisation)
+- [dependency; published-backward] thm-completion-preserves-dimension-and-hilbert-samuel-data (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-support-and-annihilator-of-a-finite-module (localisation-of-modules-and-support)
+- [dependency; published-backward] thm-completion-preserves-dimension-and-hilbert-samuel-data (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> def-system-of-parameters-and-parameter-ideal (krull-dimension-and-height-theorems)
+- [dependency; cross-batch] thm-completion-preserves-dimension-and-hilbert-samuel-data (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> def-hilbert-samuel-multiplicity (rees-modules-artin-rees-and-hilbert-samuel-theory)
+- [dependency; cross-batch] thm-completion-preserves-dimension-and-hilbert-samuel-data (inverse-limits-and-noetherian-completion, frontier-28-batch-3) -> thm-hilbert-samuel-dimension-theorem (rees-modules-artin-rees-and-hilbert-samuel-theory)
+- [dependency; published-backward] ex-completion-of-a-domain-not-a-domain (inverse-limits-and-noetherian-completion-examples, frontier-28-batch-3) -> thm-noetherian-ring-quotients-and-localisations (noetherian-rings-and-hilbert-basis)
+- [dependency; published-backward] def-bounded-linear-functional-on-l-p-and-its-operator-norm (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-l-p-space-as-a-quotient-by-null-functions (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] def-bounded-linear-functional-on-l-p-and-its-operator-norm (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-l-p-space-as-a-quotient-by-null-functions (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-holder-inequality-for-integrals (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-the-lebesgue-integral-respects-almost-everywhere-equality (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-linearity-of-the-lebesgue-integral-on-l-one (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-conjugate-exponents (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-finite-sigma-finite-and-semifinite-measures (measures-and-their-basic-properties)
+- [dependency; published-backward] prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm (the-duality-of-lp-and-lq, frontier-28-batch-4) -> prop-essential-supremum-is-attained-as-the-least-essential-bound (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm (the-duality-of-lp-and-lq, frontier-28-batch-4) -> rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] prop-semifinite-measures-make-l-q-representatives-unique (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] prop-semifinite-measures-make-l-q-representatives-unique (the-duality-of-lp-and-lq, frontier-28-batch-4) -> prop-essential-supremum-is-attained-as-the-least-essential-bound (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-l-p-space-as-a-quotient-by-null-functions (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-chebyshev-markov-inequality-for-the-integral (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-finite-sigma-finite-and-semifinite-measures (measures-and-their-basic-properties)
+- [dependency; published-backward] lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-signed-measure (signed-and-complex-measures-hahn-and-jordan)
+- [dependency; published-backward] lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-dominated-convergence (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-l-p-space-as-a-quotient-by-null-functions (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality (the-radon-nikodym-theorem-and-lebesgue-decomposition)
+- [dependency; published-backward] lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities (the-duality-of-lp-and-lq, frontier-28-batch-4) -> cor-measurable-functions-admit-dominated-simple-approximations (measurable-functions-and-simple-approximation)
+- [dependency; published-backward] lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-dominated-convergence (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-linearity-of-the-lebesgue-integral-on-l-one (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-monotone-convergence-for-the-integral (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-conjugate-exponents (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q (the-duality-of-lp-and-lq, frontier-28-batch-4) -> prop-essential-supremum-is-attained-as-the-least-essential-bound (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] thm-sigma-finite-duality-for-bounded-functionals-on-l-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-finite-sigma-finite-and-semifinite-measures (measures-and-their-basic-properties)
+- [dependency; published-backward] thm-sigma-finite-duality-for-bounded-functionals-on-l-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-dominated-convergence (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] thm-sigma-finite-duality-for-bounded-functionals-on-l-p (the-duality-of-lp-and-lq, frontier-28-batch-4) -> thm-monotone-convergence-for-the-integral (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity (the-duality-of-lp-and-lq, frontier-28-batch-4) -> def-finite-sigma-finite-and-semifinite-measures (measures-and-their-basic-properties)
+- [dependency; published-backward] cor-ell-p-duality-by-counting-measure (the-duality-of-lp-and-lq, frontier-28-batch-4) -> rem-ell-p-is-l-p-of-counting-measure (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [external_mention; unresolved] rem-the-p-equals-infinity-case-is-recorded-not-proved-here (the-duality-of-lp-and-lq, frontier-28-batch-4) -> rem-dual-of-l-infinity (deferred-functional-analysis)
+- [dependency; published-backward] ex-the-half-interval-integral-functional-has-norm-two-to-the-minus-one-over-q (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> def-countable-choice (countability-and-uncountability)
+- [dependency; published-backward] ex-the-half-interval-integral-functional-has-norm-two-to-the-minus-one-over-q (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> thm-lebesgue-measure-of-a-box-of-every-kind (lebesgue-measure-on-euclidean-space)
+- [dependency; published-backward] ex-the-dual-of-ell-two-is-ell-two-by-the-counting-measure-pairing (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> rem-ell-p-is-l-p-of-counting-measure (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] cex-point-evaluation-at-zero-is-not-well-defined-on-l-p-of-unit-interval (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> def-countable-choice (countability-and-uncountability)
+- [dependency; published-backward] cex-point-evaluation-at-zero-is-not-well-defined-on-l-p-of-unit-interval (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> def-l-p-space-as-a-quotient-by-null-functions (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] cex-point-evaluation-at-zero-is-not-well-defined-on-l-p-of-unit-interval (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] cex-point-evaluation-at-zero-is-not-well-defined-on-l-p-of-unit-interval (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> thm-lebesgue-measure-of-a-box-of-every-kind (lebesgue-measure-on-euclidean-space)
+- [dependency; published-backward] cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> def-countable-choice (countability-and-uncountability)
+- [dependency; published-backward] cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> def-sigma-algebra (sigma-algebras-and-borel-sets)
+- [dependency; published-backward] cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> def-measure (measures-and-their-basic-properties)
+- [dependency; published-backward] cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> thm-countable-union-of-countable (countability-and-uncountability)
+- [dependency; published-backward] cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> lem-subset-of-countable (countability-and-uncountability)
+- [dependency; published-backward] cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> def-l-p-space-as-a-quotient-by-null-functions (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> def-l-infinity-on-a-measure-space (the-lp-spaces-holder-minkowski-and-riesz-fischer)
+- [dependency; published-backward] cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> def-l-one-of-a-measure (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality (the-duality-of-lp-and-lq-examples, frontier-28-batch-4) -> thm-chebyshev-markov-inequality-for-the-integral (the-lebesgue-integral-and-the-convergence-theorems)
+- [dependency; published-backward] def-bounded-linear-operator (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-linear-map (linear-maps-rank-nullity-and-quotient-spaces)
+- [dependency; published-backward] def-bounded-linear-operator (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-norm-and-normed-space (rn-as-a-normed-space)
+- [dependency; published-backward] def-bounded-linear-operator (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> rem-real-and-complex-normed-space-convention (normed-and-banach-spaces)
+- [dependency; published-backward] thm-bounded-linear-operator-equivalences (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-lipschitz-holder-contraction (completeness-and-uniform-continuity)
+- [dependency; published-backward] thm-bounded-linear-operator-equivalences (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> thm-metric-regularity-hierarchy (completeness-and-uniform-continuity)
+- [dependency; published-backward] thm-bounded-linear-operator-equivalences (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-metric-continuity (metric-spaces)
+- [dependency; published-backward] def-space-of-bounded-linear-operators (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-vector-space-of-linear-maps (matrices-and-the-matrix-of-a-linear-map)
+- [dependency; published-backward] thm-bounded-operator-space-is-banach (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-banach-space (normed-and-banach-spaces)
+- [dependency; published-backward] thm-extension-of-a-bounded-map-from-a-dense-subspace (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-banach-space (normed-and-banach-spaces)
+- [dependency; published-backward] thm-extension-of-a-bounded-map-from-a-dense-subspace (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-countable-choice (countability-and-uncountability)
+- [dependency; published-backward] thm-extension-of-a-bounded-map-from-a-dense-subspace (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-normed-subspace (normed-and-banach-spaces)
+- [dependency; published-backward] thm-extension-of-a-bounded-map-from-a-dense-subspace (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> lem-metric-limits-unique (metric-spaces)
+- [dependency; published-backward] thm-extension-of-a-bounded-map-from-a-dense-subspace (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> lem-vector-operations-are-continuous-in-a-normed-space (normed-and-banach-spaces)
+- [dependency; published-backward] thm-extension-of-a-bounded-map-from-a-dense-subspace (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-metric-interior-closure-boundary (metric-spaces)
+- [dependency; published-backward] def-topological-isomorphism-of-normed-spaces (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-injection-surjection-bijection (relations-functions-and-quotients)
+- [dependency; published-backward] def-bounded-bilinear-map (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-norm-and-normed-space (rn-as-a-normed-space)
+- [dependency; published-backward] def-bounded-bilinear-map (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-vector-space (vector-spaces-and-subspaces)
+- [dependency; published-backward] def-bounded-bilinear-map (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> rem-real-and-complex-normed-space-convention (normed-and-banach-spaces)
+- [dependency; published-backward] thm-bounded-bilinear-map-equivalences (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-product-norms-on-finitely-many-normed-spaces (normed-and-banach-spaces)
+- [dependency; published-backward] thm-bounded-bilinear-map-equivalences (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> lem-vector-operations-are-continuous-in-a-normed-space (normed-and-banach-spaces)
+- [dependency; published-backward] thm-bounded-bilinear-map-equivalences (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-metric-continuity (metric-spaces)
+- [dependency; published-backward] def-quotient-vector-space-coset-notation (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-quotient-vector-space-and-canonical-projection (triangularisation-and-jordan-canonical-form)
+- [dependency; published-backward] def-quotient-vector-space-coset-notation (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> prop-quotient-vector-space-operations-and-projection (triangularisation-and-jordan-canonical-form)
+- [dependency; published-backward] def-quotient-seminorm (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-norm-and-normed-space (rn-as-a-normed-space)
+- [dependency; published-backward] lem-quotient-seminorm-is-representative-independent (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> prop-quotient-vector-space-operations-and-projection (triangularisation-and-jordan-canonical-form)
+- [dependency; published-backward] thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-linear-subspace (vector-spaces-and-subspaces)
+- [dependency; published-backward] thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> thm-metric-closure-characterisation (metric-spaces)
+- [dependency; published-backward] thm-quotient-of-banach-by-closed-subspace-is-banach (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-banach-space (normed-and-banach-spaces)
+- [dependency; published-backward] thm-quotient-of-banach-by-closed-subspace-is-banach (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-countable-choice (countability-and-uncountability)
+- [dependency; published-backward] thm-quotient-of-banach-by-closed-subspace-is-banach (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> thm-banach-series-criterion (normed-and-banach-spaces)
+- [dependency; published-backward] thm-universal-property-of-the-normed-quotient (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> thm-quotient-vector-space-universal-property (triangularisation-and-jordan-canonical-form)
+- [dependency; published-backward] def-complemented-subspace (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-linear-subspace (vector-spaces-and-subspaces)
+- [dependency; published-backward] def-complemented-subspace (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-normed-subspace (normed-and-banach-spaces)
+- [dependency; published-backward] thm-bounded-below-iff-injective-with-closed-range (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-banach-space (normed-and-banach-spaces)
+- [dependency; published-backward] thm-bounded-below-iff-injective-with-closed-range (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-dependent-choice (compactness-in-metric-spaces)
+- [dependency; published-backward] thm-bounded-below-iff-injective-with-closed-range (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> lem-closed-subspace-of-a-banach-space-is-banach (normed-and-banach-spaces)
+- [dependency; published-backward] thm-bounded-below-iff-injective-with-closed-range (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> thm-baire-category-for-complete-metric-spaces (approximation-and-compactness-in-ck)
+- [dependency; published-backward] thm-bounded-below-iff-injective-with-closed-range (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-injection-surjection-bijection (relations-functions-and-quotients)
+- [dependency; published-backward] thm-bounded-right-inverse-iff-kernel-is-complemented (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-dependent-choice (compactness-in-metric-spaces)
+- [dependency; published-backward] thm-bounded-right-inverse-iff-kernel-is-complemented (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> lem-closed-subspace-of-a-banach-space-is-banach (normed-and-banach-spaces)
+- [dependency; published-backward] thm-bounded-left-inverse-iff-range-is-complemented (bounded-linear-operators-and-quotient-spaces, frontier-28-batch-5) -> def-dependent-choice (compactness-in-metric-spaces)
+- [dependency; published-backward] ex-coordinate-projections-and-inclusions-on-product-banach-spaces (bounded-linear-operators-and-quotient-spaces-examples, frontier-28-batch-5) -> def-product-norms-on-finitely-many-normed-spaces (normed-and-banach-spaces)
+- [dependency; published-backward] ex-coordinate-projections-and-inclusions-on-product-banach-spaces (bounded-linear-operators-and-quotient-spaces-examples, frontier-28-batch-5) -> thm-finite-products-of-banach-spaces-are-banach (normed-and-banach-spaces)
+- [dependency; published-backward] ex-quotient-by-the-kernel-is-isometric-to-the-range-with-the-induced-quotient-norm (bounded-linear-operators-and-quotient-spaces-examples, frontier-28-batch-5) -> def-kernel-and-image-of-a-linear-map (linear-maps-rank-nullity-and-quotient-spaces)
+- [dependency; published-backward] ex-quotient-by-the-kernel-is-isometric-to-the-range-with-the-induced-quotient-norm (bounded-linear-operators-and-quotient-spaces-examples, frontier-28-batch-5) -> thm-linear-kernel-image-and-injectivity (linear-maps-rank-nullity-and-quotient-spaces)
+- [dependency; published-backward] ex-quotient-by-the-kernel-is-isometric-to-the-range-with-the-induced-quotient-norm (bounded-linear-operators-and-quotient-spaces-examples, frontier-28-batch-5) -> thm-quotient-vector-space-universal-property (triangularisation-and-jordan-canonical-form)
+- [dependency; published-backward] ex-c-mod-constants-and-oscillation-norm (bounded-linear-operators-and-quotient-spaces-examples, frontier-28-batch-5) -> thm-extreme-value-metric (compactness-in-metric-spaces)
+- [dependency; published-backward] def-prime-counting-function (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-prime (primes-and-the-fundamental-theorem-of-arithmetic)
+- [dependency; published-backward] def-chebyshev-theta-function (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-prime (primes-and-the-fundamental-theorem-of-arithmetic)
+- [dependency; published-backward] def-chebyshev-theta-function (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-natural-logarithm (the-logarithm-and-general-powers)
+- [dependency; published-backward] def-chebyshev-psi-function (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-von-mangoldt-function (arithmetic-functions-and-dirichlet-convolution)
+- [dependency; published-backward] lem-chebyshev-psi-prime-power-expansion (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-von-mangoldt-function (arithmetic-functions-and-dirichlet-convolution)
+- [dependency; published-backward] lem-prime-counting-chebyshev-partial-summation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> lem-abel-summation-by-parts (absolute-convergence-and-rearrangement)
+- [dependency; published-backward] lem-prime-counting-chebyshev-partial-summation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-logarithm-derivative-and-integral (the-logarithm-and-general-powers)
+- [dependency; published-backward] lem-prime-counting-chebyshev-partial-summation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-natural-logarithm-laws (the-logarithm-and-general-powers)
+- [dependency; published-backward] lem-central-binomial-coefficient-bounds (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-binomial-coefficient (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] lem-central-binomial-coefficient-bounds (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-binomial-theorem (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] lem-central-binomial-coefficient-bounds (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> lem-binomial-coefficients-symmetric-and-unimodal (chains-antichains-sperner-and-dilworth)
+- [dependency; published-backward] lem-central-binomial-coefficient-prime-valuation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-p-adic-valuation (primes-and-the-fundamental-theorem-of-arithmetic)
+- [dependency; published-backward] lem-central-binomial-coefficient-prime-valuation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> lem-p-adic-valuation-basic (primes-and-the-fundamental-theorem-of-arithmetic)
+- [dependency; published-backward] lem-central-binomial-coefficient-prime-valuation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> lem-p-adic-valuation-additive (primes-and-the-fundamental-theorem-of-arithmetic)
+- [dependency; published-backward] lem-central-binomial-coefficient-prime-valuation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-binomial-closed-formula (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] lem-central-binomial-coefficient-prime-valuation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-binomial-coefficient (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] lem-central-binomial-coefficient-prime-valuation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-prime (primes-and-the-fundamental-theorem-of-arithmetic)
+- [dependency; published-backward] lem-central-binomial-coefficient-prime-valuation (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-factorial-and-falling-factorial (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] thm-chebyshev-theta-linear-bounds (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-natural-logarithm-laws (the-logarithm-and-general-powers)
+- [dependency; published-backward] thm-chebyshev-theta-linear-bounds (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-binomial-theorem (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] thm-chebyshev-theta-linear-bounds (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-binomial-closed-formula (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] thm-chebyshev-theta-linear-bounds (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-induction-principle (construction-of-the-natural-numbers)
+- [dependency; published-backward] thm-bertrands-postulate (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-prime (primes-and-the-fundamental-theorem-of-arithmetic)
+- [dependency; published-backward] thm-bertrands-postulate (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-binomial-theorem (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] thm-bertrands-postulate (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-binomial-closed-formula (finite-counting-and-binomial-coefficients)
+- [dependency; published-backward] thm-bertrands-postulate (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-induction-principle (construction-of-the-natural-numbers)
+- [dependency; published-backward] thm-bertrands-postulate (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-natural-logarithm-laws (the-logarithm-and-general-powers)
+- [dependency; published-backward] lem-weighted-von-mangoldt-harmonic-estimate (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-von-mangoldt-function (arithmetic-functions-and-dirichlet-convolution)
+- [dependency; published-backward] lem-weighted-von-mangoldt-harmonic-estimate (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-von-mangoldt-divisor-sum-identity (arithmetic-functions-and-dirichlet-convolution)
+- [dependency; published-backward] lem-weighted-von-mangoldt-harmonic-estimate (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> lem-harmonic-sum-asymptotic (average-orders-divisor-sums-and-representation-counts)
+- [dependency; published-backward] lem-weighted-von-mangoldt-harmonic-estimate (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> lem-summatory-logarithm-asymptotic (average-orders-divisor-sums-and-representation-counts)
+- [dependency; published-backward] thm-first-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-prime (primes-and-the-fundamental-theorem-of-arithmetic)
+- [dependency; published-backward] thm-first-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-von-mangoldt-function (arithmetic-functions-and-dirichlet-convolution)
+- [dependency; published-backward] thm-first-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-natural-logarithm-laws (the-logarithm-and-general-powers)
+- [dependency; published-backward] thm-first-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-logarithm-derivative-and-integral (the-logarithm-and-general-powers)
+- [dependency; published-backward] thm-first-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-p-series-real-exponents (the-logarithm-and-general-powers)
+- [dependency; published-backward] thm-first-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-direct-comparison-test (series-and-nonnegative-tests)
+- [dependency; published-backward] def-meissel-mertens-constant (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-natural-logarithm (the-logarithm-and-general-powers)
+- [dependency; published-backward] thm-second-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> lem-abel-summation-by-parts (absolute-convergence-and-rearrangement)
+- [dependency; published-backward] thm-second-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-logarithm-derivative-and-integral (the-logarithm-and-general-powers)
+- [dependency; published-backward] thm-second-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-natural-logarithm-laws (the-logarithm-and-general-powers)
+- [dependency; published-backward] thm-third-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> def-euler-mascheroni-constant (average-orders-divisor-sums-and-representation-counts)
+- [dependency; published-backward] thm-third-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-gamma-weierstrass-product (the-gamma-function)
+- [dependency; published-backward] thm-third-mertens-theorem-for-primes (chebyshev-bounds-and-mertens-theorems, frontier-28-batch-6) -> thm-natural-logarithm-laws (the-logarithm-and-general-powers)
+- [dependency; published-backward] ex-third-mertens-product-numerics (chebyshev-bounds-and-mertens-theorems-examples, frontier-28-batch-6) -> def-euler-mascheroni-constant (average-orders-divisor-sums-and-representation-counts)
+- [dependency; published-backward] def-braiding (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-monoidal-category (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] def-braiding (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-natural-isomorphism (categories-functors-and-natural-transformations)
+- [dependency; published-backward] thm-the-braiding-is-compatible-with-the-unit-constraints (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-the-left-unitor-of-a-tensor-product-is-determined (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] thm-the-braiding-is-compatible-with-the-unit-constraints (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-the-right-unitor-of-a-tensor-product-is-determined (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] thm-in-a-strict-braided-monoidal-category-the-braiding-satisfies-the-yang-baxter-equation (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-strict-monoidal-category (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] def-braided-monoidal-functor (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-lax-strong-and-strict-monoidal-functor (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] thm-the-cartesian-swap-braiding-is-a-symmetry (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-a-category-with-finite-products-is-monoidal (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-monoidal-equivalence (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-mac-lane-strictification (strictification-and-mac-lanes-coherence-theorem)
+- [dependency; published-backward] def-braid-group-by-the-artin-presentation (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-group-presentation (free-groups-and-presentations)
+- [dependency; published-backward] def-braid-group-by-the-artin-presentation (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-relators-relations-and-finite-presentations (free-groups-and-presentations)
+- [dependency; published-backward] thm-the-two-strand-braid-group-is-infinite-cyclic (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-free-groups-are-torsion-free (free-groups-and-presentations)
+- [dependency; published-backward] thm-the-two-strand-braid-group-is-infinite-cyclic (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-von-dyck (free-groups-and-presentations)
+- [dependency; published-backward] thm-the-symmetric-group-has-the-coxeter-presentation (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-finite-symmetric-group-and-permutation-notation (symmetric-groups-and-the-sign-homomorphism)
+- [dependency; published-backward] thm-the-symmetric-group-has-the-coxeter-presentation (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> lem-symmetric-group-is-a-group (monoids-groups-and-subgroups)
+- [dependency; published-backward] thm-the-symmetric-group-has-the-coxeter-presentation (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-adjacent-transpositions-generate-the-symmetric-group (conjugacy-and-simplicity-in-the-symmetric-groups)
+- [dependency; published-backward] thm-the-symmetric-group-has-the-coxeter-presentation (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-von-dyck (free-groups-and-presentations)
+- [dependency; published-backward] thm-the-braid-group-surjects-onto-the-symmetric-group (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-adjacent-transpositions-generate-the-symmetric-group (conjugacy-and-simplicity-in-the-symmetric-groups)
+- [dependency; published-backward] thm-the-braid-group-surjects-onto-the-symmetric-group (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-von-dyck (free-groups-and-presentations)
+- [dependency; published-backward] def-the-braid-category (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-strict-monoidal-category (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] thm-symmetric-coherence (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-parenthesised-tensor-word (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] thm-the-braid-category-is-the-free-strict-braided-monoidal-category-on-one-generator (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-von-dyck (free-groups-and-presentations)
+- [dependency; published-backward] thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> def-monoid-object-and-comonoid-object-in-a-monoidal-category (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category (braided-and-symmetric-monoidal-categories, frontier-28-batch-7) -> thm-the-monoid-object-axioms-may-be-written-without-associators (strictification-and-mac-lanes-coherence-theorem)
+- [dependency; published-backward] ex-commutative-monoid-objects-in-sets-are-ordinary-commutative-monoids (braided-and-symmetric-monoidal-categories-examples, frontier-28-batch-7) -> thm-monoid-objects-in-a-cartesian-monoidal-category-are-monoids-in-the-ordinary-sense (monoidal-categories-and-monoidal-functors)
+- [dependency; published-backward] def-augmented-chain-complex-over-an-object (projective-and-injective-resolutions, frontier-28-batch-8) -> def-chain-complex-in-an-abelian-category (chain-complexes-and-homology)
+- [dependency; published-backward] def-coaugmented-cochain-complex-under-an-object (projective-and-injective-resolutions, frontier-28-batch-8) -> def-cochain-complex-in-an-abelian-category (chain-complexes-and-homology)
+- [dependency; published-backward] def-projective-resolution-in-an-abelian-category (projective-and-injective-resolutions, frontier-28-batch-8) -> def-projective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] def-projective-resolution-in-an-abelian-category (projective-and-injective-resolutions, frontier-28-batch-8) -> def-exactness-of-a-complex-at-a-degree-and-acyclic-complex (chain-complexes-and-homology)
+- [dependency; published-backward] def-injective-resolution-in-an-abelian-category (projective-and-injective-resolutions, frontier-28-batch-8) -> def-injective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] def-injective-resolution-in-an-abelian-category (projective-and-injective-resolutions, frontier-28-batch-8) -> def-exactness-of-a-complex-at-a-degree-and-acyclic-complex (chain-complexes-and-homology)
+- [dependency; published-backward] lem-one-step-extension-of-a-partial-projective-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> def-projective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-one-step-extension-of-a-partial-projective-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> def-exactness-of-a-complex-at-a-degree-and-acyclic-complex (chain-complexes-and-homology)
+- [dependency; published-backward] lem-one-step-extension-of-a-partial-injective-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> def-injective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-one-step-extension-of-a-partial-injective-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> def-exactness-of-a-complex-at-a-degree-and-acyclic-complex (chain-complexes-and-homology)
+- [dependency; published-backward] cor-every-module-admits-a-projective-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-free-modules-are-projective-with-choice-boundary (free-modules-and-exact-sequences)
+- [dependency; published-backward] cor-every-module-admits-an-injective-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-module-categories-are-grothendieck-categories (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] prop-the-iterated-free-module-resolution-is-canonical-in-zf (projective-and-injective-resolutions, frontier-28-batch-8) -> cor-every-module-is-a-quotient-of-a-free-module (free-modules-and-exact-sequences)
+- [dependency; published-backward] prop-the-iterated-free-module-resolution-is-canonical-in-zf (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-free-modules-are-projective-with-choice-boundary (free-modules-and-exact-sequences)
+- [dependency; published-backward] def-augmentation-preserving-map-of-projective-resolutions (projective-and-injective-resolutions, frontier-28-batch-8) -> def-chain-map (chain-complexes-and-homology)
+- [dependency; published-backward] lem-lift-a-map-through-degree-zero-of-a-projective-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> def-projective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-extend-a-partial-comparison-map-by-one-degree (projective-and-injective-resolutions, frontier-28-batch-8) -> def-cycle-and-boundary-subobjects-of-a-complex (chain-complexes-and-homology)
+- [dependency; published-backward] lem-extend-a-partial-comparison-map-by-one-degree (projective-and-injective-resolutions, frontier-28-batch-8) -> def-projective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] thm-projective-comparison-map-exists (projective-and-injective-resolutions, frontier-28-batch-8) -> def-dependent-choice (compactness-in-metric-spaces)
+- [dependency; published-backward] lem-extend-a-partial-comparison-homotopy-by-one-degree (projective-and-injective-resolutions, frontier-28-batch-8) -> def-chain-homotopy (chain-homotopy-and-the-homotopy-category)
+- [dependency; published-backward] lem-extend-a-partial-comparison-homotopy-by-one-degree (projective-and-injective-resolutions, frontier-28-batch-8) -> def-cycle-and-boundary-subobjects-of-a-complex (chain-complexes-and-homology)
+- [dependency; published-backward] lem-extend-a-partial-comparison-homotopy-by-one-degree (projective-and-injective-resolutions, frontier-28-batch-8) -> def-projective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] thm-projective-comparison-maps-are-unique-up-to-chain-homotopy (projective-and-injective-resolutions, frontier-28-batch-8) -> def-chain-homotopy (chain-homotopy-and-the-homotopy-category)
+- [dependency; published-backward] thm-projective-comparison-maps-are-unique-up-to-chain-homotopy (projective-and-injective-resolutions, frontier-28-batch-8) -> def-dependent-choice (compactness-in-metric-spaces)
+- [dependency; published-backward] thm-injective-comparison-map-exists (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-the-opposite-of-an-abelian-category-is-abelian (abelian-categories)
+- [dependency; published-backward] thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-the-opposite-of-an-abelian-category-is-abelian (abelian-categories)
+- [dependency; published-backward] lem-degree-zero-horseshoe-lift (projective-and-injective-resolutions, frontier-28-batch-8) -> def-projective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-degree-zero-horseshoe-lift (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-the-horseshoe-kernel-fits-a-short-exact-sequence (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-snake-lemma-in-an-abelian-category (the-diagram-lemmas-in-an-abelian-category)
+- [dependency; published-backward] lem-the-horseshoe-kernel-fits-a-short-exact-sequence (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-nine-lemma-in-an-abelian-category (the-diagram-lemmas-in-an-abelian-category)
+- [dependency; published-backward] thm-horseshoe-lemma-for-projective-resolutions (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] thm-horseshoe-lemma-for-projective-resolutions (projective-and-injective-resolutions, frontier-28-batch-8) -> def-dependent-choice (compactness-in-metric-spaces)
+- [dependency; published-backward] thm-horseshoe-lemma-for-injective-resolutions (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-the-opposite-of-an-abelian-category-is-abelian (abelian-categories)
+- [dependency; published-backward] prop-horseshoe-resolutions-are-compatible-with-morphisms-of-short-exact-sequences-up-to-homotopy (projective-and-injective-resolutions, frontier-28-batch-8) -> def-morphism-of-short-exact-sequences-of-complexes (long-exact-sequences-in-homology)
+- [dependency; published-backward] cor-a-split-short-exact-sequence-admits-the-direct-sum-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> def-split-short-exact-sequence-in-an-abelian-category (exactness-and-the-member-calculus)
+- [dependency; published-backward] thm-schanuel-lemma-in-an-abelian-category (projective-and-injective-resolutions, frontier-28-batch-8) -> def-projective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] thm-schanuel-lemma-in-an-abelian-category (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-projective-object-characterisations (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] thm-schanuel-lemma-in-an-abelian-category (projective-and-injective-resolutions, frontier-28-batch-8) -> def-pullbacks-and-pushouts (limits-and-colimits)
+- [dependency; published-backward] thm-schanuel-lemma-in-an-abelian-category (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-the-pullback-of-an-epimorphism-is-an-epimorphism (abelian-categories)
+- [dependency; published-backward] thm-dual-schanuel-lemma-for-injective-copresentations (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-the-opposite-of-an-abelian-category-is-abelian (abelian-categories)
+- [dependency; published-backward] prop-a-projective-object-has-a-length-zero-projective-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> def-projective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-extension-from-subobjects-of-a-generator-detects-injectivity (projective-and-injective-resolutions, frontier-28-batch-8) -> def-grothendieck-category (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-extension-from-subobjects-of-a-generator-detects-injectivity (projective-and-injective-resolutions, frontier-28-batch-8) -> def-injective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-extension-from-subobjects-of-a-generator-detects-injectivity (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-a-locally-small-abelian-category-with-a-generator-is-well-powered (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-extension-from-subobjects-of-a-generator-detects-injectivity (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-a-generator-detects-equality-of-subobjects (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] lem-extension-from-subobjects-of-a-generator-detects-injectivity (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-zorn (order-zorn-and-the-axiom-of-choice)
+- [dependency; published-backward] def-functorial-one-step-generator-extension (projective-and-injective-resolutions, frontier-28-batch-8) -> def-grothendieck-category (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] def-functorial-one-step-generator-extension (projective-and-injective-resolutions, frontier-28-batch-8) -> def-generator-and-cogenerator-of-a-category (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] def-functorial-one-step-generator-extension (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-a-locally-small-abelian-category-with-a-generator-is-well-powered (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] def-functorial-one-step-generator-extension (projective-and-injective-resolutions, frontier-28-batch-8) -> def-pullbacks-and-pushouts (limits-and-colimits)
+- [dependency; published-backward] lem-the-one-step-generator-map-is-a-functorial-monomorphism (projective-and-injective-resolutions, frontier-28-batch-8) -> cor-the-pushout-of-a-monomorphism-is-a-monomorphism (abelian-categories)
+- [dependency; published-backward] lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps (projective-and-injective-resolutions, frontier-28-batch-8) -> def-the-axioms-ab5-and-ab5-star (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings (projective-and-injective-resolutions, frontier-28-batch-8) -> def-grothendieck-category (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] cor-every-grothendieck-category-has-enough-injectives-and-every-object-admits-an-injective-resolution (projective-and-injective-resolutions, frontier-28-batch-8) -> def-a-category-with-enough-projectives-and-with-enough-injectives (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] fs-every-abelian-category-has-enough-projectives-and-enough-injectives (projective-and-injective-resolutions, frontier-28-batch-8) -> def-a-category-with-enough-projectives-and-with-enough-injectives (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] fs-every-acyclic-complex-of-projective-objects-is-contractible (projective-and-injective-resolutions, frontier-28-batch-8) -> thm-a-bounded-below-acyclic-complex-of-projective-objects-is-contractible-when-its-cycle-epimorphisms-split (chain-homotopy-and-the-homotopy-category)
+- [dependency; published-backward] fs-every-acyclic-complex-of-projective-objects-is-contractible (projective-and-injective-resolutions, frontier-28-batch-8) -> def-contractible-complex (chain-homotopy-and-the-homotopy-category)
+- [dependency; published-backward] ex-a-projective-resolution-of-a-cyclic-abelian-group (projective-and-injective-resolutions-examples, frontier-28-batch-8) -> thm-free-modules-are-projective-with-choice-boundary (free-modules-and-exact-sequences)
+- [dependency; published-backward] ex-an-injective-resolution-of-an-abelian-group-beginning-with-a-divisible-envelope (projective-and-injective-resolutions-examples, frontier-28-batch-8) -> lem-every-abelian-group-embeds-in-a-divisible-group (free-modules-and-exact-sequences)
+- [dependency; published-backward] ex-an-injective-resolution-of-an-abelian-group-beginning-with-a-divisible-envelope (projective-and-injective-resolutions-examples, frontier-28-batch-8) -> thm-injective-modules-over-a-pid-are-exactly-divisible (free-modules-and-exact-sequences)
+- [dependency; published-backward] ex-schanuel-lemma-for-two-presentations-of-a-module (projective-and-injective-resolutions-examples, frontier-28-batch-8) -> def-exact-and-short-exact-sequences-of-modules (free-modules-and-exact-sequences)
+- [dependency; published-backward] cex-a-category-with-enough-injectives-but-not-enough-projectives (projective-and-injective-resolutions-examples, frontier-28-batch-8) -> def-projective-object (subobject-lattices-generators-and-the-grothendieck-axioms)
+- [dependency; published-backward] cex-a-category-with-enough-injectives-but-not-enough-projectives (projective-and-injective-resolutions-examples, frontier-28-batch-8) -> thm-modules-over-a-ring-form-an-abelian-category (abelian-categories)
+- [dependency; published-backward] cex-a-category-with-enough-injectives-but-not-enough-projectives (projective-and-injective-resolutions-examples, frontier-28-batch-8) -> thm-injective-modules-over-a-pid-are-exactly-divisible (free-modules-and-exact-sequences)
+- [dependency; published-backward] cex-a-category-with-enough-injectives-but-not-enough-projectives (projective-and-injective-resolutions-examples, frontier-28-batch-8) -> lem-every-abelian-group-embeds-in-a-divisible-group (free-modules-and-exact-sequences)
+- [dependency; published-backward] def-wonderful-finite-family (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-anticonnected-graph-and-anticonnected-component (induced-subgraphs-and-hereditary-graph-classes)
+- [dependency; published-backward] def-wonderful-finite-family (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-blockade-length-and-width (blockades-combs-and-pattern-graphs)
+- [dependency; published-backward] def-wonderful-finite-family (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-c-sparse-and-c-restricted-vertex-set (sparse-restricted-subgraphs-and-rodl-nikiforov)
+- [dependency; published-backward] def-wonderful-finite-family (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-directional-and-weak-sparsity-between-vertex-sets (sparse-restricted-subgraphs-and-rodl-nikiforov)
+- [dependency; published-backward] def-wonderful-finite-family (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-edges-between-sets-and-pure-mixed-pairs (induced-subgraphs-and-hereditary-graph-classes)
+- [dependency; published-backward] def-wonderful-finite-family (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-graph-isomorphism-and-complement (graphs-walks-and-connectivity)
+- [dependency; published-backward] def-wonderful-finite-family (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-h-free-and-family-free-graph (induced-subgraphs-and-hereditary-graph-classes)
+- [dependency; published-backward] lem-a-vertex-mixed-on-an-anticonnected-set-yields-opposite-adjacency-on-a-nonedge (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-anticonnected-graph-and-anticonnected-component (induced-subgraphs-and-hereditary-graph-classes)
+- [dependency; published-backward] lem-a-vertex-mixed-on-an-anticonnected-set-yields-opposite-adjacency-on-a-nonedge (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-edges-between-sets-and-pure-mixed-pairs (induced-subgraphs-and-hereditary-graph-classes)
+- [dependency; published-backward] lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-anticonnected-graph-and-anticonnected-component (induced-subgraphs-and-hereditary-graph-classes)
+- [dependency; published-backward] lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-directional-and-weak-sparsity-between-vertex-sets (sparse-restricted-subgraphs-and-rodl-nikiforov)
+- [dependency; published-backward] lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-edges-between-sets-and-pure-mixed-pairs (induced-subgraphs-and-hereditary-graph-classes)
+- [dependency; published-backward] lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-h-plus-and-h-minus-for-two-special-vertices (small-graph-erdos-hajnal-consequences)
+- [dependency; published-backward] lem-the-auxiliary-pattern-has-a-polynomial-homogeneous-set-under-the-source-hypotheses (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-erdos-hajnal-property-and-constant (erdos-hajnal-property-and-homogeneous-sets)
+- [dependency; published-backward] lem-the-auxiliary-pattern-has-a-polynomial-homogeneous-set-under-the-source-hypotheses (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-homogeneous-set-and-homogeneous-number (erdos-hajnal-property-and-homogeneous-sets)
+- [dependency; published-backward] lem-the-auxiliary-pattern-has-a-polynomial-homogeneous-set-under-the-source-hypotheses (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> thm-complete-graph-free-classes-are-erdos-hajnal (erdos-hajnal-property-and-homogeneous-sets)
+- [dependency; published-backward] lem-a-polynomial-homogeneous-set-in-the-auxiliary-pattern-yields-a-y-four-restricted-union (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-c-sparse-and-c-restricted-vertex-set (sparse-restricted-subgraphs-and-rodl-nikiforov)
+- [dependency; published-backward] lem-a-polynomial-homogeneous-set-in-the-auxiliary-pattern-yields-a-y-four-restricted-union (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-directional-and-weak-sparsity-between-vertex-sets (sparse-restricted-subgraphs-and-rodl-nikiforov)
+- [dependency; published-backward] lem-a-polynomial-homogeneous-set-in-the-auxiliary-pattern-yields-a-y-four-restricted-union (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-edges-between-sets-and-pure-mixed-pairs (induced-subgraphs-and-hereditary-graph-classes)
+- [dependency; published-backward] lem-the-e-graph-and-the-bird-graph-are-wonderful (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-bird-graph-and-co-bird-graph (small-graph-erdos-hajnal-consequences)
+- [dependency; published-backward] lem-the-e-graph-and-the-bird-graph-are-wonderful (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-e-graph-and-co-e-graph (small-graph-erdos-hajnal-consequences)
+- [dependency; published-backward] lem-the-e-graph-and-the-bird-graph-are-wonderful (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> def-h-plus-and-h-minus-for-two-special-vertices (small-graph-erdos-hajnal-consequences)
+- [dependency; published-backward] lem-the-e-graph-and-the-bird-graph-are-wonderful (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> thm-substitution-preserves-the-erdos-hajnal-property (modules-substitution-and-prime-graphs)
+- [dependency; published-backward] lem-the-e-graph-and-the-bird-graph-are-wonderful (leaf-reducibility-and-wonderful-families, frontier-28-batch-9) -> thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property (small-graph-erdos-hajnal-consequences)
+- [dependency; published-backward] ex-the-e-graph-sits-inside-a-one-subdivided-star-and-deletes-to-the-five-vertex-path (leaf-reducibility-and-wonderful-families-examples, frontier-28-batch-9) -> def-e-graph-and-co-e-graph (small-graph-erdos-hajnal-consequences)
+- [dependency; published-backward] ex-the-e-graph-sits-inside-a-one-subdivided-star-and-deletes-to-the-five-vertex-path (leaf-reducibility-and-wonderful-families-examples, frontier-28-batch-9) -> def-standard-complete-bipartite-path-and-cycle-graphs (graphs-walks-and-connectivity)
+- [dependency; published-backward] ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit (leaf-reducibility-and-wonderful-families-examples, frontier-28-batch-9) -> def-bird-graph-and-co-bird-graph (small-graph-erdos-hajnal-consequences)
+- [dependency; published-backward] ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit (leaf-reducibility-and-wonderful-families-examples, frontier-28-batch-9) -> def-h-plus-and-h-minus-for-two-special-vertices (small-graph-erdos-hajnal-consequences)
+- [dependency; published-backward] ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit (leaf-reducibility-and-wonderful-families-examples, frontier-28-batch-9) -> thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property (small-graph-erdos-hajnal-consequences)
+- [dependency; published-backward] ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit (leaf-reducibility-and-wonderful-families-examples, frontier-28-batch-9) -> thm-substitution-preserves-the-erdos-hajnal-property (modules-substitution-and-prime-graphs)
+- [dependency; published-backward] lem-a-finite-coordinate-bump-map-embeds-a-compact-manifold-in-some-euclidean-space (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> lem-chart-bump-at-a-point-with-prescribed-support (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] lem-a-finite-coordinate-bump-map-embeds-a-compact-manifold-in-some-euclidean-space (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> cor-an-injective-immersion-from-a-compact-manifold-is-an-embedding (rank-theorems-and-embedded-submanifolds)
+- [dependency; published-backward] lem-a-finite-coordinate-bump-map-embeds-a-compact-manifold-in-some-euclidean-space (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-smooth-manifold (smooth-manifolds-and-smooth-maps)
+- [dependency; published-backward] lem-a-countable-coordinate-bump-map-embeds-a-manifold-in-countable-euclidean-data (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> lem-chart-bump-at-a-point-with-prescribed-support (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] lem-a-countable-coordinate-bump-map-embeds-a-manifold-in-countable-euclidean-data (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] lem-a-smooth-exhaustion-separates-the-locally-finite-chart-bands (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] lem-a-smooth-exhaustion-separates-the-locally-finite-chart-bands (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> lem-a-countable-coordinate-ball-cover-has-a-countable-locally-finite-shrinking (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] prop-a-proper-injective-immersion-is-a-smooth-embedding (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-smooth-embedding (rank-theorems-and-embedded-submanifolds)
+- [dependency; published-backward] prop-a-proper-injective-immersion-is-a-smooth-embedding (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> cor-every-immersion-is-locally-an-embedding (rank-theorems-and-embedded-submanifolds)
+- [dependency; published-backward] prop-a-proper-injective-immersion-is-a-smooth-embedding (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> prop-smooth-maps-are-continuous (smooth-manifolds-and-smooth-maps)
+- [dependency; published-backward] prop-a-proper-injective-immersion-is-a-smooth-embedding (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-locally-compact-hausdorff-basics (compactness)
+- [dependency; published-backward] def-secant-and-tangent-direction-maps-of-an-euclidean-embedding (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-smooth-embedding (rank-theorems-and-embedded-submanifolds)
+- [dependency; published-backward] def-secant-and-tangent-direction-maps-of-an-euclidean-embedding (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure (tangent-cotangent-and-the-differential)
+- [dependency; published-backward] def-secant-and-tangent-direction-maps-of-an-euclidean-embedding (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-euclidean-inner-product (rn-as-a-normed-space)
+- [dependency; published-backward] lem-a-generic-linear-projection-preserves-injectivity-and-immersion (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> prop-the-image-of-a-lower-dimensional-c1-manifold-is-null (sard-theorem-and-transversality)
+- [dependency; published-backward] lem-a-generic-linear-projection-preserves-injectivity-and-immersion (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold (sard-theorem-and-transversality)
+- [dependency; published-backward] def-tubular-neighbourhood-of-an-embedded-submanifold (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-normal-and-conormal-bundles-of-an-embedded-submanifold (smooth-vector-bundles-and-sections)
+- [dependency; published-backward] def-tubular-neighbourhood-of-an-embedded-submanifold (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> prop-normal-and-conormal-bundles-are-smooth-vector-bundles (smooth-vector-bundles-and-sections)
+- [dependency; published-backward] def-tubular-neighbourhood-of-an-embedded-submanifold (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-smooth-embedding (rank-theorems-and-embedded-submanifolds)
+- [dependency; published-backward] def-normal-addition-map-for-a-euclidean-submanifold (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle (smooth-vector-bundles-and-sections)
+- [dependency; published-backward] def-normal-addition-map-for-a-euclidean-submanifold (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-euclidean-inner-product (rn-as-a-normed-space)
+- [dependency; published-backward] lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-smooth-inverse-function-theorem-on-manifolds (rank-theorems-and-embedded-submanifolds)
+- [dependency; published-backward] lem-variable-radius-injectivity-for-normal-addition (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-smooth-partitions-of-unity-exist-on-manifolds (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] lem-variable-radius-injectivity-for-normal-addition (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] def-positive-continuous-error-function-for-strong-approximation (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-smooth-manifold (smooth-manifolds-and-smooth-maps)
+- [dependency; published-backward] thm-whitney-approximation-for-euclidean-valued-maps (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-smooth-partitions-of-unity-exist-on-manifolds (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] thm-whitney-approximation-for-euclidean-valued-maps (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> cor-smooth-partitions-subordinate-to-a-countable-coordinate-cover (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] thm-relative-whitney-approximation-for-euclidean-valued-maps (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> lem-smooth-extension-from-a-closed-neighbourhood (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] thm-relative-whitney-approximation-for-euclidean-valued-maps (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] thm-whitney-approximation-for-manifold-valued-maps (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-homotopy-relative-and-path-homotopy (homotopy-and-homotopy-equivalence)
+- [dependency; published-backward] thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-homotopy-relative-and-path-homotopy (homotopy-and-homotopy-equivalence)
+- [dependency; published-backward] thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure (smooth-manifolds-and-smooth-maps)
+- [dependency; published-backward] cor-the-smooth-and-continuous-homotopy-categories-of-smooth-manifolds-have-the-same-morphism-sets (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-homotopy-relative-and-path-homotopy (homotopy-and-homotopy-equivalence)
+- [dependency; published-backward] lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-smooth-family-of-maps-and-evaluation-map (sard-theorem-and-transversality)
+- [dependency; published-backward] lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> cor-a-submersion-is-transverse-to-every-embedded-submanifold (sard-theorem-and-transversality)
+- [dependency; published-backward] thm-transversality-homotopy-theorem (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-parametric-transversality (sard-theorem-and-transversality)
+- [dependency; published-backward] thm-transversality-homotopy-theorem (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> def-homotopy-relative-and-path-homotopy (homotopy-and-homotopy-equivalence)
+- [dependency; published-backward] cor-a-smooth-section-can-be-perturbed-transverse-to-the-zero-section (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> prop-the-zero-section-is-a-smooth-embedding (smooth-vector-bundles-and-sections)
+- [dependency; published-backward] cor-a-smooth-section-can-be-perturbed-transverse-to-the-zero-section (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> prop-a-vector-bundle-section-with-surjective-vertical-differential-at-every-zero-has-a-submanifold-zero-set (smooth-vector-bundles-and-sections)
+- [dependency; published-backward] prop-relative-transversality-preserves-a-map-on-a-closed-good-region (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-parametric-transversality (sard-theorem-and-transversality)
+- [dependency; published-backward] prop-relative-transversality-preserves-a-map-on-a-closed-good-region (whitney-embedding-tubular-neighbourhoods-and-approximation, frontier-28-batch-10) -> thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set (smooth-partitions-of-unity-and-exhaustions)
+- [dependency; published-backward] def-turing-machine-acceptance-problem (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; published-backward] def-turing-machine-acceptance-problem (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> lem-finite-tuples-admit-effective-prefix-free-encodings (formal-languages-encodings-and-decision-problems)
+- [dependency; published-backward] def-turing-machine-acceptance-problem (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-computation-alphabet-and-word-convention (formal-languages-encodings-and-decision-problems)
+- [dependency; published-backward] thm-machine-acceptance-is-recognizable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; unresolved] thm-machine-acceptance-is-recognizable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> lem-step-by-step-interpreter-for-machine-codes (robust-machine-models-and-universal-computation)
+- [dependency; published-backward] thm-machine-acceptance-is-recognizable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> thm-existence-of-a-universal-turing-machine (robust-machine-models-and-universal-computation)
+- [dependency; unresolved] thm-machine-acceptance-is-recognizable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> prop-machine-descriptions-form-a-decidable-language (decidable-recognizable-and-enumerable-languages)
+- [dependency; unresolved] thm-machine-acceptance-is-recognizable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-decidable-and-recognizable-language (decidable-recognizable-and-enumerable-languages)
+- [dependency; published-backward] lem-diagonal-self-application-machine (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; unresolved] lem-diagonal-self-application-machine (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-decidable-and-recognizable-language (decidable-recognizable-and-enumerable-languages)
+- [dependency; unresolved] thm-machine-acceptance-is-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-decidable-and-recognizable-language (decidable-recognizable-and-enumerable-languages)
+- [dependency; published-backward] thm-machine-acceptance-is-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; published-backward] def-halting-problem (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; published-backward] def-halting-problem (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> lem-finite-tuples-admit-effective-prefix-free-encodings (formal-languages-encodings-and-decision-problems)
+- [dependency; published-backward] def-halting-problem (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-halting-computation-and-divergence (turing-machines-configurations-and-computation)
+- [dependency; published-backward] thm-halting-is-recognizable-and-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; unresolved] thm-halting-is-recognizable-and-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> lem-step-by-step-interpreter-for-machine-codes (robust-machine-models-and-universal-computation)
+- [dependency; unresolved] thm-halting-is-recognizable-and-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> prop-machine-descriptions-form-a-decidable-language (decidable-recognizable-and-enumerable-languages)
+- [dependency; unresolved] thm-halting-is-recognizable-and-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-decidable-and-recognizable-language (decidable-recognizable-and-enumerable-languages)
+- [dependency; published-backward] thm-halting-is-recognizable-and-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-halting-computation-and-divergence (turing-machines-configurations-and-computation)
+- [dependency; unresolved] cor-nonhalting-is-not-recognizable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> thm-decidable-iff-language-and-complement-are-recognizable (decidable-recognizable-and-enumerable-languages)
+- [dependency; unresolved] thm-an-unrecognizable-language-exists (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-decidable-and-recognizable-language (decidable-recognizable-and-enumerable-languages)
+- [dependency; published-backward] def-busy-beaver-function (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; published-backward] def-busy-beaver-function (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-halting-computation-and-divergence (turing-machines-configurations-and-computation)
+- [dependency; published-backward] def-busy-beaver-function (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-natural-numbers (construction-of-the-natural-numbers)
+- [dependency; unresolved] thm-busy-beaver-dominates-every-total-computable-function (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-computable-and-partial-computable-function (decidable-recognizable-and-enumerable-languages)
+- [dependency; published-backward] thm-busy-beaver-dominates-every-total-computable-function (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-partial-function-computed-by-a-machine (turing-machines-configurations-and-computation)
+- [dependency; published-backward] thm-busy-beaver-dominates-every-total-computable-function (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; unresolved] cor-busy-beaver-is-not-computable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-computable-and-partial-computable-function (decidable-recognizable-and-enumerable-languages)
+- [dependency; published-backward] thm-totality-is-not-recognizable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; unresolved] thm-totality-is-not-recognizable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-decidable-and-recognizable-language (decidable-recognizable-and-enumerable-languages)
+- [dependency; published-backward] thm-machine-equivalence-is-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; published-backward] thm-machine-equivalence-is-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-language-recognized-and-decided (turing-machines-configurations-and-computation)
+- [dependency; unresolved] thm-machine-equivalence-is-undecidable (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-decidable-and-recognizable-language (decidable-recognizable-and-enumerable-languages)
+- [dependency; published-backward] fs-diagonalization-needs-literal-source-self-reading (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> def-effective-encoding-of-turing-machines (robust-machine-models-and-universal-computation)
+- [dependency; published-backward] fs-diagonalization-needs-literal-source-self-reading (diagonalization-and-the-halting-problem, frontier-28-batch-11) -> thm-existence-of-a-universal-turing-machine (robust-machine-models-and-universal-computation)
+- [dependency; unresolved] def-p (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> def-dtime-ntime-dspace-and-nspace (resource-bounds-and-machine-invariance)
+- [dependency; unresolved] def-polynomially-balanced-verifier (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> def-worst-case-time-and-space-complexity (resource-bounds-and-machine-invariance)
+- [dependency; unresolved] thm-verifier-and-nondeterministic-definitions-of-np-agree (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> def-dtime-ntime-dspace-and-nspace (resource-bounds-and-machine-invariance)
+- [dependency; unresolved] thm-verifier-and-nondeterministic-definitions-of-np-agree (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> lem-time-at-least-input-length-permits-complete-input-reading (resource-bounds-and-machine-invariance)
+- [dependency; unresolved] def-polynomial-time-many-one-reduction (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> def-worst-case-time-and-space-complexity (resource-bounds-and-machine-invariance)
+- [dependency; unresolved] def-exp-and-nexp (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> def-dtime-ntime-dspace-and-nspace (resource-bounds-and-machine-invariance)
+- [dependency; unresolved] prop-np-is-contained-in-pspace-and-pspace-in-exp (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> def-dtime-ntime-dspace-and-nspace (resource-bounds-and-machine-invariance)
+- [dependency; unresolved] prop-np-is-contained-in-pspace-and-pspace-in-exp (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> def-worst-case-time-and-space-complexity (resource-bounds-and-machine-invariance)
+- [dependency; published-backward] prop-np-is-contained-in-pspace-and-pspace-in-exp (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> def-turing-machine-configuration (turing-machines-configurations-and-computation)
+- [dependency; unresolved] prop-np-is-contained-in-pspace-and-pspace-in-exp (p-np-conp-and-polynomial-reductions, frontier-28-batch-11) -> def-tape-finite-support-convention (turing-machines-configurations-and-computation)
+ERROR unresolved: rem-the-p-equals-infinity-case-is-recorded-not-proved-here (frontier-28-batch-4) declares external_mention "rem-dual-of-l-infinity", which resolves to no published or in-run item
+ERROR unresolved: thm-machine-acceptance-is-recognizable (frontier-28-batch-11) declares dependency "lem-step-by-step-interpreter-for-machine-codes", which resolves to no published or in-run item
+ERROR unresolved: thm-machine-acceptance-is-recognizable (frontier-28-batch-11) declares dependency "prop-machine-descriptions-form-a-decidable-language", which resolves to no published or in-run item
+ERROR unresolved: thm-machine-acceptance-is-recognizable (frontier-28-batch-11) declares dependency "def-decidable-and-recognizable-language", which resolves to no published or in-run item
+ERROR unresolved: lem-diagonal-self-application-machine (frontier-28-batch-11) declares dependency "def-decidable-and-recognizable-language", which resolves to no published or in-run item
+ERROR unresolved: thm-machine-acceptance-is-undecidable (frontier-28-batch-11) declares dependency "def-decidable-and-recognizable-language", which resolves to no published or in-run item
+ERROR unresolved: thm-halting-is-recognizable-and-undecidable (frontier-28-batch-11) declares dependency "lem-step-by-step-interpreter-for-machine-codes", which resolves to no published or in-run item
+ERROR unresolved: thm-halting-is-recognizable-and-undecidable (frontier-28-batch-11) declares dependency "prop-machine-descriptions-form-a-decidable-language", which resolves to no published or in-run item
+ERROR unresolved: thm-halting-is-recognizable-and-undecidable (frontier-28-batch-11) declares dependency "def-decidable-and-recognizable-language", which resolves to no published or in-run item
+ERROR unresolved: cor-nonhalting-is-not-recognizable (frontier-28-batch-11) declares dependency "thm-decidable-iff-language-and-complement-are-recognizable", which resolves to no published or in-run item
+ERROR unresolved: thm-an-unrecognizable-language-exists (frontier-28-batch-11) declares dependency "def-decidable-and-recognizable-language", which resolves to no published or in-run item
+ERROR unresolved: thm-busy-beaver-dominates-every-total-computable-function (frontier-28-batch-11) declares dependency "def-computable-and-partial-computable-function", which resolves to no published or in-run item
+ERROR unresolved: cor-busy-beaver-is-not-computable (frontier-28-batch-11) declares dependency "def-computable-and-partial-computable-function", which resolves to no published or in-run item
+ERROR unresolved: thm-totality-is-not-recognizable (frontier-28-batch-11) declares dependency "def-decidable-and-recognizable-language", which resolves to no published or in-run item
+ERROR unresolved: thm-machine-equivalence-is-undecidable (frontier-28-batch-11) declares dependency "def-decidable-and-recognizable-language", which resolves to no published or in-run item
+ERROR unresolved: def-p (frontier-28-batch-11) declares dependency "def-dtime-ntime-dspace-and-nspace", which resolves to no published or in-run item
+ERROR unresolved: def-polynomially-balanced-verifier (frontier-28-batch-11) declares dependency "def-worst-case-time-and-space-complexity", which resolves to no published or in-run item
+ERROR unresolved: thm-verifier-and-nondeterministic-definitions-of-np-agree (frontier-28-batch-11) declares dependency "def-dtime-ntime-dspace-and-nspace", which resolves to no published or in-run item
+ERROR unresolved: thm-verifier-and-nondeterministic-definitions-of-np-agree (frontier-28-batch-11) declares dependency "lem-time-at-least-input-length-permits-complete-input-reading", which resolves to no published or in-run item
+ERROR unresolved: def-polynomial-time-many-one-reduction (frontier-28-batch-11) declares dependency "def-worst-case-time-and-space-complexity", which resolves to no published or in-run item
+ERROR unresolved: def-exp-and-nexp (frontier-28-batch-11) declares dependency "def-dtime-ntime-dspace-and-nspace", which resolves to no published or in-run item
+ERROR unresolved: prop-np-is-contained-in-pspace-and-pspace-in-exp (frontier-28-batch-11) declares dependency "def-dtime-ntime-dspace-and-nspace", which resolves to no published or in-run item
+ERROR unresolved: prop-np-is-contained-in-pspace-and-pspace-in-exp (frontier-28-batch-11) declares dependency "def-worst-case-time-and-space-complexity", which resolves to no published or in-run item
+ERROR unresolved: prop-np-is-contained-in-pspace-and-pspace-in-exp (frontier-28-batch-11) declares dependency "def-tape-finite-support-convention", which resolves to no published or in-run item
+audit-manifest: 1111 relationship(s) over 424 item(s) in 11 batch(es); 24 defect(s)
+
+```
+
+## Advisory failures
+
+```json
+[]
+```
+
+## Canonical repair protocol
+
+# Step 6 gate repair
+
+The generated repair task supplies the primary gate, live ids, exhausted ids,
+output, and advisory failures. Reproduce only the primary gate on the current
+tree; do not revisit exhausted ids or treat advisory failures as this dispatch's
+scope.
+
+For each live finding, repair a confirmed in-scope defect or document a
+false-positive with the governing rule and exact evidence. Update only records
+made stale by a confirmed repair. An unscoped mechanical failure may be fixed at
+its repository cause; do not invent an item or ledger row for it.
+
+When `risk-report` is primary, every live id needs an actual mathematical read
+and a complete, item-specific `risk_review` in its owning batch contract. Use
+scoped `--items` invocations while working. The generated task is already
+partitioned by Alpha group; do not inspect or write another group's carriers.
+A missing review is not itself a defect-ledger row, though a defect found during
+that review follows the normal repair and ledger protocol.
+
+At 6b, append one `route:"gate"` supplemental decision per concrete defect to
+the owning group's decisions file and its matching ledger row. At 6c, append the
+required `kind:"gate"` verdict and current carrier hash to
+`research/frontier-28-6c-verdicts.jsonl`; also record the changed item/page verdict.
+Extend prior retry artifacts and report the current gate result.
+
+# Step 6c — cross-batch audit and closure
+
+Read `research/frontier-28-cross-group-edges.json`, the post-6b carriers, and every
+listed citing/cited item or structural change. An empty computed list is valid.
+
+Append one evidence-bearing current-hash row per edge, forward reference,
+addition, removal, item, page, or gate outcome to
+`research/frontier-28-6c-verdicts.jsonl`; use the exact kind and verdict vocabulary
+accepted by `tools/cross-group-edges.mjs`. Obtain a current carrier hash with
+`node tools/cross-group-edges.mjs carrier --run frontier-28 --id <id>` after edits.
+
+Clean outcomes use `defect_ids:[]`. Every repair, strike, drop, removal, or
+reversion names one closed, uniquely owned `6c-cross` ledger row. Restore a
+pre-existing removal before deciding it; a page addition, removal, or
+reading-order change is an owner blocker unless the active task explicitly
+grants that authority.
+
+Write `research/frontier-28-alpha-6c.md` with the evidence, disposition, edits, and
+remaining blocker for each computed obligation. The closure gates rederive
+edges, validate verdict currency and ledger ownership, and run the Step-6 gate
+battery.
+

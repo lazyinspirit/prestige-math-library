@@ -2,7 +2,7 @@
 id: prop-machine-descriptions-form-a-decidable-language
 kind: proposition
 title: "Well-formed deterministic one-tape Turing machine descriptions form a decidable language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-effective-encoding-of-turing-machines, lem-machine-encoding-is-injective-and-decodable, def-decidable-and-recognizable-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

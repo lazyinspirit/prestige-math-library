@@ -1,0 +1,270 @@
+[
+  {
+    "order": 288.031,
+    "id": "the-duality-of-lp-and-lq",
+    "kind": "A",
+    "category": "measure-theory",
+    "title": "The Duality of $L^p$ and Lq",
+    "companion": "the-duality-of-lp-and-lq-examples",
+    "requires": [
+      "density-separability-and-convolution-in-lp-examples"
+    ],
+    "items": [
+      {
+        "id": "def-bounded-linear-functional-on-l-p-and-its-operator-norm",
+        "kind": "definition",
+        "title": "A bounded linear functional on $L^p(\\mu)$ and its operator norm",
+        "strategy": "Record the concrete notion: a linear map $\\Lambda:L^p(\\mu)\\to\\mathbb R$ or $\\mathbb C$ is bounded when $|\\Lambda f|\\le C\\|f\\|_p$ for some finite $C$, and define its norm as the supremum over the $L^p$ unit ball. This keeps MT-16 out of dual-space vocabulary while still naming the load-bearing bound.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space"
+        ]
+      },
+      {
+        "id": "thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p",
+        "kind": "theorem",
+        "title": "Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$",
+        "strategy": "Use Holder to show $\\int fg$ is absolutely convergent and independent of representatives. The map $[f]\\mapsto\\int fg\\,d\\mu$ is then linear and bounded on the quotient.",
+        "deps": [
+          "def-bounded-linear-functional-on-l-p-and-its-operator-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative"
+        ]
+      },
+      {
+      "id": "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+      "kind": "proposition",
+      "title": "The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite",
+      "strategy": "The upper bound is Holder. For $1<p<\\infty$, choose a real-valued representative $u$ of $g$ and test against the normalized function $|u|^{q-1}\\operatorname{sgn}u$. For $p=1$ and $q=\\infty$, first isolate the zero class, then use semifiniteness to choose a positive finite-measure subset of an almost-maximal level set of $|u|$.",
+        "deps": [
+          "thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p",
+          "def-conjugate-exponents",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "prop-essential-supremum-is-attained-as-the-least-essential-bound",
+          "rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative"
+        ]
+      },
+      {
+        "id": "prop-semifinite-measures-make-l-q-representatives-unique",
+        "kind": "proposition",
+        "title": "On a semifinite measure space, a representing $L^q$ function is unique",
+        "strategy": "If $\\Lambda_g=\\Lambda_h$, then $\\Lambda_{g-h}=0$. The previous norm formula forces $\\|g-h\\|_q=0$, so the representing function is unique in $L^q$ whenever the $q=\\infty$ endpoint is legitimate, namely on a semifinite measure space.",
+        "deps": [
+          "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm"
+        ]
+      },
+      {
+        "id": "lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p",
+        "kind": "lemma",
+        "title": "For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support",
+        "strategy": "Choose a measurable representative $u$. For each $n$, the level set $\\{|u|\\ge 1/n\\}$ has finite measure by Chebyshev-Markov applied to $|u|^p$, and their union is the essential support of $u$.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "def-finite-sigma-finite-and-semifinite-measures"
+        ]
+      },
+      {
+        "id": "lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures",
+        "kind": "lemma",
+        "title": "On a finite-measure space, a bounded functional on $L^p$ defines a finite signed or complex measure",
+        "strategy": "On a finite-measure space every indicator $\\mathbf 1_E$ lies in $L^p$. Define $\\nu(E)=\\Lambda(\\mathbf 1_E)$ and prove countable additivity from continuity of $\\Lambda$ and the $L^p$ convergence of partial indicator sums.",
+        "deps": [
+          "def-bounded-linear-functional-on-l-p-and-its-operator-norm",
+          "def-signed-measure",
+          "def-complex-measure",
+          "thm-dominated-convergence"
+        ]
+      },
+      {
+        "id": "lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu",
+        "kind": "lemma",
+        "title": "The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$",
+        "strategy": "If $\\mu(E)=0$, then $\\mathbf 1_E$ is the zero class in $L^p$, so the induced measure from the previous lemma vanishes on $E$. That is the exact absolute-continuity input needed for Radon-Nikodym.",
+        "deps": [
+          "lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures",
+          "def-bounded-linear-functional-on-l-p-and-its-operator-norm"
+        ]
+      },
+      {
+        "id": "lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities",
+        "kind": "lemma",
+        "title": "On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density",
+        "strategy": "Apply the signed or complex Radon-Nikodym theorem to the induced measure from the previous two lemmas. First identify $\\Lambda$ with integration against the resulting density on indicators and simple functions, then extend to all of $L^p$ by MT-15 density.",
+        "deps": [
+          "lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "cor-finite-complex-measures-admit-integrable-radon-nikodym-densities",
+          "thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ]
+      },
+      {
+        "id": "lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q",
+        "kind": "lemma",
+        "title": "The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$",
+        "strategy": "Use the previous representation on finite-measure spaces and then test the density against truncated extremizers. For $1<q<\\infty$ this reproduces the usual $|g_k|^{q-1}$ argument; for $q=\\infty$ it bounds the essential supremum by the operator norm.",
+        "deps": [
+          "lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities",
+          "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "thm-monotone-convergence-for-the-integral",
+          "def-conjugate-exponents",
+          "prop-essential-supremum-is-attained-as-the-least-essential-bound"
+        ]
+      },
+      {
+        "id": "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+        "kind": "theorem",
+        "title": "On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function",
+        "strategy": "Choose a sigma-finite exhaustion $X_n$. The finite-measure lemmas produce compatible local densities $g_n$; uniqueness on overlaps lets them glue, and monotone or dominated convergence passes the local formula and the norm bound to all of $L^p$.",
+        "deps": [
+          "prop-semifinite-measures-make-l-q-representatives-unique",
+          "lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures",
+          "lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu",
+          "lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities",
+          "lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "thm-dominated-convergence"
+        ]
+      },
+      {
+      "id": "thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity",
+      "kind": "theorem",
+      "title": "For $1 < p < \\infty$, the same representation theorem holds on arbitrary measure spaces",
+      "strategy": "For each sigma-finite measurable $E$, apply the previous theorem to the restricted functional. Under Countable Choice, select countably many near-maximizing sets and witnessing finite-measure exhaustions, take their sigma-finite union, zero-extend its density to $X$, and use the sigma-finite-support lemma to capture every $L^p$ test function.",
+      "deps": [
+        "def-countable-choice",
+        "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+        "lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p",
+        "prop-semifinite-measures-make-l-q-representatives-unique",
+        "def-finite-sigma-finite-and-semifinite-measures",
+        "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm"
+      ]
+      },
+      {
+        "id": "cor-l-p-norm-recovery-by-unit-l-q-pairings",
+        "kind": "corollary",
+        "title": "The $L^p$ norm is the supremum of pairings against unit $L^q$ functions",
+        "strategy": "Combine the easy direction with the representation theorem: Holder gives the upper bound, while the duality theorem supplies a norm-one representing function for the lower bound. The $p=1$ endpoint is kept at the same sigma-finite hypothesis as the preceding theorem.",
+        "deps": [
+          "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+          "thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity"
+        ]
+      },
+      {
+        "id": "cor-ell-p-duality-by-counting-measure",
+        "kind": "corollary",
+        "title": "Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$",
+        "strategy": "Counting measure on $\\mathbb N$ is sigma-finite, and $\\ell^p$ is already identified with $L^p$ of counting measure. Apply the sigma-finite theorem there to recover the usual sequence-space duality concretely.",
+        "deps": [
+          "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+          "rem-ell-p-is-l-p-of-counting-measure"
+        ]
+      },
+      {
+        "id": "rem-the-p-equals-infinity-case-is-recorded-not-proved-here",
+        "kind": "remark",
+        "title": "The $p=\\infty$ case is recorded but not proved here",
+        "strategy": "Keep the boundary honest: the natural map from $L^1$ into bounded functionals on $L^\\infty$ is not onto, but the page does not construct a witness because every standard construction uses Hahn-Banach. Cite the published deferred remark instead.",
+        "deps": [
+          "rem-dual-of-l-infinity"
+        ]
+      },
+      {
+        "id": "rem-duality-as-a-dual-space-statement",
+        "kind": "remark",
+        "title": "Orientation only: the dual-space phrasing of the concrete $L^p$ theorem",
+        "strategy": "This is the one orientation-only remark the design allows. It restates the concrete theorem in the language that the later functional-analysis page will own, without changing the hypotheses or re-proving anything.",
+        "deps": [
+          "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+          "thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity",
+          "rem-the-p-equals-infinity-case-is-recorded-not-proved-here"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.032,
+    "id": "the-duality-of-lp-and-lq-examples",
+    "kind": "B",
+    "category": "measure-theory",
+    "title": "The Duality of $L^p$ and Lq — Examples",
+    "companion": "the-duality-of-lp-and-lq",
+    "requires": [
+      "the-duality-of-lp-and-lq"
+    ],
+    "items": [
+      {
+        "id": "ex-a-power-function-realises-the-duality-norm-on-unit-interval",
+        "kind": "example",
+        "title": "A power function on $(0,1]$ realizes the duality norm on the unit interval",
+        "strategy": "Take $g(x)=x^{-a}$ with $0<a<1/q$, normalize the extremizer $|g|^{q-1}$ explicitly, and compute both norms by one-variable power integrals.",
+        "deps": [
+          "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm"
+        ]
+      },
+      {
+        "id": "ex-the-half-interval-integral-functional-has-norm-two-to-the-minus-one-over-q",
+        "kind": "example",
+        "title": "The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$",
+        "strategy": "Here the representing function is the indicator of $[0,1/2]$. Its $L^q$ norm is $\\lambda([0,1/2])^{1/q}=2^{-1/q}$, with the usual $q=\\infty$ interpretation at $p=1$, so the functional's norm is read off from the A-page norm theorem.",
+        "deps": [
+          "def-countable-choice",
+          "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ]
+      },
+      {
+        "id": "ex-the-dual-of-ell-two-is-ell-two-by-the-counting-measure-pairing",
+        "kind": "example",
+        "title": "Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence",
+        "strategy": "Specialize the counting-measure corollary to $p=q=2$ and spell out the pairing as $a\\mapsto\\sum_n a_n b_n$. This is the clean concrete Hilbert-space case the design asked for, but stated without invoking abstract Hilbert-space Riesz vocabulary.",
+        "deps": [
+          "cor-ell-p-duality-by-counting-measure",
+          "rem-ell-p-is-l-p-of-counting-measure"
+        ]
+      },
+      {
+        "id": "cex-point-evaluation-at-zero-is-not-well-defined-on-l-p-of-unit-interval",
+        "kind": "counterexample",
+        "title": "Point evaluation at $0$ is not well defined on $L^p[0,1]$",
+        "strategy": "Change a representative of the zero $L^p$ class at the single point $0$. The two representatives define different evaluation values, so point evaluation does not descend to an $L^p$ class.",
+        "deps": [
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ]
+      },
+      {
+        "id": "cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality",
+        "kind": "counterexample",
+        "title": "The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality",
+        "strategy": "Build the countable-cocountable measure directly, then use Chebyshev-Markov to force every $L^1$ representative to vanish off an at most countable set while $L^\\infty$ still contains distinct bounded representatives.",
+        "deps": [
+          "def-countable-choice",
+          "def-sigma-algebra",
+          "def-measure",
+          "thm-countable-union-of-countable",
+          "lem-subset-of-countable",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-l-infinity-on-a-measure-space",
+          "def-l-one-of-a-measure",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ]
+      },
+      {
+        "id": "rem-a-bounded-functional-on-l-infinity-of-unit-interval-need-not-come-from-l-one",
+        "kind": "remark",
+        "title": "A bounded functional on $L^\\infty[0,1]$ need not come from $L^1[0,1]$",
+        "strategy": "Record the Folland-Hunter boundary witness as a citation-only remark: extend point evaluation from $C([0,1])$ to $L^\\infty([0,1])$ by Hahn-Banach, and note that no $L^1$ density can produce it. This item is source-cited and proved_here=false at authoring.",
+        "deps": [
+          "rem-the-p-equals-infinity-case-is-recorded-not-proved-here"
+        ]
+      }
+    ]
+  }
+]
