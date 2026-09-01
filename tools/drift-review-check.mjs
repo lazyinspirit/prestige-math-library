@@ -24,7 +24,8 @@
 //     run still stops — the point of the stop has moved from "an owner must
 //     decide" to "nobody decided".
 //   - AN APPLIED EDGE IS NOT TRUE OF `plan-spec.json`, points forward, or leaves
-//     either page of an owed pair at or below 95% published external requires.
+//     either page of an owed pair at or below 95% published same-category
+//     requires. Cross-category edges do not serialize category roots.
 //
 // THE LAST CLAUSE, AND WHY IT IS NOT OPTIONAL. This gate began as a pure prose
 // check over a stage whose whole purpose is to MUTATE THE PLAN, so it could
@@ -113,9 +114,10 @@ for (const [i, heading] of reportHeadings.entries()) {
 }
 const reviewedOwed = owed.filter((id) => !mintedOrRescoped.has(id));
 
-// Buildability is page-local: strictly more than 95% of each page's external
-// `requires` must already be published. Only the edge to its A/B partner is
-// internal. A page merely added to this run is not already published.
+// Buildability is page-local: strictly more than 95% of each page's
+// same-category `requires` must already be published. The A/B partner and
+// cross-category edges do not serialize the frontier. A page merely added to
+// this run is not already published.
 const specPath = 'research/plan-spec.json';
 if (!existsSync(specPath)) {
   console.error(`ERROR drift-check-no-spec: ${specPath} does not exist`);
@@ -180,7 +182,7 @@ const idsWithOrder = (detail) =>
 for (const id of owedPages) {
   const page = pageById.get(id);
   if (!page) { errors.push(`drift-check-unknown-page: ${id} is owed but absent from ${specPath}`); continue; }
-  const metric = pageBuildability(page, partnerById.get(id), published);
+  const metric = pageBuildability(page, partnerById.get(id), published, pageById);
   edgesChecked += metric.dependencyCount;
   if (metric.buildable) continue;
   for (const req of metric.unpublishedDependencies) {
@@ -188,7 +190,7 @@ for (const id of owedPages) {
     errors.push(`drift-check-unbuildable-edge: ${id} requires \`${req}\`, which is `
       + (target ? `planned (order ${target.order}) but not published`
                 : 'not a page in the plan at all')
-      + ` — only ${metric.publishedCount}/${metric.dependencyCount} external dependencies are published; `
+      + ` — only ${metric.publishedCount}/${metric.dependencyCount} same-category dependencies are published; `
       + 'the page needs a share strictly greater than 95%');
   }
 }
@@ -281,4 +283,4 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(`drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, no blocked edges; `
-  + `${edgesChecked} external requires edge(s) checked, every owed A and B page strictly above 95% published`);
+  + `${edgesChecked} same-category requires edge(s) checked, every owed A and B page strictly above 95% published`);

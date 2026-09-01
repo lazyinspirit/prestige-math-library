@@ -276,7 +276,7 @@ export function step6Stages(d: any) {
         if (!existsSync(contract)) {
           return {
             role: 'beta', label: `author-recover-${unit}`,
-            job: 'authoring', covers: [unit], brief: 'briefs/authoring.md',
+            job: 'authoring', covers: [], brief: 'briefs/authoring.md',
             task: [`research/${ctx.run}-beta-${unit}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
             timeout: 21600,
           };
@@ -284,14 +284,15 @@ export function step6Stages(d: any) {
         if (readerFindingsNeedRecovery(ctx, unit)) {
           return {
             role: 'reader', label: `reader-recover-${unit}`,
-            job: 'audit', covers: [unit], brief: 'briefs/reader.md',
+            job: 'audit', covers: [], brief: 'briefs/reader.md',
             task: 'briefs/tasks/reader.md', outputSchema: 'briefs/schemas/reader-findings.json',
             resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
             timeout: 14400,
           };
         }
+        const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
         const recovered = ['beta-author-recover', 'reader-reader-recover']
-          .some((prefix) => existsSync(join(ctx.dispatchDir, `${prefix}-${unit}.result.json`)));
+          .some((prefix) => existsSync(join(dispatchDir, `${prefix}-${unit}.result.json`)));
         return {
           role: 'tool', label: `split-${unit}${recovered ? '-recovered' : ''}`,
           job: 'bookkeeping-mechanical', covers: [unit],

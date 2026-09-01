@@ -69,6 +69,10 @@ test('refuter collection precedes Alpha and all outputs are gated', () => {
   assert.ok(finalGates.includes('step6-routing-final'));
   assert.ok(finalGates.includes('step6-ledger-valid'));
   assert.ok(finalGates.includes('validate-plan'));
+  mkdirSync(join(ordinaryCtx.repo, 'research'), { recursive: true });
+  writeFileSync(join(ordinaryCtx.repo, 'research', 'r-batch-2.proof-contracts.json'), '{}\n');
+  writeFileSync(join(ordinaryCtx.repo, 'research', 'r-reader-findings-2.json'),
+    JSON.stringify({ batch: '2', findings: [] }));
   const split = byId('6a-split').plan({ ...ordinaryCtx, run: 'r' }, ['2'])[0];
   assert.deepEqual(split.argv,
     ['node', 'tools/step6-scope.mjs', 'post-reader', '--run', 'r', '--batch', '2']);
@@ -108,6 +112,7 @@ test('split routes invented carrier ids and wrong batch identity to reader recov
     const plan = splitStage.plan({ run: 'r', repo: root, dispatchDir: join(root, 'dispatch') }, ['1'])[0];
     assert.equal(plan.role, 'reader');
     assert.equal(plan.label, 'reader-recover-1');
+    assert.deepEqual(plan.covers, []);
     assert.equal(plan.resultArtifact, 'research/r-reader-findings-1.json');
 
     writeFileSync(join(root, 'research', 'r-reader-findings-1.json'), JSON.stringify({

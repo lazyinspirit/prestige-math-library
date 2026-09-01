@@ -190,6 +190,20 @@ test('an empty ledger fails rather than making every report complete', () => {
 // it is strict: exactly 95% fails, and merely putting the dependency in this run
 // does not make it already published.
 
+test('an unpublished cross-category edge does not serialize the Stage-1 frontier', () => {
+  const specPages = [
+    ...SPEC_PAGES.map((p) => ({ ...p, category: 'current' })),
+    { id: 'foreign-page', kind: 'A', category: 'other', order: 5, requires: [] },
+  ].map((p) => p.id === 'beta-page' ? { ...p, requires: ['foreign-page'] } : p);
+  const dir = fixture(PAGES, [
+    '### alpha-page', 'VERDICT: no-drift',
+    '### beta-page', 'VERDICT: no-drift',
+  ].join('\n'), { specPages, published: [] });
+  const r = check(dir);
+  assert.equal(r.status, 0, r.stderr);
+  rmSync(dir, { recursive: true, force: true });
+});
+
 test('one unpublished dependency out of 21 remains above the Stage-1 threshold', () => {
   const published = Array.from({ length: 20 }, (_, i) => `dep-${i + 1}`);
   const dir = fixture(PAGES, [
@@ -219,7 +233,7 @@ test('exactly 95 percent fails even when the unpublished dependency is built by 
   const r = check(dir);
   assert.equal(r.status, 1);
   assert.match(r.stderr, /drift-check-unbuildable-edge: beta-page requires `alpha-page`/);
-  assert.match(r.stderr, /only 19\/20 external dependencies are published/);
+  assert.match(r.stderr, /only 19\/20 same-category dependencies are published/);
   rmSync(dir, { recursive: true, force: true });
 });
 

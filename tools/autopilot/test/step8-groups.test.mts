@@ -853,6 +853,9 @@ test('every stage pattern matches the result file its own plan produces', () => 
     try { plans = s.plan(ctx, s.units(ctx).map(String)) ?? []; } catch { continue; }
     for (const p of plans) {
       if (!p?.role || !p?.label) continue;
+      // Preparatory recovery dispatches repair an input artifact and declare
+      // no coverage. The subsequent tool dispatch is what satisfies the stage.
+      if (Array.isArray(p.covers) && p.covers.length === 0) continue;
       // A mechanical rider is exempt: `9-scope` plans a `tool` snapshot in front
       // of its Alpha so the ordering is guaranteed, and that snapshot is
       // deliberately not what satisfies an agent stage's coverage.

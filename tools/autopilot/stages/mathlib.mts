@@ -2153,14 +2153,17 @@ export const stages = [
             if (malformed) {
               return {
                 role: 'refuter', label: `refute-recover-${unit}`,
-                job: 'refutation', covers: [unit], brief: 'briefs/refuter.md',
+                // Recovery repairs the input artifact. Only the following
+                // collect tool may cover this mechanical stage.
+                job: 'refutation', covers: [], brief: 'briefs/refuter.md',
                 task: 'briefs/tasks/refuter-untouched.md',
                 outputSchema: 'briefs/schemas/refute-report.json',
                 resultArtifact: `research/${ctx.run}-refute-${unit}.json`,
                 timeout: 10800,
               };
             }
-            const recovered = existsSync(join(ctx.dispatchDir,
+            const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
+            const recovered = existsSync(join(dispatchDir,
               `refuter-refute-recover-${unit}.result.json`));
             return {
               role: 'tool', label: `collect-${unit}${recovered ? '-recovered' : ''}`,
@@ -2185,7 +2188,9 @@ export const stages = [
           if (!existsSync(contract)) {
             return {
               role: 'beta', label: `author-recover-${unit}`,
-              job: 'authoring', covers: [unit], brief: 'briefs/authoring.md',
+              // Preparation only: the split tool still owes this unit after
+              // the missing contract is restored.
+              job: 'authoring', covers: [], brief: 'briefs/authoring.md',
               task: [`research/${ctx.run}-beta-${unit}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
               timeout: 21600,
             };
@@ -2258,15 +2263,18 @@ export const stages = [
             ].join('\n'));
             return {
               role: 'reader', label: `reader-recover-${unit}`,
-              job: 'audit', covers: [unit], brief: 'briefs/reader.md',
+              // Preparation only: repaired findings feed the split tool and
+              // do not themselves satisfy its coverage.
+              job: 'audit', covers: [], brief: 'briefs/reader.md',
               task: recoveryTask, outputSchema: 'briefs/schemas/reader-findings.json',
               resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
               timeout: 14400,
             };
           }
-          const authorRecovered = existsSync(join(ctx.dispatchDir,
+          const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
+          const authorRecovered = existsSync(join(dispatchDir,
             `beta-author-recover-${unit}.result.json`));
-          const readerRecovered = existsSync(join(ctx.dispatchDir,
+          const readerRecovered = existsSync(join(dispatchDir,
             `reader-reader-recover-${unit}.result.json`));
           const suffix = readerRecovered && authorRecovered ? '-reader-recovered'
             : authorRecovered || readerRecovered ? '-recovered' : '';

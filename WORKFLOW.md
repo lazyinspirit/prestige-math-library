@@ -21,9 +21,10 @@ A/B dependency schedule. Its strict wave view shows how publishing one pair can
 unlock later pairs. `frontier --next` instead computes the permanent bounded
 next-run set across every unfinished planned pair, regardless of category. A
 pair qualifies only when both its A page and its B page independently have
-strictly more than 95% of their external `requires` already published; exactly
-95% fails, zero external dependencies qualifies, and only the A<->B partner
-edge is excluded from each page's denominator. Qualifying pairs are capped in
+strictly more than 95% of their same-category `requires` already published;
+exactly 95% fails and zero same-category dependencies qualifies. A<->B partner
+edges and cross-category edges are excluded from each page's denominator, so
+categories remain independent frontier roots. Qualifying pairs are capped in
 deterministic plan order and unpublished prerequisites are not pulled into the
 same run. `plan --pairs next` uses the same selector and is capped at the
 pipeline's 24-pair ceiling. The read-only preview may use a larger explicit
@@ -269,6 +270,12 @@ A failed plan stops at its configured/stage attempt limit and becomes a
 labelled blocker. Gate repair hooks are bounded by `maxFixRounds`; Step 6 instead
 has three tries per named gate/item. Covered work with a missing artifact becomes
 the same bounded `stage-stalemate` failure.
+
+Step-6 artifact-owner recovery dispatches declare empty coverage: they repair
+the malformed or missing reader/refuter/contract input, then the pending split
+or collect tool runs and alone covers the mechanical stage. This keeps a
+successful recovery result from stranding the stage with its output artifact
+still unmaterialized.
 
 A repair hook performs a mechanical fix when one exists and otherwise dispatches
 the responsible cognitive role. Its full fan-out passes launch preflight before

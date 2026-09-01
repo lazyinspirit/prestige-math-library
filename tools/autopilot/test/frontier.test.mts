@@ -50,7 +50,7 @@ test('a pair blocked by a page outside scope is reported, not silently dropped',
   assert.deepEqual(blocked[0].blockedBy, ['elsewhere']);
 });
 
-test('next-run selection considers every category without pulling unpublished prerequisites', () => {
+test('next-run selection considers every category and cross-category edges do not serialize roots', () => {
   const pages = [
     A('foundation', 1, [], 'other'), B('foundation', 1),
     A('target', 3, ['foundation-examples'], 'priority'), B('target', 3),
@@ -58,10 +58,10 @@ test('next-run selection considers every category without pulling unpublished pr
   ];
   const r = repo({ pages });
   const next = nextBuildableSet(r, { maxPairs: 3 });
-  assert.deepEqual(next.pages.map((p) => p.id), ['foundation', 'independent']);
-  assert.deepEqual(next.ineligible.map((p) => p.id), ['target']);
+  assert.deepEqual(next.pages.map((p) => p.id), ['foundation', 'target', 'independent']);
+  assert.deepEqual(next.ineligible.map((p) => p.id), []);
   assert.deepEqual(unsatisfiableEdges(r, next.pages.map((p) => p.id)), []);
-  assert.deepEqual(next.waves.map((wave) => wave.map((p) => p.id)), [['foundation', 'independent']]);
+  assert.deepEqual(next.waves.map((wave) => wave.map((p) => p.id)), [['foundation', 'target', 'independent']]);
 });
 
 test('both pages of a pair must independently clear the threshold', () => {

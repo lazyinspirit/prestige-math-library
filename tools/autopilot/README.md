@@ -50,7 +50,7 @@ notice something.
 | command | does |
 |---|---|
 | `autopilot frontier [--categories a,b]` | what is buildable now, in dependency waves, computed from publication state on disk |
-| `autopilot frontier --next [--max-pairs 24]` | bounded next set across all planned categories; both pages must have strictly more than 95% of external dependencies published |
+| `autopilot frontier --next [--max-pairs 24]` | bounded next set across all planned categories; both pages must have strictly more than 95% of same-category dependencies published |
 | `autopilot plan --run N --pairs a,b` | step 0: pack batches by prerequisite affinity, write manifests, diff the design docs against the spec |
 | `autopilot plan --run N --pairs next` | plan the same all-category, >95%-published next set, capped at 24 pairs |
 | `autopilot start --run N [--detach]` | steps 1 → 10, autonomously |

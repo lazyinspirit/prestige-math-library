@@ -145,9 +145,10 @@ function writeDriftArtifacts(run: string, pages: string[]) {
     '  and its `-examples` companion to `plan-spec.json`, placed so every edge stays',
     '  backward, and record `drift-minted`.',
     '- **Buildability after a finding:** each retained A and B page must still have',
-    '  strictly more than 95% of its external `requires` already published; only',
-    '  the A<->B partner edge is excluded. A dependency added to this run is not',
-    '  thereby published. If an edit would put a page at or below 95%, drop the',
+    '  strictly more than 95% of its same-category `requires` already published.',
+    '  A<->B partner and cross-category edges do not serialize the frontier. A',
+    '  same-category dependency added to this run is not thereby published. If an',
+    '  edit would put a page at or below 95%, drop the',
     '  original pair and record `drift-rescoped`, naming the dependency pairs to',
     '  build instead — at most 24 pairs total.',
     '',
@@ -235,20 +236,20 @@ switch (cmd) {
       const maxPairs = Number(opt('max-pairs', '24'));
       const next = nextBuildableSet(repo, { maxPairs });
       console.log(`${next.pages.length} A/B pair(s) selected from all categories for the next run (cap ${maxPairs})`);
-      console.log('buildable means BOTH pages have strictly more than 95% of external dependencies already published');
+      console.log('buildable means BOTH pages have strictly more than 95% of same-category dependencies already published');
       console.log('');
       next.waves.forEach((wave: any) => {
         console.log(`NEXT SET  (${wave.length} pair${wave.length === 1 ? '' : 's'})`);
         for (const p of wave) {
           console.log(`  ${String(p.order).padStart(8)}  [${p.category}]  ${p.id}`);
           console.log(`            ${p.title}`);
-          console.log(`            published external dependencies: A ${p.buildability.A.publishedCount}/${p.buildability.A.dependencyCount}, B ${p.buildability.B.publishedCount}/${p.buildability.B.dependencyCount}`);
+          console.log(`            published same-category dependencies: A ${p.buildability.A.publishedCount}/${p.buildability.A.dependencyCount}, B ${p.buildability.B.publishedCount}/${p.buildability.B.dependencyCount}`);
         }
         console.log('');
       });
       const bad = unsatisfiableEdges(repo, next.pages.map((p: any) => p.id));
       if (bad.length) die(`internal error: next-run selection has ${bad.length} below-threshold dependency finding(s)`);
-      console.log('dependency check: every selected A and B page is strictly above the 95% publication threshold');
+      console.log('dependency check: every selected A and B page is strictly above the 95% same-category publication threshold');
       if (next.skipped.length) console.log(`${next.skipped.length} buildable pair(s) deferred by the cap`);
       if (next.ineligible.length) console.log(`${next.ineligible.length} unfinished pair(s) are not yet above the threshold on both pages`);
       break;
@@ -305,10 +306,10 @@ switch (cmd) {
         const shown = bad.slice(0, 12).map((b: any) => (b.requires
           ? `  ${b.page}\n      requires ${b.requires} — ${b.why}`
           : `  ${b.page} — ${b.why}`)).join('\n');
-        die(`plan: ${bad.length} unpublished external dependency finding(s) on below-threshold pages.\n${shown}`
+        die(`plan: ${bad.length} unpublished same-category dependency finding(s) on below-threshold pages.\n${shown}`
           + (bad.length > 12 ? `\n  … and ${bad.length - 12} more` : '')
-          + '\n\nEach A and B page is buildable only when strictly more than 95% of its external'
-          + '\ndependencies are already PUBLISHED. Only the A<->B partner edge is excluded.'
+          + '\n\nEach A and B page is buildable only when strictly more than 95% of its same-category'
+          + '\ndependencies are already PUBLISHED. Partner and cross-category edges are excluded.'
           + '\nPublication state is the `status:` line in the file, never the git log —'
           + '\na predecessor run is commonly published on disk hours before it is committed.'
           + '\n\nRun `autopilot frontier --next`, or publish more predecessors first.'

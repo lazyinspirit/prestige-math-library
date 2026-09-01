@@ -8,9 +8,9 @@
 // THE FRONTIER. The complete future schedule is the strict dependency-wave
 // view. The bounded NEXT set has a different permanent predicate: consider
 // every unfinished planned A/B pair, regardless of category, and include it
-// only when BOTH pages have strictly more than 95% of their external
-// dependencies already published. The A<->B partner edge is internal and is
-// the only edge excluded from each page's denominator. Both views read
+// only when BOTH pages have strictly more than 95% of their same-category
+// dependencies already published. A<->B partner edges and cross-category
+// edges do not serialize the frontier. Both views read
 // PUBLICATION STATE on disk, never a page count or remembered position.
 //
 // THE BATCHING. Pack A pages to the cap by prerequisite affinity so that
@@ -52,9 +52,9 @@ export function pageStatus(repo: string): Map<string, string> {
 }
 
 /**
- * The unpublished external edges belonging to proposed pages that fail the
- * permanent >95%-published predicate. A qualifying page's permitted residual
- * is not unsatisfiable and therefore does not appear here.
+ * The unpublished same-category edges belonging to proposed pages that fail
+ * the permanent >95%-published predicate. A qualifying page's permitted
+ * residual is not unsatisfiable and therefore does not appear here.
  *
  * THE SAME PREDICATE `drift-review-check` ENFORCES AT STAGE 1, checked before
  * a single agent is dispatched. On frontier-18 a fourteen-pair set was planned
@@ -88,7 +88,7 @@ export function unsatisfiableEdges(repo: string, pageIds: string[]): any[] {
   for (const id of [...inRun].sort()) {
     const page: any = byId.get(id);
     if (!page) { out.push({ page: id, requires: null, why: 'absent from plan-spec.json' }); continue; }
-    const metric = pageBuildability(page, partner.get(id), published);
+    const metric = pageBuildability(page, partner.get(id), published, byId);
     if (metric.buildable) continue;
     for (const req of metric.unpublishedDependencies) {
       const t: any = byId.get(req);
@@ -96,9 +96,9 @@ export function unsatisfiableEdges(repo: string, pageIds: string[]): any[] {
         page: id,
         requires: req,
         why: t
-          ? `only ${metric.publishedCount}/${metric.dependencyCount} external dependencies are published; `
+          ? `only ${metric.publishedCount}/${metric.dependencyCount} same-category dependencies are published; `
             + `${req} is ${status.has(req) ? `on disk as ${status.get(req)}` : 'not built'}`
-          : `only ${metric.publishedCount}/${metric.dependencyCount} external dependencies are published; `
+          : `only ${metric.publishedCount}/${metric.dependencyCount} same-category dependencies are published; `
             + `${req} is not a page in the plan at all`,
       });
     }
@@ -180,8 +180,9 @@ export function waves(repo: string, { categories = null }: { categories?: string
  *
  * Every unfinished planned A/B pair is considered, regardless of category and
  * without pulling unpublished prerequisites into the run. Both pages must have
- * strictly more than 95% of their own external dependencies already published.
- * Zero external dependencies qualifies. Plan order is the deterministic tie
+ * strictly more than 95% of their own same-category dependencies already
+ * published. Cross-category edges do not serialize category roots. Zero
+ * same-category dependencies qualifies. Plan order is the deterministic tie
  * breaker when the pipeline cap defers otherwise-buildable pairs.
  */
 export function nextBuildableSet(repo: string, {
@@ -205,8 +206,8 @@ export function nextBuildableSet(repo: string, {
   const assessed = unfinished.map((a: any) => {
     const companionId = a.companion ?? `${a.id}-examples`;
     const b: any = byId.get(companionId);
-    const aBuildability = pageBuildability(a, companionId, published);
-    const bBuildability = pageBuildability(b, a.id, published);
+    const aBuildability = pageBuildability(a, companionId, published, byId);
+    const bBuildability = pageBuildability(b, a.id, published, byId);
     return {
       id: a.id, order: a.order, category: a.category, title: a.title,
       requires: a.requires ?? [], companion: companionId,
