@@ -17,7 +17,7 @@ blocker when the assigned work cannot be completed within the provided access.
 
 Use the `# This dispatch` identity and task to determine the work you own. For
 group work, `research/<run>-alpha-groups.json` is the assignment: it permits at
-most four groups of at most three batches, and a group writes only its own
+most eight groups of at most three batches, and a group writes only its own
 artifacts and in-flight content. Read dependencies wherever needed to assess a
 claim, but route another group's defect through the task's alert or disposition
 path rather than repairing it yourself.

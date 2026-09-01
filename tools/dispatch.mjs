@@ -32,20 +32,10 @@ const ROLES = Object.freeze({
   // search tool was off for exactly the lanes whose brief is half source
   // research, and the comment below already records what an unsearching lane
   // does instead: it asserts from memory.
-  // CAP 9, NOT 5 (owner, 2026-08-16). The alpha cap was 3 and each group Alpha
-  // owns at most 3 batches, so a run can legitimately carry nine. Five throttled
-  // the widest legal run into two waves for no stated reason: the 3-and-3 bound
-  // exists for Alpha's attention span, not for Beta's. The reader lane matches
-  // because 6a dispatches one independent reader per batch.
-  //
-  // 9 -> 12 (owner, 2026-08-24), tracking the alpha cap 3 -> 4 by the SAME
-  // arithmetic that set 9: group Alphas x batches per Alpha is the widest legal
-  // run, and that is now 4 x 3. Leaving these at 9 would have throttled the
-  // twelve batches the new alpha cap admits, reintroducing the two-wave stall
-  // the 2026-08-16 raise removed.
-  //
-  beta:         { ...lane('agentic'), sandbox: 'workspace-write', cap: 12, web: true, why: 'one per batch, scaffolds and authors; 4 group Alphas x 3 batches' },
-  reader:       { ...lane('agentic'), sandbox: 'workspace-write', cap: 12, web: true, why: 'independent step-6 audit of a foreign batch, one per batch' },
+  // One Beta or reader owns one batch. The run ceiling is 24 A/B pairs, hence
+  // at most 24 batches; neither lane should add an artificial second wave.
+  beta:         { ...lane('agentic'), sandbox: 'workspace-write', cap: 24, web: true, why: 'one per batch, scaffolds and authors; full 24-batch run width' },
+  reader:       { ...lane('agentic'), sandbox: 'workspace-write', cap: 24, web: true, why: 'independent step-6 audit of a foreign batch; full 24-batch run width' },
   // `web: true` is a required capability. A Codex lane
   // without `tools.web_search` does not fail, it asserts from memory (the failure
   // this file records for the build lanes before 2026-08-11). The flag records
@@ -69,21 +59,17 @@ const ROLES = Object.freeze({
   // exact-hash adjudication ledger. Those three stages stay single-agent by
   // rule, and the rule is in LEVELS.md, not in this number.
   //
-  // CAP 3 -> 4 (owner, 2026-08-24). Two caps multiply into a ceiling on run
-  // width: group Alphas at <=3 batches each, times this cap, is the largest
-  // batch count `alpha-groups.mjs` will accept. At 3 that ceiling was NINE
-  // batches, and frontier-18's fourteen pairs across eight categories need ten
-  // — the packer only pairs within a category, so no legal repacking reaches
-  // nine. The assigning Alpha found a partition with zero cross-group
-  // dependency edges and the gate refused it anyway. 4 x 3 = 12 batches.
-  alpha:        { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
+  // Eight group lanes cover the full 24-batch ceiling while retaining the
+  // <=3-batches-per-Alpha attention bound. Lead-Alpha stages still declare one
+  // unit and remain serial; this number is throughput, not shared-file safety.
+  alpha:        { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 8, web: true, why: 'group Alpha, <=3 batches each; eight groups cover the 24-batch ceiling' },
   // TWO NARROWER ALPHA ROLES (owner, 2026-08-24). Effort and model are ROLE
   // properties, so a stage that wants either to differ needs its own role —
   // exactly as `mechanic` has been a separate role at `medium` since 2026-08-14
   // for the same reason.
   //
-  // THIS DOES NOT WIDEN STEP-3 CONCURRENCY, which was the thing to check before
-  // splitting `3-recheck` off the shared `alpha` budget. A run has N groups (4
+  // THIS DOES NOT DOUBLE STEP-3 CONCURRENCY, which was the thing to check before
+  // splitting `3-recheck` off the shared `alpha` budget. A run has N groups (8
   // here) and a group is in review OR fix OR recheck at any instant, never two.
   // The real peak across those stages is the group count whatever the roles are.
   //
@@ -96,7 +82,7 @@ const ROLES = Object.freeze({
   // `alpha`, one tier down. Owner's call on 3-recheck against my advice: it is
   // the gate on scaffold richness and `scaffold-verdicts` checks that verdicts
   // resolve, not that a fix was mathematically adequate. Recorded, not argued.
-  'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 4, web: true, why: 'scaffold recheck and pathway prose; one effort tier below alpha' },
+  'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 8, web: true, why: 'scaffold recheck and pathway prose; one lane per group at step 3' },
   // The final owner report interprets a mechanically reconciled local evidence
   // packet.  It neither repairs nor researches; disabling web removes a costly
   // source of irrelevant context while the read-only sandbox and structured
@@ -107,15 +93,12 @@ const ROLES = Object.freeze({
   // counts stay comparable with frontiers 15-17 even though its authors are
   // gpt-5.4.
   //
-  // CAP 1 -> 4 (owner, 2026-08-25), because step 8 is now partitioned by group
-  // Alpha rather than run by a single lead. The cap tracks the `alpha` cap by
-  // the same arithmetic it does: one Alpha per <=3 batches, four groups over the
-  // ten batches frontier-18 builds. A cap of 1 under group units would not have
-  // failed — it would have serialised the four groups behind one slot and looked
-  // like slowness rather than a misconfiguration, which is the worse failure.
+  // Step 8 is partitioned by the same group assignment, so this cap tracks the
+  // eight group-Alpha lanes. A lower value would silently serialize disjoint
+  // adjudication groups behind an otherwise legal partition.
   //
   // This cap is a THROUGHPUT limit, not a mutual-exclusion guarantee. The
-  // `alpha` role's cap of 4 has the same character; what makes concurrent
+  // `alpha` role's cap of 8 has the same character; what makes concurrent
   // adjudication safe is that the partition gives each group disjoint items and
   // that `<run>-judge-adjudications.jsonl` is append-only. Two Alphas appending
   // rows for different items do not race; two Alphas rewriting the same file
@@ -125,7 +108,7 @@ const ROLES = Object.freeze({
   // silently discards a real defect and no later gate re-examines it. Keeping it
   // on the model with the longest measured track record here is quality control,
   // not conservatism.
-  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'step-8 fatal-only adjudication, one per group Alpha; held on Sol so fatal counts stay comparable across runs' },
+  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 8, web: true, why: 'step-8 fatal-only adjudication, one per group Alpha; held on Sol so fatal counts stay comparable across runs' },
   // `final-adjudicator` — the independent Step-8 close after an item has used
   // both frozen judge contexts and the owning group Alpha has made the second
   // fatal repair.  It is intentionally a fresh Sol conversation rather than a
@@ -133,7 +116,7 @@ const ROLES = Object.freeze({
   // reasoning and web search are both owner requirements; the task queue and
   // terminal-resolution recorder make its one-item-at-a-time discipline
   // mechanical rather than aspirational.
-  'final-adjudicator': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'max', cap: 4, web: true, requiresTask: true, why: 'Step-8 final adjudication after two fatal contexts; one independent Sol-max agent per affected group, with authoritative web verification' },
+  'final-adjudicator': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'max', cap: 8, web: true, requiresTask: true, why: 'Step-8 final adjudication after two fatal contexts; one independent Sol-max agent per affected group, with authoritative web verification' },
   // `alpha-group-read` — the step-7 pass that reads a group's A/B pairs while the
   // judges are still sweeping (owner, 2026-08-25). Step 7 applies the Terra
   // xhigh profile in the stage table; Step 8 resumes the same conversation
@@ -159,9 +142,9 @@ const ROLES = Object.freeze({
   //
   // No web: everything it reads is on disk. Sourcing belongs to the Beta that
   // authored the page, not to a reader of it.
-  'alpha-group-read': { ...lane('adjudication'), sandbox: 'read-only', effort: 'xhigh', cap: 4, why: 'step-7 reading half of a group Alpha; read-only so it cannot stale a verdict mid-sweep, session resumed at step 8' },
+  'alpha-group-read': { ...lane('adjudication'), sandbox: 'read-only', effort: 'xhigh', cap: 8, why: 'step-7 reading half of a group Alpha; one read-only lane per group, resumed at step 8' },
   // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
-  refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
+  refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: 24, why: 'one independent read-only refuter per batch; returns evidence, never edits' },
 
   // The `supervisor` role was removed 2026-08-16. It existed to take "is the
   // stage done, and what fires next" away from the orchestrator, which was the
@@ -262,7 +245,7 @@ const profileName = option('--profile');
 // /tmp so codex can lay down its PATH helpers without warning.
 const sessionHomeArg = option('--session-home');
 // Resume this conversation instead of starting a new one. The id comes from the
-// step-7 result record, never from `--last`: four group Alphas run at once, so
+// step-7 result record, never from `--last`: group Alphas run at once, so
 // "most recent" is whichever happened to finish last, which is not a group.
 const resumeSession = option('--resume-session');
 const timeoutSec = Number(option('--timeout') ?? 7200);
@@ -852,7 +835,7 @@ const record = {
   //
   // codex prints `session id: <uuid>` on its own stdout at startup. Parsed from
   // there rather than by scanning the rollout directory for the newest file:
-  // four group Alphas share nothing but they do run at once, and "newest
+  // group Alphas share nothing but they do run at once, and "newest
   // rollout" resolves to whichever wrote last, which is not this dispatch. On a
   // resume the id is what we passed in, so it stays stable down the chain.
   //

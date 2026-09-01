@@ -831,7 +831,7 @@ const sessionHome = (ctx, label: string): string =>
 /** The codex conversation a group's step-7 reader created, or null.
  *
  *  Read from that dispatch's own result record. `codex exec resume --last` would
- *  be wrong here: four group Alphas run at once, so "most recent" is whichever
+ *  be wrong here: group Alphas run at once, so "most recent" is whichever
  *  finished last, which is not a group identity. */
 function readSessionId(ctx, label: string): string | null {
   const p = R(ctx, `research/${ctx.run}-dispatch/alpha-group-read-${label}.result.json`);
@@ -1627,7 +1627,7 @@ export const stages = [
     role: 'alpha',
     units: batches,
     pattern: resultPattern('alpha', 'step3-[a-z]+'),
-    concurrency: 4,
+    concurrency: 8,
     // An Alpha group reviews as a unit, so it waits for its own three batches to
     // scaffold — and for nobody else's.
     cohort: alphaCohort,
@@ -1669,7 +1669,7 @@ export const stages = [
     units: batches,
     pattern: resultPattern('beta', 'fix-batch-\\d+'),
     labelFor: (u) => `fix-batch-${u}`,
-    concurrency: 12,
+    concurrency: 24,
     // A batch with no findings still needs a covering result, so the fix task
     // is written for every batch and a Beta with nothing to do says so and
     // exits. Making "no findings" a fast no-op is cheaper than making the
@@ -1702,7 +1702,7 @@ export const stages = [
     // spellings, so a fixed pattern does not reopen a stage that closed at
     // step 3.
     pattern: /^alpha-(?:high-)?recheck-[a-z]+\.result\.json$/,
-    concurrency: 4,
+    concurrency: 8,
     cohort: alphaCohort,
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
@@ -1986,7 +1986,7 @@ export const stages = [
     // The per-batch contract is the durable completion artifact consumed by
     // Step 6, so keep that unit in authoring until the artifact actually lands.
     artifacts: (ctx, u) => `research/${ctx.run}-batch-${u}.proof-contracts.json`,
-    concurrency: 12,
+    concurrency: 24,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
       label: `author-batch-${u}`,
@@ -2341,7 +2341,7 @@ export const stages = [
   // on disk recording it. `alpha-group-read` carries `--sandbox read-only`; its
   // digest reaches disk through `--result-artifact`, which the DISPATCHER writes.
   //
-  // QUOTA. Four Terra group-reader lanes may run concurrently with the Terra
+  // QUOTA. Eight Terra group-reader lanes may run concurrently with the Terra
   // judge sweep, all on the Codex weekly cap. A cap is a ceiling the engine may
   // use, never a quota it must spend: if lanes start dying on a limit, lower
   // `alpha-group-read`'s cap rather than re-spending the loop.
@@ -2362,7 +2362,9 @@ export const stages = [
     // longer name keep it outside this pattern, so a re-read is never mistaken
     // for the unit's own coverage.
     pattern: /^(?:tool-judge-sweep|alpha-group-read-[a-z]+)\.result\.json$/,
-    concurrency: 5,
+    // One judge-sweep controller plus one read-only lane for each of eight
+    // groups. The sweep's own 24-way item pool is independently bounded.
+    concurrency: 9,
     // The judge sweep is a TOOL RUN, not an agent dispatch — judge-sweep.mjs
     // owns its own lane pools, retry semantics and attestation. The A-page ids
     // are computed here rather than in a shell sub-invocation: the first
@@ -2566,7 +2568,7 @@ export const stages = [
     units: batches,
     cohort: alphaCohort,
     pattern: resultPattern('alpha-adjudicate', 'step8-[a-z]+'),
-    concurrency: 4,
+    concurrency: 8,
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
       .map((g: any) => ({

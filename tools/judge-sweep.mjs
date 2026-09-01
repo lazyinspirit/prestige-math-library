@@ -223,14 +223,14 @@ for (const result of await buildCurrentContextHashes(ids, { loader, cachePath: c
   if (!result.ok) throw new Error(result.error);
   currentHashes.set(result.id, { context: result.context, item: result.item });
 }
-// Owner policy, 2026-08-01: cap each judge lane independently. The current
-// Terra remains capped at 14. Under the current singleton lineup that is also
-// the total judge concurrency; see MODEL_CONCURRENCY below.
+// Cap each judge lane independently. The current singleton Terra lineup may
+// use the workflow's full 24-way width; under this lineup that is also total
+// judge concurrency.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
 // Every lane has its own model-named slot directory, so independent pools cannot
 // double-book a cap.
 const MODEL_CONCURRENCY = Object.freeze({
-  [TERRA]: 14,
+  [TERRA]: 24,
 });
 
 // A targeted replay may lower a model's cap without editing the registry.

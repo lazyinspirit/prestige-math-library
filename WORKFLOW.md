@@ -137,6 +137,17 @@ period. It adopts a live external dispatch only when its run, result pattern,
 and covers match the current stage, then reconciles its eventual result into
 state.
 
+The run-level and post-Step-1 batch widths are 24. Thus `3-fix`, `5-author`,
+and the per-batch Step-6 baseline/read/split/refute/collect stages can expose
+all 24 independent batches without an engine-imposed second wave. Group work
+keeps the stricter three-batches-per-Alpha attention bound, so a 24-batch run
+admits at most eight groups and the Step-3, Step-6b, Step-7 reader, and Step-8
+group lanes are capped at eight. `7-judge` admits those eight readers plus its
+one sweep controller, while the sweep has its own 24-call Terra pool. Step 1
+remains capped at 12, and whole-level writers, snapshots, ledger mutators,
+receipts, and other ordering barriers remain serial because their lower caps
+are correctness constraints rather than throughput defaults.
+
 `src/spec.mts` rejects duplicate IDs, missing units/plan/pattern, invalid
 pattern resolvers, non-contiguous pipelines, or a pipelined stage lacking its
 role/cohort contract. Each stage needs nonempty gates or an explanatory

@@ -1231,8 +1231,8 @@ export class Executor {
     // ONE CAP, and it is the real one.
     //
     // `stage.concurrency` mirrors the dispatcher's own lane cap for that role —
-    // beta 12, reader 12, alpha 4 since 2026-08-24, verified against
-    // tools/dispatch.mjs. Those are genuine constraints and the engine should
+    // batch lanes 24 and group lanes 8, verified against tools/dispatch.mjs.
+    // Those are genuine constraints and the engine should
     // respect them. HOW MANY may run is this arithmetic; HOW FAST they may boot
     // is the per-spawn stagger in `start`, and the two are independent: raising
     // a cap without spacing the spawns is what turns width into a stampede.

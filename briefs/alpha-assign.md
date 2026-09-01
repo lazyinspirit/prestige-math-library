@@ -14,7 +14,7 @@ Write a JSON array of objects with `label`, `covers`, and `rationale` fields.
 The validator requires a single lowercase-letter label, a nonempty batch list,
 and a concrete rationale of at least 20 characters.
 
-The partition must cover every actual batch exactly once, use at most four
+The partition must cover every actual batch exactly once, use at most eight
 groups, and give no group more than three batches. Keep a category together
 whenever all of its batches fit in one group. Among valid partitions, minimise
 cross-group dependency edges and prefer mathematically coherent groupings; say

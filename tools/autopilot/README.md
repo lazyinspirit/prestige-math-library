@@ -175,6 +175,11 @@ Three things per-unit progression is **not** allowed to relax:
   too because only one stage is live. In a group it stops doing so: `3-review`
   and `3-recheck` are both Alphas. A pipelined stage must therefore declare
   `role`, and the group budgets that lane once.
+- **Current widths.** The configured run cap and post-Step-1 batch lanes are
+  24. Group lanes are eight because each Alpha may own at most three batches;
+  the Step-7 mixed stage is nine (eight readers plus the sweep controller), and
+  the sweep independently runs at most 24 judge calls. Step 1 stays at 12 and
+  shared-file/barrier stages stay at one.
 - **A dispatch that covers several units.** A group Alpha owns up to three
   batches and its one result file declares coverage of all of them, so it may not
   start until every batch it will claim is finished at the previous stage.

@@ -33,10 +33,10 @@ const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 &
 const run = opt('run');
 const wantFacts = argv.includes('--facts');
 const asJson = argv.includes('--json');
-// The alpha lane cap and the owner's per-Alpha batch bound. Both come from
-// dispatch.mjs / CLAUDE.md; stated once here so a change is a one-line edit.
-// 3 -> 4 (owner, 2026-08-24), tracking the alpha lane cap in dispatch.mjs.
-const MAX_GROUPS = Number(opt('max-groups', '4'));
+// The group-lane cap and the owner's per-Alpha batch bound. A run may contain
+// 24 batches, and no Alpha may own more than three, so eight groups are enough
+// to expose the full legal width without weakening the attention bound.
+const MAX_GROUPS = Number(opt('max-groups', '8'));
 const MAX_BATCHES_PER_GROUP = Number(opt('max-batches', '3'));
 
 if (!run) {
