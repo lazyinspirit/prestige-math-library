@@ -2,7 +2,7 @@
 // autopilot — a deterministic control plane for multi-stage agent pipelines.
 //
 //   autopilot frontier [--categories a,b]      complete future schedule
-//   autopilot frontier --next --priorities a,b dependency-closed next-run scope
+//   autopilot frontier --next                  all-category >95%-published next set
 //   autopilot plan --run <name> --pairs a,b    step 0: batch, manifest, drift-check
 //   autopilot start --run <name> [--detach]    run steps 1..10 with nobody in the loop
 //   autopilot status                           current state, human-readable
@@ -143,10 +143,13 @@ function writeDriftArtifacts(run: string, pages: string[]) {
     '  `order` so the edge points backward, revalidate, record `drift-reordered`.',
     '- **Target not in the spec at all:** MINT it (owner, 2026-08-24). Add the A page',
     '  and its `-examples` companion to `plan-spec.json`, placed so every edge stays',
-    '  backward, and record `drift-minted`. This run then builds that pair.',
-    '- **More than three pages need minting:** the run is aimed above its own',
-    '  foundations. Drop the originals and record `drift-rescoped`, naming the',
-    '  dependency pairs to build instead — at most 24 pairs total.',
+    '  backward, and record `drift-minted`.',
+    '- **Buildability after a finding:** each retained A and B page must still have',
+    '  strictly more than 95% of its external `requires` already published; only',
+    '  the A<->B partner edge is excluded. A dependency added to this run is not',
+    '  thereby published. If an edit would put a page at or below 95%, drop the',
+    '  original pair and record `drift-rescoped`, naming the dependency pairs to',
+    '  build instead — at most 24 pairs total.',
     '',
     'You run BEFORE any Beta, so all three cost one Alpha pass and no authored work.',
     '',
@@ -229,25 +232,25 @@ async function buildExecutor(run?: string) {
 switch (cmd) {
   case 'frontier': {
     if (has('next')) {
-      const priorities = (opt('priorities') ?? opt('categories') ?? '').split(',').map((s: string) => s.trim()).filter(Boolean);
       const maxPairs = Number(opt('max-pairs', '24'));
-      const next = nextBuildableSet(repo, { priorities, maxPairs });
-      console.log(`${next.pages.length} A/B pair(s) selected for the next dependency-closed run (cap ${maxPairs})`);
-      if (priorities.length) console.log(`equal-priority subjects: ${priorities.join(', ')}`);
-      if (next.unknownPriorities.length) console.log(`unknown/empty subjects: ${next.unknownPriorities.join(', ')}`);
+      const next = nextBuildableSet(repo, { maxPairs });
+      console.log(`${next.pages.length} A/B pair(s) selected from all categories for the next run (cap ${maxPairs})`);
+      console.log('buildable means BOTH pages have strictly more than 95% of external dependencies already published');
       console.log('');
-      next.waves.forEach((wave: any, i: number) => {
-        console.log(`RUN WAVE ${i + 1}  (${wave.length} pair${wave.length === 1 ? '' : 's'})`);
+      next.waves.forEach((wave: any) => {
+        console.log(`NEXT SET  (${wave.length} pair${wave.length === 1 ? '' : 's'})`);
         for (const p of wave) {
           console.log(`  ${String(p.order).padStart(8)}  [${p.category}]  ${p.id}`);
           console.log(`            ${p.title}`);
+          console.log(`            published external dependencies: A ${p.buildability.A.publishedCount}/${p.buildability.A.dependencyCount}, B ${p.buildability.B.publishedCount}/${p.buildability.B.dependencyCount}`);
         }
         console.log('');
       });
       const bad = unsatisfiableEdges(repo, next.pages.map((p: any) => p.id));
-      if (bad.length) die(`internal error: next-run selection has ${bad.length} unsatisfied edge(s)`);
-      console.log('dependency check: every prerequisite is published or selected in an earlier run wave');
-      if (next.skipped.length) console.log(`${next.skipped.length} preferred target(s) deferred by the cap or an external blocker`);
+      if (bad.length) die(`internal error: next-run selection has ${bad.length} below-threshold dependency finding(s)`);
+      console.log('dependency check: every selected A and B page is strictly above the 95% publication threshold');
+      if (next.skipped.length) console.log(`${next.skipped.length} buildable pair(s) deferred by the cap`);
+      if (next.ineligible.length) console.log(`${next.ineligible.length} unfinished pair(s) are not yet above the threshold on both pages`);
       break;
     }
     const cats = opt('categories');
@@ -275,14 +278,12 @@ switch (cmd) {
     const pairsArg = opt('pairs');
     let pages;
     if (pairsArg === 'next') {
-      const priorities = (opt('priorities') ?? opt('categories') ?? '').split(',').map((s: string) => s.trim()).filter(Boolean);
       const maxPairs = Number(opt('max-pairs', '24'));
       if (maxPairs > 24) die('plan --pairs next: --max-pairs cannot exceed the pipeline ceiling of 24');
-      const next = nextBuildableSet(repo, { priorities, maxPairs });
-      if (next.unknownPriorities.length) die(`unknown or empty priority subject(s): ${next.unknownPriorities.join(', ')}`);
+      const next = nextBuildableSet(repo, { maxPairs });
       pages = next.pages.map((p: any) => p.id);
       if (!pages.length) die('nothing buildable');
-      console.log(`using dependency-closed next-run selection (${pages.length} pair(s))\n`);
+      console.log(`using all-category >95%-published next-run selection (${pages.length} pair(s))\n`);
     } else if (pairsArg === 'wave1' || !pairsArg) {
       const cats = opt('categories');
       const { waves: w } = waves(repo, { categories: cats ? cats.split(',') : null });
@@ -294,7 +295,7 @@ switch (cmd) {
     }
 
     // REFUSE A PAIR SET THAT CANNOT BE BUILT, before a single agent starts.
-    // This is the same published-or-built-here predicate `drift-review-check`
+    // This is the same >95%-already-published predicate `drift-review-check`
     // enforces at stage 1; running it here turns a three-hour discovery into a
     // two-second one. `--allow-unbuildable` exists so a deliberate experiment
     // is possible, and says on the record that it was deliberate.
@@ -304,12 +305,13 @@ switch (cmd) {
         const shown = bad.slice(0, 12).map((b: any) => (b.requires
           ? `  ${b.page}\n      requires ${b.requires} — ${b.why}`
           : `  ${b.page} — ${b.why}`)).join('\n');
-        die(`plan: ${bad.length} unbuildable \`requires\` edge(s) in this pair set.\n${shown}`
+        die(`plan: ${bad.length} unpublished external dependency finding(s) on below-threshold pages.\n${shown}`
           + (bad.length > 12 ? `\n  … and ${bad.length - 12} more` : '')
-          + '\n\nA page is buildable only when every page it requires is PUBLISHED on disk or built by'
-          + '\nthis same run. Publication state is the `status:` line in the file, never the git log —'
+          + '\n\nEach A and B page is buildable only when strictly more than 95% of its external'
+          + '\ndependencies are already PUBLISHED. Only the A<->B partner edge is excluded.'
+          + '\nPublication state is the `status:` line in the file, never the git log —'
           + '\na predecessor run is commonly published on disk hours before it is committed.'
-          + '\n\nRun `autopilot frontier` and plan its wave 1, or publish the predecessor first.'
+          + '\n\nRun `autopilot frontier --next`, or publish more predecessors first.'
           + '\nPass --allow-unbuildable to plan anyway and own the stage-1 stop.');
       }
     }

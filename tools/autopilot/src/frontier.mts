@@ -5,11 +5,13 @@
 // are deterministic functions of files already on disk, and doing them by hand
 // is how the run picks up its first defect before an agent has even started.
 //
-// THE FRONTIER. A page is buildable when every page in its `requires` is
-// published. Iterating that gives waves. It must be computed from PUBLICATION
-// STATE on disk, never from a page count or a remembered position — a page can
-// exist as a draft, be planned but unbuilt, or be published, and only the third
-// licenses a dependent.
+// THE FRONTIER. The complete future schedule is the strict dependency-wave
+// view. The bounded NEXT set has a different permanent predicate: consider
+// every unfinished planned A/B pair, regardless of category, and include it
+// only when BOTH pages have strictly more than 95% of their external
+// dependencies already published. The A<->B partner edge is internal and is
+// the only edge excluded from each page's denominator. Both views read
+// PUBLICATION STATE on disk, never a page count or remembered position.
 //
 // THE BATCHING. Pack A pages to the cap by prerequisite affinity so that
 // dependency seams fall INSIDE a batch rather than between two. Merging two
@@ -24,6 +26,7 @@
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { pageBuildability } from '../../buildability.mjs';
 
 export function loadPlan(repo: string): any {
   return JSON.parse(readFileSync(join(repo, 'research', 'plan-spec.json'), 'utf8'));
@@ -49,8 +52,9 @@ export function pageStatus(repo: string): Map<string, string> {
 }
 
 /**
- * Every `requires` edge of the proposed pair set that points at a page which is
- * neither published nor built by this run.
+ * The unpublished external edges belonging to proposed pages that fail the
+ * permanent >95%-published predicate. A qualifying page's permitted residual
+ * is not unsatisfiable and therefore does not appear here.
  *
  * THE SAME PREDICATE `drift-review-check` ENFORCES AT STAGE 1, checked before
  * a single agent is dispatched. On frontier-18 a fourteen-pair set was planned
@@ -72,23 +76,30 @@ export function unsatisfiableEdges(repo: string, pageIds: string[]): any[] {
   const published = new Set([...status.entries()].filter(([, s]) => s === 'published').map(([id]) => id));
 
   const inRun = new Set<string>();
+  const partner = new Map<string, string>();
   for (const id of pageIds) {
+    const companionId = byId.get(id)?.companion ?? `${id}-examples`;
     inRun.add(id);
-    inRun.add(byId.get(id)?.companion ?? `${id}-examples`);
+    inRun.add(companionId);
+    partner.set(id, companionId);
+    partner.set(companionId, id);
   }
   const out: any[] = [];
   for (const id of [...inRun].sort()) {
     const page: any = byId.get(id);
     if (!page) { out.push({ page: id, requires: null, why: 'absent from plan-spec.json' }); continue; }
-    for (const req of page.requires ?? []) {
-      if (published.has(req) || inRun.has(req)) continue;
+    const metric = pageBuildability(page, partner.get(id), published);
+    if (metric.buildable) continue;
+    for (const req of metric.unpublishedDependencies) {
       const t: any = byId.get(req);
       out.push({
         page: id,
         requires: req,
         why: t
-          ? `planned (order ${t.order}) but ${status.has(req) ? `on disk as ${status.get(req)}` : 'not built'} and not in this run`
-          : 'not a page in the plan at all',
+          ? `only ${metric.publishedCount}/${metric.dependencyCount} external dependencies are published; `
+            + `${req} is ${status.has(req) ? `on disk as ${status.get(req)}` : 'not built'}`
+          : `only ${metric.publishedCount}/${metric.dependencyCount} external dependencies are published; `
+            + `${req} is not a page in the plan at all`,
       });
     }
   }
@@ -165,111 +176,61 @@ export function waves(repo: string, { categories = null }: { categories?: string
   return { waves: out, blocked };
 }
 
-/** Select a bounded, dependency-closed scope for the next run.
+/** Select the bounded set of independently buildable pairs for the next run.
  *
- * Wave 1 is only the set whose prerequisites are already published. All waves
- * are a future schedule. This selector bridges those meanings: it prefers the
- * requested subjects and pulls in every unbuilt prerequisite pair they need.
+ * Every unfinished planned A/B pair is considered, regardless of category and
+ * without pulling unpublished prerequisites into the run. Both pages must have
+ * strictly more than 95% of their own external dependencies already published.
+ * Zero external dependencies qualifies. Plan order is the deterministic tie
+ * breaker when the pipeline cap defers otherwise-buildable pairs.
  */
 export function nextBuildableSet(repo: string, {
-  priorities = [], maxPairs = 24,
-}: { priorities?: string[]; maxPairs?: number } = {}): any {
+  maxPairs = 24,
+}: { maxPairs?: number } = {}): any {
   if (!Number.isInteger(maxPairs) || maxPairs < 1) throw new Error('maxPairs must be a positive integer');
   const spec = loadPlan(repo);
   const byId = new Map<string, any>(spec.pages.map((p: any) => [p.id, p]));
   const status = pageStatus(repo);
-  const scheduled = waves(repo).waves;
-  const flat = scheduled.flat();
-  const scheduledIds = new Set(flat.map((p: any) => p.id));
-  const waveOf = new Map<string, number>();
-  scheduled.forEach((wave: any[], i: number) => wave.forEach((p: any) => waveOf.set(p.id, i)));
-  const matches = (subject: string, p: any) => p.category === subject;
-  const knownPriorities = priorities.filter((subject) => flat.some((p: any) => matches(subject, p)));
-  const unknownPriorities = priorities.filter((subject) => !flat.some((p: any) => matches(subject, p)));
-  // Round-robin the subjects. Their order is only a stable tie-breaker; no
-  // subject can consume a second preferred target before every peer has had a
-  // chance at its first.
-  const queues = knownPriorities.map((subject) => flat.filter((p: any) => matches(subject, p)));
-  const wanted: any[] = [];
-  const seenWanted = new Set<string>();
-  for (let i = 0; queues.some((q) => i < q.length); i += 1) {
-    for (const q of queues) {
-      const p = q[i];
-      if (p && !seenWanted.has(p.id)) { wanted.push(p); seenWanted.add(p.id); }
-    }
-  }
-  if (!priorities.length) wanted.push(...flat);
-  const selected = new Set<string>();
-  const skipped: any[] = [];
+  const published = new Set([...status.entries()].filter(([, s]) => s === 'published').map(([id]) => id));
+  const unfinished = spec.pages.filter((p: any) => {
+    if (p.kind !== 'A') return false;
+    const companionId = p.companion ?? `${p.id}-examples`;
+    const companion: any = byId.get(companionId);
+    if (!companion) throw new Error(`nextBuildableSet: ${p.id} has no planned companion ${companionId}`);
+    if (status.get(p.id) !== 'published') return true;
+    const deliberatelyOmitted = !status.has(companionId) && !(companion.items ?? []).length;
+    return status.get(companionId) !== 'published' && !deliberatelyOmitted;
+  }).sort((a: any, b: any) => Number(a.order) - Number(b.order) || String(a.id).localeCompare(String(b.id)));
 
-  const pairFor = (id: string): string | null => {
-    const p: any = byId.get(id);
-    if (!p) return null;
-    return p.kind === 'B' ? p.companion : p.id;
-  };
-  const neededFor = (id: string): { ids: Set<string>; blockers: string[] } => {
-    const ids = new Set<string>();
-    const blockers = new Set<string>();
-    const visit = (pid: string) => {
-      if (selected.has(pid) || ids.has(pid)) return;
-      const p: any = byId.get(pid);
-      if (!p || p.kind !== 'A') { blockers.add(pid); return; }
-      for (const req of pairRequires(byId, p)) {
-        if (status.get(req) === 'published') continue;
-        const dep = pairFor(req);
-        if (!dep || !scheduledIds.has(dep)) { blockers.add(req); continue; }
-        visit(dep);
-      }
-      ids.add(pid);
+  const assessed = unfinished.map((a: any) => {
+    const companionId = a.companion ?? `${a.id}-examples`;
+    const b: any = byId.get(companionId);
+    const aBuildability = pageBuildability(a, companionId, published);
+    const bBuildability = pageBuildability(b, a.id, published);
+    return {
+      id: a.id, order: a.order, category: a.category, title: a.title,
+      requires: a.requires ?? [], companion: companionId,
+      buildability: { A: aBuildability, B: bBuildability },
+      buildable: aBuildability.buildable && bBuildability.buildable,
     };
-    visit(id);
-    return { ids, blockers: [...blockers].sort() };
-  };
+  });
+  const eligible = assessed.filter((p: any) => p.buildable);
+  const pages = eligible.slice(0, maxPairs);
+  const skipped = eligible.slice(maxPairs).map((p: any) => ({ id: p.id, reason: 'capacity' }));
 
-  for (const target of wanted) {
-    if (selected.has(target.id)) continue;
-    const need = neededFor(target.id);
-    if (need.blockers.length) {
-      skipped.push({ id: target.id, reason: 'blocked', blockedBy: need.blockers });
-      continue;
-    }
-    const additions = [...need.ids].filter((id) => !selected.has(id));
-    if (selected.size + additions.length > maxPairs) {
-      const room = maxPairs - selected.size;
-      // A closure larger than the run is still actionable: build its earliest
-      // closed prefix now. Global wave order is topological, so every prefix
-      // has all of its selected dependencies before it.
-      additions.sort((a, b) => waveOf.get(a)! - waveOf.get(b)!);
-      additions.slice(0, room).forEach((id) => selected.add(id));
-      skipped.push({ id: target.id, reason: room ? 'capacity-prefix' : 'capacity', needs: additions.length });
-      continue;
-    }
-    additions.forEach((id) => selected.add(id));
-  }
-
-  const pages = flat.filter((p: any) => selected.has(p.id));
-  const selectedWaves: any[][] = [];
-  for (const p of pages) {
-    const n = waveOf.get(p.id)!;
-    if (!selectedWaves[n]) selectedWaves[n] = [];
-    selectedWaves[n].push(p);
-  }
-  // This is an invariant of the selector, not merely a CLI presentation
-  // check. Callers may write manifests directly from this result.
+  // This is an invariant of the selector, not merely a CLI presentation check.
+  // Callers may write manifests directly from this result.
   const bad = unsatisfiableEdges(repo, pages.map((p: any) => p.id));
   if (bad.length) {
-    throw new Error(`nextBuildableSet produced ${bad.length} unsatisfied prerequisite edge(s)`);
+    throw new Error(`nextBuildableSet produced ${bad.length} dependency finding(s) below the >95% threshold`);
   }
-  for (const p of pages) {
-    for (const req of pairRequires(byId, p)) {
-      if (status.get(req) === 'published') continue;
-      const dep = pairFor(req);
-      if (!dep || !selected.has(dep) || waveOf.get(dep)! >= waveOf.get(p.id)!) {
-        throw new Error(`nextBuildableSet did not schedule ${req} before ${p.id}`);
-      }
-    }
-  }
-  return { pages, waves: selectedWaves.filter(Boolean), skipped, priorities: [...priorities], unknownPriorities, maxPairs };
+  return {
+    pages,
+    waves: pages.length ? [pages] : [],
+    skipped,
+    ineligible: assessed.filter((p: any) => !p.buildable),
+    maxPairs,
+  };
 }
 
 /** Transitive `requires` closure of a page, over the plan. */

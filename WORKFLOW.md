@@ -17,25 +17,26 @@ node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts
 ```
 
 `frontier` reads `status:` from page files, not Git history, to return the full
-A/B dependency schedule. Wave 1 contains only pairs whose prerequisites are
-already published; later waves are transitively buildable when their
-predecessors are included in the same run. `frontier --next` turns that schedule
-into a bounded next-run scope: named subjects are equal priorities,
-dependencies from other subjects are pulled in automatically, and output is in
-topological run waves. `plan --pairs next` uses the same selector. `plan`
-refuses a pair set unless each `requires` target is published or built by that
-run; its `next` selector is capped at the pipeline's 24-pair ceiling. The
-read-only `frontier --next` preview may use a larger explicit `--max-pairs` to
-inspect a longer dependency-closed roadmap. `--allow-unbuildable` records an
-intentional stage-1 stop. Planning writes
+A/B dependency schedule. Its strict wave view shows how publishing one pair can
+unlock later pairs. `frontier --next` instead computes the permanent bounded
+next-run set across every unfinished planned pair, regardless of category. A
+pair qualifies only when both its A page and its B page independently have
+strictly more than 95% of their external `requires` already published; exactly
+95% fails, zero external dependencies qualifies, and only the A<->B partner
+edge is excluded from each page's denominator. Qualifying pairs are capped in
+deterministic plan order and unpublished prerequisites are not pulled into the
+same run. `plan --pairs next` uses the same selector and is capped at the
+pipeline's 24-pair ceiling. The read-only preview may use a larger explicit
+`--max-pairs`. `plan` and the Stage-1 drift gate enforce the same threshold;
+`--allow-unbuildable` records an intentional stage-1 stop. Planning writes
 batch manifests, covers, the immutable scope ledger, generated task files, and
 drift-review inputs.
 
 ```bash
 autopilot frontier [--categories category-a,category-b]
-autopilot frontier --next --priorities category-a,category-b [--max-pairs 24]
+autopilot frontier --next [--max-pairs 24]
 autopilot plan --run <run> --pairs <a-page-id,...>
-autopilot plan --run <run> --pairs next --priorities category-a,category-b [--max-pairs 24]
+autopilot plan --run <run> --pairs next [--max-pairs 24]
 autopilot doctor --run <run>
 autopilot start --run <run> --detach
 autopilot status [--run <run>]

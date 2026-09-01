@@ -23,8 +23,8 @@
 //     blocked verdict now means the Alpha declined authority it has, and the
 //     run still stops — the point of the stop has moved from "an owner must
 //     decide" to "nobody decided".
-//   - AN APPLIED EDGE IS NOT TRUE OF `plan-spec.json`, points forward, or names
-//     a page that neither exists nor is built by this run.
+//   - AN APPLIED EDGE IS NOT TRUE OF `plan-spec.json`, points forward, or leaves
+//     either page of an owed pair at or below 95% published external requires.
 //
 // THE LAST CLAUSE, AND WHY IT IS NOT OPTIONAL. This gate began as a pure prose
 // check over a stage whose whole purpose is to MUTATE THE PLAN, so it could
@@ -42,8 +42,9 @@
 // twenty-three pairs of the complex-analysis track that chain through it —
 // discovered only by re-running `frontier`, which nothing does after step 0.
 //
-// An edge to an unbuilt page is not a small error: it is indistinguishable from
-// a correct edge until someone asks whether the target exists.
+// An edge that drops a page below the publication threshold is not a small
+// error: it is indistinguishable from a correct edge until buildability is
+// recomputed from disk.
 //
 // The verdict contract (written into the task template in
 // tools/autopilot/bin/autopilot.mts — change them together):
@@ -64,6 +65,7 @@
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { pageBuildability } from './buildability.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
@@ -77,7 +79,8 @@ if (!existsSync(ledgerPath)) {
   console.error(`ERROR drift-check-no-ledger: ${ledgerPath} does not exist — run \`autopilot plan\``);
   process.exit(1);
 }
-const owed = (JSON.parse(readFileSync(ledgerPath, 'utf8')).pages ?? [])
+const ledgerPages = JSON.parse(readFileSync(ledgerPath, 'utf8')).pages ?? [];
+const owed = ledgerPages
   .filter((p) => p.kind === 'A')
   .map((p) => p.id);
 if (!owed.length) {
@@ -110,8 +113,9 @@ for (const [i, heading] of reportHeadings.entries()) {
 }
 const reviewedOwed = owed.filter((id) => !mintedOrRescoped.has(id));
 
-// What a `requires` edge may point at: a page a reader can already open, or one
-// this run is building. Anything else leaves the citing page unbuildable.
+// Buildability is page-local: strictly more than 95% of each page's external
+// `requires` must already be published. Only the edge to its A/B partner is
+// internal. A page merely added to this run is not already published.
 const specPath = 'research/plan-spec.json';
 if (!existsSync(specPath)) {
   console.error(`ERROR drift-check-no-spec: ${specPath} does not exist`);
@@ -119,10 +123,17 @@ if (!existsSync(specPath)) {
 }
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const pageById = new Map((spec.pages ?? []).map((p) => [p.id, p]));
+const partnerById = new Map();
+for (const page of spec.pages ?? []) {
+  if (page.kind !== 'A') continue;
+  const companionId = page.companion ?? `${page.id}-examples`;
+  partnerById.set(page.id, companionId);
+  partnerById.set(companionId, page.id);
+}
 
 // Page id is the file stem, and `status:` is the only field that decides
-// whether a reader can open it — the same rule the frontier's wave computation
-// uses, so this gate and buildability cannot disagree.
+// whether a reader can open it — the same publication-state input the next-set
+// selector uses, so this gate and buildability cannot disagree.
 const published = new Set();
 const walkLibrary = (dir) => {
   if (!existsSync(dir)) return;
@@ -137,8 +148,10 @@ const walkLibrary = (dir) => {
 };
 walkLibrary('library');
 
-const builtHere = new Set((JSON.parse(readFileSync(ledgerPath, 'utf8')).pages ?? []).map((p) => p.id));
-const satisfiable = (id) => published.has(id) || builtHere.has(id);
+const builtHere = new Set(ledgerPages.map((p) => p.id));
+const owedPages = ledgerPages
+  .filter((p) => p.kind === 'A' || p.kind === 'B')
+  .map((p) => p.id);
 
 const errors = [];
 let applied = 0;
@@ -161,20 +174,22 @@ for (const id of mintedOrRescoped) {
 const idsWithOrder = (detail) =>
   [...detail.matchAll(/`?([a-z0-9][a-z0-9-]*)`?\s*\(order\s*[0-9.]+\)/g)].map((m) => m[1]);
 
-// Every `requires` edge of every page this run owes, not only the ones this
-// report claims to have added. A bad edge from any source has the same effect,
-// and this is the last stage that can see it cheaply.
-for (const id of owed) {
+// Check BOTH pages of every owed pair, not only the A pages for which the Alpha
+// writes report sections. A companion can carry independent prerequisites and
+// therefore has its own denominator.
+for (const id of owedPages) {
   const page = pageById.get(id);
   if (!page) { errors.push(`drift-check-unknown-page: ${id} is owed but absent from ${specPath}`); continue; }
-  for (const req of page.requires ?? []) {
-    edgesChecked += 1;
-    if (satisfiable(req)) continue;
+  const metric = pageBuildability(page, partnerById.get(id), published);
+  edgesChecked += metric.dependencyCount;
+  if (metric.buildable) continue;
+  for (const req of metric.unpublishedDependencies) {
     const target = pageById.get(req);
     errors.push(`drift-check-unbuildable-edge: ${id} requires \`${req}\`, which is `
-      + (target ? `planned (order ${target.order}) but neither published nor built by this run`
+      + (target ? `planned (order ${target.order}) but not published`
                 : 'not a page in the plan at all')
-      + ` — the citing page cannot be built, and neither can anything downstream of it`);
+      + ` — only ${metric.publishedCount}/${metric.dependencyCount} external dependencies are published; `
+      + 'the page needs a share strictly greater than 95%');
   }
 }
 
@@ -266,4 +281,4 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(`drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, no blocked edges; `
-  + `${edgesChecked} requires edge(s) checked, every one published or built by this run`);
+  + `${edgesChecked} external requires edge(s) checked, every owed A and B page strictly above 95% published`);
