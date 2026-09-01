@@ -195,9 +195,13 @@ for (const file of batchFiles) {
   }
 }
 scope.sort();
-for (const row of terminalParsed.latest.values()) {
-  if (!scope.includes(row.id)) error('terminal-resolution-outside-scope', `${row.id}: terminal resolution is outside the supplied manifests`, row.id);
-}
+// The Step-8 terminal ledger is shared by run items and published dependencies
+// repaired while reading them. A valid published-item resolution has no bearing
+// on this manifest's coverage and is closed by `step8-scope published`; treating
+// it as an error here would make the two legitimate closure routes poison each
+// other. Shape/dispatch/currency remain hard-gated by
+// `step8-terminal-resolution check`, while only ids in `scope` can contribute
+// to the coverage calculation below.
 let judgeScope = scope;
 if (judgeTargetsPath) {
   const targetReceipt = loadJson(judgeTargetsPath, 'judge-targets-read');

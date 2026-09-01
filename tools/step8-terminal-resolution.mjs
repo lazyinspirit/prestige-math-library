@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-// step8-terminal-resolution.mjs — exact-hash manual closure after both Step-8
-// rejudge cycles have exhausted.
+// step8-terminal-resolution.mjs — exact-hash terminal closure after both
+// Step-8 rejudge contexts have exhausted.
 //
 // The ordinary closure remains judge -> Alpha adjudication -> repair ->
-// targeted rejudge.  This file is the deliberately narrow terminal exception:
-// after the engine has recorded `repair-exhausted` for `8-rejudge`, the owner or
-// supervising session resolves the blocker directly and records the exact text
-// and context accepted.  It never writes a judge verdict or a judge stamp.
+// targeted rejudge.  After the second confirmed-fatal repair, one independent
+// Sol-max Final Adjudicator per affected group accepts Alpha's repair or repairs
+// it independently, then records the exact text/context here. Legacy owner or
+// session interventions remain parseable for concluded runs. This tool never
+// writes a judge verdict or a judge stamp.
 
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
@@ -15,13 +16,64 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tsxLoader } from './paths.mjs';
 import { loadStep8JudgeEvidence, rejectionKey } from './step8-evidence.mjs';
+import { MODELS } from './models.mjs';
 
 export const TERMINAL_RESOLUTION_VERSION = 2;
 export const TERMINAL_REJUDGE_ROUNDS = 2;
 
 const HASH = /^[a-f0-9]{64}$/;
 const DISPOSITIONS = new Set(['repaired', 'accepted-after-review']);
-const RESOLVERS = new Set(['owner', 'session']);
+const RESOLVERS = new Set(['owner', 'session', 'final-adjudicator']);
+const FA_SOURCE_STATUSES = new Set(['verified', 'familiar']);
+
+function relativeResearchPath(path) {
+  return typeof path === 'string'
+    && /^research\/[A-Za-z0-9._/-]+$/.test(path)
+    && !path.includes('..');
+}
+
+export function finalAdjudicatorQueueProblems(queue, { run, id, group } = {}) {
+  const errors = [];
+  if (queue?.version !== 1 || queue?.stage !== '8-rejudge')
+    errors.push('queue must be version 1 for stage 8-rejudge');
+  if (typeof queue?.run !== 'string' || !queue.run || (run && queue.run !== run))
+    errors.push(`queue run must be ${run ?? 'a nonempty string'}`);
+  if (typeof queue?.group !== 'string' || !queue.group || (group && queue.group !== group))
+    errors.push(`queue group must be ${group ?? 'a nonempty string'}`);
+  if (typeof queue?.dispatch_label !== 'string' || !/^[A-Za-z0-9._-]+$/.test(queue.dispatch_label ?? ''))
+    errors.push('queue dispatch_label must be a plain dispatch label');
+  if (!Array.isArray(queue?.items) || !queue.items.length) {
+    errors.push('queue must contain at least one ordered item');
+    return errors;
+  }
+  const seen = new Set();
+  for (const [index, item] of queue.items.entries()) {
+    if (typeof item?.id !== 'string' || !item.id) errors.push(`queue item ${index + 1} has no id`);
+    else if (seen.has(item.id)) errors.push(`queue item ${item.id} appears more than once`);
+    else seen.add(item.id);
+    if (item?.position !== index + 1) errors.push(`queue item ${item?.id ?? index + 1} must have position ${index + 1}`);
+    if (item?.owner !== queue.group) errors.push(`queue item ${item?.id ?? index + 1} is not owned by group ${queue.group}`);
+  }
+  if (id && !seen.has(id)) errors.push(`queue does not contain ${id}`);
+  return errors;
+}
+
+/** Structural half of the serial-attention rule.  Current-hash checks stay at
+ * the call site because the pure shape is useful to tests and receipt audits. */
+export function finalAdjudicatorPredecessorProblems(queue, id, latest, queueSha256) {
+  const position = queue?.items?.findIndex((item) => item.id === id) ?? -1;
+  if (position < 0) return [`queue does not contain ${id}`];
+  const errors = [];
+  for (const prior of queue.items.slice(0, position)) {
+    const priorRow = latest.get(prior.id);
+    if (priorRow?.resolved_by !== 'final-adjudicator'
+      || priorRow?.final_adjudicator?.queue_sha256 !== queueSha256
+      || priorRow?.final_adjudicator?.queue_position !== prior.position) {
+      errors.push(`queue item ${prior.id} at position ${prior.position} must be resolved before ${id}`);
+    }
+  }
+  return errors;
+}
 
 export function terminalResolutionPath(run) {
   return `research/${run}-step8-terminal-resolutions.jsonl`;
@@ -46,7 +98,7 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
     if (typeof row?.run !== 'string' || !row.run || typeof row?.id !== 'string' || !row.id)
       errors.push(`${where}: run and id are required`);
     if (!RESOLVERS.has(row?.resolved_by))
-      errors.push(`${where}: resolved_by must be owner or session`);
+      errors.push(`${where}: resolved_by must be owner, session, or final-adjudicator`);
     if (!DISPOSITIONS.has(row?.disposition))
       errors.push(`${where}: disposition must be repaired or accepted-after-review`);
     const expectedRounds = legacy ? 3 : TERMINAL_REJUDGE_ROUNDS;
@@ -69,6 +121,25 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
         || !HASH.test(row?.failure_evidence?.closure_sha256 ?? '')
         || !['needs_rejudge', 'unadjudicated', 'open_fatal'].includes(row?.failure_evidence?.unresolved_as))
         errors.push(`${where}: version 2 requires exact per-item cycle ids and hash-bound unresolved closure evidence`);
+    }
+    if (row?.resolved_by === 'final-adjudicator') {
+      const fa = row?.final_adjudicator;
+      if (typeof fa?.group !== 'string' || !fa.group
+        || fa?.model !== MODELS.sol.id || fa?.effort !== 'max'
+        || !relativeResearchPath(fa?.queue_path)
+        || !HASH.test(fa?.queue_sha256 ?? '')
+        || !Number.isInteger(fa?.queue_position) || fa.queue_position < 1
+        || !Number.isInteger(fa?.queue_total) || fa.queue_total < fa.queue_position
+        || typeof fa?.dispatch_label !== 'string' || !/^[A-Za-z0-9._-]+$/.test(fa.dispatch_label)
+        || !FA_SOURCE_STATUSES.has(fa?.source_verification)
+        || !Array.isArray(fa?.authoritative_sources)
+        || fa.authoritative_sources.some((url) => typeof url !== 'string' || !/^https?:\/\//.test(url))) {
+        errors.push(`${where}: final-adjudicator resolution requires group, Sol/max attestation, ordered queue evidence, source status, and authoritative_sources`);
+      } else if (fa.source_verification === 'verified' && !fa.authoritative_sources.length) {
+        errors.push(`${where}: source_verification=verified requires at least one authoritative source URL`);
+      }
+    } else if (row?.final_adjudicator != null) {
+      errors.push(`${where}: only a final-adjudicator resolution may carry final_adjudicator metadata`);
     }
     rows.push(row);
   }
@@ -193,8 +264,9 @@ function value(argv, flag) {
 }
 
 function usage() {
-  console.error('usage: node tools/step8-terminal-resolution.mjs record --run <run> --id <id> --resolved-by owner|session --disposition repaired|accepted-after-review --basis <evidence> [--root <repo>] [--state-dir <dir>]');
-  console.error('       node tools/step8-terminal-resolution.mjs check --run <run> [--root <repo>]');
+  console.error('usage: node tools/step8-terminal-resolution.mjs record --run <run> --id <id> --resolved-by owner|session|final-adjudicator --disposition repaired|accepted-after-review (--basis <evidence> | --basis-file <file>) [--root <repo>] [--state-dir <dir>]');
+  console.error('       final-adjudicator additionally requires --group <label> --queue <research/...json> --source-status verified|familiar');
+  console.error('       node tools/step8-terminal-resolution.mjs check --run <run> [--root <repo>] [--allow-missing]');
   process.exit(2);
 }
 
@@ -208,7 +280,7 @@ function main() {
   const path = join(root, rel);
 
   if (command === 'check') {
-    const parsed = parseTerminalResolutions(path, { allowMissing: false });
+    const parsed = parseTerminalResolutions(path, { allowMissing: argv.includes('--allow-missing') });
     const errors = [...parsed.errors];
     for (const row of parsed.latest.values()) {
       if (row.run !== run) errors.push(`${row.id}: row run ${row.run} does not match ${run}`);
@@ -245,6 +317,37 @@ function main() {
           errors.push(`${row.id}: cannot verify unresolved closure evidence (${cause.message})`);
         }
       }
+      if (row.resolved_by === 'final-adjudicator' && row.final_adjudicator) {
+        const fa = row.final_adjudicator;
+        try {
+          const queueText = readFileSync(join(root, fa.queue_path), 'utf8');
+          const queueHash = createHash('sha256').update(queueText).digest('hex');
+          if (queueHash !== fa.queue_sha256) errors.push(`${row.id}: final-adjudicator queue changed after resolution`);
+          const queue = JSON.parse(queueText);
+          errors.push(...finalAdjudicatorQueueProblems(queue,
+            { run, id: row.id, group: fa.group }).map((error) => `${row.id}: ${error}`));
+          const position = queue.items?.findIndex((item) => item.id === row.id) ?? -1;
+          if (position + 1 !== fa.queue_position || queue.items?.length !== fa.queue_total)
+            errors.push(`${row.id}: final-adjudicator queue position/total does not match the frozen queue`);
+          errors.push(...finalAdjudicatorPredecessorProblems(queue, row.id, parsed.latest, fa.queue_sha256)
+            .map((error) => `${row.id}: ${error}`));
+          for (const prior of (queue.items ?? []).slice(0, Math.max(0, position))) {
+            const priorRow = parsed.latest.get(prior.id);
+            if (priorRow && String(priorRow.at) > String(row.at))
+              errors.push(`${row.id}: prior queue item ${prior.id} was resolved after this item`);
+          }
+          const resultPath = join(root, 'research', `${run}-dispatch`,
+            `final-adjudicator-${fa.dispatch_label}.result.json`);
+          const dispatch = JSON.parse(readFileSync(resultPath, 'utf8'));
+          if (dispatch.ok !== true || dispatch.role !== 'final-adjudicator'
+            || dispatch.model !== MODELS.sol.id
+            || dispatch.provider_effort !== 'max' || dispatch.requested_effort !== 'max') {
+            errors.push(`${row.id}: ${resultPath} does not attest a successful ${MODELS.sol.id} max final-adjudicator dispatch`);
+          }
+        } catch (cause) {
+          errors.push(`${row.id}: cannot verify final-adjudicator queue/dispatch (${cause.message})`);
+        }
+      }
       try {
         const now = currentHashes(root, row.id);
         if (!terminalResolutionIsCurrent(row, now)) errors.push(`${row.id}: terminal resolution is stale against current item/context`);
@@ -258,8 +361,76 @@ function main() {
   const id = value(argv, '--id');
   const resolvedBy = value(argv, '--resolved-by');
   const disposition = value(argv, '--disposition');
-  const basis = value(argv, '--basis');
+  const basisFile = value(argv, '--basis-file');
+  let basis = value(argv, '--basis');
+  if (basisFile) {
+    try { basis = readFileSync(resolve(root, basisFile), 'utf8'); }
+    catch (cause) { console.error(`cannot read --basis-file ${basisFile}: ${cause.message}`); process.exit(2); }
+  }
   if (!id || !RESOLVERS.has(resolvedBy) || !DISPOSITIONS.has(disposition) || basis.trim().length < 80) usage();
+  let finalAdjudicator = null;
+  if (resolvedBy === 'final-adjudicator') {
+    const group = value(argv, '--group');
+    const queuePath = value(argv, '--queue');
+    const sourceVerification = value(argv, '--source-status');
+    if (!group || !relativeResearchPath(queuePath) || !FA_SOURCE_STATUSES.has(sourceVerification)) usage();
+    let queueText;
+    let queue;
+    try {
+      queueText = readFileSync(join(root, queuePath), 'utf8');
+      queue = JSON.parse(queueText);
+    } catch (cause) {
+      console.error(`cannot read final-adjudicator queue ${queuePath}: ${cause.message}`);
+      process.exit(2);
+    }
+    const queueErrors = finalAdjudicatorQueueProblems(queue, { run, id, group });
+    if (queueErrors.length) {
+      for (const error of queueErrors) console.error(`ERROR ${error}`);
+      process.exit(2);
+    }
+    const position = queue.items.findIndex((item) => item.id === id);
+    const queueSha256 = createHash('sha256').update(queueText).digest('hex');
+    const existing = parseTerminalResolutions(path, { allowMissing: true });
+    if (existing.errors.length) {
+      for (const error of existing.errors) console.error(`ERROR ${error}`);
+      process.exit(2);
+    }
+    const predecessorErrors = finalAdjudicatorPredecessorProblems(queue, id, existing.latest, queueSha256);
+    for (const error of predecessorErrors) {
+      console.error(`ERROR ${id}: ${error}`);
+    }
+    if (predecessorErrors.length) process.exit(1);
+    for (const prior of queue.items.slice(0, position)) {
+      const priorRow = existing.latest.get(prior.id);
+      let current = false;
+      try { current = terminalResolutionIsCurrent(priorRow, currentHashes(root, prior.id)); } catch { current = false; }
+      if (!current) {
+        console.error(`ERROR ${id}: queue item ${prior.id} at position ${prior.position} must remain current before this item`);
+        process.exit(1);
+      }
+    }
+    const authoritativeSources = [...new Set((basis.match(/https?:\/\/[^\s<>"']+/g) ?? [])
+      .map((url) => url.replace(/[)\].,;:]+$/, '')))];
+    if (sourceVerification === 'verified' && !authoritativeSources.length) {
+      console.error('ERROR --source-status verified requires at least one authoritative http(s) URL in the basis evidence');
+      process.exit(2);
+    }
+    finalAdjudicator = {
+      group,
+      model: MODELS.sol.id,
+      effort: 'max',
+      queue_path: queuePath,
+      queue_sha256: queueSha256,
+      queue_position: position + 1,
+      queue_total: queue.items.length,
+      dispatch_label: queue.dispatch_label,
+      source_verification: sourceVerification,
+      authoritative_sources: authoritativeSources,
+    };
+  } else if (value(argv, '--group') || value(argv, '--queue') || value(argv, '--source-status')) {
+    console.error('ERROR FA queue/source flags require --resolved-by final-adjudicator');
+    process.exit(2);
+  }
   const exhausted = terminalEvidence(root, run, id, value(argv, '--state-dir') || '.autopilot');
   const now = currentHashes(root, id);
   const row = {
@@ -275,6 +446,7 @@ function main() {
     context_sha256: now.context_sha256,
     item_sha256: now.item_sha256,
     basis: basis.trim(),
+    ...(finalAdjudicator ? { final_adjudicator: finalAdjudicator } : {}),
     at: new Date().toISOString(),
   };
   appendFileSync(path, `${JSON.stringify(row)}\n`);

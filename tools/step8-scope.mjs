@@ -51,6 +51,7 @@ import { fileURLToPath } from 'node:url';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { MODELS, resolveLineup } from './models.mjs';
+import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step8-terminal-resolution.mjs';
 import {
   exactSetProblems,
   loadStep8JudgeEvidence,
@@ -85,6 +86,7 @@ const scopePath = R('research', `${run}-step8-scope.json`);
 const groupsPath = R('research', `${run}-alpha-groups.json`);
 const judgePath = R('research', `${run}-judge.jsonl`);
 const adjPath = R('research', `${run}-judge-adjudications.jsonl`);
+const terminalPath = R('research', `${run}-step8-terminal-resolutions.jsonl`);
 const closurePath = R('research', `${run}-judge-closure.json`);
 const crossPath = R('research', `${run}-step8-cross-group.jsonl`);
 const alertsPath = R('research', `${run}-step8-alerts.json`);
@@ -620,7 +622,10 @@ if (mode === 'published') {
   const escalated = rows.filter((r) => r.kind === 'escalated');
   const receiptPath = opt('out');
   const pending = { version: 1, run, repaired: [...new Set(repaired.map((row) => row.id).filter(Boolean))],
-    needs_rejudge: [], unadjudicated_rows: [], open_fatal: [], open_fatal_rows: [], escalations: escalated };
+    needs_rejudge: [], unadjudicated_rows: [], open_fatal: [], open_fatal_rows: [],
+    terminal_resolved: [], escalations: escalated };
+  const terminal = parseTerminalResolutions(terminalPath, { allowMissing: true });
+  bad.push(...terminal.errors);
 
   // An escalation is a real disposition and must not be silent: the owner rule
   // reserves deletions, id changes and reading-order changes on published pages,
@@ -669,6 +674,22 @@ if (mode === 'published') {
     if (!existsSync(p)) { bad.push(`repaired row names \`${r.id}\`, which is not an item on disk`); continue; }
     const now = currentHashes.get(r.id);
     if (!now) continue;
+    const terminalRow = terminal.latest.get(r.id);
+    if (terminalRow) {
+      if (!terminalResolutionIsCurrent(terminalRow, {
+        context_sha256: now.context,
+        item_sha256: now.item,
+      })) {
+        bad.push(`\`${r.id}\`: terminal resolution is stale against the current published item`);
+      } else {
+        pending.terminal_resolved.push({
+          id: r.id,
+          resolved_by: terminalRow.resolved_by,
+          disposition: terminalRow.disposition,
+        });
+        continue;
+      }
+    }
     const pair = pairByItem.get(r.found_via);
     let expectedSession = null;
     try {

@@ -243,8 +243,18 @@ verdict.
 `8-preflight` closes non-judge integrity before paid rejudgment. `8-rejudge`
 targets only repaired or stale items and closes only with no stale verdict,
 unadjudicated rejection, or open fatal. The durable receipt caps each item at
-two Step-8 frozen-context cycles; a remaining fatal or unavailable verdict is
-an exact-hash terminal-resolution blocker, never a third automatic cycle.
+two Step-8 frozen-context cycles; there is never a third judge cycle. When the
+second cycle is again confirmed fatal, the owning group Alpha adjudicates and
+repairs it before escalation. The engine then starts one fresh Final
+Adjudicator per affected group: an independent Sol agent at max reasoning with
+web search enabled. Its frozen queue is ordered, and the terminal recorder
+refuses item N until items 1 through N-1 have current exact-hash resolutions.
+For each item the FA follows the library's adopted conventions, verifies any
+unfamiliar mathematics against authoritative web sources, and either accepts
+Alpha's repair or makes and checks an independent repair. The resulting
+exact-hash terminal resolution is closure evidence, not a fabricated judge
+verdict or pass stamp. An exhausted item not licensed by two confirmed-fatal
+Alpha repair cycles remains an explicit owner/session intervention blocker.
 `8-final` has no repair hook, making post-budget currency failures visible.
 
 Step 9 extracts the exact post-Step-8 mathematical delta, judges and

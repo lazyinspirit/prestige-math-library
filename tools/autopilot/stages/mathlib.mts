@@ -879,6 +879,13 @@ const step8GuardGate = (ctx) => gate('step8-guard', ['node', 'tools/step8-guard.
   '--published-repairs', `research/${ctx.run}-step8-published-repairs.jsonl`,
   '--owner-prerequisite-repairs', `research/${ctx.run}-step8-owner-prerequisite-repairs.jsonl`]);
 
+/** Final-adjudicator receipts are accepted by judge closure only after this
+ * gate proves their ordered queue and successful Sol/max dispatch attestation.
+ * Missing is a valid zero-escalation case; malformed or stale is never one. */
+const terminalResolutionGate = (ctx) => gate('step8-terminal-resolutions', [
+  'node', 'tools/step8-terminal-resolution.mjs', 'check', '--run', ctx.run, '--allow-missing',
+]);
+
 const publishedGate = (ctx) => gate('step8-published', ['node', 'tools/step8-scope.mjs',
   'published', '--run', ctx.run, '--out', publishedClosurePath(ctx)]);
 
@@ -919,6 +926,99 @@ function startStep8Group(ctx: any, executor: any, stage: any, plan: any, group: 
     ...(group && sessionId ? { sessionHome: sessionHome(ctx, group), resumeSession: sessionId } : {}),
     ...plan,
   });
+}
+
+function writeFrozenFile(path: string, body: string): void {
+  if (existsSync(path)) {
+    if (readFileSync(path, 'utf8') !== body) throw new Error(`${path}: frozen FA queue/task already exists with different content`);
+    return;
+  }
+  writeFileSync(path, body, { flag: 'wx' });
+}
+
+/** Materialise one deterministic, strictly ordered final-adjudicator queue for
+ * an affected Alpha group.  The terminal recorder reads this same JSON and
+ * refuses position N until positions 1..N-1 have current resolutions. */
+function writeFinalAdjudicatorTask(ctx: any, stage: any, round: number, group: string,
+  assignments: Array<{ id: string; scope: Step8RepairScope; owner: string | null }>): string {
+  const ordered = [...assignments].sort((a, b) => a.id.localeCompare(b.id));
+  const dispatchLabel = `step8-fa-${group}-round-${round}`;
+  const queueRel = `research/${ctx.run}-${dispatchLabel}.json`;
+  const taskRel = `research/${ctx.run}-${dispatchLabel}.task.md`;
+  const stateDir = ctx.config?.stateDir ?? '.autopilot';
+  const queue = {
+    version: 1,
+    run: ctx.run,
+    stage: stage.id,
+    group,
+    round,
+    dispatch_label: dispatchLabel,
+    state_dir: stateDir,
+    items: ordered.map((row, index) => ({ ...row, position: index + 1 })),
+  };
+  const queueBody = `${JSON.stringify(queue, null, 2)}\n`;
+  writeFrozenFile(R(ctx, queueRel), queueBody);
+
+  const lines = [
+    `# Final Adjudicator queue — ${ctx.run}, group ${group}, round ${round}`,
+    '',
+    `This is the exact queue frozen in \`${queueRel}\`. It contains ${ordered.length} item(s).`,
+    'Work in the numbered order below. Do not substantively review the next item until the recorder accepts the current one.',
+    '',
+  ];
+  for (const [index, row] of ordered.entries()) {
+    const position = index + 1;
+    const evidenceRel = `research/${ctx.run}-step8-fa-${group}-${position}-${row.id}.md`;
+    lines.push(
+      `## ${position}. \`${row.id}\` (${row.scope})`,
+      '',
+      `1. Read \`items/${row.id}.md\`, its cited dependencies, pair/page context, proof contract, judge and Alpha evidence, and this group's conventions.`,
+      '2. Independently decide whether the Alpha repair is correct. If unfamiliar or uncertain, use web search and verify against authoritative sources.',
+      `3. Write concrete evidence to \`${evidenceRel}\`, including exact source URLs and what they support, or explain why the mathematics was familiar.`,
+      '4. Either accept the current repair or independently repair it and its directly required local metadata/contracts. Run focused checks.',
+      '5. Record the exact final bytes with exactly one of these commands:',
+      '',
+      '```bash',
+      `node tools/step8-terminal-resolution.mjs record --run ${ctx.run} --id ${row.id} --resolved-by final-adjudicator --group ${group} --queue ${queueRel} --state-dir ${stateDir} --disposition accepted-after-review --source-status verified --basis-file ${evidenceRel}`,
+      `node tools/step8-terminal-resolution.mjs record --run ${ctx.run} --id ${row.id} --resolved-by final-adjudicator --group ${group} --queue ${queueRel} --state-dir ${stateDir} --disposition repaired --source-status verified --basis-file ${evidenceRel}`,
+      '```',
+      '',
+      'Both commands default to `--source-status verified` and require at least one authoritative http(s) URL in the evidence file. Change only that exact word to `familiar` when no external verification was needed.',
+      '',
+    );
+  }
+  writeFrozenFile(R(ctx, taskRel), `${lines.join('\n')}\n`);
+  return taskRel;
+}
+
+/** One fresh FA per affected group. Unknown ownership is a loud blocker rather
+ * than duplicated edits by every group; valid run and published repair scopes
+ * always carry an exact owner before reaching this boundary. */
+function startFinalAdjudicators(ctx: any, executor: any, stage: any, round: number, ids: string[]): number {
+  const assignments = step8RepairAssignments(ctx, ids);
+  const unknown = assignments.filter((row) => row.scope === 'unknown' || !row.owner);
+  for (const row of unknown) {
+    const message = `${row.id}: exhausted fatal repair has no Step-8 group owner; cannot construct an independent FA queue`;
+    if (executor.state?.addBlocker?.(stage.id, message, `step8-fa-owner:${row.id}`))
+      executor.reporter?.notify?.('blocked', message, { stage: stage.id, item: row.id });
+  }
+  let started = 0;
+  for (const group of alphaGroups(ctx).map((row: any) => String(row.label))) {
+    const owned = assignments.filter((row) => row.owner === group);
+    if (!owned.length) continue;
+    const task = writeFinalAdjudicatorTask(ctx, stage, round, group, owned);
+    executor.start(stage, {
+      role: 'final-adjudicator',
+      label: `step8-fa-${group}-round-${round}`,
+      job: 'adjudication',
+      covers: [],
+      brief: 'briefs/final-adjudicator.md',
+      task: [task, 'briefs/tasks/final-adjudicator-step8.md'],
+      timeout: 21600,
+    });
+    started += 1;
+  }
+  return started;
 }
 
 type Step8RepairScope = 'run' | 'published' | 'unknown';
@@ -2780,13 +2880,15 @@ export const stages = [
       // configured judge returned a current verdict" is a statement about work that has
       // happened rather than work that was planned.
       publishedGate(ctx),
+      terminalResolutionGate(ctx),
       closureGate(ctx, { judgeSessionRun: true }),
     ],
     // A rejudge can surface a NEW rejection on repaired text, which needs
     // adjudicating and possibly repairing again. Two distinct frozen contexts
-    // per item are the lifetime ceiling: after that the blocker is resolved by
-    // the owner or supervising session under an exact-hash terminal receipt,
-    // never by a third judge cycle.
+    // per item are the lifetime ceiling: after the second fatal repair, one
+    // independent FA per owning group records exact-hash terminal closure;
+    // other exhaustion remains an explicit owner/session blocker. Neither path
+    // can buy a third judge cycle.
     // The two-context ceiling is PER ITEM and is enforced durably by
     // step8-rejudge-cycle.mjs before it probes or spends a judge call.  Keep
     // this stage's two-round convergence budget re-armable after a supervising
@@ -2794,7 +2896,12 @@ export const stages = [
     // stage-wide counter and strand different items that still have an unused
     // legal cycle (frontier-19).  Re-arming the stage cannot buy a third
     // context for any item because the cycle receipt remains authoritative.
-    maxFixRounds: 2,
+    // Three engine repair passes implement two mathematical cycles plus the
+    // independent close: (1) adjudicate the second judge rejection, (2) let the
+    // owning group Alpha make its second fatal repair, (3) send the exhausted
+    // repaired item to one fresh Sol-max FA for that group. The durable cycle
+    // receipt still forbids a third judge call.
+    maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure, prevRoundAt = null }) => {
       const closure = readClosure(ctx);
       const published = readPublishedClosure(ctx);
@@ -2809,15 +2916,12 @@ export const stages = [
       const publishedContested = [...new Set([...(published?.unadjudicated ?? []), ...(published?.open_fatal ?? [])])];
       const contested = [...new Set([...runContested, ...publishedContested])];
       if (contested.length) {
-        const fatalCounts = fatalAdjudicationCounts(ctx);
-        const exhausted = contested.filter((id) => (fatalCounts.get(id) ?? 0) >= 2);
-        for (const id of exhausted) {
-          const message = `${id}: two distinct frozen contexts were adjudicated confirmed_fatal at Step 8; intervention is required and no third adjudication/rejudge cycle is permitted`;
-          if (executor.state.addBlocker(stage.id, message, `step8-two-fatal:${id}`))
-            executor.reporter.notify('blocked', message, { stage: stage.id, item: id });
-        }
-        const liveContested = contested.filter((id) => !exhausted.includes(id));
-        if (!liveContested.length) return;
+        // A second confirmed-fatal context is no longer an immediate owner
+        // blocker. The owning group Alpha performs the second repair first;
+        // only the resulting exhausted `needs_rejudge` text is independent-FA
+        // material. This preserves judge -> adjudication -> repair as a full
+        // second cycle instead of stopping between adjudication and repair.
+        const liveContested = contested;
         refreshStep8Scope(ctx);
         const liveRunContested = runContested.filter((id) => liveContested.includes(id));
         const livePublishedContested = publishedContested.filter((id) => liveContested.includes(id));
@@ -2868,7 +2972,18 @@ export const stages = [
         // only with ids whose durable per-item budget remains.
         const cycleCounts = rejudgeCycleCounts(ctx);
         const exhausted = owed.filter((id) => (cycleCounts.get(id) ?? 0) >= 2);
-        for (const id of exhausted) {
+        const fatalCounts = fatalAdjudicationCounts(ctx);
+        const faCandidates = exhausted.filter((id) => (fatalCounts.get(id) ?? 0) >= 2);
+        const unresolvedWithoutTwoFatalRepairs = exhausted.filter((id) => !faCandidates.includes(id));
+        // FA review is deliberately isolated from any funded judge fan-out.
+        // It may independently edit an item, so running it alongside a sweep
+        // could stale a sibling's pair context mid-call. Drain these queues,
+        // then let the next battery handle still-eligible owed items.
+        if (faCandidates.length) {
+          startFinalAdjudicators(ctx, executor, stage, round, faCandidates);
+          return;
+        }
+        for (const id of unresolvedWithoutTwoFatalRepairs) {
           const message = `${id}: current repaired text still needs closure after two Step-8 frozen contexts; intervention is required and no third judge cycle is permitted`;
           if (executor.state?.addBlocker?.(stage.id, message, `step8-two-cycle-owed:${id}`))
             executor.reporter?.notify?.('blocked', message, { stage: stage.id, item: id });
@@ -2927,6 +3042,7 @@ export const stages = [
       : [
           step8GuardGate(ctx),
           publishedGate(ctx),
+          terminalResolutionGate(ctx),
           ...repoWide(ctx),
           ...contractGates(ctx, { reviewed: true }),
           ledgerGate(ctx),
@@ -2984,6 +3100,7 @@ export const stages = [
     gates: (ctx) => [
       step8GuardGate(ctx),
       publishedGate(ctx),
+      terminalResolutionGate(ctx),
       closureGate(ctx, { judgeSessionRun: true }),
     ],
   },

@@ -90,7 +90,8 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
     assert.ok(gateIds(id).includes('judge-closure'), `${id} must close its mathematical window`);
   }
   assert.ok(!gateIds('8-close').includes('level-coverage'), 'Step-9 Alpha audit receipt is not available yet');
-  assert.deepEqual(gateIds('8-final'), ['step8-guard', 'step8-published', 'judge-closure']);
+  assert.deepEqual(gateIds('8-final'),
+    ['step8-guard', 'step8-published', 'step8-terminal-resolutions', 'judge-closure']);
   assert.equal(stage('8-final').onGateFailure, undefined, 'final currency cannot trigger another repair/rejudge cycle');
   assert.ok(stages.indexOf(stage('8-close')) < stages.indexOf(stage('8-final')));
   assert.ok(stages.indexOf(stage('8-final')) < stages.indexOf(stage('8-freeze')));

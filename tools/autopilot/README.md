@@ -202,6 +202,18 @@ not from a display-sized tail. At Step 6, a reviewed risk-report residue fans
 out by the existing Alpha-group ownership: disjoint groups repair in parallel,
 while each named item keeps its independent three-try budget.
 
+Step 8 keeps its durable ceiling of two frozen judge contexts per item. If the
+second rejection is confirmed fatal, the owning group Alpha gets the complete
+second adjudication-and-repair pass. Once that repaired text is current but the
+judge budget is exhausted, `8-rejudge` dispatches one fresh `final-adjudicator`
+per affected group. That role is fixed to Sol at max reasoning with web search;
+its generated frozen queue enforces one-item-at-a-time work by refusing to
+record item N before every predecessor. Each FA independently accepts Alpha's
+repair or repairs it, follows library conventions, and records authoritative
+source URLs whenever it had to verify unfamiliar mathematics. Its exact-hash
+terminal receipt can close judge coverage but cannot create a judge verdict or
+pass stamp.
+
 ## Portability
 
 The platform-specific surface is **one config value**, an argv array:
@@ -270,6 +282,9 @@ the engine against a fake pipeline whose agents are scripts, and prove the
 retried exactly once and then blocks, that a vacuous gate stops the run, that
 pause holds and resume releases, that a restart does not redo finished work, and
 that a stage asking a model for mechanical work is refused at dispatch.
+The Step-8 tests additionally pin one Sol/max, web-enabled FA per affected
+group, deterministic serial queues, out-of-order receipt refusal, and terminal
+closure without a fabricated judge verdict.
 
 `test/pipeline.test.mts` covers overlap groups, and every test in it comes in the
 same pair: something starts earlier, and something is still checked over the

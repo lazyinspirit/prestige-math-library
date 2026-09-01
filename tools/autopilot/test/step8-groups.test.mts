@@ -42,6 +42,7 @@ function fixtureRepoWithGroups() {
   const dir = mkdtempSync(join(tmpdir(), 'step8-'));
   mkdirSync(join(dir, 'research'));
   mkdirSync(join(dir, 'tools'));
+  mkdirSync(join(dir, 'briefs', 'tasks'), { recursive: true });
   // Recovery hooks refresh the derived task files before dispatch. These
   // routing tests need only attest that the refresh happened successfully;
   // step8-scope.mjs itself has integration tests against the real repository.
@@ -50,6 +51,16 @@ function fixtureRepoWithGroups() {
     JSON.stringify([{ label: 'a', covers: ['1'] }, { label: 'b', covers: ['2'] }]));
   writeFileSync(join(dir, 'research', 'demo-step8-scope.json'),
     JSON.stringify({ by_item: { 'thm-demo-x': 'a', 'thm-demo-y': 'b' } }));
+  for (const label of ['a', 'b']) {
+    writeFileSync(join(dir, 'research', `demo-alpha-${label}-step8.task.md`),
+      `# Fixture Step 8 task for group ${label}\n\nInspect and resolve only this group's exact assigned rows.\n`);
+  }
+  writeFileSync(join(dir, 'research', 'demo-alpha-step8.task.md'),
+    '# Fixture Step 8 task\n\nInspect and resolve only the exact assigned rows.\n');
+  writeFileSync(join(dir, 'briefs', 'tasks', 'alpha-step8-closure-recovery.md'),
+    '# Fixture closure recovery\n\nAdjudicate every exact rejection row in the envelope.\n');
+  writeFileSync(join(dir, 'briefs', 'tasks', 'alpha-step8-preflight.md'),
+    '# Fixture preflight\n\nRepair every exact integrity failure in the envelope.\n');
   return dir;
 }
 
@@ -195,8 +206,10 @@ test('Step 8 separates repair integrity, judge retries, and final closure', () =
     '9-scope must consume the frozen baseline, not try to recreate it');
 
   const judgeGateIds = rejudge.gates(futureCtx).map((g: any) => g.id);
-  assert.deepEqual(judgeGateIds, ['step8-guard', 'step8-published', 'judge-closure'],
+  assert.deepEqual(judgeGateIds, ['step8-guard', 'step8-published', 'step8-terminal-resolutions', 'judge-closure'],
     'contract/repository repairs cannot consume the two-cycle judge budget');
+  assert.equal(rejudge.maxFixRounds, 3,
+    'two mathematical repair cycles are followed by one independent FA close, without a third judge call');
   assert.equal(rejudge.terminalFixBudget, undefined,
     'the stage-wide repair counter must be re-armable; the durable rejudge-cycle receipt owns the per-item lifetime cap');
   assert.equal(rejudge.maxAttempts, 1, 'a failed funded-lane preflight is not immediately repeated');
@@ -205,7 +218,7 @@ test('Step 8 separates repair integrity, judge retries, and final closure', () =
   assert.ok(!close.gates(futureCtx).some((g: any) => g.id === 'level-coverage'),
     'the full audit receipt is not authored until Step 9');
   assert.deepEqual(final.gates(futureCtx).map((g: any) => g.id),
-    ['step8-guard', 'step8-published', 'judge-closure']);
+    ['step8-guard', 'step8-published', 'step8-terminal-resolutions', 'judge-closure']);
   assert.equal(final.onGateFailure, undefined, 'final currency cannot open a third repair/judge cycle');
   assert.ok(!preflight.terminalFixBudget && !close.terminalFixBudget,
     'non-judge repair rounds have separate budgets');
@@ -218,6 +231,8 @@ test('Step 8 separates repair integrity, judge retries, and final closure', () =
     JSON.stringify({ run: 'demo', ok: true }));
   writeFileSync(join(migratedRepo, '.autopilot', 'state.json'),
     JSON.stringify({ run: 'demo', stages: { '8-rejudge': { gatesPassedAt: '2026-08-25T00:00:00.000Z' } } }));
+  writeFileSync(join(migratedRepo, 'research', 'demo-step8-cutover.json'),
+    JSON.stringify({ version: 1, run: 'demo', mode: 'post-rejudge-frozen' }));
   const migrated = close.gates({ run: 'demo', repo: migratedRepo }).map((g: any) => g.id);
   assert.deepEqual(migrated, ['step8-cutover-frozen'],
     'an already-rejudged run uses its explicit frozen migration instead of retroactively inserting work');
@@ -237,8 +252,9 @@ test('Step-8 preflight adjudicates existing rejection rows before any rejudge', 
   });
   assert.equal(started.length, 1, 'only the owning group is asked to decide the existing row');
   assert.equal(started[0].role, 'alpha-adjudicate');
-  assert.match(started[0].task[0], /step8-recovery\.task\.md$/,
-    'an unadjudicated row receives the exact-row recovery brief, not contract-repair instructions');
+  assert.match(started[0].task[0], /8-preflight-repair-envelope-1-a\.task\.md$/);
+  assert.match(readFileSync(join(repo, started[0].task[0]), 'utf8'), /Fixture closure recovery/,
+    'the exact repair envelope embeds the rejection-recovery brief, not contract-repair instructions');
   assert.ok(!started.some((p) => p.role === 'tool' && p.argv?.includes('tools/judge-sweep.mjs')),
     'preflight must not buy verdicts that the pending repair would immediately stale');
   rmSync(repo, { recursive: true, force: true });
@@ -315,6 +331,64 @@ test('Step-8 rejudge blocks exhausted owed items without stranding eligible page
   assert.match(started[0].argv.join(' '), /--items thm-demo-y(?: |$)/);
   assert.ok(!started[0].argv.join(' ').includes('thm-demo-x'));
   rmSync(repo, { recursive: true, force: true });
+});
+
+test('Step-8 escalates exhausted twice-fatal repairs to one ordered Sol-max FA per group', async () => {
+  const repo = fixtureRepoWithGroups();
+  writeFileSync(join(repo, 'research', 'demo-step8-scope.json'), JSON.stringify({
+    by_item: { 'thm-demo-x': 'a', 'thm-demo-z': 'a', 'thm-demo-y': 'b' },
+  }));
+  const ids = ['thm-demo-z', 'thm-demo-y', 'thm-demo-x'];
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: ids, unadjudicated: [], open_fatal: [], closed: false,
+  }));
+  writeFileSync(join(repo, 'research', 'demo-step8-rejudge-cycles.json'), JSON.stringify({
+    version: 1, run: 'demo', max_cycles_per_item: 2,
+    cycles: ids.flatMap((id) => [1, 2].map((n) => ({ cycle_id: `${id}-${n}`, items: [id] }))),
+  }));
+  writeFileSync(join(repo, 'research', 'demo-judge-adjudications.jsonl'),
+    `${ids.flatMap((id) => [1, 2].map((n) => JSON.stringify({
+      version: 1, id, model: MODELS.terra.id, context_sha256: String(n).repeat(64),
+      outcome: 'confirmed_fatal', rationale: 'The frozen proof contains a fatal mathematical defect.',
+    }))).join('\n')}\n`);
+
+  const started: any[] = [];
+  const s: any = stage('8-rejudge');
+  await s.onGateFailure({
+    ctx: { run: 'demo', repo, config: { stateDir: '.autopilot/demo' } },
+    executor: { start: (_x: any, plan: any) => started.push(plan) },
+    stage: s, round: 3, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
+  });
+
+  assert.equal(started.length, 2, 'three escalated items in two groups produce two FA agents');
+  assert.deepEqual(started.map((plan) => plan.role), ['final-adjudicator', 'final-adjudicator']);
+  assert.deepEqual(started.map((plan) => plan.label), ['step8-fa-a-round-3', 'step8-fa-b-round-3']);
+  assert.ok(started.every((plan) => plan.covers.length === 0), 'FA repair work cannot satisfy stage coverage');
+  const queueA = JSON.parse(readFileSync(join(repo, 'research', 'demo-step8-fa-a-round-3.json'), 'utf8'));
+  const queueB = JSON.parse(readFileSync(join(repo, 'research', 'demo-step8-fa-b-round-3.json'), 'utf8'));
+  assert.deepEqual(queueA.items.map((row: any) => [row.id, row.position]),
+    [['thm-demo-x', 1], ['thm-demo-z', 2]], 'one group shares one deterministic serial queue');
+  assert.deepEqual(queueB.items.map((row: any) => [row.id, row.position]), [['thm-demo-y', 1]]);
+  const taskA = readFileSync(join(repo, 'research', 'demo-step8-fa-a-round-3.task.md'), 'utf8');
+  assert.match(taskA, /Do not substantively review the next item until the recorder accepts the current one/);
+  assert.match(taskA, /--resolved-by final-adjudicator/);
+  assert.match(taskA, /authoritative http\(s\) URL/);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('the final-adjudicator lane is independently pinned to Sol max with web search', () => {
+  const result = spawnSync('node', ['tools/dispatch.mjs',
+    '--role', 'final-adjudicator', '--brief', 'briefs/final-adjudicator.md',
+    '--task', 'briefs/tasks/final-adjudicator-step8.md', '--label', 'fa-test',
+    '--run', 'fa-test', '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const row = JSON.parse(result.stdout);
+  assert.equal(row.role, 'final-adjudicator');
+  assert.equal(row.model, MODELS.sol.id);
+  assert.equal(row.requested_effort, 'max');
+  assert.equal(row.provider_effort, 'max');
+  assert.match(row.command, /tools\.web_search=true/);
+  assert.match(row.prompt, /one item at a time/i);
 });
 
 // Against the live run, because the plan reads the VALIDATED group assignment
@@ -570,6 +644,49 @@ test('step8-scope published accepts the configured model set on the current text
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
+    rmSync(sessionRoot, { recursive: true, force: true });
+  }
+});
+
+test('step8-scope published accepts a current terminal resolution without inventing a verdict', () => {
+  const run = `step8pubterminaltest${process.pid}`;
+  const id = 'lem-cauchy-bounded';
+  const { foundVia, sessionRoot } = installPublishedJudgeSession(run);
+  const built = spawnSync(process.execPath,
+    ['--import', tsxLoader(), 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
+    { cwd: REPO, encoding: 'utf8', timeout: 120_000 });
+  assert.equal(built.status, 0, built.stderr);
+  const hash = JSON.parse(built.stdout);
+  const receipt = join(tmpdir(), `${run}-published-closure.json`);
+  const files = [
+    [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({
+      kind: 'repaired', id, group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64),
+      defect: 'd', correction_basis: 'c',
+    })}\n`],
+    [`${run}-judge.jsonl`, ''],
+    [`${run}-step8-terminal-resolutions.jsonl`, `${JSON.stringify({
+      version: 1, run, stage: '8-rejudge', id, resolved_by: 'session',
+      disposition: 'accepted-after-review', rejudge_rounds_exhausted: 3,
+      exhausted_at: '2026-08-25T07:14:01.895Z', context_sha256: hash.context_sha256,
+      item_sha256: hash.item_sha256,
+      basis: 'A direct terminal review checked the stated domains, dependencies, and adopted conventions against the exact repaired bytes.',
+      at: '2026-08-25T08:00:00.000Z',
+    })}\n`],
+  ];
+  try {
+    for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);
+    const result = spawnSync('node', ['tools/step8-scope.mjs', 'published', '--run', run, '--out', receipt],
+      { cwd: REPO, encoding: 'utf8' });
+    assert.equal(result.status, 0, `${result.stdout}${result.stderr}`);
+    const closure = JSON.parse(readFileSync(receipt, 'utf8'));
+    assert.deepEqual(closure.needs_rejudge, []);
+    assert.deepEqual(closure.terminal_resolved, [{
+      id, resolved_by: 'session', disposition: 'accepted-after-review',
+    }]);
+  } finally {
+    for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
+    rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
+    rmSync(receipt, { force: true });
     rmSync(sessionRoot, { recursive: true, force: true });
   }
 });

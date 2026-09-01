@@ -126,6 +126,14 @@ const ROLES = Object.freeze({
   // on the model with the longest measured track record here is quality control,
   // not conservatism.
   'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'step-8 fatal-only adjudication, one per group Alpha; held on Sol so fatal counts stay comparable across runs' },
+  // `final-adjudicator` — the independent Step-8 close after an item has used
+  // both frozen judge contexts and the owning group Alpha has made the second
+  // fatal repair.  It is intentionally a fresh Sol conversation rather than a
+  // resume of the Alpha: independence is the point of the escalation.  Max
+  // reasoning and web search are both owner requirements; the task queue and
+  // terminal-resolution recorder make its one-item-at-a-time discipline
+  // mechanical rather than aspirational.
+  'final-adjudicator': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'max', cap: 4, web: true, requiresTask: true, why: 'Step-8 final adjudication after two fatal contexts; one independent Sol-max agent per affected group, with authoritative web verification' },
   // `alpha-group-read` — the step-7 pass that reads a group's A/B pairs while the
   // judges are still sweeping (owner, 2026-08-25). Step 7 applies the Terra
   // xhigh profile in the stage table; Step 8 resumes the same conversation
