@@ -1535,7 +1535,7 @@ export const stages = [
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
     pattern: /^beta-(?:beta-)?batch-\d+\.result\.json$/,
     labelFor: (u) => `batch-${u}`,
-    concurrency: 12,
+    concurrency: 24,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
       label: `batch-${u}`,
