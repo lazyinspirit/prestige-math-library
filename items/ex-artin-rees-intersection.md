@@ -2,7 +2,7 @@
 id: ex-artin-rees-intersection
 kind: example
 title: "An explicit Artin-Rees number can be computed for a submodule inside a finite module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-artin-rees-lemma]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

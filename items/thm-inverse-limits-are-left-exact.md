@@ -2,7 +2,7 @@
 id: thm-inverse-limits-are-left-exact
 kind: theorem
 title: "Inverse limits preserve kernels"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-inverse-system-and-inverse-limit-of-modules, thm-universal-property-o
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

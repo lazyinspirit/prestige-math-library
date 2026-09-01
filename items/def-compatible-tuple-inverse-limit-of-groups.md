@@ -2,12 +2,14 @@
 id: def-compatible-tuple-inverse-limit-of-groups
 kind: definition
 title: "The inverse limit is the set of compatible tuples in the Cartesian product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-directed-set-and-inverse-system-of-groups, def-cartesian-product]
+verification:
+  audited: 2026-09-01
 sources:
   scraped: []
   references:

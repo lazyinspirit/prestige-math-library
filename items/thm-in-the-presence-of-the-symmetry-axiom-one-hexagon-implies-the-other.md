@@ -2,7 +2,7 @@
 id: thm-in-the-presence-of-the-symmetry-axiom-one-hexagon-implies-the-other
 kind: theorem
 title: "In the presence of symmetry, one hexagon implies the other"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-symmetric-monoidal-category, thm-the-inverse-braiding-is-a-braiding]
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

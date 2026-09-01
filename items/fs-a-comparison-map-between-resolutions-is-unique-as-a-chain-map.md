@@ -2,7 +2,7 @@
 id: fs-a-comparison-map-between-resolutions-is-unique-as-a-chain-map
 kind: false-statement
 title: "FALSE: a comparison map between resolutions is unique as a chain map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

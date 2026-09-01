@@ -2,7 +2,7 @@
 id: thm-localisations-are-flat
 kind: theorem
 title: "Every localization is flat, and localizing a flat module preserves flatness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-flat-and-faithfully-flat-modules-and-ring-maps, def-localisation-at-a
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

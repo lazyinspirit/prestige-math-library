@@ -2,7 +2,7 @@
 id: def-quotient-seminorm
 kind: definition
 title: "The quotient seminorm \\(\\|x+M\\|_{X/M}=\\inf_{m\\in M}\\|x+m\\|=\\operatorname{dist}(x,M)\\)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-quotient-seminorm-is-representative-independent]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

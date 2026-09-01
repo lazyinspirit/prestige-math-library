@@ -2,7 +2,7 @@
 id: def-separated-and-complete-filtered-module
 kind: definition
 title: "Separated and complete filtered modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-filtration-and-adic-filtration, def-inverse-system-and-inverse-limit-of-modules]
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

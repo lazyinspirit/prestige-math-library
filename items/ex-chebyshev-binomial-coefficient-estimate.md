@@ -2,7 +2,7 @@
 id: ex-chebyshev-binomial-coefficient-estimate
 kind: example
 title: "Factoring a central binomial coefficient to detect interval primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ deps: [lem-central-binomial-coefficient-bounds,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-symmetric-coherence
 kind: theorem
 title: "Symmetric coherence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-parenthesised-tensor-word, def-symmetric-monoidal-category, thm-in-th
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

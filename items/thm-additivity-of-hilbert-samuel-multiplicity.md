@@ -2,7 +2,7 @@
 id: thm-additivity-of-hilbert-samuel-multiplicity
 kind: theorem
 title: "Hilbert-Samuel leading coefficients are additive at the top polynomial degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-hilbert-samuel-multiplicity, thm-artin-rees-lemma, cor-length-is-addi
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

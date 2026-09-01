@@ -2,7 +2,7 @@
 id: def-operator-norm
 kind: definition
 title: "The operator norm as the least bound and as the unit-sphere or unit-ball supremum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-c-prime-one-sixth-means-every-relator-has-length-at-most-six
 kind: false-statement
 title: "FALSE: C prime(1/6) means every relator has length at most six"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-two-syzygies-of-an-object-are-canonically-isomorphic
 kind: false-statement
 title: "FALSE: two syzygies of an object are canonically isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-syzygies-from-two-projective-resolutions-are-stably-isomorphic, def-syzygy-and-cosyzygy-relative-to-a-resolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

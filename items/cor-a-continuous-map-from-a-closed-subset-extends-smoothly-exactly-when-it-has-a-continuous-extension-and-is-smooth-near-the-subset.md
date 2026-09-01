@@ -2,7 +2,7 @@
 id: cor-a-continuous-map-from-a-closed-subset-extends-smoothly-exactly-when-it-has-a-continuous-extension-and-is-smooth-near-the-subset
 kind: corollary
 title: "A continuous map from a closed subset extends smoothly exactly when it has a continuous extension and is smooth near the subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

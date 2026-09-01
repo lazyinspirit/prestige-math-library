@@ -1,7 +1,7 @@
 ---
 page: leaf-reducibility-and-wonderful-families
 title: "Leaf Reducibility and Wonderful Families"
-status: draft
+status: published
 items: [def-wonderful-finite-family, lem-a-vertex-mixed-on-an-anticonnected-set-yields-opposite-adjacency-on-a-nonedge, lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph, lem-the-auxiliary-pattern-has-a-polynomial-homogeneous-set-under-the-source-hypotheses, lem-a-polynomial-homogeneous-set-in-the-auxiliary-pattern-yields-a-y-four-restricted-union, lem-star-or-special-vertex-obstructions-force-wonderfulness, lem-the-e-graph-and-the-bird-graph-are-wonderful]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: cor-induced-and-intrinsic-adic-filtrations-are-equivalent
 kind: corollary
 title: "The filtration induced on a submodule is equivalent to its intrinsic ideal-adic filtration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-artin-rees-lemma]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

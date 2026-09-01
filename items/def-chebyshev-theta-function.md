@@ -2,7 +2,7 @@
 id: def-chebyshev-theta-function
 kind: definition
 title: "Chebyshev's theta function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-prime, def-natural-logarithm]
 justified_by: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-nearest-point-projection-is-the-tubular-retraction-after-shrinking
 kind: proposition
 title: "Nearest-point projection is the tubular retraction after shrinking"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

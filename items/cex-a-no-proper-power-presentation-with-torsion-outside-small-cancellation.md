@@ -2,7 +2,7 @@
 id: cex-a-no-proper-power-presentation-with-torsion-outside-small-cancellation
 kind: counterexample
 title: "No proper-power relators alone do not prevent torsion outside small cancellation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-no-proper-power-relators-alone-implies-torsion-free, cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

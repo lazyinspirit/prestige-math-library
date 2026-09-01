@@ -2,7 +2,7 @@
 id: lem-lift-a-map-through-degree-zero-of-a-projective-resolution
 kind: lemma
 title: "Lifting a map through degree zero of a projective resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-augmentation-preserving-map-of-projective-resolutions, def-projective-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

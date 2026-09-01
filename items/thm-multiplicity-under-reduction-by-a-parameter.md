@@ -2,7 +2,7 @@
 id: thm-multiplicity-under-reduction-by-a-parameter
 kind: theorem
 title: "Modulo a parameter preserves the top Hilbert-Samuel multiplicity up to the finite-annihilator correction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-dimension-and-parameters-for-modules, thm-hilbert-samuel-dimension-th
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-the-braid-category-is-braided-but-not-symmetric
 kind: counterexample
 title: "The braid category is braided but not symmetric"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-braid-category, thm-the-two-strand-braid-group-is-infinite-cyclic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

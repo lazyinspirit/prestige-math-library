@@ -2,7 +2,7 @@
 id: thm-bounded-bilinear-map-equivalences
 kind: theorem
 title: "For a bilinear map, boundedness is equivalent to joint continuity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

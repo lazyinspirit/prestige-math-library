@@ -2,7 +2,7 @@
 id: def-hilbert-samuel-function-and-polynomial
 kind: definition
 title: "The Hilbert-Samuel function and eventual Hilbert-Samuel polynomial of a finite local module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-associated-graded-ring-and-module, def-composition-series-and-length-of-a-module, cor-length-is-additive-in-short-exact-sequences]
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-transversality-homotopy-theorem
 kind: theorem
 title: "The transversality homotopy theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

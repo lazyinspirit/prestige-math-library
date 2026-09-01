@@ -1,7 +1,7 @@
 ---
 page: flatness-and-faithful-flatness
 title: "Flatness and Faithful Flatness"
-status: draft
+status: published
 items: [thm-direct-sums-and-direct-summands-preserve-flatness,
         thm-localisations-are-flat,
         thm-flatness-is-local,

@@ -2,7 +2,7 @@
 id: ex-equivalent-adic-filtrations
 kind: example
 title: "Equivalent adic filtrations have canonically isomorphic completions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-adic-topology-on-a-module, def-adic-completion-of-a-module, thm-unive
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

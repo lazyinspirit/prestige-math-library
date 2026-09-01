@@ -2,7 +2,7 @@
 id: cor-completion-commutes-with-finite-quotients-and-submodules
 kind: corollary
 title: "Completion commutes with finite quotients and induced submodules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-completion-is-exact-on-finite-modules, thm-completion-as-extension-of
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

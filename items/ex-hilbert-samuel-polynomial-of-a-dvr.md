@@ -2,7 +2,7 @@
 id: ex-hilbert-samuel-polynomial-of-a-dvr
 kind: example
 title: "A DVR has Hilbert-Samuel polynomial $n+1$ and multiplicity one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-dvr-ideal-and-module-length, thm-existence-of-hilbert-samuel-polynomi
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-inductive-horseshoe-step
 kind: lemma
 title: "The inductive horseshoe step"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-degree-zero-horseshoe-lift, lem-the-horseshoe-kernel-fits-a-short-exact-sequence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

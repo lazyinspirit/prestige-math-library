@@ -2,7 +2,7 @@
 id: cex-chebyshev-bounds-do-not-give-the-prime-number-theorem
 kind: counterexample
 title: "Two-sided Chebyshev bounds do not imply the prime number theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-chebyshev-prime-counting-bounds]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

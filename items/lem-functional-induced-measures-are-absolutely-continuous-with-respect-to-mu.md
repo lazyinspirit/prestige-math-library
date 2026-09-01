@@ -2,7 +2,7 @@
 id: lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu
 kind: lemma
 title: "The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures, def-bounded-linear-functional-on-l-p-and-its-operator-norm, def-l-p-space-as-a-quotient-by-null-functions]
 proof_strategy: "If $\\mu(E)=0$, then $\\mathbf 1_E$ is the zero class in $L^p$, so the induced set function must vanish on $E$."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   references:

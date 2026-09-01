@@ -2,13 +2,14 @@
 id: rem-the-symmetric-and-braided-coherence-theorems-compare-s-n-with-b-n
 kind: remark
 title: "The symmetric and braided coherence theorems compare S_n with B_n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-symmetric-coherence, thm-braided-coherence-via-underlying-braids, thm-the-braid-group-surjects-onto-the-symmetric-group]
 verification:
+  audited: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

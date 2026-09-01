@@ -2,7 +2,7 @@
 id: def-hilbert-function-and-hilbert-series
 kind: definition
 title: "The Hilbert function and formal Hilbert series of a graded module with finite-length pieces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-graded-ring-and-graded-module, def-composition-series-and-length-of-a-module]
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

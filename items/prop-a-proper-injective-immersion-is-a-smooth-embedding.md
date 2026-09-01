@@ -2,7 +2,7 @@
 id: prop-a-proper-injective-immersion-is-a-smooth-embedding
 kind: proposition
 title: "A proper injective immersion is a smooth embedding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

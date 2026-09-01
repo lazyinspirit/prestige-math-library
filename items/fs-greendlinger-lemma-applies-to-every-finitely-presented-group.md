@@ -2,7 +2,7 @@
 id: fs-greendlinger-lemma-applies-to-every-finitely-presented-group
 kind: false-statement
 title: "FALSE: Greendlinger's lemma holds for every finite presentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-greendlinger-lemma-for-c-prime-one-sixth-presentations, def-group-presentation]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

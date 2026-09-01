@@ -2,7 +2,7 @@
 id: prop-relative-transversality-preserves-a-map-on-a-closed-good-region
 kind: proposition
 title: "Relative transversality preserves a map on a closed good region"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

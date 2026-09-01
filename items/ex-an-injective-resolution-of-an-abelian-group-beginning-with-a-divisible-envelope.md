@@ -2,7 +2,7 @@
 id: ex-an-injective-resolution-of-an-abelian-group-beginning-with-a-divisible-envelope
 kind: example
 title: "An injective resolution of an abelian group beginning with a divisible group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-a-power-function-realises-the-duality-norm-on-unit-interval
 kind: example
 title: "A power function on $(0,1]$ realizes the duality norm on the unit interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm]
 proof_strategy: "Take $g(x)=x^{-a}$ with $0<a<1/q$, normalize the extremizer $|g|^{q-1}$ explicitly, and compute both norms by one-variable power integrals."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-schanuel-lemma-for-two-presentations-of-a-module
 kind: example
 title: "Schanuel's lemma for two presentations of a module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

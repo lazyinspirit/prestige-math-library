@@ -2,7 +2,7 @@
 id: thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category
 kind: theorem
 title: "Monoid objects in a braided monoidal category form a monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-braided-monoidal-category, def-monoid-object-and-comonoid-object-in-a
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

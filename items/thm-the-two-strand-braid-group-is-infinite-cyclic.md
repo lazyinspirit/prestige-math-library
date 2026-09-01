@@ -2,7 +2,7 @@
 id: thm-the-two-strand-braid-group-is-infinite-cyclic
 kind: theorem
 title: "The two-strand braid group is infinite cyclic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-braid-group-by-the-artin-presentation, thm-free-groups-are-torsion-free, thm-von-dyck]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

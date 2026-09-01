@@ -2,13 +2,14 @@
 id: def-braided-monoidal-functor
 kind: definition
 title: "Braided monoidal functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-braided-monoidal-category, def-lax-strong-and-strict-monoidal-functor]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

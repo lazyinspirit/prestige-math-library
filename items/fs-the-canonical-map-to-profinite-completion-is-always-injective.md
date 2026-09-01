@@ -2,7 +2,7 @@
 id: fs-the-canonical-map-to-profinite-completion-is-always-injective
 kind: false-statement
 title: "FALSE: the canonical map to the profinite completion is always injective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion, def-finite-residual-and-residually-finite-group]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

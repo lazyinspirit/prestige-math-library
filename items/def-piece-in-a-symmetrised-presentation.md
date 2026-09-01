@@ -2,13 +2,14 @@
 id: def-piece-in-a-symmetrised-presentation
 kind: definition
 title: "A piece is a common initial segment occurring in two distinct places of a symmetrised relator set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-symmetrisation-of-a-relator-set, def-cyclically-reduced-word]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

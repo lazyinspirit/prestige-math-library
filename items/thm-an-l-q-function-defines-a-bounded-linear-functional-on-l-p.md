@@ -2,7 +2,7 @@
 id: thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p
 kind: theorem
 title: "Every $g\\in L^q(\\mu)$ defines a bounded linear functional on $L^p(\\mu)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-bounded-linear-functional-on-l-p-and-its-operator-norm, def-l-p-space-as-a-quotient-by-null-functions, thm-holder-inequality-for-integrals, thm-the-lebesgue-integral-respects-almost-everywhere-equality, rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: "Use Holder to make the pairing integrable, then use almost-everywhere invariance of the integral to descend from representatives to $L^p$ classes."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   references:

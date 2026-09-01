@@ -2,7 +2,7 @@
 id: cor-sum-of-reciprocals-of-primes-diverges
 kind: corollary
 title: "The sum of the reciprocals of the primes diverges"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-second-mertens-theorem-for-primes]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

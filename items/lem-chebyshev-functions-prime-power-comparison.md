@@ -2,7 +2,7 @@
 id: lem-chebyshev-functions-prime-power-comparison
 kind: lemma
 title: "Psi and theta differ by at most a square-root term"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps: [def-chebyshev-theta-function,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

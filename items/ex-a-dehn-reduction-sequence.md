@@ -2,7 +2,7 @@
 id: ex-a-dehn-reduction-sequence
 kind: example
 title: "A trivial word is reduced to the empty word by successive Dehn moves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dehn-algorithm-solves-the-word-problem, def-dehn-reduced-word-and-dehn-presentation, lem-dehn-replacement-strictly-shortens-a-word]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

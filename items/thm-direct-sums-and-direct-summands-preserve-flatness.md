@@ -2,7 +2,7 @@
 id: thm-direct-sums-and-direct-summands-preserve-flatness
 kind: theorem
 title: "Direct sums and direct summands of flat modules are flat"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-flat-and-faithfully-flat-modules-and-ring-maps, thm-tensor-products-c
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

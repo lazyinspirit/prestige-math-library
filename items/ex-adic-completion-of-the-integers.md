@@ -2,7 +2,7 @@
 id: ex-adic-completion-of-the-integers
 kind: example
 title: "The $p$-adic completion map of the integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-adic-completion-of-a-module, thm-kernel-and-universal-property-of-adi
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

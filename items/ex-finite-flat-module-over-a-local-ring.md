@@ -2,7 +2,7 @@
 id: ex-finite-flat-module-over-a-local-ring
 kind: example
 title: "A residue-field basis lifts to a basis of a finite flat module over a local ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-finite-flat-modules-over-local-rings-are-free]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

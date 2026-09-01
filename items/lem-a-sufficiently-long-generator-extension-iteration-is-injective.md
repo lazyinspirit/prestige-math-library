@@ -2,7 +2,7 @@
 id: lem-a-sufficiently-long-generator-extension-iteration-is-injective
 kind: lemma
 title: "A sufficiently long generator-extension iteration is injective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-extension-from-subobjects-of-a-generator-detects-injectivity, lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps, lem-the-one-step-generator-map-is-a-functorial-monomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-horseshoe-lemma-for-injective-resolutions
 kind: theorem
 title: "The horseshoe lemma for injective resolutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-horseshoe-lemma-for-projective-resolutions, def-injective-resolution-in-an-abelian-category, thm-the-opposite-of-an-abelian-category-is-abelian]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

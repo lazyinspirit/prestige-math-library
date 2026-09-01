@@ -2,7 +2,7 @@
 id: thm-bounded-right-inverse-iff-kernel-is-complemented
 kind: theorem
 title: "Under Dependent Choice, a surjective bounded operator between Banach spaces has a bounded right inverse exactly when its kernel is complemented"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

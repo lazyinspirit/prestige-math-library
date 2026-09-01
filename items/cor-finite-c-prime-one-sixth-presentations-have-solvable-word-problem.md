@@ -2,7 +2,7 @@
 id: cor-finite-c-prime-one-sixth-presentations-have-solvable-word-problem
 kind: corollary
 title: "Finite C prime(1/6) presentations have solvable word problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dehn-algorithm-solves-the-word-problem, thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-a-fine-euclidean-approximation-lands-in-a-prescribed-tubular-neighbourhood
 kind: lemma
 title: "A fine Euclidean approximation lands in a prescribed tubular neighbourhood"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

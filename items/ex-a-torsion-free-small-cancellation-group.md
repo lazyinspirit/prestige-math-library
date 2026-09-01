@@ -2,7 +2,7 @@
 id: ex-a-torsion-free-small-cancellation-group
 kind: example
 title: "A strict C prime(1/6) presentation with no proper-power relators defines a torsion-free group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

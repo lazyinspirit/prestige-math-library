@@ -2,7 +2,7 @@
 id: def-associated-graded-ring-and-module
 kind: definition
 title: "The associated graded ring and associated graded module of an ideal-adic filtration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-graded-ring-and-graded-module]
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

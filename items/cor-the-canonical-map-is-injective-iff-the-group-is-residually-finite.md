@@ -2,7 +2,7 @@
 id: cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite
 kind: corollary
 title: "The canonical map is injective exactly when the group is residually finite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion, def-finite-residual-and-residually-finite-group]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

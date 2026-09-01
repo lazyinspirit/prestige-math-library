@@ -2,7 +2,7 @@
 id: thm-enough-projectives-gives-projective-resolutions
 kind: theorem
 title: "A chosen chain of projective epimorphisms gives a projective resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-resolution-in-an-abelian-category, lem-one-step-extension-of-a-partial-projective-resolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

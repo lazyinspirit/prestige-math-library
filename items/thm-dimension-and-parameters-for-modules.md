@@ -2,7 +2,7 @@
 id: thm-dimension-and-parameters-for-modules
 kind: theorem
 title: "For a finite module, the dimension is the least size of an ideal of definition, and such tuples are systems of parameters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-system-of-parameters-and-parameter-ideal, thm-dimension-as-minimal-nu
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

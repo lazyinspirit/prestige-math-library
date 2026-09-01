@@ -1,7 +1,7 @@
 ---
 page: p-np-conp-and-polynomial-reductions
 title: "P, NP, coNP, and Polynomial Reductions"
-status: draft
+status: published
 items:
   - def-p
   - def-polynomially-balanced-verifier

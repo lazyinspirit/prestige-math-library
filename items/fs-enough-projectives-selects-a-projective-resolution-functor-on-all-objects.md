@@ -2,7 +2,7 @@
 id: fs-enough-projectives-selects-a-projective-resolution-functor-on-all-objects
 kind: false-statement
 title: "FALSE: objectwise projective-resolution choices uniquely determine a resolution functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-enough-projectives-gives-projective-resolutions, thm-free-modules-are-projective-with-choice-boundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

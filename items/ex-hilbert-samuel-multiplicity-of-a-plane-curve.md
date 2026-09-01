@@ -2,7 +2,7 @@
 id: ex-hilbert-samuel-multiplicity-of-a-plane-curve
 kind: example
 title: "The Hilbert-Samuel multiplicity of a plane-curve singularity is read from its associated graded ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-associated-graded-ring-and-module, def-hilbert-samuel-multiplicity, t
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

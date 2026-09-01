@@ -2,7 +2,7 @@
 id: cor-syzygies-from-two-projective-resolutions-are-stably-isomorphic
 kind: corollary
 title: "Syzygies from two projective resolutions are stably isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-syzygy-and-cosyzygy-relative-to-a-resolution, thm-schanuel-lemma-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

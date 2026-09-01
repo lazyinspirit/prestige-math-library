@@ -2,13 +2,14 @@
 id: rem-being-braided-is-a-property-of-a-monoidal-functor
 kind: remark
 title: "Being braided is a property of a strong monoidal functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-braided-monoidal-functor]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

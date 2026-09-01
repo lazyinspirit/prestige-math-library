@@ -2,13 +2,14 @@
 id: def-small-cancellation-conditions-c-lambda-and-c-prime-lambda
 kind: definition
 title: "The small-cancellation conditions C(lambda) and C prime(lambda)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-piece-in-a-symmetrised-presentation]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

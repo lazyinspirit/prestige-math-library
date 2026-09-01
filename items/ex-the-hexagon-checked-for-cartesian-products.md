@@ -2,7 +2,7 @@
 id: ex-the-hexagon-checked-for-cartesian-products
 kind: example
 title: "The hexagon checked for cartesian products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-cartesian-swap-braiding-is-a-symmetry]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

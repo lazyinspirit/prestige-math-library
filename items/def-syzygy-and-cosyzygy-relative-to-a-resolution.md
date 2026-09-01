@@ -2,13 +2,14 @@
 id: def-syzygy-and-cosyzygy-relative-to-a-resolution
 kind: definition
 title: "Syzygies and cosyzygies relative to a chosen resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-projective-resolution-in-an-abelian-category, def-injective-resolution-in-an-abelian-category, def-deleted-resolution, def-length-of-a-resolution]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

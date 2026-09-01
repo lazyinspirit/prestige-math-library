@@ -2,7 +2,7 @@
 id: def-adic-topology-on-a-module
 kind: definition
 title: "The $I$-adic topology on a module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-filtration-and-adic-filtration]
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-faithful-flatness-detected-by-nonzero-modules-and-fibres
 kind: theorem
 title: "For a flat module, faithful flatness is equivalent to detecting nonzero modules and residue fields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-flat-and-faithfully-flat-modules-and-ring-maps, thm-flatness-criteria
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

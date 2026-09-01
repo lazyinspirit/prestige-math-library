@@ -2,7 +2,7 @@
 id: cor-a-smooth-section-can-be-perturbed-transverse-to-the-zero-section
 kind: corollary
 title: "A smooth section transverse to the zero section has a submanifold zero set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

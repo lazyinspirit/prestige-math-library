@@ -2,13 +2,14 @@
 id: def-directed-set-and-inverse-system-of-groups
 kind: definition
 title: "A directed set and an inverse system of groups indexed by it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-directed-set-and-net, def-group-homomorphism]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

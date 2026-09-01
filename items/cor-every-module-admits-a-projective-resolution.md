@@ -2,7 +2,7 @@
 id: cor-every-module-admits-a-projective-resolution
 kind: corollary
 title: "Under the Axiom of Choice, every module admits a projective resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-the-iterated-free-module-resolution-is-canonical-in-zf, thm-free-modules-are-projective-with-choice-boundary, def-projective-resolution-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-first-and-second-mertens-numerics
 kind: example
 title: "Numerics for the first and second Mertens theorems"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ deps: [thm-first-mertens-theorem-for-primes,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-bounded-linear-functional-on-l-p-and-its-operator-norm
 kind: definition
 title: "A bounded linear functional on $L^p(\\mu)$ and its operator norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "John K. Hunter, Measure Theory, Section 7.5"
       url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-every-acyclic-complex-of-projective-objects-is-contractible
 kind: false-statement
 title: "FALSE: every acyclic complex of projective objects is contractible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-a-bounded-below-acyclic-complex-of-projective-objects-is-contractible-when-its-cycle-epimorphisms-split, def-contractible-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

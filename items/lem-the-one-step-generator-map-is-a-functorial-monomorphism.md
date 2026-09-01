@@ -2,7 +2,7 @@
 id: lem-the-one-step-generator-map-is-a-functorial-monomorphism
 kind: lemma
 title: "The one-step generator map is a functorial monomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-functorial-one-step-generator-extension, cor-the-pushout-of-a-monomorphism-is-a-monomorphism, thm-ab5-implies-ab4]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

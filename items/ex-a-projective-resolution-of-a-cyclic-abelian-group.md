@@ -2,7 +2,7 @@
 id: ex-a-projective-resolution-of-a-cyclic-abelian-group
 kind: example
 title: "A projective resolution of a cyclic abelian group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-free-modules-are-projective-with-choice-boundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

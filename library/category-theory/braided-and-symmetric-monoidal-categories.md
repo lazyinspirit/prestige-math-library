@@ -1,7 +1,7 @@
 ---
 page: braided-and-symmetric-monoidal-categories
 title: "Braided and Symmetric Monoidal Categories"
-status: draft
+status: published
 items: [def-braiding,
         def-braided-monoidal-category,
         thm-the-inverse-braiding-is-a-braiding,

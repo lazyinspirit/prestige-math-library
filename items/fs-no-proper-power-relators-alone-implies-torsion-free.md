@@ -2,7 +2,7 @@
 id: fs-no-proper-power-relators-alone-implies-torsion-free
 kind: false-statement
 title: "FALSE: a presentation with no proper-power relators is automatically torsion-free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free, def-group-power]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

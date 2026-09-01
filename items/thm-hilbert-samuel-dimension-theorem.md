@@ -2,7 +2,7 @@
 id: thm-hilbert-samuel-dimension-theorem
 kind: theorem
 title: "The degree of the Hilbert-Samuel polynomial equals the dimension of the support"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-existence-of-hilbert-samuel-polynomial, thm-dimension-and-parameters-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

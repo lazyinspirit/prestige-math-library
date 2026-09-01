@@ -2,7 +2,7 @@
 id: thm-hilbert-serre-theorem
 kind: theorem
 title: "A finite graded module over a standard graded algebra has rational Hilbert series and eventual polynomial growth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-hilbert-function-and-hilbert-series, def-graded-ring-and-graded-modul
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

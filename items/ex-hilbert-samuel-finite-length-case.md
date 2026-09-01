@@ -2,7 +2,7 @@
 id: ex-hilbert-samuel-finite-length-case
 kind: example
 title: "In dimension zero the Hilbert-Samuel polynomial is constant and equals the module length"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-composition-series-and-length-of-a-module, thm-existence-of-hilbert-s
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

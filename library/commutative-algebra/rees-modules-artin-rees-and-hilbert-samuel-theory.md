@@ -1,7 +1,7 @@
 ---
 page: rees-modules-artin-rees-and-hilbert-samuel-theory
 title: "Rees Modules Artin Rees and Hilbert Samuel Theory"
-status: draft
+status: published
 items: [def-graded-ring-and-graded-module,
         def-hilbert-function-and-hilbert-series,
         thm-hilbert-serre-theorem,

@@ -2,7 +2,7 @@
 id: thm-the-cartesian-swap-braiding-is-a-symmetry
 kind: theorem
 title: "The cartesian swap braiding is a symmetry"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-braiding, def-symmetric-monoidal-category, thm-a-category-with-finite
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

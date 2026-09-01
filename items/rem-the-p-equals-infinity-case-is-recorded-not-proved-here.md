@@ -2,7 +2,7 @@
 id: rem-the-p-equals-infinity-case-is-recorded-not-proved-here
 kind: remark
 title: "The $p=\\infty$ case is recorded but not proved here"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -15,6 +15,7 @@ external_dependency:
   local_proof_attempt: "No local proof is supplied because the standard witness extends point evaluation or an equivalent subspace functional by Hahn-Banach."
   necessity: "MT-16 must record the $p=\\infty$ boundary honestly without importing Hahn-Banach before the functional-analysis track."
 verification:
+  sources_checked: 2026-09-01
   precheck: n/a
 sources:
   references:

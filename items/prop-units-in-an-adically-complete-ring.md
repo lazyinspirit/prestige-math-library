@@ -2,7 +2,7 @@
 id: prop-units-in-an-adically-complete-ring
 kind: proposition
 title: "Elements congruent to $1$ modulo a defining ideal are units"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-adic-completion-of-a-module, def-separated-and-complete-filtered-modu
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

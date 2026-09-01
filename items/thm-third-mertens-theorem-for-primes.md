@@ -2,7 +2,7 @@
 id: thm-third-mertens-theorem-for-primes
 kind: theorem
 title: "Mertens' third theorem for primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

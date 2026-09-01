@@ -2,12 +2,14 @@
 id: def-profinite-completion-of-an-abstract-group
 kind: definition
 title: "The profinite completion is the inverse limit of the finite quotients G over N"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-directed-set-and-inverse-system-of-groups, def-profinite-topology-on-an-abstract-group, def-quotient-group, def-inverse-limit-topology-for-finite-discrete-groups, lem-inverse-limit-of-finite-discrete-groups-is-a-closed-topological-subgroup, def-profinite-group-by-inverse-limit]
+verification:
+  audited: 2026-09-01
 sources:
   scraped: []
   references:

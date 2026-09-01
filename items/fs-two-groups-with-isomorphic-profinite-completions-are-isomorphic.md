@@ -2,7 +2,7 @@
 id: fs-two-groups-with-isomorphic-profinite-completions-are-isomorphic
 kind: false-statement
 title: "FALSE: isomorphic profinite completions force the original groups to be isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-profinite-completion-of-an-abstract-group, thm-profinite-completion-is-functorial]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

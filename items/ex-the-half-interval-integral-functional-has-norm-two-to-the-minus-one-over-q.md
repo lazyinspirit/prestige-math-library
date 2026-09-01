@@ -2,7 +2,7 @@
 id: ex-the-half-interval-integral-functional-has-norm-two-to-the-minus-one-over-q
 kind: example
 title: "The functional $f\\mapsto\\int_0^{1/2} f$ on $L^p[0,1]$ has norm $2^{-1/q}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-countable-choice, prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm, thm-lebesgue-measure-of-a-box-of-every-kind]
 proof_strategy: "Represent the functional by the indicator of $[0,1/2]$, compute that indicator's $L^q$ norm from its measure, and invoke the norm formula for $\\Lambda_g$."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

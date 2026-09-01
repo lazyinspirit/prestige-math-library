@@ -2,7 +2,7 @@
 id: ex-two-canonical-maps-with-different-underlying-braids
 kind: example
 title: "Two canonical maps with different underlying braids do not agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-two-canonical-braided-composites-agree-exactly-when-their-underlying-braids-agree, def-the-braid-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-a-closed-subspace-need-not-have-a-best-approximation
 kind: counterexample
 title: "A closed subspace of a Banach space need not contain a nearest point to every ambient vector"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

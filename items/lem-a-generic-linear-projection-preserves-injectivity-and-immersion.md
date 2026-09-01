@@ -2,7 +2,7 @@
 id: lem-a-generic-linear-projection-preserves-injectivity-and-immersion
 kind: lemma
 title: "A generic linear projection preserves injectivity and immersion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

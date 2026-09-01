@@ -2,7 +2,7 @@
 id: lem-compatible-tuples-form-a-subgroup
 kind: lemma
 title: "Compatible tuples form a subgroup of the product group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-compatible-tuple-inverse-limit-of-groups, def-subgroup, def-group]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

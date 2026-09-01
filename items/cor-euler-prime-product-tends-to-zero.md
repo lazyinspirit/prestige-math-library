@@ -2,7 +2,7 @@
 id: cor-euler-prime-product-tends-to-zero
 kind: corollary
 title: "Euler's prime product tends to zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-third-mertens-theorem-for-primes]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

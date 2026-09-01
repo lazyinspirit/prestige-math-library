@@ -2,7 +2,7 @@
 id: cor-every-closed-embedded-submanifold-has-a-smooth-neighbourhood-retraction
 kind: corollary
 title: "Every closed embedded submanifold has a smooth neighborhood retraction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

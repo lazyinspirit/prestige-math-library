@@ -2,7 +2,7 @@
 id: ex-faithfully-flat-principal-open-cover
 kind: example
 title: "A finite product of principal localizations covering the spectrum is faithfully flat"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-localisations-are-flat, thm-faithfully-flat-ring-map-characterisation
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

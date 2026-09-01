@@ -2,7 +2,7 @@
 id: cor-parameter-ideal-multiplicity-positive
 kind: corollary
 title: "For a nonzero finite module and an ideal of definition, Hilbert-Samuel multiplicity is a positive integer"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-hilbert-samuel-multiplicity, thm-existence-of-hilbert-samuel-polynomi
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

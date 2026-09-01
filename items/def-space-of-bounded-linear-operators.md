@@ -2,7 +2,7 @@
 id: def-space-of-bounded-linear-operators
 kind: definition
 title: "The spaces \\(\\mathcal B(X,Y)\\) and \\(\\mathcal B(X)\\) of bounded linear operators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

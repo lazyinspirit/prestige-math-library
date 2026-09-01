@@ -2,7 +2,7 @@
 id: prop-horseshoe-resolutions-are-compatible-with-morphisms-of-short-exact-sequences-up-to-homotopy
 kind: proposition
 title: "Horseshoe resolutions are compatible with morphisms of short exact sequences up to homotopy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-horseshoe-lemma-for-projective-resolutions, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy, def-morphism-of-short-exact-sequences-of-complexes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

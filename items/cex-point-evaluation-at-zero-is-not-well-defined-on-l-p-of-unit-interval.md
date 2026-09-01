@@ -2,7 +2,7 @@
 id: cex-point-evaluation-at-zero-is-not-well-defined-on-l-p-of-unit-interval
 kind: counterexample
 title: "Point evaluation at $0$ is not well defined on $L^p[0,1]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-countable-choice, def-l-p-space-as-a-quotient-by-null-functions, rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative, thm-lebesgue-measure-of-a-box-of-every-kind]
 proof_strategy: "Compare the zero function with the indicator of the singleton $\\{0\\}$: they define the same $L^p$ class but have different values at $0$."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

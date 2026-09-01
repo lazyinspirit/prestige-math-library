@@ -1,7 +1,7 @@
 ---
 page: chebyshev-bounds-and-mertens-theorems-examples
 title: "Chebyshev Bounds and Mertens Theorems — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-prime-counting-theta-and-psi-table,
            ex-chebyshev-binomial-coefficient-estimate,

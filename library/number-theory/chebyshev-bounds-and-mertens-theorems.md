@@ -1,7 +1,7 @@
 ---
 page: chebyshev-bounds-and-mertens-theorems
 title: "Chebyshev Bounds and Mertens Theorems"
-status: draft
+status: published
 items: [def-prime-counting-function,
         def-chebyshev-theta-function,
         def-chebyshev-psi-function,

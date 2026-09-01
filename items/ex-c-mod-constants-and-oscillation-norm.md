@@ -2,7 +2,7 @@
 id: ex-c-mod-constants-and-oscillation-norm
 kind: example
 title: "For real continuous functions modulo constants, the quotient norm is half the oscillation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

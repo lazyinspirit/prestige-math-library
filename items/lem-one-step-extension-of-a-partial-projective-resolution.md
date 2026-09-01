@@ -2,7 +2,7 @@
 id: lem-one-step-extension-of-a-partial-projective-resolution
 kind: lemma
 title: "One-step extension of a partial projective resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-augmented-chain-complex-over-an-object, def-projective-object, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-sigma-finite-duality-for-bounded-functionals-on-l-p
 kind: theorem
 title: "On a sigma-finite measure space, every bounded linear functional on $L^p$ is integration against a unique $L^q$ function"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [prop-semifinite-measures-make-l-q-representatives-unique, lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures, lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu, lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities, lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q, def-finite-sigma-finite-and-semifinite-measures, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm]
 proof_strategy: "Restrict the functional to an increasing finite-measure exhaustion, obtain local $L^q$ densities, glue them by uniqueness on overlaps, and pass to the limit using continuity on $L^p$."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   references:

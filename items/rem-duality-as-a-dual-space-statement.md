@@ -2,7 +2,7 @@
 id: rem-duality-as-a-dual-space-statement
 kind: remark
 title: "Orientation only: the dual-space phrasing of the concrete $L^p$ theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Section 6.2"
       url: "https://djvu.online/file/NPF4BEtSuqdFA"
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

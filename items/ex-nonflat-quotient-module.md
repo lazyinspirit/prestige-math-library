@@ -2,7 +2,7 @@
 id: ex-nonflat-quotient-module
 kind: example
 title: "The quotient by a nonidempotent ideal is not flat"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-flatness-criteria-by-injections-and-ideals, cor-flat-quotients-and-id
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

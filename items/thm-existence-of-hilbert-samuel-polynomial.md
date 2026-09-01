@@ -2,7 +2,7 @@
 id: thm-existence-of-hilbert-samuel-polynomial
 kind: theorem
 title: "The Hilbert-Samuel function agrees eventually with a rational polynomial in binomial form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-hilbert-samuel-function-and-polynomial, thm-hilbert-serre-theorem, de
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

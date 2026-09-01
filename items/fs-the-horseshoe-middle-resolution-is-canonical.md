@@ -2,7 +2,7 @@
 id: fs-the-horseshoe-middle-resolution-is-canonical
 kind: false-statement
 title: "FALSE: the degree-zero horseshoe lift is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-degree-zero-horseshoe-lift]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

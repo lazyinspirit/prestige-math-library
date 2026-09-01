@@ -2,7 +2,7 @@
 id: thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected
 kind: theorem
 title: "Inverse limits of finite discrete groups are Hausdorff and totally disconnected, and compact assuming Choice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-inverse-limit-of-finite-discrete-groups-is-a-closed-topological-subgroup, thm-tychonoff, def-compact-space, def-hausdorff-space, lem-products-preserve-t0-t1-and-hausdorff, thm-closed-subspace-of-a-compact-space-is-compact, def-inverse-limit-topology-for-finite-discrete-groups, lem-finite-choice]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

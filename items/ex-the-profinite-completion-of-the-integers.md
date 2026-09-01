@@ -2,7 +2,7 @@
 id: ex-the-profinite-completion-of-the-integers
 kind: example
 title: "The profinite completion of the integers is the inverse limit of the rings Z mod n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-profinite-completion-of-an-abstract-group, def-canonical-map-to-the-profinite-completion, thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

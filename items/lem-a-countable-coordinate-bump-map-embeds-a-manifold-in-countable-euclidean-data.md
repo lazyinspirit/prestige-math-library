@@ -2,7 +2,7 @@
 id: lem-a-countable-coordinate-bump-map-embeds-a-manifold-in-countable-euclidean-data
 kind: lemma
 title: "A countable coordinate-bump map embeds a manifold in countable Euclidean data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-bounded-linear-operator-equivalences
 kind: theorem
 title: "For a linear operator, boundedness, continuity at 0, continuity, and Lipschitz continuity are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

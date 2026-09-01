@@ -2,7 +2,7 @@
 id: cor-faithfully-flat-descent-of-finite-generation
 kind: corollary
 title: "Finite generation descends along faithfully flat ring maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-faithful-flatness-detected-by-nonzero-modules-and-fibres, thm-faithfu
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-an-overlap-at-exactly-one-sixth-under-the-strict-convention
 kind: counterexample
 title: "An overlap of exactly one sixth shows that the strict C prime(1/6) inequality is not cosmetic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

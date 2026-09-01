@@ -2,7 +2,7 @@
 id: thm-van-kampen-lemma
 kind: theorem
 title: "A word is trivial in a presented group exactly when it bounds a finite van Kampen diagram"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group, prop-normal-closure-is-products-of-conjugates]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

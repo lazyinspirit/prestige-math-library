@@ -2,7 +2,7 @@
 id: thm-completion-preserves-dimension-and-hilbert-samuel-data
 kind: theorem
 title: "Completion preserves dimension and Hilbert-Samuel data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-completion-of-a-noetherian-local-ring, cor-completion-commutes-with-f
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

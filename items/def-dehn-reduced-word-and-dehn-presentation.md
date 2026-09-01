@@ -2,13 +2,14 @@
 id: def-dehn-reduced-word-and-dehn-presentation
 kind: definition
 title: "Dehn-reduced words and Dehn presentations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-symmetrisation-of-a-relator-set, def-cyclically-reduced-word]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

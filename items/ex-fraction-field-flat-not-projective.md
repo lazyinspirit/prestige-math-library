@@ -2,7 +2,7 @@
 id: ex-fraction-field-flat-not-projective
 kind: example
 title: "A fraction field is flat over its domain and may fail to be projective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-localisations-are-flat, thm-projective-module-characterizations]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-the-braid-group-on-three-strands
 kind: example
 title: "The braid group on three strands and its quotient to S_3"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-braid-group-by-the-artin-presentation, thm-the-braid-group-surjects-onto-the-symmetric-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

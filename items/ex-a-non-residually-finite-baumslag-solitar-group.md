@@ -2,7 +2,7 @@
 id: ex-a-non-residually-finite-baumslag-solitar-group
 kind: example
 title: "A Baumslag-Solitar group gives a noninjective completion map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite, def-group-presentation]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

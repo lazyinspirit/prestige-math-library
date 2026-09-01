@@ -2,7 +2,7 @@
 id: cor-every-module-admits-an-injective-resolution
 kind: corollary
 title: "Every module admits an injective resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-module-categories-are-grothendieck-categories, thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings, lem-one-step-extension-of-a-partial-injective-resolution, def-injective-resolution-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p
 kind: lemma
 title: "For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-l-p-space-as-a-quotient-by-null-functions, rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative, thm-chebyshev-markov-inequality-for-the-integral, def-finite-sigma-finite-and-semifinite-measures]
 proof_strategy: "Take a representative $u$ and use the level sets $\\{|u|\\ge1/n\\}$. Chebyshev-Markov makes each level set finite-measure, and their union contains every point where $u\\ne0$."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

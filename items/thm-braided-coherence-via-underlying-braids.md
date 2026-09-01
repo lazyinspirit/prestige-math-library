@@ -2,7 +2,7 @@
 id: thm-braided-coherence-via-underlying-braids
 kind: theorem
 title: "Braided coherence is controlled by underlying braids"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-braided-monoidal-functor, thm-the-braid-category-is-the-free-strict-b
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

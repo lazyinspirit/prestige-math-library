@@ -2,7 +2,7 @@
 id: lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures
 kind: lemma
 title: "On a finite-measure space, a bounded functional on $L^p$ defines a finite signed measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-bounded-linear-functional-on-l-p-and-its-operator-norm, def-signed-measure, thm-dominated-convergence]
 proof_strategy: "Define $\\nu(E)=\\Lambda([\\mathbf 1_E])$. Finite measure puts every indicator in $L^p$, and countable additivity comes from $L^p$ convergence of partial indicator sums plus continuity of $\\Lambda$."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: def-rees-algebra-and-rees-module
 kind: definition
 title: "The Rees algebra of an ideal and the Rees module of a filtered module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-associated-graded-ring-and-module, def-graded-ring-and-graded-module]
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

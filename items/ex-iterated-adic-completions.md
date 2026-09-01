@@ -2,7 +2,7 @@
 id: ex-iterated-adic-completions
 kind: example
 title: "Powers of an ideal give the same one-step adic completion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-adic-completion-of-a-module, ex-equivalent-adic-filtrations]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

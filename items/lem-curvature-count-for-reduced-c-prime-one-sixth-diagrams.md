@@ -2,7 +2,7 @@
 id: lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams
 kind: lemma
 title: "Reduced C prime(1/6) diagrams satisfy the standard combinatorial curvature count"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-small-cancellation-conditions-c-lambda-and-c-prime-lambda,
        def-van-kampen-diagram-boundary-label-and-area]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

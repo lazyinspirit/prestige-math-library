@@ -2,7 +2,7 @@
 id: lem-degree-zero-horseshoe-lift
 kind: lemma
 title: "The degree-zero horseshoe lift"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-resolution-in-an-abelian-category, def-projective-object, thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

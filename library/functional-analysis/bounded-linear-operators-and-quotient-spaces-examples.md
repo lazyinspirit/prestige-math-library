@@ -1,7 +1,7 @@
 ---
 page: bounded-linear-operators-and-quotient-spaces-examples
 title: "Bounded Linear Operators and Quotient Spaces — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-coordinate-projections-and-inclusions-on-product-banach-spaces,
            ex-shift-operators-on-classical-sequence-spaces,

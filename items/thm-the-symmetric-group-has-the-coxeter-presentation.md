@@ -2,7 +2,7 @@
 id: thm-the-symmetric-group-has-the-coxeter-presentation
 kind: theorem
 title: "The symmetric group has the Coxeter presentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-finite-symmetric-group-and-permutation-notation, lem-symmetric-group-is-a-group, thm-adjacent-transpositions-generate-the-symmetric-group, thm-von-dyck]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

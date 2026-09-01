@@ -2,7 +2,7 @@
 id: lem-extension-from-subobjects-of-a-generator-detects-injectivity
 kind: lemma
 title: "Extension from subobjects of a generator detects injectivity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-grothendieck-category, def-injective-object, thm-a-locally-small-abelian-category-with-a-generator-is-well-powered, thm-a-generator-detects-equality-of-subobjects, thm-zorn]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-projective-comparison-map-exists
 kind: theorem
 title: "Projective comparison maps exist"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-resolution-in-an-abelian-category, def-augmentation-preserving-map-of-projective-resolutions, lem-extend-a-partial-comparison-map-by-one-degree, lem-lift-a-map-through-degree-zero-of-a-projective-resolution, def-dependent-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-c-prime-lambda-implies-c-lambda
 kind: lemma
 title: "C prime(lambda) implies C(lambda)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

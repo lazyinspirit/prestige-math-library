@@ -2,7 +2,7 @@
 id: def-the-braid-category
 kind: definition
 title: "The braid category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-braided-monoidal-category, def-braid-group-by-the-artin-presentation, def-strict-monoidal-category]
 landmark: true
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

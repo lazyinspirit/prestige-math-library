@@ -2,7 +2,7 @@
 id: ex-projecting-a-space-curve-can-create-a-double-point
 kind: example
 title: "Projecting a space curve can create a double point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,12 +2,14 @@
 id: def-coordinate-projections-from-an-inverse-limit
 kind: definition
 title: "The inverse limit has its canonical coordinate projection maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-compatible-tuple-inverse-limit-of-groups]
+verification:
+  audited: 2026-09-01
 sources:
   scraped: []
   references:

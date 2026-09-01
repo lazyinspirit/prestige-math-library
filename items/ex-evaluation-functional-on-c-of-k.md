@@ -2,7 +2,7 @@
 id: ex-evaluation-functional-on-c-of-k
 kind: example
 title: "The evaluation functional on \\(C(K)\\) has norm one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

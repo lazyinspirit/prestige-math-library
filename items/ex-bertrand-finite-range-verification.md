@@ -2,7 +2,7 @@
 id: ex-bertrand-finite-range-verification
 kind: example
 title: "The residual finite-range check for Bertrand's postulate"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-bertrands-postulate]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

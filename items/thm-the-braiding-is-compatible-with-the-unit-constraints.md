@@ -2,7 +2,7 @@
 id: thm-the-braiding-is-compatible-with-the-unit-constraints
 kind: theorem
 title: "The braiding is compatible with the unit constraints"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-braiding, thm-the-inverse-braiding-is-a-braiding, thm-the-left-unitor-of-a-tensor-product-is-determined, thm-the-right-unitor-of-a-tensor-product-is-determined]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

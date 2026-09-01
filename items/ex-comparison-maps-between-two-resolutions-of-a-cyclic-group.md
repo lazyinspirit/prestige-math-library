@@ -2,7 +2,7 @@
 id: ex-comparison-maps-between-two-resolutions-of-a-cyclic-group
 kind: example
 title: "Comparison maps between two resolutions of a cyclic group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [ex-a-projective-resolution-of-a-cyclic-abelian-group, thm-projective-comparison-map-exists]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

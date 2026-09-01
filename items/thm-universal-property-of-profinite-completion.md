@@ -2,7 +2,7 @@
 id: thm-universal-property-of-profinite-completion
 kind: theorem
 title: "The profinite completion is initial among continuous homomorphisms from G to profinite groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ deps: [def-profinite-completion-of-an-abstract-group,
        thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

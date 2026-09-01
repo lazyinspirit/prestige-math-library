@@ -2,7 +2,7 @@
 id: def-graded-ring-and-graded-module
 kind: definition
 title: "Nonnegatively graded rings and modules, homogeneous elements, and twists"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: []
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-ell-p-duality-by-counting-measure
 kind: corollary
 title: "Counting measure specializes the representation theorem to $\\ell^p$ and $\\ell^q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-sigma-finite-duality-for-bounded-functionals-on-l-p, rem-ell-p-is-l-p-of-counting-measure]
 proof_strategy: "View $\\ell^p$ as $L^p$ of counting measure on $\\mathbb N$, note that counting measure on $\\mathbb N$ is sigma-finite by finite initial segments, and translate the representing $L^q$ function back to a sequence."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: thm-bounded-below-iff-injective-with-closed-range
 kind: theorem
 title: "Under Dependent Choice, a bounded operator between Banach spaces is bounded below exactly when it is injective with closed range"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

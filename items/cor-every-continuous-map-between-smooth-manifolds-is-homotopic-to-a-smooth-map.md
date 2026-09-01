@@ -2,7 +2,7 @@
 id: cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map
 kind: corollary
 title: "Every continuous map between smooth manifolds is homotopic to a smooth map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

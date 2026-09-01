@@ -2,7 +2,7 @@
 id: thm-local-criterion-for-flatness-closed-fibre-form
 kind: theorem
 title: "For an $R$-finite module over a local map, flatness on the closed fibre plus the multiplication-map condition implies flatness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-local-criterion-for-flatness-ideal-form]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

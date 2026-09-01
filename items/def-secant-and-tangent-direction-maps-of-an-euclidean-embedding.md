@@ -2,7 +2,7 @@
 id: def-secant-and-tangent-direction-maps-of-an-euclidean-embedding
 kind: definition
 title: "Secant and tangent direction maps of a Euclidean embedding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

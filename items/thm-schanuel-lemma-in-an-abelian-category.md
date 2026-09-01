@@ -2,7 +2,7 @@
 id: thm-schanuel-lemma-in-an-abelian-category
 kind: theorem
 title: "Schanuel's lemma in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-object, thm-projective-object-characterisations, def-pullbacks-and-pushouts, thm-the-pullback-of-an-epimorphism-is-an-epimorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

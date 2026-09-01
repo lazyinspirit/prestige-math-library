@@ -2,7 +2,7 @@
 id: lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities
 kind: lemma
 title: "On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures, lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, cor-measurable-functions-admit-dominated-simple-approximations, thm-dominated-convergence, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: "Apply Radon-Nikodym to the measure $\\nu(E)=\\Lambda(\\mathbf 1_E)$, identify the pairing first on indicators and simple functions, and then extend to bounded measurable representatives by dominated convergence."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   references:

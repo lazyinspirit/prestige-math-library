@@ -2,7 +2,7 @@
 id: cor-l-p-norm-recovery-by-unit-l-q-pairings
 kind: corollary
 title: "The $L^p$ norm is the supremum of pairings against unit $L^q$ functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm, thm-sigma-finite-duality-for-bounded-functionals-on-l-p, thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity]
 proof_strategy: "Holder gives the universal upper bound. Equality comes from the explicit norming function $|f|^{p-1}\\operatorname{sgn} f$ for $p>1$ and the sign function for $p=1$."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

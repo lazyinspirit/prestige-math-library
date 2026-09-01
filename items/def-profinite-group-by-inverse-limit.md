@@ -2,13 +2,14 @@
 id: def-profinite-group-by-inverse-limit
 kind: definition
 title: "A profinite group is a topological group isomorphic to an inverse limit of finite discrete groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected, def-topological-group]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-semifinite-measures-make-l-q-representatives-unique
 kind: proposition
 title: "On a semifinite measure space, a representing $L^q$ function is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "Subtract the two representing functions, observe that the induced pairing is the zero functional, and use the norm formula for $\\Lambda_g$ to force the difference to be the zero $L^q$ class."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

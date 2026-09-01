@@ -2,7 +2,7 @@
 id: cex-a-nearest-point-projection-is-not-unique-outside-the-tubular-radius
 kind: counterexample
 title: "A nearest-point projection need not be unique outside the tubular radius"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

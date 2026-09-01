@@ -2,7 +2,7 @@
 id: thm-dehn-algorithm-solves-the-word-problem
 kind: theorem
 title: "Dehn's algorithm terminates and decides the word problem for a Dehn presentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-greendlinger-lemma-for-c-prime-one-sixth-presentations, lem-dehn-replacement-strictly-shortens-a-word, thm-van-kampen-lemma]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-every-repeated-subword-is-a-piece
 kind: false-statement
 title: "FALSE: every repeated subword of a relator is a piece"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-piece-in-a-symmetrised-presentation]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

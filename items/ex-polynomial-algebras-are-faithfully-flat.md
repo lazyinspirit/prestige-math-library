@@ -2,7 +2,7 @@
 id: ex-polynomial-algebras-are-faithfully-flat
 kind: example
 title: "A polynomial algebra is free and therefore faithfully flat over its coefficient ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-free-modules-are-projective-and-flat, thm-faithfully-flat-ring-map-ch
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

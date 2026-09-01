@@ -2,13 +2,14 @@
 id: def-augmentation-preserving-map-of-projective-resolutions
 kind: definition
 title: "Augmentation-preserving maps of projective resolutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-projective-resolution-in-an-abelian-category, def-chain-map]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

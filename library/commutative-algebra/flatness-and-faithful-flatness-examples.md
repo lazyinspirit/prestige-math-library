@@ -1,7 +1,7 @@
 ---
 page: flatness-and-faithful-flatness-examples
 title: "Flatness and Faithful Flatness — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-polynomial-algebras-are-faithfully-flat,
            ex-localisations-not-faithfully-flat,

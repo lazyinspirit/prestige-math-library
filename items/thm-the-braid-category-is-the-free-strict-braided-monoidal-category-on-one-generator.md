@@ -2,7 +2,7 @@
 id: thm-the-braid-category-is-the-free-strict-braided-monoidal-category-on-one-generator
 kind: theorem
 title: "The braid category is the free strict braided monoidal category on one generator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-braided-monoidal-functor, def-the-braid-category, thm-in-a-strict-braided-monoidal-category-the-braiding-satisfies-the-yang-baxter-equation, thm-von-dyck]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

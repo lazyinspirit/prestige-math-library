@@ -2,7 +2,7 @@
 id: cor-unbracketed-and-unordered-tensor-strings-are-well-defined-in-a-symmetric-monoidal-category
 kind: corollary
 title: "Labelled unbracketed and unordered tensor strings are well defined in a symmetric monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-symmetric-coherence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

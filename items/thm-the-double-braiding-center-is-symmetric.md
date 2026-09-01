@@ -2,7 +2,7 @@
 id: thm-the-double-braiding-center-is-symmetric
 kind: theorem
 title: "The double-braiding center is a symmetric monoidal subcategory"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-braided-monoidal-category,
        thm-mac-lane-coherence-in-the-canonical-map-form]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

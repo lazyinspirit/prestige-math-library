@@ -2,7 +2,7 @@
 id: lem-the-auxiliary-pattern-has-a-polynomial-homogeneous-set-under-the-source-hypotheses
 kind: lemma
 title: "The auxiliary pattern then has a polynomial-size clique or stable set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: projective-and-injective-resolutions-examples
 title: "Projective and Injective Resolutions — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-projective-resolution-of-a-cyclic-abelian-group, ex-the-canonical-iterated-free-resolution-of-a-module, ex-an-injective-resolution-of-an-abelian-group-beginning-with-a-divisible-envelope, ex-comparison-maps-between-two-resolutions-of-a-cyclic-group, ex-an-explicit-comparison-homotopy, ex-the-horseshoe-resolution-of-an-extension-of-cyclic-groups, ex-schanuel-lemma-for-two-presentations-of-a-module, cex-two-projective-resolutions-with-nonisomorphic-first-syzygies, cex-a-category-with-enough-injectives-but-not-enough-projectives]
 ---

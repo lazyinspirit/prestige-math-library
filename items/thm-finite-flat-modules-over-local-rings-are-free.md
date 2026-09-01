@@ -2,7 +2,7 @@
 id: thm-finite-flat-modules-over-local-rings-are-free
 kind: theorem
 title: "A finite flat module over a local ring is free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-equational-criterion-for-flatness, cor-nakayama-generators-modulo-an-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

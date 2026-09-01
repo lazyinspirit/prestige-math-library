@@ -2,7 +2,7 @@
 id: lem-kernels-of-finite-projections-form-an-open-normal-neighbourhood-basis
 kind: lemma
 title: "The kernels of the finite coordinate projections form an open normal neighbourhood basis at the identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-coordinate-projections-from-an-inverse-limit, def-inverse-limit-topology-for-finite-discrete-groups, def-profinite-group-by-inverse-limit, def-normal-subgroup, def-quotient-group]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

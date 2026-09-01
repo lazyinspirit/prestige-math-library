@@ -2,7 +2,7 @@
 id: cor-two-canonical-braided-composites-agree-exactly-when-their-underlying-braids-agree
 kind: corollary
 title: "Two canonical braided composites agree exactly when their underlying braids agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-braided-coherence-via-underlying-braids, def-the-braid-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

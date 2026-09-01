@@ -2,7 +2,7 @@
 id: lem-extend-a-partial-comparison-map-by-one-degree
 kind: lemma
 title: "Extending a partial comparison map by one degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-augmentation-preserving-map-of-projective-resolutions, lem-lift-a-map-through-degree-zero-of-a-projective-resolution, def-cycle-and-boundary-subobjects-of-a-complex, def-projective-object, def-projective-resolution-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-the-horseshoe-kernel-fits-a-short-exact-sequence
 kind: lemma
 title: "The horseshoe kernel fits into a short exact sequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-degree-zero-horseshoe-lift, def-syzygy-and-cosyzygy-relative-to-a-resolution, thm-snake-lemma-in-an-abelian-category, thm-nine-lemma-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

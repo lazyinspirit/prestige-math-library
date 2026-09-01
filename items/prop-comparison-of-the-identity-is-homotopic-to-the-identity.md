@@ -2,7 +2,7 @@
 id: prop-comparison-of-the-identity-is-homotopic-to-the-identity
 kind: proposition
 title: "Comparison of the identity is homotopic to the identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-comparison-maps-respect-composition-up-to-homotopy, thm-projective-comparison-map-exists]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

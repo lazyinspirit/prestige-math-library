@@ -2,7 +2,7 @@
 id: ex-p-adic-integers-as-an-inverse-limit
 kind: example
 title: "The $p$-adic integers as an inverse limit and as a completion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-inverse-system-and-inverse-limit-of-modules, def-adic-completion-of-a
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: whitney-embedding-tubular-neighbourhoods-and-approximation-examples
 title: "Whitney Embedding Tubular Neighbourhoods and Approximation — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-standard-circle-and-its-annular-tubular-neighbourhood,
            ex-the-sphere-and-its-two-sided-normal-tube,

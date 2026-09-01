@@ -2,13 +2,14 @@
 id: def-finite-residual-and-residually-finite-group
 kind: definition
 title: "The finite residual is the intersection of the finite-index normal subgroups, and a group is residually finite when that intersection is trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-profinite-topology-on-an-abstract-group, def-normal-subgroup]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

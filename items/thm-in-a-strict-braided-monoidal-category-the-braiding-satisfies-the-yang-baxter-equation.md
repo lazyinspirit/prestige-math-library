@@ -2,7 +2,7 @@
 id: thm-in-a-strict-braided-monoidal-category-the-braiding-satisfies-the-yang-baxter-equation
 kind: theorem
 title: "In a strict braided monoidal category the braiding satisfies the Yang-Baxter equation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-braided-monoidal-category, def-strict-monoidal-category]
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: leaf-reducibility-and-wonderful-families-examples
 title: "Leaf Reducibility and Wonderful Families — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-e-graph-sits-inside-a-one-subdivided-star-and-deletes-to-the-five-vertex-path, ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit]
 ---

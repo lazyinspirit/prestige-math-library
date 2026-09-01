@@ -2,7 +2,7 @@
 id: thm-chebyshev-prime-counting-bounds
 kind: theorem
 title: "Chebyshev bounds for the prime-counting function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

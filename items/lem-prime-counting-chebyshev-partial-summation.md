@@ -2,7 +2,7 @@
 id: lem-prime-counting-chebyshev-partial-summation
 kind: lemma
 title: "Abel summation recovers the prime-counting function from theta"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ deps: [def-prime-counting-function,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

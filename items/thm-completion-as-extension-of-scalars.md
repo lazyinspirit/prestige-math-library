@@ -2,7 +2,7 @@
 id: thm-completion-as-extension-of-scalars
 kind: theorem
 title: "Completion of a finite module is extension of scalars"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-completion-is-exact-on-finite-modules, thm-universal-property-of-modu
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one
 kind: theorem
 title: "Every braided monoidal category is monoidally equivalent to a strict braided one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-braided-monoidal-functor, def-monoidal-equivalence, thm-mac-lane-strictification]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

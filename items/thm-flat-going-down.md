@@ -2,7 +2,7 @@
 id: thm-flat-going-down
 kind: theorem
 title: "Every flat ring map satisfies going down"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-faithfully-flat-ring-map-characterisations, thm-localisations-are-fla
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free
 kind: corollary
 title: "A C prime(1/6) presentation with no proper-power relators defines a torsion-free group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-torsion-theorem-for-c-prime-one-sixth-groups, def-group-power]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

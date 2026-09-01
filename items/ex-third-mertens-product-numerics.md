@@ -2,7 +2,7 @@
 id: ex-third-mertens-product-numerics
 kind: example
 title: "Numerics for the third Mertens theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ deps: [def-euler-mascheroni-constant,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

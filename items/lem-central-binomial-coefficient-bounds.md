@@ -2,7 +2,7 @@
 id: lem-central-binomial-coefficient-bounds
 kind: lemma
 title: "Central binomial coefficient bounds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-binomial-coefficient,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

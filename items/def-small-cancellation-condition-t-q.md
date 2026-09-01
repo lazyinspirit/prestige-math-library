@@ -2,13 +2,14 @@
 id: def-small-cancellation-condition-t-q
 kind: definition
 title: "The condition T(q) forbids short cycles of pieces in the relator graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-symmetrisation-of-a-relator-set]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

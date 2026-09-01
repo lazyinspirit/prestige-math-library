@@ -2,7 +2,7 @@
 id: thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed
 kind: theorem
 title: "The quotient seminorm is a norm exactly when the subspace is closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

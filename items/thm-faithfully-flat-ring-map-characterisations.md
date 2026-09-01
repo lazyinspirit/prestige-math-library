@@ -2,7 +2,7 @@
 id: thm-faithfully-flat-ring-map-characterisations
 kind: theorem
 title: "A flat ring map is faithfully flat exactly when it detects proper ideals and is surjective on spectra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-flat-and-faithfully-flat-modules-and-ring-maps, thm-faithful-flatness
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

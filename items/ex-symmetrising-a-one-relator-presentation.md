@@ -2,7 +2,7 @@
 id: ex-symmetrising-a-one-relator-presentation
 kind: example
 title: "Symmetrising a one-relator presentation adds the cyclic conjugates and inverse cyclic conjugates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-symmetrisation-of-a-relator-set]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

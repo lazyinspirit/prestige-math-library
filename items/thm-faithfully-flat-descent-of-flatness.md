@@ -2,7 +2,7 @@
 id: thm-faithfully-flat-descent-of-flatness
 kind: theorem
 title: "Flatness descends along faithfully flat base change"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-flat-and-faithfully-flat-modules-and-ring-maps, prop-extension-of-sca
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

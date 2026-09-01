@@ -2,13 +2,14 @@
 id: def-injective-resolution-in-an-abelian-category
 kind: definition
 title: "Injective resolutions in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-coaugmented-cochain-complex-under-an-object, def-injective-object, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

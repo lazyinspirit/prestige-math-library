@@ -2,7 +2,7 @@
 id: def-adic-completion-of-a-module
 kind: definition
 title: "The $I$-adic completion of a module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-adic-topology-on-a-module, def-inverse-system-and-inverse-limit-of-modules]
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

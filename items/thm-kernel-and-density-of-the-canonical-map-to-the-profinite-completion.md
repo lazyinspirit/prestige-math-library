@@ -2,7 +2,7 @@
 id: thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion
 kind: theorem
 title: "The canonical map to the profinite completion has kernel equal to the finite residual and has dense image"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-profinite-completion-of-an-abstract-group, def-canonical-map-to-the-profinite-completion, def-finite-residual-and-residually-finite-group]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

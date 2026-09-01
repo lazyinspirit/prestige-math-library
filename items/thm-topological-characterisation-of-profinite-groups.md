@@ -2,7 +2,7 @@
 id: thm-topological-characterisation-of-profinite-groups
 kind: theorem
 title: "Assuming Choice, a topological group is profinite exactly when it is compact, Hausdorff, and totally disconnected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ deps: [def-profinite-group-by-inverse-limit,
        thm-closed-subspace-of-a-compact-space-is-compact]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

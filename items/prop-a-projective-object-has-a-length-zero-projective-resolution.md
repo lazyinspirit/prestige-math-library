@@ -2,7 +2,7 @@
 id: prop-a-projective-object-has-a-length-zero-projective-resolution
 kind: proposition
 title: "A projective object has a length-zero projective resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-resolution-in-an-abelian-category, def-length-of-a-resolution, def-projective-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-universal-property-of-an-inverse-limit-of-modules
 kind: theorem
 title: "Universal property of an inverse limit of modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-inverse-system-and-inverse-limit-of-modules]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

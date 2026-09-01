@@ -2,7 +2,7 @@
 id: ex-a-noncompact-embedded-curve-with-no-uniform-tubular-radius
 kind: example
 title: "A noncompact embedded curve with no uniform tubular radius"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

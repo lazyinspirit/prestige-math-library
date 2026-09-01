@@ -2,7 +2,7 @@
 id: thm-torsion-theorem-for-c-prime-one-sixth-groups
 kind: theorem
 title: "In a C prime(1/6) group, every nontrivial torsion element is conjugate to a power of a relator root"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-power]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

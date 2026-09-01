@@ -2,7 +2,7 @@
 id: lem-a-finite-coordinate-bump-map-embeds-a-compact-manifold-in-some-euclidean-space
 kind: lemma
 title: "A finite coordinate-bump map embeds a compact manifold in some Euclidean space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

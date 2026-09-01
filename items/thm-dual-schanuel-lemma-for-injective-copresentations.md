@@ -2,7 +2,7 @@
 id: thm-dual-schanuel-lemma-for-injective-copresentations
 kind: theorem
 title: "The dual Schanuel lemma for injective copresentations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-schanuel-lemma-in-an-abelian-category, thm-the-opposite-of-an-abelian-category-is-abelian]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

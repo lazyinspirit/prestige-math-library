@@ -2,13 +2,14 @@
 id: def-canonical-map-to-the-profinite-completion
 kind: definition
 title: "The canonical map sends g to its coherent system of residue classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-profinite-completion-of-an-abstract-group]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

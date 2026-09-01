@@ -2,7 +2,7 @@
 id: ex-associated-graded-of-a-local-ring
 kind: example
 title: "The associated graded ring of a regular local ring and of a cusp local ring can be computed explicitly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-associated-graded-ring-and-module]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-the-swap-braiding-on-sets
 kind: example
 title: "The swap map on sets is the cartesian braiding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-cartesian-swap-braiding-is-a-symmetry]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

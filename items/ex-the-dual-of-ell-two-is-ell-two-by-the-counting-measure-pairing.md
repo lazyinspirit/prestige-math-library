@@ -2,7 +2,7 @@
 id: ex-the-dual-of-ell-two-is-ell-two-by-the-counting-measure-pairing
 kind: example
 title: "Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [cor-ell-p-duality-by-counting-measure, rem-ell-p-is-l-p-of-counting-measure]
 proof_strategy: "Specialize the counting-measure duality corollary to $p=q=2$ and rewrite the integral pairing as an ordinary series."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

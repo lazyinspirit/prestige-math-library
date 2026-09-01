@@ -2,7 +2,7 @@
 id: ex-a-greendlinger-cell-in-a-van-kampen-diagram
 kind: example
 title: "A minimal diagram exhibits the Greendlinger face covering more than half its boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

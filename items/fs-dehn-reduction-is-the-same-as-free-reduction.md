@@ -2,7 +2,7 @@
 id: fs-dehn-reduction-is-the-same-as-free-reduction
 kind: false-statement
 title: "FALSE: Dehn reduction is just free reduction under another name"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dehn-reduced-word-and-dehn-presentation]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

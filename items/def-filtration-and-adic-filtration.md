@@ -2,7 +2,7 @@
 id: def-filtration-and-adic-filtration
 kind: definition
 title: "Filtered modules and the $I$-adic filtration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-product-of-an-ideal-and-a-module]
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

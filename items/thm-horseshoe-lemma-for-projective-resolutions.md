@@ -2,7 +2,7 @@
 id: thm-horseshoe-lemma-for-projective-resolutions
 kind: theorem
 title: "The horseshoe lemma for projective resolutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [lem-inductive-horseshoe-step, def-projective-resolution-in-an-abelian-cat
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

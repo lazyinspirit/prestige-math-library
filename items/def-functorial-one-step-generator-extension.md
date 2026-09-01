@@ -2,13 +2,14 @@
 id: def-functorial-one-step-generator-extension
 kind: definition
 title: "The one-step generator extension functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-grothendieck-category, def-generator-and-cogenerator-of-a-category, thm-a-locally-small-abelian-category-with-a-generator-is-well-powered, def-pullbacks-and-pushouts]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

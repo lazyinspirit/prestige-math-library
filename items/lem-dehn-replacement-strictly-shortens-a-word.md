@@ -2,7 +2,7 @@
 id: lem-dehn-replacement-strictly-shortens-a-word
 kind: lemma
 title: "A Dehn replacement shortens the word strictly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dehn-reduced-word-and-dehn-presentation]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

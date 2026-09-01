@@ -2,7 +2,7 @@
 id: rem-malcev-finitely-generated-linear-groups-are-residually-finite
 kind: remark
 title: "Malcev's theorem gives a canonical non-load-bearing source of residually finite groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ external_dependency:
   local_proof_attempt: "A local proof would need the commutative-algebra and number-theoretic reduction machinery behind Malcev's theorem, including finite-residue separation for finitely generated coefficient rings, which this page does not build."
   necessity: "The page needs one canonical non-load-bearing class of residually finite groups beyond free groups, but no later item in this batch may depend on it."
 verification:
+  sources_checked: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

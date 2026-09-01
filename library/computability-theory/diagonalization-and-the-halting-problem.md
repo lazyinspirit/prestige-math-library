@@ -1,7 +1,7 @@
 ---
 page: diagonalization-and-the-halting-problem
 title: "Diagonalization and the Halting Problem"
-status: draft
+status: published
 items:
   - def-turing-machine-acceptance-problem
   - thm-machine-acceptance-is-recognizable

@@ -2,7 +2,7 @@
 id: thm-flatness-is-local
 kind: theorem
 title: "A module is flat if and only if all prime localizations are flat, equivalently all maximal localizations are flat"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-localisations-are-flat, thm-flatness-criteria-by-injections-and-ideal
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

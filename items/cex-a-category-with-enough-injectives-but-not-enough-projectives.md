@@ -2,7 +2,7 @@
 id: cex-a-category-with-enough-injectives-but-not-enough-projectives
 kind: counterexample
 title: "A category with enough injectives but not enough projectives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-quotient-seminorm-is-representative-independent
 kind: lemma
 title: "The quotient seminorm is independent of the chosen coset representative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

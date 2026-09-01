@@ -2,7 +2,7 @@
 id: thm-faithful-flatness-of-jacobson-adic-completion
 kind: theorem
 title: "Jacobson-adic completion is faithfully flat"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-flatness-of-noetherian-completion, cor-completion-commutes-with-finit
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

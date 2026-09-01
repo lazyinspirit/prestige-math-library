@@ -2,7 +2,7 @@
 id: ex-hilbert-series-of-a-polynomial-ring
 kind: example
 title: "The polynomial ring and a homogeneous quotient have the expected Hilbert series and Hilbert polynomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-hilbert-serre-theorem]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

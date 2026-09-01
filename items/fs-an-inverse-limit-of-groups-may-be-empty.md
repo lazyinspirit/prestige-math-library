@@ -2,7 +2,7 @@
 id: fs-an-inverse-limit-of-groups-may-be-empty
 kind: false-statement
 title: "FALSE: an inverse limit of groups can be empty"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-compatible-tuple-inverse-limit-of-groups, lem-compatible-tuples-form-a-subgroup]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

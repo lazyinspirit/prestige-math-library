@@ -2,7 +2,7 @@
 id: thm-artin-rees-lemma
 kind: theorem
 title: "Artin-Rees controls intersections of submodules with high ideal powers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-rees-module-finiteness-and-stable-filtrations, thm-finite-generation-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

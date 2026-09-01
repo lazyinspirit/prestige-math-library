@@ -2,7 +2,7 @@
 id: thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy
 kind: theorem
 title: "Injective comparison maps are unique up to cochain homotopy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-comparison-maps-are-unique-up-to-chain-homotopy, thm-the-opposite-of-an-abelian-category-is-abelian]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

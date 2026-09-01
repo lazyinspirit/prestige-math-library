@@ -1,7 +1,7 @@
 ---
 page: small-cancellation-and-dehn-algorithms-examples
 title: "Small Cancellation and Dehn Algorithms - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-symmetrising-a-one-relator-presentation, ex-finding-pieces-and-checking-c-prime-one-sixth, ex-a-dehn-reduction-sequence, ex-a-greendlinger-cell-in-a-van-kampen-diagram, ex-a-torsion-free-small-cancellation-group, cex-an-overlap-at-exactly-one-sixth-under-the-strict-convention, cex-a-no-proper-power-presentation-with-torsion-outside-small-cancellation]
 ---

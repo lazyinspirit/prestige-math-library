@@ -2,7 +2,7 @@
 id: lem-weighted-von-mangoldt-harmonic-estimate
 kind: lemma
 title: "The von Mangoldt harmonic sum is log x plus O(1)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ deps: [def-von-mangoldt-function,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

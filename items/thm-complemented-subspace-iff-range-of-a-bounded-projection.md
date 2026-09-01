@@ -2,7 +2,7 @@
 id: thm-complemented-subspace-iff-range-of-a-bounded-projection
 kind: theorem
 title: "A closed subspace is complemented exactly when it is the range of a bounded projection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

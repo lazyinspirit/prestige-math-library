@@ -2,7 +2,7 @@
 id: thm-second-mertens-theorem-for-primes
 kind: theorem
 title: "Mertens' second theorem for primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

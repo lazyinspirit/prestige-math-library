@@ -2,7 +2,7 @@
 id: thm-free-groups-are-residually-finite
 kind: theorem
 title: "Free groups are residually finite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-finite-residual-and-residually-finite-group, thm-reduced-words-form-the-free-group, thm-free-groups-unique-up-to-unique-isomorphism, def-cyclically-reduced-word, lem-cyclic-reduction-normal-form]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

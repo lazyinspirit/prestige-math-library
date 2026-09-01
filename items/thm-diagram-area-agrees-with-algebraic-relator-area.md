@@ -2,7 +2,7 @@
 id: thm-diagram-area-agrees-with-algebraic-relator-area
 kind: theorem
 title: "Minimal van Kampen area agrees with minimal algebraic relator area"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-van-kampen-lemma, def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation, lem-minimal-algebraic-relator-area-exists]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-inverse-limit-of-finite-discrete-groups-is-a-closed-topological-subgroup
 kind: lemma
 title: "The inverse limit of finite discrete groups is a closed topological subgroup of the full product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-compatible-tuples-form-a-subgroup, def-inverse-limit-topology-for-finite-discrete-groups, def-topological-group]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

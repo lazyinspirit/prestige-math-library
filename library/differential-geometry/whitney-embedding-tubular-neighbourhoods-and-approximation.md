@@ -1,7 +1,7 @@
 ---
 page: whitney-embedding-tubular-neighbourhoods-and-approximation
 title: "Whitney Embedding Tubular Neighbourhoods and Approximation"
-status: draft
+status: published
 items: [lem-a-finite-coordinate-bump-map-embeds-a-compact-manifold-in-some-euclidean-space,
         lem-a-countable-coordinate-bump-map-embeds-a-manifold-in-countable-euclidean-data,
         lem-a-smooth-exhaustion-separates-the-locally-finite-chart-bands,

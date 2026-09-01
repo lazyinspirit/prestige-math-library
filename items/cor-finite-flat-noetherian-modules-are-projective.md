@@ -2,7 +2,7 @@
 id: cor-finite-flat-noetherian-modules-are-projective
 kind: corollary
 title: "A finite flat module over a Noetherian ring is finite projective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-finite-flat-modules-over-local-rings-are-free, thm-flatness-is-local,
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

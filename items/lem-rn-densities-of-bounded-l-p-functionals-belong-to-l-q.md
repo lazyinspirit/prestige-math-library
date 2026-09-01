@@ -2,7 +2,7 @@
 id: lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q
 kind: lemma
 title: "The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities, prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm, thm-monotone-convergence-for-the-integral, def-conjugate-exponents, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "For $1<p<\\infty$, test the Radon-Nikodym density against bounded truncated extremizers and pass to the limit by monotone convergence. For $p=1$, level-set testing forces the essential supremum below the operator norm."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   references:

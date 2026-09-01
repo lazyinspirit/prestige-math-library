@@ -2,7 +2,7 @@
 id: ex-localisations-not-faithfully-flat
 kind: example
 title: "A proper localization is flat but need not be faithfully flat"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-localisations-are-flat, thm-faithfully-flat-ring-map-characterisation
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

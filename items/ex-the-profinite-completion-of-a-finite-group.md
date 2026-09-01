@@ -2,7 +2,7 @@
 id: ex-the-profinite-completion-of-a-finite-group
 kind: example
 title: "A finite group is canonically isomorphic to its profinite completion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-profinite-completion-of-an-abstract-group, thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion, thm-universal-property-of-profinite-completion, cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

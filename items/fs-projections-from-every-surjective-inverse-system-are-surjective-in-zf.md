@@ -2,7 +2,7 @@
 id: fs-projections-from-every-surjective-inverse-system-are-surjective-in-zf
 kind: false-statement
 title: "FALSE: every inverse limit of surjective finite-group systems has surjective coordinate projections in ZF"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-coordinate-projections-from-an-inverse-limit, thm-concrete-inverse-limit-universal-property-in-groups]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

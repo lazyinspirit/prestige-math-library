@@ -2,7 +2,7 @@
 id: thm-noetherianity-of-adic-completion
 kind: theorem
 title: "Completion of a Noetherian ring is Noetherian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-noetherian-ring, thm-noetherian-ring-quotients-and-localisations, thm
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

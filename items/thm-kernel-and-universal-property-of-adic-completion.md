@@ -2,7 +2,7 @@
 id: thm-kernel-and-universal-property-of-adic-completion
 kind: theorem
 title: "Kernel and universal property of adic completion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-adic-completion-of-a-module, def-adic-topology-on-a-module, def-separ
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

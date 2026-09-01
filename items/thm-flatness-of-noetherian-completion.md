@@ -2,7 +2,7 @@
 id: thm-flatness-of-noetherian-completion
 kind: theorem
 title: "The completion of a Noetherian ring is flat"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-completion-as-extension-of-scalars, cor-completion-commutes-with-fini
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

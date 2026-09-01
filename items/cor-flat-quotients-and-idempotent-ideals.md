@@ -2,7 +2,7 @@
 id: cor-flat-quotients-and-idempotent-ideals
 kind: corollary
 title: "If $R/I$ is flat then $I = I^2$, and for finitely generated $I$ this is equivalent to generation by an idempotent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-flatness-criteria-by-injections-and-ideals, cor-tensor-product-with-a
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

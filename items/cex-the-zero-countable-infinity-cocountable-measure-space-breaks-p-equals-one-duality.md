@@ -2,7 +2,7 @@
 id: cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality
 kind: counterexample
 title: "The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-countable-choice, def-sigma-algebra, def-measure, thm-countable-union-of-countable, lem-subset-of-countable, def-l-p-space-as-a-quotient-by-null-functions, def-l-infinity-on-a-measure-space, def-l-one-of-a-measure, thm-chebyshev-markov-inequality-for-the-integral]
 proof_strategy: "Build the countable-cocountable measure directly, then use Chebyshev-Markov to force every $L^1$ representative to vanish off an at most countable set while $L^\\infty$ still contains distinct bounded representatives."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

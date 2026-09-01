@@ -2,7 +2,7 @@
 id: thm-finitely-generated-free-groups-are-subgroup-separable
 kind: theorem
 title: "Every finitely generated free group is subgroup separable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-subgroup-separable-and-lerf]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

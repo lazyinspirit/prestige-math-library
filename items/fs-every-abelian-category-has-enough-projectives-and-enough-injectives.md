@@ -2,7 +2,7 @@
 id: fs-every-abelian-category-has-enough-projectives-and-enough-injectives
 kind: false-statement
 title: "FALSE: every abelian category has enough projectives and enough injectives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-a-category-with-enough-projectives-and-with-enough-injectives, thm-enough-projectives-gives-projective-resolutions, cor-every-grothendieck-category-has-enough-injectives-and-every-object-admits-an-injective-resolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

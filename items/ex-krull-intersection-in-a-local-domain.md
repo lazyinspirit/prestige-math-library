@@ -2,7 +2,7 @@
 id: ex-krull-intersection-in-a-local-domain
 kind: example
 title: "In a Noetherian local domain, the intersection of the powers of the maximal ideal is zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-krull-intersection-theorem]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

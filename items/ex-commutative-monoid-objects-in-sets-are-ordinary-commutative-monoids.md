@@ -2,7 +2,7 @@
 id: ex-commutative-monoid-objects-in-sets-are-ordinary-commutative-monoids
 kind: example
 title: "Commutative monoid objects in sets are ordinary commutative monoids"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-monoid-objects-in-a-cartesian-monoidal-category-are-monoids-in-the-ordinary-sense, cor-monoid-objects-in-a-symmetric-monoidal-category-form-a-symmetric-monoidal-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

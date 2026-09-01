@@ -2,7 +2,7 @@
 id: thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object
 kind: theorem
 title: "Injective resolutions of the same object are homotopy equivalent under that object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-injective-comparison-map-exists, thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

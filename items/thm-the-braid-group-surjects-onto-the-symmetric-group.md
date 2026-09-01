@@ -2,7 +2,7 @@
 id: thm-the-braid-group-surjects-onto-the-symmetric-group
 kind: theorem
 title: "The braid group surjects onto the symmetric group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-braid-group-by-the-artin-presentation, thm-the-symmetric-group-has-th
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

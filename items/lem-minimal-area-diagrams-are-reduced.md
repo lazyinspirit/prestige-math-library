@@ -2,7 +2,7 @@
 id: lem-minimal-area-diagrams-are-reduced
 kind: lemma
 title: "A minimal-area van Kampen diagram is reduced"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-reduced-van-kampen-diagram, def-van-kampen-diagram-boundary-label-and-area]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

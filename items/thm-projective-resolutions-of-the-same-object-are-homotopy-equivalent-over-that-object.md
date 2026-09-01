@@ -2,7 +2,7 @@
 id: thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object
 kind: theorem
 title: "Projective resolutions of the same object are homotopy equivalent over that object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-comparison-map-exists, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

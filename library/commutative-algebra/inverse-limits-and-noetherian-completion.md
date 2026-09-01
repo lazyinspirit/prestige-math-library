@@ -1,7 +1,7 @@
 ---
 page: inverse-limits-and-noetherian-completion
 title: "Inverse Limits and Noetherian Completion"
-status: draft
+status: published
 items: [def-filtration-and-adic-filtration,
         def-adic-topology-on-a-module,
         def-inverse-system-and-inverse-limit-of-modules,

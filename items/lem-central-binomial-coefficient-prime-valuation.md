@@ -2,7 +2,7 @@
 id: lem-central-binomial-coefficient-prime-valuation
 kind: lemma
 title: "Prime valuations in the central binomial coefficient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ deps: [def-p-adic-valuation,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

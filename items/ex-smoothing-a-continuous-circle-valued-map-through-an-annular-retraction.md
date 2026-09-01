@@ -2,7 +2,7 @@
 id: ex-smoothing-a-continuous-circle-valued-map-through-an-annular-retraction
 kind: example
 title: "Smoothing a continuous circle-valued map through an annular retraction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

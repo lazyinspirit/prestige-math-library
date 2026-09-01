@@ -2,12 +2,14 @@
 id: def-profinite-topology-on-an-abstract-group
 kind: definition
 title: "The profinite topology on a group uses finite-index normal subgroups as an identity-neighbourhood basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-group, def-normal-subgroup, def-index]
+verification:
+  audited: 2026-09-01
 sources:
   scraped: []
   references:

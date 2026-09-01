@@ -2,13 +2,14 @@
 id: def-totally-disconnected-and-totally-separated-spaces
 kind: definition
 title: "Totally disconnected spaces and totally separated spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-topological-space, def-connected-component-and-quasicomponent, def-interior-closure-boundary-top]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

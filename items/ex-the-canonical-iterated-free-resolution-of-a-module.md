@@ -2,7 +2,7 @@
 id: ex-the-canonical-iterated-free-resolution-of-a-module
 kind: example
 title: "The canonical iterated free resolution of a module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

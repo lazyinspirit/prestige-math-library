@@ -2,7 +2,7 @@
 id: def-meissel-mertens-constant
 kind: definition
 title: "The Meissel-Mertens constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-natural-logarithm]
 justified_by: [thm-second-mertens-theorem-for-primes]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-bounded-left-inverse-iff-range-is-complemented
 kind: theorem
 title: "Under Dependent Choice, an injective bounded operator between Banach spaces has a bounded left inverse exactly when its range is closed and complemented"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

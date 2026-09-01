@@ -2,7 +2,7 @@
 id: lem-chebyshev-psi-prime-power-expansion
 kind: lemma
 title: "Prime-power expansion of Chebyshev's psi function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-chebyshev-psi-function,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

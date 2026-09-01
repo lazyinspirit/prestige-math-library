@@ -2,7 +2,7 @@
 id: def-symmetric-monoidal-category
 kind: definition
 title: "Symmetric monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-braided-monoidal-category]
 landmark: true
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-finite-modules-over-complete-noetherian-rings-are-complete
 kind: theorem
 title: "Finite modules over complete Noetherian rings are complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-separated-and-complete-filtered-module, def-adic-completion-of-a-modu
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

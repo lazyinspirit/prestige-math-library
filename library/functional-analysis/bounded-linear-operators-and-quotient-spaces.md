@@ -1,7 +1,7 @@
 ---
 page: bounded-linear-operators-and-quotient-spaces
 title: "Bounded Linear Operators and Quotient Spaces"
-status: draft
+status: published
 items: [def-bounded-linear-operator, thm-bounded-linear-operator-equivalences,
         def-operator-norm, lem-operator-norm-is-a-norm,
         lem-composition-operator-norm-inequality,

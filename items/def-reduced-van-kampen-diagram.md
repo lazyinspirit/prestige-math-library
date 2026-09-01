@@ -2,13 +2,14 @@
 id: def-reduced-van-kampen-diagram
 kind: definition
 title: "A reduced van Kampen diagram has no cancellable adjacent faces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-van-kampen-diagram-boundary-label-and-area]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

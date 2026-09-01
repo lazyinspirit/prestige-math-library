@@ -2,7 +2,7 @@
 id: thm-concrete-inverse-limit-universal-property-in-groups
 kind: theorem
 title: "The compatible-tuple construction satisfies the inverse-limit universal property in groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-compatible-tuple-inverse-limit-of-groups, def-coordinate-projections-from-an-inverse-limit, def-group-homomorphism]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

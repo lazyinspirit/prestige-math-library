@@ -2,7 +2,7 @@
 id: thm-quotient-of-banach-by-closed-subspace-is-banach
 kind: theorem
 title: "A quotient of a Banach space by a closed subspace is Banach"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

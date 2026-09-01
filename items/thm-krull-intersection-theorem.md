@@ -2,7 +2,7 @@
 id: thm-krull-intersection-theorem
 kind: theorem
 title: "The Krull intersection is the $(1-a)$-torsion submodule, and it vanishes in the Jacobson-radical case"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-artin-rees-lemma, lem-determinant-trick-for-nakayama, thm-jacobson-ra
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

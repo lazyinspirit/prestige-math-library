@@ -2,7 +2,7 @@
 id: cor-linear-isoperimetric-bound-for-finite-c-prime-one-sixth-presentations
 kind: corollary
 title: "Finite C prime(1/6) presentations satisfy a linear isoperimetric inequality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-greendlinger-lemma-for-c-prime-one-sixth-presentations, thm-diagram-area-agrees-with-algebraic-relator-area, lem-minimal-area-diagrams-are-reduced]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

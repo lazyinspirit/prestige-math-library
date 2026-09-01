@@ -2,7 +2,7 @@
 id: lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps
 kind: lemma
 title: "Transfinite iteration of the generator extension preserves monomorphisms and factorizes small-source maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-functorial-one-step-generator-extension, lem-the-one-step-generator-map-is-a-functorial-monomorphism, def-the-axioms-ab5-and-ab5-star, thm-a-locally-small-abelian-category-with-a-generator-is-well-powered]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

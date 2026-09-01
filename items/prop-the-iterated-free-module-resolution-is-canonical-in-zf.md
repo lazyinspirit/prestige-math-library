@@ -2,7 +2,7 @@
 id: prop-the-iterated-free-module-resolution-is-canonical-in-zf
 kind: proposition
 title: "The iterated free-module resolution is canonical in ZF"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-every-module-is-a-quotient-of-a-free-module, lem-one-step-extension-of-a-partial-projective-resolution, thm-free-modules-are-projective-with-choice-boundary]
 proof_strategy: constructive
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

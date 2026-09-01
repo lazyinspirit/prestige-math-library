@@ -1,7 +1,7 @@
 ---
 page: diagonalization-and-the-halting-problem-examples
 title: "Diagonalization and the Halting Problem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-diagonal-self-application-machine

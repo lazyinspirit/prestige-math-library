@@ -2,7 +2,7 @@
 id: thm-greendlinger-lemma-for-c-prime-one-sixth-presentations
 kind: theorem
 title: "In a reduced C prime(1/6) null diagram, some face contributes more than half of its boundary to the outer boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams, lem-minimal-a
 landmark: true
 proof_strategy: "contradiction"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

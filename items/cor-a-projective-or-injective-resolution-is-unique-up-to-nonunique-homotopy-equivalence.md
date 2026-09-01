@@ -2,7 +2,7 @@
 id: cor-a-projective-or-injective-resolution-is-unique-up-to-nonunique-homotopy-equivalence
 kind: corollary
 title: "A projective or injective resolution is unique up to nonunique homotopy equivalence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object, thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: inverse-limits-and-noetherian-completion-examples
 title: "Inverse Limits and Noetherian Completion — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-p-adic-integers-as-an-inverse-limit,
            ex-adic-completion-of-the-integers,

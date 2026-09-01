@@ -2,7 +2,7 @@
 id: ex-completion-of-a-domain-not-a-domain
 kind: example
 title: "A Noetherian domain can have a completion that is not a domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-noetherian-ring-quotients-and-localisations, thm-noetherianity-of-adi
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

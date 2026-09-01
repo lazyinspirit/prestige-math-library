@@ -2,7 +2,7 @@
 id: def-hilbert-samuel-multiplicity
 kind: definition
 title: "Hilbert-Samuel multiplicity as the factorial-scaled leading coefficient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-existence-of-hilbert-samuel-polynomial]
 aliases: []
 verification:
+  audited: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

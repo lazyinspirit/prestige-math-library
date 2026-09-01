@@ -2,7 +2,7 @@
 id: thm-injective-comparison-map-exists
 kind: theorem
 title: "Injective comparison maps exist"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-comparison-map-exists, def-injective-resolution-in-an-abelian-category, thm-the-opposite-of-an-abelian-category-is-abelian]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

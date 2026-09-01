@@ -2,7 +2,7 @@
 id: cor-monoid-objects-in-a-symmetric-monoidal-category-form-a-symmetric-monoidal-category
 kind: corollary
 title: "Monoid objects in a symmetric monoidal category form a symmetric monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-symmetric-monoidal-category, thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

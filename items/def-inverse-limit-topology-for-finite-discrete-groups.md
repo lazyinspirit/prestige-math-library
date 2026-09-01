@@ -2,13 +2,14 @@
 id: def-inverse-limit-topology-for-finite-discrete-groups
 kind: definition
 title: "The inverse limit of finite groups carries the subspace topology from the product of discrete factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-compatible-tuple-inverse-limit-of-groups, def-product-topology, def-subspace-topology-top]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

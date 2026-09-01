@@ -1,7 +1,7 @@
 ---
 page: rees-modules-artin-rees-and-hilbert-samuel-theory-examples
 title: "Rees Modules Artin Rees and Hilbert Samuel Theory — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hilbert-series-of-a-polynomial-ring,
            ex-associated-graded-of-a-local-ring,

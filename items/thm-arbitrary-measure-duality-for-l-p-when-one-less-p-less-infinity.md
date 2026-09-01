@@ -2,7 +2,7 @@
 id: thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity
 kind: theorem
 title: "For $1 < p < \\infty$, the same representation theorem holds on arbitrary measure spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, thm-sigma-finite-duality-for-bounded-functionals-on-l-p, lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p, prop-semifinite-measures-make-l-q-representatives-unique, def-finite-sigma-finite-and-semifinite-measures, prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm]
 proof_strategy: "Represent the restriction of the functional on each sigma-finite measurable subset, choose a countable near-maximizing family of such subsets, and prove that their union already captures every local representative."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: thm-the-inverse-braiding-is-a-braiding
 kind: theorem
 title: "The inverse braiding is again a braiding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-braiding]
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

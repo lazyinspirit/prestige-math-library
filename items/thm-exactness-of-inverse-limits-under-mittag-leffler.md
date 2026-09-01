@@ -2,7 +2,7 @@
 id: thm-exactness-of-inverse-limits-under-mittag-leffler
 kind: theorem
 title: "Countable Mittag-Leffler systems preserve short exactness on inverse limits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-inverse-limits-are-left-exact, def-mittag-leffler-inverse-system]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

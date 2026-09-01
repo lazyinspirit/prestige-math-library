@@ -2,13 +2,14 @@
 id: def-symmetrisation-of-a-relator-set
 kind: definition
 title: "The symmetrisation of a relator set closes under inverses and cyclic conjugates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-cyclically-reduced-word, def-group-presentation]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-finding-pieces-and-checking-c-prime-one-sixth
 kind: example
 title: "A concrete relator set with its pieces and a direct C prime(1/6) check"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-piece-in-a-symmetrised-presentation, def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

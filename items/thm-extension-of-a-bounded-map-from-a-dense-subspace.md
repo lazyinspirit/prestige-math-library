@@ -2,7 +2,7 @@
 id: thm-extension-of-a-bounded-map-from-a-dense-subspace
 kind: theorem
 title: "A bounded linear map from a dense normed subspace into a Banach space extends uniquely with the same norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

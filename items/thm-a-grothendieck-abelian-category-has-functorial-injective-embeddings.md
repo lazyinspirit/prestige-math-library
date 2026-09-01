@@ -2,7 +2,7 @@
 id: thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings
 kind: theorem
 title: "Grothendieck abelian categories have functorial injective embeddings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-grothendieck-category, lem-extension-from-subobjects-of-a-generator-d
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-a-dense-nonclosed-copy-of-a-group-in-its-completion
 kind: example
 title: "The integers sit densely but not closedly inside their profinite completion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion, ex-the-profinite-completion-of-the-integers]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

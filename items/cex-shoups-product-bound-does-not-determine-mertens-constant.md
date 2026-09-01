@@ -2,7 +2,7 @@
 id: cex-shoups-product-bound-does-not-determine-mertens-constant
 kind: counterexample
 title: "A Theta(1/log x) product bound does not determine the Mertens constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ deps: [thm-second-mertens-theorem-for-primes,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

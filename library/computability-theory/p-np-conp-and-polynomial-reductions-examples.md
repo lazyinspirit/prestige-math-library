@@ -1,7 +1,7 @@
 ---
 page: p-np-conp-and-polynomial-reductions-examples
 title: "P, NP, coNP, and Polynomial Reductions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-p-is-contained-in-np-intersection-conp

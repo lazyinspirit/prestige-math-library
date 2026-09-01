@@ -2,7 +2,7 @@
 id: def-tubular-neighbourhood-of-an-embedded-submanifold
 kind: definition
 title: "Tubular neighbourhoods of embedded submanifolds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

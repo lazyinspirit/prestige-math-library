@@ -2,13 +2,14 @@
 id: def-deleted-resolution
 kind: definition
 title: "Deleted resolutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-projective-resolution-in-an-abelian-category, def-injective-resolution-in-an-abelian-category]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

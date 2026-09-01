@@ -2,7 +2,7 @@
 id: ex-a-residually-finite-free-group
 kind: example
 title: "A free group separates one nontrivial reduced word by a finite quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-free-groups-are-residually-finite]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

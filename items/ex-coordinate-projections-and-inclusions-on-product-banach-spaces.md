@@ -2,7 +2,7 @@
 id: ex-coordinate-projections-and-inclusions-on-product-banach-spaces
 kind: example
 title: "Coordinate projections and inclusions on a finite product Banach space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

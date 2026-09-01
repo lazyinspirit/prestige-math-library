@@ -2,7 +2,7 @@
 id: ex-the-horseshoe-resolution-of-an-extension-of-cyclic-groups
 kind: example
 title: "The horseshoe resolution of an extension of cyclic groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

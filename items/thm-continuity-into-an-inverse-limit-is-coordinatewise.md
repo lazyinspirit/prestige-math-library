@@ -2,7 +2,7 @@
 id: thm-continuity-into-an-inverse-limit-is-coordinatewise
 kind: theorem
 title: "A map into an inverse limit is continuous exactly when all coordinate composites are continuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-coordinate-projections-from-an-inverse-limit, def-inverse-limit-topology-for-finite-discrete-groups, def-continuous-map-top]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

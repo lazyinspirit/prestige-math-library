@@ -2,13 +2,14 @@
 id: def-subgroup-separable-and-lerf
 kind: definition
 title: "A subgroup is separable when it is closed in the profinite topology, and a group is LERF when every finitely generated subgroup is separable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-profinite-topology-on-an-abstract-group, def-subgroup]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

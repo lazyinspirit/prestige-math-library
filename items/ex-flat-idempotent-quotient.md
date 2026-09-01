@@ -2,7 +2,7 @@
 id: ex-flat-idempotent-quotient
 kind: example
 title: "A quotient by an idempotent ideal is flat"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-flat-quotients-and-idempotent-ideals]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

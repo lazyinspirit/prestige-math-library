@@ -2,7 +2,7 @@
 id: lem-rees-module-finiteness-and-stable-filtrations
 kind: lemma
 title: "Over a Noetherian ring, an ideal filtration is stable exactly when its Rees module is finite, and the Rees algebra is Noetherian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-rees-algebra-and-rees-module, def-graded-ring-and-graded-module, thm-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

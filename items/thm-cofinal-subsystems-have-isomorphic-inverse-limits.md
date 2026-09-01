@@ -2,7 +2,7 @@
 id: thm-cofinal-subsystems-have-isomorphic-inverse-limits
 kind: theorem
 title: "A cofinal subsystem has the same inverse limit up to canonical isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cofinal-subsystem, def-compatible-tuple-inverse-limit-of-groups, thm-concrete-inverse-limit-universal-property-in-groups]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

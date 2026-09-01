@@ -2,7 +2,7 @@
 id: cor-a-split-short-exact-sequence-admits-the-direct-sum-resolution
 kind: corollary
 title: "A split short exact sequence admits the direct-sum resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-horseshoe-lemma-for-projective-resolutions, def-split-short-exact-sequence-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

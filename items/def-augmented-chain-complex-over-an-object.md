@@ -2,13 +2,14 @@
 id: def-augmented-chain-complex-over-an-object
 kind: definition
 title: "Augmented chain complexes over an object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-complex-in-an-abelian-category]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

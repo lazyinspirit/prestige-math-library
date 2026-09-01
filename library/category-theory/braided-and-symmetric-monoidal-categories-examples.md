@@ -1,7 +1,7 @@
 ---
 page: braided-and-symmetric-monoidal-categories-examples
 title: "Braided and Symmetric Monoidal Categories - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-swap-braiding-on-sets,
            ex-the-braid-group-on-three-strands,

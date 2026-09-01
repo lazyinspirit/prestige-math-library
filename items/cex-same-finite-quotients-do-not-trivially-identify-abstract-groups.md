@@ -2,7 +2,7 @@
 id: cex-same-finite-quotients-do-not-trivially-identify-abstract-groups
 kind: counterexample
 title: "Nonisomorphic groups can share the same profinite completion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-two-groups-with-isomorphic-profinite-completions-are-isomorphic, def-profinite-completion-of-an-abstract-group, thm-profinite-completion-is-functorial]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

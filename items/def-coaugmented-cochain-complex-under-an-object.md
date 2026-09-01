@@ -2,13 +2,14 @@
 id: def-coaugmented-cochain-complex-under-an-object
 kind: definition
 title: "Coaugmented cochain complexes under an object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-cochain-complex-in-an-abelian-category]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

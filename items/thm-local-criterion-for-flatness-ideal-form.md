@@ -2,7 +2,7 @@
 id: thm-local-criterion-for-flatness-ideal-form
 kind: theorem
 title: "For an $R$-finite module over a local map, flatness modulo $I$ and injectivity of $I \\otimes M \\to M$ imply flatness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-equational-criterion-for-flatness, cor-nakayama-generators-modulo-an-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

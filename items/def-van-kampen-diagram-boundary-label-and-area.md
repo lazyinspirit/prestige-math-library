@@ -2,13 +2,14 @@
 id: def-van-kampen-diagram-boundary-label-and-area
 kind: definition
 title: "Van Kampen diagrams, boundary labels, and diagram area for a presentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-group-presentation, def-finite-cardinality]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

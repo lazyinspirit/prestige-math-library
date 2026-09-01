@@ -2,7 +2,7 @@
 id: lem-symmetrisation-has-the-same-normal-closure
 kind: lemma
 title: "A relator set and its symmetrisation have the same normal closure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-symmetrisation-of-a-relator-set, def-normal-closure]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

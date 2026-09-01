@@ -2,7 +2,7 @@
 id: rem-strong-whitney-immersion-theorem
 kind: remark
 title: "The strong Whitney immersion theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -14,6 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  sources_checked: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

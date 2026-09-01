@@ -2,7 +2,7 @@
 id: lem-mixed-anticonnected-blocks-lift-pattern-obstructions-to-the-ambient-graph
 kind: lemma
 title: "Mixed anticonnected blocks lift pattern obstructions to the ambient graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

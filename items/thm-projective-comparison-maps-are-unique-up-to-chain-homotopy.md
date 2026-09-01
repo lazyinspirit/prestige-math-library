@@ -2,7 +2,7 @@
 id: thm-projective-comparison-maps-are-unique-up-to-chain-homotopy
 kind: theorem
 title: "Projective comparison maps are unique up to chain homotopy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-projective-comparison-map-exists, lem-extend-a-partial-comparison-hom
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

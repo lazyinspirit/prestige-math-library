@@ -2,7 +2,7 @@
 id: fs-a-compact-hausdorff-group-is-profinite-without-total-disconnectedness
 kind: false-statement
 title: "FALSE: every compact Hausdorff topological group is profinite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-topological-characterisation-of-profinite-groups, thm-compact-hausdorff-total-disconnectedness-and-total-separatedness-agree]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

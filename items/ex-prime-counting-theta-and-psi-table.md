@@ -2,7 +2,7 @@
 id: ex-prime-counting-theta-and-psi-table
 kind: example
 title: "A table of pi(x), theta(x), and psi(x)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ deps: [def-prime-counting-function,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

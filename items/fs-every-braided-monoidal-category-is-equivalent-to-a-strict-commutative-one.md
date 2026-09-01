@@ -2,7 +2,7 @@
 id: fs-every-braided-monoidal-category-is-equivalent-to-a-strict-commutative-one
 kind: false-statement
 title: "FALSE: every braided monoidal category is equivalent to a strict commutative one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-the-braid-category-is-braided-but-not-symmetric, thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

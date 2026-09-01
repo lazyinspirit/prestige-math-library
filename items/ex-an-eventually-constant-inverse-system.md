@@ -2,7 +2,7 @@
 id: ex-an-eventually-constant-inverse-system
 kind: example
 title: "An eventually constant inverse system has inverse limit equal to its stable value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-concrete-inverse-limit-universal-property-in-groups, thm-cofinal-subsystems-have-isomorphic-inverse-limits]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

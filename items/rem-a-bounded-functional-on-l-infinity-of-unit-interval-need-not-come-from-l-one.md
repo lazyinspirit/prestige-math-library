@@ -2,7 +2,7 @@
 id: rem-a-bounded-functional-on-l-infinity-of-unit-interval-need-not-come-from-l-one
 kind: remark
 title: "A bounded functional on $L^\\infty[0,1]$ need not come from $L^1[0,1]$"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -15,6 +15,7 @@ external_dependency:
   local_proof_attempt: "No local proof is supplied because the extension step is Hahn-Banach, which this measure-theory page does not own."
   necessity: "The examples page must carry the standard concrete $p=\\infty$ boundary witness without importing abstract functional-analysis machinery."
 verification:
+  sources_checked: 2026-09-01
   precheck: n/a
 sources:
   references:

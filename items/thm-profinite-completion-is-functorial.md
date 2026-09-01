@@ -2,7 +2,7 @@
 id: thm-profinite-completion-is-functorial
 kind: theorem
 title: "A homomorphism induces a continuous homomorphism of profinite completions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [thm-universal-property-of-profinite-completion,
        thm-continuity-into-an-inverse-limit-is-coordinatewise]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group
 kind: lemma
 title: "The boundary label of a van Kampen diagram is trivial in the presented group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-van-kampen-diagram-boundary-label-and-area, def-normal-closure, def-group-presentation]
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

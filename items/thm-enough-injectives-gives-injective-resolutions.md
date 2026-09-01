@@ -2,7 +2,7 @@
 id: thm-enough-injectives-gives-injective-resolutions
 kind: theorem
 title: "A chosen chain of injective embeddings gives an injective resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-injective-resolution-in-an-abelian-category, lem-one-step-extension-of-a-partial-injective-resolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

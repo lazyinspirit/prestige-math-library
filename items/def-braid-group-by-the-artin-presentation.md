@@ -2,7 +2,7 @@
 id: def-braid-group-by-the-artin-presentation
 kind: definition
 title: "The braid group by Artin presentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-presentation, def-relators-relations-and-finite-presentations]
 landmark: true
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

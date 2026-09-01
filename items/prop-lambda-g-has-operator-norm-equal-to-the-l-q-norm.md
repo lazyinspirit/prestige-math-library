@@ -2,7 +2,7 @@
 id: prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm
 kind: proposition
 title: "The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p, def-conjugate-exponents, def-finite-sigma-finite-and-semifinite-measures, prop-essential-supremum-is-attained-as-the-least-essential-bound, rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative]
 proof_strategy: "Use Holder for the upper bound. For $1<p<\\infty$ test against the normalized extremizer $|g|^{q-1}\\operatorname{sgn} g$; for $p=1$ use a finite-measure subset of an almost-maximal level set, which is exactly where semifiniteness enters."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   references:

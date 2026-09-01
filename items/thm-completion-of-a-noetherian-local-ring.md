@@ -2,7 +2,7 @@
 id: thm-completion-of-a-noetherian-local-ring
 kind: theorem
 title: "Completion of a Noetherian local ring is local with the same residue field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-noetherianity-of-adic-completion, thm-faithful-flatness-of-jacobson-a
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

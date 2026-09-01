@@ -2,12 +2,14 @@
 id: def-cofinal-subsystem
 kind: definition
 title: "A cofinal subsystem meets every index eventually"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-directed-set-and-inverse-system-of-groups]
+verification:
+  audited: 2026-09-01
 sources:
   scraped: []
   references:

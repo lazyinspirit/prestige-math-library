@@ -2,7 +2,7 @@
 id: def-positive-continuous-error-function-for-strong-approximation
 kind: definition
 title: "Positive continuous error functions for strong approximation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

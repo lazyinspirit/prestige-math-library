@@ -2,7 +2,7 @@
 id: lem-extend-a-partial-comparison-homotopy-by-one-degree
 kind: lemma
 title: "Extending a partial comparison homotopy by one degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-augmentation-preserving-map-of-projective-resolutions, def-chain-homotopy, def-cycle-and-boundary-subobjects-of-a-complex, def-projective-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []
