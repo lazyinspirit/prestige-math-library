@@ -2024,7 +2024,10 @@ export const stages = [
     // quote in three successful rounds, then falsely exhausted before the newly
     // exposed boundary review could receive its first routed read. Keep the
     // loop bounded, but budget for sequential distinct gates at this join.
-    maxFixRounds: 8,
+    // Frontier 28 needed depcheck, rendercheck, two splice synchronisations,
+    // contract quote repair, and contract-detector review in one join; eight
+    // rounds left no room for a truthful residual from the detector audit.
+    maxFixRounds: 10,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
       // Artifact accounting now keeps a partial zero-exit author covered but
       // incomplete. Resume exactly the batches whose required contracts never
