@@ -2,7 +2,7 @@
 id: def-np-hard-and-np-complete
 kind: definition
 title: "NP-hard and NP-complete languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - def-np-by-verifiers
   - def-polynomial-time-many-one-reduction
 verification:
+  audited: 2026-09-02
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

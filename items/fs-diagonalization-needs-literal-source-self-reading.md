@@ -2,7 +2,7 @@
 id: fs-diagonalization-needs-literal-source-self-reading
 kind: false-statement
 title: "FALSE: diagonalization requires a machine to read its physical source text"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-effective-encoding-of-turing-machines, lem-diagonal-self-application-machine, thm-existence-of-a-universal-turing-machine]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

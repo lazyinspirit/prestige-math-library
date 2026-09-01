@@ -2,7 +2,7 @@
 id: cor-nonhalting-is-not-recognizable
 kind: corollary
 title: "The complement of the halting problem is not recognizable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-halting-is-recognizable-and-undecidable, thm-decidable-iff-language-and-complement-are-recognizable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

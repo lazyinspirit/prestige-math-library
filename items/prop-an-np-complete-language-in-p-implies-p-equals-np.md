@@ -2,7 +2,7 @@
 id: prop-an-np-complete-language-in-p-implies-p-equals-np
 kind: proposition
 title: "An NP-complete language in P forces $P=NP$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-np-hard-and-np-complete, thm-polynomial-reductions-transfer-p-np-and-conp-membership, prop-p-is-contained-in-np-intersection-conp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

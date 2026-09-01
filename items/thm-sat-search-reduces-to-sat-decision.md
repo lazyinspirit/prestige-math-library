@@ -2,7 +2,7 @@
 id: thm-sat-search-reduces-to-sat-decision
 kind: theorem
 title: "SAT search polynomial-time Turing reduces to SAT decision"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-search-version-of-an-np-relation, def-polynomially-balanced-verifier]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

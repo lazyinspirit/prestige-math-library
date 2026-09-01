@@ -2,7 +2,7 @@
 id: thm-totality-is-not-recognizable
 kind: theorem
 title: "Halting on every input is not recognizable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-halting-problem, cor-nonhalting-is-not-recognizable, def-effective-encoding-of-turing-machines, def-decidable-and-recognizable-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-p-is-contained-in-np-intersection-conp
 kind: example
 title: "An even-length language sits in P, hence also in NP and coNP"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-p-is-contained-in-np-intersection-conp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

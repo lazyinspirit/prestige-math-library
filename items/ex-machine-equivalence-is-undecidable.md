@@ -2,7 +2,7 @@
 id: ex-machine-equivalence-is-undecidable
 kind: example
 title: "Reducing halting to language equivalence by a machine that either accepts everything or loops forever"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-machine-equivalence-is-undecidable, thm-halting-is-recognizable-and-undecidable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

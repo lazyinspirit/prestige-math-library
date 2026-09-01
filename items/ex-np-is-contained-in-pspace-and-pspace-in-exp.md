@@ -2,7 +2,7 @@
 id: ex-np-is-contained-in-pspace-and-pspace-in-exp
 kind: example
 title: "Lexicographic certificate search uses polynomial space and exponential time"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-np-is-contained-in-pspace-and-pspace-in-exp, def-search-version-of-an-np-relation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

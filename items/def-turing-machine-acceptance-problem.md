@@ -2,7 +2,7 @@
 id: def-turing-machine-acceptance-problem
 kind: definition
 title: "The Turing-machine acceptance problem $A_{TM}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps:
   - lem-finite-tuples-admit-effective-prefix-free-encodings
   - def-computation-alphabet-and-word-convention
 verification:
+  audited: 2026-09-02
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

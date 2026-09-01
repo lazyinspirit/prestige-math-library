@@ -2,7 +2,7 @@
 id: thm-halting-is-recognizable-and-undecidable
 kind: theorem
 title: "The halting problem is recognizable and undecidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-halting-problem, def-effective-encoding-of-turing-machines, lem-step-by-step-interpreter-for-machine-codes, prop-machine-descriptions-form-a-decidable-language, thm-machine-acceptance-is-undecidable, def-decidable-and-recognizable-language, def-halting-computation-and-divergence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

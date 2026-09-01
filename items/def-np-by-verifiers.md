@@ -2,7 +2,7 @@
 id: def-np-by-verifiers
 kind: definition
 title: "The class NP via polynomial-time verifiers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - def-polynomially-balanced-verifier
   - def-p
 verification:
+  audited: 2026-09-02
   precheck: n/a
 sources:
   scraped: []

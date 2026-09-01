@@ -2,7 +2,7 @@
 id: lem-polynomial-reductions-compose
 kind: lemma
 title: "Polynomial-time many-one reductions compose"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-polynomial-time-many-one-reduction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

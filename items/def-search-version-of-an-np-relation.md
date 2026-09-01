@@ -2,7 +2,7 @@
 id: def-search-version-of-an-np-relation
 kind: definition
 title: "The search problem attached to an NP verifier"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - def-polynomially-balanced-verifier
   - def-np-by-verifiers
 verification:
+  audited: 2026-09-02
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

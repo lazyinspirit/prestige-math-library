@@ -2,7 +2,7 @@
 id: def-busy-beaver-function
 kind: definition
 title: "The step-count busy beaver function relative to the chosen machine coding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps:
   - def-halting-computation-and-divergence
   - def-natural-numbers
 verification:
+  audited: 2026-09-02
   precheck: n/a
 sources:
   scraped: []

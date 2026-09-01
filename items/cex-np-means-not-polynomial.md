@@ -2,7 +2,7 @@
 id: cex-np-means-not-polynomial
 kind: counterexample
 title: "A regular parity language refutes 'NP means not polynomial'"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-np-means-not-polynomial, prop-p-is-contained-in-np-intersection-conp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

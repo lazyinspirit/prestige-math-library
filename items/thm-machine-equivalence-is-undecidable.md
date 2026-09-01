@@ -2,7 +2,7 @@
 id: thm-machine-equivalence-is-undecidable
 kind: theorem
 title: "Language equivalence of Turing machines is undecidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-effective-encoding-of-turing-machines, thm-halting-is-recognizable-and-undecidable, def-language-recognized-and-decided, def-decidable-and-recognizable-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

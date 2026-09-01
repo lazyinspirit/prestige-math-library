@@ -2,7 +2,7 @@
 id: prop-p-is-contained-in-np-intersection-conp
 kind: proposition
 title: "$P \\subseteq NP \\cap coNP$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p, def-np-by-verifiers, def-conp, def-polynomially-balanced-verifier]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

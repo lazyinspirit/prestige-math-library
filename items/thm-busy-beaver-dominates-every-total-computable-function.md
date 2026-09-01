@@ -2,7 +2,7 @@
 id: thm-busy-beaver-dominates-every-total-computable-function
 kind: theorem
 title: "The busy beaver function eventually dominates every total computable function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-busy-beaver-function, def-computable-and-partial-computable-function, def-partial-function-computed-by-a-machine, def-effective-encoding-of-turing-machines]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

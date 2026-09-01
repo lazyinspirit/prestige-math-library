@@ -2,7 +2,7 @@
 id: def-polynomial-time-many-one-reduction
 kind: definition
 title: "Polynomial-time many-one reductions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - def-p
   - def-worst-case-time-and-space-complexity
 verification:
+  audited: 2026-09-02
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

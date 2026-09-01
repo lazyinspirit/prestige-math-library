@@ -2,7 +2,7 @@
 id: cex-undecidable-means-no-instance-can-be-answered
 kind: counterexample
 title: "An immediate-accept machine gives an easy yes-instance inside an undecidable language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-undecidable-means-no-instance-can-be-answered, def-turing-machine-acceptance-problem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

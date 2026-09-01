@@ -2,7 +2,7 @@
 id: thm-polynomial-reductions-transfer-p-np-and-conp-membership
 kind: theorem
 title: "Polynomial-time many-one reductions transfer P-, NP-, and coNP-membership"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-polynomial-time-many-one-reduction, lem-polynomial-reductions-compose, def-p, def-np-by-verifiers, def-conp, def-polynomially-balanced-verifier]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

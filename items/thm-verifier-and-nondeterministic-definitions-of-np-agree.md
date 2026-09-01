@@ -2,7 +2,7 @@
 id: thm-verifier-and-nondeterministic-definitions-of-np-agree
 kind: theorem
 title: "The verifier and nondeterministic definitions of NP agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-np-by-verifiers, def-dtime-ntime-dspace-and-nspace, lem-time-at-least-input-length-permits-complete-input-reading]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

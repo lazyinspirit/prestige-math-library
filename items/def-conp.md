@@ -2,7 +2,7 @@
 id: def-conp
 kind: definition
 title: "The class coNP"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps:
   - def-np-by-verifiers
 verification:
+  audited: 2026-09-02
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

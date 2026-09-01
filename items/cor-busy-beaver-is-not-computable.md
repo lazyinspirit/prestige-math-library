@@ -2,7 +2,7 @@
 id: cor-busy-beaver-is-not-computable
 kind: corollary
 title: "The busy beaver function is not computable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-busy-beaver-function, thm-busy-beaver-dominates-every-total-computable-function, def-computable-and-partial-computable-function]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

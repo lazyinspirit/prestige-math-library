@@ -2,7 +2,7 @@
 id: thm-machine-acceptance-is-undecidable
 kind: theorem
 title: "The Turing-machine acceptance problem is undecidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-turing-machine-acceptance-problem, lem-diagonal-self-application-machine, def-decidable-and-recognizable-language, def-effective-encoding-of-turing-machines]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

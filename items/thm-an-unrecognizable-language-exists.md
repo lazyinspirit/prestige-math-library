@@ -2,7 +2,7 @@
 id: thm-an-unrecognizable-language-exists
 kind: theorem
 title: "There exists a language that is not recognizable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-nonhalting-is-not-recognizable, def-halting-problem, def-decidable-and-recognizable-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

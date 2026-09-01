@@ -2,7 +2,7 @@
 id: fs-np-complete-means-known-not-in-p
 kind: false-statement
 title: "FALSE: NP-complete means proven not to lie in P"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-np-hard-and-np-complete, prop-an-np-complete-language-in-p-implies-p-equals-np]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

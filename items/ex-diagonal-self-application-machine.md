@@ -2,7 +2,7 @@
 id: ex-diagonal-self-application-machine
 kind: example
 title: "Building the diagonal machine against a hypothetical acceptance decider"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-diagonal-self-application-machine, thm-machine-acceptance-is-undecidable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

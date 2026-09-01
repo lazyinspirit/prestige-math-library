@@ -2,7 +2,7 @@
 id: def-exp-and-nexp
 kind: definition
 title: "The classes EXP and NEXP"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps:
   - def-dtime-ntime-dspace-and-nspace
 verification:
+  audited: 2026-09-02
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-undecidable-means-no-instance-can-be-answered
 kind: false-statement
 title: "FALSE: undecidable means no individual instance can be answered"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-machine-acceptance-is-undecidable, def-turing-machine-acceptance-problem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

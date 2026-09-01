@@ -2,7 +2,7 @@
 id: prop-np-is-contained-in-pspace-and-pspace-in-exp
 kind: proposition
 title: "$NP \\subseteq PSPACE \\subseteq EXP$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-np-by-verifiers, def-exp-and-nexp, def-dtime-ntime-dspace-and-nspace, def-worst-case-time-and-space-complexity, def-turing-machine-configuration, def-tape-finite-support-convention]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []

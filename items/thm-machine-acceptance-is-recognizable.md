@@ -2,7 +2,7 @@
 id: thm-machine-acceptance-is-recognizable
 kind: theorem
 title: "The Turing-machine acceptance problem is recognizable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-turing-machine-acceptance-problem, def-effective-encoding-of-turing-machines, lem-step-by-step-interpreter-for-machine-codes, thm-existence-of-a-universal-turing-machine, prop-machine-descriptions-form-a-decidable-language, def-decidable-and-recognizable-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

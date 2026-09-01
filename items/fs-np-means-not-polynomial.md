@@ -2,7 +2,7 @@
 id: fs-np-means-not-polynomial
 kind: false-statement
 title: "FALSE: NP means not polynomial-time solvable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-np-by-verifiers, prop-p-is-contained-in-np-intersection-conp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-02
   precheck: pass
 sources:
   scraped: []
