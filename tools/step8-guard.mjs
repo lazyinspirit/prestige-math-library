@@ -74,10 +74,13 @@ const publishedRepairsPath = option('--published-repairs');
 const terminalResolutionsPath = option('--terminal-resolutions');
 // A fatal repair can expose a defect in one of its own run-local prerequisites.
 // That prerequisite has no judge row of its own, so the ordinary fatal licence
-// cannot name it.  After automatic repair exhaustion, the owner may authorize
-// that one dependency repair explicitly.  The receipt is deliberately exact:
-// same group, direct dependency, a real confirmed-fatal exposing item, baseline
-// and repaired hashes, and the authoritative sources used for the correction.
+// cannot name it.  After automatic repair exhaustion, either the owner or the
+// independent final adjudicator reviewing the exposing item may authorize that
+// one dependency repair explicitly.  The receipt is deliberately exact: same
+// group, direct dependency, a real confirmed-fatal exposing item, baseline and
+// repaired hashes, and the authoritative sources used for the correction.  An
+// FA licence additionally has to match that exposing item's terminal receipt;
+// prose claiming that an FA was involved is not authority.
 const ownerPrerequisiteRepairsPath = option('--owner-prerequisite-repairs');
 
 const usage = () => {
@@ -279,8 +282,10 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
       continue;
     }
     const where = `${ownerPrerequisiteRepairsPath}:${index + 1}`;
+    const authorizedByOwner = record?.authorized_by === 'owner';
+    const authorizedByFa = record?.authorized_by === 'final-adjudicator';
     if (record?.version !== 1 || record?.kind !== 'owner-prerequisite-repair'
-      || record?.run !== scope.run || record?.authorized_by !== 'owner'
+      || record?.run !== scope.run || (!authorizedByOwner && !authorizedByFa)
       || typeof record?.id !== 'string' || typeof record?.found_via !== 'string'
       || typeof record?.defect !== 'string' || record.defect.trim().length < 20
       || typeof record?.correction_basis !== 'string' || record.correction_basis.trim().length < 80
@@ -291,7 +296,7 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
       || !/^[a-f0-9]{64}$/.test(record?.post_sha256 ?? '')) {
       error('owner-prerequisite-repair-shape',
         `${where}: requires a version-1 owner-prerequisite-repair with run, id, found_via, `
-        + 'authorized_by:"owner", exact pre/post hashes, at least two HTTPS source URLs, and concrete defect/correction evidence',
+        + 'authorized_by:"owner" or "final-adjudicator", exact pre/post hashes, at least two HTTPS source URLs, and concrete defect/correction evidence',
         record?.id ?? null);
       continue;
     }
@@ -314,6 +319,23 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
     if (!(fatalLicences.get(record.found_via)?.size)) {
       error('owner-prerequisite-repair-no-fatal', `${where}: found_via has no exact confirmed-fatal judge adjudication`, record.id);
       continue;
+    }
+    if (authorizedByFa) {
+      const terminal = terminalParsed.latest.get(record.found_via);
+      const terminalSources = new Set(terminal?.final_adjudicator?.authoritative_sources ?? []);
+      if (terminal?.resolved_by !== 'final-adjudicator' || terminal?.disposition !== 'repaired'
+        || String(terminal?.final_adjudicator?.group) !== String(record.group)
+        || record.source_urls.some((url) => !terminalSources.has(url))) {
+        error('final-adjudicator-prerequisite-repair-provenance',
+          `${where}: an FA prerequisite repair must match a repaired terminal resolution for found_via in the same group, and every source URL must occur in that FA receipt`, record.id);
+        continue;
+      }
+      const exposingText = readFileSync(join(ITEMS, `${record.found_via}.md`), 'utf8');
+      if (terminal.item_sha256 !== itemHashJudge(exposingText)) {
+        error('final-adjudicator-prerequisite-repair-stale',
+          `${where}: found_via terminal resolution does not match the current exposing item`, record.id);
+        continue;
+      }
     }
     if (shortHash(record.pre_sha256) !== baseline.hashes?.[record.id]
       || shortHash(record.post_sha256) !== now?.[record.id]) {

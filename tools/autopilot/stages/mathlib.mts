@@ -975,7 +975,7 @@ function writeFinalAdjudicatorTask(ctx: any, stage: any, round: number, group: s
       `1. Read \`items/${row.id}.md\`, its cited dependencies, pair/page context, proof contract, judge and Alpha evidence, and this group's conventions.`,
       '2. Independently decide whether the Alpha repair is correct. If unfamiliar or uncertain, use web search and verify against authoritative sources.',
       `3. Write concrete evidence to \`${evidenceRel}\`, including exact source URLs and what they support, or explain why the mathematics was familiar.`,
-      '4. Either accept the current repair or independently repair it and its directly required local metadata/contracts. Run focused checks.',
+      '4. Either accept the current repair or independently repair it and its directly required local metadata/contracts. If that repair changes a run-local direct dependency, record the exact final-adjudicator prerequisite-repair licence required by the FA brief. Run focused checks.',
       '5. Record the exact final bytes with exactly one of these commands:',
       '',
       '```bash',
