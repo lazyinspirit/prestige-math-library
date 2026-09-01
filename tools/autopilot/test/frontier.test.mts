@@ -91,6 +91,24 @@ test('strictly more than 95 percent qualifies while exactly 95 percent does not'
   assert.equal(unsatisfiableEdges(r, ['exactly-95']).length, 1);
 });
 
+test('an explicit plan may satisfy a same-category edge with an earlier pair in the same run', () => {
+  const pages = [
+    A('foundation', 1), B('foundation', 1),
+    A('dependent', 3, ['foundation']), B('dependent', 3),
+  ];
+  const r = repo({ pages });
+  assert.equal(unsatisfiableEdges(r, ['foundation', 'dependent']).length, 1);
+  assert.deepEqual(
+    unsatisfiableEdges(r, ['foundation', 'dependent'], { allowInRunDependencies: true }),
+    [],
+  );
+  assert.equal(
+    unsatisfiableEdges(r, ['dependent'], { allowInRunDependencies: true }).length,
+    1,
+    'the option must not excuse a prerequisite absent from the run',
+  );
+});
+
 test('next-run selection refuses an A page whose companion pair is absent', () => {
   const r = repo({ pages: [A('orphan', 1, [], 'priority')] });
   assert.throws(

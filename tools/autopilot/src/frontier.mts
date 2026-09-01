@@ -53,8 +53,10 @@ export function pageStatus(repo: string): Map<string, string> {
 
 /**
  * The unpublished same-category edges belonging to proposed pages that fail
- * the permanent >95%-published predicate. A qualifying page's permitted
- * residual is not unsatisfiable and therefore does not appear here.
+ * the permanent >95%-published predicate. An explicit plan may opt into
+ * satisfying an edge with a lower-order pair carried by that same run; the
+ * next-frontier selector never enables that exception. A qualifying page's
+ * permitted residual is not unsatisfiable and therefore does not appear here.
  *
  * THE SAME PREDICATE `drift-review-check` ENFORCES AT STAGE 1, checked before
  * a single agent is dispatched. On frontier-18 a fourteen-pair set was planned
@@ -69,7 +71,9 @@ export function pageStatus(repo: string): Map<string, string> {
  * flips `status: published` on disk hours before committing, so a commit
  * timestamp says nothing about whether a page is readable.
  */
-export function unsatisfiableEdges(repo: string, pageIds: string[]): any[] {
+export function unsatisfiableEdges(repo: string, pageIds: string[], {
+  allowInRunDependencies = false,
+}: { allowInRunDependencies?: boolean } = {}): any[] {
   const spec = loadPlan(repo);
   const byId = new Map<string, any>(spec.pages.map((p: any) => [p.id, p]));
   const status = pageStatus(repo);
@@ -88,7 +92,14 @@ export function unsatisfiableEdges(repo: string, pageIds: string[]): any[] {
   for (const id of [...inRun].sort()) {
     const page: any = byId.get(id);
     if (!page) { out.push({ page: id, requires: null, why: 'absent from plan-spec.json' }); continue; }
-    const metric = pageBuildability(page, partner.get(id), published, byId);
+    const available = new Set(published);
+    if (allowInRunDependencies) {
+      for (const candidate of inRun) {
+        const target: any = byId.get(candidate);
+        if (target && Number(target.order) < Number(page.order)) available.add(candidate);
+      }
+    }
+    const metric = pageBuildability(page, partner.get(id), available, byId);
     if (metric.buildable) continue;
     for (const req of metric.unpublishedDependencies) {
       const t: any = byId.get(req);

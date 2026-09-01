@@ -74,6 +74,7 @@ if (write) {
     run,
     written: new Date().toISOString(),
     note: 'Every page this run owes. A page here that is absent from every manifest later is scope loss, not a disposition.',
+    allow_in_run_dependencies: argv.includes('--allow-in-run-dependencies'),
     pages: [...current.entries()].map(([id, v]) => ({ id, kind: v.kind, batch: v.batch })).sort((a, b) => a.id.localeCompare(b.id)),
   };
   writeFileSync(ledgerPath, JSON.stringify(ledger, null, 2) + '\n');

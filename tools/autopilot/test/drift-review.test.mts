@@ -47,12 +47,13 @@ const SPEC_PAGES = [
 ];
 
 function fixture(ledgerPages: any[] | null, report: string | null,
-  { specPages = SPEC_PAGES, published = ['gamma-page'] }: { specPages?: any[]; published?: string[] } = {}) {
+  { specPages = SPEC_PAGES, published = ['gamma-page'], allowInRunDependencies = false }:
+  { specPages?: any[]; published?: string[]; allowInRunDependencies?: boolean } = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'drift-'));
   mkdirSync(join(dir, 'research'));
   if (ledgerPages !== null) {
     writeFileSync(join(dir, 'research', 'demo-scope-ledger.json'),
-      JSON.stringify({ run: 'demo', pages: ledgerPages }, null, 2));
+      JSON.stringify({ run: 'demo', allow_in_run_dependencies: allowInRunDependencies, pages: ledgerPages }, null, 2));
   }
   if (report !== null) {
     writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), report);
@@ -234,6 +235,21 @@ test('exactly 95 percent fails even when the unpublished dependency is built by 
   assert.equal(r.status, 1);
   assert.match(r.stderr, /drift-check-unbuildable-edge: beta-page requires `alpha-page`/);
   assert.match(r.stderr, /only 19\/20 same-category dependencies are published/);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('the ledger opt-in counts an earlier dependency carried by the same run', () => {
+  const dir = fixture(PAGES, [
+    '### alpha-page', 'VERDICT: no-drift',
+    '### beta-page', 'VERDICT: drift-applied — added alpha-page (order 10)',
+  ].join('\n'), {
+    specPages: [...SPEC_PAGES.filter((p) => p.id !== 'beta-page'),
+      { id: 'beta-page', kind: 'A', order: 20, requires: ['alpha-page'] }],
+    published: [],
+    allowInRunDependencies: true,
+  });
+  const r = check(dir);
+  assert.equal(r.status, 0, r.stderr);
   rmSync(dir, { recursive: true, force: true });
 });
 

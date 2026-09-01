@@ -80,7 +80,9 @@ if (!existsSync(ledgerPath)) {
   console.error(`ERROR drift-check-no-ledger: ${ledgerPath} does not exist — run \`autopilot plan\``);
   process.exit(1);
 }
-const ledgerPages = JSON.parse(readFileSync(ledgerPath, 'utf8')).pages ?? [];
+const ledger = JSON.parse(readFileSync(ledgerPath, 'utf8'));
+const ledgerPages = ledger.pages ?? [];
+const allowInRunDependencies = ledger.allow_in_run_dependencies === true;
 const owed = ledgerPages
   .filter((p) => p.kind === 'A')
   .map((p) => p.id);
@@ -116,8 +118,9 @@ const reviewedOwed = owed.filter((id) => !mintedOrRescoped.has(id));
 
 // Buildability is page-local: strictly more than 95% of each page's
 // same-category `requires` must already be published. The A/B partner and
-// cross-category edges do not serialize the frontier. A page merely added to
-// this run is not already published.
+// cross-category edges do not serialize the frontier. An explicit plan may
+// record the narrow scope-ledger exception that a lower-order prerequisite is
+// carried by this same run; the normal next-frontier path never records it.
 const specPath = 'research/plan-spec.json';
 if (!existsSync(specPath)) {
   console.error(`ERROR drift-check-no-spec: ${specPath} does not exist`);
@@ -182,7 +185,14 @@ const idsWithOrder = (detail) =>
 for (const id of owedPages) {
   const page = pageById.get(id);
   if (!page) { errors.push(`drift-check-unknown-page: ${id} is owed but absent from ${specPath}`); continue; }
-  const metric = pageBuildability(page, partnerById.get(id), published, pageById);
+  const available = new Set(published);
+  if (allowInRunDependencies) {
+    for (const candidate of builtHere) {
+      const target = pageById.get(candidate);
+      if (target && Number(target.order) < Number(page.order)) available.add(candidate);
+    }
+  }
+  const metric = pageBuildability(page, partnerById.get(id), available, pageById);
   edgesChecked += metric.dependencyCount;
   if (metric.buildable) continue;
   for (const req of metric.unpublishedDependencies) {
@@ -190,7 +200,7 @@ for (const id of owedPages) {
     errors.push(`drift-check-unbuildable-edge: ${id} requires \`${req}\`, which is `
       + (target ? `planned (order ${target.order}) but not published`
                 : 'not a page in the plan at all')
-      + ` — only ${metric.publishedCount}/${metric.dependencyCount} same-category dependencies are published; `
+      + ` — only ${metric.publishedCount}/${metric.dependencyCount} same-category dependencies are ${allowInRunDependencies ? 'published or earlier in-run' : 'published'}; `
       + 'the page needs a share strictly greater than 95%');
   }
 }
@@ -283,4 +293,5 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(`drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, no blocked edges; `
-  + `${edgesChecked} same-category requires edge(s) checked, every owed A and B page strictly above 95% published`);
+  + `${edgesChecked} same-category requires edge(s) checked, every owed A and B page strictly above 95% `
+  + (allowInRunDependencies ? 'published-or-earlier-in-run' : 'published'));

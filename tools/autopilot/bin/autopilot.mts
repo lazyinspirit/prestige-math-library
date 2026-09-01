@@ -105,7 +105,7 @@ const die = (msg: string, code = 2): never => { console.error(msg); process.exit
  *  and the example is inside the dispatched prompt — the drift unit burned all
  *  three attempts and blocked stage 1 on exactly that.
  */
-function writeDriftArtifacts(run: string, pages: string[]) {
+function writeDriftArtifacts(run: string, pages: string[], allowInRunDependencies = false) {
   const evidence = driftEvidence(repo, pages);
   const evPath = join(repo, 'research', `${run}-drift-evidence.json`);
   writeFileSync(evPath, JSON.stringify(evidence, null, 2) + '\n');
@@ -145,10 +145,12 @@ function writeDriftArtifacts(run: string, pages: string[]) {
     '  and its `-examples` companion to `plan-spec.json`, placed so every edge stays',
     '  backward, and record `drift-minted`.',
     '- **Buildability after a finding:** each retained A and B page must still have',
-    '  strictly more than 95% of its same-category `requires` already published.',
-    '  A<->B partner and cross-category edges do not serialize the frontier. A',
-    '  same-category dependency added to this run is not thereby published. If an',
-    '  edit would put a page at or below 95%, drop the',
+    '  strictly more than 95% of its same-category `requires` available.',
+    '  A<->B partner and cross-category edges do not serialize the frontier.',
+    allowInRunDependencies
+      ? '  This run explicitly counts lower-order dependencies carried by its own scope ledger as available.'
+      : '  Available means already published; adding a same-category dependency to this run does not qualify it.',
+    '  If an edit would put a page at or below 95%, drop the',
     '  original pair and record `drift-rescoped`, naming the dependency pairs to',
     '  build instead — at most 24 pairs total.',
     '',
@@ -301,7 +303,9 @@ switch (cmd) {
     // two-second one. `--allow-unbuildable` exists so a deliberate experiment
     // is possible, and says on the record that it was deliberate.
     {
-      const bad = unsatisfiableEdges(repo, pages);
+      const bad = unsatisfiableEdges(repo, pages, {
+        allowInRunDependencies: has('allow-in-run-dependencies'),
+      });
       if (bad.length && !has('allow-unbuildable')) {
         const shown = bad.slice(0, 12).map((b: any) => (b.requires
           ? `  ${b.page}\n      requires ${b.requires} — ${b.why}`
@@ -313,7 +317,8 @@ switch (cmd) {
           + '\nPublication state is the `status:` line in the file, never the git log —'
           + '\na predecessor run is commonly published on disk hours before it is committed.'
           + '\n\nRun `autopilot frontier --next`, or publish more predecessors first.'
-          + '\nPass --allow-unbuildable to plan anyway and own the stage-1 stop.');
+          + '\nPass --allow-in-run-dependencies only when every missing prerequisite is an earlier pair'
+          + '\nin this exact run, or --allow-unbuildable to deliberately own a stage-1 stop.');
       }
     }
 
@@ -323,7 +328,7 @@ switch (cmd) {
     console.log(`step 0 for ${run}: ${pages.length} A/B pair(s) -> ${groups.length} batch(es), cap ${cap}\n`);
     for (const wr of written) console.log(`  batch ${wr.batch}: ${wr.pages.join(', ')}`);
 
-    writeDriftArtifacts(run, pages);
+    writeDriftArtifacts(run, pages, has('allow-in-run-dependencies'));
 
     const covers = {};
     written.forEach((wr: any) => { covers[`beta-batch-${wr.batch}`] = [String(wr.batch)]; });
@@ -343,6 +348,7 @@ switch (cmd) {
       const { spawnSync } = await import('node:child_process');
       const ledgerArgs = ['tools/manifest-integrity.mjs', '--run', run, '--write-ledger'];
       if (has('force')) ledgerArgs.push('--force');
+      if (has('allow-in-run-dependencies')) ledgerArgs.push('--allow-in-run-dependencies');
       const r = spawnSync('node', ledgerArgs, { cwd: repo, encoding: 'utf8' });
       process.stdout.write((r.stdout ?? '').replace(/^/gm, '  '));
       process.stderr.write((r.stderr ?? '').replace(/^/gm, '  '));
@@ -385,10 +391,11 @@ switch (cmd) {
     const run = opt('run') ?? die('--run is required');
     const ledgerPath = join(repo, 'research', `${run}-scope-ledger.json`);
     if (!existsSync(ledgerPath)) die(`refresh-tasks: no ${ledgerPath} — run \`plan\` first; there is nothing to refresh`);
-    const owedA = (JSON.parse(readFileSync(ledgerPath, 'utf8')).pages ?? [])
+    const ledger = JSON.parse(readFileSync(ledgerPath, 'utf8'));
+    const owedA = (ledger.pages ?? [])
       .filter((p: any) => p.kind === 'A').map((p: any) => p.id);
     if (!owedA.length) die(`refresh-tasks: ${ledgerPath} owes no A pages`);
-    writeDriftArtifacts(run, owedA);
+    writeDriftArtifacts(run, owedA, ledger.allow_in_run_dependencies === true);
     // The stage task files are generated too, from briefs/tasks/, so a template
     // defect found mid-run is fixed in the template and re-rendered here — the
     // whole point of this command. `--force` also re-renders the per-batch Beta

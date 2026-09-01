@@ -29,14 +29,18 @@ deterministic plan order and unpublished prerequisites are not pulled into the
 same run. `plan --pairs next` uses the same selector and is capped at the
 pipeline's 24-pair ceiling. The read-only preview may use a larger explicit
 `--max-pairs`. `plan` and the Stage-1 drift gate enforce the same threshold;
-`--allow-unbuildable` records an intentional stage-1 stop. Planning writes
+an explicit pair list may use `--allow-in-run-dependencies` when every missing
+same-category prerequisite is an earlier pair in that same run. The scope
+ledger records that narrow exception, and Stage 1 rechecks it; it does not alter
+`frontier --next`. `--allow-unbuildable` records an intentional stage-1 stop.
+Planning writes
 batch manifests, covers, the immutable scope ledger, generated task files, and
 drift-review inputs.
 
 ```bash
 autopilot frontier [--categories category-a,category-b]
 autopilot frontier --next [--max-pairs 24]
-autopilot plan --run <run> --pairs <a-page-id,...>
+autopilot plan --run <run> --pairs <a-page-id,...> [--allow-in-run-dependencies]
 autopilot plan --run <run> --pairs next [--max-pairs 24]
 autopilot doctor --run <run>
 autopilot start --run <run> --detach
