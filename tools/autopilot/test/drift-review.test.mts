@@ -185,42 +185,41 @@ test('an empty ledger fails rather than making every report complete', () => {
 
 // ------------------------------------------- the edges, not just the prose
 //
-// frontier-16: the review read a design sentence saying CA-5 cites the FTA
-// statement "once that predecessor is authored", and applied that conditional
-// future citation as a present `requires` edge to a planned, unauthored page.
-// validate-plan passed (backward edge, target has no item list); this gate
-// passed (well-formed prose); and the citing page — plus the 23 pairs chaining
-// through it — became unbuildable, discovered only by re-running `frontier`,
-// which nothing does after step 0.
+// Buildability is recomputed from publication state after the review changes
+// the spec. The permanent threshold permits a small unpublished residual, but
+// it is strict: exactly 95% fails, and merely putting the dependency in this run
+// does not make it already published.
 
-test('an edge to a page that is neither published nor built by this run fails', () => {
+test('one unpublished dependency out of 21 remains above the Stage-1 threshold', () => {
+  const published = Array.from({ length: 20 }, (_, i) => `dep-${i + 1}`);
   const dir = fixture(PAGES, [
     '### alpha-page', 'VERDICT: no-drift',
     '### beta-page', 'VERDICT: drift-applied — added delta-page (order 5)',
   ].join('\n'), {
     specPages: [...SPEC_PAGES.filter((p) => p.id !== 'beta-page'),
-      { id: 'beta-page', kind: 'A', order: 20, requires: ['gamma-page', 'delta-page'] },
+      { id: 'beta-page', kind: 'A', order: 20, requires: [...published, 'delta-page'] },
       { id: 'delta-page', kind: 'A', order: 5, requires: [] }],
-    published: ['gamma-page'],   // delta-page is planned but unbuilt
+    published,
   });
   const r = check(dir);
-  assert.equal(r.status, 1);
-  assert.match(r.stderr, /drift-check-unbuildable-edge: beta-page requires `delta-page`/);
-  assert.match(r.stderr, /neither published nor built by this run/);
+  assert.equal(r.status, 0, r.stderr);
   rmSync(dir, { recursive: true, force: true });
 });
 
-test('a page built by this run satisfies an edge, even though nothing is published yet', () => {
-  // The run's own A pages are legitimate targets: they will exist when it ends.
+test('exactly 95 percent fails even when the unpublished dependency is built by this run', () => {
+  const published = Array.from({ length: 19 }, (_, i) => `dep-${i + 1}`);
   const dir = fixture(PAGES, [
     '### alpha-page', 'VERDICT: no-drift',
     '### beta-page', 'VERDICT: drift-applied — added alpha-page (order 10)',
   ].join('\n'), {
     specPages: [...SPEC_PAGES.filter((p) => p.id !== 'beta-page'),
-      { id: 'beta-page', kind: 'A', order: 20, requires: ['gamma-page', 'alpha-page'] }],
+      { id: 'beta-page', kind: 'A', order: 20, requires: [...published, 'alpha-page'] }],
+    published,
   });
   const r = check(dir);
-  assert.equal(r.status, 0, r.stderr);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /drift-check-unbuildable-edge: beta-page requires `alpha-page`/);
+  assert.match(r.stderr, /only 19\/20 external dependencies are published/);
   rmSync(dir, { recursive: true, force: true });
 });
 
@@ -387,8 +386,8 @@ test('a blocked verdict re-dispatches the drift review; other residue does not',
   assert.equal(started[0].brief, 'briefs/alpha-drift.md');
   assert.equal(started[0].label, 'drift-review-2');
 
-  // An unbuildable edge is NOT the Alpha's to fix by re-reading: the target is
-  // unpublished and unbuilt, and re-asking cannot change that.
+  // A below-threshold page is NOT the Alpha's to fix by re-reading: publication
+  // state, not whether the target shares this run, decides the gate.
   started.length = 0;
   assert.equal(dispatchDriftRereview({ ...args, failure: gate('ERROR drift-check-unbuildable-edge: p requires q') }), false);
   assert.equal(started.length, 0);
