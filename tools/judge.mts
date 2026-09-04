@@ -11,7 +11,7 @@ import { createHash } from 'node:crypto';
 import { basename, join, resolve } from 'node:path';
 import { homedir } from 'node:os';
 import { spawn } from 'node:child_process';
-import { itemHashJudge } from './item-hash.mjs';
+import { itemHashJudge, stripJudgeStamp } from './item-hash.mjs';
 import { extractEmbeddedVerdict } from './judge-parse.mjs';
 import {
   DEFAULT_LINEUP, JUDGE_CONTEXT_WINDOW, JUDGE_LINEUPS, KNOWN_JUDGES,
@@ -73,7 +73,11 @@ const section = (source: string, headings: string[]): string => {
 const interfaceText = (source: string): string => {
   const main = section(source, ['Statement refuted', 'Statement', 'Definition', 'Example']);
   const remarks = section(source, ['Remarks']);
-  const text = [main, remarks ? `**Remarks.**\n${remarks}` : ''].filter(Boolean).join('\n\n') || source.trim();
+  // Unusual item kinds can fall back to the whole source. Keep that fallback
+  // byte-compatible with the pre-stamp context: verification.judge is evidence
+  // about the mathematics, not mathematical context for every page-mate.
+  const text = [main, remarks ? `**Remarks.**\n${remarks}` : ''].filter(Boolean).join('\n\n')
+    || stripJudgeStamp(source).trim();
   const cap = 3_000;
   return text.length <= cap
     ? text

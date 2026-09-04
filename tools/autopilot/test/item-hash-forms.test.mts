@@ -128,6 +128,12 @@ test('nothing keeps a private copy of either normalisation any more', () => {
   }
 });
 
+test('whole-source pair interfaces exclude generated judge stamps', () => {
+  const judge = readFileSync(join(REPO, 'tools', 'judge.mts'), 'utf8');
+  assert.match(judge, /\|\| stripJudgeStamp\(source\)\.trim\(\)/,
+    'an uncommon item kind that uses the whole-source interface must not make stamping invalidate every page-mate context');
+});
+
 test('the errors that consume these hashes say which form they expect', () => {
   const guard = readFileSync(join(REPO, 'tools', 'step8-guard.mjs'), 'utf8');
   assert.match(guard, /itemHashGuard/, 'judge-adjudication-unhashed must name the guard form');

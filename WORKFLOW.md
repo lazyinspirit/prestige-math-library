@@ -289,6 +289,10 @@ whose mathematics or pair context actually changed.
 Step 9 extracts the exact post-Step-8 mathematical delta, judges and
 adjudicates it, then applies its stamps. The final stamp stage verifies every
 scoped item; a stamp records a current pass, not an adjudicated rejection.
+The generated `verification.judge` block is excluded from both the stamped
+item's attestation hash and any whole-source fallback used for a sibling's pair
+interface, so applying stamps cannot invalidate current judge or terminal
+resolution context.
 
 ## Repairs, outages, and controls
 
