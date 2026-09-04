@@ -336,7 +336,10 @@ marks a stage complete and waives its assurance.
 Step 10 serially closes terminal contracts/ledger, pathways, stamps, final
 readiness, reconciled evidence, protected-tree reporting, obligations, and the
 main-branch close-out commit. `publication-ready.mjs` requires all run items to
-remain `status: draft` and seals the final protected-tree hash.
+remain `status: draft` and seals the final protected-tree hash. Runtime state
+directories named `.autopilot` or `.autopilot-*` are excluded from both Step 10
+tree seals because their event and status files continue changing while the
+sealed content is verified.
 
 `step10-report.mjs evidence` reconciles readiness, judge/adjudication, defect,
 touch, and pathway artifacts into a hash-bound packet. The read-only reporting

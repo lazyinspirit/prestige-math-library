@@ -229,14 +229,16 @@ if (command === 'check-evidence') {
   process.exit(0);
 }
 
-const ignored = new Set(['.git', '.autopilot', 'node_modules']);
+const ignored = new Set(['.git', 'node_modules']);
 const allowed = new Set([relative(root, responsePath), relative(root, reportPath), relative(root, integrityPath)]);
 const dispatchPrefix = `research/${run}-dispatch/`;
 function files(dir = root, out = []) {
   for (const name of readdirSync(dir)) {
     const full = join(dir, name);
     const rel = relative(root, full).replaceAll('\\', '/');
-    if (!rel || ignored.has(rel)) continue;
+    const topLevel = rel.split('/')[0];
+    if (!rel || ignored.has(topLevel)
+      || topLevel === '.autopilot' || topLevel.startsWith('.autopilot-')) continue;
     if (allowed.has(rel) || rel.startsWith(dispatchPrefix)) continue;
     const stat = statSync(full);
     if (stat.isDirectory()) files(full, out); else if (stat.isFile()) out.push(rel);

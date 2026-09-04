@@ -72,6 +72,9 @@ test('Step 10 mechanically reconciles and renders every fatal row', () => {
     }));
     result = runTool(root, 'snapshot');
     assert.equal(result.status, 0, result.stderr);
+    mkdirSync(join(root, '.autopilot-demo'));
+    writeFileSync(join(root, '.autopilot-demo', 'events.jsonl'), 'first runtime event\n');
+    writeFileSync(join(root, '.autopilot-demo', 'events.jsonl'), 'later runtime event\n');
     result = runTool(root, 'check-response');
     assert.equal(result.status, 0, result.stderr);
     result = runTool(root, 'render');
@@ -114,6 +117,8 @@ test('publication readiness seals protected inputs without rejecting expected re
     assert.ok(receipt.protected_tree_files > 0);
     assert.match(receipt.protected_tree_sha256, /^[a-f0-9]{64}$/);
 
+    mkdirSync(join(root, '.autopilot-demo'));
+    writeFileSync(join(root, '.autopilot-demo', 'events.jsonl'), 'runtime state changes after sealing\n');
     result = runReadiness(root, '--verify');
     assert.equal(result.status, 0, result.stderr);
     writeFileSync(join(root, 'research', 'demo-judge-context-hashes.json'), JSON.stringify({ cached: 'refreshed-by-closure-gate' }));

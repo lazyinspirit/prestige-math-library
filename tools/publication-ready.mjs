@@ -36,7 +36,7 @@ const artifactRels = [
 ];
 
 function protectedTreeReceipt() {
-  const ignoredTopLevel = new Set(['.git', '.autopilot', 'node_modules']);
+  const ignoredTopLevel = new Set(['.git', 'node_modules']);
   const mutableAfterReadiness = new Set([
     receiptRel,
     `research/${run}-judge-context-hashes.json`,
@@ -51,7 +51,9 @@ function protectedTreeReceipt() {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const absolute = join(dir, entry.name);
       const rel = relative(root, absolute).replaceAll('\\', '/');
-      if (!rel || ignoredTopLevel.has(rel.split('/')[0])) continue;
+      const topLevel = rel.split('/')[0];
+      if (!rel || ignoredTopLevel.has(topLevel)
+        || topLevel === '.autopilot' || topLevel.startsWith('.autopilot-')) continue;
       if (mutableAfterReadiness.has(rel) || rel.startsWith(dispatchPrefix)) continue;
       if (entry.isDirectory()) walk(absolute);
       else if (entry.isFile()) files.push(rel);
