@@ -819,29 +819,6 @@ const step9ClosureGate = (ctx) => gate('step9-judge-closure', ['node', 'tools/le
 const scopeDecisionsGate = (ctx) => gate('scope-decisions', ['node', 'tools/scope-decisions.mjs',
   'check', '--run', ctx.run]);
 
-/** The persistent CODEX_HOME for one group's Alpha.
- *
- *  Under `.autopilot/`, which is gitignored — a session home holds an auth
- *  record and a full transcript, and neither belongs in the repository. One per
- *  run and per group, so no two lanes share a home.
- */
-const sessionHome = (ctx, label: string): string =>
-  `.autopilot/sessions/${ctx.run}/${label}`;
-
-/** The codex conversation a group's step-7 reader created, or null.
- *
- *  Read from that dispatch's own result record. `codex exec resume --last` would
- *  be wrong here: group Alphas run at once, so "most recent" is whichever
- *  finished last, which is not a group identity. */
-function readSessionId(ctx, label: string): string | null {
-  const p = R(ctx, `research/${ctx.run}-dispatch/alpha-group-read-${label}.result.json`);
-  if (!existsSync(p)) return null;
-  try {
-    const rec = JSON.parse(readFileSync(p, 'utf8'));
-    return rec?.ok === true && typeof rec.session_id === 'string' ? rec.session_id : null;
-  } catch { return null; }
-}
-
 /** Re-render current Step-8 tasks before a recovery dispatch. The initial task
  *  is a snapshot of the first rejection set; using it after a rejudge made an
  *  Alpha reread historical rows that no longer owed a decision. */
@@ -917,13 +894,11 @@ function itemsFromGateFailure(failure: any): string[] {
   ])];
 }
 
-function startStep8Group(ctx: any, executor: any, stage: any, plan: any, group: string | null): void {
-  const sessionId = group ? readSessionId(ctx, group) : null;
+function startStep8Group(ctx: any, executor: any, stage: any, plan: any, _group: string | null): void {
   executor.start(stage, {
     role: 'alpha-adjudicate',
     covers: [],
     brief: 'briefs/alpha.md',
-    ...(group && sessionId ? { sessionHome: sessionHome(ctx, group), resumeSession: sessionId } : {}),
     ...plan,
   });
 }
@@ -1327,13 +1302,12 @@ const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['n
  *            that; an unadjudicated rejection and an open fatal are NOT allowed.
  *   after  — no allowances at all.
  */
-const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeSessionRun = false } = {}) =>
+const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false } = {}) =>
   gate('judge-closure', ['node', 'tools/level-coverage.mjs',
     '--judge-only', '--verify-current-context',
     '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
     '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
     '--terminal-resolutions', terminalResolutionsPath(ctx),
-    ...(judgeSessionRun ? ['--judge-session-run', ctx.run] : []),
     ...(allowUnadjudicated ? ['--allow-unadjudicated'] : []),
     ...(pendingRejudge ? ['--allow-pending-rejudge'] : []),
     '--out', closurePath(ctx),
@@ -2324,12 +2298,10 @@ export const stages = [
   // reading stage in front of the sweep would cost its own wall-clock, which is
   // the thing the owner's instruction removes.
   //
-  // WHAT THE PRE-READ BUYS. Step 8 resumes these reader conversations whenever
-  // their durable session ids are available. Without this each adjudicator
-  // meets two hundred items and a list of rejections in the same context window
-  // and reads the mathematics through the objections.
-  // Reading first separates those: the group reads its own pairs while
-  // no verdict exists, and its digest is the first thing its step-8 self opens.
+  // WHAT THE PRE-READ BUYS. Each group reads its own pairs while no verdict
+  // exists and writes a durable digest. Step 8 starts fresh from that digest,
+  // so it receives the useful mathematical findings without paying again for
+  // an entire Step-7 transcript.
   // A concern recorded here was found with nobody pointing at it, so a judge
   // rejection landing in the same place is two independent readings agreeing —
   // evidence of a different quality from agreeing with a rejection you were
@@ -2347,7 +2319,7 @@ export const stages = [
   // `alpha-group-read`'s cap rather than re-spending the loop.
   {
     id: '7-judge',
-    label: 'one persistent Terra judge per A/B pair, with the group Alphas reading alongside',
+    label: 'one stateless Terra judge per item, with whole-group readers alongside',
     modelProfile: (plan: any) => plan.role === 'alpha-group-read'
       ? TERRA_XHIGH
       : undefined,
@@ -2404,10 +2376,6 @@ export const stages = [
           task: [`research/${ctx.run}-alpha-${g.label}-step7-read.task.md`, 'briefs/tasks/alpha-step7-read.md'],
           outputSchema: 'briefs/schemas/step8-context.json',
           resultArtifact: `research/${ctx.run}-alpha-${g.label}-step8-context.json`,
-          // The home survives this dispatch. `8-adjudicate` resumes the
-          // conversation started here, so the group Alpha adjudicates holding
-          // the reading it did, not a file describing it.
-          sessionHome: sessionHome(ctx, String(g.label)),
           timeout: 21600,
         });
       }
@@ -2427,7 +2395,7 @@ export const stages = [
     // list — a careful reading that finds nothing thin is a result, and failing
     // it would teach the lane to manufacture concerns.
     gates: (ctx) => [
-      closureGate(ctx, { allowUnadjudicated: true, judgeSessionRun: true }),
+      closureGate(ctx, { allowUnadjudicated: true }),
       gate('step8-digests', ['node', 'tools/step8-scope.mjs', 'digests', '--run', ctx.run], {
         liveness: { pattern: /(\d+) item\(s\) opened/.source, min: 1, unit: 'items opened while reading' },
       }),
@@ -2443,7 +2411,12 @@ export const stages = [
       // produced it exited zero, so unit coverage will not re-drive it on its
       // own — this hook is the only route back.
       if (args.failure.id === 'step8-digests') {
-        for (const g of alphaGroups(args.ctx)) {
+        const text = `${args.failure.output ?? ''}\n${args.failure.why ?? ''}`;
+        const named = new Set([...text.matchAll(/group\s+([a-z]+)\s*:/gi)].map((m) => m[1].toLowerCase()));
+        const groups = alphaGroups(args.ctx);
+        const selected = groups.filter((g: any) => named.has(String(g.label)));
+        const retry = selected.length ? selected : groups;
+        for (const g of retry) {
           args.executor.start(args.stage, {
             role: 'alpha-group-read',
             // Not `<label>` alone: that matches the stage pattern, and a repair
@@ -2455,11 +2428,6 @@ export const stages = [
             task: [`research/${args.ctx.run}-alpha-${g.label}-step7-read.task.md`, 'briefs/tasks/alpha-step7-read.md'],
             outputSchema: 'briefs/schemas/step8-context.json',
             resultArtifact: `research/${args.ctx.run}-alpha-${g.label}-step8-context.json`,
-            // Same home, so the re-read CONTINUES the group's conversation
-            // rather than starting a rival one. Step 8 resumes whichever thread
-            // this home holds, and there must only ever be one per group.
-            sessionHome: sessionHome(args.ctx, String(g.label)),
-            resumeSession: readSessionId(args.ctx, String(g.label)) ?? undefined,
             timeout: 21600,
           });
         }
@@ -2543,11 +2511,9 @@ export const stages = [
   // assigned by `2-assign` for mathematical relatedness rather than position.
   // Step 8 now uses that same partition, and the same `alphaCohort`.
   //
-  // Each group Alpha resumes the read-only conversation it began alongside the
-  // Step-7 sweep. This carries a rejection-blind mathematical reading into the
-  // adjudication without reusing the Step-3/Step-6 conversation that already
-  // approved the proof. If no durable session id was recorded, dispatch falls
-  // back to a fresh conversation using the rendered task file from `8-scope`.
+  // Each group Alpha starts a fresh Step-8 conversation from the durable digest
+  // written by its rejection-blind Step-7 reading. This preserves the findings
+  // and independence without replaying the reader's full transcript.
   //
   // READ SCOPE IS THE WHOLE LIBRARY, WRITE SCOPE IS THE GROUP. The sandbox is
   // the repository root, so every Alpha can open any published item and any
@@ -2581,14 +2547,6 @@ export const stages = [
         // for a repair round firing before `8-scope` has re-rendered, and it
         // tells the reader to look its own label up in the scope file.
         task: [`research/${ctx.run}-alpha-${g.label}-step8.task.md`, `research/${ctx.run}-alpha-step8.task.md`],
-        // RESUME THE STEP-7 READER RATHER THAN SPAWN A NEW AGENT. Same
-        // conversation, now with write access — `codex exec resume` picks the
-        // sandbox again, which one `codex exec` cannot do. If the reader left no
-        // usable session the fields are empty and this is an ordinary fresh
-        // dispatch working from the rendered file, which is strictly worse but
-        // not broken.
-        sessionHome: readSessionId(ctx, g.label) ? sessionHome(ctx, String(g.label)) : undefined,
-        resumeSession: readSessionId(ctx, g.label) ?? undefined,
         timeout: 21600,
       })),
     gates: (ctx) => [
@@ -2611,7 +2569,7 @@ export const stages = [
       // A repaired item correctly has no current verdict; `8-rejudge` owns
       // that, hence the allowance. An unadjudicated rejection or an open fatal is
       // this stage's own unfinished work.
-      closureGate(ctx, { pendingRejudge: true, judgeSessionRun: true }),
+      closureGate(ctx, { pendingRejudge: true }),
     ],
     // THE FATAL-REPAIR LOOP.
     //
@@ -2778,7 +2736,7 @@ export const stages = [
           ...repoWide(ctx),
           ...contractGates(ctx, { reviewed: true }),
           ledgerGate(ctx),
-          closureGate(ctx, { pendingRejudge: true, judgeSessionRun: true }),
+          closureGate(ctx, { pendingRejudge: true }),
         ],
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
@@ -2802,7 +2760,7 @@ export const stages = [
         ...(closure?.unadjudicated ?? []),
         ...(closure?.open_fatal ?? []),
       ])];
-      // An exact id routes to its owning resumed group. A gate that provides no
+      // An exact id routes to its owning group. A gate that provides no
       // id gets one focused reviewer, not four whole-group rereads.
       const owners = named.length ? step8RepairOwners(ctx, named) : [null];
       for (const g of owners) {
@@ -2894,7 +2852,7 @@ export const stages = [
       // happened rather than work that was planned.
       publishedGate(ctx),
       terminalResolutionGate(ctx),
-      closureGate(ctx, { judgeSessionRun: true }),
+      closureGate(ctx),
     ],
     // A rejudge can surface a NEW rejection on repaired text, which needs
     // adjudicating and possibly repairing again. Two distinct frozen contexts
@@ -3114,7 +3072,7 @@ export const stages = [
       step8GuardGate(ctx),
       publishedGate(ctx),
       terminalResolutionGate(ctx),
-      closureGate(ctx, { judgeSessionRun: true }),
+      closureGate(ctx),
     ],
   },
 

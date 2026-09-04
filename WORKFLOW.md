@@ -97,7 +97,7 @@ tokens (the official catalog reserves five percent of the nominal window).
 | Lead Alpha | Step-6 cross-group closure, Step-9 scope work, and level receipts. | Cross-edge, scope, audit, and spine receipts. |
 | Special Alpha roles | Partition, narrower recheck/pathway work, fatal adjudication, or final read-only interpretation. | Stage-declared artifact. |
 | Tool stage | All disk-deterministic transition, routing, checking, receipt, stamp, report, and commit work. | Command result plus declared artifact. |
-| Judge | Frozen-text verdicts only. | Judge ledger, context hash, required session identity, closure. |
+| Judge | Frozen-text verdicts only. | Judge ledger, current context/item hashes, closure. |
 
 `src/roles.mts` requires every agent dispatch to name a cognitive `job` and
 refuses mechanical jobs such as transition, coverage, gate running, retry
@@ -229,21 +229,23 @@ incompatible closure entries. Step 10 mechanically renders
 
 ## Frozen judge lifecycle
 
-The configured judge set is resolved only through `tools/models.mjs`.
-`judge-sweep.mjs` records each full A/B context, declared/cited dependencies,
-context hash, and pair session identity. One persistent judge session owns the
-entire A/B pair, and every item is judged in its own sequential turn inside that
-same session. Before the next item turn, the sweep compacts at 50% of Terra's
-effective context window. If a pre-threshold session is already exhausted, recovery
-reverts only its consecutive failed, verdict-free turns and compacts that exact
-session before retrying the same item; it never rotates the session identity or
-discards a successful item turn. Every scoped item needs a current verdict from
-the configured set; retained rows for unselected sets are evidence, not
-coverage.
+The configured judge set is resolved only through `tools/models.mjs`. Every
+item receives one stateless, ephemeral xhigh call from each configured judge.
+The call contains the full target item, compact interfaces for direct
+dependencies, and compact statement/definition/example/remarks interfaces for
+the complete A/B pair; sibling proofs are judged only in their own calls. This
+retains pair-aware checking without repeatedly sending every sibling proof or
+accumulating earlier item turns. `judge-sweep.mjs` runs up to 24 Terra calls,
+stops launching work immediately on a usage/rate-limit signature, and resumes
+safely from the append-only hash-attested ledger. Codex JSON events supply real
+input, cached-input, and output token telemetry. Every scoped item needs a
+current verdict from the configured set; retained rows for unselected sets are
+evidence, not coverage.
 
-Step-7 group Alphas read the frozen text in read-only sessions and emit
-schema-checked digests. Step 8 resumes that session with write access when its
-recorded ID exists, otherwise it uses the mechanically rendered group task.
+Step-7 group Alphas still read their entire assigned groups against frozen text
+and emit schema-checked digests. Step 8 starts a fresh Sol adjudication from the
+mechanically rendered task and that durable digest; it does not replay the
+reader transcript. A failed digest gate rereads only the named bad groups.
 Write scope remains with the owning group, while cross-group discoveries become
 alerts requiring the owner's group disposition.
 

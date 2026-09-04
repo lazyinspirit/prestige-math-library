@@ -96,11 +96,9 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   assert.ok(stages.indexOf(stage('8-close')) < stages.indexOf(stage('8-final')));
   assert.ok(stages.indexOf(stage('8-final')) < stages.indexOf(stage('8-freeze')));
 
-  for (const id of ['7-judge', '8-adjudicate', '8-preflight', '8-rejudge', '8-final']) {
-    assert.ok(closureArgv(id).includes('--judge-session-run'), `${id} must require its assigned Terra conversation`);
-  }
-  for (const id of ['9-scope', '9-changes-judge', '9-close', '10-readiness-v2']) {
-    assert.ok(!closureArgv(id).includes('--judge-session-run'), `${id} must retain the later fresh-item route`);
+  for (const id of ['7-judge', '8-adjudicate', '8-preflight', '8-rejudge', '8-final',
+    '9-scope', '9-changes-judge', '9-close', '10-readiness-v2']) {
+    assert.ok(!closureArgv(id).includes('--judge-session-run'), `${id} must certify current item evidence, not chat identity`);
   }
 
   // Later mathematical change stages retain direct closure until final

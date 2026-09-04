@@ -108,7 +108,8 @@ test('a re-read round is not mistaken for the unit it repairs', { skip: !existsS
     stage: s, round: 1,
     failure: { id: 'step8-digests', why: 'group c: 2/6 of its own pages read' },
   });
-  assert.ok(started.length >= 1, 'a thin digest is re-read, not reported');
+  assert.equal(started.length, 1, 'only the group with a thin digest is re-read');
+  assert.match(started[0].label, /read-again-c-/);
   for (const p of started) {
     assert.equal(p.role, 'alpha-group-read', 'and still read-only');
     assert.deepEqual(p.covers, [], 'a repair round manufactures no coverage');
@@ -117,29 +118,21 @@ test('a re-read round is not mistaken for the unit it repairs', { skip: !existsS
   }
 });
 
-// THE HANDOFF. Step 7's reader and step 8's adjudicator are the SAME
-// conversation: read-only while the judges sweep, resumed with write access to
-// adjudicate. If the session home is not persistent, or step 8 does not resume
-// the id step 7 recorded, the adjudicator is silently a fresh agent working from
-// a file — which looks identical in the logs and is the thing this design exists
-// to avoid.
-test('the step-7 reader keeps a session that step 8 resumes', { skip: !existsSync(join(REPO, 'research/frontier-18-alpha-groups.json')) }, () => {
+// THE HANDOFF. Step 7 records compact durable findings; Step 8 consumes those
+// findings in a fresh context instead of inheriting a full reader transcript.
+test('the step-7 reader hands off a digest without a resumable session', { skip: !existsSync(join(REPO, 'research/frontier-18-alpha-groups.json')) }, () => {
   const ctx = { run: 'frontier-18', repo: REPO };
   const reader = stage('7-judge').plan(ctx, stage('7-judge').units(ctx).map(String))
     .filter((p: any) => p.role === 'alpha-group-read');
   assert.ok(reader.length, 'there are readers to check');
   for (const p of reader) {
-    assert.ok(p.sessionHome, `reader ${p.label} has no persistent session home`);
-    assert.match(p.sessionHome, /^\.autopilot\//, 'a session home holds auth and a transcript; it stays out of the repo');
-    assert.ok(!p.resumeSession, 'the reader starts the conversation, it does not resume one');
+    assert.match(p.resultArtifact, /-step8-context\.json$/);
+    assert.equal(p.sessionHome, undefined);
+    assert.equal(p.resumeSession, undefined);
   }
-  const homes = new Set(reader.map((p: any) => p.sessionHome));
-  assert.equal(homes.size, reader.length, 'two groups sharing a home would resume each other');
 });
 
-test('a step-8 adjudicator with no recorded session falls back to a fresh dispatch', () => {
-  // The fixture has no dispatch records, so no session exists. The plan must
-  // still produce a working dispatch rather than a half-filled resume.
+test('a step-8 adjudicator always starts fresh from its rendered digest handoff', () => {
   const repo = fixtureRepoWithGroups();
   const plans = stage('8-adjudicate').plan({ run: 'demo', repo }, ['1', '2']);
   assert.ok(plans.length, 'the stage still plans');
@@ -394,7 +387,7 @@ test('the final-adjudicator lane is independently pinned to Sol max with web sea
 // Against the live run, because the plan reads the VALIDATED group assignment
 // and a fixture would exercise the positional fallback instead — the one thing
 // `alphaGroups` documents as deliberately not the answer.
-test('every group Alpha at step 8 has its own task file and resumes its reader when recorded', { skip: !existsSync(join(REPO, 'research/frontier-18-alpha-groups.json')) }, () => {
+test('every group Alpha at step 8 has its own task file and fresh context', { skip: !existsSync(join(REPO, 'research/frontier-18-alpha-groups.json')) }, () => {
   const s = stage('8-adjudicate');
   const ctx = { run: 'frontier-18', repo: REPO };
   const plans = s.plan(ctx, s.units(ctx).map(String));
@@ -406,6 +399,8 @@ test('every group Alpha at step 8 has its own task file and resumes its reader w
     assert.ok(Array.isArray(p.task), 'a per-group file with the generic fallback behind it');
     assert.match(p.task[0], /-alpha-[a-z]+-step8\.task\.md$/);
     assert.ok(p.covers.length, 'each Alpha declares the batches it claims');
+    assert.equal(p.sessionHome, undefined);
+    assert.equal(p.resumeSession, undefined);
     assert.ok(s.pattern.test(`${p.role}-${p.label}.result.json`),
       `the stage pattern must match the result file ${p.role}-${p.label}.result.json`);
   }
@@ -561,25 +556,18 @@ test('step8-guard licenses a published repair, and only a well-formed one', () =
   }
 });
 
-function installPublishedJudgeSession(run: string) {
+function publishedFixtureRoute() {
   const pair = 'free-groups-and-presentations';
   const plan = JSON.parse(readFileSync(join(REPO, 'research', 'plan-spec.json'), 'utf8'));
   const page = plan.pages.find((candidate: any) => candidate.id === pair);
   assert.ok(page?.items?.length, `test pair ${pair} must exist in plan-spec.json`);
   const foundVia = page.items[0].id;
-  const sessionId = 'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee';
-  const sessionRoot = join(REPO, '.autopilot', 'sessions', run);
-  const sessionHome = join(sessionRoot, 'judge', pair);
-  mkdirSync(sessionHome, { recursive: true });
-  writeFileSync(join(sessionHome, 'judge-session.json'), `${JSON.stringify({
-    version: 1, pair, model: MODELS.terra.id, session_id: sessionId,
-  }, null, 2)}\n`);
-  return { foundVia, pair, sessionId, sessionRoot };
+  return { foundVia };
 }
 
 test('step8-scope published refuses retired-lineup-only evidence', () => {
   const run = `step8pubtest${process.pid}`;
-  const { foundVia, sessionRoot } = installPublishedJudgeSession(run);
+  const { foundVia } = publishedFixtureRoute();
   const files = [
     [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
     [`${run}-judge.jsonl`, `${JSON.stringify({ id: 'lem-cauchy-bounded', model: 'gpt-5.6-terra', context_sha256: 'abc', keep: true })}\n`],
@@ -592,19 +580,17 @@ test('step8-scope published refuses retired-lineup-only evidence', () => {
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
-    rmSync(sessionRoot, { recursive: true, force: true });
   }
 });
 
 test('step8-scope published refuses a stale configured-model verdict', () => {
   const run = `step8pubstaletest${process.pid}`;
-  const { foundVia, pair, sessionId, sessionRoot } = installPublishedJudgeSession(run);
+  const { foundVia } = publishedFixtureRoute();
   const { models } = resolveLineup();
   const files = [
     [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
     [`${run}-judge.jsonl`, models.map((model) => JSON.stringify({
       id: 'lem-cauchy-bounded', model, context_sha256: 'stale', item_sha256: 'b'.repeat(64), keep: true,
-      session_pair: pair, session_id: sessionId,
     })).join('\n') + '\n'],
   ];
   try {
@@ -615,14 +601,13 @@ test('step8-scope published refuses a stale configured-model verdict', () => {
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
-    rmSync(sessionRoot, { recursive: true, force: true });
   }
 });
 
 test('step8-scope published accepts the configured model set on the current text', () => {
   const run = `step8pubcurrenttest${process.pid}`;
   const id = 'lem-cauchy-bounded';
-  const { foundVia, pair, sessionId, sessionRoot } = installPublishedJudgeSession(run);
+  const { foundVia } = publishedFixtureRoute();
   const built = spawnSync(process.execPath,
     ['--import', tsxLoader(), 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
     { cwd: REPO, encoding: 'utf8', timeout: 120_000 });
@@ -633,7 +618,6 @@ test('step8-scope published accepts the configured model set on the current text
     [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id, group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
     [`${run}-judge.jsonl`, models.map((model) => JSON.stringify({
       id, model, context_sha256: hash.context_sha256, item_sha256: hash.item_sha256, keep: true,
-      session_pair: pair, session_id: sessionId,
     })).join('\n') + '\n'],
   ];
   try {
@@ -644,14 +628,13 @@ test('step8-scope published accepts the configured model set on the current text
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
-    rmSync(sessionRoot, { recursive: true, force: true });
   }
 });
 
 test('step8-scope published accepts a current terminal resolution without inventing a verdict', () => {
   const run = `step8pubterminaltest${process.pid}`;
   const id = 'lem-cauchy-bounded';
-  const { foundVia, sessionRoot } = installPublishedJudgeSession(run);
+  const { foundVia } = publishedFixtureRoute();
   const built = spawnSync(process.execPath,
     ['--import', tsxLoader(), 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
     { cwd: REPO, encoding: 'utf8', timeout: 120_000 });
@@ -687,7 +670,6 @@ test('step8-scope published accepts a current terminal resolution without invent
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
     rmSync(receipt, { force: true });
-    rmSync(sessionRoot, { recursive: true, force: true });
   }
 });
 

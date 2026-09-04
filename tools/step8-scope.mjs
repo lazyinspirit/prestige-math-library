@@ -50,7 +50,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
-import { MODELS, resolveLineup } from './models.mjs';
+import { resolveLineup } from './models.mjs';
 import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step8-terminal-resolution.mjs';
 import {
   exactSetProblems,
@@ -296,7 +296,8 @@ function itemLine(it) {
  *  are read by a fresh agent that knows nothing about the group. The BODY
  *  differs — the rules, or the reconstruction instructions — and is appended by
  *  the caller after a rule. Nothing here is a judgement about mathematics. */
-function groupHeader(g, index, seam, rejections, alerts) {
+function groupHeader(g, index, seam, rejections, alerts, phase = 'step8') {
+  const reading = phase === 'step7';
   const pages = index.pagesOf.get(g.label);
   const aPages = pages.filter((p) => p.kind === 'A');
   const nItems = pages.reduce((n, p) => n + (p.items ?? []).length, 0);
@@ -305,16 +306,23 @@ function groupHeader(g, index, seam, rejections, alerts) {
   for (const r of mine) (byItem.get(r.id) ?? byItem.set(r.id, []).get(r.id)).push(r);
 
   const L = [];
-  L.push(`# Step 8 — group **${g.label}**, run \`${run}\``);
+  L.push(`# ${reading ? 'Step 7 whole-group reading' : 'Step 8 adjudication'} — group **${g.label}**, run \`${run}\``);
   L.push('');
   L.push(`You are the group Alpha for batches ${g.covers.map((b) => `**${b}**`).join(', ')}: `
-    + `${aPages.length} A/B pair(s), ${pages.length} page(s), ${nItems} item(s), `
-    + `${mine.length} open rejection(s) over ${byItem.size} item(s).`);
+    + `${aPages.length} A/B pair(s), ${pages.length} page(s), ${nItems} item(s)`
+    + `${reading ? '.' : `, ${mine.length} open rejection(s) over ${byItem.size} item(s).`}`);
   L.push('');
-  L.push('The engine resumes the read-only conversation you began for this group at');
-  L.push('step 7 whenever its exact session record is available; otherwise this file is');
-  L.push('the complete fallback for a fresh dispatch. Nothing from step 3, step 6, or');
-  L.push('another group is assumed. Everything below is');
+  if (reading) {
+    L.push('Read every owned item and every listed seam before returning the compact');
+    L.push('schema-constrained digest. That file, not this conversation, is the handoff');
+    L.push('to a fresh Step-8 adjudicator. No judge verdict is supplied here.');
+  } else {
+    L.push('This is a fresh adjudication context. The durable digest below carries the');
+    L.push('findings from the rejection-blind whole-group reading at step 7 without');
+    L.push('replaying that reader\'s transcript. Nothing from step 3, step 6, or another');
+    L.push('group is assumed.');
+  }
+  L.push('Everything below is');
   L.push('derived from disk by `tools/step8-scope.mjs`; no line of it is a judgement');
   L.push('about mathematics.');
   L.push('');
@@ -324,7 +332,7 @@ function groupHeader(g, index, seam, rejections, alerts) {
   // group's own account of the mathematics, recorded before any verdict
   // existed, and its value is precisely that it was not shaped by the
   // objections that follow.
-  {
+  if (!reading) {
     const d = digestPath(g.label);
     L.push('## What you recorded at step 7');
     L.push('');
@@ -350,23 +358,29 @@ function groupHeader(g, index, seam, rejections, alerts) {
     L.push('');
   }
 
-  L.push('## Read scope, write scope');
+  L.push(reading ? '## Read scope' : '## Read scope, write scope');
   L.push('');
-  L.push('**You may read the entire library.** `items/` holds every published item and');
+  L.push('**Read the entire assigned group and anything it cites.** `items/` holds every published item and');
   L.push('every item this run has built, and your sandbox is the repository root. Open');
-  L.push('anything a rejection touches — a published dependency, another group\'s page,');
+  L.push(`anything ${reading ? 'an owned item' : 'a rejection'} touches — a published dependency, another group's page,`);
   L.push('a definition three levels down. Adjudicating a citation objection without');
   L.push('opening the cited item is exactly what the refuter rule forbids.');
   L.push('');
-  L.push('**You may write only inside your own group.** A `confirmed_fatal` licenses a');
-  L.push('repair to an item in the batches listed above. If a rejection\'s real defect');
-  L.push('lies in an item owned by another group, do not repair it: record the finding');
-  L.push(`in \`research/${run}-step8-cross-group.jsonl\` as`);
-  L.push('`{from_group, item, owning_group, finding, severity, source_rejection:{id,model,context_sha256}}`');
-  L.push('and adjudicate your own rejection on what is true. The source tuple is');
-  L.push('provenance only; it cannot license a repair to the target. The gate routes a');
-  L.push('stable alert to the owning group, and a finding nobody answers fails the stage.');
-  L.push('');
+  if (reading) {
+    L.push('**This dispatch is read-only.** Record concerns about owned items and alerts');
+    L.push('about other groups in the returned digest; do not repair anything.');
+    L.push('');
+  } else {
+    L.push('**You may write only inside your own group.** A `confirmed_fatal` licenses a');
+    L.push('repair to an item in the batches listed above. If a rejection\'s real defect');
+    L.push('lies in an item owned by another group, do not repair it: record the finding');
+    L.push(`in \`research/${run}-step8-cross-group.jsonl\` as`);
+    L.push('`{from_group, item, owning_group, finding, severity, source_rejection:{id,model,context_sha256}}`');
+    L.push('and adjudicate your own rejection on what is true. The source tuple is');
+    L.push('provenance only; it cannot license a repair to the target. The gate routes a');
+    L.push('stable alert to the owning group, and a finding nobody answers fails the stage.');
+    L.push('');
+  }
 
   L.push('## Your pages');
   L.push('');
@@ -421,7 +435,7 @@ function groupHeader(g, index, seam, rejections, alerts) {
   // Alerts are separate from judge evidence. They carry stable ids and require
   // an owning-group disposition; no source tuple is ever relabelled as though a
   // judge had rejected the target item.
-  {
+  if (!reading) {
     const incoming = alerts.filter((alert) => alert.owning_group === g.label);
     L.push('## Alerts from other groups');
     L.push('');
@@ -442,25 +456,27 @@ function groupHeader(g, index, seam, rejections, alerts) {
     L.push('');
   }
 
-  L.push('## Your rejections');
-  L.push('');
-  if (!mine.length) {
-    L.push('**None open at render time.** That is a real outcome, not an error: Terra');
-    L.push('may have passed every item you own. Verify it against');
-    L.push(`\`research/${run}-judge.jsonl\` yourself before reporting nothing to do —`);
-    L.push('a rejection recorded after this file was rendered is still yours.');
-  } else {
-    L.push('| item | page | model | context_sha256 |');
-    L.push('|---|---|---|---|');
-    for (const r of mine) {
-      const owner = index.itemOwner.get(r.id);
-      L.push(`| \`${r.id}\` | \`${owner.page}\` | ${r.model} | \`${r.context_sha256}\` |`);
+  if (!reading) {
+    L.push('## Your rejections');
+    L.push('');
+    if (!mine.length) {
+      L.push('**None open at render time.** That is a real outcome, not an error: Terra');
+      L.push('may have passed every item you own. Verify it against');
+      L.push(`\`research/${run}-judge.jsonl\` yourself before reporting nothing to do —`);
+      L.push('a rejection recorded after this file was rendered is still yours.');
+    } else {
+      L.push('| item | page | model | context_sha256 |');
+      L.push('|---|---|---|---|');
+      for (const r of mine) {
+        const owner = index.itemOwner.get(r.id);
+        L.push(`| \`${r.id}\` | \`${owner.page}\` | ${r.model} | \`${r.context_sha256}\` |`);
+      }
+      L.push('');
+      L.push('Rendered from the ledger at scope time. **The ledger is the authority** — if');
+      L.push('a row appeared since, it is still yours to adjudicate.');
     }
     L.push('');
-    L.push('Rendered from the ledger at scope time. **The ledger is the authority** — if');
-    L.push('a row appeared since, it is still yours to adjudicate.');
   }
-  L.push('');
 
   return L.join('\n');
 }
@@ -519,7 +535,8 @@ if (mode === 'render') {
     writeFileSync(R('research', `${run}-alpha-${g.label}-step8-recovery.task.md`), compose(header, recoveryPath));
     writeFileSync(R('research', `${run}-alpha-${g.label}-step8-preflight.task.md`), compose(header, preflightPath));
     writeFileSync(R('research', `${run}-alpha-${g.label}-step8-close.task.md`), compose(header, R('briefs/tasks/alpha-step8-close.md')));
-    writeFileSync(R('research', `${run}-alpha-${g.label}-step7-read.task.md`), compose(header, readPath));
+    const readingHeader = groupHeader(g, index, seam.get(g.label), [], [], 'step7');
+    writeFileSync(R('research', `${run}-alpha-${g.label}-step7-read.task.md`), compose(readingHeader, readPath));
   }
 
   const total = rejections.length;
@@ -647,20 +664,6 @@ if (mode === 'published') {
   bad.push(...evidence.errors);
   const verdicts = repairedIds.length ? readJsonl(judgePath) : [];
   const { models: currentModels } = resolveLineup();
-  if (currentModels.length !== 1 || currentModels[0] !== MODELS.terra.id) {
-    bad.push(`Step 8 persistent-session closure requires the singleton ${MODELS.terra.id} lineup`);
-  }
-  const plan = repairedIds.length ? JSON.parse(readFileSync(R('research', 'plan-spec.json'), 'utf8')) : { pages: [] };
-  const pairByPage = new Map();
-  for (const page of plan.pages.filter((candidate) => candidate.kind === 'A')) {
-    pairByPage.set(page.id, page.id);
-    if (typeof page.companion === 'string') pairByPage.set(page.companion, page.id);
-  }
-  const pairByItem = new Map();
-  for (const page of plan.pages) {
-    const pair = pairByPage.get(page.id);
-    for (const item of page.items ?? []) if (pair) pairByItem.set(item.id, pair);
-  }
   const currentHashes = new Map();
   for (const result of await buildCurrentContextHashes(repairedIds, {
     cwd: REPO,
@@ -690,20 +693,6 @@ if (mode === 'published') {
         continue;
       }
     }
-    const pair = pairByItem.get(r.found_via);
-    let expectedSession = null;
-    try {
-      if (!pair) throw new Error(`found_via ${r.found_via} has no run A/B pair`);
-      const sessionPath = R('.autopilot', 'sessions', run, 'judge', pair, 'judge-session.json');
-      const session = JSON.parse(readFileSync(sessionPath, 'utf8'));
-      if (session.version !== 1 || session.pair !== pair || session.model !== MODELS.terra.id
-        || !/^[0-9a-f-]{36}$/i.test(session.session_id)) throw new Error(`${sessionPath}: invalid session metadata`);
-      expectedSession = session;
-    } catch (cause) {
-      bad.push(`\`${r.id}\`: cannot route the repaired item to its Step-7 Terra session (${cause.message ?? String(cause)})`);
-      pending.needs_rejudge.push(r.id);
-      continue;
-    }
     // Use the same currency predicate and same-context configured-model shape as
     // level-coverage. Published items are outside the run manifests, so the
     // run-scoped closure receipt cannot perform this check for us.
@@ -718,8 +707,6 @@ if (mode === 'published') {
     }
     const eligible = [...byContext.entries()].filter(([context, byModel]) =>
       currentModels.every((model) => byModel.has(model)
-        && byModel.get(model).session_pair === pair
-        && byModel.get(model).session_id === expectedSession.session_id
         && verdictIsCurrent({ context_sha256: context, item_sha256: byModel.get(model).item_sha256 }, now)));
     if (!eligible.length) {
       bad.push(`\`${r.id}\` was repaired but lacks a current verdict from ${currentModels.join(' + ')} — `

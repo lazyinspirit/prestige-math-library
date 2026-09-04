@@ -119,8 +119,8 @@ const ROLES = Object.freeze({
   'final-adjudicator': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'max', cap: 8, web: true, requiresTask: true, why: 'Step-8 final adjudication after two fatal contexts; one independent Sol-max agent per affected group, with authoritative web verification' },
   // `alpha-group-read` — the step-7 pass that reads a group's A/B pairs while the
   // judges are still sweeping (owner, 2026-08-25). Step 7 applies the Terra
-  // xhigh profile in the stage table; Step 8 resumes the same conversation
-  // under the adjudicator's own Sol xhigh role.
+  // xhigh profile; the durable digest hands its findings to a fresh Sol xhigh
+  // adjudicator at Step 8.
   //
   // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 7 judges a frozen text; an
   // edit landing mid-sweep voids verdicts already cast against the old bytes and
@@ -133,16 +133,13 @@ const ROLES = Object.freeze({
   //
   // No web: everything it reads is on disk, and a source lookup belongs to the
   // Beta that authored the page, not to a reader of it.
-  // `alpha-group-read` — the step-7 half of a group Alpha's life (owner,
-  // 2026-08-25). Read-only at the kernel while the judges sweep a frozen text,
-  // and given a PERSISTENT session home so that `8-adjudicate` resumes this very
-  // conversation with write access rather than starting a fresh agent. The
-  // model change at the boundary is deliberate: Terra xhigh reads at Step 7,
-  // then Sol xhigh performs the Step-8 adjudication.
+  // `alpha-group-read` — a rejection-blind whole-group read while the judges
+  // sweep frozen text. Its schema-constrained digest is the Step-8 handoff; the
+  // later Sol adjudicator starts fresh rather than replaying a long transcript.
   //
   // No web: everything it reads is on disk. Sourcing belongs to the Beta that
   // authored the page, not to a reader of it.
-  'alpha-group-read': { ...lane('adjudication'), sandbox: 'read-only', effort: 'xhigh', cap: 8, why: 'step-7 reading half of a group Alpha; one read-only lane per group, resumed at step 8' },
+  'alpha-group-read': { ...lane('adjudication'), sandbox: 'read-only', effort: 'xhigh', cap: 8, why: 'step-7 whole-group read; one read-only lane per group, handed to step 8 by compact digest' },
   // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
   refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: 24, why: 'one independent read-only refuter per batch; returns evidence, never edits' },
 
