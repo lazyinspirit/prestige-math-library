@@ -316,6 +316,9 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step8') {
     L.push('Read every owned item and every listed seam before returning the compact');
     L.push('schema-constrained digest. That file, not this conversation, is the handoff');
     L.push('to a fresh Step-8 adjudicator. No judge verdict is supplied here.');
+    L.push('In the digest, `pages_read` is exactly the ids under **Your pages** and');
+    L.push('`items_read` exactly the ids under **Your content**. External items you');
+    L.push('open belong only in `published_dependencies`; never add them to those inventories.');
   } else {
     L.push('This is a fresh adjudication context. The durable digest below carries the');
     L.push('findings from the rejection-blind whole-group reading at step 7 without');

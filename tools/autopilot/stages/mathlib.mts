@@ -470,7 +470,10 @@ export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [] }: an
       r = spawnSync('node', argvTail, { cwd: ctx.repo, encoding: 'utf8' });
     }
     const classify = OUTAGE_CLASSIFIERS[f.id];
-    const reason = classify ? classify(ctx, startedAt) : null;
+    const directOutage = f.id === 'judge-closure' && r.status === 3
+      ? String(r.stderr || r.stdout || 'judge provider outage').replace(/\s+/g, ' ').slice(-300)
+      : null;
+    const reason = directOutage ?? (classify ? classify(ctx, startedAt) : null);
     // An outage short-circuits: the round is refunded and the clock waited on,
     // so running the remaining repairs against a platform that is refusing
     // calls would spend work to learn what this already knows.

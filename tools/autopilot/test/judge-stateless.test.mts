@@ -49,7 +49,7 @@ process.stdin.on('end', () => {
   writeFileSync(args[outAt + 1], '{"keep":true,"reason":"checked target and pair interfaces"}\\n');
   process.stdout.write(JSON.stringify({ type: 'turn.completed', usage: {
     input_tokens: 123, cached_input_tokens: 23, output_tokens: 7,
-  } }) + '\\n');
+  }, rate_limits: { primary: { used_percent: 12 } } }) + '\\n');
 });
 `);
   chmodSync(fakeCodex, 0o755);

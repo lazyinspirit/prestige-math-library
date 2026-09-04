@@ -377,10 +377,15 @@ const callOnce = async (
     status: run.code, latency_ms: Math.round(performance.now() - started),
     has_content: Boolean(run.message), raw_bytes: raw.length, at,
   });
+  // Successful JSONL can include a normal `rate_limits` telemetry object. A
+  // valid structured final message outranks diagnostic-keyword matching; only
+  // classify provider text as an outage when the call did not succeed.
+  if (run.code === 0 && run.message) {
+    const verdict = parseVerdict(run.message);
+    return verdict ? { kind: 'verdict' as const, verdict } : { kind: 'retry' as const, raw: run.message };
+  }
   if (OUTAGE.test(raw)) return { kind: 'outage' as const, raw };
-  if (run.code !== 0 || !run.message) return { kind: 'retry' as const, raw };
-  const verdict = parseVerdict(run.message);
-  return verdict ? { kind: 'verdict' as const, verdict } : { kind: 'retry' as const, raw: run.message };
+  return { kind: 'retry' as const, raw };
 };
 
 if (flags.has('preflight')) {
