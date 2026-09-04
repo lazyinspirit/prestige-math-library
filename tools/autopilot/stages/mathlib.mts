@@ -157,11 +157,19 @@ const coverageGates = (ctx, { requireDestination = false } = {}) => batches(ctx)
  *  earlier page in another batch resolves as planned content. Running one
  *  invocation per batch misclassifies that edge as missing until step 4 has
  *  authored the target, creating a deadlock before the splice. */
-const policyGates = (ctx) => [gate('content-policy-scaffold', ['node', 'tools/content-policy.mjs',
-  '--manifest-only',
+const manifestDepsGate = (ctx) => gate('manifest-deps', ['node', 'tools/manifest-deps.mjs',
   ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
-  liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
-})];
+  liveness: { pattern: /manifest-deps: (\d+) item/.source, min: 1, unit: 'planned items' },
+});
+
+const policyGates = (ctx) => [
+  manifestDepsGate(ctx),
+  gate('content-policy-scaffold', ['node', 'tools/content-policy.mjs',
+    '--manifest-only',
+    ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
+    liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
+  }),
+];
 
 /** Item mode — the other half of content-policy, and the only enforcement of
  *  applied-iota notation, provenance ENUM validity (level-coverage checks
@@ -222,6 +230,11 @@ const fetchGate = (ctx) => gate('source-fetch-check', ['node', 'tools/source-fet
 // REPLACE is the standing rule — and only then retire what is still dead and
 // carries nothing the level would lose.
 export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[][]> = {
+  // A scaffold item with no dependency field means an empty list was omitted,
+  // not that mathematical judgment is needed. Normalize it before authoring so
+  // Step 9 never spends an Alpha call discovering missing plan evidence.
+  'manifest-deps': (ctx) => ['tools/manifest-deps.mjs', '--write',
+    ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)],
   'url-liveness': (ctx) => [
     // 1. dead citation with a recorded archive snapshot -> swap it in place
     ['tools/url-recover-apply.mjs',
@@ -1702,7 +1715,7 @@ export const stages = [
     // unstamped sources; only an unrecoverable or unfetchable source reaches
     // the fix loop below, as scouting work for the owning Beta.
     gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx, { requireSufficient: true }),
-      scopeDecisionsGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
+      manifestDepsGate(ctx), scopeDecisionsGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
     // Still thin after the re-check is another fix round, not an advance. Bounded
     // for the same reason the judge loop is: a scaffold that will not converge is
     // a decision for a person, and the blocker names the pairs.
@@ -3259,6 +3272,7 @@ export const stages = [
     plan: (ctx) => [{ role: 'tool', label: 'close-splice', job: 'bookkeeping-mechanical', covers: ['all'], timeout: 600,
       argv: ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'] }],
     gates: (ctx) => [
+      manifestDepsGate(ctx),
       gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
       gate('impact-receipt', ['node', 'tools/impact-audit.mjs',
         '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
@@ -3377,9 +3391,15 @@ export const stages = [
       task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step9.task.md`],
       timeout: 14400,
     }],
-    gates: (ctx) => [levelCoverageGate(ctx)],
+    gates: (ctx) => [manifestDepsGate(ctx), levelCoverageGate(ctx)],
     maxFixRounds: 2,
-    onGateFailure: async ({ ctx, executor, stage, round }) => {
+    onGateFailure: async (args: any) => {
+      const repair = await mechanicalRepair(args);
+      if (repair.outcome !== 'unhandled') {
+        if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
+        return;
+      }
+      const { ctx, executor, stage, round } = args;
       executor.start(stage, {
         role: 'alpha', label: `receipts-fix-${round}`, job: 'audit', covers: [], brief: 'briefs/alpha.md',
         task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step9.task.md`], timeout: 14400,
@@ -3541,7 +3561,11 @@ export const stages = [
     pattern: resultPattern('tool', 'readiness-v2'), concurrency: 1,
     plan: (ctx) => [{ role: 'tool', label: 'readiness-v2', job: 'bookkeeping-mechanical', covers: ['all'],
       argv: ['node', 'tools/publication-ready.mjs', '--run', ctx.run, '--write'] }],
-    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), closureGate(ctx), ledgerGate(ctx, { terminal: true }),
+    // Full level coverage already performs the configured-judge closure and
+    // writes its receipt. Running the judge-only scan beside it reread every
+    // manifest, verdict, adjudication and terminal resolution for no added
+    // assurance.
+    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), ledgerGate(ctx, { terminal: true }),
       gate('publication-readiness', ['node', 'tools/publication-ready.mjs', '--run', ctx.run, '--verify'])],
   },
   // Reconcile the final receipts and append-only ledgers once.  The reporter
@@ -3610,7 +3634,12 @@ export const stages = [
       job: 'bookkeeping-mechanical',
       covers: ['all'],
       timeout: 300,
-      argv: ['node', 'tools/run-commit.mjs', '--run', ctx.run],
+      // run-commit writes this final receipt before staging, so the one close
+      // commit contains its own coverage evidence and the engine must not add
+      // a second, post-commit receipt.
+      writeReceipt: false,
+      argv: ['node', 'tools/run-commit.mjs', '--run', ctx.run, '--final-receipt',
+        `research/${ctx.run}-dispatch/tool-close-step10-v2.result.json`],
     }],
     gates: (ctx) => [
       // No liveness floor: zero obligation rows is a legitimately empty set.
@@ -3628,10 +3657,10 @@ export const stages = [
       // any obligation closure written in a repair round.
       gate('tree-clean', ['node', 'tools/run-commit.mjs', '--run', ctx.run, '--check']),
     ],
-    // The close-out commit deliberately dirties the tree with its own result
-    // file, so one clean-up/commit retry is expected. The remaining rounds are
-    // headroom for a real late obligation; a report-integrity mismatch is never
-    // auto-repaired because it signals an unexpected protected-tree mutation.
+    // The close command commits its own receipt, so a clean run passes on the
+    // first battery. Repair rounds remain for a real late obligation; a
+    // report-integrity mismatch is never auto-repaired because it signals an
+    // unexpected protected-tree mutation.
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
       if (failure.id === 'tree-clean') {

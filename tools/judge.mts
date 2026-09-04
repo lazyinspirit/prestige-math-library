@@ -18,7 +18,7 @@ import {
 } from './models.mjs';
 
 const argv = process.argv.slice(2);
-const VALUE_FLAGS = new Set(['model', 'topic', 'conventions', 'batch']);
+const VALUE_FLAGS = new Set(['model', 'topic', 'conventions', 'batch', 'context-hashes']);
 const values = new Map<string, string>();
 const flags = new Set<string>();
 let file = '';
@@ -33,8 +33,9 @@ for (let i = 0; i < argv.length; i += 1) {
   else flags.add(name);
 }
 
-if (!file && !flags.has('preflight')) {
+if (!file && !flags.has('preflight') && !values.has('context-hashes')) {
   console.error('usage: node tools/tsx-run.mjs tools/judge.mts items/<id>.md [--model M] [--context-hash|--dump-prompt]');
+  console.error('       node tools/tsx-run.mjs tools/judge.mts --context-hashes <id,id,...>');
   console.error('       node tools/tsx-run.mjs tools/judge.mts --preflight [--model M]');
   process.exit(2);
 }
@@ -124,6 +125,12 @@ const loadPages = (root: string): PageRow[] => {
   });
 };
 
+// A single-item judge call still loads once. Mechanical consumers that need
+// many current hashes use --context-hashes, which reuses this corpus snapshot
+// instead of starting one process and rereading every item for every id.
+let itemsCache: ReturnType<typeof loadItems> | null = null;
+let pagesCache: PageRow[] | null = null;
+
 const companion = (slug: string): string => slug.endsWith('-examples')
   ? slug.slice(0, -'-examples'.length)
   : `${slug}-examples`;
@@ -146,10 +153,10 @@ const buildPrompt = (itemFile: string): {
   const targetPath = resolve(REPO, itemFile);
   const body = readFileSync(targetPath, 'utf8');
   const id = basename(targetPath, '.md');
-  const { byId, aliases } = loadItems();
+  const { byId, aliases } = itemsCache ??= loadItems();
   const pages = flags.has('no-context')
     ? []
-    : loadPages(resolve(REPO, process.env.JUDGE_LIBRARY_DIR ?? 'library'));
+    : pagesCache ??= loadPages(resolve(REPO, process.env.JUDGE_LIBRARY_DIR ?? 'library'));
   const ownPage = pages.find((page) => page.ids.includes(id));
   const pairPage = ownPage ? pages.find((page) => page.slug === companion(ownPage.slug)) : undefined;
   const resolveId = (raw: string): string | null => byId.has(raw) ? raw : aliases.get(raw) ?? null;
@@ -407,6 +414,28 @@ if (flags.has('preflight')) {
     }
   }
   console.error(`[judge] preflight OK for ${models.join(', ')}`);
+  process.exit(0);
+}
+
+if (values.has('context-hashes')) {
+  const ids = [...new Set((values.get('context-hashes') ?? '').split(',').map((id) => id.trim()).filter(Boolean))];
+  if (!ids.length) {
+    console.error('[judge] --context-hashes needs at least one item id');
+    process.exit(2);
+  }
+  const contexts: Record<string, { context_sha256: string; item_sha256: string }> = {};
+  for (const id of ids) {
+    const built = buildPrompt(`items/${id}.md`);
+    contexts[id] = {
+      context_sha256: createHash('sha256').update(built.prompt).digest('hex'),
+      item_sha256: built.itemSha256,
+    };
+  }
+  // stdout is a pipe for the stamp tool. `console.log(); process.exit()` can
+  // truncate a large batch before Node flushes it, yielding valid-prefix JSON.
+  await new Promise<void>((resolve, reject) => {
+    process.stdout.write(`${JSON.stringify({ contexts })}\n`, (error) => error ? reject(error) : resolve());
+  });
   process.exit(0);
 }
 

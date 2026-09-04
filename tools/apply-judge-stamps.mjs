@@ -157,9 +157,20 @@ if (targetedReceiptPath && [...ledgerLanes].some((m) => !models.includes(m))) {
   process.exit(2);
 }
 
+let contextHashes = null;
 const contextHash = (id) => {
-  const out = execFileSync(process.execPath, ['--import', LOADER, 'tools/judge.mts', `items/${id}.md`, '--context-hash'], { encoding: 'utf8' });
-  return JSON.parse(out).context_sha256;
+  // The item-hash fast path below normally avoids context work altogether. If
+  // any residue needs clause (a), compute every scoped context in one judge.mts
+  // process: one corpus read, no per-item process/load cycle, identical prompts.
+  if (contextHashes === null) {
+    const out = execFileSync(process.execPath,
+      ['--import', LOADER, 'tools/judge.mts', '--context-hashes', ids.join(',')],
+      { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+    contextHashes = JSON.parse(out).contexts;
+  }
+  const hash = contextHashes?.[id]?.context_sha256;
+  if (typeof hash !== 'string') throw new Error(`batch context output omitted ${id}`);
+  return hash;
 };
 
 // Replace an existing `  judge:` block (a mapping nested under `verification:`)
@@ -261,8 +272,9 @@ for (const id of ids) {
   // Alpha-attested pair context and item hash are BOTH exact.
   //
   // The pair-context hash is LAZY: clause (b) needs no subprocess and, once a
-  // sweep records item_sha256, covers nearly every current verdict — so the
-  // per-item judge.mts spawn is paid only for the residue. Both passes go
+  // sweep records item_sha256, covers nearly every current verdict. If any
+  // residue needs pair context, one batched judge.mts call serves the scope.
+  // Both passes go
   // through the ONE shared predicate; the cheap pass hands it a context no row
   // can match, so it is a sound subset of the full check, never a third
   // reading of the rule.

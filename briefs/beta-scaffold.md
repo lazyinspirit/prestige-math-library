@@ -13,6 +13,8 @@ with the schema's kind prefixes; do not silently duplicate an existing claim.
 Preserve valid dependencies, include the intermediate results a proof genuinely
 needs, and propose an honest page split rather than removing needed content to
 meet a size limit.
+Every manifest item object must carry an explicit `deps` array; write `deps: []`
+when the item has no planned dependencies.
 
 For every assigned A page, maintain the required coverage harvest: independent
 sources, including an eligible primary treatment; an HTTP(S) URL and exact

@@ -118,6 +118,10 @@ always recomputed from artifacts. `events.jsonl` is append-only history and
 `status.md` is the replaceable current report. `status` also observes eligible
 external dispatches rather than reporting only this process's children.
 
+Verbose gate output is retained as a bounded head and tail in `events.jsonl`,
+preserving summaries and terminal diagnostics without allowing a per-item
+checker to add megabytes to one event.
+
 Only two contiguous groups pipeline by unit:
 
 - `scaffold`: `3-review` → `3-fix` → `3-recheck`.
@@ -247,6 +251,10 @@ input, cached-input, and output token telemetry. Every scoped item needs a
 current verdict from the configured set; retained rows for unselected sets are
 evidence, not coverage.
 
+When stamp verification needs pair-context hashes, `judge.mts` computes the
+requested set in one process and one corpus read instead of reloading the
+repository in a subprocess for every item.
+
 Step-7 group Alphas still read their entire assigned groups against frozen text
 and emit schema-checked digests. Step 8 starts a fresh Sol adjudication from the
 mechanically rendered task and that durable digest; it does not replay the
@@ -293,6 +301,11 @@ The generated `verification.judge` block is excluded from both the stamped
 item's attestation hash and any whole-source fallback used for a sibling's pair
 interface, so applying stamps cannot invalidate current judge or terminal
 resolution context.
+
+Every scaffold manifest item must carry an explicit `deps` array. Missing empty
+arrays are normalized mechanically at the Step-1/3 scaffold joins and again
+before the Step-9 receipt, so the whole-level audit does not spend an Alpha call
+repairing syntax; malformed dependency values remain hard errors.
 
 ## Repairs, outages, and controls
 
@@ -341,6 +354,9 @@ directories named `.autopilot` or `.autopilot-*` are excluded from both Step 10
 tree seals because their event and status files continue changing while the
 sealed content is verified.
 
+Final readiness performs one complete level-coverage scan. That scan includes
+configured-judge closure, so a second judge-only scan is not run.
+
 `step10-report.mjs evidence` reconciles readiness, judge/adjudication, defect,
 touch, and pathway artifacts into a hash-bound packet. The read-only reporting
 role can interpret only that packet; mechanical rendering supplies the factual
@@ -348,7 +364,10 @@ counts and fatal rows. The report-integrity receipt stops any protected-tree
 mutation between readiness and close-out.
 
 `10-close-v2` calls `run-commit.mjs` on `main` and gates terminal obligations,
-integrity, readiness, and a clean tree. It neither pushes nor changes `status:`.
+integrity, readiness, and a clean tree. The command writes its successful result
+receipt before staging and includes it in the same commit, avoiding a
+receipt-only repair pass and second commit. It neither pushes nor changes
+`status:`.
 Only the owner may perform the personal final audit, deliberate
 `status: published` change, and push/deployment; engine completion is therefore
 `publishable pending owner approval`, never publication.

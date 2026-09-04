@@ -47,11 +47,11 @@ function fixture(ids: string[]) {
   mkdirSync(join(dir, 'items'), { recursive: true });
   mkdirSync(join(dir, 'tools'), { recursive: true });
   mkdirSync(join(dir, 'research'), { recursive: true });
-  // A stub pair-context builder. The lazy clause-(b) fast path means the real
-  // judge.mts is spawned only for an item whose recorded item hash no longer
-  // matches; the stub answers a fixed context hash for the clause-(a) tests.
+  // A stub pair-context builder. The lazy clause-(b) fast path means judge.mts
+  // is spawned only when recorded item hashes no longer match; all requested
+  // contexts must arrive in that one batch.
   writeFileSync(join(dir, 'tools', 'judge.mts'),
-    `console.log(JSON.stringify({ context_sha256: '${STUB_CONTEXT}' }));\n`);
+    `import { appendFileSync } from 'node:fs'; const a=process.argv.slice(2); const ids=(a[a.indexOf('--context-hashes')+1]||'').split(',').filter(Boolean); appendFileSync('research/context-calls.jsonl', JSON.stringify(ids)+'\\n'); console.log(JSON.stringify({contexts:Object.fromEntries(ids.map(id=>[id,{context_sha256:'${STUB_CONTEXT}',item_sha256:'0'.repeat(64)}]))}));\n`);
   for (const id of ids) writeFileSync(join(dir, 'items', `${id}.md`), itemText(id));
   writeFileSync(join(dir, 'research', 'm.pages.json'),
     JSON.stringify([{ id: 'page-a', items: ids.map((id) => ({ id })) }]));
@@ -203,6 +203,9 @@ test('clause (a) still reaches a pair-context match through the lazy spawn; a tr
   assert.equal(r.status, 1);
   assert.match(r.stderr, /itm-c: the ledger licenses a judge pass/);
   assert.match(r.stderr, /itm-d: no current configured-judge verdict/);
+  const calls = readFileSync(join(dir, 'research', 'context-calls.jsonl'), 'utf8').trim().split('\n');
+  assert.equal(calls.length, 1, 'all stale contexts are computed in one process');
+  assert.deepEqual(JSON.parse(calls[0]), ['itm-c', 'itm-d']);
 
   r = run(dir, '--apply');
   assert.equal(r.status, 0, r.stderr);

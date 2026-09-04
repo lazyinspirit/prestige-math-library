@@ -96,7 +96,8 @@ export async function runGate(gate: Gate, { cwd, env = {}, signal, logger = () =
 }
 
 /** The most useful line of a failing gate's output, for a one-line report.
- *  Full output is kept on the result and in events.jsonl. */
+ *  Full output stays on the in-memory result for repair routing; events.jsonl
+ *  keeps the reporter's bounded diagnostic copy. */
 function firstProblem(out: string): string | null {
   for (const line of out.split('\n')) {
     if (/^\s*(ERROR|FAIL|error:|✗)/i.test(line)) return line.trim().slice(0, 240);

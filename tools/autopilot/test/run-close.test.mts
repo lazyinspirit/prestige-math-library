@@ -76,9 +76,12 @@ test('run-commit commits a dirty tree on main and refuses any other branch', () 
   writeFileSync(join(dir, 'new-item.md'), 'draft content');
   let r = runTool(join(dir, 'tools', 'run-commit.mjs'), dir, ['--run', 'r9', '--check']);
   assert.equal(r.status, 1, 'a dirty tree fails the gate');
-  r = runTool(join(dir, 'tools', 'run-commit.mjs'), dir, ['--run', 'r9']);
+  const receipt = 'research/r9-dispatch/tool-close-step10-v2.result.json';
+  r = runTool(join(dir, 'tools', 'run-commit.mjs'), dir, ['--run', 'r9', '--final-receipt', receipt]);
   assert.equal(r.status, 0, r.stderr);
   assert.match(r.stdout, /committed/);
+  assert.equal(JSON.parse(readFileSync(join(dir, receipt), 'utf8')).ok, true);
+  assert.equal(git('status', '--porcelain'), '', 'the final receipt is part of the same close-out commit');
   const log = git('log', '--oneline');
   assert.match(log, /engine close-out/);
   assert.ok(!/Co-Authored-By/.test(git('log', '-1', '--format=%B')), 'no trailers, ever');
@@ -90,6 +93,14 @@ test('run-commit commits a dirty tree on main and refuses any other branch', () 
   r = runTool(join(dir, 'tools', 'run-commit.mjs'), dir, ['--run', 'r9']);
   assert.equal(r.status, 1, 'any branch but main is a refusal, never a checkout');
   assert.match(r.stderr, /not main/);
+});
+
+test('the close stage delegates its receipt to run-commit instead of creating a second commit', () => {
+  const stage: any = stages.find((candidate: any) => candidate.id === '10-close-v2');
+  const plan = stage.plan({ run: 'demo', repo: REPO })[0];
+  assert.equal(plan.writeReceipt, false);
+  assert.deepEqual(plan.argv.slice(-2), ['--final-receipt',
+    'research/demo-dispatch/tool-close-step10-v2.result.json']);
 });
 
 test('the 10-contract-close hook routes an open contract row to the owning Beta, then to the certifier', async () => {

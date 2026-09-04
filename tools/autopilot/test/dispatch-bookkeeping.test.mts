@@ -263,6 +263,19 @@ test('events.jsonl is append-only: nothing truncates it', () => {
   assert.notEqual((r as any).eventsPath, (r as any).statusPath);
 });
 
+test('large gate output keeps diagnostic head and tail without bloating events.jsonl', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ap-rep-'));
+  const r = new Reporter({ dir, sink: () => {}, intervalMs: 0 });
+  const output = `HEAD-${'x'.repeat(100_000)}-TAIL`;
+  r.event('gate', { id: 'large', output });
+  const line = readFileSync(join(dir, 'events.jsonl'), 'utf8').trim();
+  const row = JSON.parse(line);
+  assert.match(row.output, /^HEAD-/);
+  assert.match(row.output, /characters omitted from event/);
+  assert.match(row.output, /-TAIL$/);
+  assert.ok(line.length < 35_000, 'one verbose gate must remain a small event row');
+});
+
 test('the source proves it: appendFileSync is the only writer of eventsPath', () => {
   const src = readFileSync(new URL('../src/reporter.mts', import.meta.url), 'utf8');
   const writes = [...src.matchAll(/(appendFileSync|writeFileSync)\(this\.(\w+)/g)]

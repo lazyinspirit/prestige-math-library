@@ -21,6 +21,13 @@ import { appendFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import type { Snapshot } from './types.mts';
 import { join } from 'node:path';
 
+const EVENT_OUTPUT_LIMIT = 32 * 1024;
+const boundedOutput = (value: string): string => {
+  if (value.length <= EVENT_OUTPUT_LIMIT) return value;
+  const half = EVENT_OUTPUT_LIMIT / 2;
+  return `${value.slice(0, half)}\n… [${value.length - EVENT_OUTPUT_LIMIT} characters omitted from event] …\n${value.slice(-half)}`;
+};
+
 export class Reporter {
   dir: string; intervalMs: number; sink: (s: string) => void; now: () => number;
   lastReport = 0; eventsPath: string; statusPath: string;
@@ -45,7 +52,13 @@ export class Reporter {
    *  throws inside `JSON.stringify`, which is OUTSIDE the try that guards the
    *  write. Serialise inside it. */
   event(type: string, payload: Record<string, unknown> = {}): Record<string, unknown> {
-    const row = { at: new Date(this.now()).toISOString(), type, ...payload };
+    // Gate programs may print a line per repository item. Keep enough of both
+    // ends for summaries and terminal errors without turning one event into a
+    // multi-megabyte append; the full result remains available by rerunning the
+    // deterministic gate.
+    const safe = { ...payload };
+    if (typeof safe.output === 'string') safe.output = boundedOutput(safe.output);
+    const row = { at: new Date(this.now()).toISOString(), type, ...safe };
     try { appendFileSync(this.eventsPath, JSON.stringify(row) + '\n'); }
     catch { /* logging must not kill a run */ }
     return row;

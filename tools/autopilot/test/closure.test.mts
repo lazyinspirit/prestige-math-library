@@ -119,7 +119,8 @@ test('final readiness runs whole-level closure once and terminal close verifies 
   assert.ok(levelCoverage, 'final readiness owns the complete level scan');
   assert.ok(levelCoverage.argv.includes('--verify-current-context'),
     'the complete scan must bind verdicts to current mathematical text');
-  assert.ok(readinessGates.some((gate: any) => gate.id === 'judge-closure'));
+  assert.ok(!readinessGates.some((gate: any) => gate.id === 'judge-closure'),
+    'final readiness must not repeat the judge-only subset of level coverage');
   assert.ok(readinessGates.some((gate: any) => gate.id === 'publication-readiness'));
 
   const closeGates = stage('10-close-v2').gates(ctx).map((gate: any) => gate.id);
