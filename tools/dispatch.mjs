@@ -441,6 +441,42 @@ const writeAttemptFile = (path, stable, value) => {
   refreshLatest(path, stable);
 };
 
+// Agent CLIs can be extremely noisy during long tool-heavy runs. Keeping their
+// complete stdout/stderr in JavaScript strings makes receipt creation depend on
+// output volume: V8 throws once a string reaches its implementation limit, so a
+// successful agent can lose its dispatch receipt at the very end. Preserve the
+// useful beginning (startup/session metadata) and end (final report/errors), and
+// bound the otherwise untrusted middle.
+const OUTPUT_HEAD_CHARS = 1024 * 1024;
+const OUTPUT_TAIL_CHARS = 1024 * 1024;
+const boundedOutput = () => {
+  let head = '';
+  let tail = '';
+  let omitted = 0;
+  return {
+    append(chunk) {
+      let text = String(chunk);
+      const room = OUTPUT_HEAD_CHARS - head.length;
+      if (room > 0) {
+        head += text.slice(0, room);
+        text = text.slice(room);
+      }
+      if (!text) return;
+      const combined = tail + text;
+      if (combined.length > OUTPUT_TAIL_CHARS) {
+        omitted += combined.length - OUTPUT_TAIL_CHARS;
+        tail = combined.slice(-OUTPUT_TAIL_CHARS);
+      } else {
+        tail = combined;
+      }
+    },
+    text() {
+      if (!omitted) return head + tail;
+      return `${head}\n\n[dispatch omitted ${omitted} characters from the middle of this stream]\n\n${tail}`;
+    },
+  };
+};
+
 // ---- the command -------------------------------------------------------------
 
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
@@ -696,8 +732,8 @@ const result = await new Promise((resolve) => {
     env: { ...process.env, ...extraEnv, ...providerEnvironment },
   });
 
-  let stdout = '';
-  let stderr = '';
+  const stdout = boundedOutput();
+  const stderr = boundedOutput();
   let settled = false;
   let timedOut = false;
 
@@ -705,14 +741,16 @@ const result = await new Promise((resolve) => {
     if (settled) return;
     settled = true;
     clearTimeout(timer);
-    writeAttemptFile(logPath, stableLogPath, `# ${role}/${label} ${started.toISOString()}\n\n## stdout\n${stdout}\n\n## stderr\n${stderr}\n`);
-    resolve({ code, timedOut, stdout, stderr });
+    const capturedStdout = stdout.text();
+    const capturedStderr = stderr.text();
+    writeAttemptFile(logPath, stableLogPath, `# ${role}/${label} ${started.toISOString()}\n\n## stdout\n${capturedStdout}\n\n## stderr\n${capturedStderr}\n`);
+    resolve({ code, timedOut, stdout: capturedStdout, stderr: capturedStderr });
   };
   const timer = setTimeout(() => { timedOut = true; child.kill('SIGTERM'); }, timeoutSec * 1000);
 
-  child.stdout.on('data', (chunk) => { stdout += chunk; });
-  child.stderr.on('data', (chunk) => { stderr += chunk; });
-  child.on('error', (error) => { stderr += String(error); finish(null); });
+  child.stdout.on('data', (chunk) => { stdout.append(chunk); });
+  child.stderr.on('data', (chunk) => { stderr.append(chunk); });
+  child.on('error', (error) => { stderr.append(error); finish(null); });
   child.on('close', finish);
   child.stdin.end(prompt);
 });
@@ -849,7 +887,7 @@ const record = {
   session_home: persistentHome ? relative(REPO, persistentHome) : null,
   log: logPath, prompt: promptPath,
   // The agent's own final text, which is its report. Truncated in the record;
-  // the log holds it in full.
+  // the bounded log retains the stream's beginning and end.
   tail: result.stdout.trim().split('\n').slice(-40).join('\n'),
 };
 writeAttemptFile(resultPath, stableResultPath, JSON.stringify(record, null, 2) + '\n');

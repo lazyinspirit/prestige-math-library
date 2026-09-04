@@ -173,6 +173,11 @@ keeps the unsuffixed names as latest-result compatibility paths, and limits
 structured output artifacts to `research/`. Read-only enforcement is role and
 runner specific; inspect it with:
 
+Dispatch stdout and stderr capture is bounded to the beginning and end of each
+stream. Long or noisy agent runs therefore retain startup metadata and final
+diagnostics without risking a V8 string-limit crash before their result receipt
+is written; an explicit marker records any omitted middle output.
+
 ```bash
 node tools/dispatch.mjs --check-read-only
 ```
