@@ -106,7 +106,7 @@ test('a re-read round is not mistaken for the unit it repairs', { skip: !existsS
     ctx: { run: 'frontier-18', repo: REPO },
     executor: { start: (_x: any, p: any) => started.push(p) },
     stage: s, round: 1,
-    failure: { id: 'step8-digests', why: 'group c: 2/6 of its own pages read' },
+    failure: { id: 'step8-digests', why: 'group c items_read: unexpected `def-external`' },
   });
   assert.equal(started.length, 1, 'only the group with a thin digest is re-read');
   assert.match(started[0].label, /read-again-c-/);

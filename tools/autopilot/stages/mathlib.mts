@@ -2415,7 +2415,9 @@ export const stages = [
       // own — this hook is the only route back.
       if (args.failure.id === 'step8-digests') {
         const text = `${args.failure.output ?? ''}\n${args.failure.why ?? ''}`;
-        const named = new Set([...text.matchAll(/group\s+([a-z]+)\s*:/gi)].map((m) => m[1].toLowerCase()));
+        const named = new Set([...text.matchAll(
+          /group\s+([a-z]+)(?=\s*:|\s+(?:pages_read|items_read|seams_checked|batches)\s*:)/gi,
+        )].map((m) => m[1].toLowerCase()));
         const groups = alphaGroups(args.ctx);
         const selected = groups.filter((g: any) => named.has(String(g.label)));
         const retry = selected.length ? selected : groups;
