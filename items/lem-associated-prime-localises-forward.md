@@ -30,9 +30,7 @@ sources:
 Let $R$ be a commutative ring, let $M$ be a left $R$-module, let
 $S \subseteq R$ be multiplicative, and let $\mathfrak p \in \operatorname{Ass}_R(M)$
 with $\mathfrak p \cap S=\varnothing$. Then
-$$
-S^{-1}\mathfrak p \in \operatorname{Ass}_{S^{-1}R}(S^{-1}M).
-$$
+$$ S^{-1}\mathfrak p \in \operatorname{Ass}_{S^{-1}R}(S^{-1}M). $$
 
 ## Facts & Assumptions
 

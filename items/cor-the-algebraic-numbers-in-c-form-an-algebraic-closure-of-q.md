@@ -32,9 +32,7 @@ pipeline_run: frontier-20
 ## Statement
 
 Let
-$$
-A:=\{z \in \mathbb C : z \text{ is algebraic over } \mathbb Q\}.
-$$
+$$ A:=\{z \in \mathbb C : z \text{ is algebraic over } \mathbb Q\}. $$
 Then $A$ is an algebraic closure of $\mathbb Q$.
 
 ## Facts & Assumptions

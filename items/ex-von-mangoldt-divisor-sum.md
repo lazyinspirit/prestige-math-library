@@ -27,15 +27,11 @@ pipeline_run: null
 
 For $16$ and $30$ the divisor-sum identity reads
 
-$$
-\sum_{d\mid16}\Lambda(d)=4\log2=\log16
-$$
+$$ \sum_{d\mid16}\Lambda(d)=4\log2=\log16 $$
 
 and
 
-$$
-\sum_{d\mid30}\Lambda(d)=\log2+\log3+\log5=\log30.
-$$
+$$ \sum_{d\mid30}\Lambda(d)=\log2+\log3+\log5=\log30. $$
 
 ## Facts & Assumptions
 

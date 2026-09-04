@@ -33,9 +33,7 @@ pipeline_run: null
 
 Let $V\subseteq K$ be a valuation ring, and let $\Gamma:=K^\times/V^\times$ be
 its value group. Define an order on $\Gamma$ by
-$$
-\overline x\le\overline y \Longleftrightarrow y/x\in V.
-$$
+$$ \overline x\le\overline y \Longleftrightarrow y/x\in V. $$
 Then this order is well defined, total, and translation-invariant, so $\Gamma$
 is a totally ordered abelian group.
 

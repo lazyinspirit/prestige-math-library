@@ -29,9 +29,7 @@ pipeline_run: null
 
 Let $m\ge2$, let $\Omega\subseteq\mathbb C^m$ be a domain, and let
 
-$$
-H:=\Omega\cap\{z_m=0\}.
-$$
+$$ H:=\Omega\cap\{z_m=0\}. $$
 
 If $f:\Omega\setminus H\to\mathbb C$ is holomorphic and locally bounded near
 $H$, then there exists a unique holomorphic $F:\Omega\to\mathbb C$ such that

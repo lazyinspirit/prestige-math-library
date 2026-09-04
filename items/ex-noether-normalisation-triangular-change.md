@@ -26,9 +26,7 @@ pipeline_run: null
 ## Example
 
 Let $k$ be an infinite field of characteristic not equal to $2$, and let
-$$
-A=\frac{k[x,y]}{(x^2+y^2)}.
-$$
+$$ A=\frac{k[x,y]}{(x^2+y^2)}. $$
 Put $u=x-y$. Then the triangular change $x=u+y$ makes the defining relation
 monic in $y$, and $A$ is module-finite over the polynomial subring
 $k[\bar u]$.

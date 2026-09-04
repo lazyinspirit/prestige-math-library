@@ -32,8 +32,6 @@ let $I$ be a nonzero fractional ideal of $R$. By
 $R_{\mathfrak p}$ is a DVR, and by
 [[thm-nonzero-ideals-in-dedekind-domains-are-invertible]] together with
 [[thm-ideals-in-a-dvr]] the localised ideal has the form
-$$
-I_{\mathfrak p}=\mathfrak p^nR_{\mathfrak p}
-$$
+$$ I_{\mathfrak p}=\mathfrak p^nR_{\mathfrak p} $$
 for a unique integer $n$. This integer is the **prime-ideal valuation** of $I$
 at $\mathfrak p$, written $v_{\mathfrak p}(I):=n$.

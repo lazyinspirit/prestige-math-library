@@ -33,9 +33,7 @@ Let $H$ have $h$ vertices. If $G$ has $n$ vertices,
 $\operatorname{ind}_H(G)<(\delta n)^h$, and $W\subseteq V(G)$ satisfies
 $|W|\ge\lambda n>0$, then
 
-$$
-\operatorname{ind}_H(G[W])<((\delta/\lambda)|W|)^h.
-$$
+$$ \operatorname{ind}_H(G[W])<((\delta/\lambda)|W|)^h. $$
 
 ## Facts & Assumptions
 

@@ -1,0 +1,456 @@
+[
+  {
+    "order": 625,
+    "id": "space-complexity-savitch-and-tqbf",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Space Complexity, Savitch's Theorem, and TQBF",
+    "companion": "space-complexity-savitch-and-tqbf-examples",
+    "requires": [
+      "p-np-conp-and-polynomial-reductions",
+      "graphs-walks-and-connectivity"
+    ],
+    "items": [
+      {
+        "id": "def-pspace-and-npspace",
+        "kind": "definition",
+        "title": "The classes PSPACE and NPSPACE",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "lem-space-bounded-machines-have-exponentially-many-configurations",
+        "kind": "lemma",
+        "title": "A machine using space s(n) has at most exponentially many configurations",
+        "strategy": "A configuration is determined by a state, finitely many head positions, and the tape symbols written on the visited work cells. Each ingredient has at most exponentially many possibilities in the space bound, so the total number of configurations is 2^{O(s(n))}.",
+        "deps": [
+          "def-worst-case-time-and-space-complexity",
+          "def-multitape-and-nondeterministic-machines",
+          "def-tape-finite-support-convention"
+        ]
+      },
+      {
+        "id": "def-bounded-reachability-recursion",
+        "kind": "definition",
+        "title": "The bounded reachability recursion for directed paths of length at most 2^i",
+        "deps": [
+          "def-multigraph-loop-and-digraph"
+        ]
+      },
+      {
+        "id": "lem-bounded-reachability-recursion-is-correct",
+        "kind": "lemma",
+        "title": "The bounded reachability recursion is correct",
+        "strategy": "Proceed by induction on i. For i = 0 the recursion checks equality or one legal edge. For i > 0, a path of length at most 2^i exists exactly when some midpoint z splits it into two paths of length at most 2^{i-1}.",
+        "deps": [
+          "def-bounded-reachability-recursion"
+        ]
+      },
+      {
+        "id": "lem-bounded-reachability-uses-logarithmic-recursion-depth",
+        "kind": "lemma",
+        "title": "The bounded reachability recursion uses logarithmic recursion depth",
+        "strategy": "Each recursive call halves the permitted path-length bound. Starting from a bound large enough to cover all possible configurations, this gives depth O(log N), and each stack frame stores only the current endpoints, the midpoint candidate, and the current exponent.",
+        "deps": [
+          "def-bounded-reachability-recursion",
+          "lem-space-bounded-machines-have-exponentially-many-configurations"
+        ]
+      },
+      {
+        "id": "thm-savitchs-theorem",
+        "kind": "theorem",
+        "title": "Savitch's theorem: NSPACE(s(n)) is contained in DSPACE(s(n)^2)",
+        "strategy": "Given a nondeterministic machine, build its implicit configuration digraph on the input and ask whether the start configuration reaches an accepting configuration within the number of possible configurations. The previous reachability lemmas give correctness, and the logarithmic recursion depth over an exponential-size graph yields O(log^2 N)=O(s(n)^2) space.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "lem-space-bounded-machines-have-exponentially-many-configurations",
+          "def-bounded-reachability-recursion",
+          "lem-bounded-reachability-recursion-is-correct",
+          "lem-bounded-reachability-uses-logarithmic-recursion-depth"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-pspace-equals-npspace-and-is-closed-under-complement",
+        "kind": "corollary",
+        "title": "PSPACE equals NPSPACE and is closed under complement",
+        "strategy": "Apply Savitch's theorem to polynomial space bounds; squaring a polynomial preserves polynomial growth. Closure under complement then comes from swapping the accepting and rejecting halting states of a deterministic polynomial-space decider.",
+        "deps": [
+          "def-pspace-and-npspace",
+          "thm-savitchs-theorem",
+          "def-dtime-ntime-dspace-and-nspace"
+        ]
+      },
+      {
+        "id": "def-quantified-boolean-formula-and-tqbf",
+        "kind": "definition",
+        "title": "Quantified Boolean formulas and the language TQBF",
+        "deps": []
+      },
+      {
+        "id": "prop-tqbf-is-in-pspace",
+        "kind": "proposition",
+        "title": "TQBF is in PSPACE",
+        "strategy": "Evaluate the quantified formula depth-first by assigning one variable at a time and recursively checking the remaining suffix. The procedure may take exponential time, but it stores only the formula, the current partial assignment, and one branch of the recursion tree.",
+        "deps": [
+          "def-quantified-boolean-formula-and-tqbf",
+          "def-pspace-and-npspace"
+        ]
+      },
+      {
+        "id": "def-reachable-configuration-formula",
+        "kind": "definition",
+        "title": "The quantified formula expressing reachability between two configurations",
+        "deps": [
+          "def-quantified-boolean-formula-and-tqbf"
+        ]
+      },
+      {
+        "id": "lem-quantifier-reuse-keeps-reachability-formulas-polynomial",
+        "kind": "lemma",
+        "title": "Quantifier reuse keeps the reachability formulas polynomial in size",
+        "strategy": "The naive recursive definition doubles the formula at every level. Replacing the duplicated subformulas by one midpoint and two comparison configurations gives the recurrence size(i)=size(i-1)+O(m), where m is the configuration length, so the final formula remains polynomial.",
+        "deps": [
+          "def-reachable-configuration-formula"
+        ]
+      },
+      {
+        "id": "thm-tqbf-is-pspace-complete",
+        "kind": "theorem",
+        "title": "TQBF is PSPACE-complete",
+        "strategy": "Membership is the previous proposition. For hardness, fix a polynomial-space machine M on input x, encode configurations as bit strings, and build a quantified formula asserting that the start configuration reaches the accepting one within the number of possible configurations. The quantifier-reuse lemma keeps the reduction polynomial-time.",
+        "deps": [
+          "prop-tqbf-is-in-pspace",
+          "lem-space-bounded-machines-have-exponentially-many-configurations",
+          "def-reachable-configuration-formula",
+          "lem-quantifier-reuse-keeps-reachability-formulas-polynomial",
+          "def-polynomial-time-many-one-reduction",
+          "def-effective-encoding-of-turing-machines",
+          "lem-machine-encoding-is-injective-and-decodable"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "def-quantified-formula-game",
+        "kind": "definition",
+        "title": "The quantified formula game for a quantified Boolean formula",
+        "deps": [
+          "def-quantified-boolean-formula-and-tqbf"
+        ]
+      },
+      {
+        "id": "thm-tqbf-truth-iff-existential-player-has-a-winning-strategy",
+        "kind": "theorem",
+        "title": "A quantified Boolean formula is true if and only if the existential player has a winning strategy in its game",
+        "strategy": "Induct on the quantifier prefix. An initial existential quantifier means there is a first move leading to a true suffix, while an initial universal quantifier means every opposing move leads to a true suffix. This matches exactly the game-theoretic notion of a winning strategy.",
+        "deps": [
+          "def-quantified-boolean-formula-and-tqbf",
+          "def-quantified-formula-game"
+        ]
+      },
+      {
+        "id": "def-alternating-polynomial-time",
+        "kind": "definition",
+        "title": "Alternating polynomial time and the class AP",
+        "deps": [
+          "def-worst-case-time-and-space-complexity",
+          "def-multitape-and-nondeterministic-machines"
+        ]
+      },
+      {
+        "id": "thm-ap-equals-pspace",
+        "kind": "theorem",
+        "title": "AP equals PSPACE",
+        "strategy": "For PSPACE subseteq AP, use TQBF-completeness together with the quantified-formula game: existential and universal states choose the next quantified variable's value. For AP subseteq PSPACE, evaluate the alternating computation tree depth-first, recursively checking existential nodes by disjunction and universal nodes by conjunction while storing only the current configuration and recursion stack.",
+        "deps": [
+          "def-alternating-polynomial-time",
+          "thm-tqbf-is-pspace-complete",
+          "thm-tqbf-truth-iff-existential-player-has-a-winning-strategy",
+          "prop-tqbf-is-in-pspace"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "fs-savitch-stores-the-whole-configuration-graph",
+        "kind": "false-statement",
+        "title": "FALSE: Savitch's algorithm stores the whole configuration graph",
+        "strategy": "Refute by inspecting the recursion. The procedure recomputes adjacency information when needed and keeps only the current endpoints, a midpoint candidate, and the recursion stack, not an explicit graph of all configurations.",
+        "deps": [
+          "def-bounded-reachability-recursion",
+          "lem-bounded-reachability-uses-logarithmic-recursion-depth"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 626,
+    "id": "space-complexity-savitch-and-tqbf-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Space Complexity, Savitch's Theorem, and TQBF: Examples and Counterexamples",
+    "requires": [
+      "space-complexity-savitch-and-tqbf"
+    ],
+    "items": [
+      {
+        "id": "ex-bounded-reachability-recursion-is-correct",
+        "kind": "example",
+        "title": "A four-vertex digraph where the bounded reachability recursion finds a path via a midpoint",
+        "strategy": "Use a small directed graph with a length-four path from s to t. Check explicitly that the recursion accepts by splitting at the actual midpoint and that the same recursion rejects when every midpoint candidate fails one of the two shorter subproblems.",
+        "deps": [
+          "def-bounded-reachability-recursion",
+          "lem-bounded-reachability-recursion-is-correct"
+        ]
+      },
+      {
+        "id": "ex-ap-equals-pspace",
+        "kind": "example",
+        "title": "An alternating machine for a quantified Boolean formula",
+        "strategy": "Take a small quantified Boolean formula, let existential states guess existential variables and universal states branch over universal ones, and compare the accepting computation tree with the winning strategy in the associated quantified game.",
+        "deps": [
+          "def-quantified-formula-game",
+          "thm-tqbf-truth-iff-existential-player-has-a-winning-strategy",
+          "thm-ap-equals-pspace"
+        ]
+      },
+      {
+        "id": "cex-savitch-stores-the-whole-configuration-graph",
+        "kind": "counterexample",
+        "title": "A Savitch recursion that never materializes the full configuration graph",
+        "strategy": "Trace one successful recursive search on a configuration graph with many possible midpoint candidates. At each stage the workspace carries only the current endpoints, the current midpoint under test, and the reduced path bound, so the full graph is never stored.",
+        "deps": [
+          "fs-savitch-stores-the-whole-configuration-graph"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 635,
+    "id": "randomized-complexity-and-amplification",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Randomized Complexity and Amplification",
+    "companion": "randomized-complexity-and-amplification-examples",
+    "requires": [
+      "p-np-conp-and-polynomial-reductions",
+      "finite-probability-spaces-and-random-variables"
+    ],
+    "items": [
+      {
+        "id": "def-probabilistic-polynomial-time-machine",
+        "kind": "definition",
+        "title": "Probabilistic polynomial-time Turing machines",
+        "deps": [
+          "def-worst-case-time-and-space-complexity",
+          "def-multitape-and-nondeterministic-machines"
+        ]
+      },
+      {
+        "id": "def-rp-corp-zpp-bpp-and-pp",
+        "kind": "definition",
+        "title": "The classes RP, coRP, ZPP, BPP, and PP",
+        "deps": [
+          "def-probabilistic-polynomial-time-machine"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-zpp-equals-rp-intersection-corp",
+        "kind": "theorem",
+        "title": "ZPP equals RP intersection coRP",
+        "strategy": "A zero-error expected-time machine yields one one-sided procedure for certifying membership and another for certifying nonmembership. Conversely, interleave the RP and coRP procedures on the same input until one of them halts with its certified answer; the success probabilities give polynomial expected running time.",
+        "deps": [
+          "def-rp-corp-zpp-bpp-and-pp"
+        ]
+      },
+      {
+        "id": "lem-majority-error-bound-from-chebyshev",
+        "kind": "lemma",
+        "title": "Chebyshev bounds the majority error of repeated Bernoulli trials",
+        "strategy": "Let X_i record whether the i-th run is correct and let T be their average. The mean of T stays above 1/2 and its variance is O(1/k) by variance additivity for pairwise-independent Bernoulli trials, so Chebyshev bounds the probability that T falls to 1/2 or below by O(1/k).",
+        "deps": [
+          "thm-chebyshev-inequality",
+          "thm-variance-of-a-finite-sum",
+          "cor-variance-adds-for-pairwise-independent-random-variables",
+          "lem-bernoulli-and-binomial-mean-and-variance",
+          "def-independence-of-finite-random-variables"
+        ]
+      },
+      {
+        "id": "thm-bpp-amplification-to-inverse-polynomial-error",
+        "kind": "theorem",
+        "title": "BPP amplification to inverse-polynomial error",
+        "strategy": "Repeat the original bounded-error algorithm independently k times and output the majority answer. Choosing k to be a sufficiently large polynomial and applying the previous Chebyshev bound drives the error below 1/p(n) for any prescribed polynomial p.",
+        "deps": [
+          "def-rp-corp-zpp-bpp-and-pp",
+          "lem-majority-error-bound-from-chebyshev"
+        ]
+      },
+      {
+        "id": "lem-chernoff-bound-for-bernoulli-trials",
+        "kind": "lemma",
+        "title": "A Chernoff bound for sums of independent Bernoulli trials",
+        "strategy": "Apply Markov's inequality to the exponential moment of the sum, factor the moment using independence, and optimize the resulting upper bound in the exponential parameter. The page's published probability and real-exponential interfaces are enough for the standard moment-generating-function argument.",
+        "deps": [
+          "def-independence-of-finite-random-variables",
+          "thm-markov-inequality",
+          "lem-bernoulli-and-binomial-mean-and-variance",
+          "thm-expectation-of-products-of-independent-random-variables"
+        ]
+      },
+      {
+        "id": "thm-bpp-amplification-to-exponentially-small-error",
+        "kind": "theorem",
+        "title": "BPP amplification to exponentially small error",
+        "strategy": "Run the bounded-error algorithm independently many times and output the majority answer. The Chernoff bound makes the probability of a bad majority decay exponentially in the number of repetitions.",
+        "deps": [
+          "def-rp-corp-zpp-bpp-and-pp",
+          "lem-chernoff-bound-for-bernoulli-trials"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-rp-one-sided-amplification",
+        "kind": "theorem",
+        "title": "RP admits one-sided amplification to exponentially small error",
+        "strategy": "Repeat the RP machine independently and accept if any run accepts. No false positive is ever introduced, and on yes-instances the chance that every run misses the witness decays exponentially with the number of fresh random trials.",
+        "deps": [
+          "def-rp-corp-zpp-bpp-and-pp"
+        ]
+      },
+      {
+        "id": "thm-adleman-bpp-is-contained-in-p-poly",
+        "kind": "theorem",
+        "title": "Adleman's theorem: BPP is contained in P/poly",
+        "strategy": "First amplify the error on inputs of length n down to below 2^{-(n+1)}. A union bound over all 2^n inputs then shows that some random string is simultaneously good for every input of that length, and hardwiring that string yields a polynomial-size nonuniform circuit family.",
+        "deps": [
+          "def-rp-corp-zpp-bpp-and-pp",
+          "thm-bpp-amplification-to-exponentially-small-error"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "def-pairwise-independent-hash-family",
+        "kind": "definition",
+        "title": "Pairwise independent hash families",
+        "deps": []
+      },
+      {
+        "id": "lem-affine-finite-field-hashes-are-pairwise-independent",
+        "kind": "lemma",
+        "title": "Affine maps over a finite field form a pairwise independent hash family",
+        "strategy": "For distinct x and x', the equations ax+b=y and ax'+b=y' have a unique solution (a,b) in the field. Uniformly choosing (a,b) therefore makes the pair of outputs uniform on F x F.",
+        "deps": [
+          "def-pairwise-independent-hash-family",
+          "def-field"
+        ]
+      },
+      {
+        "id": "thm-freivalds-matrix-product-verification",
+        "kind": "theorem",
+        "title": "Freivalds' algorithm verifies a matrix product in randomized polynomial time with one-sided error",
+        "strategy": "Given A, B, and C, pick a random 0-1 vector r and compare A(Br) with Cr. If C=AB the check always passes; if D=C-AB is nonzero then one row of D forces Dr to be nonzero with probability at least 1/2, giving one-sided error at most 1/2 per trial.",
+        "deps": [
+          "def-rp-corp-zpp-bpp-and-pp",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-field"
+        ]
+      },
+      {
+        "id": "def-polynomial-identity-testing",
+        "kind": "definition",
+        "title": "Polynomial identity testing",
+        "deps": [
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-polynomial-evaluation-and-root"
+        ]
+      },
+      {
+        "id": "thm-schwartz-zippel-lemma",
+        "kind": "theorem",
+        "title": "The Schwartz-Zippel lemma",
+        "strategy": "Induct on the number of variables. Regard the polynomial as a univariate polynomial in one chosen variable whose coefficients are polynomials in the remaining variables, apply the root bound in the field to the leading nonzero coefficient slice, and then average over the random choice of the first coordinate.",
+        "deps": [
+          "def-field",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-polynomial-evaluation-and-root",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-pit-is-in-corp",
+        "kind": "corollary",
+        "title": "Polynomial identity testing is in coRP",
+        "strategy": "Given a represented polynomial, evaluate it at a random point from a large finite grid and reject as soon as a nonzero value appears. The zero polynomial always survives, while the Schwartz-Zippel lemma bounds the false-accept probability on every nonzero polynomial.",
+        "deps": [
+          "def-rp-corp-zpp-bpp-and-pp",
+          "def-polynomial-identity-testing",
+          "thm-schwartz-zippel-lemma"
+        ]
+      },
+      {
+        "id": "fs-reusing-random-bits-amplifies-success",
+        "kind": "false-statement",
+        "title": "FALSE: reusing the same random bits amplifies success",
+        "strategy": "Refute the claim with a machine whose output depends only on one random string. Repeating that machine while feeding it the same random bits produces perfectly correlated trials, so the success probability does not improve at all.",
+        "deps": [
+          "thm-bpp-amplification-to-exponentially-small-error"
+        ]
+      },
+      {
+        "id": "fs-pp-has-bounded-error-away-from-one-half",
+        "kind": "false-statement",
+        "title": "FALSE: every PP algorithm has bounded error separated from one half by a fixed constant",
+        "strategy": "Refute by recalling what PP actually permits: membership is determined only by whether the acceptance probability is above one half. The definition does not force any uniform gap away from one half, so a PP computation can be arbitrarily close to the threshold.",
+        "deps": [
+          "def-rp-corp-zpp-bpp-and-pp"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 636,
+    "id": "randomized-complexity-and-amplification-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Randomized Complexity and Amplification: Examples and Counterexamples",
+    "requires": [
+      "randomized-complexity-and-amplification"
+    ],
+    "items": [
+      {
+        "id": "ex-majority-error-bound-from-chebyshev",
+        "kind": "example",
+        "title": "A concrete majority-vote error estimate from Chebyshev's inequality",
+        "strategy": "Assume each trial succeeds with probability 3/4, compute the mean and variance of the average of k independent indicators, and plug the distance from 1/2 into the Chebyshev bound to obtain an explicit O(1/k) majority-error estimate.",
+        "deps": [
+          "lem-majority-error-bound-from-chebyshev"
+        ]
+      },
+      {
+        "id": "ex-pit-is-in-corp",
+        "kind": "example",
+        "title": "A random evaluation test that separates the zero polynomial from x^2-y^2",
+        "strategy": "Evaluate the nonzero polynomial x^2-y^2 on a small finite grid and compute the fraction of random points on which it vanishes. This makes the one-sided error guarantee in the coRP classification concrete.",
+        "deps": [
+          "def-polynomial-identity-testing",
+          "thm-schwartz-zippel-lemma",
+          "cor-pit-is-in-corp"
+        ]
+      },
+      {
+        "id": "cex-reusing-random-bits-amplifies-success",
+        "kind": "counterexample",
+        "title": "Repeating a randomized test with the same coin string gives no amplification",
+        "strategy": "Take a machine that accepts exactly when its random string begins with 1. Running it twice with the same randomness produces identical outcomes, so the acceptance probability stays 1/2 instead of squaring or otherwise improving.",
+        "deps": [
+          "fs-reusing-random-bits-amplifies-success"
+        ]
+      }
+    ]
+  }
+]

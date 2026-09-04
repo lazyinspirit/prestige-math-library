@@ -28,9 +28,7 @@ pipeline_run: null
 ## Example
 
 The complete quotients of $\sqrt{14}$ are
-$$
-\frac{\sqrt{14}+3}{5},\qquad \frac{\sqrt{14}+2}{2},\qquad \frac{\sqrt{14}+2}{5},\qquad \sqrt{14}+3,
-$$
+$$ \frac{\sqrt{14}+3}{5},\qquad \frac{\sqrt{14}+2}{2},\qquad \frac{\sqrt{14}+2}{5},\qquad \sqrt{14}+3, $$
 so
 $$\sqrt{14}=[3;\overline{1,2,1,6}].$$
 The convergent $15/4$ is the first one with norm $1$, so the fundamental Pell

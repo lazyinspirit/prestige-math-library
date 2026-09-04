@@ -31,14 +31,10 @@ $Q \subsetneq M$ be a proper submodule. Then $Q$ is **primary** when every zero
 divisor on the quotient module $M/Q$ acts nilpotently on $M/Q$; equivalently,
 whenever multiplication by $a \in R$ on $M/Q$ has nontrivial kernel, there
 exists $n \ge 1$ with
-$$
-a^n(M/Q)=0.
-$$
+$$ a^n(M/Q)=0. $$
 
 If
-$$
-\sqrt{\operatorname{Ann}_R(M/Q)}=\mathfrak p,
-$$
+$$ \sqrt{\operatorname{Ann}_R(M/Q)}=\mathfrak p, $$
 then $Q$ is called **$\mathfrak p$-primary**.
 
 The radical here is well-defined: $\operatorname{Ann}_R(M/Q)$ is an ideal of

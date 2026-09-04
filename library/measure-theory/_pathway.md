@@ -21,17 +21,18 @@ parts:
       - the-lp-spaces-holder-minkowski-and-riesz-fischer
       - density-separability-and-convolution-in-lp
       - the-duality-of-lp-and-lq
+      - the-maximal-function-and-lebesgue-differentiation
 ---
 
 ## sigma-algebras-and-borel-sets
 
 A sigma-algebra is the closure needed for countable additivity, and outer measure plus
 Caratheodory build Lebesgue measure, measurable functions, and integration. Convergence
-theorems, product and signed measures, and Radon-Nikodym/Lebesgue decomposition extend
-that calculus to iterated integration, densities, and total variation. The $L^p$ page
-then supplies Hölder, Minkowski, completeness, and essential-supremum limits. Density,
-separability, convolution, Young's inequality, and mollifier approximation turn those
-spaces into analytic working objects, with the $L^\infty$ endpoint failures kept explicit.
-The duality page then identifies bounded functionals on $L^p$ with integration against
-$L^q$, via the norm formula, finite-measure Radon-Nikodym, sigma-finite exhaustion, and
-the separate arbitrary-measure extension for $1<p<\infty$.
+theorems, product and signed measures, Radon-Nikodym/Lebesgue decomposition, the $L^p$
+inequalities, density, convolution, mollifiers, and the duality of $L^p$ with $L^q$ turn
+that calculus into an analytic one. The maximal-function page brings it back to pointwise
+control: Vitali covering yields the Hardy-Littlewood weak $(1,1)$ estimate,
+interpolation gives $L^p$ boundedness, and those estimates drive Lebesgue
+differentiation, almost-everywhere Lebesgue points and density points, nicely shrinking
+differentiation bases, differentiation of measures, and the $L^1$ fundamental theorem of
+calculus.

@@ -28,9 +28,7 @@ pipeline_run: null
 
 For every real number $x\ge1$, **Chebyshev's psi function** is
 
-$$
-\psi(x):=\sum_{n\le x}\Lambda(n),
-$$
+$$ \psi(x):=\sum_{n\le x}\Lambda(n), $$
 
 where $\Lambda$ is the von Mangoldt function of
 [[def-von-mangoldt-function]].

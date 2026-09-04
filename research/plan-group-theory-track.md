@@ -2272,7 +2272,7 @@ Frattini/Burnside generation principle to finitely generated pro-$p$ groups.
 - `fs-zp-is-a-torsion-group-because-all-its-coordinate-groups-are-finite`
   `[LN]`.
 - `fs-zp-is-cyclic-as-an-abstract-group` `[LN]`.
-- `fs-the-frattini-subgroup-of-a-pro-p-group-needs-no-topological-closure`
+- `thm-frattini-formula-without-an-extra-closure-for-finitely-generated-pro-p-groups`
   `[LN]`.
 - `fs-every-profinite-group-is-pro-p-for-some-prime` `[LN]`.
 

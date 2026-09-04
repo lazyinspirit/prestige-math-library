@@ -35,9 +35,7 @@ Let $G$ be a finite group and let $k$ be an algebraically closed field with
 $\operatorname{char} k \nmid |G|$. If $V_1,\ldots,V_r$ is a complete list of the
 irreducible representations of $G$ over $k$, up to equivalence, then
 
-$$
-\sum_{i=1}^r (\dim_k V_i)^2=|G|.
-$$
+$$ \sum_{i=1}^r (\dim_k V_i)^2=|G|. $$
 
 ## Facts & Assumptions
 

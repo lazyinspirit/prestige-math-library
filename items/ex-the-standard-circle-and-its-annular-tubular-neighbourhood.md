@@ -30,26 +30,16 @@ sources:
 ## Example
 
 For the unit circle
-$$
-S^1=\{p\in\mathbb R^2:\|p\|=1\},
-$$
+$$ S^1=\{p\in\mathbb R^2:\|p\|=1\}, $$
 the normal line at $p$ is the radial line $\mathbb Rp$. Thus the normal bundle
 is identified with
-$$
-S^1\times\mathbb R,\qquad (p,t)\leftrightarrow (p,tp),
-$$
+$$ S^1\times\mathbb R,\qquad (p,t)\leftrightarrow (p,tp), $$
 and the normal addition map is
-$$
-E(p,t)=(1+t)p.
-$$
+$$ E(p,t)=(1+t)p. $$
 For $|t|<1/2$, the image is the annulus
-$$
-\{x\in\mathbb R^2:1/2<\|x\|<3/2\},
-$$
+$$ \{x\in\mathbb R^2:1/2<\|x\|<3/2\}, $$
 and the tubular retraction is radial normalization
-$$
-r(x)=\frac{x}{\|x\|}.
-$$
+$$ r(x)=\frac{x}{\|x\|}. $$
 
 ## Facts & Assumptions
 

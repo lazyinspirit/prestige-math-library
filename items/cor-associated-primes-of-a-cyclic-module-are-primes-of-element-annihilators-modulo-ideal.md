@@ -28,9 +28,7 @@ sources:
 ## Statement
 
 Let $R$ be a commutative ring and let $I \trianglelefteq R$ be an ideal. Then
-$$
-\operatorname{Ass}_R(R/I)=\{\mathfrak p \in \operatorname{Spec}(R) : \mathfrak p=(I:r)\text{ for some }r \notin I\}.
-$$
+$$ \operatorname{Ass}_R(R/I)=\{\mathfrak p \in \operatorname{Spec}(R) : \mathfrak p=(I:r)\text{ for some }r \notin I\}. $$
 
 ## Facts & Assumptions
 

@@ -32,9 +32,7 @@ as an $R$-module. Assume:
 
 1. $M/IM$ is flat over $R/I$;
 2. the multiplication map
-   $$
-   I\otimes_R M\to M
-   $$
+   $$    I\otimes_R M\to M    $$
    is injective.
 
 Then $M$ is flat over $R$.

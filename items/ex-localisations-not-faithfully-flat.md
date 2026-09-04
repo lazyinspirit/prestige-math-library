@@ -29,9 +29,7 @@ sources:
 Assume the Axiom of Choice for the faithfully-flat characterization used below.
 
 The localization map
-$$
-\mathbb Z\to \mathbb Z\!\left[\frac12\right]
-$$
+$$ \mathbb Z\to \mathbb Z\!\left[\frac12\right] $$
 is flat but not faithfully flat.
 
 ## Facts & Assumptions

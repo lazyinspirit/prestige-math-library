@@ -29,9 +29,7 @@ sources:
 
 Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated
 left $R$-module. Then there exist submodules
-$$
-0=M_0\subset M_1\subset\cdots\subset M_n=M
-$$
+$$ 0=M_0\subset M_1\subset\cdots\subset M_n=M $$
 such that each quotient $M_i/M_{i-1}$ is isomorphic to $R/\mathfrak p_i$ for
 some prime ideal $\mathfrak p_i$ of $R$. When $M=0$, this is the empty
 filtration with $n=0$.

@@ -35,9 +35,7 @@ Every finite family of graphs with the polynomial Rödl property has the
 Erdős–Hajnal property. More precisely, if $d\ge1$ witnesses the polynomial Rödl
 property of $\mathcal F$, then
 
-$$
-\frac{1}{2d+2}
-$$
+$$ \frac{1}{2d+2} $$
 
 is an Erdős–Hajnal constant for the class of $\mathcal F$-free graphs.
 

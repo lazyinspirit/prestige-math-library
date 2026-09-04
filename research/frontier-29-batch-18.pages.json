@@ -1,0 +1,440 @@
+[
+  {
+    "order": 605,
+    "id": "computable-reductions-and-rices-theorem",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Computable Reductions and Rice's Theorem",
+    "companion": "computable-reductions-and-rices-theorem-examples",
+    "requires": [
+      "diagonalization-and-the-halting-problem"
+    ],
+    "items": [
+      {
+        "id": "def-computable-many-one-reduction",
+        "kind": "definition",
+        "title": "Computable many-one reductions between languages",
+        "deps": [
+          "def-computable-and-partial-computable-function",
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "lem-many-one-reducibility-is-a-preorder",
+        "kind": "lemma",
+        "title": "Computable many-one reducibility is reflexive and transitive",
+        "strategy": "Use the identity map for reflexivity and compose total computable reduction maps for transitivity. The iff clauses compose with the functions, so both correctness and total computability are preserved.",
+        "deps": [
+          "def-computable-many-one-reduction"
+        ]
+      },
+      {
+        "id": "thm-many-one-reductions-transfer-decidability-and-recognizability",
+        "kind": "theorem",
+        "title": "Computable many-one reductions transfer decidability and recognizability backward",
+        "strategy": "Given a reduction from A to B, decide or recognize A by first computing the reduction image and then running the decider or recognizer for B on that single target instance. The iff clause guarantees correctness.",
+        "deps": [
+          "def-computable-many-one-reduction",
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "def-ce-hardness-and-completeness",
+        "kind": "definition",
+        "title": "Computably enumerable hardness and completeness under computable many-one reductions",
+        "deps": [
+          "def-computable-many-one-reduction",
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "thm-machine-acceptance-is-ce-complete",
+        "kind": "theorem",
+        "title": "The Turing-machine acceptance problem is computably enumerable complete",
+        "strategy": "Recognizability was proved on the previous page. For hardness, fix a recognizer R for any recognizable language L and map x to the coded pair <R,x>; x lies in L exactly when that pair lies in A_TM, and the coding map is total and computable.",
+        "deps": [
+          "def-ce-hardness-and-completeness",
+          "def-turing-machine-acceptance-problem",
+          "thm-machine-acceptance-is-recognizable",
+          "def-effective-encoding-of-turing-machines",
+          "lem-finite-tuples-admit-effective-prefix-free-encodings"
+        ]
+      },
+      {
+        "id": "def-turing-reduction",
+        "kind": "definition",
+        "title": "Turing reductions via oracle deciders",
+        "deps": [
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "lem-many-one-implies-turing-reduction",
+        "kind": "lemma",
+        "title": "Every computable many-one reduction induces a Turing reduction",
+        "strategy": "Compute the many-one reduction image and ask the oracle for the target language about that one string. Return the same answer; this is a one-query oracle computation.",
+        "deps": [
+          "def-computable-many-one-reduction",
+          "def-turing-reduction"
+        ]
+      },
+      {
+        "id": "prop-the-converse-fails",
+        "kind": "proposition",
+        "title": "Turing reducibility is strictly weaker than computable many-one reducibility",
+        "strategy": "Use the complement of A_TM versus A_TM. One oracle query to A_TM decides its complement, so the complement Turing-reduces to A_TM; but a many-one reduction would make the complement recognizable, contradicting the previous undecidability frontier.",
+        "deps": [
+          "def-computable-many-one-reduction",
+          "def-turing-reduction",
+          "def-turing-machine-acceptance-problem",
+          "thm-machine-acceptance-is-recognizable",
+          "thm-machine-acceptance-is-undecidable",
+          "thm-decidable-iff-language-and-complement-are-recognizable"
+        ]
+      },
+      {
+        "id": "def-index-set-and-extensional-machine-property",
+        "kind": "definition",
+        "title": "Index sets and extensional properties of Turing-machine languages",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "def-language-recognized-and-decided"
+        ]
+      },
+      {
+        "id": "lem-rice-witness-machine-construction",
+        "kind": "lemma",
+        "title": "A nontrivial extensional property admits a uniform witness machine construction",
+        "strategy": "Choose one witness machine whose recognized language has the property and one witness outside it. Given <M,w>, build a new machine that first simulates M on w and then, depending on that outcome, behaves like the positive witness or like the negative witness; extensionality turns the behavioral split into a property-membership split.",
+        "deps": [
+          "def-index-set-and-extensional-machine-property",
+          "def-turing-machine-acceptance-problem",
+          "def-effective-encoding-of-turing-machines",
+          "lem-finite-tuples-admit-effective-prefix-free-encodings"
+        ]
+      },
+      {
+        "id": "thm-rices-theorem",
+        "kind": "theorem",
+        "title": "Every nontrivial extensional property of Turing-machine languages is undecidable",
+        "strategy": "Reduce A_TM to the index set of the given property using the witness-machine lemma. If the property were decidable, the acceptance problem would be decidable as well, contradicting the previous page.",
+        "deps": [
+          "def-computable-many-one-reduction",
+          "def-index-set-and-extensional-machine-property",
+          "lem-rice-witness-machine-construction",
+          "thm-machine-acceptance-is-undecidable"
+        ]
+      },
+      {
+        "id": "cor-standard-semantic-machine-properties-are-undecidable",
+        "kind": "corollary",
+        "title": "Standard semantic properties such as emptiness, finiteness, regularity, and context-freedom are undecidable",
+        "strategy": "Each listed property depends only on the recognized language and is nontrivial. Apply Rice's theorem once the extensional framing is checked in each case.",
+        "deps": [
+          "thm-rices-theorem",
+          "def-index-set-and-extensional-machine-property"
+        ]
+      },
+      {
+        "id": "thm-rice-shapiro-positive-information-direction",
+        "kind": "theorem",
+        "title": "Recognizable extensional properties are positively witnessed by finite information",
+        "strategy": "Assume the index set of an extensional property is recognizable. The recognition procedure can only certify membership after seeing finitely much positive behavior, so every recognized language in the property contains a finite witness fragment whose inclusion already forces membership for all recognizable extensions.",
+        "deps": [
+          "def-index-set-and-extensional-machine-property"
+        ]
+      },
+      {
+        "id": "prop-syntactic-properties-lie-outside-rices-theorem",
+        "kind": "proposition",
+        "title": "Syntactic machine properties lie outside the scope of Rice's theorem",
+        "strategy": "Exhibit extensionally equivalent machines with different code-level features, such as state counts or dead transitions. Those properties vary with the presentation of the machine rather than with the recognized language, so they are not extensional.",
+        "deps": [
+          "def-index-set-and-extensional-machine-property",
+          "thm-rices-theorem"
+        ]
+      },
+      {
+        "id": "fs-reductions-may-reverse-yes-and-no",
+        "kind": "false-statement",
+        "title": "FALSE: a valid many-one reduction may reverse yes-instances and no-instances",
+        "strategy": "Refute the claim from the definition. A many-one reduction preserves membership by an iff statement; reversing answers means reducing to the complement, which is a different target language.",
+        "deps": [
+          "def-computable-many-one-reduction"
+        ]
+      },
+      {
+        "id": "fs-rices-theorem-applies-to-state-count",
+        "kind": "false-statement",
+        "title": "FALSE: Rice's theorem applies to having at most a fixed number of states",
+        "strategy": "Refute the claim by separating syntax from semantics. A state-count bound depends on a particular machine description, while Rice's theorem applies only to extensional language properties.",
+        "deps": [
+          "prop-syntactic-properties-lie-outside-rices-theorem",
+          "thm-rices-theorem"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 606,
+    "id": "computable-reductions-and-rices-theorem-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Computable Reductions and Rice's Theorem: Examples and Counterexamples",
+    "requires": [
+      "computable-reductions-and-rices-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-many-one-reductions-transfer-decidability-and-recognizability",
+        "kind": "example",
+        "title": "Using A_TM ≤m E_TM^c to transfer undecidability and recognizability information",
+        "strategy": "Build the standard machine that accepts only when a fixed simulation accepts, so nonemptiness mirrors the original acceptance instance. Then read off how undecidability and recognizability transfer through the main theorem.",
+        "deps": [
+          "thm-many-one-reductions-transfer-decidability-and-recognizability",
+          "thm-machine-acceptance-is-undecidable"
+        ]
+      },
+      {
+        "id": "ex-syntactic-properties-lie-outside-rices-theorem",
+        "kind": "example",
+        "title": "Adding an unreachable state changes syntax without changing the recognized language",
+        "strategy": "Start from a machine M and form M' by adjoining a new dead state with no incoming edges. The two machines recognize the same language, but one has a different state count and transition table.",
+        "deps": [
+          "prop-syntactic-properties-lie-outside-rices-theorem"
+        ]
+      },
+      {
+        "id": "cex-reductions-may-reverse-yes-and-no",
+        "kind": "counterexample",
+        "title": "A reduction to the complement is not a reduction to the original target",
+        "strategy": "Take any language A with a computable reduction to B. The same map witnesses a reduction from the complement of A to the complement of B, not to B itself, which isolates the exact place where the false slogan fails.",
+        "deps": [
+          "fs-reductions-may-reverse-yes-and-no",
+          "def-computable-many-one-reduction"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 621,
+    "id": "the-cook-levin-theorem",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "The Cook--Levin Theorem",
+    "companion": "the-cook-levin-theorem-examples",
+    "requires": [
+      "p-np-conp-and-polynomial-reductions"
+    ],
+    "items": [
+      {
+        "id": "def-boolean-formula-cnf-and-sat",
+        "kind": "definition",
+        "title": "Boolean formulas, conjunctive normal form, and the satisfiability language SAT",
+        "deps": []
+      },
+      {
+        "id": "prop-sat-is-in-np",
+        "kind": "proposition",
+        "title": "SAT lies in NP",
+        "strategy": "Use a truth assignment as the certificate and evaluate the formula deterministically. Formula evaluation is polynomial in the input size, so the verifier definition of NP applies directly.",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat",
+          "def-np-by-verifiers",
+          "def-polynomially-balanced-verifier"
+        ]
+      },
+      {
+        "id": "def-bounded-computation-tableau",
+        "kind": "definition",
+        "title": "A bounded computation tableau for a nondeterministic Turing-machine run",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-turing-machine-configuration",
+          "def-tape-finite-support-convention"
+        ]
+      },
+      {
+        "id": "lem-tableau-cell-alphabet-is-constant",
+        "kind": "lemma",
+        "title": "For a fixed machine, each tableau cell ranges over a constant-size extended alphabet",
+        "strategy": "Encode each cell by either a tape symbol or a tape symbol paired with the unique machine state that currently scans that cell. The machine and its alphabets are fixed, so the resulting choice set has constant size.",
+        "deps": [
+          "def-bounded-computation-tableau"
+        ]
+      },
+      {
+        "id": "def-local-tableau-window",
+        "kind": "definition",
+        "title": "Local 2×3 tableau windows and legality",
+        "deps": [
+          "def-bounded-computation-tableau"
+        ]
+      },
+      {
+        "id": "lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal",
+        "kind": "lemma",
+        "title": "A tableau is legal exactly when every local window and boundary condition is legal",
+        "strategy": "One direction is immediate by inspecting a genuine computation history. For the converse, local legality forces every row-to-row update to agree with the transition function and boundary data, so the whole tableau reconstructs a valid run.",
+        "deps": [
+          "def-bounded-computation-tableau",
+          "def-local-tableau-window"
+        ]
+      },
+      {
+        "id": "lem-exactly-one-symbol-constraints-have-polynomial-size",
+        "kind": "lemma",
+        "title": "The exactly-one-symbol constraints have polynomial size",
+        "strategy": "Introduce one Boolean variable per cell-symbol pair. Because the tableau has polynomially many cells and each cell has only constantly many candidate symbols, the at-least-one and pairwise-exclusion clauses remain polynomial in total size.",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat",
+          "def-bounded-computation-tableau",
+          "lem-tableau-cell-alphabet-is-constant"
+        ]
+      },
+      {
+        "id": "lem-start-accept-and-transition-constraints-have-polynomial-size",
+        "kind": "lemma",
+        "title": "The start, accept, and transition constraints have polynomial size",
+        "strategy": "Write the start row explicitly, express acceptance by a disjunction over tableau positions, and add one local legality clause schema per window location. There are only polynomially many locations and each schema expands by a constant amount.",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat",
+          "def-bounded-computation-tableau",
+          "def-local-tableau-window",
+          "lem-tableau-cell-alphabet-is-constant"
+        ]
+      },
+      {
+        "id": "lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs",
+        "kind": "lemma",
+        "title": "The Cook--Levin formula is satisfiable if and only if an accepting bounded tableau exists",
+        "strategy": "Encode a tableau by a satisfying assignment to the cell variables. The clause families force exactly the start row, local transition consistency, and an accepting cell somewhere in the tableau, so satisfying assignments and accepting tableaux correspond exactly.",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat",
+          "def-bounded-computation-tableau",
+          "lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal",
+          "lem-exactly-one-symbol-constraints-have-polynomial-size",
+          "lem-start-accept-and-transition-constraints-have-polynomial-size"
+        ]
+      },
+      {
+        "id": "lem-cook-levin-map-is-polynomial-time",
+        "kind": "lemma",
+        "title": "The Cook--Levin reduction map is computable in polynomial time",
+        "strategy": "Construct the variable list and each clause family by nested loops over the tableau positions and the constant-size local alphabet. The number of generated variables and clauses is polynomial, and each one is written in polynomially bounded time.",
+        "deps": [
+          "def-bounded-computation-tableau",
+          "lem-exactly-one-symbol-constraints-have-polynomial-size",
+          "lem-start-accept-and-transition-constraints-have-polynomial-size",
+          "def-worst-case-time-and-space-complexity"
+        ]
+      },
+      {
+        "id": "thm-cook-levin-sat-is-np-complete",
+        "kind": "theorem",
+        "title": "SAT is NP-complete",
+        "strategy": "Membership is the verifier argument from the opening proposition. For hardness, let L be any NP language, pass to a polynomial-time nondeterministic machine for L, and map each input to the Cook-Levin formula whose satisfiability exactly captures an accepting bounded computation tableau.",
+        "deps": [
+          "def-np-hard-and-np-complete",
+          "def-polynomial-time-many-one-reduction",
+          "prop-sat-is-in-np",
+          "lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs",
+          "lem-cook-levin-map-is-polynomial-time",
+          "thm-verifier-and-nondeterministic-definitions-of-np-agree"
+        ]
+      },
+      {
+        "id": "def-tseitin-extension-variable",
+        "kind": "definition",
+        "title": "Tseitin extension variables for subformulas",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat"
+        ]
+      },
+      {
+        "id": "lem-tseitin-transformation-is-linear-size-and-equisatisfiable",
+        "kind": "lemma",
+        "title": "The Tseitin transformation has linear size and preserves satisfiability",
+        "strategy": "Add one fresh variable per subformula and constrain it to agree locally with its immediate children. A satisfying assignment for the original formula extends uniquely to the new variables, and any satisfying assignment of the Tseitin CNF restricts to a satisfying assignment of the original formula.",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat",
+          "def-tseitin-extension-variable"
+        ]
+      },
+      {
+        "id": "thm-three-sat-is-np-complete",
+        "kind": "theorem",
+        "title": "3-SAT is NP-complete",
+        "strategy": "3-SAT is in NP for the same certificate-checking reason as SAT. For hardness, compose the Cook-Levin SAT reduction with a Tseitin-style conversion to an equisatisfiable 3-CNF of linear size and then pad the few short clauses without changing satisfiability.",
+        "deps": [
+          "def-np-hard-and-np-complete",
+          "def-polynomial-time-many-one-reduction",
+          "prop-sat-is-in-np",
+          "thm-cook-levin-sat-is-np-complete",
+          "lem-tseitin-transformation-is-linear-size-and-equisatisfiable"
+        ]
+      },
+      {
+        "id": "fs-cook-levin-enumerates-all-branches",
+        "kind": "false-statement",
+        "title": "FALSE: the Cook--Levin reduction enumerates all nondeterministic branches",
+        "strategy": "Refute the slogan by noting what a satisfying assignment represents: one accepting tableau. The reduction asks whether at least one accepting branch exists and never needs to list every branch explicitly.",
+        "deps": [
+          "def-bounded-computation-tableau",
+          "lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs"
+        ]
+      },
+      {
+        "id": "fs-naive-distribution-to-cnf-is-always-polynomial",
+        "kind": "false-statement",
+        "title": "FALSE: distributing an arbitrary formula into CNF always has polynomial size",
+        "strategy": "Refute the claim with the standard exponential blowup from repeated distribution of disjunction over conjunction. The Tseitin transformation is needed precisely because naive full CNF expansion is not polynomially bounded.",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat",
+          "lem-tseitin-transformation-is-linear-size-and-equisatisfiable"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 622,
+    "id": "the-cook-levin-theorem-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "The Cook--Levin Theorem: Examples and Counterexamples",
+    "requires": [
+      "the-cook-levin-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-tableau-cell-alphabet-is-constant",
+        "kind": "example",
+        "title": "Counting the constant-size extended alphabet for a fixed nondeterministic machine",
+        "strategy": "Fix a machine with tape alphabet Gamma and state set Q. Work out explicitly that each tableau cell can hold either a bare tape symbol or a tape symbol tagged by one state from Q, giving a constant bound independent of the input length.",
+        "deps": [
+          "lem-tableau-cell-alphabet-is-constant"
+        ]
+      },
+      {
+        "id": "ex-three-sat-is-np-complete",
+        "kind": "example",
+        "title": "Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables",
+        "strategy": "Choose a small formula with nested conjunctions and disjunctions, introduce one variable for each non-atomic subformula, and write the local 3-CNF clauses enforcing equivalence. Then read off how a satisfying assignment transfers in both directions.",
+        "deps": [
+          "thm-three-sat-is-np-complete",
+          "lem-tseitin-transformation-is-linear-size-and-equisatisfiable"
+        ]
+      },
+      {
+        "id": "cex-cook-levin-enumerates-all-branches",
+        "kind": "counterexample",
+        "title": "A machine with two branches shows that one satisfying tableau need not encode every branch",
+        "strategy": "Take a nondeterministic machine whose left branch accepts quickly and whose right branch loops. The Cook-Levin formula is satisfiable because of the accepting branch, but no satisfying assignment needs to describe the looping branch at all.",
+        "deps": [
+          "fs-cook-levin-enumerates-all-branches",
+          "def-bounded-computation-tableau"
+        ]
+      }
+    ]
+  }
+]

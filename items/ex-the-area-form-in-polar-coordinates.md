@@ -31,9 +31,7 @@ sources:
 On the polar chart domain $\{(r,\theta):r>0\}$, the Euclidean area form pulls
 back as
 
-$$
-F^*(dx\wedge dy)=r\,dr\wedge d\theta,
-$$
+$$ F^*(dx\wedge dy)=r\,dr\wedge d\theta, $$
 
 where $F(r,\theta)=(r\cos\theta,r\sin\theta)$.
 

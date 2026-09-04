@@ -32,9 +32,7 @@ pipeline_run: null
 
 For every real $x\ge1$,
 
-$$
-\sum_{n\le x}r_2(n)=\pi x+O(\sqrt x).
-$$
+$$ \sum_{n\le x}r_2(n)=\pi x+O(\sqrt x). $$
 
 Consequently the constant function $\pi$ is an average order of $r_2$.
 

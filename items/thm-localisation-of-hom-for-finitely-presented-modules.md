@@ -29,9 +29,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, let $S \subseteq R$ be multiplicative, and let $M,N$ be left $R$-modules. The natural map
-$$
-\theta_{M,N}:S^{-1}\!\operatorname{Hom}_R(M,N) \longrightarrow \operatorname{Hom}_{S^{-1}R}(S^{-1}M,S^{-1}N)
-$$
+$$ \theta_{M,N}:S^{-1}\!\operatorname{Hom}_R(M,N) \longrightarrow \operatorname{Hom}_{S^{-1}R}(S^{-1}M,S^{-1}N) $$
 is injective when $M$ is finitely generated, and it is an isomorphism when $M$ is finitely presented.
 
 ## Facts & Assumptions

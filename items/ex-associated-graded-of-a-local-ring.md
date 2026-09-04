@@ -29,24 +29,16 @@ sources:
 ## Example
 
 Let
-$$
-R_1:=k[x,y]_{(x,y)}
-$$
+$$ R_1:=k[x,y]_{(x,y)} $$
 with maximal ideal $\mathfrak m=(x,y)$. Then
-$$
-\operatorname{gr}_{\mathfrak m}(R_1)\cong k[X,Y],
-$$
+$$ \operatorname{gr}_{\mathfrak m}(R_1)\cong k[X,Y], $$
 because $\mathfrak m^n/\mathfrak m^{n+1}$ has basis given by degree-$n$
 monomials in the initial classes of $x$ and $y$.
 
 For the cusp local ring
-$$
-R_2:=k[x,y]_{(x,y)}/(y^2-x^3),
-$$
+$$ R_2:=k[x,y]_{(x,y)}/(y^2-x^3), $$
 the initial form of the relation has degree $2$, so
-$$
-\operatorname{gr}_{\mathfrak m}(R_2)\cong k[X,Y]/(Y^2).
-$$
+$$ \operatorname{gr}_{\mathfrak m}(R_2)\cong k[X,Y]/(Y^2). $$
 
 ## Facts & Assumptions
 
@@ -54,9 +46,7 @@ $$
 maximal-ideal filtrations.
 
 [L1] The associated graded ring is
-$$
-\operatorname{gr}_{\mathfrak m}(R)=\bigoplus_{n\ge0}\mathfrak m^n/\mathfrak m^{n+1}
-$$
+$$ \operatorname{gr}_{\mathfrak m}(R)=\bigoplus_{n\ge0}\mathfrak m^n/\mathfrak m^{n+1} $$
 ([[def-associated-graded-ring-and-module]]).
 
 ## Verification

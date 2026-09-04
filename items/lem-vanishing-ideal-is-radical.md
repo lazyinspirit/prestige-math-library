@@ -26,9 +26,7 @@ pipeline_run: null
 ## Statement
 
 Let $k$ be a field and let $X\subseteq k^n$. Then the vanishing ideal
-$$
-I(X)=\{f\in k[x_1,\ldots,x_n]: f(a)=0\text{ for every }a\in X\}
-$$
+$$ I(X)=\{f\in k[x_1,\ldots,x_n]: f(a)=0\text{ for every }a\in X\} $$
 is a radical ideal.
 
 ## Facts & Assumptions

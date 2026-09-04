@@ -62,9 +62,7 @@ atlas so that each $F(U_i)$ lies in some $V_{j(i)}$. [L1, step 1.1, given,
 choose]
 
 3.1 For each $i$, the coordinate representative [L2, step 2.1, algebra]
-$$
-f_i:=\psi_{j(i)}\circ F\circ\varphi_i^{-1}
-$$
+$$ f_i:=\psi_{j(i)}\circ F\circ\varphi_i^{-1} $$
 is smooth between Euclidean open sets with positive-dimensional target. A point
 of $U_i$ is critical for $F$ exactly when its coordinate representative is
 critical for $f_i$, because the chart maps have invertible differentials. By

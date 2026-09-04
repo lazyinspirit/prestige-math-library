@@ -38,9 +38,7 @@ equivalent:
 2. For every proper ideal $I\subsetneq R$, the extended ideal $IS$ is proper.
 3. Every maximal ideal of $R$ has a prime ideal of $S$ lying over it.
 4. The map on prime spectra
-   $$
-   \operatorname{Spec}(S)\to\operatorname{Spec}(R)
-   $$
+   $$    \operatorname{Spec}(S)\to\operatorname{Spec}(R)    $$
    is surjective.
 
 ## Facts & Assumptions

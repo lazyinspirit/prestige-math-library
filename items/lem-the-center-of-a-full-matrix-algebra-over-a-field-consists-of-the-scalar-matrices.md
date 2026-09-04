@@ -31,9 +31,7 @@ pipeline_run: null
 
 Let $k$ be a field and let $n \ge 1$. Then
 
-$$
-Z(M_n(k))=\{\lambda I_n:\lambda \in k\}.
-$$
+$$ Z(M_n(k))=\{\lambda I_n:\lambda \in k\}. $$
 
 ## Facts & Assumptions
 

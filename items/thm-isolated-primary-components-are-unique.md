@@ -31,15 +31,11 @@ Assume the Axiom of Choice.
 
 Let $R$ be a Noetherian commutative ring, let $M$ be a finitely generated left
 $R$-module, and let
-$$
-N=Q_1\cap\cdots\cap Q_r
-$$
+$$ N=Q_1\cap\cdots\cap Q_r $$
 be a minimal primary decomposition with each $Q_i$ $\mathfrak p_i$-primary for
 a prime ideal $\mathfrak p_i$. If
 $\mathfrak p_i$ is isolated, then
-$$
-Q_i=M\cap N_{\mathfrak p_i}
-$$
+$$ Q_i=M\cap N_{\mathfrak p_i} $$
 inside $M_{\mathfrak p_i}$. In particular, each isolated primary component is
 uniquely determined by $N \subseteq M$.
 

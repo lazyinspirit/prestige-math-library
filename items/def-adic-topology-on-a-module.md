@@ -33,17 +33,11 @@ an $R$-module.
 
 The **$I$-adic topology** on $M$ is the linear topology whose distinguished
 neighbourhood basis of $0$ is
-$$
-\{I^nM : n \ge 0\}.
-$$
+$$ \{I^nM : n \ge 0\}. $$
 Equivalently, a subset $U \subseteq M$ is open when for every $x \in U$ there
 exists $n$ such that
-$$
-x + I^nM \subseteq U.
-$$
+$$ x + I^nM \subseteq U. $$
 
 Thus the basic open neighbourhoods of an arbitrary point $x \in M$ are the
 cosets
-$$
-x + I^nM \qquad (n \ge 0).
-$$
+$$ x + I^nM \qquad (n \ge 0). $$

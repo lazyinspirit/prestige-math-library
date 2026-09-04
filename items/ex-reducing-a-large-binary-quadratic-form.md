@@ -32,15 +32,11 @@ pipeline_run: null
 The positive-definite form $(458,214,25)$ reduces to $(1,0,1)$ through the
 explicit swap-and-shear moves
 
-$$
-(458,214,25)\to(25,-214,458)\to(25,-14,2)\to(2,14,25)\to(2,2,1)\to(1,-2,2)\to(1,0,1).
-$$
+$$ (458,214,25)\to(25,-214,458)\to(25,-14,2)\to(2,14,25)\to(2,2,1)\to(1,-2,2)\to(1,0,1). $$
 
 Equivalently,
 
-$$
-(458,214,25)\mid\begin{pmatrix}3&4\\ -13&-17\end{pmatrix}=(1,0,1).
-$$
+$$ (458,214,25)\mid\begin{pmatrix}3&4\\ -13&-17\end{pmatrix}=(1,0,1). $$
 
 ## Facts & Assumptions
 

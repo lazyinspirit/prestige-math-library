@@ -26,9 +26,7 @@ sources:
 ## Statement
 
 Let
-$$
-F=(g,\rho):M\to\mathbb R^N\times\mathbb R
-$$
+$$ F=(g,\rho):M\to\mathbb R^N\times\mathbb R $$
 be a smooth embedding such that $g(M)$ is bounded and $\rho$ is proper. If a
 unit vector $u\in S^N$ is not parallel to the last-coordinate axis and lies
 outside the secant and tangent direction images of $F$, then the orthogonal

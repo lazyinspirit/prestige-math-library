@@ -31,9 +31,7 @@ Let $R$ be a Noetherian commutative ring, let $M$ be a finitely generated left
 $R$-module, let $Q \subsetneq M$ be a $\mathfrak p$-primary submodule, and let
 the radical $\mathfrak p$ be prime. Let $S \subseteq R$ be multiplicative with
 $S \cap \mathfrak p=\varnothing$. Then
-$$
-Q=\{m \in M : m/1 \in S^{-1}Q\}.
-$$
+$$ Q=\{m \in M : m/1 \in S^{-1}Q\}. $$
 
 ## Facts & Assumptions
 

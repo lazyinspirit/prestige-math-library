@@ -31,19 +31,13 @@ pipeline_run: null
 ## Definition
 
 Let $R$ be a commutative ring, let $S \subseteq R$ be a multiplicative subset, and let $M$ be a left $R$-module. On $M \times S$, define
-$$
-(m,s) \sim (n,t) \quad \Longleftrightarrow \quad u(tm-sn)=0 \text{ for some } u \in S.
-$$
+$$ (m,s) \sim (n,t) \quad \Longleftrightarrow \quad u(tm-sn)=0 \text{ for some } u \in S. $$
 
 The **localisation** of $M$ at $S$ is the set $S^{-1}M$ of equivalence classes for this relation, and the class of $(m,s)$ is written $m/s$.
 
 The proposed addition and $S^{-1}R$-scalar action are
-$$
-\frac{m}{s}+\frac{n}{t}:=\frac{tm+sn}{st}, \qquad \frac{a}{u}\cdot\frac{m}{s}:=\frac{am}{us}.
-$$
+$$ \frac{m}{s}+\frac{n}{t}:=\frac{tm+sn}{st}, \qquad \frac{a}{u}\cdot\frac{m}{s}:=\frac{am}{us}. $$
 The canonical map is
-$$
-\lambda_M:M \longrightarrow S^{-1}M, \qquad m \longmapsto \frac{m}{1}.
-$$
+$$ \lambda_M:M \longrightarrow S^{-1}M, \qquad m \longmapsto \frac{m}{1}. $$
 
 The relation, the addition formula, and the scalar action are justified by [[lem-localised-module-fraction-equivalence-is-an-equivalence-relation]], [[lem-localised-module-addition-independent-of-representatives]], and [[lem-localised-module-scalar-action-independent-of-representatives]].

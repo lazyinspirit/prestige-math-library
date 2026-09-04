@@ -31,23 +31,17 @@ pipeline_run: null
 
 Let $n\ge1$ be a natural number and let $p$ be a prime. Then
 
-$$
-v_p(n!)=\sum_{k\ge1}\left\lfloor\frac{n}{p^k}\right\rfloor
-$$
+$$ v_p(n!)=\sum_{k\ge1}\left\lfloor\frac{n}{p^k}\right\rfloor $$
 
 and
 
-$$
-v_p\binom{2n}{n}=\sum_{k\ge1}\left(\left\lfloor\frac{2n}{p^k}\right\rfloor-2\left\lfloor\frac{n}{p^k}\right\rfloor\right).
-$$
+$$ v_p\binom{2n}{n}=\sum_{k\ge1}\left(\left\lfloor\frac{2n}{p^k}\right\rfloor-2\left\lfloor\frac{n}{p^k}\right\rfloor\right). $$
 
 Consequently:
 
 1. if $n<p\le2n$, then $v_p\binom{2n}{n}=1$;
 2. in general,
-   $$
-   v_p\binom{2n}{n}\le\frac{\log(2n)}{\log p}.
-   $$
+   $$    v_p\binom{2n}{n}\le\frac{\log(2n)}{\log p}.    $$
 
 ## Facts & Assumptions
 
@@ -59,13 +53,9 @@ products and detects exactly the powers $p^k$ that divide $a$
 [[def-p-adic-valuation]]).
 
 [L2] The factorial satisfies
-$$
-n!=1\cdot2\cdots n
-$$
+$$ n!=1\cdot2\cdots n $$
 and
-$$
-\binom{2n}{n}\,n!\,n!=(2n)!
-$$
+$$ \binom{2n}{n}\,n!\,n!=(2n)! $$
 ([[def-factorial-and-falling-factorial]], [[thm-binomial-closed-formula]],
 [[def-binomial-coefficient]]).
 

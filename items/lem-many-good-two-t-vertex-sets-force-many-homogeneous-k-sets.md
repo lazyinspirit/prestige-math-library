@@ -37,9 +37,7 @@ $n\ge2t$ vertices. Suppose at least half of the sets $X\in[V(G)]^{2t}$ contain
 a $t$-element subset $T\subseteq X$ with $G[T]\in\mathcal C$. Then $G$ has at
 least
 
-$$
-\frac12\left(\frac{n}{2t}\right)^k
-$$
+$$ \frac12\left(\frac{n}{2t}\right)^k $$
 
 homogeneous vertex sets of size $k$.
 

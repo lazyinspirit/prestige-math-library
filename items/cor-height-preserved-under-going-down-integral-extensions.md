@@ -34,9 +34,7 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Let $A\subseteq B$ be an integral extension of domains with $A$ integrally closed. If $\mathfrak q\in\operatorname{Spec}(B)$ lies over $\mathfrak p:=\mathfrak q\cap A$ and one of the heights $\operatorname{ht}(\mathfrak p)$ or $\operatorname{ht}(\mathfrak q)$ is finite, then both are finite and
-$$
-\operatorname{ht}(\mathfrak q)=\operatorname{ht}(\mathfrak p).
-$$
+$$ \operatorname{ht}(\mathfrak q)=\operatorname{ht}(\mathfrak p). $$
 
 ## Facts & Assumptions
 

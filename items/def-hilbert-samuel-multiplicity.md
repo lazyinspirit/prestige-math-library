@@ -27,9 +27,7 @@ Let $(R,\mathfrak m)$ be a Noetherian local ring, let $M$ be a finite
 $R$-module, and let $I$ be an ideal of definition for $M$.
 
 If $M=0$, define
-$$
-e_I(M):=0.
-$$
+$$ e_I(M):=0. $$
 
 If $M\neq0$, let $P_{I,M}$ be the eventual Hilbert-Samuel polynomial from
 [[thm-existence-of-hilbert-samuel-polynomial]], and let $d=\deg P_{I,M}$.
@@ -38,12 +36,8 @@ $M/I^{n+1}M$ nonzero for every $n$, so $P_{I,M}$ is not the zero polynomial
 and $d$ is defined.
 
 The **Hilbert-Samuel multiplicity** of $M$ with respect to $I$ is
-$$
-e_I(M):=d!\cdot(\text{leading coefficient of }P_{I,M}).
-$$
+$$ e_I(M):=d!\cdot(\text{leading coefficient of }P_{I,M}). $$
 
 Equivalently, when $M\neq0$ and
-$$
-P_{I,M}(n)=\frac{e_I(M)}{d!}n^d+\text{lower-degree terms},
-$$
+$$ P_{I,M}(n)=\frac{e_I(M)}{d!}n^d+\text{lower-degree terms}, $$
 then $e_I(M)$ is the integer scaling the top term.

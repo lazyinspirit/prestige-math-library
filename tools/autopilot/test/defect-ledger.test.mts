@@ -268,6 +268,27 @@ test('validate accepts the current step-6 frontier-26 vocabulary already present
   assert.equal(r.status, 0, r.stderr);
 });
 
+test('validate accepts the current step-6 frontier-29 vocabulary already present on disk', () => {
+  const dir = fixture([
+    row({
+      defect_id: 'f29-b-t13-01',
+      run: 'frontier-29',
+      severity: 'nonfatal',
+      subclass: 'frontmatter-schema',
+      location: 'frontmatter',
+    }),
+    row({
+      defect_id: 'f29-b-r14-04',
+      run: 'frontier-29',
+      subject: 'presheaves-sheaves-stalks-and-sheafification-examples',
+      subclass: 'overstrong-title-or-statement',
+      location: 'page prose',
+    }),
+  ], []);
+  const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 0, r.stderr);
+});
+
 test('validate still rejects malformed proof-step legacy locations', () => {
   const dir = fixture([
     row({
@@ -301,6 +322,14 @@ test('append accepts current step-6 detail vocabulary for new rows', () => {
       subclass: 'citation-inaccurate',
       location: 'Statement',
     }),
+  }, {
+    ...row({
+      defect_id: 'r9-D003',
+      run: 'frontier-29',
+      subclass: 'frontmatter-schema',
+      severity: 'nonfatal',
+      location: 'frontmatter',
+    }),
   }];
   writeFileSync(join(dir, 'rows.json'), JSON.stringify(incoming));
   const appended = spawnSync(process.execPath, [TOOL, 'append', '--file', join(dir, 'rows.json')],
@@ -310,7 +339,26 @@ test('append accepts current step-6 detail vocabulary for new rows', () => {
   assert.equal(validated.status, 0, validated.stderr);
 });
 
-test('append remains strict for new rows with legacy-shaped locations or missing subclass_note', () => {
+test('append remains strict for new rows with validate-only location aliases or missing subclass_note', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ledger-append-'));
+  mkdirSync(join(dir, 'research'));
+  writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'), '');
+  const incoming = {
+    ...row({
+      defect_id: 'r9-D001',
+      run: 'frontier-29',
+      location: 'page prose',
+    }),
+  };
+  writeFileSync(join(dir, 'rows.json'), JSON.stringify(incoming));
+  const r = spawnSync(process.execPath, [TOOL, 'append', '--file', join(dir, 'rows.json')],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  const out = `${r.stdout}${r.stderr}`;
+  assert.notEqual(r.status, 0);
+  assert.match(out, /outside the closed enum/);
+});
+
+test('append remains strict for new frontier-20 legacy rows with missing subclass_note', () => {
   const dir = mkdtempSync(join(tmpdir(), 'ledger-append-'));
   mkdirSync(join(dir, 'research'));
   writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'), '');
@@ -326,9 +374,10 @@ test('append remains strict for new rows with legacy-shaped locations or missing
   writeFileSync(join(dir, 'rows.json'), JSON.stringify(incoming));
   const r = spawnSync(process.execPath, [TOOL, 'append', '--file', join(dir, 'rows.json')],
     { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  const out = `${r.stdout}${r.stderr}`;
   assert.notEqual(r.status, 0);
-  assert.match(r.stderr, /outside the closed enum/);
-  assert.match(r.stderr, /requires subclass_note/);
+  assert.match(out, /outside the closed enum/);
+  assert.match(out, /requires subclass_note/);
 });
 
 test('render leads with outcomes, never a bare total', () => {

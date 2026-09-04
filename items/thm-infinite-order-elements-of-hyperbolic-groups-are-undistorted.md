@@ -25,9 +25,7 @@ Let $G$ be a hyperbolic group and let $g \in G$ have infinite order. Then the
 cyclic subgroup $\langle g \rangle$ is undistorted in $G$: for some constants
 $A,B>0$,
 
-$$
-|n| \le A\,|g^n|_S + B
-$$
+$$ |n| \le A\,|g^n|_S + B $$
 
 for all $n \in \mathbb Z$, where $|\cdot|_S$ is word length with respect to a
 finite generating set $S$ of $G$.

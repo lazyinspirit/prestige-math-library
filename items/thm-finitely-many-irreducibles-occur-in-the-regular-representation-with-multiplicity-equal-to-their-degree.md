@@ -36,9 +36,7 @@ $\operatorname{char} k \nmid |G|$. Then there are finitely many irreducible
 representations $V_1,\ldots,V_r$ of $G$ over $k$, up to equivalence, and the
 regular representation decomposes as
 
-$$
-k[G]\cong V_1^{\oplus \dim_k V_1}\oplus\cdots\oplus V_r^{\oplus \dim_k V_r}.
-$$
+$$ k[G]\cong V_1^{\oplus \dim_k V_1}\oplus\cdots\oplus V_r^{\oplus \dim_k V_r}. $$
 
 In particular, each irreducible representation occurs in the regular
 representation with multiplicity equal to its degree.
@@ -48,9 +46,7 @@ representation with multiplicity equal to its degree.
 **Given:** A finite group $G$ and an algebraically closed field $k$ with $\operatorname{char} k \nmid |G|$.
 
 [L1] Under these hypotheses, there is a $k$-algebra decomposition
-$$
-k[G]\cong\prod_{i=1}^r M_{n_i}(k)
-$$
+$$ k[G]\cong\prod_{i=1}^r M_{n_i}(k) $$
 for positive integers $n_i$ ([[thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field]]).
 
 [L2] For such a product ring $\prod_{i=1}^r M_{n_i}(k)$ with $r\ge1$, the simple left modules are exactly the column modules $k^{n_i}$, one isomorphism class for each factor ([[thm-simple-modules-over-semisimple-rings]]).

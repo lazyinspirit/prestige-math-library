@@ -30,7 +30,5 @@ pipeline_run: null
 ## Definition
 
 For a commutative ring $R$, the **Jacobson radical** is
-$$
-J(R):=\bigcap_{\mathfrak m \text{ maximal}} \mathfrak m.
-$$
+$$ J(R):=\bigcap_{\mathfrak m \text{ maximal}} \mathfrak m. $$
 When $R=0$, there are no maximal ideals, and on this page the empty intersection is taken to be $0$, so $J(0)=0$.

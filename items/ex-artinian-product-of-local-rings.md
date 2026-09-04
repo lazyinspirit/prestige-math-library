@@ -32,9 +32,7 @@ pipeline_run: null
 ## Example
 
 The ring $\mathbb Z/12\mathbb Z$ decomposes as
-$$
-\mathbb Z/12\mathbb Z\cong\mathbb Z/3\mathbb Z\times\mathbb Z/4\mathbb Z.
-$$
+$$ \mathbb Z/12\mathbb Z\cong\mathbb Z/3\mathbb Z\times\mathbb Z/4\mathbb Z. $$
 The two factors are local Artinian rings, and the two prime ideals of $\mathbb Z/12\mathbb Z$ are the pullbacks of the two coordinate prime ideals.
 
 ## Facts & Assumptions

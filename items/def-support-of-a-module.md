@@ -26,9 +26,7 @@ pipeline_run: null
 ## Definition
 
 Let $R$ be a commutative ring and let $M$ be a left $R$-module. The **support** of $M$ is
-$$
-\operatorname{Supp}_R(M):=\{\mathfrak p : M_{\mathfrak p}\neq 0\},
-$$
+$$ \operatorname{Supp}_R(M):=\{\mathfrak p : M_{\mathfrak p}\neq 0\}, $$
 where $\mathfrak p$ ranges over the prime ideals of $R$ and $M_{\mathfrak p}$ denotes localisation at the multiplicative set $R \setminus \mathfrak p$ ([[def-localisation-at-a-prime-ideal]]).
 
 On this page, before the separate spectrum page is built, $\operatorname{Supp}_R(M)$ is read simply as a set of prime ideals.

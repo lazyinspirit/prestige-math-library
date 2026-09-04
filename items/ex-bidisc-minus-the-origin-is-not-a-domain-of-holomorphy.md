@@ -34,9 +34,7 @@ pipeline_run: null
 
 The punctured bidisc
 
-$$
-\Omega=\{(z_1,z_2): |z_1|<1,\ |z_2|<1\}\setminus\{(0,0)\}
-$$
+$$ \Omega=\{(z_1,z_2): |z_1|<1,\ |z_2|<1\}\setminus\{(0,0)\} $$
 
 is not a domain of holomorphy.
 

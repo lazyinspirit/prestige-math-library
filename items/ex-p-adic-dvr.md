@@ -28,9 +28,7 @@ pipeline_run: null
 ## Example
 
 Fix a prime integer $p$. The subring
-$$
-\mathbb Z_{(p)}=\left\{\frac ab\in\mathbb Q:b\ne0,\ p\nmid b\right\}
-$$
+$$ \mathbb Z_{(p)}=\left\{\frac ab\in\mathbb Q:b\ne0,\ p\nmid b\right\} $$
 is a discrete valuation ring with uniformiser $p$. Its units are the fractions
 whose numerators and denominators are both prime to $p$, and every nonzero ideal
 is $p^n\mathbb Z_{(p)}$ for a unique $n\ge0$.

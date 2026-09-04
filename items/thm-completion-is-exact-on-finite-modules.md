@@ -30,14 +30,10 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Let $R$ be a Noetherian commutative ring, let $I \subseteq R$ be an ideal, and let
-$$
-0 \to M' \to M \to M'' \to 0
-$$
+$$ 0 \to M' \to M \to M'' \to 0 $$
 be a short exact sequence of finitely generated $R$-modules. Then the induced
 sequence of $I$-adic completions
-$$
-0 \to \widehat{M'} \to \widehat M \to \widehat{M''} \to 0
-$$
+$$ 0 \to \widehat{M'} \to \widehat M \to \widehat{M''} \to 0 $$
 is exact.
 
 ## Facts & Assumptions

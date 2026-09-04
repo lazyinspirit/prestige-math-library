@@ -31,9 +31,7 @@ pipeline_run: null
 ## Definition
 
 Let $R$ be a nonzero commutative ring. A **strict chain of prime ideals of length $n$** is a sequence
-$$
-\mathfrak p_0\subsetneq\mathfrak p_1\subsetneq\cdots\subsetneq\mathfrak p_n
-$$
+$$ \mathfrak p_0\subsetneq\mathfrak p_1\subsetneq\cdots\subsetneq\mathfrak p_n $$
 of prime ideals of $R$.
 
 The **Krull dimension** of $R$ is the supremum of all integers $n\ge 0$ for which such a chain exists. This supremum is allowed to be infinite.

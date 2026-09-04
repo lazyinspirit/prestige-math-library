@@ -26,14 +26,10 @@ pipeline_run: null
 Let $R$ be a commutative ring, let $I \subseteq R$ be an ideal, let $r \ge 1$,
 and let $M$ be an $R$-module. Then the $I$-adic and $I^r$-adic completions are
 canonically isomorphic:
-$$
-\widehat M^{\,I} \cong \widehat M^{\,I^r}.
-$$
+$$ \widehat M^{\,I} \cong \widehat M^{\,I^r}. $$
 Since $I+I^r=I$, the same completed module is also the completion for the
 combined ideal
-$$
-I+I^r=I,
-$$
+$$ I+I^r=I, $$
 namely with $\widehat M^{\,I}$.
 
 ## Facts & Assumptions

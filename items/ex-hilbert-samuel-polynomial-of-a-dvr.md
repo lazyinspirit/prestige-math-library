@@ -29,14 +29,10 @@ sources:
 ## Example
 
 Let $(V,(\pi))$ be a discrete valuation ring. Then
-$$
-\chi_{(\pi),V}(n)=\ell_V(V/(\pi^{n+1}))=n+1
-$$
+$$ \chi_{(\pi),V}(n)=\ell_V(V/(\pi^{n+1}))=n+1 $$
 for every $n\ge0$. Hence the Hilbert-Samuel polynomial is exactly $n+1$, and
 the Hilbert-Samuel multiplicity is
-$$
-e_{(\pi)}(V)=1.
-$$
+$$ e_{(\pi)}(V)=1. $$
 
 ## Facts & Assumptions
 

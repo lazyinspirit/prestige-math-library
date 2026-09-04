@@ -31,15 +31,11 @@ verification:
 Let $G$ be a group and let $K,H\le G$ be subgroups ([[def-subgroup]]). For
 $g\in G$, the **$(K,H)$-double coset** of $g$ is
 
-$$
-KgH:=\{kgh:k\in K,\ h\in H\}.
-$$
+$$ KgH:=\{kgh:k\in K,\ h\in H\}. $$
 
 The set of all such double cosets is written
 
-$$
-K\backslash G/H.
-$$
+$$ K\backslash G/H. $$
 
 ## Remarks
 

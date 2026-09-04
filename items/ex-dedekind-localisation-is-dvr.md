@@ -33,9 +33,7 @@ pipeline_run: null
 
 Let $R$ be a Dedekind domain, let $\mathfrak p$ be a nonzero prime ideal, and let $n\ge0$ be an integer.
 Then $R_{\mathfrak p}$ is a DVR, and
-$$
-(\mathfrak p^n)_{\mathfrak p}=\mathfrak p^nR_{\mathfrak p}.
-$$
+$$ (\mathfrak p^n)_{\mathfrak p}=\mathfrak p^nR_{\mathfrak p}. $$
 Hence $v_{\mathfrak p}(\mathfrak p^n)=n$.
 
 ## Facts & Assumptions

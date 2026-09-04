@@ -32,14 +32,10 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Let
-$$
-0 \to A_n \xrightarrow{f_n} B_n \xrightarrow{g_n} C_n \to 0
-$$
+$$ 0 \to A_n \xrightarrow{f_n} B_n \xrightarrow{g_n} C_n \to 0 $$
 be a short exact sequence of inverse systems of $R$-modules indexed by
 $\mathbb{N}_{\ge 1}$. If $(A_n)$ is Mittag-Leffler, then
-$$
-0 \to \varprojlim A_n \to \varprojlim B_n \to \varprojlim C_n \to 0
-$$
+$$ 0 \to \varprojlim A_n \to \varprojlim B_n \to \varprojlim C_n \to 0 $$
 is exact.
 
 ## Facts & Assumptions

@@ -29,9 +29,7 @@ For an abstract group $G$ with its profinite-topology data
 ([[def-profinite-topology-on-an-abstract-group]], [[def-normal-subgroup]]), the
 **finite residual** is
 
-$$
-R_f(G):=\bigcap_{N\trianglelefteq G,\ [G:N]<\infty} N.
-$$
+$$ R_f(G):=\bigcap_{N\trianglelefteq G,\ [G:N]<\infty} N. $$
 
 The group $G$ is **residually finite** when $R_f(G)=\{1\}$. Equivalently,
 every nonidentity element is omitted by some finite-index normal subgroup.

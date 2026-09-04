@@ -28,9 +28,7 @@ sources:
 ## Statement
 
 Let $R$ be a commutative ring and let $M$ be a left $R$-module. Then
-$$
-\operatorname{Ass}_R(M)\subseteq \operatorname{Supp}_R(M).
-$$
+$$ \operatorname{Ass}_R(M)\subseteq \operatorname{Supp}_R(M). $$
 
 ## Facts & Assumptions
 

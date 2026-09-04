@@ -23,9 +23,7 @@ sources:
 
 Let $G$ be an abstract group. Its **profinite completion** is the inverse limit
 
-$$
-\widehat G:=\varprojlim_{N\trianglelefteq G,\ [G:N]<\infty} G/N,
-$$
+$$ \widehat G:=\varprojlim_{N\trianglelefteq G,\ [G:N]<\infty} G/N, $$
 
 where the index set is the directed family of finite-index normal subgroups,
 ordered by reverse inclusion, and the transition maps are the natural quotient

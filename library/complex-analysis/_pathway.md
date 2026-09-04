@@ -27,6 +27,7 @@ parts:
       - the-residue-theorem
       - the-riemann-sphere-and-mobius-transformations
       - holomorphic-inverse-and-weierstrass-preparation
+      - the-riemann-zeta-function
       - domains-of-holomorphy-and-pseudoconvexity
       - normal-families-and-montels-theorem
       - conformal-mapping-branches-and-the-schwarz-lemma
@@ -49,11 +50,11 @@ term, and its derivatives recover its coefficients.
 Contour integrals, Goursat, and Cauchy's formula turn local holomorphy into analyticity,
 derivative estimates, residues, and zero-pole counting. Poisson, Dirichlet, Hartogs,
 pseudoconvexity, Runge-Mittag-Leffler, Gamma, and Weierstrass extend that control to
-boundary values, approximation, principal parts, growth, and special functions; Montel,
-Schwarz-Pick, Bloch, Schottky, Picard, and Riemann mapping complete the conformal side.
-The simply connected and analytic-continuation pages close the part by globalizing local
-germs: zero periods, primitives, harmonic conjugates, and winding number describe when
-holomorphic data continues consistently, monodromy makes continuation path-independent on
-simply connected domains, and the resulting germ space becomes a Riemann surface for
-examples such as $\log$ and $z^{1/n}$ while natural boundaries show where continuation
-stops.
+boundary values, approximation, principal parts, growth, and special functions, while
+Montel, Schwarz-Pick, Bloch, Schottky, Picard, and Riemann mapping complete the conformal
+side. Simply connected domains and analytic continuation globalize local germs through
+periods, primitives, harmonic conjugates, monodromy, and Riemann surfaces. The zeta page
+then applies the same machinery to a central Dirichlet series: Euler products hold on
+$\operatorname{Re}s>1$, eta and theta-Mellin formulas continue it meromorphically, and
+the completed $\Lambda$ and $\xi$ package the functional equation, zero symmetries,
+Hadamard product, and special values.

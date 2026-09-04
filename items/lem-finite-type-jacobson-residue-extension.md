@@ -29,9 +29,7 @@ Let $R$ be a Jacobson ring, let $A$ be a finite-type $R$-algebra, and let
 $\mathfrak m$ be a maximal ideal of $A$. Put $\mathfrak p=\mathfrak m\cap R$.
 Then the residue field $\kappa(\mathfrak m)=A_{\mathfrak m}/\mathfrak mA_{\mathfrak m}$
 is a finite field extension of
-$$
-\kappa(\mathfrak p)=R_{\mathfrak p}/\mathfrak pR_{\mathfrak p}.
-$$
+$$ \kappa(\mathfrak p)=R_{\mathfrak p}/\mathfrak pR_{\mathfrak p}. $$
 
 ## Facts & Assumptions
 

@@ -33,9 +33,7 @@ pipeline_run: null
 
 The function
 
-$$
-f(z_1,z_2)=\frac{1}{1-z_1z_2}
-$$
+$$ f(z_1,z_2)=\frac{1}{1-z_1z_2} $$
 
 is holomorphic on the full bidisc $\{|z_1|<1,\ |z_2|<1\}$ and therefore, a
 fortiori, on every Hartogs figure inside that bidisc.

@@ -29,12 +29,8 @@ sources:
 
 Let $M$ be a smooth manifold. A **positive continuous error function on $M$** is
 a continuous map
-$$
-\varepsilon:M\to(0,\infty).
-$$
+$$ \varepsilon:M\to(0,\infty). $$
 In Whitney approximation on a noncompact manifold, the inequality
-$$
-\|G(p)-F(p)\|<\varepsilon(p)
-$$
+$$ \|G(p)-F(p)\|<\varepsilon(p) $$
 is the pointwise fine-control condition that replaces one global uniform error
 bound.

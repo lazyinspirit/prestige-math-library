@@ -28,9 +28,7 @@ sources:
 ## Example
 
 Let $R=k[x,y]$ and $I=(x^2,xy)$. Then
-$$
-\operatorname{Ass}_R(R/I)=\{(x),(x,y)\}.
-$$
+$$ \operatorname{Ass}_R(R/I)=\{(x),(x,y)\}. $$
 
 ## Facts & Assumptions
 

@@ -40,9 +40,7 @@ for $0 < h < 1$, for instance, on $(1,1+h]$ one has $\tau_h f = 1$ and
 $f = 0$. [L1, given, algebra]
 
 2.1 Therefore [step 1.1, algebra]
-$$
-\|\tau_h f-f\|_\infty = 1
-$$
+$$ \|\tau_h f-f\|_\infty = 1 $$
 for every $h \neq 0$, so the norm does not tend to $0$ as $h \to 0$. [step 1.1, algebra]
 
 3.1 Hence translation is not continuous in $L^\infty$, which is exactly why [L1, step 2.1]

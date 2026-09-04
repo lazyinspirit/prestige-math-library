@@ -26,15 +26,11 @@ sources:
 
 Let $A:\mathbb R^2\to\mathbb R^2$ be the linear map
 
-$$
-A(x,y)=(x+2y,3x-y).
-$$
+$$ A(x,y)=(x+2y,3x-y). $$
 
 Then
 
-$$
-T(\alpha,v):=\alpha(Av)
-$$
+$$ T(\alpha,v):=\alpha(Av) $$
 
 defines a type $(1,1)$ tensor on $\mathbb R^2$.
 

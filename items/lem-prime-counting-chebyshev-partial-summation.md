@@ -31,9 +31,7 @@ pipeline_run: null
 
 For every real $x\ge2$,
 
-$$
-\pi(x)=\frac{\theta(x)}{\log x}+\int_2^x\frac{\theta(t)}{t\log^2 t}\,dt.
-$$
+$$ \pi(x)=\frac{\theta(x)}{\log x}+\int_2^x\frac{\theta(t)}{t\log^2 t}\,dt. $$
 
 ## Facts & Assumptions
 

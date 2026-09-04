@@ -28,13 +28,9 @@ sources:
 ## Example
 
 On $S^1=\mathbb R/2\pi\mathbb Z$, consider the embedded space curve
-$$
-\gamma([t]):=(\cos t,\sin t,\cos 2t)\subseteq\mathbb R^3.
-$$
+$$ \gamma([t]):=(\cos t,\sin t,\cos 2t)\subseteq\mathbb R^3. $$
 Projecting along the $y$-axis gives
-$$
-\pi(\gamma([t]))=(\cos t,\cos 2t)\in\mathbb R^2.
-$$
+$$ \pi(\gamma([t]))=(\cos t,\cos 2t)\in\mathbb R^2. $$
 The distinct parameters $t$ and $-t$ have the same projected image, so this
 projection creates double points.
 

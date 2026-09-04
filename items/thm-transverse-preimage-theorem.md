@@ -33,9 +33,7 @@ Let $F:M^m\to N^n$ be smooth and let $Z\subseteq N$ be an embedded submanifold
 of codimension $c$. If $F\pitchfork Z$, then $F^{-1}(Z)$ is an embedded
 submanifold of $M$ of codimension $c$. For each $p\in F^{-1}(Z)$,
 
-$$
-T_pF^{-1}(Z)=\{v\in T_pM:dF_p(v)\in T_{F(p)}Z\}.
-$$
+$$ T_pF^{-1}(Z)=\{v\in T_pM:dF_p(v)\in T_{F(p)}Z\}. $$
 
 ## Facts & Assumptions
 

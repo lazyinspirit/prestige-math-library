@@ -33,15 +33,11 @@ pipeline_run: null
 Take $x=12$, $U=3$, and $V=4$, so $UV=12$. For $\tau=\mathbf1*\mathbf1$,
 Dirichlet's hyperbola identity becomes
 
-$$
-\sum_{n\le12}\tau(n)=\sum_{a\le3}\left\lfloor\frac{12}{a}\right\rfloor+\sum_{b\le4}\left\lfloor\frac{12}{b}\right\rfloor-3\cdot4.
-$$
+$$ \sum_{n\le12}\tau(n)=\sum_{a\le3}\left\lfloor\frac{12}{a}\right\rfloor+\sum_{b\le4}\left\lfloor\frac{12}{b}\right\rfloor-3\cdot4. $$
 
 Numerically this is
 
-$$
-35=(12+6+4)+(12+6+4+3)-12.
-$$
+$$ 35=(12+6+4)+(12+6+4+3)-12. $$
 
 ## Facts & Assumptions
 

@@ -28,10 +28,6 @@ sources:
 
 Let $R$ be a commutative ring and let $M$ be a left $R$-module. A prime ideal
 $\mathfrak p \subsetneq R$ is **associated to $M$** when
-$$
-\mathfrak p=\operatorname{Ann}_R(m)
-$$
+$$ \mathfrak p=\operatorname{Ann}_R(m) $$
 for some element $m \in M$. The set of associated primes of $M$ is denoted
-$$
-\operatorname{Ass}_R(M).
-$$
+$$ \operatorname{Ass}_R(M). $$

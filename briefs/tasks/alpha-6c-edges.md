@@ -7,7 +7,7 @@ Append one evidence-bearing current-hash row per edge, forward reference,
 addition, removal, item, page, or gate outcome to
 `research/<run>-6c-verdicts.jsonl`; use the exact kind and verdict vocabulary
 accepted by `tools/cross-group-edges.mjs`. Obtain a current carrier hash with
-`node tools/cross-group-edges.mjs carrier --run <run> --id <id>` after edits.
+`node tools/cross-group-edges.mjs carrier --run <run> --id ITEM_ID` after edits.
 
 Clean outcomes use `defect_ids:[]`. Every repair, strike, drop, removal, or
 reversion names one closed, uniquely owned `6c-cross` ledger row. Restore a

@@ -31,6 +31,4 @@ Let $V$ be a finite-dimensional real vector space, let $k\ge 0$, and let
 $\sigma\in S_k$. If $T:V^k\to\mathbb R$ is covariant of degree $k$, define
 $\sigma\cdot T$ by
 
-$$
-(\sigma\cdot T)(v_1,\ldots,v_k):=T(v_{\sigma(1)},\ldots,v_{\sigma(k)}).
-$$
+$$ (\sigma\cdot T)(v_1,\ldots,v_k):=T(v_{\sigma(1)},\ldots,v_{\sigma(k)}). $$

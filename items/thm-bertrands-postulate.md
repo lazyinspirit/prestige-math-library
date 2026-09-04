@@ -34,9 +34,7 @@ pipeline_run: null
 
 For every integer $n>1$, there is a prime $p$ with
 
-$$
-n<p<2n.
-$$
+$$ n<p<2n. $$
 
 ## Facts & Assumptions
 

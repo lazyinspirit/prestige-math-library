@@ -33,6 +33,4 @@ pipeline_run: null
 Let $R$ be a Dedekind domain. Its **divisor group** $\operatorname{Div}(R)$ is
 the free abelian group on the nonzero prime ideals of $R$. Equivalently, it is
 the group of finitely supported sums
-$$
-\sum_{\mathfrak p}n_{\mathfrak p}[\mathfrak p],\qquad n_{\mathfrak p}\in\mathbb Z.
-$$
+$$ \sum_{\mathfrak p}n_{\mathfrak p}[\mathfrak p],\qquad n_{\mathfrak p}\in\mathbb Z. $$

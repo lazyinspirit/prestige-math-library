@@ -1,0 +1,1850 @@
+{
+  "version": 1,
+  "level": "frontier-29",
+  "note": "Step-5 authoring contract for frontier-29 batch 7 on Tuesday, September 1, 2026.",
+  "scope": [
+    "lem-fourier-partial-sums-are-dirichlet-convolutions",
+    "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+    "lem-step-functions-have-vanishing-torus-fourier-coefficients",
+    "lem-step-functions-on-one-period-are-dense-in-l-one-on-the-torus",
+    "thm-riemann-lebesgue-lemma-for-fourier-coefficients",
+    "lem-symmetric-difference-formula-for-fourier-partial-sums",
+    "thm-riemann-localisation-principle-for-fourier-series",
+    "thm-dini-pointwise-convergence-criterion-for-fourier-series",
+    "cor-local-holder-regularity-implies-fourier-convergence-at-a-point",
+    "lem-bounded-variation-gives-one-sided-dirichlet-integrability",
+    "thm-dirichlet-jordan-pointwise-convergence",
+    "cor-piecewise-c-one-fourier-series-converges-to-midpoint-values",
+    "ex-dirichlet-kernel-at-zero-and-away-from-zero",
+    "thm-lebesgue-constants-grow-logarithmically",
+    "ex-fourier-partial-sums-of-the-sawtooth",
+    "ex-localisation-for-functions-equal-on-an-arc",
+    "cex-continuity-alone-does-not-satisfy-a-dini-modulus"
+  ],
+  "contracts": {
+    "lem-fourier-partial-sums-are-dirichlet-convolutions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb T := \\mathbb R / \\mathbb Z$ and represent a function on\n$\\mathbb T$ by a one-periodic function on $\\mathbb R$.\n\nFor $k \\in \\mathbb Z$, define the $k$-th character\n$e_k(x) := e^{2\\pi i kx}$.\n\nIf $f$ is integrable on one period, its Fourier coefficients are\n\n$$\\widehat f(k) := \\int_0^1 f(t)e^{-2\\pi i kt}\\,dt \\qquad (k \\in \\mathbb Z).$$\n\nFor $N \\ge 0$, the $N$-th Fourier partial sum of $f$ is\n\n$$S_Nf(x) := \\sum_{|k| \\le N}\\widehat f(k)e_k(x).$$\n\nA **trigonometric polynomial** on $\\mathbb T$ is a finite linear combination of\nthe characters $e_k$.\n\nIf $f,g \\in L^1(\\mathbb T)$, their convolution is the $L^1(\\mathbb T)$ class\ndefined for almost every $x$ by\n\n$$(f*g)(x) := \\int_0^1 f(x-t)g(t)\\,dt,$$\n\nwhere $f$ and $g$ are read as one-periodic representatives. More precisely,\nthe integrand is absolutely integrable for almost every $x$, and the displayed\nformula gives an almost-everywhere-defined integrable function whose class is\nindependent of the chosen representatives. When one factor is bounded, as for\nthe Dirichlet kernels below, the integral exists at every $x$ for which the\nother representative is integrable on one period.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dirichlet-and-fejer-kernels",
+          "source_section": "Definition",
+          "quote": "For $N \\ge 0$, the **Dirichlet kernel** on $\\mathbb T$ is\n\n$$D_N(t) := \\sum_{|k| \\le N} e_k(t).$$\n\nThe **Fejer kernel** is the arithmetic mean\n\n$$F_N(t) := \\frac{1}{N+1}\\sum_{j=0}^N D_j(t).$$\n\nEquivalently,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt),$$\n\nso $D_N$ is real-valued and even. Also\n\n$$\\int_0^1 D_N(t)\\,dt = 1,$$\n\nbecause every nonconstant character has integral $0$ over one period.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding the convolution against the finite sum [L1, L2, algebra] gives $$\\int_0^1 f(x-t)D_N(t)\\,dt = \\sum_{|k|\\le N}\\int_0^1 f(x-t)e^{2\\pi ikt}\\,dt.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $k$, substitute $u=x-t$. Then $$\\int_0^1 f(x-t)e^{2\\pi ikt}\\,dt = e^{2\\pi ikx}\\int_{x-1}^x f(u)e^{-2\\pi iku}\\,du.$$ The integrand $u \\mapsto f(u)e^{-2\\pi iku}$ is one-periodic, so its integral over $[x-1,x]$ equals its integral over $[0,1]$, namely $\\widehat f(k)$. Therefore $$\\int_0^1 f(x-t)e^{2\\pi ikt}\\,dt = \\widehat f(k)e_k(x).$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing step 2.1 over $|k|\\le N$ yields $$\\int_0^1 f(x-t)D_N(t)\\,dt = \\sum_{|k|\\le N}\\widehat f(k)e_k(x) = S_Nf(x).$$ By [L1], the integral is also $(f*D_N)(x)$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums are Dirichlet convolutions does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the identity for every integer N >= 0, so the base case N = 0 is included without a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums are Dirichlet convolutions has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums are Dirichlet convolutions has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums are Dirichlet convolutions is not an endpoint-sensitive interval claim outside the cases already handled explicitly in the written proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums are Dirichlet convolutions does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums are Dirichlet convolutions is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums are Dirichlet convolutions is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk was the substitution over the shifted interval [x-1,x] and the appeal to one-periodicity. I reread steps 1.1-3.1: the convolution expands termwise against the finite Dirichlet sum, the change of variables produces e_k(x) times an integral over [x-1,x], and periodicity moves that integral back to [0,1], so the identity with S_N f is exact."
+      }
+    },
+    "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dirichlet-and-fejer-kernels",
+          "source_section": "Definition",
+          "quote": "For $N \\ge 0$, the **Dirichlet kernel** on $\\mathbb T$ is\n\n$$D_N(t) := \\sum_{|k| \\le N} e_k(t).$$\n\nThe **Fejer kernel** is the arithmetic mean\n\n$$F_N(t) := \\frac{1}{N+1}\\sum_{j=0}^N D_j(t).$$\n\nEquivalently,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt),$$\n\nso $D_N$ is real-valued and even. Also\n\n$$\\int_0^1 D_N(t)\\,dt = 1,$$\n\nbecause every nonconstant character has integral $0$ over one period.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Pair the terms with indices $k$ and $-k$ in [L1]. This gives $$D_N(t)=1+\\sum_{k=1}^N \\bigl(e^{2\\pi ikt}+e^{-2\\pi ikt}\\bigr)=1+2\\sum_{k=1}^N \\cos(2\\pi kt).$$ Hence $D_N$ is even. If $t=m \\in \\mathbb Z$, then every exponential equals $1$, so $D_N(m)=2N+1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $t \\notin \\mathbb Z$ and put $z=e^{2\\pi it} \\ne 1$. Then [L1, algebra] $$D_N(t)=z^{-N}\\sum_{j=0}^{2N} z^j = z^{-N}\\frac{1-z^{2N+1}}{1-z}.$$ Rewriting numerator and denominator with half-angle factors yields $$D_N(t)=\\frac{e^{-\\pi i(2N+1)t}-e^{\\pi i(2N+1)t}}{e^{-\\pi it}-e^{\\pi it}}=\\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The triangle inequality applied to [L1] gives $|D_N(t)|\\le 2N+1$ for every $t$. If $t \\notin \\mathbb Z$, step 1.2 and $|\\sin((2N+1)\\pi t)|\\le1$ give $$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the cosine sum for every N >= 0, so the empty inner sum at N = 0 is included explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the integer-point branch, including t = 0, by evaluating the finite character sum directly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Closed form and size bounds for the Dirichlet kernel has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Closed form and size bounds for the Dirichlet kernel has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 separate the removable integer-point case from the off-integer sine-quotient case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Closed form and size bounds for the Dirichlet kernel does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Closed form and size bounds for the Dirichlet kernel is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Closed form and size bounds for the Dirichlet kernel is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ]
+    },
+    "lem-step-functions-have-vanishing-torus-fourier-coefficients": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb T := \\mathbb R / \\mathbb Z$ and represent a function on\n$\\mathbb T$ by a one-periodic function on $\\mathbb R$.\n\nFor $k \\in \\mathbb Z$, define the $k$-th character\n$e_k(x) := e^{2\\pi i kx}$.\n\nIf $f$ is integrable on one period, its Fourier coefficients are\n\n$$\\widehat f(k) := \\int_0^1 f(t)e^{-2\\pi i kt}\\,dt \\qquad (k \\in \\mathbb Z).$$\n\nFor $N \\ge 0$, the $N$-th Fourier partial sum of $f$ is\n\n$$S_Nf(x) := \\sum_{|k| \\le N}\\widehat f(k)e_k(x).$$\n\nA **trigonometric polynomial** on $\\mathbb T$ is a finite linear combination of\nthe characters $e_k$.\n\nIf $f,g \\in L^1(\\mathbb T)$, their convolution is the $L^1(\\mathbb T)$ class\ndefined for almost every $x$ by\n\n$$(f*g)(x) := \\int_0^1 f(x-t)g(t)\\,dt,$$\n\nwhere $f$ and $g$ are read as one-periodic representatives. More precisely,\nthe integrand is absolutely integrable for almost every $x$, and the displayed\nformula gives an almost-everywhere-defined integrable function whose class is\nindependent of the chosen representatives. When one factor is bounded, as for\nthe Dirichlet kernels below, the integral exists at every $x$ for which the\nother representative is integrable on one period.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $s=\\sum_{j=1}^m a_j\\mathbf 1_{[x_{j-1},x_j)}$ for a partition $0=x_0<\\cdots<x_m=1$. For $k \\ne 0$, [L1, algebra] $$\\widehat{\\mathbf 1_{[x_{j-1},x_j)}}(k)=\\int_{x_{j-1}}^{x_j} e^{-2\\pi ikt}\\,dt=\\frac{e^{-2\\pi ikx_{j-1}}-e^{-2\\pi ikx_j}}{2\\pi ik}.$$ Therefore $$\\left|\\widehat{\\mathbf 1_{[x_{j-1},x_j)}}(k)\\right|\\le\\frac{1}{\\pi |k|}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By linearity, $$\\widehat s(k)=\\sum_{j=1}^m a_j\\widehat{\\mathbf 1_{[x_{j-1},x_j)}}(k).$$ Step 1.1 then gives $$|\\widehat s(k)|\\le\\frac{1}{\\pi |k|}\\sum_{j=1}^m |a_j|.$$ Taking $C:=\\pi^{-1}\\sum_{j=1}^m|a_j|$ proves the displayed bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $C/|k| \\to 0$ as $|k| \\to \\infty$, step 2.1 yields $\\widehat s(k)\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Step functions on one period have vanishing Fourier coefficients does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement isolates k != 0, and step 1.1 computes the interval coefficient exactly on that branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Step functions on one period have vanishing Fourier coefficients has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Step functions on one period have vanishing Fourier coefficients has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Step functions on one period have vanishing Fourier coefficients is not an endpoint-sensitive interval claim outside the cases already handled explicitly in the written proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step functions on one period have vanishing Fourier coefficients does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Step functions on one period have vanishing Fourier coefficients is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step functions on one period have vanishing Fourier coefficients is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ]
+    },
+    "lem-step-functions-on-one-period-are-dense-in-l-one-on-the-torus": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb T := \\mathbb R / \\mathbb Z$ and represent a function on\n$\\mathbb T$ by a one-periodic function on $\\mathbb R$.\n\nFor $k \\in \\mathbb Z$, define the $k$-th character\n$e_k(x) := e^{2\\pi i kx}$.\n\nIf $f$ is integrable on one period, its Fourier coefficients are\n\n$$\\widehat f(k) := \\int_0^1 f(t)e^{-2\\pi i kt}\\,dt \\qquad (k \\in \\mathbb Z).$$\n\nFor $N \\ge 0$, the $N$-th Fourier partial sum of $f$ is\n\n$$S_Nf(x) := \\sum_{|k| \\le N}\\widehat f(k)e_k(x).$$\n\nA **trigonometric polynomial** on $\\mathbb T$ is a finite linear combination of\nthe characters $e_k$.\n\nIf $f,g \\in L^1(\\mathbb T)$, their convolution is the $L^1(\\mathbb T)$ class\ndefined for almost every $x$ by\n\n$$(f*g)(x) := \\int_0^1 f(x-t)g(t)\\,dt,$$\n\nwhere $f$ and $g$ are read as one-periodic representatives. More precisely,\nthe integrand is absolutely integrable for almost every $x$, and the displayed\nformula gives an almost-everywhere-defined integrable function whose class is\nindependent of the chosen representatives. When one factor is bounded, as for\nthe Dirichlet kernels below, the integral exists at every $x$ for which the\nother representative is integrable on one period.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-box-step-functions-are-dense-in-l-p-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$. Finite linear combinations of indicator functions of\nboxes are dense in $L^p(\\mathbb{R}^n)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $g:\\mathbb R\\to\\mathbb R$ by $g(t)=f(t)$ for $0\\le t<1$ and $g(t)=0$ otherwise. Then $g\\in L^1(\\mathbb R)$. By [L2], choose a finite linear combination of interval indicators $u$ with $$\\int_{\\mathbb R}|g(t)-u(t)|\\,dt<\\varepsilon.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Restrict $u$ to $[0,1)$ and call the restriction $s$. Intersecting each interval in $u$ with $[0,1)$ produces only finitely many subintervals, so $s$ is a step function on $[0,1)$. Since $g=f$ on $[0,1)$, $$\\int_0^1 |f(t)-s(t)|\\,dt=\\int_0^1 |g(t)-u(t)|\\,dt\\le\\int_{\\mathbb R}|g(t)-u(t)|\\,dt<\\varepsilon.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 is exactly the claimed density statement on one period.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Step functions on one period are dense in L^1 on the torus does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Step functions on one period are dense in L^1 on the torus has no free numeric or denominator-sensitive zero case beyond the hypotheses already handled in the written proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Step functions on one period are dense in L^1 on the torus has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Step functions on one period are dense in L^1 on the torus has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Step functions on one period are dense in L^1 on the torus is not an endpoint-sensitive interval claim outside the cases already handled explicitly in the written proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 makes the only load-bearing choice, namely an L^1(R) approximant supplied by the published density theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Step functions on one period are dense in L^1 on the torus is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step functions on one period are dense in L^1 on the torus is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ]
+    },
+    "thm-riemann-lebesgue-lemma-for-fourier-coefficients": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb T := \\mathbb R / \\mathbb Z$ and represent a function on\n$\\mathbb T$ by a one-periodic function on $\\mathbb R$.\n\nFor $k \\in \\mathbb Z$, define the $k$-th character\n$e_k(x) := e^{2\\pi i kx}$.\n\nIf $f$ is integrable on one period, its Fourier coefficients are\n\n$$\\widehat f(k) := \\int_0^1 f(t)e^{-2\\pi i kt}\\,dt \\qquad (k \\in \\mathbb Z).$$\n\nFor $N \\ge 0$, the $N$-th Fourier partial sum of $f$ is\n\n$$S_Nf(x) := \\sum_{|k| \\le N}\\widehat f(k)e_k(x).$$\n\nA **trigonometric polynomial** on $\\mathbb T$ is a finite linear combination of\nthe characters $e_k$.\n\nIf $f,g \\in L^1(\\mathbb T)$, their convolution is the $L^1(\\mathbb T)$ class\ndefined for almost every $x$ by\n\n$$(f*g)(x) := \\int_0^1 f(x-t)g(t)\\,dt,$$\n\nwhere $f$ and $g$ are read as one-periodic representatives. More precisely,\nthe integrand is absolutely integrable for almost every $x$, and the displayed\nformula gives an almost-everywhere-defined integrable function whose class is\nindependent of the chosen representatives. When one factor is bounded, as for\nthe Dirichlet kernels below, the integral exists at every $x$ for which the\nother representative is integrable on one period.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-step-functions-have-vanishing-torus-fourier-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $s$ be a step function on $[0,1)$, and extend it one-periodically to\n$\\mathbb R$. Then there is a constant $C \\ge 0$ such that\n\n$$|\\widehat s(k)| \\le \\frac{C}{|k|} \\qquad (k \\ne 0).$$\n\nIn particular, $\\widehat s(k) \\to 0$ as $|k| \\to \\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-step-functions-on-one-period-are-dense-in-l-one-on-the-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f$ be integrable on one period. For every $\\varepsilon>0$ there is a step\nfunction $s$ on $[0,1)$ such that\n\n$$\\int_0^1 |f(t)-s(t)|\\,dt < \\varepsilon.$$\n\nEquivalently, one-period step functions are dense in $L^1(\\mathbb T)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L3], choose a one-period step function $s$ with $$\\int_0^1|f(t)-s(t)|\\,dt<\\varepsilon/3.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L2], choose $K\\ge1$ such that $|k|\\ge K$ implies $|\\widehat s(k)|<\\varepsilon/3$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every integer $k$, [L1, algebra] $$|\\widehat f(k)-\\widehat s(k)|\\le\\int_0^1 |f(t)-s(t)|\\,dt<\\varepsilon/3.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $|k|\\ge K$, then step 2.1 and step 1.2 give $$|\\widehat f(k)|\\le|\\widehat f(k)-\\widehat s(k)|+|\\widehat s(k)|<\\frac{2\\varepsilon}{3}<\\varepsilon.$$",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $\\varepsilon>0$ was arbitrary, step 3.1 is exactly $\\widehat f(k)\\to0$ as $|k|\\to\\infty$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Riemann-Lebesgue lemma for Fourier coefficients does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Riemann-Lebesgue lemma for Fourier coefficients has no free numeric or denominator-sensitive zero case beyond the hypotheses already handled in the written proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Riemann-Lebesgue lemma for Fourier coefficients has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Riemann-Lebesgue lemma for Fourier coefficients has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Riemann-Lebesgue lemma for Fourier coefficients is not an endpoint-sensitive interval claim outside the cases already handled explicitly in the written proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 explicitly choose the step approximation and the tail index K from the cited density and decay lemmas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Riemann-Lebesgue lemma for Fourier coefficients is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Riemann-Lebesgue lemma for Fourier coefficients is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ]
+    },
+    "lem-symmetric-difference-formula-for-fourier-partial-sums": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-fourier-partial-sums-are-dirichlet-convolutions",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a one-period integrable function on $\\mathbb R$. Then for every\n$N \\ge 0$ and every $x \\in \\mathbb R$,\n\n$$S_Nf(x) = \\int_0^1 f(x-t)D_N(t)\\,dt = (f*D_N)(x).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dirichlet-and-fejer-kernels",
+          "source_section": "Definition",
+          "quote": "For $N \\ge 0$, the **Dirichlet kernel** on $\\mathbb T$ is\n\n$$D_N(t) := \\sum_{|k| \\le N} e_k(t).$$\n\nThe **Fejer kernel** is the arithmetic mean\n\n$$F_N(t) := \\frac{1}{N+1}\\sum_{j=0}^N D_j(t).$$\n\nEquivalently,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt),$$\n\nso $D_N$ is real-valued and even. Also\n\n$$\\int_0^1 D_N(t)\\,dt = 1,$$\n\nbecause every nonconstant character has integral $0$ over one period.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "source_section": "Statement",
+          "quote": "For every integer $N \\ge 0$,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt).$$\n\nIf $t \\notin \\mathbb Z$, then\n\n$$D_N(t) = \\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$\n\nIf $m \\in \\mathbb Z$, then $D_N(m)=2N+1$. In particular $D_N$ is even and\n\n$$|D_N(t)| \\le 2N+1 \\qquad (t \\in \\mathbb R),$$\n\nwhile for $t \\notin \\mathbb Z$,\n\n$$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], $$S_Nf(x)-s=\\int_0^1 \\bigl(f(x-t)-s\\bigr)D_N(t)\\,dt,$$ because [L2] gives $\\int_0^1 D_N(t)\\,dt=1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Split the integral in step 1.1 at $1/2$ and substitute $u=1-t$ on $[1/2,1]$. Since $f$ is one-periodic and $D_N(1-u)=D_N(-u)=D_N(u)$ by [L2], this yields $$S_Nf(x)-s=\\int_0^{1/2}\\bigl(f(x-t)+f(x+t)-2s\\bigr)D_N(t)\\,dt.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The first displayed formula is step 2.1 with the two summands reordered. Replacing $D_N(t)$ by the closed form from [L3] gives the second displayed formula.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Symmetric difference formula for Fourier partial sums does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Symmetric difference formula for Fourier partial sums has no free numeric or denominator-sensitive zero case beyond the hypotheses already handled in the written proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Symmetric difference formula for Fourier partial sums has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Symmetric difference formula for Fourier partial sums has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the split at 1/2 and uses periodicity across the seam to pair the two half-intervals correctly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Symmetric difference formula for Fourier partial sums does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Symmetric difference formula for Fourier partial sums is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Symmetric difference formula for Fourier partial sums is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk was the split at 1/2 and the evenness identity for D_N. I reread steps 1.1-3.1: subtracting s uses the integral of D_N equal to 1, the substitution u = 1-t turns the second half of the integral into the reflected term because D_N(1-u) = D_N(-u) = D_N(u), and the closed-form kernel is only inserted after that identity is established."
+      }
+    },
+    "thm-riemann-localisation-principle-for-fourier-series": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "source_section": "Statement",
+          "quote": "For every integer $N \\ge 0$,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt).$$\n\nIf $t \\notin \\mathbb Z$, then\n\n$$D_N(t) = \\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$\n\nIf $m \\in \\mathbb Z$, then $D_N(m)=2N+1$. In particular $D_N$ is even and\n\n$$|D_N(t)| \\le 2N+1 \\qquad (t \\in \\mathbb R),$$\n\nwhile for $t \\notin \\mathbb Z$,\n\n$$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-lebesgue-lemma-for-fourier-coefficients",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f$ be integrable on one period. Then\n\n$$\\widehat f(k)\\to0 \\qquad \\text{as } |k|\\to\\infty.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-symmetric-difference-formula-for-fourier-partial-sums",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a one-period integrable function, let $x,s\\in\\mathbb R$, and let\n$N\\ge0$. Then\n\n$$S_Nf(x)-s=\\int_0^{1/2}\\bigl(f(x+t)+f(x-t)-2s\\bigr)D_N(t)\\,dt.$$\n\nEquivalently,\n\n$$S_Nf(x)-s=\\int_0^{1/2}\\bigl(f(x+t)+f(x-t)-2s\\bigr)\\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}\\,dt.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L3] to $h:=f-g$ with $s=0$. Since $h(y)=0$ for almost every $y\\in(x-\\delta,x+\\delta)$, the integrand vanishes for almost every $t\\in(0,\\delta)$, so $$S_Nh(x)=\\int_\\delta^{1/2}\\bigl(h(x+t)+h(x-t)\\bigr)D_N(t)\\,dt.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define a one-period function $\\psi$ on $[0,1)$ by $$\\psi(t):=\\mathbf 1_{[\\delta,1/2]}(t)\\,\\frac{(h(x+t)+h(x-t))e^{i\\pi t}}{\\sin(\\pi t)}.$$ Because $\\sin(\\pi t)$ is bounded away from $0$ on $[\\delta,1/2]$ and $h\\in L^1(\\mathbb T)$, one has $\\psi\\in L^1(\\mathbb T)$. Using [L1], step 1.1 becomes $$S_Nh(x)=\\operatorname{Im}\\int_0^1 \\psi(t)e^{2\\pi iNt}\\,dt = \\operatorname{Im}\\,\\widehat\\psi(-N).$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2], $\\widehat\\psi(-N)\\to0$ as $N\\to\\infty$. Step 2.1 therefore gives $S_Nh(x)\\to0$. Since $h=f-g$, this is exactly $$S_Nf(x)-S_Ng(x)\\to0.$$",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Riemann localisation principle for Fourier series does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Riemann localisation principle for Fourier series has no free numeric or denominator-sensitive zero case beyond the hypotheses already handled in the written proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Riemann localisation principle for Fourier series has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Riemann localisation principle for Fourier series has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 split at the chosen delta and then work only on the away-from-zero interval [delta, 1/2], where the denominator stays bounded away from 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Riemann localisation principle for Fourier series does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Riemann localisation principle for Fourier series is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Riemann localisation principle for Fourier series is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk was whether almost-everywhere agreement on a neighborhood of x was enough to localize the Fourier sums. I reread steps 1.1-3.1: h = f-g vanishes almost everywhere on the local arc, the remaining tail integral is rewritten as a Fourier coefficient of an L^1 function psi supported away from 0, and the Riemann-Lebesgue lemma then forces S_N h(x) to zero."
+      }
+    },
+    "thm-dini-pointwise-convergence-criterion-for-fourier-series": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "source_section": "Statement",
+          "quote": "For every integer $N \\ge 0$,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt).$$\n\nIf $t \\notin \\mathbb Z$, then\n\n$$D_N(t) = \\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$\n\nIf $m \\in \\mathbb Z$, then $D_N(m)=2N+1$. In particular $D_N$ is even and\n\n$$|D_N(t)| \\le 2N+1 \\qquad (t \\in \\mathbb R),$$\n\nwhile for $t \\notin \\mathbb Z$,\n\n$$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-lebesgue-lemma-for-fourier-coefficients",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f$ be integrable on one period. Then\n\n$$\\widehat f(k)\\to0 \\qquad \\text{as } |k|\\to\\infty.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-symmetric-difference-formula-for-fourier-partial-sums",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a one-period integrable function, let $x,s\\in\\mathbb R$, and let\n$N\\ge0$. Then\n\n$$S_Nf(x)-s=\\int_0^{1/2}\\bigl(f(x+t)+f(x-t)-2s\\bigr)D_N(t)\\,dt.$$\n\nEquivalently,\n\n$$S_Nf(x)-s=\\int_0^{1/2}\\bigl(f(x+t)+f(x-t)-2s\\bigr)\\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}\\,dt.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "source_section": "Statement",
+          "quote": "For $0<x\\le2$, $\\sin x\\ge x-x^3/6\\ge x/3>0$. Also $\\cos2\\le-1/3$. Consequently $\\cos$ is strictly decreasing on $[0,2]$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $a(t):=f(x+t)+f(x-t)-2s$. By [L3], $$S_Nf(x)-s=\\int_0^\\delta a(t)D_N(t)\\,dt+\\int_\\delta^{1/2} a(t)D_N(t)\\,dt.$$",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<t\\le\\delta<1/2$, one has $0<\\pi t<\\pi/2<2$, so [L4] gives $\\sin(\\pi t)\\ge\\pi t/3$. Define $$\\psi_0(t):=\\mathbf 1_{(0,\\delta]}(t)\\,\\frac{a(t)e^{i\\pi t}}{\\sin(\\pi t)}.$$ Then $$|\\psi_0(t)|\\le\\frac{3}{\\pi}\\,\\mathbf 1_{(0,\\delta]}(t)\\frac{|a(t)|}{t},$$ so the hypothesis makes $\\psi_0\\in L^1(\\mathbb T)$. Using [L1], $$\\int_0^\\delta a(t)D_N(t)\\,dt=\\operatorname{Im}\\int_0^1\\psi_0(t)e^{2\\pi iNt}\\,dt=\\operatorname{Im}\\,\\widehat\\psi_0(-N).$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Define $$\\psi_1(t):=\\mathbf 1_{[\\delta,1/2]}(t)\\,\\frac{a(t)e^{i\\pi t}}{\\sin(\\pi t)}.$$ Since $\\sin(\\pi t)$ is bounded away from $0$ on $[\\delta,1/2]$ and $a\\in L^1([\\delta,1/2])$, one has $\\psi_1\\in L^1(\\mathbb T)$. Again [L1] turns the second integral in step 1.1 into $$\\int_\\delta^{1/2} a(t)D_N(t)\\,dt=\\operatorname{Im}\\,\\widehat\\psi_1(-N).$$",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2], both $\\widehat\\psi_0(-N)$ and $\\widehat\\psi_1(-N)$ tend to $0$. Steps 2.1 and 2.2 therefore make both integrals in step 1.1 tend to $0$. Hence $S_Nf(x)-s\\to0$, or equivalently $S_Nf(x)\\to s$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "step 2.2",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Dini pointwise convergence criterion for Fourier series does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the singular regime t down to 0 by comparing sin(pi t) with t and using the Dini integral."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Dini pointwise convergence criterion for Fourier series has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Dini pointwise convergence criterion for Fourier series has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 separately treats the compact away-from-zero interval [delta, 1/2]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Dini pointwise convergence criterion for Fourier series does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Dini pointwise convergence criterion for Fourier series is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Dini pointwise convergence criterion for Fourier series is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Critical risk was the near-zero integrability of a(t)/t and the split between the local and far parts of the kernel integral. I reread steps 1.1-3.1: the current proof builds psi_0 and psi_1 separately, uses sin(pi t) >= pi t / 3 on (0,delta], checks both functions are in L^1, and then applies the Riemann-Lebesgue lemma to each part, so the Dini criterion is fully justified."
+      }
+    },
+    "cor-local-holder-regularity-implies-fourier-convergence-at-a-point": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-dini-pointwise-convergence-criterion-for-fourier-series",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f$ be a one-period integrable function, let $x,s\\in\\mathbb R$, and assume\nthere is $\\delta\\in(0,1/2)$ such that\n\n$$\\int_0^\\delta \\frac{|f(x+t)+f(x-t)-2s|}{t}\\,dt<\\infty.$$\n\nThen\n\n$$S_Nf(x)\\to s \\qquad \\text{as } N\\to\\infty.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $0<t<\\delta$, the triangle inequality and the hypotheses give $$|f(x+t)+f(x-t)-2f(x)|\\le |f(x+t)-f(x)|+|f(x-t)-f(x)|\\le2Ct^\\alpha.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $$\\int_0^\\delta \\frac{|f(x+t)+f(x-t)-2f(x)|}{t}\\,dt\\le2C\\int_0^\\delta t^{\\alpha-1}\\,dt=\\frac{2C}{\\alpha}\\delta^\\alpha<\\infty.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [L1] with $s=f(x)$ and using step 2.1 gives $S_Nf(x)\\to f(x)$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Local Holder regularity implies Fourier convergence at a point does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the only singular boundary, the integral near t = 0, by integrating t^(alpha-1) with alpha > 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Local Holder regularity implies Fourier convergence at a point has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Local Holder regularity implies Fourier convergence at a point has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Local Holder regularity implies Fourier convergence at a point is not an endpoint-sensitive interval claim outside the cases already handled explicitly in the written proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Local Holder regularity implies Fourier convergence at a point does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Local Holder regularity implies Fourier convergence at a point is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Local Holder regularity implies Fourier convergence at a point is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ]
+    },
+    "lem-bounded-variation-gives-one-sided-dirichlet-integrability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-jordan-decomposition-for-bv-functions",
+          "source_section": "Statement",
+          "quote": "A real function $f$ on $[a,b]$ has bounded variation if and only if it is a\ndifference of two nondecreasing functions. If $f(a)=0$, the canonical normalized\ndecomposition is $f=P_f-N_f$. More generally $f=f(a)+P_f-N_f$.\n\nIt is minimal: if $f=f(a)+g-h$ with nondecreasing $g,h$ and $g(a)=h(a)=0$, then\n$P_f(x)\\le g(x)$ and $N_f(x)\\le h(x)$ for every $x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-variation-function-and-jordan-identities",
+          "source_section": "Statement",
+          "quote": "For a bounded-variation function $f:[a,b]\\to\\mathbb R$, the functions $P_f$ and\n$N_f$ are nondecreasing and\n\n$$f(x)=f(a)+P_f(x)-N_f(x),\\qquad V_f(x)=P_f(x)+N_f(x).$$\n\nBoth $P_f(a)$ and $N_f(a)$ are $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "source_section": "Statement",
+          "quote": "For every integer $N \\ge 0$,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt).$$\n\nIf $t \\notin \\mathbb Z$, then\n\n$$D_N(t) = \\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$\n\nIf $m \\in \\mathbb Z$, then $D_N(m)=2N+1$. In particular $D_N$ is even and\n\n$$|D_N(t)| \\le 2N+1 \\qquad (t \\in \\mathbb R),$$\n\nwhile for $t \\notin \\mathbb Z$,\n\n$$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-second-mean-value-theorem-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be monotone, that is\nnondecreasing or nonincreasing ([[def-monotone-function]]), and let\n$g : [a,b] \\to \\mathbb{R}$ be integrable ([[def-darboux-integral]]). Then $fg$ is\nintegrable and there is $\\xi \\in [a,b]$ with\n\n$$\\int_a^b f\\,g \\;=\\; f(a)\\int_a^{\\xi} g \\;+\\; f(b)\\int_{\\xi}^{b} g .$$\n\n**No differentiability and no continuity of $f$ is assumed.** A monotone function\nmay be discontinuous at infinitely many points and is still integrable\n([[thm-monotone-implies-integrable]]), and the proof below uses only that its\nincrements over the subintervals of a partition all have the same sign. This is\nthe general form; the version usually proved by integration by parts needs $f$\ncontinuously differentiable, which is a strictly stronger hypothesis.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "source_section": "Statement",
+          "quote": "For $0<x\\le2$, $\\sin x\\ge x-x^3/6\\ge x/3>0$. Also $\\cos2\\le-1/3$. Consequently $\\cos$ is strictly decreasing on $[0,2]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-riemann-lebesgue-lemma-for-fourier-coefficients",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f$ be integrable on one period. Then\n\n$$\\widehat f(k)\\to0 \\qquad \\text{as } |k|\\to\\infty.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], write $u=P_u-N_u$ with $P_u(0)=N_u(0)=0$ and $P_u,N_u$ nondecreasing. Let $$p:=\\inf_{0<t\\le\\delta}P_u(t)=\\lim_{t\\downarrow0}P_u(t), \\qquad q:=\\inf_{0<t\\le\\delta}N_u(t)=\\lim_{t\\downarrow0}N_u(t).$$ Since $u(t)\\to0$, one has $p-q=0$. If $p=q>0$, define $\\widetilde P(0)=\\widetilde N(0)=0$ and $\\widetilde P(t)=P_u(t)-p$, $\\widetilde N(t)=N_u(t)-p$ for $t>0$. Then $\\widetilde P,\\widetilde N$ are again nondecreasing, nonnegative, normalized, and satisfy $u=\\widetilde P-\\widetilde N$, but $\\widetilde P(t)<P_u(t)$ for every $t>0$, contradicting the minimality in [L1]. Hence $p=q=0$, so $$P_u(t)\\to0, \\qquad N_u(t)\\to0, \\qquad \\operatorname{Var}_{[0,t]}(u)=P_u(t)+N_u(t)\\to0$$ as $t\\downarrow0$ by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $0\\le t\\le\\delta$, define $$H_N(t):=\\int_0^t D_N(s)\\,ds.$$ Using [L3] and the change of variables $y=(2N+1)\\pi s$, $$H_N(t)=\\int_0^{(2N+1)\\pi t}\\sin y\\cdot g_N(y)\\,dy,$$ where $$g_N(y):=\\frac{1}{(2N+1)\\pi\\sin(y/(2N+1))}.$$ If $(2N+1)\\pi t\\le1$, then $0<y/(2N+1)\\le1<2$, so [L5] and $|\\sin y|\\le y$ give $|\\sin y\\,g_N(y)|\\le 3/\\pi$ on $[0,(2N+1)\\pi t]$, hence $|H_N(t)|\\le3/\\pi$. If $(2N+1)\\pi t>1$, the same estimate controls the part on $[0,1]$, while on $[1,(2N+1)\\pi t]$ the function $g_N$ is positive and decreasing because $0<y/(2N+1)\\le\\pi/2$. Bonnet's theorem [L4] therefore gives a point $\\xi$ with $$\\int_1^{(2N+1)\\pi t}\\sin y\\,g_N(y)\\,dy=g_N(1)\\int_1^\\xi\\sin y\\,dy+g_N((2N+1)\\pi t)\\int_\\xi^{(2N+1)\\pi t}\\sin y\\,dy.$$ The absolute value is at most $$2g_N(1)+2g_N((2N+1)\\pi t)\\le4g_N(1)\\le\\frac{12}{\\pi}$$ by monotonicity of $g_N$ and [L5]. Thus $$|H_N(t)|\\le\\frac{15}{\\pi} \\qquad (0\\le t\\le\\delta,\\ N\\ge0).$$",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $\\varepsilon>0$. By step 1.1, choose $\\eta\\in(0,\\delta)$ such that $$\\operatorname{Var}_{[0,\\eta]}(u)<\\frac{\\pi\\varepsilon}{60}.$$ Applying [L4] to the monotone functions $P_u$ and $N_u$ on $[0,\\eta]$, and using $P_u(0)=N_u(0)=0$, step 1.2 yields $$\\left|\\int_0^\\eta P_u(t)D_N(t)\\,dt\\right|\\le\\frac{30}{\\pi}P_u(\\eta), \\qquad \\left|\\int_0^\\eta N_u(t)D_N(t)\\,dt\\right|\\le\\frac{30}{\\pi}N_u(\\eta).$$ Therefore $$\\left|\\int_0^\\eta u(t)D_N(t)\\,dt\\right|\\le\\frac{30}{\\pi}\\bigl(P_u(\\eta)+N_u(\\eta)\\bigr)=\\frac{30}{\\pi}\\operatorname{Var}_{[0,\\eta]}(u)<\\frac{\\varepsilon}{2}.$$",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $[\\eta,\\delta]$, define $$\\psi(t):=\\mathbf 1_{[\\eta,\\delta]}(t)\\,\\frac{u(t)e^{i\\pi t}}{\\sin(\\pi t)}.$$ Because $\\sin(\\pi t)$ is bounded away from $0$ on $[\\eta,\\delta]$ and $u$ is bounded on the compact interval $[\\eta,\\delta]$, one has $\\psi\\in L^1(\\mathbb T)$. By [L3], $$\\int_\\eta^\\delta u(t)D_N(t)\\,dt=\\operatorname{Im}\\int_0^1\\psi(t)e^{2\\pi iNt}\\,dt=\\operatorname{Im}\\,\\widehat\\psi(-N).$$",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [L6], $\\widehat\\psi(-N)\\to0$. So step 3.1 gives $$\\int_\\eta^\\delta u(t)D_N(t)\\,dt\\to0.$$ Choose $N_0$ such that the absolute value of this integral is below $\\varepsilon/2$ for every $N\\ge N_0$. Combining with step 2.1 shows that, for $N\\ge N_0$, $$\\left|\\int_0^\\delta u(t)D_N(t)\\,dt\\right|<\\varepsilon.$$ Since $D_N(t)=\\sin((2N+1)\\pi t)/\\sin(\\pi t)$ on $(0,\\delta]$ by [L3], the stated limit follows.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "L6",
+            "step 2.1",
+            "step 3.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Bounded variation gives one-sided Dirichlet integrability does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 control the near-zero interval through the canonical Jordan decomposition and the shrinking variation tail."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Bounded variation gives one-sided Dirichlet integrability has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Bounded variation gives one-sided Dirichlet integrability has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 handle the remaining compact interval [eta, delta] by converting it to an L^1 Fourier-coefficient term."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Bounded variation gives one-sided Dirichlet integrability does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Bounded variation gives one-sided Dirichlet integrability is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Bounded variation gives one-sided Dirichlet integrability is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Critical risk was the Bonnet mean-value step and the uniform primitive bound for H_N. I reread the repaired steps 1.2-4.1: the current file keeps both endpoint terms from Bonnet's theorem, gets the coarser but valid 15/pi bound for H_N, and then scales the variation estimate accordingly before invoking Riemann-Lebesgue on the away-from-zero part, so the convergence claim now has a licensed proof."
+      }
+    },
+    "thm-dirichlet-jordan-pointwise-convergence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-symmetric-difference-formula-for-fourier-partial-sums",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a one-period integrable function, let $x,s\\in\\mathbb R$, and let\n$N\\ge0$. Then\n\n$$S_Nf(x)-s=\\int_0^{1/2}\\bigl(f(x+t)+f(x-t)-2s\\bigr)D_N(t)\\,dt.$$\n\nEquivalently,\n\n$$S_Nf(x)-s=\\int_0^{1/2}\\bigl(f(x+t)+f(x-t)-2s\\bigr)\\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}\\,dt.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-bounded-variation-gives-one-sided-dirichlet-integrability",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $0<\\delta<1/2$, and let $u:[0,\\delta]\\to\\mathbb R$ have bounded variation.\nAssume that $u(0)=0$ and $\\lim_{t\\downarrow0}u(t)=0$. Then\n\n$$\\int_0^\\delta u(t)\\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}\\,dt \\to 0 \\qquad \\text{as } N\\to\\infty.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-bv-discontinuities-are-countable-and-of-first-kind",
+          "source_section": "Statement",
+          "quote": "If $f:[a,b]\\to\\mathbb R$ has bounded variation, every well-posed one-sided limit\nof $f$ exists. Consequently every discontinuity is of the first kind, and the\nset of discontinuities is at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-riemann-lebesgue-lemma-for-fourier-coefficients",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f$ be integrable on one period. Then\n\n$$\\widehat f(k)\\to0 \\qquad \\text{as } |k|\\to\\infty.$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "source_section": "Statement",
+          "quote": "For every integer $N \\ge 0$,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt).$$\n\nIf $t \\notin \\mathbb Z$, then\n\n$$D_N(t) = \\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$\n\nIf $m \\in \\mathbb Z$, then $D_N(m)=2N+1$. In particular $D_N$ is even and\n\n$$|D_N(t)| \\le 2N+1 \\qquad (t \\in \\mathbb R),$$\n\nwhile for $t \\notin \\mathbb Z$,\n\n$$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L3], the one-sided limits $f(x+)$ and $f(x-)$ exist. Put $$s:=\\frac{f(x+)+f(x-)}{2}.$$ Choose $\\delta\\in(0,1/2)$ and define, on $[0,\\delta]$, $$u_+(0):=0,\\qquad u_-(0):=0,$$ $$u_+(t):=f(x+t)-f(x+) \\quad\\text{and}\\quad u_-(t):=f(x-t)-f(x-) \\qquad(0<t\\le\\delta).$$ Because translations and reflections preserve bounded variation on a compact interval, and changing a function at one point preserves bounded variation, both $u_+$ and $u_-$ have bounded variation on $[0,\\delta]$. The cited one-sided-limit result [L3] gives $u_\\pm(t)\\to0$ as $t\\downarrow0$, and by construction $u_\\pm(0)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] with the value $s$ from step 1.1 yields $$S_Nf(x)-s=\\int_0^\\delta \\bigl(u_+(t)+u_-(t)\\bigr)D_N(t)\\,dt+\\int_\\delta^{1/2}\\bigl(f(x+t)+f(x-t)-2s\\bigr)D_N(t)\\,dt.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2] applied to $u_+$ and to $u_-$, and then using [L5], $$\\int_0^\\delta u_+(t)D_N(t)\\,dt\\to0, \\qquad \\int_0^\\delta u_-(t)D_N(t)\\,dt\\to0.$$ Hence the first integral in step 2.1 tends to $0$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L5",
+            "step 1.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Define $$\\psi(t):=\\mathbf 1_{[\\delta,1/2]}(t)\\,\\frac{(f(x+t)+f(x-t)-2s)e^{i\\pi t}}{\\sin(\\pi t)}.$$ Since $\\sin(\\pi t)$ is bounded away from $0$ on $[\\delta,1/2]$ and the numerator is integrable there, $\\psi\\in L^1(\\mathbb T)$. By [L5], the second integral in step 2.1 equals $$\\operatorname{Im}\\int_0^1\\psi(t)e^{2\\pi iNt}\\,dt=\\operatorname{Im}\\,\\widehat\\psi(-N),$$ so it tends to $0$ by [L4].",
+          "step": "3.2",
+          "inputs": [
+            "L4",
+            "L5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 3.1 and 3.2 make both integrals in step 2.1 tend to $0$. Therefore $S_Nf(x)-s\\to0$, which is exactly $$S_Nf(x)\\to\\frac{f(x+)+f(x-)}2.$$",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Dirichlet-Jordan pointwise convergence does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 discharges the singular t = 0 contribution by applying the one-sided Dirichlet lemma to the right and left increment functions."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Dirichlet-Jordan pointwise convergence has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Dirichlet-Jordan pointwise convergence has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.2 handles the interval [delta, 1/2], so the periodic seam and the away-from-zero endpoint are both treated explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Dirichlet-Jordan pointwise convergence does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Dirichlet-Jordan pointwise convergence is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Dirichlet-Jordan pointwise convergence is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Critical risk was the endpoint value u_+(0) = u_-(0) = 0 required by the integrability lemma. I reread the repaired step 1.1 and the rest of the proof: the file now sets those endpoint values explicitly, notes that changing one point preserves bounded variation, and then uses the local lemma on [0,delta] plus the Fourier-coefficient tail estimate on [delta,1/2], so the midpoint convergence theorem is sound."
+      }
+    },
+    "cor-piecewise-c-one-fourier-series-converges-to-midpoint-values": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-dirichlet-jordan-pointwise-convergence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f:\\mathbb R\\to\\mathbb R$ be one-periodic and of bounded variation on one\nperiod. Then for every $x\\in\\mathbb R$,\n\n$$S_Nf(x)\\to\\frac{f(x+)+f(x-)}{2} \\qquad \\text{as } N\\to\\infty.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-c1-lipschitz-ac-bv-hierarchy",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$.\n\n1. If $f$ is continuous on $[a,b]$, differentiable on $(a,b)$, and $f'$ extends\n   continuously to $[a,b]$, then $f$ is Lipschitz.\n2. Every Lipschitz $f$ is absolutely continuous.\n3. Every absolutely continuous $f$ is continuous and has bounded variation.\n\nThus, with $C^1$ understood in the endpoint-extension sense of claim 1,\n$C^1\\subseteq\\mathrm{Lipschitz}\\subseteq AC\\subseteq C\\cap BV$ on a compact\ninterval.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $j$, let $f_j$ denote the $C^1$ extension of $f|_{(x_{j-1},x_j)}$ to $[x_{j-1},x_j]$. By [L2], each $f_j$ has bounded variation on its interval. Summing those finitely many variations and adding the finitely many endpoint jumps shows that the one-period representative of $f$ has bounded variation on $[0,1]$, including the periodic seam between $1-$ and $0+$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L1] to that one-period bounded-variation representative. It yields $$S_Nf(x)\\to\\frac{f(x+)+f(x-)}2$$ for every $x\\in\\mathbb R$, which is the claimed midpoint-value convergence.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Piecewise C^1 Fourier series converges to midpoint values does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Piecewise C^1 Fourier series converges to midpoint values has no free numeric or denominator-sensitive zero case beyond the hypotheses already handled in the written proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Piecewise C^1 Fourier series converges to midpoint values has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Piecewise C^1 Fourier series converges to midpoint values has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly includes the periodic seam among the finitely many junctions whose jumps are added to the bounded-variation ledger."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Piecewise C^1 Fourier series converges to midpoint values does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Piecewise C^1 Fourier series converges to midpoint values is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Piecewise C^1 Fourier series converges to midpoint values is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk was the periodic seam and the finite sum of local variations. I reread steps 1.1-2.1: each C^1 branch has bounded variation on its closed interval, the proof explicitly adds the finitely many endpoint jumps including the 1- to 0+ seam, and then applies the repaired Dirichlet-Jordan theorem to obtain the midpoint-value convergence."
+      }
+    },
+    "ex-dirichlet-kernel-at-zero-and-away-from-zero": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dirichlet-and-fejer-kernels",
+          "source_section": "Definition",
+          "quote": "For $N \\ge 0$, the **Dirichlet kernel** on $\\mathbb T$ is\n\n$$D_N(t) := \\sum_{|k| \\le N} e_k(t).$$\n\nThe **Fejer kernel** is the arithmetic mean\n\n$$F_N(t) := \\frac{1}{N+1}\\sum_{j=0}^N D_j(t).$$\n\nEquivalently,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt),$$\n\nso $D_N$ is real-valued and even. Also\n\n$$\\int_0^1 D_N(t)\\,dt = 1,$$\n\nbecause every nonconstant character has integral $0$ over one period.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "source_section": "Statement",
+          "quote": "For every integer $N \\ge 0$,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt).$$\n\nIf $t \\notin \\mathbb Z$, then\n\n$$D_N(t) = \\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$\n\nIf $m \\in \\mathbb Z$, then $D_N(m)=2N+1$. In particular $D_N$ is even and\n\n$$|D_N(t)| \\le 2N+1 \\qquad (t \\in \\mathbb R),$$\n\nwhile for $t \\notin \\mathbb Z$,\n\n$$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $t=0$, [L1] gives $$D_N(0)=\\sum_{|k|\\le N} e_k(0)=\\sum_{|k|\\le N}1=2N+1,$$ which agrees with the removable value recorded in [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The numbers $(4N+2)^{-1}$ and $3(4N+2)^{-1}$ are not integers, so [L2] applies. Since $(2N+1)\\pi/(4N+2)=\\pi/2$ and $3(2N+1)\\pi/(4N+2)=3\\pi/2$, the numerator is respectively $1$ and $-1$. The denominators are positive because their angles lie in $(0,\\pi)$. Hence the two displayed signs follow.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Dirichlet kernel at zero and away from zero does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 records the removable value D_N(0) = 2N + 1 before step 2.1 evaluates the away-from-zero sample points."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Dirichlet kernel at zero and away from zero has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Dirichlet kernel at zero and away from zero has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Dirichlet kernel at zero and away from zero is not an endpoint-sensitive interval claim outside the cases already handled explicitly in the written proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Dirichlet kernel at zero and away from zero does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Dirichlet kernel at zero and away from zero is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Dirichlet kernel at zero and away from zero is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ]
+    },
+    "thm-lebesgue-constants-grow-logarithmically": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "source_section": "Statement",
+          "quote": "For every integer $N \\ge 0$,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt).$$\n\nIf $t \\notin \\mathbb Z$, then\n\n$$D_N(t) = \\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$\n\nIf $m \\in \\mathbb Z$, then $D_N(m)=2N+1$. In particular $D_N$ is even and\n\n$$|D_N(t)| \\le 2N+1 \\qquad (t \\in \\mathbb R),$$\n\nwhile for $t \\notin \\mathbb Z$,\n\n$$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "source_section": "Statement",
+          "quote": "For $0<x\\le2$, $\\sin x\\ge x-x^3/6\\ge x/3>0$. Also $\\cos2\\le-1/3$. Consequently $\\cos$ is strictly decreasing on $[0,2]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $0<t<1$, [L1] gives $D_N(1-t)=D_N(t)$, so $$\\int_0^1 |D_N(t)|\\,dt=2\\int_0^{1/2}|D_N(t)|\\,dt.$$ Split the last integral at $1/(2N+1)$. On $(0,1/(2N+1)]$, [L1] and the bound $|D_N(t)|\\le2N+1$ give a contribution at most $1$. On $[1/(2N+1),1/2]$, one has $0<\\pi t\\le\\pi/2<2$, so [L2] implies $\\sin(\\pi t)\\ge\\pi t/3$. Using [L1], $$|D_N(t)|\\le\\frac{1}{\\sin(\\pi t)}\\le\\frac{3}{\\pi t}.$$ Therefore $$\\int_0^1 |D_N(t)|\\,dt\\le2+\\frac{6}{\\pi}\\int_{1/(2N+1)}^{1/2}\\frac{dt}{t}\\le C\\log(N+1)$$ for a universal $C$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $m=0,\\dots,N-1$, let $$J_m:=\\left[\\frac{m+1/6}{2N+1},\\frac{m+5/6}{2N+1}\\right].$$ These intervals lie in $(0,1/2)$ and are disjoint. If $t\\in J_m$, then $(2N+1)\\pi t\\in[(m+1/6)\\pi,(m+5/6)\\pi]$, so $|\\sin((2N+1)\\pi t)|\\ge1/2$. Also $\\sin(\\pi t)\\le\\pi t$. Hence [L1] gives $$|D_N(t)|\\ge\\frac{1}{2\\pi t} \\qquad (t\\in J_m).$$",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integrating the lower bound from step 1.2 over each $J_m$ and summing yields $$\\int_0^{1/2}|D_N(t)|\\,dt\\ge\\frac{1}{2\\pi}\\sum_{m=0}^{N-1} \\int_{J_m}\\frac{dt}{t}=\\frac{1}{2\\pi}\\sum_{m=0}^{N-1} \\log\\!\\left(\\frac{m+5/6}{m+1/6}\\right).$$ Since $$\\log\\!\\left(\\frac{m+5/6}{m+1/6}\\right)\\ge\\frac{2/3}{m+5/6}\\ge\\frac{2}{3(m+1)},$$ one gets $$\\int_0^{1/2}|D_N(t)|\\,dt\\ge\\frac{1}{3\\pi}\\sum_{m=0}^{N-1}\\frac{1}{m+1}\\ge\\frac{1}{3\\pi}\\int_1^{N+1}\\frac{dt}{t}=\\frac{1}{3\\pi}\\log(N+1).$$ Using step 1.1 once more, $$\\int_0^1 |D_N(t)|\\,dt\\ge\\frac{2}{3\\pi}\\log(N+1).$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 give the two-sided logarithmic bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Lebesgue constants grow logarithmically does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 isolates the neighborhood (0, 1/(2N+1)] so the singularity at 0 contributes only a bounded amount."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Lebesgue constants grow logarithmically has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Lebesgue constants grow logarithmically has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 split the half-period at both 1/(2N+1) and 1/2, and the lower-bound intervals J_m stay strictly inside that range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Lebesgue constants grow logarithmically does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Lebesgue constants grow logarithmically is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Lebesgue constants grow logarithmically is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk was the lower-bound interval family near 1/2. I reread steps 1.1-3.1: the repaired proof now indexes J_m with m = 0,...,N-1, so every interval lies inside (0,1/2), the kernel lower bound on each J_m is valid, and the harmonic-sum estimate gives the stated logarithmic lower bound without crossing the forbidden endpoint."
+      }
+    },
+    "ex-fourier-partial-sums-of-the-sawtooth": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb T := \\mathbb R / \\mathbb Z$ and represent a function on\n$\\mathbb T$ by a one-periodic function on $\\mathbb R$.\n\nFor $k \\in \\mathbb Z$, define the $k$-th character\n$e_k(x) := e^{2\\pi i kx}$.\n\nIf $f$ is integrable on one period, its Fourier coefficients are\n\n$$\\widehat f(k) := \\int_0^1 f(t)e^{-2\\pi i kt}\\,dt \\qquad (k \\in \\mathbb Z).$$\n\nFor $N \\ge 0$, the $N$-th Fourier partial sum of $f$ is\n\n$$S_Nf(x) := \\sum_{|k| \\le N}\\widehat f(k)e_k(x).$$\n\nA **trigonometric polynomial** on $\\mathbb T$ is a finite linear combination of\nthe characters $e_k$.\n\nIf $f,g \\in L^1(\\mathbb T)$, their convolution is the $L^1(\\mathbb T)$ class\ndefined for almost every $x$ by\n\n$$(f*g)(x) := \\int_0^1 f(x-t)g(t)\\,dt,$$\n\nwhere $f$ and $g$ are read as one-periodic representatives. More precisely,\nthe integrand is absolutely integrable for almost every $x$, and the displayed\nformula gives an almost-everywhere-defined integrable function whose class is\nindependent of the chosen representatives. When one factor is bounded, as for\nthe Dirichlet kernels below, the integral exists at every $x$ for which the\nother representative is integrable on one period.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-dirichlet-jordan-pointwise-convergence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f:\\mathbb R\\to\\mathbb R$ be one-periodic and of bounded variation on one\nperiod. Then for every $x\\in\\mathbb R$,\n\n$$S_Nf(x)\\to\\frac{f(x+)+f(x-)}{2} \\qquad \\text{as } N\\to\\infty.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\int_0^1 (x-\\tfrac12)\\,dx=0$, [L1] gives $\\widehat f(0)=0$. For $k\\ne0$, direct integration gives $$\\widehat f(k)=\\int_0^1 \\left(x-\\frac12\\right)e^{-2\\pi ikx}\\,dx=-\\frac{1}{2\\pi ik}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Insert the coefficients from step 1.1 into the partial-sum formula [L1]. Pairing the $k$ and $-k$ terms gives $$S_Nf(x)=-\\sum_{k=1}^N \\frac{\\sin(2\\pi kx)}{\\pi k}.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The sawtooth is piecewise $C^1$, hence of bounded variation on one period. If $x\\notin\\mathbb{Z}$, choose the unique integer $m$ with $y:=x-m\\in(0,1)$. Because both $f$ and its Fourier partial sums are one-periodic, one has $S_Nf(x)=S_Nf(y)$ and $f(x)=f(y)=y-\\tfrac12$. The one-sided limits at $y$ therefore both equal $f(x)$, so [L2] gives $S_Nf(x)\\to f(x)$. At an integer $x$, the one-sided limits are $-1/2$ and $1/2$, whose midpoint is $0$, so [L2] gives $S_Nf(x)\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums of the sawtooth does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 separates the k = 0 Fourier coefficient from the k != 0 formula before the harmonic expansion is formed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums of the sawtooth has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums of the sawtooth has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 separately identifies the noninteger points and the integer seam, where the midpoint value is 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums of the sawtooth does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums of the sawtooth is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Fourier partial sums of the sawtooth is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk was the old false claim S_N f(x) -> x - 1/2 for every noninteger x, which ignored one-periodicity. I reread steps 1.1-3.1: the current file now reduces a noninteger x to its representative y in (0,1), uses periodicity of both f and S_N f, and concludes that the limit is f(x), while the integer case still converges to 0."
+      }
+    },
+    "ex-localisation-for-functions-equal-on-an-arc": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-localisation-principle-for-fourier-series",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f$ and $g$ be one-period integrable functions, and let $x\\in\\mathbb R$.\nAssume there is $\\delta\\in(0,1/2)$ such that $f(y)=g(y)$ for almost every\n$y\\in(x-\\delta,x+\\delta)$. Then\n\n$$S_Nf(x)-S_Ng(x)\\to0 \\qquad \\text{as } N\\to\\infty.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the interval $(-1/8,1/8)$ modulo $1$, the indicator $g$ vanishes, so $f=g=0$ there. Thus the hypothesis of [L1] holds at $x=0$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] at $x=0$ gives $S_Ng(0)-S_Nf(0)\\to0$. But every Fourier coefficient of the zero function is $0$, so $S_Nf(0)=0$ for all $N$. Therefore $S_Ng(0)\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Localisation for functions equal on an arc does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses x = 0 and verifies equality on a neighborhood of that point before step 2.1 applies localisation there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Localisation for functions equal on an arc has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Localisation for functions equal on an arc has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Localisation for functions equal on an arc is not an endpoint-sensitive interval claim outside the cases already handled explicitly in the written proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Localisation for functions equal on an arc does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Localisation for functions equal on an arc is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Localisation for functions equal on an arc is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk was whether the local agreement hypothesis at x = 0 really held for the chosen functions. I reread steps 1.1-2.1: on the arc (-1/8,1/8) mod 1 both f and g vanish, so the localization theorem applies directly with the zero function as comparison, and the conclusion S_N g(0) -> 0 follows from the trivial Fourier sums of f = 0."
+      }
+    },
+    "cex-continuity-alone-does-not-satisfy-a-dini-modulus": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-dini-pointwise-convergence-criterion-for-fourier-series",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f$ be a one-period integrable function, let $x,s\\in\\mathbb R$, and assume\nthere is $\\delta\\in(0,1/2)$ such that\n\n$$\\int_0^\\delta \\frac{|f(x+t)+f(x-t)-2s|}{t}\\,dt<\\infty.$$\n\nThen\n\n$$S_Nf(x)\\to s \\qquad \\text{as } N\\to\\infty.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $d(x,\\mathbb Z):=\\min_{m\\in\\mathbb Z}|x-m|$ and define the one-periodic function $$f(x):=\\begin{cases} 0, & d(x,\\mathbb Z)=0,\\\\ \\displaystyle\\frac{1}{\\log(e/d(x,\\mathbb Z))}, & d(x,\\mathbb Z)>0. \\end{cases}$$ Because $d(x,\\mathbb Z)\\to0$ exactly when $x$ approaches an integer and $1/\\log(e/r)\\to0$ as $r\\downarrow0$, the function $f$ is continuous on $\\mathbb T$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $x=0$ one has $f(0)=0$ and, for $0<t\\le1/4$, $d(t,\\mathbb Z)=d(-t,\\mathbb Z)=t$. Hence $$f(t)+f(-t)-2f(0)=\\frac{2}{\\log(e/t)}.$$ Therefore $$\\int_0^{1/4}\\frac{|f(t)+f(-t)-2f(0)|}{t}\\,dt=2\\int_0^{1/4}\\frac{dt}{t\\log(e/t)}=\\infty,$$ because the change of variables $u=\\log(e/t)$ turns the integral into $\\int_{\\log(4e)}^\\infty du/u$. So the hypothesis in [L1] fails at $x=0$: $f$ is continuous but does not satisfy the Dini condition there.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Continuity alone does not satisfy a Dini modulus does not quantify over an indexed family, union, or empty-domain construction whose empty case would need a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the Dini integral exactly at x = 0, where the logarithmic modulus produces the divergent 1/(t log(e/t)) integral."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Continuity alone does not satisfy a Dini modulus has no distinct singleton, first-index, or value-1 branch separate from the general argument on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Continuity alone does not satisfy a Dini modulus has no extra collapsed configuration beyond the hypotheses already stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Continuity alone does not satisfy a Dini modulus is not an endpoint-sensitive interval claim outside the cases already handled explicitly in the written proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Continuity alone does not satisfy a Dini modulus does not rely on an unstated arbitrary choice from a merely nonempty family beyond the choices already recorded in its cited steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Continuity alone does not satisfy a Dini modulus is not stated as a biconditional, so there is no separate forward-direction obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Continuity alone does not satisfy a Dini modulus is not stated as a biconditional, so there is no separate reverse-direction obligation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk was the explicit divergence of the Dini integral despite continuity of the function. I reread steps 1.1-2.1: the one-periodic model f(x) = 1/log(e/d(x,Z)) is continuous at the seam, but at x = 0 the numerator behaves like 2/log(e/t), and the substitution u = log(e/t) turns the Dini integral into an integral of du/u that diverges, so the counterexample is still valid."
+      }
+    }
+  }
+}

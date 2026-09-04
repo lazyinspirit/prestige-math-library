@@ -31,9 +31,7 @@ sources:
 
 The Baumslag-Solitar group
 
-$$
-\operatorname{BS}(2,3)=\langle a,t\mid t^{-1}a^2t=a^3\rangle
-$$
+$$ \operatorname{BS}(2,3)=\langle a,t\mid t^{-1}a^2t=a^3\rangle $$
 
 is a standard example whose canonical map to its profinite completion is not
 injective.

@@ -1,0 +1,2658 @@
+{
+  "version": 1,
+  "level": "frontier-29",
+  "note": "Step-5 authoring contract for frontier-29 batch 14 on Tuesday, September 1, 2026.",
+  "scope": [
+    "lem-sheaf-section-over-empty-set-terminal",
+    "thm-sheaf-equalizer-condition",
+    "lem-sheaf-condition-check-on-basis",
+    "lem-forgetful-sheaf-compatibility",
+    "lem-germ-equivalence-relation",
+    "lem-section-zero-if-all-germs-zero",
+    "lem-morphisms-of-sheaves-determined-by-stalks",
+    "thm-sheaf-morphism-isomorphism-stalkwise",
+    "thm-sheaves-as-local-homeomorphisms",
+    "lem-first-plus-construction-is-separated",
+    "lem-second-plus-construction-is-sheaf",
+    "thm-sheafification-universal-property",
+    "thm-sheafification-preserves-stalks",
+    "cor-sheafification-idempotent",
+    "lem-image-sheaf-is-sheafification-presheaf-image",
+    "ex-sheaf-continuous-real-functions",
+    "ex-sheaf-locally-constant-functions",
+    "cex-presheaf-bounded-continuous-functions-not-sheaf",
+    "cex-constant-presheaf-not-sheaf-disconnected-open",
+    "ex-skyscraper-set-sheaf-stalks",
+    "ex-extension-by-empty-outside-open",
+    "cex-objectwise-image-not-sheaf",
+    "ex-germs-of-continuous-functions",
+    "ex-empty-space-unique-sheaf-sections"
+  ],
+  "contracts": {
+    "lem-sheaf-section-over-empty-set-terminal": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 treat the empty cover of $\\varnothing$ directly and use it for existence and uniqueness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the empty-open uniqueness lemma, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the empty-open uniqueness lemma, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the empty-open uniqueness lemma, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the empty-open uniqueness lemma, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the empty-open uniqueness lemma, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the empty-open uniqueness lemma, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the empty-open uniqueness lemma, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] to the empty cover of $\\varnothing$. The empty family of local sections is vacuously compatible, so gluing produces at least one section $s\\in\\mathcal F(\\varnothing)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $t\\in\\mathcal F(\\varnothing)$. Then $t$ also restricts to the same empty family on the empty cover. By the uniqueness part of [L1], one has $t=s$. Therefore $\\mathcal F(\\varnothing)=\\{s\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ]
+    },
+    "thm-sheaf-equalizer-condition": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 handles arbitrary covers, so the empty cover of $\\varnothing$ is included in the equalizer reformulation."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the equalizer reformulation of sheafhood, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the equalizer reformulation of sheafhood, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the equalizer reformulation of sheafhood, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the equalizer reformulation of sheafhood, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the equalizer reformulation of sheafhood, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 prove that the sheaf axiom implies the equalizer property on the chosen cover."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 derives locality and gluing from the equalizer hypothesis."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-section-restriction-and-global-section",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.\n\nAn element of $\\mathcal F(U)$ is called a **section of $\\mathcal F$ over $U$**.\nWe also write\n$$\\Gamma(U,\\mathcal F):=\\mathcal F(U).$$\n\nIf $V \\subseteq U$ and $s \\in \\mathcal F(U)$, its **restriction to $V$** is\n$$s|_V:=\\rho^U_V(s)\\in\\mathcal F(V).$$\n\nA **global section** of $\\mathcal F$ is a section over the whole space:\n$$\\Gamma(X,\\mathcal F)=\\mathcal F(X).$$\n\nThe presheaf identities imply\n$$s|_U=s,\\qquad (s|_V)|_W=s|_W\\quad\\text{for }W\\subseteq V\\subseteq U.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-equalizers-and-coequalizers",
+          "source_section": "Definition",
+          "quote": "For parallel morphisms $f,g:A\\rightrightarrows B$, an **equalizer** is a limit\nof that parallel-pair diagram ([[def-limit-and-colimit-of-a-diagram]]). It is a\nmorphism $e:E\\to A$ satisfying $fe=ge$ such that, whenever $h:X\\to A$ satisfies\n$fh=gh$, there is a unique $u:X\\to E$ with $eu=h$.\n\nA **coequalizer** is a colimit of the parallel pair. It is a morphism\n$q:B\\to Q$ satisfying $qf=qg$ such that, whenever $h:B\\to X$ satisfies\n$hf=hg$, there is a unique $u:Q\\to X$ with $uq=h$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $\\mathcal F$ is a sheaf. For any $s\\in\\mathcal F(U)$, the two families $d_0(e(s))$ and $d_1(e(s))$ are equal because both entries on $U_i\\cap U_j$ are the common restriction $s|_{U_i\\cap U_j}$ by [F1]. Thus $d_0e=d_1e$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $(s_i)_{i\\in I}\\in\\prod_i\\mathcal F(U_i)$ satisfy $d_0((s_i))=d_1((s_i))$. Unwinding the definitions, this says exactly that $s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}$ for all $i,j$. By the gluing clause of [L1], there exists a unique $s\\in\\mathcal F(U)$ with $s|_{U_i}=s_i$ for all $i$. Hence every equalizing family factors uniquely through $e$, so [L2] shows that $e$ is an equalizer.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, assume $e$ is an equalizer for every open set and cover. If $s,t\\in\\mathcal F(U)$ satisfy $s|_{U_i}=t|_{U_i}$ for all $i$, then $e(s)=e(t)$. Let $\\ast$ be a singleton and define $h:\\{\\ast\\}\\to\\prod_i\\mathcal F(U_i)$ by $h(\\ast)=e(s)=e(t)$. Then $d_0h=d_1h$, so [L2] gives a unique $u:\\{\\ast\\}\\to\\mathcal F(U)$ with $eu=h$. The two maps sending $\\ast$ to $s$ and to $t$ both satisfy this condition, hence are equal and therefore $s=t$. So locality holds. If $(s_i)$ is a compatible family on the cover, then $d_0((s_i))=d_1((s_i))$, so [L2] yields a unique $s\\in\\mathcal F(U)$ with $e(s)=(s_i)$. That is exactly unique gluing. Therefore [L1] implies that $\\mathcal F$ is a sheaf.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "F1"
+          ]
+        }
+      ]
+    },
+    "lem-sheaf-condition-check-on-basis": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 allows the basis cover of an empty open set to be empty, and step 3.1 then glues vacuously."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the basis-check criterion, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the basis-check criterion, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the basis-check criterion, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the basis-check criterion, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses an index $\\alpha(x)$ and a basis neighbourhood $B_x$ for each point from the stated cover and basis hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the full sheaf axiom implies the basis-cover criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 3.1 build arbitrary-cover gluing from the basis criterion."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-topology-basis-subbasis",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]).\n\nA family $\\mathcal{B} \\subseteq \\mathcal{T}$ is a **basis for $\\mathcal{T}$** if\nevery open set is a union of members of $\\mathcal{B}$: for every\n$U \\in \\mathcal{T}$ there is $\\mathcal{B}_U \\subseteq \\mathcal{B}$ with\n$U = \\bigcup \\mathcal{B}_U$. Equivalently, and this is the form used in proofs,\n\n$$\\text{for every } U \\in \\mathcal{T} \\text{ and every } x \\in U \\text{ there is } B \\in \\mathcal{B} \\text{ with } x \\in B \\subseteq U .$$\n\n*The two forms say the same thing.* If every open $U$ is such a union and\n$x \\in U$, then $x$ lies in one of the sets united, which is a member of\n$\\mathcal{B}$ inside $U$. Conversely, if the displayed condition holds then\n$U = \\bigcup \\{\\, B \\in \\mathcal{B} : B \\subseteq U \\,\\}$, since each such $B$ is\ncontained in $U$ and each $x \\in U$ lies in one of them. Note that\n$\\bigcup \\varnothing = \\varnothing$, so the empty open set is covered by the empty\nsubfamily and needs no member of $\\mathcal{B}$. The members of a basis are called\n**basic open sets**.\n\n**The topology generated by a family.** Let $\\mathcal{S} \\subseteq \\mathcal{P}(X)$\nbe *any* family of subsets of $X$. Then\n\n$$\\langle \\mathcal{S} \\rangle := \\bigcap \\{\\, \\mathcal{T}' : \\mathcal{T}' \\text{ is a topology on } X \\text{ with } \\mathcal{S} \\subseteq \\mathcal{T}' \\,\\}$$\n\nis a topology on $X$, it contains $\\mathcal{S}$, and it is contained in every\ntopology on $X$ that contains $\\mathcal{S}$. It is called the **topology\ngenerated by $\\mathcal{S}$**, and $\\mathcal{S}$ is a **subbasis** for a topology\n$\\mathcal{T}$ when $\\mathcal{T} = \\langle \\mathcal{S} \\rangle$.\n\n*This is well posed, and the obligation is discharged here.* The collection being\nintersected is nonempty, because $\\mathcal{P}(X)$ is a topology on $X$ containing\n$\\mathcal{S}$; so the intersection is an intersection of a nonempty family of\nsubsets of $\\mathcal{P}(X)$ and is a set. It is a topology: $\\varnothing$ and $X$\nlie in every topology on $X$, hence in the intersection, which is (T1); if\n$\\mathcal{S}' \\subseteq \\langle \\mathcal{S} \\rangle$ then $\\mathcal{S}'$ is a\nsubfamily of each $\\mathcal{T}'$ in the collection, so $\\bigcup \\mathcal{S}'$ lies\nin each $\\mathcal{T}'$ and hence in the intersection, which is (T2); and the same\nargument with $U \\cap V$ gives (T3). It contains $\\mathcal{S}$ because every\n$\\mathcal{T}'$ in the collection does, and it is contained in each such\n$\\mathcal{T}'$ because an intersection is contained in each of its members. So\n$\\langle \\mathcal{S} \\rangle$ is the coarsest topology on $X$ containing\n$\\mathcal{S}$ ([[def-topological-space]]), and in particular it is uniquely\ndetermined by $\\mathcal{S}$.\n\n**Neither notion is intrinsic to the family alone.** \"$\\mathcal{B}$ is a basis\nfor $\\mathcal{T}$\" and \"$\\mathcal{S}$ is a subbasis for $\\mathcal{T}$\" are\nrelations between a family and a topology, not properties of the family. The\nquestion of which families are a basis *for some* topology, and how the topology\ngenerated by a subbasis is computed from it, is settled by the next item.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $\\mathcal F$ is a sheaf. Let $U=\\bigcup_i B_i$ be a basis cover and let $(s_i)$ satisfy the basis-overlap hypothesis. Fix $i,j$. The sets $C\\in\\mathcal B$ with $C\\subseteq B_i\\cap B_j$ cover $B_i\\cap B_j$ by [L1] and the intersection hypothesis on $\\mathcal B$. On each such $C$ the restrictions of $s_i$ and $s_j$ agree, so locality from [L2] gives $s_i|_{B_i\\cap B_j}=s_j|_{B_i\\cap B_j}$. Gluing in [L2] then produces a unique $s\\in\\mathcal F(U)$ with $s|_{B_i}=s_i$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume the displayed basis condition. Let $U=\\bigcup_{\\alpha\\in A}U_\\alpha$ be an arbitrary open cover and let $t_\\alpha\\in\\mathcal F(U_\\alpha)$ be compatible on overlaps. For each $x\\in U$, choose $\\alpha(x)$ with $x\\in U_{\\alpha(x)}$, and then choose $B_x\\in\\mathcal B$ with $x\\in B_x\\subseteq U_{\\alpha(x)}$ by [L1]. Put $r_x:=t_{\\alpha(x)}|_{B_x}$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By the assumed basis condition, there is a unique $s\\in\\mathcal F(U)$ with $s|_{B_x}=r_x$ for every $x\\in U$.",
+          "step": "1.3",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $C\\in\\mathcal B$ satisfy $C\\subseteq B_x\\cap B_y$. Then $C\\subseteq U_{\\alpha(x)}\\cap U_{\\alpha(y)}$, so compatibility of the original family gives $r_x|_C=t_{\\alpha(x)}|_C=t_{\\alpha(y)}|_C=r_y|_C$. Therefore the family $(r_x)_{x\\in U}$ satisfies the displayed basis condition for the basis cover $U=\\bigcup_{x\\in U}B_x$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $\\alpha\\in A$. For each $y\\in U_\\alpha$, choose $C_y\\in\\mathcal B$ with $$y\\in C_y\\subseteq B_y\\cap U_\\alpha$$ by [L1] and the basis-refinement hypothesis. Then the $C_y$ form a basis cover of $U_\\alpha$. Since $C_y\\subseteq U_{\\alpha(y)}\\cap U_\\alpha$, step 2.1 gives $$r_y|_{C_y}=t_{\\alpha(y)}|_{C_y}=t_\\alpha|_{C_y}.$$ Because $s|_{C_y}=r_y|_{C_y}$ by step 1.3, the two sections $s|_{U_\\alpha}$ and $t_\\alpha$ restrict to the same family on the basis cover $\\{C_y\\}_{y\\in U_\\alpha}$. By the uniqueness part of the assumed basis condition, $s|_{U_\\alpha}=t_\\alpha$. Since this holds for every $\\alpha$, the arbitrary compatible family glues uniquely, so [L2] implies that $\\mathcal F$ is a sheaf.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1",
+            "step 1.3",
+            "given",
+            "choose"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The risk is the reverse gluing direction on arbitrary covers. Step 3.1 now refines each U_alpha inside B_y cap U_alpha and invokes the uniqueness clause only on a genuine basis cover."
+      }
+    },
+    "lem-forgetful-sheaf-compatibility": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For the forgetful detection lemma, the top-level claim has no additional empty-family branch beyond the open-cover or germ cases already written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the forgetful detection lemma, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the forgetful detection lemma, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the forgetful detection lemma, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the forgetful detection lemma, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the forgetful detection lemma, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 is the forward implication from algebra-valued sheafhood to set-valued sheafhood."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 is the reverse implication back to the algebra-valued statement."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-presheaf-of-groups-rings-modules",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space.\nFix a ring $R$ when modules are under discussion.\n\nA **presheaf of groups** on $X$ is a presheaf $\\mathcal F$ such that every\n$\\mathcal F(U)$ is a group and every restriction map\n$\\rho^U_V:\\mathcal F(U)\\to\\mathcal F(V)$ is a group homomorphism\n([[prop-groups-and-homomorphisms-form-category-grp]]).\n\nA **presheaf of rings** on $X$ is defined the same way with rings and ring\nhomomorphisms ([[prop-rings-and-homomorphisms-form-category-ring]]).\n\nA **presheaf of left $R$-modules** on $X$ is defined the same way with left\n$R$-modules and $R$-linear maps\n([[prop-modules-and-homomorphisms-form-category-rmod]]).\n\nA **sheaf of groups**, **sheaf of rings**, or **sheaf of left $R$-modules** is\nsuch a presheaf whose underlying set-valued presheaf is a sheaf.\n\nIn particular, each sheaf of groups has a distinguished identity section on\nevery open set; in additive notation this section is written $0$, and all\nrestrictions preserve the algebraic operations.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\mathcal F$ is a sheaf of groups, rings, or left $R$-modules, then [F1] already says that its underlying set-valued presheaf is a sheaf.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, assume the underlying set-valued presheaf is a sheaf. The sets $\\mathcal F(U)$ already carry the given group, ring, or left $R$-module structures, and the restriction maps already preserve those structures by [F1]. Since [L1] tests only locality and gluing of the underlying sections, the assumed setwise sheaf condition is exactly the required algebra-valued sheaf condition.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1"
+          ]
+        }
+      ]
+    },
+    "lem-germ-equivalence-relation": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For the neighbourhood-germ equivalence relation, the top-level claim has no additional empty-family branch beyond the open-cover or germ cases already written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the neighbourhood-germ equivalence relation, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the neighbourhood-germ equivalence relation, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the degenerate self-comparison $(U,s)\\sim_x(U,s)$ explicitly in the reflexive case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the neighbourhood-germ equivalence relation, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the neighbourhood-germ equivalence relation, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the neighbourhood-germ equivalence relation, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the neighbourhood-germ equivalence relation, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-equivalence-relation",
+          "source_section": "Definition",
+          "quote": "A **binary relation** on a set $A$ is a subset $R \\subseteq A \\times A$\n([[def-relation-domain-range-and-field]], [[def-cartesian-product]]); we write\n$a \\sim b$ for $(a,b) \\in R$ and read it \"$a$ is related to $b$\".\n\nA binary relation $\\sim$ on $A$ is an **equivalence relation** when it is reflexive\non $A$, symmetric and transitive ([[def-properties-of-a-relation-on-a-set]]), that\nis, when it is\n\n- **reflexive**: $a \\sim a$ for every $a \\in A$;\n- **symmetric**: $a \\sim b$ implies $b \\sim a$, for all $a, b \\in A$;\n- **transitive**: $a \\sim b$ and $b \\sim c$ imply $a \\sim c$, for all\n  $a, b, c \\in A$.\n\nLet $\\sim$ be an equivalence relation on $A$. For $a \\in A$, the **equivalence\nclass** of $a$ is the subset\n\n$$[a] \\;:=\\; \\{\\, b \\in A \\;:\\; a \\sim b \\,\\} \\;\\subseteq\\; A,$$\n\nand any $b$ with $[b] = C$ is called a **representative** of the class $C$. The\n**quotient set** is the set of all classes,\n\n$$A/{\\sim} \\;:=\\; \\{\\, [a] \\;:\\; a \\in A \\,\\},$$\n\na subset of the power set of $A$ ([[def-power-set]]). The map\n$\\pi : A \\to A/{\\sim}$ ([[def-function]]) with $\\pi(a) = [a]$ is the **quotient\nmap**; it is surjective by construction ([[def-injection-surjection-bijection]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Reflexivity holds because if $(U,s)$ is any pair, then $s|_U=s|_U$, so $(U,s)\\sim_x(U,s)$. Symmetry holds because $s|_W=t|_W$ implies $t|_W=s|_W$ on the same neighbourhood $W$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $(U,s)\\sim_x(V,t)$ and $(V,t)\\sim_x(Z,r)$. Choose neighbourhoods $W_1\\subseteq U\\cap V$ and $W_2\\subseteq V\\cap Z$ with $s|_{W_1}=t|_{W_1}$ and $t|_{W_2}=r|_{W_2}$. Then $W:=W_1\\cap W_2$ is an open neighbourhood of $x$ contained in $U\\cap Z$, and on $W$ one has $s|_W=t|_W=r|_W$. Hence $(U,s)\\sim_x(Z,r)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 show that $\\sim_x$ is reflexive, symmetric, and transitive. By [F2], it is an equivalence relation.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The risk is transitivity under shrinking neighbourhoods. Step 1.2 intersects the two witness neighbourhoods and keeps the equalities on the common smaller neighbourhood."
+      }
+    },
+    "lem-section-zero-if-all-germs-zero": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "When $U=\\varnothing$, step 1.2 gives an empty cover and step 2.1 applies locality vacuously."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the zero-by-germs criterion for sheaves of groups, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the zero-by-germs criterion for sheaves of groups, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the zero-by-germs criterion for sheaves of groups, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the zero-by-germs criterion for sheaves of groups, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the zero-by-germs criterion for sheaves of groups, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that the zero section has zero germ at every point."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 prove that zero germs force the section itself to be zero."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-presheaf-of-groups-rings-modules",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space.\nFix a ring $R$ when modules are under discussion.\n\nA **presheaf of groups** on $X$ is a presheaf $\\mathcal F$ such that every\n$\\mathcal F(U)$ is a group and every restriction map\n$\\rho^U_V:\\mathcal F(U)\\to\\mathcal F(V)$ is a group homomorphism\n([[prop-groups-and-homomorphisms-form-category-grp]]).\n\nA **presheaf of rings** on $X$ is defined the same way with rings and ring\nhomomorphisms ([[prop-rings-and-homomorphisms-form-category-ring]]).\n\nA **presheaf of left $R$-modules** on $X$ is defined the same way with left\n$R$-modules and $R$-linear maps\n([[prop-modules-and-homomorphisms-form-category-rmod]]).\n\nA **sheaf of groups**, **sheaf of rings**, or **sheaf of left $R$-modules** is\nsuch a presheaf whose underlying set-valued presheaf is a sheaf.\n\nIn particular, each sheaf of groups has a distinguished identity section on\nevery open set; in additive notation this section is written $0$, and all\nrestrictions preserve the algebraic operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-germ-of-section",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on $X$, let $x\\in X$, and let $s\\in\\mathcal F(U)$\nfor some open set $U$ containing $x$.\n\nThe class of the pair $(U,s)$ in the stalk $\\mathcal F_x$ is called the\n**germ of $s$ at $x$**, and it is denoted by\n$$s_x\\in\\mathcal F_x.$$\n\nFor every open set $U$ containing $x$, this gives a canonical map\n$$\\mathcal F(U)\\longrightarrow\\mathcal F_x,\\qquad s\\longmapsto s_x.$$\n\nIf $V\\subseteq U$ is open and also contains $x$, then $(s|_V)_x=s_x$, because\nthe two pairs $(U,s)$ and $(V,s|_V)$ agree on the smaller open neighbourhood\n$V$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $s=0$ in $\\mathcal F(U)$, then for every $x\\in U$ the induced germ is $s_x=0_x$ because the stalk map respects restriction and the zero section by [F1] and [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $s_x=0$ for every $x\\in U$. Fix $x\\in U$. By [F2], equality of germs means that there exists an open neighbourhood $V_x\\subseteq U$ of $x$ such that $s|_{V_x}=0|_{V_x}$. The sets $V_x$ cover $U$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the open cover $\\{V_x\\}_{x\\in U}$, the sections $s$ and $0$ have the same restriction by step 1.2. Locality in [L1] therefore gives $s=0$ in $\\mathcal F(U)$. Together with step 1.1, this proves both directions.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The risk is turning stalkwise zero into global zero. Step 1.2 converts each germ equality into a neighbourhood equality, and sheaf locality then forces s=0."
+      }
+    },
+    "lem-morphisms-of-sheaves-determined-by-stalks": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For the stalkwise-determination lemma, the top-level claim has no additional empty-family branch beyond the open-cover or germ cases already written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the stalkwise-determination lemma, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the stalkwise-determination lemma, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the stalkwise-determination lemma, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the stalkwise-determination lemma, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the stalkwise-determination lemma, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the stalkwise-determination lemma, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the stalkwise-determination lemma, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-morphism-of-presheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ and $\\mathcal G$ be presheaves on a topological space $X$.\nA **morphism of presheaves**\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nis a natural transformation ([[def-natural-transformation]]) between the two\ncontravariant functors on $\\operatorname{Open}(X)$.\n\nEquivalently, it is a family of maps\n$$\\varphi_U:\\mathcal F(U)\\longrightarrow\\mathcal G(U)$$\nfor every open $U \\subseteq X$, such that for every inclusion $V \\subseteq U$\nthe square\n$$ \\begin{aligned} \\mathcal F(U) &\\xrightarrow{\\ \\varphi_U\\ } \\mathcal G(U)\\\\ \\downarrow && \\downarrow\\\\ \\mathcal F(V) &\\xrightarrow{\\ \\varphi_V\\ } \\mathcal G(V) \\end{aligned} $$\ncommutes, that is,\n$$\\varphi_V(s|_V)=\\varphi_U(s)|_V\\qquad\\text{for all }s\\in\\mathcal F(U).$$\n\nComposition and identities are taken componentwise.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-morphism-of-presheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ and $\\mathcal G$ be presheaves on a topological space $X$.\nA **morphism of presheaves**\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nis a natural transformation ([[def-natural-transformation]]) between the two\ncontravariant functors on $\\operatorname{Open}(X)$.\n\nEquivalently, it is a family of maps\n$$\\varphi_U:\\mathcal F(U)\\longrightarrow\\mathcal G(U)$$\nfor every open $U \\subseteq X$, such that for every inclusion $V \\subseteq U$\nthe square\n$$ \\begin{aligned} \\mathcal F(U) &\\xrightarrow{\\ \\varphi_U\\ } \\mathcal G(U)\\\\ \\downarrow && \\downarrow\\\\ \\mathcal F(V) &\\xrightarrow{\\ \\varphi_V\\ } \\mathcal G(V) \\end{aligned} $$\ncommutes, that is,\n$$\\varphi_V(s|_V)=\\varphi_U(s)|_V\\qquad\\text{for all }s\\in\\mathcal F(U).$$\n\nComposition and identities are taken componentwise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-germ-of-section",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on $X$, let $x\\in X$, and let $s\\in\\mathcal F(U)$\nfor some open set $U$ containing $x$.\n\nThe class of the pair $(U,s)$ in the stalk $\\mathcal F_x$ is called the\n**germ of $s$ at $x$**, and it is denoted by\n$$s_x\\in\\mathcal F_x.$$\n\nFor every open set $U$ containing $x$, this gives a canonical map\n$$\\mathcal F(U)\\longrightarrow\\mathcal F_x,\\qquad s\\longmapsto s_x.$$\n\nIf $V\\subseteq U$ is open and also contains $x$, then $(s|_V)_x=s_x$, because\nthe two pairs $(U,s)$ and $(V,s|_V)$ agree on the smaller open neighbourhood\n$V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an open set $U\\subseteq X$ and a section $s\\in\\mathcal F(U)$. For every $x\\in U$, the hypothesis $\\varphi_x=\\psi_x$ and [F2] give $$(\\varphi_U(s))_x=\\varphi_x(s_x)=\\psi_x(s_x)=(\\psi_U(s))_x.$$",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], equality of the germs in step 1.1 means that for each $x\\in U$ there exists an open neighbourhood $V_x\\subseteq U$ such that $$\\varphi_U(s)|_{V_x}=\\psi_U(s)|_{V_x}.$$ The sets $V_x$ cover $U$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L1], the two sections $\\varphi_U(s)$ and $\\psi_U(s)$ are equal on $U$. Since $U$ and $s$ were arbitrary, the component maps $\\varphi_U$ and $\\psi_U$ agree for every open $U$. Therefore $\\varphi=\\psi$ by [F1].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The risk was the missing functoriality citation for stalk maps. The facts block now cites the stalk construction itself, and step 2.1 uses the smaller-neighbourhood criterion for germ equality."
+      }
+    },
+    "thm-sheaf-morphism-isomorphism-stalkwise": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For $U=\\varnothing$, the family in step 1.2 is empty and step 3.1 glues it uniquely, so the empty-open case is covered."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the stalkwise isomorphism theorem, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the stalkwise isomorphism theorem, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the stalkwise isomorphism theorem, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the stalkwise isomorphism theorem, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses a stalk preimage $a_x$ and then a representing local section $s_x$ for each point of the open set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that an inverse morphism induces inverse stalk maps."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2 through 4.1 construct the inverse morphism from stalkwise bijectivity."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-morphism-of-presheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ and $\\mathcal G$ be presheaves on a topological space $X$.\nA **morphism of presheaves**\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nis a natural transformation ([[def-natural-transformation]]) between the two\ncontravariant functors on $\\operatorname{Open}(X)$.\n\nEquivalently, it is a family of maps\n$$\\varphi_U:\\mathcal F(U)\\longrightarrow\\mathcal G(U)$$\nfor every open $U \\subseteq X$, such that for every inclusion $V \\subseteq U$\nthe square\n$$ \\begin{aligned} \\mathcal F(U) &\\xrightarrow{\\ \\varphi_U\\ } \\mathcal G(U)\\\\ \\downarrow && \\downarrow\\\\ \\mathcal F(V) &\\xrightarrow{\\ \\varphi_V\\ } \\mathcal G(V) \\end{aligned} $$\ncommutes, that is,\n$$\\varphi_V(s|_V)=\\varphi_U(s)|_V\\qquad\\text{for all }s\\in\\mathcal F(U).$$\n\nComposition and identities are taken componentwise.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-morphism-of-presheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ and $\\mathcal G$ be presheaves on a topological space $X$.\nA **morphism of presheaves**\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nis a natural transformation ([[def-natural-transformation]]) between the two\ncontravariant functors on $\\operatorname{Open}(X)$.\n\nEquivalently, it is a family of maps\n$$\\varphi_U:\\mathcal F(U)\\longrightarrow\\mathcal G(U)$$\nfor every open $U \\subseteq X$, such that for every inclusion $V \\subseteq U$\nthe square\n$$ \\begin{aligned} \\mathcal F(U) &\\xrightarrow{\\ \\varphi_U\\ } \\mathcal G(U)\\\\ \\downarrow && \\downarrow\\\\ \\mathcal F(V) &\\xrightarrow{\\ \\varphi_V\\ } \\mathcal G(V) \\end{aligned} $$\ncommutes, that is,\n$$\\varphi_V(s|_V)=\\varphi_U(s)|_V\\qquad\\text{for all }s\\in\\mathcal F(U).$$\n\nComposition and identities are taken componentwise.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-germ-of-section",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on $X$, let $x\\in X$, and let $s\\in\\mathcal F(U)$\nfor some open set $U$ containing $x$.\n\nThe class of the pair $(U,s)$ in the stalk $\\mathcal F_x$ is called the\n**germ of $s$ at $x$**, and it is denoted by\n$$s_x\\in\\mathcal F_x.$$\n\nFor every open set $U$ containing $x$, this gives a canonical map\n$$\\mathcal F(U)\\longrightarrow\\mathcal F_x,\\qquad s\\longmapsto s_x.$$\n\nIf $V\\subseteq U$ is open and also contains $x$, then $(s|_V)_x=s_x$, because\nthe two pairs $(U,s)$ and $(V,s|_V)$ agree on the smaller open neighbourhood\n$V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\varphi$ is an isomorphism with inverse $\\psi$, then for every $x$ the induced maps $\\varphi_x$ and $\\psi_x$ are inverse because taking stalks preserves composition and identities by [F2]. Hence each $\\varphi_x$ is a bijection.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume now that every $\\varphi_x$ is a bijection. Fix an open set $U\\subseteq X$ and a section $t\\in\\mathcal G(U)$. For each $x\\in U$, choose $a_x\\in\\mathcal F_x$ with $\\varphi_x(a_x)=t_x$. Pick a representative $s_x\\in\\mathcal F(V_x)$ of $a_x$ on some open neighbourhood $V_x\\subseteq U$ of $x$. Then $(\\varphi_{V_x}(s_x))_x=t_x$, so [F3] lets us shrink $V_x$ and assume $\\varphi_{V_x}(s_x)=t|_{V_x}$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $s,s'\\in\\mathcal F(U)$ satisfy $\\varphi_U(s)=\\varphi_U(s')$, then for every $x\\in U$ one has $\\varphi_x(s_x)=\\varphi_x(s'_x)$ by [F2]. Injectivity of $\\varphi_x$ gives $s_x=s'_x$. By [F3], for each $x$ there exists an open neighbourhood $W_x\\subseteq U$ with $s|_{W_x}=s'|_{W_x}$. The sets $W_x$ cover $U$, so [L2] gives $s=s'$. Thus each $\\varphi_U$ is injective.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $x,y\\in U$. For any $z\\in V_x\\cap V_y$, the two sections $s_x|_{V_x\\cap V_y}$ and $s_y|_{V_x\\cap V_y}$ have images under $\\varphi$ whose germs at $z$ both equal $t_z$. Since $\\varphi_z$ is injective, the germs of $s_x$ and $s_y$ at $z$ are equal. By [F3], there is a neighbourhood $W_z\\subseteq V_x\\cap V_y$ of $z$ on which $s_x|_{W_z}=s_y|_{W_z}$. The sets $W_z$ cover $V_x\\cap V_y$, so [L2] gives $$s_x|_{V_x\\cap V_y}=s_y|_{V_x\\cap V_y}.$$ Therefore the family $(s_x)$ is compatible on the cover $\\{V_x\\}_{x\\in U}$ of $U$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2], the compatible family of step 2.1 glues to a unique section $\\psi_U(t)\\in\\mathcal F(U)$ satisfying $\\varphi_U(\\psi_U(t))=t$. Thus $\\varphi_U$ is surjective for every $U$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $V\\subseteq U$ and $t\\in\\mathcal G(U)$. Then $$\\varphi_V(\\psi_U(t)|_V)=\\varphi_U(\\psi_U(t))|_V=t|_V=\\varphi_V(\\psi_V(t|_V)).$$ Step 1.3 gives injectivity of $\\varphi_V$, so $\\psi_U(t)|_V=\\psi_V(t|_V)$. Hence the maps $\\psi_U$ commute with restriction and define a morphism of sheaves $\\psi:\\mathcal G\\to\\mathcal F$. By steps 3.1 and 1.3, $\\psi$ is a two-sided inverse to $\\varphi$, so [F1] shows that $\\varphi$ is an isomorphism. Together with step 1.1 this proves both directions.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 1.3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The risk is the stalkwise-to-global inverse construction. The proof now builds local preimages, proves overlap compatibility, and derives injectivity from local germ equality instead of the earlier mis-citation."
+      }
+    },
+    "thm-sheaves-as-local-homeomorphisms": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the section-sheaf gluing axiom for arbitrary covers, which includes the empty cover over $\\varnothing$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the sheaf-local-homeomorphism correspondence, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the sheaf-local-homeomorphism correspondence, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the sheaf-local-homeomorphism correspondence, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the sheaf-local-homeomorphism correspondence, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses local basic opens $[s_x,V_x]$ around section values, and step 3.1 chooses a local section through a given point $e$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the sheaf-local-homeomorphism correspondence, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the sheaf-local-homeomorphism correspondence, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-etale-space-of-sheaf-of-sets",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a sheaf of sets on a topological space $X$.\n\nIts **etale space** is the disjoint union of stalks\n$$E(\\mathcal F):=\\coprod_{x\\in X}\\mathcal F_x,$$\nequipped with the projection\n$$p:E(\\mathcal F)\\longrightarrow X,\\qquad p(\\xi)=x\\text{ if }\\xi\\in\\mathcal F_x.$$\n\nFor every open set $U\\subseteq X$ and every section $s\\in\\mathcal F(U)$, define\nthe subset\n$$[s,U]:=\\{\\,s_x : x\\in U\\,\\}\\subseteq E(\\mathcal F).$$\n\nThe topology on $E(\\mathcal F)$ is the topology generated by the family of all\nsuch subsets $[s,U]$ ([[def-topology-basis-subbasis]]).\n\nOn each set $[s,U]$, the projection $p$ restricts to a bijection onto $U$ with\ninverse\n$$U\\longrightarrow [s,U],\\qquad x\\longmapsto s_x.$$\nThe next theorem shows that this bijection is in fact a homeomorphism.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-morphism-of-presheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ and $\\mathcal G$ be presheaves on a topological space $X$.\nA **morphism of presheaves**\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nis a natural transformation ([[def-natural-transformation]]) between the two\ncontravariant functors on $\\operatorname{Open}(X)$.\n\nEquivalently, it is a family of maps\n$$\\varphi_U:\\mathcal F(U)\\longrightarrow\\mathcal G(U)$$\nfor every open $U \\subseteq X$, such that for every inclusion $V \\subseteq U$\nthe square\n$$ \\begin{aligned} \\mathcal F(U) &\\xrightarrow{\\ \\varphi_U\\ } \\mathcal G(U)\\\\ \\downarrow && \\downarrow\\\\ \\mathcal F(V) &\\xrightarrow{\\ \\varphi_V\\ } \\mathcal G(V) \\end{aligned} $$\ncommutes, that is,\n$$\\varphi_V(s|_V)=\\varphi_U(s)|_V\\qquad\\text{for all }s\\in\\mathcal F(U).$$\n\nComposition and identities are taken componentwise.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a sheaf $\\mathcal F$, let $p:E(\\mathcal F)\\to X$ be as in [F1]. If $\\xi=s_x\\in E(\\mathcal F)$, then $\\xi\\in[s,U]$ for some section $s\\in\\mathcal F(U)$. By construction $p:[s,U]\\to U$ is bijective. Its inverse $x'\\mapsto s_{x'}$ is continuous because for any smaller basic open $[t,V]\\subseteq[s,U]$, the preimage is the open set $\\{x'\\in U\\cap V:s_{x'}=t_{x'}\\}$, which is open by the sheaf locality encoded in [L1]. Hence $p|_{[s,U]}$ is a homeomorphism onto the open set $U$. Since every point of $E(\\mathcal F)$ lies in some $[s,U]$, $p$ is a local homeomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $q:E\\to X$ be a local homeomorphism, and let $\\operatorname{Sec}_q(U)$ denote its continuous sections over an open set $U$. Restriction of a section is again a section, so $\\operatorname{Sec}_q$ is a presheaf. If two sections of $\\operatorname{Sec}_q(U)$ agree on an open cover, they are equal pointwise, so locality holds. If $\\sigma_i\\in\\operatorname{Sec}_q(U_i)$ are compatible on an open cover $U=\\bigcup_iU_i$, define $\\sigma(x)=\\sigma_i(x)$ for $x\\in U_i$. Compatibility makes this well defined, and continuity is local on the cover because each $\\sigma_i$ is continuous. Thus [L1] holds, so $\\operatorname{Sec}_q$ is a sheaf.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "A sheaf morphism $\\varphi:\\mathcal F\\to\\mathcal G$ induces a map over $X$ $$E(\\varphi):E(\\mathcal F)\\longrightarrow E(\\mathcal G),\\qquad s_x\\longmapsto(\\varphi_U(s))_x.$$ This is well defined by restriction compatibility. It is continuous: if $E(\\varphi)(s_x)$ lies in a basic open $[t,V]$, equality of the two germs lets us shrink to an open $W\\subseteq U\\cap V$ on which $\\varphi_U(s)|_W=t|_W$; then $[s|_W,W]$ is a neighbourhood of $s_x$ mapped into $[t,V]$. Identities and compositions are preserved. Conversely, a map $f:E\\to E'$ over $X$ between local homeomorphisms sends a section $\\sigma$ to $f\\circ\\sigma$, naturally in the open set, and hence induces a sheaf morphism $\\operatorname{Sec}(f)$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a sheaf $\\mathcal F$ and an open set $U$, send $s\\in\\mathcal F(U)$ to the section $$\\theta_U(s):U\\longrightarrow E(\\mathcal F),\\qquad \\theta_U(s)(x)=s_x.$$ By step 1.1 this is continuous. If $\\theta_U(s)=\\theta_U(t)$, then $s_x=t_x$ for all $x\\in U$, so [L1] gives $s=t$. Conversely, let $\\sigma:U\\to E(\\mathcal F)$ be a continuous section. For each $x\\in U$, choose a basic open $[s_x,V_x]$ containing $\\sigma(x)$. Continuity makes $$W_x:=U\\cap V_x\\cap\\sigma^{-1}([s_x,V_x])$$ an open neighbourhood of $x$. Since $p$ is injective on $[s_x,V_x]$ and $p\\circ\\sigma=\\operatorname{id}_U$, the restriction $\\sigma|_{W_x}$ equals $y\\mapsto(s_x)_y$. These local sections agree on overlaps because they induce the same map $\\sigma$. By [L1], they glue to a unique $s\\in\\mathcal F(U)$ with $\\theta_U(s)=\\sigma$. Thus $\\theta_U$ is a bijection, natural in $U$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a local homeomorphism $q:E\\to X$, define $$\\eta:E\\longrightarrow E(\\operatorname{Sec}_q)$$ by sending $e\\in E$ to the germ at $x=q(e)$ of any local section through $e$. Such a local section exists because $q$ is a local homeomorphism, and two choices have the same germ because on a smaller common chart they are both the inverse of $q$. On a chart $W\\xrightarrow{\\sim}q(W)$, the map $\\eta$ is a homeomorphism from $W$ onto the basic open defined by the inverse section. Hence $\\eta$ is an isomorphism over $X$. The formula $E(\\varphi)(s_x)=(\\varphi_U(s))_x$ makes the bijections $\\theta$ of step 2.1 natural in $\\mathcal F$, while the formula $\\eta(f(e))=(f\\circ\\sigma)_x$ makes $\\eta$ natural in $E$. Thus the two functors constructed in steps 1.2 and 1.3 are quasi-inverse equivalences.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 1.3"
+          ]
+        }
+      ]
+    },
+    "lem-first-plus-construction-is-separated": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In step 1.1, if $U=\\varnothing$ there are no points to inspect, so the equivalence of presentations is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the first plus construction, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the first plus construction, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the first plus construction, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the first plus construction, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses a presenting chart $U_i$ containing the stalk point $x$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the first plus construction, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the first plus construction, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-presheaf-plus-construction",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $U\\subseteq X$\nbe open.\n\nA **germ-compatible local presentation** of a section over $U$ consists of:\n\n- an open cover $U=\\bigcup_{i\\in I}U_i$;\n- sections $s_i\\in\\mathcal F(U_i)$;\n\nsuch that for every $x\\in U_i\\cap U_j$ the germs agree:\n$$\\left(s_i\\right)_x=\\left(s_j\\right)_x\\text{ in }\\mathcal F_x.$$\n\nTwo germ-compatible local presentations $(U_i,s_i)$ and $(V_j,t_j)$ over $U$\nare called **equivalent** if for every $x\\in U$ and every choice of indices\n$i,j$ with $x\\in U_i\\cap V_j$, one has\n$$\\left(s_i\\right)_x=\\left(t_j\\right)_x\\text{ in }\\mathcal F_x.$$\n\nThe **plus construction** $\\mathcal F^+$ is the presheaf defined by letting\n$\\mathcal F^+(U)$ be the set of equivalence classes of germ-compatible local\npresentations over $U$. Restriction to an open subset $V\\subseteq U$ is obtained\nby replacing the cover $U_i$ with $U_i\\cap V$ and restricting each section\n$s_i$ to $U_i\\cap V$.\n\nThere is a canonical morphism of presheaves\n$$\\eta:\\mathcal F\\longrightarrow\\mathcal F^+$$\nwhose component on $U$ sends a section $s\\in\\mathcal F(U)$ to the class of the\nsingle-chart presentation $(U,s)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-separated-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.\n\nThe presheaf $\\mathcal F$ is **separated** when uniqueness of gluing holds:\nfor every open set $U \\subseteq X$, every open cover $U=\\bigcup_{i\\in I}U_i$,\nand every pair of sections $s,t\\in\\mathcal F(U)$,\n$$s|_{U_i}=t|_{U_i}\\text{ for all }i\\in I\\qquad\\Longrightarrow\\qquad s=t.$$\n\nThus a separated presheaf has the locality part of the sheaf axiom, but it may\nstill fail existence of gluing.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+          "source_section": "Statement",
+          "quote": "Let $D:\\mathcal J\\to\\mathbf{Set}$ be a small filtered diagram. For\n$x\\in D(j)$ and $y\\in D(k)$, their images in $\\operatorname*{colim}D$ are equal\nif and only if there are arrows $a:j\\to\\ell$ and $b:k\\to\\ell$ such that\n$D(a)(x)=D(b)(y)$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\sigma,\\tau\\in\\mathcal F^+(U)$ and suppose there is an open cover $U=\\bigcup_{\\alpha\\in A}W_\\alpha$ such that $\\sigma|_{W_\\alpha}=\\tau|_{W_\\alpha}$ for every $\\alpha$. Fix $x\\in U$, and choose $\\alpha$ with $x\\in W_\\alpha$. Equality on $W_\\alpha$ means that the two restricted presentations determine the same germ at $x$, so $\\sigma$ and $\\tau$ have the same germ at $x$. Since this holds for every $x\\in U$, the two global presentations are equivalent by [F1]. Therefore $\\sigma=\\tau$, and $\\mathcal F^+$ is separated by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "To prove surjectivity of $\\eta_x$, let $\\xi\\in(\\mathcal F^+)_x$. Choose an open neighbourhood $U$ of $x$ and a section $\\sigma\\in\\mathcal F^+(U)$ representing $\\xi$. Pick a local presentation $(U_i,s_i)$ of $\\sigma$ with $x\\in U_i$ for some index $i$. Then on the neighbourhood $U_i$ the section $\\sigma$ equals $\\eta_{U_i}(s_i)$ by [F1], so the germ $\\xi$ is the image of the germ of $s_i$ at $x$. Hence $\\eta_x$ is surjective.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Now suppose $\\eta_x(a)=\\eta_x(b)$ in $(\\mathcal F^+)_x$, where $a\\in\\mathcal F_x$ and $b\\in\\mathcal F_x$. Represent $a$ and $b$ by sections $s\\in\\mathcal F(U)$ and $t\\in\\mathcal F(V)$ on neighbourhoods of $x$. By [L1], equality of their images in the stalk of $\\mathcal F^+$ means that there exists an open neighbourhood $W\\subseteq U\\cap V$ of $x$ such that $$\\eta_W(s|_W)=\\eta_W(t|_W)\\text{ in }\\mathcal F^+(W).$$ By [F1], equality of these two single-chart classes says exactly that $s|_W$ and $t|_W$ have the same germ at every point of $W$, in particular at $x$. Thus $a=b$ in $\\mathcal F_x$, so $\\eta_x$ is injective.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.2 and 1.3 prove that every $\\eta_x$ is bijective, and step 1.1 proves that $\\mathcal F^+$ is separated.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The risk is injectivity on stalks for the first plus construction. Step 1.3 uses eventual equality in the filtered colimit together with the single-chart description to recover equality back in F_x."
+      }
+    },
+    "lem-second-plus-construction-is-sheaf": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The cover in step 1.1 may be empty, in which case the empty family already gives the unique section over $\\varnothing$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the double-plus sheaf lemma, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the double-plus sheaf lemma, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the double-plus sheaf lemma, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the double-plus sheaf lemma, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses first-plus presentations and then underlying $\\mathcal F$-presentations for the local sections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the double-plus sheaf lemma, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the double-plus sheaf lemma, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-presheaf-plus-construction",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $U\\subseteq X$\nbe open.\n\nA **germ-compatible local presentation** of a section over $U$ consists of:\n\n- an open cover $U=\\bigcup_{i\\in I}U_i$;\n- sections $s_i\\in\\mathcal F(U_i)$;\n\nsuch that for every $x\\in U_i\\cap U_j$ the germs agree:\n$$\\left(s_i\\right)_x=\\left(s_j\\right)_x\\text{ in }\\mathcal F_x.$$\n\nTwo germ-compatible local presentations $(U_i,s_i)$ and $(V_j,t_j)$ over $U$\nare called **equivalent** if for every $x\\in U$ and every choice of indices\n$i,j$ with $x\\in U_i\\cap V_j$, one has\n$$\\left(s_i\\right)_x=\\left(t_j\\right)_x\\text{ in }\\mathcal F_x.$$\n\nThe **plus construction** $\\mathcal F^+$ is the presheaf defined by letting\n$\\mathcal F^+(U)$ be the set of equivalence classes of germ-compatible local\npresentations over $U$. Restriction to an open subset $V\\subseteq U$ is obtained\nby replacing the cover $U_i$ with $U_i\\cap V$ and restricting each section\n$s_i$ to $U_i\\cap V$.\n\nThere is a canonical morphism of presheaves\n$$\\eta:\\mathcal F\\longrightarrow\\mathcal F^+$$\nwhose component on $U$ sends a section $s\\in\\mathcal F(U)$ to the class of the\nsingle-chart presentation $(U,s)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-first-plus-construction-is-separated",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let\n$\\eta:\\mathcal F\\to\\mathcal F^+$ be the canonical map of\n[[def-presheaf-plus-construction]]. Then:\n\n1. $\\mathcal F^+$ is a separated presheaf.\n2. For every $x\\in X$, the induced map on stalks\n   $$\\eta_x:\\mathcal F_x\\longrightarrow(\\mathcal F^+)_x$$\n   is a bijection.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $U=\\bigcup_{i\\in I}U_i$ be an open cover and let $\\sigma_i\\in\\mathcal F^{++}(U_i)$ be compatible on overlaps. For each $i$, choose a presentation of $\\sigma_i$ by sections $\\tau_{i,a}\\in\\mathcal F^+(V_{i,a})$ on an open cover $U_i=\\bigcup_a V_{i,a}$. For each $\\tau_{i,a}$, choose a presentation by sections $s_{i,a,b}\\in\\mathcal F(W_{i,a,b})$ on an open cover $V_{i,a}=\\bigcup_b W_{i,a,b}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The compatibility of the $\\sigma_i$ means that whenever $x\\in U_i\\cap U_j$, the germs of $\\sigma_i$ and $\\sigma_j$ at $x$ agree. Hence, after restricting to small enough neighbourhoods of $x$, some representatives $\\tau_{i,a}$ and $\\tau_{j,c}$ have the same germ at every point near $x$. By [F1], that equality in $\\mathcal F^+$ means that after refining further, the underlying $\\mathcal F$-sections $s_{i,a,b}$ and $s_{j,c,d}$ agree on the refined overlap. Therefore the full family of local $\\mathcal F$-sections can be refined to a germ-compatible presentation over all of $U$, which defines a section $\\sigma\\in\\mathcal F^{++}(U)$ restricting to each $\\sigma_i$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $\\sigma,\\sigma'\\in\\mathcal F^{++}(U)$ restrict equally to every $U_i$. Then for each $x\\in U$ one can choose $i$ with $x\\in U_i$, so the germs of $\\sigma$ and $\\sigma'$ at $x$ agree. Equality of germs in $\\mathcal F^{++}$ means equality of the represented $\\mathcal F^+$-sections near $x$, and [L1] then forces those local $\\mathcal F^+$-sections to be equal wherever they are both defined. Thus the two global presentations of $\\sigma$ and $\\sigma'$ are equivalent, so $\\sigma=\\sigma'$. Hence locality holds.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1 and 3.1 give gluing and locality for every open cover. Therefore [F2] shows that $\\mathcal F^{++}$ is a sheaf.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ]
+    },
+    "thm-sheafification-universal-property": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For the sheafification adjunction theorem, the top-level claim has no additional empty-family branch beyond the open-cover or germ cases already written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the sheafification adjunction theorem, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the sheafification adjunction theorem, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the sheafification adjunction theorem, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the sheafification adjunction theorem, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a local presentation of a plus-section, and step 3.1 chooses local representatives of a section of $a\\mathcal F$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the sheafification adjunction theorem, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the sheafification adjunction theorem, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sheafification",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.\n\nIts **sheafification** is the sheaf\n$$a\\mathcal F:=\\mathcal F^{++}.$$\n\nThe canonical morphism\n$$\\eta_{\\mathcal F}:\\mathcal F\\longrightarrow a\\mathcal F$$\nis the composite\n$$\\mathcal F\\xrightarrow{\\ \\eta\\ }\\mathcal F^+\\xrightarrow{\\ \\eta\\ }(\\mathcal F^+)^+=a\\mathcal F,$$\nwhere each $\\eta$ is the single-chart map of\n[[def-presheaf-plus-construction]].\n\nBy [[lem-second-plus-construction-is-sheaf]], $a\\mathcal F$ is indeed a sheaf.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-first-plus-construction-is-separated",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let\n$\\eta:\\mathcal F\\to\\mathcal F^+$ be the canonical map of\n[[def-presheaf-plus-construction]]. Then:\n\n1. $\\mathcal F^+$ is a separated presheaf.\n2. For every $x\\in X$, the induced map on stalks\n   $$\\eta_x:\\mathcal F_x\\longrightarrow(\\mathcal F^+)_x$$\n   is a bijection.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-second-plus-construction-is-sheaf",
+          "source_section": "Statement",
+          "quote": "For every presheaf $\\mathcal F$ on a topological space $X$, the double plus\nconstruction $\\mathcal F^{++}=(\\mathcal F^+)^+$ is a sheaf.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\sigma\\in\\mathcal F^+(U)$ be represented by sections $s_i\\in\\mathcal F(U_i)$ on an open cover $U=\\bigcup_iU_i$. The sections $\\varphi_{U_i}(s_i)\\in\\mathcal G(U_i)$ have equal germs on overlaps because the $s_i$ do. Since $\\mathcal G$ is a sheaf, they glue uniquely to a section $\\varphi^+_U(\\sigma)\\in\\mathcal G(U)$. This is independent of the chosen presentation because equivalent presentations have the same germs at every point, and a sheaf is separated. Thus $\\varphi$ extends uniquely to a morphism $\\varphi^+:\\mathcal F^+\\to\\mathcal G$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the same construction again to the morphism $\\varphi^+:\\mathcal F^+\\to\\mathcal G$. Because $\\mathcal G$ is already a sheaf, this yields a morphism $$\\overline\\varphi:(\\mathcal F^+)^+=a\\mathcal F\\longrightarrow\\mathcal G$$ whose restriction along the second unit map is $\\varphi^+$. Composing with the first unit map gives $\\overline\\varphi\\circ\\eta_{\\mathcal F}=\\varphi$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "To prove uniqueness, let $\\psi,\\psi':a\\mathcal F\\to\\mathcal G$ satisfy $\\psi\\circ\\eta_{\\mathcal F}=\\psi'\\circ\\eta_{\\mathcal F}$. Fix an open set $U$ and a section $\\sigma\\in a\\mathcal F(U)$. By [F1], $\\sigma$ is represented locally by sections of $\\mathcal F^+$, and each such local $\\mathcal F^+$-section is itself locally represented by sections of $\\mathcal F$. Therefore $U$ admits an open cover $\\{U_i\\}$ and sections $s_i\\in\\mathcal F(U_i)$ such that $$\\sigma|_{U_i}=\\eta_{\\mathcal F,U_i}(s_i)$$ for every $i$. On each $U_i$ the hypothesis gives $$\\psi_U(\\sigma)|_{U_i}=\\psi_{U_i}(\\eta_{\\mathcal F,U_i}(s_i)) =\\psi'_{U_i}(\\eta_{\\mathcal F,U_i}(s_i)) =\\psi'_U(\\sigma)|_{U_i}.$$ Since $\\mathcal G$ is a sheaf, locality forces $\\psi_U(\\sigma)=\\psi'_U(\\sigma)$. Thus $\\psi=\\psi'$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1 and 3.1 prove that every morphism $\\mathcal F\\to\\mathcal G$ factors uniquely through $\\eta_{\\mathcal F}$. This is the stated adjoint universal property.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ]
+    },
+    "thm-sheafification-preserves-stalks": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For the stalk preservation theorem for sheafification, the top-level claim has no additional empty-family branch beyond the open-cover or germ cases already written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the stalk preservation theorem for sheafification, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the stalk preservation theorem for sheafification, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the stalk preservation theorem for sheafification, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the stalk preservation theorem for sheafification, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the stalk preservation theorem for sheafification, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the stalk preservation theorem for sheafification, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the stalk preservation theorem for sheafification, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sheafification",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.\n\nIts **sheafification** is the sheaf\n$$a\\mathcal F:=\\mathcal F^{++}.$$\n\nThe canonical morphism\n$$\\eta_{\\mathcal F}:\\mathcal F\\longrightarrow a\\mathcal F$$\nis the composite\n$$\\mathcal F\\xrightarrow{\\ \\eta\\ }\\mathcal F^+\\xrightarrow{\\ \\eta\\ }(\\mathcal F^+)^+=a\\mathcal F,$$\nwhere each $\\eta$ is the single-chart map of\n[[def-presheaf-plus-construction]].\n\nBy [[lem-second-plus-construction-is-sheaf]], $a\\mathcal F$ is indeed a sheaf.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-first-plus-construction-is-separated",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let\n$\\eta:\\mathcal F\\to\\mathcal F^+$ be the canonical map of\n[[def-presheaf-plus-construction]]. Then:\n\n1. $\\mathcal F^+$ is a separated presheaf.\n2. For every $x\\in X$, the induced map on stalks\n   $$\\eta_x:\\mathcal F_x\\longrightarrow(\\mathcal F^+)_x$$\n   is a bijection.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+          "source_section": "Statement",
+          "quote": "Let $D:\\mathcal J\\to\\mathbf{Set}$ be a small filtered diagram. For\n$x\\in D(j)$ and $y\\in D(k)$, their images in $\\operatorname*{colim}D$ are equal\nif and only if there are arrows $a:j\\to\\ell$ and $b:k\\to\\ell$ such that\n$D(a)(x)=D(b)(y)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] to the presheaf $\\mathcal F$. This gives a bijection $$\\mathcal F_x\\xrightarrow{\\ \\cong\\ }(\\mathcal F^+)_x.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L1] again, now to the presheaf $\\mathcal F^+$. Since [L1] holds for every presheaf, it yields a bijection $$ (\\mathcal F^+)_x\\xrightarrow{\\ \\cong\\ }((\\mathcal F^+)^+)_x=(a\\mathcal F)_x. $$ The reference to [F2] is the same eventual-equality argument used inside [L1] to prove injectivity on stalks.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Composing the bijections of steps 1.1 and 2.1 gives the required isomorphism $$\\mathcal F_x\\xrightarrow{\\ \\cong\\ }(a\\mathcal F)_x.$$ By [F1], this composite is exactly the map induced by $\\eta_{\\mathcal F}$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ]
+    },
+    "cor-sheafification-idempotent": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For the idempotence corollary, the top-level claim has no additional empty-family branch beyond the open-cover or germ cases already written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the idempotence corollary, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the idempotence corollary, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the idempotence corollary, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the idempotence corollary, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the idempotence corollary, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the idempotence corollary, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the idempotence corollary, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sheafification",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.\n\nIts **sheafification** is the sheaf\n$$a\\mathcal F:=\\mathcal F^{++}.$$\n\nThe canonical morphism\n$$\\eta_{\\mathcal F}:\\mathcal F\\longrightarrow a\\mathcal F$$\nis the composite\n$$\\mathcal F\\xrightarrow{\\ \\eta\\ }\\mathcal F^+\\xrightarrow{\\ \\eta\\ }(\\mathcal F^+)^+=a\\mathcal F,$$\nwhere each $\\eta$ is the single-chart map of\n[[def-presheaf-plus-construction]].\n\nBy [[lem-second-plus-construction-is-sheaf]], $a\\mathcal F$ is indeed a sheaf.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sheafification-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, let\n$\\eta_{\\mathcal F}:\\mathcal F\\to a\\mathcal F$ be its sheafification map, and let\n$\\mathcal G$ be a sheaf on $X$. Then every morphism of presheaves\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nfactors uniquely through $\\eta_{\\mathcal F}$:\nthere is a unique morphism of sheaves\n$$\\overline\\varphi:a\\mathcal F\\longrightarrow\\mathcal G$$\nsuch that\n$$\\varphi=\\overline\\varphi\\circ\\eta_{\\mathcal F}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $a\\mathcal F$ is already a sheaf by [F1], apply [L1] to the identity map $1_{a\\mathcal F}:a\\mathcal F\\to a\\mathcal F$. There is a unique morphism $$\\varepsilon:a(a\\mathcal F)\\longrightarrow a\\mathcal F$$ such that $$\\varepsilon\\circ\\eta_{a\\mathcal F}=1_{a\\mathcal F}.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L1] again to the map $\\eta_{a\\mathcal F}:a\\mathcal F\\to a(a\\mathcal F)$, whose target is also a sheaf. The identity map on $a(a\\mathcal F)$ is one factorization through $\\eta_{a\\mathcal F}$. The composite $\\eta_{a\\mathcal F}\\circ\\varepsilon$ is another, because step 1.1 gives $(\\eta_{a\\mathcal F}\\circ\\varepsilon)\\circ\\eta_{a\\mathcal F} =\\eta_{a\\mathcal F}$. By uniqueness in [L1], $\\eta_{a\\mathcal F}\\circ\\varepsilon=1_{a(a\\mathcal F)}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 show that $\\varepsilon$ and $\\eta_{a\\mathcal F}$ are two-sided inverses. Therefore $\\eta_{a\\mathcal F}$ is an isomorphism, so $a(a\\mathcal F)\\cong a\\mathcal F$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ]
+    },
+    "lem-image-sheaf-is-sheafification-presheaf-image": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the sheaf condition for the locally representable image sections, so the empty open set is included."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the image-sheaf comparison lemma, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the image-sheaf comparison lemma, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the image-sheaf comparison lemma, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the image-sheaf comparison lemma, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 chooses an open cover and local lifts $s_i$ witnessing that a target section is locally in the image."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the image-sheaf comparison lemma, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the image-sheaf comparison lemma, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subsheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal G$ be a sheaf of sets on a topological space $X$.\n\nA **subsheaf** of $\\mathcal G$ is a sheaf $\\mathcal H$ on $X$ together with a\nmorphism of presheaves\n$$\\iota:\\mathcal H\\longrightarrow\\mathcal G$$\n([[def-morphism-of-presheaves]]) such that for every open set $U\\subseteq X$,\nthe component\n$$\\iota_U:\\mathcal H(U)\\longrightarrow\\mathcal G(U)$$\nis injective.\n\nEquivalently, one may identify $\\mathcal H(U)$ with a subset of $\\mathcal G(U)$\nfor every open $U$, with restriction maps inherited from $\\mathcal G$, and then\nrequire that these subsets define a sheaf. A subpresheaf of a sheaf need not be\na subsheaf, because it may fail gluing.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-morphism-of-presheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ and $\\mathcal G$ be presheaves on a topological space $X$.\nA **morphism of presheaves**\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nis a natural transformation ([[def-natural-transformation]]) between the two\ncontravariant functors on $\\operatorname{Open}(X)$.\n\nEquivalently, it is a family of maps\n$$\\varphi_U:\\mathcal F(U)\\longrightarrow\\mathcal G(U)$$\nfor every open $U \\subseteq X$, such that for every inclusion $V \\subseteq U$\nthe square\n$$\n\\begin{aligned}\n\\mathcal F(U) &\\xrightarrow{\\ \\varphi_U\\ } \\mathcal G(U)\\\\\n\\downarrow && \\downarrow\\\\\n\\mathcal F(V) &\\xrightarrow{\\ \\varphi_V\\ } \\mathcal G(V)\n\\end{aligned}\n$$\ncommutes, that is,\n$$\\varphi_V(s|_V)=\\varphi_U(s)|_V\\qquad\\text{for all }s\\in\\mathcal F(U).$$\n\nComposition and identities are taken componentwise.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sheafification-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, let\n$\\eta_{\\mathcal F}:\\mathcal F\\to a\\mathcal F$ be its sheafification map, and let\n$\\mathcal G$ be a sheaf on $X$. Then every morphism of presheaves\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nfactors uniquely through $\\eta_{\\mathcal F}$:\nthere is a unique morphism of sheaves\n$$\\overline\\varphi:a\\mathcal F\\longrightarrow\\mathcal G$$\nsuch that\n$$\\varphi=\\overline\\varphi\\circ\\eta_{\\mathcal F}.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The assignment $U\\mapsto I(U)$ is a subpresheaf of $\\mathcal G$: if $t=\\varphi_U(s)\\in I(U)$ and $V\\subseteq U$, then $t|_V=\\varphi_V(s|_V)\\in I(V)$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The assignment $J$ is a subsheaf of $\\mathcal G$. Indeed, restriction clearly preserves local representability. If sections $t_i\\in J(U_i)$ on an open cover of $U$ agree on overlaps, then because $\\mathcal G$ is a sheaf they glue to a unique $t\\in\\mathcal G(U)$. The local witnesses for each $t_i$ also witness that $t$ lies in $J(U)$. Thus $J$ is a sheaf, and [F1] makes it a subsheaf. The factorization $\\mathcal F\\to J$ is immediate from the definition of $J$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $I$ maps into the sheaf $J$, [L1] gives a unique morphism $$\\alpha:aI\\longrightarrow J$$ extending the inclusion $I\\hookrightarrow J$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, let $t\\in J(U)$. Choose an open cover $U=\\bigcup_iU_i$ and sections $s_i\\in\\mathcal F(U_i)$ with $\\varphi_{U_i}(s_i)=t|_{U_i}$. Then the sections $\\varphi_{U_i}(s_i)\\in I(U_i)$ are compatible on overlaps because they all come from $t$. Hence they define a section $\\beta_U(t)\\in aI(U)$ by the very construction of sheafification. These assignments are compatible with restriction, so they define a morphism $\\beta:J\\to aI$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The composites $\\alpha\\circ\\beta$ and $\\beta\\circ\\alpha$ are identities, because both are identities locally on the chosen image sections that generate $J$ and $aI$, and both targets are sheaves. Therefore $\\alpha$ is an isomorphism.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The risk is whether local image witnesses glue to mutually inverse maps. Step 2.2 constructs the local image section in aI, and step 3.1 identifies both composites on the local image charts."
+      }
+    },
+    "ex-sheaf-continuous-real-functions": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 glues continuous functions on an arbitrary open cover, including the empty cover of $\\varnothing$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the continuous-function sheaf example, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the continuous-function sheaf example, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the continuous-function sheaf example, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the continuous-function sheaf example, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the continuous-function sheaf example, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the continuous-function sheaf example, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the continuous-function sheaf example, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Restriction of a continuous function is continuous, so $U\\mapsto C^0(U,\\mathbb R)$ is a presheaf. If two continuous functions on $U$ agree on every $U_i$, then they agree pointwise on all of $U$ because the $U_i$ cover $U$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $f_i\\in C^0(U_i,\\mathbb R)$ be compatible on overlaps. Define $f:U\\to\\mathbb R$ by $f(x)=f_i(x)$ for any $i$ with $x\\in U_i$. Compatibility makes this well defined, and continuity is local on the open cover because $f|_{U_i}=f_i$ is continuous for each $i$. Thus [L1] holds.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        }
+      ]
+    },
+    "ex-sheaf-locally-constant-functions": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats gluing on arbitrary covers, so the empty cover over $\\varnothing$ is included."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the locally constant function example, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the locally constant function example, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the locally constant function example, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the locally constant function example, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the locally constant function example, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the locally constant function example, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the locally constant function example, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-germ-of-section",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on $X$, let $x\\in X$, and let $s\\in\\mathcal F(U)$\nfor some open set $U$ containing $x$.\n\nThe class of the pair $(U,s)$ in the stalk $\\mathcal F_x$ is called the\n**germ of $s$ at $x$**, and it is denoted by\n$$s_x\\in\\mathcal F_x.$$\n\nFor every open set $U$ containing $x$, this gives a canonical map\n$$\\mathcal F(U)\\longrightarrow\\mathcal F_x,\\qquad s\\longmapsto s_x.$$\n\nIf $V\\subseteq U$ is open and also contains $x$, then $(s|_V)_x=s_x$, because\nthe two pairs $(U,s)$ and $(V,s|_V)$ agree on the smaller open neighbourhood\n$V$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Restriction preserves local constancy. If two locally constant functions on $U$ agree on an open cover, then they agree pointwise on $U$. If locally constant functions $f_i:U_i\\to A$ are compatible on an open cover of $U$, the pointwise glued function $f$ is well defined and locally constant because near any point it agrees with one of the local functions $f_i$. Hence [L1] holds and $\\underline A_{\\mathrm{loc}}$ is a sheaf.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $\\epsilon_x:\\underline A_{\\mathrm{loc},x}\\to A$ by $\\epsilon_x([U,f])=f(x)$. This is well defined because equal germs agree on some neighbourhood of $x$, hence have the same value at $x$. Every $a\\in A$ is the value at $x$ of the constant function $a$ on any neighbourhood of $x$, so $\\epsilon_x$ is surjective. If $\\epsilon_x([U,f])=\\epsilon_x([V,g])$, then $f(x)=g(x)$. Since both functions are locally constant, there is a neighbourhood $W$ of $x$ on which $f$ and $g$ are both constantly this common value, so $[U,f]=[V,g]$. Therefore $\\epsilon_x$ is bijective.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The risk is the stalk computation. Step 2.1 proves injectivity of evaluation by shrinking to neighbourhoods on which both locally constant functions are constant with the same value."
+      }
+    },
+    "cex-presheaf-bounded-continuous-functions-not-sheaf": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In the bounded-function counterexample, the refutation is driven by one explicit nonempty witness cover or local family; an empty-family variant would not change the failure of the universal claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the bounded-function counterexample, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the bounded-function counterexample, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the bounded-function counterexample, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the bounded-function counterexample, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the bounded-function counterexample, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the bounded-function counterexample, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the bounded-function counterexample, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-presheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. A **presheaf of sets on $X$** is a\ncontravariant functor\n$$\\mathcal F:\\operatorname{Open}(X)\\longrightarrow \\mathbf{Set}$$\n([[def-functor-and-contravariant-functor]],\n[[prop-sets-and-functions-form-category-set]]).\n\nEquivalently, a presheaf of sets on $X$ consists of:\n\n- a set $\\mathcal F(U)$ for every open set $U \\subseteq X$;\n- for every inclusion $V \\subseteq U$, a restriction map\n  $$\\rho^U_V:\\mathcal F(U)\\longrightarrow \\mathcal F(V),$$\n\nsuch that\n$$\\rho^U_U=\\operatorname{id}_{\\mathcal F(U)}$$\nand, whenever $W \\subseteq V \\subseteq U$,\n$$\\rho^U_W=\\rho^V_W\\circ \\rho^U_V.$$\n\nBecause the arrows of $\\operatorname{Open}(X)$ are the inclusions\n$V \\to U$ with $V \\subseteq U$, contravariance is exactly the rule that sections\nover a larger open set restrict to sections over a smaller one.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each integer $n\\ge1$, let $U_n:=(-n,n)$ and let $s_n:U_n\\to\\mathbb R$ be the identity function $s_n(x)=x$. Each $s_n$ lies in $C^0_b(U_n,\\mathbb R)$ because $U_n$ is bounded.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $m\\le n$, then $s_n|_{U_m}=s_m$, so the family $(s_n)$ is compatible on the open cover $\\mathbb R=\\bigcup_{n\\ge1}U_n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Any glued section on $\\mathbb R$ would have to equal the identity function $x\\mapsto x$, because it agrees with each $s_n$ on $U_n$. But $x\\mapsto x$ is not bounded on $\\mathbb R$, so it does not lie in $C^0_b(\\mathbb R,\\mathbb R)$. This violates the gluing requirement in [L1]. Therefore the stated presheaf is not a sheaf.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ]
+    },
+    "cex-constant-presheaf-not-sheaf-disconnected-open": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the empty overlap $U_1\\cap U_2=\\varnothing$ as the actual compatibility witness in the counterexample."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the disconnected-open constant-presheaf counterexample, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the disconnected-open constant-presheaf counterexample, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the disconnected-open constant-presheaf counterexample, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the disconnected-open constant-presheaf counterexample, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the disconnected-open constant-presheaf counterexample, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the disconnected-open constant-presheaf counterexample, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the disconnected-open constant-presheaf counterexample, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-presheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. A **presheaf of sets on $X$** is a\ncontravariant functor\n$$\\mathcal F:\\operatorname{Open}(X)\\longrightarrow \\mathbf{Set}$$\n([[def-functor-and-contravariant-functor]],\n[[prop-sets-and-functions-form-category-set]]).\n\nEquivalently, a presheaf of sets on $X$ consists of:\n\n- a set $\\mathcal F(U)$ for every open set $U \\subseteq X$;\n- for every inclusion $V \\subseteq U$, a restriction map\n  $$\\rho^U_V:\\mathcal F(U)\\longrightarrow \\mathcal F(V),$$\n\nsuch that\n$$\\rho^U_U=\\operatorname{id}_{\\mathcal F(U)}$$\nand, whenever $W \\subseteq V \\subseteq U$,\n$$\\rho^U_W=\\rho^V_W\\circ \\rho^U_V.$$\n\nBecause the arrows of $\\operatorname{Open}(X)$ are the inclusions\n$V \\to U$ with $V \\subseteq U$, contravariance is exactly the rule that sections\nover a larger open set restrict to sections over a smaller one.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sheafification",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.\n\nIts **sheafification** is the sheaf\n$$a\\mathcal F:=\\mathcal F^{++}.$$\n\nThe canonical morphism\n$$\\eta_{\\mathcal F}:\\mathcal F\\longrightarrow a\\mathcal F$$\nis the composite\n$$\\mathcal F\\xrightarrow{\\ \\eta\\ }\\mathcal F^+\\xrightarrow{\\ \\eta\\ }(\\mathcal F^+)^+=a\\mathcal F,$$\nwhere each $\\eta$ is the single-chart map of\n[[def-presheaf-plus-construction]].\n\nBy [[lem-second-plus-construction-is-sheaf]], $a\\mathcal F$ is indeed a sheaf.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "ex-sheaf-locally-constant-functions",
+          "source_section": "Example",
+          "quote": "Fix a set $A$. For each open set $U\\subseteq X$, let\n$$\\underline A_{\\mathrm{loc}}(U):=\\{f:U\\to A \\text{ locally constant}\\}.$$\nWith the usual restriction maps, this is a sheaf of sets on $X$. For every\n$x\\in X$, evaluation at $x$ induces a canonical bijection\n$$\\underline A_{\\mathrm{loc},x}\\cong A.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $\\underline A_{\\mathrm{pre}}$ is a presheaf. On the disjoint cover $U=U_1\\cup U_2$, choose the local sections $s_1:=a\\in\\underline A_{\\mathrm {pre}}(U_1)$ and $s_2:=b\\in\\underline A_{\\mathrm{pre}}(U_2)$. Because $U_1\\cap U_2=\\varnothing$, there is no overlap condition to check, so the pair is compatible.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A glued section over $U$ would have to be an element $s\\in A$ whose restriction to $U_1$ is $a$ and to $U_2$ is $b$. But every restriction map is the identity, so this would force $s=a=b$, contradicting the choice $a\\neq b$. Therefore $\\underline A_{\\mathrm{pre}}$ is not a sheaf.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The sheafification of $\\underline A_{\\mathrm{pre}}$ records exactly the data obtained by gluing constant local sections on an open cover, which is the same as an $A$-valued locally constant function. By [L1], that sheaf is $\\underline A_{\\mathrm{loc}}$, so [F2] identifies the locally constant sheaf as the sheafification of the constant presheaf.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ]
+    },
+    "ex-skyscraper-set-sheaf-stalks": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats opens not containing $x_0$, which includes the empty open set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the set-valued skyscraper example, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the set-valued skyscraper example, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the set-valued skyscraper example, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the set-valued skyscraper example, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the set-valued skyscraper example, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the set-valued skyscraper example, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the set-valued skyscraper example, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-germ-of-section",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on $X$, let $x\\in X$, and let $s\\in\\mathcal F(U)$\nfor some open set $U$ containing $x$.\n\nThe class of the pair $(U,s)$ in the stalk $\\mathcal F_x$ is called the\n**germ of $s$ at $x$**, and it is denoted by\n$$s_x\\in\\mathcal F_x.$$\n\nFor every open set $U$ containing $x$, this gives a canonical map\n$$\\mathcal F(U)\\longrightarrow\\mathcal F_x,\\qquad s\\longmapsto s_x.$$\n\nIf $V\\subseteq U$ is open and also contains $x$, then $(s|_V)_x=s_x$, because\nthe two pairs $(U,s)$ and $(V,s|_V)$ agree on the smaller open neighbourhood\n$V$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If an open set $U$ does not contain $x_0$, then every section of $\\mathcal S_{x_0,A}(U)$ is the unique element $\\ast$, so locality and gluing are trivial. If $x_0\\in U$ and $U=\\bigcup_iU_i$, then at least one $U_i$ contains $x_0$. Compatibility forces all sections on such $U_i$ to be the same element of $A$, and every $U_j$ not containing $x_0$ contributes only the unique section $\\ast$. Thus there is a unique glued section on $U$. Therefore [L1] holds and $\\mathcal S_{x_0,A}$ is a sheaf.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the stalk at $x_0$, every neighbourhood of $x_0$ has section set $A$ and every transition map is the identity on $A$. Hence the colimit in [F1] is canonically $A$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $y$ has an open neighbourhood $V$ with $x_0\\notin V$, then every smaller neighbourhood of $y$ inside $V$ also has section set $\\{\\ast\\}$. Hence the stalk diagram is eventually constant at $\\{\\ast\\}$, so [F1] gives $(\\mathcal S_{x_0,A})_y\\cong\\{\\ast\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "The risk was the off-support stalk claim on non-T1 spaces. The statement is now narrowed to points with a neighbourhood disjoint from x_0, and step 2.1 computes the eventual singleton stalk on that basis."
+      }
+    },
+    "ex-extension-by-empty-outside-open": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 splits into the cases $V\\subseteq W$ and $V\\not\\subseteq W$; the empty open set sits in the first branch with the unique section $\\ast$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the empty-outside extension example, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the empty-outside extension example, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the empty-outside extension example, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the empty-outside extension example, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the empty-outside extension example, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the empty-outside extension example, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the empty-outside extension example, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $V\\subseteq W$, then every $V_i\\subseteq W$ has the unique section $\\ast$, and the only possible glued section on $V$ is again $\\ast$. If $V\\not\\subseteq W$, choose $x\\in V\\setminus W$. Some cover member $V_i$ contains $x$, so $V_i\\not\\subseteq W$ and $\\mathcal E_W(V_i)=\\varnothing$. Hence there is no compatible family of local sections on this cover. In either case the gluing and uniqueness clauses in [L1] are satisfied.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Restriction maps are forced: from $\\{\\ast\\}$ to $\\{\\ast\\}$ they are the identity, and into $\\varnothing$ there is only the empty function from $\\varnothing$. Thus $\\mathcal E_W$ is a presheaf, and step 1.1 shows it is a sheaf.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ]
+    },
+    "cex-objectwise-image-not-sheaf": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In the objectwise-image counterexample on the circle, the refutation is driven by one explicit nonempty witness cover or local family; an empty-family variant would not change the failure of the universal claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the objectwise-image counterexample on the circle, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the objectwise-image counterexample on the circle, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the objectwise-image counterexample on the circle, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the objectwise-image counterexample on the circle, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses continuous argument functions on the two covering arcs of $S^1$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the objectwise-image counterexample on the circle, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the objectwise-image counterexample on the circle, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subsheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal G$ be a sheaf of sets on a topological space $X$.\n\nA **subsheaf** of $\\mathcal G$ is a sheaf $\\mathcal H$ on $X$ together with a\nmorphism of presheaves\n$$\\iota:\\mathcal H\\longrightarrow\\mathcal G$$\n([[def-morphism-of-presheaves]]) such that for every open set $U\\subseteq X$,\nthe component\n$$\\iota_U:\\mathcal H(U)\\longrightarrow\\mathcal G(U)$$\nis injective.\n\nEquivalently, one may identify $\\mathcal H(U)$ with a subset of $\\mathcal G(U)$\nfor every open $U$, with restriction maps inherited from $\\mathcal G$, and then\nrequire that these subsets define a sheaf. A subpresheaf of a sheaf need not be\na subsheaf, because it may fail gluing.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-image-sheaf-is-sheafification-presheaf-image",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of sets on a\ntopological space $X$, and let $I$ be the **presheaf image**\n$$I(U):=\\varphi_U(\\mathcal F(U))\\subseteq\\mathcal G(U).$$\nDefine the **image sheaf** $J$ by\n$$\nJ(U):=\\left\\{\\,t\\in\\mathcal G(U):\n\\text{ for every }x\\in U\\text{ there exists }x\\in V\\subseteq U\n\\text{ and }s\\in\\mathcal F(V)\\text{ with }\\varphi_V(s)=t|_V\\,\\right\\}.\n$$\nThen $J$ is a subsheaf of $\\mathcal G$, $\\varphi$ factors through $J$, and the\ncanonical map\n$$aI\\longrightarrow J$$\nis an isomorphism. In particular, the image sheaf is the sheafification of the\nobjectwise image presheaf.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $U_1=S^1\\setminus\\{(-1,0)\\}$ and $U_2=S^1\\setminus\\{(1,0)\\}$. These open arcs cover $S^1$. On each $U_i$ choose a continuous argument $\\theta_i:U_i\\to\\mathbb R$ with $e^{2\\pi i\\theta_i(z)}=z$. Therefore the identity map $\\operatorname{id}_{S^1}$ restricts to sections in the objectwise image presheaf on both $U_1$ and $U_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the overlap $U_1\\cap U_2$, both local sections are equal to the same target section $\\operatorname{id}_{S^1}|_{U_1\\cap U_2}$, so they are compatible.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $\\operatorname{id}_{S^1}$ lay in the global objectwise image. Then there would be a continuous $f:S^1\\to\\mathbb R$ with $e^{2\\pi i f(z)}=z$ for every $z\\in S^1$. Writing $z=e^{2\\pi i t}$ with $t\\in[0,1]$, the function $g(t):=f(e^{2\\pi i t})-t$ is continuous and integer valued, hence constant. So $f(e^{2\\pi i t})=t+n$ for some fixed integer $n$. Evaluating at $t=0$ and $t=1$ gives two values of $f$ at the same point $1\\in S^1$, namely $n$ and $n+1$, a contradiction. Thus $\\operatorname{id}_{S^1}$ is not in the global objectwise image.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1 to 3.1 give compatible local sections in the image presheaf that do not glue globally, so the objectwise image is not a sheaf and hence not a subsheaf by [F1]. By [L1], its sheafification is the correct image sheaf.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 3.1",
+            "step 1.1"
+          ]
+        }
+      ]
+    },
+    "ex-germs-of-continuous-functions": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For the continuous-germ comparison example, the top-level claim has no additional empty-family branch beyond the open-cover or germ cases already written in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the continuous-germ comparison example, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the continuous-germ comparison example, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the continuous-germ comparison example, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the continuous-germ comparison example, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the continuous-germ comparison example, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the continuous-germ comparison example, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the continuous-germ comparison example, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-germ-of-section",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on $X$, let $x\\in X$, and let $s\\in\\mathcal F(U)$\nfor some open set $U$ containing $x$.\n\nThe class of the pair $(U,s)$ in the stalk $\\mathcal F_x$ is called the\n**germ of $s$ at $x$**, and it is denoted by\n$$s_x\\in\\mathcal F_x.$$\n\nFor every open set $U$ containing $x$, this gives a canonical map\n$$\\mathcal F(U)\\longrightarrow\\mathcal F_x,\\qquad s\\longmapsto s_x.$$\n\nIf $V\\subseteq U$ is open and also contains $x$, then $(s|_V)_x=s_x$, because\nthe two pairs $(U,s)$ and $(V,s|_V)$ agree on the smaller open neighbourhood\n$V$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-morphisms-of-sheaves-determined-by-stalks",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi,\\psi:\\mathcal F\\to\\mathcal G$ be morphisms of sheaves of sets on a\ntopological space $X$. If the induced maps on stalks\n$$\\varphi_x,\\psi_x:\\mathcal F_x\\longrightarrow\\mathcal G_x$$\nare equal for every $x\\in X$, then $\\varphi=\\psi$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The function $g$ vanishes on the neighbourhood $(-1,1)$ of $0$, so its germ at $0$ equals the germ of the zero function by [F1]. But $g(2)=1$, so the two functions are not equal globally.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $f_x=g_x$ for every $x\\in U$, then [F1] gives for each $x$ an open neighbourhood $V_x\\subseteq U$ on which $f|_{V_x}=g|_{V_x}$. The sets $V_x$ cover $U$, so $f$ and $g$ agree at every point of $U$ and hence are equal.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This pointwise-germ criterion is the section-level instance behind [L1]: one stalk does not determine a section, but all stalks together do.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ]
+    },
+    "ex-empty-space-unique-sheaf-sections": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies $\\varnothing$ as the only open set, and step 2.1 shows its section set is a singleton."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For the empty-space sheaf example, every displayed construction is set-theoretic or categorical; there is no symbolic denominator or free numeric parameter whose value 0 changes the argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For the empty-space sheaf example, neither a singleton cover nor a value-1 specialization creates a new branch beyond the argument already on disk."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For the empty-space sheaf example, no further collapsed configuration remains after the hypotheses already built into the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For the empty-space sheaf example, the proof does not study interval endpoints, boundary points of an ordered segment, or end terms of an exact sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the empty-space sheaf example, the proof uses only the data already fixed in the statement and does not need an extra arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the empty-space sheaf example, the statement is not itself written as an if-and-only-if claim, so there is no separate forward iff direction to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the empty-space sheaf example, the statement is not itself written as an if-and-only-if claim, so there is no separate reverse iff direction to certify."
+        }
+      ],
+      "finite_smoke": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and write $\\mathcal{P}(X)$ for its power set. A **topology** on\n$X$ is a family $\\mathcal{T} \\subseteq \\mathcal{P}(X)$ such that\n\n- **(T1)** $\\varnothing \\in \\mathcal{T}$ and $X \\in \\mathcal{T}$;\n- **(T2)** $\\bigcup \\mathcal{S} \\in \\mathcal{T}$ for every $\\mathcal{S} \\subseteq \\mathcal{T}$;\n- **(T3)** $U \\cap V \\in \\mathcal{T}$ for all $U, V \\in \\mathcal{T}$.\n\nA **topological space** is a pair $(X, \\mathcal{T})$ consisting of a set $X$ and\na topology $\\mathcal{T}$ on it; the elements of $X$ are its **points**. When only\none topology is in play we write $X$ for the pair; when several are, the topology\nis always named.\n\nThe members of $\\mathcal{T}$ are the **open** sets of $(X,\\mathcal{T})$. A subset\n$F \\subseteq X$ is **closed** when its complement $X \\setminus F$ is open, and\n**clopen** when it is both open and closed. By (T1) both $\\varnothing$ and $X$\nare clopen. *Open and closed are not opposites*: a set may be neither, and it may\nbe both, so \"not open\" is never a synonym for \"closed\".\n\n**Finite intersections, and the empty one.** Axiom (T3) is stated for two sets\nbecause that is all that is ever needed: if $n \\ge 1$ and\n$U_1, \\dots, U_n \\in \\mathcal{T}$, then $U_1 \\cap \\dots \\cap U_n \\in \\mathcal{T}$\nfollows by iterating (T3) $n-1$ times. The intersection of the **empty** family\nof subsets of $X$ is $X$, since the condition \"lies in every member of the empty\nfamily\" is vacuous; that case is covered by (T1) rather than by (T3), which is\none of the two reasons $X \\in \\mathcal{T}$ is demanded outright. The other is\nthat (T2) alone gives only $\\bigcup \\varnothing = \\varnothing$.\n\n**The closed sets, and the dual axiomatisation.** Put\n$\\mathcal{C} := \\{\\, X \\setminus U : U \\in \\mathcal{T} \\,\\}$, the family of closed\nsets. Then\n\n- **(C1)** $\\varnothing \\in \\mathcal{C}$ and $X \\in \\mathcal{C}$;\n- **(C2)** $\\bigcap \\mathcal{D} \\in \\mathcal{C}$ for every **nonempty**\n  $\\mathcal{D} \\subseteq \\mathcal{C}$;\n- **(C3)** $C \\cup D \\in \\mathcal{C}$ for all $C, D \\in \\mathcal{C}$.\n\nConversely, if a family $\\mathcal{C} \\subseteq \\mathcal{P}(X)$ satisfies (C1),\n(C2) and (C3), then $\\mathcal{T} := \\{\\, X \\setminus C : C \\in \\mathcal{C} \\,\\}$\nis a topology on $X$ whose closed sets are exactly the members of $\\mathcal{C}$.\nSo a topology may be presented equally well by its open sets or by its closed\nsets, and this library uses whichever is shorter.\n\n*Both directions are one computation, and it is carried out here rather than\nassumed.* The map $U \\mapsto X \\setminus U$ is an involution of\n$\\mathcal{P}(X)$, hence a bijection, and it carries the two De Morgan identities\n\n$$X \\setminus \\bigcup_{i \\in I} A_i = \\bigcap_{i \\in I} (X \\setminus A_i) \\quad (I \\ne \\varnothing), \\qquad X \\setminus \\bigcap_{i \\in I} A_i = \\bigcup_{i \\in I} (X \\setminus A_i) \\quad (I \\ne \\varnothing)$$\n\nterm by term into each other. Given (T1)–(T3): $\\varnothing = X \\setminus X$ and\n$X = X \\setminus \\varnothing$ lie in $\\mathcal{C}$, which is (C1); for nonempty\n$\\mathcal{D} \\subseteq \\mathcal{C}$ the family\n$\\mathcal{S} = \\{\\, X \\setminus C : C \\in \\mathcal{D} \\,\\}$ lies in $\\mathcal{T}$\nand $\\bigcap \\mathcal{D} = X \\setminus \\bigcup \\mathcal{S}$ is closed by (T2),\nwhich is (C2); and $C \\cup D = X \\setminus ((X \\setminus C) \\cap (X \\setminus D))$\nis closed by (T3), which is (C3). Given (C1)–(C3) the same three lines run\nbackwards, the empty-union case $\\bigcup \\varnothing = \\varnothing$ being supplied\nby (C1) rather than by (C2); and $\\{\\, X \\setminus C : C \\in \\mathcal{C} \\,\\}$ has\n$\\mathcal{C}$ as its family of complements because complementation is an\ninvolution.\n\n**Comparison of topologies.** If $\\mathcal{T}_1$ and $\\mathcal{T}_2$ are\ntopologies on the same set $X$ and $\\mathcal{T}_1 \\subseteq \\mathcal{T}_2$, then\n$\\mathcal{T}_1$ is **coarser** than $\\mathcal{T}_2$ and $\\mathcal{T}_2$ is\n**finer** than $\\mathcal{T}_1$; the comparison is **strict** when the inclusion\nis. Inclusion is a partial order on the set of topologies on $X$\n([[def-partial-order]]), and it is not a total one: two topologies on the same\nset may be incomparable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-sheaf-section-over-empty-set-terminal",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a sheaf of sets on a topological space $X$. Then\n$\\mathcal F(\\varnothing)$ is a singleton.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], there is no open set to consider except $\\varnothing$, so the whole presheaf data of $\\mathcal F$ is just the set $\\mathcal F(\\varnothing)$ together with its identity restriction map.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], this set $\\mathcal F(\\varnothing)$ is a singleton. Therefore every sheaf on the empty space has exactly one section over its only open set.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ]
+    }
+  }
+}

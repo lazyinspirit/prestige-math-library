@@ -34,9 +34,7 @@ pipeline_run: null
 Let $k$ be an algebraically closed field, and let $\mathfrak m$ be a maximal
 ideal of $k[x_1,\ldots,x_n]$. Then there is a unique point
 $a=(a_1,\ldots,a_n)\in k^n$ such that
-$$
-\mathfrak m=(x_1-a_1,\ldots,x_n-a_n).
-$$
+$$ \mathfrak m=(x_1-a_1,\ldots,x_n-a_n). $$
 
 ## Facts & Assumptions
 

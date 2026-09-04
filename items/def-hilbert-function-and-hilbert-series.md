@@ -33,16 +33,10 @@ piece $M_n$ has finite length as an $S_0$-module and that $M_n=0$ for all
 sufficiently negative $n$.
 
 The **Hilbert function** of $M$ is
-$$
-H_M(n):=\ell_{S_0}(M_n)\qquad (n\in\mathbb Z).
-$$
+$$ H_M(n):=\ell_{S_0}(M_n)\qquad (n\in\mathbb Z). $$
 
 Its **formal Hilbert series** is the formal Laurent series
-$$
-\operatorname{HS}_M(t):=\sum_{n\in\mathbb Z} H_M(n)t^n.
-$$
+$$ \operatorname{HS}_M(t):=\sum_{n\in\mathbb Z} H_M(n)t^n. $$
 
 Thus this is an ordinary formal power series after a shift. For a twist, one has
-$$
-\operatorname{HS}_{M(a)}(t)=t^{-a}\operatorname{HS}_M(t).
-$$
+$$ \operatorname{HS}_{M(a)}(t)=t^{-a}\operatorname{HS}_M(t). $$

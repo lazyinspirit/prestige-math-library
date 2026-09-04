@@ -31,9 +31,7 @@ sources:
 Let $S\subseteq\mathbb R^m$ be an embedded smooth submanifold, and let
 $E:N^\perp S\to\mathbb R^m$ be the normal addition map. Then there exists a
 positive smooth function $\delta:S\to(0,\infty)$ such that $E$ is injective on
-$$
-\Omega_\delta:=\{(p,v)\in N^\perp S:\|v\|<\delta(p)\}.
-$$
+$$ \Omega_\delta:=\{(p,v)\in N^\perp S:\|v\|<\delta(p)\}. $$
 
 ## Facts & Assumptions
 

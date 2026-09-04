@@ -28,9 +28,7 @@ pipeline_run: null
 
 The **Meissel-Mertens constant** is
 
-$$
-B_1:=\lim_{x\to\infty}\left(\sum_{p\le x}\frac1p-\log\log x\right),
-$$
+$$ B_1:=\lim_{x\to\infty}\left(\sum_{p\le x}\frac1p-\log\log x\right), $$
 
 provided the limit exists.
 

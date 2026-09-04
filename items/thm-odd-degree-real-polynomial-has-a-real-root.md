@@ -28,9 +28,7 @@ pipeline_run: frontier-20
 ## Statement
 
 Let
-$$
-f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0 \in \mathbb R[x]
-$$
+$$ f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0 \in \mathbb R[x] $$
 have odd degree $n \ge 1$. Then there exists $c \in \mathbb R$ with $f(c)=0$.
 
 ## Facts & Assumptions

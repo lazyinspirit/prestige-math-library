@@ -23,12 +23,8 @@ sources:
 Consider the DFA over $\{a,b\}$ with states
 $$ q_0,q_a,q_b,r,s, $$
 start state $q_0$, accepting states $\{q_a,q_b\}$, and transitions
-$$
-\delta(q_0,a)=q_a,\ \delta(q_0,b)=q_b,\ \delta(q_a,a)=r,\ \delta(q_a,b)=s,
-$$
-$$
-\delta(q_b,a)=r,\ \delta(q_b,b)=q_b,\ \delta(r,a)=r,\ \delta(r,b)=r,\ \delta(s,a)=s,\ \delta(s,b)=s.
-$$
+$$ \delta(q_0,a)=q_a,\ \delta(q_0,b)=q_b,\ \delta(q_a,a)=r,\ \delta(q_a,b)=s, $$
+$$ \delta(q_b,a)=r,\ \delta(q_b,b)=q_b,\ \delta(r,a)=r,\ \delta(r,b)=r,\ \delta(s,a)=s,\ \delta(s,b)=s. $$
 It recognizes the language $\{a\}\cup\{b^m:m\geq 1\}$.
 
 ## Facts & Assumptions

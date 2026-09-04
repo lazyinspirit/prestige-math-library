@@ -28,15 +28,11 @@ pipeline_run: null
 The **Dirichlet-convolution identity** is the arithmetic function
 $\varepsilon$ given by
 
-$$
-\varepsilon(1)=1,\qquad \varepsilon(n)=0\text{ for }n>1.
-$$
+$$ \varepsilon(1)=1,\qquad \varepsilon(n)=0\text{ for }n>1. $$
 
 The **constant-one function** is the arithmetic function $\mathbf 1$ defined by
 
-$$
-\mathbf 1(n)=1
-$$
+$$ \mathbf 1(n)=1 $$
 
 for every positive integer $n$.
 

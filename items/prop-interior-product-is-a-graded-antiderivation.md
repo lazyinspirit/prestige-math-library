@@ -28,9 +28,7 @@ sources:
 If $\alpha\in\operatorname{Alt}^k(V)$, $\beta\in\operatorname{Alt}^\ell(V)$,
 and $v\in V$, then
 
-$$
-\iota_v(\alpha\wedge\beta)=\iota_v\alpha\wedge\beta+(-1)^k\alpha\wedge\iota_v\beta.
-$$
+$$ \iota_v(\alpha\wedge\beta)=\iota_v\alpha\wedge\beta+(-1)^k\alpha\wedge\iota_v\beta. $$
 
 ## Facts & Assumptions
 

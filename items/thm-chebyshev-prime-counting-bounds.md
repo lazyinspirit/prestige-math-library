@@ -31,9 +31,7 @@ pipeline_run: null
 
 There exist positive constants $c_1<c_2$ and a real number $x_0$ such that
 
-$$
-c_1\frac{x}{\log x}\le\pi(x)\le c_2\frac{x}{\log x}
-$$
+$$ c_1\frac{x}{\log x}\le\pi(x)\le c_2\frac{x}{\log x} $$
 
 for every real $x\ge x_0$.
 

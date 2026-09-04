@@ -32,9 +32,7 @@ Let $M^n$ be a compact smooth manifold. Then there are finitely many coordinate
 charts $(U_i,x_i)$, open sets $V_i\subseteq U_i$ covering $M$, and smooth bump
 functions $\phi_i:M\to[0,1]$ supported in $U_i$ and equal to $1$ on $V_i$ such
 that
-$$
-F:=\bigl(\phi_1,\phi_1x_1^1,\dots,\phi_1x_1^n,\dots,\phi_m,\phi_mx_m^1,\dots,\phi_mx_m^n\bigr):M\to\mathbb R^{m(n+1)}
-$$
+$$ F:=\bigl(\phi_1,\phi_1x_1^1,\dots,\phi_1x_1^n,\dots,\phi_m,\phi_mx_m^1,\dots,\phi_mx_m^n\bigr):M\to\mathbb R^{m(n+1)} $$
 is a smooth embedding.
 
 ## Facts & Assumptions

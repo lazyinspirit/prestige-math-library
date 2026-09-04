@@ -30,15 +30,11 @@ sources:
 Let $c:\mathbb R\to S^1\subseteq\mathbb R^2$ be the parametrized unit circle
 $c(t)=(\cos t,\sin t)$, and let
 
-$$
-\eta=-y\,dx+x\,dy.
-$$
+$$ \eta=-y\,dx+x\,dy. $$
 
 Then
 
-$$
-c^*\eta=dt.
-$$
+$$ c^*\eta=dt. $$
 
 ## Facts & Assumptions
 

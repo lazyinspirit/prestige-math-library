@@ -28,9 +28,7 @@ pipeline_run: null
 Fix a graph $H$ with $h=|V(H)|$ and a real $\epsilon\in(0,\tfrac12)$. Then
 there exists $\delta>0$ such that every nonempty finite simple graph $G$ with
 
-$$
-\operatorname{ind}_H(G)<(\delta|V(G)|)^h
-$$
+$$ \operatorname{ind}_H(G)<(\delta|V(G)|)^h $$
 
 has an $\epsilon$-restricted vertex set of size at least $\delta|V(G)|$.
 

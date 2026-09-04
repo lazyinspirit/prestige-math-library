@@ -26,9 +26,7 @@ pipeline_run: frontier-28
 Assume the Axiom of Dependent Choice.
 
 Let
-$$
-0\to A'\to A\to A''\to0
-$$
+$$ 0\to A'\to A\to A''\to0 $$
 be a split short exact sequence, and let projective resolutions of $A'$ and
 $A''$ be given. Then the sequence admits a projective resolution of $A$ whose
 degree-$n$ term is the direct sum $P'_n\oplus P''_n$ of the chosen side terms.

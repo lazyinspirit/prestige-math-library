@@ -27,9 +27,7 @@ pipeline_run: null
 
 For every real $x\ge1$,
 
-$$
-\sum_{n\le x}\sigma(n)=\frac{\pi^2}{12}x^2+O(x\log x).
-$$
+$$ \sum_{n\le x}\sigma(n)=\frac{\pi^2}{12}x^2+O(x\log x). $$
 
 ## Facts & Assumptions
 

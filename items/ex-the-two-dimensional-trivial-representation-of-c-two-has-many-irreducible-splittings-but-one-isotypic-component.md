@@ -32,9 +32,7 @@ pipeline_run: null
 Let $k$ be a field, let $C_2=\{e,t\}$, and let $V=ke_1\oplus ke_2$ with the
 trivial action of $C_2$. Then
 
-$$
-V=ke_1\oplus ke_2 = k(e_1+e_2)\oplus ke_2
-$$
+$$ V=ke_1\oplus ke_2 = k(e_1+e_2)\oplus ke_2 $$
 
 are two different decompositions into irreducible subrepresentations, but the
 unique isotypic component is all of $V$.

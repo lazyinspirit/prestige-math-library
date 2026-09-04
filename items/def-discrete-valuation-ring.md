@@ -32,9 +32,7 @@ pipeline_run: null
 
 Let $K$ be a field and let $v$ be a discrete valuation on $K$
 ([[def-discrete-valuation]]). Its **valuation ring** is
-$$
-V_v:=\{x\in K:v(x)\ge 0\}.
-$$
+$$ V_v:=\{x\in K:v(x)\ge 0\}. $$
 This is a valuation ring in the sense of [[def-valuation-ring]].
 
 A **discrete valuation ring** (DVR) is a subring $V\subseteq K$ of the form

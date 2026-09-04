@@ -27,13 +27,9 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, let $S \subseteq R$ be multiplicative, and let $M$ be a left $R$-module. The map
-$$
-\Phi:(S^{-1}R)\otimes_R M \longrightarrow S^{-1}M, \qquad \Phi\bigl((a/s)\otimes m\bigr)=am/s,
-$$
+$$ \Phi:(S^{-1}R)\otimes_R M \longrightarrow S^{-1}M, \qquad \Phi\bigl((a/s)\otimes m\bigr)=am/s, $$
 is an isomorphism of $S^{-1}R$-modules. Its inverse is
-$$
-\Psi:S^{-1}M \longrightarrow (S^{-1}R)\otimes_R M, \qquad \Psi(m/s)=(1/s)\otimes m.
-$$
+$$ \Psi:S^{-1}M \longrightarrow (S^{-1}R)\otimes_R M, \qquad \Psi(m/s)=(1/s)\otimes m. $$
 
 ## Facts & Assumptions
 

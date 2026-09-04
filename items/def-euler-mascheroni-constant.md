@@ -30,9 +30,7 @@ pipeline_run: null
 
 The **Euler-Mascheroni constant** is
 
-$$
-\gamma:=\lim_{N\to\infty}\left(\sum_{n=1}^{N}\frac1n-\log N\right),
-$$
+$$ \gamma:=\lim_{N\to\infty}\left(\sum_{n=1}^{N}\frac1n-\log N\right), $$
 
 provided the limit exists.
 

@@ -29,9 +29,7 @@ Let $\mathbb F\in\{\mathbb R,\mathbb C\}$, let $A\in M_n(\mathbb F)$,
 let $\mu\in\mathbb F$, and let $x\in\mathbb F^n$
 satisfy $\|x\|_2=1$. Put $r:=Ax-\mu x$. Then
 
-$$
-\eta(A,\mu,x)=\|r\|_2.
-$$
+$$ \eta(A,\mu,x)=\|r\|_2. $$
 
 In particular, the rank-one perturbation $E:=-rx^*$ attains the infimum.
 

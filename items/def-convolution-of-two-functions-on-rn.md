@@ -27,15 +27,11 @@ sources:
 Let $f,g : \mathbb{R}^n \to \mathbb{C}$ be measurable functions. When, for a
 given $x \in \mathbb{R}^n$, the function
 
-$$
-y \longmapsto f(x-y)g(y)
-$$
+$$ y \longmapsto f(x-y)g(y) $$
 
 is measurable and integrable on $\mathbb{R}^n$, the **convolution** of $f$ and
 $g$ at $x$ is
 
-$$
-(f*g)(x) := \int_{\mathbb{R}^n} f(x-y)g(y)\,dy.
-$$
+$$ (f*g)(x) := \int_{\mathbb{R}^n} f(x-y)g(y)\,dy. $$
 
 For $L^1$ classes, later items make the representative convention explicit.

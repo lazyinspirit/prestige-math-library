@@ -34,13 +34,9 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 In $R=\mathbb Z$, the fractional ideal
-$$
-I:=\frac{40}{9}\mathbb Z=(2)^3(5)(3)^{-2}
-$$
+$$ I:=\frac{40}{9}\mathbb Z=(2)^3(5)(3)^{-2} $$
 has divisor
-$$
-\operatorname{div}(40/9)=3[(2)]+[(5)]-2[(3)],
-$$
+$$ \operatorname{div}(40/9)=3[(2)]+[(5)]-2[(3)], $$
 and its ideal class is trivial.
 
 ## Facts & Assumptions

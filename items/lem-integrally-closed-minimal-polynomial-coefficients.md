@@ -34,9 +34,7 @@ pipeline_run: null
 Let $A$ be an integrally closed domain with field of fractions $K$, let $L/K$ be a field extension, and let $u\in L$ be integral over $A$. Then the minimal polynomial of $u$ over $K$ has coefficients in $A$.
 
 In particular, if $f(T)\in A[T]$ is monic and factors in $K[T]$ as
-$$
-f(T)=(T-a)h(T)
-$$
+$$ f(T)=(T-a)h(T) $$
 with $a\in K$, then $h(T)\in A[T]$.
 
 ## Facts & Assumptions

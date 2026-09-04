@@ -27,13 +27,9 @@ pipeline_run: null
 
 Let $R$ be a Noetherian commutative ring, let $t\ge1$, and let
 $\mathfrak m_1,\dots,\mathfrak m_t$ be distinct maximal ideals. Set
-$$
-\mathfrak m:=\mathfrak m_1 \cap \cdots \cap \mathfrak m_t.
-$$
+$$ \mathfrak m:=\mathfrak m_1 \cap \cdots \cap \mathfrak m_t. $$
 Then the $\mathfrak m$-adic completion of $R$ decomposes as
-$$
-\widehat R^{\,\mathfrak m} \cong \prod_{i=1}^t \widehat{R_{\mathfrak m_i}}.
-$$
+$$ \widehat R^{\,\mathfrak m} \cong \prod_{i=1}^t \widehat{R_{\mathfrak m_i}}. $$
 
 ## Facts & Assumptions
 

@@ -24,9 +24,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, let $S \subseteq R$ be multiplicative, let $M$ be a finite free $R$-module, and let $N$ be a left $R$-module. Then the natural map
-$$
-\theta_{M,N}:S^{-1}\!\operatorname{Hom}_R(M,N) \longrightarrow \operatorname{Hom}_{S^{-1}R}(S^{-1}M,S^{-1}N)
-$$
+$$ \theta_{M,N}:S^{-1}\!\operatorname{Hom}_R(M,N) \longrightarrow \operatorname{Hom}_{S^{-1}R}(S^{-1}M,S^{-1}N) $$
 from [[lem-localisation-of-hom-natural-map]] is an isomorphism.
 
 ## Facts & Assumptions

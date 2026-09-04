@@ -28,9 +28,7 @@ pipeline_run: null
 ## Example
 
 A direct continued-fraction calculation gives
-$$
-\sqrt{61}=[7;\overline{1,4,3,1,2,2,1,3,4,1,14}],
-$$
+$$ \sqrt{61}=[7;\overline{1,4,3,1,2,2,1,3,4,1,14}], $$
 so the period length is $11$. The least positive solution of
 $$x^2-61y^2=-1$$
 is

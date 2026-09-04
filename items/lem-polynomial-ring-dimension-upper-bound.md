@@ -29,9 +29,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a Noetherian commutative ring and let
-$$
-P_0\subsetneq P_1\subsetneq\cdots\subsetneq P_n
-$$
+$$ P_0\subsetneq P_1\subsetneq\cdots\subsetneq P_n $$
 be a strict prime chain in $R[x]$. Then the length $n$ is at most $\dim R+1$.
 
 ## Facts & Assumptions

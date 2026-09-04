@@ -31,9 +31,7 @@ pipeline_run: null
 
 Let $R$ be a commutative ring and let $I \subseteq R$ be an ideal. Assume that
 $R$ is $I$-adically complete. If $u \in R$ satisfies
-$$
-u \equiv 1 \pmod I,
-$$
+$$ u \equiv 1 \pmod I, $$
 then $u$ is a unit of $R$.
 
 Consequently, every element of $I$ lies in the Jacobson radical of $R$.

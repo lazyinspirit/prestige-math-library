@@ -35,9 +35,7 @@ pipeline_run: null
 
 For every real $x\ge1$,
 
-$$
-\sum_{n\le x}\varphi(n)=\frac{3}{\pi^2}x^2+O(x\log x).
-$$
+$$ \sum_{n\le x}\varphi(n)=\frac{3}{\pi^2}x^2+O(x\log x). $$
 
 ## Facts & Assumptions
 

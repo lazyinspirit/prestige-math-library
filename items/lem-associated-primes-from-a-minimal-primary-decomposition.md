@@ -29,15 +29,11 @@ sources:
 
 Let $R$ be a Noetherian commutative ring, let $M$ be a finitely generated left
 $R$-module, and let
-$$
-N=Q_1\cap\cdots\cap Q_r
-$$
+$$ N=Q_1\cap\cdots\cap Q_r $$
 be a minimal primary decomposition in which each $Q_i$ is $\mathfrak p_i$-primary.
 Assume each $\mathfrak p_i$ is a prime ideal.
 Then
-$$
-\operatorname{Ass}_R(M/N)=\{\mathfrak p_1,\dots,\mathfrak p_r\}.
-$$
+$$ \operatorname{Ass}_R(M/N)=\{\mathfrak p_1,\dots,\mathfrak p_r\}. $$
 
 ## Facts & Assumptions
 

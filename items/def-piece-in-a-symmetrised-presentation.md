@@ -33,9 +33,7 @@ Let $R^{\operatorname{sym}}$ be a symmetrised set of cyclically reduced words
 ([[def-symmetrisation-of-a-relator-set]], [[def-cyclically-reduced-word]]). A
 nonempty reduced word $p$ is a **piece** when there are decompositions
 
-$$
-r=pu, \qquad s=pv,
-$$
+$$ r=pu, \qquad s=pv, $$
 
 with $r,s\in R^{\operatorname{sym}}$, such that the two occurrences are
 **distinct**: the ordered pairs $(r,u)$ and $(s,v)$ are not equal.

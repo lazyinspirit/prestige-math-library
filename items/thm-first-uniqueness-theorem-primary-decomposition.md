@@ -33,9 +33,7 @@ $$N=Q_1\cap\cdots\cap Q_r$$
 be a minimal primary decomposition in which each $Q_i$ is
 $\mathfrak p_i$-primary for a prime ideal $\mathfrak p_i$. Then the set of
 component radicals is uniquely determined by $M/N$ and equals
-$$
-\operatorname{Ass}_R(M/N).
-$$
+$$ \operatorname{Ass}_R(M/N). $$
 
 ## Facts & Assumptions
 

@@ -26,9 +26,7 @@ pipeline_run: null
 ## Example
 
 Let $M=\mathbb Z/12\mathbb Z$. If $S_2=\{2^n:n\in\mathbb N\}$ and $S_3=\{3^n:n\in\mathbb N\}$, then
-$$
-\ker(M \to S_2^{-1}M)=\{[0],[3],[6],[9]\}, \qquad \ker(M \to S_3^{-1}M)=\{[0],[4],[8]\}.
-$$
+$$ \ker(M \to S_2^{-1}M)=\{[0],[3],[6],[9]\}, \qquad \ker(M \to S_3^{-1}M)=\{[0],[4],[8]\}. $$
 So localisation kills exactly the torsion detected by the chosen denominator set.
 
 ## Facts & Assumptions

@@ -28,9 +28,7 @@ pipeline_run: null
 ## Example
 
 Let
-$$
-R=(\mathbb Z/2)^{\mathbb N}.
-$$
+$$ R=(\mathbb Z/2)^{\mathbb N}. $$
 Then every prime ideal of $R$ is maximal, so $R$ has Krull dimension $0$, but $R$ is not Noetherian.
 
 ## Facts & Assumptions

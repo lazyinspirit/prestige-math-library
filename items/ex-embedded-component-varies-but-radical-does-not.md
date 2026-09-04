@@ -30,9 +30,7 @@ sources:
 Assume the Axiom of Choice ([[def-axiom-of-choice]]), and let $k$ be a field.
 
 In $R=k[x,y]$,
-$$
-(x^2,xy)=(x)\cap(x,y)^2=(x)\cap(x^2,y).
-$$
+$$ (x^2,xy)=(x)\cap(x,y)^2=(x)\cap(x^2,y). $$
 The radical set is the same in both decompositions, but the embedded
 $(x,y)$-primary component changes.
 

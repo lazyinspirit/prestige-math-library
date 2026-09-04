@@ -29,9 +29,7 @@ pipeline_run: null
 Let $G$ be a finite simple graph on $n$ vertices, and let $u,v$ be nonadjacent
 vertices satisfying
 
-$$
-\deg_G(u)+\deg_G(v)\ge n.
-$$
+$$ \deg_G(u)+\deg_G(v)\ge n. $$
 
 Then $G$ is Hamiltonian if and only if $G+uv$ is Hamiltonian.
 

@@ -33,17 +33,13 @@ pipeline_run: null
 Let $G$ be a $\overline{P_5}$-free graph, let $k\ge4$ be an integer, and let
 $B\subseteq V(G)$. Suppose
 
-$$
-((a_i,B_i):i\in[k])
-$$
+$$ ((a_i,B_i):i\in[k]) $$
 
 is a $(k,|B|/k^8)$-comb in $G$ with $B_i\subseteq B$ and $a_i\notin B$ for
 every $i\in[k]$.
 Suppose also that there is a vertex
 
-$$
-v\in V(G)\setminus\bigl(B\cup\{a_1,\ldots,a_k\}\bigr)
-$$
+$$ v\in V(G)\setminus\bigl(B\cup\{a_1,\ldots,a_k\}\bigr) $$
 
 that is complete to $B$ and anticomplete to $\{a_1,\ldots,a_k\}$. Then
 $G[B]$ contains a pure $(k,|B|/k^{10})$-blockade.

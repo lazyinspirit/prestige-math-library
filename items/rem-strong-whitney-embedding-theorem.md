@@ -32,9 +32,7 @@ external_dependency:
 
 **Recorded, not proved here.** For every smooth $n$-manifold with $n>0$, there
 exists a smooth embedding
-$$
-M^n\hookrightarrow\mathbb R^{2n}.
-$$
+$$ M^n\hookrightarrow\mathbb R^{2n}. $$
 This sharp dimension bound is stronger than
 [[thm-weak-whitney-proper-embedding-theorem]] and is not a short consequence of
 the Sard-theoretic projection argument used on this page.

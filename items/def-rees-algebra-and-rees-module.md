@@ -29,24 +29,16 @@ sources:
 
 Let $R$ be a commutative ring and $I\subset R$ an ideal. The **Rees algebra** of
 $I$ is the graded subring
-$$
-\mathcal R(I):=\bigoplus_{n\ge0} I^nt^n\subset R[t].
-$$
+$$ \mathcal R(I):=\bigoplus_{n\ge0} I^nt^n\subset R[t]. $$
 Equivalently, it is the graded ring whose degree-$n$ piece is $I^n$.
 
 Let $M$ be an $R$-module equipped with a descending filtration
-$$
-M=M_0\supseteq M_1\supseteq M_2\supseteq\cdots
-$$
+$$ M=M_0\supseteq M_1\supseteq M_2\supseteq\cdots $$
 satisfying $IM_n\subseteq M_{n+1}$ for every $n\ge0$. The **Rees module** of
 this filtration is
-$$
-\mathcal R(M_\bullet):=\bigoplus_{n\ge0} M_nt^n\subset M[t],
-$$
+$$ \mathcal R(M_\bullet):=\bigoplus_{n\ge0} M_nt^n\subset M[t], $$
 viewed as a graded $\mathcal R(I)$-module.
 
 For the $I$-adic filtration $M_n=I^nM$, the quotient
-$$
-\mathcal R(M_\bullet)/I\mathcal R(M_\bullet)
-$$
+$$ \mathcal R(M_\bullet)/I\mathcal R(M_\bullet) $$
 is naturally $\operatorname{gr}_I(M)$.

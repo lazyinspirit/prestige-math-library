@@ -34,9 +34,7 @@ let $(x_0,y_0)\in S$. If $S$ is transverse at $(x_0,y_0)$ to the vertical
 fibre $\{x_0\}\times N$, then there exist neighbourhoods $U\subseteq M$ of
 $x_0$ and $V\subseteq N$ of $y_0$ and a smooth map $f:U\to V$ such that
 
-$$
-S\cap(U\times V)=\{(x,f(x)):x\in U\}.
-$$
+$$ S\cap(U\times V)=\{(x,f(x)):x\in U\}. $$
 
 ## Facts & Assumptions
 

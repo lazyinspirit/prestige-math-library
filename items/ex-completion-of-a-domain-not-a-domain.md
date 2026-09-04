@@ -26,9 +26,7 @@ pipeline_run: null
 ## Example
 
 Let $k$ be a field of characteristic different from $2$, and set
-$$
-A:=k[x,y]_{(x,y)}/(y^2-x^2-x^3).
-$$
+$$ A:=k[x,y]_{(x,y)}/(y^2-x^2-x^3). $$
 Then $A$ is a Noetherian local domain, but its completion at the maximal ideal
 is not a domain.
 

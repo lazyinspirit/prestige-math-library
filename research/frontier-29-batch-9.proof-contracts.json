@@ -1,0 +1,2961 @@
+{
+  "version": 1,
+  "level": "frontier-29",
+  "note": "Step-5 authoring contract for frontier-29 batch 9 on Wednesday, September 2, 2026.",
+  "scope": [
+    "lem-riemann-zeta-dirichlet-series-converges-locally-uniformly",
+    "thm-euler-product-for-riemann-zeta",
+    "cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one",
+    "thm-riemann-zeta-continuation-to-the-right-half-plane",
+    "thm-dirichlet-eta-representation",
+    "thm-jacobi-theta-transformation",
+    "thm-theta-mellin-representation-of-completed-zeta",
+    "thm-riemann-zeta-meromorphic-continuation",
+    "thm-completed-riemann-zeta-functional-equation",
+    "thm-riemann-zeta-functional-equation",
+    "thm-riemann-xi-is-entire-of-order-one",
+    "thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane",
+    "thm-trivial-zeros-and-critical-strip",
+    "thm-hadamard-product-for-riemann-xi",
+    "thm-special-values-of-riemann-zeta-at-integers",
+    "ex-euler-product-numerically-approximates-zeta-at-two",
+    "ex-zeta-four-equals-pi-to-the-four-over-ninety",
+    "ex-zeta-zero-equals-minus-one-half",
+    "ex-splitting-the-theta-mellin-integral-isolates-the-two-polar-terms",
+    "ex-zeta-minus-two-vanishes-by-the-sine-factor",
+    "ex-symmetric-finite-zero-products-model-the-xi-hadamard-product",
+    "cex-the-eta-series-represents-the-continuation-where-the-dirichlet-series-diverges",
+    "cex-the-harmonic-series-shows-the-defining-series-diverges-at-one",
+    "fs-riemann-zeta-is-given-by-its-dirichlet-series-for-all-s-not-one",
+    "fs-zeta-minus-one-is-the-ordinary-sum-one-plus-two-plus-three-and-so-on",
+    "fs-riemann-zeta-is-entire",
+    "fs-the-functional-equation-alone-characterizes-zeta"
+  ],
+  "contracts": {
+    "lem-riemann-zeta-dirichlet-series-converges-locally-uniformly": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$\n\\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}.\n$$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-weierstrass-m-test-for-complex-function-series",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and $f_n:X\\to\\mathbb C$. Suppose $M_n\\ge0$, $|f_n(x)|\\le M_n$ for all $n,x$, and the real series $\\sum M_n$ converges. Then $\\sum f_n(x)$ converges absolutely for every $x$ and its partial sums converge uniformly on $X$ in the sense of [[def-uniform-convergence-of-complex-valued-functions]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-p-series-rational",
+          "source_section": "Statement",
+          "quote": "Let $p \\in \\mathbb{Q}$ with $p > 0$. For a natural number $k \\ge 1$ write\n$\\iota(k) = k \\cdot 1_{\\mathbb{R}}$ for the canonical natural, which is positive\n([[lem-of-naturals-positive]]), and write $k^{p} := \\iota(k)^{p}$ for its rational\npower ([[def-rational-power]]). Then\n\n$$\\sum_{k \\ge 1} \\frac{1}{k^{p}} \\ \\text{converges} \\qquad \\Longleftrightarrow \\qquad p > 1 .$$\n\nIn particular the harmonic series $\\sum_{k \\ge 1} 1/k$ diverges, at $p = 1$, and\n$\\sum_{k \\ge 1} 1/k^{2}$ converges, at $p = 2$.\n\n**The index range is not cosmetic.** The series starts at $k = 1$ because\n$1/0^{p}$ is undefined: [[def-rational-power]] gives $0^{p} = 0$ for rational\n$p > 0$, and $0$ has no inverse. Sequences here are functions on $\\mathbb{N}$ and\n$\\mathbb{N}$ contains $0$ ([[def-series]]), so the object named above is a series\nfrom the starting index $1$ in the sense of [[def-series]], not a series of a\nsequence on $\\mathbb{N}$.\n\n**The exponent is rational, and that is a limitation of this page.** Rational\npowers of a positive base are what [[def-rational-power]] supplies; real exponents\nrequire the exponential and the logarithm, which this library develops later. The\nstatement above is therefore the full $p$-series theorem for every exponent this\npage can name.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $K$ is compact and lies in the open half-plane $\\operatorname{Re}s>1$, there is a real number $\\sigma>1$ with $\\operatorname{Re}s\\ge\\sigma$ for every $s\\in K$. For $n\\ge1$ and $s\\in K$, [L1] and [L2] give $n^{-s}=\\exp(-s\\log n)$, so $$|n^{-s}|=\\exp(-\\operatorname{Re}s\\log n)\\le\\exp(-\\sigma\\log n)=n^{-\\sigma}.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Taking $\\sigma>1$ rational if necessary, [L4] makes $\\sum_{n\\ge1}n^{-\\sigma}$ convergent. Step 1.1 and [L3] therefore give uniform convergence of $\\sum n^{-s}$ on $K$. Since $|n^{-s}|$ is bounded by the same summable majorant, the series also converges absolutely at each point of $K$, hence at each $s$ with $\\operatorname{Re}s>1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\operatorname{Re}s>1$, the series is indexed by $nge1$ and the compact set $K$ is fixed data, not an optional empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\operatorname{Re}s>1$, the series is indexed by $nge1$ and the compact set $K$ is fixed data, not an optional empty family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\\\operatorname{Re}s>1$, Proof technique: direct. 1.1 Because $K$ is compact and lies in the open half-plane $\\operatorname{Re}s>1$, there is a real number $\\sigma>…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\\\operatorname{Re}s>1$, For every complex number $s$ with $\\operatorname{Re}s>1$, the series $$\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n),$$ converges…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\\\operatorname{Re}s>1$, For every complex number $s$ with $\\operatorname{Re}s>1$, the series $$\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n),$$ converges…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\\\operatorname{Re}s>1$, For every complex number $s$ with $\\operatorname{Re}s>1$, the series $$\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n),$$ converges…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\\\operatorname{Re}s>1$, step 1.1 Because $K$ is compact and lies in the open half-plane $\\operatorname{Re}s>1$, there is a real number $\\sigma>1$ with $\\operatorname{Re}s\\ge\\sigma$ for every $s\\in K$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\\\operatorname{Re}s>1$, For every complex number $s$ with $\\operatorname{Re}s>1$, the series $$\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n),$$ converges…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\\\operatorname{Re}s>1$, For every complex number $s$ with $\\operatorname{Re}s>1$, the series $$\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n),$$ converges…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was compact-set absolute and local-uniform convergence. Rechecked the uniform n^(-sigma) majorant and the passage from compact K to pointwise absolute convergence."
+      }
+    },
+    "thm-euler-product-for-riemann-zeta": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-riemann-zeta-function",
+          "source_section": "Definition",
+          "quote": "For $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, define the **Riemann zeta\nfunction** by\n\n$$\\zeta(s):=\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n).$$\n\nHere $\\exp$ is the complex exponential and $\\log n$ is the real logarithm of\nthe positive integer $n$. The preceding lemma\n[[lem-riemann-zeta-dirichlet-series-converges-locally-uniformly]] proves that\nthis Dirichlet series converges absolutely and locally uniformly on the open\nhalf-plane $\\operatorname{Re}s>1$, so the definition is well posed exactly on\nthat domain.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-riemann-zeta-dirichlet-series-converges-locally-uniformly",
+          "source_section": "Statement",
+          "quote": "For every complex number $s$ with $\\operatorname{Re}s>1$, the series\n\n$$\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n),$$\n\nconverges absolutely. Moreover, if $K\\subseteq\\{s\\in\\mathbb C:\\operatorname{Re}s>1\\}$\nis compact, then the same series converges uniformly on $K$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-absolute-convergence-criterion-for-complex-infinite-products",
+          "source_section": "Statement",
+          "quote": "Let $(a_n)_{n\\ge0}$ be a sequence of complex numbers. The following are\nequivalent:\n\n1. the product $\\prod_{n\\ge0}(1+a_n)$ is absolutely convergent, meaning that\n   $\\prod_{n\\ge0}(1+|a_n|)$ converges;\n2. the series $\\sum_{n\\ge0}|a_n|$ converges.\n\nWhen these conditions hold, the complex product $\\prod_{n\\ge0}(1+a_n)$ itself\nconverges and has nonzero value.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-fundamental-theorem-of-arithmetic",
+          "source_section": "Statement",
+          "quote": "Finite products are taken in the commutative monoid $(\\mathbb{Z},\\cdot,1)$ of\n[[lem-units-of-z]] as in [[def-monoid-finite-product]], and a **list of primes\nof length $r$** is a function $p : r \\to \\mathbb{Z}$ on the von Neumann natural\n$r = \\{0,\\dots,r-1\\}$ with every $p_i$ prime ([[def-prime]]).\n\n1. **Existence.** Every $n \\in \\mathbb{Z}$ with $n \\ge 1$ is $\\prod_{i<r} p_i$\n   for some $r \\in \\mathbb{N}$ and some list $p$ of primes of length $r$\n   ([[thm-prime-factorisation-exists]]).\n2. **Uniqueness up to order.** Let $p$ and $q$ be lists of primes, of lengths\n   $r$ and $s$. If\n\n   $$\\prod_{i<r} p_i \\;=\\; \\prod_{j<s} q_j ,$$\n\n   then $r = s$, and there is a permutation $\\pi \\in \\operatorname{Sym}(r)$\n   ([[def-symmetric-group]]) with\n\n   $$q_i \\;=\\; p_{\\pi(i)} \\qquad \\text{for every } i < r .$$\n\nAt $r = 0$ clause 2 says that the only list of primes whose product is $1$ is the\nempty list, and the permutation condition is vacuous.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-canonical-prime-factorisation",
+          "source_section": "Statement",
+          "quote": "Powers are the natural powers of [[def-group-power]] and finite products those of\n[[def-monoid-finite-product]], both taken in the commutative monoid\n$(\\mathbb{Z},\\cdot,1)$ of [[lem-units-of-z]]. Call $p : r \\to \\mathbb{Z}$ an\n**injective list of primes** when every $p_i$ is prime ([[def-prime]]) and\n$p_i = p_j$ forces $i = j$ ([[def-injection-surjection-bijection]]).\n\nLet $n \\in \\mathbb{Z}$ with $n \\ge 1$ and let $p : r \\to \\mathbb{Z}$ be an\ninjective list of primes such that every prime divisor of $n$ equals $p_i$ for\nsome $i < r$. Then, with $v_q$ as in [[def-p-adic-valuation]]:\n\n1. $\\displaystyle n \\;=\\; \\prod_{i<r} p_i^{\\,v_{p_i}(n)}$;\n2. $v_q(n) = 0$ for every prime $q$ that is not among $p_0,\\dots,p_{r-1}$;\n3. the exponents are determined by $n$: if $e : r \\to \\mathbb{N}$ and\n   $n = \\prod_{i<r} p_i^{\\,e_i}$, then $e_j = v_{p_j}(n)$ for every $j < r$.\n\nClause 3 needs only injectivity of the list, not the covering hypothesis.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\sigma:=\\operatorname{Re}s$. Since the primes are among the integers at least $2$, $$\\sum_p |p^{-s}|=\\sum_p p^{-\\sigma}\\le\\sum_{n=2}^\\infty n^{-\\sigma}<\\infty$$ by [L1]. Therefore [L2] applies to $a_p:=-p^{-s}$, so the product $\\prod_p(1-p^{-s})$ converges and is nonzero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a finite set $P$ of primes, $$\\prod_{p\\in P}\\frac{1}{1-p^{-s}}=\\prod_{p\\in P}\\sum_{k\\ge0}p^{-ks}.$$ Multiplying out this finite product lists exactly the terms $n^{-s}$ for those integers $n\\ge1$ whose prime divisors all lie in $P$, and [L3] with [L4] shows that each such integer appears exactly once. Hence $$\\prod_{p\\in P}\\frac{1}{1-p^{-s}}=\\sum_{\\substack{n\\ge1\\\\ p\\mid n\\Rightarrow p\\in P}} n^{-s}.$$",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $P_N$ be the set of primes at most $N$. By step 1.2 the corresponding partial products are the partial sums over integers all of whose prime divisors lie in $P_N$. Every fixed integer eventually has this property, and the omitted terms are bounded in absolute value by the tail of the absolutely convergent series in [L1]. Therefore these partial products converge pointwise to $\\sum_{n\\ge1}n^{-s}=\\zeta(s)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $K\\subseteq\\{s:\\operatorname{Re}s>1\\}$ be compact, and choose $\\sigma>1$ with $\\operatorname{Re}s\\ge\\sigma$ on $K$. If an integer $n$ is omitted from the partial product over $P_N$, then $n$ has some prime divisor greater than $N$, hence $n>N$. So for $s\\in K$,\n$$\\left|\\zeta(s)-\\prod_{p\\le N}\\frac{1}{1-p^{-s}}\\right|\n\\le \\sum_{n>N} n^{-\\sigma}.$$\nThe tail on the right tends to $0$ independently of $s$, so the partial products converge uniformly on $K$. Thus the Euler product converges locally uniformly on $\\operatorname{Re}s>1$. Combining this with steps 1.1 and 2.1 proves the stated formula together with its absolute and locally uniform convergence.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "choose",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has its Euler product on the half-plane $\\\\operatorname{Re}s>1$, For every $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, $$\\zeta(s)=\\prod_p \\frac{1}{1-p^{-s}},$$ where the product ranges over the primes an…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has its Euler product on the half-plane $\\\\operatorname{Re}s>1$, Proof technique: direct. 1.1 Write $\\sigma:=\\operatorname{Re}s$. Since the primes are among the integers at least $2$, $$\\sum_p |p^{-s}|=\\s…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has its Euler product on the half-plane $\\\\operatorname{Re}s>1$, For every $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, $$\\zeta(s)=\\prod_p \\frac{1}{1-p^{-s}},$$ where the product ranges over the primes an…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has its Euler product on the half-plane $\\\\operatorname{Re}s>1$, For every $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, $$\\zeta(s)=\\prod_p \\frac{1}{1-p^{-s}},$$ where the product ranges over the primes an…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has its Euler product on the half-plane $\\\\operatorname{Re}s>1$, For every $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, $$\\zeta(s)=\\prod_p \\frac{1}{1-p^{-s}},$$ where the product ranges over the primes an…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has its Euler product on the half-plane $\\\\operatorname{Re}s>1$, Proof technique: direct. 1.1 Write $\\sigma:=\\operatorname{Re}s$. Since the primes are among the integers at least $2$, $$\\sum_p |p^{-s}|=\\s…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has its Euler product on the half-plane $\\\\operatorname{Re}s>1$, For every $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, $$\\zeta(s)=\\prod_p \\frac{1}{1-p^{-s}},$$ where the product ranges over the primes an…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has its Euler product on the half-plane $\\\\operatorname{Re}s>1$, For every $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, $$\\zeta(s)=\\prod_p \\frac{1}{1-p^{-s}},$$ where the product ranges over the primes an…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the local-uniform product convergence. Step 3.1 now bounds the omitted integers by sum_{n>N} n^(-sigma) uniformly on compact K, so the prime products converge to zeta(s) on current bytes."
+      }
+    },
+    "cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-euler-product-for-riemann-zeta",
+          "source_section": "Statement",
+          "quote": "For every $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$,\n\n$$\\zeta(s)=\\prod_p \\frac{1}{1-p^{-s}},$$\n\nwhere the product ranges over the primes and converges absolutely and locally\nuniformly on $\\operatorname{Re}s>1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-absolute-convergence-criterion-for-complex-infinite-products",
+          "source_section": "Statement",
+          "quote": "Let $(a_n)_{n\\ge0}$ be a sequence of complex numbers. The following are\nequivalent:\n\n1. the product $\\prod_{n\\ge0}(1+a_n)$ is absolutely convergent, meaning that\n   $\\prod_{n\\ge0}(1+|a_n|)$ converges;\n2. the series $\\sum_{n\\ge0}|a_n|$ converges.\n\nWhen these conditions hold, the complex product $\\prod_{n\\ge0}(1+a_n)$ itself\nconverges and has nonzero value.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], $\\zeta(s)$ is the reciprocal of the absolutely convergent product $\\prod_p(1-p^{-s})$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], that product is nonzero, so its reciprocal is also nonzero. Therefore $\\zeta(s)\\ne0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros when $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $\\zeta(s)\\ne0$.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros when $\\\\operatorname{Re}s>1$, Proof technique: direct. 1.1 By [L1], $\\zeta(s)$ is the reciprocal of the absolutely convergent product $\\prod_p(1-p^{-s})$. [L1, given] 2.…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros when $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $\\zeta(s)\\ne0$.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros when $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $\\zeta(s)\\ne0$.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros when $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $\\zeta(s)\\ne0$.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros when $\\\\operatorname{Re}s>1$, Proof technique: direct. 1.1 By [L1], $\\zeta(s)$ is the reciprocal of the absolutely convergent product $\\prod_p(1-p^{-s})$. [L1, given] 2.…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros when $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $\\zeta(s)\\ne0$.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros when $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $\\zeta(s)\\ne0$.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-riemann-zeta-continuation-to-the-right-half-plane": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-riemann-zeta-function",
+          "source_section": "Definition",
+          "quote": "For $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, define the **Riemann zeta\nfunction** by\n\n$$\\zeta(s):=\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n).$$\n\nHere $\\exp$ is the complex exponential and $\\log n$ is the real logarithm of\nthe positive integer $n$. The preceding lemma\n[[lem-riemann-zeta-dirichlet-series-converges-locally-uniformly]] proves that\nthis Dirichlet series converges absolutely and locally uniformly on the open\nhalf-plane $\\operatorname{Re}s>1$, so the definition is well posed exactly on\nthat domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-p-series-rational",
+          "source_section": "Statement",
+          "quote": "Let $p \\in \\mathbb{Q}$ with $p > 0$. For a natural number $k \\ge 1$ write\n$\\iota(k) = k \\cdot 1_{\\mathbb{R}}$ for the canonical natural, which is positive\n([[lem-of-naturals-positive]]), and write $k^{p} := \\iota(k)^{p}$ for its rational\npower ([[def-rational-power]]). Then\n\n$$\\sum_{k \\ge 1} \\frac{1}{k^{p}} \\ \\text{converges} \\qquad \\Longleftrightarrow \\qquad p > 1 .$$\n\nIn particular the harmonic series $\\sum_{k \\ge 1} 1/k$ diverges, at $p = 1$, and\n$\\sum_{k \\ge 1} 1/k^{2}$ converges, at $p = 2$.\n\n**The index range is not cosmetic.** The series starts at $k = 1$ because\n$1/0^{p}$ is undefined: [[def-rational-power]] gives $0^{p} = 0$ for rational\n$p > 0$, and $0$ has no inverse. Sequences here are functions on $\\mathbb{N}$ and\n$\\mathbb{N}$ contains $0$ ([[def-series]]), so the object named above is a series\nfrom the starting index $1$ in the sense of [[def-series]], not a series of a\nsequence on $\\mathbb{N}$.\n\n**The exponent is rational, and that is a limitation of this page.** Rational\npowers of a positive base are what [[def-rational-power]] supplies; real exponents\nrequire the exponential and the logarithm, which this library develops later. The\nstatement above is therefore the full $p$-series theorem for every exponent this\npage can name.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $N\\ge2$, $$s\\int_1^N \\lfloor x\\rfloor x^{-s-1}\\,dx=\\sum_{n=1}^{N-1} n\\!\\int_n^{n+1} s x^{-s-1}\\,dx=\\sum_{n=1}^{N-1} n(n^{-s}-(n+1)^{-s}).$$ Expanding the last sum gives $$s\\int_1^N \\lfloor x\\rfloor x^{-s-1}\\,dx=\\sum_{n=1}^{N-1}n^{-s}-(N-1)N^{-s},$$ and therefore $$\\sum_{n=1}^{N}n^{-s}=N^{1-s}+s\\int_1^N \\lfloor x\\rfloor x^{-s-1}\\,dx.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\operatorname{Re}s>1$, the term $N^{1-s}$ tends to $0$ as $N\\to\\infty$. Letting $N\\to\\infty$ in step 1.1 and using [L1] yields $$\\zeta(s)=s\\int_1^\\infty \\lfloor x\\rfloor x^{-s-1}\\,dx=s\\int_1^\\infty (x-\\{x\\})x^{-s-1}\\,dx.$$ Also $$s\\int_1^\\infty x^{-s}\\,dx=\\frac{s}{s-1},$$ so $$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty \\{x\\}x^{-s-1}\\,dx$$ on $\\operatorname{Re}s>1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $K\\subseteq\\{s\\in\\mathbb C:\\operatorname{Re}s>0\\}$ be compact, and choose $\\sigma>0$ with $\\operatorname{Re}s\\ge\\sigma$ on $K$. Because $0\\le\\{x\\}<1$, $$\\bigl|\\{x\\}x^{-s-1}\\bigr|\\le x^{-\\sigma-1}\\qquad(x\\ge1,\\ s\\in K).$$ Taking $\\sigma$ rational with $\\sigma>0$, [L2] implies $\\int_1^\\infty x^{-\\sigma-1}\\,dx<\\infty$, so the integral in step 2.1 converges absolutely and locally uniformly on $\\operatorname{Re}s>0$. Hence it defines a holomorphic function there. Therefore the displayed formula continues meromorphically to $\\operatorname{Re}s>0$, and the only singularity is the simple pole of $s/(s-1)$ at $1$, whose residue is $1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In For $\\\\operatorname{Re}s>0$, zeta admits the fractional-part integral formula with a simple residue-one pole at $1$, For every complex number $s$ with $\\operatorname{Re}s>0$, $$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty \\{x\\}x^{-s-1}\\,dx,$$ where $\\{x\\}=x-\\lflo…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the $s=1$ boundary explicitly by identifying the right-hand side as meromorphic with a single simple residue-one pole there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In For $\\\\operatorname{Re}s>0$, zeta admits the fractional-part integral formula with a simple residue-one pole at $1$, For every complex number $s$ with $\\operatorname{Re}s>0$, $$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty \\{x\\}x^{-s-1}\\,dx,$$ where $\\{x\\}=x-\\lflo…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In For $\\\\operatorname{Re}s>0$, zeta admits the fractional-part integral formula with a simple residue-one pole at $1$, For every complex number $s$ with $\\operatorname{Re}s>0$, $$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty \\{x\\}x^{-s-1}\\,dx,$$ where $\\{x\\}=x-\\lflo…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In For $\\\\operatorname{Re}s>0$, zeta admits the fractional-part integral formula with a simple residue-one pole at $1$, step 3.1 Let $K\\subseteq\\{s\\in\\mathbb C:\\operatorname{Re}s>0\\}$ be compact, and choose $\\sigma>0$ with $\\operatorname{Re}s\\ge\\sigma$ on $K$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In For $\\\\operatorname{Re}s>0$, zeta admits the fractional-part integral formula with a simple residue-one pole at $1$, step 3.1 Let $K\\subseteq\\{s\\in\\mathbb C:\\operatorname{Re}s>0\\}$ be compact, and choose $\\sigma>0$ with $\\operatorname{Re}s\\ge\\sigma$ on $K$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In For $\\\\operatorname{Re}s>0$, zeta admits the fractional-part integral formula with a simple residue-one pole at $1$, For every complex number $s$ with $\\operatorname{Re}s>0$, $$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty \\{x\\}x^{-s-1}\\,dx,$$ where $\\{x\\}=x-\\lflo…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In For $\\\\operatorname{Re}s>0$, zeta admits the fractional-part integral formula with a simple residue-one pole at $1$, For every complex number $s$ with $\\operatorname{Re}s>0$, $$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty \\{x\\}x^{-s-1}\\,dx,$$ where $\\{x\\}=x-\\lflo…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the meromorphic continuation through the fractional-part integral. Rechecked the telescoping identity in step 1.1 and the uniform x^(-sigma-1) majorant giving a holomorphic integral on Re s > 0."
+      }
+    },
+    "thm-dirichlet-eta-representation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-riemann-zeta-function",
+          "source_section": "Definition",
+          "quote": "For $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, define the **Riemann zeta\nfunction** by\n\n$$\\zeta(s):=\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n).$$\n\nHere $\\exp$ is the complex exponential and $\\log n$ is the real logarithm of\nthe positive integer $n$. The preceding lemma\n[[lem-riemann-zeta-dirichlet-series-converges-locally-uniformly]] proves that\nthis Dirichlet series converges absolutely and locally uniformly on the open\nhalf-plane $\\operatorname{Re}s>1$, so the definition is well posed exactly on\nthat domain.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-zeta-continuation-to-the-right-half-plane",
+          "source_section": "Statement",
+          "quote": "For every complex number $s$ with $\\operatorname{Re}s>0$ and $s\\ne1$,\n\n$$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty \\{x\\}x^{-s-1}\\,dx,$$\n\nwhere $\\{x\\}=x-\\lfloor x\\rfloor$ is the fractional part. The integral defines a\nholomorphic function on $\\operatorname{Re}s>0$, so the right-hand side is\nmeromorphic there with a single simple pole at $s=1$ of residue $1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-weierstrass-m-test-for-complex-function-series",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and $f_n:X\\to\\mathbb C$. Suppose $M_n\\ge0$, $|f_n(x)|\\le M_n$ for all $n,x$, and the real series $\\sum M_n$ converges. Then $\\sum f_n(x)$ converges absolutely for every $x$ and its partial sums converge uniformly on $X$ in the sense of [[def-uniform-convergence-of-complex-valued-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-p-series-rational",
+          "source_section": "Statement",
+          "quote": "Let $p \\in \\mathbb{Q}$ with $p > 0$. For a natural number $k \\ge 1$ write\n$\\iota(k) = k \\cdot 1_{\\mathbb{R}}$ for the canonical natural, which is positive\n([[lem-of-naturals-positive]]), and write $k^{p} := \\iota(k)^{p}$ for its rational\npower ([[def-rational-power]]). Then\n\n$$\\sum_{k \\ge 1} \\frac{1}{k^{p}} \\ \\text{converges} \\qquad \\Longleftrightarrow \\qquad p > 1 .$$\n\nIn particular the harmonic series $\\sum_{k \\ge 1} 1/k$ diverges, at $p = 1$, and\n$\\sum_{k \\ge 1} 1/k^{2}$ converges, at $p = 2$.\n\n**The index range is not cosmetic.** The series starts at $k = 1$ because\n$1/0^{p}$ is undefined: [[def-rational-power]] gives $0^{p} = 0$ for rational\n$p > 0$, and $0$ has no inverse. Sequences here are functions on $\\mathbb{N}$ and\n$\\mathbb{N}$ contains $0$ ([[def-series]]), so the object named above is a series\nfrom the starting index $1$ in the sense of [[def-series]], not a series of a\nsequence on $\\mathbb{N}$.\n\n**The exponent is rational, and that is a limitation of this page.** Rational\npowers of a positive base are what [[def-rational-power]] supplies; real exponents\nrequire the exponential and the logarithm, which this library develops later. The\nstatement above is therefore the full $p$-series theorem for every exponent this\npage can name.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $\\sigma>0$ and $M\\ge0$ so that $\\operatorname{Re}s\\ge\\sigma$ and $|s|\\le M$ on $K$. Pair the alternating series as $$\\eta(s)=\\sum_{n=1}^\\infty\\bigl((2n-1)^{-s}-(2n)^{-s}\\bigr).$$ Using [A1] and [L4], $$|(2n-1)^{-s}-(2n)^{-s}|=\\left|s\\int_{2n-1}^{2n}x^{-s-1}\\,dx\\right|\\le M(2n-1)^{-\\sigma-1}.$$ Taking $\\sigma$ rational, [L5] makes $\\sum_n (2n-1)^{-\\sigma-1}$ convergent. Therefore [L3] gives local uniform convergence of the paired series on $K$, so $\\eta$ is holomorphic on $\\operatorname{Re}s>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3",
+            "L4",
+            "L5",
+            "A1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On $\\operatorname{Re}s>1$, the zeta series of [L1] converges absolutely, so regrouping odd and even terms gives $$\\eta(s)=\\sum_{n\\ge1}n^{-s}-2\\sum_{n\\ge1}(2n)^{-s}=\\bigl(1-2^{1-s}\\bigr)\\zeta(s).$$",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By step 1.1, $\\eta$ is holomorphic on $\\operatorname{Re}s>0$. By [L2], the function $(1-2^{1-s})\\zeta(s)$ is also holomorphic there: the factor $1-2^{1-s}$ vanishes at $s=1$ and removes the only pole of $\\zeta$. Step 1.2 shows that the two holomorphic functions agree on the nonempty open set $\\operatorname{Re}s>1$, so [A2] gives the identity $$\\eta(s)=(1-2^{1-s})\\zeta(s)$$ throughout $\\operatorname{Re}s>0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2",
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet eta series is holomorphic on $\\operatorname{Re}s>0$ and equals the prefactor times zeta there, the paired alternating series and the compact set $K$ are fixed data; the detector is reacting to series notation rather than a missing empty branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In The Dirichlet eta series is holomorphic on $\\operatorname{Re}s>0$ and equals the prefactor times zeta there, the paired alternating series and the compact set $K$ are fixed data; the detector is reacting to series notation rather than a missing empty branch."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet eta series is holomorphic on $\\\\operatorname{Re}s>0$ and equals the prefactor times zeta there, Proof technique: direct. 1.1 Choose $\\sigma>0$ and $M\\ge0$ so that $\\operatorname{Re}s\\ge\\sigma$ and $|s|\\le M$ on $K$. Pair the alternatin…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet eta series is holomorphic on $\\\\operatorname{Re}s>0$ and equals the prefactor times zeta there, The series $$\\eta(s):=\\sum_{n=1}^\\infty (-1)^{n-1}n^{-s}$$ converges locally uniformly on the half-plane $\\operatorname{Re}s>0$ and so defi…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet eta series is holomorphic on $\\\\operatorname{Re}s>0$ and equals the prefactor times zeta there, The series $$\\eta(s):=\\sum_{n=1}^\\infty (-1)^{n-1}n^{-s}$$ converges locally uniformly on the half-plane $\\operatorname{Re}s>0$ and so defi…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet eta series is holomorphic on $\\\\operatorname{Re}s>0$ and equals the prefactor times zeta there, The series $$\\eta(s):=\\sum_{n=1}^\\infty (-1)^{n-1}n^{-s}$$ converges locally uniformly on the half-plane $\\operatorname{Re}s>0$ and so defi…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In The Dirichlet eta series is holomorphic on $\\\\operatorname{Re}s>0$ and equals the prefactor times zeta there, step 1.1 Choose $\\sigma>0$ and $M\\ge0$ so that $\\operatorname{Re}s\\ge\\sigma$ and $|s|\\le M$ on $K$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet eta series is holomorphic on $\\\\operatorname{Re}s>0$ and equals the prefactor times zeta there, The series $$\\eta(s):=\\sum_{n=1}^\\infty (-1)^{n-1}n^{-s}$$ converges locally uniformly on the half-plane $\\operatorname{Re}s>0$ and so defi…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Dirichlet eta series is holomorphic on $\\\\operatorname{Re}s>0$ and equals the prefactor times zeta there, The series $$\\eta(s):=\\sum_{n=1}^\\infty (-1)^{n-1}n^{-s}$$ converges locally uniformly on the half-plane $\\operatorname{Re}s>0$ and so defi…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was holomorphy across the zeros of 1-2^(1-s) and paired-series convergence. Rechecked the derivative bound for x^(-s) on compact K and the identity-theorem extension from Re s > 1 to Re s > 0."
+      }
+    },
+    "thm-jacobi-theta-transformation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-jacobi-theta-function",
+          "source_section": "Definition",
+          "quote": "For $t>0$, define the **Jacobi theta function** by\n\n$$\\theta(t):=\\sum_{n\\in\\mathbb Z} e^{-\\pi n^2 t}=1+2\\sum_{n=1}^\\infty e^{-\\pi n^2 t}.$$\n\nThe terms are real and positive. Since $n^2\\ge n$ for $n\\ge1$, the tail is\ndominated by the geometric series $\\sum_{n\\ge1}e^{-\\pi n t}$, so the defining\nseries converges absolutely for every $t>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Evaluating the transform in [L3] at $\\xi=0$ gives $$C_t=\\widehat g_t(0)=\\int_{-\\infty}^{\\infty} e^{-\\pi t x^2}\\,dx.$$ With the change of variables $u=\\sqrt{\\pi t}\\,x$ and [L2], this integral equals $t^{-1/2}$. Therefore $$\\widehat g_t(\\xi)=t^{-1/2}e^{-\\pi \\xi^2/t}.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], $\\theta(t)=\\sum_{n\\in\\mathbb Z}g_t(n)$. Poisson summation from [L3] and step 1.1 therefore give $$\\theta(t)=\\sum_{m\\in\\mathbb Z}\\widehat g_t(m)=t^{-1/2}\\sum_{m\\in\\mathbb Z}e^{-\\pi m^2/t}=t^{-1/2}\\theta(1/t).$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Jacobi theta function satisfies $\\\\theta(t)=t^{-1/2}\\\\theta(1/t)$, For every $t>0$, $$\\theta(t)=t^{-1/2}\\theta(1/t).$$; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The Jacobi theta function satisfies $\\\\theta(t)=t^{-1/2}\\\\theta(1/t)$, Proof technique: direct. 1.1 Evaluating the transform in [L3] at $\\xi=0$ gives $$C_t=\\widehat g_t(0)=\\int_{-\\infty}^{\\infty} e^{-\\pi t x^2}…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Jacobi theta function satisfies $\\\\theta(t)=t^{-1/2}\\\\theta(1/t)$, For every $t>0$, $$\\theta(t)=t^{-1/2}\\theta(1/t).$$; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Jacobi theta function satisfies $\\\\theta(t)=t^{-1/2}\\\\theta(1/t)$, For every $t>0$, $$\\theta(t)=t^{-1/2}\\theta(1/t).$$; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The Jacobi theta function satisfies $\\\\theta(t)=t^{-1/2}\\\\theta(1/t)$, For every $t>0$, $$\\theta(t)=t^{-1/2}\\theta(1/t).$$; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The Jacobi theta function satisfies $\\\\theta(t)=t^{-1/2}\\\\theta(1/t)$, Proof technique: direct. 1.1 Evaluating the transform in [L3] at $\\xi=0$ gives $$C_t=\\widehat g_t(0)=\\int_{-\\infty}^{\\infty} e^{-\\pi t x^2}…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Jacobi theta function satisfies $\\\\theta(t)=t^{-1/2}\\\\theta(1/t)$, For every $t>0$, $$\\theta(t)=t^{-1/2}\\theta(1/t).$$; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Jacobi theta function satisfies $\\\\theta(t)=t^{-1/2}\\\\theta(1/t)$, For every $t>0$, $$\\theta(t)=t^{-1/2}\\theta(1/t).$$; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-theta-mellin-representation-of-completed-zeta": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-riemann-zeta-function",
+          "source_section": "Definition",
+          "quote": "For $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, define the **Riemann zeta\nfunction** by\n\n$$\\zeta(s):=\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n).$$\n\nHere $\\exp$ is the complex exponential and $\\log n$ is the real logarithm of\nthe positive integer $n$. The preceding lemma\n[[lem-riemann-zeta-dirichlet-series-converges-locally-uniformly]] proves that\nthis Dirichlet series converges absolutely and locally uniformly on the open\nhalf-plane $\\operatorname{Re}s>1$, so the definition is well posed exactly on\nthat domain.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-jacobi-theta-function",
+          "source_section": "Definition",
+          "quote": "For $t>0$, define the **Jacobi theta function** by\n\n$$\\theta(t):=\\sum_{n\\in\\mathbb Z} e^{-\\pi n^2 t}=1+2\\sum_{n=1}^\\infty e^{-\\pi n^2 t}.$$\n\nThe terms are real and positive. Since $n^2\\ge n$ for $n\\ge1$, the tail is\ndominated by the geometric series $\\sum_{n\\ge1}e^{-\\pi n t}$, so the defining\nseries converges absolutely for every $t>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-euler-gamma-function",
+          "source_section": "Definition",
+          "quote": "For $z\\in\\mathbb C$ with $\\operatorname{Re}z>0$, define\n\n$$\\Gamma(z):=\\int_0^\\infty t^{z-1}e^{-t}\\,dt,$$\n\nwhere for $t>0$ one uses the real logarithm convention\n$t^{z-1}:=\\exp((z-1)\\log t)$.\n\nThe next lemma proves that the improper integral converges locally uniformly on\nthe open right half-plane, so this definition is well posed exactly on the\ndisplayed domain.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\sigma:=\\operatorname{Re}s$. By [L2], $$\\frac12\\int_0^\\infty(\\theta(t)-1)t^{s/2-1}\\,dt=\\sum_{n\\ge1}\\int_0^\\infty e^{-\\pi n^2 t}t^{s/2-1}\\,dt,$$ provided the interchange is justified. Since $|t^{s/2-1}|=t^{\\sigma/2-1}$ and $\\sigma>1$, the summands are absolutely integrable and nonnegative after taking absolute values, so [L4] applies to the absolute-value kernel.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $n\\ge1$, substitute $u=\\pi n^2 t$. Then $$\\int_0^\\infty e^{-\\pi n^2 t}t^{s/2-1}\\,dt=\\pi^{-s/2}n^{-s}\\int_0^\\infty e^{-u}u^{s/2-1}\\,du=\\pi^{-s/2}\\Gamma(s/2)n^{-s}$$ by [L3].",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Summing the identity of step 1.2 over $n$ and using [L1] yields $$\\frac12\\int_0^\\infty(\\theta(t)-1)t^{s/2-1}\\,dt=\\pi^{-s/2}\\Gamma(s/2)\\sum_{n\\ge1}n^{-s}=\\pi^{-s/2}\\Gamma(s/2)\\zeta(s).$$ This is the claimed Mellin representation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function has its Mellin-theta integral representation on $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $$\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)=\\frac12\\int_0^\\infty (\\theta(t)-1)t^{s/2-1}\\,dt.$$; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function has its Mellin-theta integral representation on $\\\\operatorname{Re}s>1$, Proof technique: direct. 1.1 Write $\\sigma:=\\operatorname{Re}s$. By [L2], $$\\frac12\\int_0^\\infty(\\theta(t)-1)t^{s/2-1}\\,dt=\\sum_{n\\ge1}\\int…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function has its Mellin-theta integral representation on $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $$\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)=\\frac12\\int_0^\\infty (\\theta(t)-1)t^{s/2-1}\\,dt.$$; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function has its Mellin-theta integral representation on $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $$\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)=\\frac12\\int_0^\\infty (\\theta(t)-1)t^{s/2-1}\\,dt.$$; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function has its Mellin-theta integral representation on $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $$\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)=\\frac12\\int_0^\\infty (\\theta(t)-1)t^{s/2-1}\\,dt.$$; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function has its Mellin-theta integral representation on $\\\\operatorname{Re}s>1$, Proof technique: direct. 1.1 Write $\\sigma:=\\operatorname{Re}s$. By [L2], $$\\frac12\\int_0^\\infty(\\theta(t)-1)t^{s/2-1}\\,dt=\\sum_{n\\ge1}\\int…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function has its Mellin-theta integral representation on $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $$\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)=\\frac12\\int_0^\\infty (\\theta(t)-1)t^{s/2-1}\\,dt.$$; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function has its Mellin-theta integral representation on $\\\\operatorname{Re}s>1$, If $\\operatorname{Re}s>1$, then $$\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)=\\frac12\\int_0^\\infty (\\theta(t)-1)t^{s/2-1}\\,dt.$$; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the sum-integral interchange. Rechecked absolute integrability of e^(-pi n^2 t) t^(sigma/2-1) and the u=pi n^2 t substitution producing Gamma(s/2)n^(-s)."
+      }
+    },
+    "thm-riemann-zeta-meromorphic-continuation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-zeta-continuation-to-the-right-half-plane",
+          "source_section": "Statement",
+          "quote": "For every complex number $s$ with $\\operatorname{Re}s>0$ and $s\\ne1$,\n\n$$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty \\{x\\}x^{-s-1}\\,dx,$$\n\nwhere $\\{x\\}=x-\\lfloor x\\rfloor$ is the fractional part. The integral defines a\nholomorphic function on $\\operatorname{Re}s>0$, so the right-hand side is\nmeromorphic there with a single simple pole at $s=1$ of residue $1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-jacobi-theta-transformation",
+          "source_section": "Statement",
+          "quote": "For every $t>0$,\n\n$$\\theta(t)=t^{-1/2}\\theta(1/t).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-theta-mellin-representation-of-completed-zeta",
+          "source_section": "Statement",
+          "quote": "If $\\operatorname{Re}s>1$, then\n\n$$\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)=\\frac12\\int_0^\\infty (\\theta(t)-1)t^{s/2-1}\\,dt.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-completed-riemann-zeta-function",
+          "source_section": "Definition",
+          "quote": "For $\\operatorname{Re}s>1$, define the **completed zeta function**\n\n$$\\Lambda(s):=\\pi^{-s/2}\\Gamma(s/2)\\zeta(s).$$\n\nAt this stage both factors on the right are already defined on\n$\\operatorname{Re}s>1$. The later continuation theorem extends this expression\nmeromorphically to all complex $s$ and keeps the symbol $\\Lambda$ for that\nmeromorphic continuation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-gamma-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "Gamma extends to a meromorphic function on $\\mathbb C$ with simple poles at the\nnonpositive integers, and\n\n$$\\operatorname{Res}(\\Gamma,-n)=\\frac{(-1)^n}{n!}\\qquad(n=0,1,2,\\dots).$$\n\nMore generally, for every integer $m\\ge0$ and every\n$z\\notin\\{0,-1,\\dots,-m\\}$,\n\n$$\\Gamma(z)=\\frac{\\Gamma(z+m+1)}{z(z+1)\\cdots(z+m)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-gamma-function-has-no-zeros",
+          "source_section": "Statement",
+          "quote": "Gamma has no zeros on $\\mathbb C$, and $1/\\Gamma$ has simple zeros exactly at\n$0,-1,-2,\\dots$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $\\operatorname{Re}s>1$, split the integral in [L3] at $1$. Using [L2] on $(0,1)$ and the change of variables $u=1/t$ gives $$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-(s+1)/2}\\right)\\,dt.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $t\\ge1$, [L2] and the definition of $\\theta$ give $$0<\\theta(t)-1=2\\sum_{n\\ge1}e^{-\\pi n^2 t}\\le 2\\sum_{n\\ge1}e^{-\\pi n t}=\\frac{2e^{-\\pi t}}{1-e^{-\\pi t}}.$$ Hence the integral in step 1.1 converges absolutely and locally uniformly for every $s\\in\\mathbb C$, because the powers of $t$ contribute only polynomial growth while the right-hand side decays exponentially. Therefore $$H(s):=\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-(s+1)/2}\\right)\\,dt$$ is entire, and step 1.1 shows that $\\Lambda(s)=1/(s(s-1))+H(s)$ is meromorphic on $\\mathbb C$ with at most simple poles at $0$ and $1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L5] and [L6], $1/\\Gamma(s/2)$ is entire, with a simple zero at $s=0$ and zeros only at the negative even integers. Thus $$\\widetilde\\zeta(s):=\\pi^{s/2}\\Lambda(s)/\\Gamma(s/2)$$ is meromorphic on $\\mathbb C$. On $\\operatorname{Re}s>1$, [L4] makes $\\widetilde\\zeta(s)=\\zeta(s)$. By [A1], this is the unique meromorphic continuation of zeta. The zero of $1/\\Gamma(s/2)$ cancels the pole of $\\Lambda$ at $0$, and no further poles are introduced at the negative even integers. Since [L1] already shows that zeta is holomorphic on $\\operatorname{Re}s>0$ away from $1$, the only pole of the continuation is the simple residue-one pole at $s=1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L4",
+            "L5",
+            "L6",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function extends meromorphically to the complex plane with its only pole at $1$, There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that agrees with the Dirichlet series on $\\operatorname{Re}s>1$.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The Riemann zeta function extends meromorphically to the complex plane with its only pole at $1$, step 3.1 By [L5] and [L6], $1/\\Gamma(s/2)$ is entire, with a simple zero at $s=0$ and zeros only at the negative even integers."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function extends meromorphically to the complex plane with its only pole at $1$, There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that agrees with the Dirichlet series on $\\operatorname{Re}s>1$.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function extends meromorphically to the complex plane with its only pole at $1$, There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that agrees with the Dirichlet series on $\\operatorname{Re}s>1$.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The Riemann zeta function extends meromorphically to the complex plane with its only pole at $1$, step 1.1 On $\\operatorname{Re}s>1$, split the integral in [L3] at $1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function extends meromorphically to the complex plane with its only pole at $1$, Proof technique: direct. 1.1 On $\\operatorname{Re}s>1$, split the integral in [L3] at $1$. Using [L2] on $(0,1)$ and the change of variable…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function extends meromorphically to the complex plane with its only pole at $1$, There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that agrees with the Dirichlet series on $\\operatorname{Re}s>1$.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function extends meromorphically to the complex plane with its only pole at $1$, There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that agrees with the Dirichlet series on $\\operatorname{Re}s>1$.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the global continuation via the split theta integral. Rechecked the exponentially decaying H(s) integral and the cancellation of the s=0 pole by 1/Gamma(s/2)."
+      }
+    },
+    "thm-completed-riemann-zeta-functional-equation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-completed-riemann-zeta-function",
+          "source_section": "Definition",
+          "quote": "For $\\operatorname{Re}s>1$, define the **completed zeta function**\n\n$$\\Lambda(s):=\\pi^{-s/2}\\Gamma(s/2)\\zeta(s).$$\n\nAt this stage both factors on the right are already defined on\n$\\operatorname{Re}s>1$. The later continuation theorem extends this expression\nmeromorphically to all complex $s$ and keeps the symbol $\\Lambda$ for that\nmeromorphic continuation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-jacobi-theta-transformation",
+          "source_section": "Statement",
+          "quote": "For every $t>0$,\n\n$$\\theta(t)=t^{-1/2}\\theta(1/t).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-theta-mellin-representation-of-completed-zeta",
+          "source_section": "Statement",
+          "quote": "If $\\operatorname{Re}s>1$, then\n\n$$\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)=\\frac12\\int_0^\\infty (\\theta(t)-1)t^{s/2-1}\\,dt.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-riemann-zeta-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that\nagrees with the Dirichlet series on $\\operatorname{Re}s>1$. This continuation is\nholomorphic on $\\mathbb C\\setminus\\{1\\}$ and has a single simple pole at\n$s=1$, of residue $1$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Repeating the split-at-$1$ calculation from the Mellin integral in [L3] and using [L2] on $(0,1)$ gives $$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt$$ for $\\operatorname{Re}s>1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $$F(s):=\\frac{1}{s(s-1)}+H(s),$$ where $H$ is the entire function from [L4]. By step 1.1, on $\\operatorname{Re}s>1$ this equals the explicit right-hand side there. That explicit formula is unchanged when $s$ is replaced by $1-s$, because $1/(s(s-1))=1/((1-s)(-s))$ and the two powers of $t$ are exchanged. Hence $$F(s)=F(1-s)\\qquad(\\operatorname{Re}s>1).$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $\\operatorname{Re}s>1$, [L1] names the completed function as $\\Lambda(s)$, and step 1.1 identifies that same function with the explicit split formula. Combined with [L4], this shows that $F(s)=\\Lambda(s)$ there. Since both $F$ and $\\Lambda$ are meromorphic on $\\mathbb C$, [A1] gives $F=\\Lambda$ on all of $\\mathbb C$. Applying [A1] again to the meromorphic functions $F(s)$ and $F(1-s)$, which agree on $\\operatorname{Re}s>1$ by step 2.1, yields $F(s)=F(1-s)$ on $\\mathbb C$. Therefore $$\\Lambda(s)=F(s)=F(1-s)=\\Lambda(1-s)$$ for every $s \\in \\mathbb C$. The explicit pole term in step 1.1 shows that the poles at $0$ and $1$ are simple.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1",
+            "L4",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function satisfies $\\\\Lambda(s)=\\\\Lambda(1-s)$, The completed zeta function extends meromorphically to $\\mathbb C$, has simple poles at $0$ and $1$, and satisfies $$\\Lambda(s)=\\Lambda(1-s…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The completed zeta function satisfies $\\\\Lambda(s)=\\\\Lambda(1-s)$, step 2.1 Define $$F(s):=\\frac{1}{s(s-1)}+H(s),$$ where $H$ is the entire function from [L4].; together with step 3.1 On $\\operatorname{Re}s>1$, [L1] names the completed function as $\\Lambda(s)$, and step 1.1 identifies that same function with the explicit split formula."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function satisfies $\\\\Lambda(s)=\\\\Lambda(1-s)$, The completed zeta function extends meromorphically to $\\mathbb C$, has simple poles at $0$ and $1$, and satisfies $$\\Lambda(s)=\\Lambda(1-s…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function satisfies $\\\\Lambda(s)=\\\\Lambda(1-s)$, The completed zeta function extends meromorphically to $\\mathbb C$, has simple poles at $0$ and $1$, and satisfies $$\\Lambda(s)=\\Lambda(1-s…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The completed zeta function satisfies $\\\\Lambda(s)=\\\\Lambda(1-s)$, step 1.1 Repeating the split-at-$1$ calculation from the Mellin integral in [L3] and using [L2] on $(0,1)$ gives $$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt$$ for $\\ope…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function satisfies $\\\\Lambda(s)=\\\\Lambda(1-s)$, Proof technique: direct. 1.1 Repeating the split-at-$1$ calculation from the Mellin integral in [L3] and using [L2] on $(0,1)$ gives $$\\Lam…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function satisfies $\\\\Lambda(s)=\\\\Lambda(1-s)$, The completed zeta function extends meromorphically to $\\mathbb C$, has simple poles at $0$ and $1$, and satisfies $$\\Lambda(s)=\\Lambda(1-s…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The completed zeta function satisfies $\\\\Lambda(s)=\\\\Lambda(1-s)$, The completed zeta function extends meromorphically to $\\mathbb C$, has simple poles at $0$ and $1$, and satisfies $$\\Lambda(s)=\\Lambda(1-s…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the global symmetry claim from the split formula. Steps 2.1-3.1 now route through the meromorphic F(s)=1/(s(s-1))+H(s), so Lambda = F = F∘(1-s) globally."
+      }
+    },
+    "thm-riemann-zeta-functional-equation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-completed-riemann-zeta-functional-equation",
+          "source_section": "Statement",
+          "quote": "The completed zeta function extends meromorphically to $\\mathbb C$, has simple\npoles at $0$ and $1$, and satisfies\n\n$$\\Lambda(s)=\\Lambda(1-s).$$\n\nMore explicitly,\n\n$$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt,$$\n\nand the right-hand side is symmetric under $s\\mapsto1-s$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-euler-reflection-formula",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C\\setminus\\mathbb Z$,\n\n$$\\Gamma(z)\\Gamma(1-z)=\\frac{\\pi}{\\sin(\\pi z)}.$$\n\nThe identity extends meromorphically to all $z\\in\\mathbb C$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-legendre-duplication-formula",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$ away from the poles,\n\n$$\\Gamma(z)\\Gamma\\!\\left(z+\\frac12\\right)=2^{1-2z}\\sqrt{\\pi}\\,\\Gamma(2z).$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Rearranging [L1] gives $$\\zeta(s)=\\pi^{s-1/2}\\frac{\\Gamma((1-s)/2)}{\\Gamma(s/2)}\\zeta(1-s).$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [L3] with $z=(1-s)/2$ to obtain $$\\Gamma((1-s)/2)\\Gamma(1-s/2)=2^s\\sqrt{\\pi}\\,\\Gamma(1-s).$$ Apply [L2] with $z=s/2$ to obtain $$\\Gamma(s/2)\\Gamma(1-s/2)=\\frac{\\pi}{\\sin(\\pi s/2)}.$$ Dividing the first identity by the second yields $$\\pi^{s-1/2}\\frac{\\Gamma((1-s)/2)}{\\Gamma(s/2)}=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s).$$",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute the factor identity from step 1.2 into step 1.1. This gives $$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$ which is the classical functional equation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function satisfies the classical sine-gamma functional equation, For all $s\\in\\mathbb C$, $$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$ as an identity of meromorphic functions.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function satisfies the classical sine-gamma functional equation, step 1.2 manipulates identities of meromorphic factors and the theorem's conclusion is itself an identity of meromorphic functions, so the zeros of $Gamma(s/2)$ or $sin(pi s/2)$ are not separate pointwise denominator cases the boundary row must split off.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In The Riemann zeta function satisfies the classical sine-gamma functional equation, step 1.2 manipulates identities of meromorphic factors and the theorem's conclusion is itself an identity of meromorphic functions, so the zeros of $Gamma(s/2)$ or $sin(pi s/2)$ are not separate pointwise denominator cases the boundary row must split off."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function satisfies the classical sine-gamma functional equation, For all $s\\in\\mathbb C$, $$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$ as an identity of meromorphic functions.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function satisfies the classical sine-gamma functional equation, For all $s\\in\\mathbb C$, $$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$ as an identity of meromorphic functions.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function satisfies the classical sine-gamma functional equation, For all $s\\in\\mathbb C$, $$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$ as an identity of meromorphic functions.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function satisfies the classical sine-gamma functional equation, Proof technique: direct. 1.1 Rearranging [L1] gives $$\\zeta(s)=\\pi^{s-1/2}\\frac{\\Gamma((1-s)/2)}{\\Gamma(s/2)}\\zeta(1-s).$$ [L1, given, alge…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function satisfies the classical sine-gamma functional equation, For all $s\\in\\mathbb C$, $$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$ as an identity of meromorphic functions.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function satisfies the classical sine-gamma functional equation, For all $s\\in\\mathbb C$, $$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$ as an identity of meromorphic functions.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-riemann-xi-is-entire-of-order-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-riemann-xi-function",
+          "source_section": "Definition",
+          "quote": "The completed function extends meromorphically with simple poles at $0$ and\n$1$ by [[thm-completed-riemann-zeta-functional-equation]]. The **Riemann xi\nfunction** is defined on $\\mathbb C$ by\n\n$$\\xi(s):=\\frac12 s(s-1)\\Lambda(s)=\\frac12 s(s-1)\\pi^{-s/2}\\Gamma(s/2)\\zeta(s).$$\n\nThe role of the factor $\\tfrac12 s(s-1)$ is to cancel the two simple poles of\nthe completed function $\\Lambda$. Thus $\\xi$ is the entire completion, while\n$\\Lambda$ remains meromorphic.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-completed-riemann-zeta-functional-equation",
+          "source_section": "Statement",
+          "quote": "The completed zeta function extends meromorphically to $\\mathbb C$, has simple\npoles at $0$ and $1$, and satisfies\n\n$$\\Lambda(s)=\\Lambda(1-s).$$\n\nMore explicitly,\n\n$$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt,$$\n\nand the right-hand side is symmetric under $s\\mapsto1-s$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-stirling-formula-gamma",
+          "source_section": "Statement",
+          "quote": "Fix $\\delta$ with $0<\\delta<\\pi$. On the closed sector\n$|\\arg z|\\le\\pi-\\delta$, using the principal logarithm in\n$z^{z-1/2}:=\\exp((z-1/2)\\operatorname{Log} z)$, one has\n\n$$\\Gamma(z)=\\sqrt{2\\pi}\\,z^{z-1/2}e^{-z}\\left(1+O_\\delta(|z|^{-1})\\right)$$\n\nas $|z|\\to\\infty$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-riemann-zeta-function",
+          "source_section": "Definition",
+          "quote": "For $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, define the **Riemann zeta\nfunction** by\n\n$$\\zeta(s):=\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n).$$\n\nHere $\\exp$ is the complex exponential and $\\log n$ is the real logarithm of\nthe positive integer $n$. The preceding lemma\n[[lem-riemann-zeta-dirichlet-series-converges-locally-uniformly]] proves that\nthis Dirichlet series converges absolutely and locally uniformly on the open\nhalf-plane $\\operatorname{Re}s>1$, so the definition is well posed exactly on\nthat domain.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L3], $\\Lambda$ has simple poles at $0$ and $1$. Multiplying by $\\tfrac12 s(s-1)$ in [L1] cancels exactly those poles, so $\\xi$ is entire. The same two facts give $$\\xi(1-s)=\\frac12(1-s)(-s)\\Lambda(1-s)=\\frac12 s(s-1)\\Lambda(s)=\\xi(s).$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For real $x>1$, the Dirichlet series in [L5] is a sum of positive real terms, so $\\zeta(x)\\in\\mathbb R$. The remaining factors in [L1] are also real there, hence $\\xi(x)\\in\\mathbb R$ for all $x>1$. Therefore the entire functions $s\\mapsto \\xi(s)$ and $s\\mapsto \\overline{\\xi(\\overline s)}$ agree on $(1,\\infty)$, so [A1] makes them equal on all of $\\mathbb C$. In particular $\\xi(x)$ is real for every real $x$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L5",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the half-plane $\\operatorname{Re}s\\ge2$, [L5] gives $|\\zeta(s)|\\le\\sum_{n\\ge1}n^{-2}$. Applying [L4] to $z=s/2$ on that sector shows $$|\\Gamma(s/2)|\\le \\exp(C|s|\\log(2+|s|))$$ for some constant $C$, hence [L1] gives $$|\\xi(s)|\\le \\exp(C_1|s|\\log(2+|s|))\\qquad(\\operatorname{Re}s\\ge2).$$ By the symmetry from step 1.1, the same bound holds on $\\operatorname{Re}s\\le-1$. On the strip $-1\\le\\operatorname{Re}s\\le2$, the explicit split formula in [L3] gives $$\\xi(s)=\\frac12+\\frac14 s(s-1)\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt.$$ For $t\\ge1$ and $-1\\le\\operatorname{Re}s\\le2$, both powers of $t$ have modulus at most $1$, while $\\theta(t)-1$ decays exponentially in $t$. Hence the integral is uniformly bounded on the strip, so $|\\xi(s)|\\le C_2(1+|s|^2)$ there. Therefore the same exponential bound holds on all of $\\mathbb C$, and $\\xi$ has order at most $1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Along the positive real axis, $\\zeta(r)\\to1$ as $r\\to\\infty$ by [L5], so [L1] and [L4] give $$\\log |\\xi(r)|=\\frac{r}{2}\\log r+O(r)\\qquad(r\\to\\infty).$$ Thus $\\log\\log M_\\xi(r)\\ge \\log\\log|\\xi(r)|=\\log r+o(\\log r)$, which rules out order smaller than $1$. Combining this with step 2.1 shows that $\\xi$ has order exactly $1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function is entire of order one, real on the real axis, and symmetric under $s\\\\mapsto1-s$, The function $$\\xi(s)=\\frac12 s(s-1)\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$$ extends to an entire function of order $1$.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function is entire of order one, real on the real axis, and symmetric under $s\\\\mapsto1-s$, Proof technique: direct. 1.1 By [L3], $\\Lambda$ has simple poles at $0$ and $1$. Multiplying by $\\tfrac12 s(s-1)$ in [L1] cancels exactly t…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function is entire of order one, real on the real axis, and symmetric under $s\\\\mapsto1-s$, The function $$\\xi(s)=\\frac12 s(s-1)\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$$ extends to an entire function of order $1$.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function is entire of order one, real on the real axis, and symmetric under $s\\\\mapsto1-s$, The function $$\\xi(s)=\\frac12 s(s-1)\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$$ extends to an entire function of order $1$.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The Riemann xi function is entire of order one, real on the real axis, and symmetric under $s\\\\mapsto1-s$, step 2.1 On the half-plane $\\operatorname{Re}s\\ge2$, [L5] gives $|\\zeta(s)|\\le\\sum_{n\\ge1}n^{-2}$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function is entire of order one, real on the real axis, and symmetric under $s\\\\mapsto1-s$, Proof technique: direct. 1.1 By [L3], $\\Lambda$ has simple poles at $0$ and $1$. Multiplying by $\\tfrac12 s(s-1)$ in [L1] cancels exactly t…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function is entire of order one, real on the real axis, and symmetric under $s\\\\mapsto1-s$, The function $$\\xi(s)=\\frac12 s(s-1)\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$$ extends to an entire function of order $1$.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function is entire of order one, real on the real axis, and symmetric under $s\\\\mapsto1-s$, The function $$\\xi(s)=\\frac12 s(s-1)\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$$ extends to an entire function of order $1$.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was cancelling the poles of Lambda and controlling growth on the central strip. Step 2.1 now bounds xi directly via the split integral after the s(s-1) cancellation, so the order-one estimate is sound."
+      }
+    },
+    "thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one",
+          "source_section": "Statement",
+          "quote": "If $\\operatorname{Re}s>1$, then $\\zeta(s)\\ne0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-zeta-continuation-to-the-right-half-plane",
+          "source_section": "Statement",
+          "quote": "For every complex number $s$ with $\\operatorname{Re}s>0$ and $s\\ne1$,\n\n$$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty \\{x\\}x^{-s-1}\\,dx,$$\n\nwhere $\\{x\\}=x-\\lfloor x\\rfloor$ is the fractional part. The integral defines a\nholomorphic function on $\\operatorname{Re}s>0$, so the right-hand side is\nmeromorphic there with a single simple pole at $s=1$ of residue $1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-euler-product-for-riemann-zeta",
+          "source_section": "Statement",
+          "quote": "For every $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$,\n\n$$\\zeta(s)=\\prod_p \\frac{1}{1-p^{-s}},$$\n\nwhere the product ranges over the primes and converges absolutely and locally\nuniformly on $\\operatorname{Re}s>1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], only the boundary line $\\operatorname{Re}s=1$ remains to be checked. Suppose $t\\ne0$ and $\\zeta(1+it)=0$. Since [L2] makes zeta holomorphic at $1+it$, there are $\\delta>0$ and $C>0$ such that $$|\\zeta(\\sigma+it)|\\le C(\\sigma-1)\\qquad(1<\\sigma<1+\\delta).$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\sigma>1$ and real $u$, absolute convergence in [L3] and the power series $-\\log(1-z)=\\sum_{m\\ge1}z^m/m$ give $$\\log|\\zeta(\\sigma+iu)|=\\sum_p\\sum_{m\\ge1}\\frac{\\cos(mu\\log p)}{m p^{m\\sigma}}.$$ Consequently $$\\log\\!\\left|\\zeta(\\sigma)^3\\zeta(\\sigma+it)^4\\zeta(\\sigma+2it)\\right|=\\sum_p\\sum_{m\\ge1}\\frac{3+4\\cos(mt\\log p)+\\cos(2mt\\log p)}{m p^{m\\sigma}}\\ge0,$$ because $3+4\\cos\\theta+\\cos 2\\theta=2(1+\\cos\\theta)^2\\ge0$. Exponentiating gives $$\\left|\\zeta(\\sigma)^3\\zeta(\\sigma+it)^4\\zeta(\\sigma+2it)\\right|\\ge1.$$ On the other hand, [L2] gives $\\zeta(\\sigma)=1/(\\sigma-1)+O(1)$ as $\\sigma\\downarrow1$, so $\\zeta(\\sigma)^3=O((\\sigma-1)^{-3})$. The point $1+2it$ is not $1$, so [L2] also makes $\\zeta(\\sigma+2it)$ bounded as $\\sigma\\downarrow1$. Combining these bounds with step 1.1 yields $$\\left|\\zeta(\\sigma)^3\\zeta(\\sigma+it)^4\\zeta(\\sigma+2it)\\right|=O(\\sigma-1)\\to0,$$ contradicting the lower bound above.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $\\zeta(1+it)\\ne0$ for every $t\\ne0$. At $t=0$, [L2] says $s=1$ is a simple pole, not a zero. Together with [L1], this proves that zeta has no zeros on $\\operatorname{Re}s\\ge1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros on the closed half-plane $\\\\operatorname{Re}s\\\\ge1$, except for its pole at $1$, The meromorphic continuation of $\\zeta$ has no zeros on the closed half-plane $\\operatorname{Re}s\\ge1$.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The Riemann zeta function has no zeros on the closed half-plane $\\\\operatorname{Re}s\\\\ge1$, except for its pole at $1$, step 3.1 Therefore $\\zeta(1+it)\\ne0$ for every $t\\ne0$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros on the closed half-plane $\\\\operatorname{Re}s\\\\ge1$, except for its pole at $1$, The meromorphic continuation of $\\zeta$ has no zeros on the closed half-plane $\\operatorname{Re}s\\ge1$.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros on the closed half-plane $\\\\operatorname{Re}s\\\\ge1$, except for its pole at $1$, The meromorphic continuation of $\\zeta$ has no zeros on the closed half-plane $\\operatorname{Re}s\\ge1$.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The Riemann zeta function has no zeros on the closed half-plane $\\\\operatorname{Re}s\\\\ge1$, except for its pole at $1$, step 1.1 By [L1], only the boundary line $\\operatorname{Re}s=1$ remains to be checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "In The Riemann zeta function has no zeros on the closed half-plane $\\\\operatorname{Re}s\\\\ge1$, except for its pole at $1$, step 1.1 By [L1], only the boundary line $\\operatorname{Re}s=1$ remains to be checked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros on the closed half-plane $\\\\operatorname{Re}s\\\\ge1$, except for its pole at $1$, The meromorphic continuation of $\\zeta$ has no zeros on the closed half-plane $\\operatorname{Re}s\\ge1$.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has no zeros on the closed half-plane $\\\\operatorname{Re}s\\\\ge1$, except for its pole at $1$, The meromorphic continuation of $\\zeta$ has no zeros on the closed half-plane $\\operatorname{Re}s\\ge1$.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk is the boundary-line zero-free argument, especially the zero-to-linear-bound step and the powers 3, 4, and 1 in the trigonometric inequality. Rechecked that t != 0 keeps both 1+it and 1+2it away from the pole, that the Euler-product logarithm is absolutely convergent for sigma > 1, and that the assumed zero supplies an O(sigma-1) factor. Thus the displayed product is simultaneously at least 1 and O(sigma-1), while t = 0 is handled separately by the simple pole at 1."
+      }
+    },
+    "thm-trivial-zeros-and-critical-strip": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-zeta-functional-equation",
+          "source_section": "Statement",
+          "quote": "For all $s\\in\\mathbb C$,\n\n$$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$\n\nas an identity of meromorphic functions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane",
+          "source_section": "Statement",
+          "quote": "The meromorphic continuation of $\\zeta$ has no zeros on the closed half-plane\n$\\operatorname{Re}s\\ge1$. Its only singularity there is the simple pole at\n$s=1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-gamma-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "Gamma extends to a meromorphic function on $\\mathbb C$ with simple poles at the\nnonpositive integers, and\n\n$$\\operatorname{Res}(\\Gamma,-n)=\\frac{(-1)^n}{n!}\\qquad(n=0,1,2,\\dots).$$\n\nMore generally, for every integer $m\\ge0$ and every\n$z\\notin\\{0,-1,\\dots,-m\\}$,\n\n$$\\Gamma(z)=\\frac{\\Gamma(z+m+1)}{z(z+1)\\cdots(z+m)}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-gamma-function-has-no-zeros",
+          "source_section": "Statement",
+          "quote": "Gamma has no zeros on $\\mathbb C$, and $1/\\Gamma$ has simple zeros exactly at\n$0,-1,-2,\\dots$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-riemann-zeta-function",
+          "source_section": "Definition",
+          "quote": "For $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, define the **Riemann zeta\nfunction** by\n\n$$\\zeta(s):=\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n).$$\n\nHere $\\exp$ is the complex exponential and $\\log n$ is the real logarithm of\nthe positive integer $n$. The preceding lemma\n[[lem-riemann-zeta-dirichlet-series-converges-locally-uniformly]] proves that\nthis Dirichlet series converges absolutely and locally uniformly on the open\nhalf-plane $\\operatorname{Re}s>1$, so the definition is well posed exactly on\nthat domain.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $m\\ge1$. Substituting $s=-2m$ into [L1], the sine factor vanishes, $\\Gamma(1+2m)$ is finite by [L3], and $\\zeta(1+2m)\\ne0$ by [L2]. Hence $\\zeta(-2m)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x<0$ real and not a negative even integer, the sine factor in [L1] is nonzero. Also $1-x>1$, so [L2] gives $\\zeta(1-x)\\ne0$, and [L3] with [L4] gives $\\Gamma(1-x)\\ne0$. Therefore [L1] forces $\\zeta(x)\\ne0$. To handle $x=0$, let $s\\to0$ in [L1]: one has $\\sin(\\pi s/2)\\sim \\pi s/2$, $\\Gamma(1-s)\\to1$, and zeta has a simple residue-one pole at $1$, so $\\zeta(1-s)\\sim -1/s$. Thus $\\zeta(0)=-1/2\\ne0$. Hence the only nonpositive real zeros are the numbers $-2,-4,\\dots$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Now let $\\rho$ be any zero of zeta that is not one of the negative even integers. If $\\operatorname{Re}\\rho\\le0$, then [L2] gives $\\zeta(1-\\rho)\\ne0$ because $\\operatorname{Re}(1-\\rho)\\ge1$, and [L4] gives $\\Gamma(1-\\rho)\\ne0$ unless $1-\\rho$ is a nonpositive integer, which cannot happen when $\\operatorname{Re}\\rho\\le0$. Since the sine factor in [L1] vanishes only at even integers, step 2.1 rules out that possibility. Therefore [L1] cannot vanish at $\\rho$, a contradiction. So every zero not listed in step 1.1 satisfies $\\operatorname{Re}\\rho>0$. Applying [L2] again excludes $\\operatorname{Re}\\rho\\ge1$, so every remaining zero lies in $0<\\operatorname{Re}\\rho<1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $\\rho$ is a nontrivial zero, then step 3.1 places it in the open critical strip. The sine and Gamma factors in [L1] are therefore finite and nonzero, so the functional equation gives $\\zeta(1-\\rho)=0$. On $\\operatorname{Re}s>1$, the Dirichlet series in [L5] satisfies $\\overline{\\zeta(s)}=\\zeta(\\overline s)$ term by term. Meromorphic continuation therefore extends this identity to all $s\\ne1$, so $\\zeta(\\rho)=0$ implies $\\zeta(\\overline\\rho)=0$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L1",
+            "L3",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The only zeros of zeta on the nonpositive real axis are the negative even integers, and every other zero lies in the open critical strip, For each integer $m\\ge1$, $$\\zeta(-2m)=0.$$ These are the only zeros of $\\zeta$ on the nonpositive real axis.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The only zeros of zeta on the nonpositive real axis are the negative even integers, and every other zero lies in the open critical strip, step 2.1 For $x<0$ real and not a negative even integer, the sine factor in [L1] is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The only zeros of zeta on the nonpositive real axis are the negative even integers, and every other zero lies in the open critical strip, For each integer $m\\ge1$, $$\\zeta(-2m)=0.$$ These are the only zeros of $\\zeta$ on the nonpositive real axis.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The only zeros of zeta on the nonpositive real axis are the negative even integers, and every other zero lies in the open critical strip, For each integer $m\\ge1$, $$\\zeta(-2m)=0.$$ These are the only zeros of $\\zeta$ on the nonpositive real axis.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The only zeros of zeta on the nonpositive real axis are the negative even integers, and every other zero lies in the open critical strip, step 2.1 For $x<0$ real and not a negative even integer, the sine factor in [L1] is nonzero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The only zeros of zeta on the nonpositive real axis are the negative even integers, and every other zero lies in the open critical strip, Proof technique: direct. 1.1 Let $m\\ge1$. Substituting $s=-2m$ into [L1], the sine factor vanishes, $\\Gamma(1+2m)$ is finite by [L3], and $…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The only zeros of zeta on the nonpositive real axis are the negative even integers, and every other zero lies in the open critical strip, For each integer $m\\ge1$, $$\\zeta(-2m)=0.$$ These are the only zeros of $\\zeta$ on the nonpositive real axis.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The only zeros of zeta on the nonpositive real axis are the negative even integers, and every other zero lies in the open critical strip, For each integer $m\\ge1$, $$\\zeta(-2m)=0.$$ These are the only zeros of $\\zeta$ on the nonpositive real axis.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was excluding other nonpositive-real zeros and propagating symmetries. Rechecked the functional-equation factors at x < 0 and the conjugation argument extending from the Dirichlet series."
+      }
+    },
+    "thm-hadamard-product-for-riemann-xi": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-xi-is-entire-of-order-one",
+          "source_section": "Statement",
+          "quote": "The function\n\n$$\\xi(s)=\\frac12 s(s-1)\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$$\n\nextends to an entire function of order $1$. It satisfies\n\n$$\\xi(s)=\\xi(1-s),$$\n\nand $\\xi(x)\\in\\mathbb R$ for every real $x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-hadamard-factorization-for-finite-order-entire-functions",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a nonzero entire function of finite order $\\rho$, let $m$ be the\norder of its zero at $0$, let $(a_n)_{n\\ge1}$ list its nonzero zeros with\nmultiplicity and without finite accumulation point, and put\n\n$$p:=\\lfloor\\rho\\rfloor.$$\n\nThen there is a polynomial $Q$ of degree at most $p$ such that\n\n$$f(z)=z^m e^{Q(z)}\\prod_{n\\ge1}E_p(z/a_n).$$\n\nIn particular, a finite-order entire function factors as an exponential of a\npolynomial times a canonical product whose genus is bounded by its order.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-trivial-zeros-and-critical-strip",
+          "source_section": "Statement",
+          "quote": "For each integer $m\\ge1$,\n\n$$\\zeta(-2m)=0.$$\n\nThese are the only zeros of $\\zeta$ on the nonpositive real axis. Every other\nzero $\\rho$ of $\\zeta$ satisfies $0<\\operatorname{Re}\\rho<1$. Moreover, if\n$\\rho$ is a nontrivial zero, then so are $1-\\rho$ and $\\overline{\\rho}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-completed-riemann-zeta-functional-equation",
+          "source_section": "Statement",
+          "quote": "The completed zeta function extends meromorphically to $\\mathbb C$, has simple\npoles at $0$ and $1$, and satisfies\n\n$$\\Lambda(s)=\\Lambda(1-s).$$\n\nMore explicitly,\n\n$$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt,$$\n\nand the right-hand side is symmetric under $s\\mapsto1-s$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-riemann-xi-function",
+          "source_section": "Definition",
+          "quote": "The completed function extends meromorphically with simple poles at $0$ and\n$1$ by [[thm-completed-riemann-zeta-functional-equation]]. The **Riemann xi\nfunction** is defined on $\\mathbb C$ by\n\n$$\\xi(s):=\\frac12 s(s-1)\\Lambda(s)=\\frac12 s(s-1)\\pi^{-s/2}\\Gamma(s/2)\\zeta(s).$$\n\nThe role of the factor $\\tfrac12 s(s-1)$ is to cancel the two simple poles of\nthe completed function $\\Lambda$. Thus $\\xi$ is the entire completion, while\n$\\Lambda$ remains meromorphic.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one",
+          "source_section": "Statement",
+          "quote": "If $\\operatorname{Re}s>1$, then $\\zeta(s)\\ne0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-gamma-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "Gamma extends to a meromorphic function on $\\mathbb C$ with simple poles at the\nnonpositive integers, and\n\n$$\\operatorname{Res}(\\Gamma,-n)=\\frac{(-1)^n}{n!}\\qquad(n=0,1,2,\\dots).$$\n\nMore generally, for every integer $m\\ge0$ and every\n$z\\notin\\{0,-1,\\dots,-m\\}$,\n\n$$\\Gamma(z)=\\frac{\\Gamma(z+m+1)}{z(z+1)\\cdots(z+m)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], xi is entire of finite order $1$. Applying [L2] with $\\rho=1$ therefore yields constants $A,B\\in\\mathbb C$ such that $$\\xi(s)=e^{A+Bs}\\prod_{\\rho'}E_1(s/\\rho'),$$ where the product runs over the zeros $\\rho'$ of xi, counted with multiplicity.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L5] and [L4], $$\\xi(s)=\\frac12+\\frac12 s(s-1)H(s).$$ Hence $\\xi(0)=\\xi(1)=1/2$, so neither $0$ nor $1$ is a zero of xi. Now fix $m\\ge1$. The symmetry from [L4] and [L5] gives $$\\xi(-2m)=\\xi(1+2m).$$ Since $1+2m>1$, [L6] gives $\\zeta(1+2m)\\ne0$, and [L7] shows that $\\Gamma((1+2m)/2)$ is finite because $(1+2m)/2$ is not a nonpositive integer. The scalar factor $\\tfrac12(1+2m)(2m)$ is also nonzero, so [L5] gives $\\xi(1+2m)\\ne0$, hence $\\xi(-2m)\\ne0$. Together with [L3], this shows that the zeros of xi are exactly the nontrivial zeros of zeta.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Replacing the zero set $\\{\\rho'\\}$ in step 1.1 by the nontrivial zeros of zeta from step 1.2 gives the announced product. The phrase \"genus-one canonical sense\" is exactly the convergence prescription supplied by [L2] for an order-one entire function.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function has its genus-one Hadamard product over the nontrivial zeros of zeta, There exist constants $A,B\\in\\mathbb C$ such that $$\\xi(s)=e^{A+Bs}\\prod_\\rho E_1(s/\\rho),$$ where the product runs over the nontrivial zer…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function has its genus-one Hadamard product over the nontrivial zeros of zeta, Proof technique: direct. 1.1 By [L1], xi is entire of finite order $1$. Applying [L2] with $\\rho=1$ therefore yields constants $A,B\\in\\math…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function has its genus-one Hadamard product over the nontrivial zeros of zeta, There exist constants $A,B\\in\\mathbb C$ such that $$\\xi(s)=e^{A+Bs}\\prod_\\rho E_1(s/\\rho),$$ where the product runs over the nontrivial zer…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function has its genus-one Hadamard product over the nontrivial zeros of zeta, There exist constants $A,B\\in\\mathbb C$ such that $$\\xi(s)=e^{A+Bs}\\prod_\\rho E_1(s/\\rho),$$ where the product runs over the nontrivial zer…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function has its genus-one Hadamard product over the nontrivial zeros of zeta, There exist constants $A,B\\in\\mathbb C$ such that $$\\xi(s)=e^{A+Bs}\\prod_\\rho E_1(s/\\rho),$$ where the product runs over the nontrivial zer…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function has its genus-one Hadamard product over the nontrivial zeros of zeta, Proof technique: direct. 1.1 By [L1], xi is entire of finite order $1$. Applying [L2] with $\\rho=1$ therefore yields constants $A,B\\in\\math…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function has its genus-one Hadamard product over the nontrivial zeros of zeta, There exist constants $A,B\\in\\mathbb C$ such that $$\\xi(s)=e^{A+Bs}\\prod_\\rho E_1(s/\\rho),$$ where the product runs over the nontrivial zer…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Riemann xi function has its genus-one Hadamard product over the nontrivial zeros of zeta, There exist constants $A,B\\in\\mathbb C$ such that $$\\xi(s)=e^{A+Bs}\\prod_\\rho E_1(s/\\rho),$$ where the product runs over the nontrivial zer…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was identifying the zero set of xi. Step 1.2 now checks xi(0)=xi(1)=1/2 and uses the functional equation plus zero-freeness on Re s > 1 to exclude the trivial zeros from xi."
+      }
+    },
+    "thm-special-values-of-riemann-zeta-at-integers": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bernoulli-numbers-by-their-generating-function",
+          "source_section": "Definition",
+          "quote": "Near $t=0$, the quotient $t/(e^t-1)$ is holomorphic because\n$e^t-1=t+O(t^2)$. Its Maclaurin expansion therefore has a unique form\n\n$$\\frac{t}{e^t-1}=\\sum_{n=0}^\\infty \\frac{B_n}{n!}t^n.$$\n\nThe coefficients $B_n$ are the **Bernoulli numbers**. This normalization gives\n$B_0=1$ and $B_1=-1/2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-mittag-leffler-expansion-of-pi-cotangent",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C\\setminus\\mathbb Z$,\n\n$$\\pi\\cot(\\pi z)=\\frac1z+\\sum_{n\\ge1}\\frac{2z}{z^2-n^2}=\\frac1z+\\sum_{n\\ge1}\\left(\\frac1{z-n}+\\frac1{z+n}\\right).$$\n\nwhere the series converges locally uniformly on $\\mathbb C\\setminus\\mathbb Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-riemann-zeta-functional-equation",
+          "source_section": "Statement",
+          "quote": "For all $s\\in\\mathbb C$,\n\n$$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$\n\nas an identity of meromorphic functions.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-riemann-zeta-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that\nagrees with the Dirichlet series on $\\operatorname{Re}s>1$. This continuation is\nholomorphic on $\\mathbb C\\setminus\\{1\\}$ and has a single simple pole at\n$s=1$, of residue $1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-trivial-zeros-and-critical-strip",
+          "source_section": "Statement",
+          "quote": "For each integer $m\\ge1$,\n\n$$\\zeta(-2m)=0.$$\n\nThese are the only zeros of $\\zeta$ on the nonpositive real axis. Every other\nzero $\\rho$ of $\\zeta$ satisfies $0<\\operatorname{Re}\\rho<1$. Moreover, if\n$\\rho$ is a nontrivial zero, then so are $1-\\rho$ and $\\overline{\\rho}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $|z|<1$, expand the summand in [L2] as $$\\frac{2z}{z^2-n^2}=-\\frac{2z}{n^2}\\frac{1}{1-z^2/n^2}=-2\\sum_{m\\ge1}\\frac{z^{2m-1}}{n^{2m}}.$$ Summing over $n$ gives $$\\pi z\\cot(\\pi z)=1-2\\sum_{m\\ge1}\\zeta(2m)z^{2m}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $s\\to0$ in [L3]. One has $\\sin(\\pi s/2)\\sim \\pi s/2$, $\\Gamma(1-s)\\to1$, and [L4] gives $\\zeta(1-s)\\sim -1/s$. Therefore $$\\zeta(0)=\\lim_{s\\to0}2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s)=-\\frac12.$$ Also [L5] already gives $\\zeta(-2m)=0$ for $m\\ge1$.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From [L1], $$\\frac{t}{e^t-1}+\\frac{t}{2}=\\sum_{n\\ge0}\\frac{B_n}{n!}t^n+\\frac{t}{2}$$ is even, so $B_{2m+1}=0$ for every $m\\ge1$. Setting $t=2\\pi i z$ and simplifying yields $$\\pi z\\cot(\\pi z)=\\sum_{m\\ge0}\\frac{B_{2m}(2\\pi i z)^{2m}}{(2m)!}=1+\\sum_{m\\ge1}(-1)^m\\frac{B_{2m}(2\\pi)^{2m}}{(2m)!}z^{2m}.$$ Comparing coefficients with step 1.1 gives $$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!}\\qquad(m\\ge1).$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $m\\ge1$, substitute $s=1-2m$ into [L3]. Since $\\sin(\\pi(1-2m)/2)=(-1)^m$ and $\\Gamma(2m)=(2m-1)!$, step 2.1 yields $$\\zeta(1-2m)=2^{1-2m}\\pi^{-2m}(-1)^m(2m-1)!\\,\\zeta(2m)=-\\frac{B_{2m}}{2m}.$$ Together with step 1.2, this gives all the displayed special values.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "L3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has the standard Bernoulli special values at the positive even and nonpositive integers, For every integer $m\\ge1$, $$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!},\\qquad \\zeta(1-2m)=-\\frac{B_{2m}}{2m},\\qquad \\zeta(-2m)=0…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The Riemann zeta function has the standard Bernoulli special values at the positive even and nonpositive integers, step 1.2 Let $s\\to0$ in [L3]. One has $\\sin(\\pi s/2)\\sim \\pi s/2$, $\\Gamma(1-s)\\to1$, and [L4] gives $\\zeta(1-s)\\sim -1/s$. Therefore $$\\zeta(0)=\\lim_{s\\to0}2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s)=-\\frac12.$$ Also [L5] al…"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has the standard Bernoulli special values at the positive even and nonpositive integers, For every integer $m\\ge1$, $$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!},\\qquad \\zeta(1-2m)=-\\frac{B_{2m}}{2m},\\qquad \\zeta(-2m)=0…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has the standard Bernoulli special values at the positive even and nonpositive integers, For every integer $m\\ge1$, $$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!},\\qquad \\zeta(1-2m)=-\\frac{B_{2m}}{2m},\\qquad \\zeta(-2m)=0…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has the standard Bernoulli special values at the positive even and nonpositive integers, For every integer $m\\ge1$, $$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!},\\qquad \\zeta(1-2m)=-\\frac{B_{2m}}{2m},\\qquad \\zeta(-2m)=0…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has the standard Bernoulli special values at the positive even and nonpositive integers, Proof technique: direct. 1.1 For $|z|<1$, expand the summand in [L2] as $$\\frac{2z}{z^2-n^2}=-\\frac{2z}{n^2}\\frac{1}{1-z^2/n^2}=-2\\sum_{m\\g…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has the standard Bernoulli special values at the positive even and nonpositive integers, For every integer $m\\ge1$, $$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!},\\qquad \\zeta(1-2m)=-\\frac{B_{2m}}{2m},\\qquad \\zeta(-2m)=0…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The Riemann zeta function has the standard Bernoulli special values at the positive even and nonpositive integers, For every integer $m\\ge1$, $$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!},\\qquad \\zeta(1-2m)=-\\frac{B_{2m}}{2m},\\qquad \\zeta(-2m)=0…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the sign in the odd negative integer evaluation. Step 3.1 now uses sin(pi(1-2m)/2)=(-1)^m, which restores zeta(1-2m)=-B_(2m)/(2m)."
+      }
+    },
+    "ex-euler-product-numerically-approximates-zeta-at-two": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-euler-product-for-riemann-zeta",
+          "source_section": "Statement",
+          "quote": "For every $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$,\n\n$$\\zeta(s)=\\prod_p \\frac{1}{1-p^{-s}},$$\n\nwhere the product ranges over the primes and converges absolutely and locally\nuniformly on $\\operatorname{Re}s>1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-special-values-of-riemann-zeta-at-integers",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$,\n\n$$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!},\\qquad \\zeta(1-2m)=-\\frac{B_{2m}}{2m},\\qquad \\zeta(-2m)=0,$$\n\nand also\n\n$$\\zeta(0)=-\\frac12.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Evaluating the Euler factors from [L1] at $s=2$ gives $$\\left(1-\\frac14\\right)^{-1}\\left(1-\\frac19\\right)^{-1}\\left(1-\\frac1{25}\\right)^{-1}\\left(1-\\frac1{49}\\right)^{-1}=\\frac43\\cdot\\frac98\\cdot\\frac{25}{24}\\cdot\\frac{49}{48}=\\frac{1225}{768}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the target value is $\\pi^2/6\\approx1.64493$. Comparing with step 1.1 shows that even this short prime truncation already lands within about five hundredths of $\\zeta(2)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A short Euler-product truncation already numerically approximates zeta at $2$, Using the first four primes, $$\\prod_{p\\in\\{2,3,5,7\\}}\\frac{1}{1-p^{-2}}=\\frac{1225}{768}\\approx1.59505,$$ while $$\\zeta(2)=\\frac{\\pi^2}{6}…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A short Euler-product truncation already numerically approximates zeta at $2$, Proof technique: direct. 1.1 Evaluating the Euler factors from [L1] at $s=2$ gives $$\\left(1-\\frac14\\right)^{-1}\\left(1-\\frac19\\right)^{-1}…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A short Euler-product truncation already numerically approximates zeta at $2$, Using the first four primes, $$\\prod_{p\\in\\{2,3,5,7\\}}\\frac{1}{1-p^{-2}}=\\frac{1225}{768}\\approx1.59505,$$ while $$\\zeta(2)=\\frac{\\pi^2}{6}…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A short Euler-product truncation already numerically approximates zeta at $2$, Using the first four primes, $$\\prod_{p\\in\\{2,3,5,7\\}}\\frac{1}{1-p^{-2}}=\\frac{1225}{768}\\approx1.59505,$$ while $$\\zeta(2)=\\frac{\\pi^2}{6}…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A short Euler-product truncation already numerically approximates zeta at $2$, Using the first four primes, $$\\prod_{p\\in\\{2,3,5,7\\}}\\frac{1}{1-p^{-2}}=\\frac{1225}{768}\\approx1.59505,$$ while $$\\zeta(2)=\\frac{\\pi^2}{6}…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A short Euler-product truncation already numerically approximates zeta at $2$, Proof technique: direct. 1.1 Evaluating the Euler factors from [L1] at $s=2$ gives $$\\left(1-\\frac14\\right)^{-1}\\left(1-\\frac19\\right)^{-1}…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A short Euler-product truncation already numerically approximates zeta at $2$, Using the first four primes, $$\\prod_{p\\in\\{2,3,5,7\\}}\\frac{1}{1-p^{-2}}=\\frac{1225}{768}\\approx1.59505,$$ while $$\\zeta(2)=\\frac{\\pi^2}{6}…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A short Euler-product truncation already numerically approximates zeta at $2$, Using the first four primes, $$\\prod_{p\\in\\{2,3,5,7\\}}\\frac{1}{1-p^{-2}}=\\frac{1225}{768}\\approx1.59505,$$ while $$\\zeta(2)=\\frac{\\pi^2}{6}…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-zeta-four-equals-pi-to-the-four-over-ninety": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bernoulli-numbers-by-their-generating-function",
+          "source_section": "Definition",
+          "quote": "Near $t=0$, the quotient $t/(e^t-1)$ is holomorphic because\n$e^t-1=t+O(t^2)$. Its Maclaurin expansion therefore has a unique form\n\n$$\\frac{t}{e^t-1}=\\sum_{n=0}^\\infty \\frac{B_n}{n!}t^n.$$\n\nThe coefficients $B_n$ are the **Bernoulli numbers**. This normalization gives\n$B_0=1$ and $B_1=-1/2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-special-values-of-riemann-zeta-at-integers",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$,\n\n$$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!},\\qquad \\zeta(1-2m)=-\\frac{B_{2m}}{2m},\\qquad \\zeta(-2m)=0,$$\n\nand also\n\n$$\\zeta(0)=-\\frac12.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding $e^t-1=t+t^2/2+t^3/6+t^4/24+\\cdots$ and solving for the quotient in [L1] gives $$\\frac{t}{e^t-1}=1-\\frac{t}{2}+\\frac{t^2}{12}-\\frac{t^4}{720}+\\cdots,$$ so $B_4=-1/30$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute $m=2$ and $B_4=-1/30$ into [L2]: $$\\zeta(4)=-\\frac{(-1/30)(2\\pi)^4}{2\\cdot4!}=\\frac{\\pi^4}{90}.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The special-value formula gives $\\\\zeta(4)=\\\\pi^4/90$, $$\\zeta(4)=\\frac{\\pi^4}{90}.$$; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The special-value formula gives $\\zeta(4)=\\pi^4/90$, the flagged denominators are $e^t-1$ inside the Bernoulli-series expansion and the fixed number $2cdot4!$ in step 2.1; no separate zero-parameter branch is left unhandled.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In The special-value formula gives $\\zeta(4)=\\pi^4/90$, the flagged denominators are $e^t-1$ inside the Bernoulli-series expansion and the fixed number $2cdot4!$ in step 2.1; no separate zero-parameter branch is left unhandled."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The special-value formula gives $\\\\zeta(4)=\\\\pi^4/90$, $$\\zeta(4)=\\frac{\\pi^4}{90}.$$; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The special-value formula gives $\\\\zeta(4)=\\\\pi^4/90$, $$\\zeta(4)=\\frac{\\pi^4}{90}.$$; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The special-value formula gives $\\\\zeta(4)=\\\\pi^4/90$, $$\\zeta(4)=\\frac{\\pi^4}{90}.$$; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The special-value formula gives $\\\\zeta(4)=\\\\pi^4/90$, Proof technique: direct. 1.1 Expanding $e^t-1=t+t^2/2+t^3/6+t^4/24+\\cdots$ and solving for the quotient in [L1] gives $$\\frac{t}{e^t-1}=1-\\…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The special-value formula gives $\\\\zeta(4)=\\\\pi^4/90$, $$\\zeta(4)=\\frac{\\pi^4}{90}.$$; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The special-value formula gives $\\\\zeta(4)=\\\\pi^4/90$, $$\\zeta(4)=\\frac{\\pi^4}{90}.$$; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-zeta-zero-equals-minus-one-half": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-zeta-functional-equation",
+          "source_section": "Statement",
+          "quote": "For all $s\\in\\mathbb C$,\n\n$$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$\n\nas an identity of meromorphic functions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-zeta-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that\nagrees with the Dirichlet series on $\\operatorname{Re}s>1$. This continuation is\nholomorphic on $\\mathbb C\\setminus\\{1\\}$ and has a single simple pole at\n$s=1$, of residue $1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $s\\to0$ in [L1]. Then $2^s\\to1$, $\\pi^{s-1}\\to\\pi^{-1}$, $\\sin(\\pi s/2)\\sim\\pi s/2$, and $\\Gamma(1-s)\\to1$. Also [L2] gives $\\zeta(1-s)\\sim -1/s$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiplying the limits from step 1.1 yields $$\\zeta(0)=\\lim_{s\\to0}2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s)=-\\frac12.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The functional equation gives $\\\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression, $$\\zeta(0)=-\\frac12.$$; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The functional equation gives $\\\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression, step 1.1 Let $s\\to0$ in [L1]. Then $2^s\\to1$, $\\pi^{s-1}\\to\\pi^{-1}$, $\\sin(\\pi s/2)\\sim\\pi s/2$, and $\\Gamma(1-s)\\to1$. Also [L2] gives $\\zeta(1-s)\\sim -1/s$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The functional equation gives $\\\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression, $$\\zeta(0)=-\\frac12.$$; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The functional equation gives $\\\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression, $$\\zeta(0)=-\\frac12.$$; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The functional equation gives $\\\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression, $$\\zeta(0)=-\\frac12.$$; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The functional equation gives $\\\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression, Proof technique: direct. 1.1 Let $s\\to0$ in [L1]. Then $2^s\\to1$, $\\pi^{s-1}\\to\\pi^{-1}$, $\\sin(\\pi s/2)\\sim\\pi s/2$, and $\\Gamma(1-s)\\to1$…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The functional equation gives $\\\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression, $$\\zeta(0)=-\\frac12.$$; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The functional equation gives $\\\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression, $$\\zeta(0)=-\\frac12.$$; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the zero-times-pole limit at s=0. Rechecked the asymptotics sin(pi s/2)~pi s/2 and zeta(1-s)~-1/s, yielding -1/2."
+      }
+    },
+    "ex-splitting-the-theta-mellin-integral-isolates-the-two-polar-terms": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-theta-mellin-representation-of-completed-zeta",
+          "source_section": "Statement",
+          "quote": "If $\\operatorname{Re}s>1$, then\n\n$$\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)=\\frac12\\int_0^\\infty (\\theta(t)-1)t^{s/2-1}\\,dt.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-completed-riemann-zeta-functional-equation",
+          "source_section": "Statement",
+          "quote": "The completed zeta function extends meromorphically to $\\mathbb C$, has simple\npoles at $0$ and $1$, and satisfies\n\n$$\\Lambda(s)=\\Lambda(1-s).$$\n\nMore explicitly,\n\n$$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt,$$\n\nand the right-hand side is symmetric under $s\\mapsto1-s$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Start from [L1] and split the integral at $1$. The piece on $(0,1)$ is exactly where the theta transformation is used in the proof of the completed functional equation.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The resulting rewritten form is the symmetric identity recorded in [L2], $$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt,$$ so the two polar terms are isolated explicitly in the factor $1/(s(s-1))$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Splitting the theta Mellin integral at $1$ isolates the two polar terms of completed zeta, For the completed zeta function, $$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt.$$; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly isolates the meromorphic factor $1/(s(s-1))$, so the $s=0$ and $s=1$ poles are the recorded boundary rather than an omitted zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Splitting the theta Mellin integral at $1$ isolates the two polar terms of completed zeta, For the completed zeta function, $$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt.$$; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Splitting the theta Mellin integral at $1$ isolates the two polar terms of completed zeta, For the completed zeta function, $$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt.$$; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In Splitting the theta Mellin integral at $1$ isolates the two polar terms of completed zeta, step 1.1 Start from [L1] and split the integral at $1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Splitting the theta Mellin integral at $1$ isolates the two polar terms of completed zeta, Proof technique: direct. 1.1 Start from [L1] and split the integral at $1$. The piece on $(0,1)$ is exactly where the theta transformation…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Splitting the theta Mellin integral at $1$ isolates the two polar terms of completed zeta, For the completed zeta function, $$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt.$$; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Splitting the theta Mellin integral at $1$ isolates the two polar terms of completed zeta, For the completed zeta function, $$\\Lambda(s)=\\frac{1}{s(s-1)}+\\frac12\\int_1^\\infty (\\theta(t)-1)\\left(t^{s/2-1}+t^{-s/2-1/2}\\right)\\,dt.$$; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-zeta-minus-two-vanishes-by-the-sine-factor": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-trivial-zeros-and-critical-strip",
+          "source_section": "Statement",
+          "quote": "For each integer $m\\ge1$,\n\n$$\\zeta(-2m)=0.$$\n\nThese are the only zeros of $\\zeta$ on the nonpositive real axis. Every other\nzero $\\rho$ of $\\zeta$ satisfies $0<\\operatorname{Re}\\rho<1$. Moreover, if\n$\\rho$ is a nontrivial zero, then so are $1-\\rho$ and $\\overline{\\rho}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] with $m=1$. Then $\\zeta(-2)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This is exactly the first trivial zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The functional equation shows that $\\\\zeta(-2)=0$ through the sine factor, $$\\zeta(-2)=0.$$; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The functional equation shows that $\\\\zeta(-2)=0$ through the sine factor, Proof technique: direct. 1.1 Apply [L1] with $m=1$. Then $\\zeta(-2)=0$. [L1, given] 2.1 This is exactly the first trivial zero. [step 1.1,…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The functional equation shows that $\\\\zeta(-2)=0$ through the sine factor, $$\\zeta(-2)=0.$$; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The functional equation shows that $\\\\zeta(-2)=0$ through the sine factor, $$\\zeta(-2)=0.$$; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The functional equation shows that $\\\\zeta(-2)=0$ through the sine factor, $$\\zeta(-2)=0.$$; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The functional equation shows that $\\\\zeta(-2)=0$ through the sine factor, Proof technique: direct. 1.1 Apply [L1] with $m=1$. Then $\\zeta(-2)=0$. [L1, given] 2.1 This is exactly the first trivial zero. [step 1.1,…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The functional equation shows that $\\\\zeta(-2)=0$ through the sine factor, $$\\zeta(-2)=0.$$; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The functional equation shows that $\\\\zeta(-2)=0$ through the sine factor, $$\\zeta(-2)=0.$$; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-symmetric-finite-zero-products-model-the-xi-hadamard-product": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-hadamard-product-for-riemann-xi",
+          "source_section": "Statement",
+          "quote": "There exist constants $A,B\\in\\mathbb C$ such that\n\n$$\\xi(s)=e^{A+Bs}\\prod_\\rho E_1(s/\\rho),$$\n\nwhere the product runs over the nontrivial zeros $\\rho$ of $\\zeta$, counted\nwith multiplicity, and\n\n$$E_1(w)=(1-w)e^w.$$\n\nThe product converges in the genus-one canonical sense.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The four listed roots of $P_\\rho$, counted with multiplicity, are closed under complex conjugation and under $\\alpha\\mapsto1-\\alpha$. Therefore the coefficients of $P_\\rho$ are real, and replacing $s$ by $1-s$ permutes this root multiset.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A polynomial is determined by its roots together with the leading coefficient, and both remain unchanged in step 1.1. Hence $P_\\rho(1-s)=P_\\rho(s)$. This finite symmetric zero set is exactly the pattern that the full xi product repeats over all nontrivial zeros.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Symmetric finite zero products model the genus-one product for xi, Fix a complex number $\\rho$ with $\\rho\\notin\\mathbb R$ and consider the finite product $$P_\\rho(s):=\\left(1-\\frac{s}{\\rho}\\right)\\left(1-\\f…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Symmetric finite zero products model the genus-one product for xi, Proof technique: direct. 1.1 The four listed roots of $P_\\rho$, counted with multiplicity, are closed under complex conjugation and under $…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Symmetric finite zero products model the genus-one product for xi, Fix a complex number $\\rho$ with $\\rho\\notin\\mathbb R$ and consider the finite product $$P_\\rho(s):=\\left(1-\\frac{s}{\\rho}\\right)\\left(1-\\f…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Symmetric finite zero products model the genus-one product for xi, Fix a complex number $\\rho$ with $\\rho\\notin\\mathbb R$ and consider the finite product $$P_\\rho(s):=\\left(1-\\frac{s}{\\rho}\\right)\\left(1-\\f…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Symmetric finite zero products model the genus-one product for xi, Fix a complex number $\\rho$ with $\\rho\\notin\\mathbb R$ and consider the finite product $$P_\\rho(s):=\\left(1-\\frac{s}{\\rho}\\right)\\left(1-\\f…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Symmetric finite zero products model the genus-one product for xi, Proof technique: direct. 1.1 The four listed roots of $P_\\rho$, counted with multiplicity, are closed under complex conjugation and under $…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Symmetric finite zero products model the genus-one product for xi, Fix a complex number $\\rho$ with $\\rho\\notin\\mathbb R$ and consider the finite product $$P_\\rho(s):=\\left(1-\\frac{s}{\\rho}\\right)\\left(1-\\f…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Symmetric finite zero products model the genus-one product for xi, Fix a complex number $\\rho$ with $\\rho\\notin\\mathbb R$ and consider the finite product $$P_\\rho(s):=\\left(1-\\frac{s}{\\rho}\\right)\\left(1-\\f…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-the-eta-series-represents-the-continuation-where-the-dirichlet-series-diverges": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-dirichlet-eta-representation",
+          "source_section": "Statement",
+          "quote": "The series\n\n$$\\eta(s):=\\sum_{n=1}^\\infty (-1)^{n-1}n^{-s}$$\n\nconverges locally uniformly on the half-plane $\\operatorname{Re}s>0$ and so\ndefines a holomorphic function there. On the same half-plane one has\n\n$$\\eta(s)=(1-2^{1-s})\\zeta(s).$$\n\nThe identity is a representation theorem: it remains valid at the zeros of\n$1-2^{1-s}$ because both sides are already holomorphic there.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-p-series-rational",
+          "source_section": "Statement",
+          "quote": "Let $p \\in \\mathbb{Q}$ with $p > 0$. For a natural number $k \\ge 1$ write\n$\\iota(k) = k \\cdot 1_{\\mathbb{R}}$ for the canonical natural, which is positive\n([[lem-of-naturals-positive]]), and write $k^{p} := \\iota(k)^{p}$ for its rational\npower ([[def-rational-power]]). Then\n\n$$\\sum_{k \\ge 1} \\frac{1}{k^{p}} \\ \\text{converges} \\qquad \\Longleftrightarrow \\qquad p > 1 .$$\n\nIn particular the harmonic series $\\sum_{k \\ge 1} 1/k$ diverges, at $p = 1$, and\n$\\sum_{k \\ge 1} 1/k^{2}$ converges, at $p = 2$.\n\n**The index range is not cosmetic.** The series starts at $k = 1$ because\n$1/0^{p}$ is undefined: [[def-rational-power]] gives $0^{p} = 0$ for rational\n$p > 0$, and $0$ has no inverse. Sequences here are functions on $\\mathbb{N}$ and\n$\\mathbb{N}$ contains $0$ ([[def-series]]), so the object named above is a series\nfrom the starting index $1$ in the sense of [[def-series]], not a series of a\nsequence on $\\mathbb{N}$.\n\n**The exponent is rational, and that is a limitation of this page.** Rational\npowers of a positive base are what [[def-rational-power]] supplies; real exponents\nrequire the exponential and the logarithm, which this library develops later. The\nstatement above is therefore the full $p$-series theorem for every exponent this\npage can name.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] at $s=1/2$. Then $$\\sum_{n\\ge1}\\frac{(-1)^{n-1}}{\\sqrt n}=(1-\\sqrt2)\\zeta(1/2),$$ so the eta series represents the continued zeta value at $1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the defining Dirichlet series $\\sum_{n\\ge1}n^{-1/2}$ diverges. Therefore step 1.1 gives a point where the continuation is represented by the eta series even though the defining Dirichlet series diverges.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The eta series can represent the continued zeta function where the defining Dirichlet series diverges, Whenever a series represents the zeta continuation, it must be the defining Dirichlet series $\\sum_{n\\ge1}n^{-s}$.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The eta series can represent the continued zeta function where the defining Dirichlet series diverges, Proof technique: direct. 1.1 Apply [L1] at $s=1/2$. Then $$\\sum_{n\\ge1}\\frac{(-1)^{n-1}}{\\sqrt n}=(1-\\sqrt2)\\zeta(1/2),$$ so the eta series…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The eta series can represent the continued zeta function where the defining Dirichlet series diverges, Whenever a series represents the zeta continuation, it must be the defining Dirichlet series $\\sum_{n\\ge1}n^{-s}$.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The eta series can represent the continued zeta function where the defining Dirichlet series diverges, Whenever a series represents the zeta continuation, it must be the defining Dirichlet series $\\sum_{n\\ge1}n^{-s}$.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The eta series can represent the continued zeta function where the defining Dirichlet series diverges, Whenever a series represents the zeta continuation, it must be the defining Dirichlet series $\\sum_{n\\ge1}n^{-s}$.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The eta series can represent the continued zeta function where the defining Dirichlet series diverges, Proof technique: direct. 1.1 Apply [L1] at $s=1/2$. Then $$\\sum_{n\\ge1}\\frac{(-1)^{n-1}}{\\sqrt n}=(1-\\sqrt2)\\zeta(1/2),$$ so the eta series…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The eta series can represent the continued zeta function where the defining Dirichlet series diverges, Whenever a series represents the zeta continuation, it must be the defining Dirichlet series $\\sum_{n\\ge1}n^{-s}$.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The eta series can represent the continued zeta function where the defining Dirichlet series diverges, Whenever a series represents the zeta continuation, it must be the defining Dirichlet series $\\sum_{n\\ge1}n^{-s}$.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-the-harmonic-series-shows-the-defining-series-diverges-at-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-riemann-zeta-function",
+          "source_section": "Definition",
+          "quote": "For $s\\in\\mathbb C$ with $\\operatorname{Re}s>1$, define the **Riemann zeta\nfunction** by\n\n$$\\zeta(s):=\\sum_{n=1}^\\infty n^{-s},\\qquad n^{-s}:=\\exp(-s\\log n).$$\n\nHere $\\exp$ is the complex exponential and $\\log n$ is the real logarithm of\nthe positive integer $n$. The preceding lemma\n[[lem-riemann-zeta-dirichlet-series-converges-locally-uniformly]] proves that\nthis Dirichlet series converges absolutely and locally uniformly on the open\nhalf-plane $\\operatorname{Re}s>1$, so the definition is well posed exactly on\nthat domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-p-series-rational",
+          "source_section": "Statement",
+          "quote": "Let $p \\in \\mathbb{Q}$ with $p > 0$. For a natural number $k \\ge 1$ write\n$\\iota(k) = k \\cdot 1_{\\mathbb{R}}$ for the canonical natural, which is positive\n([[lem-of-naturals-positive]]), and write $k^{p} := \\iota(k)^{p}$ for its rational\npower ([[def-rational-power]]). Then\n\n$$\\sum_{k \\ge 1} \\frac{1}{k^{p}} \\ \\text{converges} \\qquad \\Longleftrightarrow \\qquad p > 1 .$$\n\nIn particular the harmonic series $\\sum_{k \\ge 1} 1/k$ diverges, at $p = 1$, and\n$\\sum_{k \\ge 1} 1/k^{2}$ converges, at $p = 2$.\n\n**The index range is not cosmetic.** The series starts at $k = 1$ because\n$1/0^{p}$ is undefined: [[def-rational-power]] gives $0^{p} = 0$ for rational\n$p > 0$, and $0$ has no inverse. Sequences here are functions on $\\mathbb{N}$ and\n$\\mathbb{N}$ contains $0$ ([[def-series]]), so the object named above is a series\nfrom the starting index $1$ in the sense of [[def-series]], not a series of a\nsequence on $\\mathbb{N}$.\n\n**The exponent is rational, and that is a limitation of this page.** Rational\npowers of a positive base are what [[def-rational-power]] supplies; real exponents\nrequire the exponential and the logarithm, which this library develops later. The\nstatement above is therefore the full $p$-series theorem for every exponent this\npage can name.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $s=1$, the defining series in [L1] becomes $\\sum_{n\\ge1}1/n$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], this is the harmonic series and it diverges. Therefore the defining Dirichlet series does not converge at $s=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The defining Dirichlet series for zeta diverges at $s=1$ because it becomes the harmonic series, The defining series of zeta still converges at $s=1$.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The defining Dirichlet series for zeta diverges at $s=1$ because it becomes the harmonic series, Proof technique: direct. 1.1 At $s=1$, the defining series in [L1] becomes $\\sum_{n\\ge1}1/n$. [L1, given] 2.1 By [L2], this is the harmonic…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The defining Dirichlet series for zeta diverges at $s=1$ because it becomes the harmonic series, The defining series of zeta still converges at $s=1$.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The defining Dirichlet series for zeta diverges at $s=1$ because it becomes the harmonic series, The defining series of zeta still converges at $s=1$.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The defining Dirichlet series for zeta diverges at $s=1$ because it becomes the harmonic series, The defining series of zeta still converges at $s=1$.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The defining Dirichlet series for zeta diverges at $s=1$ because it becomes the harmonic series, Proof technique: direct. 1.1 At $s=1$, the defining series in [L1] becomes $\\sum_{n\\ge1}1/n$. [L1, given] 2.1 By [L2], this is the harmonic…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The defining Dirichlet series for zeta diverges at $s=1$ because it becomes the harmonic series, The defining series of zeta still converges at $s=1$.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The defining Dirichlet series for zeta diverges at $s=1$ because it becomes the harmonic series, The defining series of zeta still converges at $s=1$.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "fs-riemann-zeta-is-given-by-its-dirichlet-series-for-all-s-not-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cex-the-eta-series-represents-the-continuation-where-the-dirichlet-series-diverges",
+          "source_section": "Statement refuted",
+          "quote": "Whenever a series represents the zeta continuation, it must be the defining\nDirichlet series $\\sum_{n\\ge1}n^{-s}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cex-the-harmonic-series-shows-the-defining-series-diverges-at-one",
+          "source_section": "Statement refuted",
+          "quote": "The defining series of zeta still converges at $s=1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the claim already fails at $s=1/2$: the continuation exists there, but the Dirichlet series does not converge.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the excluded point $s=1$ is also a divergence point for the defining series. Therefore the slogan \"the same Dirichlet series works for every $s\\ne1$\" is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$, the refutation uses one fixed Dirichlet series and the explicit witness $s=1/2$, so the detector's empty-family regex is inapplicable.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$, the refutation uses one fixed Dirichlet series and the explicit witness $s=1/2$, so the detector's empty-family regex is inapplicable."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$, Proof technique: direct. 1.1 By [L1], the claim already fails at $s=1/2$: the continuation exists there, but the Dirichlet series does not…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$, False claim: zeta is given by the Dirichlet series $\\sum_{n\\ge1}n^{-s}$ for every complex $s\\ne1$.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$, False claim: zeta is given by the Dirichlet series $\\sum_{n\\ge1}n^{-s}$ for every complex $s\\ne1$.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$, False claim: zeta is given by the Dirichlet series $\\sum_{n\\ge1}n^{-s}$ for every complex $s\\ne1$.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$, Proof technique: direct. 1.1 By [L1], the claim already fails at $s=1/2$: the continuation exists there, but the Dirichlet series does not…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$, False claim: zeta is given by the Dirichlet series $\\sum_{n\\ge1}n^{-s}$ for every complex $s\\ne1$.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$, False claim: zeta is given by the Dirichlet series $\\sum_{n\\ge1}n^{-s}$ for every complex $s\\ne1$.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was whether the refutation uses an actual continuation point off Re s > 1. Rechecked the cited eta-series counterexample at s=1/2, where the continuation exists but the Dirichlet series diverges."
+      }
+    },
+    "fs-zeta-minus-one-is-the-ordinary-sum-one-plus-two-plus-three-and-so-on": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-special-values-of-riemann-zeta-at-integers",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$,\n\n$$\\zeta(2m)=(-1)^{m+1}\\frac{B_{2m}(2\\pi)^{2m}}{2(2m)!},\\qquad \\zeta(1-2m)=-\\frac{B_{2m}}{2m},\\qquad \\zeta(-2m)=0,$$\n\nand also\n\n$$\\zeta(0)=-\\frac12.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-dirichlet-series-continuation-and-regularized-sums",
+          "source_section": "Remark",
+          "quote": "The defining series $\\sum_{n\\ge1}n^{-s}$ names zeta only on the half-plane\n$\\operatorname{Re}s>1$. Outside that domain, the symbol $\\zeta(s)$ refers to the\nmeromorphic continuation from\n[[thm-riemann-zeta-meromorphic-continuation]], not to a literally convergent\nsum of the original terms.\n\nThe standard cautionary value is\n$$\\zeta(-1)=-\\frac{1}{12},$$\nfrom [[thm-special-values-of-riemann-zeta-at-integers]]. This identity belongs\nto analytic continuation and regularization language. It does **not** say that\nthe ordinary series $1+2+3+\\cdots$ converges in the usual sense.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the continued zeta value at $-1$ is $-1/12$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The ordinary partial sums of $1+2+3+\\cdots$ are $1,3,6,\\dots$, so they do not equal the fixed number $-1/12$. Step 1.1 and [L2] therefore refute the claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: $\\\\zeta(-1)$ is the ordinary sum $1+2+3+\\\\cdots$, False claim: $\\zeta(-1)$ is the ordinary sum $1+2+3+\\cdots$.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: $\\\\zeta(-1)$ is the ordinary sum $1+2+3+\\\\cdots$, Proof technique: direct. 1.1 By [L1], the continued zeta value at $-1$ is $-1/12$. [L1, given] 2.1 The ordinary partial sums of $1+2+3+\\cdo…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: $\\\\zeta(-1)$ is the ordinary sum $1+2+3+\\\\cdots$, False claim: $\\zeta(-1)$ is the ordinary sum $1+2+3+\\cdots$.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: $\\\\zeta(-1)$ is the ordinary sum $1+2+3+\\\\cdots$, False claim: $\\zeta(-1)$ is the ordinary sum $1+2+3+\\cdots$.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In FALSE: $\\\\zeta(-1)$ is the ordinary sum $1+2+3+\\\\cdots$, False claim: $\\zeta(-1)$ is the ordinary sum $1+2+3+\\cdots$.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: $\\\\zeta(-1)$ is the ordinary sum $1+2+3+\\\\cdots$, Proof technique: direct. 1.1 By [L1], the continued zeta value at $-1$ is $-1/12$. [L1, given] 2.1 The ordinary partial sums of $1+2+3+\\cdo…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: $\\\\zeta(-1)$ is the ordinary sum $1+2+3+\\\\cdots$, False claim: $\\zeta(-1)$ is the ordinary sum $1+2+3+\\cdots$.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: $\\\\zeta(-1)$ is the ordinary sum $1+2+3+\\\\cdots$, False claim: $\\zeta(-1)$ is the ordinary sum $1+2+3+\\cdots$.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "fs-riemann-zeta-is-entire": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-zeta-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that\nagrees with the Dirichlet series on $\\operatorname{Re}s>1$. This continuation is\nholomorphic on $\\mathbb C\\setminus\\{1\\}$ and has a single simple pole at\n$s=1$, of residue $1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], zeta has a pole at $1$ and therefore is not holomorphic there.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "An entire function is holomorphic on all of $\\mathbb C$, so step 1.1 rules that out. Hence zeta is not entire.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: the Riemann zeta function is entire, False claim: the Riemann zeta function is entire.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: the Riemann zeta function is entire, Proof technique: direct. 1.1 By [L1], zeta has a pole at $1$ and therefore is not holomorphic there. [L1, given] 2.1 An entire function is…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: the Riemann zeta function is entire, False claim: the Riemann zeta function is entire.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: the Riemann zeta function is entire, False claim: the Riemann zeta function is entire.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In FALSE: the Riemann zeta function is entire, step 1.1 By [L1], zeta has a pole at $1$ and therefore is not holomorphic there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: the Riemann zeta function is entire, Proof technique: direct. 1.1 By [L1], zeta has a pole at $1$ and therefore is not holomorphic there. [L1, given] 2.1 An entire function is…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: the Riemann zeta function is entire, False claim: the Riemann zeta function is entire.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: the Riemann zeta function is entire, False claim: the Riemann zeta function is entire.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    },
+    "fs-the-functional-equation-alone-characterizes-zeta": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-zeta-functional-equation",
+          "source_section": "Statement",
+          "quote": "For all $s\\in\\mathbb C$,\n\n$$\\zeta(s)=2^s\\pi^{s-1}\\sin(\\pi s/2)\\Gamma(1-s)\\zeta(1-s),$$\n\nas an identity of meromorphic functions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The factor $e^{(s-1/2)^2}$ is entire, nonconstant, and invariant under $s\\mapsto1-s$ because $(1-s-1/2)^2=(s-1/2)^2$. Therefore multiplying the functional equation in [L1] by this factor shows that $F$ satisfies the same functional equation as zeta.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $F$ is not equal to zeta, since for example $F(2)=e^{9/4}\\zeta(2)\\ne\\zeta(2)$. Thus step 1.1 gives a different meromorphic function obeying the same functional equation, so that equation alone cannot characterize zeta.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: the classical functional equation alone characterizes the Riemann zeta function, False claim: the classical functional equation by itself determines zeta.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: the classical functional equation alone characterizes the Riemann zeta function, Proof technique: direct. 1.1 The factor $e^{(s-1/2)^2}$ is entire, nonconstant, and invariant under $s\\mapsto1-s$ because $(1-s-1/2)^2=(s-1…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: the classical functional equation alone characterizes the Riemann zeta function, False claim: the classical functional equation by itself determines zeta.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: the classical functional equation alone characterizes the Riemann zeta function, False claim: the classical functional equation by itself determines zeta.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In FALSE: the classical functional equation alone characterizes the Riemann zeta function, False claim: the classical functional equation by itself determines zeta.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: the classical functional equation alone characterizes the Riemann zeta function, Proof technique: direct. 1.1 The factor $e^{(s-1/2)^2}$ is entire, nonconstant, and invariant under $s\\mapsto1-s$ because $(1-s-1/2)^2=(s-1…; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: the classical functional equation alone characterizes the Riemann zeta function, False claim: the classical functional equation by itself determines zeta.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: the classical functional equation alone characterizes the Riemann zeta function, False claim: the classical functional equation by itself determines zeta.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ]
+    }
+  }
+}

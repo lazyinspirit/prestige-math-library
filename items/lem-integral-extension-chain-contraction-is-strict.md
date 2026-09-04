@@ -32,13 +32,9 @@ pipeline_run: null
 ## Statement
 
 Let $f:A\to B$ be an integral ring map, and let
-$$
-\mathfrak q_0\subsetneq\mathfrak q_1\subsetneq\cdots\subsetneq\mathfrak q_n
-$$
+$$ \mathfrak q_0\subsetneq\mathfrak q_1\subsetneq\cdots\subsetneq\mathfrak q_n $$
 be a strict chain of prime ideals of $B$. Then
-$$
-f^{-1}(\mathfrak q_0)\subsetneq f^{-1}(\mathfrak q_1)\subsetneq\cdots\subsetneq f^{-1}(\mathfrak q_n)
-$$
+$$ f^{-1}(\mathfrak q_0)\subsetneq f^{-1}(\mathfrak q_1)\subsetneq\cdots\subsetneq f^{-1}(\mathfrak q_n) $$
 is a strict chain of prime ideals of $A$.
 
 ## Facts & Assumptions

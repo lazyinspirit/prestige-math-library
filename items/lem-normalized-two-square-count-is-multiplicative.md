@@ -30,19 +30,13 @@ pipeline_run: null
 
 The arithmetic function $f(n):=r_2(n)/4$ is multiplicative. More precisely,
 
-$$
-f(2^a)=1,
-$$
+$$ f(2^a)=1, $$
 
-$$
-f(p^a)=a+1 \quad\text{for } p\equiv1\pmod4,
-$$
+$$ f(p^a)=a+1 \quad\text{for } p\equiv1\pmod4, $$
 
 and
 
-$$
-f(q^a)=\begin{cases}1,&a\text{ even},\\0,&a\text{ odd},\end{cases}\quad\text{for } q\equiv3\pmod4.
-$$
+$$ f(q^a)=\begin{cases}1,&a\text{ even},\\0,&a\text{ odd},\end{cases}\quad\text{for } q\equiv3\pmod4. $$
 
 ## Facts & Assumptions
 

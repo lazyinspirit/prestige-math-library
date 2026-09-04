@@ -33,9 +33,7 @@ $\mathfrak m$-adic completion.
 1. $\widehat R$ is a Noetherian local ring with maximal ideal
    $\mathfrak m\widehat R$.
 2. The residue field is unchanged:
-   $$
-   \widehat R/\mathfrak m\widehat R \cong R/\mathfrak m.
-   $$
+   $$    \widehat R/\mathfrak m\widehat R \cong R/\mathfrak m.    $$
 3. The completion map $R \to \widehat R$ is faithfully flat.
 
 ## Facts & Assumptions

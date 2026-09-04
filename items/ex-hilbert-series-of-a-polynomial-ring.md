@@ -29,24 +29,16 @@ sources:
 ## Example
 
 Let $k$ be a field and give $k[x,y]$ the standard grading. Then
-$$
-\operatorname{HS}_{k[x,y]}(t)=\frac{1}{(1-t)^2},
-$$
+$$ \operatorname{HS}_{k[x,y]}(t)=\frac{1}{(1-t)^2}, $$
 because the degree-$n$ piece has basis
-$$
-x^n,x^{n-1}y,\ldots,xy^{n-1},y^n
-$$
+$$ x^n,x^{n-1}y,\ldots,xy^{n-1},y^n $$
 and therefore dimension $n+1$.
 
 For the homogeneous quotient
-$$
-A:=k[x,y]/(y^2),
-$$
+$$ A:=k[x,y]/(y^2), $$
 the degree-$0$ piece has dimension $1$ and each degree-$n\ge1$ piece has basis
 $x^n,x^{n-1}y$. Hence
-$$
-\operatorname{HS}_A(t)=1+2t+2t^2+\cdots=\frac{1+t}{1-t},
-$$
+$$ \operatorname{HS}_A(t)=1+2t+2t^2+\cdots=\frac{1+t}{1-t}, $$
 so the Hilbert polynomial of $A$ is the constant polynomial $2$.
 
 ## Facts & Assumptions

@@ -28,9 +28,7 @@ pipeline_run: null
 ## Statement
 
 For an ideal $I$ of a commutative ring $R$,
-$$
-\operatorname{Supp}_R(R/I)=\{\mathfrak p : I \subseteq \mathfrak p\}.
-$$
+$$ \operatorname{Supp}_R(R/I)=\{\mathfrak p : I \subseteq \mathfrak p\}. $$
 
 ## Facts & Assumptions
 

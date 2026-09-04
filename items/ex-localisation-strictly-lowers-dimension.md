@@ -31,9 +31,7 @@ pipeline_run: null
 ## Example
 
 Let $R=k[x,y]$ and let $S=R\setminus(x)$. Then
-$$
-S^{-1}R=R_{(x)}
-$$
+$$ S^{-1}R=R_{(x)} $$
 has dimension $1$, strictly smaller than $\dim R=2$.
 
 ## Facts & Assumptions

@@ -34,9 +34,7 @@ pipeline_run: null
 In the notation of
 [[lem-holomorphic-dependence-of-slice-laurent-coefficients]], one has
 
-$$
-a_n(w)=0 \qquad\text{for every } n<0 \text{ and every } |w|<1.
-$$
+$$ a_n(w)=0 \qquad\text{for every } n<0 \text{ and every } |w|<1. $$
 
 ## Facts & Assumptions
 

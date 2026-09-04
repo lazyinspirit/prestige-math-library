@@ -24,9 +24,7 @@ Let $C_0(\mathbb{R}^n)$ be the space of continuous functions
 $f : \mathbb{R}^n \to \mathbb{R}$ such that for every $\varepsilon > 0$ there is
 a compact set $K \subseteq \mathbb{R}^n$ with
 
-$$
-|f(x)| < \varepsilon \qquad(x \notin K).
-$$
+$$ |f(x)| < \varepsilon \qquad(x \notin K). $$
 
 Equivalently, every $\varepsilon$-tail of $f$ is eventually small outside a
 large Euclidean ball; this is the correct $L^\infty$-closure target of

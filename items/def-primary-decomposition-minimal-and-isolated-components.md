@@ -30,9 +30,7 @@ Let $R$ be a commutative ring, let $M$ be a left $R$-module, and let
 $N \subseteq M$ be a submodule.
 
 A **primary decomposition** of $N$ in $M$ is an expression
-$$
-N=Q_1\cap\cdots\cap Q_r
-$$
+$$ N=Q_1\cap\cdots\cap Q_r $$
 with each $Q_i \subsetneq M$ a primary submodule.
 
 Such a decomposition is **minimal** when:

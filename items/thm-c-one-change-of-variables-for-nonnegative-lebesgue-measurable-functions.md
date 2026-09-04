@@ -24,9 +24,7 @@ Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let
 $U,V \subseteq \mathbb R^n$ be open and let $T : U \to V$ be a
 $C^1$ diffeomorphism. For every nonnegative Lebesgue measurable
 $f : V \to [0,\infty]$,
-$$
-\int_V f(y)\,d\lambda_n(y) = \int_U f(T(x))\,|\det DT(x)|\,d\lambda_n(x).
-$$
+$$ \int_V f(y)\,d\lambda_n(y) = \int_U f(T(x))\,|\det DT(x)|\,d\lambda_n(x). $$
 
 ## Facts & Assumptions
 

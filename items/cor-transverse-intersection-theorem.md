@@ -30,9 +30,7 @@ If $S,T\subseteq M$ are transverse embedded submanifolds of codimensions $a$ and
 $b$, then $S\cap T$ is an embedded submanifold of codimension $a+b$. At each
 $p\in S\cap T$,
 
-$$
-T_p(S\cap T)=T_pS\cap T_pT.
-$$
+$$ T_p(S\cap T)=T_pS\cap T_pT. $$
 
 ## Facts & Assumptions
 

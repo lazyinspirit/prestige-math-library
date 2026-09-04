@@ -38,9 +38,7 @@ $f:U\times\{0<|w|<R\}\to\mathbb C$ be holomorphic. Assume that for some
 $0<\eta<R$ the restriction of $f$ to $U\times\{0<|w|<\eta\}$ is bounded.
 Define
 
-$$
-F(z'):=\frac{1}{2\pi i}\int_{|\zeta|=\eta}\frac{f(z',\zeta)}{\zeta}\,d\zeta.
-$$
+$$ F(z'):=\frac{1}{2\pi i}\int_{|\zeta|=\eta}\frac{f(z',\zeta)}{\zeta}\,d\zeta. $$
 
 Then $F$ is holomorphic on $U$, and for every fixed $z'\in U$ the one-variable
 slice $w\mapsto f(z',w)$ extends holomorphically to $|w|<R$ with value

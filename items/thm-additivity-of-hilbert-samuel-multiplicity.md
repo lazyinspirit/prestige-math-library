@@ -26,9 +26,7 @@ sources:
 
 Let $(R,\mathfrak m)$ be a Noetherian local ring, let $I\subseteq\mathfrak m$
 be an ideal of definition, and let
-$$
-0\to M'\to M\to M''\to0
-$$
+$$ 0\to M'\to M\to M''\to0 $$
 be a short exact sequence of finite $R$-modules. If $M=0$, put $d=0$;
 otherwise put
 $$d=\max\{\deg P_{I,M'},\deg P_{I,M},\deg P_{I,M''}\},$$
@@ -37,9 +35,7 @@ $$e_I^{[d]}(N):=d!\,[n^d]P_{I,N}(n),$$
 with value $0$ when $N=0$ or $\deg P_{I,N}<d$. Then
 $$e_I^{[d]}(M)=e_I^{[d]}(M')+e_I^{[d]}(M'').$$
 In particular, if all three nonzero modules have Hilbert-Samuel polynomial of degree $d$, then
-$$
-e_I(M)=e_I(M')+e_I(M'').
-$$
+$$ e_I(M)=e_I(M')+e_I(M''). $$
 
 ## Facts & Assumptions
 

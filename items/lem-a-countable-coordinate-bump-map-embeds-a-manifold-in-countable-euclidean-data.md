@@ -31,9 +31,7 @@ Let $M^n$ be a smooth manifold. Then there are countably many coordinate balls
 $(U_j,x_j)$, open sets $V_j\Subset U_j$ covering $M$, and smooth bump
 functions $\phi_j$ supported in $U_j$ and equal to $1$ on $V_j$ such that the
 countable family of blocks
-$$
-B_j(p):=\bigl(\phi_j(p),\phi_j(p)x_j^1(p),\dots,\phi_j(p)x_j^n(p)\bigr)\in\mathbb R^{n+1}
-$$
+$$ B_j(p):=\bigl(\phi_j(p),\phi_j(p)x_j^1(p),\dots,\phi_j(p)x_j^n(p)\bigr)\in\mathbb R^{n+1} $$
 separates points and tangent vectors: if $p\ne q$, then $B_j(p)\ne B_j(q)$ for
 some $j$, and for each $p\in M$ there is an index $j$ with $p\in V_j$ such
 that the last $n$ coordinates of $B_j$ give the chart coordinates on a

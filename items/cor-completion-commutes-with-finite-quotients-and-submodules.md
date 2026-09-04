@@ -31,20 +31,14 @@ Let $R$ be a Noetherian commutative ring, let $I \subseteq R$ be an ideal, and l
 $N \subseteq M$ be finitely generated $R$-modules.
 
 1. The natural map
-   $$
-   \widehat M/\widehat N \longrightarrow \widehat{M/N}
-   $$
+   $$    \widehat M/\widehat N \longrightarrow \widehat{M/N}    $$
    is an isomorphism.
 2. Under the natural map $\widehat N \to \widehat M$, the image of
    $\widehat N$ is the $\widehat R$-submodule $N\widehat R \subseteq \widehat M$.
    In particular, for every ideal $J \subseteq R$,
-   $$
-   \widehat{JM}\cong J\widehat M.
-   $$
+   $$    \widehat{JM}\cong J\widehat M.    $$
 3. For every $n \ge 0$,
-   $$
-   \widehat M/I^n\widehat M \cong M/I^nM.
-   $$
+   $$    \widehat M/I^n\widehat M \cong M/I^nM.    $$
 
 ## Facts & Assumptions
 

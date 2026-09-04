@@ -30,9 +30,7 @@ sources:
 For a smooth map $F:M\to N$, pullback sends smooth differential forms on $N$ to
 smooth differential forms on $M$, is functorial, and satisfies
 
-$$
-F^*(\alpha\wedge\beta)=F^*\alpha\wedge F^*\beta.
-$$
+$$ F^*(\alpha\wedge\beta)=F^*\alpha\wedge F^*\beta. $$
 
 ## Facts & Assumptions
 

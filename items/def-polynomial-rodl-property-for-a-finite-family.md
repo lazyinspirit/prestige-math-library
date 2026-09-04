@@ -36,9 +36,7 @@ every real $\epsilon\in(0,\tfrac12)$ and every nonempty $\mathcal F$-free finite
 simple graph $G$, there is an $\epsilon$-restricted vertex set
 $X\subseteq V(G)$ with
 
-$$
-|X|\ge\epsilon^d|V(G)|.
-$$
+$$ |X|\ge\epsilon^d|V(G)|. $$
 
 Here $\mathcal F$-free is in the induced-subgraph sense of
 [[def-h-free-and-family-free-graph]], $\epsilon$-restricted means

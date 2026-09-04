@@ -31,15 +31,11 @@ For alternating covectors $\alpha\in\operatorname{Alt}^k(V)$,
 $\beta\in\operatorname{Alt}^\ell(V)$, and
 $\gamma\in\operatorname{Alt}^m(V)$,
 
-$$
-(\alpha\wedge\beta)\wedge\gamma=\alpha\wedge(\beta\wedge\gamma)
-$$
+$$ (\alpha\wedge\beta)\wedge\gamma=\alpha\wedge(\beta\wedge\gamma) $$
 
 and
 
-$$
-\alpha\wedge\beta=(-1)^{k\ell}\beta\wedge\alpha.
-$$
+$$ \alpha\wedge\beta=(-1)^{k\ell}\beta\wedge\alpha. $$
 
 ## Facts & Assumptions
 

@@ -30,15 +30,11 @@ sources:
 On $T^*\mathbb R^2$ with coordinates $(x,y,\xi_1,\xi_2)$, the canonical
 $1$-form is
 
-$$
-\lambda=\xi_1\,dx+\xi_2\,dy.
-$$
+$$ \lambda=\xi_1\,dx+\xi_2\,dy. $$
 
 At a point $(p,\xi)$ and a tangent vector $v$ to $T^*\mathbb R^2$, it satisfies
 
-$$
-\lambda_{(p,\xi)}(v)=\xi(d\pi(v)),
-$$
+$$ \lambda_{(p,\xi)}(v)=\xi(d\pi(v)), $$
 
 where $\pi:T^*\mathbb R^2\to\mathbb R^2$ is the bundle projection.
 

@@ -26,9 +26,7 @@ sources:
 
 Let $(R,\mathfrak m)$ be a Noetherian local ring and let $M\neq0$ be a finite
 $R$-module. Put
-$$
-d:=\dim\operatorname{Supp}(M).
-$$
+$$ d:=\dim\operatorname{Supp}(M). $$
 Then:
 
 1. $d$ is the least integer $r$ for which there exist $x_1,\ldots,x_r\in\mathfrak m$

@@ -27,15 +27,11 @@ pipeline_run: null
 
 For an integer $k$, define the arithmetic function $\operatorname{id}_k$ by
 
-$$
-\operatorname{id}_k(n):=n^k.
-$$
+$$ \operatorname{id}_k(n):=n^k. $$
 
 The corresponding **divisor-power-sum function** is
 
-$$
-\sigma_k(n):=\sum_{\substack{d\mid n\\d>0}} d^k.
-$$
+$$ \sigma_k(n):=\sum_{\substack{d\mid n\\d>0}} d^k. $$
 
 In particular, $\sigma:=\sigma_1$.
 

@@ -48,9 +48,7 @@ Let $R$ be a commutative ring and let $I\trianglelefteq R$ be a proper ideal. Th
 1.1 The singleton set $\{1\}$ is multiplicative and is disjoint from $I$ because $I$ is proper. Applying [L1] gives at least one prime ideal containing $I$. Let $\Sigma$ be the set of all prime ideals containing $I$, ordered by reverse inclusion. Then $\Sigma\neq\varnothing$. [L1, given, construct]
 
 1.2 Let $\mathcal C\subseteq\Sigma$ be a chain. Put
-$$
-\mathfrak q=\bigcap_{\mathfrak p\in\mathcal C}\mathfrak p.
-$$
+$$ \mathfrak q=\bigcap_{\mathfrak p\in\mathcal C}\mathfrak p. $$
 Then $I\subseteq\mathfrak q$. To see that $\mathfrak q$ is prime, let $ab\in\mathfrak q$ and assume $a,b\notin\mathfrak q$. Choose $\mathfrak p_a,\mathfrak p_b\in\mathcal C$ with $a\notin\mathfrak p_a$ and $b\notin\mathfrak p_b$. Since $\mathcal C$ is totally ordered by inclusion, either $\mathfrak p_a\subseteq\mathfrak p_b$ or $\mathfrak p_b\subseteq\mathfrak p_a$. In the first case $b\notin\mathfrak p_a$ because $\mathfrak p_a\subseteq\mathfrak p_b$; in the second case $a\notin\mathfrak p_b$. Either way one of the primes in the chain contains $ab$ but neither factor, a contradiction. Thus $\mathfrak q\in\Sigma$, and it is an upper bound of $\mathcal C$ in the reverse-inclusion order. [L3, choose, algebra]
 
 2.1 By [L2], the poset $\Sigma$ has a maximal element for reverse inclusion. Such an element is exactly a prime ideal minimal by ordinary inclusion among the primes containing $I$. [L2, step 1.1, step 1.2]

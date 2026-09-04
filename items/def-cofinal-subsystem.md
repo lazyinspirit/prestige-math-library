@@ -24,9 +24,7 @@ sources:
 Let $((G_i),\varphi_{ij})$ be an inverse system indexed by a directed set $I$.
 A subset $J\subseteq I$ is **cofinal** when:
 
-$$
-\forall i\in I\ \exists j\in J\text{ with } i\le j.
-$$
+$$ \forall i\in I\ \exists j\in J\text{ with } i\le j. $$
 
 With the induced order, the restricted family $(G_j)_{j\in J}$ and the maps
 $\varphi_{jk}$ for $j\le k$ in $J$ form the **cofinal subsystem**

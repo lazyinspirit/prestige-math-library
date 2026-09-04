@@ -29,9 +29,7 @@ Let $G$ be a finite group, let $H\le G$, and let $\psi$ be an irreducible
 complex character of $G$. Then some irreducible constituent $\varphi$ of
 $\operatorname{Res}_H^G\psi$ satisfies
 
-$$
-\langle \operatorname{Ind}_H^G\varphi,\psi\rangle_G>0.
-$$
+$$ \langle \operatorname{Ind}_H^G\varphi,\psi\rangle_G>0. $$
 
 Equivalently, $\psi$ occurs in the induced character
 $\operatorname{Ind}_H^G\varphi$.

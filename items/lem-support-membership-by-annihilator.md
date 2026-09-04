@@ -28,9 +28,7 @@ pipeline_run: null
 ## Statement
 
 For a left $R$-module $M$ and a prime ideal $\mathfrak p$ of $R$,
-$$
-\mathfrak p \in \operatorname{Supp}_R(M) \quad \Longleftrightarrow \quad \operatorname{Ann}_R(m) \subseteq \mathfrak p \text{ for some } m \in M.
-$$
+$$ \mathfrak p \in \operatorname{Supp}_R(M) \quad \Longleftrightarrow \quad \operatorname{Ann}_R(m) \subseteq \mathfrak p \text{ for some } m \in M. $$
 
 ## Facts & Assumptions
 

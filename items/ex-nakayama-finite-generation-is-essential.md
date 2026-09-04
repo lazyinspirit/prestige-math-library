@@ -26,9 +26,7 @@ pipeline_run: null
 ## Example
 
 Fix a prime number $p$ and let $R=\mathbb Z_{(p)}$. The $R$-module
-$$
-M=\mathbb Q/\mathbb Z_{(p)}
-$$
+$$ M=\mathbb Q/\mathbb Z_{(p)} $$
 satisfies $pM=M$ but $M\neq0$, so Nakayama's lemma fails without finite generation.
 
 ## Facts & Assumptions

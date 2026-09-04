@@ -27,9 +27,7 @@ pipeline_run: null
 
 Let $k$ be a field, let $r>0$, and let
 $s\in k[t_1,\ldots,t_r]$ be nonzero. Then the localization
-$$
-k[t_1,\ldots,t_r]\left[\frac1s\right]
-$$
+$$ k[t_1,\ldots,t_r]\left[\frac1s\right] $$
 is not a field.
 
 ## Facts & Assumptions

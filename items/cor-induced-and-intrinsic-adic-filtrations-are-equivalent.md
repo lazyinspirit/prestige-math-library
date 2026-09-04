@@ -31,9 +31,7 @@ sources:
 Let $R$ be Noetherian, let $I\subset R$ be an ideal, let $M$ be a finite
 $R$-module, and let $N\subseteq M$ be a submodule. Then there exists $c\ge0$
 such that for every $n\ge c$,
-$$
-I^nN\subseteq I^nM\cap N\subseteq I^{n-c}N.
-$$
+$$ I^nN\subseteq I^nM\cap N\subseteq I^{n-c}N. $$
 Equivalently, the filtration induced from the $I$-adic filtration of $M$ and the
 intrinsic $I$-adic filtration of $N$ agree up to a bounded shift.
 
@@ -43,9 +41,7 @@ intrinsic $I$-adic filtration of $N$ agree up to a bounded shift.
 $R$-module $M$, and a submodule $N\subseteq M$.
 
 [L1] Artin-Rees gives $c\ge0$ with
-$$
-I^nM\cap N = I^{n-c}(I^cM\cap N)
-$$
+$$ I^nM\cap N = I^{n-c}(I^cM\cap N) $$
 for all $n\ge c$ ([[thm-artin-rees-lemma]]).
 
 ## Proof

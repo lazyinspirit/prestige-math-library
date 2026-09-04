@@ -28,14 +28,10 @@ sources:
 ## Example
 
 Consider the grammar
-$$
-S\to AB\mid a,\qquad A\to a,\qquad B\to b,\qquad C\to cC,\qquad D\to d.
-$$
+$$ S\to AB\mid a,\qquad A\to a,\qquad B\to b,\qquad C\to cC,\qquad D\to d. $$
 The variable $C$ is nongenerating, and $D$ is generating but unreachable from
 $S$. Deleting both yields the smaller grammar
-$$
-S\to AB\mid a,\qquad A\to a,\qquad B\to b,
-$$
+$$ S\to AB\mid a,\qquad A\to a,\qquad B\to b, $$
 which generates the same language $\{ab,a\}$.
 
 ## Facts & Assumptions

@@ -34,9 +34,7 @@ pipeline_run: null
 
 There exist positive constants $c<C$ and a real number $x_0$ such that
 
-$$
-cx\le\theta(x)\le Cx
-$$
+$$ cx\le\theta(x)\le Cx $$
 
 for every real $x\ge x_0$.
 

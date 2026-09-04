@@ -31,9 +31,7 @@ sources:
 ## Example
 
 Parametrize the circle by $e^{it}$ with $t\in[-\pi,\pi]$ and define
-$$
-F(e^{it})=e^{i|\sin(t/2)|}.
-$$
+$$ F(e^{it})=e^{i|\sin(t/2)|}. $$
 This is continuous on $S^1$ but not smooth at $t=0$. Embedding the target
 circle in $\mathbb R^2$, approximating the planar representative smoothly, and
 then retracting through the standard annulus produces a smooth circle-valued

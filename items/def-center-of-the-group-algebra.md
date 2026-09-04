@@ -31,9 +31,7 @@ pipeline_run: null
 Let $k$ be a field and let $G$ be a group. The **center of the group algebra**
 is
 
-$$
-Z(k[G]):=\{x \in k[G]:xy=yx \text{ for every } y \in k[G]\}.
-$$
+$$ Z(k[G]):=\{x \in k[G]:xy=yx \text{ for every } y \in k[G]\}. $$
 
 It is the central $k$-subalgebra of $k[G]$ that will later be computed both
 from conjugacy classes and from the Wedderburn decomposition.

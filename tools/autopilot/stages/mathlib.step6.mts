@@ -80,6 +80,17 @@ export function step6Stages(d: any) {
     const advisory = (args.failure.advisory ?? []).map((failure: any) => ({
       stage: failure.stage, gate: failure.id, why: failure.why,
     }));
+    const rawGateOutput = String(args.failure.output ?? '');
+    const gateOutputLimit = 120_000;
+    const gateOutput = rawGateOutput.length <= gateOutputLimit
+      ? rawGateOutput
+      : [
+          rawGateOutput.slice(0, gateOutputLimit / 2),
+          '',
+          `[autopilot truncated ${rawGateOutput.length - gateOutputLimit} characters from the middle of this gate output; reproduce the primary gate on the current tree for the complete diagnostics]`,
+          '',
+          rawGateOutput.slice(-gateOutputLimit / 2),
+        ].join('\n');
     const canonical = [
       readFileSync(join(args.ctx.repo, 'briefs/tasks/alpha-step6-gate.md'), 'utf8').trim(),
       edge ? readFileSync(join(args.ctx.repo, 'briefs/tasks/alpha-step6-edge.md'), 'utf8').trim() : '',
@@ -102,7 +113,7 @@ export function step6Stages(d: any) {
       '## Primary gate output',
       '',
       '```text',
-      String(args.failure.output ?? ''),
+      gateOutput,
       '```',
       '',
       '## Advisory failures',

@@ -33,6 +33,4 @@ sources:
 Let $F:M\to N$ be smooth, and let $T$ be a covariant $k$-tensor field on $N$.
 Its **pullback** $F^*T$ is the covariant $k$-tensor field on $M$ defined by
 
-$$
-(F^*T)_p(v_1,\ldots,v_k):=T_{F(p)}(dF_pv_1,\ldots,dF_pv_k).
-$$
+$$ (F^*T)_p(v_1,\ldots,v_k):=T_{F(p)}(dF_pv_1,\ldots,dF_pv_k). $$

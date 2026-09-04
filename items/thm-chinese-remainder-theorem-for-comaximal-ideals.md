@@ -28,17 +28,11 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring and let $I_1,\ldots,I_r$ be pairwise comaximal ideals, where $r\ge1$. Then the canonical map
-$$
-R\longrightarrow \prod_{i=1}^r R/I_i,\qquad x\longmapsto(x+I_1,\ldots,x+I_r)
-$$
+$$ R\longrightarrow \prod_{i=1}^r R/I_i,\qquad x\longmapsto(x+I_1,\ldots,x+I_r) $$
 is surjective, its kernel is $\bigcap_{i=1}^r I_i$, and
-$$
-\bigcap_{i=1}^r I_i=\prod_{i=1}^r I_i.
-$$
+$$ \bigcap_{i=1}^r I_i=\prod_{i=1}^r I_i. $$
 Equivalently,
-$$
-R/\prod_{i=1}^r I_i\cong\prod_{i=1}^r R/I_i.
-$$
+$$ R/\prod_{i=1}^r I_i\cong\prod_{i=1}^r R/I_i. $$
 
 ## Facts & Assumptions
 

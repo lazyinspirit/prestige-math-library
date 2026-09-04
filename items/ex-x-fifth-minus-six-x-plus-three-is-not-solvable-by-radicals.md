@@ -28,9 +28,7 @@ pipeline_run: frontier-20
 ## Example
 
 The irreducible quintic
-$$
-f(x)=x^5-6x+3 \in \mathbb Q[x]
-$$
+$$ f(x)=x^5-6x+3 \in \mathbb Q[x] $$
 is not solvable by radicals.
 
 ## Facts & Assumptions

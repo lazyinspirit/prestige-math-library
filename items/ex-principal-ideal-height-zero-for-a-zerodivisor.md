@@ -29,9 +29,7 @@ pipeline_run: null
 ## Example
 
 In the ring
-$$
-R=k[x,y]/(xy)
-$$
+$$ R=k[x,y]/(xy) $$
 the element $\bar x$ is a zero divisor, and the prime ideal $(\bar x)$ is minimal over the principal ideal $(\bar x)$ while having height $0$.
 
 ## Facts & Assumptions

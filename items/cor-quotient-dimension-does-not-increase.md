@@ -33,9 +33,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a nonzero commutative ring and let $I\subsetneq R$ be a proper ideal. Then
-$$
-\dim(R/I)\le \dim R.
-$$
+$$ \dim(R/I)\le \dim R. $$
 
 ## Facts & Assumptions
 

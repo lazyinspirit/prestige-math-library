@@ -28,13 +28,9 @@ pipeline_run: null
 Let $R$ be a commutative ring and let $S \subseteq R$ be multiplicative.
 
 1. For every submodule $N \le M$, there is a natural isomorphism
-$$
-S^{-1}(M/N) \cong (S^{-1}M)/(S^{-1}N).
-$$
+$$ S^{-1}(M/N) \cong (S^{-1}M)/(S^{-1}N). $$
 2. For every family $(M_i)_{i \in I}$ of left $R$-modules, there is a natural isomorphism
-$$
-S^{-1}\!\left(\bigoplus_{i \in I} M_i\right) \cong \bigoplus_{i \in I} S^{-1}M_i.
-$$
+$$ S^{-1}\!\left(\bigoplus_{i \in I} M_i\right) \cong \bigoplus_{i \in I} S^{-1}M_i. $$
 
 ## Facts & Assumptions
 

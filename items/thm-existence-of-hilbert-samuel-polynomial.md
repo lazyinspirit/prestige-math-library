@@ -27,14 +27,10 @@ sources:
 Let $(R,\mathfrak m)$ be a Noetherian local ring, let $M$ be a finite
 $R$-module, and let $I\subset R$ be an ideal of definition for $M$. Then the
 Hilbert-Samuel function
-$$
-\chi_{I,M}(n)=\ell_R(M/I^{n+1}M)
-$$
+$$ \chi_{I,M}(n)=\ell_R(M/I^{n+1}M) $$
 agrees for all sufficiently large $n$ with a polynomial in $\mathbb Q[n]$.
 Equivalently, there are integers $a_0,\ldots,a_d$ such that for large $n$,
-$$
-\chi_{I,M}(n)=\sum_{j=0}^d a_j\binom{n+j}{j}.
-$$
+$$ \chi_{I,M}(n)=\sum_{j=0}^d a_j\binom{n+j}{j}. $$
 
 ## Facts & Assumptions
 

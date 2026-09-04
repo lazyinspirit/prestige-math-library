@@ -25,9 +25,7 @@ sources:
 
 Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated
 left $R$-module. If $\mathfrak p$ is minimal in $\operatorname{Supp}_R(M)$, then
-$$
-\mathfrak p \in \operatorname{Ass}_R(M).
-$$
+$$ \mathfrak p \in \operatorname{Ass}_R(M). $$
 
 ## Facts & Assumptions
 

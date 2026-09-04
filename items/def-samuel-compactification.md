@@ -28,9 +28,7 @@ pipeline_run: null
 ## Definition
 
 A **Samuel completion** of $(X,\mathcal U)$ is a Hausdorff completion
-$$
-\eta:(X,\mathcal U_S)\longrightarrow S(X)
-$$
+$$ \eta:(X,\mathcal U_S)\longrightarrow S(X) $$
 of its Samuel uniformity in the sense of [[def-completion-of-a-uniform-space]]. Such a completion exists by [[thm-hausdorff-completion-of-a-uniform-space]], but its canonical map need not be injective.
 
 Regard $X$ with its original induced topology. A Samuel completion

@@ -29,9 +29,7 @@ Assume the Axiom of Choice.
 Let $(R,\mathfrak m)$ be a Noetherian local ring, let $M\neq0$ be a finite
 $R$-module, and let $I$ be an ideal of definition for $M$. Then the
 Hilbert-Samuel polynomial $P_{I,M}$ has degree
-$$
-\deg P_{I,M}=\dim \operatorname{Supp}(M).
-$$
+$$ \deg P_{I,M}=\dim \operatorname{Supp}(M). $$
 
 ## Facts & Assumptions
 

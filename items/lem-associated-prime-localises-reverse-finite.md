@@ -29,9 +29,7 @@ sources:
 
 Let $R$ be a Noetherian commutative ring, let $M$ be a finitely generated left
 $R$-module, and let $S \subseteq R$ be multiplicative. If
-$$
-\mathfrak q \in \operatorname{Ass}_{S^{-1}R}(S^{-1}M),
-$$
+$$ \mathfrak q \in \operatorname{Ass}_{S^{-1}R}(S^{-1}M), $$
 then there exists $\mathfrak p \in \operatorname{Ass}_R(M)$ with
 $\mathfrak p \cap S=\varnothing$ and $\mathfrak q=S^{-1}\mathfrak p$.
 

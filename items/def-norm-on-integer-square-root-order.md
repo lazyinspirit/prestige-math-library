@@ -34,13 +34,9 @@ Fix a positive integer $D$ that is not a square. Write
 $$\mathbb Z[\sqrt D]:=\{x+y\sqrt D:x,y\in\mathbb Z\},$$
 viewed only as the explicit rank-two order of such expressions. Its coordinate
 operations are
-$$
-(x+y\sqrt D)+(u+v\sqrt D)=(x+u)+(y+v)\sqrt D
-$$
+$$ (x+y\sqrt D)+(u+v\sqrt D)=(x+u)+(y+v)\sqrt D $$
 and
-$$
-(x+y\sqrt D)(u+v\sqrt D)=(xu+D yv)+(xv+yu)\sqrt D.
-$$
+$$ (x+y\sqrt D)(u+v\sqrt D)=(xu+D yv)+(xv+yu)\sqrt D. $$
 
 The **conjugate** of
 $$\alpha=x+y\sqrt D\in\mathbb Z[\sqrt D]$$

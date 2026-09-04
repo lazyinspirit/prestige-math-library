@@ -31,9 +31,7 @@ pipeline_run: null
 ## Statement
 
 Let $k$ be a field, let $A$ be a finite-type $k$-domain, and let $K=\operatorname{Frac}(A)$. Then
-$$
-\dim A=\operatorname{trdeg}_k K.
-$$
+$$ \dim A=\operatorname{trdeg}_k K. $$
 
 ## Facts & Assumptions
 

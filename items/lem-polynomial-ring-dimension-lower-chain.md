@@ -33,13 +33,9 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring. If
-$$
-\mathfrak p_0\subsetneq\cdots\subsetneq\mathfrak p_d
-$$
+$$ \mathfrak p_0\subsetneq\cdots\subsetneq\mathfrak p_d $$
 is a strict prime chain in $R$, then
-$$
-\mathfrak p_0R[x]\subsetneq\cdots\subsetneq\mathfrak p_dR[x]\subsetneq\mathfrak p_dR[x]+(x)
-$$
+$$ \mathfrak p_0R[x]\subsetneq\cdots\subsetneq\mathfrak p_dR[x]\subsetneq\mathfrak p_dR[x]+(x) $$
 is a strict prime chain in $R[x]$. Consequently $\dim R[x]\ge \dim R+1$ whenever $\dim R$ is finite.
 
 ## Facts & Assumptions

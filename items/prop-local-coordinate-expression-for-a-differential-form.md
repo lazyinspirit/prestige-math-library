@@ -30,9 +30,7 @@ sources:
 On a chart $(U,x^1,\ldots,x^n)$, every smooth differential $k$-form $\omega$ has
 a unique expression
 
-$$
-\omega=\sum_{1\le i_1<\cdots<i_k\le n}\omega_{i_1\cdots i_k}\,dx^{i_1}\wedge\cdots\wedge dx^{i_k}
-$$
+$$ \omega=\sum_{1\le i_1<\cdots<i_k\le n}\omega_{i_1\cdots i_k}\,dx^{i_1}\wedge\cdots\wedge dx^{i_k} $$
 
 with smooth coefficient functions $\omega_{i_1\cdots i_k}$ on $U$.
 

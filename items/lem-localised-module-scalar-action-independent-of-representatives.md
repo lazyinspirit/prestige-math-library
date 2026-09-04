@@ -30,9 +30,7 @@ pipeline_run: null
 ## Statement
 
 If $a/u = a'/u'$ in $S^{-1}R$ and $m/s = m'/s'$ in $S^{-1}M$, then
-$$
-\frac{am}{us}=\frac{a'm'}{u's'}.
-$$
+$$ \frac{am}{us}=\frac{a'm'}{u's'}. $$
 So the scalar action of [[def-localisation-of-a-module]] is independent of both ring-fraction and module-fraction representatives.
 
 ## Facts & Assumptions

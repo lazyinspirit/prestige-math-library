@@ -29,9 +29,7 @@ pipeline_run: null
 Let $G$ be a finite simple graph on $n$ vertices. Repeatedly add an edge between
 nonadjacent vertices $u,v$ whenever their degrees in the current graph satisfy
 
-$$
-\deg(u)+\deg(v)\ge n.
-$$
+$$ \deg(u)+\deg(v)\ge n. $$
 
 Stop when no such pair remains. The resulting graph is the
 **Bondy-Chvatal closure** of $G$, denoted $\operatorname{cl}(G)$. The edge

@@ -23,9 +23,7 @@ sources:
 Let $U,V \subseteq \mathbb R^n$ be open and let $T : U \to V$ be a
  $C^1$ diffeomorphism. If $f : V \to \mathbb R$ is continuous and compactly
 supported, then
-$$
-\int_V f(y)\,d\lambda_n(y) = \int_U f(T(x))\,|\det DT(x)|\,d\lambda_n(x).
-$$
+$$ \int_V f(y)\,d\lambda_n(y) = \int_U f(T(x))\,|\det DT(x)|\,d\lambda_n(x). $$
 
 ## Facts & Assumptions
 

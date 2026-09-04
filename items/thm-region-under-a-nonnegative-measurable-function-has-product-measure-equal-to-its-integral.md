@@ -27,9 +27,7 @@ Then
 $$G_f := \{(x,t) \in X \times \mathbb R : 0 \le t < f(x)\}$$
 
 belongs to $\mathcal A \otimes \mathcal L(\mathbb R)$ and
-$$
-(\mu \times \lambda_1)(G_f)=\int_X f\,d\mu.
-$$
+$$ (\mu \times \lambda_1)(G_f)=\int_X f\,d\mu. $$
 
 ## Facts & Assumptions
 

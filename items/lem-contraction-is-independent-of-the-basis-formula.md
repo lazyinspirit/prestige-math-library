@@ -28,9 +28,7 @@ sources:
 
 The contraction formula
 
-$$
-\sum_i T(e^i,\alpha_2,\ldots,\alpha_r,e_i,v_2,\ldots,v_s)
-$$
+$$ \sum_i T(e^i,\alpha_2,\ldots,\alpha_r,e_i,v_2,\ldots,v_s) $$
 
 has the same value for every basis $(e_i)$ and its dual basis $(e^i)$.
 

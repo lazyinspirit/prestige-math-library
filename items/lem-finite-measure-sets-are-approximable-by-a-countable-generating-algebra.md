@@ -29,9 +29,7 @@ $\mathcal A_0 \subseteq \mathcal A$ such that for every $E \in \mathcal A$ with
 $\mu(E) < \infty$ and every $\varepsilon > 0$ there exists $A \in \mathcal A_0$
 with
 
-$$
-\mu(E \triangle A) < \varepsilon.
-$$
+$$ \mu(E \triangle A) < \varepsilon. $$
 
 ## Facts & Assumptions
 

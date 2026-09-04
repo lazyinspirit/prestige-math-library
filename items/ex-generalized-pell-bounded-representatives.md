@@ -32,13 +32,9 @@ $$x^2-7y^2=57,$$
 the orbit bound reduces the search to the finite box
 $$|x|\le 16.02,\qquad |y|\le 6.06.$$
 Inside that box the solutions are
-$$
-\pm(8+\sqrt7),\ \pm(8-\sqrt7),\ \pm(13+4\sqrt7),\ \pm(13-4\sqrt7).
-$$
+$$ \pm(8+\sqrt7),\ \pm(8-\sqrt7),\ \pm(13+4\sqrt7),\ \pm(13-4\sqrt7). $$
 Thus every integral solution lies in one of the eight Pell orbits represented by
-$$
-\pm(8+\sqrt7),\qquad \pm(8-\sqrt7),\qquad \pm(13+4\sqrt7),\qquad \pm(13-4\sqrt7).
-$$
+$$ \pm(8+\sqrt7),\qquad \pm(8-\sqrt7),\qquad \pm(13+4\sqrt7),\qquad \pm(13-4\sqrt7). $$
 
 ## Facts & Assumptions
 

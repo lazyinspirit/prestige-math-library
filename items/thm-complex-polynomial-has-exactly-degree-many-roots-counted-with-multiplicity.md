@@ -34,13 +34,9 @@ pipeline_run: frontier-20
 Let $f \in \mathbb C[x]$ have degree $n \ge 1$. Then there exist distinct
 complex numbers $\alpha_1,\dots,\alpha_r$ and positive integers
 $m_1,\dots,m_r$ such that
-$$
-f(x)=c\prod_{j=1}^r (x-\alpha_j)^{m_j}
-$$
+$$ f(x)=c\prod_{j=1}^r (x-\alpha_j)^{m_j} $$
 for some $c \in \mathbb C^\times$, with
-$$
-m_1+\cdots+m_r=n.
-$$
+$$ m_1+\cdots+m_r=n. $$
 These exponents are uniquely determined by $f$. Equivalently, $f$ has exactly
 $n$ roots counted with multiplicity.
 

@@ -26,27 +26,17 @@ pipeline_run: null
 ## Statement
 
 Let
-$$
-(f_n)\colon (M_n,\varphi_n) \to (N_n,\psi_n)
-$$
+$$ (f_n)\colon (M_n,\varphi_n) \to (N_n,\psi_n) $$
 be a morphism of inverse systems of $R$-modules. Then the kernel of the induced
 map
-$$
-\varprojlim M_n \longrightarrow \varprojlim N_n
-$$
+$$ \varprojlim M_n \longrightarrow \varprojlim N_n $$
 is canonically isomorphic to
-$$
-\varprojlim \ker(f_n).
-$$
+$$ \varprojlim \ker(f_n). $$
 
 Consequently, if
-$$
-0 \to A_n \to B_n \to C_n
-$$
+$$ 0 \to A_n \to B_n \to C_n $$
 is an exact sequence of inverse systems, then
-$$
-0 \to \varprojlim A_n \to \varprojlim B_n \to \varprojlim C_n
-$$
+$$ 0 \to \varprojlim A_n \to \varprojlim B_n \to \varprojlim C_n $$
 is exact.
 
 ## Facts & Assumptions

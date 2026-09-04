@@ -24,9 +24,7 @@ pipeline_run: null
 ## Statement
 
 Let $N_1,\dots,N_r$ be submodules of a left $R$-module $M$. Then
-$$
-S^{-1}\!\left(\bigcap_{i=1}^r N_i\right)=\bigcap_{i=1}^r S^{-1}N_i
-$$
+$$ S^{-1}\!\left(\bigcap_{i=1}^r N_i\right)=\bigcap_{i=1}^r S^{-1}N_i $$
 inside $S^{-1}M$.
 
 ## Facts & Assumptions

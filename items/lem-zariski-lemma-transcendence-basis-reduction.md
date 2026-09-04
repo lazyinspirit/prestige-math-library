@@ -33,9 +33,7 @@ Let $k\subseteq K$ be a field extension, and assume that $K$ is finitely
 generated as a $k$-algebra. Let $t_1,\ldots,t_r\in K$ be a transcendence basis
 of $K$ over $k$. Then there exists a nonzero polynomial
 $s\in k[t_1,\ldots,t_r]$ such that $K$ is integral over the localization
-$$
-k[t_1,\ldots,t_r]\left[\frac1s\right].
-$$
+$$ k[t_1,\ldots,t_r]\left[\frac1s\right]. $$
 
 ## Facts & Assumptions
 

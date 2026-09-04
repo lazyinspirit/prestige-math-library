@@ -39,9 +39,7 @@ Let $f$ be an arithmetic function. Then the following are equivalent.
 When these conditions hold, the inverse $g$ is unique, it also satisfies
 $g*f=\varepsilon$, and it is determined recursively by
 
-$$
-g(1)=\frac{1}{f(1)},\qquad g(n)=-\frac{1}{f(1)}\sum_{\substack{d\mid n\\d<n}} f(n/d)g(d)\quad(n>1).
-$$
+$$ g(1)=\frac{1}{f(1)},\qquad g(n)=-\frac{1}{f(1)}\sum_{\substack{d\mid n\\d<n}} f(n/d)g(d)\quad(n>1). $$
 
 ## Facts & Assumptions
 

@@ -32,9 +32,7 @@ Let $G$ be a finite group, let $k$ be a field, and let $C \subseteq G$ be a
 conjugacy class ([[def-conjugacy-class-and-centralizer]]). Its **class sum** in
 $k[G]$ is
 
-$$
-\widehat C:=\sum_{g \in C}[g].
-$$
+$$ \widehat C:=\sum_{g \in C}[g]. $$
 
 Because $C$ is finite, this is a well-defined element of the group algebra
 $k[G]$ ([[def-group-ring]]).

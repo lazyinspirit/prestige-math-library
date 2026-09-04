@@ -36,13 +36,9 @@ Let $R$ be a commutative ring.
 1. $V((0))=\operatorname{Spec}(R)$.
 2. $V(R)=\varnothing$.
 3. For every family $(I_\lambda)_{\lambda\in\Lambda}$ of ideals,
-   $$
-   V\!\left(\sum_{\lambda\in\Lambda} I_\lambda\right)=\bigcap_{\lambda\in\Lambda}V(I_\lambda).
-   $$
+   $$    V\!\left(\sum_{\lambda\in\Lambda} I_\lambda\right)=\bigcap_{\lambda\in\Lambda}V(I_\lambda).    $$
 4. For every finite family $I_1,\dots,I_n$ of ideals with $n\ge 1$,
-   $$
-   V(I_1\cdots I_n)=V(I_1)\cup\cdots\cup V(I_n).
-   $$
+   $$    V(I_1\cdots I_n)=V(I_1)\cup\cdots\cup V(I_n).    $$
 
 ## Facts & Assumptions
 

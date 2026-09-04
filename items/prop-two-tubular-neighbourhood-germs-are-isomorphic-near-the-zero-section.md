@@ -29,9 +29,7 @@ Let $\Phi_1:\Omega_1\to M$ and $\Phi_2:\Omega_2\to M$ be two tubular
 neighbourhoods of the same closed embedded submanifold $S\subseteq M$ built on
 the same normal bundle $\nu(S)$. Then, after shrinking $\Omega_1$ and
 $\Omega_2$ around the zero section, there is a diffeomorphism
-$$
-\Psi:\Omega_1'\to\Omega_2'
-$$
+$$ \Psi:\Omega_1'\to\Omega_2' $$
 such that $\Phi_2\circ\Psi=\Phi_1$ and $\Psi$ restricts to the identity on the
 zero section.
 

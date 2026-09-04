@@ -28,9 +28,7 @@ sources:
 If $X$ is a smooth vector field and $\alpha\in\Omega^k(M)$, $\beta\in\Omega^\ell(M)$,
 then
 
-$$
-\iota_X(\alpha\wedge\beta)=\iota_X\alpha\wedge\beta+(-1)^k\alpha\wedge\iota_X\beta.
-$$
+$$ \iota_X(\alpha\wedge\beta)=\iota_X\alpha\wedge\beta+(-1)^k\alpha\wedge\iota_X\beta. $$
 
 ## Facts & Assumptions
 

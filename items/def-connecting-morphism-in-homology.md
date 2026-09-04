@@ -31,9 +31,7 @@ pipeline_run: frontier-27
 ## Definition
 
 Fix a short exact sequence of complexes in an abelian category,
-$$
-0\to A_\bullet\to B_\bullet\to C_\bullet\to0,
-$$
+$$ 0\to A_\bullet\to B_\bullet\to C_\bullet\to0, $$
 and an integer $n$. Let
 $$q_n:Z_n(C)\to H_n(C)$$
 be the homology quotient of [[def-homology-object-of-a-chain-complex]]. By

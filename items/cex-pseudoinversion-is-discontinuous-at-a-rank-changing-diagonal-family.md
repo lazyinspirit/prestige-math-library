@@ -32,9 +32,7 @@ matrix everywhere in the full matrix space.
 
 For $t\neq0$, let
 
-$$
-A_t=\operatorname{diag}(1,t).
-$$
+$$ A_t=\operatorname{diag}(1,t). $$
 
 Then $A_t\to\operatorname{diag}(1,0)$ as $t\to0$, but
 $A_t^+=\operatorname{diag}(1,t^{-1})$ does not converge.

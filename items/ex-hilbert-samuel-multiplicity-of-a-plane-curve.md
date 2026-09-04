@@ -29,22 +29,14 @@ sources:
 ## Example
 
 Let
-$$
-R:=k[x,y]_{(x,y)}/(y^2-x^3)
-$$
+$$ R:=k[x,y]_{(x,y)}/(y^2-x^3) $$
 with maximal ideal $\mathfrak m=(x,y)/(y^2-x^3)$. Then
-$$
-\operatorname{gr}_{\mathfrak m}(R)\cong k[X,Y]/(Y^2),
-$$
+$$ \operatorname{gr}_{\mathfrak m}(R)\cong k[X,Y]/(Y^2), $$
 so the homogeneous piece of degree $n\ge1$ has basis $X^n,X^{n-1}Y$ and
 dimension $2$. Consequently
-$$
-\chi_{\mathfrak m,R}(n)=1+\sum_{j=1}^n2=2n+1
-$$
+$$ \chi_{\mathfrak m,R}(n)=1+\sum_{j=1}^n2=2n+1 $$
 for $n\ge1$, and therefore
-$$
-e_{\mathfrak m}(R)=2.
-$$
+$$ e_{\mathfrak m}(R)=2. $$
 
 ## Facts & Assumptions
 

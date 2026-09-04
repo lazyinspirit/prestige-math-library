@@ -30,13 +30,9 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Let $R$ be a commutative ring and let $f,f_1,\dots,f_n\in R$ with $n\ge 1$. Then
-$$
-D(f)\subseteq D(f_1)\cup\cdots\cup D(f_n)
-$$
+$$ D(f)\subseteq D(f_1)\cup\cdots\cup D(f_n) $$
 if and only if
-$$
-f\in\sqrt{(f_1,\dots,f_n)}.
-$$
+$$ f\in\sqrt{(f_1,\dots,f_n)}. $$
 Equivalently, some positive power of $f$ lies in the ideal $(f_1,\dots,f_n)$.
 
 ## Facts & Assumptions

@@ -29,13 +29,9 @@ pipeline_run: null
 ## Example
 
 Let
-$$
-A=k[x,y]/(y-x^2).
-$$
+$$ A=k[x,y]/(y-x^2). $$
 Then $A\cong k[x]$ is a one-dimensional affine domain. For the prime ideals $(0)$ and $\mathfrak m=(\bar x,\bar y)$, the affine dimension formula reads
-$$
-\operatorname{ht}(\mathfrak p)+\dim(A/\mathfrak p)=1.
-$$
+$$ \operatorname{ht}(\mathfrak p)+\dim(A/\mathfrak p)=1. $$
 
 ## Facts & Assumptions
 

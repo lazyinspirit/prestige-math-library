@@ -47,13 +47,9 @@ semidirect product, written
 $$H \wr_\Sigma K := H^\Sigma \rtimes K.$$
 
 It acts on $B \times \Sigma$ by
-$$
-(f,k) \cdot (b,\sigma) := \bigl(f(k \cdot \sigma) \cdot b,\ k \cdot \sigma\bigr).
-$$
+$$ (f,k) \cdot (b,\sigma) := \bigl(f(k \cdot \sigma) \cdot b,\ k \cdot \sigma\bigr). $$
 Indeed, if
-$$
-(f,k)(f',k') = \bigl(f \cdot (k \cdot f'),\ kk'\bigr),
-$$
+$$ (f,k)(f',k') = \bigl(f \cdot (k \cdot f'),\ kk'\bigr), $$
 then the first coordinate at $(b,\sigma)$ becomes
 $$\bigl(f \cdot (k \cdot f')\bigr)(kk' \cdot \sigma) \cdot b = f(kk' \cdot \sigma) \cdot \bigl(f'(k' \cdot \sigma) \cdot b\bigr),$$
 which is exactly what one gets by first applying $(f',k')$ and then $(f,k)$.

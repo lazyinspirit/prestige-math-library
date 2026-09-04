@@ -29,15 +29,11 @@ sources:
 
 On $V=\mathbb R^2$ with basis $(e_1,e_2)$ and dual basis $(e^1,e^2)$, let
 
-$$
-S=e^1,\qquad T=e^2,\qquad R=e_1\otimes e^1+e_2\otimes e^2.
-$$
+$$ S=e^1,\qquad T=e^2,\qquad R=e_1\otimes e^1+e_2\otimes e^2. $$
 
 Then
 
-$$
-S\otimes T=e^1\otimes e^2,\qquad \operatorname{ctr}(R)=2.
-$$
+$$ S\otimes T=e^1\otimes e^2,\qquad \operatorname{ctr}(R)=2. $$
 
 ## Facts & Assumptions
 

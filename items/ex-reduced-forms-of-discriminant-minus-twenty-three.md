@@ -28,9 +28,7 @@ pipeline_run: null
 The reduced primitive positive-definite binary quadratic forms of discriminant
 $-23$ are
 
-$$
-(1,1,6),\qquad (2,1,3),\qquad (2,-1,3).
-$$
+$$ (1,1,6),\qquad (2,1,3),\qquad (2,-1,3). $$
 
 Consequently $h(-23)=3$.
 

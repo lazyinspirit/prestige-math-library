@@ -32,9 +32,7 @@ external_dependency:
 
 **Recorded, not proved here.** For every smooth $n$-manifold with $n>1$, there
 exists a smooth immersion
-$$
-M^n\looparrowright\mathbb R^{2n-1}.
-$$
+$$ M^n\looparrowright\mathbb R^{2n-1}. $$
 This is the sharp companion to
 [[thm-weak-whitney-immersion-theorem]] and requires stronger input than the
 projection argument proved on this page.

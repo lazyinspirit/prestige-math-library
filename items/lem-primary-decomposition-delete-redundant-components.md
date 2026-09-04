@@ -28,9 +28,7 @@ sources:
 ## Statement
 
 If
-$$
-N=Q_1\cap\cdots\cap Q_r
-$$
+$$ N=Q_1\cap\cdots\cap Q_r $$
 is a finite primary decomposition of a submodule $N \subseteq M$, then some
 subfamily of the $Q_i$ has the same intersection and is irredundant.
 

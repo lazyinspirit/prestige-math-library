@@ -28,9 +28,7 @@ sources:
 Let $f:M\to\mathbb R^n$ be smooth and let $Z\subseteq\mathbb R^n$ be an embedded
 submanifold. Then the set of $a\in\mathbb R^n$ for which the translated map
 
-$$
-f_a(p):=f(p)+a
-$$
+$$ f_a(p):=f(p)+a $$
 
 fails to be transverse to $Z$ is a null subset of $\mathbb R^n$.
 

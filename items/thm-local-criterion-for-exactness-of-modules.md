@@ -33,13 +33,9 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Let
-$$
-M' \xrightarrow{f} M \xrightarrow{g} M''
-$$
+$$ M' \xrightarrow{f} M \xrightarrow{g} M'' $$
 be a sequence of $R$-module homomorphisms with $g \circ f=0$. Then the sequence is exact at $M$ if and only if, for every prime ideal $\mathfrak p$, the localised sequence
-$$
-M'_{\mathfrak p} \xrightarrow{f_{\mathfrak p}} M_{\mathfrak p} \xrightarrow{g_{\mathfrak p}} M''_{\mathfrak p}
-$$
+$$ M'_{\mathfrak p} \xrightarrow{f_{\mathfrak p}} M_{\mathfrak p} \xrightarrow{g_{\mathfrak p}} M''_{\mathfrak p} $$
 is exact at $M_{\mathfrak p}$. Equivalently, it suffices to check exactness at every maximal ideal.
 
 ## Facts & Assumptions

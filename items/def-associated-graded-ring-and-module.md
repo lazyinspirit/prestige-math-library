@@ -29,19 +29,11 @@ sources:
 
 Let $R$ be a commutative ring, let $I\subset R$ be an ideal, and let $M$ be an
 $R$-module. The **associated graded ring** of the $I$-adic filtration is
-$$
-\operatorname{gr}_I(R):=\bigoplus_{n\ge0} I^n/I^{n+1}.
-$$
+$$ \operatorname{gr}_I(R):=\bigoplus_{n\ge0} I^n/I^{n+1}. $$
 Multiplication is induced by multiplication in $R$:
-$$
-(a+I^{m+1})(b+I^{n+1})=ab+I^{m+n+1}.
-$$
+$$ (a+I^{m+1})(b+I^{n+1})=ab+I^{m+n+1}. $$
 
 The **associated graded module** is
-$$
-\operatorname{gr}_I(M):=\bigoplus_{n\ge0} I^nM/I^{n+1}M,
-$$
+$$ \operatorname{gr}_I(M):=\bigoplus_{n\ge0} I^nM/I^{n+1}M, $$
 viewed as a graded $\operatorname{gr}_I(R)$-module by
-$$
-(a+I^{m+1})(x+I^{n+1}M)=ax+I^{m+n+1}M.
-$$
+$$ (a+I^{m+1})(x+I^{n+1}M)=ax+I^{m+n+1}M. $$

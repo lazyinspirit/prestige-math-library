@@ -25,9 +25,7 @@ sources:
 
 Let $R$ be a commutative ring, let $M$ be a Noetherian left $R$-module, and let
 $Q \subsetneq M$ be **irreducible**, meaning that whenever
-$$
-Q=A\cap B
-$$
+$$ Q=A\cap B $$
 with submodules $A,B \subseteq M$, then $Q=A$ or $Q=B$. Then $Q$ is primary.
 
 ## Facts & Assumptions

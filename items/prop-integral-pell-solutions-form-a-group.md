@@ -46,9 +46,7 @@ is an abelian group under multiplication in $\mathbb Z[\sqrt D]$.
 [F2] The Pell norm is multiplicative: $N_D(\alpha\beta)=N_D(\alpha)N_D(\beta)$ for all $\alpha,\beta\in\mathbb Z[\sqrt D]$ ([[lem-pell-norm-multiplication]]).
 
 [F3] In $\mathbb Z[\sqrt D]$, the product is
-$$
-(x+y\sqrt D)(u+v\sqrt D)=(xu+D yv)+(xv+yu)\sqrt D.
-$$
+$$ (x+y\sqrt D)(u+v\sqrt D)=(xu+D yv)+(xv+yu)\sqrt D. $$
 ([[def-norm-on-integer-square-root-order]]).
 
 ## Proof

@@ -1,0 +1,505 @@
+[
+  {
+    "order": 194.001,
+    "id": "henselian-rings-and-equicharacteristic-cohen-structure",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Henselian Rings and Equicharacteristic Cohen Structure",
+    "companion": "henselian-rings-and-equicharacteristic-cohen-structure-examples",
+    "requires": [
+      "inverse-limits-and-noetherian-completion-examples",
+      "formal-power-series"
+    ],
+    "items": [
+      {
+        "id": "def-henselian-pair-and-henselian-local-ring",
+        "kind": "definition",
+        "title": "Henselian pairs and Henselian local rings",
+        "deps": []
+      },
+      {
+        "id": "lem-henselian-pair-ideal-in-jacobson-radical",
+        "kind": "lemma",
+        "title": "The defining ideal of a Henselian pair lies in the Jacobson radical",
+        "strategy": "Record the adopted convention explicitly: a Henselian pair carries the Jacobson-radical containment as part of the definition, and later uniqueness and unit arguments spend exactly that hypothesis rather than re-proving it ad hoc.",
+        "deps": [
+          "def-henselian-pair-and-henselian-local-ring"
+        ]
+      },
+      {
+        "id": "lem-coprime-factor-bezout-lift",
+        "kind": "lemma",
+        "title": "Lift a Bezout identity for coprime residue factors",
+        "strategy": "Lift representatives of the residue factors and of one Bezout relation from the quotient polynomial ring. The only point is to keep the lifted coefficients polynomial rather than formal.",
+        "deps": []
+      },
+      {
+        "id": "lem-hensel-factor-lift-leading-coefficient-normalisation",
+        "kind": "lemma",
+        "title": "Monicity and degree stay fixed during Hensel factor lifting",
+        "strategy": "Track the leading coefficients through the correction step: once the target polynomial and one lifted factor are monic, the correction equations force the other factor to remain monic and keep the prescribed degrees.",
+        "deps": [
+          "lem-coprime-factor-bezout-lift"
+        ]
+      },
+      {
+        "id": "lem-hensel-factor-correction-one-stage",
+        "kind": "lemma",
+        "title": "One correction step raises factor lifting by one ideal power",
+        "strategy": "Linearize the error term modulo the next ideal power and solve the correction equation with the lifted Bezout identity. Degree bounds come from discarding the quotient part after division by the monic lifted factors.",
+        "deps": [
+          "lem-coprime-factor-bezout-lift",
+          "lem-hensel-factor-lift-leading-coefficient-normalisation"
+        ]
+      },
+      {
+        "id": "lem-hensel-factor-corrections-form-cauchy-sequences",
+        "kind": "lemma",
+        "title": "Successive Hensel corrections are Cauchy",
+        "strategy": "At the nth stage every coefficient correction lands in the nth ideal power, so the coefficient sequences are Cauchy in the adic topology term by term.",
+        "deps": [
+          "lem-hensel-factor-correction-one-stage"
+        ]
+      },
+      {
+        "id": "lem-hensel-factor-limit-multiplies-to-original",
+        "kind": "lemma",
+        "title": "The coefficientwise limits multiply back to the original polynomial",
+        "strategy": "Use completeness to take coefficientwise limits of the Cauchy factor sequences and use separatedness to pass from congruence modulo every ideal power to literal equality of polynomials.",
+        "deps": [
+          "lem-hensel-factor-corrections-form-cauchy-sequences"
+        ]
+      },
+      {
+        "id": "lem-hensel-factor-lift-uniqueness-induction",
+        "kind": "lemma",
+        "title": "Two lifted factorisations agree modulo every ideal power",
+        "strategy": "Compare two lifts, subtract the factorisation equations, and use the lifted Bezout relation to improve congruence from modulo I^n to modulo I^(n+1). Separatedness then turns the inductive congruences into equality.",
+        "deps": [
+          "lem-coprime-factor-bezout-lift",
+          "lem-hensel-factor-lift-leading-coefficient-normalisation"
+        ]
+      },
+      {
+        "id": "prop-uniqueness-of-hensel-factor-lifting",
+        "kind": "proposition",
+        "title": "Lifted coprime factorisations are unique",
+        "strategy": "Package the congruence-by-congruence uniqueness induction as the actual uniqueness statement used later for simple roots and factorisations.",
+        "deps": [
+          "def-henselian-pair-and-henselian-local-ring",
+          "lem-henselian-pair-ideal-in-jacobson-radical",
+          "lem-hensel-factor-lift-uniqueness-induction"
+        ]
+      },
+      {
+        "id": "lem-simple-root-to-coprime-factorisation",
+        "kind": "lemma",
+        "title": "A simple residue root determines a coprime residue factorisation",
+        "strategy": "Factor the residue polynomial by the linear term of the root and use the derivative test to show the complementary factor is nonzero at that root, hence coprime to the linear factor.",
+        "deps": []
+      },
+      {
+        "id": "cor-factor-hensel-implies-simple-root-hensel",
+        "kind": "corollary",
+        "title": "Factor lifting implies simple-root lifting",
+        "strategy": "Lift the coprime factorisation coming from the simple residue root, read off the lifted linear factor, and use uniqueness of lifted factors to deduce uniqueness of the lifted root.",
+        "deps": [
+          "def-henselian-pair-and-henselian-local-ring",
+          "lem-simple-root-to-coprime-factorisation",
+          "prop-uniqueness-of-hensel-factor-lifting"
+        ]
+      },
+      {
+        "id": "cor-idempotents-lift-uniquely-in-a-henselian-pair",
+        "kind": "corollary",
+        "title": "Idempotents lift uniquely in a Henselian pair",
+        "strategy": "Apply the factor-lifting definition to x^2-x=(x)(x-1) modulo the defining ideal. The two residue factors are monic and coprime, so the lifted factorisation gives the unique lifted idempotent.",
+        "deps": [
+          "def-henselian-pair-and-henselian-local-ring"
+        ]
+      },
+      {
+        "id": "lem-simple-root-hensel-lifts-idempotents",
+        "kind": "lemma",
+        "title": "Simple-root lifting also lifts idempotents",
+        "strategy": "Run the simple-root form on x^2-x at the residue roots 0 and 1. The derivative 2x-1 is a unit at both residue roots, so the simple-root criterion supplies the lift.",
+        "deps": [
+          "cor-factor-hensel-implies-simple-root-hensel"
+        ]
+      },
+      {
+        "id": "lem-simple-root-form-recovers-factor-lifting",
+        "kind": "lemma",
+        "title": "The simple-root form recovers factor lifting",
+        "strategy": "Parameterize one monic factor by its coefficients inside the finite coefficient algebra attached to the target factorisation, then apply simple-root lifting there. The coprimeness hypothesis makes the Jacobian determinant a unit via the resultant.",
+        "deps": [
+          "lem-henselian-pair-ideal-in-jacobson-radical",
+          "lem-simple-root-to-coprime-factorisation"
+        ]
+      },
+      {
+        "id": "cor-henselian-local-simple-root-criterion",
+        "kind": "corollary",
+        "title": "A local ring is Henselian exactly when simple residue roots lift uniquely",
+        "strategy": "One direction is the lifted-factor route to simple roots. The converse is the coefficient-algebra reconstruction of factor lifting from the simple-root hypothesis.",
+        "deps": [
+          "def-henselian-pair-and-henselian-local-ring",
+          "cor-factor-hensel-implies-simple-root-hensel",
+          "lem-simple-root-form-recovers-factor-lifting"
+        ]
+      },
+      {
+        "id": "thm-equivalent-elementary-forms-of-hensels-property",
+        "kind": "theorem",
+        "title": "Equivalent elementary forms of Hensel's property",
+        "strategy": "Package the page's three equivalent viewpoints: factor lifting, simple-root lifting, and the finite-algebra idempotent form. The page stops before the etale or henselization formulations the source also discusses.",
+        "deps": [
+          "def-henselian-pair-and-henselian-local-ring",
+          "cor-henselian-local-simple-root-criterion",
+          "cor-idempotents-lift-uniquely-in-a-henselian-pair",
+          "lem-simple-root-hensel-lifts-idempotents",
+          "lem-simple-root-form-recovers-factor-lifting"
+        ]
+      },
+      {
+        "id": "cor-complete-separated-adic-pair-henselian",
+        "kind": "corollary",
+        "title": "Complete separated adic pairs are Henselian",
+        "strategy": "Iterate the one-stage correction lemma, keep the lifted factors monic of fixed degrees, use completeness for convergence, and finish uniqueness with the Jacobson-radical hypothesis plus the uniqueness induction.",
+        "deps": [
+          "def-henselian-pair-and-henselian-local-ring",
+          "lem-henselian-pair-ideal-in-jacobson-radical",
+          "lem-coprime-factor-bezout-lift",
+          "lem-hensel-factor-lift-leading-coefficient-normalisation",
+          "lem-hensel-factor-correction-one-stage",
+          "lem-hensel-factor-corrections-form-cauchy-sequences",
+          "lem-hensel-factor-limit-multiplies-to-original",
+          "prop-uniqueness-of-hensel-factor-lifting"
+        ]
+      },
+      {
+        "id": "cor-complete-local-rings-are-henselian",
+        "kind": "corollary",
+        "title": "Complete local rings are Henselian",
+        "strategy": "Apply the complete-pair corollary to the maximal-ideal pair of a complete local ring.",
+        "deps": [
+          "cor-complete-separated-adic-pair-henselian"
+        ]
+      },
+      {
+        "id": "cor-nilpotent-ideal-pair-is-henselian",
+        "kind": "corollary",
+        "title": "Nilpotent Jacobson pairs are Henselian",
+        "strategy": "When the ideal is nilpotent, the adic topology stabilizes after finitely many steps, so completeness and separatedness are automatic and the complete-pair corollary applies immediately.",
+        "deps": [
+          "cor-complete-separated-adic-pair-henselian"
+        ]
+      },
+      {
+        "id": "cor-artinian-local-henselian-via-nilpotent-maximal-ideal",
+        "kind": "corollary",
+        "title": "Artinian local rings are Henselian",
+        "strategy": "Use the published nilpotence of the maximal ideal in an Artinian local ring and then invoke the nilpotent-pair corollary.",
+        "deps": [
+          "cor-nilpotent-ideal-pair-is-henselian",
+          "thm-artinian-local-ring-has-nilpotent-maximal-ideal"
+        ]
+      },
+      {
+        "id": "lem-henselian-quotient-factor-lift",
+        "kind": "lemma",
+        "title": "Henselian factor lifting descends to quotients",
+        "strategy": "Lift the polynomial and its residue factors from the quotient back to the original ring, apply the Henselian factor-lifting property there, and reduce the lifted factorisation back down.",
+        "deps": [
+          "def-henselian-pair-and-henselian-local-ring"
+        ]
+      },
+      {
+        "id": "cor-quotient-of-a-henselian-local-ring-is-henselian",
+        "kind": "corollary",
+        "title": "Quotients of Henselian local rings are Henselian",
+        "strategy": "A quotient of a local ring is still local, and the quotient factor-lifting lemma supplies the Henselian property for the new maximal-ideal pair.",
+        "deps": [
+          "lem-henselian-quotient-factor-lift"
+        ]
+      },
+      {
+        "id": "def-equicharacteristic-local-ring-and-coefficient-field",
+        "kind": "definition",
+        "title": "Equicharacteristic local rings and coefficient fields",
+        "deps": [
+          "def-local-ring",
+          "def-field"
+        ]
+      },
+      {
+        "id": "lem-coefficient-field-maps-isomorphically-to-residue-field",
+        "kind": "lemma",
+        "title": "A coefficient field maps isomorphically to the residue field",
+        "strategy": "Unpack the convention carefully: a subfield of a local ring meets the maximal ideal trivially, so the residue map is automatically injective, and being a coefficient field is exactly the requirement that this map also be surjective.",
+        "deps": [
+          "def-equicharacteristic-local-ring-and-coefficient-field"
+        ]
+      },
+      {
+        "id": "lem-equicharacteristic-prime-field-lifts",
+        "kind": "lemma",
+        "title": "The prime field lifts in the equicharacteristic case",
+        "strategy": "Use the prime-subfield classification. In characteristic zero the universal map from Q is injective because no nonzero integer dies in the residue field, while in characteristic p the canonical copy of F_p already lifts the residue prime field.",
+        "deps": [
+          "def-equicharacteristic-local-ring-and-coefficient-field",
+          "thm-prime-subfield-classification"
+        ]
+      },
+      {
+        "id": "lem-maximal-residue-injective-subfield",
+        "kind": "lemma",
+        "title": "Maximal residue-injective subfields exist",
+        "strategy": "Order the residue-injective subfields by inclusion and apply Zorn's lemma. A union of a chain is still a subfield and still maps injectively to the residue field.",
+        "deps": [
+          "def-equicharacteristic-local-ring-and-coefficient-field",
+          "thm-zorn"
+        ]
+      },
+      {
+        "id": "lem-coefficient-field-separable-adjunction-step",
+        "kind": "lemma",
+        "title": "Separable residue elements adjoin across a maximal subfield",
+        "strategy": "Take a residue element separable over the current image, lift its minimal polynomial to the ring, and use the simple-root Hensel criterion to lift the root itself. Adjoining that root enlarges the residue image without losing injectivity.",
+        "deps": [
+          "lem-maximal-residue-injective-subfield",
+          "cor-factor-hensel-implies-simple-root-hensel"
+        ]
+      },
+      {
+        "id": "lem-coefficient-field-transcendental-adjunction-step",
+        "kind": "lemma",
+        "title": "Transcendental residue elements adjoin across a maximal subfield",
+        "strategy": "Lift a transcendental residue element t. Every nonzero polynomial in the lift has nonzero residue, hence is a unit in the local ring, so the rational-function field over the current subfield embeds in the ring.",
+        "deps": [
+          "lem-maximal-residue-injective-subfield",
+          "def-equicharacteristic-local-ring-and-coefficient-field"
+        ]
+      },
+      {
+        "id": "lem-coefficient-field-purely-inseparable-complete-step",
+        "kind": "lemma",
+        "title": "Completeness handles the purely inseparable residue step",
+        "strategy": "For the remaining p-power residue extension, choose compatible lifts through higher and higher Frobenius powers and then use completeness to pass to a limit. This is the stage where completeness, rather than ordinary simple-root lifting, does the work.",
+        "deps": [
+          "lem-equicharacteristic-prime-field-lifts",
+          "lem-maximal-residue-injective-subfield"
+        ]
+      },
+      {
+        "id": "cor-equicharacteristic-complete-local-ring-has-coefficient-field",
+        "kind": "corollary",
+        "title": "Complete equicharacteristic local rings have coefficient fields",
+        "strategy": "Start from the lifted prime field, choose a maximal residue-injective subfield, and then rule out any missing residue element by the separable, transcendental, or purely inseparable adjunction steps.",
+        "deps": [
+          "def-equicharacteristic-local-ring-and-coefficient-field",
+          "lem-equicharacteristic-prime-field-lifts",
+          "lem-maximal-residue-injective-subfield",
+          "lem-coefficient-field-separable-adjunction-step",
+          "lem-coefficient-field-transcendental-adjunction-step",
+          "lem-coefficient-field-purely-inseparable-complete-step"
+        ]
+      },
+      {
+        "id": "lem-formal-power-series-evaluation-converges",
+        "kind": "lemma",
+        "title": "Formal power-series substitution converges in a complete local algebra",
+        "strategy": "Group a series by total degree. When every substituted variable lies in the maximal ideal, the degree-N tail lands in the Nth maximal-ideal power, so completeness makes the degreewise partial sums converge.",
+        "deps": []
+      },
+      {
+        "id": "lem-formal-power-series-evaluation-unique-continuous-map",
+        "kind": "lemma",
+        "title": "Formal power-series substitution is the unique continuous k-algebra map",
+        "strategy": "The convergence lemma gives the substitution map. Uniqueness follows because polynomial truncations are dense in the adic topology and two continuous maps agreeing on coefficients and indeterminates agree on every limit.",
+        "deps": [
+          "lem-formal-power-series-evaluation-converges"
+        ]
+      },
+      {
+        "id": "lem-cohen-presentation-surjective-mod-maximal-square",
+        "kind": "lemma",
+        "title": "The Cohen map is surjective modulo every power of the maximal ideal",
+        "strategy": "Let x_1,...,x_e lift a residue-field basis of m/m^2. Nakayama makes these generators of m, and then products of the x_i generate each successive quotient m^n/m^(n+1), so the formal-series map is surjective modulo every m^n.",
+        "deps": [
+          "cor-equicharacteristic-complete-local-ring-has-coefficient-field",
+          "lem-formal-power-series-evaluation-unique-continuous-map",
+          "cor-nakayama-generators-modulo-an-ideal",
+          "thm-noetherian-ring-ideal-characterisations"
+        ]
+      },
+      {
+        "id": "lem-cohen-presentation-surjective-by-completeness",
+        "kind": "lemma",
+        "title": "Completeness turns dense image into surjectivity",
+        "strategy": "Choose compatible polynomial preimages modulo m^n and sum the successive homogeneous corrections into a formal series. Completeness of the target turns the dense-image statement into an actual preimage.",
+        "deps": [
+          "lem-formal-power-series-evaluation-converges",
+          "lem-cohen-presentation-surjective-mod-maximal-square"
+        ]
+      },
+      {
+        "id": "cor-equicharacteristic-complete-local-power-series-quotient",
+        "kind": "corollary",
+        "title": "A complete equicharacteristic Noetherian local ring is a power-series quotient",
+        "strategy": "Choose a coefficient field and lifts of a basis of m/m^2, build the formal-series substitution map, and combine the two surjectivity lemmas to identify the ring as a quotient of a finite-variable formal power-series ring.",
+        "deps": [
+          "cor-equicharacteristic-complete-local-ring-has-coefficient-field",
+          "lem-cohen-presentation-surjective-by-completeness"
+        ]
+      },
+      {
+        "id": "lem-parameter-power-series-subring-makes-ring-finite",
+        "kind": "lemma",
+        "title": "Parameters make a complete local domain finite over the image of a power-series map",
+        "strategy": "Regard A as a module over B=k[[X_1,...,X_d]] through the parameter map. The m-primary parameter ideal makes A/(x_1,...,x_d) finite-dimensional over k=B/(X_1,...,X_d); completeness of B and separatedness of A let complete Nakayama lift those residue generators, proving finiteness over B and hence over its image without presupposing injectivity.",
+        "deps": [
+          "cor-equicharacteristic-complete-local-ring-has-coefficient-field",
+          "def-system-of-parameters-and-parameter-ideal",
+          "lem-parameter-ideal-equivalent-m-primary",
+          "lem-formal-power-series-evaluation-unique-continuous-map",
+          "thm-complete-nakayama-lemma",
+          "def-dependent-choice"
+        ]
+      },
+      {
+        "id": "lem-parameter-power-series-map-injective-by-dimension",
+        "kind": "lemma",
+        "title": "The parameter power-series map is injective by dimension",
+        "strategy": "If the parameter map had nonzero kernel, the quotient of the d-variable power-series ring by that kernel would have smaller dimension than d. That contradicts the dimension equality forced by the finite extension from the previous lemma.",
+        "deps": [
+          "lem-parameter-power-series-subring-makes-ring-finite"
+        ]
+      },
+      {
+        "id": "cor-complete-local-domain-finite-over-a-regular-power-series-ring",
+        "kind": "corollary",
+        "title": "A complete local domain is finite over a regular power-series ring",
+        "strategy": "Choose a coefficient field and a system of parameters, use the parameter theorem to obtain module finiteness, and then use the injectivity lemma to identify the regular power-series subring inside the domain.",
+        "deps": [
+          "def-system-of-parameters-and-parameter-ideal",
+          "lem-parameter-power-series-subring-makes-ring-finite",
+          "lem-parameter-power-series-map-injective-by-dimension"
+        ]
+      },
+      {
+        "id": "rem-mixed-characteristic-cohen-structure-boundary",
+        "kind": "remark",
+        "title": "Mixed-characteristic Cohen structure remains a cited boundary",
+        "strategy": "Record the full mixed-characteristic Cohen theorem only as a scope boundary. The present page stops at the equicharacteristic theorem and names the missing Cohen-ring and formal-smoothness machinery explicitly instead of pretending it has already been built.",
+        "deps": [
+          "cor-equicharacteristic-complete-local-power-series-quotient"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 194.002,
+    "id": "henselian-rings-and-equicharacteristic-cohen-structure-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Henselian Rings and Equicharacteristic Cohen Structure — Examples",
+    "companion": "henselian-rings-and-equicharacteristic-cohen-structure",
+    "requires": [
+      "henselian-rings-and-equicharacteristic-cohen-structure"
+    ],
+    "items": [
+      {
+        "id": "ex-hensel-factor-correction-mod-three-powers",
+        "kind": "example",
+        "title": "Three Hensel correction stages for a coprime factorisation",
+        "strategy": "Choose a monic polynomial over a complete local ring whose residue factorisation is visibly coprime, write down the lifted Bezout identity, and perform three explicit correction steps so the iterative scheme is concrete rather than schematic.",
+        "deps": [
+          "lem-coprime-factor-bezout-lift",
+          "lem-hensel-factor-correction-one-stage"
+        ]
+      },
+      {
+        "id": "ex-simple-root-and-factor-hensel-same-lift",
+        "kind": "example",
+        "title": "Simple-root lifting and factor lifting produce the same root",
+        "strategy": "Use one polynomial whose residue root is simple and whose residue factorisation splits off the same linear term. Lift it both ways and use uniqueness to show the resulting root agrees.",
+        "deps": [
+          "cor-factor-hensel-implies-simple-root-hensel",
+          "prop-uniqueness-of-hensel-factor-lifting"
+        ]
+      },
+      {
+        "id": "ex-multiple-residue-root-does-not-lift-uniquely",
+        "kind": "example",
+        "title": "A multiple residue root need not lift uniquely",
+        "strategy": "Use a sourced multiple-root example where either many lifts or no lift exist. The point is to isolate exactly why the derivative-unit hypothesis in the simple-root form is load-bearing.",
+        "deps": [
+          "cor-factor-hensel-implies-simple-root-hensel"
+        ]
+      },
+      {
+        "id": "ex-idempotent-lifting-and-product-decomposition",
+        "kind": "example",
+        "title": "Lifting an idempotent recovers a product decomposition",
+        "strategy": "Take a concrete complete pair with a nontrivial residue idempotent, lift that idempotent, and read the corresponding direct-product decomposition back off from the lifted projector.",
+        "deps": [
+          "cor-idempotents-lift-uniquely-in-a-henselian-pair"
+        ]
+      },
+      {
+        "id": "ex-complete-discrete-valuation-ring-henselian",
+        "kind": "example",
+        "title": "A complete discrete valuation ring is Henselian",
+        "strategy": "Use k[[t]] as the model complete DVR. The published formal-series page makes it a local domain, the DVR characterization identifies the valuation-ring structure, and the A-page corollary supplies Henselianity.",
+        "deps": [
+          "cor-complete-local-rings-are-henselian",
+          "cor-formal-series-over-a-field-is-a-local-domain",
+          "thm-equivalent-characterisations-of-a-dvr"
+        ]
+      },
+      {
+        "id": "ex-artinian-local-ring-henselian",
+        "kind": "example",
+        "title": "A truncated polynomial local ring is Henselian",
+        "strategy": "Work in k[x]/(x^n) with maximal ideal (x). Every class with nonzero constant term is a unit, (x)^n=0, and the A-page Artinian-local corollary then yields the Henselian conclusion.",
+        "deps": [
+          "cor-artinian-local-henselian-via-nilpotent-maximal-ideal",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring"
+        ]
+      },
+      {
+        "id": "ex-localised-integers-not-henselian",
+        "kind": "example",
+        "title": "A localization of the integers at p need not be Henselian",
+        "strategy": "Take p=7 and f(T)=T^2-2 over Z_(7). The residue class 3 in F_7 is a simple root because 3^2-2=0 mod 7 and f'(3)=6 is nonzero mod 7, but a root in Z_(7) would be a rational square root of 2, impossible; so the simple-root criterion fails.",
+        "deps": [
+          "cor-henselian-local-simple-root-criterion",
+          "thm-localisation-at-a-prime-is-local",
+          "cor-residue-field-of-a-localisation-at-a-prime",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "ex-cohen-presentation-singular-hypersurface",
+        "kind": "example",
+        "title": "A complete singular local ring as a power-series quotient",
+        "strategy": "Present a familiar complete singular local ring, for example a plane-curve hypersurface, as k[[x_1,...,x_n]] modulo its defining equation and identify the kernel directly.",
+        "deps": [
+          "cor-equicharacteristic-complete-local-power-series-quotient"
+        ]
+      },
+      {
+        "id": "ex-coefficient-field-noncanonical-choice",
+        "kind": "example",
+        "title": "Coefficient fields need not be unique",
+        "strategy": "Use a complete equicharacteristic local ring with a transcendence parameter, compare the obvious coefficient field with a translated one, and make the nonuniqueness visible on the residue map.",
+        "deps": [
+          "cor-equicharacteristic-complete-local-ring-has-coefficient-field",
+          "cor-formal-series-over-a-field-is-a-local-domain"
+        ]
+      }
+    ]
+  }
+]

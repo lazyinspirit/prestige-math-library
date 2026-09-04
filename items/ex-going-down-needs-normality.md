@@ -26,17 +26,11 @@ pipeline_run: null
 ## Example
 
 Let $K$ be a field, let
-$$
-R:=K[x(1-x),y,xy]\subseteq S:=K[x,y],
-$$
+$$ R:=K[x(1-x),y,xy]\subseteq S:=K[x,y], $$
 let
-$$
-P_0:=(x(1-x),xy)R,\qquad P:=(x(1-x),y,xy)R,
-$$
+$$ P_0:=(x(1-x),xy)R,\qquad P:=(x(1-x),y,xy)R, $$
 and let
-$$
-Q:=(1-x,y)S.
-$$
+$$ Q:=(1-x,y)S. $$
 Then $R\subseteq S$ is an integral extension of domains, $P_0\subsetneq P$ is a strict prime chain in $R$, $Q$ lies over $P$, and there is no prime ideal $Q_0\subseteq Q$ of $S$ lying over $P_0$. So going down fails although both rings are domains.
 
 ## Facts & Assumptions

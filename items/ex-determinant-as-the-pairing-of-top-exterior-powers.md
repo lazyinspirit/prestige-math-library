@@ -30,9 +30,7 @@ sources:
 On $\mathbb R^n$ with standard basis $e_1,\ldots,e_n$ and dual basis
 $e^1,\ldots,e^n$, the pairing
 
-$$
-\langle e^1\wedge\cdots\wedge e^n,\ v_1\wedge\cdots\wedge v_n\rangle
-$$
+$$ \langle e^1\wedge\cdots\wedge e^n,\ v_1\wedge\cdots\wedge v_n\rangle $$
 
 is exactly $\det[v_1\ \cdots\ v_n]$.
 

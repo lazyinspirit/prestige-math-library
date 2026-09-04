@@ -31,15 +31,11 @@ pipeline_run: null
 
 The existence of positive constants $c_1<c_2$ with
 
-$$
-c_1\frac{x}{\log x}\le f(x)\le c_2\frac{x}{\log x}
-$$
+$$ c_1\frac{x}{\log x}\le f(x)\le c_2\frac{x}{\log x} $$
 
 for all sufficiently large $x$ forces
 
-$$
-f(x)\sim\frac{x}{\log x}.
-$$
+$$ f(x)\sim\frac{x}{\log x}. $$
 
 ## Facts & Assumptions
 

@@ -26,9 +26,7 @@ pipeline_run: null
 ## Example
 
 Let $k=\mathbb F_q$ and
-$$
-f(x,y)=x^qy-xy^q.
-$$
+$$ f(x,y)=x^qy-xy^q. $$
 Then no substitution $x\mapsto x+ay$ with $a\in \mathbb F_q$ makes $f$ monic in
 $y$, but the weight substitution $x\mapsto x+y^N$ with $N>q$ does.
 

@@ -32,9 +32,7 @@ pipeline_run: null
 Let $k$ be a field, let $n\ge 1$, and let
 $f\in k[x_1,\ldots,x_n]$ be nonzero. Then there exists an integer $N>1$ such
 that, after the substitution
-$$
-x_i\longmapsto x_i+x_n^{N^i}\qquad(1\le i<n),
-$$
+$$ x_i\longmapsto x_i+x_n^{N^i}\qquad(1\le i<n), $$
 the transformed polynomial becomes a nonzero polynomial in $x_n$ over
 $k[x_1,\ldots,x_{n-1}]$ whose highest power of $x_n$ occurs in exactly one
 monomial term. Consequently, after multiplying by a nonzero scalar, the

@@ -29,15 +29,11 @@ Let $(X,d)$ be a proper geodesic hyperbolic space and fix a basepoint $o \in X$.
 
 A sequence $(x_n)$ in $X$ is a **Gromov sequence** if
 
-$$
-(x_m,x_n)_o \to \infty \quad \text{as } m,n \to \infty.
-$$
+$$ (x_m,x_n)_o \to \infty \quad \text{as } m,n \to \infty. $$
 
 Two Gromov sequences $(x_n)$ and $(y_n)$ are **asymptotic** if
 
-$$
-(x_m,y_n)_o \to \infty \quad \text{as } m,n \to \infty.
-$$
+$$ (x_m,y_n)_o \to \infty \quad \text{as } m,n \to \infty. $$
 
 After [[lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences]]
 shows that this is an equivalence relation, the **Gromov boundary**

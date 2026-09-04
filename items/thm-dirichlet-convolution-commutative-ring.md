@@ -32,9 +32,7 @@ pipeline_run: null
 
 Let $\mathcal A$ be the set of arithmetic functions. With pointwise addition
 
-$$
-(f+g)(n):=f(n)+g(n)
-$$
+$$ (f+g)(n):=f(n)+g(n) $$
 
 and Dirichlet convolution [[def-dirichlet-convolution]], $\mathcal A$ is a
 commutative ring. Its additive identity is the zero function $0(n)=0$, its

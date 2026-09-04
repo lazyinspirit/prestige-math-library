@@ -27,9 +27,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, let $S \subseteq R$ be multiplicative, let $M$ be a left $R$-module, and let $N$ be an $S^{-1}R$-module. Every $R$-linear map $f:M \to N$ factors uniquely through the localisation map $\lambda_M:M \to S^{-1}M$ by an $S^{-1}R$-linear map
-$$
-\widetilde{f}:S^{-1}M \longrightarrow N, \qquad \widetilde{f}(m/s)=(1/s)f(m).
-$$
+$$ \widetilde{f}:S^{-1}M \longrightarrow N, \qquad \widetilde{f}(m/s)=(1/s)f(m). $$
 
 ## Facts & Assumptions
 

@@ -28,13 +28,9 @@ pipeline_run: null
 ## Example
 
 In $\mathbb Z$, the fractional ideal
-$$
-I:=\frac{12}{35}\mathbb Z
-$$
+$$ I:=\frac{12}{35}\mathbb Z $$
 has factorization
-$$
-I=(2)^2(3)(5)^{-1}(7)^{-1}.
-$$
+$$ I=(2)^2(3)(5)^{-1}(7)^{-1}. $$
 
 ## Facts & Assumptions
 

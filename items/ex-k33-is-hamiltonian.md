@@ -31,9 +31,7 @@ pipeline_run: null
 Let the two parts of $K_{3,3}$ be
 $A=\{a_1,a_2,a_3\}$ and $B=\{b_1,b_2,b_3\}$. Then
 
-$$
-a_1,b_1,a_2,b_2,a_3,b_3,a_1
-$$
+$$ a_1,b_1,a_2,b_2,a_3,b_3,a_1 $$
 
 is a Hamilton cycle.
 

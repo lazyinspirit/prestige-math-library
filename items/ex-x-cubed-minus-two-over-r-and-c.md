@@ -32,13 +32,9 @@ pipeline_run: frontier-20
 ## Example
 
 Let $r$ be the real cube root of $2$. Then
-$$
-x^3-2=(x-r)(x^2+rx+r^2)
-$$
+$$ x^3-2=(x-r)(x^2+rx+r^2) $$
 over $\mathbb R$, and
-$$
-x^3-2=\left(x-r\right)\left(x-\frac{-1+i\sqrt 3}{2}\,r\right)\left(x-\frac{-1-i\sqrt 3}{2}\,r\right)
-$$
+$$ x^3-2=\left(x-r\right)\left(x-\frac{-1+i\sqrt 3}{2}\,r\right)\left(x-\frac{-1-i\sqrt 3}{2}\,r\right) $$
 over $\mathbb C$.
 
 ## Facts & Assumptions

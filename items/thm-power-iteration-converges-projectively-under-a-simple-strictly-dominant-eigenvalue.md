@@ -31,9 +31,7 @@ $x_0=\sum_{i=1}^n c_i v_i$ with $c_1\neq0$, and let $(x_k)$ be the power
 iteration of [[def-power-iteration]]. Then there exist scalars
 $\alpha_k\in\mathbb F$ with $|\alpha_k|=1$ such that
 
-$$
-\|\alpha_k x_k-\tfrac{v_1}{\|v_1\|_2}\|_2=O\!\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).
-$$
+$$ \|\alpha_k x_k-\tfrac{v_1}{\|v_1\|_2}\|_2=O\!\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right). $$
 
 In particular, $x_k$ converges to the eigendirection of $\lambda_1$
 projectively.

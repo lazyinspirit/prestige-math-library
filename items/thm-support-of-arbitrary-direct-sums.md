@@ -30,9 +30,7 @@ pipeline_run: null
 ## Statement
 
 For any family $(M_i)_{i \in I}$ of left $R$-modules,
-$$
-\operatorname{Supp}_R\!\left(\bigoplus_{i \in I} M_i\right)=\bigcup_{i \in I}\operatorname{Supp}_R(M_i).
-$$
+$$ \operatorname{Supp}_R\!\left(\bigoplus_{i \in I} M_i\right)=\bigcup_{i \in I}\operatorname{Supp}_R(M_i). $$
 
 ## Facts & Assumptions
 

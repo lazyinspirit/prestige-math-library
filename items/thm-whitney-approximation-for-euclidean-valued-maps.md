@@ -29,9 +29,7 @@ sources:
 Let $F:M\to\mathbb R^k$ be continuous, where $M$ is a smooth manifold, and let
 $\varepsilon:M\to(0,\infty)$ be a positive continuous error function. Then there
 exists a smooth map $\widetilde F:M\to\mathbb R^k$ such that
-$$
-\|\widetilde F(p)-F(p)\|<\varepsilon(p)\qquad\text{for all }p\in M.
-$$
+$$ \|\widetilde F(p)-F(p)\|<\varepsilon(p)\qquad\text{for all }p\in M. $$
 
 ## Facts & Assumptions
 

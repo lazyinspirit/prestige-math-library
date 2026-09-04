@@ -32,9 +32,7 @@ sources:
 
 For the trivial line bundle $\mathbb R^2\times\mathbb R\to\mathbb R^2$, the
 transverse section
-$$
-s(x,y)=x
-$$
+$$ s(x,y)=x $$
 is transverse to the zero section. Its zero set is the line $\{x=0\}$, a
 codimension-one submanifold.
 

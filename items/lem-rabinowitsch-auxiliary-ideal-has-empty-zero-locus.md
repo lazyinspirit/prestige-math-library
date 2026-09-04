@@ -31,9 +31,7 @@ pipeline_run: null
 
 Let $k$ be a field, let $I\subseteq k[x_1,\ldots,x_n]$ be an ideal, and let
 $f\in k[x_1,\ldots,x_n]$ vanish on every point of $V(I)$. Then the ideal
-$$
-J:=I+(1-yf)\subseteq k[x_1,\ldots,x_n,y]
-$$
+$$ J:=I+(1-yf)\subseteq k[x_1,\ldots,x_n,y] $$
 has empty zero locus.
 
 ## Facts & Assumptions

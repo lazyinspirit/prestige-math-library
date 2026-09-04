@@ -31,9 +31,7 @@ pipeline_run: null
 
 For every real $x\ge1$,
 
-$$
-\sum_{n\le x}\frac1n=\log x+\gamma+O(1/x).
-$$
+$$ \sum_{n\le x}\frac1n=\log x+\gamma+O(1/x). $$
 
 ## Facts & Assumptions
 

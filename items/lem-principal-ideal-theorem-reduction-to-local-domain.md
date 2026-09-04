@@ -31,9 +31,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a Noetherian commutative ring, let $x\in R$, and let $\mathfrak p$ be a prime ideal minimal over $(x)$. Then for every minimal prime $\mathfrak q\subseteq\mathfrak p$ of $R$ the localized quotient
-$$
-A=(R/\mathfrak q)_{\mathfrak p/\mathfrak q}
-$$
+$$ A=(R/\mathfrak q)_{\mathfrak p/\mathfrak q} $$
 is a Noetherian local domain. If $\mathfrak q\ne\mathfrak p$, then the image of $x$ in $A$ is nonzero and the maximal ideal of $A$ is minimal over that principal ideal. Consequently the principal ideal theorem is reduced to bounding the maximal ideal of such a local domain by $1$.
 
 ## Facts & Assumptions

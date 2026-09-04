@@ -27,15 +27,11 @@ pipeline_run: null
 
 For a prime $p$,
 
-$$
-(\mathbf 1*\lambda)(p^4)=1-1+1-1+1=1
-$$
+$$ (\mathbf 1*\lambda)(p^4)=1-1+1-1+1=1 $$
 
 and
 
-$$
-(\mathbf 1*\lambda)(p^3)=1-1+1-1=0.
-$$
+$$ (\mathbf 1*\lambda)(p^3)=1-1+1-1=0. $$
 
 So the convolution distinguishes the square prime power $p^4$ from the
 nonsquare prime power $p^3$.

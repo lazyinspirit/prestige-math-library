@@ -30,9 +30,7 @@ pipeline_run: null
 ## Statement
 
 Let $M$ be a finitely generated left $R$-module and let $\mathfrak p$ be a prime ideal of $R$. If $M_{\mathfrak p}=0$, then there exists $s \notin \mathfrak p$ such that the localisation of $M$ at the multiplicative set
-$$
-S_s:=\{1,s,s^2,\dots\}
-$$
+$$ S_s:=\{1,s,s^2,\dots\} $$
 is zero.
 
 ## Facts & Assumptions

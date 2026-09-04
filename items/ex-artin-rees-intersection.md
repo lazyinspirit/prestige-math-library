@@ -28,9 +28,7 @@ sources:
 
 Take $R=k[x]$, $I=(x)$, $M=R$, and $N=(x^m)$ for a fixed integer $m\ge0$. Then
 for every $n\ge m$,
-$$
-I^nM\cap N=(x^n)\cap(x^m)=(x^n)=I^{n-m}(I^mM\cap N).
-$$
+$$ I^nM\cap N=(x^n)\cap(x^m)=(x^n)=I^{n-m}(I^mM\cap N). $$
 So in this case one may take the Artin-Rees number to be $c=m$.
 
 ## Facts & Assumptions
@@ -39,9 +37,7 @@ So in this case one may take the Artin-Rees number to be $c=m$.
 $I=(x)$, the module $M=R$, and the submodule $N=(x^m)$.
 
 [L1] Artin-Rees gives some constant $c$ with
-$$
-I^nM\cap N=I^{n-c}(I^cM\cap N)
-$$
+$$ I^nM\cap N=I^{n-c}(I^cM\cap N) $$
 for all $n\ge c$ ([[thm-artin-rees-lemma]]).
 
 ## Verification

@@ -32,9 +32,7 @@ pipeline_run: null
 Let $f,g$ be arithmetic functions. Their **Dirichlet convolution** is the
 arithmetic function $f*g$ defined by
 
-$$
-(f*g)(n):=\sum_{\substack{d\mid n\\d>0}} f(d)g(n/d)
-$$
+$$ (f*g)(n):=\sum_{\substack{d\mid n\\d>0}} f(d)g(n/d) $$
 
 for each positive integer $n$, where divisibility is that of
 [[def-divides-in-z]].

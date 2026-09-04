@@ -27,9 +27,7 @@ pipeline_run: null
 
 For each positive integer $n$, define
 
-$$
-r_2(n):=\#\{(x,y)\in\mathbb Z^2:x^2+y^2=n\}.
-$$
+$$ r_2(n):=\#\{(x,y)\in\mathbb Z^2:x^2+y^2=n\}. $$
 
 This counts order and signs separately, in the sense of
 [[def-sum-of-two-squares-representation]].

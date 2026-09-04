@@ -30,9 +30,7 @@ sources:
 Assume the Axiom of Choice ([[def-axiom-of-choice]]), and let $k$ be a field.
 
 In $R=k[x,y]$,
-$$
-(x^2,xy)=(x)\cap(x,y)^2.
-$$
+$$ (x^2,xy)=(x)\cap(x,y)^2. $$
 Localizing at $(x)$ kills the $(x,y)$-primary component, while localizing at
 $(x,y)$ preserves both components.
 

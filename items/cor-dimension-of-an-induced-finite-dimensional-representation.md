@@ -34,9 +34,7 @@ finite-dimensional representation of $H$ over $k$. Then
 $\operatorname{Ind}_H^G W$ is a finite-dimensional representation of $G$ over
 $k$ and
 
-$$
-\dim_k\operatorname{Ind}_H^G W=[G:H]\dim_k W.
-$$
+$$ \dim_k\operatorname{Ind}_H^G W=[G:H]\dim_k W. $$
 
 ## Facts & Assumptions
 

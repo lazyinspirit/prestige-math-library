@@ -29,9 +29,7 @@ pipeline_run: null
 In $G=\operatorname{Sym}(\{1,2,3\})$, let
 $N=\langle(123)\rangle$. Then
 
-$$
-N=\{\operatorname{id},(123),(132)\}
-$$
+$$ N=\{\operatorname{id},(123),(132)\} $$
 
 is normal, and $G/N$ is the two-element group
 $\{N,(12)N\}$.

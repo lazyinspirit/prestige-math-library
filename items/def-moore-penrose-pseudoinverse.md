@@ -35,9 +35,7 @@ $$ABA=A,\qquad BAB=B,$$
 
 and the two square products are self-adjoint:
 
-$$
-(AB)^*=AB,\qquad (BA)^*=BA.
-$$
+$$ (AB)^*=AB,\qquad (BA)^*=BA. $$
 
 When such a matrix exists and is unique, it is denoted by $A^+$.
 

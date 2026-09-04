@@ -34,9 +34,7 @@ pipeline_run: null
 For $0<r,s<1$, the Hartogs figure $H(r,s)$ is the union of a thin inner cylinder
 and a thick outer shell:
 
-$$
-H(r,s)=\{ |z_1|<1,\ |z_2|<s\}\cup\{ r<|z_1|<1,\ |z_2|<1\}.
-$$
+$$ H(r,s)=\{ |z_1|<1,\ |z_2|<s\}\cup\{ r<|z_1|<1,\ |z_2|<1\}. $$
 
 In the $(|z_1|,|z_2|)$-plane this is exactly the region obtained by taking the
 rectangle $[0,1)\times[0,s)$ together with the vertical strip

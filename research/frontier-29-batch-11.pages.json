@@ -1,0 +1,611 @@
+[
+  {
+    "order": 365.047,
+    "id": "derived-functors",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Derived Functors",
+    "companion": "derived-functors-examples",
+    "requires": [
+      "projective-and-injective-resolutions-examples"
+    ],
+    "items": [
+      {
+        "id": "def-supplied-projective-resolution-datum",
+        "kind": "definition",
+        "title": "Supplied projective resolution data",
+        "deps": [
+          "def-projective-resolution-in-an-abelian-category",
+          "def-abelian-category"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "def-supplied-injective-resolution-datum",
+        "kind": "definition",
+        "title": "Supplied injective resolution data",
+        "deps": [
+          "def-injective-resolution-in-an-abelian-category",
+          "def-abelian-category"
+        ]
+      },
+      {
+        "id": "def-left-derived-object-relative-to-projective-resolution-data",
+        "kind": "definition",
+        "title": "Left derived objects relative to supplied projective resolution data",
+        "deps": [
+          "def-supplied-projective-resolution-datum",
+          "def-additive-functor",
+          "def-deleted-resolution",
+          "def-homology-object-of-a-chain-complex",
+          "prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps"
+        ]
+      },
+      {
+        "id": "def-right-derived-object-relative-to-injective-resolution-data",
+        "kind": "definition",
+        "title": "Right derived objects relative to supplied injective resolution data",
+        "deps": [
+          "def-supplied-injective-resolution-datum",
+          "def-additive-functor",
+          "def-deleted-resolution",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-cohomology-object-of-a-cochain-complex"
+        ]
+      },
+      {
+        "id": "prop-negative-derived-degrees-vanish-for-one-sided-resolutions",
+        "kind": "proposition",
+        "title": "Negative derived degrees vanish for one-sided resolutions",
+        "strategy": "The deleted projective resolution lives only in nonnegative homological degrees, and the deleted injective resolution lives only in nonnegative cohomological degrees. Outside those supported degrees the relevant cycles and quotients are zero, so the negative derived groups vanish on both sides.",
+        "deps": [
+          "def-left-derived-object-relative-to-projective-resolution-data",
+          "def-right-derived-object-relative-to-injective-resolution-data"
+        ]
+      },
+      {
+        "id": "lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions",
+        "kind": "lemma",
+        "title": "A morphism has a comparison lift between the supplied projective resolutions",
+        "strategy": "For a morphism f from A to B, apply the published projective comparison theorem to the specific augmented resolutions supplied by the datum for A and B. This yields an augmentation-preserving chain map between the chosen deleted resolutions that lies over f.",
+        "deps": [
+          "def-supplied-projective-resolution-datum",
+          "thm-projective-comparison-map-exists"
+        ]
+      },
+      {
+        "id": "lem-the-induced-homology-map-is-independent-of-the-comparison-lift",
+        "kind": "lemma",
+        "title": "The induced homology map is independent of the chosen comparison lift",
+        "strategy": "Any two comparison lifts of the same morphism are chain-homotopic by the published uniqueness theorem. Applying the additive functor preserves the homotopy relation, so the induced maps on homology agree.",
+        "deps": [
+          "def-left-derived-object-relative-to-projective-resolution-data",
+          "lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions",
+          "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology"
+        ]
+      },
+      {
+        "id": "def-left-derived-map-relative-to-resolution-data",
+        "kind": "definition",
+        "title": "The left derived map relative to supplied resolution data",
+        "deps": [
+          "def-left-derived-object-relative-to-projective-resolution-data",
+          "lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions",
+          "lem-the-induced-homology-map-is-independent-of-the-comparison-lift"
+        ]
+      },
+      {
+        "id": "prop-left-derived-maps-preserve-identities",
+        "kind": "proposition",
+        "title": "Left derived maps preserve identities",
+        "strategy": "A comparison lift of the identity morphism is homotopic to the identity chain map on the chosen resolution. Passing to homology therefore gives the identity on every left derived object.",
+        "deps": [
+          "def-left-derived-map-relative-to-resolution-data",
+          "prop-comparison-of-the-identity-is-homotopic-to-the-identity",
+          "prop-homology-respects-identities-and-composition"
+        ]
+      },
+      {
+        "id": "prop-left-derived-maps-preserve-composition",
+        "kind": "proposition",
+        "title": "Left derived maps preserve composition",
+        "strategy": "Take comparison lifts for f, g, and gf. The published composition law says the lift of gf is homotopic to the composite of the chosen lifts, so the induced homology maps multiply in the expected order.",
+        "deps": [
+          "def-left-derived-map-relative-to-resolution-data",
+          "prop-comparison-maps-respect-composition-up-to-homotopy",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology",
+          "prop-homology-respects-identities-and-composition"
+        ]
+      },
+      {
+        "id": "thm-left-derived-functors-relative-to-supplied-data-are-additive-functors",
+        "kind": "theorem",
+        "title": "Left derived functors relative to supplied data are additive functors",
+        "strategy": "The previous two propositions give functoriality. Additivity comes from adding comparison lifts degreewise and then using that homology is already an additive functor on complexes.",
+        "deps": [
+          "def-left-derived-map-relative-to-resolution-data",
+          "prop-left-derived-maps-preserve-identities",
+          "prop-left-derived-maps-preserve-composition",
+          "def-additive-functor",
+          "prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps",
+          "thm-homology-is-an-additive-functor"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions",
+        "kind": "lemma",
+        "title": "A morphism has a comparison extension between the supplied injective resolutions",
+        "strategy": "Apply the published injective comparison theorem to the two specific injective resolutions supplied by the datum. This yields a coaugmentation-preserving map of cochain complexes extending the original morphism.",
+        "deps": [
+          "def-supplied-injective-resolution-datum",
+          "thm-injective-comparison-map-exists"
+        ]
+      },
+      {
+        "id": "lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension",
+        "kind": "lemma",
+        "title": "The induced cohomology map is independent of the chosen injective comparison extension",
+        "strategy": "Any two extensions of the same morphism are cochain-homotopic by the injective comparison uniqueness theorem. Reindexing the cochain complexes as chain complexes turns this into the published homotopy-invariance statement for homology, so the cohomology map is well defined.",
+        "deps": [
+          "def-right-derived-object-relative-to-injective-resolution-data",
+          "lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions",
+          "thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy",
+          "def-cohomology-object-of-a-cochain-complex",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology"
+        ]
+      },
+      {
+        "id": "def-right-derived-map-relative-to-resolution-data",
+        "kind": "definition",
+        "title": "The right derived map relative to supplied resolution data",
+        "deps": [
+          "def-right-derived-object-relative-to-injective-resolution-data",
+          "lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions",
+          "lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension"
+        ]
+      },
+      {
+        "id": "thm-right-derived-functors-relative-to-supplied-data-are-additive-functors",
+        "kind": "theorem",
+        "title": "Right derived functors relative to supplied data are additive functors",
+        "strategy": "Use the injective comparison identity and composition laws exactly as on the projective side, then read cohomology as homology of the reindexed deleted resolution to inherit additivity.",
+        "deps": [
+          "def-right-derived-map-relative-to-resolution-data",
+          "def-additive-functor",
+          "def-cohomology-object-of-a-cochain-complex",
+          "prop-comparison-of-the-identity-is-homotopic-to-the-identity",
+          "prop-comparison-maps-respect-composition-up-to-homotopy",
+          "thm-homology-is-an-additive-functor"
+        ]
+      },
+      {
+        "id": "prop-a-natural-transformation-induces-natural-transformations-of-left-derived-functors",
+        "kind": "proposition",
+        "title": "A natural transformation induces natural transformations of left derived functors",
+        "strategy": "Apply the natural transformation degreewise to every chosen projective resolution. The resulting chain maps commute with comparison lifts because the original squares commute objectwise, so homology produces a natural transformation in every derived degree.",
+        "deps": [
+          "thm-left-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "def-natural-transformation",
+          "prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology"
+        ]
+      },
+      {
+        "id": "prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors",
+        "kind": "proposition",
+        "title": "A natural transformation induces natural transformations of right derived functors",
+        "strategy": "Apply the natural transformation degreewise to the supplied injective resolutions. Naturality with respect to comparison extensions gives a map of cochain complexes, and taking cohomology yields the desired natural transformation.",
+        "deps": [
+          "thm-right-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "def-natural-transformation",
+          "def-cohomology-object-of-a-cochain-complex"
+        ]
+      },
+      {
+        "id": "lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects",
+        "kind": "lemma",
+        "title": "Objectwise comparison of two projective resolution data induces an isomorphism on derived objects",
+        "strategy": "For each object, compare the two chosen projective resolutions in both directions. Their composites are homotopic to the identity, so the induced homology maps are inverse isomorphisms.",
+        "deps": [
+          "def-left-derived-object-relative-to-projective-resolution-data",
+          "def-supplied-projective-resolution-datum",
+          "thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology",
+          "prop-homology-respects-identities-and-composition"
+        ]
+      },
+      {
+        "id": "lem-the-change-of-projective-resolution-isomorphisms-are-natural",
+        "kind": "lemma",
+        "title": "The change-of-projective-resolution isomorphisms are natural",
+        "strategy": "For a morphism f, the two chain-level routes across the square of chosen comparison maps both lift f. The projective comparison uniqueness theorem makes those routes homotopic, and homology then forces the square to commute.",
+        "deps": [
+          "lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects",
+          "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology"
+        ]
+      },
+      {
+        "id": "thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic",
+        "kind": "theorem",
+        "title": "Two supplied projective resolution data define naturally isomorphic left derived functors",
+        "strategy": "Use the objectwise comparison isomorphisms as the components and the previous lemma for naturality. Independence from the specific comparison maps has already been built into the homology-level construction.",
+        "deps": [
+          "thm-left-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects",
+          "lem-the-change-of-projective-resolution-isomorphisms-are-natural"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "prop-change-of-projective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws",
+        "kind": "proposition",
+        "title": "Change-of-projective-resolution isomorphisms satisfy identity and cocycle laws",
+        "strategy": "For identical data the comparison map is the identity up to homotopy, and for three data sets the two composite comparison chains lift the same map. Uniqueness up to homotopy therefore forces both the identity law and the cocycle law after passing to homology.",
+        "deps": [
+          "thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic",
+          "lem-the-change-of-projective-resolution-isomorphisms-are-natural",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology"
+        ]
+      },
+      {
+        "id": "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+        "kind": "theorem",
+        "title": "Two supplied injective resolution data define naturally isomorphic right derived functors",
+        "strategy": "Repeat the change-of-resolution argument on the injective side. Comparison maps between the two chosen injective resolutions exist in both directions, are unique up to cochain homotopy, and therefore induce inverse natural isomorphisms on cohomology.",
+        "deps": [
+          "thm-right-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object",
+          "thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy",
+          "def-cohomology-object-of-a-cochain-complex",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology",
+          "prop-homology-respects-identities-and-composition"
+        ]
+      },
+      {
+        "id": "prop-change-of-injective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws",
+        "kind": "proposition",
+        "title": "Change-of-injective-resolution isomorphisms satisfy identity and cocycle laws",
+        "strategy": "The identity comparison map is homotopic to the identity, and the two three-datum composites are again competing lifts of the same map. Cohomology therefore inherits the same identity and cocycle laws as on the projective side.",
+        "deps": [
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic"
+        ]
+      },
+      {
+        "id": "rem-derived-functors-are-well-defined-relative-to-supplied-resolution-data",
+        "kind": "remark",
+        "title": "Derived functors are well defined relative to supplied resolution data",
+        "deps": [
+          "thm-left-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "thm-right-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic",
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+          "prop-change-of-projective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws",
+          "prop-change-of-injective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws"
+        ]
+      },
+      {
+        "id": "thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor",
+        "kind": "theorem",
+        "title": "The zero-th left derived functor of a right exact functor recovers the functor",
+        "strategy": "For a right exact functor F, the beginning of a projective resolution remains exact after applying F. The zeroth homology of the resulting deleted complex is therefore the cokernel that already computes F(A), and the construction is natural in A.",
+        "deps": [
+          "thm-left-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "def-left-exact-and-right-exact-functor",
+          "def-projective-resolution-in-an-abelian-category",
+          "def-homology-object-of-a-chain-complex"
+        ]
+      },
+      {
+        "id": "thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor",
+        "kind": "theorem",
+        "title": "The zero-th right derived functor of a left exact functor recovers the functor",
+        "strategy": "For a left exact functor F, the first part of every injective resolution stays exact after applying F. The zeroth cohomology of the resulting deleted cochain complex is therefore exactly F(A), naturally in A.",
+        "deps": [
+          "thm-right-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "def-left-exact-and-right-exact-functor"
+        ]
+      },
+      {
+        "id": "prop-positive-left-derived-functors-vanish-on-projective-objects",
+        "kind": "proposition",
+        "title": "Positive left derived functors vanish on projective objects",
+        "strategy": "A projective object has a length-zero projective resolution. Comparing the supplied resolution datum with that zero-length resolution and using the negative-degree vanishing proposition forces every positive derived degree to be zero.",
+        "deps": [
+          "thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic",
+          "prop-a-projective-object-has-a-length-zero-projective-resolution",
+          "prop-negative-derived-degrees-vanish-for-one-sided-resolutions"
+        ]
+      },
+      {
+        "id": "prop-positive-right-derived-functors-vanish-on-injective-objects",
+        "kind": "proposition",
+        "title": "Positive right derived functors vanish on injective objects",
+        "strategy": "An injective object admits the tautological length-zero injective resolution. Comparing the supplied datum with that trivial resolution reduces every positive cohomology group to a negative supported degree, hence to zero.",
+        "deps": [
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+          "def-injective-object",
+          "def-injective-resolution-in-an-abelian-category",
+          "prop-negative-derived-degrees-vanish-for-one-sided-resolutions"
+        ]
+      },
+      {
+        "id": "def-acyclic-object-for-a-left-exact-functor",
+        "kind": "definition",
+        "title": "An acyclic object for a left exact functor",
+        "deps": [
+          "def-right-derived-object-relative-to-injective-resolution-data",
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+          "def-left-exact-and-right-exact-functor"
+        ]
+      },
+      {
+        "id": "def-acyclic-object-for-a-right-exact-functor",
+        "kind": "definition",
+        "title": "An acyclic object for a right exact functor",
+        "deps": [
+          "def-left-derived-object-relative-to-projective-resolution-data",
+          "thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic",
+          "def-left-exact-and-right-exact-functor"
+        ]
+      },
+      {
+        "id": "def-f-acyclic-resolution",
+        "kind": "definition",
+        "title": "An F-acyclic resolution",
+        "deps": [
+          "def-acyclic-object-for-a-left-exact-functor",
+          "def-acyclic-object-for-a-right-exact-functor",
+          "def-projective-resolution-in-an-abelian-category",
+          "def-injective-resolution-in-an-abelian-category"
+        ]
+      },
+      {
+        "id": "thm-acyclic-resolution-theorem-for-right-derived-functors",
+        "kind": "theorem",
+        "title": "The acyclic-resolution theorem for right derived functors",
+        "strategy": "Resolve the object by F-acyclics and break the resolution into the short exact sequences of kernels, quotients, and successive tails. The long exact cohomology sequences and the vanishing on the acyclic pieces collapse the staircase until the desired cohomology is identified with the cohomology of the chosen acyclic resolution.",
+        "deps": [
+          "def-f-acyclic-resolution",
+          "def-acyclic-object-for-a-left-exact-functor",
+          "thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor",
+          "prop-positive-right-derived-functors-vanish-on-injective-objects",
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+          "thm-long-exact-sequence-in-cohomology"
+        ]
+      },
+      {
+        "id": "thm-acyclic-resolution-theorem-for-left-derived-functors",
+        "kind": "theorem",
+        "title": "The acyclic-resolution theorem for left derived functors",
+        "strategy": "Run the same staircase argument on a right exact functor and an F-acyclic projective-side resolution. Successive long exact homology sequences collapse because the higher derived functors of the acyclic terms vanish, leaving the homology of the displayed resolution as the derived object.",
+        "deps": [
+          "def-f-acyclic-resolution",
+          "def-acyclic-object-for-a-right-exact-functor",
+          "thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor",
+          "prop-positive-left-derived-functors-vanish-on-projective-objects",
+          "thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic",
+          "thm-long-exact-sequence-in-homology"
+        ]
+      },
+      {
+        "id": "cor-adapted-classes-compute-derived-functors",
+        "kind": "corollary",
+        "title": "Adapted classes compute derived functors",
+        "strategy": "Once a class of objects is closed under the printed kernel or cokernel conditions and every object admits the appropriate monomorphism or epimorphism into that class, the resulting resolutions are F-acyclic by definition. The two acyclic-resolution theorems then compute the derived functors on those adapted resolutions.",
+        "deps": [
+          "def-f-acyclic-resolution",
+          "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "thm-acyclic-resolution-theorem-for-left-derived-functors"
+        ]
+      },
+      {
+        "id": "prop-an-exact-functor-has-vanishing-positive-derived-functors",
+        "kind": "proposition",
+        "title": "An exact functor has vanishing positive derived functors",
+        "strategy": "Applying an exact functor to any projective or injective resolution preserves exactness of the deleted complex. The resulting homology and cohomology therefore vanish in every positive degree.",
+        "deps": [
+          "def-exact-functor-between-abelian-categories",
+          "def-left-derived-object-relative-to-projective-resolution-data",
+          "def-right-derived-object-relative-to-injective-resolution-data",
+          "thm-an-exact-functor-commutes-with-homology",
+          "prop-negative-derived-degrees-vanish-for-one-sided-resolutions"
+        ]
+      },
+      {
+        "id": "prop-derived-functors-commute-with-finite-biproducts",
+        "kind": "proposition",
+        "title": "Derived functors commute with finite biproducts",
+        "strategy": "Additive functors preserve finite biproducts degreewise on the chosen resolutions, and finite biproducts of complexes are computed term by term. Homology and cohomology therefore identify the derived object of a finite biproduct with the finite biproduct of the derived objects.",
+        "deps": [
+          "thm-left-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "thm-right-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "thm-an-additive-functor-preserves-finite-biproducts",
+          "prop-finite-biproducts-of-complexes-are-computed-degreewise",
+          "thm-homology-is-an-additive-functor"
+        ]
+      },
+      {
+        "id": "prop-contravariant-derived-functors-are-derived-on-the-opposite-category",
+        "kind": "proposition",
+        "title": "Contravariant derived functors are derived on the opposite category",
+        "strategy": "Read a contravariant additive functor on A as a covariant functor on A^op. Projective resolutions in A become injective resolutions in A^op, so the right-derived and left-derived constructions match after the standard opposite-category translation.",
+        "deps": [
+          "def-functor-and-contravariant-functor",
+          "def-opposite-category",
+          "thm-the-opposite-of-an-abelian-category-is-abelian",
+          "def-left-derived-object-relative-to-projective-resolution-data",
+          "def-right-derived-object-relative-to-injective-resolution-data"
+        ]
+      },
+      {
+        "id": "prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied",
+        "kind": "proposition",
+        "title": "A bifunctor can be derived in either variable when the relevant resolution data are supplied",
+        "strategy": "Fix one variable and derive in the other using the chosen projective or injective datum of the matching variance. Repeating this in the other variable gives the second candidate construction; the proposition records both candidates without asserting they coincide.",
+        "deps": [
+          "prop-contravariant-derived-functors-are-derived-on-the-opposite-category",
+          "def-left-derived-object-relative-to-projective-resolution-data",
+          "def-right-derived-object-relative-to-injective-resolution-data"
+        ]
+      },
+      {
+        "id": "def-balanced-derived-bifunctor",
+        "kind": "definition",
+        "title": "A balanced derived bifunctor",
+        "deps": [
+          "prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied",
+          "def-natural-transformation",
+          "thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor",
+          "thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor"
+        ]
+      },
+      {
+        "id": "fs-enough-projectives-implies-a-canonical-resolution-for-every-object",
+        "kind": "false-statement",
+        "title": "FALSE: enough projectives imply a canonical resolution for every object",
+        "strategy": "Refute the slogan by separating existence from global selection. The previous resolutions page already records that enough projectives does not itself choose a projective-resolution functor, while the canonical iterated free resolution is a special module-category construction rather than a consequence of the abstract existence hypothesis.",
+        "deps": [
+          "def-supplied-projective-resolution-datum",
+          "fs-enough-projectives-selects-a-projective-resolution-functor-on-all-objects",
+          "prop-the-iterated-free-module-resolution-is-canonical-in-zf"
+        ]
+      },
+      {
+        "id": "fs-the-definition-of-a-derived-map-may-depend-on-the-chosen-comparison-lift",
+        "kind": "false-statement",
+        "title": "FALSE: the definition of a derived map may depend on the chosen comparison lift",
+        "strategy": "Refute the claim with the comparison-homotopy theorem. Competing lifts of the same morphism induce the same homology or cohomology map, so the definition of the derived map is independent of that lift choice.",
+        "deps": [
+          "def-left-derived-map-relative-to-resolution-data",
+          "def-right-derived-map-relative-to-resolution-data",
+          "lem-the-induced-homology-map-is-independent-of-the-comparison-lift",
+          "lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension"
+        ]
+      },
+      {
+        "id": "fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself",
+        "kind": "false-statement",
+        "title": "FALSE: every additive functor has L_0 naturally isomorphic to itself",
+        "strategy": "The recovery theorem requires right exactness. An additive functor that fails to preserve the relevant cokernel data can have a zeroth left derived functor different from its original value, so additivity alone is not enough.",
+        "deps": [
+          "thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor",
+          "def-additive-functor"
+        ]
+      },
+      {
+        "id": "fs-derived-functors-in-two-variables-are-automatically-balanced",
+        "kind": "false-statement",
+        "title": "FALSE: derived functors in two variables are automatically balanced",
+        "strategy": "The previous proposition only constructs two candidate one-variable derivations. A separate natural isomorphism with coherence conditions is exactly the extra datum recorded by the balanced-definition item, so balance is not automatic.",
+        "deps": [
+          "prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied",
+          "def-balanced-derived-bifunctor"
+        ]
+      },
+      {
+        "id": "fs-an-acyclic-resolution-is-the-same-thing-as-an-injective-resolution",
+        "kind": "false-statement",
+        "title": "FALSE: an acyclic resolution is the same thing as an injective resolution",
+        "strategy": "Injective resolutions are one important source of acyclic resolutions, but the computation theorem applies more broadly. The whole point of F-acyclic resolutions is that noninjective adapted objects can also compute derived functors.",
+        "deps": [
+          "def-acyclic-object-for-a-left-exact-functor",
+          "def-f-acyclic-resolution",
+          "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "prop-positive-right-derived-functors-vanish-on-injective-objects"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 365.048,
+    "id": "derived-functors-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Derived Functors — Examples",
+    "companion": "derived-functors",
+    "requires": [
+      "derived-functors"
+    ],
+    "items": [
+      {
+        "id": "ex-the-left-derived-functors-of-an-exact-functor",
+        "kind": "example",
+        "title": "The left derived functors of an exact functor",
+        "strategy": "Take any exact additive functor F. The main page says L_0F recovers F and every positive left derived functor vanishes, so the example simply writes down that derived profile and shows how little room is left once exactness is known.",
+        "deps": [
+          "prop-an-exact-functor-has-vanishing-positive-derived-functors",
+          "thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor"
+        ]
+      },
+      {
+        "id": "ex-the-right-derived-functors-of-hom-from-a-fixed-object",
+        "kind": "example",
+        "title": "The right derived functors of Hom from a fixed object",
+        "strategy": "Fix an object A and view Hom(A,-) as a left exact covariant functor. The example sets up R^0 as the original Hom functor, records the vanishing on injectives, and prepares the reader for the later Ext page without importing Ext as a definition yet.",
+        "deps": [
+          "thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor",
+          "prop-positive-right-derived-functors-vanish-on-injective-objects",
+          "thm-hom-is-left-exact-in-each-variable"
+        ]
+      },
+      {
+        "id": "ex-two-resolution-data-and-their-change-isomorphism",
+        "kind": "example",
+        "title": "Two resolution data and their change isomorphism",
+        "strategy": "Choose two different projective or injective resolution assignments for the same object and write down the induced comparison maps. The example traces the resulting isomorphism on derived objects and shows how the naturality square from the main theorem is used in practice.",
+        "deps": [
+          "thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic",
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic"
+        ]
+      },
+      {
+        "id": "ex-independence-of-two-comparison-lifts-on-homology",
+        "kind": "example",
+        "title": "Independence of two comparison lifts on homology",
+        "strategy": "Take one morphism and two explicit comparison lifts between chosen projective resolutions. A chain homotopy between those lifts gives the same induced map on homology, making the abstract well-definedness lemma concrete.",
+        "deps": [
+          "lem-the-induced-homology-map-is-independent-of-the-comparison-lift",
+          "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy"
+        ]
+      },
+      {
+        "id": "ex-an-acyclic-resolution-that-is-not-an-injective-resolution",
+        "kind": "example",
+        "title": "An acyclic resolution that is not an injective resolution",
+        "strategy": "Use a projective resolution by free modules to compute a left derived functor of a right exact functor. The terms are automatically acyclic by vanishing on projectives, but they need not be injective objects, so the example separates the notions cleanly.",
+        "deps": [
+          "def-acyclic-object-for-a-right-exact-functor",
+          "def-f-acyclic-resolution",
+          "thm-acyclic-resolution-theorem-for-left-derived-functors",
+          "prop-positive-left-derived-functors-vanish-on-projective-objects",
+          "def-projective-object",
+          "def-injective-object"
+        ]
+      },
+      {
+        "id": "cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor",
+        "kind": "counterexample",
+        "title": "L_0 of a non-right-exact functor need not recover the functor",
+        "strategy": "Take a covariant Hom functor Hom(A,-), which is additive and left exact but not generally right exact. Computing H_0 on a projective resolution shows that the naive left-derived zeroth term need not reproduce the original Hom value, so the right-exactness hypothesis in the recovery theorem is genuine.",
+        "deps": [
+          "fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself",
+          "thm-hom-is-left-exact-in-each-variable",
+          "thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor"
+        ]
+      },
+      {
+        "id": "ex-a-contravariant-functor-derived-via-the-opposite-category",
+        "kind": "example",
+        "title": "A contravariant functor derived via the opposite category",
+        "strategy": "Treat a contravariant Hom functor as a covariant functor on the opposite category and rewrite its projective-resolution computation in that language. The example makes the variance bookkeeping explicit before Ext and Tor begin using it heavily.",
+        "deps": [
+          "prop-contravariant-derived-functors-are-derived-on-the-opposite-category",
+          "thm-hom-is-left-exact-in-each-variable"
+        ]
+      }
+    ]
+  }
+]

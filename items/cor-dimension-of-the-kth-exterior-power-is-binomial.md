@@ -29,9 +29,7 @@ sources:
 If $V$ is a finite-dimensional real vector space with $\dim V=n$ and
 $k\in\mathbb N$, then
 
-$$
-\dim\operatorname{Alt}^k(V)=\binom{n}{k}.
-$$
+$$ \dim\operatorname{Alt}^k(V)=\binom{n}{k}. $$
 
 In particular, $\operatorname{Alt}^k(V)=0$ for $k>n$.
 

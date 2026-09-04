@@ -25,17 +25,13 @@ sources:
 ## Statement
 
 Let $A$ be an Artinian commutative ring, let
-$$
-S=A[x_1,\ldots,x_r]/J
-$$
+$$ S=A[x_1,\ldots,x_r]/J $$
 be a standard graded $A$-algebra with $\deg x_i=1$, and let
 $M=\bigoplus_{n\in\mathbb Z}M_n$ be a finite graded $S$-module. Then:
 
 1. the Hilbert series $\operatorname{HS}_M(t)$ is a rational function of the
    form
-   $$
-   \operatorname{HS}_M(t)=\frac{p(t)}{(1-t)^r}
-   $$
+   $$    \operatorname{HS}_M(t)=\frac{p(t)}{(1-t)^r}    $$
    for some Laurent polynomial $p(t)\in\mathbb Z[t,t^{-1}]$;
 2. the Hilbert function $n\mapsto \ell_A(M_n)$ agrees for all sufficiently
    large $n$ with a polynomial in $n$ with rational coefficients.
@@ -47,9 +43,7 @@ $S=A[x_1,\ldots,x_r]/J$ with $\deg x_i=1$, and a finite graded $S$-module
 $M=\bigoplus M_n$.
 
 [L1] A twist satisfies $M(-1)_n=M_{n-1}$, hence
-$$
-\operatorname{HS}_{M(-1)}(t)=t\operatorname{HS}_M(t)
-$$
+$$ \operatorname{HS}_{M(-1)}(t)=t\operatorname{HS}_M(t) $$
 ([[def-graded-ring-and-graded-module]], [[def-hilbert-function-and-hilbert-series]]).
 
 [L2] Length is additive in short exact sequences of finite-length modules

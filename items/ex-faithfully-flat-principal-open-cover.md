@@ -25,9 +25,7 @@ sources:
 Assume the Axiom of Choice for the faithfully-flat characterization used below.
 
 Let $f_1,\ldots,f_n\in R$ generate the unit ideal. Then the product map
-$$
-R\longrightarrow \prod_{i=1}^n R_{f_i}
-$$
+$$ R\longrightarrow \prod_{i=1}^n R_{f_i} $$
 is faithfully flat.
 
 ## Facts & Assumptions

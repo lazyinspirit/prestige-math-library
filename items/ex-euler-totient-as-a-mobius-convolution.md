@@ -27,15 +27,11 @@ pipeline_run: null
 
 The published divisor-sum identity for Euler's totient implies
 
-$$
-\varphi=\mu*\operatorname{id}_1.
-$$
+$$ \varphi=\mu*\operatorname{id}_1. $$
 
 Equivalently, for every positive integer $n$,
 
-$$
-\varphi(n)=\sum_{d\mid n}\mu(d)\frac{n}{d}.
-$$
+$$ \varphi(n)=\sum_{d\mid n}\mu(d)\frac{n}{d}. $$
 
 ## Facts & Assumptions
 

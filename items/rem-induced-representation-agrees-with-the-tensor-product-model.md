@@ -46,9 +46,7 @@ and therefore descends uniquely
 Comparing both sides on a finite left transversal shows that this descended map
 is a $G$-equivariant isomorphism
 
-$$
-R[G]\otimes_{R[H]}W\cong \operatorname{Ind}_H^G W.
-$$
+$$ R[G]\otimes_{R[H]}W\cong \operatorname{Ind}_H^G W. $$
 
 Thus, in the finite-index setting used for finite-group character theory, the
 function model and the tensor-product model are two descriptions of the same

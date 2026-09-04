@@ -32,13 +32,9 @@ pipeline_run: null
 
 A **totally ordered abelian group** is an abelian group $(\Gamma,+,0)$ together
 with a total order $\le$ such that translation preserves the order:
-$$
-\gamma\le\delta \Longrightarrow \gamma+\eta\le\delta+\eta
-$$
+$$ \gamma\le\delta \Longrightarrow \gamma+\eta\le\delta+\eta $$
 for all $\gamma,\delta,\eta\in\Gamma$.
 
 The positive cone is
-$$
-\Gamma_{\ge 0}:=\{\gamma\in\Gamma:\gamma\ge 0\},
-$$
+$$ \Gamma_{\ge 0}:=\{\gamma\in\Gamma:\gamma\ge 0\}, $$
 and similarly $\Gamma_{>0}$, $\Gamma_{\le 0}$, and $\Gamma_{<0}$.

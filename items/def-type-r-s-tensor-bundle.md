@@ -34,9 +34,7 @@ sources:
 Let $M$ be a smooth manifold, and let $r,s\ge 0$. The **type $(r,s)$ tensor
 bundle** of $M$ is the fibrewise assignment
 
-$$
-T^r_sM:=\coprod_{p\in M}\operatorname{Mult}\bigl((T_p^*M)^r\times(T_pM)^s,\mathbb R\bigr),
-$$
+$$ T^r_sM:=\coprod_{p\in M}\operatorname{Mult}\bigl((T_p^*M)^r\times(T_pM)^s,\mathbb R\bigr), $$
 
 that is, the fibre over $p$ consists of the type $(r,s)$ tensors on $T_pM$ in
 the multilinear-map sense. The next theorem equips this disjoint union with its

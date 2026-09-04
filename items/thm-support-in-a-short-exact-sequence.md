@@ -30,13 +30,9 @@ pipeline_run: null
 ## Statement
 
 If
-$$
-0 \longrightarrow M' \longrightarrow M \longrightarrow M'' \longrightarrow 0
-$$
+$$ 0 \longrightarrow M' \longrightarrow M \longrightarrow M'' \longrightarrow 0 $$
 is a short exact sequence of left $R$-modules, then
-$$
-\operatorname{Supp}_R(M)=\operatorname{Supp}_R(M')\cup\operatorname{Supp}_R(M'').
-$$
+$$ \operatorname{Supp}_R(M)=\operatorname{Supp}_R(M')\cup\operatorname{Supp}_R(M''). $$
 
 ## Facts & Assumptions
 

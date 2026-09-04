@@ -30,13 +30,9 @@ Assume the Axiom of Choice.
 Let $k$ be a field, let $d\ge 0$, and let $A$ be an integral domain that is
 module-finite over the polynomial ring $k[z_1,\ldots,z_d]$ via an injective
 $k$-algebra map
-$$
-k[z_1,\ldots,z_d]\hookrightarrow A.
-$$
+$$ k[z_1,\ldots,z_d]\hookrightarrow A. $$
 Then
-$$
-\dim A\ge d.
-$$
+$$ \dim A\ge d. $$
 
 ## Facts & Assumptions
 

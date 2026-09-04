@@ -24,21 +24,13 @@ pipeline_run: null
 ## Example
 
 Let $p$ be a prime integer, let
-$$
-M:=\bigoplus_{n \ge 1} \mathbb Z e_n,
-$$
+$$ M:=\bigoplus_{n \ge 1} \mathbb Z e_n, $$
 and define an endomorphism
-$$
-f \colon M \to M,\qquad f(e_n)=p^n e_n.
-$$
+$$ f \colon M \to M,\qquad f(e_n)=p^n e_n. $$
 Then
-$$
-0 \to M \xrightarrow{f} M \to \operatorname{coker}(f) \to 0
-$$
+$$ 0 \to M \xrightarrow{f} M \to \operatorname{coker}(f) \to 0 $$
 is exact, but the induced map on $(p)$-adic completions
-$$
-\widehat f \colon \widehat M \to \widehat M
-$$
+$$ \widehat f \colon \widehat M \to \widehat M $$
 is not surjective. So completion is not exact without a finiteness hypothesis.
 
 ## Facts & Assumptions

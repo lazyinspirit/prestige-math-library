@@ -29,9 +29,7 @@ principal block is not at a Wilkinson tie, and let $\mu$ be the corresponding
 Wilkinson shift. If $T-\mu I=QR$ is the real orthogonal QR factorisation built
 from the standard adjacent-row Givens eliminations, then
 
-$$
-T_+:=RQ+\mu I
-$$
+$$ T_+:=RQ+\mu I $$
 
 is again a real symmetric tridiagonal matrix.
 

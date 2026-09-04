@@ -32,9 +32,7 @@ pipeline_run: null
 ## Example
 
 Let $k$ be a field and let
-$$
-R=k[x]/(x^n)
-$$
+$$ R=k[x]/(x^n) $$
 with $n\ge1$. Then $R$ is a local Artinian ring with maximal ideal $(x)$, its ideals are exactly $(x^r)$ for $0\le r\le n$, and its length as an $R$-module is $n$.
 
 ## Facts & Assumptions

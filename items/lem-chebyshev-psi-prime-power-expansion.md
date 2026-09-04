@@ -27,9 +27,7 @@ pipeline_run: null
 
 For every real $x\ge1$,
 
-$$
-\psi(x)=\sum_{p^k\le x}\log p=\sum_{k\ge1}\theta(x^{1/k}),
-$$
+$$ \psi(x)=\sum_{p^k\le x}\log p=\sum_{k\ge1}\theta(x^{1/k}), $$
 
 and both sums are finite.
 
@@ -41,15 +39,11 @@ and both sums are finite.
 prime power and $\Lambda(n)=0$ otherwise ([[def-von-mangoldt-function]]).
 
 [L2] By definition,
-$$
-\psi(x)=\sum_{n\le x}\Lambda(n)
-$$
+$$ \psi(x)=\sum_{n\le x}\Lambda(n) $$
 ([[def-chebyshev-psi-function]]).
 
 [L3] By definition,
-$$
-\theta(y)=\sum_{p\le y}\log p
-$$
+$$ \theta(y)=\sum_{p\le y}\log p $$
 for every real $y\ge2$ ([[def-chebyshev-theta-function]]).
 
 ## Proof

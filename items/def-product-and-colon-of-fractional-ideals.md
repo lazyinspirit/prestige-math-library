@@ -32,16 +32,10 @@ pipeline_run: null
 
 Let $I$ and $J$ be fractional ideals of a domain $R$ with fraction field $K$.
 Their **product** is
-$$
-IJ:=\left\{\sum_{r=1}^n x_ry_r:n\ge1,\ x_r\in I,\ y_r\in J\right\}\subseteq K,
-$$
+$$ IJ:=\left\{\sum_{r=1}^n x_ry_r:n\ge1,\ x_r\in I,\ y_r\in J\right\}\subseteq K, $$
 and their **colon** is
-$$
-(I:J):=\{x\in K:xJ\subseteq I\}.
-$$
+$$ (I:J):=\{x\in K:xJ\subseteq I\}. $$
 The usual inverse candidate is
-$$
-I^{-1}:=(R:I).
-$$
+$$ I^{-1}:=(R:I). $$
 The next lemma checks that these constructions stay inside the world of
 fractional ideals.

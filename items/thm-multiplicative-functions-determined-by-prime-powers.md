@@ -33,15 +33,11 @@ pipeline_run: null
 Let $f$ be a multiplicative arithmetic function, and write the canonical prime
 factorization of $n\ge1$ as
 
-$$
-n=\prod_{i<r} p_i^{e_i}
-$$
+$$ n=\prod_{i<r} p_i^{e_i} $$
 
 with distinct primes $p_i$ and exponents $e_i\ge1$. Then
 
-$$
-f(n)=\prod_{i<r} f(p_i^{e_i}).
-$$
+$$ f(n)=\prod_{i<r} f(p_i^{e_i}). $$
 
 Conversely, if values are prescribed on every prime power $p^e$ with $e\ge1$,
 then there is a unique multiplicative arithmetic function having those

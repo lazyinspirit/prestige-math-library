@@ -27,9 +27,7 @@ pipeline_run: null
 
 Let $k$ be a field, let $m\ge 1$, let $I=(h_1,\ldots,h_m)\subseteq k[x_1,\ldots,x_n]$, and
 let
-$$
-1=\sum_{i=1}^m a_i(x,y)h_i(x)+b(x,y)(1-yf(x))
-$$
+$$ 1=\sum_{i=1}^m a_i(x,y)h_i(x)+b(x,y)(1-yf(x)) $$
 be an identity in $k[x_1,\ldots,x_n,y]$. Then some power $f^N$ lies in $I$.
 
 ## Facts & Assumptions

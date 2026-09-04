@@ -31,9 +31,7 @@ pipeline_run: null
 
 The **von Mangoldt function** is the arithmetic function $\Lambda$ defined by
 
-$$
-\Lambda(n):=\begin{cases}\log p,& n=p^k\text{ for some prime }p\text{ and some }k\ge1,\\0,& \text{otherwise.}\end{cases}
-$$
+$$ \Lambda(n):=\begin{cases}\log p,& n=p^k\text{ for some prime }p\text{ and some }k\ge1,\\0,& \text{otherwise.}\end{cases} $$
 
 ## Remarks
 

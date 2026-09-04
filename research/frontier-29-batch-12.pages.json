@@ -1,0 +1,404 @@
+[
+  {
+    "order": 366.001,
+    "id": "simplicial-complexes-and-simplicial-homology",
+    "kind": "A",
+    "category": "algebraic-topology",
+    "title": "Simplicial Complexes and Simplicial Homology",
+    "companion": "simplicial-complexes-and-simplicial-homology-examples",
+    "requires": [
+      "schur-multipliers-and-universal-central-extensions-examples"
+    ],
+    "items": [
+      {
+        "id": "def-abstract-simplicial-complex",
+        "kind": "definition",
+        "title": "An abstract simplicial complex",
+        "deps": []
+      },
+      {
+        "id": "def-simplicial-subcomplex-star-closure-and-link",
+        "kind": "definition",
+        "title": "Subcomplexes, closures, stars, and links in a simplicial complex",
+        "deps": [
+          "def-abstract-simplicial-complex"
+        ]
+      },
+      {
+        "id": "def-locally-finite-and-finite-dimensional-simplicial-complex",
+        "kind": "definition",
+        "title": "Local finiteness, finiteness, and finite dimensionality of a simplicial complex",
+        "deps": [
+          "def-abstract-simplicial-complex"
+        ]
+      },
+      {
+        "id": "def-geometric-simplex-spanned-by-affinely-independent-vertices",
+        "kind": "definition",
+        "title": "The geometric simplex spanned by affinely independent vertices",
+        "deps": []
+      },
+      {
+        "id": "lem-barycentric-coordinates-are-unique",
+        "kind": "lemma",
+        "title": "Barycentric coordinates are unique",
+        "strategy": "Subtract two affine-coordinate expressions for the same point. Affine independence forces every coefficient difference to vanish, so the barycentric coordinates agree term by term.",
+        "deps": [
+          "def-geometric-simplex-spanned-by-affinely-independent-vertices"
+        ]
+      },
+      {
+        "id": "def-geometric-realization-of-an-abstract-simplicial-complex",
+        "kind": "definition",
+        "title": "The geometric realization of an abstract simplicial complex",
+        "deps": [
+          "def-abstract-simplicial-complex",
+          "def-geometric-simplex-spanned-by-affinely-independent-vertices",
+          "def-product-topology",
+          "def-subspace-topology-top"
+        ]
+      },
+      {
+        "id": "lem-geometric-simplices-intersect-in-the-realization-of-their-common-face",
+        "kind": "lemma",
+        "title": "Geometric simplices intersect in the realization of their common face",
+        "strategy": "A point in the realization has unique barycentric coordinates on each simplex. The vertices with nonzero coefficients are therefore exactly the support of the point, so belonging to two simplices means that support lies in their intersection.",
+        "deps": [
+          "def-geometric-realization-of-an-abstract-simplicial-complex",
+          "lem-barycentric-coordinates-are-unique"
+        ]
+      },
+      {
+        "id": "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization",
+        "kind": "proposition",
+        "title": "A finite simplicial complex has a compact Hausdorff realization",
+        "strategy": "Enumerate the finitely many vertices and view the realization inside a Euclidean cube via barycentric coordinates. Each simplex is compact by Heine-Borel, the realization is a finite union of such simplices, and the ambient Euclidean space is Hausdorff.",
+        "deps": [
+          "def-geometric-realization-of-an-abstract-simplicial-complex",
+          "def-locally-finite-and-finite-dimensional-simplicial-complex",
+          "lem-geometric-simplices-intersect-in-the-realization-of-their-common-face",
+          "thm-heine-borel-rn",
+          "thm-metric-hausdorff-separation"
+        ]
+      },
+      {
+        "id": "def-simplicial-map-and-its-geometric-realization",
+        "kind": "definition",
+        "title": "A simplicial map and its geometric realization",
+        "deps": [
+          "def-abstract-simplicial-complex",
+          "def-geometric-realization-of-an-abstract-simplicial-complex"
+        ]
+      },
+      {
+        "id": "lem-the-realization-of-a-simplicial-map-is-continuous-and-functorial",
+        "kind": "lemma",
+        "title": "The realization of a simplicial map is continuous and functorial",
+        "strategy": "On each simplex, the realization is the affine barycentric formula determined by the vertex map, so it is continuous there. The common-face intersection lemma makes these affine pieces agree on overlaps, and the identity and composition laws hold directly on barycentric coordinates.",
+        "deps": [
+          "def-simplicial-map-and-its-geometric-realization",
+          "lem-geometric-simplices-intersect-in-the-realization-of-their-common-face"
+        ]
+      },
+      {
+        "id": "def-orientation-of-a-simplex",
+        "kind": "definition",
+        "title": "An orientation of a simplex",
+        "deps": [
+          "def-abstract-simplicial-complex"
+        ]
+      },
+      {
+        "id": "lem-an-odd-permutation-reverses-oriented-simplex-sign",
+        "kind": "lemma",
+        "title": "An odd permutation reverses the sign of an oriented simplex",
+        "strategy": "Orientations are vertex orderings modulo even permutation. An adjacent transposition changes parity, so it swaps the two orientation classes; every odd permutation is a product of an odd number of adjacent transpositions.",
+        "deps": [
+          "def-orientation-of-a-simplex"
+        ]
+      },
+      {
+        "id": "def-simplicial-chain-groups-and-boundary",
+        "kind": "definition",
+        "title": "Simplicial chain groups and the boundary operator",
+        "deps": [
+          "def-orientation-of-a-simplex"
+        ]
+      },
+      {
+        "id": "lem-simplicial-boundary-is-independent-of-oriented-representative",
+        "kind": "lemma",
+        "title": "The simplicial boundary is independent of the chosen oriented representative",
+        "strategy": "Check the boundary formula after one adjacent transposition of the vertex order. Both the generator and each codimension-one face pick up the same overall sign, and arbitrary permutations follow by factorization into transpositions.",
+        "deps": [
+          "def-simplicial-chain-groups-and-boundary",
+          "lem-an-odd-permutation-reverses-oriented-simplex-sign"
+        ]
+      },
+      {
+        "id": "thm-the-simplicial-boundary-squares-to-zero",
+        "kind": "theorem",
+        "title": "The simplicial boundary squares to zero",
+        "strategy": "Expand the double boundary of one oriented simplex. Every codimension-two face appears twice, once in each order of deleting two vertices, and the two signs are opposite after the orientation-independence lemma.",
+        "deps": [
+          "def-simplicial-chain-groups-and-boundary",
+          "lem-simplicial-boundary-is-independent-of-oriented-representative"
+        ]
+      },
+      {
+        "id": "def-simplicial-cycles-boundaries-and-homology",
+        "kind": "definition",
+        "title": "Simplicial cycles, boundaries, and homology",
+        "deps": [
+          "def-simplicial-chain-groups-and-boundary",
+          "thm-the-simplicial-boundary-squares-to-zero",
+          "def-cycle-and-boundary-subobjects-of-a-complex",
+          "def-homology-object-of-a-chain-complex"
+        ]
+      },
+      {
+        "id": "def-augmentation-and-reduced-simplicial-homology",
+        "kind": "definition",
+        "title": "Augmentation and reduced simplicial homology",
+        "deps": [
+          "def-simplicial-chain-groups-and-boundary",
+          "def-homology-object-of-a-chain-complex"
+        ]
+      },
+      {
+        "id": "lem-the-simplicial-augmentation-is-a-chain-map",
+        "kind": "lemma",
+        "title": "The simplicial augmentation is a chain map",
+        "strategy": "In degree one, the boundary of an oriented edge is the difference of its endpoints, whose augmentation is zero. In every higher degree the augmentation is not involved, so the augmented differential still composes correctly.",
+        "deps": [
+          "def-augmentation-and-reduced-simplicial-homology",
+          "def-simplicial-chain-groups-and-boundary"
+        ]
+      },
+      {
+        "id": "def-induced-simplicial-chain-map",
+        "kind": "definition",
+        "title": "The induced chain map of a simplicial map",
+        "deps": [
+          "def-simplicial-map-and-its-geometric-realization",
+          "def-orientation-of-a-simplex",
+          "def-simplicial-chain-groups-and-boundary"
+        ]
+      },
+      {
+        "id": "lem-induced-simplicial-chain-maps-commute-with-boundaries",
+        "kind": "lemma",
+        "title": "Induced simplicial chain maps commute with boundaries",
+        "strategy": "When the image simplex has distinct vertices, deleting one vertex before or after applying the map gives the same oriented face. When vertices collide, the degenerate image and the repeated-image faces cancel in pairs, so the boundary formula still matches.",
+        "deps": [
+          "def-induced-simplicial-chain-map",
+          "lem-simplicial-boundary-is-independent-of-oriented-representative"
+        ]
+      },
+      {
+        "id": "prop-simplicial-homology-is-functorial",
+        "kind": "proposition",
+        "title": "Simplicial homology is functorial",
+        "strategy": "The induced simplicial chain maps respect identities and composition on oriented generators, and the previous lemma shows they are genuine chain maps. The published homological-algebra functoriality then passes these identities to homology.",
+        "deps": [
+          "def-induced-simplicial-chain-map",
+          "lem-induced-simplicial-chain-maps-commute-with-boundaries",
+          "prop-homology-respects-identities-and-composition"
+        ]
+      },
+      {
+        "id": "def-contiguous-simplicial-maps",
+        "kind": "definition",
+        "title": "Contiguous simplicial maps",
+        "deps": [
+          "def-simplicial-map-and-its-geometric-realization"
+        ]
+      },
+      {
+        "id": "lem-contiguous-simplicial-maps-have-homotopic-realizations",
+        "kind": "lemma",
+        "title": "Contiguous simplicial maps have homotopic realizations",
+        "strategy": "For a point in one simplex, both realizations lie in the geometric simplex spanned by the union of the two image simplices. The straight-line interpolation of barycentric coordinates therefore stays inside that common simplex and patches continuously over all faces.",
+        "deps": [
+          "def-contiguous-simplicial-maps",
+          "def-homotopy-relative-and-path-homotopy"
+        ]
+      },
+      {
+        "id": "thm-contiguous-simplicial-maps-induce-the-same-map-on-simplicial-homology",
+        "kind": "theorem",
+        "title": "Contiguous simplicial maps induce the same map on simplicial homology",
+        "strategy": "Define the prism operator on each oriented simplex by alternating the f- and g-images in the standard order. Its boundary is the difference of the two induced chain maps plus the prism of the boundary, so the induced maps are chain homotopic and hence agree on homology.",
+        "deps": [
+          "def-contiguous-simplicial-maps",
+          "def-induced-simplicial-chain-map",
+          "lem-induced-simplicial-chain-maps-commute-with-boundaries",
+          "def-chain-homotopy",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology"
+        ]
+      },
+      {
+        "id": "lem-the-augmented-simplicial-chain-complex-of-a-simplex-is-contractible",
+        "kind": "lemma",
+        "title": "The augmented simplicial chain complex of a simplex is contractible",
+        "strategy": "Choose one vertex of the simplex and cone every oriented face to it. A direct boundary calculation shows that this degree-raising operator satisfies the contraction identity.",
+        "deps": [
+          "def-augmentation-and-reduced-simplicial-homology",
+          "def-contractible-complex"
+        ]
+      },
+      {
+        "id": "cor-the-simplex-has-zero-reduced-simplicial-homology",
+        "kind": "corollary",
+        "title": "A simplex has zero reduced simplicial homology",
+        "strategy": "The previous lemma gives a contracting homotopy for the augmented simplicial chain complex. Published homological algebra turns contractibility into acyclicity, which is exactly the vanishing of reduced homology.",
+        "deps": [
+          "lem-the-augmented-simplicial-chain-complex-of-a-simplex-is-contractible",
+          "cor-a-contractible-complex-is-acyclic",
+          "def-augmentation-and-reduced-simplicial-homology"
+        ]
+      },
+      {
+        "id": "prop-zero-th-simplicial-homology-is-free-on-connected-components",
+        "kind": "proposition",
+        "title": "Zero-th simplicial homology is free on connected components",
+        "strategy": "Every 0-cycle is an integer combination of vertices. Boundaries of edges identify adjacent vertices, so quotienting by boundaries collapses exactly the vertices joined by edge paths, and every point of the realization lies in the same component as some vertex of its simplex.",
+        "deps": [
+          "def-simplicial-cycles-boundaries-and-homology",
+          "def-connected-component-and-quasicomponent"
+        ]
+      },
+      {
+        "id": "prop-simplicial-homology-of-a-disjoint-union-is-the-direct-sum",
+        "kind": "proposition",
+        "title": "Simplicial homology of a disjoint union is the direct sum",
+        "strategy": "A simplex of a disjoint union lies in exactly one component, so each chain group splits componentwise. The boundary preserves this split, hence cycles, boundaries, and the quotient homology groups split componentwise as well.",
+        "deps": [
+          "def-simplicial-cycles-boundaries-and-homology",
+          "def-simplicial-chain-groups-and-boundary"
+        ]
+      },
+      {
+        "id": "def-simplicial-euler-characteristic",
+        "kind": "definition",
+        "title": "The simplicial Euler characteristic",
+        "deps": [
+          "def-locally-finite-and-finite-dimensional-simplicial-complex"
+        ]
+      },
+      {
+        "id": "thm-euler-poincare-formula-for-a-finite-simplicial-complex",
+        "kind": "theorem",
+        "title": "The Euler-Poincare formula for a finite simplicial complex",
+        "strategy": "For a finite simplicial complex, the simplicial chain groups form a finite chain complex of finite-rank free abelian groups whose ranks are exactly the simplex counts. Apply the published Euler-Poincare theorem to this chain complex and rewrite the two alternating sums.",
+        "deps": [
+          "def-simplicial-euler-characteristic",
+          "def-simplicial-cycles-boundaries-and-homology",
+          "thm-euler-poincare-formula-for-finite-free-complexes"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 366.002,
+    "id": "simplicial-complexes-and-simplicial-homology-examples",
+    "kind": "B",
+    "category": "algebraic-topology",
+    "title": "Simplicial Complexes and Simplicial Homology — Examples",
+    "companion": "simplicial-complexes-and-simplicial-homology",
+    "requires": [
+      "simplicial-complexes-and-simplicial-homology"
+    ],
+    "items": [
+      {
+        "id": "ex-simplicial-homology-of-a-point-and-an-edge",
+        "kind": "example",
+        "title": "The simplicial homology of a point and an edge",
+        "strategy": "Write the augmented chain complexes for the one-vertex complex and the one-edge complex explicitly, compute their kernels and images degree by degree, and read off the unreduced and reduced homology groups.",
+        "deps": [
+          "def-simplicial-chain-groups-and-boundary",
+          "def-augmentation-and-reduced-simplicial-homology"
+        ]
+      },
+      {
+        "id": "ex-boundary-of-a-triangle-has-first-homology-z",
+        "kind": "example",
+        "title": "The boundary of a triangle has first homology Z",
+        "strategy": "Orient the three edges cyclically, compute the boundary matrix from edges to vertices, and check that the sum of all three oriented edges spans the cycle group while the 2-chain group is zero.",
+        "deps": [
+          "def-simplicial-cycles-boundaries-and-homology",
+          "def-orientation-of-a-simplex"
+        ]
+      },
+      {
+        "id": "ex-simplicial-homology-of-the-tetrahedron-boundary",
+        "kind": "example",
+        "title": "The simplicial homology of the tetrahedron boundary",
+        "strategy": "Compute connectedness and the obvious top-dimensional cycle directly. Then use the Euler characteristic count together with the vanishing of higher chain groups to isolate the remaining homology ranks.",
+        "deps": [
+          "prop-zero-th-simplicial-homology-is-free-on-connected-components",
+          "thm-euler-poincare-formula-for-a-finite-simplicial-complex",
+          "def-simplicial-cycles-boundaries-and-homology"
+        ]
+      },
+      {
+        "id": "ex-a-contractible-simplicial-cone",
+        "kind": "example",
+        "title": "A contractible simplicial cone",
+        "strategy": "Adjoin a cone vertex to a finite simplicial complex and send each oriented simplex to the cone on that simplex. The same signed boundary computation as for a simplex gives a chain contraction of the augmented cone complex.",
+        "deps": [
+          "def-augmentation-and-reduced-simplicial-homology",
+          "def-chain-homotopy",
+          "cor-a-contractible-complex-is-acyclic"
+        ]
+      },
+      {
+        "id": "ex-two-contiguous-maps-of-a-subdivided-interval",
+        "kind": "example",
+        "title": "Two contiguous maps of a subdivided interval",
+        "strategy": "Take the interval with one subdivision vertex, define two vertex maps into a triangle boundary, and check simplex by simplex that each union of images is again a simplex. Then read off the homotopy and homology consequences from the A-page theorems.",
+        "deps": [
+          "def-contiguous-simplicial-maps",
+          "lem-contiguous-simplicial-maps-have-homotopic-realizations",
+          "thm-contiguous-simplicial-maps-induce-the-same-map-on-simplicial-homology"
+        ]
+      },
+      {
+        "id": "ex-a-finite-complex-with-euler-characteristic-zero",
+        "kind": "example",
+        "title": "A finite complex with Euler characteristic zero",
+        "strategy": "Triangulate a circle as a polygon, count its vertices and edges, and then compare the alternating simplex count with the homology ranks already computed for the same complex.",
+        "deps": [
+          "def-simplicial-euler-characteristic",
+          "thm-euler-poincare-formula-for-a-finite-simplicial-complex",
+          "ex-boundary-of-a-triangle-has-first-homology-z"
+        ]
+      },
+      {
+        "id": "cex-a-vertex-map-need-not-be-simplicial",
+        "kind": "counterexample",
+        "title": "A vertex map need not be simplicial",
+        "strategy": "Map the endpoints of one edge to two vertices that do not span an edge in the target complex. The vertex function exists, but it does not send that domain simplex to a target simplex.",
+        "deps": [
+          "def-simplicial-map-and-its-geometric-realization"
+        ]
+      },
+      {
+        "id": "cex-finite-dimensional-does-not-imply-finite-or-locally-finite",
+        "kind": "counterexample",
+        "title": "Finite dimensional does not imply finite or locally finite",
+        "strategy": "Take one central vertex joined by edges to countably many leaf vertices. The complex is one-dimensional, but it has infinitely many simplices and the central vertex lies in infinitely many edges.",
+        "deps": [
+          "def-locally-finite-and-finite-dimensional-simplicial-complex"
+        ]
+      },
+      {
+        "id": "ex-a-delta-complex-structure-on-the-torus",
+        "kind": "example",
+        "title": "A delta-complex structure on the torus",
+        "strategy": "Cut the square model of the torus along one diagonal and keep the edge identifications. This gives two triangles, three edges, and one vertex, showing how delta-complexes compress the same topology more efficiently than abstract simplicial complexes.",
+        "deps": []
+      }
+    ]
+  }
+]

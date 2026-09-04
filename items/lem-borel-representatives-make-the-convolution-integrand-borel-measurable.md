@@ -24,9 +24,7 @@ sources:
 Let $\tilde f,\tilde g : \mathbb{R}^n \to \mathbb{C}$ be Borel measurable
 functions. Then
 
-$$
-H(x,y) := \tilde f(x-y)\tilde g(y)
-$$
+$$ H(x,y) := \tilde f(x-y)\tilde g(y) $$
 
 is Borel measurable on $\mathbb{R}^{2n}$. In particular, for each fixed
 $x \in \mathbb{R}^n$, the section $y \mapsto H(x,y)$ is measurable.
@@ -61,8 +59,6 @@ $(x,y) \mapsto \tilde f(x-y)$ and $(x,y) \mapsto \tilde g(y)$ are Borel
 measurable. [L2, L3, given, construct]
 
 2.1 Multiplication on $\mathbb{C}$ is continuous, so [L3] makes [L3, L4, step 1.1]
-$$
-H(x,y)=\tilde f(x-y)\tilde g(y)
-$$
+$$ H(x,y)=\tilde f(x-y)\tilde g(y) $$
 Borel measurable on $\mathbb{R}^{2n}$. Then [L4] gives measurability of each
 section $y \mapsto H(x,y)$. [L3, L4, step 1.1] ∎

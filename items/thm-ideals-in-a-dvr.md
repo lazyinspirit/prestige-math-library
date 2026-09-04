@@ -34,9 +34,7 @@ pipeline_run: null
 Let $V$ be a discrete valuation ring with maximal ideal $\mathfrak m=(\pi)$,
 where $\pi$ is a uniformiser. Then every nonzero ideal $I\subseteq V$ is of the
 form
-$$
-I=(\pi^n)=\mathfrak m^n
-$$
+$$ I=(\pi^n)=\mathfrak m^n $$
 for a unique integer $n\ge0$.
 
 ## Facts & Assumptions

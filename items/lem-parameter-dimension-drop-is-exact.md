@@ -31,9 +31,7 @@ pipeline_run: null
 ## Statement
 
 Let $(R,\mathfrak m)$ be a Noetherian local ring of positive dimension $d$, and let $(x,x_2,\ldots,x_d)$ be a system of parameters. Then
-$$
-\dim(R/(x))=d-1.
-$$
+$$ \dim(R/(x))=d-1. $$
 
 ## Facts & Assumptions
 

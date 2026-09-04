@@ -33,9 +33,7 @@ pipeline_run: null
 Let $R$ be a commutative ring.
 
 The **nilradical** of $R$ is the radical of the zero ideal,
-$$
-\operatorname{Nil}(R)=\sqrt{(0)}.
-$$
+$$ \operatorname{Nil}(R)=\sqrt{(0)}. $$
 Thus $x\in\operatorname{Nil}(R)$ exactly when $x^n=0$ for some integer $n\ge 1$.
 
 The ring $R$ is **reduced** when $\operatorname{Nil}(R)=(0)$, equivalently when the only nilpotent element of $R$ is $0$.

@@ -31,9 +31,7 @@ pipeline_run: null
 Let $D$ be a finite digraph with no isolated vertices. Then $D$ has a directed
 Euler circuit if and only if its underlying undirected graph is connected and
 
-$$
-\deg_D^+(v)=\deg_D^-(v)
-$$
+$$ \deg_D^+(v)=\deg_D^-(v) $$
 
 for every vertex $v$.
 

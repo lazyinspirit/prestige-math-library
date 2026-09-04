@@ -29,9 +29,7 @@ sources:
 
 Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated
 left $R$-module. Then
-$$
-\operatorname{Supp}_R(M)=\bigcup_{\mathfrak p \in \operatorname{Ass}_R(M)}V(\mathfrak p).
-$$
+$$ \operatorname{Supp}_R(M)=\bigcup_{\mathfrak p \in \operatorname{Ass}_R(M)}V(\mathfrak p). $$
 
 ## Facts & Assumptions
 

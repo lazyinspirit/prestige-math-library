@@ -28,9 +28,7 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Consider the $\mathbb Z$-module homomorphism
-$$
-\phi:\mathbb Z/6\mathbb Z \longrightarrow \mathbb Z/2\mathbb Z \oplus \mathbb Z/3\mathbb Z, \qquad [a]_6 \longmapsto ([a]_2,[a]_3).
-$$
+$$ \phi:\mathbb Z/6\mathbb Z \longrightarrow \mathbb Z/2\mathbb Z \oplus \mathbb Z/3\mathbb Z, \qquad [a]_6 \longmapsto ([a]_2,[a]_3). $$
 This map is an isomorphism because every prime localisation of $\phi$ is an isomorphism.
 
 ## Facts & Assumptions

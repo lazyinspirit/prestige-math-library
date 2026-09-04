@@ -34,13 +34,9 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Let $f:A\to B$ be an integral ring map, let
-$$
-\mathfrak p_0\subseteq\mathfrak p_1\subseteq\cdots\subseteq\mathfrak p_n
-$$
+$$ \mathfrak p_0\subseteq\mathfrak p_1\subseteq\cdots\subseteq\mathfrak p_n $$
 be a finite chain of prime ideals in $A$, and let $\mathfrak q_0$ be a prime ideal of $B$ with $f^{-1}(\mathfrak q_0)=\mathfrak p_0$. Then there exist prime ideals
-$$
-\mathfrak q_0\subseteq\mathfrak q_1\subseteq\cdots\subseteq\mathfrak q_n
-$$
+$$ \mathfrak q_0\subseteq\mathfrak q_1\subseteq\cdots\subseteq\mathfrak q_n $$
 of $B$ such that $f^{-1}(\mathfrak q_i)=\mathfrak p_i$ for every $i$.
 
 ## Facts & Assumptions

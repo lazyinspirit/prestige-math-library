@@ -34,9 +34,7 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Let $R$ be a commutative ring and let $I,J\trianglelefteq R$ be ideals. Then
-$$
-V(I)=V(J)\quad\Longleftrightarrow\quad \sqrt{I}=\sqrt{J}.
-$$
+$$ V(I)=V(J)\quad\Longleftrightarrow\quad \sqrt{I}=\sqrt{J}. $$
 
 ## Facts & Assumptions
 

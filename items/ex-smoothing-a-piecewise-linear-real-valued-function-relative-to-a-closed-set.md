@@ -31,9 +31,7 @@ sources:
 ## Example
 
 Let
-$$
-f(x):=\max(x,0)
-$$
+$$ f(x):=\max(x,0) $$
 on $\mathbb R$, and let $A:=(-\infty,-1]$. The function is piecewise linear and
 already smooth on a neighbourhood of the closed set $A$.
 

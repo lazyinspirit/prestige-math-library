@@ -36,9 +36,7 @@ pipeline_run: null
 
 For every real $x\ge2$,
 
-$$
-\sum_{p\le x}\frac{\log p}{p}=\log x+O(1).
-$$
+$$ \sum_{p\le x}\frac{\log p}{p}=\log x+O(1). $$
 
 ## Facts & Assumptions
 

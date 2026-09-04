@@ -35,17 +35,13 @@ $R^{\operatorname{sym}}$ be a symmetrised relator set.
 The set $R^{\operatorname{sym}}$ satisfies **$C'(\lambda)$** when every piece
 $p$ occurring in a relator $r\in R^{\operatorname{sym}}$ satisfies
 
-$$
-|p|<\lambda |r|.
-$$
+$$ |p|<\lambda |r|. $$
 
 It satisfies **$C(\lambda)$** when, whenever a relator $r\in
 R^{\operatorname{sym}}$ is written as a concatenation of pieces
 $r=p_1\cdots p_n$, one has
 
-$$
-n>\frac1\lambda.
-$$
+$$ n>\frac1\lambda. $$
 
 Here piece means the notion fixed in
 [[def-piece-in-a-symmetrised-presentation]]. The strict inequality in

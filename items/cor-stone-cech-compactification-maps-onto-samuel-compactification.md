@@ -29,9 +29,7 @@ pipeline_run: null
 ## Statement
 
 **Assume dependent choice and the ultrafilter lemma.** If $X$ is a separated uniform space, then its evaluation-closure Stone--Cech compactification $j:X\to\beta X$ admits a continuous surjection
-$$
-q:\beta X\longrightarrow S(X)
-$$
+$$ q:\beta X\longrightarrow S(X) $$
 such that $qj=\eta$, where $\eta:X\to S(X)$ is the Samuel compactification map.
 
 ## Facts & Assumptions

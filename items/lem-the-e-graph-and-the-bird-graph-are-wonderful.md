@@ -52,9 +52,7 @@ vertices
 ([[def-bird-graph-and-co-bird-graph]], [[def-h-plus-and-h-minus-for-two-special-vertices]]).
 
 [A1] Let $H$ be the graph on vertices $v_1,\dots,v_6$ with edge set
-$$
-\{v_1v_2,v_1v_3,v_1v_5,v_1v_6,v_2v_3,v_2v_4,v_2v_5,v_3v_5,v_4v_5,v_4v_6\}.
-$$
+$$ \{v_1v_2,v_1v_3,v_1v_5,v_1v_6,v_2v_3,v_2v_4,v_2v_5,v_3v_5,v_4v_5,v_4v_6\}. $$
 Its distinguished vertices are $v_1$ and $v_2$.
 
 ## Proof

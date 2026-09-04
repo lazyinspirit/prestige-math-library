@@ -32,16 +32,12 @@ pipeline_run: null
 
 Let $V\subseteq K$ be a valuation ring ([[def-valuation-ring]]). Its **value
 group** is the quotient abelian group
-$$
-K^\times/V^\times,
-$$
+$$ K^\times/V^\times, $$
 written additively, where the group law is induced by multiplication in
 $K^\times$.
 
 For $x\in K^\times$, write $\overline x$ for its class in $K^\times/V^\times$.
 The intended order is
-$$
-\overline x\le\overline y \Longleftrightarrow y/x\in V.
-$$
+$$ \overline x\le\overline y \Longleftrightarrow y/x\in V. $$
 The next theorem checks that this order is well defined, total, and
 translation-invariant.

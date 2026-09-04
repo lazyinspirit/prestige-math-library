@@ -30,13 +30,9 @@ pipeline_run: null
 ## Example
 
 Let $p$ be a prime integer. The inverse system
-$$
-\cdots \to \mathbb Z/p^3\mathbb Z \to \mathbb Z/p^2\mathbb Z \to \mathbb Z/p\mathbb Z
-$$
+$$ \cdots \to \mathbb Z/p^3\mathbb Z \to \mathbb Z/p^2\mathbb Z \to \mathbb Z/p\mathbb Z $$
 with the natural reduction maps has inverse limit
-$$
-\mathbb Z_p := \varprojlim_n \mathbb Z/p^n\mathbb Z.
-$$
+$$ \mathbb Z_p := \varprojlim_n \mathbb Z/p^n\mathbb Z. $$
 This module is canonically the $(p)$-adic completion of $\mathbb Z$.
 
 ## Facts & Assumptions
@@ -44,9 +40,7 @@ This module is canonically the $(p)$-adic completion of $\mathbb Z$.
 **Given:** A prime integer $p$.
 
 [L2] The $(p)$-adic completion of $\mathbb Z$ is
-$$
-\widehat{\mathbb Z}^{\,(p)}=\varprojlim_n \mathbb Z/p^n\mathbb Z
-$$
+$$ \widehat{\mathbb Z}^{\,(p)}=\varprojlim_n \mathbb Z/p^n\mathbb Z $$
 with completion map $m \mapsto (m \bmod p^n)_n$
 ([[def-adic-completion-of-a-module]]).
 

@@ -28,9 +28,7 @@ pipeline_run: null
 Let $\mathbf 1$ be the constant-one function. The inverse recursion from
 [[thm-dirichlet-convolution-invertibility-criterion]] gives
 
-$$
-g(1)=1,\quad g(2)=-1,\quad g(3)=-1,\quad g(4)=0,\quad g(5)=-1,\quad g(6)=1.
-$$
+$$ g(1)=1,\quad g(2)=-1,\quad g(3)=-1,\quad g(4)=0,\quad g(5)=-1,\quad g(6)=1. $$
 
 ## Facts & Assumptions
 

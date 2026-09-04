@@ -28,9 +28,7 @@ Assume Dependent Choice.
 Let $R$ be a Noetherian commutative ring and let $I \trianglelefteq R$ be a
 radical ideal. Then there exist finitely many prime ideals
 $\mathfrak p_1,\dots,\mathfrak p_m$ minimal over $I$ such that
-$$
-I=\mathfrak p_1\cap\cdots\cap \mathfrak p_m.
-$$
+$$ I=\mathfrak p_1\cap\cdots\cap \mathfrak p_m. $$
 When $I=R$, this is the empty intersection.
 
 ## Facts & Assumptions

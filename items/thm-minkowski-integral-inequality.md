@@ -26,14 +26,10 @@ sources:
 Let $(X,\mu)$ and $(Y,\nu)$ be sigma-finite measure spaces, let
 $1 \le p < \infty$, and let $F : X \times Y \to \mathbb{C}$ be measurable with
 
-$$
-\int_Y \|F(\cdot,y)\|_{L^p(X)}\,d\nu(y) < \infty.
-$$
+$$ \int_Y \|F(\cdot,y)\|_{L^p(X)}\,d\nu(y) < \infty. $$
 
 Then the function
-$$
-H(x) := \int_Y |F(x,y)|\,d\nu(y)
-$$
+$$ H(x) := \int_Y |F(x,y)|\,d\nu(y) $$
 belongs to $L^p(X)$ and
 
 $$ \|H\|_{L^p(X)} \le \int_Y \|F(\cdot,y)\|_{L^p(X)}\,d\nu(y). $$

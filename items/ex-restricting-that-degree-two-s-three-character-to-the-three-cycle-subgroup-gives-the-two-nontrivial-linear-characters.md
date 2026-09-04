@@ -26,9 +26,7 @@ verification:
 Let $\chi_2$ be the degree-two irreducible character of $S_3$ from the previous
 example. Then
 
-$$
-\operatorname{Res}_{A_3}^{S_3}\chi_2=\theta+\overline{\theta},
-$$
+$$ \operatorname{Res}_{A_3}^{S_3}\chi_2=\theta+\overline{\theta}, $$
 
 the sum of the two nontrivial linear characters of $A_3$.
 

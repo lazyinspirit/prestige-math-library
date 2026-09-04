@@ -29,9 +29,7 @@ pipeline_run: null
 By [[thm-lagrange-existence-for-pell-equation]], the set of positive nontrivial
 solutions of Pell's equation is nonempty. The **fundamental Pell solution** is
 the positive solution
-$$
-(x_1,y_1)\in\mathbb Z_{>0}^2,\qquad x_1^2-Dy_1^2=1,
-$$
+$$ (x_1,y_1)\in\mathbb Z_{>0}^2,\qquad x_1^2-Dy_1^2=1, $$
 whose first coordinate $x_1$ is least among all positive solutions.
 
 Write

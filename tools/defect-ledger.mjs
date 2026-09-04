@@ -107,6 +107,9 @@ const ENUMS = {
     'false-or-overstrong-title', 'missing-hypothesis', 'missing-choice-scope',
     'invalid-witness', 'false-boundary-disposition', 'arithmetic-error',
     'undefined-notation', 'ill-typed-claim', 'ill-typed-construction',
+    // Current Step-6 rows distinguish frontmatter schema failures from later
+    // contract drift, because the carrier defect is in the item metadata.
+    'frontmatter-schema',
     // Legacy Step-6 spellings still present in current ledgers.
     'false-claim', 'ill-formed', 'false-computation', 'contract-mismatch',
     'overstrong-title-or-statement', 'invalid-refutation', 'missing-map',
@@ -174,6 +177,11 @@ const FRONTIER20_LEGACY_LOCATION_RE = [
   /^proof-step \d+(?:\.\d+)*$/,
   /^page prose paragraph \d+$/,
 ];
+const FRONTIER29_VALIDATE_ONLY_LOCATION_EXACT = new Set([
+  // One current frontier-29 refuter-backed row uses the human-spaced form.
+  // Keep it validate-only so new appends stay on canonical `page-prose`.
+  'page prose',
+]);
 const FRONTIER20_LEGACY_OTHER_NOTE_IDS = new Set([
   'f20-b-t3-01', 'f20-b-t3-02', 'f20-b-t3-03', 'f20-b-t3-05', 'f20-b-t3-06',
   'f20-b-t3-08', 'f20-b-t3-09', 'f20-b-t3-10', 'f20-b-t9-01', 'f20-b-t9-02',
@@ -199,10 +207,16 @@ function loadLedger(path = ledgerPath) {
   });
 }
 
-function locationAllowed(row, { allowFrontier20Legacy = true } = {}) {
+function locationAllowed(row, {
+  allowFrontier20Legacy = true,
+  allowFrontier29ValidateOnly = true,
+} = {}) {
   if (ENUMS.location.includes(row.location)) return true;
   if (CURRENT_STEP6_LOCATION_EXACT.has(row.location)) return true;
   if (CURRENT_STEP6_LOCATION_RE.some((re) => re.test(row.location))) return true;
+  if (allowFrontier29ValidateOnly
+    && row.run === 'frontier-29'
+    && FRONTIER29_VALIDATE_ONLY_LOCATION_EXACT.has(row.location)) return true;
   if (!allowFrontier20Legacy || row.run !== 'frontier-20') return false;
   return FRONTIER20_LEGACY_LOCATION_EXACT.has(row.location)
     || FRONTIER20_LEGACY_LOCATION_RE.some((re) => re.test(row.location));
@@ -337,7 +351,10 @@ if (cmd === 'append') {
     const existing = loadLedger();
     const ids = new Set(existing.map((r) => r.defect_id));
     const errs = [];
-    for (const row of rows) errs.push(...validateRow(row, ids, { allowFrontier20Legacy: false }));
+    for (const row of rows) errs.push(...validateRow(row, ids, {
+      allowFrontier20Legacy: false,
+      allowFrontier29ValidateOnly: false,
+    }));
     if (errs.length) {
       console.error(`defect-ledger: ${errs.length} invalid row(s); nothing appended`);
       for (const e of errs) console.error(`  ${e}`);

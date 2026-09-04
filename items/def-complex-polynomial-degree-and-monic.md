@@ -25,9 +25,7 @@ pipeline_run: null
 ## Definition
 
 A **formal complex polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\ldots,a_n)$ with $a_n\ne0$; we write the latter as $p(Z)=\sum_{k=0}^{n}a_kZ^k$. The list, rather than the function it induces, is the polynomial object. Define evaluation at $z\in\mathbb C$ by
-$$
-0(z):=0,\qquad p(z):=\sum_{k<n+1}^{\mathbb C}a_kz^k\quad\text{for }p=(a_0,\ldots,a_n)\ne0.
-$$
+$$ 0(z):=0,\qquad p(z):=\sum_{k<n+1}^{\mathbb C}a_kz^k\quad\text{for }p=(a_0,\ldots,a_n)\ne0. $$
 where the latter is the initial-segment complex sum defined in
 [[def-complex-series-power-series-and-absolute-convergence]]. Thus evaluation is
 defined for the zero polynomial as well as every nonzero formal polynomial.

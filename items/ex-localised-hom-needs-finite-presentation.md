@@ -24,13 +24,9 @@ pipeline_run: null
 ## Example
 
 Fix a prime number $p$, let $S=\{p^n:n\in\mathbb N\}$, let
-$$
-M=\bigoplus_{n\ge0}\mathbb Z e_n,
-$$
+$$ M=\bigoplus_{n\ge0}\mathbb Z e_n, $$
 and let $N=\mathbb Z$. The source $M$ is not finitely presented, and the natural map
-$$
-S^{-1}\!\operatorname{Hom}_{\mathbb Z}(M,N)\longrightarrow\operatorname{Hom}_{\mathbb Z[1/p]}(S^{-1}M,S^{-1}N)
-$$
+$$ S^{-1}\!\operatorname{Hom}_{\mathbb Z}(M,N)\longrightarrow\operatorname{Hom}_{\mathbb Z[1/p]}(S^{-1}M,S^{-1}N) $$
 is not surjective.
 
 ## Facts & Assumptions

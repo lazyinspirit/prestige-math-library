@@ -26,13 +26,9 @@ pipeline_run: null
 ## Example
 
 Let $I=(x,y)\subseteq k[x,y]$ and let $f=x+y$. Then the auxiliary ideal
-$$
-I+(1-u(x+y))\subseteq k[x,y,u]
-$$
+$$ I+(1-u(x+y))\subseteq k[x,y,u] $$
 contains the explicit identity
-$$
-1=ux+uy+(1-u(x+y)),
-$$
+$$ 1=ux+uy+(1-u(x+y)), $$
 and clearing denominators after $u=1/(x+y)$ shows $x+y\in I$.
 
 ## Facts & Assumptions

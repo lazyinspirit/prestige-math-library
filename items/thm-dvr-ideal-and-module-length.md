@@ -29,13 +29,9 @@ pipeline_run: null
 
 Let $V$ be a discrete valuation ring with uniformiser $\pi$. Then for every
 integer $n\ge0$,
-$$
-\ell_V(V/(\pi^n))=n.
-$$
+$$ \ell_V(V/(\pi^n))=n. $$
 More generally, if $x\in V$ is nonzero and $x=u\pi^n$ with $u$ a unit, then
-$$
-\ell_V(V/(x))=n.
-$$
+$$ \ell_V(V/(x))=n. $$
 
 ## Facts & Assumptions
 

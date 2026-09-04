@@ -31,13 +31,9 @@ sources:
 For the unit sphere $S^n\subseteq\mathbb R^{n+1}$, the outward unit normal at
 $p$ is again $p$. Hence the normal bundle is the trivial line bundle
 $S^n\times\mathbb R$, and the normal addition map is
-$$
-E(p,t)=(1+t)p.
-$$
+$$ E(p,t)=(1+t)p. $$
 For $|t|<1/2$, its image is the spherical shell
-$$
-\{x\in\mathbb R^{n+1}:1/2<\|x\|<3/2\}.
-$$
+$$ \{x\in\mathbb R^{n+1}:1/2<\|x\|<3/2\}. $$
 
 ## Facts & Assumptions
 

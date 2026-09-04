@@ -27,9 +27,7 @@ sources:
 
 Consider the one-relator presentation
 
-$$
-G=\langle x_1,x_2,x_3,x_4,x_5,x_6,x_7 \mid x_1x_2x_3x_4x_5x_6x_7 \rangle.
-$$
+$$ G=\langle x_1,x_2,x_3,x_4,x_5,x_6,x_7 \mid x_1x_2x_3x_4x_5x_6x_7 \rangle. $$
 
 This is a finite $C'(1/6)$ presentation and hence defines a hyperbolic group.
 

@@ -27,9 +27,7 @@ sources:
 Let $h \in \mathbb{R}^n$ and let $f : \mathbb{R}^n \to \mathbb{C}$ be a function.
 The **translate** of $f$ by $h$ is the function $\tau_h f$ defined by
 
-$$
-(\tau_h f)(x) := f(x-h)\qquad(x \in \mathbb{R}^n).
-$$
+$$ (\tau_h f)(x) := f(x-h)\qquad(x \in \mathbb{R}^n). $$
 
 This fixes the sign convention used throughout the page: translating by $h$
 shifts the graph of $f$ in the positive $h$-direction.

@@ -31,14 +31,10 @@ sources:
 
 Let $S\subseteq\mathbb R^m$ be an embedded smooth submanifold. Using the
 Euclidean inner product, define its **orthogonal normal bundle** by
-$$
-N^\perp S:=\{(p,v)\in S\times\mathbb R^m:v\perp T_pS\}.
-$$
+$$ N^\perp S:=\{(p,v)\in S\times\mathbb R^m:v\perp T_pS\}. $$
 Local slice charts and orthogonal projection onto $T_pS$ give this set its
 standard smooth rank-$(m-\dim S)$ vector-bundle structure. The **normal
 addition map** is
-$$
-E:N^\perp S\to\mathbb R^m,\qquad E(p,v):=p+v.
-$$
+$$ E:N^\perp S\to\mathbb R^m,\qquad E(p,v):=p+v. $$
 It restricts on the zero section to the inclusion $S\hookrightarrow\mathbb R^m$
 and is the basic model map used to build Euclidean tubular neighbourhoods.

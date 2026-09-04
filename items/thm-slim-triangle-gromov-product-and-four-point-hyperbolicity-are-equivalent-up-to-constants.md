@@ -34,16 +34,12 @@ up to changing the constant:
 some $\delta \ge 0$.
 2. For every basepoint $o \in X$ there exists $\delta'_o \ge 0$ such that one has
 
-$$
-(x,z)_o \ge \min\{(x,y)_o,(y,z)_o\} - \delta'_o
-$$
+$$ (x,z)_o \ge \min\{(x,y)_o,(y,z)_o\} - \delta'_o $$
 
 for all $x,y,z \in X$.
 3. For some $\delta'' \ge 0$, one has
 
-$$
-d(x,z)+d(y,w) \le \max\{d(x,y)+d(z,w),\, d(x,w)+d(y,z)\} + \delta''
-$$
+$$ d(x,z)+d(y,w) \le \max\{d(x,y)+d(z,w),\, d(x,w)+d(y,z)\} + \delta'' $$
 
 for all $x,y,z,w \in X$.
 

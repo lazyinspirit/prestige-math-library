@@ -27,9 +27,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, let $I \trianglelefteq R$ be an ideal, and let $M$ be a finitely generated left $R$-module. If $IM=M$, then there exists $a \in I$ such that
-$$
-(1-a)M=0.
-$$
+$$ (1-a)M=0. $$
 
 ## Facts & Assumptions
 

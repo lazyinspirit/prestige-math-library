@@ -28,9 +28,7 @@ sources:
 
 The graded vector space
 
-$$
-\Omega^*(M):=\bigoplus_{k\ge 0}\Omega^k(M)
-$$
+$$ \Omega^*(M):=\bigoplus_{k\ge 0}\Omega^k(M) $$
 
 with the wedge product is an associative graded-commutative algebra.
 

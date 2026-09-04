@@ -32,6 +32,4 @@ Let $F:M\to N$ be smooth, and let $\omega\in\Omega^k(N)$. The **pullback**
 $F^*\omega$ is the pullback of $\omega$ viewed as an alternating covariant
 $k$-tensor field:
 
-$$
-(F^*\omega)_p(v_1,\ldots,v_k)=\omega_{F(p)}(dF_pv_1,\ldots,dF_pv_k).
-$$
+$$ (F^*\omega)_p(v_1,\ldots,v_k)=\omega_{F(p)}(dF_pv_1,\ldots,dF_pv_k). $$

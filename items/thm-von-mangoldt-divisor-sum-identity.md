@@ -28,16 +28,12 @@ pipeline_run: null
 
 For every positive integer $n$,
 
-$$
-\sum_{\substack{d\mid n\\d>0}} \Lambda(d)=\log n.
-$$
+$$ \sum_{\substack{d\mid n\\d>0}} \Lambda(d)=\log n. $$
 
 Equivalently, if the arithmetic function $\log$ is defined by $n\mapsto\log n$,
 then
 
-$$
-\mathbf 1 * \Lambda=\log.
-$$
+$$ \mathbf 1 * \Lambda=\log. $$
 
 ## Facts & Assumptions
 

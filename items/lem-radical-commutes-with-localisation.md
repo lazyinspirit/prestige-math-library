@@ -28,9 +28,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, let $S\subseteq R$ be a multiplicative subset, and let $I\trianglelefteq R$ be an ideal. Then
-$$
-S^{-1}\!\sqrt{I}=\sqrt{S^{-1}I}
-$$
+$$ S^{-1}\!\sqrt{I}=\sqrt{S^{-1}I} $$
 as ideals of $S^{-1}R$.
 
 ## Facts & Assumptions

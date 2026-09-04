@@ -26,9 +26,7 @@ pipeline_run: null
 ## Statement
 
 If $M$ and $N$ are finitely generated left $R$-modules, then
-$$
-\operatorname{Supp}_R(M \otimes_R N)=\operatorname{Supp}_R(M)\cap\operatorname{Supp}_R(N).
-$$
+$$ \operatorname{Supp}_R(M \otimes_R N)=\operatorname{Supp}_R(M)\cap\operatorname{Supp}_R(N). $$
 
 ## Facts & Assumptions
 

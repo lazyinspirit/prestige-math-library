@@ -30,9 +30,7 @@ sources:
 ## Facts & Assumptions
 
 **Given:** A smooth bump $\beta:\mathbb R\to\mathbb R$ supported in $[-1,1]$ with $\beta(0)=1$, $\beta'(0)=0$, and $0<\beta(t)<1$ for $0<|t|<1$, together with the smooth map
-$$
-f(x):=\sum_{k=1}^\infty \left(1-\frac1k\right)\beta\bigl(2^k(x-k)\bigr).
-$$
+$$ f(x):=\sum_{k=1}^\infty \left(1-\frac1k\right)\beta\bigl(2^k(x-k)\bigr). $$
 
 [L1] A sigma-compact set need not be closed, and regular values can be dense despite the presence of critical values accumulating at them ([[prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact]], [[cor-regular-values-form-a-dense-g-delta-set]]).
 

@@ -28,9 +28,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, let $I\subseteq J\trianglelefteq R$ be ideals, and write $\pi:R\to R/I$ for the quotient map. Then
-$$
-\sqrt{J/I}=\sqrt{J}/I
-$$
+$$ \sqrt{J/I}=\sqrt{J}/I $$
 as ideals of $R/I$. In particular, $J/I$ is radical in $R/I$ if and only if $J$ is radical in $R$.
 
 ## Facts & Assumptions

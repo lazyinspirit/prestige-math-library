@@ -31,8 +31,6 @@ sources:
 Let $\alpha\in\Omega^k(M)$ and $\beta\in\Omega^\ell(M)$. Their **wedge product**
 is the differential form defined pointwise by
 
-$$
-(\alpha\wedge\beta)_p:=\alpha_p\wedge\beta_p\in\operatorname{Alt}^{k+\ell}(T_pM).
-$$
+$$ (\alpha\wedge\beta)_p:=\alpha_p\wedge\beta_p\in\operatorname{Alt}^{k+\ell}(T_pM). $$
 
 The next proposition verifies that this pointwise field is smooth.

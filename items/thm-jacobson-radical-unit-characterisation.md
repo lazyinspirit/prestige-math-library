@@ -33,9 +33,7 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 For a commutative ring $R$ and an element $x \in R$,
-$$
-x \in J(R) \quad \Longleftrightarrow \quad 1-rx \text{ is a unit for every } r \in R.
-$$
+$$ x \in J(R) \quad \Longleftrightarrow \quad 1-rx \text{ is a unit for every } r \in R. $$
 
 ## Facts & Assumptions
 

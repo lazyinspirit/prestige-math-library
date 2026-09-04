@@ -36,20 +36,12 @@ $$\gamma<\infty,\qquad \gamma+\infty=\infty+\gamma=\infty,\qquad \infty+\infty=\
 for every $\gamma\in\Gamma$.
 
 A **valuation on $K$ with value group in $\Gamma$** is a map
-$$
-v:K\to\Gamma\cup\{\infty\}
-$$
+$$ v:K\to\Gamma\cup\{\infty\} $$
 such that for all $x,y\in K$,
-$$
-v(x)=\infty \Longleftrightarrow x=0,
-$$
-$$
-v(xy)=v(x)+v(y),
-$$
+$$ v(x)=\infty \Longleftrightarrow x=0, $$
+$$ v(xy)=v(x)+v(y), $$
 and
-$$
-v(x+y)\ge\min\{v(x),v(y)\}.
-$$
+$$ v(x+y)\ge\min\{v(x),v(y)\}. $$
 
 When $x\ne 0$, the value $v(x)$ lies in $\Gamma$. The displayed laws imply
 $v(1)=0$ and $v(x^{-1})=-v(x)$ for $x\in K^\times$.

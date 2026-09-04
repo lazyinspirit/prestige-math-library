@@ -28,9 +28,7 @@ pipeline_run: null
 ## Statement
 
 If $m/s = m'/s'$ and $n/t = n'/t'$ in $S^{-1}M$, then
-$$
-\frac{tm+sn}{st}=\frac{t'm'+s'n'}{s't'}.
-$$
+$$ \frac{tm+sn}{st}=\frac{t'm'+s'n'}{s't'}. $$
 So the addition formula of [[def-localisation-of-a-module]] is independent of the chosen representatives.
 
 ## Facts & Assumptions

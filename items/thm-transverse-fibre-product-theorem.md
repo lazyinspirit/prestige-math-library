@@ -29,9 +29,7 @@ sources:
 
 Let $F:M\to N$ and $G:P\to N$ be smooth and transverse. Then the fibre product
 
-$$
-M\times_N P:=\{(p,q)\in M\times P:F(p)=G(q)\}
-$$
+$$ M\times_N P:=\{(p,q)\in M\times P:F(p)=G(q)\} $$
 
 is an embedded submanifold of $M\times P$.
 

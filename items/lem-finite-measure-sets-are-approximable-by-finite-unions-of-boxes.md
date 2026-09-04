@@ -29,9 +29,7 @@ Let $E \subseteq \mathbb{R}^n$ be Lebesgue measurable with
 $\lambda_n(E) < \infty$. For every $\varepsilon > 0$ there is a finite union of
 boxes $B$ such that
 
-$$
-\lambda_n(E \triangle B) < \varepsilon.
-$$
+$$ \lambda_n(E \triangle B) < \varepsilon. $$
 
 ## Facts & Assumptions
 

@@ -32,13 +32,9 @@ are equivalent:
 1. $M$ is faithfully flat.
 2. For every nonzero $R$-module $N$, one has $N\otimes_R M\neq0$.
 3. For every prime ideal $\mathfrak p\subset R$,
-   $$
-   \kappa(\mathfrak p)\otimes_R M\neq0.
-   $$
+   $$    \kappa(\mathfrak p)\otimes_R M\neq0.    $$
 4. For every maximal ideal $\mathfrak m\subset R$,
-   $$
-   R/\mathfrak m\otimes_R M=M/\mathfrak m M\neq0.
-   $$
+   $$    R/\mathfrak m\otimes_R M=M/\mathfrak m M\neq0.    $$
 
 ## Facts & Assumptions
 

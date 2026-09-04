@@ -40,9 +40,7 @@ The space $L^\infty([0,1])$ is not separable.
 
 1.1 For each $t \in [0,1]$, let $u_t := \mathbf{1}_{[0,t]}$. If $s < t$, then [L2, given, algebra]
 $u_s$ and $u_t$ differ by $1$ on $(s,t]$, a set of positive measure, so
-$$
-\|u_t-u_s\|_\infty = 1
-$$
+$$ \|u_t-u_s\|_\infty = 1 $$
 by [L2]. Thus the family $\{u_t : t \in [0,1]\}$ is uncountable and
 $1$-separated. [L2, given, algebra]
 

@@ -1,0 +1,3145 @@
+{
+  "version": 1,
+  "level": "frontier-29",
+  "note": "Step-5 authoring contract for frontier-29 batch 18 on Wednesday, September 2, 2026 (AEST).",
+  "scope": [
+    "lem-many-one-reducibility-is-a-preorder",
+    "thm-many-one-reductions-transfer-decidability-and-recognizability",
+    "thm-machine-acceptance-is-ce-complete",
+    "lem-many-one-implies-turing-reduction",
+    "prop-the-converse-fails",
+    "lem-rice-witness-machine-construction",
+    "thm-rices-theorem",
+    "cor-standard-semantic-machine-properties-are-undecidable",
+    "thm-rice-shapiro-positive-information-direction",
+    "prop-syntactic-properties-lie-outside-rices-theorem",
+    "fs-reductions-may-reverse-yes-and-no",
+    "fs-rices-theorem-applies-to-state-count",
+    "ex-many-one-reductions-transfer-decidability-and-recognizability",
+    "ex-syntactic-properties-lie-outside-rices-theorem",
+    "cex-reductions-may-reverse-yes-and-no",
+    "prop-sat-is-in-np",
+    "lem-tableau-cell-alphabet-is-constant",
+    "lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal",
+    "lem-exactly-one-symbol-constraints-have-polynomial-size",
+    "lem-start-accept-and-transition-constraints-have-polynomial-size",
+    "lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs",
+    "lem-cook-levin-map-is-polynomial-time",
+    "thm-cook-levin-sat-is-np-complete",
+    "lem-tseitin-transformation-is-linear-size-and-equisatisfiable",
+    "thm-three-sat-is-np-complete",
+    "fs-cook-levin-enumerates-all-branches",
+    "fs-naive-distribution-to-cnf-is-always-polynomial",
+    "ex-tableau-cell-alphabet-is-constant",
+    "ex-three-sat-is-np-complete",
+    "cex-cook-levin-enumerates-all-branches"
+  ],
+  "contracts": {
+    "lem-many-one-reducibility-is-a-preorder": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computable-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **computable many-one reduction** from $A$ to $B$ is a total\ncomputable function\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that for every $x\\in\\Sigma^*$ one has\n$$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_m B. $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For reflexivity, use the identity map $\\operatorname{id}(x)=x$ on $A$'s alphabet. It is total and computable, and $x\\in A\\iff \\operatorname{id}(x)\\in A$ for every $x$, so [L1] gives $A\\le_m A$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For transitivity, let $f$ witness $A\\le_m B$ and let $g$ witness $B\\le_m C$. By [L1], both maps are total and computable, so $h:=g\\circ f$ is total and computable as well.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $x$, [L1] gives $x\\in A\\iff f(x)\\in B\\iff g(f(x))\\in C$. Thus $x\\in A\\iff h(x)\\in C$, so [L1] yields $A\\le_m C$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Computable many-one reducibility is reflexive and transitive does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Computable many-one reducibility is reflexive and transitive does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Computable many-one reducibility is reflexive and transitive does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Computable many-one reducibility is reflexive and transitive; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Computable many-one reducibility is reflexive and transitive; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Computable many-one reducibility is reflexive and transitive does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Computable many-one reducibility is reflexive and transitive is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Computable many-one reducibility is reflexive and transitive is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk came from the biconditional/transitivity wording. I reread step 1.1 and step 2.1: the identity map is total and computable, and composition preserves total computability, so both implication directions are explicitly justified with no missing boundary case."
+      }
+    },
+    "thm-many-one-reductions-transfer-decidability-and-recognizability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computable-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **computable many-one reduction** from $A$ to $B$ is a total\ncomputable function\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that for every $x\\in\\Sigma^*$ one has\n$$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_m B. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $f$ witness $A\\le_m B$. By [L1], $f$ is total and computable and satisfies $x\\in A\\iff f(x)\\in B$ for all $x$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $B$ is decidable, [L2] supplies a decider $D_B$ for $B$. On input $x$, first compute $f(x)$ and then run $D_B$ on that word. By step 1.1 the output is correct for $A$, and totality of $f$ and $D_B$ makes the composite machine halt on every input. Therefore $A$ is decidable.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $B$ is recognizable, [L2] supplies a recognizer $R_B$ for $B$. On input $x$, compute $f(x)$ and run $R_B$ on it. By step 1.1 this machine accepts exactly the words of $A$, so $A$ is recognizable.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Computable many-one reductions transfer decidability and recognizability backward does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Computable many-one reductions transfer decidability and recognizability backward does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Computable many-one reductions transfer decidability and recognizability backward does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Computable many-one reductions transfer decidability and recognizability backward; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Computable many-one reductions transfer decidability and recognizability backward; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Computable many-one reductions transfer decidability and recognizability backward does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Computable many-one reductions transfer decidability and recognizability backward is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Computable many-one reductions transfer decidability and recognizability backward is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk was the backward transfer of both decidability and recognizability through an iff reduction. Step 2.1 composes the total computable reduction with a decider, while step 3.1 composes it with a recognizer, so the halting requirement is used only in the decidable branch and the two notions are not conflated."
+      }
+    },
+    "thm-machine-acceptance-is-ce-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ce-hardness-and-completeness",
+          "source_section": "Definition",
+          "quote": "Let $C$ be a language over a finite alphabet.\n\n- $C$ is **c.e.-hard** when every recognizable language $L$ satisfies\n  $$ L\\le_m C. $$\n- $C$ is **c.e.-complete** when $C$ is recognizable and c.e.-hard.\n\nHere \"c.e.\" means \"computably enumerable,\" which on this page is synonymous\nwith \"recognizable.\"",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-machine-acceptance-is-recognizable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is\nrecognizable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-turing-machine-acceptance-problem",
+          "source_section": "Definition",
+          "quote": "Fix the chosen machine code $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nFor binary words $x,y$, write\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $w=a_1\\cdots a_\\ell\\in\\Sigma_s^*$, where each $a_i\\in\\{1,\\dots,s\\}$, put\n$$ \\widehat w:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nThe **Turing-machine acceptance problem** is the language\n$$ A_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ accepts } w\\bigr\\}. $$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], $A_{TM}$ is recognizable. To use [L1], it remains to prove c.e.-hardness.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $L$ be any recognizable language, and choose a recognizer $R$ for $L$. Define $f(x):=\\langle\\ulcorner R\\urcorner,\\widehat x\\rangle$. Because $R$ is fixed, encoding its chosen code and pairing it with the canonical word-code of $x$ is a total computable procedure. By [L3], $x\\in L$ exactly when $R$ accepts $x$, and that happens exactly when $f(x)\\in A_{TM}$. Thus $L\\le_m A_{TM}$.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 proves that every recognizable language many-one reduces to $A_{TM}$, and step 1.1 already recorded recognizability. Therefore [L1] gives that $A_{TM}$ is c.e.-complete.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in The Turing-machine acceptance problem is computably enumerable complete does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in The Turing-machine acceptance problem is computably enumerable complete does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of The Turing-machine acceptance problem is computably enumerable complete does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of The Turing-machine acceptance problem is computably enumerable complete; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in The Turing-machine acceptance problem is computably enumerable complete; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The Turing-machine acceptance problem is computably enumerable complete does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The Turing-machine acceptance problem is computably enumerable complete is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The Turing-machine acceptance problem is computably enumerable complete is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk came from completeness and coding. Step 1.2 fixes a recognizer R for arbitrary c.e. L and maps x to <R,x>; that map is total and computable because R is fixed and the coding is effective, and L3 is exactly the acceptance-language definition needed for the many-one equivalence."
+      }
+    },
+    "lem-many-one-implies-turing-reduction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computable-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **computable many-one reduction** from $A$ to $B$ is a total\ncomputable function\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that for every $x\\in\\Sigma^*$ one has\n$$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_m B. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-turing-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages. A **Turing\nreduction** from $A$ to $B$ is a deterministic oracle Turing machine $M^B$\nthat halts on every input and satisfies\n$$ x\\in A\\iff M^B \\text{ accepts } x $$\nfor every $x\\in\\Sigma^*$.\n\nWhen such a machine exists, write\n$$ A\\le_T B. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $f$ witness $A\\le_m B$. Build an oracle machine that, on input $x$, first computes $f(x)$ and then asks the oracle for $B$ whether $f(x)\\in B$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the oracle answer to step 1.1 is \"yes\" exactly when $x\\in A$. The machine makes only that one query and then halts with the same answer, so [L2] shows that it is a Turing reduction from $A$ to $B$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Every computable many-one reduction induces a Turing reduction does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Every computable many-one reduction induces a Turing reduction does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Every computable many-one reduction induces a Turing reduction does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Every computable many-one reduction induces a Turing reduction; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Every computable many-one reduction induces a Turing reduction; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Every computable many-one reduction induces a Turing reduction does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Every computable many-one reduction induces a Turing reduction is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Every computable many-one reduction induces a Turing reduction is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "Risk was the reduction-type boundary. The current proof computes f(x), asks one oracle question about B, and halts immediately with that answer, so it meets the repo definition of a Turing reduction as a halting oracle decider and preserves the same membership biconditional."
+      }
+    },
+    "prop-the-converse-fails": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-machine-acceptance-is-recognizable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is\nrecognizable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-decidable-iff-language-and-complement-are-recognizable",
+          "source_section": "Statement",
+          "quote": "For every language $L\\subseteq\\Sigma^*$, the following are equivalent:\n\n1. $L$ is decidable.\n2. Both $L$ and its complement $\\Sigma^*\\setminus L$ are recognizable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With oracle access to $A_{TM}$, an input $x$ belongs to $\\overline{A_{TM}}$ exactly when the oracle answers \"no\" to the single query $x$. So the machine that asks that one query and flips the answer halts on every input and decides $\\overline{A_{TM}}$. Hence $\\overline{A_{TM}}\\le_T A_{TM}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose instead that $\\overline{A_{TM}}\\le_m A_{TM}$. Then $\\overline{A_{TM}}$ would be recognizable because $A_{TM}$ is recognizable by [L1] and recognizability transfers backward along many-one reductions. Since [L1] also makes $A_{TM}$ recognizable, [L2] would imply that $A_{TM}$ is decidable, contradicting [L3]. Therefore $\\overline{A_{TM}}\\not\\le_m A_{TM}$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "assume-contra",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 exhibit a Turing reduction that is not a many-one reduction, so Turing reducibility is strictly weaker than computable many-one reducibility.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "discharge-contradiction: the assumed many-one reduction would decide A_TM"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Turing reducibility is strictly weaker than computable many-one reducibility does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Turing reducibility is strictly weaker than computable many-one reducibility does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Turing reducibility is strictly weaker than computable many-one reducibility does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Turing reducibility is strictly weaker than computable many-one reducibility; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Turing reducibility is strictly weaker than computable many-one reducibility; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Turing reducibility is strictly weaker than computable many-one reducibility does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Turing reducibility is strictly weaker than computable many-one reducibility is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Turing reducibility is strictly weaker than computable many-one reducibility is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "Critical risk was the strictness witness. Step 1.1 is a genuine halting oracle decider for the complement of A_TM, and step 1.2 uses recognizability transfer plus the decidable-iff-both-recognizable criterion to force a contradiction with undecidability. No hidden complement-recognizability assumption remains."
+      }
+    },
+    "lem-rice-witness-machine-construction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-index-set-and-extensional-machine-property",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal P$ be a class of recognizable languages over finite alphabets.\nIts **index set** is\n$$ I_{\\mathcal P}:=\\{\\ulcorner M\\urcorner : L(M)\\in\\mathcal P\\}, $$\nwhere $\\ulcorner M\\urcorner$ is the chosen code of a Turing machine and\n$L(M)$ is the language recognized by $M$.\n\nThe class $\\mathcal P$ is an **extensional machine property** when\n$$ L(M)=L(N)\\implies \\bigl(L(M)\\in\\mathcal P\\iff L(N)\\in\\mathcal P\\bigr). $$\nThus membership depends only on the recognized language, not on the particular\nmachine code.\n\nThe property is **nontrivial** when some recognizable language belongs to\n$\\mathcal P$ and some recognizable language does not.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-turing-machine-acceptance-problem",
+          "source_section": "Definition",
+          "quote": "Fix the chosen machine code $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nFor binary words $x,y$, write\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $w=a_1\\cdots a_\\ell\\in\\Sigma_s^*$, where each $a_i\\in\\{1,\\dots,s\\}$, put\n$$ \\widehat w:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nThe **Turing-machine acceptance problem** is the language\n$$ A_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ accepts } w\\bigr\\}. $$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\varnothing\\notin\\mathcal P$, choose a recognizable language $W\\in\\mathcal P$. If instead $\\varnothing\\in\\mathcal P$, choose a recognizable language $W\\notin\\mathcal P$. In either case, this choice fixes a recognizable language $W$ that lies on the opposite side of $\\mathcal P$ from $\\varnothing$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a recognizer $R_W$ for $W$. For each coded pair $x=\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$, build a machine $N_x$ that on input $y$ simulates $M$ on $w$; if that simulation ever accepts, $N_x$ starts a simulation of $R_W$ on $y$, and if the simulation of $M$ never accepts then $N_x$ never accepts $y$. Because the code of $R_W$ is fixed and $x$ is inserted as data, the map $x\\mapsto \\ulcorner N_x\\urcorner$ is total and computable.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $x\\in A_{TM}$, then [L2] says that $M$ accepts $w$, so step 2.1 eventually releases the simulation of $R_W$ on every input $y$; hence $L(N_x)=W$. If $x\\notin A_{TM}$, the simulation of $M$ on $w$ never accepts, so $N_x$ accepts no input and $L(N_x)=\\varnothing$. This is exactly the required witness-machine construction.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 and step 3.1 treat the explicit split between $W$ and $\u000barnothing$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in A nontrivial extensional property admits a uniform witness machine construction does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of A nontrivial extensional property admits a uniform witness machine construction does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of A nontrivial extensional property admits a uniform witness machine construction; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in A nontrivial extensional property admits a uniform witness machine construction; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of A nontrivial extensional property admits a uniform witness machine construction does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A nontrivial extensional property admits a uniform witness machine construction is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A nontrivial extensional property admits a uniform witness machine construction is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk was the chosen witness language and the x -> N_x construction. The proof fixes W on the opposite side of P from the empty language, then defines N_x to wait for M on w to accept before simulating R_W on y; that yields L(N_x)=W on yes inputs and the empty language otherwise, exactly as stated."
+      }
+    },
+    "thm-rices-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-rice-witness-machine-construction",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a nontrivial extensional property of recognizable\nlanguages. Then there exists a recognizable language $W$ such that $W$ and\n$\\varnothing$ lie on opposite sides of $\\mathcal P$, and there is a total\ncomputable map\n$$ g:\\{0,1\\}^*\\to\\{0,1\\}^* $$\nwith the following property: for every coded pair\n$x=\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$,\nif $g(x)=\\ulcorner N_x\\urcorner$, then\n\n- when $x\\in A_{TM}$ one has $L(N_x)=W$, and\n- when $x\\notin A_{TM}$ one has $L(N_x)=\\varnothing$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume for contradiction that $I_{\\mathcal P}$ is decidable. Fix the map $g$ and the language $W$ from [L1]. Because $W$ and $\\varnothing$ lie on opposite sides of $\\mathcal P$, exactly one of the two conditions $W\\in\\mathcal P$ and $\\varnothing\\in\\mathcal P$ holds.",
+          "step": "1.1",
+          "inputs": [
+            "assume-contra",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On input $x$, compute $g(x)=\\ulcorner N_x\\urcorner$ and run the assumed decider for $I_{\\mathcal P}$ on that code. If $W\\in\\mathcal P$, answer exactly as the decider answers; if $\\varnothing\\in\\mathcal P$, flip the decider's answer. By [L1], this procedure accepts exactly those $x$ in $A_{TM}$, so it decides $A_{TM}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 contradicts [L2]. Therefore the assumption in step 1.1 was false, and $I_{\\mathcal P}$ is undecidable.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "contradiction",
+            "discharge-contradiction: a decider for the index set would decide A_TM",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1 decide $A_{TM}$ by comparing the decider output on $W$ versus $\u000barnothing$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Every nontrivial extensional property of Turing-machine languages is undecidable does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Every nontrivial extensional property of Turing-machine languages is undecidable does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Every nontrivial extensional property of Turing-machine languages is undecidable; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Every nontrivial extensional property of Turing-machine languages is undecidable; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Every nontrivial extensional property of Turing-machine languages is undecidable does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Every nontrivial extensional property of Turing-machine languages is undecidable is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Every nontrivial extensional property of Turing-machine languages is undecidable is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk was the case split on whether W or the empty language lies in P. Step 2.1 computes g(x), runs the assumed decider for I_P, and flips only in the empty-language branch, so one procedure decides A_TM in either case. The contradiction therefore uses the extensional setup correctly."
+      }
+    },
+    "cor-standard-semantic-machine-properties-are-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-rices-theorem",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a nontrivial extensional property of recognizable\nlanguages. Then its index set\n$$ I_{\\mathcal P}=\\{\\ulcorner M\\urcorner : L(M)\\in\\mathcal P\\} $$\nis undecidable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-index-set-and-extensional-machine-property",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal P$ be a class of recognizable languages over finite alphabets.\nIts **index set** is\n$$ I_{\\mathcal P}:=\\{\\ulcorner M\\urcorner : L(M)\\in\\mathcal P\\}, $$\nwhere $\\ulcorner M\\urcorner$ is the chosen code of a Turing machine and\n$L(M)$ is the language recognized by $M$.\n\nThe class $\\mathcal P$ is an **extensional machine property** when\n$$ L(M)=L(N)\\implies \\bigl(L(M)\\in\\mathcal P\\iff L(N)\\in\\mathcal P\\bigr). $$\nThus membership depends only on the recognized language, not on the particular\nmachine code.\n\nThe property is **nontrivial** when some recognizable language belongs to\n$\\mathcal P$ and some recognizable language does not.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each listed property is extensional in the sense of [L2]: if two machines recognize the same language, then either both languages are empty, both are finite, both are regular, or both are context-free.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each property is nontrivial. For emptiness, $\\varnothing$ belongs and $\\{0\\}$ does not. For finiteness, $\\{0\\}$ belongs and $\\{0^n:n\\ge 0\\}$ does not. For regularity, $\\varnothing$ belongs and the standard recognizable language $\\{0^n1^n:n\\ge 0\\}$ does not. For context-freedom, $\\{0^n1^n:n\\ge 0\\}$ belongs and the standard recognizable language $\\{0^n1^n2^n:n\\ge 0\\}$ does not.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore [L1] applies to each of the four properties, so each corresponding index set is undecidable.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.2 handles the emptiness property using the witness pair $\u000barnothing$ and ${0}$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Standard semantic properties such as emptiness, finiteness, regularity, and context-freedom are undecidable does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Standard semantic properties such as emptiness, finiteness, regularity, and context-freedom are undecidable does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Standard semantic properties such as emptiness, finiteness, regularity, and context-freedom are undecidable; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Standard semantic properties such as emptiness, finiteness, regularity, and context-freedom are undecidable; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Standard semantic properties such as emptiness, finiteness, regularity, and context-freedom are undecidable does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Standard semantic properties such as emptiness, finiteness, regularity, and context-freedom are undecidable is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Standard semantic properties such as emptiness, finiteness, regularity, and context-freedom are undecidable is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "thm-rice-shapiro-positive-information-direction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-index-set-and-extensional-machine-property",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal P$ be a class of recognizable languages over finite alphabets.\nIts **index set** is\n$$ I_{\\mathcal P}:=\\{\\ulcorner M\\urcorner : L(M)\\in\\mathcal P\\}, $$\nwhere $\\ulcorner M\\urcorner$ is the chosen code of a Turing machine and\n$L(M)$ is the language recognized by $M$.\n\nThe class $\\mathcal P$ is an **extensional machine property** when\n$$ L(M)=L(N)\\implies \\bigl(L(M)\\in\\mathcal P\\iff L(N)\\in\\mathcal P\\bigr). $$\nThus membership depends only on the recognized language, not on the particular\nmachine code.\n\nThe property is **nontrivial** when some recognizable language belongs to\n$\\mathcal P$ and some recognizable language does not.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-machine-acceptance-is-recognizable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is\nrecognizable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-decidable-iff-language-and-complement-are-recognizable",
+          "source_section": "Statement",
+          "quote": "For every language $L\\subseteq\\Sigma^*$, the following are equivalent:\n\n1. $L$ is decidable.\n2. Both $L$ and its complement $\\Sigma^*\\setminus L$ are recognizable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-turing-machine-acceptance-problem",
+          "source_section": "Definition",
+          "quote": "Fix the chosen machine code $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nFor binary words $x,y$, write\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $w=a_1\\cdots a_\\ell\\in\\Sigma_s^*$, where each $a_i\\in\\{1,\\dots,s\\}$, put\n$$ \\widehat w:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nThe **Turing-machine acceptance problem** is the language\n$$ A_{TM}:=\\bigl\\{\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle : M \\text{ is a coded deterministic one-tape Turing machine and } M \\text{ accepts } w\\bigr\\}. $$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], $\\overline{A_{TM}}$ is not recognizable: otherwise both $A_{TM}$ and its complement would be recognizable and hence $A_{TM}$ would be decidable.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose a recognizer for $A$, and let $\\Sigma$ be its finite input alphabet. Dovetail the recognizer on the words of $\\Sigma^*$ in a fixed length-lexicographic order, outputting each newly accepted word once. This gives an effective enumeration of $A$ by finite stages $F_0\\subseteq F_1\\subseteq\\cdots$ with $\\bigcup_sF_s=A$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose for contradiction that no finite subset of $A$ belongs to $\\mathcal P$. For each binary word $x$, effectively construct a recognizer $N_x$ that, on its own input $y$, simulates the stage enumeration from step 1.2 and the recognizer for $A_{TM}$ on $x$ in lockstep. It accepts if $y$ appears in the stage enumeration before the latter recognizer accepts, and otherwise continues forever. The coding in [L3] makes $x\\mapsto\\ulcorner N_x\\urcorner$ total and computable. If $x\\notin A_{TM}$ then $L(N_x)=A\\in\\mathcal P$; if $x\\in A_{TM}$ then $L(N_x)=F_s\\notin\\mathcal P$ for the finite stage $s$ at which that simulation stops admitting new words.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.2",
+            "assume-contra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A recognizer for $I_{\\mathcal P}$ could therefore recognize $\\overline{A_{TM}}$: on input $x$, compute $\\ulcorner N_x\\urcorner$ and run the index-set recognizer on it. This contradicts step 1.1. Hence there is a finite set $F\\subseteq A$ with $F\\in\\mathcal P$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "contradiction",
+            "discharge-contradiction: the assumed absence of a finite witness would recognize the complement of A_TM"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $B$ be recognizable with $F\\subseteq B$, and suppose for contradiction that $B\\notin\\mathcal P$. For each binary word $x$, effectively build a recognizer $K_x$ that accepts every word of $F$ and, if the recognizer for $A_{TM}$ accepts $x$, also simulates a fixed recognizer for $B$. Then $x\\notin A_{TM}$ gives $L(K_x)=F\\in\\mathcal P$, while $x\\in A_{TM}$ gives $L(K_x)=F\\cup B=B\\notin\\mathcal P$. As in step 3.1, the total computable map $x\\mapsto\\ulcorner K_x\\urcorner$ and the recognizer for $I_{\\mathcal P}$ would recognize $\\overline{A_{TM}}$, contradicting step 1.1. Therefore every such $B$ belongs to $\\mathcal P$, and $F$ is the required finite positive witness.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1",
+            "step 3.1",
+            "assume-contra",
+            "construct",
+            "discharge-contradiction: an extension outside the property would recognize the complement of A_TM"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Recognizable extensional properties are positively witnessed by finite information does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Recognizable extensional properties are positively witnessed by finite information does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Recognizable extensional properties are positively witnessed by finite information does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Recognizable extensional properties are positively witnessed by finite information; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Recognizable extensional properties are positively witnessed by finite information; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 extracts a finite witness set $F\\subseteq A$, and step 4.1 tests arbitrary recognizable supersets of $F$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Recognizable extensional properties are positively witnessed by finite information is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Recognizable extensional properties are positively witnessed by finite information is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-step8-preflight-g",
+        "notes": "Critical risk is the finite-witness and upward-closure argument after the earlier invalid partial-function-class inference. In the current proof, step 2.1 maps each x to a recognizer whose language is A when x is outside A_TM and a finite stage F_s when x enters A_TM; recognizability of the index set would therefore recognize the nonrecognizable complement unless some finite F is in the property. Step 4.1 repeats the construction with F versus an arbitrary recognizable B containing F, so any such B outside the property would yield the same contradiction. The effective coding and both language cases are explicit."
+      }
+    },
+    "prop-syntactic-properties-lie-outside-rices-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-index-set-and-extensional-machine-property",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal P$ be a class of recognizable languages over finite alphabets.\nIts **index set** is\n$$ I_{\\mathcal P}:=\\{\\ulcorner M\\urcorner : L(M)\\in\\mathcal P\\}, $$\nwhere $\\ulcorner M\\urcorner$ is the chosen code of a Turing machine and\n$L(M)$ is the language recognized by $M$.\n\nThe class $\\mathcal P$ is an **extensional machine property** when\n$$ L(M)=L(N)\\implies \\bigl(L(M)\\in\\mathcal P\\iff L(N)\\in\\mathcal P\\bigr). $$\nThus membership depends only on the recognized language, not on the particular\nmachine code.\n\nThe property is **nontrivial** when some recognizable language belongs to\n$\\mathcal P$ and some recognizable language does not.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-rices-theorem",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a nontrivial extensional property of recognizable\nlanguages. Then its index set\n$$ I_{\\mathcal P}=\\{\\ulcorner M\\urcorner : L(M)\\in\\mathcal P\\} $$\nis undecidable.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Adjoining any number of new states with no incoming transitions leaves every existing computation unchanged. Thus the original machine and the enlarged machine recognize the same language.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Start with a three-state machine and adjoin eight unreachable states. The two machines have the same recognized language by step 1.1, but the first has at most ten states and the second has eleven. Hence the state-count property is not extensional.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For the second property, take a three-state machine whose start state moves to its accept state on one input symbol and to its reject state on the blank symbol; each of its three states is reachable. Adjoin one state with no incoming transitions. Step 1.1 again preserves the recognized language, but now exactly the enlarged machine has an unreachable state. Hence this property is not extensional either.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since the extensionality hypothesis of [L2] fails for both properties, Rice's theorem does not speak about them.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Syntactic machine properties lie outside the scope of Rice's theorem does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Syntactic machine properties lie outside the scope of Rice's theorem does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Syntactic machine properties lie outside the scope of Rice's theorem does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Syntactic machine properties lie outside the scope of Rice's theorem; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Syntactic machine properties lie outside the scope of Rice's theorem; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Syntactic machine properties lie outside the scope of Rice's theorem does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Syntactic machine properties lie outside the scope of Rice's theorem is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Syntactic machine properties lie outside the scope of Rice's theorem is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "fs-reductions-may-reverse-yes-and-no": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computable-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **computable many-one reduction** from $A$ to $B$ is a total\ncomputable function\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that for every $x\\in\\Sigma^*$ one has\n$$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_m B. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $f$ is a many-one reduction from $A$ to $B$, then [L1] says that $x\\in A$ and $f(x)\\in B$ always have the same truth value. Equivalently, $x\\notin A\\iff f(x)\\notin B$ as well.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "So a valid reduction preserves both yes-answers and no-answers relative to the chosen target language $B$; it does not reverse them. Reversal would mean reducing to the complement language $\\overline B$ instead. Therefore the statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in FALSE: a valid many-one reduction may reverse yes-instances and no-instances does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in FALSE: a valid many-one reduction may reverse yes-instances and no-instances does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of FALSE: a valid many-one reduction may reverse yes-instances and no-instances does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of FALSE: a valid many-one reduction may reverse yes-instances and no-instances; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in FALSE: a valid many-one reduction may reverse yes-instances and no-instances; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of FALSE: a valid many-one reduction may reverse yes-instances and no-instances does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in FALSE: a valid many-one reduction may reverse yes-instances and no-instances is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in FALSE: a valid many-one reduction may reverse yes-instances and no-instances is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk came from the biconditional slogan. The current refutation is correct: L1 says x in A iff f(x) in B, so both yes and no answers are preserved relative to B. The only way to reverse the truth value is to change the target to the complement language, which is exactly the repaired point."
+      }
+    },
+    "fs-rices-theorem-applies-to-state-count": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-syntactic-properties-lie-outside-rices-theorem",
+          "source_section": "Statement",
+          "quote": "Properties of a machine description such as \"has at most ten states\" or \"has\nan unreachable state\" are not extensional language properties, so Rice's\ntheorem does not apply to them.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-rices-theorem",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a nontrivial extensional property of recognizable\nlanguages. Then its index set\n$$ I_{\\mathcal P}=\\{\\ulcorner M\\urcorner : L(M)\\in\\mathcal P\\} $$\nis undecidable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the property \"has at most $k$ states\" can change when one rewrites the machine without changing its recognized language. So it is not an extensional language property.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because the extensionality hypothesis of [L2] fails, Rice's theorem does not apply to this property. Therefore the statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in FALSE: Rice's theorem applies to having at most a fixed number of states does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in FALSE: Rice's theorem applies to having at most a fixed number of states does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of FALSE: Rice's theorem applies to having at most a fixed number of states does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of FALSE: Rice's theorem applies to having at most a fixed number of states; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in FALSE: Rice's theorem applies to having at most a fixed number of states; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of FALSE: Rice's theorem applies to having at most a fixed number of states does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in FALSE: Rice's theorem applies to having at most a fixed number of states is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in FALSE: Rice's theorem applies to having at most a fixed number of states is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "ex-many-one-reductions-transfer-decidability-and-recognizability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-many-one-reductions-transfer-decidability-and-recognizability",
+          "source_section": "Statement",
+          "quote": "If $A\\le_m B$, then:\n\n- whenever $B$ is decidable, $A$ is decidable, and\n- whenever $B$ is recognizable, $A$ is recognizable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$, build a machine $N_{M,w}$ that ignores its own input, simulates $M$ on $w$, and accepts exactly when that simulation accepts. Then $L(N_{M,w})\\neq\\varnothing$ exactly when $M$ accepts $w$. So this construction gives a many-one reduction from $A_{TM}$ to $\\mathrm{NONEMPTY}_{TM}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\mathrm{NONEMPTY}_{TM}$ were decidable, [L1] would make $A_{TM}$ decidable, contradicting [L2]. Thus the nonemptiness problem is undecidable. The same pattern also shows how recognizability or nonrecognizability information can be pulled backward once the target side is known.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Using A_TM <=m nonemptiness to transfer undecidability and recognizability information does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Using A_TM <=m nonemptiness to transfer undecidability and recognizability information does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Using A_TM <=m nonemptiness to transfer undecidability and recognizability information does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Using A_TM <=m nonemptiness to transfer undecidability and recognizability information; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Using A_TM <=m nonemptiness to transfer undecidability and recognizability information; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Using A_TM <=m nonemptiness to transfer undecidability and recognizability information does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Using A_TM <=m nonemptiness to transfer undecidability and recognizability information is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Using A_TM <=m nonemptiness to transfer undecidability and recognizability information is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "ex-syntactic-properties-lie-outside-rices-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-syntactic-properties-lie-outside-rices-theorem",
+          "source_section": "Statement",
+          "quote": "Properties of a machine description such as \"has at most ten states\" or \"has\nan unreachable state\" are not extensional language properties, so Rice's\ntheorem does not apply to them.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because no transition ever enters $q_{dead}$, the computation of $M'$ on every input follows exactly the same states, tape symbols, and head moves as the computation of $M$. Hence $L(M')=L(M)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Even so, $M'$ has a different state count and visibly has an unreachable state. Step 1.1 therefore gives a concrete instance of [L1]: the code-level property changes while the language does not.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Adding an unreachable state changes syntax without changing the recognized language does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Adding an unreachable state changes syntax without changing the recognized language does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Adding an unreachable state changes syntax without changing the recognized language does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Adding an unreachable state changes syntax without changing the recognized language; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Adding an unreachable state changes syntax without changing the recognized language; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Adding an unreachable state changes syntax without changing the recognized language does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Adding an unreachable state changes syntax without changing the recognized language is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Adding an unreachable state changes syntax without changing the recognized language is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "cex-reductions-may-reverse-yes-and-no": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computable-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **computable many-one reduction** from $A$ to $B$ is a total\ncomputable function\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that for every $x\\in\\Sigma^*$ one has\n$$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_m B. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "fs-reductions-may-reverse-yes-and-no",
+          "source_section": "Statement",
+          "quote": "A valid computable many-one reduction may reverse yes-instances and\nno-instances.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $r$ reverses membership relative to $B$: the yes-instance $0\\in A$ is sent to $0\\notin B$, while every no-instance $x\\notin A$ is sent to $1\\in B$. In particular, already at $x=0$ the biconditional required by [L1] fails, so $r$ is not a many-one reduction from $A$ to $B$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same map does satisfy $x\\in A\\iff r(x)\\in\\overline B$, so it is a reduction from $A$ to $\\overline B$. Thus an answer-reversing transformation changes the target to its complement and is not a valid reduction to $B$; this refutes [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in A reduction to the complement is not a reduction to the original target does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in A reduction to the complement is not a reduction to the original target does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of A reduction to the complement is not a reduction to the original target does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of A reduction to the complement is not a reduction to the original target; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in A reduction to the complement is not a reduction to the original target; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of A reduction to the complement is not a reduction to the original target does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A reduction to the complement is not a reduction to the original target is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A reduction to the complement is not a reduction to the original target is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk was whether the example really separates reduction to B from reduction to complement(B). The repaired map reverses membership relative to B, fails the required biconditional already at 0, and satisfies the biconditional exactly for complement(B)."
+      }
+    },
+    "prop-sat-is-in-np": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-boolean-formula-cnf-and-sat",
+          "source_section": "Definition",
+          "quote": "A **Boolean formula** is built from variables, the constants $\\top,\\bot$, and\nthe connectives $\\neg,\\land,\\lor$ in the usual recursive way. A formula is in\n**conjunctive normal form (CNF)** when it is a conjunction of clauses, where\neach clause is a disjunction of literals and a **literal** is either a variable\nor the negation of a variable.\n\nThe language\n$$ SAT:=\\{\\ulcorner\\varphi\\urcorner : \\varphi \\text{ is a satisfiable Boolean formula}\\} $$\nconsists of the encodings of Boolean formulas that admit a truth assignment\nmaking them true.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-np-by-verifiers",
+          "source_section": "Definition",
+          "quote": "The class **NP** is the set of languages\n$$ L\\subseteq\\{0,1\\}^* $$\nthat admit a polynomial-time verifier with polynomially bounded certificates in\nthe sense of [[def-polynomially-balanced-verifier]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-polynomially-balanced-verifier",
+          "source_section": "Definition",
+          "quote": "Fix the binary pairing\n$$ \\langle x,u\\rangle:=1^{|x|}0xu $$\nfor binary words $x,u\\in\\{0,1\\}^*$. Let $L\\subseteq\\{0,1\\}^*$ be a language.\nA **polynomial-time verifier with polynomially bounded certificates** for $L$\nconsists of:\n\n- a binary relation $R\\subseteq\\{0,1\\}^*\\times\\{0,1\\}^*$ whose paired language\n  $$ L_R:=\\{\\langle x,u\\rangle:(x,u)\\in R\\} $$\n  belongs to $P$, and\n- a polynomial $p$ such that\n  $$ x\\in L\\iff \\exists u\\in\\{0,1\\}^* \\text{ with } |u|\\le p(|x|) \\text{ and } (x,u)\\in R. $$\n\nAny such $u$ is called a **certificate** or **witness** for $x$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use as certificate a truth assignment $a\\in\\{0,1\\}^n$ for the variables of $\\varphi$. Its length is $n$, so it is linearly bounded by the input size of $\\ulcorner\\varphi\\urcorner$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A deterministic verifier can evaluate $\\varphi$ under $a$ by traversing the parse tree of $\\varphi$ once. That takes time polynomial in $|\\ulcorner\\varphi\\urcorner|$, and by [L1] it accepts exactly when $\\varphi$ is satisfiable. Therefore [L2] gives $SAT\\in NP$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in SAT lies in NP does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in SAT lies in NP does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of SAT lies in NP does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of SAT lies in NP; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in SAT lies in NP; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of SAT lies in NP does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in SAT lies in NP is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in SAT lies in NP is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "lem-tableau-cell-alphabet-is-constant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-computation-tableau",
+          "source_section": "Definition",
+          "quote": "- and each row contains exactly one distinguished state-tagged tape symbol,\n  marking the head position and current state.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A tableau cell either lies away from the head, in which case it stores only a tape symbol from $\\Gamma$, or it is the unique scanned cell of that row, in which case it must record both the scanned tape symbol and the current state, hence an element of $Q\\times\\Gamma$. By [L1], these are the only possibilities.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore every cell value lies in $\\Delta_N=\\Gamma\\cup(Q\\times\\Gamma)$. Because the machine $N$ is fixed before any input is considered, both $Q$ and $\\Gamma$ are fixed finite sets, so $|\\Delta_N|=|\\Gamma|+|Q||\\Gamma|$ is a constant independent of the input length.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in For a fixed machine, each tableau cell ranges over a constant-size extended alphabet does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in For a fixed machine, each tableau cell ranges over a constant-size extended alphabet does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of For a fixed machine, each tableau cell ranges over a constant-size extended alphabet does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of For a fixed machine, each tableau cell ranges over a constant-size extended alphabet; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in For a fixed machine, each tableau cell ranges over a constant-size extended alphabet; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of For a fixed machine, each tableau cell ranges over a constant-size extended alphabet does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in For a fixed machine, each tableau cell ranges over a constant-size extended alphabet is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in For a fixed machine, each tableau cell ranges over a constant-size extended alphabet is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-computation-tableau",
+          "source_section": "Definition",
+          "quote": "- row $0$ is the initial configuration on input $w$,\n- each later row is obtained from the previous row by one legal transition of\n  $N$, or else repeats the previous row unchanged when that previous row is\n  already halting,",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-local-tableau-window",
+          "source_section": "Definition",
+          "quote": "Let $T$ be a bounded computation tableau for a fixed machine $N$. Adjoin a\nfixed boundary marker `#` to the left and right of every row. A\n**local $2\\times 3$ tableau window** is any block of the form\n$$ \\begin{matrix} T_{r,c} & T_{r,c+1} & T_{r,c+2}\\\\ T_{r+1,c} & T_{r+1,c+1} & T_{r+1,c+2} \\end{matrix} $$\ncut from two adjacent padded rows and three consecutive padded columns.\n\nSuch a window is **legal** when it is consistent with the local row-to-row rule\nfor bounded tableaux: the boundary markers stay fixed; if the upper row is\nnonhalting then cells away from the head remain unchanged and the cells in the\nhead's neighborhood change exactly as one allowed transition of $N$\nprescribes; and if the upper row is already halting then the lower row is\nidentical to it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $T$ is an actual computation history, then its first row is the start configuration. Each pair of adjacent rows is either one legal transition or a repeated halting row, so every padded $2\\times 3$ window is legal by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, assume the two bullet conditions in the statement hold. In particular, every local window is legal in the sense of [L2].",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix adjacent rows $r$ and $r+1$. If row $r$ is already halting, [L2] forces row $r+1$ to repeat it exactly. Otherwise row $r$ has a unique head neighborhood, and the overlapping legal windows force every cell outside that neighborhood to stay unchanged while the local neighborhood realizes exactly one allowed transition of $N$. So row $r+1$ is either the same halting configuration or the one-step successor of row $r$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because the first row is correct and every later row follows the previous one in one of the two ways allowed by step 2.1, the whole tableau is a valid branch computation history in the sense of [L1]. Hence [L1] gives the converse implication.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in A tableau is legal exactly when the start row is correct and every local window is legal does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in A tableau is legal exactly when the start row is correct and every local window is legal does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of A tableau is legal exactly when the start row is correct and every local window is legal does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of A tableau is legal exactly when the start row is correct and every local window is legal; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in A tableau is legal exactly when the start row is correct and every local window is legal; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of A tableau is legal exactly when the start row is correct and every local window is legal does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves that a genuine computation history forces the correct start row and legal local windows."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1 proves that the start-row and local-window conditions reconstruct a genuine computation history."
+        }
+      ]
+    },
+    "lem-exactly-one-symbol-constraints-have-polynomial-size": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-tableau-cell-alphabet-is-constant",
+          "source_section": "Statement",
+          "quote": "Fix a nondeterministic Turing machine $N$ with state set $Q$ and tape alphabet\n$\\Gamma$. Then every cell of a bounded computation tableau for $N$ ranges over\nthe constant-size set\n$$ \\Delta_N:=\\Gamma\\cup(Q\\times\\Gamma). $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-boolean-formula-cnf-and-sat",
+          "source_section": "Definition",
+          "quote": "A **Boolean formula** is built from variables, the constants $\\top,\\bot$, and\nthe connectives $\\neg,\\land,\\lor$ in the usual recursive way. A formula is in\n**conjunctive normal form (CNF)** when it is a conjunction of clauses, where\neach clause is a disjunction of literals and a **literal** is either a variable\nor the negation of a variable.\n\nThe language\n$$ SAT:=\\{\\ulcorner\\varphi\\urcorner : \\varphi \\text{ is a satisfiable Boolean formula}\\} $$\nconsists of the encodings of Boolean formulas that admit a truth assignment\nmaking them true.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Introduce a variable $X_{r,c,a}$ for each row $r$, column $c$, and symbol $a\\in\\Delta_N$, intended to mean that cell $(r,c)$ carries $a$. By [L1], the number of choices for $a$ is a fixed constant, so the total number of such variables is $O(T^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each cell, add one at-least-one clause $\\bigvee_{a\\in\\Delta_N} X_{r,c,a}$ and one pairwise-exclusion clause $\\neg X_{r,c,a}\\lor \\neg X_{r,c,b}$ for each distinct pair $a\\neq b$. Because $|\\Delta_N|$ is constant by [L1], each cell contributes only constantly many literals and clauses.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "There are $(T+1)^2$ cells, and step 2.1 attaches only constant-size data to each one. Therefore the full exactly-one-symbol family has size polynomial in $T$, hence polynomial in the input length once $T$ is polynomially bounded.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in The exactly-one-symbol constraints have polynomial size does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in The exactly-one-symbol constraints have polynomial size does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of The exactly-one-symbol constraints have polynomial size does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of The exactly-one-symbol constraints have polynomial size; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in The exactly-one-symbol constraints have polynomial size; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The exactly-one-symbol constraints have polynomial size does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The exactly-one-symbol constraints have polynomial size is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The exactly-one-symbol constraints have polynomial size is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "lem-start-accept-and-transition-constraints-have-polynomial-size": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-local-tableau-window",
+          "source_section": "Definition",
+          "quote": "Let $T$ be a bounded computation tableau for a fixed machine $N$. Adjoin a\nfixed boundary marker `#` to the left and right of every row. A\n**local $2\\times 3$ tableau window** is any block of the form\n$$ \\begin{matrix} T_{r,c} & T_{r,c+1} & T_{r,c+2}\\\\ T_{r+1,c} & T_{r+1,c+1} & T_{r+1,c+2} \\end{matrix} $$\ncut from two adjacent padded rows and three consecutive padded columns.\n\nSuch a window is **legal** when it is consistent with the local row-to-row rule\nfor bounded tableaux: the boundary markers stay fixed; if the upper row is\nnonhalting then cells away from the head remain unchanged and the cells in the\nhead's neighborhood change exactly as one allowed transition of $N$\nprescribes; and if the upper row is already halting then the lower row is\nidentical to it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-tableau-cell-alphabet-is-constant",
+          "source_section": "Statement",
+          "quote": "Fix a nondeterministic Turing machine $N$ with state set $Q$ and tape alphabet\n$\\Gamma$. Then every cell of a bounded computation tableau for $N$ ranges over\nthe constant-size set\n$$ \\Delta_N:=\\Gamma\\cup(Q\\times\\Gamma). $$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The start constraint fixes each cell of the first row to its predetermined initial symbol, so it contributes one constant-size literal condition per column and therefore $O(T)$ total size. The accept constraint is the disjunction over all cells that one of them carries an accepting-state tag, so it has $O(T^2)$ size.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each adjacent-row position and each illegal $2\\times 3$ pattern, add a clause forbidding that pattern. By [L1] and [L2], there are $O(T^2)$ window positions and only constantly many patterns to inspect at each position, each producing a constant-size clause.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Combining steps 1.1 and 1.2 shows that the start, accept, and transition families together have polynomial total size.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in The start, accept, and transition constraints have polynomial size does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in The start, accept, and transition constraints have polynomial size does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of The start, accept, and transition constraints have polynomial size does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of The start, accept, and transition constraints have polynomial size; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in The start, accept, and transition constraints have polynomial size; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The start, accept, and transition constraints have polynomial size does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The start, accept, and transition constraints have polynomial size is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The start, accept, and transition constraints have polynomial size is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk was the boundary-sensitive move-clause count. With the updated local-window definition, step 1.2 still ranges over only O(T^2) padded window positions and only constantly many forbidden patterns for a fixed machine, including the halting-row stutter case, so the polynomial-size estimate remains sound."
+      }
+    },
+    "lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-exactly-one-symbol-constraints-have-polynomial-size",
+          "source_section": "Statement",
+          "quote": "For a tableau of size $(T+1)\\times(T+1)$ for a fixed machine $N$, the Boolean\nconstraints asserting that each cell carries exactly one symbol of $\\Delta_N$\nhave polynomial total size.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-start-accept-and-transition-constraints-have-polynomial-size",
+          "source_section": "Statement",
+          "quote": "For a fixed machine and a polynomially bounded tableau, the Boolean formulas\nforcing the correct start row, forcing an accepting state somewhere, and\nforcing legal row-to-row transitions all have polynomial total size.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal",
+          "source_section": "Statement",
+          "quote": "A bounded tableau is the computation history of one branch exactly when:\n\n- its first row is the correct start configuration, and\n- every local $2\\times 3$ window is legal.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If an accepting bounded tableau exists, assign each variable $X_{r,c,a}$ the value $1$ exactly when the tableau places symbol $a$ in cell $(r,c)$. The tableau then satisfies $\\psi_{\\mathrm{cell}}$ by construction, while [L2] and [L3] show that it also satisfies $\\psi_{\\mathrm{start}}$, $\\psi_{\\mathrm{move}}$, and $\\psi_{\\mathrm{accept}}$. Hence $\\psi_{N,w}$ is satisfiable.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, suppose $\\psi_{N,w}$ is satisfiable. By [L1], the satisfying assignment determines one symbol in every tableau cell.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The tableau extracted in step 1.2 satisfies the required start, accept, and local transition conditions by [L2]. Therefore [L3] turns it into a genuine branch computation history for $N$ on $w$, with later rows allowed to repeat once a halting configuration has appeared, and the accept part of [L2] makes that history accepting.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove both implication directions, so $\\psi_{N,w}$ is satisfiable exactly when an accepting bounded tableau exists.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in The Cook-Levin formula is satisfiable if and only if an accepting bounded tableau exists does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in The Cook-Levin formula is satisfiable if and only if an accepting bounded tableau exists does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of The Cook-Levin formula is satisfiable if and only if an accepting bounded tableau exists does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of The Cook-Levin formula is satisfiable if and only if an accepting bounded tableau exists; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in The Cook-Levin formula is satisfiable if and only if an accepting bounded tableau exists; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The Cook-Levin formula is satisfiable if and only if an accepting bounded tableau exists does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 maps an accepting tableau to a satisfying assignment."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 reconstructs an accepting tableau from a satisfying assignment."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "Critical risk was the reverse implication and the T=1 / early-halting counterexample. The repaired local semantics now use padded windows and allow a halting configuration to repeat, so a satisfying assignment reconstructs a genuine accepting bounded tableau and the old refuter gap is closed."
+      }
+    },
+    "lem-cook-levin-map-is-polynomial-time": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-exactly-one-symbol-constraints-have-polynomial-size",
+          "source_section": "Statement",
+          "quote": "For a tableau of size $(T+1)\\times(T+1)$ for a fixed machine $N$, the Boolean\nconstraints asserting that each cell carries exactly one symbol of $\\Delta_N$\nhave polynomial total size.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-start-accept-and-transition-constraints-have-polynomial-size",
+          "source_section": "Statement",
+          "quote": "For a fixed machine and a polynomially bounded tableau, the Boolean formulas\nforcing the correct start row, forcing an accepting state somewhere, and\nforcing legal row-to-row transitions all have polynomial total size.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-worst-case-time-and-space-complexity",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic $k$-tape Turing machine. For an input word $w$, let\n$\\operatorname{time}_M(w)$ be the number of steps in the computation of $M$ on\n$w$ when that computation halts, and let $\\operatorname{space}_M(w)$ be the\ntotal number of tape cells that are ever visited during that computation across\nall $k$ tapes.\n\nIf $M$ halts on every input of length $n$, its **worst-case time complexity**\nand **worst-case space complexity** are the functions\n$$ \\operatorname{Time}_M(n):=\\max_{|w|=n}\\operatorname{time}_M(w),\\qquad \\operatorname{Space}_M(n):=\\max_{|w|=n}\\operatorname{space}_M(w). $$\n\nFor a nondeterministic machine $N$, define $\\operatorname{time}_N(w)$ and\n$\\operatorname{space}_N(w)$ as the maximum over all halting branches on input\n$w$, provided every branch halts. The worst-case functions\n$\\operatorname{Time}_N$ and $\\operatorname{Space}_N$ are then defined by the\nsame maxima over inputs of length $n$.\n\nWe say that a machine **runs in time at most $t(n)$** when its worst-case time\nis bounded by $t$, and **runs in space at most $s(n)$** when its worst-case\nspace is bounded by $s$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On an input $w$ of length $n$, [L3] gives a tableau side length $T+1$ with $T\\le p(n)$. A deterministic transducer can loop over all cells, all alphabet symbols, and all local windows in lexicographic order and print the corresponding clauses of $\\psi_{N,w}$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1] and [L2], the number of printed variables and clauses is polynomial in $T$, hence polynomial in $n$ because $T\\le p(n)$. Each loop iteration performs only constant-size bookkeeping for the fixed machine $N$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the transducer from step 1.1 halts after polynomially many steps and outputs $\\psi_{N,w}$. So the Cook-Levin map $w\\mapsto \\psi_{N,w}$ is polynomial-time computable.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in The Cook-Levin reduction map is computable in polynomial time does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in The Cook-Levin reduction map is computable in polynomial time does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of The Cook-Levin reduction map is computable in polynomial time does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of The Cook-Levin reduction map is computable in polynomial time; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in The Cook-Levin reduction map is computable in polynomial time; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The Cook-Levin reduction map is computable in polynomial time does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The Cook-Levin reduction map is computable in polynomial time is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The Cook-Levin reduction map is computable in polynomial time is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk was whether the reduction still prints only polynomially many clauses once the move constraints are read through the repaired tableau conventions. Step 1.1 still loops over cells, symbols, and local windows for a fixed machine, and step 2.1 bounds the output by the two clause-size lemmas, so the map remains polynomial-time."
+      }
+    },
+    "thm-cook-levin-sat-is-np-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-sat-is-in-np",
+          "source_section": "Statement",
+          "quote": "The satisfiability language $SAT$ belongs to $NP$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-verifier-and-nondeterministic-definitions-of-np-agree",
+          "source_section": "Statement",
+          "quote": "For a language $L\\subseteq\\{0,1\\}^*$, the following are equivalent:\n\n1. $L\\in NP$ in the verifier sense of [[def-np-by-verifiers]].\n2. There exists $k\\ge 1$ such that $L\\in\\operatorname{NTIME}(n^k)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs",
+          "source_section": "Statement",
+          "quote": "$\\psi_{N,w}$ is satisfiable if and only if there exists an accepting bounded\ncomputation tableau for $N$ on $w$ of height and width $T+1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cook-levin-map-is-polynomial-time",
+          "source_section": "Statement",
+          "quote": "For a fixed nondeterministic polynomial-time machine $N$, the map sending an\ninput $w$ to the Cook-Levin formula $\\psi_{N,w}$ is computable in polynomial\ntime.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-np-hard-and-np-complete",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\{0,1\\}^*$ be a language.\n\n- $C$ is **NP-hard** when for every language $L\\in NP$ one has $L\\le_p C$.\n- $C$ is **NP-complete** when $C$ is NP-hard and $C\\in NP$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], $SAT$ is in $NP$. To prove NP-completeness via [L4], it remains to prove NP-hardness.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Because $L\\in NP$, [L2] supplies a nondeterministic polynomial-time machine $N$ deciding $L$. For an input $x$, let $f(x)$ be the Cook-Levin formula $\\psi_{N,x}$ for a polynomial bound on computations of $N$ on $x$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L3], the formula $f(x)$ is satisfiable exactly when $N$ has an accepting bounded tableau on $x$; with the bounded-tableau convention that later rows may repeat a halting configuration, this happens exactly when $x\\in L$. The same citation shows that $f$ is computable in polynomial time. Therefore $L\\le_p SAT$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $L\\in NP$ was arbitrary, step 2.1 proves that every language in $NP$ reduces to $SAT$. Together with step 1.1, [L4] gives that $SAT$ is NP-complete.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in SAT is NP-complete does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in SAT is NP-complete does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of SAT is NP-complete does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of SAT is NP-complete; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in SAT is NP-complete; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of SAT is NP-complete does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in SAT is NP-complete is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in SAT is NP-complete is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "Critical risk was the NP-hardness step after the refuter showed that early acceptance could fail under a fixed time bound. The repaired step 2.1 now explicitly uses the bounded-tableau convention that later rows may repeat a halting configuration, so acceptance within the time bound is equivalent to existence of an accepting tableau of the chosen size."
+      }
+    },
+    "lem-tseitin-transformation-is-linear-size-and-equisatisfiable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-tseitin-extension-variable",
+          "source_section": "Definition",
+          "quote": "Given a Boolean formula $\\varphi$, a **Tseitin extension variable** for a\nsubformula $\\theta$ of $\\varphi$ is a fresh variable $y_\\theta$ intended to\nrepresent the truth value of $\\theta$. The Tseitin translation adds a local\nconstraint for every subformula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-boolean-formula-cnf-and-sat",
+          "source_section": "Definition",
+          "quote": "A **Boolean formula** is built from variables, the constants $\\top,\\bot$, and\nthe connectives $\\neg,\\land,\\lor$ in the usual recursive way. A formula is in\n**conjunctive normal form (CNF)** when it is a conjunction of clauses, where\neach clause is a disjunction of literals and a **literal** is either a variable\nor the negation of a variable.\n\nThe language\n$$ SAT:=\\{\\ulcorner\\varphi\\urcorner : \\varphi \\text{ is a satisfiable Boolean formula}\\} $$\nconsists of the encodings of Boolean formulas that admit a truth assignment\nmaking them true.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each subformula $\\theta$ of $\\varphi$, introduce the extension variable from [L1]. If $\\theta$ is a literal $\\ell$, add $(\\neg y_\\theta\\lor \\ell)$ and $(y_\\theta\\lor \\neg \\ell)$. If $\\theta=\\alpha\\land\\beta$, add $(\\neg y_\\theta\\lor y_\\alpha)$, $(\\neg y_\\theta\\lor y_\\beta)$, and $(y_\\theta\\lor \\neg y_\\alpha\\lor \\neg y_\\beta)$. If $\\theta=\\alpha\\lor\\beta$, add $(y_\\theta\\lor \\neg y_\\alpha)$, $(y_\\theta\\lor \\neg y_\\beta)$, and $(\\neg y_\\theta\\lor y_\\alpha\\lor y_\\beta)$. If $\\theta=\\neg\\alpha$, add $(\\neg y_\\theta\\lor \\neg y_\\alpha)$ and $(y_\\theta\\lor y_\\alpha)$. If $\\theta=\\top$ or $\\theta=\\bot$, add the unit clause $(y_\\theta)$ or $(\\neg y_\\theta)$ respectively. Finally add the unit clause $(y_\\varphi)$. Every clause has at most three literals.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Any satisfying assignment of $\\varphi$ extends to the new variables by setting each $y_\\theta$ equal to the truth value of $\\theta$ under that assignment. Then every local clause from step 1.1 is satisfied, including the negation and constant clauses, and $y_\\varphi=1$ because $\\varphi$ itself is true. So satisfiability of $\\varphi$ implies satisfiability of $T(\\varphi)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, suppose $T(\\varphi)$ is satisfiable. The clauses of step 1.1 force each $y_\\theta$ to agree with the Boolean value prescribed by its immediate subformulas, and an induction on subformula complexity shows that every extension variable equals the value of its subformula under the restricted assignment to the original variables. Since the clause $(y_\\varphi)$ is satisfied, the original formula $\\varphi$ is true.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each subformula of $\\varphi$ contributes one fresh variable and only constantly many clauses, so the total size of $T(\\varphi)$ is linear in $|\\varphi|$. Together with steps 2.1 and 3.1, this proves the statement.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in The Tseitin transformation has linear size and preserves satisfiability does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in The Tseitin transformation has linear size and preserves satisfiability does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of The Tseitin transformation has linear size and preserves satisfiability does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of The Tseitin transformation has linear size and preserves satisfiability; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in The Tseitin transformation has linear size and preserves satisfiability; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The Tseitin transformation has linear size and preserves satisfiability does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 extends any satisfying assignment of $\u000barphi$ to one of $T(\u000barphi)$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1 restricts any satisfying assignment of $T(\u000barphi)$ back to a satisfying assignment of $\u000barphi$."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "Critical risk was total coverage of Boolean syntax and the reverse satisfiability direction. Step 1.1 now treats literals, negation, conjunction, disjunction, and constants explicitly, and step 3.1 inducts over subformula complexity to force each extension variable to match its subformula. The linear-size bound still follows because each subformula contributes only constantly many clauses."
+      }
+    },
+    "thm-three-sat-is-np-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cook-levin-sat-is-np-complete",
+          "source_section": "Statement",
+          "quote": "The satisfiability language $SAT$ is NP-complete.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-tseitin-transformation-is-linear-size-and-equisatisfiable",
+          "source_section": "Statement",
+          "quote": "For every Boolean formula $\\varphi$, there is a CNF formula $T(\\varphi)$ such\nthat:\n\n- every clause of $T(\\varphi)$ has at most three literals,\n- $T(\\varphi)$ has size $O(|\\varphi|)$,\n- and $\\varphi$ is satisfiable if and only if $T(\\varphi)$ is satisfiable.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-np-hard-and-np-complete",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\{0,1\\}^*$ be a language.\n\n- $C$ is **NP-hard** when for every language $L\\in NP$ one has $L\\le_p C$.\n- $C$ is **NP-complete** when $C$ is NP-hard and $C\\in NP$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A truth assignment for a $3$-CNF formula can be checked clause by clause in polynomial time, exactly as for SAT. So $3$-SAT lies in $NP$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L1], it is enough to reduce $SAT$ to $3$-SAT. Start from $\\varphi$ and apply [L2] to obtain an equisatisfiable CNF formula $T(\\varphi)$ whose clauses have size at most three.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Replace every $2$-clause $(\\ell_1\\lor \\ell_2)$ by $(\\ell_1\\lor \\ell_2\\lor z)\\land(\\ell_1\\lor \\ell_2\\lor \\neg z)$ with a fresh variable $z$, and replace every $1$-clause $(\\ell)$ by $(\\ell\\lor u\\lor v)\\land(\\ell\\lor u\\lor \\neg v)\\land(\\ell\\lor \\neg u\\lor v)\\land(\\ell\\lor \\neg u\\lor \\neg v)$ with fresh variables $u,v$. These replacements preserve satisfiability and produce only $3$-clauses.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.2 and 2.1 give a polynomial-time many-one reduction from $SAT$ to $3$-SAT, because [L2] is linear-size and the padding in step 2.1 adds only constantly many clauses per short clause. Therefore $3$-SAT is NP-hard. Combined with step 1.1, [L3] yields that $3$-SAT is NP-complete.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in 3-SAT is NP-complete does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in 3-SAT is NP-complete does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 explicitly handles unit clauses and two-literal clauses before concluding with exact three-literal padding."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of 3-SAT is NP-complete; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in 3-SAT is NP-complete; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of 3-SAT is NP-complete does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in 3-SAT is NP-complete is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in 3-SAT is NP-complete is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk was the exact-three-literal boundary. The proof first gets an equisatisfiable CNF with clauses of size at most three from Tseitin, then pads the 1- and 2-clauses with fresh variables using satisfiability-preserving replacements. That yields a genuine reduction to the exact-3-CNF language named in the statement."
+      }
+    },
+    "fs-cook-levin-enumerates-all-branches": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-computation-tableau",
+          "source_section": "Definition",
+          "quote": "$(T+1)\\times(T+1)$ array whose rows encode one computation branch of $N$ on\n$w$, padded after halting if necessary:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs",
+          "source_section": "Statement",
+          "quote": "$\\psi_{N,w}$ is satisfiable if and only if there exists an accepting bounded\ncomputation tableau for $N$ on $w$ of height and width $T+1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], one satisfying assignment describes one tableau, hence one branch. There is no requirement that the encoding simultaneously list all other branches.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the reduction asks only whether some accepting tableau exists. Existence of one accepting branch is enough, so explicit enumeration of every branch is unnecessary. Therefore the statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in FALSE: the Cook-Levin reduction enumerates all nondeterministic branches does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in FALSE: the Cook-Levin reduction enumerates all nondeterministic branches does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of FALSE: the Cook-Levin reduction enumerates all nondeterministic branches does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of FALSE: the Cook-Levin reduction enumerates all nondeterministic branches; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in FALSE: the Cook-Levin reduction enumerates all nondeterministic branches; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of FALSE: the Cook-Levin reduction enumerates all nondeterministic branches does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in FALSE: the Cook-Levin reduction enumerates all nondeterministic branches is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in FALSE: the Cook-Levin reduction enumerates all nondeterministic branches is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk was the existential-versus-enumerative boundary. Even after the Cook-Levin repair, one satisfying assignment still represents one accepting tableau rather than the whole nondeterministic tree. The current refutation therefore correctly distinguishes existential witnessing from explicit branch enumeration."
+      }
+    },
+    "fs-naive-distribution-to-cnf-is-always-polynomial": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-boolean-formula-cnf-and-sat",
+          "source_section": "Definition",
+          "quote": "A **Boolean formula** is built from variables, the constants $\\top,\\bot$, and\nthe connectives $\\neg,\\land,\\lor$ in the usual recursive way. A formula is in\n**conjunctive normal form (CNF)** when it is a conjunction of clauses, where\neach clause is a disjunction of literals and a **literal** is either a variable\nor the negation of a variable.\n\nThe language\n$$ SAT:=\\{\\ulcorner\\varphi\\urcorner : \\varphi \\text{ is a satisfiable Boolean formula}\\} $$\nconsists of the encodings of Boolean formulas that admit a truth assignment\nmaking them true.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-tseitin-transformation-is-linear-size-and-equisatisfiable",
+          "source_section": "Statement",
+          "quote": "For every Boolean formula $\\varphi$, there is a CNF\nformula $T(\\varphi)$ such that:\n\n- every clause of $T(\\varphi)$ has at most three literals,\n- $T(\\varphi)$ has size $O(|\\varphi|)$,\n- and $\\varphi$ is satisfiable if and only if $T(\\varphi)$ is satisfiable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fully distributing $\\varphi_n$ into CNF chooses one literal from each conjunctive pair $(a_i\\land b_i)$, so the resulting CNF has one clause for every function $\\{1,\\dots,n\\}\\to\\{a_i,b_i\\}$. That is $2^n$ distinct clauses.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the original formula has size $O(n)$ but the distributed CNF has $2^n$ clauses, the size blowup is exponential, not polynomial. Step 1.1 is exactly why [L2] keeps Tseitin variables available. Therefore the statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in FALSE: distributing an arbitrary formula into CNF always has polynomial size does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in FALSE: distributing an arbitrary formula into CNF always has polynomial size does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of FALSE: distributing an arbitrary formula into CNF always has polynomial size does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of FALSE: distributing an arbitrary formula into CNF always has polynomial size; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in FALSE: distributing an arbitrary formula into CNF always has polynomial size; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of FALSE: distributing an arbitrary formula into CNF always has polynomial size does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in FALSE: distributing an arbitrary formula into CNF always has polynomial size is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in FALSE: distributing an arbitrary formula into CNF always has polynomial size is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "ex-tableau-cell-alphabet-is-constant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-tableau-cell-alphabet-is-constant",
+          "source_section": "Statement",
+          "quote": "Fix a nondeterministic Turing machine $N$ with state set $Q$ and tape alphabet\n$\\Gamma$. Then every cell of a bounded computation tableau for $N$ ranges over\nthe constant-size set\n$$ \\Delta_N:=\\Gamma\\cup(Q\\times\\Gamma). $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The bare tape-symbol options contribute the three symbols $0,1,\\sqcup$. The state-tagged options contribute one pair $(q,a)$ for each $q\\in Q$ and $a\\in\\Gamma$, so there are $4\\cdot 3=12$ such tagged symbols.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the total extended alphabet size is therefore $3+12=15$, independent of the input length. This is the concrete constant hidden in the general lemma.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Counting the constant-size extended alphabet for a fixed nondeterministic machine does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Counting the constant-size extended alphabet for a fixed nondeterministic machine does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Counting the constant-size extended alphabet for a fixed nondeterministic machine does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Counting the constant-size extended alphabet for a fixed nondeterministic machine; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Counting the constant-size extended alphabet for a fixed nondeterministic machine; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Counting the constant-size extended alphabet for a fixed nondeterministic machine does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Counting the constant-size extended alphabet for a fixed nondeterministic machine is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Counting the constant-size extended alphabet for a fixed nondeterministic machine is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "ex-three-sat-is-np-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-tseitin-transformation-is-linear-size-and-equisatisfiable",
+          "source_section": "Statement",
+          "quote": "For every Boolean formula $\\varphi$, there is a CNF\nformula $T(\\varphi)$ such that:\n\n- every clause of $T(\\varphi)$ has at most three literals,\n- $T(\\varphi)$ has size $O(|\\varphi|)$,\n- and $\\varphi$ is satisfiable if and only if $T(\\varphi)$ is satisfiable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-three-sat-is-np-complete",
+          "source_section": "Statement",
+          "quote": "The language $3$-SAT of satisfiable CNF formulas with exactly three literals\nper clause is NP-complete.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Tseitin clauses are $(\\neg a\\lor x)$, $(\\neg a\\lor y)$, $(a\\lor \\neg x\\lor \\neg y)$ for $a\\leftrightarrow(x\\land y)$, together with $(b\\lor \\neg a)$, $(b\\lor \\neg z)$, $(\\neg b\\lor a\\lor z)$ for $b\\leftrightarrow(a\\lor z)$, and the root clause $(b)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\varphi$ is satisfiable, set $a$ and $b$ to the truth values of their subformulas; then all clauses in step 1.1 are satisfied. Conversely, any satisfying assignment of those clauses forces $b=1$ and hence $(x\\land y)\\lor z=1$. So step 1.1 is an explicit equisatisfiable $3$-CNF encoding of $\\varphi$, illustrating [L1] and therefore [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ]
+    },
+    "cex-cook-levin-enumerates-all-branches": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-computation-tableau",
+          "source_section": "Definition",
+          "quote": "Fix a nondeterministic one-tape Turing machine $N$ and an input word $w$.\nSuppose $T\\ge |w|$, every branch of $N$ on $w$ halts within $T$ steps, and no\nbranch visits a tape cell beyond position $T$. A **bounded computation\ntableau** for $N$ on $w$ is a\n$(T+1)\\times(T+1)$ array whose rows encode one computation branch of $N$ on\n$w$, padded after halting if necessary:\n\n- row $0$ is the initial configuration on input $w$,\n- each later row is obtained from the previous row by one legal transition of\n  $N$, or else repeats the previous row unchanged when that previous row is\n  already halting,\n- and each row contains exactly one distinguished state-tagged tape symbol,\n  marking the head position and current state.\n\nThe tableau is **accepting** when some row is an accepting configuration.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "fs-cook-levin-enumerates-all-branches",
+          "source_section": "Statement",
+          "quote": "The Cook-Levin reduction works by explicitly enumerating every nondeterministic\nbranch of the machine.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-exactly-one-symbol-constraints-have-polynomial-size",
+          "source_section": "Statement",
+          "quote": "For a tableau of size $(T+1)\\times(T+1)$ for a fixed machine $N$, the Boolean\nconstraints asserting that each cell carries exactly one symbol of $\\Delta_N$\nhave polynomial total size.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-start-accept-and-transition-constraints-have-polynomial-size",
+          "source_section": "Statement",
+          "quote": "For a fixed machine and a polynomially bounded tableau, the Boolean formulas\nforcing the correct start row, forcing an accepting state somewhere, and\nforcing legal row-to-row transitions all have polynomial total size.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The formula for $N$ is produced from the fixed constraint families in [L3] by iterating over tableau cells and local windows. This construction never generates either computation branch.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The left branch has an accepting tableau of constant size, so assigning the tableau variables according to that branch satisfies the formula. By [L1], this assignment encodes only the accepting branch; the rejecting branch is not encoded by it. Together with the branch-free construction in step 1.1, this refutes the enumeration slogan [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mathematics in A machine with two branches shows that one satisfying tableau need not encode every branch does not hinge on a vacuous family or empty indexing set beyond the ordinary quantified statement already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument in A machine with two branches shows that one satisfying tableau need not encode every branch does not divide by or branch on a zero-valued parameter, so the zero axis is not a separate proof obligation here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof of A machine with two branches shows that one satisfying tableau need not encode every branch does not require a special singleton or unit-value case distinct from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed-object or collapsed-structure regime carries the proof of A machine with two branches shows that one satisfying tableau need not encode every branch; the construction is stated directly in its intended domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-endpoint or first-versus-last boundary split in A machine with two branches shows that one satisfying tableau need not encode every branch; the proof is combinatorial rather than endpoint-sensitive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of A machine with two branches shows that one satisfying tableau need not encode every branch does not choose an arbitrary witness from a merely nonempty set as a separate mathematical boundary step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A machine with two branches shows that one satisfying tableau need not encode every branch is not a biconditional, so there is no forward implication boundary to separate out."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A machine with two branches shows that one satisfying tableau need not encode every branch is not a biconditional, so there is no reverse implication boundary to separate out."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-step8-preflight-g",
+        "notes": "High risk is whether the example refutes the actual enumeration slogan while satisfying the bounded-tableau regime. The current statement exactly repeats that false slogan. For the empty input and bound T=1, both branches halt within the bound; the fixed local constraint families are generated without exploring either branch, and a satisfying assignment records only the accepting branch while the rejecting branch is absent. Those two facts directly refute explicit enumeration of every branch."
+      }
+    }
+  }
+}

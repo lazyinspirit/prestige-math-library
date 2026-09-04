@@ -32,18 +32,12 @@ Let $R$ be a commutative ring and let $M$ be an $R$-module. Then $M$ is flat if
 and only if the following condition holds:
 
 Whenever $x_1,\ldots,x_n\in M$ and $a_1,\ldots,a_n\in R$ satisfy
-$$
-\sum_{i=1}^n a_ix_i=0,
-$$
+$$ \sum_{i=1}^n a_ix_i=0, $$
 there exist elements $y_1,\ldots,y_m\in M$ and coefficients $b_{ij}\in R$ such
 that
-$$
-x_i=\sum_{j=1}^m b_{ij}y_j\quad\text{for every }i,
-$$
+$$ x_i=\sum_{j=1}^m b_{ij}y_j\quad\text{for every }i, $$
 and
-$$
-\sum_{i=1}^n a_ib_{ij}=0\quad\text{for every }j.
-$$
+$$ \sum_{i=1}^n a_ib_{ij}=0\quad\text{for every }j. $$
 
 ## Facts & Assumptions
 

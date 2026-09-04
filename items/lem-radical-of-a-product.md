@@ -28,9 +28,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring and let $I,J\trianglelefteq R$ be ideals. Then
-$$
-\sqrt{IJ}=\sqrt{I\cap J}=\sqrt{I}\cap\sqrt{J}.
-$$
+$$ \sqrt{IJ}=\sqrt{I\cap J}=\sqrt{I}\cap\sqrt{J}. $$
 
 ## Facts & Assumptions
 

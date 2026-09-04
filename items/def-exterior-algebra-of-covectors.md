@@ -27,9 +27,7 @@ sources:
 Let $V$ be finite-dimensional. Its **exterior algebra of covectors** is the
 graded vector space
 
-$$
-\bigwedge V^*:=\bigoplus_{k=0}^{\dim V}\operatorname{Alt}^k(V)
-$$
+$$ \bigwedge V^*:=\bigoplus_{k=0}^{\dim V}\operatorname{Alt}^k(V) $$
 
 equipped with the wedge product of
 [[def-wedge-product-of-alternating-covectors]].

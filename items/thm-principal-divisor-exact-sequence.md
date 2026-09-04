@@ -31,17 +31,11 @@ Assume the Axiom of Choice.
 
 Let $R$ be a Dedekind domain with fraction field $K$. Then the valuation maps
 fit into an exact sequence
-$$
-0\longrightarrow R^\times\longrightarrow K^\times\xrightarrow{\operatorname{div}}\operatorname{Div}(R)\xrightarrow{\operatorname{cl}}\operatorname{Cl}(R)\longrightarrow0,
-$$
+$$ 0\longrightarrow R^\times\longrightarrow K^\times\xrightarrow{\operatorname{div}}\operatorname{Div}(R)\xrightarrow{\operatorname{cl}}\operatorname{Cl}(R)\longrightarrow0, $$
 where
-$$
-\operatorname{div}(x)=\sum_{\mathfrak p}v_{\mathfrak p}((x))[\mathfrak p]
-$$
+$$ \operatorname{div}(x)=\sum_{\mathfrak p}v_{\mathfrak p}((x))[\mathfrak p] $$
 and
-$$
-\operatorname{cl}\!\left(\sum_{\mathfrak p}n_{\mathfrak p}[\mathfrak p]\right)=\left[\prod_{\mathfrak p}\mathfrak p^{n_{\mathfrak p}}\right].
-$$
+$$ \operatorname{cl}\!\left(\sum_{\mathfrak p}n_{\mathfrak p}[\mathfrak p]\right)=\left[\prod_{\mathfrak p}\mathfrak p^{n_{\mathfrak p}}\right]. $$
 
 ## Facts & Assumptions
 
@@ -64,9 +58,7 @@ $$
 1.1 The map $\operatorname{cl}$ is well defined and surjective: by [L1], every divisor is a finite sum and therefore determines a unique fractional ideal $\prod\mathfrak p^{n_{\mathfrak p}}$, and every ideal class has such a representative. [F1, F2, L1, L2]
 
 1.2 If $x\in K^\times$, then [L1] applied to the principal fractional ideal $(x)$ gives
-$$
-(x)=\prod_{\mathfrak p}\mathfrak p^{v_{\mathfrak p}((x))}.
-$$
+$$ (x)=\prod_{\mathfrak p}\mathfrak p^{v_{\mathfrak p}((x))}. $$
 Therefore $\operatorname{cl}(\operatorname{div}(x))=[(x)]=0$ in $\operatorname{Cl}(R)$. So $\operatorname{im}(\operatorname{div})\subseteq\ker(\operatorname{cl})$. [F2, F3, L1]
 
 1.3 Conversely, if $D=\sum n_{\mathfrak p}[\mathfrak p]$ satisfies $\operatorname{cl}(D)=0$, then the ideal $\prod\mathfrak p^{n_{\mathfrak p}}$ is principal, say equal to $(x)$ with $x\in K^\times$. Uniqueness in [L1] then forces $D=\operatorname{div}(x)$. Thus $\ker(\operatorname{cl})=\operatorname{im}(\operatorname{div})$. [F2, F3, L1, L2]

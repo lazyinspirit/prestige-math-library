@@ -28,9 +28,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, and let $I_1,\dots,I_n\trianglelefteq R$ with $n\ge 1$. Then
-$$
-\sqrt{I_1\cap\cdots\cap I_n}=\sqrt{I_1}\cap\cdots\cap\sqrt{I_n}.
-$$
+$$ \sqrt{I_1\cap\cdots\cap I_n}=\sqrt{I_1}\cap\cdots\cap\sqrt{I_n}. $$
 
 ## Facts & Assumptions
 

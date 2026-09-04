@@ -32,9 +32,7 @@ verification:
 Let $K\le H\le G$ be subgroups of a finite group $G$, and let $W$ be an
 $R$-linear $K$-module over a commutative ring $R$. Then
 
-$$
-\operatorname{Ind}_H^G(\operatorname{Ind}_K^H W)\cong \operatorname{Ind}_K^G W
-$$
+$$ \operatorname{Ind}_H^G(\operatorname{Ind}_K^H W)\cong \operatorname{Ind}_K^G W $$
 
 as $R$-linear $G$-modules.
 

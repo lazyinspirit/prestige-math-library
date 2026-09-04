@@ -31,15 +31,11 @@ sources:
 ## Example
 
 Cover $S^1$ by the two standard stereographic-coordinate charts
-$$
-U_+:=S^1\setminus\{(-1,0)\},\qquad U_-:=S^1\setminus\{(1,0)\},
-$$
+$$ U_+:=S^1\setminus\{(-1,0)\},\qquad U_-:=S^1\setminus\{(1,0)\}, $$
 with angular coordinates $\theta_+$ and $\theta_-$. Choose smooth bumps
 $\phi_\pm$ supported in $U_\pm$ and equal to $1$ on smaller arcs still covering
 $S^1$. Then
-$$
-F(p):=\bigl(\phi_+(p),\phi_+(p)\theta_+(p),\phi_-(p),\phi_-(p)\theta_-(p)\bigr)
-$$
+$$ F(p):=\bigl(\phi_+(p),\phi_+(p)\theta_+(p),\phi_-(p),\phi_-(p)\theta_-(p)\bigr) $$
 is an explicit coordinate-bump embedding of $S^1$ into $\mathbb R^4$.
 
 ## Facts & Assumptions

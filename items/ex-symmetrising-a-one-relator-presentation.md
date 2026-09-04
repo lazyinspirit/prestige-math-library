@@ -34,9 +34,7 @@ sources:
 For the one-relator presentation $\langle a,b,c \mid abc\rangle$, the
 symmetrisation of the relator set is
 
-$$
-\{abc,bca,cab,c^{-1}b^{-1}a^{-1},b^{-1}a^{-1}c^{-1},a^{-1}c^{-1}b^{-1}\}.
-$$
+$$ \{abc,bca,cab,c^{-1}b^{-1}a^{-1},b^{-1}a^{-1}c^{-1},a^{-1}c^{-1}b^{-1}\}. $$
 
 ## Facts & Assumptions
 

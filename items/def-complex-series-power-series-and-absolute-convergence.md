@@ -28,9 +28,7 @@ A **complex sequence** is a function $a\colon\mathbb N\to\mathbb C$. Since the
 additive reduct $(\mathbb C,+,0)$ of the complex field is a commutative monoid,
 the finite-list construction of [[def-monoid-finite-product]], read additively,
 defines its complex partial sums by
-$$
-S_0=0,\qquad S_{N+1}=S_N+a_N,\qquad S_N=\sum_{n<N}^{\mathbb C}a_n.
-$$
+$$ S_0=0,\qquad S_{N+1}=S_N+a_N,\qquad S_N=\sum_{n<N}^{\mathbb C}a_n. $$
 The superscript is omitted when the summands already make the codomain clear.
 
 The **complex series** $\sum a_n$ converges to $s\in\mathbb C$ when
@@ -44,15 +42,11 @@ converges. For a bijection $\sigma\colon\mathbb N\to\mathbb N$, its
 
 Let $(c_n)$ be a complex sequence and $a\in\mathbb C$. The **complex power
 series centered at $a$ with coefficients $(c_n)$** is
-$$
-\sum_{n=0}^{\infty}c_n(z-a)^n,
-$$
+$$ \sum_{n=0}^{\infty}c_n(z-a)^n, $$
 with powers from [[def-complex-integer-powers]] and the preceding complex
 partial sums. To define its radius without ambiguity, form the specific real
 power series
-$$
-Q(x):=\sum_{n=0}^{\infty}|c_n|x^n
-$$
+$$ Q(x):=\sum_{n=0}^{\infty}|c_n|x^n $$
 centered at $0$. The **radius of convergence** of the complex power series is,
 by definition, the radius of this $Q$ in
 [[def-real-power-series-and-radius-of-convergence]]. Thus the coefficient

@@ -34,9 +34,7 @@ Let $V$ be a completely reducible representation of a group $G$ over a field
 $k$, and let $S$ be an irreducible representation of $G$ over $k$. The
 **isotypic component of $V$ of type $S$** is
 
-$$
-V_{(S)}:=\sum \{U \le V : U \text{ is an irreducible subrepresentation equivalent to } S\}.
-$$
+$$ V_{(S)}:=\sum \{U \le V : U \text{ is an irreducible subrepresentation equivalent to } S\}. $$
 
 If no irreducible subrepresentation of $V$ is equivalent to $S$, this sum is
 $0$.

@@ -27,9 +27,7 @@ pipeline_run: null
 
 The **divisor-counting function** is the arithmetic function $\tau$ defined by
 
-$$
-\tau(n):=\sum_{\substack{d\mid n\\d>0}} 1.
-$$
+$$ \tau(n):=\sum_{\substack{d\mid n\\d>0}} 1. $$
 
 Equivalently, $\tau(n)$ is the number of positive divisors of $n$.
 

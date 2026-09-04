@@ -32,9 +32,7 @@ generated $R$-module, and let $\widehat R$, $\widehat M$ denote the
 $\mathfrak m$-adic completions.
 
 1. For every $n \ge 0$,
-   $$
-   \widehat M/\mathfrak m^{n+1}\widehat M \cong M/\mathfrak m^{n+1}M.
-   $$
+   $$    \widehat M/\mathfrak m^{n+1}\widehat M \cong M/\mathfrak m^{n+1}M.    $$
    In particular the Hilbert-Samuel functions of $M$ and $\widehat M$ agree.
 2. The Hilbert-Samuel multiplicity of $M$ equals that of $\widehat M$.
 3. The support dimensions of $M$ and $\widehat M$ are equal.

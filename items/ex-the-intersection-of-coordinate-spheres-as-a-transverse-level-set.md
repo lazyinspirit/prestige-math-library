@@ -29,15 +29,11 @@ sources:
 
 In $\mathbb R^4$, let
 
-$$
-F(x_1,x_2,x_3,x_4)=(x_1^2+x_2^2,\ x_3^2+x_4^2).
-$$
+$$ F(x_1,x_2,x_3,x_4)=(x_1^2+x_2^2,\ x_3^2+x_4^2). $$
 
 Then
 
-$$
-F^{-1}(1,1)=S^1\times S^1
-$$
+$$ F^{-1}(1,1)=S^1\times S^1 $$
 
 is a transverse codimension-$2$ level set.
 

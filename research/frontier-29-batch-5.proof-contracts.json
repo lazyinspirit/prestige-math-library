@@ -1,0 +1,2415 @@
+{
+  "version": 1,
+  "level": "frontier-29",
+  "scope": [
+    "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+    "thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent",
+    "cor-finite-dimensional-normed-spaces-are-banach",
+    "cor-finite-dimensional-subspaces-are-closed",
+    "cor-linear-maps-with-finite-dimensional-domain-are-bounded",
+    "lem-riesz-lemma",
+    "thm-locally-compact-normed-space-iff-finite-dimensional",
+    "lem-dependent-choice-riesz-separated-unit-sequence",
+    "thm-closed-unit-ball-compact-iff-finite-dimensional",
+    "cor-infinite-dimensional-closed-unit-ball-is-not-compact",
+    "cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact",
+    "thm-banach-space-no-countably-infinite-hamel-basis",
+    "thm-kuratowski-distance-map-is-an-isometry",
+    "thm-kuratowski-wojdyslawski-embedding",
+    "ex-explicit-equivalence-constants-for-standard-norms-on-kn",
+    "ex-an-infinite-separated-subset-of-the-unit-sphere",
+    "cex-heine-borel-fails-in-ell-two",
+    "cex-polynomial-space-admits-no-complete-norm",
+    "ex-kuratowski-embedding-of-a-finite-metric-space",
+    "ex-choice-free-discontinuous-functional-on-c00"
+  ],
+  "contracts": {
+    "thm-coordinate-map-for-a-finite-dimensional-normed-space": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\nA subset $B \\subseteq V$ is a **basis of $V$** when\n\n- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).\n\n**The empty set is a basis of the zero space, and of nothing else.**\n$\\varnothing$ is linearly independent ([[def-linear-independence]]) and\n$\\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[lem-span-is-the-set-of-linear-combinations]]), so $\\varnothing$ is a basis of\n$V$ exactly when $V = \\{0_V\\}$. This is the case $n = 0$ from which every\ninduction on this page starts, and it is a genuine case rather than a convention.\n\n### Ordered bases\n\nAn **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.\n\nBy claim 6 of [[lem-independent-list-is-injective]], a list is linearly\nindependent exactly when it is injective with linearly independent image, so an\nordered basis is equally described as a **linearly independent list $v : n \\to V$\nwith $\\operatorname{span}(v[n]) = V$**: the injectivity does not have to be\nimposed separately. The empty list is the ordered basis of the zero space.\n\nAn ordered basis is a list, so it carries an order; a basis is a set, so it does\nnot. Reordering an ordered basis gives a different ordered basis with the same\nimage, and the coordinates of\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] are attached to the\nlist, not to the set.\n\n### Bases of a linear subspace\n\nLet $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$. For $A \\subseteq U$ the two readings of\n\"$A$ is a basis\" — computed inside $U$, or computed inside $V$ — agree, so the\nphrase needs no disambiguation below.\n\n- **Independence agrees.** The finite sums $\\sum_{i<n}\\lambda_i a_i$ of a list\n  $a : n \\to U$ are given by the same recursion in $U$ as in $V$\n  ([[def-monoid-finite-product]]), the base value $0_V$ and the operation $+$\n  being literally those of $V$ ([[def-linear-subspace]]). So a list into $U$ has\n  the same sums whichever space it is read in, and the vanishing condition of\n  [[def-linear-independence]] is the same condition in both.\n- **The span agrees.** A subset of $U$ is a linear subspace of $U$ exactly when it\n  is a linear subspace of $V$, conditions (W1), (W2), (W3) being the same\n  conditions in either reading. Now $\\operatorname{span}_V(A) \\subseteq U$, since\n  $U$ is a linear subspace of $V$ containing $A$ and the span is contained in\n  every such subspace; so $\\operatorname{span}_V(A)$ is a linear subspace of $U$\n  containing $A$, whence $\\operatorname{span}_U(A) \\subseteq \\operatorname{span}_V(A)$.\n  Conversely $\\operatorname{span}_U(A)$ is a linear subspace of $V$ containing\n  $A$, whence $\\operatorname{span}_V(A) \\subseteq \\operatorname{span}_U(A)$. The\n  two are therefore equal, and we write $\\operatorname{span}(A)$ for both.\n\nConsequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]), let\n$n \\in \\mathbb{N}$ and let $v : n \\to V$ be a finite list\n([[def-linear-combination-and-span]]).\n\n1. **The span of the image of a list.** Whether or not $v$ is injective,\n   $$\\operatorname{span}(v[n]) \\;=\\; \\Bigl\\{\\, \\sum_{i<n}\\lambda_i v_i \\;:\\; \\lambda : n \\to F \\,\\Bigr\\} .$$\n2. **Coordinates.** $v$ is an ordered basis of $V$ ([[def-linear-basis]]) **if and\n   only if** for every $x \\in V$ there is **exactly one** $\\lambda : n \\to F$ with\n   $x = \\sum_{i<n}\\lambda_i v_i$. When that holds, this $\\lambda$ is called the\n   **coordinate list of $x$ with respect to the ordered basis $v$**, and\n   $\\lambda_i$ its **$i$-th coordinate**.\n\nThe coordinate list is attached to the **ordered** basis and not to the basis as\na set: reordering the list permutes the coordinates of every vector, as the\ncompanion page shows on a worked example in $\\mathbb{R}^{2}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-topological-isomorphism-of-normed-spaces",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field. A map\n$T:X\\to Y$ is a **topological isomorphism of normed spaces** when\n\n1. $T$ is a bounded linear operator ([[def-bounded-linear-operator]]);\n2. $T$ is bijective ([[def-injection-surjection-bijection]]);\n3. the inverse map $T^{-1}:Y\\to X$ is also bounded.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-all-norms-on-rn-are-equivalent",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Then any two norms on $\\mathbb{R}^{n}$ are\nequivalent ([[def-equivalent-norms]], [[def-norm-and-normed-space]]).\n\nMore precisely, for every norm $N$ on $\\mathbb{R}^{n}$ there are reals\n$c > 0$ and $C' > 0$ with\n\n$$c\\,\\lVert x\\rVert_2 \\;\\le\\; N(x) \\;\\le\\; C'\\,\\lVert x\\rVert_2 \\qquad \\text{for every } x \\in \\mathbb{R}^{n},$$\n\nand the general statement follows because equivalence of norms is an equivalence\nrelation.\n\n**Consequently all the metric notions on $\\mathbb{R}^{n}$ are norm independent**\nfor $n \\ge 1$: any two norms give the same open sets, the same convergent\nsequences with the same limits, the same Cauchy sequences and the same uniformly\ncontinuous maps ([[def-equivalent-norms]]).\n\n**The hypothesis $n \\ge 1$ is used twice in the proof and both uses are marked**:\nonce so that the constant $C$ of\n[[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]] exists, and once\nso that the Euclidean unit sphere is **nonempty**, which is what the extreme\nvalue theorem needs. At $n = 0$ the conclusion is true but vacuous, the zero\nspace carrying exactly one norm ([[def-norm-and-normed-space]]), and it is not\nobtained from the argument below.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-complex-numbers-are-the-real-coordinate-plane",
+          "source_section": "Statement",
+          "quote": "The map\n$$\\Phi:\\mathbb C\\longrightarrow\\mathbb R^2,\\qquad \\Phi(a+bi)=(a,b),$$\nis a bijection. Under it,\n$$\\Phi((a+bi)+(u+vi))=(a+u,b+v)$$\nand\n$$\\Phi((a+bi)(u+vi))=(au-bv,av+bu).$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "rem-real-and-complex-normed-space-convention",
+          "source_section": "Remark",
+          "quote": "The published definition [[def-norm-and-normed-space]] is written for vector\nspaces over $\\mathbb{R}$. On this page the same language is used over\n$\\mathbb{C}$ as well: a complex normed space is a complex vector space with a\nfunction $\\|\\cdot\\|:V\\to\\mathbb{R}$ satisfying the same separation and triangle\ninequality clauses, while absolute homogeneity is read with the complex modulus\n$|\\lambda|$ of\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] instead of the real\nabsolute value.\n\nNothing else changes. The induced metric is still $d(x,y)=\\|x-y\\|$, Banach\nmeans complete for that metric, and every estimate on this page that uses only\nthe triangle inequality and $|\\lambda|$ is valid verbatim over either scalar\nfield. When scalar continuity in the complex case is mentioned, the scalar field\nis the field of complex numbers already constructed in\n[[thm-complex-numbers-form-a-field]].",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], every $x\\in X$ has exactly one coordinate list $a=(a_0,\\dots,a_{n-1})\\in\\mathbb K^n$ with $x=\\sum_{j<n} a_j e_j$. Therefore the displayed map $T$ is well defined, surjective, and injective.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "$T$ is linear, because finite sums and scalar multiplication distribute over the coordinate formula: $T(\\lambda a+b)=\\sum_{j<n}(\\lambda a_j+b_j)e_j=\\lambda\\sum_{j<n}a_je_j+\\sum_{j<n}b_je_j =\\lambda T(a)+T(b)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the complex case $\\mathbb K=\\mathbb C$, write $\\Psi:\\mathbb C^n\\to\\mathbb R^{2n}$ for the coordinatewise real-imaginary-part map from [L4]. Define $$N_{\\mathbb R}(u,v):=\\|T(u_0+iv_0,\\dots,u_{n-1}+iv_{n-1})\\|.$$ By [L4] and [L5] this is a real norm on $\\mathbb R^{2n}$. If $n=0$ the inverse is again bounded trivially. If $n\\ge1$, [L3] applied to $\\mathbb R^{2n}$ gives $c>0$ with $$c\\|(u,v)\\|_2\\le N_{\\mathbb R}(u,v)$$ for every $(u,v)\\in\\mathbb R^{2n}$. Also $|u_j+iv_j|\\le |u_j|+|v_j|\\le \\sqrt2\\,(u_j^2+v_j^2)^{1/2}$, so $$\\|(u_0+iv_0,\\dots,u_{n-1}+iv_{n-1})\\|_1\\le \\sqrt{2n}\\,\\|(u,v)\\|_2.$$ Hence $$\\|a\\|_1\\le \\frac{\\sqrt{2n}}{c}\\,\\|T(a)\\| \\qquad (a\\in\\mathbb C^n),$$ which is the boundedness of $T^{-1}$.",
+          "step": "1.3",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $C:=\\sum_{j<n}\\|e_j\\|$, a finite real. Then $$\\|T(a)\\|=\\left\\|\\sum_{j<n}a_je_j\\right\\|\\le\\sum_{j<n}|a_j|\\,\\|e_j\\| \\le C\\sum_{j<n}|a_j|=C\\|a\\|_1,$$ so $T$ is bounded.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In the real case $\\mathbb K=\\mathbb R$, the pullback $N(a):=\\|T(a)\\|$ is a norm on $\\mathbb R^n$: definiteness uses step 1.1, and the triangle and homogeneity axioms come from the norm axioms on $X$ and the linearity of $T$. If $n=0$, then $\\mathbb R^0=\\{0\\}$ and the inverse of $T$ is the zero map, hence bounded. If $n\\ge1$, [L3] gives $c>0$ with $c\\|a\\|_1\\le N(a)=\\|T(a)\\|$ for every $a\\in\\mathbb R^n$, so $\\|T^{-1}x\\|_1\\le c^{-1}\\|x\\|$ for every $x\\in X$. Thus $T^{-1}$ is bounded in the real case.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1, 1.2, 1.3, 2.1, and 2.2 verify the three clauses of [L2]. Therefore $T$ is a topological isomorphism of normed spaces.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.2 explicitly isolate the $n=0$ case, where the coordinate sums are empty and both $T$ and $T^{-1}$ are bounded trivially."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.2 and step 1.3 handle the zero-dimensional case n = 0 by reducing to the zero coordinate space and the zero inverse map."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Coordinate-space identification: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Coordinate-space identification: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Coordinate-space identification: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.2 and step 1.3 instantiate the comparison constants supplied by the real finite-dimensional norm theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Coordinate-space identification: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Coordinate-space identification: this item does not itself state an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: the proof has real/complex and zero-dimensional branches. Steps 1.3 and 2.2 explicitly handle n=0 and derive bounded inverses from finite-dimensional norm comparison, so the coordinate isomorphism is complete on every stated case."
+      }
+    },
+    "thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K \\in \\{\\mathbb R,\\mathbb C\\}$, read in\nthe complex case by [[rem-real-and-complex-normed-space-convention]]. Let\n$e:n\\to X$ be an ordered basis ([[def-linear-basis]]), and write $e_j:=e(j)$.\nGive $\\mathbb K^n$ its coordinate $\\ell^1$ norm\n\n$$\\|(a_0,\\dots,a_{n-1})\\|_1:=\\sum_{j<n}|a_j|.$$\n\nDefine\n\n$$T:\\mathbb K^n\\to X,\\qquad T(a_0,\\dots,a_{n-1})=\\sum_{j<n} a_j e_j.$$\n\nThen $T$ is a topological isomorphism of normed spaces in the sense of\n[[def-topological-isomorphism-of-normed-spaces]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-equivalent-norms",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over $\\mathbb{R}$ ([[def-vector-space]]) and let $M$\nand $N$ be norms on $V$ ([[def-norm-and-normed-space]]). $M$ and $N$ are\n**equivalent** when there are reals $c > 0$ and $C > 0$ with\n\n$$c\\,M(v) \\;\\le\\; N(v) \\;\\le\\; C\\,M(v) \\qquad \\text{for every } v \\in V .$$\n\nThe constants are not part of the data and are not unique: any smaller $c$ and\nany larger $C$ serve as well.\n\n### This is an equivalence relation on the norms on $V$\n\n- **Reflexive:** take $c = C = 1$.\n- **Symmetric:** from $cM \\le N \\le CM$ and $c, C > 0$ one gets\n  $C^{-1}N \\le M \\le c^{-1}N$, dividing by the positive constants\n  ([[lem-of-inverse-positive]]).\n- **Transitive:** if $cM \\le N \\le CM$ and $c'N \\le P \\le C'N$ then\n  $c'c\\,M \\le P \\le C'C\\,M$, and $c'c > 0$, $C'C > 0$, a product of positives\n  being positive.\n\n### The dictionary with equivalent metrics\n\nLet $d_M(u,v) = M(u-v)$ and $d_N(u,v) = N(u-v)$ be the induced metrics\n([[def-norm-and-normed-space]]). Substituting $v := u - w$ in the displayed\ncondition gives\n\n$$c\\,d_M(u,w) \\;\\le\\; d_N(u,w) \\;\\le\\; C\\,d_M(u,w) \\qquad \\text{for all } u, w \\in V ,$$\n\nwhich is **verbatim the Lipschitz equivalence** of $d_M$ and $d_N$ in the sense\nof [[def-equivalent-metrics]], with $\\alpha = c$ and $\\beta = C$. That is the\n**strongest** of the three tiers that item distinguishes: by\n[[thm-metric-equivalence-hierarchy]], Lipschitz equivalence implies uniform\nequivalence, which implies topological equivalence. So equivalent norms give\n\n- the same open sets, hence the same closed sets, closures and interiors\n  ([[def-metric-topology]]);\n- the same uniformly continuous maps into and out of $V$\n  ([[def-metric-uniform-continuity]]);\n- the same convergent sequences with the same limits, and the same Cauchy\n  sequences ([[def-metric-convergence]], [[def-cauchy-in-metric]]).\n\nThe last line deserves its two-line verification, since it is used constantly\nbelow and is not literally a clause of [[thm-metric-equivalence-hierarchy]]. If\n$d_M(v_k, v) \\to 0$ then $0 \\le d_N(v_k,v) \\le C\\,d_M(v_k,v)$, so given a\nrational $\\varepsilon > 0$ an index beyond which $d_M(v_k,v) < \\varepsilon/C$\nserves for $d_N$; the converse uses $d_M \\le c^{-1}d_N$ in the same way. The\nCauchy statement is the same estimate applied to $d_N(v_k,v_l)$. In particular\n$(V, d_M)$ is complete if and only if $(V,d_N)$ is.\n\n**Naming.** Many texts say *strongly equivalent* for what\n[[def-equivalent-metrics]] calls Lipschitz equivalent, and simply *equivalent*\nfor what it calls topologically equivalent. As there, this library always writes\nthe qualifier for metrics. For **norms** there is no fork to guard against: the\ncondition displayed above is the only one anyone calls equivalence of norms, and\nit is always the Lipschitz-strength one.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $T:\\mathbb C^n\\to X$ be the common algebraic basis map $T(a_0,\\dots,a_{n-1})=\\sum_{j<n}a_je_j$. Applied to the norm $\\|\\cdot\\|_a$, [L1] gives constants $A,B>0$ such that $$\\|T(a)\\|_a\\le A\\|a\\|_1 \\quad\\text{and}\\quad \\|a\\|_1\\le B\\|T(a)\\|_a$$ for every $a\\in\\mathbb C^n$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Applied to the norm $\\|\\cdot\\|_b$, [L1] gives constants $A',B'>0$ such that $$\\|T(a)\\|_b\\le A'\\|a\\|_1 \\quad\\text{and}\\quad \\|a\\|_1\\le B'\\|T(a)\\|_b$$ for every $a\\in\\mathbb C^n$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $x\\in X$ and write $x=T(a)$, which is possible and unique by [L1]. Then $$\\|x\\|_b=\\|T(a)\\|_b\\le A'\\|a\\|_1\\le A'B\\|T(a)\\|_a=A'B\\|x\\|_a.$$ Interchanging $a$ and $b$ gives $$\\|x\\|_a\\le AB'\\|x\\|_b.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 is exactly the two-sided estimate of [L2], so the two norms are equivalent.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Complex finite-dimensional norm equivalence: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Complex finite-dimensional norm equivalence: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Complex finite-dimensional norm equivalence: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Complex finite-dimensional norm equivalence: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Complex finite-dimensional norm equivalence: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 and step 1.2 instantiate the two comparison constants coming from the coordinate isomorphism for each norm."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In All norms on a finite-dimensional complex normed space are equivalent, “equivalent” names the previously defined two-sided norm-comparison predicate; this theorem asserts that predicate under finite-dimensionality rather than a new biconditional whose directions need separate certification.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In All norms on a finite-dimensional complex normed space are equivalent, “equivalent” names the previously defined two-sided norm-comparison predicate; this theorem asserts that predicate under finite-dimensionality rather than a new biconditional whose directions need separate certification."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In All norms on a finite-dimensional complex normed space are equivalent, “equivalent” names the previously defined two-sided norm-comparison predicate; this theorem asserts that predicate under finite-dimensionality rather than a new biconditional whose directions need separate certification.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In All norms on a finite-dimensional complex normed space are equivalent, “equivalent” names the previously defined two-sided norm-comparison predicate; this theorem asserts that predicate under finite-dimensionality rather than a new biconditional whose directions need separate certification."
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: the only load-bearing move is transporting both norms through the same basis map. Steps 1.1 to 3.1 produce the two-sided constants A'B and AB', so the equivalence claim matches the written proof."
+      }
+    },
+    "cor-finite-dimensional-normed-spaces-are-banach": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K \\in \\{\\mathbb R,\\mathbb C\\}$, read in\nthe complex case by [[rem-real-and-complex-normed-space-convention]]. Let\n$e:n\\to X$ be an ordered basis ([[def-linear-basis]]), and write $e_j:=e(j)$.\nGive $\\mathbb K^n$ its coordinate $\\ell^1$ norm\n\n$$\\|(a_0,\\dots,a_{n-1})\\|_1:=\\sum_{j<n}|a_j|.$$\n\nDefine\n\n$$T:\\mathbb K^n\\to X,\\qquad T(a_0,\\dots,a_{n-1})=\\sum_{j<n} a_j e_j.$$\n\nThen $T$ is a topological isomorphism of normed spaces in the sense of\n[[def-topological-isomorphism-of-normed-spaces]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-componentwise-convergence-and-completeness",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^{n}$ carry the Euclidean\nmetric $d_2$ of [[lem-metrics-on-rn]], and let $\\bigl(x^{(j)}\\bigr)_{j\\in\\mathbb{N}}$\nbe a sequence in $\\mathbb{R}^{n}$ ([[def-metric-convergence]]). For $k < n$ write\n$\\bigl(x^{(j)}_k\\bigr)_{j\\in\\mathbb{N}}$ for the $k$-th **coordinate sequence**,\na sequence of reals ([[def-sequence]]). Then:\n\n1. **Convergence is componentwise.** For $x \\in \\mathbb{R}^{n}$,\n   $x^{(j)} \\to x$ in $(\\mathbb{R}^{n}, d_2)$ if and only if\n   $x^{(j)}_k \\to x_k$ in $\\mathbb{R}$ for every $k<n$\n   ([[def-real-limit]]).\n2. **Cauchyness is componentwise.** $\\bigl(x^{(j)}\\bigr)$ is Cauchy in\n   $(\\mathbb{R}^{n},d_2)$ ([[def-cauchy-in-metric]]) if and only if every\n   coordinate sequence is Cauchy in $\\mathbb{R}$.\n3. **Completeness in every norm.** For every norm $N$ on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]) the metric space $(\\mathbb{R}^{n}, d_N)$ is\n   complete ([[def-complete-metric-space]]).\n\n**Clause 3 is obtained by citation and is not reproved here.**\n[[thm-euclidean-space-complete]] clause 2 states that $(\\mathbb{R}^{n},d_2)$ is\ncomplete, **for $n \\ge 1$ only**, and this theorem carries that hypothesis\nforward without weakening it; what is added is the passage from $d_2$ to an\narbitrary norm, through [[thm-all-norms-on-rn-are-equivalent]] and the dictionary\nof [[def-equivalent-norms]].",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-complex-numbers-are-the-real-coordinate-plane",
+          "source_section": "Statement",
+          "quote": "The map\n$$\\Phi:\\mathbb C\\longrightarrow\\mathbb R^2,\\qquad \\Phi(a+bi)=(a,b),$$\nis a bijection. Under it,\n$$\\Phi((a+bi)+(u+vi))=(a+u,b+v)$$\nand\n$$\\Phi((a+bi)(u+vi))=(au-bv,av+bu).$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], it is enough to prove that $\\mathbb K^n$ is complete for the coordinate $\\ell^1$ norm, because a bounded bijection with bounded inverse preserves Cauchy sequences and their limits.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the real case $\\mathbb K=\\mathbb R$, if $n=0$ then $\\mathbb R^0=\\{0\\}$ is complete trivially. If $n\\ge1$, [L2] applies directly to the $\\ell^1$ norm on $\\mathbb R^n$, so $\\mathbb R^n$ is complete.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the complex case $\\mathbb K=\\mathbb C$, if $n=0$ the same trivial argument applies. If $n\\ge1$, [L3] identifies $\\mathbb C^n$ with $\\mathbb R^{2n}$ by real and imaginary parts, and the proof of [[thm-coordinate-map-for-a-finite-dimensional-normed-space]] already shows that the complex coordinate $\\ell^1$ norm is equivalent to a real norm on $\\mathbb R^{2n}$. By [L2], that real norm is complete, hence so is $\\mathbb C^n$ with the complex coordinate $\\ell^1$ norm.",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $(x_m)$ be a Cauchy sequence in $X$, and write $a_m:=T^{-1}x_m$. Since $T^{-1}$ is bounded, $(a_m)$ is Cauchy in $\\mathbb K^n$; by steps 1.2 and 1.3 it converges to some $a\\in\\mathbb K^n$. Since $T$ is bounded, $x_m=T(a_m)\\to T(a)$ in $X$. Thus every Cauchy sequence in $X$ converges in $X$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L4], step 2.1 says exactly that $X$ is Banach.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Finite-dimensional completeness transfer: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 and step 1.3 both treat n = 0 explicitly before the positive-dimensional completeness transfer."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Finite-dimensional completeness transfer: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Finite-dimensional completeness transfer: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Finite-dimensional completeness transfer: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Finite-dimensional completeness transfer: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Finite-dimensional completeness transfer: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Finite-dimensional completeness transfer: this item does not itself state an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: completeness must be transported through the coordinate isomorphism, especially in the complex case. Steps 1.2 to 2.1 handle n=0 separately and reduce the complex case to the complete real coordinate space, so the Banach conclusion is justified."
+      }
+    },
+    "cor-finite-dimensional-subspaces-are-closed": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and assume\n$X$ admits an ordered basis of finite length. Then $X$ is a Banach space in the\nsense of [[def-banach-space]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-complete-subspace-is-closed",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a normed subspace. If $W$ is\ncomplete for its restricted norm, then $W$ is closed in $V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-normed-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a linear subspace in the\nsense of [[def-linear-subspace]]. The **normed subspace** $W$ is the vector\nspace $W$ equipped with the restricted norm\n$$\\|w\\|_W:=\\|w\\|_V \\qquad (w\\in W).$$\n\nIts induced metric is the restriction of the ambient norm metric to\n$W\\times W$, so the inclusion $W\\hookrightarrow V$ is an isometric embedding in\nthe sense of [[def-isometry-and-metric-embedding]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L3], the hypothesis makes $W$ a normed space in its own right, with an ordered basis of finite length. Therefore [L1] makes $W$ Banach, hence complete for its restricted norm.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] to that complete normed subspace shows that $W$ is closed in $V$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Closedness of finite-dimensional subspaces: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Closedness of finite-dimensional subspaces: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Closedness of finite-dimensional subspaces: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Closedness of finite-dimensional subspaces: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Closedness of finite-dimensional subspaces: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Closedness of finite-dimensional subspaces: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Closedness of finite-dimensional subspaces: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Closedness of finite-dimensional subspaces: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    },
+    "cor-linear-maps-with-finite-dimensional-domain-are-bounded": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K \\in \\{\\mathbb R,\\mathbb C\\}$, read in\nthe complex case by [[rem-real-and-complex-normed-space-convention]]. Let\n$e:n\\to X$ be an ordered basis ([[def-linear-basis]]), and write $e_j:=e(j)$.\nGive $\\mathbb K^n$ its coordinate $\\ell^1$ norm\n\n$$\\|(a_0,\\dots,a_{n-1})\\|_1:=\\sum_{j<n}|a_j|.$$\n\nDefine\n\n$$T:\\mathbb K^n\\to X,\\qquad T(a_0,\\dots,a_{n-1})=\\sum_{j<n} a_j e_j.$$\n\nThen $T$ is a topological isomorphism of normed spaces in the sense of\n[[def-topological-isomorphism-of-normed-spaces]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[rem-real-and-complex-normed-space-convention]]. A linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $T:\\mathbb K^n\\to X$ be the basis map from [L1]. Since $T^{-1}$ is bounded, there is $B>0$ such that $$\\|T^{-1}x\\|_1\\le B\\|x\\| \\qquad (x\\in X).$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $M:=\\sum_{j<n}\\|S(e_j)\\|$, a finite real. If $x=\\sum_{j<n}a_je_j=T(a_0,\\dots,a_{n-1})$, then by [L3] $$Sx=\\sum_{j<n}a_jS(e_j),$$ so $$\\|Sx\\|\\le\\sum_{j<n}|a_j|\\,\\|S(e_j)\\|\\le M\\sum_{j<n}|a_j|=M\\|T^{-1}x\\|_1.$$",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Combining steps 1.1 and 1.2 gives $$\\|Sx\\|\\le MB\\|x\\| \\qquad (x\\in X).$$ Therefore $S$ is bounded, and with [L3] this makes $S$ a bounded linear operator by [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Boundedness from a finite-dimensional domain: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Boundedness from a finite-dimensional domain: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Boundedness from a finite-dimensional domain: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Boundedness from a finite-dimensional domain: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Boundedness from a finite-dimensional domain: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Boundedness from a finite-dimensional domain: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Boundedness from a finite-dimensional domain: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Boundedness from a finite-dimensional domain: this item does not itself state an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: boundedness is reduced to a finite coefficient estimate. Steps 1.1 to 2.1 combine the bounded inverse of the basis map with the finite sum M = sum ||S(e_j)||, giving the required global norm bound."
+      }
+    },
+    "lem-riesz-lemma": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], choose $y\\in X\\setminus M$ and put $d:=\\inf_{m\\in M}\\|y-m\\|$. Because $M$ is closed, its complement is open, so there is $\\rho>0$ with $B(y,\\rho)\\subseteq X\\setminus M$. Hence $\\|y-m\\|\\ge \\rho$ for every $m\\in M$, which gives $d\\ge \\rho>0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\alpha<1$, one has $d<d/\\alpha$. By definition of the infimum, choose $m\\in M$ with $$d\\le \\|y-m\\|<\\frac d\\alpha.$$ Put $$x:=\\frac{y-m}{\\|y-m\\|}.$$ Then $\\|x\\|=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $m'\\in M$. Because $m+\\|y-m\\|m'\\in M$, the definition of $d$ gives $$d\\le \\|y-(m+\\|y-m\\|m')\\| =\\|y-m-\\|y-m\\|m'\\| =\\|y-m\\|\\,\\|x-m'\\|.$$ Therefore $$\\|x-m'\\|\\ge \\frac d{\\|y-m\\|}>\\alpha,$$ the last inequality by step 2.1. Since $m'\\in M$ was arbitrary, $\\operatorname{dist}(x,M)>\\alpha$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 3.1 produces a unit vector $x$ whose distance from $M$ exceeds $\\alpha$, as required.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Riesz lemma: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves $dge\rho>0$, and step 2.1 then divides by $|y-m|$ only after choosing $m$ with $|y-m|ge d>0$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Riesz lemma: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Riesz lemma: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Riesz lemma: the statement assumes 0 < alpha < 1, so the excluded endpoint values alpha = 0 and alpha = 1 are not claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses y outside the proper subspace and step 2.1 chooses the approximate minimizer m from the nonempty subspace M."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Riesz lemma: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Riesz lemma: this item does not itself state an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: the dangerous point was proving dist(y,M) > 0 without hidden countable choice. Step 1.1 now uses the openness of X\\M around y, so the distance lower bound is direct and the rest of the approximate-minimizer argument is sound."
+      }
+    },
+    "thm-locally-compact-normed-space-iff-finite-dimensional": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K \\in \\{\\mathbb R,\\mathbb C\\}$, read in\nthe complex case by [[rem-real-and-complex-normed-space-convention]]. Let\n$e:n\\to X$ be an ordered basis ([[def-linear-basis]]), and write $e_j:=e(j)$.\nGive $\\mathbb K^n$ its coordinate $\\ell^1$ norm\n\n$$\\|(a_0,\\dots,a_{n-1})\\|_1:=\\sum_{j<n}|a_j|.$$\n\nDefine\n\n$$T:\\mathbb K^n\\to X,\\qquad T(a_0,\\dots,a_{n-1})=\\sum_{j<n} a_j e_j.$$\n\nThen $T$ is a topological isomorphism of normed spaces in the sense of\n[[def-topological-isomorphism-of-normed-spaces]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-riesz-lemma",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space, let $M\\subsetneq X$ be a proper closed normed\nsubspace ([[def-normed-subspace]]), and let $0<\\alpha<1$. Then there exists\n$x\\in X$ such that $\\|x\\|=1$ and\n\n$$\\operatorname{dist}(x,M):=\\inf_{m\\in M}\\|x-m\\|>\\alpha.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-compact-implies-complete-and-totally-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]). Then $(X,d)$ is totally bounded\n([[def-totally-bounded]]) and complete ([[def-complete-metric-space]]).\n\n**Both implications are theorems of ZF.** Completeness is obtained here from the\nfinite intersection characterisation ([[thm-compact-iff-finite-intersection-property]])\napplied to the closures of the tails of a Cauchy sequence, and not from the\nextraction of a convergent subsequence, which would route the argument through\nsequential compactness. What matters for the ledger is that the route taken below\nselects nothing at all; the first remark below says why the other route was not\ntaken.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-rn-is-locally-compact-and-sigma-compact",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, Euclidean space $\\mathbb{R}^n$ is locally compact and $\\sigma$-compact.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-complex-numbers-are-the-real-coordinate-plane",
+          "source_section": "Statement",
+          "quote": "The map\n$$\\Phi:\\mathbb C\\longrightarrow\\mathbb R^2,\\qquad \\Phi(a+bi)=(a,b),$$\nis a bijection. Under it,\n$$\\Phi((a+bi)+(u+vi))=(a+u,b+v)$$\nand\n$$\\Phi((a+bi)(u+vi))=(au-bv,av+bu).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-locally-compact-space",
+          "source_section": "Definition",
+          "quote": "A topological space $(X, \\mathcal{T})$ ([[def-topological-space]]) is **locally\ncompact** when\n\n> every point of $X$ has a compact neighbourhood:\n\nthat is, for every $x \\in X$ there is a neighbourhood $N$ of $x$\n([[def-neighbourhood-top]]) that is a compact subset of $X$\n([[def-compact-space]], [[def-subspace-topology-top]]).\n\n**A neighbourhood need not be open here**, and that is what makes the condition\nthe weak one it is meant to be: $N$ is required only to contain some open set\ncontaining $x$. Writing \"compact **open** neighbourhood\" instead would define a\nstrictly stronger property, satisfied by no space in which a point has no compact\nopen neighbourhood, $\\mathbb{R}$ among them; and requiring the compact set merely\nto *contain* $x$ would define a property so weak that every space with a\nsingleton has it, singletons being compact.\n\n**Every compact space is locally compact**, since $X$ itself is a neighbourhood\nof each of its points and is a compact subset of itself. The converse fails, and\n$\\mathbb{R}^n$ is the standard witness.\n\n**What the condition says in a metric space.** Let $(X,d)$ be a metric space\ncarrying its metric topology ([[def-metric-topology]], [[def-metrizable-space]]),\nwith balls as in [[def-metric-ball]], and let $x \\in X$. Then\n\n> $x$ has a compact neighbourhood **if and only if** there are a real $r > 0$ and\n> a compact $K \\subseteq X$ with $B(x,r) \\subseteq K$.\n\n*Both directions are immediate and are discharged here.* If $N$ is a compact\nneighbourhood of $x$, fix an open $U$ with $x \\in U \\subseteq N$; by\n[[def-metric-topology]] there is $r > 0$ with $B(x,r) \\subseteq U \\subseteq N$, so\n$K := N$ serves. Conversely, if $B(x,r) \\subseteq K$ with $K$ compact, then $K$\ncontains the open set $B(x,r)$, which contains $x$, so $K$ is a neighbourhood of\n$x$ and is compact. Compactness of a subset of $(X,d)$ means the same thing read\nmetrically and read topologically\n([[thm-compactness-agrees-with-metric-compactness]]), so the criterion may be\napplied with either development's theorems.\n\n**$\\mathbb{R}^n$ is locally compact for every $n \\ge 1$.** Give $\\mathbb{R}^n$\nthe product topology, which is the metric topology of the Euclidean metric $d_2$\n([[lem-metrics-on-rn]], [[cor-heine-borel-in-the-product-topology]]). For\n$p \\in \\mathbb{R}^n$ the set\n\n$$Q_p \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : d_2(x,p) \\le 1 \\,\\}$$\n\nis closed, being the complement of the union of the open balls $B(y, d_2(y,p) - 1)$\nover the points $y$ with $d_2(y,p) > 1$, and it is bounded\n([[def-metric-bounded-diameter]]), lying inside $B(p, 2)$; so $Q_p$ is compact by\n[[cor-heine-borel-in-the-product-topology]]. It contains the open ball $B(p,1)$,\nwhich contains $p$, so it is a compact neighbourhood of $p$. The space\n$\\mathbb{R}^n$ is not compact, so local compactness is strictly weaker than\ncompactness.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $X$ admits an ordered basis of length $n$. If $\\mathbb K=\\mathbb R$, the coordinate space $\\mathbb R^n$ is locally compact by [L4] when $n\\ge1$, and $\\mathbb R^0=\\{0\\}$ is compact, hence locally compact. If $\\mathbb K=\\mathbb C$, then $\\mathbb C^n$ identifies with $\\mathbb R^{2n}$ by [L5], so the same conclusion holds there. By [L1], $X$ is homeomorphic to that coordinate space, hence locally compact.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume now that $X$ is locally compact. By [L6], applied to the norm metric, $0$ has a compact neighbourhood $K$ containing some open ball $B(0,r)$ with $r>0$. The closed ball $$\\overline B\\left(0,\\frac r2\\right):=\\left\\{x\\in X:\\|x\\|\\le \\frac r2\\right\\}$$ is a closed subset of $K$ and is therefore compact.",
+          "step": "1.2",
+          "inputs": [
+            "L6",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For the successor step, let $M_m:=\\operatorname{span}\\{x_0,\\dots,x_m\\}$. The finite list $x_0,\\dots,x_m$ generates $M_m$, so by deleting dependent terms if necessary one gets an ordered basis of finite length for $M_m$. Thus $M_m\\subsetneq X$ by the contradiction hypothesis, and [[cor-finite-dimensional-subspaces-are-closed]] makes $M_m$ closed. Applying [L2] with $\\alpha=1/2$ yields a unit vector $x_{m+1}$ with $\\operatorname{dist}(x_{m+1},M_m)>1/2$. In particular $\\|x_{m+1}-x_j\\|>1/2$ for every $j\\le m$. [L2, [[cor-finite-dimensional-subspaces-are-closed]], choose]",
+          "step": "1.3",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose for contradiction that $X$ admits no ordered basis of finite length. We recursively build, for each $m\\ge0$, unit vectors $x_0,\\dots,x_m\\in X$ such that $$\\|x_j-x_k\\|>\\frac12 \\qquad (j\\ne k).$$ For $m=0$ choose any nonzero $x_0$ and normalize it.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "assume-contra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every $x_j$ lies in the closed ball $\\overline B(0,r/2)$ after rescaling by $r/2$: namely $y_j:=(r/2)x_j$ satisfies $\\|y_j\\|=r/2$, so $y_j$ lies in that compact set. Also $$\\|y_j-y_k\\|=\\frac r2\\|x_j-x_k\\|>\\frac r4 \\qquad (j\\ne k).$$",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [L3], the compact metric space $\\overline B(0,r/2)$ is totally bounded. Taking $\\varepsilon=r/8$, it admits a finite $\\varepsilon$-net. But one $\\varepsilon$-ball can contain at most one of the points $y_j$, since distinct ones are more than $r/4=2\\varepsilon$ apart. Therefore a finite $\\varepsilon$-net cannot cover arbitrarily large finite sets $\\{y_0,\\dots,y_m\\}$, contradiction.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "step 3.1",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The contradiction in step 4.1 shows that $X$ must admit an ordered basis of finite length. Together with step 1.1, this proves the equivalence.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Local compactness versus finite dimension: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles the zero-dimensional coordinate space as the one-point compact case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Local compactness versus finite dimension: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Local compactness versus finite dimension: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Local compactness versus finite dimension: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 chooses a compact neighbourhood and step 2.1 starts the finite recursive separated-family construction with a nonzero vector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves that a finite ordered basis yields local compactness by transport from the coordinate space."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.2, step 1.3, step 4.1, and step 5.1 prove that local compactness forces a contradiction with arbitrarily large separated finite subsets unless the space is finite-dimensional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: the reverse implication depends on turning one compact neighborhood into a finite-dimensional contradiction. Steps 1.2 to 4.1 use a compact closed ball, the repaired Riesz lemma, and a finite-net obstruction, so the biconditional is resolved on current bytes."
+      }
+    },
+    "lem-dependent-choice-riesz-separated-unit-sequence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a sequence $x : \\mathbb{N} \\to X$ ([[def-sequence]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nAs everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. That is precisely the situation $\\mathrm{AC}_\\omega$ does not\ncover, and it is why a construction \"pick $x_{n+1}$ depending on $x_n$, for every\n$n$ at once\" is not licensed by countable choice.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. The reverse derivation is standard and is not needed anywhere in\nthis library, so it is not carried out; every use below prescribes $x_0$.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-finite-dimensional-subspaces-are-closed",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a normed subspace. If $W$\nadmits an ordered basis of finite length, then $W$ is closed in $V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-riesz-lemma",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space, let $M\\subsetneq X$ be a proper closed normed\nsubspace ([[def-normed-subspace]]), and let $0<\\alpha<1$. Then there exists\n$x\\in X$ such that $\\|x\\|=1$ and\n\n$$\\operatorname{dist}(x,M):=\\inf_{m\\in M}\\|x-m\\|>\\alpha.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n### Finite sums of vectors\n\nBy axiom (V1) the triple $(V, +, 0_V)$ is an abelian group ([[def-group]]), hence\nin particular a commutative monoid ([[def-semigroup-and-monoid]]). So the finite\nproducts of [[def-monoid-finite-product]] are available in it, and we write them\n**additively**: for $n \\in \\mathbb{N}$ and a finite list $u : n \\to V$, that is a\nfunction on the von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]),\n\n$$\\sum_{i<n} u_i \\;:=\\; \\prod_{i<n} u_i \\quad \\text{computed in } (V,+,0_V),$$\n\nso that $\\sum_{i<0} u_i = 0_V$ and $\\sum_{i<\\sigma(n)} u_i = \\bigl(\\sum_{i<n} u_i\\bigr) + u_n$,\nand the value depends only on $u_0, \\dots, u_{n-1}$.\n\n### Linear combinations\n\nA **linear combination in $V$** is a vector of the form\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nwhere $n \\in \\mathbb{N}$, $\\lambda : n \\to F$ is a finite list of scalars and\n$v : n \\to V$ is a finite list of vectors; the sum is the finite sum just\ndescribed, of the list $i \\mapsto \\lambda_i v_i$. For $S \\subseteq V$, a vector\n$w \\in V$ is a **linear combination of elements of $S$** when there are\n$n \\in \\mathbb{N}$, $\\lambda : n \\to F$ and $v : n \\to S$ with\n$w = \\sum_{i<n} \\lambda_i v_i$.\n\n**The empty case is a real case.** $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]), and at $n = 0$ the sum is the empty sum, which is\n$0_V$. So $0_V$ is a linear combination of elements of every subset of $V$,\nincluding $S = \\varnothing$. The lists are indexed from $0$, so a linear\ncombination of length $n$ is $\\lambda_0 v_0 + \\dots + \\lambda_{n-1}v_{n-1}$; no\nstatement here is restricted to $n \\ge 1$.\n\n### The span\n\nLet $S \\subseteq V$. The set of linear subspaces of $V$ containing $S$ is\nnonempty, since $V$ itself is one, so its intersection is a linear subspace of\n$V$ by [[lem-intersection-of-linear-subspaces]]. That intersection is the **span\nof $S$**,\n\n$$\\operatorname{span}(S) \\;:=\\; \\bigcap \\{\\, W \\;:\\; W \\text{ is a linear subspace of } V \\text{ and } S \\subseteq W \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each of which contains $S$, and it\nis contained in every linear subspace of $V$ that contains $S$. So it is the\n**smallest** linear subspace of $V$ containing $S$, and those two properties\ndetermine it uniquely: if $W$ and $W'$ both contain $S$ and are each contained in\nevery linear subspace containing $S$, then each is contained in the other. This\nis what licenses the definite article.\n\nA subset $S \\subseteq V$ **spans** $V$, or is a **spanning set** of $V$, when\n$\\operatorname{span}(S) = V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S$ be the set of all finite lists $s=(u_0,\\dots,u_m)$ of unit vectors in $X$ such that $\\|u_j-u_k\\|>\\alpha$ for all $j\\ne k$. The set $S$ is nonempty because any single unit vector lies in it: choose any nonzero $u\\in X$ and normalize it.",
+          "step": "1.1",
+          "inputs": [
+            "L4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Define a relation $R$ on $S$ by $s\\,R\\,t$ when $t$ is obtained from $s$ by appending one more unit vector $u$ with $\\operatorname{dist}(u,\\operatorname{span}(s))>\\alpha$. If $s=(u_0,\\dots,u_m)\\in S$, then the finite span $M:=\\operatorname{span}(s)$ is generated by a finite list, so by deleting dependent terms one obtains an ordered basis of finite length for $M$. Since $X$ is not the span of any finite list, $M\\subsetneq X$; by [L2] it is closed. Now [L3] applies to $M$ and produces a unit vector $u$ with $\\operatorname{dist}(u,M)>\\alpha$, so $s$ has an $R$-successor. Thus $R$ is entire on $S$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [L1], there is a sequence $(s_n)_{n\\in\\mathbb N}$ in $S$ with $s_n\\,R\\,s_{n+1}$ for every $n$. Because each successor appends exactly one new term, the first entries stabilize: if $x_n$ denotes the last entry appended when passing from $s_n$ to $s_{n+1}$, then every earlier $x_j$ remains in all later lists.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $m<n$, the vector $x_n$ was chosen with $\\operatorname{dist}(x_n,\\operatorname{span}(x_0,\\dots,x_{n-1}))>\\alpha$, and $x_m$ lies in that span. Hence $\\|x_n-x_m\\|>\\alpha$. Every $x_n$ is a unit vector by the definition of $R$. Therefore $(x_n)_{n\\in\\mathbb N}$ is the required separated sequence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Dependent-choice separated sequence: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Dependent-choice separated sequence: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Dependent-choice separated sequence: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Dependent-choice separated sequence: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Dependent-choice separated sequence: the statement assumes 0 < alpha < 1, so the endpoint values are outside the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses an initial unit vector and step 1.3 uses Dependent Choice to continue the entire relation indefinitely."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Dependent-choice separated sequence: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Dependent-choice separated sequence: this item does not itself state an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: this lemma intentionally spends dependent choice and needs that use scoped exactly. Step 1.2 makes the successor relation entire on finite separated lists and step 1.3 invokes dependent choice only there, so the choice cost matches the statement."
+      }
+    },
+    "thm-closed-unit-ball-compact-iff-finite-dimensional": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K \\in \\{\\mathbb R,\\mathbb C\\}$, read in\nthe complex case by [[rem-real-and-complex-normed-space-convention]]. Let\n$e:n\\to X$ be an ordered basis ([[def-linear-basis]]), and write $e_j:=e(j)$.\nGive $\\mathbb K^n$ its coordinate $\\ell^1$ norm\n\n$$\\|(a_0,\\dots,a_{n-1})\\|_1:=\\sum_{j<n}|a_j|.$$\n\nDefine\n\n$$T:\\mathbb K^n\\to X,\\qquad T(a_0,\\dots,a_{n-1})=\\sum_{j<n} a_j e_j.$$\n\nThen $T$ is a topological isomorphism of normed spaces in the sense of\n[[def-topological-isomorphism-of-normed-spaces]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-riesz-lemma",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space, let $M\\subsetneq X$ be a proper closed normed\nsubspace ([[def-normed-subspace]]), and let $0<\\alpha<1$. Then there exists\n$x\\in X$ such that $\\|x\\|=1$ and\n\n$$\\operatorname{dist}(x,M):=\\inf_{m\\in M}\\|x-m\\|>\\alpha.$$",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-finite-dimensional-subspaces-are-closed",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a normed subspace. If $W$\nadmits an ordered basis of finite length, then $W$ is closed in $V$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-compact-implies-complete-and-totally-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]). Then $(X,d)$ is totally bounded\n([[def-totally-bounded]]) and complete ([[def-complete-metric-space]]).\n\n**Both implications are theorems of ZF.** Completeness is obtained here from the\nfinite intersection characterisation ([[thm-compact-iff-finite-intersection-property]])\napplied to the closures of the tails of a Cauchy sequence, and not from the\nextraction of a convergent subsequence, which would route the argument through\nsequential compactness. What matters for the ledger is that the route taken below\nselects nothing at all; the first remark below says why the other route was not\ntaken.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-complex-numbers-are-the-real-coordinate-plane",
+          "source_section": "Statement",
+          "quote": "The map\n$$\\Phi:\\mathbb C\\longrightarrow\\mathbb R^2,\\qquad \\Phi(a+bi)=(a,b),$$\nis a bijection. Under it,\n$$\\Phi((a+bi)+(u+vi))=(a+u,b+v)$$\nand\n$$\\Phi((a+bi)(u+vi))=(au-bv,av+bu).$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $X$ admits an ordered basis of length $n$, and let $T:\\mathbb K^n\\to X$ be the coordinate isomorphism from [L1]. Then $T^{-1}[\\overline B_X]$ is closed in $\\mathbb K^n$, because $T$ is continuous, and bounded in the coordinate $\\ell^1$ norm, because $T^{-1}$ is bounded.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume conversely that $\\overline B_X$ is compact. Then [L4] makes it totally bounded. Suppose for contradiction that $X$ admits no ordered basis of finite length.",
+          "step": "1.2",
+          "inputs": [
+            "L4",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $F\\subseteq \\overline B_X$ be a finite $1/2$-net, and put $M:=\\operatorname{span}(F)$. The finite set $F$ generates $M$, so by deleting dependent terms one gets an ordered basis of finite length for $M$; thus [L3] makes $M$ closed. Since $X$ is not finitely generated, $M\\subsetneq X$.",
+          "step": "1.3",
+          "inputs": [
+            "L3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the real case $\\mathbb K=\\mathbb R$, if $n=0$ then $\\overline B_X=\\{0\\}$ is compact. If $n\\ge1$, step 1.1 and [L5] show that $T^{-1}[\\overline B_X]$ is compact in $\\mathbb R^n$, hence $\\overline B_X$ is compact as its homeomorphic image.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In the complex case $\\mathbb K=\\mathbb C$, [L6] identifies $\\mathbb C^n$ with $\\mathbb R^{2n}$. Under that identification the coordinate $\\ell^1$ norm is equivalent to a real norm on $\\mathbb R^{2n}$, so the bounded closed set $T^{-1}[\\overline B_X]$ is also closed and bounded in Euclidean space. If $n=0$ it is a singleton; if $n\\ge1$, [L5] makes it compact in $\\mathbb R^{2n}$, hence compact in $\\mathbb C^n$ and therefore in $X$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Applying [L2] with $\\alpha=1/2$ gives a unit vector $x\\in X$ with $\\operatorname{dist}(x,M)>1/2$. Since $F$ is a $1/2$-net in the unit ball and $x\\in\\overline B_X$, some $y\\in F$ satisfies $\\|x-y\\|<1/2$. But $y\\in M$, which contradicts $\\operatorname{dist}(x,M)>1/2$.",
+          "step": "2.3",
+          "inputs": [
+            "L2",
+            "step 1.3",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $X$ must admit an ordered basis of finite length. Together with steps 2.1 and 2.2, this proves the equivalence.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Compact closed unit ball criterion: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 and step 2.2 treat the zero-dimensional coordinate space as a singleton compact unit ball."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Compact closed unit ball criterion: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Compact closed unit ball criterion: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Compact closed unit ball criterion: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.3 chooses a finite 1/2-net and step 2.3 instantiates Riesz lemma against its span."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 together with step 2.1 and step 2.2 proves compactness from a finite coordinate model."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.2, step 1.3, step 2.3, and step 3.1 prove that compactness of the unit ball forces a finite-dimensional span."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: both directions hinge on the repaired Riesz lemma and the compact-coordinate argument. Steps 1.1 to 3.1 cover the real and complex coordinate cases and use one finite 1/2-net for the converse, so the iff claim is justified."
+      }
+    },
+    "cor-infinite-dimensional-closed-unit-ball-is-not-compact": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-closed-unit-ball-compact-iff-finite-dimensional",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and write\n\n$$\\overline B_X:=\\{x\\in X:\\|x\\|\\le1\\}.$$\n\nThen the following are equivalent.\n\n1. $\\overline B_X$ is compact in the norm metric ([[def-metric-compactness]]).\n2. $X$ admits an ordered basis of finite length.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\overline B_X$ were compact, [L1] would force $X$ to admit an ordered basis of finite length.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "That contradicts the hypothesis, so $\\overline B_X$ is not compact.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Noncompactness of the infinite-dimensional unit ball: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Noncompactness of the infinite-dimensional unit ball: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Noncompactness of the infinite-dimensional unit ball: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Noncompactness of the infinite-dimensional unit ball: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Noncompactness of the infinite-dimensional unit ball: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Noncompactness of the infinite-dimensional unit ball: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Noncompactness of the infinite-dimensional unit ball: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Noncompactness of the infinite-dimensional unit ball: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    },
+    "cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[rem-real-and-complex-normed-space-convention]]. A linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-infinite-dimensional-closed-unit-ball-is-not-compact",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space that admits no ordered basis of finite length. Then\nits closed unit ball\n\n$$\\overline B_X:=\\{x\\in X:\\|x\\|\\le1\\}$$\n\nis not compact.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The identity map is linear and satisfies $\\|I_Xx\\|=\\|x\\|$ for every $x\\in X$, so [L1] makes it a bounded linear operator.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "One has $I_X[\\overline B_X]=\\overline B_X$. By [L2], that set is not compact. Therefore the identity operator does not send the closed unit ball to a compact subset of $X$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Noncompact identity operator: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Noncompact identity operator: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Noncompact identity operator: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Noncompact identity operator: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Noncompact identity operator: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Noncompact identity operator: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Noncompact identity operator: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Noncompact identity operator: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-banach-space-no-countably-infinite-hamel-basis": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-finite-dimensional-subspaces-are-closed",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a normed subspace. If $W$\nadmits an ordered basis of finite length, then $W$ is closed in $V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "rem-baire-category-choice-strength",
+          "source_section": "Statement",
+          "quote": "Over ZF, \"the Baire category theorem\" is not one statement. Naming the versions\nby the class of spaces they quantify over:\n\n**(BCT-metric)** In a complete metric space, a countable intersection of dense\nopen sets is dense. **Over ZF this is equivalent to the axiom of dependent\nchoice (DC).** The implication from DC is the usual proof, in which each nested\nball is chosen in terms of the previous one; the converse is Blair (1977).\n\n**(BCT-separable)** The same statement restricted to **separable** complete\nmetric spaces **is a theorem of ZF**, with no choice principle at all: a fixed\ncountable dense set removes every choice from the construction.\n\n**(BCT-compact-Hausdorff)** Every compact Hausdorff space is a Baire space. Over\nZF this is equivalent to the principle \"every tree has a subtree all of whose\nlevels are finite\", introduced by Blass (1979) and known as **dependent multiple\nchoice (DMC)**. The equivalence is Fossy and Morillon (1998).\n\n**Separating them.** DMC is strictly weaker than each of DC and the axiom of\nmultiple choice, in ZF and in ZFA alike, so BCT-metric and BCT-compact-Hausdorff\nare genuinely different assumptions. The Boolean prime ideal theorem does not\nimply DMC either, and so does not give BCT-compact-Hausdorff. The ground for that\nlast point is recorded elsewhere on this page: DMC implies Urysohn's lemma\n(Blass 1979) while BPI does not (Brunner 1983, in the Mostowski linearly ordered\nmodel). The same pair shows DMC is not itself a theorem of ZF, since Urysohn's\nlemma is not.\n\n**If ZF is consistent**, none of these principles is a theorem of ZF except\nBCT-separable, and the non-implications listed are witnessed by models.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-countable-iff-surjection-from-n",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a nonempty set. Then $A$ is at most countable ([[def-countable]]) if\nand only if there is a surjection $s : \\mathbb{N} \\to A$\n([[def-injection-surjection-bijection]]).\n\nMoreover, from any such surjection an injection $A \\to \\mathbb{N}$ is obtained\nexplicitly, without any choice, by\n\n$$j(a) := \\min\\{\\, k \\in \\mathbb{N} : s(k) = a \\,\\}.$$\n\nThis is the working form of countability used everywhere below: to prove a\nnonempty set countable it suffices to list its elements, repetitions and all.\n\n**No choice principle is used.** The backward direction is where an appeal to\nchoice would be natural (\"for each $a$ pick some $k$ with $s(k) = a$\") and it is\navoided outright, because $\\min$ is canonical: every nonempty set of naturals has\na *least* element ([[thm-well-ordering-principle]]), so $j(a)$ is determined by\n$a$ and $s$ alone.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $Q_{\\mathbb K}:=\\mathbb Q$ in the real case and $Q_{\\mathbb K}:=\\{a+ib:a,b\\in\\mathbb Q\\}$ in the complex case. In either case $Q_{\\mathbb K}$ is countable by [L3], and it is dense in $\\mathbb K$. Let $D\\subseteq X$ be the set of all finite $Q_{\\mathbb K}$-linear combinations of the basis vectors $b_n$. Coding a finite combination by the finite list of its indices together with its coefficient list gives an explicit surjection from a countable set onto $D$, so $D$ is countable. Also $0\\in D$, so $D$ is nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $N\\in\\mathbb N$ put $$F_N:=\\operatorname{span}_{\\mathbb R}\\{b_0,\\dots,b_N\\}$$ in the real case, and $$F_N:=\\operatorname{span}_{\\mathbb R}\\{b_0,ib_0,\\dots,b_N,ib_N\\}$$ in the complex case. In either case $F_N$ is finite-dimensional over $\\mathbb R$. It is proper: in the real case $b_{N+1}\\notin F_N$ by linear independence of the basis image, and in the complex case a real-linear relation expressing $b_{N+1}$ in terms of $b_0,ib_0,\\dots,b_N,ib_N$ would be the same as a complex-linear relation expressing $b_{N+1}$ in terms of $b_0,\\dots,b_N$. Thus [L2] makes every $F_N$ closed. Also $X=\\bigcup_{N\\in\\mathbb N}F_N$, because every vector uses only finitely many basis vectors, and in the complex case every complex coefficient splits into real and imaginary parts.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Every proper linear subspace of a normed space has empty interior. Indeed, if $W\\subsetneq X$ were a linear subspace containing some ball $B(x,r)$, then $B(0,r)\\subseteq W$ because $W$ is closed under subtraction, and for any $y\\in X\\setminus\\{0\\}$ the vector $(r/(2\\|y\\|))y$ would lie in $B(0,r)\\subseteq W$, forcing $y=(2\\|y\\|/r)\\,(r/(2\\|y\\|))y\\in W$; also $0\\in W$. So $W=X$, contradiction.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L5], fix a surjection $d:\\mathbb N\\to D$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L5",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "$D$ is dense in $X$. Indeed, let $x=\\sum_{j=0}^m \\lambda_j b_{n_j}\\in X$ and let $\\varepsilon>0$. Choose $q_j\\in Q_{\\mathbb K}$ with $|\\lambda_j-q_j|<\\varepsilon/(2(m+1)(1+\\sum_{j=0}^m\\|b_{n_j}\\|))$. Then $$\\left\\|x-\\sum_{j=0}^m q_j b_{n_j}\\right\\| \\le \\sum_{j=0}^m |\\lambda_j-q_j|\\,\\|b_{n_j}\\|<\\varepsilon.$$ So every vector of $X$ lies in the closure of $D$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "We now run the separable-complete Baire argument inside the open unit ball $U_0:=\\{x:\\|x\\|<1\\}$. Because $F_0$ is closed with empty interior, the set $U_0\\setminus F_0$ is nonempty and open. By step 2.2, the set $$A_0:=\\{m\\in\\mathbb N:d(m)\\in U_0\\setminus F_0\\}$$ is nonempty, so [L5] gives its least element $m_0$. Put $x_0:=d(m_0)$. Since $U_0\\setminus F_0$ is open at $x_0$, the set $$B_0:=\\left\\{k\\in\\mathbb N_{\\ge1}:\\overline B\\left(x_0,\\frac1k\\right)\\subseteq U_0\\setminus F_0\\right\\}$$ is nonempty; let $k_0$ be its least element and set $r_0:=1/k_0$. Then $\\overline B(x_0,r_0)\\subseteq U_0\\setminus F_0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 1.3",
+            "L5",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Inductively, if closed balls $\\overline B(x_n,r_n)\\subseteq U_0\\setminus F_n$ have been chosen with $\\overline B(x_n,r_n)\\subseteq B(x_{n-1},r_{n-1}/2)$ for $n\\ge1$, then $B(x_n,r_n/2)\\setminus F_{n+1}$ is a nonempty open set. By step 2.2, the set $$A_{n+1}:=\\{m\\in\\mathbb N:d(m)\\in B(x_n,r_n/2)\\setminus F_{n+1}\\}$$ is nonempty, so [L5] gives its least element $m_{n+1}$. Put $x_{n+1}:=d(m_{n+1})$. Since $B(x_n,r_n/2)\\setminus F_{n+1}$ is open at $x_{n+1}$, the set $$B_{n+1}:=\\left\\{k\\in\\mathbb N_{\\ge1}:\\frac1k<\\frac{r_n}2\\text{ and }\\overline B\\left(x_{n+1},\\frac1k\\right)\\subseteq B(x_n,r_n/2)\\setminus F_{n+1}\\right\\}$$ is nonempty; let $k_{n+1}$ be its least element and set $r_{n+1}:=1/k_{n+1}$. Then $$\\overline B(x_{n+1},r_{n+1})\\subseteq B(x_n,r_n/2)\\setminus F_{n+1}\\subseteq \\overline B(x_n,r_n),$$ and $r_{n+1}<r_n/2$. Hence $r_n\\le r_0/2^n$ for every $n$, so $r_n\\to0$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 1.3",
+            "L5",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $m>n$, the inclusion from step 3.2 gives $x_m\\in B(x_n,r_n/2)$, so $\\|x_m-x_n\\|<r_n/2$. Hence $(x_n)$ is Cauchy. Since $X$ is Banach, [L1] gives $x_n\\to x$ for some $x\\in X$. Each $\\overline B(x_n,r_n)$ is closed and contains all later $x_m$, so it contains the limit $x$; therefore $x\\in \\overline B(x_n,r_n)\\subseteq X\\setminus F_n$ for every $n$.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Step 4.1 contradicts $X=\\bigcup_N F_N$ from step 1.2. Therefore no countably infinite Hamel basis exists. The foundational point recorded in [L4] is that the proof used only a fixed countable dense set, with both the recurring point selections and the ball radii chosen canonically from $\\mathbb N$, and not the unrestricted complete-metric Baire theorem.",
+          "step": "5.1",
+          "inputs": [
+            "L4",
+            "step 1.2",
+            "step 4.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No countable Hamel basis in a Banach space: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No countable Hamel basis in a Banach space: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No countable Hamel basis in a Banach space: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No countable Hamel basis in a Banach space: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No countable Hamel basis in a Banach space: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 chooses rational approximants from the countable dense coefficient set, and step 3.1 and step 3.2 choose nested balls in the separable-complete Baire argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No countable Hamel basis in a Banach space: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No countable Hamel basis in a Banach space: this item does not itself state an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: the proof must avoid hidden countable choice and the sequence formulation must really encode a countably infinite basis. The statement now requires pairwise distinct basis enumerators, and steps 3.1 to 3.2 choose both dense points and radii canonically from N, so the current proof matches its stated choice strength."
+      }
+    },
+    "thm-kuratowski-distance-map-is-an-isometry": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-kuratowski-distance-map",
+          "source_section": "Definition",
+          "quote": "Let $(M,d)$ be a nonempty metric space ([[def-metric-space]]) and fix a basepoint\n$o\\in M$. Inside the real function space $\\mathbb R^M$ of\n[[def-function-space]], write $C_b(M)$ for the set of bounded continuous\nreal-valued functions on $M$, equipped with the supremum norm\n\n$$\\|f\\|_\\infty:=\\sup_{z\\in M}|f(z)|.$$\n\nFor each $x\\in M$, define a function $K_o(x):M\\to\\mathbb R$ by\n\n$$K_o(x)(z):=d(x,z)-d(o,z)\\qquad (z\\in M).$$\n\nThe triangle inequality gives\n\n$$|K_o(x)(z)|=|d(x,z)-d(o,z)|\\le d(x,o),$$\n\nso $K_o(x)$ is bounded. The same inequality in the $z$ variable shows that\n$K_o(x)$ is $2$-Lipschitz, hence continuous. Therefore $K_o(x)\\in C_b(M)$ for\nevery $x\\in M$.\n\nThe resulting map\n\n$$K_o:M\\to C_b(M),\\qquad x\\mapsto K_o(x),$$\n\nis the **based Kuratowski distance map**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-isometry-and-metric-embedding",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]).\n\n**Isometric embedding and isometry.** A function $f : X \\to Y$ is an\n**isometric embedding** if\n\n$$d_Y\\big(f(x), f(x')\\big) = d_X(x,x') \\qquad \\text{for all } x, x' \\in X ,$$\n\nand an **isometry** if it is in addition bijective\n([[def-injection-surjection-bijection]]). Two metric spaces are **isometric** if\nsome isometry between them exists.\n\n**Subspace metric.** Let $A \\subseteq X$ and let\n\n$$d_A := d_X \\restriction (A \\times A)$$\n\nbe the restriction of $d_X$ to pairs from $A$. Then $d_A$ is a metric on $A$:\nthe three axioms (M1), (M2), (M3) of [[def-metric-space]] are conditions on\ntriples of points, and each holds for points of $A$ because it holds for points\nof $X$. The pair $(A, d_A)$ is the **metric subspace** $A$ of $X$, and the\ninclusion $A \\to X$ is an isometric embedding by construction. The metric\ntopology of $d_A$ ([[def-metric-topology]]) is the **subspace topology** of $A$.\n\n**Balls of a subspace are traces of balls of the ambient space.** For $a \\in A$\nand $r > 0$,\n\n$$B_A(a,r) = B_X(a,r) \\cap A ,$$\n\ndirectly from the definitions: a point $z$ lies in the left side exactly when\n$z \\in A$ and $d_A(a,z) = d_X(a,z) < r$ ([[def-metric-ball]]). This is why the\nambient space is always written into the ball notation, and it is the source of\nevery apparent paradox about balls in subspaces.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the map $K_o$ is well defined as a map into $C_b(M)$. For any $x,y,z\\in M$, the triangle inequality gives $$d(x,z)\\le d(x,y)+d(y,z) \\quad\\text{and}\\quad d(y,z)\\le d(y,x)+d(x,z),$$ so $$|K_o(x)(z)-K_o(y)(z)|=|d(x,z)-d(y,z)|\\le d(x,y).$$ Taking the supremum over $z$ yields $\\|K_o(x)-K_o(y)\\|_\\infty\\le d(x,y)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Evaluating at $z=y$ gives $$|K_o(x)(y)-K_o(y)(y)| =|d(x,y)-0| =d(x,y),$$ and evaluating at $z=x$ gives the same value. Therefore the supremum norm is at least $d(x,y)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 give $\\|K_o(x)-K_o(y)\\|_\\infty=d(x,y)$ for all $x,y\\in M$, which is exactly [L2]. Hence $K_o$ is an isometric embedding.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Based Kuratowski isometry: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 covers the equal-point case x = y at the same time as the general distance identity, yielding 0 on both sides."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Based Kuratowski isometry: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Based Kuratowski isometry: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Based Kuratowski isometry: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Based Kuratowski isometry: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Based Kuratowski isometry: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Based Kuratowski isometry: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-kuratowski-wojdyslawski-embedding": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-kuratowski-distance-map-is-an-isometry",
+          "source_section": "Statement",
+          "quote": "Let $(M,d)$ be a nonempty metric space, fix $o\\in M$, and let\n$K_o:M\\to C_b(M)$ be the based Kuratowski distance map of\n[[def-kuratowski-distance-map]]. Then $K_o$ is an isometric embedding in the\nsense of [[def-isometry-and-metric-embedding]]:\n\n$$\\|K_o(x)-K_o(y)\\|_\\infty=d(x,y)\\qquad (x,y\\in M).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-uniform-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{T}_X)$ be a topological space ([[def-topological-space]]) and\nlet $(Y,d)$ be a metric space ([[def-metric-space]]) carrying its metric\ntopology. Then:\n\n1. **The $\\varepsilon/3$ criterion.** Let $f : X \\to Y$ be a function such that\n   for every real $\\varepsilon > 0$ there is a **continuous** $g : X \\to Y$ with\n   $$d\\big(f(x), g(x)\\big) < \\varepsilon \\qquad \\text{for every } x \\in X .$$\n   Then $f$ is continuous ([[def-continuous-map-top]]).\n2. **Uniform limit theorem.** If $X$ is nonempty, $(f_k)$ is a sequence of\n   continuous maps $X \\to Y$ and $(f_k)$ converges uniformly to $f$\n   ([[def-topology-of-uniform-convergence]]), then $f$ is continuous.\n3. **Closedness.** If $X$ is nonempty, $C(X,Y)$ is a closed subset of\n   $(Y^{X}, \\bar\\rho)$, the uniform metric being that of\n   [[lem-uniform-metric-on-a-function-space]].\n\n**The domain is an arbitrary topological space**, not a metric space: nothing in\nthe argument uses a distance in $X$. Only the target carries a metric, and it\ncarries one because the hypothesis of claim 1 is a statement about distances in\n$Y$.\n\n**No choice principle is used, and claim 3 in particular is choice free.** The\nproof of claim 3 instantiates *one* continuous $g$ for each $\\varepsilon$ and uses\nit immediately, rather than manufacturing a sequence of them; a sequential\nargument through [[thm-metric-sequential-closure]] would spend the Axiom of\nCountable Choice, and that route is deliberately not taken.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-bounded-remetrisation",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and define, for\n$x, y \\in X$,\n\n$$d'(x,y) := \\min\\{\\, d(x,y),\\ 1 \\,\\}, \\qquad d''(x,y) := \\frac{d(x,y)}{1 + d(x,y)} .$$\n\nBoth are well defined: $d(x,y) \\ge 0$ ([[lem-metric-nonnegativity]]), so\n$1 + d(x,y) > 0$ and is invertible, and the minimum of a two-element set of\nreals exists ([[lem-finite-set-has-max]], [[def-max-min]]). Then:\n\n1. $d'$ and $d''$ are metrics on $X$.\n2. $d'(x,y) \\le 1$ and $d''(x,y) < 1$ for all $x,y$; hence $(X,d')$ and\n   $(X,d'')$ are bounded metric spaces\n   ([[def-metric-bounded-diameter]]), and if $X \\ne \\emptyset$ then\n   $\\operatorname{diam}(X) \\le 1$ for both.\n3. $d'$ and $d''$ are each uniformly equivalent to $d$, hence topologically\n   equivalent to it ([[def-equivalent-metrics]],\n   [[thm-metric-equivalence-hierarchy]]).\n\n**Consequently every metric space carries a bounded metric with exactly the same\ntopology**, so boundedness cannot be read off the topology alone.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-equivalent-metrics",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $d$ and $d'$ both be metrics on $X$\n([[def-metric-space]]). Note that the underlying set is the same; nothing below\ncompares metrics on different sets.\n\n- $d$ and $d'$ are **topologically equivalent** if they have the same metric\n  topology ([[def-metric-topology]]):\n  $$\\mathcal{T}_d = \\mathcal{T}_{d'} .$$\n- $d$ and $d'$ are **uniformly equivalent** if for every real $\\varepsilon > 0$\n  there are reals $\\delta > 0$ and $\\delta' > 0$ such that, for all\n  $x, y \\in X$,\n  $$d(x,y) < \\delta \\;\\Longrightarrow\\; d'(x,y) < \\varepsilon \\qquad \\text{and} \\qquad d'(x,y) < \\delta' \\;\\Longrightarrow\\; d(x,y) < \\varepsilon .$$\n- $d$ and $d'$ are **Lipschitz equivalent** if there are reals\n  $\\alpha, \\beta > 0$ with\n  $$\\alpha\\, d(x,y) \\;\\le\\; d'(x,y) \\;\\le\\; \\beta\\, d(x,y) \\qquad \\text{for all } x, y \\in X .$$\n\n**What the middle condition says in words.** It is the statement that both\nidentity maps $\\mathrm{id} : (X,d) \\to (X,d')$ and\n$\\mathrm{id} : (X,d') \\to (X,d)$ are *uniformly* continuous: the same $\\delta$\nworks at every pair of points, not merely at each point separately as in\n[[def-metric-continuity]]. Uniform continuity has no definition of its own at\nthis point in the reading order, so the condition is written out in full above;\na later page defines it, and until then this write-out is what earlier pages\nquote.\n\n**Each of the three is an equivalence relation on the metrics on $X$.**\nReflexivity is immediate ($\\delta = \\varepsilon$, and $\\alpha = \\beta = 1$);\nsymmetry is built into the statements, the uniform one being symmetric by\nconstruction and the Lipschitz one because\n$\\alpha d \\le d' \\le \\beta d$ gives $\\beta^{-1} d' \\le d \\le \\alpha^{-1} d'$;\nand transitivity follows by composing the $\\delta$s and multiplying the\nconstants.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-metrizable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $(X, \\mathcal{T})$ ([[def-topological-space]]) is\n**metrizable** if there is a metric $d$ on $X$ ([[def-metric-space]]) whose\nmetric topology is $\\mathcal{T}$, that is $\\mathcal{T} = \\mathcal{T}_d$\n([[def-metric-topology]]). Such a $d$ is said to **induce** or **metrise**\n$\\mathcal{T}$.\n\n**The definition presupposes that $\\mathcal{T}_d$ is a topology in the sense of\n[[def-topological-space]], and it is.** By [[def-metric-topology]] both\n$\\varnothing$ and $X$ are open in $(X,d)$, which is (T1), and by\n[[thm-metric-open-set-algebra]] the family $\\mathcal{T}_d$ is closed under\narbitrary unions, which is (T2), and under intersections of $n \\ge 1$ members,\nwhich contains (T3). So every metric space is a topological space, and the\nmetric-space development of this library is a special case of the present one.\n\n**The standard local notions in the two developments agree after translating\ntheir neighbourhood conventions.** Let $d$ be a metric on $X$ and give $X$ the\ntopology $\\mathcal{T}_d$.\n\n- *Neighbourhoods and balls.* [[def-metric-topology]] uses \"neighbourhood\" for\n  an open set containing $x$, whereas [[def-neighbourhood-top]] also allows a\n  non-open superset of such a set. Thus the two collections are not literally\n  equal, but the open metric neighbourhoods are cofinal in the broader\n  neighbourhood filter. The balls $B(x,r)$, $r > 0$ ([[def-metric-ball]]), are\n  open ([[thm-metric-open-set-algebra]]) and form a neighbourhood base at $x$:\n  any neighbourhood $N$ contains an open $U \\ni x$, hence a ball around $x$ by\n  [[def-metric-topology]]. The balls of radius $1/n$ alone already suffice\n  ([[lem-metric-ball-neighbourhood-base]]).\n- *Interior, closure, boundary.* [[def-metric-interior-closure-boundary]] defines\n  them by the same conditions with balls in place of neighbourhoods, and the\n  previous bullet makes the two conditions equivalent; the metric closure is the\n  smallest closed superset ([[thm-metric-closure-characterisation]]), which is the\n  definition used here ([[def-interior-closure-boundary-top]]). So the two\n  closures, the two interiors and the two boundaries are the same three\n  operations.\n- *Convergence.* $x_k \\to p$ in the sense of [[def-sequence-convergence-top]] is\n  \"eventually in every neighbourhood of $p$\", and by the first bullet this is\n  \"eventually in every ball around $p$\", which is [[def-metric-convergence]].\n- *Continuity.* $\\varepsilon$-$\\delta$ continuity at $a$\n  ([[def-metric-continuity]]) says that every ball around $f(a)$ has a ball\n  around $a$ mapped into it, which by the first bullet is continuity at $a$ in\n  the sense of [[def-continuous-map-top]].\n\n- *Subspaces.* For $A \\subseteq X$ the subspace topology\n  $\\{\\, U \\cap A : U \\in \\mathcal{T}_d \\,\\}$ of [[def-subspace-topology-top]] is\n  exactly the metric topology of the subspace metric $d_A$\n  ([[def-isometry-and-metric-embedding]]), so the two uses of the phrase\n  *subspace topology* in this library name one thing. Indeed\n  $B_A(a,r) = B_X(a,r) \\cap A$: a trace $U \\cap A$ is $d_A$-open, since each of\n  its points $a$ has $B_X(a,r) \\subseteq U$ and hence $B_A(a,r) \\subseteq U \\cap A$;\n  and a $d_A$-open $W$ is the trace of\n  $U := \\bigcup \\{\\, B_X(a,r) : a \\in W,\\ r > 0,\\ B_X(a,r) \\cap A \\subseteq W \\,\\}$,\n  which is $d_X$-open, satisfies $U \\cap A = W$, and involves no choice principle,\n  the union being taken over a set of pairs rather than over a selection.\n\nConsequently the metric-space notions of interior, closure, boundary, density,\nconvergence, continuity and subspace agree with the topological notions here,\nand statements about them transfer once a metric is named. For neighbourhoods\nthe transfer uses the explicit convention change above: a metric-page\nneighbourhood is an open topological neighbourhood, while every topological\nneighbourhood contains one.\n\n**Metrizability is a topological property; the metric is not part of it.** If\n$h : X \\to Y$ is a homeomorphism ([[def-homeomorphism-and-open-maps]]) and $d$\nmetrises $X$, then $d'(y_1,y_2) := d(h^{-1}(y_1), h^{-1}(y_2))$ is a metric on\n$Y$ — the three axioms transfer along the bijection $h^{-1}$ — and\n$h[B_d(x,r)] = B_{d'}(h(x), r)$, so $h$ carries a basis of $\\mathcal{T}_d$ to a\nbasis of $\\mathcal{T}_{d'}$ and $\\mathcal{T}_{d'} = h[\\mathcal{T}_d] = \\mathcal{T}_Y$.\nHence $Y$ is metrizable. The metric itself, however, is **not** determined by the\ntopology: two metrics on one set may induce the same topology without agreeing,\nwhich is exactly topological equivalence ([[def-equivalent-metrics]]), and\nproperties of a metric that are not properties of its topology, boundedness among\nthem, are therefore not properties of a metrizable space.\n\n**Two things every metrizable space has.** It is **Hausdorff**: distinct points\nhave disjoint open neighbourhoods, by [[thm-metric-hausdorff-separation]] applied\nto any metric inducing the topology. And it is **first countable**\n([[def-first-countable-top]]), by [[lem-metric-ball-neighbourhood-base]]. Either\nfailure is therefore an obstruction to metrizability, and this page uses the\nfirst of them to exhibit a topology induced by no metric.\n\n**Sequential limits in a metrizable space are unique, so the notation\n$\\lim_k x_k$ is available there.** In a metric space a sequence has at most one\nlimit ([[lem-metric-limits-unique]]), and by the agreement of convergence above\nthat uniqueness is a statement about the topology alone; so within a metrizable\nspace, and only there, this page writes $\\lim_k x_k$ in the ordinary way. In a\ngeneral space the symbol is unavailable ([[def-sequence-convergence-top]]).\n\n**The usual topology of $\\mathbb{R}$.** The absolute value makes $\\mathbb{R}$ a\nmetric space under $d_{\\mathbb{R}}(x,y) = |x-y|$, its open balls are the bounded\nopen intervals, and the resulting metric topology is what claim 3 of\n[[lem-real-line-is-a-metric-space]] names the **usual topology** of $\\mathbb{R}$.\nThat is the topology meant by the phrase throughout these two pages, and\n$\\mathbb{R}$ carrying it is metrizable by definition. Every statement about it on\nthese two pages is proved from the metric $d_{\\mathbb{R}}$ and the bridge above,\nand no example re-derives any of it.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The target $C_b(M)$ is Banach for the supremum norm. Indeed, let $(f_n)$ be a Cauchy sequence in the supremum norm. Then each scalar sequence $(f_n(z))_n$ is Cauchy, so define $f(z):=\\lim_n f_n(z)$. Fix $N$ with $\\|f_n-f_m\\|_\\infty<1$ for $n,m\\ge N$; letting $m\\to\\infty$ gives $|f(z)|\\le \\|f_N\\|_\\infty+1$ for all $z$, so $f$ is bounded. Given $\\varepsilon>0$, fix $N$ with $\\|f_n-f_m\\|_\\infty<\\varepsilon$ for $n,m\\ge N$; letting $m\\to\\infty$ yields $\\|f_n-f\\|_\\infty\\le\\varepsilon$ for $n\\ge N$, so $f_n\\to f$ uniformly. By [L2], $f$ is continuous. Hence every Cauchy sequence converges in $C_b(M)$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], $K_o$ is an isometric embedding of $M$ into the Banach space $C_b(M)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $$f=\\sum_{j=1}^m \\lambda_j K_o(x_j)$$ be a point of the algebraic convex hull of $K_o[M]$, so each $\\lambda_j\\ge0$ and $\\sum_j\\lambda_j=1$. Put $$\\Delta:=\\sum_{i=1}^m\\sum_{j=1}^m \\lambda_i\\lambda_j d(x_i,x_j).$$ If $\\Delta=0$, then every pair with $\\lambda_i\\lambda_j>0$ satisfies $d(x_i,x_j)=0$, hence all support points coincide and $f=K_o(x_j)$ lies in the image.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Assume $\\Delta>0$, and let $y\\in M$. Evaluating at $y$ gives $$f(y)-K_o(y)(y)=\\sum_{j=1}^m\\lambda_j d(x_j,y).$$ For each $i,j$, the triangle inequality yields $d(x_i,x_j)\\le d(x_i,y)+d(y,x_j)$. Multiplying by $\\lambda_i\\lambda_j$ and summing over $i,j$ gives $$\\Delta\\le 2\\sum_{j=1}^m\\lambda_j d(x_j,y)=2\\bigl(f(y)-K_o(y)(y)\\bigr).$$ Therefore $$\\|f-K_o(y)\\|_\\infty\\ge f(y)-K_o(y)(y)\\ge \\frac\\Delta2>0.$$ Since this holds for every $y\\in M$, the distance from $f$ to $K_o[M]$ is at least $\\Delta/2$. So no such $f$ lies in the closure of $K_o[M]$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 3.1 and 4.1 show that every point of the algebraic convex hull that lies in the closure of $K_o[M]$ is already in $K_o[M]$. Thus $K_o[M]$ is closed in its algebraic convex hull.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For the final claim, let $(X,\\mathcal T)$ be metrizable. If $X=\\varnothing$, the unique map $\\varnothing\\to\\{0\\}$ into any Banach space is a homeomorphic embedding, and its image is closed in its algebraic convex hull. Assume now that $X\\ne\\varnothing$. By [L4], choose a metric $d$ inducing $\\mathcal T$. By [L3], the bounded metric $d_b=d/(1+d)$ induces the same topology. Applying steps 1.1 to 5.1 to $(X,d_b)$ gives an isometric embedding into a Banach space whose image is closed in its algebraic convex hull. Because $d$ and $d_b$ are topologically equivalent, that same map is a homeomorphic embedding for the original topology $\\mathcal T$.",
+          "step": "6.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 1.1",
+            "step 2.1",
+            "step 5.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Kuratowski-Wojdyslawski embedding: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Kuratowski-Wojdyslawski embedding: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Kuratowski-Wojdyslawski embedding: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Kuratowski-Wojdyslawski embedding: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Kuratowski-Wojdyslawski embedding: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 instantiates Cauchy witnesses in C_b(M), and step 6.1 chooses a compatible metric on the metrizable space before bounded remetrisation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Kuratowski-Wojdyslawski embedding: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Kuratowski-Wojdyslawski embedding: this item does not itself state an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Risk reviewed: the metric-space part is nonempty, but the metrizable corollary also has to cover X = emptyset. Step 6.1 now splits off the empty case before using the based Kuratowski construction, so the corollary no longer overreaches its hypotheses."
+      }
+    },
+    "ex-explicit-equivalence-constants-for-standard-norms-on-kn": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is a rational, and that is not a matter of taste.**\n[[def-rational-power]] supplies $a^{r}$ for a nonnegative base and a **rational**\nexponent only; real exponents do not exist at this point in the reading order,\nand [[rem-real-exponents-deferred]] records exactly why. This is also why the\npublished Minkowski inequality [[thm-minkowski-finite]], which is what makes the\ntriangle inequality work below, is itself stated for rational $p \\ge 1$. **No\nstatement on this page is written for $p$ ranging over a real interval.**\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-all-norms-on-rn-are-equivalent",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Then any two norms on $\\mathbb{R}^{n}$ are\nequivalent ([[def-equivalent-norms]], [[def-norm-and-normed-space]]).\n\nMore precisely, for every norm $N$ on $\\mathbb{R}^{n}$ there are reals\n$c > 0$ and $C' > 0$ with\n\n$$c\\,\\lVert x\\rVert_2 \\;\\le\\; N(x) \\;\\le\\; C'\\,\\lVert x\\rVert_2 \\qquad \\text{for every } x \\in \\mathbb{R}^{n},$$\n\nand the general statement follows because equivalence of norms is an equivalence\nrelation.\n\n**Consequently all the metric notions on $\\mathbb{R}^{n}$ are norm independent**\nfor $n \\ge 1$: any two norms give the same open sets, the same convergent\nsequences with the same limits, the same Cauchy sequences and the same uniformly\ncontinuous maps ([[def-equivalent-norms]]).\n\n**The hypothesis $n \\ge 1$ is used twice in the proof and both uses are marked**:\nonce so that the constant $C$ of\n[[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]] exists, and once\nso that the Euclidean unit sphere is **nonempty**, which is what the extreme\nvalue theorem needs. At $n = 0$ the conclusion is true but vacuous, the zero\nspace carrying exactly one norm ([[def-norm-and-normed-space]]), and it is not\nobtained from the argument below.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a complex vector space carrying two norms $\\|\\cdot\\|_a$ and\n$\\|\\cdot\\|_b$, and suppose $X$ admits an ordered basis of finite length. Then\n$\\|\\cdot\\|_a$ and $\\|\\cdot\\|_b$ are equivalent in the sense of\n[[def-equivalent-norms]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since every summand $|x_j|^2$ is nonnegative and one of them equals $\\|x\\|_\\infty^2$, one has $\\|x\\|_\\infty^2\\le \\sum_{j<n}|x_j|^2=\\|x\\|_2^2$, hence $\\|x\\|_\\infty\\le\\|x\\|_2$. Also $$\\|x\\|_2^2=\\sum_{j<n}|x_j|^2\\le \\left(\\sum_{j<n}|x_j|\\right)^2=\\|x\\|_1^2,$$ so $\\|x\\|_2\\le\\|x\\|_1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By Cauchy-Schwarz for the vectors $(|x_j|)_{j<n}$ and $(1,\\dots,1)$, $$\\|x\\|_1=\\sum_{j<n}|x_j| \\le \\left(\\sum_{j<n}|x_j|^2\\right)^{1/2}\\left(\\sum_{j<n}1^2\\right)^{1/2} =\\sqrt n\\,\\|x\\|_2.$$ Also $|x_j|\\le\\|x\\|_\\infty$ for every $j$, so $\\|x\\|_1\\le n\\|x\\|_\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Combining steps 1.1 and 2.1 yields the displayed chain. Thus [L1] and [L2] become concrete on these coordinate norms.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Explicit coordinate norm constants: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Explicit coordinate norm constants: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 uses the exact size-one coefficient family (1, ..., 1) in the sharpness remark and the constant sqrt(n) in the displayed comparison chain."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Explicit coordinate norm constants: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Explicit coordinate norm constants: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Explicit coordinate norm constants: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Explicit coordinate norm constants: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Explicit coordinate norm constants: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-an-infinite-separated-subset-of-the-unit-sphere": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-dependent-choice-riesz-separated-unit-sequence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice ([[def-dependent-choice]]). Let $X$ be a\nnormed space that is not spanned by any finite list, and let $0<\\alpha<1$. Then\nthere exists a sequence $(x_n)_{n\\in\\mathbb N}$ of unit vectors in $X$ such that\n\n$$\\|x_n-x_m\\|>\\alpha \\qquad \\text{for all } n\\ne m.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] with $\\alpha=1/2$. This gives a sequence $(x_n)$ of unit vectors such that $\\|x_n-x_m\\|>1/2$ whenever $n\\ne m$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The set $\\{x_n:n\\in\\mathbb N\\}$ is therefore an infinite subset of the unit sphere whose distinct points are pairwise more than $1/2$ apart.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Separated subset of the unit sphere: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Separated subset of the unit sphere: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Separated subset of the unit sphere: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Separated subset of the unit sphere: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Separated subset example: the only parameter is fixed at alpha = 1/2, so there is no endpoint family to check separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Separated subset of the unit sphere: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Separated subset of the unit sphere: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Separated subset of the unit sphere: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-heine-borel-fails-in-ell-two": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-infinite-dimensional-closed-unit-ball-is-not-compact",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space that admits no ordered basis of finite length. Then\nits closed unit ball\n\n$$\\overline B_X:=\\{x\\in X:\\|x\\|\\le1\\}$$\n\nis not compact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-lp-spaces-are-banach-spaces",
+          "source_section": "Remark",
+          "quote": "The measure-theory page already proves the classical completeness theorem:\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nbuilds the normed spaces $L^p(\\mu)$, and\n[[thm-riesz-fischer-completeness-of-l-p]] proves they are complete. Therefore\neach $L^p(\\mu)$ with $1\\le p\\le \\infty$ is a Banach space in the sense of\n[[def-banach-space]].\n\nThe published [[rem-lp-completeness-and-the-banach-property]] records this as\nthe agreement seam between the measure-theory track and the functional-analysis\ntrack. Nothing on the present page repeats the quotient construction or the\nRiesz-Fischer proof.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) and suppose\n$V$ has a spanning subset $S$ ([[def-linear-combination-and-span]]) with\n$S \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]). Then:\n\n1. every linearly independent subset $L \\subseteq V$\n   ([[def-linear-independence]]) is finite ([[def-countable]]), and the unique\n   $m \\in \\mathbb{N}$ with $L \\approx m$ satisfies $m \\le n$;\n2. no linearly independent subset of $V$ is equinumerous with $\\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The standard unit vectors are linearly independent: if $\\sum_{j=0}^m a_je_j=0$, then the $j$-th coordinate of that sequence is $a_j$, so every $a_j=0$. Therefore the set $\\{e_n:n\\in\\mathbb N\\}$ is linearly independent and is equinumerous with $\\mathbb N$. By [L3], $\\ell^2$ cannot be spanned by any finite list, hence it admits no ordered basis of finite length. Each $e_n$ belongs to $\\ell^2$ and has norm $1$, so every $e_n$ lies in the closed unit ball. Also for $m\\ne n$ one has $\\|e_n-e_m\\|_2=\\sqrt2$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], $\\ell^2$ is a Banach space. Since step 1.1 shows that $\\ell^2$ admits no ordered basis of finite length, [L1] implies that $\\overline B_{\\ell^2}$ is not compact. This closed unit ball is closed and bounded by definition, so it refutes the claim.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Heine-Borel failure in ell^2: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Heine-Borel failure in ell^2: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Heine-Borel failure in ell^2: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Heine-Borel failure in ell^2: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Heine-Borel failure in ell^2: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 works with the explicit nonempty sequence of standard unit vectors e_n."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Heine-Borel failure in ell^2: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Heine-Borel failure in ell^2: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-polynomial-space-admits-no-complete-norm": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-banach-space-no-countably-infinite-hamel-basis",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a Banach space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then $X$\nhas no countably infinite Hamel basis. Equivalently, there is no sequence\n$(b_n)_{n\\in\\mathbb N}$ of pairwise distinct vectors whose image is a basis of\n$X$ in the sense of [[def-linear-basis]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\nA subset $B \\subseteq V$ is a **basis of $V$** when\n\n- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).\n\n**The empty set is a basis of the zero space, and of nothing else.**\n$\\varnothing$ is linearly independent ([[def-linear-independence]]) and\n$\\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[lem-span-is-the-set-of-linear-combinations]]), so $\\varnothing$ is a basis of\n$V$ exactly when $V = \\{0_V\\}$. This is the case $n = 0$ from which every\ninduction on this page starts, and it is a genuine case rather than a convention.\n\n### Ordered bases\n\nAn **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.\n\nBy claim 6 of [[lem-independent-list-is-injective]], a list is linearly\nindependent exactly when it is injective with linearly independent image, so an\nordered basis is equally described as a **linearly independent list $v : n \\to V$\nwith $\\operatorname{span}(v[n]) = V$**: the injectivity does not have to be\nimposed separately. The empty list is the ordered basis of the zero space.\n\nAn ordered basis is a list, so it carries an order; a basis is a set, so it does\nnot. Reordering an ordered basis gives a different ordered basis with the same\nimage, and the coordinates of\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] are attached to the\nlist, not to the set.\n\n### Bases of a linear subspace\n\nLet $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$. For $A \\subseteq U$ the two readings of\n\"$A$ is a basis\" — computed inside $U$, or computed inside $V$ — agree, so the\nphrase needs no disambiguation below.\n\n- **Independence agrees.** The finite sums $\\sum_{i<n}\\lambda_i a_i$ of a list\n  $a : n \\to U$ are given by the same recursion in $U$ as in $V$\n  ([[def-monoid-finite-product]]), the base value $0_V$ and the operation $+$\n  being literally those of $V$ ([[def-linear-subspace]]). So a list into $U$ has\n  the same sums whichever space it is read in, and the vanishing condition of\n  [[def-linear-independence]] is the same condition in both.\n- **The span agrees.** A subset of $U$ is a linear subspace of $U$ exactly when it\n  is a linear subspace of $V$, conditions (W1), (W2), (W3) being the same\n  conditions in either reading. Now $\\operatorname{span}_V(A) \\subseteq U$, since\n  $U$ is a linear subspace of $V$ containing $A$ and the span is contained in\n  every such subspace; so $\\operatorname{span}_V(A)$ is a linear subspace of $U$\n  containing $A$, whence $\\operatorname{span}_U(A) \\subseteq \\operatorname{span}_V(A)$.\n  Conversely $\\operatorname{span}_U(A)$ is a linear subspace of $V$ containing\n  $A$, whence $\\operatorname{span}_V(A) \\subseteq \\operatorname{span}_U(A)$. The\n  two are therefore equal, and we write $\\operatorname{span}(A)$ for both.\n\nConsequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-polynomial-ring-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring ([[def-commutative-ring]]). A function $a\\colon\\mathbb N\\to R$ has **finite support** when there is $N\\in\\mathbb N$ such that $a_i=0$ for every $i>N$. The **polynomial ring** $R[x]$ is the set of all finitely supported functions $a\\colon\\mathbb N\\to R$.\n\nFor $a,b\\in R[x]$ and $n\\in\\mathbb N$, define\n\n$$ (a+b)_n:=a_n+b_n,\\qquad (ab)_n:=\\sum_{i+j=n}a_i b_j. $$\n\nThe convolution sum is a finite sum in the additive commutative monoid of $R$ ([[def-finite-sum-in-a-commutative-monoid]]). Write $0$ for the zero sequence, $1$ for the sequence with coefficient $1_R$ at index $0$ and zero elsewhere, and $x$ for the sequence with coefficient $1_R$ at index $1$ and zero elsewhere. The coefficient sequence supported at $0$ with value $r$ is denoted again by $r$, and a polynomial $a$ is written formally as $\\sum_i a_i x^i$.\n\nThe closure of these operations and the commutative-ring axioms are established by [[lem-polynomial-operations-preserve-finite-support]] and [[thm-polynomial-ring-is-a-commutative-ring]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $\\{1,x,x^2,\\dots\\}$ spans $\\mathbb K[x]$ by [L3], because every polynomial is a finite linear combination of monomials. It is linearly independent: if $a_0+a_1x+\\cdots+a_mx^m=0$ as a polynomial, then every coefficient is $0$. Hence [L2] makes $\\{1,x,x^2,\\dots\\}$ a countably infinite Hamel basis of $\\mathbb K[x]$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If some norm on $\\mathbb K[x]$ were complete, then [L1] would forbid the countably infinite Hamel basis from step 1.1. This contradiction shows that no norm on $\\mathbb K[x]$ is complete.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "assume-contra",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Polynomial-space incompleteness: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Polynomial-space incompleteness: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Polynomial-space incompleteness: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Polynomial-space incompleteness: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Polynomial-space incompleteness: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 works with the explicit monomial family 1, x, x^2, ... and step 2.1 applies the Banach-space obstruction to that nonempty basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Polynomial-space incompleteness: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Polynomial-space incompleteness: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-kuratowski-embedding-of-a-finite-metric-space": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-kuratowski-distance-map-is-an-isometry",
+          "source_section": "Statement",
+          "quote": "Let $(M,d)$ be a nonempty metric space, fix $o\\in M$, and let\n$K_o:M\\to C_b(M)$ be the based Kuratowski distance map of\n[[def-kuratowski-distance-map]]. Then $K_o$ is an isometric embedding in the\nsense of [[def-isometry-and-metric-embedding]]:\n\n$$\\|K_o(x)-K_o(y)\\|_\\infty=d(x,y)\\qquad (x,y\\in M).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By definition, $K_o(x)(z)=d(x,z)-d(o,z)$. Evaluating this on the three points gives $K_o(o)=(0,0,0)$, $K_o(a)=(1,-1,-1)$, and $K_o(b)=(2,0,-2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The sup distances are $\\|K_o(a)-K_o(o)\\|_\\infty=1$, $\\|K_o(b)-K_o(a)\\|_\\infty=1$, and $\\|K_o(b)-K_o(o)\\|_\\infty=2$, exactly matching $d(o,a)$, $d(a,b)$, and $d(o,b)$. This is the concrete instance promised by [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Finite-metric Kuratowski computation: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Finite-metric Kuratowski computation: no separate zero or zero-dimensional branch is needed beyond the uniform argument written in the proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 checks the distance-one edges d(o,a) and d(a,b) explicitly in the computed finite model."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Finite-metric Kuratowski computation: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Finite-metric Kuratowski computation: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Finite-metric Kuratowski computation: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Finite-metric Kuratowski computation: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Finite-metric Kuratowski computation: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-choice-free-discontinuous-functional-on-c00": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. This is the same convention [[rem-metric-axiom-conventions]]\nrecords for metrics.\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because every element of $c_{00}$ has finite support, the displayed sum for $f(x)$ has only finitely many nonzero terms. Therefore $f$ is well defined, and termwise addition shows $f(ax+by)=af(x)+bf(y)$ for all scalars $a,b$ and all $x,y\\in c_{00}$. Thus $f$ is linear by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $n$, the unit vector $e_n$ satisfies $\\|e_n\\|_\\infty=1$ and $f(e_n)=n+1$. Hence the values of $f$ on the unit sphere are unbounded, so no constant $C$ can satisfy $|f(x)|\\le C\\|x\\|_\\infty$ for all $x\\in c_{00}$. Thus $f$ is unbounded.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every bounded linear functional on a normed space is continuous at $0$, so an unbounded linear functional cannot be continuous. Therefore $f$ is a discontinuous linear functional on $c_{00}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "assume-contra",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Choice-free discontinuous functional on c_00: the written claim is about one normed or metric space and not about a family indexed by an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes the zero finitely supported sequence in the same finite-sum definition, and step 3.1 uses unboundedness on unit vectors rather than any exceptional zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Choice-free discontinuous functional on c_00: there is no singleton or value-one boundary that carries a distinct argument here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Choice-free discontinuous functional on c_00: the argument does not hinge on a separate degenerate ambient space or collapsed decomposition case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Choice-free discontinuous functional on c_00: no interval endpoint or extremal parameter is asserted without its needed hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Choice-free discontinuous functional on c_00: the proof does not need a special choice-from-nonempty-set discussion beyond the ordinary instantiated steps already written."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Choice-free discontinuous functional on c_00: this item does not itself state an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Choice-free discontinuous functional on c_00: this item does not itself state an if-and-only-if claim."
+        }
+      ]
+    }
+  }
+}

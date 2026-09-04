@@ -33,8 +33,6 @@ sources:
 Let $M$ be a smooth manifold and $k\ge 0$. The **$k$th exterior-power bundle of
 the cotangent bundle** is the fibrewise assignment
 
-$$
-\bigwedge^kT^*M:=\coprod_{p\in M}\operatorname{Alt}^k(T_pM).
-$$
+$$ \bigwedge^kT^*M:=\coprod_{p\in M}\operatorname{Alt}^k(T_pM). $$
 
 The next theorem provides its smooth vector-bundle structure.

@@ -31,9 +31,7 @@ sources:
 Let $R$ be a Noetherian commutative ring, let $I\subset R$ be an ideal, let $M$
 be a finite $R$-module, and let $N\subseteq M$ be a submodule. Then there exists
 an integer $c\ge0$ such that
-$$
-I^nM\cap N = I^{n-c}(I^cM\cap N)
-$$
+$$ I^nM\cap N = I^{n-c}(I^cM\cap N) $$
 for every $n\ge c$.
 
 ## Facts & Assumptions

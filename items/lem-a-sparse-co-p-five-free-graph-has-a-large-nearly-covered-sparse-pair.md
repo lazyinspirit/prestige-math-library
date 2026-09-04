@@ -36,9 +36,7 @@ $\overline{P_5}$-free graph with $|V(G)|\ge y^{-4}$. Suppose that $G$ is not
 $2y^{4}$-sparse, and that there do not exist disjoint sets $X,Y\subseteq V(G)$
 such that
 
-$$
-|X|\ge y^{4}|V(G)|,\qquad |Y|\ge (1-4y)|V(G)|,
-$$
+$$ |X|\ge y^{4}|V(G)|,\qquad |Y|\ge (1-4y)|V(G)|, $$
 
 and $Y$ is $x$-sparse to $X$. Then there exist disjoint sets
 $A,B\subseteq V(G)$ such that:

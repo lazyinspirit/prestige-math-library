@@ -33,9 +33,7 @@ pipeline_run: null
 ## Statement
 
 Let $k$ be a field, let $A$ be a finite-type $k$-domain, and let $\mathfrak p\subseteq\mathfrak q$ be prime ideals of $A$. Then
-$$
-\operatorname{ht}(\mathfrak q/\mathfrak p)+\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak q)=\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak p).
-$$
+$$ \operatorname{ht}(\mathfrak q/\mathfrak p)+\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak q)=\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak p). $$
 
 ## Facts & Assumptions
 

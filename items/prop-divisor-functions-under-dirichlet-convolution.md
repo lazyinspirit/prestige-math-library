@@ -28,16 +28,12 @@ pipeline_run: null
 
 One has
 
-$$
-\tau=\mathbf 1*\mathbf 1,\qquad \sigma_k=\mathbf 1*\operatorname{id}_k.
-$$
+$$ \tau=\mathbf 1*\mathbf 1,\qquad \sigma_k=\mathbf 1*\operatorname{id}_k. $$
 
 Consequently $\tau$ and every $\sigma_k$ are multiplicative. For a prime power
 $p^a$,
 
-$$
-\tau(p^a)=a+1,\qquad \sigma_k(p^a)=1+p^k+\cdots+p^{ak}.
-$$
+$$ \tau(p^a)=a+1,\qquad \sigma_k(p^a)=1+p^k+\cdots+p^{ak}. $$
 
 ## Facts & Assumptions
 

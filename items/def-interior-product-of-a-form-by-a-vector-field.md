@@ -31,9 +31,7 @@ Let $X:M\to TM$ be a smooth section of the tangent bundle, that is, a smooth
 vector field on $M$, and let $\omega\in\Omega^k(M)$. The **interior product**
 $\iota_X\omega\in\Omega^{k-1}(M)$ is defined pointwise by
 
-$$
-(\iota_X\omega)_p:=\iota_{X_p}\omega_p.
-$$
+$$ (\iota_X\omega)_p:=\iota_{X_p}\omega_p. $$
 
 For $k=0$, adopt the formal convention $\Omega^{-1}(M):=\{0\}$ and set
 $\iota_X\omega:=0$.

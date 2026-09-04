@@ -30,9 +30,7 @@ pipeline_run: null
 ## Example
 
 As a $\mathbb Z$-module,
-$$
-\operatorname{Supp}_{\mathbb Z}(\mathbb Z/12\mathbb Z)=\{(2),(3)\}.
-$$
+$$ \operatorname{Supp}_{\mathbb Z}(\mathbb Z/12\mathbb Z)=\{(2),(3)\}. $$
 
 ## Facts & Assumptions
 

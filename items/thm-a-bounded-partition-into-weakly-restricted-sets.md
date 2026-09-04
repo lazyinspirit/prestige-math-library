@@ -33,9 +33,7 @@ Fix a graph $H$ and a real $\epsilon\in(0,\tfrac12)$. Then there exists an
 integer $B=B(H,\epsilon)$ such that every $H$-free finite simple graph $G$
 admits a partition
 
-$$
-V(G)=X_1\sqcup\cdots\sqcup X_m,\qquad m\le B,
-$$
+$$ V(G)=X_1\sqcup\cdots\sqcup X_m,\qquad m\le B, $$
 
 in which every part satisfies $d_G(X_i,X_i)\le\epsilon$ or
 $d_G(X_i,X_i)\ge1-\epsilon$.

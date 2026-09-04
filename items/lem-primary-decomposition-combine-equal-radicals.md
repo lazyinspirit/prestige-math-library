@@ -29,9 +29,7 @@ sources:
 
 Let $R$ be a Noetherian commutative ring, let $M$ be a finitely generated left
 $R$-module, and let
-$$
-N=Q_1\cap\cdots\cap Q_r
-$$
+$$ N=Q_1\cap\cdots\cap Q_r $$
 be a finite primary decomposition of a submodule $N \subseteq M$, with each
 $Q_i$ $\mathfrak p_i$-primary for a prime ideal $\mathfrak p_i$. If several of
 the $\mathfrak p_i$ equal one prime $\mathfrak p$, then replacing that whole

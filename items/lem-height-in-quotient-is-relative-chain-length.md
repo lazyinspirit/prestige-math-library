@@ -29,9 +29,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring and let $\mathfrak p\subseteq\mathfrak q$ be prime ideals. Then the height of $\mathfrak q/\mathfrak p$ in $R/\mathfrak p$ is the supremum of the lengths of strict prime chains
-$$
-\mathfrak p=\mathfrak q_0\subsetneq\mathfrak q_1\subsetneq\cdots\subsetneq\mathfrak q_n=\mathfrak q
-$$
+$$ \mathfrak p=\mathfrak q_0\subsetneq\mathfrak q_1\subsetneq\cdots\subsetneq\mathfrak q_n=\mathfrak q $$
 in $R$.
 
 ## Facts & Assumptions

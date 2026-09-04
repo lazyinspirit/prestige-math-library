@@ -33,9 +33,7 @@ following classical condition holds:
 
 for every $a \in R$ and every $m \in M$, if $am \in Q$ and $m \notin Q$, then
 there exists $n \ge 1$ such that
-$$
-a^nM\subseteq Q.
-$$
+$$ a^nM\subseteq Q. $$
 
 ## Facts & Assumptions
 

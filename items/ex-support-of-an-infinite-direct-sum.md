@@ -26,13 +26,9 @@ pipeline_run: null
 ## Example
 
 Let
-$$
-M=\bigoplus_{p \text{ prime}} \mathbb Z/p\mathbb Z.
-$$
+$$ M=\bigoplus_{p \text{ prime}} \mathbb Z/p\mathbb Z. $$
 Then
-$$
-\operatorname{Supp}_{\mathbb Z}(M)=\{(p): p \text{ prime}\},
-$$
+$$ \operatorname{Supp}_{\mathbb Z}(M)=\{(p): p \text{ prime}\}, $$
 the set of all nonzero prime ideals of $\mathbb Z$.
 
 ## Facts & Assumptions

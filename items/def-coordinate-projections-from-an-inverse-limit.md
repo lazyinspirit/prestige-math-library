@@ -23,9 +23,7 @@ sources:
 
 For an inverse limit $L=\varprojlim G_i$, the **$i$th coordinate projection** is
 
-$$
-\pi_i:L\to G_i,\qquad \pi_i((g_j)_{j\in I})=g_i.
-$$
+$$ \pi_i:L\to G_i,\qquad \pi_i((g_j)_{j\in I})=g_i. $$
 
 Because elements of $L$ are tuples, each projection is simply the ambient
 Cartesian-product coordinate map restricted to the compatible-tuples subset

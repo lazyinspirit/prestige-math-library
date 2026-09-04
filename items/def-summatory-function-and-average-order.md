@@ -31,17 +31,13 @@ pipeline_run: null
 Let $f$ be an arithmetic function ([[def-arithmetic-function]]). Its
 **summatory function** is
 
-$$
-F_f(x):=\sum_{n\le x} f(n)
-$$
+$$ F_f(x):=\sum_{n\le x} f(n) $$
 
 for real $x \ge 1$.
 
 An arithmetic function $g$ is an **average order** of $f$ when
 
-$$
-\sum_{n\le x} f(n)\sim \sum_{n\le x} g(n)
-$$
+$$ \sum_{n\le x} f(n)\sim \sum_{n\le x} g(n) $$
 
 as $x\to\infty$, and the comparison sum on the right is eventually nonzero.
 

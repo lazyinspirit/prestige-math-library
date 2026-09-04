@@ -29,6 +29,7 @@ parts:
       - closed-monoidal-categories-and-the-internal-hom
       - the-diagram-lemmas-in-an-abelian-category
       - braided-and-symmetric-monoidal-categories
+      - duality-and-rigidity-in-monoidal-categories
 ---
 
 ## categories-and-yoneda
@@ -53,12 +54,11 @@ completion then supply the standard structural consequences.
 ## reflections-and-monads
 
 Reflective subcategories and the adjoint functor theorems explain when limits, solution
-sets, and size hypotheses force left adjoints, and monads, comonads, and Beck recast the
-same adjunction data as algebraic structure and monadic comparison. Abelian categories
-then supply kernels, cokernels, exactness, Grothendieck generators, and the diagram
-lemmas needed for homological arguments, while monoidal categories, strictification, and
-closed internal-hom formalisms organize tensor products and coherence. The braided and
-symmetric pages add the missing commutativity layer: braidings satisfy hexagon axioms and
-the Yang-Baxter relation, symmetry collapses braid data to permutations, coherence splits
-accordingly into braid-group and symmetric-group forms, and monoid objects inherit the
-same braided or symmetric tensor structure.
+sets, and size hypotheses force left adjoints, and monads, comonads, and Beck recast that
+adjunction data as algebraic structure. Abelian categories then supply kernels, cokernels,
+exactness, Grothendieck generators, and the diagram lemmas for homological arguments,
+while monoidal, closed, braided, and symmetric structures organize tensor products,
+coherence, internal homs, and commutativity constraints. Duality and rigidity complete the
+tensor branch: dual objects induce tensor adjunctions, rigid categories support duals of
+morphisms and the Drinfeld morphism, and pivotal, spherical, and ribbon data refine trace
+and dimension into categorical invariants.

@@ -26,9 +26,7 @@ pipeline_run: null
 ## Statement
 
 Let $k$ be a field and let $a=(a_1,\ldots,a_n)\in k^n$. The evaluation map
-$$
-\operatorname{ev}_a:k[x_1,\ldots,x_n]\to k,\qquad f\mapsto f(a),
-$$
+$$ \operatorname{ev}_a:k[x_1,\ldots,x_n]\to k,\qquad f\mapsto f(a), $$
 has kernel $(x_1-a_1,\ldots,x_n-a_n)$. In particular, this ideal is maximal.
 
 ## Facts & Assumptions

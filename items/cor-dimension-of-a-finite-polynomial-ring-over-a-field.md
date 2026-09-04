@@ -31,9 +31,7 @@ pipeline_run: null
 ## Statement
 
 Let $k$ be a field and let $n\ge0$. Then
-$$
-\dim k[x_1,\ldots,x_n]=n.
-$$
+$$ \dim k[x_1,\ldots,x_n]=n. $$
 
 ## Facts & Assumptions
 

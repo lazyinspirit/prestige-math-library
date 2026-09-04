@@ -30,9 +30,7 @@ pipeline_run: frontier-20
 ## Example
 
 The polynomial
-$$
-f(x)=x^5-x-1
-$$
+$$ f(x)=x^5-x-1 $$
 has a real root.
 
 ## Facts & Assumptions

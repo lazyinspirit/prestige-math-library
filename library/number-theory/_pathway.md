@@ -16,6 +16,8 @@ parts:
       - primitive-roots-and-unit-groups-modulo-n
       - positive-definite-binary-quadratic-forms-and-reduction
       - arithmetic-functions-and-dirichlet-convolution
+      - dirichlet-series-and-euler-products
+      - absolute-values-completions-and-p-adic-numbers
   - part: quadratic-residues
     title: "Quadratic residues and reciprocity"
     pages:
@@ -45,13 +47,14 @@ solubility decidable by a finite search.
 Congruences modulo $n$ turn divisibility into arithmetic in quotient rings, so the Chinese
 remainder theorem splits moduli, Euler's totient counts units, and primitive roots describe
 the cyclic prime-modulus case. The same language governs positive-definite binary
-quadratic forms: discriminants are constrained modulo $4$, representations are preserved by
-unimodular change of variables, and Gauss reduction gives finitely many classes with
-unique reduced representatives. The new arithmetic-functions page repackages this
-arithmetic on positive integers: Dirichlet convolution forms a commutative ring, preserves
-multiplicativity, and determines multiplicative functions from prime powers, while divisor,
-Liouville, von Mangoldt, and Mertens functions supply finite identities such as divisor
-sums, irreducible-polynomial counts, and square detection by $\mathbf 1 * \lambda$.
+quadratic forms through discriminants, unimodular equivalence, and Gauss reduction, while
+arithmetic functions and Dirichlet convolution reorganize multiplicative information on
+the integers. Dirichlet series then package that arithmetic analytically on half-planes,
+where absolute convergence licenses Euler products, logarithmic derivatives, and
+zeta-series identities for Möbius, divisor, and totient functions. Absolute values and
+completions close the part by classifying the places of $\mathbb Q$ and building
+$\mathbb Q_p$ and $\mathbb Z_p$ with their ultrametric topology, digit expansions, and
+Hensel-style lifting.
 
 ## quadratic-residues
 

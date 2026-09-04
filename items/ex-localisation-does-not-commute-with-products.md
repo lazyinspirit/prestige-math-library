@@ -24,13 +24,9 @@ pipeline_run: null
 ## Example
 
 Fix a prime number $p$, let $S=\{p^n:n\in\mathbb N\}$, and let
-$$
-P=\prod_{n\ge0}\mathbb Z.
-$$
+$$ P=\prod_{n\ge0}\mathbb Z. $$
 Then the natural map
-$$
-S^{-1}P \longrightarrow \prod_{n\ge0} S^{-1}\mathbb Z=\prod_{n\ge0}\mathbb Z[1/p]
-$$
+$$ S^{-1}P \longrightarrow \prod_{n\ge0} S^{-1}\mathbb Z=\prod_{n\ge0}\mathbb Z[1/p] $$
 is not surjective. So localisation need not commute with infinite products.
 
 ## Facts & Assumptions

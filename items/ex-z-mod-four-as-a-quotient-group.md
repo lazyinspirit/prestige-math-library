@@ -28,15 +28,11 @@ pipeline_run: null
 
 The quotient group $\mathbb Z/4\mathbb Z$ has the four cosets
 
-$$
-4\mathbb Z,\quad 1+4\mathbb Z,\quad 2+4\mathbb Z,\quad 3+4\mathbb Z,
-$$
+$$ 4\mathbb Z,\quad 1+4\mathbb Z,\quad 2+4\mathbb Z,\quad 3+4\mathbb Z, $$
 
 and its operation is
 
-$$
-(a+4\mathbb Z)+(b+4\mathbb Z)=(a+b)+4\mathbb Z.
-$$
+$$ (a+4\mathbb Z)+(b+4\mathbb Z)=(a+b)+4\mathbb Z. $$
 
 Under the identification of $a+4\mathbb Z$ with the residue class $[a]_4$,
 this is addition modulo $4$.

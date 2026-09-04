@@ -34,9 +34,7 @@ $j(\iota_{\mathbb R}(n!))\ne0$ in the complex field
 [[thm-complex-numbers-form-a-field]].
 
 For $z\in\mathbb C$, define
-$$
-\exp z:=\sum_{n=0}^{\infty}\frac{z^n}{j(\iota_{\mathbb R}(n!))}.
-$$
+$$ \exp z:=\sum_{n=0}^{\infty}\frac{z^n}{j(\iota_{\mathbb R}(n!))}. $$
 whenever this complex series converges. Inside a complex expression we
 abbreviate the embedded denominator $j(\iota_{\mathbb R}(n!))$ by $n!$, so the
 same definition may be written $\exp z=\sum z^n/n!$ without identifying a

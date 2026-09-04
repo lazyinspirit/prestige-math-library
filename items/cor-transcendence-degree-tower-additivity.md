@@ -27,9 +27,7 @@ pipeline_run: null
 
 Let $k\subseteq K\subseteq L$ be a tower of field extensions. Assume that
 $\operatorname{trdeg}_k K$ and $\operatorname{trdeg}_K L$ are finite. Then
-$$
-\operatorname{trdeg}_k L=\operatorname{trdeg}_k K+\operatorname{trdeg}_K L.
-$$
+$$ \operatorname{trdeg}_k L=\operatorname{trdeg}_k K+\operatorname{trdeg}_K L. $$
 
 ## Facts & Assumptions
 

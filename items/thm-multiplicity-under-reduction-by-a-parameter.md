@@ -36,13 +36,9 @@ which $J$ is an ideal of definition, and for an integer $r\ge0$ with
 either $N=0$ or $r\ge\deg P_{J,N}$, write
 $$e_J^{[r]}(N):=r!\,[n^r]P_{J,N}(n),$$
 with value $0$ when $N=0$ or $\deg P_{J,N}<r$. Then
-$$
-e_Q^{[d]}(M)=e_{Q'}^{[d-1]}(M/xM)-e_{Q'}^{[d-1]}(0:_M x).
-$$
+$$ e_Q^{[d]}(M)=e_{Q'}^{[d-1]}(M/xM)-e_{Q'}^{[d-1]}(0:_M x). $$
 In particular, if $x$ is $M$-regular, then
-$$
-e_Q(M)=e_{Q'}(M/xM).
-$$
+$$ e_Q(M)=e_{Q'}(M/xM). $$
 
 ## Facts & Assumptions
 

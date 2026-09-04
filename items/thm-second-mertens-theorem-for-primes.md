@@ -39,9 +39,7 @@ pipeline_run: null
 
 For every real $x\ge2$,
 
-$$
-\sum_{p\le x}\frac1p=\log\log x+B_1+O(1/\log x),
-$$
+$$ \sum_{p\le x}\frac1p=\log\log x+B_1+O(1/\log x), $$
 
 where $B_1$ is the Meissel-Mertens constant of
 [[def-meissel-mertens-constant]].
@@ -49,22 +47,16 @@ where $B_1$ is the Meissel-Mertens constant of
 ## Facts & Assumptions
 
 **Given:** A real number $x\ge2$ and the function
-$$
-A(y):=\sum_{p\le y}\frac{\log p}{p}.
-$$
+$$ A(y):=\sum_{p\le y}\frac{\log p}{p}. $$
 
 [L1] Mertens' first theorem gives
-$$
-A(y)=\log y+O(1)
-$$
+$$ A(y)=\log y+O(1) $$
 for $y\ge2$ ([[thm-first-mertens-theorem-for-primes]]).
 
 [L2] Abel summation by parts is available ([[lem-abel-summation-by-parts]]).
 
 [L3] The logarithm derivative is $1/t$, so
-$$
-\frac{d}{dt}\frac1{\log t}=-\frac1{t\log^2 t}
-$$
+$$ \frac{d}{dt}\frac1{\log t}=-\frac1{t\log^2 t} $$
 for $t>1$ ([[thm-logarithm-derivative-and-integral]],
 [[thm-natural-logarithm-laws]]).
 

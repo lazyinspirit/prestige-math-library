@@ -34,9 +34,7 @@ pipeline_run: null
 Let $V$ be a discrete valuation ring with fraction field $K$, let $v$ be its
 discrete valuation, and let $\pi\in V$ be a uniformiser. Then every nonzero
 element $x\in K^\times$ has a unique expression
-$$
-x=u\pi^n
-$$
+$$ x=u\pi^n $$
 with $u\in V^\times$ and $n\in\mathbb Z$.
 
 ## Facts & Assumptions

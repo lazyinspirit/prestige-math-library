@@ -27,9 +27,7 @@ pipeline_run: null
 
 Let $G=\mathbb Z/3\mathbb Z=\{0,1,2\}$. Then
 
-$$
-\mathbb C[G]\cong \mathbb C\times\mathbb C\times\mathbb C.
-$$
+$$ \mathbb C[G]\cong \mathbb C\times\mathbb C\times\mathbb C. $$
 
 ## Facts & Assumptions
 

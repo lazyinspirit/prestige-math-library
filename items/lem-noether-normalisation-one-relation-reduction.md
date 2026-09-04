@@ -28,9 +28,7 @@ pipeline_run: null
 Let $k$ be a field, let $A$ be a $k$-algebra of finite type, and let
 $y_1,\ldots,y_n\in A$ generate $A$ as a $k$-algebra. Suppose there exists a
 monic polynomial
-$$
-Y^m+b_{m-1}Y^{m-1}+\cdots+b_0\in k[y_1,\ldots,y_{n-1}][Y]
-$$
+$$ Y^m+b_{m-1}Y^{m-1}+\cdots+b_0\in k[y_1,\ldots,y_{n-1}][Y] $$
 that vanishes at $Y=y_n$. Then $y_n$ is integral over the subalgebra
 $k[y_1,\ldots,y_{n-1}]$, and hence $A$ is integral over that subalgebra.
 

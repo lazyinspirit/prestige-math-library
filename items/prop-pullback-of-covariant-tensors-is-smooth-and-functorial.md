@@ -30,9 +30,7 @@ sources:
 If $F:M\to N$ is smooth and $T$ is a smooth covariant tensor field on $N$, then
 $F^*T$ is a smooth covariant tensor field on $M$. Moreover,
 
-$$
-(\operatorname{id}_M)^*T=T,\qquad (G\circ F)^*T=F^*(G^*T)
-$$
+$$ (\operatorname{id}_M)^*T=T,\qquad (G\circ F)^*T=F^*(G^*T) $$
 
 for every composable smooth map $G$.
 

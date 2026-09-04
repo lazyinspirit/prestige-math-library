@@ -28,9 +28,7 @@ pipeline_run: null
 If one allows determinant $-1$ substitutions as well as determinant $1$
 substitutions, then the two distinct reduced forms
 
-$$
-(2,1,3)\qquad\text{and}\qquad(2,-1,3)
-$$
+$$ (2,1,3)\qquad\text{and}\qquad(2,-1,3) $$
 
 become equivalent.
 

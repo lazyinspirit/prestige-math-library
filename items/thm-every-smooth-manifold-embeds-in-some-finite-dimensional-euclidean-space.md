@@ -33,9 +33,7 @@ sources:
 Every smooth manifold embeds smoothly in some finite-dimensional Euclidean
 space. If the manifold is noncompact, one can choose such an embedding in the
 form
-$$
-M\hookrightarrow \mathbb R^N\times\mathbb R,\qquad p\mapsto (G(p),\rho(p)),
-$$
+$$ M\hookrightarrow \mathbb R^N\times\mathbb R,\qquad p\mapsto (G(p),\rho(p)), $$
 where $G$ is bounded and $\rho$ is a smooth proper exhaustion function.
 
 ## Facts & Assumptions

@@ -32,9 +32,7 @@ pipeline_run: frontier-20
 ## Example
 
 Over $\mathbb R$ one has
-$$
-x^4+1=(x^2+\sqrt 2\,x+1)(x^2-\sqrt 2\,x+1),
-$$
+$$ x^4+1=(x^2+\sqrt 2\,x+1)(x^2-\sqrt 2\,x+1), $$
 and each quadratic factor is irreducible.
 
 ## Facts & Assumptions

@@ -29,13 +29,9 @@ sources:
 
 Let $R$ be a commutative ring, let $M$ be a left $R$-module, and let
 $\mathfrak p$ be a prime ideal of $R$. Then
-$$
-\mathfrak p \in \operatorname{Ass}_R(M)
-$$
+$$ \mathfrak p \in \operatorname{Ass}_R(M) $$
 if and only if there exists an injective $R$-module homomorphism
-$$
-R/\mathfrak p \hookrightarrow M.
-$$
+$$ R/\mathfrak p \hookrightarrow M. $$
 
 ## Facts & Assumptions
 

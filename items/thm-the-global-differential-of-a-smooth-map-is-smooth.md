@@ -1,7 +1,7 @@
 ---
 id: thm-the-global-differential-of-a-smooth-map-is-smooth
 kind: theorem
-title: "The global differential of a smooth map is smooth"
+title: "Assuming countable choice, the global differential of a smooth map is smooth"
 status: published
 origin: session
 provenance:
@@ -28,17 +28,18 @@ sources:
 
 ## Statement
 
-If $F:M\to N$ is smooth, then the global differential $dF:TM\to TN$ is a smooth map.
+Assume $\mathrm{AC}_\omega$. If $F:M\to N$ is smooth, then the global
+differential $dF:TM\to TN$ is a smooth map.
 
 ## Facts & Assumptions
 
-**Given:** A smooth map $F:M\to N$.
+**Given:** The axiom $\mathrm{AC}_\omega$ and a smooth map $F:M\to N$.
 
 [F1] The global differential sends $v\in T_pM$ to $dF_p(v)$ ([[def-global-differential-or-tangent-map]]).
 
 [L1] In bundle charts, the fiber coordinates of $dF_p$ are given by the Jacobian matrix of the coordinate representative of $F$ ([[thm-coordinate-formula-for-the-differential]]).
 
-[L2] Tangent bundles carry the smooth structures induced by bundle charts ([[thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure]]).
+[L2] Assuming $\mathrm{AC}_\omega$, tangent bundles carry the smooth structures induced by bundle charts ([[thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure]]).
 
 ## Proof
 

@@ -33,9 +33,7 @@ pipeline_run: frontier-20
 
 The polynomial $x^2+1$ is irreducible in $\mathbb R[x]$, while over
 $\mathbb C$ it factors as
-$$
-x^2+1=(x-i)(x+i).
-$$
+$$ x^2+1=(x-i)(x+i). $$
 
 ## Facts & Assumptions
 

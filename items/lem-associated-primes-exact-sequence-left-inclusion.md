@@ -28,13 +28,9 @@ sources:
 ## Statement
 
 If
-$$
-0 \longrightarrow M' \longrightarrow M \longrightarrow M'' \longrightarrow 0
-$$
+$$ 0 \longrightarrow M' \longrightarrow M \longrightarrow M'' \longrightarrow 0 $$
 is a short exact sequence of left $R$-modules, then
-$$
-\operatorname{Ass}_R(M')\subseteq \operatorname{Ass}_R(M).
-$$
+$$ \operatorname{Ass}_R(M')\subseteq \operatorname{Ass}_R(M). $$
 
 ## Facts & Assumptions
 

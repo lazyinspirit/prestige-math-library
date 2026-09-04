@@ -38,16 +38,12 @@ for the induced operator norm of
 [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. The
 **eigenpair residual** of $(\mu,x)$ for $A$ is
 
-$$
-r(A,\mu,x):=Ax-\mu x.
-$$
+$$ r(A,\mu,x):=Ax-\mu x. $$
 
 If $\|x\|_2=1$, the **normwise backward error** of the approximate eigenpair
 $(\mu,x)$ is
 
-$$
-\eta(A,\mu,x):=\inf\{\,\|E\|_2:(A+E)x=\mu x\,\}.
-$$
+$$ \eta(A,\mu,x):=\inf\{\,\|E\|_2:(A+E)x=\mu x\,\}. $$
 
 Thus $\eta(A,\mu,x)$ measures the smallest spectral-norm perturbation that makes
 $(\mu,x)$ an exact eigenpair.

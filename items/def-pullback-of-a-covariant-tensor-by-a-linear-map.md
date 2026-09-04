@@ -28,6 +28,4 @@ Let $V$ and $W$ be finite-dimensional real vector spaces, let $k\ge0$ be an
 integer, let $A:V\to W$ be linear, and let $T:W^k\to\mathbb R$ be a covariant tensor of
 degree $k$. Its **pullback** $A^*T$ is the covariant tensor on $V$ defined by
 
-$$
-(A^*T)(v_1,\ldots,v_k):=T(Av_1,\ldots,Av_k).
-$$
+$$ (A^*T)(v_1,\ldots,v_k):=T(Av_1,\ldots,Av_k). $$

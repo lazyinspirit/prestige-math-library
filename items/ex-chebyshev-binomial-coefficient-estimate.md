@@ -32,9 +32,7 @@ pipeline_run: null
 
 At $n=10$,
 
-$$
-\binom{20}{10}=184756=2^2\cdot11\cdot13\cdot17\cdot19.
-$$
+$$ \binom{20}{10}=184756=2^2\cdot11\cdot13\cdot17\cdot19. $$
 
 Thus every prime in $(10,20]$ appears, exactly as the valuation lemma predicts.
 
@@ -43,9 +41,7 @@ Thus every prime in $(10,20]$ appears, exactly as the valuation lemma predicts.
 **Given:** The value $n=10$.
 
 [L1] The central binomial coefficient satisfies
-$$
-\frac{4^{10}}{21}\le\binom{20}{10}\le4^{10}
-$$
+$$ \frac{4^{10}}{21}\le\binom{20}{10}\le4^{10} $$
 ([[lem-central-binomial-coefficient-bounds]]).
 
 [L2] Every prime $p$ with $10<p\le20$ divides $\binom{20}{10}$ exactly once

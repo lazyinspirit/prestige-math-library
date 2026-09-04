@@ -25,9 +25,7 @@ sources:
 
 The profinite completion of $\mathbb Z$ is
 
-$$
-\widehat{\mathbb Z}=\varprojlim_{n\ge 1} \mathbb Z/n\mathbb Z,
-$$
+$$ \widehat{\mathbb Z}=\varprojlim_{n\ge 1} \mathbb Z/n\mathbb Z, $$
 
 where the transition maps are reduction modulo divisibility.
 

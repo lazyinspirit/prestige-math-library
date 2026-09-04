@@ -29,9 +29,7 @@ sources:
 
 **False claim:** for arbitrary compatible matrices $A$ and $B$,
 
-$$
-(AB)^+=B^+A^+.
-$$
+$$ (AB)^+=B^+A^+. $$
 
 ## Facts & Assumptions
 

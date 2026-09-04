@@ -26,9 +26,7 @@ pipeline_run: null
 ## Statement
 
 Let $D$ be a division ring and $n\ge1$. On the set of $n\times n$ arrays over $D$, use entrywise addition and the product
-$$
-(AB)_{ij}:=\sum_{k=1}^n a_{ik}b_{kj}.
-$$
+$$ (AB)_{ij}:=\sum_{k=1}^n a_{ik}b_{kj}. $$
 These operations make a ring $M_n(D)$, and this ring is semisimple. More precisely, its left regular module is the direct sum of the simple column ideals $M_n(D)e_{jj}\cong D^n$ for $1\le j\le n$. See [[def-semisimple-ring]].
 
 ## Facts & Assumptions

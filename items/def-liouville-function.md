@@ -32,15 +32,11 @@ pipeline_run: null
 For $n\ge1$, list its distinct prime divisors as $p_0,\ldots,p_{r-1}$ and put
 $e_i:=v_{p_i}(n)\ge1$. Its canonical prime factorization is
 
-$$
-n=\prod_{i<r} p_i^{e_i}.
-$$
+$$ n=\prod_{i<r} p_i^{e_i}. $$
 
 The **Liouville function** is
 
-$$
-\lambda(n):=(-1)^{e_0+\cdots+e_{r-1}}.
-$$
+$$ \lambda(n):=(-1)^{e_0+\cdots+e_{r-1}}. $$
 
 For $n=1$ the exponent sum is empty, so $\lambda(1)=1$.
 

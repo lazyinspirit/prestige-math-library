@@ -1,0 +1,1624 @@
+{
+  "version": 1,
+  "level": "frontier-29",
+  "note": "Step-5 authoring contract for frontier-29 batch 15 on Wednesday, September 2, 2026.",
+  "scope": [
+    "lem-a-complete-or-weakly-sparse-blockade-can-be-thinned-to-equal-subblocks-with-directional-sparsity",
+    "lem-a-complete-or-weakly-sparse-blockade-yields-a-complete-subblockade-or-an-anticonnected-thinning",
+    "lem-a-wonderful-anticonnected-complete-or-sparse-blockade-yields-a-restricted-subgraph-or-a-large-anticomplete-pair",
+    "lem-generalized-niceness-yields-four-reduction-outcomes",
+    "cor-large-almost-pure-pair-hypotheses-yield-a-complete-or-anticomplete-blockade",
+    "lem-cy-restricted-generalized-niceness-yields-three-outcomes",
+    "lem-iterated-restricted-sparsification-reaches-the-target-scale",
+    "lem-a-large-cy-restricted-subgraph-in-the-three-outcome-theorem-forces-a-smaller-scale-restricted-subgraph",
+    "lem-constant-scale-restricted-generalized-niceness-yields-an-x-scale-restricted-subgraph-a-polynomial-clique-or-stable-set-or-a-blockade",
+    "ex-thinning-a-four-block-weakly-sparse-blockade-to-directional-sparse-subblocks",
+    "ex-a-large-almost-pure-pair-extends-an-anticomplete-blockade",
+    "ex-a-numeric-run-of-the-lemma-three-three-exponent-choice"
+  ],
+  "contracts": {
+    "lem-a-complete-or-weakly-sparse-blockade-can-be-thinned-to-equal-subblocks-with-directional-sparsity": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $n:=\\lceil m\\rceil$ and $s:=\\lceil\\epsilon n\\rceil$. Since every $|A_i|$ is an integer at least $m$, one has $n\\le |A_i|$. Choose independently and uniformly an $n$-element subset $X_i\\subseteq A_i$ for each $i$. For a weakly $\\epsilon^a$-sparse pair $(A_i,A_j)$, finite double counting and [L3] give $$\\mathbb E\\,e_G(X_i,X_j)=e_G(A_i,A_j)\\frac{n^2}{|A_i||A_j|}\\le\\epsilon^a n^2.$$ Consequently the probability that $e_G(X_i,X_j)>\\epsilon^{a-2}n^2$ is less than $\\epsilon^2$: on that event the nonnegative edge count already exceeds the threshold, so its expectation is greater than the threshold times the event probability. There are at most $\\binom{\\ell}{2}$ relevant pairs, and $$\\binom{\\ell}{2}\\epsilon^2<\\frac{1+\\epsilon}{2}<1$$ because $\\ell=\\lceil\\epsilon^{-1}\\rceil<\\epsilon^{-1}+1$. By [L4], some simultaneous choice of the $X_i$ therefore satisfies $$e_G(X_i,X_j)\\le\\epsilon^{a-2}n^2$$ for every weakly sparse pair. Complete pairs remain complete by [L2]. Fix such a choice.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We choose $D_1,\\ldots,D_\\ell$ successively, always requiring $D_i\\subseteq X_i$ and $|D_i|=s$. Suppose that $D_1,\\ldots,D_{i-1}$ have already been chosen. For each $p\\ne i$ with $(A_p,A_i)$ weakly $\\epsilon^a$-sparse, let $C_p\\subseteq X_i$ consist of the vertices having more than $\\epsilon^{a-4}n$ neighbours in $D_p$ when $p<i$, or more than $\\epsilon^{a-4}n$ neighbours in $X_p$ when $p>i$. In either case step 1.1 gives $$e_G(X_i,D_p)\\le e_G(X_i,X_p)\\le\\epsilon^{a-2}n^2,$$ so $|C_p|<\\epsilon^2n$. Since $\\ell-1<\\epsilon^{-1}$, the union of the forbidden sets has fewer than $\\epsilon n$ vertices and therefore at most $s-1$ vertices. Thus at least $n-s+1\\ge s$ vertices survive: indeed $s\\le\\lceil n/4\\rceil$ and $2\\lceil n/4\\rceil\\le n+1$. Choose $D_i$ to be any $s$ survivors.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $(A_i,A_j)$ be weakly $\\epsilon^a$-sparse, and assume $i<j$. When $D_i$ was chosen, the index $j$ was still future, so every vertex of $D_i$ has at most $\\epsilon^{a-4}n$ neighbours in $X_j$, hence at most that many in $D_j$. When $D_j$ was chosen, every vertex of $D_j$ was required to have at most $\\epsilon^{a-4}n$ neighbours in $D_i$. Since $s\\ge\\epsilon n$, $$\\epsilon^{a-4}n\\le\\epsilon^{a-5}s.$$ Therefore $D_i$ is $\\epsilon^{a-5}$-sparse to $D_j$ and $D_j$ is $\\epsilon^{a-5}$-sparse to $D_i$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $(A_i,A_j)$ is complete, then $(D_i,D_j)$ is complete by [L2] because $D_i\\subseteq A_i$ and $D_j\\subseteq A_j$. Together with step 3.1, this proves that $\\mathcal D=(D_1,\\ldots,D_\\ell)$ has all the required properties.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade can be thinned to equal subblocks with directional sparsity, Let $a\\ge 0$, let $\\epsilon\\in(0,\\tfrac14]$, and let $$ \\mathcal A=(A_1,\\ldots,A_\\ell) $$ be a blockade in a graph $G$ with $\\ell=\\lceil\\ep…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The blockade hypothesis makes every A_i nonempty, while m>0 gives n=ceil(m)>=1. Thus |A_i||A_j| is nonzero in step 1.1, and every probability-space denominator is defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade can be thinned to equal subblocks with directional sparsity, Let $a\\ge 0$, let $\\epsilon\\in(0,\\tfrac14]$, and let $$ \\mathcal A=(A_1,\\ldots,A_\\ell) $$ be a blockade in a graph $G$ with $\\ell=\\lceil\\ep…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade can be thinned to equal subblocks with directional sparsity, Let $a\\ge 0$, let $\\epsilon\\in(0,\\tfrac14]$, and let $$ \\mathcal A=(A_1,\\ldots,A_\\ell) $$ be a blockade in a graph $G$ with $\\ell=\\lceil\\ep…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade can be thinned to equal subblocks with directional sparsity, Let $a\\ge 0$, let $\\epsilon\\in(0,\\tfrac14]$, and let $$ \\mathcal A=(A_1,\\ldots,A_\\ell) $$ be a blockade in a graph $G$ with $\\ell=\\lceil\\ep…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 proves each block contains at least s vertices, and step 2.1 then chooses the nonempty subblocks D_i."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade can be thinned to equal subblocks with directional sparsity, Let $a\\ge 0$, let $\\epsilon\\in(0,\\tfrac14]$, and let $$ \\mathcal A=(A_1,\\ldots,A_\\ell) $$ be a blockade in a graph $G$ with $\\ell=\\lceil\\ep…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade can be thinned to equal subblocks with directional sparsity, Let $a\\ge 0$, let $\\epsilon\\in(0,\\tfrac14]$, and let $$ \\mathcal A=(A_1,\\ldots,A_\\ell) $$ be a blockade in a graph $G$ with $\\ell=\\lceil\\ep…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-directional-and-weak-sparsity-between-vertex-sets",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$.\n\n- For disjoint nonempty sets $X,Y\\subseteq V(G)$, $X$ is **$c$-sparse to $Y$** when every $x\\in X$ has at most $c|Y|$\n  neighbours in $Y$.\n- For nonempty sets $X,Y\\subseteq V(G)$, the ordered pair $(X,Y)$ is **weakly $c$-sparse** when\n  $e_G(X,Y)\\le c|X||Y|$, with the ordered edge count of [[def-edge-density-between-vertex-sets]].\n- Such a pair $(X,Y)$ is **weakly $c$-dense** when it is weakly $c$-sparse in the\n  complement graph.\n\nThe directional notion need not be symmetric, while the weak notion is an\nedge-count and so is symmetric. For nonempty $X$, taking $Y=X$ makes weak sparsity the\nself-density condition discussed in [[def-edge-density-between-vertex-sets]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-linearity-of-expectation",
+          "source_section": "Statement",
+          "quote": "For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,\n$$\\mathbb E\\!\\left[\\sum_{i\\in I}a_iX_i\\right]=\\sum_{i\\in I}a_i\\mathbb E[X_i].$$\nNo independence hypothesis is required. For $I=\\varnothing$, both sides are $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the authored thinning proof and boundary dispositions for batch 15 on 2026-09-02."
+      }
+    },
+    "lem-a-complete-or-weakly-sparse-blockade-yields-a-complete-subblockade-or-an-anticonnected-thinning": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose some block $D_i$ has no anticonnected component of size at least $q/\\ell$. Partition the anticonnected components of $G[D_i]$ into a minimum number of nonempty unions $S_0,\\ldots,S_r$, each of size less than $q/\\ell$, ordered so that $|S_0|\\le \\cdots \\le |S_r|$. Since the unions cover $D_i$ and each has size less than $q/\\ell$, one has $r+1>\\ell$. Minimality implies $|S_{t-1}|+|S_t|\\ge q/\\ell$ for every $t\\ge 1$, so $|S_t|\\ge q/(2\\ell)\\ge q/\\ell^2$ because $\\ell\\ge 2$. By [L1], the sets $S_1,\\ldots,S_\\ell$ are pairwise complete. They therefore form a complete $(\\ell,q/\\ell^2)$-blockade, proving outcome 1.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We may therefore assume that every $D_i$ has an anticonnected component of size at least $q/\\ell$. For each $i$, choose such a component $C_i$ and then choose a subset $B_i\\subseteq C_i$ with $|B_i|=\\lceil q/\\ell\\rceil$. Because $C_i$ is anticonnected and $B_i$ is an induced subgraph of $C_i$ on vertices of our choice, we may choose $B_i$ itself anticonnected by [L2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "choose",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $(D_i,D_j)$ is complete, then $(B_i,B_j)$ is complete because $B_i\\subseteq D_i$ and $B_j\\subseteq D_j$. If $(D_i,D_j)$ is mutually $\\eta$-sparse, every vertex of $B_i$ has at most $\\eta|D_j|=\\eta q$ neighbours in $D_j$, hence at most $\\eta q\\le \\eta\\ell|B_j|$ neighbours in $B_j$ because $|B_j|\\ge q/\\ell$; the same argument with $i$ and $j$ exchanged gives the reverse direction. Thus every noncomplete pair is mutually $(\\eta\\ell)$-sparse.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 1.1 yields outcome 1, while steps 2.1 and 3.1 yield outcome 2. Therefore one of the two stated outcomes holds.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade yields a complete subblockade or an anticonnected thinning, Let $\\epsilon\\in(0,\\tfrac14]$, let $\\ell=\\lceil\\epsilon^{-1}\\rceil$, and let $$ \\mathcal D=(D_1,\\ldots,D_\\ell) $$ be a blockade in a graph…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade yields a complete subblockade or an anticonnected thinning, Proof technique: inspect each block's anticonnected components.; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade yields a complete subblockade or an anticonnected thinning, Let $\\epsilon\\in(0,\\tfrac14]$, let $\\ell=\\lceil\\epsilon^{-1}\\rceil$, and let $$ \\mathcal D=(D_1,\\ldots,D_\\ell) $$ be a blockade in a graph…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 split exactly on whether a block does or does not have an anticonnected component of size at least q/l."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade yields a complete subblockade or an anticonnected thinning, Let $\\epsilon\\in(0,\\tfrac14]$, let $\\ell=\\lceil\\epsilon^{-1}\\rceil$, and let $$ \\mathcal D=(D_1,\\ldots,D_\\ell) $$ be a blockade in a graph…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses the large anticonnected components and the sets B_i after the size lower bound is established."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade yields a complete subblockade or an anticonnected thinning, Let $\\epsilon\\in(0,\\tfrac14]$, let $\\ell=\\lceil\\epsilon^{-1}\\rceil$, and let $$ \\mathcal D=(D_1,\\ldots,D_\\ell) $$ be a blockade in a graph…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A complete-or-weakly-sparse blockade yields a complete subblockade or an anticonnected thinning, Let $\\epsilon\\in(0,\\tfrac14]$, let $\\ell=\\lceil\\epsilon^{-1}\\rceil$, and let $$ \\mathcal D=(D_1,\\ldots,D_\\ell) $$ be a blockade in a graph…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-components-are-anticomplete-and-anticomponents-complete",
+          "source_section": "Statement",
+          "quote": "Distinct connected components of a graph are anticomplete to one another. Distinct anticomponents are complete to one another.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-anticonnected-graph-and-anticonnected-component",
+          "source_section": "Definition",
+          "quote": "A graph $G$ is **anticonnected**, or **co-connected**, when its complement $\\overline G$ is connected ([[def-connected-graph-and-connected-component]], [[def-graph-isomorphism-and-complement]]).\n\nAn **anticonnected component**, or **anticomponent**, of $G$ is a vertex set $A\\subseteq V(G)$ that is the vertex set of a connected component of $\\overline G$. Equivalently, $G[A]$ is anticonnected and $A$ is inclusion-maximal with that property ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nUnder the library convention, the null graph is not anticonnected, while a one-vertex graph is anticonnected.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the anticonnected-component thinning and complete-blockade alternative. Rechecked the minimal union partition in step 1.1 and the spanning-tree leaf-pruning argument extracting anticonnected B_i of size ceil(q/ell)."
+      }
+    },
+    "lem-a-wonderful-anticonnected-complete-or-sparse-blockade-yields-a-restricted-subgraph-or-a-large-anticomplete-pair": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] to the blockade $\\mathcal B$. If it yields a $y^4$-restricted induced subgraph on at least $w$ vertices, then outcome 1 of the present lemma holds immediately.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We may therefore assume that [L1] yields an index $i\\in[\\ell]$ for which at most $y|G|$ vertices outside $V(\\mathcal B)$ are mixed on $B_i$. Let $M$ be that exceptional set of mixed outside vertices. Every outside vertex with a neighbour in $B_i$ but not in $M$ has at least $|B_i|/2$ neighbours in $B_i$. Since every vertex of $B_i$ has total degree at most $y|G|$ by [L2], the number of outside vertices with at least $|B_i|/2$ neighbours in $B_i$ is at most $2y|G|$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $Y$ be the set of vertices in $V(G)\\setminus V(\\mathcal B)$ that have no neighbours in $B_i$, and let $X:=B_i$. By step 2.1, $|Y|\\ge |G|-|V(\\mathcal B)|-|M|-2y|G|\\ge |G|-y|G|-y|G|-2y|G|=(1-4y)|G|$. By construction there are no edges between $X$ and $Y$, so [L3] gives that $Y$ is anticomplete to $X$. Because all blocks have size $w$, we also have $|X|=|B_i|=w$. Thus outcome 2 holds.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1 and 3.1 prove that one of the two stated outcomes must occur.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A wonderful anticonnected complete-or-sparse blockade yields a restricted subgraph or a large anticomplete pair, the lemma starts from a blockade of length $ellge y^{-a}$ with equal-sized blocks, so the family data are already nonempty before the dichotomy begins.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In A wonderful anticonnected complete-or-sparse blockade yields a restricted subgraph or a large anticomplete pair, the lemma starts from a blockade of length $ellge y^{-a}$ with equal-sized blocks, so the family data are already nonempty before the dichotomy begins."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A wonderful anticonnected complete-or-sparse blockade yields a restricted subgraph or a large anticomplete pair, Proof technique: apply wonderfulness and then count the outside vertices that still see a chosen block.; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A wonderful anticonnected complete-or-sparse blockade yields a restricted subgraph or a large anticomplete pair, Let $\\mathcal F$ be a wonderful finite family, and let $a\\ge 6$ be a witness for wonderfulness.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A wonderful anticonnected complete-or-sparse blockade yields a restricted subgraph or a large anticomplete pair, Let $\\mathcal F$ be a wonderful finite family, and let $a\\ge 6$ be a witness for wonderfulness.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A wonderful anticonnected complete-or-sparse blockade yields a restricted subgraph or a large anticomplete pair, Let $\\mathcal F$ be a wonderful finite family, and let $a\\ge 6$ be a witness for wonderfulness.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the index i supplied by wonderfulness, and step 3.1 then defines the outside anticomplete set Y."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A wonderful anticonnected complete-or-sparse blockade yields a restricted subgraph or a large anticomplete pair, Let $\\mathcal F$ be a wonderful finite family, and let $a\\ge 6$ be a witness for wonderfulness.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A wonderful anticonnected complete-or-sparse blockade yields a restricted subgraph or a large anticomplete pair, Let $\\mathcal F$ be a wonderful finite family, and let $a\\ge 6$ be a witness for wonderfulness.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-wonderful-finite-family",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs, and write\n\n$$\\overline{\\mathcal F}:=\\{\\overline H:H\\in\\mathcal F\\}$$\n\nfor its family of complements\n([[def-graph-isomorphism-and-complement]]).\n\nWe say that $\\mathcal F$ is **wonderful** if there exists a real constant\n$a\\ge 6$ such that the following holds for every $y\\in(0,\\tfrac12)$ and every\n$\\overline{\\mathcal F}$-free graph $G$\n([[def-h-free-and-family-free-graph]]).\n\nSuppose that $\\mathcal B=(B_1,\\dots,B_\\ell)$ is an $(\\ell,w)$-blockade in $G$\n([[def-blockade-length-and-width]]) with $\\ell\\ge y^{-a}$, that all blocks have\nthe same size, that every block $B_i$ is anticonnected\n([[def-anticonnected-graph-and-anticonnected-component]]), and that for every\ndistinct $i,j\\in[\\ell]$ either\n\n- $B_i$ is complete to $B_j$\n  ([[def-edges-between-sets-and-pure-mixed-pairs]]), or\n- $B_i$ is $y^a$-sparse to $B_j$ and $B_j$ is $y^a$-sparse to $B_i$\n  ([[def-directional-and-weak-sparsity-between-vertex-sets]]).\n\nThen at least one of the following conclusions holds:\n\n1. $G$ has a $y^4$-restricted induced subgraph of size at least $w$\n   ([[def-c-sparse-and-c-restricted-vertex-set]]).\n2. There exists $i\\in[\\ell]$ such that at most $y|V(G)|$ vertices\n   $v\\in V(G)\\setminus V(\\mathcal B)$ satisfy\n   $$0<|N_G(v)\\cap B_i|<\\frac12|B_i|.$$\n\nThis item fixes the symmetric reading of the source phrase \"complete or\n$y^a$-sparse\" that the later proof actually uses: when a pair of blocks is not\ncomplete, each block is sparse to the other.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-c-sparse-and-c-restricted-vertex-set",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$ be real. A nonempty vertex set\n$X\\subseteq V(G)$ is **$c$-sparse** when\n\n$$\n|N_G(x)\\cap X|\\le c|X|\n$$\n\nfor every $x\\in X$, and it is **$c$-dense** when\n\n$$\n|(X\\setminus\\{x\\})\\setminus N_G(x)|\\le c|X|\n$$\n\nfor every $x\\in X$. Thus $c$-dense means that every vertex of $X$ has at most\n$c|X|$ non-neighbours inside $X$ other than itself.\n\nA set is **$c$-restricted** when it is $c$-sparse or $c$-dense. The condition is\ninternal to the induced subgraph $G[X]$ ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]), and the dense clause is the sparse clause read in the complement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the outside-vertex count after wonderfulness chooses one block. Rechecked the mixed-vertex set M, the 2y|G| bound on outside vertices with many neighbors in B_i, and the final (1-4y)|G| anticomplete set."
+      }
+    },
+    "lem-generalized-niceness-yields-four-reduction-outcomes": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix constants from [L1], [L2], and [L4], and set $a_1:=ac_3$, $a_2:=c_4$, $a_4:=4$, $a_5:=h+4$, and $a_3:=\\max\\{a(c_1+5),\\,ac_8,\\,c_5,\\,4d+1\\}$. These choices depend only on $\\mathcal F$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $|G|\\le y^{-a_3}$, then any one-vertex induced subgraph of $G$ is $y^4$-restricted and has size at least $y^{a_3}|G|$. So outcome 2 holds.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $\\overline G$ is $y$-sparse. Apply [L2] to the family $\\mathcal F$ inside $\\overline G$ with the parameter $b=4$. Either $\\overline G$ has a $y^4$-restricted induced subgraph of size at least $y^{4d+1}|G|$, or there are disjoint sets $X,Y\\subseteq V(G)$ with $|X|\\ge y^{4d+1}|G|$, $|Y|\\ge (1-hy)|G|$, and $Y$ anticomplete to $X$ in $\\overline G$. By [L3], the restricted induced subgraph is also $y^4$-restricted in $G$, and the anticomplete pair in $\\overline G$ is a complete pair in $G$. Since $a_3\\ge 4d+1$ and $a_5\\ge h$, this gives outcome 2 or outcome 4 in $G$.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "We may therefore assume that $G$ itself is $y$-sparse. Put $\\epsilon:=y^a$, where $a$ is the witness from [L4]. Because $G$ is $\\overline{\\mathcal F}$-free, [L1] applies to $G$ and $\\epsilon$. If [L1] produces a clique or stable set of size $(\\epsilon^{c_3}|G|)^{c_4}$, then this is exactly outcome 1 by the choice $a_1=ac_3$ and $a_2=c_4$. If [L1] produces a complete or anticomplete $(k,|G|/k^{c_5})$-blockade with $k\\ge \\epsilon^{-c_6}$, then $k\\ge y^{-1}$ because $c_6\\ge 1$, and $|G|/k^{c_5}\\ge |G|/k^{a_3}$ because $a_3\\ge c_5$, so outcome 3 holds. If [L1] produces an $\\epsilon^{c_7}$-restricted induced subgraph of size at least $\\epsilon^{c_8}|G|$, then $\\epsilon^{c_7}\\le y^4$ and $\\epsilon^{c_8}=y^{ac_8}\\ge y^{a_3}$, so outcome 2 holds. We are left only with the blockade alternative from [L1].",
+          "step": "2.3",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "given",
+            "algebra",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $G$ has a blockade $\\mathcal A=(A_1,\\ldots,A_\\ell)$ with $\\ell=\\lceil\\epsilon^{-1}\\rceil$, each $|A_i|\\ge m:=\\epsilon^{c_1}|G|$, and every distinct pair complete or weakly $\\epsilon^{c_2}$-sparse. Apply [L5] to obtain equal-sized subblocks $\\mathcal D=(D_1,\\ldots,D_\\ell)$ with $|D_i|=q:=\\lceil\\epsilon\\lceil m\\rceil\\rceil$ and every noncomplete pair mutually $\\epsilon^{c_2-5}$-sparse. Then apply [L6] to $\\mathcal D$. If [L6] yields a complete $(\\ell,q/\\ell^2)$-blockade, then $q/\\ell^2\\ge \\epsilon m\\cdot \\epsilon^4=\\epsilon^5m=y^{a(c_1+5)}|G|\\ge y^{a_3}|G|$, because $\\ell=\\lceil\\epsilon^{-1}\\rceil\\le \\epsilon^{-2}$ for $\\epsilon\\in(0,\\tfrac12)$ and step 1.1 has $a_3\\ge a(c_1+5)$. Since also $\\ell\\ge \\epsilon^{-1}=y^{-a}\\ge y^{-1}$, outcome 3 follows.",
+          "step": "3.1",
+          "inputs": [
+            "L5",
+            "L6",
+            "step 2.3",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "We may therefore assume [L6] yields anticonnected subsets $B_i\\subseteq D_i$ of common size $w:=\\lceil q/\\ell\\rceil$ such that every distinct pair is either complete or mutually $(\\epsilon^{c_2-5}\\ell)$-sparse. Because $\\ell\\le \\epsilon^{-2}$, every noncomplete pair is in fact mutually $\\epsilon^{c_2-7}$-sparse. Also $w\\ge q/\\ell\\ge \\epsilon^3m=\\epsilon^{c_1+3}|G|=y^{a(c_1+3)}|G|\\ge y^{a_3}|G|$, since $q\\ge \\epsilon m$ and $\\ell\\le \\epsilon^{-2}$. Since step 2.1 fails, $|G|>y^{-a_3}$, and because $a_3\\ge a(c_1+5)$ with $\\epsilon=y^a$, this gives $m=\\epsilon^{c_1}|G|>y^{-5a}=\\epsilon^{-5}$ and hence $q=\\lceil\\epsilon\\lceil m\\rceil\\rceil>\\epsilon m>\\epsilon^{-4}\\ge \\epsilon^{-2}\\ge \\ell$. Therefore $|V(\\mathcal B)|=\\sum_{i=1}^\\ell |B_i|\\le \\ell(q/\\ell+1)=q+\\ell\\le 2q\\le 2\\lceil m\\rceil\\le 4m\\le \\epsilon^{c_1-2}|G|\\le \\epsilon|G|\\le y|G|$, where $\\mathcal B:=(B_1,\\ldots,B_\\ell)$. Since $c_2\\ge 8$, one has $\\epsilon^{c_2-7}=y^{a(c_2-7)}\\le y^a$. Therefore the hypotheses of [L7] hold for $\\mathcal B$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L6",
+            "L7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Applying [L7] to $\\mathcal B$ yields either a $y^4$-restricted induced subgraph of size at least $w$, giving outcome 2, or disjoint sets $X,Y\\subseteq V(G)$ with $|X|=w\\ge y^{a_3}|G|$, $|Y|\\ge (1-4y)|G| \\ge (1-a_5y)|G|$, and $Y$ anticomplete to $X$, giving outcome 4.",
+          "step": "5.1",
+          "inputs": [
+            "L7",
+            "step 4.1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The cases in steps 2.1, 2.2, 2.3, and 5.1 exhaust all possibilities, so one of the four stated outcomes always holds.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Generalized niceness yields four reduction outcomes, the item starts from one $y$-restricted graph $G$ and a fixed forbidden family $mathcal F$, so the family notation is not an optional empty witness family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In Generalized niceness yields four reduction outcomes, the item starts from one $y$-restricted graph $G$ and a fixed forbidden family $mathcal F$, so the family notation is not an optional empty witness family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Generalized niceness yields four reduction outcomes, Proof technique: separate the complement-sparse branch from the sparse branch, then resolve the blockade branch by thinning and wonderfulne…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the small-graph regime by taking a one-vertex induced subgraph."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.2, 2.3, and 3.1 separate the complement-sparse branch, the direct generalized-nice outcomes, and the residual blockade branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Generalized niceness yields four reduction outcomes, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family of graphs.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses the thinned blockade and step 4.1 chooses the anticonnected subblocks in the remaining case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Generalized niceness yields four reduction outcomes, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family of graphs.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Generalized niceness yields four reduction outcomes, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family of graphs.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-generalized-nice-finite-family",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs, and write\n\n$$\n\\overline{\\mathcal F}:=\\{\\overline H:H\\in\\mathcal F\\}\n$$\n\nfor the family of complements\n([[def-graph-isomorphism-and-complement]]).\n\nWe say that $\\mathcal F$ is **generalized nice** if there exist real constants\n\n$$\nc_1\\ge 3,\\qquad c_2\\ge 8,\\qquad c_3,c_4,c_5,c_8>0,\\qquad c_6\\ge 1,\\qquad c_7\\ge 4\n$$\n\nsuch that for every $\\overline{\\mathcal F}$-free graph $G$\n([[def-h-free-and-family-free-graph]]) and every $\\epsilon\\in(0,\\tfrac12)$, at\nleast one of the following holds:\n\n1. $G$ has an $(\\lceil\\epsilon^{-1}\\rceil,\\epsilon^{c_1}|G|)$-blockade\n   ([[def-blockade-length-and-width]]) whose distinct block pairs are either\n   complete or weakly $\\epsilon^{c_2}$-sparse\n   ([[def-directional-and-weak-sparsity-between-vertex-sets]]);\n2. $G$ has a clique or stable set of size at least\n   $$ (\\epsilon^{c_3}|G|)^{c_4} $$\n   ([[def-clique-stable-set-and-numbers]]);\n3. $G$ has a complete or anticomplete $(k,|G|/k^{c_5})$-blockade with\n   $k\\ge \\epsilon^{-c_6}$; or\n4. $G$ has an $\\epsilon^{c_7}$-restricted induced subgraph of size at least\n   $$ \\epsilon^{c_8}|G| $$\n   ([[def-c-sparse-and-c-restricted-vertex-set]]).\n\nThis is the Section 3 replacement for the earlier \"nice\" condition: the first\nalternative still produces a long blockade, but the other three alternatives\nalready package the three reduction outcomes that will be iterated later on the\npage.",
+          "uses": [
+            "1.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-leaf-reducible-families-yield-a-large-anticomplete-pair-or-a-more-restricted-induced-subgraph",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a leaf-reducible finite family of graphs. Then there exist\nconstants $d>0$ and $h\\ge 1$ such that for every $y\\in(0,\\tfrac12)$, every\n$b>1$, and every $y$-sparse $\\mathcal F$-free graph $G$, at least one of the\nfollowing holds:\n\n1. there are disjoint sets $X,Y\\subseteq V(G)$ with\n$$|X|\\ge y^{bd+1}|V(G)|,\\qquad |Y|\\ge (1-hy)|V(G)|,$$\nand $Y$ anticomplete to $X$; or\n2. $G$ has a $y^b$-restricted induced subgraph with at least\n$$y^{bd+1}|V(G)|$$\nvertices.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-restrictedness-is-complement-invariant",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite simple graph, let $c\\ge0$, and let $X\\subseteq V(G)$ be\nnonempty. Then $X$ is $c$-sparse in $G$ if and only if $X$ is $c$-dense in\n$\\overline G$. Consequently $X$ is $c$-restricted in $G$ if and only if it is\n$c$-restricted in $\\overline G$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-wonderful-finite-family",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs, and write\n\n$$\\overline{\\mathcal F}:=\\{\\overline H:H\\in\\mathcal F\\}$$\n\nfor its family of complements\n([[def-graph-isomorphism-and-complement]]).\n\nWe say that $\\mathcal F$ is **wonderful** if there exists a real constant\n$a\\ge 6$ such that the following holds for every $y\\in(0,\\tfrac12)$ and every\n$\\overline{\\mathcal F}$-free graph $G$\n([[def-h-free-and-family-free-graph]]).\n\nSuppose that $\\mathcal B=(B_1,\\dots,B_\\ell)$ is an $(\\ell,w)$-blockade in $G$\n([[def-blockade-length-and-width]]) with $\\ell\\ge y^{-a}$, that all blocks have\nthe same size, that every block $B_i$ is anticonnected\n([[def-anticonnected-graph-and-anticonnected-component]]), and that for every\ndistinct $i,j\\in[\\ell]$ either\n\n- $B_i$ is complete to $B_j$\n  ([[def-edges-between-sets-and-pure-mixed-pairs]]), or\n- $B_i$ is $y^a$-sparse to $B_j$ and $B_j$ is $y^a$-sparse to $B_i$\n  ([[def-directional-and-weak-sparsity-between-vertex-sets]]).\n\nThen at least one of the following conclusions holds:\n\n1. $G$ has a $y^4$-restricted induced subgraph of size at least $w$\n   ([[def-c-sparse-and-c-restricted-vertex-set]]).\n2. There exists $i\\in[\\ell]$ such that at most $y|V(G)|$ vertices\n   $v\\in V(G)\\setminus V(\\mathcal B)$ satisfy\n   $$0<|N_G(v)\\cap B_i|<\\frac12|B_i|.$$\n\nThis item fixes the symmetric reading of the source phrase \"complete or\n$y^a$-sparse\" that the later proof actually uses: when a pair of blocks is not\ncomplete, each block is sparse to the other.",
+          "uses": [
+            "1.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-a-complete-or-weakly-sparse-blockade-can-be-thinned-to-equal-subblocks-with-directional-sparsity",
+          "source_section": "Statement",
+          "quote": "Let $a\\ge 0$, let $\\epsilon\\in(0,\\tfrac14]$, and let\n\n$$\n\\mathcal A=(A_1,\\ldots,A_\\ell)\n$$\n\nbe a blockade in a graph $G$ with $\\ell=\\lceil\\epsilon^{-1}\\rceil$ and width\nat least $m>0$. Assume that every distinct pair $(A_i,A_j)$ is either complete\nor weakly $\\epsilon^a$-sparse. Then there is a subblockade\n\n$$\n\\mathcal D=(D_1,\\ldots,D_\\ell)\n$$\n\nsuch that:\n\n1. $D_i\\subseteq A_i$ and $|D_i|=\\lceil\\epsilon\\lceil m\\rceil\\rceil$ for every\n   $i\\in[\\ell]$;\n2. if $(A_i,A_j)$ is complete, then $(D_i,D_j)$ is complete; and\n3. if $(A_i,A_j)$ is weakly $\\epsilon^a$-sparse, then $D_i$ is\n   $\\epsilon^{a-5}$-sparse to $D_j$ and $D_j$ is $\\epsilon^{a-5}$-sparse to\n   $D_i$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-a-complete-or-weakly-sparse-blockade-yields-a-complete-subblockade-or-an-anticonnected-thinning",
+          "source_section": "Statement",
+          "quote": "Let $\\epsilon\\in(0,\\tfrac14]$, let $\\ell=\\lceil\\epsilon^{-1}\\rceil$, and let\n\n$$\n\\mathcal D=(D_1,\\ldots,D_\\ell)\n$$\n\nbe a blockade in a graph $G$ such that all blocks have the same size $q>1$ and\nevery distinct pair $(D_i,D_j)$ is either complete or mutually $\\eta$-sparse.\nThen one of the following holds:\n\n1. $G$ contains a complete $(\\ell,q/\\ell^2)$-blockade; or\n2. there exist anticonnected subsets $B_i\\subseteq D_i$ with\n   $|B_i|=\\lceil q/\\ell\\rceil$ for all $i\\in[\\ell]$ such that every distinct\n   pair $(B_i,B_j)$ is either complete or mutually $(\\eta\\ell)$-sparse.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-a-wonderful-anticonnected-complete-or-sparse-blockade-yields-a-restricted-subgraph-or-a-large-anticomplete-pair",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a wonderful finite family, and let $a\\ge 6$ be a witness\nfor wonderfulness. Let $y\\in(0,\\tfrac12)$ and let $G$ be a $y$-sparse\n$\\overline{\\mathcal F}$-free graph. Suppose that\n\n$$\n\\mathcal B=(B_1,\\ldots,B_\\ell)\n$$\n\nis a blockade in $G$ such that:\n\n1. $\\ell\\ge y^{-a}$;\n2. all blocks have the same size $w$;\n3. every block $B_i$ is anticonnected;\n4. every distinct pair $(B_i,B_j)$ is either complete or mutually $y^a$-sparse;\n5. the support satisfies $|V(\\mathcal B)|\\le y|G|$.\n\nThen one of the following holds:\n\n1. $G$ has a $y^4$-restricted induced subgraph with at least $w$ vertices; or\n2. there exist disjoint sets $X,Y\\subseteq V(G)$ with $|X|=w$,\n   $|Y|\\ge (1-4y)|G|$, and $Y$ anticomplete to $X$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the blockade branch after thinning. Step 4.1 now uses w >= epsilon^3 m rather than the false epsilon^2 m bound, and the remaining support and wonderfulness estimates still reach outcomes 2 or 4."
+      }
+    },
+    "cor-large-almost-pure-pair-hypotheses-yield-a-complete-or-anticomplete-blockade": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $n$ be maximal such that $G$ has a blockade $(B_1,\\ldots,B_n)$ with $|B_i|\\ge y^{a+2}|G|$ for all $i\\in[n]$, with $|B_n|\\ge (1-by)^n|G|$, and with the property that for each $i\\in[n]$, either every later block is complete to $B_i$, or every later block is anticomplete to $B_i$. This is possible because $0<y^{a+2}\\le 1$, so $B_1:=V(G)$ already satisfies the required lower bounds.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $n<2y^{-1}$. The bound $y\\le c=2^{-4b}$ implies $by<\\tfrac12$, and the elementary inequality $1-t\\ge 2^{-2t}$ for $t\\in[0,\\tfrac12]$ gives $(1-by)^n\\ge (1-by)^{2y^{-1}}\\ge 2^{-4b}=c$. Hence $|B_n|\\ge c|G|$, so the hypothesis applies to $G[B_n]$. Choose disjoint $X,Y\\subseteq B_n$ with $$|X|\\ge y^a|B_n|\\ge y^ac|G|\\ge y^{a+2}|G|,$$ where the last inequality uses $c\\ge y\\ge y^2$, and with $|Y|\\ge (1-by)|B_n|\\ge (1-by)^{n+1}|G|$, and $Y$ complete or anticomplete to $X$. Moreover, $$|Y|\\ge (1-by)c|G|>\\tfrac12c|G|\\ge\\tfrac12y|G|\\ge y^{a+2}|G|,$$ where the last inequality follows from $a>1$ and $y\\le\\tfrac12$. Because $X\\cup Y\\subseteq B_n$, every earlier block has the same pure relation to both $X$ and $Y$ that it had to $B_n$. Thus $(B_1,\\ldots,B_{n-1},X,Y)$ is a longer blockade of the same type, contradicting the maximality of $n$. So $n\\ge 2y^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "assume-contra",
+            "choose",
+            "algebra",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $Q$ be the set of indices $i$ such that every later block is complete to $B_i$, and let $R$ be the set of indices $i$ such that every later block is anticomplete to $B_i$. By construction every index lies in $Q\\cup R$, so one of $Q$ or $R$ has size at least $n/2\\ge y^{-1}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $|Q|\\ge y^{-1}$, choose $\\lceil y^{-1}\\rceil$ indices from $Q$ in their inherited order. The corresponding blocks form a complete blockade, and every block has size at least $y^{a+2}|G|$ by step 1.1. If instead $|R|\\ge y^{-1}$, the same construction with $R$ gives an anticomplete blockade. In either case we obtain a complete or anticomplete $(\\lceil y^{-1}\\rceil,y^{a+2}|G|)$-blockade.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Therefore the stated blockade exists.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns one finite graph and a nonempty parameter interval; it has no indexed family whose empty case requires a separate convention."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypotheses require $a>1$, $b>0$, and $y>0$, while $|G|\\ge y^{-(a+2)}$ makes $G$ nonempty; no zero-parameter case is admitted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Since $y\\le\\tfrac12$, the target length $\\lceil y^{-1}\\rceil$ is at least two; the statement has no separate value-one regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies that both replacement blocks meet the common width and last-block bounds, while the uniform relation invariant from step 1.1 makes the complete/anticomplete split in steps 3.1-4.1 exhaustive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At the statement's allowed upper endpoint $y=\\min\\{\\tfrac12,c\\}$, the non-strict comparisons $c\\ge y\\ge y^2$ and $y\\le\\tfrac12$ used in step 2.1 for both replacement-block widths remain valid; $y\\le c=2^{-4b}$ also gives $by<\\tfrac12$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The one-block candidate makes the finite maximal choice in step 1.1 nonempty. The bound $|G|\\ge y^{-(a+2)}$ makes the required width at least one, step 2.1 proves both new blocks meet it, and step 4.1 selects at least $\\lceil y^{-1}\\rceil$ indices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is an implication, not the forward half of an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is an implication and asserts no converse."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-blockade-length-and-width",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph, let $\\ell\\in\\mathbb N$ with $\\ell\\ge 1$, and let\n$w>0$ be real. An **$(\\ell,w)$-blockade** in $G$ is a sequence\n\n$$\\mathcal{B}=(B_1,\\dots,B_t)$$\n\nof pairwise disjoint nonempty subsets of $V(G)$ such that $t\\geq \\ell$ and\n$|B_i|\\geq w$ for every $i\\in[t]$.\n\nEach $B_i$ is a **block**. The **length** of $\\mathcal{B}$ is $t$, its\n**width** is\n\n$$\\min\\{|B_1|,\\dots,|B_t|\\},$$\n\nand its **support** is\n\n$$V(\\mathcal{B})=B_1\\cup\\cdots\\cup B_t.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "final-adjudicator",
+        "notes": "Independently reviewed the maximal-blockade invariant and both replacement-block width bounds against Huang-Ju-Zhou, Lemma 2.8, on 2026-09-04."
+      }
+    },
+    "lem-cy-restricted-generalized-niceness-yields-three-outcomes": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $a_1,a_2,a_5,a_3,a_4$ be as in [L1], and set $c:=\\min\\{2^{-4a_5},(2a_5)^{-1},1/4\\}$, $c_1:=a_1+1$, $c_2:=a_2$, $c_3:=a_3+2$, and $c_4:=a_4$. Then $c\\in(0,\\tfrac12)$ and $c_3\\ge c_4\\ge 4$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $|G|\\le y^{-c_3}$, then any one-vertex induced subgraph of $G$ is $y^{c_4}$-restricted and has size at least $y^{c_3}|G|$, so outcome 3 holds.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose every induced subgraph $F$ of $G$ with $|F|\\ge c|G|$ contains disjoint sets $X,Y\\subseteq V(F)$ with $|X|\\ge y^{a_3}|F|$, $|Y|\\ge (1-a_5y)|F|$, and $Y$ complete or anticomplete to $X$. Since $y\\le c\\le (2a_5)^{-1}$ and $c\\le 2^{-4a_5}$, the hypotheses of [L2] are satisfied with $a=a_3$ and $b=a_5$. Therefore [L2] yields a complete or anticomplete $(\\lceil y^{-1}\\rceil,y^{a_3+2}|G|)$-blockade in $G$. Because $c_3=a_3+2$ and $1/\\lceil y^{-1}\\rceil\\le y$, each block has size at least $y^{c_3}|G|\\ge |G|/\\lceil y^{-1}\\rceil^{c_3}$. Hence outcome 2 holds after shrinking to exactly $\\lceil y^{-1}\\rceil$ blocks if necessary.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "We may therefore choose an induced subgraph $F$ of $G$ with $|F|\\ge c|G|$ for which no such almost-pure pair exists. Because $G$ is $cy$-restricted and $|F|\\ge c|G|$, [L3] implies that $F$ is $y$-restricted. Apply [L1] to $F$. Its fourth outcome is excluded by the choice of $F$. If [L1] gives a clique or stable set of size at least $(y^{a_1}|F|)^{a_2}$, then $(y^{a_1}|F|)^{a_2}\\ge (y^{a_1+1}|G|)^{a_2}=(y^{c_1}|G|)^{c_2}$, because $|F|\\ge c|G|\\ge y|G|$. So outcome 1 holds. If [L1] gives a complete or anticomplete blockade $(k,|F|/k^{a_3})$ with $k\\ge y^{-1}$, then $|F|/k^{a_3}\\ge c|G|/k^{a_3}\\ge y^2|G|/k^{a_3}\\ge |G|/k^{a_3+2}=|G|/k^{c_3}$, because $c\\ge y\\ge y^2$ and $y\\ge 1/k$. So outcome 2 holds. Finally, if [L1] gives a $y^{a_4}$-restricted induced subgraph of size at least $y^{a_3}|F|$, then $y^{a_3}|F|\\ge y^{a_3}c|G|\\ge y^{a_3+2}|G|=y^{c_3}|G|$, because $c\\ge y^2$, and $a_4=c_4$. So outcome 3 holds.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1, 2.2, and 2.3 cover all cases, so one of the three stated outcomes always holds.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In cy-restricted generalized niceness yields three outcomes, the theorem starts from one $cy$-restricted graph $G$ with outcomes measured against $|G|$, so the detector's family regex is not exposing a missing empty branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In cy-restricted generalized niceness yields three outcomes, the theorem starts from one $cy$-restricted graph $G$ with outcomes measured against $|G|$, so the detector's family regex is not exposing a missing empty branch."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In cy-restricted generalized niceness yields three outcomes, Proof technique: either every large induced subgraph already has a large pure pair, or one large induced subgraph avoids that outcome and t…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the small-graph regime by taking a one-vertex induced subgraph."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 handles the universal almost-pure-pair regime, and step 2.3 handles the complementary large-subgraph regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In cy-restricted generalized niceness yields three outcomes, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.3 chooses the induced subgraph F once the universal almost-pure-pair branch fails."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In cy-restricted generalized niceness yields three outcomes, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In cy-restricted generalized niceness yields three outcomes, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-generalized-niceness-yields-four-reduction-outcomes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family\nof graphs. Then there exist constants $a_1,a_2,a_5>0$ and $a_3\\ge a_4\\ge 4$\nsuch that for every $y\\in(0,\\tfrac12)$ and every $y$-restricted\n$\\overline{\\mathcal F}$-free graph $G$, at least one of the following holds:\n\n1. $G$ has a clique or stable set of size at least\n   $$ (y^{a_1}|G|)^{a_2}; $$\n2. $G$ has a $y^{a_4}$-restricted induced subgraph with at least\n   $$ y^{a_3}|G| $$\n   vertices;\n3. $G$ has a complete or anticomplete $(k,|G|/k^{a_3})$-blockade with\n   $k\\ge y^{-1}$; or\n4. there exist disjoint sets $X,Y\\subseteq V(G)$ with\n   $$ |X|\\ge y^{a_3}|G|,\\qquad |Y|\\ge (1-a_5y)|G|, $$\n   and $Y$ complete or anticomplete to $X$.",
+          "uses": [
+            "1.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-large-almost-pure-pair-hypotheses-yield-a-complete-or-anticomplete-blockade",
+          "source_section": "Statement",
+          "quote": "Let $a>1$, $b>0$, put $c:=2^{-4b}$, and assume\n$$ y\\in\\left(0,\\min\\left\\{\\tfrac12,c\\right\\}\\right]. $$\nAssume that $|G|\\ge y^{-(a+2)}$. Suppose that every\ninduced subgraph $F$ of $G$ with $|F|\\ge c|G|$ contains disjoint sets\n$X,Y\\subseteq V(F)$ such that\n\n$$ |X|\\ge y^a|F|,\\qquad |Y|\\ge (1-by)|F|, $$\n\nand $Y$ is complete or anticomplete to $X$. Then $G$ contains a complete or\nanticomplete $(\\lceil y^{-1}\\rceil,y^{a+2}|G|)$-blockade.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-c-sparse-and-c-restricted-vertex-set",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$ be real. A nonempty vertex set\n$X\\subseteq V(G)$ is **$c$-sparse** when\n\n$$ |N_G(x)\\cap X|\\le c|X| $$\n\nfor every $x\\in X$, and it is **$c$-dense** when\n\n$$ |(X\\setminus\\{x\\})\\setminus N_G(x)|\\le c|X| $$\n\nfor every $x\\in X$. Thus $c$-dense means that every vertex of $X$ has at most\n$c|X|$ non-neighbours inside $X$ other than itself.\n\nA set is **$c$-restricted** when it is $c$-sparse or $c$-dense. The condition is\ninternal to the induced subgraph $G[X]$ ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]), and the dense clause is the sparse clause read in the complement.",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the parameter transfer from the four-outcome lemma to the large-pure-pair blockade corollary. Rechecked the choice of c, the size lower bounds from |F| >= c|G|, and the conversion of each four-outcome case to one of the three stated outcomes."
+      }
+    },
+    "lem-iterated-restricted-sparsification-reaches-the-target-scale": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By hypothesis 1, there exists at least one induced subgraph of $G$ that is $c$-restricted and has at least $c^{b_2}|G|$ vertices. Therefore the set of admissible restriction parameters considered below is nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a nonempty induced subgraph $E$ of $G$, let $\\rho(E)$ be the smallest real number $\\lambda\\in[0,1]$ such that $E$ is $\\lambda$-restricted. Because $E$ is finite, [L1] shows that $\\rho(E)$ is attained by one of finitely many degree or codegree ratios in $E$. Choose an induced subgraph $F$ of $G$ for which $\\lambda:=\\max(x^{b_1},\\rho(F))$ is minimal subject to $|F|\\ge \\lambda^{b_2}|G|$. Step 1.1 ensures that such a choice exists and that $\\lambda\\le c$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $\\lambda\\ge x$. Then $\\lambda=\\rho(F)$, so hypothesis 2 applies to $F$ and yields a $\\lambda^{b_1}$-restricted induced subgraph $F'\\subseteq F$ with $|F'|\\ge \\lambda^{b_3}|F|\\ge \\lambda^{b_2+b_3}|G|\\ge \\lambda^{b_1b_2}|G|$, where the last inequality uses $b_1b_2\\ge b_2+b_3$. Because $F'$ is $\\lambda^{b_1}$-restricted, its admissible parameter satisfies $\\max(x^{b_1},\\rho(F'))\\le \\lambda^{b_1}<\\lambda$, while $|F'|\\ge \\max(x^{b_1},\\rho(F'))^{b_2}|G|$. This contradicts the minimal choice of $\\lambda$ in step 2.1. Hence $\\lambda<x$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "assume-contra",
+            "algebra",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $\\lambda=\\max(x^{b_1},\\rho(F))$, step 2.1 gives $x^{b_1}\\le \\lambda<x$ by step 3.1. Therefore $\\rho(F)\\le \\lambda<x$, so $F$ is $x$-restricted. Its size also satisfies $|F|\\ge \\lambda^{b_2}|G|\\ge (x^{b_1})^{b_2}|G|=x^{b_1b_2}|G|$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The induced subgraph $F$ from step 4.1 is the required $x$-restricted induced subgraph.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Iterated restricted sparsification reaches the target scale, Let $c\\in(0,1)$, let $b_1>1$, let $b_2,b_3>0$, and assume $$ b_1b_2\\ge b_2+b_3.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Iterated restricted sparsification reaches the target scale, Proof technique: minimal admissible restriction parameter.; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Iterated restricted sparsification reaches the target scale, Let $c\\in(0,1)$, let $b_1>1$, let $b_2,b_3>0$, and assume $$ b_1b_2\\ge b_2+b_3.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the only critical branch lambda>=x and forces the contradiction that drives the iteration."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Iterated restricted sparsification reaches the target scale, Let $c\\in(0,1)$, let $b_1>1$, let $b_2,b_3>0$, and assume $$ b_1b_2\\ge b_2+b_3.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the admissible family is nonempty, and step 2.1 then chooses a minimal-parameter witness F."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Iterated restricted sparsification reaches the target scale, Let $c\\in(0,1)$, let $b_1>1$, let $b_2,b_3>0$, and assume $$ b_1b_2\\ge b_2+b_3.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Iterated restricted sparsification reaches the target scale, Let $c\\in(0,1)$, let $b_1>1$, let $b_2,b_3>0$, and assume $$ b_1b_2\\ge b_2+b_3.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-c-sparse-and-c-restricted-vertex-set",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$ be real. A nonempty vertex set\n$X\\subseteq V(G)$ is **$c$-sparse** when\n\n$$\n|N_G(x)\\cap X|\\le c|X|\n$$\n\nfor every $x\\in X$, and it is **$c$-dense** when\n\n$$\n|(X\\setminus\\{x\\})\\setminus N_G(x)|\\le c|X|\n$$\n\nfor every $x\\in X$. Thus $c$-dense means that every vertex of $X$ has at most\n$c|X|$ non-neighbours inside $X$ other than itself.\n\nA set is **$c$-restricted** when it is $c$-sparse or $c$-dense. The condition is\ninternal to the induced subgraph $G[X]$ ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]), and the dense clause is the sparse clause read in the complement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the authored restricted-iteration proof and boundary dispositions for batch 15 on 2026-09-02."
+      }
+    },
+    "lem-a-large-cy-restricted-subgraph-in-the-three-outcome-theorem-forces-a-smaller-scale-restricted-subgraph": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $cy\\in[x,c^2]$ and $c<1$, we have $y\\ge x$ and $y\\le c$. Also $cy\\ge y^2$ because $y\\le c$. Therefore $|F|\\ge (cy)^{4c_3/c_4}|G|\\ge y^{8c_3/c_4}|G|$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $F$ is an induced subgraph of the $\\overline{\\mathcal F}$-free graph $G$, [L2] implies that $F$ is also $\\overline{\\mathcal F}$-free. Apply [L1] to $F$. If it gives a clique or stable set in $F$ of size at least $(y^{c_1}|F|)^{c_2}$, then by step 1.1 one has $(y^{c_1}|F|)^{c_2}\\ge (y^{c_1+8c_3/c_4}|G|)^{c_2}\\ge (x^{c_1+3c_3}|G|)^{c_2}$, because $8c_3/c_4\\le 2c_3\\le 3c_3$ and $y\\ge x$. This contradicts global hypothesis 1.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If [L1] gives a complete or anticomplete $(k,|F|/k^{c_3})$-blockade in $F$ with $k\\ge y^{-1}$, then $k\\ge2$. Using step 1.1 and $k\\ge y^{-1}$, one has $|F|/k^{c_3}\\ge y^{8c_3/c_4}|G|/k^{c_3}\\ge |G|/k^{c_3+8c_3/c_4}\\ge |G|/k^{c_1+3c_3}$, since $c_3+8c_3/c_4\\le c_1+3c_3$. This contradicts global hypothesis 2.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore only the third outcome of [L1] can occur. So $F$ has a $y^{c_4}$-restricted induced subgraph $S$ with $|S|\\ge y^{c_3}|F|$. Because $cy\\ge y^2$, one has $y^{c_4}=(y^2)^{c_4/2}\\le (cy)^{c_4/2}$, so $S$ is also $(cy)^{c_4/2}$-restricted. Since $cy\\le y$, we also have $y^{c_3}\\ge (cy)^{c_3}$, hence $|S|\\ge y^{c_3}|F|\\ge (cy)^{c_3}|F|$. This is exactly the claimed smaller-scale restricted induced subgraph.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The claimed induced subgraph exists.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A large cy-restricted subgraph in the three-outcome theorem forces a smaller-scale restricted subgraph, the hypothesis already requires $|F|ge(cy)^{4c_3/c_4}|G|$, so the detector's family regex is not pointing to an optional empty witness family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In A large cy-restricted subgraph in the three-outcome theorem forces a smaller-scale restricted subgraph, the hypothesis already requires $|F|ge(cy)^{4c_3/c_4}|G|$, so the detector's family regex is not pointing to an optional empty witness family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A large cy-restricted subgraph in the three-outcome theorem forces a smaller-scale restricted subgraph, Proof technique: apply the three-outcome theorem to $F$ and rule out its first two outcomes by the assumed global failures in $G$.; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A large cy-restricted subgraph in the three-outcome theorem forces a smaller-scale restricted subgraph, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 eliminate the clique/stable-set and blockade outcomes, forcing the restricted-subgraph branch in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A large cy-restricted subgraph in the three-outcome theorem forces a smaller-scale restricted subgraph, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the induced subgraph S supplied by the surviving third outcome of the cited three-outcome theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A large cy-restricted subgraph in the three-outcome theorem forces a smaller-scale restricted subgraph, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A large cy-restricted subgraph in the three-outcome theorem forces a smaller-scale restricted subgraph, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cy-restricted-generalized-niceness-yields-three-outcomes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite\nfamily. Then there exist constants $c\\in(0,\\tfrac12)$, $c_1,c_2>0$, and\n$c_3\\ge c_4\\ge 4$ such that for every $y\\in(0,c]$ and every\n$cy$-restricted $\\overline{\\mathcal F}$-free graph $G$, at least one of the\nfollowing holds:\n\n1. $G$ has a clique or stable set of size at least\n   $$ (y^{c_1}|G|)^{c_2}; $$\n2. $G$ has a complete or anticomplete $(k,|G|/k^{c_3})$-blockade with\n   $k\\ge y^{-1}$; or\n3. $G$ has a $y^{c_4}$-restricted induced subgraph with at least\n   $$ y^{c_3}|G| $$\n   vertices.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the authored helper claim and boundary dispositions for batch 15 on 2026-09-02."
+      }
+    },
+    "lem-constant-scale-restricted-generalized-niceness-yields-an-x-scale-restricted-subgraph-a-polynomial-clique-or-stable-set-or-a-blockade": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $c,c_1,c_2,c_3,c_4$ be the constants from [L1], and set $a_1:=c_1+3c_3$, $a_2:=c_2$, $b_1:=c_4/2$, $b_2:=4c_3/c_4$, and $b_3:=c_3$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Hypothesis 1 of [L3] is automatic with starting constant $c^2$: the graph $G$ itself is $c^2$-restricted by assumption, so it has a $c^2$-restricted induced subgraph of size $|G|=(c^2)^0|G|$, and in particular of size at least $(c^2)^{b_2}|G|$ because $b_2>0$ and $c^2<1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose outcomes 2 and 3 fail for the given graph $G$. We will show that outcome 1 must then hold.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [L2] with the constants from step 1.1. It shows that for every $y$ with $cy\\in[x,c^2]$ and every $cy$-restricted induced subgraph $F$ of $G$ with $|F|\\ge (cy)^{4c_3/c_4}|G|$, there is a $(cy)^{c_4/2}$-restricted induced subgraph of $F$ with at least $(cy)^{c_3}|F|$ vertices. Writing $\\lambda:=cy$, this is exactly hypothesis 2 of [L3] for every $\\lambda\\in[x,c^2]$, with the starting constant $c^2$ and the choices $b_1=c_4/2$, $b_2=4c_3/c_4$, and $b_3=c_3$ from step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The inequality required by [L3] holds for these choices, because $b_1b_2=(c_4/2)\\cdot (4c_3/c_4)=2c_3\\ge c_3+4c_3/c_4=b_3+b_2$, using $c_4\\ge 4$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "algebra",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Therefore [L3] applies and yields an $x$-restricted induced subgraph of $G$ with at least $x^{b_1b_2}|G|=x^{2c_3}|G|$ vertices. Since $a_1=c_1+3c_3\\ge 2c_3$ and $x\\in(0,1)$, we have $x^{2c_3}\\ge x^{a_1}$, so outcome 1 holds.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Outcome 1 follows whenever outcomes 2 and 3 fail. Hence at least one of the three stated outcomes holds for every admissible $G$.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.2",
+            "step 5.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Constant-scale restricted generalized niceness yields an x-scale restricted subgraph, a polynomial clique or stable set, or a blockade, the claim starts from one $c^2$-restricted graph $G$ and its induced subgraphs rather than from an optional empty family parameter.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "In Constant-scale restricted generalized niceness yields an x-scale restricted subgraph, a polynomial clique or stable set, or a blockade, the claim starts from one $c^2$-restricted graph $G$ and its induced subgraphs rather than from an optional empty family parameter."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Constant-scale restricted generalized niceness yields an x-scale restricted subgraph, a polynomial clique or stable set, or a blockade, Proof technique: if the clique/stable-set and blockade outcomes fail, use the helper claim to verify the second hypothesis of the iterative…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Constant-scale restricted generalized niceness yields an x-scale restricted subgraph, a polynomial clique or stable set, or a blockade, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 assumes failure of the clique/stable-set and blockade outcomes, and steps 3.1-5.1 force the remaining restricted outcome."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Constant-scale restricted generalized niceness yields an x-scale restricted subgraph, a polynomial clique or stable set, or a blockade, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 provides the starting restricted induced subgraph G itself, and step 3.1 invokes the helper claim on every large cy-restricted induced subgraph."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Constant-scale restricted generalized niceness yields an x-scale restricted subgraph, a polynomial clique or stable set, or a blockade, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Constant-scale restricted generalized niceness yields an x-scale restricted subgraph, a polynomial clique or stable set, or a blockade, Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite family.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cy-restricted-generalized-niceness-yields-three-outcomes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite\nfamily. Then there exist constants $c\\in(0,\\tfrac12)$, $c_1,c_2>0$, and\n$c_3\\ge c_4\\ge 4$ such that for every $y\\in(0,c]$ and every\n$cy$-restricted $\\overline{\\mathcal F}$-free graph $G$, at least one of the\nfollowing holds:\n\n1. $G$ has a clique or stable set of size at least\n   $$ (y^{c_1}|G|)^{c_2}; $$\n2. $G$ has a complete or anticomplete $(k,|G|/k^{c_3})$-blockade with\n   $k\\ge y^{-1}$; or\n3. $G$ has a $y^{c_4}$-restricted induced subgraph with at least\n   $$ y^{c_3}|G| $$\n   vertices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-a-large-cy-restricted-subgraph-in-the-three-outcome-theorem-forces-a-smaller-scale-restricted-subgraph",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite\nfamily. Assume constants $c\\in(0,\\tfrac12)$, $c_1,c_2>0$, and\n$c_3\\ge c_4\\ge 4$ satisfy the conclusion of\n[[lem-cy-restricted-generalized-niceness-yields-three-outcomes]] for\n$\\mathcal F$. Let $x\\in(0,c^2)$, and let $G$ be an\n$\\overline{\\mathcal F}$-free graph such that:\n\n1. $G$ has no clique and no stable set of size at least\n   $$ (x^{c_1+3c_3}|G|)^{c_2}; $$\n2. for every integer $k\\ge2$, $G$ has no complete or anticomplete\n   $(k,|G|/k^{c_1+3c_3})$-blockade.\n\nThen for every $y$ with $cy\\in[x,c^2]$ and every $cy$-restricted induced\nsubgraph $F$ of $G$ with\n\n$$ |F|\\ge (cy)^{4c_3/c_4}|G|, $$\n\nthere is a $(cy)^{c_4/2}$-restricted induced subgraph of $F$ with at least\n$(cy)^{c_3}|F|$ vertices.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-iterated-restricted-sparsification-reaches-the-target-scale",
+          "source_section": "Statement",
+          "quote": "Let $c\\in(0,1)$, let $b_1>1$, let $b_2,b_3>0$, and assume\n\n$$ b_1b_2\\ge b_2+b_3. $$\n\nSuppose that $x\\in(0,c)$ and that a graph $G$ satisfies:\n\n1. $G$ has a $c$-restricted induced subgraph with at least $c^{b_2}|G|$\n   vertices; and\n2. for every $\\lambda\\in[x,c]$ and every $\\lambda$-restricted induced subgraph\n   $F$ of $G$ with $|F|\\ge \\lambda^{b_2}|G|$, there is a\n   $\\lambda^{b_1}$-restricted induced subgraph of $F$ with at least\n   $\\lambda^{b_3}|F|$ vertices.\n\nThen $G$ contains an $x$-restricted induced subgraph with at least\n$x^{b_1b_2}|G|$ vertices.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-c-sparse-and-c-restricted-vertex-set",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$ be real. A nonempty vertex set\n$X\\subseteq V(G)$ is **$c$-sparse** when\n\n$$ |N_G(x)\\cap X|\\le c|X| $$\n\nfor every $x\\in X$, and it is **$c$-dense** when\n\n$$ |(X\\setminus\\{x\\})\\setminus N_G(x)|\\le c|X| $$\n\nfor every $x\\in X$. Thus $c$-dense means that every vertex of $X$ has at most\n$c|X|$ non-neighbours inside $X$ other than itself.\n\nA set is **$c$-restricted** when it is $c$-sparse or $c$-dense. The condition is\ninternal to the induced subgraph $G[X]$ ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]), and the dense clause is the sparse clause read in the complement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High risk was the iterative-sparsification parameter match. Rechecked the helper lemma's lambda = cy regime, the inequality b_1 b_2 >= b_2 + b_3, and the final exponent comparison x^(2c_3) >= x^(a_1)."
+      }
+    },
+    "ex-thinning-a-four-block-weakly-sparse-blockade-to-directional-sparse-subblocks": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The four blocks are pairwise disjoint and nonempty, each has size $8$, so $(A_1,A_2,A_3,A_4)$ is a blockade of width $8$ by [L1]. Every noncomplete pair listed in the example has exactly one cross-edge, hence at most $1=(1/16)\\cdot 8\\cdot 8$ cross-edges. Therefore each such pair is weakly $1/16$-sparse by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "None of the vertices $a_7,a_8,b_7,b_8,c_7,c_8,d_7,d_8$ appears in any of the six displayed cross-edges. Hence every noncomplete pair among $D_1,D_2,D_3,D_4$ has no cross-edge at all, so each vertex in one chosen subblock has $0$ neighbours in the other. By [L2], those pairs are directionally $0$-sparse.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the thinning $(A_1,A_2,A_3,A_4)\\rightsquigarrow(D_1,D_2,D_3,D_4)$ exhibits exactly the weak-to-directional sparsity conversion claimed in the example.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Thinning a four-block weakly sparse blockade to directional sparse subblocks, Let $G$ have four pairwise disjoint blocks $$A_1=\\{a_1,\\ldots,a_8\\},\\quad A_2=\\{b_1,\\ldots,b_8\\},\\quad A_3=\\{c_1,\\ldots,c_8\\},\\quad A_4=\\{d…; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Thinning a four-block weakly sparse blockade to directional sparse subblocks, Proof technique: direct adjacency count.; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Thinning a four-block weakly sparse blockade to directional sparse subblocks, Let $G$ have four pairwise disjoint blocks $$A_1=\\{a_1,\\ldots,a_8\\},\\quad A_2=\\{b_1,\\ldots,b_8\\},\\quad A_3=\\{c_1,\\ldots,c_8\\},\\quad A_4=\\{d…; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Thinning a four-block weakly sparse blockade to directional sparse subblocks, Let $G$ have four pairwise disjoint blocks $$A_1=\\{a_1,\\ldots,a_8\\},\\quad A_2=\\{b_1,\\ldots,b_8\\},\\quad A_3=\\{c_1,\\ldots,c_8\\},\\quad A_4=\\{d…; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Thinning a four-block weakly sparse blockade to directional sparse subblocks, Let $G$ have four pairwise disjoint blocks $$A_1=\\{a_1,\\ldots,a_8\\},\\quad A_2=\\{b_1,\\ldots,b_8\\},\\quad A_3=\\{c_1,\\ldots,c_8\\},\\quad A_4=\\{d…; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the explicitly chosen subblocks D_1,D_2,D_3,D_4 from the example statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Thinning a four-block weakly sparse blockade to directional sparse subblocks, Let $G$ have four pairwise disjoint blocks $$A_1=\\{a_1,\\ldots,a_8\\},\\quad A_2=\\{b_1,\\ldots,b_8\\},\\quad A_3=\\{c_1,\\ldots,c_8\\},\\quad A_4=\\{d…; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Thinning a four-block weakly sparse blockade to directional sparse subblocks, Let $G$ have four pairwise disjoint blocks $$A_1=\\{a_1,\\ldots,a_8\\},\\quad A_2=\\{b_1,\\ldots,b_8\\},\\quad A_3=\\{c_1,\\ldots,c_8\\},\\quad A_4=\\{d…; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-blockade-length-and-width",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph, let $\\ell\\in\\mathbb N$ with $\\ell\\ge 1$, and let\n$w>0$ be real. An **$(\\ell,w)$-blockade** in $G$ is a sequence\n\n$$\\mathcal{B}=(B_1,\\dots,B_t)$$\n\nof pairwise disjoint nonempty subsets of $V(G)$ such that $t\\geq \\ell$ and\n$|B_i|\\geq w$ for every $i\\in[t]$.\n\nEach $B_i$ is a **block**. The **length** of $\\mathcal{B}$ is $t$, its\n**width** is\n\n$$\\min\\{|B_1|,\\dots,|B_t|\\},$$\n\nand its **support** is\n\n$$V(\\mathcal{B})=B_1\\cup\\cdots\\cup B_t.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-directional-and-weak-sparsity-between-vertex-sets",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$.\n\n- For disjoint nonempty sets $X,Y\\subseteq V(G)$, $X$ is **$c$-sparse to $Y$** when every $x\\in X$ has at most $c|Y|$\n  neighbours in $Y$.\n- For nonempty sets $X,Y\\subseteq V(G)$, the ordered pair $(X,Y)$ is **weakly $c$-sparse** when\n  $e_G(X,Y)\\le c|X||Y|$, with the ordered edge count of [[def-edge-density-between-vertex-sets]].\n- Such a pair $(X,Y)$ is **weakly $c$-dense** when it is weakly $c$-sparse in the\n  complement graph.\n\nThe directional notion need not be symmetric, while the weak notion is an\nedge-count and so is symmetric. For nonempty $X$, taking $Y=X$ makes weak sparsity the\nself-density condition discussed in [[def-edge-density-between-vertex-sets]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the authored thinning example and boundary dispositions for batch 15 on 2026-09-02."
+      }
+    },
+    "ex-a-large-almost-pure-pair-extends-an-anticomplete-blockade": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sets $B_0,B_1,B_2$ are pairwise disjoint and nonempty, so $(B_0,B_1,B_2)$ is a blockade by [L1]. Hypotheses 1 and 2 say that each earlier block is anticomplete to every later block, so [L2] makes it an anticomplete blockade.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The sets $X$ and $Y$ are disjoint nonempty subsets of $B_2$, and hypothesis 3 says that $Y$ is anticomplete to $X$. Hypothesis 2 also implies that both $X$ and $Y$ are anticomplete to $B_0\\cup B_1$. Therefore every earlier block in $(B_0,B_1,X,Y)$ is anticomplete to every later block.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By steps 1.1 and 1.2, replacing the last block $B_2$ by the anticomplete pair $(X,Y)$ extends the original anticomplete blockade by one step.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A large almost-pure pair extends an anticomplete blockade, Let $$ B_0=\\{u_1,u_2\\},\\qquad B_1=\\{v_1,v_2\\},\\qquad B_2=\\{w_1,w_2,w_3,w_4,w_5,w_6\\}, $$ and assume: 1.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A large almost-pure pair extends an anticomplete blockade, Proof technique: direct. 1.1 The sets $B_0,B_1,B_2$ are pairwise disjoint and nonempty, so $(B_0,B_1,B_2)$ is a blockade by [L1]. Hypothese…; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A large almost-pure pair extends an anticomplete blockade, Let $$ B_0=\\{u_1,u_2\\},\\qquad B_1=\\{v_1,v_2\\},\\qquad B_2=\\{w_1,w_2,w_3,w_4,w_5,w_6\\}, $$ and assume: 1.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A large almost-pure pair extends an anticomplete blockade, Let $$ B_0=\\{u_1,u_2\\},\\qquad B_1=\\{v_1,v_2\\},\\qquad B_2=\\{w_1,w_2,w_3,w_4,w_5,w_6\\}, $$ and assume: 1.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A large almost-pure pair extends an anticomplete blockade, Let $$ B_0=\\{u_1,u_2\\},\\qquad B_1=\\{v_1,v_2\\},\\qquad B_2=\\{w_1,w_2,w_3,w_4,w_5,w_6\\}, $$ and assume: 1.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the explicitly displayed pair X,Y inside the last block B_2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A large almost-pure pair extends an anticomplete blockade, Let $$ B_0=\\{u_1,u_2\\},\\qquad B_1=\\{v_1,v_2\\},\\qquad B_2=\\{w_1,w_2,w_3,w_4,w_5,w_6\\}, $$ and assume: 1.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A large almost-pure pair extends an anticomplete blockade, Let $$ B_0=\\{u_1,u_2\\},\\qquad B_1=\\{v_1,v_2\\},\\qquad B_2=\\{w_1,w_2,w_3,w_4,w_5,w_6\\}, $$ and assume: 1.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-blockade-length-and-width",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph, let $\\ell\\in\\mathbb N$ with $\\ell\\ge 1$, and let\n$w>0$ be real. An **$(\\ell,w)$-blockade** in $G$ is a sequence\n\n$$\\mathcal{B}=(B_1,\\dots,B_t)$$\n\nof pairwise disjoint nonempty subsets of $V(G)$ such that $t\\geq \\ell$ and\n$|B_i|\\geq w$ for every $i\\in[t]$.\n\nEach $B_i$ is a **block**. The **length** of $\\mathcal{B}$ is $t$, its\n**width** is\n\n$$\\min\\{|B_1|,\\dots,|B_t|\\},$$\n\nand its **support** is\n\n$$V(\\mathcal{B})=B_1\\cup\\cdots\\cup B_t.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the authored anticomplete-blockade extension example and boundary dispositions for batch 15 on 2026-09-02."
+      }
+    },
+    "ex-a-numeric-run-of-the-lemma-three-three-exponent-choice": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting the given values into [L1] gives $b_1=2$, $b_2=4$, and $b_3=4$. Therefore $b_1b_2=8=b_2+b_3$, so the numerical inequality required by the iterative lemma holds exactly.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The graph $G$ itself supplies the starting $c^2$-restricted subgraph required by [L2], because $|G|\\ge(c^2)^{b_2}|G|$. For every $\\lambda\\in[x,c^2]$, write $\\lambda=cy$. The helper [L1], under the two global failure hypotheses in the Given data, sends each $\\lambda$-restricted $F$ with $|F|\\ge\\lambda^{b_2}|G|=\\lambda^4|G|$ to a $\\lambda^{b_1}$-restricted subgraph of size at least $\\lambda^{b_3}|F|=\\lambda^4|F|$. Thus both hypotheses of [L2] hold with starting constant $c^2$, and it gives an $x$-restricted induced subgraph of size at least $x^{b_1b_2}|G|=x^8|G|$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This is exactly the numerical exponent pattern used again in [L3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A numeric run of the Lemma 3.3 exponent choice, Take $$ c_4=4,\\qquad c_3=3,\\qquad c=\\tfrac14,\\qquad x=2^{-10}.; the indexed sum, product, or family is part of that written data, so there is no separate empty-family branch to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A numeric run of the Lemma 3.3 exponent choice, Proof technique: direct arithmetic.; any potential zero value is already controlled by the written hypotheses, cited definitions, or fixed witness, so there is no separate zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A numeric run of the Lemma 3.3 exponent choice, Take $$ c_4=4,\\qquad c_3=3,\\qquad c=\\tfrac14,\\qquad x=2^{-10}.; the argument does not split off a separate one-element or value-one regime beyond the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A numeric run of the Lemma 3.3 exponent choice, Take $$ c_4=4,\\qquad c_3=3,\\qquad c=\\tfrac14,\\qquad x=2^{-10}.; any collapsed regime is already ruled in or out by the written hypotheses, so there is no extra degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A numeric run of the Lemma 3.3 exponent choice, Take $$ c_4=4,\\qquad c_3=3,\\qquad c=\\tfrac14,\\qquad x=2^{-10}.; the claim has no additional interval-endpoint or boundary-line branch beyond what is written there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A numeric run of the Lemma 3.3 exponent choice, Proof technique: direct arithmetic.; every choice the proof uses is already named explicitly, so there is no extra pick from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A numeric run of the Lemma 3.3 exponent choice, Take $$ c_4=4,\\qquad c_3=3,\\qquad c=\\tfrac14,\\qquad x=2^{-10}.; the top-level statement is not itself the forward direction of a separate if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A numeric run of the Lemma 3.3 exponent choice, Take $$ c_4=4,\\qquad c_3=3,\\qquad c=\\tfrac14,\\qquad x=2^{-10}.; the top-level statement is not itself the reverse direction of a separate if-and-only-if claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-a-large-cy-restricted-subgraph-in-the-three-outcome-theorem-forces-a-smaller-scale-restricted-subgraph",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite\nfamily. Assume constants $c\\in(0,\\tfrac12)$, $c_1,c_2>0$, and\n$c_3\\ge c_4\\ge 4$ satisfy the conclusion of\n[[lem-cy-restricted-generalized-niceness-yields-three-outcomes]] for\n$\\mathcal F$. Let $x\\in(0,c^2)$, and let $G$ be an\n$\\overline{\\mathcal F}$-free graph such that:\n\n1. $G$ has no clique and no stable set of size at least\n   $$ (x^{c_1+3c_3}|G|)^{c_2}; $$\n2. for every integer $k\\ge2$, $G$ has no complete or anticomplete\n   $(k,|G|/k^{c_1+3c_3})$-blockade.\n\nThen for every $y$ with $cy\\in[x,c^2]$ and every $cy$-restricted induced\nsubgraph $F$ of $G$ with\n\n$$ |F|\\ge (cy)^{4c_3/c_4}|G|, $$\n\nthere is a $(cy)^{c_4/2}$-restricted induced subgraph of $F$ with at least\n$(cy)^{c_3}|F|$ vertices.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-iterated-restricted-sparsification-reaches-the-target-scale",
+          "source_section": "Statement",
+          "quote": "Let $c\\in(0,1)$, let $b_1>1$, let $b_2,b_3>0$, and assume\n\n$$ b_1b_2\\ge b_2+b_3. $$\n\nSuppose that $x\\in(0,c)$ and that a graph $G$ satisfies:\n\n1. $G$ has a $c$-restricted induced subgraph with at least $c^{b_2}|G|$\n   vertices; and\n2. for every $\\lambda\\in[x,c]$ and every $\\lambda$-restricted induced subgraph\n   $F$ of $G$ with $|F|\\ge \\lambda^{b_2}|G|$, there is a\n   $\\lambda^{b_1}$-restricted induced subgraph of $F$ with at least\n   $\\lambda^{b_3}|F|$ vertices.\n\nThen $G$ contains an $x$-restricted induced subgraph with at least\n$x^{b_1b_2}|G|$ vertices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-constant-scale-restricted-generalized-niceness-yields-an-x-scale-restricted-subgraph-a-polynomial-clique-or-stable-set-or-a-blockade",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a generalized nice, leaf-reducible, wonderful finite\nfamily. Then there exist constants $c\\in(0,\\tfrac12)$, $a_1\\ge 1$, and\n$a_2>0$ such that for every $x\\in(0,c^2)$ and every $c^2$-restricted\n$\\overline{\\mathcal F}$-free graph $G$, at least one of the following holds:\n\n1. $G$ has an $x$-restricted induced subgraph with at least $x^{a_1}|G|$\n   vertices;\n2. $G$ has a clique or stable set of size at least\n   $$ (x^{a_1}|G|)^{a_2}; $$\n3. $G$ has a complete or anticomplete $(k,|G|/k^{a_1})$-blockade for some\n   integer $k\\in[2,x^{-1}]$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the authored exponent-choice example and boundary dispositions for batch 15 on 2026-09-02."
+      }
+    }
+  }
+}

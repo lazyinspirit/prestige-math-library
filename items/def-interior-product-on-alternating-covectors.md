@@ -27,9 +27,7 @@ Let $V$ be a finite-dimensional real vector space, let $v\in V$, and let
 $\omega\in\operatorname{Alt}^k(V)$ with $k\ge 1$. The
 **interior product** $\iota_v\omega\in\operatorname{Alt}^{k-1}(V)$ is defined by
 
-$$
-(\iota_v\omega)(v_2,\ldots,v_k):=\omega(v,v_2,\ldots,v_k).
-$$
+$$ (\iota_v\omega)(v_2,\ldots,v_k):=\omega(v,v_2,\ldots,v_k). $$
 
 For $k=0$, adopt the formal convention $\operatorname{Alt}^{-1}(V):=\{0\}$ and
 set $\iota_v\omega:=0$.

@@ -28,15 +28,11 @@ pipeline_run: null
 
 For every positive integer $n$,
 
-$$
-\Lambda(n)=\sum_{\substack{d\mid n\\d>0}} \mu(d)\log(n/d).
-$$
+$$ \Lambda(n)=\sum_{\substack{d\mid n\\d>0}} \mu(d)\log(n/d). $$
 
 Equivalently,
 
-$$
-\Lambda=\mu*\log.
-$$
+$$ \Lambda=\mu*\log. $$
 
 ## Facts & Assumptions
 

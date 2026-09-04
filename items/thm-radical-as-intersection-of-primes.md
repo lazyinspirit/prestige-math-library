@@ -34,9 +34,7 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Let $R$ be a commutative ring and let $I\trianglelefteq R$ be an ideal. Then
-$$
-\sqrt{I}=\bigcap_{\substack{\mathfrak p\in\operatorname{Spec}R\\ I\subseteq\mathfrak p}} \mathfrak p,
-$$
+$$ \sqrt{I}=\bigcap_{\substack{\mathfrak p\in\operatorname{Spec}R\\ I\subseteq\mathfrak p}} \mathfrak p, $$
 where the intersection is taken to be $R$ if no prime ideal contains $I$.
 
 ## Facts & Assumptions

@@ -37,15 +37,11 @@ has the $(t,k)$-homogeneous property.
 Let $G$ be a finite graph on $n\ge2t$ vertices. Choose $X$ uniformly from
 $[V(G)]^{2t}$ and define
 
-$$
-Y(X):=\sum_{H\in\mathcal F}\operatorname{ind}_H(G[X]).
-$$
+$$ Y(X):=\sum_{H\in\mathcal F}\operatorname{ind}_H(G[X]). $$
 
 If $\mathbb E[Y]\le t/2$, then $G$ has at least
 
-$$
-\frac12\left(\frac{n}{2t}\right)^k
-$$
+$$ \frac12\left(\frac{n}{2t}\right)^k $$
 
 homogeneous vertex sets of size $k$.
 

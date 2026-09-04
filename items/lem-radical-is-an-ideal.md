@@ -32,9 +32,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring and let $I\trianglelefteq R$ be an ideal. Then $\sqrt{I}$ is an ideal of $R$ containing $I$. If $J\trianglelefteq R$ is another ideal with $I\subseteq J$, then $\sqrt{I}\subseteq\sqrt{J}$. Moreover,
-$$
-\sqrt{\sqrt{I}}=\sqrt{I}.
-$$
+$$ \sqrt{\sqrt{I}}=\sqrt{I}. $$
 
 ## Facts & Assumptions
 

@@ -32,9 +32,7 @@ sources:
 Let $S\subseteq\mathbb R^m$ be an embedded smooth submanifold, and let
 $E:N^\perp S\to\mathbb R^m$ be its normal addition map. For every $p\in S$ the
 differential
-$$
-dE_{(p,0)}:T_{(p,0)}(N^\perp S)\to T_p\mathbb R^m\cong\mathbb R^m
-$$
+$$ dE_{(p,0)}:T_{(p,0)}(N^\perp S)\to T_p\mathbb R^m\cong\mathbb R^m $$
 is an isomorphism. Consequently, $E$ is a local diffeomorphism at every point
 of the zero section.
 

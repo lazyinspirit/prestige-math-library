@@ -33,9 +33,7 @@ sources:
 If $H$ is upper Hessenberg and a shifted QR step factors
 $H-\mu I=QR$ using the standard adjacent-row Givens eliminations, then
 
-$$
-H_+:=RQ+\mu I
-$$
+$$ H_+:=RQ+\mu I $$
 
 is again upper Hessenberg.
 

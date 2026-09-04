@@ -1,0 +1,210 @@
+[
+  {
+    "order": 288.14002,
+    "id": "dirichlet-kernel-localisation-and-pointwise-fourier-convergence",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "Dirichlet Kernel Localisation and Pointwise Fourier Convergence",
+    "companion": "dirichlet-kernel-localisation-and-pointwise-fourier-convergence-examples",
+    "requires": [
+      "itos-formula-and-brownian-martingales-examples",
+      "density-separability-and-convolution-in-lp"
+    ],
+    "items": [
+      {
+        "id": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+        "kind": "definition",
+        "title": "Period-one Fourier coefficients, partial sums, and convolution on the torus",
+        "deps": []
+      },
+      {
+        "id": "def-dirichlet-and-fejer-kernels",
+        "kind": "definition",
+        "title": "Dirichlet and Fejer kernels",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution"
+        ]
+      },
+      {
+        "id": "lem-fourier-partial-sums-are-dirichlet-convolutions",
+        "kind": "lemma",
+        "title": "Fourier partial sums are Dirichlet convolutions",
+        "strategy": "Expand the partial sum from the period-one Fourier definition, interchange the finite sum with the one-period integral, and collect the resulting character sum into the Dirichlet kernel.",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "def-dirichlet-and-fejer-kernels"
+        ]
+      },
+      {
+        "id": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+        "kind": "lemma",
+        "title": "Closed form and size bounds for the Dirichlet kernel",
+        "strategy": "Sum the finite geometric progression for D_N away from integer points, remove the singularity at zero by continuity, and record the standard pointwise comparison with 1/|sin(pi t)|.",
+        "deps": [
+          "def-dirichlet-and-fejer-kernels"
+        ]
+      },
+      {
+        "id": "lem-step-functions-have-vanishing-torus-fourier-coefficients",
+        "kind": "lemma",
+        "title": "Step functions on one period have vanishing Fourier coefficients",
+        "strategy": "Write a step function as a finite linear combination of half-open interval indicators and compute each coefficient from the exponential antiderivative, giving an O(1/|k|) bound.",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution"
+        ]
+      },
+      {
+        "id": "lem-step-functions-on-one-period-are-dense-in-l-one-on-the-torus",
+        "kind": "lemma",
+        "title": "Step functions on one period are dense in L^1 on the torus",
+        "strategy": "Represent a torus L^1 class by its one-period restriction to [0,1), extend by zero to the line, apply the published one-dimensional box-step density theorem, and read the approximant back on one period.",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "thm-box-step-functions-are-dense-in-l-p-of-rn"
+        ]
+      },
+      {
+        "id": "thm-riemann-lebesgue-lemma-for-fourier-coefficients",
+        "kind": "theorem",
+        "title": "Riemann-Lebesgue lemma for Fourier coefficients",
+        "strategy": "Approximate an L^1 function in one period by step functions, use the explicit coefficient decay from the previous lemma on the approximant, and bound the error by the L^1 norm of the difference.",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "lem-step-functions-have-vanishing-torus-fourier-coefficients",
+          "lem-step-functions-on-one-period-are-dense-in-l-one-on-the-torus"
+        ]
+      },
+      {
+        "id": "lem-symmetric-difference-formula-for-fourier-partial-sums",
+        "kind": "lemma",
+        "title": "Symmetric difference formula for Fourier partial sums",
+        "strategy": "Translate the Dirichlet-convolution formula to the evaluation point x, average the t and -t contributions, subtract the candidate value s using the kernel integral 1, and rewrite with the sine-kernel closed form.",
+        "deps": [
+          "lem-fourier-partial-sums-are-dirichlet-convolutions",
+          "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel"
+        ]
+      },
+      {
+        "id": "thm-riemann-localisation-principle-for-fourier-series",
+        "kind": "theorem",
+        "title": "Riemann localisation principle for Fourier series",
+        "strategy": "Apply the symmetric kernel representation to f-g at the point x, use equality near x to remove a neighborhood of the singularity, divide by sin(pi t) only on the remaining support, and conclude by Riemann-Lebesgue.",
+        "deps": [
+          "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "thm-riemann-lebesgue-lemma-for-fourier-coefficients",
+          "lem-symmetric-difference-formula-for-fourier-partial-sums"
+        ]
+      },
+      {
+        "id": "thm-dini-pointwise-convergence-criterion-for-fourier-series",
+        "kind": "theorem",
+        "title": "Dini pointwise convergence criterion for Fourier series",
+        "strategy": "Split the symmetric-difference formula at a small delta. The away-from-zero part is a localisation-style Riemann-Lebesgue term, while the near-zero part is controlled by the Dini quotient against a uniformly bounded sine-kernel primitive.",
+        "deps": [
+          "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "thm-riemann-lebesgue-lemma-for-fourier-coefficients",
+          "lem-symmetric-difference-formula-for-fourier-partial-sums"
+        ]
+      },
+      {
+        "id": "cor-local-holder-regularity-implies-fourier-convergence-at-a-point",
+        "kind": "corollary",
+        "title": "Local Holder regularity implies Fourier convergence at a point",
+        "strategy": "Bound the Dini integrand by C|t|^(alpha-1) on both sides of the point and apply the Dini criterion.",
+        "deps": [
+          "thm-dini-pointwise-convergence-criterion-for-fourier-series"
+        ]
+      },
+      {
+        "id": "lem-bounded-variation-gives-one-sided-dirichlet-integrability",
+        "kind": "lemma",
+        "title": "Bounded variation gives one-sided Dirichlet integrability",
+        "strategy": "Use Jordan decomposition on a one-sided interval to write the local increment as a difference of increasing functions and integrate by parts against the bounded primitive of the sine kernel.",
+        "deps": [
+          "thm-jordan-decomposition-for-bv-functions"
+        ]
+      },
+      {
+        "id": "thm-dirichlet-jordan-pointwise-convergence",
+        "kind": "theorem",
+        "title": "Dirichlet-Jordan pointwise convergence",
+        "strategy": "For a BV representative, the one-sided limits exist and the one-sided increment quotients satisfy the previous lemma, so the Dini criterion applies with the midpoint candidate value.",
+        "deps": [
+          "thm-dini-pointwise-convergence-criterion-for-fourier-series",
+          "lem-bounded-variation-gives-one-sided-dirichlet-integrability",
+          "cor-bv-discontinuities-are-countable-and-of-first-kind"
+        ]
+      },
+      {
+        "id": "cor-piecewise-c-one-fourier-series-converges-to-midpoint-values",
+        "kind": "corollary",
+        "title": "Piecewise C^1 Fourier series converges to midpoint values",
+        "strategy": "A periodic piecewise C^1 function has bounded variation on one period, including at the periodic seam, so the Dirichlet-Jordan theorem gives the midpoint-value limit at every point.",
+        "deps": [
+          "thm-dirichlet-jordan-pointwise-convergence",
+          "thm-c1-lipschitz-ac-bv-hierarchy"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.14004,
+    "id": "dirichlet-kernel-localisation-and-pointwise-fourier-convergence-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "Dirichlet Kernel Localisation and Pointwise Fourier Convergence — Examples",
+    "companion": "dirichlet-kernel-localisation-and-pointwise-fourier-convergence",
+    "requires": [
+      "dirichlet-kernel-localisation-and-pointwise-fourier-convergence"
+    ],
+    "items": [
+      {
+        "id": "ex-dirichlet-kernel-at-zero-and-away-from-zero",
+        "kind": "example",
+        "title": "The Dirichlet kernel at zero and away from zero",
+        "strategy": "Evaluate the removable value at zero from the finite character sum, then use the closed form to exhibit sign oscillation away from zero.",
+        "deps": [
+          "def-dirichlet-and-fejer-kernels",
+          "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-constants-grow-logarithmically",
+        "kind": "theorem",
+        "title": "Lebesgue constants grow logarithmically",
+        "strategy": "Use the Dirichlet-kernel closed form for the upper bound, splitting one period into intervals on which the denominator has comparable size, and obtain the lower bound from intervals where the numerator stays uniformly away from zero.",
+        "deps": [
+          "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel"
+        ]
+      },
+      {
+        "id": "ex-fourier-partial-sums-of-the-sawtooth",
+        "kind": "example",
+        "title": "Fourier partial sums of the sawtooth",
+        "strategy": "Compute the coefficients of the period-one odd sawtooth, identify the symmetric partial sums explicitly, and invoke Dirichlet-Jordan at the jump and at continuity points.",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "thm-dirichlet-jordan-pointwise-convergence"
+        ]
+      },
+      {
+        "id": "ex-localisation-for-functions-equal-on-an-arc",
+        "kind": "example",
+        "title": "Localisation for functions equal on an arc",
+        "strategy": "Choose explicit L^1 functions whose difference vanishes on a neighborhood of the target point and apply Riemann localisation to conclude that their partial sums there are asymptotically equal.",
+        "deps": [
+          "thm-riemann-localisation-principle-for-fourier-series"
+        ]
+      },
+      {
+        "id": "cex-continuity-alone-does-not-satisfy-a-dini-modulus",
+        "kind": "counterexample",
+        "title": "Continuity alone does not satisfy a Dini modulus",
+        "strategy": "Use a continuous period-one function with local modulus comparable to 1/log(e/|t|) near one point, for which the Dini integral diverges even though the function is continuous.",
+        "deps": [
+          "thm-dini-pointwise-convergence-criterion-for-fourier-series"
+        ]
+      }
+    ]
+  }
+]

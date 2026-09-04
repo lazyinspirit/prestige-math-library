@@ -31,9 +31,7 @@ pipeline_run: null
 
 Let $G$ be a finite group and let $k$ be a field. Then
 
-$$
-\dim_k Z(k[G])
-$$
+$$ \dim_k Z(k[G]) $$
 
 is exactly the number of conjugacy classes of $G$.
 

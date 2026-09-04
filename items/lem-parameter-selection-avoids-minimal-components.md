@@ -31,9 +31,7 @@ pipeline_run: null
 ## Statement
 
 Let $(R,\mathfrak m)$ be a Noetherian local ring of positive dimension $d$. Then there exists $x\in\mathfrak m$ outside every minimal prime of $R$. For every such $x$ one has
-$$
-\dim(R/(x))\le d-1.
-$$
+$$ \dim(R/(x))\le d-1. $$
 In particular $x$ misses the top-dimensional minimal components.
 
 ## Facts & Assumptions

@@ -33,9 +33,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a nonzero commutative ring and let $S\subseteq R$ be a multiplicative subset with $0\notin S$. Then
-$$
-\dim(S^{-1}R)\le \dim R.
-$$
+$$ \dim(S^{-1}R)\le \dim R. $$
 
 ## Facts & Assumptions
 

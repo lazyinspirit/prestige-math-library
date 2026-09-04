@@ -29,9 +29,7 @@ pipeline_run: null
 
 Let $V$ be a discrete valuation ring with maximal ideal $\mathfrak m$. Then the
 only prime ideals of $V$ are $(0)$ and $\mathfrak m$. In particular,
-$$
-\dim V=1.
-$$
+$$ \dim V=1. $$
 
 ## Facts & Assumptions
 

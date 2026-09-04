@@ -28,15 +28,11 @@ sources:
 Let $A:V^k\to W$ be an alternating $k$-linear map into a real vector space $W$.
 Then there is a unique linear map
 
-$$
-\widetilde A:\bigwedge^kV\to W
-$$
+$$ \widetilde A:\bigwedge^kV\to W $$
 
 such that
 
-$$
-\widetilde A(v_1\wedge\cdots\wedge v_k)=A(v_1,\ldots,v_k)
-$$
+$$ \widetilde A(v_1\wedge\cdots\wedge v_k)=A(v_1,\ldots,v_k) $$
 
 for all $v_1,\ldots,v_k\in V$.
 

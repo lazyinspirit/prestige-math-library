@@ -28,23 +28,17 @@ sources:
 ## Definition
 
 A **nonnegatively graded ring** is a commutative ring
-$$
-S=\bigoplus_{n\ge 0} S_n
-$$
+$$ S=\bigoplus_{n\ge 0} S_n $$
 such that $S_nS_m\subseteq S_{n+m}$ for all $m,n\ge 0$. An element of $S_n$ is
 called **homogeneous of degree $n$**.
 
 If $S$ is graded, a **graded $S$-module** is an $S$-module
-$$
-M=\bigoplus_{n\in\mathbb Z} M_n
-$$
+$$ M=\bigoplus_{n\in\mathbb Z} M_n $$
 with $S_iM_j\subseteq M_{i+j}$ for all $i\ge 0$ and $j\in\mathbb Z$. An element
 of $M_j$ is homogeneous of degree $j$.
 
 For an integer $a$, the **twist** $M(a)$ is the graded module with
-$$
-M(a)_n=M_{n+a}.
-$$
+$$ M(a)_n=M_{n+a}. $$
 Thus a homogeneous element of degree $n+a$ in $M$ is viewed as degree $n$ in
 $M(a)$.
 

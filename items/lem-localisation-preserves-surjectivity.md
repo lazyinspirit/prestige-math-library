@@ -28,9 +28,7 @@ pipeline_run: null
 ## Statement
 
 Let $f:M \to M''$ be a surjective $R$-module homomorphism. Then the induced map
-$$
-S^{-1}f:S^{-1}M \longrightarrow S^{-1}M'', \qquad (m/s) \longmapsto f(m)/s,
-$$
+$$ S^{-1}f:S^{-1}M \longrightarrow S^{-1}M'', \qquad (m/s) \longmapsto f(m)/s, $$
 is surjective.
 
 ## Facts & Assumptions

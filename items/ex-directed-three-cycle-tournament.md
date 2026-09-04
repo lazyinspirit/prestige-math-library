@@ -30,9 +30,7 @@ pipeline_run: null
 
 Let $T$ have vertices $1,2,3$ and arcs
 
-$$
-1\to2,\qquad 2\to3,\qquad 3\to1.
-$$
+$$ 1\to2,\qquad 2\to3,\qquad 3\to1. $$
 
 Then $T$ is a strongly connected tournament, and $1,2,3,1$ is a directed
 Hamilton cycle.

@@ -30,9 +30,7 @@ pipeline_run: null
 
 For every real number $x\ge1$, **Chebyshev's theta function** is
 
-$$
-\theta(x):=\sum_{p\le x}\log p,
-$$
+$$ \theta(x):=\sum_{p\le x}\log p, $$
 
 the sum being taken over the primes $p$.
 

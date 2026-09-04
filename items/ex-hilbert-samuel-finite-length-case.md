@@ -29,13 +29,9 @@ sources:
 Let $(R,\mathfrak m)$ be a zero-dimensional Noetherian local ring and let $M$ be
 a finite $R$-module. Then some power of $\mathfrak m$ annihilates $M$, so for
 all sufficiently large $n$,
-$$
-M/\mathfrak m^{n+1}M\cong M.
-$$
+$$ M/\mathfrak m^{n+1}M\cong M. $$
 Hence the Hilbert-Samuel polynomial is the constant polynomial
-$$
-P_{\mathfrak m,M}(n)=\ell_R(M).
-$$
+$$ P_{\mathfrak m,M}(n)=\ell_R(M). $$
 
 ## Facts & Assumptions
 

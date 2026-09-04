@@ -28,9 +28,7 @@ sources:
 
 Let $R=A\times B$ and let $I=A\times0=R(1,0)$. Then $(1,0)$ is idempotent, so
 the quotient
-$$
-R/I\cong 0\times B\cong B
-$$
+$$ R/I\cong 0\times B\cong B $$
 is a flat $R$-module.
 
 ## Facts & Assumptions

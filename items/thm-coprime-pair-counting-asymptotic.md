@@ -27,9 +27,7 @@ pipeline_run: null
 Let $C(x)$ be the number of ordered pairs $(a,b)$ of positive integers with
 $a,b\le x$ and $\gcd(a,b)=1$ ([[def-coprime]]). Then
 
-$$
-C(x)=\frac{6}{\pi^2}x^2+O(x\log x)
-$$
+$$ C(x)=\frac{6}{\pi^2}x^2+O(x\log x) $$
 
 for real $x\ge1$.
 

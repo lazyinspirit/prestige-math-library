@@ -31,16 +31,12 @@ Assume the Axiom of Choice.
 
 Let $R$ be a Noetherian commutative ring, let $M$ be a finitely generated left
 $R$-module, and let
-$$
-N=Q_1\cap\cdots\cap Q_r
-$$
+$$ N=Q_1\cap\cdots\cap Q_r $$
 be a minimal primary decomposition with each $Q_i$ $\mathfrak p_i$-primary for
 a prime ideal $\mathfrak p_i$.
 Let $\Sigma \subseteq \operatorname{Ass}_R(M/N)$ be downward-closed under
 inclusion. Then
-$$
-\bigcap_{\mathfrak p_i \in \Sigma}Q_i
-$$
+$$ \bigcap_{\mathfrak p_i \in \Sigma}Q_i $$
 depends only on $N \subseteq M$ and on $\Sigma$, not on the chosen minimal
 decomposition. When $\Sigma=\varnothing$, the empty intersection is interpreted
 as $M$.

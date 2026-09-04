@@ -32,9 +32,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, let $I\trianglelefteq R$ be an ideal, and let $x\in R$. Then
-$$
-x\in\sqrt{I}\quad\Longleftrightarrow\quad x^n\in I\text{ for some integer }n\ge 1.
-$$
+$$ x\in\sqrt{I}\quad\Longleftrightarrow\quad x^n\in I\text{ for some integer }n\ge 1. $$
 In particular, $\sqrt{R}=R$, and if $R$ is the zero ring then $\sqrt{(0)}=R$.
 
 ## Facts & Assumptions

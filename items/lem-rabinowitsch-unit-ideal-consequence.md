@@ -33,9 +33,7 @@ Assume the Axiom of Choice.
 
 Let $k$ be an algebraically closed field, let $I\subseteq k[x_1,\ldots,x_n]$
 be an ideal, and let $f$ vanish on $V(I)$. Then the auxiliary ideal
-$$
-J:=I+(1-yf)\subseteq k[x_1,\ldots,x_n,y]
-$$
+$$ J:=I+(1-yf)\subseteq k[x_1,\ldots,x_n,y] $$
 is the unit ideal.
 
 ## Facts & Assumptions

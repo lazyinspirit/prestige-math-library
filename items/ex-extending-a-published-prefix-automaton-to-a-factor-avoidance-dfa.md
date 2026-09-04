@@ -32,12 +32,8 @@ set is
 $$ S_B=\{\varepsilon,1\}. $$
 Adjoin a sink state $\bot$, keep $\varepsilon$ and $1$ accepting, and define
 the transitions by
-$$
-\delta(\varepsilon,0)=\varepsilon,\qquad \delta(\varepsilon,1)=1,
-$$
-$$
-\delta(1,0)=\varepsilon,\qquad \delta(1,1)=\bot,\qquad \delta(\bot,0)=\bot,\qquad \delta(\bot,1)=\bot.
-$$
+$$ \delta(\varepsilon,0)=\varepsilon,\qquad \delta(\varepsilon,1)=1, $$
+$$ \delta(1,0)=\varepsilon,\qquad \delta(1,1)=\bot,\qquad \delta(\bot,0)=\bot,\qquad \delta(\bot,1)=\bot. $$
 
 This DFA accepts exactly the binary words with no factor `11`.
 

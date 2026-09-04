@@ -26,12 +26,8 @@ pipeline_run: frontier-11
 ## Example
 
 The five conjugacy classes of $A_5$ have representatives and sizes
-$$
-1:1,\qquad (123):20,\qquad (12)(34):15,
-$$
-$$
-(12345):12,\qquad (13524):12.
-$$
+$$ 1:1,\qquad (123):20,\qquad (12)(34):15, $$
+$$ (12345):12,\qquad (13524):12. $$
 The last two classes are the two halves of the $S_5$ class of $5$-cycles.
 
 ## Facts & Assumptions

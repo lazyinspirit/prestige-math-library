@@ -30,9 +30,7 @@ Let $j:N\hookrightarrow\mathbb R^m$ be a closed embedded smooth submanifold with
 tubular neighbourhood $U$, and let $F:M\to N$ be continuous. Then there exists
 a positive continuous error function $\varepsilon$ on $M$ such that every smooth
 map $\widetilde H:M\to\mathbb R^m$ satisfying
-$$
-\|\widetilde H(p)-j(F(p))\|<\varepsilon(p)
-$$
+$$ \|\widetilde H(p)-j(F(p))\|<\varepsilon(p) $$
 for all $p$ has image contained in $U$.
 
 ## Facts & Assumptions

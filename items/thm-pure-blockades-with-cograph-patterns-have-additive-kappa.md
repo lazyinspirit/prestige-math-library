@@ -36,9 +36,7 @@ pipeline_run: null
 Let $\mathcal B=(B_1,\dots,B_t)$ be a pure blockade in a graph $G$ whose
 pattern graph is a cograph. Then
 
-$$
-\kappa(G[V(\mathcal B)])\geq \sum_{i=1}^{t}\kappa(G[B_i]).
-$$
+$$ \kappa(G[V(\mathcal B)])\geq \sum_{i=1}^{t}\kappa(G[B_i]). $$
 
 ## Facts & Assumptions
 

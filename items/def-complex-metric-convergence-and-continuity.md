@@ -25,9 +25,7 @@ pipeline_run: null
 ## Definition
 
 For $z=x+iy$ and $w=u+iv$, put
-$$
-d_{\mathbb C}(z,w):=|z-w|=\sqrt{(x-u)^2+(y-v)^2}=\lVert(x-u,y-v)\rVert_2.
-$$
+$$ d_{\mathbb C}(z,w):=|z-w|=\sqrt{(x-u)^2+(y-v)^2}=\lVert(x-u,y-v)\rVert_2. $$
 Under the identification $\mathbb C=\mathbb R^2$, this is exactly the metric
 $d_2$ induced by the Euclidean norm of [[def-p-norms-on-rn]]. It is a metric by
 [[lem-p-norms-are-norms-and-induce-the-published-metrics]], so the metric axioms

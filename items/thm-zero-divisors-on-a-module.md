@@ -29,9 +29,7 @@ sources:
 
 Let $R$ be a Noetherian commutative ring and let $M$ be a left $R$-module. Then
 the set of zero divisors on $M$ is
-$$
-\bigcup_{\mathfrak p \in \operatorname{Ass}_R(M)}\mathfrak p.
-$$
+$$ \bigcup_{\mathfrak p \in \operatorname{Ass}_R(M)}\mathfrak p. $$
 If $M$ is finitely generated, this is a finite union.
 
 ## Facts & Assumptions

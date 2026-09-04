@@ -31,9 +31,7 @@ pipeline_run: null
 
 The six-vertex graph
 
-$$
-H:\ E(H)=\{v_1v_2,v_1v_3,v_1v_5,v_1v_6,v_2v_3,v_2v_4,v_2v_5,v_3v_5,v_4v_5,v_4v_6\}
-$$
+$$ H:\ E(H)=\{v_1v_2,v_1v_3,v_1v_5,v_1v_6,v_2v_3,v_2v_4,v_2v_5,v_3v_5,v_4v_5,v_4v_6\} $$
 
 has a homogeneous clique $\{v_2,v_5\}$, so $H$ has the Erdős-Hajnal property;
 moreover $H^+-v_3$ and $H^--v_6$ are both co-Bird.

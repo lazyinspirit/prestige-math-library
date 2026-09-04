@@ -28,9 +28,7 @@ pipeline_run: null
 ## Statement
 
 For $m \in M$ and $s \in S$,
-$$
-\frac{m}{s}=0 \text{ in } S^{-1}M \quad \Longleftrightarrow \quad um=0 \text{ for some } u \in S.
-$$
+$$ \frac{m}{s}=0 \text{ in } S^{-1}M \quad \Longleftrightarrow \quad um=0 \text{ for some } u \in S. $$
 
 ## Facts & Assumptions
 

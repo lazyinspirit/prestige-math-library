@@ -33,9 +33,7 @@ pipeline_run: null
 Let $V$ be a discrete valuation ring with discrete valuation $v$ and maximal
 ideal $\mathfrak m$. A **uniformising parameter** or **uniformiser** is an
 element $\pi\in V$ with
-$$
-v(\pi)=1.
-$$
+$$ v(\pi)=1. $$
 
 This is equivalent to requiring that $\pi$ generate the maximal ideal
 $\mathfrak m$. Indeed, if $v(\pi)=1$ and $x\in\mathfrak m$ is nonzero, then

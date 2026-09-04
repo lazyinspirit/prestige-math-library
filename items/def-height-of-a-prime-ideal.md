@@ -31,6 +31,4 @@ pipeline_run: null
 ## Definition
 
 Let $R$ be a commutative ring and let $\mathfrak p\in\operatorname{Spec}(R)$. The **height** of $\mathfrak p$ is the Krull dimension of the local ring $R_{\mathfrak p}$:
-$$
-\operatorname{ht}(\mathfrak p)=\dim(R_{\mathfrak p}).
-$$
+$$ \operatorname{ht}(\mathfrak p)=\dim(R_{\mathfrak p}). $$

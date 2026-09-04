@@ -28,9 +28,7 @@ pipeline_run: null
 
 Given a decreasing symmetric sequence $(E_n)$ with $E_0=X\times X$ and
 $E_{n+1}^{\circ3}\subseteq E_n$, there is a pseudometric $p$ on $X$ such that
-$$
-E_n\subseteq\{p\le2^{-n}\}\subseteq E_{n-1}
-$$
+$$ E_n\subseteq\{p\le2^{-n}\}\subseteq E_{n-1} $$
 for every $n\ge1$. In particular, each set $\{p<\varepsilon\}$ is an
 entourage, so $p$ is uniformly continuous for the original uniformity in the
 sense of [[def-gauge-of-pseudometrics]].

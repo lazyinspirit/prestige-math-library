@@ -29,9 +29,7 @@ sources:
 
 On $\mathbb R^n$, the Euclidean metric
 
-$$
-g=\sum_{i=1}^n dx^i\otimes dx^i
-$$
+$$ g=\sum_{i=1}^n dx^i\otimes dx^i $$
 
 is a smooth section of the symmetric subbundle of $T^0_2\mathbb R^n$.
 

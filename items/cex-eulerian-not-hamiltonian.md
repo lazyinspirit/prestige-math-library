@@ -50,9 +50,7 @@ Every finite simple graph with an Euler circuit has a Hamilton cycle.
 
 Let $G$ have vertices $x,a,b,c,d$ and edges
 
-$$
-xa,ab,bx,xc,cd,dx.
-$$
+$$ xa,ab,bx,xc,cd,dx. $$
 
 Thus $G$ consists of two triangles sharing only $x$. It is Eulerian but not
 Hamiltonian.

@@ -34,9 +34,7 @@ boundary.
 
 Let $R$ be a Noetherian commutative ring, let $I\subset R$ be an ideal, and let
 $M$ be a finite $R$-module. Put
-$$
-K:=\bigcap_{n\ge0} I^nM.
-$$
+$$ K:=\bigcap_{n\ge0} I^nM. $$
 Then:
 
 1. $K$ is exactly the set of elements $m\in M$ for which $(1-a)m=0$ for some

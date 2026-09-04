@@ -30,17 +30,13 @@ pipeline_run: null
 Let $\epsilon\in(0,1]$, let $0\le\ell\le k$ be integers, and let $u,n$ be
 positive integers with
 
-$$
-(1-\epsilon)^\ell n\le u.
-$$
+$$ (1-\epsilon)^\ell n\le u. $$
 
 Let $G$ be a finite graph on $n$ vertices such that every subset
 $S\subseteq V(G)$ with $|S|\ge u$ induces a graph $G[S]$ of maximum degree at
 least $\epsilon|S|-1$. Then $G$ has at most
 
-$$
-\binom{n}{\ell}\binom{u}{k-\ell}
-$$
+$$ \binom{n}{\ell}\binom{u}{k-\ell} $$
 
 stable sets of size $k$.
 

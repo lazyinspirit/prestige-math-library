@@ -33,9 +33,7 @@ sources:
 
 The presentation
 
-$$
-G=\langle x_1,\dots,x_7 \mid x_1x_2x_3x_4x_5x_6x_7\rangle
-$$
+$$ G=\langle x_1,\dots,x_7 \mid x_1x_2x_3x_4x_5x_6x_7\rangle $$
 
 is a strict $C'(1/6)$ presentation with no proper-power relator, so $G$ is
 torsion-free.

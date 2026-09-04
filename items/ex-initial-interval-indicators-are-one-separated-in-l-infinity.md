@@ -22,9 +22,7 @@ sources:
 ## Example
 
 The family
-$$
-\left\{\mathbf{1}_{[0,t]} : t \in [0,1]\right\}
-$$
+$$ \left\{\mathbf{1}_{[0,t]} : t \in [0,1]\right\} $$
 is $1$-separated in $L^\infty([0,1])$.
 
 ## Facts & Assumptions
@@ -43,9 +41,7 @@ $\mathbf{1}_{[0,t]}-\mathbf{1}_{[0,s]}$ equals $1$ on $(s,t]$, a set of positive
 measure. [L1, given, algebra]
 
 2.1 Hence [step 1.1, algebra]
-$$
-\|\mathbf{1}_{[0,t]}-\mathbf{1}_{[0,s]}\|_\infty = 1.
-$$
+$$ \|\mathbf{1}_{[0,t]}-\mathbf{1}_{[0,s]}\|_\infty = 1. $$
 The same conclusion holds when $t < s$ by symmetry. [step 1.1, algebra]
 
 3.1 So any two distinct members of the family are distance $1$ apart, which is [L1, step 2.1]

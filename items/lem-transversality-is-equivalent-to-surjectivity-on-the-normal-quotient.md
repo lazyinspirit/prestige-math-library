@@ -29,9 +29,7 @@ Let $F:M\to N$ be smooth, let $Z\subseteq N$ be an embedded submanifold, and let
 $p\in F^{-1}(Z)$ with $y=F(p)$. Then $F$ is transverse to $Z$ at $p$ if and
 only if the composite
 
-$$
-T_pM\xrightarrow{dF_p}T_yN\twoheadrightarrow T_yN/T_yZ
-$$
+$$ T_pM\xrightarrow{dF_p}T_yN\twoheadrightarrow T_yN/T_yZ $$
 
 is surjective.
 

@@ -28,9 +28,7 @@ $\theta$ be the nontrivial linear character of $H$ with
 $\theta((123))=\omega$ and $\theta((132))=\omega^2$. Then
 $\operatorname{Ind}_{A_3}^{S_3}\theta$ has values
 
-$$
-\bigl(2,0,-1\bigr)
-$$
+$$ \bigl(2,0,-1\bigr) $$
 
 on the conjugacy classes $\{e\}$, the transpositions, and the $3$-cycles
 respectively. Its self-inner-product is $1$, so it is irreducible of degree $2$.

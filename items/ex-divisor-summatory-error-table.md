@@ -31,9 +31,7 @@ pipeline_run: null
 
 Let
 
-$$
-E(x):=\sum_{n\le x}\tau(n)-x\log x-(2\gamma-1)x.
-$$
+$$ E(x):=\sum_{n\le x}\tau(n)-x\log x-(2\gamma-1)x. $$
 
 Using $\gamma\approx0.5772156649$, the theorem predicts $E(x)=O(\sqrt x)$. For
 four small values one gets:

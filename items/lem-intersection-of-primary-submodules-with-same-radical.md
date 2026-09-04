@@ -30,9 +30,7 @@ sources:
 Let $R$ be a Noetherian commutative ring, let $M$ be a finitely generated left
 $R$-module, and let $r\ge1$. Let $Q_1,\dots,Q_r \subsetneq M$ be $\mathfrak p$-primary
 submodules. Then
-$$
-Q=Q_1\cap\cdots\cap Q_r
-$$
+$$ Q=Q_1\cap\cdots\cap Q_r $$
 is also $\mathfrak p$-primary.
 
 ## Facts & Assumptions

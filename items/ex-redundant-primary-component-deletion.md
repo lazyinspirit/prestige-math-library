@@ -26,13 +26,9 @@ sources:
 ## Example
 
 In $R=k[x,y]$, the ideal
-$$
-I=(x)\cap(x^2,y)\cap(x,y)^2\cap(x,y)^2
-$$
+$$ I=(x)\cap(x^2,y)\cap(x,y)^2\cap(x,y)^2 $$
 cleans up to the minimal decomposition
-$$
-I=(x)\cap(x,y)^2=(x^2,xy).
-$$
+$$ I=(x)\cap(x,y)^2=(x^2,xy). $$
 
 ## Facts & Assumptions
 

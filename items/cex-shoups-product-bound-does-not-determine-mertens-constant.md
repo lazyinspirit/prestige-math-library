@@ -30,9 +30,7 @@ pipeline_run: null
 
 Knowing only that a positive function $F(x)$ satisfies
 
-$$
-F(x)=\Theta(1/\log x)
-$$
+$$ F(x)=\Theta(1/\log x) $$
 
 determines the exact leading constant in front of $1/\log x$.
 

@@ -30,13 +30,9 @@ pipeline_run: null
 Assume the Axiom of Choice.
 
 Let $R$ be a commutative Artinian ring. If $R=0$, then it has no maximal ideals. Otherwise let $\mathfrak m_1,\ldots,\mathfrak m_r$ be its maximal ideals. Then the canonical localization map
-$$
-R\longrightarrow \prod_{i=1}^r R_{\mathfrak m_i}
-$$
+$$ R\longrightarrow \prod_{i=1}^r R_{\mathfrak m_i} $$
 is an isomorphism. If $N=\operatorname{Nil}(R)$ and $N^n=0$, then also
-$$
-R\cong\prod_{i=1}^r R/\mathfrak m_i^n.
-$$
+$$ R\cong\prod_{i=1}^r R/\mathfrak m_i^n. $$
 The quotient-by-powers description depends on the chosen exponent $n$, but the product of localizations is canonical.
 
 ## Facts & Assumptions

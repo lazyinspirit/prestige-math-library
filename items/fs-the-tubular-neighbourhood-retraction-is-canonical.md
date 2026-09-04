@@ -34,9 +34,7 @@ submanifold is canonical.
 ## Facts & Assumptions
 
 **Given:** The annulus
-$$
-A:=\{(r\cos\theta,r\sin\theta):1/2<r<3/2\}
-$$
+$$ A:=\{(r\cos\theta,r\sin\theta):1/2<r<3/2\} $$
 around the unit circle $S^1\subseteq\mathbb R^2$.
 
 [L1] Two tubular neighbourhoods are unique only up to shrinking and germ

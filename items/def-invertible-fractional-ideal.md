@@ -27,8 +27,6 @@ pipeline_run: null
 ## Definition
 
 A fractional ideal $I$ of a domain $R$ is **invertible** if
-$$
-I(R:I)=R.
-$$
+$$ I(R:I)=R. $$
 Equivalently, $I$ is invertible when there exists a fractional ideal $J$ with
 $IJ=R$, in which case necessarily $J=(R:I)$.

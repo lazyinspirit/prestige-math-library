@@ -30,9 +30,7 @@ pipeline_run: null
 
 For every real number $x\ge0$, the **prime-counting function** is
 
-$$
-\pi(x):=\#\{\,p\text{ prime}:p\le x\,\}.
-$$
+$$ \pi(x):=\#\{\,p\text{ prime}:p\le x\,\}. $$
 
 ## Remarks
 

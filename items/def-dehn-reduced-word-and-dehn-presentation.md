@@ -33,9 +33,7 @@ Let $R^{\operatorname{sym}}$ be a symmetrised relator set
 ([[def-symmetrisation-of-a-relator-set]], [[def-cyclically-reduced-word]]).
 A freely reduced word $w$ is **Dehn-reduced** when no factorisation
 
-$$
-r=uv
-$$
+$$ r=uv $$
 
 with $r\in R^{\operatorname{sym}}$ has $u$ appearing as a subword of $w$ and
 $|u|>|v|$.

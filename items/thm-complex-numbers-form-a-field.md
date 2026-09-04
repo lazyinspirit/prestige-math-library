@@ -28,16 +28,10 @@ pipeline_run: frontier-11
 $\mathbb C=\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of
 $\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\in\mathbb R$,
 and
-$$
-(a+bi)+(u+vi)=(a+u)+(b+v)i,
-$$
-$$
-(a+bi)(u+vi)=(au-bv)+(av+bu)i.
-$$
+$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$
+$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$
 If $a+bi\ne0$, then
-$$
-(a+bi)^{-1}=\frac{a-bi}{a^2+b^2}.
-$$
+$$ (a+bi)^{-1}=\frac{a-bi}{a^2+b^2}. $$
 
 ## Facts & Assumptions
 

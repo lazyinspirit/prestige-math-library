@@ -31,9 +31,7 @@ Let $G$ be a finite group and let $k$ be an algebraically closed field with
 $\operatorname{char} k \nmid |G|$. Then there are positive integers
 $n_1,\ldots,n_r$ such that
 
-$$
-k[G]\cong\prod_{i=1}^r M_{n_i}(k)
-$$
+$$ k[G]\cong\prod_{i=1}^r M_{n_i}(k) $$
 
 as $k$-algebras.
 

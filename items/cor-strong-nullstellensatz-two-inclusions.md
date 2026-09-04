@@ -31,9 +31,7 @@ Assume the Axiom of Choice.
 
 Let $k$ be an algebraically closed field and let
 $I\subseteq k[x_1,\ldots,x_n]$ be an ideal. Then
-$$
-I(V(I))=\sqrt I.
-$$
+$$ I(V(I))=\sqrt I. $$
 
 ## Facts & Assumptions
 

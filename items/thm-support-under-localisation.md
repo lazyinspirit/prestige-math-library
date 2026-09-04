@@ -27,13 +27,9 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, let $S \subseteq R$ be multiplicative, and let $M$ be a left $R$-module. Under the prime-ideal correspondence
-$$
-\{\mathfrak p \subseteq R : \mathfrak p \cap S=\varnothing\}\longleftrightarrow \operatorname{Spec}(S^{-1}R), \qquad \mathfrak p \longmapsto S^{-1}\mathfrak p,
-$$
+$$ \{\mathfrak p \subseteq R : \mathfrak p \cap S=\varnothing\}\longleftrightarrow \operatorname{Spec}(S^{-1}R), \qquad \mathfrak p \longmapsto S^{-1}\mathfrak p, $$
 the support of $S^{-1}M$ corresponds exactly to
-$$
-\{\mathfrak p \in \operatorname{Supp}_R(M) : \mathfrak p \cap S=\varnothing\}.
-$$
+$$ \{\mathfrak p \in \operatorname{Supp}_R(M) : \mathfrak p \cap S=\varnothing\}. $$
 
 ## Facts & Assumptions
 

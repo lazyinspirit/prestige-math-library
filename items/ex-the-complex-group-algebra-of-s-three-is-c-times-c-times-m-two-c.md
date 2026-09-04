@@ -27,9 +27,7 @@ pipeline_run: null
 
 For the symmetric group $S_3$,
 
-$$
-\mathbb C[S_3]\cong \mathbb C\times\mathbb C\times M_2(\mathbb C).
-$$
+$$ \mathbb C[S_3]\cong \mathbb C\times\mathbb C\times M_2(\mathbb C). $$
 
 ## Facts & Assumptions
 

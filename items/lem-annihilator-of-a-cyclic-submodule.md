@@ -25,9 +25,7 @@ sources:
 
 Let $R$ be a commutative ring, let $M$ be a left $R$-module, and let $m \in M$.
 Then the cyclic submodule $Rm$ is naturally isomorphic to
-$$
-R/\operatorname{Ann}_R(m).
-$$
+$$ R/\operatorname{Ann}_R(m). $$
 
 ## Facts & Assumptions
 

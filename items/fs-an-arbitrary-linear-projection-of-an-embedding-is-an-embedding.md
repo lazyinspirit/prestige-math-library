@@ -30,9 +30,7 @@ embedding.
 ## Facts & Assumptions
 
 **Given:** The standard unit circle
-$$
-S^1=\{(x,y)\in\mathbb R^2:x^2+y^2=1\}
-$$
+$$ S^1=\{(x,y)\in\mathbb R^2:x^2+y^2=1\} $$
 and the projection $\pi(x,y)=x$ onto the first coordinate.
 
 [L1] Only generic projection directions preserve injectivity and immersion

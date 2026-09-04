@@ -31,9 +31,7 @@ and let $x_0\in\mathbb F^n$ be nonzero. The **shifted inverse iteration** with
 shift $\mu$ and starting vector $x_0$ is the power iteration applied to
 $(A-\mu I)^{-1}$:
 
-$$
-x_{k+1}:=\frac{(A-\mu I)^{-1}x_k}{\|(A-\mu I)^{-1}x_k\|_2}.
-$$
+$$ x_{k+1}:=\frac{(A-\mu I)^{-1}x_k}{\|(A-\mu I)^{-1}x_k\|_2}. $$
 
 The special case $\mu=0$, when $A$ itself is invertible, is **inverse
 iteration**.

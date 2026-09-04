@@ -31,9 +31,7 @@ pipeline_run: null
 ## Definition
 
 A **discrete valuation** on a field $K$ is a valuation
-$$
-v:K\to\mathbb Z\cup\{\infty\}
-$$
+$$ v:K\to\mathbb Z\cup\{\infty\} $$
 in the sense of [[def-valuation-on-a-field]] such that the restriction
 $v:K^\times\to\mathbb Z$ is surjective.
 

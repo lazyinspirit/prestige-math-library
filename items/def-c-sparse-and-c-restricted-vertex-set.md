@@ -31,15 +31,11 @@ pipeline_run: null
 Let $G$ be a finite simple graph and let $c\ge0$ be real. A nonempty vertex set
 $X\subseteq V(G)$ is **$c$-sparse** when
 
-$$
-|N_G(x)\cap X|\le c|X|
-$$
+$$ |N_G(x)\cap X|\le c|X| $$
 
 for every $x\in X$, and it is **$c$-dense** when
 
-$$
-|(X\setminus\{x\})\setminus N_G(x)|\le c|X|
-$$
+$$ |(X\setminus\{x\})\setminus N_G(x)|\le c|X| $$
 
 for every $x\in X$. Thus $c$-dense means that every vertex of $X$ has at most
 $c|X|$ non-neighbours inside $X$ other than itself.

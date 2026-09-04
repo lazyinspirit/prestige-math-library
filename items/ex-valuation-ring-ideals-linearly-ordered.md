@@ -30,9 +30,7 @@ pipeline_run: null
 Let $V$ be the valuation ring from [[ex-nondiscrete-ordered-subgroup-valuation]],
 with value group $\Gamma=\mathbb Z+\mathbb Z\sqrt2$. Then any two ideals of $V$
 are comparable. The ideal
-$$
-I:=\{x\in V:x=0\text{ or }v(x)>1\}
-$$
+$$ I:=\{x\in V:x=0\text{ or }v(x)>1\} $$
 is an explicit nonprincipal ideal.
 
 ## Facts & Assumptions

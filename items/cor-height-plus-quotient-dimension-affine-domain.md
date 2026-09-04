@@ -35,9 +35,7 @@ pipeline_run: null
 ## Statement
 
 Let $k$ be a field, let $A$ be a finite-type $k$-domain, and let $\mathfrak p\in\operatorname{Spec}(A)$. Then
-$$
-\operatorname{ht}(\mathfrak p)+\dim(A/\mathfrak p)=\dim A.
-$$
+$$ \operatorname{ht}(\mathfrak p)+\dim(A/\mathfrak p)=\dim A. $$
 
 ## Facts & Assumptions
 

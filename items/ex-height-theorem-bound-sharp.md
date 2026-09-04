@@ -29,9 +29,7 @@ pipeline_run: null
 ## Example
 
 In $A=k[x_1,\ldots,x_n]$, the coordinate ideal
-$$
-I=(x_1,\ldots,x_n)
-$$
+$$ I=(x_1,\ldots,x_n) $$
 is maximal, hence minimal over itself, and has height exactly $n$.
 
 ## Facts & Assumptions

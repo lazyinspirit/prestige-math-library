@@ -30,9 +30,7 @@ $\gamma(H,\eta),c(H,\eta)>0$ and $N(H,\eta)$ from the induced counting lemma. If
 $0<\gamma\le\gamma(H,\eta)$ and $W\subseteq V(G)$ has $|W|\ge N(H,\eta)$ with $(W,W)$
 $\gamma$-regular and $\eta\le d_G(W,W)\le1-\eta$, then
 
-$$
-\operatorname{ind}_H(G)\ge c(H,\eta)|W|^h.
-$$
+$$ \operatorname{ind}_H(G)\ge c(H,\eta)|W|^h. $$
 
 ## Facts & Assumptions
 

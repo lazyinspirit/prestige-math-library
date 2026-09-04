@@ -29,9 +29,7 @@ pipeline_run: null
 
 For a real number $x\ge1$, the **Mertens function** is
 
-$$
-M(x):=\sum_{1\le n\le x}\mu(n),
-$$
+$$ M(x):=\sum_{1\le n\le x}\mu(n), $$
 
 where $\mu$ is the number-theoretic Möbius function of
 [[def-number-theoretic-mobius-function]].

@@ -24,13 +24,9 @@ pipeline_run: null
 ## Statement
 
 Let
-$$
-R^m \xrightarrow{\alpha} R^n \xrightarrow{\beta} M \longrightarrow 0
-$$
+$$ R^m \xrightarrow{\alpha} R^n \xrightarrow{\beta} M \longrightarrow 0 $$
 be a finite presentation of an $R$-module $M$, and let $N$ be an $R$-module. If the natural localisation maps for $R^n$ and $R^m$ are isomorphisms, then the natural localisation map
-$$
-S^{-1}\!\operatorname{Hom}_R(M,N) \longrightarrow \operatorname{Hom}_{S^{-1}R}(S^{-1}M,S^{-1}N)
-$$
+$$ S^{-1}\!\operatorname{Hom}_R(M,N) \longrightarrow \operatorname{Hom}_{S^{-1}R}(S^{-1}M,S^{-1}N) $$
 is an isomorphism as well.
 
 ## Facts & Assumptions

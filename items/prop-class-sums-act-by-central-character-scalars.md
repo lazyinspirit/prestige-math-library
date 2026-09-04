@@ -30,9 +30,7 @@ $\widehat C\in \mathbb C[G]$ be its class sum, and let $V$ be an irreducible
 complex representation of $G$ with character $\chi$. Then $\widehat C$ acts on
 $V$ as the scalar $\omega_\chi(\widehat C)$:
 
-$$
-\rho_V(\widehat C)=\omega_\chi(\widehat C)\operatorname{id}_V.
-$$
+$$ \rho_V(\widehat C)=\omega_\chi(\widehat C)\operatorname{id}_V. $$
 
 ## Facts & Assumptions
 

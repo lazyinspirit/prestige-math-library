@@ -29,9 +29,7 @@ pipeline_run: null
 
 The series
 
-$$
-\sum_p\frac1p
-$$
+$$ \sum_p\frac1p $$
 
 diverges.
 
@@ -40,9 +38,7 @@ diverges.
 **Given:** The reciprocal-prime partial sums.
 
 [L1] Mertens' second theorem gives
-$$
-\sum_{p\le x}\frac1p=\log\log x+B_1+O(1/\log x)
-$$
+$$ \sum_{p\le x}\frac1p=\log\log x+B_1+O(1/\log x) $$
 ([[thm-second-mertens-theorem-for-primes]]).
 
 ## Proof

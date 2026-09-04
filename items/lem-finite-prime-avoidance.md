@@ -29,9 +29,7 @@ sources:
 
 Let $R$ be a commutative ring, let $I \trianglelefteq R$ be an ideal, and let
 $\mathfrak p_1,\dots,\mathfrak p_n$ be prime ideals with $n \ge 1$. If
-$$
-I\subseteq \mathfrak p_1\cup\cdots\cup \mathfrak p_n,
-$$
+$$ I\subseteq \mathfrak p_1\cup\cdots\cup \mathfrak p_n, $$
 then $I\subseteq \mathfrak p_i$ for some $i$.
 
 ## Facts & Assumptions

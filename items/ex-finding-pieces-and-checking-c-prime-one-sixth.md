@@ -33,9 +33,7 @@ sources:
 
 Let
 
-$$
-R=\{abcdefg,ahijklmn\}.
-$$
+$$ R=\{abcdefg,ahijklmn\}. $$
 
 Then the only nontrivial pieces in the symmetrised set are the one-letter words
 $a$ and $a^{-1}$, so this relator set satisfies $C'(1/6)$.

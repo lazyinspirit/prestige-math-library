@@ -31,9 +31,7 @@ Assume the Axiom of Choice.
 
 Let $R$ be a Noetherian commutative ring and let $I \subseteq R$ be an ideal. Then the
 completion map
-$$
-R \to \widehat R
-$$
+$$ R \to \widehat R $$
 makes $\widehat R$ into a flat $R$-module.
 
 ## Facts & Assumptions

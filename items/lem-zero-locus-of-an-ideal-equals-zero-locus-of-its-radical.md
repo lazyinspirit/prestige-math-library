@@ -26,9 +26,7 @@ pipeline_run: null
 ## Statement
 
 Let $k$ be a field and let $I\subseteq k[x_1,\ldots,x_n]$ be an ideal. Then
-$$
-V(I)=V(\sqrt I).
-$$
+$$ V(I)=V(\sqrt I). $$
 
 ## Facts & Assumptions
 

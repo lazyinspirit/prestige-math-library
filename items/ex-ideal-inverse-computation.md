@@ -26,9 +26,7 @@ pipeline_run: null
 ## Example
 
 In $R=\mathbb Z$, let $I=(2/3)\mathbb Z$. Then
-$$
-(R:I)=(3/2)\mathbb Z,
-$$
+$$ (R:I)=(3/2)\mathbb Z, $$
 and therefore $I(R:I)=R$.
 
 ## Facts & Assumptions

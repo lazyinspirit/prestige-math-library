@@ -29,9 +29,7 @@ sources:
 Let $e_1,\ldots,e_n$ be a basis of $V$, with dual basis
 $e^1,\ldots,e^n$. Then the wedges
 
-$$
-e^{i_1}\wedge\cdots\wedge e^{i_k}\qquad (1\le i_1<\cdots<i_k\le n)
-$$
+$$ e^{i_1}\wedge\cdots\wedge e^{i_k}\qquad (1\le i_1<\cdots<i_k\le n) $$
 
 form a basis of $\operatorname{Alt}^k(V)$.
 

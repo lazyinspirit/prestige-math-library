@@ -32,9 +32,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring, and let $(I_\lambda)_{\lambda\in\Lambda}$ be a family of ideals of $R$. Write $\sum_{\lambda\in\Lambda} I_\lambda$ for the ideal of finite sums of elements drawn from the family, with the empty sum equal to $0$. Then
-$$
-V\!\left(\sum_{\lambda\in\Lambda} I_\lambda\right)=\bigcap_{\lambda\in\Lambda}V(I_\lambda).
-$$
+$$ V\!\left(\sum_{\lambda\in\Lambda} I_\lambda\right)=\bigcap_{\lambda\in\Lambda}V(I_\lambda). $$
 
 ## Facts & Assumptions
 

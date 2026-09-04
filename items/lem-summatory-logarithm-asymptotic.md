@@ -32,9 +32,7 @@ pipeline_run: null
 
 For every real $x\ge1$,
 
-$$
-\sum_{n\le x}\log n=x\log x-x+O(\log x).
-$$
+$$ \sum_{n\le x}\log n=x\log x-x+O(\log x). $$
 
 ## Facts & Assumptions
 

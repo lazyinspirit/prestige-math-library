@@ -28,9 +28,7 @@ sources:
 
 On $\mathbb R^2$, the dot product
 
-$$
-g((a,b),(c,d)):=ac+bd
-$$
+$$ g((a,b),(c,d)):=ac+bd $$
 
 is a type $(0,2)$ tensor.
 

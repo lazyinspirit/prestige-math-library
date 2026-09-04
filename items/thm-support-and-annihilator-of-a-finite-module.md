@@ -27,9 +27,7 @@ pipeline_run: null
 ## Statement
 
 If $M$ is a finitely generated left $R$-module, then
-$$
-\operatorname{Supp}_R(M)=\{\mathfrak p : \operatorname{Ann}_R(M)\subseteq\mathfrak p\}.
-$$
+$$ \operatorname{Supp}_R(M)=\{\mathfrak p : \operatorname{Ann}_R(M)\subseteq\mathfrak p\}. $$
 
 ## Facts & Assumptions
 

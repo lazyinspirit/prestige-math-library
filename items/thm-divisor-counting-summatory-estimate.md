@@ -33,9 +33,7 @@ pipeline_run: null
 
 For every real $x\ge1$,
 
-$$
-\sum_{n\le x}\tau(n)=x\log x+(2\gamma-1)x+O(\sqrt x).
-$$
+$$ \sum_{n\le x}\tau(n)=x\log x+(2\gamma-1)x+O(\sqrt x). $$
 
 ## Facts & Assumptions
 

@@ -35,9 +35,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a Noetherian commutative ring of finite Krull dimension. Then
-$$
-\dim R[x]=\dim R+1.
-$$
+$$ \dim R[x]=\dim R+1. $$
 
 ## Facts & Assumptions
 

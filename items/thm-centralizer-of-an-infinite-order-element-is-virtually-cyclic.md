@@ -28,9 +28,7 @@ sources:
 Let $G$ be a hyperbolic group and let $g \in G$ have infinite order. Then its
 centralizer
 
-$$
-C_G(g)=\{h \in G : hg=gh\}
-$$
+$$ C_G(g)=\{h \in G : hg=gh\} $$
 
 contains a cyclic subgroup of finite index.
 

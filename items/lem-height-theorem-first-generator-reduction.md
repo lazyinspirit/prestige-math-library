@@ -29,17 +29,11 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a Noetherian commutative ring, let $n\ge2$, let
-$$
-I=(x_1,\ldots,x_n),
-$$
+$$ I=(x_1,\ldots,x_n), $$
 and let $\mathfrak p$ be a prime ideal minimal over $I$. Let $\mathfrak p'_1,\ldots,\mathfrak p'_r$ be the minimal prime ideals over $(x_2,\ldots,x_n)$. If $\mathfrak p$ is not one of the $\mathfrak p'_i$ and if
-$$
-\mathfrak p=\mathfrak p_d\supsetneq\mathfrak p_{d-1}\supsetneq\cdots\supsetneq\mathfrak p_0
-$$
+$$ \mathfrak p=\mathfrak p_d\supsetneq\mathfrak p_{d-1}\supsetneq\cdots\supsetneq\mathfrak p_0 $$
 is a strict prime chain, then there exists a strict prime chain of the same length ending at $\mathfrak p$ whose first proper subprime $\mathfrak p_1$ is not contained in any $\mathfrak p'_i$. For such a chain one can choose
-$$
-b\in\mathfrak p_1\setminus\bigcup_{i=1}^r\mathfrak p'_i,
-$$
+$$ b\in\mathfrak p_1\setminus\bigcup_{i=1}^r\mathfrak p'_i, $$
 and then $\mathfrak p$ is minimal over $(b,x_2,\ldots,x_n)$.
 
 ## Facts & Assumptions

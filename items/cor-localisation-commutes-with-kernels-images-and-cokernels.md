@@ -24,9 +24,7 @@ pipeline_run: null
 ## Statement
 
 For every $R$-module homomorphism $f:M \to N$, localisation identifies
-$$
-S^{-1}(\ker f) \cong \ker(S^{-1}f), \qquad S^{-1}(\operatorname{im}f) \cong \operatorname{im}(S^{-1}f), \qquad S^{-1}(\operatorname{coker}f) \cong \operatorname{coker}(S^{-1}f).
-$$
+$$ S^{-1}(\ker f) \cong \ker(S^{-1}f), \qquad S^{-1}(\operatorname{im}f) \cong \operatorname{im}(S^{-1}f), \qquad S^{-1}(\operatorname{coker}f) \cong \operatorname{coker}(S^{-1}f). $$
 
 ## Facts & Assumptions
 

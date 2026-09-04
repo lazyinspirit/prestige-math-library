@@ -27,18 +27,14 @@ pipeline_run: null
 
 For every natural number $n$,
 
-$$
-\frac{4^n}{2n+1}\le\binom{2n}{n}\le4^n.
-$$
+$$ \frac{4^n}{2n+1}\le\binom{2n}{n}\le4^n. $$
 
 ## Facts & Assumptions
 
 **Given:** A natural number $n$.
 
 [L1] The binomial theorem gives
-$$
-\sum_{k=0}^{2n}\binom{2n}{k}=(1+1)^{2n}=4^n
-$$
+$$ \sum_{k=0}^{2n}\binom{2n}{k}=(1+1)^{2n}=4^n $$
 ([[thm-binomial-theorem]], [[def-binomial-coefficient]]).
 
 [L2] The binomial coefficients in the $2n$th row are symmetric and unimodal, so

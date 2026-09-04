@@ -29,9 +29,7 @@ pipeline_run: null
 
 Assume the Axiom of Choice. Let $R$ be a Dedekind domain and let $I$ be an invertible fractional ideal.
 Then the module
-$$
-M:=R\oplus I
-$$
+$$ M:=R\oplus I $$
 is a finite torsion-free module of rank $2$, and under the class-group
 identification its second summand contributes the class
 $[I]\in\operatorname{Cl}(R)$.

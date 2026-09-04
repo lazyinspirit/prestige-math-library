@@ -31,9 +31,7 @@ Assume the Axiom of Choice.
 
 Let $k$ be a field, let $A$ be a finite-type $k$-algebra, and let
 $J\subseteq A$ be a radical ideal. Then
-$$
-J=\bigcap_{\mathfrak m\supseteq J,\ \mathfrak m\text{ maximal}} \mathfrak m.
-$$
+$$ J=\bigcap_{\mathfrak m\supseteq J,\ \mathfrak m\text{ maximal}} \mathfrak m. $$
 If no maximal ideal contains $J$, this intersection is understood to be $A$.
 
 ## Facts & Assumptions

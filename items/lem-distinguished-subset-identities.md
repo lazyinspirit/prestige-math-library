@@ -32,13 +32,9 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a commutative ring and let $f,g\in R$. Then
-$$
-D(0)=\varnothing,\qquad D(1)=\operatorname{Spec}(R),\qquad D(fg)=D(f)\cap D(g).
-$$
+$$ D(0)=\varnothing,\qquad D(1)=\operatorname{Spec}(R),\qquad D(fg)=D(f)\cap D(g). $$
 Moreover, for every integer $n\ge 1$ one has
-$$
-D(f^n)=D(f).
-$$
+$$ D(f^n)=D(f). $$
 
 ## Facts & Assumptions
 

@@ -29,9 +29,7 @@ pipeline_run: null
 ## Statement
 
 Let $R$ be a Noetherian commutative ring and let $\mathfrak p\in\operatorname{Spec}(R)$. Then
-$$
-\operatorname{ht}(\mathfrak p)\le \mu_{R_{\mathfrak p}}(\mathfrak pR_{\mathfrak p}),
-$$
+$$ \operatorname{ht}(\mathfrak p)\le \mu_{R_{\mathfrak p}}(\mathfrak pR_{\mathfrak p}), $$
 where $\mu$ denotes the minimal number of generators.
 
 ## Facts & Assumptions

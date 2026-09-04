@@ -34,9 +34,7 @@ pipeline_run: null
 On the punctured bidisc
 $\{(z_1,z_2): |z_1|<1,\ |z_2|<1\}\setminus\{(0,0)\}$, the function
 
-$$
-f(z_1,z_2)=\frac{z_1}{1-z_1z_2}
-$$
+$$ f(z_1,z_2)=\frac{z_1}{1-z_1z_2} $$
 
 is holomorphic and extends holomorphically across the origin as the same
 formula.

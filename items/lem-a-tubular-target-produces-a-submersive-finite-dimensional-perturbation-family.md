@@ -30,17 +30,11 @@ sources:
 ## Statement
 
 Let $f:M\to N$ be smooth. Then there exist an open ball
-$$
-B\subseteq\mathbb R^m
-$$
+$$ B\subseteq\mathbb R^m $$
 containing $0$ and a smooth family of maps
-$$
-\mathcal F:M\times B\to N
-$$
+$$ \mathcal F:M\times B\to N $$
 such that $\mathcal F_0=f$ and, for every $p\in M$, the parameter map
-$$
-\mathcal F_p:B\to N,\qquad a\longmapsto \mathcal F(p,a),
-$$
+$$ \mathcal F_p:B\to N,\qquad a\longmapsto \mathcal F(p,a), $$
 is a submersion. In particular, the evaluation map $\mathcal F$ is a
 submersion, so it is transverse to every closed embedded submanifold
 $Z\subseteq N$.

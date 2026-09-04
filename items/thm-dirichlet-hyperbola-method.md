@@ -36,9 +36,7 @@ $F(y)=\sum_{n\le y}f(n)$ and $G(y)=\sum_{n\le y}g(n)$
 ([[def-summatory-function-and-average-order]]). If $x\ge1$ and $U,V\ge1$
 satisfy $UV=x$, then
 
-$$
-\sum_{n\le x}(f*g)(n)=\sum_{a\le U} f(a)G(x/a)+\sum_{b\le V} g(b)F(x/b)-F(U)G(V).
-$$
+$$ \sum_{n\le x}(f*g)(n)=\sum_{a\le U} f(a)G(x/a)+\sum_{b\le V} g(b)F(x/b)-F(U)G(V). $$
 
 ## Facts & Assumptions
 

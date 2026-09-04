@@ -28,9 +28,7 @@ pipeline_run: null
 
 For every subgroup $H$ of a group $G$, the rule
 
-$$
-(aH)(bH)=(ab)H
-$$
+$$ (aH)(bH)=(ab)H $$
 
 is independent of the representatives $a$ and $b$.
 

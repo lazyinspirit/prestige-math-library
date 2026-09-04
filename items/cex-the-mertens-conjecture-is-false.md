@@ -29,9 +29,7 @@ pipeline_run: null
 
 The historical statement
 
-$$
-|M(x)|<\sqrt{x}\qquad\text{for every real }x>1
-$$
+$$ |M(x)|<\sqrt{x}\qquad\text{for every real }x>1 $$
 
 is false, where $M$ is the Mertens function of [[def-mertens-function]].
 

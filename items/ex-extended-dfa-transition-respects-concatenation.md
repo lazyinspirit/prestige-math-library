@@ -37,12 +37,8 @@ Consider the DFA over $\{a,b\}$ with states $q_0,q_1,q_2,q_3$, where:
 Take $q_0$ as the start state and $F=\{q_3\}$ as the accepting set.
 
 Its transitions are
-$$
-\delta(q_0,a)=q_1,\ \delta(q_0,b)=q_0,\ \delta(q_1,a)=q_1,\ \delta(q_1,b)=q_2,
-$$
-$$
-\delta(q_2,a)=q_1,\ \delta(q_2,b)=q_3,\ \delta(q_3,a)=q_1,\ \delta(q_3,b)=q_0.
-$$
+$$ \delta(q_0,a)=q_1,\ \delta(q_0,b)=q_0,\ \delta(q_1,a)=q_1,\ \delta(q_1,b)=q_2, $$
+$$ \delta(q_2,a)=q_1,\ \delta(q_2,b)=q_3,\ \delta(q_3,a)=q_1,\ \delta(q_3,b)=q_0. $$
 Take $u=ab$ and $v=abb$.
 
 Then

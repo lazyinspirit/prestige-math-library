@@ -29,9 +29,7 @@ Assume the Axiom of Choice.
 
 Let $R$ be a Noetherian commutative ring and let $I \subseteq J(R)$ be an ideal. Then the
 completion map
-$$
-R \to \widehat R
-$$
+$$ R \to \widehat R $$
 is faithfully flat.
 
 ## Facts & Assumptions

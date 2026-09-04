@@ -30,9 +30,7 @@ sources:
 Fix a smooth bump $\beta:\mathbb R\to\mathbb R$ supported in $[-1,1]$ with
 $\beta(0)=1$, $\beta'(0)=0$, and $0<\beta(t)<1$ for $0<|t|<1$. Then
 
-$$
-f(x):=\sum_{k=1}^\infty \left(1-\frac1k\right)\beta\bigl(2^k(x-k)\bigr)
-$$
+$$ f(x):=\sum_{k=1}^\infty \left(1-\frac1k\right)\beta\bigl(2^k(x-k)\bigr) $$
 
 is smooth, has critical values $1-\frac1k$ for all $k$, and has regular value
 $1$. Hence its critical value set is not closed.

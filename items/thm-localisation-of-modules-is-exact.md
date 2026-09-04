@@ -31,13 +31,9 @@ pipeline_run: null
 ## Statement
 
 If
-$$
-0 \longrightarrow M' \xrightarrow{f} M \xrightarrow{g} M'' \longrightarrow 0
-$$
+$$ 0 \longrightarrow M' \xrightarrow{f} M \xrightarrow{g} M'' \longrightarrow 0 $$
 is a short exact sequence of $R$-modules, then
-$$
-0 \longrightarrow S^{-1}M' \xrightarrow{S^{-1}f} S^{-1}M \xrightarrow{S^{-1}g} S^{-1}M'' \longrightarrow 0
-$$
+$$ 0 \longrightarrow S^{-1}M' \xrightarrow{S^{-1}f} S^{-1}M \xrightarrow{S^{-1}g} S^{-1}M'' \longrightarrow 0 $$
 is a short exact sequence of $S^{-1}R$-modules.
 
 ## Facts & Assumptions

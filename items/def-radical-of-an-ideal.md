@@ -31,8 +31,6 @@ pipeline_run: null
 ## Definition
 
 Let $R$ be a commutative ring and let $I\trianglelefteq R$ be an ideal. The **radical** of $I$ is
-$$
-\sqrt{I}=\{x\in R:x^n\in I\text{ for some integer }n\ge 1\}.
-$$
+$$ \sqrt{I}=\{x\in R:x^n\in I\text{ for some integer }n\ge 1\}. $$
 
 The ideal $I$ is **radical** when $I=\sqrt{I}$.

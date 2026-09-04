@@ -32,9 +32,7 @@ there is a $k\in I$ with $i\le k$ and $j\le k$
 An **inverse system of groups** indexed by $I$ is a family of groups
 $(G_i)_{i\in I}$ together with homomorphisms
 
-$$
-\varphi_{ij}:G_j\to G_i \qquad (i\le j)
-$$
+$$ \varphi_{ij}:G_j\to G_i \qquad (i\le j) $$
 
 satisfying $\varphi_{ii}=\operatorname{id}_{G_i}$ and
 $\varphi_{ik}=\varphi_{ij}\circ\varphi_{jk}$ whenever $i\le j\le k$

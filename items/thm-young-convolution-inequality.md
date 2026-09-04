@@ -23,16 +23,12 @@ sources:
 
 Let $1 \le p,q,r \le \infty$ satisfy
 
-$$
-\frac1r = \frac1p + \frac1q - 1.
-$$
+$$ \frac1r = \frac1p + \frac1q - 1. $$
 
 If $f \in L^p(\mathbb{R}^n)$ and $g \in L^q(\mathbb{R}^n)$, then the
 convolution $f*g$ is defined almost everywhere and satisfies
 
-$$
-\|f*g\|_r \le \|f\|_p\|g\|_q.
-$$
+$$ \|f*g\|_r \le \|f\|_p\|g\|_q. $$
 
 ## Facts & Assumptions
 

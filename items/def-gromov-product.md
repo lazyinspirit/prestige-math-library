@@ -27,6 +27,4 @@ sources:
 Let $(X,d)$ be a metric space, let $o \in X$, and let $x,y \in X$. The
 **Gromov product** of $x$ and $y$ with respect to $o$ is
 
-$$
-(x,y)_o := \frac{1}{2}\bigl(d(x,o)+d(y,o)-d(x,y)\bigr).
-$$
+$$ (x,y)_o := \frac{1}{2}\bigl(d(x,o)+d(y,o)-d(x,y)\bigr). $$

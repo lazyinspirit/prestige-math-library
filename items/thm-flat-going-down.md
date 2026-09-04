@@ -30,9 +30,7 @@ Let $f:R\to S$ be a flat homomorphism of commutative rings. Then $f$ satisfies
 **going down**: whenever
 $$ \mathfrak p_1\subseteq \mathfrak p_2\subset R,\qquad \mathfrak q_2\subset S,\qquad \mathfrak q_2\cap R=\mathfrak p_2, $$
 there exists a prime ideal $\mathfrak q_1\subseteq \mathfrak q_2$ with
-$$
-\mathfrak q_1\cap R=\mathfrak p_1.
-$$
+$$ \mathfrak q_1\cap R=\mathfrak p_1. $$
 
 ## Facts & Assumptions
 

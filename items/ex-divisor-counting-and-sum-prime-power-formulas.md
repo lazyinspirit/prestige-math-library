@@ -32,15 +32,11 @@ pipeline_run: null
 Using the prime-power formulas from
 [[prop-divisor-functions-under-dirichlet-convolution]]:
 
-$$
-\tau(12)=(2+1)(1+1)=6,\qquad \sigma(12)=(1+2+4)(1+3)=28,
-$$
+$$ \tau(12)=(2+1)(1+1)=6,\qquad \sigma(12)=(1+2+4)(1+3)=28, $$
 
 since $12=2^2\cdot3$, and
 
-$$
-\tau(18)=(1+1)(2+1)=6,\qquad \sigma_2(18)=(1+2^2)(1+3^2+3^4)=455,
-$$
+$$ \tau(18)=(1+1)(2+1)=6,\qquad \sigma_2(18)=(1+2^2)(1+3^2+3^4)=455, $$
 
 since $18=2\cdot3^2$.
 

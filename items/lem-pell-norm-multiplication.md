@@ -43,9 +43,7 @@ $$N_D(\alpha\beta)=N_D(\alpha)N_D(\beta).$$
 **Given:** Two elements $\alpha=x+y\sqrt D$ and $\beta=u+v\sqrt D$ of $\mathbb Z[\sqrt D]$.
 
 [F1] In $\mathbb Z[\sqrt D]$, one has
-$$
-(x+y\sqrt D)(u+v\sqrt D)=(xu+D yv)+(xv+yu)\sqrt D
-$$
+$$ (x+y\sqrt D)(u+v\sqrt D)=(xu+D yv)+(xv+yu)\sqrt D $$
 and
 $$N_D(x+y\sqrt D)=x^2-Dy^2.$$
 ([[def-norm-on-integer-square-root-order]]).

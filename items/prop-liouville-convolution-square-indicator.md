@@ -32,9 +32,7 @@ pipeline_run: null
 
 For every positive integer $n$,
 
-$$
-(\mathbf 1*\lambda)(n)=\begin{cases}1,& n\text{ is a perfect square},\\0,& n\text{ is not a perfect square}.\end{cases}
-$$
+$$ (\mathbf 1*\lambda)(n)=\begin{cases}1,& n\text{ is a perfect square},\\0,& n\text{ is not a perfect square}.\end{cases} $$
 
 ## Facts & Assumptions
 

@@ -34,9 +34,7 @@ finitely generated as an $R$-module. Assume:
 
 1. the closed fibre $M/\mathfrak mM$ is flat over $S/\mathfrak mS$;
 2. the multiplication map
-   $$
-   \mathfrak m\otimes_R M\to M
-   $$
+   $$    \mathfrak m\otimes_R M\to M    $$
    is injective.
 
 Then $M$ is flat over $R$.
@@ -49,9 +47,7 @@ $R$-module and satisfies the two hypotheses.
 
 [L1] The ideal-form local criterion applies once one knows that $M/\mathfrak mM$
 is flat over $R/\mathfrak m$ and that
-$$
-\mathfrak m\otimes_R M\to M
-$$
+$$ \mathfrak m\otimes_R M\to M $$
 is injective ([[thm-local-criterion-for-flatness-ideal-form]]).
 
 ## Proof

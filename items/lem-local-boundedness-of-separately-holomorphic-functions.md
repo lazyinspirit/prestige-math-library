@@ -43,9 +43,7 @@ pipeline_run: null
 
 Let $m\ge1$, let $R>0$, and let
 
-$$
-\Delta_R^m:=\{z=(z_1,\dots,z_m)\in\mathbb C^m : |z_j|<R \text{ for every } j\}.
-$$
+$$ \Delta_R^m:=\{z=(z_1,\dots,z_m)\in\mathbb C^m : |z_j|<R \text{ for every } j\}. $$
 
 If $f:\Delta_R^m\to\mathbb C$ is separately holomorphic, then for every
 $0<r<R$ the function $f$ is bounded on the closed polydisc

@@ -34,9 +34,7 @@ Let $\mathbb F_q$ be a finite field of order $q$, and let $N_q(n)$ denote the
 number of monic irreducible polynomials of degree $n$ in $\mathbb F_q[t]$. Then
 for every $n\ge1$,
 
-$$
-N_q(n)=\frac1n\sum_{\substack{d\mid n\\d>0}} \mu(d)q^{n/d}.
-$$
+$$ N_q(n)=\frac1n\sum_{\substack{d\mid n\\d>0}} \mu(d)q^{n/d}. $$
 
 ## Facts & Assumptions
 

@@ -30,9 +30,7 @@ sources:
 
 Let $f:M^n\to\mathbb R^N$ be a smooth embedding with $N>2n+1$. Then the set of
 unit vectors $u\in S^{N-1}$ for which the orthogonal projection
-$$
-P_u:\mathbb R^N\to u^\perp
-$$
+$$ P_u:\mathbb R^N\to u^\perp $$
 makes $P_u\circ f$ an injective immersion is dense in $S^{N-1}$.
 
 ## Facts & Assumptions

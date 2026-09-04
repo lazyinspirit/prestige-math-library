@@ -28,15 +28,11 @@ pipeline_run: null
 
 There are positive constants $K_1,K_2$ such that for every real $x\ge2$,
 
-$$
-0\le\psi(x)-\theta(x)\le K_1\sqrt{x}\log x
-$$
+$$ 0\le\psi(x)-\theta(x)\le K_1\sqrt{x}\log x $$
 
 and, for all sufficiently large $x$,
 
-$$
-\psi(x)-\theta(x)\le K_2\sqrt{x}.
-$$
+$$ \psi(x)-\theta(x)\le K_2\sqrt{x}. $$
 
 ## Facts & Assumptions
 
