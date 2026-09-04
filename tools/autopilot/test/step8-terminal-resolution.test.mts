@@ -6,6 +6,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import {
+  finalAdjudicatorHistoricalPredecessorProblems,
   finalAdjudicatorPredecessorProblems,
   finalAdjudicatorQueueProblems,
 } from '../../step8-terminal-resolution.mjs';
@@ -165,6 +166,34 @@ test('the FA recorder structurally refuses item N until every predecessor is res
     final_adjudicator: { queue_sha256: queueHash, queue_position: 1 },
   }]]);
   assert.deepEqual(finalAdjudicatorPredecessorProblems(queue, 'thm-two', latest, queueHash), []);
+});
+
+test('resealing an earlier item does not erase a completed queue\'s historical order', () => {
+  const queue = {
+    items: [
+      { id: 'thm-one', position: 1 },
+      { id: 'thm-two', position: 2 },
+    ],
+  };
+  const oldQueueHash = 'a'.repeat(64);
+  const rows = [
+    {
+      id: 'thm-one', resolved_by: 'final-adjudicator', at: '2026-01-01T00:00:00.000Z',
+      final_adjudicator: { queue_sha256: oldQueueHash, queue_position: 1 },
+    },
+    {
+      id: 'thm-two', resolved_by: 'final-adjudicator', at: '2026-01-01T00:01:00.000Z',
+      final_adjudicator: { queue_sha256: oldQueueHash, queue_position: 2 },
+    },
+    {
+      id: 'thm-one', resolved_by: 'final-adjudicator', at: '2026-01-01T00:02:00.000Z',
+      final_adjudicator: { queue_sha256: 'b'.repeat(64), queue_position: 1 },
+    },
+  ];
+  assert.deepEqual(finalAdjudicatorHistoricalPredecessorProblems(
+    queue, 'thm-two', rows, oldQueueHash, rows[1].at), []);
+  assert.match(finalAdjudicatorHistoricalPredecessorProblems(
+    queue, 'thm-two', rows.slice(1), oldQueueHash, rows[1].at)[0], /was not resolved before/);
 });
 
 test('the FA recorder CLI refuses an out-of-order item before touching repository mathematics', () => {

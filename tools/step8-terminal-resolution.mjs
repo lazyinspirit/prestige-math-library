@@ -75,6 +75,28 @@ export function finalAdjudicatorPredecessorProblems(queue, id, latest, queueSha2
   return errors;
 }
 
+/** Audit the order a completed FA queue actually ran in.
+ *
+ * Recording uses the latest-row check above because position N must not start
+ * until positions 1..N-1 are current. Later repairs may legitimately reseal an
+ * earlier item in a new queue. That must not erase the historical fact that the
+ * old queue ran in order; current-hash checks independently decide whether each
+ * item's latest resolution remains valid. */
+export function finalAdjudicatorHistoricalPredecessorProblems(queue, id, rows, queueSha256, resolvedAt) {
+  const position = queue?.items?.findIndex((item) => item.id === id) ?? -1;
+  if (position < 0) return [`queue does not contain ${id}`];
+  const errors = [];
+  for (const prior of queue.items.slice(0, position)) {
+    const existed = rows.some((row) => row?.id === prior.id
+      && row?.resolved_by === 'final-adjudicator'
+      && row?.final_adjudicator?.queue_sha256 === queueSha256
+      && row?.final_adjudicator?.queue_position === prior.position
+      && String(row?.at ?? '') <= String(resolvedAt ?? ''));
+    if (!existed) errors.push(`queue item ${prior.id} at position ${prior.position} was not resolved before ${id}`);
+  }
+  return errors;
+}
+
 export function terminalResolutionPath(run) {
   return `research/${run}-step8-terminal-resolutions.jsonl`;
 }
@@ -329,13 +351,9 @@ function main() {
           const position = queue.items?.findIndex((item) => item.id === row.id) ?? -1;
           if (position + 1 !== fa.queue_position || queue.items?.length !== fa.queue_total)
             errors.push(`${row.id}: final-adjudicator queue position/total does not match the frozen queue`);
-          errors.push(...finalAdjudicatorPredecessorProblems(queue, row.id, parsed.latest, fa.queue_sha256)
+          errors.push(...finalAdjudicatorHistoricalPredecessorProblems(
+            queue, row.id, parsed.rows, fa.queue_sha256, row.at)
             .map((error) => `${row.id}: ${error}`));
-          for (const prior of (queue.items ?? []).slice(0, Math.max(0, position))) {
-            const priorRow = parsed.latest.get(prior.id);
-            if (priorRow && String(priorRow.at) > String(row.at))
-              errors.push(`${row.id}: prior queue item ${prior.id} was resolved after this item`);
-          }
           const resultPath = join(root, 'research', `${run}-dispatch`,
             `final-adjudicator-${fa.dispatch_label}.result.json`);
           const dispatch = JSON.parse(readFileSync(resultPath, 'utf8'));

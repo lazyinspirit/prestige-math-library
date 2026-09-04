@@ -281,6 +281,10 @@ exact-hash terminal resolution is closure evidence, not a fabricated judge
 verdict or pass stamp. An exhausted item not licensed by two confirmed-fatal
 Alpha repair cycles remains an explicit owner/session intervention blocker.
 `8-final` has no repair hook, making post-budget currency failures visible.
+The terminal audit verifies each Final Adjudicator queue against its historical
+rows. Resealing an earlier item in a later queue does not erase evidence that an
+older queue ran in order; current hashes independently invalidate any later item
+whose mathematics or pair context actually changed.
 
 Step 9 extracts the exact post-Step-8 mathematical delta, judges and
 adjudicates it, then applies its stamps. The final stamp stage verifies every
