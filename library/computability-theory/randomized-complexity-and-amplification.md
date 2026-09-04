@@ -1,7 +1,7 @@
 ---
 page: randomized-complexity-and-amplification
 title: "Randomized Complexity and Amplification"
-status: draft
+status: published
 items:
   - def-probabilistic-polynomial-time-machine
   - def-rp-corp-zpp-bpp-and-pp

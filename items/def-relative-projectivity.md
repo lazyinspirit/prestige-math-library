@@ -2,13 +2,14 @@
 id: def-relative-projectivity
 kind: definition
 title: "A module is relatively H-projective when it is a direct summand of one induced from H"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-projective-module, thm-projective-module-characterizations]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

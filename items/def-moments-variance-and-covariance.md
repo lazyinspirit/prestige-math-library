@@ -2,13 +2,14 @@
 id: def-moments-variance-and-covariance
 kind: definition
 title: "Moments, variance, and covariance on a probability space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

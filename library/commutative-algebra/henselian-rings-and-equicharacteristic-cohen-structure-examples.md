@@ -1,7 +1,7 @@
 ---
 page: henselian-rings-and-equicharacteristic-cohen-structure-examples
 title: "Henselian Rings and Equicharacteristic Cohen Structure — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hensel-factor-correction-mod-three-powers, ex-simple-root-and-factor-hensel-same-lift, ex-multiple-residue-root-does-not-lift-uniquely, ex-idempotent-lifting-and-product-decomposition, ex-complete-discrete-valuation-ring-henselian, ex-artinian-local-ring-henselian, ex-localised-integers-not-henselian, ex-cohen-presentation-singular-hypersurface, ex-coefficient-field-noncanonical-choice]
 ---

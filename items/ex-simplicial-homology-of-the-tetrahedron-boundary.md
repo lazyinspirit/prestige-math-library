@@ -2,11 +2,13 @@
 id: ex-simplicial-homology-of-the-tetrahedron-boundary
 kind: example
 title: "The simplicial homology of the tetrahedron boundary"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [prop-zero-th-simplicial-homology-is-free-on-connected-components, thm-euler-poincare-formula-for-a-finite-simplicial-complex, def-simplicial-cycles-boundaries-and-homology]
+verification:
+  audited: 2026-09-04
 sources:
   scraped: []
   references:

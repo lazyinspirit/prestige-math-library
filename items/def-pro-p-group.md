@@ -2,13 +2,14 @@
 id: def-pro-p-group
 kind: definition
 title: "A pro-p group is a profinite group that is an inverse limit of finite p-groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-profinite-group-by-inverse-limit]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

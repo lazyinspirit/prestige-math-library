@@ -2,7 +2,7 @@
 id: lem-maximal-proper-closed-subgroups-of-a-profinite-group-are-open
 kind: lemma
 title: "Every maximal proper closed subgroup of a profinite group is open"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-frattini-subgroup-of-a-profinite-group, def-profinite-group-by-inverse-limit]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

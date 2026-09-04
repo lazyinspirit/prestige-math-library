@@ -2,7 +2,7 @@
 id: lem-coprime-factor-bezout-lift
 kind: lemma
 title: "Lift a Bezout identity for coprime residue factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-polynomial-ring-over-a-commutative-ring, def-quotient-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

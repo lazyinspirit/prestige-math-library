@@ -2,13 +2,14 @@
 id: prop-a-finite-simplicial-complex-has-compact-hausdorff-realization
 kind: proposition
 title: "A finite simplicial complex has a compact Hausdorff realization"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-geometric-realization-of-an-abstract-simplicial-complex, def-locally-finite-and-finite-dimensional-simplicial-complex, lem-geometric-simplices-intersect-in-the-realization-of-their-common-face, thm-heine-borel-rn, thm-metric-hausdorff-separation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

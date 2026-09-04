@@ -2,7 +2,7 @@
 id: prop-coordinate-formula-for-the-lie-bracket
 kind: proposition
 title: "Coordinate formula for the Lie bracket"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-a-distribution-function-need-not-have-a-density
 kind: counterexample
 title: "A distribution function need not have a density"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-cumulative-distribution-function-of-a-random-variable, def-atom-and-continuity-point-of-a-law]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

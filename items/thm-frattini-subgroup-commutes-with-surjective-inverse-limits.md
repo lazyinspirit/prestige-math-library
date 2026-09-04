@@ -2,7 +2,7 @@
 id: thm-frattini-subgroup-commutes-with-surjective-inverse-limits
 kind: theorem
 title: "For surjective inverse systems in the pro-p setting, the Frattini subgroup commutes with the inverse limit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-frattini-subgroup-of-a-profinite-group, lem-maximal-proper-closed-subgroups-of-a-profinite-group-are-open, def-coordinate-projections-from-an-inverse-limit]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

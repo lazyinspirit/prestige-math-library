@@ -2,7 +2,7 @@
 id: lem-coordinate-change-congruence-for-the-critical-hessian
 kind: lemma
 title: "Critical-point Hessian matrices transform by congruence under chart changes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: coordinate computation
+verification:
+  audited: 2026-09-04
 sources:
   scraped: []
   references:

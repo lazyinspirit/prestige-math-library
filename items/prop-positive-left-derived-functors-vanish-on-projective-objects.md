@@ -2,7 +2,7 @@
 id: prop-positive-left-derived-functors-vanish-on-projective-objects
 kind: proposition
 title: "Positive left derived functors vanish on projective objects"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic, prop-a-projective-object-has-a-length-zero-projective-resolution, def-left-derived-object-relative-to-projective-resolution-data]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

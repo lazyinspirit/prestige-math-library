@@ -2,7 +2,7 @@
 id: thm-duals-are-unique-up-to-a-unique-compatible-isomorphism
 kind: theorem
 title: "Duals are unique up to a unique compatible isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-left-dual-and-right-dual-object, def-the-zig-zag-identities]
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-og-lattice-and-reduction-modulo-the-maximal-ideal
 kind: definition
 title: "An OG-lattice is a finite free module over the valuation ring with G-action, and reduction modulo the maximal ideal produces a kG-module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-splitting-p-modular-system-for-a-finite-group, def-g-module-over-a-commutative-ring]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

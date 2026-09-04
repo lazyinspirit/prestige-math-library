@@ -2,7 +2,7 @@
 id: fs-first-cohomology-with-nonabelian-coefficients-is-a-group
 kind: false-statement
 title: "FALSE: first cohomology with nonabelian coefficients is a group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-first-nonabelian-cohomology-as-a-pointed-set, thm-nonabelian-first-cohomology-classifies-complements-as-a-pointed-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-graph-subgroup-in-a-semidirect-product
 kind: definition
 title: "The graph subgroup attached to a map into a semidirect product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-external-semidirect-product]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

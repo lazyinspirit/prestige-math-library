@@ -2,13 +2,14 @@
 id: def-restriction-inflation-and-the-quotient-conjugation-action-on-first-cohomology
 kind: definition
 title: "Restriction, inflation, and the quotient conjugation action on first cohomology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-first-cohomology-via-crossed-homomorphisms, def-first-nonabelian-cohomology-as-a-pointed-set]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

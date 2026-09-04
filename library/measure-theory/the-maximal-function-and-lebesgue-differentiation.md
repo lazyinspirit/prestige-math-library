@@ -1,7 +1,7 @@
 ---
 page: the-maximal-function-and-lebesgue-differentiation
 title: "The Maximal Function and Lebesgue Differentiation"
-status: draft
+status: published
 items: [def-locally-integrable-function-on-r-n, lem-euclidean-balls-have-positive-finite-lebesgue-measure, def-ball-average-operator-on-r-n, def-centered-and-uncentered-hardy-littlewood-maximal-functions, def-sublinear-operator-weak-and-strong-type-p-q, def-lebesgue-point-and-lebesgue-set, def-density-of-a-measurable-set-at-a-point, def-family-shrinking-nicely-to-a-point, thm-vitali-covering-lemma-for-balls-with-fivefold-dilates, prop-ball-average-is-continuous-in-centre-and-radius, thm-centered-hardy-littlewood-maximal-function-is-borel-measurable, prop-centered-and-uncentered-maximal-functions-are-comparable, thm-hardy-littlewood-maximal-inequality-for-balls, prop-hardy-littlewood-maximal-function-is-l-infinity-bounded, thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity, cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded, thm-riesz-thorin-interpolation, lem-continuous-compactly-supported-functions-differentiate-by-ball-averages, thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n, thm-almost-every-point-is-a-lebesgue-point, thm-lebesgue-density-theorem, thm-differentiation-along-families-shrinking-nicely, thm-differentiation-of-borel-measures-finite-on-compact-sets-on-r-n, thm-first-fundamental-theorem-of-calculus-for-l-one, cex-the-hardy-littlewood-maximal-operator-is-not-strong-type-one-one]
 examples: []
 ---

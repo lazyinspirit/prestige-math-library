@@ -2,13 +2,14 @@
 id: rem-derived-functors-are-well-defined-relative-to-supplied-resolution-data
 kind: remark
 title: "Derived functors are well defined relative to supplied resolution data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions, lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions, lem-the-induced-homology-map-is-independent-of-the-comparison-lift, lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension, thm-left-derived-functors-relative-to-supplied-data-are-additive-functors, thm-right-derived-functors-relative-to-supplied-data-are-additive-functors, thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic, thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic, prop-change-of-projective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws, prop-change-of-injective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: rem-zero-dimensional-morse-convention
 kind: remark
 title: "The zero-dimensional Morse convention"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

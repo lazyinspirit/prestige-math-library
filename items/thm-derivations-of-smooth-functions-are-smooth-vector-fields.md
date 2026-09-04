@@ -2,7 +2,7 @@
 id: thm-derivations-of-smooth-functions-are-smooth-vector-fields
 kind: theorem
 title: "Derivations of smooth functions are exactly smooth vector fields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

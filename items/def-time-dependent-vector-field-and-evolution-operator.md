@@ -2,7 +2,7 @@
 id: def-time-dependent-vector-field-and-evolution-operator
 kind: definition
 title: "Time-dependent vector fields and their evolution operators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

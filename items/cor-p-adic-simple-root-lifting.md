@@ -2,7 +2,7 @@
 id: cor-p-adic-simple-root-lifting
 kind: corollary
 title: "Simple roots lift uniquely in Z_p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-zp-is-the-valuation-ring-of-qp, thm-p-adic-completion-is-a-field]
 proof_strategy: constructive
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

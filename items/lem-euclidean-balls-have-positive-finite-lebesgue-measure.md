@@ -2,7 +2,7 @@
 id: lem-euclidean-balls-have-positive-finite-lebesgue-measure
 kind: lemma
 title: "Euclidean balls have positive finite Lebesgue measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, def-metric-ball, thm-lebesgue-measure-of-a-box-of-every-kind]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

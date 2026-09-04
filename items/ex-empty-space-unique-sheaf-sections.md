@@ -2,7 +2,7 @@
 id: ex-empty-space-unique-sheaf-sections
 kind: example
 title: "The empty space has a unique sheaf section over the empty open set"
-status: draft
+status: published
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -11,6 +11,7 @@ generation:
 deps: [def-topological-space, def-sheaf-on-topological-space, lem-sheaf-section-over-empty-set-terminal]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

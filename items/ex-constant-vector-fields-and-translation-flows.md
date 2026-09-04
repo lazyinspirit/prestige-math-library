@@ -2,7 +2,7 @@
 id: ex-constant-vector-fields-and-translation-flows
 kind: example
 title: "Constant vector fields have translation flows"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

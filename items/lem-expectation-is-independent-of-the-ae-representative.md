@@ -2,7 +2,7 @@
 id: lem-expectation-is-independent-of-the-ae-representative
 kind: lemma
 title: "Expectation depends only on the almost-everywhere class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable, thm-the-lebesgue-integral-respects-almost-everywhere-equality]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

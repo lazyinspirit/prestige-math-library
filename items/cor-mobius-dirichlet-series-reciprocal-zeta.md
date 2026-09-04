@@ -2,7 +2,7 @@
 id: cor-mobius-dirichlet-series-reciprocal-zeta
 kind: corollary
 title: "The Dirichlet series of the Möbius function is the reciprocal of the zeta Dirichlet series on Re s greater than 1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-number-theoretic-mobius-function, thm-dirichlet-series-multiplication-convolution, cor-classical-mobius-inversion, def-dirichlet-convolution-identity, thm-p-series-rational]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

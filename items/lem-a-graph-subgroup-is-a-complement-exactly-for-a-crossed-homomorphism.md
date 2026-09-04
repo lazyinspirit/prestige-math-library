@@ -2,7 +2,7 @@
 id: lem-a-graph-subgroup-is-a-complement-exactly-for-a-crossed-homomorphism
 kind: lemma
 title: "A graph subgroup is a complement exactly for a crossed homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-crossed-homomorphism-for-a-g-group, def-graph-subgroup-in-a-semidirect-product, thm-external-semidirect-product-is-a-group, prop-canonical-subgroups-of-an-external-semidirect-product]
 proof_strategy: iff
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

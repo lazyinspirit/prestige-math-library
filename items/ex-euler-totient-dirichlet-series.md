@@ -2,7 +2,7 @@
 id: ex-euler-totient-dirichlet-series
 kind: example
 title: "A local prime factor in the Dirichlet series of Euler's totient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-euler-totient-dirichlet-series, thm-totient-of-a-prime-power]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

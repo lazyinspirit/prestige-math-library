@@ -2,7 +2,7 @@
 id: cor-large-almost-pure-pair-hypotheses-yield-a-complete-or-anticomplete-blockade
 kind: corollary
 title: "Large almost-pure pair hypotheses yield a complete or anticomplete blockade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

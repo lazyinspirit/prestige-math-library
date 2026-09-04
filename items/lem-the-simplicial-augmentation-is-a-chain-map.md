@@ -2,13 +2,14 @@
 id: lem-the-simplicial-augmentation-is-a-chain-map
 kind: lemma
 title: "The simplicial augmentation is a chain map"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-augmentation-and-reduced-simplicial-homology, def-simplicial-chain-groups-and-boundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

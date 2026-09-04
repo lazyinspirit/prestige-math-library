@@ -2,7 +2,7 @@
 id: cex-an-infinite-dimensional-vector-space-has-no-dual-object
 kind: counterexample
 title: "An infinite-dimensional vector space has no dual object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-not-every-monoidal-category-is-rigid]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

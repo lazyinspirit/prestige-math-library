@@ -2,7 +2,7 @@
 id: lem-laws-commute-with-measurable-maps
 kind: lemma
 title: "Laws commute with measurable maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-law-or-distribution-of-a-random-element, lem-law-of-a-random-element-is-a-probability-measure, thm-composition-with-borel-functions-preserves-measurability]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

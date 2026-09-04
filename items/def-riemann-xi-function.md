@@ -2,13 +2,14 @@
 id: def-riemann-xi-function
 kind: definition
 title: "The Riemann xi function $\\xi(s)=\\tfrac12 s(s-1)\\Lambda(s)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-completed-riemann-zeta-function, thm-completed-riemann-zeta-functional-equation]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

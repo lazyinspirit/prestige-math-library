@@ -2,13 +2,14 @@
 id: rem-general-inequalities-restrict-to-the-published-finite-ones
 kind: remark
 title: "The general inequalities compare cleanly with the published finite ones"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [cor-markov-inequality-for-random-variables, cor-chebyshev-inequality-for-random-variables, cor-cauchy-schwarz-for-random-variables, cor-second-moment-positive-probability-bound, thm-markov-inequality, thm-chebyshev-inequality, lem-cauchy-schwarz-for-finite-random-variables, thm-finite-second-moment-lower-bound]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   references:

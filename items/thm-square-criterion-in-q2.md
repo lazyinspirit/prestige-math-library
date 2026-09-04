@@ -2,7 +2,7 @@
 id: thm-square-criterion-in-q2
 kind: theorem
 title: "Square criterion in Q_2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-zp-is-the-valuation-ring-of-qp, thm-p-adic-newton-criterion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

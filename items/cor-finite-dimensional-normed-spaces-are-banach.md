@@ -2,7 +2,7 @@
 id: cor-finite-dimensional-normed-spaces-are-banach
 kind: corollary
 title: "Every finite-dimensional normed space is Banach"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

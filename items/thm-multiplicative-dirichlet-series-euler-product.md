@@ -2,7 +2,7 @@
 id: thm-multiplicative-dirichlet-series-euler-product
 kind: theorem
 title: "A multiplicative Dirichlet series factors as an Euler product on its absolute half-plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dirichlet-series-multiplication-convolution, def-multiplicative-arithmetic-function, thm-fundamental-theorem-of-arithmetic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

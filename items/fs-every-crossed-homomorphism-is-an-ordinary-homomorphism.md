@@ -2,7 +2,7 @@
 id: fs-every-crossed-homomorphism-is-an-ordinary-homomorphism
 kind: false-statement
 title: "FALSE: every crossed homomorphism is an ordinary homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-crossed-homomorphism-for-a-g-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions
 kind: lemma
 title: "A morphism has a comparison extension between the supplied injective resolutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-supplied-injective-resolution-datum, thm-injective-comparison-map-exists]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-the-generating-vector-field-is-invariant-under-its-flow
 kind: proposition
 title: "The generating vector field is invariant under its own flow"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

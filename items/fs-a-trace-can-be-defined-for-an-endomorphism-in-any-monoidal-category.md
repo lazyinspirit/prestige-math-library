@@ -2,7 +2,7 @@
 id: fs-a-trace-can-be-defined-for-an-endomorphism-in-any-monoidal-category
 kind: false-statement
 title: "FALSE: a trace can be defined for an endomorphism in any monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-what-is-needed-before-a-trace-can-be-written, def-pivotal-structure]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

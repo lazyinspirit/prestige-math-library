@@ -2,7 +2,7 @@
 id: ex-bertrand-chord-paradox-is-a-model-specification-problem
 kind: example
 title: "Bertrand's chord paradox is a model-specification problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-probability-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

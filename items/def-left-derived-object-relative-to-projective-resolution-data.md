@@ -2,13 +2,14 @@
 id: def-left-derived-object-relative-to-projective-resolution-data
 kind: definition
 title: "Left derived objects relative to supplied projective resolution data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-supplied-projective-resolution-datum, def-additive-functor, def-deleted-resolution, def-homology-object-of-a-chain-complex, prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

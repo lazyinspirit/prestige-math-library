@@ -2,7 +2,7 @@
 id: thm-topological-characterisation-of-pro-p-groups
 kind: theorem
 title: "A topological group is pro-p exactly when it is profinite and has an open normal basis with finite p-group quotients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-pro-p-group, def-profinite-group-by-inverse-limit, lem-kernels-of-finite-projections-form-an-open-normal-neighbourhood-basis]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

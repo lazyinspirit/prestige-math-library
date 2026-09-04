@@ -2,7 +2,7 @@
 id: thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane
 kind: theorem
 title: "The Riemann zeta function has no zeros on the closed half-plane $\\operatorname{Re}s\\ge1$, except for its pole at $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one, thm-riemann-zeta-continuation-to-the-right-half-plane, thm-euler-product-for-riemann-zeta]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

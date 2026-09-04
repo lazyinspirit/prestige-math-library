@@ -2,7 +2,7 @@
 id: ex-an-infinite-separated-subset-of-the-unit-sphere
 kind: example
 title: "An infinite separated subset of the unit sphere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

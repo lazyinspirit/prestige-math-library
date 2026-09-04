@@ -2,7 +2,7 @@
 id: def-riemann-zeta-function
 kind: definition
 title: "The Riemann zeta function on the half-plane $\\operatorname{Re}s>1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-complex-exponential, def-natural-logarithm]
 justified_by: [lem-riemann-zeta-dirichlet-series-converges-locally-uniformly]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

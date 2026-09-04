@@ -2,13 +2,14 @@
 id: thm-sheaf-equalizer-condition
 kind: theorem
 title: "The sheaf axiom is the equalizer condition on a cover"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheaf-on-topological-space, def-section-restriction-and-global-section, def-equalizers-and-coequalizers]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-germs-of-continuous-functions
 kind: example
 title: "Distinct continuous functions can share one germ, but equal germs everywhere force equality"
-status: draft
+status: published
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -11,6 +11,7 @@ generation:
 deps: [def-germ-of-section, lem-morphisms-of-sheaves-determined-by-stalks]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

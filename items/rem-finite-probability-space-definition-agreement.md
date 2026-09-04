@@ -2,13 +2,14 @@
 id: rem-finite-probability-space-definition-agreement
 kind: remark
 title: "Agreement with the published finite probability-space definition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces, def-finite-probability-space-and-event]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

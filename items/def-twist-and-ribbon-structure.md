@@ -2,7 +2,7 @@
 id: def-twist-and-ribbon-structure
 kind: definition
 title: "Twist and ribbon structure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-braiding, def-rigid-object-and-rigid-monoidal-category, def-the-dual-of-a-morphism]
 landmark: true
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: space-complexity-savitch-and-tqbf-examples
 title: "Space Complexity, Savitch's Theorem, and TQBF: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-bounded-reachability-recursion-is-correct

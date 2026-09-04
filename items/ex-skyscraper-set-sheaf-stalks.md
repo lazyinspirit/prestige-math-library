@@ -2,13 +2,14 @@
 id: ex-skyscraper-set-sheaf-stalks
 kind: example
 title: "A set-valued skyscraper sheaf and its stalks"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-sheaf-on-topological-space, def-stalk-of-presheaf, def-germ-of-section]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: the-riemann-zeta-function
 title: "The Riemann Zeta Function"
-status: draft
+status: published
 items: [lem-riemann-zeta-dirichlet-series-converges-locally-uniformly,
         def-riemann-zeta-function,
         thm-euler-product-for-riemann-zeta,

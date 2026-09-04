@@ -2,7 +2,7 @@
 id: cor-infinite-dimensional-closed-unit-ball-is-not-compact
 kind: corollary
 title: "In an infinite-dimensional normed space the closed unit ball is not compact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

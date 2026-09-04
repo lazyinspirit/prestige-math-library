@@ -2,13 +2,14 @@
 id: def-first-group-cohomology-via-inhomogeneous-one-cocycles
 kind: definition
 title: "First group cohomology via inhomogeneous one-cocycles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-crossed-homomorphism-for-a-g-group, def-cohomology-object-of-a-cochain-complex]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

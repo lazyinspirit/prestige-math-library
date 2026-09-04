@@ -2,7 +2,7 @@
 id: ex-an-acyclic-resolution-that-is-not-an-injective-resolution
 kind: example
 title: "An acyclic resolution that is not an injective resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-f-acyclic-resolution, prop-positive-left-derived-functors-vanish-on-projective-objects, def-projective-object, def-injective-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

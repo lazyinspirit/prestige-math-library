@@ -2,13 +2,14 @@
 id: thm-euler-poincare-formula-for-a-finite-simplicial-complex
 kind: theorem
 title: "The Euler-Poincare formula for a finite simplicial complex with free homology"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-simplicial-euler-characteristic, def-simplicial-cycles-boundaries-and-homology, thm-euler-poincare-formula-for-finite-free-complexes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

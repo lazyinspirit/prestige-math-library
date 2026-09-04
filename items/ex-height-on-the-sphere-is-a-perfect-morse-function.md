@@ -2,7 +2,7 @@
 id: ex-height-on-the-sphere-is-a-perfect-morse-function
 kind: example
 title: "The height function on the sphere is Morse and excellent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct local model
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-probability-law-and-distribution-function-correspondence
 kind: theorem
 title: "Probability laws correspond to distribution functions"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-cumulative-distribution-function-of-a-random-variable, def-law-or-distribution-of-a-random-element, lem-law-of-a-random-element-is-a-probability-measure, thm-lebesgue-stieltjes-correspondence-with-distribution-functions, prop-measure-of-a-set-difference, thm-continuity-from-below-for-measures, thm-continuity-from-above-for-measures, prop-measure-monotonicity]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

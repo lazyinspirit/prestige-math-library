@@ -2,7 +2,7 @@
 id: cor-factor-hensel-implies-simple-root-hensel
 kind: corollary
 title: "Factor lifting implies simple-root lifting"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-henselian-pair-and-henselian-local-ring, lem-simple-root-to-coprime-factorisation, prop-uniqueness-of-hensel-factor-lifting]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

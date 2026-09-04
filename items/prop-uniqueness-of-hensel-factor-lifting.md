@@ -2,7 +2,7 @@
 id: prop-uniqueness-of-hensel-factor-lifting
 kind: proposition
 title: "Lifted coprime factorisations are unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-henselian-pair-and-henselian-local-ring, lem-henselian-pair-ideal-in-jacobson-radical, lem-hensel-factor-lift-uniqueness-induction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

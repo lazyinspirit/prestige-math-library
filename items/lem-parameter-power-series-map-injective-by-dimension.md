@@ -2,7 +2,7 @@
 id: lem-parameter-power-series-map-injective-by-dimension
 kind: lemma
 title: "The parameter power-series map is injective by dimension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-parameter-power-series-subring-makes-ring-finite, def-system-of-parameters-and-parameter-ideal, thm-dimension-as-minimal-number-of-radical-generators, lem-integral-extension-chain-contraction-is-strict, def-dependent-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

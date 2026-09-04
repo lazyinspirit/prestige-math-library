@@ -2,7 +2,7 @@
 id: cor-idempotents-lift-uniquely-in-a-henselian-pair
 kind: corollary
 title: "Idempotents lift uniquely in a Henselian pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-henselian-pair-and-henselian-local-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-morse-lemma
 kind: theorem
 title: "Morse lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: dimension induction
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

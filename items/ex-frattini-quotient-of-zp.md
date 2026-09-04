@@ -2,7 +2,7 @@
 id: ex-frattini-quotient-of-zp
 kind: example
 title: "The Frattini quotient of Zp is the one-dimensional vector space Fp"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-frattini-formula-for-finitely-generated-pro-p-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

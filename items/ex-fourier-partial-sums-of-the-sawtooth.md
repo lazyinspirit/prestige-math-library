@@ -2,7 +2,7 @@
 id: ex-fourier-partial-sums-of-the-sawtooth
 kind: example
 title: "Fourier partial sums of the sawtooth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution, thm-dirichlet-jordan-pointwise-convergence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

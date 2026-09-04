@@ -2,7 +2,7 @@
 id: cor-a-finite-p-group-has-only-the-trivial-simple-module-in-characteristic-p
 kind: corollary
 title: "A finite p-group has only the trivial simple module over a field of characteristic p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-kg-is-local-iff-g-is-a-p-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

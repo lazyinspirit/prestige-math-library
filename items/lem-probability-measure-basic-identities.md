@@ -2,7 +2,7 @@
 id: lem-probability-measure-basic-identities
 kind: lemma
 title: "Basic identities for a probability measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-probability-measure, prop-measure-monotonicity, prop-measure-of-a-set-difference, thm-finite-and-countable-subadditivity-of-measures, thm-continuity-from-below-for-measures, thm-continuity-from-above-for-measures, thm-finite-inclusion-exclusion-for-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: thm-differentiation-of-borel-measures-finite-on-compact-sets-on-r-n
 kind: theorem
 title: "Differentiation of sigma-finite Borel measures finite on compact sets"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-countable-choice, def-radon-nikodym-derivative, thm-continuity-from-below-for-measures, thm-differentiation-along-families-shrinking-nicely, thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures, thm-lebesgue-inner-regularity-by-closed-and-compact-sets, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-vitali-covering-lemma-for-balls-with-fivefold-dilates]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

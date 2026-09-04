@@ -2,7 +2,7 @@
 id: thm-riemann-xi-is-entire-of-order-one
 kind: theorem
 title: "The Riemann xi function is entire of order one, real on the real axis, and symmetric under $s\\mapsto1-s$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemann-xi-function, thm-riemann-zeta-meromorphic-continuation, thm-completed-riemann-zeta-functional-equation, thm-stirling-formula-gamma, def-riemann-zeta-function]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

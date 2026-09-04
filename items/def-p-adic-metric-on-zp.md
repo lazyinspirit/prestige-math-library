@@ -2,13 +2,14 @@
 id: def-p-adic-metric-on-zp
 kind: definition
 title: "The p-adic metric on Zp is determined by the first coordinate at which two compatible residue systems differ"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-p-adic-integers-as-compatible-residue-classes]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

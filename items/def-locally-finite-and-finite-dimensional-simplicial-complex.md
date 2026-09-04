@@ -2,12 +2,13 @@
 id: def-locally-finite-and-finite-dimensional-simplicial-complex
 kind: definition
 title: "Local finiteness, finiteness, and finite dimensionality of a simplicial complex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-abstract-simplicial-complex]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

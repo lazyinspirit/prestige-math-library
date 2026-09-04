@@ -2,13 +2,14 @@
 id: lem-induced-simplicial-chain-maps-commute-with-boundaries
 kind: lemma
 title: "Induced simplicial chain maps commute with boundaries"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-induced-simplicial-chain-map, lem-simplicial-boundary-is-independent-of-oriented-representative]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

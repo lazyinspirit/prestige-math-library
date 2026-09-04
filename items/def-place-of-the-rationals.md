@@ -2,13 +2,14 @@
 id: def-place-of-the-rationals
 kind: definition
 title: "Places of the rationals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-ostrowskis-theorem-for-the-rationals]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

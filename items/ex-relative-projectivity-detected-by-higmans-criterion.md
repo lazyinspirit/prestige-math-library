@@ -2,7 +2,7 @@
 id: ex-relative-projectivity-detected-by-higmans-criterion
 kind: example
 title: "A permutation-induced summand is detected as relatively projective by Higman's criterion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-higman-criterion-for-relative-projectivity]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

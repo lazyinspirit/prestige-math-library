@@ -2,7 +2,7 @@
 id: thm-inflation-restriction-exact-sequence-in-degree-one
 kind: theorem
 title: "Inflation-restriction exact sequence in degree one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one, def-restriction-inflation-and-the-quotient-conjugation-action-on-first-cohomology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

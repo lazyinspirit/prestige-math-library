@@ -2,7 +2,7 @@
 id: cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor
 kind: counterexample
 title: "L_0 of a non-right-exact functor need not recover the functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself, thm-hom-is-left-exact-in-each-variable, thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor, def-left-derived-object-relative-to-projective-resolution-data]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

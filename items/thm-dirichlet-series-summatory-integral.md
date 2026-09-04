@@ -2,7 +2,7 @@
 id: thm-dirichlet-series-summatory-integral
 kind: theorem
 title: "Dirichlet series from arithmetic functions admit the Abel-summation integral formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirichlet-series, lem-abel-summation-for-complex-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

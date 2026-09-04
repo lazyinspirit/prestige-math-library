@@ -2,7 +2,7 @@
 id: fs-a-braiding-suffices-to-define-a-trace
 kind: false-statement
 title: "FALSE: a braiding suffices to define a trace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-what-is-needed-before-a-trace-can-be-written, cex-not-every-monoidal-category-is-rigid]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

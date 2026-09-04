@@ -2,13 +2,14 @@
 id: def-equicharacteristic-local-ring-and-coefficient-field
 kind: definition
 title: "Equicharacteristic local rings and coefficient fields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-local-ring, def-field]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-zp-is-a-torsion-group-because-all-its-coordinate-groups-are-finite
 kind: false-statement
 title: "Because every coordinate group is finite, Zp is an additive torsion group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-additive-group-of-zp-is-torsion-free]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

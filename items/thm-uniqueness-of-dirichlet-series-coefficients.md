@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-dirichlet-series-coefficients
 kind: theorem
 title: "A Dirichlet series with absolute convergence on a right half-plane is determined there by its coefficients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirichlet-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-extensions-with-coprime-kernel-and-quotient-split
 kind: corollary
 title: "Extensions with coprime kernel and quotient split"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-kernel-subgroup-in-a-group-extension-is-normal-and-the-quotient-is-the-base, thm-schur-zassenhaus-existence, thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

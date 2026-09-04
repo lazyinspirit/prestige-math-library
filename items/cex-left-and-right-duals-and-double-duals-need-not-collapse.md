@@ -2,7 +2,7 @@
 id: cex-left-and-right-duals-and-double-duals-need-not-collapse
 kind: counterexample
 title: "Left and right duals, and double duals, need not collapse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-double-dual-is-a-monoidal-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

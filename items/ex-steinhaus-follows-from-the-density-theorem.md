@@ -2,7 +2,7 @@
 id: ex-steinhaus-follows-from-the-density-theorem
 kind: example
 title: "Steinhaus follows in two lines from the density theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-countable-choice, thm-lebesgue-density-theorem, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, thm-lebesgue-measure-under-dilations-and-reflections]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

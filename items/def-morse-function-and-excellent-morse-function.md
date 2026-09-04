@@ -2,7 +2,7 @@
 id: def-morse-function-and-excellent-morse-function
 kind: definition
 title: "Morse functions and excellent Morse functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

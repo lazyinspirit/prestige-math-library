@@ -2,7 +2,7 @@
 id: cor-markov-inequality-for-random-variables
 kind: corollary
 title: "Markov's inequality for random variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable, thm-chebyshev-markov-inequality-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

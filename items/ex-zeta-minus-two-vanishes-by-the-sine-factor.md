@@ -2,7 +2,7 @@
 id: ex-zeta-minus-two-vanishes-by-the-sine-factor
 kind: example
 title: "The functional equation shows that $\\zeta(-2)=0$ through the sine factor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-trivial-zeros-and-critical-strip]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

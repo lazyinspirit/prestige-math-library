@@ -2,7 +2,7 @@
 id: ex-zeta-four-equals-pi-to-the-four-over-ninety
 kind: example
 title: "The special-value formula gives $\\zeta(4)=\\pi^4/90$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-special-values-of-riemann-zeta-at-integers, def-bernoulli-numbers-by-their-generating-function]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

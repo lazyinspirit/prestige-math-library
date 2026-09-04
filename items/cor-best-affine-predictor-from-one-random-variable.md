@@ -2,7 +2,7 @@
 id: cor-best-affine-predictor-from-one-random-variable
 kind: corollary
 title: "Best affine prediction from one random variable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-normal-equations-for-best-affine-l2-prediction, def-moments-variance-and-covariance]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

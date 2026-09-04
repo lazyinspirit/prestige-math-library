@@ -2,7 +2,7 @@
 id: thm-fundamental-theorem-on-flows
 kind: theorem
 title: "The fundamental theorem on flows"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-an-ordinary-irreducible-with-reducible-mod-p-reduction
 kind: counterexample
 title: "An ordinary irreducible representation can have reducible reduction modulo p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-og-lattice-and-reduction-modulo-the-maximal-ideal, rem-maschke-failure-in-defining-characteristic, ex-reducing-an-integral-lattice-for-s-three]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

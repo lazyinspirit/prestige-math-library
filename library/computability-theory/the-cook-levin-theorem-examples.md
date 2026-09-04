@@ -1,7 +1,7 @@
 ---
 page: the-cook-levin-theorem-examples
 title: "The Cook--Levin Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-tableau-cell-alphabet-is-constant

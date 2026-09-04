@@ -2,7 +2,7 @@
 id: thm-normal-equations-for-best-affine-l2-prediction
 kind: theorem
 title: "Normal equations for best affine $L^2$ prediction"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-moments-variance-and-covariance, lem-variance-and-covariance-identities-for-random-variables, cor-cauchy-schwarz-for-random-variables, def-l-p-space-as-a-quotient-by-null-functions, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, thm-orthogonal-projection-is-the-unique-nearest-point, thm-nonnegative-integral-zero-iff-zero-almost-everywhere]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

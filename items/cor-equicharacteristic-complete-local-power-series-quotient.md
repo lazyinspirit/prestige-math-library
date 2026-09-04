@@ -2,7 +2,7 @@
 id: cor-equicharacteristic-complete-local-power-series-quotient
 kind: corollary
 title: "A complete equicharacteristic Noetherian local ring is a power-series quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-equicharacteristic-complete-local-ring-has-coefficient-field, lem-cohen-presentation-surjective-by-completeness]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

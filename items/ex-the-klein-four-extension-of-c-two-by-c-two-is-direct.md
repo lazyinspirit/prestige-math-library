@@ -2,7 +2,7 @@
 id: ex-the-klein-four-extension-of-c-two-by-c-two-is-direct
 kind: example
 title: "The split extension C_2 × C_2 of C_2 by C_2 is direct"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-a-split-extension-is-direct-product-iff-its-complement-centralizes-the-kernel, def-external-direct-product-of-groups, thm-external-direct-product-is-a-group, thm-classification-of-cyclic-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-retraction-of-the-kernel-in-a-group-extension
 kind: definition
 title: "A retraction of the kernel in a group extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-group-homomorphism, def-split-extension-of-groups]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

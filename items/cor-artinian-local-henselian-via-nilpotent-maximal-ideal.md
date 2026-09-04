@@ -2,7 +2,7 @@
 id: cor-artinian-local-henselian-via-nilpotent-maximal-ideal
 kind: corollary
 title: "Artinian local rings are Henselian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-nilpotent-ideal-pair-is-henselian, thm-artinian-local-ring-has-nilpotent-maximal-ideal]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

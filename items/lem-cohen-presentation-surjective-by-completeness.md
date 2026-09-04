@@ -2,7 +2,7 @@
 id: lem-cohen-presentation-surjective-by-completeness
 kind: lemma
 title: "The Cohen map is surjective by completeness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-formal-power-series-evaluation-converges, lem-cohen-presentation-surjective-mod-maximal-square]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

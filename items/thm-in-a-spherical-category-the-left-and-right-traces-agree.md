@@ -2,7 +2,7 @@
 id: thm-in-a-spherical-category-the-left-and-right-traces-agree
 kind: theorem
 title: "In a spherical category the left and right traces agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-spherical-structure, def-pivotal-structure, def-the-categorical-trace
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

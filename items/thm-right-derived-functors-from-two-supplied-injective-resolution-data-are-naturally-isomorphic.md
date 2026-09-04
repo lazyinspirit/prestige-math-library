@@ -2,7 +2,7 @@
 id: thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic
 kind: theorem
 title: "Two supplied injective resolution data define naturally isomorphic right derived functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-right-derived-functors-relative-to-supplied-data-are-additive-functors, lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions, thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object, thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy, def-cochain-complex-in-an-abelian-category, thm-chain-homotopic-maps-induce-the-same-map-on-homology, prop-homology-respects-identities-and-composition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

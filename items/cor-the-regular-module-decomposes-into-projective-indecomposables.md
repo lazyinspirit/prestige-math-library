@@ -2,7 +2,7 @@
 id: cor-the-regular-module-decomposes-into-projective-indecomposables
 kind: corollary
 title: "The regular module is a direct sum of the projective covers of the simple modules, with the split-field multiplicities"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules, thm-krull-schmidt-for-finite-dimensional-kg-modules, prop-group-algebra-in-defining-characteristic-is-a-symmetric-frobenius-algebra, thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple, def-splitting-field-for-a-finite-group, thm-wedderburn-artin-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

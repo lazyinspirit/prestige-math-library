@@ -2,13 +2,14 @@
 id: lem-geometric-simplices-intersect-in-the-realization-of-their-common-face
 kind: lemma
 title: "Geometric simplices intersect in the realization of their common face"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-geometric-realization-of-an-abstract-simplicial-complex, lem-barycentric-coordinates-are-unique]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

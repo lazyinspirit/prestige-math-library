@@ -2,13 +2,14 @@
 id: def-centered-and-uncentered-hardy-littlewood-maximal-functions
 kind: definition
 title: "The centered and uncentered Hardy-Littlewood maximal functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-countable-choice, def-ball-average-operator-on-r-n]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

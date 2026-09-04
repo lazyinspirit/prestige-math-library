@@ -2,7 +2,7 @@
 id: fs-an-acyclic-resolution-is-the-same-thing-as-an-injective-resolution
 kind: false-statement
 title: "FALSE: an acyclic resolution is the same thing as an injective resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-f-acyclic-resolution, prop-an-exact-functor-has-vanishing-positive-derived-functors, def-injective-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

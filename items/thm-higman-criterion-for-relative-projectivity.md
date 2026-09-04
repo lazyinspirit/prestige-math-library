@@ -2,7 +2,7 @@
 id: thm-higman-criterion-for-relative-projectivity
 kind: theorem
 title: "Higman's criterion characterizes relative projectivity through the relative trace idempotent test"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-relative-projectivity, thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules, prop-induced-module-decomposes-over-a-left-transversal]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

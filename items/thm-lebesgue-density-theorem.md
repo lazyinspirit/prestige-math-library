@@ -2,7 +2,7 @@
 id: thm-lebesgue-density-theorem
 kind: theorem
 title: "Lebesgue density theorem"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-countable-choice, def-density-of-a-measurable-set-at-a-point, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-almost-every-point-is-a-lebesgue-point, lem-euclidean-balls-have-positive-finite-lebesgue-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

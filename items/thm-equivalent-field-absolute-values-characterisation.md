@@ -2,7 +2,7 @@
 id: thm-equivalent-field-absolute-values-characterisation
 kind: theorem
 title: "Two nontrivial absolute values induce the same topology exactly when one is a positive power of the other"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-multiplicative-absolute-value-on-a-field, def-equivalent-field-absolute-values, def-natural-logarithm]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

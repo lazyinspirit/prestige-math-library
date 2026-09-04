@@ -2,12 +2,13 @@
 id: def-augmentation-and-reduced-simplicial-homology
 kind: definition
 title: "Augmentation and reduced simplicial homology"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-simplicial-chain-groups-and-boundary, def-homology-object-of-a-chain-complex]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

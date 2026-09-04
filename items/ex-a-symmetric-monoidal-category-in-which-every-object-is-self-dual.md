@@ -2,7 +2,7 @@
 id: ex-a-symmetric-monoidal-category-in-which-every-object-is-self-dual
 kind: example
 title: "A symmetric monoidal category in which every object is self-dual"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-finite-dimensional-vector-spaces-are-rigid, thm-dual-family-is-a-basis-in-finite-dimension, cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

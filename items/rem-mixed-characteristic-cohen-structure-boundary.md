@@ -2,7 +2,7 @@
 id: rem-mixed-characteristic-cohen-structure-boundary
 kind: remark
 title: "Mixed-characteristic Cohen structure remains a cited boundary"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -10,6 +10,11 @@ provenance:
   proof: not-applicable
 deps: [cor-equicharacteristic-complete-local-power-series-quotient]
 verification:
+  audited: 2026-09-04
+  sources_checked:
+    date: 2026-09-04
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

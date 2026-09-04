@@ -2,7 +2,7 @@
 id: lem-coefficient-field-transcendental-adjunction-step
 kind: lemma
 title: "Transcendental residue elements adjoin across a maximal subfield"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-maximal-residue-injective-subfield, def-equicharacteristic-local-ring-and-coefficient-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

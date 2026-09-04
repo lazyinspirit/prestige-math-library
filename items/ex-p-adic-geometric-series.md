@@ -2,7 +2,7 @@
 id: ex-p-adic-geometric-series
 kind: example
 title: "A geometric series that is p-adically convergent and really divergent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-adic-absolute-value-on-the-rationals, thm-p-adic-completion-is-a-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

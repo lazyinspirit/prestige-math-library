@@ -2,7 +2,7 @@
 id: lem-simple-root-to-coprime-factorisation
 kind: lemma
 title: "A simple residue root determines a coprime residue factorisation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-polynomial-ring-over-a-commutative-ring, thm-z-mod-p-is-a-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-zp-is-compact-hausdorff-totally-disconnected-and-complete
 kind: theorem
 title: "Zp is Hausdorff, totally disconnected, and complete, and compact assuming Choice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-inverse-limit-topology-equals-the-p-adic-metric-topology, thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected, lem-coordinatewise-addition-and-negation-make-zp-a-topological-abelian-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-countable-probability-space-with-geometric-weights
 kind: example
 title: "A countable probability space with geometric weights"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-probability-measure, def-random-element-and-real-random-variable, def-law-or-distribution-of-a-random-element, thm-change-of-variables-for-expectation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

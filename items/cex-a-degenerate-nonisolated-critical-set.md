@@ -2,7 +2,7 @@
 id: cex-a-degenerate-nonisolated-critical-set
 kind: counterexample
 title: "A degenerate critical set can be nonisolated"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct computation
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: prop-simplicial-homology-is-functorial
 kind: proposition
 title: "Simplicial homology is functorial"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-induced-simplicial-chain-map, lem-induced-simplicial-chain-maps-commute-with-boundaries, prop-homology-respects-identities-and-composition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-every-vector-field-can-be-pushed-forward-by-every-smooth-map
 kind: false-statement
 title: "FALSE: every smooth vector field can be pushed forward by every smooth map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

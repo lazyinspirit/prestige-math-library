@@ -1,7 +1,7 @@
 ---
 page: absolute-values-completions-and-p-adic-numbers
 title: "Absolute Values Completions and P Adic Numbers"
-status: draft
+status: published
 items: [def-multiplicative-absolute-value-on-a-field,
         lem-nonarchimedean-absolute-value-criterion,
         def-equivalent-field-absolute-values,

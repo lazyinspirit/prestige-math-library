@@ -2,7 +2,7 @@
 id: thm-closed-unit-ball-compact-iff-finite-dimensional
 kind: theorem
 title: "The closed unit ball is compact if and only if the normed space is finite-dimensional"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

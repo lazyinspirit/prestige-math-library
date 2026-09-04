@@ -2,7 +2,7 @@
 id: cor-divisor-dirichlet-series-zeta-square
 kind: corollary
 title: "The divisor-counting Dirichlet series is the square of the zeta Dirichlet series on Re s greater than 1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-divisor-counting-function, thm-dirichlet-series-multiplication-convolution, prop-divisor-functions-under-dirichlet-convolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

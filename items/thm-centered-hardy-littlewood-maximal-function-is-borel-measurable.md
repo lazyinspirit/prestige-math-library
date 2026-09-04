@@ -2,7 +2,7 @@
 id: thm-centered-hardy-littlewood-maximal-function-is-borel-measurable
 kind: theorem
 title: "The centered Hardy-Littlewood maximal function is Borel measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-centered-and-uncentered-hardy-littlewood-maximal-functions, def-countable-choice, prop-ball-average-is-continuous-in-centre-and-radius]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-euler-totient-dirichlet-series
 kind: corollary
 title: "The Dirichlet series of Euler's totient is zeta of s minus 1 divided by zeta of s on Re s greater than 2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-unit-group-modulo-n-and-euler-totient, thm-dirichlet-series-multiplication-convolution, cor-classical-mobius-inversion, thm-sum-of-totients-over-divisors, def-divisor-power-sum-functions, cor-mobius-dirichlet-series-reciprocal-zeta, thm-p-series-rational]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

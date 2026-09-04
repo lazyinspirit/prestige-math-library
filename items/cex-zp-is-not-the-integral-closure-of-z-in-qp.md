@@ -2,7 +2,7 @@
 id: cex-zp-is-not-the-integral-closure-of-z-in-qp
 kind: counterexample
 title: "Z_p is not the integral closure of Z in Q_p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-p-adic-completion-agrees-with-the-fraction-field-of-zp, cor-zp-is-the-valuation-ring-of-qp, thm-p-adic-digit-expansion, def-integral-element-and-algebraic-integer]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

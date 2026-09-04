@@ -2,7 +2,7 @@
 id: ex-expectation-under-a-measurable-transformation
 kind: example
 title: "Expectation under a measurable transformation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-change-of-variables-for-expectation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

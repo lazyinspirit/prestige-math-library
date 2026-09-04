@@ -2,7 +2,7 @@
 id: ex-p-adic-hensel-lifting-a-simple-root
 kind: example
 title: "Hensel lifting a simple root of X squared minus 2 in Z_7"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-p-adic-simple-root-lifting, thm-p-adic-newton-criterion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

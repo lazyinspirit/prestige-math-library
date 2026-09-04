@@ -1,7 +1,7 @@
 ---
 page: vector-fields-flows-and-lie-derivatives-examples
 title: "Vector Fields Flows and Lie Derivatives: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-constant-vector-fields-and-translation-flows,
            ex-the-radial-vector-field-and-dilation-flow,

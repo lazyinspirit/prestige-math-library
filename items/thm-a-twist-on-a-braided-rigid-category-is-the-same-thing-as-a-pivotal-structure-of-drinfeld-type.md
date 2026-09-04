@@ -2,7 +2,7 @@
 id: thm-a-twist-on-a-braided-rigid-category-is-the-same-thing-as-a-pivotal-structure-of-drinfeld-type
 kind: theorem
 title: "A twist on a braided rigid category is the same thing as a pivotal structure of Drinfeld type"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-a-braided-rigid-category-has-a-drinfeld-morphism, def-pivotal-structu
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

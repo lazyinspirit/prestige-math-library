@@ -2,7 +2,7 @@
 id: thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent
 kind: theorem
 title: "All norms on a finite-dimensional complex normed space are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

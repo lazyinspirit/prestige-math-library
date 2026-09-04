@@ -2,7 +2,7 @@
 id: fs-first-cohomology-classifies-all-subgroups-of-a-semidirect-product
 kind: false-statement
 title: "FALSE: first cohomology classifies all subgroups of a semidirect product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

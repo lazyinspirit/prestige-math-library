@@ -2,7 +2,7 @@
 id: thm-left-derived-functors-relative-to-supplied-data-are-additive-functors
 kind: theorem
 title: "Left derived functors relative to supplied data are additive functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-left-derived-map-relative-to-resolution-data, prop-left-derived-maps-
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: crossed-homomorphisms-complements-and-first-cohomology-examples
 title: "Crossed Homomorphisms Complements and First Cohomology — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-first-cohomology-of-c-two-with-trivial-action-on-c-three-is-zero,
   ex-crossed-homomorphisms-from-a-cyclic-group-are-determined-by-a-generator,

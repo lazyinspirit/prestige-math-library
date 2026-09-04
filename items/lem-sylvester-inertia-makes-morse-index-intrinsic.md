@@ -2,7 +2,7 @@
 id: lem-sylvester-inertia-makes-morse-index-intrinsic
 kind: lemma
 title: "Sylvester inertia makes the Morse index intrinsic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: congruence invariance
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

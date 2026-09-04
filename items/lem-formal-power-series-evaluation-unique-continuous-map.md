@@ -2,7 +2,7 @@
 id: lem-formal-power-series-evaluation-unique-continuous-map
 kind: lemma
 title: "Formal power-series substitution is the unique continuous k-algebra map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-formal-power-series-evaluation-converges]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

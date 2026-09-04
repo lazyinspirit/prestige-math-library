@@ -2,13 +2,14 @@
 id: def-abstract-kernel-and-the-general-extension-problem
 kind: definition
 title: "Abstract kernels and the general extension problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-an-extension-induces-a-well-defined-outer-action-on-the-kernel]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

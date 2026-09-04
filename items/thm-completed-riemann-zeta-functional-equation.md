@@ -2,7 +2,7 @@
 id: thm-completed-riemann-zeta-functional-equation
 kind: theorem
 title: "The completed zeta function satisfies $\\Lambda(s)=\\Lambda(1-s)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-completed-riemann-zeta-function, thm-jacobi-theta-transformation, thm-theta-mellin-representation-of-completed-zeta, thm-riemann-zeta-meromorphic-continuation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

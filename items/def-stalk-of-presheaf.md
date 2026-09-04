@@ -2,13 +2,14 @@
 id: def-stalk-of-presheaf
 kind: definition
 title: "The stalk of a presheaf at a point"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-on-topological-space, def-neighbourhood-top, def-filtered-category-and-filtered-colimit]
 justified_by: [lem-germ-equivalence-relation]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

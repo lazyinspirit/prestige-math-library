@@ -2,7 +2,7 @@
 id: prop-the-flow-of-a-vector-field-tangent-to-a-closed-embedded-submanifold-preserves-it
 kind: proposition
 title: "The flow of a vector field tangent to a closed embedded submanifold preserves it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

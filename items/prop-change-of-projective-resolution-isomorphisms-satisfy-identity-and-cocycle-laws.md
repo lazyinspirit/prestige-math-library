@@ -2,7 +2,7 @@
 id: prop-change-of-projective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws
 kind: proposition
 title: "Change-of-projective-resolution isomorphisms satisfy identity and cocycle laws"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic, lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects, lem-the-change-of-projective-resolution-isomorphisms-are-natural, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy, thm-chain-homotopic-maps-induce-the-same-map-on-homology, prop-homology-respects-identities-and-composition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

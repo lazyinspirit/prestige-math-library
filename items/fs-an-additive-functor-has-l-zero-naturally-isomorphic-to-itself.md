@@ -2,7 +2,7 @@
 id: fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself
 kind: false-statement
 title: "FALSE: every additive functor has L_0 naturally isomorphic to itself"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor, def-left-derived-object-relative-to-projective-resolution-data, def-additive-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-local-extrema-and-saddles-from-the-morse-index
 kind: corollary
 title: "The Morse index detects local extrema and saddles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: normal form reading
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

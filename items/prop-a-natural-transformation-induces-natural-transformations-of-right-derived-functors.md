@@ -2,7 +2,7 @@
 id: prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors
 kind: proposition
 title: "A natural transformation induces natural transformations of right derived functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-right-derived-functors-relative-to-supplied-data-are-additive-functors, def-natural-transformation, def-cochain-complex-in-an-abelian-category, prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps, thm-a-chain-map-induces-a-well-defined-map-on-homology, def-right-derived-map-relative-to-resolution-data]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

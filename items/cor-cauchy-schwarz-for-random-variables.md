@@ -2,7 +2,7 @@
 id: cor-cauchy-schwarz-for-random-variables
 kind: corollary
 title: "Cauchy-Schwarz for random variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-holder-inequality-for-random-variables, cor-cauchy-schwarz-inequality-for-l-two]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-cohen-presentation-surjective-mod-maximal-square
 kind: lemma
 title: "The Cohen map is surjective modulo every power of the maximal ideal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-formal-power-series-evaluation-unique-continuous-map, cor-nakayama-generators-modulo-an-ideal, thm-noetherian-ring-ideal-characterisations]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-isomorphic-middle-groups-force-equivalent-group-extensions
 kind: false-statement
 title: "FALSE: isomorphic middle groups force equivalent extensions with fixed kernel and quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-riemann-zeta-is-given-by-its-dirichlet-series-for-all-s-not-one
 kind: false-statement
 title: "FALSE: zeta is given by the same Dirichlet series for every complex $s$ other than $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-the-eta-series-represents-the-continuation-where-the-dirichlet-series-diverges, cex-the-harmonic-series-shows-the-defining-series-diverges-at-one]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: cor-index-and-coindex-swap-under-negation
 kind: corollary
 title: "Index and coindex swap under negation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct sign reversal
+verification:
+  audited: 2026-09-04
 sources:
   scraped: []
   references:

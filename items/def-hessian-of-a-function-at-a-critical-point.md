@@ -2,7 +2,7 @@
 id: def-hessian-of-a-function-at-a-critical-point
 kind: definition
 title: "The intrinsic Hessian of a smooth function at a critical point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-coordinate-change-congruence-for-the-critical-hessian]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

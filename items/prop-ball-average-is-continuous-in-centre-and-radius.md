@@ -2,7 +2,7 @@
 id: prop-ball-average-is-continuous-in-centre-and-radius
 kind: proposition
 title: "Ball averages vary continuously with the centre and radius"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ball-average-operator-on-r-n, def-countable-choice, thm-dominated-convergence, lem-euclidean-balls-have-positive-finite-lebesgue-measure, thm-lebesgue-measure-under-dilations-and-reflections]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

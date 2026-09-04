@@ -2,12 +2,13 @@
 id: def-sheafification
 kind: definition
 title: "Sheafification of a presheaf"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-plus-construction, lem-second-plus-construction-is-sheaf]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: space-complexity-savitch-and-tqbf
 title: "Space Complexity, Savitch's Theorem, and TQBF"
-status: draft
+status: published
 items:
   - def-pspace-and-npspace
   - lem-space-bounded-machines-have-exponentially-many-configurations

@@ -2,7 +2,7 @@
 id: lem-reduction-of-an-og-lattice-is-a-finite-dimensional-kg-module
 kind: lemma
 title: "Reducing an OG-lattice modulo the maximal ideal gives a finite-dimensional kG-module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-og-lattice-and-reduction-modulo-the-maximal-ideal]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

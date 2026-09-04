@@ -2,7 +2,7 @@
 id: ex-kernel-conjugate-complements-differ-by-a-principal-crossed-homomorphism
 kind: example
 title: "Kernel-conjugate complements differ by a principal crossed homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-kernel-conjugation-by-an-element-of-the-coefficient-group-corresponds-to-a-principal-crossed-homomorphism, thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy, def-external-semidirect-product]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

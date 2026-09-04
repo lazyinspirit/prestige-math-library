@@ -2,7 +2,7 @@
 id: cor-a-second-proof-that-adjoints-are-unique
 kind: corollary
 title: "A second proof that adjoints are unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor, thm-duals-are-unique-up-to-a-unique-compatible-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic
 kind: theorem
 title: "Two supplied projective resolution data define naturally isomorphic left derived functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-left-derived-functors-relative-to-supplied-data-are-additive-functors
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

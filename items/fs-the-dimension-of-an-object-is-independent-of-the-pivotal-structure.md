@@ -2,7 +2,7 @@
 id: fs-the-dimension-of-an-object-is-independent-of-the-pivotal-structure
 kind: false-statement
 title: "FALSE: the dimension of an object is independent of the pivotal structure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-pivotal-and-spherical-structures-vary-by-monoidal-automorphisms-of-the-identity, def-the-dimension-of-an-object-relative-to-a-pivotal-structure, fs-the-left-and-right-traces-always-agree]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

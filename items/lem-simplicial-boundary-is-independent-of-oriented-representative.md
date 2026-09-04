@@ -2,13 +2,14 @@
 id: lem-simplicial-boundary-is-independent-of-oriented-representative
 kind: lemma
 title: "The simplicial boundary is independent of the chosen oriented representative"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-simplicial-chain-groups-and-boundary, lem-an-odd-permutation-reverses-oriented-simplex-sign]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

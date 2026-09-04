@@ -2,7 +2,7 @@
 id: lem-radical-of-a-finite-length-module-is-superfluous
 kind: lemma
 title: "For a finite-length module, the radical is a superfluous submodule"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-module-radical-socle-head-and-loewy-series, def-composition-series-and-length-of-a-module, thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

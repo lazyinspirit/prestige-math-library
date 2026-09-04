@@ -2,7 +2,7 @@
 id: thm-dirichlet-series-absolute-half-plane-holomorphy
 kind: theorem
 title: "Absolute convergence at one point forces absolute and locally uniform convergence on closed half-planes to the right"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirichlet-series, thm-weierstrass-m-test-for-complex-function-series, thm-weierstrass-convergence-holomorphic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

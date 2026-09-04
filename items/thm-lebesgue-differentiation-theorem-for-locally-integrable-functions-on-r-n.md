@@ -2,7 +2,7 @@
 id: thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n
 kind: theorem
 title: "Lebesgue differentiation theorem on $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-ball-average-operator-on-r-n, def-countable-choice, def-locally-integrable-function-on-r-n, lem-continuous-compactly-supported-functions-differentiate-by-ball-averages, thm-c-c-rn-is-dense-in-l-p-of-rn, thm-chebyshev-markov-inequality-for-the-integral, thm-hardy-littlewood-maximal-inequality-for-balls, thm-countable-union-of-null-is-null]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

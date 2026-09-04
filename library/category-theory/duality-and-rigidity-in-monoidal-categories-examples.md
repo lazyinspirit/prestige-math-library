@@ -1,7 +1,7 @@
 ---
 page: duality-and-rigidity-in-monoidal-categories-examples
 title: "Duality and Rigidity in Monoidal Categories - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-dual-of-a-finite-dimensional-vector-space-as-a-categorical-dual,
            ex-the-zig-zag-identities-checked-in-finite-dimensional-vector-spaces,

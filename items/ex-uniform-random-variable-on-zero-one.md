@@ -2,7 +2,7 @@
 id: ex-uniform-random-variable-on-zero-one
 kind: example
 title: "The uniform random variable on [0,1]"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-probability-measure, def-cumulative-distribution-function-of-a-random-variable, def-expectation-of-a-nonnegative-or-integrable-random-variable, cor-layer-cake-formulas-for-random-variables]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

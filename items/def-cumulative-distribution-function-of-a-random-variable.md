@@ -2,13 +2,14 @@
 id: def-cumulative-distribution-function-of-a-random-variable
 kind: definition
 title: "Cumulative distribution function of a real random variable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-law-or-distribution-of-a-random-element]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: lem-image-sheaf-is-sheafification-presheaf-image
 kind: lemma
 title: "The image sheaf is the sheafification of the presheaf image"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-subsheaf, def-sheafification, thm-sheafification-universal-property, def-morphism-of-presheaves]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

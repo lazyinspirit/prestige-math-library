@@ -2,7 +2,7 @@
 id: ex-explicit-equivalence-constants-for-standard-norms-on-kn
 kind: example
 title: "Explicit comparison constants for the standard norms on K^n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

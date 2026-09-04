@@ -2,7 +2,7 @@
 id: ex-a-cauchy-sequence-in-the-additive-p-adic-metric
 kind: example
 title: "A standard p-adic digit sequence is Cauchy and converges in Zp"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-adic-metric-on-zp, thm-zp-is-compact-hausdorff-totally-disconnected-and-complete]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

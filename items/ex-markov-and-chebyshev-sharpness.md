@@ -2,7 +2,7 @@
 id: ex-markov-and-chebyshev-sharpness
 kind: example
 title: "Markov and Chebyshev sharpness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [cor-markov-inequality-for-random-variables, cor-chebyshev-inequality-for-random-variables]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

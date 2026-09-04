@@ -2,7 +2,7 @@
 id: fs-enough-projectives-implies-a-canonical-resolution-for-every-object
 kind: false-statement
 title: "FALSE: enough projectives imply a canonical resolution for every object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-supplied-projective-resolution-datum, fs-enough-projectives-selects-a-projective-resolution-functor-on-all-objects, prop-the-iterated-free-module-resolution-is-canonical-in-zf]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

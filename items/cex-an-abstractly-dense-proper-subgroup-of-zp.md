@@ -2,7 +2,7 @@
 id: cex-an-abstractly-dense-proper-subgroup-of-zp
 kind: counterexample
 title: "The embedded integers form an abstractly proper but topologically dense subgroup of Zp"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-zp-is-topologically-generated-by-one, thm-the-integers-map-injectively-and-densely-into-zp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

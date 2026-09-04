@@ -2,13 +2,14 @@
 id: lem-contiguous-simplicial-maps-have-homotopic-realizations
 kind: lemma
 title: "Contiguous simplicial maps have homotopic realizations"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-contiguous-simplicial-maps, def-homotopy-relative-and-path-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

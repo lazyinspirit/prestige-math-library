@@ -2,7 +2,7 @@
 id: ex-zeta-zero-equals-minus-one-half
 kind: example
 title: "The functional equation gives $\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-riemann-zeta-functional-equation, thm-riemann-zeta-meromorphic-continuation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

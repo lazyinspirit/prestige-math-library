@@ -2,13 +2,14 @@
 id: def-right-derived-object-relative-to-injective-resolution-data
 kind: definition
 title: "Right derived objects relative to supplied injective resolution data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-supplied-injective-resolution-datum, def-additive-functor, def-deleted-resolution, def-cochain-complex-in-an-abelian-category, def-cohomology-object-of-a-cochain-complex]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

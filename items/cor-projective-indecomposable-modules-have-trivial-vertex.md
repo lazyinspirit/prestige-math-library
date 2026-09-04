@@ -2,7 +2,7 @@
 id: cor-projective-indecomposable-modules-have-trivial-vertex
 kind: corollary
 title: "A projective indecomposable module has trivial vertex"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-vertex-and-source-of-an-indecomposable-module, thm-green-vertex-source-existence-and-conjugacy, prop-restriction-and-induction-preserve-projectives, thm-projective-module-characterizations]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

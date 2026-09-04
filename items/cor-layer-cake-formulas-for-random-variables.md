@@ -2,7 +2,7 @@
 id: cor-layer-cake-formulas-for-random-variables
 kind: corollary
 title: "Layer-cake formulas for random variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable, def-positive-and-negative-parts-of-a-function, thm-layer-cake-formula-for-l-p-powers, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

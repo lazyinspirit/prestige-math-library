@@ -2,7 +2,7 @@
 id: cex-the-eta-series-represents-the-continuation-where-the-dirichlet-series-diverges
 kind: counterexample
 title: "The eta series can represent the continued zeta function where the defining Dirichlet series diverges"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dirichlet-eta-representation, thm-p-series-rational]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

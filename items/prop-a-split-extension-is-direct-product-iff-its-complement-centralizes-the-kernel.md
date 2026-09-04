@@ -2,7 +2,7 @@
 id: prop-a-split-extension-is-direct-product-iff-its-complement-centralizes-the-kernel
 kind: proposition
 title: "A split extension is a direct product exactly when its complement centralizes the kernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-complement-induces-the-conjugation-action-on-the-kernel, prop-semidirect-product-is-direct-iff-action-is-trivial]
 proof_strategy: iff
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

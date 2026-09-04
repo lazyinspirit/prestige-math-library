@@ -2,7 +2,7 @@
 id: def-generalized-nice-finite-family
 kind: definition
 title: "Generalized nice finite graph families"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

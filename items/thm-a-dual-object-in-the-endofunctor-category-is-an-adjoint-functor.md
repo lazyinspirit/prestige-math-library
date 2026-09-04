@@ -2,7 +2,7 @@
 id: thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor
 kind: theorem
 title: "A dual object in the endofunctor category is an adjoint functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-the-zig-zag-identities, def-adjunction-by-unit-counit-and-triangle-id
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-independence-of-two-comparison-lifts-on-homology
 kind: example
 title: "Independence of two comparison lifts on homology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [lem-the-induced-homology-map-is-independent-of-the-comparison-lift, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

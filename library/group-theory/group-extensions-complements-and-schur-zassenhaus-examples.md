@@ -1,7 +1,7 @@
 ---
 page: group-extensions-complements-and-schur-zassenhaus-examples
 title: "Group Extensions Complements and Schur Zassenhaus — Examples"
-status: draft
+status: published
 items: []
 examples: [cex-a-set-theoretic-section-of-c-four-onto-c-two-need-not-be-homomorphic,
   ex-the-dihedral-group-of-order-eight-is-a-split-extension-of-c-four-by-c-two,

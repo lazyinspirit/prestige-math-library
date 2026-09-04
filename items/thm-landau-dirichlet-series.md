@@ -2,7 +2,7 @@
 id: thm-landau-dirichlet-series
 kind: theorem
 title: "Landau's theorem for Dirichlet series with nonnegative coefficients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-abscissae-dirichlet-series, thm-dirichlet-series-half-plane-convergence, thm-dirichlet-series-absolute-half-plane-holomorphy]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

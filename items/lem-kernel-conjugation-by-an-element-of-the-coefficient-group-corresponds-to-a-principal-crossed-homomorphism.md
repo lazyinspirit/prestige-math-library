@@ -2,7 +2,7 @@
 id: lem-kernel-conjugation-by-an-element-of-the-coefficient-group-corresponds-to-a-principal-crossed-homomorphism
 kind: lemma
 title: "Kernel conjugation by an element of the coefficient group corresponds to a principal crossed homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-principal-crossed-homomorphism-for-abelian-coefficients, def-graph-subgroup-in-a-semidirect-product, thm-external-semidirect-product-is-a-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

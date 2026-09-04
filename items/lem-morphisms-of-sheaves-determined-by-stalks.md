@@ -2,13 +2,14 @@
 id: lem-morphisms-of-sheaves-determined-by-stalks
 kind: lemma
 title: "Morphisms of sheaves are determined by their maps on stalks"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheaf-on-topological-space, def-morphism-of-presheaves, def-stalk-of-presheaf, def-germ-of-section]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

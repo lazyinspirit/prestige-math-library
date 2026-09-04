@@ -2,7 +2,7 @@
 id: thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products
 kind: theorem
 title: "A group extension splits exactly when it has a complement or a compatible semidirect-product model, and a kernel retraction forces a direct product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-retraction-of-the-kernel-in-a-group-extension, thm-splitting-lemma-for-group-extensions, lem-kernel-subgroup-in-a-group-extension-is-normal-and-the-quotient-is-the-base]
 proof_strategy: iff
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

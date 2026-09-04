@@ -2,7 +2,7 @@
 id: thm-first-fundamental-theorem-of-calculus-for-l-one
 kind: theorem
 title: "The indefinite integral of an $L^1$ function is differentiable almost everywhere"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-countable-choice, def-l-one-of-a-measure, thm-differentiation-along-families-shrinking-nicely]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,12 +2,13 @@
 id: def-presheaf-plus-construction
 kind: definition
 title: "The plus construction for a presheaf"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-on-topological-space, def-stalk-of-presheaf, def-germ-of-section]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

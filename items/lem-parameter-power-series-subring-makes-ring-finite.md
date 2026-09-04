@@ -2,7 +2,7 @@
 id: lem-parameter-power-series-subring-makes-ring-finite
 kind: lemma
 title: "Parameters make a complete local domain finite over the image of a power-series map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-equicharacteristic-complete-local-ring-has-coefficient-field, def-system-of-parameters-and-parameter-ideal, lem-parameter-ideal-equivalent-m-primary, lem-formal-power-series-evaluation-unique-continuous-map, thm-complete-nakayama-lemma, def-dependent-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

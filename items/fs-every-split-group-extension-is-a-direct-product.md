@@ -2,7 +2,7 @@
 id: fs-every-split-group-extension-is-a-direct-product
 kind: false-statement
 title: "FALSE: every split group extension is a direct product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products, prop-a-split-extension-is-direct-product-iff-its-complement-centralizes-the-kernel]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

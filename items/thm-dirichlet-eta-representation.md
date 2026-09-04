@@ -2,7 +2,7 @@
 id: thm-dirichlet-eta-representation
 kind: theorem
 title: "The Dirichlet eta series is holomorphic on $\\operatorname{Re}s>0$ and equals the prefactor times zeta there"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemann-zeta-function, thm-riemann-zeta-continuation-to-the-right-half-plane, thm-weierstrass-m-test-for-complex-function-series, def-complex-exponential, def-natural-logarithm, thm-p-series-rational]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

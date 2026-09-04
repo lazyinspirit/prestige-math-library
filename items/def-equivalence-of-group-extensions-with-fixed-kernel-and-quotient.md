@@ -2,13 +2,14 @@
 id: def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient
 kind: definition
 title: "Equivalence of group extensions with fixed kernel and fixed quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-split-extension-of-groups, def-group-isomorphism-and-automorphism]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

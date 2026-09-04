@@ -2,7 +2,7 @@
 id: cor-zp-is-the-valuation-ring-of-qp
 kind: corollary
 title: "Z_p is the valuation ring of Q_p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

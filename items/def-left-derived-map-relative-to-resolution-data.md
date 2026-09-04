@@ -2,13 +2,14 @@
 id: def-left-derived-map-relative-to-resolution-data
 kind: definition
 title: "The left derived map relative to supplied resolution data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-left-derived-object-relative-to-projective-resolution-data, lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions, lem-the-induced-homology-map-is-independent-of-the-comparison-lift]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

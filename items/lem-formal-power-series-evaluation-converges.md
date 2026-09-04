@@ -2,7 +2,7 @@
 id: lem-formal-power-series-evaluation-converges
 kind: lemma
 title: "Formal power-series substitution converges in a complete local algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-separated-and-complete-filtered-module, def-local-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

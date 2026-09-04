@@ -2,13 +2,14 @@
 id: def-completed-riemann-zeta-function
 kind: definition
 title: "The completed zeta function $\\Lambda(s)=\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-riemann-zeta-function, def-euler-gamma-function]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

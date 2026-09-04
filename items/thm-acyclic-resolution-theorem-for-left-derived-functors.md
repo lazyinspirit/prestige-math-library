@@ -2,7 +2,7 @@
 id: thm-acyclic-resolution-theorem-for-left-derived-functors
 kind: theorem
 title: "The acyclic-resolution theorem for left derived functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-f-acyclic-resolution, def-acyclic-object-for-a-right-exact-functor, thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor, thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic, thm-horseshoe-lemma-for-projective-resolutions, thm-long-exact-sequence-in-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

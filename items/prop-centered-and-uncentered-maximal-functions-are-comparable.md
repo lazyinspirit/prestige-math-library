@@ -2,7 +2,7 @@
 id: prop-centered-and-uncentered-maximal-functions-are-comparable
 kind: proposition
 title: "The centered and uncentered maximal functions are pointwise comparable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-centered-and-uncentered-hardy-littlewood-maximal-functions, def-countable-choice, thm-lebesgue-measure-under-dilations-and-reflections]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: fs-zp-is-the-profinite-completion-of-z
 kind: false-statement
 title: "Zp is the full profinite completion of the integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-zp-is-the-pro-p-completion-of-the-integers, prop-profinite-completion-of-z-is-the-product-of-all-zp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-jacobi-theta-function
 kind: definition
 title: "The Jacobi theta function $\\theta(t)=\\sum_{n\\in\\mathbb Z} e^{-\\pi n^2 t}$ for $t>0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-complex-exponential]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

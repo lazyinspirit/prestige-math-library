@@ -2,7 +2,7 @@
 id: lem-step-functions-have-vanishing-torus-fourier-coefficients
 kind: lemma
 title: "Step functions on one period have vanishing Fourier coefficients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

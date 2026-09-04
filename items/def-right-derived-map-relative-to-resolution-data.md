@@ -2,13 +2,14 @@
 id: def-right-derived-map-relative-to-resolution-data
 kind: definition
 title: "The right derived map relative to supplied resolution data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-right-derived-object-relative-to-injective-resolution-data, lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions, lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

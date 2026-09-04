@@ -2,7 +2,7 @@
 id: thm-vitali-covering-lemma-for-balls-with-fivefold-dilates
 kind: theorem
 title: "Vitali covering lemma for Euclidean balls with fivefold dilates"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-metric-ball, thm-lebesgue-measure-under-dilations-and-reflections]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

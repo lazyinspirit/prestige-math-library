@@ -2,7 +2,7 @@
 id: lem-variance-and-covariance-identities-for-random-variables
 kind: lemma
 title: "Variance and covariance identities for random variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-moments-variance-and-covariance, cor-expectation-linearity-monotonicity-and-modulus-bound, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

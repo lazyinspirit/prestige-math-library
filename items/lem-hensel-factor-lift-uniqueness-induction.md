@@ -2,7 +2,7 @@
 id: lem-hensel-factor-lift-uniqueness-induction
 kind: lemma
 title: "Two lifted factorisations agree modulo every ideal power"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-coprime-factor-bezout-lift]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

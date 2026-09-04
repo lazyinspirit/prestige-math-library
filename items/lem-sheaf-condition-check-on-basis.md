@@ -2,13 +2,14 @@
 id: lem-sheaf-condition-check-on-basis
 kind: lemma
 title: "The sheaf condition can be checked on a basis with basis-refinable intersections"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheaf-on-topological-space, def-topology-basis-subbasis]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: rem-discontinuous-functionals-on-banach-spaces-and-choice
 kind: remark
 title: "Discontinuous linear functionals on infinite-dimensional Banach spaces are not available in ZF + DC"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

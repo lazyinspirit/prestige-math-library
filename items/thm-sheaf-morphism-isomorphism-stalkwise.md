@@ -2,13 +2,14 @@
 id: thm-sheaf-morphism-isomorphism-stalkwise
 kind: theorem
 title: "A morphism of sheaves is an isomorphism exactly when it is an isomorphism on every stalk"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheaf-on-topological-space, def-morphism-of-presheaves, def-stalk-of-presheaf, def-germ-of-section]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

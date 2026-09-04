@@ -2,7 +2,7 @@
 id: thm-a-left-dual-of-an-object-has-that-object-as-a-right-dual
 kind: theorem
 title: "A left dual of an object has that object as a right dual"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-dual-and-right-dual-object, def-the-zig-zag-identities]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

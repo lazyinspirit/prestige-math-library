@@ -2,7 +2,7 @@
 id: lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension
 kind: lemma
 title: "The induced cohomology map is independent of the chosen injective comparison extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-right-derived-object-relative-to-injective-resolution-data, lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions, thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy, def-cochain-complex-in-an-abelian-category, def-chain-homotopy, def-additive-functor, prop-an-additive-functor-preserves-zero-morphisms, thm-chain-homotopic-maps-induce-the-same-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-reversing-the-tensor-product-exchanges-left-and-right-duals
 kind: theorem
 title: "Reversing the tensor product exchanges left and right duals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-dual-and-right-dual-object, def-the-reverse-and-the-opposite-of-a-monoidal-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

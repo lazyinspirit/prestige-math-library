@@ -2,13 +2,14 @@
 id: def-expectation-of-a-nonnegative-or-integrable-random-variable
 kind: definition
 title: "Expectation of a nonnegative or integrable random variable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-random-element-and-real-random-variable, def-nonnegative-lebesgue-integral, def-integrable-real-and-complex-functions-and-their-integrals]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

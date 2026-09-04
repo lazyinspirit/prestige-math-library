@@ -2,7 +2,7 @@
 id: prop-positive-right-derived-functors-vanish-on-injective-objects
 kind: proposition
 title: "Positive right derived functors vanish on injective objects"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic, def-injective-object, def-injective-resolution-in-an-abelian-category, def-right-derived-object-relative-to-injective-resolution-data]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

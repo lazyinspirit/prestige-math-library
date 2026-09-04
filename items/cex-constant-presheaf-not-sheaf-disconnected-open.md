@@ -2,13 +2,14 @@
 id: cex-constant-presheaf-not-sheaf-disconnected-open
 kind: counterexample
 title: "The constant presheaf need not be a sheaf on a disconnected open set"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-presheaf-on-topological-space, def-sheafification, ex-sheaf-locally-constant-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

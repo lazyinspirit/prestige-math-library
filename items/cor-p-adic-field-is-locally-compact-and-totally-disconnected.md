@@ -2,7 +2,7 @@
 id: cor-p-adic-field-is-locally-compact-and-totally-disconnected
 kind: corollary
 title: "Q_p is locally compact and totally disconnected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-zp-is-the-valuation-ring-of-qp, lem-p-adic-balls-are-clopen, thm-p-adic-digit-expansion, thm-complete-and-totally-bounded-implies-compact, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

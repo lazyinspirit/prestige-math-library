@@ -2,7 +2,7 @@
 id: fs-riemann-zeta-is-entire
 kind: false-statement
 title: "FALSE: the Riemann zeta function is entire"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-riemann-zeta-meromorphic-continuation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

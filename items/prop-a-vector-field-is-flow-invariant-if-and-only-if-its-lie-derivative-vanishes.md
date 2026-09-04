@@ -2,7 +2,7 @@
 id: prop-a-vector-field-is-flow-invariant-if-and-only-if-its-lie-derivative-vanishes
 kind: proposition
 title: "A vector field is flow-invariant if and only if its Lie derivative vanishes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

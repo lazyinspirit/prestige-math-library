@@ -2,7 +2,7 @@
 id: thm-differentiation-along-families-shrinking-nicely
 kind: theorem
 title: "Differentiation holds along families shrinking nicely"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-countable-choice, def-family-shrinking-nicely-to-a-point, thm-almost-every-point-is-a-lebesgue-point]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

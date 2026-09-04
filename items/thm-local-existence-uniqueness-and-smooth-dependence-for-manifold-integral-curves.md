@@ -2,7 +2,7 @@
 id: thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves
 kind: theorem
 title: "Local existence, uniqueness, and smooth dependence for manifold integral curves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

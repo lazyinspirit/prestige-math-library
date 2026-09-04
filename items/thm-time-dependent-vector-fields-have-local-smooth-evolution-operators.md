@@ -2,7 +2,7 @@
 id: thm-time-dependent-vector-fields-have-local-smooth-evolution-operators
 kind: theorem
 title: "Time-dependent vector fields have local smooth evolution operators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

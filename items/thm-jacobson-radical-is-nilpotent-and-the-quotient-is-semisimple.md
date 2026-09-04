@@ -2,7 +2,7 @@
 id: thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple
 kind: theorem
 title: "For a finite-dimensional algebra, the Jacobson radical is nilpotent and the quotient by it is semisimple"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-jacobson-radical-of-a-finite-dimensional-algebra, thm-composition-series-iff-noetherian-and-artinian, thm-wedderburn-artin-theorem, thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules, def-simple-module, def-semisimple-ring, thm-equivalent-characterizations-of-semisimple-rings]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

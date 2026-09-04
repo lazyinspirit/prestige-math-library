@@ -2,11 +2,12 @@
 id: def-geometric-simplex-spanned-by-affinely-independent-vertices
 kind: definition
 title: "The geometric simplex spanned by affinely independent vertices"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

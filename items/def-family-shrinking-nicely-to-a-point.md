@@ -2,12 +2,14 @@
 id: def-family-shrinking-nicely-to-a-point
 kind: definition
 title: "A family shrinking nicely to a point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-countable-choice, def-metric-ball, lem-euclidean-balls-have-positive-finite-lebesgue-measure]
+verification:
+  audited: 2026-09-04
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis: Modern Techniques and Their Applications, 2nd ed., Theorem 3.21"

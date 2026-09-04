@@ -2,7 +2,7 @@
 id: thm-p-adic-completion-agrees-with-the-fraction-field-of-zp
 kind: theorem
 title: "The p-adic completion agrees with the fraction field of Z_p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-field-of-p-adic-numbers, thm-p-adic-completion-is-a-field, def-adic-completion-of-a-module, thm-kernel-and-universal-property-of-adic-completion, thm-bezout-identity, thm-fundamental-theorem-of-arithmetic]
 proof_strategy: constructive
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

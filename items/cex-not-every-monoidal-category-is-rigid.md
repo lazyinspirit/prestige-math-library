@@ -2,7 +2,7 @@
 id: cex-not-every-monoidal-category-is-rigid
 kind: counterexample
 title: "Not every monoidal category is rigid"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-rigid-object-and-rigid-monoidal-category, def-dimension]
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: generalized-niceness-and-reduction-outcomes-examples
 title: "Generalized Niceness and Reduction Outcomes -- Examples"
-status: draft
+status: published
 items: []
 examples: [ex-thinning-a-four-block-weakly-sparse-blockade-to-directional-sparse-subblocks, ex-a-large-almost-pure-pair-extends-an-anticomplete-blockade, ex-a-numeric-run-of-the-lemma-three-three-exponent-choice]
 ---

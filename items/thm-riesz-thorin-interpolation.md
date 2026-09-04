@@ -2,7 +2,7 @@
 id: thm-riesz-thorin-interpolation
 kind: theorem
 title: "Riesz-Thorin interpolation theorem"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [cor-l-p-norm-recovery-by-unit-l-q-pairings, thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p, thm-riesz-fischer-completeness-of-l-p]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

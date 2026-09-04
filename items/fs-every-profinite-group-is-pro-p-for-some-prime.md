@@ -2,7 +2,7 @@
 id: fs-every-profinite-group-is-pro-p-for-some-prime
 kind: false-statement
 title: "Every profinite group is pro-p for some prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-profinite-completion-of-z-is-the-product-of-all-zp, def-pro-p-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

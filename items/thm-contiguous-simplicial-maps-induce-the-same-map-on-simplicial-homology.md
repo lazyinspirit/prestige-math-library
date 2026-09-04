@@ -2,13 +2,14 @@
 id: thm-contiguous-simplicial-maps-induce-the-same-map-on-simplicial-homology
 kind: theorem
 title: "Contiguous simplicial maps induce the same map on simplicial homology"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-contiguous-simplicial-maps, def-induced-simplicial-chain-map, lem-induced-simplicial-chain-maps-commute-with-boundaries, def-chain-homotopy, thm-chain-homotopic-maps-induce-the-same-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

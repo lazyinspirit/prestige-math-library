@@ -2,7 +2,7 @@
 id: ex-a-compactly-supported-cutoff-of-an-incomplete-vector-field-is-complete
 kind: example
 title: "A compactly supported cutoff of an incomplete vector field is complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

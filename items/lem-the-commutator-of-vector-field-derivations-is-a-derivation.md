@@ -2,7 +2,7 @@
 id: lem-the-commutator-of-vector-field-derivations-is-a-derivation
 kind: lemma
 title: "The commutator of vector-field derivations is again a derivation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

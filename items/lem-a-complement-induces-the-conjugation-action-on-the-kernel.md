@@ -2,7 +2,7 @@
 id: lem-a-complement-induces-the-conjugation-action-on-the-kernel
 kind: lemma
 title: "A complement determines the conjugation action on the kernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products, thm-conjugation-is-an-automorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

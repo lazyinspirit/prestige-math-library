@@ -2,13 +2,14 @@
 id: def-ball-average-operator-on-r-n
 kind: definition
 title: "The average of a locally integrable function over a Euclidean ball"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-countable-choice, def-locally-integrable-function-on-r-n, lem-euclidean-balls-have-positive-finite-lebesgue-measure]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

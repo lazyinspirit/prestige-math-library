@@ -2,7 +2,7 @@
 id: ex-coefficient-field-noncanonical-choice
 kind: example
 title: "Coefficient fields need not be unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-equicharacteristic-complete-local-ring-has-coefficient-field, cor-formal-series-over-a-field-is-a-local-domain]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

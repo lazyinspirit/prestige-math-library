@@ -2,7 +2,7 @@
 id: ex-crossed-homomorphisms-from-a-cyclic-group-are-determined-by-a-generator
 kind: example
 title: "Crossed homomorphisms from a cyclic group are determined by the value on a generator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-crossed-homomorphism-for-a-g-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

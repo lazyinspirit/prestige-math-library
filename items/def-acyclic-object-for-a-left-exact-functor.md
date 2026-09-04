@@ -2,13 +2,14 @@
 id: def-acyclic-object-for-a-left-exact-functor
 kind: definition
 title: "An acyclic object for a left exact functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-right-derived-object-relative-to-injective-resolution-data, thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic, def-left-exact-and-right-exact-functor]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

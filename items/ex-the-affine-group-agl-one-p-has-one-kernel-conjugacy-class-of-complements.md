@@ -2,7 +2,7 @@
 id: ex-the-affine-group-agl-one-p-has-one-kernel-conjugacy-class-of-complements
 kind: example
 title: "The affine group AGL(1,p) has one kernel-conjugacy class of complements to its translation subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-first-cohomology-via-crossed-homomorphisms, thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy, thm-z-mod-p-is-a-field, thm-multiplicative-group-of-a-finite-field-is-cyclic, ex-crossed-homomorphisms-from-a-cyclic-group-are-determined-by-a-generator]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

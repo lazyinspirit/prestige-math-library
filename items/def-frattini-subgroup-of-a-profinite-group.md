@@ -2,13 +2,14 @@
 id: def-frattini-subgroup-of-a-profinite-group
 kind: definition
 title: "The Frattini subgroup of a profinite group is the intersection of its maximal proper closed subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

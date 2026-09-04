@@ -2,7 +2,7 @@
 id: ex-mobius-reciprocal-zeta-coefficients
 kind: example
 title: "The first coefficients of 1 over zeta are the Möbius values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-mobius-dirichlet-series-reciprocal-zeta, thm-dirichlet-series-multiplication-convolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

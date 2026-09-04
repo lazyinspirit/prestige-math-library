@@ -2,7 +2,7 @@
 id: ex-compatible-p-adic-digit-sequences
 kind: example
 title: "A p-adic integer is encoded by a compatible sequence of residue digits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-adic-integers-as-compatible-residue-classes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

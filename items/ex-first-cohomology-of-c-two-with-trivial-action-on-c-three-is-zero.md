@@ -2,7 +2,7 @@
 id: ex-first-cohomology-of-c-two-with-trivial-action-on-c-three-is-zero
 kind: example
 title: "With trivial action, H^1(C_2,C_3) is zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-first-cohomology-for-a-trivial-action-is-hom, thm-classification-of-cyclic-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

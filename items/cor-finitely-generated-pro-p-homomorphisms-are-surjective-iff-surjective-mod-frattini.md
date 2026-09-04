@@ -2,7 +2,7 @@
 id: cor-finitely-generated-pro-p-homomorphisms-are-surjective-iff-surjective-mod-frattini
 kind: corollary
 title: "A homomorphism of finitely generated pro-p groups is surjective exactly when the induced map on Frattini quotients is surjective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-topological-burnside-basis-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

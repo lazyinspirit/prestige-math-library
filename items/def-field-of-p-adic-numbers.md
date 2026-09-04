@@ -2,13 +2,14 @@
 id: def-field-of-p-adic-numbers
 kind: definition
 title: "The p-adic numbers as a metric completion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-p-adic-absolute-value-on-the-rationals, def-metric-completion, thm-metric-completion-exists]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

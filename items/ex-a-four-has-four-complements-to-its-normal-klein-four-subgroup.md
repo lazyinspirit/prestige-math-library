@@ -2,7 +2,7 @@
 id: ex-a-four-has-four-complements-to-its-normal-klein-four-subgroup
 kind: example
 title: "A_4 has four complements to its normal Klein four subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-schur-zassenhaus-existence, thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable, def-alternating-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

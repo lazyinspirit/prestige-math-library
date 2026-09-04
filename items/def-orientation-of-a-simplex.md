@@ -2,12 +2,13 @@
 id: def-orientation-of-a-simplex
 kind: definition
 title: "An orientation of a simplex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-abstract-simplicial-complex]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

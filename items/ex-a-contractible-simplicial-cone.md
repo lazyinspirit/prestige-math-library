@@ -2,11 +2,13 @@
 id: ex-a-contractible-simplicial-cone
 kind: example
 title: "A contractible simplicial cone"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-augmentation-and-reduced-simplicial-homology, def-chain-homotopy, cor-a-contractible-complex-is-acyclic]
+verification:
+  audited: 2026-09-04
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-principal-crossed-homomorphisms-form-a-subgroup
 kind: lemma
 title: "Principal crossed homomorphisms form a subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-crossed-homomorphisms-with-abelian-coefficients-form-an-abelian-group, def-principal-crossed-homomorphism-for-abelian-coefficients]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

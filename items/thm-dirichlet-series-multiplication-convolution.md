@@ -2,7 +2,7 @@
 id: thm-dirichlet-series-multiplication-convolution
 kind: theorem
 title: "Multiplying absolutely convergent Dirichlet series gives Dirichlet convolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirichlet-series, def-dirichlet-convolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

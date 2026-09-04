@@ -2,7 +2,7 @@
 id: fs-projective-covers-are-canonical-equalities-rather-than-unique-isomorphism-classes
 kind: false-statement
 title: "A module has one literally canonical projective cover, not just a unique isomorphism class over the target"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

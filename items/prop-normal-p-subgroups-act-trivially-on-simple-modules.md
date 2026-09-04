@@ -2,7 +2,7 @@
 id: prop-normal-p-subgroups-act-trivially-on-simple-modules
 kind: proposition
 title: "A normal p-subgroup acts trivially on every simple module in characteristic p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-kg-is-local-iff-g-is-a-p-group, def-simple-module, thm-composition-series-iff-noetherian-and-artinian]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

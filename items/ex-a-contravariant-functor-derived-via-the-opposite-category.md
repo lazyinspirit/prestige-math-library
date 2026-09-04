@@ -2,7 +2,7 @@
 id: ex-a-contravariant-functor-derived-via-the-opposite-category
 kind: example
 title: "A contravariant functor derived via the opposite category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-contravariant-derived-functors-are-derived-on-the-opposite-category, thm-hom-is-left-exact-in-each-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

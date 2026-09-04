@@ -2,7 +2,7 @@
 id: def-action-of-a-vector-field-on-smooth-functions
 kind: definition
 title: "The action of a vector field on smooth functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

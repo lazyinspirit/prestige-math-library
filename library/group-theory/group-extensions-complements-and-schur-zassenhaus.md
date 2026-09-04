@@ -1,7 +1,7 @@
 ---
 page: group-extensions-complements-and-schur-zassenhaus
 title: "Group Extensions Complements and Schur Zassenhaus"
-status: draft
+status: published
 items: [def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient,
   def-morphism-of-group-extensions,
   lem-kernel-subgroup-in-a-group-extension-is-normal-and-the-quotient-is-the-base,

@@ -2,7 +2,7 @@
 id: lem-bounded-variation-gives-one-sided-dirichlet-integrability
 kind: lemma
 title: "Bounded variation gives one-sided Dirichlet integrability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-jordan-decomposition-for-bv-functions, lem-variation-function-and-jordan-identities, lem-closed-form-and-size-bounds-for-the-dirichlet-kernel, thm-second-mean-value-theorem-for-integrals, lem-sine-positive-and-cosine-decreasing-on-zero-two, thm-riemann-lebesgue-lemma-for-fourier-coefficients]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

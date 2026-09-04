@@ -2,13 +2,14 @@
 id: cor-sheafification-idempotent
 kind: corollary
 title: "Sheafification is idempotent"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheafification, thm-sheafification-universal-property]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

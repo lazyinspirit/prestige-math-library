@@ -2,13 +2,14 @@
 id: def-principal-crossed-homomorphism-for-abelian-coefficients
 kind: definition
 title: "Principal crossed homomorphism for abelian coefficients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-crossed-homomorphism-for-a-g-group]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

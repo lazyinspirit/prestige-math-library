@@ -2,7 +2,7 @@
 id: thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute
 kind: theorem
 title: "Two vector fields commute if and only if their local flows commute"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

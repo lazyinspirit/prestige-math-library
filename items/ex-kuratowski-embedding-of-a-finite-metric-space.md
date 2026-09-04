@@ -2,7 +2,7 @@
 id: ex-kuratowski-embedding-of-a-finite-metric-space
 kind: example
 title: "The Kuratowski embedding of a finite metric space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

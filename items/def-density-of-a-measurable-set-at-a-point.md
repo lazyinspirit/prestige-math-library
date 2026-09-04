@@ -2,12 +2,14 @@
 id: def-density-of-a-measurable-set-at-a-point
 kind: definition
 title: "Density of a measurable set at a point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-countable-choice, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-metric-ball, lem-euclidean-balls-have-positive-finite-lebesgue-measure]
+verification:
+  audited: 2026-09-04
 sources:
   references:
     - title: "Terence Tao, An Introduction to Measure Theory, Exercise 1.6.24"

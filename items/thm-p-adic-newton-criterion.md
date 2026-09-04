@@ -2,7 +2,7 @@
 id: thm-p-adic-newton-criterion
 kind: theorem
 title: "Newton's criterion in Q_p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-zp-is-the-valuation-ring-of-qp, thm-p-adic-completion-is-a-field]
 proof_strategy: constructive
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

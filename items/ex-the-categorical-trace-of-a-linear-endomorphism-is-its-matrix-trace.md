@@ -2,7 +2,7 @@
 id: ex-the-categorical-trace-of-a-linear-endomorphism-is-its-matrix-trace
 kind: example
 title: "The categorical trace of a linear endomorphism is its matrix trace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-categorical-trace-of-a-morphism-into-the-double-dual, def-trace-of-an-endomorphism, def-canonical-map-to-the-double-dual, def-pivotal-structure]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

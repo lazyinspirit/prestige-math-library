@@ -2,7 +2,7 @@
 id: fs-the-definition-of-a-derived-map-may-depend-on-the-chosen-comparison-lift
 kind: false-statement
 title: "FALSE: the definition of a derived map may depend on the chosen comparison lift"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-derived-map-relative-to-resolution-data, def-right-derived-map-relative-to-resolution-data, lem-the-induced-homology-map-is-independent-of-the-comparison-lift, lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-the-empty-and-zero-dimensional-morse-cases
 kind: example
 title: "The empty and zero-dimensional Morse cases"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: boundary check
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

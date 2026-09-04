@@ -2,7 +2,7 @@
 id: fs-every-pointwise-assignment-of-a-tangent-vector-is-a-smooth-vector-field
 kind: false-statement
 title: "FALSE: every pointwise assignment of a tangent vector is a smooth vector field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

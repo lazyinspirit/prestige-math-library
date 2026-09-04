@@ -2,7 +2,7 @@
 id: thm-acyclic-resolution-theorem-for-right-derived-functors
 kind: theorem
 title: "The acyclic-resolution theorem for right derived functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-f-acyclic-resolution, def-acyclic-object-for-a-left-exact-functor, thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor, thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic, thm-horseshoe-lemma-for-projective-resolutions, thm-the-opposite-of-an-abelian-category-is-abelian, thm-an-additive-functor-preserves-finite-biproducts, thm-long-exact-sequence-in-cohomology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

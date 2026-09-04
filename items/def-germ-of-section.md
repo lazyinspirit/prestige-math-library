@@ -2,12 +2,13 @@
 id: def-germ-of-section
 kind: definition
 title: "Germs of sections"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-stalk-of-presheaf, def-section-restriction-and-global-section]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

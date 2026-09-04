@@ -2,7 +2,7 @@
 id: ex-reducing-an-integral-lattice-for-s-three
 kind: example
 title: "Reducing a standard integral lattice for S3 modulo 3 produces a reducible kS3-module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-og-lattice-and-reduction-modulo-the-maximal-ideal, lem-reduction-of-an-og-lattice-is-a-finite-dimensional-kg-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

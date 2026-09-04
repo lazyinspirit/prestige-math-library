@@ -2,7 +2,7 @@
 id: ex-dirichlet-series-abscissa-boundaries
 kind: example
 title: "Boundary behavior can agree or differ for Dirichlet-series abscissae"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-abscissae-dirichlet-series, thm-dirichlet-series-half-plane-convergence, thm-dirichlet-series-absolute-half-plane-holomorphy, lem-abel-summation-for-complex-series, thm-p-series-rational, lem-nth-term-test]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

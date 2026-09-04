@@ -2,13 +2,14 @@
 id: def-multiplicative-absolute-value-on-a-field
 kind: definition
 title: "Absolute values on a field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

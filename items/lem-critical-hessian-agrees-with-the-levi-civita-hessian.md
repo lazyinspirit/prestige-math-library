@@ -2,7 +2,7 @@
 id: lem-critical-hessian-agrees-with-the-levi-civita-hessian
 kind: lemma
 title: "At a critical point, the intrinsic Hessian agrees with the Levi-Civita Hessian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: coordinate computation
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

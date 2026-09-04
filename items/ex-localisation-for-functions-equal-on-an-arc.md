@@ -2,7 +2,7 @@
 id: ex-localisation-for-functions-equal-on-an-arc
 kind: example
 title: "Localisation for functions equal on an arc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-riemann-localisation-principle-for-fourier-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

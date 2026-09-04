@@ -2,7 +2,7 @@
 id: lem-maximal-residue-injective-subfield
 kind: lemma
 title: "Maximal residue-injective subfields exist"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-equicharacteristic-local-ring-and-coefficient-field, lem-equicharacteristic-prime-field-lifts, thm-zorn]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

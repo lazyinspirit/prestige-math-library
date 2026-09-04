@@ -2,13 +2,14 @@
 id: def-acyclic-object-for-a-right-exact-functor
 kind: definition
 title: "An acyclic object for a right exact functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-left-derived-object-relative-to-projective-resolution-data, thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic, def-left-exact-and-right-exact-functor]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

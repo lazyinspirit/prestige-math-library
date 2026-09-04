@@ -2,12 +2,13 @@
 id: def-etale-space-of-sheaf-of-sets
 kind: definition
 title: "The etale space of a sheaf of sets"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-sheaf-on-topological-space, def-stalk-of-presheaf, def-germ-of-section, def-topology-basis-subbasis]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

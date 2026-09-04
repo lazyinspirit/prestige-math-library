@@ -2,7 +2,7 @@
 id: thm-special-values-of-riemann-zeta-at-integers
 kind: theorem
 title: "The Riemann zeta function has the standard Bernoulli special values at the positive even and nonpositive integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-riemann-zeta-meromorphic-continuation, thm-riemann-zeta-functional-equation, def-bernoulli-numbers-by-their-generating-function, thm-mittag-leffler-expansion-of-pi-cotangent, thm-trivial-zeros-and-critical-strip]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: lem-forgetful-sheaf-compatibility
 kind: lemma
 title: "Sheafhood of algebraic-structure valued presheaves is detected on underlying sets"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-presheaf-of-groups-rings-modules, def-sheaf-on-topological-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

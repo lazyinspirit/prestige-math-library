@@ -2,7 +2,7 @@
 id: ex-jensen-for-logarithm-and-exponential
 kind: example
 title: "Jensen for logarithm and exponential"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-jensen-inequality-for-expectation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

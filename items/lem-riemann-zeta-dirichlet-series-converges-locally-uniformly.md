@@ -2,7 +2,7 @@
 id: lem-riemann-zeta-dirichlet-series-converges-locally-uniformly
 kind: lemma
 title: "The Dirichlet series for zeta converges absolutely and locally uniformly on the half-plane $\\operatorname{Re}s>1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemann-zeta-function, def-complex-exponential, def-natural-logarithm, thm-weierstrass-m-test-for-complex-function-series, thm-p-series-rational]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

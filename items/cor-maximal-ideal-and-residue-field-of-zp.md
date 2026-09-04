@@ -2,7 +2,7 @@
 id: cor-maximal-ideal-and-residue-field-of-zp
 kind: corollary
 title: "The maximal ideal and residue field of Z_p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-zp-is-the-valuation-ring-of-qp, thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

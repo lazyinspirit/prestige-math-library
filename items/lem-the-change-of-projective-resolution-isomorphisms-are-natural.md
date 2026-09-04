@@ -2,7 +2,7 @@
 id: lem-the-change-of-projective-resolution-isomorphisms-are-natural
 kind: lemma
 title: "The change-of-projective-resolution isomorphisms are natural"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions, lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy, thm-chain-homotopic-maps-induce-the-same-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

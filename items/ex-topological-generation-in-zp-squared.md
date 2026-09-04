@@ -2,7 +2,7 @@
 id: ex-topological-generation-in-zp-squared
 kind: example
 title: "In Zp squared, topological generation is detected by the Frattini quotient coordinates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-topological-burnside-basis-theorem, def-external-direct-product-of-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

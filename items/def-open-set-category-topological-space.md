@@ -2,11 +2,13 @@
 id: def-open-set-category-topological-space
 kind: definition
 title: "The category of open subsets of a topological space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-category, def-topological-space]
+verification:
+  audited: 2026-09-04
 sources:
   scraped: []
   references:

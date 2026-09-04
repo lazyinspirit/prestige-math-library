@@ -2,7 +2,7 @@
 id: lem-normal-hall-subgroup-gives-a-coprime-extension
 kind: lemma
 title: "A normal Hall subgroup presents the ambient group as an extension of coprime orders"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hall-pi-subgroup, thm-lagrange, cor-order-of-a-quotient-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

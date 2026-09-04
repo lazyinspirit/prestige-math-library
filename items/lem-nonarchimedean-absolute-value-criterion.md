@@ -2,7 +2,7 @@
 id: lem-nonarchimedean-absolute-value-criterion
 kind: lemma
 title: "An absolute value is nonarchimedean exactly when every integer has absolute value at most one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-multiplicative-absolute-value-on-a-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

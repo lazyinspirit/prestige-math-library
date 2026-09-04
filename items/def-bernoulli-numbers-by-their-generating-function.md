@@ -2,13 +2,14 @@
 id: def-bernoulli-numbers-by-their-generating-function
 kind: definition
 title: "The Bernoulli numbers are defined by the generating series $t/(e^t-1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-complex-exponential]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

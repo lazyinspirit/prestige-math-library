@@ -2,7 +2,7 @@
 id: thm-locally-compact-normed-space-iff-finite-dimensional
 kind: theorem
 title: "A normed space is locally compact if and only if it is finite-dimensional"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

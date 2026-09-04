@@ -1,7 +1,7 @@
 ---
 page: finite-dimensional-normed-spaces-and-riesz-lemma
 title: "Finite Dimensional Normed Spaces and Riesz Lemma"
-status: draft
+status: published
 items: [thm-coordinate-map-for-a-finite-dimensional-normed-space,
         thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent,
         cor-finite-dimensional-normed-spaces-are-banach,

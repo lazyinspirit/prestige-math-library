@@ -2,7 +2,7 @@
 id: cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points
 kind: corollary
 title: "A Morse function on a compact manifold has finitely many critical points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: compactness cover
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

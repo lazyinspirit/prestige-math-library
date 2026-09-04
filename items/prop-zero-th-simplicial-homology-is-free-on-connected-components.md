@@ -2,13 +2,14 @@
 id: prop-zero-th-simplicial-homology-is-free-on-connected-components
 kind: proposition
 title: "Zero-th simplicial homology is free on connected components"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-simplicial-cycles-boundaries-and-homology, def-connected-component-and-quasicomponent]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

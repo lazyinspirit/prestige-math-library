@@ -2,7 +2,7 @@
 id: thm-the-unit-is-self-dual
 kind: theorem
 title: "The unit is self-dual"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-dual-and-right-dual-object, cor-the-two-unitors-agree-on-the-unit-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

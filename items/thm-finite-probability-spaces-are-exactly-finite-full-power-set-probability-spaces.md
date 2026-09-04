@@ -2,7 +2,7 @@
 id: thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces
 kind: theorem
 title: "Finite probability spaces are exactly finite full-power-set probability spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-probability-measure, def-finite-probability-space-and-event, thm-measures-on-finite-sigma-algebras-are-atomic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: ex-projective-cover-of-the-trivial-module-for-a-p-group
 kind: example
 title: "For a finite p-group, the augmentation map from kP to the trivial module is its projective cover"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras, thm-kg-is-local-iff-g-is-a-p-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

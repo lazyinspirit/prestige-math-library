@@ -2,7 +2,7 @@
 id: fs-whole-semidirect-product-conjugacy-is-the-equivalence-relation-behind-first-cohomology
 kind: false-statement
 title: "FALSE: quotient-copy conjugacy is the equivalence relation behind first cohomology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

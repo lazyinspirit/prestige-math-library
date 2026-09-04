@@ -2,7 +2,7 @@
 id: lem-coefficient-field-purely-inseparable-complete-step
 kind: lemma
 title: "Completeness resolves the purely inseparable prime-field case"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-equicharacteristic-prime-field-lifts, def-equicharacteristic-local-ring-and-coefficient-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

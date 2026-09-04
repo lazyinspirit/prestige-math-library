@@ -2,12 +2,13 @@
 id: cex-finite-dimensional-does-not-imply-finite-or-locally-finite
 kind: counterexample
 title: "Finite dimensional does not imply finite or locally finite"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-locally-finite-and-finite-dimensional-simplicial-complex]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

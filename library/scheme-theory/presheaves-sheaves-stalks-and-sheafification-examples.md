@@ -1,7 +1,7 @@
 ---
 page: presheaves-sheaves-stalks-and-sheafification-examples
 title: "Presheaves Sheaves Stalks and Sheafification - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-sheaf-continuous-real-functions,
            ex-sheaf-locally-constant-functions,

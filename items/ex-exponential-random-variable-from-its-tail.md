@@ -2,7 +2,7 @@
 id: ex-exponential-random-variable-from-its-tail
 kind: example
 title: "Recovering an exponential law from its tail"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-countable-choice, def-cumulative-distribution-function-of-a-random-variable, cor-layer-cake-formulas-for-random-variables, thm-probability-law-and-distribution-function-correspondence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

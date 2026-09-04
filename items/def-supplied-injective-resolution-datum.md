@@ -2,13 +2,14 @@
 id: def-supplied-injective-resolution-datum
 kind: definition
 title: "Supplied injective resolution data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-injective-resolution-in-an-abelian-category, def-abelian-category]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

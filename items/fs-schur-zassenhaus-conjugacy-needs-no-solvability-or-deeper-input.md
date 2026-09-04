@@ -2,7 +2,7 @@
 id: fs-schur-zassenhaus-conjugacy-needs-no-solvability-or-deeper-input
 kind: false-statement
 title: "FALSE: Schur-Zassenhaus conjugacy needs no solvability or deeper input"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable, rem-schur-zassenhaus-conjugacy-in-full-generality]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

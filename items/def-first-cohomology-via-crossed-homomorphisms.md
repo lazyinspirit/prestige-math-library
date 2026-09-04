@@ -2,13 +2,14 @@
 id: def-first-cohomology-via-crossed-homomorphisms
 kind: definition
 title: "First cohomology via crossed homomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-crossed-homomorphisms-with-abelian-coefficients-form-an-abelian-group, lem-principal-crossed-homomorphisms-form-a-subgroup]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

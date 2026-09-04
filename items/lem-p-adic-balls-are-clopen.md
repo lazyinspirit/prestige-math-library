@@ -2,7 +2,7 @@
 id: lem-p-adic-balls-are-clopen
 kind: lemma
 title: "P-adic balls are clopen and intersecting comparable balls are nested"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-field-of-p-adic-numbers, thm-p-adic-absolute-value-is-nonarchimedean]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

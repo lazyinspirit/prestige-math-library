@@ -2,7 +2,7 @@
 id: thm-krull-schmidt-for-finite-dimensional-kg-modules
 kind: theorem
 title: "Finite-dimensional kG-modules decompose as finite direct sums of indecomposables uniquely up to order and isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-composition-series-and-length-of-a-module, thm-composition-series-iff-noetherian-and-artinian]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

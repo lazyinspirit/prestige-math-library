@@ -2,7 +2,7 @@
 id: ex-a-positive-measure-compact-set-can-miss-part-of-every-interval
 kind: example
 title: "A positive-measure compact set can miss part of every interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, thm-rationals-countable, thm-geometric-series, thm-finite-and-countable-subadditivity-of-measures, thm-heine-borel-characterisation-r, thm-lebesgue-measure-of-a-box-of-every-kind]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

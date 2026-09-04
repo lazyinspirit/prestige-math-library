@@ -2,7 +2,7 @@
 id: thm-frattini-formula-for-finitely-generated-pro-p-groups
 kind: theorem
 title: "For a finitely generated pro-p group, the Frattini subgroup is the closure of [G,G]G^p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-frattini-subgroup-commutes-with-surjective-inverse-limits, thm-frattini-subgroup-formula-for-a-finite-p-group, def-pth-power-subgroup-of-a-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

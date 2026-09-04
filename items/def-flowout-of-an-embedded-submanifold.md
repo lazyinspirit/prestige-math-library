@@ -2,7 +2,7 @@
 id: def-flowout-of-an-embedded-submanifold
 kind: definition
 title: "The flowout of an embedded submanifold by a vector field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

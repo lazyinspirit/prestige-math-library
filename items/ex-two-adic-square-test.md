@@ -2,7 +2,7 @@
 id: ex-two-adic-square-test
 kind: example
 title: "The two-adic square test separates 17 and 5"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-square-criterion-in-q2]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

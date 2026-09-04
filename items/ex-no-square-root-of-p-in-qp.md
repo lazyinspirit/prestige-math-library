@@ -2,7 +2,7 @@
 id: ex-no-square-root-of-p-in-qp
 kind: example
 title: "There is no square root of p in Q_p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-square-criterion-in-qp-for-odd-p, thm-square-criterion-in-q2]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-vertex-and-source-of-an-indecomposable-module
 kind: definition
 title: "A vertex is a minimal p-subgroup for relative projectivity, and a source is an indecomposable inducing summand there"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-relative-projectivity, thm-higman-criterion-for-relative-projectivity]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

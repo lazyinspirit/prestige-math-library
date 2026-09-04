@@ -2,7 +2,7 @@
 id: cor-first-cohomology-for-a-trivial-action-is-hom
 kind: corollary
 title: "For a trivial action, first cohomology is Hom"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-homomorphism, thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

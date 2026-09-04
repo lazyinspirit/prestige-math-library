@@ -2,7 +2,7 @@
 id: thm-jensen-inequality-for-expectation
 kind: theorem
 title: "Jensen's inequality for expectation"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable, thm-jensens-integral-inequality]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-projective-and-injective-modules-coincide-over-every-ring
 kind: false-statement
 title: "Projective and injective modules coincide over every ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-finitely-generated-projective-kg-modules-are-injective-and-conversely]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

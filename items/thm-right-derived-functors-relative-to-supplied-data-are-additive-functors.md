@@ -2,7 +2,7 @@
 id: thm-right-derived-functors-relative-to-supplied-data-are-additive-functors
 kind: theorem
 title: "Right derived functors relative to supplied data are additive functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-right-derived-map-relative-to-resolution-data, lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions, lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension, def-additive-functor, def-cochain-complex-in-an-abelian-category, thm-the-category-of-complexes-in-an-additive-category-is-additive, thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy, prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps, thm-chain-homotopic-maps-induce-the-same-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

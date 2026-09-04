@@ -2,7 +2,7 @@
 id: thm-duality-yields-adjunctions-of-tensoring-functors
 kind: theorem
 title: "Duality yields adjunctions of tensoring functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-left-dual-and-right-dual-object, def-adjunction-by-unit-counit-and-tr
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

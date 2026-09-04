@@ -2,7 +2,7 @@
 id: thm-equivalent-elementary-forms-of-hensels-property
 kind: theorem
 title: "Equivalent elementary forms of Hensel's property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-henselian-pair-and-henselian-local-ring, cor-henselian-local-simple-root-criterion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

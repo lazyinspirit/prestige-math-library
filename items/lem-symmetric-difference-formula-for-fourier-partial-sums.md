@@ -2,7 +2,7 @@
 id: lem-symmetric-difference-formula-for-fourier-partial-sums
 kind: lemma
 title: "Symmetric difference formula for Fourier partial sums"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-fourier-partial-sums-are-dirichlet-convolutions, def-dirichlet-and-fejer-kernels, lem-closed-form-and-size-bounds-for-the-dirichlet-kernel]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

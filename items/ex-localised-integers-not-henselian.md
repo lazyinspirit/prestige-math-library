@@ -2,7 +2,7 @@
 id: ex-localised-integers-not-henselian
 kind: example
 title: "A localization of the integers at p need not be Henselian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-henselian-local-simple-root-criterion, thm-localisation-at-a-prime-is-local, cor-residue-field-of-a-localisation-at-a-prime, thm-z-mod-p-is-a-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

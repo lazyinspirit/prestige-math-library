@@ -2,7 +2,7 @@
 id: cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one
 kind: corollary
 title: "The Riemann zeta function has no zeros when $\\operatorname{Re}s>1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-euler-product-for-riemann-zeta, thm-absolute-convergence-criterion-for-complex-infinite-products]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

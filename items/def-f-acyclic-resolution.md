@@ -2,13 +2,14 @@
 id: def-f-acyclic-resolution
 kind: definition
 title: "An F-acyclic resolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-acyclic-object-for-a-left-exact-functor, def-acyclic-object-for-a-right-exact-functor, def-projective-resolution-in-an-abelian-category, def-injective-resolution-in-an-abelian-category]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

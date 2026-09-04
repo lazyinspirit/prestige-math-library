@@ -2,7 +2,7 @@
 id: ex-convergence-of-partial-p-adic-expansions
 kind: example
 title: "The partial sums of a p-adic expansion converge in the inverse-limit topology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-inverse-limit-topology-equals-the-p-adic-metric-topology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

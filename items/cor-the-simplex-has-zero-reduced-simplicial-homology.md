@@ -2,13 +2,14 @@
 id: cor-the-simplex-has-zero-reduced-simplicial-homology
 kind: corollary
 title: "A simplex has zero reduced simplicial homology"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [lem-the-augmented-simplicial-chain-complex-of-a-simplex-is-contractible, cor-a-contractible-complex-is-acyclic, def-augmentation-and-reduced-simplicial-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-liouville-dirichlet-series
 kind: example
 title: "The Dirichlet series of the Liouville function is zeta of 2s divided by zeta of s"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-liouville-function, cor-completely-multiplicative-dirichlet-series-euler-product]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

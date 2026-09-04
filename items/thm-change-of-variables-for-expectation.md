@@ -2,7 +2,7 @@
 id: thm-change-of-variables-for-expectation
 kind: theorem
 title: "Change of variables for expectation"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-law-or-distribution-of-a-random-element, def-expectation-of-a-nonnegative-or-integrable-random-variable, lem-law-of-a-random-element-is-a-probability-measure, thm-composition-with-borel-functions-preserves-measurability, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-of-a-nonnegative-simple-function, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

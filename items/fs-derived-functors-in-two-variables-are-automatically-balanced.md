@@ -2,7 +2,7 @@
 id: fs-derived-functors-in-two-variables-are-automatically-balanced
 kind: false-statement
 title: "FALSE: derived functors in two variables are automatically balanced"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied, def-balanced-derived-bifunctor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

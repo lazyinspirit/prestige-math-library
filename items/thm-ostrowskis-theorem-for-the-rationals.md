@@ -2,7 +2,7 @@
 id: thm-ostrowskis-theorem-for-the-rationals
 kind: theorem
 title: "Ostrowski's theorem for the rationals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-multiplicative-absolute-value-on-a-field, lem-nonarchimedean-absolute-value-criterion, def-equivalent-field-absolute-values, def-p-adic-absolute-value-on-the-rationals, thm-p-adic-absolute-value-is-nonarchimedean, thm-canonical-prime-factorisation, thm-fundamental-theorem-of-arithmetic, thm-bezout-identity, def-natural-logarithm]
 proof_strategy: cases
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

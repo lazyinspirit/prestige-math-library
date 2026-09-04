@@ -2,7 +2,7 @@
 id: ex-the-regular-module-of-cp-in-characteristic-p
 kind: example
 title: "The regular module of Cp in characteristic p is indecomposable with a unique simple quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-kg-is-local-iff-g-is-a-p-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

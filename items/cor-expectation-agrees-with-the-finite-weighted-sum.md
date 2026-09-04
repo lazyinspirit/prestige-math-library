@@ -2,7 +2,7 @@
 id: cor-expectation-agrees-with-the-finite-weighted-sum
 kind: corollary
 title: "Expectation agrees with the published finite weighted sum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-change-of-variables-for-expectation, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces, lem-finite-random-variables-are-measurable, def-expectation-on-a-finite-probability-space, lem-expectation-by-distribution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

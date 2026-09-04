@@ -2,7 +2,7 @@
 id: ex-artinian-local-ring-henselian
 kind: example
 title: "A truncated polynomial local ring is Henselian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-artinian-local-henselian-via-nilpotent-maximal-ideal, def-polynomial-ring-over-a-commutative-ring, def-quotient-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

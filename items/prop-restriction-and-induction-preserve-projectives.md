@@ -2,7 +2,7 @@
 id: prop-restriction-and-induction-preserve-projectives
 kind: proposition
 title: "Restriction and induction along a subgroup preserve projective modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-module, thm-projective-module-characterizations, thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules, prop-induced-module-decomposes-over-a-left-transversal]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-hardy-littlewood-maximal-inequality-for-balls
 kind: theorem
 title: "The centered Hardy-Littlewood maximal operator is weak type $(1,1)$"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-centered-and-uncentered-hardy-littlewood-maximal-functions, def-countable-choice, def-l-one-of-a-measure, prop-ball-average-is-continuous-in-centre-and-radius, thm-lebesgue-inner-regularity-by-closed-and-compact-sets, thm-vitali-covering-lemma-for-balls-with-fivefold-dilates]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

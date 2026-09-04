@@ -2,13 +2,14 @@
 id: thm-sheafification-universal-property
 kind: theorem
 title: "Sheafification is left adjoint to the inclusion of sheaves into presheaves"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheafification, lem-first-plus-construction-is-separated, lem-second-plus-construction-is-sheaf]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

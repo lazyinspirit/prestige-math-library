@@ -2,7 +2,7 @@
 id: thm-hadamard-product-for-riemann-xi
 kind: theorem
 title: "The Riemann xi function has its genus-one Hadamard product over the nontrivial zeros of zeta"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemann-xi-function, thm-riemann-xi-is-entire-of-order-one, thm-hadamard-factorization-for-finite-order-entire-functions, thm-trivial-zeros-and-critical-strip, thm-completed-riemann-zeta-functional-equation, cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one, thm-gamma-meromorphic-continuation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

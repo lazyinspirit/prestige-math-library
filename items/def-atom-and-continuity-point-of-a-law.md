@@ -2,13 +2,14 @@
 id: def-atom-and-continuity-point-of-a-law
 kind: definition
 title: "Atoms and continuity points of a law"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-cumulative-distribution-function-of-a-random-variable, def-atom-of-a-measure-on-r]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

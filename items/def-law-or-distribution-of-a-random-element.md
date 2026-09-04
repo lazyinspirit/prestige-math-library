@@ -2,13 +2,14 @@
 id: def-law-or-distribution-of-a-random-element
 kind: definition
 title: "Law or distribution of a random element"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-random-element-and-real-random-variable, def-probability-measure]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

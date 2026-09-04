@@ -2,12 +2,14 @@
 id: def-sublinear-operator-weak-and-strong-type-p-q
 kind: definition
 title: "Sublinear operators and weak or strong type $(p,q)$ bounds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-distribution-function-of-absolute-value, def-l-infinity-on-a-measure-space, def-l-p-space-as-a-quotient-by-null-functions]
+verification:
+  audited: 2026-09-04
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis: Modern Techniques and Their Applications, 2nd ed., Sections 6.4-6.5"

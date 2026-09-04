@@ -2,7 +2,7 @@
 id: thm-green-vertex-source-existence-and-conjugacy
 kind: theorem
 title: "Vertices exist for indecomposable modules, are conjugate in G, and sources are conjugate by the appropriate normalizer"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-vertex-and-source-of-an-indecomposable-module, thm-higman-criterion-for-relative-projectivity, thm-krull-schmidt-for-finite-dimensional-kg-modules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

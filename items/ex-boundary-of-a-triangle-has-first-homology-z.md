@@ -2,12 +2,13 @@
 id: ex-boundary-of-a-triangle-has-first-homology-z
 kind: example
 title: "The boundary of a triangle has first homology Z"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-simplicial-cycles-boundaries-and-homology, def-orientation-of-a-simplex]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

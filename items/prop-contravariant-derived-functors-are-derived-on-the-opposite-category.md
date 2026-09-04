@@ -2,7 +2,7 @@
 id: prop-contravariant-derived-functors-are-derived-on-the-opposite-category
 kind: proposition
 title: "Contravariant derived functors are derived on the opposite category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-functor-and-contravariant-functor, def-opposite-category, thm-the-opposite-of-an-abelian-category-is-abelian, def-projective-object, def-injective-object, def-right-derived-object-relative-to-injective-resolution-data]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

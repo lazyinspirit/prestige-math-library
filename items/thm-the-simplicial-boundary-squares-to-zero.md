@@ -2,13 +2,14 @@
 id: thm-the-simplicial-boundary-squares-to-zero
 kind: theorem
 title: "The simplicial boundary squares to zero"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-simplicial-chain-groups-and-boundary, lem-simplicial-boundary-is-independent-of-oriented-representative]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

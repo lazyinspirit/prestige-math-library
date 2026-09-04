@@ -1,7 +1,7 @@
 ---
 page: dirichlet-kernel-localisation-and-pointwise-fourier-convergence
 title: "Dirichlet Kernel Localisation and Pointwise Fourier Convergence"
-status: draft
+status: published
 items: [def-period-one-fourier-coefficients-partial-sums-and-convolution, def-dirichlet-and-fejer-kernels, lem-fourier-partial-sums-are-dirichlet-convolutions, lem-closed-form-and-size-bounds-for-the-dirichlet-kernel, lem-step-functions-have-vanishing-torus-fourier-coefficients, lem-step-functions-on-one-period-are-dense-in-l-one-on-the-torus, thm-riemann-lebesgue-lemma-for-fourier-coefficients, lem-symmetric-difference-formula-for-fourier-partial-sums, thm-riemann-localisation-principle-for-fourier-series, thm-dini-pointwise-convergence-criterion-for-fourier-series, cor-local-holder-regularity-implies-fourier-convergence-at-a-point, lem-bounded-variation-gives-one-sided-dirichlet-integrability, thm-dirichlet-jordan-pointwise-convergence, cor-piecewise-c-one-fourier-series-converges-to-midpoint-values]
 examples: []
 ---

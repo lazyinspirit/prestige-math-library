@@ -2,13 +2,14 @@
 id: def-simplicial-chain-groups-and-boundary
 kind: definition
 title: "Simplicial chain groups and the boundary operator"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-orientation-of-a-simplex]
 justified_by: [lem-simplicial-boundary-is-independent-of-oriented-representative]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

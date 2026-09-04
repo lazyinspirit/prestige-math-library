@@ -2,7 +2,7 @@
 id: def-critical-point-and-critical-value-of-a-smooth-function
 kind: definition
 title: "Critical points and critical values of a smooth function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

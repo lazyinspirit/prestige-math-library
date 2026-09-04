@@ -2,7 +2,7 @@
 id: thm-frattini-formula-without-an-extra-closure-for-finitely-generated-pro-p-groups
 kind: theorem
 title: "For a finitely generated pro-p group, the Frattini formula retains the closure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-pth-power-subgroup-of-a-group, thm-frattini-formula-for-finitely-generated-pro-p-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

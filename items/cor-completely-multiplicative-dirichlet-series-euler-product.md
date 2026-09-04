@@ -2,7 +2,7 @@
 id: cor-completely-multiplicative-dirichlet-series-euler-product
 kind: corollary
 title: "Completely multiplicative Dirichlet series have geometric Euler factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-multiplicative-dirichlet-series-euler-product, def-completely-multiplicative-arithmetic-function]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-topological-burnside-basis-theorem
 kind: theorem
 title: "A subset topologically generates a finitely generated pro-p group exactly when its image spans the Frattini quotient over Fp"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-frattini-formula-for-finitely-generated-pro-p-groups, thm-burnside-basis-theorem, cor-generation-is-detected-modulo-the-frattini-subgroup]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

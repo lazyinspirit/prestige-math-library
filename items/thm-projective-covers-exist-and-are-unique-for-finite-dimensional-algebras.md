@@ -2,7 +2,7 @@
 id: thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras
 kind: theorem
 title: "Every finite-dimensional module has a projective cover, unique up to isomorphism over the target"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-essential-epimorphism-and-projective-cover, thm-projective-module-characterizations, cor-every-module-is-a-quotient-of-a-free-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

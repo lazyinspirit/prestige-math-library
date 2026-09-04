@@ -1,7 +1,7 @@
 ---
 page: finite-dimensional-normed-spaces-and-riesz-lemma-examples
 title: "Finite Dimensional Normed Spaces and Riesz Lemma — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-explicit-equivalence-constants-for-standard-norms-on-kn,
            ex-an-infinite-separated-subset-of-the-unit-sphere,

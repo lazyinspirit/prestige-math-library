@@ -2,7 +2,7 @@
 id: ex-the-centered-maximal-function-of-the-unit-interval-indicator-on-r
 kind: example
 title: "The centered maximal function of $\\mathbf{1}_{[0,1]}$ on $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, def-centered-and-uncentered-hardy-littlewood-maximal-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

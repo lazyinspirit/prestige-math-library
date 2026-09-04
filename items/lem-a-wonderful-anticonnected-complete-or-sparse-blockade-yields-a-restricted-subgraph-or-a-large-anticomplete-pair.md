@@ -2,7 +2,7 @@
 id: lem-a-wonderful-anticonnected-complete-or-sparse-blockade-yields-a-restricted-subgraph-or-a-large-anticomplete-pair
 kind: lemma
 title: "A wonderful anticonnected complete-or-sparse blockade yields a restricted subgraph or a large anticomplete pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

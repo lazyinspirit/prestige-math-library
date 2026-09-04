@@ -2,13 +2,14 @@
 id: ex-sheaf-locally-constant-functions
 kind: example
 title: "Locally constant functions form a sheaf and have constant stalks"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-sheaf-on-topological-space, def-stalk-of-presheaf, def-germ-of-section]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

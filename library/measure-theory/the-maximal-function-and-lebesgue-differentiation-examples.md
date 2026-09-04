@@ -1,7 +1,7 @@
 ---
 page: the-maximal-function-and-lebesgue-differentiation-examples
 title: "The Maximal Function and Lebesgue Differentiation — Examples"
-status: draft
+status: published
 items: [ex-the-centered-maximal-function-of-the-unit-interval-indicator-on-r, cex-the-unit-interval-indicator-has-nonintegrable-maximal-function, ex-a-unit-mass-spike-has-a-large-maximal-superlevel-set, ex-the-lebesgue-set-of-the-rationals-indicator-is-all-of-r, ex-an-interval-endpoint-is-not-a-density-point, ex-a-positive-measure-compact-set-can-miss-part-of-every-interval, ex-steinhaus-follows-from-the-density-theorem, fs-there-is-a-measurable-set-with-density-one-half-in-every-interval, ex-a-locally-integrable-function-can-fail-to-differentiate-on-a-null-set]
 examples: []
 ---

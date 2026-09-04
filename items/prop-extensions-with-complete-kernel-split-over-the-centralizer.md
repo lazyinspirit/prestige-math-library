@@ -2,7 +2,7 @@
 id: prop-extensions-with-complete-kernel-split-over-the-centralizer
 kind: proposition
 title: "If the kernel is complete, the extension splits over its centralizer"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-complete-group, lem-an-extension-induces-a-well-defined-outer-action-on-the-kernel, thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products, def-centralizer-of-a-subgroup, thm-conjugation-is-an-automorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-negative-derived-degrees-vanish-for-one-sided-resolutions
 kind: proposition
 title: "Negative derived degrees vanish for one-sided resolutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-derived-object-relative-to-projective-resolution-data, def-right-derived-object-relative-to-injective-resolution-data]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

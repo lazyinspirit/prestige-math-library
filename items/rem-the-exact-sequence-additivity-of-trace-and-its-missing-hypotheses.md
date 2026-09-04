@@ -2,7 +2,7 @@
 id: rem-the-exact-sequence-additivity-of-trace-and-its-missing-hypotheses
 kind: remark
 title: "Exact-sequence additivity of trace and its missing hypotheses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,11 @@ external_dependency:
   local_proof_attempt: "I kept only the exact theorem statement and the missing-hypothesis warning. The source proof uses exact-sequence technology inside multitensor categories that this page does not build."
   necessity: "The page needs this boundary item to stop readers from widening Proposition 4.7.5 to arbitrary rigid abelian monoidal categories."
 verification:
+  audited: 2026-09-04
+  sources_checked:
+    date: 2026-09-04
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

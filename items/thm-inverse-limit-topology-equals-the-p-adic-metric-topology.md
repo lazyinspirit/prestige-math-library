@@ -2,7 +2,7 @@
 id: thm-inverse-limit-topology-equals-the-p-adic-metric-topology
 kind: theorem
 title: "The inverse-limit topology on Zp agrees with the p-adic metric topology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-adic-metric-on-zp, def-inverse-limit-topology-for-finite-discrete-groups, def-p-adic-integers-as-compatible-residue-classes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

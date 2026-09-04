@@ -2,13 +2,14 @@
 id: rem-dirichlet-series-continuation-and-regularized-sums
 kind: remark
 title: "The analytic continuation of zeta is not the same object as the defining Dirichlet series outside $\\operatorname{Re}s>1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-riemann-zeta-meromorphic-continuation, thm-special-values-of-riemann-zeta-at-integers]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

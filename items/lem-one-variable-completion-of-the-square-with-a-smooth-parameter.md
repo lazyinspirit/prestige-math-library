@@ -2,7 +2,7 @@
 id: lem-one-variable-completion-of-the-square-with-a-smooth-parameter
 kind: lemma
 title: "A nonzero second derivative splits off a signed square with a smooth parameter"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: local reduction
+verification:
+  audited: 2026-09-04
 sources:
   scraped: []
   references:

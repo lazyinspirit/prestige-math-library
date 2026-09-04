@@ -2,7 +2,7 @@
 id: thm-p-adic-absolute-value-is-nonarchimedean
 kind: theorem
 title: "The p-adic absolute value is nonarchimedean"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-adic-absolute-value-on-the-rationals, lem-p-adic-valuation-on-q]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

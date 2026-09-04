@@ -2,7 +2,7 @@
 id: lem-coefficient-field-separable-adjunction-step
 kind: lemma
 title: "Separable residue elements adjoin across a maximal subfield"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-maximal-residue-injective-subfield, cor-henselian-local-simple-root-criterion, cor-complete-local-rings-are-henselian]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

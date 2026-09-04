@@ -2,7 +2,7 @@
 id: prop-additive-group-of-zp-is-torsion-free
 kind: proposition
 title: "The additive group of Zp is torsion-free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-adic-integers-as-compatible-residue-classes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

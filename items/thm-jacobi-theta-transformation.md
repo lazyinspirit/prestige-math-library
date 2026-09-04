@@ -2,7 +2,7 @@
 id: thm-jacobi-theta-transformation
 kind: theorem
 title: "The Jacobi theta function satisfies $\\theta(t)=t^{-1/2}\\theta(1/t)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-jacobi-theta-function, thm-gaussian-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

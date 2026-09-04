@@ -2,7 +2,7 @@
 id: thm-finite-dimensional-vector-spaces-are-rigid
 kind: theorem
 title: "Finite-dimensional vector spaces are rigid"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-rigid-object-and-rigid-monoidal-category, thm-modules-over-a-commutat
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: randomized-complexity-and-amplification-examples
 title: "Randomized Complexity and Amplification: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-majority-error-bound-from-chebyshev

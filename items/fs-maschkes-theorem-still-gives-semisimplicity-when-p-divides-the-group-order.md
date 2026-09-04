@@ -2,7 +2,7 @@
 id: fs-maschkes-theorem-still-gives-semisimplicity-when-p-divides-the-group-order
 kind: false-statement
 title: "If the field has characteristic p and p divides |G|, then Maschke's theorem still makes kG semisimple"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-maschke-failure-in-defining-characteristic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

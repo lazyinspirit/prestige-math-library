@@ -2,12 +2,13 @@
 id: def-presheaf-of-groups-rings-modules
 kind: definition
 title: "Presheaves and sheaves of groups, rings, and modules"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-on-topological-space, prop-groups-and-homomorphisms-form-category-grp, prop-rings-and-homomorphisms-form-category-ring, prop-modules-and-homomorphisms-form-category-rmod]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

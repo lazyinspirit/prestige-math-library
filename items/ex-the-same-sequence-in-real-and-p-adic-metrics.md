@@ -2,7 +2,7 @@
 id: ex-the-same-sequence-in-real-and-p-adic-metrics
 kind: example
 title: "The same sequence behaves oppositely in the real and p-adic metrics"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-adic-absolute-value-on-the-rationals, def-field-of-p-adic-numbers]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

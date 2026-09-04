@@ -2,12 +2,13 @@
 id: def-presheaf-on-topological-space
 kind: definition
 title: "A presheaf on a topological space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-open-set-category-topological-space, def-functor-and-contravariant-functor, prop-sets-and-functions-form-category-set]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

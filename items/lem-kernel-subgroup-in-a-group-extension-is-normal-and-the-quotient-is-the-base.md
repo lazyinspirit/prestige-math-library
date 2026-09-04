@@ -2,7 +2,7 @@
 id: lem-kernel-subgroup-in-a-group-extension-is-normal-and-the-quotient-is-the-base
 kind: lemma
 title: "In a group extension the kernel is normal and the quotient recovers the base"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-split-extension-of-groups, thm-image-subgroup-and-kernel-normal, thm-first-isomorphism-theorem-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

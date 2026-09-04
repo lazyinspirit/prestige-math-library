@@ -2,7 +2,7 @@
 id: ex-an-adjunction-read-as-a-duality-of-endofunctors
 kind: example
 title: "An adjunction read as a duality of endofunctors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor, thm-currying-is-an-adjunction-in-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-morse-splitting-induction-preserves-the-residual-hessian
 kind: lemma
 title: "Splitting one Morse coordinate preserves the residual Hessian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct local comparison
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

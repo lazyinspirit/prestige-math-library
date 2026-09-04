@@ -2,7 +2,7 @@
 id: fs-a-set-theoretic-section-of-an-extension-is-automatically-a-homomorphism
 kind: false-statement
 title: "FALSE: a set-theoretic section of an extension is automatically a homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-split-extension-of-groups, def-group-homomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

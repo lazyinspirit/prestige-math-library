@@ -2,7 +2,7 @@
 id: fs-the-cochain-and-crossed-homomorphism-definitions-of-first-cohomology-agree-automatically
 kind: false-statement
 title: "FALSE: the cochain and crossed-homomorphism definitions of first cohomology agree automatically"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-first-group-cohomology-via-inhomogeneous-one-cocycles, thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

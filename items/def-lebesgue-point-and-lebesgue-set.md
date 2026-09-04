@@ -2,13 +2,14 @@
 id: def-lebesgue-point-and-lebesgue-set
 kind: definition
 title: "Lebesgue points and the Lebesgue set of an $L^1_{loc}$ class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-ball-average-operator-on-r-n, def-countable-choice, def-locally-integrable-function-on-r-n]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

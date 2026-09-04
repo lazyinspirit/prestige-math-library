@@ -2,7 +2,7 @@
 id: lem-nondegenerate-critical-points-are-isolated
 kind: lemma
 title: "Nondegenerate critical points are isolated"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: dimension split
+verification:
+  audited: 2026-09-04
 sources:
   scraped: []
   references:

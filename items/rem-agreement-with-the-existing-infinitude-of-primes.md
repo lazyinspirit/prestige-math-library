@@ -2,13 +2,14 @@
 id: rem-agreement-with-the-existing-infinitude-of-primes
 kind: remark
 title: "The pole of zeta at $1$ recovers Euclid's infinitude of primes without reminting it on this page"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-euler-product-for-riemann-zeta, thm-euclid-infinitude-of-primes]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

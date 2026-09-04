@@ -1,7 +1,7 @@
 ---
 page: affine-algebraic-sets-and-coordinate-rings-examples
 title: "Affine Algebraic Sets and Coordinate Rings — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-affine-line-and-affine-space-coordinate-rings

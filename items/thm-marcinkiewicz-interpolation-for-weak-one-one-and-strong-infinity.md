@@ -2,7 +2,7 @@
 id: thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity
 kind: theorem
 title: "Marcinkiewicz interpolation from weak $(1,1)$ and strong $(\\infty,\\infty)$"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-sublinear-operator-weak-and-strong-type-p-q, def-distribution-function-of-absolute-value, thm-layer-cake-formula-for-l-p-powers]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

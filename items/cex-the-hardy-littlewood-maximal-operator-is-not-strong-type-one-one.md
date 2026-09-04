@@ -2,7 +2,7 @@
 id: cex-the-hardy-littlewood-maximal-operator-is-not-strong-type-one-one
 kind: counterexample
 title: "The Hardy-Littlewood maximal operator is not strong type $(1,1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-centered-and-uncentered-hardy-littlewood-maximal-functions, def-countable-choice, def-l-one-of-a-measure, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, thm-lebesgue-measure-under-dilations-and-reflections]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: thm-riemann-lebesgue-lemma-for-fourier-coefficients
 kind: theorem
 title: "Riemann-Lebesgue lemma for Fourier coefficients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution, lem-step-functions-have-vanishing-torus-fourier-coefficients, lem-step-functions-on-one-period-are-dense-in-l-one-on-the-torus]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-the-functional-equation-alone-characterizes-zeta
 kind: false-statement
 title: "FALSE: the classical functional equation alone characterizes the Riemann zeta function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-riemann-zeta-functional-equation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-hensel-factor-correction-one-stage
 kind: lemma
 title: "One correction step raises factor lifting by one ideal power"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-coprime-factor-bezout-lift, lem-hensel-factor-lift-leading-coefficient-normalisation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

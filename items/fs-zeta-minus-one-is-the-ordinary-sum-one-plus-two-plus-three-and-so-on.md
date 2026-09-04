@@ -2,7 +2,7 @@
 id: fs-zeta-minus-one-is-the-ordinary-sum-one-plus-two-plus-three-and-so-on
 kind: false-statement
 title: "FALSE: $\\zeta(-1)$ is the ordinary sum $1+2+3+\\cdots$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-special-values-of-riemann-zeta-at-integers, rem-dirichlet-series-continuation-and-regularized-sums]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

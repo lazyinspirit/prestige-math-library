@@ -2,7 +2,7 @@
 id: cor-complete-separated-adic-pair-henselian
 kind: corollary
 title: "Complete separated adic pairs are Henselian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-henselian-pair-and-henselian-local-ring, prop-units-in-an-adically-complete-ring, lem-coprime-factor-bezout-lift, lem-hensel-factor-lift-leading-coefficient-normalisation, lem-hensel-factor-correction-one-stage, lem-hensel-factor-corrections-form-cauchy-sequences, lem-hensel-factor-limit-multiplies-to-original, lem-hensel-factor-lift-uniqueness-induction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

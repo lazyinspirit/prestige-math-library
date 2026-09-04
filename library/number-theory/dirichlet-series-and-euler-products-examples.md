@@ -1,7 +1,7 @@
 ---
 page: dirichlet-series-and-euler-products-examples
 title: "Dirichlet Series and Euler Products -- Examples"
-status: draft
+status: published
 items: []
 examples: [ex-dirichlet-series-abscissa-boundaries,
            ex-mobius-reciprocal-zeta-coefficients,

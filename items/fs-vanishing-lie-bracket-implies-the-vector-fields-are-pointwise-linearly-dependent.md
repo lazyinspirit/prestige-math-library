@@ -2,7 +2,7 @@
 id: fs-vanishing-lie-bracket-implies-the-vector-fields-are-pointwise-linearly-dependent
 kind: false-statement
 title: "FALSE: a vanishing Lie bracket forces the vector fields to be pointwise linearly dependent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-hensel-factor-limit-multiplies-to-original
 kind: lemma
 title: "The coefficientwise limits multiply back to the original polynomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-hensel-factor-corrections-form-cauchy-sequences, def-separated-and-complete-filtered-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

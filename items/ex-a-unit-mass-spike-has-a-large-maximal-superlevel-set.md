@@ -2,7 +2,7 @@
 id: ex-a-unit-mass-spike-has-a-large-maximal-superlevel-set
 kind: example
 title: "A unit-mass spike has a large maximal superlevel set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-countable-choice, thm-hardy-littlewood-maximal-inequality-for-balls]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

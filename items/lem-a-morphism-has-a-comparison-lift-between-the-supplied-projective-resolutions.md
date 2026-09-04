@@ -2,7 +2,7 @@
 id: lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions
 kind: lemma
 title: "A morphism has a comparison lift between the supplied projective resolutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-supplied-projective-resolution-datum, thm-projective-comparison-map-exists]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

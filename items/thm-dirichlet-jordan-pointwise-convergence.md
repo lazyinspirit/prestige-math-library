@@ -2,7 +2,7 @@
 id: thm-dirichlet-jordan-pointwise-convergence
 kind: theorem
 title: "Dirichlet-Jordan pointwise convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-symmetric-difference-formula-for-fourier-partial-sums, lem-bounded-variation-gives-one-sided-dirichlet-integrability, cor-bv-discontinuities-are-countable-and-of-first-kind, thm-riemann-lebesgue-lemma-for-fourier-coefficients, lem-closed-form-and-size-bounds-for-the-dirichlet-kernel]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

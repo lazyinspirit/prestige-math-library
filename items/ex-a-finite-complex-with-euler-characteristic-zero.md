@@ -2,12 +2,13 @@
 id: ex-a-finite-complex-with-euler-characteristic-zero
 kind: example
 title: "A finite complex with Euler characteristic zero"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-simplicial-euler-characteristic, thm-euler-poincare-formula-for-a-finite-simplicial-complex, ex-boundary-of-a-triangle-has-first-homology-z]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

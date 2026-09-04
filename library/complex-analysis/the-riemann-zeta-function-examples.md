@@ -1,7 +1,7 @@
 ---
 page: the-riemann-zeta-function-examples
 title: "The Riemann Zeta Function — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-euler-product-numerically-approximates-zeta-at-two,
            ex-zeta-four-equals-pi-to-the-four-over-ninety,

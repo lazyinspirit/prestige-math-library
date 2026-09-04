@@ -2,7 +2,7 @@
 id: prop-related-vector-fields-have-related-lie-brackets
 kind: proposition
 title: "Related vector fields have related Lie brackets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

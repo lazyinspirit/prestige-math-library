@@ -2,13 +2,14 @@
 id: def-random-element-and-real-random-variable
 kind: definition
 title: "Random elements and real random variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-probability-measure, def-measurable-function-between-measurable-spaces, def-borel-sigma-algebra]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: computable-reductions-and-rices-theorem
 title: "Computable Reductions and Rice's Theorem"
-status: draft
+status: published
 items:
   - def-computable-many-one-reduction
   - lem-many-one-reducibility-is-a-preorder
@@ -32,4 +32,3 @@ The second half recasts machine questions extensionally, proves Rice's theorem
 through the witness-machine construction, records the standard semantic
 applications, and closes with the exact boundary between semantic properties of
 recognized languages and merely syntactic properties of machine descriptions.
-

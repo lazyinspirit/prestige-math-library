@@ -2,7 +2,7 @@
 id: thm-nonabelian-first-cohomology-classifies-complements-as-a-pointed-set
 kind: theorem
 title: "Nonabelian first cohomology classifies complements as a pointed set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-graph-subgroup-is-a-complement-exactly-for-a-crossed-homomorphism, def-first-nonabelian-cohomology-as-a-pointed-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

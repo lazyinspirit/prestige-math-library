@@ -2,13 +2,14 @@
 id: lem-the-augmented-simplicial-chain-complex-of-a-simplex-is-contractible
 kind: lemma
 title: "The augmented simplicial chain complex of a simplex is contractible"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-augmentation-and-reduced-simplicial-homology, def-contractible-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

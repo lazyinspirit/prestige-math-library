@@ -2,7 +2,7 @@
 id: lem-the-induced-homology-map-is-independent-of-the-comparison-lift
 kind: lemma
 title: "The induced homology map is independent of the chosen comparison lift"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-derived-object-relative-to-projective-resolution-data, lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy, def-chain-homotopy, def-additive-functor, prop-an-additive-functor-preserves-zero-morphisms, thm-chain-homotopic-maps-induce-the-same-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

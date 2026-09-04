@@ -1,7 +1,7 @@
 ---
 page: dirichlet-series-and-euler-products
 title: "Dirichlet Series and Euler Products"
-status: draft
+status: published
 items: [def-dirichlet-series,
         def-abscissae-dirichlet-series,
         thm-dirichlet-series-half-plane-convergence,

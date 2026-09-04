@@ -2,13 +2,14 @@
 id: def-p-modular-system
 kind: definition
 title: "A p-modular system is a characteristic-zero fraction field over a complete discrete valuation ring with residue field of characteristic p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-discrete-valuation-ring, def-adic-topology-on-a-module, def-separated-and-complete-filtered-module]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

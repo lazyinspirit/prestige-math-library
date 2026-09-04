@@ -1,7 +1,7 @@
 ---
 page: duality-and-rigidity-in-monoidal-categories
 title: "Duality and Rigidity in Monoidal Categories"
-status: draft
+status: published
 items: [def-left-dual-and-right-dual-object,
         def-the-zig-zag-identities,
         rem-which-side-the-word-left-refers-to,

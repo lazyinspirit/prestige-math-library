@@ -2,7 +2,7 @@
 id: cor-henselian-local-simple-root-criterion
 kind: corollary
 title: "A local ring is Henselian exactly when simple residue roots lift uniquely"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-henselian-pair-and-henselian-local-ring, cor-factor-hensel-implies-simple-root-hensel, lem-simple-root-form-recovers-factor-lifting]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

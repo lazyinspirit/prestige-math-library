@@ -2,7 +2,7 @@
 id: cor-local-holder-regularity-implies-fourier-convergence-at-a-point
 kind: corollary
 title: "Local Holder regularity implies Fourier convergence at a point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dini-pointwise-convergence-criterion-for-fourier-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

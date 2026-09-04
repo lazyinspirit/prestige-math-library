@@ -2,7 +2,7 @@
 id: thm-coordinate-map-for-a-finite-dimensional-normed-space
 kind: theorem
 title: "A chosen algebraic basis identifies a finite-dimensional normed space with a coordinate space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

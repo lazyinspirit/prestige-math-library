@@ -2,7 +2,7 @@
 id: thm-weak-approximation-for-rational-places
 kind: theorem
 title: "Weak approximation for rational places"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-place-of-the-rationals, thm-product-formula-for-the-rationals, thm-chinese-remainder-theorem, thm-rationals-countable, lem-q-and-irrationals-dense-r]
 proof_strategy: constructive
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

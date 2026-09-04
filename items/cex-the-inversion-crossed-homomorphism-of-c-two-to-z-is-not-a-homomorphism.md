@@ -2,7 +2,7 @@
 id: cex-the-inversion-crossed-homomorphism-of-c-two-to-z-is-not-a-homomorphism
 kind: counterexample
 title: "The inversion crossed homomorphism C_2 → Z is not an ordinary homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-every-crossed-homomorphism-is-an-ordinary-homomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

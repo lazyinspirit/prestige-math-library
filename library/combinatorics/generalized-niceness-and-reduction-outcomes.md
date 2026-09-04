@@ -1,7 +1,7 @@
 ---
 page: generalized-niceness-and-reduction-outcomes
 title: "Generalized Niceness and Reduction Outcomes"
-status: draft
+status: published
 items: [def-generalized-nice-finite-family, lem-a-complete-or-weakly-sparse-blockade-can-be-thinned-to-equal-subblocks-with-directional-sparsity, lem-a-complete-or-weakly-sparse-blockade-yields-a-complete-subblockade-or-an-anticonnected-thinning, lem-a-wonderful-anticonnected-complete-or-sparse-blockade-yields-a-restricted-subgraph-or-a-large-anticomplete-pair, lem-generalized-niceness-yields-four-reduction-outcomes, cor-large-almost-pure-pair-hypotheses-yield-a-complete-or-anticomplete-blockade, lem-cy-restricted-generalized-niceness-yields-three-outcomes, lem-iterated-restricted-sparsification-reaches-the-target-scale, lem-a-large-cy-restricted-subgraph-in-the-three-outcome-theorem-forces-a-smaller-scale-restricted-subgraph, lem-constant-scale-restricted-generalized-niceness-yields-an-x-scale-restricted-subgraph-a-polynomial-clique-or-stable-set-or-a-blockade]
 examples: []
 ---

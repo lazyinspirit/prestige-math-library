@@ -1,7 +1,7 @@
 ---
 page: the-cook-levin-theorem
 title: "The Cook--Levin Theorem"
-status: draft
+status: published
 items:
   - def-boolean-formula-cnf-and-sat
   - prop-sat-is-in-np
@@ -31,4 +31,3 @@ After SAT completeness is established, the page adds the standard Tseitin
 epilogue. Extension variables keep CNF conversion linear, which makes the
 polynomial reduction from SAT to 3-SAT explicit and also clarifies why naive
 full distribution is the wrong conversion mechanism.
-

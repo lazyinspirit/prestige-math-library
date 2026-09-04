@@ -2,7 +2,7 @@
 id: thm-almost-every-point-is-a-lebesgue-point
 kind: theorem
 title: "Almost every point is a Lebesgue point of a locally integrable function"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-countable-choice, def-lebesgue-point-and-lebesgue-set, def-measure-null-set-and-almost-everywhere, lem-rat-embeds-dense, thm-countable-union-of-null-is-null, thm-product-of-countable, thm-rationals-countable, thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

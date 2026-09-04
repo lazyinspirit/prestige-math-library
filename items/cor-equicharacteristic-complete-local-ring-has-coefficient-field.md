@@ -2,7 +2,7 @@
 id: cor-equicharacteristic-complete-local-ring-has-coefficient-field
 kind: corollary
 title: "Complete equicharacteristic local rings have coefficient fields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-equicharacteristic-local-ring-and-coefficient-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-complete-local-domain-finite-over-a-regular-power-series-ring
 kind: corollary
 title: "A complete local domain is finite over a regular power-series ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-system-of-parameters-and-parameter-ideal, lem-parameter-power-series-subring-makes-ring-finite, lem-parameter-power-series-map-injective-by-dimension]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

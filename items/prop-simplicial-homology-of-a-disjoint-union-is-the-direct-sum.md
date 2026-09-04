@@ -2,13 +2,14 @@
 id: prop-simplicial-homology-of-a-disjoint-union-is-the-direct-sum
 kind: proposition
 title: "Simplicial homology of a disjoint union is the direct sum"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-simplicial-cycles-boundaries-and-homology, def-simplicial-chain-groups-and-boundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

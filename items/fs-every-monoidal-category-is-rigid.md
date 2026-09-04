@@ -2,7 +2,7 @@
 id: fs-every-monoidal-category-is-rigid
 kind: false-statement
 title: "FALSE: every monoidal category is rigid"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-not-every-monoidal-category-is-rigid]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

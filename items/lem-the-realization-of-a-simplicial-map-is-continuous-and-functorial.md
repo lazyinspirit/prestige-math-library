@@ -2,13 +2,14 @@
 id: lem-the-realization-of-a-simplicial-map-is-continuous-and-functorial
 kind: lemma
 title: "The realization of a simplicial map is continuous and functorial"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-simplicial-map-and-its-geometric-realization, lem-geometric-simplices-intersect-in-the-realization-of-their-common-face]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

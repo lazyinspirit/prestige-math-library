@@ -2,7 +2,7 @@
 id: cor-adapted-classes-compute-derived-functors
 kind: corollary
 title: "Adapted classes compute derived functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-f-acyclic-resolution, thm-acyclic-resolution-theorem-for-right-derived-functors, thm-acyclic-resolution-theorem-for-left-derived-functors]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-first-cohomology-of-a-finite-group-with-uniquely-divisible-coefficients-vanishes
 kind: corollary
 title: "For a finite group, uniquely divisible coefficients have trivial first cohomology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-first-cohomology-via-crossed-homomorphisms, thm-lagrange]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

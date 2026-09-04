@@ -2,7 +2,7 @@
 id: lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects
 kind: lemma
 title: "Objectwise comparison of two projective resolution data induces an isomorphism on derived objects"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-derived-object-relative-to-projective-resolution-data, def-supplied-projective-resolution-datum, thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object, thm-chain-homotopic-maps-induce-the-same-map-on-homology, prop-homology-respects-identities-and-composition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

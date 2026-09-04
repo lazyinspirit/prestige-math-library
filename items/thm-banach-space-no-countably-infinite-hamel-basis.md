@@ -2,7 +2,7 @@
 id: thm-banach-space-no-countably-infinite-hamel-basis
 kind: theorem
 title: "A Banach space has no countably infinite Hamel basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

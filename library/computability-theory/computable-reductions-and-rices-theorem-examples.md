@@ -1,7 +1,7 @@
 ---
 page: computable-reductions-and-rices-theorem-examples
 title: "Computable Reductions and Rice's Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-many-one-reductions-transfer-decidability-and-recognizability

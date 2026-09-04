@@ -2,7 +2,7 @@
 id: cex-a-random-variable-need-not-have-a-finite-expectation
 kind: counterexample
 title: "A random variable need not have a finite expectation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable, def-integral-of-a-nonnegative-simple-function, prop-the-nonnegative-integral-agrees-with-the-simple-integral, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

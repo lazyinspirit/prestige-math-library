@@ -2,7 +2,7 @@
 id: lem-finite-random-variables-are-measurable
 kind: lemma
 title: "Finite random variables are measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-random-element-and-real-random-variable, def-finite-real-random-variable-and-distribution, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

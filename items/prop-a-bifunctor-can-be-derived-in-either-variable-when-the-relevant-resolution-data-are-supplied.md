@@ -2,7 +2,7 @@
 id: prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied
 kind: proposition
 title: "A bifunctor can be derived in either variable when the relevant resolution data are supplied"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-contravariant-derived-functors-are-derived-on-the-opposite-category, def-left-derived-object-relative-to-projective-resolution-data, def-right-derived-object-relative-to-injective-resolution-data]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

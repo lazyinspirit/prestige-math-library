@@ -2,7 +2,7 @@
 id: def-left-dual-and-right-dual-object
 kind: definition
 title: "Left dual and right dual object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoidal-category]
 landmark: true
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

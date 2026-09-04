@@ -2,7 +2,7 @@
 id: cor-expectation-linearity-monotonicity-and-modulus-bound
 kind: corollary
 title: "Linearity, monotonicity, and the modulus bound for expectation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-integral-triangle-inequality]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

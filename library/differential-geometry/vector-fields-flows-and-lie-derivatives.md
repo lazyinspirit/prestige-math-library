@@ -1,7 +1,7 @@
 ---
 page: vector-fields-flows-and-lie-derivatives
 title: "Vector Fields Flows and Lie Derivatives"
-status: draft
+status: published
 items: [def-smooth-vector-field-as-a-tangent-bundle-section,
         prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components,
         def-action-of-a-vector-field-on-smooth-functions,

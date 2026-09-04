@@ -2,7 +2,7 @@
 id: cex-isomorphic-middle-groups-do-not-determine-equivalent-extensions
 kind: counterexample
 title: "The cyclic group Z/9 supports inequivalent extensions of C_3 by C_3"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-isomorphic-middle-groups-force-equivalent-group-extensions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

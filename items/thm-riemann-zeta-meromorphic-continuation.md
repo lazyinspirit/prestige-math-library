@@ -2,7 +2,7 @@
 id: thm-riemann-zeta-meromorphic-continuation
 kind: theorem
 title: "The Riemann zeta function extends meromorphically to the complex plane with its only pole at $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-riemann-zeta-continuation-to-the-right-half-plane, thm-jacobi-theta-transformation, thm-theta-mellin-representation-of-completed-zeta, def-completed-riemann-zeta-function, thm-gamma-meromorphic-continuation, cor-gamma-function-has-no-zeros]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

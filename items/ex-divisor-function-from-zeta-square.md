@@ -2,7 +2,7 @@
 id: ex-divisor-function-from-zeta-square
 kind: example
 title: "The coefficient of 12 in zeta squared is the divisor count of 12"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-divisor-dirichlet-series-zeta-square]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

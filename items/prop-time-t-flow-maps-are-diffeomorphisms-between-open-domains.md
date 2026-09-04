@@ -2,7 +2,7 @@
 id: prop-time-t-flow-maps-are-diffeomorphisms-between-open-domains
 kind: proposition
 title: "Time-t flow maps are diffeomorphisms between open domains"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

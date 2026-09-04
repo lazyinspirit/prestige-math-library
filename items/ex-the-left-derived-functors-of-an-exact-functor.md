@@ -2,7 +2,7 @@
 id: ex-the-left-derived-functors-of-an-exact-functor
 kind: example
 title: "The left derived functors of an exact functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-an-exact-functor-has-vanishing-positive-derived-functors, thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

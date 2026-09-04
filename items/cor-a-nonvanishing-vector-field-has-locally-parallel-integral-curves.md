@@ -2,7 +2,7 @@
 id: cor-a-nonvanishing-vector-field-has-locally-parallel-integral-curves
 kind: corollary
 title: "A nonvanishing vector field has locally parallel integral curves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

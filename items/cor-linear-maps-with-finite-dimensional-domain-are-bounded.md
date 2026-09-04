@@ -2,7 +2,7 @@
 id: cor-linear-maps-with-finite-dimensional-domain-are-bounded
 kind: corollary
 title: "A linear map from a finite-dimensional normed space is bounded"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

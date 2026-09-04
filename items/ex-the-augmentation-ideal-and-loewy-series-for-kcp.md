@@ -2,7 +2,7 @@
 id: ex-the-augmentation-ideal-and-loewy-series-for-kcp
 kind: example
 title: "The augmentation ideal and Loewy series of kCp can be written explicitly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-module-radical-socle-head-and-loewy-series, thm-kg-is-local-iff-g-is-a-p-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

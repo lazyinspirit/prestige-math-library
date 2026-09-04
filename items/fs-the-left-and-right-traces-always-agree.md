@@ -2,7 +2,7 @@
 id: fs-the-left-and-right-traces-always-agree
 kind: false-statement
 title: "FALSE: the left and right traces always agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-in-a-spherical-category-the-left-and-right-traces-agree]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

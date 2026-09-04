@@ -2,7 +2,7 @@
 id: cor-finitely-generated-projective-kg-modules-are-injective-and-conversely
 kind: corollary
 title: "Over a finite group algebra in defining characteristic, finite-dimensional projective and injective modules coincide"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-group-algebra-in-defining-characteristic-is-a-symmetric-frobenius-algebra, def-projective-module, def-injective-module, thm-projective-module-characterizations, thm-injective-module-characterizations]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

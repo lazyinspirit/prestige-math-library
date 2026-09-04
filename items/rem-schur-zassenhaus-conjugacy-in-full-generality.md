@@ -2,7 +2,7 @@
 id: rem-schur-zassenhaus-conjugacy-in-full-generality
 kind: remark
 title: "The full Schur-Zassenhaus conjugacy theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -15,6 +15,11 @@ external_dependency:
   local_proof_attempt: "This page proves the classical conjugacy theorem when the kernel or quotient is solvable and stops at that boundary."
   necessity: "The remark records the standard clean statement without erasing the proof boundary of the locally written theorem."
 verification:
+  audited: 2026-09-04
+  sources_checked:
+    date: 2026-09-04
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

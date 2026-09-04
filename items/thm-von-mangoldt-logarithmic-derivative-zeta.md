@@ -2,7 +2,7 @@
 id: thm-von-mangoldt-logarithmic-derivative-zeta
 kind: theorem
 title: "The logarithmic derivative of the zeta Dirichlet series is the Dirichlet series of the von Mangoldt function on Re s greater than 1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-von-mangoldt-function, cor-completely-multiplicative-dirichlet-series-euler-product, thm-dirichlet-series-multiplication-convolution, cor-von-mangoldt-mobius-inversion-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,12 +2,13 @@
 id: def-simplicial-euler-characteristic
 kind: definition
 title: "The simplicial Euler characteristic"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-locally-finite-and-finite-dimensional-simplicial-complex]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

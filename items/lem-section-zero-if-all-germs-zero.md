@@ -2,13 +2,14 @@
 id: lem-section-zero-if-all-germs-zero
 kind: lemma
 title: "A section of a sheaf of groups is zero exactly when all of its germs are zero"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheaf-on-topological-space, def-presheaf-of-groups-rings-modules, def-germ-of-section]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

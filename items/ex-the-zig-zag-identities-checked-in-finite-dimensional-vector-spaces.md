@@ -2,7 +2,7 @@
 id: ex-the-zig-zag-identities-checked-in-finite-dimensional-vector-spaces
 kind: example
 title: "The zig-zag identities in finite-dimensional vector spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-zig-zag-identities, thm-finite-dimensional-vector-spaces-are-rigid]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

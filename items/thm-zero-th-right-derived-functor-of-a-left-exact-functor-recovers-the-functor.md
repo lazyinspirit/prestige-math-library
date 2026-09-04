@@ -2,7 +2,7 @@
 id: thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor
 kind: theorem
 title: "The zero-th right derived functor of a left exact functor recovers the functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-right-derived-functors-relative-to-supplied-data-are-additive-functors, def-left-exact-and-right-exact-functor, def-cohomology-object-of-a-cochain-complex, def-injective-resolution-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

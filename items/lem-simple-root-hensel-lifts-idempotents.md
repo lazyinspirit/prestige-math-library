@@ -2,7 +2,7 @@
 id: lem-simple-root-hensel-lifts-idempotents
 kind: lemma
 title: "Simple-root lifting also lifts idempotents"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-factor-hensel-implies-simple-root-hensel]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

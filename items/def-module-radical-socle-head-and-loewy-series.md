@@ -2,13 +2,14 @@
 id: def-module-radical-socle-head-and-loewy-series
 kind: definition
 title: "The radical, socle, head, and Loewy series of a finite-dimensional module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-module-radical-is-jacobson-radical-times-the-module, def-socle-of-a-module, def-quotient-module, def-simple-module]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

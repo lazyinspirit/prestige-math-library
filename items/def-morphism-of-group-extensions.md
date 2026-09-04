@@ -2,13 +2,14 @@
 id: def-morphism-of-group-extensions
 kind: definition
 title: "Morphisms of group extensions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient, def-group-homomorphism]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

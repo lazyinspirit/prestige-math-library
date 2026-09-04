@@ -2,12 +2,13 @@
 id: def-sheaf-on-topological-space
 kind: definition
 title: "A sheaf on a topological space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-on-topological-space]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

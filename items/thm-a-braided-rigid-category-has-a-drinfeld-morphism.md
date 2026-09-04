@@ -2,7 +2,7 @@
 id: thm-a-braided-rigid-category-has-a-drinfeld-morphism
 kind: theorem
 title: "A braided rigid category has a Drinfeld morphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-rigid-object-and-rigid-monoidal-category, def-braiding, thm-the-doubl
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

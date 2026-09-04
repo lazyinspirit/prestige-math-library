@@ -2,7 +2,7 @@
 id: thm-a-riemannian-metric-has-a-unique-levi-civita-connection-on-the-cotangent-bundle
 kind: theorem
 title: "A Riemannian metric has a unique Levi-Civita connection on the cotangent bundle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: local coefficient construction
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-every-reduction-of-an-ordinary-irreducible-remains-irreducible
 kind: false-statement
 title: "Every reduction modulo p of an ordinary irreducible lattice stays irreducible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-og-lattice-and-reduction-modulo-the-maximal-ideal]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

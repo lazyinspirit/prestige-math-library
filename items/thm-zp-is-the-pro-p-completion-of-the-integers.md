@@ -2,7 +2,7 @@
 id: thm-zp-is-the-pro-p-completion-of-the-integers
 kind: theorem
 title: "Zp is the pro-p completion of the integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-pro-p-completion-of-an-abstract-group, def-canonical-map-from-the-integers-to-zp, thm-concrete-inverse-limit-universal-property-in-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

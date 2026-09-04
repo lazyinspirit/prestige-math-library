@@ -2,7 +2,7 @@
 id: prop-derived-functors-commute-with-finite-biproducts
 kind: proposition
 title: "Derived functors commute with finite biproducts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-left-derived-functors-relative-to-supplied-data-are-additive-functors, thm-right-derived-functors-relative-to-supplied-data-are-additive-functors, thm-an-additive-functor-preserves-finite-biproducts]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

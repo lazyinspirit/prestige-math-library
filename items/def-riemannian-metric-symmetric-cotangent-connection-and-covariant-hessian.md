@@ -2,7 +2,7 @@
 id: def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian
 kind: definition
 title: "Riemannian metrics, symmetric cotangent-bundle connections, and covariant Hessians"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

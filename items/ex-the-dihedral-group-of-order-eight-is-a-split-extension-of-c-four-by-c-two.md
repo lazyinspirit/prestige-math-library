@@ -2,7 +2,7 @@
 id: ex-the-dihedral-group-of-order-eight-is-a-split-extension-of-c-four-by-c-two
 kind: example
 title: "The dihedral group of order eight is a split extension of C_4 by C_2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-dihedral-groups-as-semidirect-products, thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

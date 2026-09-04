@@ -1,7 +1,7 @@
 ---
 page: derived-functors-examples
 title: "Derived Functors — Examples"
-status: draft
+status: published
 items: []
 examples:
   [ex-the-left-derived-functors-of-an-exact-functor, ex-the-right-derived-functors-of-hom-from-a-fixed-object, ex-two-resolution-data-and-their-change-isomorphism, ex-independence-of-two-comparison-lifts-on-homology, ex-an-acyclic-resolution-that-is-not-an-injective-resolution, cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor, ex-a-contravariant-functor-derived-via-the-opposite-category]

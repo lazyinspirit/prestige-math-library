@@ -2,13 +2,14 @@
 id: def-p-adic-absolute-value-on-the-rationals
 kind: definition
 title: "The p-adic absolute value on the rationals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-p-adic-valuation-on-q]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

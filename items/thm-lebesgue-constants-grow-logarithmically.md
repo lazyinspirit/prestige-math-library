@@ -2,7 +2,7 @@
 id: thm-lebesgue-constants-grow-logarithmically
 kind: theorem
 title: "Lebesgue constants grow logarithmically"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-closed-form-and-size-bounds-for-the-dirichlet-kernel, lem-sine-positive-and-cosine-decreasing-on-zero-two]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

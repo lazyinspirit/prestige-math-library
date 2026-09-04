@@ -2,13 +2,14 @@
 id: def-splitting-p-modular-system-for-a-finite-group
 kind: definition
 title: "A splitting p-modular system for a finite group is a p-modular system whose fraction and residue fields split the needed group algebras"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-p-modular-system, def-splitting-field-for-a-finite-group]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: probability-spaces-random-variables-and-expectation-examples
 title: "Probability Spaces Random Variables and Expectation — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-countable-probability-space-with-geometric-weights,
            ex-uniform-random-variable-on-zero-one,

@@ -2,7 +2,7 @@
 id: ex-idempotent-lifting-and-product-decomposition
 kind: example
 title: "Lifting an idempotent recovers a product decomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-complete-separated-adic-pair-henselian, cor-idempotents-lift-uniquely-in-a-henselian-pair]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

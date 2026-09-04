@@ -1,7 +1,7 @@
 ---
 page: absolute-values-completions-and-p-adic-numbers-examples
 title: "Absolute Values Completions and P Adic Numbers -- Examples"
-status: draft
+status: published
 items: []
 examples: [ex-p-adic-geometric-series,
            ex-p-adic-expansion-of-minus-one,

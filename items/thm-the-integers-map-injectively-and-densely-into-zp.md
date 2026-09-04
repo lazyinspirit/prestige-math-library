@@ -2,7 +2,7 @@
 id: thm-the-integers-map-injectively-and-densely-into-zp
 kind: theorem
 title: "The canonical map from the integers into Zp is injective and has dense image"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-canonical-map-from-the-integers-to-zp, def-p-adic-integers-as-compatible-residue-classes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

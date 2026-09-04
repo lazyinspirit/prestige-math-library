@@ -2,7 +2,7 @@
 id: lem-coefficient-field-maps-isomorphically-to-residue-field
 kind: lemma
 title: "A coefficient field maps isomorphically to the residue field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-equicharacteristic-local-ring-and-coefficient-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

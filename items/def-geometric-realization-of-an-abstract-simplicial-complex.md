@@ -2,12 +2,13 @@
 id: def-geometric-realization-of-an-abstract-simplicial-complex
 kind: definition
 title: "The geometric realization of an abstract simplicial complex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-abstract-simplicial-complex, def-geometric-simplex-spanned-by-affinely-independent-vertices, def-product-topology, def-subspace-topology-top]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-first-nonabelian-cohomology-as-a-pointed-set
 kind: definition
 title: "First nonabelian cohomology as a pointed set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-crossed-homomorphism-for-a-g-group]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

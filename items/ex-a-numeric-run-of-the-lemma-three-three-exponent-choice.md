@@ -2,7 +2,7 @@
 id: ex-a-numeric-run-of-the-lemma-three-three-exponent-choice
 kind: example
 title: "A numeric run of the Lemma 3.3 exponent choice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

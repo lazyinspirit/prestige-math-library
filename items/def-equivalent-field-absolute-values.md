@@ -2,13 +2,14 @@
 id: def-equivalent-field-absolute-values
 kind: definition
 title: "Equivalent nontrivial absolute values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-multiplicative-absolute-value-on-a-field]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

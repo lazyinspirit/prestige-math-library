@@ -2,12 +2,14 @@
 id: def-locally-integrable-function-on-r-n
 kind: definition
 title: "A locally integrable function on $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-borel-and-lebesgue-measurable-function-on-rn, def-integrable-real-and-complex-functions-and-their-integrals, def-metric-ball]
+verification:
+  audited: 2026-09-04
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis: Modern Techniques and Their Applications, 2nd ed., Section 3.4"

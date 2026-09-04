@@ -2,12 +2,13 @@
 id: rem-sections-not-determined-by-single-stalk
 kind: remark
 title: "A single stalk does not determine a global section"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-stalk-of-presheaf, def-germ-of-section]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

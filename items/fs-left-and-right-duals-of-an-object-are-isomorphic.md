@@ -2,7 +2,7 @@
 id: fs-left-and-right-duals-of-an-object-are-isomorphic
 kind: false-statement
 title: "FALSE: left and right duals of an object are isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-left-and-right-duals-and-double-duals-need-not-collapse]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

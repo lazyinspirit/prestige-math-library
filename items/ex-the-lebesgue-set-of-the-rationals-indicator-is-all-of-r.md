@@ -2,7 +2,7 @@
 id: ex-the-lebesgue-set-of-the-rationals-indicator-is-all-of-r
 kind: example
 title: "The $L^1_{loc}$ class of $\\mathbf{1}_{\\mathbb{Q}}$ has every point as a Lebesgue point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, def-lebesgue-point-and-lebesgue-set, prop-countable-subsets-of-rn-are-lebesgue-null]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-dirichlet-series-abscissa-gap
 kind: theorem
 title: "The convergence and absolute-convergence abscissae differ by at most one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-abscissae-dirichlet-series, thm-dirichlet-series-half-plane-convergence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

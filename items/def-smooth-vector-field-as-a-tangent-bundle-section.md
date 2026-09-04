@@ -2,7 +2,7 @@
 id: def-smooth-vector-field-as-a-tangent-bundle-section
 kind: definition
 title: "A smooth vector field is a smooth section of the tangent bundle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-product-formula-for-the-rationals
 kind: theorem
 title: "The product formula for the rationals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-place-of-the-rationals, def-p-adic-absolute-value-on-the-rationals, thm-canonical-prime-factorisation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

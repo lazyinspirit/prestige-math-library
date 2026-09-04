@@ -2,7 +2,7 @@
 id: lem-law-of-a-random-element-is-a-probability-measure
 kind: lemma
 title: "The law of a random element is a probability measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-law-or-distribution-of-a-random-element, def-probability-measure, def-random-element-and-real-random-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

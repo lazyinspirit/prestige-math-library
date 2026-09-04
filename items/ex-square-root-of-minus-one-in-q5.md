@@ -2,7 +2,7 @@
 id: ex-square-root-of-minus-one-in-q5
 kind: example
 title: "A square root of minus one in Q_5"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-p-adic-simple-root-lifting, thm-p-adic-newton-criterion, thm-square-criterion-in-qp-for-odd-p]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

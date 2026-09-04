@@ -2,7 +2,7 @@
 id: thm-nakayama-lemma-for-finite-dimensional-algebras
 kind: theorem
 title: "Over a finite-dimensional algebra, a module annihilated modulo its radical is zero, and generators lift from the head"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-module-radical-is-jacobson-radical-times-the-module, thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

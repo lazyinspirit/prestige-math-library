@@ -2,7 +2,7 @@
 id: cex-conditionally-convergent-euler-product-rearrangement
 kind: counterexample
 title: "The Euler-product identity does not survive after leaving the absolute half-plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-multiplicative-dirichlet-series-euler-product, thm-dirichlet-series-absolute-half-plane-holomorphy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

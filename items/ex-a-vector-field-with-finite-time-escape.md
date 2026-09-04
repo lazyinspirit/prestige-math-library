@@ -2,7 +2,7 @@
 id: ex-a-vector-field-with-finite-time-escape
 kind: example
 title: "The vector field x^2 d/dx has finite-time escape"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

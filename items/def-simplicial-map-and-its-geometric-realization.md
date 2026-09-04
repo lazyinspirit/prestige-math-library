@@ -2,12 +2,13 @@
 id: def-simplicial-map-and-its-geometric-realization
 kind: definition
 title: "A simplicial map and its geometric realization"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-abstract-simplicial-complex, def-geometric-realization-of-an-abstract-simplicial-complex]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

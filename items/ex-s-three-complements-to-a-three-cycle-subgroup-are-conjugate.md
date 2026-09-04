@@ -2,7 +2,7 @@
 id: ex-s-three-complements-to-a-three-cycle-subgroup-are-conjugate
 kind: example
 title: "The three transposition subgroups of S_3 are conjugate complements to A_3"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable, def-symmetric-group, def-alternating-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

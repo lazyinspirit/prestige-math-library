@@ -2,7 +2,7 @@
 id: lem-cy-restricted-generalized-niceness-yields-three-outcomes
 kind: lemma
 title: "cy-restricted generalized niceness yields three outcomes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

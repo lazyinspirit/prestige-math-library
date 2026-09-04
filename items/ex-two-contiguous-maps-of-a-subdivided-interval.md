@@ -2,12 +2,13 @@
 id: ex-two-contiguous-maps-of-a-subdivided-interval
 kind: example
 title: "Two contiguous maps of a subdivided interval"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-contiguous-simplicial-maps, lem-contiguous-simplicial-maps-have-homotopic-realizations, thm-contiguous-simplicial-maps-induce-the-same-map-on-simplicial-homology]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

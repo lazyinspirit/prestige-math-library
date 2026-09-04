@@ -2,7 +2,7 @@
 id: cor-lyapunov-moment-inequality-on-a-probability-space
 kind: corollary
 title: "Lyapunov's moment inequality on a probability space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-probability-measure, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

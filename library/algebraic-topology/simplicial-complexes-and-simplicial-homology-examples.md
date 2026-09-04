@@ -1,7 +1,7 @@
 ---
 page: simplicial-complexes-and-simplicial-homology-examples
 title: Simplicial Complexes and Simplicial Homology - Examples
-status: draft
+status: published
 items: []
 examples: [ex-simplicial-homology-of-a-point-and-an-edge, ex-boundary-of-a-triangle-has-first-homology-z, ex-simplicial-homology-of-the-tetrahedron-boundary, ex-a-contractible-simplicial-cone, ex-two-contiguous-maps-of-a-subdivided-interval, ex-a-finite-complex-with-euler-characteristic-zero, cex-a-vertex-map-need-not-be-simplicial, cex-finite-dimensional-does-not-imply-finite-or-locally-finite, ex-a-delta-complex-structure-on-the-torus]
 ---

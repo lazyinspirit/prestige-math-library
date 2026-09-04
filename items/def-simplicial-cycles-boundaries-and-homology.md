@@ -2,12 +2,13 @@
 id: def-simplicial-cycles-boundaries-and-homology
 kind: definition
 title: "Simplicial cycles, boundaries, and homology"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-simplicial-chain-groups-and-boundary, thm-the-simplicial-boundary-squares-to-zero, def-cycle-and-boundary-subobjects-of-a-complex, def-homology-object-of-a-chain-complex]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

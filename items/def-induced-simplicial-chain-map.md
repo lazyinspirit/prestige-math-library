@@ -2,12 +2,13 @@
 id: def-induced-simplicial-chain-map
 kind: definition
 title: "The induced graded homomorphism of a simplicial map"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-simplicial-map-and-its-geometric-realization, def-orientation-of-a-simplex, def-simplicial-chain-groups-and-boundary]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

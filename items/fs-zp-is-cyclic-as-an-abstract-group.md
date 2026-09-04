@@ -2,7 +2,7 @@
 id: fs-zp-is-cyclic-as-an-abstract-group
 kind: false-statement
 title: "The additive group of Zp is cyclic as an abstract group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-zp-is-topologically-generated-by-one, prop-additive-group-of-zp-is-torsion-free]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-supplied-projective-resolution-datum
 kind: definition
 title: "Supplied projective resolution data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-resolution-in-an-abelian-category, def-abelian-category]
 landmark: true
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

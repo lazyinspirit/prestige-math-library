@@ -2,7 +2,7 @@
 id: cor-piecewise-c-one-fourier-series-converges-to-midpoint-values
 kind: corollary
 title: "Piecewise C^1 Fourier series converges to midpoint values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dirichlet-jordan-pointwise-convergence, thm-c1-lipschitz-ac-bv-hierarchy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: lem-barycentric-coordinates-are-unique
 kind: lemma
 title: "Barycentric coordinates are unique"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-geometric-simplex-spanned-by-affinely-independent-vertices]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

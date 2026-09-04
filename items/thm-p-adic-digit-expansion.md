@@ -2,7 +2,7 @@
 id: thm-p-adic-digit-expansion
 kind: theorem
 title: "Every p-adic number has a unique digit expansion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-field-of-p-adic-numbers, thm-p-adic-completion-agrees-with-the-fraction-field-of-zp, thm-p-adic-completion-is-a-field, cor-zp-is-the-valuation-ring-of-qp]
 proof_strategy: constructive
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-continuity-alone-does-not-satisfy-a-dini-modulus
 kind: counterexample
 title: "Continuity alone does not satisfy a Dini modulus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-dini-pointwise-convergence-criterion-for-fourier-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

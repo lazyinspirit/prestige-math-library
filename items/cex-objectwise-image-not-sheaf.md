@@ -2,13 +2,14 @@
 id: cex-objectwise-image-not-sheaf
 kind: counterexample
 title: "The objectwise image of a sheaf morphism need not be a sheaf"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-subsheaf, lem-image-sheaf-is-sheafification-presheaf-image]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

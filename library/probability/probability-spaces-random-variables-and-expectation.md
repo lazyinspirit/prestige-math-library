@@ -1,7 +1,7 @@
 ---
 page: probability-spaces-random-variables-and-expectation
 title: "Probability Spaces Random Variables and Expectation"
-status: draft
+status: published
 items: [lem-probability-measure-basic-identities,
         thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces,
         rem-finite-probability-space-definition-agreement,

@@ -2,7 +2,7 @@
 id: prop-hardy-littlewood-maximal-function-is-l-infinity-bounded
 kind: proposition
 title: "The centered maximal operator is bounded on $L^\\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-centered-and-uncentered-hardy-littlewood-maximal-functions, def-countable-choice, def-l-infinity-on-a-measure-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

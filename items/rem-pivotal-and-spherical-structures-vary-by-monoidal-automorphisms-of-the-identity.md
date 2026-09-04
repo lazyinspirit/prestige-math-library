@@ -2,13 +2,14 @@
 id: rem-pivotal-and-spherical-structures-vary-by-monoidal-automorphisms-of-the-identity
 kind: remark
 title: "Pivotal and spherical structures vary by monoidal automorphisms of the identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-pivotal-structure, def-spherical-structure]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: lem-second-plus-construction-is-sheaf
 kind: lemma
 title: "The second plus construction is a sheaf"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-presheaf-plus-construction, lem-first-plus-construction-is-separated, def-sheaf-on-topological-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-expectation-of-an-indicator-is-probability
 kind: corollary
 title: "The expectation of an indicator is the probability of the event"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable, lem-probability-measure-basic-identities, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-of-a-nonnegative-simple-function]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

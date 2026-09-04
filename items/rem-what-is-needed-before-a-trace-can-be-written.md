@@ -2,13 +2,14 @@
 id: rem-what-is-needed-before-a-trace-can-be-written
 kind: remark
 title: "What is needed before a trace can be written"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-the-categorical-trace-of-a-morphism-into-the-double-dual, thm-a-braided-rigid-category-has-a-drinfeld-morphism]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

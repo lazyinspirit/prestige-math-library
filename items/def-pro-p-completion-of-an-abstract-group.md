@@ -2,13 +2,14 @@
 id: def-pro-p-completion-of-an-abstract-group
 kind: definition
 title: "The pro-p completion of an abstract group is the inverse limit over its finite p-group quotients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-profinite-completion-of-an-abstract-group, def-pro-p-group]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

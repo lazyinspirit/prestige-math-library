@@ -2,7 +2,7 @@
 id: lem-fourier-partial-sums-are-dirichlet-convolutions
 kind: lemma
 title: "Fourier partial sums are Dirichlet convolutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution, def-dirichlet-and-fejer-kernels]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

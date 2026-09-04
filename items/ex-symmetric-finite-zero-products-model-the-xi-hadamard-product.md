@@ -2,7 +2,7 @@
 id: ex-symmetric-finite-zero-products-model-the-xi-hadamard-product
 kind: example
 title: "Symmetric finite zero products model the genus-one product for xi"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-hadamard-product-for-riemann-xi]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

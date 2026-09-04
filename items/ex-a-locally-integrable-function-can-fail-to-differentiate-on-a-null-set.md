@@ -2,7 +2,7 @@
 id: ex-a-locally-integrable-function-can-fail-to-differentiate-on-a-null-set
 kind: example
 title: "A locally integrable function can fail to differentiate on a null set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-countable-choice, def-ball-average-operator-on-r-n, thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

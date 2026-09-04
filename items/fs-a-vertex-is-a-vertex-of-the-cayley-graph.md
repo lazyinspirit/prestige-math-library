@@ -2,7 +2,7 @@
 id: fs-a-vertex-is-a-vertex-of-the-cayley-graph
 kind: false-statement
 title: "The vertex of an indecomposable module is literally a graph vertex of a Cayley graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-vertex-and-source-of-an-indecomposable-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

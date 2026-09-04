@@ -2,7 +2,7 @@
 id: thm-square-criterion-in-qp-for-odd-p
 kind: theorem
 title: "Square criterion in Q_p for odd p"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-zp-is-the-valuation-ring-of-qp, cor-p-adic-simple-root-lifting]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

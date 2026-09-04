@@ -1,7 +1,7 @@
 ---
 page: affine-algebraic-sets-and-coordinate-rings
 title: "Affine Algebraic Sets and Coordinate Rings"
-status: draft
+status: published
 items:
   - def-affine-algebraic-set
   - lem-zero-locus-ideal-closure

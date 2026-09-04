@@ -2,13 +2,14 @@
 id: def-balanced-derived-bifunctor
 kind: definition
 title: "A balanced derived bifunctor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied, def-natural-transformation, thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor, thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

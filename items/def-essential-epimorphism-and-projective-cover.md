@@ -2,13 +2,14 @@
 id: def-essential-epimorphism-and-projective-cover
 kind: definition
 title: "An essential epimorphism is a surjection with superfluous kernel, and a projective cover is a projective source with such a map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-projective-module, thm-projective-module-characterizations, lem-radical-of-a-finite-length-module-is-superfluous]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

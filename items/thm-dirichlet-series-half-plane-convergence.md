@@ -2,7 +2,7 @@
 id: thm-dirichlet-series-half-plane-convergence
 kind: theorem
 title: "Convergence at one point of a Dirichlet series forces local uniform convergence on the open half-plane to its right"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirichlet-series, lem-abel-summation-for-complex-series, thm-weierstrass-convergence-holomorphic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

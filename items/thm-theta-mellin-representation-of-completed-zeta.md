@@ -2,7 +2,7 @@
 id: thm-theta-mellin-representation-of-completed-zeta
 kind: theorem
 title: "The completed zeta function has its Mellin-theta integral representation on $\\operatorname{Re}s>1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemann-zeta-function, def-jacobi-theta-function, def-euler-gamma-function, thm-tonelli-theorem-for-sigma-finite-product-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

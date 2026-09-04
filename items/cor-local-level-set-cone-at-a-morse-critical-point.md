@@ -2,7 +2,7 @@
 id: cor-local-level-set-cone-at-a-morse-critical-point
 kind: corollary
 title: "The critical level is a quadratic cone in Morse coordinates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: normal form reading
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

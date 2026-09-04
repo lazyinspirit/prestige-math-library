@@ -2,7 +2,7 @@
 id: thm-the-double-dual-is-a-monoidal-functor
 kind: theorem
 title: "The double dual is a monoidal functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-left-duality-is-a-contravariant-antimonoidal-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

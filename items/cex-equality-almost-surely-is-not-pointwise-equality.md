@@ -2,7 +2,7 @@
 id: cex-equality-almost-surely-is-not-pointwise-equality
 kind: counterexample
 title: "Equality almost surely is not pointwise equality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [lem-expectation-is-independent-of-the-ae-representative, def-measure-null-set-and-almost-everywhere]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-the-harmonic-series-shows-the-defining-series-diverges-at-one
 kind: counterexample
 title: "The defining Dirichlet series for zeta diverges at $s=1$ because it becomes the harmonic series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemann-zeta-function, thm-p-series-rational]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

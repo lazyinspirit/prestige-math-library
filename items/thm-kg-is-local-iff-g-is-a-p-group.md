@@ -2,7 +2,7 @@
 id: thm-kg-is-local-iff-g-is-a-p-group
 kind: theorem
 title: "For a finite group and a field of characteristic p, the group algebra is local exactly when the group is a p-group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-augmentation-ideal-of-a-finite-p-group-algebra-is-nilpotent, def-jacobson-radical-of-a-finite-dimensional-algebra, thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple, def-augmentation-map-and-augmentation-ideal-of-a-group-ring, thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules, thm-cauchys-theorem-for-finite-groups, thm-group-ring-is-a-unital-algebra-with-basis-g]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

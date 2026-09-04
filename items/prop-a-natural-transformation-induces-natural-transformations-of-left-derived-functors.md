@@ -2,7 +2,7 @@
 id: prop-a-natural-transformation-induces-natural-transformations-of-left-derived-functors
 kind: proposition
 title: "A natural transformation induces natural transformations of left derived functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-left-derived-functors-relative-to-supplied-data-are-additive-functors, def-natural-transformation, prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps, thm-a-chain-map-induces-a-well-defined-map-on-homology, def-left-derived-map-relative-to-resolution-data]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

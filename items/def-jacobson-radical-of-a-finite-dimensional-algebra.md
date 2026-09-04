@@ -2,13 +2,14 @@
 id: def-jacobson-radical-of-a-finite-dimensional-algebra
 kind: definition
 title: "The Jacobson radical of a finite-dimensional algebra is the intersection of its maximal left ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules]
 verification:
+  audited: 2026-09-04
   precheck: n/a
 sources:
   scraped: []

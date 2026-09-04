@@ -2,7 +2,7 @@
 id: prop-left-derived-maps-preserve-composition
 kind: proposition
 title: "Left derived maps preserve composition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-derived-map-relative-to-resolution-data, prop-comparison-maps-respect-composition-up-to-homotopy, thm-chain-homotopic-maps-induce-the-same-map-on-homology, prop-homology-respects-identities-and-composition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-closed-form-and-size-bounds-for-the-dirichlet-kernel
 kind: lemma
 title: "Closed form and size bounds for the Dirichlet kernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirichlet-and-fejer-kernels]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

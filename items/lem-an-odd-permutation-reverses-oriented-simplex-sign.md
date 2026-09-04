@@ -2,13 +2,14 @@
 id: lem-an-odd-permutation-reverses-oriented-simplex-sign
 kind: lemma
 title: "An odd permutation reverses the sign of an oriented simplex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-orientation-of-a-simplex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-the-dimension-of-an-object-relative-to-a-pivotal-structure
 kind: definition
 title: "The dimension of an object relative to a pivotal structure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-the-categorical-trace-of-a-morphism-into-the-double-dual, def-pivotal-structure]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

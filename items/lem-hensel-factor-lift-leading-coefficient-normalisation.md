@@ -2,7 +2,7 @@
 id: lem-hensel-factor-lift-leading-coefficient-normalisation
 kind: lemma
 title: "Monicity and degree stay fixed during Hensel factor lifting"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

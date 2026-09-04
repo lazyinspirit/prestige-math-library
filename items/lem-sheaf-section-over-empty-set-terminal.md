@@ -2,13 +2,14 @@
 id: lem-sheaf-section-over-empty-set-terminal
 kind: lemma
 title: "A set-valued sheaf has a unique section over the empty open set"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheaf-on-topological-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

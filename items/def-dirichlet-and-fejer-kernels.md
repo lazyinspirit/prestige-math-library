@@ -2,13 +2,14 @@
 id: def-dirichlet-and-fejer-kernels
 kind: definition
 title: "Dirichlet and Fejer kernels"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

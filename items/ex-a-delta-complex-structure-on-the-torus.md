@@ -2,11 +2,12 @@
 id: ex-a-delta-complex-structure-on-the-torus
 kind: example
 title: "A delta-complex structure on the torus"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

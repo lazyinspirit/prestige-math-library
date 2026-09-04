@@ -2,7 +2,7 @@
 id: thm-left-duality-is-a-contravariant-antimonoidal-functor
 kind: theorem
 title: "Left duality is a contravariant antimonoidal functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-dual-of-a-morphism, thm-duals-are-unique-up-to-a-unique-compatible-isomorphism, thm-the-unit-is-self-dual]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

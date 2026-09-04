@@ -2,7 +2,7 @@
 id: thm-in-a-rigid-category-every-morphism-of-monoidal-functors-is-an-isomorphism
 kind: theorem
 title: "In a rigid category every morphism of monoidal functors is an isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-rigid-object-and-rigid-monoidal-category, def-monoidal-natural-transf
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

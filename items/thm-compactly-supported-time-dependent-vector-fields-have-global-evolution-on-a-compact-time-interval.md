@@ -2,7 +2,7 @@
 id: thm-compactly-supported-time-dependent-vector-fields-have-global-evolution-on-a-compact-time-interval
 kind: theorem
 title: "Compactly supported time-dependent vector fields have global evolution on a compact time interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

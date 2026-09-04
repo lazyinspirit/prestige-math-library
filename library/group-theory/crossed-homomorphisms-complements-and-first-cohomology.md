@@ -1,7 +1,7 @@
 ---
 page: crossed-homomorphisms-complements-and-first-cohomology
 title: "Crossed Homomorphisms Complements and First Cohomology"
-status: draft
+status: published
 items: [def-crossed-homomorphism-for-a-g-group,
   lem-crossed-homomorphisms-with-abelian-coefficients-form-an-abelian-group,
   def-principal-crossed-homomorphism-for-abelian-coefficients,

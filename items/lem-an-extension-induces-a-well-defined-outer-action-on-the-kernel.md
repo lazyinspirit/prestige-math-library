@@ -2,7 +2,7 @@
 id: lem-an-extension-induces-a-well-defined-outer-action-on-the-kernel
 kind: lemma
 title: "A group extension induces a well-defined outer action on its kernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient, def-outer-automorphism-group, thm-conjugation-is-an-automorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

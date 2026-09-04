@@ -2,7 +2,7 @@
 id: ex-cohen-presentation-singular-hypersurface
 kind: example
 title: "A complete singular local ring as a power-series quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-equicharacteristic-complete-local-power-series-quotient]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

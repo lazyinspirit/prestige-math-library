@@ -2,7 +2,7 @@
 id: ex-the-right-derived-functors-of-hom-from-a-fixed-object
 kind: example
 title: "The right derived functors of Hom from a fixed object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor, prop-positive-right-derived-functors-vanish-on-injective-objects, thm-hom-is-left-exact-in-each-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

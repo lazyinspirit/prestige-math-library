@@ -2,7 +2,7 @@
 id: rem-nonabelian-extension-obstruction-and-h-two-torsor
 kind: remark
 title: "Nonabelian extension obstructions live in H^3 and realized classes form an H^2-torsor"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -15,6 +15,11 @@ external_dependency:
   local_proof_attempt: "This page develops only the pre-cohomological extension dictionary and does not introduce the degree-two and degree-three cohomology machinery needed for the theorem."
   necessity: "The remark records the correct boundary of the nonabelian extension problem without pretending to prove the full classification before the cohomology pages."
 verification:
+  audited: 2026-09-04
+  sources_checked:
+    date: 2026-09-04
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

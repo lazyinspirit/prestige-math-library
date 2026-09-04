@@ -2,7 +2,7 @@
 id: thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules
 kind: theorem
 title: "Indecomposable projective kG-modules correspond to simple modules through taking the head"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras, def-module-radical-socle-head-and-loewy-series, lem-radical-of-a-finite-length-module-is-superfluous]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

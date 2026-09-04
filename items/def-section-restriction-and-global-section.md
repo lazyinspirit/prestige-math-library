@@ -2,12 +2,13 @@
 id: def-section-restriction-and-global-section
 kind: definition
 title: "Sections, restrictions, and global sections of a presheaf"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-on-topological-space]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

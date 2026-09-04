@@ -2,7 +2,7 @@
 id: ex-simple-root-and-factor-hensel-same-lift
 kind: example
 title: "Simple-root lifting and factor lifting produce the same root"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-complete-local-rings-are-henselian, cor-factor-hensel-implies-simple-root-hensel, def-henselian-pair-and-henselian-local-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

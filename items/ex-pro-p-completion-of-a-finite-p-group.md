@@ -2,7 +2,7 @@
 id: ex-pro-p-completion-of-a-finite-p-group
 kind: example
 title: "A finite p-group is naturally isomorphic to its own pro-p completion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-pro-p-completion-of-an-abstract-group, def-pro-p-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

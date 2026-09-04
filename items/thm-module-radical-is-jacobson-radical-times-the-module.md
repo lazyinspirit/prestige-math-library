@@ -2,7 +2,7 @@
 id: thm-module-radical-is-jacobson-radical-times-the-module
 kind: theorem
 title: "For a finite-dimensional algebra, the module radical is exactly the action of the Jacobson radical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-jacobson-radical-of-a-finite-dimensional-algebra, thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple, def-simple-module, thm-equivalent-characterizations-of-semisimple-rings]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

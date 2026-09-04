@@ -2,7 +2,7 @@
 id: thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy
 kind: theorem
 title: "First cohomology classifies complements up to kernel conjugacy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-first-cohomology-via-crossed-homomorphisms, lem-a-graph-subgroup-is-a-complement-exactly-for-a-crossed-homomorphism, lem-kernel-conjugation-by-an-element-of-the-coefficient-group-corresponds-to-a-principal-crossed-homomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

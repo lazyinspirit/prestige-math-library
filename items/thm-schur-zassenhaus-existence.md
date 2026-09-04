@@ -2,7 +2,7 @@
 id: thm-schur-zassenhaus-existence
 kind: theorem
 title: "Schur-Zassenhaus existence theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-normal-hall-subgroup-gives-a-coprime-extension, thm-splitting-criteri
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-trivial-zeros-and-critical-strip
 kind: theorem
 title: "The only zeros of zeta on the nonpositive real axis are the negative even integers, and every other zero lies in the open critical strip"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-riemann-zeta-functional-equation, thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane, thm-gamma-meromorphic-continuation, cor-gamma-function-has-no-zeros, def-riemann-zeta-function]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

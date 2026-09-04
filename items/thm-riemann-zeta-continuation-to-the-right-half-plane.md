@@ -2,7 +2,7 @@
 id: thm-riemann-zeta-continuation-to-the-right-half-plane
 kind: theorem
 title: "For $\\operatorname{Re}s>0$, zeta admits the fractional-part integral formula with a simple residue-one pole at $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemann-zeta-function, thm-p-series-rational]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

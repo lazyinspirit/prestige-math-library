@@ -2,13 +2,14 @@
 id: thm-sheaves-as-local-homeomorphisms
 kind: theorem
 title: "Sheaves of sets are equivalent to local homeomorphisms over the base space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-etale-space-of-sheaf-of-sets, def-sheaf-on-topological-space, def-morphism-of-presheaves]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

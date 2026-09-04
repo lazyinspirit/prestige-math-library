@@ -2,7 +2,7 @@
 id: lem-augmentation-ideal-of-a-finite-p-group-algebra-is-nilpotent
 kind: lemma
 title: "For a finite p-group in characteristic p, the augmentation ideal of the group algebra is nilpotent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-augmentation-map-and-augmentation-ideal-of-a-group-ring, thm-group-ring-is-a-unital-algebra-with-basis-g, cor-dimension-of-a-finite-group-algebra, thm-nontrivial-center-of-a-finite-p-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

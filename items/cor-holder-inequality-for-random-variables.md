@@ -2,7 +2,7 @@
 id: cor-holder-inequality-for-random-variables
 kind: corollary
 title: "Holder's inequality for random variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable, thm-holder-inequality-for-integrals]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

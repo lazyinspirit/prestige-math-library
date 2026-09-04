@@ -2,7 +2,7 @@
 id: cex-an-abscissa-need-not-be-a-line-of-convergence
 kind: counterexample
 title: "A boundary line need not have uniform convergence behavior"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-abscissae-dirichlet-series, thm-geometric-series, thm-p-series-rational, thm-alternating-series-test]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

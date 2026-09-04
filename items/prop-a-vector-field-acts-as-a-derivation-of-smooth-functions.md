@@ -2,7 +2,7 @@
 id: prop-a-vector-field-acts-as-a-derivation-of-smooth-functions
 kind: proposition
 title: "A vector field acts as a derivation of smooth functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

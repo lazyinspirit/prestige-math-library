@@ -2,13 +2,14 @@
 id: def-canonical-map-from-the-integers-to-zp
 kind: definition
 title: "The canonical map from Z to Zp sends an integer to its coherent residue classes modulo p^n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-p-adic-integers-as-compatible-residue-classes]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

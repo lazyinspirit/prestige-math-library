@@ -2,7 +2,7 @@
 id: ex-an-interval-endpoint-is-not-a-density-point
 kind: example
 title: "An endpoint of an interval has density one half, not one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, def-density-of-a-measurable-set-at-a-point, thm-lebesgue-measure-of-a-box-of-every-kind]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

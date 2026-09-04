@@ -2,7 +2,7 @@
 id: thm-euler-product-for-riemann-zeta
 kind: theorem
 title: "The Riemann zeta function has its Euler product on the half-plane $\\operatorname{Re}s>1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemann-zeta-function, lem-riemann-zeta-dirichlet-series-converges-locally-uniformly, thm-absolute-convergence-criterion-for-complex-infinite-products, thm-fundamental-theorem-of-arithmetic, thm-canonical-prime-factorisation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

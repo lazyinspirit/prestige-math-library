@@ -2,7 +2,7 @@
 id: thm-basic-properties-of-the-categorical-trace
 kind: theorem
 title: "Basic properties of the categorical trace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-categorical-trace-of-a-morphism-into-the-double-dual, thm-left-duality-is-a-contravariant-antimonoidal-functor, def-additive-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

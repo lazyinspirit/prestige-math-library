@@ -2,7 +2,7 @@
 id: lem-equicharacteristic-prime-field-lifts
 kind: lemma
 title: "The prime field lifts in the equicharacteristic case"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-equicharacteristic-local-ring-and-coefficient-field, thm-prime-subfield-classification]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

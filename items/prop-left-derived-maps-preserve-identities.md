@@ -2,7 +2,7 @@
 id: prop-left-derived-maps-preserve-identities
 kind: proposition
 title: "Left derived maps preserve identities"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-derived-map-relative-to-resolution-data, prop-comparison-of-the-identity-is-homotopic-to-the-identity, prop-homology-respects-identities-and-composition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

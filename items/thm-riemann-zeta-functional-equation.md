@@ -2,7 +2,7 @@
 id: thm-riemann-zeta-functional-equation
 kind: theorem
 title: "The Riemann zeta function satisfies the classical sine-gamma functional equation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-completed-riemann-zeta-functional-equation, thm-euler-reflection-formula, thm-legendre-duplication-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: lem-step-functions-on-one-period-are-dense-in-l-one-on-the-torus
 kind: lemma
 title: "Step functions on one period are dense in L^1 on the torus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution, thm-box-step-functions-are-dense-in-l-p-of-rn]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

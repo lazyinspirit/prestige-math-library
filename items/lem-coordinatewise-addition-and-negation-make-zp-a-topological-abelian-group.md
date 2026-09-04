@@ -2,7 +2,7 @@
 id: lem-coordinatewise-addition-and-negation-make-zp-a-topological-abelian-group
 kind: lemma
 title: "Coordinatewise addition and negation make Zp a topological abelian group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-adic-integers-as-compatible-residue-classes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

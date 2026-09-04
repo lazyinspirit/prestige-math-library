@@ -2,7 +2,7 @@
 id: prop-profinite-completion-of-z-is-the-product-of-all-zp
 kind: proposition
 title: "The profinite completion of the integers is the direct product of the p-adic integer groups over all primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-zp-is-the-pro-p-completion-of-the-integers, def-external-direct-product-of-groups, thm-concrete-inverse-limit-universal-property-in-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

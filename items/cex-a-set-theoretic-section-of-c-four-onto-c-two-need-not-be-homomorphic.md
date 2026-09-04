@@ -2,7 +2,7 @@
 id: cex-a-set-theoretic-section-of-c-four-onto-c-two-need-not-be-homomorphic
 kind: counterexample
 title: "A set-theoretic section of C_4 onto C_2 need not be a homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-a-set-theoretic-section-of-an-extension-is-automatically-a-homomorphism, thm-classification-of-cyclic-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

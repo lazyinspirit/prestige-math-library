@@ -2,13 +2,14 @@
 id: lem-first-plus-construction-is-separated
 kind: lemma
 title: "The first plus construction is separated and preserves stalks"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-presheaf-plus-construction, def-separated-presheaf, lem-equality-in-a-filtered-colimit-of-sets-is-eventual]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

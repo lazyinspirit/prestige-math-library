@@ -2,7 +2,7 @@
 id: prop-group-algebra-in-defining-characteristic-is-a-symmetric-frobenius-algebra
 kind: proposition
 title: "For a finite group and a field of characteristic p, the group algebra is a symmetric Frobenius algebra via the coefficient of the identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-ring, cor-dimension-of-a-finite-group-algebra]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

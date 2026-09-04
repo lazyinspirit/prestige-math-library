@@ -2,7 +2,7 @@
 id: lem-continuous-compactly-supported-functions-differentiate-by-ball-averages
 kind: lemma
 title: "Continuous compactly supported functions are recovered by small ball averages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ball-average-operator-on-r-n, def-c-c-and-c-c-infinity-on-rn, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

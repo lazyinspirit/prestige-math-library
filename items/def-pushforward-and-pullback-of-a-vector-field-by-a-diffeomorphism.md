@@ -2,7 +2,7 @@
 id: def-pushforward-and-pullback-of-a-vector-field-by-a-diffeomorphism
 kind: definition
 title: "Pushforwards and pullbacks of vector fields by a diffeomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

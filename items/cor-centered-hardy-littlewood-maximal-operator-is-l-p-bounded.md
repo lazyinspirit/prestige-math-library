@@ -2,7 +2,7 @@
 id: cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded
 kind: corollary
 title: "The centered maximal operator is bounded on $L^p(\\mathbb{R}^n)$ for $1<p<\\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, prop-centered-and-uncentered-maximal-functions-are-comparable, prop-hardy-littlewood-maximal-function-is-l-infinity-bounded, thm-hardy-littlewood-maximal-inequality-for-balls, thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

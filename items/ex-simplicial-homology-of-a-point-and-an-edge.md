@@ -2,12 +2,13 @@
 id: ex-simplicial-homology-of-a-point-and-an-edge
 kind: example
 title: "The simplicial homology of a point and an edge"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-simplicial-chain-groups-and-boundary, def-augmentation-and-reduced-simplicial-homology]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

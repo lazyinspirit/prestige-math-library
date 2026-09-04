@@ -2,7 +2,7 @@
 id: def-nondegenerate-critical-point-nullity-index-and-coindex
 kind: definition
 title: "Nondegenerate critical points, nullity, index, and coindex"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: dirichlet-kernel-localisation-and-pointwise-fourier-convergence-examples
 title: "Dirichlet Kernel Localisation and Pointwise Fourier Convergence - Examples"
-status: draft
+status: published
 items: [thm-lebesgue-constants-grow-logarithmically]
 examples: [ex-dirichlet-kernel-at-zero-and-away-from-zero, ex-fourier-partial-sums-of-the-sawtooth, ex-localisation-for-functions-equal-on-an-arc, cex-continuity-alone-does-not-satisfy-a-dini-modulus]
 ---

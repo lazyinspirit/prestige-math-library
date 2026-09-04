@@ -2,7 +2,7 @@
 id: def-the-categorical-trace-of-a-morphism-into-the-double-dual
 kind: definition
 title: "The categorical trace of a morphism into the double dual"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-double-dual-is-a-monoidal-functor]
 landmark: true
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

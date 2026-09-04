@@ -2,13 +2,14 @@
 id: ex-extension-by-empty-outside-open
 kind: example
 title: "Sections on an open subset extended by the empty set outside it"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-sheaf-on-topological-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-schur-zassenhaus-says-every-hall-subgroup-is-normal
 kind: false-statement
 title: "FALSE: Schur-Zassenhaus says every Hall subgroup is normal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hall-pi-subgroup, thm-schur-zassenhaus-existence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-henselian-pair-and-henselian-local-ring
 kind: definition
 title: "Henselian pairs and Henselian local rings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-local-ring]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

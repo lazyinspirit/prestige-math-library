@@ -2,7 +2,7 @@
 id: fs-there-is-a-measurable-set-with-density-one-half-in-every-interval
 kind: false-statement
 title: "FALSE: some measurable set has density one half in every interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, thm-lebesgue-density-theorem, thm-lebesgue-measure-of-a-box-of-every-kind]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

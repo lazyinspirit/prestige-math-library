@@ -2,7 +2,7 @@
 id: ex-dirichlet-kernel-at-zero-and-away-from-zero
 kind: example
 title: "The Dirichlet kernel at zero and away from zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-dirichlet-and-fejer-kernels, lem-closed-form-and-size-bounds-for-the-dirichlet-kernel]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

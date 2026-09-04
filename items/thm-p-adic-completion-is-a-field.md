@@ -2,7 +2,7 @@
 id: thm-p-adic-completion-is-a-field
 kind: theorem
 title: "The p-adic completion is a complete valued field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-field-of-p-adic-numbers, thm-metric-completion-exists, thm-p-adic-absolute-value-is-nonarchimedean]
 proof_strategy: constructive
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact
 kind: corollary
 title: "On an infinite-dimensional normed space, the identity operator is not compact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

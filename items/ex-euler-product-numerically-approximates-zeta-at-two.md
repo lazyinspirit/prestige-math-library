@@ -2,7 +2,7 @@
 id: ex-euler-product-numerically-approximates-zeta-at-two
 kind: example
 title: "A short Euler-product truncation already numerically approximates zeta at $2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-euler-product-for-riemann-zeta, thm-special-values-of-riemann-zeta-at-integers]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

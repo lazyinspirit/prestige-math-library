@@ -2,7 +2,7 @@
 id: prop-an-exact-functor-has-vanishing-positive-derived-functors
 kind: proposition
 title: "An exact functor has vanishing positive derived functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-exact-functor-between-abelian-categories, def-left-derived-object-relative-to-projective-resolution-data, def-right-derived-object-relative-to-injective-resolution-data, thm-an-exact-functor-commutes-with-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-riemann-localisation-principle-for-fourier-series
 kind: theorem
 title: "Riemann localisation principle for Fourier series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-closed-form-and-size-bounds-for-the-dirichlet-kernel, thm-riemann-lebesgue-lemma-for-fourier-coefficients, lem-symmetric-difference-formula-for-fourier-partial-sums]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

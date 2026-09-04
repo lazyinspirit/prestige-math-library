@@ -2,7 +2,7 @@
 id: ex-complete-discrete-valuation-ring-henselian
 kind: example
 title: "A complete discrete valuation ring is Henselian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-complete-local-rings-are-henselian, cor-formal-series-over-a-field-is-a-local-domain, thm-equivalent-characterisations-of-a-dvr]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

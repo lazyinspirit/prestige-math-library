@@ -2,12 +2,13 @@
 id: def-contiguous-simplicial-maps
 kind: definition
 title: "Contiguous simplicial maps"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-simplicial-map-and-its-geometric-realization]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

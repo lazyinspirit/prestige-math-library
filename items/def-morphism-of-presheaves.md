@@ -2,12 +2,13 @@
 id: def-morphism-of-presheaves
 kind: definition
 title: "Morphisms of presheaves"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-on-topological-space, def-natural-transformation]
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

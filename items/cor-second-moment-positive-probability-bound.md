@@ -2,7 +2,7 @@
 id: cor-second-moment-positive-probability-bound
 kind: corollary
 title: "The second-moment lower bound for positive probability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-expectation-of-an-indicator-is-probability, cor-cauchy-schwarz-for-random-variables, def-moments-variance-and-covariance]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   references:

@@ -2,13 +2,14 @@
 id: rem-rigidity-alone-does-not-make-a-tensor-category
 kind: remark
 title: "Rigidity alone does not make a tensor category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-rigid-object-and-rigid-monoidal-category]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

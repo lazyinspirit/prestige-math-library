@@ -2,7 +2,7 @@
 id: ex-splitting-the-theta-mellin-integral-isolates-the-two-polar-terms
 kind: example
 title: "Splitting the theta Mellin integral at $1$ isolates the two polar terms of completed zeta"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-theta-mellin-representation-of-completed-zeta, thm-completed-riemann-zeta-functional-equation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

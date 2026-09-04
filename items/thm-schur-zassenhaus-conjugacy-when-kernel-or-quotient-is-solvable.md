@@ -2,7 +2,7 @@
 id: thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable
 kind: theorem
 title: "Schur-Zassenhaus conjugacy when the kernel or quotient is solvable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-schur-zassenhaus-existence, thm-subgroups-and-quotients-of-solvable-groups-are-solvable, lem-nontrivial-normal-subgroup-of-a-solvable-group-has-an-abelian-normal-subgroup, thm-cauchys-theorem-for-finite-groups, cor-prime-order-group-is-cyclic, thm-sylow-second-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

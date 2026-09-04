@@ -2,13 +2,14 @@
 id: rem-maschke-failure-in-defining-characteristic
 kind: remark
 title: "When the characteristic divides the group order, Maschke can fail and kG need not be semisimple"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [cor-group-algebra-is-not-semisimple-when-char-k-divides-group-order]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

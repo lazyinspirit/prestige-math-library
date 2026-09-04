@@ -2,7 +2,7 @@
 id: lem-henselian-pair-ideal-in-jacobson-radical
 kind: lemma
 title: "The defining ideal of a Henselian pair lies in the Jacobson radical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-henselian-pair-and-henselian-local-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

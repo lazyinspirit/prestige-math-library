@@ -2,7 +2,7 @@
 id: ex-a-large-almost-pure-pair-extends-an-anticomplete-blockade
 kind: example
 title: "A large almost-pure pair extends an anticomplete blockade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

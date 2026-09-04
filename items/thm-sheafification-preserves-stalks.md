@@ -2,13 +2,14 @@
 id: thm-sheafification-preserves-stalks
 kind: theorem
 title: "Sheafification preserves stalks"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheafification, lem-first-plus-construction-is-separated, lem-equality-in-a-filtered-colimit-of-sets-is-eventual]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

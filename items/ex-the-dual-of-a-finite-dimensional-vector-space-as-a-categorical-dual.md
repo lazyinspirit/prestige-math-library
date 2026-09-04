@@ -2,7 +2,7 @@
 id: ex-the-dual-of-a-finite-dimensional-vector-space-as-a-categorical-dual
 kind: example
 title: "The dual of a finite-dimensional vector space as a categorical dual"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-finite-dimensional-vector-spaces-are-rigid]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []

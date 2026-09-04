@@ -2,7 +2,7 @@
 id: cor-chebyshev-inequality-for-random-variables
 kind: corollary
 title: "Chebyshev's inequality for random variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-moments-variance-and-covariance, cor-markov-inequality-for-random-variables]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

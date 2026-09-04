@@ -2,13 +2,14 @@
 id: def-period-one-fourier-coefficients-partial-sums-and-convolution
 kind: definition
 title: "Period-one Fourier coefficients, partial sums, and convolution on the torus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-04
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

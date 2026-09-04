@@ -2,7 +2,7 @@
 id: thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one
 kind: theorem
 title: "The inhomogeneous one-cocycle model agrees with crossed homomorphisms in degree one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-first-cohomology-via-crossed-homomorphisms, def-first-group-cohomolog
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

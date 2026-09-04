@@ -2,13 +2,14 @@
 id: def-the-dual-of-a-morphism
 kind: definition
 title: "The dual of a morphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-left-dual-and-right-dual-object]
 verification:
+  audited: 2026-09-04
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

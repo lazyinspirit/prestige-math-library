@@ -2,7 +2,7 @@
 id: ex-the-dimension-of-a-vector-space-is-its-linear-dimension
 kind: example
 title: "The categorical dimension of a vector space is the scalar image of its linear dimension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-dimension-of-an-object-relative-to-a-pivotal-structure, def-dimension, thm-finite-dimensional-vector-spaces-are-rigid]
 proof_strategy: direct
 verification:
+  audited: 2026-09-04
   precheck: pass
 sources:
   scraped: []
