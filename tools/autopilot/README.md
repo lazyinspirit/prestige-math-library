@@ -50,9 +50,9 @@ notice something.
 | command | does |
 |---|---|
 | `autopilot frontier [--categories a,b]` | what is buildable now, in dependency waves, computed from publication state on disk |
-| `autopilot frontier --next [--max-pairs 24]` | bounded next set across all planned categories; both pages must have strictly more than 95% of same-category dependencies published |
+| `autopilot frontier --next [--max-pairs 27]` | bounded next set across all planned categories; both pages must have strictly more than 95% of same-category dependencies published |
 | `autopilot plan --run N --pairs a,b [--allow-in-run-dependencies]` | step 0: pack batches by prerequisite affinity, write manifests, diff the design docs against the spec; the opt-in permits only earlier prerequisites carried by that exact run |
-| `autopilot plan --run N --pairs next` | plan the same all-category, >95%-published next set, capped at 24 pairs |
+| `autopilot plan --run N --pairs next` | plan the same all-category, >95%-published next set, capped at 27 pairs |
 | `autopilot start --run N [--detach]` | steps 1 → 10, autonomously |
 | `autopilot status` | current state |
 | `autopilot pause` / `resume` | hold and release; in-flight agents always finish |
@@ -175,10 +175,10 @@ Three things per-unit progression is **not** allowed to relax:
   too because only one stage is live. In a group it stops doing so: `3-review`
   and `3-recheck` are both Alphas. A pipelined stage must therefore declare
   `role`, and the group budgets that lane once.
-- **Current widths.** The configured run cap and all batch lanes are 24. Group
-  lanes are eight because each Alpha may own at most three batches;
-  the Step-7 mixed stage is nine (eight readers plus the sweep controller), and
-  the sweep independently runs at most 24 judge calls. Shared-file/barrier
+- **Current widths.** The configured run cap and all batch lanes are 27. Group
+  lanes are nine because each Alpha may own at most three batches;
+  the Step-7 mixed stage is ten (nine readers plus the sweep controller), and
+  the sweep independently runs at most 27 judge calls. Shared-file/barrier
   stages stay at one.
 - **A dispatch that covers several units.** A group Alpha owns up to three
   batches and its one result file declares coverage of all of them, so it may not

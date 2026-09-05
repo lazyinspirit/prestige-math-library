@@ -27,7 +27,7 @@ edges and cross-category edges are excluded from each page's denominator, so
 categories remain independent frontier roots. Qualifying pairs are capped in
 deterministic plan order and unpublished prerequisites are not pulled into the
 same run. `plan --pairs next` uses the same selector and is capped at the
-pipeline's 24-pair ceiling. The read-only preview may use a larger explicit
+pipeline's 27-pair ceiling. The read-only preview may use a larger explicit
 `--max-pairs`. `plan` and the Stage-1 drift gate enforce the same threshold;
 an explicit pair list may use `--allow-in-run-dependencies` when every missing
 same-category prerequisite is an earlier pair in that same run. The scope
@@ -39,9 +39,9 @@ drift-review inputs.
 
 ```bash
 autopilot frontier [--categories category-a,category-b]
-autopilot frontier --next [--max-pairs 24]
+autopilot frontier --next [--max-pairs 27]
 autopilot plan --run <run> --pairs <a-page-id,...> [--allow-in-run-dependencies]
-autopilot plan --run <run> --pairs next [--max-pairs 24]
+autopilot plan --run <run> --pairs next [--max-pairs 27]
 autopilot doctor --run <run>
 autopilot start --run <run> --detach
 autopilot status [--run <run>]
@@ -141,13 +141,13 @@ period. It adopts a live external dispatch only when its run, result pattern,
 and covers match the current stage, then reconciles its eventual result into
 state.
 
-The run-level and batch widths are 24. Thus `1-scaffold`, `3-fix`, `5-author`,
+The run-level and batch widths are 27. Thus `1-scaffold`, `3-fix`, `5-author`,
 and the per-batch Step-6 baseline/read/split/refute/collect stages can expose
-all 24 independent batches without an engine-imposed second wave. Group work
-keeps the stricter three-batches-per-Alpha attention bound, so a 24-batch run
-admits at most eight groups and the Step-3, Step-6b, Step-7 reader, and Step-8
-group lanes are capped at eight. `7-judge` admits those eight readers plus its
-one sweep controller, while the sweep has its own 24-call Terra pool.
+all 27 independent batches without an engine-imposed second wave. Group work
+keeps the stricter three-batches-per-Alpha attention bound, so a 27-batch run
+admits at most nine groups and the Step-3, Step-6b, Step-7 reader, and Step-8
+group lanes are capped at nine. `7-judge` admits those nine readers plus its
+one sweep controller, while the sweep has its own 27-call Terra pool.
 Whole-level writers, snapshots, ledger mutators, receipts, and other ordering
 barriers remain serial because their lower caps are correctness constraints
 rather than throughput defaults.
@@ -262,7 +262,7 @@ The call contains the full target item, compact interfaces for direct
 dependencies, and compact statement/definition/example/remarks interfaces for
 the complete A/B pair; sibling proofs are judged only in their own calls. This
 retains pair-aware checking without repeatedly sending every sibling proof or
-accumulating earlier item turns. `judge-sweep.mjs` runs up to 24 Terra calls,
+accumulating earlier item turns. `judge-sweep.mjs` runs up to 27 Terra calls,
 stops launching work immediately on a usage/rate-limit signature, and resumes
 safely from the append-only hash-attested ledger. Codex JSON events supply real
 input, cached-input, and output token telemetry. Every scoped item needs a

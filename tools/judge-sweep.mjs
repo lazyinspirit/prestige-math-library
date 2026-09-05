@@ -110,7 +110,7 @@ for (const result of await buildCurrentContextHashes(ids, { loader, cachePath: c
 }
 
 const TERRA = MODELS.terra.id;
-const hardCaps = Object.freeze({ [TERRA]: 24 });
+const hardCaps = Object.freeze({ [TERRA]: 27 });
 const capFor = (model) => {
   const hard = hardCaps[model];
   if (!hard) throw new Error(`no concurrency cap configured for ${model}`);
@@ -178,7 +178,7 @@ const capture = async (task, attempt) => {
 let cursor = 0;
 let outage = false;
 const worker = async (index) => {
-  // Avoid a 24-process authentication/boot burst while still reaching the
+  // Avoid a 27-process authentication/boot burst while still reaching the
   // full steady-state cap quickly.
   if (index) await pause(index * 1_500);
   while (!outage) {

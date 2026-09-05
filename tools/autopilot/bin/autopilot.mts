@@ -152,7 +152,7 @@ function writeDriftArtifacts(run: string, pages: string[], allowInRunDependencie
       : '  Available means already published; adding a same-category dependency to this run does not qualify it.',
     '  If an edit would put a page at or below 95%, drop the',
     '  original pair and record `drift-rescoped`, naming the dependency pairs to',
-    '  build instead — at most 24 pairs total.',
+    '  build instead — at most 27 pairs total.',
     '',
     'You run BEFORE any Beta, so all three cost one Alpha pass and no authored work.',
     '',
@@ -235,7 +235,7 @@ async function buildExecutor(run?: string) {
 switch (cmd) {
   case 'frontier': {
     if (has('next')) {
-      const maxPairs = Number(opt('max-pairs', '24'));
+      const maxPairs = Number(opt('max-pairs', '27'));
       const next = nextBuildableSet(repo, { maxPairs });
       console.log(`${next.pages.length} A/B pair(s) selected from all categories for the next run (cap ${maxPairs})`);
       console.log('buildable means BOTH pages have strictly more than 95% of same-category dependencies already published');
@@ -281,8 +281,8 @@ switch (cmd) {
     const pairsArg = opt('pairs');
     let pages;
     if (pairsArg === 'next') {
-      const maxPairs = Number(opt('max-pairs', '24'));
-      if (maxPairs > 24) die('plan --pairs next: --max-pairs cannot exceed the pipeline ceiling of 24');
+      const maxPairs = Number(opt('max-pairs', '27'));
+      if (maxPairs > 27) die('plan --pairs next: --max-pairs cannot exceed the pipeline ceiling of 27');
       const next = nextBuildableSet(repo, { maxPairs });
       pages = next.pages.map((p: any) => p.id);
       if (!pages.length) die('nothing buildable');

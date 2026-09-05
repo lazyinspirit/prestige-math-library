@@ -34,9 +34,9 @@ const run = opt('run');
 const wantFacts = argv.includes('--facts');
 const asJson = argv.includes('--json');
 // The group-lane cap and the owner's per-Alpha batch bound. A run may contain
-// 24 batches, and no Alpha may own more than three, so eight groups are enough
+// 27 batches, and no Alpha may own more than three, so nine groups are enough
 // to expose the full legal width without weakening the attention bound.
-const MAX_GROUPS = Number(opt('max-groups', '8'));
+const MAX_GROUPS = Number(opt('max-groups', '9'));
 const MAX_BATCHES_PER_GROUP = Number(opt('max-batches', '3'));
 
 if (!run) {

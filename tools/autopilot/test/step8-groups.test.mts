@@ -170,7 +170,7 @@ test('8-scope checks its partition without repeating unchanged judge closure', (
 test('8-adjudicate runs one Alpha per group over the group cohort', () => {
   const s = stage('8-adjudicate');
   assert.ok(s.cohort, 'a group stage advances on its cohort, not on a single batch');
-  assert.equal(s.concurrency, 8, 'eight groups cover the 24-batch ceiling at three batches each');
+  assert.equal(s.concurrency, 9, 'nine groups cover the 27-batch ceiling at three batches each');
   assert.ok(!s.pipeline, 'step 8 is a whole-level barrier: it follows the level-wide sweep');
   const units = s.units({ run: 'demo', repo: REPO });
   assert.ok(Array.isArray(units), 'units are the batches, not the literal "all"');

@@ -197,7 +197,7 @@ export function waves(repo: string, { categories = null }: { categories?: string
  * breaker when the pipeline cap defers otherwise-buildable pairs.
  */
 export function nextBuildableSet(repo: string, {
-  maxPairs = 24,
+  maxPairs = 27,
 }: { maxPairs?: number } = {}): any {
   if (!Number.isInteger(maxPairs) || maxPairs < 1) throw new Error('maxPairs must be a positive integer');
   const spec = loadPlan(repo);

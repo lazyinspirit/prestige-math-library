@@ -230,7 +230,7 @@ export function step6Stages(d: any) {
       labelFor: (unit: string) => `hash-pre-${unit}`,
       artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
         `research/${ctx.run}-step6-hash-${unit}-pre.json`),
-      concurrency: 24,
+      concurrency: 27,
       cohort: solo,
       plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
         role: 'tool', label: `hash-pre-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
@@ -255,7 +255,7 @@ export function step6Stages(d: any) {
           ? report
           : [report, `research/${ctx.run}-reader-findings-${unit}.json`];
       },
-      concurrency: 24,
+      concurrency: 27,
       cohort: solo,
       plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
         role: 'reader', label: `reader-${unit}`, job: 'audit', covers: [unit],
@@ -280,7 +280,7 @@ export function step6Stages(d: any) {
       labelFor: (unit: string) => `split-${unit}`,
       artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
         `research/${ctx.run}-step6-scope-${unit}.json`),
-      concurrency: 24,
+      concurrency: 27,
       cohort: solo,
       plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => {
         const contract = join(ctx.repo, 'research', `${ctx.run}-batch-${unit}.proof-contracts.json`);
@@ -325,7 +325,7 @@ export function step6Stages(d: any) {
       labelFor: (unit: string) => `refute-${unit}`,
       artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
         `research/${ctx.run}-refute-${unit}.json`),
-      concurrency: 24,
+      concurrency: 27,
       cohort: solo,
       plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
         role: 'refuter', label: `refute-${unit}`, job: 'refutation', covers: [unit],
@@ -348,7 +348,7 @@ export function step6Stages(d: any) {
       labelFor: (unit: string) => `collect-${unit}`,
       artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
         `research/${ctx.run}-step6-scope-${unit}.json`),
-      concurrency: 24,
+      concurrency: 27,
       cohort: solo,
       plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
         role: 'tool', label: `collect-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
@@ -372,7 +372,7 @@ export function step6Stages(d: any) {
           ? report
           : [report, `research/${ctx.run}-alpha-${group.label}-6b-decisions.json`];
       },
-      concurrency: 8,
+      concurrency: 9,
       cohort: alphaCohort,
       plan: (ctx: any, pending: string[]) => alphaGroups(ctx)
         .filter((group: any) => group.covers.some((unit: any) => pending.includes(String(unit))))

@@ -1547,7 +1547,7 @@ export const stages = [
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
     pattern: /^beta-(?:beta-)?batch-\d+\.result\.json$/,
     labelFor: (u) => `batch-${u}`,
-    concurrency: 24,
+    concurrency: 27,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
       label: `batch-${u}`,
@@ -1639,7 +1639,7 @@ export const stages = [
     role: 'alpha',
     units: batches,
     pattern: resultPattern('alpha', 'step3-[a-z]+'),
-    concurrency: 8,
+    concurrency: 9,
     // An Alpha group reviews as a unit, so it waits for its own three batches to
     // scaffold — and for nobody else's.
     cohort: alphaCohort,
@@ -1681,7 +1681,7 @@ export const stages = [
     units: batches,
     pattern: resultPattern('beta', 'fix-batch-\\d+'),
     labelFor: (u) => `fix-batch-${u}`,
-    concurrency: 24,
+    concurrency: 27,
     // A batch with no findings still needs a covering result, so the fix task
     // is written for every batch and a Beta with nothing to do says so and
     // exits. Making "no findings" a fast no-op is cheaper than making the
@@ -1714,7 +1714,7 @@ export const stages = [
     // spellings, so a fixed pattern does not reopen a stage that closed at
     // step 3.
     pattern: /^alpha-(?:high-)?recheck-[a-z]+\.result\.json$/,
-    concurrency: 8,
+    concurrency: 9,
     cohort: alphaCohort,
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
@@ -1998,7 +1998,7 @@ export const stages = [
     // The per-batch contract is the durable completion artifact consumed by
     // Step 6, so keep that unit in authoring until the artifact actually lands.
     artifacts: (ctx, u) => `research/${ctx.run}-batch-${u}.proof-contracts.json`,
-    concurrency: 24,
+    concurrency: 27,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
       label: `author-batch-${u}`,
@@ -2372,9 +2372,9 @@ export const stages = [
     // longer name keep it outside this pattern, so a re-read is never mistaken
     // for the unit's own coverage.
     pattern: /^(?:tool-judge-sweep|alpha-group-read-[a-z]+)\.result\.json$/,
-    // One judge-sweep controller plus one read-only lane for each of eight
-    // groups. The sweep's own 24-way item pool is independently bounded.
-    concurrency: 9,
+    // One judge-sweep controller plus one read-only lane for each of nine
+    // groups. The sweep's own 27-way item pool is independently bounded.
+    concurrency: 10,
     // The judge sweep is a TOOL RUN, not an agent dispatch — judge-sweep.mjs
     // owns its own lane pools, retry semantics and attestation. The A-page ids
     // are computed here rather than in a shell sub-invocation: the first
@@ -2574,7 +2574,7 @@ export const stages = [
     units: batches,
     cohort: alphaCohort,
     pattern: resultPattern('alpha-adjudicate', 'step8-[a-z]+'),
-    concurrency: 8,
+    concurrency: 9,
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
       .map((g: any) => ({
