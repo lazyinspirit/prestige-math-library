@@ -55,12 +55,12 @@ use a fresh `--state-dir` for another run.
 
 ## Conceptual steps and stage IDs
 
-Stage IDs are operational rather than conceptual. The current table has 48
+Stage IDs are operational rather than conceptual. The current table has 49
 stages.
 
 | Step | Actual stages | Closure |
 |---|---|---|
-| 0 — select/plan | `frontier`, `plan`, `1-drift` | Fixed scope plus Alpha's gated prerequisite-drift review. |
+| 0 — select/plan | `frontier`, `plan`, `1-drift`, `1-drift-apply` | Fixed scope, Alpha's gated prerequisite-drift review, then mechanical manifest/task synchronization before any Beta starts. |
 | 1 — scaffold | `1-scaffold` | Beta source/scaffold work with scope, plan, harvest, source liveness/backing/fetch, and policy gates. |
 | 2 — assign | `2-assign` | A partitioning Alpha groups batches; `alpha-groups.mjs` requires full, disjoint coverage and groups of at most three batches. |
 | 3 — scaffold closure | `3-review` → `3-fix` → `3-recheck` | Group Alpha review, owned-Beta remediation, and one sufficient verdict per pair. |
@@ -212,8 +212,10 @@ this check unconditionally.
 The scope ledger is checked repeatedly, so a promised page cannot disappear.
 `validate-plan.mjs` checks plan order/shape; splice verification keeps plan and
 batch manifests aligned. The drift reviewer may add a backward edge, reorder,
-mint a prerequisite pair, or rescope, but `drift-apply.mjs` mechanically
-materializes its accepted decision.
+mint a prerequisite pair, or rescope. The following `1-drift-apply` stage
+always runs `drift-apply.mjs`, mechanically repacking manifests and
+regenerating the scope ledger and task files from the reviewed spec before any
+Beta starts; even a same-scope edge or order edit is therefore materialized.
 
 Source gates require harvest dispositions, fetch-verification stamps, live URLs,
 and source backing for each authored result. URL recovery precedes replacement;

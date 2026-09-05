@@ -255,12 +255,12 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
       '--retire-redundant',
       '--retired-record', `research/${ctx.run}-retired-sources.json`],
   ],
-  // the drift review MINTED a prerequisite page or RESCOPED the run onto its
-  // dependencies (owner, 2026-08-24) -> write the batch manifests those
-  // decisions imply, and regenerate the ledger, task files and covers map from
-  // them. The Alpha decided; this is the bookkeeping, which is why it is
-  // mechanical. Exits 0 having done nothing when the report decided nothing,
-  // so it is safe as an unconditional repair for this gate.
+  // The drift review edited prerequisite edges/order, MINTED a prerequisite,
+  // or RESCOPED the run (owner, 2026-08-24) -> rewrite the batch manifests from
+  // the current spec and regenerate the ledger, task files and covers map. The
+  // Alpha decided; this is bookkeeping. Even an applied edge or reorder with
+  // the same pair set must sync, because generated Beta tasks quote those
+  // fields.
   'drift-review': (ctx) => ['tools/drift-apply.mjs', '--run', ctx.run],
   // sources missing their full-text stamp -> fetch the bodies and stamp them
   'source-fetch-check': (ctx) => ['tools/source-fetch-check.mjs',
@@ -1522,6 +1522,18 @@ export const stages = [
         throw new Error(`drift decisions could not be materialised: ${(repair.stderr ?? '').slice(0, 300)}`);
       }
     },
+  },
+  {
+    id: '1-drift-apply',
+    label: 'materialize prerequisite-drift decisions (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'drift-apply'),
+    concurrency: 1,
+    plan: (ctx: any) => [{
+      role: 'tool', label: 'drift-apply', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/drift-apply.mjs', '--run', ctx.run], timeout: 600,
+    }],
+    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate()],
   },
   {
     id: '1-scaffold',

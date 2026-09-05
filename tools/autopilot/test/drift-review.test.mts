@@ -25,6 +25,7 @@ import { identityPlaceholders } from '../src/doctor.mts';
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'drift-review-check.mjs');
+const APPLY = join(REPO, 'tools', 'drift-apply.mjs');
 
 // ---------------------------------------------------------------- the gate
 
@@ -341,12 +342,42 @@ test('the drift review is a stage of its own, owed before any batch', () => {
   assert.ok(ids.indexOf('1-drift') >= 0, 'no 1-drift stage');
   assert.ok(ids.indexOf('1-drift') < ids.indexOf('1-scaffold'),
     '1-drift must precede 1-scaffold, or a rescope lands on scaffolded work');
+  assert.ok(ids.indexOf('1-drift') < ids.indexOf('1-drift-apply'));
+  assert.ok(ids.indexOf('1-drift-apply') < ids.indexOf('1-scaffold'),
+    'accepted drift decisions must be materialized before any Beta starts');
   const drift: any = stages.find((s: any) => s.id === '1-drift');
   const scaffold: any = stages.find((s: any) => s.id === '1-scaffold');
   assert.deepEqual(drift.units(ctx), ['drift']);
   // The scaffold stage owes batches ONLY — a drift unit left here would let a
   // Beta start before the review that may rescope it.
   assert.deepEqual(scaffold.units(ctx), ['1', '2']);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('ordinary applied edges and reorders materialize instead of becoming a no-op', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'drift-sync-'));
+  mkdirSync(join(dir, 'research'));
+  const a = {
+    order: 20, id: 'alpha-page', title: 'Alpha', kind: 'A', category: 'demo',
+    companion: 'alpha-page-examples', requires: ['gamma-page'], items: [],
+  };
+  const b = {
+    order: 21, id: 'alpha-page-examples', title: 'Alpha examples', kind: 'B', category: 'demo',
+    companion: 'alpha-page', requires: ['alpha-page'], items: [],
+  };
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify({ pages: [a, b] }, null, 2));
+  writeFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), JSON.stringify([
+    { ...a, order: 10, requires: [] }, b,
+  ], null, 2));
+  writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), [
+    '### alpha-page',
+    'VERDICT: drift-applied — added gamma-page (order 5)',
+  ].join('\n'));
+  const result = spawnSync(process.execPath, [APPLY, '--run', 'demo', '--dry-run'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /would sync demo onto 1 pair/);
+  assert.doesNotMatch(result.stdout, /nothing to materialise/);
   rmSync(dir, { recursive: true, force: true });
 });
 
@@ -386,7 +417,7 @@ test('each stage-1 pattern admits exactly its own result shape', () => {
   assert.ok(!scaffold.pattern.test('alpha-drift-review.result.json'));
 });
 
-test('1-drift repairs a mint/rescope verdict mechanically, via drift-apply', () => {
+test('1-drift materializes every accepted verdict mechanically, via drift-apply', () => {
   const drift: any = stages.find((s: any) => s.id === '1-drift');
   // The gate the repair hangs off, and the repair itself. An Alpha that wrote
   // manifests would be an Alpha driving a stage transition; the bookkeeping is
@@ -394,6 +425,10 @@ test('1-drift repairs a mint/rescope verdict mechanically, via drift-apply', () 
   assert.ok(MECHANICAL_REPAIRS['drift-review'], 'no mechanical repair for the drift gate');
   const argv = MECHANICAL_REPAIRS['drift-review']({ run: 'demo', repo: '/tmp' } as any);
   assert.deepEqual(argv, ['tools/drift-apply.mjs', '--run', 'demo']);
+  const apply: any = stages.find((s: any) => s.id === '1-drift-apply');
+  const [plan] = apply.plan({ run: 'demo', repo: '/tmp' });
+  assert.equal(plan.role, 'tool');
+  assert.deepEqual(plan.argv, ['node', 'tools/drift-apply.mjs', '--run', 'demo']);
   // Two rounds, two DIFFERENT repairs: materialise the decision, then — if a
   // blocked verdict is what remains — send the stale report back to an Alpha.
   assert.equal(drift.maxFixRounds, 2);

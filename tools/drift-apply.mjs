@@ -79,11 +79,6 @@ for (const [i, h] of headings.entries()) {
   }
 }
 
-if (!minted.size && !rescopeTo.size) {
-  console.log('drift-apply: no drift-minted or drift-rescoped verdict; nothing to materialise');
-  process.exit(0);
-}
-
 // ---- validate against the spec the Alpha edited -------------------------
 const errors = [];
 const checkMintable = (id, kind) => {
@@ -145,13 +140,9 @@ if (rescopeTo.size) {
   // RESCOPE. The pair set is replaced wholesale by the prerequisites.
   mode = 'rescope';
   finalPairs = [...rescopeTo];
-} else {
+} else if (minted.size) {
   mode = 'mint';
   const newMints = [...minted].filter((id) => !existingPairs.includes(id));
-  if (!newMints.length) {
-    console.log(`drift-apply: ${minted.size} minted page(s) already carried by a manifest; nothing to add`);
-    process.exit(0);
-  }
   finalPairs = [...existingPairs, ...newMints];
 
   // THE PAIR CAP IS A SWAP, NOT A REFUSAL (owner, 2026-08-24). Minting is
@@ -174,6 +165,14 @@ if (rescopeTo.size) {
       + 'naming the pairs to build instead.');
     process.exit(1);
   }
+} else {
+  // APPLIED EDGES AND REORDERS KEEP THE SAME PAIR SET, but still change the
+  // authoritative manifest bytes and every generated task that quotes them.
+  // Treating "no mint/rescope" as a no-op let Betas start from stale requires
+  // and order values after a successful drift review. Repack the unchanged
+  // scope from the current spec before any scaffold dispatch can start.
+  mode = 'sync';
+  finalPairs = [...existingPairs];
 }
 
 if (dryRun) {
