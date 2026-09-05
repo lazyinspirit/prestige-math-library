@@ -2,7 +2,7 @@
 id: lem-compact-morse-critical-points-have-uniform-hessian-gaps
 kind: lemma
 title: "On a compact manifold, a Morse function has finitely many critical points and a uniform Hessian gap on disjoint critical neighborhoods"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

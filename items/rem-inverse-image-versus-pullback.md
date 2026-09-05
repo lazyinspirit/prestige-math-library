@@ -2,12 +2,13 @@
 id: rem-inverse-image-versus-pullback
 kind: remark
 title: "Inverse image of sheaves and pullback of modules are not the same construction"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-inverse-image-presheaf-and-sheaf, def-pullback-module-ringed-spaces]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

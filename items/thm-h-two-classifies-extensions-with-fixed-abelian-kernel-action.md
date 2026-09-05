@@ -2,7 +2,7 @@
 id: thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action
 kind: theorem
 title: "H^2 classifies extensions with fixed abelian kernel action"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-an-extension-determines-a-well-defined-h-two-class, lem-cohomologous-two-cocycles-give-equivalent-extensions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

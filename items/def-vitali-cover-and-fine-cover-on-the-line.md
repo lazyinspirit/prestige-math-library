@@ -2,7 +2,7 @@
 id: def-vitali-cover-and-fine-cover-on-the-line
 kind: definition
 title: "Vitali covers and fine covers on the real line by closed intervals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

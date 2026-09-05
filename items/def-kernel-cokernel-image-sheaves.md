@@ -2,12 +2,13 @@
 id: def-kernel-cokernel-image-sheaves
 kind: definition
 title: "Kernel sheaves are objectwise, while cokernels and images are sheafified"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-morphism-of-presheaves, def-sheafification, def-subsheaf]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

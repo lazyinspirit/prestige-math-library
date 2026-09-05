@@ -2,12 +2,14 @@
 id: rem-gibbs-phenomenon
 kind: remark
 title: "Gibbs phenomenon"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-fejer-kernel-is-a-positive-approximate-identity, lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity, thm-gibbs-overshoot-at-a-piecewise-c-one-jump]
+verification:
+  audited: 2026-09-05
 sources:
   references:
     - title: "Loukas Grafakos, Classical Fourier Analysis, 3rd ed."

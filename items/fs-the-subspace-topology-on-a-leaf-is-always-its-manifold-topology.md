@@ -2,7 +2,7 @@
 id: fs-the-subspace-topology-on-a-leaf-is-always-its-manifold-topology
 kind: false-statement
 title: "The subspace topology on a leaf is always its manifold topology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

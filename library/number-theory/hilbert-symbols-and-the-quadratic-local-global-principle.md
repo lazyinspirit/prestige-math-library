@@ -1,7 +1,7 @@
 ---
 page: hilbert-symbols-and-the-quadratic-local-global-principle
 title: "Hilbert Symbols and the Quadratic Local Global Principle"
-status: draft
+status: published
 items: [def-rational-local-fields,
         def-hilbert-symbol-over-a-rational-completion,
         lem-equivalent-definitions-of-the-hilbert-symbol,

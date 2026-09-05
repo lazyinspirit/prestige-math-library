@@ -2,7 +2,7 @@
 id: rem-the-underlying-category-can-lose-information
 kind: remark
 title: "The underlying category can lose genuinely enriched information"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-the-underlying-ordinary-category-of-an-enriched-category]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

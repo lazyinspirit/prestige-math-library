@@ -2,7 +2,7 @@
 id: thm-baer-sum-agrees-with-addition-in-h-two
 kind: theorem
 title: "The Baer sum agrees with addition in H^2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, def-baer-sum-of-abelian-kernel-extensions, lem-baer-sum-is-independent-of-extension-representatives]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

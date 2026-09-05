@@ -2,7 +2,7 @@
 id: def-clique-independent-set-and-vertex-cover-problems
 kind: definition
 title: "Clique, independent set, and vertex cover decision problems"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

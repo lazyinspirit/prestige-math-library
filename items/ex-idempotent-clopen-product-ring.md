@@ -2,7 +2,7 @@
 id: ex-idempotent-clopen-product-ring
 kind: example
 title: "Coordinate idempotents split the spectrum of a product ring into two clopen pieces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 10.22: Connected components of spectra"
       url: "https://stacks.math.columbia.edu/tag/04PP"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

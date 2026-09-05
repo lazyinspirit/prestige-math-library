@@ -2,7 +2,7 @@
 id: ex-jump-and-continuous-parts-of-x-plus-rational-jumps
 kind: example
 title: "The function x plus summable rational jumps decomposes as its continuous part x and its jump part"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

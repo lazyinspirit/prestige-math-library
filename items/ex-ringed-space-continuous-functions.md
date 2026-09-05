@@ -2,13 +2,14 @@
 id: ex-ringed-space-continuous-functions
 kind: example
 title: "Continuous real-valued functions make a space into a locally ringed space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-locally-ringed-space, def-ringed-space, def-stalk-of-presheaf, def-local-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

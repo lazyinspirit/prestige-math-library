@@ -1,7 +1,7 @@
 ---
 page: the-analytic-hahn-banach-theorem-examples
 title: "The Analytic Hahn Banach Theorem - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-norming-functionals-in-lp-from-the-measure-duality-page,
            ex-many-extensions-from-a-codimension-one-subspace,

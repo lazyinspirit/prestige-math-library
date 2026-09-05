@@ -2,7 +2,7 @@
 id: ex-cantor-function-has-zero-derivative-almost-everywhere-is-not-differentiable-on-the-cantor-set-and-rises-by-one
 kind: example
 title: "The Cantor function has derivative 0 almost everywhere, is not differentiable on the Cantor set, and still rises from 0 to 1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

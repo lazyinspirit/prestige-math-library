@@ -2,7 +2,7 @@
 id: thm-brauer-character-is-additive-on-short-exact-sequences
 kind: theorem
 title: "Brauer characters are additive on short exact sequences"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-brauer-character-of-a-finite-dimensional-kg-module, lem-brauer-character-is-independent-of-basis-and-splitting-field-realisation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

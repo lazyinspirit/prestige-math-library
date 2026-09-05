@@ -2,7 +2,7 @@
 id: ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex
 kind: example
 title: "Direct cancellation in the boundary squared of a two-simplex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-singular-boundary-squares-to-zero, ex-boundaries-of-the-standard-one-and-two-simplices]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

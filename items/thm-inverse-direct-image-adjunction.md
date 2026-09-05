@@ -2,13 +2,14 @@
 id: thm-inverse-direct-image-adjunction
 kind: theorem
 title: "Inverse image is left adjoint to direct image on sheaves"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-direct-image-sheaf, def-inverse-image-presheaf-and-sheaf, thm-sheafification-universal-property]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

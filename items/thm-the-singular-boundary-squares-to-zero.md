@@ -2,7 +2,7 @@
 id: thm-the-singular-boundary-squares-to-zero
 kind: theorem
 title: "The singular boundary squares to zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-boundary-operator, lem-affine-face-maps-satisfy-the-cosimplicial-identities]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

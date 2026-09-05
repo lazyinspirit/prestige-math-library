@@ -2,7 +2,7 @@
 id: rem-the-particular-yoneda-end-and-the-enriched-functor-category-are-different-size-claims
 kind: remark
 title: "The particular Yoneda end and the enriched functor category have different size requirements"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-strong-enriched-yoneda-lemma-as-a-particular-end, def-functor-categor
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
 sources:
   scraped: []

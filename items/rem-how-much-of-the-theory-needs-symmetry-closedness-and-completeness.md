@@ -2,7 +2,7 @@
 id: rem-how-much-of-the-theory-needs-symmetry-closedness-and-completeness
 kind: remark
 title: "How much of the theory needs symmetry, closedness, and completeness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-enriched-category, def-symmetric-monoidal-category, def-left-closed-a
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
 sources:
   scraped: []

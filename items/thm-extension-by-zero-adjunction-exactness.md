@@ -2,13 +2,14 @@
 id: thm-extension-by-zero-adjunction-exactness
 kind: theorem
 title: "Extension by zero is left adjoint to restriction and is exact on abelian sheaves"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-exact-sequence-sheaves, def-extension-by-zero-abelian-sheaf, def-restriction-sheaf-open-subspace, thm-exactness-of-sheaves-stalkwise]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

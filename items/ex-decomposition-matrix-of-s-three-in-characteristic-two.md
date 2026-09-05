@@ -2,7 +2,7 @@
 id: ex-decomposition-matrix-of-s-three-in-characteristic-two
 kind: example
 title: "The decomposition matrix of S3 in characteristic two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-decomposition-map-from-ordinary-to-modular-grothendieck-groups, def-decomposition-numbers-and-decomposition-matrix, ex-p-regular-classes-of-s-three]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

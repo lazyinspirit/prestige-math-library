@@ -2,7 +2,7 @@
 id: lem-p-regular-elements-are-preserved-by-conjugacy-and-coprime-powers
 kind: lemma
 title: "p-regularity is preserved by conjugacy and by powers coprime to the element order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-regular-and-p-singular-elements]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

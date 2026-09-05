@@ -2,7 +2,7 @@
 id: ex-pullback-free-module
 kind: example
 title: "Pullback carries a free module to the corresponding free module"
-status: draft
+status: published
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -11,6 +11,7 @@ generation:
 deps: [def-pullback-module-ringed-spaces, thm-pullback-pushforward-module-adjunction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

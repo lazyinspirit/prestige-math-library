@@ -2,7 +2,7 @@
 id: cex-divergent-probability-sum-without-independence
 kind: counterexample
 title: "A divergent probability sum does not force infinitely many occurrences without independence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ proof_strategy: constructive
 sources:
   references: []
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

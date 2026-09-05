@@ -2,7 +2,7 @@
 id: thm-morse-functions-are-open-dense-on-a-compact-manifold
 kind: theorem
 title: "On a compact smooth manifold, the Morse functions form an open dense subset in the $C^2$ and hence $C^\\infty$ topology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

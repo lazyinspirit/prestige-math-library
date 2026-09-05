@@ -2,13 +2,14 @@
 id: def-connecting-map-for-left-derived-functors
 kind: definition
 title: "The connecting map for left derived functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-left-derived-object-relative-to-projective-resolution-data, lem-horseshoe-gives-a-short-exact-sequence-after-applying-a-right-exact-functor, def-connecting-morphism-in-homology, thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

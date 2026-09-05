@@ -2,7 +2,7 @@
 id: fs-universality-removes-the-need-for-supplied-resolution-data
 kind: false-statement
 title: "FALSE: universality removes the need for supplied resolution data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-supplied-projective-resolution-datum, def-supplied-injective-resolution-datum, thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic, thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic, thm-derived-functors-are-universal-delta-functors, cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

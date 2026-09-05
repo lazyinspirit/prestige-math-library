@@ -2,7 +2,7 @@
 id: ex-two-adic-hilbert-symbol
 kind: example
 title: "The two-adic Hilbert symbol table"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Andrew V. Sutherland, 18.782 Lecture 10, Theorem 10.9"
       url: "https://math.mit.edu/classes/18.782/2013fa/LectureNotes10.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

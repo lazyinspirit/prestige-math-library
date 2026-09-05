@@ -2,7 +2,7 @@
 id: lem-simplicial-to-singular-chains-commute-with-boundaries
 kind: lemma
 title: "The simplicial-to-singular chain map commutes with boundaries"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-simplicial-to-singular-chain-map, def-singular-boundary-operator, def-simplicial-chain-groups-and-boundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

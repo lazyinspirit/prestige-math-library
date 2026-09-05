@@ -2,7 +2,7 @@
 id: lem-positive-log-dirichlet-series-nonvanishing
 kind: lemma
 title: "Positive logarithmic Dirichlet series force boundary nonvanishing"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Leonard Tomczak, Analytic Number Theory, Chapter 4"
       url: "https://math.berkeley.edu/~ltomczak/notes/Mich2022/AnaNT_Notes.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

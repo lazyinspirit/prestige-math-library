@@ -2,7 +2,7 @@
 id: thm-a-conical-limit-is-stronger-than-a-limit-in-the-underlying-category
 kind: theorem
 title: "A conical enriched limit is stronger than a limit in the underlying category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

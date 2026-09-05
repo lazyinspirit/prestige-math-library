@@ -2,7 +2,7 @@
 id: thm-the-root-set-is-a-reduced-crystallographic-root-system
 kind: theorem
 title: "The root set is a reduced crystallographic root system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

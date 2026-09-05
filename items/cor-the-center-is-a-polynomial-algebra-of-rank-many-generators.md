@@ -2,7 +2,7 @@
 id: cor-the-center-is-a-polynomial-algebra-of-rank-many-generators
 kind: corollary
 title: "The center of the enveloping algebra is polynomial on rank-many generators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

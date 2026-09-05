@@ -2,7 +2,7 @@
 id: lem-nonprincipal-dirichlet-character-partial-sums
 kind: lemma
 title: "Nonprincipal Dirichlet character partial sums are bounded"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Kiran S. Kedlaya, Notes on Analytic Number Theory, section 3.1"
       url: "https://kskedlaya.org/ant/chap-lfunc.html"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-hasse-minkowski-over-the-rationals
 kind: theorem
 title: "Hasse-Minkowski theorem over Q"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Sam Raskin, Introduction to the Arithmetic Theory of Quadratic Forms, sections 4.8-4.9"
       url: "https://www.samraskin.net/forms.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

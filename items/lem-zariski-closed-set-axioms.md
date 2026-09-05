@@ -2,7 +2,7 @@
 id: lem-zariski-closed-set-axioms
 kind: lemma
 title: "The vanishing sets define the Zariski topology on the prime spectrum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Definition 10.17.3"
       url: "https://stacks.math.columbia.edu/tag/00DY"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

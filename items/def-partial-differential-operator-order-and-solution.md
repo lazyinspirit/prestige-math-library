@@ -2,7 +2,7 @@
 id: def-partial-differential-operator-order-and-solution
 kind: definition
 title: "Scalar partial differential equations, order, and classical solutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-monotone-functions-have-at-most-countably-many-nondifferentiability-points
 kind: false-statement
 title: "FALSE: a monotone function has at most countably many points of non-differentiability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

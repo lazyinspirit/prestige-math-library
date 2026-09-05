@@ -2,7 +2,7 @@
 id: cor-principal-localisation-spectrum-is-distinguished-open
 kind: corollary
 title: "The spectrum of a principal localisation is the distinguished open D(f)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Lemma 10.17.6"
       url: "https://stacks.math.columbia.edu/tag/00DY"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

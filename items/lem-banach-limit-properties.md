@@ -2,7 +2,7 @@
 id: lem-banach-limit-properties
 kind: lemma
 title: "A Banach limit is positive, has norm one, is shift invariant, and lies between liminf and limsup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [ex-banach-limit-from-hahn-banach, def-limsup-liminf, def-cesaro-mean,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

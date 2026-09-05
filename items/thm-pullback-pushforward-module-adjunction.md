@@ -2,13 +2,14 @@
 id: thm-pullback-pushforward-module-adjunction
 kind: theorem
 title: "Pullback of modules is left adjoint to pushforward"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-pullback-module-ringed-spaces, thm-extension-of-scalars-is-left-adjoint-to-restriction, thm-inverse-direct-image-adjunction, thm-sheafification-universal-property]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

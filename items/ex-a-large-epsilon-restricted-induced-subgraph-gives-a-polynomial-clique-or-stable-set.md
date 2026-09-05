@@ -2,7 +2,7 @@
 id: ex-a-large-epsilon-restricted-induced-subgraph-gives-a-polynomial-clique-or-stable-set
 kind: example
 title: "A large epsilon-restricted induced subgraph gives a polynomial clique or stable set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

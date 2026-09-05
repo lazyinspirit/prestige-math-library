@@ -2,7 +2,7 @@
 id: prop-an-exact-base-functor-has-the-trivial-universal-delta-functor
 kind: proposition
 title: "An exact base functor has the trivial universal delta functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-universal-delta-functor, def-exact-functor-between-abelian-categories, thm-derived-functors-are-universal-delta-functors, prop-an-exact-functor-has-vanishing-positive-derived-functors, thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor, thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

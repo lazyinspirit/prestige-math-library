@@ -2,7 +2,7 @@
 id: def-three-colourability
 kind: definition
 title: "The three-colourability decision problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "John E. Savage, Models of Computation, Chapter 8"
       url: "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter8.pdf"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-changing-a-section-by-a-one-cochain
 kind: example
 title: "Changing a section by a one-cochain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-normalized-set-theoretic-section-and-factor-set, lem-changing-the-section-changes-the-factor-set-by-a-coboundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

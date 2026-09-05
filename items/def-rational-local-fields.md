@@ -2,7 +2,7 @@
 id: def-rational-local-fields
 kind: definition
 title: "The rational local fields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "Sam Raskin, Introduction to the Arithmetic Theory of Quadratic Forms"
       url: "https://www.samraskin.net/forms.pdf"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

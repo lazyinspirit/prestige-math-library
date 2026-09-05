@@ -2,7 +2,7 @@
 id: thm-dirichlet-primes-arithmetic-progressions
 kind: theorem
 title: "Dirichlet's theorem on primes in arithmetic progressions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Andrew V. Sutherland, Number Theory I, Theorem 18.1"
       url: "https://ocw.mit.edu/courses/18-785-number-theory-i-fall-2021/mit18_785f21_full_lec.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

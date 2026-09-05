@@ -2,7 +2,7 @@
 id: cor-closed-points-dense-in-affine-spectra
 kind: corollary
 title: "In a finite-type algebra over a field, closed points are dense in every closed subset of the spectrum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "A. Altman and S. Kleiman, A Term of Commutative Algebra, 13th ed., Theorem (15.26)"
       url: "https://web.mit.edu/18.705/www/13Ed.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

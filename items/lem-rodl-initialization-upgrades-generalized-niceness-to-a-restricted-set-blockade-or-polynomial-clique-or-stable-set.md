@@ -2,7 +2,7 @@
 id: lem-rodl-initialization-upgrades-generalized-niceness-to-a-restricted-set-blockade-or-polynomial-clique-or-stable-set
 kind: lemma
 title: "Rödl initialization upgrades generalized niceness to a restricted set, a complete or anticomplete blockade, or a polynomial clique or stable set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

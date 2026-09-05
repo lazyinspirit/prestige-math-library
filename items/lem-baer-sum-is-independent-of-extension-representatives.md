@@ -2,7 +2,7 @@
 id: lem-baer-sum-is-independent-of-extension-representatives
 kind: lemma
 title: "The Baer sum is independent of extension representatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-baer-sum-of-abelian-kernel-extensions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

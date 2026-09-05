@@ -2,7 +2,7 @@
 id: def-quadratic-casimir-element
 kind: definition
 title: "The quadratic Casimir element"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-the-casimir-element-is-independent-of-dual-bases]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

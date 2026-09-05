@@ -2,13 +2,14 @@
 id: def-singular-simplex-and-singular-chain-group-with-coefficients
 kind: definition
 title: "Singular simplices and singular chain groups with coefficients"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-standard-topological-simplex-and-its-affine-face-maps, def-continuous-map-top, def-tensor-product-of-modules-by-generators-and-relations]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

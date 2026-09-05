@@ -2,13 +2,14 @@
 id: lem-direct-image-is-sheaf
 kind: lemma
 title: "Direct image preserves sheaves and objectwise algebraic structure"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-direct-image-sheaf, def-presheaf-of-groups-rings-modules, def-sheaf-on-topological-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-a-brauer-character-is-defined-on-all-elements-by-the-usual-trace
 kind: false-statement
 title: "FALSE: a Brauer character is defined on all elements by the usual trace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-brauer-character-of-a-finite-dimensional-kg-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

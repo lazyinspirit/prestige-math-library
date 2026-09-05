@@ -2,7 +2,7 @@
 id: thm-a-category-enriched-in-categories-is-exactly-a-small-object-strict-two-category-with-small-homs
 kind: theorem
 title: "A Cat-enriched category is exactly a strict 2-category with a set of objects and small hom-categories"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

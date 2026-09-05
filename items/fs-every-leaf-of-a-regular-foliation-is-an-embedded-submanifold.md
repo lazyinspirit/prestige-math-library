@@ -2,7 +2,7 @@
 id: fs-every-leaf-of-a-regular-foliation-is-an-embedded-submanifold
 kind: false-statement
 title: "Every leaf of a regular foliation is an embedded submanifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -21,6 +21,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

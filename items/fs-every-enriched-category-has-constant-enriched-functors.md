@@ -2,7 +2,7 @@
 id: fs-every-enriched-category-has-constant-enriched-functors
 kind: false-statement
 title: "FALSE: every enriched category has constant enriched functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

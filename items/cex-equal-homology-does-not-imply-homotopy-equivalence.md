@@ -2,7 +2,7 @@
 id: cex-equal-homology-does-not-imply-homotopy-equivalence
 kind: counterexample
 title: "Equal homology does not imply homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-chain-complex-and-singular-homology, def-wedge-of-pointed-spaces, cor-fundamental-group-of-two-circle-wedge, cor-fundamental-group-of-two-dimensional-torus, thm-higher-dimensional-spheres-are-simply-connected, cor-seifert-van-kampen-simply-connected-overlap, prop-retracts-inject-fundamental-groups, thm-induced-fundamental-group-map-functoriality]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

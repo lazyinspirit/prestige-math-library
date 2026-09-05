@@ -2,7 +2,7 @@
 id: rem-dini-derivatives-specialise-the-published-derivative
 kind: remark
 title: "The Dini-derivative criterion is the extended-real shadow of the library's finite derivative convention"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

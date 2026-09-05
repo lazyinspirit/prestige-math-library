@@ -2,13 +2,14 @@
 id: thm-gluing-ringed-and-locally-ringed-spaces
 kind: theorem
 title: "Compatible open pieces of ringed or locally ringed spaces glue"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-locally-ringed-space, def-morphism-locally-ringed-spaces, def-ringed-space, thm-gluing-sheaves]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

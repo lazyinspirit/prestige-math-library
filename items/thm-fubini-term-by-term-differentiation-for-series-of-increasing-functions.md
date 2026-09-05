@@ -2,7 +2,7 @@
 id: thm-fubini-term-by-term-differentiation-for-series-of-increasing-functions
 kind: theorem
 title: "Fubini's theorem on term-by-term differentiation for pointwise sums of nondecreasing functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-hahn-banach-extension-need-not-be-unique
 kind: counterexample
 title: "Hahn-Banach norm-preserving extensions need not be unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [ex-many-extensions-from-a-codimension-one-subspace]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

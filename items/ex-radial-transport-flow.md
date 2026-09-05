@@ -2,7 +2,7 @@
 id: ex-radial-transport-flow
 kind: example
 title: "The stationary equation x dot Du = u is solved by radial characteristics"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

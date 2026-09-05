@@ -2,7 +2,7 @@
 id: fs-every-block-has-one-ordinary-and-one-brauer-irreducible-character
 kind: false-statement
 title: "FALSE: every block has one ordinary and one Brauer irreducible character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-blocks-partition-ordinary-and-brauer-irreducible-characters, prop-decomposition-matrix-is-block-diagonal-after-block-ordering]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

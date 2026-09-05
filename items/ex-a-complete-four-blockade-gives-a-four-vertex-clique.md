@@ -2,7 +2,7 @@
 id: ex-a-complete-four-blockade-gives-a-four-vertex-clique
 kind: example
 title: "A complete four-blockade gives a four-vertex clique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

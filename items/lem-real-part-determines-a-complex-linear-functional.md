@@ -2,7 +2,7 @@
 id: lem-real-part-determines-a-complex-linear-functional
 kind: lemma
 title: "A complex linear functional is recovered from its real part by f(x)=u(x)-iu(ix)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-algebraic-dual-and-linear-functional,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-the-character-chi-four-and-leibniz-series
 kind: example
 title: "The character chi_4 and the Gregory-Leibniz series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Kiran S. Kedlaya, Notes on Analytic Number Theory, section 3.2"
       url: "https://kskedlaya.org/ant/chap-lfunc.html"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

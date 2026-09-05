@@ -2,7 +2,7 @@
 id: def-limsup-and-infinitely-often-event
 kind: definition
 title: "Limsup and the infinitely often event"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ sources:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Section 2.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

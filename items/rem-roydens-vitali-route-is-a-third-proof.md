@@ -2,7 +2,7 @@
 id: rem-roydens-vitali-route-is-a-third-proof
 kind: remark
 title: "Royden's classical Vitali-covering proof is a third route and is not run on this page"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

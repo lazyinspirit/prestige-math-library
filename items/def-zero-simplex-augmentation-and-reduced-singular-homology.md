@@ -2,13 +2,14 @@
 id: def-zero-simplex-augmentation-and-reduced-singular-homology
 kind: definition
 title: "Augmentation at 0-simplices and reduced singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-singular-chain-complex-and-singular-homology]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

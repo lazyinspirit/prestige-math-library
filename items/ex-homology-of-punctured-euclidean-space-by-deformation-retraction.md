@@ -2,7 +2,7 @@
 id: ex-homology-of-punctured-euclidean-space-by-deformation-retraction
 kind: example
 title: "The homology of punctured Euclidean space by deformation retraction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-singular-homology-is-invariant-under-deformation-retracts, thm-punctured-rn-deformation-retracts-onto-the-sphere]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

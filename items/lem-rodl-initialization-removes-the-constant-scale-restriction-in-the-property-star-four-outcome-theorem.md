@@ -2,7 +2,7 @@
 id: lem-rodl-initialization-removes-the-constant-scale-restriction-in-the-property-star-four-outcome-theorem
 kind: lemma
 title: "Rödl initialization removes the constant-scale restriction in the property (*) four-outcome theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

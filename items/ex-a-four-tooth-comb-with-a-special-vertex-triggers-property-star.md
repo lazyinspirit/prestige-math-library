@@ -2,7 +2,7 @@
 id: ex-a-four-tooth-comb-with-a-special-vertex-triggers-property-star
 kind: example
 title: "A four-tooth comb with a special vertex realizes the trigger configuration for property (*)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

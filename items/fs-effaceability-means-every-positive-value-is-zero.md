@@ -2,7 +2,7 @@
 id: fs-effaceability-means-every-positive-value-is-zero
 kind: false-statement
 title: "FALSE: effaceability means every positive value is zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-effaceable-homological-delta-functor-in-positive-degrees, def-effaceable-cohomological-delta-functor-in-positive-degrees, prop-positive-left-derived-functors-are-effaceable-by-projectives, thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-brauer-reciprocity
 kind: theorem
 title: "Brauer reciprocity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-splitting-p-modular-system-for-a-finite-group, def-decomposition-numbers-and-decomposition-matrix, lem-decomposition-numbers-are-nonnegative-integers, def-projective-indecomposable-characters-and-cartan-invariants]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

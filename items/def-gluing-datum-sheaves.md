@@ -2,12 +2,13 @@
 id: def-gluing-datum-sheaves
 kind: definition
 title: "A gluing datum for sheaves on an open cover"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-restriction-sheaf-open-subspace]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

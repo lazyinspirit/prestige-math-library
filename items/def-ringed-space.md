@@ -2,12 +2,13 @@
 id: def-ringed-space
 kind: definition
 title: "A ringed space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-of-groups-rings-modules, def-sheaf-on-topological-space]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

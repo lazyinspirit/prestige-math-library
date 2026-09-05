@@ -2,7 +2,7 @@
 id: lem-fejer-kernel-is-a-positive-approximate-identity
 kind: lemma
 title: "The Fejer kernel is a positive approximate identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirichlet-and-fejer-kernels]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

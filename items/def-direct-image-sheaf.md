@@ -2,11 +2,13 @@
 id: def-direct-image-sheaf
 kind: definition
 title: "Direct image of a sheaf along a continuous map"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-on-topological-space]
+verification:
+  audited: 2026-09-05
 sources:
   scraped: []
   references:

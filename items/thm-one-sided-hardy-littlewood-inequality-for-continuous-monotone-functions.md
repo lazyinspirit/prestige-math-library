@@ -2,7 +2,7 @@
 id: thm-one-sided-hardy-littlewood-inequality-for-continuous-monotone-functions
 kind: theorem
 title: "One-sided Hardy-Littlewood inequalities for the Dini derivatives of a continuous monotone function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

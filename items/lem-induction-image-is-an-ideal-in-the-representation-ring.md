@@ -2,7 +2,7 @@
 id: lem-induction-image-is-an-ideal-in-the-representation-ring
 kind: lemma
 title: "The cyclic induction subgroup is an ideal of the character ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

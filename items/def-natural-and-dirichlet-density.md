@@ -2,7 +2,7 @@
 id: def-natural-and-dirichlet-density
 kind: definition
 title: "Natural and Dirichlet density"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "Kiran S. Kedlaya, Notes on Analytic Number Theory, Definitions 4.3 and 4.4"
       url: "https://kskedlaya.org/ant/chap-primes-in-ap.html"
 verification:
+  audited: 2026-09-05
   precheck: n/a
 ---
 

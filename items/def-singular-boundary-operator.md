@@ -2,13 +2,14 @@
 id: def-singular-boundary-operator
 kind: definition
 title: "The singular boundary operator"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-singular-simplex-and-singular-chain-group-with-coefficients]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-decomposition-matrix-is-block-diagonal-after-block-ordering
 kind: proposition
 title: "After block ordering, the decomposition matrix is block diagonal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-decomposition-numbers-and-decomposition-matrix, thm-blocks-partition-ordinary-and-brauer-irreducible-characters]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

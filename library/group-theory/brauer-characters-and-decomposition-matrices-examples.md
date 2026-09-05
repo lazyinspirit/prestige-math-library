@@ -1,7 +1,7 @@
 ---
 page: brauer-characters-and-decomposition-matrices-examples
 title: "Brauer Characters and Decomposition Matrices - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-brauer-characters-of-a-p-group, ex-p-regular-classes-of-s-three, ex-decomposition-matrix-of-s-three-in-characteristic-two, ex-cartan-matrix-from-d-transpose-d, ex-a-block-with-one-ordinary-and-one-brauer-character, cex-ordinary-trace-on-a-p-singular-unipotent-element]
 ---

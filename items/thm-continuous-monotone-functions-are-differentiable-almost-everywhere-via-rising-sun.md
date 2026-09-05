@@ -2,7 +2,7 @@
 id: thm-continuous-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun
 kind: theorem
 title: "A continuous monotone function is differentiable almost everywhere by the rising-sun route"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

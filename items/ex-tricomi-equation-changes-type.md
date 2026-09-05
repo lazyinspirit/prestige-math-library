@@ -2,7 +2,7 @@
 id: ex-tricomi-equation-changes-type
 kind: example
 title: "The Tricomi equation changes type across y = 0"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-reduction-mod-p-of-an-ordinary-character-is-always-irreducible
 kind: false-statement
 title: "FALSE: reduction mod p of an ordinary irreducible is always irreducible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-decomposition-map-from-ordinary-to-modular-grothendieck-groups, def-decomposition-numbers-and-decomposition-matrix]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

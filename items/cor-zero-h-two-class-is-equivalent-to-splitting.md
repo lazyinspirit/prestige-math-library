@@ -2,7 +2,7 @@
 id: cor-zero-h-two-class-is-equivalent-to-splitting
 kind: corollary
 title: "The zero H^2 class is equivalent to splitting"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]
 proof_strategy: iff
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

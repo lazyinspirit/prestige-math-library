@@ -2,7 +2,7 @@
 id: ex-clique-is-np-complete
 kind: example
 title: "A worked clause-cluster instance witnessing that CLIQUE is NP-complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ sources:
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

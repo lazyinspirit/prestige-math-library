@@ -2,13 +2,14 @@
 id: def-induced-singular-chain-map
 kind: definition
 title: "The induced singular chain map of a continuous map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-singular-simplex-and-singular-chain-group-with-coefficients, def-continuous-map-top]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-contractible-nonempty-spaces-have-the-homology-of-a-point
 kind: corollary
 title: "Contractible nonempty spaces have the homology of a point"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nullhomotopic-map-and-contractible-space, cor-contractible-iff-identity-nullhomotopic, thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

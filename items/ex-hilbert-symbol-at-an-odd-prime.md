@@ -2,7 +2,7 @@
 id: ex-hilbert-symbol-at-an-odd-prime
 kind: example
 title: "A Hilbert-symbol computation at an odd prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Andrew V. Sutherland, 18.782 Lecture 10, Theorem 10.7"
       url: "https://math.mit.edu/classes/18.782/2013fa/LectureNotes10.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

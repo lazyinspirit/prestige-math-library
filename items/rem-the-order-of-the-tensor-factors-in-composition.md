@@ -2,7 +2,7 @@
 id: rem-the-order-of-the-tensor-factors-in-composition
 kind: remark
 title: "The order of the tensor factors in enriched composition is fixed on this page"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-enriched-category]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

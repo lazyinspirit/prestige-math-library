@@ -2,7 +2,7 @@
 id: def-conical-limit-in-an-enriched-category
 kind: definition
 title: "Conical enriched limit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-enriched-weighted-limit, thm-the-free-enriched-category-two-adjunctio
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

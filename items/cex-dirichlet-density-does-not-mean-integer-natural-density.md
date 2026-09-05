@@ -2,7 +2,7 @@
 id: cex-dirichlet-density-does-not-mean-integer-natural-density
 kind: counterexample
 title: "Positive prime Dirichlet density does not give positive integer natural density"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Kiran S. Kedlaya, Notes on Analytic Number Theory, Definitions 4.3 and 4.4"
       url: "https://kskedlaya.org/ant/chap-primes-in-ap.html"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

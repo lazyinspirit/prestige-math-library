@@ -2,7 +2,7 @@
 id: cor-closed-points-of-spectrum-are-maximal-ideals
 kind: corollary
 title: "The closed points of the prime spectrum are exactly the maximal ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "A. Altman and S. Kleiman, A Term of Commutative Algebra, 13th ed., Exercise (13.23)"
       url: "https://web.mit.edu/18.705/www/13Ed.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

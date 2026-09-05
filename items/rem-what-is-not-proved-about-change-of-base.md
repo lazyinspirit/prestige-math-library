@@ -2,7 +2,7 @@
 id: rem-what-is-not-proved-about-change-of-base
 kind: remark
 title: "What this page does not prove about change of base"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-the-underlying-ordinary-category-is-an-instance-of-change-of-base]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-cesaro-and-abel-means-of-a-fourier-series
 kind: definition
 title: "Cesaro and Abel means of a Fourier series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution, def-dirichlet-and-fejer-kernels]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

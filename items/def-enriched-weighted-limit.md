@@ -2,7 +2,7 @@
 id: def-enriched-weighted-limit
 kind: definition
 title: "Enriched weighted limit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-set-weighted-limit-and-weighted-colimit, def-enriched-functor, thm-a-
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
 sources:
   scraped: []

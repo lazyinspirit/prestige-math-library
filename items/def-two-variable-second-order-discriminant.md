@@ -2,7 +2,7 @@
 id: def-two-variable-second-order-discriminant
 kind: definition
 title: "The discriminant for a second-order equation in two variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
 sources:
   scraped: []

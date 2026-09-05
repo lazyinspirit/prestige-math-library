@@ -2,7 +2,7 @@
 id: thm-dirichlet-l-nonvanishing-line-one
 kind: theorem
 title: "Nonprincipal Dirichlet L-functions do not vanish on Re s = 1 away from s = 1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Leonard Tomczak, Analytic Number Theory, Chapter 4"
       url: "https://math.berkeley.edu/~ltomczak/notes/Mich2022/AnaNT_Notes.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

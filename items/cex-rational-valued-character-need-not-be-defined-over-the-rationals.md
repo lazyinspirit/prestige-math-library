@@ -2,7 +2,7 @@
 id: cex-rational-valued-character-need-not-be-defined-over-the-rationals
 kind: counterexample
 title: "A rational-valued irreducible character need not come from a $\\mathbb Q$-representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

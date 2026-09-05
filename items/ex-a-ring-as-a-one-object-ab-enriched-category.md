@@ -2,7 +2,7 @@
 id: ex-a-ring-as-a-one-object-ab-enriched-category
 kind: example
 title: "A ring as a one-object Ab-enriched category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

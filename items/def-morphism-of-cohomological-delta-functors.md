@@ -2,13 +2,14 @@
 id: def-morphism-of-cohomological-delta-functors
 kind: definition
 title: "Morphism of cohomological delta functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-cohomological-delta-functor, def-natural-transformation]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-killing-form-pairs-only-opposite-root-spaces
 kind: proposition
 title: "The Killing form pairs only opposite root spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-clopen-subset-gives-idempotent-decomposition
 kind: lemma
 title: "A clopen decomposition of the spectrum comes from a nontrivial idempotent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 10.22: Connected components of spectra"
       url: "https://stacks.math.columbia.edu/tag/04PP"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-distinguished-opens-cover-every-open
 kind: lemma
 title: "Every Zariski-open subset is a union of distinguished opens"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 10.21: Open and closed subsets of spectra"
       url: "https://stacks.math.columbia.edu/tag/04PN"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

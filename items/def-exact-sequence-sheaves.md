@@ -2,12 +2,13 @@
 id: def-exact-sequence-sheaves
 kind: definition
 title: "Exact sequences of sheaves"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-exact-sequence-and-short-exact-sequence-in-an-abelian-category, thm-abelian-sheaves-form-abelian-category]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

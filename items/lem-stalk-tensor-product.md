@@ -2,13 +2,14 @@
 id: lem-stalk-tensor-product
 kind: lemma
 title: "The stalk of a tensor product sheaf is the tensor product of the stalks"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-sheaf-tensor-product, def-stalk-of-presheaf, thm-sheafification-preserves-stalks]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

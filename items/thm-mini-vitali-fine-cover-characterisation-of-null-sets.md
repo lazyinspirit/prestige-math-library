@@ -2,7 +2,7 @@
 id: thm-mini-vitali-fine-cover-characterisation-of-null-sets
 kind: theorem
 title: "A set is null exactly when every fine cover has arbitrarily cheap countable subfamilies covering it up to a null remainder"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

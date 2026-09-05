@@ -1,7 +1,7 @@
 ---
 page: distributions-integral-manifolds-and-the-frobenius-theorem-examples
 title: "Distributions Integral Manifolds and the Frobenius Theorem: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-coordinate-plane-distribution-and-its-affine-leaves,
            ex-kernel-of-a-submersion-as-an-integrable-distribution,

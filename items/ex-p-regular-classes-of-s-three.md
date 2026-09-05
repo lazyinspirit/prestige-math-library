@@ -2,7 +2,7 @@
 id: ex-p-regular-classes-of-s-three
 kind: example
 title: "The p-regular classes of S3"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-regular-and-p-singular-elements, prop-brauer-characters-are-class-functions-on-p-regular-elements]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions
 kind: theorem
 title: "Irreducible Brauer characters form a basis of the p-regular class functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-brauer-characters-are-class-functions-on-p-regular-elements, thm-bra
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

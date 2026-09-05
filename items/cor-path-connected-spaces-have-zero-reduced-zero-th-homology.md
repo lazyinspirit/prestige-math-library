@@ -2,7 +2,7 @@
 id: cor-path-connected-spaces-have-zero-reduced-zero-th-homology
 kind: corollary
 title: "Path-connected spaces have zero reduced zero-th homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-zero-th-singular-homology-is-free-on-path-components, def-zero-simplex-augmentation-and-reduced-singular-homology, lem-singular-augmentation-commutes-with-boundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

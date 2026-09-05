@@ -2,7 +2,7 @@
 id: ex-brauer-characters-of-a-p-group
 kind: example
 title: "Brauer characters of a p-group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-brauer-character-of-a-finite-dimensional-kg-module, thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions, cor-a-finite-p-group-has-only-the-trivial-simple-module-in-characteristic-p]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: zariski-topology-on-prime-spectra-examples
 title: "Zariski Topology on Prime Spectra — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-distinguished-open-finite-subcover-from-unit-expression, ex-zariski-spectrum-of-the-integers, ex-zariski-spectrum-not-hausdorff, ex-specialisation-poset-of-a-small-spectrum, ex-idempotent-clopen-product-ring, ex-nonclosed-support-without-finiteness]
 ---

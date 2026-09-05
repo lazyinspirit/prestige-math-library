@@ -2,7 +2,7 @@
 id: thm-factorization-of-expectations-for-independent-variables
 kind: theorem
 title: "Expectations factor over finite products of independent random variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "S. R. S. Varadhan, Probability Theory, Section 1.6"
       url: "https://math.nyu.edu/~varadhan/course/PROB.ch1.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

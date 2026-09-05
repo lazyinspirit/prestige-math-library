@@ -2,7 +2,7 @@
 id: def-specialisation-and-generic-point
 kind: definition
 title: "Specialisations, generalisations, and generic points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "The Stacks Project, Sections 5.8 and 10.17"
       url: "https://stacks.math.columbia.edu/tag/00DY"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

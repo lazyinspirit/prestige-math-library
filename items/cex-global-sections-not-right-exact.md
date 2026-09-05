@@ -2,13 +2,14 @@
 id: cex-global-sections-not-right-exact
 kind: counterexample
 title: "Global sections need not preserve surjections"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-global-sections-left-exact]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

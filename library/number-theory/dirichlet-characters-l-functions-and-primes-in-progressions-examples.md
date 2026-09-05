@@ -1,7 +1,7 @@
 ---
 page: dirichlet-characters-l-functions-and-primes-in-progressions-examples
 title: "Dirichlet Characters L Functions and Primes in Progressions -- Examples"
-status: draft
+status: published
 items: []
 examples: [ex-dirichlet-characters-modulo-three-four-and-five,
            ex-dirichlet-characters-modulo-eight-and-twelve,

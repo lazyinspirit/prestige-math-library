@@ -2,7 +2,7 @@
 id: ex-hasse-minkowski-for-a-quaternary-form
 kind: example
 title: "A quaternary Hasse-Minkowski calculation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Andrew V. Sutherland, 18.782 Lecture 11, Theorem 11.17"
       url: "https://math.mit.edu/classes/18.782/2013fa/LectureNotes11.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

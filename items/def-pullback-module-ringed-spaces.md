@@ -2,11 +2,13 @@
 id: def-pullback-module-ringed-spaces
 kind: definition
 title: "Pullback of a module along a morphism of ringed spaces"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-inverse-image-presheaf-and-sheaf, def-presheaf-of-groups-rings-modules, thm-inverse-direct-image-adjunction, def-module-on-ringed-space, def-morphism-ringed-spaces, def-sheaf-tensor-product]
+verification:
+  audited: 2026-09-05
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-blocks-partition-ordinary-and-brauer-irreducible-characters
 kind: theorem
 title: "Blocks partition the ordinary and Brauer irreducible characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-blocks-by-primitive-central-idempotents, thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

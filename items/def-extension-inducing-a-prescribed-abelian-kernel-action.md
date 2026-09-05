@@ -2,13 +2,14 @@
 id: def-extension-inducing-a-prescribed-abelian-kernel-action
 kind: definition
 title: "An extension inducing a prescribed abelian kernel action"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

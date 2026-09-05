@@ -2,13 +2,14 @@
 id: ex-glue-line-bundle-transition-functions
 kind: example
 title: "Units satisfying the cocycle law glue local rank-one free modules into a line bundle"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-gluing-datum-sheaves, def-module-on-ringed-space, thm-gluing-sheaves]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

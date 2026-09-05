@@ -2,7 +2,7 @@
 id: prop-root-space-brackets-add-their-roots
 kind: proposition
 title: "Brackets of root spaces add their roots"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

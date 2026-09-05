@@ -2,7 +2,7 @@
 id: def-representable-enriched-functor
 kind: definition
 title: "Representable enriched functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-a-closed-monoidal-category-is-enriched-in-itself, def-enriched-functo
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

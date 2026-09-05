@@ -1,7 +1,7 @@
 ---
 page: second-cohomology-and-abelian-kernel-extensions-examples
 title: "Second Cohomology and Abelian Kernel Extensions - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-cp-squared-extension-as-a-nonzero-two-cocycle, ex-the-split-extension-as-the-zero-cocycle, ex-central-extensions-of-a-cyclic-group, ex-the-quaternion-and-dihedral-central-extension-classes, ex-changing-a-section-by-a-one-cochain, ex-baer-sum-of-two-factor-sets, cex-same-middle-group-with-inequivalent-extension-maps]
 ---

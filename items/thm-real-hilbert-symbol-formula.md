@@ -2,7 +2,7 @@
 id: thm-real-hilbert-symbol-formula
 kind: theorem
 title: "The real Hilbert symbol formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Sam Raskin, Introduction to the Arithmetic Theory of Quadratic Forms, section 4.1"
       url: "https://www.samraskin.net/forms.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

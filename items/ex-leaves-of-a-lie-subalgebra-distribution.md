@@ -2,7 +2,7 @@
 id: ex-leaves-of-a-lie-subalgebra-distribution
 kind: example
 title: "Leaves of a Lie subalgebra distribution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

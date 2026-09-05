@@ -2,7 +2,7 @@
 id: lem-rho-shift-intertwines-the-dot-and-ordinary-weyl-actions
 kind: lemma
 title: "The rho-shift intertwines the dot and ordinary Weyl actions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

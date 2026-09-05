@@ -1,7 +1,7 @@
 ---
 page: distributions-integral-manifolds-and-the-frobenius-theorem
 title: "Distributions Integral Manifolds and the Frobenius Theorem"
-status: draft
+status: published
 items: [def-smooth-distribution-on-a-manifold,
         prop-local-frame-characterization-of-a-smooth-distribution,
         def-vector-field-tangent-to-a-distribution,

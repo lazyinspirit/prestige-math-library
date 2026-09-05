@@ -2,13 +2,14 @@
 id: def-morphism-of-homological-delta-functors
 kind: definition
 title: "Morphism of homological delta functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-homological-delta-functor, def-natural-transformation]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

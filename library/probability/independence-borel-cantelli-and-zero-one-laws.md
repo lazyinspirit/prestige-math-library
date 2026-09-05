@@ -1,7 +1,7 @@
 ---
 page: independence-borel-cantelli-and-zero-one-laws
 title: "Independence Borel Cantelli and Zero One Laws"
-status: draft
+status: published
 items: [def-independent-families-of-event-classes,
         def-independent-sigma-algebras-and-events,
         def-pairwise-independence,

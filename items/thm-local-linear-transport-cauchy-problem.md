@@ -2,7 +2,7 @@
 id: thm-local-linear-transport-cauchy-problem
 kind: theorem
 title: "Local linear transport has a unique solution from noncharacteristic Cauchy data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

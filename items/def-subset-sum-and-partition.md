@@ -2,7 +2,7 @@
 id: def-subset-sum-and-partition
 kind: definition
 title: "Subset sum and partition decision problems"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "Fabrizio Iozzi and Luca Trevisan, Handout NP3"
       url: "https://lucatrevisan.github.io/30540/notes-np3.pdf"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-separating-equal-critical-values-by-bump-functions
 kind: example
 title: "Two equal critical levels can be separated by adding disjoint bump perturbations near the corresponding critical points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct construction
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

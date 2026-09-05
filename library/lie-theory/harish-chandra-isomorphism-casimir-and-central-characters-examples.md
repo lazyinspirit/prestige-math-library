@@ -1,7 +1,7 @@
 ---
 page: harish-chandra-isomorphism-casimir-and-central-characters-examples
 title: "Harish Chandra Isomorphism Casimir and Central Characters - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-sl2-casimir-and-its-highest-weight-eigenvalue,
            ex-sl3-harish-chandra-center-generators,

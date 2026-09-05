@@ -2,7 +2,7 @@
 id: cor-independent-set-and-vertex-cover-are-np-complete
 kind: corollary
 title: "INDEPENDENT SET and VERTEX COVER are NP-complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

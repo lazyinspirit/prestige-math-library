@@ -2,7 +2,7 @@
 id: lem-distinguished-open-refinement-at-a-point
 kind: lemma
 title: "Every point of a Zariski-open set has a distinguished-open neighbourhood inside it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 10.21: Open and closed subsets of spectra"
       url: "https://stacks.math.columbia.edu/tag/04PN"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

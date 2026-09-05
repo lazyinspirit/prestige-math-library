@@ -2,7 +2,7 @@
 id: fs-the-zero-h-two-class-corresponds-to-the-direct-product-only
 kind: false-statement
 title: "FALSE: the zero H^2 class corresponds to the direct product only"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-zero-h-two-class-is-equivalent-to-splitting]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

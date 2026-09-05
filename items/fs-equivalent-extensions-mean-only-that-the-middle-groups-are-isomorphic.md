@@ -2,7 +2,7 @@
 id: fs-equivalent-extensions-mean-only-that-the-middle-groups-are-isomorphic
 kind: false-statement
 title: "FALSE: equivalent extensions mean only that the middle groups are isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-cohomologous-two-cocycles-give-equivalent-extensions, def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

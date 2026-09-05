@@ -1,7 +1,7 @@
 ---
 page: from-generalized-niceness-to-erdos-hajnal-examples
 title: "From Generalized Niceness to Erdős-Hajnal — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-lemma-three-five-parameter-choice-on-a-large-graph, ex-a-complete-four-blockade-gives-a-four-vertex-clique, ex-a-large-epsilon-restricted-induced-subgraph-gives-a-polynomial-clique-or-stable-set]
 ---

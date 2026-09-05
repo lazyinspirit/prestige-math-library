@@ -2,7 +2,7 @@
 id: ex-two-universal-delta-functors-and-their-unique-isomorphism
 kind: example
 title: "Two universal delta functors and their unique isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-derived-functors-are-universal-delta-functors, thm-left-derived-functors-form-a-homological-delta-functor, cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

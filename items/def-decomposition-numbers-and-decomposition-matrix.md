@@ -2,13 +2,14 @@
 id: def-decomposition-numbers-and-decomposition-matrix
 kind: definition
 title: "Decomposition numbers and the decomposition matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-decomposition-map-from-ordinary-to-modular-grothendieck-groups, thm-decomposition-map-is-independent-of-the-stable-lattice, thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

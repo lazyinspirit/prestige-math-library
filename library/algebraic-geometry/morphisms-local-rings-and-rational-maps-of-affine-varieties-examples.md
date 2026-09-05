@@ -1,7 +1,7 @@
 ---
 page: morphisms-local-rings-and-rational-maps-of-affine-varieties-examples
 title: "Morphisms Local Rings and Rational Maps of Affine Varieties — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-polynomial-map-coordinate-pullback

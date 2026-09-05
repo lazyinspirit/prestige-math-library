@@ -2,7 +2,7 @@
 id: thm-enveloping-algebra-is-free-over-its-center
 kind: theorem
 title: "The enveloping algebra is free over its center"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

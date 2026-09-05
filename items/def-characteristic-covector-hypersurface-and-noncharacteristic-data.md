@@ -2,7 +2,7 @@
 id: def-characteristic-covector-hypersurface-and-noncharacteristic-data
 kind: definition
 title: "Characteristic covectors, hypersurfaces, and noncharacteristic data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-characteristic-hypersurface-is-independent-of-defining-functi
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
 sources:
   scraped: []

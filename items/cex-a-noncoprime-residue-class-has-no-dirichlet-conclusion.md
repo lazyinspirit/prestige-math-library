@@ -2,7 +2,7 @@
 id: cex-a-noncoprime-residue-class-has-no-dirichlet-conclusion
 kind: counterexample
 title: "A noncoprime residue class has no Dirichlet conclusion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Kiran S. Kedlaya, Notes on Analytic Number Theory, Chapter 4"
       url: "https://kskedlaya.org/ant/chap-primes-in-ap.html"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

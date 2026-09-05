@@ -2,7 +2,7 @@
 id: prop-positive-left-derived-functors-are-effaceable-by-projectives
 kind: proposition
 title: "Positive left derived functors are effaceable by projectives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-effaceable-homological-delta-functor-in-positive-degrees, thm-left-derived-functors-form-a-homological-delta-functor, prop-positive-left-derived-functors-vanish-on-projective-objects, def-a-category-with-enough-projectives-and-with-enough-injectives]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

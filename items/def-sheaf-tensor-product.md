@@ -2,12 +2,13 @@
 id: def-sheaf-tensor-product
 kind: definition
 title: "Tensor product of sheaves of modules"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-module-on-ringed-space, def-sheafification]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

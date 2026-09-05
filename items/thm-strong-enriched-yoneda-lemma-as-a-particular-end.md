@@ -2,7 +2,7 @@
 id: thm-strong-enriched-yoneda-lemma-as-a-particular-end
 kind: theorem
 title: "Strong enriched Yoneda lemma as a particular end"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

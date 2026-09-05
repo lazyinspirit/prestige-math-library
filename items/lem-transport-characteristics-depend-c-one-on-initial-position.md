@@ -2,7 +2,7 @@
 id: lem-transport-characteristics-depend-c-one-on-initial-position
 kind: lemma
 title: "Transport characteristics depend C^1 on the initial position"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

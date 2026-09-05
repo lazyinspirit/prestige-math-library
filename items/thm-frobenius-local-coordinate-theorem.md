@@ -2,7 +2,7 @@
 id: thm-frobenius-local-coordinate-theorem
 kind: theorem
 title: "Frobenius local coordinate theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

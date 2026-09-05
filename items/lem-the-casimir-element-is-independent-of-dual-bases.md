@@ -2,7 +2,7 @@
 id: lem-the-casimir-element-is-independent-of-dual-bases
 kind: lemma
 title: "The quadratic Casimir element is independent of the choice of dual bases"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

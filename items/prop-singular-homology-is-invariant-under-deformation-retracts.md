@@ -2,7 +2,7 @@
 id: prop-singular-homology-is-invariant-under-deformation-retracts
 kind: proposition
 title: "Singular homology is invariant under deformation retracts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology, thm-a-deformation-retract-is-a-homotopy-equivalence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

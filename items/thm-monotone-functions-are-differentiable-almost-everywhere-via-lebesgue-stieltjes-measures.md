@@ -2,7 +2,7 @@
 id: thm-monotone-functions-are-differentiable-almost-everywhere-via-lebesgue-stieltjes-measures
 kind: theorem
 title: "A monotone function is differentiable almost everywhere by the Lebesgue-Stieltjes route"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: rem-hahn-banach-open-choice-questions
 kind: remark
 title: "Two choice-theoretic consequences of Hahn-Banach remain open"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [rem-choice-strength-of-hahn-banach,
        rem-hahn-banach-discontinuous-additive-open]
 justified_by: []
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

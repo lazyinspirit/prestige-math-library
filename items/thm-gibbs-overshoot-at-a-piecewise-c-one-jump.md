@@ -2,7 +2,7 @@
 id: thm-gibbs-overshoot-at-a-piecewise-c-one-jump
 kind: theorem
 title: "Gibbs overshoot at a piecewise C^1 jump"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, def-period-one-fourier-coefficients-partial-sums-and-convolution, prop-countable-subsets-of-rn-are-lebesgue-null, thm-the-lebesgue-integral-respects-almost-everywhere-equality]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   references:

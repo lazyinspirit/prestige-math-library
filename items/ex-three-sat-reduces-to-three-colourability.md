@@ -2,7 +2,7 @@
 id: ex-three-sat-reduces-to-three-colourability
 kind: example
 title: "A small 3SAT instance and its three-colourability gadget graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ sources:
     - title: "John E. Savage, Models of Computation, Chapter 8"
       url: "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter8.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

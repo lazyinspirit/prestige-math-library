@@ -2,7 +2,7 @@
 id: rem-noncompact-morse-genericity-is-not-an-open-dense-claim
 kind: remark
 title: "On a noncompact manifold, this page states Morse genericity as a strong-topology residual theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

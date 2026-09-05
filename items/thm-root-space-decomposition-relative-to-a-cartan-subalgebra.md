@@ -2,7 +2,7 @@
 id: thm-root-space-decomposition-relative-to-a-cartan-subalgebra
 kind: theorem
 title: "Root-space decomposition relative to a Cartan subalgebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

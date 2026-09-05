@@ -2,7 +2,7 @@
 id: lem-the-effacement-extension-is-independent-of-the-effacing-morphism
 kind: lemma
 title: "The effacement extension is independent of the effacing morphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-extend-a-degree-zero-transformation-through-one-dimension-shift, thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

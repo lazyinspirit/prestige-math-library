@@ -2,7 +2,7 @@
 id: lem-idempotent-gives-clopen-spectrum-partition
 kind: lemma
 title: "An idempotent partitions the spectrum into complementary clopen subsets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 10.22: Connected components of spectra"
       url: "https://stacks.math.columbia.edu/tag/04PP"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: ex-sl2-casimir-and-its-highest-weight-eigenvalue
 kind: example
 title: "$\\mathfrak{sl}_2$ Casimir and highest-weight eigenvalue"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

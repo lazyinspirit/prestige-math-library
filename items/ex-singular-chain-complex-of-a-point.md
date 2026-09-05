@@ -2,7 +2,7 @@
 id: ex-singular-chain-complex-of-a-point
 kind: example
 title: "The singular chain complex of a point"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-zero-simplex-augmentation-and-reduced-singular-homology, def-singular-boundary-operator]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

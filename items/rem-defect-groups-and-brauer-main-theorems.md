@@ -2,7 +2,7 @@
 id: rem-defect-groups-and-brauer-main-theorems
 kind: remark
 title: "Defect groups and Brauer's main theorems lie beyond this page"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -15,6 +15,11 @@ external_dependency:
   local_proof_attempt: "This page develops Brauer characters, decomposition matrices, projective indecomposables, Cartan invariants, and primitive central block idempotents, but not the local subgroup analysis needed for defect groups or Brauer pairs."
   necessity: "The remark marks the exact sequel boundary so later pages can cite the present block partition facts without pretending that local block theory has already been proved."
 verification:
+  audited: 2026-09-05
+  sources_checked:
+    date: 2026-09-05
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

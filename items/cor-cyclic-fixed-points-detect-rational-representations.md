@@ -2,7 +2,7 @@
 id: cor-cyclic-fixed-points-detect-rational-representations
 kind: corollary
 title: "Cyclic fixed-space dimensions detect rational virtual characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

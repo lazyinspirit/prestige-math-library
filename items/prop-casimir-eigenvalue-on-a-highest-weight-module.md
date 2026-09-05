@@ -2,7 +2,7 @@
 id: prop-casimir-eigenvalue-on-a-highest-weight-module
 kind: proposition
 title: "The quadratic Casimir eigenvalue on a highest-weight module is $(\\lambda,\\lambda+2\\rho)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-enriched-natural-transformation
 kind: definition
 title: "Enriched natural transformation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-enriched-functor]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-singular-chains-and-homology-are-covariantly-functorial
 kind: proposition
 title: "Singular chains and singular homology are covariantly functorial"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-chain-complex-and-singular-homology, def-induced-singular-chain-map, lem-induced-singular-chain-maps-commute-with-boundaries, prop-homology-respects-identities-and-composition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

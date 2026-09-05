@@ -2,7 +2,7 @@
 id: ex-central-extensions-of-a-cyclic-group
 kind: example
 title: "Central extensions of a cyclic group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-central-extensions-are-classified-by-h-two-with-trivial-action]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

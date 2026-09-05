@@ -2,12 +2,13 @@
 id: def-skyscraper-sheaf-abelian-group
 kind: definition
 title: "A skyscraper sheaf of abelian groups at a point"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-sheaf-on-topological-space]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

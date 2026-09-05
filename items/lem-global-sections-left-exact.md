@@ -2,13 +2,14 @@
 id: lem-global-sections-left-exact
 kind: lemma
 title: "Global sections are left exact but need not preserve epimorphisms"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-exact-sequence-sheaves, def-kernel-cokernel-image-sheaves, def-section-restriction-and-global-section]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-cohomologous-two-cocycles-give-equivalent-extensions
 kind: lemma
 title: "Cohomologous two-cocycles give equivalent extensions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-changing-the-section-changes-the-factor-set-by-a-coboundary, def-twisted-product-extension-from-a-two-cocycle, lem-twisted-product-is-a-group-iff-the-factor-set-is-a-two-cocycle, def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient]
 proof_strategy: iff
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

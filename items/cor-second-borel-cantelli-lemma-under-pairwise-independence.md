@@ -2,7 +2,7 @@
 id: cor-second-borel-cantelli-lemma-under-pairwise-independence
 kind: corollary
 title: "Second Borel-Cantelli lemma under pairwise independence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Theorem 2.3.7 and Theorem 2.3.9"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

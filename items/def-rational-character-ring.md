@@ -2,7 +2,7 @@
 id: def-rational-character-ring
 kind: definition
 title: "The rational representation ring $R_{\\mathbb Q}(G)$ and rational-valued class functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-virtual-character-and-character-ring-of-a-finite-group, def-finite-di
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

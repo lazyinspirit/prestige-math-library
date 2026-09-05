@@ -2,7 +2,7 @@
 id: prop-every-leaf-is-initial-among-smooth-maps-tangent-to-the-distribution
 kind: proposition
 title: "Every connected tangent map meeting a leaf factors uniquely through that leaf"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

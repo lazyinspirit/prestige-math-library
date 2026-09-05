@@ -2,7 +2,7 @@
 id: prop-lie-algebra-actions-extend-to-unital-actions-of-the-enveloping-algebra
 kind: proposition
 title: "Lie algebra actions extend to unital actions of the enveloping algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

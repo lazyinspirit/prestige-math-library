@@ -2,7 +2,7 @@
 id: thm-singular-chain-homotopy-formula
 kind: theorem
 title: "The singular chain homotopy formula"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-prism-operator-for-a-homotopy, lem-the-prism-triangulation-has-the-stated-oriented-boundary, def-induced-singular-chain-map, def-singular-boundary-operator]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

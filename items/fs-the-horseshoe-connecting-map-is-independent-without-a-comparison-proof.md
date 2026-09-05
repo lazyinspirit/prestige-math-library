@@ -2,7 +2,7 @@
 id: fs-the-horseshoe-connecting-map-is-independent-without-a-comparison-proof
 kind: false-statement
 title: "FALSE: the horseshoe connecting map is independent without a comparison proof"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-connecting-map-for-left-derived-functors, lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

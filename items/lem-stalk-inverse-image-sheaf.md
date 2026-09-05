@@ -2,13 +2,14 @@
 id: lem-stalk-inverse-image-sheaf
 kind: lemma
 title: "The stalk of an inverse image sheaf is the stalk over the image point"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-inverse-image-presheaf-and-sheaf, def-stalk-of-presheaf, thm-sheafification-preserves-stalks]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

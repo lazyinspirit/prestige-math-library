@@ -2,7 +2,7 @@
 id: thm-five-term-exact-sequence-as-extension-and-transgression-data
 kind: theorem
 title: "Extension-theoretic interpretation of the standard five-term exact sequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-restriction-inflation-and-the-quotient-conjugation-action-on-first-cohomology, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, thm-inflation-restriction-exact-sequence-in-degree-one]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

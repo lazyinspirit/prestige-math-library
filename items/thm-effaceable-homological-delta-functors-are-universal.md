@@ -2,7 +2,7 @@
 id: thm-effaceable-homological-delta-functors-are-universal
 kind: theorem
 title: "Effaceable homological delta functors are universal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-universal-delta-functor, def-morphism-of-homological-delta-functors, 
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

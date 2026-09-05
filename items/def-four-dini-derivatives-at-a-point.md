@@ -2,7 +2,7 @@
 id: def-four-dini-derivatives-at-a-point
 kind: definition
 title: "The four Dini derivatives of a real function at a point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-dini-derivatives-exist-are-ordered-and-detect-differentiabili
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

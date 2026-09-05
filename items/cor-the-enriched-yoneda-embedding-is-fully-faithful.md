@@ -2,7 +2,7 @@
 id: cor-the-enriched-yoneda-embedding-is-fully-faithful
 kind: corollary
 title: "The enriched Yoneda assignment is fully faithful"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

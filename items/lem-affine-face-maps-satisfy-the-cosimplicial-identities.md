@@ -2,7 +2,7 @@
 id: lem-affine-face-maps-satisfy-the-cosimplicial-identities
 kind: lemma
 title: "The affine face maps satisfy the cosimplicial identities"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-standard-topological-simplex-and-its-affine-face-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

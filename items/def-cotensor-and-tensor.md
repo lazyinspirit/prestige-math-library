@@ -2,7 +2,7 @@
 id: def-cotensor-and-tensor
 kind: definition
 title: "Tensor and cotensor in a V-category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-enriched-category, thm-a-closed-monoidal-category-is-enriched-in-itse
 aliases: []
 landmark: true
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

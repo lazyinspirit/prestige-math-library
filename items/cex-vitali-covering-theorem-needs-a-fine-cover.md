@@ -2,7 +2,7 @@
 id: cex-vitali-covering-theorem-needs-a-fine-cover
 kind: counterexample
 title: "The fine-cover hypothesis in the Vitali covering theorem is load-bearing"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

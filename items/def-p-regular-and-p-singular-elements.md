@@ -2,13 +2,14 @@
 id: def-p-regular-and-p-singular-elements
 kind: definition
 title: "p-regular and p-singular elements"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

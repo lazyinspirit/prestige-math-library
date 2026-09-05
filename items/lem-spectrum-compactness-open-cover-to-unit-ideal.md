@@ -2,7 +2,7 @@
 id: lem-spectrum-compactness-open-cover-to-unit-ideal
 kind: lemma
 title: "A distinguished-open cover of the spectrum forces the covering ideal to be the unit ideal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Lemma 10.17.2"
       url: "https://stacks.math.columbia.edu/tag/00DY"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

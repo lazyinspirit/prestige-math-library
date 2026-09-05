@@ -2,12 +2,13 @@
 id: def-extension-by-zero-abelian-sheaf
 kind: definition
 title: "Extension by zero for abelian sheaves on an open subspace"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-restriction-sheaf-open-subspace, def-sheafification]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

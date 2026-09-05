@@ -2,7 +2,7 @@
 id: ex-the-trivial-delta-functor-of-an-exact-functor
 kind: example
 title: "The trivial delta functor of an exact functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-an-exact-base-functor-has-the-trivial-universal-delta-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-homology-as-a-homological-delta-functor
 kind: example
 title: "Homology as a homological delta functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-homological-delta-functor, def-homological-delta-functor-carried-by-homology-of-complexes, prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

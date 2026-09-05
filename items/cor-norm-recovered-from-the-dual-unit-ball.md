@@ -2,7 +2,7 @@
 id: cor-norm-recovered-from-the-dual-unit-ball
 kind: corollary
 title: "The norm of a vector is the supremum of |f(x)| over the dual unit ball"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-dual-space-of-a-normed-space, thm-dual-norms-every-vector]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

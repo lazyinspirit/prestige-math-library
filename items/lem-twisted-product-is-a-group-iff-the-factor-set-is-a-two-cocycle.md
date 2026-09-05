@@ -2,7 +2,7 @@
 id: lem-twisted-product-is-a-group-iff-the-factor-set-is-a-two-cocycle
 kind: lemma
 title: "The twisted product is a group iff the factor set is a two-cocycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-normalized-two-cocycle-and-two-coboundary, def-twisted-product-extension-from-a-two-cocycle]
 proof_strategy: iff
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

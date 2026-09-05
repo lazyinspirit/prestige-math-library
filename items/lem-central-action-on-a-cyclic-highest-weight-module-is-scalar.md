@@ -2,7 +2,7 @@
 id: lem-central-action-on-a-cyclic-highest-weight-module-is-scalar
 kind: lemma
 title: "Central elements act by scalars on cyclic highest-weight modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

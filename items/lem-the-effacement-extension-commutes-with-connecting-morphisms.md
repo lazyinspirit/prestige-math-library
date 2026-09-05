@@ -2,7 +2,7 @@
 id: lem-the-effacement-extension-commutes-with-connecting-morphisms
 kind: lemma
 title: "The effacement extension commutes with connecting morphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-extend-a-degree-zero-transformation-through-one-dimension-shift, lem-the-effacement-extension-is-independent-of-the-effacing-morphism, lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle, lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

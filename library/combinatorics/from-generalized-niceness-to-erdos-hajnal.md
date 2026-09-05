@@ -1,7 +1,7 @@
 ---
 page: from-generalized-niceness-to-erdos-hajnal
 title: "From Generalized Niceness to Erdős-Hajnal"
-status: draft
+status: published
 items: [lem-rodl-initialization-upgrades-generalized-niceness-to-a-restricted-set-blockade-or-polynomial-clique-or-stable-set, lem-large-induced-subgraphs-without-a-polynomial-clique-or-stable-set-force-complete-or-anticomplete-blockades, thm-leaf-reducible-wonderful-generalized-nice-finite-families-have-the-erdos-hajnal-property]
 examples: [ex-the-lemma-three-five-parameter-choice-on-a-large-graph, ex-a-complete-four-blockade-gives-a-four-vertex-clique, ex-a-large-epsilon-restricted-induced-subgraph-gives-a-polynomial-clique-or-stable-set]
 ---

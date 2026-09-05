@@ -2,7 +2,7 @@
 id: cor-an-extension-determines-a-well-defined-h-two-class
 kind: corollary
 title: "An extension determines a well-defined H^2 class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-second-cohomology-by-factor-sets, lem-changing-the-section-changes-the-factor-set-by-a-coboundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

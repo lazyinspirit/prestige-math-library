@@ -2,7 +2,7 @@
 id: thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology
 kind: theorem
 title: "Homotopy equivalences induce isomorphisms on singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-homotopy-equivalence, prop-singular-chains-and-homology-are-covariantly-functorial, cor-homotopic-maps-induce-the-same-map-on-singular-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

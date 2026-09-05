@@ -2,13 +2,14 @@
 id: rem-universality-is-the-construction-independence-principle
 kind: remark
 title: "Universality is the construction-independence principle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-derived-functors-are-universal-delta-functors, cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero, def-balanced-derived-bifunctor]
 verification:
+  audited: 2026-09-05
   precheck: n/a
 sources:
   scraped: []

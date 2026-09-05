@@ -2,7 +2,7 @@
 id: lem-constant-scale-restricted-property-star-yields-a-restricted-subgraph-a-polynomial-clique-or-stable-set-or-two-blockade-alternatives
 kind: lemma
 title: "Constant-scale restricted property (*) yields a restricted subgraph, a polynomial clique or stable set, or two blockade alternatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,12 +2,13 @@
 id: def-morphism-ringed-spaces
 kind: definition
 title: "Morphisms of ringed spaces"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-direct-image-sheaf, def-morphism-of-presheaves, def-ringed-space]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

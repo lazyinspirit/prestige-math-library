@@ -2,7 +2,7 @@
 id: lem-hahn-banach-one-step-extension
 kind: lemma
 title: "The admissible values in a one-step Hahn-Banach extension form a nonempty interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-sublinear-functional, def-algebraic-dual-and-linear-functional,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

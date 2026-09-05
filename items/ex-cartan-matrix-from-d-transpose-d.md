@@ -2,7 +2,7 @@
 id: ex-cartan-matrix-from-d-transpose-d
 kind: example
 title: "A Cartan matrix computed from D^T D"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-cartan-matrix-is-d-transpose-d, ex-decomposition-matrix-of-s-three-in-characteristic-two]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

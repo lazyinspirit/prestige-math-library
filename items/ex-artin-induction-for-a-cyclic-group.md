@@ -2,7 +2,7 @@
 id: ex-artin-induction-for-a-cyclic-group
 kind: example
 title: "Artin induction is tautological for a cyclic group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

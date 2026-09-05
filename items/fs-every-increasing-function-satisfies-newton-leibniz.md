@@ -2,7 +2,7 @@
 id: fs-every-increasing-function-satisfies-newton-leibniz
 kind: false-statement
 title: "FALSE: every increasing function satisfies Newton-Leibniz with its derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

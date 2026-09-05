@@ -2,7 +2,7 @@
 id: cor-spectrum-connected-iff-no-nontrivial-idempotents
 kind: corollary
 title: "The prime spectrum is connected exactly when the ring has no idempotents other than zero and one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Sections 10.21 and 10.22"
       url: "https://stacks.math.columbia.edu/tag/04PP"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

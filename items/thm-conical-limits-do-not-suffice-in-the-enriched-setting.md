@@ -2,7 +2,7 @@
 id: thm-conical-limits-do-not-suffice-in-the-enriched-setting
 kind: theorem
 title: "Conical weights are a proper special case of enriched weights"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-any-sequence-of-functors-with-long-exact-sequences-is-a-delta-functor
 kind: false-statement
 title: "FALSE: any sequence of functors with long exact sequences is a delta functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-homological-delta-functor, def-cohomological-delta-functor, prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws, ex-a-degreewise-split-sequence-with-nonzero-connecting-map]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

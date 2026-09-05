@@ -2,7 +2,7 @@
 id: thm-derived-functors-are-universal-delta-functors
 kind: theorem
 title: "Derived functors are universal delta functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-left-derived-functors-form-a-homological-delta-functor, thm-right-der
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

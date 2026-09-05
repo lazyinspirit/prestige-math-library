@@ -2,13 +2,14 @@
 id: def-normalized-set-theoretic-section-and-factor-set
 kind: definition
 title: "Normalized set-theoretic section and factor set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extension-inducing-a-prescribed-abelian-kernel-action]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

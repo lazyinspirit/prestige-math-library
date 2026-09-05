@@ -2,7 +2,7 @@
 id: thm-two-adic-hilbert-symbol-formula
 kind: theorem
 title: "The two-adic Hilbert symbol formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Sam Raskin, Introduction to the Arithmetic Theory of Quadratic Forms, Proposition 3.16.3"
       url: "https://www.samraskin.net/forms.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

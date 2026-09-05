@@ -2,7 +2,7 @@
 id: thm-effaceable-cohomological-delta-functors-are-universal
 kind: theorem
 title: "Effaceable cohomological delta functors are universal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-universal-delta-functor, def-morphism-of-cohomological-delta-functors, def-effaceable-cohomological-delta-functor-in-positive-degrees, lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle, lem-extend-a-degree-zero-transformation-through-one-dimension-shift, lem-the-effacement-extension-is-independent-of-the-effacing-morphism, lem-the-effacement-extension-commutes-with-connecting-morphisms]
 proof_strategy: induction
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

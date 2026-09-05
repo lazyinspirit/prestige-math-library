@@ -2,7 +2,7 @@
 id: def-noetherian-topological-space
 kind: definition
 title: "Noetherian topological spaces via ACC on opens or DCC on closed subsets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "The Stacks Project, Section 5.9: Noetherian topological spaces"
       url: "https://stacks.math.columbia.edu/tag/0050"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

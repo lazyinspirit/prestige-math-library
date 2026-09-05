@@ -2,7 +2,7 @@
 id: thm-hahn-banach-norm-preserving-extension
 kind: theorem
 title: "A bounded real linear functional on a subspace of a real normed space extends with the same norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [thm-hahn-banach-dominated-extension, def-bounded-linear-operator,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

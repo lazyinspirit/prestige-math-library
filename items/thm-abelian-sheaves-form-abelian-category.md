@@ -2,13 +2,14 @@
 id: thm-abelian-sheaves-form-abelian-category
 kind: theorem
 title: "Sheaves of abelian groups, and likewise sheaves of modules on a ringed space, form abelian categories"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-abelian-category, def-kernel-cokernel-image-sheaves, thm-modules-over-a-ring-form-an-abelian-category, def-ringed-space, def-module-on-ringed-space, thm-sheafification-preserves-stalks, thm-sheaf-morphism-isomorphism-stalkwise]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

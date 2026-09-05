@@ -2,7 +2,7 @@
 id: lem-cyclic-generator-class-functions-by-moebius-inversion
 kind: lemma
 title: "The generator-indicator class function of a cyclic group is obtained by Mobius inversion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

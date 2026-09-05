@@ -2,13 +2,14 @@
 id: thm-exactness-of-sheaves-stalkwise
 kind: theorem
 title: "A sequence of abelian sheaves is exact exactly when it is exact on every stalk"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-exact-sequence-sheaves, def-stalk-of-presheaf, thm-abelian-sheaves-form-abelian-category, thm-sheaf-morphism-isomorphism-stalkwise, def-kernel-cokernel-image-sheaves, thm-sheafification-preserves-stalks]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

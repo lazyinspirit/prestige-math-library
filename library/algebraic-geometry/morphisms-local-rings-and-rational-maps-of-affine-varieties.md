@@ -1,7 +1,7 @@
 ---
 page: morphisms-local-rings-and-rational-maps-of-affine-varieties
 title: "Morphisms Local Rings and Rational Maps of Affine Varieties"
-status: draft
+status: published
 items:
   - def-regular-function-classical-variety
   - lem-regular-functions-form-sheaf-classical

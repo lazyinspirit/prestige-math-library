@@ -2,7 +2,7 @@
 id: fs-modular-representations-are-determined-by-ordinary-characters
 kind: false-statement
 title: "FALSE: modular representations are determined by ordinary characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-brauer-nesbitt-module-determination]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

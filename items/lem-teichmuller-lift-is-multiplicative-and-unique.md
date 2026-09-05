@@ -2,7 +2,7 @@
 id: lem-teichmuller-lift-is-multiplicative-and-unique
 kind: lemma
 title: "The Teichmuller lift is multiplicative and unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-teichmuller-lift-in-a-splitting-p-modular-system]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

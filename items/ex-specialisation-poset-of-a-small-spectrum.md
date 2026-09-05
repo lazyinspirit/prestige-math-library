@@ -2,7 +2,7 @@
 id: ex-specialisation-poset-of-a-small-spectrum
 kind: example
 title: "A local PID gives a two-point spectrum with one generic point and one closed point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 10.17: The spectrum of a ring"
       url: "https://stacks.math.columbia.edu/tag/00DY"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

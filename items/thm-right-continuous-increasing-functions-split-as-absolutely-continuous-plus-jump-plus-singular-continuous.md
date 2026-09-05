@@ -2,7 +2,7 @@
 id: thm-right-continuous-increasing-functions-split-as-absolutely-continuous-plus-jump-plus-singular-continuous
 kind: theorem
 title: "A right-continuous nondecreasing function splits uniquely as absolutely continuous plus jump plus singular continuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

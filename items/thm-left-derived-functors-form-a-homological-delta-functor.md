@@ -2,7 +2,7 @@
 id: thm-left-derived-functors-form-a-homological-delta-functor
 kind: theorem
 title: "Left derived functors form a homological delta functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-homological-delta-functor, def-connecting-map-for-left-derived-functo
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

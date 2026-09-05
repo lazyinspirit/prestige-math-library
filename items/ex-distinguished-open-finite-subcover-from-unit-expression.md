@@ -2,7 +2,7 @@
 id: ex-distinguished-open-finite-subcover-from-unit-expression
 kind: example
 title: "A unit-ideal expression gives a finite distinguished-open cover"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "A. Altman and S. Kleiman, A Term of Commutative Algebra, 13th ed., Proposition (13.20)"
       url: "https://web.mit.edu/18.705/www/13Ed.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

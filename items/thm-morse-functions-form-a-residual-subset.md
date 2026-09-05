@@ -2,7 +2,7 @@
 id: thm-morse-functions-form-a-residual-subset
 kind: theorem
 title: "In the strong $C^\\infty$ topology on $C^\\infty(M,\\mathbb R)$, the Morse functions form a residual subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

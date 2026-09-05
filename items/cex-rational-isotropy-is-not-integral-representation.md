@@ -2,7 +2,7 @@
 id: cex-rational-isotropy-is-not-integral-representation
 kind: counterexample
 title: "Rational isotropy does not solve an integral representation problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Sam Raskin, Introduction to the Arithmetic Theory of Quadratic Forms, section 4.7"
       url: "https://www.samraskin.net/forms.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

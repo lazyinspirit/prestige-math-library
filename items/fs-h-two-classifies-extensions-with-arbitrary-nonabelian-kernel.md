@@ -2,7 +2,7 @@
 id: fs-h-two-classifies-extensions-with-arbitrary-nonabelian-kernel
 kind: false-statement
 title: "FALSE: H^2 classifies extensions with arbitrary nonabelian kernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, rem-nonabelian-extension-obstruction-in-h-three]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

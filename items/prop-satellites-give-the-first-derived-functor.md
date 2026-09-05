@@ -2,7 +2,7 @@
 id: prop-satellites-give-the-first-derived-functor
 kind: proposition
 title: "Satellites give the first derived functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-universal-delta-functor, thm-derived-functors-are-universal-delta-functors, cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic, thm-left-derived-functors-form-a-homological-delta-functor, thm-right-derived-functors-form-a-cohomological-delta-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

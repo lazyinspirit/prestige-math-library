@@ -2,7 +2,7 @@
 id: fs-the-factor-set-is-independent-of-the-section-as-a-function
 kind: false-statement
 title: "FALSE: the factor set is independent of the section as a function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-changing-the-section-changes-the-factor-set-by-a-coboundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

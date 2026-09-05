@@ -2,7 +2,7 @@
 id: ex-zariski-spectrum-of-the-integers
 kind: example
 title: "The spectrum of the integers has one generic point, closed points (p), and basic opens D(n)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "A. Altman and S. Kleiman, A Term of Commutative Algebra, 13th ed., §13"
       url: "https://web.mit.edu/18.705/www/13Ed.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

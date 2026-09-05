@@ -2,7 +2,7 @@
 id: cex-ordinary-trace-on-a-p-singular-unipotent-element
 kind: counterexample
 title: "Ordinary trace on a p-singular unipotent element is not a Brauer-character value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-a-brauer-character-is-defined-on-all-elements-by-the-usual-trace, def-brauer-character-of-a-finite-dimensional-kg-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

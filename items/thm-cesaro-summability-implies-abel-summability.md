@@ -2,7 +2,7 @@
 id: thm-cesaro-summability-implies-abel-summability
 kind: theorem
 title: "Cesaro summability implies Abel summability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cesaro-and-abel-means-of-a-fourier-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

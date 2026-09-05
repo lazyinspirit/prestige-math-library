@@ -2,7 +2,7 @@
 id: rem-nonabelian-extension-obstruction-in-h-three
 kind: remark
 title: "Nonabelian extension obstruction in H^3"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -15,6 +15,11 @@ external_dependency:
   local_proof_attempt: "This page proves the abelian-kernel factor-set dictionary and its degree-two consequences, but it does not build the nonabelian cohomology machinery or the H^3 obstruction class."
   necessity: "The remark records the exact boundary between the present H^2 classification and the later nonabelian obstruction theory."
 verification:
+  audited: 2026-09-05
+  sources_checked:
+    date: 2026-09-05
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

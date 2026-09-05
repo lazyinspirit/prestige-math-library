@@ -2,7 +2,7 @@
 id: ex-the-third-outcome-of-property-star-gives-a-pure-four-blockade
 kind: example
 title: "The third outcome of property (*) gives a pure four-blockade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-gadget-correctness-needs-only-one-direction
 kind: counterexample
 title: "A forward-only mapping that is not a correct many-one reduction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ sources:
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-harish-chandra-projection-computes-highest-weight-scalars
 kind: lemma
 title: "The Harish-Chandra projection computes the highest-weight scalar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

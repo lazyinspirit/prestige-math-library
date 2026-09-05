@@ -2,7 +2,7 @@
 id: cor-central-characters-are-dot-weyl-orbits
 kind: corollary
 title: "Central characters are dot-Weyl orbits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

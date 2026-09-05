@@ -2,7 +2,7 @@
 id: ex-the-split-extension-as-the-zero-cocycle
 kind: example
 title: "The split extension as the zero cocycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-twisted-product-extension-from-a-two-cocycle, cor-zero-h-two-class-is-equivalent-to-splitting]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

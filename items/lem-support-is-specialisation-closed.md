@@ -2,7 +2,7 @@
 id: lem-support-is-specialisation-closed
 kind: lemma
 title: "The support of any module is closed under specialisation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 10.40: Support"
       url: "https://stacks.math.columbia.edu/tag/080S"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

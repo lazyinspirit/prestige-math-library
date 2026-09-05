@@ -2,7 +2,7 @@
 id: lem-principal-symbol-under-a-c-one-coordinate-change
 kind: lemma
 title: "The principal symbol depends only on the first derivative of a smooth coordinate change"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

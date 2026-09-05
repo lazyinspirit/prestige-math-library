@@ -2,7 +2,7 @@
 id: ex-one-dimension-shift-along-an-injective-copresentation
 kind: example
 title: "One dimension shift along an injective copresentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-right-derived-functors-form-a-cohomological-delta-functor, prop-positive-right-derived-functors-vanish-on-injective-objects, lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

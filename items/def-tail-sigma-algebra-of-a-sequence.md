@@ -2,7 +2,7 @@
 id: def-tail-sigma-algebra-of-a-sequence
 kind: definition
 title: "Tail sigma-algebra of a sequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ sources:
     - title: "S. R. S. Varadhan, Probability Theory, discussion before Theorem 3.15"
       url: "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

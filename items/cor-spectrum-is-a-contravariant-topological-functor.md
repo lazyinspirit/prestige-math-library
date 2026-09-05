@@ -2,7 +2,7 @@
 id: cor-spectrum-is-a-contravariant-topological-functor
 kind: corollary
 title: "The prime-spectrum construction is a contravariant functor to topological spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Lemma 10.17.4"
       url: "https://stacks.math.columbia.edu/tag/00DY"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

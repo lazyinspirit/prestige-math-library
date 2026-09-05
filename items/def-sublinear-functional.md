@@ -2,7 +2,7 @@
 id: def-sublinear-functional
 kind: definition
 title: "A sublinear functional on a real vector space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-vector-space]
 justified_by: []
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: ex-direct-image-open-immersion
 kind: example
 title: "Direct image along an open immersion is restriction-compatible intersection"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-direct-image-sheaf, def-restriction-sheaf-open-subspace]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

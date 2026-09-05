@@ -2,7 +2,7 @@
 id: ex-homology-of-an-interval-from-contractibility
 kind: example
 title: "The homology of an interval from contractibility"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-contractible-nonempty-spaces-have-the-homology-of-a-point, cor-convex-subsets-of-rn-are-contractible, ex-singular-chain-complex-of-a-point]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

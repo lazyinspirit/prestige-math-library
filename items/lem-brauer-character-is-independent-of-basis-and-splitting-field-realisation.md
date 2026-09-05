@@ -2,7 +2,7 @@
 id: lem-brauer-character-is-independent-of-basis-and-splitting-field-realisation
 kind: lemma
 title: "The Brauer character is independent of basis and splitting-field realization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-brauer-character-of-a-finite-dimensional-kg-module, lem-teichmuller-lift-is-multiplicative-and-unique]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-every-enriched-functor-into-the-base-is-a-weighted-colimit-of-representables
 kind: theorem
 title: "Every enriched functor into the base is a weighted colimit of representables when the displayed weighted colimit exists"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants
 kind: lemma
 title: "Weyl-invariant polynomials on the Cartan extend to invariant polynomials on $\\mathfrak g$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

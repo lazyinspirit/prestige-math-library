@@ -2,7 +2,7 @@
 id: def-enriched-category
 kind: definition
 title: "Enriched category over a monoidal base"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-monoidal-category]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-09-05
   precheck: n/a
 sources:
   scraped: []

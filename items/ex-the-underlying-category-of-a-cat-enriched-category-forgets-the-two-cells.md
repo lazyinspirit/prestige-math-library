@@ -2,7 +2,7 @@
 id: ex-the-underlying-category-of-a-cat-enriched-category-forgets-the-two-cells
 kind: example
 title: "The underlying category of a Cat-enriched category forgets the 2-cells"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

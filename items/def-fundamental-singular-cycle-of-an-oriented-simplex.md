@@ -2,13 +2,14 @@
 id: def-fundamental-singular-cycle-of-an-oriented-simplex
 kind: definition
 title: "The affine characteristic singular simplex of an ordered simplex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-geometric-realization-of-an-abstract-simplicial-complex, def-standard-topological-simplex-and-its-affine-face-maps]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

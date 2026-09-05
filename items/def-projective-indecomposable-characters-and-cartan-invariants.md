@@ -2,7 +2,7 @@
 id: def-projective-indecomposable-characters-and-cartan-invariants
 kind: definition
 title: "Projective indecomposable characters and Cartan invariants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-decomposition-numbers-and-decomposition-matrix, thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras, thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules]
 justified_by: [thm-brauer-reciprocity]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

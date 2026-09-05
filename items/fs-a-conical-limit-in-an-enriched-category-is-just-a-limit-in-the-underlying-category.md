@@ -2,7 +2,7 @@
 id: fs-a-conical-limit-in-an-enriched-category-is-just-a-limit-in-the-underlying-category
 kind: false-statement
 title: "FALSE: a conical limit in an enriched category is just a limit in the underlying category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

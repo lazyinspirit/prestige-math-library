@@ -1,7 +1,7 @@
 ---
 page: partial-differential-equations-and-characteristics
 title: "Partial Differential Equations and Characteristics"
-status: draft
+status: published
 items: [def-partial-differential-operator-order-and-solution,
         def-linear-semilinear-quasilinear-and-fully-nonlinear-pde,
         def-principal-part-and-principal-symbol-of-a-scalar-pde,

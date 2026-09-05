@@ -2,7 +2,7 @@
 id: lem-finitely-many-critical-values-can-be-separated-locally
 kind: lemma
 title: "For a compact Morse function, disjoint local bump perturbations can separate finitely many equal critical values without changing the Hessians"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

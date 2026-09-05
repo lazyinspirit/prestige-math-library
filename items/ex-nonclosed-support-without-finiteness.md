@@ -2,7 +2,7 @@
 id: ex-nonclosed-support-without-finiteness
 kind: example
 title: "An infinitely generated module can have specialization-closed support that is not Zariski closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "A. Altman and S. Kleiman, A Term of Commutative Algebra, 13th ed., Exercise (13.34)"
       url: "https://web.mit.edu/18.705/www/13Ed.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle
 kind: lemma
 title: "Dimension shift for a homological delta functor effaced in the middle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-homological-delta-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-norming-functionals-in-lp-from-the-measure-duality-page
 kind: example
 title: "The abstract norming-functional theorem agrees with the concrete L^p-L^q formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-dual-norms-every-vector, cor-l-p-norm-recovery-by-unit-l-q-pairings]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

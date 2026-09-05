@@ -2,7 +2,7 @@
 id: lem-artin-cyclic-permutation-relation
 kind: lemma
 title: "A positive integer multiple of the trivial character is an integral combination of cyclic permutation characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

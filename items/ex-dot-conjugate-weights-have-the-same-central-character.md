@@ -2,7 +2,7 @@
 id: ex-dot-conjugate-weights-have-the-same-central-character
 kind: example
 title: "Dot-conjugate type-$A_2$ weights have the same central character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ proof_strategy: direct
 generation:
   role: example
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

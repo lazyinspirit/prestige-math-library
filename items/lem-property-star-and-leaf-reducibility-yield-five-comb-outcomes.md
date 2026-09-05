@@ -2,7 +2,7 @@
 id: lem-property-star-and-leaf-reducibility-yield-five-comb-outcomes
 kind: lemma
 title: "Property (*) and leaf reducibility yield five comb outcomes in a restricted graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

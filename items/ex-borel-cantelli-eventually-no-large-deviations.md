@@ -2,7 +2,7 @@
 id: ex-borel-cantelli-eventually-no-large-deviations
 kind: example
 title: "A summable tail bound becomes an almost-sure eventual bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ proof_strategy: direct
 sources:
   references: []
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

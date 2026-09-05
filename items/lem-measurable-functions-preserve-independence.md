@@ -2,7 +2,7 @@
 id: lem-measurable-functions-preserve-independence
 kind: lemma
 title: "Measurable coordinatewise functions preserve independence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "S. R. S. Varadhan, Probability Theory, Section 3.1"
       url: "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

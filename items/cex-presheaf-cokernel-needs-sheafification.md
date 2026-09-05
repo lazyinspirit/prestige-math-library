@@ -2,13 +2,14 @@
 id: cex-presheaf-cokernel-needs-sheafification
 kind: counterexample
 title: "The objectwise cokernel presheaf can fail to be a sheaf"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [cex-extension-by-zero-differs-direct-image, def-kernel-cokernel-image-sheaves]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

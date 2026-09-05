@@ -1,7 +1,7 @@
 ---
 page: artin-induction-and-rational-characters
 title: "Artin Induction and Rational Characters"
-status: draft
+status: published
 items: [def-rational-character-ring, def-cyclic-induction-subgroup, lem-induction-image-is-an-ideal-in-the-representation-ring, lem-cyclic-generator-class-functions-by-moebius-inversion, lem-artin-cyclic-permutation-relation, thm-artin-induction-for-rational-characters, cor-cyclic-fixed-points-detect-rational-representations, cor-rank-of-the-rational-representation-ring, cor-cyclic-local-integrality-criterion]
 examples: []
 ---

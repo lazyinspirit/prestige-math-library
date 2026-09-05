@@ -2,13 +2,14 @@
 id: def-simplicial-to-singular-chain-map
 kind: definition
 title: "The degreewise simplicial-to-singular homomorphisms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-fundamental-singular-cycle-of-an-oriented-simplex, def-simplicial-chain-groups-and-boundary, def-geometric-realization-of-an-abstract-simplicial-complex]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

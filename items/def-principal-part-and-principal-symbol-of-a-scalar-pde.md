@@ -2,7 +2,7 @@
 id: def-principal-part-and-principal-symbol-of-a-scalar-pde
 kind: definition
 title: "Principal part and principal symbol of a scalar PDE"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ justified_by: [lem-principal-symbol-under-a-c-one-coordinate-change]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
 sources:
   scraped: []

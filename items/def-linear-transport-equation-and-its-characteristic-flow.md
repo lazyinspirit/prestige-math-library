@@ -2,7 +2,7 @@
 id: def-linear-transport-equation-and-its-characteristic-flow
 kind: definition
 title: "Linear transport equations and their characteristic flow"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

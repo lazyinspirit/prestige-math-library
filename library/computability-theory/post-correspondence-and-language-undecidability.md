@@ -1,7 +1,7 @@
 ---
 page: post-correspondence-and-language-undecidability
 title: "Post Correspondence and Language Undecidability"
-status: draft
+status: published
 items:
   - def-post-correspondence-problem
   - def-modified-post-correspondence-problem

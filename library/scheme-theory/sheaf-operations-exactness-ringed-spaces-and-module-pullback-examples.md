@@ -1,7 +1,7 @@
 ---
 page: sheaf-operations-exactness-ringed-spaces-and-module-pullback-examples
 title: "Sheaf Operations Exactness Ringed Spaces and Module Pullback - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-direct-image-open-immersion,
            cex-extension-by-zero-differs-direct-image,

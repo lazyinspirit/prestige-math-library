@@ -2,7 +2,7 @@
 id: cex-morse-functions-need-not-have-distinct-critical-values
 kind: counterexample
 title: "A Morse function can have two different critical points with the same critical value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct computation
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

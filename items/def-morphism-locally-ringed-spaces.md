@@ -2,12 +2,13 @@
 id: def-morphism-locally-ringed-spaces
 kind: definition
 title: "Morphisms of locally ringed spaces"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-locally-ringed-space, def-morphism-ringed-spaces]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

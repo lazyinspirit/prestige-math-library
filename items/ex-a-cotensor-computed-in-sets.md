@@ -2,7 +2,7 @@
 id: ex-a-cotensor-computed-in-sets
 kind: example
 title: "A cotensor in Set is a power"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

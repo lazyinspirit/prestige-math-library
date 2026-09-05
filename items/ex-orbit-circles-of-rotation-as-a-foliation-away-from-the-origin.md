@@ -2,7 +2,7 @@
 id: ex-orbit-circles-of-rotation-as-a-foliation-away-from-the-origin
 kind: example
 title: "Orbit circles of rotation as a foliation away from the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

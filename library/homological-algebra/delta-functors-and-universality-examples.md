@@ -1,7 +1,7 @@
 ---
 page: delta-functors-and-universality-examples
 title: "Delta Functors and Universality — Examples"
-status: draft
+status: published
 items: []
 examples:
   [ex-homology-as-a-homological-delta-functor, ex-the-trivial-delta-functor-of-an-exact-functor, ex-one-dimension-shift-along-a-projective-presentation, ex-one-dimension-shift-along-an-injective-copresentation, ex-extending-a-degree-zero-natural-transformation, cex-a-nonnatural-choice-of-connecting-maps-does-not-form-a-delta-functor, ex-two-universal-delta-functors-and-their-unique-isomorphism]

@@ -2,7 +2,7 @@
 id: lem-horseshoe-gives-a-short-exact-sequence-after-applying-a-right-exact-functor
 kind: lemma
 title: "The horseshoe construction stays short exact after applying a right exact functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-exact-and-right-exact-functor, thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive, def-short-exact-sequence-of-complexes, thm-horseshoe-lemma-for-projective-resolutions, prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps, cor-a-sequence-of-chain-maps-is-exact-exactly-when-it-is-exact-degreewise]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

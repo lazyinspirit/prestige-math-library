@@ -2,13 +2,14 @@
 id: lem-pullback-modules-right-exact
 kind: lemma
 title: "Pullback of modules is right exact, and flat stalk maps make it exact"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-flat-and-faithfully-flat-modules-and-ring-maps, def-pullback-module-ringed-spaces, lem-stalk-tensor-product, thm-exactness-of-sheaves-stalkwise, thm-right-exactness-of-tensor-products, lem-stalk-inverse-image-sheaf]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

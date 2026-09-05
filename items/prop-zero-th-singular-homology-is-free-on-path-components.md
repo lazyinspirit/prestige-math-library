@@ -2,7 +2,7 @@
 id: prop-zero-th-singular-homology-is-free-on-path-components
 kind: proposition
 title: "Zero-th singular homology is free on path components"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-chain-complex-and-singular-homology, def-zero-simplex-augmentation-and-reduced-singular-homology, lem-singular-augmentation-commutes-with-boundary, def-path-connected]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

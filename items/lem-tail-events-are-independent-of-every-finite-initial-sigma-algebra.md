@@ -2,7 +2,7 @@
 id: lem-tail-events-are-independent-of-every-finite-initial-sigma-algebra
 kind: lemma
 title: "Tail events are independent of every finite initial sigma-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "S. R. S. Varadhan, Probability Theory, discussion before Theorem 3.15"
       url: "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

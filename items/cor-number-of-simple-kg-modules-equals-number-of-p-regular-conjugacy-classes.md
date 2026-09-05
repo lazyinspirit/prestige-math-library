@@ -2,7 +2,7 @@
 id: cor-number-of-simple-kg-modules-equals-number-of-p-regular-conjugacy-classes
 kind: corollary
 title: "The number of simple kG-modules equals the number of p-regular conjugacy classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

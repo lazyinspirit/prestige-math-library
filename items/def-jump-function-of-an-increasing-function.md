@@ -2,7 +2,7 @@
 id: def-jump-function-of-an-increasing-function
 kind: definition
 title: "The jump function of a nondecreasing function on a compact interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-increasing-functions-split-uniquely-as-jump-plus-continuous]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

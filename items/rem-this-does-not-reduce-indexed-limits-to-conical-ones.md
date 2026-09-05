@@ -2,7 +2,7 @@
 id: rem-this-does-not-reduce-indexed-limits-to-conical-ones
 kind: remark
 title: "The completeness test does not reduce indexed limits to conical ones"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-enriched-completeness-is-cotensors-plus-small-conical-limits, thm-con
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

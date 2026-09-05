@@ -2,7 +2,7 @@
 id: fs-the-cartan-matrix-equals-the-decomposition-matrix
 kind: false-statement
 title: "FALSE: the Cartan matrix equals the decomposition matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-cartan-matrix-is-d-transpose-d]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-extending-a-degree-zero-natural-transformation
 kind: example
 title: "Extending a degree-zero natural transformation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [lem-extend-a-degree-zero-transformation-through-one-dimension-shift, lem-the-effacement-extension-is-independent-of-the-effacing-morphism, lem-the-effacement-extension-commutes-with-connecting-morphisms, thm-derived-functors-are-universal-delta-functors]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

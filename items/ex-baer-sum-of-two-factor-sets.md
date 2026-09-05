@@ -2,7 +2,7 @@
 id: ex-baer-sum-of-two-factor-sets
 kind: example
 title: "Baer sum of two factor sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-baer-sum-of-abelian-kernel-extensions, thm-baer-sum-agrees-with-addition-in-h-two]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

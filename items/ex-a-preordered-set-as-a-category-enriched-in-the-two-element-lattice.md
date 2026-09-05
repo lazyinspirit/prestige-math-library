@@ -2,7 +2,7 @@
 id: ex-a-preordered-set-as-a-category-enriched-in-the-two-element-lattice
 kind: example
 title: "A preordered set read as a category enriched in the two-element lattice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

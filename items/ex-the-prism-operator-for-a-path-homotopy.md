@@ -2,7 +2,7 @@
 id: ex-the-prism-operator-for-a-path-homotopy
 kind: example
 title: "The prism operator for a path homotopy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-prism-operator-for-a-homotopy, thm-singular-chain-homotopy-formula, def-homotopy-relative-and-path-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

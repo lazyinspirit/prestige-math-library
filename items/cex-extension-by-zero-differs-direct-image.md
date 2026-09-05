@@ -2,13 +2,14 @@
 id: cex-extension-by-zero-differs-direct-image
 kind: counterexample
 title: "Extension by zero can be strictly smaller than direct image on a punctured interval"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-extension-by-zero-abelian-sheaf, ex-direct-image-open-immersion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

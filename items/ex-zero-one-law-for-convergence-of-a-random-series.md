@@ -2,7 +2,7 @@
 id: ex-zero-one-law-for-convergence-of-a-random-series
 kind: example
 title: "Convergence of an independent random series is a zero-one event"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ proof_strategy: direct
 sources:
   references: []
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

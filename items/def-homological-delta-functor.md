@@ -2,13 +2,14 @@
 id: def-homological-delta-functor
 kind: definition
 title: "Homological delta functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-additive-functor, def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

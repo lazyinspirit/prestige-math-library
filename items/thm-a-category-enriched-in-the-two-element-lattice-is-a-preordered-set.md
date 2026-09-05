@@ -2,7 +2,7 @@
 id: thm-a-category-enriched-in-the-two-element-lattice-is-a-preordered-set
 kind: theorem
 title: "A category enriched in the two-element lattice is a preordered set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

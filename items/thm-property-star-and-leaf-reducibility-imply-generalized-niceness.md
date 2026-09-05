@@ -2,7 +2,7 @@
 id: thm-property-star-and-leaf-reducibility-imply-generalized-niceness
 kind: theorem
 title: "Property (*) and leaf reducibility imply generalized niceness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

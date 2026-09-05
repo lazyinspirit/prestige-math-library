@@ -2,7 +2,7 @@
 id: cor-the-underlying-ordinary-category-is-an-instance-of-change-of-base
 kind: corollary
 title: "The underlying ordinary category is change of base along the underlying-hom functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

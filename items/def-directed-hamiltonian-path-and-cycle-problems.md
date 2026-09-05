@@ -2,7 +2,7 @@
 id: def-directed-hamiltonian-path-and-cycle-problems
 kind: definition
 title: "Directed and undirected Hamiltonian path and cycle decision problems"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "MIT 6.045J / 18.400J, Lecture 16: More NP-completeness"
       url: "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/567d75f927ca3c11a819baee9ab260ac_MIT6_045JS11_lec16.pdf"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

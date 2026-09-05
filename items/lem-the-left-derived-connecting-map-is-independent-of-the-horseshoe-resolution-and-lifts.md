@@ -2,7 +2,7 @@
 id: lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts
 kind: lemma
 title: "The left derived connecting map is independent of the horseshoe resolution and lifts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-connecting-map-for-left-derived-functors, thm-horseshoe-lemma-for-projective-resolutions, prop-horseshoe-resolutions-are-compatible-with-morphisms-of-short-exact-sequences-up-to-homotopy, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy, thm-naturality-of-the-homology-connecting-morphism, thm-chain-homotopic-maps-induce-the-same-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

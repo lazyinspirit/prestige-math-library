@@ -2,7 +2,7 @@
 id: def-weyl-vector-rho-for-a-chosen-positive-system
 kind: definition
 title: "The Weyl vector rho for a chosen positive system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

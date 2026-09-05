@@ -1,7 +1,7 @@
 ---
 page: acceptable-numberings-smn-and-the-recursion-theorem-examples
 title: "Acceptable Numberings, the s-m-n Theorem, and Recursion: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-smn-parameter-theorem

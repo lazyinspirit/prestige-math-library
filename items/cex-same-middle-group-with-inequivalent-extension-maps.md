@@ -2,7 +2,7 @@
 id: cex-same-middle-group-with-inequivalent-extension-maps
 kind: counterexample
 title: "The same middle group can support inequivalent extension maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-equivalent-extensions-mean-only-that-the-middle-groups-are-isomorphic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

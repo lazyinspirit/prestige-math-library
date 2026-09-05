@@ -2,7 +2,7 @@
 id: thm-hilbert-symbol-is-symmetric-bilinear-and-nondegenerate
 kind: theorem
 title: "The Hilbert symbol is a symmetric bilinear nondegenerate pairing"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Sam Raskin, Introduction to the Arithmetic Theory of Quadratic Forms, section 4.4"
       url: "https://www.samraskin.net/forms.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

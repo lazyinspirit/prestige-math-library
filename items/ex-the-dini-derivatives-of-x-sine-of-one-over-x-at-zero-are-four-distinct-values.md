@@ -2,7 +2,7 @@
 id: ex-the-dini-derivatives-of-x-sine-of-one-over-x-at-zero-are-four-distinct-values
 kind: example
 title: "The four Dini derivatives of x sin(1/x) at 0 take two distinct values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

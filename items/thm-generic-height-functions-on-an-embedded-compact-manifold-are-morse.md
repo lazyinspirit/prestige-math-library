@@ -2,7 +2,7 @@
 id: thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse
 kind: theorem
 title: "For a compact manifold embedded in Euclidean space, the restricted linear height is Morse for generic directions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: partial-differential-equations-and-characteristics-examples
 title: "Partial Differential Equations and Characteristics — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-constant-velocity-transport,
            ex-transport-with-growth-and-source,

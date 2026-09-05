@@ -2,7 +2,7 @@
 id: lem-dirichlet-character-values
 kind: lemma
 title: "Character values on units are roots of unity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Andrew V. Sutherland, Number Theory I, section 18.2"
       url: "https://ocw.mit.edu/courses/18-785-number-theory-i-fall-2021/mit18_785f21_full_lec.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

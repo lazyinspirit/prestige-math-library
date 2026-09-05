@@ -2,7 +2,7 @@
 id: cex-local-global-fails-for-a-cubic-curve
 kind: counterexample
 title: "Selmer's cubic is locally soluble but globally insoluble"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: "Keith Conrad, Selmer's Example"
       url: "https://dms.umontreal.ca/~mlalin/mat6630/selmerexample.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

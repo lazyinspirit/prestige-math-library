@@ -2,12 +2,13 @@
 id: def-module-on-ringed-space
 kind: definition
 title: "Modules on a ringed space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-of-groups-rings-modules, def-ringed-space]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-annihilator-bundle-of-a-distribution
 kind: definition
 title: "The annihilator bundle of a distribution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

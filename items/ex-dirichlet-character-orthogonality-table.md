@@ -2,7 +2,7 @@
 id: ex-dirichlet-character-orthogonality-table
 kind: example
 title: "An orthogonality table for Dirichlet characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Leonard Tomczak, Analytic Number Theory, Corollary 4.3"
       url: "https://math.berkeley.edu/~ltomczak/notes/Mich2022/AnaNT_Notes.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

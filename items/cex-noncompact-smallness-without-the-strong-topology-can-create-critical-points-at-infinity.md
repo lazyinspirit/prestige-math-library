@@ -2,7 +2,7 @@
 id: cex-noncompact-smallness-without-the-strong-topology-can-create-critical-points-at-infinity
 kind: counterexample
 title: "Uniformly tiny perturbations on larger and larger shells of a noncompact manifold can create new critical points far out"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct construction
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

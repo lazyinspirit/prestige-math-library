@@ -2,7 +2,7 @@
 id: ex-cyclic-fixed-point-detection-for-s3
 kind: example
 title: "The cyclic fixed-space data recovers an $S_3$ rational character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-the-derivative-of-an-increasing-function-is-measurable-integrable-and-bounded-by-its-total-increase
 kind: theorem
 title: "For a nondecreasing function, the derivative is measurable and integrable and its integral is bounded by the total increase"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero
 kind: corollary
 title: "A morphism between universal delta functors is determined in degree zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-universal-delta-functor, def-morphism-of-homological-delta-functors, def-morphism-of-cohomological-delta-functors]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

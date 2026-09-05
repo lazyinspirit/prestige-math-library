@@ -2,7 +2,7 @@
 id: ex-fejer-summation-of-the-square-wave
 kind: example
 title: "Fejer summation of the square wave"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cesaro-and-abel-means-of-a-fourier-series, thm-fejer-theorem-for-pointwise-midpoint-values, lem-fejer-kernel-is-a-positive-approximate-identity]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

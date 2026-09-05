@@ -2,7 +2,7 @@
 id: lem-binary-quadratic-representation-via-hilbert-symbol
 kind: lemma
 title: "Binary quadratic representation via the Hilbert symbol"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Andrew V. Sutherland, 18.782 Lecture 10"
       url: "https://math.mit.edu/classes/18.782/2013fa/LectureNotes10.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

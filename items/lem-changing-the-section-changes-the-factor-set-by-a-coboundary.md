@@ -2,7 +2,7 @@
 id: lem-changing-the-section-changes-the-factor-set-by-a-coboundary
 kind: lemma
 title: "Changing the section changes the factor set by a coboundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-normalized-two-cocycle-and-two-coboundary, def-normalized-set-theoretic-section-and-factor-set, lem-factor-set-of-a-section-is-a-normalized-two-cocycle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

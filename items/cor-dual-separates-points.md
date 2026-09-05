@@ -2,7 +2,7 @@
 id: cor-dual-separates-points
 kind: corollary
 title: "The dual space separates points of a normed space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-dual-norms-every-vector]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

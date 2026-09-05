@@ -2,13 +2,14 @@
 id: def-singular-chain-complex-and-singular-homology
 kind: definition
 title: "The singular chain complex and singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-singular-boundary-operator, thm-the-singular-boundary-squares-to-zero, def-cycle-and-boundary-subobjects-of-a-complex, def-homology-object-of-a-chain-complex]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

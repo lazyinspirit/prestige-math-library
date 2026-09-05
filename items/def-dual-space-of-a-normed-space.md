@@ -2,7 +2,7 @@
 id: def-dual-space-of-a-normed-space
 kind: definition
 title: "The dual space X^* of a normed space and its dual norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-space-of-bounded-linear-operators, def-operator-norm,
        rem-real-and-complex-normed-space-convention]
 justified_by: []
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

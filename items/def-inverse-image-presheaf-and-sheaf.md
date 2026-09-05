@@ -2,12 +2,13 @@
 id: def-inverse-image-presheaf-and-sheaf
 kind: definition
 title: "Inverse image presheaf and inverse image sheaf"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-presheaf-on-topological-space, def-sheafification]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-singular-chain-cross-product-boundary-formula
 kind: lemma
 title: "The singular chain cross product satisfies the boundary formula"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-chain-cross-product-on-generators, def-singular-boundary-operator]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

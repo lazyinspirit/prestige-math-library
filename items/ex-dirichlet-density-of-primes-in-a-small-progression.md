@@ -2,7 +2,7 @@
 id: ex-dirichlet-density-of-primes-in-a-small-progression
 kind: example
 title: "Dirichlet density for a small prime progression"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Kiran S. Kedlaya, Notes on Analytic Number Theory, Theorem 4.11"
       url: "https://kskedlaya.org/ant/chap-primes-in-ap.html"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

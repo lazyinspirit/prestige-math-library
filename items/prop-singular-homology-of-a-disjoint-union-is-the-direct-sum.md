@@ -2,7 +2,7 @@
 id: prop-singular-homology-of-a-disjoint-union-is-the-direct-sum
 kind: proposition
 title: "The singular homology of a disjoint union is the direct sum"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-chain-complex-and-singular-homology, def-disjoint-union-topology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

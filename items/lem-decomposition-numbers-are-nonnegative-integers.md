@@ -2,7 +2,7 @@
 id: lem-decomposition-numbers-are-nonnegative-integers
 kind: lemma
 title: "Decomposition numbers are nonnegative integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-decomposition-numbers-and-decomposition-matrix]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

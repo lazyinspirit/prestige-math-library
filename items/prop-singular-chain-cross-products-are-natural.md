@@ -2,7 +2,7 @@
 id: prop-singular-chain-cross-products-are-natural
 kind: proposition
 title: "Singular chain cross products are natural"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-chain-cross-product-on-generators, def-induced-singular-chain-map, def-product-topology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

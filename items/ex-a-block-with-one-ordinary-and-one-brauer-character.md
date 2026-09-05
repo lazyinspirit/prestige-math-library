@@ -2,7 +2,7 @@
 id: ex-a-block-with-one-ordinary-and-one-brauer-character
 kind: example
 title: "A block with one ordinary and one Brauer character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-blocks-by-primitive-central-idempotents, thm-blocks-partition-ordinary-and-brauer-irreducible-characters, ex-brauer-characters-of-a-p-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

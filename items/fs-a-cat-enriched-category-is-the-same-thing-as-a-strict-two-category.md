@@ -2,7 +2,7 @@
 id: fs-a-cat-enriched-category-is-the-same-thing-as-a-strict-two-category
 kind: false-statement
 title: "FALSE: a Cat-enriched category is the same thing as a strict 2-category without smallness hypotheses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

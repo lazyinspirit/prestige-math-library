@@ -2,13 +2,14 @@
 id: def-prism-operator-for-a-homotopy
 kind: definition
 title: "The prism operator of a homotopy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-homotopy-relative-and-path-homotopy, def-standard-topological-simplex-and-its-affine-face-maps, def-singular-simplex-and-singular-chain-group-with-coefficients]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

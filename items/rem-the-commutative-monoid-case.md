@@ -2,7 +2,7 @@
 id: rem-the-commutative-monoid-case
 kind: remark
 title: "The commutative-monoid enrichment of a semiadditive category remains only a sourced remark here"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-a-category-with-finite-biproducts-is-enriched-in-commutative-monoids,
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

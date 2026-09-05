@@ -1,7 +1,7 @@
 ---
 page: singular-chains-and-singular-homology-examples
 title: Singular Chains and Singular Homology - Examples
-status: draft
+status: published
 items: []
 examples: [ex-singular-chain-complex-of-a-point, ex-boundaries-of-the-standard-one-and-two-simplices, ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex, ex-the-prism-operator-for-a-path-homotopy, ex-homology-of-an-interval-from-contractibility, ex-homology-of-punctured-euclidean-space-by-deformation-retraction, cex-equal-homology-does-not-imply-homotopy-equivalence, cex-a-singular-cochain-is-not-a-finite-singular-chain]
 ---

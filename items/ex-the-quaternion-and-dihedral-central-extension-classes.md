@@ -2,7 +2,7 @@
 id: ex-the-quaternion-and-dihedral-central-extension-classes
 kind: example
 title: "Quaternion and dihedral central extension classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-central-extensions-are-classified-by-h-two-with-trivial-action]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

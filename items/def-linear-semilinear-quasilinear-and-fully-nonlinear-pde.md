@@ -2,7 +2,7 @@
 id: def-linear-semilinear-quasilinear-and-fully-nonlinear-pde
 kind: definition
 title: "Linear, semilinear, quasilinear, and fully nonlinear partial differential equations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

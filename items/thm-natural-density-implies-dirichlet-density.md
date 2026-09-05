@@ -2,7 +2,7 @@
 id: thm-natural-density-implies-dirichlet-density
 kind: theorem
 title: "Natural density implies Dirichlet density"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: "Kiran S. Kedlaya, Notes on Analytic Number Theory, Lemma 4.7"
       url: "https://kskedlaya.org/ant/chap-primes-in-ap.html"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

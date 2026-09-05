@@ -2,7 +2,7 @@
 id: thm-morse-functions-are-dense-by-relative-jet-transversality
 kind: theorem
 title: "Every smooth function admits arbitrarily fine strong-topology perturbations whose differential is transverse to zero, supported away from a closed set where transversality already holds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

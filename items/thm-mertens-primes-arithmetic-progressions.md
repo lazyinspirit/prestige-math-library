@@ -2,7 +2,7 @@
 id: thm-mertens-primes-arithmetic-progressions
 kind: theorem
 title: "Mertens sum for primes in an arithmetic progression"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "P. Andersen, Analytic Number Theory, Chapters 14-15"
       url: "https://www.math.ku.dk/~andersk/undervisning/22-23/AnalyticNT/notes.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

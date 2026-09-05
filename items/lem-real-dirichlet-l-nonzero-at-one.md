@@ -2,7 +2,7 @@
 id: lem-real-dirichlet-l-nonzero-at-one
 kind: lemma
 title: "A real nonprincipal Dirichlet L-function is nonzero at one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Leonard Tomczak, Analytic Number Theory, Chapter 4"
       url: "https://math.berkeley.edu/~ltomczak/notes/Mich2022/AnaNT_Notes.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

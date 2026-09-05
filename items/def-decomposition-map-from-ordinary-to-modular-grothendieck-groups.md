@@ -2,7 +2,7 @@
 id: def-decomposition-map-from-ordinary-to-modular-grothendieck-groups
 kind: definition
 title: "Decomposition map from ordinary to modular Grothendieck groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-og-lattice-and-reduction-modulo-the-maximal-ideal, lem-reduction-of-an-og-lattice-is-a-finite-dimensional-kg-module, thm-brauer-character-is-additive-on-short-exact-sequences]
 justified_by: [thm-decomposition-map-is-independent-of-the-stable-lattice]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

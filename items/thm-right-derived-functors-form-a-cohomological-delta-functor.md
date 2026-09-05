@@ -2,7 +2,7 @@
 id: thm-right-derived-functors-form-a-cohomological-delta-functor
 kind: theorem
 title: "Right derived functors form a cohomological delta functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cohomological-delta-functor, thm-right-derived-functors-relative-to-supplied-data-are-additive-functors, thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor, thm-horseshoe-lemma-for-injective-resolutions, thm-horseshoe-lemma-for-projective-resolutions, thm-long-exact-sequence-in-cohomology, thm-naturality-of-the-cohomology-connecting-morphism, thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic, lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

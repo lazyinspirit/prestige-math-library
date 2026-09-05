@@ -2,13 +2,14 @@
 id: lem-local-homomorphism-residue-field-map
 kind: lemma
 title: "A local morphism of stalks induces a residue-field map"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-local-ring, def-morphism-locally-ringed-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

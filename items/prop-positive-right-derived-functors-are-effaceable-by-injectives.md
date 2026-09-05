@@ -2,7 +2,7 @@
 id: prop-positive-right-derived-functors-are-effaceable-by-injectives
 kind: proposition
 title: "Positive right derived functors are effaceable by injectives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-effaceable-cohomological-delta-functor-in-positive-degrees, thm-right-derived-functors-form-a-cohomological-delta-functor, prop-positive-right-derived-functors-vanish-on-injective-objects, def-a-category-with-enough-projectives-and-with-enough-injectives]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

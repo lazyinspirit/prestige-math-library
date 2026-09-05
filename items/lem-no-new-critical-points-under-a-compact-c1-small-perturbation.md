@@ -2,7 +2,7 @@
 id: lem-no-new-critical-points-under-a-compact-c1-small-perturbation
 kind: lemma
 title: "Away from fixed critical neighborhoods, sufficiently small $C^1$ perturbations create no new critical points on a compact manifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

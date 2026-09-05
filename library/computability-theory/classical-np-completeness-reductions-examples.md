@@ -1,7 +1,7 @@
 ---
 page: classical-np-completeness-reductions-examples
 title: "Classical NP-Completeness Reductions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-clique-is-np-complete, ex-three-sat-reduces-to-three-colourability, cex-gadget-correctness-needs-only-one-direction]
 ---

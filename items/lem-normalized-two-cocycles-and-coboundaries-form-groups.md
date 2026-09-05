@@ -2,7 +2,7 @@
 id: lem-normalized-two-cocycles-and-coboundaries-form-groups
 kind: lemma
 title: "Normalized two-cocycles and coboundaries form groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-normalized-two-cocycle-and-two-coboundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-homotopic-maps-induce-the-same-map-on-singular-homology
 kind: corollary
 title: "Homotopic maps induce the same map on singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-chain-complex-and-singular-homology, thm-singular-chain-homotopy-formula, def-chain-homotopy, thm-chain-homotopic-maps-induce-the-same-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

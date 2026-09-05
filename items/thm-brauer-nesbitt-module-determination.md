@@ -2,7 +2,7 @@
 id: thm-brauer-nesbitt-module-determination
 kind: theorem
 title: "Brauer-Nesbitt determines semisimplifications"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-brauer-character-is-additive-on-short-exact-sequences, thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]
 proof_strategy: iff
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

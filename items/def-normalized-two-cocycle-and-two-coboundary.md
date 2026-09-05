@@ -2,13 +2,14 @@
 id: def-normalized-two-cocycle-and-two-coboundary
 kind: definition
 title: "Normalized two-cocycle and two-coboundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

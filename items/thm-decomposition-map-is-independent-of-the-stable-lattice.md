@@ -2,7 +2,7 @@
 id: thm-decomposition-map-is-independent-of-the-stable-lattice
 kind: theorem
 title: "The decomposition map is independent of the stable lattice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-decomposition-map-from-ordinary-to-modular-grothendieck-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

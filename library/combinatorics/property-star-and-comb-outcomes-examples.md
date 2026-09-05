@@ -1,7 +1,7 @@
 ---
 page: property-star-and-comb-outcomes-examples
 title: "Property (*) and Comb Outcomes — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-four-tooth-comb-with-a-special-vertex-triggers-property-star, ex-the-third-outcome-of-property-star-gives-a-pure-four-blockade, ex-the-square-root-rescaling-in-lemma-four-four, ex-the-epsilon-to-five-d-substitution-in-lemma-four-five-one]
 ---

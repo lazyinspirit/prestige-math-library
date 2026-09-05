@@ -2,13 +2,14 @@
 id: thm-gluing-sheaves
 kind: theorem
 title: "Compatible local sheaves glue uniquely up to unique isomorphism"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-gluing-datum-sheaves, def-sheaf-on-topological-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-leaf-of-a-regular-foliation
 kind: definition
 title: "Leaves of a regular foliation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
 sources:
   scraped: []

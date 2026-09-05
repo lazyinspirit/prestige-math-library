@@ -1,7 +1,7 @@
 ---
 page: post-correspondence-and-language-undecidability-examples
 title: "Post Correspondence and Language Undecidability: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-modified-pcp-is-undecidable

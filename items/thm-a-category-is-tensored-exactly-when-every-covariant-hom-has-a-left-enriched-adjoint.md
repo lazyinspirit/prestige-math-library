@@ -2,7 +2,7 @@
 id: thm-a-category-is-tensored-exactly-when-every-covariant-hom-has-a-left-enriched-adjoint
 kind: theorem
 title: "A V-category is tensored exactly when each covariant hom has a left enriched adjoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

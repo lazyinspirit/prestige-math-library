@@ -2,7 +2,7 @@
 id: thm-three-sat-reduces-to-clique
 kind: theorem
 title: "3SAT polynomial-time many-one reduces to CLIQUE"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Fabrizio Iozzi and Luca Trevisan, Handout NP3"
       url: "https://lucatrevisan.github.io/30540/notes-np3.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

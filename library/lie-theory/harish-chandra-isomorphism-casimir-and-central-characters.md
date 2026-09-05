@@ -1,7 +1,7 @@
 ---
 page: harish-chandra-isomorphism-casimir-and-central-characters
 title: "Harish Chandra Isomorphism Casimir and Central Characters"
-status: draft
+status: published
 items: [def-universal-enveloping-algebra-as-a-tensor-quotient,
         prop-lie-algebra-actions-extend-to-unital-actions-of-the-enveloping-algebra,
         def-killing-form-of-a-semisimple-lie-algebra,

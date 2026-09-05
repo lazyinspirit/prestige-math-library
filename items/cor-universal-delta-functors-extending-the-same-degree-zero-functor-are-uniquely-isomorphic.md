@@ -2,7 +2,7 @@
 id: cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic
 kind: corollary
 title: "Universal delta functors extending the same degree-zero functor are uniquely isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-universal-delta-functor, def-morphism-of-homological-delta-functors, def-morphism-of-cohomological-delta-functors]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

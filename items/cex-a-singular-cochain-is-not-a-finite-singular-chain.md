@@ -2,7 +2,7 @@
 id: cex-a-singular-cochain-is-not-a-finite-singular-chain
 kind: counterexample
 title: "A singular cochain need not have finite support on singular simplices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-simplex-and-singular-chain-group-with-coefficients, ex-homology-of-an-interval-from-contractibility]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

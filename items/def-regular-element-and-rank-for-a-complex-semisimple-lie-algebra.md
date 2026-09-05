@@ -2,7 +2,7 @@
 id: def-regular-element-and-rank-for-a-complex-semisimple-lie-algebra
 kind: definition
 title: "Regular elements and rank for a complex semisimple Lie algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

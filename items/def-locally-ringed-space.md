@@ -2,12 +2,13 @@
 id: def-locally-ringed-space
 kind: definition
 title: "A locally ringed space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-local-ring, def-ringed-space]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

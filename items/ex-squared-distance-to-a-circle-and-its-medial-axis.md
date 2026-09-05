@@ -2,7 +2,7 @@
 id: ex-squared-distance-to-a-circle-and-its-medial-axis
 kind: example
 title: "Squared distance to a circle is Morse for centers off the medial axis and degenerate at the center"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct computation
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

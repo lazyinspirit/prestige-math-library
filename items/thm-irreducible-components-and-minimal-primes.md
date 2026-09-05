@@ -2,7 +2,7 @@
 id: thm-irreducible-components-and-minimal-primes
 kind: theorem
 title: "Irreducible components of the spectrum correspond to minimal prime ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ sources:
     - title: "The Stacks Project, Section 10.26: Irreducible components of spectra"
       url: "https://stacks.math.columbia.edu/tag/00ET"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

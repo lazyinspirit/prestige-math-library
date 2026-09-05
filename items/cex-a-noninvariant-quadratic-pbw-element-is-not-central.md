@@ -2,7 +2,7 @@
 id: cex-a-noninvariant-quadratic-pbw-element-is-not-central
 kind: counterexample
 title: "A noninvariant quadratic PBW element need not be central"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ proof_strategy: direct
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

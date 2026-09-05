@@ -2,7 +2,7 @@
 id: ex-hilbert-one-place-principle
 kind: example
 title: "The one-place principle in action"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Andrew V. Sutherland, 18.782 Lecture 11, Corollary 11.13"
       url: "https://math.mit.edu/classes/18.782/2013fa/LectureNotes11.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

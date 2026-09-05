@@ -2,7 +2,7 @@
 id: cor-rank-of-the-rational-representation-ring
 kind: corollary
 title: "The rank of $R_{\\mathbb Q}(G)$ is the number of conjugacy classes of cyclic subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

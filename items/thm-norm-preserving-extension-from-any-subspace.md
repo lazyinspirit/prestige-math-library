@@ -2,7 +2,7 @@
 id: thm-norm-preserving-extension-from-any-subspace
 kind: theorem
 title: "A bounded linear functional on an arbitrary subspace extends with the same norm, without assuming the subspace is closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [thm-hahn-banach-norm-preserving-extension,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

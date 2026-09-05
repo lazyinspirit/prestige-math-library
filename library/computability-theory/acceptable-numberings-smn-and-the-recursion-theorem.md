@@ -1,7 +1,7 @@
 ---
 page: acceptable-numberings-smn-and-the-recursion-theorem
 title: "Acceptable Numberings, the s-m-n Theorem, and Recursion"
-status: draft
+status: published
 items:
   - def-numbering-of-partial-computable-functions
   - def-universal-and-acceptable-numbering

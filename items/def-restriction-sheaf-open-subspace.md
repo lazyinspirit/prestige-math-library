@@ -2,12 +2,13 @@
 id: def-restriction-sheaf-open-subspace
 kind: definition
 title: "Restriction of a sheaf to an open subspace"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-inverse-image-presheaf-and-sheaf]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

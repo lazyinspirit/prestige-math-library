@@ -2,7 +2,7 @@
 id: thm-enriched-adjoint-functor-theorem-for-cotensored-categories
 kind: theorem
 title: "Enriched adjoint functor theorem for cotensored categories"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

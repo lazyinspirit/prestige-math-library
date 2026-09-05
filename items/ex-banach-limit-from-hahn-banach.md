@@ -2,7 +2,7 @@
 id: ex-banach-limit-from-hahn-banach
 kind: example
 title: "A Banach limit obtained from Hahn-Banach"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-hahn-banach-dominated-extension, def-sublinear-functional,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

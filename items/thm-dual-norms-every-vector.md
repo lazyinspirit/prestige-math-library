@@ -2,7 +2,7 @@
 id: thm-dual-norms-every-vector
 kind: theorem
 title: "Every nonzero vector has a norming functional"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-dual-space-of-a-normed-space,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

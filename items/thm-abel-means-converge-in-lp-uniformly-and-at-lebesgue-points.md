@@ -2,7 +2,7 @@
 id: thm-abel-means-converge-in-lp-uniformly-and-at-lebesgue-points
 kind: theorem
 title: "Abel means converge in L^p, uniformly, and at Lebesgue points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cesaro-and-abel-means-of-a-fourier-series, lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity, def-lebesgue-point-and-lebesgue-set, thm-almost-every-point-is-a-lebesgue-point, thm-c-c-rn-is-dense-in-l-p-of-rn]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

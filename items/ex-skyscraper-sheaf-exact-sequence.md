@@ -2,7 +2,7 @@
 id: ex-skyscraper-sheaf-exact-sequence
 kind: example
 title: "A short exact sequence of abelian groups gives a short exact sequence of skyscraper sheaves"
-status: draft
+status: published
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -11,6 +11,7 @@ generation:
 deps: [def-exact-sequence-sheaves, def-skyscraper-sheaf-abelian-group, thm-exactness-of-sheaves-stalkwise, def-stalk-of-presheaf]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

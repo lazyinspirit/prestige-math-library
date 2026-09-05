@@ -1,7 +1,7 @@
 ---
 page: hilbert-symbols-and-the-quadratic-local-global-principle-examples
 title: "Hilbert Symbols and the Quadratic Local Global Principle -- Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hilbert-symbol-over-the-reals,
            ex-hilbert-symbol-at-an-odd-prime,

@@ -2,7 +2,7 @@
 id: ex-the-cp-squared-extension-as-a-nonzero-two-cocycle
 kind: example
 title: "The C_p^2 extension as a nonzero two-cocycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-an-extension-determines-a-well-defined-h-two-class, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

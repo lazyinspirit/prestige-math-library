@@ -2,7 +2,7 @@
 id: thm-cartan-matrix-is-d-transpose-d
 kind: theorem
 title: "The Cartan matrix is D^T D"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-indecomposable-characters-and-cartan-invariants, thm-brauer-reciprocity]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

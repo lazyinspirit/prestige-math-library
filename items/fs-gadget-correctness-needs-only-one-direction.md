@@ -2,7 +2,7 @@
 id: fs-gadget-correctness-needs-only-one-direction
 kind: false-statement
 title: "A gadget reduction is correct as soon as every yes-instance maps to a yes-instance"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ sources:
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-factor-set-model-agrees-with-derived-second-group-cohomology
 kind: theorem
 title: "The factor-set model agrees with the inhomogeneous cochain model in degree two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-normalized-two-cocycle-and-two-coboundary, def-second-cohomology-by-f
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

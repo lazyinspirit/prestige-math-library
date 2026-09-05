@@ -2,7 +2,7 @@
 id: lem-spectrum-compactness-unit-expression-finite-subcover
 kind: lemma
 title: "A finite unit-ideal expression yields a finite distinguished-open subcover"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, v4.03, Proposition 14.4(c)"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

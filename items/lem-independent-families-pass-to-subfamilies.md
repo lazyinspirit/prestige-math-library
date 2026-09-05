@@ -2,7 +2,7 @@
 id: lem-independent-families-pass-to-subfamilies
 kind: lemma
 title: "Independent families pass to subfamilies"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Section 2.1"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

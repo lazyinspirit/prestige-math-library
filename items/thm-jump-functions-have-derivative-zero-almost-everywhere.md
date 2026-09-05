@@ -2,7 +2,7 @@
 id: thm-jump-functions-have-derivative-zero-almost-everywhere
 kind: theorem
 title: "A jump function has derivative zero almost everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

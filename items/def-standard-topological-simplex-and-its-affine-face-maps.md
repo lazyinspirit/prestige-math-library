@@ -2,12 +2,13 @@
 id: def-standard-topological-simplex-and-its-affine-face-maps
 kind: definition
 title: "The standard topological simplex and its affine face maps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

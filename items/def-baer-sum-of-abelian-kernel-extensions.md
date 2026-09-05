@@ -2,13 +2,14 @@
 id: def-baer-sum-of-abelian-kernel-extensions
 kind: definition
 title: "Baer sum of abelian-kernel extensions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-extension-inducing-a-prescribed-abelian-kernel-action, def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

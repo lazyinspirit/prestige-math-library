@@ -2,7 +2,7 @@
 id: ex-generic-and-exceptional-height-directions-on-a-torus
 kind: example
 title: "A standard embedded torus has generic height directions with four Morse critical points, but symmetry directions create degenerate or nongeneric behavior"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct computation
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

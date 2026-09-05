@@ -2,13 +2,14 @@
 id: def-brauer-character-of-a-finite-dimensional-kg-module
 kind: definition
 title: "Brauer character of a finite-dimensional kG-module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-p-regular-and-p-singular-elements, def-teichmuller-lift-in-a-splitting-p-modular-system]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

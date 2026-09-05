@@ -2,7 +2,7 @@
 id: fs-pseudopolynomial-is-polynomial-in-bit-length
 kind: false-statement
 title: "A pseudopolynomial algorithm is polynomial in the binary input length"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ sources:
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

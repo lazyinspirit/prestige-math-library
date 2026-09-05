@@ -2,7 +2,7 @@
 id: lem-closure-of-a-point-is-its-vanishing-set
 kind: lemma
 title: "The closure of a prime is its vanishing set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 10.17: The spectrum of a ring"
       url: "https://stacks.math.columbia.edu/tag/00DY"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

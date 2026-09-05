@@ -2,13 +2,14 @@
 id: def-second-cohomology-by-factor-sets
 kind: definition
 title: "Second cohomology by factor sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-normalized-two-cocycles-and-coboundaries-form-groups]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

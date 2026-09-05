@@ -1,7 +1,7 @@
 ---
 page: fejer-and-poisson-summability-of-fourier-series-examples
 title: "Fejer and Poisson Summability of Fourier Series - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-fejer-means-of-a-single-character, ex-poisson-integral-of-a-single-character, ex-fejer-summation-of-the-square-wave, cex-fejer-means-need-not-converge-uniformly-for-discontinuous-data, cex-abel-summability-does-not-imply-ordinary-convergence]
 ---

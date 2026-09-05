@@ -2,7 +2,7 @@
 id: lem-a-large-y-ten-thirds-restricted-induced-subgraph-forces-a-y-eleven-thirds-restricted-induced-subgraph
 kind: lemma
 title: "Under failure of the global outcomes, a large y^(10/3)-restricted induced subgraph forces a y^(11/3)-restricted induced subgraph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

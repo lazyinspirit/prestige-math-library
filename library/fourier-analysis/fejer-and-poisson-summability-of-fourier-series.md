@@ -1,7 +1,7 @@
 ---
 page: fejer-and-poisson-summability-of-fourier-series
 title: "Fejer and Poisson Summability of Fourier Series"
-status: draft
+status: published
 items: [def-cesaro-and-abel-means-of-a-fourier-series, lem-fejer-kernel-is-a-positive-approximate-identity, thm-fejer-convergence-in-lp, thm-fejer-uniform-convergence-for-continuous-periodic-functions, thm-fejer-means-converge-at-lebesgue-points, lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity, thm-abel-means-converge-in-lp-uniformly-and-at-lebesgue-points, thm-cesaro-summability-implies-abel-summability, thm-fejer-theorem-for-pointwise-midpoint-values, thm-gibbs-overshoot-at-a-piecewise-c-one-jump, rem-gibbs-phenomenon]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: fs-every-function-g-times-g-to-m-is-a-factor-set
 kind: false-statement
 title: "FALSE: every function G times G to M is a factor set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-normalized-two-cocycle-and-two-coboundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

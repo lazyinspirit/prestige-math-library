@@ -2,7 +2,7 @@
 id: prop-local-frame-characterization-of-a-smooth-distribution
 kind: proposition
 title: "A smooth distribution is exactly a locally framed constant-rank family of tangent spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

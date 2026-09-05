@@ -2,7 +2,7 @@
 id: cor-central-extensions-are-classified-by-h-two-with-trivial-action
 kind: corollary
 title: "Central extensions are classified by H^2 with trivial action"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, cor-zero-h-two-class-is-equivalent-to-splitting]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

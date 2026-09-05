@@ -2,7 +2,7 @@
 id: prop-natural-transformations-of-base-functors-give-morphisms-of-derived-delta-functors
 kind: proposition
 title: "Natural transformations of base functors give morphisms of derived delta functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-morphism-of-homological-delta-functors, def-morphism-of-cohomological-delta-functors, prop-a-natural-transformation-induces-natural-transformations-of-left-derived-functors, prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors, thm-naturality-of-the-homology-connecting-morphism, thm-naturality-of-the-cohomology-connecting-morphism, thm-left-derived-functors-form-a-homological-delta-functor, thm-right-derived-functors-form-a-cohomological-delta-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

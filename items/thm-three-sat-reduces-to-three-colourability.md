@@ -2,7 +2,7 @@
 id: thm-three-sat-reduces-to-three-colourability
 kind: theorem
 title: "3SAT polynomial-time many-one reduces to 3-COLORABILITY"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: "John E. Savage, Models of Computation, Chapter 8"
       url: "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter8.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

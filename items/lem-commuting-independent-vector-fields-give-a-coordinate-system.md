@@ -2,7 +2,7 @@
 id: lem-commuting-independent-vector-fields-give-a-coordinate-system
 kind: lemma
 title: "Commuting independent vector fields give a coordinate system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

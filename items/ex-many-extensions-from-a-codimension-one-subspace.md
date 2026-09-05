@@ -2,7 +2,7 @@
 id: ex-many-extensions-from-a-codimension-one-subspace
 kind: example
 title: "A codimension-one subspace can admit many norm-preserving Hahn-Banach extensions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [lem-hahn-banach-one-step-extension,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

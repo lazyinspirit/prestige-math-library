@@ -2,7 +2,7 @@
 id: thm-vitali-covering-theorem-for-fine-covers-on-the-line
 kind: theorem
 title: "The Vitali covering theorem for fine covers on the real line"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

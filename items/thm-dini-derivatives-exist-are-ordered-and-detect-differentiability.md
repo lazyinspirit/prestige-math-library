@@ -2,7 +2,7 @@
 id: thm-dini-derivatives-exist-are-ordered-and-detect-differentiability
 kind: theorem
 title: "The four Dini derivatives always exist in the extended reals, satisfy the one-sided order inequalities, and detect finite differentiability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

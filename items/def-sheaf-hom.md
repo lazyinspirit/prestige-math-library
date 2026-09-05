@@ -2,12 +2,13 @@
 id: def-sheaf-hom
 kind: definition
 title: "The internal Hom sheaf of two module sheaves"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-module-on-ringed-space, def-restriction-sheaf-open-subspace]
 verification:
+  audited: 2026-09-05
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

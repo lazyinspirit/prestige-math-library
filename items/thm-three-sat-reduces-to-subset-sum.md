@@ -2,7 +2,7 @@
 id: thm-three-sat-reduces-to-subset-sum
 kind: theorem
 title: "3SAT polynomial-time many-one reduces to subset sum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: rem-choice-strength-of-hahn-banach
 kind: remark
 title: "The set-theoretic cost of Hahn-Banach"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-hahn-banach-dominated-extension, rem-halpern-levy-bpi-not-ac]
 justified_by: []
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

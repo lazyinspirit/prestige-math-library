@@ -2,7 +2,7 @@
 id: lem-dirichlet-character-arithmetic-function-characterization
 kind: lemma
 title: "Arithmetic characterization of Dirichlet characters modulo q"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Kiran S. Kedlaya, Notes on Analytic Number Theory, section 3.1"
       url: "https://kskedlaya.org/ant/chap-lfunc.html"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

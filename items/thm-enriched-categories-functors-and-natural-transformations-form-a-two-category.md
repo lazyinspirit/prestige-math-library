@@ -2,7 +2,7 @@
 id: thm-enriched-categories-functors-and-natural-transformations-form-a-two-category
 kind: theorem
 title: "Set-object enriched categories, enriched functors, and enriched natural transformations form a strict 2-category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

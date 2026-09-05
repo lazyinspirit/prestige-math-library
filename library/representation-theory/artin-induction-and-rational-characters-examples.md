@@ -1,7 +1,7 @@
 ---
 page: artin-induction-and-rational-characters-examples
 title: "Artin Induction and Rational Characters - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-artin-induction-for-a-cyclic-group, ex-artin-permutation-relation-for-a5, ex-cyclic-fixed-point-detection-for-s3, cex-rational-valued-character-need-not-be-defined-over-the-rationals]
 ---

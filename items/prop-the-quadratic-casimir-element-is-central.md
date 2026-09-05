@@ -2,7 +2,7 @@
 id: prop-the-quadratic-casimir-element-is-central
 kind: proposition
 title: "The quadratic Casimir element is central"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

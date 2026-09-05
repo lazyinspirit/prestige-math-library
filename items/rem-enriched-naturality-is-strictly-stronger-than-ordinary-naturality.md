@@ -2,7 +2,7 @@
 id: rem-enriched-naturality-is-strictly-stronger-than-ordinary-naturality
 kind: remark
 title: "Enriched naturality can be strictly stronger than ordinary naturality of the underlying components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-enriched-natural-transformation, thm-the-compact-square-form-of-enric
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

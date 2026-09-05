@@ -1,7 +1,7 @@
 ---
 page: dirichlet-characters-l-functions-and-primes-in-progressions
 title: "Dirichlet Characters L Functions and Primes in Progressions"
-status: draft
+status: published
 items: [def-dirichlet-character-modulo-q,
         lem-dirichlet-character-extension-well-defined,
         lem-dirichlet-character-arithmetic-function-characterization,

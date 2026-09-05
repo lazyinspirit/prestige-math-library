@@ -2,7 +2,7 @@
 id: lem-extend-a-degree-zero-transformation-through-one-dimension-shift
 kind: lemma
 title: "A partial morphism of delta functors extends through one dimension shift"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-natural-transformation, def-effaceable-homological-delta-functor-in-positive-degrees, def-effaceable-cohomological-delta-functor-in-positive-degrees, lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle, lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

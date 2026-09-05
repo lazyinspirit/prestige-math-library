@@ -2,7 +2,7 @@
 id: def-irreducible-topological-space-and-subset
 kind: definition
 title: "Irreducible topological spaces and irreducible subsets in the subspace topology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "The Stacks Project, Definition 5.8.1"
       url: "https://stacks.math.columbia.edu/tag/004U"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

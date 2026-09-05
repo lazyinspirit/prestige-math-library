@@ -2,7 +2,7 @@
 id: thm-primes-residue-class-dirichlet-density
 kind: theorem
 title: "Primes in one reduced residue class have Dirichlet density 1 over phi(q)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Andrew V. Sutherland, Number Theory I, Lecture 18"
       url: "https://ocw.mit.edu/courses/18-785-number-theory-i-fall-2021/mit18_785f21_full_lec.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

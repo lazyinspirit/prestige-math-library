@@ -2,7 +2,7 @@
 id: cex-fejer-means-need-not-converge-uniformly-for-discontinuous-data
 kind: counterexample
 title: "Fejer means need not converge uniformly for discontinuous data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-cesaro-and-abel-means-of-a-fourier-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

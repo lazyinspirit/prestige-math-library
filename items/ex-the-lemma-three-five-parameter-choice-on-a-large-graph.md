@@ -2,7 +2,7 @@
 id: ex-the-lemma-three-five-parameter-choice-on-a-large-graph
 kind: example
 title: "The Lemma 3.5 parameter choice at the next power of two above the source threshold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

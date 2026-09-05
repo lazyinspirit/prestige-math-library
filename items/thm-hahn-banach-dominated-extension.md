@@ -2,7 +2,7 @@
 id: thm-hahn-banach-dominated-extension
 kind: theorem
 title: "Hahn-Banach dominated extension theorem for real vector spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [lem-hahn-banach-one-step-extension,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

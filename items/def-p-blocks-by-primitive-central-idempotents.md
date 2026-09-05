@@ -2,13 +2,14 @@
 id: def-p-blocks-by-primitive-central-idempotents
 kind: definition
 title: "p-blocks from primitive central idempotents"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-splitting-p-modular-system-for-a-finite-group]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

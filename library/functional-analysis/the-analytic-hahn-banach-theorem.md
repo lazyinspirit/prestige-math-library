@@ -1,7 +1,7 @@
 ---
 page: the-analytic-hahn-banach-theorem
 title: "The Analytic Hahn Banach Theorem"
-status: draft
+status: published
 items: [def-sublinear-functional, lem-hahn-banach-one-step-extension,
         lem-union-of-a-chain-of-dominated-extensions,
         thm-hahn-banach-dominated-extension,

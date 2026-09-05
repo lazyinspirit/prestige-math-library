@@ -2,7 +2,7 @@
 id: thm-homogeneous-linear-transport-by-the-flow
 kind: theorem
 title: "Homogeneous linear transport is solved by the inverse characteristic flow"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

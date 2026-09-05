@@ -2,7 +2,7 @@
 id: lem-hilbert-symbol-depends-only-on-square-classes
 kind: lemma
 title: "The Hilbert symbol depends only on square classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Sam Raskin, Introduction to the Arithmetic Theory of Quadratic Forms, section 4"
       url: "https://www.samraskin.net/forms.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

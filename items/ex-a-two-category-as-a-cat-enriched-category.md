@@ -2,7 +2,7 @@
 id: ex-a-two-category-as-a-cat-enriched-category
 kind: example
 title: "A strict 2-category read as a Cat-enriched category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

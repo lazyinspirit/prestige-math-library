@@ -2,7 +2,7 @@
 id: ex-the-epsilon-to-five-d-substitution-in-lemma-four-five-one
 kind: example
 title: "The epsilon^(5d) substitution in Claim 4.5.1 and Lemma 4.5"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

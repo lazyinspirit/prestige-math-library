@@ -2,7 +2,7 @@
 id: lem-union-of-a-chain-of-dominated-extensions
 kind: lemma
 title: "The union of a chain of dominated extensions is a well-defined dominated linear functional"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-sublinear-functional, def-algebraic-dual-and-linear-functional,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

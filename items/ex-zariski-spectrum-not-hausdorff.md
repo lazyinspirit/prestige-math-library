@@ -2,7 +2,7 @@
 id: ex-zariski-spectrum-not-hausdorff
 kind: example
 title: "A generic point and a distinct specialization cannot be separated in the Zariski topology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "A. Altman and S. Kleiman, A Term of Commutative Algebra, 13th ed., §13"
       url: "https://web.mit.edu/18.705/www/13Ed.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

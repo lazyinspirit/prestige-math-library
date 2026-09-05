@@ -2,7 +2,7 @@
 id: cex-a-nonnatural-choice-of-connecting-maps-does-not-form-a-delta-functor
 kind: counterexample
 title: "A nonnatural choice of connecting maps does not form a delta functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-homological-delta-functor, prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws, ex-a-degreewise-split-sequence-with-nonzero-connecting-map]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

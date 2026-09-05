@@ -2,7 +2,7 @@
 id: cex-independent-events-need-not-be-closed-under-unions-of-overlapping-pairs
 kind: counterexample
 title: "Unions of overlapping independent events need not remain independent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ proof_strategy: constructive
 sources:
   references: []
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

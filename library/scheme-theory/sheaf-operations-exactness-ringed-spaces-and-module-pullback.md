@@ -1,7 +1,7 @@
 ---
 page: sheaf-operations-exactness-ringed-spaces-and-module-pullback
 title: "Sheaf Operations Exactness Ringed Spaces and Module Pullback"
-status: draft
+status: published
 items: [def-direct-image-sheaf,
         lem-direct-image-is-sheaf,
         def-inverse-image-presheaf-and-sheaf,

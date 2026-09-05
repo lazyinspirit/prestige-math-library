@@ -2,7 +2,7 @@
 id: def-reduction-gadget-and-interface-invariant
 kind: definition
 title: "Reduction gadgets and interface invariants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ sources:
     - title: "Luca Trevisan and Fabrizio Iozzi, 30540 Computer Science 2 course page"
       url: "https://lucatrevisan.github.io/30540/index.html"
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

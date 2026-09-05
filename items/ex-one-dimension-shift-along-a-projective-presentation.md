@@ -2,7 +2,7 @@
 id: ex-one-dimension-shift-along-a-projective-presentation
 kind: example
 title: "One dimension shift along a projective presentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-left-derived-functors-form-a-homological-delta-functor, prop-positive-left-derived-functors-vanish-on-projective-objects, lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-increasing-functions-split-uniquely-as-jump-plus-continuous
 kind: theorem
 title: "A nondecreasing function splits uniquely into a jump part and a continuous part"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
 sources:
   scraped: []

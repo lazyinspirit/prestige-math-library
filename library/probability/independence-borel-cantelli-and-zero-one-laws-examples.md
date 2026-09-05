@@ -1,7 +1,7 @@
 ---
 page: independence-borel-cantelli-and-zero-one-laws-examples
 title: "Independence Borel Cantelli and Zero One Laws - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-independent-events-that-are-not-disjoint,
            ex-functions-of-disjoint-independent-coordinate-blocks,

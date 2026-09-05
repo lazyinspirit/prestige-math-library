@@ -2,7 +2,7 @@
 id: cor-noetherian-spectrum-has-finitely-many-irreducible-components
 kind: corollary
 title: "A Noetherian ring has only finitely many irreducible components in its spectrum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 10.26: Irreducible components of spectra"
       url: "https://stacks.math.columbia.edu/tag/00ET"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

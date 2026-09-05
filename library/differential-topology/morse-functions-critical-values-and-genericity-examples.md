@@ -1,7 +1,7 @@
 ---
 page: morse-functions-critical-values-and-genericity-examples
 title: Morse Functions Critical Values and Genericity — Examples
-status: draft
+status: published
 items: []
 examples: [ex-generic-and-exceptional-height-directions-on-a-torus, ex-squared-distance-to-a-circle-and-its-medial-axis, ex-separating-equal-critical-values-by-bump-functions, cex-morse-functions-need-not-have-distinct-critical-values, cex-noncompact-smallness-without-the-strong-topology-can-create-critical-points-at-infinity]
 ---

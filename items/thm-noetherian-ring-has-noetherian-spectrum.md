@@ -2,7 +2,7 @@
 id: thm-noetherian-ring-has-noetherian-spectrum
 kind: theorem
 title: "The spectrum of a Noetherian ring is a Noetherian topological space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Section 5.9 and Section 10.17"
       url: "https://stacks.math.columbia.edu/tag/0050"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

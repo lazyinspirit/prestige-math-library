@@ -2,7 +2,7 @@
 id: thm-subset-sum-reduces-to-partition
 kind: theorem
 title: "Subset sum polynomial-time many-one reduces to partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: "Fabrizio Iozzi and Luca Trevisan, Handout NP3"
       url: "https://lucatrevisan.github.io/30540/notes-np3.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

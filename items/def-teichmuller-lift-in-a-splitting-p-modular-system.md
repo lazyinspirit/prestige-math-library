@@ -2,13 +2,14 @@
 id: def-teichmuller-lift-in-a-splitting-p-modular-system
 kind: definition
 title: "Teichmuller lift in a splitting p-modular system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-splitting-p-modular-system-for-a-finite-group]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

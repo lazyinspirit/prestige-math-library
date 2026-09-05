@@ -2,7 +2,7 @@
 id: thm-dirichlet-character-orthogonality
 kind: theorem
 title: "Orthogonality relations for Dirichlet characters modulo q"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Andrew V. Sutherland, Number Theory I, Corollary 18.16"
       url: "https://ocw.mit.edu/courses/18-785-number-theory-i-fall-2021/mit18_785f21_full_lec.pdf"
 verification:
+  audited: 2026-09-05
   precheck: pass
 ---
 

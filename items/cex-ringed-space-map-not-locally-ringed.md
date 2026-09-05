@@ -2,13 +2,14 @@
 id: cex-ringed-space-map-not-locally-ringed
 kind: counterexample
 title: "A morphism of ringed spaces need not be a morphism of locally ringed spaces"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-local-ring, def-morphism-locally-ringed-spaces, def-morphism-ringed-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

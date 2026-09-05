@@ -2,13 +2,14 @@
 id: def-effaceable-cohomological-delta-functor-in-positive-degrees
 kind: definition
 title: "Effaceable cohomological delta functor in positive degrees"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-cohomological-delta-functor, def-injective-object]
 verification:
+  audited: 2026-09-05
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

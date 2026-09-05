@@ -2,7 +2,7 @@
 id: ex-boundaries-of-the-standard-one-and-two-simplices
 kind: example
 title: "Boundaries of the standard one- and two-simplices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-standard-topological-simplex-and-its-affine-face-maps, def-singular-boundary-operator]
 proof_strategy: direct
 verification:
+  audited: 2026-09-05
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
