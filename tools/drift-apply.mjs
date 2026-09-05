@@ -32,10 +32,19 @@ const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
 const has = (n) => argv.includes(`--${n}`);
 const run = opt('run');
-if (!run) { console.error('usage: node tools/drift-apply.mjs --run <run> [--cap N] [--max-pairs N] [--dry-run]'); process.exit(2); }
+if (!run) { console.error('usage: node tools/drift-apply.mjs --run <run> [--cap N] [--max-pairs N] [--allow-in-run-dependencies] [--dry-run]'); process.exit(2); }
 
 const repo = process.cwd();
 const cap = Number(opt('cap') ?? 2);
+// Rewriting the scope ledger must preserve the plan-time opt-in. Losing this
+// bit turns a valid earlier-prerequisite chain back into an unbuildable run at
+// the materialization gate. The explicit flag repairs an already-clobbered
+// ledger; ordinary runs inherit the value recorded by `plan`.
+let allowInRunDependencies = has('allow-in-run-dependencies');
+try {
+  const priorLedger = JSON.parse(readFileSync(join(repo, 'research', `${run}-scope-ledger.json`), 'utf8'));
+  allowInRunDependencies ||= priorLedger.allow_in_run_dependencies === true;
+} catch { /* the plan/ledger gate will report a genuinely missing ledger */ }
 // The owner's cap on a rescoped run (2026-08-24). A rescope replaces the run's
 // pair set wholesale, and without a ceiling a densely-blocked track could
 // expand it without bound.
@@ -210,7 +219,9 @@ const step = (label, args) => {
     process.exit(1);
   }
 };
-step('ledger', ['tools/manifest-integrity.mjs', '--run', run, '--write-ledger', '--force']);
+const ledgerArgs = ['tools/manifest-integrity.mjs', '--run', run, '--write-ledger', '--force'];
+if (allowInRunDependencies) ledgerArgs.push('--allow-in-run-dependencies');
+step('ledger', ledgerArgs);
 step('tasks', ['tools/run-tasks.mjs', '--run', run, '--force']);
 
 // covers.json maps a dispatch label to the units it covers; a new batch with no

@@ -381,6 +381,36 @@ test('ordinary applied edges and reorders materialize instead of becoming a no-o
   rmSync(dir, { recursive: true, force: true });
 });
 
+test('drift materialization preserves the in-run dependency opt-in', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'drift-in-run-'));
+  mkdirSync(join(dir, 'research'));
+  mkdirSync(join(dir, 'tools'));
+  const a = {
+    order: 20, id: 'alpha-page', title: 'Alpha', kind: 'A', category: 'demo',
+    companion: 'alpha-page-examples', requires: [], items: [],
+  };
+  const b = {
+    order: 21, id: 'alpha-page-examples', title: 'Alpha examples', kind: 'B', category: 'demo',
+    companion: 'alpha-page', requires: ['alpha-page'], items: [],
+  };
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify({ pages: [a, b] }, null, 2));
+  writeFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), JSON.stringify([a, b], null, 2));
+  writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), '### alpha-page\nVERDICT: no-drift\n');
+  writeFileSync(join(dir, 'research', 'demo-scope-ledger.json'), JSON.stringify({
+    run: 'demo', allow_in_run_dependencies: true, pages: [
+      { id: a.id, kind: a.kind, batch: '1' }, { id: b.id, kind: b.kind, batch: '1' },
+    ],
+  }));
+  writeFileSync(join(dir, 'tools', 'manifest-integrity.mjs'),
+    'console.log(`LEDGER_ARGS ${process.argv.slice(2).join(" ")}`);\n');
+  writeFileSync(join(dir, 'tools', 'run-tasks.mjs'), 'console.log("TASKS_OK");\n');
+  const result = spawnSync(process.execPath, [APPLY, '--run', 'demo'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /LEDGER_ARGS .*--allow-in-run-dependencies/);
+  rmSync(dir, { recursive: true, force: true });
+});
+
 test('1-drift routes to an Alpha verification dispatch; 1-scaffold to Betas', () => {
   const { dir, ctx } = stageCtx();
   const drift: any = stages.find((s: any) => s.id === '1-drift');

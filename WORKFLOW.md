@@ -216,6 +216,8 @@ mint a prerequisite pair, or rescope. The following `1-drift-apply` stage
 always runs `drift-apply.mjs`, mechanically repacking manifests and
 regenerating the scope ledger and task files from the reviewed spec before any
 Beta starts; even a same-scope edge or order edit is therefore materialized.
+Ledger regeneration preserves the plan-time `--allow-in-run-dependencies`
+opt-in, so an explicitly approved earlier-prerequisite chain remains valid.
 
 Source gates require harvest dispositions, fetch-verification stamps, live URLs,
 and source backing for each authored result. URL recovery precedes replacement;
