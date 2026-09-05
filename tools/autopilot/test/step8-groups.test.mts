@@ -271,6 +271,35 @@ test('Step-8 preflight routes unhandled advisory residue in the same repair roun
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('Step-8 groups retain full shared evidence but receive only relevant diagnostic records', async () => {
+  const repo = fixtureRepoWithGroups();
+  try {
+    const started: any[] = [];
+    const s: any = stage('8-preflight');
+    const output = 'ERROR contract [thm-demo-x]: x detail\n    x continuation\n'
+      + 'ERROR contract [thm-demo-y]: y detail\n    y continuation\n';
+    await s.onGateFailure({
+      ctx: { run: 'demo', repo }, executor: { start: (_x: any, p: any) => started.push(p) },
+      stage: s, round: 1, failure: { id: 'proof-contract', why: 'contract residue', output },
+    });
+    assert.equal(started.length, 2);
+    const envelopes = started.map((p) => JSON.parse(
+      readFileSync(join(repo, p.task[0]), 'utf8').match(/```json\n([\s\S]*?)\n```/)![1]));
+    assert.equal(envelopes[0].full_evidence, envelopes[1].full_evidence);
+    const full = JSON.parse(readFileSync(join(repo, envelopes[0].full_evidence), 'utf8'));
+    assert.equal(full.failures[0].output, output);
+    assert.equal(full.live_items.length, 2);
+    for (const envelope of envelopes) {
+      assert.equal(envelope.assigned_items.length, 1);
+      assert.equal(envelope.live_items.length, 1);
+      const own = envelope.group === 'a' ? 'x' : 'y';
+      const other = own === 'x' ? 'y' : 'x';
+      assert.match(envelope.failures[0].output, new RegExp(`${own} detail\\n    ${own} continuation`));
+      assert.doesNotMatch(envelope.failures[0].output, new RegExp(`${other} detail`));
+    }
+  } finally { rmSync(repo, { recursive: true, force: true }); }
+});
+
 test('Step-8 rejudge dispatches agents for contested rows and tools only for missing verdicts', async () => {
   const repo = fixtureRepoWithGroups();
   const s: any = stage('8-rejudge');

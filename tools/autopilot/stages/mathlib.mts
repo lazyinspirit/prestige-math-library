@@ -24,6 +24,7 @@ import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { hasLegacyStep6Cutover, step6Stages } from './mathlib.step6.mts';
+import { scopedGateOutput } from '../src/repair-evidence.mts';
 
 const GPT54_HIGH_1M = MODEL_PROFILE_NAMES.gpt54High1m;
 const TERRA_XHIGH = MODEL_PROFILE_NAMES.terraXhigh;
@@ -1071,6 +1072,23 @@ function writeStep8RepairEnvelope({ ctx, stage, round, group, mode, failures, me
     ...((publishedClosure?.open_fatal_rows ?? []).map((row) => ({ ...row, scope: 'published', status: 'open_fatal' }))),
   ];
   const assignedIds = new Set(assigned.map((row) => row.id));
+  const knownIds = new Set(assignments.map((row) => row.id));
+  const complete = {
+    run: ctx.run, stage: stage.id, round,
+    failures: failures.map((entry: any) => ({
+      id: String(entry.id), stage: entry.stage ?? stage.id,
+      why: String(entry.why ?? ''), output: String(entry.output ?? ''),
+      named_ids: itemsFromGateFailure(entry),
+    })),
+    mechanical_residue: String(mechanicalStderr ?? ''),
+    live_items: assignments,
+  };
+  const evidenceBody = JSON.stringify(complete, null, 2) + '\n';
+  const evidenceHash = createHash('sha256').update(evidenceBody).digest('hex');
+  const evidencePath = `research/${ctx.run}-${stage.id}-repair-evidence-${round}-${evidenceHash}.json`;
+  if (!existsSync(R(ctx, evidencePath))) {
+    writeFileSync(R(ctx, evidencePath), evidenceBody);
+  }
   const envelope = {
     version: 1,
     run: ctx.run,
@@ -1078,15 +1096,17 @@ function writeStep8RepairEnvelope({ ctx, stage, round, group, mode, failures, me
     round,
     mode,
     group,
+    full_evidence: evidencePath,
+    full_evidence_sha256: evidenceHash,
     failures: failures.map((entry: any) => ({
       id: String(entry.id),
       stage: entry.stage ?? stage.id,
       why: String(entry.why ?? ''),
-      output: String(entry.output ?? ''),
-      named_ids: itemsFromGateFailure(entry),
+      output: scopedGateOutput(String(entry.output ?? ''), assignedIds, knownIds),
+      named_ids: itemsFromGateFailure(entry).filter((id: string) => assignedIds.has(id)),
     })),
     mechanical_residue: String(mechanicalStderr ?? ''),
-    live_items: assignments,
+    live_items: assigned,
     assigned_items: assigned,
     live_tuples: tupleRows.filter((row: any) => assignedIds.has(String(row.id))),
   };
@@ -1098,7 +1118,9 @@ function writeStep8RepairEnvelope({ ctx, stage, round, group, mode, failures, me
     `# Exact Step-8 repair envelope — ${stage.id}, round ${round}`,
     '',
     'The JSON envelope below is the authority for this dispatch. It contains every failing gate from the battery,',
-    'the full untruncated output, exact current rejection tuples, and explicit run/published ownership.',
+    'complete relevant diagnostic records, exact current rejection tuples, and explicit run/published ownership.',
+    'The full_evidence file retains the original untruncated battery output and all ownership assignments.',
+    'Read its relevant sections if a diagnostic is ambiguous; do not infer absence from this scoped view.',
     'Act only on `assigned_items` and `live_tuples`; do not substitute the latest event-log row.',
     '',
     '```json',

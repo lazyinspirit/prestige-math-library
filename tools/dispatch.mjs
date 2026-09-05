@@ -18,6 +18,7 @@ import { homedir } from 'node:os';
 import { REPO, deepseekEnvFile } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
 import { validateCodexOutputSchema } from './codex-output-schema.mjs';
+import { findRollout, readDispatchUsage } from './dispatch-usage.mjs';
 
 // tools/models.mjs owns model IDs and semantic lane assignments.
 import { lane, modelProfile } from './models.mjs';
@@ -299,7 +300,12 @@ const spec = Object.freeze({
   requestedEffort: ROLES[role].effort ?? 'xhigh',
   ...profileSpec,
   profile: profileName,
+  autoCompactTokenLimit: role === 'final-adjudicator' ? null : 200_000,
 });
+const compactionArgs = spec.autoCompactTokenLimit == null ? [] : [
+  '-c', `model_auto_compact_token_limit=${spec.autoCompactTokenLimit}`,
+  '-c', 'model_auto_compact_token_limit_scope="total"',
+];
 
 // ---- prompt ------------------------------------------------------------------
 
@@ -335,6 +341,23 @@ if (taskPath) {
 } else {
   prompt += `\n\n---\n\n# This dispatch\n\n${identity}\n`;
 }
+
+prompt += `\n\n## Mathematical context continuity\n\nRead exact task paths first. Search current owned artifacts before historical runs;
+exclude dispatch logs from routine content searches. Fetch complete relevant source
+sections and dependency statements, using bounded output chunks. A truncated result
+is not evidence of absence; continue reading until the required argument is complete.
+Do not dump entire ledgers, source books, or repository-wide search results into context.
+
+For writing roles, after each completed item update the task-authorized notes or report with the
+current item IDs, exact claim and conventions, source paths/URLs and locators,
+dependency IDs, decisions, validation results, unresolved obligations, and next action.
+Automatic compaction can occur mid-proof. After compaction or handoff, reread the
+current item, relevant dependency statements, source passages, and these obligations
+before continuing a proof or repair. A summary is a navigation aid, never a substitute
+for mathematical evidence. If a hypothesis or source qualification cannot be
+recovered, record the blocker rather than infer it. Preserve all independent reviews
+and exact-hash gates. Never mark an unfinished obligation complete to save context.
+${spec.sandbox === 'read-only' ? 'This role is read-only: do not write checkpoints or extra files. Use the task-provided durable evidence and reread it after compaction; return only the required response format.' : 'Checkpoint only in the task-authorized notes/report; do not create transcripts or alter other owners’ artifacts.'}\n`;
 
 // Render the complete assembled prompt, including the task. An EMPTY value
 // means "not pinned", never "erase the placeholder": the engine passes
@@ -516,6 +539,7 @@ const buildCodexResume = (sessionHome) => [
     '-c', `sandbox_mode="${spec.sandbox}"`,
     '-c', `model_reasoning_effort="${spec.effort ?? 'xhigh'}"`,
     '-c', `model_context_window=${spec.contextWindow}`,
+    ...compactionArgs,
     ...(spec.web ? ['-c', 'tools.web_search=true'] : []),
     ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
     ...(outputSchemaPath ? ['--output-schema', resolveFile(outputSchemaPath)] : []),
@@ -542,6 +566,7 @@ const buildCodex = (temporaryHome) => [
     // 1,000,000-token window explicitly or the lane silently runs at the
     // built-in default.
     '-c', `model_context_window=${spec.contextWindow}`,
+    ...compactionArgs,
     // Passed explicitly, never inherited. The temporary CODEX_HOME carries only
     // auth.json, and wave 1b's defect was exactly an implicitly inherited
     // setting that turned out not to be inherited. A source-review role that cannot
@@ -567,6 +592,7 @@ if (dryRun) {
     model: spec.model, profile: spec.profile, sandbox: spec.sandbox,
     requested_effort: spec.requestedEffort,
     provider_effort: spec.effort ?? 'xhigh', context_window: spec.contextWindow,
+    auto_compact_token_limit: spec.autoCompactTokenLimit,
     read_only_enforcement: spec.sandbox !== 'read-only' ? null
       : 'process: --sandbox read-only',
     lane_cap: spec.cap, timeout_s: timeoutSec,
@@ -758,6 +784,8 @@ const result = await new Promise((resolve) => {
 release();
 persistRotatedCodexAuth();
 const completedSessionId = resumeSession ?? codexSessionId(result);
+const rolloutPath = findRollout(persistentHome ?? temporaryHome, completedSessionId);
+const tokenUsage = await readDispatchUsage(rolloutPath, started.toISOString());
 
 const attestContext = () => {
   if (!spec.attestContext) return null;
@@ -774,18 +802,7 @@ const attestContext = () => {
     observed_context_window: null,
   };
   if (!home || !completedSessionId) return { ...attestation, error: 'session metadata missing' };
-  const pending = [join(home, 'sessions')];
-  let rollout = null;
-  while (pending.length && !rollout) {
-    const dir = pending.pop();
-    let entries;
-    try { entries = readdirSync(dir, { withFileTypes: true }); } catch { continue; }
-    for (const entry of entries) {
-      const path = join(dir, entry.name);
-      if (entry.isDirectory()) pending.push(path);
-      else if (entry.name.endsWith(`-${completedSessionId}.jsonl`)) { rollout = path; break; }
-    }
-  }
+  const rollout = rolloutPath;
   if (!rollout) return { ...attestation, error: 'rollout metadata missing' };
   let provider = null;
   let model = null;
@@ -862,6 +879,8 @@ const record = {
   profile: spec.profile, requested_effort: spec.requestedEffort,
   provider_effort: spec.effort ?? 'xhigh', context_window: spec.contextWindow,
   context_attestation: contextAttestation,
+  auto_compact_token_limit: spec.autoCompactTokenLimit,
+  token_usage: tokenUsage,
   sandbox: spec.sandbox,
   started_at: started.toISOString(), ended_at: ended.toISOString(), ms: ended - started,
   exit_code: result.code, timed_out: result.timedOut,

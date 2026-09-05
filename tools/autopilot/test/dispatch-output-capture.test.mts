@@ -13,6 +13,16 @@ test('a noisy agent still produces a bounded log and successful receipt', () => 
   const run = `dispatch-output-${process.pid}-${Date.now()}`;
   const outDir = join(REPO, 'research', `${run}-dispatch`);
   writeFileSync(fakeCodex, `#!/usr/bin/env node
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+const sessions = join(process.env.CODEX_HOME, 'sessions');
+mkdirSync(sessions);
+writeFileSync(join(sessions, 'rollout-11111111-1111-1111-1111-111111111111.jsonl'), JSON.stringify({
+  timestamp: new Date().toISOString(), type: 'event_msg', payload: { type: 'token_count', info: {
+    total_token_usage: { input_tokens: 500000, cached_input_tokens: 400000, output_tokens: 9000 },
+    last_token_usage: { input_tokens: 200000 }
+  } }
+}) + '\\n');
 process.stdin.resume();
 process.stderr.write('session id: 11111111-1111-1111-1111-111111111111\\n');
 process.stderr.write('s'.repeat(3 * 1024 * 1024));
@@ -38,6 +48,14 @@ process.stdout.write('\\nFINAL STDOUT\\n');
     const receipt = JSON.parse(readFileSync(join(outDir, 'mechanic-noisy.attempt-1.result.json'), 'utf8'));
     assert.equal(receipt.ok, true);
     assert.equal(receipt.session_id, '11111111-1111-1111-1111-111111111111');
+    assert.equal(receipt.token_usage.input_tokens, 500000);
+    assert.equal(receipt.token_usage.cached_input_tokens, 400000);
+    assert.equal(receipt.token_usage.max_request_input_tokens, 200000);
+    assert.equal(receipt.token_usage.requests_over_272k, 0,
+      'cumulative input is not the surcharge threshold');
+    const prompt = readFileSync(receipt.prompt, 'utf8');
+    assert.match(prompt, /After compaction or handoff, reread/);
+    assert.match(prompt, /unfinished obligation/);
 
     const log = readFileSync(join(outDir, 'mechanic-noisy.attempt-1.log'), 'utf8');
     assert.match(log, /dispatch omitted \d+ characters from the middle of this stream/);

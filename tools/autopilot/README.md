@@ -213,7 +213,7 @@ Step 8 keeps its durable ceiling of two frozen judge contexts per item. If the
 second rejection is confirmed fatal, the owning group Alpha gets the complete
 second adjudication-and-repair pass. Once that repaired text is current but the
 judge budget is exhausted, `8-rejudge` dispatches one fresh `final-adjudicator`
-per affected group. That role is fixed to Sol at max reasoning with web search;
+per affected group. That role is fixed to Sol at xhigh reasoning with web search;
 its generated frozen queue enforces one-item-at-a-time work by refusing to
 record item N before every predecessor. Each FA independently accepts Alpha's
 repair or repairs it, follows library conventions, and records authoritative
@@ -222,6 +222,15 @@ terminal receipt can close judge coverage but cannot create a judge verdict or
 pass stamp.
 
 ## Portability
+
+Dispatch receipts include observed token usage and request peaks extracted before
+temporary session cleanup. Agents compact at 200k total active-context tokens,
+except Step-8 final adjudicators, whose model defaults remain in effect. Prompts
+require durable mathematical checkpoints for writing roles and evidence rereads
+after compaction; read-only roles preserve their no-write boundary. This threshold
+does not guarantee requests remain below 272k. Step-8 repair envelopes filter
+unrelated diagnostics while retaining full shared evidence on disk. See
+`WORKFLOW.md` for accounting limits and the continuity protocol.
 
 The platform-specific surface is **one config value**, an argv array:
 

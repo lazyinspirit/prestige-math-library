@@ -107,7 +107,7 @@ const designDocs = readdirSync(R('research'))
       const m = /^(#{2,4})\s+(.*)$/.exec(line);
       if (m) headings.push({ line: i + 1, text: m[2].trim(), norm: normalize(m[2]) });
     });
-    return { file: f, lines, headings };
+    return { file: `research/${f}`, lines, headings };
   });
 
 function designFor(page) {

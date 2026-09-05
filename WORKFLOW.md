@@ -182,6 +182,24 @@ stream. Long or noisy agent runs therefore retain startup metadata and final
 diagnostics without risking a V8 string-limit crash before their result receipt
 is written; an explicit marker records any omitted middle output.
 
+Every agent uses a 200,000-token automatic compaction threshold counting total
+active context, except Step-8 `final-adjudicator`, which retains the model's
+default compaction behavior. Fresh and resumed dispatches use the same policy;
+the nominal model window is unchanged. Stateless judges also receive the setting.
+This is a trigger, not a hard request-size ceiling: a large tool result can
+overshoot it. Agents read bounded chunks without skipping required mathematics,
+checkpoint completed items in authorized artifacts, and reread the current proof,
+dependencies, source passages, and unresolved obligations after compaction.
+Read-only roles never write checkpoints; their durable inputs remain authoritative.
+
+Before deleting an isolated session home, the dispatcher extracts token counters
+into `token_usage`: dispatch input, cached-input (a subset of input), output,
+observed request count, peak request input, requests above 272k, and compactions.
+Resumed sessions subtract the earlier session baseline; repeated rate-limit token
+events are deduplicated. Missing telemetry is reported as unavailable, not zero.
+These observed counters do not establish actual billing or include unreported
+requests. No transcript is retained by this extraction.
+
 ```bash
 node tools/dispatch.mjs --check-read-only
 ```
@@ -272,6 +290,11 @@ fatal authorizes a Step-8 content edit; the other outcomes close without
 content, contract, impact, or judge changes. An obvious published-item error
 uses its separate evidence-bound repair path and needs a targeted current
 verdict.
+
+Step-8 repair prompts carry complete diagnostic records relevant to their owner,
+including cross-owner references and ambiguous records. One shared evidence file
+retains the full battery output and assignment map; each prompt identifies its
+path and hash. Filtering prompt context never changes routing or whole-level gates.
 
 `8-preflight` closes non-judge integrity before paid rejudgment. `8-rejudge`
 targets only repaired or stale items and closes only with no stale verdict,
