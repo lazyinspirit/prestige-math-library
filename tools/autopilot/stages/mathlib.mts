@@ -26,7 +26,7 @@ import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { hasLegacyStep6Cutover, step6Stages } from './mathlib.step6.mts';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 
-const GPT54_HIGH_1M = MODEL_PROFILE_NAMES.gpt54High1m;
+const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
 const TERRA_XHIGH = MODEL_PROFILE_NAMES.terraXhigh;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
@@ -1982,7 +1982,7 @@ export const stages = [
     id: '5-author',
     label: 'authoring',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'authoring'
-      ? GPT54_HIGH_1M
+      ? TERRA_HIGH
       : undefined,
     // THE LARGEST WIN. A batch whose authoring is finished starts its reader
     // while the other batches are still being written: authors run to six hours
@@ -3724,7 +3724,7 @@ export const stages = [
 // fall back to their role's ordinary lane. Tool plans remain deterministic.
 for (const stage of stages) {
   if (/^(?:9|10)-/.test(stage.id)) {
-    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : GPT54_HIGH_1M;
+    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : TERRA_HIGH;
   }
 }
 

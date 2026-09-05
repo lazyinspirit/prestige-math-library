@@ -18,11 +18,11 @@ import {
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 
-test('every registered model is a GPT model on the Codex runner', () => {
+test('every registered model names its Codex provider family', () => {
   for (const model of Object.values(MODELS)) {
-    assert.match(model.id, /^gpt-/);
     assert.equal(model.runner, 'codex');
-    assert.equal(model.family, 'openai');
+    if (model.family === 'openai') assert.match(model.id, /^gpt-/);
+    else assert.equal(model.family, 'deepseek');
   }
 });
 
@@ -55,10 +55,10 @@ test('known judges exactly cover configured lineups', () => {
   assert.deepEqual([...KNOWN_JUDGES], [...new Set(Object.values(JUDGE_LINEUPS).flat())]);
 });
 
-test('judge requests xhigh reasoning and the one-million-token window', () => {
+test('judge requests xhigh reasoning and Terra\'s configured context window', () => {
   const source = readFileSync(join(REPO, 'tools/judge.mts'), 'utf8');
   assert.match(source, /model_reasoning_effort="xhigh"/);
-  assert.match(source, /model_context_window=1000000/);
+  assert.match(source, /model_context_window=\$\{JUDGE_CONTEXT_WINDOW\}/);
 });
 
 test('the Alpha brief derives model identity from the registry', () => {

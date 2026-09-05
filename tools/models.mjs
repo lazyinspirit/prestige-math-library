@@ -12,11 +12,6 @@ export const MODELS = Object.freeze({
     runner: 'codex',
     family: 'openai',
   }),
-  gpt54: Object.freeze({
-    id: process.env.GPT54_MODEL ?? 'gpt-5.4',
-    runner: 'codex',
-    family: 'openai',
-  }),
   luna: Object.freeze({
     id: process.env.LUNA_MODEL ?? 'gpt-5.6-luna',
     runner: 'codex',
@@ -35,8 +30,7 @@ export const MODELS = Object.freeze({
 // the owner's `xhigh` terminology and the dispatcher records both spellings.
 export const MODEL_PROFILE_NAMES = Object.freeze({
   deepseekXhigh1m: 'deepseek-v4-pro-xhigh-1m',
-  gpt54High1m: 'gpt-5.4-high-1m',
-  gpt54Xhigh1m: 'gpt-5.4-xhigh-1m',
+  terraHigh: 'gpt-5.6-terra-high',
   terraXhigh: 'gpt-5.6-terra-xhigh',
 });
 
@@ -52,23 +46,14 @@ export const MODEL_PROFILES = Object.freeze({
     effectiveContextFloor: 995_000,
     attestContext: true,
   }),
-  [MODEL_PROFILE_NAMES.gpt54Xhigh1m]: Object.freeze({
-    model: MODELS.gpt54.id,
-    runner: MODELS.gpt54.runner,
-    family: MODELS.gpt54.family,
-    provider: 'openai',
-    effort: 'xhigh',
-    requestedEffort: 'xhigh',
-    contextWindow: 1_000_000,
-  }),
-  [MODEL_PROFILE_NAMES.gpt54High1m]: Object.freeze({
-    model: MODELS.gpt54.id,
-    runner: MODELS.gpt54.runner,
-    family: MODELS.gpt54.family,
+  [MODEL_PROFILE_NAMES.terraHigh]: Object.freeze({
+    model: MODELS.terra.id,
+    runner: MODELS.terra.runner,
+    family: MODELS.terra.family,
     provider: 'openai',
     effort: 'high',
     requestedEffort: 'high',
-    contextWindow: 1_000_000,
+    contextWindow: 872_000,
   }),
   [MODEL_PROFILE_NAMES.terraXhigh]: Object.freeze({
     model: MODELS.terra.id,
@@ -82,8 +67,8 @@ export const MODEL_PROFILES = Object.freeze({
 });
 
 export const LANES = Object.freeze({
-  agentic: 'gpt54',
-  secondary: 'gpt54',
+  agentic: 'terra',
+  secondary: 'terra',
   partition: 'terra',
   adjudication: 'sol',
 });

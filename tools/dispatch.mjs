@@ -92,7 +92,7 @@ const ROLES = Object.freeze({
   // `alpha-adjudicate` — step 8 ONLY (owner, 2026-08-24). gpt-5.6-sol at xhigh,
   // the SAME adjudicator every past run used, so frontier-18's confirmed_fatal
   // counts stay comparable with frontiers 15-17 even though its authors are
-  // gpt-5.4.
+  // the pre-migration Alpha model.
   //
   // Step 8 is partitioned by the same group assignment, so this cap tracks the
   // nine group-Alpha lanes. A lower value would silently serialize disjoint

@@ -8,7 +8,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { tsxLoader } from './paths.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
-import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
+import { MODELS, resolveLineup } from './models.mjs';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { createSlotPool } from './slots.mjs';
 
@@ -49,9 +49,7 @@ if (limit !== Infinity && (!Number.isInteger(limit) || limit < 1)) {
   throw new Error('--limit must be a positive integer');
 }
 
-const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
-const supportedModels = JUDGE_LINEUPS[lineupName];
-if (!supportedModels) throw new Error(`unknown JUDGE_LINEUP ${lineupName}`);
+const { name: lineupName, models: supportedModels } = resolveLineup();
 const models = modelsArg
   ? [...new Set(modelsArg.split(',').map((value) => value.trim()).filter(Boolean))]
   : [...supportedModels];
