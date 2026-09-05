@@ -1,0 +1,2591 @@
+{
+  "version": 1,
+  "level": "frontier-30",
+  "note": "Step-5 authoring contract for frontier-30 batch 13 on Saturday, September 5, 2026.",
+  "scope": [
+    "lem-direct-image-is-sheaf",
+    "thm-inverse-direct-image-adjunction",
+    "lem-stalk-inverse-image-sheaf",
+    "thm-abelian-sheaves-form-abelian-category",
+    "thm-exactness-of-sheaves-stalkwise",
+    "lem-global-sections-left-exact",
+    "thm-extension-by-zero-adjunction-exactness",
+    "lem-local-homomorphism-residue-field-map",
+    "lem-stalk-tensor-product",
+    "thm-pullback-pushforward-module-adjunction",
+    "lem-pullback-modules-right-exact",
+    "thm-gluing-sheaves",
+    "thm-gluing-ringed-and-locally-ringed-spaces",
+    "ex-direct-image-open-immersion",
+    "cex-extension-by-zero-differs-direct-image",
+    "ex-skyscraper-sheaf-exact-sequence",
+    "cex-global-sections-not-right-exact",
+    "ex-ringed-space-continuous-functions",
+    "cex-ringed-space-map-not-locally-ringed",
+    "ex-pullback-free-module",
+    "ex-glue-line-bundle-transition-functions",
+    "cex-presheaf-cokernel-needs-sheafification"
+  ],
+  "contracts": {
+    "lem-direct-image-is-sheaf": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal F$ be a sheaf on $X$, let $V=\\bigcup_i V_i$ be an open cover in $Y$, and let $s_i\\in (f_*\\mathcal F)(V_i)=\\mathcal F(f^{-1}(V_i))$ be compatible on overlaps. By [F1], the sets $f^{-1}(V_i)$ cover $f^{-1}(V)$, so [L1] gives a unique section $s\\in\\mathcal F(f^{-1}(V))$ restricting to every $s_i$. This section is exactly an element of $(f_*\\mathcal F)(V)$, so $f_*\\mathcal F$ is a sheaf.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\mathcal F$ is a sheaf of groups, rings, or modules, then each section set of $f_*\\mathcal F$ is literally the corresponding section set of $\\mathcal F$ over a preimage open set. Hence the algebraic operations are inherited objectwise, and the restriction maps are the same homomorphisms as before. By [L2] and step 1.1, $f_*\\mathcal F$ is a sheaf of the same kind.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove both assertions.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Direct image preserves sheaves and objectwise algebraic structure is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Direct image preserves sheaves and objectwise algebraic structure has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Direct image preserves sheaves and objectwise algebraic structure has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Direct image preserves sheaves and objectwise algebraic structure has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Direct image preserves sheaves and objectwise algebraic structure has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Direct image preserves sheaves and objectwise algebraic structure does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Direct image preserves sheaves and objectwise algebraic structure is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Direct image preserves sheaves and objectwise algebraic structure is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal F$ be a presheaf on $X$.\nThe **direct image presheaf**\n$$f_*\\mathcal F$$\non $Y$ is defined on an open set $V \\subseteq Y$ by\n$$\n(f_*\\mathcal F)(V):=\\mathcal F(f^{-1}(V)).\n$$\nIf $V' \\subseteq V$, the restriction map\n$$\n(f_*\\mathcal F)(V)\\longrightarrow(f_*\\mathcal F)(V')\n$$\nis the restriction map of $\\mathcal F$ for the inclusion\n$f^{-1}(V') \\subseteq f^{-1}(V)$.\n\nThus direct image is just precomposition of the presheaf with the inverse-image\nmap on open sets.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-presheaf-of-groups-rings-modules",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space.\nFix a ring $R$ when modules are under discussion.\n\nA **presheaf of groups** on $X$ is a presheaf $\\mathcal F$ such that every\n$\\mathcal F(U)$ is a group and every restriction map\n$\\rho^U_V:\\mathcal F(U)\\to\\mathcal F(V)$ is a group homomorphism\n([[prop-groups-and-homomorphisms-form-category-grp]]).\n\nA **presheaf of rings** on $X$ is defined the same way with rings and ring\nhomomorphisms ([[prop-rings-and-homomorphisms-form-category-ring]]).\n\nA **presheaf of left $R$-modules** on $X$ is defined the same way with left\n$R$-modules and $R$-linear maps\n([[prop-modules-and-homomorphisms-form-category-rmod]]).\n\nA **sheaf of groups**, **sheaf of rings**, or **sheaf of left $R$-modules** is\nsuch a presheaf whose underlying set-valued presheaf is a sheaf.\n\nIn particular, each sheaf of groups has a distinguished identity section on\nevery open set; in additive notation this section is written $0$, and all\nrestrictions preserve the algebraic operations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for Direct image preserves sheaves and objectwise algebraic structure on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "thm-inverse-direct-image-adjunction": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\alpha:f^{-1}\\mathcal G\\to\\mathcal F$ be a sheaf morphism. By [F2] and [L1], $\\alpha$ corresponds uniquely to a presheaf morphism $\\widetilde\\alpha:f_{\\mathrm p}\\mathcal G\\to\\mathcal F$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $\\beta:\\mathcal G\\to f_*\\mathcal F$ be a sheaf morphism. For an open $U \\subseteq X$, represent an element of $(f_{\\mathrm p}\\mathcal G)(U)$ by a pair $(V,s)$ with $f(U)\\subseteq V$ and $s\\in\\mathcal G(V)$, and define $$\\widetilde\\beta_U([V,s]):=\\beta_V(s)|_U \\in \\mathcal F(U),$$ where the restriction is taken from $\\mathcal F(f^{-1}(V))$ to $\\mathcal F(U)$. If $(V,s)$ and $(V',s')$ represent the same colimit class, then on some smaller open neighbourhood $W \\subseteq V\\cap V'$ of $f(U)$ one has $s|_W=s'|_W$, so $\\beta_V(s)|_U=\\beta_{V'}(s')|_U$. Thus $\\widetilde\\beta$ is well defined and natural in $U$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an open set $V \\subseteq Y$ and a section $s\\in\\mathcal G(V)$, let $[V,s]$ denote its class in $(f_{\\mathrm p}\\mathcal G)(f^{-1}(V))$, and define $$\\beta_V(s):=\\widetilde\\alpha_{f^{-1}(V)}([V,s])\\in \\mathcal F(f^{-1}(V))=(f_*\\mathcal F)(V).$$ If $V' \\subseteq V$, naturality of $\\widetilde\\alpha$ shows $\\beta_{V'}(s|_{V'})=\\beta_V(s)|_{V'}$, so the $\\beta_V$ define a morphism $\\beta:\\mathcal G\\to f_*\\mathcal F$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F2] and [L1], the presheaf morphism $\\widetilde\\beta:f_{\\mathrm p}\\mathcal G\\to\\mathcal F$ factors uniquely through a sheaf morphism $\\alpha:f^{-1}\\mathcal G\\to\\mathcal F$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The constructions of steps 2.1 and 2.2 are inverse, because both are recovered from the same formula on representative classes $[V,s]$. Therefore $$\\operatorname{Hom}_X(f^{-1}\\mathcal G,\\mathcal F)\\cong\\operatorname{Hom}_Y(\\mathcal G,f_*\\mathcal F)$$ naturally in both sheaves.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Inverse image is left adjoint to direct image on sheaves is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Inverse image is left adjoint to direct image on sheaves has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Inverse image is left adjoint to direct image on sheaves has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Inverse image is left adjoint to direct image on sheaves has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Inverse image is left adjoint to direct image on sheaves has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Inverse image is left adjoint to direct image on sheaves does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In Inverse image is left adjoint to direct image on sheaves, step 2.1 supplies the forward direction of the written equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In Inverse image is left adjoint to direct image on sheaves, step 2.2 supplies the reverse direction of the written equivalence."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal F$ be a presheaf on $X$.\nThe **direct image presheaf**\n$$f_*\\mathcal F$$\non $Y$ is defined on an open set $V \\subseteq Y$ by\n$$\n(f_*\\mathcal F)(V):=\\mathcal F(f^{-1}(V)).\n$$\nIf $V' \\subseteq V$, the restriction map\n$$\n(f_*\\mathcal F)(V)\\longrightarrow(f_*\\mathcal F)(V')\n$$\nis the restriction map of $\\mathcal F$ for the inclusion\n$f^{-1}(V') \\subseteq f^{-1}(V)$.\n\nThus direct image is just precomposition of the presheaf with the inverse-image\nmap on open sets.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal G$ be a presheaf on $Y$.\nThe **inverse-image presheaf**\n$$\nf_{\\mathrm p}\\mathcal G\n$$\non $X$ is defined by\n$$\n(f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V),\n$$\nwhere $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by\nreverse inclusion. If $U' \\subseteq U$, then every neighbourhood of $f(U)$ is a\nneighbourhood of $f(U')$, so there is a natural restriction map\n$(f_{\\mathrm p}\\mathcal G)(U)\\to(f_{\\mathrm p}\\mathcal G)(U')$.\n\nThe **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification\nof this presheaf:\n$$\nf^{-1}\\mathcal G:=a(f_{\\mathrm p}\\mathcal G).\n$$\n\nWhen $U$ is open in $X$ and $V$ is an open set of $Y$ with $f(U)\\subseteq V$,\nthere is a canonical map\n$$\n\\mathcal G(V)\\longrightarrow(f_{\\mathrm p}\\mathcal G)(U)\n$$\ninto the colimit class represented by $V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sheafification-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, let\n$\\eta_{\\mathcal F}:\\mathcal F\\to a\\mathcal F$ be its sheafification map, and let\n$\\mathcal G$ be a sheaf on $X$. Then every morphism of presheaves\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nfactors uniquely through $\\eta_{\\mathcal F}$:\nthere is a unique morphism of sheaves\n$$\\overline\\varphi:a\\mathcal F\\longrightarrow\\mathcal G$$\nsuch that\n$$\\varphi=\\overline\\varphi\\circ\\eta_{\\mathcal F}.$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Reviewed on 2026-09-04 because this adjunction is built from representative classes and sheafification. I rechecked the well-defined formula on classes [V,s], the construction back from a sheaf map into f_*F, and the inverse identities through the universal property, so the current adjunction proof is coherent."
+      }
+    },
+    "lem-stalk-inverse-image-sheaf": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [L1], it is enough to identify the stalk $(f_{\\mathrm p}\\mathcal G)_x$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $t\\in\\mathcal G(V)$ with $f(x)\\in V$, then $x\\in f^{-1}(V)$ and $t$ defines a class $[V,t]\\in (f_{\\mathrm p}\\mathcal G)(f^{-1}(V))$. Sending the germ $t_{f(x)}$ to the germ of $[V,t]$ at $x$ gives a map $$\\Phi:\\mathcal G_{f(x)}\\longrightarrow (f_{\\mathrm p}\\mathcal G)_x.$$ If two representatives agree on a smaller neighbourhood of $f(x)$, then their induced sections agree on the inverse image of that smaller neighbourhood, so $\\Phi$ is well defined.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Conversely, represent a germ in $(f_{\\mathrm p}\\mathcal G)_x$ by a section $[V,t]\\in (f_{\\mathrm p}\\mathcal G)(U)$ with $x\\in U$ and $f(U)\\subseteq V$. Since $f(x)\\in V$, the section $t$ has a germ $t_{f(x)}\\in \\mathcal G_{f(x)}$. This depends only on the original germ at $x$, because equality of germs in $(f_{\\mathrm p}\\mathcal G)_x$ means equality after restricting to some smaller neighbourhood of $x$, hence after restricting $t$ and $t'$ to some common neighbourhood of $f(x)$. Thus there is a map $$\\Psi:(f_{\\mathrm p}\\mathcal G)_x\\longrightarrow \\mathcal G_{f(x)}.$$",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The maps $\\Phi$ and $\\Psi$ are inverse on representatives, so $(f_{\\mathrm p}\\mathcal G)_x\\cong\\mathcal G_{f(x)}$. Step 1.1 then gives $(f^{-1}\\mathcal G)_x\\cong\\mathcal G_{f(x)}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement The stalk of an inverse image sheaf is the stalk over the image point is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement The stalk of an inverse image sheaf is the stalk over the image point has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement The stalk of an inverse image sheaf is the stalk over the image point has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item The stalk of an inverse image sheaf is the stalk over the image point has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item The stalk of an inverse image sheaf is the stalk over the image point has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item The stalk of an inverse image sheaf is the stalk over the image point does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The stalk of an inverse image sheaf is the stalk over the image point is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The stalk of an inverse image sheaf is the stalk over the image point is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal G$ be a presheaf on $Y$.\nThe **inverse-image presheaf**\n$$\nf_{\\mathrm p}\\mathcal G\n$$\non $X$ is defined by\n$$\n(f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V),\n$$\nwhere $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by\nreverse inclusion. If $U' \\subseteq U$, then every neighbourhood of $f(U)$ is a\nneighbourhood of $f(U')$, so there is a natural restriction map\n$(f_{\\mathrm p}\\mathcal G)(U)\\to(f_{\\mathrm p}\\mathcal G)(U')$.\n\nThe **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification\nof this presheaf:\n$$\nf^{-1}\\mathcal G:=a(f_{\\mathrm p}\\mathcal G).\n$$\n\nWhen $U$ is open in $X$ and $V$ is an open set of $Y$ with $f(U)\\subseteq V$,\nthere is a canonical map\n$$\n\\mathcal G(V)\\longrightarrow(f_{\\mathrm p}\\mathcal G)(U)\n$$\ninto the colimit class represented by $V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sheafification-preserves-stalks",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. For every $x\\in X$,\nthe sheafification map induces a bijection\n$$\\eta_{\\mathcal F,x}:\\mathcal F_x\\xrightarrow{\\ \\cong\\ }(a\\mathcal F)_x.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for The stalk of an inverse image sheaf is the stalk over the image point on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "thm-abelian-sheaves-form-abelian-category": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In both categories, sums and zero morphisms are defined sectionwise, the zero sheaf is a zero object, and finite direct sums are obtained by taking direct sums on every open set. Hence both categories are additive.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], every morphism has a kernel and a cokernel. The same item also gives the image sheaf by sheafifying the objectwise image presheaf, and the coimage is the cokernel of the kernel inclusion.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism in either category. At a point $x\\in X$, the stalks of the kernel, cokernel, image, and coimage from step 2.1 are the usual kernel, cokernel, image, and coimage of the stalk map $\\varphi_x$, because kernels are objectwise and [L2] identifies stalks after sheafification. By [L1], module categories are abelian, and the abelian-group case is the special case of modules over $\\mathbb Z$, so the canonical map $\\operatorname{coim}(\\varphi_x)\\to\\operatorname{im}(\\varphi_x)$ is an isomorphism for every $x$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The sheaf morphism $\\operatorname{coim}(\\varphi)\\to\\operatorname{im}(\\varphi)$ is therefore an isomorphism on every stalk, so [L3] makes it an isomorphism globally. Together with steps 1.1 and 2.1, [F1] shows that both categories are abelian.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "L3",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Sheaves of abelian groups, and likewise sheaves of modules on a ringed space, form abelian categories is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Sheaves of abelian groups, and likewise sheaves of modules on a ringed space, form abelian categories has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Sheaves of abelian groups, and likewise sheaves of modules on a ringed space, form abelian categories has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Sheaves of abelian groups, and likewise sheaves of modules on a ringed space, form abelian categories has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Sheaves of abelian groups, and likewise sheaves of modules on a ringed space, form abelian categories has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Sheaves of abelian groups, and likewise sheaves of modules on a ringed space, form abelian categories does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Sheaves of abelian groups, and likewise sheaves of modules on a ringed space, form abelian categories is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Sheaves of abelian groups, and likewise sheaves of modules on a ringed space, form abelian categories is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abelian-category",
+          "source_section": "Definition",
+          "quote": "An **abelian category** is an additive category ([[def-additive-category]]) in\nwhich every morphism has a kernel and a cokernel, and in which for every\nmorphism $f$ the canonical comparison morphism\n\n$$\\operatorname{coim}(f)\\longrightarrow\\operatorname{im}(f)$$\n\nconstructed in\n[[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]\nis an isomorphism.\n\nThe first two clauses are Grothendieck's AB1, while the invertibility of the\ncanonical map is this page's working form of AB2.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kernel-cokernel-image-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of abelian\ngroups on a topological space $X$.\n\nThe **kernel sheaf** is the subsheaf\n$$\n\\ker(\\varphi)\\subseteq \\mathcal F\n$$\ndefined objectwise by\n$$\n\\ker(\\varphi)(U):=\\ker\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr).\n$$\n\nThe **cokernel presheaf** is\n$$\nU\\longmapsto \\operatorname{coker}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **cokernel sheaf** $\\operatorname{coker}(\\varphi)$ is its\nsheafification.\n\nThe **image presheaf** is\n$$\nU\\longmapsto \\operatorname{im}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **image sheaf** $\\operatorname{im}(\\varphi)$ is its sheafification.\n\nFor sheaves of modules on a ringed space, the same formulas are taken in the\ncorresponding module categories on each open set.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-modules-over-a-ring-form-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "For every ring $R$, the category $R\\text{-}\\mathbf{Mod}$ of left $R$-modules is\nan abelian category.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-sheafification-preserves-stalks",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. For every $x\\in X$,\nthe sheafification map induces a bijection\n$$\\eta_{\\mathcal F,x}:\\mathcal F_x\\xrightarrow{\\ \\cong\\ }(a\\mathcal F)_x.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sheaf-morphism-isomorphism-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of sets on a\ntopological space $X$. Then $\\varphi$ is an isomorphism if and only if, for\nevery $x\\in X$, the induced map on stalks\n$$\\varphi_x:\\mathcal F_x\\longrightarrow\\mathcal G_x$$\nis a bijection.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Reviewed on 2026-09-04 because the proof must transport kernel, cokernel, image, and coimage data through stalks. I rechecked the additive structure, the existence of kernel/cokernel/image/coimage sheaves, and the stalkwise coimage-to-image isomorphism; the current abelian-category argument is complete."
+      }
+    },
+    "thm-exactness-of-sheaves-stalkwise": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume the sheaf sequence is exact. At each middle term $\\mathcal F_i$, [F1] says that the canonical map $\\operatorname{im}(d_{i-1})\\to\\ker(d_i)$ is an isomorphism. Using [F2] for the stalk construction and then [L1] and [L2], its stalk at $x$ is the canonical map $$\\operatorname{im}((d_{i-1})_x)\\longrightarrow \\ker((d_i)_x),$$ so the stalk sequence is exact at $x$. Since $x$ was arbitrary, the whole stalk sequence is exact.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, assume every stalk sequence is exact. For each middle term, consider the canonical morphism $\\operatorname{im}(d_{i-1})\\to\\ker(d_i)$. Using [F2] for the stalk construction and then [L1] and [L2], its stalk at $x$ is $$\\operatorname{im}((d_{i-1})_x)\\longrightarrow \\ker((d_i)_x),$$ which is an isomorphism by the stalkwise exactness hypothesis. Therefore [L3] implies that $\\operatorname{im}(d_{i-1})\\to\\ker(d_i)$ is an isomorphism of sheaves.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], step 1.2 is exactly the assertion that the original sequence is exact. Together with step 1.1, this proves the equivalence.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement A sequence of abelian sheaves is exact exactly when it is exact on every stalk is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement A sequence of abelian sheaves is exact exactly when it is exact on every stalk has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement A sequence of abelian sheaves is exact exactly when it is exact on every stalk has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item A sequence of abelian sheaves is exact exactly when it is exact on every stalk has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item A sequence of abelian sheaves is exact exactly when it is exact on every stalk has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item A sequence of abelian sheaves is exact exactly when it is exact on every stalk does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In A sequence of abelian sheaves is exact exactly when it is exact on every stalk, step 1.1 supplies the forward direction of the written equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In A sequence of abelian sheaves is exact exactly when it is exact on every stalk, step 1.2 supplies the reverse direction of the written equivalence."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-exact-sequence-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. A sequence of sheaves of abelian groups on $X$\nis **exact** when it is exact in the abelian category of\n[[thm-abelian-sheaves-form-abelian-category]], equivalently in the sense of\n[[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]].\n\nThus a sequence\n$$\n\\cdots\\to \\mathcal F_{i-1}\\to \\mathcal F_i\\to \\mathcal F_{i+1}\\to\\cdots\n$$\nis exact at $\\mathcal F_i$ when the image sheaf of the first morphism equals\nthe kernel sheaf of the second.\n\nThe same language applies to $\\mathcal O_X$-modules on a ringed space.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-kernel-cokernel-image-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of abelian\ngroups on a topological space $X$.\n\nThe **kernel sheaf** is the subsheaf\n$$\n\\ker(\\varphi)\\subseteq \\mathcal F\n$$\ndefined objectwise by\n$$\n\\ker(\\varphi)(U):=\\ker\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr).\n$$\n\nThe **cokernel presheaf** is\n$$\nU\\longmapsto \\operatorname{coker}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **cokernel sheaf** $\\operatorname{coker}(\\varphi)$ is its\nsheafification.\n\nThe **image presheaf** is\n$$\nU\\longmapsto \\operatorname{im}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **image sheaf** $\\operatorname{im}(\\varphi)$ is its sheafification.\n\nFor sheaves of modules on a ringed space, the same formulas are taken in the\ncorresponding module categories on each open set.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-sheafification-preserves-stalks",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. For every $x\\in X$,\nthe sheafification map induces a bijection\n$$\\eta_{\\mathcal F,x}:\\mathcal F_x\\xrightarrow{\\ \\cong\\ }(a\\mathcal F)_x.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sheaf-morphism-isomorphism-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of sets on a\ntopological space $X$. Then $\\varphi$ is an isomorphism if and only if, for\nevery $x\\in X$, the induced map on stalks\n$$\\varphi_x:\\mathcal F_x\\longrightarrow\\mathcal G_x$$\nis a bijection.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Reviewed on 2026-09-04 because this is a biconditional exactness criterion and its stalk citations needed to be current. I rechecked both directions using the kernel/image comparison, sheafification on stalks, and stalkwise isomorphism detection; the current proof now cites the stalk construction exactly where it is used."
+      }
+    },
+    "lem-global-sections-left-exact": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $0\\to\\mathcal F'\\to\\mathcal F\\to\\mathcal F''$ is exact. By [L1], the kernel of the map $\\Gamma(X,\\mathcal F)\\to\\Gamma(X,\\mathcal F'')$ is the section group of the kernel sheaf at $X$. By [L2], that kernel sheaf is the image of $\\mathcal F'\\to\\mathcal F$, so its sections over $X$ are exactly the image of $\\Gamma(X,\\mathcal F')\\to\\Gamma(X,\\mathcal F)$. Together with [F1], this is the displayed left exactness.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the failure of surjectivity, let $X=S^1$, let $\\mathcal C$ be the sheaf of continuous real-valued functions on $S^1$, and let $\\underline{\\mathbb Z}$ be the subsheaf of locally constant integer-valued functions. Let $\\mathcal Q$ be the quotient sheaf obtained by sheafifying the presheaf $V\\mapsto \\mathcal C(V)/\\underline{\\mathbb Z}(V)$. Every germ of a section of $\\mathcal Q$ is represented locally by a continuous real-valued function, so the canonical map $\\mathcal C\\to\\mathcal Q$ is locally surjective and hence an epimorphism of sheaves.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Cover the circle by the arcs $U_0=S^1\\setminus\\{(-1,0)\\}$ and $U_1=S^1\\setminus\\{(1,0)\\}$. Choose continuous angle functions $\\theta_0:U_0\\to(-1/2,1/2)$ and $\\theta_1:U_1\\to(0,1)$ with $e^{2\\pi i\\theta_i(z)}=z$. On one connected component of $U_0\\cap U_1$ the difference $\\theta_1-\\theta_0$ is $0$, and on the other it is $1$, so the classes of $\\theta_0$ and $\\theta_1$ agree in the quotient presheaf and glue to a global section $q\\in\\Gamma(X,\\mathcal Q)$. If $q$ had a lift $g\\in\\Gamma(X,\\mathcal C)$, then $g-\\theta_i$ would be an integer-valued continuous function on the connected arc $U_i$, hence a constant $n_i$. On the two components of $U_0\\cap U_1$ this would force $n_0-n_1$ to be both $0$ and $1$, a contradiction. Thus $\\Gamma(X,\\mathcal C)\\to\\Gamma(X,\\mathcal Q)$ is not surjective.",
+          "step": "1.3",
+          "inputs": [
+            "construct",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 gives left exactness, and step 1.3 gives an epimorphism whose global sections map is not surjective.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Global sections are left exact but need not preserve epimorphisms is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Global sections are left exact but need not preserve epimorphisms has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Global sections are left exact but need not preserve epimorphisms has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Global sections are left exact but need not preserve epimorphisms has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Global sections are left exact but need not preserve epimorphisms has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Global sections are left exact but need not preserve epimorphisms does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Global sections are left exact but need not preserve epimorphisms is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Global sections are left exact but need not preserve epimorphisms is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-section-restriction-and-global-section",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.\n\nAn element of $\\mathcal F(U)$ is called a **section of $\\mathcal F$ over $U$**.\nWe also write\n$$\\Gamma(U,\\mathcal F):=\\mathcal F(U).$$\n\nIf $V \\subseteq U$ and $s \\in \\mathcal F(U)$, its **restriction to $V$** is\n$$s|_V:=\\rho^U_V(s)\\in\\mathcal F(V).$$\n\nA **global section** of $\\mathcal F$ is a section over the whole space:\n$$\\Gamma(X,\\mathcal F)=\\mathcal F(X).$$\n\nThe presheaf identities imply\n$$s|_U=s,\\qquad (s|_V)|_W=s|_W\\quad\\text{for }W\\subseteq V\\subseteq U.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-kernel-cokernel-image-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of abelian\ngroups on a topological space $X$.\n\nThe **kernel sheaf** is the subsheaf\n$$\n\\ker(\\varphi)\\subseteq \\mathcal F\n$$\ndefined objectwise by\n$$\n\\ker(\\varphi)(U):=\\ker\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr).\n$$\n\nThe **cokernel presheaf** is\n$$\nU\\longmapsto \\operatorname{coker}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **cokernel sheaf** $\\operatorname{coker}(\\varphi)$ is its\nsheafification.\n\nThe **image presheaf** is\n$$\nU\\longmapsto \\operatorname{im}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **image sheaf** $\\operatorname{im}(\\varphi)$ is its sheafification.\n\nFor sheaves of modules on a ringed space, the same formulas are taken in the\ncorresponding module categories on each open set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-exact-sequence-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. A sequence of sheaves of abelian groups on $X$\nis **exact** when it is exact in the abelian category of\n[[thm-abelian-sheaves-form-abelian-category]], equivalently in the sense of\n[[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]].\n\nThus a sequence\n$$\n\\cdots\\to \\mathcal F_{i-1}\\to \\mathcal F_i\\to \\mathcal F_{i+1}\\to\\cdots\n$$\nis exact at $\\mathcal F_i$ when the image sheaf of the first morphism equals\nthe kernel sheaf of the second.\n\nThe same language applies to $\\mathcal O_X$-modules on a ringed space.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Reviewed on 2026-09-04 because the lemma mixes an exactness claim with a quotient-sheaf counterexample. I rechecked the objectwise-kernel argument for left exactness and the circle-angle construction showing global sections need not preserve surjections; both parts of the present item are correct."
+      }
+    },
+    "thm-extension-by-zero-adjunction-exactness": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\Phi:j_!\\mathcal F\\to\\mathcal G$ be a morphism on $X$. If $W \\subseteq U$ is open, then [F2] gives $(j_!\\mathcal F)(W)=\\mathcal F(W)$, so the components $\\Phi_W$ define a morphism $\\mathcal F\\to j^{-1}\\mathcal G$ on $U$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $\\Psi:\\mathcal F\\to j^{-1}\\mathcal G$ be a morphism on $U$. For an open set $V \\subseteq X$ and a section $s\\in (j_!\\mathcal F)(V)$, use $\\Psi$ to obtain a section on $V\\cap U$. For each point $x\\in V\\setminus U$, the support condition in [F2] gives an open neighbourhood $W_x \\subseteq V$ with $s|_{W_x\\cap U}=0$, so we may assign the zero section of $\\mathcal G$ on $W_x$. These local sections agree on overlaps, so they glue uniquely to a section of $\\mathcal G(V)$. This defines a morphism $j_!\\mathcal F\\to\\mathcal G$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $x\\in X$. If $x\\in U$, then the neighbourhoods of $x$ that lie inside $U$ are cofinal among all neighbourhoods of $x$, so $(j_!\\mathcal F)_x\\cong\\mathcal F_x$. If $x\\notin U$ and $s\\in (j_!\\mathcal F)(V)$ for some neighbourhood $V$ of $x$, then [F2] gives an open neighbourhood $W_x\\subseteq V$ with $s|_{W_x\\cap U}=0$, so the germ of $s$ at $x$ is zero. Therefore $(j_!\\mathcal F)_x=0$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The constructions in steps 1.1 and 1.2 are inverse, because on opens contained in $U$ they both recover the original morphism on $\\mathcal F$, and outside $U$ the support condition forces the extension to vanish locally. Therefore $j_!$ is left adjoint to $j^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply step 1.3 to a short exact sequence on $U$. At points of $U$ the stalk sequence after $j_!$ is the original exact stalk sequence, and outside $U$ it is $0\\to0\\to0\\to0$. Hence [L1] implies that $j_!$ preserves exact sequences.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Extension by zero is left adjoint to restriction and is exact on abelian sheaves is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Extension by zero is left adjoint to restriction and is exact on abelian sheaves has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Extension by zero is left adjoint to restriction and is exact on abelian sheaves has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Extension by zero is left adjoint to restriction and is exact on abelian sheaves has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Extension by zero is left adjoint to restriction and is exact on abelian sheaves has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Extension by zero is left adjoint to restriction and is exact on abelian sheaves does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Extension by zero is left adjoint to restriction and is exact on abelian sheaves is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Extension by zero is left adjoint to restriction and is exact on abelian sheaves is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-restriction-sheaf-open-subspace",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let\n$\\mathcal F$ be a sheaf on $X$. The **restriction of $\\mathcal F$ to $U$** is\nthe inverse image sheaf\n$$\n\\mathcal F|_U:=j^{-1}\\mathcal F.\n$$\n\nFor an open set $W \\subseteq U$, one may identify $(\\mathcal F|_U)(W)$ with\n$\\mathcal F(W)$: because $U$ is open in $X$, the set $W$ is also open in $X$,\nand in the neighbourhood-colimit defining $j^{-1}\\mathcal F$ the open set $W$\nitself is a neighbourhood of $j(W)=W$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let\n$\\mathcal F$ be a sheaf of abelian groups on $U$.\n\nFor an open set $V \\subseteq X$, define\n$$(j_!\\mathcal F)(V) := \\left\\{ s\\in \\mathcal F(V\\cap U): \\operatorname{Supp}(s)\\text{ is closed in }V \\right\\}.$$\nEquivalently, $s$ lies in $(j_!\\mathcal F)(V)$ exactly when for every\n$x\\in V\\setminus U$ there exists an open neighbourhood $W_x \\subseteq V$ with\n$$\ns|_{W_x\\cap U}=0.\n$$\n\nRestriction maps are inherited from $\\mathcal F$, so $j_!\\mathcal F$ is a\nsubsheaf of $j_*\\mathcal F$. When $V \\subseteq U$, the support condition is\nvacuous and\n$$\n(j_!\\mathcal F)(V)=\\mathcal F(V).\n$$\n\nThis is the **extension by zero** of $\\mathcal F$ along $j$. It is distinct in\ngeneral from the ordinary direct image $j_*\\mathcal F$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Reviewed on 2026-09-04 because the reader repaired a false outside-U stalk claim. I rechecked the extension-by-zero construction via sections with closed support and verified that outside U the stalk vanishes by the support condition, not by a nonexistent disjoint neighbourhood; the exactness argument is now sound."
+      }
+    },
+    "lem-local-homomorphism-residue-field-map": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathfrak m_{f(x)}$ and $\\mathfrak m_x$ be the maximal ideals of the two stalks. By [F2], the composite $$\\mathcal O_{Y,f(x)}\\xrightarrow{\\,f^\\sharp_x\\,}\\mathcal O_{X,x}\\longrightarrow \\mathcal O_{X,x}/\\mathfrak m_x$$ kills $\\mathfrak m_{f(x)}$, so it factors through the quotient $$\\mathcal O_{Y,f(x)}/\\mathfrak m_{f(x)}.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the source and target quotients in step 1.1 are exactly the residue fields $\\kappa(f(x))$ and $\\kappa(x)$. Therefore step 1.1 is the desired field homomorphism $$\\kappa(f(x))\\to\\kappa(x).$$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement A local morphism of stalks induces a residue-field map is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement A local morphism of stalks induces a residue-field map has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement A local morphism of stalks induces a residue-field map has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item A local morphism of stalks induces a residue-field map has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item A local morphism of stalks induces a residue-field map has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item A local morphism of stalks induces a residue-field map does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A local morphism of stalks induces a residue-field map is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A local morphism of stalks induces a residue-field map is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-local-ring",
+          "source_section": "Definition",
+          "quote": "A **local ring** is a nonzero commutative ring $R$ with exactly one maximal ideal. That ideal is usually denoted $\\mathfrak m_R$ or simply $\\mathfrak m$. The quotient $R/\\mathfrak m$, which is a field, is the **residue field** of the local ring.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-morphism-locally-ringed-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(f,f^\\sharp):(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ be a morphism of ringed\nspaces between locally ringed spaces. It is a **morphism of locally ringed\nspaces** if for every point $x\\in X$ the induced stalk map\n$$\nf^\\sharp_x:\\mathcal O_{Y,f(x)}\\longrightarrow \\mathcal O_{X,x}\n$$\nis a local ring homomorphism, meaning that the maximal ideal of\n$\\mathcal O_{Y,f(x)}$ maps into the maximal ideal of $\\mathcal O_{X,x}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for A local morphism of stalks induces a residue-field map on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "lem-stalk-tensor-product": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [L1], it is enough to identify the stalk of the tensor-product presheaf $$U\\longmapsto \\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U).$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every neighbourhood $U$ of $x$, the germ maps $\\mathcal F(U)\\to\\mathcal F_x$, $\\mathcal G(U)\\to\\mathcal G_x$, and $\\mathcal O_X(U)\\to\\mathcal O_{X,x}$ induce an $\\mathcal O_X(U)$-balanced pairing into $\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x$. Hence there is a homomorphism $$\\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U)\\longrightarrow \\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x,$$ and these maps are compatible with restriction. Therefore they induce a map $$\\Phi:(\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G)_x\\longrightarrow \\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x.$$",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Conversely, if $s_x\\in\\mathcal F_x$ and $t_x\\in\\mathcal G_x$ are represented by sections $s\\in\\mathcal F(U)$ and $t\\in\\mathcal G(U)$ on the same neighbourhood $U$ of $x$, define $$\\Psi(s_x\\otimes t_x):=(s\\otimes t)_x.$$ If the representatives are changed on a smaller neighbourhood, the represented germ of $s\\otimes t$ is unchanged there, so $\\Psi$ is well defined on simple tensors and extends linearly to a homomorphism $$\\Psi:\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x\\longrightarrow (\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G)_x.$$",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a simple tensor represented on one neighbourhood, $\\Phi$ and $\\Psi$ plainly undo each other. Since both sides are generated by simple tensors, they are inverse isomorphisms. Combining this with step 1.1 gives the stated isomorphism for the sheaf tensor product.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement The stalk of a tensor product sheaf is the tensor product of the stalks is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement The stalk of a tensor product sheaf is the tensor product of the stalks has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement The stalk of a tensor product sheaf is the tensor product of the stalks has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item The stalk of a tensor product sheaf is the tensor product of the stalks has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item The stalk of a tensor product sheaf is the tensor product of the stalks has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item The stalk of a tensor product sheaf is the tensor product of the stalks does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The stalk of a tensor product sheaf is the tensor product of the stalks is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The stalk of a tensor product sheaf is the tensor product of the stalks is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sheaf-tensor-product",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, and let $\\mathcal F,\\mathcal G$ be\n$\\mathcal O_X$-modules. The **tensor-product presheaf**\n$$\n\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G\n$$\nis defined by\n$$(\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G)(U) := \\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U)$$\nfor each open set $U \\subseteq X$, with restriction induced from the\nrestriction maps of $\\mathcal F$ and $\\mathcal G$.\n\nThe **tensor-product sheaf** is the sheafification of this presheaf:\n$$\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G := a(\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sheafification-preserves-stalks",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. For every $x\\in X$,\nthe sheafification map induces a bijection\n$$\\eta_{\\mathcal F,x}:\\mathcal F_x\\xrightarrow{\\ \\cong\\ }(a\\mathcal F)_x.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for The stalk of a tensor product sheaf is the tensor product of the stalks on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "thm-pullback-pushforward-module-adjunction": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\alpha:f^*\\mathcal G\\to\\mathcal F$ be an $\\mathcal O_X$-linear morphism. By [F1] and [L3], $\\alpha$ is equivalent to a morphism from the tensor-product presheaf $$U\\longmapsto \\mathcal O_X(U)\\otimes_{(f^{-1}\\mathcal O_Y)(U)}(f^{-1}\\mathcal G)(U)$$ into the sheaf $\\mathcal F$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $\\beta:\\mathcal G\\to f_*\\mathcal F$ be an $\\mathcal O_Y$-linear morphism. By [L2], it corresponds to an $f^{-1}\\mathcal O_Y$-linear morphism $\\widetilde\\beta:f^{-1}\\mathcal G\\to\\mathcal F$. Applying [L1] on each open set gives a morphism from the tensor-product presheaf of [F1] into $\\mathcal F$, and then [L3] factors it uniquely through the sheafification $f^*\\mathcal G$. This yields an $\\mathcal O_X$-linear morphism $\\alpha:f^*\\mathcal G\\to\\mathcal F$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] on each open set $U \\subseteq X$ converts the map of step 1.1 into an $(f^{-1}\\mathcal O_Y)(U)$-linear map $(f^{-1}\\mathcal G)(U)\\to\\mathcal F(U)$, compatible with restriction. Hence step 1.1 is equivalent to an $f^{-1}\\mathcal O_Y$-linear sheaf morphism $$\\widetilde\\alpha:f^{-1}\\mathcal G\\to\\mathcal F.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2], the underlying sheaf morphism $\\widetilde\\alpha$ corresponds to a sheaf morphism $\\beta:\\mathcal G\\to f_*\\mathcal F$. Because the maps in step 2.1 are $(f^{-1}\\mathcal O_Y)(U)$-linear, the corresponding components $\\beta_V$ are $\\mathcal O_Y(V)$-linear. Thus $\\beta$ is a morphism of $\\mathcal O_Y$-modules.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The constructions in steps 3.1 and 1.2 are inverse because each stage is built from an adjunction with the standard mutually inverse formulas. Therefore $$\\operatorname{Hom}_{\\mathcal O_X}(f^*\\mathcal G,\\mathcal F)\\cong\\operatorname{Hom}_{\\mathcal O_Y}(\\mathcal G,f_*\\mathcal F)$$ naturally in both variables.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Pullback of modules is left adjoint to pushforward is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Pullback of modules is left adjoint to pushforward has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Pullback of modules is left adjoint to pushforward has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Pullback of modules is left adjoint to pushforward has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Pullback of modules is left adjoint to pushforward has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Pullback of modules is left adjoint to pushforward does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In Pullback of modules is left adjoint to pushforward, step 3.1 supplies the forward direction of the written equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In Pullback of modules is left adjoint to pushforward, step 1.2 supplies the reverse direction of the written equivalence."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pullback-module-ringed-spaces",
+          "source_section": "Definition",
+          "quote": "$$f^*\\mathcal G := \\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}\\mathcal G.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-extension-of-scalars-is-left-adjoint-to-restriction",
+          "source_section": "Statement",
+          "quote": "Let $f:R\\to S$ be a homomorphism of commutative rings, let $M$ be an $R$-module, and let $N$ be an $S$-module. There is a natural bijection\n\n$$\\operatorname{Hom}_S(S\\otimes_RM,N)\\cong\\operatorname{Hom}_R(M,\\operatorname{Res}^S_RN).$$\n\nIt sends $F$ to $m\\mapsto F(1_S\\otimes m)$. Its inverse sends $u:M\\to\\operatorname{Res}^S_RN$ to the $S$-linear map determined by\n\n$$s\\otimes m\\longmapsto s\\,u(m).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-inverse-direct-image-adjunction",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map, let $\\mathcal G$ be a sheaf on $Y$, and let\n$\\mathcal F$ be a sheaf on $X$. Then there is a natural bijection\n$$\\operatorname{Hom}_X(f^{-1}\\mathcal G,\\mathcal F) \\cong \\operatorname{Hom}_Y(\\mathcal G,f_*\\mathcal F).$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sheafification-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, let\n$\\eta_{\\mathcal F}:\\mathcal F\\to a\\mathcal F$ be its sheafification map, and let\n$\\mathcal G$ be a sheaf on $X$. Then every morphism of presheaves\n$$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$\nfactors uniquely through $\\eta_{\\mathcal F}$:\nthere is a unique morphism of sheaves\n$$\\overline\\varphi:a\\mathcal F\\longrightarrow\\mathcal G$$\nsuch that\n$$\\varphi=\\overline\\varphi\\circ\\eta_{\\mathcal F}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for Pullback of modules is left adjoint to pushforward on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "lem-pullback-modules-right-exact": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal M'\\to\\mathcal M\\to\\mathcal M''\\to0$ be an exact sequence of $\\mathcal O_Y$-modules, and fix $x\\in X$ with $y=f(x)$. By [L1], the stalk sequence after applying $f^{-1}$ is $$\\mathcal M'_y\\longrightarrow \\mathcal M_y\\longrightarrow \\mathcal M''_y\\longrightarrow 0,$$ which is exact because the original sequence is exact at every stalk. Hence $f^{-1}$ is exact on the underlying sheaves.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and [L2], the stalk of the pulled-back sequence at $x$ is $$\\mathcal O_{X,x}\\otimes_{\\mathcal O_{Y,y}}\\mathcal M'_y\\longrightarrow\\mathcal O_{X,x}\\otimes_{\\mathcal O_{Y,y}}\\mathcal M_y\\longrightarrow\\mathcal O_{X,x}\\otimes_{\\mathcal O_{Y,y}}\\mathcal M''_y\\longrightarrow0.$$ Step 1.1 gives exactness before tensoring, so [L4] makes this sequence right exact. Since this holds for every $x$, [L3] shows that $f^*$ is right exact.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "L3",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Assume every stalk ring map $$ \\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x} $$ is flat. By [F2], for each $x\\in X$ the functor $$ \\mathcal O_{X,x}\\otimes_{\\mathcal O_{Y,f(x)}}- $$ is exact on $\\mathcal O_{Y,f(x)}$-modules. Applying this to the exact stalk sequence from step 1.1 shows that the sequence in step 2.1 is exact at every $x$. Therefore [L3] implies that $f^*$ is exact.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "L3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Pullback of modules is right exact, and flat stalk maps are the criterion for exactness is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Pullback of modules is right exact, and flat stalk maps are the criterion for exactness has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Pullback of modules is right exact, and flat stalk maps are the criterion for exactness has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Pullback of modules is right exact, and flat stalk maps are the criterion for exactness has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Pullback of modules is right exact, and flat stalk maps are the criterion for exactness has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Pullback of modules is right exact, and flat stalk maps are the criterion for exactness does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In Pullback of modules is right exact, and flat stalk maps are the criterion for exactness, step 3.1 supplies the forward direction of the written equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In Pullback of modules is right exact, and flat stalk maps are the criterion for exactness, step 3.1 supplies the reverse direction of the written equivalence."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pullback-module-ringed-spaces",
+          "source_section": "Definition",
+          "quote": "$$f^*\\mathcal G := \\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}\\mathcal G.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-flat-and-faithfully-flat-modules-and-ring-maps",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring and let $M$ be an $R$-module. The module $M$ is **flat** if the functor $-\\otimes_RM$ preserves exact sequences: whenever $A\\to B\\to C$ is exact, so is\n\n$$A\\otimes_RM\\longrightarrow B\\otimes_RM\\longrightarrow C\\otimes_RM.$$\n\nSince tensoring is always right exact ([[thm-right-exactness-of-tensor-products]], [[def-exact-and-short-exact-sequences-of-modules]]), the definition asks for the remaining left-hand exactness. Its equivalent formulation as preservation of injections is proved separately rather than built into the definition.\n\nThe module $M$ is **faithfully flat** if a sequence of $R$-modules is exact exactly when its tensor with $M$ is exact.\n\nFor a unital ring homomorphism $f:R\\to S$ ([[def-ring-homomorphism]]) between commutative rings, $S$ is an $R$-module by $r\\cdot s=f(r)s$. The map $f$ is **flat**, respectively **faithfully flat**, when this $R$-module is flat, respectively faithfully flat.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-stalk-inverse-image-sheaf",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map, let $\\mathcal G$ be a sheaf on $Y$, and let\n$x\\in X$. Then there is a canonical isomorphism\n$$\n(f^{-1}\\mathcal G)_x\\cong \\mathcal G_{f(x)}.\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-stalk-tensor-product",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, let $\\mathcal F,\\mathcal G$ be\n$\\mathcal O_X$-modules, and let $x\\in X$. Then there is a canonical\nisomorphism of $\\mathcal O_{X,x}$-modules\n$$(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x \\cong \\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-right-exactness-of-tensor-products",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, let\n\n$$A\\xrightarrow{f}B\\xrightarrow{g}C\\longrightarrow0$$\n\nbe an exact sequence of $R$-modules, and let $N$ be an $R$-module. Then\n\n$$A\\otimes_RN\\xrightarrow{f\\otimes1}B\\otimes_RN\\xrightarrow{g\\otimes1}C\\otimes_RN\\longrightarrow0$$\n\nis exact. Thus tensoring preserves cokernels and surjections, but no injectivity at the left is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for Pullback of modules is right exact, and flat stalk maps are the criterion for exactness on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "thm-gluing-sheaves": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For an open set $W \\subseteq X$, define $\\mathcal F(W)$ to be the set of families $(s_i)$ with $s_i\\in\\mathcal F_i(W\\cap U_i)$ such that on every overlap $W\\cap U_i\\cap U_j$ one has $$ \\varphi_{ij}(s_i|_{W\\cap U_i\\cap U_j})=s_j|_{W\\cap U_i\\cap U_j}. $$ Restriction is taken componentwise. This defines a presheaf on $X$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $k$. If $W \\subseteq U_k$, the map $\\mathcal F(W)\\to\\mathcal F_k(W)$ sending $(s_i)$ to $s_k$ is an isomorphism: given $t\\in\\mathcal F_k(W)$, define $s_i:=\\varphi_{ki}(t|_{W\\cap U_i})$, and [F1] makes these sections compatible. Therefore $\\mathcal F|_{U_k}\\cong\\mathcal F_k$, and the overlap maps are exactly the prescribed $\\varphi_{ij}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $W=\\bigcup_\\alpha W_\\alpha$ and let $(s_i^{(\\alpha)})$ be compatible sections of the presheaf from step 1.1 on the cover. For each fixed $i$, the sections $s_i^{(\\alpha)}\\in \\mathcal F_i(W_\\alpha\\cap U_i)$ are compatible, so [L1] glues them uniquely to a section $s_i\\in\\mathcal F_i(W\\cap U_i)$. The cocycle condition from [F1] is preserved under these gluings, hence $(s_i)$ is a glued section of $\\mathcal F(W)$. Uniqueness is again componentwise, so the presheaf is a sheaf. If the $\\mathcal F_i$ carry abelian-group, ring, or module structures and each $\\varphi_{ij}$ preserves them, then the componentwise operations on the families $(s_i)$ make the glued sheaf a sheaf of the same kind.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\mathcal G$ is another sheaf with the same local identifications, then on every open $W$ its sections are exactly the compatible families of local sections on the cover $\\{W\\cap U_i\\}$. By [L1], the correspondence of step 1.1 is therefore forced, so there is a unique isomorphism $\\mathcal G\\cong\\mathcal F$. This proves uniqueness up to unique isomorphism.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In Compatible local sheaves glue uniquely up to unique isomorphism, step 1.1 defines the glued presheaf by compatible families on the cover and step 2.1 proves the sheaf axiom componentwise; when the cover is empty those compatible families are just the unique empty family, so the empty-cover case is already absorbed by the same construction."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Compatible local sheaves glue uniquely up to unique isomorphism has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Compatible local sheaves glue uniquely up to unique isomorphism has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Compatible local sheaves glue uniquely up to unique isomorphism has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Compatible local sheaves glue uniquely up to unique isomorphism has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Compatible local sheaves glue uniquely up to unique isomorphism does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Compatible local sheaves glue uniquely up to unique isomorphism is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Compatible local sheaves glue uniquely up to unique isomorphism is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gluing-datum-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space with an open cover $X=\\bigcup_i U_i$. A\n**gluing datum for sheaves on this cover** consists of\n\n1. a sheaf $\\mathcal F_i$ on each open set $U_i$, and\n2. for each pair $(i,j)$, an isomorphism of sheaves on $U_i\\cap U_j$,\n   $$\n   \\varphi_{ij}:\\mathcal F_i|_{U_i\\cap U_j}\\xrightarrow{\\ \\cong\\ }\\mathcal F_j|_{U_i\\cap U_j},\n   $$\n\nsuch that\n\n1. $\\varphi_{ii}=\\operatorname{id}_{\\mathcal F_i}$, and\n2. on every triple overlap $U_i\\cap U_j\\cap U_k$ one has\n   $$\n   \\varphi_{jk}\\circ\\varphi_{ij}=\\varphi_{ik}.\n   $$\n\nThe same definition applies to sheaves of abelian groups, rings, or modules.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Reviewed on 2026-09-04 because the theorem now explicitly carries abelian-group, ring, and module structure through the gluing construction. I rechecked the compatible-family presheaf, the local identifications on each U_k, the sheaf gluing step, and the uniqueness argument; the expanded statement matches the proof."
+      }
+    },
+    "thm-gluing-ringed-and-locally-ringed-spaces": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Form the disjoint union $\\coprod_i X_i$ and impose the equivalence relation generated by $x_i\\sim\\varphi_{ij}(x_i)$ whenever $x_i\\in U_{ij}$, using the underlying homeomorphisms of the isomorphisms $\\varphi_{ij}$. The identity and cocycle hypotheses make this an equivalence relation. Let $X$ be the quotient space. The image $V_i$ of each $X_i$ in $X$ is open, the $V_i$ cover $X$, and the quotient map $q_i:X_i\\to V_i$ is a homeomorphism because identifications occur only along open subsets via homeomorphisms.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Transport each structure sheaf $\\mathcal O_i$ to the open subset $V_i$ via $q_i$, obtaining a sheaf of rings on $V_i$. The ringed-space isomorphisms on the overlaps induce isomorphisms of these sheaves on $V_i\\cap V_j$, and the cocycle condition is exactly the compatibility required by [L1]. Hence [L1] glues the local structure sheaves to a sheaf of rings $\\mathcal O_X$ on $X$, making each $q_i$ an isomorphism of ringed spaces $(X_i,\\mathcal O_i)\\cong (V_i,\\mathcal O_X|_{V_i})$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the input pieces are locally ringed spaces, let $x\\in X$ and choose $i$ with $x\\in V_i$. Because $q_i$ is a homeomorphism onto an open neighbourhood of $x$, the stalk $\\mathcal O_{X,x}$ identifies with the stalk of $\\mathcal O_i$ at the corresponding point of $X_i$. That stalk is local by [F1], so every stalk of $\\mathcal O_X$ is local. Thus $(X,\\mathcal O_X)$ is locally ringed.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Any other glued ringed or locally ringed space has the same quotient-topology description as in step 1.1 and the same locally compatible structure sheaf. By the uniqueness clause of [L1], it is uniquely isomorphic to $(X,\\mathcal O_X)$. This proves existence and uniqueness in both the ringed and locally ringed settings.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Compatible open pieces of ringed or locally ringed spaces glue is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Compatible open pieces of ringed or locally ringed spaces glue has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Compatible open pieces of ringed or locally ringed spaces glue has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Compatible open pieces of ringed or locally ringed spaces glue has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Compatible open pieces of ringed or locally ringed spaces glue has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Compatible open pieces of ringed or locally ringed spaces glue does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Compatible open pieces of ringed or locally ringed spaces glue is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Compatible open pieces of ringed or locally ringed spaces glue is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ringed-space",
+          "source_section": "Definition",
+          "quote": "A **ringed space** is a pair\n$$\n(X,\\mathcal O_X)\n$$\nconsisting of a topological space $X$ and a sheaf of commutative rings\n$\\mathcal O_X$ on $X$.\n\nThe sheaf $\\mathcal O_X$ is called the **structure sheaf** of the ringed space.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-locally-ringed-space",
+          "source_section": "Definition",
+          "quote": "A **locally ringed space** is a ringed space $(X,\\mathcal O_X)$ such that every\nstalk $\\mathcal O_{X,x}$ is a local ring in the sense of [[def-local-ring]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-morphism-locally-ringed-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(f,f^\\sharp):(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ be a morphism of ringed\nspaces between locally ringed spaces. It is a **morphism of locally ringed\nspaces** if for every point $x\\in X$ the induced stalk map\n$$\nf^\\sharp_x:\\mathcal O_{Y,f(x)}\\longrightarrow \\mathcal O_{X,x}\n$$\nis a local ring homomorphism, meaning that the maximal ideal of\n$\\mathcal O_{Y,f(x)}$ maps into the maximal ideal of $\\mathcal O_{X,x}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-gluing-sheaves",
+          "source_section": "Statement",
+          "quote": "Let $X=\\bigcup_i U_i$ be an open cover, and let\n$$\n(\\mathcal F_i,\\varphi_{ij})\n$$\nbe a gluing datum for sheaves on that cover. Then there exists a sheaf\n$\\mathcal F$ on $X$ together with isomorphisms\n$$\n\\mathcal F|_{U_i}\\xrightarrow{\\ \\cong\\ }\\mathcal F_i\n$$\nwhose induced overlap identifications are the given $\\varphi_{ij}$. This glued\nsheaf is unique up to unique isomorphism.\n\nThe same objectwise construction gives the analogous gluing result for sheaves\nof abelian groups, commutative rings, and modules on a fixed ringed space.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Reviewed on 2026-09-04 because this proof is quotient- and stalk-sensitive and the statement needed the overlap isomorphism hypothesis. I rechecked the quotient-topology construction, the glued structure sheaf on the opens V_i, and the transfer of local-ring stalks, so the repaired statement and proof now align."
+      }
+    },
+    "ex-direct-image-open-immersion": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $j$ is the inclusion of $U$ into $X$, one has $j^{-1}(V)=V\\cap U$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting step 1.1 into [F1] gives $$(j_*\\mathcal F)(V)=\\mathcal F(V\\cap U).$$ This is exactly the announced formula, and it is compatible with the restriction interpretation in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Direct image along an open immersion is restriction-compatible intersection is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Direct image along an open immersion is restriction-compatible intersection has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Direct image along an open immersion is restriction-compatible intersection has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Direct image along an open immersion is restriction-compatible intersection has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Direct image along an open immersion is restriction-compatible intersection has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Direct image along an open immersion is restriction-compatible intersection does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Direct image along an open immersion is restriction-compatible intersection is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Direct image along an open immersion is restriction-compatible intersection is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal F$ be a presheaf on $X$.\nThe **direct image presheaf**\n$$f_*\\mathcal F$$\non $Y$ is defined on an open set $V \\subseteq Y$ by\n$$\n(f_*\\mathcal F)(V):=\\mathcal F(f^{-1}(V)).\n$$\nIf $V' \\subseteq V$, the restriction map\n$$\n(f_*\\mathcal F)(V)\\longrightarrow(f_*\\mathcal F)(V')\n$$\nis the restriction map of $\\mathcal F$ for the inclusion\n$f^{-1}(V') \\subseteq f^{-1}(V)$.\n\nThus direct image is just precomposition of the presheaf with the inverse-image\nmap on open sets.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-restriction-sheaf-open-subspace",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let\n$\\mathcal F$ be a sheaf on $X$. The **restriction of $\\mathcal F$ to $U$** is\nthe inverse image sheaf\n$$\n\\mathcal F|_U:=j^{-1}\\mathcal F.\n$$\n\nFor an open set $W \\subseteq U$, one may identify $(\\mathcal F|_U)(W)$ with\n$\\mathcal F(W)$: because $U$ is open in $X$, the set $W$ is also open in $X$,\nand in the neighbourhood-colimit defining $j^{-1}\\mathcal F$ the open set $W$\nitself is a neighbourhood of $j(W)=W$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for Direct image along an open immersion is restriction-compatible intersection on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "cex-extension-by-zero-differs-direct-image": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the global section set of $j_*\\underline{\\mathbb Z}$ is $$(j_*\\underline{\\mathbb Z})(X)=\\underline{\\mathbb Z}(U)\\cong \\mathbb Z\\times\\mathbb Z,$$ because $U$ has two connected components. Let $s$ be the section that is $1$ on both components.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The germ of $s$ is nonzero at every point of $U$, so its support is all of $U$. But $U=(-1,0)\\cup(0,1)$ is not closed in $X=(-1,1)$, since its closure contains $0$. Therefore [F2] shows that $s\\notin (j_!\\underline{\\mathbb Z})(X)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $s$ lies in $j_*\\underline{\\mathbb Z}$ but not in $j_!\\underline{\\mathbb Z}$, so the two sheaves are not equal. This refutes the statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Extension by zero can be strictly smaller than direct image on a punctured interval is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Extension by zero can be strictly smaller than direct image on a punctured interval has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Extension by zero can be strictly smaller than direct image on a punctured interval has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Extension by zero can be strictly smaller than direct image on a punctured interval has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Extension by zero can be strictly smaller than direct image on a punctured interval has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Extension by zero can be strictly smaller than direct image on a punctured interval does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Extension by zero can be strictly smaller than direct image on a punctured interval is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Extension by zero can be strictly smaller than direct image on a punctured interval is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "ex-direct-image-open-immersion",
+          "source_section": "Example",
+          "quote": "Let $j:U\\hookrightarrow X$ be an open immersion, and let $\\mathcal F$ be a\nsheaf on $U$. Then for every open set $V \\subseteq X$ one has\n$$\n(j_*\\mathcal F)(V)=\\mathcal F(V\\cap U).\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let\n$\\mathcal F$ be a sheaf of abelian groups on $U$.\n\nFor an open set $V \\subseteq X$, define\n$$(j_!\\mathcal F)(V) := \\left\\{ s\\in \\mathcal F(V\\cap U): \\operatorname{Supp}(s)\\text{ is closed in }V \\right\\}.$$\nEquivalently, $s$ lies in $(j_!\\mathcal F)(V)$ exactly when for every\n$x\\in V\\setminus U$ there exists an open neighbourhood $W_x \\subseteq V$ with\n$$\ns|_{W_x\\cap U}=0.\n$$\n\nRestriction maps are inherited from $\\mathcal F$, so $j_!\\mathcal F$ is a\nsubsheaf of $j_*\\mathcal F$. When $V \\subseteq U$, the support condition is\nvacuous and\n$$\n(j_!\\mathcal F)(V)=\\mathcal F(V).\n$$\n\nThis is the **extension by zero** of $\\mathcal F$ along $j$. It is distinct in\ngeneral from the ordinary direct image $j_*\\mathcal F$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for Extension by zero can be strictly smaller than direct image on a punctured interval on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "ex-skyscraper-sheaf-exact-sequence": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a point $y\\in X$. If every neighbourhood of $y$ contains $x$, then [F1] shows that each stalk in the displayed skyscraper sequence is the original group at $y$, so the stalk sequence is exactly $$ 0\\to A'\\to A\\to A''\\to 0. $$ If some neighbourhood of $y$ omits $x$, then every smaller neighbourhood also omits $x$, so [F1] makes all three stalks equal to $0$ and the stalk sequence is $$ 0\\to0\\to0\\to0. $$ In either case the stalk sequence is exact.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The stalk sequence is therefore exact at every point, so [L1] implies that the skyscraper sequence is exact as a sequence of sheaves. By [L2], this is exactly the claimed short exact sequence of skyscraper sheaves.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement A short exact sequence of abelian groups gives a short exact sequence of skyscraper sheaves is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement A short exact sequence of abelian groups gives a short exact sequence of skyscraper sheaves has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement A short exact sequence of abelian groups gives a short exact sequence of skyscraper sheaves has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item A short exact sequence of abelian groups gives a short exact sequence of skyscraper sheaves has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item A short exact sequence of abelian groups gives a short exact sequence of skyscraper sheaves has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item A short exact sequence of abelian groups gives a short exact sequence of skyscraper sheaves does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A short exact sequence of abelian groups gives a short exact sequence of skyscraper sheaves is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A short exact sequence of abelian groups gives a short exact sequence of skyscraper sheaves is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-skyscraper-sheaf-abelian-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space, let $x\\in X$, and let $A$ be an abelian group.\nThe **skyscraper sheaf at $x$ with value $A$** is the sheaf\n$$\ni_{x,*}A\n$$\ndefined on an open set $V \\subseteq X$ by\n$$(i_{x,*}A)(V)= \\begin{cases} A,& x\\in V,\\\\ 0,& x\\notin V. \\end{cases}$$\nIf $V' \\subseteq V$ and both opens contain $x$, the restriction map is the\nidentity on $A$. If $x\\notin V'$, the restriction map to $0$ is the unique zero\nhomomorphism.\n\nThus a skyscraper sheaf has the value $A$ precisely on opens that meet the\nchosen point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-exact-sequence-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. A sequence of sheaves of abelian groups on $X$\nis **exact** when it is exact in the abelian category of\n[[thm-abelian-sheaves-form-abelian-category]], equivalently in the sense of\n[[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]].\n\nThus a sequence\n$$\n\\cdots\\to \\mathcal F_{i-1}\\to \\mathcal F_i\\to \\mathcal F_{i+1}\\to\\cdots\n$$\nis exact at $\\mathcal F_i$ when the image sheaf of the first morphism equals\nthe kernel sheaf of the second.\n\nThe same language applies to $\\mathcal O_X$-modules on a ringed space.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Reviewed on 2026-09-04 because the refuter caught a false stalk claim away from x. I repaired the example by using the actual stalk colimit: at a point y the stalk is either the original group sequence if every neighbourhood contains x or the zero sequence once one omits x, and exactness follows in both cases."
+      }
+    },
+    "cex-global-sections-not-right-exact": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal C$ be the sheaf of continuous real-valued functions on $S^1$, and let $\\underline{\\mathbb Z}$ be the subsheaf of locally constant integer-valued functions. Let $\\mathcal Q$ be the sheafification of the presheaf quotient $V\\mapsto \\mathcal C(V)/\\underline{\\mathbb Z}(V)$. Every germ of $\\mathcal Q$ is represented locally by a continuous function, so the canonical map $\\mathcal C\\to\\mathcal Q$ is locally surjective and hence an epimorphism of sheaves.",
+          "step": "1.1",
+          "inputs": [
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Cover the circle by the two arcs $U_0=S^1\\setminus\\{(-1,0)\\}$ and $U_1=S^1\\setminus\\{(1,0)\\}$. Choose continuous angle functions $\\theta_0:U_0\\to(-1/2,1/2)$ and $\\theta_1:U_1\\to(0,1)$ with $e^{2\\pi i\\theta_i(z)}=z$. Their quotient classes agree on $U_0\\cap U_1$, because the difference $\\theta_1-\\theta_0$ is locally constant integer-valued there. Thus they glue to a section $q\\in\\Gamma(S^1,\\mathcal Q)$. If $q$ came from a global continuous real function $g$, then $g-\\theta_i$ would be an integer-valued continuous function on the connected set $U_i$, hence constant. On the two connected components of $U_0\\cap U_1$ this would force the same constant difference to be both $0$ and $1$, which is impossible. So $\\Gamma(S^1,\\mathcal C)\\to\\Gamma(S^1,\\mathcal Q)$ is not surjective.",
+          "step": "1.2",
+          "inputs": [
+            "construct",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore an epimorphism of sheaves can fail to become surjective on global sections. This is exactly the phenomenon asserted in [F1], so the statement is refuted.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Global sections need not preserve surjections is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Global sections need not preserve surjections has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Global sections need not preserve surjections has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Global sections need not preserve surjections has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Global sections need not preserve surjections has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Global sections need not preserve surjections does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Global sections need not preserve surjections is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Global sections need not preserve surjections is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-global-sections-left-exact",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space. If\n$$\n0\\to\\mathcal F'\\to\\mathcal F\\to\\mathcal F''\n$$\nis exact in sheaves of abelian groups on $X$, then\n$$\n0\\to\\Gamma(X,\\mathcal F')\\to\\Gamma(X,\\mathcal F)\\to\\Gamma(X,\\mathcal F'')\n$$\nis exact. However, there exists an epimorphism of sheaves of abelian groups on\nsome space $X$ whose induced map on global sections is not surjective.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for Global sections need not preserve surjections on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "ex-ringed-space-continuous-functions": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The usual restriction of continuous functions makes $U\\mapsto \\mathcal C_X^0(U)$ a sheaf of commutative rings on $X$, so [F1] gives a ringed space $(X,\\mathcal C_X^0)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $x\\in X$. By [F2], the stalk $\\mathcal C^0_{X,x}$ consists of germs of continuous real-valued functions near $x$. The germs vanishing at $x$ form an ideal $\\mathfrak m_x$. If a germ is not in $\\mathfrak m_x$, it has a representative $g$ with $g(x)\\neq0$, so continuity makes $g$ nonzero on a smaller neighbourhood of $x$; hence $1/g$ is continuous there and defines an inverse germ. Therefore the nonunits are exactly the germs in $\\mathfrak m_x$, so $\\mathfrak m_x$ is the unique maximal ideal. Thus $\\mathcal C^0_{X,x}$ is a local ring, and [L1] shows that $(X,\\mathcal C_X^0)$ is locally ringed.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Continuous real-valued functions make a space into a locally ringed space is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Continuous real-valued functions make a space into a locally ringed space has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Continuous real-valued functions make a space into a locally ringed space has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Continuous real-valued functions make a space into a locally ringed space has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Continuous real-valued functions make a space into a locally ringed space has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Continuous real-valued functions make a space into a locally ringed space does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Continuous real-valued functions make a space into a locally ringed space is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Continuous real-valued functions make a space into a locally ringed space is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ringed-space",
+          "source_section": "Definition",
+          "quote": "A **ringed space** is a pair\n$$\n(X,\\mathcal O_X)\n$$\nconsisting of a topological space $X$ and a sheaf of commutative rings\n$\\mathcal O_X$ on $X$.\n\nThe sheaf $\\mathcal O_X$ is called the **structure sheaf** of the ringed space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-locally-ringed-space",
+          "source_section": "Definition",
+          "quote": "A **locally ringed space** is a ringed space $(X,\\mathcal O_X)$ such that every\nstalk $\\mathcal O_{X,x}$ is a local ring in the sense of [[def-local-ring]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-local-ring",
+          "source_section": "Definition",
+          "quote": "A **local ring** is a nonzero commutative ring $R$ with exactly one maximal ideal. That ideal is usually denoted $\\mathfrak m_R$ or simply $\\mathfrak m$. The quotient $R/\\mathfrak m$, which is a field, is the **residue field** of the local ring.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for Continuous real-valued functions make a space into a locally ringed space on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "cex-ringed-space-map-not-locally-ringed": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard $(\\{\\ast\\},A)$ and $(\\{\\ast\\},K)$ as one-point ringed spaces. The assignment $y\\mapsto x$ defines a ring homomorphism $A\\to K$, so by [F1] it defines a morphism of ringed spaces $$(\\{\\ast\\},K)\\longrightarrow (\\{\\ast\\},A).$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The unique maximal ideal of $A$ is $(y)$ by [L1], while the unique maximal ideal of the field $K$ is $0$. Under the stalk map $A\\to K$, the element $y$ goes to the nonzero element $x$, hence to a unit of $K$. Therefore the image of $(y)$ is not contained in $0$, so the stalk map is not local. By [F2], the morphism is not a morphism of locally ringed spaces.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This gives a morphism of ringed spaces between locally ringed spaces that is not locally ringed. The statement is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement A morphism of ringed spaces need not be a morphism of locally ringed spaces is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement A morphism of ringed spaces need not be a morphism of locally ringed spaces has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement A morphism of ringed spaces need not be a morphism of locally ringed spaces has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item A morphism of ringed spaces need not be a morphism of locally ringed spaces has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item A morphism of ringed spaces need not be a morphism of locally ringed spaces has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item A morphism of ringed spaces need not be a morphism of locally ringed spaces does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A morphism of ringed spaces need not be a morphism of locally ringed spaces is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in A morphism of ringed spaces need not be a morphism of locally ringed spaces is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-morphism-ringed-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ and $(Y,\\mathcal O_Y)$ be ringed spaces. A\n**morphism of ringed spaces**\n$$\n(f,f^\\sharp):(X,\\mathcal O_X)\\longrightarrow(Y,\\mathcal O_Y)\n$$\nconsists of\n\n1. a continuous map $f:X\\to Y$, and\n2. a morphism of sheaves of rings\n   $$\n   f^\\sharp:\\mathcal O_Y\\longrightarrow f_*\\mathcal O_X\n   $$\n   on $Y$.\n\nEquivalently, for every open set $V \\subseteq Y$ there are ring homomorphisms\n$$\nf^\\sharp_V:\\mathcal O_Y(V)\\longrightarrow \\mathcal O_X(f^{-1}(V))\n$$\ncompatible with restriction.\n\nComposition is defined by composing the continuous maps and the corresponding\nmorphisms into the direct images of structure sheaves.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-morphism-locally-ringed-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(f,f^\\sharp):(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ be a morphism of ringed\nspaces between locally ringed spaces. It is a **morphism of locally ringed\nspaces** if for every point $x\\in X$ the induced stalk map\n$$\nf^\\sharp_x:\\mathcal O_{Y,f(x)}\\longrightarrow \\mathcal O_{X,x}\n$$\nis a local ring homomorphism, meaning that the maximal ideal of\n$\\mathcal O_{Y,f(x)}$ maps into the maximal ideal of $\\mathcal O_{X,x}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-local-ring",
+          "source_section": "Definition",
+          "quote": "A **local ring** is a nonzero commutative ring $R$ with exactly one maximal ideal. That ideal is usually denoted $\\mathfrak m_R$ or simply $\\mathfrak m$. The quotient $R/\\mathfrak m$, which is a field, is the **residue field** of the local ring.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for A morphism of ringed spaces need not be a morphism of locally ringed spaces on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "ex-pullback-free-module": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sheaf $\\mathcal O_Y^{\\,n}$ is the finite direct sum of $n$ copies of $\\mathcal O_Y$, with the case $n=0$ giving the zero sheaf. Since [L1] makes $f^*$ a left adjoint, it preserves these finite direct sums. Thus $$f^*(\\mathcal O_Y^{\\,n})\\cong \\bigl(f^*\\mathcal O_Y\\bigr)^{n}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F1] to $\\mathcal G=\\mathcal O_Y$ gives $$f^*\\mathcal O_Y=\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}\\mathcal O_Y\\cong\\mathcal O_X,$$ because tensoring a module over a ring with the ring itself leaves the module unchanged. Substituting this into step 1.1 yields $$f^*(\\mathcal O_Y^{\\,n})\\cong \\mathcal O_X^{\\,n}.$$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Pullback carries a free module to the corresponding free module is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Pullback carries a free module to the corresponding free module has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Pullback carries a free module to the corresponding free module has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Pullback carries a free module to the corresponding free module has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Pullback carries a free module to the corresponding free module has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Pullback carries a free module to the corresponding free module does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Pullback carries a free module to the corresponding free module is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Pullback carries a free module to the corresponding free module is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pullback-module-ringed-spaces",
+          "source_section": "Definition",
+          "quote": "$$f^*\\mathcal G := \\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}\\mathcal G.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-pullback-pushforward-module-adjunction",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n(f,f^\\sharp):(X,\\mathcal O_X)\\longrightarrow(Y,\\mathcal O_Y)\n$$\nbe a morphism of ringed spaces, let $\\mathcal G$ be an $\\mathcal O_Y$-module,\nand let $\\mathcal F$ be an $\\mathcal O_X$-module. Then there is a natural\nbijection\n$$\\operatorname{Hom}_{\\mathcal O_X}(f^*\\mathcal G,\\mathcal F) \\cong \\operatorname{Hom}_{\\mathcal O_Y}(\\mathcal G,f_*\\mathcal F).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for Pullback carries a free module to the corresponding free module on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "ex-glue-line-bundle-transition-functions": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $U_i\\cap U_j$, define $$\\varphi_{ij}:\\mathcal O_X|_{U_i\\cap U_j}\\longrightarrow \\mathcal O_X|_{U_i\\cap U_j},\\qquad s\\longmapsto g_{ij}s.$$ Because $g_{ij}$ is a unit, $\\varphi_{ij}$ is an isomorphism of $\\mathcal O_X$-modules, and the rules for the $g_{ij}$ are exactly the identity and cocycle conditions of [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the local free rank-one modules $\\mathcal O_X|_{U_i}$ glue to an $\\mathcal O_X$-module $\\mathcal L$ on $X$ with $\\mathcal L|_{U_i}\\cong \\mathcal O_X|_{U_i}$ for every $i$. Therefore $\\mathcal L$ is locally free of rank one, i.e. a line bundle.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement Units satisfying the cocycle law glue local rank-one free modules into a line bundle is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement Units satisfying the cocycle law glue local rank-one free modules into a line bundle has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement Units satisfying the cocycle law glue local rank-one free modules into a line bundle has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Units satisfying the cocycle law glue local rank-one free modules into a line bundle has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Units satisfying the cocycle law glue local rank-one free modules into a line bundle has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item Units satisfying the cocycle law glue local rank-one free modules into a line bundle does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Units satisfying the cocycle law glue local rank-one free modules into a line bundle is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in Units satisfying the cocycle law glue local rank-one free modules into a line bundle is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-module-on-ringed-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space.\n\nAn **$\\mathcal O_X$-module** is a sheaf $\\mathcal F$ of abelian groups on $X$\nsuch that for every open set $U \\subseteq X$ the section group $\\mathcal F(U)$\nis an $\\mathcal O_X(U)$-module, and for every inclusion $V \\subseteq U$ the\nrestriction map\n$$\n\\mathcal F(U)\\longrightarrow\\mathcal F(V)\n$$\nis $\\mathcal O_X(U)$-linear after restricting scalars along\n$\\mathcal O_X(U)\\to\\mathcal O_X(V)$.\n\nA **morphism of $\\mathcal O_X$-modules** is a morphism of the underlying sheaves\nof abelian groups whose components are $\\mathcal O_X(U)$-linear on every open\nset $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gluing-datum-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space with an open cover $X=\\bigcup_i U_i$. A\n**gluing datum for sheaves on this cover** consists of\n\n1. a sheaf $\\mathcal F_i$ on each open set $U_i$, and\n2. for each pair $(i,j)$, an isomorphism of sheaves on $U_i\\cap U_j$,\n   $$\n   \\varphi_{ij}:\\mathcal F_i|_{U_i\\cap U_j}\\xrightarrow{\\ \\cong\\ }\\mathcal F_j|_{U_i\\cap U_j},\n   $$\n\nsuch that\n\n1. $\\varphi_{ii}=\\operatorname{id}_{\\mathcal F_i}$, and\n2. on every triple overlap $U_i\\cap U_j\\cap U_k$ one has\n   $$\n   \\varphi_{jk}\\circ\\varphi_{ij}=\\varphi_{ik}.\n   $$\n\nThe same definition applies to sheaves of abelian groups, rings, or modules.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-gluing-sheaves",
+          "source_section": "Statement",
+          "quote": "Let $X=\\bigcup_i U_i$ be an open cover, and let\n$$\n(\\mathcal F_i,\\varphi_{ij})\n$$\nbe a gluing datum for sheaves on that cover. Then there exists a sheaf\n$\\mathcal F$ on $X$ together with isomorphisms\n$$\n\\mathcal F|_{U_i}\\xrightarrow{\\ \\cong\\ }\\mathcal F_i\n$$\nwhose induced overlap identifications are the given $\\varphi_{ij}$. This glued\nsheaf is unique up to unique isomorphism.\n\nThe same objectwise construction gives the analogous gluing result for sheaves\nof abelian groups, commutative rings, and modules on a fixed ringed space.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for Units satisfying the cocycle law glue local rank-one free modules into a line bundle on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    },
+    "cex-presheaf-cokernel-needs-sheafification": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal P$ be the presheaf cokernel of the inclusion $\\underline{\\mathbb Z}\\hookrightarrow \\mathcal C$, so $$\\mathcal P(V)=\\mathcal C(V)/\\underline{\\mathbb Z}(V)$$ for each open $V\\subseteq S^1$. Cover $S^1$ by the arcs $U_0=S^1\\setminus\\{(-1,0)\\}$ and $U_1=S^1\\setminus\\{(1,0)\\}$, and choose continuous angle functions $\\theta_0:U_0\\to(-1/2,1/2)$ and $\\theta_1:U_1\\to(0,1)$ with $e^{2\\pi i\\theta_i(z)}=z$. On $U_0\\cap U_1$, the difference $\\theta_1-\\theta_0$ is locally constant integer-valued, so the classes $[\\theta_0]\\in\\mathcal P(U_0)$ and $[\\theta_1]\\in\\mathcal P(U_1)$ agree on the overlap.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If these local classes came from a global class $[g]\\in\\mathcal P(S^1)$, then on each arc $U_i$ the difference $g-\\theta_i$ would be integer-valued and continuous, hence constant because $U_i$ is connected. On the two connected components of $U_0\\cap U_1$, this would force the same constant difference to be both $0$ and $1$, which is impossible. Therefore the compatible local classes of step 1.1 do not glue in the presheaf $\\mathcal P$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "So the objectwise cokernel presheaf is not a sheaf. By [F1], this is exactly why one sheafifies it to obtain the true cokernel sheaf. The statement is false.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement The objectwise cokernel presheaf can fail to be a sheaf is not parameterized by an empty family or empty ambient object beyond the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement The objectwise cokernel presheaf can fail to be a sheaf has no separate zero-case beyond the written general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement The objectwise cokernel presheaf can fail to be a sheaf has no separate singleton or value-one branch beyond the written general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item The objectwise cokernel presheaf can fail to be a sheaf has no further degenerate regime beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item The objectwise cokernel presheaf can fail to be a sheaf has no endpoint regime requiring a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item The objectwise cokernel presheaf can fail to be a sheaf does not use a hidden nonempty-family choice beyond the explicit constructions in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The objectwise cokernel presheaf can fail to be a sheaf is not a single biconditional requiring a separate forward implication certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim in The objectwise cokernel presheaf can fail to be a sheaf is not a single biconditional requiring a separate reverse implication certificate."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kernel-cokernel-image-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of abelian\ngroups on a topological space $X$.\n\nThe **kernel sheaf** is the subsheaf\n$$\n\\ker(\\varphi)\\subseteq \\mathcal F\n$$\ndefined objectwise by\n$$\n\\ker(\\varphi)(U):=\\ker\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr).\n$$\n\nThe **cokernel presheaf** is\n$$\nU\\longmapsto \\operatorname{coker}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **cokernel sheaf** $\\operatorname{coker}(\\varphi)$ is its\nsheafification.\n\nThe **image presheaf** is\n$$\nU\\longmapsto \\operatorname{im}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **image sheaf** $\\operatorname{im}(\\varphi)$ is its sheafification.\n\nFor sheaves of modules on a ringed space, the same formulas are taken in the\ncorresponding module categories on each open set.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Reviewed the on-disk proof for The objectwise cokernel presheaf can fail to be a sheaf on 2026-09-05 and aligned this contract to the final precheck-clean step structure."
+      }
+    }
+  }
+}

@@ -8,6 +8,7 @@ parts:
       - normed-and-banach-spaces
       - bounded-linear-operators-and-quotient-spaces
       - finite-dimensional-normed-spaces-and-riesz-lemma
+      - the-analytic-hahn-banach-theorem
 ---
 
 ## foundations
@@ -22,4 +23,8 @@ show where the theory becomes rigid: all norms are equivalent, finite dimension
 forces completeness and closed subspaces, every linear map out of finite
 dimension is bounded, and Riesz's lemma detects infinite dimension through
 separated unit vectors, noncompact closed unit balls, and the
-Kuratowski-Wojdyslawski embedding route.
+Kuratowski-Wojdyslawski embedding route. Hahn-Banach completes the foundational
+duality tool: Zorn's lemma extends real sublinearly dominated functionals, the
+complex case follows through real parts, and norm-preserving extensions yield
+norming functionals, separation of points by the dual, and recovery of a vector's
+norm from the dual unit ball.

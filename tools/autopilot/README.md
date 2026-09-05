@@ -289,7 +289,7 @@ the engine against a fake pipeline whose agents are scripts, and prove the
 retried exactly once and then blocks, that a vacuous gate stops the run, that
 pause holds and resume releases, that a restart does not redo finished work, and
 that a stage asking a model for mechanical work is refused at dispatch.
-The Step-8 tests additionally pin one Sol/max, web-enabled FA per affected
+The Step-8 tests additionally pin one Sol/xhigh, web-enabled FA per affected
 group, deterministic serial queues, out-of-order receipt refusal, and terminal
 closure without a fabricated judge verdict.
 

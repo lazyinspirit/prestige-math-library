@@ -1,0 +1,1813 @@
+{
+ "version": 1,
+ "level": "frontier-30",
+ "note": "Step-5 authoring contract for frontier-30 batch 4 on Friday, September 4, 2026.",
+ "scope": [
+  "lem-hahn-banach-one-step-extension",
+  "lem-union-of-a-chain-of-dominated-extensions",
+  "thm-hahn-banach-dominated-extension",
+  "thm-hahn-banach-norm-preserving-extension",
+  "lem-real-part-determines-a-complex-linear-functional",
+  "thm-complex-hahn-banach-norm-preserving-extension",
+  "thm-dual-norms-every-vector",
+  "cor-dual-separates-points",
+  "cor-norm-recovered-from-the-dual-unit-ball",
+  "thm-norm-preserving-extension-from-any-subspace",
+  "ex-norming-functionals-in-lp-from-the-measure-duality-page",
+  "ex-many-extensions-from-a-codimension-one-subspace",
+  "ex-banach-limit-from-hahn-banach",
+  "lem-banach-limit-properties",
+  "cex-hahn-banach-extension-need-not-be-unique"
+ ],
+ "contracts": {
+  "lem-hahn-banach-one-step-extension": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "If $m+tx_0=m'+t'x_0$ with $m,m' \\in M$ and $t,t' \\in \\mathbb{R}$, then $m-m'=(t'-t)x_0 \\in M$. If $t \\ne t'$, closure under scalar multiplication from [L3] gives $x_0 \\in M$, contradicting the hypothesis. So $t=t'$ and then $m=m'$. Therefore every element of $N$ has a unique representation $m+tx_0$, and $F_c$ is well defined.",
+     "step": "1.1",
+     "inputs": [
+      "L3",
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "For $y,z \\in M$, one has $$F_c(y-x_0)=f(y)-c \\qquad \\text{and} \\qquad F_c(z+x_0)=f(z)+c.$$ Therefore $$F_c(y-x_0) \\le p(y-x_0) \\iff f(y)-p(y-x_0) \\le c,$$ and $$F_c(z+x_0) \\le p(z+x_0) \\iff c \\le p(z+x_0)-f(z).$$",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-3",
+     "claim": "Let $y,z \\in M$. Since $y-z \\in M$ by [L3], linearity and domination on $M$ give $$f(y)-f(z)=f(y-z) \\le p(y-z).$$ Also $$y-z=(y-x_0)+(z+x_0),$$ so subadditivity from [L1] yields $$p(y-z) \\le p(y-x_0)+p(z+x_0).$$ Combining these inequalities gives $$f(y)-p(y-x_0) \\le p(z+x_0)-f(z).$$ Hence every lower endpoint is at most every upper endpoint.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Suppose first that the two inequalities from step 1.2 hold for every $y,z \\in M$. Let $m+tx_0 \\in N$. If $t>0$, then $$m+tx_0=t\\left(\\frac{m}{t}+x_0\\right),$$ so by linearity and positive homogeneity, $$F_c(m+tx_0)=tF_c\\left(\\frac{m}{t}+x_0\\right) \\le tp\\left(\\frac{m}{t}+x_0\\right)=p(m+tx_0).$$ If $t<0$, then $$m+tx_0=(-t)\\left(\\frac{-m}{t}-x_0\\right),$$ so the lower-bound half of step 1.2 applied to $y:=-m/t$ gives $$F_c(m+tx_0)=(-t)F_c\\left(\\frac{-m}{t}-x_0\\right) \\le (-t)p\\left(\\frac{-m}{t}-x_0\\right)=p(m+tx_0).$$ If $t=0$, then $m+tx_0=m \\in M$, so the hypothesis $f \\le p$ gives $F_c(m)=f(m) \\le p(m)$. Thus $F_c \\le p$ on $N$. Conversely, if $F_c \\le p$ on $N$, then applying that inequality to $y-x_0$ and $z+x_0$ yields the two inequalities in step 1.2.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L1",
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Step 1.3 shows that the set of lower endpoints is bounded above by every upper endpoint, and the set of upper endpoints is bounded below by every lower endpoint. Completeness of $\\mathbb{R}$ therefore gives real numbers $\\alpha \\le \\beta$ with the displayed formulas in the statement. By step 2.1, a real number $c$ is admissible exactly when it lies between every lower endpoint and every upper endpoint, that is, exactly when $\\alpha \\le c \\le \\beta$. Therefore the admissible values form the nonempty interval $[\\alpha,\\beta]$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "step 1.3"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-sublinear-functional",
+     "source_section": "Definition",
+     "quote": "Let $X$ be a real vector space ([[def-vector-space]]). A function\n$p:X \\to \\mathbb{R}$ is a **sublinear functional** if\n\n$$p(x+y) \\le p(x)+p(y) \\qquad \\text{for all } x,y \\in X,$$\n\nand\n\n$$p(tx)=tp(x) \\qquad \\text{for all } x \\in X \\text{ and all } t \\ge 0.$$",
+     "uses": [
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-algebraic-dual-and-linear-functional",
+     "source_section": "Definition",
+     "quote": "Let $V$ be a vector space over $F$. A **linear functional** on $V$ is a linear map $f:V\\to F$, where $F$ is regarded as a vector space over itself. The **algebraic dual space** of $V$ is\n\n$$V^*:=\\mathcal L(V,F),$$\n\nwith pointwise addition and scalar multiplication. This is the full algebraic dual: no topology, norm, or continuity condition is imposed.",
+     "uses": [
+      "1.2",
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-linear-subspace",
+     "source_section": "Definition",
+     "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). A subset\n$W \\subseteq V$ is a **linear subspace** of $V$ when\n\n- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.\n\nEvery vector space $V$ has the two **trivial linear subspaces** $\\{0_V\\}$ and $V$\nitself; a linear subspace $W$ with $W \\ne V$ is called **proper**.\n\n**The restricted operations are the required data, and $W$ is a vector space.**\nBy (W2) the vector addition of $V$ restricts to a binary operation\n$W \\times W \\to W$, and by (W3) the scalar multiplication restricts to a map\n$F \\times W \\to W$. With these and the element $0_V$, the set $W$ is a vector\nspace over $F$:\n\n- axioms (V2)–(V5) are equations required of elements of $W$, which are in\n  particular elements of $V$, so they are inherited from $V$; likewise\n  associativity and commutativity of the restricted addition;\n- $0_V$ lies in $W$ by (W1) and is a two-sided identity for the restricted\n  addition, since it is one in $V$;\n- for $v \\in W$ the vector $(-1_F)v$ lies in $W$ by (W3), and\n  $(-1_F)v = -v$ ([[lem-vector-space-elementary-consequences]]), so $-v \\in W$\n  and $v + (-v) = 0_V$ holds in $W$.\n\nSo $(W,+,0_V)$ is an abelian group, which is axiom (V1), and $W$ is a vector\nspace over $F$ **whose zero vector and whose additive inverses are those of\n$V$**. In the language of [[def-subgroup]], the three displayed conditions\n(S1) $0_V \\in W$, (S2) closure under addition and (S3) closure under additive\ninverses all hold, so $W$ is a subgroup of the abelian group $(V,+,0_V)$\n([[def-group]]); that reading, and its converse, are recorded as\n[[lem-linear-subspace-is-a-subgroup]] and are cited from there rather than\nre-argued below.",
+     "uses": [
+      "1.1",
+      "1.3"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The lemma studies one fixed subspace M and one fixed vector x_0, not an empty family of extensions or domains."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "In lem-hahn-banach-one-step-extension, step 2.1 handles the t=0 branch explicitly, so vectors already in M are covered."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No singleton-family or value-one regime appears in the one-step interval statement."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In lem-hahn-banach-one-step-extension, step 3.1 allows alpha=beta, so the admissible interval may collapse to a single point and still be valid."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "In lem-hahn-banach-one-step-extension, step 3.1 proves c is admissible exactly when alpha <= c <= beta, so both endpoints belong to the interval."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In lem-hahn-banach-one-step-extension, step 3.1 proves the admissible set is nonempty by producing alpha <= beta from the written inequalities."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "In lem-hahn-banach-one-step-extension, step 2.1 proves that F_c <= p on N forces the interval inequalities from step 1.2."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "In lem-hahn-banach-one-step-extension, step 2.1 proves that the inequalities from step 1.2 imply F_c <= p on N."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-d",
+    "notes": "High risk came from the nonempty admissible interval, the iff, and the sign split in the extension formula. I reread the uniqueness of the decomposition in M+Rx_0, the proof that every lower endpoint is at most every upper endpoint, the t>0/t<0/t=0 case split in step 2.1, and the completeness argument in step 3.1. The current proof is sound and the contract now records that review."
+   }
+  },
+  "lem-union-of-a-chain-of-dominated-extensions": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "If $x \\in N_1 \\cap N_2$ for $(N_1,g_1),(N_2,g_2) \\in \\mathcal{C}$, then [L2] gives comparability. Suppose $N_1 \\subseteq N_2$. Since the chain order is extension, $g_2|_{N_1}=g_1$, so $g_1(x)=g_2(x)$. The other inclusion case is the same. Therefore $G(x)$ is well defined on overlaps.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Let $u,v \\in U$ and $a \\in \\mathbb{R}$. Choose $(N_1,g_1),(N_2,g_2) \\in \\mathcal{C}$ with $u \\in N_1$ and $v \\in N_2$. By [L2], one of the domains contains the other; after relabeling, assume $N_1 \\subseteq N_2$. Then $u,v \\in N_2$, so $u+v \\in N_2$ and $au \\in N_2$ because $N_2$ is a linear subspace. Hence $u+v,au \\in U$. Thus $U$ is a linear subspace.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "With the same choice of $N_2$ as in step 1.2, one has $$G(u+v)=g_2(u+v)=g_2(u)+g_2(v)=G(u)+G(v),$$ and $$G(au)=g_2(au)=ag_2(u)=aG(u),$$ by [L1]. Therefore $G$ is linear.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "If $u \\in U$, choose $(N,g) \\in \\mathcal{C}$ with $u \\in N$. Then $G(u)=g(u) \\le p(u)$ by the defining property of the chain element, so $G$ is dominated by $p$. If every chain element extends the same $f:M \\to \\mathbb{R}$, then every $m \\in M$ lies in each domain and all values there equal $f(m)$, so $G|_M=f$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "given"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-algebraic-dual-and-linear-functional",
+     "source_section": "Definition",
+     "quote": "Let $V$ be a vector space over $F$. A **linear functional** on $V$ is a linear map $f:V\\to F$, where $F$ is regarded as a vector space over itself. The **algebraic dual space** of $V$ is\n\n$$V^*:=\\mathcal L(V,F),$$\n\nwith pointwise addition and scalar multiplication. This is the full algebraic dual: no topology, norm, or continuity condition is imposed.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-chain",
+     "source_section": "Definition",
+     "quote": "Let $(P, \\le)$ be a poset ([[def-partial-order]]). A subset $C \\subseteq P$ is a\n**chain** if any two of its elements are comparable: for all $x, y \\in C$, either\n$x \\le y$ or $y \\le x$.\n\nEquivalently, $C$ is a chain if the restriction of $\\le$ to $C$ is a total order\non $C$.",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "In The union of a chain of dominated extensions is a well-defined dominated linear functional, the Statement explicitly assumes that the chain C is nonempty, so the empty-chain union is outside the written hypotheses rather than a missing proof branch.",
+     "reviewed": {
+      "upheld": true,
+      "by": "contract-audit-6",
+      "reason": "In The union of a chain of dominated extensions is a well-defined dominated linear functional, the Statement explicitly assumes that the chain C is nonempty, so the empty-chain union is outside the written hypotheses rather than a missing proof branch."
+     }
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The lemma is about overlap agreement and linearity on a union of domains, so there is no separate zero-denominator or zero-vector branch to discharge."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "In lem-union-of-a-chain-of-dominated-extensions, steps 1.1 through 3.1 still work when the chain has one element, because the union is then exactly that one domain."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In lem-union-of-a-chain-of-dominated-extensions, steps 1.1 and 3.1 allow two comparable extensions to have the same domain, and the overlap check is exactly what forces their equality there."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval, order-endpoint, or boundary-value parameter occurs in the union lemma."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "No element is selected from a nonempty family; the union functional is defined pointwise from the chain data already given."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim of the union lemma is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim of the union lemma is not a biconditional."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-d",
+    "notes": "High risk came from well-definedness of the pointwise union and the nonempty-chain hypothesis. I reread the overlap argument from comparability in the chain, the placement of two vectors into one larger domain to prove closure under addition and scalar multiplication, and the domination/extension check on the union. The explicit nonempty-chain hypothesis resolves the empty-case concern, so the current proof is sound."
+   }
+  },
+  "thm-hahn-banach-dominated-extension": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Let $\\mathcal{E}$ be the set of all pairs $(N,g)$ such that $M \\subseteq N \\subseteq X$, the set $N$ is a linear subspace of $X$, the map $g:N \\to \\mathbb{R}$ is linear, $g|_M=f$, and $g \\le p$ on $N$. Order $\\mathcal{E}$ by extension: $$(N_1,g_1) \\preceq (N_2,g_2) \\iff N_1 \\subseteq N_2 \\text{ and } g_2|_{N_1}=g_1.$$ The pair $(M,f)$ lies in $\\mathcal{E}$, so this poset is nonempty.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Let $\\mathcal{C} \\subseteq \\mathcal{E}$ be a chain. If $\\mathcal{C}=\\emptyset$, then $(M,f)$ is an upper bound for it. If $\\mathcal{C} \\ne \\emptyset$, [L2] applies to the union of its domains and yields a well-defined linear functional dominated by $p$; because every chain element extends $f$, that union functional still extends $f$. Hence every chain in $\\mathcal{E}$ has an upper bound in $\\mathcal{E}$.",
+     "step": "2.1",
+     "inputs": [
+      "L2",
+      "step 1.1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "By [L3], choose a maximal element $(N,F)$ of $\\mathcal{E}$. If $N \\ne X$, choose $x_0 \\in X \\setminus N$. Applying [L1] to the dominated functional $F$ on the subspace $N$ produces a dominated linear extension $\\widetilde{F}$ on $N+\\mathbb{R}x_0$. Then $(N,F) \\prec (N+\\mathbb{R}x_0,\\widetilde{F})$, contradicting maximality. Therefore $N=X$.",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "L3",
+      "step 2.1",
+      "choose"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Since the maximal domain is all of $X$, the corresponding functional $F$ is the required dominated extension of $f$.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-hahn-banach-one-step-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a real vector space, let $M \\subseteq X$ be a linear subspace, let\n$p:X \\to \\mathbb{R}$ be sublinear, and let $f:M \\to \\mathbb{R}$ be linear with\n$f(m) \\le p(m)$ for every $m \\in M$. Fix $x_0 \\in X \\setminus M$ and put\n$N:=M+\\mathbb{R}x_0$.\n\nFor $c \\in \\mathbb{R}$ define\n\n$$F_c(m+tx_0):=f(m)+tc \\qquad (m \\in M,\\ t \\in \\mathbb{R}).$$\n\nThis is well defined, and with\n\n$$\\alpha:=\\sup_{y \\in M}\\bigl(f(y)-p(y-x_0)\\bigr), \\qquad\n\\beta:=\\inf_{z \\in M}\\bigl(p(z+x_0)-f(z)\\bigr),$$\n\none has $\\alpha \\le \\beta$. Moreover,\n$F_c(n) \\le p(n)$ for every $n \\in N$ if and only if $\\alpha \\le c \\le \\beta$.\nIn particular the admissible values of $F_c(x_0)=c$ form the nonempty interval\n$[\\alpha,\\beta]$.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-union-of-a-chain-of-dominated-extensions",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a real vector space and let $p:X \\to \\mathbb{R}$ be sublinear. Let\n$\\mathcal{C}$ be a nonempty chain, ordered by extension, of pairs $(N,g)$ such that\n$N \\subseteq X$ is a linear subspace and $g:N \\to \\mathbb{R}$ is linear with\n$g(n) \\le p(n)$ for every $n \\in N$.\n\nPut\n\n$$U:=\\bigcup_{(N,g) \\in \\mathcal{C}} N.$$\n\nThen $U$ is a linear subspace of $X$, and the pointwise union\n$G:U \\to \\mathbb{R}$ defined by $G(x)=g(x)$ whenever $x \\in N$ is a well-defined\nlinear functional with $G(u) \\le p(u)$ for every $u \\in U$.\n\nIf every $(N,g) \\in \\mathcal{C}$ extends the same linear functional\n$f:M \\to \\mathbb{R}$, then $G$ also extends $f$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-zorn",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(P, \\le)$ be a\nnonempty poset in which **every chain has an upper bound**. Then $P$ has a\nmaximal element ([[def-maximal-element]]).\n\nNote the hypothesis asks only for an upper bound, not a least upper bound, and\nthe conclusion asserts only that a maximal element exists, never that a greatest\none does.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "In thm-hahn-banach-dominated-extension, step 2.1 treats the empty chain explicitly by taking (M,f) as an upper bound."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The theorem has no distinguished zero-denominator or zero-divisor branch; zero values are already absorbed by the linear-functional hypotheses."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No singleton, value-one, or one-dimensional exceptional argument is separated off in the theorem statement."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In thm-hahn-banach-dominated-extension, step 3.1 already closes when the maximal domain is X, so the case M=X is included without a second argument."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The dominated extension theorem is not parameterized by interval endpoints or ordered-boundary values."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In thm-hahn-banach-dominated-extension, step 3.1 is the choice-bearing existence step: Zorn supplies a maximal dominated extension."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The dominated extension theorem is an existence statement, not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The dominated extension theorem is an existence statement, not a biconditional."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-d",
+    "notes": "Critical risk came from the Zorn step, the empty-chain branch, and enlargement of a maximal domain. I reread the construction of the extension poset, the upper-bound argument using (M,f) for the empty chain and the union lemma for nonempty chains, and the contradiction from adjoining x_0 by the one-step extension lemma. The current theorem is sound on those points."
+   }
+  },
+  "thm-hahn-banach-norm-preserving-extension": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Define $p:X \\to \\mathbb{R}$ by $$p(x):=\\|f_0\\|\\,\\|x\\|.$$ The triangle inequality and real homogeneity of the norm make $p$ sublinear. For $m \\in M$, [L3] and [L4] give $$f_0(m) \\le |f_0(m)| \\le \\|f_0\\|\\,\\|m\\|=p(m),$$ so $f_0 \\le p$ on $M$.",
+     "step": "1.1",
+     "inputs": [
+      "L3",
+      "L4",
+      "given",
+      "construct",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "By [L1], there exists a linear functional $F:X \\to \\mathbb{R}$ extending $f_0$ and satisfying $F(x) \\le p(x)$ for every $x \\in X$.",
+     "step": "2.1",
+     "inputs": [
+      "L1",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Apply step 2.1 to $x$ and to $-x$. Since $p(-x)=p(x)$, one gets $$-\\,\\|f_0\\|\\,\\|x\\| \\le F(x) \\le \\|f_0\\|\\,\\|x\\|,$$ hence $$|F(x)| \\le \\|f_0\\|\\,\\|x\\| \\qquad (x \\in X).$$ So $F$ is bounded in the sense of [L2], and [L3] gives $\\|F\\| \\le \\|f_0\\|$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "L2",
+      "L3",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-2",
+     "claim": "Since $F|_M=f_0$, for every $m \\in M$ with $\\|m\\| \\le 1$ one has $|f_0(m)|=|F(m)| \\le \\|F\\|$. Taking the supremum over the unit ball of the normed subspace $M$ and using [L3] and [L4] yields $\\|f_0\\| \\le \\|F\\|$.",
+     "step": "3.2",
+     "inputs": [
+      "step 2.1",
+      "L3",
+      "L4"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Steps 3.1 and 3.2 give $\\|F\\|=\\|f_0\\|$, so $F$ is the required norm-preserving extension.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1",
+      "step 3.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-hahn-banach-dominated-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a real vector space, let $M \\subseteq X$ be a linear subspace, let\n$p:X \\to \\mathbb{R}$ be sublinear, and let $f:M \\to \\mathbb{R}$ be linear with\n$f(m) \\le p(m)$ for every $m \\in M$. Then there exists a linear functional\n$F:X \\to \\mathbb{R}$ such that $F|_M=f$ and $F(x) \\le p(x)$ for every $x \\in X$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-bounded-linear-operator",
+     "source_section": "Definition",
+     "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[rem-real-and-complex-normed-space-convention]]. A linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-operator-norm",
+     "source_section": "Definition",
+     "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThis supremum is finite because every bound $C$ for $T$ also bounds the set on\nthe right by $C$.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+     "uses": [
+      "1.1",
+      "3.1",
+      "3.2"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "def-normed-subspace",
+     "source_section": "Definition",
+     "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a linear subspace in the\nsense of [[def-linear-subspace]]. The **normed subspace** $W$ is the vector\nspace $W$ equipped with the restricted norm\n$$\\|w\\|_W:=\\|w\\|_V \\qquad (w\\in W).$$\n\nIts induced metric is the restriction of the ambient norm metric to\n$W\\times W$, so the inclusion $W\\hookrightarrow V$ is an isometric embedding in\nthe sense of [[def-isometry-and-metric-embedding]].",
+     "uses": [
+      "1.1",
+      "3.2"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "A normed space already contains 0, so the theorem is not about an empty ambient object."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "In thm-hahn-banach-norm-preserving-extension, step 1.1 still gives p=0 when ||f_0||=0, and steps 2.1 through 4.1 then return a zero extension with the same norm."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The theorem has no separate value-one or singleton branch beyond the general operator-norm argument."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In thm-hahn-banach-norm-preserving-extension, step 2.1 does not require M to be proper, so the case M=X is included in the same proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval-endpoint or boundary-order parameter appears in the norm-preserving extension theorem."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In thm-hahn-banach-norm-preserving-extension, step 2.1 invokes Hahn-Banach to obtain the extension F."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The top-level claim is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The top-level claim is not a biconditional."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-d",
+    "notes": "Critical risk came from the domination functional p(x)=||f_0|| ||x||, the two-sided bound on F, and the reverse norm inequality on the subspace unit ball. I reread the proof that p is sublinear and dominates f_0, the application to x and -x giving |F(x)|<=||f_0|| ||x||, and the supremum argument on the unit ball of M. The current proof is sound."
+   }
+  },
+  "lem-real-part-determines-a-complex-linear-functional": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Let $u:=\\operatorname{Re}f$. For $x,y \\in X$ and $a \\in \\mathbb{R}$, $$u(x+y)=\\operatorname{Re}(f(x+y))=\\operatorname{Re}f(x)+\\operatorname{Re}f(y),$$ and $$u(ax)=\\operatorname{Re}(f(ax))=\\operatorname{Re}(af(x))=au(x).$$ So $u$ is real linear.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Write $f(x)=a+ib$ with $a,b \\in \\mathbb{R}$. Since $f$ is complex linear, $$f(ix)=if(x)=ia-b,$$ so $\\operatorname{Re}f(x)=a$ and $\\operatorname{Re}f(ix)=-b$. Therefore $$u(x)-iu(ix)=a-i(-b)=a+ib=f(x).$$",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-3",
+     "claim": "Conversely, let $u$ be real linear and define $g(x):=u(x)-iu(ix)$. Additivity is immediate from real linearity of $u$. Also $$g(ix)=u(ix)-iu(i^2x)=u(ix)+iu(x)=i\\bigl(u(x)-iu(ix)\\bigr)=ig(x).$$ Now for $\\lambda=a+ib \\in \\mathbb{C}$ with $a,b \\in \\mathbb{R}$, $$g(\\lambda x)=g(ax+bix)=ag(x)+bg(ix)=ag(x)+big(x)=\\lambda g(x).$$ Hence $g$ is complex linear.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "L2",
+      "given",
+      "construct",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Taking real parts in the definition of $g$ gives $\\operatorname{Re}g(x)=u(x)$ for every $x$. Together with step 1.2, this shows that a complex linear functional is uniquely determined by its real part.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "step 1.3",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-algebraic-dual-and-linear-functional",
+     "source_section": "Definition",
+     "quote": "Let $V$ be a vector space over $F$. A **linear functional** on $V$ is a linear map $f:V\\to F$, where $F$ is regarded as a vector space over itself. The **algebraic dual space** of $V$ is\n\n$$V^*:=\\mathcal L(V,F),$$\n\nwith pointwise addition and scalar multiplication. This is the full algebraic dual: no topology, norm, or continuity condition is imposed.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "rem-real-and-complex-normed-space-convention",
+     "source_section": "Remark",
+     "quote": "The published definition [[def-norm-and-normed-space]] is written for vector\nspaces over $\\mathbb{R}$. On this page the same language is used over\n$\\mathbb{C}$ as well: a complex normed space is a complex vector space with a\nfunction $\\|\\cdot\\|:V\\to\\mathbb{R}$ satisfying the same separation and triangle\ninequality clauses, while absolute homogeneity is read with the complex modulus\n$|\\lambda|$ of\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] instead of the real\nabsolute value.\n\nNothing else changes. The induced metric is still $d(x,y)=\\|x-y\\|$, Banach\nmeans complete for that metric, and every estimate on this page that uses only\nthe triangle inequality and $|\\lambda|$ is valid verbatim over either scalar\nfield. When scalar continuity in the complex case is mentioned, the scalar field\nis the field of complex numbers already constructed in\n[[thm-complex-numbers-form-a-field]].",
+     "uses": [
+      "1.1",
+      "1.3"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The lemma is a pointwise reconstruction identity and does not quantify over an empty family."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "No denominator, zero-divisor, or excluded zero-vector branch appears in the reconstruction formulas."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The formulas do not split off any special value-one or singleton case."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The reconstruction argument is purely algebraic and does not depend on excluding a smaller or collapsed ambient regime."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval or ordered-endpoint parameter occurs in the real-part lemma."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "No hidden choice is used: the functional g is defined by an explicit formula in step 1.3."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "In lem-real-part-determines-a-complex-linear-functional, steps 1.1 and 1.2 prove that a complex-linear f is recovered from its real part."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "In lem-real-part-determines-a-complex-linear-functional, steps 1.3 and 2.1 prove that any real-linear u defines a complex-linear g with Re g=u."
+    }
+   ]
+  },
+  "thm-complex-hahn-banach-norm-preserving-extension": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Let $u:=\\operatorname{Re}f_0$. By [L2], $u$ is real linear on the underlying real subspace $M$. Also $$|u(m)| \\le |f_0(m)| \\le \\|f_0\\|\\,\\|m\\| \\qquad (m \\in M),$$ so $u$ is bounded with $\\|u\\| \\le \\|f_0\\|$.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Apply [L1] to the underlying real normed spaces. This yields a bounded real linear functional $U:X \\to \\mathbb{R}$ extending $u$ and satisfying $\\|U\\|=\\|u\\|$. Define $$F(x):=U(x)-iU(ix) \\qquad (x \\in X).$$ By [L2], $F$ is complex linear and $\\operatorname{Re}F=U$.",
+     "step": "2.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "step 1.1",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "For $m \\in M$, the equality $U|_M=u$ and [L2] give $$F(m)=u(m)-iu(im)=f_0(m).$$ So $F$ extends $f_0$.",
+     "step": "3.1",
+     "inputs": [
+      "L2",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "step-3-2",
+     "claim": "Fix $x \\in X$. Choose $\\theta \\in \\mathbb{R}$ so that $e^{i\\theta}F(x)=|F(x)|$ is a nonnegative real number. Since $\\operatorname{Re}F=U$ and $F$ is complex linear, $$|F(x)|=\\operatorname{Re}(e^{i\\theta}F(x)) =\\operatorname{Re}F(e^{i\\theta}x)=U(e^{i\\theta}x).$$ Therefore $$|F(x)| \\le \\|U\\|\\,\\|e^{i\\theta}x\\|=\\|U\\|\\,\\|x\\| \\le \\|f_0\\|\\,\\|x\\|,$$ where the last inequality uses step 1.1 and $\\|U\\|=\\|u\\|$. Hence $\\|F\\| \\le \\|f_0\\|$.",
+     "step": "3.2",
+     "inputs": [
+      "L2",
+      "L3",
+      "step 1.1",
+      "step 2.1",
+      "choose",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Since $F|_M=f_0$, every $m \\in M$ with $\\|m\\| \\le 1$ satisfies $|f_0(m)|=|F(m)| \\le \\|F\\|$. Taking the supremum over the unit ball of $M$ gives $\\|f_0\\| \\le \\|F\\|$. Combined with step 3.2, this yields $\\|F\\|=\\|f_0\\|$.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1",
+      "step 3.2",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-hahn-banach-norm-preserving-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a real normed space, let $M \\subseteq X$ be a linear subspace, and\nlet $f_0:M \\to \\mathbb{R}$ be a bounded linear functional. Then there exists a\nbounded linear functional $F:X \\to \\mathbb{R}$ such that $F|_M=f_0$ and\n$\\|F\\|=\\|f_0\\|$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-real-part-determines-a-complex-linear-functional",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a complex vector space.\n\nIf $f:X \\to \\mathbb{C}$ is complex linear and $u:=\\operatorname{Re}f$, then $u$\nis real linear on the underlying real vector space and\n\n$$f(x)=u(x)-iu(ix) \\qquad (x \\in X).$$\n\nConversely, if $u:X \\to \\mathbb{R}$ is real linear on the underlying real\nvector space, then\n\n$$g(x):=u(x)-iu(ix) \\qquad (x \\in X)$$\n\ndefines a complex linear functional with $\\operatorname{Re}g=u$. In particular a\ncomplex linear functional is uniquely determined by its real part.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "3.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "rem-real-and-complex-normed-space-convention",
+     "source_section": "Remark",
+     "quote": "The published definition [[def-norm-and-normed-space]] is written for vector\nspaces over $\\mathbb{R}$. On this page the same language is used over\n$\\mathbb{C}$ as well: a complex normed space is a complex vector space with a\nfunction $\\|\\cdot\\|:V\\to\\mathbb{R}$ satisfying the same separation and triangle\ninequality clauses, while absolute homogeneity is read with the complex modulus\n$|\\lambda|$ of\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] instead of the real\nabsolute value.\n\nNothing else changes. The induced metric is still $d(x,y)=\\|x-y\\|$, Banach\nmeans complete for that metric, and every estimate on this page that uses only\nthe triangle inequality and $|\\lambda|$ is valid verbatim over either scalar\nfield. When scalar continuity in the complex case is mentioned, the scalar field\nis the field of complex numbers already constructed in\n[[thm-complex-numbers-form-a-field]].",
+     "uses": [
+      "3.2"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "A complex normed space is not an empty ambient object, and emptiness plays no role in the proof."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "In thm-complex-hahn-banach-norm-preserving-extension, step 1.1 gives u=0 when f_0=0, and steps 2.1 through 4.1 return a norm-zero extension."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No value-one or singleton branch is separated from the general complex extension proof."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In thm-complex-hahn-banach-norm-preserving-extension, step 2.1 works whether or not M is proper, so the whole-space case is already included."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The complex extension theorem is not an endpoint statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In thm-complex-hahn-banach-norm-preserving-extension, step 2.1 obtains the real extension U from the real Hahn-Banach theorem."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The theorem is an existence statement rather than a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The theorem is an existence statement rather than a biconditional."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-d",
+    "notes": "High risk came from reconstructing a complex functional from its real part and preserving the norm. I reread the passage to the underlying real normed spaces, the definition F(x)=U(x)-iU(ix), the extension check on M, and the phase choice e^{i theta} making |F(x)|=U(e^{i theta}x). Those steps are correct on the current text, so the proof is sound."
+   }
+  },
+  "thm-dual-norms-every-vector": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Let $M:=\\operatorname{span}\\{x\\}$. Define $f_0:M \\to \\mathbb{R}$ or $f_0:M \\to \\mathbb{C}$ by $$f_0(\\lambda x):=\\lambda \\|x\\|.$$ Because $x \\ne 0$, each vector of $M$ has a unique representation $\\lambda x$. Moreover, $$|f_0(\\lambda x)|=|\\lambda|\\,\\|x\\|=\\|\\lambda x\\|,$$ so $f_0$ is bounded and $\\|f_0\\|=1$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "construct",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "If the scalar field is $\\mathbb{R}$, [L2] extends $f_0$ to a bounded real linear functional $f$ on $X$ with $\\|f\\|=\\|f_0\\|=1$. Since $x=1 \\cdot x$, $f(x)=f_0(x)=\\|x\\|$.",
+     "step": "2.1",
+     "inputs": [
+      "L2",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "If the scalar field is $\\mathbb{C}$, [L3] extends $f_0$ to a bounded complex linear functional $f$ on $X$ with $\\|f\\|=\\|f_0\\|=1$. Again $f(x)=f_0(x)=\\|x\\|$.",
+     "step": "2.2",
+     "inputs": [
+      "L3",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "In either scalar case, the extension produced in step 2.1 or step 2.2 is a bounded linear functional on $X$, hence an element of $X^*$ by [L1], with norm $1$ and value $\\|x\\|$ at $x$.",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "step 2.1",
+      "step 2.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-dual-space-of-a-normed-space",
+     "source_section": "Definition",
+     "quote": "Let $X$ be a normed space over the scalar field $\\mathbb{K}$, where\n$\\mathbb{K}=\\mathbb{R}$ in the literal definition and $\\mathbb{K}=\\mathbb{C}$\nby the convention of [[rem-real-and-complex-normed-space-convention]]. The\n**dual space** of $X$ is\n\n$$X^*:=\\mathcal{B}(X,\\mathbb{K}),$$\n\nthe space of bounded linear functionals on $X$\n([[def-space-of-bounded-linear-operators]]).\n\nEach $f \\in X^*$ is in particular a linear functional in the algebraic sense,\nso $X^*$ is a subspace of the algebraic dual from\n[[def-algebraic-dual-and-linear-functional]].\n\nThe **dual norm** on $X^*$ is the operator norm:\n\n$$\\|f\\|_{X^*}:=\\|f\\|\n=\\sup\\{|f(x)|:\\|x\\| \\le 1\\}.$$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-hahn-banach-norm-preserving-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a real normed space, let $M \\subseteq X$ be a linear subspace, and\nlet $f_0:M \\to \\mathbb{R}$ be a bounded linear functional. Then there exists a\nbounded linear functional $F:X \\to \\mathbb{R}$ such that $F|_M=f_0$ and\n$\\|F\\|=\\|f_0\\|$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-complex-hahn-banach-norm-preserving-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a complex normed space, let $M \\subseteq X$ be a linear subspace, and\nlet $f_0:M \\to \\mathbb{C}$ be a bounded complex linear functional. Then there\nexists a bounded complex linear functional $F:X \\to \\mathbb{C}$ such that\n$F|_M=f_0$ and $\\|F\\|=\\|f_0\\|$.",
+     "uses": [
+      "2.2"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The theorem concerns one fixed nonzero vector, not an empty family of vectors."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement excludes x=0 explicitly, so the zero-vector case is outside the claim."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "In thm-dual-norms-every-vector, step 1.1 computes ||f_0||=1 on span{x}, and steps 2.1 through 3.1 preserve that unit norm."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In thm-dual-norms-every-vector, step 1.1 works on the minimal one-dimensional carrier span{x}, so no larger subspace is needed."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The norming-functional theorem is not an interval-endpoint statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In thm-dual-norms-every-vector, steps 2.1 and 2.2 use Hahn-Banach extension to produce the functional on all of X."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The theorem asserts existence of a functional, not an if-and-only-if criterion."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The theorem asserts existence of a functional, not an if-and-only-if criterion."
+    }
+   ]
+  },
+  "cor-dual-separates-points": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Since $x \\ne y$, the vector $x-y$ is nonzero.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "By [L1], there exists $f \\in X^*$ with $$f(x-y)=\\|x-y\\|.$$ In particular $f(x-y) \\ne 0$.",
+     "step": "2.1",
+     "inputs": [
+      "L1",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "If $f(x)=f(y)$, then linearity would give $f(x-y)=0$, contradicting step 2.1. Therefore $f(x) \\ne f(y)$, so the dual space separates $x$ and $y$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-dual-norms-every-vector",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a normed space over $\\mathbb{R}$ or $\\mathbb{C}$, and let\n$x \\in X$ be nonzero. Then there exists $f \\in X^*$ such that\n\n$$\\|f\\|=1 \\qquad \\text{and} \\qquad f(x)=\\|x\\|.$$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The corollary concerns one fixed pair of points, not an empty family."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "In cor-dual-separates-points, step 1.1 reduces the problem to the nonzero vector x-y."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No value-one or singleton regime is singled out in the separation corollary."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The case x=y is excluded by the statement, so coincident points are not part of the claim."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "There is no interval or endpoint parameter in point separation by the dual."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In cor-dual-separates-points, step 2.1 invokes the norming-functional theorem to obtain a separating functional."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "In The dual space separates points of a normed space, the corollary is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "In The dual space separates points of a normed space, the corollary is not a biconditional."
+    }
+   ]
+  },
+  "cor-norm-recovered-from-the-dual-unit-ball": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "If $f \\in X^*$ and $\\|f\\| \\le 1$, then [L1] gives $$|f(x)| \\le \\|f\\|\\,\\|x\\| \\le \\|x\\|.$$ So the displayed supremum is at most $\\|x\\|$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "If $x=0$, step 1.1 already shows that the supremum is $0$, so the formula holds. Assume now that $x \\ne 0$. By [L2], choose $g \\in X^*$ with $\\|g\\|=1$ and $g(x)=\\|x\\|$. Then the displayed supremum is at least $|g(x)|=\\|x\\|$.",
+     "step": "2.1",
+     "inputs": [
+      "L2",
+      "given",
+      "choose",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Step 1.1 gives an upper bound of $\\|x\\|$, and step 2.1 gives equality. So $$\\|x\\|=\\sup\\{|f(x)|:f \\in X^*,\\ \\|f\\| \\le 1\\}.$$",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-dual-space-of-a-normed-space",
+     "source_section": "Definition",
+     "quote": "Let $X$ be a normed space over the scalar field $\\mathbb{K}$, where\n$\\mathbb{K}=\\mathbb{R}$ in the literal definition and $\\mathbb{K}=\\mathbb{C}$\nby the convention of [[rem-real-and-complex-normed-space-convention]]. The\n**dual space** of $X$ is\n\n$$X^*:=\\mathcal{B}(X,\\mathbb{K}),$$\n\nthe space of bounded linear functionals on $X$\n([[def-space-of-bounded-linear-operators]]).\n\nEach $f \\in X^*$ is in particular a linear functional in the algebraic sense,\nso $X^*$ is a subspace of the algebraic dual from\n[[def-algebraic-dual-and-linear-functional]].\n\nThe **dual norm** on $X^*$ is the operator norm:\n\n$$\\|f\\|_{X^*}:=\\|f\\|\n=\\sup\\{|f(x)|:\\|x\\| \\le 1\\}.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-dual-norms-every-vector",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a normed space over $\\mathbb{R}$ or $\\mathbb{C}$, and let\n$x \\in X$ be nonzero. Then there exists $f \\in X^*$ such that\n\n$$\\|f\\|=1 \\qquad \\text{and} \\qquad f(x)=\\|x\\|.$$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The corollary concerns one fixed vector x and the dual unit ball, not an empty indexing family."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "In cor-norm-recovered-from-the-dual-unit-ball, step 2.1 handles x=0 explicitly before the nonzero case."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The proof does not require a separate value-one branch beyond the general unit-ball estimate."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "No collapsed or exceptional ambient regime remains once the zero-vector case is separated in step 2.1."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "In cor-norm-recovered-from-the-dual-unit-ball, steps 2.1 and 3.1 show the supremum actually attains the boundary value ||x|| when x is nonzero."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In cor-norm-recovered-from-the-dual-unit-ball, step 2.1 chooses a unit functional from the norming-functional theorem."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The norm-recovery formula is an equality, not an if-and-only-if statement between two named conditions."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The norm-recovery formula is an equality, not an if-and-only-if statement between two named conditions."
+    }
+   ]
+  },
+  "thm-norm-preserving-extension-from-any-subspace": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "If the scalar field is $\\mathbb{R}$, then [L1] applies exactly as stated to the given subspace $M$ and produces a norm-preserving extension of $f_0$ to $X$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L3",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "If the scalar field is $\\mathbb{C}$, then [L2] applies exactly as stated to the given subspace $M$ and produces a norm-preserving extension of $f_0$ to $X$.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "L3",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Neither step 1.1 nor step 1.2 uses or requires that $M$ be closed; each cited theorem assumes only that $M$ is a linear subspace. Therefore every bounded linear functional on an arbitrary subspace extends with the same norm.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "L1",
+      "L2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-hahn-banach-norm-preserving-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a real normed space, let $M \\subseteq X$ be a linear subspace, and\nlet $f_0:M \\to \\mathbb{R}$ be a bounded linear functional. Then there exists a\nbounded linear functional $F:X \\to \\mathbb{R}$ such that $F|_M=f_0$ and\n$\\|F\\|=\\|f_0\\|$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-complex-hahn-banach-norm-preserving-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a complex normed space, let $M \\subseteq X$ be a linear subspace, and\nlet $f_0:M \\to \\mathbb{C}$ be a bounded complex linear functional. Then there\nexists a bounded complex linear functional $F:X \\to \\mathbb{C}$ such that\n$F|_M=f_0$ and $\\|F\\|=\\|f_0\\|$.",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "rem-real-and-complex-normed-space-convention",
+     "source_section": "Remark",
+     "quote": "The published definition [[def-norm-and-normed-space]] is written for vector\nspaces over $\\mathbb{R}$. On this page the same language is used over\n$\\mathbb{C}$ as well: a complex normed space is a complex vector space with a\nfunction $\\|\\cdot\\|:V\\to\\mathbb{R}$ satisfying the same separation and triangle\ninequality clauses, while absolute homogeneity is read with the complex modulus\n$|\\lambda|$ of\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] instead of the real\nabsolute value.\n\nNothing else changes. The induced metric is still $d(x,y)=\\|x-y\\|$, Banach\nmeans complete for that metric, and every estimate on this page that uses only\nthe triangle inequality and $|\\lambda|$ is valid verbatim over either scalar\nfield. When scalar continuity in the complex case is mentioned, the scalar field\nis the field of complex numbers already constructed in\n[[thm-complex-numbers-form-a-field]].",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "A normed space contains 0, and the theorem is not about an empty ambient object."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "In thm-norm-preserving-extension-from-any-subspace, steps 1.1 and 1.2 cite extension theorems that already include the zero functional."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No singleton or value-one exceptional case is separated in this scope-guard theorem."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In thm-norm-preserving-extension-from-any-subspace, steps 1.1 and 1.2 do not require M to be proper or closed, so both M=X and nonclosed M are included."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "There is no endpoint parameter in the arbitrary-subspace extension theorem."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In thm-norm-preserving-extension-from-any-subspace, steps 1.1 and 1.2 obtain the extension from the earlier Hahn-Banach theorems."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "In A bounded linear functional on an arbitrary subspace extends with the same norm, without assuming the subspace is closed, the theorem is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "In A bounded linear functional on an arbitrary subspace extends with the same norm, without assuming the subspace is closed, the theorem is not a biconditional."
+    }
+   ]
+  },
+  "ex-norming-functionals-in-lp-from-the-measure-duality-page": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Apply [L1] to the nonzero vector $f \\in L^p(\\mu)$. This gives a functional $\\Phi \\in (L^p(\\mu))^*$ with $\\|\\Phi\\|=1$ and $\\Phi(f)=\\|f\\|_p$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "By [L2], the same number $\\|f\\|_p$ is obtained as $$\\sup\\left\\{\\left|\\int fg\\,d\\mu\\right|:\\|g\\|_q \\le 1\\right\\}.$$ In the standard explicit realization, one takes $g=|f|^{p-1}\\operatorname{sgn}f/\\|f\\|_p^{p-1}$ when $1<p<\\infty$, and $g=\\operatorname{sgn}f$ when $p=1$.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Thus the abstract existence statement from Hahn-Banach and the concrete $L^p-L^q$ formula from the earlier page identify the same norming phenomenon: one proves that some unit functional attains $\\|f\\|_p$, and the other writes an attaining functional down explicitly.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-dual-norms-every-vector",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a normed space over $\\mathbb{R}$ or $\\mathbb{C}$, and let\n$x \\in X$ be nonzero. Then there exists $f \\in X^*$ such that\n\n$$\\|f\\|=1 \\qquad \\text{and} \\qquad f(x)=\\|x\\|.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "cor-l-p-norm-recovery-by-unit-l-q-pairings",
+     "source_section": "Statement",
+     "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $1 \\le p < \\infty$, and let\n$q$ be conjugate to $p$. Assume either $1<p<\\infty$, or $p=1$ and $\\mu$ is\nsigma-finite. Then for every $f \\in L^p(\\mu)$,\n$$\\|f\\|_p= \\sup\\left\\{\\,\\left|\\int fg\\,d\\mu\\right|:g \\in L^q(\\mu),\\ \\|g\\|_q\\le1\\,\\right\\}.$$",
+     "uses": [
+      "1.2"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The example concerns one fixed nonzero L^p element, not an empty family of test functions."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The example assumes f is nonzero, so the zero element is outside the scope of comparison."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "In ex-norming-functionals-in-lp-from-the-measure-duality-page, steps 1.1 and 1.2 both produce unit-norm functionals."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "Once f is assumed nonzero, no further collapsed case remains in this comparison example."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The example compares two norm-attaining descriptions and does not hinge on interval endpoints."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In ex-norming-functionals-in-lp-from-the-measure-duality-page, step 1.1 invokes the abstract norming-functional theorem to produce Phi."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example is a comparison, not a biconditional theorem."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The example is a comparison, not a biconditional theorem."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-d",
+    "notes": "High risk came from the endpoint p=1 case and the concrete extremizer comparison. I reread the abstract norming-functional existence for nonzero f, the concrete L^p-L^q supremum formula, the normalized witness |f|^{p-1}sgn(f)/||f||_p^{p-1} for 1<p<infty, and the sgn(f) witness when p=1 under sigma-finiteness. The current example is sound."
+   }
+  },
+  "ex-many-extensions-from-a-codimension-one-subspace": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "For $(t,t) \\in M$ one has $$|f_0(t,t)|=|t|=\\|(t,t)\\|_\\infty,$$ so $\\|f_0\\|=1$. Also every $(a,b) \\in \\mathbb{R}^2$ decomposes as $$ (a,b)=\\frac{a+b}{2}(1,1)+\\frac{a-b}{2}(1,-1), $$ so $X=M \\oplus \\mathbb{R}(1,-1)$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "If $F$ is a linear extension of $f_0$ and $c:=F(1,-1)$, then step 1.1 forces $$ F(a,b)=\\frac{a+b}{2}F(1,1)+\\frac{a-b}{2}F(1,-1) =\\frac{1+c}{2}a+\\frac{1-c}{2}b. $$ Conversely, the displayed formula defines a linear functional extending $f_0$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "given",
+      "construct",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Let $\\varphi(a,b):=\\alpha a+\\beta b$ on $(\\mathbb{R}^2,\\|\\cdot\\|_\\infty)$. If\n$\\|(a,b)\\|_\\infty \\le 1$, then\n$$|\\varphi(a,b)| \\le |\\alpha|\\,|a|+|\\beta|\\,|b| \\le |\\alpha|+|\\beta|.$$\nChoosing $a=\\operatorname{sgn}\\alpha$ and $b=\\operatorname{sgn}\\beta$\n(interpreting $\\operatorname{sgn}0=0$) gives $\\|(a,b)\\|_\\infty \\le 1$ and\n$|\\varphi(a,b)|=|\\alpha|+|\\beta|$, so $\\|\\varphi\\|=|\\alpha|+|\\beta|$. Applying\nthis to the formula from step 2.1 yields\n$$ \\|F_c\\|=\\frac{|1+c|+|1-c|}{2}. $$\nThis equals $1$ exactly when $-1 \\le c \\le 1$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Therefore every $c \\in [-1,1]$ gives a norm-preserving extension of $f_0$. This computes explicitly the admissible interval predicted abstractly by [L1], and in particular is consistent with the existence statement of [L2].",
+     "step": "4.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "step 3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-hahn-banach-one-step-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a real vector space, let $M \\subseteq X$ be a linear subspace, let\n$p:X \\to \\mathbb{R}$ be sublinear, and let $f:M \\to \\mathbb{R}$ be linear with\n$f(m) \\le p(m)$ for every $m \\in M$. Fix $x_0 \\in X \\setminus M$ and put\n$N:=M+\\mathbb{R}x_0$.\n\nFor $c \\in \\mathbb{R}$ define\n\n$$F_c(m+tx_0):=f(m)+tc \\qquad (m \\in M,\\ t \\in \\mathbb{R}).$$\n\nThis is well defined, and with\n\n$$\\alpha:=\\sup_{y \\in M}\\bigl(f(y)-p(y-x_0)\\bigr), \\qquad\n\\beta:=\\inf_{z \\in M}\\bigl(p(z+x_0)-f(z)\\bigr),$$\n\none has $\\alpha \\le \\beta$. Moreover,\n$F_c(n) \\le p(n)$ for every $n \\in N$ if and only if $\\alpha \\le c \\le \\beta$.\nIn particular the admissible values of $F_c(x_0)=c$ form the nonempty interval\n$[\\alpha,\\beta]$.",
+     "uses": [
+      "4.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-hahn-banach-norm-preserving-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a real normed space, let $M \\subseteq X$ be a linear subspace, and\nlet $f_0:M \\to \\mathbb{R}$ be a bounded linear functional. Then there exists a\nbounded linear functional $F:X \\to \\mathbb{R}$ such that $F|_M=f_0$ and\n$\\|F\\|=\\|f_0\\|$.",
+     "uses": [
+      "4.1"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The example fixes one concrete subspace and one concrete functional, not an empty family."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "No zero-denominator or zero-vector branch is the point of this interval computation."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "In ex-many-extensions-from-a-codimension-one-subspace, step 1.1 computes ||f_0||=1 and step 4.1 keeps the extensions at that same norm."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In ex-many-extensions-from-a-codimension-one-subspace, step 4.1 would still be valid if the admissible interval collapsed to one point; the proof only uses the norm formula from step 3.1."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "In ex-many-extensions-from-a-codimension-one-subspace, steps 3.1 and 4.1 include the endpoint values c=-1 and c=1 among the admissible extensions."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "No choice principle is used: the whole family F_c is written down explicitly."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example is not stated as a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The example is not stated as a biconditional."
+    }
+   ]
+  },
+  "ex-banach-limit-from-hahn-banach": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Define $p:\\ell^\\infty \\to \\mathbb{R}$ by $$p(x):=\\limsup_{n \\to \\infty}\\sigma_n(x).$$ If $x \\in \\ell^\\infty$, choose $M \\ge 0$ with $|x_n| \\le M$ for all $n$; then every Cesaro mean satisfies $|\\sigma_n(x)| \\le M$, so [L4] shows that $p(x)$ is an ordinary real number. Because $\\sigma_n(x+y)=\\sigma_n(x)+\\sigma_n(y)$ for every $n$, [L5] gives $$p(x+y) \\le p(x)+p(y).$$ Also $\\sigma_n(tx)=t\\sigma_n(x)$ for every $t \\ge 0$, so $p(tx)=tp(x)$. Thus $p$ is sublinear in the sense of [L1].",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L3",
+      "L4",
+      "L5",
+      "L6",
+      "given",
+      "construct",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Let $C \\subseteq \\ell^\\infty$ be the set of sequences whose Cesaro means converge, and define $$\\lambda(x):=\\lim_{n \\to \\infty}\\sigma_n(x) \\qquad (x \\in C).$$ Since $\\sigma_n(ax+by)=a\\sigma_n(x)+b\\sigma_n(y)$ for all real scalars $a,b$, the set $C$ is a linear subspace and $\\lambda$ is linear. If $x \\in C$, then the convergent sequence $(\\sigma_n(x))$ has limit superior equal to its limit, so $\\lambda(x) \\le p(x)$. Therefore [L2] yields a linear extension $L:\\ell^\\infty \\to \\mathbb{R}$ of $\\lambda$ with $L \\le p$ on all of $\\ell^\\infty$.",
+     "step": "2.1",
+     "inputs": [
+      "L2",
+      "L3",
+      "L4",
+      "step 1.1",
+      "given",
+      "construct",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Let $x=(x_n) \\in \\ell^\\infty$. Since $x$ is bounded, there is $M \\ge 0$ with $|x_n| \\le M$ for all $n$. Using [L3], $$ \\sigma_n(x-Sx)=\\frac{1}{n+1}\\sum_{k=0}^n (x_k-x_{k+1}) =\\frac{x_0-x_{n+1}}{n+1}. $$ Hence $$ \\left|\\sigma_n(x-Sx)\\right| \\le \\frac{|x_0|+M}{n+1} \\to 0, $$ so $x-Sx \\in C$ and $\\lambda(x-Sx)=0$. Since $L$ extends $\\lambda$, $L(x-Sx)=0$, that is, $L(Sx)=L(x)$.",
+     "step": "3.1",
+     "inputs": [
+      "L3",
+      "step 2.1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Step 2.1 gives the extension and domination properties, and step 3.1 gives shift invariance. Therefore $L$ has all three properties listed in the example.",
+     "step": "4.1",
+     "inputs": [
+      "step 2.1",
+      "step 3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-sublinear-functional",
+     "source_section": "Definition",
+     "quote": "Let $X$ be a real vector space ([[def-vector-space]]). A function\n$p:X \\to \\mathbb{R}$ is a **sublinear functional** if\n\n$$p(x+y) \\le p(x)+p(y) \\qquad \\text{for all } x,y \\in X,$$\n\nand\n\n$$p(tx)=tp(x) \\qquad \\text{for all } x \\in X \\text{ and all } t \\ge 0.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-hahn-banach-dominated-extension",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a real vector space, let $M \\subseteq X$ be a linear subspace, let\n$p:X \\to \\mathbb{R}$ be sublinear, and let $f:M \\to \\mathbb{R}$ be linear with\n$f(m) \\le p(m)$ for every $m \\in M$. Then there exists a linear functional\n$F:X \\to \\mathbb{R}$ such that $F|_M=f$ and $F(x) \\le p(x)$ for every $x \\in X$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-cesaro-mean",
+     "source_section": "Definition",
+     "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]), with finite sums as in\n[[def-finite-sum]]. For $n \\in \\mathbb{N}$ the **$n$-th Cesaro mean** of\n$(x_k)$ is\n\n$$\\sigma_n \\;:=\\; \\frac{1}{n+1}\\sum_{k=0}^{n} x_k \\;=\\; \\frac{x_0 + x_1 + \\dots + x_n}{n+1},$$\n\nwhere $n+1$ denotes the canonical natural $(n+1)\\cdot 1_{\\mathbb{R}}$.\n\n**This is well defined.** The only thing that could fail is the division: since\n$n + 1 \\ge 1$, the canonical natural $(n+1)\\cdot 1_{\\mathbb{R}}$ is strictly\npositive ([[lem-of-naturals-positive]]), hence nonzero by trichotomy\n([[def-complete-ordered-field]]), hence invertible. The sum\n$\\sum_{k=0}^{n} x_k$ is the finite sum $\\sum_{k < n+1} x_k$ of\n[[def-finite-sum]], a single well-determined real for each $n$. So\n$(\\sigma_n)_{n \\in \\mathbb{N}}$ is again a sequence of reals.\n\nThe sequence $(x_k)$ is **$(C,1)$-summable to $L \\in \\mathbb{R}$**, or\n**Cesaro summable to $L$**, when the sequence of Cesaro means converges to $L$\n([[def-real-limit]]). Limits of real sequences are unique\n([[lem-limit-unique]]), so such an $L$ is unique when it exists, and we write it\n$\\lim_n \\sigma_n$.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "def-limsup-liminf",
+     "source_section": "Definition",
+     "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]). For $n \\in \\mathbb{N}$ let\n\n$$T_n \\;:=\\; \\{\\, x_k : k \\in \\mathbb{N},\\ k \\ge n \\,\\} \\subseteq \\mathbb{R}$$\n\nbe the **$n$-th tail range** of $(x_k)$, a nonempty subset of $\\mathbb{R}$ since\n$x_n \\in T_n$. Regard $T_n$ as a subset of $\\overline{\\mathbb{R}}$\n([[def-extended-reals]]) and put\n\n$$s_n \\;:=\\; \\sup T_n \\in \\overline{\\mathbb{R}}, \\qquad i_n \\;:=\\; \\inf T_n \\in \\overline{\\mathbb{R}},$$\n\nthe supremum and infimum taken in $\\overline{\\mathbb{R}}$, which exist for every\n$n$ and for every sequence by [[lem-extended-reals-complete]]. The **limit\nsuperior** and **limit inferior** of $(x_k)$ are then\n\n$$\\limsup_{k} x_k \\;:=\\; \\inf \\{\\, s_n : n \\in \\mathbb{N} \\,\\}, \\qquad \\liminf_{k} x_k \\;:=\\; \\sup \\{\\, i_n : n \\in \\mathbb{N} \\,\\},$$\n\nagain taken in $\\overline{\\mathbb{R}}$ and again existing by\n[[lem-extended-reals-complete]], since $\\{s_n : n \\in \\mathbb{N}\\}$ and\n$\\{i_n : n \\in \\mathbb{N}\\}$ are subsets of $\\overline{\\mathbb{R}}$ on which no\nhypothesis is needed. Both are elements of $\\overline{\\mathbb{R}}$, and either may\nbe $+\\infty$ or $-\\infty$. The notations $\\limsup_{k \\to \\infty} x_k$,\n$\\varlimsup_k x_k$ and $\\overline{\\lim}_k x_k$ all denote the first of them\nelsewhere; this library writes $\\limsup_k x_k$.\n\n**Every quantity written here exists, and that is why the extended line was\nintroduced.** Each of the four operations above is an application of\n[[lem-extended-reals-complete]] to a subset of $\\overline{\\mathbb{R}}$ carrying no\nhypothesis whatever. Written with the real supremum of\n[[def-complete-ordered-field]] and the real infimum of [[thm-infimum-property]]\ninstead, the definition would be available only for sequences that are bounded\n([[def-bounded-set]]): $\\sup T_n$ needs $T_n$ bounded above, and\n$\\inf\\{s_n\\}$ needs $\\{s_n\\}$ nonempty, bounded below, and made of real numbers\n([[def-infimum]]). None of those is automatic, and the discipline recorded in\n[[rem-sup-conventions]] forbids papering over the gap with a convention. The\nextended supremum is a different operation in a different ordered set, and it is\ntotal.\n\n**Values, when the sequence is bounded.** If $(x_k)$ is bounded, say\n$|x_k| \\le M$ for every $k$, then each $T_n$ is a nonempty subset of $\\mathbb{R}$\nbounded above by $M$ and below by $-M$, so by the agreement clause of\n[[lem-extended-reals-complete]] each $s_n$ and each $i_n$ is the *real* supremum\nor infimum of $T_n$, and lies in $[-M, M]$. The family $\\{s_n\\}$ is then a\nnonempty set of reals bounded below by $-M$, so $\\limsup_k x_k$ is likewise the\nreal infimum of $\\{s_n\\}$ and lies in $[-M, M]$; dually for $\\liminf_k x_k$. So\nfor a bounded sequence both quantities are ordinary real numbers computed with\nthe ordinary real supremum and infimum, and the extended line is doing no work.\nIt is only for unbounded sequences that the values $\\pm\\infty$ occur.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-limsup-subadditive",
+     "source_section": "Statement",
+     "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) and write\n$\\Lambda := \\limsup_{k} x_k$, $M := \\limsup_{k} y_k$\n([[def-limsup-liminf]]).\n\n1. If the sum $\\Lambda + M$ is defined in $\\overline{\\mathbb{R}}$\n   ([[def-extended-reals]]), that is if $\\{\\Lambda, M\\} \\ne \\{+\\infty, -\\infty\\}$,\n   then\n   $$\\limsup_{k}(x_k + y_k) \\;\\le\\; \\Lambda + M .$$\n2. Dually, writing $\\lambda := \\liminf_k x_k$ and $\\mu := \\liminf_k y_k$, if\n   $\\lambda + \\mu$ is defined in $\\overline{\\mathbb{R}}$ then\n   $$\\liminf_{k}(x_k + y_k) \\;\\ge\\; \\lambda + \\mu .$$\n\n**The hypothesis is exactly the one [[def-extended-reals]] forces, and it cannot\nbe dropped.** When one of $\\Lambda$, $M$ is $+\\infty$ and the other $-\\infty$ the\nright-hand side is not an element of $\\overline{\\mathbb{R}}$ at all, so there is\nnothing to compare. The inequality is genuinely an inequality: equality can fail,\nand does, for an alternating pair of sequences; the failure of additivity is\nrecorded as a false statement among this page's examples, and the witness is a\nnamed counterexample on the companion page.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "def-sequence",
+     "source_section": "Definition",
+     "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]],\n[[def-real-numbers]]) with its order and absolute value ([[def-real-order]]), and\n$\\mathbb{N}$ is the set of natural numbers with its order ([[def-natural-numbers]],\n[[def-nat-order]]).\n\nA **sequence of reals** is a function $x : \\mathbb{N} \\to \\mathbb{R}$. We write\n$x_k$ for the value $x(k)$, call it the **$k$-th term**, and write $(x_k)$, or\n$(x_k)_{k \\in \\mathbb{N}}$, for the function itself. The **range** of $(x_k)$ is\nthe subset $\\{\\, x_k : k \\in \\mathbb{N} \\,\\} \\subseteq \\mathbb{R}$.\n\nLet $(x_k)$ be a sequence of reals and let $P$ be a property of indices.\n\n- $(x_k)$ is **bounded** if there is $M \\in \\mathbb{R}$ with $|x_k| \\le M$ for\n  every $k \\in \\mathbb{N}$; it is **unbounded** otherwise.\n- $P$ holds **eventually** if there is $K \\in \\mathbb{N}$ such that $P(k)$ holds\n  for every $k \\ge K$.\n- $P$ holds **frequently** if for every $K \\in \\mathbb{N}$ there is some\n  $k \\ge K$ for which $P(k)$ holds.\n- For $K \\in \\mathbb{N}$, the **$K$-th tail** of $(x_k)$ is the sequence\n  $x^{(K)}$ defined by $x^{(K)}_j := x_{j + K}$ for $j \\in \\mathbb{N}$; it is\n  again a sequence of reals.\n- A function $n : \\mathbb{N} \\to \\mathbb{N}$ is **strictly increasing** if\n  $n_j < n_k$ whenever $j < k$. For such an $n$, the **subsequence** of $(x_k)$\n  along $n$ is the composite $x \\circ n$, written $(x_{n_k})_{k \\in \\mathbb{N}}$;\n  it is again a sequence of reals.\n\n**Convergence and Cauchyness are not defined here.** They are already fixed, for\nsequences of reals, by the published [[def-real-limit]]: $(x_k)$ *converges* to\n$x \\in \\mathbb{R}$ when for every rational $\\varepsilon > 0$ there is\n$K \\in \\mathbb{N}$ with $|x_k - x| < \\varepsilon$ for all $k \\ge K$, and $(x_k)$\nis *Cauchy* when for every rational $\\varepsilon > 0$ there is $K \\in \\mathbb{N}$\nwith $|x_k - x_l| < \\varepsilon$ for all $k, l \\ge K$. This page builds the\ntoolkit for those two notions and does not restate them. A sequence\n**converges** if it converges to some real, and **diverges** if it does not.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The example fixes one ambient sequence space and one Cesaro-limit subspace, not an empty family of spaces."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "In ex-banach-limit-from-hahn-banach, step 3.1 proves lambda(x-Sx)=0, which is the zero-value boundary needed for shift invariance."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The constant-one sequence is handled on the next lemma, not in the construction step itself."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The construction does not split into further degenerate ambient cases once the Cesaro-limit subspace C is fixed."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The Banach-limit construction is not an interval-endpoint statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "In ex-banach-limit-from-hahn-banach, step 2.1 applies Hahn-Banach to extend lambda from C to all of l^infty."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example constructs an object and is not a biconditional theorem."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The example constructs an object and is not a biconditional theorem."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-d",
+    "notes": "Critical risk came from making p(x)=limsup sigma_n(x) real-valued, extending lambda from the Cesaro-convergent subspace, and proving shift invariance. I reread the bounded-Cesaro-means argument in step 1.1, the linearity of C and lambda in step 2.1, and the telescoping identity for x-Sx in step 3.1. The repaired proof is sound on current bytes."
+   }
+  },
+  "lem-banach-limit-properties": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Shift invariance is part of [L1]. Let $\\mathbf{1}=(1,1,1,\\dots)$. By [L3], every Cesaro mean of $\\mathbf{1}$ equals $1$, so the extension property in [L1] gives $L(\\mathbf{1})=1$. By linearity, $$L(c\\mathbf{1})=c \\qquad (c \\in \\mathbb{R}).$$",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L3",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Suppose $x_n \\ge 0$ for every $n$. Then every Cesaro mean of $-x$ is nonpositive, so $$\\limsup_{n \\to \\infty}\\sigma_n(-x) \\le 0.$$ The domination part of [L1] therefore gives $$-L(x)=L(-x) \\le \\limsup_{n \\to \\infty}\\sigma_n(-x) \\le 0,$$ hence $L(x) \\ge 0$. So $L$ is positive.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L4",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Let $M:=\\|x\\|_\\infty$. Then $-M\\mathbf{1} \\le x \\le M\\mathbf{1}$ termwise, so the sequences $M\\mathbf{1}-x$ and $M\\mathbf{1}+x$ are pointwise nonnegative. By step 1.2, $$0 \\le L(M\\mathbf{1}-x)=M-L(x) \\qquad \\text{and} \\qquad 0 \\le L(M\\mathbf{1}+x)=M+L(x).$$ Thus $|L(x)| \\le M=\\|x\\|_\\infty$, so $\\|L\\| \\le 1$. Since step 1.1 gives $L(\\mathbf{1})=1$ and $\\|\\mathbf{1}\\|_\\infty=1$, one also has $\\|L\\| \\ge 1$. Therefore $\\|L\\|=1$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "Write $\\alpha:=\\liminf_{n \\to \\infty}x_n$ and $\\beta:=\\limsup_{n \\to \\infty}x_n$. Let $\\varepsilon > 0$. By the definition in [L2], there is $N \\in \\mathbb{N}$ such that for all $k \\ge N$, $$\\alpha-\\varepsilon \\le x_k \\le \\beta+\\varepsilon.$$ Hence every term of the shifted sequence $S^N x$ lies between the constant sequences $(\\alpha-\\varepsilon)\\mathbf{1}$ and $(\\beta+\\varepsilon)\\mathbf{1}$. Using positivity from step 1.2, the constant-sequence values from step 1.1, and shift invariance from [L1], we get $$ \\alpha-\\varepsilon=L((\\alpha-\\varepsilon)\\mathbf{1}) \\le L(S^N x)=L(x) \\le L((\\beta+\\varepsilon)\\mathbf{1})=\\beta+\\varepsilon. $$",
+     "step": "2.2",
+     "inputs": [
+      "L1",
+      "L2",
+      "step 1.1",
+      "step 1.2",
+      "given",
+      "choose",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Since the inequalities of step 2.2 hold for every $\\varepsilon > 0$, one obtains $\\alpha \\le L(x) \\le \\beta$. Together with steps 1.1, 1.2, and 2.1, this shows that $L$ is a Banach limit.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.2",
+      "step 1.1",
+      "step 1.2",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "ex-banach-limit-from-hahn-banach",
+     "source_section": "Example",
+     "quote": "Let $\\ell^\\infty$ be the real vector space of bounded real sequences with the\nsupremum norm, let $S:\\ell^\\infty \\to \\ell^\\infty$ be the shift\n$S(x_0,x_1,x_2,\\dots)=(x_1,x_2,x_3,\\dots)$, and let\n$C \\subseteq \\ell^\\infty$ be the subspace of sequences whose Cesaro means\nconverge.\n\nThen there exists a linear functional $L:\\ell^\\infty \\to \\mathbb{R}$ such that\n\n- $L(x)=\\lim_{n \\to \\infty}\\sigma_n(x)$ for every $x \\in C$;\n- $L(x) \\le \\limsup_{n \\to \\infty}\\sigma_n(x)$ for every bounded sequence $x$;\n- $L(Sx)=L(x)$ for every bounded sequence $x$.\n\nThe next lemma shows that such an $L$ is a Banach limit.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-limsup-liminf",
+     "source_section": "Definition",
+     "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]). For $n \\in \\mathbb{N}$ let\n\n$$T_n \\;:=\\; \\{\\, x_k : k \\in \\mathbb{N},\\ k \\ge n \\,\\} \\subseteq \\mathbb{R}$$\n\nbe the **$n$-th tail range** of $(x_k)$, a nonempty subset of $\\mathbb{R}$ since\n$x_n \\in T_n$. Regard $T_n$ as a subset of $\\overline{\\mathbb{R}}$\n([[def-extended-reals]]) and put\n\n$$s_n \\;:=\\; \\sup T_n \\in \\overline{\\mathbb{R}}, \\qquad i_n \\;:=\\; \\inf T_n \\in \\overline{\\mathbb{R}},$$\n\nthe supremum and infimum taken in $\\overline{\\mathbb{R}}$, which exist for every\n$n$ and for every sequence by [[lem-extended-reals-complete]]. The **limit\nsuperior** and **limit inferior** of $(x_k)$ are then\n\n$$\\limsup_{k} x_k \\;:=\\; \\inf \\{\\, s_n : n \\in \\mathbb{N} \\,\\}, \\qquad \\liminf_{k} x_k \\;:=\\; \\sup \\{\\, i_n : n \\in \\mathbb{N} \\,\\},$$\n\nagain taken in $\\overline{\\mathbb{R}}$ and again existing by\n[[lem-extended-reals-complete]], since $\\{s_n : n \\in \\mathbb{N}\\}$ and\n$\\{i_n : n \\in \\mathbb{N}\\}$ are subsets of $\\overline{\\mathbb{R}}$ on which no\nhypothesis is needed. Both are elements of $\\overline{\\mathbb{R}}$, and either may\nbe $+\\infty$ or $-\\infty$. The notations $\\limsup_{k \\to \\infty} x_k$,\n$\\varlimsup_k x_k$ and $\\overline{\\lim}_k x_k$ all denote the first of them\nelsewhere; this library writes $\\limsup_k x_k$.\n\n**Every quantity written here exists, and that is why the extended line was\nintroduced.** Each of the four operations above is an application of\n[[lem-extended-reals-complete]] to a subset of $\\overline{\\mathbb{R}}$ carrying no\nhypothesis whatever. Written with the real supremum of\n[[def-complete-ordered-field]] and the real infimum of [[thm-infimum-property]]\ninstead, the definition would be available only for sequences that are bounded\n([[def-bounded-set]]): $\\sup T_n$ needs $T_n$ bounded above, and\n$\\inf\\{s_n\\}$ needs $\\{s_n\\}$ nonempty, bounded below, and made of real numbers\n([[def-infimum]]). None of those is automatic, and the discipline recorded in\n[[rem-sup-conventions]] forbids papering over the gap with a convention. The\nextended supremum is a different operation in a different ordered set, and it is\ntotal.\n\n**Values, when the sequence is bounded.** If $(x_k)$ is bounded, say\n$|x_k| \\le M$ for every $k$, then each $T_n$ is a nonempty subset of $\\mathbb{R}$\nbounded above by $M$ and below by $-M$, so by the agreement clause of\n[[lem-extended-reals-complete]] each $s_n$ and each $i_n$ is the *real* supremum\nor infimum of $T_n$, and lies in $[-M, M]$. The family $\\{s_n\\}$ is then a\nnonempty set of reals bounded below by $-M$, so $\\limsup_k x_k$ is likewise the\nreal infimum of $\\{s_n\\}$ and lies in $[-M, M]$; dually for $\\liminf_k x_k$. So\nfor a bounded sequence both quantities are ordinary real numbers computed with\nthe ordinary real supremum and infimum, and the extended line is doing no work.\nIt is only for unbounded sequences that the values $\\pm\\infty$ occur.",
+     "uses": [
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-cesaro-mean",
+     "source_section": "Definition",
+     "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]), with finite sums as in\n[[def-finite-sum]]. For $n \\in \\mathbb{N}$ the **$n$-th Cesaro mean** of\n$(x_k)$ is\n\n$$\\sigma_n \\;:=\\; \\frac{1}{n+1}\\sum_{k=0}^{n} x_k \\;=\\; \\frac{x_0 + x_1 + \\dots + x_n}{n+1},$$\n\nwhere $n+1$ denotes the canonical natural $(n+1)\\cdot 1_{\\mathbb{R}}$.\n\n**This is well defined.** The only thing that could fail is the division: since\n$n + 1 \\ge 1$, the canonical natural $(n+1)\\cdot 1_{\\mathbb{R}}$ is strictly\npositive ([[lem-of-naturals-positive]]), hence nonzero by trichotomy\n([[def-complete-ordered-field]]), hence invertible. The sum\n$\\sum_{k=0}^{n} x_k$ is the finite sum $\\sum_{k < n+1} x_k$ of\n[[def-finite-sum]], a single well-determined real for each $n$. So\n$(\\sigma_n)_{n \\in \\mathbb{N}}$ is again a sequence of reals.\n\nThe sequence $(x_k)$ is **$(C,1)$-summable to $L \\in \\mathbb{R}$**, or\n**Cesaro summable to $L$**, when the sequence of Cesaro means converges to $L$\n([[def-real-limit]]). Limits of real sequences are unique\n([[lem-limit-unique]]), so such an $L$ is unique when it exists, and we write it\n$\\lim_n \\sigma_n$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-limsup-subadditive",
+     "source_section": "Statement",
+     "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) and write\n$\\Lambda := \\limsup_{k} x_k$, $M := \\limsup_{k} y_k$\n([[def-limsup-liminf]]).\n\n1. If the sum $\\Lambda + M$ is defined in $\\overline{\\mathbb{R}}$\n   ([[def-extended-reals]]), that is if $\\{\\Lambda, M\\} \\ne \\{+\\infty, -\\infty\\}$,\n   then\n   $$\\limsup_{k}(x_k + y_k) \\;\\le\\; \\Lambda + M .$$\n2. Dually, writing $\\lambda := \\liminf_k x_k$ and $\\mu := \\liminf_k y_k$, if\n   $\\lambda + \\mu$ is defined in $\\overline{\\mathbb{R}}$ then\n   $$\\liminf_{k}(x_k + y_k) \\;\\ge\\; \\lambda + \\mu .$$\n\n**The hypothesis is exactly the one [[def-extended-reals]] forces, and it cannot\nbe dropped.** When one of $\\Lambda$, $M$ is $+\\infty$ and the other $-\\infty$ the\nright-hand side is not an element of $\\overline{\\mathbb{R}}$ at all, so there is\nnothing to compare. The inequality is genuinely an inequality: equality can fail,\nand does, for an alternating pair of sequences; the failure of additivity is\nrecorded as a false statement among this page's examples, and the witness is a\nnamed counterexample on the companion page.",
+     "uses": [
+      "1.2"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The lemma studies one fixed bounded sequence x and one fixed Banach-limit functional L, not an empty family."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "In lem-banach-limit-properties, step 1.2 turns pointwise nonnegativity into the inequality L(x) >= 0, and step 2.1 then bounds L(x) around 0."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "In lem-banach-limit-properties, step 1.1 computes L(1)=1 and step 2.1 uses that exact value to prove ||L||=1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In lem-banach-limit-properties, step 2.2 allows liminf x_n = limsup x_n, so the convergent-sequence case is included in the same inequality proof."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "In lem-banach-limit-properties, step 3.1 passes from the epsilon-expanded tail bounds of step 2.2 to the actual endpoints liminf and limsup."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "No choice from a nonempty family is hidden here; after the construction of L, the proof is deterministic."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The lemma lists properties of L and is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The lemma lists properties of L and is not a biconditional."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-d",
+    "notes": "Critical risk came from positivity, norm one, and the liminf/limsup squeeze. I reread the constant-sequence computation L(1)=1 and L(c1)=c, the positivity argument via L(-x)<=limsup sigma_n(-x), the norm-one bound from M1+-x, and the shifted-tail squeeze in step 2.2. The repaired lemma is sound on the current text."
+   }
+  },
+  "cex-hahn-banach-extension-need-not-be-unique": {
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L1], the functionals $$F_1(a,b)=a \\qquad \\text{and} \\qquad F_{-1}(a,b)=b$$ are both norm-preserving extensions of $f_0$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "They agree on $M$, since $F_1(t,t)=t=F_{-1}(t,t)$ for every $(t,t) \\in M$, but they differ on $(1,-1)$: $$F_1(1,-1)=1 \\ne -1=F_{-1}(1,-1).$$",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Thus the same functional on the same subspace has two distinct norm-preserving Hahn-Banach extensions. Therefore the uniqueness claim is false.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "ex-many-extensions-from-a-codimension-one-subspace",
+     "source_section": "Example",
+     "quote": "Let $X=(\\mathbb{R}^2,\\|\\cdot\\|_\\infty)$, let\n$M:=\\operatorname{span}\\{(1,1)\\}$, and define $f_0:M \\to \\mathbb{R}$ by\n$f_0(t,t)=t$. Then $\\|f_0\\|=1$, and for every $c \\in [-1,1]$ the formula\n\n$$F_c(a,b):=\\frac{1+c}{2}a+\\frac{1-c}{2}b$$\n\ndefines a norm-preserving extension of $f_0$ to all of $X$. So a codimension-one\nsubspace can have infinitely many Hahn-Banach extensions of the same norm.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "finite_smoke": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The counterexample fixes explicit witness extensions and does not involve an empty family."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The witness does not turn on a zero-value branch; it turns on two distinct endpoint extensions."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "In cex-hahn-banach-extension-need-not-be-unique, step 1.1 uses the concrete witnesses F_1 and F_-1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "In cex-hahn-banach-extension-need-not-be-unique, step 2.1 shows the two functionals agree on the entire original subspace, so the counterexample does not change the starting data."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "In cex-hahn-banach-extension-need-not-be-unique, step 1.1 chooses the endpoint values c=1 and c=-1 from the previous interval example."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "No choice principle is used: the two witness extensions are written down explicitly."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The counterexample refutes a uniqueness claim rather than proving a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The counterexample refutes a uniqueness claim rather than proving a biconditional."
+    }
+   ]
+  }
+ }
+}

@@ -27,6 +27,8 @@ parts:
       - lagrange-four-square-theorem
       - average-orders-divisor-sums-and-representation-counts
       - chebyshev-bounds-and-mertens-theorems
+      - hilbert-symbols-and-the-quadratic-local-global-principle
+      - dirichlet-characters-l-functions-and-primes-in-progressions
 ---
 
 ## divisibility-and-primes
@@ -66,4 +68,10 @@ arguments then give summatory formulas for $\tau$, $\sigma$, and $\varphi$, dens
 $6/\pi^2$ for coprime pairs, and mean order $\pi$ for $r_2$. The Chebyshev and Mertens
 page adds $\theta$ and $\psi$, finite proofs of Chebyshev bounds and Bertrand's postulate,
 and the three Mertens theorems, yielding divergence of $\sum 1/p$ and vanishing of the
-Euler prime product without the prime number theorem.
+Euler prime product without the prime number theorem. The local-global branch passes to
+$\mathbb R$ and the fields $\mathbb Q_p$: Hilbert-symbol formulas and reciprocity reduce
+the isotropy of rational quadratic forms to their local behavior, culminating in
+Hasse-Minkowski over $\mathbb Q$. In a separate analytic branch, Dirichlet characters and
+their $L$-functions isolate reduced residue classes; nonvanishing on the relevant boundary
+of the half-plane gives their Dirichlet densities and infinitely many primes in each such
+arithmetic progression.

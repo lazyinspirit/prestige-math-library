@@ -48,8 +48,9 @@ threshold, there is some $r\in[2,x^{-1}]$ and a pure or $x$-sparse
 $(r,|V(G)|/r^D)$-blockade whenever $x\in(0,2^{-D})$ and
 $|V(G)|\ge x^{-D}$.
 
-[F2] In this library, the first parameter of an $(\ell,w)$-blockade must be a
-natural number, and the actual length is at least $\ell$
+[F2] In this library, the first parameter $\ell$ of an $(\ell,w)$-blockade
+may be any real number at least $1$; its integral actual length must be at
+least $\ell$ (equivalently, at least $\lceil\ell\rceil$)
 ([[def-blockade-length-and-width]]).
 
 ## Proof
@@ -58,7 +59,7 @@ natural number, and the actual length is at least $\ell$
 
 1.1 Let $D\ge40$ be supplied by [L1], and set $d:=2D$. Fix $x$ and $G$ as in the Statement. Since $d\ge D$, one has $x<2^{-D}$ and $|V(G)|\ge x^{-D}$. Thus [L1] gives a real $r\in[2,x^{-1}]$ and a pure or $x$-sparse blockade whose actual length is at least $r$ and whose width is at least $|V(G)|/r^D$. [L1, given, algebra]
 
-2.1 Put $k:=\lfloor r\rfloor$. Then $k$ is an integer and $2\le k\le r\le x^{-1}$. The blockade's integral actual length, being at least $r$, is in particular at least $k$, as required by [F2]. [step 1.1, F2, algebra]
+2.1 Put $k:=\lfloor r\rfloor$. Then $k$ is an integer and $2\le k\le r\le x^{-1}$. The blockade's integral actual length, being at least $r$, is in particular at least $k$, so [F2] makes it a $(k,|V(G)|/r^D)$-blockade. [step 1.1, F2, algebra]
 
 3.1 Since $k\ge2$ and $k\le r<k+1$, one has $r^D<(k+1)^D\le(3k/2)^D\le k^{2D}=k^d$. Consequently $|V(G)|/r^D\ge |V(G)|/k^d$. The blockade from step 1.1 is therefore a pure or $x$-sparse $(k,|V(G)|/k^d)$-blockade in the library's sense. [step 1.1, step 2.1, algebra]
 

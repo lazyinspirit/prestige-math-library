@@ -1,0 +1,229 @@
+[
+  {
+    "order": 288.053,
+    "id": "the-analytic-hahn-banach-theorem",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "The Analytic Hahn Banach Theorem",
+    "companion": "the-analytic-hahn-banach-theorem-examples",
+    "requires": [
+      "finite-dimensional-normed-spaces-and-riesz-lemma-examples"
+    ],
+    "items": [
+      {
+        "id": "def-sublinear-functional",
+        "kind": "definition",
+        "title": "A sublinear functional on a real vector space",
+        "deps": [
+          "def-vector-space"
+        ]
+      },
+      {
+        "id": "lem-hahn-banach-one-step-extension",
+        "kind": "lemma",
+        "title": "The admissible values in a one-step Hahn-Banach extension form a nonempty interval",
+        "strategy": "Fix x_0 outside M and parameterize an extension on M + R x_0 by c = F(x_0). The inequalities forced by F(m + alpha x_0) <= p(m + alpha x_0) for positive and negative alpha become lower and upper bounds on c, and sublinearity shows every lower endpoint is at most every upper endpoint.",
+        "deps": [
+          "def-sublinear-functional",
+          "def-algebraic-dual-and-linear-functional",
+          "def-linear-subspace"
+        ]
+      },
+      {
+        "id": "lem-union-of-a-chain-of-dominated-extensions",
+        "kind": "lemma",
+        "title": "The union of a chain of dominated extensions is a well-defined dominated linear functional",
+        "strategy": "Because the domains are linearly ordered by inclusion, two members of the chain agree on every overlap. The pointwise union is therefore well defined on the union of the domains, and linearity and domination are checked inside a single chain element containing the finitely many vectors involved.",
+        "deps": [
+          "def-sublinear-functional",
+          "def-algebraic-dual-and-linear-functional",
+          "def-chain"
+        ]
+      },
+      {
+        "id": "thm-hahn-banach-dominated-extension",
+        "kind": "theorem",
+        "title": "Hahn-Banach dominated extension theorem for real vector spaces",
+        "strategy": "Use the one-step interval lemma to extend across one missing direction, order all dominated extensions by inclusion of domains, prove every chain has an upper bound by the union lemma, and apply Zorn. The notes keep the sharper choice ledger separate so the theorem is labelled HB rather than ZF.",
+        "deps": [
+          "lem-hahn-banach-one-step-extension",
+          "lem-union-of-a-chain-of-dominated-extensions",
+          "thm-zorn"
+        ]
+      },
+      {
+        "id": "def-dual-space-of-a-normed-space",
+        "kind": "definition",
+        "title": "The dual space X^* of a normed space and its dual norm",
+        "deps": [
+          "def-space-of-bounded-linear-operators",
+          "def-operator-norm",
+          "def-algebraic-dual-and-linear-functional",
+          "rem-real-and-complex-normed-space-convention"
+        ]
+      },
+      {
+        "id": "thm-hahn-banach-norm-preserving-extension",
+        "kind": "theorem",
+        "title": "A bounded real linear functional on a subspace of a real normed space extends with the same norm",
+        "strategy": "Apply the dominated theorem to p(x)=||f_0|| ||x||. The extension still satisfies |F(x)| <= ||f_0|| ||x||, so its operator norm is at most ||f_0||, while restriction back to the original subspace forces equality.",
+        "deps": [
+          "thm-hahn-banach-dominated-extension",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "def-normed-subspace",
+          "rem-real-and-complex-normed-space-convention"
+        ]
+      },
+      {
+        "id": "lem-real-part-determines-a-complex-linear-functional",
+        "kind": "lemma",
+        "title": "A complex linear functional is recovered from its real part by f(x)=u(x)-iu(ix)",
+        "strategy": "For a complex linear f, the real part u = Re f is real linear and satisfies Im f(x) = -u(ix). Conversely, any real-linear u on the underlying real space defines a complex-linear functional by the same formula, and uniqueness is pointwise.",
+        "deps": [
+          "def-algebraic-dual-and-linear-functional",
+          "rem-real-and-complex-normed-space-convention"
+        ]
+      },
+      {
+        "id": "thm-complex-hahn-banach-norm-preserving-extension",
+        "kind": "theorem",
+        "title": "A bounded complex linear functional on a subspace of a complex normed space extends with the same norm",
+        "strategy": "Extend the real part with the real norm-preserving theorem on the underlying real space, reconstruct the complex extension from the real-part lemma, and multiply by a unimodular scalar when needed to turn a complex value into a nonnegative real one for the final bound.",
+        "deps": [
+          "thm-hahn-banach-norm-preserving-extension",
+          "lem-real-part-determines-a-complex-linear-functional",
+          "rem-real-and-complex-normed-space-convention"
+        ]
+      },
+      {
+        "id": "thm-dual-norms-every-vector",
+        "kind": "theorem",
+        "title": "Every nonzero vector has a norming functional",
+        "strategy": "On span{x}, define f_0(ax)=a||x|| using the page's real or complex scalar convention. The complex norm-preserving extension theorem then produces F in X^* with ||F|| = 1 and F(x) = ||x||.",
+        "deps": [
+          "def-dual-space-of-a-normed-space",
+          "thm-complex-hahn-banach-norm-preserving-extension"
+        ]
+      },
+      {
+        "id": "cor-dual-separates-points",
+        "kind": "corollary",
+        "title": "The dual space separates points of a normed space",
+        "strategy": "If x != y, apply the norming-functional theorem to x - y and evaluate at that difference.",
+        "deps": [
+          "thm-dual-norms-every-vector"
+        ]
+      },
+      {
+        "id": "cor-norm-recovered-from-the-dual-unit-ball",
+        "kind": "corollary",
+        "title": "The norm of a vector is the supremum of |f(x)| over the dual unit ball",
+        "strategy": "The dual norm inequality gives |f(x)| <= ||x|| for every functional in the dual unit ball. The norming-functional theorem gives equality by producing one unit-norm functional with value ||x|| at x.",
+        "deps": [
+          "def-dual-space-of-a-normed-space",
+          "thm-dual-norms-every-vector"
+        ]
+      },
+      {
+        "id": "thm-norm-preserving-extension-from-any-subspace",
+        "kind": "theorem",
+        "title": "A bounded linear functional on an arbitrary subspace extends with the same norm, without assuming the subspace is closed",
+        "strategy": "This is the explicit scope guard the design asked for: the real and complex norm-preserving extension theorems above never assume the domain subspace is closed. The page keeps that boundary as its own theorem so later authoring does not silently strengthen the hypothesis.",
+        "deps": [
+          "thm-hahn-banach-norm-preserving-extension",
+          "thm-complex-hahn-banach-norm-preserving-extension",
+          "rem-real-and-complex-normed-space-convention"
+        ]
+      },
+      {
+        "id": "rem-choice-strength-of-hahn-banach",
+        "kind": "remark",
+        "title": "The set-theoretic cost of Hahn-Banach",
+        "deps": [
+          "thm-hahn-banach-dominated-extension",
+          "rem-halpern-levy-bpi-not-ac"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.054,
+    "id": "the-analytic-hahn-banach-theorem-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "The Analytic Hahn Banach Theorem - Examples",
+    "companion": "the-analytic-hahn-banach-theorem",
+    "requires": [
+      "the-analytic-hahn-banach-theorem",
+      "the-duality-of-lp-and-lq"
+    ],
+    "items": [
+      {
+        "id": "ex-norming-functionals-in-lp-from-the-measure-duality-page",
+        "kind": "example",
+        "title": "The abstract norming-functional theorem agrees with the concrete L^p-L^q formula",
+        "strategy": "Compare the A-page existence theorem with the concrete MT-16 representation theorem, where the norming functional is written down explicitly by the usual L^q extremizer.",
+        "deps": [
+          "thm-dual-norms-every-vector",
+          "cor-l-p-norm-recovery-by-unit-l-q-pairings"
+        ]
+      },
+      {
+        "id": "ex-many-extensions-from-a-codimension-one-subspace",
+        "kind": "example",
+        "title": "A codimension-one subspace can admit many norm-preserving Hahn-Banach extensions",
+        "strategy": "Choose a one-dimensional complement where the admissible interval in the one-step lemma is visibly nondegenerate and compute that interval explicitly. Every point of it gives a different extension.",
+        "deps": [
+          "lem-hahn-banach-one-step-extension",
+          "thm-hahn-banach-norm-preserving-extension"
+        ]
+      },
+      {
+        "id": "ex-banach-limit-from-hahn-banach",
+        "kind": "example",
+        "title": "A Banach limit obtained from Hahn-Banach",
+        "strategy": "On the subspace of bounded sequences whose Cesaro means converge, start with the ordinary limit of those Cesaro means and dominate it by the sublinear functional x -> limsup sigma_n(x). The dominated extension theorem then gives a shift-invariant extension to all bounded sequences.",
+        "deps": [
+          "thm-hahn-banach-dominated-extension",
+          "def-sublinear-functional",
+          "def-cesaro-mean",
+          "def-limsup-liminf",
+          "thm-limsup-subadditive",
+          "def-sequence"
+        ]
+      },
+      {
+        "id": "lem-banach-limit-properties",
+        "kind": "lemma",
+        "title": "A Banach limit is positive, has norm one, is shift invariant, and lies between liminf and limsup",
+        "strategy": "Read linearity, boundedness, and shift invariance from the construction, then prove positivity by applying the extension to e - x for 0 <= x <= e. The liminf and limsup bounds follow from positivity after shifting by constant sequences.",
+        "deps": [
+          "ex-banach-limit-from-hahn-banach",
+          "def-limsup-liminf",
+          "def-cesaro-mean",
+          "thm-limsup-subadditive"
+        ]
+      },
+      {
+        "id": "cex-hahn-banach-extension-need-not-be-unique",
+        "kind": "counterexample",
+        "title": "Hahn-Banach norm-preserving extensions need not be unique",
+        "strategy": "Reuse the codimension-one interval example and pick two different admissible values. The resulting extensions agree on the original subspace and differ on the chosen complement vector.",
+        "deps": [
+          "ex-many-extensions-from-a-codimension-one-subspace"
+        ]
+      },
+      {
+        "id": "rem-hahn-banach-open-choice-questions",
+        "kind": "remark",
+        "title": "Two choice-theoretic consequences of Hahn-Banach remain open",
+        "deps": [
+          "rem-choice-strength-of-hahn-banach",
+          "rem-hahn-banach-hamel-basis-open",
+          "rem-hahn-banach-discontinuous-additive-open"
+        ]
+      }
+    ]
+  }
+]

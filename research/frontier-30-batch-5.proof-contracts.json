@@ -1,0 +1,2431 @@
+{
+  "version": 1,
+  "level": "frontier-30",
+  "scope": [
+    "lem-independent-families-pass-to-subfamilies",
+    "lem-independent-events-remain-independent-under-complements",
+    "thm-pi-system-criterion-for-independent-sigma-algebras",
+    "thm-grouping-independent-sigma-algebras",
+    "thm-rectangle-criterion-for-independent-random-elements",
+    "cor-finite-random-variable-independence-agreement",
+    "lem-measurable-functions-preserve-independence",
+    "thm-independent-random-elements-have-product-joint-law",
+    "thm-factorization-of-expectations-for-independent-variables",
+    "cor-covariance-vanishes-under-independence",
+    "cor-first-borel-cantelli-lemma-for-events",
+    "thm-pairwise-independent-borel-cantelli-frequency-law",
+    "cor-second-borel-cantelli-lemma-under-pairwise-independence",
+    "lem-tail-events-are-independent-of-every-finite-initial-sigma-algebra",
+    "thm-kolmogorov-zero-one-law",
+    "cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event",
+    "ex-independent-events-that-are-not-disjoint",
+    "ex-functions-of-disjoint-independent-coordinate-blocks",
+    "ex-borel-cantelli-eventually-no-large-deviations",
+    "ex-zero-one-law-for-convergence-of-a-random-series",
+    "cex-divergent-probability-sum-without-independence",
+    "cex-independent-events-need-not-be-closed-under-unions-of-overlapping-pairs"
+  ],
+  "contracts": {
+    "lem-independent-families-pass-to-subfamilies": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $I$ be an index\nset, and let $(\\mathcal C_i)_{i\\in I}$ be a family of classes of events\n$\\mathcal C_i\\subseteq\\mathcal F$.\n\nThe family $(\\mathcal C_i)_{i\\in I}$ is **independent** when for every natural\nnumber $n\\ge1$, every choice of distinct indices $i_0,\\dots,i_{n-1}\\in I$, and\nevery choice of events $A_k\\in\\mathcal C_{i_k}$, one has\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_k\\right)=\\prod_{k<n}\\mathbb P(A_k).$$\n\nThus independence is a finite-subfamily condition. In particular, the empty\nfamily and every one-member family are independent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a natural number $n\\ge1$, distinct indices $j_0,\\dots,j_{n-1}\\in J$, and events $A_k\\in\\mathcal C_{j_k}$. Since $J\\subseteq I$, this is also a valid finite choice inside the original family.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] to that same finite choice gives $$\\mathbb P\\left(\\bigcap_{k<n}A_k\\right)=\\prod_{k<n}\\mathbb P(A_k).$$ Hence the restricted family is independent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 reduces every finite check in the restricted family to the original one, and the definition of independence already includes the empty restricted family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The lemma concerns event classes and finite subfamily checks, not a zero-valued parameter or null quantity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the one-event case as part of the same finite-factorization argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy hypothesis is present: the claim is only that deleting indices preserves the same independence property."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, limiting index endpoint, or boundary inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not choose an element from a nonempty set; it only reuses a fixed finite family already supplied in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way preservation statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way preservation statement, not a biconditional."
+        }
+      ]
+    },
+    "lem-independent-events-remain-independent-under-complements": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\nA family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras of $\\mathcal F$ is\n**independent** when it is independent as a family of event classes in the\nsense of [[def-independent-families-of-event-classes]].\n\nA family $(A_i)_{i\\in I}$ of events is **independent** when the singleton event\nclasses $\\bigl(\\{A_i\\}\\bigr)_{i\\in I}$ are independent. Equivalently, for every\nfinite choice of distinct indices $i_0,\\dots,i_{n-1}$,\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_{i_k}\\right)=\\prod_{k<n}\\mathbb P(A_{i_k}).$$\n\nFor two events this reduces to the familiar identity\n$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "It is enough to prove the claim for a fixed finite subfamily $A_{i_0},\\dots,A_{i_{n-1}}$. We argue by induction on the number of complemented coordinates among $B_{i_0},\\dots,B_{i_{n-1}}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If no coordinate is complemented, the required factorization is exactly [L1].",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume the factorization is known whenever at most $m$ coordinates are complemented, and suppose exactly $m+1$ are. Reindex so that $B_{i_{n-1}}=A_{i_{n-1}}^c$, and put $C:=\\bigcap_{k<n-1}B_{i_k}$. Then $C\\cap A_{i_{n-1}}\\subseteq C$, so [L2] gives $$\\mathbb P(C\\cap A_{i_{n-1}}^c)=\\mathbb P(C)-\\mathbb P(C\\cap A_{i_{n-1}}).$$ By the induction hypothesis, both terms on the right factor: $\\mathbb P(C)=\\prod_{k<n-1}\\mathbb P(B_{i_k})$ and $\\mathbb P(C\\cap A_{i_{n-1}})=\\left(\\prod_{k<n-1}\\mathbb P(B_{i_k})\\right)\\mathbb P(A_{i_{n-1}})$. Therefore $$\\mathbb P(C\\cap A_{i_{n-1}}^c)=\\left(\\prod_{k<n-1}\\mathbb P(B_{i_k})\\right)(1-\\mathbb P(A_{i_{n-1}}))=\\left(\\prod_{k<n-1}\\mathbb P(B_{i_k})\\right)\\mathbb P(A_{i_{n-1}}^c).$$ This is the desired factorization for the current finite family.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.2 and 2.1 prove the inductive claim for every finite subfamily, so the family $(B_i)_{i\\in I}$ is independent.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 closes the induction for every finite subfamily, and the empty subfamily remains independent by the definition used in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly treats the zero-probability complement factor through the term $1-\\mathbb P(A_{i_{n-1}})$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 also covers the unit-probability case, because the same factor $1-\\mathbb P(A_{i_{n-1}})$ may equal $1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma allows arbitrary probabilities and does not assume or exclude trivial events separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or first/last index endpoint claim beyond the finite induction already recorded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness from a nonempty set is selected; the proof is an induction on how many coordinates were complemented."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves preservation under complements, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves preservation under complements, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk came from the induction on the number of complemented coordinates and the finite-family reduction. I reread the passage from arbitrary families to a fixed finite subfamily and the difference-of-probabilities argument for the inductive step. The current proof closes the complement case correctly."
+      }
+    },
+    "thm-pi-system-criterion-for-independent-sigma-algebras": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\nA family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras of $\\mathcal F$ is\n**independent** when it is independent as a family of event classes in the\nsense of [[def-independent-families-of-event-classes]].\n\nA family $(A_i)_{i\\in I}$ of events is **independent** when the singleton event\nclasses $\\bigl(\\{A_i\\}\\bigr)_{i\\in I}$ are independent. Equivalently, for every\nfinite choice of distinct indices $i_0,\\dots,i_{n-1}$,\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_{i_k}\\right)=\\prod_{k<n}\\mathbb P(A_{i_k}).$$\n\nFor two events this reduces to the familiar identity\n$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], it suffices to fix a finite list of distinct indices $i_0,\\dots,i_{n-1}$ and prove that $\\sigma(\\Pi_{i_0}),\\dots,\\sigma(\\Pi_{i_{n-1}})$ are independent.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $B_k\\in\\Pi_{i_k}$ for $k<n-1$ and define $$\\Lambda_{n-1}:=\\left\\{A\\in\\sigma(\\Pi_{i_{n-1}}):\\mathbb P\\left(\\bigcap_{k<n-1}B_k\\cap A\\right)=\\left(\\prod_{k<n-1}\\mathbb P(B_k)\\right)\\mathbb P(A)\\right\\}.$$ Because $\\Omega\\in\\Pi_{i_{n-1}}$, the class $\\Lambda_{n-1}$ contains $\\Omega$. It is closed under relative differences of nested sets and under increasing countable unions because both sides of the defining identity are countably additive in $A$. Since the original pi-systems are independent, every $A\\in\\Pi_{i_{n-1}}$ lies in $\\Lambda_{n-1}$. Therefore [L2] gives $\\sigma(\\Pi_{i_{n-1}})\\subseteq\\Lambda_{n-1}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Repeat the construction of step 1.2 for the coordinates $n-2,n-3,\\dots,0$, each time freezing already-promoted later coordinates in $\\sigma(\\Pi_{i_j})$ and keeping the earlier coordinates inside the original pi-systems. Each stage produces a lambda-system containing the relevant pi-system, so [L2] successively replaces every $\\Pi_{i_j}$ by $\\sigma(\\Pi_{i_j})$. Hence $$\\mathbb P\\left(\\bigcap_{k<n}A_k\\right)=\\prod_{k<n}\\mathbb P(A_k)\\qquad(A_k\\in\\sigma(\\Pi_{i_k})).$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since the finite choice of indices was arbitrary, the full family $(\\sigma(\\Pi_i))_{i\\in I}$ is independent.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Independent pi-systems generate independent sigma-algebras, [L1] reduces independence to finite subfamilies with n>=1, so the detector is reacting to the word family rather than to an omitted empty-family clause.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Independent pi-systems generate independent sigma-algebras, [L1] reduces independence to finite subfamilies with n>=1, so the detector is reacting to the word family rather than to an omitted empty-family clause."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or null-measure exceptional branch appears in the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the one-sigma-algebra case automatically, since the finite list fixed in step 1.1 may have length one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the explicit unit hypothesis $\\Omega\\in\\Pi_i$ to close the lambda-system argument even in the trivial-coordinate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is about finite-factorization, not a limit or interval endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes arbitrary events from the pi-systems but does not require a witness from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This theorem proves only that independence on the pi-systems implies independence on the generated sigma-algebras."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This theorem proves only that independence on the pi-systems implies independence on the generated sigma-algebras."
+        }
+      ]
+    },
+    "thm-grouping-independent-sigma-algebras": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\nA family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras of $\\mathcal F$ is\n**independent** when it is independent as a family of event classes in the\nsense of [[def-independent-families-of-event-classes]].\n\nA family $(A_i)_{i\\in I}$ of events is **independent** when the singleton event\nclasses $\\bigl(\\{A_i\\}\\bigr)_{i\\in I}$ are independent. Equivalently, for every\nfinite choice of distinct indices $i_0,\\dots,i_{n-1}$,\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_{i_k}\\right)=\\prod_{k<n}\\mathbb P(A_{i_k}).$$\n\nFor two events this reduces to the familiar identity\n$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pi-system-criterion-for-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\Pi_i)_{i\\in I}$ be a family of pi-systems in a probability space\n$(\\Omega,\\mathcal F,\\mathbb P)$, and assume $\\Omega\\in\\Pi_i$ for every $i$.\nIf the family $(\\Pi_i)_{i\\in I}$ is independent, then the sigma-algebras\n$(\\sigma(\\Pi_i))_{i\\in I}$ are independent.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $r<m$, let $\\Pi_r$ be the class consisting of $\\Omega$ together with all finite intersections $\\bigcap_{i\\in F}A_i$, where $F\\subseteq J_r$ is finite and $A_i\\in\\mathcal F_i$ for every $i\\in F$. Each $\\Pi_r$ contains $\\Omega$ and is closed under finite intersections, so it is a pi-system. Moreover $\\sigma(\\Pi_r)=\\mathcal G_r$ by definition of $\\mathcal G_r$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $C_r\\in\\Pi_r$ for each $r<m$. Because the index sets $J_r$ are pairwise disjoint, the event $\\bigcap_{r<m}C_r$ is a finite intersection of events taken from distinct members of the original independent family. Hence [L1] gives $$\\mathbb P\\left(\\bigcap_{r<m}C_r\\right)=\\prod_{r<m}\\mathbb P(C_r).$$",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 says that the pi-systems $\\Pi_0,\\dots,\\Pi_{m-1}$ are independent. Applying [L2] and using step 1.1 yields independence of $\\sigma(\\Pi_r)=\\mathcal G_r$ for every $r<m$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly inserts $\\Omega$ into each block pi-system so that empty finite intersections inside a block are still covered."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem is about sigma-algebra grouping, not a zero-valued quantitative parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the single-block case because the grouped pi-system argument still gives the same sigma-algebra back."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the degenerate empty intersection inside a block by adjoining $\\Omega$ before applying the pi-system criterion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument fixes arbitrary block events and does not spend a witness-existence step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a one-way permanence result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves a one-way permanence result."
+        }
+      ]
+    },
+    "thm-rectangle-criterion-for-independent-random-elements": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pi-system-criterion-for-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\Pi_i)_{i\\in I}$ be a family of pi-systems in a probability space\n$(\\Omega,\\mathcal F,\\mathbb P)$, and assume $\\Omega\\in\\Pi_i$ for every $i$.\nIf the family $(\\Pi_i)_{i\\in I}$ is independent, then the sigma-algebras\n$(\\sigma(\\Pi_i))_{i\\in I}$ are independent.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $(X_i)_{i\\in I}$ is independent, then by [L1] the sigma-algebras $\\sigma(X_i)$ are independent. Since $X_i^{-1}(B)\\in\\sigma(X_i)$ for every $B\\in\\Sigma_i$, the displayed rectangle identity follows immediately.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, for each $i$ let $\\Pi_i:=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F$. Preimages preserve finite intersections, so each $\\Pi_i$ is a pi-system containing $\\Omega$. The hypothesis in clause 2 says exactly that the family $(\\Pi_i)_{i\\in I}$ is independent. Since $\\sigma(\\Pi_i)=\\sigma(X_i)$ by definition, [L2] implies that the sigma-algebras $\\sigma(X_i)$ are independent.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 proves clause 2 implies clause 1, and step 1.1 proves the reverse implication. Therefore the two conditions are equivalent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Independent random elements are characterized by finite rectangle probabilities, clause 2 already quantifies only over natural numbers n>=1, so the displayed product and rectangle condition never range over an empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Independent random elements are characterized by finite rectangle probabilities, clause 2 already quantifies only over natural numbers n>=1, so the displayed product and rectangle condition never range over an empty family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is part of the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the single-random-element case as part of the same rectangle criterion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the degenerate rectangle $\\Omega$ through the fact that each preimage pi-system contains $\\Omega$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem does not involve interval endpoints or a limit transition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument does not choose witnesses from nonempty sets; it compares arbitrary measurable rectangles."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that independence implies the rectangle factorization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves that rectangle factorization implies independence."
+        }
+      ]
+    },
+    "cor-finite-random-variable-independence-agreement": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-finite-random-variables-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space, and regard it as the probability\nspace $(\\Omega,\\mathcal P(\\Omega),\\mathbb P_w)$ from\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]].\nThen every function $X:\\Omega\\to\\mathbb R$ is a real random variable.\n\nIn particular, the published finite definition\n[[def-finite-real-random-variable-and-distribution]] is exactly the\nmeasure-theoretic definition on that full-power-set probability space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be a finite set.\n\n1. If $(\\Omega,w)$ is a finite probability space in the sense of\n   [[def-finite-probability-space-and-event]], then\n   $$\\mathbb P_w(A):=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega)$$\n   is a probability measure on $(\\Omega,\\mathcal P(\\Omega))$.\n2. Conversely, if $\\mathbb P$ is a probability measure on\n   $(\\Omega,\\mathcal P(\\Omega))$, then\n   $$w(\\omega):=\\mathbb P(\\{\\omega\\})\\qquad(\\omega\\in\\Omega)$$\n   makes $(\\Omega,w)$ a finite probability space and\n   $$\\mathbb P(A)=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega).$$\n\nThese two constructions are inverse to each other. In particular, zero-weight\noutcomes remain genuine outcomes in both descriptions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. Then the following are\nequivalent:\n\n1. the family $(X_i)_{i\\in I}$ is independent;\n2. for every natural number $n\\ge1$, every choice of distinct indices\n   $i_0,\\dots,i_{n-1}\\in I$, and every choice of measurable sets\n   $B_k\\in\\Sigma_{i_k}$,\n   $$\\mathbb P\\bigl(X_{i_0}\\in B_0,\\dots,X_{i_{n-1}}\\in B_{n-1}\\bigr)=\\prod_{k<n}\\mathbb P(X_{i_k}\\in B_k).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-independence-of-finite-random-variables",
+          "source_section": "Definition",
+          "quote": "A finite family of finite-valued random variables $(X_i)_{i\\in I}$ is **mutually independent** when for every nonempty $J\\subseteq I$ and every selection $x_j\\in X_j(\\Omega)$,\n$$\\mathbb P(X_j=x_j\\text{ for every }j\\in J)=\\prod_{j\\in J}\\mathbb P(X_j=x_j).$$\nIt is **pairwise independent** when this identity is required only for two distinct indices. The empty family is mutually independent vacuously, and a one-member family is mutually independent.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2] and [L1], the variables $X_i$ are genuine random elements on the full-power-set probability space, so [L3] applies to them.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, assume [L4]. For a finite subfamily $(X_i)_{i\\in J}$ and measurable sets $B_i\\subseteq\\mathbb R$, only finitely many values in $B_i\\cap X_i(\\Omega)$ can occur. The event $\\{X_i\\in B_i\\text{ for all }i\\in J\\}$ is the disjoint union of the attained-value events $\\{X_i=x_i\\text{ for all }i\\in J\\}$ over those finitely many tuples. Summing the factorized singleton probabilities from [L4] gives $$\\mathbb P_w(X_i\\in B_i\\text{ for all }i\\in J)=\\prod_{i\\in J}\\mathbb P_w(X_i\\in B_i).$$ So the rectangle criterion holds.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the rectangle criterion holds, apply it to singleton target sets $B_i=\\{x_i\\}$. This gives $$\\mathbb P_w(X_i=x_i\\text{ for all }i\\in J)=\\prod_{i\\in J}\\mathbb P_w(X_i=x_i)$$ for every finite $J\\subseteq I$, which is exactly [L4].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 1.2 prove that the finite published definition and the general rectangle criterion agree exactly on finite-valued variables over a finite probability space.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The general rectangle criterion agrees with the published finite random-variable definition, the item compares two independence tests for one fixed finite family of variables; it does not introduce a separate optional empty-family parameter beyond those definitions.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In The general rectangle criterion agrees with the published finite random-variable definition, the item compares two independence tests for one fixed finite family of variables; it does not introduce a separate optional empty-family parameter beyond those definitions."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 allows unattained or empty target-value sets to contribute zero through the disjoint-union expansion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the one-variable case because both independence notions reduce to the same vacuous finite-factorization condition there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 moves to the full-power-set probability space, so zero-weight outcomes and other finite-space degeneracies remain inside the compared notions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim compares definitions and contains no endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness from a nonempty set is chosen; the proof sums over all relevant attained-value tuples."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 shows that the rectangle criterion implies the published attained-value definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 shows that the published attained-value definition implies the rectangle criterion."
+        }
+      ]
+    },
+    "lem-measurable-functions-preserve-independence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. Then the following are\nequivalent:\n\n1. the family $(X_i)_{i\\in I}$ is independent;\n2. for every natural number $n\\ge1$, every choice of distinct indices\n   $i_0,\\dots,i_{n-1}\\in I$, and every choice of measurable sets\n   $B_k\\in\\Sigma_{i_k}$,\n   $$\\mathbb P\\bigl(X_{i_0}\\in B_0,\\dots,X_{i_{n-1}}\\in B_{n-1}\\bigr)=\\prod_{k<n}\\mathbb P(X_{i_k}\\in B_k).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], each composite $g_i\\circ X_i$ is again a random element.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a finite list of distinct indices $i_0,\\dots,i_{n-1}$ and measurable sets $C_k\\in\\mathcal T_{i_k}$. Then $g_{i_k}^{-1}(C_k)\\in\\Sigma_{i_k}$ for every $k$, so [L2] applied to the independent family $(X_i)$ gives $$\\mathbb P(g_{i_0}(X_{i_0})\\in C_0,\\dots,g_{i_{n-1}}(X_{i_{n-1}})\\in C_{n-1})=\\prod_{k<n}\\mathbb P(g_{i_k}(X_{i_k})\\in C_k).$$",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 is exactly the rectangle criterion for the family $(g_i\\circ X_i)_{i\\in I}$, so [L2] shows that this family is independent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 covers every finite rectangle test for the transformed family, and the empty family stays independent by the same definition."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter appears."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the one-coordinate case automatically, since the rectangle criterion there is trivial."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma allows arbitrary measurable outer maps and does not isolate a degenerate target-space branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint condition is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses arbitrary measurable sets and their preimages, not a witness chosen from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way permanence statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way permanence statement."
+        }
+      ]
+    },
+    "thm-independent-random-elements-have-product-joint-law": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. Then the following are\nequivalent:\n\n1. the family $(X_i)_{i\\in I}$ is independent;\n2. for every natural number $n\\ge1$, every choice of distinct indices\n   $i_0,\\dots,i_{n-1}\\in I$, and every choice of measurable sets\n   $B_k\\in\\Sigma_{i_k}$,\n   $$\\mathbb P\\bigl(X_{i_0}\\in B_0,\\dots,X_{i_{n-1}}\\in B_{n-1}\\bigr)=\\prod_{k<n}\\mathbb P(X_{i_k}\\in B_k).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-law-of-a-random-element-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Then\n$\\mathbb P_X$ is a probability measure on $(S,\\Sigma)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B);$$\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal D:=\\{E\\subseteq\\prod_{i<n}S_i:X^{-1}(E)\\in\\mathcal F\\}$. Preimages preserve complements and countable unions, so $\\mathcal D$ is a sigma-algebra. If $R=\\prod_{i<n}B_i$ is a measurable rectangle, then $X^{-1}(R)=\\bigcap_{i<n}X_i^{-1}(B_i)\\in\\mathcal F$. Since [L4] says the product sigma-algebra is generated by such rectangles, $X$ is measurable for $\\bigotimes_{i<n}\\Sigma_i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every measurable rectangle $R=\\prod_{i<n}B_i$, [L1] gives $$\\mathbb P_X(R)=\\mathbb P(X_0\\in B_0,\\dots,X_{n-1}\\in B_{n-1})=\\prod_{i<n}\\mathbb P(X_i\\in B_i)=\\prod_{i<n}\\mathbb P_{X_i}(B_i).$$",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By step 1.1, the law $\\mathbb P_X$ is defined, and [L2] makes it a probability measure on the product sigma-algebra.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $n=1$, step 1.2 already identifies $\\mathbb P_X$ with $\\mathbb P_{X_0}$. For $n\\ge2$, define recursively $\\nu_1:=\\mathbb P_{X_0}$ and $\\nu_{m+1}:=\\nu_m\\otimes\\mathbb P_{X_m}$. Repeated use of the rectangle formula in [L3] shows that $\\nu_n\\left(\\prod_{i<n}B_i\\right)=\\prod_{i<n}\\mathbb P_{X_i}(B_i)$ for every measurable rectangle. Therefore $\\mathbb P_X$ and $\\nu_n$ agree on all measurable rectangles.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The measures $\\mathbb P_X$ and $\\nu_n$ are finite, hence sigma-finite, and step 2.2 shows that they agree on the generating measurable rectangles from [L4]. The uniqueness clause of [L3], applied recursively through the finite product construction, gives $$\\mathbb P_X=\\nu_n=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$ This is the claimed product joint law.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Independent random elements have product joint law, the Statement begins with n>=1, so the product space, measurable rectangles, and product measure are all formed for a nonempty finite list of factors.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Independent random elements have product joint law, the Statement begins with n>=1, so the product space, measurable rectangles, and product measure are all formed for a nonempty finite list of factors."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim is structural and has no zero-valued parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 isolates the $n=1$ case and identifies the joint law with the single marginal law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the measurable-rectangle generator directly, so degenerate rectangles such as whole-space factors are already included."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval endpoint or limiting boundary claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof constructs no witness from a nonempty set; it compares measures on all measurable rectangles."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a product-law consequence of independence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves a product-law consequence of independence, not an equivalence."
+        }
+      ]
+    },
+    "thm-factorization-of-expectations-for-independent-variables": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $Y_i:=g_i(X_i)$. By [L1], the family $Y_0,\\dots,Y_{n-1}$ is independent. On $\\mathbb R^n$ with the finite product sigma-algebra, each coordinate projection $\\pi_i$ is measurable because $\\pi_i^{-1}(B)=\\mathbb R^i\\times B\\times\\mathbb R^{n-1-i}$ is a measurable rectangle. Repeated use of [L6] therefore makes the product map $m(y_0,\\dots,y_{n-1})=\\prod_{i<n}y_i$ measurable.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume each $g_i$ is nonnegative. Let $\\mu_i$ be the law of $Y_i$ and let $\\mu=\\bigotimes_{i<n}\\mu_i$. By [L2], the joint law of $Y=(Y_0,\\dots,Y_{n-1})$ is $\\mu$. Using [L3] for the measurable map $m$ and then applying [L4] repeatedly on the product measure space yields $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\int_{\\mathbb R^n}m\\,d\\mu=\\prod_{i<n}\\int_{\\mathbb R}y\\,d\\mu_i=\\prod_{i<n}\\mathbb E[g_i(X_i)].$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Now assume every $g_i(X_i)$ is integrable. Applying step 2.1 to the nonnegative functions $|g_i|$ gives $$\\mathbb E\\left[\\prod_{i<n}|g_i(X_i)|\\right]=\\prod_{i<n}\\mathbb E[|g_i(X_i)|]<\\infty.$$ So $\\prod_{i<n}g_i(X_i)$ is integrable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $\\mu_i$ be the law of $Y_i=g_i(X_i)$ and $\\mu=\\bigotimes_{i<n}\\mu_i$ as in step 2.1. Step 3.1 shows that the product map $m$ is $\\mu$-integrable. By [L2], [L3], and repeated use of [L5], $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\int_{\\mathbb R^n}m\\,d\\mu=\\prod_{i<n}\\int_{\\mathbb R}y\\,d\\mu_i=\\prod_{i<n}\\mathbb E[g_i(X_i)].$$",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L2",
+            "L3",
+            "L5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Step 2.1 proves the nonnegative case, and step 4.1 proves the integrable case.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Expectations factor over finite products of independent random variables, the Statement fixes n>=1, so the displayed products are taken over a nonempty finite list and there is no separate empty-product branch to certify.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Expectations factor over finite products of independent random variables, the Statement fixes n>=1, so the displayed products are taken over a nonempty finite list and there is no separate empty-product branch to certify."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles the zero-expectation and zero-factor branch through the absolute-value factorization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 5.1 include the $n=1$ case, where the product map is the identity and the factorization is tautological."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the degenerate integrability issue by proving the absolute integrability of the product before step 4.1 applies Fubini."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, threshold endpoint, or limiting index boundary is part of the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses law factorization and repeated integration, not a witness chosen from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a consequence of independence, not a biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a consequence of independence, not a biconditional characterization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk came from measurability of the product map and from the Tonelli/Fubini passage in the nonnegative and integrable cases. I reread the coordinate-projection measurability argument on R^n, the independence transfer to Y_i=g_i(X_i), and the absolute-integrability check via the |g_i| version. The current factorization theorem is sound."
+      }
+    },
+    "cor-covariance-vanishes-under-independence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $X$ and $Y$ are square-integrable, they are integrable. Applying [L1] with $g_0(x)=x$ and $g_1(y)=y$ gives $$\\mathbb E[XY]=\\mathbb E[X]\\mathbb E[Y].$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting step 1.1 into [L2] yields $$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y]=0.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary is about a fixed pair of random variables, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is exactly the zero-covariance conclusion after substituting the factorized product expectation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton-family or unit-parameter branch in a two-variable covariance statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 also covers degenerate variables, since constant or zero variables still satisfy the same covariance identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement contains no interval or limiting endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness or element is chosen from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary proves only the forward implication from independence to zero covariance."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The statement explicitly says the converse is false; the reverse direction is intentionally excluded rather than proved."
+        }
+      ]
+    },
+    "cor-first-borel-cantelli-lemma-for-events": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-limsup-and-infinitely-often-event",
+          "source_section": "Definition",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be a sequence of events in a probability space. The\nevent that **infinitely many** of the $A_n$ occur is\n\n$$\\{A_n\\ \\mathrm{i.o.}\\}:=\\limsup_{n\\to\\infty}A_n=\\bigcap_{m\\in\\mathbb N}\\bigcup_{n\\ge m}A_n.$$\n\nThus $\\omega\\in\\{A_n\\ \\mathrm{i.o.}\\}$ exactly when $\\omega$ belongs to $A_n$ for\ninfinitely many indices $n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-first-borel-cantelli",
+          "source_section": "Statement",
+          "quote": "Let $(E_k)_{k\\in\\mathbb N}$ be measurable sets in a measure space. If the nonnegative extended sum satisfies\n\n$$\\sum_{k=0}^{\\infty}\\mu(E_k)<+\\infty,$$\n\nthen\n\n$$\\mu\\left(\\limsup_{k\\to\\infty}E_k\\right)=0.$$\n\nNo independence hypothesis and no finiteness hypothesis on the whole space are required.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the event $\\{A_n\\ \\mathrm{i.o.}\\}$ is exactly $\\limsup_{n\\to\\infty}A_n$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] to the probability measure $\\mathbb P$ and the measurable sets $A_n$ gives $$\\mathbb P(A_n\\ \\mathrm{i.o.})=\\mathbb P\\left(\\limsup_{n\\to\\infty}A_n\\right)=0.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the measure-theoretic first Borel-Cantelli lemma exactly as stated, which already includes the eventually-empty and identically-empty sequence branches."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 concludes the limsup event has probability zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is a null-event conclusion, not a unit-probability or singleton boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 does not need independence or a finite ambient-space hypothesis, so degenerate event sequences are already included."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim concerns convergence of a series of probabilities, not endpoint inequalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is a one-way implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is a one-way implication."
+        }
+      ]
+    },
+    "thm-pairwise-independent-borel-cantelli-frequency-law": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-pairwise-independence",
+          "source_section": "Definition",
+          "quote": "Let $(A_i)_{i\\in I}$ be a family of events in a probability space.\n\nThe family is **pairwise independent** when every two distinct members are\nindependent, that is, when\n\n$$\\mathbb P(A_i\\cap A_j)=\\mathbb P(A_i)\\mathbb P(A_j)\\qquad(i\\ne j).$$\n\nPairwise independence is weaker than independence of the whole family: it asks\nfor the product rule only for two-member subfamilies.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let $E \\subseteq X$. The\nindicator function\n\n$$\\mathbf{1}_E(x) := \\begin{cases} 1, & x \\in E,\\\\ 0, & x \\notin E \\end{cases}$$\n\nis measurable as a map $X \\to \\mathbb{R}$ if and only if $E \\in \\mathcal{A}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $A\\in\\mathcal F$.\nThen the indicator $\\mathbf 1_A$ satisfies\n$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-first-borel-cantelli-lemma-for-events",
+          "source_section": "Statement",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $k$, the indicator $\\mathbf 1_{A_k}$ is a real random variable by [L2]. Repeated use of [L4] and [L2] gives $$\\mathbb E[S_n]=\\sum_{k=1}^n\\mathbb E[\\mathbf 1_{A_k}]=\\sum_{k=1}^n\\mathbb P(A_k)=a_n.$$ The divergence hypothesis makes $a_n\\to+\\infty$. In particular, there is $N \\ge 1$ with $a_n>0$ for every $n \\ge N$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $i\\ne j$, step 1.1 and [L1] give $$\\mathbb E[\\mathbf 1_{A_i}\\mathbf 1_{A_j}]=\\mathbb E[\\mathbf 1_{A_i\\cap A_j}]=\\mathbb P(A_i\\cap A_j)=\\mathbb P(A_i)\\mathbb P(A_j)=\\mathbb E[\\mathbf 1_{A_i}]\\,\\mathbb E[\\mathbf 1_{A_j}].$$ Also $\\mathbf 1_{A_k}^2=\\mathbf 1_{A_k}$ for every $k$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L3], the partial sum $S_n$ and its square $S_n^2$ are measurable. Expanding $S_n^2$ and using step 2.1 together with linearity from [L4] yields $$\\mathbb E[S_n^2]=\\sum_{k=1}^n\\mathbb P(A_k)+2\\sum_{1\\le i<j\\le n}\\mathbb P(A_i)\\mathbb P(A_j)=a_n^2+\\sum_{k=1}^n\\bigl(\\mathbb P(A_k)-\\mathbb P(A_k)^2\\bigr)\\le a_n^2+a_n.$$ So $S_n$ is square-integrable, and [L4] gives $$\\operatorname{Var}(S_n)=\\mathbb E[S_n^2]-\\mathbb E[S_n]^2\\le a_n.$$",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $\\varepsilon>0$ and $n \\ge N$. Applying [L5] to $S_n$ gives $$\\mathbb P\\left(\\left|\\frac{S_n}{a_n}-1\\right|\\ge\\varepsilon\\right)=\\mathbb P\\left(|S_n-a_n|\\ge\\varepsilon a_n\\right)\\le\\frac{\\operatorname{Var}(S_n)}{\\varepsilon^2a_n^2}\\le\\frac{1}{\\varepsilon^2a_n}.$$ Hence $S_n/a_n\\to1$ in probability along the defined tail $n \\ge N$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For each integer $m\\ge1$, let $n_m$ be the least index with $a_{n_m}\\ge a_1+m^2$; it exists by step 1.1. Since $a_{n_m-1}<a_1+m^2 \\le a_{n_m}$ and $a_{n_m}-a_{n_m-1}=\\mathbb P(A_{n_m})\\le1$, one has $$a_1+m^2 \\le a_{n_m} < a_1+m^2+1.$$ Therefore step 4.1 yields $$\\mathbb P\\left(\\left|\\frac{S_{n_m}}{a_{n_m}}-1\\right|\\ge\\varepsilon\\right)\\le\\frac{1}{\\varepsilon^2(a_1+m^2)},$$ and the sum over $m$ is finite.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For each integer $r\\ge1$, step 5.1 with $\\varepsilon=1/r$ gives $$\\sum_{m=1}^\\infty \\mathbb P\\left(\\left|\\frac{S_{n_m}}{a_{n_m}}-1\\right|\\ge\\frac1r\\right)<+\\infty.$$ Applying [L6] to these deviation events shows that, for each $r$, only finitely many of them occur almost surely.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Intersect the full-probability events from step 6.1 over all $r\\in\\mathbb N_{>0}$. On that still full-probability event, for every $r$ there is $M_r(\\omega)$ such that $$\\left|\\frac{S_{n_m}(\\omega)}{a_{n_m}}-1\\right|<\\frac1r\\qquad(m\\ge M_r(\\omega)).$$ Hence $S_{n_m}/a_{n_m}\\to1$ almost surely.",
+          "step": "7.1",
+          "inputs": [
+            "step 6.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Fix $\\omega$ in the full-probability event from step 7.1. If $n_m\\le n<n_{m+1}$, then $S_{n_m}(\\omega)\\le S_n(\\omega)\\le S_{n_{m+1}}(\\omega)$ and $a_{n_m}\\le a_n<a_{n_{m+1}}$, so $$\\frac{S_{n_m}(\\omega)}{a_{n_{m+1}}}\\le\\frac{S_n(\\omega)}{a_n}\\le\\frac{S_{n_{m+1}}(\\omega)}{a_{n_m}}.$$ Since $a_{n_m}/a_{n_{m+1}} \\to 1$ and $a_{n_{m+1}}/a_{n_m}\\to1$ by the bounds in step 5.1, step 7.1 squeezes $S_n(\\omega)/a_n$ to $1$. Therefore $S_n/a_n\\to1$ almost surely for all sufficiently large $n$, equivalently for all $n$ with $a_n>0$.",
+          "step": "8.1",
+          "inputs": [
+            "step 5.1",
+            "step 7.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "Step 8.1 is exactly the asserted frequency law.",
+          "step": "9.1",
+          "inputs": [
+            "step 8.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Pairwise-independent Borel-Cantelli frequency law, the theorem is about one fixed infinite sequence (A_n)_{n>=1} with a divergent probability sum, not an optional empty family of events.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Pairwise-independent Borel-Cantelli frequency law, the theorem is about one fixed infinite sequence (A_n)_{n>=1} with a divergent probability sum, not an optional empty family of events."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 controls the zero-probability branch through the summand $\\mathbb P(A_k)-\\mathbb P(A_k)^2$, which vanishes when $\\mathbb P(A_k)=0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 also covers the unit-probability branch because the same summand $\\mathbb P(A_k)-\\mathbb P(A_k)^2$ vanishes when $\\mathbb P(A_k)=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 handle degenerate indicator variables directly, and the argument continues using only the global divergence hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 chooses the least threshold-crossing index $n_m$, and step 8.1 interpolates between consecutive crossings $n_m\\le n<n_{m+1}$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 makes the only witness-like choice canonically by taking the least $n_m$ with $a_{n_m}\\ge m^2$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way almost-sure frequency law, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way almost-sure frequency law, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Critical risk came from undefined ratios when a_n=0 and from the old subsequence endpoint a_{n_m-1}. I repaired the statement to assert the ratio on the eventual tail where a_n>0, reindexed the sums from n>=1, and repaired the threshold argument with the shifted levels a_1+m^2. The current proof now avoids both denominator defects."
+      }
+    },
+    "cor-second-borel-cantelli-lemma-under-pairwise-independence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-pairwise-independent-borel-cantelli-frequency-law",
+          "source_section": "Statement",
+          "quote": "Let $(A_n)_{n\\ge1}$ be pairwise independent events with\n$$\\sum_{n=1}^\\infty \\mathbb P(A_n)=+\\infty.$$\nFor $n\\ge1$, put\n$$S_n:=\\sum_{k=1}^n \\mathbf 1_{A_k},\\qquad a_n:=\\sum_{k=1}^n \\mathbb P(A_k).$$\nThen $a_n>0$ for all sufficiently large $n$, and\nfor those $n$\nThen\n$$\\frac{S_n}{a_n}\\longrightarrow 1\\qquad\\text{almost surely.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-limsup-and-infinitely-often-event",
+          "source_section": "Definition",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be a sequence of events in a probability space. The\nevent that **infinitely many** of the $A_n$ occur is\n\n$$\\{A_n\\ \\mathrm{i.o.}\\}:=\\limsup_{n\\to\\infty}A_n=\\bigcap_{m\\in\\mathbb N}\\bigcup_{n\\ge m}A_n.$$\n\nThus $\\omega\\in\\{A_n\\ \\mathrm{i.o.}\\}$ exactly when $\\omega$ belongs to $A_n$ for\ninfinitely many indices $n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S_n:=\\sum_{k=0}^n\\mathbf 1_{A_k}$ and $a_n:=\\sum_{k=0}^n\\mathbb P(A_k)$. The divergence hypothesis makes $a_n\\to+\\infty$, and [L1] gives $S_n/a_n\\to1$ almost surely. Therefore on a full-probability event there is $N$ such that $S_n\\ge a_n/2$ for every $n\\ge N$, hence $S_n\\to+\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The partial counts $S_n(\\omega)$ diverge to $+\\infty$ exactly when the event $A_n$ occurs for infinitely many indices $n$. By [L2], this is precisely the event $A_n\\ \\mathrm{i.o.}$. Since step 1.1 shows it has probability $1$, the second Borel-Cantelli conclusion follows.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Second Borel-Cantelli lemma under pairwise independence, the corollary is indexed by the whole sequence (A_n)_{n in N}; the detector is reacting to the summation notation rather than to a missing empty-family branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Second Borel-Cantelli lemma under pairwise independence, the corollary is indexed by the whole sequence (A_n)_{n in N}; the detector is reacting to the summation notation rather than to a missing empty-family branch."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The conclusion is a probability-one event, not a zero branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 concludes exactly that the infinitely-often event has probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 reduces the claim to the growth of the counting process, which already covers trivial and nontrivial event values uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or threshold endpoint is part of the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way consequence of the frequency law."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way consequence of the frequency law."
+        }
+      ]
+    },
+    "lem-tail-events-are-independent-of-every-finite-initial-sigma-algebra": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-tail-sigma-algebra-of-a-sequence",
+          "source_section": "Definition",
+          "quote": "Let $(X_n)_{n\\in\\mathbb N}$ be random elements on a common probability space.\nFor $m\\in\\mathbb N$, write\n\n$$\\sigma(X_n:n\\ge m):=\\sigma_\\Omega\\left(\\bigcup_{n\\ge m}\\sigma(X_n)\\right),$$\n\nthe sigma-algebra generated by all coordinate sigma-algebras from time $m$\nonward.\n\nThe **tail sigma-algebra** of the sequence is\n\n$$\\mathcal T(X_n:n\\in\\mathbb N):=\\bigcap_{m\\in\\mathbb N}\\sigma(X_n:n\\ge m).$$\n\nThus a tail event is one whose membership is unchanged by altering only finitely\nmany initial coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The independent sequence $(X_n)$ gives an independent family of sigma-algebras $(\\sigma(X_n))_{n\\in\\mathbb N}$. Grouping the first $m+1$ coordinates into one block and the remaining coordinates into the other, [L2] shows that $\\mathcal H_m$ and $\\mathcal G_m$ are independent sigma-algebras.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $A$ lies in the tail sigma-algebra, [L1] gives $A\\in\\sigma(X_n:n\\ge m+1)=\\mathcal G_m$. Step 1.1 therefore yields $$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B).$$ So every tail event is independent of every event in the finite initial sigma-algebra.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 groups the empty future intersection into the whole-space event through the grouped sigma-algebra argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The lemma is qualitative and has no zero-valued parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the one-coordinate initial sigma-algebra case when $m=0$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the degenerate whole-space block through the grouping theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the exact future block $n\\ge m+1$, so the initial/future boundary at $m$ is explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Tail events are independent of every finite initial sigma-algebra, no witness from a nonempty set is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves only an independence consequence for tail events."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves only an independence consequence for tail events."
+        }
+      ]
+    },
+    "thm-kolmogorov-zero-one-law": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-tail-events-are-independent-of-every-finite-initial-sigma-algebra",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)_{n\\in\\mathbb N}$ be an independent sequence of random elements. For\neach $m\\in\\mathbb N$, let\n\n$$\\mathcal H_m:=\\sigma(X_0,\\dots,X_m),\\qquad \\mathcal G_m:=\\sigma(X_n:n\\ge m+1).$$\n\nThen every tail event $A\\in\\mathcal T(X_n:n\\in\\mathbb N)$ is independent of\nevery event $B\\in\\mathcal H_m$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-monotone-class",
+          "source_section": "Statement",
+          "quote": "For every algebra $\\mathcal A$ of subsets of $X$,\n\n$$m_X(\\mathcal A)=\\sigma_X(\\mathcal A).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-tail-sigma-algebra-of-a-sequence",
+          "source_section": "Definition",
+          "quote": "Let $(X_n)_{n\\in\\mathbb N}$ be random elements on a common probability space.\nFor $m\\in\\mathbb N$, write\n\n$$\\sigma(X_n:n\\ge m):=\\sigma_\\Omega\\left(\\bigcup_{n\\ge m}\\sigma(X_n)\\right),$$\n\nthe sigma-algebra generated by all coordinate sigma-algebras from time $m$\nonward.\n\nThe **tail sigma-algebra** of the sequence is\n\n$$\\mathcal T(X_n:n\\in\\mathbb N):=\\bigcap_{m\\in\\mathbb N}\\sigma(X_n:n\\ge m).$$\n\nThus a tail event is one whose membership is unchanged by altering only finitely\nmany initial coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $m\\in\\mathbb N$, let $\\mathcal H_m:=\\sigma(X_0,\\dots,X_m)$ and put $\\mathcal A:=\\bigcup_{m\\in\\mathbb N}\\mathcal H_m$. Since the family $(\\mathcal H_m)$ is increasing, $\\mathcal A$ is an algebra of events. Define $$\\mathcal D:=\\{B\\in\\sigma(\\mathcal A):\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)\\}.$$ Using the continuity statements from [L3], the class $\\mathcal D$ is closed under increasing unions and decreasing intersections, so it is a monotone class.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $m$, [L1] gives $\\mathcal H_m\\subseteq\\mathcal D$. Hence the algebra $\\mathcal A=\\bigcup_m\\mathcal H_m$ is contained in $\\mathcal D$.",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $\\mathcal D$ is a monotone class containing the algebra $\\mathcal A$, [L2] yields $\\sigma(\\mathcal A)\\subseteq\\mathcal D$. But $\\sigma(\\mathcal A)=\\sigma(X_n:n\\ge0)$, and [L4] puts every tail event in this full-coordinate sigma-algebra. Therefore $A\\in\\mathcal D$, so $$\\mathbb P(A)=\\mathbb P(A\\cap A)=\\mathbb P(A)^2.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 and [L3] show that the probability $p=\\mathbb P(A)$ satisfies $0\\le p\\le1$ and $p=p^2$, so $p\\in\\{0,1\\}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 builds the algebra of finite-coordinate events and the monotone class around it, which includes the empty and whole-space tail events."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies one of the only two allowed probabilities as $0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the other allowed probability as $1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the degenerate tail events $\\varnothing$ and $\\Omega$ through the same identity $\\mathbb P(A)=\\mathbb P(A)^2$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats increasing and decreasing monotone event sequences inside the monotone-class closure argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses no witness-existence step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk came from moving from independence against each finite initial sigma-algebra to independence against the sigma-algebra they generate, and from locating the tail event in the full-coordinate sigma-algebra. I reread the monotone-class argument and the explicit tail-sigma citation in step 2.1. The theorem is sound on current bytes."
+      }
+    },
+    "cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-tail-sigma-algebra-of-a-sequence",
+          "source_section": "Definition",
+          "quote": "Let $(X_n)_{n\\in\\mathbb N}$ be random elements on a common probability space.\nFor $m\\in\\mathbb N$, write\n\n$$\\sigma(X_n:n\\ge m):=\\sigma_\\Omega\\left(\\bigcup_{n\\ge m}\\sigma(X_n)\\right),$$\n\nthe sigma-algebra generated by all coordinate sigma-algebras from time $m$\nonward.\n\nThe **tail sigma-algebra** of the sequence is\n\n$$\\mathcal T(X_n:n\\in\\mathbb N):=\\bigcap_{m\\in\\mathbb N}\\sigma(X_n:n\\ge m).$$\n\nThus a tail event is one whose membership is unchanged by altering only finitely\nmany initial coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-kolmogorov-zero-one-law",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)_{n\\in\\mathbb N}$ be an independent sequence of random elements, and\nlet $\\mathcal T(X_n:n\\in\\mathbb N)$ be its tail sigma-algebra. Then every event\n$A\\in\\mathcal T(X_n:n\\in\\mathbb N)$ satisfies\n$$\\mathbb P(A)\\in\\{0,1\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $E:=\\{\\sum_{n=0}^\\infty X_n\\text{ converges}\\}$ and fix $m\\in\\mathbb N$. The series $\\sum_{n=0}^\\infty X_n$ converges if and only if the tail series $\\sum_{n=m}^\\infty X_n$ converges, because removing finitely many initial terms changes every partial sum by a fixed finite constant. By the Cauchy criterion, $$E=\\bigcap_{r=1}^\\infty\\bigcup_{N=m}^\\infty\\bigcap_{q\\ge p\\ge N}\\left\\{\\left|\\sum_{n=p}^q X_n\\right|\\le\\frac1r\\right\\}.$$ For $q\\ge p\\ge N\\ge m$, the partial sum $\\sum_{n=p}^q X_n$ is measurable with respect to $\\sigma(X_n:n\\ge m)$ by repeated use of [L2], so each displayed event lies in $\\sigma(X_n:n\\ge m)$. Therefore $E\\in\\sigma(X_n:n\\ge m)$ for every $m$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 shows that $E$ lies in the tail sigma-algebra, so [L3] gives $\\mathbb P(E)\\in\\{0,1\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Almost-sure convergence of an independent series is a zero-one event, the event is defined from one fixed infinite series sum_{n=0}^infty X_n, not from an optional empty family of coordinates.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Almost-sure convergence of an independent series is a zero-one event, the event is defined from one fixed infinite series sum_{n=0}^infty X_n, not from an optional empty family of coordinates."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the convergence event to have probability $0$ as one of the two zero-one outcomes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the convergence event to have probability $1$ as the other zero-one outcome."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the degenerate finitely modified series case directly by comparing it with its tails."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly checks the finite-initial-segment boundary by removing the first $m$ terms."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Almost-sure convergence of an independent series is a zero-one event, no witness from a nonempty set is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Almost-sure convergence of an independent series is a zero-one event, the corollary is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Almost-sure convergence of an independent series is a zero-one event, the corollary is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Critical risk came from proving that the convergence event is measurable with respect to every future-coordinate sigma-algebra, not just invariant under deleting finitely many terms. I reread the Cauchy-criterion description in step 1.1 and the measurable-arithmetic closure it uses. The event is now honestly tail-measurable."
+      }
+    },
+    "ex-independent-events-that-are-not-disjoint": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-uniform-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a nonempty finite set. Its **uniform probability space** assigns every $\\omega\\in\\Omega$ the weight $1/|\\Omega|$. Thus every event $A\\subseteq\\Omega$ has\n$$\\mathbb P(A)=\\frac{|A|}{|\\Omega|}.$$\nNonemptiness is required so that the denominator is positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-pairwise-and-mutual-independence-of-events",
+          "source_section": "Definition",
+          "quote": "Two events $A$ and $B$ are **independent** when\n$$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B).$$\n\nA finite family $(A_i)_{i\\in I}$ is **pairwise independent** when every two distinct members are independent. It is **mutually independent** when for every nonempty $J\\subseteq I$,\n$$\\mathbb P\\!\\left(\\bigcap_{j\\in J}A_j\\right)=\\prod_{j\\in J}\\mathbb P(A_j).$$\nThe empty-subfamily identity is also valid under the conventions $\\mathbb P(\\Omega)=1$ and $\\prod_{j\\in\\varnothing}\\mathbb P(A_j)=1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the events $A$ and $B$ each have probability $2/4=1/2$, while $A\\cap B=\\{00\\}$ has probability $1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 gives $$\\mathbb P(A\\cap B)=\\frac14=\\frac12\\cdot\\frac12=\\mathbb P(A)\\mathbb P(B),$$ so [L2] shows that $A$ and $B$ are independent. Since $00\\in A\\cap B$, they are not disjoint.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes an explicit nonempty finite space and two explicit events."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-probability or zero-valued parameter is the point of the example."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns two events of probability $1/2$, not a unit boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example is deliberately nondegenerate: the overlap event is a genuine singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the concrete witness $00\\in A\\cap B$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Independent events need not be disjoint, the item is an example, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Independent events need not be disjoint, the item is an example, not an equivalence."
+        }
+      ]
+    },
+    "ex-functions-of-disjoint-independent-coordinate-blocks": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sigma-algebras $\\sigma(X_0),\\sigma(X_1),\\sigma(X_2),\\sigma(X_3)$ are independent by [L3]. Grouping the first two and last two coordinates, [L1] shows that the block sigma-algebras $\\sigma(X_0,X_1)$ and $\\sigma(X_2,X_3)$ are independent. Therefore the block random elements $Y$ and $Z$ are independent.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] to the independent pair $Y,Z$ and the measurable maps $f,g$ gives independence of $f(Y)$ and $g(Z)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is about two explicit nonempty coordinate blocks."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or null-measure special case is involved."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the case where one block is reduced to a single measurable transform just as well as the displayed two-coordinate blocks."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example does not hinge on degenerate constant maps or empty targets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or index-endpoint condition is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness from a nonempty set is selected; the block decomposition is part of the data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Functions of disjoint independent coordinate blocks remain independent, the item is an example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Functions of disjoint independent coordinate blocks remain independent, the item is an example, not a biconditional."
+        }
+      ]
+    },
+    "ex-borel-cantelli-eventually-no-large-deviations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-first-borel-cantelli-lemma-for-events",
+          "source_section": "Statement",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] to the events $A_n:=\\{|X_n|>a_n\\}$. Then $$\\mathbb P(|X_n|>a_n\\ \\mathrm{i.o.})=0.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The complement of the event in step 1.1 is exactly the event that there is an index $N$ such that $|X_n|\\le a_n$ for all $n\\ge N$. Hence that eventual bound holds almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the eventually-empty deviation sequence as an immediate special case of the first Borel-Cantelli application."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 concludes that the large-deviation limsup event has probability zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The conclusion is an almost-sure eventual bound rather than a probability-one limsup statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers degenerate sequences where all but finitely many deviations are already impossible."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 is exactly the eventual-tail endpoint statement: there exists $N$ such that all later indices obey the bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 extracts the witness index $N$ from the complement of the limsup event."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A summable tail bound becomes an almost-sure eventual bound, the item is an example, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A summable tail bound becomes an almost-sure eventual bound, the item is an example, not an equivalence."
+        }
+      ]
+    },
+    "ex-zero-one-law-for-convergence-of-a-random-series": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)_{n\\in\\mathbb N}$ be an independent sequence of real random\nvariables. Then the event\n\n$$\\left\\{\\sum_{n=0}^\\infty X_n\\text{ converges}\\right\\}$$\n\nhas probability $0$ or $1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed event is exactly the convergence event covered by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore its probability belongs to $\\{0,1\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns an infinite random series."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes probability $0$ as one of the only two possible values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes probability $1$ as the other possible value."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example does not isolate a degenerate deterministic series."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or threshold endpoint appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Convergence of an independent random series is a zero-one event, no witness from a nonempty set is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Convergence of an independent random series is a zero-one event, the item is an example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Convergence of an independent random series is a zero-one event, the item is an example, not a biconditional."
+        }
+      ]
+    },
+    "cex-divergent-probability-sum-without-independence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-limsup-and-infinitely-often-event",
+          "source_section": "Definition",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be a sequence of events in a probability space. The\nevent that **infinitely many** of the $A_n$ occur is\n\n$$\\{A_n\\ \\mathrm{i.o.}\\}:=\\limsup_{n\\to\\infty}A_n=\\bigcap_{m\\in\\mathbb N}\\bigcup_{n\\ge m}A_n.$$\n\nThus $\\omega\\in\\{A_n\\ \\mathrm{i.o.}\\}$ exactly when $\\omega$ belongs to $A_n$ for\ninfinitely many indices $n$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since every $A_n$ equals $A$, one has $$\\sum_{n=0}^\\infty \\mathbb P(A_n)=\\sum_{n=0}^\\infty \\mathbb P(A)=+\\infty.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every outcome $\\omega$, either $\\omega\\in A$ and then $\\omega\\in A_n$ for all $n$, or $\\omega\\notin A$ and then $\\omega\\notin A_n$ for all $n$. Hence the infinitely-often event is exactly $A$ itself: $$A_n\\ \\mathrm{i.o.}=A.$$",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $$\\mathbb P(A_n\\ \\mathrm{i.o.})=\\mathbb P(A),$$ and the chosen hypothesis $0<\\mathbb P(A)<1$ makes this probability strictly between $0$ and $1$. So the displayed implication is false without an independence hypothesis.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a constant infinite event sequence, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The witness requires an intermediate probability strictly between $0$ and $1$, so the zero boundary is intentionally excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness requires an intermediate probability strictly between $0$ and $1$, so the unit boundary is intentionally excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the maximally dependent degenerate case $A_n=A$ for every $n$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 determines the tail-event endpoint exactly by identifying the whole limsup with the repeated event $A$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Given line chooses a concrete witness event with $0<\\mathbb P(A)<1$, and step 2.1 uses that witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a one-way implication rather than an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a one-way implication rather than an equivalence."
+        }
+      ]
+    },
+    "cex-independent-events-need-not-be-closed-under-unions-of-overlapping-pairs": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-uniform-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a nonempty finite set. Its **uniform probability space** assigns every $\\omega\\in\\Omega$ the weight $1/|\\Omega|$. Thus every event $A\\subseteq\\Omega$ has\n$$\\mathbb P(A)=\\frac{|A|}{|\\Omega|}.$$\nNonemptiness is required so that the denominator is positive.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-pairwise-and-mutual-independence-of-events",
+          "source_section": "Definition",
+          "quote": "Two events $A$ and $B$ are **independent** when\n$$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B).$$\n\nA finite family $(A_i)_{i\\in I}$ is **pairwise independent** when every two distinct members are independent. It is **mutually independent** when for every nonempty $J\\subseteq I$,\n$$\\mathbb P\\!\\left(\\bigcap_{j\\in J}A_j\\right)=\\prod_{j\\in J}\\mathbb P(A_j).$$\nThe empty-subfamily identity is also valid under the conventions $\\mathbb P(\\Omega)=1$ and $\\prod_{j\\in\\varnothing}\\mathbb P(A_j)=1$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the events $A$ and $B$ have probability $1/2$, and $A\\cap B=\\{00\\}$ has probability $1/4$. Hence $A$ and $B$ are independent by [L2]. Also $C$ overlaps both of them because $00\\in A\\cap C$ and $00\\in B\\cap C$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The unions are $$A\\cup C=\\{00,01,11\\},\\qquad B\\cup C=\\{00,10,11\\},$$ so each has probability $3/4$, while $$(A\\cup C)\\cap(B\\cup C)=\\{00,11\\}$$ has probability $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $$\\mathbb P((A\\cup C)\\cap(B\\cup C))=\\frac12\\ne\\frac{9}{16}=\\frac34\\cdot\\frac34,$$ [L2] shows that $A\\cup C$ and $B\\cup C$ are not independent. This refutes the statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes three explicit nonempty events."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The witness probabilities are $1/2$, $3/4$, and $1/2$, not zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness probabilities are strictly below $1$, so the unit boundary is not the issue."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The point of the counterexample is a genuinely nontrivial overlap, not a degenerate whole-space union."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting boundary is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the explicit overlapping witness $00$ in both $A\\cap C$ and $B\\cap C$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a one-way closure claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a one-way closure claim, not a biconditional."
+        }
+      ]
+    }
+  }
+}

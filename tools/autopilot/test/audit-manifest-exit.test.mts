@@ -13,7 +13,7 @@
 // here too — a manifest set that resolved to nothing must not pass as an audit.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, rmSync, mkdirSync, copyFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -39,6 +39,28 @@ const run = (file: string, extra: string[] = []) => spawnSync(
 
 const REAL_ITEMS = ['lem-cauchy-bounded'];
 
+function pageHomeFixture(pageStatus: 'draft' | 'published') {
+  const root = mkdtempSync(join(tmpdir(), 'am-page-home-'));
+  mkdirSync(join(root, 'tools'), { recursive: true });
+  mkdirSync(join(root, 'items'), { recursive: true });
+  mkdirSync(join(root, 'library', 'demo'), { recursive: true });
+  copyFileSync(TOOL, join(root, 'tools', 'audit-manifest.mjs'));
+  writeFileSync(join(root, 'items', 'thm-source.md'), `---\nid: thm-source\nstatus: draft\ndeps: [thm-target]\n---\n`);
+  writeFileSync(join(root, 'items', 'thm-target.md'), `---\nid: thm-target\nstatus: draft\n---\n`);
+  writeFileSync(join(root, 'library', 'demo', 'target-page.md'), `---\npage: target-page\nstatus: ${pageStatus}\nitems: [thm-target]\n---\n`);
+  const file = join(root, 'demo-batch-1.pages.json');
+  writeFileSync(file, JSON.stringify([{ id: 'source-page', items: [{ id: 'thm-source' }] }]));
+  return { root, file };
+}
+
+function runFixture(root: string, file: string) {
+  return spawnSync(process.execPath, [join(root, 'tools', 'audit-manifest.mjs'), file], {
+    cwd: root,
+    encoding: 'utf8',
+    timeout: 180_000,
+  });
+}
+
 test('a manifest naming a nonexistent item exits 1', () => {
   const { dir, file } = manifest([{
     id: 'demo-page',
@@ -56,6 +78,22 @@ test('a manifest of real items exits 0', () => {
   assert.equal(r.status, 0, `${r.stdout}${r.stderr}`);
   assert.match(r.stdout + r.stderr, /0 defect\(s\)/);
   rmSync(dir, { recursive: true, force: true });
+});
+
+test('a published page is a valid published home for a legacy draft item', () => {
+  const { root, file } = pageHomeFixture('published');
+  const r = runFixture(root, file);
+  assert.equal(r.status, 0, `${r.stdout}${r.stderr}`);
+  assert.match(r.stdout + r.stderr, /published-backward: 1/);
+  rmSync(root, { recursive: true, force: true });
+});
+
+test('a draft page does not make its draft item a published home', () => {
+  const { root, file } = pageHomeFixture('draft');
+  const r = runFixture(root, file);
+  assert.equal(r.status, 1, `${r.stdout}${r.stderr}`);
+  assert.match(r.stdout + r.stderr, /ERROR unresolved: thm-source/);
+  rmSync(root, { recursive: true, force: true });
 });
 
 test('the summary line carries the count the engine liveness probe reads', () => {

@@ -1,0 +1,2150 @@
+{
+  "version": 1,
+  "level": "frontier-30",
+  "note": "Step-5 authoring contract for frontier-30 batch 18 on Friday, September 4, 2026.",
+  "scope": [
+    "lem-morse-functions-are-transverse-differentials",
+    "thm-morse-functions-are-dense-by-relative-jet-transversality",
+    "thm-morse-functions-form-a-residual-subset",
+    "lem-compact-morse-critical-points-have-uniform-hessian-gaps",
+    "lem-no-new-critical-points-under-a-compact-c1-small-perturbation",
+    "thm-morse-functions-are-open-dense-on-a-compact-manifold",
+    "lem-finitely-many-critical-values-can-be-separated-locally",
+    "thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold",
+    "thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse",
+    "thm-generic-squared-distance-functions-are-morse",
+    "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function",
+    "lem-properness-survives-a-controlled-locally-finite-perturbation",
+    "prop-proper-morse-exhaustions-exist-on-smooth-manifolds",
+    "ex-generic-and-exceptional-height-directions-on-a-torus",
+    "ex-squared-distance-to-a-circle-and-its-medial-axis",
+    "ex-separating-equal-critical-values-by-bump-functions",
+    "cex-morse-functions-need-not-have-distinct-critical-values",
+    "cex-noncompact-smallness-without-the-strong-topology-can-create-critical-points-at-infinity"
+  ],
+  "contracts": {
+    "lem-morse-functions-are-transverse-differentials": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The zero set of the section $df$ is exactly the critical set of $f$, because $df_p=0$ means that the differential of $f$ vanishes at $p$. Thus transversality to the zero section is vacuous away from the critical points.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a critical point $p$. By [A1], in cotangent-bundle coordinates centered at $0_p$ the derivative of $df$ at $p$ induces on the fibre quotient exactly the Hessian matrix of $f$ at $p$. Therefore that quotient map is surjective if and only if $\\operatorname{Hess}_p(f)$ is nondegenerate in the sense of [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L1], $df$ is transverse to the zero section at $p$ if and only if that quotient map is surjective. Combining this with step 2.1 shows that $df$ is transverse to the zero section at $p$ if and only if $p$ is a nondegenerate critical point of $f$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since the only points at which transversality needs checking are the critical points from step 1.1, step 3.1 proves that $df$ is transverse to the zero section exactly when every critical point of $f$ is nondegenerate. By [F1], that is exactly the Morse condition.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Morse-transversality lemma is not parameterized by an empty family beyond the ordinary possibility of having no critical points, which the general argument already treats vacuously in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement does not require a separate zero-value or zero-dimensional branch beyond the coordinate and Hessian argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The top-level claim has no separate singleton or value-one regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies degeneracy exactly with failure of transversality at a critical point."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A smooth function is Morse if and only if its differential section is transverse to the zero section, the item has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that transversality of $df$ implies every critical point is nondegenerate, hence $f$ is Morse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 also proves that if every critical point is nondegenerate, then $df$ is transverse to the zero section."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hessian-of-a-function-at-a-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $f:M\\to \\mathbb R$ be smooth, and let $p\\in M$ be a critical point of $f$\n([[def-critical-point-and-critical-value-of-a-smooth-function]]).\n\nChoose a smooth chart $x=(x^1,\\dots,x^n)$ around $p$, write\n$a:=x(p)$, and let $g:=f\\circ x^{-1}$. The matrix\n\n$$H_x(f,p):=\\left(\\frac{\\partial^2 g}{\\partial x^i\\partial x^j}(a)\\right)_{1\\le i,j\\le n}$$\n\nis symmetric, and it defines a bilinear form on $T_pM$ by\n\n$$\\operatorname{Hess}_p(f)\\!\\left(\\sum_i u^i\\frac{\\partial}{\\partial x^i}\\Big|_p,\\sum_j v^j\\frac{\\partial}{\\partial x^j}\\Big|_p\\right):=\\sum_{i,j}u^iv^j\\frac{\\partial^2 g}{\\partial x^i\\partial x^j}(a).$$\n\nBy [[lem-coordinate-change-congruence-for-the-critical-hessian]], this bilinear\nform is independent of the chosen chart. It is the **Hessian of $f$ at $p$**.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nondegenerate-critical-point-nullity-index-and-coindex",
+          "source_section": "Definition",
+          "quote": "Let $f:M\\to\\mathbb R$ be smooth and let $p$ be a critical point of $f$. The\nHessian $\\operatorname{Hess}_p(f)$ is a symmetric bilinear form on the\nfinite-dimensional real vector space $T_pM$\n([[def-hessian-of-a-function-at-a-critical-point]]).\n\n- The **nullity** of $p$ for $f$ is\n  $$\\operatorname{null}_p(f):=\\dim\\ker\\bigl(\\operatorname{Hess}_p(f)\\bigr).$$\n- The critical point $p$ is **nondegenerate** when\n  $\\operatorname{null}_p(f)=0$.\n- The **index** of $p$ for $f$ is the largest dimension of a subspace of $T_pM$\n  on which $\\operatorname{Hess}_p(f)$ is negative definite.\n- The **coindex** of $p$ for $f$ is the largest dimension of a subspace of\n  $T_pM$ on which $\\operatorname{Hess}_p(f)$ is positive definite.\n\nThe positivity and negativity conventions are those of\n[[def-definiteness-inertia-and-signature-data-over-the-reals]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-a-smooth-map-transverse-to-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $F:M\\to N$ be smooth, and let $Z\\subseteq N$ be an embedded submanifold.\nThen $F$ is **transverse to $Z$**, written $F\\pitchfork Z$, when for every\n$p\\in F^{-1}(Z)$,\n\n$$dF_p(T_pM)+T_{F(p)}Z=T_{F(p)}N.$$\n\nIf $F(M)\\cap Z=\\varnothing$, this condition is vacuous, so $F\\pitchfork Z$\nstill holds.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-the-zero-section-is-a-smooth-embedding",
+          "source_section": "Statement",
+          "quote": "For a smooth vector bundle $\\pi:E\\to M$, the zero section\n$0_M:M\\to E$, $p\\mapsto 0_p$, is a smooth embedding.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "Critical risk came from the biconditional and the fibre-quotient identification with the Hessian. I re-read the current proof with the opened definitions. Step 1.1 identifies the zero set of df with the critical set, step 2.1 uses the local cotangent-bundle coordinate model to identify the fibre quotient map with the Hessian matrix, and steps 3.1-4.1 convert surjectivity exactly into nondegeneracy and hence the Morse condition. Both directions of the iff are discharged on current bytes."
+      }
+    },
+    "thm-morse-functions-are-dense-by-relative-jet-transversality": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose an open set $W$ with $A\\subseteq W$ and $\\overline W\\subseteq V$. By [L3], fix a smooth proper exhaustion $h:M\\to[0,\\infty)$, set $K_{-1}=K_0:=\\varnothing$, and for $n\\ge1$ let $K_n:=h^{-1}([0,n])$. Using [A1], choose integers $r_n\\ge n+1$ and positive tolerances $\\varepsilon_n$ so small that whenever smooth functions $u_n$ satisfy $$\\operatorname{supp}(u_n)\\subseteq\\bigl(\\operatorname{int}K_{n+1}\\setminus K_{n-1}\\bigr)\\setminus\\overline W$$ and $\\|u_n\\|_{C^{r_n}(K_{n+1})}<\\varepsilon_n$ for every $n$, the locally finite sum $u:=\\sum_nu_n$ gives $f+u\\in\\mathcal U$. The varying orders $r_n$ dominate every derivative order imposed by the chosen strong neighbourhood on the corresponding shell.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Construct inductively $g_n$ so that $g_0=f$, the correction $u_n:=g_n-g_{n-1}$ has the support and size prescribed in step 1.1, and $dg_n$ is transverse to the zero section on a neighbourhood of $\\overline W\\cup K_n$. Suppose $g_{n-1}$ has been chosen. The set $C_n$ where $dg_{n-1}$ is not transverse on $K_n$ is compact. If $C_n=\\varnothing$, put $u_n:=0$ and $g_n:=g_{n-1}$; openness of the transversality locus gives the required neighbourhood of $K_n$, so all the inductive conditions hold. Hence assume that $C_n$ is nonempty. It is disjoint from both $\\overline W$ and $K_{n-1}$: on $\\overline W$ every earlier correction vanishes and $df$ is transverse, while transversality near $K_{n-1}$ is the inductive hypothesis. Thus $C_n$ has a finite coordinate cover whose chart closures lie in $$\\bigl(\\operatorname{int}K_{n+1}\\setminus K_{n-1}\\bigr)\\setminus\\overline W.$$ Using [L2], choose bump-supported coordinate functions $\\phi_i$ on these charts so that their differentials span every cotangent fibre on a neighbourhood of $C_n$. The resulting parameter space is positive-dimensional: a nontransverse point cannot occur when $\\dim M=0$, and a nonempty coordinate cover in positive dimension supplies at least one coordinate function.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the nonempty case of step 2.1, consider the finite-dimensional family $$g_{n-1,\\mathbf a}:=g_{n-1}+\\sum_i a_i\\phi_i.$$ On a neighbourhood of $C_n$, its parameter derivatives span the cotangent fibres. On the compact remainder of $K_n$, the section $dg_{n-1}$ is already transverse, so after restricting to a sufficiently small parameter ball, transversality there persists for every parameter. Hence the total family is transverse to the zero section on a neighbourhood of $K_n$. By [L1], the bad slice parameters form a null set; because the parameter ball is positive-dimensional, its complement is dense. Choose $\\mathbf a_n$ in that complement and close enough to $0$ that $u_n:=\\sum_i(a_n)_i\\phi_i$ satisfies the bound in step 1.1. Put $g_n:=g_{n-1}+u_n$. Transversality is open, so $dg_n$ is transverse on a neighbourhood of $K_n$, and it still agrees with $df$ near $\\overline W$. Together with the empty case handled in step 2.1, this completes the induction.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "choose",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The shell supports are locally finite, so [L2] makes $u:=\\sum_{n\\ge1}u_n$ smooth. Put $g:=f+u$. Step 1.1 gives $g\\in\\mathcal U$. Every correction is supported outside $\\overline W$, so $g=f$ on the neighbourhood $W$ of $A$ and $g-f$ is supported in $M\\setminus A$. Fix $p\\in M$ and choose $n$ with $p\\in K_n$. Step 3.1 makes $dg_{n+1}$ transverse near $p$, while every $u_m$ with $m\\ge n+2$ has support disjoint from $K_n$ and therefore vanishes near $p$. Thus $g$ agrees near $p$ with $g_{n+1}$, so $dg$ is transverse there. Since $p$ was arbitrary, $dg$ is transverse everywhere.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F1], the final function $g$ is Morse. This proves the relative strong-topology density statement.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is not about an empty family; the closed set $A$ may be empty, but the written shell construction already covers that case without a separate branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-case analysis is needed beyond the zero section already built into the theorem's statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton or value-one boundary separate from the general perturbation argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles an empty compact nontransverse locus by the zero correction; otherwise it notes that the resulting fibre-spanning parameter space is positive-dimensional before step 3.1 uses density outside the null bad set."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no endpoint parameter regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses a parameter from the dense complement of the null bad set to obtain the shell correction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim is an existence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim is an existence statement, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-morse-functions-are-transverse-differentials",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth. Then $f$ is a\nMorse function if and only if the smooth section\n$$df:M\\to T^*M$$\nis transverse to the zero section of the cotangent bundle.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-the-zero-section-is-a-smooth-embedding",
+          "source_section": "Statement",
+          "quote": "For a smooth vector bundle $\\pi:E\\to M$, the zero section\n$0_M:M\\to E$, $p\\mapsto 0_p$, is a smooth embedding.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-parametric-transversality",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F:M\\times S\\to N$ be a smooth family of maps and let $Z\\subseteq N$\nbe an embedded submanifold. If $\\mathcal F\\pitchfork Z$, then the set of\nparameters $s\\in S$ for which the slice $\\mathcal F_s:M\\to N$ fails to be\ntransverse to $Z$ is a null subset of $S$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold",
+          "source_section": "Statement",
+          "quote": "If $M$ is a positive-dimensional smooth manifold and $E\\subseteq M$ is null,\nthen $M\\setminus E$ is dense in $M$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, let $K\\subseteq M$ be compact, and let $W\\subseteq M$ be open with $K\\subseteq W$. Then there exists a smooth function $\\rho:M\\to [0,1]$ that equals $1$ on an open neighbourhood of $K$ and satisfies $\\operatorname{supp}(\\rho)\\subseteq W$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-a-locally-finite-sum-of-smooth-functions-is-smooth",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold and let $(f_i)_{i\\in I}$ be smooth functions $f_i:M\\to\\mathbb R$ whose supports form a locally finite family. Then the pointwise sum $f:=\\sum_{i\\in I} f_i$ is well defined and smooth.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function",
+          "source_section": "Statement",
+          "quote": "Every smooth manifold admits a smooth proper function $h:M\\to [0,\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk comes from the noncompact relative shell construction: corrections must avoid the closed region already protected near A, and the finite-dimensional family must be transverse on the full current compact set. I re-read the repaired proof. Step 2.1 defines the compact nontransverse locus C_n inside K_n; the induction makes C_n disjoint from both the protected closure of W and K_{n-1}, so it admits finitely many bump-coordinate charts inside the permitted shell. Step 3.1 uses fibre-spanning only near C_n and openness on the compact remainder before applying parametric transversality. Step 4.1 uses local finiteness and the inner shell cutoff to make every later correction vanish near a fixed point. This closes the boundary-of-W defect without changing the relative theorem."
+      }
+    },
+    "thm-morse-functions-form-a-residual-subset": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose a smooth proper exhaustion $h:M\\to[0,\\infty)$ and write $K_n:=h^{-1}([0,n])$. For each $n\\ge1$, let $\\mathcal O_n$ be the set of smooth functions $g$ such that $dg$ is transverse to the zero section on some open neighbourhood of $K_n$. If $g$ is Morse, then [F1] gives $g\\in\\mathcal O_n$ for every $n$. Conversely, if $g\\in\\bigcap_n\\mathcal O_n$, then every point of $M$ lies in some $K_n$, so $dg$ is transverse near that point; [F1] then makes $g$ Morse. Thus the Morse functions are exactly $\\bigcap_{n\\ge1}\\mathcal O_n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each $\\mathcal O_n$ is open by [A1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Each $\\mathcal O_n$ is dense. Indeed, given any smooth function $f$ and any strong neighbourhood $\\mathcal U$ of $f$, [L2] produces a Morse function $g\\in\\mathcal U$, and step 1.1 shows that every Morse function belongs to every $\\mathcal O_n$.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 identifies the Morse functions with a countable intersection of the open dense sets $\\mathcal O_n$ from steps 2.1 and 2.2. Therefore the Morse functions form a residual subset of $C^\\infty(M,\\mathbb R)$ in the strong topology.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns one function space, not an empty family of spaces or parameters."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero branch in the residuality argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim has no singleton or value-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the non-Morse locus as failure of transversality on some compact stage."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In In the strong $C^\\\\infty$ topology on $C^\\\\infty(M,\\\\mathbb R)$, the Morse functions form a residual subset, there is no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not choose from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that every Morse function lies in every open set $\\mathcal O_n$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 also proves that membership in every $\\mathcal O_n$ forces the function to be Morse."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-morse-functions-are-transverse-differentials",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth. Then $f$ is a\nMorse function if and only if the smooth section\n$$df:M\\to T^*M$$\nis transverse to the zero section of the cotangent bundle.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function",
+          "source_section": "Statement",
+          "quote": "Every smooth manifold admits a smooth proper function $h:M\\to [0,\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-morse-functions-are-dense-by-relative-jet-transversality",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, let $f:M\\to\\mathbb R$ be smooth, and let\n$A\\subseteq M$ be closed. Assume that $df$ is transverse to the zero section on\nan open neighbourhood of $A$. Then every neighbourhood of $f$ in the strong\n$C^\\infty$ topology contains a smooth function $g$ such that:\n\n- $g-f$ is supported in $M\\setminus A$;\n- $g=f$ on some open neighbourhood of $A$; and\n- $dg$ is transverse to the zero section of $T^*M$.\n\nEquivalently, every strong neighbourhood of $f$ contains a Morse function that\nagrees with $f$ near $A$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ]
+    },
+    "lem-compact-morse-critical-points-have-uniform-hessian-gaps": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the critical set of $f$ is finite; write it as $\\{p_1,\\dots,p_r\\}$. Choose pairwise disjoint coordinate charts $\\varphi_i:U_i'\\to B_i\\subseteq\\mathbb R^{n_i}$ with $\\varphi_i(p_i)=0$, and then shrink to relatively compact subcharts $U_i\\Subset U_i'$ that are still pairwise disjoint.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $r=0$, take $\\eta:=1$; there are no neighbourhood conditions to check, so the conclusion is vacuous. If instead $\\dim M=0$, then $M$ is discrete and each $U_i:=\\{p_i\\}$ is a coordinate neighbourhood. Again take $\\eta:=1$. The displayed matrix inequality is vacuous on the zero vector space, every point is critical and nondegenerate, and every function on $U_i$ has exactly the one critical point $p_i$. Thus the conclusion holds in either boundary case. Henceforth assume $r\\ge1$ and $\\dim M\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Write $F_i:=\\nabla(f\\circ\\varphi_i^{-1})$ on $B_i$. Since $p_i$ is nondegenerate by [F1], the derivative $DF_i(0)$ is the Hessian matrix at $p_i$ and is invertible. By [L2], after shrinking $U_i$ again we may assume $F_i$ is a diffeomorphism from $\\varphi_i(U_i)$ onto an open neighbourhood of $0$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Continuity of the Hessian matrices on the compact closures $\\overline{U_i}$ lets us shrink the $U_i$ so that every Hessian matrix $H_i(x)$ of $f$ on $\\overline{U_i}$ stays within half the least singular value of $DF_i(0)$. Hence there is $\\eta_i>0$ such that $\\|H_i(x)v\\|\\ge2\\eta_i\\|v\\|$ for all $x\\in\\overline{U_i}$ and all coordinate vectors $v$. Let $\\eta:=\\min_i\\eta_i>0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $g$ is sufficiently $C^2$-close to $f$ on $\\overline{U_i}$, then the gradient map $\\nabla(g\\circ\\varphi_i^{-1})$ is $C^1$-close to $F_i$. Because $F_i$ is a local diffeomorphism carrying $0$ to $0$ and the Hessian gap from step 3.1 keeps the derivative uniformly invertible on $\\overline{U_i}$, the inverse-function argument persists under sufficiently small $C^1$ perturbation: the perturbed gradient has a unique zero in $\\varphi_i(U_i)$, and at that zero its derivative is still invertible. Thus $g$ has exactly one nondegenerate critical point in $U_i$.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 1.1, 3.1, and 4.1 give the claimed finite critical set, disjoint critical neighbourhoods, uniform Hessian gap, and local persistence statement.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the empty critical set r=0 separately and makes both neighbourhood clauses vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats zero-dimensional manifolds separately; singleton coordinate neighbourhoods have vacuous Hessian norm bounds and automatic critical-point persistence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 already allows the finite critical set to have a single element, and the same neighborhood and Hessian-gap argument then applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 use invertibility of the Hessian to rule out degenerate critical points in the chosen neighborhoods."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In On a compact manifold, a Morse function has finitely many critical points and a uniform Hessian gap on disjoint critical neighborhoods, the item has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses the finite critical neighbourhood system and step 3.1 chooses the uniform gap constant after the boundary cases are removed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-morse-function-and-excellent-morse-function",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth.\n\n- The function $f$ is a **Morse function** when every critical point of $f$ is\n  nondegenerate\n  ([[def-critical-point-and-critical-value-of-a-smooth-function]],\n  [[def-nondegenerate-critical-point-nullity-index-and-coindex]]).\n- The function $f$ is an **excellent Morse function** when it is Morse and any\n  two distinct critical points have distinct critical values.\n\nThus excellence is stronger than the Morse condition: it excludes repeated\ncritical values, not repeated indices.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-morse-functions-are-transverse-differentials",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth. Then $f$ is a\nMorse function if and only if the smooth section\n$$df:M\\to T^*M$$\nis transverse to the zero section of the cotangent bundle.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points",
+          "source_section": "Statement",
+          "quote": "If $M$ is a compact smooth manifold and $f:M\\to\\mathbb R$ is a Morse function,\nthen $f$ has only finitely many critical points.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "Critical risk comes from both zero-dimensional Hessians and persistence on each positive-dimensional critical neighbourhood. I re-read the repaired proof. Step 2.1 handles r=0 and dimension zero without referring to a nonexistent least singular value. Step 2.2 turns each remaining nondegenerate critical point into a local diffeomorphism of gradient maps, step 3.1 records the equivalent uniform operator lower bound, and step 4.1 applies inverse-function persistence. The statement is now typed in every dimension while retaining the local-persistence conclusion."
+      }
+    },
+    "lem-no-new-critical-points-under-a-compact-c1-small-perturbation": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the compact set $K:=M\\setminus\\bigcup_iU_i$ contains no critical point of $f$. Hence [F1] gives $df_x\\neq0$ for every $x\\in K$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1], the continuous function $x\\mapsto \\|df_x\\|$ attains a positive minimum $m$ on $K$. Put $\\delta:=m/2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $g$ satisfies $\\|dg-df\\|_{C^0}<\\delta$ on $K$, then for every $x\\in K$ one has $\\|dg_x\\|\\ge \\|df_x\\|-\\|dg_x-df_x\\|>m-\\delta=\\delta>0$. Therefore $dg_x\\neq0$ on $K$, so [F1] shows that $g$ has no critical point in $K$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $K=M\\setminus\\bigcup_iU_i$, this says that sufficiently small $C^1$ perturbations create no new critical points outside the chosen critical neighbourhoods.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If there are no chosen critical neighborhoods, then step 1.1 says the whole compact manifold has no critical points and step 2.1 gives the same conclusion for nearby perturbations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 turns the nonvanishing lower bound for $df$ on the compact complement into the positive constant $\\delta$ used in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no separate singleton or value-one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma is about excluding new zeros of the differential outside fixed neighborhoods, not about classifying Hessian degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Away from fixed critical neighborhoods, sufficiently small $C^1$ perturbations create no new critical points on a compact manifold, the item has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses the compact lower bound and the perturbation threshold $\\delta$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way stability claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way stability claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-critical-point-and-critical-value-of-a-smooth-function",
+          "source_section": "Definition",
+          "quote": "Let $f:M\\to \\mathbb R$ be a smooth function and let $p\\in M$.\n\n- The point $p$ is a **critical point** of $f$ when $df_p=0$\n  ([[def-differential-of-a-smooth-real-valued-function]]).\n- A real number $c$ is a **critical value** of $f$ when $c=f(p)$ for some\n  critical point $p$.\n\nThis is the specialization of\n[[def-regular-and-critical-points-and-values]] to real-valued functions: for a\nmap to $\\mathbb R$, the empty-fibre case is still regular, so a value is\ncritical exactly when it is attained at a critical point.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-compact-morse-critical-points-have-uniform-hessian-gaps",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact smooth manifold and let $f:M\\to\\mathbb R$ be Morse. Then\n$f$ has finitely many critical points $p_1,\\dots,p_r$, and one can choose\npairwise disjoint coordinate neighbourhoods $U_i$ of $p_i$ and a constant\n$\\eta>0$ such that:\n\n- in the chosen chart on $U_i$, every Hessian matrix $H_i(x)$ of $f$ on\n  $\\overline{U_i}$ satisfies\n  $$\\|H_i(x)v\\|\\ge 2\\eta\\|v\\|$$\n  for every coordinate vector $v$; and\n- every smooth function $g$ that is sufficiently $C^2$-close to $f$ on\n  $\\overline{U_i}$ has exactly one critical point in $U_i$, and that critical\n  point is nondegenerate.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "thm-morse-functions-are-open-dense-on-a-compact-manifold": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Density is immediate from [L1]: given any smooth function and any $C^\\infty$ neighbourhood of it, there is a Morse function in that neighbourhood. Since the $C^\\infty$ topology is finer than the $C^2$ topology on the same compact manifold, this already implies density in the $C^2$ topology as well.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $f$ be Morse. Apply [L2] to choose pairwise disjoint critical neighbourhoods $U_1,\\dots,U_r$ for the critical points of $f$, with the stated persistence and Hessian-gap properties. Apply [L3] to the complement $M\\setminus\\bigcup_iU_i$. Then every function $g$ sufficiently close to $f$ in the $C^2$ topology has exactly one critical point in each $U_i$, all those critical points are nondegenerate by [L2], and there are no further critical points outside the $U_i$ by [L3].",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore every critical point of such a nearby function $g$ is nondegenerate. Hence $g$ is Morse. This proves that the Morse functions are open in the $C^2$ topology.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Combining steps 1.1 and 2.1 gives that the Morse functions form an open dense subset in the $C^2$ topology. Because the identity map from the $C^\\infty$ topology to the $C^2$ topology is continuous on a compact source, the same set is also open and dense in the $C^\\infty$ topology.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is not parameterized by an empty family; density and openness are proved for the whole function space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-value branch is needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim has no singleton or value-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 combines the local Hessian-gap lemma and the no-new-critical-points lemma to exclude degenerate critical points for nearby functions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In On a compact smooth manifold, the Morse functions form an open dense subset in the $C^2$ and hence $C^\\\\infty$ topology, there is no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses the critical neighborhoods and the compact complement threshold coming from the two compact lemmas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In On a compact smooth manifold, the Morse functions form an open dense subset in the $C^2$ and hence $C^\\\\infty$ topology, the theorem is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In On a compact smooth manifold, the Morse functions form an open dense subset in the $C^2$ and hence $C^\\\\infty$ topology, the theorem is not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-morse-functions-are-dense-by-relative-jet-transversality",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, let $f:M\\to\\mathbb R$ be smooth, and let\n$A\\subseteq M$ be closed. Assume that $df$ is transverse to the zero section on\nan open neighbourhood of $A$. Then every neighbourhood of $f$ in the strong\n$C^\\infty$ topology contains a smooth function $g$ such that:\n\n- $g-f$ is supported in $M\\setminus A$;\n- $g=f$ on some open neighbourhood of $A$; and\n- $dg$ is transverse to the zero section of $T^*M$.\n\nEquivalently, every strong neighbourhood of $f$ contains a Morse function that\nagrees with $f$ near $A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-compact-morse-critical-points-have-uniform-hessian-gaps",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact smooth manifold and let $f:M\\to\\mathbb R$ be Morse. Then\n$f$ has finitely many critical points $p_1,\\dots,p_r$, and one can choose\npairwise disjoint coordinate neighbourhoods $U_i$ of $p_i$ and a constant\n$\\eta>0$ such that:\n\n- in the chosen chart on $U_i$, every Hessian matrix $H_i(x)$ of $f$ on\n  $\\overline{U_i}$ satisfies\n  $$\\|H_i(x)v\\|\\ge 2\\eta\\|v\\|$$\n  for every coordinate vector $v$; and\n- every smooth function $g$ that is sufficiently $C^2$-close to $f$ on\n  $\\overline{U_i}$ has exactly one critical point in $U_i$, and that critical\n  point is nondegenerate.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-no-new-critical-points-under-a-compact-c1-small-perturbation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact smooth manifold, let $f:M\\to\\mathbb R$ be Morse, and let\n$U_1,\\dots,U_r$ be pairwise disjoint critical neighbourhoods as in\n[[lem-compact-morse-critical-points-have-uniform-hessian-gaps]]. Then there is\n$\\delta>0$ such that every smooth function $g$ with $\\|dg-df\\|_{C^0}<\\delta$ on\n$M\\setminus\\bigcup_iU_i$ has no critical points in\n$M\\setminus\\bigcup_iU_i$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ]
+    },
+    "lem-finitely-many-critical-values-can-be-separated-locally": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the critical points of $f$ are $p_1,\\dots,p_r$. Choose pairwise disjoint open neighbourhoods $V_i\\Subset U_i$ of the $p_i$ such that each $U_i$ contains no critical point other than $p_i$, and by [L2] choose smooth functions $\\rho_i$ with $\\rho_i=1$ on $V_i$ and $\\operatorname{supp}(\\rho_i)\\subseteq U_i$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $K:=M\\setminus\\bigcup_{i=1}^rV_i$. This compact set contains no critical point of $f$, so [A1] gives a constant $m>0$ with $\\|df_x\\|\\ge m$ for every $x\\in K$. Using [A2], choose real numbers $\\lambda_i$ such that the shifted numbers $f(p_i)+\\lambda_i$ are pairwise distinct, the finite sum $$u:=\\sum_{i=1}^r\\lambda_i\\rho_i$$ satisfies $f+u\\in\\mathcal U$, and $$ \\sum_i|\\lambda_i|\\,\\|d\\rho_i\\|_{C^0(K)}<m/2. $$ Define $g:=f+u$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On each neighbourhood $V_i$ one has $g=f+\\lambda_i$, because $\\rho_i=1$ there and every $\\rho_j$ with $j\\ne i$ vanishes there. Therefore $p_i$ is still a critical point of $g$, and the Hessian of $g$ at $p_i$ equals the Hessian of $f$ there.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $x\\in K$, step 2.1 gives $$\\|dg_x-df_x\\|\\le \\sum_i|\\lambda_i|\\,\\|d\\rho_i\\|_{C^0(K)}<m/2,$$ so $\\|dg_x\\|\\ge \\|df_x\\|-\\|dg_x-df_x\\|>m/2>0$. Hence $g$ has no critical point on $K$. Since every critical point of $f$ lies in some $V_i$, step 3.1 shows that the critical set of $g$ is exactly $\\{p_1,\\dots,p_r\\}$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The critical values of $g$ are $g(p_i)=f(p_i)+\\lambda_i$, which are pairwise distinct by step 2.1. The same step also gives $g\\in\\mathcal U$. Therefore $g$ has the same critical points and Hessians as $f$, while all of its critical values are distinct.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Thus one can separate all repeated critical values by disjoint local perturbations without changing any critical Hessian.",
+          "step": "6.1",
+          "inputs": [
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If there are no critical points, step 1.1 gives an empty family and step 2.1 leaves $g=f$, so the conclusion is immediate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The lemma concerns equal critical values of arbitrary size, not a distinguished zero level."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If there is only one critical point, step 2.1 can choose one sufficiently small coefficient and the separation condition is automatic."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 preserves the Hessian at each critical point, so a Morse critical point stays nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In For a compact Morse function, disjoint local bump perturbations can separate finitely many equal critical values without changing the Hessians, the item has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 choose the disjoint bump functions and the distinct level shifts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is an existence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is an existence statement, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points",
+          "source_section": "Statement",
+          "quote": "If $M$ is a compact smooth manifold and $f:M\\to\\mathbb R$ is a Morse function,\nthen $f$ has only finitely many critical points.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, let $K\\subseteq M$ be compact, and let $W\\subseteq M$ be open with $K\\subseteq W$. Then there exists a smooth function $\\rho:M\\to [0,1]$ that equals $1$ on an open neighbourhood of $K$ and satisfies $\\operatorname{supp}(\\rho)\\subseteq W$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "To prove density, let $\\mathcal U$ be a $C^\\infty$ neighbourhood of an arbitrary smooth function $f$. By [L1], choose a Morse function $h\\in\\mathcal U$. Because $\\mathcal U$ is itself a $C^\\infty$ neighbourhood of the compact Morse function $h$, [L2] yields a function $g\\in\\mathcal U$ with the same critical points and Hessians as $h$, but with pairwise distinct critical values. By [F1], this $g$ is excellent Morse.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $f$ be excellent Morse. By [L3], choose pairwise disjoint critical neighbourhoods $U_1,\\dots,U_r$ around the critical points $p_1,\\dots,p_r$ of $f$ such that every sufficiently small $C^2$ perturbation has exactly one nondegenerate critical point in each $U_i$ and none outside $\\bigcup_iU_i$. Because the critical values $f(p_i)$ are pairwise distinct, choose pairwise disjoint open intervals $I_i$ with $f(p_i)\\in I_i$ and $f(U_i)\\subseteq I_i$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "L3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $g$ is sufficiently close to $f$ in the $C^2$ topology, then step 1.2 gives exactly one critical point $q_i$ of $g$ in each $U_i$ and no others. The $C^0$ closeness keeps $g(q_i)$ inside the same interval $I_i$, so the critical values of $g$ are pairwise distinct because the intervals are disjoint. Since each $q_i$ is nondegenerate, [F1] shows that $g$ is excellent Morse.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 gives density in the $C^\\infty$ topology, hence also in the coarser $C^2$ topology, and step 2.1 gives openness in the $C^2$ topology. Every $C^2$-open subset is also $C^\\infty$-open on a compact manifold, so the same set of excellent Morse functions is open in the $C^\\infty$ topology as well. Thus the excellent Morse functions are open dense in both topologies.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns the whole function space, not an empty parameter family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no distinguished zero-level branch in the proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If a compact Morse function has only one critical point, step 2.1 still applies and distinctness of critical values is automatic."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the compact persistence neighborhoods to keep all nearby critical points nondegenerate while separating their values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 choose the perturbation to an excellent Morse function and the disjoint value intervals around the original critical levels."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In On a compact smooth manifold, the excellent Morse functions form an open dense subset of the $C^2$ and hence $C^\\\\infty$ topology, the theorem is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In On a compact smooth manifold, the excellent Morse functions form an open dense subset of the $C^2$ and hence $C^\\\\infty$ topology, the theorem is not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-morse-function-and-excellent-morse-function",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth.\n\n- The function $f$ is a **Morse function** when every critical point of $f$ is\n  nondegenerate\n  ([[def-critical-point-and-critical-value-of-a-smooth-function]],\n  [[def-nondegenerate-critical-point-nullity-index-and-coindex]]).\n- The function $f$ is an **excellent Morse function** when it is Morse and any\n  two distinct critical points have distinct critical values.\n\nThus excellence is stronger than the Morse condition: it excludes repeated\ncritical values, not repeated indices.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-morse-functions-are-open-dense-on-a-compact-manifold",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact smooth manifold. Then the Morse functions\n$M\\to\\mathbb R$ form an open dense subset of $C^\\infty(M,\\mathbb R)$ in the\n$C^2$ topology. Consequently they also form an open dense subset in the\n$C^\\infty$ topology.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-finitely-many-critical-values-can-be-separated-locally",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact smooth manifold and let $f:M\\to\\mathbb R$ be Morse. Then\nevery $C^\\infty$ neighbourhood $\\mathcal U$ of $f$ contains a smooth function\n$g$ such that:\n\n- $g$ has the same critical points as $f$;\n- the Hessian of $g$ at each critical point equals the Hessian of $f$ there; and\n- distinct critical points of $g$ have distinct critical values.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-compact-morse-critical-points-have-uniform-hessian-gaps",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact smooth manifold and let $f:M\\to\\mathbb R$ be Morse. Then\n$f$ has finitely many critical points $p_1,\\dots,p_r$, and one can choose\npairwise disjoint coordinate neighbourhoods $U_i$ of $p_i$ and a constant\n$\\eta>0$ such that:\n\n- in the chosen chart on $U_i$, every Hessian matrix $H_i(x)$ of $f$ on\n  $\\overline{U_i}$ satisfies\n  $$\\|H_i(x)v\\|\\ge 2\\eta\\|v\\|$$\n  for every coordinate vector $v$; and\n- every smooth function $g$ that is sufficiently $C^2$-close to $f$ on\n  $\\overline{U_i}$ has exactly one critical point in $U_i$, and that critical\n  point is nondegenerate.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-no-new-critical-points-under-a-compact-c1-small-perturbation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact smooth manifold, let $f:M\\to\\mathbb R$ be Morse, and let\n$U_1,\\dots,U_r$ be pairwise disjoint critical neighbourhoods as in\n[[lem-compact-morse-critical-points-have-uniform-hessian-gaps]]. Then there is\n$\\delta>0$ such that every smooth function $g$ with $\\|dg-df\\|_{C^0}<\\delta$ on\n$M\\setminus\\bigcup_iU_i$ has no critical points in\n$M\\setminus\\bigcup_iU_i$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk came from the density claim in the C^infty topology, not just in the C^2 topology. I re-read the current proof after strengthening the local separation lemma. Step 1.1 now starts with an arbitrary C^infty neighbourhood U, chooses a Morse h in U by the compact Morse genericity theorem, and then applies the repaired separation lemma inside the same neighbourhood U to obtain an excellent Morse g in U. Steps 1.2-2.1 still give openness by persistent critical neighbourhoods and disjoint value intervals. The current carrier resolves the former density gap."
+      }
+    },
+    "thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $N=1$, then every embedded compact submanifold of $\\mathbb R$ is zero-dimensional, hence finite. The restriction of a nonzero linear functional to a finite manifold has all points critical and nondegenerate in the zero-dimensional Morse convention, so it is Morse.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume now that $N\\ge2$. Define a smooth family of cotangent sections by $$\\mathcal D:M\\times S^{N-1}\\to T^*M,\\qquad \\mathcal D(x,u)=d(h_u)_x.$$ By [L2], its target zero section is an embedded submanifold. At any zero $(x,u)$, [A1] says that the parameter derivative in tangent directions to $S^{N-1}$ spans the whole fibre $T_x^*M$, so $\\mathcal D$ is transverse to the zero section.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "A1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] to the family $\\mathcal D$ shows that the set $E\\subseteq S^{N-1}$ of directions for which $d(h_u)$ fails to be transverse to the zero section is null. For every $u\\notin E$, [F1] makes $h_u$ a Morse function on $M$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 handles $N=1$, and step 2.1 handles $N\\ge2$. Therefore restricted linear heights are Morse for generic directions.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is not about an empty family; the parameter family of directions is explicit and nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-value level analysis is needed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the one-dimensional ambient case $N=1$ separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 isolates the degenerate directions as the null bad set excluded by parametric transversality."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The sphere of directions has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof identifies a null bad set but does not choose a specific direction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In For a compact manifold embedded in Euclidean space, the restricted linear height is Morse for generic directions, the theorem is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In For a compact manifold embedded in Euclidean space, the restricted linear height is Morse for generic directions, the theorem is not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-morse-functions-are-transverse-differentials",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth. Then $f$ is a\nMorse function if and only if the smooth section\n$$df:M\\to T^*M$$\nis transverse to the zero section of the cotangent bundle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-parametric-transversality",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F:M\\times S\\to N$ be a smooth family of maps and let $Z\\subseteq N$\nbe an embedded submanifold. If $\\mathcal F\\pitchfork Z$, then the set of\nparameters $s\\in S$ for which the slice $\\mathcal F_s:M\\to N$ fails to be\ntransverse to $Z$ is a null subset of $S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-the-zero-section-is-a-smooth-embedding",
+          "source_section": "Statement",
+          "quote": "For a smooth vector bundle $\\pi:E\\to M$, the zero section\n$0_M:M\\to E$, $p\\mapsto 0_p$, is a smooth embedding.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ]
+    },
+    "thm-generic-squared-distance-functions-are-morse": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define a smooth family of cotangent sections by $$\\mathcal D:M\\times\\mathbb R^N\\to T^*M,\\qquad \\mathcal D(x,p)=d(d_p)_x.$$ By [L2], the zero section is an embedded submanifold of the target bundle. At any zero $(x,p)$, the parameter-derivative description in [A1] spans the full fibre $T_x^*M$, so $\\mathcal D$ is transverse to the zero section.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "A1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L1] to the family $\\mathcal D$. The bad centers $p$ for which $d(d_p)$ is not transverse to the zero section form a null subset $E\\subseteq\\mathbb R^N$. For every $p\\notin E$, [F1] turns this transversality conclusion into the statement that $d_p$ is Morse.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore squared-distance functions are Morse for generic centers in the ambient Euclidean space.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is not parameterized by an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 isolates the exceptional centers exactly as the bad parameter set where transversality fails; the center example is the zero-case witness on the B page."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton or value-one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes precisely the centers that would make the squared-distance function degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The ambient parameter space has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof identifies a null exceptional set but does not choose a specific good center."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In For a compact manifold embedded in Euclidean space, the squared-distance function from a generic center is Morse, the statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In For a compact manifold embedded in Euclidean space, the squared-distance function from a generic center is Morse, the statement is not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-morse-functions-are-transverse-differentials",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth. Then $f$ is a\nMorse function if and only if the smooth section\n$$df:M\\to T^*M$$\nis transverse to the zero section of the cotangent bundle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-parametric-transversality",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F:M\\times S\\to N$ be a smooth family of maps and let $Z\\subseteq N$\nbe an embedded submanifold. If $\\mathcal F\\pitchfork Z$, then the set of\nparameters $s\\in S$ for which the slice $\\mathcal F_s:M\\to N$ fails to be\ntransverse to $Z$ is a null subset of $S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-the-zero-section-is-a-smooth-embedding",
+          "source_section": "Statement",
+          "quote": "For a smooth vector bundle $\\pi:E\\to M$, the zero section\n$0_M:M\\to E$, $p\\mapsto 0_p$, is a smooth embedding.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose a smooth embedding $M\\hookrightarrow\\mathbb R^N$. Then [L2] gives a Morse height function $h:M\\to\\mathbb R$ on that embedding.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L3] to the Morse function $h$. Since excellent Morse functions are dense on the compact manifold $M$, some excellent Morse function lies arbitrarily close to $h$ and in particular exists on $M$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore every compact smooth manifold admits an excellent Morse function.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 also apply to the empty compact manifold, where any smooth function is vacuously excellent Morse."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-value regime in this existence corollary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is not split by a singleton or value-one parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 first produces a Morse height function, and step 2.1 upgrades it to excellent, so degeneracy is excluded by the cited theorems."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Every compact smooth manifold admits an excellent Morse function, the item has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses an embedding and a generic height function, and step 2.1 chooses an excellent perturbation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is an existence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is an existence statement, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space",
+          "source_section": "Statement",
+          "quote": "Every smooth manifold embeds smoothly in some finite-dimensional Euclidean\nspace. If the manifold is noncompact, one can choose such an embedding in the\nform\n$$ M\\hookrightarrow \\mathbb R^N\\times\\mathbb R,\\qquad p\\mapsto (G(p),\\rho(p)), $$\nwhere $G$ is bounded and $\\rho$ is a smooth proper exhaustion function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse",
+          "source_section": "Statement",
+          "quote": "Let $M\\subseteq\\mathbb R^N$ be a compact embedded smooth manifold.\n\n- If $N=1$, then every nonzero linear functional on $\\mathbb R$ restricts to a\n  Morse function on $M$.\n- If $N\\ge2$, then there is a null subset $E\\subseteq S^{N-1}$ such that for\n  every $u\\in S^{N-1}\\setminus E$, the height function\n  $$h_u:M\\to\\mathbb R,\\qquad h_u(x)=u\\cdot x$$\n  is Morse.\n\nThus restricted linear heights are Morse for generic directions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact smooth manifold. Then the excellent Morse functions form\nan open dense subset of $C^\\infty(M,\\mathbb R)$ in the $C^2$ topology, and\nhence also in the $C^\\infty$ topology.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ]
+    },
+    "lem-properness-survives-a-controlled-locally-finite-perturbation": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The family of supports is locally finite, so [L1] makes the sum $u=\\sum_nu_n$ a smooth function.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $x\\in M$, the pointwise estimate gives $$|u(x)|\\le \\sum_{n\\ge1}|u_n(x)|\\le \\sum_{n\\ge1}2^{-n-2}=\\tfrac14$$ by [A1]. Hence $(h+u)(x)\\ge h(x)-\\tfrac14$ for all $x$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $(h+u)(x)\\le c$, then step 2.1 gives $h(x)\\le c+\\tfrac14$. Therefore $$\\{x:(h+u)(x)\\le c\\}\\subseteq \\{x:h(x)\\le c+\\tfrac14\\}.$$ The right-hand side is compact because $h$ is proper, and the left-hand side is closed because $h+u$ is continuous. By [A2], the left-hand side is compact.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus $h+u$ is proper, and the shellwise perturbation preserves properness.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If every $u_n$ vanishes, then step 1.1 gives $u=0$ and step 3.1 says the original proper function remains proper."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the uniform bound $|u|\\le 1/4$, which is the zero-threshold estimate used in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton or value-one boundary separate from the general geometric-series estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma concerns properness, not critical-point degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A locally finite shellwise perturbation with rapidly decaying size preserves properness of a smooth exhaustion, there is no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a nonempty family is used in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A locally finite shellwise perturbation with rapidly decaying size preserves properness of a smooth exhaustion, the statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A locally finite shellwise perturbation with rapidly decaying size preserves properness of a smooth exhaustion, the statement is not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-a-locally-finite-sum-of-smooth-functions-is-smooth",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold and let $(f_i)_{i\\in I}$ be smooth functions $f_i:M\\to\\mathbb R$ whose supports form a locally finite family. Then the pointwise sum $f:=\\sum_{i\\in I} f_i$ is well defined and smooth.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "prop-proper-morse-exhaustions-exist-on-smooth-manifolds": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a smooth proper exhaustion $h:M\\to[0,\\infty)$ by [L1], and let $$\\mathcal U:=\\{g\\in C^\\infty(M,\\mathbb R): |g(x)-h(x)|<\\tfrac14\\text{ for every }x\\in M\\}.$$ By [A1], this is a strong neighbourhood of $h$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "A1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L2] to the function $h$, the closed set $A:=\\varnothing$, and the strong neighbourhood $\\mathcal U$. It yields a smooth function $g\\in\\mathcal U$ whose differential is transverse to the zero section.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $g\\in\\mathcal U$, one has $g\\ge h-\\tfrac14$. Thus, for every real $c$, $$\\{x:g(x)\\le c\\}\\subseteq\\{x:h(x)\\le c+\\tfrac14\\}.$$ The left-hand side is closed and the right-hand side is compact because $h$ is proper, so every sublevel set of $g$ is compact. Also $g\\ge-\\tfrac14$, hence the inverse image under $g$ of every compact subset of $\\mathbb R$ is a closed subset of one of these compact sublevel sets. Therefore $g$ is proper. Since step 2.1 gives $dg$ transverse to the zero section everywhere, [F1] makes $g$ Morse.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Hence $g$ is a proper Morse function on $M$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 begins with an arbitrary smooth manifold, and the construction also works for the empty manifold by choosing the empty proper Morse exhaustion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-value branch is needed in the shellwise construction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton or value-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 uses transversality of the final differential and [F1] to conclude that the resulting proper function is Morse, excluding degenerate critical points."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Every smooth manifold admits a proper Morse function, the item has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 choose a proper exhaustion, a strong neighbourhood of it, and a transverse differential inside that neighbourhood."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition is an existence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition is an existence statement, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function",
+          "source_section": "Statement",
+          "quote": "Every smooth manifold admits a smooth proper function $h:M\\to [0,\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-morse-functions-are-dense-by-relative-jet-transversality",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, let $f:M\\to\\mathbb R$ be smooth, and let\n$A\\subseteq M$ be closed. Assume that $df$ is transverse to the zero section on\nan open neighbourhood of $A$. Then every neighbourhood of $f$ in the strong\n$C^\\infty$ topology contains a smooth function $g$ such that:\n\n- $g-f$ is supported in $M\\setminus A$;\n- $g=f$ on some open neighbourhood of $A$; and\n- $dg$ is transverse to the zero section of $T^*M$.\n\nEquivalently, every strong neighbourhood of $f$ contains a Morse function that\nagrees with $f$ near $A$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-morse-functions-are-transverse-differentials",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth. Then $f$ is a\nMorse function if and only if the smooth section\n$$df:M\\to T^*M$$\nis transverse to the zero section of the cotangent bundle.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk came from the unsupported claim that every function in a chosen strong neighbourhood has a prescribed shell decomposition. I re-read the repaired proof. Step 1.1 instead chooses the explicit strong neighbourhood |g-h|<1/4 of a proper exhaustion h. Step 2.1 uses relative density only to choose a transverse differential inside it, and step 3.1 proves properness directly from the uniform lower bound g>=h-1/4 and compact h-sublevels. No shell decomposition is assumed."
+      }
+    },
+    "ex-generic-and-exceptional-height-directions-on-a-torus": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write a unit direction as $\\mathbf q=(A\\cos\\phi,A\\sin\\phi,c)$ with $A\\ge0$ and $A^2+c^2=1$. Its height on the torus is $$h_{\\mathbf q}(u,v)=A(R+r\\cos u)\\cos(v-\\phi)+cr\\sin u.$$ If $A>0$, then $R+r\\cos u>0$ makes the critical-point equations equivalent to $$\\sin(v-\\phi)=0,\\qquad -A\\sin u\\cos(v-\\phi)+c\\cos u=0.$$ For each of the two signs $s=\\cos(v-\\phi)\\in\\{1,-1\\}$, the second equation has exactly two solutions modulo $2\\pi$. Hence every nonvertical direction has exactly four critical points.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At a critical point from step 1.1 the mixed second derivative vanishes, while the two diagonal Hessian entries are $$-r\\bigl(As\\cos u+c\\sin u\\bigr),\\qquad -As(R+r\\cos u).$$ The first has absolute value $r\\sqrt{A^2+c^2}=r$, and the second is nonzero because $A>0$ and $R+r\\cos u>0$. Thus all four critical points are nondegenerate, so every nonvertical height is Morse by [F1]. In particular the $x$-height is the case $(A,c,\\phi)=(1,0,0)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $A=0$, then $c=\\pm1$ and the height is $k(u,v)=\\pm r\\sin u$. Its critical set is the union of the two circles $u=\\pi/2$ and $u=3\\pi/2$, so both vertical directions are degenerate and not Morse.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two vertical poles form a null subset of the direction sphere, while every direction in their complement has the four Morse critical points from steps 1.1 and 2.1. This proves directly that generic directions have four critical points and identifies the exceptional symmetry directions, consistently with [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "step 2.2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a concrete embedded torus, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero branch beyond the explicit height computations."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no singleton or value-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 exhibits the vertical symmetry direction with a whole circle of critical points, hence degenerate behavior."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example does not turn on endpoint analysis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 parameterizes every direction; steps 2.1 and 2.2 divide them exhaustively into nonvertical and vertical cases."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional statement."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-morse-function-and-excellent-morse-function",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth.\n\n- The function $f$ is a **Morse function** when every critical point of $f$ is\n  nondegenerate\n  ([[def-critical-point-and-critical-value-of-a-smooth-function]],\n  [[def-nondegenerate-critical-point-nullity-index-and-coindex]]).\n- The function $f$ is an **excellent Morse function** when it is Morse and any\n  two distinct critical points have distinct critical values.\n\nThus excellence is stronger than the Morse condition: it excludes repeated\ncritical values, not repeated indices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse",
+          "source_section": "Statement",
+          "quote": "Let $M\\subseteq\\mathbb R^N$ be a compact embedded smooth manifold.\n\n- If $N=1$, then every nonzero linear functional on $\\mathbb R$ restricts to a\n  Morse function on $M$.\n- If $N\\ge2$, then there is a null subset $E\\subseteq S^{N-1}$ such that for\n  every $u\\in S^{N-1}\\setminus E$, the height function\n  $$h_u:M\\to\\mathbb R,\\qquad h_u(x)=u\\cdot x$$\n  is Morse.\n\nThus restricted linear heights are Morse for generic directions.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-step8-preflight-g",
+        "notes": "High risk comes from the repaired genericity quantifier, the quotient torus coordinates, and the degenerate vertical boundary. I re-read the current verification and its two cited interfaces. Step 1.1 parameterizes every unit direction by A >= 0 and splits the sphere into A > 0 and A = 0. For A > 0, each sign of cos(v-phi) gives exactly two critical values of u; step 2.1 checks both diagonal Hessian entries are nonzero, so all four critical points are nondegenerate. Step 2.2 identifies exactly the two vertical poles and their critical circles. Thus the cases are exhaustive, the exceptional set is null, and the claimed generic four-point behavior is established."
+      }
+    },
+    "ex-squared-distance-to-a-circle-and-its-medial-axis": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Parametrize the circle by $x(\\theta)=(\\cos\\theta,\\sin\\theta)$. Then $$d_p(\\theta)=\\|x(\\theta)-p\\|^2=1+a^2+b^2-2(a\\cos\\theta+b\\sin\\theta).$$ Therefore $$d_p'(\\theta)=2(a\\sin\\theta-b\\cos\\theta)\\quad\\text{and}\\quad d_p''(\\theta)=2(a\\cos\\theta+b\\sin\\theta).$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $p\\neq0$, the equation $a\\sin\\theta=b\\cos\\theta$ has exactly two solutions modulo $2\\pi$, corresponding to the two points where the radius through $p$ meets the circle. At those two points one has $d_p''(\\theta)=\\pm2\\sqrt{a^2+b^2}\\neq0$, so both critical points are nondegenerate and $d_p$ is Morse. This matches the generic-center theorem [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $p=0$, then $d_0(\\theta)\\equiv1$ is constant. Every point of the circle is critical, so the function is degenerate and not Morse.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus centers off the medial axis yield Morse squared-distance functions, while the center itself is the exceptional degenerate case.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a concrete circle with a chosen center, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 treats the zero center and shows that the resulting squared-distance function is constant and degenerate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton or value-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 is exactly the degenerate-center case on the medial axis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 compares a chosen nonzero center with the chosen zero center of step 2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Squared distance to a circle is Morse for centers off the medial axis and degenerate at the center, the example is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Squared distance to a circle is Morse for centers off the medial axis and degenerate at the center, the example is not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-generic-squared-distance-functions-are-morse",
+          "source_section": "Statement",
+          "quote": "Let $M\\subseteq\\mathbb R^N$ be a compact embedded smooth manifold. Then there\nis a null subset $E\\subseteq\\mathbb R^N$ such that for every\n$p\\in\\mathbb R^N\\setminus E$, the squared-distance function\n$$d_p:M\\to\\mathbb R,\\qquad d_p(x)=\\|x-p\\|^2$$\nis Morse.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ]
+    },
+    "ex-separating-equal-critical-values-by-bump-functions": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The partial derivatives are $\\partial f/\\partial x=-2\\pi\\sin(2\\pi x)$ and $\\partial f/\\partial y=-2\\pi\\sin(2\\pi y)$, so the critical points are exactly the four points with $x,y\\in\\{0,\\tfrac12\\}$ modulo $\\mathbb Z$. At the two saddles $(0,\\tfrac12)$ and $(\\tfrac12,0)$ the critical value is $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The Hessian is diagonal with entries $-4\\pi^2\\cos(2\\pi x)$ and $-4\\pi^2\\cos(2\\pi y)$, so all four critical points are nondegenerate. By [F1], $f$ is Morse. Choose pairwise disjoint neighbourhoods of the two saddles and bump functions $\\rho_1,\\rho_2$ that are identically $1$ near the corresponding saddle and supported away from the other one.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For sufficiently small $\\varepsilon>0$, define $$g:=f+\\varepsilon\\rho_1-\\varepsilon\\rho_2.$$ The compact perturbation argument from [L1] applies to these two fixed bumps: for small enough $\\varepsilon$, the function $g$ has the same critical points as $f$ and the same Hessians at those critical points. Near the first saddle one has $g=f+\\varepsilon$, and near the second one has $g=f-\\varepsilon$, so the two saddle critical values become $\\varepsilon$ and $-\\varepsilon$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Hence two equal critical levels can be separated by disjoint bump perturbations without changing the local Hessians.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a concrete torus function with two named saddles, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 starts from two critical points at the common critical value $0$ and step 3.1 separates them to $\\pm\\varepsilon$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns two equal critical levels, not a singleton branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the saddle points as Morse critical points, and step 3.1 preserves their local Hessians under the perturbation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses the two local bump functions and step 3.1 chooses the perturbation size $\\varepsilon$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Two equal critical levels can be separated by adding disjoint bump perturbations near the corresponding critical points, the example is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Two equal critical levels can be separated by adding disjoint bump perturbations near the corresponding critical points, the example is not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-morse-function-and-excellent-morse-function",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth.\n\n- The function $f$ is a **Morse function** when every critical point of $f$ is\n  nondegenerate\n  ([[def-critical-point-and-critical-value-of-a-smooth-function]],\n  [[def-nondegenerate-critical-point-nullity-index-and-coindex]]).\n- The function $f$ is an **excellent Morse function** when it is Morse and any\n  two distinct critical points have distinct critical values.\n\nThus excellence is stronger than the Morse condition: it excludes repeated\ncritical values, not repeated indices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-finitely-many-critical-values-can-be-separated-locally",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact smooth manifold and let $f:M\\to\\mathbb R$ be Morse. Then\nevery $C^\\infty$ neighbourhood $\\mathcal U$ of $f$ contains a smooth function\n$g$ such that:\n\n- $g$ has the same critical points as $f$;\n- the Hessian of $g$ at each critical point equals the Hessian of $f$ there; and\n- distinct critical points of $g$ have distinct critical values.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk came from the example's dependence on the actual torus critical set and on the repaired separation lemma. I re-read the current proof. Steps 1.1-2.1 explicitly compute the four torus critical points and the diagonal Hessian, so the two relevant saddles are genuinely nondegenerate and share the value 0. Step 3.1 uses only two fixed disjoint bumps and invokes the repaired A-page lemma to preserve the critical set and Hessians while shifting the two saddle levels to +/- epsilon. The current example resolves the witness risk."
+      }
+    },
+    "cex-morse-functions-need-not-have-distinct-critical-values": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The partial derivatives are $\\partial f/\\partial x=-2\\pi\\sin(2\\pi x)$ and $\\partial f/\\partial y=-2\\pi\\sin(2\\pi y)$, so the critical points are exactly the four points with $x,y\\in\\{0,\\tfrac12\\}$ modulo $\\mathbb Z$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The Hessian is diagonal with entries $-4\\pi^2\\cos(2\\pi x)$ and $-4\\pi^2\\cos(2\\pi y)$. At each of the four critical points these entries are nonzero, so every critical point is nondegenerate. By [F1], the function $f$ is Morse.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two saddle points $(0,\\tfrac12)$ and $(\\tfrac12,0)$ both have critical value $0$, so distinct critical points can share one critical level. This is exactly the boundary described in [L1], and by [F1] it shows that $f$ is not excellent. Therefore the displayed universal claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a specific Morse function, not an empty-family claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The counterexample paragraph exhibits two saddle points at the critical value $0$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The refuted claim is not a singleton or value-one statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample paragraph explicitly computes the Hessian and states that all four critical points are nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample has no endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A Morse function can have two different critical points with the same critical value, the top-level claim is a false universal statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A Morse function can have two different critical points with the same critical value, the top-level claim is a false universal statement, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-morse-function-and-excellent-morse-function",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and let $f:M\\to\\mathbb R$ be smooth.\n\n- The function $f$ is a **Morse function** when every critical point of $f$ is\n  nondegenerate\n  ([[def-critical-point-and-critical-value-of-a-smooth-function]],\n  [[def-nondegenerate-critical-point-nullity-index-and-coindex]]).\n- The function $f$ is an **excellent Morse function** when it is Morse and any\n  two distinct critical points have distinct critical values.\n\nThus excellence is stronger than the Morse condition: it excludes repeated\ncritical values, not repeated indices.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "rem-morse-does-not-mean-distinct-critical-values",
+          "source_section": "Remark",
+          "quote": "The adjective **Morse** controls only the Hessians at critical points, not the\nrelative heights of those critical points. By\n[[def-morse-function-and-excellent-morse-function]], repeated critical values\nare allowed unless one adds the extra adjective **excellent**.\n\nThe point of [[lem-finitely-many-critical-values-can-be-separated-locally]] is\nthat on a compact manifold this extra condition is still generic: repeated\ncritical levels can be broken by local perturbations that do not change the\ncritical Hessians.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "High risk came from the boundary between Morse and excellent: the counterexample has to exhibit a truly Morse function while keeping two distinct critical points on the same level. I re-read the torus computation on current disk. Step 2.1 shows all four critical points are nondegenerate, so the function is Morse, while step 3.1 shows the two saddles (0, 1/2) and (1/2, 0) both have critical value 0. That is exactly the Morse-but-not-excellent witness claimed by the page, so the current carrier resolves the distinction risk."
+      }
+    },
+    "cex-noncompact-smallness-without-the-strong-topology-can-create-critical-points-at-infinity": {
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "One has $\\|g_n-f\\|_\\infty\\le 1/n$, so the perturbations are uniformly tiny in value. Their supports lie in $[n-1/n^2,n+1/n^2]$, hence for every fixed compact set $K\\subseteq\\mathbb R$ one has $g_n=f$ on $K$ once $n$ is large enough.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating gives $g_n'(x)=1+n\\,\\beta'(n^2(x-n))$. In particular $g_n'(n)=1+n\\beta'(0)=1-n\\le 0$, with equality only when $n=1$, while outside the support interval one has $g_n'(x)=1$. Thus $g_1'(1)=0$, and for every $n\\ge 2$ continuity gives some $x_n\\in[n-1/n^2,n+1/n^2]$ with $g_n'(x_n)=0$. Thus each $g_n$ has a new critical point near $x=n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 shows that the perturbations are tiny on every fixed compact set, while step 2.1 shows that they still create new far-out critical points. This is exactly the noncompact failure mode recorded in [L1]. Therefore the displayed claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a concrete sequence of perturbations on $\\mathbb R$, not an empty-family claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 produces a far-out point $x_n$ with $g_n'(x_n)=0$, which is the zero-derivative boundary the false claim overlooks."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The refuted claim has no singleton or value-one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample only needs new critical points to appear; it is not about Hessian degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The counterexample paragraph explicitly sends the new critical point support to the far-out shells near $x=n$, which is the at-infinity endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The counterexample chooses a bump function with $\\beta'(0)=-1$ and the perturbation sequence $g_n$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Uniformly tiny perturbations on larger and larger shells of a noncompact manifold can create new critical points far out, the top-level claim is a false universal statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Uniformly tiny perturbations on larger and larger shells of a noncompact manifold can create new critical points far out, the top-level claim is a false universal statement, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "rem-noncompact-morse-genericity-is-not-an-open-dense-claim",
+          "source_section": "Remark",
+          "quote": "The compact theorem and the general theorem package different results.\n\nOn a compact manifold,\n[[thm-morse-functions-are-open-dense-on-a-compact-manifold]] gives an open dense\nsubset in the ordinary $C^2$ or $C^\\infty$ topology. On an arbitrary\nnoncompact manifold, [[thm-morse-functions-form-a-residual-subset]] is the\nstrong-topology theorem proved on this page.\n\nThe drifting-shell counterexample below serves a narrower purpose. It shows\nthat perturbations which are tiny only on each fixed compact set can still\ncreate new critical points far out at infinity, so that kind of weak control is\nnot a substitute for the strong topology. By itself, that example does not\nsettle any separate openness claim.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ]
+    }
+  }
+}

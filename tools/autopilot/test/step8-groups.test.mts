@@ -326,7 +326,7 @@ test('Step-8 rejudge blocks exhausted owed items without stranding eligible page
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('Step-8 escalates exhausted twice-fatal repairs to one ordered Sol-max FA per group', async () => {
+test('Step-8 escalates exhausted twice-fatal repairs to one ordered Sol-xhigh FA per group', async () => {
   const repo = fixtureRepoWithGroups();
   writeFileSync(join(repo, 'research', 'demo-step8-scope.json'), JSON.stringify({
     by_item: { 'thm-demo-x': 'a', 'thm-demo-z': 'a', 'thm-demo-y': 'b' },
@@ -369,7 +369,7 @@ test('Step-8 escalates exhausted twice-fatal repairs to one ordered Sol-max FA p
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('the final-adjudicator lane is independently pinned to Sol max with web search', () => {
+test('the final-adjudicator lane is independently pinned to Sol xhigh with web search', () => {
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'final-adjudicator', '--brief', 'briefs/final-adjudicator.md',
     '--task', 'briefs/tasks/final-adjudicator-step8.md', '--label', 'fa-test',
@@ -378,8 +378,8 @@ test('the final-adjudicator lane is independently pinned to Sol max with web sea
   const row = JSON.parse(result.stdout);
   assert.equal(row.role, 'final-adjudicator');
   assert.equal(row.model, MODELS.sol.id);
-  assert.equal(row.requested_effort, 'max');
-  assert.equal(row.provider_effort, 'max');
+  assert.equal(row.requested_effort, 'xhigh');
+  assert.equal(row.provider_effort, 'xhigh');
   assert.match(row.command, /tools\.web_search=true/);
   assert.match(row.prompt, /one item at a time/i);
 });

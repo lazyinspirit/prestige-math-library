@@ -4,15 +4,19 @@
 //
 // The ordinary closure remains judge -> Alpha adjudication -> repair ->
 // targeted rejudge.  After the second confirmed-fatal repair, one independent
-// Sol-max Final Adjudicator per affected group accepts Alpha's repair or repairs
+// Sol-xhigh Final Adjudicator per affected group accepts Alpha's repair or repairs
 // it independently, then records the exact text/context here. Legacy owner or
 // session interventions remain parseable for concluded runs. This tool never
 // writes a judge verdict or a judge stamp.
 
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import {
+  existsSync, readFileSync, appendFileSync, mkdirSync, writeFileSync,
+  mkdtempSync, openSync, closeSync, rmSync,
+} from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { join, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { tsxLoader } from './paths.mjs';
 import { loadStep8JudgeEvidence, rejectionKey } from './step8-evidence.mjs';
@@ -147,7 +151,7 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
     if (row?.resolved_by === 'final-adjudicator') {
       const fa = row?.final_adjudicator;
       if (typeof fa?.group !== 'string' || !fa.group
-        || fa?.model !== MODELS.sol.id || fa?.effort !== 'max'
+        || fa?.model !== MODELS.sol.id || fa?.effort !== 'xhigh'
         || !relativeResearchPath(fa?.queue_path)
         || !HASH.test(fa?.queue_sha256 ?? '')
         || !Number.isInteger(fa?.queue_position) || fa.queue_position < 1
@@ -156,7 +160,7 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
         || !FA_SOURCE_STATUSES.has(fa?.source_verification)
         || !Array.isArray(fa?.authoritative_sources)
         || fa.authoritative_sources.some((url) => typeof url !== 'string' || !/^https?:\/\//.test(url))) {
-        errors.push(`${where}: final-adjudicator resolution requires group, Sol/max attestation, ordered queue evidence, source status, and authoritative_sources`);
+        errors.push(`${where}: final-adjudicator resolution requires group, Sol/xhigh attestation, ordered queue evidence, source status, and authoritative_sources`);
       } else if (fa.source_verification === 'verified' && !fa.authoritative_sources.length) {
         errors.push(`${where}: source_verification=verified requires at least one authoritative source URL`);
       }
@@ -181,10 +185,32 @@ export function terminalResolutionIsCurrent(row, now) {
 
 function currentHashes(root, id) {
   const loader = tsxLoader();
-  const stdout = execFileSync(process.execPath,
-    ['--import', loader, 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
-    { cwd: root, encoding: 'utf8' });
-  return JSON.parse(stdout);
+  const scratch = mkdtempSync(join(tmpdir(), 'step8-terminal-hash-'));
+  try {
+    const stdoutPath = join(scratch, 'stdout');
+    const stderrPath = join(scratch, 'stderr');
+    const stdoutFd = openSync(stdoutPath, 'w');
+    const stderrFd = openSync(stderrPath, 'w');
+    let child;
+    try {
+      // File-backed stdio also works in managed sandboxes that forbid the
+      // anonymous pipes normally created by spawnSync's default stdio.
+      child = spawnSync(process.execPath,
+        ['--import', loader, 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
+        { cwd: root, stdio: ['ignore', stdoutFd, stderrFd] });
+    } finally {
+      closeSync(stdoutFd);
+      closeSync(stderrFd);
+    }
+    const stdout = readFileSync(stdoutPath, 'utf8');
+    const stderr = readFileSync(stderrPath, 'utf8');
+    if (child.status !== 0 || !stdout.trim()) {
+      throw child.error ?? new Error(stderr.trim() || `judge hash process exited ${child.status}`);
+    }
+    return JSON.parse(stdout);
+  } finally {
+    rmSync(scratch, { recursive: true, force: true });
+  }
 }
 
 function initialFatalCycleErrors(root, run, cycles) {
@@ -359,8 +385,8 @@ function main() {
           const dispatch = JSON.parse(readFileSync(resultPath, 'utf8'));
           if (dispatch.ok !== true || dispatch.role !== 'final-adjudicator'
             || dispatch.model !== MODELS.sol.id
-            || dispatch.provider_effort !== 'max' || dispatch.requested_effort !== 'max') {
-            errors.push(`${row.id}: ${resultPath} does not attest a successful ${MODELS.sol.id} max final-adjudicator dispatch`);
+            || dispatch.provider_effort !== 'xhigh' || dispatch.requested_effort !== 'xhigh') {
+            errors.push(`${row.id}: ${resultPath} does not attest a successful ${MODELS.sol.id} xhigh final-adjudicator dispatch`);
           }
         } catch (cause) {
           errors.push(`${row.id}: cannot verify final-adjudicator queue/dispatch (${cause.message})`);
@@ -436,7 +462,7 @@ function main() {
     finalAdjudicator = {
       group,
       model: MODELS.sol.id,
-      effort: 'max',
+      effort: 'xhigh',
       queue_path: queuePath,
       queue_sha256: queueSha256,
       queue_position: position + 1,

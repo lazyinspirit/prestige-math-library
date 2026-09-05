@@ -279,7 +279,7 @@ unadjudicated rejection, or open fatal. The durable receipt caps each item at
 two Step-8 frozen-context cycles; there is never a third judge cycle. When the
 second cycle is again confirmed fatal, the owning group Alpha adjudicates and
 repairs it before escalation. The engine then starts one fresh Final
-Adjudicator per affected group: an independent Sol agent at max reasoning with
+Adjudicator per affected group: an independent Sol agent at xhigh reasoning with
 web search enabled. Its frozen queue is ordered, and the terminal recorder
 refuses item N until items 1 through N-1 have current exact-hash resolutions.
 For each item the FA follows the library's adopted conventions, verifies any

@@ -1,0 +1,447 @@
+[
+  {
+    "order": 288.035,
+    "id": "differentiation-of-monotone-functions-and-the-vitali-covering-theorem",
+    "kind": "A",
+    "category": "measure-theory",
+    "title": "Differentiation of Monotone Functions and the Vitali Covering Theorem",
+    "companion": "differentiation-of-monotone-functions-and-the-vitali-covering-theorem-examples",
+    "requires": [
+      "the-maximal-function-and-lebesgue-differentiation-examples"
+    ],
+    "items": [
+      {
+        "id": "def-four-dini-derivatives-at-a-point",
+        "kind": "definition",
+        "title": "The four Dini derivatives of a real function at a point",
+        "strategy": "Fix the upper and lower right and left Dini derivatives as the one-sided limsup and liminf of the difference quotient, valued in the extended real line so no boundedness hypothesis is hidden in the notation.",
+        "deps": [
+          "def-derivative",
+          "def-one-sided-limits",
+          "def-extended-reals"
+        ]
+      },
+      {
+        "id": "thm-dini-derivatives-exist-are-ordered-and-detect-differentiability",
+        "kind": "theorem",
+        "title": "The four Dini derivatives always exist in the extended reals, satisfy the one-sided order inequalities, and detect finite differentiability",
+        "strategy": "The upper and lower one-sided limsup and liminf always exist in the extended line. On each side the lower value is at most the upper one. A finite derivative exists exactly when the right and left difference quotients both converge to the same real value, which is equivalent to all four Dini derivatives agreeing finitely.",
+        "deps": [
+          "def-derivative",
+          "def-extended-reals",
+          "def-four-dini-derivatives-at-a-point",
+          "thm-two-sided-limit-iff-both-one-sided"
+        ]
+      },
+      {
+        "id": "rem-dini-derivatives-specialise-the-published-derivative",
+        "kind": "remark",
+        "title": "The Dini-derivative criterion is the extended-real shadow of the library's finite derivative convention",
+        "strategy": "Record explicitly that the published `def-derivative` is the finite common value case of the four Dini derivatives and that the infinite-agreement cases are deliberately not called derivatives in this library.",
+        "deps": [
+          "thm-dini-derivatives-exist-are-ordered-and-detect-differentiability"
+        ]
+      },
+      {
+        "id": "def-vitali-cover-and-fine-cover-on-the-line",
+        "kind": "definition",
+        "title": "Vitali covers and fine covers on the real line by closed intervals",
+        "strategy": "Define a Vitali or fine cover of a set on the line by closed nondegenerate intervals shrinking to each covered point. State the interval form because it is the one this page proves and uses; in one dimension the ball language is the same statement.",
+        "deps": [
+          "def-interval"
+        ]
+      },
+      {
+        "id": "thm-riesz-rising-sun-lemma",
+        "kind": "theorem",
+        "title": "Riesz's rising sun lemma with the correct endpoint conclusion",
+        "strategy": "For a continuous function F on [a,b], take the shadow set of points exceeded somewhere to their right. Its subspace components are [a,d) when a is shadowed and otherwise open intervals (c,d), allowing c=a. A tail maximum outside each component proves F(x)<F(d); continuity gives F(c)<=F(d), with equality when c>a.",
+        "deps": [
+          "def-continuity-real",
+          "def-interval",
+          "thm-extreme-value-r",
+          "thm-open-subsets-of-r-structure"
+        ]
+      },
+      {
+        "id": "thm-one-sided-hardy-littlewood-inequality-for-continuous-monotone-functions",
+        "kind": "theorem",
+        "title": "One-sided Hardy-Littlewood inequalities for the Dini derivatives of a continuous monotone function",
+        "strategy": "Apply the rising sun lemma to affine perturbations of the monotone function, such as F(x)-lambda x and r x + F(-x), so that the superlevel sets of the one-sided Dini derivatives are covered by disjoint shadow intervals whose total length is controlled by the total increase.",
+        "deps": [
+          "def-countable-choice",
+          "def-four-dini-derivatives-at-a-point",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-monotone-function",
+          "thm-riesz-rising-sun-lemma"
+        ]
+      },
+      {
+        "id": "thm-continuous-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun",
+        "kind": "theorem",
+        "title": "A continuous monotone function is differentiable almost everywhere by the rising-sun route",
+        "strategy": "For each rational pair 0 < r < R, apply the one-sided maximal inequalities to the set where the upper right derivative exceeds R while the lower left derivative stays below r. The resulting density bound forces each such set to be null, and a countable union over rational pairs yields almost-everywhere agreement of the four Dini derivatives.",
+        "deps": [
+          "def-countable-choice",
+          "def-four-dini-derivatives-at-a-point",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-countable-union-of-null-is-null",
+          "thm-dini-derivatives-exist-are-ordered-and-detect-differentiability",
+          "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+          "thm-one-sided-hardy-littlewood-inequality-for-continuous-monotone-functions"
+        ]
+      },
+      {
+        "id": "def-jump-function-of-an-increasing-function",
+        "kind": "definition",
+        "title": "The jump function of an increasing function on a compact interval",
+        "strategy": "For an increasing F on [a,b], define J_F(x) as the supremum of the finite sums of jump sizes F(t)-F(t-) over finite subsets of [a,x]. This packages the whole atomic part of F without committing to an arbitrary enumeration of the jump points.",
+        "deps": [
+          "def-bounded-set",
+          "def-complete-ordered-field",
+          "def-finite-sum",
+          "def-monotone-function",
+          "def-one-sided-limits",
+          "thm-monotone-one-sided-limits-exist"
+        ]
+      },
+      {
+        "id": "thm-increasing-functions-split-uniquely-as-jump-plus-continuous",
+        "kind": "theorem",
+        "title": "A nondecreasing function splits uniquely into a jump part and a continuous part",
+        "strategy": "The jump-function construction separately accumulates the endpoint defect, interior left and right jumps, and the final left jump. Splitting finite jump sums across [x,y] proves its increment is at most F(y)-F(x), so C_F:=F-J_F remains nondecreasing; matching every one-sided jump then makes C_F continuous and fixes the canonical decomposition.",
+        "deps": [
+          "def-jump-function-of-an-increasing-function",
+          "def-monotone-function",
+          "thm-froda",
+          "thm-monotone-discontinuities-are-jumps",
+          "thm-monotone-one-sided-limits-exist"
+        ]
+      },
+      {
+        "id": "thm-jump-functions-have-derivative-zero-almost-everywhere",
+        "kind": "theorem",
+        "title": "A jump function has derivative zero almost everywhere",
+        "strategy": "Control the points where the upper derivative of the jump function exceeds a fixed lambda by intervals whose total length is dominated by the total jump mass. A countable union over rational lambda then leaves only a null exceptional set, so the finite derivative exists and equals 0 almost everywhere.",
+        "deps": [
+          "def-countable-choice",
+          "def-jump-function-of-an-increasing-function",
+          "thm-countable-union-of-null-is-null",
+          "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+          "thm-monotone-real-functions-are-borel-measurable"
+        ]
+      },
+      {
+        "id": "thm-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun",
+        "kind": "theorem",
+        "title": "A monotone function is differentiable almost everywhere by the rising-sun route",
+        "strategy": "Subtract the jump function to reduce to the continuous monotone case, apply the continuous rising-sun theorem to the continuous part, and combine it with the almost-everywhere vanishing of the jump-part derivative. The exceptional set is still null by countable union.",
+        "deps": [
+          "def-countable-choice",
+          "thm-continuous-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun",
+          "thm-countable-union-of-null-is-null",
+          "thm-dini-derivatives-exist-are-ordered-and-detect-differentiability",
+          "thm-increasing-functions-split-uniquely-as-jump-plus-continuous",
+          "thm-jump-functions-have-derivative-zero-almost-everywhere"
+        ]
+      },
+      {
+        "id": "thm-vitali-covering-theorem-for-fine-covers-on-the-line",
+        "kind": "theorem",
+        "title": "The Vitali covering theorem for fine covers on the real line",
+        "strategy": "Assume dependent choice and run the greedy disjoint exhaustion on a fine cover of a bounded set, always choosing a remaining interval of almost maximal length. The fine-cover property and outer-measure bookkeeping force the uncovered remainder to be null, giving the usual finite-epsilon and countable-disjoint forms.",
+        "deps": [
+          "def-dependent-choice",
+          "def-lebesgue-outer-measure",
+          "def-measure-zero-and-content-zero",
+          "def-vitali-cover-and-fine-cover-on-the-line",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-heine-borel-characterisation-r",
+          "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+          "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume"
+        ]
+      },
+      {
+        "id": "thm-mini-vitali-fine-cover-characterisation-of-null-sets",
+        "kind": "theorem",
+        "title": "A set is null exactly when every fine cover has arbitrarily cheap countable subcovers",
+        "strategy": "If E is null, first enclose it in an open set of arbitrarily small length and then apply the full Vitali theorem inside that open envelope. Conversely, an arbitrarily cheap countable subcover from every fine cover is already a null-set cover in the elementary interval sense.",
+        "deps": [
+          "def-countable-choice",
+          "def-measure-zero-and-content-zero",
+          "def-vitali-cover-and-fine-cover-on-the-line",
+          "thm-countable-union-of-null-is-null",
+          "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+          "thm-vitali-covering-theorem-for-fine-covers-on-the-line"
+        ]
+      },
+      {
+        "id": "thm-monotone-functions-are-differentiable-almost-everywhere-via-lebesgue-stieltjes-measures",
+        "kind": "theorem",
+        "title": "A monotone function is differentiable almost everywhere by the Lebesgue-Stieltjes route",
+        "strategy": "Replace the function by its right-continuous representative, which differs only on the countable jump set. Apply differentiation of measures to its Lebesgue-Stieltjes measure on left and right interval families, identify the limiting interval ratios with the one-sided derivatives, and use the Dini criterion to conclude finite differentiability almost everywhere.",
+        "deps": [
+          "def-countable-choice",
+          "def-monotone-function",
+          "def-one-sided-limits",
+          "thm-countable-union-of-null-is-null",
+          "thm-differentiation-of-borel-measures-finite-on-compact-sets-on-r-n",
+          "thm-dini-derivatives-exist-are-ordered-and-detect-differentiability",
+          "thm-froda",
+          "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures",
+          "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions",
+          "thm-monotone-one-sided-limits-exist"
+        ]
+      },
+      {
+        "id": "thm-the-derivative-of-an-increasing-function-is-measurable-integrable-and-bounded-by-its-total-increase",
+        "kind": "theorem",
+        "title": "For an increasing function, the derivative is measurable and integrable and its integral is bounded by the total increase",
+        "strategy": "Extend the increasing function slightly past the right endpoint, study the nonnegative measurable difference quotients h_n(x)=n(F(x+1/n)-F(x)), and apply Fatou to the interval integrals of h_n. The almost-everywhere derivative from the monotone theorem is the liminf of these quotients, so it is measurable and satisfies the integral bound.",
+        "deps": [
+          "def-countable-choice",
+          "def-derivative",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-integral-over-a-measurable-set",
+          "def-monotone-function",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-fatou-lemma",
+          "thm-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun",
+          "thm-monotone-real-functions-are-borel-measurable",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ]
+      },
+      {
+        "id": "def-singular-function",
+        "kind": "definition",
+        "title": "A singular function on a compact interval",
+        "strategy": "Define a singular function to be continuous, nondecreasing, nonconstant, and almost everywhere differentiable with derivative 0 almost everywhere. This is the page's concrete function-level version of a singular continuous measure.",
+        "deps": [
+          "def-continuity-real",
+          "def-derivative",
+          "def-interval",
+          "def-monotone-function"
+        ]
+      },
+      {
+        "id": "thm-right-continuous-increasing-functions-split-as-absolutely-continuous-plus-jump-plus-singular-continuous",
+        "kind": "theorem",
+        "title": "A right-continuous increasing function splits uniquely as absolutely continuous plus jump plus singular continuous",
+        "strategy": "Decompose the Lebesgue-Stieltjes measure into absolutely continuous, discrete, and singular-continuous parts, then take their distribution functions. The absolutely continuous part is an indefinite integral of its density, the discrete part is the jump function, and the singular-continuous part is continuous with derivative 0 almost everywhere and is therefore either constant or a singular function.",
+        "deps": [
+          "def-absolutely-continuous-function",
+          "def-jump-function-of-an-increasing-function",
+          "def-singular-function",
+          "thm-absolute-continuity-of-the-integral",
+          "thm-differentiation-of-borel-measures-finite-on-compact-sets-on-r-n",
+          "thm-finite-borel-measures-on-r-have-a-unique-absolutely-continuous-discrete-and-singular-continuous-decomposition",
+          "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "thm-increasing-functions-split-uniquely-as-jump-plus-continuous",
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions"
+        ]
+      },
+      {
+        "id": "thm-bv-functions-are-differentiable-almost-everywhere",
+        "kind": "theorem",
+        "title": "Every function of bounded variation is differentiable almost everywhere",
+        "strategy": "Use the published Jordan decomposition to write a BV function as a difference of two increasing functions and apply the monotone differentiability theorem to each summand. Outside the union of the two null exceptional sets, the derivative of the difference exists.",
+        "deps": [
+          "def-bounded-variation-and-total-variation",
+          "thm-jordan-decomposition-for-bv-functions",
+          "thm-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun"
+        ]
+      },
+      {
+        "id": "thm-fubini-term-by-term-differentiation-for-series-of-increasing-functions",
+        "kind": "theorem",
+        "title": "Fubini's theorem on term-by-term differentiation for pointwise sums of increasing functions",
+        "strategy": "Take the common full-measure set on which every summand is differentiable. For a pointwise convergent sum of increasing functions, the difference quotients are nonnegative and finite partial sums commute with them exactly. Tonelli for nonnegative double series then lets the limit and the countable sum pass through one another almost everywhere.",
+        "deps": [
+          "def-countable-choice",
+          "def-sequence",
+          "thm-countable-union-of-null-is-null",
+          "thm-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun",
+          "thm-tonelli-for-nonnegative-double-series"
+        ]
+      },
+      {
+        "id": "rem-roydens-vitali-route-is-a-third-proof",
+        "kind": "remark",
+        "title": "Royden's classical Vitali-covering proof is a third route and is not run on this page",
+        "strategy": "Record the historical third proof through measurability of Dini derivatives and the Vitali theorem, and explain that this page deliberately keeps only the rising-sun route and the Lebesgue-Stieltjes route because they expose a more informative comparison of choice costs.",
+        "deps": [
+          "thm-monotone-functions-are-differentiable-almost-everywhere-via-lebesgue-stieltjes-measures",
+          "thm-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun",
+          "thm-vitali-covering-theorem-for-fine-covers-on-the-line"
+        ]
+      },
+      {
+        "id": "fs-every-continuous-function-is-differentiable-almost-everywhere",
+        "kind": "false-statement",
+        "title": "FALSE: every continuous function is differentiable almost everywhere",
+        "strategy": "Refute with the published Takagi function, which is continuous everywhere and has no finite derivative at any point.",
+        "deps": [
+          "thm-takagi-function-is-continuous-and-nowhere-differentiable"
+        ]
+      },
+      {
+        "id": "fs-every-increasing-function-satisfies-newton-leibniz",
+        "kind": "false-statement",
+        "title": "FALSE: every increasing function satisfies Newton-Leibniz with its derivative",
+        "strategy": "Use the Cantor function: it is increasing, is locally constant off the Cantor set, hence has derivative 0 almost everywhere, but still climbs from 0 to 1. Therefore the derivative integral need not recover the total increment.",
+        "deps": [
+          "cor-cantor-function-is-continuous",
+          "def-derivative",
+          "thm-cantor-function-properties",
+          "thm-cantor-set-properties",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ]
+      },
+      {
+        "id": "fs-vitali-covering-theorem-holds-for-arbitrary-covers",
+        "kind": "false-statement",
+        "title": "FALSE: the Vitali covering theorem holds for arbitrary covers",
+        "strategy": "Refute with an explicit cover of [0,1] by nested left intervals and nested right intervals. It covers every point, but every disjoint subfamily contains at most one interval of each type and therefore leaves a gap of positive length.",
+        "deps": [
+          "def-interval",
+          "def-vitali-cover-and-fine-cover-on-the-line"
+        ]
+      },
+      {
+        "id": "fs-zero-derivative-almost-everywhere-implies-constancy",
+        "kind": "false-statement",
+        "title": "FALSE: derivative zero almost everywhere implies constancy",
+        "strategy": "Again use the Cantor function: the derivative vanishes off a null set, yet the endpoint increment is 1, so almost-everywhere vanishing is far weaker than the everywhere hypothesis of the mean-value corollary.",
+        "deps": [
+          "cor-cantor-function-is-continuous",
+          "def-derivative",
+          "thm-cantor-function-properties",
+          "thm-cantor-set-properties"
+        ]
+      },
+      {
+        "id": "fs-bounded-variation-implies-absolute-continuity",
+        "kind": "false-statement",
+        "title": "FALSE: every function of bounded variation is absolutely continuous",
+        "strategy": "The Cantor function is nondecreasing and therefore has total variation one. At stage n, the 2^n remaining Cantor intervals have total length (2/3)^n but their Cantor-function endpoint increments sum to one, so these families violate the epsilon-delta definition of absolute continuity.",
+        "deps": [
+          "cor-cantor-function-is-continuous",
+          "def-absolutely-continuous-function",
+          "def-bounded-variation-and-total-variation",
+          "def-cantor-function",
+          "def-cantor-set",
+          "def-monotone-function",
+          "lem-geometric-sequence-null",
+          "thm-cantor-function-properties",
+          "thm-cantor-set-ternary-description"
+        ]
+      },
+      {
+        "id": "fs-monotone-functions-have-at-most-countably-many-nondifferentiability-points",
+        "kind": "false-statement",
+        "title": "FALSE: a monotone function has at most countably many points of non-differentiability",
+        "strategy": "Use the Cantor function. Off the Cantor set it is locally constant, while at every Cantor-set point the ternary digit-flip argument produces nearby secant slopes escaping every finite bound. Since the Cantor set is uncountable, the nondifferentiability set need not be countable.",
+        "deps": [
+          "cor-cantor-set-is-an-uncountable-lebesgue-null-set",
+          "def-cantor-function",
+          "def-derivative",
+          "thm-cantor-set-ternary-description"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.036,
+    "id": "differentiation-of-monotone-functions-and-the-vitali-covering-theorem-examples",
+    "kind": "B",
+    "category": "measure-theory",
+    "title": "Differentiation of Monotone Functions and the Vitali Covering Theorem — Examples",
+    "companion": "differentiation-of-monotone-functions-and-the-vitali-covering-theorem",
+    "requires": [
+      "differentiation-of-monotone-functions-and-the-vitali-covering-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-cantor-function-has-zero-derivative-almost-everywhere-is-not-differentiable-on-the-cantor-set-and-rises-by-one",
+        "kind": "example",
+        "title": "The Cantor function has derivative 0 almost everywhere, is not differentiable on the Cantor set, and still rises from 0 to 1",
+        "strategy": "Outside the Cantor set the function is locally constant, so the derivative is 0 there. On the Cantor set, flip a late ternary digit to obtain nearby points with quotient size about (3/2)^n, which forbids a finite derivative. This one example simultaneously witnesses the strict integral inequality and the uncountable nondifferentiability set.",
+        "deps": [
+          "cor-cantor-function-is-continuous",
+          "cor-cantor-set-is-an-uncountable-lebesgue-null-set",
+          "def-cantor-function",
+          "def-derivative",
+          "thm-cantor-function-properties",
+          "thm-cantor-set-ternary-description"
+        ]
+      },
+      {
+        "id": "ex-pure-jump-function-with-dense-discontinuities-and-zero-derivative-almost-everywhere",
+        "kind": "example",
+        "title": "A pure jump function can have dense discontinuities and derivative 0 almost everywhere",
+        "strategy": "Fix an enumeration of the rationals in [0,1] and set J(x)=sum_{q_n <= x} 2^{-n}. The discontinuities are dense and occur exactly at the enumerated rationals, while the jump-function theorem supplies derivative 0 almost everywhere.",
+        "deps": [
+          "def-countable-choice",
+          "thm-jump-functions-have-derivative-zero-almost-everywhere",
+          "thm-rationals-countable"
+        ]
+      },
+      {
+        "id": "ex-a-strictly-increasing-singular-function-from-a-dense-cantor-series",
+        "kind": "example",
+        "title": "A strictly increasing singular function from a dense series of scaled Cantor functions",
+        "strategy": "Choose a countable dense family of subintervals and place a suitably scaled Cantor function on each one, weighted by a summable positive series. Every interval meets some active Cantor piece, so the sum is strictly increasing, and the term-by-term differentiation theorem keeps the derivative equal to 0 almost everywhere.",
+        "deps": [
+          "def-singular-function",
+          "thm-cantor-function-properties",
+          "thm-fubini-term-by-term-differentiation-for-series-of-increasing-functions"
+        ]
+      },
+      {
+        "id": "ex-the-dini-derivatives-of-x-sine-of-one-over-x-at-zero-are-four-distinct-values",
+        "kind": "example",
+        "title": "The four Dini derivatives of x sin(1/x) at 0 are all distinct",
+        "strategy": "Evaluate the difference quotient sin(1/x) along four standard quarter-turn sequences approaching 0 from the right and the left. Their limits 1, -1, 1, and -1 force the upper and lower one-sided Dini derivatives to take the four extremal values.",
+        "deps": [
+          "def-four-dini-derivatives-at-a-point",
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-cosine-zero-sets-and-fundamental-period"
+        ]
+      },
+      {
+        "id": "ex-jump-and-continuous-parts-of-x-plus-rational-jumps",
+        "kind": "example",
+        "title": "The function x plus summable rational jumps decomposes as its continuous part x and its jump part",
+        "strategy": "For F(x)=x+sum_{q_n <= x} 2^{-n} on [0,1], the linear term is already continuous and the summation term is already a jump function. The abstract decomposition theorem therefore reads off both parts without further analysis.",
+        "deps": [
+          "def-countable-choice",
+          "thm-increasing-functions-split-uniquely-as-jump-plus-continuous",
+          "thm-rationals-countable"
+        ]
+      },
+      {
+        "id": "cex-vitali-covering-theorem-needs-a-fine-cover",
+        "kind": "counterexample",
+        "title": "The fine-cover hypothesis in the Vitali covering theorem is load-bearing",
+        "strategy": "Cover [0,1] by the nested left intervals [0,t] and right intervals [t,1] with 0 < t < 1. The cover is not fine, and every disjoint subfamily leaves a central gap of positive length, so no Vitali conclusion survives.",
+        "deps": [
+          "def-interval",
+          "def-vitali-cover-and-fine-cover-on-the-line"
+        ]
+      },
+      {
+        "id": "ex-a-bv-function-with-a-jump-is-differentiable-almost-everywhere",
+        "kind": "example",
+        "title": "A BV function can fail continuity at one point and still be differentiable almost everywhere",
+        "strategy": "Use the Heaviside step function on [0,1]. Its total variation is 1, it has a single jump discontinuity, and its derivative exists and equals 0 away from that one point, illustrating the BV theorem in the simplest possible noncontinuous case.",
+        "deps": [
+          "def-bounded-variation-and-total-variation",
+          "def-derivative",
+          "thm-bv-functions-are-differentiable-almost-everywhere"
+        ]
+      }
+    ]
+  }
+]

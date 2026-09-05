@@ -67,6 +67,8 @@ parts:
       - iterative-restriction-and-comb-extraction-lemmas
       - leaf-reducibility-and-wonderful-families
       - generalized-niceness-and-reduction-outcomes
+      - property-star-and-comb-outcomes
+      - from-generalized-niceness-to-erdos-hajnal
 ---
 
 ## counting
@@ -136,3 +138,8 @@ the bull and $C_5$ through the small-graph and six-vertex prime cases. The closi
 reduction layer packages generalized niceness, blockade thinning, and anticonnected
 thinnings into four-outcome, three-outcome, and iterated restricted-sparsification lemmas
 that force either the target restricted subgraph or a polynomial-sized homogeneous set.
+Property (*) makes the relevant comb trigger explicit; together with leaf reducibility it
+produces the constant-scale alternatives and then generalized niceness. Rödl initialization
+removes the initial restriction, while the final page upgrades the resulting restricted or
+blockade outcomes to the Erdos-Hajnal property, using complement invariance to return from
+the complement-free formulation to the original forbidden family.

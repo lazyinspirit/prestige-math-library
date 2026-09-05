@@ -1,0 +1,1488 @@
+{
+ "version": 1,
+ "run": "frontier-30",
+ "batch": "12",
+ "scope": [
+  "lem-regular-functions-form-sheaf-classical",
+  "thm-global-regular-functions-affine-variety-coordinate-ring",
+  "thm-affine-morphisms-coordinate-ring-anti-equivalence",
+  "cor-affine-algebraic-set-coordinate-duality-complete",
+  "lem-morphism-equality-on-dense-open",
+  "thm-local-ring-affine-variety-localization",
+  "thm-function-field-independent-affine-open",
+  "lem-rational-map-equivalence-transitive",
+  "lem-dominant-map-pullback-function-fields",
+  "thm-rational-maps-to-affine-variety-function-field",
+  "thm-birational-equivalence-function-fields"
+ ],
+ "contracts": {
+  "lem-regular-functions-form-sheaf-classical": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-regular-function-classical-variety",
+     "source_section": "Definition",
+     "quote": "Let $X$ be a classical affine variety over an algebraically closed field $k$,\nand let $U \\subseteq X$ be open. A function $f:U \\to k$ is **regular on $U$**\nwhen for every point $x \\in U$ there exist an open neighbourhood $W \\subseteq U$\nof $x$ and elements $a,b \\in k[X]$ such that $b(y) \\ne 0$ for every $y \\in W$\nand\n$$ f(y)=\\frac{a(y)}{b(y)}\\qquad\\text{for every }y\\in W. $$\n\nThe set of regular functions on $U$ is denoted $\\mathcal O_X(U)$.\n\nThus a regular function is locally a quotient of global regular functions from\nthe affine variety itself, with a denominator that stays nonzero on the\nneighbourhood where that formula is used.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "If $f \\in \\mathcal O_X(U)$ and $V \\subseteq U$ is open, then every point of\n$V$ has an open neighbourhood $W\\subseteq U$ on which [L1] gives a quotient\nformula $f=a/b$. Then $W\\cap V$ is an open neighbourhood of that point inside\n$V$, the denominator $b$ is still nowhere zero there, and $f|_V=a/b$ on\n$W\\cap V$. Hence restriction maps are well defined.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "If $f,g \\in \\mathcal O_X(U)$ and $f|_{U_i}=g|_{U_i}$ for every $i\\in I$, then for each $x \\in U$ some $U_i$ contains $x$, so $f(x)=g(x)$. Therefore $f=g$ on $U$. This is the uniqueness clause.",
+     "step": "1.2",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-1-3",
+     "claim": "Suppose for each $i\\in I$ we are given $f_i \\in \\mathcal O_X(U_i)$, and suppose $f_i=f_j$ on $U_i \\cap U_j$ for all $i,j$. Define $f:U \\to k$ by $f(x)=f_i(x)$ whenever $x \\in U_i$. This is well defined by the overlap hypothesis.",
+     "step": "1.3",
+     "inputs": [
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Fix $x \\in U$. Choose $i$ with $x \\in U_i$. Since $f_i$ is regular on $U_i$, [L1] gives an open neighbourhood $W \\subseteq U_i$ of $x$ and elements $a,b \\in k[X]$ with $b$ nowhere zero on $W$ and $f_i=a/b$ on $W$. On that same neighbourhood, the glued function $f$ equals $f_i$, so $f=a/b$ on $W$. By [L1], $f$ is regular at $x$.",
+     "step": "2.1",
+     "inputs": [
+      "L1",
+      "step 1.3",
+      "choose"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Step 1.1 gives restriction, step 1.2 gives uniqueness of gluing, and steps 1.3 and 2.1 give existence of gluing. Therefore $U \\mapsto \\mathcal O_X(U)$ is a sheaf of $k$-algebras on $X$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.3",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The sheaf statement is about arbitrary open covers and does not single out an empty algebraic variety or empty index family boundary."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "No zero element, zero ring, or zero morphism boundary appears in the statement."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The claim does not distinguish a unit or one-element special case."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "There is no collapsed or exceptional geometric case beyond ordinary open-cover gluing."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The statement has no ordered interval, extremal index, or endpoint parameter."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 2.1 chooses a cover member containing the point and uses its neighbourhood data."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement is not biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement is not biconditional."
+    }
+   ]
+  },
+  "thm-global-regular-functions-affine-variety-coordinate-ring": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-principal-open-classical-variety",
+     "source_section": "Definition",
+     "quote": "Its boundary cases are $$ D_X(0)=\\varnothing \\qquad\\text{and}\\qquad D_X(1)=X. $$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-principal-localisation",
+     "source_section": "Definition",
+     "quote": "Its elements may be written $r/f^n$. In particular, $R_1$ is canonically isomorphic to $R$, while $R_0$ is the zero ring.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-coordinate-ring-principal-open",
+     "source_section": "Statement",
+     "quote": "Then evaluation induces a ring isomorphism $$ k[X]_{\\overline f}\\xrightarrow{\\sim}\\mathcal O_X(U). $$ If $U=\\varnothing$, both sides are the zero ring.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Applying the principal-open theorem at the unit function identifies both source and target with the global objects.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The isomorphism from step 1.1 is exactly the desired evaluation map.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "A classical affine variety is nonempty by definition, so the theorem does not treat an empty source variety."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "No zero divisor, zero morphism, or zero ring boundary is singled out in the theorem."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.1 handles the unit boundary by taking the principal open of $1$, namely $D_X(1)=X$."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The theorem does not split into exceptional geometric subcases beyond the unit principal-open case already recorded."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "There is no ordered parameter or endpoint boundary in the statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof makes no load-bearing choice from a set whose nonemptiness must be established."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "In Global regular functions on a classical affine variety are its coordinate ring, the theorem is not biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "In Global regular functions on a classical affine variety are its coordinate ring, the theorem is not biconditional."
+    }
+   ]
+  },
+  "thm-affine-morphisms-coordinate-ring-anti-equivalence": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-morphism-classical-varieties",
+     "source_section": "Definition",
+     "quote": "A map $\\varphi:X \\to Y$ is a **morphism** when for every open subset $V \\subseteq Y$ and every regular function $f \\in \\mathcal O_Y(V)$, the pullback $$ f\\circ\\varphi:\\varphi^{-1}(V)\\to k $$ is regular on $\\varphi^{-1}(V)$.",
+     "uses": [
+      "1.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-global-regular-functions-affine-variety-coordinate-ring",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a classical affine variety over an algebraically closed field $k$. Then evaluation induces a ring isomorphism $$ k[X]\\xrightarrow{\\sim}\\mathcal O_X(X). $$",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-coordinate-ring-affine-algebraic-set",
+     "source_section": "Definition",
+     "quote": "Its **coordinate ring** is $$ k[X]:=k[x_1,\\ldots,x_n]/I(X). $$ The image of $x_i$ in $k[X]$ is the $i$th **coordinate function** on $X$.",
+     "uses": [
+      "1.2",
+      "2.1",
+      "2.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "def-vanishing-ideal-affine-set",
+     "source_section": "Definition",
+     "quote": "The **vanishing ideal** of $X$ is $$ I(X):=\\{f\\in k[x_1,\\ldots,x_n]:f(a)=0\\text{ for every }a\\in X\\}. $$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "A morphism determines a pullback homomorphism on coordinate rings.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "A coordinate-ring homomorphism supplies candidate coordinate functions for a map into affine space.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "L3"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The coordinate functions from step 1.2 satisfy every defining equation of $Y$, so the map lands in $Y$.",
+     "step": "2.1",
+     "inputs": [
+      "L3",
+      "L4",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "Polynomial expressions in the coordinate classes pull back to the prescribed regular functions, so the constructed map is a morphism with pullback $\\alpha$.",
+     "step": "2.2",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "The two constructions recover the original morphism or homomorphism.",
+     "step": "3.1",
+     "inputs": [
+      "L3",
+      "step 1.1",
+      "step 2.2"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Identity and composition behave contravariantly under pullback, completing the correspondence.",
+     "step": "4.1",
+     "inputs": [
+      "step 1.1",
+      "step 3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "Classical affine varieties are nonempty, so the theorem does not address an empty source or target variety."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The correspondence is between morphisms and homomorphisms, not a zero-element or zero-ring boundary."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No unit or one-point special case changes the argument."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 4.1 checks the identity morphism and the composition law, the categorical edge cases of the correspondence."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "There is no interval or ordered endpoint boundary in the theorem."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof constructs maps from specified coordinate classes and uses no load-bearing choice from a merely nonempty set."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "In Affine morphisms are contravariantly equivalent to coordinate-ring homomorphisms, the theorem gives a correspondence rather than a biconditional proposition."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "In Affine morphisms are contravariantly equivalent to coordinate-ring homomorphisms, the theorem gives a correspondence rather than a biconditional proposition."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "Reviewed on 2026-09-04 because the theorem is a full morphism dictionary with several direction changes. I rechecked the pullback construction, the coordinate-function reconstruction of a map from a k-algebra homomorphism, and the inverse/composition clauses; the current proof closes each part correctly."
+   }
+  },
+  "cor-affine-algebraic-set-coordinate-duality-complete": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-affine-algebraic-sets-coordinate-duality",
+     "source_section": "Statement",
+     "quote": "Let $k$ be an algebraically closed field.\n\n1. If $X\\subseteq \\mathbf A_k^n$ is an affine algebraic set, then its coordinate\nring $k[X]$ is a reduced affine $k$-algebra.\n\n2. If $A$ is a reduced affine $k$-algebra, then there exist $n\\ge0$ and an\naffine algebraic set $X\\subseteq \\mathbf A_k^n$ such that\n$$ A\\cong k[X] $$\nas $k$-algebras.\n\nThus affine algebraic sets correspond to reduced affine $k$-algebras at the\nobject level, with the morphism half deferred to the next page.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-affine-morphisms-coordinate-ring-anti-equivalence",
+     "source_section": "Statement",
+     "quote": "Let $X$ and $Y$ be classical affine varieties over an algebraically closed field\n$k$. Then\n$$ \\operatorname{Mor}(X,Y)\\cong\\operatorname{Hom}_{k\\text{-alg}}(k[Y],k[X]) $$\ncanonically. Under this correspondence, identities correspond to identity\nhomomorphisms and composition of morphisms corresponds to composition of\npullback homomorphisms in the opposite order.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Fact [L1] supplies the object assignment $X\\mapsto k[X]$ for affine\nalgebraic sets.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Let $X$ and $Y$ be classical affine varieties. Fact [L2] gives a bijection\n$$ \\operatorname{Mor}(X,Y)\\cong \\operatorname{Hom}_{k\\text{-alg}}(k[Y],k[X]) $$\nthat respects identities and composition in the contravariant order.\nTherefore, on the full subcategory of classical affine varieties, the\nassignment of step 1.1 is contravariantly full and faithful.",
+     "step": "2.1",
+     "inputs": [
+      "L2",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "This is exactly the claimed morphism-level completion of the affine\nalgebraic-set dictionary on classical affine varieties.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Statement and step 2.1 inherit the empty affine algebraic-set boundary already included in the object correspondence of [L1]."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The corollary is about duality of categories, not a separate zero-element case."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No unit or one-point boundary is isolated in the statement."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 2.1 includes identities and hom-set bijections, the categorical degenerate cases for the duality."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "There is no ordered or endpoint parameter."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof uses only previously established correspondences and makes no load-bearing choice."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The corollary is not a biconditional proposition."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The corollary is not a biconditional proposition."
+    }
+   ]
+  },
+  "lem-morphism-equality-on-dense-open": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-morphism-classical-varieties",
+     "source_section": "Definition",
+     "quote": "Because $Y$ is affine, it is enough to test pullback on global regular functions. By [[thm-global-regular-functions-affine-variety-coordinate-ring]], those are exactly the elements of $k[Y]$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-density-nonempty-open-affine-variety",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a classical affine variety. Every nonempty open subset of $X$ is dense in $X$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-global-regular-functions-affine-variety-coordinate-ring",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a classical affine variety over an algebraically closed field $k$. Then evaluation induces a ring isomorphism $$ k[X]\\xrightarrow{\\sim}\\mathcal O_X(X). $$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "def-principal-open-classical-variety",
+     "source_section": "Definition",
+     "quote": "The **principal open subset** determined by $\\overline f$ is $$ D_X(\\overline f):=\\{x\\in X:\\overline f(x)\\ne0\\}. $$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The coordinate functions of the target pull back to coordinate-ring elements of the source that agree on the dense open subset.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L3"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "If one coordinate difference were nonzero, its principal open would meet the dense set where the difference vanishes, contradiction.",
+     "step": "2.1",
+     "inputs": [
+      "L2",
+      "L4",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Equality of all coordinate pullbacks forces equality of the two morphisms.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The lemma explicitly assumes the comparison open subset is nonempty."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "No zero ring or zero morphism boundary is part of the statement."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "There is no one-point or unit boundary singled out."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The argument treats arbitrary affine targets uniformly and does not split off an exceptional degenerate case."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "In Morphisms from an irreducible affine variety to an affine variety are determined by a dense open subset, there is no ordered endpoint parameter."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof does not require a load-bearing selection from a set whose nonemptiness needs proof."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "In Morphisms from an irreducible affine variety to an affine variety are determined by a dense open subset, the lemma is not biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "In Morphisms from an irreducible affine variety to an affine variety are determined by a dense open subset, the lemma is not biconditional."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "Reviewed on 2026-09-04 because the argument depends on irreducibility and dense-open vanishing. I rechecked the coordinate-difference functions h_i, the contradiction using a nonempty principal open D_X(h_i), and the final coordinatewise equality argument, so the uniqueness lemma is sound."
+   }
+  },
+  "thm-local-ring-affine-variety-localization": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-germ-and-local-ring-classical-variety",
+     "source_section": "Definition",
+     "quote": "An equivalence class is called the **germ** of a regular function at $x$ and is written $f_x$ when $f$ represents it. The set of all such germs is a ring under representativewise addition and multiplication. It is the **local ring of $X$ at $x$** and is denoted $$ \\mathcal O_{X,x}. $$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-maximal-ideals-are-points-over-algebraically-closed-field",
+     "source_section": "Statement",
+     "quote": "Then the map $$ x\\longmapsto \\mathfrak m_x:=\\{\\overline f\\in k[X]:\\overline f(x)=0\\} $$ is a bijection from $X$ onto the set of maximal ideals of $k[X]$.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-localisation-at-a-prime-ideal",
+     "source_section": "Definition",
+     "quote": "The **localisation of $R$ at $\\mathfrak p$** is $$ R_{\\mathfrak p}=(R\\setminus\\mathfrak p)^{-1}R. $$ Its elements are fractions $r/s$ with $s\\notin\\mathfrak p$.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "lem-principal-opens-form-affine-basis",
+     "source_section": "Statement",
+     "quote": "Then the principal opens $D_X(\\overline f)$ form a basis for the Zariski topology on $X$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-coordinate-ring-principal-open",
+     "source_section": "Statement",
+     "quote": "Then evaluation induces a ring isomorphism $$ k[X]_{\\overline f}\\xrightarrow{\\sim}\\mathcal O_X(U). $$ If $U=\\varnothing$, both sides are the zero ring.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.1",
+      "2.4"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "prop-localisation-zero-equality-and-kernel-criteria",
+     "source_section": "Statement",
+     "quote": "Let $R$ be a commutative ring and $S\\subseteq R$ multiplicative. For $r,r'\\in R$ and $s,s'\\in S$, $$ \\frac r s=\\frac{r'}{s'}\\quad\\Longleftrightarrow\\quad u(rs'-r's)=0\\text{ for some }u\\in S, $$",
+     "uses": [
+      "2.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "thm-localisation-at-a-prime-is-local",
+     "source_section": "Statement",
+     "quote": "Let $\\mathfrak p$ be a prime ideal of a commutative ring $R$. Then $R_{\\mathfrak p}$ is a nonzero local ring.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "A germ has an image in the localisation by restricting to a principal-open neighbourhood and reading the section as a localisation fraction.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "A localisation fraction defines a germ of a regular function on the principal open where its denominator is nonzero.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "L3",
+      "L5"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Equivalent representatives of a germ yield the same localisation element after restricting to a smaller principal open.",
+     "step": "2.1",
+     "inputs": [
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "L6",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "Equal localisation fractions define the same germ on a common principal-open neighbourhood where the cleared numerator relation can be divided by the extra localisation factor.",
+     "step": "2.2",
+     "inputs": [
+      "L2",
+      "L3",
+      "L6",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-2-3",
+     "claim": "Applying the second construction to the first returns the original germ.",
+     "step": "2.3",
+     "inputs": [
+      "step 1.1",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-2-4",
+     "claim": "Applying the first construction to the second returns the original localisation fraction.",
+     "step": "2.4",
+     "inputs": [
+      "L5",
+      "step 1.1",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "The two constructions are inverse ring homomorphisms, and the target is local.",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "L7",
+      "step 2.3",
+      "step 2.4"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "A classical affine variety is nonempty, and the theorem is about a chosen point of that variety."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement is not about the zero ring or zero ideal boundary; it identifies two local constructions at a point."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No unit or one-point special case is isolated in the theorem."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The theorem treats every point uniformly and does not split into a separate degenerate case."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "In The local ring at a point of an affine variety is the localization at its maximal ideal, there is no ordered endpoint parameter."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 2.1 choose principal-open neighbourhoods containing the point."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The theorem is an isomorphism statement, not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The theorem is an isomorphism statement, not a biconditional."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "Reviewed on 2026-09-04 because this item is critical and the reader repaired the localization equality step. I rechecked the map Phi from germs, the inverse Psi from localization fractions, and especially step 2.2 with the extra denominator t on a common principal open; the current isomorphism proof is coherent."
+   }
+  },
+  "thm-function-field-independent-affine-open": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-affine-open-subset-classical-variety",
+     "source_section": "Definition",
+     "quote": "On this page, an **affine open subset** of $X$ means a principal open subset $$ U=D_X(\\overline f) $$ for some $\\overline f \\in k[X]$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-coordinate-ring-principal-open",
+     "source_section": "Statement",
+     "quote": "Then evaluation induces a ring isomorphism $$ k[X]_{\\overline f}\\xrightarrow{\\sim}\\mathcal O_X(U). $$ If $U=\\varnothing$, both sides are the zero ring.",
+     "uses": [
+      "1.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-affine-variety-prime-coordinate-ring",
+     "source_section": "Statement",
+     "quote": "Then $X$ is a classical affine variety if and only if its coordinate ring $k[X]$ is an integral domain.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "def-function-field-variety",
+     "source_section": "Definition",
+     "quote": "The **function field** of $X$ is $$ k(X):=\\operatorname{Frac}(k[X]). $$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "A nonempty affine open is a principal open whose coordinate ring is a principal localisation of the domain $k[X]$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The fraction field of the localisation and the fraction field of $k[X]$ contain each other via the obvious fraction embeddings.",
+     "step": "2.1",
+     "inputs": [
+      "L3",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Substituting the coordinate-ring identifications yields the canonical function-field isomorphism.",
+     "step": "3.1",
+     "inputs": [
+      "L2",
+      "L4",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The theorem explicitly assumes the affine open subset is nonempty."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The statement compares fraction fields of domains, not a zero-ring boundary."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No one-point or unit special case is isolated."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The proof treats all nonempty principal opens uniformly."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "There is no ordered parameter or endpoint boundary."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "No load-bearing choice from a merely nonempty set occurs."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "In All nonempty affine opens of an irreducible affine variety have the same function field, the theorem is not biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "In All nonempty affine opens of an irreducible affine variety have the same function field, the theorem is not biconditional."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "Reviewed on 2026-09-04 because the theorem identifies two fraction-field constructions. I rechecked the reduction to U=D(f) with f nonzero, the embeddings between k[X]_f and Frac(k[X]), and the final identification with k(X); the present proof resolves the quotient and nonempty-open cases correctly."
+   }
+  },
+  "lem-rational-map-equivalence-transitive": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-rational-map-varieties",
+     "source_section": "Definition",
+     "quote": "A **rational map** $$ X \\dashrightarrow Y $$ is an equivalence class of morphisms $\\varphi:U \\to Y$ whose source $U \\subseteq X$ is a nonempty affine open subset. Two representatives $\\varphi:U \\to Y$ and $\\psi:V \\to Y$ are equivalent when there exists a nonempty affine open subset $W \\subseteq U \\cap V$ such that $$ \\varphi|_W=\\psi|_W. $$",
+     "uses": [
+      "1.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-density-nonempty-open-affine-variety",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a classical affine variety. Every nonempty open subset of $X$ is dense in $X$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "lem-principal-opens-form-affine-basis",
+     "source_section": "Statement",
+     "quote": "Then the principal opens $D_X(\\overline f)$ form a basis for the Zariski topology on $X$. In particular, $$ D_X(\\overline f)\\cap D_X(\\overline g)=D_X(\\overline f\\,\\overline g) $$ for all $\\overline f,\\overline g\\in k[X]$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The two witness opens are dense and therefore intersect nontrivially.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The intersection witness is again an affine open subset on which all three representatives agree.",
+     "step": "2.1",
+     "inputs": [
+      "L3",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "That common affine-open witness proves transitivity of the equivalence relation.",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The rational-map definition already restricts to nonempty affine-open domains, so an empty witness is outside the statement."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "No zero ring or zero morphism boundary is involved."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No unit or one-point special case appears."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The proof treats arbitrary representatives uniformly and does not split off a degenerate case."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "In The rational-map equivalence relation is transitive, there is no ordered endpoint parameter."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof uses the given witness opens and makes no new load-bearing choice."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "In The rational-map equivalence relation is transitive, the lemma is not biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "In The rational-map equivalence relation is transitive, the lemma is not biconditional."
+    }
+   ]
+  },
+  "lem-dominant-map-pullback-function-fields": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-function-field-variety",
+     "source_section": "Definition",
+     "quote": "Let $X$ be a classical affine variety. Since [[thm-affine-variety-prime-coordinate-ring]]\nshows that $k[X]$ is an integral domain, its field of fractions exists.\n\nThe **function field** of $X$ is\n$$ k(X):=\\operatorname{Frac}(k[X]). $$",
+     "uses": [
+      "1.1",
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-domain-of-definition-rational-map",
+     "source_section": "Definition",
+     "quote": "Let $\\eta:X \\dashrightarrow Y$ be a rational map between classical affine\nvarieties. Its **domain of definition** is the subset\n$$ \\operatorname{Dom}(\\eta):=\\bigcup U, $$\nwhere the union runs over all affine opens $U \\subseteq X$ for which $\\eta$ has\na representative morphism $U \\to Y$.\n\nThe previous items guarantee that this is well defined: transitivity of the\nequivalence relation is provided by\n[[lem-rational-map-equivalence-transitive]], and\n[[lem-morphism-equality-on-dense-open]] gives uniqueness of representatives on\noverlaps.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-dominant-morphism-and-rational-map",
+     "source_section": "Definition",
+     "quote": "Let $X$ and $Y$ be classical affine varieties.\n\nA morphism $\\varphi:X \\to Y$ is **dominant** when its image $\\varphi(X)$ is\ndense in $Y$.\n\nA rational map $\\eta:X \\dashrightarrow Y$ is **dominant** when every\nrepresentative morphism $\\varphi:U\\to Y$ has dense image in $Y$.\n\nThe representatives are compatible on their overlaps and regularity is local,\nso they glue to a unique regular map\n$$\n\\eta_{\\max}:\\operatorname{Dom}(\\eta)\\longrightarrow Y.\n$$\nThis is the **maximal representative** of $\\eta$. In the dominant case its\nimage is dense in $Y$, since it contains the image of every representative.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-affine-morphisms-coordinate-ring-anti-equivalence",
+     "source_section": "Statement",
+     "quote": "Let $X$ and $Y$ be classical affine varieties over an algebraically closed field\n$k$. Then\n$$ \\operatorname{Mor}(X,Y)\\cong\\operatorname{Hom}_{k\\text{-alg}}(k[Y],k[X]) $$\ncanonically. Under this correspondence, identities correspond to identity\nhomomorphisms and composition of morphisms corresponds to composition of\npullback homomorphisms in the opposite order.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-affine-variety-prime-coordinate-ring",
+     "source_section": "Statement",
+     "quote": "Let $k$ be an algebraically closed field and let $X\\subseteq \\mathbf A_k^n$ be\na nonempty affine algebraic set. Then $X$ is a classical affine variety if and\nonly if its coordinate ring $k[X]$ is an integral domain.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "thm-function-field-independent-affine-open",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a classical affine variety. If $U \\subseteq X$ is a nonempty affine\nopen subset, then\n$$ \\operatorname{Frac}(k[U])\\cong k(X) $$\ncanonically. Hence any two nonempty affine opens of $X$ have canonically\nisomorphic function fields.",
+     "uses": [
+      "1.1",
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "def-principal-open-classical-variety",
+     "source_section": "Definition",
+     "quote": "Let $X$ be a classical affine variety over an algebraically closed field $k$,\nand let $\\overline f\\in k[X]$. The **principal open subset** determined by\n$\\overline f$ is\n$$ D_X(\\overline f):=\\{x\\in X:\\overline f(x)\\ne0\\}. $$\n\nIf $f\\in k[x_1,\\ldots,x_n]$ is any representative of $\\overline f$, then\n$D_X(\\overline f)$ depends only on the class $\\overline f$, not on the chosen\nrepresentative. Its boundary cases are\n$$ D_X(0)=\\varnothing \\qquad\\text{and}\\qquad D_X(1)=X. $$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "lem-density-nonempty-open-affine-variety",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a classical affine variety. Every nonempty open subset of $X$ is\ndense in $X$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Choose a representative morphism $\\varphi:U \\to Y$ of $\\eta$ on a nonempty affine open $U \\subseteq X$, guaranteed by [L2]. By [L4], $\\varphi$ induces a $k$-algebra homomorphism $\\varphi^*:k[Y]\\to k[U]$. Using [L6] and [L1], regard $k[U]$ as a subring of $k(X)$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L4",
+      "L6",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The map $\\varphi^*$ is injective. Let $0 \\ne h \\in k[Y]$. By [L5], the\nring $k[Y]$ is a domain, so [L7] makes $D_Y(h)$ a nonempty open subset of $Y$.\nLet $\\psi:\\operatorname{Dom}(\\eta)\\to Y$ be the representative from [L3] whose\nimage is dense in $Y$. By the definition of rational map, $\\psi$ and\n$\\varphi$ agree on some nonempty open subset $W\\subseteq U$. Since $W$ is a\nnonempty open subset of the classical affine variety $X$, [L8] makes $W$ dense\nin $X$, hence dense in the open subspace $\\operatorname{Dom}(\\eta)$. Therefore\n$\\psi(W)$ is dense in $\\psi(\\operatorname{Dom}(\\eta))$, which is dense in $Y$.\nBecause $\\varphi(W)=\\psi(W)\\subseteq\\varphi(U)$, the image $\\varphi(U)$ is\ndense in $Y$. It follows that $\\varphi(U)$ meets $D_Y(h)$, so for some\n$u\\in U$ one has $\\varphi^*(h)(u)=h(\\varphi(u))\\ne0$. Hence $\\varphi^*(h)\\ne0$.",
+     "step": "2.1",
+     "inputs": [
+      "L3",
+      "L5",
+      "L7",
+      "L8",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "For $a/b \\in k(Y)=\\operatorname{Frac}(k[Y])$, define $\\eta^*(a/b):=\\varphi^*(a)/\\varphi^*(b) \\in \\operatorname{Frac}(k[U])=k(X)$. This is well defined because step 2.1 makes $\\varphi^*(b)$ nonzero whenever $b \\ne 0$.",
+     "step": "3.1",
+     "inputs": [
+      "L1",
+      "L6",
+      "step 1.1",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "If $\\psi:V \\to Y$ is another representative of $\\eta$, then by the definition of rational map the two representatives agree on some nonempty affine open $W \\subseteq U \\cap V$. Their coordinate-ring pullbacks therefore agree on $k[Y]$, and after passing to fraction fields and using [L6] for $W$, the two constructions of step 3.1 agree in $k(X)$. Thus $\\eta^*$ is independent of the chosen representative.",
+     "step": "4.1",
+     "inputs": [
+      "L1",
+      "L6",
+      "step 1.1",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "Let $\\theta:Y \\dashrightarrow Z$ be another dominant rational map, represented on some nonempty affine open of $Y$. On a common domain where both pullbacks are defined, pullback of regular functions satisfies $(\\theta\\circ\\eta)^*(h)=\\eta^*(\\theta^*(h))$ for every $h \\in k[Z]$. By fraction-field arithmetic the same identity holds for every element of $k(Z)$. Therefore pullback on function fields is functorial.",
+     "step": "5.1",
+     "inputs": [
+      "step 3.1",
+      "step 4.1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "A dominant rational map is represented on a nonempty affine open by definition, so an empty domain case is excluded."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The lemma concerns fraction fields of domains, not a zero-ring boundary."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No one-point or unit boundary is singled out."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The proof treats dominant representatives uniformly and does not split off an exceptional degenerate case."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "In Dominant maps pull back function fields functorially, there is no ordered endpoint parameter."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.1 chooses a representative morphism on a nonempty affine open from the domain of definition."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "In Dominant maps pull back function fields functorially, the lemma is not biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "In Dominant maps pull back function fields functorially, the lemma is not biconditional."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "Reviewed on 2026-09-04 because the refuter found an unlicensed density step in the injectivity argument. I repaired step 2.1 by passing through a common dense open W inside Dom(eta), and I rechecked injectivity, independence of representative, and functoriality; the current proof now licenses the pullback map."
+   }
+  },
+  "thm-rational-maps-to-affine-variety-function-field": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-dominant-map-pullback-function-fields",
+     "source_section": "Statement",
+     "quote": "Then pullback along any representative induces an injective $k$-algebra homomorphism $$ \\eta^*:k(Y)\\hookrightarrow k(X). $$ This construction is independent of the representative and is functorial under composition of dominant rational maps.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-function-field-variety",
+     "source_section": "Definition",
+     "quote": "The **function field** of $X$ is $$ k(X):=\\operatorname{Frac}(k[X]). $$",
+     "uses": [
+      "1.2",
+      "2.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-coordinate-ring-affine-algebraic-set",
+     "source_section": "Definition",
+     "quote": "Its **coordinate ring** is $$ k[X]:=k[x_1,\\ldots,x_n]/I(X). $$ The image of $x_i$ in $k[X]$ is the $i$th **coordinate function** on $X$.",
+     "uses": [
+      "1.2",
+      "2.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "def-vanishing-ideal-affine-set",
+     "source_section": "Definition",
+     "quote": "Thus $I(X)$ records the polynomial equations satisfied by every point of $X$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "def-affine-open-subset-classical-variety",
+     "source_section": "Definition",
+     "quote": "On this page, an **affine open subset** of $X$ means a principal open subset $$ U=D_X(\\overline f) $$ for some $\\overline f \\in k[X]$.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-coordinate-ring-principal-open",
+     "source_section": "Statement",
+     "quote": "Then evaluation induces a ring isomorphism $$ k[X]_{\\overline f}\\xrightarrow{\\sim}\\mathcal O_X(U). $$ If $U=\\varnothing$, both sides are the zero ring.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "thm-affine-morphisms-coordinate-ring-anti-equivalence",
+     "source_section": "Statement",
+     "quote": "Then $$ \\operatorname{Mor}(X,Y)\\cong\\operatorname{Hom}_{k\\text{-alg}}(k[Y],k[X]) $$ canonically.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "A dominant rational map determines an injective function-field homomorphism by the previous lemma.",
+     "step": "1.1",
+     "inputs": [
+      "L1"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "An injective field homomorphism sends the target coordinate classes to rational functions that become regular on one principal open of the source.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "L3",
+      "L5"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The defining relations of $Y$ vanish after substitution, so the regular coordinate functions define a $k$-algebra map on $k[Y]$.",
+     "step": "2.1",
+     "inputs": [
+      "L2",
+      "L3",
+      "L4",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "The coordinate-ring map from step 1.3 corresponds to a morphism on the chosen affine open and hence to a rational map.",
+     "step": "3.1",
+     "inputs": [
+      "L6",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "If the constructed map were not dominant, some nonzero target function would contradict injectivity of the original field map.",
+     "step": "4.1",
+     "inputs": [
+      "step 2.1",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "The constructed rational map has pullback equal to the original field homomorphism because they agree on generators.",
+     "step": "5.1",
+     "inputs": [
+      "L2",
+      "L3",
+      "step 1.1",
+      "step 1.2",
+      "step 4.1"
+     ]
+    },
+    {
+     "id": "step-6-1",
+     "claim": "The constructions in steps 1.1 and 5.1 are inverse and give the desired bijection.",
+     "step": "6.1",
+     "inputs": [
+      "step 1.1",
+      "step 5.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The theorem concerns dominant rational maps between classical affine varieties, whose source domains are nonempty by definition."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "In Dominant rational maps to an affine variety correspond to injective homomorphisms of function fields, step 1.2 explicitly writes sigma(y_i)=a_i/d_i with d_i != 0 in the domain k[X], so the detector is not exposing an unhandled zero denominator.",
+     "reviewed": {
+      "upheld": true,
+      "by": "contract-audit-6",
+      "reason": "In Dominant rational maps to an affine variety correspond to injective homomorphisms of function fields, step 1.2 explicitly writes sigma(y_i)=a_i/d_i with d_i != 0 in the domain k[X], so the detector is not exposing an unhandled zero denominator."
+     }
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No one-point or unit special case is isolated."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The theorem already restricts to dominant maps and injective homomorphisms, so there is no additional degenerate branch."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "In Dominant rational maps to an affine variety correspond to injective homomorphisms of function fields, there is no ordered endpoint parameter."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof clears denominators by explicit multiplication and does not invoke a load-bearing choice from a merely nonempty set."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "In Dominant rational maps to an affine variety correspond to injective homomorphisms of function fields, the theorem gives a correspondence rather than a biconditional proposition."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "In Dominant rational maps to an affine variety correspond to injective homomorphisms of function fields, the theorem gives a correspondence rather than a biconditional proposition."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "Reviewed on 2026-09-04 because the theorem reconstructs dominant rational maps from field embeddings. I rechecked the choice of a common denominator on D(d), the relation check for I(Y) inside k(X), the dominance contradiction with nonzero h, and the inverse-to-pullback step; the current bijection is sound."
+   }
+  },
+  "thm-birational-equivalence-function-fields": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-birational-equivalence-varieties",
+     "source_section": "Definition",
+     "quote": "A rational map $\\eta:X \\dashrightarrow Y$ is **birational** when there exists a rational map $\\theta:Y \\dashrightarrow X$ such that $$ \\theta\\circ\\eta=\\operatorname{id}_X\\qquad\\text{and}\\qquad \\eta\\circ\\theta=\\operatorname{id}_Y $$ as rational maps.",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-rational-maps-to-affine-variety-function-field",
+     "source_section": "Statement",
+     "quote": "Sending a dominant rational map $$ \\eta:X \\dashrightarrow Y $$ to its pullback on function fields gives a canonical bijection $$ \\{\\text{dominant rational maps }X \\dashrightarrow Y\\}\\cong \\operatorname{Hom}_{k\\text{-fld}}^{\\mathrm{inj}}(k(Y),k(X)). $$",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "A birational inverse pair induces inverse isomorphisms of function fields by functorial pullback.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "A field isomorphism and its inverse correspond to rational maps whose compositions are the identity rational maps.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The forward and reverse implications together give the birational/function-field equivalence.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "Classical affine varieties are nonempty, so the statement has no empty-variety boundary."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The theorem concerns field isomorphisms, not a zero-ring boundary."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No one-point or unit special case is separated out."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The two implications cover the full statement uniformly without a separate degenerate branch."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "In Irreducible affine varieties are birational exactly when their function fields are isomorphic, there is no ordered endpoint parameter."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof uses the given inverse maps or isomorphisms and makes no load-bearing choice."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 1.1 proves that birational equivalence implies isomorphic function fields."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 1.2 proves that an isomorphism of function fields yields a birational equivalence."
+    }
+   ]
+  }
+ }
+}

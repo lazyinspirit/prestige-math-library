@@ -13,10 +13,6 @@ landmark: false
 verification:
   audited: 2026-08-27
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:
@@ -29,13 +25,18 @@ pipeline_run: null
 
 ## Definition
 
-Let $G$ be a finite graph, let $\ell\in\mathbb N$ with $\ell\ge 1$, and let
-$w>0$ be real. An **$(\ell,w)$-blockade** in $G$ is a sequence
+Let $G$ be a finite graph, and let $\ell,w$ be real with $\ell\ge 1$ and
+$w>0$. An **$(\ell,w)$-blockade** in $G$ is a sequence
 
 $$\mathcal{B}=(B_1,\dots,B_t)$$
 
 of pairwise disjoint nonempty subsets of $V(G)$ such that $t\geq \ell$ and
 $|B_i|\geq w$ for every $i\in[t]$.
+
+Since the actual length $t$ is an integer, a real lower bound $t\geq\ell$ is
+equivalent to $t\geq\lceil\ell\rceil$. Thus this notation includes the usual
+integer length parameters while also allowing the real thresholds, such as
+$\epsilon^{-1}$, used in blockade estimates.
 
 Each $B_i$ is a **block**. The **length** of $\mathcal{B}$ is $t$, its
 **width** is

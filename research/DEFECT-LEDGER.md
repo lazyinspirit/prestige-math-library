@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 9b8eb7a6ad45 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ e02aee4be4be by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 5181 |
-| now mechanically prevented | 233 |
+| defects caught before publication | 5724 |
+| now mechanically prevented | 234 |
 | escaped to publication | 1 |
 | still open | 27 |
 
@@ -465,6 +465,41 @@
 | citation-inflated |  |  | 2 | 1 |
 | unsupported-inference |  |  | 2 |  |
 | arithmetic-error | 1 |  |  |  |
+
+## frontier-30 — 543 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross | 8-adjudicate | 8-rejudge | 9-scope |
+|---|---|---|---|---|---|---|
+| invalid-inference | 5 | 9 |  | 48 | 5 |  |
+| missing-hypothesis | 4 | 10 |  | 36 | 5 |  |
+| unlicensed-inference | 10 | 32 |  | 1 |  |  |
+| ill-formed | 30 | 8 |  |  |  |  |
+| citation-inaccurate | 7 | 6 |  | 18 | 7 |  |
+| other | 6 | 32 |  |  |  |  |
+| reader-repair |  | 37 |  |  |  |  |
+| false-claim | 11 | 16 |  | 7 | 2 |  |
+| false-or-overstrong-statement | 4 | 3 |  | 14 | 5 | 1 |
+| ill-typed-claim | 8 | 1 |  | 16 | 1 |  |
+| contract-mismatch | 22 |  | 1 |  |  |  |
+| unsupported-inference |  |  |  | 13 | 2 |  |
+| invalid-witness | 7 | 1 |  | 5 |  |  |
+| citation-missing | 1 | 1 |  | 7 | 3 |  |
+| false-or-overstrong-title |  | 1 |  | 7 | 3 |  |
+| false-boundary-disposition | 3 |  |  | 5 |  |  |
+| ill-typed-construction | 2 |  |  | 4 | 2 |  |
+| missing-choice-scope | 1 |  |  | 7 |  |  |
+| missing-case | 5 |  |  |  | 2 |  |
+| false-computation | 1 | 2 |  | 4 |  |  |
+| citation-inflated |  |  |  | 2 | 5 |  |
+| undefined-notation | 3 |  |  | 2 | 1 |  |
+| invalid-refutation |  |  |  | 3 |  |  |
+| citation-misattributed | 1 |  |  |  | 1 |  |
+| frontmatter-schema | 2 |  |  |  |  |  |
+| arithmetic-error |  |  |  | 1 | 1 |  |
+| risk-review |  | 1 |  |  |  |  |
+| artifact-overwritten |  |  | 1 |  |  |  |
+| citation-truncated |  |  |  | 1 |  |  |
+| unsupported-universal-property |  |  |  | 1 |  |  |
 
 ## pre-frontier-13 — 3 row(s)
 

@@ -1,0 +1,61 @@
+# frontier-30 reader-11 report
+
+Date: Friday, September 4, 2026.
+Run: `frontier-30`
+Batch: `11`
+Role: independent Step-6 reader
+
+## Opened scope
+
+- Control artifacts: `CLAUDE.md`, `README.md`, `research/frontier-30-reader.task.md`, `research/frontier-30-beta-11.task.md`, `research/frontier-30-batch-11.pages.json`, `research/frontier-30-batch-11.coverage.json`, `research/frontier-30-batch-11.notes.md`, `research/frontier-30-batch-11.proof-contracts.json`, `research/frontier-30-step6-hash-11-pre.json`.
+- Live controller check: `node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts status --repo .` showed the repository controller still running `frontier-23` at stage `5-author`; I treated that as live-run context only and did not edit workflow state.
+- Assigned pages: `library/algebraic-topology/singular-chains-and-singular-homology.md`, `library/algebraic-topology/singular-chains-and-singular-homology-examples.md`.
+- Assigned item inventory from `research/frontier-30-batch-11.pages.json`: all 27 A-page items and all 8 B-page items, namely `def-standard-topological-simplex-and-its-affine-face-maps`, `lem-affine-face-maps-satisfy-the-cosimplicial-identities`, `def-singular-simplex-and-singular-chain-group-with-coefficients`, `def-singular-boundary-operator`, `thm-the-singular-boundary-squares-to-zero`, `def-singular-chain-complex-and-singular-homology`, `def-induced-singular-chain-map`, `lem-induced-singular-chain-maps-commute-with-boundaries`, `prop-singular-chains-and-homology-are-covariantly-functorial`, `def-zero-simplex-augmentation-and-reduced-singular-homology`, `lem-singular-augmentation-commutes-with-boundary`, `prop-zero-th-singular-homology-is-free-on-path-components`, `cor-path-connected-spaces-have-zero-reduced-zero-th-homology`, `prop-singular-homology-of-a-disjoint-union-is-the-direct-sum`, `def-prism-operator-for-a-homotopy`, `lem-the-prism-triangulation-has-the-stated-oriented-boundary`, `thm-singular-chain-homotopy-formula`, `cor-homotopic-maps-induce-the-same-map-on-singular-homology`, `thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology`, `cor-contractible-nonempty-spaces-have-the-homology-of-a-point`, `prop-singular-homology-is-invariant-under-deformation-retracts`, `def-singular-chain-cross-product-on-generators`, `lem-singular-chain-cross-product-boundary-formula`, `prop-singular-chain-cross-products-are-natural`, `def-fundamental-singular-cycle-of-an-oriented-simplex`, `def-simplicial-to-singular-chain-map`, `lem-simplicial-to-singular-chains-commute-with-boundaries`, `ex-singular-chain-complex-of-a-point`, `ex-boundaries-of-the-standard-one-and-two-simplices`, `ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex`, `ex-the-prism-operator-for-a-path-homotopy`, `ex-homology-of-an-interval-from-contractibility`, `ex-homology-of-punctured-euclidean-space-by-deformation-retraction`, `cex-equal-homology-does-not-imply-homotopy-equivalence`, `cex-a-singular-cochain-is-not-a-finite-singular-chain`.
+- Published dependency items opened for verification: `def-continuous-map-top`, `def-tensor-product-of-modules-by-generators-and-relations`, `def-cycle-and-boundary-subobjects-of-a-complex`, `def-homology-object-of-a-chain-complex`, `prop-homology-respects-identities-and-composition`, `def-path-connected`, `def-disjoint-union-topology`, `def-homotopy-relative-and-path-homotopy`, `def-chain-homotopy`, `thm-chain-homotopic-maps-induce-the-same-map-on-homology`, `def-homotopy-equivalence`, `def-nullhomotopic-map-and-contractible-space`, `cor-contractible-iff-identity-nullhomotopic`, `thm-a-deformation-retract-is-a-homotopy-equivalence`, `def-product-topology`, `def-geometric-realization-of-an-abstract-simplicial-complex`, `def-orientation-of-a-simplex`, `def-simplicial-chain-groups-and-boundary`, `cor-convex-subsets-of-rn-are-contractible`, `thm-punctured-rn-deformation-retracts-onto-the-sphere`, `def-wedge-of-pointed-spaces`, `cor-fundamental-group-of-two-circle-wedge`, `cor-fundamental-group-of-two-dimensional-torus`, `thm-higher-dimensional-spheres-are-simply-connected`, `cor-seifert-van-kampen-simply-connected-overlap`, `thm-seifert-van-kampen`, `cor-van-kampen-one-simply-connected-set`, `lem-finite-circle-wedge-open-cover`, `thm-induced-fundamental-group-map-functoriality`.
+
+## Confirmed defects and edits
+
+1. Repaired low-degree typing defects in the singular-chain identities.
+   `lem-induced-singular-chain-maps-commute-with-boundaries`, `thm-the-singular-boundary-squares-to-zero`, `thm-singular-chain-homotopy-formula`, `cor-homotopic-maps-induce-the-same-map-on-singular-homology`, `lem-singular-chain-cross-product-boundary-formula`, `lem-simplicial-to-singular-chains-commute-with-boundaries`, and `ex-singular-chain-complex-of-a-point` all used degree-`0` formulas that implicitly invoked undefined degree-`-1` maps or generators. I rewrote those statements and proofs to separate the degree-`0` branch explicitly, added the omitted zero-term convention for the cross-product formula, and updated the downstream chain-homotopy wording to extend the prism operator by zero in degree `-1`.
+2. Repaired the `H_0` arguments in `prop-zero-th-singular-homology-is-free-on-path-components` and `cor-path-connected-spaces-have-zero-reduced-zero-th-homology`.
+   The proposition previously treated a path `I -> X` as if it were already a singular `1`-simplex; I replaced that with an explicit `Delta^1` parametrization. The corollary previously identified reduced `H_0` with the augmentation kernel itself; I replaced that with the correct argument that `ker epsilon_X = B_0(X; Z)` in the path-connected case, using the earlier augmentation lemma.
+3. Repaired `cex-equal-homology-does-not-imply-homotopy-equivalence`.
+   The old proof applied `cor-seifert-van-kampen-simply-connected-overlap` directly to the closed wedge summands `S^1 vee S^1` and `S^2`, which are not the open subsets required by `thm-seifert-van-kampen`. I replaced that with an explicit open cover of `(S^1 vee S^1) vee S^2` built from the wedge quotient, showed one member deformation retracts to `S^1 vee S^1`, the other to `S^2`, and the overlap to the wedge point, and then reran the `pi_1` comparison through the correct open-cover hypothesis.
+4. Repaired the simplicial-to-singular comparison seam.
+   `def-fundamental-singular-cycle-of-an-oriented-simplex` falsely claimed that even vertex permutations leave the characteristic singular simplex unchanged, and `def-simplicial-to-singular-chain-map` therefore did not define a well-typed map on the published simplicial chain convention. I retitled the characteristic-simplex item to ordered simplices, made the dependence on a chosen ordering explicit, and rewrote the comparison-map definition and boundary-compatibility lemma to use a global total order on the vertex set and the corresponding orientation sign.
+5. Updated `research/frontier-30-batch-11.proof-contracts.json`.
+   I regenerated the changed contract entries for the ten proof-bearing repaired items and the five downstream consumers whose citation quotes changed: `prop-singular-chains-and-homology-are-covariantly-functorial`, `thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology`, `ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex`, `ex-the-prism-operator-for-a-path-homotopy`, and `ex-homology-of-an-interval-from-contractibility`. I also corrected the stale `zero` boundary-axis rows for the repaired low-degree items.
+
+## Per-page verdicts
+
+- `singular-chains-and-singular-homology`: pass after the repairs above. The current page summary, item titles, chain-level identities, `H_0` arguments, prism formula, cross-product seam, and simplicial-comparison seam now agree with the opened dependencies.
+- `singular-chains-and-singular-homology-examples`: pass after the repairs above. No B-page body edit was needed, but two example/counterexample items on that page required mathematical repair.
+
+## Checks
+
+- `node tools/tsx-run.mjs tools/reflow.mts items/lem-induced-singular-chain-maps-commute-with-boundaries.md items/prop-zero-th-singular-homology-is-free-on-path-components.md items/cor-path-connected-spaces-have-zero-reduced-zero-th-homology.md items/cex-equal-homology-does-not-imply-homotopy-equivalence.md items/def-fundamental-singular-cycle-of-an-oriented-simplex.md items/def-simplicial-to-singular-chain-map.md items/lem-simplicial-to-singular-chains-commute-with-boundaries.md items/thm-the-singular-boundary-squares-to-zero.md items/ex-singular-chain-complex-of-a-point.md items/thm-singular-chain-homotopy-formula.md items/cor-homotopic-maps-induce-the-same-map-on-singular-homology.md items/lem-singular-chain-cross-product-boundary-formula.md`
+  Result: 5 proof-bearing files reflowed in the first pass and 5 more in the second; the two definition files were already canonical.
+- `node tools/tsx-run.mjs tools/precheck.mts items/lem-induced-singular-chain-maps-commute-with-boundaries.md items/prop-zero-th-singular-homology-is-free-on-path-components.md items/cor-path-connected-spaces-have-zero-reduced-zero-th-homology.md items/cex-equal-homology-does-not-imply-homotopy-equivalence.md items/def-fundamental-singular-cycle-of-an-oriented-simplex.md items/def-simplicial-to-singular-chain-map.md items/lem-simplicial-to-singular-chains-commute-with-boundaries.md items/thm-the-singular-boundary-squares-to-zero.md items/ex-singular-chain-complex-of-a-point.md items/thm-singular-chain-homotopy-formula.md items/cor-homotopic-maps-induce-the-same-map-on-singular-homology.md items/lem-singular-chain-cross-product-boundary-formula.md`
+  Result: `10 checked, 0 failing`.
+- `node tools/regen-contract-entries.mjs research/frontier-30-batch-11.proof-contracts.json lem-induced-singular-chain-maps-commute-with-boundaries prop-zero-th-singular-homology-is-free-on-path-components cor-path-connected-spaces-have-zero-reduced-zero-th-homology cex-equal-homology-does-not-imply-homotopy-equivalence lem-simplicial-to-singular-chains-commute-with-boundaries thm-the-singular-boundary-squares-to-zero ex-singular-chain-complex-of-a-point thm-singular-chain-homotopy-formula cor-homotopic-maps-induce-the-same-map-on-singular-homology lem-singular-chain-cross-product-boundary-formula prop-singular-chains-and-homology-are-covariantly-functorial thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex ex-the-prism-operator-for-a-path-homotopy ex-homology-of-an-interval-from-contractibility`
+  Result: `research/frontier-30-batch-11.proof-contracts.json: regenerated 15, skipped 0`.
+- Full batch precheck over the 25 proof-bearing batch-11 scope items from the contract file.
+  Result: `25 checked, 0 failing`.
+- `node tools/content-policy.mjs research/frontier-30-batch-11.pages.json`
+  Result: `35 scoped item(s), 0 error(s), 0 warning(s)`.
+- `node tools/proof-contract.mjs research/frontier-30-batch-11.proof-contracts.json --strict`
+  Result: `0 error(s), 0 warning(s), 25/25 item(s) checked`.
+- `node tools/citation-fidelity.mjs research/frontier-30-batch-11.proof-contracts.json --items-dir items --fail-on-missing-quote`
+  Result: 64 citations checked, no missing quotes, no widening candidates.
+- `node tools/boundary-audit.mjs research/frontier-30-batch-11.proof-contracts.json --items-dir items --fail-on-contradicted`
+  Result: no contradicted boundary dispositions.
+- `git diff --check -- items/lem-induced-singular-chain-maps-commute-with-boundaries.md items/prop-zero-th-singular-homology-is-free-on-path-components.md items/cor-path-connected-spaces-have-zero-reduced-zero-th-homology.md items/cex-equal-homology-does-not-imply-homotopy-equivalence.md items/def-fundamental-singular-cycle-of-an-oriented-simplex.md items/def-simplicial-to-singular-chain-map.md items/lem-simplicial-to-singular-chains-commute-with-boundaries.md items/thm-the-singular-boundary-squares-to-zero.md items/ex-singular-chain-complex-of-a-point.md items/thm-singular-chain-homotopy-formula.md items/cor-homotopic-maps-induce-the-same-map-on-singular-homology.md items/lem-singular-chain-cross-product-boundary-formula.md research/frontier-30-batch-11.proof-contracts.json`
+  Result: clean.
+
+## Uneditable defects
+
+- None remain in the opened scope.
+
+## Blockers
+
+- None.

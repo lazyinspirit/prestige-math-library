@@ -112,11 +112,11 @@ const ROLES = Object.freeze({
   // `final-adjudicator` — the independent Step-8 close after an item has used
   // both frozen judge contexts and the owning group Alpha has made the second
   // fatal repair.  It is intentionally a fresh Sol conversation rather than a
-  // resume of the Alpha: independence is the point of the escalation.  Max
+  // resume of the Alpha: independence is the point of the escalation.  Extra-high
   // reasoning and web search are both owner requirements; the task queue and
   // terminal-resolution recorder make its one-item-at-a-time discipline
   // mechanical rather than aspirational.
-  'final-adjudicator': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'max', cap: 8, web: true, requiresTask: true, why: 'Step-8 final adjudication after two fatal contexts; one independent Sol-max agent per affected group, with authoritative web verification' },
+  'final-adjudicator': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 8, web: true, requiresTask: true, why: 'Step-8 final adjudication after two fatal contexts; one independent Sol-xhigh agent per affected group, with authoritative web verification' },
   // `alpha-group-read` — the step-7 pass that reads a group's A/B pairs while the
   // judges are still sweeping (owner, 2026-08-25). Step 7 applies the Terra
   // xhigh profile; the durable digest hands its findings to a fresh Sol xhigh

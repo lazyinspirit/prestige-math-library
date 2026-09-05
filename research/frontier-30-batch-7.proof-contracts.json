@@ -1,0 +1,1896 @@
+{
+  "version": 1,
+  "level": "frontier-30",
+  "note": "Step-5 authoring contract for frontier-30 batch 7 on Friday, September 4, 2026.",
+  "scope": [
+    "lem-principal-symbol-under-a-c-one-coordinate-change",
+    "lem-characteristic-hypersurface-is-independent-of-defining-function",
+    "thm-symmetric-principal-part-has-a-signature-normal-form",
+    "thm-two-variable-type-and-characteristic-directions-are-coordinate-invariant",
+    "thm-two-variable-constant-coefficient-canonical-principal-forms",
+    "lem-transport-equation-along-a-characteristic",
+    "lem-transport-characteristics-depend-c-one-on-initial-position",
+    "thm-homogeneous-linear-transport-by-the-flow",
+    "thm-inhomogeneous-linear-transport-formula",
+    "thm-local-linear-transport-cauchy-problem",
+    "cor-support-propagates-along-transport-characteristics",
+    "ex-constant-velocity-transport",
+    "ex-transport-with-growth-and-source",
+    "ex-radial-transport-flow",
+    "cex-characteristic-cauchy-data-may-be-nonunique-or-incompatible",
+    "ex-classification-of-laplace-heat-and-wave-equations",
+    "ex-canonical-coordinates-for-a-hyperbolic-equation",
+    "ex-tricomi-equation-changes-type",
+    "cex-threefold-classification-is-not-global"
+  ],
+  "contracts": {
+    "lem-principal-symbol-under-a-c-one-coordinate-change": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-principal-part-and-principal-symbol-of-a-scalar-pde",
+          "source_section": "Definition",
+          "quote": "Let\n\n$$L u=\\sum_{|\\alpha|\\le m} a_\\alpha(x)D^\\alpha u$$\n\nbe a linear scalar differential operator of order $m$ on an open\n$\\Omega\\subseteq\\mathbb R^n$.\n\nIts **principal part** is the homogeneous order-$m$ operator\n\n$$L_m u:=\\sum_{|\\alpha|=m} a_\\alpha(x)D^\\alpha u.$$\n\nIts **principal symbol** is the homogeneous polynomial in the covector\n$\\xi\\in(\\mathbb R^n)^*$ given by\n\n$$p_m(x,\\xi):=\\sum_{|\\alpha|=m} a_\\alpha(x)\\xi^\\alpha.$$\n\nIf the equation is quasilinear, first freeze the lower jet\n$(u,Du,\\ldots,D^{m-1}u)$ at the point under discussion; the resulting linear\noperator in the highest derivatives has a principal part and principal symbol\ndefined by the same formula.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-symmetry-of-higher-mixed-partials",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge2$. If $f\\in C^k(U)$ for an open $U\\subseteq\\mathbb R^m$, then every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a first $y$-derivative, [L2] gives $\\partial_{y_j}v(y)=\\sum_{i=1}^n \\partial_{x_i}u(\\Phi(y))\\,\\partial_{y_j}\\Phi_i(y)$, so each differentiation either lands on a derivative of $u$ or on one factor $\\partial_{y_j}\\Phi_i$.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Repeating step 1.1 $m$ times produces a sum of terms, and the only terms containing an order-$m$ derivative of $u$ are those in which every differentiation lands on the $u$-factor; once a differentiation lands on a coefficient $\\partial_{y_j}\\Phi_i$, the remaining differentiations can raise the order of the $u$-derivative by at most $m-1$, so every derivative of $\\Phi$ of order at least $2$ contributes only to lower-order terms of $\\widetilde L$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the top-order part, each application of step 1.1 contributes one factor of the pulled-back covector, and [L3] lets us reorder the $m$ differentiations without changing the result; therefore [L1] identifies the transformed principal symbol as $\\widetilde p_m(y,\\eta)=p_m(\\Phi(y),D\\Phi(y)^{-T}\\eta)$, which depends only on the first derivative of the coordinate change.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 2.1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The principal symbol depends only on the first derivative of a smooth coordinate change, the multi-index set {alpha: |alpha|<=m} is nonempty even when m=0 because it contains alpha=0, so the displayed sum is not an omitted empty-family branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In The principal symbol depends only on the first derivative of a smooth coordinate change, the multi-index set {alpha: |alpha|<=m} is nonempty even when m=0 because it contains alpha=0, so the displayed sum is not an omitted empty-family branch."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The principal symbol depends only on the first derivative of a smooth coordinate change has no free scalar parameter whose value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 handles the single-derivative case that seeds the repeated expansion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The principal symbol depends only on the first derivative of a smooth coordinate change has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The principal symbol depends only on the first derivative of a smooth coordinate change is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The principal symbol depends only on the first derivative of a smooth coordinate change does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The principal symbol depends only on the first derivative of a smooth coordinate change is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The principal symbol depends only on the first derivative of a smooth coordinate change is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "lem-characteristic-hypersurface-is-independent-of-defining-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-characteristic-covector-hypersurface-and-noncharacteristic-data",
+          "source_section": "Definition",
+          "quote": "Let $p_m(x,\\xi)$ be the principal symbol of an order-$m$ scalar equation.\n\nA nonzero covector $\\xi\\in T_x^*\\Omega$ is **characteristic at $x$** when\n\n$$p_m(x,\\xi)=0.$$\n\nIf $\\Sigma\\subseteq\\Omega$ is a $C^1$ hypersurface locally written as\n$\\Sigma\\cap U=\\{\\phi=0\\}$ with $d\\phi\\neq0$ on $\\Sigma\\cap U$, then $\\Sigma$ is\n**characteristic at $x\\in\\Sigma$** when its conormal $d\\phi(x)$ is\ncharacteristic, and **noncharacteristic at $x$** otherwise.\n\nAccordingly, Cauchy data prescribed on $\\Sigma$ are **noncharacteristic near\n$x$** when the defining conormal is nowhere characteristic there.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-principal-part-and-principal-symbol-of-a-scalar-pde",
+          "source_section": "Definition",
+          "quote": "Let\n\n$$L u=\\sum_{|\\alpha|\\le m} a_\\alpha(x)D^\\alpha u$$\n\nbe a linear scalar differential operator of order $m$ on an open\n$\\Omega\\subseteq\\mathbb R^n$.\n\nIts **principal part** is the homogeneous order-$m$ operator\n\n$$L_m u:=\\sum_{|\\alpha|=m} a_\\alpha(x)D^\\alpha u.$$\n\nIts **principal symbol** is the homogeneous polynomial in the covector\n$\\xi\\in(\\mathbb R^n)^*$ given by\n\n$$p_m(x,\\xi):=\\sum_{|\\alpha|=m} a_\\alpha(x)\\xi^\\alpha.$$\n\nIf the equation is quasilinear, first freeze the lower jet\n$(u,Du,\\ldots,D^{m-1}u)$ at the point under discussion; the resulting linear\noperator in the highest derivatives has a principal part and principal symbol\ndefined by the same formula.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $x\\in\\Sigma\\cap U$. Any tangent vector $v\\in T_x\\Sigma$ is the velocity of a $C^1$ curve in $\\Sigma$, so $d\\phi(x)(v)=d\\psi(x)(v)=0$ because both defining functions vanish on $\\Sigma$; thus $d\\phi(x)$ and $d\\psi(x)$ have the same kernel, namely the tangent hyperplane $T_x\\Sigma$. Since both covectors are nonzero, the annihilator of that hyperplane is one-dimensional, so there is a unique scalar $h(x)\\neq0$ with $d\\psi(x)=h(x)\\,d\\phi(x)$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], homogeneity gives $p_m(x,d\\psi(x))=p_m(x,h(x)d\\phi(x))=h(x)^m p_m(x,d\\phi(x))$ for every $x\\in\\Sigma\\cap U$; since $h(x)\\neq0$, these values vanish together, so [L1] shows that the characteristic property is independent of the chosen defining function.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Characteristic hypersurfaces are independent of the defining function does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Characteristic hypersurfaces are independent of the defining function has no free scalar parameter whose value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Characteristic hypersurfaces are independent of the defining function has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Characteristic hypersurfaces are independent of the defining function has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Characteristic hypersurfaces are independent of the defining function is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Characteristic hypersurfaces are independent of the defining function does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 proves that if $p_m(x,dphi(x))=0$, then $p_m(x,dpsi(x))=0$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 proves the reverse implication because the two symbol values differ by the nonzero scalar factor $h(x)^m$."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk came from the biconditional and the conormal-scaling argument. I reread the tangent-hyperplane proof that dphi and dpsi annihilate the same codimension-one tangent space and therefore differ by a nonzero scalar h(x), then the homogeneity step p_m(x,dpsi)=h(x)^m p_m(x,dphi). Both directions of the iff are resolved on current text."
+      }
+    },
+    "thm-symmetric-principal-part-has-a-signature-normal-form": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-elliptic-hyperbolic-and-parabolic-principal-symbols",
+          "source_section": "Definition",
+          "quote": "For a real scalar second-order principal symbol\n\n$$p_2(x,\\xi)=\\sum_{i,j=1}^n a_{ij}(x)\\xi_i\\xi_j,$$\n\nassume $a_{ij}=a_{ji}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sylvesters-law-of-inertia",
+          "source_section": "Statement",
+          "quote": "Every symmetric bilinear form on a finite-dimensional real vector space is congruent to exactly one normal form\n\n$$\\operatorname{diag}(I_p,-I_q,0_r),\\qquad p+q+r=\\dim V.$$\n\nEquivalently, the numbers of positive, negative, and zero diagonal entries are independent of the diagonalizing basis.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the frozen principal symbol is $p_2(\\xi)=\\xi^T A\\xi$, and because $A$ is symmetric, [L2] gives an orthonormal eigenbasis in which $A$ is diagonal with real eigenvalues $\\lambda_1,\\ldots,\\lambda_n$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Rescaling each coordinate with $\\lambda_i\\neq0$ by $|\\lambda_i|^{1/2}$ changes the nonzero diagonal entries to $1$ or $-1$ and leaves the zero eigenvalues unchanged, so the principal form becomes $\\operatorname{diag}(I_p,-I_q,0_r)$; by [L3], the numbers of positive, negative, and zero directions are intrinsic.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the frozen symmetric principal part has the stated signature normal form, and its signature triple is invariant under further invertible linear coordinate changes.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 still covers the zero-dimensional case, where all three counts are $0$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 leaves the zero eigenvalue directions in the $0_r$ block explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A symmetric second-order principal part has a coordinate-invariant signature normal form has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 and step 3.1 treat degenerate forms through the explicit $0_r$ block and its invariant multiplicity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A symmetric second-order principal part has a coordinate-invariant signature normal form is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A symmetric second-order principal part has a coordinate-invariant signature normal form does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A symmetric second-order principal part has a coordinate-invariant signature normal form is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A symmetric second-order principal part has a coordinate-invariant signature normal form is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "thm-two-variable-type-and-characteristic-directions-are-coordinate-invariant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-two-variable-second-order-discriminant",
+          "source_section": "Definition",
+          "quote": "For a second-order equation in two variables with principal part\n\n$$A(x,y)u_{xx}+2B(x,y)u_{xy}+C(x,y)u_{yy},$$\n\nthe **discriminant** is\n\n$$\\Delta(x,y):=B(x,y)^2-A(x,y)C(x,y).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-principal-symbol-under-a-c-one-coordinate-change",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$L=\\sum_{|\\alpha|\\le m} a_\\alpha(x)D_x^\\alpha$$\n\nbe a linear scalar differential operator of order $m$, let $x=\\Phi(y)$ be a\nsmooth local coordinate change with smooth inverse, and let $\\widetilde L$ be\nthe operator in the $y$-coordinates defined by\n$\\widetilde L(v)=L(v\\circ\\Phi^{-1})\\circ\\Phi$. Then\n\n$$\\widetilde p_m(y,\\eta)=p_m\\bigl(\\Phi(y),D\\Phi(y)^{-T}\\eta\\bigr)$$\n\nfor every covector $\\eta$, and every derivative of $\\Phi$ of order at least $2$\ncontributes only to lower-order terms of $\\widetilde L$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-characteristic-covector-hypersurface-and-noncharacteristic-data",
+          "source_section": "Definition",
+          "quote": "Let $p_m(x,\\xi)$ be the principal symbol of an order-$m$ scalar equation.\n\nA nonzero covector $\\xi\\in T_x^*\\Omega$ is **characteristic at $x$** when\n\n$$p_m(x,\\xi)=0.$$\n\nIf $\\Sigma\\subseteq\\Omega$ is a $C^1$ hypersurface locally written as\n$\\Sigma\\cap U=\\{\\phi=0\\}$ with $d\\phi\\neq0$ on $\\Sigma\\cap U$, then $\\Sigma$ is\n**characteristic at $x\\in\\Sigma$** when its conormal $d\\phi(x)$ is\ncharacteristic, and **noncharacteristic at $x$** otherwise.\n\nAccordingly, Cauchy data prescribed on $\\Sigma$ are **noncharacteristic near\n$x$** when the defining conormal is nowhere characteristic there.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-characteristic-hypersurface-is-independent-of-defining-function",
+          "source_section": "Statement",
+          "quote": "Let $\\Sigma\\cap U=\\{\\phi=0\\}=\\{\\psi=0\\}$ be a $C^1$ hypersurface with\n$d\\phi\\neq0$ and $d\\psi\\neq0$ on $\\Sigma\\cap U$. If $p_m$ is the principal\nsymbol of an order-$m$ scalar operator, then\n\n$$p_m(x,d\\phi(x))=0 \\quad\\Longleftrightarrow\\quad p_m(x,d\\psi(x))=0$$\n\nfor every $x\\in\\Sigma\\cap U$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write the quadratic symbol matrix as $M=\\begin{pmatrix}A&B\\\\ B&C\\end{pmatrix}$. By [L2], if $x=\\Phi(y)$ has Jacobian $J=D\\Phi(y)$, then the transformed principal symbol is $\\widetilde p_2(y,\\eta)=p_2(\\Phi(y),J^{-T}\\eta)=\\eta^T(J^{-1}MJ^{-T})\\eta$, so the new matrix is $M'=J^{-1}MJ^{-T}$. Therefore $\\det M'=(\\det J)^{-2}\\det M$, and because [L1] gives $\\Delta=-\\det M$, the transformed discriminant is $(\\det J)^{-2}\\Delta$; its sign is unchanged.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If a $C^1$ curve is written locally as $\\phi(x,y)=0$, then its tangent vector $v=(\\dot x,\\dot y)$ is annihilated by the normal covector $d\\phi=(\\phi_x,\\phi_y)$, so in two dimensions $d\\phi$ is a quarter-turn of $v$ up to a nonzero scalar; the curve is characteristic exactly when $p_2(d\\phi)=0$ by [L3], equivalently when $A(dy)^2-2B\\,dx\\,dy+C(dx)^2=0$, and because [L3] makes characteristic conormals coordinate invariant, the corresponding tangent directions are coordinate invariant as well.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In two variables, type and characteristic directions are coordinate invariant does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In two variables, type and characteristic directions are coordinate invariant has no free scalar parameter whose value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In two variables, type and characteristic directions are coordinate invariant has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 covers the characteristic-direction equation, including the degenerate tangent directions where the principal symbol vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In two variables, type and characteristic directions are coordinate invariant is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In two variables, type and characteristic directions are coordinate invariant does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In two variables, type and characteristic directions are coordinate invariant is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In two variables, type and characteristic directions are coordinate invariant is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk came from the matrix pullback law and the characteristic-direction identification. I reread the corrected transformation M'=J^{-1}MJ^{-T}, the determinant scaling by (det J)^{-2}, and the conversion between a tangent direction (dx,dy) and its conormal up to nonzero scale. Those steps give the claimed invariance on current bytes."
+      }
+    },
+    "thm-two-variable-constant-coefficient-canonical-principal-forms": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-symmetric-principal-part-has-a-signature-normal-form",
+          "source_section": "Statement",
+          "quote": "Fix a point $x_0$ of a scalar second-order operator whose principal part is\n\n$$\\sum_{i,j=1}^n a_{ij}(x_0)\\,\\partial_{x_i x_j},\\qquad a_{ij}(x_0)=a_{ji}(x_0).$$\n\nThen there is a linear change of coordinates near $x_0$ in which the frozen\nprincipal quadratic form becomes\n\n$$\\xi_1^2+\\cdots+\\xi_p^2-\\xi_{p+1}^2-\\cdots-\\xi_{p+q}^2,$$\n\nwith the remaining $r=n-p-q$ directions absent. The triple $(p,q,r)$ depends\nonly on the quadratic form, not on the chosen coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-two-variable-type-and-characteristic-directions-are-coordinate-invariant",
+          "source_section": "Statement",
+          "quote": "For a scalar second-order equation in two variables, the sign of the\ndiscriminant $\\Delta=B^2-AC$ is unchanged by a smooth local coordinate change.\nMoreover, the characteristic directions are exactly the tangent directions whose\nnormal covectors are characteristic, so they are also coordinate invariant.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-two-variable-second-order-discriminant",
+          "source_section": "Definition",
+          "quote": "For a second-order equation in two variables with principal part\n\n$$A(x,y)u_{xx}+2B(x,y)u_{xy}+C(x,y)u_{yy},$$\n\nthe **discriminant** is\n\n$$\\Delta(x,y):=B(x,y)^2-A(x,y)C(x,y).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], an invertible linear change of variables diagonalizes the constant principal matrix to $\\operatorname{diag}(1,1)$, $\\operatorname{diag}(1,-1)$, $\\operatorname{diag}(1,0)$, or the negative of one of these matrices, and multiplying the equation by a nonzero scalar removes the global sign.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L3], these three normal forms have discriminants $-1$, $1$, and $0$, and [L2] says that the sign of the discriminant is the invariant datum distinguishing them; therefore the principal part reduces to the Laplace, wave, or rank-one parabolic form listed in the statement.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Constant-coefficient second-order equations in two variables have canonical principal forms does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 includes the discriminant-zero case and identifies its rank-one parabolic normal form."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Constant-coefficient second-order equations in two variables have canonical principal forms has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 treats the degenerate rank-one principal part separately from the nondegenerate elliptic and hyperbolic cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Constant-coefficient second-order equations in two variables have canonical principal forms is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Constant-coefficient second-order equations in two variables have canonical principal forms does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Constant-coefficient second-order equations in two variables have canonical principal forms is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Constant-coefficient second-order equations in two variables have canonical principal forms is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "lem-transport-equation-along-a-characteristic": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-linear-transport-equation-and-its-characteristic-flow",
+          "source_section": "Definition",
+          "quote": "The scalar first-order equation\n\n$$u_t(x,t)+a(x,t)\\cdot\\nabla_x u(x,t)+c(x,t)u(x,t)=f(x,t)$$\n\nis a **linear transport equation**.\n\nFix $(x_0,t_0)\\in\\Omega$. A **characteristic through $(x_0,t_0)$** is a\nsolution $X(\\cdot)$ of the ODE\n\n$$X'(s)=a(X(s),s),\\qquad X(t_0)=x_0,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L2] to the map $s\\mapsto u(X(s),s)$; since the space-time velocity of the characteristic is $(X'(s),1)$, this gives $\\frac{d}{ds}u(X(s),s)=u_t(X(s),s)+\\nabla_xu(X(s),s)\\cdot X'(s)$.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the characteristic ODE gives $X'(s)=a(X(s),s)$, so substituting into step 1.1 and then using the PDE yields $\\frac{d}{ds}u(X(s),s)=f(X(s),s)-c(X(s),s)u(X(s),s)$, which is the claimed scalar linear ODE along the characteristic.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A transport equation restricts to a linear ODE along each characteristic does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A transport equation restricts to a linear ODE along each characteristic, the detector is reading the derivative notation d/ds as a quotient, but the proof never divides by a free scalar s or by 0.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In A transport equation restricts to a linear ODE along each characteristic, the detector is reading the derivative notation d/ds as a quotient, but the proof never divides by a free scalar s or by 0."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 is the single-parameter differentiation along the characteristic curve."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A transport equation restricts to a linear ODE along each characteristic has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A transport equation restricts to a linear ODE along each characteristic is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A transport equation restricts to a linear ODE along each characteristic does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A transport equation restricts to a linear ODE along each characteristic is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A transport equation restricts to a linear ODE along each characteristic is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "lem-transport-characteristics-depend-c-one-on-initial-position": {
+      "citations": [
+        {
+          "fact": "L2",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-continuous-dependence-of-odes-on-initial-data-and-parameters",
+          "source_section": "Statement",
+          "quote": "Let $F(t,x,\\lambda)$ be continuous on an open time-state-parameter domain and locally state-Lipschitz with one constant on compact cylinders. Near fixed data $(t_0,x_0,\\lambda_0)$, the solutions supplied by Picard-Lindelof exist on one common compact time interval and depend jointly and uniformly continuously there on the initial time, initial state, and parameter. Quantitatively, if the common time interval has length at most $H$, $\\|F\\|_2\\le M$, and $F$ has state-Lipschitz constant $L$, then solutions through $(t_0,x_0)$ and $(s,y_0)$ satisfy\n\n$$\\|x(t)-y(t)\\|_2\\le e^{LH}\\bigl(\\|x_0-y_0\\|_2+M|s-t_0|+H\\,\\omega(\\|\\lambda-\\mu\\|_2)\\bigr),$$\n\nwhere $\\omega(r)\\to0$ is a uniform modulus for the parameter dependence of $F$ on that cylinder.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2] and [L3], after shrinking to a neighborhood $U_0$ of $\\xi_0$, every $\\xi\\in U_0$ has a unique characteristic $X(\\cdot;\\xi)$ on the common compact interval $I$, and $(t,\\xi)\\mapsto X(t;\\xi)$ is continuous there.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a coordinate vector $e_j$ and a nonzero scalar $h$ with $\\xi,\\xi+he_j\\in U_0$; by [L4], the difference quotient $Z_h(t):=\\frac{X(t;\\xi+he_j)-X(t;\\xi)}{h}$ satisfies $Z_h(t)=e_j+\\int_{t_0}^t A_h(s,\\xi)\\,Z_h(s)\\,ds$, where $A_h(s,\\xi)=\\int_0^1 D_xa(X(s;\\xi)+\\theta(X(s;\\xi+he_j)-X(s;\\xi)),s)\\,d\\theta$, and because $a$ is $C^1$ on a compact neighborhood of the family of graphs, the matrices $A_h$ are uniformly bounded.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [L6] to the integral equation in step 2.1. If $t\\ge t_0$, then $\\|Z_h(t)\\|_2\\le 1+M\\int_{t_0}^t \\|Z_h(s)\\|_2\\,ds$; if $t\\le t_0$, rewrite step 2.1 as $$Z_h(t)=e_j-\\int_t^{t_0} A_h(s,\\xi)\\,Z_h(s)\\,ds,$$ so $\\|Z_h(t)\\|_2\\le 1+M\\int_t^{t_0}\\|Z_h(s)\\|_2\\,ds$. Gronwall therefore gives $\\|Z_h(t)\\|_2\\le e^{M|t-t_0|}$ for every $t\\in I$, uniformly in $h$. The continuity from step 1.1 together with the uniform continuity of $D_xa$ makes $A_h(\\cdot,\\xi)\\to D_xa(X(\\cdot;\\xi),\\cdot)$ uniformly as $h\\to0$; comparing the equations for $Z_h$ and $Z_k$ on the forward or backward interval between $t_0$ and $t$ and applying [L5] again shows that $(Z_h)$ is Cauchy in $C(I;\\mathbb R^n)$.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L5",
+            "L6",
+            "step 2.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $Y_j(\\cdot,\\xi)$ be the limit from step 3.1; passing to the limit in step 2.1 gives $Y_j(t,\\xi)=e_j+\\int_{t_0}^t D_xa(X(s;\\xi),s)\\,Y_j(s,\\xi)\\,ds$, which [L4] rewrites as $Y_j'(t,\\xi)=D_xa(X(t;\\xi),t)Y_j(t,\\xi)$ with $Y_j(t_0,\\xi)=e_j$, and doing this for every coordinate vector while invoking [L7] identifies the matrix $Y=(Y_1\\,\\cdots\\,Y_n)$ with $D_\\xi X$; therefore $\\xi\\mapsto X(t;\\xi)$ is $C^1$ and its Jacobian solves the displayed variational equation.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "L7",
+            "step 3.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Transport characteristics depend C^1 on the initial position does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Transport characteristics depend C^1 on the initial position, step 2.1 explicitly fixes a nonzero scalar h before forming the difference quotient Z_h, so the h=0 branch is excluded by the written setup rather than omitted.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Transport characteristics depend C^1 on the initial position, step 2.1 explicitly fixes a nonzero scalar h before forming the difference quotient Z_h, so the h=0 branch is excluded by the written setup rather than omitted."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 fixes one coordinate vector $e_j$ and proves differentiability in that single initial-position direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Transport characteristics depend C^1 on the initial position has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Transport characteristics depend C^1 on the initial position is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Transport characteristics depend C^1 on the initial position does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Transport characteristics depend C^1 on the initial position is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Transport characteristics depend C^1 on the initial position is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Critical risk came from the h-difference quotient and the forward/backward time branches in the Gronwall step. I repaired step 3.1 to split the cases t>=t_0 and t<=t_0 before applying Gronwall, giving the uniform bound e^{M|t-t_0|} and the valid C(I)-Cauchy argument for Z_h. The current lemma is now sound."
+      }
+    },
+    "thm-homogeneous-linear-transport-by-the-flow": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-linear-transport-equation-and-its-characteristic-flow",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n\\times\\mathbb R$ be open and let\n$a:\\Omega\\to\\mathbb R^n$, $c:\\Omega\\to\\mathbb R$, and $f:\\Omega\\to\\mathbb R$.\nThe scalar first-order equation\n\n$$u_t(x,t)+a(x,t)\\cdot\\nabla_x u(x,t)+c(x,t)u(x,t)=f(x,t)$$\n\nis a **linear transport equation**.\n\nFix $(x_0,t_0)\\in\\Omega$. A **characteristic through $(x_0,t_0)$** is a\nsolution $X(\\cdot)$ of the ODE\n\n$$X'(s)=a(X(s),s),\\qquad X(t_0)=x_0,$$\n\non an interval containing $t_0$. The corresponding space-time curve is\n$s\\mapsto (X(s),s)$. If these initial-value problems have unique solutions for\nvarying initial data, write $X(s;t_0,x_0)$ for the solution through\n$(x_0,t_0)$. The resulting maps $x_0\\mapsto X(s;t_0,x_0)$, on the domains\nwhere they are defined, form the **characteristic flow** of the transport\nfield. Without uniqueness there are characteristics, but no single-valued\ncharacteristic flow.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-transport-equation-along-a-characteristic",
+          "source_section": "Statement",
+          "quote": "Let $u\\in C^1(\\Omega)$ satisfy\n\n$$u_t+a\\cdot\\nabla_x u+c\\,u=f,$$\n\nand let $X$ be a characteristic solving $X'(s)=a(X(s),s)$. Then\n\n$$\\frac{d}{ds}u(X(s),s)+c(X(s),s)u(X(s),s)=f(X(s),s).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $(x,t)\\in U$ and let $s\\mapsto X(s;t,x)$ be its characteristic. Its whole segment to time $0$ lies in $U$, so [L2] with $c=f=0$ makes $v(s)=u(X(s;t,x),s)$ satisfy $v'(s)=0$. Hence $v$ is constant and $u(x,t)=v(t)=v(0)=u_0(X(0;t,x))$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 proves the representation formula for every classical solution. The assumed characteristic flow is single valued, so two solutions with the same initial datum agree pointwise on $U$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, suppose a $C^1$ function satisfies the displayed formula. Along the characteristic through $(x,t)$, flow consistency gives $$X(0;s,X(s;t,x))=X(0;t,x).$$ Applying the formula at $(X(s;t,x),s)$ therefore makes $s\\mapsto u(X(s;t,x),s)$ constant. By [L3] and the characteristic equation from [L1], its derivative is $$u_t(X(s;t,x),s)+a(X(s;t,x),s)\\cdot\\nabla_xu(X(s;t,x),s).$$ Evaluating at $s=t$ proves the PDE at $(x,t)$, while setting $t=0$ gives the initial condition. Step 2.1 then gives uniqueness.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Homogeneous linear transport is solved by the inverse characteristic flow does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 uses the zero right-hand side to show that the characteristic restriction is constant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Homogeneous linear transport is solved by the inverse characteristic flow has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Homogeneous linear transport is solved by the inverse characteristic flow has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly spends the hypothesis that the whole characteristic segment from t to 0 remains inside U, so both evaluation endpoints are in the PDE domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Homogeneous linear transport is solved by the inverse characteristic flow does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 derive the inverse-flow formula and uniqueness from any classical solution."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 uses flow consistency and the chain rule directly to recover both the PDE and initial condition from a C1 function satisfying the formula."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "final-adjudicator",
+        "notes": "High risk comes from the domain endpoints and converse direction. Step 1.1 uses only characteristic segments assumed to stay in U; step 2.1 uses the directly assumed single-valued flow rather than importing unstated Picard-Lindelof hypotheses; and step 3.1 uses flow consistency plus the chain rule directly to recover the PDE."
+      }
+    },
+    "thm-inhomogeneous-linear-transport-formula": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-transport-equation-along-a-characteristic",
+          "source_section": "Statement",
+          "quote": "Let $u\\in C^1(\\Omega)$ satisfy\n\n$$u_t+a\\cdot\\nabla_x u+c\\,u=f,$$\n\nand let $X$ be a characteristic solving $X'(s)=a(X(s),s)$. Then\n\n$$\\frac{d}{ds}u(X(s),s)+c(X(s),s)u(X(s),s)=f(X(s),s).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-first-order-linear-ode-integrating-factor",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, let $x_0\\in I$, and let $p,q:I\\to\\mathbb R$ be continuous. The IVP $y'+py=q$, $y(x_0)=y_0$, has exactly one solution on $I$, namely\n\n$$y(x)=\\exp(-P(x))\\left(y_0+\\int_{x_0}^x\\exp(P(t))q(t)\\,dt\\right),\\qquad P(x)=\\int_{x_0}^x p(t)\\,dt.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-linear-transport-equation-and-its-characteristic-flow",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n\\times\\mathbb R$ be open and let\n$a:\\Omega\\to\\mathbb R^n$, $c:\\Omega\\to\\mathbb R$, and $f:\\Omega\\to\\mathbb R$.\nThe scalar first-order equation\n\n$$u_t(x,t)+a(x,t)\\cdot\\nabla_x u(x,t)+c(x,t)u(x,t)=f(x,t)$$\n\nis a **linear transport equation**.\n\nFix $(x_0,t_0)\\in\\Omega$. A **characteristic through $(x_0,t_0)$** is a\nsolution $X(\\cdot)$ of the ODE\n\n$$X'(s)=a(X(s),s),\\qquad X(t_0)=x_0,$$\n\non an interval containing $t_0$. The corresponding space-time curve is\n$s\\mapsto (X(s),s)$. If these initial-value problems have unique solutions for\nvarying initial data, write $X(s;t_0,x_0)$ for the solution through\n$(x_0,t_0)$. The resulting maps $x_0\\mapsto X(s;t_0,x_0)$, on the domains\nwhere they are defined, form the **characteristic flow** of the transport\nfield. Without uniqueness there are characteristics, but no single-valued\ncharacteristic flow.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $(x,t)\\in U$ and let $v(s)=u(X(s;t,x),s)$. The characteristic segment stays in $U$, so [L2] gives $v'(s)+c(X(s;t,x),s)v(s)=f(X(s;t,x),s)$ and $v(0)=u_0(X(0;t,x))$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $t=0$, the displayed formula is exactly the initial condition. If $t\\neq0$, apply [L3] to the scalar ODE from step 1.1 on the interval with endpoints $0$ and $t$; continuity of $c,f$, the characteristic, and its in-domain graph makes the two composed coefficients continuous there, while oriented integrals cover either order of the endpoints. This yields the displayed formula for $v(t)=u(x,t)$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, suppose a $C^1$ function satisfies the displayed formula and fix the characteristic $Y(s)=X(s;t,x)$. Flow consistency gives $X(r;s,Y(s))=Y(r)$ for every relevant $r,s$. Substitution in the displayed formula therefore writes $v(s)=u(Y(s),s)$ exactly as the [L3] integrating-factor solution with coefficients $p(s)=c(Y(s),s)$ and $q(s)=f(Y(s),s)$. Hence $v'+pv=q$. By [L1] and [L4], $v'=u_t+a\\cdot\\nabla_xu$, proving the PDE at $(x,t)$. At $t=0$, [L4] gives $X(0;0,x)=x$ and the integral vanishes, so the formula also gives $u(x,0)=u_0(x)$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The word family refers to the characteristic flow parametrized by points of U; the formula is checked pointwise and performs no aggregation or choice over that family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-step8-preflight-d",
+            "reason": "The word family refers to the characteristic flow over U. If U is empty the universal claim is vacuous, and otherwise the proof fixes one point; no empty-index operation occurs."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles t=0 before applying the positive-length interval theorem, and step 3.1 checks that the formula then reduces to u(x,0)=u_0(x)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The inhomogeneous linear transport equation has the characteristic integrating-factor formula has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The inhomogeneous linear transport equation has the characteristic integrating-factor formula has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 applies the integrating-factor theorem on the interval with endpoints $0$ and $t$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The inhomogeneous linear transport equation has the characteristic integrating-factor formula does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 restrict a classical PDE solution to a characteristic and derive the displayed integrating-factor formula."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 independently rewrites the displayed formula along a fixed characteristic as the scalar ODE solution, then uses the chain rule to recover the PDE and initial condition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "final-adjudicator",
+        "notes": "Critical risk comes from coefficient regularity, the zero-time endpoint, orientation for negative time, and the converse. The statement supplies C1/continuous coefficients and an in-domain flow; step 2.1 separates t=0 and uses oriented integrals; and step 3.1 derives the scalar ODE directly from the formula before applying the chain rule, without reusing the one-way restriction lemma."
+      }
+    },
+    "thm-local-linear-transport-cauchy-problem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-noncharacteristic-first-order-cauchy-surface",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n\\times\\mathbb R$ be the domain of the transport\nequation, and let $\\sigma:U\\subseteq\\mathbb R^n\\to\\Omega$ be a $C^1$\nparametrized hypersurface, written\n\n$$\\sigma(\\eta)=(\\gamma(\\eta),\\tau(\\eta)).$$\n\nFor the transport equation $u_t+a(x,t)\\cdot\\nabla_xu+c(x,t)u=f(x,t)$, let the\nspace-time transport vector be\n\n$$B(x,t):=(a(x,t),1)\\in\\mathbb R^{n+1}.$$\n\nThe surface $\\sigma$ is **noncharacteristic at $\\eta_0$** when the\n$(n+1)\\times(n+1)$ matrix whose columns are the $n$ tangent vectors\n$\\partial_{\\eta_1}\\sigma(\\eta_0),\\ldots,\\partial_{\\eta_n}\\sigma(\\eta_0)$ and\nthe vector $B(\\sigma(\\eta_0))$ has nonzero determinant. Equivalently,\n$B(\\sigma(\\eta_0))$ is not tangent to the data surface.\n\nA prescribed datum for the transport equation is a function\n$g:U\\to\\mathbb R$, interpreted as the Cauchy condition\n$u(\\gamma(\\eta),\\tau(\\eta))=g(\\eta)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-transport-characteristics-depend-c-one-on-initial-position",
+          "source_section": "Statement",
+          "quote": "Let $a$ be $C^1$ on an open neighborhood of the graph of a characteristic\n$X(\\cdot;\\xi_0)$ solving\n\n$$X'(t)=a(X(t),t),\\qquad X(t_0;\\xi_0)=\\xi_0,$$\n\non a compact interval $I$ containing $t_0$. Then, after shrinking to a\nneighborhood $U_0$ of $\\xi_0$, every initial point $\\xi\\in U_0$ determines a\ncharacteristic $X(\\cdot;\\xi)$ on the same interval $I$, the map\n$(t,\\xi)\\mapsto X(t;\\xi)$ is continuous on $I\\times U_0$, and for each\n$t\\in I$ the map $\\xi\\mapsto X(t;\\xi)$ is $C^1$. Its Jacobian matrix\n$Y(t,\\xi)=D_\\xi X(t;\\xi)$ satisfies\n\n$$Y'(t,\\xi)=D_xa(X(t,\\xi),t)\\,Y(t,\\xi),\\qquad Y(t_0,\\xi)=I_n.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-first-order-linear-ode-integrating-factor",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, let $x_0\\in I$, and let $p,q:I\\to\\mathbb R$ be continuous. The IVP $y'+py=q$, $y(x_0)=y_0$, has exactly one solution on $I$, namely\n\n$$y(x)=\\exp(-P(x))\\left(y_0+\\int_{x_0}^x\\exp(P(t))q(t)\\,dt\\right),\\qquad P(x)=\\int_{x_0}^x p(t)\\,dt.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-continuous-dependence-of-odes-on-initial-data-and-parameters",
+          "source_section": "Statement",
+          "quote": "Let $F(t,x,\\lambda)$ be continuous on an open time-state-parameter domain and locally state-Lipschitz with one constant on compact cylinders. Near fixed data $(t_0,x_0,\\lambda_0)$, the solutions supplied by Picard-Lindelof exist on one common compact time interval and depend jointly and uniformly continuously there on the initial time, initial state, and parameter. Quantitatively, if the common time interval has length at most $H$, $\\|F\\|_2\\le M$, and $F$ has state-Lipschitz constant $L$, then solutions through $(t_0,x_0)$ and $(s,y_0)$ satisfy\n\n$$\\|x(t)-y(t)\\|_2\\le e^{LH}\\bigl(\\|x_0-y_0\\|_2+M|s-t_0|+H\\,\\omega(\\|\\lambda-\\mu\\|_2)\\bigr),$$\n\nwhere $\\omega(r)\\to0$ is a uniform modulus for the parameter dependence of $F$ on that cylinder.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L2] to the space-time vector field $\\widetilde a((x,t),r):=(a(x,t),1)$ with initial time $r=0$. After shrinking near $\\eta_*$, its flow $\\Gamma(s;z)$ is jointly continuous, $D_z\\Gamma=Y$ exists, and $Y'=D\\widetilde a(\\Gamma)Y$ with $Y(0,z)=I_{n+1}$. The coefficient $D\\widetilde a(\\Gamma(s;z))$ is jointly continuous; applying [L6] to this linear matrix ODE, with $z$ as parameter, makes $Y$ jointly continuous. Also $\\partial_s\\Gamma=\\widetilde a(\\Gamma)$ is jointly continuous. Thus $\\Gamma$ is $C^1$ in $(s,z)$. Since $\\sigma$ is $C^1$, $$\\Phi(s,\\eta):=\\Gamma(s;\\sigma(\\eta))$$ is $C^1$, and $\\Phi(0,\\eta)=\\sigma(\\eta)$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $(0,\\eta_*)$, the $s$-derivative of $\\Phi$ is the transport vector $$\\partial_s\\Phi(0,\\eta_*)=\\widetilde a(\\sigma(\\eta_*),0)=(a(x_*,t_*),1)=B(\\sigma(\\eta_*)).$$ For each $j$, the $\\eta_j$-derivative is $\\partial_{\\eta_j}\\Phi(0,\\eta_*)=\\partial_{\\eta_j}\\sigma(\\eta_*)$ because $\\Phi(0,\\eta)=\\sigma(\\eta)$. Thus the columns of $D\\Phi(0,\\eta_*)$ are exactly the $n$ tangent vectors to the data surface together with the transport vector, so [L1] says that $D\\Phi(0,\\eta_*)$ is invertible.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L4], after shrinking domains there are neighborhoods $I$ of $0$, $V$ of $\\eta_*$, and $W$ of $(x_*,t_*)$ such that $\\Phi:I\\times V\\to W$ is a $C^1$ diffeomorphism. Write $\\Gamma(\\rho;\\sigma(\\eta))=(X(\\rho;\\eta),T(\\rho;\\eta))$. For each $\\eta\\in V$, [L3] gives the unique solution $z(\\cdot,\\eta)$ of $$\\partial_s z(s,\\eta)+c(X(s;\\eta),T(s;\\eta))z(s,\\eta)=f(X(s;\\eta),T(s;\\eta)),\\qquad z(0,\\eta)=g(\\eta),$$ namely $$z(s,\\eta)=e^{-\\int_0^s c(X(\\rho;\\eta),T(\\rho;\\eta))\\,d\\rho}g(\\eta)+\\int_0^s e^{-\\int_\\lambda^s c(X(\\rho;\\eta),T(\\rho;\\eta))\\,d\\rho}f(X(\\lambda;\\eta),T(\\lambda;\\eta))\\,d\\lambda.$$ The $C^1$ integrands on the compact local interval may be differentiated in $s$ and $\\eta$, so $z$ is $C^1$. Define $u:=z\\circ\\Phi^{-1}$ on $W$.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Because $\\Phi(0,\\eta)=\\sigma(\\eta)$, step 3.1 gives $u(\\gamma(\\eta),\\tau(\\eta))=g(\\eta)$ for $\\eta\\in V$. Moreover $u(\\Phi(s,\\eta))=z(s,\\eta)$, so [L5] and $\\partial_s\\Phi=(a,1)$ give $$\\partial_s z(s,\\eta)=u_t(\\Phi(s,\\eta))+a(\\Phi(s,\\eta))\\cdot\\nabla_xu(\\Phi(s,\\eta)).$$ Substitution into the scalar ODE for $z$ proves the transport PDE throughout $W$. If two $C^1$ solutions shared the data, [L5] would restrict each one to the same scalar IVP on every characteristic, and uniqueness in [L3] would make them agree throughout $W$.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "L5",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Local linear transport has a unique solution from noncharacteristic Cauchy data does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When the spatial dimension n is zero, the characteristic-coordinate derivative is the 1 by 1 time derivative equal to 1, so steps 1.1-4.1 reduce to the same scalar linear ODE construction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Local linear transport has a unique solution from noncharacteristic Cauchy data has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 isolates the determinant condition that excludes the degenerate tangent-to-flow case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Local linear transport has a unique solution from noncharacteristic Cauchy data is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Local linear transport has a unique solution from noncharacteristic Cauchy data does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Local linear transport has a unique solution from noncharacteristic Cauchy data is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Local linear transport has a unique solution from noncharacteristic Cauchy data is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "final-adjudicator",
+        "notes": "Critical risk comes from joint C1 regularity of the characteristic coordinates, transversality, and transfer of the scalar ODE solution back to spacetime. Step 1.1 now proves joint C1 regularity through the variational equation and continuous parameter dependence; steps 2.1-3.1 apply the inverse function and integrating-factor theorems directly; and step 4.1 proves the data, PDE, and uniqueness by the chain rule."
+      }
+    },
+    "cor-support-propagates-along-transport-characteristics": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-homogeneous-linear-transport-by-the-flow",
+          "source_section": "Statement",
+          "quote": "If $u\\in C^1(U)$ solves\n\n$$u_t+a\\cdot\\nabla_xu=0,\\qquad u(x,0)=u_0(x),$$\n\nthen\n\n$$u(x,t)=u_0(X(0;t,x)).$$\n\nHence there is at most one classical solution on $U$. Conversely, any $C^1$\nfunction on $U$ satisfying this formula is that unique classical solution.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], $u(x,t)=u_0(\\Phi_t^{-1}(x))$, so $u(x,t)\\neq0$ exactly when $u_0(\\Phi_t^{-1}(x))\\neq0$, equivalently when $\\Phi_t^{-1}(x)\\in\\{u_0\\neq0\\}$ and therefore when $x\\in\\Phi_t(\\{u_0\\neq0\\})$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $\\Phi_t$ is a homeomorphism, it carries closures to closures, and taking closures in step 1.1 gives $\\operatorname{supp}u(\\cdot,t)=\\Phi_t(\\operatorname{supp}u_0)$, so support can move only along the characteristic flow.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1 also cover the zero solution, whose support is empty and remains empty under the flow."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Support propagates along transport characteristics has no free scalar parameter whose value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Support propagates along transport characteristics has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Support propagates along transport characteristics has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Support propagates along transport characteristics is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Support propagates along transport characteristics does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Support propagates along transport characteristics is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Support propagates along transport characteristics is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-constant-velocity-transport": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-homogeneous-linear-transport-by-the-flow",
+          "source_section": "Statement",
+          "quote": "If $u\\in C^1(U)$ solves\n\n$$u_t+a\\cdot\\nabla_xu=0,\\qquad u(x,0)=u_0(x),$$\n\nthen\n\n$$u(x,t)=u_0(X(0;t,x)).$$\n\nHence there is at most one classical solution on $U$. Conversely, any $C^1$\nfunction on $U$ satisfying this formula is that unique classical solution.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The characteristic ODE is $X'(s)=b$, so the characteristic through $x$ at time $t$ is $X(s;t,x)=x+(s-t)b$, and in particular $X(0;t,x)=x-bt$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L1] with the characteristic from step 1.1; the transport solution is therefore $u(x,t)=u_0(X(0;t,x))=u_0(x-bt)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Constant-velocity transport translates the initial profile does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 gives $X(0;t,x)=x-bt$, so at $t=0$ the formula returns the initial profile."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Constant-velocity transport translates the initial profile has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Constant-velocity transport translates the initial profile has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Constant-velocity transport translates the initial profile is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Constant-velocity transport translates the initial profile does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Constant-velocity transport translates the initial profile is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Constant-velocity transport translates the initial profile is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-transport-with-growth-and-source": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-inhomogeneous-linear-transport-formula",
+          "source_section": "Statement",
+          "quote": "If\n$u\\in C^1(U)$ solves\n\n$$u_t+a\\cdot\\nabla_xu+c\\,u=f,\\qquad u(x,0)=u_0(x),$$\n\nthen\n\n$$u(x,t)=e^{-\\int_0^t c(X(\\tau;t,x),\\tau)\\,d\\tau}u_0(X(0;t,x))+\\int_0^t e^{-\\int_s^t c(X(\\tau;t,x),\\tau)\\,d\\tau}f(X(s;t,x),s)\\,ds.$$\n\nConversely, any $C^1$ function satisfying this formula solves the transport\nequation on $U$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The characteristics are the straight lines $X(s;t,x)=x+(s-t)b$, so $X(0;t,x)=x-bt$, and along such a curve the source becomes $q(X(s;t,x)-bs)=q(x-bt)$, which is independent of $s$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] with $c\\equiv1$ gives $u(x,t)=e^{-t}u_0(x-bt)+\\int_0^t e^{-(t-s)}q(x-bt)\\,ds$, and the integral equals $(1-e^{-t})q(x-bt)$, so the displayed closed form follows.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Transport with growth and source along straight characteristics does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 yields $u(x,0)=u_0(x)$ because both correction terms vanish at time $0$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Transport with growth and source along straight characteristics has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Transport with growth and source along straight characteristics has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Transport with growth and source along straight characteristics is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Transport with growth and source along straight characteristics does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Transport with growth and source along straight characteristics is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Transport with growth and source along straight characteristics is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-radial-transport-flow": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-transport-equation-along-a-characteristic",
+          "source_section": "Statement",
+          "quote": "Let $u\\in C^1(\\Omega)$ satisfy\n\n$$u_t+a\\cdot\\nabla_x u+c\\,u=f,$$\n\nand let $X$ be a characteristic solving $X'(s)=a(X(s),s)$. Then\n\n$$\\frac{d}{ds}u(X(s),s)+c(X(s),s)u(X(s),s)=f(X(s),s).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard the equation as transport with characteristic ODE $X'(s)=X(s)$; its solutions are the rays $X(s)=e^s x_0$, and by [L1] the restricted function $v(s)=u(X(s))$ satisfies $v'(s)=v(s)$, hence $v(s)=e^s v(0)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Writing $x=r\\omega$ with $r=e^s$ and $\\omega\\in S^{n-1}$ gives $u(r\\omega)=r\\,u(\\omega)$, so every solution has the claimed form with $g(\\omega)=u(\\omega)$; conversely, for $u(r\\omega)=r\\,g(\\omega)$ the radial derivative is $u/r$, hence $x\\cdot\\nabla u=u$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stationary equation x dot Du = u is solved by radial characteristics does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example is stated on $mathbb R^n\\setminus\\{0\\}$, so the singular origin $r=0$ is deliberately outside the domain rather than a branch to prove."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 identifies the unit-sphere slice $r=1$ as the free angular datum $g(omega)$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The stationary equation x dot Du = u is solved by radial characteristics has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stationary equation x dot Du = u is solved by radial characteristics is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The stationary equation x dot Du = u is solved by radial characteristics does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The stationary equation x dot Du = u is solved by radial characteristics is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The stationary equation x dot Du = u is solved by radial characteristics is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "cex-characteristic-cauchy-data-may-be-nonunique-or-incompatible": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-local-linear-transport-cauchy-problem",
+          "source_section": "Statement",
+          "quote": "If $\\sigma$ is\nnoncharacteristic at $\\eta_*$, then there are\nneighborhoods $V$ of $\\eta_*$ and $W$ of $(x_*,t_*)$ and a unique\n$u\\in C^1(W)$ such that\n\n$$u_t+a\\cdot\\nabla_xu+c\\,u=f \\quad\\text{on } W,$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-noncharacteristic-first-order-cauchy-surface",
+          "source_section": "Definition",
+          "quote": "The surface $\\sigma$ is **noncharacteristic at $\\eta_0$** when the\n$(n+1)\\times(n+1)$ matrix whose columns are the $n$ tangent vectors\n$\\partial_{\\eta_1}\\sigma(\\eta_0),\\ldots,\\partial_{\\eta_n}\\sigma(\\eta_0)$ and\nthe vector $B(\\sigma(\\eta_0))$ has nonzero determinant. Equivalently,\n$B(\\sigma(\\eta_0))$ is not tangent to the data surface.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $u_t+u_x=0$, the space-time transport vector is $(1,1)$, which is tangent to $\\Sigma$, so $\\Sigma$ is characteristic rather than noncharacteristic by [L2], and [L1] does not apply.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every $C^1$ function of the form $u(x,t)=F(x-t)$ solves $u_t+u_x=0$, and on $\\Sigma$ one has $x-t=0$, so the restriction is the constant $F(0)$. Taking $F_0(s)=0$ and $F_1(s)=s$ gives two different local classical solutions with the same constant data on $\\Sigma$, proving nonuniqueness. On the other hand, every classical solution restricts to a constant on $\\Sigma$, so nonconstant prescribed data such as $g(t)=t$ are incompatible.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Characteristic Cauchy data may be nonunique or incompatible does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Characteristic Cauchy data may be nonunique or incompatible has no free scalar parameter whose value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Characteristic Cauchy data may be nonunique or incompatible has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 treats the tangent data surface, the degenerate case that destroys the noncharacteristic uniqueness theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Characteristic Cauchy data may be nonunique or incompatible is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Characteristic Cauchy data may be nonunique or incompatible does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Characteristic Cauchy data may be nonunique or incompatible is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Characteristic Cauchy data may be nonunique or incompatible is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk came from the classical-solution regularity in the nonuniqueness witness. I reread the characteristic-line setup and repaired step 2.1 so the witnesses are the C^1 functions F_0(s)=0 and F_1(s)=s, which give two distinct classical solutions with the same constant data while nonconstant data remain incompatible. The current counterexample is sound."
+      }
+    },
+    "ex-classification-of-laplace-heat-and-wave-equations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-elliptic-hyperbolic-and-parabolic-principal-symbols",
+          "source_section": "Definition",
+          "quote": "The symbol is **elliptic at $x$** when $p_2(x,\\xi)\\neq0$ for every\n$\\xi\\neq0$; equivalently, the quadratic form has one definite sign.\n\nFix a nonzero covector $\\tau$. The symbol is **strictly hyperbolic at $x$\nrelative to $\\tau$** when $p_2(x,\\tau)\\neq0$ and, for every $\\zeta$ not\nproportional to $\\tau$, the polynomial\n$\\lambda\\mapsto p_2(x,\\zeta+\\lambda\\tau)$ has two distinct real roots. The\nfirst condition says that $\\tau$ is noncharacteristic and prevents the root\ncondition from becoming vacuous in one dimension.\n\nA space-time operator of the form\n\n$$u_t-\\sum_{i,j=1}^n a_{ij}(x,t)u_{x_i x_j}+\\text{lower-order terms}$$\n\nis **parabolic at $(x,t)$** when the spatial quadratic form\n$\\sum a_{ij}(x,t)\\xi_i\\xi_j$ is positive semidefinite and nonzero, and, in the\nstandard time covector, the equation contains a first-order time derivative\nrather than a second-order one. The nonzero condition ensures that the operator\nstill has a second-order spatial principal part at the point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-two-variable-second-order-discriminant",
+          "source_section": "Definition",
+          "quote": "For a second-order equation in two variables with principal part\n\n$$A(x,y)u_{xx}+2B(x,y)u_{xy}+C(x,y)u_{yy},$$\n\nthe **discriminant** is\n\n$$\\Delta(x,y):=B(x,y)^2-A(x,y)C(x,y).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $u_{xx}+u_{yy}$ one has $A=C=1$ and $B=0$, so [L2] gives $\\Delta=-1<0$ and the Laplace operator is elliptic; for $u_{tt}-u_{xx}$, the principal polynomial in $(\\tau,\\xi)$ is $\\tau^2-\\xi^2$, which has two distinct real roots $\\tau=\\pm\\xi$ for $\\xi\\neq0$, so [L1] makes it hyperbolic.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the heat operator $\\partial_t-\\Delta_x$, the spatial quadratic form is $|\\xi|^2$, which is positive definite, while the time derivative is first order, so [L1] identifies it as parabolic.",
+          "step": "2.1",
+          "inputs": [
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Laplace, heat, and wave equations have elliptic, parabolic, and hyperbolic principal symbols does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes the case $B=0$ in the Laplace symbol and the zero mixed term is handled directly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Laplace, heat, and wave equations have elliptic, parabolic, and hyperbolic principal symbols has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Laplace, heat, and wave equations have elliptic, parabolic, and hyperbolic principal symbols has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Laplace, heat, and wave equations have elliptic, parabolic, and hyperbolic principal symbols is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Laplace, heat, and wave equations have elliptic, parabolic, and hyperbolic principal symbols does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Laplace, heat, and wave equations have elliptic, parabolic, and hyperbolic principal symbols is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Laplace, heat, and wave equations have elliptic, parabolic, and hyperbolic principal symbols is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-canonical-coordinates-for-a-hyperbolic-equation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-two-variable-constant-coefficient-canonical-principal-forms",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$A u_{xx}+2B u_{xy}+C u_{yy}+\\text{lower-order terms}=0$$\n\nhave constant real coefficients in its principal part.\n\nIf $B^2-AC<0$, an invertible linear change of variables and multiplication by a\nnonzero scalar reduce the principal part to $u_{\\xi\\xi}+u_{\\eta\\eta}$.\n\nIf $B^2-AC>0$, such a change reduces it to $u_{\\xi\\xi}-u_{\\eta\\eta}$.\n\nIf $B^2-AC=0$ but $(A,B,C)\\neq(0,0,0)$, such a change reduces it to\n$u_{\\xi\\xi}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-two-variable-type-and-characteristic-directions-are-coordinate-invariant",
+          "source_section": "Statement",
+          "quote": "For a scalar second-order equation in two variables, the sign of the\ndiscriminant $\\Delta=B^2-AC$ is unchanged by a smooth local coordinate change.\nMoreover, the characteristic directions are exactly the tangent directions whose\nnormal covectors are characteristic, so they are also coordinate invariant.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The principal quadratic form is $\\xi_x^2-\\xi_y^2$, so the characteristic covectors are proportional to $d(x+y)$ and $d(x-y)$, and [L2] shows that using $\\xi=x+y$ and $\\eta=x-y$ follows the two characteristic families.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In these coordinates, $\\partial_x=\\partial_\\xi+\\partial_\\eta$ and $\\partial_y=\\partial_\\xi-\\partial_\\eta$, so $u_{xx}-u_{yy}=(\\partial_\\xi+\\partial_\\eta)^2u-(\\partial_\\xi-\\partial_\\eta)^2u=4u_{\\xi\\eta}$; this is the mixed canonical form, equivalent to the hyperbolic normal form from [L1] after a further linear recombination of $\\xi$ and $\\eta$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A constant-coefficient hyperbolic equation is diagonalized by characteristic coordinates does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A constant-coefficient hyperbolic equation is diagonalized by characteristic coordinates has no free scalar parameter whose value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 identifies the two characteristic families one by one before recombining them into the new coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A constant-coefficient hyperbolic equation is diagonalized by characteristic coordinates has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A constant-coefficient hyperbolic equation is diagonalized by characteristic coordinates is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A constant-coefficient hyperbolic equation is diagonalized by characteristic coordinates does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A constant-coefficient hyperbolic equation is diagonalized by characteristic coordinates is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A constant-coefficient hyperbolic equation is diagonalized by characteristic coordinates is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-tricomi-equation-changes-type": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-two-variable-second-order-discriminant",
+          "source_section": "Definition",
+          "quote": "For a second-order equation in two variables with principal part\n\n$$A(x,y)u_{xx}+2B(x,y)u_{xy}+C(x,y)u_{yy},$$\n\nthe **discriminant** is\n\n$$\\Delta(x,y):=B(x,y)^2-A(x,y)C(x,y).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-limits-of-the-elliptic-parabolic-hyperbolic-trichotomy",
+          "source_section": "Remark",
+          "quote": "The names on this page combine related but differently formulated pointwise\nnotions: ellipticity and strict hyperbolicity are conditions on real scalar\nsecond-order principal symbols, whereas the stated parabolic condition is for a\nspace-time operator with a first-order time derivative and a semidefinite\nspatial quadratic form. These notions do not by themselves give a global\ntaxonomy of equations that change type from point to point, systems with\nmatrix-valued principal symbols, higher-order equations, or fully nonlinear\nequations whose leading behavior is not a single quadratic form.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $A=y$, $B=0$, and $C=1$, so [L1] gives $\\Delta(y)=0-y\\cdot1=-y$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $y>0$, then $\\Delta<0$ and the equation is elliptic; if $y<0$, then $\\Delta>0$ and it is hyperbolic; and if $y=0$, then $\\Delta=0$ and the principal part has rank one, so this pointwise change of sign is exactly the mixed-type behavior singled out in [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Tricomi equation changes type across y = 0 does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 treats the boundary line $y=0$, where the discriminant is exactly zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Tricomi equation changes type across y = 0 has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Tricomi equation changes type across y = 0 has no further collapsed configuration beyond the hypotheses and cases already treated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Tricomi equation changes type across y = 0 is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Tricomi equation changes type across y = 0 does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Tricomi equation changes type across y = 0 is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Tricomi equation changes type across y = 0 is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk came from the sign change at y=0 and the pointwise nature of the classification. I reread the coefficients A=y, B=0, C=1, the discriminant computation Delta=-y, and the conclusion elliptic for y>0, hyperbolic for y<0, parabolic on y=0. The example is mathematically correct on current bytes."
+      }
+    },
+    "cex-threefold-classification-is-not-global": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-tricomi-equation-changes-type",
+          "source_section": "Example",
+          "quote": "The Tricomi equation\n\n$$y\\,u_{xx}+u_{yy}=0$$\n\nis elliptic for $y>0$, hyperbolic for $y<0$, and parabolic on the line $y=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-limits-of-the-elliptic-parabolic-hyperbolic-trichotomy",
+          "source_section": "Remark",
+          "quote": "The names on this page combine related but differently formulated pointwise\nnotions: ellipticity and strict hyperbolicity are conditions on real scalar\nsecond-order principal symbols, whereas the stated parabolic condition is for a\nspace-time operator with a first-order time derivative and a semidefinite\nspatial quadratic form. These notions do not by themselves give a global\ntaxonomy of equations that change type from point to point, systems with\nmatrix-valued principal symbols, higher-order equations, or fully nonlinear\nequations whose leading behavior is not a single quadratic form.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the single operator $y\\,u_{xx}+u_{yy}$ is elliptic on one open region, hyperbolic on another, and degenerate on the separating line, so even within second order one operator need not belong globally to just one of the three names.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The biharmonic equation $\\Delta^2u=0$ has order $4$, so [L2] says the second-order trichotomy does not classify it at all; the claimed global taxonomy therefore fails both because some operators change type from point to point and because others lie outside the stated second-order scope.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The elliptic-parabolic-hyperbolic trichotomy is not a global taxonomy does not quantify over an empty index set or empty domain branch distinct from the argument already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The elliptic-parabolic-hyperbolic trichotomy is not a global taxonomy has no free scalar parameter whose value 0 creates a separate proof obligation beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The elliptic-parabolic-hyperbolic trichotomy is not a global taxonomy has no separate singleton or value-1 branch requiring an additional argument beyond the written proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 uses the separating line of the Tricomi operator as the degenerate interface between the elliptic and hyperbolic regions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The elliptic-parabolic-hyperbolic trichotomy is not a global taxonomy is not an endpoint-sensitive interval claim except where the statement itself already fixes the relevant interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The elliptic-parabolic-hyperbolic trichotomy is not a global taxonomy does not rely on an unstated arbitrary choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The elliptic-parabolic-hyperbolic trichotomy is not a global taxonomy is not stated as a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The elliptic-parabolic-hyperbolic trichotomy is not a global taxonomy is not stated as a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "High risk came from mixing a second-order mixed-type operator with an equation outside the page's second-order taxonomy. I reread the Tricomi reference in step 1.1 and the order-4 biharmonic witness in step 2.1. Together they show that one operator can change type pointwise and another need not be classifiable by this trichotomy at all. The current counterexample is sound."
+      }
+    }
+  }
+}

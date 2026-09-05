@@ -1,0 +1,2070 @@
+{
+  "version": 1,
+  "level": "frontier-30",
+  "note": "Step-5 authoring contract for frontier-30 batch 20 on Friday, September 4, 2026.",
+  "scope": [
+    "thm-three-sat-reduces-to-clique",
+    "cor-clique-is-np-complete",
+    "thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible",
+    "cor-independent-set-and-vertex-cover-are-np-complete",
+    "thm-three-sat-reduces-to-directed-hamiltonian-cycle",
+    "thm-directed-reduces-to-undirected-hamiltonian-cycle",
+    "cor-hamiltonian-path-and-cycle-are-np-complete",
+    "thm-three-sat-reduces-to-subset-sum",
+    "thm-subset-sum-reduces-to-partition",
+    "thm-vertex-cover-reduces-to-set-cover",
+    "thm-three-sat-reduces-to-three-colourability",
+    "fs-gadget-correctness-needs-only-one-direction",
+    "fs-pseudopolynomial-is-polynomial-in-bit-length",
+    "ex-clique-is-np-complete",
+    "ex-three-sat-reduces-to-three-colourability",
+    "cex-gadget-correctness-needs-only-one-direction"
+  ],
+  "contracts": {
+    "thm-three-sat-reduces-to-clique": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-reduction-gadget-and-interface-invariant",
+          "source_section": "Definition",
+          "quote": "Let source and target languages $A,B$ be equipped with explicit witness\nrelations $R_A(x,w)$ and $R_B(y,z)$, so that membership means existence of a\ncorresponding witness. Fix a proposed polynomial-time map $f$ between their\nambient string spaces in the sense of\n[[def-polynomial-time-many-one-reduction]].\n\nA **reduction gadget** is a bounded local piece of $f(x)$ together\nwith a specified way that candidate witnesses may enter, exit, or label its\nboundary. An **interface invariant** is the condition imposed on those\nboundary data so that local choices from neighbouring gadgets are compatible\nwith one global target witness $z$ satisfying $R_B(f(x),z)$.\n\nOn this page, a gadget proof is regarded as complete only after all of the\nfollowing have been established.\n\n1. A total algorithm constructs the target instance from the source instance in\n   polynomial time.\n2. The target size is polynomially bounded in the source size.\n3. Every source witness $w$ with $R_A(x,w)$ induces target choices satisfying each gadget's local\n   constraints and the interface invariants.\n4. Every global target witness $z$ with $R_B(f(x),z)$ projects back to a source witness because the\n   interface invariants rule out inconsistent local choices.\n\nThe gadget language is therefore bookkeeping for the two directions of the iff\ncondition in a many-one reduction, not a substitute for that condition.",
+          "uses": [
+            "1.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph.\n\n- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of\n  $K$ are adjacent.\n- A subset $I\\subseteq V$ is an **independent set** when no two distinct\n  vertices of $I$ are adjacent.\n- A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at\n  least one endpoint in $C$.\n\nThe associated decision problems are:\n\n- **CLIQUE**: given $(G,k)$ with $k\\in\\mathbb{N}$, decide whether $G$ has a\n  clique of size at least $k$;\n- **INDEPENDENT SET**: given $(G,k)$, decide whether $G$ has an independent set\n  of size at least $k$;\n- **VERTEX COVER**: given $(G,k)$, decide whether $G$ has a vertex cover of\n  size at most $k$.\n\nBecause the input graph is simple, adjacency means the edge relation from\n[[def-graph-adjacency-incidence-neighbourhood-and-degree]] on the vertex set of\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Construct a graph $G_\\varphi$ with one vertex $v_{jr}$ for each literal occurrence $\\ell_{jr}$ in clause $C_j$. Join $v_{jr}$ and $v_{j'r'}$ by an edge exactly when $j\\ne j'$ and the literals $\\ell_{jr}$ and $\\ell_{j'r'}$ are not complementary. Output the CLIQUE instance $(G_\\varphi,m)$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume that $\\varphi$ is satisfiable, and choose a satisfying assignment. For each clause $C_j$, pick one literal made true by that assignment and take the corresponding vertex of $G_\\varphi$. This gives $m$ chosen vertices, one from each clause. Two chosen literals cannot be complementary because one assignment cannot make a variable and its negation both true, so step 1.1 makes every chosen pair adjacent. Therefore the chosen vertices form an $m$-clique.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Assume conversely that $G_\\varphi$ has a clique $K$ of size $m$. By step 1.1, no two vertices from the same clause are adjacent, so $K$ contains exactly one vertex from each clause. Again by step 1.1, the literals represented by those vertices are pairwise noncomplementary. Assign truth values so that every chosen literal is true, and extend arbitrarily to variables not yet assigned. Then each clause contains its chosen true literal, so $\\varphi$ is satisfiable.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The graph $G_\\varphi$ has $3m$ vertices and at most $9m^2$ candidate edges, so the map in step 1.1 is computable in polynomial time. Steps 2.1 and 2.2 prove\n$$ \\varphi\\in 3\\text{-}SAT \\iff (G_\\varphi,m)\\in CLIQUE. $$\nBy [L1] and [L2], this is a polynomial-time many-one reduction.",
+          "step": "2.3",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is about clause-cluster graphs for arbitrary 3-CNF formulas, not about choosing from an empty ambient set as a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof treats the clause count uniformly; it does not introduce a separate zero-clause argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter requires a separate branch; the clique argument is uniform in the number of clauses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Apart from the uniform formula-to-graph construction, the proof has no collapsed exceptional case distinct from the main reduction argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This reduction has no path or interval endpoints; its local boundary is compatibility of literal choices rather than an endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses one satisfied literal from each clause, and step 2.2 chooses one clique vertex from each clause to read back a satisfying assignment."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that a satisfying assignment yields a clique of size m."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 proves that a clique of size m yields a satisfying assignment."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on the two witness directions for the gadget reduction. The current clause-literal graph construction is total and polynomial, a satisfying assignment yields one compatible literal from each clause and hence an m-clique, and an m-clique picks exactly one noncomplementary literal per clause, which reads back to a satisfying assignment."
+      }
+    },
+    "cor-clique-is-np-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-three-sat-reduces-to-clique",
+          "source_section": "Statement",
+          "quote": "There is a polynomial-time many-one reduction from $3$-SAT to CLIQUE.\nExplicitly, for every $3$-CNF formula\n$$ \\varphi=C_1\\land\\cdots\\land C_m $$\none can construct in polynomial time a graph $G_\\varphi$ such that\n$$ \\varphi\\in 3\\text{-}SAT \\iff (G_\\varphi,m)\\in CLIQUE. $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-three-sat-is-np-complete",
+          "source_section": "Statement",
+          "quote": "The language $3$-SAT of satisfiable CNF formulas with exactly three literals\nper clause is NP-complete.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-np-hard-and-np-complete",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\{0,1\\}^*$ be a language.\n\n- $C$ is **NP-hard** when for every language $L\\in NP$ one has $L\\le_p C$.\n- $C$ is **NP-complete** when $C$ is NP-hard and $C\\in NP$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph.\n\n- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of\n  $K$ are adjacent.\n- A subset $I\\subseteq V$ is an **independent set** when no two distinct\n  vertices of $I$ are adjacent.\n- A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at\n  least one endpoint in $C$.\n\nThe associated decision problems are:\n\n- **CLIQUE**: given $(G,k)$ with $k\\in\\mathbb{N}$, decide whether $G$ has a\n  clique of size at least $k$;\n- **INDEPENDENT SET**: given $(G,k)$, decide whether $G$ has an independent set\n  of size at least $k$;\n- **VERTEX COVER**: given $(G,k)$, decide whether $G$ has a vertex cover of\n  size at most $k$.\n\nBecause the input graph is simple, adjacency means the edge relation from\n[[def-graph-adjacency-incidence-neighbourhood-and-degree]] on the vertex set of\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A certificate for $(G,k)\\in CLIQUE$ is a list of $k$ vertices. One checks in polynomial time that the listed vertices are distinct and that every pair is adjacent, so CLIQUE lies in $NP$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Because [L2] says that $3$-SAT is NP-complete, every language in $NP$ reduces to $3$-SAT. Composing any such reduction with the fixed reduction [L1] shows that every language in $NP$ reduces to CLIQUE. Hence CLIQUE is NP-hard.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 gives CLIQUE $\\in NP$, and step 1.2 gives NP-hardness. Therefore CLIQUE is NP-complete by [L3].",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proof concerns language membership and hardness transfer, not an empty-set witness construction."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No scalar zero case is singled out; NP membership and NP-hardness are proved uniformly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The corollary has no special unit-size branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no exceptional graph family or collapsed parameter treated separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "CLIQUE certification and hardness transfer do not involve endpoint data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the chosen list of k vertices as the certificate to verify membership in NP."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is NP-completeness, not a biconditional with forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is NP-completeness, not a biconditional with forward and reverse directions."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the NP-hardness transfer and certificate check. The current proof gives a direct polynomial-time certificate verifier for k chosen vertices and then transfers NP-hardness by composing every NP-to-3SAT reduction with the established 3SAT-to-CLIQUE map, which is exactly the right completeness argument."
+      }
+    },
+    "thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-graph-isomorphism-and-complement",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be graphs. A **graph isomorphism** is a bijection\n$\\varphi:V\\to W$ ([[def-injection-surjection-bijection]]) such that, for all\ndistinct $u,v\\in V$,\n\n$$\\{u,v\\}\\in E\\quad\\Longleftrightarrow\\quad\\{\\varphi(u),\\varphi(v)\\}\\in F.$$\n\nGraphs are **isomorphic**, written $G\\cong H$, when such a map exists. An\n**automorphism** of $G$ is an isomorphism from $G$ to itself.\n\nThe **complement** of $G$ is the graph\n\n$$\\overline G:=(V,[V]^2\\setminus E).$$\n\nThus exactly one of $G$ and $\\overline G$ contains any given pair of distinct\nvertices as an edge, and $\\overline{\\overline G}=G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph.\n\n- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of\n  $K$ are adjacent.\n- A subset $I\\subseteq V$ is an **independent set** when no two distinct\n  vertices of $I$ are adjacent.\n- A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at\n  least one endpoint in $C$.\n\nThe associated decision problems are:\n\n- **CLIQUE**: given $(G,k)$ with $k\\in\\mathbb{N}$, decide whether $G$ has a\n  clique of size at least $k$;\n- **INDEPENDENT SET**: given $(G,k)$, decide whether $G$ has an independent set\n  of size at least $k$;\n- **VERTEX COVER**: given $(G,k)$, decide whether $G$ has a vertex cover of\n  size at most $k$.\n\nBecause the input graph is simple, adjacency means the edge relation from\n[[def-graph-adjacency-incidence-neighbourhood-and-degree]] on the vertex set of\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any subset $S\\subseteq V$, [L1] implies that the vertices of $S$ are pairwise adjacent in $G$ if and only if they are pairwise nonadjacent in $\\overline G$. Thus $S$ is a clique in $G$ if and only if it is an independent set in $\\overline G$. Therefore $(G,k)\\mapsto(\\overline G,k)$ is a polynomial-time many-one reduction from CLIQUE to INDEPENDENT SET, and the same map is also a reduction in the reverse direction.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any subset $I\\subseteq V$, the complement $V\\setminus I$ is a vertex cover if and only if $I$ is an independent set. Indeed, if $I$ is independent, every edge has at least one endpoint outside $I$, so it is covered by $V\\setminus I$. Conversely, if $V\\setminus I$ is a vertex cover and two vertices of $I$ were adjacent, that edge would have no endpoint in $V\\setminus I$, a contradiction. Hence, whenever $k\\le |V|$, the graph $G$ has an independent set of size at least $k$ if and only if it has a vertex cover of size at most $|V|-k$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use step 1.2 to define total reductions. For INDEPENDENT SET to VERTEX COVER, map $(G,k)$ to $(G,|V|-k)$ when $k\\le |V|$, and map it to the fixed no-instance $(K_2,0)$ when $k>|V|$. For VERTEX COVER to INDEPENDENT SET, map $(G,k)$ to $(G,|V|-k)$ when $k\\le |V|$, and map it to the fixed yes-instance $(K_1,1)$ when $k>|V|$. The exceptional branches are correct because no graph has an independent set larger than its vertex set, while every graph has a vertex cover of size at most $|V|$. Both maps are clearly polynomial-time.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "F1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 gives reductions between CLIQUE and INDEPENDENT SET, and step 2.1 gives reductions between INDEPENDENT SET and VERTEX COVER. Composing these reductions yields reductions in every direction among the three problems.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proof works for arbitrary finite graphs and does not isolate the empty vertex set as a separate case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The natural number parameter k is handled uniformly except for the explicit k>|V| branch recorded under degenerate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-vertex or k=1 branch is required by the complement and set-complement arguments."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly treats the exceptional branch k>|V| by mapping to fixed yes- or no-instances so the reductions stay total."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is about complementing graphs and vertex subsets, not about endpoints of paths or intervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 and step 2.1 pivot on the chosen subset I and its complement V\\setminus I."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the clique-to-independent-set equivalence, and step 1.2 gives the independent-set-to-vertex-cover forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the reverse complement implication, and step 1.2 proves that a vertex cover complement is an independent set."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on the biconditionals and the exceptional k>|V| branches. The current proof uses the complement graph to swap cliques with independent sets, uses V\\I for the independent-set/vertex-cover equivalence, and adds explicit fixed yes/no instances so both reductions remain total when k exceeds the vertex count."
+      }
+    },
+    "cor-independent-set-and-vertex-cover-are-np-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-clique-is-np-complete",
+          "source_section": "Statement",
+          "quote": "CLIQUE is NP-complete.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible",
+          "source_section": "Statement",
+          "quote": "Each of the languages CLIQUE, INDEPENDENT SET, and VERTEX COVER\npolynomial-time many-one reduces to each of the other two.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-np-hard-and-np-complete",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\{0,1\\}^*$ be a language.\n\n- $C$ is **NP-hard** when for every language $L\\in NP$ one has $L\\le_p C$.\n- $C$ is **NP-complete** when $C$ is NP-hard and $C\\in NP$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph.\n\n- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of\n  $K$ are adjacent.\n- A subset $I\\subseteq V$ is an **independent set** when no two distinct\n  vertices of $I$ are adjacent.\n- A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at\n  least one endpoint in $C$.\n\nThe associated decision problems are:\n\n- **CLIQUE**: given $(G,k)$ with $k\\in\\mathbb{N}$, decide whether $G$ has a\n  clique of size at least $k$;\n- **INDEPENDENT SET**: given $(G,k)$, decide whether $G$ has an independent set\n  of size at least $k$;\n- **VERTEX COVER**: given $(G,k)$, decide whether $G$ has a vertex cover of\n  size at most $k$.\n\nBecause the input graph is simple, adjacency means the edge relation from\n[[def-graph-adjacency-incidence-neighbourhood-and-degree]] on the vertex set of\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A certificate for INDEPENDENT SET is a list of $k$ vertices, and one checks in polynomial time that no pair among them is adjacent. A certificate for VERTEX COVER is a list of at most $k$ vertices, and one checks in polynomial time that every edge has an endpoint in that list. Hence both problems lie in $NP$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since [L1] makes CLIQUE NP-complete, every language in $NP$ reduces to CLIQUE. Applying the reductions from [L2] from CLIQUE to INDEPENDENT SET and from CLIQUE to VERTEX COVER shows that every language in $NP$ reduces to each of those target problems. Therefore both targets are NP-hard.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Combine step 1.1 with step 1.2 and [L3]. Both INDEPENDENT SET and VERTEX COVER are NP-complete.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary concerns complexity classification, not an empty witness family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No special zero-value case is separated from the generic certificate and hardness arguments."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no distinguished one-element boundary case in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof transfers hardness and NP membership uniformly, without an exceptional family."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Neither certificate checking nor hardness transfer uses endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses explicit chosen vertex lists as certificates for both target problems."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is NP-completeness of two languages, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is NP-completeness of two languages, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on whether NP-hardness and NP-membership are shown separately for both targets. The current proof gives direct verifiers for independent sets and vertex covers and transfers NP-hardness from CLIQUE through the established interreductions, so neither completeness claim hides an unchecked branch."
+      }
+    },
+    "thm-three-sat-reduces-to-directed-hamiltonian-cycle": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-reduction-gadget-and-interface-invariant",
+          "source_section": "Definition",
+          "quote": "Let source and target languages $A,B$ be equipped with explicit witness\nrelations $R_A(x,w)$ and $R_B(y,z)$, so that membership means existence of a\ncorresponding witness. Fix a proposed polynomial-time map $f$ between their\nambient string spaces in the sense of\n[[def-polynomial-time-many-one-reduction]].\n\nA **reduction gadget** is a bounded local piece of $f(x)$ together\nwith a specified way that candidate witnesses may enter, exit, or label its\nboundary. An **interface invariant** is the condition imposed on those\nboundary data so that local choices from neighbouring gadgets are compatible\nwith one global target witness $z$ satisfying $R_B(f(x),z)$.\n\nOn this page, a gadget proof is regarded as complete only after all of the\nfollowing have been established.\n\n1. A total algorithm constructs the target instance from the source instance in\n   polynomial time.\n2. The target size is polynomially bounded in the source size.\n3. Every source witness $w$ with $R_A(x,w)$ induces target choices satisfying each gadget's local\n   constraints and the interface invariants.\n4. Every global target witness $z$ with $R_B(f(x),z)$ projects back to a source witness because the\n   interface invariants rule out inconsistent local choices.\n\nThe gadget language is therefore bookkeeping for the two directions of the iff\ncondition in a many-one reduction, not a substitute for that condition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-directed-hamiltonian-path-and-cycle-problems",
+          "source_section": "Definition",
+          "quote": "Let $D=(V,A)$ be a finite directed graph in the sense of\n[[def-multigraph-loop-and-digraph]]. A **directed Hamiltonian path** in $D$ is\nan ordering\n$$ v_1,\\ldots,v_n $$\nof all vertices of $V$ such that $(v_i,v_{i+1})\\in A$ for each $1\\le i<n$. A\n**directed Hamiltonian cycle** in $D$ is a cyclic ordering\n$$ v_1,\\ldots,v_n,v_1 $$\nof all vertices of $V$ such that $(v_i,v_{i+1})\\in A$ for $1\\le i<n$ and\n$(v_n,v_1)\\in A$.\n\nLet $G$ be a finite simple graph. An **undirected Hamiltonian path** in $G$ is\na path in the sense of [[def-graph-walk-trail-path-and-cycle]] that visits\nevery vertex exactly once, and an **undirected Hamiltonian cycle** in $G$ is a\ncycle there that visits every vertex exactly once.\n\nThe four decision problems are:\n\n- **directed Hamiltonian path**: given $D$, decide whether $D$ has a directed\n  Hamiltonian path;\n- **directed Hamiltonian cycle**: given $D$, decide whether $D$ has a directed\n  Hamiltonian cycle;\n- **undirected Hamiltonian path**: given $G$, decide whether $G$ has an\n  undirected Hamiltonian path;\n- **undirected Hamiltonian cycle**: given $G$, decide whether $G$ has an\n  undirected Hamiltonian cycle.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $m=0$, then $\\varphi$ is the empty conjunction and is satisfiable. Let $D_\\varphi$ be the one-vertex digraph and name its unique vertex both $s_\\varphi$ and $t_\\varphi$; it has the required one-vertex Hamiltonian path. Adjoining $z_\\varphi$ and the two opposite arcs between $z_\\varphi$ and $s_\\varphi=t_\\varphi$ gives a directed Hamiltonian cycle. This is the required constant-size output in the empty case. Assume henceforth that $m\\ge1$, so at least one variable occurs. Enumerate the variables of $\\varphi$ as $x_1,\\ldots,x_n$ and the clauses as $C_1,\\ldots,C_m$. For each variable $x_i$, create vertices $$ p_i,\\ q_i,\\ s_{i,0},\\ldots,s_{i,m},\\ \\ell_{i,1},r_{i,1},\\ldots,\\ell_{i,m},r_{i,m}. $$ The **crossbar** of the gadget $X_i$ is the bidirected path $$ s_{i,0}\\leftrightarrow \\ell_{i,1}\\leftrightarrow r_{i,1}\\leftrightarrow s_{i,1} \\leftrightarrow\\cdots\\leftrightarrow s_{i,m-1}\\leftrightarrow \\ell_{i,m} \\leftrightarrow r_{i,m}\\leftrightarrow s_{i,m}, $$ and we also add the four boundary arcs $$ p_i\\to s_{i,0},\\quad p_i\\to s_{i,m},\\quad s_{i,0}\\to q_i,\\quad s_{i,m}\\to q_i. $$ Thus every Hamiltonian path from $p_i$ to $q_i$ inside $X_i$ must enter the crossbar at one end, traverse every crossbar vertex exactly once, and exit from the opposite end; equivalently it is either the left-to-right route through all clause pairs or the right-to-left route through all clause pairs. Identify $q_i$ with $p_{i+1}$ for $1\\le i<n$, and write $s_\\varphi:=p_1$, $t_\\varphi:=q_n$. For each clause $C_j$, add one clause vertex $c_j$. If the literal $x_i$ occurs in $C_j$, add the two arcs $$ \\ell_{i,j}\\to c_j,\\qquad c_j\\to r_{i,j}; $$ if the literal $\\neg x_i$ occurs in $C_j$, add $$ r_{i,j}\\to c_j,\\qquad c_j\\to \\ell_{i,j}. $$ If both literals occur, add both pairs of arcs. This completely specifies the digraph $D_\\varphi$, which has $O(nm)$ vertices and arcs and is computable in polynomial time.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "F1",
+            "given",
+            "cases",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose that $\\varphi$ is satisfiable. In each gadget $X_i$, choose the left-to-right crossbar route if $x_i=true$ and the right-to-left route if $x_i=false$. Concatenating these routes through the identified vertices $q_i=p_{i+1}$ already yields a directed path from $s_\\varphi$ to $t_\\varphi$ visiting every gadget vertex exactly once. Now fix a clause $C_j$, and choose one literal of $C_j$ that is true under the satisfying assignment. If it is a positive occurrence of $x_i$, replace the local edge $\\ell_{i,j}\\to r_{i,j}$ on the left-to-right route by the detour $\\ell_{i,j}\\to c_j\\to r_{i,j}$. If it is a negative occurrence of $x_i$, replace the local edge $r_{i,j}\\to \\ell_{i,j}$ on the right-to-left route by $r_{i,j}\\to c_j\\to \\ell_{i,j}$. Doing this once for each clause visits every clause vertex exactly once and does not revisit any gadget vertex, because each detour leaves and re-enters the same clause pair. Hence $D_\\varphi$ has a directed Hamiltonian path from $s_\\varphi$ to $t_\\varphi$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose conversely that $D_\\varphi$ has a directed Hamiltonian path from $s_\\varphi$ to $t_\\varphi$. We first verify the interface invariant omitted by a merely pictorial gadget argument. If the path enters a clause vertex $c_j$ from an occurrence pair in $X_i$ and leaves toward a different occurrence pair, then the unused vertex of the first pair can subsequently be entered only from its other crossbar neighbour; after that entry, every possible exit goes to that already visited neighbour, the visited mate, or the already visited clause vertex. The path is therefore stuck before reaching $t_\\varphi$. The same four-case check applies with the crossbar direction reversed and with positive and negative occurrence arcs exchanged. Hence every visit to $c_j$ leaves through the mate in the same occurrence pair: a clause visit only replaces one crossbar edge by its two-edge detour. It follows that the path cannot jump between variable gadgets through a clause vertex. The remaining connections force it through $X_1,\\ldots,X_n$ in order, and within each $X_i$ it traverses the entire crossbar monotonically from one end to the other. Set $x_i=true$ exactly for a left-to-right traversal. Every clause vertex is visited by a same-pair detour whose orientation exists only for a literal made true by this assignment. Thus every clause has a true literal and $\\varphi$ is satisfiable.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "F1",
+            "step 1.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Now add one fresh vertex $z_\\varphi$ and the two arcs $z_\\varphi\\to s_\\varphi$ and $t_\\varphi\\to z_\\varphi$. If $D_\\varphi$ has a Hamiltonian path from $s_\\varphi$ to $t_\\varphi$, then adjoining $z_\\varphi$ closes that path to a directed Hamiltonian cycle in $D'_\\varphi$. Conversely, any directed Hamiltonian cycle in $D'_\\varphi$ must pass through the fresh vertex $z_\\varphi$, whose only outgoing arc is to $s_\\varphi$ and whose only incoming arc is from $t_\\varphi$. Deleting $z_\\varphi$ from the cycle therefore yields a directed Hamiltonian path from $s_\\varphi$ to $t_\\varphi$ in $D_\\varphi$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 1.1 handles the empty formula and gives a polynomial-time construction for every well-formed $3$-CNF formula. For $m\\ge1$, steps 2.1 and 2.2 prove the iff for directed Hamiltonian path, and step 3.1 converts that iff to directed Hamiltonian cycle. Extend the map to every input string by checking $3$-CNF syntax in polynomial time and sending any malformed string to the fixed one-vertex loopless digraph, which has no directed Hamiltonian cycle. By [L1] and [L2], the resulting total function is a polynomial-time many-one reduction from $3$-SAT to directed Hamiltonian cycle.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "cases-exhaustive"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+      "status": "checked",
+      "evidence": "Step 1.1 maps the empty conjunction to a one-vertex distinguished path instance and its two-vertex directed-cycle closure."
+        },
+        {
+          "case": "zero",
+      "status": "checked",
+      "evidence": "Step 1.1 handles zero clauses before referring to any variable gadget, and step 4.1 separately totalizes the map on malformed strings."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special one-variable or one-clause branch is singled out; the same gadget description applies uniformly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof does not introduce an additional exceptional source instance beyond the standard gadget and closing-vertex construction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 names the distinguished start and end vertices s_phi and t_phi, and step 3.1 uses the fresh vertex z_phi to close exactly that endpoint pair into a cycle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses one satisfied literal per clause to decide which clause detour to take through the Hamiltonian gadget."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that a satisfying assignment yields a directed Hamiltonian path, and step 3.1 closes it to a directed Hamiltonian cycle."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 reads a satisfying assignment from any Hamiltonian path, and step 3.1 removes the fresh vertex to recover that path from a cycle."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+      "reviewer": "final-adjudicator",
+      "notes": "Critical-risk reread focused on totality, the zero-clause case, and cross-gadget clause jumps. The proof explicitly handles the empty conjunction, totalizes the map on malformed strings, names every crossbar and detour arc, and proves that a cross-pair exit strands the unused mate, forcing monotone variable traversals and a satisfying assignment."
+      }
+    },
+    "thm-directed-reduces-to-undirected-hamiltonian-cycle": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-directed-hamiltonian-path-and-cycle-problems",
+          "source_section": "Definition",
+          "quote": "Let $D=(V,A)$ be a finite directed graph in the sense of\n[[def-multigraph-loop-and-digraph]]. A **directed Hamiltonian path** in $D$ is\nan ordering\n$$ v_1,\\ldots,v_n $$\nof all vertices of $V$ such that $(v_i,v_{i+1})\\in A$ for each $1\\le i<n$. A\n**directed Hamiltonian cycle** in $D$ is a cyclic ordering\n$$ v_1,\\ldots,v_n,v_1 $$\nof all vertices of $V$ such that $(v_i,v_{i+1})\\in A$ for $1\\le i<n$ and\n$(v_n,v_1)\\in A$.\n\nLet $G$ be a finite simple graph. An **undirected Hamiltonian path** in $G$ is\na path in the sense of [[def-graph-walk-trail-path-and-cycle]] that visits\nevery vertex exactly once, and an **undirected Hamiltonian cycle** in $G$ is a\ncycle there that visits every vertex exactly once.\n\nThe four decision problems are:\n\n- **directed Hamiltonian path**: given $D$, decide whether $D$ has a directed\n  Hamiltonian path;\n- **directed Hamiltonian cycle**: given $D$, decide whether $D$ has a directed\n  Hamiltonian cycle;\n- **undirected Hamiltonian path**: given $G$, decide whether $G$ has an\n  undirected Hamiltonian path;\n- **undirected Hamiltonian cycle**: given $G$, decide whether $G$ has an\n  undirected Hamiltonian cycle.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multigraph-loop-and-digraph",
+          "source_section": "Definition",
+          "quote": "A **finite undirected multigraph** consists of a finite vertex set $V$, a finite\nedge set $M$, and an endpoint map assigning to each $e\\in M$ either a singleton\n$\\{v\\}$ or a two-element subset $\\{u,v\\}$ of $V$. An edge assigned $\\{v\\}$ is a\n**loop** at $v$. Distinct members of $M$ assigned the same endpoint set are\n**parallel edges**.\n\nA **finite directed graph**, or **digraph**, consists of a finite vertex set $V$\nand a set $A\\subseteq V\\times V$ of **arcs**. An arc $(u,v)$ is directed from\n$u$ to $v$; an arc $(v,v)$ is a directed loop.\n\nThese objects are variants, not instances of the default graph convention in\n[[def-finite-simple-graph]] and [[rem-finite-simple-graph-convention]]. A theorem\nstated merely for a graph therefore neither permits loops or parallel edges nor\nsupplies directions to its edges.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $|V|\\le 1$, decide directly whether $D$ has a directed Hamiltonian cycle and map it to a fixed yes-instance or no-instance of undirected Hamiltonian cycle accordingly. Thus it is enough to treat the case $|V|\\ge 2$. Delete every loop, since a Hamiltonian cycle through at least two distinct vertices cannot use a loop. For each vertex $v\\in V$, create three undirected vertices $v_1,v_2,v_3$ and the two edges $v_1v_2$ and $v_2v_3$. For each arc $(u,v)\\in A$ with $u\\ne v$, add the undirected edge $u_3v_1$. Call the resulting graph $G_D$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In any Hamiltonian cycle of $G_D$, the middle vertex $v_2$ has degree two, so the cycle must traverse the gadget for $v$ as the consecutive path $v_1,v_2,v_3$ or as the consecutive path $v_3,v_2,v_1$. Moreover, every external gadget edge joins a $3$-vertex to a $1$-vertex. Hence, after orienting the cycle, once one gadget is traversed in one of those two directions, every subsequent gadget is forced to be traversed in the same direction around the cycle.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $D$ has a directed Hamiltonian cycle $v^{(1)}\\to v^{(2)}\\to\\cdots\\to v^{(n)}\\to v^{(1)}$, then $v^{(1)}_1,v^{(1)}_2,v^{(1)}_3,v^{(2)}_1,v^{(2)}_2,v^{(2)}_3,\\ldots,v^{(n)}_1,v^{(n)}_2,v^{(n)}_3,v^{(1)}_1$ is a Hamiltonian cycle in $G_D$, because each directed arc $v^{(i)}\\to v^{(i+1)}$ supplies the edge $v^{(i)}_3v^{(i+1)}_1$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, let $C$ be a Hamiltonian cycle in $G_D$. By step 2.1 and, if necessary, reversing the orientation of $C$, we may assume that every gadget is traversed as $v_1,v_2,v_3$. Whenever $C$ moves from the gadget of $u$ to the gadget of $v$, it uses an edge $u_3v_1$, and such an edge exists only when $(u,v)\\in A$. Replacing each gadget path $v_1,v_2,v_3$ by the single vertex $v$ therefore projects $C$ to a directed Hamiltonian cycle of $D$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The map $D\\mapsto G_D$ uses $3|V|$ vertices and at most $|A|+2|V|$ edges, so it is polynomial-time. Steps 2.2 and 3.1 prove $D$ has a directed Hamiltonian cycle if and only if $G_D$ has an undirected Hamiltonian cycle. By [L1], this is a polynomial-time many-one reduction.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The reduction acts on finite digraphs and does not use an empty ambient set as a separate proof obligation."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof has no numeric zero branch beyond the explicit tiny-graph exceptional case recorded under degenerate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The size-one source case is handled together with the general tiny-graph exceptional case rather than as a separate unit argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the exceptional case |V|<=1 by mapping directly to fixed yes- or no-instances before applying the tripling construction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 tracks the forced local endpoints v_1 and v_3 of each three-vertex gadget, which is the boundary condition that makes the projection back to arcs work."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not choose a witness from a nonempty family; it transforms an already given Hamiltonian cycle witness in steps 2.2 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 sends a directed Hamiltonian cycle of D to an undirected Hamiltonian cycle of G_D."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 projects any undirected Hamiltonian cycle of G_D back to a directed Hamiltonian cycle of D."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on orientation consistency through the tripled gadgets. The current proof makes the middle vertex v_2 degree two in every gadget, so each triple is traversed consecutively, and because all external edges go from a 3-vertex to a 1-vertex the Hamiltonian cycle projects back to one coherent directed cycle in D."
+      }
+    },
+    "cor-hamiltonian-path-and-cycle-are-np-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-three-sat-reduces-to-directed-hamiltonian-cycle",
+          "source_section": "Statement",
+          "quote": "There is a polynomial-time many-one reduction from $3$-SAT to directed\nHamiltonian cycle.\n\nMore explicitly, for every $3$-CNF formula $\\varphi$ one can construct in\npolynomial time a directed graph $D_\\varphi$ with distinguished vertices\n$s_\\varphi,t_\\varphi$ such that\n\n1. $\\varphi$ is satisfiable if and only if $D_\\varphi$ has a directed\n   Hamiltonian path from $s_\\varphi$ to $t_\\varphi$; and\n2. after adjoining one fresh vertex $z_\\varphi$ and the two arcs\n   $z_\\varphi\\to s_\\varphi$ and $t_\\varphi\\to z_\\varphi$, the resulting digraph\n   $D'_\\varphi$ has a directed Hamiltonian cycle if and only if $\\varphi$ is\n   satisfiable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-directed-reduces-to-undirected-hamiltonian-cycle",
+          "source_section": "Statement",
+          "quote": "Directed Hamiltonian cycle polynomial-time many-one reduces to undirected\nHamiltonian cycle.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-three-sat-is-np-complete",
+          "source_section": "Statement",
+          "quote": "The language $3$-SAT of satisfiable CNF formulas with exactly three literals\nper clause is NP-complete.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-np-hard-and-np-complete",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\{0,1\\}^*$ be a language.\n\n- $C$ is **NP-hard** when for every language $L\\in NP$ one has $L\\le_p C$.\n- $C$ is **NP-complete** when $C$ is NP-hard and $C\\in NP$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-directed-hamiltonian-path-and-cycle-problems",
+          "source_section": "Definition",
+          "quote": "Let $D=(V,A)$ be a finite directed graph in the sense of\n[[def-multigraph-loop-and-digraph]]. A **directed Hamiltonian path** in $D$ is\nan ordering\n$$ v_1,\\ldots,v_n $$\nof all vertices of $V$ such that $(v_i,v_{i+1})\\in A$ for each $1\\le i<n$. A\n**directed Hamiltonian cycle** in $D$ is a cyclic ordering\n$$ v_1,\\ldots,v_n,v_1 $$\nof all vertices of $V$ such that $(v_i,v_{i+1})\\in A$ for $1\\le i<n$ and\n$(v_n,v_1)\\in A$.\n\nLet $G$ be a finite simple graph. An **undirected Hamiltonian path** in $G$ is\na path in the sense of [[def-graph-walk-trail-path-and-cycle]] that visits\nevery vertex exactly once, and an **undirected Hamiltonian cycle** in $G$ is a\ncycle there that visits every vertex exactly once.\n\nThe four decision problems are:\n\n- **directed Hamiltonian path**: given $D$, decide whether $D$ has a directed\n  Hamiltonian path;\n- **directed Hamiltonian cycle**: given $D$, decide whether $D$ has a directed\n  Hamiltonian cycle;\n- **undirected Hamiltonian path**: given $G$, decide whether $G$ has an\n  undirected Hamiltonian path;\n- **undirected Hamiltonian cycle**: given $G$, decide whether $G$ has an\n  undirected Hamiltonian cycle.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each of the four problems lies in $NP$: a certificate is an ordering of all vertices, and one checks in polynomial time that consecutive vertices are connected by the required edges or arcs, with one additional last-to-first check in the cycle cases.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L1], every $3$-CNF formula $\\varphi$ gives a digraph $D_\\varphi$ with distinguished vertices $s_\\varphi,t_\\varphi$ such that $\\varphi$ is satisfiable exactly when $D_\\varphi$ has a directed Hamiltonian path from $s_\\varphi$ to $t_\\varphi$, and also a digraph $D'_\\varphi$ with a directed Hamiltonian cycle exactly when $\\varphi$ is satisfiable. Since [L3] makes $3$-SAT NP-complete, directed Hamiltonian cycle is NP-hard, and the endpoint-labelled problem $$ \\mathrm{DHAMPATH}_*:=\\{(D,s,t): D\\text{ has a directed Hamiltonian path from }s\\text{ to }t\\} $$ is NP-hard as well.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Reduce $\\mathrm{DHAMPATH}_*$ to the ordinary directed Hamiltonian path problem. Given $(D,s,t)$, add fresh vertices $s_-$ and $t_+$ together with the two arcs $s_-\\to s$ and $t\\to t_+$. Any Hamiltonian path in the new digraph must start at $s_-$ and end at $t_+$, because $s_-$ has indegree $0$ and $t_+$ has outdegree $0$. Deleting those two new vertices therefore recovers a directed Hamiltonian path from $s$ to $t$ in $D$, and conversely any such path extends by adjoining $s_-$ at the front and $t_+$ at the end. Thus ordinary directed Hamiltonian path is NP-hard.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Next define the endpoint-labelled undirected problem $$ \\mathrm{UHAMPATH}_*:=\\{(G,s,t): G\\text{ has an undirected Hamiltonian path from }s\\text{ to }t\\}. $$ From $(D,s,t)\\in\\mathrm{DHAMPATH}_*$ build an undirected graph $G'$ by replacing every vertex $v\\notin\\{s,t\\}$ by a path $v_1-v_2-v_3$, replacing $s$ by a single vertex $s_3$, replacing $t$ by a single vertex $t_1$, and adding an undirected edge $u_3-v_1$ for every arc $u\\to v$ of $D$ that is not incoming to $s$ and not outgoing from $t$, with the conventions $u_3=s_3$ if $u=s$ and $v_1=t_1$ if $v=t$. A directed Hamiltonian path $$ s=v^{(1)}\\to v^{(2)}\\to\\cdots\\to v^{(r)}=t $$ in $D$ then becomes the undirected Hamiltonian path $$ s_3,v^{(2)}_1,v^{(2)}_2,v^{(2)}_3,\\ldots,v^{(r-1)}_1,v^{(r-1)}_2,v^{(r-1)}_3,t_1 $$ in $G'$. Conversely, an undirected Hamiltonian path from $s_3$ to $t_1$ must traverse every triple $v_1-v_2-v_3$ consecutively because the middle vertex $v_2$ has degree $2$, and all external edges join a $3$-vertex to a $1$-vertex. Contracting each triple therefore recovers a directed Hamiltonian path from $s$ to $t$ in $D$. Hence $\\mathrm{DHAMPATH}_*\\le_p \\mathrm{UHAMPATH}_*$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "For undirected Hamiltonian cycle, NP-hardness is exactly [L2] composed with the NP-hardness of directed Hamiltonian cycle from step 1.2.",
+          "step": "2.3",
+          "inputs": [
+            "L2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Reduce $\\mathrm{UHAMPATH}_*$ to the ordinary undirected Hamiltonian path problem. Given $(G,s,t)$, attach two fresh leaves $s_-$ and $t_+$ by the edges $s_-s$ and $tt_+$. Any Hamiltonian path in the enlarged graph must have the two leaves as its endpoints, so deleting them recovers a Hamiltonian path from $s$ to $t$ in $G$; conversely any $s$-to-$t$ Hamiltonian path in $G$ extends by the two leaves. Therefore ordinary undirected Hamiltonian path is NP-hard.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 1.1 gives membership in $NP$, while steps 1.2, 2.1, 2.2, 2.3, and 3.1 give NP-hardness for directed Hamiltonian path, directed Hamiltonian cycle, undirected Hamiltonian path, and undirected Hamiltonian cycle. Hence all four problems are NP-complete by [L4].",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary classifies four languages; it does not turn on an empty witness set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No scalar zero boundary is singled out in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The argument does not branch on a one-vertex instance separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof transfers hardness and NP membership without a distinct exceptional family."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 through 3.1 force the prescribed source/target vertices in the directed and undirected path reductions and then remove those endpoint labels without changing Hamiltonicity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a proposed full vertex ordering as the certificate for each of the four problems."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is NP-completeness of four decision problems, not a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is NP-completeness of four decision problems, not a biconditional claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the endpoint discipline that the refuter caught. The repaired proof now separates endpoint-labelled DHAMPATH_* and UHAMPATH_*, forces directed endpoints by adding a fresh source and sink, transports path hardness through the tripling construction, and only then removes the undirected endpoint labels with two leaves."
+      }
+    },
+    "thm-three-sat-reduces-to-subset-sum": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-three-sat-reduces-to-clique",
+          "source_section": "Statement",
+          "quote": "There is a polynomial-time many-one reduction from $3$-SAT to CLIQUE.\nExplicitly, for every $3$-CNF formula\n$$ \\varphi=C_1\\land\\cdots\\land C_m $$\none can construct in polynomial time a graph $G_\\varphi$ such that\n$$ \\varphi\\in 3\\text{-}SAT \\iff (G_\\varphi,m)\\in CLIQUE. $$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible",
+          "source_section": "Statement",
+          "quote": "Each of the languages CLIQUE, INDEPENDENT SET, and VERTEX COVER\npolynomial-time many-one reduces to each of the other two.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph.\n\n- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of\n  $K$ are adjacent.\n- A subset $I\\subseteq V$ is an **independent set** when no two distinct\n  vertices of $I$ are adjacent.\n- A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at\n  least one endpoint in $C$.\n\nThe associated decision problems are:\n\n- **CLIQUE**: given $(G,k)$ with $k\\in\\mathbb{N}$, decide whether $G$ has a\n  clique of size at least $k$;\n- **INDEPENDENT SET**: given $(G,k)$, decide whether $G$ has an independent set\n  of size at least $k$;\n- **VERTEX COVER**: given $(G,k)$, decide whether $G$ has a vertex cover of\n  size at most $k$.\n\nBecause the input graph is simple, adjacency means the edge relation from\n[[def-graph-adjacency-incidence-neighbourhood-and-degree]] on the vertex set of\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-subset-sum-and-partition",
+          "source_section": "Definition",
+          "quote": "An instance of **SUBSET SUM** is a finite list of positive integers\n$$ a_1,\\ldots,a_n $$\nwritten in binary together with a target integer $d>0$, also written in binary.\nIt is a yes-instance when some subset of the listed integers sums exactly to\n$d$.\n\nAn instance of **PARTITION** is a finite list of positive integers\n$$ q_1,\\ldots,q_r $$\nwritten in binary. It is a yes-instance when the list can be divided into two\nsubcollections having the same total sum.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L2], it is enough to reduce INDEPENDENT SET to SUBSET SUM. If $k=0$, map $(G,k)$ to the fixed yes-instance consisting of the list $(1)$ with target $1$, because every graph has an independent set of size $0$. If $k>n$, map $(G,k)$ to the fixed no-instance consisting of the list $(1)$ with target $2$, because no graph on $n$ vertices has an independent set of size greater than $n$. So assume from now on that $1\\le k\\le n$. Set the base to $B:=n+2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "F1",
+            "given",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each vertex $v_i$, form a base-$B$ integer $a_i$ with $m+1$ digits: the leading digit is $1$, and the digit in edge-column $j$ is $1$ exactly when $e_j$ is incident to $v_i$. For each edge $e_j$, form one slack integer $b_j$ whose only nonzero digit is a $1$ in edge-column $j$. Let the target integer $T$ have leading digit $k$ and digit $1$ in every edge-column. Since the leading-column sum is at most $n<B$ and every edge-column sum is at most $3<B$, no carries can occur in any valid sum.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $I\\subseteq V(G)$ is an independent set of size $k$, choose the vertex numbers $a_i$ with $v_i\\in I$. For each edge $e_j$ that has no endpoint in $I$, also choose the slack number $b_j$. Then the leading digit sums to $k$, and each edge-column sums to $1$: an edge with one endpoint in $I$ receives its $1$ from the corresponding vertex number, while an edge with no endpoint in $I$ receives its $1$ from its slack number. Hence the chosen integers sum to $T$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Conversely, suppose that some subcollection of the constructed integers sums to $T$. Because the slack numbers have leading digit $0$, exactly $k$ vertex numbers $a_i$ must be chosen. Consider any edge $e_j=\\{u,v\\}$. The target has digit $1$ in column $j$, and there are no carries by step 2.1. Hence both endpoint numbers for $u$ and $v$ cannot both be chosen, because that would contribute at least $2$ in column $j$. Therefore the chosen $k$ vertices are pairwise nonadjacent, so they form an independent set.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The map in step 2.1 uses $n+m$ integers with $m+1$ base-$B$ digits, so its binary output size and construction time are polynomial in the size of $(G,k)$. Steps 3.1 and 3.2 prove a polynomial-time many-one reduction from INDEPENDENT SET to SUBSET SUM. Composing that reduction with [L1] and [L2] yields a polynomial-time many-one reduction from $3$-SAT to SUBSET SUM.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The reduction is written for graph instances and target digit encodings; no empty ambient set is isolated as a separate branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof does not require a separate k=0 argument; the digit-column construction handles the parameter uniformly except for the k>n branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special size-one graph or single-column case is singled out."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the exceptional branch k>n by mapping to a fixed no-instance before building the digit encoding."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the leading size column and the individual edge columns as the boundary coordinates that the subset-sum witness must hit exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses the vertex numbers corresponding to an independent set and, where needed, the slack numbers for uncovered edge columns."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that an independent set yields a subset summing to the target."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.2 proves that any subset summing to the target encodes an independent set."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the totality boundary at k=0 and the no-carry digit encoding. The repaired reduction now handles k=0 by a fixed yes-instance, handles k>n by a fixed no-instance, and for 1<=k<=n the leading digit and edge columns still force exactly k pairwise nonadjacent chosen vertices."
+      }
+    },
+    "thm-subset-sum-reduces-to-partition": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-subset-sum-and-partition",
+          "source_section": "Definition",
+          "quote": "An instance of **SUBSET SUM** is a finite list of positive integers\n$$ a_1,\\ldots,a_n $$\nwritten in binary together with a target integer $d>0$, also written in binary.\nIt is a yes-instance when some subset of the listed integers sums exactly to\n$d$.\n\nAn instance of **PARTITION** is a finite list of positive integers\n$$ q_1,\\ldots,q_r $$\nwritten in binary. It is a yes-instance when the list can be divided into two\nsubcollections having the same total sum.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $k>A$, map the instance to the one-element list $(1)$ for PARTITION. This is a correct no-instance because no subcollection of $a_1,\\ldots,a_n$ can exceed the total $A$, and the list $(1)$ cannot be partitioned into two equal sums. Thus it remains to treat the case $k\\le A$. Define $b:=2A-k$ and $c:=A+k$, and output the PARTITION instance with list $(a_1,\\ldots,a_n,b,c)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The new total sum is $A+b+c = A+(2A-k)+(A+k)=4A$, so any equal partition must split the numbers into two subcollections each summing to $2A$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the SUBSET SUM instance is positive, choose $I\\subseteq\\{1,\\ldots,n\\}$ with $\\sum_{i\\in I} a_i=k$. Then $\\sum_{i\\in I} a_i + b = k+(2A-k)=2A$. The complementary numbers among $a_1,\\ldots,a_n$ therefore sum to $A-k$, and $(A-k)+c = (A-k)+(A+k)=2A$. So the augmented list is a yes-instance of PARTITION.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Conversely, suppose the augmented list has a partition into two subcollections each summing to $2A$. The numbers $b$ and $c$ cannot lie on the same side because $b+c=3A>2A$, and they cannot both be absent from one side because then that side would use only the original $a_i$ and so would sum at most $A<2A$. Hence exactly one of $b,c$ lies on each side. The side containing $b$ must then contain original numbers summing to $2A-b = 2A-(2A-k)=k$. Those numbers witness a yes-instance of SUBSET SUM.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The construction adds only two binary integers computed from $A$ and $k$, so it is polynomial-time. Steps 3.1 and 3.2 establish the required iff, and [L1] therefore gives a polynomial-time many-one reduction from SUBSET SUM to PARTITION.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns finite lists of positive integers, so there is no empty-family branch in the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All integers are positive by definition; the argument does not involve a zero entry or zero target as a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton-value case needs separate handling beyond the explicit k>A branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly isolates the exceptional branch k>A and maps it to the fixed no-instance (1) for PARTITION."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is arithmetic rather than path-based, so there are no endpoints to control."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses the witnessing subset I from the SUBSET SUM instance, and step 3.2 chooses the side of the partition containing b."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that a subset summing to k yields an equal partition after adjoining b and c."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.2 proves that an equal partition forces a subset of the original numbers summing to k."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the iff and the k>A boundary. The current proof treats k>A by a fixed no-instance, computes the total of the augmented list as 4A, and shows exactly one of b or c must lie on each side of any equal partition, which recovers a subset summing to k in the reverse direction."
+      }
+    },
+    "thm-vertex-cover-reduces-to-set-cover": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph.\n\n- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of\n  $K$ are adjacent.\n- A subset $I\\subseteq V$ is an **independent set** when no two distinct\n  vertices of $I$ are adjacent.\n- A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at\n  least one endpoint in $C$.\n\nThe associated decision problems are:\n\n- **CLIQUE**: given $(G,k)$ with $k\\in\\mathbb{N}$, decide whether $G$ has a\n  clique of size at least $k$;\n- **INDEPENDENT SET**: given $(G,k)$, decide whether $G$ has an independent set\n  of size at least $k$;\n- **VERTEX COVER**: given $(G,k)$, decide whether $G$ has a vertex cover of\n  size at most $k$.\n\nBecause the input graph is simple, adjacency means the edge relation from\n[[def-graph-adjacency-incidence-neighbourhood-and-degree]] on the vertex set of\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-set-cover",
+          "source_section": "Definition",
+          "quote": "An instance of **SET COVER** consists of a finite set\n$$ U=\\{u_1,\\ldots,u_m\\}, $$\na family of subsets\n$$ \\mathcal{S}=\\{S_1,\\ldots,S_n\\}\\subseteq \\mathcal{P}(U), $$\nand a natural number $k$. It is a yes-instance when there exist indices\n$i_1,\\ldots,i_t$ with $t\\le k$ such that\n$$ S_{i_1}\\cup\\cdots\\cup S_{i_t}=U. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let the SET COVER universe be the edge set $U:=E$. For each vertex $v\\in V$, define the subset $S_v:=\\{\\, e\\in E : v\\in e \\,\\}$. Output the SET COVER instance $(U,\\{S_v : v\\in V\\},k)$. This is computable in polynomial time by scanning the incidence relation of $G$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $C\\subseteq V$ is a vertex cover with $|C|\\le k$, then every edge of $G$ has an endpoint in $C$. Equivalently, every element of $U=E$ lies in one of the sets $S_v$ with $v\\in C$. Hence $\\{S_v : v\\in C\\}$ is a set cover of size at most $k$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, if $\\{S_v : v\\in C\\}$ is a set cover of size at most $k$, then every edge $e\\in E$ belongs to some $S_v$ with $v\\in C$. By definition of $S_v$, that means $v$ is an endpoint of $e$. Therefore $C$ is a vertex cover of size at most $k$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 prove $(G,k)\\in VERTEX\\ COVER \\iff (U,\\{S_v\\}_{v\\in V},k)\\in SET\\ COVER$. By [L1], the construction in step 1.1 is a polynomial-time many-one reduction.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The reduction is stated uniformly for arbitrary graph edge sets and does not isolate an empty universe case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The parameter k is handled uniformly; no separate zero-parameter branch is written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no distinct unit-size case in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof needs no exceptional fixed instance: the incidence-family construction works on every input graph."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 turns each graph edge into a universe element and tracks exactly which vertex-subset boundaries cover it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 move between a chosen vertex cover C and the chosen subfamily {S_v : v in C}."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that a vertex cover yields a set cover."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 proves that a set cover yields a vertex cover."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the iff between graph edge coverage and set-family coverage. The current construction uses the edge set as the universe and the incident-edge family S_v, and steps 2.1-2.2 prove the forward and reverse translations exactly, so no hidden counting or choice issue remains."
+      }
+    },
+    "thm-three-sat-reduces-to-three-colourability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-reduction-gadget-and-interface-invariant",
+          "source_section": "Definition",
+          "quote": "Let source and target languages $A,B$ be equipped with explicit witness\nrelations $R_A(x,w)$ and $R_B(y,z)$, so that membership means existence of a\ncorresponding witness. Fix a proposed polynomial-time map $f$ between their\nambient string spaces in the sense of\n[[def-polynomial-time-many-one-reduction]].\n\nA **reduction gadget** is a bounded local piece of $f(x)$ together\nwith a specified way that candidate witnesses may enter, exit, or label its\nboundary. An **interface invariant** is the condition imposed on those\nboundary data so that local choices from neighbouring gadgets are compatible\nwith one global target witness $z$ satisfying $R_B(f(x),z)$.\n\nOn this page, a gadget proof is regarded as complete only after all of the\nfollowing have been established.\n\n1. A total algorithm constructs the target instance from the source instance in\n   polynomial time.\n2. The target size is polynomially bounded in the source size.\n3. Every source witness $w$ with $R_A(x,w)$ induces target choices satisfying each gadget's local\n   constraints and the interface invariants.\n4. Every global target witness $z$ with $R_B(f(x),z)$ projects back to a source witness because the\n   interface invariants rule out inconsistent local choices.\n\nThe gadget language is therefore bookkeeping for the two directions of the iff\ncondition in a many-one reduction, not a substitute for that condition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-three-colourability",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph. A **proper three-colouring** of $G$ is\na map\n$$ \\kappa:V\\to\\{0,1,2\\} $$\nsuch that\n$$ \\kappa(u)\\ne \\kappa(v) \\quad\\text{whenever}\\quad \\{u,v\\}\\in E. $$\n\nThe decision problem **$3$-COLORABILITY** asks, given $G$, whether such a\nproper three-colouring exists.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First reduce $\\varphi$ to a not-all-equal $3$-CNF formula. Introduce one global fresh variable $z$ and, for each clause $C_j=(\\ell_{j1}\\lor \\ell_{j2}\\lor \\ell_{j3})$, one fresh variable $s_j$. Replace $C_j$ by the two NAE clauses $N_{j,1}=NAE(\\ell_{j1},\\ell_{j2},s_j)$ and $N_{j,2}=NAE(\\neg s_j,\\ell_{j3},z)$. Call the conjunction of all these clauses $\\psi$. This is polynomial-time and doubles the number of clauses.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The formula $\\varphi$ is satisfiable if and only if $\\psi$ is NAE-satisfiable. If $\\varphi$ is satisfiable, set $z=0$ and keep the satisfying values of the original variables. Then every original clause has at least one true literal, so the four-tuple $(\\ell_{j1},\\ell_{j2},\\ell_{j3},z)$ is not all equal; choose $s_j$ so that the pair of NAE clauses in step 1.1 holds, which is possible exactly because $NAE(a,b,c,d) \\iff \\exists s \\bigl( NAE(a,b,s)\\land NAE(\\neg s,c,d) \\bigr)$. Conversely, if $\\psi$ is NAE-satisfiable and $z=0$, then each original clause has at least one true literal and $\\varphi$ is satisfiable. If instead $z=1$, complement every Boolean value. NAE truth is invariant under global complementation, so the complemented assignment still satisfies $\\psi$ and now has $z=0$. Thus $\\varphi$ is satisfiable in all cases.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "From $\\psi$, build a graph $G_\\psi$ as follows. Add one distinguished vertex $\\nu$. For each variable $u$ appearing in $\\psi$, add the triangle on the three vertices $u,\\neg u,\\nu$. For each NAE clause with ordered literal occurrences $(a,b,c)$, add a clause triangle with three position-distinguished vertices $(j,1),(j,2),(j,3)$, and join them respectively to the variable-triangle vertices labeled $a,b,c$. The position labels remain distinct even when a literal is repeated. This is polynomial-time and creates $O(|\\psi|)$ vertices and edges.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose that $\\psi$ is NAE-satisfiable. Colour $\\nu$ by $2$. In each variable triangle, colour the literal vertices $u$ and $\\neg u$ by their Boolean values $0$ and $1$, which are opposite because they are complements. Now fix one clause triangle. Because the clause is NAE-satisfied, two of its literals have different Boolean values; colour the corresponding two clause vertices by the opposite Boolean values, so each differs from the colour of the adjacent variable vertex. Colour the third clause vertex by $2$. The three clause-vertex colours are then $0,1,2$, so the clause triangle is proper. Doing this for every clause yields a proper three-colouring of $G_\\psi$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Suppose conversely that $G_\\psi$ has a proper three-colouring. Every triangle uses all three colours, so after permuting colour names assume $\\nu$ has colour $2$. In each variable triangle, the vertices $u$ and $\\neg u$ therefore receive colours $0$ and $1$ in some order; assign the truth value of the literal to be the complementary Boolean value, so $u$ and $\\neg u$ receive opposite truth values. In each clause triangle, exactly one vertex has colour $2$ and the other two have colours $0$ and $1$. Because each clause vertex is adjacent to the matching literal vertex, a clause vertex with colour $0$ or $1$ forces the corresponding literal to have the complementary truth value. Thus the three literals of the clause are not all equal, so the clause is NAE-satisfied. Therefore $\\psi$ is NAE-satisfiable.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 2.1, 3.1, and 4.1 show $\\varphi\\in 3\\text{-}SAT \\iff \\psi\\text{ is NAE-satisfiable } \\iff G_\\psi\\in 3\\text{-}COLORABILITY$. Since the constructions in steps 1.1 and 2.2 are polynomial-time, [L1] and [L2] yield a polynomial-time many-one reduction from $3$-SAT to $3$-COLORABILITY.",
+          "step": "5.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is a formula-to-graph reduction and does not use an empty ambient set as a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The clause count is treated uniformly; the proof does not split off a zero-clause subargument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-variable or one-clause special case is isolated from the general NAE and colouring constructions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The written proof needs no exceptional fixed instance beyond the general NAE-splitting and graph gadget construction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 fixes the distinguished vertex nu that anchors every variable triangle and clause triangle attachment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses two literals of each NAE clause with different Boolean values to determine the clause-triangle colours."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 prove that a satisfying assignment yields an NAE assignment and then a proper three-colouring."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 reads an NAE assignment from any proper three-colouring, and step 2.1 turns that back into a satisfying assignment of the original formula."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on the not-all-equal split and the clause-gadget readback. The current proof explicitly shows satisfiable 3SAT iff the auxiliary NAE formula is satisfiable, then shows a proper 3-colouring of the clause and variable triangles is equivalent to NAE truth on every clause, so both directions of the reduction are closed."
+      }
+    },
+    "fs-gadget-correctness-needs-only-one-direction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-reduction-gadget-and-interface-invariant",
+          "source_section": "Definition",
+          "quote": "Let source and target languages $A,B$ be equipped with explicit witness\nrelations $R_A(x,w)$ and $R_B(y,z)$, so that membership means existence of a\ncorresponding witness. Fix a proposed polynomial-time map $f$ between their\nambient string spaces in the sense of\n[[def-polynomial-time-many-one-reduction]].\n\nA **reduction gadget** is a bounded local piece of $f(x)$ together\nwith a specified way that candidate witnesses may enter, exit, or label its\nboundary. An **interface invariant** is the condition imposed on those\nboundary data so that local choices from neighbouring gadgets are compatible\nwith one global target witness $z$ satisfying $R_B(f(x),z)$.\n\nOn this page, a gadget proof is regarded as complete only after all of the\nfollowing have been established.\n\n1. A total algorithm constructs the target instance from the source instance in\n   polynomial time.\n2. The target size is polynomially bounded in the source size.\n3. Every source witness $w$ with $R_A(x,w)$ induces target choices satisfying each gadget's local\n   constraints and the interface invariants.\n4. Every global target witness $z$ with $R_B(f(x),z)$ projects back to a source witness because the\n   interface invariants rule out inconsistent local choices.\n\nThe gadget language is therefore bookkeeping for the two directions of the iff\ncondition in a many-one reduction, not a substitute for that condition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the constant map $f(x):=y_B$ for every source instance $x$. This map is total and polynomial-time, and it certainly sends every yes-instance of $A$ to a yes-instance of $B$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $x_0\\notin A$. Then $f(x_0)=y_B\\in B$, so the reverse implication in [L2] fails: $f(x_0)\\in B$ does not force $x_0\\in A$. Therefore yes-preservation alone does not make $f$ a correct many-one reduction.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The statement is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses generic source and target languages rather than an empty-set boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No scalar parameter is present."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-size parameter is part of the statement or proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample is already the generic constant-map construction; there is no further exceptional branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The refutation concerns language membership implications, not endpoint data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes one yes-instance y_B of the target language and uses that chosen witness to define the constant map."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a false statement refuted by counterexample, not a theorem with a forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 2.1 shows that the reverse implication fails, which is exactly why the slogan is false rather than a biconditional being established."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the false iff slogan itself. The current refutation uses the constant map to a fixed yes-instance y_B, shows it preserves yes-instances of an arbitrary source language A, and then uses an explicit no-instance x_0 to show the reverse implication fails, which is exactly the load-bearing point of the false statement."
+      }
+    },
+    "fs-pseudopolynomial-is-polynomial-in-bit-length": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subset-sum-and-partition",
+          "source_section": "Definition",
+          "quote": "An instance of **SUBSET SUM** is a finite list of positive integers\n$$ a_1,\\ldots,a_n $$\nwritten in binary together with a target integer $d>0$, also written in binary.\nIt is a yes-instance when some subset of the listed integers sums exactly to\n$d$.\n\nAn instance of **PARTITION** is a finite list of positive integers\n$$ q_1,\\ldots,q_r $$\nwritten in binary. It is a yes-instance when the list can be divided into two\nsubcollections having the same total sum.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-worst-case-time-and-space-complexity",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic $k$-tape Turing machine. For an input word $w$, let\n$\\operatorname{time}_M(w)$ be the number of steps in the computation of $M$ on\n$w$ when that computation halts, and let $\\operatorname{space}_M(w)$ be the\ntotal number of tape cells that are ever visited during that computation across\nall $k$ tapes.\n\nIf $M$ halts on every input of length $n$, its **worst-case time complexity**\nand **worst-case space complexity** are the functions\n$$ \\operatorname{Time}_M(n):=\\max_{|w|=n}\\operatorname{time}_M(w),\\qquad \\operatorname{Space}_M(n):=\\max_{|w|=n}\\operatorname{space}_M(w). $$\n\nFor a nondeterministic machine $N$, define $\\operatorname{time}_N(w)$ and\n$\\operatorname{space}_N(w)$ as the maximum over all halting branches on input\n$w$, provided every branch halts. The worst-case functions\n$\\operatorname{Time}_N$ and $\\operatorname{Space}_N$ are then defined by the\nsame maxima over inputs of length $n$.\n\nWe say that a machine **runs in time at most $t(n)$** when its worst-case time\nis bounded by $t$, and **runs in space at most $s(n)$** when its worst-case\nspace is bounded by $s$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Consider the one-number SUBSET SUM instances\n$$ ([2^m],2^m) $$\nfor $m\\ge 1$. By [F1], the binary input length is $O(m)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The standard table-filling algorithm uses $\\Theta(nT)=\\Theta(2^m)$ time on this family because here $n=1$ and $T=2^m$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $2^m$ is exponential in the binary length $m$, the running time in step 2.1 is not polynomial in the input length. By [L1], polynomial-time complexity is measured against that binary length. Therefore pseudopolynomial dependence on $T$ does not imply polynomial dependence on the bit-length of $T$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The statement is false.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation studies an explicit infinite family of nonempty SUBSET SUM instances, not an empty input family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The refutation does not analyze a zero target or zero-valued input, and this page's SUBSET SUM convention uses positive integers and a positive target."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof already hard-codes n=1 in step 1.1, so there is no additional unit-size branch beyond that chosen family."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No exceptional case is peeled off; the whole refutation is the explicit dynamic-programming family."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument is about running-time growth, not endpoint behaviour."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from a nonempty set; the proof analyses a fixed input family and its running time."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a refutation of a slogan, not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proof does not establish an iff; it shows the claimed implication from pseudopolynomial to polynomial-time fails on the family in steps 2.1 and 3.1."
+        }
+      ]
+    },
+    "ex-clique-is-np-complete": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph.\n\n- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of\n  $K$ are adjacent.\n- A subset $I\\subseteq V$ is an **independent set** when no two distinct\n  vertices of $I$ are adjacent.\n- A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at\n  least one endpoint in $C$.\n\nThe associated decision problems are:\n\n- **CLIQUE**: given $(G,k)$ with $k\\in\\mathbb{N}$, decide whether $G$ has a\n  clique of size at least $k$;\n- **INDEPENDENT SET**: given $(G,k)$, decide whether $G$ has an independent set\n  of size at least $k$;\n- **VERTEX COVER**: given $(G,k)$, decide whether $G$ has a vertex cover of\n  size at most $k$.\n\nBecause the input graph is simple, adjacency means the edge relation from\n[[def-graph-adjacency-incidence-neighbourhood-and-degree]] on the vertex set of\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-three-sat-reduces-to-clique",
+          "source_section": "Statement",
+          "quote": "There is a polynomial-time many-one reduction from $3$-SAT to CLIQUE.\nExplicitly, for every $3$-CNF formula\n$$ \\varphi=C_1\\land\\cdots\\land C_m $$\none can construct in polynomial time a graph $G_\\varphi$ such that\n$$ \\varphi\\in 3\\text{-}SAT \\iff (G_\\varphi,m)\\in CLIQUE. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-clique-is-np-complete",
+          "source_section": "Statement",
+          "quote": "CLIQUE is NP-complete.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the graph defined in the example, choose the vertices labeled by the literal $z$ in the first, second, and third clauses. These occurrences come from different clauses and no two are complementary, so every pair is adjacent. Thus they form a clique of size $3$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The assignment $z=1$ satisfies all three clauses of $\\varphi$, so the explicitly constructed clique agrees with the iff asserted by [L1]. This concrete yes-instance therefore illustrates the reduction theorem and, through [L2], the NP-completeness conclusion for CLIQUE.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a concrete three-clause formula, not an empty-instance boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The worked instance has clique size 3, so there is no zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example does not isolate a size-one clique case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This is a generic worked yes-instance, not an exceptional limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example concerns clique compatibility, not endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly chooses the three z-labelled vertices, one from each clause cluster."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an example illustrating a theorem, not a biconditional proof in its own right."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is an example illustrating a theorem, not a biconditional proof in its own right."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-step8-preflight-f",
+        "notes": "High-risk reread checked the three cited interfaces, the theorem's iff, and the concrete witness. The three position-distinct z-occurrences lie in different clause clusters and are pairwise noncomplementary, so they form the claimed 3-clique; independently, z=1 satisfies every displayed clause. Thus the worked yes-instance agrees with both directions of the reduction theorem it illustrates, and the final NP-completeness reference is used only for the stated global conclusion. The empty, zero, one, and choice boundaries are explicitly resolved by this fixed three-clause witness."
+      }
+    },
+    "ex-three-sat-reduces-to-three-colourability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-three-colourability",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph. A **proper three-colouring** of $G$ is\na map\n$$ \\kappa:V\\to\\{0,1,2\\} $$\nsuch that\n$$ \\kappa(u)\\ne \\kappa(v) \\quad\\text{whenever}\\quad \\{u,v\\}\\in E. $$\n\nThe decision problem **$3$-COLORABILITY** asks, given $G$, whether such a\nproper three-colouring exists.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-three-sat-reduces-to-three-colourability",
+          "source_section": "Statement",
+          "quote": "There is a polynomial-time many-one reduction from $3$-SAT to\n$3$-COLORABILITY.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the given assignment, both NAE clauses are satisfied: $(x,y,s)=(1,0,0)$ is not all equal, and $(\\neg s,z,w)=(1,0,0)$ is not all equal.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define the graph directly: take a distinguished vertex $\\nu$; for each variable $u\\in\\{x,y,z,w,s\\}$ add the triangle $(u,\\neg u,\\nu)$; for each of the two ordered NAE clauses add a triangle of three position vertices and join its $r$th vertex to the literal vertex in position $r$. Colour $\\nu$ by $2$. In the variable triangles, colour each literal vertex by its Boolean value, so $x,\\neg x$ receive $1,0$, $y,\\neg y$ receive $0,1$, $z,\\neg z$ receive $0,1$, $w,\\neg w$ receive $0,1$, and $s,\\neg s$ receive $0,1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the clause triangle for $N_1$, the literals $x$ and $y$ have different truth values, so colour their two position vertices by the opposite colours $0$ and $1$, and colour the remaining position vertex by $2$. Do the same for $N_2$. Every clause triangle then uses $0,1,2$, and each clause vertex differs from the colour of its adjacent literal vertex. Thus the explicitly defined graph is properly three-coloured.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "This worked instance shows concretely how the theorem's NAE assignment is converted into a proper three-colouring.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The worked formula has one clause and a concrete colouring; no empty-instance branch appears."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued size parameter singled out in the example."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example already fixes one clause as its whole input, so there is no additional unit-case analysis."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This is a representative toy instance rather than a collapsed exceptional case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 fixes the distinguished vertex nu of the colouring gadget before colouring the variable and clause triangles."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses explicit colours for the clause-triangle vertices from the given satisfying assignment."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item verifies one explicit example rather than proving both directions of the general theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item verifies one explicit example rather than proving both directions of the general theorem."
+        }
+      ]
+    },
+    "cex-gadget-correctness-needs-only-one-direction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph.\n\n- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of\n  $K$ are adjacent.\n- A subset $I\\subseteq V$ is an **independent set** when no two distinct\n  vertices of $I$ are adjacent.\n- A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at\n  least one endpoint in $C$.\n\nThe associated decision problems are:\n\n- **CLIQUE**: given $(G,k)$ with $k\\in\\mathbb{N}$, decide whether $G$ has a\n  clique of size at least $k$;\n- **INDEPENDENT SET**: given $(G,k)$, decide whether $G$ has an independent set\n  of size at least $k$;\n- **VERTEX COVER**: given $(G,k)$, decide whether $G$ has a vertex cover of\n  size at most $k$.\n\nBecause the input graph is simple, adjacency means the edge relation from\n[[def-graph-adjacency-incidence-neighbourhood-and-degree]] on the vertex set of\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "fs-gadget-correctness-needs-only-one-direction",
+          "source_section": "Statement",
+          "quote": "A gadget reduction is correct as soon as every yes-instance maps to a\nyes-instance.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The constant map in the given data is total and polynomial-time, and every satisfiable $3$-CNF formula is sent to the yes-instance $(K_1,1)$. So it preserves yes-instances in exactly the way promised by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Consider the unsatisfiable formula $(x\\lor x\\lor x)\\land(\\neg x\\lor \\neg x\\lor \\neg x)$. It is still mapped to $(K_1,1)$, which is a yes-instance by [F1]. Thus the reverse implication in [L1] fails, so the map is not a correct many-one reduction.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This explicit map therefore refutes the slogan [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a concrete constant map on 3-CNF formulas, not an empty-family special case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No scalar zero boundary appears in the statement or the witness map."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-size case is needed; the constant-map witness is already explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The constant-map witness is the entire point of the counterexample, not an exceptional subcase of a broader proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample concerns membership preservation, not endpoint structure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes the chosen yes-instance (K_1,1) as the constant target value of the map."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a counterexample, not a theorem proving a forward iff direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 2.1 is included precisely to show that the reverse implication demanded by many-one reduction fails on the explicit unsatisfiable formula."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the missing reverse implication in many-one reductions. The current counterexample uses a fixed yes-instance target and an explicit unsatisfiable 3-CNF no-instance, so it cleanly demonstrates that yes-preservation alone does not satisfy the iff demanded by the reduction definition."
+      }
+    }
+  }
+}

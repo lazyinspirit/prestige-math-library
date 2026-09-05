@@ -1,0 +1,237 @@
+[
+  {
+    "order": 519,
+    "id": "morse-functions-critical-values-and-genericity",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Morse Functions Critical Values and Genericity",
+    "companion": "morse-functions-critical-values-and-genericity-examples",
+    "requires": [
+      "morse-critical-points-hessians-and-indices-examples"
+    ],
+    "items": [
+      {
+        "id": "lem-morse-functions-are-transverse-differentials",
+        "kind": "lemma",
+        "title": "A smooth function is Morse if and only if its differential section is transverse to the zero section",
+        "strategy": "Identify the zeros of the section df with the critical points of f, and compare the vertical differential of df at a zero with the intrinsic critical-point Hessian. Transversality to the zero section is exactly nondegeneracy of that Hessian.",
+        "deps": [
+          "def-hessian-of-a-function-at-a-critical-point",
+          "def-nondegenerate-critical-point-nullity-index-and-coindex",
+          "def-a-smooth-map-transverse-to-an-embedded-submanifold",
+          "prop-the-zero-section-is-a-smooth-embedding"
+        ]
+      },
+      {
+        "id": "thm-morse-functions-are-dense-by-relative-jet-transversality",
+        "kind": "theorem",
+        "title": "Every smooth function admits arbitrarily fine strong-topology perturbations whose differential is transverse to zero, supported away from a closed set where transversality already holds",
+        "strategy": "Apply the library's relative transversality mechanism to the differential section, preserving the map on a closed good region and shrinking the perturbation inside an arbitrary strong neighborhood. Then translate transverse differential sections back into Morse functions.",
+        "deps": [
+          "lem-morse-functions-are-transverse-differentials",
+          "thm-strong-whitney-approximation-by-transverse-maps",
+          "prop-relative-transversality-preserves-a-map-on-a-closed-good-region"
+        ]
+      },
+      {
+        "id": "thm-morse-functions-form-a-residual-subset",
+        "kind": "theorem",
+        "title": "In the strong $C^\\infty$ topology on $C^\\infty(M,\\mathbb R)$, the Morse functions form a residual subset",
+        "strategy": "Write the Morse condition as transversality of df to the zero section, localize that condition on a countable exhaustion of charts or compacta, and intersect the resulting countable family of dense open strong-topology conditions. Keep the claim at residuality on arbitrary noncompact manifolds.",
+        "deps": [
+          "lem-morse-functions-are-transverse-differentials",
+          "thm-morse-functions-are-dense-by-relative-jet-transversality"
+        ]
+      },
+      {
+        "id": "lem-compact-morse-critical-points-have-uniform-hessian-gaps",
+        "kind": "lemma",
+        "title": "On a compact manifold, a Morse function has finitely many critical points and a uniform Hessian gap on disjoint critical neighborhoods",
+        "strategy": "Use compactness to reduce to finitely many critical points and choose pairwise disjoint Morse neighborhoods. Continuity of the Hessian on the closures of those neighborhoods gives a positive lower bound on the smallest singular value at every critical point.",
+        "deps": [
+          "def-morse-function-and-excellent-morse-function",
+          "cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points",
+          "lem-morse-functions-are-transverse-differentials"
+        ]
+      },
+      {
+        "id": "lem-no-new-critical-points-under-a-compact-c1-small-perturbation",
+        "kind": "lemma",
+        "title": "Away from fixed critical neighborhoods, sufficiently small $C^1$ perturbations create no new critical points on a compact manifold",
+        "strategy": "Remove the chosen critical neighborhoods and use compactness of the complement to get a positive lower bound for the norm of df there. A sufficiently small C^1 perturbation preserves that lower bound and therefore cannot introduce new zeros of the differential.",
+        "deps": [
+          "def-critical-point-and-critical-value-of-a-smooth-function",
+          "lem-compact-morse-critical-points-have-uniform-hessian-gaps"
+        ]
+      },
+      {
+        "id": "thm-morse-functions-are-open-dense-on-a-compact-manifold",
+        "kind": "theorem",
+        "title": "On a compact smooth manifold, the Morse functions form an open dense subset in the $C^2$ and hence $C^\\infty$ topology",
+        "strategy": "Use the relative density theorem for the dense part. For openness, combine persistence of the finitely many old critical points with the no-new-critical-points lemma on the compact complement of their neighborhoods.",
+        "deps": [
+          "thm-morse-functions-are-dense-by-relative-jet-transversality",
+          "lem-compact-morse-critical-points-have-uniform-hessian-gaps",
+          "lem-no-new-critical-points-under-a-compact-c1-small-perturbation"
+        ]
+      },
+      {
+        "id": "lem-finitely-many-critical-values-can-be-separated-locally",
+        "kind": "lemma",
+        "title": "For a compact Morse function, disjoint local bump perturbations can separate finitely many equal critical values without changing the Hessians",
+        "strategy": "Choose pairwise disjoint Morse charts around the finitely many critical points, then add compactly supported local constants near selected critical points. The perturbation shifts function values independently while leaving the first and second derivatives unchanged at the critical points.",
+        "deps": [
+          "def-morse-function-and-excellent-morse-function",
+          "cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set"
+        ]
+      },
+      {
+        "id": "thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold",
+        "kind": "theorem",
+        "title": "On a compact smooth manifold, the excellent Morse functions form an open dense subset of the $C^2$ and hence $C^\\infty$ topology",
+        "strategy": "Start from the compact open-dense theorem for Morse functions. Then use the value-separation lemma to perturb equal critical levels apart while preserving the Morse Hessians, and keep the finitely separated values distinct under small perturbations.",
+        "deps": [
+          "def-morse-function-and-excellent-morse-function",
+          "thm-morse-functions-are-open-dense-on-a-compact-manifold",
+          "lem-finitely-many-critical-values-can-be-separated-locally"
+        ]
+      },
+      {
+        "id": "thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse",
+        "kind": "theorem",
+        "title": "For a compact manifold embedded in Euclidean space, the restricted linear height is Morse for generic directions",
+        "strategy": "View the family of linear functionals on the ambient Euclidean space as a finite-dimensional family of smooth functions on the embedded manifold. Apply parametric transversality to the induced family of differential sections and translate transverse-to-zero back into the Morse condition.",
+        "deps": [
+          "lem-morse-functions-are-transverse-differentials",
+          "thm-parametric-transversality",
+          "prop-the-zero-section-is-a-smooth-embedding"
+        ]
+      },
+      {
+        "id": "thm-generic-squared-distance-functions-are-morse",
+        "kind": "theorem",
+        "title": "For a compact manifold embedded in Euclidean space, the squared-distance function from a generic center is Morse",
+        "strategy": "Use the ambient point as the finite-dimensional parameter in the squared-distance family x \\mapsto ||x-p||^2. The bad centers are critical values of the normal-bundle endpoint map, equivalently the nongeneric parameters for transversality of the differential section to zero.",
+        "deps": [
+          "lem-morse-functions-are-transverse-differentials",
+          "thm-parametric-transversality",
+          "prop-the-zero-section-is-a-smooth-embedding"
+        ]
+      },
+      {
+        "id": "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function",
+        "kind": "corollary",
+        "title": "Every compact smooth manifold admits an excellent Morse function",
+        "strategy": "Embed the manifold into some Euclidean space, choose a generic height function on that embedding to obtain a Morse function, and then separate repeated critical values using the compact excellent-genericity theorem.",
+        "deps": [
+          "thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space",
+          "thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse",
+          "thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold"
+        ]
+      },
+      {
+        "id": "lem-properness-survives-a-controlled-locally-finite-perturbation",
+        "kind": "lemma",
+        "title": "A locally finite shellwise perturbation with rapidly decaying size preserves properness of a smooth exhaustion",
+        "strategy": "Choose compact exhaustion shells and perturb on each shell by a bump-supported function whose sup norm is much smaller than the gap between successive exhaustion levels. Outside a large compact set the original exhaustion still dominates the perturbation, so sublevel sets remain compact.",
+        "deps": [
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-a-locally-finite-sum-of-smooth-functions-is-smooth",
+          "thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function"
+        ]
+      },
+      {
+        "id": "prop-proper-morse-exhaustions-exist-on-smooth-manifolds",
+        "kind": "proposition",
+        "title": "Every smooth manifold admits a proper Morse function",
+        "strategy": "Begin with a proper smooth exhaustion, then perturb it shell by shell by a locally finite family of relative Morse improvements. The relative construction keeps previously repaired regions fixed, and the perturbation sizes are chosen small enough that properness survives.",
+        "deps": [
+          "thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function",
+          "lem-morse-functions-are-transverse-differentials",
+          "thm-morse-functions-are-dense-by-relative-jet-transversality",
+          "lem-properness-survives-a-controlled-locally-finite-perturbation"
+        ]
+      },
+      {
+        "id": "rem-noncompact-morse-genericity-is-not-an-open-dense-claim",
+        "kind": "remark",
+        "title": "On a noncompact manifold, this page states Morse genericity as a strong-topology residual theorem",
+        "deps": [
+          "thm-morse-functions-form-a-residual-subset",
+          "thm-morse-functions-are-open-dense-on-a-compact-manifold"
+        ]
+      },
+      {
+        "id": "rem-morse-does-not-mean-distinct-critical-values",
+        "kind": "remark",
+        "title": "Being Morse does not by itself force distinct critical values; excellence is a separate generic condition",
+        "deps": [
+          "def-morse-function-and-excellent-morse-function",
+          "lem-finitely-many-critical-values-can-be-separated-locally"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 520,
+    "id": "morse-functions-critical-values-and-genericity-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Morse Functions Critical Values and Genericity — Examples",
+    "companion": "morse-functions-critical-values-and-genericity",
+    "requires": [
+      "morse-functions-critical-values-and-genericity"
+    ],
+    "items": [
+      {
+        "id": "ex-generic-and-exceptional-height-directions-on-a-torus",
+        "kind": "example",
+        "title": "A standard embedded torus has generic height directions with four Morse critical points, but symmetry directions create degenerate or nongeneric behavior",
+        "strategy": "Use the vertical torus height as the generic model with two saddles and then tilt the direction toward a symmetry direction where critical points merge or lose nondegeneracy. The example should make the exceptional parameter set concrete inside the circle of directions.",
+        "deps": [
+          "def-morse-function-and-excellent-morse-function",
+          "thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse"
+        ]
+      },
+      {
+        "id": "ex-squared-distance-to-a-circle-and-its-medial-axis",
+        "kind": "example",
+        "title": "Squared distance to a circle is Morse for centers off the medial axis and degenerate at the center",
+        "strategy": "Compute the critical points of the squared-distance function on the unit circle explicitly for a generic point in the plane, and then compare with the center where the Hessian degenerates at both antipodal critical points.",
+        "deps": [
+          "thm-generic-squared-distance-functions-are-morse"
+        ]
+      },
+      {
+        "id": "ex-separating-equal-critical-values-by-bump-functions",
+        "kind": "example",
+        "title": "Two equal critical levels can be separated by adding disjoint bump perturbations near the corresponding critical points",
+        "strategy": "Start from a Morse function with two critical points at the same value, add local bump-supported constants near those points, and check that only the critical values change while the Hessians do not.",
+        "deps": [
+          "lem-finitely-many-critical-values-can-be-separated-locally",
+          "def-morse-function-and-excellent-morse-function"
+        ]
+      },
+      {
+        "id": "cex-morse-functions-need-not-have-distinct-critical-values",
+        "kind": "counterexample",
+        "title": "A Morse function can have two different critical points with the same critical value",
+        "strategy": "Use the standard torus height function, whose two saddle points occur at the same level. It is Morse but not excellent, exactly isolating the gap between the two notions.",
+        "deps": [
+          "def-morse-function-and-excellent-morse-function",
+          "rem-morse-does-not-mean-distinct-critical-values"
+        ]
+      },
+      {
+        "id": "cex-noncompact-smallness-without-the-strong-topology-can-create-critical-points-at-infinity",
+        "kind": "counterexample",
+        "title": "Uniformly tiny perturbations on larger and larger shells of a noncompact manifold can create new critical points far out",
+        "strategy": "Construct on $\\mathbb R$ or $\\mathbb R^n$ a sequence of bump perturbations whose local size tends to zero on every fixed compact set but which introduces a new far-out critical point on each shell. This isolates why compact-set smallness alone is weaker than strong-topology control at infinity.",
+        "deps": [
+          "rem-noncompact-morse-genericity-is-not-an-open-dense-claim"
+        ]
+      }
+    ]
+  }
+]

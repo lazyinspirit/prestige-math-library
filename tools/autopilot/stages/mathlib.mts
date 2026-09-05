@@ -873,7 +873,7 @@ const step8GuardGate = (ctx) => gate('step8-guard', ['node', 'tools/step8-guard.
   '--owner-prerequisite-repairs', `research/${ctx.run}-step8-owner-prerequisite-repairs.jsonl`]);
 
 /** Final-adjudicator receipts are accepted by judge closure only after this
- * gate proves their ordered queue and successful Sol/max dispatch attestation.
+ * gate proves their ordered queue and successful Sol/xhigh dispatch attestation.
  * Missing is a valid zero-escalation case; malformed or stale is never one. */
 const terminalResolutionGate = (ctx) => gate('step8-terminal-resolutions', [
   'node', 'tools/step8-terminal-resolution.mjs', 'check', '--run', ctx.run, '--allow-missing',
@@ -2888,7 +2888,7 @@ export const stages = [
     // Three engine repair passes implement two mathematical cycles plus the
     // independent close: (1) adjudicate the second judge rejection, (2) let the
     // owning group Alpha make its second fatal repair, (3) send the exhausted
-    // repaired item to one fresh Sol-max FA for that group. The durable cycle
+    // repaired item to one fresh Sol-xhigh FA for that group. The durable cycle
     // receipt still forbids a third judge call.
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure, prevRoundAt = null }) => {

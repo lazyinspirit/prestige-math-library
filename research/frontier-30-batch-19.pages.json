@@ -1,0 +1,437 @@
+[
+  {
+    "order": 607,
+    "id": "post-correspondence-and-language-undecidability",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Post Correspondence and Language Undecidability",
+    "companion": "post-correspondence-and-language-undecidability-examples",
+    "requires": [
+      "computable-reductions-and-rices-theorem",
+      "context-free-pumping-ogden-and-parsing",
+      "myhill-nerode-theory-and-dfa-minimization"
+    ],
+    "items": [
+      {
+        "id": "def-post-correspondence-problem",
+        "kind": "definition",
+        "title": "The Post correspondence problem",
+        "deps": []
+      },
+      {
+        "id": "def-modified-post-correspondence-problem",
+        "kind": "definition",
+        "title": "The modified Post correspondence problem",
+        "deps": [
+          "def-post-correspondence-problem"
+        ]
+      },
+      {
+        "id": "lem-computation-history-domino-encoding",
+        "kind": "lemma",
+        "title": "Accepting computation histories can be encoded by modified-PCP domino matches",
+        "strategy": "Encode the start configuration, every legal local successor check, and the accepting tail so that a designated-first domino match exists exactly when the chosen machine-input pair has an accepting computation history.",
+        "deps": [
+          "def-modified-post-correspondence-problem",
+          "def-effective-encoding-of-turing-machines",
+          "def-halting-computation-and-divergence",
+          "prop-valid-computation-histories-are-decidable"
+        ]
+      },
+      {
+        "id": "thm-modified-pcp-is-undecidable",
+        "kind": "theorem",
+        "title": "The modified Post correspondence problem is undecidable",
+        "strategy": "Map a machine-input pair to the domino family from the computation-history lemma. A match forces and is forced by an accepting computation history, so a decider for modified PCP would decide machine acceptance.",
+        "deps": [
+          "lem-computation-history-domino-encoding",
+          "def-computable-many-one-reduction",
+          "thm-machine-acceptance-is-undecidable",
+          "thm-many-one-reductions-transfer-decidability-and-recognizability"
+        ]
+      },
+      {
+        "id": "lem-modified-pcp-reduces-to-pcp",
+        "kind": "lemma",
+        "title": "Modified PCP many-one reduces to PCP",
+        "strategy": "Shift each word by star markers, add one special start tile for the designated first domino and one end tile, and then erase the markers from any PCP match to recover exactly the modified-PCP matches.",
+        "deps": [
+          "def-post-correspondence-problem",
+          "def-modified-post-correspondence-problem"
+        ]
+      },
+      {
+        "id": "thm-post-correspondence-is-undecidable",
+        "kind": "theorem",
+        "title": "The Post correspondence problem is undecidable",
+        "strategy": "Combine the reduction from modified PCP to PCP with undecidability transfer along computable many-one reductions.",
+        "deps": [
+          "lem-modified-pcp-reduces-to-pcp",
+          "thm-modified-pcp-is-undecidable",
+          "thm-many-one-reductions-transfer-decidability-and-recognizability"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "prop-post-correspondence-is-recognizable",
+        "kind": "proposition",
+        "title": "The Post correspondence problem is recognizable",
+        "strategy": "Enumerate all finite tile-index sequences and accept as soon as one equalizes the top and bottom concatenations.",
+        "deps": [
+          "def-post-correspondence-problem"
+        ]
+      },
+      {
+        "id": "thm-cfg-intersection-emptiness-is-undecidable",
+        "kind": "theorem",
+        "title": "Emptiness of the intersection of two CFGs is undecidable",
+        "strategy": "From a PCP instance build two grammars generating the marked top and bottom concatenations with the same reversed index suffix. Their intersection is nonempty exactly when the PCP instance has a match.",
+        "deps": [
+          "def-post-correspondence-problem",
+          "thm-post-correspondence-is-undecidable",
+          "def-computable-many-one-reduction",
+          "def-language-generated-by-a-cfg",
+          "thm-many-one-reductions-transfer-decidability-and-recognizability"
+        ]
+      },
+      {
+        "id": "thm-cfg-universality-is-undecidable",
+        "kind": "theorem",
+        "title": "CFG universality is undecidable",
+        "strategy": "Use the computation-history method for invalid histories: given a machine-input pair, build a grammar whose language is all encodings exactly when the machine has no accepting computation history on that input. A universality decider would therefore decide machine acceptance.",
+        "deps": [
+          "prop-valid-computation-histories-are-decidable",
+          "def-halting-computation-and-divergence",
+          "def-language-generated-by-a-cfg",
+          "def-computable-many-one-reduction",
+          "thm-machine-acceptance-is-undecidable",
+          "thm-many-one-reductions-transfer-decidability-and-recognizability"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-cfg-equivalence-is-undecidable",
+        "kind": "theorem",
+        "title": "CFG equivalence is undecidable",
+        "strategy": "Reduce universality to equivalence by comparing a grammar with a fixed grammar for all words over the same terminal alphabet.",
+        "deps": [
+          "def-cfg-equivalence-and-ambiguity-problems",
+          "thm-cfg-universality-is-undecidable"
+        ]
+      },
+      {
+        "id": "thm-cfg-ambiguity-is-undecidable",
+        "kind": "theorem",
+        "title": "CFG ambiguity is undecidable",
+        "strategy": "From a PCP instance build the standard grammar with separate top and bottom derivation branches and index suffixes. A word has two leftmost derivations exactly when the same tile sequence matches on top and bottom.",
+        "deps": [
+          "def-cfg-equivalence-and-ambiguity-problems",
+          "def-ambiguity-and-inherent-ambiguity",
+          "def-post-correspondence-problem",
+          "def-computable-many-one-reduction",
+          "thm-post-correspondence-is-undecidable",
+          "thm-many-one-reductions-transfer-decidability-and-recognizability"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "def-chomsky-hierarchy",
+        "kind": "definition",
+        "title": "The Chomsky hierarchy of regular, context-free, decidable, and computably enumerable languages",
+        "deps": [
+          "def-regular-language-by-dfa-recognition",
+          "def-language-generated-by-a-cfg",
+          "def-language-recognized-and-decided"
+        ]
+      },
+      {
+        "id": "thm-proper-inclusions-in-the-chomsky-hierarchy",
+        "kind": "theorem",
+        "title": "The inclusions in the Chomsky hierarchy are proper",
+        "strategy": "Show regular is contained in context-free by the standard automaton-to-grammar viewpoint and witness strictness with {a^n b^n}. Use CFL membership decidability together with a non-context-free intersection of two CFLs to witness context-free is properly contained in decidable. Finally, every decider is a recognizer, and A_TM witnesses the strict inclusion into the computably enumerable languages.",
+        "deps": [
+          "def-chomsky-hierarchy",
+          "thm-pumping-lemma-for-regular-languages",
+          "def-language-generated-by-a-cfg",
+          "cor-cfl-membership-is-decidable",
+          "thm-cfls-are-not-closed-under-intersection",
+          "thm-decidable-languages-are-closed-under-boolean-operations",
+          "thm-machine-acceptance-is-ce-complete"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "fs-pcp-allows-symbol-reordering-within-dominoes",
+        "kind": "false-statement",
+        "title": "FALSE: PCP permits reordering symbols inside a domino",
+        "strategy": "Refute with a small tile family where a top-bottom match would exist only after illegally permuting symbols inside one domino; legal PCP solutions concatenate whole tiles in order.",
+        "deps": [
+          "def-post-correspondence-problem"
+        ]
+      },
+      {
+        "id": "fs-two-decidable-cfls-have-decidable-intersection-emptiness",
+        "kind": "false-statement",
+        "title": "FALSE: decidable CFLs have a decidable intersection-emptiness problem",
+        "strategy": "Refute by combining universal decidability of context-free membership with the earlier undecidable intersection-emptiness theorem: the languages are individually decidable, but the problem about their grammar descriptions remains undecidable.",
+        "deps": [
+          "cor-cfl-membership-is-decidable",
+          "thm-cfg-intersection-emptiness-is-undecidable"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 608,
+    "id": "post-correspondence-and-language-undecidability-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Post Correspondence and Language Undecidability: Examples and Counterexamples",
+    "requires": [
+      "post-correspondence-and-language-undecidability"
+    ],
+    "items": [
+      {
+        "id": "ex-modified-pcp-is-undecidable",
+        "kind": "example",
+        "title": "A computation-history domino system whose matches spell a halting run",
+        "strategy": "Work through a tiny machine-input pair whose accepting history produces the expected start, copy, and successor domino blocks, so the witness sequence can be inspected concretely before invoking undecidability.",
+        "deps": [
+          "lem-computation-history-domino-encoding",
+          "thm-modified-pcp-is-undecidable"
+        ]
+      },
+      {
+        "id": "ex-proper-inclusions-in-the-chomsky-hierarchy",
+        "kind": "example",
+        "title": "Witness languages for the proper inclusions in the Chomsky hierarchy",
+        "strategy": "Collect one concrete witness for each strict containment, using {a^n b^n}, the non-context-free intersection from the CFL page, and A_TM as the recognizable-but-undecidable example.",
+        "deps": [
+          "thm-proper-inclusions-in-the-chomsky-hierarchy"
+        ]
+      },
+      {
+        "id": "cex-pcp-allows-symbol-reordering-within-dominoes",
+        "kind": "counterexample",
+        "title": "A domino family where matching fails unless one illegally permutes symbols inside a tile",
+        "strategy": "Choose a PCP instance whose only apparent agreement comes from rearranging letters within one tile, and then check that every legal tile-by-tile concatenation still disagrees.",
+        "deps": [
+          "fs-pcp-allows-symbol-reordering-within-dominoes"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 611,
+    "id": "acceptable-numberings-smn-and-the-recursion-theorem",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Acceptable Numberings, the s-m-n Theorem, and Recursion",
+    "companion": "acceptable-numberings-smn-and-the-recursion-theorem-examples",
+    "requires": [
+      "primitive-recursive-and-partial-computable-functions",
+      "computable-reductions-and-rices-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-numbering-of-partial-computable-functions",
+        "kind": "definition",
+        "title": "Numberings of partial computable functions",
+        "deps": [
+          "thm-partial-recursive-iff-turing-computable"
+        ]
+      },
+      {
+        "id": "def-universal-and-acceptable-numbering",
+        "kind": "definition",
+        "title": "Universal and acceptable numberings",
+        "deps": [
+          "def-numbering-of-partial-computable-functions"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "prop-fixed-machine-coding-is-acceptable",
+        "kind": "proposition",
+        "title": "The fixed machine coding gives an acceptable numbering",
+        "strategy": "Use the chosen machine-code indexing as the standard numbering. Universal evaluation comes from the earlier coding and normal-form machinery, and hard-wiring a fixed input into the initial tape gives the required effective specialization operation.",
+        "deps": [
+          "def-universal-and-acceptable-numbering",
+          "def-effective-encoding-of-turing-machines",
+          "lem-machine-encoding-is-injective-and-decodable",
+          "def-kleene-t-predicate-and-output-function",
+          "thm-kleene-normal-form"
+        ]
+      },
+      {
+        "id": "def-parameter-specialization-function",
+        "kind": "definition",
+        "title": "Parameter-specialization functions",
+        "deps": [
+          "def-universal-and-acceptable-numbering",
+          "def-natural-number-coding-of-finite-sequences"
+        ]
+      },
+      {
+        "id": "thm-smn-parameter-theorem",
+        "kind": "theorem",
+        "title": "The s-m-n theorem",
+        "strategy": "Represent tuples of fixed arguments by the published sequence coding and iterate the acceptable numbering's single hard-wiring operation to produce the full family of computable specialization maps s^m_n.",
+        "deps": [
+          "def-parameter-specialization-function",
+          "def-universal-and-acceptable-numbering",
+          "def-natural-number-coding-of-finite-sequences"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-effective-program-specialization",
+        "kind": "corollary",
+        "title": "Effective program specialization",
+        "strategy": "Read s^m_n(e, a_1, ..., a_m) as the index of the residual program obtained by hard-wiring the fixed arguments into the first m input slots of program e.",
+        "deps": [
+          "thm-smn-parameter-theorem"
+        ]
+      },
+      {
+        "id": "def-computable-program-transformer",
+        "kind": "definition",
+        "title": "Computable program transformers",
+        "deps": [
+          "def-numbering-of-partial-computable-functions"
+        ]
+      },
+      {
+        "id": "lem-self-reference-construction-from-smn",
+        "kind": "lemma",
+        "title": "The diagonal self-reference construction from s-m-n",
+        "strategy": "Given a total computable transformer f, apply s-m-n to the binary program that substitutes its own index into the first argument and then applies f. The specialized index already carries the self-reference needed for a fixed point.",
+        "deps": [
+          "def-computable-program-transformer",
+          "thm-smn-parameter-theorem"
+        ]
+      },
+      {
+        "id": "thm-kleenes-second-recursion-theorem",
+        "kind": "theorem",
+        "title": "Kleene's second recursion theorem",
+        "strategy": "Apply the diagonal self-reference lemma to a total computable transformer f and compare the specialized index with its transformed image to obtain a fixed point with the same computed partial function.",
+        "deps": [
+          "lem-self-reference-construction-from-smn",
+          "def-computable-program-transformer"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-recursion-theorem-with-parameters",
+        "kind": "theorem",
+        "title": "The recursion theorem with parameters",
+        "strategy": "Bundle the external parameters into a computable transformer, apply the fixed-point theorem uniformly, and then unpack the resulting family of fixed-point indices.",
+        "deps": [
+          "thm-kleenes-second-recursion-theorem",
+          "thm-smn-parameter-theorem",
+          "def-computable-program-transformer"
+        ]
+      },
+      {
+        "id": "def-productive-and-creative-set",
+        "kind": "definition",
+        "title": "Productive and creative sets",
+        "deps": [
+          "def-numbering-of-partial-computable-functions"
+        ]
+      },
+      {
+        "id": "thm-nonhalting-is-productive-and-halting-is-creative",
+        "kind": "theorem",
+        "title": "The nonhalting set is productive and the halting set is creative",
+        "strategy": "Let K = {e : phi_e(e) downarrow}. Given any c.e. subset of its complement, use the recursion theorem to build an index that diagonalizes out of that enumeration while staying outside K. Since K itself is c.e., this makes K creative.",
+        "deps": [
+          "def-productive-and-creative-set",
+          "thm-kleenes-second-recursion-theorem"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-myhill-isomorphism-theorem-for-creative-sets",
+        "kind": "theorem",
+        "title": "Myhill's isomorphism theorem for creative sets",
+        "strategy": "Use one-one completeness of creative sets to place any creative set and the halting set in mutual one-one reducibility, then upgrade those reductions to a computable permutation by the Myhill isomorphism theorem.",
+        "deps": [
+          "def-productive-and-creative-set",
+          "thm-nonhalting-is-productive-and-halting-is-creative"
+        ]
+      },
+      {
+        "id": "prop-acceptable-numberings-are-computably-intertranslatable",
+        "kind": "proposition",
+        "title": "Acceptable numberings are computably intertranslatable",
+        "strategy": "Use the fixed standard acceptable numbering as a hub. The acceptable-numbering theorem supplies total computable translators to and from any acceptable numbering, and composing them gives intertranslatability between arbitrary pairs.",
+        "deps": [
+          "def-universal-and-acceptable-numbering",
+          "prop-fixed-machine-coding-is-acceptable",
+          "thm-kleenes-second-recursion-theorem"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "fs-recursion-theorem-needs-source-file-access",
+        "kind": "false-statement",
+        "title": "FALSE: the recursion theorem requires source-code access",
+        "strategy": "Refute with quines and fixed points built purely from numbering, specialization, and computable program transformation. The fixed-point argument never inspects literal source text.",
+        "deps": [
+          "thm-kleenes-second-recursion-theorem"
+        ]
+      },
+      {
+        "id": "fs-program-indices-are-unique",
+        "kind": "false-statement",
+        "title": "FALSE: a partial computable function has a unique program index",
+        "strategy": "Refute by specializing or padding a program without changing its computed partial function, thereby producing distinct indices for extensionally equal programs.",
+        "deps": [
+          "thm-smn-parameter-theorem"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 612,
+    "id": "acceptable-numberings-smn-and-the-recursion-theorem-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Acceptable Numberings, the s-m-n Theorem, and Recursion: Examples and Counterexamples",
+    "requires": [
+      "acceptable-numberings-smn-and-the-recursion-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-smn-parameter-theorem",
+        "kind": "example",
+        "title": "Specializing a two-argument program to obtain a unary residual program",
+        "strategy": "Take a simple binary program, hard-wire one argument with s^1_1, and verify directly that the residual index computes the expected unary function.",
+        "deps": [
+          "thm-smn-parameter-theorem",
+          "cor-effective-program-specialization"
+        ]
+      },
+      {
+        "id": "ex-acceptable-numberings-are-computably-intertranslatable",
+        "kind": "example",
+        "title": "Compiling between two acceptable numberings",
+        "strategy": "Compare two explicit acceptable codings and trace the total computable compiler and decompiler maps that preserve the extensional partial function.",
+        "deps": [
+          "prop-acceptable-numberings-are-computably-intertranslatable"
+        ]
+      },
+      {
+        "id": "cex-recursion-theorem-needs-source-file-access",
+        "kind": "counterexample",
+        "title": "A quine obtained without inspecting its own source file",
+        "strategy": "Use the fixed-point theorem to produce an index that outputs its own code, emphasizing that the construction works through numbering and specialization rather than reflective file access.",
+        "deps": [
+          "fs-recursion-theorem-needs-source-file-access"
+        ]
+      }
+    ]
+  }
+]

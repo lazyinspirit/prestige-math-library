@@ -114,7 +114,13 @@ const home = new Map();
 for (const full of walk(join(REPO, 'library')).filter((f) => f.endsWith('.md') && !basename(f).startsWith('_'))) {
   const { fm } = split(readFileSync(full, 'utf8'));
   const page = scalar(fm, 'page') || basename(full).replace(/\.md$/, '');
-  for (const id of [...list(fm, 'items'), ...list(fm, 'examples')]) if (!home.has(id)) home.set(id, page);
+  const status = scalar(fm, 'status') || 'draft';
+  for (const id of [...list(fm, 'items'), ...list(fm, 'examples')]) {
+    const existing = home.get(id);
+    // A page is the public carrier.  Preserve its published home even if a
+    // legacy item's own status was not promoted when the page was published.
+    if (!existing || (status === 'published' && existing.status !== 'published')) home.set(id, { page, status });
+  }
 }
 
 const edges = [];
@@ -129,7 +135,9 @@ function classify(source, target, edgeType) {
   const targetBatch = itemBatch.get(resolved);
   if (targetBatch === sourceBatch) return { target: resolved, kind: 'same-batch' };
   if (targetBatch) return { target: resolved, kind: 'cross-batch' };
-  if (targetItem.status === 'published') return { target: resolved, kind: 'published-backward' };
+  if (targetItem.status === 'published' || home.get(resolved)?.status === 'published') {
+    return { target: resolved, kind: 'published-backward' };
+  }
   return { target: resolved, kind: 'unresolved' };
 }
 
@@ -151,12 +159,12 @@ for (const [id, batch] of itemBatch) {
       const target = classified.target;
       edges.push({
         source: id,
-        sourcePage: home.get(id) ?? null,
+        sourcePage: home.get(id)?.page ?? null,
         batch,
         target,
         declared_target: declaredTarget,
         target_statement_provenance: target ? items.get(target)?.statement_provenance ?? null : null,
-        targetPage: target ? home.get(target) ?? null : null,
+        targetPage: target ? home.get(target)?.page ?? null : null,
         targetBatch: target ? itemBatch.get(target) ?? null : null,
         edge_type,
         kind: classified.kind,

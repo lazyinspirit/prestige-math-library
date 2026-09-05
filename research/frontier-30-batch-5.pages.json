@@ -1,0 +1,315 @@
+[
+  {
+    "order": 288.099,
+    "id": "independence-borel-cantelli-and-zero-one-laws",
+    "kind": "A",
+    "category": "probability",
+    "title": "Independence Borel Cantelli and Zero One Laws",
+    "companion": "independence-borel-cantelli-and-zero-one-laws-examples",
+    "requires": [
+      "probability-spaces-random-variables-and-expectation-examples"
+    ],
+    "items": [
+      {
+        "id": "def-independent-families-of-event-classes",
+        "kind": "definition",
+        "title": "Independent families of event classes",
+        "deps": [
+          "def-probability-measure"
+        ]
+      },
+      {
+        "id": "def-independent-sigma-algebras-and-events",
+        "kind": "definition",
+        "title": "Independent sigma-algebras and independent events",
+        "deps": [
+          "def-independent-families-of-event-classes",
+          "def-sigma-algebra"
+        ]
+      },
+      {
+        "id": "def-pairwise-independence",
+        "kind": "definition",
+        "title": "Pairwise independence",
+        "deps": [
+          "def-independent-sigma-algebras-and-events"
+        ]
+      },
+      {
+        "id": "lem-independent-families-pass-to-subfamilies",
+        "kind": "lemma",
+        "title": "Independent families pass to subfamilies",
+        "strategy": "Restrict the defining finite-factorization identity to the chosen smaller index set; nothing new has to be proved once the original family is independent.",
+        "deps": [
+          "def-independent-families-of-event-classes"
+        ]
+      },
+      {
+        "id": "lem-independent-events-remain-independent-under-complements",
+        "kind": "lemma",
+        "title": "Independent events remain independent under complements",
+        "strategy": "Induct on the number of complemented coordinates and rewrite each mixed intersection by subtracting a smaller independent intersection from a probability already known to factor.",
+        "deps": [
+          "def-independent-sigma-algebras-and-events",
+          "lem-probability-measure-basic-identities"
+        ]
+      },
+      {
+        "id": "thm-pi-system-criterion-for-independent-sigma-algebras",
+        "kind": "theorem",
+        "title": "Independent pi-systems generate independent sigma-algebras",
+        "strategy": "Freeze all but one coordinate, collect the good sets into a lambda-system, and iterate Dynkin's pi-lambda theorem across the finite family; the unit event is carried explicitly so the lambda-system axioms close.",
+        "deps": [
+          "def-independent-sigma-algebras-and-events",
+          "def-pi-system",
+          "thm-dynkin-pi-lambda"
+        ]
+      },
+      {
+        "id": "thm-grouping-independent-sigma-algebras",
+        "kind": "theorem",
+        "title": "Disjoint groups of an independent sigma-algebra family remain independent",
+        "strategy": "For each block, finite intersections of members of the sigma-algebras in that block form a pi-system containing the whole space; apply the pi-system criterion to those block pi-systems.",
+        "deps": [
+          "def-independent-sigma-algebras-and-events",
+          "thm-pi-system-criterion-for-independent-sigma-algebras"
+        ]
+      },
+      {
+        "id": "def-independent-random-elements",
+        "kind": "definition",
+        "title": "Independent random elements",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "def-sigma-algebra-generated-by-a-function",
+          "def-independent-sigma-algebras-and-events"
+        ]
+      },
+      {
+        "id": "thm-rectangle-criterion-for-independent-random-elements",
+        "kind": "theorem",
+        "title": "Independent random elements are characterized by finite rectangle probabilities",
+        "strategy": "For each random element, inverse images of measurable target sets form a pi-system generating its sigma-algebra. Independence of the sigma-algebras is therefore equivalent to factorization on all finite measurable rectangles.",
+        "deps": [
+          "def-independent-random-elements",
+          "def-pi-system",
+          "thm-pi-system-criterion-for-independent-sigma-algebras"
+        ]
+      },
+      {
+        "id": "cor-finite-random-variable-independence-agreement",
+        "kind": "corollary",
+        "title": "The general rectangle criterion agrees with the published finite random-variable definition",
+        "strategy": "On a finite full-power-set probability space every finite-valued variable is measurable, and measurable rectangles are exactly joint attained-value events, so the general criterion reduces to the published factorization formula.",
+        "deps": [
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "def-independence-of-finite-random-variables",
+          "lem-finite-random-variables-are-measurable",
+          "thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces"
+        ]
+      },
+      {
+        "id": "lem-measurable-functions-preserve-independence",
+        "kind": "lemma",
+        "title": "Measurable coordinatewise functions preserve independence",
+        "strategy": "Pull each target rectangle back through the measurable coordinate maps and then through the original random elements. The resulting source rectangle factors by the rectangle criterion, so the transformed family is independent.",
+        "deps": [
+          "def-independent-random-elements",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-composition-with-borel-functions-preserves-measurability"
+        ]
+      },
+      {
+        "id": "thm-independent-random-elements-have-product-joint-law",
+        "kind": "theorem",
+        "title": "Independent random elements have product joint law",
+        "strategy": "Compare the law of the finite tuple with the finite product of its marginals on measurable rectangles. Both are probability measures and they agree on the generating rectangle pi-system, so the product-measure uniqueness theorem identifies them everywhere.",
+        "deps": [
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "def-law-or-distribution-of-a-random-element",
+          "lem-law-of-a-random-element-is-a-probability-measure",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ]
+      },
+      {
+        "id": "thm-factorization-of-expectations-for-independent-variables",
+        "kind": "theorem",
+        "title": "Expectations factor over finite products of independent random variables",
+        "strategy": "Use the product joint law from the previous theorem and the change-of-variables formula for expectation. Tonelli handles nonnegative products, Fubini handles absolutely integrable products, and the signed case is reached only after absolute integrability has been checked.",
+        "deps": [
+          "thm-independent-random-elements-have-product-joint-law",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-change-of-variables-for-expectation",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ]
+      },
+      {
+        "id": "cor-covariance-vanishes-under-independence",
+        "kind": "corollary",
+        "title": "Independence forces covariance to vanish",
+        "strategy": "Rewrite covariance as E[XY] - E[X]E[Y] and apply expectation factorization to the product term. The counterexample to the converse stays on the already-published finite examples page.",
+        "deps": [
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables"
+        ]
+      },
+      {
+        "id": "def-limsup-and-infinitely-often-event",
+        "kind": "definition",
+        "title": "Limsup and the infinitely often event",
+        "deps": [
+          "def-set-limsup-and-liminf"
+        ]
+      },
+      {
+        "id": "cor-first-borel-cantelli-lemma-for-events",
+        "kind": "corollary",
+        "title": "First Borel-Cantelli lemma for events",
+        "strategy": "Translate the infinitely-often event into the set limsup and apply the published measure-theoretic Borel-Cantelli theorem with the probability measure as the ambient measure.",
+        "deps": [
+          "def-limsup-and-infinitely-often-event",
+          "thm-first-borel-cantelli"
+        ]
+      },
+      {
+        "id": "thm-pairwise-independent-borel-cantelli-frequency-law",
+        "kind": "theorem",
+        "title": "Pairwise-independent Borel-Cantelli frequency law",
+        "strategy": "For X_k = 1_{A_k} and S_n = sum_{k <= n} X_k, pairwise independence makes the indicators pairwise independent, so var(S_n) = sum var(X_k) <= E[S_n]. Chebyshev gives S_n/E[S_n] -> 1 in probability. Choose the least n_k with E[S_{n_k}] >= k^2, apply the first Borel-Cantelli lemma to the deviations along that subsequence, and interpolate between successive crossings to recover full almost-sure convergence.",
+        "deps": [
+          "def-pairwise-independence",
+          "def-indicator-random-variable",
+          "thm-event-independence-and-indicator-independence",
+          "cor-expectation-of-an-indicator-is-probability",
+          "cor-chebyshev-inequality-for-random-variables",
+          "cor-variance-adds-for-pairwise-independent-random-variables",
+          "cor-first-borel-cantelli-lemma-for-events"
+        ]
+      },
+      {
+        "id": "cor-second-borel-cantelli-lemma-under-pairwise-independence",
+        "kind": "corollary",
+        "title": "Second Borel-Cantelli lemma under pairwise independence",
+        "strategy": "If S_n/E[S_n] -> 1 almost surely and E[S_n] -> infinity, then S_n is unbounded almost surely. Unbounded partial counts are exactly the event that infinitely many of the A_n occur.",
+        "deps": [
+          "def-limsup-and-infinitely-often-event",
+          "thm-pairwise-independent-borel-cantelli-frequency-law"
+        ]
+      },
+      {
+        "id": "def-tail-sigma-algebra-of-a-sequence",
+        "kind": "definition",
+        "title": "Tail sigma-algebra of a sequence",
+        "deps": [
+          "def-generated-sigma-algebra",
+          "def-sigma-algebra-generated-by-a-function",
+          "def-independent-random-elements"
+        ]
+      },
+      {
+        "id": "lem-tail-events-are-independent-of-every-finite-initial-sigma-algebra",
+        "kind": "lemma",
+        "title": "Tail events are independent of every finite initial sigma-algebra",
+        "strategy": "Apply the grouping theorem to the independent family sigma(X_1), sigma(X_2), ... so that the first n coordinates and the future block are independent. A tail event lies in every future block sigma-algebra, hence is independent of each finite initial sigma-algebra.",
+        "deps": [
+          "def-tail-sigma-algebra-of-a-sequence",
+          "thm-grouping-independent-sigma-algebras"
+        ]
+      },
+      {
+        "id": "thm-kolmogorov-zero-one-law",
+        "kind": "theorem",
+        "title": "Kolmogorov zero-one law",
+        "strategy": "Fix a tail event A and let D be the class of events B with P(A cap B) = P(A)P(B). The previous lemma puts every finite initial sigma-algebra inside D. Those initial sigma-algebras form an increasing algebra of events, so the monotone-class theorem gives the sigma-algebra they generate inside D; since the tail event itself lies there, P(A) = P(A)^2.",
+        "deps": [
+          "def-generated-sigma-algebra",
+          "lem-tail-events-are-independent-of-every-finite-initial-sigma-algebra",
+          "thm-monotone-class"
+        ]
+      },
+      {
+        "id": "cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event",
+        "kind": "corollary",
+        "title": "Almost-sure convergence of an independent series is a zero-one event",
+        "strategy": "Changing finitely many terms does not affect convergence of a series, so the convergence event belongs to the tail sigma-algebra. Kolmogorov's zero-one law then forces its probability to be 0 or 1.",
+        "deps": [
+          "def-tail-sigma-algebra-of-a-sequence",
+          "thm-kolmogorov-zero-one-law"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.1,
+    "id": "independence-borel-cantelli-and-zero-one-laws-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Independence Borel Cantelli and Zero One Laws - Examples",
+    "companion": "independence-borel-cantelli-and-zero-one-laws",
+    "requires": [
+      "independence-borel-cantelli-and-zero-one-laws"
+    ],
+    "items": [
+      {
+        "id": "ex-independent-events-that-are-not-disjoint",
+        "kind": "example",
+        "title": "Independent events need not be disjoint",
+        "strategy": "Use a uniform four-point space and choose two coordinate events with a nonempty intersection whose probability still equals the product of the marginals.",
+        "deps": [
+          "def-uniform-finite-probability-space",
+          "def-pairwise-and-mutual-independence-of-events"
+        ]
+      },
+      {
+        "id": "ex-functions-of-disjoint-independent-coordinate-blocks",
+        "kind": "example",
+        "title": "Functions of disjoint independent coordinate blocks remain independent",
+        "strategy": "Let one random quantity depend on the first coordinate block and another on a disjoint later block. The grouping theorem supplies independence without rechecking every rectangle separately.",
+        "deps": [
+          "def-independent-random-elements",
+          "thm-grouping-independent-sigma-algebras"
+        ]
+      },
+      {
+        "id": "ex-borel-cantelli-eventually-no-large-deviations",
+        "kind": "example",
+        "title": "A summable tail bound becomes an almost-sure eventual bound",
+        "strategy": "Apply the first Borel-Cantelli corollary to the events {|X_n| > a_n}; the null limsup event is exactly the statement that only finitely many large deviations occur.",
+        "deps": [
+          "cor-first-borel-cantelli-lemma-for-events"
+        ]
+      },
+      {
+        "id": "ex-zero-one-law-for-convergence-of-a-random-series",
+        "kind": "example",
+        "title": "Convergence of an independent random series is a zero-one event",
+        "strategy": "Verify directly that deleting finitely many initial summands does not change convergence and then invoke the zero-one corollary for independent series.",
+        "deps": [
+          "cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event"
+        ]
+      },
+      {
+        "id": "cex-divergent-probability-sum-without-independence",
+        "kind": "counterexample",
+        "title": "A divergent probability sum does not force infinitely many occurrences without independence",
+        "strategy": "Repeat one event A with 0 < P(A) < 1 as every A_n. Then sum P(A_n) diverges but A_n i.o. is just A, so the limsup event can have any intermediate probability.",
+        "deps": [
+          "def-limsup-and-infinitely-often-event",
+          "lem-probability-measure-basic-identities"
+        ]
+      },
+      {
+        "id": "cex-independent-events-need-not-be-closed-under-unions-of-overlapping-pairs",
+        "kind": "counterexample",
+        "title": "Unions of overlapping independent events need not remain independent",
+        "strategy": "Choose explicit events on a finite product space that are independent before taking unions, then compute the overlapping unions and show the product rule fails for the new pair.",
+        "deps": [
+          "def-uniform-finite-probability-space",
+          "def-pairwise-and-mutual-independence-of-events"
+        ]
+      }
+    ]
+  }
+]

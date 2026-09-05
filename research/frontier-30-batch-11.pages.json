@@ -1,0 +1,390 @@
+[
+  {
+    "order": 366.003,
+    "id": "singular-chains-and-singular-homology",
+    "kind": "A",
+    "category": "algebraic-topology",
+    "title": "Singular Chains and Singular Homology",
+    "companion": "singular-chains-and-singular-homology-examples",
+  "requires": [
+    "simplicial-complexes-and-simplicial-homology-examples",
+    "the-seifert-van-kampen-theorem",
+    "applications-of-the-fundamental-group"
+  ],
+    "items": [
+      {
+        "id": "def-standard-topological-simplex-and-its-affine-face-maps",
+        "kind": "definition",
+        "title": "The standard topological simplex and its affine face maps",
+        "deps": []
+      },
+      {
+        "id": "lem-affine-face-maps-satisfy-the-cosimplicial-identities",
+        "kind": "lemma",
+        "title": "The affine face maps satisfy the cosimplicial identities",
+        "strategy": "Write each face map in coordinates by inserting a zero in the specified slot. For i < j, both composites from Delta^(n-2) to Delta^n insert zeros in the same two positions and shift the remaining coordinates identically, so the formulas agree coordinatewise.",
+        "deps": [
+          "def-standard-topological-simplex-and-its-affine-face-maps"
+        ]
+      },
+      {
+        "id": "def-singular-simplex-and-singular-chain-group-with-coefficients",
+        "kind": "definition",
+        "title": "Singular simplices and singular chain groups with coefficients",
+        "deps": [
+          "def-standard-topological-simplex-and-its-affine-face-maps",
+          "def-continuous-map-top",
+          "def-tensor-product-of-modules-by-generators-and-relations"
+        ]
+      },
+      {
+        "id": "def-singular-boundary-operator",
+        "kind": "definition",
+        "title": "The singular boundary operator",
+        "deps": [
+          "def-singular-simplex-and-singular-chain-group-with-coefficients"
+        ]
+      },
+      {
+        "id": "thm-the-singular-boundary-squares-to-zero",
+        "kind": "theorem",
+        "title": "The singular boundary squares to zero",
+        "strategy": "Expand the double boundary of one singular simplex. The cosimplicial identity pairs the two appearances of each codimension-two face with opposite signs, and the low-degree cases n = 0 and n = 1 are checked directly.",
+        "deps": [
+          "def-singular-boundary-operator",
+          "lem-affine-face-maps-satisfy-the-cosimplicial-identities"
+        ]
+      },
+      {
+        "id": "def-singular-chain-complex-and-singular-homology",
+        "kind": "definition",
+        "title": "The singular chain complex and singular homology",
+        "deps": [
+          "def-singular-boundary-operator",
+          "thm-the-singular-boundary-squares-to-zero",
+          "def-cycle-and-boundary-subobjects-of-a-complex",
+          "def-homology-object-of-a-chain-complex"
+        ]
+      },
+      {
+        "id": "def-induced-singular-chain-map",
+        "kind": "definition",
+        "title": "The induced singular chain map of a continuous map",
+        "deps": [
+          "def-singular-simplex-and-singular-chain-group-with-coefficients",
+          "def-continuous-map-top"
+        ]
+      },
+      {
+        "id": "lem-induced-singular-chain-maps-commute-with-boundaries",
+        "kind": "lemma",
+        "title": "Induced singular chain maps commute with boundaries",
+        "strategy": "On a generator sigma, postcomposition with f commutes with every affine face restriction: f o sigma o delta_i = (f o sigma) o delta_i. Summing the signed faces and extending linearly gives the chain-map identity.",
+        "deps": [
+          "def-induced-singular-chain-map",
+          "def-singular-boundary-operator"
+        ]
+      },
+      {
+        "id": "prop-singular-chains-and-homology-are-covariantly-functorial",
+        "kind": "proposition",
+        "title": "Singular chains and singular homology are covariantly functorial",
+        "strategy": "The identity map and a composite map act on each singular simplex by literal postcomposition, so the corresponding singular chain maps satisfy the identity and composition laws on generators. The boundary-compatibility lemma makes these genuine chain maps, and homology then inherits the same functorial laws.",
+        "deps": [
+          "def-singular-chain-complex-and-singular-homology",
+          "def-induced-singular-chain-map",
+          "lem-induced-singular-chain-maps-commute-with-boundaries",
+          "prop-homology-respects-identities-and-composition"
+        ]
+      },
+      {
+        "id": "def-zero-simplex-augmentation-and-reduced-singular-homology",
+        "kind": "definition",
+        "title": "Augmentation at 0-simplices and reduced singular homology",
+        "deps": [
+          "def-singular-chain-complex-and-singular-homology"
+        ]
+      },
+      {
+        "id": "lem-singular-augmentation-commutes-with-boundary",
+        "kind": "lemma",
+        "title": "The singular augmentation commutes with the boundary",
+        "strategy": "For a singular 1-simplex, the boundary is its terminal 0-simplex minus its initial 0-simplex, so augmentation sends it to 1 - 1 = 0. Higher degrees are unchanged, so adjoining the augmentation still gives a chain complex.",
+        "deps": [
+          "def-zero-simplex-augmentation-and-reduced-singular-homology",
+          "def-singular-boundary-operator"
+        ]
+      },
+      {
+        "id": "prop-zero-th-singular-homology-is-free-on-path-components",
+        "kind": "proposition",
+        "title": "Zero-th singular homology is free on path components",
+        "strategy": "Send a 0-chain to the finitely supported function recording the total coefficient in each path component. Boundaries of singular 1-simplices vanish under this map because every 1-simplex stays inside one path component, and finite-support representatives supply the inverse using only finitely many chosen points.",
+        "deps": [
+          "def-singular-chain-complex-and-singular-homology",
+          "def-zero-simplex-augmentation-and-reduced-singular-homology",
+          "lem-singular-augmentation-commutes-with-boundary",
+          "def-path-connected"
+        ]
+      },
+      {
+        "id": "cor-path-connected-spaces-have-zero-reduced-zero-th-homology",
+        "kind": "corollary",
+        "title": "Path-connected spaces have zero reduced zero-th homology",
+        "strategy": "If X is nonempty and path-connected, the previous proposition identifies H_0(X; Z) with a single copy of Z. Reduced degree-zero homology is the augmentation kernel, so it is zero.",
+        "deps": [
+          "prop-zero-th-singular-homology-is-free-on-path-components",
+          "def-zero-simplex-augmentation-and-reduced-singular-homology",
+          "lem-singular-augmentation-commutes-with-boundary"
+        ]
+      },
+      {
+        "id": "prop-singular-homology-of-a-disjoint-union-is-the-direct-sum",
+        "kind": "proposition",
+        "title": "The singular homology of a disjoint union is the direct sum",
+        "strategy": "Every singular simplex in a disjoint union lands in one summand because the standard simplex is path-connected. Therefore the singular chain complex splits degreewise as the direct sum of the summand chain complexes, and cycles and boundaries split componentwise as well.",
+        "deps": [
+          "def-singular-chain-complex-and-singular-homology",
+          "def-disjoint-union-topology"
+        ]
+      },
+      {
+        "id": "def-prism-operator-for-a-homotopy",
+        "kind": "definition",
+        "title": "The prism operator of a homotopy",
+        "deps": [
+          "def-homotopy-relative-and-path-homotopy",
+          "def-standard-topological-simplex-and-its-affine-face-maps",
+          "def-singular-simplex-and-singular-chain-group-with-coefficients"
+        ]
+      },
+      {
+        "id": "lem-the-prism-triangulation-has-the-stated-oriented-boundary",
+        "kind": "lemma",
+        "title": "The prism triangulation has the stated oriented boundary",
+        "strategy": "List the n + 1 simplices in the standard triangulation of Delta^n x I and compute the alternating boundary of each. Interior faces occur twice with opposite orientations, while the uncancelled faces are the top, the bottom with the opposite sign, and the side prisms indexed by the boundary faces of Delta^n.",
+        "deps": [
+          "def-prism-operator-for-a-homotopy",
+          "def-singular-boundary-operator"
+        ]
+      },
+      {
+        "id": "thm-singular-chain-homotopy-formula",
+        "kind": "theorem",
+        "title": "The singular chain homotopy formula",
+        "strategy": "Apply the homotopy H to each simplex in the standard prism triangulation from the prism-operator definition. The previous boundary computation identifies the boundary of that image prism with the top minus the bottom together with the prism contribution from the simplex boundary.",
+        "deps": [
+          "def-prism-operator-for-a-homotopy",
+          "lem-the-prism-triangulation-has-the-stated-oriented-boundary",
+          "def-induced-singular-chain-map",
+          "def-singular-boundary-operator"
+        ]
+      },
+      {
+        "id": "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+        "kind": "corollary",
+        "title": "Homotopic maps induce the same map on singular homology",
+        "strategy": "The prism operator expresses g_# - f_# as a chain-homotopy boundary. The published chain-homotopy theorem then forces the induced homology maps to agree in every degree.",
+        "deps": [
+          "def-singular-chain-complex-and-singular-homology",
+          "thm-singular-chain-homotopy-formula",
+          "def-chain-homotopy",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology"
+        ]
+      },
+      {
+        "id": "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+        "kind": "theorem",
+        "title": "Homotopy equivalences induce isomorphisms on singular homology",
+        "strategy": "If g is a homotopy inverse of f, the previous corollary identifies (g o f)_* and (f o g)_* with the identity maps on homology. Singular homology functoriality then shows f_* and g_* are inverse isomorphisms.",
+        "deps": [
+          "def-homotopy-equivalence",
+          "prop-singular-chains-and-homology-are-covariantly-functorial",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology"
+        ]
+      },
+      {
+        "id": "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+        "kind": "corollary",
+        "title": "Contractible nonempty spaces have the homology of a point",
+        "strategy": "By the library's nonempty contractibility convention, a contractible space is homotopy equivalent to a one-point space. Apply the homotopy-invariance theorem to the unique map from X to a point.",
+        "deps": [
+          "def-nullhomotopic-map-and-contractible-space",
+          "cor-contractible-iff-identity-nullhomotopic",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology"
+        ]
+      },
+      {
+        "id": "prop-singular-homology-is-invariant-under-deformation-retracts",
+        "kind": "proposition",
+        "title": "Singular homology is invariant under deformation retracts",
+        "strategy": "A deformation retract inclusion is already a homotopy equivalence by the published topology page. Applying homotopy invariance to that inclusion and its retraction gives inverse isomorphisms on singular homology.",
+        "deps": [
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "thm-a-deformation-retract-is-a-homotopy-equivalence"
+        ]
+      },
+      {
+        "id": "def-singular-chain-cross-product-on-generators",
+        "kind": "definition",
+        "title": "The singular chain cross product on generators",
+        "deps": [
+          "def-singular-simplex-and-singular-chain-group-with-coefficients",
+          "def-product-topology"
+        ]
+      },
+      {
+        "id": "lem-singular-chain-cross-product-boundary-formula",
+        "kind": "lemma",
+        "title": "The singular chain cross product satisfies the boundary formula",
+        "strategy": "Handle p=0 and q=0 directly. For positive degrees, cancel internal diagonal faces in pairs between adjacent shuffles, then identify the remaining horizontal and vertical boundary faces with partial sigma x tau and (-1)^p sigma x partial tau.",
+        "deps": [
+          "def-singular-chain-cross-product-on-generators",
+          "def-singular-boundary-operator"
+        ]
+      },
+      {
+        "id": "prop-singular-chain-cross-products-are-natural",
+        "kind": "proposition",
+        "title": "Singular chain cross products are natural",
+        "strategy": "On a generator built from sigma and tau, postcompose the product simplex with f x g and compare with the shuffle sum built from f o sigma and g o tau. The simplices and signs agree term by term, so linearity gives the naturality identity.",
+        "deps": [
+          "def-singular-chain-cross-product-on-generators",
+          "def-induced-singular-chain-map",
+          "def-product-topology"
+        ]
+      },
+      {
+        "id": "def-fundamental-singular-cycle-of-an-oriented-simplex",
+        "kind": "definition",
+        "title": "The affine characteristic singular simplex of an ordered simplex",
+        "deps": [
+          "def-geometric-realization-of-an-abstract-simplicial-complex",
+          "def-standard-topological-simplex-and-its-affine-face-maps"
+        ]
+      },
+      {
+        "id": "def-simplicial-to-singular-chain-map",
+        "kind": "definition",
+        "title": "The simplicial-to-singular chain map",
+        "deps": [
+          "def-fundamental-singular-cycle-of-an-oriented-simplex",
+          "def-simplicial-chain-groups-and-boundary",
+          "def-geometric-realization-of-an-abstract-simplicial-complex"
+        ]
+      },
+      {
+        "id": "lem-simplicial-to-singular-chains-commute-with-boundaries",
+        "kind": "lemma",
+        "title": "The simplicial-to-singular chain map commutes with boundaries",
+        "strategy": "The affine characteristic singular simplex of a codimension-one face is exactly the corresponding face restriction of the characteristic simplex of the whole oriented simplex. Therefore the alternating singular boundary reproduces the alternating simplicial boundary term by term.",
+        "deps": [
+          "def-simplicial-to-singular-chain-map",
+          "def-singular-boundary-operator",
+          "def-simplicial-chain-groups-and-boundary"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 366.004,
+    "id": "singular-chains-and-singular-homology-examples",
+    "kind": "B",
+    "category": "algebraic-topology",
+    "title": "Singular Chains and Singular Homology — Examples",
+    "companion": "singular-chains-and-singular-homology",
+    "requires": [
+      "singular-chains-and-singular-homology"
+    ],
+    "items": [
+      {
+        "id": "ex-singular-chain-complex-of-a-point",
+        "kind": "example",
+        "title": "The singular chain complex of a point",
+        "strategy": "Every singular simplex in a point is the unique constant simplex, so each chain group is rank one and the boundary alternates between identity and zero. A degree-one operator obtained by repeating the unique vertex contracts the augmented complex explicitly.",
+        "deps": [
+          "def-zero-simplex-augmentation-and-reduced-singular-homology",
+          "def-singular-boundary-operator"
+        ]
+      },
+      {
+        "id": "ex-boundaries-of-the-standard-one-and-two-simplices",
+        "kind": "example",
+        "title": "Boundaries of the standard one- and two-simplices",
+        "strategy": "Write the face inclusions of Delta^1 and Delta^2 explicitly and apply the alternating boundary formula. This makes the low-degree sign convention concrete before any general cancellation argument.",
+        "deps": [
+          "def-standard-topological-simplex-and-its-affine-face-maps",
+          "def-singular-boundary-operator"
+        ]
+      },
+      {
+        "id": "ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex",
+        "kind": "example",
+        "title": "Direct cancellation in the boundary squared of a two-simplex",
+        "strategy": "Expand the double boundary of the identity 2-simplex on Delta^2 and list the resulting vertices. Each vertex appears twice with opposite signs, so the full sum is zero.",
+        "deps": [
+          "thm-the-singular-boundary-squares-to-zero",
+          "ex-boundaries-of-the-standard-one-and-two-simplices"
+        ]
+      },
+      {
+        "id": "ex-the-prism-operator-for-a-path-homotopy",
+        "kind": "example",
+        "title": "The prism operator for a path homotopy",
+        "strategy": "For n = 1, triangulate Delta^1 x I as a square cut by one diagonal. Applying the homotopy to those two oriented triangles gives a concrete chain whose boundary is the terminal path minus the initial path together with the side edges.",
+        "deps": [
+          "def-prism-operator-for-a-homotopy",
+          "thm-singular-chain-homotopy-formula",
+          "def-homotopy-relative-and-path-homotopy"
+        ]
+      },
+      {
+        "id": "ex-homology-of-an-interval-from-contractibility",
+        "kind": "example",
+        "title": "The homology of an interval from contractibility",
+        "strategy": "The unit interval is a nonempty convex subset of R, hence contractible by the published straight-line homotopy result. Apply the current contractible-space corollary and compare with the point example.",
+        "deps": [
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "cor-convex-subsets-of-rn-are-contractible",
+          "ex-singular-chain-complex-of-a-point"
+        ]
+      },
+      {
+        "id": "ex-homology-of-punctured-euclidean-space-by-deformation-retraction",
+        "kind": "example",
+        "title": "The homology of punctured Euclidean space by deformation retraction",
+        "strategy": "Use the published radial deformation retract of R^n minus the origin onto S^(n-1). The current deformation-retract invariance proposition then identifies the homology groups without yet computing the sphere groups themselves.",
+        "deps": [
+          "prop-singular-homology-is-invariant-under-deformation-retracts",
+          "thm-punctured-rn-deformation-retracts-onto-the-sphere"
+        ]
+      },
+      {
+        "id": "cex-equal-homology-does-not-imply-homotopy-equivalence",
+        "kind": "counterexample",
+        "title": "Equal homology does not imply homotopy equivalence",
+        "strategy": "Use the exact pair T^2 and (S^1 vee S^1) vee S^2. May's cellular-homology example gives H_0 = Z, H_1 = Z^2, and H_2 = Z for the torus, while Miller's CW-homology notes give the same groups for the wedge space from its one-vertex, two-1-cell, one-2-cell CW structure with zero differentials. The torus has fundamental group Z^2, while van Kampen with the simply connected S^2 summand gives fundamental group F_2 for the wedge space, so a homotopy equivalence would contradict the functoriality and based-homotopy invariance of induced pi_1 maps.",
+        "deps": [
+          "def-singular-chain-complex-and-singular-homology",
+          "def-wedge-of-pointed-spaces",
+          "cor-fundamental-group-of-two-circle-wedge",
+          "cor-fundamental-group-of-two-dimensional-torus",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "cor-seifert-van-kampen-simply-connected-overlap",
+          "prop-retracts-inject-fundamental-groups",
+          "thm-induced-fundamental-group-map-functoriality"
+        ]
+      },
+      {
+        "id": "cex-a-singular-cochain-is-not-a-finite-singular-chain",
+        "kind": "counterexample",
+        "title": "A singular cochain need not have finite support on singular simplices",
+        "strategy": "Take a space with infinitely many singular simplices, such as the interval. The homomorphism sending every basis simplex to 1 is a valid singular cochain, but no singular chain can represent it because singular chains are finite-support sums of simplices.",
+        "deps": [
+          "def-singular-simplex-and-singular-chain-group-with-coefficients",
+          "ex-homology-of-an-interval-from-contractibility"
+        ]
+      }
+    ]
+  }
+]

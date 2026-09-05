@@ -1,0 +1,1310 @@
+{
+ "version": 1,
+ "note": "Step-5 authoring contract for frontier-30 batch 17 on Friday, September 4, 2026.",
+ "scope": [
+  "lem-induction-image-is-an-ideal-in-the-representation-ring",
+  "lem-cyclic-generator-class-functions-by-moebius-inversion",
+  "lem-artin-cyclic-permutation-relation",
+  "thm-artin-induction-for-rational-characters",
+  "cor-cyclic-fixed-points-detect-rational-representations",
+  "cor-rank-of-the-rational-representation-ring",
+  "cor-cyclic-local-integrality-criterion",
+  "ex-artin-induction-for-a-cyclic-group",
+  "ex-artin-permutation-relation-for-a5",
+  "ex-cyclic-fixed-point-detection-for-s3",
+  "cex-rational-valued-character-need-not-be-defined-over-the-rationals"
+ ],
+ "contracts": {
+  "lem-induction-image-is-an-ideal-in-the-representation-ring": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The proof concerns a fixed finite decomposition of an element of the cyclic induction subgroup; there is no separate empty-index-family branch beyond the subgroup sum already built into the definition."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 treats every product term $\\theta_i\\operatorname{Res}_{C_i}^G\\psi$ uniformly, so the zero-character case is included as a summand that still lies in $R(C_i)$."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No singleton-cardinality or value-one specialization is needed: the argument is ring-theoretic and works for arbitrary cyclic subgroups and virtual characters."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The statement is closed under arbitrary summands in the induction ideal, so there is no extra collapsed case distinct from the ordinary algebra in step 2.1."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval, boundary point, or extremal parameter occurs in the ideal argument."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The decomposition in step 1.1 is supplied by the definition of $I_{\\mathrm{cyc}}(G)$; the proof does not choose an element from a merely nonempty set."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The lemma is a one-way closure statement, not one direction of a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "There is no reverse implication to discharge in this ideal-membership lemma."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-cyclic-induction-subgroup",
+     "source_section": "Definition",
+     "quote": "Let $G$ be a finite group. For each cyclic subgroup $C\\le G$\n([[def-generated-subgroup]]), induction on characters gives a homomorphism\n\n$$\\operatorname{Ind}_C^G:R(C)\\longrightarrow R(G)$$\n\n([[def-induced-character-of-a-complex-representation]],\n[[def-virtual-character-and-character-ring-of-a-finite-group]]).\n\nThe **cyclic induction subgroup** of $R(G)$ is\n\n$$I_{\\mathrm{cyc}}(G):=\\sum_{\\substack{C\\le G\\\\ C\\text{ cyclic}}}\\operatorname{Ind}_C^G(R(C))\\subseteq R(G).$$\n\nThus an element of $I_{\\mathrm{cyc}}(G)$ is a finite sum\n\n$$\\sum_i \\operatorname{Ind}_{C_i}^G(\\theta_i)$$\n\nwith each $C_i\\le G$ cyclic and each $\\theta_i\\in R(C_i)$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, let $H\\le G$, let $\\chi\\in R(H)$, and let\n$\\psi\\in R(G)$. Then\n\n$$ \\operatorname{Ind}_H^G\\!\\bigl(\\chi\\cdot\\operatorname{Res}_H^G\\psi\\bigr) = \\bigl(\\operatorname{Ind}_H^G\\chi\\bigr)\\cdot\\psi $$\n\nin the character ring $R(G)$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [F1], write $x=\\sum_{i=1}^r\\operatorname{Ind}_{C_i}^G(\\theta_i)$ with each $C_i\\le G$ cyclic and each $\\theta_i\\in R(C_i)$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Multiplying by $\\psi$ and applying [F2] termwise gives $x\\psi=\\sum_{i=1}^r\\bigl(\\operatorname{Ind}_{C_i}^G(\\theta_i)\\bigr)\\psi=\\sum_{i=1}^r\\operatorname{Ind}_{C_i}^G\\!\\bigl(\\theta_i\\operatorname{Res}_{C_i}^G\\psi\\bigr)$. Each factor $\\theta_i\\operatorname{Res}_{C_i}^G\\psi$ lies in $R(C_i)$, so every summand on the right again belongs to $I_{\\mathrm{cyc}}(G)$ by [F1].",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "step 1.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Therefore $x\\psi\\in I_{\\mathrm{cyc}}(G)$. Since $x\\in I_{\\mathrm{cyc}}(G)$ and $\\psi\\in R(G)$ were arbitrary, $I_{\\mathrm{cyc}}(G)$ is an ideal of $R(G)$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1"
+     ]
+    }
+   ]
+  },
+  "lem-cyclic-generator-class-functions-by-moebius-inversion": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "For the sum in step 2.1, the indexing family contains at least $E$ because $E\\le E\\le C$, so the divisor-sum family is never empty."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The proof uses positive subgroup orders and the Mobius function on positive divisors, so there is no zero-denominator or zero-order branch."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "In the trivial cyclic group, step 3.1 gives $\\operatorname{Ind}_C^C1_C(e)=1$ and step 2.1 gives $1_{\\{\\langle e\\rangle=C\\}}=1$, so the order-one case is included."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 3.1 explicitly separates the non-generator case $\\langle c\\rangle\\ne C$, where the induced-value sum becomes $0$ and matches $\\eta_C(c)$."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "Nothing here depends on interval endpoints or extremal points of a continuum; the only order present is divisibility of subgroup sizes."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The element $c\\in C$ is given at the start, and the proof never selects an arbitrary witness from a nonempty subset."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The lemma asserts one explicit formula; it is not the forward half of an if-and-only-if claim."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No reverse direction is present: equality of class functions is proved directly by pointwise evaluation."
+    }
+   ],
+   "finite_smoke": [
+    {
+     "check": "cyclic-subgroup-lagrange",
+     "asserts": "For each divisor $m$ of $|C|$, the subgroup $\\langle g^{|C|/m}\\rangle$ has order $m$",
+     "claim": "Step 1.1 classifies the subgroups of a finite cyclic group by divisor data, so a bounded cyclic-subgroup size check is a genuine finite smoke obligation here.",
+     "checked_in": "step 1.1",
+     "max_modulus": 24
+    }
+   ],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-generated-subgroup",
+     "source_section": "Definition",
+     "quote": "Let $G$ be a group ([[def-group]]) and $S \\subseteq G$ a subset. The set of\nsubgroups of $G$ containing $S$ is nonempty, since $G$ itself is such a subgroup,\nso its intersection is a subgroup of $G$ by [[lem-intersection-of-subgroups]].\nThat intersection is the **subgroup generated by $S$**,\n\n$$\\langle S \\rangle \\;:=\\; \\bigcap \\{\\, H \\;:\\; H \\le G \\text{ and } S \\subseteq H \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each containing $S$, and it is\ncontained in every subgroup of $G$ that contains $S$; so it is the **smallest**\nsubgroup of $G$ containing $S$, and these two properties determine it uniquely.\nThe elements of $S$ are called **generators**.\n\nFor a single element $g \\in G$ we write $\\langle g \\rangle := \\langle \\{g\\}\\rangle$\nand call it the **cyclic subgroup generated by $g$**. A group $G$ is **cyclic**\nwhen $G = \\langle g \\rangle$ for some $g \\in G$.\n\nBy convention $\\langle \\varnothing \\rangle = \\{e\\}$: the trivial subgroup is the\nsmallest subgroup containing the empty set, and this is a consequence of the\ndefinition, not a stipulation, since every subgroup contains $e$\n([[def-subgroup]]).",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-frobenius-formula-for-induced-characters",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, let $H\\le G$, and let $\\chi$ be the character of a\nfinite-dimensional complex representation of $H$. Then for every $g\\in G$,\n\n$$ \\operatorname{Ind}_H^G\\chi(g) = \\frac1{|H|} \\sum_{\\substack{x\\in G\\\\x^{-1}gx\\in H}} \\chi(x^{-1}gx). $$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Let $E:=\\langle c\\rangle$. By [F1], for every subgroup $D\\le C$ one has $c\\in D$ if and only if $E\\le D$. Choose a generator $g$ of $C$. For each divisor $m$ of $|C|$, the subgroup $\\langle g^{|C|/m}\\rangle$ has order $m$, so cyclic subgroups of $C$ are uniquely indexed by the divisors of $|C|$. If $H,K\\le C$ have orders $m,n$, then $H\\le K$ holds exactly when $m\\mid n$, because with the displayed indexing one has $\\langle g^{|C|/m}\\rangle\\le\\langle g^{|C|/n}\\rangle$ exactly when $|C|/n$ divides $|C|/m$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The quotient $|C:E|$ is a positive integer. If $E\\le D\\le C$, then $|C:E|=|C:D|\\,|D:E|$, so the index $|C:D|$ divides $|C:E|$. Conversely, if $d$ is a positive divisor of $|C:E|$, put $m:=|C|/d$. Then $|E|$ divides $m$, so by step 1.1 the unique subgroup $D\\le C$ of order $m$ contains $E$ and satisfies $|C:D|=d$. Therefore the positive divisors of $|C:E|$ are exactly the indices $|C:D|$ for subgroups $D$ with $E\\le D\\le C$. Hence [F3] gives $$ \\sum_{E\\le D\\le C}\\mu(|C:D|)= \\sum_{d\\mid |C:E|}\\mu(d)= \\begin{cases} 1, & |C:E|=1,\\\\ 0, & |C:E|>1. \\end{cases} $$ Since $|C:E|=1$ holds exactly when $E=C$, this is $1_{\\{\\langle c\\rangle=C\\}}$.",
+     "step": "2.1",
+     "inputs": [
+      "F3",
+      "step 1.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Because $C$ is abelian, $x^{-1}cx=c$ for every $x\\in C$, so [F2] becomes $\\operatorname{Ind}_D^C1_D(c)=|C|/|D|$ when $c\\in D$ and $\\operatorname{Ind}_D^C1_D(c)=0$ when $c\\notin D$. Using step 1.1, the right-hand side of the claimed formula evaluates at $c$ to $\\sum_{D\\le C}\\mu(|C:D|)|D|\\operatorname{Ind}_D^C1_D(c)=|C|\\sum_{E\\le D\\le C}\\mu(|C:D|)=|C|\\,1_{\\{\\langle c\\rangle=C\\}}$, which is exactly $\\eta_C(c)$ by step 2.1.",
+     "step": "3.1",
+     "inputs": [
+      "F2",
+      "step 1.1",
+      "step 2.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "The equality of step 3.1 holds for every $c\\in C$, so the two class functions are equal.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-a-6b",
+    "notes": "Critical risk was the subgroup-structure claim for cyclic groups: the earlier linear-order sentence was false. I reread the repaired proof and citations; it now uses the exact divisor-index classification of cyclic subgroups, matches containment with divisibility, and runs the Mobius sum over divisors of |C:<c>| without any hidden lattice error."
+   }
+  },
+  "lem-artin-cyclic-permutation-relation": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "A finite group always has at least the trivial cyclic subgroup, so the sum over cyclic subgroups is never empty."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The proof counts contributions of group elements and subgroup orders; there is no separate zero-parameter branch."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "If $G$ is trivial, step 2.1 counts exactly one element of $G$ and yields $f(e)=|G|=1$, so the relation specializes to $1_G=1_G$."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 2.1 includes the case that a candidate cyclic subgroup contributes nothing: every $x\\in G$ has exactly one contributing subgroup, while all others contribute zero."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval or boundary-value analysis occurs in the counting argument."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof does not choose from a merely nonempty family; it sums over all cyclic subgroups and all group elements."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement is a direct existence formula, not one implication of a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "There is no converse direction attached to the Artin permutation relation."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-cyclic-generator-class-functions-by-moebius-inversion",
+     "source_section": "Statement",
+     "quote": "Let $C$ be a finite cyclic group, and define a class function $\\eta_C:C\\to\n\\mathbb Z$ by\n\n$$\\eta_C(c)=\n\\begin{cases}\n|C|, & \\langle c\\rangle=C,\\\\\n0, & \\langle c\\rangle\\ne C.\n\\end{cases}$$\n\nThen\n\n$$\\eta_C=\\sum_{D\\le C}\\mu(|C:D|)\\,|D|\\,\\operatorname{Ind}_D^C1_D,$$\n\nwhere $\\mu$ is the classical number-theoretic Mobius function, characterized by\n\n$$\\sum_{d\\mid n}\\mu(d)=\n\\begin{cases}\n1, & n=1,\\\\\n0, & n>1.\n\\end{cases}$$",
+     "uses": [
+      "1.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-frobenius-formula-for-induced-characters",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, let $H\\le G$, and let $\\chi$ be the character of a\nfinite-dimensional complex representation of $H$. Then for every $g\\in G$,\n\n$$ \\operatorname{Ind}_H^G\\chi(g) = \\frac1{|H|} \\sum_{\\substack{x\\in G\\\\x^{-1}gx\\in H}} \\chi(x^{-1}gx). $$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-transitivity-of-induction-for-finite-groups",
+     "source_section": "Statement",
+     "quote": "Let $K\\le H\\le G$ be subgroups of a finite group $G$, and let $W$ be an\n$R$-linear $K$-module over a commutative ring $R$. Then\n\n$$ \\operatorname{Ind}_H^G(\\operatorname{Ind}_K^H W)\\cong \\operatorname{Ind}_K^G W $$\n\nas $R$-linear $G$-modules.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "For each cyclic subgroup $C\\le G$, let $\\eta_C$ be the class function from [F1], and define $f:=\\sum_{\\substack{C\\le G\\\\C\\text{ cyclic}}}\\operatorname{Ind}_C^G\\eta_C$. The sum is finite because a finite group has only finitely many subgroups.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "By [F2], for each cyclic $C\\le G$ one has $\\operatorname{Ind}_C^G\\eta_C(g)=\\frac1{|C|}\\sum_{\\substack{x\\in G\\\\x^{-1}gx\\in C}}\\eta_C(x^{-1}gx)$. Fix $x\\in G$. Among all cyclic subgroups $C\\le G$, exactly one of them can make the summand indexed by $x$ nonzero, namely $C=\\langle x^{-1}gx\\rangle$; for that subgroup, the value of $\\eta_C$ is $|C|$. Therefore the double sum defining $f(g)$ contributes exactly $1$ for each $x\\in G$, so $f(g)=|G|$.",
+     "step": "2.1",
+     "inputs": [
+      "F2",
+      "step 1.1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Step 2.1 holds for every $g\\in G$, hence $f=|G|1_G$ as class functions. Expanding each $\\eta_C$ by [F1] and then using [F3] to replace $\\operatorname{Ind}_C^G(\\operatorname{Ind}_D^C1_D)$ by $\\operatorname{Ind}_D^G1_D$ expresses $f$ as an integral linear combination of characters $\\operatorname{Ind}_D^G1_D$ with $D$ cyclic. Thus $|G|1_G$ has the required form.",
+     "step": "3.1",
+     "inputs": [
+      "F1",
+      "F3",
+      "step 1.1",
+      "step 2.1",
+      "algebra"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-a-6b",
+    "notes": "High risk is the uniqueness of the contributing cyclic subgroup in the double induced-character sum. On reread, the current proof is sound with the repaired generator-indicator lemma: for each fixed x and g, the only subgroup that contributes nontrivially is <x^(-1)gx>, and transitivity of induction then gives the required integral Artin relation."
+   }
+  },
+  "thm-artin-induction-for-rational-characters": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The argument uses the nonempty family of cyclic subgroups provided by a finite group; the theorem does not branch on an empty indexing set."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 already yields $|G|x\\in I_{\\mathrm{cyc}}(G)$ for arbitrary $x$, so the zero character is included without any extra case split."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No singleton-value branch is singled out in the induction theorem itself; the cyclic-group boundary is treated separately on the examples page."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "Apart from the zero character already covered, the proof does not collapse to a separate degenerate regime: every rational character is handled by the same Artin relation."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The theorem is algebraic and uses no interval endpoints or limiting values."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The cyclic subgroups and coefficients are chosen from the existing Artin relation in step 1.1, not from an arbitrary nonempty set whose choice properties matter."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 3.1 proves the forward direction by dividing the controlled multiple from step 2.1 and obtaining a rational linear combination of induced cyclic characters."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 4.1 proves the reverse direction by clearing denominators in a rational linear combination and placing the resulting multiple in $I_{\\mathrm{cyc}}(G)$."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-induction-image-is-an-ideal-in-the-representation-ring",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group. Then the cyclic induction subgroup\n$I_{\\mathrm{cyc}}(G)\\subseteq R(G)$ is an ideal of the character ring $R(G)$.",
+     "uses": [
+      "1.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-artin-cyclic-permutation-relation",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group. Then there is an integral linear combination of\ncharacters induced from trivial characters of cyclic subgroups whose value is\n$|G|1_G$. Equivalently,\n\n$$|G|1_G=\\sum_i a_i\\,\\operatorname{Ind}_{C_i}^G1_{C_i}$$\n\nfor cyclic subgroups $C_i\\le G$ and integers $a_i$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, let $H\\le G$, let $\\chi\\in R(H)$, and let\n$\\psi\\in R(G)$. Then\n\n$$ \\operatorname{Ind}_H^G\\!\\bigl(\\chi\\cdot\\operatorname{Res}_H^G\\psi\\bigr) = \\bigl(\\operatorname{Ind}_H^G\\chi\\bigr)\\cdot\\psi $$\n\nin the character ring $R(G)$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [F2], choose cyclic subgroups $C_i\\le G$ and integers $a_i$ with $|G|1_G=\\sum_i a_i\\operatorname{Ind}_{C_i}^G1_{C_i}$. Multiplying by $x$ in $R(G)$ gives $|G|x=\\sum_i a_i\\bigl(\\operatorname{Ind}_{C_i}^G1_{C_i}\\bigr)x$. Because [F1] makes $I_{\\mathrm{cyc}}(G)$ an ideal containing each $\\operatorname{Ind}_{C_i}^G1_{C_i}$, this already shows $|G|x\\in I_{\\mathrm{cyc}}(G)$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Applying [F3] to each summand of step 1.1 yields $|G|x=\\sum_i a_i\\operatorname{Ind}_{C_i}^G(\\operatorname{Res}_{C_i}^Gx)$. By [A1], each $\\operatorname{Res}_{C_i}^Gx$ again lies in the rational representation ring of the cyclic subgroup $C_i$. This identity is an explicit expression of $|G|x$ as a sum of characters induced from cyclic subgroups.",
+     "step": "2.1",
+     "inputs": [
+      "F3",
+      "A1",
+      "step 1.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Dividing the identity of step 2.1 by $|G|$ expresses $x$ as a rational linear combination of characters induced from cyclic subgroups of $G$. This is claim 1.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Conversely, if $x$ is any rational linear combination of characters induced from cyclic subgroups, then multiplying by a common positive denominator places that multiple of $x$ in $I_{\\mathrm{cyc}}(G)$. Step 1.1 shows that one may take the specific controlled denominator $|G|$, so claims 1 and 2 are equivalent.",
+     "step": "4.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "step 3.1",
+      "algebra"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-a-6b",
+    "notes": "High risk is the controlled denominator |G| and the closure of R_Q under subgroup restriction. The current proof now cleanly separates those points: step 1.1 puts |G|x in the cyclic induction ideal via the Artin relation, step 2.1 uses the projection formula, and the explicit Q-restriction fact makes each restricted summand stay inside the rational representation ring of the cyclic subgroup."
+   }
+  },
+  "cor-cyclic-fixed-points-detect-rational-representations": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The product in the statement is indexed by cyclic conjugacy classes, and the trivial subgroup contributes one such class, so the coordinate family is nonempty."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 5.1 is exactly the zero-detection step: from vanishing cyclic pairings it deduces $\\langle x,x\\rangle_G=0$ and hence $x=0$."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The corollary is not about a one-element subgroup as a special exception; the trivial subgroup is simply one coordinate among the cyclic ones."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 3.1 explicitly includes the case that a cyclic fixed-space coordinate vanishes for every subgroup, and step 4.1 propagates that degenerate data to all cyclicly induced test characters."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No ordered interval or endpoint phenomenon occurs in this character-theoretic injectivity argument."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "Step 1.1 chooses one generator for each subgroup of a fixed cyclic group, but the conclusion does not depend on a pick from a merely nonempty class beyond naming coefficients."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The corollary states injectivity and the interpretation of its coordinates; it is not written as a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "There is no reverse implication distinct from the injectivity claim in the statement."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-standard-inner-product-on-complex-class-functions",
+     "source_section": "Definition",
+     "quote": "For two class functions $\\varphi,\\psi\\in\\mathrm{cf}(G)$\n([[def-class-function-and-the-space-of-complex-class-functions]]), define\n\n$$\\langle\\varphi,\\psi\\rangle:=\\frac{1}{|G|}\\sum_{g\\in G}\\varphi(g)\\,\\overline{\\psi(g)},$$\n\nthe finite sum being that of\n([[def-sum-over-a-finite-index-set]]). This is the standard Hermitian form on\nthe complex vector space of class functions.\n\nThis assignment is an inner product in the exact sense of the published\ndefinition ([[def-inner-product-space]]), with the inner product linear in the\nfirst argument. Linearity in the first slot is immediate from the pointwise\nvector-space structure of $\\mathrm{cf}(G)$ and linearity of the finite sum. The\nconjugate-symmetry clause holds because conjugation\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) is an involution:\n$\\langle\\psi,\\varphi\\rangle=\\frac1{|G|}\\sum_g\\psi(g)\\overline{\\varphi(g)}\n=\\overline{\\frac1{|G|}\\sum_g\\varphi(g)\\overline{\\psi(g)}}\n=\\overline{\\langle\\varphi,\\psi\\rangle}$. For definiteness,\n$\\langle\\varphi,\\varphi\\rangle=\\frac1{|G|}\\sum_g|\\varphi(g)|^2$ is a sum of\nnonnegative real numbers, hence nonnegative real; it is $0$ exactly when every\nterm $|\\varphi(g)|^2$ is $0$, and since $|z|=0$ holds only for $z=0$ in\n$\\mathbb C$, that says exactly $\\varphi=0$ as a function.",
+     "uses": [
+      "4.1",
+      "5.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "cor-frobenius-reciprocity-for-complex-characters",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, let $H\\le G$, let $\\chi$ be a complex character of\n$H$, and let $\\psi$ be a complex character of $G$. Then\n\n$$\\langle \\operatorname{Ind}_H^G\\chi,\\psi\\rangle_G = \\langle \\chi,\\operatorname{Res}_H^G\\psi\\rangle_H.$$",
+     "uses": [
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "lem-averaging-operator-projects-onto-the-fixed-subspace",
+     "source_section": "Statement",
+     "quote": "Let $\\rho:G\\to\\operatorname{GL}(V)$ be a finite-dimensional representation of\na finite group $G$ over $\\mathbb C$. The **averaging operator**\n\n$$P:=\\frac{1}{|G|}\\sum_{g\\in G}\\rho(g)$$\n\nsatisfies $P^2=P$ and has image exactly $V^{G}$; consequently\n$\\operatorname{tr}P=\\dim V^{G}$.",
+     "uses": [
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-g-fixed-subspace-of-a-representation",
+     "source_section": "Definition",
+     "quote": "Let $\\rho:G\\to\\operatorname{GL}(V)$ be a representation of a group $G$ over a\nfield $k$ ([[def-finite-dimensional-representation-of-a-group-over-a-field]]).\nThe **fixed subspace** of $V$ is\n\n$$V^{G}:=\\bigl\\{\\,v\\in V\\;:\\;g\\cdot v=v\\text{ for every }g\\in G\\,\\bigr\\}.$$\n\nThe set $V^{G}$ is a linear subspace of $V$\n([[def-linear-subspace]]): it contains $0_V$ because every operator\n$\\rho(g)$ is linear, it is closed under addition and scalar multiplication\nfor the same reason, and the defining equations are the required pointwise\nidentities. When $G$ is finite and $k=\\mathbb C$,\n[[lem-averaging-operator-projects-onto-the-fixed-subspace]] shows that an\nexplicit projection of $V$ has image exactly $V^{G}$.",
+     "uses": [
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "lem-cyclic-generator-class-functions-by-moebius-inversion",
+     "source_section": "Statement",
+     "quote": "Let $C$ be a finite cyclic group, and define a class function $\\eta_C:C\\to\n\\mathbb Z$ by\n\n$$\\eta_C(c)=\n\\begin{cases}\n|C|, & \\langle c\\rangle=C,\\\\\n0, & \\langle c\\rangle\\ne C.\n\\end{cases}$$\n\nThen\n\n$$\\eta_C=\\sum_{D\\le C}\\mu(|C:D|)\\,|D|\\,\\operatorname{Ind}_D^C1_D,$$\n\nwhere $\\mu$ is the classical number-theoretic Mobius function, characterized by\n\n$$\\sum_{d\\mid n}\\mu(d)=\n\\begin{cases}\n1, & n=1,\\\\\n0, & n>1.\n\\end{cases}$$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "thm-transitivity-of-induction-for-finite-groups",
+     "source_section": "Statement",
+     "quote": "Let $K\\le H\\le G$ be subgroups of a finite group $G$, and let $W$ be an\n$R$-linear $K$-module over a commutative ring $R$. Then\n\n$$ \\operatorname{Ind}_H^G(\\operatorname{Ind}_K^H W)\\cong \\operatorname{Ind}_K^G W $$\n\nas $R$-linear $G$-modules.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "thm-frobenius-formula-for-induced-characters",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, let $H\\le G$, and let $\\chi$ be the character of a\nfinite-dimensional complex representation of $H$. Then for every $g\\in G$,\n\n$$ \\operatorname{Ind}_H^G\\chi(g) = \\frac1{|H|} \\sum_{\\substack{x\\in G\\\\x^{-1}gx\\in H}} \\chi(x^{-1}gx). $$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "thm-artin-induction-for-rational-characters",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, and let $x\\in R_{\\mathbb Q}(G)$ in the sense of\n[[def-rational-character-ring]]. Then:\n\n1. $x$ is a rational linear combination of characters induced from cyclic\n   subgroups of $G$.\n2. Equivalently, the controlled multiple $|G|x$ lies in the cyclic induction\n   subgroup $I_{\\mathrm{cyc}}(G)$.",
+     "uses": [
+      "6.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Let $C\\le G$ be cyclic, and let $y\\in R_{\\mathbb Q}(C)$. By [[def-rational-character-ring]], $y$ is an integral linear combination of characters of finite-dimensional $\\mathbb Q$-representations of $C$, so it is enough to prove the next claim for one such character and then extend by linearity. Let $\\rho:C\\to\\operatorname{GL}(V)$ be a finite-dimensional $\\mathbb Q$-representation with character $y$, let $D\\le C$, and let $d,d'$ be generators of $D$. Then $d'=d^u$ for some integer $u$ coprime to $|D|$. Because $d^{|D|}=1$, the matrix $\\rho(d)$ has rational entries and satisfies $\\rho(d)^{|D|}=I$, so over $\\mathbb C$ it is diagonalizable with eigenvalues among the $|D|$-th roots of unity. Because the characteristic polynomial of $\\rho(d)$ lies in $\\mathbb Q[t]$, those eigenvalues occur with multiplicities stable under the Galois automorphism $\\zeta\\mapsto\\zeta^u$ of the cyclotomic field. Thus the multisets of eigenvalues of $\\rho(d)$ and $\\rho(d')=\\rho(d)^u$ agree, so $y(d')=\\operatorname{tr}\\rho(d')=\\operatorname{tr}\\rho(d)=y(d)$. Therefore every $y\\in R_{\\mathbb Q}(C)$ is constant on the set of generators of each subgroup of $C$. [[def-rational-character-ring]]",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "For each subgroup $D\\le C$, choose a generator $d_D$ of $D$ when $D\\ne1$ and put $d_1=e$. Writing $b_D:=y(d_D)\\in\\mathbb Q$, step 1.1 gives $$ |C|y=\\sum_{D\\le C} b_D\\,\\widetilde\\eta_D, $$ where $\\widetilde\\eta_D(c)=|C|$ when $\\langle c\\rangle=D$ and $\\widetilde\\eta_D(c)=0$ otherwise.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "given",
+      "choose",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "For each $D\\le C$, one has $\\widetilde\\eta_D=\\operatorname{Ind}_D^C\\eta_D$. Indeed, if $c\\in C$ generates $D$, then $c\\in D$ and $C$ is abelian, so [F6] gives $\\operatorname{Ind}_D^C\\eta_D(c)=|C|$; if $\\langle c\\rangle\\ne D$, then either $c\\notin D$ or $c$ does not generate $D$, and the induced value is $0$. Using [F4] inside $D$ and [F5] to induce further to $C$, each $\\widetilde\\eta_D$ is therefore an integral linear combination of the permutation characters $U_E^C:=\\operatorname{Ind}_E^C1_E$ with $E\\le D$. Thus every $y\\in R_{\\mathbb Q}(C)$ is a rational linear combination of the $U_E^C$.",
+     "step": "3.1",
+     "inputs": [
+      "F4",
+      "F5",
+      "F6",
+      "step 2.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "Suppose now that $m_D(x)=0$ for every cyclic subgroup $D\\le G$. Let $C\\le G$ be cyclic. For each subgroup $E\\le C$, the class functions $\\operatorname{Res}_C^Gx$ and $U_E^C$ are rational-valued, so [F1] makes their inner product symmetric. Using that symmetry and then Frobenius reciprocity [F2], we get $$ \\langle \\operatorname{Res}_C^Gx,U_E^C\\rangle_C =\\langle U_E^C,\\operatorname{Res}_C^Gx\\rangle_C =\\langle 1_E,\\operatorname{Res}_E^Gx\\rangle_E =\\langle \\operatorname{Res}_E^Gx,1_E\\rangle_E =m_E(x)=0. $$",
+     "step": "4.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "step 3.1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "By step 3.1, every $y\\in R_{\\mathbb Q}(C)$ is a rational linear combination of the class functions $U_E^C$, and both $\\operatorname{Res}_C^Gx$ and $y$ are rational-valued by [[def-rational-character-ring]]. Thus the $\\mathbb Q$-bilinearity of [F1] on rational-valued class functions combines with step 4.1 to give $\\langle \\operatorname{Res}_C^Gx,y\\rangle_C=0$ for every $y\\in R_{\\mathbb Q}(C)$. Applying [F2] again, we get $\\langle \\operatorname{Ind}_C^Gy,x\\rangle_G=0$ for every cyclic subgroup $C\\le G$ and every $y\\in R_{\\mathbb Q}(C)$.",
+     "step": "5.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "step 3.1",
+      "step 4.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-6-1",
+     "claim": "By [F7], the rational virtual character $x$ is itself a rational linear combination of the induced characters $\\operatorname{Ind}_C^Gy$ from step 5.1. Linearity of [F1] in the first argument and step 5.1 therefore give $\\langle x,x\\rangle_G=0$. The positive definiteness in [F1] forces $x=0$. Therefore the map $x\\mapsto(m_C(x))_{(C)}$ is injective.",
+     "step": "6.1",
+     "inputs": [
+      "F1",
+      "F7",
+      "step 5.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-7-1",
+     "claim": "For an honest $\\mathbb Q$-representation $V$, the equality $m_C(\\chi_V)=\\dim V^C$ is exactly [F3].",
+     "step": "7.1",
+     "inputs": [
+      "F3",
+      "step 6.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-a-6b",
+    "notes": "Critical risk was the cyclic-generator trace argument and the Frobenius reciprocity argument order. The current proof fixes the first by using only rho(d)^{|D|}=I, not “order |D|,” and fixes the second by invoking the symmetric restriction of the inner product on rational-valued class functions before applying Frobenius reciprocity, so the injectivity argument is now correct on the reread."
+   }
+  },
+  "cor-rank-of-the-rational-representation-ring": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "A finite group has at least one cyclic subgroup up to conjugacy, namely the trivial subgroup, so the rank count never compares against zero cyclic classes."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The rank of $R_{\\mathbb Q}(G)$ is never handled through a zero-size case; the proof compares an injective upper bound with explicit independent elements."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "When there is exactly one cyclic conjugacy class, step 1.1 gives rank at most $1$ and step 3.1 supplies one nonzero permutation character, so the argument still proves rank $1$."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 2.1 allows some coefficients $a_i$ to vanish and chooses the first nonzero one; that is the only collapsed linear-dependence regime the proof must control."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No endpoint or boundary-line argument appears in the linear-independence proof."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "Choosing representatives and a generator in steps 1.1 and 1.2 is bookkeeping, not a mathematically delicate pick from a nonempty family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The corollary states one equality of ranks, not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No reverse logical direction exists separately from the proof of the equality."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "cor-cyclic-fixed-points-detect-rational-representations",
+     "source_section": "Statement",
+     "quote": "For each cyclic subgroup $C\\le G$, define\n\n$$m_C(x):=\\langle \\operatorname{Res}_C^Gx,1_C\\rangle_C \\qquad (x\\in R_{\\mathbb Q}(G)).$$\n\nThen the family $(m_C(x))_{(C)}$, indexed by conjugacy classes of cyclic\nsubgroups of $G$, determines $x$ uniquely. In particular, the map\n\n$$R_{\\mathbb Q}(G)\\longrightarrow \\prod_{(C)}\\mathbb Q,\\qquad x\\longmapsto (m_C(x))_{(C)}$$\n\nis injective. For an honest $\\mathbb Q$-representation $V$, one has\n$m_C(\\chi_V)=\\dim V^C$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group and let $H\\le G$. Inducing the trivial complex\nrepresentation of $H$ to $G$ gives the permutation representation of $G$ on the\nleft coset set $G/H$.",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-character-of-a-permutation-representation-counts-fixed-points",
+     "source_section": "Statement",
+     "quote": "Let $X$ be a finite left $G$-set and let $\\mathbb C^{(X)}$ be the permutation\nrepresentation over $\\mathbb C$. Then the character of $\\mathbb C^{(X)}$ is\n\n$$\\chi_{\\mathbb C^{(X)}}(g)=\\bigl|\\{\\,x\\in X:g\\cdot x=x\\,\\}\\bigr|,$$\n\nthe number of fixed points of $g$ acting on $X$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Choose representatives $C_1,\\dots,C_r$ of the conjugacy classes of cyclic subgroups of $G$. By [F1], the group $R_{\\mathbb Q}(G)$ injects into $\\mathbb Q^r$, so its rank is at most $r$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given",
+      "choose"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "For each $i$, let $U_i:=\\operatorname{Ind}_{C_i}^G1_{C_i}$, viewed as an element of $R_{\\mathbb Q}(G)$. Suppose that $a_1U_1+\\cdots+a_rU_r=0$ with $a_i\\in\\mathbb Q$. Reorder the representatives so that $|C_1|\\ge\\cdots\\ge|C_r|$, and choose $i$ minimal with $a_i\\ne0$. Let $g_i$ be a generator of $C_i$.",
+     "step": "1.2",
+     "inputs": [
+      "F2",
+      "given",
+      "choose"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "If $U_j(g_i)\\ne0$, then [F2] and [F3] show that $g_i$ fixes some coset $xC_j$, so $x^{-1}g_ix\\in C_j$. Therefore a conjugate of the cyclic subgroup $C_i=\\langle g_i\\rangle$ lies in $C_j$, which implies $|C_i|\\le|C_j|$. In the relation from step 1.2, every index $j<i$ has $a_j=0$ by minimality of $i$, so only $j\\ge i$ can contribute. For such $j$, the ordering gives $|C_j|\\le|C_i|$, hence $|C_j|=|C_i|$. A subgroup of $C_j$ with the same finite order as $C_j$ must equal $C_j$, so the conjugate of $C_i$ lying in $C_j$ is all of $C_j$. Thus $C_j$ is conjugate to $C_i$, and because $C_1,\\dots,C_r$ were chosen as distinct conjugacy-class representatives, this forces $j=i$. On the other hand, $g_i$ fixes the coset $C_i$ itself, so [F2] and [F3] give $U_i(g_i)>0$. Evaluating the relation from step 1.2 at $g_i$ therefore yields $a_iU_i(g_i)=0$, a contradiction. Thus the $U_i$ are linearly independent.",
+     "step": "2.1",
+     "inputs": [
+      "F2",
+      "F3",
+      "step 1.2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Step 2.1 gives $r$ linearly independent elements of $R_{\\mathbb Q}(G)$, while step 1.1 shows that the rank is at most $r$. Hence $\\operatorname{rank}R_{\\mathbb Q}(G)=r$, the number of cyclic conjugacy classes.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "algebra"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-a-6b",
+    "notes": "High risk was the minimal-index elimination in the independence argument for the permutation characters U_i. The current step 2.1 now restricts attention to coefficients a_j that are actually nonzero, uses the size ordering to force |C_j|=|C_i|, and then uses distinct conjugacy-class representatives to conclude j=i, removing the earlier gap for larger cyclic overgroups."
+   }
+  },
+  "cor-cyclic-local-integrality-criterion": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The hypothesis quantifies over all cyclic subgroups of a finite group, and that family is never empty."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 shows that every induced summand lands in $R(G)$, so the zero-character restriction case is absorbed automatically by the same integral-linear-combination argument."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "If $|G|=1$, step 1.1 gives the trivial Artin relation and step 2.1 yields $x\\in R(G)$ directly, so the denominator bound collapses to $1$."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "Beyond the already-covered trivial group and zero character, the proof does not split into a second degenerate regime."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The corollary concerns character rings and induction, not endpoint behavior."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The cyclic subgroups and coefficients come from the Artin relation of step 1.1; no additional choice principle is used."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "This authored corollary is the narrowed denominator statement $|G|x\\in R(G)$, not an if-and-only-if integrality criterion."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse statement is claimed after the narrowing to the source-backed bounded-denominator result."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-artin-cyclic-permutation-relation",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group. Then there is an integral linear combination of\ncharacters induced from trivial characters of cyclic subgroups whose value is\n$|G|1_G$. Equivalently,\n\n$$|G|1_G=\\sum_i a_i\\,\\operatorname{Ind}_{C_i}^G1_{C_i}$$\n\nfor cyclic subgroups $C_i\\le G$ and integers $a_i$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, let $H\\le G$, let $\\chi\\in R(H)$, and let\n$\\psi\\in R(G)$. Then\n\n$$ \\operatorname{Ind}_H^G\\!\\bigl(\\chi\\cdot\\operatorname{Res}_H^G\\psi\\bigr) = \\bigl(\\operatorname{Ind}_H^G\\chi\\bigr)\\cdot\\psi $$\n\nin the character ring $R(G)$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-virtual-character-and-character-ring-of-a-finite-group",
+     "source_section": "Definition",
+     "quote": "Let $G$ be a finite group. A **virtual character** of $G$ is an integral linear\ncombination of irreducible complex characters:\n\n$$ \\vartheta=\\sum_i n_i\\chi_i, \\qquad n_i\\in\\mathbb Z, $$\n\nwith only finitely many nonzero coefficients. Since irreducible characters are\nclass functions, every virtual character is a class function on $G$\n([[def-class-function-and-the-space-of-complex-class-functions]],\n[[def-irreducible-complex-character]]).\n\nThe set of all virtual characters is the **character ring** $R(G)$. Addition is\npointwise addition of class functions, and multiplication is the bilinear\nextension of tensor-product multiplication on honest characters:\n\n$$ (\\chi_V+\\chi_W)(g)=\\chi_V(g)+\\chi_W(g), \\qquad (\\chi_V\\chi_W)(g)=\\chi_{V\\otimes W}(g) $$\n\n([[thm-characters-of-direct-sums-tensor-products-and-duals]]).",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Choose cyclic subgroups $C_i\\le G$ and integers $a_i$ with $|G|1_G=\\sum_i a_i\\operatorname{Ind}_{C_i}^G1_{C_i}$ as in [F1]. Multiplying by $x$ in $R(G)\\otimes_{\\mathbb Z}\\mathbb Q$ gives $|G|x=\\sum_i a_i\\bigl(\\operatorname{Ind}_{C_i}^G1_{C_i}\\bigr)x$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Applying [F2] termwise to the identity of step 1.1 yields $|G|x=\\sum_i a_i\\operatorname{Ind}_{C_i}^G(\\operatorname{Res}_{C_i}^Gx)$. By hypothesis each $\\operatorname{Res}_{C_i}^Gx$ lies in $R(C_i)$, so [A1] places every induced summand in $R(G)$. Since $R(G)$ is closed under integral linear combinations, the whole right-hand side lies in $R(G)$.",
+     "step": "2.1",
+     "inputs": [
+      "F2",
+      "F3",
+      "step 1.1",
+      "algebra",
+      "A1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Therefore $|G|x\\in R(G)$, as claimed.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-a-6b",
+    "notes": "High risk was overclaiming full integrality instead of the weaker bounded-denominator conclusion. The current item proves exactly |G|x in R(G), and I also synced the manifest row so its title, strategy, and dependency list match that weaker statement; the proof itself now cleanly uses the Artin relation, projection formula, and induction closure of R(C) inside R(G)."
+   }
+  },
+  "ex-artin-induction-for-a-cyclic-group": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "A cyclic group always contains itself as a cyclic subgroup, so the example never faces an empty supply of inducing subgroups."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The example is about the tautological subgroup choice, not about a zero character or vanishing coefficient phenomenon."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 2.1 spells out the $n=1$ boundary explicitly as $1_{C_1}=\\operatorname{Ind}_{C_1}^{C_1}1_{C_1}$."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.1 is the degenerate Artin expression itself: the inducing subgroup is the whole group, so the theorem collapses to the identity map."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "There is no interval or endpoint parameter in this group-theoretic example."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "No delicate choice is made: the subgroup is canonically the whole cyclic group."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example verifies a direct identity, not one half of a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "There is no converse implication attached to this cyclic-group example."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-artin-induction-for-rational-characters",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, and let $x\\in R_{\\mathbb Q}(G)$ in the sense of\n[[def-rational-character-ring]]. Then:\n\n1. $x$ is a rational linear combination of characters induced from cyclic\n   subgroups of $G$.\n2. Equivalently, the controlled multiple $|G|x$ lies in the cyclic induction\n   subgroup $I_{\\mathrm{cyc}}(G)$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-generated-subgroup",
+     "source_section": "Definition",
+     "quote": "Let $G$ be a group ([[def-group]]) and $S \\subseteq G$ a subset. The set of\nsubgroups of $G$ containing $S$ is nonempty, since $G$ itself is such a subgroup,\nso its intersection is a subgroup of $G$ by [[lem-intersection-of-subgroups]].\nThat intersection is the **subgroup generated by $S$**,\n\n$$\\langle S \\rangle \\;:=\\; \\bigcap \\{\\, H \\;:\\; H \\le G \\text{ and } S \\subseteq H \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each containing $S$, and it is\ncontained in every subgroup of $G$ that contains $S$; so it is the **smallest**\nsubgroup of $G$ containing $S$, and these two properties determine it uniquely.\nThe elements of $S$ are called **generators**.\n\nFor a single element $g \\in G$ we write $\\langle g \\rangle := \\langle \\{g\\}\\rangle$\nand call it the **cyclic subgroup generated by $g$**. A group $G$ is **cyclic**\nwhen $G = \\langle g \\rangle$ for some $g \\in G$.\n\nBy convention $\\langle \\varnothing \\rangle = \\{e\\}$: the trivial subgroup is the\nsmallest subgroup containing the empty set, and this is a consequence of the\ndefinition, not a stipulation, since every subgroup contains $e$\n([[def-subgroup]]).",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [F2], the whole group $C_n$ is already a cyclic subgroup of itself. Induction from a subgroup to itself is the identity construction, so $\\operatorname{Ind}_{C_n}^{C_n}x=x$. Thus the Artin expression can be taken to have one summand, namely the subgroup $C_n$ itself.",
+     "step": "1.1",
+     "inputs": [
+      "F2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "This realizes the conclusion of [F1] in the most degenerate possible way: no proper cyclic subgroup is needed. If $n=1$, then $C_n=C_1$ and step 1.1 becomes the explicit identity $1_{C_1}=\\operatorname{Ind}_{C_1}^{C_1}1_{C_1}$.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-a-6b",
+    "notes": "High risk is the degenerate boundary n=1. The current example handles that explicitly: induction from a subgroup to itself is the identity, so the whole group C_n gives the single summand, and when n=1 the proof records the concrete identity 1_{C_1}=Ind_{C_1}^{C_1}1_{C_1} instead of leaving the trivial case implicit."
+   }
+  },
+  "ex-artin-permutation-relation-for-a5": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The example uses four concrete cyclic subgroup orders in $A_5$; no empty family is involved."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 explicitly records that the wrong-order induced characters vanish on each nonidentity class, so zero values are part of the verification."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.1 includes the order-one subgroup $C_1$, whose induced character supplies the regular-character term subtracted in the final relation."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The point of the example is a genuinely nontrivial denominator in $A_5$, so it does not reduce to a degenerate special case beyond the recorded zero values."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No endpoint analysis appears in the character-table computation."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The subgroup orders and class representatives are fixed concrete data, not a generic nonempty choice problem."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example checks one explicit relation; it is not phrased as an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No reverse implication is present in the $A_5$ calculation."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-artin-cyclic-permutation-relation",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group. Then there is an integral linear combination of\ncharacters induced from trivial characters of cyclic subgroups whose value is\n$|G|1_G$. Equivalently,\n\n$$|G|1_G=\\sum_i a_i\\,\\operatorname{Ind}_{C_i}^G1_{C_i}$$\n\nfor cyclic subgroups $C_i\\le G$ and integers $a_i$.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-frobenius-formula-for-induced-characters",
+     "source_section": "Statement",
+     "quote": "Let $G$ be a finite group, let $H\\le G$, and let $\\chi$ be the character of a\nfinite-dimensional complex representation of $H$. Then for every $g\\in G$,\n\n$$ \\operatorname{Ind}_H^G\\chi(g) = \\frac1{|H|} \\sum_{\\substack{x\\in G\\\\x^{-1}gx\\in H}} \\chi(x^{-1}gx). $$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [A1], the numbers of cyclic subgroups of orders $2$, $3$, and $5$ are $15$, $20/2=10$, and $(12+12)/4=6$, because each subgroup of order $2$, $3$, or $5$ has $1$, $2$, or $4$ generators. Hence their normalizers have orders $60/15=4$, $60/10=6$, and $60/6=10$.",
+     "step": "1.1",
+     "inputs": [
+      "A1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Put $U_n:=\\operatorname{Ind}_{C_n}^{A_5}1_{C_n}$. Frobenius' formula [F2] gives $U_1(1)=60$, $U_2(1)=30$, $U_3(1)=20$, and $U_5(1)=12$. If $g\\in\\{\\tau,\\sigma,\\rho,\\rho^2\\}$, then $U_n(g)=0$ unless $g$ has order $n$. For an element whose order is $n$, the same formula counts $|N_{A_5}(C_n)|/|C_n|=2$ fixed cosets, so $U_2(\\tau)=2$, $U_3(\\sigma)=2$, and $U_5(\\rho)=U_5(\\rho^2)=2$, while all other nonidentity values among these four characters are $0$.",
+     "step": "2.1",
+     "inputs": [
+      "F2",
+      "step 1.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Therefore the character $U_5+U_3+U_2-U_1$ has value $12+20+30-60=2$ at the identity, and also value $2$ on each of the four nontrivial conjugacy classes from step 2.1. So it is the constant class function $2=2\\cdot1_{A_5}$. This is the concrete $A_5$ instance promised by [F1].",
+     "step": "3.1",
+     "inputs": [
+      "F1",
+      "step 2.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "If $1_{A_5}$ were an integral linear combination of cyclic permutation characters, then evaluating that combination on $\\tau$ would give $1$ as an integer combination of the values from step 2.1. But every cyclic permutation character of $A_5$ takes value either $0$ or $2$ on $\\tau$, so any such integral combination would be even. This contradiction shows that the denominator $2$ is genuinely unavoidable.",
+     "step": "4.1",
+     "inputs": [
+      "step 2.1",
+      "step 3.1",
+      "algebra"
+     ]
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-a-6b",
+    "notes": "High risk is the concrete A_5 arithmetic: subgroup counts, normalizer orders, and the denominator-two obstruction all have to line up exactly. I rechecked the class sizes, the resulting counts of cyclic subgroups of orders 2, 3, and 5, the induced-character values on each nontrivial class, and the parity obstruction at tau; the current computation now supports the stated relation and the unavoidable denominator."
+   }
+  },
+  "ex-cyclic-fixed-point-detection-for-s3": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The example works with the explicit cyclic subgroups $1$, $C_2$, and $A_3$, so the fixed-space table is never empty."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 includes the zero fixed-space entry for the standard representation on $A_3$, and step 2.1 uses that row together with the other entries to recover the coefficients."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.1 records several one-dimensional fixed spaces, including the sign representation on $1$ and $A_3$ and the standard representation on $C_2$."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The example studies an invertible $3\\times3$ table; it is not a collapse-to-rank-deficient edge case."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No continuum parameter or endpoint behavior occurs in the finite $S_3$ reconstruction."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The characters and cyclic subgroups are fixed standard objects of $S_3$, not selections from an unspecified nonempty family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example verifies injective recovery from a concrete matrix, not a biconditional claim."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "There is no converse implication beyond the direct linear-algebra check."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "cor-cyclic-fixed-points-detect-rational-representations",
+     "source_section": "Statement",
+     "quote": "For each cyclic subgroup $C\\le G$, define\n\n$$m_C(x):=\\langle \\operatorname{Res}_C^Gx,1_C\\rangle_C \\qquad (x\\in R_{\\mathbb Q}(G)).$$\n\nThen the family $(m_C(x))_{(C)}$, indexed by conjugacy classes of cyclic\nsubgroups of $G$, determines $x$ uniquely. In particular, the map\n\n$$R_{\\mathbb Q}(G)\\longrightarrow \\prod_{(C)}\\mathbb Q,\\qquad x\\longmapsto (m_C(x))_{(C)}$$\n\nis injective. For an honest $\\mathbb Q$-representation $V$, one has\n$m_C(\\chi_V)=\\dim V^C$.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-g-fixed-subspace-of-a-representation",
+     "source_section": "Definition",
+     "quote": "Let $\\rho:G\\to\\operatorname{GL}(V)$ be a representation of a group $G$ over a\nfield $k$ ([[def-finite-dimensional-representation-of-a-group-over-a-field]]).\nThe **fixed subspace** of $V$ is\n\n$$V^{G}:=\\bigl\\{\\,v\\in V\\;:\\;g\\cdot v=v\\text{ for every }g\\in G\\,\\bigr\\}.$$\n\nThe set $V^{G}$ is a linear subspace of $V$\n([[def-linear-subspace]]): it contains $0_V$ because every operator\n$\\rho(g)$ is linear, it is closed under addition and scalar multiplication\nfor the same reason, and the defining equations are the required pointwise\nidentities. When $G$ is finite and $k=\\mathbb C$,\n[[lem-averaging-operator-projects-onto-the-fixed-subspace]] shows that an\nexplicit projection of $V$ has image exactly $V^{G}$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [F2] and [A1], the trivial representation has fixed-space dimensions $(1,1,1)$ on $(1,C_2,A_3)$, the sign representation has $(1,0,1)$, and the standard representation has $(2,1,0)$. This is exactly the displayed table.",
+     "step": "1.1",
+     "inputs": [
+      "F2",
+      "A1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Therefore the cyclic fixed-space data of $x=a\\cdot1+b\\cdot\\operatorname{sgn}+c\\cdot\\chi_{\\mathrm{std}}$ is $\\bigl(a+b+2c,\\ a+c,\\ a+b\\bigr)$. The coefficient matrix $\\begin{pmatrix} 1 & 1 & 2\\\\ 1 & 0 & 1\\\\ 1 & 1 & 0 \\end{pmatrix}$ has determinant $2\\ne0$, so these three numbers determine $a$, $b$, and $c$ uniquely.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "Thus the cyclic fixed-space data recovers the rational character $x$, which is the concrete $S_3$ instance of [F1].",
+     "step": "3.1",
+     "inputs": [
+      "F1",
+      "step 2.1",
+      "algebra"
+     ]
+    }
+   ]
+  },
+  "cex-rational-valued-character-need-not-be-defined-over-the-rationals": {
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The counterexample is a single explicit representation of $Q_8$; it does not quantify over an empty or varying family."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 computes the zero character values on the three order-four conjugacy classes, and those zero values are part of the rational-valued witness."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The obstruction comes from a two-dimensional irreducible character with Schur index two, so there is no separate value-one boundary to treat."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "This is a genuinely nontrivial counterexample: the witness is irreducible and faithful, not a collapsed or trivial representation."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval endpoint or limiting argument occurs in the quaternion counterexample."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The matrices are fixed explicitly; the proof uses no arbitrary witness from a merely nonempty set."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "A counterexample refutes a universal statement rather than proving one direction of an if-and-only-if."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "There is no reverse direction to discharge once the universal claim is refuted by the $Q_8$ witness."
+    }
+   ],
+   "finite_smoke": [],
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-quaternion-group-of-order-eight",
+     "source_section": "Definition",
+     "quote": "Let $\\mathbb{H}$ be the quaternions, with the basis quaternions\n$1=(1,0,0,0)$, $i=(0,1,0,0)$, $j=(0,0,1,0)$, $k=(0,0,0,1)$ and the real\nembedding $\\lambda\\mapsto\\hat\\lambda$ of [[def-quaternions]]. Write\n\n$$n:=\\widehat{-1}=(-1,0,0,0),\\qquad -x:=nx\\ \\ (x\\in\\mathbb{H}),$$\n\nso that $-x=(-x_0,-x_1,-x_2,-x_3)$ by the formula\n$\\hat\\lambda x=x\\hat\\lambda=(\\lambda x_0,\\lambda x_1,\\lambda x_2,\\lambda x_3)$\nrecorded in [[def-quaternions]].\n\nBy [[thm-quaternions-form-a-division-ring]] the set\n$\\mathbb{H}\\setminus\\{0_{\\mathbb{H}}\\}$ is a group under quaternion\nmultiplication ([[def-group]]); write it $\\mathbb{H}^{\\times}$. The\n**quaternion group** is the subset\n\n$$Q_8\\;:=\\;\\{\\,1,\\,-1,\\,i,\\,-i,\\,j,\\,-j,\\,k,\\,-k\\,\\}\\;\\subseteq\\;\\mathbb{H}^{\\times}.$$\n\nThat $Q_8$ is a subgroup of $\\mathbb{H}^{\\times}$ ([[def-subgroup]]), that it has\nexactly eight elements, and that $-1$ is its only element of order $2$ are proved\nin [[prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two]]\nand are not assumed here.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two",
+     "source_section": "Statement",
+     "quote": "Let $Q_8=\\{1,-1,i,-i,j,-j,k,-k\\}\\subseteq\\mathbb{H}^{\\times}$ be as in\n[[def-quaternion-group-of-order-eight]]. Then:\n\n1. $Q_8$ is a subgroup of $\\mathbb{H}^{\\times}$ and $|Q_8|=8$;\n2. $1$ is the only element of order $1$, $-1$ is the only element of order $2$,\n   and each of $\\pm i,\\pm j,\\pm k$ has order $4$;\n3. $\\langle i\\rangle=\\{1,i,-1,-i\\}$ is a subgroup of order $4$ containing $-1$,\n   and the same holds for $\\langle j\\rangle$ and $\\langle k\\rangle$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The displayed matrices satisfy $\\rho(i)^2=\\rho(j)^2=\\rho(k)^2=-I_2$ and $\\rho(i)\\rho(j)=\\rho(k)$, $\\rho(j)\\rho(i)=-\\rho(k)$. Hence they obey the same relations as the generators of $Q_8$ from [F1], so they define a two-dimensional complex representation of $Q_8$. Their traces are $2,-2,0,0,0$ on the conjugacy classes $1$, $-1$, $\\{\\pm i\\}$, $\\{\\pm j\\}$, and $\\{\\pm k\\}$, so the character is rational-valued.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The Magma Schur-index example in the cited source computes that this irreducible character has Schur index $2$ over $\\mathbb Q$. A character with Schur index greater than $1$ is not afforded by any $\\mathbb Q$-representation. Therefore this rational-valued irreducible character is not defined over $\\mathbb Q$, refuting the statement.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra"
+     ]
+    }
+   ]
+  }
+ }
+}

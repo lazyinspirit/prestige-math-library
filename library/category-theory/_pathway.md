@@ -30,6 +30,7 @@ parts:
       - the-diagram-lemmas-in-an-abelian-category
       - braided-and-symmetric-monoidal-categories
       - duality-and-rigidity-in-monoidal-categories
+      - enriched-categories
 ---
 
 ## categories-and-yoneda
@@ -61,4 +62,7 @@ while monoidal, closed, braided, and symmetric structures organize tensor produc
 coherence, internal homs, and commutativity constraints. Duality and rigidity complete the
 tensor branch: dual objects induce tensor adjunctions, rigid categories support duals of
 morphisms and the Drinfeld morphism, and pivotal, spherical, and ribbon data refine trace
-and dimension into categorical invariants.
+and dimension into categorical invariants. Enrichment then retains this structure in a
+monoidal base rather than merely in sets: enriched functors and transformations, the
+enriched Yoneda lemma, tensors, cotensors, weighted limits, change of base, and enriched
+adjunctions show how ordinary categorical constructions acquire a hom-object-valued form.

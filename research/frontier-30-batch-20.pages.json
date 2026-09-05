@@ -1,0 +1,262 @@
+[
+  {
+    "order": 623,
+    "id": "classical-np-completeness-reductions",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Classical NP-Completeness Reductions",
+    "companion": "classical-np-completeness-reductions-examples",
+    "requires": [
+      "the-cook-levin-theorem",
+      "graphs-walks-and-connectivity"
+    ],
+    "items": [
+      {
+        "id": "def-reduction-gadget-and-interface-invariant",
+        "kind": "definition",
+        "title": "Reduction gadgets and interface invariants",
+        "deps": [
+          "def-polynomial-time-many-one-reduction"
+        ]
+      },
+      {
+        "id": "def-clique-independent-set-and-vertex-cover-problems",
+        "kind": "definition",
+        "title": "Clique, independent set, and vertex cover decision problems",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree"
+        ]
+      },
+      {
+        "id": "thm-three-sat-reduces-to-clique",
+        "kind": "theorem",
+        "title": "3SAT polynomial-time many-one reduces to CLIQUE",
+        "strategy": "For a 3CNF formula with m clauses, first build the standard clause-cluster graph in which one chooses one literal per clause and incompatible literal choices are joined by edges. Satisfying assignments then correspond exactly to independent sets of size m. Pass to the complement graph, where those same m vertices form a clique, to obtain the required many-one reduction to CLIQUE.",
+        "deps": [
+          "def-reduction-gadget-and-interface-invariant",
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-polynomial-time-many-one-reduction",
+          "thm-three-sat-is-np-complete"
+        ]
+      },
+      {
+        "id": "cor-clique-is-np-complete",
+        "kind": "corollary",
+        "title": "CLIQUE is NP-complete",
+        "strategy": "Membership in NP is checked by guessing k vertices and verifying all pairs are adjacent. NP-hardness follows from the previous theorem and the already-published NP-completeness of 3SAT.",
+        "deps": [
+          "thm-three-sat-reduces-to-clique",
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-np-hard-and-np-complete",
+          "thm-three-sat-is-np-complete"
+        ]
+      },
+      {
+        "id": "thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible",
+        "kind": "theorem",
+        "title": "CLIQUE, INDEPENDENT SET, and VERTEX COVER are polynomially interreducible",
+        "strategy": "Map a graph to its complement to swap cliques with independent sets. On the original graph, complements of independent sets are exactly vertex covers, so (G,k) maps to (G,|V|-k). Composing those two elementary transformations yields reductions in every direction among the three problems.",
+        "deps": [
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-polynomial-time-many-one-reduction",
+          "def-graph-isomorphism-and-complement",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "cor-independent-set-and-vertex-cover-are-np-complete",
+        "kind": "corollary",
+        "title": "INDEPENDENT SET and VERTEX COVER are NP-complete",
+        "strategy": "Transfer NP-hardness from CLIQUE along the interreduction theorem, and observe that both target problems lie in NP by direct certificate checks.",
+        "deps": [
+          "cor-clique-is-np-complete",
+          "thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible",
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-np-hard-and-np-complete"
+        ]
+      },
+      {
+        "id": "def-directed-hamiltonian-path-and-cycle-problems",
+        "kind": "definition",
+        "title": "Directed and undirected Hamiltonian path and cycle decision problems",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-graph-walk-trail-path-and-cycle",
+          "def-multigraph-loop-and-digraph"
+        ]
+      },
+      {
+        "id": "thm-three-sat-reduces-to-directed-hamiltonian-cycle",
+        "kind": "theorem",
+        "title": "3SAT polynomial-time many-one reduces to directed Hamiltonian cycle",
+        "strategy": "Use explicit variable gadgets with bidirected crossbars that can only be traversed left-to-right or right-to-left, attach clause detours whose orientation matches satisfied literals, and then close the resulting source-to-target Hamiltonian path by one extra vertex.",
+        "deps": [
+          "def-reduction-gadget-and-interface-invariant",
+          "def-directed-hamiltonian-path-and-cycle-problems",
+          "def-polynomial-time-many-one-reduction",
+          "def-multigraph-loop-and-digraph",
+          "thm-three-sat-is-np-complete"
+        ]
+      },
+      {
+        "id": "thm-directed-reduces-to-undirected-hamiltonian-cycle",
+        "kind": "theorem",
+        "title": "Directed Hamiltonian cycle polynomial-time many-one reduces to undirected Hamiltonian cycle",
+        "strategy": "Replace each directed vertex x by an undirected path x1-x2-x3 and replace each arc x -> y by an undirected edge x3-y1. In any Hamiltonian cycle the middle vertex x2 forces the local traversal x1-x2-x3 or x3-x2-x1, so the cycle respects a consistent orientation and projects back to a directed Hamiltonian cycle.",
+        "deps": [
+          "def-directed-hamiltonian-path-and-cycle-problems",
+          "def-polynomial-time-many-one-reduction",
+          "def-finite-simple-graph",
+          "def-graph-walk-trail-path-and-cycle",
+          "def-multigraph-loop-and-digraph"
+        ]
+      },
+      {
+        "id": "cor-hamiltonian-path-and-cycle-are-np-complete",
+        "kind": "corollary",
+        "title": "Directed and undirected Hamiltonian path and cycle are NP-complete",
+        "strategy": "Use the previous theorem for endpoint-labelled directed Hamiltonian path and cycle, force prescribed directed endpoints with fresh source/sink vertices, transport endpoint-labelled path hardness through the tripling construction, and finally remove the endpoint labels from the undirected path version by attaching two leaves.",
+        "deps": [
+          "thm-three-sat-reduces-to-directed-hamiltonian-cycle",
+          "thm-directed-reduces-to-undirected-hamiltonian-cycle",
+          "def-directed-hamiltonian-path-and-cycle-problems",
+          "def-np-hard-and-np-complete",
+          "thm-three-sat-is-np-complete"
+        ]
+      },
+      {
+        "id": "def-subset-sum-and-partition",
+        "kind": "definition",
+        "title": "Subset sum and partition decision problems",
+        "deps": []
+      },
+      {
+        "id": "thm-three-sat-reduces-to-subset-sum",
+        "kind": "theorem",
+        "title": "3SAT polynomial-time many-one reduces to subset sum",
+        "strategy": "Compose the page's 3SAT -> CLIQUE reduction with the complement reduction from CLIQUE to INDEPENDENT SET, then apply the standard digit-column encoding of INDEPENDENT SET into SUBSET SUM. One leading column forces exactly k chosen vertices and one column per edge forbids choosing both endpoints; choosing a base at least 4 prevents carries, so a target sum exists exactly when the graph has an independent set of the required size.",
+        "deps": [
+          "thm-three-sat-reduces-to-clique",
+          "thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible",
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-subset-sum-and-partition",
+          "def-polynomial-time-many-one-reduction"
+        ]
+      },
+      {
+        "id": "thm-subset-sum-reduces-to-partition",
+        "kind": "theorem",
+        "title": "Subset sum polynomial-time many-one reduces to partition",
+        "strategy": "Given subset-sum data a1,...,an and target k with total A, adjoin two extra numbers b = 2A - k and c = A + k. The new multiset has total 4A, so a half-sum partition has value 2A; such a partition exists exactly when the original instance has a subcollection summing to k.",
+        "deps": [
+          "def-subset-sum-and-partition",
+          "def-polynomial-time-many-one-reduction"
+        ]
+      },
+      {
+        "id": "def-set-cover",
+        "kind": "definition",
+        "title": "The set cover decision problem",
+        "deps": []
+      },
+      {
+        "id": "thm-vertex-cover-reduces-to-set-cover",
+        "kind": "theorem",
+        "title": "Vertex cover polynomial-time many-one reduces to set cover",
+        "strategy": "Use the graph's edge set as the universe and assign to each vertex v the subset of incident edges. Choosing k such subsets covers the universe exactly when the corresponding k vertices cover every edge of the graph.",
+        "deps": [
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-set-cover",
+          "def-polynomial-time-many-one-reduction"
+        ]
+      },
+      {
+        "id": "def-three-colourability",
+        "kind": "definition",
+        "title": "The three-colourability decision problem",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree"
+        ]
+      },
+      {
+        "id": "thm-three-sat-reduces-to-three-colourability",
+        "kind": "theorem",
+        "title": "3SAT polynomial-time many-one reduces to 3-COLORABILITY",
+        "strategy": "First pass from 3SAT to the not-all-equal variant so each clause must contain both a true and a false literal. Then build the standard truth-base triangle, attach one literal pair for each variable, and add one clause gadget per clause. The gadget is forced to colour properly exactly when the clause receives at least one true literal, and the variable pair ensures complementary truth assignments stay consistent across the whole graph.",
+        "deps": [
+          "def-reduction-gadget-and-interface-invariant",
+          "def-three-colourability",
+          "def-polynomial-time-many-one-reduction",
+          "thm-three-sat-is-np-complete"
+        ]
+      },
+      {
+        "id": "fs-gadget-correctness-needs-only-one-direction",
+        "kind": "false-statement",
+        "title": "A gadget reduction is correct as soon as every yes-instance maps to a yes-instance",
+        "strategy": "Refute by exhibiting a polynomial-time map that preserves yes-instances but sends some no-instances to yes-instances as well. The missing reverse implication destroys the iff clause in the definition of a many-one reduction even though the forward gadget story sounds plausible.",
+        "deps": [
+          "def-reduction-gadget-and-interface-invariant",
+          "def-polynomial-time-many-one-reduction"
+        ]
+      },
+      {
+        "id": "fs-pseudopolynomial-is-polynomial-in-bit-length",
+        "kind": "false-statement",
+        "title": "A pseudopolynomial algorithm is polynomial in the binary input length",
+        "strategy": "Refute with the standard O(nT) dynamic program for SUBSET SUM on instances whose target T is given in binary. Choosing T = 2^m makes the running time polynomial in the numeric value T but exponential in the input length m = log2 T, which is exactly why pseudopolynomial does not mean polynomial-time for the decision problem.",
+        "deps": [
+          "def-subset-sum-and-partition",
+          "def-worst-case-time-and-space-complexity"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 624,
+    "id": "classical-np-completeness-reductions-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Classical NP-Completeness Reductions: Examples and Counterexamples",
+    "companion": "classical-np-completeness-reductions",
+    "requires": [
+      "classical-np-completeness-reductions"
+    ],
+    "items": [
+      {
+        "id": "ex-clique-is-np-complete",
+        "kind": "example",
+        "title": "A worked clause-cluster instance witnessing that CLIQUE is NP-complete",
+        "strategy": "Take a small satisfiable 3CNF formula, build its clause clusters, identify a clique with one consistent literal assignment from each clause, and then read the NP-completeness conclusion off the A-page theorem and corollary.",
+        "deps": [
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "thm-three-sat-reduces-to-clique",
+          "cor-clique-is-np-complete"
+        ]
+      },
+      {
+        "id": "ex-three-sat-reduces-to-three-colourability",
+        "kind": "example",
+        "title": "A small 3SAT instance and its three-colourability gadget graph",
+        "strategy": "Build the truth triangle, one variable pair, and one clause gadget for a tiny satisfiable formula, then verify explicitly how a proper 3-colouring encodes a satisfying assignment and how the satisfying assignment colours the gadget back.",
+        "deps": [
+          "def-three-colourability",
+          "thm-three-sat-reduces-to-three-colourability"
+        ]
+      },
+      {
+        "id": "cex-gadget-correctness-needs-only-one-direction",
+        "kind": "counterexample",
+        "title": "A forward-only mapping that is not a correct many-one reduction",
+        "strategy": "Send every source instance to a fixed yes-instance of a target problem. The map is polynomial-time and certainly sends yes to yes, but it also sends every no-instance to yes, so it fails the reverse direction required for reduction correctness.",
+        "deps": [
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-polynomial-time-many-one-reduction",
+          "fs-gadget-correctness-needs-only-one-direction"
+        ]
+      }
+    ]
+  }
+]

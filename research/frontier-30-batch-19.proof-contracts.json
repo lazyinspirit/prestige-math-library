@@ -1,0 +1,3173 @@
+{
+  "version": 1,
+  "level": "frontier-30",
+  "scope": [
+    "lem-computation-history-domino-encoding",
+    "thm-modified-pcp-is-undecidable",
+    "lem-modified-pcp-reduces-to-pcp",
+    "thm-post-correspondence-is-undecidable",
+    "prop-post-correspondence-is-recognizable",
+    "thm-cfg-intersection-emptiness-is-undecidable",
+    "thm-cfg-universality-is-undecidable",
+    "thm-cfg-equivalence-is-undecidable",
+    "thm-cfg-ambiguity-is-undecidable",
+    "thm-proper-inclusions-in-the-chomsky-hierarchy",
+    "fs-pcp-allows-symbol-reordering-within-dominoes",
+    "fs-two-decidable-cfls-have-decidable-intersection-emptiness",
+    "ex-modified-pcp-is-undecidable",
+    "ex-proper-inclusions-in-the-chomsky-hierarchy",
+    "cex-pcp-allows-symbol-reordering-within-dominoes",
+    "prop-fixed-machine-coding-is-acceptable",
+    "thm-smn-parameter-theorem",
+    "cor-effective-program-specialization",
+    "lem-self-reference-construction-from-smn",
+    "thm-kleenes-second-recursion-theorem",
+    "thm-recursion-theorem-with-parameters",
+    "thm-nonhalting-is-productive-and-halting-is-creative",
+    "thm-myhill-isomorphism-theorem-for-creative-sets",
+    "prop-acceptable-numberings-are-computably-intertranslatable",
+    "fs-recursion-theorem-needs-source-file-access",
+    "fs-program-indices-are-unique",
+    "ex-smn-parameter-theorem",
+    "ex-acceptable-numberings-are-computably-intertranslatable",
+    "cex-recursion-theorem-needs-source-file-access"
+  ],
+  "contracts": {
+    "lem-computation-history-domino-encoding": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-modified-post-correspondence-problem",
+          "source_section": "Definition",
+          "quote": "An instance of the **modified Post correspondence problem** is a PCP instance\n$$ (u_1,v_1),\\dots,(u_n,v_n) $$\nwith the extra requirement that a permitted match must start with the first\ndomino.\n\nThus a **modified-PCP match** is a nonempty sequence\n$$ 1=i_1,i_2,\\dots,i_k $$\nsuch that\n$$ u_{i_1}\\cdots u_{i_k}=v_{i_1}\\cdots v_{i_k}. $$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-halting-computation-and-divergence",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ and\nan input word $w\\in\\Sigma^*$.\n\nA **finite computation history** of $M$ on input $w$ is a finite list of\nconfigurations\n$$ C_0,C_1,\\dots,C_n $$\nsuch that $C_0=I_M(w)$ and\n$$ C_i\\vdash_M C_{i+1}\\qquad(0\\le i<n). $$\n\nSuch a history is:\n\n- **accepting** if $C_n$ is an accepting configuration,\n- **rejecting** if $C_n$ is a rejecting configuration,\n- **halting** if it is accepting or rejecting.\n\nWe say that **$M$ halts on $w$** if there exists a halting computation history\nof $M$ on $w$.\n\nWe say that **$M$ diverges on $w$** if there is no halting computation history\nof $M$ on $w$.\n\nFor a halting configuration $C=(q,h,t)$ and a word $u=a_0\\cdots a_{m-1}$ over\n$\\Gamma\\setminus\\{\\sqcup\\}$, we say that **$C$ outputs $u$** when\n$$ t(i)=\\begin{cases} a_i,&0\\le i<m,\\\\ \\sqcup,&i\\ge m. \\end{cases} $$\nSo the tape contains exactly $u$ followed by blanks.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-valid-computation-histories-are-decidable",
+          "source_section": "Statement",
+          "quote": "Fix a deterministic one-tape Turing machine $M$ and an input word $w$ for $M$.\nThen one can choose a binary encoding of configurations of $M$ and a binary\nencoding of finite tuples of such codes so that the set\n$$ H_{M,w} $$\nof encoded accepting computation histories of $M$ on input $w$ is a decidable\nlanguage over $\\{0,1\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a concrete version of the effective configuration coding in [L4], tag the finite state and tape alphabets disjointly. For $C=(q,h,t)$ and any padding bound $r\\ge\\max(\\{h\\}\\cup\\operatorname{supp}(t))$, put $a_i:=t(i)$ and encode the padded representative as $$ \\widetilde C^{(r)}:=\\triangleright a_0\\cdots a_{h-1}qa_h\\cdots a_r, $$ where $\\triangleright$ is a fresh left-end marker. This word contains exactly one state symbol and decodes unambiguously to $C$ even when some final $a_i$ are blank; different amounts of trailing blank padding may represent the same configuration. We also permit the right-blank abbreviation $\\triangleright a_0\\cdots a_{h-1}q$ when $t(h)=\\sqcup$ and every cell from $h$ onward is blank; it records the same configuration with the scanned blank left implicit. Adjoin a second fresh symbol `#` as a block separator. Starting with the least explicit bound for $C_0$, the intended history prefix has the form $$ \\#\\widetilde C_0^{(r_0)}\\#\\widetilde C_1^{(r_1)}\\#\\cdots\\#\\widetilde C_t^{(r_t)}\\#. $$",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write a domino as $(u,v)$ with top word $u$ and bottom word $v$. Let $P_{M,w}$ contain the designated start domino $$ (\\#,\\ \\#\\widetilde C_0^{(r_0)}\\#). $$ Add copier dominoes $(c,c)$ for $c\\in\\Gamma\\cup\\{\\triangleright,\\#\\}$, but not for state symbols. For every transition $\\delta(q,a)=(r,b,R)$ add $(qa,br)$. Add the boundary-padding domino $(\\#,\\sqcup\\#)$: it supplies the newly scanned blank when a right move passes the last displayed tape cell, and otherwise merely permits one additional trailing blank in the next padded representative. For every $\\delta(q,a)=(r,b,L)$ and $c\\in\\Gamma$ add $(cqa,rcb)$, and add the separate clamped-left domino $(\\triangleright qa,\\triangleright rb)$. Finally, for each $c\\in\\Gamma\\cup\\{\\triangleright\\}$ add the accepting-cleanup dominoes $(c q_{\\mathrm{acc}},q_{\\mathrm{acc}})$ and $(q_{\\mathrm{acc}}c,q_{\\mathrm{acc}})$, and add the terminal domino $(q_{\\mathrm{acc}}\\#\\#,\\#)$. These are finitely many pairs of nonempty words and are computed directly from the finite alphabet, transition table, and start configuration in [L3].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $M$ has an accepting history $C_0,C_1,\\dots,C_t$, choose padding bounds recursively. Having chosen $r_j$, keep the same bound for $C_{j+1}$ unless a right move from cell $r_j$ requires $r_{j+1}=r_j+1$; in particular, retain a now-trailing blank when a left move erases the last nonblank cell. Begin with the start domino. For each $C_j\\vdash_M C_{j+1}$, use copier dominoes up to the head window, the unique right-, interior-left-, or clamped-left transition domino from step 2.1 at that window, copier dominoes after it, and then $(\\#,\\#)$ if $r_{j+1}=r_j$ or $(\\#,\\sqcup\\#)$ if $r_{j+1}=r_j+1$. At every separator the top row has thereby copied $\\widetilde C_j^{(r_j)}\\#$ while the bottom row has appended $\\widetilde C_{j+1}^{(r_{j+1})}\\#$, so the bottom remains exactly one padded configuration block ahead. In the final accepting block, repeated whole-block passes use copiers together with $(c q_{\\mathrm{acc}},q_{\\mathrm{acc}})$ to delete the symbol immediately left of the accepting state, or with $(q_{\\mathrm{acc}}c,q_{\\mathrm{acc}})$ to delete the symbol immediately right of it. These passes eventually leave the one-block lag $q_{\\mathrm{acc}}\\#$, which the terminal domino closes because its top is $q_{\\mathrm{acc}}\\#\\#$ and its bottom is `#`. The two full concatenations are then equal, giving a modified-PCP match.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Conversely, let a modified-PCP match be given. Its first domino is the designated start domino by [L1], so the unmatched bottom suffix initially is exactly $\\widetilde C_0^{(r_0)}\\#$. Induct over the separators subsequently matched by the top row. Copier dominoes cannot copy a state symbol. Before $q_{\\mathrm{acc}}$ appears, the unique state symbol in the current block must therefore be consumed by one transition domino from step 2.1. The symbol immediately before it distinguishes an interior left move from the special $\\triangleright$-boundary move. All other tape symbols are copied, while the choice between $(\\#,\\#)$ and $(\\#,\\sqcup\\#)$ either preserves the displayed length or adds one trailing blank. If a right move has put a nonaccepting state just beyond the last displayed cell, choosing $(\\#,\\#)$ would leave that state immediately before the separator, where no transition or cleanup top can consume it, so a complete match must choose the boundary-padding tile. If the new state is $q_{\\mathrm{acc}}$, the shorter choice is precisely the right-blank abbreviation from step 1.1. Consequently every pre-cleanup bottom block decodes to the unique configuration $C_{j+1}$ with $C_j\\vdash_M C_{j+1}$, although its harmless trailing-blank padding need not be unique. Cleanup dominoes contain $q_{\\mathrm{acc}}$ and cannot begin this suffix before an accepting block has been reached; after they begin, their shorter bottom words and the terminal anchor can remove the remaining offset. Hence every match has a prefix decoding to an accepting computation history of the original machine $M$ on $w$.",
+          "step": "3.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 3.1 and 3.2 prove that $P_{M,w}$ has a match if and only if $M$ has an accepting computation history on $w$. Step 2.1 constructs its finite domino list effectively from $(M,w)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Accepting computation histories can be encoded by modified-PCP domino matches does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Accepting computation histories can be encoded by modified-PCP domino matches has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Accepting computation histories can be encoded by modified-PCP domino matches does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Accepting computation histories can be encoded by modified-PCP domino matches does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Accepting computation histories can be encoded by modified-PCP domino matches has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Accepting computation histories can be encoded by modified-PCP domino matches does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.2 turns any modified-PCP match into an accepting computation history of M on w."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1 builds a modified-PCP match from any accepting computation history."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+      "reviewer": "final-adjudicator",
+      "notes": "Critical-risk reread focused on the exact iff between accepting histories and modified-PCP matches. The proof now uses padded configuration representatives, retains a trailing blank when canonical words would shrink, requires boundary padding when a nonaccepting right move passes the displayed edge, and treats the accepting edge case as an explicit implicit-blank abbreviation. Whole-block cleanup and converse decoding are both stated."
+      }
+    },
+    "thm-modified-pcp-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-computation-history-domino-encoding",
+          "source_section": "Statement",
+          "quote": "For every coded deterministic one-tape Turing machine $M$ and every input word\n$w$, one can effectively construct a modified-PCP instance $P_{M,w}$ such that\n$P_{M,w}$ has a match if and only if $M$ has an accepting computation history\non $w$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-many-one-reductions-transfer-decidability-and-recognizability",
+          "source_section": "Statement",
+          "quote": "If $A\\le_m B$, then:\n\n- whenever $B$ is decidable, $A$ is decidable, and\n- whenever $B$ is recognizable, $A$ is recognizable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define a map $f$ on coded machine-input pairs by $$ f(\\langle M,w\\rangle):=P_{M,w}. $$ By [L1], this map is total and computable and satisfies $$ \\langle M,w\\rangle\\in A_{TM}\\iff f(\\langle M,w\\rangle)\\in \\operatorname{MPCP}. $$ Thus $A_{TM}\\le_m\\operatorname{MPCP}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If modified PCP were decidable, then [L3] and step 1.1 would imply that $A_{TM}$ is decidable. This contradicts [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore modified PCP is undecidable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "discharge-contradiction: a decider for modified PCP would decide $A_{TM}$"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The modified Post correspondence problem is undecidable does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The modified Post correspondence problem is undecidable has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The modified Post correspondence problem is undecidable does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The modified Post correspondence problem is undecidable does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The modified Post correspondence problem is undecidable has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The modified Post correspondence problem is undecidable does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The modified Post correspondence problem is undecidable is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The modified Post correspondence problem is undecidable is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on totality of the many-one map from A_TM. The current theorem delegates the whole iff to the repaired computation-history lemma, defines f(<M,w>)=P_{M,w} explicitly, and then uses the standard many-one contradiction to machine acceptance undecidability, so the reduction is now exact on current disk."
+      }
+    },
+    "lem-modified-pcp-reduces-to-pcp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-modified-post-correspondence-problem",
+          "source_section": "Definition",
+          "quote": "An instance of the **modified Post correspondence problem** is a PCP instance\n$$ (u_1,v_1),\\dots,(u_n,v_n) $$\nwith the extra requirement that a permitted match must start with the first\ndomino.\n\nThus a **modified-PCP match** is a nonempty sequence\n$$ 1=i_1,i_2,\\dots,i_k $$\nsuch that\n$$ u_{i_1}\\cdots u_{i_k}=v_{i_1}\\cdots v_{i_k}. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-post-correspondence-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite alphabet $\\Sigma$. A **Post correspondence problem instance**\nover $\\Sigma$ is a finite list of pairs of nonempty words\n$$ (u_1,v_1),\\dots,(u_n,v_n)\\in(\\Sigma^+\\times\\Sigma^+). $$\n\nA **match** for that instance is a nonempty finite index sequence\n$$ i_1,\\dots,i_k\\in\\{1,\\dots,n\\} $$\nsuch that\n$$ u_{i_1}\\cdots u_{i_k}=v_{i_1}\\cdots v_{i_k}. $$\n\nThe **Post correspondence problem** asks, given such a finite list of dominoes,\nwhether a match exists.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Introduce fresh symbols `*` and `!`. For a word $a_1\\cdots a_k$, write $$ L(a_1\\cdots a_k):=a_1*a_2*\\cdots a_k*,\\qquad R(a_1\\cdots a_k):=*a_1*a_2*\\cdots *a_k. $$ Construct a PCP instance consisting of one special start tile, one shifted tile for each original domino, and one end tile: $$ (*L(x_1),R(y_1)),\\qquad (L(x_i),R(y_i))\\ (1\\le i\\le n),\\qquad (!,*!). $$ The extra leading `*` appears only on the special start tile, and `!` appears only on the end tile.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $1=i_1,i_2,\\dots,i_k$ is a modified-PCP match, choose the special start tile, then the ordinary shifted tiles for $i_2,\\dots,i_k$, and finally the end tile. The top concatenation is $$ *L(x_1)L(x_{i_2})\\cdots L(x_{i_k})!, $$ while the bottom concatenation is $$ R(y_1)R(y_{i_2})\\cdots R(y_{i_k})*!. $$ Because the original match satisfies $x_1x_{i_2}\\cdots x_{i_k}=y_1y_{i_2}\\cdots y_{i_k}$, these two shifted strings agree symbol by symbol: the leading `*` on top supplies the one-symbol offset, every interior `*` matches the next boundary marker on the bottom, and the end tile matches the final extra `*`. Hence the transformed PCP instance has a match.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, let a PCP match be given for the transformed instance. The common concatenated word begins with `*`, and among the available top words only the special start tile begins with `*`, so the first chosen tile must be that special start tile. Likewise `!` appears only in the end tile, whose top word is just `!`, so the end tile must be used exactly once and only at the end of the match. After deleting the initial `*`, the terminal `!`, and all separator symbols `*`, the equality of the transformed concatenations becomes $$ x_1x_{i_2}\\cdots x_{i_k}=y_1y_{i_2}\\cdots y_{i_k} $$ for the ordinary tiles chosen between the boundary tiles. Thus the recovered index sequence begins with the original first domino and is a modified-PCP match.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 prove the required equivalence, and the construction in step 1.1 is effective. Therefore modified PCP many-one reduces to PCP.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Modified PCP many-one reduces to PCP does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Modified PCP many-one reduces to PCP has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Modified PCP many-one reduces to PCP does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Modified PCP many-one reduces to PCP does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 introduces the unique start and end tiles, and step 2.2 uses them to force the transformed PCP solution to begin and finish in the correct places."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Modified PCP many-one reduces to PCP does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Modified PCP many-one reduces to PCP is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Modified PCP many-one reduces to PCP is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "thm-post-correspondence-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-modified-pcp-reduces-to-pcp",
+          "source_section": "Statement",
+          "quote": "There is a computable many-one reduction from modified PCP to ordinary PCP.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-modified-pcp-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The modified Post correspondence problem is undecidable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-many-one-reductions-transfer-decidability-and-recognizability",
+          "source_section": "Statement",
+          "quote": "If $A\\le_m B$, then:\n\n- whenever $B$ is decidable, $A$ is decidable, and\n- whenever $B$ is recognizable, $A$ is recognizable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], there is a total computable map sending each modified-PCP instance to a PCP instance with the same yes-or-no answer.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If PCP were decidable, then [L3] and step 1.1 would imply that modified PCP is decidable. This contradicts [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore PCP is undecidable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "discharge-contradiction: a decider for PCP would decide modified PCP"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is undecidable does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is undecidable has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is undecidable does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is undecidable does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is undecidable has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is undecidable does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is undecidable is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is undecidable is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "prop-post-correspondence-is-recognizable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-post-correspondence-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite alphabet $\\Sigma$. A **Post correspondence problem instance**\nover $\\Sigma$ is a finite list of pairs of nonempty words\n$$ (u_1,v_1),\\dots,(u_n,v_n)\\in(\\Sigma^+\\times\\Sigma^+). $$\n\nA **match** for that instance is a nonempty finite index sequence\n$$ i_1,\\dots,i_k\\in\\{1,\\dots,n\\} $$\nsuch that\n$$ u_{i_1}\\cdots u_{i_k}=v_{i_1}\\cdots v_{i_k}. $$\n\nThe **Post correspondence problem** asks, given such a finite list of dominoes,\nwhether a match exists.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Enumerate all nonempty finite sequences over $\\{1,\\dots,n\\}$ in length-lexicographic order: $$ (1),(2),\\dots,(n),(1,1),(1,2),\\dots. $$ For each sequence $\\sigma=(i_1,\\dots,i_k)$, compute the two concatenations $u_{i_1}\\cdots u_{i_k}$ and $v_{i_1}\\cdots v_{i_k}$ and compare them.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the instance has a match, [L1] supplies some witnessing sequence $\\sigma$, and the enumeration from step 1.1 eventually reaches it and accepts. If the instance has no match, every tested sequence fails and the search runs forever.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore there is a Turing machine that accepts exactly the PCP yes-instances, so PCP is recognizable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 enumerates only nonempty index sequences, matching the definition that a PCP witness may not be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is recognizable has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is recognizable does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is recognizable does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is recognizable has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is recognizable does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is recognizable is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Post correspondence problem is recognizable is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "thm-cfg-intersection-emptiness-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-post-correspondence-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite alphabet $\\Sigma$. A **Post correspondence problem instance**\nover $\\Sigma$ is a finite list of pairs of nonempty words\n$$ (u_1,v_1),\\dots,(u_n,v_n)\\in(\\Sigma^+\\times\\Sigma^+). $$\n\nA **match** for that instance is a nonempty finite index sequence\n$$ i_1,\\dots,i_k\\in\\{1,\\dots,n\\} $$\nsuch that\n$$ u_{i_1}\\cdots u_{i_k}=v_{i_1}\\cdots v_{i_k}. $$\n\nThe **Post correspondence problem** asks, given such a finite list of dominoes,\nwhether a match exists.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-post-correspondence-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The Post correspondence problem is undecidable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-many-one-reductions-transfer-decidability-and-recognizability",
+          "source_section": "Statement",
+          "quote": "If $A\\le_m B$, then:\n\n- whenever $B$ is decidable, $A$ is decidable, and\n- whenever $B$ is recognizable, $A$ is recognizable.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From the PCP instance build two context-free grammars over the alphabet consisting of the original symbols together with index symbols $1,\\dots,n$: $$ S_T\\to u_iS_T i\\mid u_i i,\\qquad S_B\\to v_iS_B i\\mid v_i i\\qquad(1\\le i\\le n). $$ Thus $G_T$ generates exactly the words $u_{i_1}\\cdots u_{i_k}i_k\\cdots i_1$, and $G_B$ generates exactly the words $v_{i_1}\\cdots v_{i_k}i_k\\cdots i_1$, for nonempty index sequences $i_1,\\dots,i_k$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $i_1,\\dots,i_k$ is a PCP match, then $$ u_{i_1}\\cdots u_{i_k}i_k\\cdots i_1=v_{i_1}\\cdots v_{i_k}i_k\\cdots i_1, $$ so that common word lies in $L(G_T)\\cap L(G_B)$. Conversely, if a word lies in $L(G_T)\\cap L(G_B)$, its reversed index suffix uniquely determines the same index sequence on both sides, and removing that suffix leaves $$ u_{i_1}\\cdots u_{i_k}=v_{i_1}\\cdots v_{i_k}. $$ Hence the original PCP instance has a match if and only if $L(G_T)\\cap L(G_B)\\neq\\varnothing$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The map from the PCP instance to the pair $(G_T,G_B)$ is total and computable by step 1.1. If intersection-emptiness for pairs of CFGs were decidable, step 2.1 and [L3] would make PCP decidable, contradicting [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1",
+            "contradiction",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore emptiness of the intersection of two CFGs is undecidable.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "discharge-contradiction: a decider for CFG intersection-emptiness would decide PCP"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Emptiness of the intersection of two CFGs is undecidable does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Emptiness of the intersection of two CFGs is undecidable has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Emptiness of the intersection of two CFGs is undecidable does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Emptiness of the intersection of two CFGs is undecidable does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Emptiness of the intersection of two CFGs is undecidable has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Emptiness of the intersection of two CFGs is undecidable does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 sends every PCP match to a common word of the two grammar languages."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 recovers a PCP match from any word in the grammar intersection."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on whether the two grammars really encode the same index sequence. The current construction appends the reversed indices to both top and bottom words, so any intersection word determines one common sequence and yields a PCP match, while every PCP match gives the same common word in both grammars."
+      }
+    },
+    "thm-cfg-universality-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-halting-computation-and-divergence",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ and\nan input word $w\\in\\Sigma^*$.\n\nA **finite computation history** of $M$ on input $w$ is a finite list of\nconfigurations\n$$ C_0,C_1,\\dots,C_n $$\nsuch that $C_0=I_M(w)$ and\n$$ C_i\\vdash_M C_{i+1}\\qquad(0\\le i<n). $$\n\nSuch a history is:\n\n- **accepting** if $C_n$ is an accepting configuration,\n- **rejecting** if $C_n$ is a rejecting configuration,\n- **halting** if it is accepting or rejecting.\n\nWe say that **$M$ halts on $w$** if there exists a halting computation history\nof $M$ on $w$.\n\nWe say that **$M$ diverges on $w$** if there is no halting computation history\nof $M$ on $w$.\n\nFor a halting configuration $C=(q,h,t)$ and a word $u=a_0\\cdots a_{m-1}$ over\n$\\Gamma\\setminus\\{\\sqcup\\}$, we say that **$C$ outputs $u$** when\n$$ t(i)=\\begin{cases} a_i,&0\\le i<m,\\\\ \\sqcup,&i\\ge m. \\end{cases} $$\nSo the tape contains exactly $u$ followed by blanks.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-valid-computation-histories-are-decidable",
+          "source_section": "Statement",
+          "quote": "Fix a deterministic one-tape Turing machine $M$ and an input word $w$ for $M$.\nThen one can choose a binary encoding of configurations of $M$ and a binary\nencoding of finite tuples of such codes so that the set\n$$ H_{M,w} $$\nof encoded accepting computation histories of $M$ on input $w$ is a decidable\nlanguage over $\\{0,1\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-many-one-reductions-transfer-decidability-and-recognizability",
+          "source_section": "Statement",
+          "quote": "If $A\\le_m B$, then:\n\n- whenever $B$ is decidable, $A$ is decidable, and\n- whenever $B$ is recognizable, $A$ is recognizable.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Using the history encoding from [L2], let $B_{M,w}$ be the set of all words over the history alphabet that are **not** accepting computation histories of $M$ on $w$. This set is the union of three effectively described languages: malformed encodings, well-formed histories with the wrong initial or final configuration, and well-formed histories containing adjacent configurations that are not related by one legal machine step. The first two parts are regular. The third part is context-free because illegality of one transition is witnessed by one bounded local window around one separator, and a pushdown automaton can guess that window and verify the mismatch while reading the rest of the two neighboring configurations. Hence $B_{M,w}$ is context-free, so some CFG $G_{M,w}$ satisfies $L(G_{M,w})=B_{M,w}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the definition of $B_{M,w}$, the grammar $G_{M,w}$ is universal exactly when there is no accepting computation history of $M$ on $w$. Using [L1], this is equivalent to $$ L(G_{M,w})=\\Sigma^* \\iff \\langle M,w\\rangle\\notin A_{TM}. $$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The construction of $G_{M,w}$ is effective by step 1.1. If CFG universality were decidable, then step 2.1 would decide $\\overline{A_{TM}}$, and hence decide $A_{TM}$ by complementing the answer. That contradicts [L3].",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 2.1",
+            "contradiction",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore CFG universality is undecidable.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "discharge-contradiction: a universality decider would decide $A_{TM}$"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "CFG universality is undecidable does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "CFG universality is undecidable has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "CFG universality is undecidable does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "CFG universality is undecidable does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "CFG universality is undecidable has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "CFG universality is undecidable does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 identifies universality of G_{M,w} with the nonacceptance of the machine-input pair."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 also proves that absence of an accepting history forces universality of G_{M,w}."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on the decomposition of non-accepting histories. The current proof cleanly separates malformed encodings, wrong endpoints, and one local illegal transition; the first two parts are regular and the third is context-free by a guessed bounded window, so universality of the resulting grammar is equivalent to absence of an accepting history for (M,w)."
+      }
+    },
+    "thm-cfg-equivalence-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cfg-equivalence-and-ambiguity-problems",
+          "source_section": "Definition",
+          "quote": "The **CFG equivalence problem** asks, given two context-free grammars $G$ and\n$H$ over the same alphabet, whether\n$$ L(G)=L(H). $$\n\nThe **CFG ambiguity problem** asks, given a context-free grammar $G$, whether\n$G$ is ambiguous in the sense of [[def-ambiguity-and-inherent-ambiguity]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cfg-universality-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The problem of deciding whether a context-free grammar generates all words over\nits terminal alphabet is undecidable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $U_\\Sigma$ be a fixed grammar generating $\\Sigma^*$. Such a grammar is easy to write, for example with productions $$ S\\to aS\\mid \\varepsilon\\qquad(a\\in\\Sigma). $$ Then $$ L(G)=\\Sigma^* \\iff L(G)=L(U_\\Sigma). $$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore a decision procedure for CFG equivalence would decide whether $L(G)=\\Sigma^*$ by comparing $G$ with the fixed universal grammar $U_\\Sigma$. That would decide CFG universality, contradicting [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence CFG equivalence is undecidable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "discharge-contradiction: equivalence with a fixed universal grammar would decide universality"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "CFG equivalence is undecidable does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "CFG equivalence is undecidable has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "CFG equivalence is undecidable does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "CFG equivalence is undecidable does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "CFG equivalence is undecidable has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "CFG equivalence is undecidable does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "CFG equivalence is undecidable is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "CFG equivalence is undecidable is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "thm-cfg-ambiguity-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ambiguity-and-inherent-ambiguity",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a context-free grammar.\n\nThe grammar $G$ is **ambiguous** when there exists a word $w\\in L(G)$ having\ntwo distinct leftmost derivations in $G$. By\n[[thm-derivation-parse-tree-correspondence]], this is equivalent to requiring\ntwo distinct finite parse trees for $G$ with yield $w$.\n\nThe grammar $G$ is **unambiguous** when it is not ambiguous.\n\nA context-free language $L$ is **inherently ambiguous** when every\ncontext-free grammar $G$ with $L(G)=L$ is ambiguous.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-post-correspondence-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite alphabet $\\Sigma$. A **Post correspondence problem instance**\nover $\\Sigma$ is a finite list of pairs of nonempty words\n$$ (u_1,v_1),\\dots,(u_n,v_n)\\in(\\Sigma^+\\times\\Sigma^+). $$\n\nA **match** for that instance is a nonempty finite index sequence\n$$ i_1,\\dots,i_k\\in\\{1,\\dots,n\\} $$\nsuch that\n$$ u_{i_1}\\cdots u_{i_k}=v_{i_1}\\cdots v_{i_k}. $$\n\nThe **Post correspondence problem** asks, given such a finite list of dominoes,\nwhether a match exists.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-post-correspondence-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The Post correspondence problem is undecidable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-many-one-reductions-transfer-decidability-and-recognizability",
+          "source_section": "Statement",
+          "quote": "If $A\\le_m B$, then:\n\n- whenever $B$ is decidable, $A$ is decidable, and\n- whenever $B$ is recognizable, $A$ is recognizable.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Build one grammar with start symbol $S$ and two branches: $$ S\\to T\\mid B, $$ $$ T\\to u_iTi\\mid u_i i,\\qquad B\\to v_iBi\\mid v_i i\\qquad(1\\le i\\le n), $$ where the indices $1,\\dots,n$ are treated as terminal symbols appended in reverse order. Then a leftmost derivation from $T$ yields exactly the words $u_{i_1}\\cdots u_{i_k}i_k\\cdots i_1$, and a leftmost derivation from $B$ yields exactly the words $v_{i_1}\\cdots v_{i_k}i_k\\cdots i_1$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $i_1,\\dots,i_k$ is a PCP match, then the word $$ u_{i_1}\\cdots u_{i_k}i_k\\cdots i_1=v_{i_1}\\cdots v_{i_k}i_k\\cdots i_1 $$ has one leftmost derivation beginning with $S\\Rightarrow T$ and another beginning with $S\\Rightarrow B$. Hence the grammar is ambiguous by [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, if the grammar is ambiguous, [L1] gives a word with two distinct leftmost derivations. Because the only branching at the start symbol is $S\\to T$ or $S\\to B$, one derivation must begin in the $T$ branch and the other in the $B$ branch. By step 1.1 the common terminal word therefore has the form $$ u_{i_1}\\cdots u_{i_k}i_k\\cdots i_1=v_{j_1}\\cdots v_{j_m}j_m\\cdots j_1. $$ The reversed index suffix forces $k=m$ and $i_r=j_r$ for every $r$, so $i_1,\\dots,i_k$ is a PCP match.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 show that the constructed grammar is ambiguous if and only if the original PCP instance has a match. If CFG ambiguity were decidable, then [L4] and this equivalence would make PCP decidable, contradicting [L3].",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 2.1",
+            "step 2.2",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore CFG ambiguity is undecidable.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "discharge-contradiction: an ambiguity decider would decide PCP"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "CFG ambiguity is undecidable does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "CFG ambiguity is undecidable has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "CFG ambiguity is undecidable does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "CFG ambiguity is undecidable does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "CFG ambiguity is undecidable has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "CFG ambiguity is undecidable does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 shows that a PCP match yields two leftmost derivations of one word."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.2 extracts a PCP match from any ambiguity witness for the constructed grammar."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on the reversed-index suffix and the two-derivation iff. The current grammar keeps the T and B branches separate, appends indices in reverse order so the chosen sequence is uniquely recoverable from a common terminal word, and therefore makes ambiguity equivalent to a genuine PCP match."
+      }
+    },
+    "thm-proper-inclusions-in-the-chomsky-hierarchy": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-pumping-lemma-for-regular-languages",
+          "source_section": "Statement",
+          "quote": "If $L$ is regular, then there exists $p\\geq 1$ such that every word\n$w\\in L$ with $|w|\\geq p$ can be written as $w=xyz$ with\n$$ |xy|\\leq p,\\qquad |y|>0,\\qquad xy^iz\\in L\\ \\text{for every } i\\geq 0. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-cfl-membership-is-decidable",
+          "source_section": "Statement",
+          "quote": "Given a context-free grammar $G$ and a word $w$, one can decide whether\n$w\\in L(G)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-pumping-lemma-for-context-free-languages",
+          "source_section": "Statement",
+          "quote": "If $L$ is a context-free language, then there exists an integer $p\\ge 1$ such\nthat every word $z\\in L$ with $|z|\\ge p$ can be written as\n$$ z=uvwxy $$\nwith\n$$ |vx|\\ge 1,\\qquad |vwx|\\le p,\\qquad uv^i wx^i y\\in L\\text{ for every }i\\ge 0. $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-machine-acceptance-is-ce-complete",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is\nc.e.-complete under computable many-one reductions.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If a language is regular, choose a DFA $D$ recognizing it. Make one CFG whose variables are the states of $D$, whose start variable is the start state, whose productions are $q\\to a\\,\\delta(q,a)$ for each transition, and whose accepting states also have productions $q\\to\\varepsilon$. Then the grammar generates exactly the words accepted by $D$. Hence every regular language is context-free.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Every decidable language is recognizable by running its decider and accepting exactly when the decider accepts. Thus $$ \\text{decidable}\\subseteq\\text{computably enumerable}. $$",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The language $$ L_{ab}:=\\{a^n b^n:n\\ge 0\\} $$ is context-free, for example via the grammar $S\\to aSb\\mid\\varepsilon$. It is not regular: if it were regular, [L1] would give a pumping length $p$, but $a^pb^p$ cannot be pumped inside the first $p$ symbols without changing the number of $a$'s and leaving the number of $b$'s fixed. Therefore $$ \\text{regular}\\subsetneq\\text{context-free}. $$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Relabel the binary alphabet of $A_{TM}$ injectively by the two chosen symbols $a,b\\in\\Sigma$. This computable letter-by-letter bijection preserves recognizability and decidability. By [L5] and [L6], the relabeled language over $\\Sigma$ is computably enumerable but not decidable. Therefore $$ \\text{decidable}\\subsetneq\\text{computably enumerable}. $$",
+          "step": "2.2",
+          "inputs": [
+            "L5",
+            "L6",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every context-free language is decidable by [L2], so $$ \\text{context-free}\\subseteq\\text{decidable}. $$",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The language $$L_{aba}:=\\{a^nb^na^n:n\\ge0\\}$$ is decidable by checking the three blocks and comparing their lengths. It is not context-free: if $p$ were a pumping length from [L3], then a pumping window of length at most $p$ in $a^pb^pa^p$ could meet at most two consecutive blocks and could not meet both $a$-blocks. Pumping a nonempty part therefore changes at least one of the three required counts without changing all three equally, or destroys the block order. This contradicts [L3]. Hence $$ \\text{context-free}\\subsetneq\\text{decidable}. $$",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 2.1, 4.1, and 2.2 prove that all three containments are strict over the fixed alphabet $\\Sigma$.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The inclusions in the Chomsky hierarchy are proper does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The inclusions in the Chomsky hierarchy are proper has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The inclusions in the Chomsky hierarchy are proper does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The inclusions in the Chomsky hierarchy are proper does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The inclusions in the Chomsky hierarchy are proper has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The inclusions in the Chomsky hierarchy are proper does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The inclusions in the Chomsky hierarchy are proper is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The inclusions in the Chomsky hierarchy are proper is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on whether all three strict containments were independently justified. The current proof gives an explicit DFA-to-CFG inclusion, uses L_ab with the pumping lemma for regular languages, uses decidability of CFL membership plus a decidable non-CFL intersection to separate CFL from decidable, and uses A_TM to separate decidable from c.e."
+      }
+    },
+    "fs-pcp-allows-symbol-reordering-within-dominoes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-post-correspondence-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite alphabet $\\Sigma$. A **Post correspondence problem instance**\nover $\\Sigma$ is a finite list of pairs of nonempty words\n$$ (u_1,v_1),\\dots,(u_n,v_n)\\in(\\Sigma^+\\times\\Sigma^+). $$\n\nA **match** for that instance is a nonempty finite index sequence\n$$ i_1,\\dots,i_k\\in\\{1,\\dots,n\\} $$\nsuch that\n$$ u_{i_1}\\cdots u_{i_k}=v_{i_1}\\cdots v_{i_k}. $$\n\nThe **Post correspondence problem** asks, given such a finite list of dominoes,\nwhether a match exists.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If one were allowed to reorder symbols inside the domino, the unique tile could be changed from $(ab,ba)$ to $(ab,ab)$ by swapping the bottom symbols, and then a one-tile sequence would look like a match.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In actual PCP, [L1] forbids that operation. The only nonempty sequences use the same domino some number $k\\ge 1$ of times, yielding top word $(ab)^k$ and bottom word $(ba)^k$. Their first symbols are always different, so these words are never equal.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the claimed permission is false: PCP concatenates whole dominoes in the chosen order and does not allow symbol reordering within a tile.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: PCP permits reordering symbols inside a domino does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: PCP permits reordering symbols inside a domino has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 use a one-domino instance to show the claimed reordering permission already fails at the smallest scale."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: PCP permits reordering symbols inside a domino does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: PCP permits reordering symbols inside a domino has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: PCP permits reordering symbols inside a domino does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: PCP permits reordering symbols inside a domino is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: PCP permits reordering symbols inside a domino is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "fs-two-decidable-cfls-have-decidable-intersection-emptiness": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-cfl-membership-is-decidable",
+          "source_section": "Statement",
+          "quote": "Given a context-free grammar $G$ and a word $w$, one can decide whether\n$w\\in L(G)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cfg-intersection-emptiness-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The problem of deciding, from two context-free grammars $G$ and $H$, whether\n$L(G)\\cap L(H)=\\varnothing$ is undecidable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fact [L1] says that for any fixed word $w$, one can decide separately whether $w\\in L(G)$ and whether $w\\in L(H)$. That is a pointwise membership statement about the two languages themselves.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The claim in the statement is stronger: it asks for one algorithm that, from the grammar descriptions alone, decides whether **some** word lies in both languages. But [L2] says that this description-level problem is undecidable.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence the statement is false. Decidable membership for each individual CFL does not make the intersection-emptiness problem for pairs of CFGs decidable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: decidable CFLs have a decidable intersection-emptiness problem does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: decidable CFLs have a decidable intersection-emptiness problem has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "FALSE: decidable CFLs have a decidable intersection-emptiness problem does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: decidable CFLs have a decidable intersection-emptiness problem does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: decidable CFLs have a decidable intersection-emptiness problem has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: decidable CFLs have a decidable intersection-emptiness problem does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: decidable CFLs have a decidable intersection-emptiness problem is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: decidable CFLs have a decidable intersection-emptiness problem is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "ex-modified-pcp-is-undecidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-computation-history-domino-encoding",
+          "source_section": "Statement",
+          "quote": "For every coded deterministic one-tape Turing machine $M$ and every input word\n$w$, one can effectively construct a modified-PCP instance $P_{M,w}$ such that\n$P_{M,w}$ has a match if and only if $M$ has an accepting computation history\non $w$. The construction may be chosen so that every match spells a\nseparator-delimited accepting history before its forced cleanup suffix and\nuses only start, copier, local-transition, boundary-extension,\naccepting-cleanup, and terminal tiles.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the three displayed dominoes in order. Their top concatenation is $$\\#\\triangleright q_01\\#,$$ while their bottom concatenation is $$\\#\\triangleright q_01\\#\\triangleright q_{\\mathrm{acc}}1\\#.$$ Thus the top has matched the initial block and the bottom is exactly one block ahead with the accepting configuration. No right-boundary extension is needed because the only move is the clamped left move.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After the three dominoes in step 1.1, append $$ (\\triangleright q_{\\mathrm{acc}},q_{\\mathrm{acc}}),\\ (1,1),\\ (\\#,\\#),\\ (q_{\\mathrm{acc}}1,q_{\\mathrm{acc}}),\\ (\\#,\\#),\\ (q_{\\mathrm{acc}}\\#\\#,\\#). $$ Every pair belongs to the construction in [L1], and the two complete rows are both $$\\#\\triangleright q_01\\#\\triangleright q_{\\mathrm{acc}}1\\#q_{\\mathrm{acc}}1\\#q_{\\mathrm{acc}}\\#\\#.$$ Thus this instance has a match. Conversely, [L1] decodes every match back to an accepting history; here determinism leaves only $C_0,C_1$. The theorem [[thm-modified-pcp-is-undecidable]] says that no algorithm can decide all such instances, even though this particular accepting instance is visible directly.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A computation-history domino system whose matches spell a halting run does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A computation-history domino system whose matches spell a halting run has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses the single transition tile of the two-configuration accepting history."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A computation-history domino system whose matches spell a halting run does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A computation-history domino system whose matches spell a halting run has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A computation-history domino system whose matches spell a halting run does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A computation-history domino system whose matches spell a halting run is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A computation-history domino system whose matches spell a halting run is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "ex-proper-inclusions-in-the-chomsky-hierarchy": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-proper-inclusions-in-the-chomsky-hierarchy",
+          "source_section": "Statement",
+          "quote": "For every fixed finite alphabet $\\Sigma$ with at least two symbols, the\ncontainments in [[def-chomsky-hierarchy]] are all strict:\n$$ \\text{regular}\\subsetneq\\text{context-free}\\subsetneq\\text{decidable}\\subsetneq\\text{computably enumerable}. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pumping-lemma-for-regular-languages",
+          "source_section": "Statement",
+          "quote": "If $L$ is regular, then there exists $p\\geq 1$ such that every word\n$w\\in L$ with $|w|\\geq p$ can be written as $w=xyz$ with\n$$ |xy|\\leq p,\\qquad |y|>0,\\qquad xy^iz\\in L\\ \\text{for every } i\\geq 0. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-pumping-lemma-for-context-free-languages",
+          "source_section": "Statement",
+          "quote": "If $L$ is a context-free language, then there exists an integer $p\\ge 1$ such\nthat every word $z\\in L$ with $|z|\\ge p$ can be written as\n$$ z=uvwxy $$\nwith\n$$ |vx|\\ge 1,\\qquad |vwx|\\le p,\\qquad uv^i wx^i y\\in L\\text{ for every }i\\ge 0. $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-machine-acceptance-is-ce-complete",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is\nc.e.-complete under computable many-one reductions.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-machine-acceptance-is-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $A_{TM}$ of [[def-turing-machine-acceptance-problem]] is not\ndecidable.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The language $L_{ab}$ is context-free via the grammar $S\\to aSb\\mid\\varepsilon$. If it were regular, [L2] would give a pumping length $p$, but pumping the word $a^pb^p$ inside its first $p$ symbols changes only the number of $a$'s. So $L_{ab}$ witnesses $$ \\text{regular}\\subsetneq\\text{context-free}. $$",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The language $L_{abc}$ is decidable by a machine that first checks the form $a^*b^*c^*$ and then counts the three block lengths and compares them. If it were context-free, [L3] would give a pumping length $p$ for the word $a^pb^pc^p$, but any factor $vwx$ with $|vwx|\\le p$ lies in at most two consecutive blocks, so pumping $v$ and $x$ changes at most two symbol counts and destroys equality of all three counts. Thus $L_{abc}$ witnesses $$ \\text{context-free}\\subsetneq\\text{decidable}. $$",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [L4] and [L5], $A_{TM}$ is computably enumerable but not decidable. So it witnesses $$ \\text{decidable}\\subsetneq\\text{computably enumerable}. $$",
+          "step": "1.3",
+          "inputs": [
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "These are exactly the three strict containments proved in [L1]. The point of the example is that one should keep the witnesses separate rather than expecting one language to witness every gap at once.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Witness languages for the proper inclusions in the Chomsky hierarchy does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Witness languages for the proper inclusions in the Chomsky hierarchy has no separate zero-valued parameter or denominator case beyond the chosen language witnesses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Witness languages for the proper inclusions in the Chomsky hierarchy does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Witness languages for the proper inclusions in the Chomsky hierarchy does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Witness languages for the proper inclusions in the Chomsky hierarchy has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Witness languages for the proper inclusions in the Chomsky hierarchy does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Witness languages for the proper inclusions in the Chomsky hierarchy is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Witness languages for the proper inclusions in the Chomsky hierarchy is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on whether the example really supplies three separate witnesses. The current example now gives direct proofs for L_ab, L_abc, and A_TM instead of merely naming them, so each strict containment regular<CFL, CFL<decidable, and decidable<c.e. is witnessed concretely on current bytes."
+      }
+    },
+    "cex-pcp-allows-symbol-reordering-within-dominoes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "fs-pcp-allows-symbol-reordering-within-dominoes",
+          "source_section": "Statement",
+          "quote": "In a PCP match, one may reorder the symbols inside a chosen domino before\nconcatenating it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Consider the one-domino instance $$ (ab,ba). $$ If internal permutation were allowed, the bottom word `ba` could be rearranged to `ab`, so one use of the domino would look like a match.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In actual PCP, only whole dominoes may be concatenated. Using the unique tile $k\\ge 1$ times gives top word $(ab)^k$ and bottom word $(ba)^k$, whose first symbols differ. So the instance has no legal match.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore this instance refutes the statement. It is exactly the concrete counterexample recorded abstractly in [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A domino family where matching fails unless one illegally permutes symbols inside a tile does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A domino family where matching fails unless one illegally permutes symbols inside a tile has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 use a one-domino instance, so the refutation is visible in the smallest nonempty case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A domino family where matching fails unless one illegally permutes symbols inside a tile does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A domino family where matching fails unless one illegally permutes symbols inside a tile has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A domino family where matching fails unless one illegally permutes symbols inside a tile does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A domino family where matching fails unless one illegally permutes symbols inside a tile is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A domino family where matching fails unless one illegally permutes symbols inside a tile is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "prop-fixed-machine-coding-is-acceptable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-universal-and-acceptable-numbering",
+          "source_section": "Definition",
+          "quote": "Let $(\\varphi_e)_{e\\in\\mathbb N}$ be a numbering of the partial computable\nfunctions.\n\nThe numbering is **universal** when the binary partial function\n$$ U(e,x)\\simeq\\varphi_e(x) $$\nis itself partial computable.\n\nThe numbering is **acceptable** when it is universal and there exists a total\ncomputable function\n$$ s:\\mathbb N^2\\to\\mathbb N $$\nsuch that for all $e,a,x\\in\\mathbb N$ one has\n$$ \\varphi_{s(e,a)}(x)\\simeq\\varphi_e(\\ulcorner a,x\\urcorner_{\\mathrm{seq}}), $$\nwhere $\\ulcorner a,x\\urcorner_{\\mathrm{seq}}$ is the chosen code of the\ntwo-term sequence $(a,x)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-machine-encoding-is-injective-and-decodable",
+          "source_section": "Statement",
+          "quote": "The coding $\\ulcorner M\\urcorner$ fixed in\n[[def-effective-encoding-of-turing-machines]] is injective on coded\ndeterministic one-tape Turing machines, and it has a total decoder that either\nreconstructs the unique coded machine or reports malformed input.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "This family is a numbering of the partial computable unary functions. If $f$ is partial computable, some deterministic one-tape Turing machine computes it. Relabel that machine's finite state set and tape alphabet by integers so that the start, accept, and reject states become $0,1,2$ and the symbols become the normalized alphabets of [L3]. The resulting coded machine has some code $e$, and by construction $\\varphi_e=f$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The numbering is universal. On input $(e,x)$, first run the total decoder from [L2]. If $e$ is malformed, diverge forever. If $e$ decodes to a machine $M_e$, simulate $M_e$ on input $x$ and output exactly what $M_e$ outputs if it halts. This produces a partial computable binary function $U(e,x)$ with $U(e,x)\\simeq\\varphi_e(x)$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For hard-wiring, given $e$ and $a$, construct a coded machine $N_{e,a}$ that on input $x$ first computes the pair code $\\ulcorner a,x\\urcorner_{\\mathrm{seq}}$, then simulates the machine coded by $e$ on that code, and copies out the simulated output if the simulation halts. By [L2] and [L3], the map $(e,a)\\mapsto\\ulcorner N_{e,a}\\urcorner$ is total and computable.",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By construction, for every $x$ one has $$ \\varphi_{\\ulcorner N_{e,a}\\urcorner}(x)\\simeq\\varphi_e(\\ulcorner a,x\\urcorner_{\\mathrm{seq}}). $$ So the function $s(e,a):=\\ulcorner N_{e,a}\\urcorner$ is the required hard-wiring operation from [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1, 1.2, and 2.1 show that $(\\varphi_e)$ is a numbering, is universal, and has the required hard-wiring map. Therefore the fixed machine coding gives an acceptable numbering.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fixed machine coding gives an acceptable numbering does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed machine coding gives an acceptable numbering has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The fixed machine coding gives an acceptable numbering does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2 explicitly handles malformed machine codes by diverging, so the decoder-failure case is covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The fixed machine coding gives an acceptable numbering has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The fixed machine coding gives an acceptable numbering does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fixed machine coding gives an acceptable numbering is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The fixed machine coding gives an acceptable numbering is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on whether the fixed coding really enumerates all partial computable unary functions and supplies total hard-wiring. The repaired proof now explicitly relabels an arbitrary machine into the fixed coding in step 1.1, builds the universal simulator from the decoder, and constructs the hard-wired machine N_{e,a} total-computably."
+      }
+    },
+    "thm-smn-parameter-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-universal-and-acceptable-numbering",
+          "source_section": "Definition",
+          "quote": "Let $(\\varphi_e)_{e\\in\\mathbb N}$ be a numbering of the partial computable\nfunctions.\n\nThe numbering is **universal** when the binary partial function\n$$ U(e,x)\\simeq\\varphi_e(x) $$\nis itself partial computable.\n\nThe numbering is **acceptable** when it is universal and there exists a total\ncomputable function\n$$ s:\\mathbb N^2\\to\\mathbb N $$\nsuch that for all $e,a,x\\in\\mathbb N$ one has\n$$ \\varphi_{s(e,a)}(x)\\simeq\\varphi_e(\\ulcorner a,x\\urcorner_{\\mathrm{seq}}), $$\nwhere $\\ulcorner a,x\\urcorner_{\\mathrm{seq}}$ is the chosen code of the\ntwo-term sequence $(a,x)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-parameter-specialization-function",
+          "source_section": "Definition",
+          "quote": "Fix an acceptable numbering $(\\varphi_e)_{e\\in\\mathbb N}$.\n\nFor $n\\in\\mathbb N$, define the recursively coded input tuple by\n$$ \\operatorname{Inp}_0:=\\ulcorner()\\urcorner_{\\mathrm{seq}},\\qquad \\operatorname{Inp}_{n+1}(b_1,\\dots,b_{n+1}):=\\ulcorner b_1,\\operatorname{Inp}_n(b_2,\\dots,b_{n+1})\\urcorner_{\\mathrm{seq}}. $$\n\nFor $m,n\\in\\mathbb N$, a total computable function\n$$ s_m^n:\\mathbb N^{m+1}\\to\\mathbb N $$\nis a **parameter-specialization function** when for all indices $e$, all\nparameters $a_1,\\dots,a_m$, all inputs $b_1,\\dots,b_n$, and the sequence coding\nof [[def-natural-number-coding-of-finite-sequences]], one has\n$$ \\varphi_{s_m^n(e,a_1,\\dots,a_m)}(\\operatorname{Inp}_n(b_1,\\dots,b_n))\n\\simeq\n\\varphi_e(\\operatorname{Inp}_{m+n}(a_1,\\dots,a_m,b_1,\\dots,b_n)). $$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the functions $s_m^n$ recursively from the binary map of [L1]: $$ s_0^n(e):=e, $$ and $$ s_{m+1}^n(e,a_1,\\dots,a_{m+1}):=s\\bigl(s_m^{n+1}(e,a_1,\\dots,a_m),a_{m+1}\\bigr). $$ Because $s$ is total computable and composition preserves total computability, each $s_m^n$ is total computable.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We prove the defining identity from [L2] by induction on $m$. For $m=0$, step 1.1 gives $s_0^n(e)=e$, so the statement is immediate. Assume it holds for $m$. Then for every input tuple $b_1,\\dots,b_n$, $$ \\varphi_{s_{m+1}^n(e,a_1,\\dots,a_{m+1})}(\\operatorname{Inp}_n(b_1,\\dots,b_n)) $$ $$ \\simeq \\varphi_{s_m^{n+1}(e,a_1,\\dots,a_m)}\\bigl(\\ulcorner a_{m+1},\\operatorname{Inp}_n(b_1,\\dots,b_n)\\urcorner_{\\mathrm{seq}}\\bigr) $$ by [L1]. By the definition in [L2], that inner code is exactly $$ \\operatorname{Inp}_{n+1}(a_{m+1},b_1,\\dots,b_n). $$ The induction hypothesis therefore turns the right-hand side into $$ \\varphi_e(\\operatorname{Inp}_{m+n+1}(a_1,\\dots,a_m,a_{m+1},b_1,\\dots,b_n)). $$ So the required identity also holds for $m+1$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore for every $m,n$ the recursively defined $s_m^n$ is a parameter-specialization function.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The s-m-n theorem does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 defines s_0^n(e)=e, and step 2.1 proves the base case m=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The s-m-n theorem does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The s-m-n theorem does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The s-m-n theorem has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The s-m-n theorem does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The s-m-n theorem is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The s-m-n theorem is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the inductive specialization identity. The repaired proof no longer conflates the nested input code with a flat tuple code: step 2.1 uses Inp_n and Inp_{n+1} exactly as defined, so the recursive construction of s_m^n closes correctly for the chosen coding convention."
+      }
+    },
+    "cor-effective-program-specialization": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-smn-parameter-theorem",
+          "source_section": "Statement",
+          "quote": "If $(\\varphi_e)_{e\\in\\mathbb N}$ is an acceptable numbering, then for every\n$m,n\\in\\mathbb N$ there exists a parameter-specialization function $s_m^n$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] to the chosen pair $(m,n)$. The number $$ e':=s_m^n(e,a_1,\\dots,a_m) $$ is effectively computable from the data.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the defining property of $s_m^n$, the indexed function $\\varphi_{e'}$ agrees on every remaining input tuple with the original program $\\varphi_e$ after the first $m$ inputs have been fixed to $a_1,\\dots,a_m$. Thus $e'$ is the desired residual-program index.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore program specialization is effective.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Effective program specialization does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Effective program specialization has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Effective program specialization does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Effective program specialization does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Effective program specialization has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Effective program specialization does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Effective program specialization is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Effective program specialization is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "lem-self-reference-construction-from-smn": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-smn-parameter-theorem",
+          "source_section": "Statement",
+          "quote": "If $(\\varphi_e)_{e\\in\\mathbb N}$ is an acceptable numbering, then for every\n$m,n\\in\\mathbb N$ there exists a parameter-specialization function $s_m^n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $s_1^1$ be the specialization map from [L1]. Define $$ d(u):=s_1^1(u,u). $$ Because $s_1^1$ is total computable, so is $d$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the defining property of $s_1^1$, for every $u$ and $x$ one has $$ \\varphi_{d(u)}(x)=\\varphi_{s_1^1(u,u)}(x)\\simeq\\varphi_u(\\ulcorner u,x\\urcorner_{\\mathrm{seq}}). $$ That is exactly the required diagonal identity.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the desired total computable self-reference constructor exists.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The diagonal self-reference construction from s-m-n does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The diagonal self-reference construction from s-m-n has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 specializes exactly one parameter into the first input slot by d(u)=s_1^1(u,u)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The diagonal self-reference construction from s-m-n does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The diagonal self-reference construction from s-m-n has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The diagonal self-reference construction from s-m-n does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The diagonal self-reference construction from s-m-n is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The diagonal self-reference construction from s-m-n is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "thm-kleenes-second-recursion-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computable-program-transformer",
+          "source_section": "Definition",
+          "quote": "Fix a numbering $(\\varphi_e)_{e\\in\\mathbb N}$ of the partial computable\nfunctions.\n\nA **computable program transformer** is a total computable function\n$$ F:\\mathbb N\\to\\mathbb N. $$\n\nIt acts on indices rather than directly on extensional partial functions: the\ntransformed program with input index $e$ is the index $F(e)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-self-reference-construction-from-smn",
+          "source_section": "Statement",
+          "quote": "For an acceptable numbering, there exists a total computable function\n$$ d:\\mathbb N\\to\\mathbb N $$\nsuch that for every index $u$ and every input $x$,\n$$ \\varphi_{d(u)}(x)\\simeq\\varphi_u(\\ulcorner u,x\\urcorner_{\\mathrm{seq}}). $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $d$ be the diagonal map from [L2]. Because $F$ is total computable by [L1], the binary partial function $$ \\Psi(z,x):=\\varphi_{F(d(z))}(x) $$ is partial computable. Since we are working inside a numbering of all partial computable functions, choose an index $q$ with $$ \\varphi_q(\\ulcorner z,x\\urcorner_{\\mathrm{seq}})\\simeq\\Psi(z,x) $$ for all $z,x$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $e:=d(q)$. Then for every input $x$, $$ \\varphi_e(x)\\simeq\\varphi_q(\\ulcorner q,x\\urcorner_{\\mathrm{seq}})\\simeq\\Psi(q,x)=\\varphi_{F(d(q))}(x)=\\varphi_{F(e)}(x), $$ where the first equivalence is [L2] and the last equality is the definition of $e$. Hence $\\varphi_e=\\varphi_{F(e)}$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore every computable program transformer has a fixed point.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Kleene's second recursion theorem does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Kleene's second recursion theorem has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Kleene's second recursion theorem does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Kleene's second recursion theorem does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Kleene's second recursion theorem has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Kleene's second recursion theorem does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Kleene's second recursion theorem is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Kleene's second recursion theorem is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the self-reference map and the fixed-point computation. The current proof chooses q indexing the binary computable function Psi(z,x)=phi_{F(d(z))}(x), then sets e=d(q); step 2.1 expands both definitions and gets phi_e=phi_{F(e)} pointwise with no missing source-file or encoding assumption."
+      }
+    },
+    "thm-recursion-theorem-with-parameters": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-smn-parameter-theorem",
+          "source_section": "Statement",
+          "quote": "If $(\\varphi_e)_{e\\in\\mathbb N}$ is an acceptable numbering, then for every\n$m,n\\in\\mathbb N$ there exists a parameter-specialization function $s_m^n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-kleenes-second-recursion-theorem",
+          "source_section": "Statement",
+          "quote": "Fix an acceptable numbering $(\\varphi_e)_{e\\in\\mathbb N}$. For every\ncomputable program transformer $F:\\mathbb N\\to\\mathbb N$, there exists an index\n$e$ such that\n$$ \\varphi_e=\\varphi_{F(e)} $$\nas partial functions.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $s_2^1$ be the specialization function from [L1]. Define a ternary partial computable function by $$ \\Psi(a,u,x):=\\varphi_{F(a,s_2^1(u,a,u))}(x). $$ Because $F$ and $s_2^1$ are total computable, $\\Psi$ is partial computable, so choose an index $r$ with $$ \\varphi_r(\\ulcorner a,\\ulcorner u,x\\urcorner_{\\mathrm{seq}}\\urcorner_{\\mathrm{seq}})\\simeq\\Psi(a,u,x) $$ for all $a,u,x$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $$ q(a):=s_2^1(r,a,r). $$ This function is total computable because $s_2^1$ is.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $a$ and $x$, $$ \\varphi_{q(a)}(x)\\simeq\\varphi_r(\\ulcorner a,\\ulcorner r,x\\urcorner_{\\mathrm{seq}}\\urcorner_{\\mathrm{seq}})=\\Psi(a,r,x)=\\varphi_{F(a,s_2^1(r,a,r))}(x)=\\varphi_{F(a,q(a))}(x). $$ Hence $\\varphi_{q(a)}=\\varphi_{F(a,q(a))}$ for every parameter $a$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore the fixed-point construction can be carried out uniformly in the external parameter.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The recursion theorem with parameters does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The recursion theorem with parameters has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 through 3.1 treat one external parameter a uniformly via the total map q(a)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The recursion theorem with parameters does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The recursion theorem with parameters has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The recursion theorem with parameters does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The recursion theorem with parameters is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The recursion theorem with parameters is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the repaired nested coding. The current proof now uses the specialization function s_2^1 together with the nested code <a,<r,x>> required by the chosen sequence coding, so q(a)=s_2^1(r,a,r) really satisfies phi_{q(a)}=phi_{F(a,q(a))} for every parameter a."
+      }
+    },
+    "thm-nonhalting-is-productive-and-halting-is-creative": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-productive-and-creative-set",
+          "source_section": "Definition",
+          "quote": "Fix a numbering $(\\varphi_e)_{e\\in\\mathbb N}$ and write\n$$ W_e:=\\operatorname{dom}(\\varphi_e). $$\n\nA set $P\\subseteq\\mathbb N$ is **productive** when there exists a partial\ncomputable function\n$$ p:\\mathbb N\\rightharpoonup\\mathbb N $$\nsuch that for every $e$,\n$$ W_e\\subseteq P \\implies p(e)\\mathbin\\downarrow\\text{ and }p(e)\\in P\\setminus W_e. $$\nSuch a function $p$ is called a **productive function** for $P$.\n\nA set $C\\subseteq\\mathbb N$ is **creative** when:\n\n- $C=W_e$ for some $e$, so $C$ is computably enumerable, and\n- its complement $\\mathbb N\\setminus C$ is productive.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-fixed-machine-coding-is-acceptable",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi_e$ be the partial function computed by the coded deterministic\none-tape Turing machine with code $e$ on input $x$, when $e$ decodes to a\nmachine and that machine halts on $x$; if $e$ is malformed or the computation\ndoes not halt, leave $\\varphi_e(x)$ undefined. Then\n$(\\varphi_e)_{e\\in\\mathbb N}$ is an acceptable numbering.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-machine-encoding-is-injective-and-decodable",
+          "source_section": "Statement",
+          "quote": "The coding $\\ulcorner M\\urcorner$ fixed in\n[[def-effective-encoding-of-turing-machines]] is injective on coded\ndeterministic one-tape Turing machines, and it has a total decoder that either\nreconstructs the unique coded machine or reports malformed input.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $K$ is computably enumerable: dovetail over all indices $e$, decode each one using [L3], and simulate the decoded machine on input $e$. Enumerate $e$ exactly when that simulation halts. By [L2], this lists precisely the numbers in $K$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $e$, build a coded machine $Q_e$ that on input $x$ simulates the enumeration of $W_e$ and halts exactly when the number $x$ appears in that enumeration. Let $p(e):=\\ulcorner Q_e\\urcorner$. The effective machine coding makes $p$ total computable; productivity in [L1] does not require this particular witness to be injective.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "given",
+            "construct",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume $W_e\\subseteq\\mathbb N\\setminus K$. If $p(e)\\in W_e$, then by the definition of $Q_e$ the computation $Q_e(p(e))$ halts, so $p(e)\\in K$, which contradicts $W_e\\subseteq\\mathbb N\\setminus K$. Therefore $p(e)\\notin W_e$. But then the simulation inside $Q_e$ never sees $p(e)$ enter $W_e$, so $Q_e(p(e))$ diverges and hence $p(e)\\notin K$. Thus $p(e)\\in(\\mathbb N\\setminus K)\\setminus W_e$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 shows that $p$ is a productive function for $\\mathbb N\\setminus K$. By [L1], the complement of $K$ is productive. Together with step 1.1, [L1] gives that $K$ is creative.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 still produces a productive witness when W_e is empty, because the proof never assumes W_e contains any element."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The nonhalting set is productive and the halting set is creative has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The nonhalting set is productive and the halting set is creative does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The nonhalting set is productive and the halting set is creative does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The nonhalting set is productive and the halting set is creative has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The nonhalting set is productive and the halting set is creative does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The nonhalting set is productive and the halting set is creative is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The nonhalting set is productive and the halting set is creative is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "High-risk reread focused on the numbering-specific diagonal argument. The current theorem is now explicitly about the fixed machine-coding acceptable numbering, p(e)=code(Q_e) is total and one-one, and the step-2 diagonal argument really places p(e) in (N\\K)\\W_e whenever W_e is a c.e. subset of the complement."
+      }
+    },
+    "thm-myhill-isomorphism-theorem-for-creative-sets": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-productive-and-creative-set",
+          "source_section": "Definition",
+          "quote": "Fix a numbering $(\\varphi_e)_{e\\in\\mathbb N}$ and write\n$$ W_e:=\\operatorname{dom}(\\varphi_e). $$\n\nA set $P\\subseteq\\mathbb N$ is **productive** when there exists a partial\ncomputable function\n$$ p:\\mathbb N\\rightharpoonup\\mathbb N $$\nsuch that for every $e$,\n$$ W_e\\subseteq P \\implies p(e)\\mathbin\\downarrow\\text{ and }p(e)\\in P\\setminus W_e. $$\nSuch a function $p$ is called a **productive function** for $P$.\n\nA set $C\\subseteq\\mathbb N$ is **creative** when:\n\n- $C=W_e$ for some $e$, so $C$ is computably enumerable, and\n- its complement $\\mathbb N\\setminus C$ is productive.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nonhalting-is-productive-and-halting-is-creative",
+          "source_section": "Statement",
+          "quote": "For the fixed machine-coding acceptable numbering of\n[[prop-fixed-machine-coding-is-acceptable]], let\n$$ K:=\\{e\\in\\mathbb N:\\varphi_e(e)\\downarrow\\}. $$\nThen $\\mathbb N\\setminus K$ is productive, and therefore $K$ is creative.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-recursion-theorem-with-parameters",
+          "source_section": "Statement",
+          "quote": "Fix an acceptable numbering $(\\varphi_e)_{e\\in\\mathbb N}$. For every total\ncomputable function\n$$ F:\\mathbb N^2\\to\\mathbb N, $$\nthere exists a total computable function $q:\\mathbb N\\to\\mathbb N$ such that\nfor every parameter $a$,\n$$ \\varphi_{q(a)}=\\varphi_{F(a,q(a))}. $$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every c.e. set one-one reduces to $K$. If $C=W_e$, let $m_e(x)$ be the code of a machine that ignores its actual input, enumerates $W_e$, and halts exactly when $x$ appears. Add to its finite description an unreachable chain of states whose length encodes $x$. This does not change its behaviour, and the fixed injective machine coding makes $x\\mapsto m_e(x)$ total computable and one-one. Thus $$x\\in C\\iff m_e(x)\\in K.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $C$ be creative, put $P=\\mathbb N\\setminus C$, and choose a normalized total one-one productive function $p$ from [L1]. The fixed coding supplies a total computable padding map $\\operatorname{pad}(e,y)$: it builds a machine simulating program $e$ and adds an unreachable state chain encoding the pair $(e,y)$. Hence $\\varphi_{\\operatorname{pad}(e,y)}=\\varphi_e$, and $\\operatorname{pad}$ is one-one in the pair. Apply [L3] to the transformer that, from $(y,e)$, returns an index whose domain is $\\{p(\\operatorname{pad}(e,y))\\}$ if program $y$ halts on $y$, and is empty otherwise. We obtain a total computable $q$ satisfying this fixed-point equation. Put $$n(y):=\\operatorname{pad}(q(y),y),\\qquad g(y):=p(n(y)).$$ Then $n$, and therefore $g$, is one-one, and padding gives $$W_{n(y)}=W_{q(y)}=\\begin{cases}\\{g(y)\\},&y\\in K,\\\\ \\varnothing,&y\\notin K.\\end{cases}$$ If $y\\in K$ and $g(y)\\in P$, productivity applied to $W_{n(y)}\\subseteq P$ would force $g(y)\\notin W_{n(y)}$, a contradiction. If $y\\notin K$, then $W_{n(y)}=\\varnothing\\subseteq P$, so productivity gives $g(y)\\in P$. Therefore $$y\\in K\\iff g(y)\\in C,$$ and $g$ is a one-one computable reduction $K\\le_1C$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying step 1.1 to $A$ and then step 1.2 to $B$ gives a one-one reduction $A\\le_1 B$ by composition. Reversing the roles of $A$ and $B$ gives $B\\le_1 A$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $f$ witness $A\\le_1B$ and let $g$ witness $B\\le_1A$. Build finite membership-preserving partial bijections $h_s$ by stages. At a domain stage, choose the least $x\\notin\\operatorname{dom}h_s$ and start with $y_0=f(x)$. While $y_i\\in\\operatorname{rng}h_s$, set $x_{i+1}=h_s^{-1}(y_i)$ and $y_{i+1}=f(x_{i+1})$. This search must leave the finite range: otherwise a repeated $y_i$ and injectivity of $f$ would eventually put the original unused $x$ in $\\operatorname{dom}h_s$. Pair $x$ with the first unused $y_i$. Each passage through $f$ and $h_s^{-1}$ preserves and reflects membership, so the new pair does too.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "At the alternating range stage, choose the least $y\\notin\\operatorname{rng}h_s$ and start with $x_0=g(y)$. While $x_i\\in\\operatorname{dom}h_s$, set $y_{i+1}=h_s(x_i)$ and $x_{i+1}=g(y_{i+1})$. The symmetric injectivity argument finds an unused $x_i$ after finitely many steps. Pair that $x_i$ with $y$; again all traversed maps preserve and reflect membership. Thus every stage effectively extends the finite membership-preserving partial bijection.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $h:=\\bigcup_sh_s$. The alternating least-unused choices put every natural number eventually into both its domain and range, so $h$ is a bijection. It is computable because, on input $x$, one simulates stages until $x$ is paired. Every stage preserves $x\\in A\\iff h(x)\\in B$, hence this equivalence holds for all $x$.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "So $h$ is a computable permutation sending $A$ onto $B$. Taking $B=K$ and using [L2] gives the final clause.",
+          "step": "6.1",
+          "inputs": [
+            "L2",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Myhill's isomorphism theorem for creative sets does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Myhill's isomorphism theorem for creative sets has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Myhill's isomorphism theorem for creative sets does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Myhill's isomorphism theorem for creative sets does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Myhill's isomorphism theorem for creative sets has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 chooses the least unused element and then the first unused point on the corresponding chain at each stage."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 4.1 proves that the resulting permutation sends every x in A to a value in B."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 4.1 also records reflection of membership, so h(x) in B implies x in A."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f",
+        "notes": "Critical-risk reread focused on the one-one reductions and the final permutation construction. The repaired theorem is now honestly scoped to the fixed machine coding, builds a one-one reduction K<=_1 C via productive functions and the recursion theorem with parameters, then uses the standard back-and-forth on injective reductions to produce a computable permutation."
+      }
+    },
+    "prop-acceptable-numberings-are-computably-intertranslatable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-fixed-machine-coding-is-acceptable",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi_e$ be the partial function computed by the coded deterministic\none-tape Turing machine with code $e$ on input $x$, when $e$ decodes to a\nmachine and that machine halts on $x$; if $e$ is malformed or the computation\ndoes not halt, leave $\\varphi_e(x)$ undefined. Then\n$(\\varphi_e)_{e\\in\\mathbb N}$ is an acceptable numbering.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-universal-and-acceptable-numbering",
+          "source_section": "Definition",
+          "quote": "Let $(\\varphi_e)_{e\\in\\mathbb N}$ be a numbering of the partial computable\nfunctions.\n\nThe numbering is **universal** when the binary partial function\n$$ U(e,x)\\simeq\\varphi_e(x) $$\nis itself partial computable.\n\nThe numbering is **acceptable** when it is universal and there exists a total\ncomputable function\n$$ s:\\mathbb N^2\\to\\mathbb N $$\nsuch that for all $e,a,x\\in\\mathbb N$ one has\n$$ \\varphi_{s(e,a)}(x)\\simeq\\varphi_e(\\ulcorner a,x\\urcorner_{\\mathrm{seq}}), $$\nwhere $\\ulcorner a,x\\urcorner_{\\mathrm{seq}}$ is the chosen code of the\ntwo-term sequence $(a,x)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], let $(\\varphi_e)$ denote the standard acceptable numbering coming from the fixed machine coding. Because $\\alpha$ is universal by [L2], the partial function $(e,x)\\mapsto\\varphi_e(x)$ has some $\\alpha$-index $u$. Because $\\alpha$ is acceptable, [L2] supplies a total computable hard-wiring map $s_\\alpha$, and then $$ t_{\\varphi\\to\\alpha}(e):=s_\\alpha(u,e) $$ satisfies $$ \\alpha_{t_{\\varphi\\to\\alpha}(e)}(x)\\simeq\\alpha_u(\\ulcorner e,x\\urcorner_{\\mathrm{seq}})=\\varphi_e(x). $$ So $\\varphi$ translates computably into $\\alpha$. The same argument gives a computable translator $t_{\\varphi\\to\\beta}$ from $\\varphi$ into $\\beta$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $\\varphi$ is universal and $\\alpha$ is acceptable, the same argument with the roles reversed gives a total computable translator $t_{\\alpha\\to\\varphi}$ with $$ \\varphi_{t_{\\alpha\\to\\varphi}(e)}=\\alpha_e. $$ Likewise there is $t_{\\beta\\to\\varphi}$ with $$ \\varphi_{t_{\\beta\\to\\varphi}(e)}=\\beta_e. $$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Compose the translators through the hub numbering $\\varphi$: $$ t_{\\alpha\\to\\beta}:=t_{\\varphi\\to\\beta}\\circ t_{\\alpha\\to\\varphi},\\qquad t_{\\beta\\to\\alpha}:=t_{\\varphi\\to\\alpha}\\circ t_{\\beta\\to\\varphi}. $$ Then $$ \\beta_{t_{\\alpha\\to\\beta}(e)}=\\varphi_{t_{\\alpha\\to\\varphi}(e)}=\\alpha_e, $$ and similarly $\\alpha_{t_{\\beta\\to\\alpha}(e)}=\\beta_e$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore any two acceptable numberings are computably intertranslatable.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Acceptable numberings are computably intertranslatable does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Acceptable numberings are computably intertranslatable has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Acceptable numberings are computably intertranslatable does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Acceptable numberings are computably intertranslatable does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Acceptable numberings are computably intertranslatable has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Acceptable numberings are computably intertranslatable does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Acceptable numberings are computably intertranslatable is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Acceptable numberings are computably intertranslatable is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "fs-recursion-theorem-needs-source-file-access": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-kleenes-second-recursion-theorem",
+          "source_section": "Statement",
+          "quote": "Fix an acceptable numbering $(\\varphi_e)_{e\\in\\mathbb N}$. For every\ncomputable program transformer $F:\\mathbb N\\to\\mathbb N$, there exists an index\n$e$ such that\n$$ \\varphi_e=\\varphi_{F(e)} $$\nas partial functions.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Consider the total computable transformer $F$ that sends an index $e$ to a program which ignores its actual input and simply outputs the numeral $e$. This transformer manipulates indices only; it does not read any source file.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], there exists $q$ with $$ \\varphi_q=\\varphi_{F(q)}. $$ But $\\varphi_{F(q)}$ is precisely the constant program that outputs $q$, so $\\varphi_q$ does the same. Thus a quine-style fixed point exists without any inspection of a literal source file.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the statement is false. The recursion theorem needs numbering, specialization, and computable index transformation, not filesystem access.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: the recursion theorem requires source-code access does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: the recursion theorem requires source-code access has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "FALSE: the recursion theorem requires source-code access does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: the recursion theorem requires source-code access does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: the recursion theorem requires source-code access has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: the recursion theorem requires source-code access does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: the recursion theorem requires source-code access is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: the recursion theorem requires source-code access is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "fs-program-indices-are-unique": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-kleenes-second-recursion-theorem",
+          "source_section": "Statement",
+          "quote": "Fix an acceptable numbering $(\\varphi_e)_{e\\in\\mathbb N}$. For every\ncomputable program transformer $F:\\mathbb N\\to\\mathbb N$, there exists an index\n$e$ such that\n$$ \\varphi_e=\\varphi_{F(e)} $$\nas partial functions.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Consider the total computable transformer $$ F(e):=e+1. $$ It changes only the numerical index and is therefore a computable program transformer.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], there exists an index $e$ with $$ \\varphi_e=\\varphi_{F(e)}=\\varphi_{e+1}. $$ Since $e\\neq e+1$, the same partial computable function has at least two distinct indices.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the statement is false: a partial computable function can have many distinct indices.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: a partial computable function has a unique program index does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: a partial computable function has a unique program index has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 exhibits the distinct indices e and e+1 for the same function."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: a partial computable function has a unique program index does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: a partial computable function has a unique program index has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: a partial computable function has a unique program index does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: a partial computable function has a unique program index is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: a partial computable function has a unique program index is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "ex-smn-parameter-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-smn-parameter-theorem",
+          "source_section": "Statement",
+          "quote": "If $(\\varphi_e)_{e\\in\\mathbb N}$ is an acceptable numbering, then for every\n$m,n\\in\\mathbb N$ there exists a parameter-specialization function $s_m^n$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], there is a total specialization map $s_1^1$. Put $$ e_7:=s_1^1(e_+,7). $$ Then for every $v$, $$ \\varphi_{e_7}(v)\\simeq\\varphi_{e_+}(\\ulcorner 7,v\\urcorner_{\\mathrm{seq}})=7+v. $$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "So $e_7$ is an index for the unary residual program $v\\mapsto 7+v$. This is exactly the interpretation recorded abstractly in [[cor-effective-program-specialization]].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Specializing a two-argument program to obtain a unary residual program does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Specializing a two-argument program to obtain a unary residual program has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 specializes a single fixed parameter, namely 7."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Specializing a two-argument program to obtain a unary residual program does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Specializing a two-argument program to obtain a unary residual program has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Specializing a two-argument program to obtain a unary residual program does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Specializing a two-argument program to obtain a unary residual program is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Specializing a two-argument program to obtain a unary residual program is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "ex-acceptable-numberings-are-computably-intertranslatable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-acceptable-numberings-are-computably-intertranslatable",
+          "source_section": "Statement",
+          "quote": "If $(\\alpha_e)_{e\\in\\mathbb N}$ and $(\\beta_e)_{e\\in\\mathbb N}$ are acceptable\nnumberings of the partial computable functions, then there exist total\ncomputable functions\n$$ t_{\\alpha\\to\\beta},t_{\\beta\\to\\alpha}:\\mathbb N\\to\\mathbb N $$\nsuch that for every index $e$,\n$$ \\beta_{t_{\\alpha\\to\\beta}(e)}=\\alpha_e,\\qquad \\alpha_{t_{\\beta\\to\\alpha}(e)}=\\beta_e. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $$ t_{\\alpha\\to\\beta}(e):=\\ulcorner 0,e\\urcorner_{\\mathrm{seq}} $$ is total computable and satisfies $$ \\beta_{t_{\\alpha\\to\\beta}(e)}=\\alpha_e. $$ The decoder-projection $$ t_{\\beta\\to\\alpha}(j):=\\pi(j) $$ is also total computable, and by definition of $\\beta$ it satisfies $$ \\alpha_{t_{\\beta\\to\\alpha}(j)}=\\beta_j $$ for every index $j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus these two numberings are explicitly compiled into each other. This is a concrete instance of [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Compiling between two acceptable numberings does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Compiling between two acceptable numberings has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Compiling between two acceptable numberings does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Compiling between two acceptable numberings does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Compiling between two acceptable numberings has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Compiling between two acceptable numberings does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Compiling between two acceptable numberings is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Compiling between two acceptable numberings is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    },
+    "cex-recursion-theorem-needs-source-file-access": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "fs-recursion-theorem-needs-source-file-access",
+          "source_section": "Statement",
+          "quote": "Kleene's recursion theorem can produce self-referential programs only when the\nprogram can inspect its own literal source file.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $F$ be the total computable transformer sending an index $e$ to the program that ignores its actual input and prints the numeral $e$. No filesystem or source-file query appears in the description of $F$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the fixed-point theorem discussed in [L1], there exists an index $q$ with $\\varphi_q=\\varphi_{F(q)}$. Therefore running program $q$ makes it print its own index $q$, even though the construction used only numbering and effective transformation of indices.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This explicit quine is a counterexample to the statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A quine obtained without inspecting its own source file does not require a separate empty-set or empty-family branch beyond its stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A quine obtained without inspecting its own source file has no separate zero-valued parameter or denominator case beyond the general argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A quine obtained without inspecting its own source file does not split off a separate one-element or one-parameter branch from the proof already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A quine obtained without inspecting its own source file does not rely on an additional degenerate configuration outside the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A quine obtained without inspecting its own source file has no interval-endpoint or first-versus-last boundary case requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A quine obtained without inspecting its own source file does not depend on choosing an element from a merely asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A quine obtained without inspecting its own source file is not stated as a biconditional, so there is no forward iff direction to isolate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A quine obtained without inspecting its own source file is not stated as a biconditional, so there is no reverse iff direction to isolate."
+        }
+      ]
+    }
+  }
+}

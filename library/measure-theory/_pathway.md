@@ -22,6 +22,7 @@ parts:
       - density-separability-and-convolution-in-lp
       - the-duality-of-lp-and-lq
       - the-maximal-function-and-lebesgue-differentiation
+      - differentiation-of-monotone-functions-and-the-vitali-covering-theorem
 ---
 
 ## sigma-algebras-and-borel-sets
@@ -35,4 +36,8 @@ control: Vitali covering yields the Hardy-Littlewood weak $(1,1)$ estimate,
 interpolation gives $L^p$ boundedness, and those estimates drive Lebesgue
 differentiation, almost-everywhere Lebesgue points and density points, nicely shrinking
 differentiation bases, differentiation of measures, and the $L^1$ fundamental theorem of
-calculus.
+calculus. The final page supplies a one-dimensional Vitali route in detail: Dini derivatives
+and the rising-sun argument give almost-everywhere differentiability for monotone functions,
+fine interval covers characterize null sets, and the jump, absolutely continuous, and
+singular parts clarify both the sharp derivative bounds and the distinction between bounded
+variation and absolute continuity.

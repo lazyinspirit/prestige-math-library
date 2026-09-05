@@ -1,0 +1,1469 @@
+{
+  "version": 1,
+  "level": "frontier-30",
+  "note": "Step-5 authoring contract for frontier-30 batch 6 on 2026-09-05.",
+  "scope": [
+    "lem-fejer-kernel-is-a-positive-approximate-identity",
+    "thm-fejer-convergence-in-lp",
+    "thm-fejer-uniform-convergence-for-continuous-periodic-functions",
+    "thm-fejer-means-converge-at-lebesgue-points",
+    "lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity",
+    "thm-abel-means-converge-in-lp-uniformly-and-at-lebesgue-points",
+    "thm-cesaro-summability-implies-abel-summability",
+    "thm-fejer-theorem-for-pointwise-midpoint-values",
+    "thm-gibbs-overshoot-at-a-piecewise-c-one-jump",
+    "ex-fejer-means-of-a-single-character",
+    "ex-poisson-integral-of-a-single-character",
+    "ex-fejer-summation-of-the-square-wave",
+    "cex-fejer-means-need-not-converge-uniformly-for-discontinuous-data",
+    "cex-abel-summability-does-not-imply-ordinary-convergence"
+  ],
+  "contracts": {
+    "lem-fejer-kernel-is-a-positive-approximate-identity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dirichlet-and-fejer-kernels",
+          "source_section": "Definition",
+          "quote": "For $N \\ge 0$, the **Dirichlet kernel** on $\\mathbb T$ is\n\n$$D_N(t) := \\sum_{|k| \\le N} e_k(t).$$\n\nThe **Fejer kernel** is the arithmetic mean\n\n$$F_N(t) := \\frac{1}{N+1}\\sum_{j=0}^N D_j(t).$$\n\nEquivalently,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt),$$\n\nso $D_N$ is real-valued and even. Also\n\n$$\\int_0^1 D_N(t)\\,dt = 1,$$\n\nbecause every nonconstant character has integral $0$ over one period.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding the average in [L1] gives $$\\sum_{m=0}^N D_m(t)=\\sum_{m=0}^N\\sum_{|k|\\le m}e_k(t)=\\sum_{|k|\\le N}(N+1-|k|)e_k(t).$$ On the other hand, $$\\left|\\sum_{j=0}^N e_j(t)\\right|^2=\\sum_{j=0}^N\\sum_{\\ell=0}^N e_{j-\\ell}(t)=\\sum_{|k|\\le N}(N+1-|k|)e_k(t).$$ Therefore $$F_N(t)=\\frac{1}{N+1}\\left|\\sum_{j=0}^N e_j(t)\\right|^2.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $t\\notin\\mathbb Z$, the finite geometric-series formula gives $$\\sum_{j=0}^N e_j(t)=\\sum_{j=0}^N e^{2\\pi ijt}=e^{\\pi iNt}\\frac{\\sin((N+1)\\pi t)}{\\sin(\\pi t)},$$ so step 1.1 yields the displayed square formula. This proves $F_N(t)\\ge0$ for every $t\\notin\\mathbb Z$, and at integers the same formula extends by continuity to $F_N(0)=N+1$. Also [L1] gives $$\\int_0^1F_N(t)\\,dt=\\frac{1}{N+1}\\sum_{m=0}^N \\int_0^1 D_m(t)\\,dt=1.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $t\\in[\\delta,1-\\delta]$, one has $|\\sin(\\pi t)|\\ge\\sin(\\pi\\delta)$. Using step 2.1 and $|\\sin((N+1)\\pi t)|\\le1$ therefore gives $$F_N(t)\\le \\frac{1}{(N+1)\\sin^2(\\pi\\delta)}.$$ Integrating over an interval of length at most $1$ yields $$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\le \\frac{1}{(N+1)\\sin^2(\\pi\\delta)}\\to0.$$",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Fejer kernel is a positive approximate identity, the sums run from 0 to N with N>=0, so the indexed family always has at least its j=0 term and no separate empty-family branch arises.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In The Fejer kernel is a positive approximate identity, the sums run from 0 to N with N>=0, so the indexed family always has at least its j=0 term and no separate empty-family branch arises."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The Fejer kernel is a positive approximate identity, step 2.1 keeps the N = 0 case inside the square formula and identifies the integer value F_0(0) = 1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of The Fejer kernel is a positive approximate identity has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item The Fejer kernel is a positive approximate identity has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The Fejer kernel is a positive approximate identity, step 3.1 treats every delta in (0, 1/2], so the endpoint choice delta = 1/2 is included in the same tail estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The Fejer kernel is a positive approximate identity does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of The Fejer kernel is a positive approximate identity is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of The Fejer kernel is a positive approximate identity is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ]
+    },
+    "thm-fejer-convergence-in-lp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "source_section": "Statement",
+          "quote": "For every $N \\ge 0$, the Fejer kernel satisfies\n\n$$F_N(t)=\\frac{1}{N+1}\\left|\\sum_{j=0}^N e_j(t)\\right|^2.$$\n\nHence, for $t \\notin \\mathbb Z$,\n\n$$F_N(t)=\\frac{1}{N+1}\\left(\\frac{\\sin((N+1)\\pi t)}{\\sin(\\pi t)}\\right)^2,$$\n\nso $F_N(t)\\ge0$ for all $t$, $\\int_0^1F_N(t)\\,dt=1$, and for every\n$\\delta\\in(0,1/2]$,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\le \\frac{1}{(N+1)\\sin^2(\\pi\\delta)}.$$\n\nIn particular,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\longrightarrow 0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-fejer-uniform-convergence-for-continuous-periodic-functions",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R\\to\\mathbb C$ be one-periodic and continuous. Then\n\n$$\\sup_{x\\in\\mathbb R}|\\sigma_Nf(x)-f(x)|\\longrightarrow0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-c-c-rn-is-dense-in-l-p-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$. Then $C_c(\\mathbb{R}^n)$ is dense in\n$L^p(\\mathbb{R}^n)$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $g$ be any one-periodic member of $L^p([0,1])$. By [L1] and the positivity and unit mass from [L2], Jensen's inequality gives $$|\\sigma_Ng(x)|^p=\\left|\\int_0^1 g(x-t)F_N(t)\\,dt\\right|^p \\le \\int_0^1 |g(x-t)|^pF_N(t)\\,dt.$$ Integrating in $x$ over $[0,1]$ and using one-periodicity yields $$\\|\\sigma_Ng\\|_{L^p([0,1])}\\le \\|g\\|_{L^p([0,1])}.$$ Applying this to $g-h$ shows $$\\|\\sigma_Ng-\\sigma_Nh\\|_{L^p([0,1])}\\le \\|g-h\\|_{L^p([0,1])}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $u$ is continuous and one-periodic, then [L3] gives $$\\sup_{x\\in\\mathbb R}|\\sigma_Nu(x)-u(x)|\\to0.$$ Hence $$\\|\\sigma_Nu-u\\|_{L^p([0,1])}\\le \\sup_{x\\in\\mathbb R}|\\sigma_Nu(x)-u(x)|\\to0.$$",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $\\varepsilon>0$. Because $|f|^p$ is integrable on $[0,1]$, choose $a\\in(0,1/6)$ so that $$\\int_0^a |f(x)|^p\\,dx+\\int_{1-a}^1 |f(x)|^p\\,dx < (\\varepsilon/6)^p.$$ Define $F_a:\\mathbb R\\to\\mathbb C$ by $F_a(x)=f(x)$ for $x\\in[a,1-a]$ and $F_a(x)=0$ otherwise. Then [L4] gives $g\\in C_c(\\mathbb R)$ with $$\\|F_a-g\\|_{L^p(\\mathbb R)}<\\varepsilon/6.$$ Let $\\eta_a$ be the piecewise linear cutoff that is $0$ on $(-\\infty,a/2]\\cup[1-a/2,\\infty)$, $1$ on $[a,1-a]$, and linear on $[a/2,a]$ and $[1-a,1-a/2]$. Put $h:=\\eta_ag$. Then $h\\in C_c((0,1))$ and, because $\\eta_a=1$ on $[a,1-a]$ where $F_a$ is supported, $$\\|h-F_a\\|_{L^p(\\mathbb R)}\\le \\|g-F_a\\|_{L^p(\\mathbb R)}<\\varepsilon/6.$$ Now periodize $h$ by $$u(x):=\\sum_{m\\in\\mathbb Z}h(x-m).$$ Since $\\operatorname{supp}(h)$ is a compact subset of $(0,1)$, at most one summand is nonzero at each $x$, so $u$ is continuous and one-periodic. On $[0,1]$ only the $m=0$ summand can contribute, hence $u=h$ there. Therefore $$\\|f-u\\|_{L^p([0,1])}\\le \\|f-F_a\\|_{L^p([0,1])}+\\|F_a-h\\|_{L^p(\\mathbb R)}<\\varepsilon/3.$$",
+          "step": "1.3",
+          "inputs": [
+            "L4",
+            "given",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose $u$ as in step 1.3. Then $$\\|\\sigma_Nf-f\\|_{L^p([0,1])}\\le \\|\\sigma_N(f-u)\\|_{L^p([0,1])}+\\|\\sigma_Nu-u\\|_{L^p([0,1])}+\\|u-f\\|_{L^p([0,1])}.$$ Step 1.1 bounds the first term by $\\|f-u\\|_{L^p([0,1])}<\\varepsilon/3$, and step 1.2 makes the middle term $<\\varepsilon/3$ for all large $N$. Thus $$\\|\\sigma_Nf-f\\|_{L^p([0,1])}<\\varepsilon$$ for all large $N$. Since $\\varepsilon>0$ was arbitrary, $\\sigma_Nf\\to f$ in $L^p([0,1])$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge in L^p for 1 <= p < infinity is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge in L^p for 1 <= p < infinity has no additional zero-valued parameter case requiring a separate argument beyond the general proof on disk."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge in L^p for 1 <= p < infinity has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Fejer means converge in L^p for 1 <= p < infinity has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Fejer means converge in L^p for 1 <= p < infinity does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Fejer means converge in L^p for 1 <= p < infinity does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge in L^p for 1 <= p < infinity is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge in L^p for 1 <= p < infinity is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Critical risk came from the periodization step near the endpoints of [0,1]. I repaired step 1.3 by moving the cutoff support strictly inside (0,1) and replacing the false exactly-one-summand claim by the correct at-most-one-summand argument; on [0,1] the periodization now agrees with h for the stated reason. The L^p approximation route is sound."
+      }
+    },
+    "thm-fejer-uniform-convergence-for-continuous-periodic-functions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "source_section": "Statement",
+          "quote": "For every $N \\ge 0$, the Fejer kernel satisfies\n\n$$F_N(t)=\\frac{1}{N+1}\\left|\\sum_{j=0}^N e_j(t)\\right|^2.$$\n\nHence, for $t \\notin \\mathbb Z$,\n\n$$F_N(t)=\\frac{1}{N+1}\\left(\\frac{\\sin((N+1)\\pi t)}{\\sin(\\pi t)}\\right)^2,$$\n\nso $F_N(t)\\ge0$ for all $t$, $\\int_0^1F_N(t)\\,dt=1$, and for every\n$\\delta\\in(0,1/2]$,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\le \\frac{1}{(N+1)\\sin^2(\\pi\\delta)}.$$\n\nIn particular,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\longrightarrow 0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\varepsilon>0$. Because $f$ is continuous on the compact interval $[0,1]$ and one-periodic, it is uniformly continuous modulo $1$. Choose $\\delta\\in(0,1/2]$ such that $$|f(x-t)-f(x)|<\\varepsilon/2$$ whenever $x\\in\\mathbb R$ and $t\\in[0,\\delta]\\cup[1-\\delta,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $x\\in\\mathbb R$, subtract $f(x)$ inside the integral from [L1]: $$|\\sigma_Nf(x)-f(x)|\\le\\int_0^1|f(x-t)-f(x)|F_N(t)\\,dt.$$ Split the integral into the near set $[0,\\delta]\\cup[1-\\delta,1]$ and the far set $[\\delta,1-\\delta]$. By step 1.1 and the positivity from [L2], the near part is at most $\\varepsilon/2$. The far part is at most $$2\\|f\\|_\\infty\\int_\\delta^{1-\\delta}F_N(t)\\,dt.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2], choose $N_0$ so large that $$2\\|f\\|_\\infty\\int_\\delta^{1-\\delta}F_N(t)\\,dt<\\varepsilon/2$$ for all $N\\ge N_0$. Then step 2.1 gives $$\\sup_{x\\in\\mathbb R}|\\sigma_Nf(x)-f(x)|<\\varepsilon \\qquad (N\\ge N_0).$$ Since $\\varepsilon$ was arbitrary, the convergence is uniform.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge uniformly for continuous periodic functions is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge uniformly for continuous periodic functions has no additional zero-valued parameter case requiring a separate argument beyond the general proof on disk."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge uniformly for continuous periodic functions has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Fejer means converge uniformly for continuous periodic functions has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Fejer means converge uniformly for continuous periodic functions does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Fejer means converge uniformly for continuous periodic functions does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge uniformly for continuous periodic functions is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge uniformly for continuous periodic functions is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk came from making the near/far kernel split uniform in x. I reread the modulo-1 uniform continuity step, the positive mass-one estimate on the near set, and the tail bound coming from the Fejer approximate-identity lemma. The current proof is sound."
+      }
+    },
+    "thm-fejer-means-converge-at-lebesgue-points": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "source_section": "Statement",
+          "quote": "For every $N \\ge 0$, the Fejer kernel satisfies\n\n$$F_N(t)=\\frac{1}{N+1}\\left|\\sum_{j=0}^N e_j(t)\\right|^2.$$\n\nHence, for $t \\notin \\mathbb Z$,\n\n$$F_N(t)=\\frac{1}{N+1}\\left(\\frac{\\sin((N+1)\\pi t)}{\\sin(\\pi t)}\\right)^2,$$\n\nso $F_N(t)\\ge0$ for all $t$, $\\int_0^1F_N(t)\\,dt=1$, and for every\n$\\delta\\in(0,1/2]$,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\le \\frac{1}{(N+1)\\sin^2(\\pi\\delta)}.$$\n\nIn particular,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\longrightarrow 0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-lebesgue-point-and-lebesgue-set",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $[f]\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n)$\n([[def-locally-integrable-function-on-r-n]]).\n\nFor a representative $f$ of that class, a point $x\\in\\mathbb{R}^n$ is a\n**Lebesgue point of $f$** if\n$$\\lim_{r\\to0^+}\\frac{1}{\\lambda(B(x,r))} \\int_{B(x,r)}|f(y)-f(x)|\\,d\\lambda(y)=0.$$\n\nThe **Lebesgue set** of the class $[f]$ is the set\n$$\\operatorname{Leb}([f]):=\\{x\\in\\mathbb{R}^n: \\text{ some representative of }[f]\\text{ has }x\\text{ as a Lebesgue point}\\}.$$\n\nThe later theorem on Lebesgue points shows that different representatives of the\nsame $L^1_{\\mathrm{loc}}$ class change this set only by a null set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-almost-every-point-is-a-lebesgue-point",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $f\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n)$. Then the Lebesgue set of the\n$L^1_{\\mathrm{loc}}$ class of $f$ has full Lebesgue measure.\n\nEquivalently, for almost every $x\\in\\mathbb{R}^n$,\n$$\\lim_{r\\to0^+}\\frac{1}{\\lambda(B(x,r))} \\int_{B(x,r)}|f(y)-f(x)|\\,d\\lambda(y)=0.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\varepsilon>0$. By [L3], choose $\\delta\\in(0,1/2]$ so that $$\\int_{-h}^h |f(x-t)-f(x)|\\,dt < \\frac{\\varepsilon}{4}h \\qquad (0<h\\le\\delta).$$ For $0<h\\le\\delta$, put $$G(h):=\\int_0^h\\bigl(|f(x+t)-f(x)|+|f(x-t)-f(x)|\\bigr)\\,dt.$$ Then $G(h)<\\varepsilon h/4$ for $0<h\\le\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using [L1], pair the intervals $[0,1/2]$ and $[1/2,1]$ exactly as in the Dirichlet symmetric-difference formula. This gives $$|\\sigma_Nf(x)-f(x)|\\le\\int_0^{1/2}\\bigl(|f(x+t)-f(x)|+|f(x-t)-f(x)|\\bigr)F_N(t)\\,dt.$$ Set $a_N:=\\min(\\delta,(N+1)^{-1})$. Since step 1.1 gives $G(a_N)<\\varepsilon a_N/4$ and the square formula in [L2] yields $F_N(t)\\le N+1$, the interval $(0,a_N)$ contributes at most $\\varepsilon/4$. If $a_N<( \\delta )$, then for $t\\in[a_N,\\delta]$ one has $\\sin(\\pi t)\\ge 2t$, so [L2] gives $$F_N(t)\\le \\frac{1}{4(N+1)t^2}.$$ Integration by parts with $G'(t)$ equal almost everywhere to the displayed integrand therefore gives $$\\int_{a_N}^{\\delta}\\frac{G'(t)}{t^2}\\,dt = \\frac{G(\\delta)}{\\delta^2}-\\frac{G(a_N)}{a_N^2}+2\\int_{a_N}^{\\delta}\\frac{G(t)}{t^3}\\,dt \\le \\frac{3\\varepsilon}{4a_N},$$ so the interval $[a_N,\\delta]$ contributes at most $3\\varepsilon/16$. Consequently $$\\int_0^\\delta\\bigl(|f(x+t)-f(x)|+|f(x-t)-f(x)|\\bigr)F_N(t)\\,dt \\le \\frac{7\\varepsilon}{16}$$ for every $N$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $[\\delta,1/2]$, the integrand is integrable and [L2] gives $$\\sup_{t\\in[\\delta,1-\\delta]}F_N(t)\\to0.$$ Hence $$\\int_\\delta^{1/2}\\bigl(|f(x+t)-f(x)|+|f(x-t)-f(x)|\\bigr)F_N(t)\\,dt\\to0.$$ Choose $N_0$ so large that this far contribution is $<9\\varepsilon/16$ for all $N\\ge N_0$. Then step 2.1 yields $$|\\sigma_Nf(x)-f(x)|<\\varepsilon \\qquad (N\\ge N_0).$$ Thus $\\sigma_Nf(x)\\to f(x)$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The first claim holds at every Lebesgue point by step 3.1. Applying [L4] therefore gives $\\sigma_Nf(x)\\to f(x)$ for almost every $x$.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge at Lebesgue points is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Fejer means converge at Lebesgue points, step 1.1 chooses delta in (0,1/2] and step 2.1 sets a_N=min(delta,(N+1)^(-1))>0, so the later divisions by t^2 and delta^2 occur only on intervals where those denominators are already positive.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Fejer means converge at Lebesgue points, step 1.1 chooses delta in (0,1/2] and step 2.1 sets a_N=min(delta,(N+1)^(-1))>0, so the later divisions by t^2 and delta^2 occur only on intervals where those denominators are already positive."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge at Lebesgue points has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Fejer means converge at Lebesgue points has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Fejer means converge at Lebesgue points does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Fejer means converge at Lebesgue points does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge at Lebesgue points is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge at Lebesgue points is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Critical risk came from the small-scale integration-by-parts estimate and the choice a_N=min(delta,(N+1)^{-1}). I reread the G(h) construction, the F_N(t)<=N+1 bound on (0,a_N), and the far-tail estimate on [delta,1/2]. The current Lebesgue-point proof is coherent."
+      }
+    },
+    "lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb T := \\mathbb R / \\mathbb Z$ and represent a function on\n$\\mathbb T$ by a one-periodic function on $\\mathbb R$.\n\nFor $k \\in \\mathbb Z$, define the $k$-th character\n$e_k(x) := e^{2\\pi i kx}$.\n\nIf $f$ is integrable on one period, its Fourier coefficients are\n\n$$\\widehat f(k) := \\int_0^1 f(t)e^{-2\\pi i kt}\\,dt \\qquad (k \\in \\mathbb Z).$$\n\nFor $N \\ge 0$, the $N$-th Fourier partial sum of $f$ is\n\n$$S_Nf(x) := \\sum_{|k| \\le N}\\widehat f(k)e_k(x).$$\n\nA **trigonometric polynomial** on $\\mathbb T$ is a finite linear combination of\nthe characters $e_k$.\n\nIf $f,g \\in L^1(\\mathbb T)$, their convolution is the $L^1(\\mathbb T)$ class\ndefined for almost every $x$ by\n\n$$(f*g)(x) := \\int_0^1 f(x-t)g(t)\\,dt,$$\n\nwhere $f$ and $g$ are read as one-periodic representatives. More precisely,\nthe integrand is absolutely integrable for almost every $x$, and the displayed\nformula gives an almost-everywhere-defined integrable function whose class is\nindependent of the chosen representatives. When one factor is bounded, as for\nthe Dirichlet kernels below, the integral exists at every $x$ for which the\nother representative is integrable on one period.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $z=e^{2\\pi it}$. By [L1], $$P_r(t)=1+\\sum_{k=1}^\\infty r^kz^k+\\sum_{k=1}^\\infty r^kz^{-k}.$$ Both geometric series converge absolutely, so $$P_r(t)=1+\\frac{rz}{1-rz}+\\frac{rz^{-1}}{1-rz^{-1}}=\\frac{1-r^2}{(1-rz)(1-rz^{-1})}.$$ Since $z+z^{-1}=2\\cos(2\\pi t)$, this is exactly $$P_r(t)=\\frac{1-r^2}{1-2r\\cos(2\\pi t)+r^2}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 shows $P_r(t)\\ge0$ because $$1-2r\\cos(2\\pi t)+r^2=(1-r)^2+2r(1-\\cos(2\\pi t))\\ge0,$$ and the numerator is positive for $r<1$. Also the constant Fourier coefficient of $P_r$ is $1$, so $$\\int_0^1P_r(t)\\,dt=1.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The limit only concerns $r\\uparrow1$, so it is enough to consider $r\\in[1/2,1)$. If $t\\in[\\delta,1-\\delta]$, then $$1-2r\\cos(2\\pi t)+r^2=(1-r)^2+4r\\sin^2(\\pi t)\\ge 2\\sin^2(\\pi\\delta).$$ Therefore step 1.1 gives $$P_r(t)\\le \\frac{1-r^2}{2\\sin^2(\\pi\\delta)}.$$ As $r\\uparrow1$, the right-hand side tends to $0$, so the displayed supremum tends to $0$. Multiplying that supremum bound by the interval length at most $1$ gives the same limit for the tail integral.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The Poisson kernel on the circle is a positive approximate identity, the Fourier series is indexed by all integers k in Z, so the detector is reacting to the summation sign rather than to an optional empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In The Poisson kernel on the circle is a positive approximate identity, the Fourier series is indexed by all integers k in Z, so the detector is reacting to the summation sign rather than to an optional empty family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In The Poisson kernel on the circle is a positive approximate identity, step 1.1 includes r = 0 and yields the constant kernel P_0 = 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In The Poisson kernel on the circle is a positive approximate identity, step 3.1 addresses the one-sided boundary regime r up to 1 through the explicit factor (1-r)(1+r)/(4r sin^2(pi delta))."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item The Poisson kernel on the circle is a positive approximate identity has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "In The Poisson kernel on the circle is a positive approximate identity, step 3.1 is written for every delta in (0, 1/2], so the endpoint value delta = 1/2 is part of the stated estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of The Poisson kernel on the circle is a positive approximate identity does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of The Poisson kernel on the circle is a positive approximate identity is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of The Poisson kernel on the circle is a positive approximate identity is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk came from the r to 1 tail estimate, especially the old division by r. I reread the repaired restriction to r in [1/2,1) and the bound P_r(t) <= (1-r^2)/(2 sin^2(pi delta)) on [delta,1-delta]. That is exactly the estimate needed for the approximate-identity limit."
+      }
+    },
+    "thm-abel-means-converge-in-lp-uniformly-and-at-lebesgue-points": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity",
+          "source_section": "Statement",
+          "quote": "For $0\\le r<1$, let\n\n$$P_r(t):=\\sum_{k\\in\\mathbb Z}r^{|k|}e_k(t).$$\n\nThen\n\n$$P_r(t)=\\frac{1-r^2}{1-2r\\cos(2\\pi t)+r^2}.$$\n\nHence $P_r(t)\\ge0$ for every $t$, $\\int_0^1P_r(t)\\,dt=1$, and for every\n$\\delta\\in(0,1/2]$,\n\n$$\\sup_{t\\in[\\delta,1-\\delta]}P_r(t)\\longrightarrow0 \\qquad (r\\uparrow1).$$\n\nIn particular,\n\n$$\\int_\\delta^{1-\\delta}P_r(t)\\,dt\\longrightarrow0 \\qquad (r\\uparrow1).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-lebesgue-point-and-lebesgue-set",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $[f]\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n)$\n([[def-locally-integrable-function-on-r-n]]).\n\nFor a representative $f$ of that class, a point $x\\in\\mathbb{R}^n$ is a\n**Lebesgue point of $f$** if\n$$\\lim_{r\\to0^+}\\frac{1}{\\lambda(B(x,r))} \\int_{B(x,r)}|f(y)-f(x)|\\,d\\lambda(y)=0.$$\n\nThe **Lebesgue set** of the class $[f]$ is the set\n$$\\operatorname{Leb}([f]):=\\{x\\in\\mathbb{R}^n: \\text{ some representative of }[f]\\text{ has }x\\text{ as a Lebesgue point}\\}.$$\n\nThe later theorem on Lebesgue points shows that different representatives of the\nsame $L^1_{\\mathrm{loc}}$ class change this set only by a null set.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-almost-every-point-is-a-lebesgue-point",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $f\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n)$. Then the Lebesgue set of the\n$L^1_{\\mathrm{loc}}$ class of $f$ has full Lebesgue measure.\n\nEquivalently, for almost every $x\\in\\mathbb{R}^n$,\n$$\\lim_{r\\to0^+}\\frac{1}{\\lambda(B(x,r))} \\int_{B(x,r)}|f(y)-f(x)|\\,d\\lambda(y)=0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-c-c-rn-is-dense-in-l-p-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$. Then $C_c(\\mathbb{R}^n)$ is dense in\n$L^p(\\mathbb{R}^n)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $g$ be one-periodic and in $L^p([0,1])$ for some $1\\le p<\\infty$. Using [L1] and the positivity and unit mass in [L2], Jensen's inequality gives $$|A_rg(x)|^p\\le \\int_0^1 |g(x-t)|^pP_r(t)\\,dt.$$ Integrating in $x$ over $[0,1]$ shows $$\\|A_rg\\|_{L^p([0,1])}\\le \\|g\\|_{L^p([0,1])},$$ and hence $$\\|A_rg-A_rh\\|_{L^p([0,1])}\\le \\|g-h\\|_{L^p([0,1])}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume now that $f$ is continuous, and let $\\varepsilon>0$. Uniform continuity modulo $1$ gives $\\delta\\in(0,1/2]$ such that $$|f(x-t)-f(x)|<\\varepsilon/2$$ whenever $t\\in[0,\\delta]\\cup[1-\\delta,1]$. Using [L1] and [L2] exactly as in the Fejer proof yields $$|A_rf(x)-f(x)|\\le \\varepsilon/2 + 2\\|f\\|_\\infty\\int_\\delta^{1-\\delta}P_r(t)\\,dt.$$ By [L2], the far term is $<\\varepsilon/2$ for all $r$ close enough to $1$, uniformly in $x$. Therefore $A_rf\\to f$ uniformly.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume $x$ is a Lebesgue point of $f$, and let $\\varepsilon>0$. By [L3], choose $\\delta\\in(0,1/2]$ so that $$\\int_{-h}^h|f(x-t)-f(x)|\\,dt<\\frac{\\varepsilon}{4}h \\qquad (0<h\\le\\delta).$$ Define $$G(h):=\\int_0^h\\bigl(|f(x+t)-f(x)|+|f(x-t)-f(x)|\\bigr)\\,dt,$$ so $G(h)<\\varepsilon h/4$ for $0<h\\le\\delta$. Pairing $[0,1/2]$ and $[1/2,1]$ in [L1] gives $$|A_rf(x)-f(x)|\\le\\int_0^{1/2}\\bigl(|f(x+t)-f(x)|+|f(x-t)-f(x)|\\bigr)P_r(t)\\,dt.$$ Set $a_r:=\\min(\\delta,1-r)$. On $(0,a_r)$, the closed form in [L2] gives $P_r(t)\\le 2/(1-r)$, so this interval contributes at most $\\varepsilon/2$. If $a_r<\\delta$ and $r\\ge1/2$, then $\\sin(\\pi t)\\ge2t$ on $[a_r,\\delta]$, so [L2] gives $$P_r(t)\\le \\frac{1-r^2}{16rt^2}\\le \\frac{1-r}{4t^2}.$$ The same integration-by-parts estimate as in the Fejer proof shows that $[a_r,\\delta]$ contributes at most $3\\varepsilon/16$. Finally, $[\\delta,1/2]$ contributes $o(1)$ as $r\\uparrow1$ by [L2]. Hence $A_rf(x)\\to f(x)$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $1\\le p<\\infty$ and assume $f|_{[0,1]}\\in L^p([0,1])$. Let $\\varepsilon>0$. Repeating the construction from the Fejer $L^p$ theorem with [L5], one obtains a continuous one-periodic function $u$ such that $$\\|f-u\\|_{L^p([0,1])}<\\varepsilon/3.$$ Then step 1.1 and the uniform convergence of step 1.2 give $$\\|A_rf-f\\|_{L^p([0,1])}\\le \\|A_r(f-u)\\|_{L^p([0,1])}+\\|A_ru-u\\|_{L^p([0,1])}+\\|u-f\\|_{L^p([0,1])}<\\varepsilon$$ for all $r$ sufficiently close to $1$. Hence $A_rf\\to f$ in $L^p([0,1])$.",
+          "step": "2.1",
+          "inputs": [
+            "L5",
+            "step 1.1",
+            "step 1.2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.3 proves the pointwise conclusion at every Lebesgue point, and [L4] therefore gives the almost-everywhere convergence.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Abel means converge in L^p, uniformly, and at Lebesgue points is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Abel means converge in L^p, uniformly, and at Lebesgue points, step 1.3 enters the tail estimate only with r>=1/2 and t in [a_r,delta] where a_r=min(delta,1-r)>0, so the displayed denominators 16rt^2 and 4t^2 are already positive when used.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Abel means converge in L^p, uniformly, and at Lebesgue points, step 1.3 enters the tail estimate only with r>=1/2 and t in [a_r,delta] where a_r=min(delta,1-r)>0, so the displayed denominators 16rt^2 and 4t^2 are already positive when used."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Abel means converge in L^p, uniformly, and at Lebesgue points, steps 1.2, 1.3, and 2.1 all work in the one-sided limit regime r up to 1, and step 1.3 introduces a_r = min(delta, 1-r) precisely to control that boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Abel means converge in L^p, uniformly, and at Lebesgue points has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Abel means converge in L^p, uniformly, and at Lebesgue points does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Abel means converge in L^p, uniformly, and at Lebesgue points does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Abel means converge in L^p, uniformly, and at Lebesgue points is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Abel means converge in L^p, uniformly, and at Lebesgue points is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Critical risk came from keeping the L^p, uniform, and Lebesgue-point arguments distinct while using only the Poisson-kernel approximate-identity estimates. I reread each of the three regimes separately and checked that the proof never smuggles one conclusion into another. The current theorem is sound."
+      }
+    },
+    "thm-cesaro-summability-implies-abel-summability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S_N:=S_Nf(x)$ and $\\sigma_N:=\\sigma_Nf(x)$. Since $$S_N=(N+1)\\sigma_N-N\\sigma_{N-1}\\qquad(N\\ge0,\\ \\sigma_{-1}:=0),$$ one has $$\\sum_{N=0}^\\infty r^NS_N=(1-r)\\sum_{N=0}^\\infty (N+1)r^N\\sigma_N$$ for $0\\le r<1$. On the other hand, the definition of $A_rf(x)$ in [L1] gives $$A_rf(x)=(1-r)\\sum_{N=0}^\\infty r^NS_N=(1-r)^2\\sum_{N=0}^\\infty (N+1)r^N\\sigma_N.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $$w_N(r):=(1-r)^2(N+1)r^N \\qquad (N\\ge0).$$ These weights are nonnegative, and $$\\sum_{N=0}^\\infty w_N(r)=(1-r)^2\\sum_{N=0}^\\infty (N+1)r^N=1.$$ Therefore step 1.1 rewrites the Abel mean as $$A_rf(x)-s=\\sum_{N=0}^\\infty w_N(r)\\bigl(\\sigma_N-s\\bigr).$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $\\varepsilon>0$. Choose $N_0$ so large that $|\\sigma_N-s|<\\varepsilon/2$ for all $N\\ge N_0$, and put $$M:=\\max_{0\\le N<N_0}|\\sigma_N-s|.$$ By step 2.1, $$|A_rf(x)-s|\\le M\\sum_{N=0}^{N_0-1}w_N(r)+\\frac{\\varepsilon}{2}\\sum_{N=N_0}^\\infty w_N(r).$$ The tail sum is at most $\\varepsilon/2$, and for each fixed $N$ one has $w_N(r)\\to0$ as $r\\uparrow1$, so the finite initial sum is $<\\varepsilon/(2M)$ for $r$ close enough to $1$ when $M>0$, and is already $0$ when $M=0$. Hence $|A_rf(x)-s|<\\varepsilon$ for all $r$ sufficiently close to $1$. Therefore $A_rf(x)\\to s$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Cesaro summability implies Abel summability is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement of Cesaro summability implies Abel summability has no additional zero-valued parameter case requiring a separate argument beyond the general proof on disk."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Cesaro summability implies Abel summability, step 3.1 is exactly the boundary analysis as r up to 1: the finitely many early weights vanish while the tail weights stay a probability measure."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Cesaro summability implies Abel summability has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Cesaro summability implies Abel summability does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Cesaro summability implies Abel summability does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Cesaro summability implies Abel summability is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Cesaro summability implies Abel summability is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ]
+    },
+    "thm-fejer-theorem-for-pointwise-midpoint-values": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "source_section": "Statement",
+          "quote": "For every $N \\ge 0$, the Fejer kernel satisfies\n\n$$F_N(t)=\\frac{1}{N+1}\\left|\\sum_{j=0}^N e_j(t)\\right|^2.$$\n\nHence, for $t \\notin \\mathbb Z$,\n\n$$F_N(t)=\\frac{1}{N+1}\\left(\\frac{\\sin((N+1)\\pi t)}{\\sin(\\pi t)}\\right)^2,$$\n\nso $F_N(t)\\ge0$ for all $t$, $\\int_0^1F_N(t)\\,dt=1$, and for every\n$\\delta\\in(0,1/2]$,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\le \\frac{1}{(N+1)\\sin^2(\\pi\\delta)}.$$\n\nIn particular,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\longrightarrow 0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $m:=(f(x-)+f(x+))/2$. Using [L1], split the integral over $[0,1]$ at $1/2$ and substitute $u=1-t$ on $[1/2,1]$. Because $F_N(1-u)=F_N(u)$, this gives $$\\sigma_Nf(x)-m=\\int_0^{1/2}\\bigl(f(x-t)-f(x-)+f(x+t)-f(x+)\\bigr)F_N(t)\\,dt.$$ Also $$2\\int_0^{1/2}F_N(t)\\,dt=\\int_0^1F_N(t)\\,dt=1.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\varepsilon>0$. Choose $\\delta\\in(0,1/2]$ so that $$|f(x-t)-f(x-)|<\\varepsilon,\\qquad |f(x+t)-f(x+)|<\\varepsilon \\qquad (0<t<\\delta).$$ Then the interval $(0,\\delta)$ contributes at most $$2\\varepsilon\\int_0^{1/2}F_N(t)\\,dt=\\varepsilon$$ by step 1.1. The interval $[\\delta,1/2]$ contributes at most $$\\left(\\int_0^1|f(y)|\\,dy+\\int_0^1|f(y)|\\,dy+\\frac{|f(x-)|+|f(x+)|}{2}\\right)\\sup_{t\\in[\\delta,1-\\delta]}F_N(t),$$ which tends to $0$ by [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Choose $N_0$ so large that the far contribution in step 2.1 is $<\\varepsilon$ for $N\\ge N_0$. Then $$|\\sigma_Nf(x)-m|<2\\varepsilon \\qquad (N\\ge N_0).$$ Since $\\varepsilon$ was arbitrary, $\\sigma_Nf(x)\\to m$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge to midpoint values at jumps is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge to midpoint values at jumps has no additional zero-valued parameter case requiring a separate argument beyond the general proof on disk."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge to midpoint values at jumps has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Fejer means converge to midpoint values at jumps has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Fejer means converge to midpoint values at jumps does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Fejer means converge to midpoint values at jumps does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge to midpoint values at jumps is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means converge to midpoint values at jumps is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk came from the symmetry reduction to the midpoint formula and the control of the far tail. I reread the F_N(1-u)=F_N(u) step, the near-field epsilon estimate from the one-sided limits, and the tail estimate from the Fejer-kernel lemma. The midpoint-value conclusion is sound."
+      }
+    },
+    "thm-gibbs-overshoot-at-a-piecewise-c-one-jump": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $m:=(f(x_0+)+f(x_0-))/2$, and define $\\widetilde f(x):=m$ when $x-x_0\\in\\mathbb Z$ and $\\widetilde f(x):=f(x)$ otherwise. Membership in $x_0+\\mathbb Z$ is invariant under integer translation, so $\\widetilde f$ is one-periodic; on each period it is piecewise $C^1$ and has midpoint value $m$ at the jump represented by $x_0$. The exceptional set $x_0+\\mathbb Z=\\{x_0+n:n\\in\\mathbb N\\}\\cup\\{x_0-n:n\\in\\mathbb N\\}$ is countable and hence Lebesgue null by [[prop-countable-subsets-of-rn-are-lebesgue-null]]. Thus $f$ and $\\widetilde f$ agree almost everywhere, so after multiplication by any character their integrals agree by [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]. Hence they have the same Fourier coefficients and the same partial sums in the normalization of [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]. They also have the same one-sided limits and the same jump $J$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F1] to the $2\\pi$-periodic function $g(y):=\\widetilde f(y/(2\\pi))$ at $y_0:=2\\pi x_0$. Its Fourier coefficients and partial sums correspond exactly to the period-one coefficients and partial sums of $\\widetilde f$ under the substitution $y=2\\pi x$, while the source offset $2\\pi/(2N+1)$ becomes $1/(2N+1)$. Therefore $$S_N\\widetilde f\\!\\left(x_0+\\frac{1}{2N+1}\\right)\\longrightarrow f(x_0+)+J\\left(\\frac{\\operatorname{Si}(\\pi)}{\\pi}-\\frac12\\right).$$ By step 1.1 the same limit holds for $S_Nf$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\operatorname{Si}(\\pi)\\approx1.85194$, one has $$\\frac{\\operatorname{Si}(\\pi)}{\\pi}-\\frac12\\approx0.08949.$$ Thus when $J>0$ the limiting value in step 2.1 lies above the right limit by the claimed fixed amount.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Gibbs overshoot at a piecewise C^1 jump is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement assigns the removable value 1 to sin(u)/u at u=0, and step 2.1 uses the strictly positive offset 1/(2N+1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of Gibbs overshoot at a piecewise C^1 jump has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A jump point has unequal one-sided limits, so the degenerate zero-jump case is excluded by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 resets the full congruence class x_0+Z, so the chosen real representative of the torus point creates no period-endpoint mismatch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement explicitly assumes Countable Choice, and step 1.1 spends it only through the cited theorem that the displayed countable exceptional set is Lebesgue null."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Gibbs overshoot at a piecewise C^1 jump is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Gibbs overshoot at a piecewise C^1 jump is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "final-adjudicator",
+        "notes": "High risk comes from the exact Gibbs asymptotic, period normalization, a removable singularity, and the point-value reset. I verified Theorem 1.42 in Plonka--Potts--Steidl--Tasche: it assumes a 2 pi-periodic piecewise continuously differentiable function with midpoint value at the jump and gives the right-side offset 2 pi/(2N+1), the right-limit formula, and the constant Si(pi)/pi-1/2. Step 1.1 resets every representative x_0+Z, preserves one-periodicity, and changes the integrand only on a countable null set. Step 2.1's substitution y=2 pi x exactly identifies the period-one coefficients and changes the source offset to 1/(2N+1). The statement now defines the value of sin(u)/u at zero."
+      }
+    },
+    "ex-fejer-means-of-a-single-character": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Fourier coefficients of $e_k$ vanish except at $k$, where the coefficient is $1$. Hence $$S_je_k=\\begin{cases} 0, & j<|k|,\\\\ e_k, & j\\ge |k|. \\end{cases}$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $|k|>N$, then every term in the Cesaro average from [L1] is $0$, so $\\sigma_Ne_k=0$. If $|k|\\le N$, then exactly $N+1-|k|$ of the terms equal $e_k$, and therefore $$\\sigma_Ne_k=\\frac{N+1-|k|}{N+1}e_k=\\left(1-\\frac{|k|}{N+1}\\right)e_k.$$ This is the same as the displayed $(\\cdot)_+$ formula, and for $N=0$ it gives $\\sigma_0e_0=e_0$ and $\\sigma_0e_k=0$ for $k\\ne0$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means of a single character is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In Fejer means of a single character, step 2.1 checks N = 0 explicitly when it concludes sigma_0 e_0 = e_0 and sigma_0 e_k = 0 for k not equal to 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means of a single character has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Fejer means of a single character has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Fejer means of a single character does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Fejer means of a single character does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means of a single character is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means of a single character is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ]
+    },
+    "ex-poisson-integral-of-a-single-character": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Fourier coefficients of $e_k$ vanish except at $k$, where the coefficient is $1$. Substituting into [L1] leaves only one term: $$A_re_k(x)=r^{|k|}e_k(x).$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since step 1.1 holds for every $x$, it is exactly the asserted identity $A_re_k=r^{|k|}e_k$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Poisson integral of a single character is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In Poisson integral of a single character, step 1.1 includes r = 0 and therefore gives A_0 e_k = 0 for k not equal to 0 and A_0 e_0 = e_0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of Poisson integral of a single character has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Poisson integral of a single character has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Poisson integral of a single character does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Poisson integral of a single character does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Poisson integral of a single character is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Poisson integral of a single character is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ]
+    },
+    "ex-fejer-summation-of-the-square-wave": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-fejer-theorem-for-pointwise-midpoint-values",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R\\to\\mathbb C$ be one-periodic with $f|_{[0,1]}\\in L^1([0,1])$.\nAssume the one-sided limits $f(x-)$ and $f(x+)$ exist at some point $x$.\nThen\n\n$$\\sigma_Nf(x)\\longrightarrow \\frac{f(x-)+f(x+)}2 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "source_section": "Statement",
+          "quote": "For every $N \\ge 0$, the Fejer kernel satisfies\n\n$$F_N(t)=\\frac{1}{N+1}\\left|\\sum_{j=0}^N e_j(t)\\right|^2.$$\n\nHence, for $t \\notin \\mathbb Z$,\n\n$$F_N(t)=\\frac{1}{N+1}\\left(\\frac{\\sin((N+1)\\pi t)}{\\sin(\\pi t)}\\right)^2,$$\n\nso $F_N(t)\\ge0$ for all $t$, $\\int_0^1F_N(t)\\,dt=1$, and for every\n$\\delta\\in(0,1/2]$,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\le \\frac{1}{(N+1)\\sin^2(\\pi\\delta)}.$$\n\nIn particular,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\longrightarrow 0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct integration gives $\\widehat q(2m)=0$ for every $m$ and $$\\widehat q(2m+1)=\\frac{2}{\\pi i(2m+1)},\\qquad \\widehat q(-(2m+1))=-\\frac{2}{\\pi i(2m+1)}.$$ Hence $$S_jq(x)=\\frac{4}{\\pi}\\sum_{0\\le m,\\ 2m+1\\le j}\\frac{\\sin(2\\pi(2m+1)x)}{2m+1}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Averaging the partial sums from step 1.1 as in [L1] shows that the odd mode $2m+1$ appears with weight $1-(2m+1)/(N+1)$ when $2m+1\\le N$ and with weight $0$ otherwise. This is exactly the displayed formula for $\\sigma_Nq$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The one-sided limits at $0$ are $-1$ and $1$, so [L2] gives $$\\sigma_Nq(0)\\to \\frac{-1+1}{2}=0.$$ Also [L1] and [L3] give $$\\sigma_Nq(x)=\\int_0^1 q(x-t)F_N(t)\\,dt,$$ and because $|q|\\le1$, positivity and total mass one imply $|\\sigma_Nq(x)|\\le1$ for every $x$. Thus the Fejer means average across the jump and do not exhibit a fixed overshoot.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer summation of the square wave is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Fejer summation of the square wave, the denominator 2m+1 comes from the odd Fourier modes with m>=0, so it is always a positive odd integer on current disk.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Fejer summation of the square wave, the denominator 2m+1 comes from the odd Fourier modes with m>=0, so it is always a positive odd integer on current disk."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer summation of the square wave has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Fejer summation of the square wave has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Fejer summation of the square wave does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Fejer summation of the square wave does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer summation of the square wave is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer summation of the square wave is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk came from the explicit Fourier coefficient computation and from showing the positive means do not overshoot the jump. I reread the odd-mode coefficient calculation, the Cesaro weighting step, and the positivity argument |sigma_N q(x)|<=1 from convolution with F_N. The example is sound."
+      }
+    },
+    "cex-fejer-means-need-not-converge-uniformly-for-discontinuous-data": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cesaro-and-abel-means-of-a-fourier-series",
+          "source_section": "Definition",
+          "quote": "Let $f$ be integrable on one period.\n\nFor $N \\ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the\nFourier series of $f$ is\n\n$$\\sigma_N f(x) := \\frac{1}{N+1}\\sum_{j=0}^N S_jf(x).$$\n\nBecause [[def-dirichlet-and-fejer-kernels]] defines\n$$F_N(t)=\\frac{1}{N+1}\\sum_{j=0}^N D_j(t),$$\nand [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]\ndefines convolution and partial sums, one has\n\n$$\\sigma_N f = f * F_N.$$\n\nFor $0 \\le r < 1$, the series\n\n$$P_r(t) := \\sum_{k \\in \\mathbb Z} r^{|k|} e_k(t)$$\n\nconverges absolutely and uniformly on $\\mathbb T$, because\n$$\\sum_{k\\in\\mathbb Z}\\bigl|r^{|k|}e_k(t)\\bigr|=\\sum_{k\\in\\mathbb Z}r^{|k|}<\\infty.$$\nThe **Abel mean** of the Fourier series of $f$ is\n\n$$A_r f(x) := \\sum_{k \\in \\mathbb Z} r^{|k|}\\widehat f(k)e_k(x).$$\n\nBecause $|\\widehat f(k)|\\le\\int_0^1|f(t)|\\,dt$, this series also converges\nabsolutely and uniformly in $x$. Therefore termwise integration against the\nabsolutely convergent kernel series gives\n\n$$A_r f = f * P_r.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $N$, the function $S_jf$ is a trigonometric polynomial for every $0\\le j\\le N$, so [L1] makes $\\sigma_Nf$ a trigonometric polynomial as well. In particular, every $\\sigma_Nf$ is continuous.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\sigma_Nf$ converged uniformly to $f$, then the uniform limit of the continuous functions $\\sigma_Nf$ would be continuous. But the chosen $f$ has a jump at $0$, so it is discontinuous. Therefore uniform convergence to $f$ is impossible. This single step function refutes the universal statement.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means need not converge uniformly for discontinuous data is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means need not converge uniformly for discontinuous data has no additional zero-valued parameter case requiring a separate argument beyond the general proof on disk."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means need not converge uniformly for discontinuous data has no separate value-1 or singleton branch beyond the general argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Fejer means need not converge uniformly for discontinuous data has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Fejer means need not converge uniformly for discontinuous data does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Fejer means need not converge uniformly for discontinuous data does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means need not converge uniformly for discontinuous data is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Fejer means need not converge uniformly for discontinuous data is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ]
+    },
+    "cex-abel-summability-does-not-imply-ordinary-convergence": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The ordinary partial sums are $$1,0,1,0,\\dots,$$ so they do not converge.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0\\le r<1$, [F1] makes the associated Abel sum $$1-r+r^2-r^3+\\cdots=\\frac{1}{1+r}.$$ As $r\\uparrow1$, this tends to $1/2$. Thus the series is Abel summable but not ordinarily convergent, refuting the statement.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement of Abel summability does not imply ordinary convergence is not parameterized by an empty family, empty domain, or empty index class requiring a separate branch beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Abel summability does not imply ordinary convergence, step 2.1 evaluates the Abel sum only for 0<=r<1, so the denominator 1+r is strictly positive throughout the witness computation.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-6",
+            "reason": "In Abel summability does not imply ordinary convergence, step 2.1 evaluates the Abel sum only for 0<=r<1, so the denominator 1+r is strictly positive throughout the witness computation."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In Abel summability does not imply ordinary convergence, step 2.1 evaluates the Abel sum as 1/(1+r) and then takes the one-sided limit r up to 1 to obtain 1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item Abel summability does not imply ordinary convergence has no further degenerate regime beyond the hypotheses already stated and the steps already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item Abel summability does not imply ordinary convergence does not split off a distinct endpoint case beyond the hypotheses already handled in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof of Abel summability does not imply ordinary convergence does not rely on a hidden selection from an unspecified nonempty set; every witness is displayed or supplied by a cited existence statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of Abel summability does not imply ordinary convergence is not a biconditional, so there is no separate forward implication to certify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of Abel summability does not imply ordinary convergence is not a biconditional, so there is no separate reverse implication to certify."
+        }
+      ]
+    }
+  }
+}

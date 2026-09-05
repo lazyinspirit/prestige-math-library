@@ -1,0 +1,2597 @@
+{
+  "version": 1,
+  "level": "frontier-30",
+  "note": "Step-5 authoring contract for frontier-30 batch 11 on Saturday, September 5, 2026 (AEST).",
+  "scope": [
+    "lem-affine-face-maps-satisfy-the-cosimplicial-identities",
+    "thm-the-singular-boundary-squares-to-zero",
+    "lem-induced-singular-chain-maps-commute-with-boundaries",
+    "prop-singular-chains-and-homology-are-covariantly-functorial",
+    "lem-singular-augmentation-commutes-with-boundary",
+    "prop-zero-th-singular-homology-is-free-on-path-components",
+    "cor-path-connected-spaces-have-zero-reduced-zero-th-homology",
+    "prop-singular-homology-of-a-disjoint-union-is-the-direct-sum",
+    "lem-the-prism-triangulation-has-the-stated-oriented-boundary",
+    "thm-singular-chain-homotopy-formula",
+    "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+    "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+    "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+    "prop-singular-homology-is-invariant-under-deformation-retracts",
+    "lem-singular-chain-cross-product-boundary-formula",
+    "prop-singular-chain-cross-products-are-natural",
+    "lem-simplicial-to-singular-chains-commute-with-boundaries",
+    "ex-singular-chain-complex-of-a-point",
+    "ex-boundaries-of-the-standard-one-and-two-simplices",
+    "ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex",
+    "ex-the-prism-operator-for-a-path-homotopy",
+    "ex-homology-of-an-interval-from-contractibility",
+    "ex-homology-of-punctured-euclidean-space-by-deformation-retraction",
+    "cex-equal-homology-does-not-imply-homotopy-equivalence",
+    "cex-a-singular-cochain-is-not-a-finite-singular-chain"
+  ],
+  "contracts": {
+    "lem-affine-face-maps-satisfy-the-cosimplicial-identities": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-standard-topological-simplex-and-its-affine-face-maps",
+          "source_section": "Definition",
+          "quote": "For each integer $n\\geq 0$, the **standard topological $n$-simplex** is\n$$\\Delta^n:=\\left\\{(t_0,\\dots,t_n)\\in\\mathbb R^{n+1}: t_i\\geq 0\\text{ for all }i,\\ \\sum_{i=0}^n t_i=1\\right\\},$$\nwith the subspace topology from $\\mathbb R^{n+1}$. Its vertices are the\nstandard basis vectors $v_0,\\dots,v_n$.\n\nFor $n\\geq 1$ and $0\\leq i\\leq n$, the **$i$th affine face map**\n$$\\delta_i:\\Delta^{n-1}\\to\\Delta^n$$\nis the continuous affine map that inserts a zero in the $i$th coordinate:\n$$\\delta_i(t_0,\\dots,t_{n-1})=(t_0,\\dots,t_{i-1},0,t_i,\\dots,t_{n-1}).$$\nEquivalently, $\\delta_i$ carries the vertex $v_k$ of $\\Delta^{n-1}$ to $v_k$\nfor $k<i$ and to $v_{k+1}$ for $k\\geq i$, so its image is the face opposite\nthe vertex $v_i$.\n\nFor $n=0$ there are no face maps because $\\Delta^{-1}$ is not part of the\nchain-level indexing used on this page.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $t=(t_0,\\dots,t_{n-2})\\in\\Delta^{n-2}$. By [L1], the composite $\\delta_j\\delta_i(t)$ is obtained by first inserting $0$ in slot $i$ and then inserting $0$ in slot $j$. Since $i<j$, the second insertion happens strictly to the right of the first one, so the resulting $(n+1)$-tuple has zeros exactly in positions $i$ and $j$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Again by [L1], the composite $\\delta_i\\delta_{j-1}(t)$ first inserts $0$ in slot $j-1$ and then inserts $0$ in slot $i$. After the second insertion, the earlier zero has shifted one place to the right, so the final tuple also has zeros exactly in positions $i$ and $j$, with every other coordinate of $t$ appearing in the same relative order as in step 1.1. Therefore the two composites agree coordinatewise.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 is the n = 0 branch, where the side-prism sum is omitted and the prism boundary is computed directly."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The lemma assumes n >= 2, so there is no n = 0 face-identity instance in scope."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The lemma assumes n >= 2, so the n = 1 case is outside the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The affine face maps satisfy the cosimplicial identities, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The affine face maps satisfy the cosimplicial identities, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The affine face maps satisfy the cosimplicial identities, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The affine face maps satisfy the cosimplicial identities, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The affine face maps satisfy the cosimplicial identities, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "thm-the-singular-boundary-squares-to-zero": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-singular-boundary-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $n\\geq 1$. For a singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, its **singular boundary** is\n$$\\partial_n\\sigma:=\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\in C_{n-1}(X;\\mathbb Z),$$\nwhere the $\\delta_i$ are the affine face maps from\n[[def-singular-simplex-and-singular-chain-group-with-coefficients]].\n\nExtend this formula $\\mathbb Z$-linearly to a homomorphism\n$$\\partial_n:C_n(X;\\mathbb Z)\\to C_{n-1}(X;\\mathbb Z).$$\nFor coefficients in an abelian group $G$, the boundary on $C_n(X;G)$ is the\ntensor extension\n$$\\partial_n\\otimes\\operatorname{id}_G:C_n(X;G)\\to C_{n-1}(X;G),$$\nagain denoted $\\partial_n$.\n\nThe degree-zero boundary is the zero map\n$$\\partial_0:C_0(X;G)\\to 0,$$\nand for negative indices the chain groups are taken to be zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-affine-face-maps-satisfy-the-cosimplicial-identities",
+          "source_section": "Statement",
+          "quote": "For every $n\\geq 2$ and every pair of integers $0\\leq i<j\\leq n$, the affine\nface maps of [[def-standard-topological-simplex-and-its-affine-face-maps]]\nsatisfy\n$$\\delta_j\\circ\\delta_i=\\delta_i\\circ\\delta_{j-1}:\\Delta^{n-2}\\to\\Delta^n.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n=0$, then $\\partial_0=0$ by [L1], so the degree-zero boundary is already zero. If $n=1$ and $\\sigma:\\Delta^1\\to X$ is a singular $1$-simplex, then $$\\partial_0\\partial_1\\sigma=\\partial_0(\\sigma\\delta_0-\\sigma\\delta_1)=0,$$ again because $\\partial_0=0$. Thus the claim holds in the two low degrees.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $n\\geq 2$ and let $\\sigma:\\Delta^n\\to X$ be a singular $n$-simplex. Expanding twice with [L1] gives $$\\partial_{n-1}\\partial_n\\sigma=\\sum_{i=0}^n\\sum_{j=0}^{n-1}(-1)^{i+j}\\sigma\\delta_i\\delta_j.$$ Reindex the terms by pairs $0\\leq j<i\\leq n$ and $0\\leq i\\leq j\\leq n-1$. By [L2], the term $\\sigma\\delta_i\\delta_j$ with $j<i$ equals $\\sigma\\delta_j\\delta_{i-1}$, but the two appearances carry opposite signs because $$(-1)^{i+j}=-(-1)^{j+(i-1)}.$$ Hence every codimension-two face occurs twice with opposite coefficients, so the whole sum is zero.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since singular simplices generate $C_n(X;\\mathbb Z)$ and the coefficient version is obtained by tensor extension, steps 1.1 and 1.2 imply $\\partial_{n-1}\\partial_n=0$ on $C_n(X;G)$ for every $n\\geq 1$, with degree $0$ handled separately in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The singular boundary squares to zero, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 checks n = 0 directly from the definition (partial_0=0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 checks n = 1 directly before the general cancellation argument begins."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The singular boundary squares to zero, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The singular boundary squares to zero, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The singular boundary squares to zero, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The singular boundary squares to zero, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The singular boundary squares to zero, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "lem-induced-singular-chain-maps-commute-with-boundaries": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-induced-singular-chain-map",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map of topological spaces. For each $n\\geq 0$,\nthe **induced singular chain map in degree $n$** is the homomorphism\n$$f_{\\#,n}:C_n(X;\\mathbb Z)\\to C_n(Y;\\mathbb Z)$$\ndefined on a singular simplex $\\sigma:\\Delta^n\\to X$ by\n$$f_{\\#,n}(\\sigma):=f\\circ\\sigma,$$\nand extended $\\mathbb Z$-linearly.\n\nFor coefficients in an abelian group $G$, tensor with\n$\\operatorname{id}_G$ to obtain\n$$f_{\\#,n}:C_n(X;G)\\to C_n(Y;G).$$\nThe family $(f_{\\#,n})_{n\\geq 0}$ is denoted $f_\\#:C_\\bullet(X;G)\\to\nC_\\bullet(Y;G)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-singular-boundary-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $n\\geq 1$. For a singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, its **singular boundary** is\n$$\\partial_n\\sigma:=\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\in C_{n-1}(X;\\mathbb Z),$$\nwhere the $\\delta_i$ are the affine face maps from\n[[def-singular-simplex-and-singular-chain-group-with-coefficients]].\n\nExtend this formula $\\mathbb Z$-linearly to a homomorphism\n$$\\partial_n:C_n(X;\\mathbb Z)\\to C_{n-1}(X;\\mathbb Z).$$\nFor coefficients in an abelian group $G$, the boundary on $C_n(X;G)$ is the\ntensor extension\n$$\\partial_n\\otimes\\operatorname{id}_G:C_n(X;G)\\to C_{n-1}(X;G),$$\nagain denoted $\\partial_n$.\n\nThe degree-zero boundary is the zero map\n$$\\partial_0:C_0(X;G)\\to 0,$$\nand for negative indices the chain groups are taken to be zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n=0$, then $\\partial_0=0$ by [L2], so both composites from $C_0(X;G)$ to $0$ are the zero map.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $n\\geq 1$ and let $\\sigma:\\Delta^n\\to X$ be a singular $n$-simplex. By [L1] and [L2], $$\\partial_n f_{\\#,n}(\\sigma)=\\sum_{i=0}^n(-1)^i(f\\circ\\sigma)\\circ\\delta_i=\\sum_{i=0}^n(-1)^if\\circ(\\sigma\\circ\\delta_i).$$ The same formulas give $$f_{\\#,n-1}\\partial_n(\\sigma)=f_{\\#,n-1}\\left(\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\right)=\\sum_{i=0}^n(-1)^if\\circ(\\sigma\\circ\\delta_i),$$ so the two values agree on every singular simplex.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Singular simplices generate $C_n(X;\\mathbb Z)$, and the coefficient-$G$ map is the tensor extension of the integer-coefficient map. Therefore step 1.2 proves the identity for every $n\\geq 1$, while step 1.1 handles degree $0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Induced singular chain maps commute with boundaries, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles degree 0 directly by using the fact that both composites land in the zero group."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Induced singular chain maps commute with boundaries, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Induced singular chain maps commute with boundaries, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Induced singular chain maps commute with boundaries, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Induced singular chain maps commute with boundaries, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Induced singular chain maps commute with boundaries, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Induced singular chain maps commute with boundaries, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "prop-singular-chains-and-homology-are-covariantly-functorial": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-induced-singular-chain-map",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map of topological spaces. For each $n\\geq 0$,\nthe **induced singular chain map in degree $n$** is the homomorphism\n$$f_{\\#,n}:C_n(X;\\mathbb Z)\\to C_n(Y;\\mathbb Z)$$\ndefined on a singular simplex $\\sigma:\\Delta^n\\to X$ by\n$$f_{\\#,n}(\\sigma):=f\\circ\\sigma,$$\nand extended $\\mathbb Z$-linearly.\n\nFor coefficients in an abelian group $G$, tensor with\n$\\operatorname{id}_G$ to obtain\n$$f_{\\#,n}:C_n(X;G)\\to C_n(Y;G).$$\nThe family $(f_{\\#,n})_{n\\geq 0}$ is denoted $f_\\#:C_\\bullet(X;G)\\to\nC_\\bullet(Y;G)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-induced-singular-chain-maps-commute-with-boundaries",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous, then for every $n\\geq 1$ and every abelian group\n$G$,\n$$\\partial_n\\circ f_{\\#,n}=f_{\\#,n-1}\\circ\\partial_n:C_n(X;G)\\to C_{n-1}(Y;G).$$\nIn degree $0$, both composites from $C_0(X;G)$ to $0$ are the zero map.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-homology-respects-identities-and-composition",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb Z$:\n\n1. $H_n(1_C)=1_{H_n(C)}$ for every chain complex $C$.\n2. If $f:C\\to D$ and $g:D\\to E$ are chain maps, then\n   $$H_n(g\\circ f)=H_n(g)\\circ H_n(f).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every singular simplex $\\sigma$ in $X$, [L1] gives $\\operatorname{id}_{X,\\#}(\\sigma)=\\operatorname{id}_X\\circ\\sigma=\\sigma$ and $(g\\circ f)_\\#(\\sigma)=(g\\circ f)\\circ\\sigma=g\\circ(f\\circ\\sigma) =g_\\#(f_\\#(\\sigma))$. By linearity, $\\operatorname{id}_{X,\\#}$ is the identity chain map and $(g\\circ f)_\\#=g_\\#\\circ f_\\#$ on singular chains.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], every induced map $f_\\#$ is a chain map. Therefore step 1.1 gives identity and composition laws in the category of chain complexes, and [L3] transfers those same laws to singular homology in each degree.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Singular chains and singular homology are covariantly functorial, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 is the degree-zero branch, where the prism boundary has no side term and gives partial P_H = g_# - f_#."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Singular chains and singular homology are covariantly functorial, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Singular chains and singular homology are covariantly functorial, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Singular chains and singular homology are covariantly functorial, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Singular chains and singular homology are covariantly functorial, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Singular chains and singular homology are covariantly functorial, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Singular chains and singular homology are covariantly functorial, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "lem-singular-augmentation-commutes-with-boundary": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-zero-simplex-augmentation-and-reduced-singular-homology",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $G$ be an abelian group. The\n**augmentation at 0-simplices** is the homomorphism\n$$\\varepsilon_X:C_0(X;G)\\to G$$\ndefined by\n$$\\varepsilon_X(\\sigma\\otimes g)=g$$\nfor every singular $0$-simplex $\\sigma:\\Delta^0\\to X$, and extended linearly.\n\nThe **reduced singular chain complex** $\\widetilde C_\\bullet(X;G)$ is obtained\nfrom the singular chain complex by replacing degree $0$ with the kernel of the\naugmentation:\n$$\\widetilde C_n(X;G):=\n\\begin{cases}\nC_n(X;G),& n\\geq 1,\\\\\n\\ker\\varepsilon_X,& n=0,\\\\\n0,& n<0.\n\\end{cases}$$\nIts differential is the singular boundary in degrees $\\geq 1$ and the zero map\n$\\widetilde C_0(X;G)\\to 0$ in degree $0$.\n\nThe **reduced singular homology groups** are\n$$\\widetilde H_n^{\\mathrm{sing}}(X;G):=H_n(\\widetilde C_\\bullet(X;G)).$$\nFor the empty space, this convention leaves $\\widetilde C_0(\\varnothing;G)=0$,\nso $\\widetilde H_n^{\\mathrm{sing}}(\\varnothing;G)=0$ for all $n\\geq 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-singular-boundary-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $n\\geq 1$. For a singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, its **singular boundary** is\n$$\\partial_n\\sigma:=\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\in C_{n-1}(X;\\mathbb Z),$$\nwhere the $\\delta_i$ are the affine face maps from\n[[def-singular-simplex-and-singular-chain-group-with-coefficients]].\n\nExtend this formula $\\mathbb Z$-linearly to a homomorphism\n$$\\partial_n:C_n(X;\\mathbb Z)\\to C_{n-1}(X;\\mathbb Z).$$\nFor coefficients in an abelian group $G$, the boundary on $C_n(X;G)$ is the\ntensor extension\n$$\\partial_n\\otimes\\operatorname{id}_G:C_n(X;G)\\to C_{n-1}(X;G),$$\nagain denoted $\\partial_n$.\n\nThe degree-zero boundary is the zero map\n$$\\partial_0:C_0(X;G)\\to 0,$$\nand for negative indices the chain groups are taken to be zero.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\sigma:\\Delta^1\\to X$ be a singular $1$-simplex and let $g\\in G$. By [L2], $$\\partial_1(\\sigma\\otimes g)=(\\sigma\\delta_0)\\otimes g-(\\sigma\\delta_1)\\otimes g.$$ Applying [L1] gives $$\\varepsilon_X\\partial_1(\\sigma\\otimes g)=g-g=0.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The generators $\\sigma\\otimes g$ span $C_1(X;G)$, so step 1.1 proves $\\varepsilon_X\\partial_1=0$ on all of $C_1(X;G)$. Therefore every $1$-boundary lies in $\\ker\\varepsilon_X$, which is exactly the compatibility needed in degree $0$ for the reduced chain complex.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The singular augmentation commutes with the boundary, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the statement records the p = 0 and q = 0 conventions explicitly by omitting the corresponding zero term."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 is exactly the singular 1-simplex endpoint computation that makes the augmentation compatible with the boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The singular augmentation commutes with the boundary, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The singular augmentation commutes with the boundary, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The singular augmentation commutes with the boundary, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The singular augmentation commutes with the boundary, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The singular augmentation commutes with the boundary, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Friday, September 4, 2026 risk review: the risk is the degree-1 to degree-0 interface. The current proof checks a generator sigma tensor g, uses the explicit 1-simplex boundary formula to obtain g - g, and then extends linearly, so no hidden degree -1 map or omitted endpoint case remains."
+      }
+    },
+    "prop-zero-th-singular-homology-is-free-on-path-components": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-singular-chain-complex-and-singular-homology",
+          "source_section": "Definition",
+          "quote": "For a topological space $X$ and an abelian group $G$, the singular chain groups\nand boundary maps of [[def-singular-boundary-operator]] form the\n**singular chain complex**\n$$C_\\bullet(X;G):=\\bigl(\\cdots\\to C_n(X;G)\\xrightarrow{\\partial_n}C_{n-1}(X;G)\\to\\cdots\\bigr),$$\nbecause [[thm-the-singular-boundary-squares-to-zero]] gives\n$\\partial_{n-1}\\partial_n=0$.\n\nIts degree-$n$ cycles and boundaries are\n$$Z_n^{\\mathrm{sing}}(X;G):=\\ker\\partial_n,\\qquad B_n^{\\mathrm{sing}}(X;G):=\\operatorname{im}\\partial_{n+1},$$\nin the sense of [[def-cycle-and-boundary-subobjects-of-a-complex]].\n\nThe **$n$th singular homology group** is the homology object of this chain\ncomplex:\n$$H_n^{\\mathrm{sing}}(X;G):=Z_n^{\\mathrm{sing}}(X;G)\\big/B_n^{\\mathrm{sing}}(X;G),$$\nequivalently $H_n(C_\\bullet(X;G))$ in the notation of\n[[def-homology-object-of-a-chain-complex]]. When the coefficient group is\n$\\mathbb Z$, write simply $C_n(X)$ and $H_n(X)$ when no confusion can arise.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-zero-simplex-augmentation-and-reduced-singular-homology",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $G$ be an abelian group. The\n**augmentation at 0-simplices** is the homomorphism\n$$\\varepsilon_X:C_0(X;G)\\to G$$\ndefined by\n$$\\varepsilon_X(\\sigma\\otimes g)=g$$\nfor every singular $0$-simplex $\\sigma:\\Delta^0\\to X$, and extended linearly.\n\nThe **reduced singular chain complex** $\\widetilde C_\\bullet(X;G)$ is obtained\nfrom the singular chain complex by replacing degree $0$ with the kernel of the\naugmentation:\n$$\\widetilde C_n(X;G):=\n\\begin{cases}\nC_n(X;G),& n\\geq 1,\\\\\n\\ker\\varepsilon_X,& n=0,\\\\\n0,& n<0.\n\\end{cases}$$\nIts differential is the singular boundary in degrees $\\geq 1$ and the zero map\n$\\widetilde C_0(X;G)\\to 0$ in degree $0$.\n\nThe **reduced singular homology groups** are\n$$\\widetilde H_n^{\\mathrm{sing}}(X;G):=H_n(\\widetilde C_\\bullet(X;G)).$$\nFor the empty space, this convention leaves $\\widetilde C_0(\\varnothing;G)=0$,\nso $\\widetilde H_n^{\\mathrm{sing}}(\\varnothing;G)=0$ for all $n\\geq 0$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-path-connected",
+          "source_section": "Definition",
+          "quote": "Throughout, $I := [0,1] = \\{\\, t \\in \\mathbb{R} : 0 \\le t \\le 1 \\,\\}$\n([[def-interval]]) carries the subspace topology inherited from $\\mathbb{R}$ with\nits usual topology ([[def-subspace-topology-top]],\n[[lem-real-line-is-a-metric-space]], [[def-metric-topology]],\n[[def-metrizable-space]]). It is called the **unit interval**.\n\nLet $X$ be a topological space ([[def-topological-space]]) and let\n$x, y \\in X$.\n\n- A **path in $X$ from $x$ to $y$** is a continuous map $\\gamma : I \\to X$\n  ([[def-continuous-map-top]]) with $\\gamma(0) = x$ and $\\gamma(1) = y$. Its\n  **image** is $\\gamma[I]$.\n- $X$ is **path-connected** when for every pair $x, y \\in X$ there is a path in\n  $X$ from $x$ to $y$. A subset $A \\subseteq X$ is a **path-connected subset**\n  when the space $A$ with its subspace topology is path-connected; equivalently,\n  when any two of its points are joined by a path whose image lies in $A$, by the\n  characteristic property of a map into a subspace\n  ([[def-subspace-topology-top]]).\n- Write $x \\sim y$ when a path in $X$ from $x$ to $y$ exists. The **path\n  component** of $x$ is its equivalence class\n  $$P(x) \\;:=\\; \\{\\, y \\in X : x \\sim y \\,\\} .$$\n- The empty space is path-connected, the defining condition quantifying over no\n  pair of points, and so is every one-point space, the constant path joining its\n  point to itself.\n\n**$\\sim$ is an equivalence relation on $X$, and the obligation is discharged\nhere**, so that \"equivalence class\" above denotes.\n\n*Reflexive.* The constant map $\\gamma(t) = x$ is continuous, every preimage being\n$\\varnothing$ or $I$ ([[def-continuous-map-top]]), and joins $x$ to $x$.\n\n*Symmetric.* If $\\gamma$ joins $x$ to $y$, put $\\bar\\gamma(t) := \\gamma(1-t)$.\nThe map $r : I \\to I$, $r(t) = 1 - t$, is continuous: for $s, t \\in I$ one has\n$|r(s) - r(t)| = |s - t|$, so a ball of radius $\\varepsilon$ around $r(t)$ pulls\nback to contain the ball of radius $\\varepsilon$ around $t$\n([[def-metric-ball]], [[def-metrizable-space]]). Hence\n$\\bar\\gamma = \\gamma \\circ r$ is continuous ([[lem-continuity-is-local-and-pastes]],\nclaim 1) and joins $y$ to $x$.\n\n*Transitive.* Let $\\gamma_1$ join $x$ to $y$ and $\\gamma_2$ join $y$ to $z$.\nDefine $\\delta : I \\to X$ by\n\n$$\\delta(t) \\;:=\\; \\begin{cases} \\gamma_1(2t), & 0 \\le t \\le 1/2, \\\\ \\gamma_2(2t - 1), & 1/2 \\le t \\le 1. \\end{cases}$$\n\nThe two clauses agree at $t = 1/2$, both giving $\\gamma_1(1) = y = \\gamma_2(0)$,\nso $\\delta$ is a well-defined function. The sets $[0,1/2]$ and $[1/2,1]$ are\nclosed in $I$ and cover it, and there are **two** of them, so the finite closed\nform of the pasting lemma applies ([[lem-continuity-is-local-and-pastes]],\nclaim 3). On $[0,1/2]$ the map $\\delta$ is $\\gamma_1 \\circ a_1$ with\n$a_1(t) = 2t$, and on $[1/2,1]$ it is $\\gamma_2 \\circ a_2$ with\n$a_2(t) = 2t - 1$; each $a_k$ is continuous into $I$, since\n$|a_k(s) - a_k(t)| = 2|s-t|$, so the ball of radius $\\varepsilon/2$ around $t$\nmaps into the ball of radius $\\varepsilon$ around $a_k(t)$\n([[def-metric-ball]], [[def-metrizable-space]],\n[[def-subspace-topology-top]]). So both restrictions are continuous by\n[[lem-continuity-is-local-and-pastes]] claim 1, hence $\\delta$ is continuous, and\nit joins $x$ to $z$.\n\n**The path components partition $X$**, being the classes of an equivalence\nrelation, and each is a path-connected subset of $X$: two points of $P(x)$ are\njoined to $x$, hence to each other by the transitivity construction above, and\nthe resulting path has image inside $P(x)$: if $\\delta$ is a path from $x$ and\n$s \\in I$, then $t \\mapsto \\delta(st)$ is a path from $x$ to $\\delta(s)$,\ncontinuous because $t \\mapsto st$ satisfies $|st_1 - st_2| \\le |t_1 - t_2|$ and\nis therefore continuous into $I$ by the ball criterion used above, so every point\nof the image is itself joined to $x$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\Phi:C_0(X;\\mathbb Z)\\to\\bigoplus_{C\\in\\pi_0^{\\mathrm{path}}(X)}\\mathbb Z e_C$ send each singular $0$-simplex $\\sigma$ to the basis vector indexed by the path component of its unique image point. If $\\tau:\\Delta^1\\to X$ is a singular $1$-simplex, then the map $s\\mapsto\\tau(1-s,s)$ is a path in $X$ from the image point of $\\tau\\delta_1$ to the image point of $\\tau\\delta_0$. Hence $\\Phi(\\partial_1\\tau)=0$, so $\\Phi$ kills $B_0(X;\\mathbb Z)$ and descends to a homomorphism $$\\overline\\Phi:H_0^{\\mathrm{sing}}(X;\\mathbb Z)\\to\\bigoplus_{C\\in\\pi_0^{\\mathrm{path}}(X)}\\mathbb Z e_C.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The map $\\overline\\Phi$ is surjective: if $X=\\varnothing$ there is nothing to prove, and otherwise any finite sum $\\sum_{k=1}^m a_k e_{C_k}$ is the image of the $0$-cycle $\\sum_{k=1}^m a_k\\sigma_k$, where $\\sigma_k$ is any singular $0$-simplex landing at a chosen point of $C_k$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $z=\\sum_{k=1}^m a_k\\sigma_k$ be a $0$-cycle with $\\overline\\Phi([z])=0$. For each path component that meets the finite support of $z$, choose one base point simplex $\\sigma_C$. Since $\\overline\\Phi([z])=0$, the total coefficient in each such component is zero. If $\\sigma_k$ and $\\sigma_C$ lie in the same path component, [L2] gives a path $\\gamma_k:I\\to X$ from the image point of $\\sigma_k$ to the image point of $\\sigma_C$. Define the singular $1$-simplex $\\overline\\gamma_k:\\Delta^1\\to X$ by $\\overline\\gamma_k(t_0,t_1)=\\gamma_k(t_1)$. Then $\\partial_1\\overline\\gamma_k=\\sigma_C-\\sigma_k$. Therefore $$[z]=\\sum_C\\left(\\sum_{\\sigma_k\\in C} a_k\\right)[\\sigma_C]=0$$ in $H_0^{\\mathrm{sing}}(X;\\mathbb Z)$. Thus $\\overline\\Phi$ is injective.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 show that $\\overline\\Phi$ is an isomorphism, so $H_0^{\\mathrm{sing}}(X;\\mathbb Z)$ is free on the path components of $X$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 treats the case X = emptyset explicitly when proving surjectivity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles degree 0 directly because both simplicial and singular boundaries vanish there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Zero-th singular homology is free on path components, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Zero-th singular homology is free on path components, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Zero-th singular homology is free on path components, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 2.1 and 2.2 choose representatives only from the finitely many path components appearing in the chain or target support."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Zero-th singular homology is free on path components, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Zero-th singular homology is free on path components, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Friday, September 4, 2026 risk review: the load-bearing point is quotienting by B_0 and relating that quotient to path components. The current proof parametrizes each path by (t_0,t_1) -> gamma(t_1), shows Phi kills 1-boundaries, and then uses one chosen simplex per finitely many relevant path components to prove injectivity."
+      }
+    },
+    "cor-path-connected-spaces-have-zero-reduced-zero-th-homology": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-zero-th-singular-homology-is-free-on-path-components",
+          "source_section": "Statement",
+          "quote": "For every topological space $X$,\n$$H_0^{\\mathrm{sing}}(X;\\mathbb Z)\\cong\\bigoplus_{C\\in\\pi_0^{\\mathrm{path}}(X)}\\mathbb Z e_C,$$\nthe free abelian group on the path components of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-zero-simplex-augmentation-and-reduced-singular-homology",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $G$ be an abelian group. The\n**augmentation at 0-simplices** is the homomorphism\n$$\\varepsilon_X:C_0(X;G)\\to G$$\ndefined by\n$$\\varepsilon_X(\\sigma\\otimes g)=g$$\nfor every singular $0$-simplex $\\sigma:\\Delta^0\\to X$, and extended linearly.\n\nThe **reduced singular chain complex** $\\widetilde C_\\bullet(X;G)$ is obtained\nfrom the singular chain complex by replacing degree $0$ with the kernel of the\naugmentation:\n$$\\widetilde C_n(X;G):=\n\\begin{cases}\nC_n(X;G),& n\\geq 1,\\\\\n\\ker\\varepsilon_X,& n=0,\\\\\n0,& n<0.\n\\end{cases}$$\nIts differential is the singular boundary in degrees $\\geq 1$ and the zero map\n$\\widetilde C_0(X;G)\\to 0$ in degree $0$.\n\nThe **reduced singular homology groups** are\n$$\\widetilde H_n^{\\mathrm{sing}}(X;G):=H_n(\\widetilde C_\\bullet(X;G)).$$\nFor the empty space, this convention leaves $\\widetilde C_0(\\varnothing;G)=0$,\nso $\\widetilde H_n^{\\mathrm{sing}}(\\varnothing;G)=0$ for all $n\\geq 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-singular-augmentation-commutes-with-boundary",
+          "source_section": "Statement",
+          "quote": "For every topological space $X$ and every abelian group $G$,\n$$\\varepsilon_X\\partial_1=0:C_1(X;G)\\to G.$$\nConsequently $\\operatorname{im}\\partial_1\\subseteq\\ker\\varepsilon_X$, so the\nreduced singular chain complex of\n[[def-zero-simplex-augmentation-and-reduced-singular-homology]] is well\ndefined.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $X$ is nonempty and path-connected, it has exactly one path component. By [L1], $$H_0^{\\mathrm{sing}}(X;\\mathbb Z)\\cong\\mathbb Z.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $z=\\sum_{k=1}^m a_k\\sigma_k\\in C_0(X;\\mathbb Z)$. Under the isomorphism of step 1.1, the class $[z]$ maps to $\\sum_{k=1}^m a_k\\in\\mathbb Z$, which is exactly $\\varepsilon_X(z)$. Therefore $z\\in\\ker\\varepsilon_X$ if and only if $[z]=0$ in $H_0^{\\mathrm{sing}}(X;\\mathbb Z)$, equivalently if and only if $z\\in B_0(X;\\mathbb Z)$. By [L3], every $0$-boundary lies in $\\ker\\varepsilon_X$, so $$\\ker\\varepsilon_X=B_0(X;\\mathbb Z).$$",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2], reduced degree-zero homology is $$\\widetilde H_0^{\\mathrm{sing}}(X;\\mathbb Z)=\\ker\\varepsilon_X\\big/\\operatorname{im}\\partial_1=\\ker\\varepsilon_X\\big/B_0(X;\\mathbb Z)=0.$$",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes X is nonempty, so the empty-space branch is excluded by hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles the degree-zero simplex separately, using the explicit formula partial_0=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Path-connected spaces have zero reduced zero-th homology, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Path-connected spaces have zero reduced zero-th homology, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Path-connected spaces have zero reduced zero-th homology, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Path-connected spaces have zero reduced zero-th homology, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Path-connected spaces have zero reduced zero-th homology, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Path-connected spaces have zero reduced zero-th homology, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Friday, September 4, 2026 risk review: the repaired risk was identifying reduced H_0 with the augmentation kernel too early. The current proof first uses the path-component computation to get H_0(X;Z) = Z, then proves ker epsilon_X = B_0(X;Z) by testing the augmentation against that isomorphism, and only then concludes reduced H_0 is zero."
+      }
+    },
+    "prop-singular-homology-of-a-disjoint-union-is-the-direct-sum": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-singular-chain-complex-and-singular-homology",
+          "source_section": "Definition",
+          "quote": "For a topological space $X$ and an abelian group $G$, the singular chain groups\nand boundary maps of [[def-singular-boundary-operator]] form the\n**singular chain complex**\n$$C_\\bullet(X;G):=\\bigl(\\cdots\\to C_n(X;G)\\xrightarrow{\\partial_n}C_{n-1}(X;G)\\to\\cdots\\bigr),$$\nbecause [[thm-the-singular-boundary-squares-to-zero]] gives\n$\\partial_{n-1}\\partial_n=0$.\n\nIts degree-$n$ cycles and boundaries are\n$$Z_n^{\\mathrm{sing}}(X;G):=\\ker\\partial_n,\\qquad B_n^{\\mathrm{sing}}(X;G):=\\operatorname{im}\\partial_{n+1},$$\nin the sense of [[def-cycle-and-boundary-subobjects-of-a-complex]].\n\nThe **$n$th singular homology group** is the homology object of this chain\ncomplex:\n$$H_n^{\\mathrm{sing}}(X;G):=Z_n^{\\mathrm{sing}}(X;G)\\big/B_n^{\\mathrm{sing}}(X;G),$$\nequivalently $H_n(C_\\bullet(X;G))$ in the notation of\n[[def-homology-object-of-a-chain-complex]]. When the coefficient group is\n$\\mathbb Z$, write simply $C_n(X)$ and $H_n(X)$ when no confusion can arise.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-disjoint-union-topology",
+          "source_section": "Definition",
+          "quote": "**The underlying set.** Let $I$ be a set and let $X_i$ be a set for each\n$i \\in I$. The **disjoint union** is\n\n$$\\bigsqcup_{i \\in I} X_i \\;:=\\; \\bigcup_{i \\in I} \\big(X_i \\times \\{i\\}\\big) ,$$\n\nwhose elements are the pairs $(x, i)$ with $i \\in I$ and $x \\in X_i$. For\n$j \\in I$ the $j$-th **canonical injection** is\n\n$$\\kappa_j : X_j \\to \\bigsqcup_{i \\in I} X_i, \\qquad \\kappa_j(x) := (x, j).$$\n\n*The construction is what makes the word \"disjoint\" honest.* Each $\\kappa_j$ is\ninjective ([[def-injection-surjection-bijection]]), since $(x,j) = (x',j)$ forces\n$x = x'$; the images $\\kappa_j[X_j] = X_j \\times \\{j\\}$ are pairwise disjoint,\nsince the second coordinate determines $j$; and their union is the whole set. So\nno assumption that the $X_i$ are disjoint as sets is needed, and none is made:\nthe tag $i$ separates the copies even when $X_i = X_{i'}$ for $i \\ne i'$.\n\n**The trace of a subset.** For $U \\subseteq \\bigsqcup_i X_i$ and $j \\in I$ write\n\n$$U_j \\;:=\\; \\kappa_j^{-1}[U] \\;=\\; \\{\\, x \\in X_j : (x,j) \\in U \\,\\} \\subseteq X_j ,$$\n\nthe **trace** of $U$ on the $j$-th summand. A subset is determined by its family\nof traces, since $U = \\bigcup_i \\kappa_i[U_i]$.\n\n**The topology.** Now let each $X_i$ carry a topology $\\mathcal{T}_i$\n([[def-topological-space]]). The **disjoint union topology** (also *coproduct\ntopology*, or *topological sum*) on $\\bigsqcup_i X_i$ is the final topology of\nthe family $(\\kappa_i)_{i \\in I}$ ([[def-initial-and-final-topology]]), that is\n\n$$\\mathcal{T}^{\\sqcup} \\;:=\\; \\Big\\{\\, U \\subseteq \\bigsqcup_i X_i \\;:\\; U_i \\in \\mathcal{T}_i \\text{ for every } i \\in I \\,\\Big\\} :$$\n\n**a set is open exactly when each of its traces is open.** That this is a\ntopology is discharged in [[def-initial-and-final-topology]], where the final\ntopology of any family is verified to satisfy (T1), (T2) and (T3); nothing\nfurther is needed here.\n\n**Closed sets, dually.** $F \\subseteq \\bigsqcup_i X_i$ is closed exactly when\nevery trace $F_i$ is closed in $X_i$. Indeed the trace operation commutes with\ncomplementation, $\\kappa_i^{-1}[\\,\\bigsqcup_j X_j \\setminus F\\,] = X_i \\setminus F_i$,\nso $F$ is closed if and only if the complement is open if and only if every\n$X_i \\setminus F_i$ is open.\n\n**Each summand sits inside as a clopen subspace.** The set\n$\\kappa_j[X_j] = X_j \\times \\{j\\}$ has traces $X_j$ at $j$ and $\\varnothing$\nelsewhere, both open and both closed, so it is clopen in the union. Its subspace\ntopology ([[def-subspace-topology-top]]) is carried across by $\\kappa_j$ from\n$\\mathcal{T}_j$, and $\\kappa_j$ is an embedding\n([[def-homeomorphism-and-open-maps]]); both statements are proved in the next\nitem rather than assumed here.\n\n**Degenerate cases.** For $I = \\varnothing$ the disjoint union is the empty set\nwith its only topology. For $I$ a one-element set the map $\\kappa$ is a bijection\ncarrying $\\mathcal{T}$ to $\\mathcal{T}^{\\sqcup}$, so the construction returns the\none summand up to homeomorphism and changes nothing.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The standard simplex $\\Delta^n$ is path-connected: if $u=(u_0,\\dots,u_n)$ and $v=(v_0,\\dots,v_n)$ are points of $\\Delta^n$, the straight-line map $t\\mapsto (1-t)u+tv$ stays in $\\Delta^n$. Therefore any singular simplex $\\sigma:\\Delta^n\\to X$ has connected image. Since the sets $X_\\alpha$ are pairwise disjoint and clopen by [L2], the image of $\\sigma$ lies in exactly one summand $X_\\alpha$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 identifies $C_n(X;G)$ with the direct sum of the chain groups $C_n(X_\\alpha;G)$, degree by degree, and the singular boundary preserves the chosen summand because each face of a simplex in $X_\\alpha$ still lands in $X_\\alpha$. Thus $$C_\\bullet(X;G)\\cong\\bigoplus_{\\alpha\\in A}C_\\bullet(X_\\alpha;G)$$ as chain complexes.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Cycles and boundaries of a direct-sum chain complex are taken componentwise, so homology also splits componentwise. Applying [L1] to the chain-complex isomorphism of step 2.1 yields $$H_n^{\\mathrm{sing}}(X;G)\\cong\\bigoplus_{\\alpha\\in A}H_n^{\\mathrm{sing}}(X_\\alpha;G).$$",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The singular homology of a disjoint union is the direct sum, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The singular homology of a disjoint union is the direct sum, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The singular homology of a disjoint union is the direct sum, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The singular homology of a disjoint union is the direct sum, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The singular homology of a disjoint union is the direct sum, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The singular homology of a disjoint union is the direct sum, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The singular homology of a disjoint union is the direct sum, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The singular homology of a disjoint union is the direct sum, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "lem-the-prism-triangulation-has-the-stated-oriented-boundary": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-prism-operator-for-a-homotopy",
+          "source_section": "Definition",
+          "quote": "Let $H:X\\times I\\to Y$ be a homotopy from $f$ to $g$ in the sense of\n[[def-homotopy-relative-and-path-homotopy]]. For each singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, write\n$$\\sigma\\times\\operatorname{id}_I:\\Delta^n\\times I\\to X\\times I,\\qquad (u,t)\\mapsto(\\sigma(u),t).$$\n\nFor each $0\\leq i\\leq n$, let\n$$\\lambda_i:\\Delta^{n+1}\\to\\Delta^n\\times I$$\nbe the affine map sending the vertices of $\\Delta^{n+1}$ to\n$$(v_0,0),\\dots,(v_i,0),(v_i,1),(v_{i+1},1),\\dots,(v_n,1).$$\nIn barycentric coordinates this is\n$$\\lambda_i(t_0,\\dots,t_{n+1})=\\bigl(s_0,\\dots,s_n,\\ t_{i+1}+\\cdots+t_{n+1}\\bigr),$$\nwhere\n$$s_k=\n\\begin{cases}\nt_k,& k<i,\\\\\nt_i+t_{i+1},& k=i,\\\\\nt_{k+1},& k>i.\n\\end{cases}$$\n\nThe **prism operator** determined by $H$ is the degree-$1$ homomorphism\n$$P_H:C_n(X;\\mathbb Z)\\to C_{n+1}(Y;\\mathbb Z)$$\ndefined on a singular simplex by\n$$P_H(\\sigma):=\\sum_{i=0}^n(-1)^i\\,H\\circ(\\sigma\\times\\operatorname{id}_I)\\circ\\lambda_i,$$\nand extended linearly. For coefficients in an abelian group $G$, tensor with\n$\\operatorname{id}_G$ to obtain\n$$P_H:C_n(X;G)\\to C_{n+1}(Y;G).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-singular-boundary-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $n\\geq 1$. For a singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, its **singular boundary** is\n$$\\partial_n\\sigma:=\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\in C_{n-1}(X;\\mathbb Z),$$\nwhere the $\\delta_i$ are the affine face maps from\n[[def-singular-simplex-and-singular-chain-group-with-coefficients]].\n\nExtend this formula $\\mathbb Z$-linearly to a homomorphism\n$$\\partial_n:C_n(X;\\mathbb Z)\\to C_{n-1}(X;\\mathbb Z).$$\nFor coefficients in an abelian group $G$, the boundary on $C_n(X;G)$ is the\ntensor extension\n$$\\partial_n\\otimes\\operatorname{id}_G:C_n(X;G)\\to C_{n-1}(X;G),$$\nagain denoted $\\partial_n$.\n\nThe degree-zero boundary is the zero map\n$$\\partial_0:C_0(X;G)\\to 0,$$\nand for negative indices the chain groups are taken to be zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n=0$, then $\\Pi_0=\\lambda_0$ is the oriented edge from $(v_0,0)$ to $(v_0,1)$, so [L2] gives $\\partial\\Pi_0=\\iota_1-\\iota_0$. This is exactly the displayed formula with no side-prism sum.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $n\\geq 1$. By [L2], each $\\partial\\lambda_i$ is the alternating sum of its $n+2$ codimension-one faces. The face opposite $(v_0,0)$ in $\\lambda_0=[(v_0,0),(v_0,1),\\dots,(v_n,1)]$ is the top face $\\iota_1$, and the face opposite $(v_n,1)$ in $\\lambda_n=[(v_0,0),\\dots,(v_n,0),(v_n,1)]$ is the bottom face $\\iota_0$. For each $1\\le i\\le n$, the face of $\\lambda_i$ opposite $(v_i,0)$ is the same $n$-simplex as the face of $\\lambda_{i-1}$ opposite $(v_{i-1},1)$, so these interior faces occur twice in $\\sum_{i=0}^n(-1)^i\\partial\\lambda_i$ with opposite total signs and cancel.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The remaining uncancelled faces are the top face $\\iota_1$ from $\\lambda_0$, the bottom face $-\\iota_0$ from $\\lambda_n$, and the side faces obtained by deleting one vertex $v_j$ of $\\Delta^n$. For each fixed $j$, those side faces are exactly the prism simplices in the standard triangulation of $\\delta_j(\\Delta^{n-1})\\times I$, and comparing the induced vertex order with the definition of $\\Pi_{n-1}$ gives the total contribution $-(-1)^j(\\delta_j\\times\\operatorname{id}_I)_\\#\\Pi_{n-1}$. Summing over $j$ and combining with steps 1.1 and 1.2 yields the stated boundary formula.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 is the n = 0 branch, where the side-prism sum is omitted and the prism boundary is computed directly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 computes the n = 0 prism directly as one oriented edge."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The prism triangulation has the stated oriented boundary, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The prism triangulation has the stated oriented boundary, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 identifies the uncancelled top and bottom faces as the two endpoint inclusions iota_1 and iota_0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The prism triangulation has the stated oriented boundary, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The prism triangulation has the stated oriented boundary, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The prism triangulation has the stated oriented boundary, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "thm-singular-chain-homotopy-formula": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-prism-operator-for-a-homotopy",
+          "source_section": "Definition",
+          "quote": "Let $H:X\\times I\\to Y$ be a homotopy from $f$ to $g$ in the sense of\n[[def-homotopy-relative-and-path-homotopy]]. For each singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, write\n$$\\sigma\\times\\operatorname{id}_I:\\Delta^n\\times I\\to X\\times I,\\qquad (u,t)\\mapsto(\\sigma(u),t).$$\n\nFor each $0\\leq i\\leq n$, let\n$$\\lambda_i:\\Delta^{n+1}\\to\\Delta^n\\times I$$\nbe the affine map sending the vertices of $\\Delta^{n+1}$ to\n$$(v_0,0),\\dots,(v_i,0),(v_i,1),(v_{i+1},1),\\dots,(v_n,1).$$\nIn barycentric coordinates this is\n$$\\lambda_i(t_0,\\dots,t_{n+1})=\\bigl(s_0,\\dots,s_n,\\ t_{i+1}+\\cdots+t_{n+1}\\bigr),$$\nwhere\n$$s_k=\n\\begin{cases}\nt_k,& k<i,\\\\\nt_i+t_{i+1},& k=i,\\\\\nt_{k+1},& k>i.\n\\end{cases}$$\n\nThe **prism operator** determined by $H$ is the degree-$1$ homomorphism\n$$P_H:C_n(X;\\mathbb Z)\\to C_{n+1}(Y;\\mathbb Z)$$\ndefined on a singular simplex by\n$$P_H(\\sigma):=\\sum_{i=0}^n(-1)^i\\,H\\circ(\\sigma\\times\\operatorname{id}_I)\\circ\\lambda_i,$$\nand extended linearly. For coefficients in an abelian group $G$, tensor with\n$\\operatorname{id}_G$ to obtain\n$$P_H:C_n(X;G)\\to C_{n+1}(Y;G).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-the-prism-triangulation-has-the-stated-oriented-boundary",
+          "source_section": "Statement",
+          "quote": "Fix $n\\geq 0$. Let $\\iota_0,\\iota_1:\\Delta^n\\to\\Delta^n\\times I$ be the bottom\nand top inclusions, $\\iota_\\varepsilon(u)=(u,\\varepsilon)$. Let\n$$\\Pi_n:=\\sum_{i=0}^n(-1)^i\\lambda_i\\in C_{n+1}(\\Delta^n\\times I;\\mathbb Z),$$\nwith the simplices $\\lambda_i$ from [[def-prism-operator-for-a-homotopy]]. Then\n$$\\partial\\Pi_n=\\iota_1-\\iota_0-\\sum_{j=0}^n(-1)^j(\\delta_j\\times\\operatorname{id}_I)_\\#\\Pi_{n-1},$$\nwhere the last sum is omitted when $n=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-induced-singular-chain-map",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map of topological spaces. For each $n\\geq 0$,\nthe **induced singular chain map in degree $n$** is the homomorphism\n$$f_{\\#,n}:C_n(X;\\mathbb Z)\\to C_n(Y;\\mathbb Z)$$\ndefined on a singular simplex $\\sigma:\\Delta^n\\to X$ by\n$$f_{\\#,n}(\\sigma):=f\\circ\\sigma,$$\nand extended $\\mathbb Z$-linearly.\n\nFor coefficients in an abelian group $G$, tensor with\n$\\operatorname{id}_G$ to obtain\n$$f_{\\#,n}:C_n(X;G)\\to C_n(Y;G).$$\nThe family $(f_{\\#,n})_{n\\geq 0}$ is denoted $f_\\#:C_\\bullet(X;G)\\to\nC_\\bullet(Y;G)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-singular-boundary-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $n\\geq 1$. For a singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, its **singular boundary** is\n$$\\partial_n\\sigma:=\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\in C_{n-1}(X;\\mathbb Z),$$\nwhere the $\\delta_i$ are the affine face maps from\n[[def-singular-simplex-and-singular-chain-group-with-coefficients]].\n\nExtend this formula $\\mathbb Z$-linearly to a homomorphism\n$$\\partial_n:C_n(X;\\mathbb Z)\\to C_{n-1}(X;\\mathbb Z).$$\nFor coefficients in an abelian group $G$, the boundary on $C_n(X;G)$ is the\ntensor extension\n$$\\partial_n\\otimes\\operatorname{id}_G:C_n(X;G)\\to C_{n-1}(X;G),$$\nagain denoted $\\partial_n$.\n\nThe degree-zero boundary is the zero map\n$$\\partial_0:C_0(X;G)\\to 0,$$\nand for negative indices the chain groups are taken to be zero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n=0$ and $\\sigma:\\Delta^0\\to X$ is a singular $0$-simplex, then [L2] gives $\\partial\\Pi_0=\\iota_1-\\iota_0$. Composing with $H\\circ(\\sigma\\times\\operatorname{id}_I)$ and using [L1] and [L3] yields $$\\partial P_H(\\sigma)=g_\\#(\\sigma)-f_\\#(\\sigma).$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $n\\geq 1$ and let $\\sigma:\\Delta^n\\to X$ be a singular $n$-simplex. Compose the boundary formula [L2] with the continuous map $$H\\circ(\\sigma\\times\\operatorname{id}_I):\\Delta^n\\times I\\to Y.$$ By [L1] and [L3], the image of $\\Pi_n$ is $P_H(\\sigma)$, the image of $\\iota_1$ is $g_\\#(\\sigma)$, and the image of $\\iota_0$ is $f_\\#(\\sigma)$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Again using [L1], [L3], and [L4], the image of the side-prism term $\\sum_{j=0}^n(-1)^j(\\delta_j\\times\\operatorname{id}_I)_\\#\\Pi_{n-1}$ under $H\\circ(\\sigma\\times\\operatorname{id}_I)$ is exactly $P_H(\\partial\\sigma)$. Therefore step 1.2 becomes $$\\partial P_H(\\sigma)=g_\\#(\\sigma)-f_\\#(\\sigma)-P_H(\\partial\\sigma),$$ or equivalently $$g_\\#(\\sigma)-f_\\#(\\sigma)=\\partial P_H(\\sigma)+P_H(\\partial\\sigma).$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Singular simplices generate $C_n(X;\\mathbb Z)$, and the coefficient-$G$ version is obtained by tensor extension, so step 2.1 holds on all chains for every $n\\geq 1$, while step 1.1 handles degree $0$. Hence the stated identities hold in all degrees.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The singular chain homotopy formula, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 is the degree-zero branch, where the prism boundary has no side term and gives partial P_H = g_# - f_#."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The singular chain homotopy formula, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The singular chain homotopy formula, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 uses the top and bottom endpoint inclusions of the prism to identify the two boundary terms with g_#(sigma) and f_#(sigma)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The singular chain homotopy formula, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The singular chain homotopy formula, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The singular chain homotopy formula, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Friday, September 4, 2026 risk review: the load-bearing issue is the degree-0 branch of the prism identity. The current statement and proof split off n = 0 explicitly, use the repaired prism-boundary lemma for n >= 1, and only then tensor with coefficients, so the chain-homotopy formula is well typed in every degree."
+      }
+    },
+    "cor-homotopic-maps-induce-the-same-map-on-singular-homology": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-singular-chain-homotopy-formula",
+          "source_section": "Statement",
+          "quote": "Let $H:X\\times I\\to Y$ be a homotopy from $f$ to $g$. Then the prism operator\n$P_H$ of [[def-prism-operator-for-a-homotopy]] satisfies\n$$g_\\#-f_\\#=\\partial P_H+P_H\\partial$$\nas homomorphisms $C_n(X;G)\\to C_n(Y;G)$ for every $n\\geq 1$ and every abelian\ngroup $G$. In degree $0$, the same identity reduces to\n$$g_{\\#,0}-f_{\\#,0}=\\partial P_H:C_0(X;G)\\to C_0(Y;G).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-chain-homotopy",
+          "source_section": "Definition",
+          "quote": "Let $C_\\bullet,D_\\bullet$ be chain complexes in an abelian category\n$\\mathcal A$, and let $f,g:C_\\bullet\\to D_\\bullet$ be chain maps. A **chain homotopy**\n$s:f\\simeq g$ is a graded morphism of degree $1$,\n$$s_n:C_n\\to D_{n+1},$$\nsuch that for every $n\\in\\mathbb Z$,\n$$f_n-g_n=d^D_{n+1}s_n+s_{n-1}d^C_n.$$\n\nEquivalently, $f-g$ is the degree-$0$ boundary of the degree-$1$ family $s$ in\n[[def-hom-complex-of-chain-complexes]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-homotopic-maps-induce-the-same-map-on-homology",
+          "source_section": "Statement",
+          "quote": "If $f,g:C_\\bullet\\to D_\\bullet$ are chain-homotopic chain maps, then for every\n$n\\in\\mathbb Z$,\n$$H_n(f)=H_n(g):H_n(C)\\to H_n(D).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Extend the prism operator by $P_{H,-1}=0$ on the zero group $C_{-1}(X;G)$. By [L1], $$f_\\#-g_\\#=\\partial(-P_H)+(-P_H)\\partial,$$ so the family $-P_H$ satisfies the defining identity of [L2] for a chain homotopy from $f_\\#$ to $g_\\#$. Thus the two induced singular chain maps are chain-homotopic.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L3] to the singular chain complex yields $$H_n(f_\\#)=H_n(g_\\#)$$ for every $n\\geq 0$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Homotopic maps induce the same map on singular homology, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Homotopic maps induce the same map on singular homology, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Homotopic maps induce the same map on singular homology, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Homotopic maps induce the same map on singular homology, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Homotopic maps induce the same map on singular homology, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Homotopic maps induce the same map on singular homology, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Homotopic maps induce the same map on singular homology, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Homotopic maps induce the same map on singular homology, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Friday, September 4, 2026 risk review: the repaired risk was the sign convention for chain homotopy. The current proof uses the prism identity g_# - f_# = d P_H + P_H d and then takes -P_H as the chain homotopy from f_# to g_#, matching the repo's definition before applying homology invariance."
+      }
+    },
+    "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-homotopy-equivalence",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be topological spaces. A continuous map $f:X\\to Y$ is a **homotopy equivalence** if there is a continuous map $g:Y\\to X$ such that\n\n$$g\\circ f\\simeq\\operatorname{id}_X\\qquad\\text{and}\\qquad f\\circ g\\simeq\\operatorname{id}_Y$$\n\nin the sense of [[def-homotopy-relative-and-path-homotopy]]. Such a $g$ is a **homotopy inverse** of $f$.\n\nThe spaces $X$ and $Y$ have the **same homotopy type**, or are **homotopy equivalent**, written $X\\simeq Y$, when a homotopy equivalence $X\\to Y$ exists.\n\nThe equations required of an ordinary inverse have been weakened to homotopies. Neither composite need equal the corresponding identity map, and a homotopy equivalence need not be bijective.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-singular-chains-and-homology-are-covariantly-functorial",
+          "source_section": "Statement",
+          "quote": "For each abelian group $G$, the assignments\n$$X\\mapsto C_\\bullet(X;G),\\qquad f\\mapsto f_\\#$$\nand\n$$X\\mapsto H_n^{\\mathrm{sing}}(X;G),\\qquad f\\mapsto H_n(f_\\#)$$\ndefine covariant functors from topological spaces to chain complexes and to\nabelian groups, respectively. Equivalently,\n$$\\operatorname{id}_{X,\\#}=\\operatorname{id}_{C_\\bullet(X;G)},\\qquad (g\\circ f)_\\#=g_\\#\\circ f_\\#,$$\nand for every $n\\geq 0$,\n$$H_n((g\\circ f)_\\#)=H_n(g_\\#)\\circ H_n(f_\\#),\\qquad H_n(\\operatorname{id}_{X,\\#})=\\operatorname{id}_{H_n(X;G)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to Y$ are homotopic continuous maps, then for every $n\\geq 0$ and\nevery abelian group $G$ the induced homomorphisms on singular homology agree:\n$$H_n(f_\\#)=H_n(g_\\#):H_n^{\\mathrm{sing}}(X;G)\\to H_n^{\\mathrm{sing}}(Y;G).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose a homotopy inverse $g:Y\\to X$ with $g\\circ f\\simeq \\operatorname{id}_X$ and $f\\circ g\\simeq\\operatorname{id}_Y$. Applying [L3] gives $$H_n((g\\circ f)_\\#)=\\operatorname{id}_{H_n(X;G)},\\qquad H_n((f\\circ g)_\\#)=\\operatorname{id}_{H_n(Y;G)}.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], $$H_n((g\\circ f)_\\#)=H_n(g_\\#)\\circ H_n(f_\\#),\\qquad H_n((f\\circ g)_\\#)=H_n(f_\\#)\\circ H_n(g_\\#).$$ Combining this with step 1.1 shows that $H_n(g_\\#)$ and $H_n(f_\\#)$ are two-sided inverses. Hence $H_n(f_\\#)$ is an isomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Homotopy equivalences induce isomorphisms on singular homology, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Homotopy equivalences induce isomorphisms on singular homology, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Homotopy equivalences induce isomorphisms on singular homology, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Homotopy equivalences induce isomorphisms on singular homology, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Homotopy equivalences induce isomorphisms on singular homology, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Homotopy equivalences induce isomorphisms on singular homology, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Homotopy equivalences induce isomorphisms on singular homology, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Homotopy equivalences induce isomorphisms on singular homology, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "cor-contractible-nonempty-spaces-have-the-homology-of-a-point": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-contractible-iff-identity-nullhomotopic",
+          "source_section": "Statement",
+          "quote": "For a nonempty topological space $X$, the following are equivalent:\n\n1. $X$ is contractible.\n2. The identity map $\\operatorname{id}_X$ is nullhomotopic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-nullhomotopic-map-and-contractible-space",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be continuous. The map $f$ is **nullhomotopic** if there is a point $y_0\\in Y$ such that $f$ is homotopic to the constant map $c_{y_0}:X\\to Y$, $c_{y_0}(x)=y_0$ ([[def-homotopy-relative-and-path-homotopy]]).\n\nA nonempty topological space $X$ is **contractible** if every continuous map $f:X\\to Y$ to every topological space $Y$ is nullhomotopic.\n\nThis definition separates the property of the space from the particular map $\\operatorname{id}_X$. The next corollary proves that it is equivalent to the familiar condition that the identity map be nullhomotopic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is a homotopy equivalence, then for every $n\\geq 0$ and every\nabelian group $G$ the induced map\n$$H_n(f_\\#):H_n^{\\mathrm{sing}}(X;G)\\to H_n^{\\mathrm{sing}}(Y;G)$$\nis an isomorphism.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the identity map on $X$ is homotopic to the constant map at some point $x_0\\in X$. Let $p:X\\to\\ast$ be the unique map and let $i:\\ast\\to X$ send the point of $\\ast$ to $x_0$. Then $i\\circ p$ is the constant map at $x_0$, so $i\\circ p\\simeq\\operatorname{id}_X$, while $p\\circ i=\\operatorname{id}_\\ast$. Hence $X$ is homotopy equivalent to a point.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L3] to the map $p:X\\to\\ast$. It induces an isomorphism on every singular homology group, which is exactly the displayed conclusion.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes X is nonempty, so the empty-space case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Contractible nonempty spaces have the homology of a point, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Contractible nonempty spaces have the homology of a point, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Contractible nonempty spaces have the homology of a point, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Contractible nonempty spaces have the homology of a point, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses the chosen point x_0 supplied by nonemptiness to define the map from the point into X."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Contractible nonempty spaces have the homology of a point, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Contractible nonempty spaces have the homology of a point, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Friday, September 4, 2026 risk review: the risk is the based homotopy-equivalence step from contractibility to point homology. The current proof uses the nullhomotopy of id_X to build maps p:X->* and i:*->X with i o p homotopic to id_X and p o i = id_*, then applies the homotopy-equivalence theorem exactly once."
+      }
+    },
+    "prop-singular-homology-is-invariant-under-deformation-retracts": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-a-deformation-retract-is-a-homotopy-equivalence",
+          "source_section": "Statement",
+          "quote": "If $A$ is a deformation retract of $X$, with inclusion $i:A\\hookrightarrow X$ and retraction $r:X\\to A$, then $i$ is a homotopy equivalence and $r$ is a homotopy inverse of $i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is a homotopy equivalence, then for every $n\\geq 0$ and every\nabelian group $G$ the induced map\n$$H_n(f_\\#):H_n^{\\mathrm{sing}}(X;G)\\to H_n^{\\mathrm{sing}}(Y;G)$$\nis an isomorphism.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the inclusion $i$ is a homotopy equivalence.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] to $i$ gives the displayed isomorphism on singular homology in every degree.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Singular homology is invariant under deformation retracts, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Singular homology is invariant under deformation retracts, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Singular homology is invariant under deformation retracts, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Singular homology is invariant under deformation retracts, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Singular homology is invariant under deformation retracts, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Singular homology is invariant under deformation retracts, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Singular homology is invariant under deformation retracts, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Singular homology is invariant under deformation retracts, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "lem-singular-chain-cross-product-boundary-formula": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-singular-chain-cross-product-on-generators",
+          "source_section": "Definition",
+          "quote": "Let $\\sigma:\\Delta^p\\to X$ and $\\tau:\\Delta^q\\to Y$ be singular simplices. A\n$(p,q)$-**shuffle** is a permutation $\\theta$ of $\\{1,\\dots,p+q\\}$ such that\n$$\\theta(1)<\\cdots<\\theta(p)\\qquad\\text{and}\\qquad \\theta(p+1)<\\cdots<\\theta(p+q).$$\nEach shuffle determines a monotone lattice path from $(0,0)$ to $(p,q)$, hence\nan affine simplex\n$$\\lambda_\\theta:\\Delta^{p+q}\\to\\Delta^p\\times\\Delta^q$$\nwhose vertices are the successive vertices of that path in the product simplex.\n\nThe **singular chain cross product on generators** is\n$$\\sigma\\times\\tau:=\\sum_{\\theta\\in\\operatorname{Sh}(p,q)}\\operatorname{sgn}(\\theta)\\,(\\sigma\\times\\tau)\\circ\\lambda_\\theta\\in C_{p+q}(X\\times Y;\\mathbb Z),$$\nwhere $\\sigma\\times\\tau:\\Delta^p\\times\\Delta^q\\to X\\times Y$ is the product\nmap.\n\nExtend bilinearly to\n$$\\times:C_p(X;\\mathbb Z)\\times C_q(Y;\\mathbb Z)\\to C_{p+q}(X\\times Y;\\mathbb Z).$$\nFor $p=0$ or $q=0$, this agrees with the evident product of a point simplex and\nan arbitrary simplex.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-singular-boundary-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $n\\geq 1$. For a singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, its **singular boundary** is\n$$\\partial_n\\sigma:=\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\in C_{n-1}(X;\\mathbb Z),$$\nwhere the $\\delta_i$ are the affine face maps from\n[[def-singular-simplex-and-singular-chain-group-with-coefficients]].\n\nExtend this formula $\\mathbb Z$-linearly to a homomorphism\n$$\\partial_n:C_n(X;\\mathbb Z)\\to C_{n-1}(X;\\mathbb Z).$$\nFor coefficients in an abelian group $G$, the boundary on $C_n(X;G)$ is the\ntensor extension\n$$\\partial_n\\otimes\\operatorname{id}_G:C_n(X;G)\\to C_{n-1}(X;G),$$\nagain denoted $\\partial_n$.\n\nThe degree-zero boundary is the zero map\n$$\\partial_0:C_0(X;G)\\to 0,$$\nand for negative indices the chain groups are taken to be zero.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By bilinearity from [L1], it is enough to prove the formula for generators $a=\\sigma$ and $b=\\tau$, where $\\sigma:\\Delta^p\\to X$ and $\\tau:\\Delta^q\\to Y$ are singular simplices.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $p=0$, there is one $(0,q)$-shuffle, and the cross product is the evident product of the point simplex $\\sigma$ with $\\tau$. Restricting it to any face of $\\Delta^q$ gives the product of $\\sigma$ with the corresponding face of $\\tau$, so $\\partial(\\sigma\\times\\tau)=\\sigma\\times\\partial\\tau$. The same argument with the factors reversed gives $\\partial(\\sigma\\times\\tau)=\\partial\\sigma\\times\\tau$ when $q=0$. These are the stated formulas in the two boundary cases. Hence it remains to assume $p,q>0$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Expand $\\partial(\\sigma\\times\\tau)$ with [L1] and [L2]. A face deletes a vertex of a shuffle path. If the deleted vertex is internal and its two adjacent steps have different directions, the resulting diagonal face is shared by the shuffle obtained by interchanging those two steps. The two shuffles have opposite permutation signs, while the face occurs in the same boundary position, so these internal faces cancel in pairs.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the remaining assumption $p,q>0$, the uncancelled faces lie on the boundary of $\\Delta^p\\times\\Delta^q$. For the face in $\\partial_i\\Delta^p\\times\\Delta^q$, deleting the corresponding horizontal coordinate gives the shuffle chain for $(p-1,q)$ with boundary sign $(-1)^i$. For the face in $\\Delta^p\\times\\partial_j\\Delta^q$, the $p$ horizontal directions precede the boundary sign $(-1)^j$, giving the total sign $(-1)^{p+j}$. Consequently the universal shuffle chain satisfies $$\\partial\\operatorname{EZ}_{p,q}=\\sum_{i=0}^p(-1)^i(\\delta_i\\times1)_\\#\\operatorname{EZ}_{p-1,q}+(-1)^p\\sum_{j=0}^q(-1)^j(1\\times\\delta_j)_\\#\\operatorname{EZ}_{p,q-1}.$$ Postcomposing with $\\sigma\\times\\tau$ gives $$\\partial(\\sigma\\times\\tau)=\\partial\\sigma\\times\\tau+(-1)^p\\sigma\\times\\partial\\tau.$$",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 3.1 extends by bilinearity to the stated formula for arbitrary integral chains $a$ and $b$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The singular chain cross product satisfies the boundary formula, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the statement records the p = 0 and q = 0 conventions explicitly by omitting the corresponding zero term."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The singular chain cross product satisfies the boundary formula, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The singular chain cross product satisfies the boundary formula, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The singular chain cross product satisfies the boundary formula, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The singular chain cross product satisfies the boundary formula, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The singular chain cross product satisfies the boundary formula, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The singular chain cross product satisfies the boundary formula, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Final-adjudicator review on September 5, 2026: step 2.1 now proves the p = 0 and q = 0 cases directly, step 2.2 pairs and cancels internal diagonal faces, and step 3.1 invokes lower-dimensional shuffle chains only after assuming p,q > 0 while deriving the horizontal and vertical boundary signs."
+      }
+    },
+    "prop-singular-chain-cross-products-are-natural": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-singular-chain-cross-product-on-generators",
+          "source_section": "Definition",
+          "quote": "Let $\\sigma:\\Delta^p\\to X$ and $\\tau:\\Delta^q\\to Y$ be singular simplices. A\n$(p,q)$-**shuffle** is a permutation $\\theta$ of $\\{1,\\dots,p+q\\}$ such that\n$$\\theta(1)<\\cdots<\\theta(p)\\qquad\\text{and}\\qquad \\theta(p+1)<\\cdots<\\theta(p+q).$$\nEach shuffle determines a monotone lattice path from $(0,0)$ to $(p,q)$, hence\nan affine simplex\n$$\\lambda_\\theta:\\Delta^{p+q}\\to\\Delta^p\\times\\Delta^q$$\nwhose vertices are the successive vertices of that path in the product simplex.\n\nThe **singular chain cross product on generators** is\n$$\\sigma\\times\\tau:=\\sum_{\\theta\\in\\operatorname{Sh}(p,q)}\\operatorname{sgn}(\\theta)\\,(\\sigma\\times\\tau)\\circ\\lambda_\\theta\\in C_{p+q}(X\\times Y;\\mathbb Z),$$\nwhere $\\sigma\\times\\tau:\\Delta^p\\times\\Delta^q\\to X\\times Y$ is the product\nmap.\n\nExtend bilinearly to\n$$\\times:C_p(X;\\mathbb Z)\\times C_q(Y;\\mathbb Z)\\to C_{p+q}(X\\times Y;\\mathbb Z).$$\nFor $p=0$ or $q=0$, this agrees with the evident product of a point simplex and\nan arbitrary simplex.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-induced-singular-chain-map",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map of topological spaces. For each $n\\geq 0$,\nthe **induced singular chain map in degree $n$** is the homomorphism\n$$f_{\\#,n}:C_n(X;\\mathbb Z)\\to C_n(Y;\\mathbb Z)$$\ndefined on a singular simplex $\\sigma:\\Delta^n\\to X$ by\n$$f_{\\#,n}(\\sigma):=f\\circ\\sigma,$$\nand extended $\\mathbb Z$-linearly.\n\nFor coefficients in an abelian group $G$, tensor with\n$\\operatorname{id}_G$ to obtain\n$$f_{\\#,n}:C_n(X;G)\\to C_n(Y;G).$$\nThe family $(f_{\\#,n})_{n\\geq 0}$ is denoted $f_\\#:C_\\bullet(X;G)\\to\nC_\\bullet(Y;G)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By bilinearity from [L1], it is enough to prove the identity for generators $a=\\sigma$ and $b=\\tau$. For each shuffle simplex $\\lambda_\\theta$, [L2] gives $$ (f\\times g)_\\#\\bigl((\\sigma\\times\\tau)\\circ\\lambda_\\theta\\bigr)=((f\\circ\\sigma)\\times(g\\circ\\tau))\\circ\\lambda_\\theta. $$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Summing the equality of step 1.1 over all shuffles with the same signs as in [L1] yields $$(f\\times g)_\\#(\\sigma\\times\\tau)=(f_\\#\\sigma)\\times(g_\\#\\tau).$$ Extending bilinearly gives the formula for arbitrary integral chains.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Singular chain cross products are natural, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Singular chain cross products are natural, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Singular chain cross products are natural, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Singular chain cross products are natural, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Singular chain cross products are natural, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Singular chain cross products are natural, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Singular chain cross products are natural, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Singular chain cross products are natural, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "lem-simplicial-to-singular-chains-commute-with-boundaries": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-simplicial-to-singular-chain-map",
+          "source_section": "Definition",
+          "quote": "Let $K$ be an abstract simplicial complex whose vertex set is equipped with a\ntotal order. For each oriented $n$-simplex $\\tau$ of $K$, let\n$[v_0<\\cdots<v_n]$ be the increasing ordering of its vertices and let\n$\\varepsilon(\\tau)\\in\\{\\pm1\\}$ be the sign for which\n$$\\tau=\\varepsilon(\\tau)[v_0,\\dots,v_n]$$\nin the simplicial chain group from\n[[def-simplicial-chain-groups-and-boundary]]. For each $n\\geq 0$, the\n**simplicial-to-singular homomorphism**\n$$\\Phi_n:C_n^{\\mathrm{simp}}(K)\\to C_n^{\\mathrm{sing}}(|K|;\\mathbb Z)$$\nis defined on an oriented simplex $\\tau$ by\n$$\\Phi_n(\\tau):=\\varepsilon(\\tau)\\,\\chi_{[v_0,\\dots,v_n]},$$\nwhere $\\chi_{[v_0,\\dots,v_n]}$ is the affine characteristic singular simplex\nfrom [[def-fundamental-singular-cycle-of-an-oriented-simplex]], and then\nextended linearly.\n\nBecause the increasing representative of each simplex is unique, the sign\n$\\varepsilon(\\tau)$ is well defined. Thus $\\Phi_n$ is a well-defined homomorphism\nwith no ambiguity from reordering the vertices. The next lemma proves that the\nfamily $(\\Phi_n)$ commutes with the two boundaries and hence is a chain map.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-singular-boundary-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $n\\geq 1$. For a singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, its **singular boundary** is\n$$\\partial_n\\sigma:=\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\in C_{n-1}(X;\\mathbb Z),$$\nwhere the $\\delta_i$ are the affine face maps from\n[[def-singular-simplex-and-singular-chain-group-with-coefficients]].\n\nExtend this formula $\\mathbb Z$-linearly to a homomorphism\n$$\\partial_n:C_n(X;\\mathbb Z)\\to C_{n-1}(X;\\mathbb Z).$$\nFor coefficients in an abelian group $G$, the boundary on $C_n(X;G)$ is the\ntensor extension\n$$\\partial_n\\otimes\\operatorname{id}_G:C_n(X;G)\\to C_{n-1}(X;G),$$\nagain denoted $\\partial_n$.\n\nThe degree-zero boundary is the zero map\n$$\\partial_0:C_0(X;G)\\to 0,$$\nand for negative indices the chain groups are taken to be zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-simplicial-chain-groups-and-boundary",
+          "source_section": "Definition",
+          "quote": "For an abstract simplicial complex $K$ and an integer $n \\geq 0$, the\n**simplicial chain group** $C_n(K)$ is the free abelian group generated by the\noriented $n$-simplices of $K$, subject to the relation\n$$[v_{\\pi(0)},\\dots,v_{\\pi(n)}]=\\operatorname{sgn}(\\pi)[v_0,\\dots,v_n]$$\nfor every permutation $\\pi$ of the vertices of a simplex. For $n<0$, set\n$C_n(K)=0$.\n\nThe **boundary operator**\n$$\\partial_n:C_n(K)\\to C_{n-1}(K)$$\nis $\\partial_0=0$ in degree $0$. For $n\\geq1$, it is defined on an oriented\nsimplex by\n$$\\partial_n[v_0,\\dots,v_n]=\\sum_{i=0}^n (-1)^i [v_0,\\dots,\\widehat{v_i},\\dots,v_n].$$\n\nThe well-definedness of this formula with respect to the chosen oriented\nrepresentative is recorded in\n[[lem-simplicial-boundary-is-independent-of-oriented-representative]] through\n`justified_by`.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n=0$, then both $\\partial^{\\mathrm{sing}}$ and $\\partial^{\\mathrm{simp}}$ are zero maps in degree $0$, so the degree-zero claim is immediate.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $n\\geq 1$ and let $\\sigma=[v_0,\\dots,v_n]$ be the increasing representative of an oriented simplex of $K$. By [L1], the singular chain $\\Phi_n(\\sigma)$ is the affine characteristic simplex $\\chi_{[v_0,\\dots,v_n]}$. Restricting along the face map $\\delta_i$ therefore produces the affine characteristic simplex of the face $[v_0,\\dots,\\widehat v_i,\\dots,v_n]$, listed in the induced increasing order.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] and [L3] to step 1.2 gives $$\\partial^{\\mathrm{sing}}\\Phi_n(\\sigma)=\\sum_{i=0}^n(-1)^i\\Phi_{n-1}([v_0,\\dots,\\widehat v_i,\\dots,v_n])=\\Phi_{n-1}\\partial^{\\mathrm{simp}}(\\sigma)$$ for the increasing representative. The same overall orientation sign $\\varepsilon(\\tau)$ from [L1] multiplies both sides for an arbitrary oriented simplex $\\tau$, so the identity holds on every generator and hence on all simplicial chains by linearity; step 1.1 handles degree $0$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The simplicial-to-singular chain map commutes with boundaries, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles degree 0 directly because both simplicial and singular boundaries vanish there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The simplicial-to-singular chain map commutes with boundaries, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The simplicial-to-singular chain map commutes with boundaries, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The simplicial-to-singular chain map commutes with boundaries, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The simplicial-to-singular chain map commutes with boundaries, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The simplicial-to-singular chain map commutes with boundaries, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The simplicial-to-singular chain map commutes with boundaries, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-singular-chain-complex-of-a-point": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-zero-simplex-augmentation-and-reduced-singular-homology",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $G$ be an abelian group. The\n**augmentation at 0-simplices** is the homomorphism\n$$\\varepsilon_X:C_0(X;G)\\to G$$\ndefined by\n$$\\varepsilon_X(\\sigma\\otimes g)=g$$\nfor every singular $0$-simplex $\\sigma:\\Delta^0\\to X$, and extended linearly.\n\nThe **reduced singular chain complex** $\\widetilde C_\\bullet(X;G)$ is obtained\nfrom the singular chain complex by replacing degree $0$ with the kernel of the\naugmentation:\n$$\\widetilde C_n(X;G):=\n\\begin{cases}\nC_n(X;G),& n\\geq 1,\\\\\n\\ker\\varepsilon_X,& n=0,\\\\\n0,& n<0.\n\\end{cases}$$\nIts differential is the singular boundary in degrees $\\geq 1$ and the zero map\n$\\widetilde C_0(X;G)\\to 0$ in degree $0$.\n\nThe **reduced singular homology groups** are\n$$\\widetilde H_n^{\\mathrm{sing}}(X;G):=H_n(\\widetilde C_\\bullet(X;G)).$$\nFor the empty space, this convention leaves $\\widetilde C_0(\\varnothing;G)=0$,\nso $\\widetilde H_n^{\\mathrm{sing}}(\\varnothing;G)=0$ for all $n\\geq 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-singular-boundary-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $n\\geq 1$. For a singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, its **singular boundary** is\n$$\\partial_n\\sigma:=\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\in C_{n-1}(X;\\mathbb Z),$$\nwhere the $\\delta_i$ are the affine face maps from\n[[def-singular-simplex-and-singular-chain-group-with-coefficients]].\n\nExtend this formula $\\mathbb Z$-linearly to a homomorphism\n$$\\partial_n:C_n(X;\\mathbb Z)\\to C_{n-1}(X;\\mathbb Z).$$\nFor coefficients in an abelian group $G$, the boundary on $C_n(X;G)$ is the\ntensor extension\n$$\\partial_n\\otimes\\operatorname{id}_G:C_n(X;G)\\to C_{n-1}(X;G),$$\nagain denoted $\\partial_n$.\n\nThe degree-zero boundary is the zero map\n$$\\partial_0:C_0(X;G)\\to 0,$$\nand for negative indices the chain groups are taken to be zero.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every map $\\Delta^n\\to\\ast$ is the same constant map $c_n$, so each chain group is free of rank one on $c_n$. By [L2], $\\partial_0=0$, and for $n\\geq 1$ one has $$\\partial_n(c_n)=\\sum_{i=0}^n(-1)^ic_{n-1},$$ which is $0$ for odd $n$ and $c_{n-1}$ for even $n$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $\\ker\\partial_n=0$ for even $n\\geq 2$ and $\\ker\\partial_n=\\mathbb Z[c_n]=\\operatorname{im}\\partial_{n+1}$ for odd $n\\geq 1$, so $H_n^{\\mathrm{sing}}(\\ast;\\mathbb Z)=0$ for all $n>0$. Also $H_0^{\\mathrm{sing}}(\\ast;\\mathbb Z)\\cong\\mathbb Z[c_0]\\cong\\mathbb Z$. Since the augmentation of [L1] sends $c_0$ to $1$, its kernel is $0$, so the reduced degree-zero group also vanishes.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The singular chain complex of a point, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles the degree-zero simplex separately, using the explicit formula partial_0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 computes the n = 1 boundary of the unique 1-simplex as zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 treats the fully degenerate situation where every singular simplex in a point is constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The singular chain complex of a point, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The singular chain complex of a point, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The singular chain complex of a point, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The singular chain complex of a point, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-boundaries-of-the-standard-one-and-two-simplices": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-standard-topological-simplex-and-its-affine-face-maps",
+          "source_section": "Definition",
+          "quote": "For each integer $n\\geq 0$, the **standard topological $n$-simplex** is\n$$\\Delta^n:=\\left\\{(t_0,\\dots,t_n)\\in\\mathbb R^{n+1}: t_i\\geq 0\\text{ for all }i,\\ \\sum_{i=0}^n t_i=1\\right\\},$$\nwith the subspace topology from $\\mathbb R^{n+1}$. Its vertices are the\nstandard basis vectors $v_0,\\dots,v_n$.\n\nFor $n\\geq 1$ and $0\\leq i\\leq n$, the **$i$th affine face map**\n$$\\delta_i:\\Delta^{n-1}\\to\\Delta^n$$\nis the continuous affine map that inserts a zero in the $i$th coordinate:\n$$\\delta_i(t_0,\\dots,t_{n-1})=(t_0,\\dots,t_{i-1},0,t_i,\\dots,t_{n-1}).$$\nEquivalently, $\\delta_i$ carries the vertex $v_k$ of $\\Delta^{n-1}$ to $v_k$\nfor $k<i$ and to $v_{k+1}$ for $k\\geq i$, so its image is the face opposite\nthe vertex $v_i$.\n\nFor $n=0$ there are no face maps because $\\Delta^{-1}$ is not part of the\nchain-level indexing used on this page.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-singular-boundary-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $n\\geq 1$. For a singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, its **singular boundary** is\n$$\\partial_n\\sigma:=\\sum_{i=0}^n(-1)^i\\sigma\\circ\\delta_i\\in C_{n-1}(X;\\mathbb Z),$$\nwhere the $\\delta_i$ are the affine face maps from\n[[def-singular-simplex-and-singular-chain-group-with-coefficients]].\n\nExtend this formula $\\mathbb Z$-linearly to a homomorphism\n$$\\partial_n:C_n(X;\\mathbb Z)\\to C_{n-1}(X;\\mathbb Z).$$\nFor coefficients in an abelian group $G$, the boundary on $C_n(X;G)$ is the\ntensor extension\n$$\\partial_n\\otimes\\operatorname{id}_G:C_n(X;G)\\to C_{n-1}(X;G),$$\nagain denoted $\\partial_n$.\n\nThe degree-zero boundary is the zero map\n$$\\partial_0:C_0(X;G)\\to 0,$$\nand for negative indices the chain groups are taken to be zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the two face maps of $\\Delta^1$ pick out the terminal and initial vertices of the interval. Therefore [L2] gives $$\\partial\\iota_1=\\iota_1\\delta_0-\\iota_1\\delta_1=v_1-v_0.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Again by [L1], the three face maps of $\\Delta^2$ are the affine inclusions of the three edges opposite $v_0$, $v_1$, and $v_2$. Applying [L2] gives the displayed alternating sum $$\\partial\\iota_2=\\iota_2\\delta_0-\\iota_2\\delta_1+\\iota_2\\delta_2.$$",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Boundaries of the standard one- and two-simplices, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Boundaries of the standard one- and two-simplices, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 computes the boundary of the standard 1-simplex explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Boundaries of the standard one- and two-simplices, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Boundaries of the standard one- and two-simplices, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Boundaries of the standard one- and two-simplices, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Boundaries of the standard one- and two-simplices, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Boundaries of the standard one- and two-simplices, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-boundaries-of-the-standard-one-and-two-simplices",
+          "source_section": "Example",
+          "quote": "Let $\\iota_1:\\Delta^1\\to\\Delta^1$ and $\\iota_2:\\Delta^2\\to\\Delta^2$ be the\nidentity singular simplices.\n\nTheir singular boundaries are\n$$\\partial\\iota_1=\\iota_1\\delta_0-\\iota_1\\delta_1=v_1-v_0$$\nand\n$$\\partial\\iota_2=\\iota_2\\delta_0-\\iota_2\\delta_1+\\iota_2\\delta_2,$$\nthe alternating sum of the three oriented edges of the standard triangle.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-singular-boundary-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For every topological space $X$, every abelian group $G$, and every integer\n$n\\geq 1$,\n$$\\partial_{n-1}\\partial_n=0:C_n(X;G)\\to C_{n-2}(X;G).$$\nIn degree $0$, the boundary is already the zero map.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding [L1] once more gives $$\\partial^2\\iota_2=\\partial(v_1v_2)-\\partial(v_0v_2)+\\partial(v_0v_1) =(v_2-v_1)-(v_2-v_0)+(v_1-v_0),$$ where each edge boundary is the degree-one formula from the previous example.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The three positive and three negative vertex terms cancel pairwise, so the sum is $0$, exactly as predicted by [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Direct cancellation in the boundary squared of a two-simplex, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Direct cancellation in the boundary squared of a two-simplex, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Direct cancellation in the boundary squared of a two-simplex, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Direct cancellation in the boundary squared of a two-simplex, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Direct cancellation in the boundary squared of a two-simplex, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Direct cancellation in the boundary squared of a two-simplex, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Direct cancellation in the boundary squared of a two-simplex, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Direct cancellation in the boundary squared of a two-simplex, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-the-prism-operator-for-a-path-homotopy": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-homotopy-relative-and-path-homotopy",
+          "source_section": "Definition",
+          "quote": "Write $I=[0,1]$ with its usual subspace topology, as in [[def-path-connected]]. Let $X$ and $Y$ be topological spaces, and let $f,g:X\\to Y$ be continuous maps ([[def-continuous-map-top]]).\n\nA **homotopy from $f$ to $g$** is a continuous map\n\n$$H:X\\times I\\longrightarrow Y$$\n\nfrom the product space ([[def-product-topology]]) such that $H(x,0)=f(x)$ and $H(x,1)=g(x)$ for every $x\\in X$. When such an $H$ exists, $f$ and $g$ are **homotopic**, written $f\\simeq g$.\n\nLet $A\\subseteq X$ carry the subspace topology ([[def-subspace-topology-top]]). The homotopy $H$ is a **homotopy relative to $A$**, or a homotopy **rel $A$**, when\n\n$$H(a,t)=f(a)=g(a)\\qquad(a\\in A,\\ t\\in I).$$\n\nThus a homotopy rel $A$ can exist only when $f|_A=g|_A$, and every ordinary homotopy is a homotopy rel $\\varnothing$. We write $f\\simeq_A g$ when a homotopy rel $A$ exists.\n\nIf $\\alpha,\\beta:I\\to Y$ are paths with the same initial point and the same terminal point ([[def-path-connected]]), a **path homotopy from $\\alpha$ to $\\beta$ relative to the endpoints** is a homotopy $H:I\\times I\\to Y$ rel $\\{0,1\\}$. Explicitly,\n\n$$H(s,0)=\\alpha(s),\\quad H(s,1)=\\beta(s),\\quad H(0,t)=\\alpha(0)=\\beta(0),\\quad H(1,t)=\\alpha(1)=\\beta(1).$$\n\nThe first coordinate $s$ parametrises the path and the second coordinate $t$ parametrises the deformation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-prism-operator-for-a-homotopy",
+          "source_section": "Definition",
+          "quote": "Let $H:X\\times I\\to Y$ be a homotopy from $f$ to $g$ in the sense of\n[[def-homotopy-relative-and-path-homotopy]]. For each singular $n$-simplex\n$\\sigma:\\Delta^n\\to X$, write\n$$\\sigma\\times\\operatorname{id}_I:\\Delta^n\\times I\\to X\\times I,\\qquad (u,t)\\mapsto(\\sigma(u),t).$$\n\nFor each $0\\leq i\\leq n$, let\n$$\\lambda_i:\\Delta^{n+1}\\to\\Delta^n\\times I$$\nbe the affine map sending the vertices of $\\Delta^{n+1}$ to\n$$(v_0,0),\\dots,(v_i,0),(v_i,1),(v_{i+1},1),\\dots,(v_n,1).$$\nIn barycentric coordinates this is\n$$\\lambda_i(t_0,\\dots,t_{n+1})=\\bigl(s_0,\\dots,s_n,\\ t_{i+1}+\\cdots+t_{n+1}\\bigr),$$\nwhere\n$$s_k=\n\\begin{cases}\nt_k,& k<i,\\\\\nt_i+t_{i+1},& k=i,\\\\\nt_{k+1},& k>i.\n\\end{cases}$$\n\nThe **prism operator** determined by $H$ is the degree-$1$ homomorphism\n$$P_H:C_n(X;\\mathbb Z)\\to C_{n+1}(Y;\\mathbb Z)$$\ndefined on a singular simplex by\n$$P_H(\\sigma):=\\sum_{i=0}^n(-1)^i\\,H\\circ(\\sigma\\times\\operatorname{id}_I)\\circ\\lambda_i,$$\nand extended linearly. For coefficients in an abelian group $G$, tensor with\n$\\operatorname{id}_G$ to obtain\n$$P_H:C_n(X;G)\\to C_{n+1}(Y;G).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-singular-chain-homotopy-formula",
+          "source_section": "Statement",
+          "quote": "Let $H:X\\times I\\to Y$ be a homotopy from $f$ to $g$. Then the prism operator\n$P_H$ of [[def-prism-operator-for-a-homotopy]] satisfies\n$$g_\\#-f_\\#=\\partial P_H+P_H\\partial$$\nas homomorphisms $C_n(X;G)\\to C_n(Y;G)$ for every $n\\geq 1$ and every abelian\ngroup $G$. In degree $0$, the same identity reduces to\n$$g_{\\#,0}-f_{\\#,0}=\\partial P_H:C_0(X;G)\\to C_0(Y;G).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], $P_H(\\iota_1)$ is the sum of the two oriented triangles obtained from the standard triangulation of the square $I\\times I$. Applying [L3] to the singular simplex $\\iota_1$ gives $$\\partial P_H(\\iota_1)=\\beta-\\alpha-P_H(\\partial\\iota_1).$$",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The chain $\\partial\\iota_1$ is the terminal vertex minus the initial vertex. By [L1], each of those vertices traces a constant path under $H$, so $P_H(\\partial\\iota_1)=0$. Therefore step 1.1 reduces to $$\\partial P_H(\\iota_1)=\\beta-\\alpha,$$ which is the announced low-dimensional prism formula.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The prism operator for a path homotopy, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The prism operator for a path homotopy, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The prism operator for a path homotopy, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The prism operator for a path homotopy, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 uses that a path homotopy relative to {0,1} makes both endpoint tracks constant, so the side-prism terms vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The prism operator for a path homotopy, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The prism operator for a path homotopy, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The prism operator for a path homotopy, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-homology-of-an-interval-from-contractibility": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-convex-subsets-of-rn-are-contractible",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. Every nonempty convex subset $C\\subseteq\\mathbb R^n$, with its Euclidean subspace topology, is contractible. More precisely, for each $c\\in C$ the formula\n\n$$H(x,t)=(1-t)x+tc$$\n\nis a homotopy from $\\operatorname{id}_C$ to the constant map at $c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "source_section": "Statement",
+          "quote": "If $X$ is a nonempty contractible topological space, then for every $n\\geq 0$\nand every abelian group $G$,\n$$H_n^{\\mathrm{sing}}(X;G)\\cong H_n^{\\mathrm{sing}}(\\ast;G),$$\nwhere $\\ast$ denotes a one-point space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "ex-singular-chain-complex-of-a-point",
+          "source_section": "Example",
+          "quote": "Let $\\ast$ be a one-point space. For each $n\\geq 0$ there is exactly one\nsingular $n$-simplex $c_n:\\Delta^n\\to\\ast$, so\n$$C_n(\\ast;\\mathbb Z)\\cong\\mathbb Z[c_n].$$\nMoreover $\\partial_0(c_0)=0$, and for $n\\geq 1$\n$$\\partial_n(c_n)=\\left(\\sum_{i=0}^n(-1)^i\\right)c_{n-1}=\n\\begin{cases}\n0,& n\\text{ odd},\\\\\nc_{n-1},& n\\text{ even}.\n\\end{cases}$$\n\nHence $H_0^{\\mathrm{sing}}(\\ast;\\mathbb Z)\\cong\\mathbb Z$, all higher singular\nhomology groups vanish, and the reduced singular homology groups are zero in\nevery degree.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The interval $I$ is a nonempty convex subset of $\\mathbb R$, so [L1] makes it contractible.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], $I$ has the same singular homology groups as a point. Substituting the computation from [L3] gives the displayed formulas for ordinary and reduced singular homology.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The homology of an interval from contractibility, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The homology of an interval from contractibility, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The homology of an interval from contractibility, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The homology of an interval from contractibility, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The homology of an interval from contractibility, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The homology of an interval from contractibility, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The homology of an interval from contractibility, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The homology of an interval from contractibility, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-homology-of-punctured-euclidean-space-by-deformation-retraction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-punctured-rn-deformation-retracts-onto-the-sphere",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, put $P=\\mathbb R^n\\setminus\\{0\\}$, and let $S^{n-1}\\subseteq P$ be the unit sphere. Radial normalisation\n\n$$r:P\\to S^{n-1},\\qquad r(x)=\\frac{x}{\\lVert x\\rVert_2},$$\n\nis a retraction, and\n\n$$H(x,t)=\\left((1-t)+\\frac{t}{\\lVert x\\rVert_2}\\right)x$$\n\nis a deformation retraction of $P$ onto $S^{n-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-singular-homology-is-invariant-under-deformation-retracts",
+          "source_section": "Statement",
+          "quote": "If $A$ is a deformation retract of a topological space $X$, then for every\n$n\\geq 0$ and every abelian group $G$ the inclusion $i:A\\hookrightarrow X$\ninduces an isomorphism\n$$H_n^{\\mathrm{sing}}(i_\\#):H_n^{\\mathrm{sing}}(A;G)\\to H_n^{\\mathrm{sing}}(X;G).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the sphere inclusion $S^{n-1}\\hookrightarrow\\mathbb R^n\\setminus\\{0\\}$ is a deformation retract inclusion.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] to that inclusion gives isomorphisms on singular homology in every degree, which is exactly the displayed statement.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In The homology of punctured Euclidean space by deformation retraction, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes n >= 1 because S^(n-1) is the deformation-retract target; n = 0 is outside the stated range."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In The homology of punctured Euclidean space by deformation retraction, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The homology of punctured Euclidean space by deformation retraction, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In The homology of punctured Euclidean space by deformation retraction, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The homology of punctured Euclidean space by deformation retraction, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The homology of punctured Euclidean space by deformation retraction, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The homology of punctured Euclidean space by deformation retraction, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "cex-equal-homology-does-not-imply-homotopy-equivalence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-fundamental-group-of-two-dimensional-torus",
+          "source_section": "Statement",
+          "quote": "For $T^2=(\\mathbb R/\\mathbb Z)^2$ pointed at $([0],[0])$,\n\n$$\\pi_1(T^2,([0],[0]))\\cong(\\mathbb Z,+)\\times(\\mathbb Z,+).$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-fundamental-group-of-two-circle-wedge",
+          "source_section": "Statement",
+          "quote": "For the wedge of two quotient circles, the fundamental group at the wedge point is the free group $F(a,b)$ on the two standard once-around loop classes $a$ and $b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-higher-dimensional-spheres-are-simply-connected",
+          "source_section": "Statement",
+          "quote": "For every natural number $n\\ge2$, the unit sphere $S^n\\subseteq\\mathbb R^{n+1}$ is simply connected ([[def-simply-connected]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-seifert-van-kampen-simply-connected-overlap",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-seifert-van-kampen]], if $U\\cap V$ is simply connected, then the inclusion-induced homomorphisms give an isomorphism\n\n$$\\pi_1(U,x_0)*\\pi_1(V,x_0)\\cong\\pi_1(X,x_0).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "prop-retracts-inject-fundamental-groups",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq X$, let $i:A\\hookrightarrow X$ be the inclusion, and choose $a\\in A$. If $A$ is a retract of $X$ ([[def-retraction-and-deformation-retract]]), then\n\n$$i_*:\\pi_1(A,a)\\longrightarrow\\pi_1(X,a)$$\n\nis injective. If $A$ is a deformation retract of $X$, the inclusion and retraction induce mutually inverse fundamental-group isomorphisms at every basepoint of $A$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-induced-fundamental-group-map-functoriality",
+          "source_section": "Statement",
+          "quote": "Let $f:(X,x_0)\\to(Y,y_0)$ be a continuous map with $f(x_0)=y_0$. Then\n\n$$f_*([\\alpha])=[f\\circ\\alpha]$$\n\nis a well-defined group homomorphism. For pointed continuous maps,\n\n$$\\operatorname{id}_*=\\operatorname{id},\\qquad (g\\circ f)_*=g_*\\circ f_*.$$\n\nIf $f_0,f_1:(X,x_0)\\to(Y,y_0)$ are homotopic through a homotopy that keeps\n$x_0$ at $y_0$, then $(f_0)_*=(f_1)_*$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-wedge-of-pointed-spaces",
+          "source_section": "Definition",
+          "quote": "Let $((X_i,x_i))_{i\\in I}$ be a family of pointed topological spaces. On the tagged disjoint union $\\coprod_{i\\in I}X_i$ ([[def-disjoint-union-topology]]), define\n\n$$ (x,i)\\sim(y,j)\\quad\\Longleftrightarrow\\quad (x,i)=(y,j)\\ \\text{ or }\\ (x=x_i\\ \\text{ and }\\ y=x_j). $$\n\nThis relation is reflexive and symmetric. For transitivity, the only nontrivial case has two related pairs that are not equal; then every point appearing is its summand's basepoint, so the first and third points are related as well. Thus $\\sim$ is an equivalence relation.\n\nFor nonempty $I$, the **wedge** is the quotient space\n\n$$ \\bigvee_{i\\in I}(X_i,x_i):=\\left(\\coprod_{i\\in I}X_i\\right)\\!\\big/\\sim $$\n\nwith the quotient topology ([[def-quotient-topology]]). The common equivalence class of the tagged basepoints is the **wedge point**, which makes the quotient pointed. The relation identifies no other points.\n\nThe wedge of the empty family is defined to be a one-point space, pointed at its sole element. For a pair one writes $(X,x_0)\\vee(Y,y_0)$, and for $r\\in\\mathbb N$ one writes $\\bigvee_{j<r}(X_j,x_j)$. In particular, the empty finite wedge is a point rather than an empty space.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], the spaces $X$ and $Y$ have isomorphic singular homology groups in every degree, so the refuted claim's hypothesis holds for this pair.",
+          "step": "1.1",
+          "inputs": [
+            "A1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $W_2:=S^1\\vee S^1$ and let $q:W_2\\sqcup S^2\\to Y$ be the quotient map from [L7], with both basepoints identified to $y_0\\in Y$. Choose a small open disk $D\\subseteq S^2$ around the sphere basepoint and small open arcs $O_1,O_2$ around the wedge point in the two circle summands of $W_2$. Put $$U:=q(W_2\\sqcup D),\\qquad V:=q((O_1\\cup O_2)\\sqcup S^2).$$ By the quotient description in [L7], these are open path-connected subsets of $Y$ covering $Y$. The set $U$ deformation retracts onto $W_2$ by contracting $D$ to $y_0$, the set $V$ deformation retracts onto $S^2$ by contracting the two arcs to $y_0$, and the overlap $U\\cap V=q((O_1\\cup O_2)\\sqcup D)$ deformation retracts onto $y_0$.",
+          "step": "1.2",
+          "inputs": [
+            "L7",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [L1], $\\pi_1(X,([0],[0]))\\cong\\mathbb Z^2$. The group $\\mathbb Z^2$ is abelian, while $F_2$ is not abelian because the reduced words $ab$ and $ba$ are distinct. Hence $\\pi_1(X,([0],[0]))\\not\\cong\\pi_1(Y,y_0)$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2] and [L5], the deformation retraction in step 1.2 gives $\\pi_1(U,y_0)\\cong F_2$. By [L3] and [L5], the corresponding deformation retraction gives $\\pi_1(V,y_0)=1$. Since $U\\cap V$ deformation retracts to the point $y_0$, it is simply connected. Applying [L4] to the open cover $Y=U\\cup V$ therefore yields $$\\pi_1(Y,y_0)\\cong\\pi_1(U,y_0)*\\pi_1(V,y_0)\\cong F_2.$$",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $X$ and $Y$ were homotopy equivalent, choose homotopy inverse maps $h:X\\to Y$ and $k:Y\\to X$, together with homotopies $H:k\\circ h\\simeq\\operatorname{id}_X$ and $K:h\\circ k\\simeq\\operatorname{id}_Y$. Put $\\beta(t):=H(([0],[0]),t)$ and $\\gamma(t):=K(y_0,t)$. [L6, step 1.3, construct]\nFor any path $\\rho$ from $a$ to $b$, the assignment $[\\alpha]\\mapsto[\\bar\\rho*\\alpha*\\rho]$ transports loop classes from $\\pi_1(X,a)$ to $\\pi_1(X,b)$, and reversing $\\rho$ gives the inverse transport because the inserted pairs $\\rho*\\bar\\rho$ and $\\bar\\rho*\\rho$ contract to constant loops. Applying this to $\\beta$ and $\\gamma$ yields isomorphisms\n$$\\beta_\\#:\\pi_1(X,k(h(([0],[0]))))\\xrightarrow{\\sim}\\pi_1(X,([0],[0])),\\qquad \\gamma_\\#:\\pi_1(Y,h(k(y_0)))\\xrightarrow{\\sim}\\pi_1(Y,y_0).$$\nThe maps $h:(X,([0],[0]))\\to(Y,h(([0],[0])))$ and $k:(Y,y_0)\\to(X,k(y_0))$ are pointed, so [L6] gives induced homomorphisms on fundamental groups. Precomposing $H$ and $K$ with based loops and then transporting the moving basepoints by $\\beta_\\#$ and $\\gamma_\\#$ shows that these induced homomorphisms are inverse isomorphisms up to the two basepoint transports. Therefore $\\pi_1(X,([0],[0]))\\cong\\pi_1(Y,y_0)$, contradicting step 1.3.",
+          "step": "2.2",
+          "inputs": [
+            "L6",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $X$ and $Y$ are not homotopy equivalent even though step 1.1 shows that their singular homology groups agree.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In Equal homology does not imply homotopy equivalence, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Equal homology does not imply homotopy equivalence, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Equal homology does not imply homotopy equivalence, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Equal homology does not imply homotopy equivalence, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In Equal homology does not imply homotopy equivalence, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Equal homology does not imply homotopy equivalence, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Equal homology does not imply homotopy equivalence, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Equal homology does not imply homotopy equivalence, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Friday, September 4, 2026 risk review: this counterexample is critical because it combines computed homology with a fundamental-group obstruction. The current proof now uses an actual open cover of (S^1 vee S^1) vee S^2, deformation retracts U and V to the wedge and sphere, applies van Kampen through the simply connected overlap, and then handles the basepoint issue explicitly by transporting loop classes along the homotopy paths."
+      }
+    },
+    "cex-a-singular-cochain-is-not-a-finite-singular-chain": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-singular-simplex-and-singular-chain-group-with-coefficients",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. For each integer $n\\geq 0$, a\n**singular $n$-simplex in $X$** is a continuous map\n$$\\sigma:\\Delta^n\\to X$$\nfrom the standard topological simplex of\n[[def-standard-topological-simplex-and-its-affine-face-maps]]. Write\n$S_n(X)$ for the set of all singular $n$-simplices in $X$.\n\nThe **singular chain group with integer coefficients** is the free abelian group\non $S_n(X)$:\n$$C_n(X;\\mathbb Z):=\\bigoplus_{\\sigma\\in S_n(X)}\\mathbb Z[\\sigma].$$\nThus an element of $C_n(X;\\mathbb Z)$ is a finite formal sum\n$$\\sum_{k=1}^m a_k\\sigma_k,\\qquad a_k\\in\\mathbb Z,\\ \\sigma_k\\in S_n(X).$$\n\nIf $G$ is an abelian group, the **singular chain group with coefficients in\n$G$** is\n$$C_n(X;G):=C_n(X;\\mathbb Z)\\otimes_{\\mathbb Z} G,$$\nusing the tensor product of\n[[def-tensor-product-of-modules-by-generators-and-relations]]. The page's\nconvention is that coefficients are attached through this tensor-product\nconstruction, not by choosing a preferred $G$-basis of singular simplices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-singular-simplex-and-singular-chain-group-with-coefficients",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. For each integer $n\\geq 0$, a\n**singular $n$-simplex in $X$** is a continuous map\n$$\\sigma:\\Delta^n\\to X$$\nfrom the standard topological simplex of\n[[def-standard-topological-simplex-and-its-affine-face-maps]]. Write\n$S_n(X)$ for the set of all singular $n$-simplices in $X$.\n\nThe **singular chain group with integer coefficients** is the free abelian group\non $S_n(X)$:\n$$C_n(X;\\mathbb Z):=\\bigoplus_{\\sigma\\in S_n(X)}\\mathbb Z[\\sigma].$$\nThus an element of $C_n(X;\\mathbb Z)$ is a finite formal sum\n$$\\sum_{k=1}^m a_k\\sigma_k,\\qquad a_k\\in\\mathbb Z,\\ \\sigma_k\\in S_n(X).$$\n\nIf $G$ is an abelian group, the **singular chain group with coefficients in\n$G$** is\n$$C_n(X;G):=C_n(X;\\mathbb Z)\\otimes_{\\mathbb Z} G,$$\nusing the tensor product of\n[[def-tensor-product-of-modules-by-generators-and-relations]]. The page's\nconvention is that coefficients are attached through this tensor-product\nconstruction, not by choosing a preferred $G$-basis of singular simplices.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The assignment $\\varphi(\\sigma)=1$ on each singular $0$-simplex extends uniquely to a homomorphism from the free abelian group $C_0(I;\\mathbb Z)$ to $\\mathbb Z$, so it is a singular $0$-cochain in the usual dual-group sense.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], each point $x\\in I$ determines a singular $0$-simplex $c_x$, and distinct points give distinct maps, so $I$ has infinitely many singular $0$-simplices. The cochain $\\varphi$ takes the value $1$ on every one of them, so its support is infinite.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $\\varphi$ is a singular cochain whose support is not finite, refuting the claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A singular cochain need not have finite support on singular simplices, the statement is not governed by an empty-family or vacuous-domain branch beyond the hypotheses already printed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A singular cochain need not have finite support on singular simplices, the statement has no separate zero-parameter or zero-degree boundary case beyond its stated hypotheses and uniform proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A singular cochain need not have finite support on singular simplices, the argument does not require a special singleton or value-one branch beyond the written uniform proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A singular cochain need not have finite support on singular simplices, the claim is not controlled by a separate degenerate-object branch; the proof treats the stated objects uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In A singular cochain need not have finite support on singular simplices, no interval-endpoint or first-versus-last boundary case is load-bearing in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A singular cochain need not have finite support on singular simplices, the proof makes no hidden arbitrary choice from a merely nonempty set beyond what the statement explicitly supplies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A singular cochain need not have finite support on singular simplices, the top-level statement is not a biconditional, so there is no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A singular cochain need not have finite support on singular simplices, the top-level statement is not a biconditional, so there is no separate reverse implication to discharge."
+        }
+      ]
+    }
+  }
+}
