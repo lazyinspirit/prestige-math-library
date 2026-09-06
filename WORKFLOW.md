@@ -361,6 +361,9 @@ still unmaterialized.
 A repair hook performs a mechanical fix when one exists and otherwise dispatches
 the responsible cognitive role. Its full fan-out passes launch preflight before
 any sibling starts; a deterministic launch error restores the round/item budget.
+At the Step-1 join, a primary scaffold-policy failure is routed to its owning
+Beta before advisory source work, so mixed batteries cannot spend every repair
+round on later URL findings while leaving the original dependency defect open.
 An external outage refunds its round and schedules a 20-minute default backoff
 or a hook-supplied time, so an unavailable provider is not treated as failed
 mathematics.

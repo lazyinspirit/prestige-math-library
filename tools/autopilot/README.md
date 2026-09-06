@@ -206,6 +206,11 @@ called by the executor, implemented by no stage and read by nothing. A failing
 gate could therefore only ever hold. Two fatal defects needing a proof rewrite
 became a paragraph in a report instead of an authoring dispatch.
 
+At the Step-1 join, a primary scaffold-policy failure is routed to its owning
+Beta before advisory source work. This prevents a mixed gate battery from
+spending every bounded repair round on URL findings while leaving the original
+dependency defect untouched.
+
 The hook also could not have worked as written — it fired only when the blocker
 *message* was new, and a gate that keeps failing the same way produces the same
 message every time. One round, then deadlock. It now fires whenever nothing is in

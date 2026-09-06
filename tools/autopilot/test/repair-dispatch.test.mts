@@ -17,7 +17,13 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { stages, dispatchSourceScouts, mechanicalRepair, MECHANICAL_REPAIRS } from '../stages/mathlib.mts';
+import {
+  stages,
+  dispatchScaffoldPolicyFixes,
+  dispatchSourceScouts,
+  mechanicalRepair,
+  MECHANICAL_REPAIRS,
+} from '../stages/mathlib.mts';
 import { Executor } from '../src/executor.mts';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
@@ -656,6 +662,41 @@ test('a stderr naming no known URL and no page still refuses to guess', () => {
     stderr: 'ERROR something-else: https://unknown.example/never-cited.pdf',
   });
   assert.equal(routed, false, 'an unmappable failure must stay a blocker, not pick a batch');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('Stage-1 scaffold-policy errors route to the owning Beta before advisory source work', async () => {
+  const repo = fixtureRepo();
+  writeFileSync(join(repo, 'research', 'demo-batch-12.pages.json'), JSON.stringify([{
+    id: 'schemes-page', kind: 'A', items: [{ id: 'def-bad-dependency', deps: ['def-missing'] }],
+  }]));
+  const started: any[] = [];
+  const executor = { start: (_s: any, plan: any) => started.push(plan) };
+  const s1: any = stages.find((stage: any) => stage.id === '1-scaffold');
+  const failure = {
+    id: 'content-policy-scaffold',
+    output: 'ERROR batch-dependency-missing [def-bad-dependency]: def-bad-dependency depends on def-missing',
+    advisory: [{
+      id: 'source-fetch-check',
+      output: 'ERROR fetch-check-unstamped: schemes-page: https://example.org/source.pdf',
+    }],
+  };
+
+  assert.equal(dispatchScaffoldPolicyFixes({
+    ctx: { run: 'demo', repo }, executor, stage: s1, round: 1, failure,
+  }), true);
+  assert.equal(started.length, 1);
+  assert.deepEqual(started[0].covers, ['12']);
+  assert.equal(started[0].label, 'policy-fix-1-b12');
+  assert.equal(started[0].job, 'remediation');
+  assert.equal(started[0].task, 'briefs/beta-scaffold-policy-fix.md');
+
+  started.length = 0;
+  await s1.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s1, round: 1, failure,
+  });
+  assert.equal(started.length, 1, 'the primary policy repair must not be starved by an advisory');
+  assert.equal(started[0].label, 'policy-fix-1-b12');
   rmSync(repo, { recursive: true, force: true });
 });
 
