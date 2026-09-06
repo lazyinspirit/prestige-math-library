@@ -1,0 +1,27 @@
+# FA terminal evidence — queue h, item 3
+
+Item: `ex-iid-sequence-with-a-prescribed-law`.
+Decision: `repaired`. Source status: `familiar`.
+
+Both preceding queue items were recorded successfully before this review began.
+I independently read the example; its original four dependencies `thm-countable-product-of-probability-spaces`, `cor-countable-independent-copies-exist`, `def-countable-choice`, and `def-dependent-choice`; and the full statement/proof of the coordinate-independence corollary. I checked the published independent-random-element and law definitions. Batch-4 A/B pages, manifest, coverage and notes, reader/refuter records, group-h conventions, Alpha adjudication, both Terra rejections, and the batch/aggregate contracts and risk record were inspected. The relevant convention is arbitrary measurable coordinates on the cylinder sigma-algebra under explicitly assumed countable and dependent choice, with natural indices starting at zero.
+
+Alpha supplied the missing choice assumptions and product-existence citation correctly. The final Terra rejection identifies a remaining citation defect: the Statement of the independent-copies corollary only promises existence of some independent family with the specified law. Its proof does construct the coordinate family, so there is no counterexample to the mathematics, but the contract specifically cites its Statement and cannot use that existential statement to identify the example's specified maps. The repaired F2 cites `cor-coordinate-random-elements-on-a-countable-product-are-independent`, whose Statement explicitly identifies those maps, instead. This changes only the example's dependency edge, not any dependency's bytes.
+
+Independent mathematical verification: substitute (E_n,Ecal_n,mu_n)=(S,Sigma,nu) at every natural index in the product theorem. Its hypotheses are supplied, and the probability lives on the cylinder sigma-algebra of S^N. Coordinate inverse images of measurable sets are cylinders, so the coordinate maps are measurable. For distinct n_1,...,n_k and A_j in Sigma, the finite product marginal gives P(intersection_j {X_{n_j} in A_j})=product_j nu(A_j). For k=1 this is the marginal law nu; substitution of these single-coordinate probabilities yields independence for every finite subfamily. Thus the family is independent and identically distributed. This is exactly the coordinate corollary's assertion and proof. Empty finite intersections have probability and empty product one. A probability space has nonempty S, singleton spaces and degenerate laws are allowed, and no atomlessness, topology, standard-Borel assumption, or full-power-set measurability is used.
+
+The mathematics here is familiar elementary product-measure and independence theory; the complete local theorem and corollary provide the needed inputs, so no external verification was necessary for this item. The recorded batch source locators remain Durrett section 2.1.4 and Kajino section 3.6, but I do not claim to have newly checked their external full texts for this item.
+
+The Example now names the cylinder sigma-algebra; Given fixes the entire repeated probability space; step 1.1 spells out the specialization. Its batch manifest now has the exact dependencies and strategy. The batch-4 and aggregate proof contracts quote the new F2 Statement and record the corrected derivation. Alpha's existing risk record remains preserved, with an FA review explaining the repaired citation. No direct dependency item was edited, so no prerequisite-repair licence is needed. No pass stamp or additional judge verdict was created.
+
+Focused checks passed: one-item precheck and rendercheck; strict batch-4 proof-contract (22/22, zero errors/warnings); batch-4 manifest-deps (29, zero errors) and content-policy (29, zero errors/warnings). The aggregate contract's two edited example entries also passed strict focused validation (2/2). All mathematical and metadata obligations are complete.
+
+Next action: record these exact bytes with the terminal recorder, then check the terminal-resolution receipts for this completed queue. No fourth review or further judge call is needed.
+
+## Exact-context recording follow-up
+
+The first item-3 recorder attempt refused because this example's corrected interface changed item 1's A/B-pair context. Item 1 had already been resolved before substantive review of item 2. Its evidence records an independent compatibility check and its same repaired disposition is being resealed, without changing mathematical bytes. Item 2's receipt remains current. The run-wide check also reports missing FA dispatch result files during active dispatches; those files are produced by the driver after agents finish, and are not authored here.
+
+## Completed queue checkpoint
+
+All three items are recorded as repaired. After the item-1 context refresh, the item-3 recorder accepted the final bytes. A final read-only recomputation using judge.mts --context-hashes (hash-only, no judge call) matched both item_sha256 and context_sha256 of the latest FA receipts for all three queue items. The original serial review and successful predecessor recordings remain in the append-only ledger. Focused mathematical, format, rendering, manifest, policy, and contract checks are complete. No mathematical blocker or further item edit remains. The driver must finish its ordinary dispatch-result bookkeeping; no runtime state was edited.

@@ -113,7 +113,8 @@ export class Executor {
   stateVersion: number;
   lastBattery: Map<string, { version: number; ok: boolean; dirFp: string }>;
   stagesPath: string | null;
-  stagesMtimeMs: number;
+  stagesWatch: string[];
+  stagesFingerprint: string;
   _adoptStage?: string;
   _announcedAdoption?: Set<string>;
   _barrierFor?: string;
@@ -149,12 +150,15 @@ export class Executor {
     // byte-identical inputs only repeats deterministic work.
     this.stateVersion = 0;
     this.lastBattery = new Map();
-    // Hot-reload bookkeeping: the stage table's source path and its mtime at
-    // load. `maybeReloadStages` swaps in an edited table at the next tick —
-    // loading a fix used to cost a stop, a full battery drain and a restart,
-    // twice in one day on frontier-15.
+    // Hot-reload bookkeeping: the stage table and every declared module it
+    // composes. Watching only the root file leaves an edited imported stage
+    // module cached in the live process even if some unrelated root edit
+    // happens to trigger a reload.
     this.stagesPath = (config as any).stagesPath ?? null;
-    try { this.stagesMtimeMs = this.stagesPath ? statSync(this.stagesPath).mtimeMs : 0; } catch { this.stagesMtimeMs = 0; }
+    this.stagesWatch = (config.stagesWatch?.length
+      ? config.stagesWatch
+      : (this.stagesPath ? [this.stagesPath] : [])).map(String);
+    this.stagesFingerprint = this.stageSourcesFingerprint();
     // Validate the spec here rather than throwing: a bad stage table found by a
     // running engine should be a visible blocker, not a crash the watchdog
     // restarts into a loop at sixty-second intervals. `bin/autopilot` checks the
@@ -205,6 +209,17 @@ export class Executor {
     }
   }
 
+  /** Fingerprint every module that composes the stage table. Size is included
+   * because coarse-mtime filesystems can preserve an mtime across a quick edit. */
+  stageSourcesFingerprint(): string {
+    return this.stagesWatch.map((path) => {
+      try {
+        const stat = statSync(path);
+        return `${path}:${stat.mtimeMs}:${stat.size}`;
+      } catch { return `${path}:missing`; }
+    }).join('|');
+  }
+
   /** Swap in an edited stage table at a tick boundary. A table that cannot
    *  fail validation is never loaded — the running table stays, the refusal is
    *  notified, and the edit can be fixed and saved again. Tools under
@@ -212,12 +227,11 @@ export class Executor {
    *  one hot file that demanded a restart. */
   async maybeReloadStages(): Promise<void> {
     if (!this.stagesPath) return;
-    let mtime = 0;
-    try { mtime = statSync(this.stagesPath).mtimeMs; } catch { return; }
-    if (mtime <= this.stagesMtimeMs) return;
-    this.stagesMtimeMs = mtime;
+    const fingerprint = this.stageSourcesFingerprint();
+    if (fingerprint === this.stagesFingerprint) return;
+    this.stagesFingerprint = fingerprint;
     try {
-      const mod = await import(`${pathToFileURL(this.stagesPath).href}?v=${mtime}`);
+      const mod = await import(`${pathToFileURL(this.stagesPath).href}?v=${encodeURIComponent(fingerprint)}`);
       const problems = validateStages(mod.stages, this.ctx());
       if (problems.length) {
         this.reporter.notify('stages-reload-refused',
@@ -906,10 +920,10 @@ export class Executor {
         for (const [stageId, st] of Object.entries<any>(this.state.data.stages)) {
           if (st.doneAt) continue;
           const stage = this.stages.find((candidate: Stage) => candidate.id === stageId);
-          // Step 8's two rejudge cycles are a lifetime ceiling. `retry` is
+          // Step 8's one paid Terra rejudge is a lifetime ceiling. `retry` is
           // still useful after the owner/session resolves the terminal blocker:
           // it invalidates the battery cache and re-runs the gates, but it may
-          // not quietly turn two cycles into more paid contexts.
+          // not quietly buy another paid context.
           if (stage?.terminalFixBudget) {
             if (st.backoffUntil) {
               delete st.backoffUntil;

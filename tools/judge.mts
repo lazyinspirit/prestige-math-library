@@ -292,7 +292,7 @@ const runCodex = (model: string, prompt: string, timeoutMs: number): Promise<Cod
     '-c', `model_context_window=${JUDGE_CONTEXT_WINDOW}`,
     '-c', 'model_auto_compact_token_limit=200000',
     '-c', 'model_auto_compact_token_limit_scope="total"',
-    '--sandbox', 'read-only', '--skip-git-repo-check', '--ignore-user-config', '--ignore-rules',
+    '--sandbox', 'read-only', '--skip-git-repo-check', '--ignore-rules',
     '--output-schema', join(REPO, 'briefs', 'schemas', 'judge-verdict.json'),
     '--output-last-message', lastMessage, '--json', '--cd', work, '-',
   ];

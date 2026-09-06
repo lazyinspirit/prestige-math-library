@@ -1,0 +1,188 @@
+# Step-6 Alpha
+
+The task determines whether this is group adjudication, cross-group closure, or
+a named repair. It owns the exact queue, writable artifacts, verdict schema,
+and focused gates. Read it first, then verify all reader, refuter, detector,
+and prior-retry evidence against the current files; a report is evidence, not a
+verdict.
+
+Work only in the task's live scope. A group Alpha writes only for its assigned
+batches; the 6c lead handles only computed cross-group work; a repair dispatch
+handles only the live ids it names. You may open dependencies outside that
+scope to test a claim. Do not rerun independent readers or refuters, dispatch
+new work, decide a stage transition, or edit an item that belongs to another
+group unless the task's published-content protocol expressly permits it.
+
+Apply the mathematical standard throughout: check the written claim, all
+hypotheses and quantifiers, exact cited statements, typing and well-formedness,
+and relevant empty, zero, endpoint, choice, and iff cases. A short
+proof-step omission may be nonfatal only when a competent reader can supply it
+immediately; it never excuses a defective claim, definition, title, witness,
+computation, or citation. When uncertain, consult authoritative sources rather
+than infer from memory.
+
+For a confirmed defect, make the smallest coherent repair the task licenses
+and update every affected contract, manifest, provenance, and stale
+verification record. Preserve stable item ids. Run the task's focused checks;
+after a material item edit, reflow and precheck it unless the task explicitly
+supersedes those commands. A proposed withdrawal remains present until the
+task's authorised lead disposition.
+
+Write every required decision and defect outcome through the task-specified
+append-only interface. Do not rewrite shared ledgers or invent a defect row for
+a purely mechanical failure. A clean decision needs evidence; an unresolved
+case is a named blocker.
+
+You neither judge nor stamp. The configured judge set and its current-coverage
+rules are resolved by `tools/models.mjs`; do not hard-code, substitute, or
+self-certify a judge outcome. Do not request permissions.
+
+
+---
+
+# This dispatch
+
+run: frontier-31a
+role: alpha
+label: 6c-gate-impact-audit-6c-7
+
+# Step 6c repair — impact-audit-6c
+
+This file is the authority for repair cycle 7.
+Primary gate: `impact-audit-6c`
+Reason: ERROR receipt-changed-scope: research/frontier-31a-impact-6c.json: changed_interfaces must exactly match the computed interface changes
+Owning Alpha group: (repository-scoped or mixed)
+Live item ids: `cex-nonclosed-scheme-point-no-k-valued-coordinate`, `cex-scheme-not-determined-by-underlying-space`, `cor-affine-scheme-isomorphism-ring-isomorphism`, `cor-affine-scheme-quasi-compact`, `cor-spectrum-with-structure-sheaf-locally-ringed`, `def-affine-scheme`, `def-closed-point-scheme`, `def-dual-numbers-scheme`, `def-functor-of-points-affine-scheme`, `def-generic-point-irreducible-closed-subset`, `def-integral-affine-scheme`, `def-morphism-affine-schemes-from-ring-map`, `def-nonreduced-infinitesimal-thickening-affine`, `def-reduced-affine-scheme`, `def-residue-field-scheme-point`, `ex-basic-open-affine-line`, `ex-dual-numbers-one-point-nonreduced`, `ex-functor-points-affine-line`, `ex-spectrum-field-one-point`, `ex-spectrum-integers-generic-and-closed-points`, `ex-spectrum-product-ring-disjoint-union`, `ex-spectrum-zero-ring-empty`, `lem-basic-opens-quasi-compact`, `lem-classical-points-inside-affine-scheme`, `lem-spectrum-localization-open-immersion`, `lem-spectrum-map-stalk-homomorphisms-local`, `rem-spec-contravariance-and-points`, `thm-affine-scheme-ring-anti-equivalence`, `thm-affine-schemes-determined-by-functor-of-points`, `thm-global-sections-affine-scheme`, `thm-sections-basic-open-affine-scheme`, `thm-spectrum-sober`, `thm-stalk-structure-sheaf-prime-localization`, `thm-structure-sheaf-affine-scheme`
+Exhausted item ids — do not repair or re-review: (none)
+
+Repair only the live ids. Reproduce the primary gate from the current tree.
+Advisory failures are context only; they receive their own gate budget if they become primary.
+
+
+## Primary gate output
+
+```text
+impact-audit: 9 changed public interface(s), 85 affected item(s)
+  fs-a-continuous-function-of-bounded-variation-is-absolutely-continuous: 0 logical, 0 direct citation consumer(s)
+  fs-absolute-continuity-is-preserved-under-composition: 0 logical, 0 direct citation consumer(s)
+  fs-continuity-almost-everywhere-differentiability-and-an-integrable-derivative-imply-newton-leibniz: 0 logical, 0 direct citation consumer(s)
+  fs-luzin-property-n-implies-absolute-continuity: 0 logical, 0 direct citation consumer(s)
+  lem-structure-presheaf-basic-open-well-defined: 34 logical, 1 direct citation consumer(s)
+  rem-noncompact-flow-completeness-is-an-extra-hypothesis: 0 logical, 0 direct citation consumer(s)
+  thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic: 49 logical, 5 direct citation consumer(s)
+  thm-structure-sheaf-affine-scheme: 33 logical, 2 direct citation consumer(s)
+  thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two: 2 logical, 2 direct citation consumer(s)
+ERROR receipt-changed-scope: research/frontier-31a-impact-6c.json: changed_interfaces must exactly match the computed interface changes
+ERROR receipt-impact-scope: research/frontier-31a-impact-6c.json: required_review must exactly match the computed downstream impact set
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item cex-nonclosed-scheme-point-no-k-valued-coordinate
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item cex-scheme-not-determined-by-underlying-space
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item cor-affine-scheme-isomorphism-ring-isomorphism
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item cor-affine-scheme-quasi-compact
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item cor-spectrum-with-structure-sheaf-locally-ringed
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-affine-scheme
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-closed-point-scheme
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-dual-numbers-scheme
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-functor-of-points-affine-scheme
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-generic-point-irreducible-closed-subset
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-integral-affine-scheme
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-morphism-affine-schemes-from-ring-map
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-nonreduced-infinitesimal-thickening-affine
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-reduced-affine-scheme
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item def-residue-field-scheme-point
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item ex-basic-open-affine-line
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item ex-dual-numbers-one-point-nonreduced
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item ex-functor-points-affine-line
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item ex-spectrum-field-one-point
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item ex-spectrum-integers-generic-and-closed-points
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item ex-spectrum-product-ring-disjoint-union
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item ex-spectrum-zero-ring-empty
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item lem-basic-opens-quasi-compact
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item lem-classical-points-inside-affine-scheme
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item lem-spectrum-localization-open-immersion
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item lem-spectrum-map-stalk-homomorphisms-local
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item rem-spec-contravariance-and-points
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item thm-affine-scheme-ring-anti-equivalence
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item thm-affine-schemes-determined-by-functor-of-points
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item thm-global-sections-affine-scheme
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item thm-sections-basic-open-affine-scheme
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item thm-spectrum-sober
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item thm-stalk-structure-sheaf-prime-localization
+ERROR receipt-missing-impact: research/frontier-31a-impact-6c.json: no disposition for affected item thm-structure-sheaf-affine-scheme
+
+```
+
+## Advisory failures
+
+```json
+[]
+```
+
+## Canonical repair protocol
+
+# Step 6 gate repair
+
+The generated repair task supplies the primary gate, live ids, exhausted ids,
+output, and advisory failures. Reproduce only the primary gate on the current
+tree; do not revisit exhausted ids or treat advisory failures as this dispatch's
+scope.
+
+For each live finding, repair a confirmed in-scope defect or document a
+false-positive with the governing rule and exact evidence. Update only records
+made stale by a confirmed repair. An unscoped mechanical failure may be fixed at
+its repository cause; do not invent an item or ledger row for it.
+
+When `risk-report` is primary, every live id needs an actual mathematical read
+and a complete, item-specific `risk_review` in its owning batch contract. Use
+scoped `--items` invocations while working. The generated task is already
+partitioned by Alpha group; do not inspect or write another group's carriers.
+A missing review is not itself a defect-ledger row, though a defect found during
+that review follows the normal repair and ledger protocol.
+
+At 6b, append one `route:"gate"` supplemental decision per concrete defect to
+the owning group's decisions file and its matching ledger row. At 6c, append the
+required `kind:"gate"` verdict and current carrier hash to
+`research/frontier-31a-6c-verdicts.jsonl`; also record the changed item/page verdict.
+Extend prior retry artifacts and report the current gate result.
+
+# Step 6c — cross-batch audit and closure
+
+Read `research/frontier-31a-cross-group-edges.json`, the post-6b carriers, and every
+listed citing/cited item or structural change. An empty computed list is valid.
+
+Append one evidence-bearing current-hash row per edge, forward reference,
+addition, removal, item, page, or gate outcome to
+`research/frontier-31a-6c-verdicts.jsonl`; use the exact kind and verdict vocabulary
+accepted by `tools/cross-group-edges.mjs`. Obtain a current carrier hash with
+`node tools/cross-group-edges.mjs carrier --run frontier-31a --id ITEM_ID` after edits.
+
+Clean outcomes use `defect_ids:[]`. Every repair, strike, drop, removal, or
+reversion names one closed, uniquely owned `6c-cross` ledger row. Restore a
+pre-existing removal before deciding it; a page addition, removal, or
+reading-order change is an owner blocker unless the active task explicitly
+grants that authority.
+
+Write `research/frontier-31a-alpha-6c.md` with the evidence, disposition, edits, and
+remaining blocker for each computed obligation. The closure gates rederive
+edges, validate verdict currency and ledger ownership, and run the Step-6 gate
+battery.
+
+
+
+## Mathematical context continuity
+
+Read exact task paths first. Search current owned artifacts before historical runs;
+exclude dispatch logs from routine content searches. Fetch complete relevant source
+sections and dependency statements, using bounded output chunks. A truncated result
+is not evidence of absence; continue reading until the required argument is complete.
+Do not dump entire ledgers, source books, or repository-wide search results into context.
+
+For writing roles, after each completed item update the task-authorized notes or report with the
+current item IDs, exact claim and conventions, source paths/URLs and locators,
+dependency IDs, decisions, validation results, unresolved obligations, and next action.
+Automatic compaction can occur mid-proof. After compaction or handoff, reread the
+current item, relevant dependency statements, source passages, and these obligations
+before continuing a proof or repair. A summary is a navigation aid, never a substitute
+for mathematical evidence. If a hypothesis or source qualification cannot be
+recovered, record the blocker rather than infer it. Preserve all independent reviews
+and exact-hash gates. Never mark an unfinished obligation complete to save context.
+Checkpoint only in the task-authorized notes/report; do not create transcripts or alter other owners’ artifacts.

@@ -28,6 +28,9 @@
 //   {"kind":"edge","from":"<id>","to":"<id>","verdict":"accurate|repaired|struck","note":"..."}
 //   {"kind":"forward","item":"<id>","target":"<id>","decision":"lemmas-added|dropped","note":"..."}
 //   {"kind":"addition|removal|page","batch":"<n>","id":"<id>","verdict":"...","note":"..."}
+//   {"kind":"gate","id":"<id>","gate":"<gate>","verdict":"confirmed_fatal|confirmed_nonfatal|false_positive","note":"..."}
+// A mechanical false-positive gate row is clean (`defect_ids: []`); confirmed
+// gate defects must own exactly one closed 6c defect row.
 
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
@@ -93,6 +96,26 @@ const canonical = (value) => Array.isArray(value) ? value.map(canonical)
     ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonical(value[key])]))
     : value;
 const hashValue = (value) => hash(JSON.stringify(canonical(value)) ?? 'undefined');
+
+function claimedPublishedIds() {
+  const path = R('research', `${run}-step6-published-claims.jsonl`);
+  if (!existsSync(path)) return new Set();
+  try {
+    return new Set(readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean)
+      .map((line) => JSON.parse(line))
+      .filter((row) => row?.version === 1 && row?.run === run
+        && typeof row?.id === 'string' && /^[a-f0-9]{64}$/.test(row?.pre_sha256 ?? ''))
+      .map((row) => row.id));
+  } catch {
+    return new Set();
+  }
+}
+
+function claimedPublishedCarrier(id) {
+  if (!claimedPublishedIds().has(id)) return null;
+  const path = R('items', `${id}.md`);
+  return existsSync(path) ? { item_sha256: hash(readFileSync(path)) } : null;
+}
 
 const contractCache = new Map();
 function contractRows(batch) {
@@ -250,6 +273,11 @@ if (cmd === 'carrier') {
       process.exit(0);
     }
   }
+  const published = claimedPublishedCarrier(id);
+  if (published) {
+    console.log(hashValue(published));
+    process.exit(0);
+  }
   die(`cross-group-edges: ${id} is not a current in-flight item or page`, 1);
 }
 
@@ -297,8 +325,10 @@ if (cmd === 'check') {
   const changeKinds = ['addition', 'removal', 'item', 'item-metadata', 'page', 'page-addition', 'page-removal'];
   const changeV = keyed(verdicts.filter((v) => changeKinds.includes(v.kind)),
     (v) => `${v.kind}\u0000${v.batch}\u0000${v.id}`, 'change');
-  const gateV = keyed(verdicts.filter((v) => v.kind === 'gate'),
-    (v) => String(v.defect_ids?.[0] ?? ''), 'gate');
+  const gateV = keyed(verdicts.filter((v) => v.kind === 'gate'), (v) => {
+    const ids = Array.isArray(v.defect_ids) ? v.defect_ids.map(String) : [];
+    return ids.length ? `defect:${ids[0]}` : `clean:${v.gate}\u0000${v.id}`;
+  }, 'gate');
 
   for (const e of edges) {
     const v = edgeV.get(pairKey(e.from, e.to));
@@ -488,7 +518,8 @@ if (cmd === 'check') {
   }
   for (const verdict of gateV.values()) {
     const ids = Array.isArray(verdict.defect_ids) ? verdict.defect_ids.map(String) : [];
-    if (ids.length !== 1) {
+    const cleanFalsePositive = verdict.verdict === 'false_positive' && ids.length === 0;
+    if (!cleanFalsePositive && ids.length !== 1) {
       err('gate-defect-cardinality', `[${verdict.id}] gate verdict must name exactly one defect id`);
     }
     if (!['confirmed_fatal', 'confirmed_nonfatal', 'false_positive'].includes(verdict.verdict)) {
@@ -502,7 +533,7 @@ if (cmd === 'check') {
     const page = currentPages.get(verdict.id);
     const pageBatch = currentPageBatch.get(verdict.id);
     const carrier = itemBatch ? itemCarrier(itemBatch, verdict.id, currentItemMetadata.get(verdict.id))
-      : pageBatch && page ? pageCarrier(page) : null;
+      : pageBatch && page ? pageCarrier(page) : claimedPublishedCarrier(verdict.id);
     if (!carrier) {
       err('gate-subject-out-of-scope', `[${verdict.id}] gate verdict does not name a current in-flight item or page`);
     } else if (verdict.subject_sha256 !== hashValue(carrier)) {
@@ -511,7 +542,8 @@ if (cmd === 'check') {
     const allowed = verdict.verdict === 'false_positive' ? ['false-positive']
       : verdict.verdict === 'confirmed_nonfatal' ? ['fixed', 'narrowed', 'nonfatal-recorded']
         : repairedDispositions;
-    bindDefects(verdict, String(verdict.id), true, `gate ${verdict.defect_ids?.[0]}`, allowed);
+    bindDefects(verdict, String(verdict.id), !cleanFalsePositive,
+      cleanFalsePositive ? `gate ${verdict.gate}:${verdict.id}` : `gate ${verdict.defect_ids?.[0]}`, allowed);
     const row = ids.length === 1 ? ledger.find((candidate) => candidate.defect_id === ids[0]) : null;
     if (row && verdict.verdict === 'confirmed_fatal' && row.severity !== 'fatal') {
       err('gate-defect-severity', `${ids[0]} is ${row.severity}, not fatal`);

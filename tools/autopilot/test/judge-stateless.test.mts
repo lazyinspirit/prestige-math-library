@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
+import { JUDGE_CONTEXT_WINDOW } from '../../models.mjs';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO
   ?? fileURLToPath(new URL('../../..', import.meta.url)).replace(/\/$/, '');
@@ -87,7 +88,7 @@ test('the sweep gives each item a fresh compact Terra call and records real usag
       assert.ok(!call.args.includes('resume'), 'item calls never inherit chat history');
       assert.equal(call.args[call.args.indexOf('--model') + 1], 'gpt-5.6-terra');
       assert.ok(call.args.includes('model_reasoning_effort="xhigh"'));
-      assert.ok(call.args.includes('model_context_window=872000'));
+      assert.ok(call.args.includes(`model_context_window=${JUDGE_CONTEXT_WINDOW}`));
       assert.equal(call.target_blocks, 1, 'one full target item per judge');
       assert.equal(call.interface_blocks, 1, 'compact A/B awareness is retained');
       assert.ok(call.proof_headings <= 1, 'a sibling proof must not enter the prompt');

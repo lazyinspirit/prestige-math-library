@@ -1,0 +1,15 @@
+# FA evidence — queue b/5
+
+Decision: repaired. Source status: familiar. Item: `def-normalized-bar-resolution`.
+
+I read the current item, its sole direct dependency `def-unnormalized-homogeneous-bar-resolution`, the subsequent degenerate-subcomplex and homotopy-equivalence items, the batch-10 manifest and convention/source notes, both A/B page carriers, both Terra rejections and Sol's adjudication. The definition has no separate proof-contract obligation or item risk record. The title is now correctly limited to an augmented complex; the resolution conclusion is deferred to the following results. Sol fixed the missing augmentation/free-module description but left descent of the differential unsupported inline, as the final rejection states.
+
+Independent repair: for a generating tuple with g_i=g_(i+1), the i-th and (i+1)-st faces coincide and have opposite signs. Every other face retains an adjacent equal pair. Thus dD is contained in D. D_0=0 and the degree-one exceptional pair cancels exactly, so there is no undefined negative bar term and the degree-zero augmentation descends. Diagonal G-translation preserves degeneracy. The free abelian basis partitions into degenerate and nondegenerate free G-orbits; each orbit has a unique first-coordinate-1 representative. This proves the claimed quotient freeness without choosing orbit representatives. Finally x_i=g_(i-1)^(-1)g_i equals 1 exactly at a repeated adjacent vertex, verifying the normalized-cochain description.
+
+These are familiar direct combinatorial calculations and do not require external verification. The local source locator is the displayed alternating deletion differential in `items/def-unnormalized-homogeneous-bar-resolution.md`. No source claim is being borrowed from a search snippet. The proof is independent of the later contractibility argument and does not assert an equivariant identity-insertion contraction.
+
+Only the queued definition was edited. Dependencies and definition metadata remain appropriate; there is no separate proof-bearing contract to synchronize, and no dependency edit requiring a licence. Focused precheck exited 0 with 0 proof-bearing items checked; the actual focused mathematical checks are the signed-face cancellation, n=0/1 cases, and canonical orbit representatives above. No judge verdict or pass stamp created.
+
+Next action: record repaired current bytes; begin position 6 only after acceptance.
+
+Context refresh before recording position 6: the recorder includes all A/B page peer statements in its context hash. The authorized position-6 restriction/corestriction definition repair therefore changed this item's context hash while leaving its own bytes and direct dependency unchanged. I checked the peer change: it concerns finite coset transversals and effacement only and has no effect on bar differential descent or orbit freeness. The same repaired decision remains valid and is resealed through the recorder so position 6 can be recorded. This is not a new judge verdict or substantive review of a later queued item out of order.

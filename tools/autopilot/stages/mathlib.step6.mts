@@ -7,7 +7,6 @@ import { join } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 
 const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
-const TERRA_XHIGH = MODEL_PROFILE_NAMES.terraXhigh;
 
 /** A completed legacy run skips only stage ids introduced by this cutover.
  * The receipt is write-once and bound to its gate timestamps and artifacts;
@@ -190,9 +189,16 @@ export function step6Stages(d: any) {
 
     const edge = await isEdgeDecision(args);
     const dynamicTask = writeGateTask(args, phase, edge);
+    // A stalemate repair owns the artifact-incomplete units while it runs.
+    // Without this claim, the next executor tick sees the same units as
+    // abandoned, launches another Alpha, and spends the entire retry budget
+    // concurrently before the first repair can land its artifact.
+    const covers = args.failure.id === 'stage-stalemate'
+      ? (args.failure.units ?? []).map(String)
+      : [];
     args.executor.start(args.stage, {
       role: 'alpha', label: `${phase}-${edge ? 'edge' : 'gate'}-${String(args.failure.id).replace(/[^a-z0-9-]+/gi, '-')}-${args.round}`,
-      job: 'adjudication', covers: [], brief: 'briefs/alpha-step6.md', task: dynamicTask,
+      job: 'adjudication', covers, brief: 'briefs/alpha-step6.md', task: dynamicTask,
       timeout: phase === '6c' ? 7200 : 3600,
     });
   };
@@ -317,7 +323,7 @@ export function step6Stages(d: any) {
     {
       id: '6a-refute',
       label: 'read-only refuters over untouched and high-risk items',
-      modelProfile: TERRA_XHIGH,
+      modelProfile: TERRA_HIGH,
       pipeline: 'read',
       role: 'refuter',
       units: introducedBatches,
@@ -340,7 +346,7 @@ export function step6Stages(d: any) {
     {
       id: '6a-collect',
       label: 'validate refuter coverage and materialize obligations (mechanical)',
-      modelProfile: (plan: any) => plan.role === 'refuter' ? TERRA_XHIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'refuter' ? TERRA_HIGH : undefined,
       pipeline: 'read',
       role: 'tool',
       units: introducedBatches,

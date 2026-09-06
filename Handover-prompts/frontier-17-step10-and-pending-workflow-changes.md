@@ -49,11 +49,10 @@ Nothing is `status: published`. **Publication and push remain owner acts.**
 
 ## Model lineup changed today (owner, 2026-08-23)
 
-Every Sol and Terra lane moved to **Claude Opus 5** (`claude-opus-5[1m]`,
-xhigh, 1M) because the Codex subscription hit its weekly cap. Judge lineup is
-now `deepseek+opus`. DeepSeek remains the ONLY cross-family reader. Details and
-the re-accepted quota risk are written into `CLAUDE.md` §Model lineup and
-`tools/dispatch.mjs`.
+Every Sol and Terra lane moved to the then-current alternate provider because
+the Codex subscription hit its weekly cap. The judge lineup likewise used a
+now-retired external lane. This paragraph records frontier-17 history only; it
+is not a model-selection instruction. The live registry is `tools/models.mjs`.
 
 The swap's live consequence: **the Opus judge lane exhausted the Claude
 subscription mid-sweep** at 02:47Z — 369 null verdicts, signature
@@ -114,10 +113,11 @@ Bring the owner a proposal BEFORE touching anything.
 | finite smoke | 4/329 | 1/271 | 3/384 |
 | stamps | 0 (owner fixed by hand) | 206 | 355 |
 
-Judge lane split this run: DeepSeek 86 of 94 current rejections; Opus 8. Opus
-was more precise when it did reject (61% confirmed fatal vs 37%) but found
-almost nothing independently — **34 DeepSeek-only confirmed-fatal defects
-versus 2 Opus-only.** Under F16's Terra lane the split was 19 vs 28.
+Judge lane split this run: the retired external lane produced 86 of 94 current
+rejections and the alternate lane produced 8. The alternate was more precise
+when it did reject (61% confirmed fatal vs 37%) but found almost nothing
+independently — **34 external-lane-only confirmed-fatal defects versus 2
+alternate-lane-only.** Under F16's Terra lane the split was 19 vs 28.
 
 ## Workflow findings worth fixing (evidence, not yet applied)
 

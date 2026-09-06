@@ -1,0 +1,9 @@
+# FA terminal evidence — queue position 24
+
+Disposition: repaired. Source status: familiar.
+
+Read current item, full UCT dependency, cycle-boundary and freeness lemmas, published free-projectivity theorem, batch-9 UCT A/B context/coverage and the Z-indexed chain and unsigned Hom convention established at position 4, contract and boundary records, Sol correction and both Terra rejections. Sol correctly changed restriction to precomposition with a projection. The final omission of R,G,n is readily repaired without changing scope: they are now quantified explicitly, n over Z according to the published complex conventions, and the exact sequence itself is displayed.
+
+Independent proof: AC makes B_(n−1) free and projective, so d_n:C_n→B_(n−1) admits a section. Its complement projection pi restricts to identity on cycles. If q:Z_n→H_n and f:H_n→G, then f q pi kills im d_(n+1), hence is a cocycle. The assignment f→[f q pi] is linear (a pointwise arbitrary lift would not suffice), and evaluation on a cycle gives f itself. Thus it splits the UCT epimorphism. Changing pi can change the section; the theorem asserts no naturality in C and does not incorrectly claim every change must change the cohomology class. G=0 and zero complex/boundary/cycle cases are immediate from the formula.
+
+This standard projection proof is familiar and has been verified directly from the complete local statements, so no external verification was needed. Added exact local dependencies for the existence of the complement and updated the queued item, manifest deps, and both contracts/boundary records. No dependency was edited. Focused precheck precedes recording. Any peer-context refresh preserves the earlier evaluation, cross-product, Tor-map and nonnatural-splitting obstruction proofs, which do not depend on this projection choice. Next action after recording is position 25; no open obligation remains here.

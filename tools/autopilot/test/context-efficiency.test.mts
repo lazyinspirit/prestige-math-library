@@ -60,7 +60,7 @@ test('diagnostic filtering preserves owned proofs, continuation lines, cross-own
   assert.equal(scopedGateOutput(input, new Set(['thm-own', 'thm-other']), new Set(['thm-own', 'thm-other'])), input);
 });
 
-test('ordinary and read-only agents compact at 200k; final adjudicators retain defaults', () => {
+test('every agent, including final adjudicators, compacts at 200k', () => {
   for (const role of ['beta', 'reader', 'refuter', 'alpha', 'alpha-report', 'final-adjudicator']) {
     const result = spawnSync(process.execPath, [
       'tools/dispatch.mjs', '--role', role, '--brief', 'briefs/alpha.md',
@@ -71,13 +71,8 @@ test('ordinary and read-only agents compact at 200k; final adjudicators retain d
     const row = JSON.parse(result.stdout);
     assert.match(row.prompt, /After compaction or handoff, reread/);
     if (row.sandbox === 'read-only') assert.match(row.prompt, /do not write checkpoints or extra files/);
-    if (role === 'final-adjudicator') {
-      assert.equal(row.auto_compact_token_limit, null);
-      assert.doesNotMatch(row.command, /model_auto_compact_token_limit/);
-    } else {
-      assert.equal(row.auto_compact_token_limit, 200000);
-      assert.match(row.command, /model_auto_compact_token_limit=200000/);
-      assert.match(row.command, /model_auto_compact_token_limit_scope="total"/);
-    }
+    assert.equal(row.auto_compact_token_limit, 200000);
+    assert.match(row.command, /model_auto_compact_token_limit=200000/);
+    assert.match(row.command, /model_auto_compact_token_limit_scope="total"/);
   }
 });

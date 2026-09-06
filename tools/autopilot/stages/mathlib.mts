@@ -23,11 +23,18 @@ import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
-import { hasLegacyStep6Cutover, step6Stages } from './mathlib.step6.mts';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 
+// Version the composed Step-6 module independently. The executor watches both
+// files and re-imports this root when either changes; the query prevents Node's
+// ESM cache from retaining the old Step-6 closures in a live controller.
+const STEP6_MODULE_URL = new URL('./mathlib.step6.mts', import.meta.url);
+const STEP6_MODULE_STAT = statSync(STEP6_MODULE_URL);
+const { hasLegacyStep6Cutover, step6Stages } = await import(
+  `${STEP6_MODULE_URL.href}?v=${STEP6_MODULE_STAT.mtimeMs}:${STEP6_MODULE_STAT.size}`
+);
+
 const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
-const TERRA_XHIGH = MODEL_PROFILE_NAMES.terraXhigh;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -42,6 +49,33 @@ export function batches(ctx: any): string[] {
     .map((f: any) => f.replace(`${ctx.run}-batch-`, '').replace('.pages.json', ''))
     .filter((n: any) => /^\d+$/.test(n))
     .sort((a: any, b: any) => Number(a) - Number(b));
+}
+
+/** Durable Step-5 output for one batch.
+ *
+ * A proof-contract file alone is not an authoring receipt: a blocked author can
+ * truthfully emit an empty contract while writing none of the manifest's items
+ * or pages.  Read the already-validated batch manifest and require the corpus
+ * files as well, so artifact accounting cannot turn an empty authoring attempt
+ * into completed coverage. */
+export function authorArtifacts(ctx: any, unit: string): string[] {
+  const manifest = `research/${ctx.run}-batch-${unit}.pages.json`;
+  const out = [manifest, `research/${ctx.run}-batch-${unit}.proof-contracts.json`];
+  try {
+    const pages = JSON.parse(readFileSync(R(ctx, manifest), 'utf8'));
+    for (const page of Array.isArray(pages) ? pages : []) {
+      if (typeof page?.category === 'string' && typeof page?.id === 'string') {
+        out.push(`library/${page.category}/${page.id}.md`);
+      }
+      for (const item of Array.isArray(page?.items) ? page.items : []) {
+        if (typeof item?.id === 'string') out.push(`items/${item.id}.md`);
+      }
+    }
+  } catch {
+    // The manifest path remains in the result, and the manifest gates provide
+    // the precise parse/schema diagnostic.  Artifact accounting stays total.
+  }
+  return [...new Set(out)];
 }
 
 /**
@@ -874,7 +908,7 @@ const step8GuardGate = (ctx) => gate('step8-guard', ['node', 'tools/step8-guard.
   '--owner-prerequisite-repairs', `research/${ctx.run}-step8-owner-prerequisite-repairs.jsonl`]);
 
 /** Final-adjudicator receipts are accepted by judge closure only after this
- * gate proves their ordered queue and successful Sol/xhigh dispatch attestation.
+ * gate proves their ordered queue and successful Astra/medium dispatch attestation.
  * Missing is a valid zero-escalation case; malformed or stale is never one. */
 const terminalResolutionGate = (ctx) => gate('step8-terminal-resolutions', [
   'node', 'tools/step8-terminal-resolution.mjs', 'check', '--run', ctx.run, '--allow-missing',
@@ -903,11 +937,16 @@ function readPublishedClosure(ctx): ReturnType<typeof readClosure> {
 function itemsFromGateFailure(failure: any): string[] {
   const text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
   const grammar = '[a-z][a-z0-9]*(?:-[a-z0-9]+){2,}';
+  const itemGrammar = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)+';
+  const itemSummaryIds = [...text.matchAll(/^\s*items:\s*(.*)$/gmi)]
+    .flatMap((m) => [...m[1].matchAll(new RegExp(itemGrammar, 'g'))].map((hit) => hit[0]));
   return [...new Set([
     ...[...text.matchAll(new RegExp(`\\[(${grammar})\\]`, 'g'))].map((m) => m[1]),
     ...[...text.matchAll(new RegExp(`\\\`(${grammar})\\\``, 'g'))].map((m) => m[1]),
     ...[...text.matchAll(new RegExp(`^\\s*(?:ERROR|FAIL)\\s+[a-z0-9-]+:\\s+(${grammar})(?=[:\\s])`, 'gmi'))].map((m) => m[1]),
     ...[...text.matchAll(new RegExp(`items/(${grammar})\\.md`, 'g'))].map((m) => m[1]),
+    ...[...text.matchAll(new RegExp(`^\\s*(${itemGrammar})\\s+\\[[^\\]]+\\]`, 'gmi'))].map((m) => m[1]),
+    ...itemSummaryIds,
   ])];
 }
 
@@ -965,9 +1004,9 @@ function writeFinalAdjudicatorTask(ctx: any, stage: any, round: number, group: s
       `## ${position}. \`${row.id}\` (${row.scope})`,
       '',
       `1. Read \`items/${row.id}.md\`, its cited dependencies, pair/page context, proof contract, judge and Alpha evidence, and this group's conventions.`,
-      '2. Independently decide whether the Alpha repair is correct. If unfamiliar or uncertain, use web search and verify against authoritative sources.',
+      '2. Independently adjudicate the Terra rejudge rejection and decide whether the current Sol repair is correct. If unfamiliar or uncertain, use web search and verify against authoritative sources.',
       `3. Write concrete evidence to \`${evidenceRel}\`, including exact source URLs and what they support, or explain why the mathematics was familiar.`,
-      '4. Either accept the current repair or independently repair it and its directly required local metadata/contracts. If that repair changes a run-local direct dependency, record the exact final-adjudicator prerequisite-repair licence required by the FA brief. Run focused checks.',
+      '4. Either accept the current Sol repair or independently repair it and its directly required local metadata/contracts. If that repair changes a run-local direct dependency, record the exact final-adjudicator prerequisite-repair licence required by the FA brief. Run focused checks. Do not append a Sol adjudication and do not request another judge call.',
       '5. Record the exact final bytes with exactly one of these commands:',
       '',
       '```bash',
@@ -990,7 +1029,7 @@ function startFinalAdjudicators(ctx: any, executor: any, stage: any, round: numb
   const assignments = step8RepairAssignments(ctx, ids);
   const unknown = assignments.filter((row) => row.scope === 'unknown' || !row.owner);
   for (const row of unknown) {
-    const message = `${row.id}: exhausted fatal repair has no Step-8 group owner; cannot construct an independent FA queue`;
+    const message = `${row.id}: rejected Terra rejudge has no Step-8 group owner; cannot construct an independent FA queue`;
     if (executor.state?.addBlocker?.(stage.id, message, `step8-fa-owner:${row.id}`))
       executor.reporter?.notify?.('blocked', message, { stage: stage.id, item: row.id });
   }
@@ -1155,6 +1194,17 @@ function readOpenAlerts(ctx): Array<{ alert_id: string; item: string; owning_gro
     return alerts.flatMap((alert: any) => {
       const decision = decisions.get(alert.alert_id);
       if (!decision) return [{ ...alert, needs_judge: false, judge_started: false }];
+      if (decision.outcome === 'confirmed_fatal') {
+        try {
+          const current = itemHashGuard(readFileSync(R(ctx, `items/${alert.item}.md`), 'utf8'));
+          if (alert.source === 'step7-read'
+            && /^[a-f0-9]{64}$/.test(String(decision.item_sha256 ?? ''))
+            && /^[a-f0-9]{64}$/.test(String(decision.post_sha256 ?? ''))
+            && decision.item_sha256 !== decision.post_sha256
+            && decision.post_sha256 === current) return [];
+        } catch { /* route the owning group again; the scope gate gives exact diagnostics */ }
+        return [{ ...alert, needs_judge: false, judge_started: false }];
+      }
       if (decision.outcome === 'confirmed_fatal_unlicensed') {
         const judgeStarted = cycles.some((cycle: any) => cycle.kind === 'alert'
           && (cycle.items ?? []).includes(alert.item)
@@ -1183,41 +1233,8 @@ function readPublishedRepairs(ctx): string[] {
   return [...ids];
 }
 
-function publishedRepairOwners(ctx, ids: string[]): string[] {
-  const wanted = new Set(ids);
-  const p = R(ctx, `research/${ctx.run}-step8-published-repairs.jsonl`);
-  if (!existsSync(p)) return [];
-  const owners = new Set<string>();
-  try {
-    for (const line of readFileSync(p, 'utf8').split(/\r?\n/)) {
-      if (!line.trim()) continue;
-      const row = JSON.parse(line);
-      if (row.kind === 'repaired' && wanted.has(row.id) && typeof row.group === 'string') owners.add(row.group);
-    }
-  } catch { return []; }
-  return alphaGroups(ctx).map((group: any) => String(group.label)).filter((label) => owners.has(label));
-}
-
-function fatalAdjudicationCounts(ctx): Map<string, number> {
-  const p = R(ctx, `research/${ctx.run}-judge-adjudications.jsonl`);
-  const contexts = new Map<string, Set<string>>();
-  if (!existsSync(p)) return new Map();
-  try {
-    for (const line of readFileSync(p, 'utf8').split(/\r?\n/)) {
-      if (!line.trim()) continue;
-      const row = JSON.parse(line);
-      if (row.outcome !== 'confirmed_fatal' || typeof row.id !== 'string') continue;
-      const seen = contexts.get(row.id) ?? new Set<string>();
-      // Two lanes rejecting the same frozen text are one fatal cycle, not two.
-      seen.add(String(row.context_sha256 ?? ''));
-      contexts.set(row.id, seen);
-    }
-  } catch { return new Map(); }
-  return new Map([...contexts].map(([id, rows]) => [id, rows.size]));
-}
-
-/** Durable Step-8 judge-cycle counts.  The receipt, not the stage-wide repair
- * counter, owns the two-context lifetime ceiling for each item. */
+/** Durable paid Step-8 rejudge counts. The receipt, not the stage-wide repair
+ * counter, owns the one-Terra-rejudge lifetime ceiling for each item. */
 function rejudgeCycleCounts(ctx): Map<string, number> {
   const p = R(ctx, `research/${ctx.run}-step8-rejudge-cycles.json`);
   const counts = new Map<string, number>();
@@ -1317,6 +1334,7 @@ const contractGates = (ctx, { reviewed = false }: { reviewed?: boolean } = {}) =
 const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['node', 'tools/defect-ledger.mjs', 'check',
   '--run', ctx.run,
   '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  '--reader-decisions', `research/${ctx.run}-step8-alert-decisions.jsonl`,
   '--closure', `research/${ctx.run}-judge-closure.json`,
   // The terminal stage may not end with any open row; steps 8–9 tolerate a
   // nonfatal one deliberately left open (step 9 owns the sweep that closes it).
@@ -2007,9 +2025,9 @@ export const stages = [
     // A zero-exit author result is only a process receipt. Frontier 21 batch 8
     // explicitly stopped after one of two pairs and omitted its contract, yet
     // coverage released the reader and made split retry an impossible command.
-    // The per-batch contract is the durable completion artifact consumed by
-    // Step 6, so keep that unit in authoring until the artifact actually lands.
-    artifacts: (ctx, u) => `research/${ctx.run}-batch-${u}.proof-contracts.json`,
+    // Require every manifest-declared page and item as well as the contract.
+    // A blocked author can emit a valid empty contract, which is not a build.
+    artifacts: authorArtifacts,
     concurrency: 27,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
@@ -2054,14 +2072,15 @@ export const stages = [
     maxFixRounds: 10,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
       // Artifact accounting now keeps a partial zero-exit author covered but
-      // incomplete. Resume exactly the batches whose required contracts never
-      // landed. The executor names only covered, artifact-incomplete units that
-      // are no longer active, so one slow ordinary author cannot suppress or
-      // duplicate recovery for its completed siblings.
+      // incomplete. Resume exactly the batches whose required contracts,
+      // manifest-declared pages, or manifest-declared items never landed. The
+      // executor names only covered, artifact-incomplete units that are no
+      // longer active, so one slow ordinary author cannot suppress or duplicate
+      // recovery for its completed siblings.
       if (failure.id === 'stage-stalemate') {
         const requested = Array.isArray(failure.units) ? failure.units.map(String) : batches(ctx).map(String);
-        const missing = requested.filter((u: any) => !existsSync(join(ctx.repo,
-          'research', `${ctx.run}-batch-${u}.proof-contracts.json`)));
+        const missing = requested.filter((u: any) =>
+          authorArtifacts(ctx, u).some((path) => !existsSync(join(ctx.repo, path))));
         for (const u of missing) {
           executor.start(stage, {
             role: 'beta', label: `author-recover-${u}-${round}`,
@@ -2363,15 +2382,15 @@ export const stages = [
   // on disk recording it. `alpha-group-read` carries `--sandbox read-only`; its
   // digest reaches disk through `--result-artifact`, which the DISPATCHER writes.
   //
-  // QUOTA. Eight Terra group-reader lanes may run concurrently with the Terra
-  // judge sweep, all on the Codex weekly cap. A cap is a ceiling the engine may
-  // use, never a quota it must spend: if lanes start dying on a limit, lower
+  // QUOTA. Eight high-context group-reader lanes may run concurrently with the
+  // judge sweep. A cap is a ceiling the engine may use, never a quota it must
+  // spend: if lanes start dying on a limit, lower
   // `alpha-group-read`'s cap rather than re-spending the loop.
   {
     id: '7-judge',
-    label: 'one stateless Terra judge per item, with whole-group readers alongside',
+    label: 'one stateless judge per item, with whole-group readers alongside',
     modelProfile: (plan: any) => plan.role === 'alpha-group-read'
-      ? TERRA_XHIGH
+      ? TERRA_HIGH
       : undefined,
     // One unit for the sweep, one per group. The stage is done when the ledger
     // is covered AND every group has a digest — which is what makes the reading
@@ -2539,7 +2558,11 @@ export const stages = [
     // write a scope whose groups no longer match the assignment on disk, or a
     // rejection belonging to no batch manifest — which nobody would adjudicate.
     gates: (ctx) => [
-      gate('step8-scope', ['node', 'tools/step8-scope.mjs', 'check', '--run', ctx.run], {
+      // Reader warnings are inputs to the group adjudicators rendered here.
+      // Their dispositions become mandatory at 8-adjudicate's strict recheck;
+      // requiring them before those agents can start is a circular gate.
+      gate('step8-scope', ['node', 'tools/step8-scope.mjs', 'check', '--run', ctx.run,
+        '--allow-pending-alerts'], {
         liveness: { pattern: /(\d+) item\(s\) partitioned/.source, min: 1, unit: 'items partitioned' },
       }),
       // Published repairs intentionally lack current verdicts here: 8-rejudge
@@ -2906,31 +2929,25 @@ export const stages = [
       terminalResolutionGate(ctx),
       closureGate(ctx),
     ],
-    // A rejudge can surface a NEW rejection on repaired text, which needs
-    // adjudicating and possibly repairing again. Two distinct frozen contexts
-    // per item are the lifetime ceiling: after the second fatal repair, one
-    // independent FA per owning group records exact-hash terminal closure;
-    // other exhaustion remains an explicit owner/session blocker. Neither path
-    // can buy a third judge cycle.
-    // The two-context ceiling is PER ITEM and is enforced durably by
+    // A rejudge can surface a NEW rejection on repaired text. It goes directly
+    // to one independent Astra FA per owning group for adjudication, any final
+    // repair, and exact-hash terminal closure. It never returns to Sol and no
+    // third judge call exists.
+    // The one-paid-rejudge ceiling is PER ITEM and is enforced durably by
     // step8-rejudge-cycle.mjs before it probes or spends a judge call.  Keep
-    // this stage's two-round convergence budget re-armable after a supervising
+    // this stage's orchestration budget re-armable after a supervising
     // intervention: one set of exhausted items can otherwise consume the
-    // stage-wide counter and strand different items that still have an unused
-    // legal cycle (frontier-19).  Re-arming the stage cannot buy a third
-    // context for any item because the cycle receipt remains authoritative.
-    // Three engine repair passes implement two mathematical cycles plus the
-    // independent close: (1) adjudicate the second judge rejection, (2) let the
-    // owning group Alpha make its second fatal repair, (3) send the exhausted
-    // repaired item to one fresh Sol-xhigh FA for that group. The durable cycle
-    // receipt still forbids a third judge call.
+    // stage-wide counter and strand different items that still need their one
+    // legal rejudge (frontier-19). Re-arming the stage cannot buy a second paid
+    // rejudge because the per-item cycle receipt remains authoritative.
+    // Stage repair rounds are orchestration retries, not extra mathematical
+    // cycles: contested Terra output always routes to Astra, while a missing
+    // Terra result blocks rather than buying another call.
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure, prevRoundAt = null }) => {
       const closure = readClosure(ctx);
       const published = readPublishedClosure(ctx);
       if (!closure && !published) return;
-      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id);
-
       // Decide every rejection already on disk before buying another verdict.
       // Frontier-18 had current unadjudicated rows and repaired items together;
       // the old order swept first, then adjudicated those pre-existing rows,
@@ -2939,43 +2956,11 @@ export const stages = [
       const publishedContested = [...new Set([...(published?.unadjudicated ?? []), ...(published?.open_fatal ?? [])])];
       const contested = [...new Set([...runContested, ...publishedContested])];
       if (contested.length) {
-        // A second confirmed-fatal context is no longer an immediate owner
-        // blocker. The owning group Alpha performs the second repair first;
-        // only the resulting exhausted `needs_rejudge` text is independent-FA
-        // material. This preserves judge -> adjudication -> repair as a full
-        // second cycle instead of stopping between adjudication and repair.
-        const liveContested = contested;
-        refreshStep8Scope(ctx);
-        const liveRunContested = runContested.filter((id) => liveContested.includes(id));
-        const livePublishedContested = publishedContested.filter((id) => liveContested.includes(id));
-        const owners = [...new Set([
-          ...(liveRunContested.length ? step8Owners(ctx, liveRunContested) : []),
-          ...publishedRepairOwners(ctx, livePublishedContested),
-        ])];
-        for (const g of owners) {
-          // A published rejection is outside the rendered run partition, so
-          // the group's static Step-8 task cannot name it.  Frontier 21 routed
-          // the Baire rejection to its correct owner but gave that owner a task
-          // saying it had no open rejection, and two repair rounds did no work.
-          // Materialise the same exact run/published tuple envelope used by the
-          // other Step-8 repair stages so the dispatch has both evidence and
-          // explicit authority for precisely its assigned contested rows.
-          const baseTask = g
-            ? (((closure?.unadjudicated?.length ?? 0) > 0 && runContested.some((id) => (closure?.unadjudicated ?? []).includes(id)))
-              ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, `research/${ctx.run}-alpha-${g}-step8.task.md`]
-              : [`research/${ctx.run}-alpha-${g}-step8.task.md`, `research/${ctx.run}-alpha-step8.task.md`])
-            : [`research/${ctx.run}-alpha-step8.task.md`];
-          const envelopeTask = writeStep8RepairEnvelope({
-            ctx, stage, round, group: g, mode: 'rejudge-adjudication', failures,
-            named: liveContested, task: baseTask,
-          });
-          startStep8Group(ctx, executor, stage, {
-            label: g ? `adjudicate-rejudge-${g}-round-${round}` : `adjudicate-rejudge-round-${round}`,
-            job: 'adjudication',
-            task: [envelopeTask],
-            timeout: 21600,
-          }, g);
-        }
+        // The initial Sol group adjudicator has already had its one opportunity
+        // to decide and repair the Step-7 evidence. A rejection from the one
+        // paid Terra rejudge goes directly to the independent Astra final
+        // adjudicator; it never returns to Sol and never buys a third verdict.
+        startFinalAdjudicators(ctx, executor, stage, round, contested);
         return;
       }
 
@@ -2994,21 +2979,10 @@ export const stages = [
         // Name each exhausted item as the intervention blocker and continue
         // only with ids whose durable per-item budget remains.
         const cycleCounts = rejudgeCycleCounts(ctx);
-        const exhausted = owed.filter((id) => (cycleCounts.get(id) ?? 0) >= 2);
-        const fatalCounts = fatalAdjudicationCounts(ctx);
-        const faCandidates = exhausted.filter((id) => (fatalCounts.get(id) ?? 0) >= 2);
-        const unresolvedWithoutTwoFatalRepairs = exhausted.filter((id) => !faCandidates.includes(id));
-        // FA review is deliberately isolated from any funded judge fan-out.
-        // It may independently edit an item, so running it alongside a sweep
-        // could stale a sibling's pair context mid-call. Drain these queues,
-        // then let the next battery handle still-eligible owed items.
-        if (faCandidates.length) {
-          startFinalAdjudicators(ctx, executor, stage, round, faCandidates);
-          return;
-        }
-        for (const id of unresolvedWithoutTwoFatalRepairs) {
-          const message = `${id}: current repaired text still needs closure after two Step-8 frozen contexts; intervention is required and no third judge cycle is permitted`;
-          if (executor.state?.addBlocker?.(stage.id, message, `step8-two-cycle-owed:${id}`))
+        const exhausted = owed.filter((id) => (cycleCounts.get(id) ?? 0) >= 1);
+        for (const id of exhausted) {
+          const message = `${id}: the one paid Terra rejudge produced no current verdict; intervention is required and no second rejudge is permitted`;
+          if (executor.state?.addBlocker?.(stage.id, message, `step8-one-rejudge-owed:${id}`))
             executor.reporter?.notify?.('blocked', message, { stage: stage.id, item: id });
         }
         const liveOwed = owed.filter((id) => !exhausted.includes(id));
@@ -3044,7 +3018,7 @@ export const stages = [
   // receipt does not exist until 9-receipt, so full `level-coverage` cannot
   // honestly run here; `8-final` below closes exact judge currency instead.
   // Repair rounds here may update receipts or contracts only. The task makes
-  // an item edit a visible blocker because the two-cycle judge stage is
+  // an item edit a visible blocker because the one-rejudge stage is
   // already closed.
   {
     id: '8-close',

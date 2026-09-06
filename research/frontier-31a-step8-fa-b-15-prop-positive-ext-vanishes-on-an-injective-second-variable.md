@@ -1,0 +1,13 @@
+# FA terminal evidence — queue position 15
+
+Disposition: repaired. Source status: familiar.
+
+Reviewed the current statement/proof, both direct dependencies (the injective Ext definition and published positive-derived-vanishing proposition), supplied-datum definition, batch-8 Ext page manifest and prior page/coverage conventions, batch and merged proof contract, Sol adjudication, original rejection and final Terra rejection. The page distinguishes supplied Ext_I from balanced Ext. The original replacement-resolution gap is repaired by the published vanishing proposition: its statement covers every supplied datum and its proof explicitly compares with the trivial resolution. The final domain objection is valid as a precision defect: the Ext definition restricts both arguments to the datum's domain. I have explicitly quantified the abelian category, datum I on D, J in D and M in D, retaining DC and n>0. The proof contract now records the actual repaired argument rather than the discarded arbitrary-resolution computation.
+
+Independently, Hom_A(M,-) is additive and left exact. Applying the published vanishing proposition to J gives R_I^n Hom(M,-)(J)=0. Its defining complex has terms Hom(M,I^q(J)) and differential postcomposition with d_I, exactly the Ext_I definition. Thus this is the required group for the supplied datum, not merely for the length-zero resolution. Zero objects cause no exception; degree zero is deliberately excluded. This basic derived-functor argument is familiar enough to verify directly against the complete local dependencies; no external verification was needed.
+
+Only the queued item and its two local contracts were edited. No prerequisite licence is needed. Focused precheck is run before recording. After the recorder accepts these bytes the next action is queue position 16; there are no unresolved mathematical obligations for position 15.
+
+Position 16 peer-context refresh: the projective Ext bifunctor now explicitly assumes its datum on all objects of A. This only supplies the missing domain hypothesis of an existing peer statement; the comparison/vanishing arguments reviewed here already use supplied resolutions for their arguments and are unchanged. Own item bytes are unchanged. Reseal the same decision.
+
+Context refresh after position 17: The peer balance/LES assertion now explicitly supplies the common resolution hypotheses and identifies the horseshoe connecting maps. The earlier comparison, variance and positive-vanishing proofs do not use this proposition; their arguments remain valid under the previously checked hypotheses. Own item bytes are unchanged. Reseal the same decision.

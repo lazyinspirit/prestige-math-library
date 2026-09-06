@@ -3490,13 +3490,12 @@ Henstock–Kurzweil integral, **every derivative is HK integrable with an
 unconditional FTC and no integrability hypothesis**, and Hake's theorem. RC-11
 mints all of that and this page re-mints none of it.
 
-**Nothing here is dropped.** The two pages meet at exactly one statement, the
-comparison of the HK and Lebesgue integrals, and it stays **MT-19's**: RC-11
-states the classical half only and explicitly leaves to this page that a
-nonnegative HK integrable function is Lebesgue integrable, that an $L^1$ function
-is HK integrable with the same value, and that the HK integral strictly extends
-the Lebesgue integral on the line while neither extends the other in general.
-Add one item here for that comparison, citing RC-11. This page's own sharp FTC for
+**The full HK/Lebesgue comparison remains source-recorded.** RC-11 proves the
+gauge-theoretic FTC but does not develop the additional Saks--Henstock and
+monotone-convergence machinery needed to prove the comparison. MT-19 therefore
+adds a `rem-` bridge to the existing source-recorded
+`rem-henstock-kurzweil-vs-lebesgue`; it does not present the comparison as
+locally proved. This page's own sharp FTC for
 absolutely continuous functions is untouched and remains the measure-theoretic
 statement; RC-11's is the gauge-theoretic one, and the two are different theorems
 with different hypotheses.
@@ -3523,8 +3522,10 @@ quoted exactly rather than described. **AC $\Rightarrow$ (N)**; **the Cantor fun
 is continuous, BV, and fails (N)** — the exact gap between "continuous BV" and "AC".
 **Banach–Zarecki** (**landmark**): $F$ is absolutely continuous on $[a,b]$ **iff**
 $F$ is continuous, of bounded variation, and satisfies Luzin's property (N); the
-hard direction is $\Leftarrow$, and the proof runs through the Vitali covering
-theorem and the FTC. This discharges `rem-banach-zarecki`. **A sharper sufficient condition, worth an
+hard direction is $\Leftarrow$, and the proof explicitly consumes Jordan
+decomposition, BV differentiability almost everywhere, integrability of the
+derivative of each increasing summand, the Vitali covering theorem, and the FTC.
+This discharges `rem-banach-zarecki`. **A sharper sufficient condition, worth an
 item because it is the form most often wanted in practice** (Cohn Thm 6.3.11,
 verified): if $F$ is continuous on $[a,b]$, differentiable **except at countably
 many points**, and $F'$ is integrable, then $F$ is absolutely continuous and the FTC

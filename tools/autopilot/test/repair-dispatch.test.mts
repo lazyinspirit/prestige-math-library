@@ -243,6 +243,34 @@ test('contract residue cannot consume rejudge budget and is routed at Step-8 clo
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('Step-8 close routes boundary-audit item summaries to their exact owners', async () => {
+  const repo = groupedFixture();
+  const started: any[] = [];
+  const close: any = stages.find((candidate: any) => candidate.id === '8-close');
+  await close.onGateFailure({
+    ctx: { run: 'demo', repo }, executor: { start: (_s: any, plan: any) => started.push(plan) },
+    stage: close, round: 1,
+    failure: {
+      id: 'boundary-audit',
+      why: 'Every line above is a candidate for a human read, not a verdict.',
+      output: [
+        'TEMPLATE REUSE — 2 cluster(s) at or above 3 members.',
+        '  3 rows · axes: empty, zero',
+        '    items: thm-demo-x',
+        '  3 rows · axes: degenerate, one',
+        '    items: thm-demo-y',
+      ].join('\n'),
+    },
+  });
+  assert.deepEqual(started.map((plan) => plan.label).sort(), ['step8-close-a-1', 'step8-close-b-1']);
+  for (const plan of started) {
+    const envelope = readFileSync(join(repo, plan.task[0]), 'utf8');
+    assert.match(envelope, /"assigned_items": \[\s*\{/);
+    assert.doesNotMatch(plan.label, /review/);
+  }
+  rmSync(repo, { recursive: true, force: true });
+});
+
 test('step 8 routes exact unadjudicated closure rows to one narrow recovery Alpha', async () => {
   const repo = groupedFixture();
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({

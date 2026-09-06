@@ -64,12 +64,9 @@ artifacts, process state, and git history are authoritative.
   session may perform SESSION duties: inspect status/logs, run gates and
   sweeps when the workflow calls for them, preserve ledgers, commit/report as
   owned by the workflow, and diagnose liveness.
-- Model bindings remain normative: Audit Alpha/Beta use GPT 5.6 Sol through the
-  Codex subscription at `xhigh` with the one-million-token context; independent
-  readers use GPT 5.6 Terra with the same settings; proof refuters use DeepSeek
-  V4 Pro at `max`; judge lanes are DeepSeek V4 Pro plus GPT 5.6 Terra under
-  `JUDGE_LINEUP=deepseek+terra` and the independent 16-call-per-model
-  scheduler. Do not substitute Claude for these roles.
+- The model bindings in this concluded frontier-17 handover are retired. Do not
+  reuse them as workflow configuration; `tools/models.mjs` is the only live
+  registry for current Alpha, Beta, reader, refuter, and judge lanes.
 - Never manually publish. Publication and `status: published` remain pending
   the owner's approval.
 - Step 10 must retain all mathematical content when Sigma rejects a render.

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // One durable Step-8 rejudge cycle. The receipt is per item, so an unrelated
-// repair does not spend another item's budget, and the frozen context that
-// licensed the first repair counts.
-// A funded configured-judge preflight runs immediately before fan-out (or is reused
+// repair does not spend another item's budget. The frozen context that
+// licensed the first repair is retained as provenance but does not spend it.
+// Exactly one paid Terra rejudge follows a Sol-licensed repair. A funded
+// configured-judge preflight runs immediately before fan-out (or is reused
 // for at most five minutes under the identical lineup).
 
 import { existsSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
@@ -14,12 +15,14 @@ import { resolveLineup } from './models.mjs';
 import { tsxLoader } from './paths.mjs';
 import { loadStep8JudgeEvidence, rejectionKey } from './step8-evidence.mjs';
 
-export const STEP8_MAX_REJUDGE_CYCLES = 2;
+export const STEP8_MAX_REJUDGE_CYCLES = 1;
+export const STEP8_REJUDGE_RECEIPT_VERSION = 2;
 export const STEP8_PREFLIGHT_TTL_MS = 5 * 60_000;
 
 export function cycleCounts(receipt) {
   const counts = new Map();
   for (const cycle of receipt?.cycles ?? []) {
+    if (String(cycle?.kind ?? '').startsWith('initial-')) continue;
     for (const id of new Set(cycle?.items ?? [])) counts.set(id, (counts.get(id) ?? 0) + 1);
   }
   return counts;
@@ -101,7 +104,7 @@ function main() {
   if (!run || !ledger || !adjudications || !cost || !ids.length || !['initial', 'repair', 'alert'].includes(kind)) usage();
 
   let receipt = {
-    version: 1,
+    version: STEP8_REJUDGE_RECEIPT_VERSION,
     run,
     max_cycles_per_item: STEP8_MAX_REJUDGE_CYCLES,
     initial_fatal_contexts: {},
@@ -111,14 +114,16 @@ function main() {
     try { receipt = JSON.parse(readFileSync(receiptPath, 'utf8')); }
     catch (cause) { console.error(`${receiptPath}: invalid JSON (${cause.message})`); process.exit(2); }
   }
-  if (receipt.version !== 1 || receipt.run !== run
-    || receipt.max_cycles_per_item !== STEP8_MAX_REJUDGE_CYCLES || !Array.isArray(receipt.cycles)) {
-    console.error(`${receiptPath}: expected a version-1 ${run} receipt with a ${STEP8_MAX_REJUDGE_CYCLES}-cycle ceiling`);
+  const currentReceipt = receipt.version === STEP8_REJUDGE_RECEIPT_VERSION
+    && receipt.max_cycles_per_item === STEP8_MAX_REJUDGE_CYCLES;
+  const legacyReceipt = receipt.version === 1 && receipt.max_cycles_per_item === 2;
+  if ((!currentReceipt && !legacyReceipt) || receipt.run !== run || !Array.isArray(receipt.cycles)) {
+    console.error(`${receiptPath}: expected a current version-${STEP8_REJUDGE_RECEIPT_VERSION} ${run} receipt with one paid rejudge, or a legacy version-1 receipt`);
     process.exit(2);
   }
 
   // Check recorded lifetime currency before even reading the other ledgers. An item that has
-  // already consumed both frozen contexts is an intervention blocker, not a
+  // already consumed its paid Terra rejudge is an intervention blocker, not a
   // reason to run another availability probe or judge call.
   let exhausted = exhaustedItems(ids, receipt);
   if (exhausted.length) {
@@ -128,10 +133,8 @@ function main() {
     process.exit(1);
   }
 
-  // The frozen judge context that produced the Step-8 repair is cycle one. It
-  // predates this wrapper, so seed it exactly once from a genuine rejection +
-  // confirmed-fatal adjudication join. Without this, "three rejudge rounds"
-  // meant the initial context plus three more paid contexts.
+  // Retain the frozen judge context that produced the Step-8 repair as
+  // provenance. It does not consume the one paid Terra rejudge budget.
   const evidence = loadStep8JudgeEvidence(
     resolve(root, ledger),
     resolve(root, adjudications),
@@ -148,7 +151,7 @@ function main() {
   exhausted = exhaustedItems(ids, receipt);
   if (exhausted.length) {
     for (const id of exhausted) {
-      console.error(`ERROR rejudge-cycle-exhausted [${id}]: two frozen contexts already exist; intervention required`);
+      console.error(`ERROR rejudge-cycle-exhausted [${id}]: the one paid Terra rejudge is already recorded; intervention required`);
     }
     process.exit(1);
   }
@@ -189,7 +192,7 @@ function main() {
     exit_code: null,
   };
   receipt.cycles.push(cycle);
-  // Count before fan-out: a killed process cannot silently buy a third call.
+  // Count before fan-out: a killed process cannot silently buy a second call.
   writeJsonAtomic(receiptPath, receipt);
 
   const sweep = spawnSync(process.execPath, ['tools/judge-sweep.mjs', '--run', run,

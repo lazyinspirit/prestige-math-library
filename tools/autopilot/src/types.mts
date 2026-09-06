@@ -208,6 +208,8 @@ export interface Config {
   stateDir: string;
   dispatchDir: string;
   stages?: string;
+  /** Stage-spec modules whose edits must hot-reload the active table. */
+  stagesWatch?: string[];
   argv: string[];
   concurrency?: number;
   /** Absent means no global limit. The per-stage caps mirror the dispatcher's

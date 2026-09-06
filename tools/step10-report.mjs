@@ -298,7 +298,7 @@ const lines = [`# ${run} — Step 10 owner report`, '', response.executive_summa
   '## Verification closure', '',
   `- Judge lineup: ${evidence.verification.judge_lineup}.`,
   `- Current judge verdicts complete: ${evidence.verification.verdicts_complete}/${evidence.verification.scope}.`,
-  `- Terminal owner/session resolutions after the ${TERMINAL_REJUDGE_ROUNDS}-cycle cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
+  `- Astra final-adjudicator resolutions after the ${TERMINAL_REJUDGE_ROUNDS}-rejudge cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
   `- Judge closure: ${evidence.verification.closure_closed ? 'closed' : 'open'}; workflow-owned blockers: ${evidence.verification.workflow_owned_blockers}.`,
   `- Evidence fingerprint: \`${evidence.evidence_sha256}\`.`, '',
   '## Fatal mathematical defects — exhaustive ledger table', '',

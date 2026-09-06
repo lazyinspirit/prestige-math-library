@@ -56,6 +56,10 @@ export const stripVerification = (text) => {
  * that licenses the stamp. Other verification evidence remains in scope. */
 export const stripJudgeStamp = (text) =>
   String(text)
+    // Flow-style verification maps are valid corpus frontmatter too. The
+    // stamp writer appends its judge mapping last, so remove that exact suffix
+    // and recover the byte-for-byte pre-stamp map for verdict currency.
+    .replace(/^(verification:\s*\{[^{}\n]*?),\s*judge:\s*\{[^{}\n]*\}(\s*\}\s*)$/m, "$1$2")
     .replace(/^ {2}judge:\n(?: {4}.*\n)*/m, "")
     .replace(/^verification:\n(?=^(?:---|[A-Za-z_][A-Za-z0-9_-]*:))/m, "");
 

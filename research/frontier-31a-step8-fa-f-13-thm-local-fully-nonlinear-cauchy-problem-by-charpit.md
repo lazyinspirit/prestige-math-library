@@ -1,0 +1,15 @@
+# Final adjudication — queue position 13
+
+Disposition: accepted-after-review. Source status: familiar.
+
+Independently read the current theorem, all seven complete direct dependencies, batch-16 A/B and fixed conventions, manifest/coverage route and Reader-16, the complete proof contract including Alpha's risk_review, Alpha's Step-8 adjudication and both Terra rejections. The earlier domain and regularity repairs are present: an open jet domain, C2 F, C1 supplied initial strip, n-1 parameters, a named base point, and the full-rank matrix.
+
+The final rejection is not a mathematical defect. A theorem giving a construction for general C2 F includes fully nonlinear F as well as its affine special cases. It nowhere asserts that every C2 F is non-affine. The title identifies the fully nonlinear application; the direct definition explicitly distinguishes general equations from the non-affine subclass. Requiring non-affinity would remove valid special cases without closing a proof gap. The batch's general Charpit system likewise is stated for arbitrary C2 F. I accept the current scope.
+
+Independent proof audit: the field G=(F_p,P dot F_p,-F_x-P F_z) is C1 on O, so the common local ODE family exists uniquely near the supplied datum. C1 initial-state dependence composed with the C1 data map gives the y derivatives; the ODE supplies the continuous s derivative, giving joint C1 regularity. The projection derivative at (0,y0) is exactly [F_p,Dgamma]; the inverse function theorem gives a local C1 inverse through that point. Constraint preservation follows by cancellation of F_x F_p + F_z P F_p + F_p(-F_x-P F_z).
+
+For each y derivative the contact defect H=Z_y-P X_y obeys H_s=partial_y(F(X,Z,P))-F_z H=-F_z H. Although the strip is initially only C1, its parameter derivatives are differentiable in s by differentiating the integral ODE with C1 G, which is also the variational-equation conclusion of the supplied dependence theorem. Thus the contact lemma applies without demanding C2 initial data. Initial compatibility and the integrating factor give H=0. Together with Z_s=P X_s this gives D_(s,y)Z=P D_(s,y)X, hence Du=P after inversion. In particular u is C1 (indeed its first derivatives are C1), F(x,u,Du)=0, and u(gamma(y))=phi(y) near y0 because the strip takes its initial values at s=0.
+
+Uniqueness is expressly confined to the local inverse projection of this fixed strip; it does not claim uniqueness across different initial momentum choices or global branches. Full rank excludes F_p=0 and forces tangential rank n-1 at the base point; local shrinking keeps the jet in O. The zero-dimensional tangential case n=1 has the same argument with no y columns. These are familiar ODE, inverse-function and contact calculations, independently recomputed; no external verification was needed.
+
+The existing risk_review and step contract accurately retain the regularity, rank and restricted uniqueness boundaries. Focused precheck, strict contract and rendercheck pass. No item or dependency edit, no prerequisite licence, no judge stamp, and no unresolved obligation. Next: record acceptance, then position 14.

@@ -1,0 +1,11 @@
+# FA terminal evidence — queue position 16
+
+Disposition: repaired. Source status: familiar.
+
+Reviewed the current item, projective Ext definition, supplied-comparison lift lemma, complete published homotopy-uniqueness theorem, the old covariant homology lemma (to check the rejected citation), batch-8 Ext page context and supplied-data conventions, original and rejudge rejection, Sol adjudication, and both proof contracts. Sol correctly replaced the inapplicable covariant derived-homology citation by direct chain homotopies. The final Terra rejection correctly identifies that a datum on an unspecified resolved class does not define a bifunctor on all A. I explicitly require the supplied datum on every object of the abelian category A. This preserves the claimed whole-category scope with its necessary hypothesis and does not assert that DC chooses such global data.
+
+For u:M'→M a lift P(M')→P(M) acts by precomposition on Hom(P(M),N); v:N→N' acts by postcomposition, and the two operations commute. If f-g=dh+hd is a chain homotopy between lifts, the cochain homotopy is s^q(phi)=phi h_(q-1), s^0=0; direct expansion gives f*−g*=delta s+s delta with the unsigned Hom differential used on this page. Thus cohomology maps are independent of lifts. Composite lifts lift composites, and identity lifts may be identities, establishing both functor laws. Degree zero and zero objects are included. These comparison/Hom calculations are familiar and fully verified locally; external sources were not needed.
+
+Updated only this queued statement, its manifest dependency list to the already-current direct homotopy theorem, and its two contracts to remove the stale invalid citation. No dependency was edited. Focused precheck precedes terminal recording. Any necessary earlier receipt refresh only acknowledges this explicit peer-domain hypothesis, which changes none of their proofs. Next action after recording is position 17; no open mathematical obligation remains here.
+
+Context refresh after position 17: The peer balance/LES assertion now explicitly supplies the common resolution hypotheses and identifies the horseshoe connecting maps. The earlier comparison, variance and positive-vanishing proofs do not use this proposition; their arguments remain valid under the previously checked hypotheses. Own item bytes are unchanged. Reseal the same decision.

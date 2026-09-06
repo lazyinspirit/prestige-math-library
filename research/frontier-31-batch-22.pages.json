@@ -1,0 +1,214 @@
+[
+  {
+    "order": 639,
+    "id": "interactive-proof-systems-and-public-coins",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Interactive Proof Systems and Public Coins",
+    "companion": "interactive-proof-systems-and-public-coins-examples",
+    "requires": [
+      "randomized-complexity-and-amplification",
+      "space-complexity-savitch-and-tqbf"
+    ],
+    "items": [
+      {
+        "id": "def-interactive-proof-transcript-round-and-strategy",
+        "kind": "definition",
+        "title": "Interactive-proof transcripts, rounds, and prover strategies",
+        "deps": [
+          "def-probabilistic-polynomial-time-machine"
+        ]
+      },
+      {
+        "id": "def-completeness-and-soundness",
+        "kind": "definition",
+        "title": "Completeness and soundness of an interactive proof",
+        "deps": [
+          "def-interactive-proof-transcript-round-and-strategy"
+        ]
+      },
+      {
+        "id": "def-ip",
+        "kind": "definition",
+        "title": "The class IP",
+        "deps": [
+          "def-interactive-proof-transcript-round-and-strategy",
+          "def-completeness-and-soundness"
+        ]
+      },
+      {
+        "id": "prop-np-is-contained-in-ip",
+        "kind": "proposition",
+        "title": "NP is contained in IP",
+        "strategy": "Turn a polynomially balanced NP certificate verifier into a one-round interactive proof: the prover sends the certificate and the verifier checks it deterministically.  The verifier's acceptance is therefore exactly the verifier predicate, which supplies perfect completeness and zero soundness error.",
+        "deps": [
+          "def-np-by-verifiers",
+          "def-completeness-and-soundness",
+          "def-ip"
+        ]
+      },
+      {
+        "id": "lem-sequential-repetition-amplifies-error",
+        "kind": "lemma",
+        "title": "Sequential repetition amplifies interactive-proof error",
+        "strategy": "Run fresh, reset copies in sequence.  For the usual two-sided gap, accept by majority: a fixed honest strategy sees independent trials, while on a no-instance every conditional acceptance probability remains at most the original soundness bound, so the conditional-moment Chernoff argument gives exponential error decay despite an adaptive prover.  Record the perfect-completeness special case separately: accepting only when every copy accepts preserves completeness one and gives the exact s^t soundness bound by conditioning on each accepted transcript.",
+        "deps": [
+          "def-completeness-and-soundness"
+        ]
+      },
+      {
+        "id": "def-private-coin-public-coin-and-arthur-merlin-protocol",
+        "kind": "definition",
+        "title": "Private-coin, public-coin, and Arthur--Merlin protocols",
+        "deps": [
+          "def-interactive-proof-transcript-round-and-strategy",
+          "def-completeness-and-soundness",
+          "def-ip"
+        ]
+      },
+      {
+        "id": "lem-hashing-commits-public-randomness",
+        "kind": "lemma",
+        "title": "Pairwise-independent hashing gives a public set-size challenge",
+        "strategy": "For a fixed efficiently checkable set of transcripts, have the verifier publish a sampled pairwise-independent hash and target, then require a preimage in the set.  Bound sparse-set success by a union bound and dense-set success by inclusion--exclusion using the two-point probabilities; choose the output length for a constant gap, then amplify.  The lemma uses \"commits\" operationally only: it makes the public challenge checkable, not a cryptographic hiding or binding claim.",
+        "deps": [
+          "def-pairwise-independent-hash-family"
+        ]
+      },
+      {
+        "id": "thm-private-coin-ip-equals-public-coin-ip",
+        "kind": "theorem",
+        "title": "Private-coin IP equals public-coin IP",
+        "strategy": "The public-coin inclusion in IP is immediate.  For the converse, first use the majority form of fresh sequential repetition to reduce both errors sufficiently, then apply the Goldwasser--Sipser set-size protocol to successive sets of verifier random strings consistent with an accepting transcript.  The published hash challenge replaces the private randomness; account explicitly for the two added messages, the polynomial blow-up, and the retained completeness and soundness gap.",
+        "deps": [
+          "def-ip",
+          "def-private-coin-public-coin-and-arthur-merlin-protocol",
+          "lem-sequential-repetition-amplifies-error",
+          "lem-hashing-commits-public-randomness"
+        ]
+      },
+      {
+        "id": "def-protocol-game-tree-and-value",
+        "kind": "definition",
+        "title": "Protocol game trees and acceptance value",
+        "deps": [
+          "def-interactive-proof-transcript-round-and-strategy"
+        ]
+      },
+      {
+        "id": "lem-optimal-prover-may-be-deterministic",
+        "kind": "lemma",
+        "title": "An optimal finite-horizon prover may be deterministic",
+        "strategy": "Evaluate the finite protocol game tree backwards.  At every prover node choose one child of maximal continuation value; chance nodes average their children.  Replacing a randomized prover's distribution by such a maximizing choice cannot decrease its acceptance probability, yielding a deterministic strategy.",
+        "deps": [
+          "def-protocol-game-tree-and-value"
+        ]
+      },
+      {
+        "id": "lem-protocol-value-is-computable-in-polynomial-space",
+        "kind": "lemma",
+        "title": "A polynomial-round protocol value is computable in polynomial space",
+        "strategy": "Depth-first evaluate the normalized protocol game tree.  Store one polynomial-length transcript, the current verifier configuration, a polynomial-depth recursion stack, and exact acceptance counts whose denominators are determined by the polynomially many verifier coins.  Enumerating exponentially many prover messages or chance outcomes costs time but not more than polynomial space.",
+        "deps": [
+          "def-protocol-game-tree-and-value",
+          "lem-optimal-prover-may-be-deterministic",
+          "def-pspace-and-npspace"
+        ]
+      },
+      {
+        "id": "thm-ip-is-contained-in-pspace",
+        "kind": "theorem",
+        "title": "IP is contained in PSPACE",
+        "strategy": "For a fixed IP verifier and input, use the polynomial-space game-tree evaluator to compute the maximum acceptance value over prover strategies exactly, then compare it with the fixed completeness/soundness thresholds.  The promise gap makes the comparison decide membership, so every IP language has a PSPACE decider.",
+        "deps": [
+          "def-ip",
+          "def-pspace-and-npspace",
+          "lem-protocol-value-is-computable-in-polynomial-space"
+        ]
+      },
+      {
+        "id": "def-graph-nonisomorphism-protocol",
+        "kind": "definition",
+        "title": "The private-coin graph-nonisomorphism protocol",
+        "deps": [
+          "def-interactive-proof-transcript-round-and-strategy",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "thm-graph-nonisomorphism-is-in-ip",
+        "kind": "theorem",
+        "title": "Graph nonisomorphism is in IP",
+        "strategy": "For nonisomorphic input graphs, an unbounded prover identifies which randomly permuted graph the verifier sent, so completeness is one.  For isomorphic inputs the two challenge distributions coincide, so every possibly adaptive prover guesses the hidden bit with probability at most one half.  Invoke the sequential-repetition lemma on fresh protocol copies to reach the chosen soundness threshold.",
+        "deps": [
+          "def-ip",
+          "def-completeness-and-soundness",
+          "def-graph-nonisomorphism-protocol",
+          "lem-sequential-repetition-amplifies-error"
+        ]
+      },
+      {
+        "id": "fs-soundness-quantifies-only-over-honest-provers",
+        "kind": "false-statement",
+        "title": "Soundness quantifies only over honest provers",
+        "strategy": "Refute the claim by contrasting completeness' existential honest strategy with soundness' universal quantifier.  Give a deliberately cheating strategy on a no-instance: omitting it from the soundness test would allow an invalid protocol to be called sound.",
+        "deps": [
+          "def-completeness-and-soundness"
+        ]
+      },
+      {
+        "id": "fs-the-prover-must-run-in-polynomial-time",
+        "kind": "false-statement",
+        "title": "The prover in an interactive proof must run in polynomial time",
+        "strategy": "Refute the claim from the model definition: only the verifier has a polynomial-time requirement.  The graph-nonisomorphism prover may determine isomorphism by unrestricted computation, while the verifier still uses polynomial time, which is exactly the intended asymmetry.",
+        "deps": [
+          "def-interactive-proof-transcript-round-and-strategy",
+          "def-ip",
+          "def-graph-nonisomorphism-protocol"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 640,
+    "id": "interactive-proof-systems-and-public-coins-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Interactive Proof Systems and Public Coins: Examples and Counterexamples",
+    "requires": [
+      "interactive-proof-systems-and-public-coins"
+    ],
+    "items": [
+      {
+        "id": "ex-sequential-repetition-amplifies-error",
+        "kind": "example",
+        "title": "Two sequential executions reduce a one-half soundness error to one quarter",
+        "strategy": "Instantiate the repetition lemma with a protocol having perfect completeness and soundness at most one half.  Write the two fresh verifier challenges and use conditional soundness after the first accepted transcript to compute the one-quarter bound.",
+        "deps": [
+          "def-completeness-and-soundness",
+          "lem-sequential-repetition-amplifies-error"
+        ]
+      },
+      {
+        "id": "ex-graph-nonisomorphism-is-in-ip",
+        "kind": "example",
+        "title": "A graph-nonisomorphism instance under the private-coin challenge protocol",
+        "strategy": "Use a small pair of visibly nonisomorphic labelled graphs.  Enumerate the verifier's hidden choice and permutation, show how a prover identifies the isomorphism class on yes-instances, and contrast it with the identical challenge distributions when the graphs are isomorphic.",
+        "deps": [
+          "def-graph-nonisomorphism-protocol",
+          "thm-graph-nonisomorphism-is-in-ip"
+        ]
+      },
+      {
+        "id": "cex-soundness-quantifies-only-over-honest-provers",
+        "kind": "counterexample",
+        "title": "A cheating prover witnesses why soundness must be universal",
+        "strategy": "Specify a verifier whose designated honest prover behaves well on yes-instances but whose acceptance predicate lets a different strategy force acceptance on a selected no-instance.  This separates the existential completeness witness from the universal soundness test without relying on an informal claim that all provers are honest.",
+        "deps": [
+          "def-completeness-and-soundness",
+          "fs-soundness-quantifies-only-over-honest-provers"
+        ]
+      }
+    ]
+  }
+]

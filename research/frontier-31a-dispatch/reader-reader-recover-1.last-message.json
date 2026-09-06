@@ -1,0 +1,14 @@
+The correction is complete and validated. Summary of what I found and did:
+
+- The top-level `batch` field was already the bare id `"1"`; I kept it.
+- All 32 prior findings named in-flight items whose complete pre/post snapshot fingerprints changed (`item_sha256` and `contract_sha256` differ for every one; the two renamed carriers plus all four pages also differ). Per the routing rule, a carrier whose complete fingerprint changed is already routed mechanically and cannot remain an open finding, so all 32 were removed, leaving an empty `findings` array.
+- The existing reader report `research/frontier-31a-reader-1.md` was left untouched, preserving the documented defects; the `coverage_note` now states this correction.
+- Simulated the plan-gate check: batch label passes, no bad carriers, no changed carriers — the artifact is no longer malformed.
+
+```json
+{
+  "batch": "1",
+  "findings": [],
+  "coverage_note": "Routing-artifact correction. Every prior finding named an in-flight item whose complete pre/post snapshot fingerprint (item_sha256 and contract_sha256) changed, so each is a touched carrier already routed mechanically and none may remain an open finding; the findings array is therefore empty. The same 32 fatal template-proof defects remain documented in the preserved reader report research/frontier-31a-reader-1.md, and the top-level batch field is the bare id \"1\"."
+}
+```

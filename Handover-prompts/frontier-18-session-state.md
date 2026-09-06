@@ -17,7 +17,8 @@ manual sweep: pid 166311
   item list: <scratchpad>/both-todo.txt, regenerate with <scratchpad>/todo.mjs
 ```
 
-Both lanes, 741 items that still owe a verdict. Terra owes 716, DeepSeek 661.
+Both historical lanes, 741 items that still owe a verdict. Terra owed 716 and
+the now-retired external lane owed 661.
 Each lane skips what it already has. Expect a ~15–20 min serial context-hash
 pre-pass before any call is spent.
 
@@ -29,17 +30,17 @@ stage before resuming.
 
 ## The judge lineup, and the Sonnet rows
 
-`DEFAULT_LINEUP = 'deepseek+terra'` (owner, 2026-08-25). Terra runs at `xhigh`
-with the explicit 1M window; no transport change was needed because `judge.mts`
-routes by runner. Caps are **14 per lane, 28 combined**.
+Frontier-18 used Terra plus a now-retired external lane. Terra ran at `xhigh`
+with the explicit 1M window; caps were **14 per lane, 28 combined**. This is a
+historical run note, not the current registry; see `tools/models.mjs`.
 
 The ledger holds **116 `claude-sonnet-4-6` rows from the previous lineup**. Under
 the unchanged workflow they are append-only evidence and satisfy no coverage, so
 Terra is judging those items too — the owner agreed to that (76 items, ~10%
 extra) rather than change the workflow.
 
-Rejection rates so far, too small to conclude from: Sonnet 4%, DeepSeek ~18%,
-Terra ~17%.
+Rejection rates so far, too small to conclude from: Sonnet 4%, the retired
+external lane ~18%, Terra ~17%.
 
 ## Owner corrections this session — these bind
 

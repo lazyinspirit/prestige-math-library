@@ -2579,7 +2579,7 @@ non-load-bearing sourced survey items.
    source table without defining them through Lie algebras.
 9. `rem-the-twenty-six-sporadic-simple-groups` — **remark** `[LS]`, exact list
    supplied in a source table; no construction or asserted pattern.
-10. `thm-classification-of-finite-simple-groups` — **theorem** `[LS]`,
+10. `rem-classification-of-finite-simple-groups` — **remark** `[LS]`,
     `proved_here: false`: every finite simple group is cyclic of prime order,
     alternating of degree at least $5$, of Lie type, or one of the 26 sporadic
     groups, subject to the standard low-rank isomorphism convention. LANDMARK;
@@ -2594,7 +2594,7 @@ non-load-bearing sourced survey items.
     date-stamped 2026-08-14: the Gorenstein--Lyons--Solomon series remains an
     ongoing project toward a complete revised proof; it is not described as
     finished.
-15. `thm-feit-thompson-odd-order-theorem` — **theorem** `[LS]`,
+15. `rem-feit-thompson-odd-order-theorem` — **remark** `[LS]`,
     `proved_here: false`, included as a historical landmark and never used.
 16. `rem-schreier-conjecture-as-a-cfsg-consequence` — **remark** `[LS]`, outer
     automorphism groups of finite simple groups are solvable; no later theorem

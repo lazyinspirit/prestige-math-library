@@ -1,0 +1,18 @@
+# FA evidence — queue b/7
+
+Decision: repaired. Source status: familiar.
+Item: `ex-baer-sum-of-two-extensions-of-cyclic-groups`.
+
+I read all original direct dependencies (Baer definition, abelian-group theorem, cyclic derived Ext computation), the split-class definition, both Terra rejections, Sol adjudication and repair, and the exact batch-8 proof contract. The batch notes and A/B plan require an explicit diagonal pullback and codiagonal pushout of extensions of finite cyclic groups. The current Example was still an imperative about Z/n by Z/m, while its verification used infinite Z as kernel. I corrected this mismatch as well as the final rejection's unlicensed derived-Ext identification. No separate risk_review is prescribed by the example's manifest entry.
+
+The repaired example uses twice 0→Z/2→Z/4→Z/2→0. The pullback D consists of pairs with equal parity; the pushout quotient is by ((2a,2b),-(a+b)). The proof prints both endpoint maps, checks injection and kernel exactness, and finds t represented by ((1,-1),0). Its projection is 1 and twice it is the relation with a=b=1, so it yields a section. The map (c,b)↦j(c)+s(b) is explicitly an endpoint-preserving isomorphism from (Z/2)^2 to the pushout. Thus the Baer sum is the split/zero extension class. All middle groups of an extension of these endpoints have four elements, so laws and maps on a fixed four-element set provide a finite set realization, satisfying the Baer-group theorem's size condition. The original extension has no section because lifts of 1 have order four.
+
+This is familiar finite abelian-group algebra, verified directly; no external source verification is required. The source/dependency locators are `def-baer-sum-of-extension-classes`, `def-split-extension-class`, and `thm-baer-sum-makes-extension-classes-an-abelian-group`. The example now proves its intended finite-cyclic Baer calculation without making a derived-Ext claim requiring an additional bridge. Its stable title and generated-example role are preserved.
+
+Updated the item, its batch-8 manifest dependencies, and both batch and merged proof-contract entries. No direct dependency file was edited and no prerequisite licence is required. Focused precheck passed after adopting the requested phase numbering (1 checked, 0 failing). No judge verdict or pass stamp was created.
+
+Next action: record exact repaired bytes; begin position 8 only after recorder acceptance.
+
+Context refresh after position 21: The higher-Yoneda comparison now explicitly uses Ext_P in the projective case and Ext_I in the injective case, with the same lifted terminal cocycle. Earlier Ext-one size and finite Baer calculations are independent of the higher theorem. For the product item, rechecked that its lifts a_i and b_i are precisely the new step 1.1 lifts, and its composite cocycle a t_p is unchanged; no multiplicativity or balance hypothesis has been imported. Thus the earlier decisions survive the changed peer/dependency interface. Own item bytes are unchanged. Reseal the same decision.
+
+Context refresh after position 27: The Yoneda product now explicitly composes two degree-zero morphisms and proves all mixed-degree associativity cases by endpoint pullback/pushout maps. The degree-zero actions already used in position 18 are precisely these actions; its cocycle computation and the comparison in position 21 are unchanged. Earlier extension-size, finite Baer-sum, and semisimple/global-dimension arguments do not depend on this product proof. Rechecked those uses against the explicit convention. Own item bytes are unchanged. Reseal the same decision.

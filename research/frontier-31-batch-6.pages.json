@@ -1,0 +1,404 @@
+[
+  {
+    "order": 348.011,
+    "id": "primitive-dirichlet-l-functions-and-functional-equations",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Primitive Dirichlet L Functions and Functional Equations",
+    "companion": "primitive-dirichlet-l-functions-and-functional-equations-examples",
+    "requires": [
+      "dirichlet-characters-l-functions-and-primes-in-progressions-examples"
+    ],
+    "items": [
+      {
+        "id": "def-induced-dirichlet-character",
+        "kind": "definition",
+        "title": "A Dirichlet character modulo q induced by a character modulo a divisor d of q",
+        "strategy": "Fix d | q. Define induction by agreement on integers coprime to q and value zero otherwise; state separately that this is more restrictive than merely composing unit-group characters, since primes dividing q/d create the zero values.",
+        "deps": ["def-dirichlet-character-modulo-q"]
+      },
+      {
+        "id": "def-primitive-dirichlet-character-and-conductor",
+        "kind": "definition",
+        "title": "Primitive Dirichlet characters and the conductor as their least inducing modulus",
+        "strategy": "Define primitive relative to the preceding induction convention and define the conductor only after the unique primitive ancestor theorem below has supplied existence and uniqueness. Record the q = 1 principal character convention explicitly.",
+        "deps": ["def-induced-dirichlet-character"]
+      },
+      {
+        "id": "thm-dirichlet-character-primitive-induction",
+        "kind": "theorem",
+        "title": "Every Dirichlet character is induced by a unique primitive character of conductor dividing its modulus",
+        "strategy": "Work prime-power by prime-power: identify the least exponent at which the local unit character factors, then use CRT to assemble the local primitive factors. Prove both the induced zero-value condition and uniqueness, not only the unit-group factorisation.",
+        "deps": ["def-induced-dirichlet-character", "def-primitive-dirichlet-character-and-conductor", "thm-chinese-remainder-theorem"]
+      },
+      {
+        "id": "thm-induced-dirichlet-l-finite-euler-factors",
+        "kind": "theorem",
+        "title": "The L-function of an induced character differs from its primitive ancestor by the omitted finite Euler factors for Re(s) > 1",
+        "strategy": "Compare the absolutely convergent Euler products of chi modulo q and its primitive ancestor chi-star modulo d. State the product over primes dividing q but not d with the correct chi-star(p) factors and keep the half-plane Re(s) > 1 in the claim.",
+        "deps": ["thm-dirichlet-character-primitive-induction", "def-dirichlet-l-function", "thm-dirichlet-l-euler-product"]
+      },
+      {
+        "id": "def-gauss-sum-dirichlet-character",
+        "kind": "definition",
+        "title": "The Gauss sum tau(chi) with e(x) = exp(2 pi i x)",
+        "strategy": "Define tau(chi) = sum modulo q chi(a)e(a/q), with the modulus and additive-character normalization displayed; this fixes the phase used later in the root number.",
+        "deps": ["def-dirichlet-character-modulo-q"]
+      },
+      {
+        "id": "lem-primitive-gauss-sum-twist",
+        "kind": "lemma",
+        "title": "For primitive chi modulo q, the additive twist sum equals conjugate(chi)(m) tau(chi)",
+        "strategy": "For (m,q)=1 change variables by m inverse modulo q. For (m,q)>1, use primitivity to choose a unit congruent to one modulo q/(m,q) on which chi is nontrivial and compare the sum after multiplication; retain the vanishing case rather than silently dividing by m.",
+        "deps": ["def-gauss-sum-dirichlet-character", "def-primitive-dirichlet-character-and-conductor"]
+      },
+      {
+        "id": "thm-primitive-gauss-sum-norm",
+        "kind": "theorem",
+        "title": "A primitive Dirichlet character chi modulo q satisfies |tau(chi)| squared = q",
+        "strategy": "Sum the twist identity over m modulo q and use character orthogonality to obtain tau(chi) conjugate(tau(chi)) = q. State that the theorem applies only to primitive characters, which is needed for the root-number modulus.",
+        "deps": ["def-gauss-sum-dirichlet-character", "lem-primitive-gauss-sum-twist"]
+      },
+      {
+        "id": "def-parity-dirichlet-character",
+        "kind": "definition",
+        "title": "Parity a of a Dirichlet character, defined by chi(-1) = (-1)^a",
+        "strategy": "Define a in {0,1} and call the two cases even and odd. Explain that q = 1 is even under this convention.",
+        "deps": ["def-dirichlet-character-modulo-q"]
+      },
+      {
+        "id": "lem-fourier-transform-of-a-gaussian",
+        "kind": "lemma",
+        "title": "Fourier transform of a Gaussian for hat f(xi) = integral f(x)e(-x xi) dx",
+        "strategy": "Under e(x) = exp(2 pi i x), prove that the transform of exp(-pi t x squared) is t^(-1/2) exp(-pi xi squared/t) for t > 0, first at t = 1 and then by scaling. State the integrability and normalization hypotheses used by Poisson summation.",
+        "deps": []
+      },
+      {
+        "id": "thm-dirac-comb-is-fourier-invariant",
+        "kind": "theorem",
+        "title": "Poisson summation from Fourier invariance of the integer Dirac comb",
+        "strategy": "Prove, for Schwartz functions under the fixed Fourier convention, sum over n f(n) = sum over m hat f(m), by pairing the Fourier-invariant Dirac comb with f. State the extension used for the scaled Gaussian separately so no distributional convention is hidden.",
+        "deps": []
+      },
+      {
+        "id": "thm-twisted-poisson-summation",
+        "kind": "theorem",
+        "title": "Twisted Poisson summation for a primitive Dirichlet character",
+        "strategy": "Decompose the integer sum into residue classes modulo q, apply Poisson summation to each translate, and use the primitive Gauss-sum twist. With f_y(x)=exp(-pi x squared y/q), retain the q, y and conjugate-character factors exactly.",
+        "deps": ["lem-primitive-gauss-sum-twist", "thm-dirac-comb-is-fourier-invariant"]
+      },
+      {
+        "id": "def-completed-dirichlet-l-function",
+        "kind": "definition",
+        "title": "The completed primitive Dirichlet L-function Lambda(s, chi)",
+        "strategy": "For primitive chi modulo q and parity a, define Lambda(s,chi) = (q/pi)^((s+a)/2) Gamma((s+a)/2)L(s,chi). Keep this normalization distinct from the entire xi-function used inside the proof.",
+        "deps": ["def-dirichlet-l-function", "def-parity-dirichlet-character"]
+      },
+      {
+        "id": "thm-primitive-dirichlet-l-analytic-continuation",
+        "kind": "theorem",
+        "title": "Analytic continuation of Lambda(s, chi) for primitive characters, with the q = 1 zeta exception",
+        "strategy": "Use the even and odd theta-kernel Mellin integrals, their transformed tails from twisted Poisson summation, and the Gaussian transform to continue the completed function. Treat principal primitive chi modulo 1 as the zeta case: Lambda is meromorphic with its familiar poles; otherwise it is entire.",
+        "deps": ["def-completed-dirichlet-l-function", "lem-fourier-transform-of-a-gaussian", "thm-twisted-poisson-summation", "thm-riemann-zeta-meromorphic-continuation"]
+      },
+      {
+        "id": "thm-primitive-dirichlet-l-functional-equation",
+        "kind": "theorem",
+        "title": "Functional equation Lambda(s, chi) = epsilon(chi) Lambda(1-s, conjugate chi) for primitive characters",
+        "strategy": "Derive the even and odd theta transformations separately, then unify them with a in {0,1} and epsilon(chi)=(-i)^a tau(chi)/sqrt(q). Check the conjugate-character and i-power against the fixed e(x) convention.",
+        "deps": ["thm-primitive-dirichlet-l-analytic-continuation", "def-completed-dirichlet-l-function", "thm-primitive-gauss-sum-norm"]
+      },
+      {
+        "id": "cor-dirichlet-l-root-number-unit-modulus",
+        "kind": "corollary",
+        "title": "The primitive Dirichlet root number epsilon(chi) has modulus one",
+        "strategy": "Insert the fixed root-number formula into the Gauss-sum norm identity; the parity factor (-i)^a has modulus one.",
+        "deps": ["thm-primitive-dirichlet-l-functional-equation", "thm-primitive-gauss-sum-norm"]
+      },
+      {
+        "id": "cor-dirichlet-l-trivial-zeros",
+        "kind": "corollary",
+        "title": "Parity-forced trivial zeros of a primitive nonprincipal Dirichlet L-function, including the s = 0 qualification",
+        "strategy": "Use the gamma poles in the completed-function identity and the entireness result to obtain zeros at negative integers of parity a. Isolate s = 0: for even characters the gamma pole is cancelled only when the completed function is regular there, so the principal q = 1 exception is not asserted as a trivial zero.",
+        "deps": ["thm-primitive-dirichlet-l-functional-equation", "thm-gamma-meromorphic-continuation"]
+      }
+    ]
+  },
+  {
+    "order": 348.012,
+    "id": "primitive-dirichlet-l-functions-and-functional-equations-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Primitive Dirichlet L Functions and Functional Equations — Examples",
+    "companion": "primitive-dirichlet-l-functions-and-functional-equations",
+    "requires": [
+      "primitive-dirichlet-l-functions-and-functional-equations"
+    ],
+    "items": [
+      {
+        "id": "ex-primitive-ancestors-of-small-characters",
+        "kind": "example",
+        "title": "Primitive ancestors and conductors of small Dirichlet characters",
+        "strategy": "Compute representative characters modulo 4, 8, and 12 by their local components, identify their primitive ancestors, and verify the induced zero-value convention directly.",
+        "deps": ["thm-dirichlet-character-primitive-induction"]
+      },
+      {
+        "id": "ex-finite-euler-factors-under-character-induction",
+        "kind": "example",
+        "title": "Finite Euler factors for a character induced from modulus 4 to modulus 12",
+        "strategy": "Take the primitive quadratic character modulo 4, form its induction modulo 12, write both Euler products in Re(s)>1, and calculate the missing prime-3 factor explicitly.",
+        "deps": ["thm-induced-dirichlet-l-finite-euler-factors"]
+      },
+      {
+        "id": "ex-gauss-sum-for-chi-four",
+        "kind": "example",
+        "title": "The Gauss sum of the primitive odd character modulo 4",
+        "strategy": "Evaluate tau(chi_4)=2i from its two nonzero residues, verify its squared modulus is 4, and identify the resulting root-number phase under the page convention.",
+        "deps": ["def-gauss-sum-dirichlet-character", "thm-primitive-gauss-sum-norm", "def-parity-dirichlet-character"]
+      },
+      {
+        "id": "ex-even-and-odd-character-theta-kernels",
+        "kind": "example",
+        "title": "Even and odd theta kernels for the principal character modulo 1 and chi_4",
+        "strategy": "Write the two Mellin kernels with the correct x^a factor, apply the transformed Gaussian, and compare the sign and i-power in the two functional equations.",
+        "deps": ["thm-twisted-poisson-summation", "thm-primitive-dirichlet-l-functional-equation"]
+      },
+      {
+        "id": "ex-trivial-zeros-of-a-dirichlet-l-function",
+        "kind": "example",
+        "title": "The negative odd trivial zeros of the beta function L(s, chi_4)",
+        "strategy": "Use that chi_4 is odd to list the forced zeros at negative odd integers and contrast this with the non-assertion at s=0.",
+        "deps": ["cor-dirichlet-l-trivial-zeros", "ex-gauss-sum-for-chi-four"]
+      },
+      {
+        "id": "cex-a-character-modulus-need-not-be-its-conductor",
+        "kind": "counterexample",
+        "title": "The character modulo 12 induced by chi_4 has conductor 4, not 12",
+        "strategy": "Compare its values on units and its zeros at nonunits with the induction definition, then invoke uniqueness of the primitive ancestor to rule out conductor 12.",
+        "deps": ["def-induced-dirichlet-character", "thm-dirichlet-character-primitive-induction"]
+      },
+      {
+        "id": "cex-gauss-sum-sign-is-not-canonical-without-conventions",
+        "kind": "counterexample",
+        "title": "Changing e(x) to exp(-2 pi i x) conjugates the displayed Gauss-sum phase",
+        "strategy": "Recalculate tau(chi_4) under the opposite additive-character convention and show it is -2i rather than 2i; the norm survives but the root-number formula's phase changes.",
+        "deps": ["ex-gauss-sum-for-chi-four"]
+      }
+    ]
+  },
+  {
+    "order": 365.911,
+    "id": "number-fields-rings-of-integers-and-discriminants",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Number Fields Rings of Integers and Discriminants",
+    "companion": "number-fields-rings-of-integers-and-discriminants-examples",
+    "requires": [
+      "hilbert-symbols-and-the-quadratic-local-global-principle-examples"
+    ],
+    "items": [
+      {
+        "id": "def-number-field",
+        "kind": "definition",
+        "title": "A number field as a finite extension of the rational field",
+        "strategy": "Define a number field K/Q and state n=[K:Q]. This page works in characteristic zero, hence finite extensions are separable when embeddings are introduced.",
+        "deps": ["def-extension-degree-and-finite-extension"]
+      },
+      {
+        "id": "def-ring-of-integers-of-a-number-field",
+        "kind": "definition",
+        "title": "The ring of integers O_K as the integral closure of Z in a number field",
+        "strategy": "Define O_K using integrality over Z and identify it with the integral closure inside K. Do not conflate this ring with an arbitrary order.",
+        "deps": ["def-number-field", "def-integral-closure-and-integrally-closed-domain"]
+      },
+      {
+        "id": "cor-algebraic-integer-minimal-polynomial-criterion",
+        "kind": "corollary",
+        "title": "An element of a number field is integral over Z exactly when its monic minimal polynomial lies in Z[x]",
+        "strategy": "Apply the integral-element/minimal-polynomial criterion in Q(alpha), using Gauss's lemma to pass between rational and integral coefficients. State both directions and the monicity condition.",
+        "deps": ["def-ring-of-integers-of-a-number-field", "def-integral-ring-extension", "thm-integrality-and-finite-module-equivalences"]
+      },
+      {
+        "id": "thm-clearing-denominators-for-an-algebraic-number",
+        "kind": "theorem",
+        "title": "Every element of a number field becomes an algebraic integer after multiplication by a nonzero integer",
+        "strategy": "Start from the rational coefficients of a monic polynomial for alpha, clear denominators by a power-compatible integer N, and exhibit a monic polynomial for N alpha with integer coefficients.",
+        "deps": ["def-number-field", "def-ring-of-integers-of-a-number-field"]
+      },
+      {
+        "id": "cor-trace-and-norm-of-an-algebraic-integer",
+        "kind": "corollary",
+        "title": "The trace and norm of an algebraic integer are integers",
+        "strategy": "Use the characteristic polynomial of multiplication by alpha, or equivalently the integral minimal polynomial with its conjugates, to show its coefficients lie in Z; identify the signed constant coefficient and next coefficient with norm and trace.",
+        "deps": ["cor-algebraic-integer-minimal-polynomial-criterion", "def-field-norm-and-trace", "thm-field-norm-and-trace-by-embeddings"]
+      },
+      {
+        "id": "def-order-in-a-number-field",
+        "kind": "definition",
+        "title": "An order in a number field as a full-rank Z-subring of O_K",
+        "strategy": "Define an order as a subring containing 1 whose additive group is a full-rank Z-lattice in O_K; record O_K itself as the maximal order and keep full rank part of the definition.",
+        "deps": ["def-ring-of-integers-of-a-number-field", "def-number-field"]
+      },
+      {
+        "id": "def-integral-basis-and-power-integral-basis",
+        "kind": "definition",
+        "title": "Integral bases and power integral bases of an order",
+        "strategy": "Define an integral basis as an ordered Z-basis of an order and a power integral basis as 1, alpha, ..., alpha^(n-1). Say that the latter is extra structure and is not assumed for a number field.",
+        "deps": ["def-order-in-a-number-field"]
+      },
+      {
+        "id": "thm-ring-of-integers-free-of-rank-degree",
+        "kind": "theorem",
+        "title": "O_K is a free Z-module of rank [K:Q]",
+        "strategy": "Use finite generation of the integral closure over Z, its torsion-free embedding in K, and the PID submodule theorem to obtain freeness. Tensor with Q to identify the rank with [K:Q], without choosing a permanent basis.",
+        "deps": ["def-ring-of-integers-of-a-number-field", "def-number-field", "thm-finite-integral-closure-in-a-finite-separable-extension", "cor-submodules-of-finite-free-pid-modules-are-free"]
+      },
+      {
+        "id": "thm-orders-have-integral-bases-and-finite-index",
+        "kind": "theorem",
+        "title": "Every order has an integral basis and finite index in O_K",
+        "strategy": "Use the full-rank definition to show O_K/order is a finite torsion abelian group, then apply the PID simultaneous-basis theorem to obtain a Z-basis. Include the converse lattice argument only as needed for the index claim.",
+        "deps": ["def-order-in-a-number-field", "def-integral-basis-and-power-integral-basis", "thm-ring-of-integers-free-of-rank-degree", "thm-simultaneous-basis-theorem-for-pid-submodules"]
+      },
+      {
+        "id": "def-archimedean-embeddings-and-number-field-signature",
+        "kind": "definition",
+        "title": "Real and complex embeddings and the signature (r_1,r_2) of a number field",
+        "strategy": "Define r_1 as the number of real embeddings and r_2 as the number of conjugate pairs of nonreal embeddings, so n=r_1+2r_2. State that the embedding determinant first uses all n embeddings, while later signature notation chooses one from each complex pair.",
+        "deps": ["def-number-field", "def-f-homomorphisms-and-embeddings-of-field-extensions"]
+      },
+      {
+        "id": "def-discriminant-of-a-number-field-basis-and-order",
+        "kind": "definition",
+        "title": "Discriminant of an ordered Q-basis, an order, and a number field",
+        "strategy": "Define disc(alpha_1,...,alpha_n)=det(Tr(alpha_i alpha_j)) for an ordered Q-basis first. Define disc(A) for an order through an integral basis only after the change-of-basis result, and define disc(K)=disc(O_K) afterwards.",
+        "deps": ["def-number-field", "def-field-norm-and-trace"]
+      },
+      {
+        "id": "lem-discriminant-change-of-basis",
+        "kind": "lemma",
+        "title": "Discriminants transform by the square of the change-of-basis determinant",
+        "strategy": "Write the trace Gram matrix in the new ordered basis as C transpose G C and take determinants. For a unimodular integral change of basis this proves basis independence of an order discriminant.",
+        "deps": ["def-discriminant-of-a-number-field-basis-and-order"]
+      },
+      {
+        "id": "thm-discriminant-as-an-embedding-determinant",
+        "kind": "theorem",
+        "title": "The basis discriminant equals the square of the determinant of the full embedding matrix",
+        "strategy": "For all n embeddings sigma_i:K to C, factor the trace Gram matrix as A transpose A with A=(sigma_i(alpha_j)); use the separable trace formula. Do not replace the full list by one representative of each complex pair in this formula.",
+        "deps": ["def-discriminant-of-a-number-field-basis-and-order", "thm-field-norm-and-trace-by-embeddings"]
+      },
+      {
+        "id": "thm-number-field-discriminant-is-well-defined-and-nonzero",
+        "kind": "theorem",
+        "title": "The discriminant of a number field is a well-defined nonzero integer",
+        "strategy": "Use an integral basis and unimodular change of basis for well-definedness, then use distinct embeddings and the embedding determinant for nonvanishing. Integrality follows from integral trace values.",
+        "deps": ["thm-ring-of-integers-free-of-rank-degree", "lem-discriminant-change-of-basis", "thm-discriminant-as-an-embedding-determinant", "cor-trace-and-norm-of-an-algebraic-integer"]
+      },
+      {
+        "id": "thm-power-basis-discriminant-is-polynomial-discriminant",
+        "kind": "theorem",
+        "title": "The discriminant of the power basis equals the discriminant of the minimal polynomial",
+        "strategy": "For alpha of degree n, compare the Vandermonde determinant of its n conjugates with the polynomial discriminant, including the conventional sign. State this for the Q-basis 1,alpha,...,alpha^(n-1), whether or not it is an integral basis.",
+        "deps": ["thm-discriminant-as-an-embedding-determinant", "cor-algebraic-integer-minimal-polynomial-criterion"]
+      },
+      {
+        "id": "cor-order-index-discriminant-formula",
+        "kind": "corollary",
+        "title": "For an order A, disc(A) = [O_K:A] squared disc(K)",
+        "strategy": "Choose simultaneous Z-bases of A and O_K; the change matrix has determinant equal in absolute value to the index. Apply the discriminant change-of-basis lemma and retain the square.",
+        "deps": ["thm-orders-have-integral-bases-and-finite-index", "lem-discriminant-change-of-basis", "thm-number-field-discriminant-is-well-defined-and-nonzero"]
+      },
+      {
+        "id": "cor-squarefree-power-basis-discriminant-gives-ring-of-integers",
+        "kind": "corollary",
+        "title": "A power order with squarefree discriminant is the full ring of integers",
+        "strategy": "If Z[alpha] is an order and its power-basis discriminant is squarefree, the index-discriminant formula forces [O_K:Z[alpha]]=1. State the necessary hypothesis alpha integral and [Q(alpha):Q]=n.",
+        "deps": ["thm-power-basis-discriminant-is-polynomial-discriminant", "cor-order-index-discriminant-formula"]
+      },
+      {
+        "id": "thm-ring-of-integers-of-a-quadratic-field",
+        "kind": "theorem",
+        "title": "The ring of integers of Q(sqrt d) for squarefree d not equal to 1",
+        "strategy": "For squarefree d != 1, prove O_K=Z[(1+sqrt d)/2] when d is 1 modulo 4 and O_K=Z[sqrt d] otherwise. Use the minimal-polynomial criterion plus trace/norm integrality to exclude all other half-integral coefficients.",
+        "deps": ["def-ring-of-integers-of-a-number-field", "cor-algebraic-integer-minimal-polynomial-criterion", "cor-trace-and-norm-of-an-algebraic-integer"]
+      },
+      {
+        "id": "cor-discriminant-of-a-quadratic-field",
+        "kind": "corollary",
+        "title": "The discriminant of Q(sqrt d) for squarefree d not equal to 1",
+        "strategy": "Compute the trace Gram determinant in the integral basis from the quadratic-integers theorem: disc(K)=d for d=1 modulo 4 and 4d otherwise.",
+        "deps": ["thm-ring-of-integers-of-a-quadratic-field", "def-discriminant-of-a-number-field-basis-and-order"]
+      },
+      {
+        "id": "cor-ring-of-integers-is-a-dedekind-domain",
+        "kind": "corollary",
+        "title": "The ring of integers of a number field is a Dedekind domain",
+        "strategy": "Apply the established theorem that the integral closure of a Dedekind domain in a finite separable extension is Dedekind, with Z and K/Q; match the page's definition of O_K exactly.",
+        "deps": ["def-ring-of-integers-of-a-number-field", "def-dedekind-domain", "cor-integral-closure-of-a-dedekind-domain-in-a-finite-separable-extension"]
+      }
+    ]
+  },
+  {
+    "order": 365.912,
+    "id": "number-fields-rings-of-integers-and-discriminants-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Number Fields Rings of Integers and Discriminants — Examples",
+    "companion": "number-fields-rings-of-integers-and-discriminants",
+    "requires": [
+      "number-fields-rings-of-integers-and-discriminants"
+    ],
+    "items": [
+      {
+        "id": "ex-ring-of-integers-of-q",
+        "kind": "example",
+        "title": "The ring of integers and discriminant of Q",
+        "strategy": "Verify O_Q=Z from the rational-root/minimal-polynomial criterion, use basis (1), and compute discriminant 1.",
+        "deps": ["def-ring-of-integers-of-a-number-field", "thm-number-field-discriminant-is-well-defined-and-nonzero"]
+      },
+      {
+        "id": "ex-gaussian-and-eisenstein-integer-bases",
+        "kind": "example",
+        "title": "Integral bases and discriminants of the Gaussian and Eisenstein integers",
+        "strategy": "Apply the quadratic formula to d=-1 and d=-3, displaying bases (1,i) and (1,(1+sqrt(-3))/2) and their discriminants -4 and -3.",
+        "deps": ["thm-ring-of-integers-of-a-quadratic-field", "cor-discriminant-of-a-quadratic-field"]
+      },
+      {
+        "id": "ex-ring-of-integers-of-q-sqrt-five",
+        "kind": "example",
+        "title": "The integral basis and discriminant of Q(sqrt 5)",
+        "strategy": "Show O_K=Z[(1+sqrt 5)/2], compute discriminant 5, and contrast it with the discriminant 20 of the nonmaximal power order Z[sqrt 5].",
+        "deps": ["thm-ring-of-integers-of-a-quadratic-field", "cor-discriminant-of-a-quadratic-field", "cor-order-index-discriminant-formula"]
+      },
+      {
+        "id": "ex-pure-cubic-power-basis",
+        "kind": "example",
+        "title": "A pure cubic field whose displayed power order is certified maximal by a squarefree discriminant",
+        "strategy": "Use a source-supported pure cubic polynomial with squarefree polynomial discriminant, verify its root is integral and has the stated degree, then apply the squarefree power-basis criterion. Include the arithmetic discriminant computation rather than asserting monogeneity.",
+        "deps": ["thm-power-basis-discriminant-is-polynomial-discriminant", "cor-squarefree-power-basis-discriminant-gives-ring-of-integers"]
+      },
+      {
+        "id": "ex-nonmaximal-quadratic-order",
+        "kind": "example",
+        "title": "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5)",
+        "strategy": "Write both integral bases, compute index 2, and verify the order-index discriminant formula 20=2 squared times 5.",
+        "deps": ["def-order-in-a-number-field", "ex-ring-of-integers-of-q-sqrt-five", "cor-order-index-discriminant-formula"]
+      },
+      {
+        "id": "ex-index-obstructs-naive-polynomial-factorization",
+        "kind": "example",
+        "title": "Index 2 explains why factorisation modulo 2 in Z[sqrt 5] is not a factorisation statement for O_Q(sqrt 5)",
+        "strategy": "Use the nonmaximal order inclusion to exhibit the missing half-integral element and explain, with a concrete polynomial reduction, which inference from a power order is invalid before maximality is established.",
+        "deps": ["ex-nonmaximal-quadratic-order", "cor-order-index-discriminant-formula"]
+      },
+      {
+        "id": "rem-nonmonogenic-number-field-source-obligation",
+        "kind": "remark",
+        "title": "A fully proved nonmonogenic number-field example remains a sourced authoring obligation",
+        "strategy": "Do not assert a particular counterexample here. The design reserves the B-page slot for a concrete nonmonogenic field, but the opened primary source only gives an unsupported general warning in its later discussion; authoring requires a fetched source that proves a named example and supplies enough detail to verify nonmonogeneity.",
+        "deps": []
+      }
+    ]
+  }
+]

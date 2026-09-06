@@ -1,0 +1,1475 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-logspace-machines-have-polynomially-many-configurations",
+    "lem-logspace-reductions-compose",
+    "thm-directed-st-connectivity-is-nl-complete",
+    "thm-read-only-input-savitch-simulation",
+    "thm-nl-is-contained-in-dspace-log-squared-n",
+    "lem-reachability-count-is-verifiable-in-nl",
+    "lem-nonreachability-has-an-inductive-counting-certificate",
+    "thm-immerman-szelepcsenyi-nl-equals-conl",
+    "cor-nspace-is-closed-under-complement-above-logspace",
+    "lem-polynomial-time-computations-have-logspace-uniform-circuits",
+    "thm-circuit-value-is-p-complete",
+    "fs-nl-equals-conl-follows-by-state-swapping",
+    "ex-logspace-reductions-compose",
+    "ex-circuit-value-is-p-complete",
+    "cex-nl-equals-conl-follows-by-state-swapping"
+  ],
+  "contracts": {
+    "lem-logspace-machines-have-polynomially-many-configurations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-read-only-input-logspace-machine",
+          "source_section": "Definition",
+          "quote": "A **read-only-input machine** has one input tape containing $x$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Encode each local configuration.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Count the encodings polynomially.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Delete repeated configurations.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 (the n+2 convention includes empty input)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 (input length zero)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 (a zero-transition accepting path)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Logspace machines have polynomially many configurations is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Logspace machines have polynomially many configurations has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Logspace machines have polynomially many configurations uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Logspace machines have polynomially many configurations makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Logspace machines have polynomially many configurations makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ]
+    },
+    "lem-logspace-reductions-compose": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-logspace-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "a deterministic read-only-input logspace transducer computes a total function $f$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Start the virtual-tape simulation.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Recompute the requested virtual bit.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Bound the composed work space.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Transfer closure to L and NL.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1 (the polynomial output bound covers empty input)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 (the virtual index handles the initial position)"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Logspace reductions compose has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Logspace reductions compose is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Logspace reductions compose has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Logspace reductions compose uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Logspace reductions compose makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Logspace reductions compose makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk: two closure claims and read-only output composition without storing the intermediate word. Resolved by the repaired recomputation construction: each requested bit of f(x) is recomputed for g, using logarithmic counters and preserving both L and NL inverse-image closure."
+      }
+    },
+    "thm-directed-st-connectivity-is-nl-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-logspace-machines-have-polynomially-many-configurations",
+          "source_section": "Statement",
+          "quote": "there is a polynomial $p_M$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-logspace-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "For languages $A,B\\subseteq\\Sigma^*$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Give the bounded-path NL procedure.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Build the configuration graph.",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Bound the membership machine's work space.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "Stream the configuration graph.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Establish completeness.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An STCON instance supplies source and target vertices, so its graph is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Directed s-t connectivity is NL-complete does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 (the zero-length path case is considered)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Directed s-t connectivity is NL-complete is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Directed s-t connectivity is NL-complete has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Directed s-t connectivity is NL-complete uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Directed s-t connectivity is NL-complete makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Directed s-t connectivity is NL-complete makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk: polynomial configuration-graph size, acceptance reachability, and logspace output access. Resolved by the fixed-machine configuration bound and an on-demand adjacency predicate, giving a total logspace reduction and the direct NL path-guessing membership proof."
+      }
+    },
+    "thm-read-only-input-savitch-simulation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-read-only-input-workspace-classes",
+          "source_section": "Definition",
+          "quote": "A read-only-input machine has one read-only input tape and finitely many work\ntapes. On an input $x$ of length $n$, the input is bracketed by endmarkers and\nthe input head is confined to those $n+2$ positions. The input tape is never\nwritten and its cells are not charged.\n\n$\\mathrm{DWORKSPACE}(s)$ contains the languages decided by such machines\nwhile visiting $O(s(n))$ work-tape cells. A bound $s$ is **work-space\nconstructible** when a deterministic read-only-input machine, on input $1^n$,\noutputs the binary expansion of $s(n)$ while visiting $O(s(n))$ work cells.\nIn hierarchy applications we require\n$\\lceil\\log_2(n+2)\\rceil=O(s(n))$ so that an input-head address fits in the\nwork bound. This model is distinct from all-tapes DSPACE.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-logspace-machines-have-polynomially-many-configurations",
+          "source_section": "Statement",
+          "quote": "For a fixed read-only-input logspace machine $M$, there is a polynomial $p_M$\nsuch that on every input $x$ of length $n$, $M$ has at most $p_M(n)$ reachable\nconfigurations. Consequently, any accepting branch has an accepting branch\nwith no repeated configuration and hence with fewer than $p_M(n)$ transitions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On input $x$, encode a configuration by its state, input-head position,\nwork contents, and work-head positions. There are only polynomially many\nsyntactically possible encodings, by the same finite product count used in\n[L2]. Choose $r=O(\\log(n+2))$ with $2^r$ at least that number.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $R(C,D,0)$ to test whether $C=D$ or $C\\to D$ is one legal transition, and define $R(C,D,j+1)$ by enumerating every configuration $E$ and accepting exactly if both $R(C,E,j)$ and $R(E,D,j)$ hold. Induction on $j$ shows that it decides reachability by a path of length at most $2^j$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A recursion frame stores $C,D,E$ and $j$, each using $O(\\log(n+2))$ work bits; there are $r+1=O(\\log(n+2))$ frames. Adjacency is recomputed from $M$ and the read-only input, never stored as a graph.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Enumerate accepting configurations $D$ and run $R(C_{\\rm start},D,r)$. By step 2.1 this accepts exactly when $M$ has an accepting branch, and by step 3.1 it uses $O(\\log^2(n+2))$ charged work space.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1 (n+2 makes the logarithm defined at empty input)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 (the reachability recursion has the depth-zero base case)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 (one-edge reachability is the base case)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Savitch simulation into read-only-input deterministic work space is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Savitch simulation into read-only-input deterministic work space has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Savitch simulation into read-only-input deterministic work space uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Savitch simulation into read-only-input deterministic work space makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Savitch simulation into read-only-input deterministic work space makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk: recursive reachability endpoints and the O(s^2) workspace recurrence. Resolved by the base cases for path length 0/1, midpoint enumeration, depth O(s), and O(s)-bit configurations/registers per level under s at least logarithmic."
+      }
+    },
+    "thm-nl-is-contained-in-dspace-log-squared-n": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-l-and-nl",
+          "source_section": "Definition",
+          "quote": "\\mathrm{NL}:=\\mathrm{NWORKSPACE}(\\log_2(n+2))",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-read-only-input-savitch-simulation",
+          "source_section": "Statement",
+          "quote": "Every language decided by a fixed nondeterministic read-only-input machine",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Choose the local NL decider.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Apply the local Savitch simulation.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Conclude the class inclusion.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 (the simulator uses log(n+2))"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 (the empty input is included)"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "NL is contained in read-only-input DWORKSPACE(log-squared n) has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "NL is contained in read-only-input DWORKSPACE(log-squared n) is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "NL is contained in read-only-input DWORKSPACE(log-squared n) has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "NL is contained in read-only-input DWORKSPACE(log-squared n) uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "NL is contained in read-only-input DWORKSPACE(log-squared n) makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "NL is contained in read-only-input DWORKSPACE(log-squared n) makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ]
+    },
+    "lem-reachability-count-is-verifiable-in-nl": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-inductive-reachable-vertex-count",
+          "source_section": "Definition",
+          "quote": "For an $N$-vertex digraph $G$, source $s$, and integer $i\\ge0$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Guess and check the complete ordered reachable list.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Bound verifier storage.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Use the given true count to prove the conditional verifier characterization.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A reachable-vertex count is verifiable in NL fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 (the i=0 reachability layer)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 (a singleton reachable set)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A reachable-vertex count is verifiable in NL is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A reachable-vertex count is verifiable in NL has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A reachable-vertex count is verifiable in NL uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "A reachable-vertex count is verifiable in NL: step 3.1 handles the forward implication by if it accepts, [L1] puts all c listed vertices in C_i. The given equality c=|C_i| makes this list exhaust C_i, so v C_i. Conversely, when v C_i, list every member of C_i with a witnessing..."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "A reachable-vertex count is verifiable in NL: step 3.1 handles the reverse implication by if it accepts, [L1] puts all c listed vertices in C_i. The given equality c=|C_i| makes this list exhaust C_i, so v C_i. Conversely, when v C_i, list every member of C_i with a witnessing..."
+        }
+      ]
+    },
+    "lem-nonreachability-has-an-inductive-counting-certificate": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-inductive-reachable-vertex-count",
+          "source_section": "Definition",
+          "quote": "Thus $C_0=\\{s\\}$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-reachability-count-is-verifiable-in-nl",
+          "source_section": "Statement",
+          "quote": "Given the true count $c=|C_i(G,s)|$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Establish the base count.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Describe one inductive count layer.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Prove layer soundness and completeness.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Discharge induction and decide nonreachability.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nonreachability has an inductive counting certificate fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 (the C0 base layer)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 (c0=1)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Nonreachability has an inductive counting certificate is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Nonreachability has an inductive counting certificate has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Nonreachability has an inductive counting certificate uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Nonreachability has an inductive counting certificate: step 3.1 handles the forward implication by induction from step 1.1 makes every accepted layer correct. Each nested certificate is checked by counters, vertex labels, and one bounded path at a time, so the verifier retains only O( ..."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Nonreachability has an inductive counting certificate: step 3.1 handles the reverse implication by induction from step 1.1 makes every accepted layer correct. Each nested certificate is checked by counters, vertex labels, and one bounded path at a time, so the verifier retains only O( ..."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk: soundness/completeness of inductive counting and the zero-layer boundary. Resolved from C_0={s}; each update uses the true prior count, rejects duplicate or dishonest enumerations, and certifies exactly the vertices with a predecessor in C_i."
+      }
+    },
+    "thm-immerman-szelepcsenyi-nl-equals-conl": {
+      "citations": [
+        {
+          "fact": "L2",
+          "source": "lem-nonreachability-has-an-inductive-counting-certificate",
+          "source_section": "Statement",
+          "quote": "There is a nondeterministic $O(\\log N)$-work-space verifier which, on\n$\\langle G,s,t\\rangle$, accepts exactly when $t$ is not reachable from $s$.\nIt uses a polynomial-length, read-once certificate carrying the successive\ncounts $c_0,\\ldots,c_{N-1}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Construct the cap and fixed-M configuration descriptions.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Build an implicit valid configuration graph on every input, with invalid names isolated.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Run bounded inductive counting with O(s) data and all branches halting.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Deduce general co-class equality and specialize to constructible logarithmic space.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 builds a valid implicit graph for every input string x, including the empty word; invalid candidate vertex names are merely isolated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 adds one to the configuration length K and step 2.1 adds a fresh target to the candidate vertices, so the graph is defined at the smallest input size."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the first reachable-count layer in the finite graph of N=2^K+1 vertices using bounded loop indices, with no positive-size exception."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Immerman-Szelepcs\u00e9nyi theorem: NL equals coNL is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 records the endmarked input-head position, and step 2.1 validates legal transitions on that actual endmarked input."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Immerman-Szelepcs\u00e9nyi theorem: NL equals coNL uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 derives NWORKSPACE(s) contained in coNWORKSPACE(s) by applying the complement decider constructed in step 3.1 to each language in the class."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 obtains coNWORKSPACE(s) contained in NWORKSPACE(s) by complementing twice: closure puts the original language back in the class."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "final-adjudicator",
+        "notes": "Construct a valid implicit configuration graph for every input; no malformed-STCON decider assumed. Fixed-M encoding constants, constructive cap, bounded certificates, all-branch halting, and both equality directions are explicit."
+      }
+    },
+    "cor-nspace-is-closed-under-complement-above-logspace": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-immerman-szelepcsenyi-nl-equals-conl",
+          "source_section": "Statement",
+          "quote": "Moreover, in the same read-only-input model",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Match the corollary hypotheses.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Extract complement closure.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Read-only-input nondeterministic work space is closed under complement above logarithmic space fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Read-only-input nondeterministic work space is closed under complement above logarithmic space does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Read-only-input nondeterministic work space is closed under complement above logarithmic space has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Read-only-input nondeterministic work space is closed under complement above logarithmic space is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Read-only-input nondeterministic work space is closed under complement above logarithmic space has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Read-only-input nondeterministic work space is closed under complement above logarithmic space uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Read-only-input nondeterministic work space is closed under complement above logarithmic space makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Read-only-input nondeterministic work space is closed under complement above logarithmic space makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ]
+    },
+    "lem-polynomial-time-computations-have-logspace-uniform-circuits": {
+      "citations": [
+        {
+          "fact": "L2",
+          "source": "def-logspace-uniform-circuit-family",
+          "source_section": "Definition",
+          "quote": "The family is",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Initialize polynomial configuration array and n labeled inputs.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Compute scanned symbols and absorbing halted updates.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Update cells and heads and prove correctness by induction.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Count bounded-fan-in gates and designate accepting-state output.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "Compute regular block indices and full circuit queries in logarithmic space.",
+          "step": "5.1",
+          "inputs": [
+            "L2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Polynomial-time computations have logspace-uniform circuit families fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-8",
+            "reason": "The circuit family is indexed by input lengths and the proof constructs each indexed circuit; the word family does not introduce an optionally empty collection."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 explicitly constructs C_0 with no input nodes and only constants in its initial row, while the polynomial time bound remains defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses exactly n input nodes, so n=1 produces one input node and all remaining initial-tableau entries are fixed constants."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Polynomial-time computations have logspace-uniform circuit families is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 cover tape positions from zero through n+B+1, retain a head commanded left at position zero, and set other out-of-range bits to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Polynomial-time computations have logspace-uniform circuit families uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that an accepting-state output bit equal to one can occur only along the genuine deterministic computation, hence only when M accepts x."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 freeze a halting configuration through time B, so every accepting run leaves the final accepting-state output bit equal to one."
+        }
+      ]
+    },
+    "thm-circuit-value-is-p-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-p-complete-under-logspace-reductions",
+          "source_section": "Definition",
+          "quote": "A language $B$ is",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-polynomial-time-computations-have-logspace-uniform-circuits",
+          "source_section": "Statement",
+          "quote": "For every fixed deterministic Turing machine",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Evaluate a circuit in topological order.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Stream the computation circuit.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Show the map is logspace.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Conclude P-completeness.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Circuit Value is P-complete fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 (constant circuits are evaluated)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 (a single-gate circuit is evaluated)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Circuit Value is P-complete is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Circuit Value is P-complete has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Circuit Value is P-complete uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Circuit Value is P-complete makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Circuit Value is P-complete makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ]
+    },
+    "fs-nl-equals-conl-follows-by-state-swapping": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-l-and-nl",
+          "source_section": "Definition",
+          "quote": "\\mathrm{NL}:=\\mathrm{NWORKSPACE}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-immerman-szelepcsenyi-nl-equals-conl",
+          "source_section": "Statement",
+          "quote": "\\mathrm{NL}=\\mathrm{coNL}",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Use existential branch acceptance.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Show state swapping still accepts.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Identify the invalid inference.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "NL equals coNL follows by swapping accepting and rejecting states fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "NL equals coNL follows by swapping accepting and rejecting states does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 (one accepting branch suffices)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "NL equals coNL follows by swapping accepting and rejecting states is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "NL equals coNL follows by swapping accepting and rejecting states has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "NL equals coNL follows by swapping accepting and rejecting states uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "NL equals coNL follows by swapping accepting and rejecting states makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "NL equals coNL follows by swapping accepting and rejecting states makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ]
+    },
+    "ex-logspace-reductions-compose": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-logspace-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "it may recompute a requested output position",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-logspace-reductions-compose",
+          "source_section": "Statement",
+          "quote": "If $A\\leq_{\\log}B$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Compute the two queried virtual positions.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Verify the composed output including n=0.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Verify both reduction biconditionals for A, B, C and apply composition.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 (the n=0 output is explicitly computed)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 (n=0 is handled)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 (the first virtual cell is queried)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Composing two logspace reductions through a virtual tape is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Composing two logspace reductions through a virtual tape has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Composing two logspace reductions through a virtual tape uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves both membership equivalences, including the empty input."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves both membership equivalences, including the empty input."
+        }
+      ]
+    },
+    "ex-circuit-value-is-p-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-polynomial-time-computations-have-logspace-uniform-circuits",
+          "source_section": "Statement",
+          "quote": "For every fixed deterministic Turing machine",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-circuit-value-is-p-complete",
+          "source_section": "Statement",
+          "quote": "Let CIRCUIT-VALUE",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Evaluate the two displayed gates.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Verify the Boolean function on all two-bit inputs and emit the four-node encoding in constant space.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Identify the Circuit Value yes-instance.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.2"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A small computation tableau compiled to Circuit Value fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 (the input bit 0 is evaluated)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 (the output bit 1 is evaluated)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A small computation tableau compiled to Circuit Value is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A small computation tableau compiled to Circuit Value has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A small computation tableau compiled to Circuit Value uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the output is one exactly on the two-bit word 01."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the output is one exactly on the two-bit word 01."
+        }
+      ]
+    },
+    "cex-nl-equals-conl-follows-by-state-swapping": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-read-only-input-logspace-machine",
+          "source_section": "Definition",
+          "quote": "A **read-only-input machine** has one input tape containing $x$, whose head may\nmove in either direction but whose cells are never changed, and finitely many\nread/write work tapes. Its work space on inputs of length $n$ is the number of\nvisited work-tape cells, not the input cells. A deterministic machine decides\nwhen it halts on every input; a nondeterministic machine decides when every\nbranch halts and some branch accepts exactly the inputs in the language.\n\nIt is a **logspace machine** when its work space is\n$O(\\log_2(n+2))$. The $n+2$ convention also covers the empty input. This is a\nwork-space convention, distinct from the all-tapes convention in\n[[def-dtime-ntime-dspace-and-nspace]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "fs-nl-equals-conl-follows-by-state-swapping",
+          "source_section": "Statement",
+          "quote": "**False statement.** For a nondeterministic machine, swapping accepting and\nrejecting states recognizes the complement language; therefore it proves\n$\\mathrm{NL}=\\mathrm{coNL}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The original accepting leaf makes the original machine accept $x$ by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After labels swap, the original rejecting leaf is accepting, so [L1] makes the swapped machine accept $x$ as well.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $x$ is in the original language, it is not in its complement; step 2.1 therefore contradicts the proposed complementing behavior, as asserted in [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A nondeterministic branch tree where state swapping is not complementing fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A nondeterministic branch tree where state swapping is not complementing does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 (one accepting branch establishes acceptance)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A nondeterministic branch tree where state swapping is not complementing is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A nondeterministic branch tree where state swapping is not complementing has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A nondeterministic branch tree where state swapping is not complementing uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A nondeterministic branch tree where state swapping is not complementing makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A nondeterministic branch tree where state swapping is not complementing makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ]
+    }
+  }
+}

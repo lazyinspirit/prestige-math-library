@@ -1,0 +1,25 @@
+---
+id: def-perfect-group
+kind: definition
+title: "Perfect group"
+status: draft
+origin: pipeline
+deps: [def-commutator-and-commutator-subgroup, thm-derived-subgroup-is-characteristic-and-abelianization-is-universal]
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-06
+sources:
+  scraped: []
+  references:
+    - title: "Clara Löh, Group Cohomology"
+      url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
+---
+
+## Definition
+
+G is perfect if G=[G,G], equivalently G_ab=0.

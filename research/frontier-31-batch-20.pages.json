@@ -1,0 +1,435 @@
+[
+  {
+    "order": 627,
+    "id": "time-and-space-hierarchy-theorems",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Time and Space Hierarchy Theorems",
+    "companion": "time-and-space-hierarchy-theorems-examples",
+    "requires": [
+      "space-complexity-savitch-and-tqbf",
+      "diagonalization-and-the-halting-problem"
+    ],
+    "items": [
+      {
+        "id": "def-efficient-universal-simulation-with-clock",
+        "kind": "definition",
+        "title": "Efficient universal simulation with an explicit clock",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-time-and-space-constructible-function",
+          "thm-universal-simulation-with-logarithmic-overhead"
+        ]
+      },
+      {
+        "id": "lem-effective-enumeration-of-clocked-machines",
+        "kind": "lemma",
+        "title": "Clocked machines admit an effective exhaustive enumeration",
+        "strategy": "Enumerate a machine code together with integral constants and a constructor/clock code. Reject malformed data by the fixed decoder, and make every valid tuple a total decider by rejecting when its clock expires. Prove both that each listed clocked machine is total within its declared budget and that every machine satisfying the chosen eventual bound is represented by some tuple.",
+        "deps": [
+          "def-efficient-universal-simulation-with-clock",
+          "prop-machine-descriptions-form-a-decidable-language"
+        ]
+      },
+      {
+        "id": "lem-time-diagonal-language-respects-its-budget",
+        "kind": "lemma",
+        "title": "The time-diagonal language remains inside its larger budget",
+        "strategy": "On the i-th clocked description, simulate only until its declared smaller clock expires and invert a returned decision; otherwise use a fixed answer. Charge decoding, clock construction, and universal-simulation overhead separately, then use the stated little-o gap to absorb all three into the larger constructible budget.",
+        "deps": [
+          "def-efficient-universal-simulation-with-clock",
+          "lem-effective-enumeration-of-clocked-machines"
+        ]
+      },
+      {
+        "id": "thm-deterministic-time-hierarchy",
+        "kind": "theorem",
+        "title": "Deterministic time hierarchy theorem",
+        "strategy": "Use the clocked enumeration and its budget-respecting diagonal language. If a purported smaller-time decider appears at a sufficiently padded code/input, the diagonal branch completes within the larger budget and returns its opposite value; this contradicts equality. State the required time-constructibility, eventual input-reading condition, and f(n) log f(n)=o(g(n)) quantitatively.",
+        "deps": [
+          "def-time-and-space-constructible-function",
+          "lem-time-diagonal-language-respects-its-budget"
+        ]
+      },
+      {
+        "id": "cor-p-is-properly-contained-in-exp",
+        "kind": "corollary",
+        "title": "P is properly contained in EXP",
+        "strategy": "Define P and EXP as the standard unions of deterministic polynomial and single-exponential time classes. Apply the deterministic hierarchy with lower bound 2^n and upper bound 2^(2n), observe P is contained in the former, and retain the resulting separating language in EXP.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "thm-deterministic-time-hierarchy"
+        ]
+      },
+      {
+        "id": "thm-nondeterministic-time-hierarchy",
+        "kind": "theorem",
+        "title": "Nondeterministic time hierarchy theorem",
+        "strategy": "Use lazy diagonalization rather than attempting to complement a nondeterministic computation branchwise. Give the padded intervals and the delayed diagonal decision explicitly; prove that for every smaller-bound nondeterministic machine one interval supplies a contradictory input while the constructed nondeterministic machine stays within the larger time bound.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-time-and-space-constructible-function"
+        ]
+      },
+      {
+        "id": "lem-space-bounded-universal-simulation",
+        "kind": "lemma",
+        "title": "Universal simulation preserves a space bound up to a constant factor",
+        "strategy": "Encode each simulated tape by tracks on a fixed simulator tape, retain its finite program in read-only form, and show that a bounded number of tracks and delimiters represent each visited simulated cell. The simulator therefore uses c_M s(n)+O(log s(n)) cells on a fixed coded machine M, with no time claim.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-turing-machine-configuration",
+          "lem-step-by-step-interpreter-for-machine-codes"
+        ]
+      },
+      {
+        "id": "lem-space-diagonal-machine-halts",
+        "kind": "lemma",
+        "title": "A space-bounded diagonal simulator detects nonhalting computations",
+        "strategy": "After marking its constructible space budget, simulate the selected machine only inside the marked region. Bound its possible configurations exponentially in the marked cells, maintain a binary counter of that many steps, and accept on timeout or rejection while rejecting on acceptance. This makes the diagonal machine total without silently assuming a space-bounded machine halts.",
+        "deps": [
+          "lem-space-bounded-universal-simulation",
+          "lem-space-bounded-machines-have-exponentially-many-configurations"
+        ]
+      },
+      {
+        "id": "thm-deterministic-space-hierarchy",
+        "kind": "theorem",
+        "title": "Deterministic space hierarchy theorem",
+        "strategy": "Apply the halting diagonal machine to a space-constructible upper bound g and a lower bound f=o(g), with g eventually at least logarithmic. Constant-factor universal simulation and the configuration counter fit in g space; at a code of each f-space decider the construction yields the opposite answer.",
+        "deps": [
+          "def-time-and-space-constructible-function",
+          "lem-space-bounded-universal-simulation",
+          "lem-space-diagonal-machine-halts"
+        ]
+      },
+      {
+        "id": "cor-l-is-properly-contained-in-pspace",
+        "kind": "corollary",
+        "title": "L is properly contained in PSPACE",
+        "strategy": "Write L as DSPACE(O(log n)) and PSPACE as the union of polynomial DSPACE bounds. Savitch puts L inside DSPACE(log^2 n); the space hierarchy separates that class from DSPACE(n), whose separating language belongs to PSPACE and hence cannot be in L.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "thm-savitchs-theorem",
+          "thm-deterministic-space-hierarchy"
+        ]
+      },
+      {
+        "id": "def-language-padding",
+        "kind": "definition",
+        "title": "Padding a language by a time bound",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder"
+        ]
+      },
+      {
+        "id": "lem-padding-transfers-time-bounds",
+        "kind": "lemma",
+        "title": "Padding transfers deterministic time bounds",
+        "strategy": "For a nondecreasing time-constructible t, decide pad_t(L) by checking the delimiter and the exact padding length, then run the L-decider on the unpadded prefix. Conversely, recover the original input by padding it and simulate the padded decider; state the output length and the time spent checking the padding rather than treating padding as cost-free.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-language-padding"
+        ]
+      },
+      {
+        "id": "thm-gap-and-union-theorems-for-complexity-bounds",
+        "kind": "theorem",
+        "title": "Gap and union theorems for computable complexity bounds",
+        "strategy": "State the two theorems with their distinct hypotheses: the gap theorem produces exceptional computable nonconstructible bounds f with DTIME(f)=DTIME(g∘f), while the union theorem collapses a uniformly computable nondecreasing sequence of bounds to one computable bound. Prove only the stated finite-injury/interval construction interfaces, carefully distinguishing exact versus O-bound conventions and never claiming the bounds are natural or constructible.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace"
+        ]
+      },
+      {
+        "id": "prop-hierarchy-theorems-do-not-separate-p-from-np",
+        "kind": "proposition",
+        "title": "Hierarchy theorems do not separate P from NP",
+        "strategy": "Compare the quantified forms of the three hierarchy theorems. Each separates two nested classes under one resource model, while P versus NP compares deterministic and nondeterministic polynomial time. The conclusion is a scope statement about what the preceding proofs establish, not an unproved assertion that P equals NP.",
+        "deps": [
+          "thm-deterministic-time-hierarchy",
+          "thm-nondeterministic-time-hierarchy",
+          "thm-deterministic-space-hierarchy"
+        ]
+      },
+      {
+        "id": "fs-unrestricted-diagonalization-respects-any-bound",
+        "kind": "false-statement",
+        "title": "Unrestricted diagonalization respects every computable resource bound",
+        "strategy": "Refute the claim with the gap theorem's computable exceptional bound f for which the relevant class is unchanged after a prescribed larger bound. Explain that a diagonal construction needs a constructible budget, simulability overhead, and a halting mechanism; merely naming a computable function does not provide them.",
+        "deps": [
+          "thm-deterministic-time-hierarchy",
+          "thm-gap-and-union-theorems-for-complexity-bounds"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 628,
+    "id": "time-and-space-hierarchy-theorems-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Time and Space Hierarchy Theorems: Examples and Counterexamples",
+    "requires": [
+      "time-and-space-hierarchy-theorems"
+    ],
+    "items": [
+      {
+        "id": "ex-time-diagonal-language-respects-its-budget",
+        "kind": "example",
+        "title": "A clocked diagonal language with an explicit polynomial gap",
+        "strategy": "Instantiate the clocked construction for machines declared to run in O(n^2), use a n^4 budget for decoding and universal simulation, and verify the reject-on-timeout convention on a concrete encoded machine/input pair.",
+        "deps": [
+          "def-efficient-universal-simulation-with-clock",
+          "lem-time-diagonal-language-respects-its-budget",
+          "thm-deterministic-time-hierarchy"
+        ]
+      },
+      {
+        "id": "ex-hierarchy-theorems-do-not-separate-p-from-np",
+        "kind": "example",
+        "title": "Why a deterministic hierarchy separation leaves P versus NP open",
+        "strategy": "Trace a deterministic time-hierarchy language through its larger deterministic class, then identify the missing simulation that would be needed to compare it with nondeterministic polynomial time. The example distinguishes a valid within-model strict containment from the unresolved cross-model equality question.",
+        "deps": [
+          "prop-hierarchy-theorems-do-not-separate-p-from-np"
+        ]
+      },
+      {
+        "id": "cex-unrestricted-diagonalization-respects-any-bound",
+        "kind": "counterexample",
+        "title": "A computable gap bound defeats an unrestricted hierarchy inference",
+        "strategy": "Use the gap theorem's computable f with DTIME(f)=DTIME(2f) (or its stated generalization) to exhibit a larger numerical budget that yields no strict class increase, and identify the missing constructibility condition.",
+        "deps": [
+          "thm-gap-and-union-theorems-for-complexity-bounds",
+          "fs-unrestricted-diagonalization-respects-any-bound"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 629,
+    "id": "logarithmic-space-nl-and-reachability",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Logarithmic Space, NL, and Reachability",
+    "companion": "logarithmic-space-nl-and-reachability-examples",
+    "requires": [
+      "space-complexity-savitch-and-tqbf",
+      "graphs-walks-and-connectivity"
+    ],
+    "items": [
+      {
+        "id": "def-read-only-input-logspace-machine",
+        "kind": "definition",
+        "title": "A read-only-input logarithmic-space machine",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace"
+        ]
+      },
+      {
+        "id": "def-l-and-nl",
+        "kind": "definition",
+        "title": "The classes L and NL",
+        "deps": [
+          "def-read-only-input-logspace-machine"
+        ]
+      },
+      {
+        "id": "lem-logspace-machines-have-polynomially-many-configurations",
+        "kind": "lemma",
+        "title": "Logspace machines have polynomially many configurations",
+        "strategy": "Count a fixed machine's finite control, its O(log n)-cell work-tape contents and head positions, and its O(n)-position read-only input head. Absorb machine-dependent constants into a single polynomial, and state separately why any accepting computation can be shortened to a simple configuration path.",
+        "deps": [
+          "def-read-only-input-logspace-machine"
+        ]
+      },
+      {
+        "id": "def-logspace-many-one-reduction",
+        "kind": "definition",
+        "title": "Logspace many-one reduction",
+        "deps": [
+          "def-read-only-input-logspace-machine"
+        ]
+      },
+      {
+        "id": "lem-logspace-reductions-compose",
+        "kind": "lemma",
+        "title": "Logspace many-one reductions compose",
+        "strategy": "Simulate the second transducer on a virtual read-only output tape of the first. Recompute a requested output symbol of the first transducer from the original input whenever the simulated input head requests it; prove the output length is polynomial and the saved head index and work tapes remain logarithmic. Record the resulting closure transfer to L and NL as the same virtual-input construction.",
+        "deps": [
+          "def-logspace-many-one-reduction"
+        ]
+      },
+      {
+        "id": "def-directed-st-connectivity",
+        "kind": "definition",
+        "title": "Directed s-t connectivity",
+        "deps": [
+          "def-multigraph-loop-and-digraph",
+          "def-directed-walk-trail-path-cycle-and-strong-connectivity"
+        ]
+      },
+      {
+        "id": "thm-directed-st-connectivity-is-nl-complete",
+        "kind": "theorem",
+        "title": "Directed s-t connectivity is NL-complete",
+        "strategy": "For membership, nondeterministically retain the current vertex and a counter through at most |V|-1 moves. For hardness, map an input and a fixed logspace nondeterministic machine to its implicitly indexed configuration graph, with start and accepting vertices. Give a logspace bit-by-bit output procedure for the graph encoding and prove reachability exactly characterizes an accepting branch.",
+        "deps": [
+          "def-l-and-nl",
+          "lem-logspace-machines-have-polynomially-many-configurations",
+          "def-logspace-many-one-reduction",
+          "def-directed-st-connectivity"
+        ]
+      },
+      {
+        "id": "thm-nl-is-contained-in-dspace-log-squared-n",
+        "kind": "theorem",
+        "title": "NL is contained in DSPACE(log-squared n)",
+        "strategy": "Instantiate Savitch's theorem at s(n)=O(log n), keeping the all-tapes space convention and the input-read-only model distinct. The theorem gives a deterministic O(log^2 n)-space decider for every NL language; it does not establish L=NL.",
+        "deps": [
+          "def-l-and-nl",
+          "thm-savitchs-theorem"
+        ]
+      },
+      {
+        "id": "def-inductive-reachable-vertex-count",
+        "kind": "definition",
+        "title": "Inductive counts of reachable vertices",
+        "deps": [
+          "def-directed-st-connectivity"
+        ]
+      },
+      {
+        "id": "lem-reachability-count-is-verifiable-in-nl",
+        "kind": "lemma",
+        "title": "A reachable-vertex count is verifiable in NL",
+        "strategy": "Given c_i, nondeterministically scan every vertex and guess a path of length at most i to each vertex counted as reachable, while retaining only a vertex index, a path counter, and an accumulator. Accept exactly when the verified witnesses total c_i; the bounded path length and all counters require O(log n) space.",
+        "deps": [
+          "def-l-and-nl",
+          "def-directed-st-connectivity",
+          "def-inductive-reachable-vertex-count"
+        ]
+      },
+      {
+        "id": "lem-nonreachability-has-an-inductive-counting-certificate",
+        "kind": "lemma",
+        "title": "Nonreachability has an inductive counting certificate",
+        "strategy": "Start from the single reachable source and inductively certify each c_i. For every vertex, verify either a bounded positive path or, using the previous count, that no predecessor lies in the prior reachable layer; demand exactly c_i positives. At i=|V|-1 the certificate accepts precisely when t was never counted, without guessing an uncheckable universal negative.",
+        "deps": [
+          "def-inductive-reachable-vertex-count",
+          "lem-reachability-count-is-verifiable-in-nl"
+        ]
+      },
+      {
+        "id": "thm-immerman-szelepcsenyi-nl-equals-conl",
+        "kind": "theorem",
+        "title": "Immerman-Szelepcsényi theorem: NL equals coNL",
+        "strategy": "Use the inductive counting certificate to put the complement of directed s-t connectivity in NL. For an arbitrary coNL language, reduce its complement to directed connectivity by NL-completeness and use the virtual-input reduction closure; state the more general NSPACE(s)=coNSPACE(s) conclusion for constructible s at least logarithmic before taking s=log n.",
+        "deps": [
+          "def-l-and-nl",
+          "lem-logspace-reductions-compose",
+          "thm-directed-st-connectivity-is-nl-complete",
+          "lem-nonreachability-has-an-inductive-counting-certificate"
+        ]
+      },
+      {
+        "id": "cor-nspace-is-closed-under-complement-above-logspace",
+        "kind": "corollary",
+        "title": "NSPACE is closed under complement above logarithmic space",
+        "strategy": "Extract the general s(n)>=log n, space-constructible clause established by Immerman-Szelepcsényi. State both inclusions by complementing twice, and distinguish this nondeterministic closure theorem from deterministic state swapping and from Savitch's deterministic simulation.",
+        "deps": [
+          "thm-immerman-szelepcsenyi-nl-equals-conl"
+        ]
+      },
+      {
+        "id": "def-logspace-uniform-circuit-family",
+        "kind": "definition",
+        "title": "A logspace-uniform Boolean circuit family",
+        "deps": [
+          "def-l-and-nl"
+        ]
+      },
+      {
+        "id": "def-p-complete-under-logspace-reductions",
+        "kind": "definition",
+        "title": "P-completeness under logspace reductions",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-logspace-many-one-reduction"
+        ]
+      },
+      {
+        "id": "lem-polynomial-time-computations-have-logspace-uniform-circuits",
+        "kind": "lemma",
+        "title": "Polynomial-time computations have logspace-uniform circuit families",
+        "strategy": "Unroll a fixed polynomial-time Turing-machine computation into a polynomial grid of local configuration-update gates. Index a gate by time, tape position, track, and bit; a logspace transducer can emit its type and constant-size predecessor list from those indices. Prove the circuit's output equals the machine's acceptance bit and quantify the polynomial size.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-logspace-uniform-circuit-family"
+        ]
+      },
+      {
+        "id": "thm-circuit-value-is-p-complete",
+        "kind": "theorem",
+        "title": "Circuit Value is P-complete",
+        "strategy": "Evaluate a topologically ordered Boolean circuit in polynomial time for membership. For hardness, use the uniform computation circuit for an arbitrary P-machine, append the input bits as constants, and have the logspace transducer stream its encoding. The circuit evaluates to one exactly on accepting computations.",
+        "deps": [
+          "def-p-complete-under-logspace-reductions",
+          "lem-polynomial-time-computations-have-logspace-uniform-circuits"
+        ]
+      },
+      {
+        "id": "fs-nl-equals-conl-follows-by-state-swapping",
+        "kind": "false-statement",
+        "title": "NL equals coNL follows by swapping accepting and rejecting states",
+        "strategy": "Refute by observing that a nondeterministic machine accepts existentially: swapping halting labels recognizes the existence of a rejecting branch, not the absence of every accepting branch. Contrast this with the inductive-counting proof that certifies a universal nonreachability condition.",
+        "deps": [
+          "def-l-and-nl",
+          "thm-immerman-szelepcsenyi-nl-equals-conl"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 630,
+    "id": "logarithmic-space-nl-and-reachability-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Logarithmic Space, NL, and Reachability: Examples and Counterexamples",
+    "requires": [
+      "logarithmic-space-nl-and-reachability"
+    ],
+    "items": [
+      {
+        "id": "ex-logspace-reductions-compose",
+        "kind": "example",
+        "title": "Composing two logspace reductions through a virtual tape",
+        "strategy": "Use a reduction whose output bits encode a directed graph and a second reduction that queries selected graph bits. Recompute each requested first-stage bit from the original input, keeping only the two output-head indices and the two logarithmic work tapes.",
+        "deps": [
+          "def-logspace-many-one-reduction",
+          "lem-logspace-reductions-compose"
+        ]
+      },
+      {
+        "id": "ex-circuit-value-is-p-complete",
+        "kind": "example",
+        "title": "A small computation tableau compiled to Circuit Value",
+        "strategy": "Take a fixed polynomial-time machine and a short input, display a few local configuration-update gates and the final acceptance gate, then verify the gate values reproduce the run. Explain which indexed loop lets the reduction emit the circuit in logarithmic space.",
+        "deps": [
+          "lem-polynomial-time-computations-have-logspace-uniform-circuits",
+          "thm-circuit-value-is-p-complete"
+        ]
+      },
+      {
+        "id": "cex-nl-equals-conl-follows-by-state-swapping",
+        "kind": "counterexample",
+        "title": "A nondeterministic branch tree where state swapping is not complementing",
+        "strategy": "Give a machine with one accepting and one rejecting branch on the same input. After swapping terminal labels it still accepts by the former rejecting branch, whereas the language complement should reject because the original machine had an accepting branch.",
+        "deps": [
+          "def-l-and-nl",
+          "fs-nl-equals-conl-follows-by-state-swapping"
+        ]
+      }
+    ]
+  }
+]

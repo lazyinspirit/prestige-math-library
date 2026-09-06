@@ -22,21 +22,20 @@ import { terminalEvidence } from '../../step8-terminal-resolution.mjs';
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 
-test('the Step-8 paid budget counts frozen contexts per item and stops at two', () => {
+test('the Step-8 paid budget permits exactly one Terra rejudge per repaired item', () => {
   const receipt = {
     cycles: [
-      { cycle_id: 'c1', items: ['thm-demo-one', 'thm-demo-one', 'thm-demo-two'] },
-      { cycle_id: 'c2', items: ['thm-demo-one'] },
+      { cycle_id: 'seed', kind: 'initial-fatal', items: ['thm-demo-one'] },
+      { cycle_id: 'c1', kind: 'repair', items: ['thm-demo-one', 'thm-demo-one'] },
     ],
   };
-  assert.equal(STEP8_MAX_REJUDGE_CYCLES, 2);
-  assert.equal(cycleCounts(receipt).get('thm-demo-one'), 2,
-    'a duplicated id inside one fan-out is still one frozen context');
-  assert.equal(cycleCounts(receipt).get('thm-demo-two'), 1);
-  assert.deepEqual(exhaustedItems(['thm-demo-two', 'thm-demo-one'], receipt), ['thm-demo-one']);
+  assert.equal(STEP8_MAX_REJUDGE_CYCLES, 1);
+  assert.equal(cycleCounts(receipt).get('thm-demo-one'), 1,
+    'initial evidence is provenance and a duplicated fan-out id is still one paid rejudge');
+  assert.deepEqual(exhaustedItems(['thm-demo-one'], receipt), ['thm-demo-one']);
 });
 
-test('the fatal context that licensed the first repair counts as cycle one', () => {
+test('the fatal context that licensed the first repair does not consume the paid rejudge', () => {
   const row = {
     id: 'thm-demo-one',
     model: 'gpt-5.6-terra',
@@ -50,12 +49,12 @@ test('the fatal context that licensed the first repair counts as cycle one', () 
   };
   const receipt: any = { version: 1, run: 'demo', max_cycles_per_item: 2, cycles: [] };
   assert.equal(seedInitialFatalContexts(receipt, evidence, [row.id], 'demo'), true);
-  assert.equal(cycleCounts(receipt).get(row.id), 1);
+  assert.equal(cycleCounts(receipt).get(row.id), undefined);
   assert.equal(seedInitialFatalContexts(receipt, evidence, [row.id], 'demo'), false,
     'a later invocation cannot count the same original context twice');
   receipt.cycles.push({ cycle_id: 'repair-1', kind: 'repair', items: [row.id] });
   assert.deepEqual(exhaustedItems([row.id], receipt), [row.id],
-    'only one post-repair judge context remains after the original fatal');
+    'the one post-repair Terra judgment exhausts the paid budget');
 });
 
 test('an exhausted item is refused before any funded-lane preflight', () => {
@@ -63,12 +62,11 @@ test('an exhausted item is refused before any funded-lane preflight', () => {
   mkdirSync(join(root, 'research'));
   const receipt = join(root, 'research', 'demo-step8-rejudge-cycles.json');
   writeFileSync(receipt, JSON.stringify({
-    version: 1,
+    version: 2,
     run: 'demo',
-    max_cycles_per_item: 2,
+    max_cycles_per_item: 1,
     cycles: [
-      { cycle_id: 'c1', items: ['thm-demo-one'] },
-      { cycle_id: 'c2', items: ['thm-demo-one'] },
+      { cycle_id: 'c1', kind: 'repair', items: ['thm-demo-one'] },
     ],
   }));
   const result = spawnSync(process.execPath, [
@@ -160,7 +158,7 @@ test('the Step-8 guard rejects an adjudication that no judge rejection supports'
     }
   });
 
-test('terminal intervention binds the exact unresolved item and two cycle receipts', () => {
+test('terminal intervention binds the exact unresolved item and completed Terra rejudge', () => {
   const root = mkdtempSync(join(tmpdir(), 'step8-terminal-'));
   mkdirSync(join(root, '.autopilot'));
   mkdirSync(join(root, 'research'));
@@ -175,13 +173,13 @@ test('terminal intervention binds the exact unresolved item and two cycle receip
     context_sha256: initialContext, outcome: 'confirmed_fatal',
   })}\n`);
   writeFileSync(join(root, 'research', 'demo-step8-rejudge-cycles.json'), JSON.stringify({
-    version: 1,
+    version: 2,
     run: 'demo',
-    max_cycles_per_item: 2,
+    max_cycles_per_item: 1,
     cycles: [
       { cycle_id: 'c1', kind: 'initial-fatal', items: ['thm-demo-target'],
         context_sha256: initialContext, started_at: '2026-08-25T00:00:00Z', completed_at: '2026-08-25T00:10:00Z' },
-      { cycle_id: 'c2', items: ['thm-demo-target'], started_at: '2026-08-25T01:00:00Z', completed_at: '2026-08-25T01:10:00Z' },
+      { cycle_id: 'c2', kind: 'repair', items: ['thm-demo-target'], started_at: '2026-08-25T01:00:00Z', completed_at: '2026-08-25T01:10:00Z', exit_code: 0 },
     ],
   }));
   writeFileSync(join(root, 'research', 'demo-judge-closure.json'), JSON.stringify({
@@ -190,7 +188,7 @@ test('terminal intervention binds the exact unresolved item and two cycle receip
     open_fatal: ['thm-demo-target'],
   }));
   const exact = terminalEvidence(root, 'demo', 'thm-demo-target');
-  assert.deepEqual(exact.evidence.cycle_ids, ['c1', 'c2']);
+  assert.deepEqual(exact.evidence.cycle_ids, ['c2']);
   assert.equal(exact.evidence.unresolved_as, 'open_fatal');
   assert.match(exact.evidence.closure_path,
     /^research\/demo-step8-terminal-evidence\/[a-f0-9]{64}\.json$/);
@@ -200,7 +198,7 @@ test('terminal intervention binds the exact unresolved item and two cycle receip
   assert.equal(readFileSync(join(root, exact.evidence.closure_path), 'utf8'), frozen,
     'later closure recomputation must not overwrite terminal failure evidence');
   assert.throws(() => terminalEvidence(root, 'demo', 'thm-arbitrary-other'),
-    /terminal intervention is not licensed|not named in the current unresolved/);
+    /final adjudication is not licensed|not named in the current unresolved/);
 });
 
 test('a frozen historical cutover is write-once and cannot bless later edits', () => {

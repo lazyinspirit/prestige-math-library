@@ -15,7 +15,7 @@
 //   autopilot start --run frontier-15 --detach  # steps 1..10, autonomous
 //   autopilot status                            # any time, from anywhere
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, rmSync, openSync, closeSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, rmSync, openSync, closeSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -203,10 +203,13 @@ async function buildExecutor(run?: string) {
   }
   const stagesPath = resolve(config.stages);
   const mod = await import(stagesPath);
-  // The executor hot-reloads this file at tick boundaries (validated first,
-  // refused on problems) — an edited stage table no longer costs a stop, a
-  // full battery drain and a restart.
+  // The executor hot-reloads the table and its sibling stage modules at tick
+  // boundaries (validated first, refused on problems). mathlib.step6.mts is a
+  // composed part of the table, not a separately restart-bound configuration.
   (config as any).stagesPath = stagesPath;
+  config.stagesWatch = readdirSync(dirname(stagesPath))
+    .filter((name) => name.endsWith('.mts'))
+    .map((name) => join(dirname(stagesPath), name));
   const state = new State(statePath(config.stateDir)).init(config.run);
   const reporter = new Reporter({ dir: config.stateDir, intervalMs: config.reportIntervalMin * 60 * 1000 });
   const adapter = makeExecAdapter({ argv: config.argv, cwd: repo, logger: (m) => reporter.event('exec', { command: m }) });

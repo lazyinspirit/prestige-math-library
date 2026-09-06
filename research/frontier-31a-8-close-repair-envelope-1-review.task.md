@@ -1,0 +1,48 @@
+# Exact Step-8 repair envelope — 8-close, round 1
+
+The JSON envelope below is the authority for this dispatch. It contains every failing gate from the battery,
+complete relevant diagnostic records, exact current rejection tuples, and explicit run/published ownership.
+The full_evidence file retains the original untruncated battery output and all ownership assignments.
+Read its relevant sections if a diagnostic is ambiguous; do not infer absence from this scoped view.
+Act only on `assigned_items` and `live_tuples`; do not substitute the latest event-log row.
+
+```json
+{
+  "version": 1,
+  "run": "frontier-31a",
+  "stage": "8-close",
+  "round": 1,
+  "mode": "close",
+  "group": null,
+  "full_evidence": "research/frontier-31a-8-close-repair-evidence-1-de36aa0cecb49b9c49737c0bad72641a6f0760ff36da52b4b47e2a9c713d58d1.json",
+  "full_evidence_sha256": "de36aa0cecb49b9c49737c0bad72641a6f0760ff36da52b4b47e2a9c713d58d1",
+  "failures": [
+    {
+      "id": "boundary-audit",
+      "stage": "8-close",
+      "why": "Every line above is a candidate for a human read, not a verdict.",
+      "output": "boundary-audit: 5632 rows over 1 contract file(s); 4631 marked not_applicable\n\nTEMPLATE REUSE — 7 cluster(s) at or above 3 members.\nA rationale shared across many items is not a determination about any of them.\n\n  5 rows · axes: degenerate, iff-forward, iff-reverse, nonempty-choice, zero\n    \"Full-resolution calculation in 1.1; right exactness and H0 in 1.2; horseshoe kernel and converse in 2.1–3.1. Zero tensor functors are exact. DC and supplied res…\"\n    items: thm-a-left-module-is-flat-exactly-when-tor-one-with-every-right-module-vanishes\n\n  5 rows · axes: degenerate, iff-forward, iff-reverse, nonempty-choice, zero\n    \"Full-resolution forward argument in 1.1, natural Tor0 and cokernel calculation in 1.2, left-variable LES and converse in 2.1–3.1. Zero tensor functors are exact…\"\n    items: thm-a-right-module-is-flat-exactly-when-tor-one-with-every-left-module-vanishes\n\n  5 rows · axes: degenerate, empty, endpoints, iff-forward, iff-reverse\n    \"This explicit positive-integer finite-complex calculation has no additional empty branch.\"\n    items: ex-the-tensor-double-complex-in-low-degrees\n\n  3 rows · axes: endpoints, one, zero\n    \"All eight zero/positive degree patterns are checked in 1.2 and 2.1–2.3; the short-extension pullback/pushout case uses the short five lemma; degree-zero composi…\"\n    items: thm-yoneda-product-is-associative-and-unital\n\n  3 rows · axes: degenerate, nonempty-choice, zero\n    \"The finite elimination in 2.1–2.2 handles degree zero and zero complexes; step 4.1 uses DC for comparisons and explicit signed total homotopies for independence…\"\n    items: thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic\n\n  3 rows · axes: degenerate, nonempty-choice, zero\n    \"Step 1.1 licenses the projection using AC and projectivity; sigma(f)=[f q pi] in 2.1–3.1 is linear and a section, including G=0, C=0 and zero cycle/boundary gro…\"\n    items: thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally\n\n  3 rows · axes: degenerate, empty, zero\n    \"Step 5.1 includes empty sums and zero modules; the LES and free kernel computation remain valid.\"\n    items: lem-the-kunneth-tor-map\n\nCONTRADICTED DISPOSITIONS — none found by the three detectors.\n\nUPHELD BY REVIEW — 7 row(s) an Alpha read and kept, with reasons on the record:\n  cor-countable-independent-copies-exist  [empty]  by alpha-contract-audit-8: The independent family is a sequence indexed by the natural numbers, so its index set is fixed and nonempty; no empty-fa\n  cor-holomorphic-functional-calculus-in-the-wiener-algebra  [zero]  by alpha-contract-audit-8: The denominator flagged in step 2.1 is the fixed complex constant 2 pi i, which is nonzero; no variable denominator appr\n  lem-primitive-gauss-sum-twist  [empty]  by alpha-contract-audit-8: A Dirichlet character modulus is positive, so the residue classes modulo q form a nonempty finite set; the displayed sum\n  thm-dirac-comb-is-fourier-invariant  [empty]  by alpha-contract-audit-8: Both displayed sums are indexed by the fixed nonempty set of integers; the summability issue is convergence, not an empt\n  thm-twisted-poisson-summation  [empty]  by alpha-contract-audit-8: The displayed sums are indexed by the fixed nonempty set of integers, so the detector sees aggregate notation without an\n  thm-gap-and-union-theorems-for-complexity-bounds  [empty]  by alpha-contract-audit-8: The displayed union is indexed by all natural numbers, a fixed nonempty index set; the detector sees a union symbol but \n  lem-polynomial-time-computations-have-logspace-uniform-circuits  [empty]  by alpha-contract-audit-8: The circuit family is indexed by input lengths and the proof constructs each indexed circuit; the word family does not i\n\nEvery line above is a candidate for a human read, not a verdict.\n",
+      "named_ids": []
+    }
+  ],
+  "mechanical_residue": "",
+  "live_items": [],
+  "assigned_items": [],
+  "live_tuples": []
+}
+```
+
+---
+
+# Step 8 — frozen integrity close, `{{run}}`
+
+The final judge boundary is closed. The generated repair envelope above is
+authoritative: review only its exact `assigned_items` and `live_tuples`, with
+their explicit run or published scope; use a focused check when supported.
+
+Do not alter mathematical items, start a judge cycle, or change another group's
+records. You may correct a contract or receipt only when it exactly describes
+the current item and cannot conceal a defect. A mathematical correction is a
+blocker for the supervising session.
+
+Return the gate, ids, non-item records changed, focused checks, and blockers.

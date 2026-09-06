@@ -1,0 +1,361 @@
+[
+  {
+    "order": 288.055,
+    "id": "geometric-hahn-banach-and-convex-separation",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Geometric Hahn Banach and Convex Separation",
+    "companion": "geometric-hahn-banach-and-convex-separation-examples",
+    "requires": [
+      "the-analytic-hahn-banach-theorem-examples"
+    ],
+    "items": [
+      {
+        "id": "def-absorbing-balanced-and-absolutely-convex-set",
+        "kind": "definition",
+        "title": "Absorbing, balanced, and absolutely convex sets",
+        "strategy": "For a subset C of a real or complex normed space, define absorbing by x in tC for some t>0 for every x; balanced by lambda C subset C whenever |lambda|<=1; and absolutely convex as convex and balanced. State these separately so later gauge hypotheses are not conflated.",
+        "deps": [
+          "def-norm-and-normed-space",
+          "rem-real-and-complex-normed-space-convention"
+        ]
+      },
+      {
+        "id": "def-minkowski-functional",
+        "kind": "definition",
+        "title": "Minkowski functional of an absorbing set",
+        "strategy": "For absorbing C define p_C(x)=inf{t>0:x in tC}. Record that absorption makes this finite; it need not be a norm or even a seminorm without further hypotheses.",
+        "deps": [
+          "def-absorbing-balanced-and-absolutely-convex-set"
+        ]
+      },
+      {
+        "id": "lem-minkowski-functional-is-sublinear",
+        "kind": "lemma",
+        "title": "The gauge of a convex absorbing set is sublinear",
+        "strategy": "Use epsilon-approximating dilates of x and y and convexity to prove p_C(x+y)<=p_C(x)+p_C(y); compare dilates directly for nonnegative real homogeneity. Keep the result explicitly real-sublinear.",
+        "deps": [
+          "def-absorbing-balanced-and-absolutely-convex-set",
+          "def-minkowski-functional"
+        ]
+      },
+      {
+        "id": "lem-balanced-gauge-is-a-seminorm",
+        "kind": "lemma",
+        "title": "The gauge of an absolutely convex absorbing set is a seminorm",
+        "strategy": "Combine sublinearity with balancedness to obtain p_C(lambda x)=|lambda|p_C(x), including the complex phase argument. Do not assert positive-definiteness.",
+        "deps": [
+          "def-absorbing-balanced-and-absolutely-convex-set",
+          "def-minkowski-functional",
+          "lem-minkowski-functional-is-sublinear"
+        ]
+      },
+      {
+        "id": "lem-open-convex-set-recovered-from-its-gauge",
+        "kind": "lemma",
+        "title": "An open convex neighbourhood is recovered from its gauge",
+        "strategy": "If U is open, convex, and contains 0, prove U={x:p_U(x)<1}; openness supplies a small radial enlargement, while convexity supplies the reverse inclusion. This is only after translating a general open set to put 0 inside it.",
+        "deps": [
+          "def-minkowski-functional",
+          "lem-minkowski-functional-is-sublinear",
+          "def-norm-and-normed-space"
+        ]
+      },
+      {
+        "id": "def-weak-and-strict-separation",
+        "kind": "definition",
+        "title": "Weak, strict, and strong separation",
+        "strategy": "Define the separation inequalities for two sets by a continuous linear functional. Over complex scalars all inequalities are imposed on Re f, never on complex values themselves; strong separation has a positive gap.",
+        "deps": [
+          "def-dual-space-of-a-normed-space",
+          "rem-real-and-complex-normed-space-convention"
+        ]
+      },
+      {
+        "id": "thm-separation-of-an-open-convex-set-and-a-point",
+        "kind": "theorem",
+        "title": "Separate a point from an open convex set",
+        "strategy": "Choose a point of the open convex set and translate that interior point to 0; the exterior point remains outside the translated set. Take its gauge, use dominated Hahn–Banach on the real span of the translated exterior point, and translate back. In the complex case recover a complex-linear functional from its real part, so the conclusion is stated with Re f.",
+        "deps": [
+          "def-minkowski-functional",
+          "lem-open-convex-set-recovered-from-its-gauge",
+          "def-weak-and-strict-separation",
+          "thm-hahn-banach-dominated-extension",
+          "lem-real-part-determines-a-complex-linear-functional"
+        ]
+      },
+      {
+        "id": "thm-separation-of-disjoint-convex-sets-one-open",
+        "kind": "theorem",
+        "title": "Separation of disjoint convex sets when one is open",
+        "strategy": "Apply point-versus-open-set separation to the open convex difference U-V, then transfer its inequality to every u in U and v in V. State the strict inequality on the open side.",
+        "deps": [
+          "thm-separation-of-an-open-convex-set-and-a-point",
+          "def-weak-and-strict-separation"
+        ]
+      },
+      {
+        "id": "thm-strong-separation-of-closed-and-compact-convex-sets",
+        "kind": "theorem",
+        "title": "Strong separation of a closed and a compact convex set",
+        "strategy": "Use compactness to obtain a positive distance, thicken the closed convex set by an open ball of smaller radius, separate the resulting open convex set from the compact set, and turn the margin into a positive gap.",
+        "deps": [
+          "thm-separation-of-disjoint-convex-sets-one-open",
+          "def-weak-and-strict-separation",
+          "lem-distance-to-set-is-lipschitz",
+          "thm-extreme-value-metric",
+          "def-metric-compactness"
+        ]
+      },
+      {
+        "id": "cor-closed-convex-set-is-an-intersection-of-closed-half-spaces",
+        "kind": "corollary",
+        "title": "A closed convex set is an intersection of closed half-spaces",
+        "strategy": "For every exterior point use point-versus-open-set separation for the open complement-side construction; the half-space containing the set excludes that point. Intersect these half-spaces and use closedness for the converse inclusion.",
+        "deps": [
+          "thm-separation-of-disjoint-convex-sets-one-open",
+          "def-weak-and-strict-separation",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "def-continuous-annihilator-of-a-subspace",
+        "kind": "definition",
+        "title": "Continuous annihilator of a linear subspace",
+        "strategy": "For M in X define M-perp={f in X*:f(m)=0 for every m in M}; distinguish this topological-dual annihilator from an algebraic dual convention.",
+        "deps": [
+          "def-dual-space-of-a-normed-space",
+          "def-linear-subspace"
+        ]
+      },
+      {
+        "id": "thm-geometric-hahn-banach-for-subspaces",
+        "kind": "theorem",
+        "title": "Geometric Hahn–Banach theorem for subspaces",
+        "strategy": "For x outside the metric closure of M, let delta=dist(x,M)>0 and define f_0(m+lambda x)=lambda on M+Kx. Its norm is at most 1/delta; extend it norm-preservingly to X to obtain f in M-perp with f(x)=1. The extension theorem covers both scalar fields.",
+        "deps": [
+          "def-continuous-annihilator-of-a-subspace",
+          "thm-norm-preserving-extension-from-any-subspace",
+          "thm-metric-closure-characterisation",
+          "def-normed-subspace"
+        ]
+      },
+      {
+        "id": "cor-annihilator-detects-closure",
+        "kind": "corollary",
+        "title": "The annihilator detects the closure of a subspace",
+        "strategy": "Prove closure(M)=the intersection of kernels of functionals in M-perp. One inclusion is continuity; the other is the geometric Hahn–Banach separator of an exterior point.",
+        "deps": [
+          "def-continuous-annihilator-of-a-subspace",
+          "thm-geometric-hahn-banach-for-subspaces"
+        ]
+      },
+      {
+        "id": "cor-density-characterised-by-annihilator-zero",
+        "kind": "corollary",
+        "title": "Density is characterized by a zero annihilator",
+        "strategy": "Specialise the closure characterization to closure(M)=X, giving M-perp={0} if and only if M is dense in X.",
+        "deps": [
+          "cor-annihilator-detects-closure"
+        ]
+      },
+      {
+        "id": "cor-finite-dimensional-subspaces-are-complemented",
+        "kind": "corollary",
+        "title": "Finite-dimensional subspaces are complemented",
+        "strategy": "Fix a basis of M, use bounded coordinate maps on M, extend them to X with the field-general extension theorem, and form the bounded projection sum f_j(x)e_j. State that the chosen basis is part of the construction.",
+        "deps": [
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "cor-finite-dimensional-subspaces-are-closed",
+          "thm-norm-preserving-extension-from-any-subspace",
+          "def-complemented-subspace",
+          "thm-complemented-subspace-iff-range-of-a-bounded-projection"
+        ]
+      },
+      {
+        "id": "cor-finite-codimensional-subspaces-are-complemented",
+        "kind": "corollary",
+        "title": "Closed finite-codimensional subspaces are complemented",
+        "strategy": "For closed M with finite-dimensional X/M, choose a quotient basis and representatives, use the bounded coordinate map on the quotient to construct a bounded linear section, and take I minus section composed with quotient as a projection onto M.",
+        "deps": [
+          "def-quotient-seminorm",
+          "thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed",
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "def-complemented-subspace",
+          "thm-complemented-subspace-iff-range-of-a-bounded-projection"
+        ]
+      },
+      {
+        "id": "def-linear-hyperplane",
+        "kind": "definition",
+        "title": "Linear hyperplane",
+        "strategy": "Define a linear hyperplane H of X by dim(X/H)=1, using the established quotient-vector-space convention; do not build closedness into the algebraic definition.",
+        "deps": [
+          "def-linear-subspace",
+          "def-quotient-vector-space-and-canonical-projection",
+          "def-dimension"
+        ]
+      },
+      {
+        "id": "thm-closed-hyperplanes-are-kernels-of-nonzero-functionals",
+        "kind": "theorem",
+        "title": "Closed hyperplanes are kernels of nonzero functionals",
+        "strategy": "For a closed codimension-one H choose x outside H and apply the subspace separator; its kernel contains H and dimension forces equality. Conversely, the kernel of a nonzero continuous functional is closed and has quotient dimension one.",
+        "deps": [
+          "def-linear-hyperplane",
+          "thm-geometric-hahn-banach-for-subspaces",
+          "def-dual-space-of-a-normed-space",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "thm-mazur-weak-and-norm-closure-of-convex-sets",
+        "kind": "theorem",
+        "title": "Mazur theorem: weak and norm closure agree for convex sets",
+        "strategy": "State weak neighbourhoods locally by finitely many dual functionals. Norm closure is contained in weak closure by continuity; if x is outside norm closure of convex C, separate x from the open convex complement-side set, and the resulting single functional excludes a weak neighbourhood of x from C.",
+        "deps": [
+          "def-dual-space-of-a-normed-space",
+          "cor-closed-convex-set-is-an-intersection-of-closed-half-spaces",
+          "thm-separation-of-disjoint-convex-sets-one-open",
+          "def-weak-and-strict-separation"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.056,
+    "id": "geometric-hahn-banach-and-convex-separation-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Geometric Hahn Banach and Convex Separation Examples",
+    "companion": "geometric-hahn-banach-and-convex-separation",
+    "requires": [
+      "geometric-hahn-banach-and-convex-separation"
+    ],
+    "items": [
+      {
+        "id": "ex-gauges-of-norm-balls-and-ellipsoids",
+        "kind": "example",
+        "title": "Gauges of norm balls and finite-dimensional ellipsoids",
+        "strategy": "Compute the gauge of an open norm ball as norm divided by its radius, and of a positive-definite quadratic ellipsoid as the square root of its quadratic form. Identify exactly which hypotheses make each a norm.",
+        "deps": [
+          "def-minkowski-functional",
+          "lem-balanced-gauge-is-a-seminorm"
+        ]
+      },
+      {
+        "id": "cex-gauge-of-a-nonbalanced-set-is-not-a-seminorm",
+        "kind": "counterexample",
+        "title": "A gauge of a nonbalanced set need not be a seminorm",
+        "strategy": "Use a one-sided open interval in the real line. Compute its finite gauge and exhibit failure of negative-scalar homogeneity, isolating the role of balancedness.",
+        "deps": [
+          "def-minkowski-functional",
+          "lem-minkowski-functional-is-sublinear"
+        ]
+      },
+      {
+        "id": "cex-two-closed-convex-sets-need-not-be-strongly-separated",
+        "kind": "counterexample",
+        "title": "Two closed convex sets can have no strong separator",
+        "strategy": "In R^2 use the x-axis and the epigraph of exp(-x). Verify closedness, convexity, and disjointness, but show their distance is zero; a positive separating gap would force positive distance.",
+        "deps": [
+          "def-weak-and-strict-separation",
+          "thm-derivative-of-exponential",
+          "cor-differentiable-implies-continuous",
+          "thm-exponential-two-point-convexity",
+          "thm-exponential-is-strictly-increasing"
+        ]
+      },
+      {
+        "id": "ex-distance-to-a-subspace-via-annihilating-functionals",
+        "kind": "example",
+        "title": "Distance to a subspace via annihilating functionals",
+        "strategy": "Derive dist(x, closure M)=sup{|f(x)|:f in M-perp, ||f||<=1}; continuity gives one inequality and the geometric Hahn–Banach functional gives equality for exterior points, with the zero-distance case separated.",
+        "deps": [
+          "def-continuous-annihilator-of-a-subspace",
+          "thm-geometric-hahn-banach-for-subspaces"
+        ]
+      },
+      {
+        "id": "def-c-zero-and-ell-infinity",
+        "kind": "definition",
+        "title": "The sequence spaces c_0 and ell-infinity",
+        "strategy": "Define bounded scalar sequences ell-infinity with sup norm and its subspace c_0 of sequences converging to zero, over the page scalar field.",
+        "deps": [
+          "def-norm-and-normed-space",
+          "def-sequence"
+        ]
+      },
+      {
+        "id": "lem-c-zero-is-a-closed-subspace-of-ell-infinity",
+        "kind": "lemma",
+        "title": "c_0 is a closed subspace of ell-infinity",
+        "strategy": "Show linearity directly; a uniform limit of null sequences is null by a two-epsilon argument, hence c_0 is closed in the sup-norm metric.",
+        "deps": [
+          "def-c-zero-and-ell-infinity",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "lem-uncountable-almost-disjoint-family-on-natural-numbers",
+        "kind": "lemma",
+        "title": "An uncountable almost-disjoint family of subsets of the naturals",
+        "strategy": "Enumerate rationals and, for each irrational x, select the least-index rational in each shrinking interval about x not used earlier. The resulting infinite subsets of N have pairwise finite intersection; uncountability follows from the irrational parameter set. The least-index rule avoids a hidden choice principle.",
+        "deps": [
+          "cor-irrationals-uncountable",
+          "lem-q-and-irrationals-dense-r",
+          "thm-rationals-countable",
+          "thm-well-ordering-principle",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "lem-quotient-by-c-zero-has-no-countable-separating-family",
+        "kind": "lemma",
+        "title": "The quotient ell-infinity/c_0 has no countable separating family",
+        "strategy": "Use indicator classes of the almost-disjoint family. For each continuous functional on the quotient, show only countably many of those classes can have nonzero value; assuming countable choice, a countable family therefore misses a nonzero class. Record the AC_omega dependence explicitly.",
+        "deps": [
+          "lem-c-zero-is-a-closed-subspace-of-ell-infinity",
+          "lem-uncountable-almost-disjoint-family-on-natural-numbers",
+          "def-quotient-seminorm",
+          "thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed",
+          "def-dual-space-of-a-normed-space",
+          "thm-countable-union-of-countable"
+        ]
+      },
+      {
+        "id": "thm-c-zero-is-not-complemented-in-ell-infinity",
+        "kind": "theorem",
+        "title": "c_0 is not complemented in ell-infinity",
+        "strategy": "Assume a bounded projection onto c_0. Its kernel is isomorphic to ell-infinity/c_0, while coordinate functionals pulled through the projection give a countable separating family on that quotient, contradicting the preceding lemma.",
+        "deps": [
+          "def-c-zero-and-ell-infinity",
+          "lem-c-zero-is-a-closed-subspace-of-ell-infinity",
+          "lem-quotient-by-c-zero-has-no-countable-separating-family",
+          "def-complemented-subspace",
+          "thm-complemented-subspace-iff-range-of-a-bounded-projection",
+          "def-quotient-seminorm"
+        ]
+      },
+      {
+        "id": "ex-a-closed-uncomplemented-subspace",
+        "kind": "example",
+        "title": "A closed uncomplemented subspace",
+        "strategy": "Package the preceding closedness and noncomplementability results as the concrete inclusion c_0 subset ell-infinity. The example depends only on the proof developed in this companion page.",
+        "deps": [
+          "lem-c-zero-is-a-closed-subspace-of-ell-infinity",
+          "thm-c-zero-is-not-complemented-in-ell-infinity"
+        ]
+      },
+      {
+        "id": "rem-two-results-called-mazurs-lemma",
+        "kind": "remark",
+        "title": "Two results called Mazur’s lemma",
+        "strategy": "Disambiguate this page’s closure theorem from the commonly named convex-combination lemma for weakly convergent sequences; only the closure theorem is proved here.",
+        "deps": [
+          "thm-mazur-weak-and-norm-closure-of-convex-sets"
+        ]
+      }
+    ]
+  }
+]

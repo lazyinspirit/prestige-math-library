@@ -152,6 +152,29 @@ test('gate repair dispatch embeds the canonical protocol in its generated task',
   }
 });
 
+test('a Step 6 stalemate repair claims its artifact-incomplete units', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'step6-stalemate-'));
+  try {
+    mkdirSync(join(root, 'research'), { recursive: true });
+    mkdirSync(join(root, 'briefs', 'tasks'), { recursive: true });
+    writeFileSync(join(root, 'briefs', 'tasks', 'alpha-step6-gate.md'),
+      readFileSync(join(REPO, 'briefs', 'tasks', 'alpha-step6-gate.md')));
+    let dispatched: any;
+    const stage = byId('6b-adjudicate');
+    await stage.onGateFailure({
+      ctx: { run: 'r', repo: root }, stage, round: 1,
+      failure: {
+        id: 'stage-stalemate',
+        why: 'unit(s) 8, 9, 10 covered but artifact-incomplete and no longer running',
+        units: ['8', '9', '10'],
+      },
+      executor: { start(_stage: any, plan: any) { dispatched = plan; } },
+    });
+    assert.deepEqual(dispatched.covers, ['8', '9', '10'],
+      'the live repair must suppress duplicate stalemate retries for the same units');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
 test('adjudicating stages budget three tries per named item', () => {
   for (const id of ['6b-adjudicate', '6c-cross']) {
     assert.equal(byId(id).perItemFixBudget, 3);
@@ -399,7 +422,7 @@ test('split routes semantic manifest edits even when item and page bytes do not 
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
-test('an uneditable published-dependency finding becomes an exact reader obligation', () => {
+test('a claimed published-dependency obligation survives withdrawal and downstream edge removal', () => {
   const fx = fixture();
   try {
     const published = 'thm-published-dependency';
@@ -436,6 +459,7 @@ test('an uneditable published-dependency finding becomes an exact reader obligat
       'claim', '--run', 'r', '--id', published, '--group', 'a', '--root', fx.root],
     { cwd: fx.root, encoding: 'utf8' });
     const repairedText = readFileSync(join(fx.root, 'items', `${published}.md`), 'utf8')
+      .replace('status: published', 'status: draft')
       + '\nCorrected published statement.\n';
     writeFileSync(join(fx.root, 'items', `${published}.md`), repairedText);
     writeFileSync(join(fx.root, 'research', 'r-step8-published-repairs.jsonl'), `${JSON.stringify({
@@ -445,8 +469,10 @@ test('an uneditable published-dependency finding becomes an exact reader obligat
       post_sha256: itemHashGuard(repairedText), defect: 'The published Statement was false.',
       correction_basis: 'The empty case gives the exact corrected boundary.',
     })}\n`);
+    writeFileSync(consumerPath, readFileSync(consumerPath, 'utf8')
+      .replace(`deps: [${published}]`, 'deps: []'));
     fx.run('stamp', '--run', 'r');
-    assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'final'), /0 error/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 

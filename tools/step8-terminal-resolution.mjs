@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-// step8-terminal-resolution.mjs — exact-hash terminal closure after both
-// Step-8 rejudge contexts have exhausted.
+// step8-terminal-resolution.mjs — exact-hash terminal closure after the one
+// paid Step-8 Terra rejudge.
 //
 // The ordinary closure remains judge -> Alpha adjudication -> repair ->
-// targeted rejudge.  After the second confirmed-fatal repair, one independent
-// Sol-xhigh Final Adjudicator per affected group accepts Alpha's repair or repairs
-// it independently, then records the exact text/context here. Legacy owner or
+// targeted rejudge. If that rejudge rejects, one independent Astra-medium Final
+// Adjudicator per affected group adjudicates the rejection, accepts the current
+// repair or repairs it independently, then records the exact text/context here. Legacy owner or
 // session interventions remain parseable for concluded runs. This tool never
 // writes a judge verdict or a judge stamp.
 
@@ -22,8 +22,8 @@ import { tsxLoader } from './paths.mjs';
 import { loadStep8JudgeEvidence, rejectionKey } from './step8-evidence.mjs';
 import { MODELS } from './models.mjs';
 
-export const TERMINAL_RESOLUTION_VERSION = 2;
-export const TERMINAL_REJUDGE_ROUNDS = 2;
+export const TERMINAL_RESOLUTION_VERSION = 3;
+export const TERMINAL_REJUDGE_ROUNDS = 1;
 
 const HASH = /^[a-f0-9]{64}$/;
 const DISPOSITIONS = new Set(['repaired', 'accepted-after-review']);
@@ -119,15 +119,18 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
     catch { errors.push(`${path}:${index + 1}: invalid JSON`); continue; }
     const where = `${path}:${index + 1}`;
     const legacy = row?.version === 1;
-    if ((!legacy && row?.version !== TERMINAL_RESOLUTION_VERSION) || row?.stage !== '8-rejudge')
-      errors.push(`${where}: expected version 1 or 2 and stage "8-rejudge"`);
+    const previous = row?.version === 2;
+    if ((!legacy && !previous && row?.version !== TERMINAL_RESOLUTION_VERSION) || row?.stage !== '8-rejudge')
+      errors.push(`${where}: expected version 1, 2, or ${TERMINAL_RESOLUTION_VERSION} and stage "8-rejudge"`);
     if (typeof row?.run !== 'string' || !row.run || typeof row?.id !== 'string' || !row.id)
       errors.push(`${where}: run and id are required`);
     if (!RESOLVERS.has(row?.resolved_by))
       errors.push(`${where}: resolved_by must be owner, session, or final-adjudicator`);
+    if (!legacy && !previous && row?.resolved_by !== 'final-adjudicator')
+      errors.push(`${where}: current terminal resolutions may be written only by final-adjudicator`);
     if (!DISPOSITIONS.has(row?.disposition))
       errors.push(`${where}: disposition must be repaired or accepted-after-review`);
-    const expectedRounds = legacy ? 3 : TERMINAL_REJUDGE_ROUNDS;
+    const expectedRounds = legacy ? 3 : previous ? 2 : TERMINAL_REJUDGE_ROUNDS;
     if (row?.rejudge_rounds_exhausted !== expectedRounds)
       errors.push(`${where}: rejudge_rounds_exhausted must be ${expectedRounds} for version ${row?.version}`);
     if (!HASH.test(row?.context_sha256 ?? '') || !HASH.test(row?.item_sha256 ?? ''))
@@ -140,18 +143,20 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
       errors.push(`${where}: at must be an ISO timestamp`);
     if (!legacy) {
       if (!Array.isArray(row?.failure_evidence?.cycle_ids)
-        || new Set(row.failure_evidence.cycle_ids).size < TERMINAL_REJUDGE_ROUNDS
+        || new Set(row.failure_evidence.cycle_ids).size < expectedRounds
         || typeof row?.failure_evidence?.closure_path !== 'string'
         || !/^research\/[a-zA-Z0-9._/-]+\.json$/.test(row.failure_evidence.closure_path)
         || row.failure_evidence.closure_path.includes('..')
         || !HASH.test(row?.failure_evidence?.closure_sha256 ?? '')
         || !['needs_rejudge', 'unadjudicated', 'open_fatal'].includes(row?.failure_evidence?.unresolved_as))
-        errors.push(`${where}: version 2 requires exact per-item cycle ids and hash-bound unresolved closure evidence`);
+        errors.push(`${where}: version ${row?.version} requires exact per-item cycle ids and hash-bound unresolved closure evidence`);
     }
     if (row?.resolved_by === 'final-adjudicator') {
       const fa = row?.final_adjudicator;
+      const expectedModel = previous || legacy ? MODELS.sol.id : MODELS.astra.id;
+      const expectedEffort = previous || legacy ? 'xhigh' : 'medium';
       if (typeof fa?.group !== 'string' || !fa.group
-        || fa?.model !== MODELS.sol.id || fa?.effort !== 'xhigh'
+        || fa?.model !== expectedModel || fa?.effort !== expectedEffort
         || !relativeResearchPath(fa?.queue_path)
         || !HASH.test(fa?.queue_sha256 ?? '')
         || !Number.isInteger(fa?.queue_position) || fa.queue_position < 1
@@ -160,7 +165,7 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
         || !FA_SOURCE_STATUSES.has(fa?.source_verification)
         || !Array.isArray(fa?.authoritative_sources)
         || fa.authoritative_sources.some((url) => typeof url !== 'string' || !/^https?:\/\//.test(url))) {
-        errors.push(`${where}: final-adjudicator resolution requires group, Sol/xhigh attestation, ordered queue evidence, source status, and authoritative_sources`);
+        errors.push(`${where}: final-adjudicator resolution requires group, ${expectedModel}/${expectedEffort} attestation, ordered queue evidence, source status, and authoritative_sources`);
       } else if (fa.source_verification === 'verified' && !fa.authoritative_sources.length) {
         errors.push(`${where}: source_verification=verified requires at least one authoritative source URL`);
       }
@@ -268,11 +273,13 @@ export function terminalEvidence(root, run, id, stateDir = '.autopilot') {
   if (!existsSync(cyclesPath)) throw new Error(`${cyclesPath}: per-item rejudge-cycle receipt is required`);
   const cycles = JSON.parse(readFileSync(cyclesPath, 'utf8'));
   const itemCycles = (cycles.cycles ?? []).filter((cycle) => (cycle.items ?? []).includes(id));
+  const paidCycles = itemCycles.filter((cycle) => !String(cycle.kind ?? '').startsWith('initial-')
+    && cycle.exit_code === 0 && typeof cycle.completed_at === 'string');
   const seedErrors = initialFatalCycleErrors(root, run, itemCycles);
   if (seedErrors.length) throw new Error(seedErrors.join('; '));
-  const distinctCycleIds = new Set(itemCycles.map((cycle) => cycle.cycle_id));
+  const distinctCycleIds = new Set(paidCycles.map((cycle) => cycle.cycle_id));
   if (distinctCycleIds.size < TERMINAL_REJUDGE_ROUNDS)
-    throw new Error(`${id}: consumed ${itemCycles.length}/${TERMINAL_REJUDGE_ROUNDS} rejudge cycles; terminal intervention is not licensed`);
+    throw new Error(`${id}: completed ${paidCycles.length}/${TERMINAL_REJUDGE_ROUNDS} paid Terra rejudge; final adjudication is not licensed`);
 
   const candidates = [
     join(root, 'research', `${run}-judge-closure.json`),
@@ -294,9 +301,9 @@ export function terminalEvidence(root, run, id, stateDir = '.autopilot') {
     if (!hit) continue;
     const frozen = freezeClosureEvidence(root, run, text);
     return {
-      exhaustedAt: itemCycles.at(-1).completed_at ?? itemCycles.at(-1).started_at,
+      exhaustedAt: paidCycles.at(-1).completed_at,
       evidence: {
-        cycle_ids: itemCycles.slice(-TERMINAL_REJUDGE_ROUNDS).map((cycle) => cycle.cycle_id),
+        cycle_ids: paidCycles.slice(-TERMINAL_REJUDGE_ROUNDS).map((cycle) => cycle.cycle_id),
         closure_path: frozen.path,
         closure_sha256: frozen.sha256,
         unresolved_as: hit[0],
@@ -312,8 +319,8 @@ function value(argv, flag) {
 }
 
 function usage() {
-  console.error('usage: node tools/step8-terminal-resolution.mjs record --run <run> --id <id> --resolved-by owner|session|final-adjudicator --disposition repaired|accepted-after-review (--basis <evidence> | --basis-file <file>) [--root <repo>] [--state-dir <dir>]');
-  console.error('       final-adjudicator additionally requires --group <label> --queue <research/...json> --source-status verified|familiar');
+  console.error('usage: node tools/step8-terminal-resolution.mjs record --run <run> --id <id> --resolved-by final-adjudicator --disposition repaired|accepted-after-review (--basis <evidence> | --basis-file <file>) [--root <repo>] [--state-dir <dir>]');
+  console.error('       final-adjudicator requires --group <label> --queue <research/...json> --source-status verified|familiar');
   console.error('       node tools/step8-terminal-resolution.mjs check --run <run> [--root <repo>] [--allow-missing]');
   process.exit(2);
 }
@@ -341,7 +348,14 @@ function main() {
             const cycle = cycles.get(cycleId);
             if (!cycle || !(cycle.items ?? []).includes(row.id))
               errors.push(`${row.id}: failure evidence cycle ${cycleId} does not bind this item`);
-            else selected.push(cycle);
+            else {
+              selected.push(cycle);
+              if (row.version === TERMINAL_RESOLUTION_VERSION
+                && (String(cycle.kind ?? '').startsWith('initial-')
+                  || cycle.exit_code !== 0 || typeof cycle.completed_at !== 'string')) {
+                errors.push(`${row.id}: failure evidence cycle ${cycleId} is not a completed paid Terra rejudge`);
+              }
+            }
           }
           errors.push(...initialFatalCycleErrors(root, run, selected).map((error) => `${row.id}: ${error}`));
         } catch (cause) { errors.push(`${row.id}: cannot verify rejudge cycles (${cause.message})`); }
@@ -383,10 +397,12 @@ function main() {
           const resultPath = join(root, 'research', `${run}-dispatch`,
             `final-adjudicator-${fa.dispatch_label}.result.json`);
           const dispatch = JSON.parse(readFileSync(resultPath, 'utf8'));
+          const expectedModel = row.version === TERMINAL_RESOLUTION_VERSION ? MODELS.astra.id : MODELS.sol.id;
+          const expectedEffort = row.version === TERMINAL_RESOLUTION_VERSION ? 'medium' : 'xhigh';
           if (dispatch.ok !== true || dispatch.role !== 'final-adjudicator'
-            || dispatch.model !== MODELS.sol.id
-            || dispatch.provider_effort !== 'xhigh' || dispatch.requested_effort !== 'xhigh') {
-            errors.push(`${row.id}: ${resultPath} does not attest a successful ${MODELS.sol.id} xhigh final-adjudicator dispatch`);
+            || dispatch.model !== expectedModel
+            || dispatch.provider_effort !== expectedEffort || dispatch.requested_effort !== expectedEffort) {
+            errors.push(`${row.id}: ${resultPath} does not attest a successful ${expectedModel} ${expectedEffort} final-adjudicator dispatch`);
           }
         } catch (cause) {
           errors.push(`${row.id}: cannot verify final-adjudicator queue/dispatch (${cause.message})`);
@@ -411,7 +427,7 @@ function main() {
     try { basis = readFileSync(resolve(root, basisFile), 'utf8'); }
     catch (cause) { console.error(`cannot read --basis-file ${basisFile}: ${cause.message}`); process.exit(2); }
   }
-  if (!id || !RESOLVERS.has(resolvedBy) || !DISPOSITIONS.has(disposition) || basis.trim().length < 80) usage();
+  if (!id || resolvedBy !== 'final-adjudicator' || !DISPOSITIONS.has(disposition) || basis.trim().length < 80) usage();
   let finalAdjudicator = null;
   if (resolvedBy === 'final-adjudicator') {
     const group = value(argv, '--group');
@@ -461,8 +477,8 @@ function main() {
     }
     finalAdjudicator = {
       group,
-      model: MODELS.sol.id,
-      effort: 'xhigh',
+      model: MODELS.astra.id,
+      effort: 'medium',
       queue_path: queuePath,
       queue_sha256: queueSha256,
       queue_position: position + 1,

@@ -25,9 +25,11 @@ import { stages } from '../stages/mathlib.mts';
 import { MODELS, resolveLineup } from '../../models.mjs';
 import { tsxLoader } from '../../paths.mjs';
 import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
+import { itemHashGuard } from '../../item-hash.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
+const READER_WARNING_ITEM = 'ex-the-mobius-band-presented-by-two-regular-patches';
 
 const stage = (id: string): any => stages.find((s: any) => s.id === id);
 
@@ -158,13 +160,19 @@ test('8-scope renders the partition before any adjudicator is dispatched', () =>
 test('8-scope checks its partition without repeating unchanged judge closure', () => {
   const scope = stage('8-scope');
   assert.ok(!scope.gatesWaived, 'a stage that writes the partition must be checkable');
-  const ids = scope.gates({ run: 'demo', repo: REPO }).map((g: any) => g.id);
+  const gates = scope.gates({ run: 'demo', repo: REPO });
+  const ids = gates.map((g: any) => g.id);
   assert.ok(ids.includes('step8-scope'), 'the partition must be checked, not just written');
+  assert.ok(gates.find((g: any) => g.id === 'step8-scope').argv.includes('--allow-pending-alerts'),
+    'reader warnings must reach their owning groups before dispositions are required');
   assert.ok(!ids.includes('judge-closure'),
     '7-judge already proved closure and no item-writing stage intervenes before this render');
-  assert.ok(stage('8-adjudicate').gates({ run: 'demo', repo: REPO })
-    .some((g: any) => g.id === 'judge-closure'),
+  const adjudicationGates = stage('8-adjudicate').gates({ run: 'demo', repo: REPO });
+  assert.ok(adjudicationGates.some((g: any) => g.id === 'judge-closure'),
   'closure is checked after the first Step-8 stage that can edit mathematics');
+  assert.ok(!adjudicationGates.find((g: any) => g.id === 'step8-scope').argv
+    .includes('--allow-pending-alerts'),
+  'post-adjudication closure must require every alert disposition');
 });
 
 test('8-adjudicate runs one Alpha per group over the group cohort', () => {
@@ -200,9 +208,9 @@ test('Step 8 separates repair integrity, judge retries, and final closure', () =
 
   const judgeGateIds = rejudge.gates(futureCtx).map((g: any) => g.id);
   assert.deepEqual(judgeGateIds, ['step8-guard', 'step8-published', 'step8-terminal-resolutions', 'judge-closure'],
-    'contract/repository repairs cannot consume the two-cycle judge budget');
+    'contract/repository repairs cannot consume the one-rejudge budget');
   assert.equal(rejudge.maxFixRounds, 3,
-    'two mathematical repair cycles are followed by one independent FA close, without a third judge call');
+    'orchestration retries do not create a second Sol pass or another judge call');
   assert.equal(rejudge.terminalFixBudget, undefined,
     'the stage-wide repair counter must be re-armable; the durable rejudge-cycle receipt owns the per-item lifetime cap');
   assert.equal(rejudge.maxAttempts, 1, 'a failed funded-lane preflight is not immediately repeated');
@@ -300,7 +308,7 @@ test('Step-8 groups retain full shared evidence but receive only relevant diagno
   } finally { rmSync(repo, { recursive: true, force: true }); }
 });
 
-test('Step-8 rejudge dispatches agents for contested rows and tools only for missing verdicts', async () => {
+test('Step-8 rejudge sends contested Terra rows only to Astra and tools only for missing verdicts', async () => {
   const repo = fixtureRepoWithGroups();
   const s: any = stage('8-rejudge');
   const runHook = async (closure: any) => {
@@ -313,7 +321,9 @@ test('Step-8 rejudge dispatches agents for contested rows and tools only for mis
     return started;
   };
   const contested = await runHook({ needs_rejudge: ['thm-demo-y'], unadjudicated: ['thm-demo-x'], open_fatal: [], closed: false });
-  assert.ok(contested.length && contested.every((p) => p.role === 'alpha-adjudicate'));
+  assert.ok(contested.length && contested.every((p) => p.role === 'final-adjudicator'));
+  assert.ok(contested.every((p) => !String(p.label).includes('adjudicate-rejudge')),
+    'a Terra rejudge rejection never returns to the Sol group adjudicator');
   const missing = await runHook({ needs_rejudge: ['thm-demo-y'], unadjudicated: [], open_fatal: [], closed: false });
   assert.equal(missing.length, 1);
   assert.equal(missing[0].role, 'tool');
@@ -327,10 +337,8 @@ test('Step-8 rejudge blocks exhausted owed items without stranding eligible page
     needs_rejudge: ['thm-demo-x', 'thm-demo-y'], unadjudicated: [], open_fatal: [], closed: false,
   }));
   writeFileSync(join(repo, 'research', 'demo-step8-rejudge-cycles.json'), JSON.stringify({
-    version: 1, run: 'demo', max_cycles_per_item: 2, cycles: [
-      { cycle_id: 'x-1', items: ['thm-demo-x'] },
-      { cycle_id: 'x-2', items: ['thm-demo-x'] },
-      { cycle_id: 'y-1', items: ['thm-demo-y'] },
+    version: 2, run: 'demo', max_cycles_per_item: 1, cycles: [
+      { cycle_id: 'x-1', kind: 'repair', items: ['thm-demo-x'] },
     ],
   }));
   const started: any[] = [];
@@ -347,7 +355,7 @@ test('Step-8 rejudge blocks exhausted owed items without stranding eligible page
     stage: s, round: 1, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
   });
   assert.equal(blockers.length, 1);
-  assert.match(blockers[0][1], /thm-demo-x/);
+  assert.match(blockers[0][1], /thm-demo-x.*one paid Terra rejudge/);
   assert.equal(notices[0][0], 'blocked');
   assert.equal(started.length, 1);
   assert.match(started[0].argv.join(' '), /--items thm-demo-y(?: |$)/);
@@ -355,50 +363,41 @@ test('Step-8 rejudge blocks exhausted owed items without stranding eligible page
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('Step-8 escalates exhausted twice-fatal repairs to one ordered Sol-xhigh FA per group', async () => {
+test('Step-8 sends every rejected Terra rejudge directly to one ordered Astra-medium FA per group', async () => {
   const repo = fixtureRepoWithGroups();
   writeFileSync(join(repo, 'research', 'demo-step8-scope.json'), JSON.stringify({
     by_item: { 'thm-demo-x': 'a', 'thm-demo-z': 'a', 'thm-demo-y': 'b' },
   }));
   const ids = ['thm-demo-z', 'thm-demo-y', 'thm-demo-x'];
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-    needs_rejudge: ids, unadjudicated: [], open_fatal: [], closed: false,
+    needs_rejudge: [], unadjudicated: ids, open_fatal: [], closed: false,
   }));
-  writeFileSync(join(repo, 'research', 'demo-step8-rejudge-cycles.json'), JSON.stringify({
-    version: 1, run: 'demo', max_cycles_per_item: 2,
-    cycles: ids.flatMap((id) => [1, 2].map((n) => ({ cycle_id: `${id}-${n}`, items: [id] }))),
-  }));
-  writeFileSync(join(repo, 'research', 'demo-judge-adjudications.jsonl'),
-    `${ids.flatMap((id) => [1, 2].map((n) => JSON.stringify({
-      version: 1, id, model: MODELS.terra.id, context_sha256: String(n).repeat(64),
-      outcome: 'confirmed_fatal', rationale: 'The frozen proof contains a fatal mathematical defect.',
-    }))).join('\n')}\n`);
 
   const started: any[] = [];
   const s: any = stage('8-rejudge');
   await s.onGateFailure({
     ctx: { run: 'demo', repo, config: { stateDir: '.autopilot/demo' } },
     executor: { start: (_x: any, plan: any) => started.push(plan) },
-    stage: s, round: 3, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
+    stage: s, round: 1, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
   });
 
   assert.equal(started.length, 2, 'three escalated items in two groups produce two FA agents');
   assert.deepEqual(started.map((plan) => plan.role), ['final-adjudicator', 'final-adjudicator']);
-  assert.deepEqual(started.map((plan) => plan.label), ['step8-fa-a-round-3', 'step8-fa-b-round-3']);
+  assert.deepEqual(started.map((plan) => plan.label), ['step8-fa-a-round-1', 'step8-fa-b-round-1']);
   assert.ok(started.every((plan) => plan.covers.length === 0), 'FA repair work cannot satisfy stage coverage');
-  const queueA = JSON.parse(readFileSync(join(repo, 'research', 'demo-step8-fa-a-round-3.json'), 'utf8'));
-  const queueB = JSON.parse(readFileSync(join(repo, 'research', 'demo-step8-fa-b-round-3.json'), 'utf8'));
+  const queueA = JSON.parse(readFileSync(join(repo, 'research', 'demo-step8-fa-a-round-1.json'), 'utf8'));
+  const queueB = JSON.parse(readFileSync(join(repo, 'research', 'demo-step8-fa-b-round-1.json'), 'utf8'));
   assert.deepEqual(queueA.items.map((row: any) => [row.id, row.position]),
     [['thm-demo-x', 1], ['thm-demo-z', 2]], 'one group shares one deterministic serial queue');
   assert.deepEqual(queueB.items.map((row: any) => [row.id, row.position]), [['thm-demo-y', 1]]);
-  const taskA = readFileSync(join(repo, 'research', 'demo-step8-fa-a-round-3.task.md'), 'utf8');
+  const taskA = readFileSync(join(repo, 'research', 'demo-step8-fa-a-round-1.task.md'), 'utf8');
   assert.match(taskA, /Do not substantively review the next item until the recorder accepts the current one/);
   assert.match(taskA, /--resolved-by final-adjudicator/);
   assert.match(taskA, /authoritative http\(s\) URL/);
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('the final-adjudicator lane is independently pinned to Sol xhigh with web search', () => {
+test('the final-adjudicator lane is independently pinned to Astra medium with web search', () => {
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'final-adjudicator', '--brief', 'briefs/final-adjudicator.md',
     '--task', 'briefs/tasks/final-adjudicator-step8.md', '--label', 'fa-test',
@@ -406,9 +405,13 @@ test('the final-adjudicator lane is independently pinned to Sol xhigh with web s
   assert.equal(result.status, 0, result.stderr);
   const row = JSON.parse(result.stdout);
   assert.equal(row.role, 'final-adjudicator');
-  assert.equal(row.model, MODELS.sol.id);
-  assert.equal(row.requested_effort, 'xhigh');
-  assert.equal(row.provider_effort, 'xhigh');
+  assert.equal(row.model, MODELS.astra.id);
+  assert.equal(row.requested_effort, 'medium');
+  assert.equal(row.provider_effort, 'medium');
+  assert.equal(row.auto_compact_token_limit, 200000);
+  assert.match(row.command, /model_auto_compact_token_limit=200000/);
+  assert.equal(row.auto_compact_token_limit, 200000);
+  assert.match(row.command, /model_auto_compact_token_limit=200000/);
   assert.match(row.command, /tools\.web_search=true/);
   assert.match(row.prompt, /one item at a time/i);
 });
@@ -467,6 +470,104 @@ function withFixtureRun(files: Record<string, unknown>, body: (run: string) => v
     for (const p of written) rmSync(p, { force: true });
   }
 }
+
+test('every Step-7 reader concern becomes an owning-group Step-8 decision', () => {
+  withFixtureRun({
+    'alpha-groups.json': [{ label: 'a', covers: ['1'] }],
+    'batch-1.pages.json': [{
+      id: 'page-demo', kind: 'A', title: 'Demo', category: 'demo', order: 1,
+      items: [{ id: 'thm-demo-one' }], requires: [],
+    }],
+    'alpha-a-step8-context.json': {
+      group: 'a', pages_read: ['page-demo'], items_read: ['thm-demo-one'],
+      conventions: [{ convention: 'Demo convention', fixed_by: 'thm-demo-one', matters_for: ['thm-demo-one'] }],
+      load_bearing: [{ id: 'thm-demo-one', statement: 'Demo statement', used_by: [] }],
+      published_dependencies: [],
+      concerns: [{ id: 'thm-demo-one', concern: 'The endpoint case is not justified.', severity: 'would-be-fatal' }],
+      alerts: [], seams_checked: [],
+    },
+  }, (run) => {
+    const generated = [
+      'step8-scope.json', 'step8-alerts.json', 'alpha-a-step8.task.md',
+      'alpha-a-step8-recovery.task.md', 'alpha-a-step8-preflight.task.md',
+      'alpha-a-step8-close.task.md', 'alpha-a-step7-read.task.md',
+      'step8-alert-decisions.jsonl',
+    ].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
+    try {
+      const rendered = render(run);
+      assert.equal(rendered.status, 0, `${rendered.stdout}${rendered.stderr}`);
+      const alerts = JSON.parse(readFileSync(generated[1], 'utf8')).alerts;
+      assert.equal(alerts.length, 1);
+      assert.equal(alerts[0].source, 'step7-read');
+      assert.equal(alerts[0].from_group, 'a');
+      assert.equal(alerts[0].owning_group, 'a');
+      const unanswered = check(run);
+      assert.notEqual(unanswered.status, 0);
+      assert.match(`${unanswered.stdout}${unanswered.stderr}`, /has no owning-group disposition/);
+      writeFileSync(generated[7], `${JSON.stringify({
+        version: 1, alert_id: alerts[0].alert_id, from_group: 'a', owning_group: 'a',
+        item: 'thm-demo-one', outcome: 'nonfatal',
+        rationale: 'The concern is presentational and the written statement remains mathematically valid.',
+        at: new Date().toISOString(),
+      })}\n`);
+      const answered = check(run);
+      assert.equal(answered.status, 0, `${answered.stdout}${answered.stderr}`);
+    } finally {
+      for (const path of generated) rmSync(path, { force: true });
+    }
+  });
+});
+
+test('a fatal reader warning requires an exact repaired post-state', () => {
+  withFixtureRun({
+    'alpha-groups.json': [{ label: 'a', covers: ['1'] }],
+    'batch-1.pages.json': [{
+      id: 'page-demo', kind: 'A', title: 'Demo', category: 'demo', order: 1,
+      items: [{ id: READER_WARNING_ITEM }], requires: [],
+    }],
+    'alpha-a-step8-context.json': {
+      group: 'a', pages_read: ['page-demo'], items_read: [READER_WARNING_ITEM],
+      conventions: [{ convention: 'Demo convention', fixed_by: READER_WARNING_ITEM, matters_for: [READER_WARNING_ITEM] }],
+      load_bearing: [{ id: READER_WARNING_ITEM, statement: 'Demo statement', used_by: [] }],
+      published_dependencies: [],
+      concerns: [{ id: READER_WARNING_ITEM, concern: 'The endpoint case is false.', severity: 'would-be-fatal' }],
+      alerts: [], seams_checked: [],
+    },
+  }, (run) => {
+    const generated = [
+      'step8-scope.json', 'step8-alerts.json', 'alpha-a-step8.task.md',
+      'alpha-a-step8-recovery.task.md', 'alpha-a-step8-preflight.task.md',
+      'alpha-a-step8-close.task.md', 'alpha-a-step7-read.task.md',
+      'step8-alert-decisions.jsonl',
+    ].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
+    try {
+      assert.equal(render(run).status, 0);
+      const alert = JSON.parse(readFileSync(generated[1], 'utf8')).alerts[0];
+      const post = itemHashGuard(readFileSync(join(REPO, 'items', `${READER_WARNING_ITEM}.md`), 'utf8'));
+      writeFileSync(generated[7], `${JSON.stringify({
+        version: 1, alert_id: alert.alert_id, from_group: 'a', owning_group: 'a',
+        item: READER_WARNING_ITEM, outcome: 'confirmed_fatal', defect_type: 'logic',
+        item_sha256: 'a'.repeat(64), post_sha256: post,
+        rationale: 'The reader identified a fatal endpoint error and the owning Sol adjudicator repaired the exact item.',
+        at: new Date().toISOString(),
+      })}\n`);
+      const accepted = check(run);
+      assert.equal(accepted.status, 0, `${accepted.stdout}${accepted.stderr}`);
+      writeFileSync(generated[7], `${JSON.stringify({
+        version: 1, alert_id: alert.alert_id, from_group: 'a', owning_group: 'a',
+        item: READER_WARNING_ITEM, outcome: 'confirmed_fatal', defect_type: 'logic',
+        item_sha256: 'a'.repeat(64), post_sha256: 'b'.repeat(64),
+        rationale: 'This row claims a repair but its post-state does not match the current item bytes.',
+        at: new Date().toISOString(),
+      })}\n`);
+      const stale = check(run);
+      assert.notEqual(stale.status, 0);
+      assert.match(`${stale.stdout}${stale.stderr}`, /does not match the current item bytes/);
+    } finally {
+      for (const path of generated) rmSync(path, { force: true });
+    }
+  });
+});
 
 // A CROSS-GROUP FINDING IS AN ALERT, NOT A NOTE (owner, 2026-08-25). The gate
 // already refused to close over an unanswered one, but a gate that blocks and
@@ -531,7 +632,7 @@ test('a repaired published item is swept even though closure never names it', ()
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('a rejected published repair returns to its originating group even after run closure', async () => {
+test('a rejected published repair goes directly to Astra even after run closure', async () => {
   const repo = fixtureRepoWithGroups();
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
     needs_rejudge: [], unadjudicated: [], open_fatal: [], closed: true,
@@ -558,9 +659,9 @@ test('a rejected published repair returns to its originating group even after ru
     failure: { id: 'step8-published', why: 'published rejection awaits adjudication' },
   });
   assert.equal(started.length, 1);
-  assert.equal(started[0].role, 'alpha-adjudicate');
+  assert.equal(started[0].role, 'final-adjudicator');
   assert.match(started[0].label, /-a-/,
-    'published work is routed to the group that made and understands the repair');
+    'published work is routed to the Astra queue for the group that owns its repair');
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -605,7 +706,8 @@ test('step8-scope published refuses retired-lineup-only evidence', () => {
     for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);
     const r = spawnSync('node', ['tools/step8-scope.mjs', 'published', '--run', run], { cwd: REPO, encoding: 'utf8' });
     assert.notEqual(r.status, 0, 'a retired judge row is not current certification');
-    assert.match(`${r.stdout}${r.stderr}`, /lacks a current verdict from gpt-5\.6-terra/);
+    assert.ok(`${r.stdout}${r.stderr}`.includes(
+      `lacks a current verdict from ${resolveLineup().models.join(', ')}`));
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });

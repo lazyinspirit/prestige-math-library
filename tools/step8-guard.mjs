@@ -8,8 +8,9 @@
 //   [--against "<later snapshot label>"] [--json]
 //
 // WHY THIS EXISTS. At step 8 Alpha adjudicates each configured-judge rejection as
-// `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`. Only the first
-// licenses a content edit. The other two close the rejection where they stand:
+// `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`. A Step-7 reader
+// warning can likewise be confirmed fatal on an exact pre-edit hash. Only those
+// fatal decisions license a content edit. The other outcomes close where they stand:
 // tools/level-coverage.mjs already lets them clear closure as warnings, so no
 // gate ever demanded the edit.
 //
@@ -20,10 +21,10 @@
 // `verification.judge`, forces a rejudge, and resamples a refuter that
 // "tends to surface a different nitpick on each stochastic run of the same long
 // proof" (WORKFLOW.md §5). Each turn of that loop costs another judge call and an
-// adjudication and converges on nothing. The automatic repair/rejudge loop is
-// capped at two frozen-context cycles. After exhaustion, only an exact-hash owner/session
-// terminal resolution may license the final intervention; it never fabricates
-// another judge verdict.
+// adjudication and converges on nothing. The automatic path permits one paid
+// Terra rejudge after the initial Sol repair. A rejection then goes only to the
+// Astra final adjudicator for exact-hash terminal resolution; it never
+// fabricates another judge verdict.
 //
 // HOW IT DECIDES, from disk rather than from an agent's account of its own edit.
 // A dedicated baseline snapshot is taken immediately before step-8 adjudication
@@ -187,6 +188,55 @@ const publishedRows = [];
 const scope = JSON.parse(readFileSync(resolvePath(scopePath), 'utf8'));
 const runItems = new Set(Object.keys(scope.by_item ?? {}));
 const groups = new Set((scope.groups ?? []).map((group) => String(group.label)));
+
+// A rejection-blind Step-7 reader warning is independent mathematical evidence,
+// not a fabricated judge verdict. The owning Sol adjudicator may confirm it
+// fatal and repair the exact pre-edit bytes; the scope gate separately requires
+// a disposition for every warning and validates the repaired post-state.
+const readerFatalLicences = new Map();
+const alertsPath = resolvePath(`research/${scope.run}-step8-alerts.json`);
+const alertDecisionsPath = resolvePath(`research/${scope.run}-step8-alert-decisions.jsonl`);
+if (existsSync(alertsPath) && existsSync(alertDecisionsPath)) {
+  let alerts = [];
+  try { alerts = JSON.parse(readFileSync(alertsPath, 'utf8'))?.alerts ?? []; }
+  catch { error('reader-warning-alerts-json', `${alertsPath}: invalid JSON`); }
+  const byAlert = new Map(alerts.map((alert) => [alert.alert_id, alert]));
+  for (const [index, line] of readFileSync(alertDecisionsPath, 'utf8').split(/\r?\n/).entries()) {
+    if (!line.trim()) continue;
+    let record;
+    try { record = JSON.parse(line); }
+    catch { error('reader-warning-decision-json', `${alertDecisionsPath}:${index + 1}: invalid JSON`); continue; }
+    if (record.outcome !== 'confirmed_fatal') continue;
+    const alert = byAlert.get(record.alert_id);
+    const where = `${alertDecisionsPath}:${index + 1}`;
+    if (alert?.source !== 'step7-read' || alert.item !== record.item
+      || alert.owning_group !== String(record.owning_group ?? '')
+      || !/^[a-f0-9]{64}$/.test(String(record.item_sha256 ?? ''))
+      || !/^[a-f0-9]{64}$/.test(String(record.post_sha256 ?? ''))
+      || !['logic', 'dependency_citation', 'other'].includes(record.defect_type)) {
+      error('reader-warning-fatal-licence-shape',
+        `${where}: confirmed_fatal must exact-match a Step-7 reader warning with ownership, defect_type, and pre/post guard hashes`,
+        record.item ?? null);
+      continue;
+    }
+    const currentTerminal = terminalParsed.latest.get(record.item);
+    const terminalSupersedesReaderPost = currentTerminal?.resolved_by === 'final-adjudicator'
+      && existsSync(join(ITEMS, `${record.item}.md`))
+      && currentTerminal.item_sha256 === itemHashJudge(
+        readFileSync(join(ITEMS, `${record.item}.md`), 'utf8'));
+    if (shortHash(record.item_sha256) !== baseline.hashes?.[record.item]
+      || (shortHash(record.post_sha256) !== now?.[record.item] && !terminalSupersedesReaderPost)
+      || record.item_sha256 === record.post_sha256) {
+      error('reader-warning-fatal-licence-stale',
+        `${where}: reader-warning repair hashes do not match the Step-8 baseline and current item`, record.item);
+      continue;
+    }
+    if (!readerFatalLicences.has(record.item)) readerFatalLicences.set(record.item, new Set());
+    readerFatalLicences.get(record.item).add(shortHash(record.item_sha256));
+    if (!seenOutcomes.has(record.item)) seenOutcomes.set(record.item, []);
+    seenOutcomes.get(record.item).push({ model: 'step7-reader', outcome: record.outcome });
+  }
+}
 const realRejectionsById = new Map();
 for (const entry of evidence.rejections.values()) {
   const rows = realRejectionsById.get(entry.row.id) ?? [];
@@ -361,6 +411,7 @@ for (const id of Object.keys(baseline.hashes)) if (!(id in now)) deleted.push(id
 for (const id of changed) {
   const licensed = fatalLicences.get(id)?.has(baseline.hashes[id]);
   if (licensed) continue;
+  if (readerFatalLicences.get(id)?.has(baseline.hashes[id])) continue;
   // A published-page repair is licensed by its own row against the same
   // pre-edit state. It is not a weaker licence: the row must name the falsehood
   // and what makes the replacement right, and the repaired item is then routed
@@ -368,7 +419,7 @@ for (const id of changed) {
   // reader the published-dependency-repair rule asks for at step 6.
   if (publishedLicences.get(id)?.has(baseline.hashes[id])) continue;
   if (ownerPrerequisiteLicences.get(id)?.has(baseline.hashes[id])) continue;
-  // The two-cycle terminal route is deliberately post-edit and exact: it
+  // The post-rejudge terminal route is deliberately post-edit and exact: it
   // licenses only the current item bytes named by the manual resolution. Judge
   // closure separately verifies the context hash before treating the blocker as
   // closed. A later edit makes this comparison fail immediately.
@@ -382,7 +433,7 @@ for (const id of changed) {
   const said = (seenOutcomes.get(id) ?? []).map((o) => `${o.model}:${o.outcome}`).join(', ') || 'no adjudication at all';
   error('nonfatal-edit',
     `${id}: changed since "${baselineLabel}" (${baseline.hashes[id]} -> ${now[id]}) with no confirmed_fatal ` +
-    `adjudication against that text state — Alpha recorded ${said}. Step 8 is fatal-only: revert the edit and ` +
+    `judge or Step-7 reader adjudication against that text state — Alpha recorded ${said}. Step 8 is fatal-only: revert the edit and ` +
     'close the rejection on its ledger row, or record the confirmed_fatal adjudication that licenses the repair. ' +
     'The two hashes above are the GUARD form (whole `verification:` block excluded, tools/item-hash.mjs ' +
     '`itemHashGuard`), and the row\'s item_sha256 must be in that same form — a judge-ledger hash, which ' +
@@ -414,7 +465,7 @@ if (asJson) {
 } else {
   console.log(`step8-guard: baseline "${baselineLabel}"${baseline.at ? ` (${baseline.at})` : ''} vs ${summary.compared_against}`);
   console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);
-  console.log(`  ${summary.licensed_by_fatal_or_terminal_resolution}/${changed.length} change(s) licensed by a confirmed_fatal adjudication, exact owner prerequisite repair, or terminal resolution`);
+  console.log(`  ${summary.licensed_by_fatal_or_terminal_resolution}/${changed.length} change(s) licensed by a confirmed_fatal judge/reader adjudication, exact owner prerequisite repair, or terminal resolution`);
   for (const w of warnings) console.log(`  WARN  ${w.code}: ${w.message}`);
   for (const e of errors) console.log(`  ERROR ${e.code}: ${e.message}`);
   console.log(errors.length ? `\nFAIL — ${errors.length} error(s)` : '\nOK — every step-8 edit is licensed by a confirmed fatal defect');

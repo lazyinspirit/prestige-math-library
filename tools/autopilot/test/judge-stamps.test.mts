@@ -134,6 +134,66 @@ test('apply creates verification for a definition with no precheck and preserves
   assert.equal(result.status, 0, result.stderr);
 });
 
+test('apply creates verification when frontmatter has neither precheck nor sources', () => {
+  const dir = fixture(['itm-no-anchor']);
+  const file = join(dir, 'items', 'itm-no-anchor.md');
+  const unanchored = itemText('itm-no-anchor').replace('verification:\n  precheck: pass\n', '');
+  writeFileSync(file, unanchored);
+  const h = itemHashJudge(unanchored);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-no-anchor', model, true, h)));
+
+  let result = run(dir, '--apply');
+  assert.equal(result.status, 0, result.stderr);
+  const stamped = readFileSync(file, 'utf8');
+  assert.match(stamped, /^verification:\n  judge:/m);
+  assert.equal(itemHashJudge(stamped), h,
+    'creating the verification parent immediately before the frontmatter end stays hash-neutral');
+
+  result = run(dir, '--verify');
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('apply stamps an inline verification map without creating a duplicate key', () => {
+  const dir = fixture(['itm-inline']);
+  const file = join(dir, 'items', 'itm-inline.md');
+  const inline = itemText('itm-inline').replace(
+    'verification:\n  precheck: pass\n',
+    'verification: {precheck: pass}\n');
+  writeFileSync(file, inline);
+  const h = itemHashJudge(inline);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-inline', model, true, h)));
+
+  let result = run(dir, '--apply');
+  assert.equal(result.status, 0, result.stderr);
+  const stamped = readFileSync(file, 'utf8');
+  assert.equal((stamped.match(/^verification:/gm) ?? []).length, 1);
+  assert.match(stamped, /^verification: \{precheck: pass, judge: \{/m);
+  assert.equal(itemHashJudge(stamped), h, 'the inline judge stamp is hash-neutral');
+
+  result = run(dir, '--verify');
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('re-apply heals the duplicate verification shape written by the former fallback', () => {
+  const dir = fixture(['itm-inline-duplicate']);
+  const file = join(dir, 'items', 'itm-inline-duplicate.md');
+  const inline = itemText('itm-inline-duplicate').replace(
+    'verification:\n  precheck: pass\n',
+    'verification: {precheck: pass}\n');
+  const duplicated = inline.replace(
+    'verification: {precheck: pass}\n',
+    `verification: {precheck: pass}\nverification:\n  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n    date: 2026-09-06\n`);
+  writeFileSync(file, duplicated);
+  const h = itemHashJudge(inline);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-inline-duplicate', model, true, h)));
+
+  const result = run(dir, '--apply');
+  assert.equal(result.status, 0, result.stderr);
+  const healed = readFileSync(file, 'utf8');
+  assert.equal((healed.match(/^verification:/gm) ?? []).length, 1);
+  assert.equal(itemHashJudge(healed), h);
+});
+
 test('a lane rejection never stamps; a stale pass block fails verify and is stripped on apply', () => {
   const dir = fixture(['itm-b']);
   // seed the stale pass a rejection now contradicts

@@ -51,6 +51,7 @@ import { fileURLToPath } from 'node:url';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { resolveLineup } from './models.mjs';
+import { itemHashGuard } from './item-hash.mjs';
 import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step8-terminal-resolution.mjs';
 import {
   exactSetProblems,
@@ -64,6 +65,7 @@ const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
 const R = (...p) => join(REPO, ...p);
 const argv = process.argv.slice(2);
 const mode = argv[0];
+const allowPendingAlerts = argv.includes('--allow-pending-alerts');
 const opt = (name, fallback = null) => {
   const at = argv.indexOf(`--${name}`);
   return at >= 0 && argv[at + 1] && !argv[at + 1].startsWith('--') ? argv[at + 1] : fallback;
@@ -71,7 +73,7 @@ const opt = (name, fallback = null) => {
 
 const run = opt('run');
 if (!run || !['render', 'check', 'digests', 'published'].includes(mode)) {
-  console.error('usage: node tools/step8-scope.mjs <render|check|digests|published> --run <run> [--out <receipt.json>]');
+  console.error('usage: node tools/step8-scope.mjs <render|check|digests|published> --run <run> [--out <receipt.json>] [--allow-pending-alerts]');
   process.exit(2);
 }
 
@@ -205,12 +207,31 @@ function openRejections() {
   return out;
 }
 
-function collectAlerts(groups, index) {
+function collectAlerts(groups, index, { includeConcerns = true } = {}) {
   const alerts = [];
   const problems = [];
   const groupLabels = new Set(groups.map((g) => g.label));
   for (const digest of readAllDigests()) {
     const from = String(digest.group ?? '');
+    for (const raw of includeConcerns ? (digest.concerns ?? []) : []) {
+      const owner = index.itemOwner.get(raw.id)?.group;
+      const alert = {
+        version: 1,
+        source: 'step7-read',
+        from_group: from,
+        owning_group: owner ?? '',
+        item: String(raw.id ?? ''),
+        finding: String(raw.concern ?? ''),
+        severity: String(raw.severity ?? ''),
+        source_rejection: null,
+      };
+      alert.alert_id = step8AlertId(alert);
+      if (!groupLabels.has(from)) problems.push(`${alert.alert_id}: unknown source group ${from}`);
+      if (!owner) problems.push(`${alert.alert_id}: concern item ${alert.item} belongs to no run group`);
+      if (owner && owner !== from) problems.push(`${alert.alert_id}: concern item ${alert.item} is not owned by source group ${from}`);
+      if (!alert.finding.trim()) problems.push(`${alert.alert_id}: finding is empty`);
+      alerts.push(alert);
+    }
     for (const raw of digest.alerts ?? []) {
       const owner = index.itemOwner.get(raw.item)?.group;
       const alert = {
@@ -440,21 +461,22 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step8') {
   // judge had rejected the target item.
   if (!reading) {
     const incoming = alerts.filter((alert) => alert.owning_group === g.label);
-    L.push('## Alerts from other groups');
+    L.push('## Step-7 reader warnings');
     L.push('');
     if (!incoming.length) {
-      L.push('None. No other group flagged an item you own.');
+      L.push('None. No Step-7 reader warning targets an item you own.');
     } else {
-      L.push(`${incoming.length} defect(s) another group found in items you own, while reading at`);
-      L.push('step 7. They could not repair them and did not adjudicate them. You own these.');
+      L.push(`${incoming.length} warning(s) a Step-7 reader recorded in items you own.`);
+      L.push('They were read-only and could not repair or adjudicate them. You own these decisions.');
       L.push('');
       for (const a of incoming) {
         L.push(`- **${a.alert_id} · \`${a.item}\`** (from group ${a.from_group}, ${a.severity}) — ${a.finding}`);
       }
       L.push('');
-      L.push(`Append one owning-group disposition per alert to \`research/${run}-step8-alert-decisions.jsonl\`.`);
-      L.push('An alert is not a verdict. A fatal repair still requires a real targeted judge rejection');
-      L.push('and its exact Alpha adjudication; never reuse the source rejection as target evidence.');
+      L.push(`Append one owning-group disposition per warning to \`research/${run}-step8-alert-decisions.jsonl\`.`);
+      L.push('A Step-7 reader warning may be adjudicated `confirmed_fatal` and repaired with exact');
+      L.push('pre/post guard hashes. A later Step-8 cross-group alert still requires a real targeted');
+      L.push('judge rejection; never reuse its source rejection as target evidence.');
     }
     L.push('');
   }
@@ -503,11 +525,12 @@ if (mode === 'render') {
   const rejections = openRejections();
   const alertReceipt = collectAlerts(groups, index);
   if (alertReceipt.problems.length) fail(alertReceipt.problems.join('\n'));
-  writeFileSync(alertsPath, `${JSON.stringify({ version: 1, run, alerts: alertReceipt.alerts }, null, 2)}\n`);
+  writeFileSync(alertsPath, `${JSON.stringify({ version: 2, run, alerts: alertReceipt.alerts }, null, 2)}\n`);
 
   const orphans = rejections.filter((r) => !index.itemOwner.has(r.id));
 
   const scope = {
+    version: 2,
     run,
     rendered_from: {
       groups: rel(groupsPath),
@@ -811,9 +834,10 @@ const open = openRejections();
 const orphans = open.filter((r) => !index.itemOwner.has(r.id));
 for (const o of orphans) problems.push(`rejection ${o.id} (${o.model}) belongs to no group — nobody adjudicates it`);
 
-// 4. Every cross-group alert has a stable identity and a genuine owning-group
-//    disposition. Alerts are observations, never relabelled judge rejections.
-const alertReceipt = collectAlerts(groups, index);
+// 4. Every Step-7 reader warning and later cross-group alert has a stable
+//    identity and a genuine owning-group disposition. Reader warnings may
+//    directly license a fatal repair; alerts never become judge rejections.
+const alertReceipt = collectAlerts(groups, index, { includeConcerns: scope.version === 2 });
 problems.push(...alertReceipt.problems);
 const alertById = new Map(alertReceipt.alerts.map((alert) => [alert.alert_id, alert]));
 // The same checker closes both renders. During `7-scope` the ledger does not
@@ -835,7 +859,7 @@ for (const decision of decisionRows) {
   if (decision?.version !== 1 || typeof decision?.alert_id !== 'string'
     || typeof decision?.rationale !== 'string' || decision.rationale.trim().length < 20
     || typeof decision?.at !== 'string' || !Number.isFinite(Date.parse(decision.at))
-    || !['not_defect', 'nonfatal', 'covered_by_rejection', 'confirmed_fatal_unlicensed'].includes(decision?.outcome)) {
+    || !['not_defect', 'nonfatal', 'covered_by_rejection', 'confirmed_fatal', 'confirmed_fatal_unlicensed'].includes(decision?.outcome)) {
     problems.push(`malformed alert decision ${JSON.stringify(decision)}`);
     continue;
   }
@@ -848,7 +872,8 @@ for (const decision of decisionRows) {
 for (const alert of alertReceipt.alerts) {
   const decision = decisions.get(alert.alert_id);
   if (!decision) {
-    problems.push(`${alert.alert_id}: alert on \`${alert.item}\` has no owning-group disposition`);
+    if (!allowPendingAlerts)
+      problems.push(`${alert.alert_id}: alert on \`${alert.item}\` has no owning-group disposition`);
     continue;
   }
   if (String(decision.owning_group ?? '') !== alert.owning_group
@@ -856,6 +881,20 @@ for (const alert of alertReceipt.alerts) {
     || String(decision.from_group ?? '') !== alert.from_group) {
     problems.push(`${alert.alert_id}: decision provenance does not match the materialised alert`);
     continue;
+  }
+  if (decision.outcome === 'confirmed_fatal') {
+    const path = R('items', `${alert.item}.md`);
+    if (alert.source !== 'step7-read') {
+      problems.push(`${alert.alert_id}: only a Step-7 reader warning may directly license a fatal repair`);
+    } else if (!/^[a-f0-9]{64}$/.test(String(decision.item_sha256 ?? ''))
+      || !/^[a-f0-9]{64}$/.test(String(decision.post_sha256 ?? ''))
+      || !['logic', 'dependency_citation', 'other'].includes(decision.defect_type)) {
+      problems.push(`${alert.alert_id}: confirmed_fatal reader decision requires defect_type and exact item_sha256/post_sha256 guard hashes`);
+    } else if (decision.item_sha256 === decision.post_sha256) {
+      problems.push(`${alert.alert_id}: confirmed_fatal reader warning was not repaired`);
+    } else if (!existsSync(path) || itemHashGuard(readFileSync(path, 'utf8')) !== decision.post_sha256) {
+      problems.push(`${alert.alert_id}: confirmed_fatal reader repair does not match the current item bytes`);
+    }
   }
   if (decision.outcome === 'confirmed_fatal_unlicensed') {
     problems.push(`${alert.alert_id}: owning group confirmed a fatal defect in \`${alert.item}\` but no targeted rejection licenses repair`);
@@ -873,9 +912,9 @@ for (const alert of alertReceipt.alerts) {
     }
   }
 }
-writeFileSync(alertsPath, `${JSON.stringify({ version: 1, run, alerts: alertReceipt.alerts }, null, 2)}\n`);
+writeFileSync(alertsPath, `${JSON.stringify({ version: scope.version === 2 ? 2 : 1, run, alerts: alertReceipt.alerts }, null, 2)}\n`);
 
 reportProblems();
 console.log(`step8-scope --check: ${scope.groups.length} group(s) scoped, `
   + `${index.itemOwner.size} item(s) partitioned, ${open.length} open rejection(s) routed, `
-  + `${alertReceipt.alerts.length} cross-group alert(s) dispositioned`);
+  + `${decisions.size}/${alertReceipt.alerts.length} reader warning/alert(s) dispositioned`);

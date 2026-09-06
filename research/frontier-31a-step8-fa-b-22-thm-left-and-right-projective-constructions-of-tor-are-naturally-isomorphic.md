@@ -1,0 +1,13 @@
+# FA terminal evidence — queue position 22
+
+Disposition: repaired. Source status: familiar.
+
+Read the item, both Tor definitions, full exact fixed-p and fixed-q dependencies, tensor-double definition, published comparison existence/uniqueness and homology LES, batch-9 Tor A/B conventions/coverage, proof and risk contract, Sol adjudication and both Terra rejections. The earlier reversal of edge arrows was repaired correctly by Sol. The final Terra rejection is valid: filtering by p leaves vertical fixed-p complexes, not the fixed-q complexes required for the first augmentation. Merely invoking degreewise finite filtrations also conceals the convergence argument.
+
+I replaced the cone argument by explicit kernel complexes, avoiding cone shift/sign ambiguity. Each augmentation is degreewise onto. The kernel of Tot→N tensor P has exact fixed-q horizontal rows, with degree-p-zero term replaced by the augmentation kernel. Eliminate a cycle's largest q using horizontal exactness: a primitive at (p+1,q) kills that component and creates only a q−1 component. Iteration terminates. For Tot→Q tensor M, use the kernel at q=0 and eliminate largest p using the signed vertical exact complex. This terminates for the same first-quadrant reason. The LES then supplies the quasi-isomorphisms and their correctly oriented ratio. All operations are in abelian groups, so this component chase requires no element reasoning in an arbitrary abelian category.
+
+Naturality is now accompanied by explicit comparison licensing and tensor homotopies h_Q tensor 1 and (-1)^p 1 tensor h_P. The Koszul sign makes the unwanted cross terms cancel; identities and comparison composition give coherence. Degree zero is included, negative homology vanishes, and zero modules require no special choices. This elementary first-quadrant double-complex argument is familiar and has been checked directly, so no external verification was required.
+
+Only the queued proof, its dependency list/manifest and both proof/risk contracts were edited. No direct dependency was changed. Focused precheck precedes recording; the statement is unchanged. After the receipt the next action is position 23. No unresolved mathematical obligation remains here.
+
+Context refresh after position 26: The weak-dimension peer now explicitly assumes DC and supplied resolutions on both hands and takes suprema in N union infinity with sup empty=0. Earlier tensor/Tor calculations, flatness criteria and balance do not depend on this dimension corollary; their formulas and hypotheses remain unchanged. Own item bytes are unchanged. Reseal the same decision.

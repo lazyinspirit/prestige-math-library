@@ -1,0 +1,3221 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-dirichlet-character-primitive-induction",
+    "thm-induced-dirichlet-l-finite-euler-factors",
+    "lem-primitive-gauss-sum-twist",
+    "thm-primitive-gauss-sum-norm",
+    "lem-fourier-transform-of-a-gaussian",
+    "thm-dirac-comb-is-fourier-invariant",
+    "thm-twisted-poisson-summation",
+    "thm-primitive-dirichlet-l-analytic-continuation",
+    "thm-primitive-dirichlet-l-functional-equation",
+    "cor-dirichlet-l-root-number-unit-modulus",
+    "cor-dirichlet-l-trivial-zeros",
+    "ex-primitive-ancestors-of-small-characters",
+    "ex-finite-euler-factors-under-character-induction",
+    "ex-gauss-sum-for-chi-four",
+    "ex-even-and-odd-character-theta-kernels",
+    "ex-trivial-zeros-of-a-dirichlet-l-function",
+    "cex-a-character-modulus-need-not-be-its-conductor",
+    "cex-gauss-sum-sign-is-not-canonical-without-conventions",
+    "cor-algebraic-integer-minimal-polynomial-criterion",
+    "thm-clearing-denominators-for-an-algebraic-number",
+    "cor-trace-and-norm-of-an-algebraic-integer",
+    "thm-ring-of-integers-free-of-rank-degree",
+    "thm-orders-have-integral-bases-and-finite-index",
+    "lem-discriminant-change-of-basis",
+    "thm-discriminant-as-an-embedding-determinant",
+    "thm-number-field-discriminant-is-well-defined-and-nonzero",
+    "thm-power-basis-discriminant-is-polynomial-discriminant",
+    "cor-order-index-discriminant-formula",
+    "cor-squarefree-power-basis-discriminant-gives-ring-of-integers",
+    "thm-ring-of-integers-of-a-quadratic-field",
+    "cor-discriminant-of-a-quadratic-field",
+    "cor-ring-of-integers-is-a-dedekind-domain",
+    "ex-ring-of-integers-of-q",
+    "ex-gaussian-and-eisenstein-integer-bases",
+    "ex-ring-of-integers-of-q-sqrt-five",
+    "ex-pure-cubic-power-basis",
+    "ex-nonmaximal-quadratic-order",
+    "ex-index-obstructs-naive-polynomial-factorization"
+  ],
+  "contracts": {
+    "thm-dirichlet-character-primitive-induction": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are existence and uniqueness of the conductor, local exponent zero, and q=1. Least local factorization exponents exist in finite sets; CRT combines them and forces divisibility for every inducing modulus. For q=1 the prime set is empty, its product is 1, and the same argument gives the unique primitive principal character."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-induced-dirichlet-character",
+          "source_section": "Definition",
+          "quote": "Let $d\\mid q$, and let $\\chi^*$ be a Dirichlet character modulo $d$. Its\n**induction to modulus $q$** is the Dirichlet character $\\chi$ modulo $q$\nwhose arithmetic function is\n$$\\chi(n)=\\begin{cases}\\chi^*(n),&(n,q)=1,\\\\0,&(n,q)>1.\\end{cases}$$\nEquivalently, on units modulo $q$ it is the pullback along reduction to units\nmodulo $d$. Thus it can be zero at an integer which is a unit modulo $d$ but\nnot modulo $q$; this is stronger than merely composing unit-group maps.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chinese-remainder-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n_0,\\ldots,n_{r-1}$ be a finite pairwise-coprime list of positive\nintegers and let $N:=\\prod_{i<r}n_i$. The map\n\n$$\\Phi:\\mathbb Z/N\\longrightarrow\\prod_{i<r}\\mathbb Z/n_i,\\qquad[x]_N\\longmapsto([x]_{n_i})_{i<r},$$\n\nis a bijection. It preserves addition, multiplication, $[0]$, and $[1]$\ncomponentwise. For the empty list, $N=1$ and both sides have one element.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $q=\\prod p^{e_p}$. For each $p$, choose the least $c_p\\le e_p$ for which the local unit character factors through reduction modulo $p^{c_p}$; the finite set of possible exponents has such a least element.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "CRT combines the resulting local characters into a character $\\chi^*$ modulo $d=\\prod p^{c_p}$, and [F1] shows that its induction has the same values as $\\chi$, including zero precisely on the nonunits modulo $q$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If a primitive character modulo $d'$ induces $\\chi$, each of its local exponents must be at least $c_p$; minimality gives $d\\mid d'$. If $d'>d$, its local character factors through a proper divisor, contradicting primitivity. Hence $d'=d$ and CRT gives $\\chi^*=\\chi^{*\\prime}$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Unique primitive ancestor of a Dirichlet character fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Unique primitive ancestor of a Dirichlet character does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Unique primitive ancestor of a Dirichlet character has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Unique primitive ancestor of a Dirichlet character is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Unique primitive ancestor of a Dirichlet character has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Unique primitive ancestor of a Dirichlet character uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Unique primitive ancestor of a Dirichlet character makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Unique primitive ancestor of a Dirichlet character makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-induced-dirichlet-l-finite-euler-factors": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risk is the direction of the exceptional Euler factors. For p dividing q but not the conductor d, chi(p)=0 while chi*(p) is nonzero, so removing the primitive local reciprocal factor multiplies L(s,chi*) by 1-chi*(p)p^{-s}. The exceptional set is finite, and the cited Euler products justify cancellation for Re(s)>1."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-dirichlet-character-primitive-induction",
+          "source_section": "Statement",
+          "quote": "Every Dirichlet character modulo $q$ is induced by a unique primitive character\nof a conductor dividing $q$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dirichlet-l-euler-product",
+          "source_section": "Statement",
+          "quote": "For every Dirichlet character $\\chi$ and every $s$ with $\\operatorname{Re}s>1$,\n\n$$L(s,\\chi)=\\prod_p \\frac{1}{1-\\chi(p)p^{-s}},$$\n\nand this product is nonzero on $\\operatorname{Re}s>1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In [F2], the local factors of $\\chi$ and $\\chi^*$ agree unless $p\\mid q$ but $p\\nmid d$; at exactly those primes $\\chi(p)=0$, while the primitive factor is $(1-\\chi^*(p)p^{-s})^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Cancelling all common local factors and multiplying the finite exceptional set gives the displayed identity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Finite Euler factors under character induction: step 1.1 handles the empty-instance boundary by in [F2], the local factors of and ^* agree unless p q but p d; at exactly those primes (p)=0, while the primitive factor is (1- ^*(p)p^-s)^-1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Finite Euler factors under character induction does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Finite Euler factors under character induction has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Finite Euler factors under character induction is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Finite Euler factors under character induction has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Finite Euler factors under character induction uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Finite Euler factors under character induction makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Finite Euler factors under character induction makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "lem-primitive-gauss-sum-twist": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are the nonunit case and the modulus-one boundary. A unit m is handled by a residue permutation. If (m,q)>1, primitivity supplies a unit u congruent to 1 modulo q/(m,q) with chi(u) not equal to 1, forcing the sum to vanish; this matches chi(m)=0. For q=1 every residue is a unit and the unit computation gives the formula."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gauss-sum-dirichlet-character",
+          "source_section": "Definition",
+          "quote": "Put $e(x)=\\exp(2\\pi i x)$. For a character $\\chi$ modulo $q$, its **Gauss\nsum** is\n$$\\tau(\\chi)=\\sum_{a\\bmod q}\\chi(a)e(a/q).$$\nThe displayed additive character and the complete residue system fix its phase.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-primitive-dirichlet-character-and-conductor",
+          "source_section": "Definition",
+          "quote": "A character modulo $q$ is **primitive** if it is not induced from a proper\ndivisor of $q$. By [[thm-dirichlet-character-primitive-induction]], every\ncharacter has a unique primitive ancestor; its modulus is the **conductor**.\nThe principal character modulo $1$ is primitive and has conductor $1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $(m,q)=1$, substitution $b=am$ permutes the residue classes and gives the sum as $\\overline{\\chi(m)}\\tau(\\chi)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "assume-case unit"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $g=(m,q)>1$, choose a unit $u\\equiv1\\pmod{q/g}$ for which $\\chi(u)\\ne1$; otherwise the unit character factors modulo $q/g$, contrary to [F2]. Multiplication by $u$ leaves $e(am/q)$ unchanged and multiplies the sum by $\\chi(u)$, so the sum is zero.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "assume-case nonunit"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the second case $\\chi(m)=0$, so the right side is also zero; the two cases prove the formula.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "cases-exhaustive"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Primitive Gauss-sum twist fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-8",
+            "reason": "A Dirichlet character modulus is positive, so the residue classes modulo q form a nonempty finite set; the displayed sum has no empty-index case."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Primitive Gauss-sum twist does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Primitive Gauss-sum twist has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Primitive Gauss-sum twist is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Primitive Gauss-sum twist has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Primitive Gauss-sum twist uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Primitive Gauss-sum twist makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Primitive Gauss-sum twist makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-primitive-gauss-sum-norm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-primitive-gauss-sum-twist",
+          "source_section": "Statement",
+          "quote": "If $\\chi$ is primitive modulo $q$, then for every integer $m$,\n$$\\sum_{a\\bmod q}\\chi(a)e(am/q)=\\overline{\\chi(m)}\\tau(\\chi).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Conjugating the defining finite sum gives $\\overline{\\tau(\\chi)}=\\sum_{a\\bmod q}\\overline{\\chi(a)}e(-a/q)$. Multiplication by $\\tau(\\chi)$ and [F1] with $m=a$ give the displayed double sum.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Finite additive-character orthogonality makes the inner sum $q$ only for $b\\equiv1\\pmod q$, and $0$ otherwise; the remaining value is $q\\chi(1)=q$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Norm of a primitive Gauss sum fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Norm of a primitive Gauss sum does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Norm of a primitive Gauss sum has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Norm of a primitive Gauss sum is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Norm of a primitive Gauss sum has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Norm of a primitive Gauss sum uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Norm of a primitive Gauss sum makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Norm of a primitive Gauss sum makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "lem-fourier-transform-of-a-gaussian": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Fourier transform of a Gaussian fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Fourier transform of a Gaussian does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Fourier transform of a Gaussian has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Fourier transform of a Gaussian is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Fourier transform of a Gaussian has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Fourier transform of a Gaussian uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Fourier transform of a Gaussian makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Fourier transform of a Gaussian makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Normalize the Fourier transform at zero with the Gaussian integral and justify real differentiation under the integral sign by an integrable uniform derivative bound.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integration by parts gives the ODE $G'(\\xi)=-2\\pi\\xi G(\\xi)$; the normalization from step 1.1 then determines the standard Gaussian transform.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute $u=\\sqrt t x$ and apply the standard transform from step 2.1 to obtain the $t^{-1/2}$ scaling.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "thm-dirac-comb-is-fourier-invariant": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Poisson summation fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-8",
+            "reason": "Both displayed sums are indexed by the fixed nonempty set of integers; the summability issue is convergence, not an empty-family boundary."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Poisson summation does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Poisson summation has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Poisson summation is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Poisson summation has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Poisson summation uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Poisson summation makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Poisson summation makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the periodization $F(x)=\\sum_{n\\in\\mathbb Z}f(x+n)$. Schwartz decay makes this series and all termwise derivative series converge uniformly on compact sets, so $F$ is smooth and 1-periodic.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The $m$th Fourier coefficient of $F$ is $\\widehat f(m)$: absolute convergence permits termwise integration and translation of the intervals $[n,n+1]$ partitions the real line.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The Fourier transform of a Schwartz function is Schwartz, so the Fourier series of $F$ converges absolutely and uniformly; evaluating it at zero yields the Poisson summation identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ]
+    },
+    "thm-twisted-poisson-summation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-dirac-comb-is-fourier-invariant",
+          "source_section": "Statement",
+          "quote": "For every Schwartz function $f$ under $\\widehat f(\\xi)=\\int f(x)e(-x\\xi)dx$,\n$$\\sum_{n\\in\\mathbb Z}f(n)=\\sum_{m\\in\\mathbb Z}\\widehat f(m).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-primitive-gauss-sum-twist",
+          "source_section": "Statement",
+          "quote": "If $\\chi$ is primitive modulo $q$, then for every integer $m$,\n$$\\sum_{a\\bmod q}\\chi(a)e(am/q)=\\overline{\\chi(m)}\\tau(\\chi).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Decompose the left side by $n\\equiv a\\pmod q$ and apply [F1] to each translated, $q$-scaled Schwartz function.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite coefficient of $\\widehat f(m/q)/q$ is $\\sum_{a\\bmod q}\\chi(a)e(am/q)$, which is [F2]. Substitution gives the formula.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Twisted Poisson summation fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-8",
+            "reason": "The displayed sums are indexed by the fixed nonempty set of integers, so the detector sees aggregate notation without an empty indexing alternative."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Twisted Poisson summation does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Twisted Poisson summation has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Twisted Poisson summation is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Twisted Poisson summation has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Twisted Poisson summation uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Twisted Poisson summation makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Twisted Poisson summation makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-primitive-dirichlet-l-analytic-continuation": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are the theta/Mellin continuation and the primitive principal exception. Twisted Poisson summation gives the required theta transformation with the fixed normalization; after splitting at 1, rapid decay makes both Mellin pieces entire for nonprincipal chi. The only primitive principal case is q=1, where the cited zeta theorem supplies exactly the stated meromorphic exception."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fourier-transform-of-a-gaussian",
+          "source_section": "Statement",
+          "quote": "For $t>0$ and $\\widehat f(\\xi)=\\int_{\\mathbb R}f(x)e(-x\\xi)\\,dx$,\n$$\\widehat{e^{-\\pi t x^2}}(\\xi)=t^{-1/2}e^{-\\pi\\xi^2/t}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-twisted-poisson-summation",
+          "source_section": "Statement",
+          "quote": "For primitive $\\chi$ modulo $q$ and Schwartz $f$,\n$$\\sum_{n\\in\\mathbb Z}\\chi(n)f(n)=\\frac{\\tau(\\chi)}q\\sum_{m\\in\\mathbb Z}\\overline{\\chi(m)}\\widehat f(m/q).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-riemann-zeta-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "There is a meromorphic function on $\\mathbb C$, still denoted $\\zeta$, that\nagrees with the Dirichlet series on $\\operatorname{Re}s>1$. This continuation is\nholomorphic on $\\mathbb C\\setminus\\{1\\}$ and has a single simple pole at\n$s=1$, of residue $1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Mellin-transform $\\sum_{n\\ge1}\\chi(n)n^a e^{-\\pi n^2t/q}$; for $\\operatorname{Re}s>1$ this equals a nonzero constant times $\\Lambda(s,\\chi)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F1] in [F2] to transform the theta kernel under $t\\mapsto1/t$. Splitting the Mellin integral at $1$ gives two rapidly decaying integrals, hence an entire continuation when $\\chi$ is nonprincipal.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The only primitive principal case is $q=1$, where the kernel's constant term is the zeta term; [F3] supplies precisely its meromorphic exception.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Analytic continuation of primitive Dirichlet L-functions fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Analytic continuation of primitive Dirichlet L-functions does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Analytic continuation of primitive Dirichlet L-functions has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Analytic continuation of primitive Dirichlet L-functions is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Analytic continuation of primitive Dirichlet L-functions has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Analytic continuation of primitive Dirichlet L-functions uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Analytic continuation of primitive Dirichlet L-functions makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Analytic continuation of primitive Dirichlet L-functions makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-primitive-dirichlet-l-functional-equation": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-step8-e",
+        "notes": "Reviewed the Gaussian and twisted-Poisson normalizations in both parity cases, the Mellin exponents after t maps to 1/t, and the separate primitive-principal modulus-one branch. A character modulus q is positive, so sqrt(q) is nonzero; step 3.1 exposes the s(s-1) denominator as exactly the two meromorphic boundary poles and proves the q=1 symmetry on that continuation."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-primitive-dirichlet-l-analytic-continuation",
+          "source_section": "Statement",
+          "quote": "If primitive $\\chi$ is nonprincipal, then $L(s,\\chi)$ and $\\Lambda(s,\\chi)$ extend to entire functions. For the principal primitive character modulo $1$, $L=\\zeta$ is meromorphic with its unique simple pole at $s=1$, while $\\Lambda(s,\\chi)=\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$ is meromorphic with simple poles at $s=0$ and $s=1$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-completed-dirichlet-l-function",
+          "source_section": "Definition",
+          "quote": "For primitive $\\chi$ modulo $q$ of parity $a$, define\n$$\\Lambda(s,\\chi)=\\left(\\frac q\\pi\\right)^{(s+a)/2}\\Gamma((s+a)/2)L(s,\\chi).$$\nThis is the completed function, not the entire xi-function used in a theta proof.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fourier-transform-of-a-gaussian",
+          "source_section": "Statement",
+          "quote": "For $t>0$ and $\\widehat f(\\xi)=\\int_{\\mathbb R}f(x)e(-x\\xi)\\,dx$, $$\\widehat{e^{-\\pi t x^2}}(\\xi)=t^{-1/2}e^{-\\pi\\xi^2/t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-twisted-poisson-summation",
+          "source_section": "Statement",
+          "quote": "For primitive $\\chi$ modulo $q$ and Schwartz $f$, $$\\sum_{n\\in\\mathbb Z}\\chi(n)f(n)=\\frac{\\tau(\\chi)}q\\sum_{m\\in\\mathbb Z}\\overline{\\chi(m)}\\widehat f(m/q).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The even theta transformation gives factor $\\tau(\\chi)/\\sqrt q$; differentiating the Gaussian kernel in the odd case gives the extra factor $-i$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Mellin transformation of these parity-specific identities and the normalization [F2] yields the displayed equation for $\\operatorname{Re}s>1$, then everywhere by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For q=1, subtract the theta constant term, split the Mellin integral at one, and use the theta transformation to obtain a meromorphic expression invariant under s maps to 1-s.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Functional equation for primitive Dirichlet L-functions fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The modulus q is positive, so the factor sqrt(q) in step 1.1 never vanishes. Step 3.1 explicitly derives the term 2/(s(s-1)); its points s=0 and s=1 are the stated meromorphic poles, and the resulting continuation is symmetric under s maps to 1-s."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the modulus-one primitive principal character separately, subtracting the theta constant term and proving the zeta functional equation on the resulting meromorphic continuation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Functional equation for primitive Dirichlet L-functions is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Functional equation for primitive Dirichlet L-functions has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Functional equation for primitive Dirichlet L-functions uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Functional equation for primitive Dirichlet L-functions makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Functional equation for primitive Dirichlet L-functions makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "cor-dirichlet-l-root-number-unit-modulus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-primitive-dirichlet-l-functional-equation",
+          "source_section": "Statement",
+          "quote": "For primitive $\\chi$ modulo $q$ of parity $a$,\n$$\\Lambda(s,\\chi)=\\varepsilon(\\chi)\\Lambda(1-s,\\overline\\chi),\\qquad \\varepsilon(\\chi)=(-i)^a\\tau(\\chi)/\\sqrt q.$$\nFor $q=1$ this is the zeta functional equation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-primitive-gauss-sum-norm",
+          "source_section": "Statement",
+          "quote": "For a primitive character $\\chi$ modulo $q$, $|\\tau(\\chi)|^2=q$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Taking absolute values in [F1] gives $|\\varepsilon(\\chi)|=|\\tau(\\chi)|/\\sqrt q$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fact [F2] makes this quotient $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Unit modulus of the Dirichlet root number fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Unit modulus of the Dirichlet root number does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Unit modulus of the Dirichlet root number has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Unit modulus of the Dirichlet root number is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Unit modulus of the Dirichlet root number has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Unit modulus of the Dirichlet root number uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Unit modulus of the Dirichlet root number makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Unit modulus of the Dirichlet root number makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "cor-dirichlet-l-trivial-zeros": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are regularity of the completed function and the s=0/principal boundary. The repaired citation now points directly to analytic continuation, which makes Lambda entire for the stated primitive nonprincipal characters. Gamma has poles at s=-a-2m, so L must cancel them; nonprincipality excludes the q=1 zeta exception, including at s=0."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-primitive-dirichlet-l-analytic-continuation",
+          "source_section": "Statement",
+          "quote": "If primitive $\\chi$ is nonprincipal, then $L(s,\\chi)$ and $\\Lambda(s,\\chi)$ extend to entire functions. For the principal primitive character modulo $1$, $L=\\zeta$ is meromorphic with its unique simple pole at $s=1$, while $\\Lambda(s,\\chi)=\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$ is meromorphic with simple poles at $s=0$ and $s=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gamma-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "Gamma extends to a meromorphic function on $\\mathbb C$ with simple poles at the\nnonpositive integers, and\n\n$$\\operatorname{Res}(\\Gamma,-n)=\\frac{(-1)^n}{n!}\\qquad(n=0,1,2,\\dots).$$\n\nMore generally, for every integer $m\\ge0$ and every\n$z\\notin\\{0,-1,\\dots,-m\\}$,\n\n$$\\Gamma(z)=\\frac{\\Gamma(z+m+1)}{z(z+1)\\cdots(z+m)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $s=-a-2m$, $\\Gamma((s+a)/2)$ has a pole by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The entireness in [F1] forces $L(s,\\chi)$ to cancel that pole. The principal exception is outside the hypothesis.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Parity-forced trivial zeros fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Parity-forced trivial zeros does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Parity-forced trivial zeros has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Parity-forced trivial zeros is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Parity-forced trivial zeros has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Parity-forced trivial zeros uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Parity-forced trivial zeros makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Parity-forced trivial zeros makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-primitive-ancestors-of-small-characters": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are the individual conductor claims and the distinction between induction and primitivity. The displayed character modulo 12 is the zero-extended induction of the primitive chi_4, and the displayed induction to modulus 8 likewise has conductor 4. Separately, the sign pattern 1,-1,-1,1 on 1,3,5,7 does not factor through modulus 4 and is the primitive quadratic character of conductor 8."
+      },
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Primitive ancestors of small characters fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Primitive ancestors of small characters does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Primitive ancestors of small characters has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Primitive ancestors of small characters is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Primitive ancestors of small characters has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Primitive ancestors of small characters uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Primitive ancestors of small characters makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Primitive ancestors of small characters makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed values are multiplicative on the listed unit groups; their zero extensions are therefore characters.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Direct reduction of the displayed unit values identifies the ancestor of the induction of $\\chi_4$ to modulus $8$, and uniqueness in the given theorem fixes its conductor as $4$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        }
+      ]
+    },
+    "ex-finite-euler-factors-under-character-induction": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Finite Euler factor from modulus 4 to 12 fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Finite Euler factor from modulus 4 to 12 does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Finite Euler factor from modulus 4 to 12 has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Finite Euler factor from modulus 4 to 12 is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Finite Euler factor from modulus 4 to 12 has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Finite Euler factor from modulus 4 to 12 uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Finite Euler factor from modulus 4 to 12 makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Finite Euler factor from modulus 4 to 12 makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The primes dividing $12$ but not $4$ consist only of $3$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute $p=3$ and $\\chi_4(3)=-1$ in the given formula.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "ex-gauss-sum-for-chi-four": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risk is the phase convention in the explicit Gauss sum. With e(x)=exp(2 pi i x) and chi_4(1)=1, chi_4(3)=-1, the sum is e(1/4)-e(3/4)=i-(-i)=2i. Its norm is 2=sqrt(4), agreeing with the stated normalization."
+      },
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Gauss sum for the character modulo 4 fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Gauss sum for the character modulo 4 does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Gauss sum for the character modulo 4 has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Gauss sum for the character modulo 4 is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Gauss sum for the character modulo 4 has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Gauss sum for the character modulo 4 uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Gauss sum for the character modulo 4 makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Gauss sum for the character modulo 4 makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two nonzero terms are $e(1/4)-e(3/4)=i-(-i)=2i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Its squared modulus is $4$, agreeing with the primitive norm theorem; with $a=1$, $(-i)\\tau(\\chi_4)/2=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "ex-even-and-odd-character-theta-kernels": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Even and odd theta kernels fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Even and odd theta kernels does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Even and odd theta kernels has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Even and odd theta kernels is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Even and odd theta kernels has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Even and odd theta kernels uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Even and odd theta kernels makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Even and odd theta kernels makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The parity-$a$ Mellin kernel is $\\sum_n\\chi(n)n^a e^{-\\pi n^2t/q}$, so the two displayed kernels are its $a=0,1$ cases.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the given transformation yields phase $(-i)^a$, agreeing with the stated functional equations.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        }
+      ]
+    },
+    "ex-trivial-zeros-of-a-dirichlet-l-function": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Trivial zeros of the beta function fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Trivial zeros of the beta function does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Trivial zeros of the beta function has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Trivial zeros of the beta function is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Trivial zeros of the beta function has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Trivial zeros of the beta function uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Trivial zeros of the beta function makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Trivial zeros of the beta function makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Odd parity means $a=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The given corollary gives $L(-1-2m,\\chi_4)=0$ for $m\\ge0$, which is exactly the displayed list.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        }
+      ]
+    },
+    "cex-a-character-modulus-need-not-be-its-conductor": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risk is confusing a character's displayed modulus with its conductor. The modulo-12 arithmetic function agrees on units with the pullback of chi_4 and is zero on nonunits, so it is induced from modulus 4. Since chi_4 is primitive, uniqueness of the primitive ancestor makes the conductor exactly 4, not 12."
+      },
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A modulus need not be a conductor fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A modulus need not be a conductor does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A modulus need not be a conductor has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A modulus need not be a conductor is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A modulus need not be a conductor has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A modulus need not be a conductor uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A modulus need not be a conductor makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A modulus need not be a conductor makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Induce $\\chi_4$ to modulus $12$; on units it agrees with reduction modulo $4$ and it vanishes at every nonunit modulo $12$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Its primitive ancestor is $\\chi_4$, so uniqueness in the given theorem makes its conductor $4$, not $12$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        }
+      ]
+    },
+    "cex-gauss-sum-sign-is-not-canonical-without-conventions": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Gauss-sum phase requires a convention fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Gauss-sum phase requires a convention does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Gauss-sum phase requires a convention has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Gauss-sum phase requires a convention is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Gauss-sum phase requires a convention has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Gauss-sum phase requires a convention uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Gauss-sum phase requires a convention makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Gauss-sum phase requires a convention makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Replace $e(x)$ by $e(-x)$. The two terms become $e(-1/4)-e(-3/4)=-i-i=-2i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This is the conjugate phase, not $2i$, although its squared modulus remains $4$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "cor-algebraic-integer-minimal-polynomial-criterion": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are both directions of the iff and the passage from a monic integral equation to the minimal polynomial. One direction is immediate from the definition of integrality. Conversely divisibility in Q[X] together with primitivity and Gauss's lemma forces the monic minimal polynomial to lie in Z[X], so neither direction assumes the conclusion."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-integral-ring-extension",
+          "source_section": "Definition",
+          "quote": "Let $f:A\\to B$ be a homomorphism of commutative rings. The map $f$ is an **integral ring map** when every element of $B$ is integral over $A$ in the sense of [[def-integral-element-and-algebraic-integer]]. When $A$ is identified with a subring of $B$, one also says that $B$ is an **integral extension** of $A$ and writes $A\\subseteq B$ integral.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If the minimal polynomial is monic over $\\mathbb Z$, [F1] gives $\\alpha\\in\\mathcal O_K$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, a monic integral polynomial annihilating $\\alpha$ is divisible by its monic minimal polynomial; Gauss's lemma makes the latter integral.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Minimal-polynomial criterion for algebraic integers fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Minimal-polynomial criterion for algebraic integers does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Minimal-polynomial criterion for algebraic integers has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Minimal-polynomial criterion for algebraic integers is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Minimal-polynomial criterion for algebraic integers has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Minimal-polynomial criterion for algebraic integers uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Minimal-polynomial criterion for algebraic integers: step 1.1 handles the forward implication by if the minimal polynomial is monic over Z, [F1] gives O_K."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Minimal-polynomial criterion for algebraic integers: step 2.1 handles the reverse implication by conversely, a monic integral polynomial annihilating is divisible by its monic minimal polynomial; Gauss's lemma makes the latter integral."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-clearing-denominators-for-an-algebraic-number": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Clearing denominators for an algebraic number fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Clearing denominators for an algebraic number does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Clearing denominators for an algebraic number has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Clearing denominators for an algebraic number is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Clearing denominators for an algebraic number has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Clearing denominators for an algebraic number uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Clearing denominators for an algebraic number makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Clearing denominators for an algebraic number makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take a polynomial for $\\alpha$ over $\\mathbb Q$ and a common positive denominator $m$ of its coefficients. Multiplying the variable by a sufficiently high power of $m$ produces a monic polynomial in $\\mathbb Z[X]$ for $m\\alpha$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus $m\\alpha\\in\\mathcal O_K$, and $\\alpha=(m\\alpha)/m$ lies in its fraction field; the reverse inclusion is contained in $K$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ]
+    },
+    "cor-trace-and-norm-of-an-algebraic-integer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-field-norm-and-trace",
+          "source_section": "Definition",
+          "quote": "Let $K/F$ be a finite field extension, so $K$ is a finite-dimensional\n$F$-vector space of degree $[K:F]$ ([[def-extension-degree-and-finite-extension]]).\nFor $a\\in K$, let\n\n$$m_a\\colon K\\to K,\\qquad x\\mapsto ax,$$\n\nthe $F$-linear operator of multiplication by $a$.\n\nThe **norm** and **trace** of $a$ from $K$ to $F$ are\n\n$$N_{K/F}(a):=\\det(m_a),\\qquad \\operatorname{Tr}_{K/F}(a):=\\operatorname{tr}(m_a),$$\n\nwhere determinant and trace are those of the published linear-operator notions\n([[def-determinant-of-a-linear-operator]], [[def-trace-of-an-endomorphism]]).\n\nBecause $K$ is a field, $m_a$ is the zero operator exactly when $a=0$ and is an\nautomorphism exactly when $a\\ne0$. Later items identify these two quantities\nwith the classical embedding formulas and the trace form.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-algebraic-integer-minimal-polynomial-criterion",
+          "source_section": "Statement",
+          "quote": "For $\\alpha\\in K$, $\\alpha\\in\\mathcal O_K$ if and only if its monic minimal polynomial over $\\mathbb Q$ lies in $\\mathbb Z[X]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Writing the monic minimal polynomial as $f(X)=X^r+c_{r-1}X^{r-1}+\\cdots+c_0$, [F2] gives $c_j\\in\\mathbb Z$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $h=[K:\\mathbb Q(\\alpha)]$, multiplication by $\\alpha$ on $K$ has characteristic polynomial $f(X)^h$. Its trace and determinant are therefore $-hc_{r-1}$ and $(-1)^{rh}c_0^h$, which are integral by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Trace and norm of an algebraic integer fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Trace and norm of an algebraic integer does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Trace and norm of an algebraic integer has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Trace and norm of an algebraic integer is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Trace and norm of an algebraic integer has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Trace and norm of an algebraic integer uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Trace and norm of an algebraic integer makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Trace and norm of an algebraic integer makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-ring-of-integers-free-of-rank-degree": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are finite generation, freeness, and equality of the rank with [K:Q]. Finite integral closure gives finite generation and containment in the characteristic-zero field gives torsion-freeness; the PID result gives freeness. The repaired dependency on clearing denominators proves O_K tensor Q is K, which establishes the exact rank."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-integral-closure-in-a-finite-separable-extension",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian integrally closed domain with fraction field $F=\\operatorname{Frac}(R)$, let $L/F$ be a finite separable field extension, and let $A$ be the integral closure of $R$ in $L$. Then $A$ is a finite $R$-module.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-submodules-of-finite-free-pid-modules-are-free",
+          "source_section": "Statement",
+          "quote": "If $M$ is free of finite rank $n$ over a PID and $N\\le M$, then $N$ is free of a uniquely determined finite rank $r\\le n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-clearing-denominators-for-an-algebraic-number",
+          "source_section": "Statement",
+          "quote": "For every $\\alpha\\in K$, some positive integer $m$ satisfies $m\\alpha\\in\\mathcal O_K$; hence $K=\\operatorname{Frac}(\\mathcal O_K)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fact [F1] makes $\\mathcal O_K$ finitely generated; it is torsion-free because it is contained in the characteristic-zero field $K$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The PID structure theorem, equivalently [F2] after embedding in a finite free module, makes it free. By [F3], tensoring with $\\mathbb Q$ gives $K$, so its rank is $[K:\\mathbb Q]$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ring of integers has rank the degree fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The ring of integers has rank the degree does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The ring of integers has rank the degree has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The ring of integers has rank the degree is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The ring of integers has rank the degree has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The ring of integers has rank the degree uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The ring of integers has rank the degree makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The ring of integers has rank the degree makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-orders-have-integral-bases-and-finite-index": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are that full rank might not imply finite index and that a basis might be assumed rather than proved. By definition an order is a full-rank sublattice of the now-established free rank-n module O_K; the simultaneous-basis theorem diagonalizes the inclusion with nonzero integer entries, giving both a Z-basis and a finite quotient of their product index."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ring-of-integers-free-of-rank-degree",
+          "source_section": "Statement",
+          "quote": "$\\mathcal O_K$ is a free $\\mathbb Z$-module of rank $[K:\\mathbb Q]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-simultaneous-basis-theorem-for-pid-submodules",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a PID, let $M$ be free of finite rank $n$, and let $N\\le M$. For a submodule $N$ of a finite free PID module, aligned bases have nonzero factors $a_1\\mid\\cdots\\mid a_r$. More precisely, there is a basis $e_1,\\ldots,e_n$ of $M$ and nonzero elements $a_1\\mid\\cdots\\mid a_r$ such that there is a basis $a_1e_1,\\ldots,a_re_r$ of the submodule with $r\\le n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The order has full rank by definition, so [F1] makes it a rank-$n$ submodule of a free rank-$n$ group.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2]: the quotient is a finite direct sum of $\\mathbb Z/a_i\\mathbb Z$, and the resulting basis of $\\mathcal O$ is integral.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Orders have integral bases and finite index fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Orders have integral bases and finite index does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Orders have integral bases and finite index has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Orders have integral bases and finite index is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Orders have integral bases and finite index has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Orders have integral bases and finite index uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Orders have integral bases and finite index makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Orders have integral bases and finite index makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "lem-discriminant-change-of-basis": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Change of basis for discriminants fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Change of basis for discriminants does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Change of basis for discriminants has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Change of basis for discriminants is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Change of basis for discriminants has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Change of basis for discriminants uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Change of basis for discriminants makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Change of basis for discriminants makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Bilinearity of trace gives $G_\\beta=A^tG_\\alpha A$ for the trace Gram matrices.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Taking determinants gives the asserted square factor.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "thm-discriminant-as-an-embedding-determinant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-field-norm-and-trace-by-embeddings",
+          "source_section": "Statement",
+          "quote": "Let $K/F$ be a finite field extension, let $\\Omega/F$ be an algebraic closure,\nlet $\\Sigma=\\operatorname{Hom}_F(K,\\Omega)$, and let\n$[K:F]_i$ be the inseparable degree ([[def-inseparable-degree]]). Then for every\n$a\\in K$,\n\n$$\\operatorname{Tr}_{K/F}(a)=[K:F]_i\\sum_{\\sigma\\in\\Sigma}\\sigma(a),$$\n\nand\n\n$$N_{K/F}(a)=\\left(\\prod_{\\sigma\\in\\Sigma}\\sigma(a)\\right)^{[K:F]_i}.$$\n\nIn particular, when $K/F$ is separable these are the ordinary sum and product\nover the distinct $F$-embeddings of $K$ into $\\Omega$; and when\n$[K:F]_i>1$ in characteristic $p>0$, the trace map is identically zero because\n$[K:F]_i$ is a power of $p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dedekind-linear-independence-of-characters",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group and $K$ a field. Every finite family of distinct group homomorphisms $G\\to K^\\times$ is linearly independent over $K$ as a family of functions.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With $A=(\\sigma_i(\\alpha_j))$, [F1] gives $G=A^tA$ for the trace Gram matrix.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $A$ were singular, a nonzero linear combination of its rows would vanish on the basis and hence on every element of $K$, contradicting [F2]; therefore $\\det A\\ne0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Taking determinants gives $\\det G=\\det(A)^2$, and step 1.2 gives the asserted nonvanishing.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Embedding determinant formula fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Embedding determinant formula does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Embedding determinant formula has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Embedding determinant formula is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Embedding determinant formula has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Embedding determinant formula uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Embedding determinant formula makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Embedding determinant formula makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-number-field-discriminant-is-well-defined-and-nonzero": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are independence of the integral basis, integrality, and nonvanishing. Unimodular basis changes multiply the discriminant by determinant squared, integral traces give an integer, and the repaired embedding-determinant theorem now explicitly uses all distinct embeddings and proves its matrix determinant nonzero by Dedekind linear independence."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-discriminant-change-of-basis",
+          "source_section": "Statement",
+          "quote": "If $\\beta_j=\\sum_i a_{ij}\\alpha_i$, then $\\operatorname{disc}(\\beta)=\\det(A)^2\\operatorname{disc}(\\alpha)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-discriminant-as-an-embedding-determinant",
+          "source_section": "Statement",
+          "quote": "Let $\\sigma_1,\\ldots,\\sigma_n$ be the $n$ distinct embeddings $K\\to\\mathbb C$.\nFor every ordered $\\mathbb Q$-basis $\\alpha_1,\\ldots,\\alpha_n$ of $K$,\n$$\\operatorname{disc}(\\alpha_1,\\ldots,\\alpha_n)=\\det(\\sigma_i(\\alpha_j))^2,$$\nand the determinant is nonzero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The integral change matrix is unimodular, so [F1] gives basis independence; integral traces make the value integral.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The distinct-embedding hypothesis and explicit nonvanishing in [F2] make its squared determinant nonzero.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Number-field discriminant is well-defined and nonzero fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Number-field discriminant is well-defined and nonzero does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Number-field discriminant is well-defined and nonzero has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Number-field discriminant is well-defined and nonzero is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Number-field discriminant is well-defined and nonzero has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Number-field discriminant is well-defined and nonzero uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Number-field discriminant is well-defined and nonzero makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Number-field discriminant is well-defined and nonzero makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-power-basis-discriminant-is-polynomial-discriminant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-discriminant-as-an-embedding-determinant",
+          "source_section": "Statement",
+          "quote": "Let $\\sigma_1,\\ldots,\\sigma_n$ be the $n$ distinct embeddings $K\\to\\mathbb C$.\nFor every ordered $\\mathbb Q$-basis $\\alpha_1,\\ldots,\\alpha_n$ of $K$,\n$$\\operatorname{disc}(\\alpha_1,\\ldots,\\alpha_n)=\\det(\\sigma_i(\\alpha_j))^2,$$\nand the determinant is nonzero.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fact [F1] makes the determinant the Vandermonde product of the conjugates of $\\alpha$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Squaring it and regrouping the root differences is the polynomial discriminant, equivalently the displayed derivative norm.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Power-basis and polynomial discriminants fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Power-basis and polynomial discriminants does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Power-basis and polynomial discriminants has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Power-basis and polynomial discriminants is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Power-basis and polynomial discriminants has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Power-basis and polynomial discriminants uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Power-basis and polynomial discriminants makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Power-basis and polynomial discriminants makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "cor-order-index-discriminant-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-orders-have-integral-bases-and-finite-index",
+          "source_section": "Statement",
+          "quote": "Every order has an integral basis and finite additive index in $\\mathcal O_K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discriminant-change-of-basis",
+          "source_section": "Statement",
+          "quote": "If $\\beta_j=\\sum_i a_{ij}\\alpha_i$, then $\\operatorname{disc}(\\beta)=\\det(A)^2\\operatorname{disc}(\\alpha)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the bases from [F1]; the absolute change determinant is the index.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] and square the determinant.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Order-index discriminant formula fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Order-index discriminant formula does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Order-index discriminant formula has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Order-index discriminant formula is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Order-index discriminant formula has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Order-index discriminant formula uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Order-index discriminant formula makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Order-index discriminant formula makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "cor-squarefree-power-basis-discriminant-gives-ring-of-integers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-order-index-discriminant-formula",
+          "source_section": "Statement",
+          "quote": "For an order $\\mathcal O\\subseteq\\mathcal O_K$, $\\operatorname{disc}(\\mathcal O)=[\\mathcal O_K:\\mathcal O]^2d_K$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The power order is an order, and [F1] says its discriminant is the square of its index times $d_K$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A square index dividing a squarefree integer is $1$, so the two orders coincide.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Squarefree power discriminant criterion fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Squarefree power discriminant criterion does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Squarefree power discriminant criterion has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Squarefree power discriminant criterion is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Squarefree power discriminant criterion has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Squarefree power discriminant criterion uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Squarefree power discriminant criterion makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Squarefree power discriminant criterion makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-ring-of-integers-of-a-quadratic-field": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-trace-and-norm-of-an-algebraic-integer",
+          "source_section": "Statement",
+          "quote": "If $\\alpha\\in\\mathcal O_K$, then $\\operatorname{Tr}_{K/\\mathbb Q}(\\alpha)$ and $N_{K/\\mathbb Q}(\\alpha)$ belong to $\\mathbb Z$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write an integral element as $(a+b\\sqrt d)/c$ in lowest terms. Fact [F1] forces $2a/c, (a^2-db^2)/c^2\\in\\mathbb Z$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "These divisibilities force $c\\mid2$; the $c=2$ case occurs exactly when $d\\equiv1\\pmod4$, yielding the displayed bases.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Integers in a quadratic field fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Integers in a quadratic field does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Integers in a quadratic field has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Integers in a quadratic field is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Integers in a quadratic field has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Integers in a quadratic field uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Integers in a quadratic field makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Integers in a quadratic field makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "cor-discriminant-of-a-quadratic-field": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ring-of-integers-of-a-quadratic-field",
+          "source_section": "Statement",
+          "quote": "For squarefree $d\\ne1$, $\\mathcal O_{\\mathbb Q(\\sqrt d)}=\\mathbb Z[(1+\\sqrt d)/2]$ if $d\\equiv1\\pmod4$, and $\\mathbb Z[\\sqrt d]$ otherwise.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In each basis of [F1], form the $2\\times2$ trace Gram matrix.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Its determinant is respectively $d$ and $4d$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Discriminant of a quadratic field fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Discriminant of a quadratic field does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Discriminant of a quadratic field has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Discriminant of a quadratic field is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Discriminant of a quadratic field has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Discriminant of a quadratic field uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Discriminant of a quadratic field makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Discriminant of a quadratic field makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "cor-ring-of-integers-is-a-dedekind-domain": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-step8-e",
+        "notes": "Reviewed the use of the integral-closure theorem with R=Z, F=Q, and L=K. Number fields are finite separable extensions of Q, the ring of integers is exactly the integral closure of Z in K, and the licensed repair states the Axiom of Choice required by the cited Dedekind-domain theorem."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-integral-closure-of-a-dedekind-domain-in-a-finite-separable-extension",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a Dedekind domain with fraction field $F$, let $L/F$ be a finite separable field extension, and let $A$ be the integral closure of $R$ in $L$. Then $A$ is a Dedekind domain.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] with base ring $\\mathbb Z$ and extension $K/\\mathbb Q$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Its integral closure is precisely $\\mathcal O_K$, so it is Dedekind.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Rings of integers are Dedekind domains fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Rings of integers are Dedekind domains does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Rings of integers are Dedekind domains has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Rings of integers are Dedekind domains is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Rings of integers are Dedekind domains has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Rings of integers are Dedekind domains uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Rings of integers are Dedekind domains makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Rings of integers are Dedekind domains makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-ring-of-integers-of-q": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Integers of Q fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Integers of Q does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Integers of Q has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Integers of Q is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Integers of Q has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Integers of Q uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Integers of Q makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Integers of Q makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Its monic minimal polynomial is $X-a/b$, integral only when $b=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The basis $(1)$ has trace Gram determinant $1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "ex-gaussian-and-eisenstein-integer-bases": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risk is the negative-radicand congruence convention and the resulting signs. Applying the quadratic ring-of-integers theorem to d=-1 and d=-3 gives bases {1,i} and {1,(1+sqrt(-3))/2}; the corresponding discriminants are -4 and -3, so both the mod-4 branch and signs are consistent."
+      },
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Gaussian and Eisenstein integral bases fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Gaussian and Eisenstein integral bases does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Gaussian and Eisenstein integral bases has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Gaussian and Eisenstein integral bases is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Gaussian and Eisenstein integral bases has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Gaussian and Eisenstein integral bases uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Gaussian and Eisenstein integral bases makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Gaussian and Eisenstein integral bases makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "citations": [],
+      "routine_steps": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Insert $d=-1$ and $d=-3$ in the given integral-basis formula.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Insert the same residues modulo $4$ in the given discriminant formula.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        }
+      ]
+    },
+    "ex-ring-of-integers-of-q-sqrt-five": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are the half-integral basis and the index/discriminant calculation. Since 5 is congruent to 1 modulo 4, the quadratic theorem gives O_K=Z[(1+sqrt(5))/2]. The basis change from {1,sqrt(5)} has determinant 1/2, so Z[sqrt(5)] has index 2 and discriminant 20 versus the field discriminant 5."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ring-of-integers-of-a-quadratic-field",
+          "source_section": "Statement",
+          "quote": "For squarefree $d\\ne1$, $\\mathcal O_{\\mathbb Q(\\sqrt d)}=\\mathbb Z[(1+\\sqrt d)/2]$ if $d\\equiv1\\pmod4$, and $\\mathbb Z[\\sqrt d]$ otherwise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-discriminant-of-a-quadratic-field",
+          "source_section": "Statement",
+          "quote": "For squarefree $d\\ne1$, $d_K=d$ if $d\\equiv1\\pmod4$, and $d_K=4d$ otherwise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-order-index-discriminant-formula",
+          "source_section": "Statement",
+          "quote": "For an order $\\mathcal O\\subseteq\\mathcal O_K$, $\\operatorname{disc}(\\mathcal O)=[\\mathcal O_K:\\mathcal O]^2d_K$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $5\\equiv1\\pmod4$, [F1] gives $\\mathcal O_K=\\mathbb Z[\\omega]$; [F2] gives $\\operatorname{disc}(K)=5$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the basis $(1,\\omega)$, one has $\\sqrt5=2\\omega-1$, so the change matrix to $(1,\\sqrt5)$ has determinant $2$. Thus $[\\mathcal O_K:\\mathbb Z[\\sqrt5]]=2$, and [F3] gives $\\operatorname{disc}(\\mathbb Z[\\sqrt5])=2^2\\cdot5=20$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The integral basis and discriminant of Q(sqrt 5) fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The integral basis and discriminant of Q(sqrt 5) does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The integral basis and discriminant of Q(sqrt 5) has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The integral basis and discriminant of Q(sqrt 5) is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The integral basis and discriminant of Q(sqrt 5) has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The integral basis and discriminant of Q(sqrt 5) uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The integral basis and discriminant of Q(sqrt 5) makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The integral basis and discriminant of Q(sqrt 5) makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-pure-cubic-power-basis": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "The risks are irreducibility, the discriminant computation, and reversing a sufficient squarefree criterion. Eisenstein at 2 makes X^3-2 the minimal polynomial of cuberoot(2); the cubic formula gives power-basis discriminant -108. Because this is not squarefree, the example concludes only that the sufficient criterion is inapplicable and makes no claim about the actual index."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-power-basis-discriminant-is-polynomial-discriminant",
+          "source_section": "Statement",
+          "quote": "If $f$ is the degree-$n$ monic minimal polynomial of $\\alpha$, then\n$$\\operatorname{disc}(1,\\alpha,\\ldots,\\alpha^{n-1})=(-1)^{n(n-1)/2}N_{K/\\mathbb Q}(f'(\\alpha))=\\operatorname{disc}(f).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-squarefree-power-basis-discriminant-gives-ring-of-integers",
+          "source_section": "Statement",
+          "quote": "If integral $\\alpha$ generates $K$ and its power-basis discriminant is squarefree, then $\\mathcal O_K=\\mathbb Z[\\alpha]$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Eisenstein's criterion at $2$ makes $f$ irreducible over $\\mathbb Q$; thus it is the monic minimal polynomial of the integral element $\\alpha$ and $(1,\\alpha,\\alpha^2)$ is a $\\mathbb Q$-basis of $K$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The cubic discriminant formula gives $\\operatorname{disc}(f)=-27(-2)^2=-108$. By [F1] this is the discriminant of the displayed power basis.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $-108$ is divisible by $2^2$ and $3^3$, it is not squarefree. Therefore the hypothesis of [F2] fails, so that criterion supplies no maximality conclusion in this example.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A pure cubic power basis: why the squarefree-discriminant certificate does not apply fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A pure cubic power basis: why the squarefree-discriminant certificate does not apply does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A pure cubic power basis: why the squarefree-discriminant certificate does not apply has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A pure cubic power basis: why the squarefree-discriminant certificate does not apply is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A pure cubic power basis: why the squarefree-discriminant certificate does not apply has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A pure cubic power basis: why the squarefree-discriminant certificate does not apply uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A pure cubic power basis: why the squarefree-discriminant certificate does not apply makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A pure cubic power basis: why the squarefree-discriminant certificate does not apply makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-nonmaximal-quadratic-order": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-order-in-a-number-field",
+          "source_section": "Definition",
+          "quote": "An **order** in $K$ is a unital subring $\\mathcal O\\subseteq\\mathcal O_K$ whose additive group is free of rank $[K:\\mathbb Q]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "ex-ring-of-integers-of-q-sqrt-five",
+          "source_section": "Example",
+          "quote": "Put $K=\\mathbb Q(\\sqrt5)$ and $\\omega=(1+\\sqrt5)/2$. Then\n$\\mathcal O_K=\\mathbb Z[\\omega]$, $(1,\\omega)$ is an integral basis, and\n$\\operatorname{disc}(K)=5$. The suborder $\\mathbb Z[\\sqrt5]$ has basis\n$(1,\\sqrt5)$, index $2$, and discriminant $20$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-order-index-discriminant-formula",
+          "source_section": "Statement",
+          "quote": "For an order $\\mathcal O\\subseteq\\mathcal O_K$, $\\operatorname{disc}(\\mathcal O)=[\\mathcal O_K:\\mathcal O]^2d_K$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\sqrt5=2\\omega-1$, $A$ is the subring generated by an integral element and has full-rank basis $(1,\\sqrt5)$; hence [F1] makes it an order.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Relative to $(1,\\omega)$, the basis $(1,\\sqrt5)$ has determinant $2$. Thus $[\\mathcal O_K:A]=2$, and [F3] with [F2] gives $\\operatorname{disc}(A)=2^2\\cdot5=20$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5) fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5) does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5) has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5) is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5) has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5) uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5) makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5) makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-index-obstructs-naive-polynomial-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "ex-nonmaximal-quadratic-order",
+          "source_section": "Example",
+          "quote": "For $K=\\mathbb Q(\\sqrt5)$, the subring $A=\\mathbb Z[\\sqrt5]$ is an order in\n$\\mathcal O_K=\\mathbb Z[(1+\\sqrt5)/2]$. It has index $2$ and\n$\\operatorname{disc}(A)=20=2^2\\cdot5$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-order-index-discriminant-formula",
+          "source_section": "Statement",
+          "quote": "For an order $\\mathcal O\\subseteq\\mathcal O_K$, $\\operatorname{disc}(\\mathcal O)=[\\mathcal O_K:\\mathcal O]^2d_K$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In $A/2A$, the class of $\\sqrt5$ satisfies $X^2-5\\equiv X^2+1=(X+1)^2$, so $A/2A\\cong\\mathbb F_2[X]/((X+1)^2)$ has a nonzero nilpotent.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The element $\\omega$ satisfies $\\omega^2-\\omega-1=0$. Hence $\\mathcal O_K/2\\mathcal O_K\\cong\\mathbb F_2[X]/(X^2+X+1)$; the polynomial has no root in $\\mathbb F_2$, so this quotient is a field.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two quotient rings cannot agree, and [F2] identifies the reason as the index divisible by $2$. Therefore reduction of the power polynomial in $A$ cannot by itself describe factorisation in the maximal order.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Index 2 obstructs reading factorisation from Z[sqrt 5] modulo 2 fixes its displayed objects and index data; it has no separate case in which the quantified input family may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Index 2 obstructs reading factorisation from Z[sqrt 5] modulo 2 does not vary a scalar, cardinality, or denominator through zero as an independent case of its stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Index 2 obstructs reading factorisation from Z[sqrt 5] modulo 2 has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Index 2 obstructs reading factorisation from Z[sqrt 5] modulo 2 is stated for the structures fixed by its hypotheses, with no additional degenerate specialization quantified as a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Index 2 obstructs reading factorisation from Z[sqrt 5] modulo 2 has no independent endpoint assertion beyond the domain and inequalities already fixed in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Index 2 obstructs reading factorisation from Z[sqrt 5] modulo 2 uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Index 2 obstructs reading factorisation from Z[sqrt 5] modulo 2 makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Index 2 obstructs reading factorisation from Z[sqrt 5] modulo 2 makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ],
+      "routine_steps": []
+    }
+  }
+}

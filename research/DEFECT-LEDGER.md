@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ e02aee4be4be by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 8ebb08a276e8 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 5724 |
-| now mechanically prevented | 234 |
+| defects caught before publication | 6432 |
+| now mechanically prevented | 255 |
 | escaped to publication | 1 |
 | still open | 27 |
 
@@ -500,6 +500,41 @@
 | artifact-overwritten |  |  | 1 |  |  |  |
 | citation-truncated |  |  |  | 1 |  |  |
 | unsupported-universal-property |  |  |  | 1 |  |  |
+
+## frontier-31a — 708 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross | 7-judge | 8-adjudicate |
+|---|---|---|---|---|---|
+| ill-formed | 5 | 77 |  |  |  |
+| other | 2 | 59 | 5 |  |  |
+| reader-repair |  | 60 |  |  |  |
+| invalid-inference | 7 | 14 |  |  | 35 |
+| missing-hypothesis | 4 | 13 | 1 | 1 | 34 |
+| citation-missing | 2 | 4 |  |  | 30 |
+| scheduler-race | 33 |  |  |  |  |
+| unsupported-inference | 17 | 8 |  |  | 4 |
+| unlicensed-inference | 3 | 26 |  |  |  |
+| citation-inaccurate | 4 | 7 | 3 |  | 13 |
+| invalid-witness | 12 | 1 | 2 |  | 9 |
+| false-or-overstrong-statement | 3 | 6 |  | 1 | 13 |
+| missing-choice-scope | 1 | 6 |  |  | 16 |
+| undefined-notation | 3 | 2 |  |  | 17 |
+| invalid-refutation | 12 | 4 | 2 |  | 2 |
+| ill-typed-construction | 1 | 5 |  |  | 13 |
+| ill-typed-claim | 3 | 1 |  |  | 14 |
+| scope-loss |  | 16 |  |  |  |
+| contract-mismatch | 12 | 1 | 2 |  |  |
+| missing-case | 2 | 6 |  |  | 2 |
+| false-or-overstrong-title |  | 2 |  |  | 7 |
+| false-claim | 1 | 5 |  |  | 2 |
+| citation-inflated |  | 1 |  |  | 6 |
+| false-computation |  | 2 |  |  | 4 |
+| false-boundary-disposition |  | 4 |  |  | 1 |
+| missing-map |  |  |  |  | 5 |
+| artifact-overwritten |  | 4 |  |  |  |
+| arithmetic-error |  | 1 |  |  |  |
+| frontmatter-schema |  | 1 |  |  |  |
+| citation-misattributed |  |  |  |  | 1 |
 
 ## pre-frontier-13 — 3 row(s)
 

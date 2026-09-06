@@ -1,4 +1,4 @@
-# Step 8 — fatal-only configured-judge adjudication, `{{run}}`
+# Step 8 — fatal-only judge and reader-warning adjudication, `{{run}}`
 
 The generated scope header supplies the owned pages, items, seams, rejections,
 and incoming alerts. Read each owned rejection against the current item and its
@@ -18,12 +18,24 @@ with the required tuple, pre-edit guard `item_sha256`, and outcome. Only
 contract, impact, or judge changes. The engine rejudges exactly changed items
 against the configured judge set.
 
+Every entry under **Step-7 reader warnings** also requires an owning-group
+decision in `research/{{run}}-step8-alert-decisions.jsonl`. Use `not_defect` or
+`nonfatal` when no content change is warranted, and `covered_by_rejection` when
+an exact judge rejection already licenses the same repair. If a Step-7 reader
+warning is independently `confirmed_fatal`, record `defect_type`, the full
+pre-edit `itemHashGuard` digest as `item_sha256`, the full repaired digest as
+`post_sha256`, repair the item before returning, and add exactly one matching
+defect-ledger row whose structured `adjudication_ref` contains this `alert_id`,
+`item`, and `item_sha256`. Only Step-7 reader warnings have this direct fatal
+licence; later cross-group alerts raised while
+adjudicating a judge rejection still require a targeted judge rejection.
+
 Every `confirmed_fatal` row must also set `defect_type` to exactly one of
 `logic`, `dependency_citation`, or `other`. Descriptive defect-ledger subclasses
 such as `invalid-inference`, `false-claim`, or `ill-typed-construction` are not
 valid adjudication `defect_type` values.
 
-For an incoming alert, append the owning-group disposition to
+For every reader warning, append the owning-group disposition to
 `research/{{run}}-step8-alert-decisions.jsonl`. A defect in another group is a
 `research/{{run}}-step8-cross-group.jsonl` alert, not permission to repair it. Use
 `published-repairs.mjs append` with a namespaced temporary row for an obvious

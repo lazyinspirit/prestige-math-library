@@ -2,6 +2,11 @@
 // Role caps, sandboxes, effort, and web access remain in tools/dispatch.mjs.
 
 export const MODELS = Object.freeze({
+  astra: Object.freeze({
+    id: process.env.ASTRA_MODEL ?? 'gpt-6-astra',
+    runner: 'codex',
+    family: 'openai',
+  }),
   sol: Object.freeze({
     id: process.env.SOL_MODEL ?? 'gpt-5.6-sol',
     runner: 'codex',
@@ -17,35 +22,21 @@ export const MODELS = Object.freeze({
     runner: 'codex',
     family: 'openai',
   }),
-  deepseek: Object.freeze({
-    id: process.env.DEEPSEEK_MODEL ?? 'deepseek-v4-pro',
-    runner: 'codex',
-    family: 'deepseek',
-  }),
 });
 
 // Stage-scoped overrides. A role still owns its sandbox, web access and cap;
 // a profile changes only the model/provider, reasoning tier and context window.
-// DeepSeek calls the top reasoning tier `max`; the public profile name retains
-// the owner's `xhigh` terminology and the dispatcher records both spellings.
 export const MODEL_PROFILE_NAMES = Object.freeze({
-  deepseekXhigh1m: 'deepseek-v4-pro-xhigh-1m',
   terraHigh: 'gpt-5.6-terra-high',
-  terraXhigh: 'gpt-5.6-terra-xhigh',
 });
 
+// Controllers started before the 2026-09-05 lane change retain this literal
+// profile name in memory for Step-6 refuters and Step-7 group readers. Keep it
+// resolvable at the new high effort until those live runs terminate; fresh
+// controllers select `terraHigh` directly from their stage definitions.
+const LIVE_TERRA_XHIGH_COMPAT = 'gpt-5.6-terra-xhigh';
+
 export const MODEL_PROFILES = Object.freeze({
-  [MODEL_PROFILE_NAMES.deepseekXhigh1m]: Object.freeze({
-    model: MODELS.deepseek.id,
-    runner: MODELS.deepseek.runner,
-    family: MODELS.deepseek.family,
-    provider: 'deepseek',
-    effort: 'max',
-    requestedEffort: 'xhigh',
-    contextWindow: 1_048_576,
-    effectiveContextFloor: 995_000,
-    attestContext: true,
-  }),
   [MODEL_PROFILE_NAMES.terraHigh]: Object.freeze({
     model: MODELS.terra.id,
     runner: MODELS.terra.runner,
@@ -55,13 +46,13 @@ export const MODEL_PROFILES = Object.freeze({
     requestedEffort: 'high',
     contextWindow: 872_000,
   }),
-  [MODEL_PROFILE_NAMES.terraXhigh]: Object.freeze({
+  [LIVE_TERRA_XHIGH_COMPAT]: Object.freeze({
     model: MODELS.terra.id,
     runner: MODELS.terra.runner,
     family: MODELS.terra.family,
     provider: 'openai',
-    effort: 'xhigh',
-    requestedEffort: 'xhigh',
+    effort: 'high',
+    requestedEffort: 'high',
     contextWindow: 872_000,
   }),
 });
@@ -71,6 +62,7 @@ export const LANES = Object.freeze({
   secondary: 'terra',
   partition: 'terra',
   adjudication: 'sol',
+  finalAdjudication: 'astra',
 });
 
 export const JUDGE_LINEUPS = Object.freeze({
@@ -80,7 +72,7 @@ export const JUDGE_LINEUPS = Object.freeze({
 export const KNOWN_JUDGES = Object.freeze([...new Set(Object.values(JUDGE_LINEUPS).flat())]);
 export const DEFAULT_LINEUP = 'terra';
 
-// Each item judge is ephemeral, but keep Terra's advertised context window
+// Each item judge is ephemeral, but keep the active lane's context window
 // explicit so an unusually large target and its compact interfaces fit without
 // inheriting user configuration.
 export const JUDGE_CONTEXT_WINDOW = 872_000;

@@ -57,8 +57,9 @@ measurements at the end; none exceeds the sixty-item split threshold.
   FA cite forward.  FA's expressly reserved reuse id
   `ex-fourier-partial-sum-operators-and-uniform-boundedness` is consumed
   on FR-5.  The exact id
-  `thm-wiener-lemma-for-absolutely-convergent-fourier-series` remains on FA-18
-  and is cited by FR-3; FR does not re-mint it.
+  `thm-wiener-lemma-for-absolutely-convergent-fourier-series` is owned by FR-3,
+  where its circle-algebra hypotheses and consequences are developed together;
+  FA-18 retains the broader Gelfand theory but does not duplicate this theorem.
 - Functional analysis retains the transform, Schwartz space, distributions,
   tempered distributions, and Plancherel.  Its Schwartz Poisson formula and
   Schwartz Heisenberg theorem retain their exact ids and are cited by FR-17
@@ -298,10 +299,10 @@ jump from extrema at points approaching the jump.
 
 **A page:** `absolute-convergence-and-the-wiener-algebra`
 **B page:** `absolute-convergence-and-the-wiener-algebra-examples`
-**Requires:** FR-1, FR-2, FA-18
-`thm-wiener-lemma-for-absolutely-convergent-fourier-series`, and Parseval from
-the Hilbert-series page; item 6 has the declared forward citation to PDE-11
-`weak-derivatives-and-sobolev-spaces`.  **Sources read:** L ch. 4, pp. 27–30; G §3.3,
+**Requires:** FR-1, FR-2, and Parseval from the Hilbert-series page. The page
+develops the circle-specific weak-derivative interface and Wiener inversion
+locally; it neither cites forward to PDE-11 nor waits for the broader FA-17/18
+pages. **Sources read:** L ch. 4, pp. 27–30; G §3.3,
 pp. 192–202; T §1, PDF pp. 1–18.
 
 | # | item id (kind) and one-line statement | for | statement provenance | proof provenance | component rationale |
@@ -311,9 +312,11 @@ pp. 192–202; T §1, PDF pp. 1–18.
 | 3 | `thm-wiener-algebra-is-a-banach-algebra` (theorem) — pointwise multiplication corresponds to discrete convolution and $\|fg\|_A\le\|f\|_A\|g\|_A$. | Makes inversion meaningful. | literature-derived | ai-altered | L ch. 4; cites $\ell^1$ completeness. |
 | 4 | `lem-ltwo-fourier-decay-implies-absolute-convergence-by-cauchy-schwarz` (lemma) — weighted $\ell^2$ control with weight inverse in $\ell^2$ implies $\ell^1$ coefficients. | Kernel of Bernstein's theorem. | literature-derived | ai-altered | L/G; separates the sequence estimate. |
 | 5 | `thm-bernstein-absolute-convergence-theorem` (theorem) — $f\in C^\alpha(\mathbb T)$ with $\alpha>1/2$ has $\widehat f\in\ell^1$. | Required absolute-convergence threshold. | literature-derived | ai-altered | L ch. 4; difference method plus item 4. |
-| 6 | `cor-one-ltwo-derivative-implies-an-absolutely-convergent-fourier-series` (corollary) — $f\in L^2$ with weak derivative in $L^2$ has $\widehat f\in\ell^1$. | Cheap Sobolev-flavoured criterion without redefining PDE spaces. | literature-derived | ai-altered | G §3.3.3; cites PDE weak derivative. |
-| 7 | `rem-wiener-lemma-interface-for-the-circle-algebra` (remark) — cite FA-18's exact theorem: a nowhere-zero $f\in A(\mathbb T)$ has $1/f\in A(\mathbb T)$. | Satisfies the Wiener-lemma requirement without duplicate minting. | literature-derived | not-supplied | FA-18 owns statement and proof. |
-| 8 | `cor-holomorphic-functional-calculus-in-the-wiener-algebra` (corollary) — if $f\in A(\mathbb T)$ and $\Phi$ is holomorphic near $f(\mathbb T)$, then $\Phi\circ f\in A(\mathbb T)$. | Shows what Wiener inversion is for. | literature-derived | ai-altered | L ch. 4 plus FA holomorphic functional calculus. |
+| 6 | `def-periodic-ltwo-weak-derivative` (definition) — define the weak derivative directly on $\mathbb T$ by periodic test functions. | Keeps the Fourier claim closed without importing the later general Sobolev page. | literature-derived | not-applicable | Periodic specialization of the standard weak-derivative definition. |
+| 7 | `lem-fourier-coefficients-of-a-periodic-weak-derivative` (lemma) — $\widehat g(k)=2\pi i k\widehat f(k)$ when $g$ is the periodic weak derivative of $f$. | Supplies the exact weighted-$\ell^2$ bridge used next. | literature-derived | ai-altered | Test against the smooth characters. |
+| 8 | `cor-one-ltwo-derivative-implies-an-absolutely-convergent-fourier-series` (corollary) — $f\in L^2$ with weak derivative in $L^2$ has $\widehat f\in\ell^1$. | Cheap Sobolev-flavoured criterion without redefining general PDE spaces. | literature-derived | ai-altered | G §3.3.3 plus items 6–7. |
+| 9 | `thm-wiener-lemma-for-absolutely-convergent-fourier-series` (theorem) — a nowhere-zero $f\in A(\mathbb T)$ has $1/f\in A(\mathbb T)$. | Gives the page's named inverse-closedness theorem. | literature-derived | literature-derived | L Theorem 4.3 and Müger Theorem 19.9. |
+| 10 | `cor-holomorphic-functional-calculus-in-the-wiener-algebra` (corollary) — if $f\in A(\mathbb T)$ and $\Phi$ is holomorphic near $f(\mathbb T)$, then $\Phi\circ f\in A(\mathbb T)$. | Shows what Wiener inversion is for. | literature-derived | ai-altered | Cauchy integral formula plus item 9 and $A(\mathbb T)$ completeness. |
 
 **B-page leaves.**
 

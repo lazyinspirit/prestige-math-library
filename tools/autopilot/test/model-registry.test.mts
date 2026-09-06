@@ -21,9 +21,15 @@ const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 test('every registered model names its Codex provider family', () => {
   for (const model of Object.values(MODELS)) {
     assert.equal(model.runner, 'codex');
-    if (model.family === 'openai') assert.match(model.id, /^gpt-/);
-    else assert.equal(model.family, 'deepseek');
+    assert.equal(model.family, 'openai');
+    assert.match(model.id, /^gpt-/);
   }
+});
+
+test('Astra is registered as the final-adjudication lane', () => {
+  assert.equal(MODELS.astra.id, 'gpt-6-astra');
+  assert.equal(LANES.finalAdjudication, 'astra');
+  assert.deepEqual(lane('finalAdjudication' as any), { runner: 'codex', model: MODELS.astra.id });
 });
 
 test('every lineup names unique models the registry knows', () => {
@@ -55,7 +61,7 @@ test('known judges exactly cover configured lineups', () => {
   assert.deepEqual([...KNOWN_JUDGES], [...new Set(Object.values(JUDGE_LINEUPS).flat())]);
 });
 
-test('judge requests xhigh reasoning and Terra\'s configured context window', () => {
+test('judge requests xhigh reasoning and the configured context window', () => {
   const source = readFileSync(join(REPO, 'tools/judge.mts'), 'utf8');
   assert.match(source, /model_reasoning_effort="xhigh"/);
   assert.match(source, /model_context_window=\$\{JUDGE_CONTEXT_WINDOW\}/);

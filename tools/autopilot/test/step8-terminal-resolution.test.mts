@@ -9,7 +9,10 @@ import {
   finalAdjudicatorHistoricalPredecessorProblems,
   finalAdjudicatorPredecessorProblems,
   finalAdjudicatorQueueProblems,
+  parseTerminalResolutions,
+  TERMINAL_RESOLUTION_VERSION,
 } from '../../step8-terminal-resolution.mjs';
+import { MODELS } from '../../models.mjs';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const ITEM = 'ex-the-mobius-band-presented-by-two-regular-patches';
@@ -41,6 +44,53 @@ function resolution(now: any) {
   };
 }
 
+test('current final-adjudicator receipts require Astra medium after one Terra rejudge', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'step8-terminal-v3-'));
+  try {
+    const path = join(dir, 'terminal.jsonl');
+    const row: any = {
+      version: TERMINAL_RESOLUTION_VERSION,
+      run: 'fixture', stage: '8-rejudge', id: 'thm-demo',
+      resolved_by: 'final-adjudicator', disposition: 'accepted-after-review',
+      rejudge_rounds_exhausted: 1, exhausted_at: '2026-09-05T00:00:00.000Z',
+      failure_evidence: {
+        cycle_ids: ['terra-rejudge-1'],
+        closure_path: 'research/fixture-closure.json', closure_sha256: 'a'.repeat(64),
+        unresolved_as: 'unadjudicated',
+      },
+      context_sha256: 'b'.repeat(64), item_sha256: 'c'.repeat(64),
+      basis: 'Astra independently adjudicated the Terra rejection against the current proof and its exact dependencies.',
+      final_adjudicator: {
+        group: 'a', model: MODELS.astra.id, effort: 'medium',
+        queue_path: 'research/fixture-fa.json', queue_sha256: 'd'.repeat(64),
+        queue_position: 1, queue_total: 1, dispatch_label: 'step8-fa-a-round-1',
+        source_verification: 'familiar', authoritative_sources: [],
+      },
+      at: '2026-09-05T00:01:00.000Z',
+    };
+    writeFileSync(path, `${JSON.stringify(row)}\n`);
+    assert.deepEqual(parseTerminalResolutions(path).errors, []);
+    writeFileSync(path, `${JSON.stringify({
+      ...row, final_adjudicator: { ...row.final_adjudicator, model: MODELS.sol.id, effort: 'xhigh' },
+    })}\n`);
+    assert.match(parseTerminalResolutions(path).errors.join('\n'), /gpt-6-astra\/medium/);
+    const { final_adjudicator: _ignored, ...ownerRow } = row;
+    writeFileSync(path, `${JSON.stringify({ ...ownerRow, resolved_by: 'owner' })}\n`);
+    assert.match(parseTerminalResolutions(path).errors.join('\n'), /only by final-adjudicator/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('current terminal recording cannot bypass Astra with an owner or session resolution', () => {
+  const result = run(['tools/step8-terminal-resolution.mjs', 'record',
+    '--run', 'fixture', '--id', ITEM, '--resolved-by', 'session',
+    '--disposition', 'accepted-after-review',
+    '--basis', 'This deliberately long basis would otherwise satisfy the evidence-length check but may not bypass Astra.']);
+  assert.equal(result.status, 2);
+  assert.match(result.stderr, /--resolved-by final-adjudicator/);
+});
+
 test('one current Terra verdict completes singleton judge coverage', () => {
   const dir = mkdtempSync(join(tmpdir(), 'step8-terra-coverage-'));
   try {
@@ -51,7 +101,7 @@ test('one current Terra verdict completes singleton judge coverage', () => {
     writeFileSync(manifest, `${JSON.stringify([{ id: 'fixture-page', items: [{ id: ITEM, deps: [] }] }])}\n`);
     writeFileSync(ledger, `${JSON.stringify({
       id: ITEM,
-      model: 'gpt-5.6-terra',
+      model: MODELS.terra.id,
       keep: true,
       context_sha256: now.context_sha256,
       item_sha256: now.item_sha256,
@@ -125,9 +175,17 @@ test('stamp verification accepts terminal resolution but writes no pass stamp', 
   const dir = mkdtempSync(join(tmpdir(), 'step8-terminal-stamp-'));
   try {
     const receipt = join(dir, 'terminal.jsonl');
-    writeFileSync(receipt, `${JSON.stringify(resolution(currentHashes()))}\n`);
+    const ledger = join(dir, 'judge.jsonl');
+    const now = currentHashes();
+    writeFileSync(receipt, `${JSON.stringify(resolution(now))}\n`);
+    writeFileSync(ledger, `${JSON.stringify({
+      id: ITEM, model: MODELS.terra.id, keep: false,
+      reason: 'Fixture rejection superseded by the exact terminal resolution.',
+      context_sha256: now.context_sha256, item_sha256: now.item_sha256,
+      at: '2026-09-05T00:00:00.000Z',
+    })}\n`);
     const result = run(['tools/apply-judge-stamps.mjs',
-      '--ledger', 'research/frontier-18-judge.jsonl', '--items', ITEM,
+      '--ledger', ledger, '--items', ITEM,
       '--terminal-resolutions', receipt, '--verify']);
     assert.equal(result.status, 0, result.stderr || result.stdout);
     assert.match(result.stdout, /1 terminal manual/);

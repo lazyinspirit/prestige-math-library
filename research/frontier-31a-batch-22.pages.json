@@ -1,0 +1,242 @@
+[
+  {
+    "order": 629,
+    "id": "logarithmic-space-nl-and-reachability",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Logarithmic Space, NL, and Reachability",
+    "companion": "logarithmic-space-nl-and-reachability-examples",
+    "requires": [
+      "time-and-space-hierarchy-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-read-only-input-logspace-machine",
+        "kind": "definition",
+        "title": "A read-only-input logarithmic-space machine",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace"
+        ]
+      },
+      {
+        "id": "def-l-and-nl",
+        "kind": "definition",
+        "title": "The classes L and NL",
+        "strategy": "Use the earlier read-only-input work-space interface to identify L with DWORKSPACE(log n), while NL is the analogous nondeterministic class defined by the local read-only-input logarithmic-work-space machines. Keep these names distinct from the library's all-tapes DSPACE and NSPACE conventions.",
+        "deps": [
+          "def-read-only-input-logspace-machine",
+          "def-read-only-input-workspace-classes"
+        ]
+      },
+      {
+        "id": "lem-logspace-machines-have-polynomially-many-configurations",
+        "kind": "lemma",
+        "title": "Logspace machines have polynomially many configurations",
+        "strategy": "Count a fixed machine's finite control, its O(log n)-cell work-tape contents and head positions, and its O(n)-position read-only input head. Absorb machine-dependent constants into one polynomial, then delete repeated configurations from an accepting computation to obtain a simple path.",
+        "deps": [
+          "def-read-only-input-logspace-machine"
+        ]
+      },
+      {
+        "id": "def-logspace-many-one-reduction",
+        "kind": "definition",
+        "title": "Logspace many-one reduction",
+        "deps": [
+          "def-read-only-input-logspace-machine"
+        ]
+      },
+      {
+        "id": "lem-logspace-reductions-compose",
+        "kind": "lemma",
+        "title": "Logspace many-one reductions compose",
+        "strategy": "Simulate the second transducer on a virtual read-only output tape of the first. Recompute a requested first-stage output bit from the original input, prove the first output has polynomial length, and retain only the output-head index and the two logarithmic work tapes. State the resulting closure transfer for L and NL.",
+        "deps": [
+          "def-l-and-nl",
+          "def-logspace-many-one-reduction"
+        ]
+      },
+      {
+        "id": "def-directed-st-connectivity",
+        "kind": "definition",
+        "title": "Directed s-t connectivity",
+        "deps": [
+          "def-multigraph-loop-and-digraph",
+          "def-directed-walk-trail-path-cycle-and-strong-connectivity"
+        ]
+      },
+      {
+        "id": "thm-directed-st-connectivity-is-nl-complete",
+        "kind": "theorem",
+        "title": "Directed s-t connectivity is NL-complete",
+        "strategy": "For membership, nondeterministically retain the current vertex and a counter through at most |V|-1 moves. For hardness, map an input and a fixed logspace nondeterministic machine to its implicitly indexed configuration graph, with start and accepting vertices. Give a logspace bit-by-bit output procedure for the graph encoding and prove reachability exactly characterizes an accepting branch.",
+        "deps": [
+          "def-l-and-nl",
+          "lem-logspace-machines-have-polynomially-many-configurations",
+          "def-logspace-many-one-reduction",
+          "def-directed-st-connectivity"
+        ]
+      },
+      {
+        "id": "thm-read-only-input-savitch-simulation",
+        "kind": "theorem",
+        "title": "Savitch simulation into read-only-input deterministic work space",
+        "strategy": "For a fixed nondeterministic read-only-input machine using O(log n) writable work space, encode a configuration by its finite control, input-head position, work-tape contents, and work-head positions. Use the polynomial configuration bound to run the midpoint reachability recursion without storing the graph: a recursion depth of O(log n) stores O(log n)-bit configurations, hence O(log-squared n) work space. By the earlier DWORKSPACE definition, this is a deterministic read-only-input work-space bound; the input head remains read-only and is not charged. It is not an application of the prerequisite page's all-tapes NSPACE theorem.",
+        "deps": [
+          "def-read-only-input-logspace-machine",
+          "def-read-only-input-workspace-classes",
+          "lem-logspace-machines-have-polynomially-many-configurations"
+        ]
+      },
+      {
+        "id": "thm-nl-is-contained-in-dspace-log-squared-n",
+        "kind": "theorem",
+        "title": "NL is contained in read-only-input DWORKSPACE(log-squared n)",
+        "strategy": "Apply the preceding read-only-input Savitch simulation to the machine supplied by the local definition of NL. The simulator witnesses membership in the explicit local DWORKSPACE(log-squared n) class, whose convention charges writable work cells but not the read-only input. This does not assert the library's all-tapes DSPACE(log-squared n) bound (the direct all-tapes accounting would be DSPACE(n + log-squared n)), and it does not establish L=NL.",
+        "deps": [
+          "def-l-and-nl",
+          "def-read-only-input-workspace-classes",
+          "thm-read-only-input-savitch-simulation"
+        ]
+      },
+      {
+        "id": "def-inductive-reachable-vertex-count",
+        "kind": "definition",
+        "title": "Inductive counts of reachable vertices",
+        "deps": [
+          "def-directed-st-connectivity"
+        ]
+      },
+      {
+        "id": "lem-reachability-count-is-verifiable-in-nl",
+        "kind": "lemma",
+        "title": "A reachable-vertex count is verifiable in NL",
+        "strategy": "Given c_i, scan every vertex and guess a path of length at most i precisely for each vertex claimed reachable. Retain only a vertex index, path counter, running count, and the read-once certificate position; accept exactly when the verified total is c_i, using O(log n) space.",
+        "deps": [
+          "def-l-and-nl",
+          "def-directed-st-connectivity",
+          "def-inductive-reachable-vertex-count"
+        ]
+      },
+      {
+        "id": "lem-nonreachability-has-an-inductive-counting-certificate",
+        "kind": "lemma",
+        "title": "Nonreachability has an inductive counting certificate",
+        "strategy": "Start from c_0=1 and inductively certify each c_i. For every vertex, verify either a bounded positive path or, from c_{i-1}, that no predecessor lies in the prior reachable layer; require exactly c_i positives. At i=|V|-1 this accepts exactly when t was never counted, without guessing an unchecked universal negative.",
+        "deps": [
+          "def-inductive-reachable-vertex-count",
+          "lem-reachability-count-is-verifiable-in-nl"
+        ]
+      },
+      {
+        "id": "thm-immerman-szelepcsenyi-nl-equals-conl",
+        "kind": "theorem",
+        "title": "Immerman-Szelepcs\u00e9nyi theorem: NL equals coNL",
+        "strategy": "Apply inductive counting to an implicit, always-valid configuration graph with O(s)-bit vertex descriptions, then specialize to logspace.",
+        "deps": [
+          "def-read-only-input-logspace-machine",
+          "def-read-only-input-workspace-classes",
+          "def-l-and-nl",
+          "lem-nonreachability-has-an-inductive-counting-certificate"
+        ]
+      },
+      {
+        "id": "cor-nspace-is-closed-under-complement-above-logspace",
+        "kind": "corollary",
+        "title": "Read-only-input nondeterministic work space is closed under complement above logarithmic space",
+        "strategy": "Extract the general clause established by Immerman-Szelepcs\u00e9nyi: for every space-constructible s(n) strictly greater than log n, the languages accepted by read-only-input nondeterministic machines using O(s(n)) writable work space are closed under complement. State equality with the corresponding co-class by complementing twice, and distinguish this qualified transfer from deterministic state swapping, Savitch's simulation, and the prerequisite page's all-tapes NSPACE notation.",
+        "deps": [
+          "thm-immerman-szelepcsenyi-nl-equals-conl"
+        ]
+      },
+      {
+        "id": "def-logspace-uniform-circuit-family",
+        "kind": "definition",
+        "title": "A logspace-uniform Boolean circuit family",
+        "deps": [
+          "def-l-and-nl"
+        ]
+      },
+      {
+        "id": "def-p-complete-under-logspace-reductions",
+        "kind": "definition",
+        "title": "P-completeness under logspace reductions",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-logspace-many-one-reduction"
+        ]
+      },
+      {
+        "id": "lem-polynomial-time-computations-have-logspace-uniform-circuits",
+        "kind": "lemma",
+        "title": "Polynomial-time computations have logspace-uniform circuit families",
+        "strategy": "Unroll a fixed polynomial-time Turing-machine computation into a polynomial grid of local configuration-update gates. Index a gate by time, tape position, track, and bit; a logspace transducer emits its type and constant-size predecessor list from those indices. Prove the final gate is the machine's acceptance bit and quantify the polynomial size.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-logspace-uniform-circuit-family"
+        ]
+      },
+      {
+        "id": "thm-circuit-value-is-p-complete",
+        "kind": "theorem",
+        "title": "Circuit Value is P-complete",
+        "strategy": "Evaluate a topologically ordered Boolean circuit in polynomial time. For hardness, use the uniform computation circuit of an arbitrary P-machine, append the concrete input bits as constants, and have a logspace transducer stream the encoding. The resulting circuit evaluates to one exactly on accepting computations.",
+        "deps": [
+          "def-p-complete-under-logspace-reductions",
+          "lem-polynomial-time-computations-have-logspace-uniform-circuits"
+        ]
+      },
+      {
+        "id": "fs-nl-equals-conl-follows-by-state-swapping",
+        "kind": "false-statement",
+        "title": "NL equals coNL follows by swapping accepting and rejecting states",
+        "strategy": "Refute the inference by observing that nondeterministic acceptance is existential: swapping terminal labels recognizes the existence of a rejecting branch, not the absence of every accepting branch. Contrast it with inductive counting, which certifies the required universal nonreachability condition.",
+        "deps": [
+          "def-l-and-nl",
+          "thm-immerman-szelepcsenyi-nl-equals-conl"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 630,
+    "id": "logarithmic-space-nl-and-reachability-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Logarithmic Space, NL, and Reachability: Examples and Counterexamples",
+    "requires": [
+      "logarithmic-space-nl-and-reachability"
+    ],
+    "items": [
+      {
+        "id": "ex-logspace-reductions-compose",
+        "kind": "example",
+        "title": "Composing two logspace reductions through a virtual tape",
+        "strategy": "Use a reduction whose output bits encode a directed graph and a second reduction that queries selected graph bits. Recompute each requested first-stage bit from the original input, keeping only two output-head indices and the two logarithmic work tapes.",
+        "deps": [
+          "def-logspace-many-one-reduction",
+          "lem-logspace-reductions-compose"
+        ]
+      },
+      {
+        "id": "ex-circuit-value-is-p-complete",
+        "kind": "example",
+        "title": "A small computation tableau compiled to Circuit Value",
+        "strategy": "Take a fixed polynomial-time machine and a short input, display selected local configuration-update gates and the final acceptance gate, verify their values reproduce the run, and identify the indexed logspace loop that emits the circuit.",
+        "deps": [
+          "lem-polynomial-time-computations-have-logspace-uniform-circuits",
+          "thm-circuit-value-is-p-complete"
+        ]
+      },
+      {
+        "id": "cex-nl-equals-conl-follows-by-state-swapping",
+        "kind": "counterexample",
+        "title": "A nondeterministic branch tree where state swapping is not complementing",
+        "strategy": "Give one input with one accepting and one rejecting branch. After swapping terminal labels the machine still accepts through the former rejecting branch, whereas the language complement must reject because the original machine had an accepting branch.",
+        "deps": [
+          "def-l-and-nl",
+          "fs-nl-equals-conl-follows-by-state-swapping"
+        ]
+      }
+    ]
+  }
+]

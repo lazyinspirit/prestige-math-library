@@ -16,6 +16,7 @@ parts:
       - primitive-roots-and-unit-groups-modulo-n
       - positive-definite-binary-quadratic-forms-and-reduction
       - arithmetic-functions-and-dirichlet-convolution
+      - number-fields-rings-of-integers-and-discriminants
       - dirichlet-series-and-euler-products
       - absolute-values-completions-and-p-adic-numbers
   - part: quadratic-residues
@@ -29,6 +30,7 @@ parts:
       - chebyshev-bounds-and-mertens-theorems
       - hilbert-symbols-and-the-quadratic-local-global-principle
       - dirichlet-characters-l-functions-and-primes-in-progressions
+      - primitive-dirichlet-l-functions-and-functional-equations
 ---
 
 ## divisibility-and-primes
@@ -46,32 +48,28 @@ solubility decidable by a finite search.
 
 ## congruences-and-unit-groups
 
-Congruences modulo $n$ turn divisibility into arithmetic in quotient rings, so the Chinese
-remainder theorem splits moduli, Euler's totient counts units, and primitive roots describe
-the cyclic prime-modulus case. The same language governs positive-definite binary
-quadratic forms through discriminants, unimodular equivalence, and Gauss reduction, while
-arithmetic functions and Dirichlet convolution reorganize multiplicative information on
-the integers. Dirichlet series then package that arithmetic analytically on half-planes,
-where absolute convergence licenses Euler products, logarithmic derivatives, and
-zeta-series identities for Möbius, divisor, and totient functions. Absolute values and
-completions close the part by classifying the places of $\mathbb Q$ and building
-$\mathbb Q_p$ and $\mathbb Z_p$ with their ultrametric topology, digit expansions, and
-Hensel-style lifting.
+Congruences modulo $n$ give quotient-ring arithmetic: the Chinese remainder theorem splits
+moduli, Euler's totient counts units, and primitive roots describe the cyclic prime-modulus
+case. Positive-definite binary quadratic forms bring discriminants, unimodular equivalence,
+and Gauss reduction into the same language, while arithmetic functions and Dirichlet
+convolution organize multiplicative information. For finite $K/\mathbb Q$, its maximal
+order $\mathcal O_K$ is a free $\mathbb Z$-module of rank $[K:\mathbb Q]$ and other orders
+have finite index. Trace, norm, and the embedding matrix define discriminants; squared
+change-of-basis determinants give a nonzero field invariant, quadratic formulas, integral
+bases, signatures, and the Dedekind property. Dirichlet series supply Euler products and
+logarithmic derivatives, while completions build $\mathbb Q_p$ and $\mathbb Z_p$ with digit
+expansions and Hensel-style lifting.
 
 ## quadratic-residues
 
-Quadratic residues ask which classes modulo an odd prime are squares, and the Legendre
-symbol, Euler's criterion, Gauss's lemma, quadratic reciprocity, and the Jacobi symbol
-give the multiplicative answer. The same congruence tools settle sums of squares,
-including the obstruction $4^a(8m+7)$ and Lagrange's four-square theorem. Average-order
-arguments then give summatory formulas for $\tau$, $\sigma$, and $\varphi$, density
-$6/\pi^2$ for coprime pairs, and mean order $\pi$ for $r_2$. The Chebyshev and Mertens
-page adds $\theta$ and $\psi$, finite proofs of Chebyshev bounds and Bertrand's postulate,
-and the three Mertens theorems, yielding divergence of $\sum 1/p$ and vanishing of the
-Euler prime product without the prime number theorem. The local-global branch passes to
-$\mathbb R$ and the fields $\mathbb Q_p$: Hilbert-symbol formulas and reciprocity reduce
-the isotropy of rational quadratic forms to their local behavior, culminating in
-Hasse-Minkowski over $\mathbb Q$. In a separate analytic branch, Dirichlet characters and
-their $L$-functions isolate reduced residue classes; nonvanishing on the relevant boundary
-of the half-plane gives their Dirichlet densities and infinitely many primes in each such
-arithmetic progression.
+Quadratic residues are controlled by the Legendre symbol, Euler's criterion, Gauss's lemma,
+reciprocity, and the Jacobi symbol. Those tools also settle sums of squares, including
+$4^a(8m+7)$ and Lagrange's theorem. Average orders of $\tau$, $\sigma$, and $\varphi$, the
+density of coprime pairs, and the mean order of $r_2$ lead to Chebyshev and Mertens
+estimates, Bertrand's postulate, divergence of $\sum 1/p$, and the vanishing Euler product.
+Hilbert symbols reduce rational quadratic-form isotropy to $\mathbb R$ and $\mathbb Q_p$,
+culminating in Hasse--Minkowski. Dirichlet characters and $L$-functions isolate residue
+classes. At the conductor, primitive characters, Gauss sums, parity, and twisted Poisson
+summation yield analytic continuation and
+$\Lambda(s,\chi)=\varepsilon(\chi)\Lambda(1-s,\overline\chi)$ with its root number and
+trivial zeros; the primitive principal character modulo $1$ is the zeta exception.

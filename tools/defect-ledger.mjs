@@ -16,7 +16,8 @@
 //   node tools/defect-ledger.mjs validate [--run R] [--ledger <path>]
 //   node tools/defect-ledger.mjs stats    [--by f1,f2] [--leakage] [--recurrence] [--coverage] [--run R] [--json]
 //   node tools/defect-ledger.mjs render   [--out research/DEFECT-LEDGER.md]
-//   node tools/defect-ledger.mjs check    --run R --adjudications <adj.jsonl> [--closure <closure.json>]
+//   node tools/defect-ledger.mjs check    --run R --adjudications <adj.jsonl> [--reader-decisions <decisions.jsonl>]
+//                                         [--closure <closure.json>]
 //                                         [--view research/DEFECT-LEDGER.md] [--no-open]
 //
 // THE VIEW IS GENERATED, AND ITS HEADER SAYS SO. `research/DEFECT-LEDGER.md`
@@ -440,19 +441,23 @@ if (cmd === 'stats') {
         note: 'present in 2+ runs with no mechanical prevention — a design input for the next run' }));
   }
   if (argv.includes('--coverage')) {
-    // A run with confirmed_fatal adjudications and zero ledger rows is the
+    // A run with confirmed_fatal judge/reader adjudications and zero ledger rows is the
     // ledger going stale — surfaced at the START of the next run via doctor.
     const runsWithRows = new Set(loadLedger().map((r) => r.run));
-    const holes = [];
+    const fatalByRun = new Map();
     for (const dir of ['research', 'research/audit']) {
       if (!existsSync(dir)) continue;
-      for (const f of readdirSync(dir).filter((x) => x.endsWith('-judge-adjudications.jsonl'))) {
-        const run = f.replace('-judge-adjudications.jsonl', '');
+      for (const f of readdirSync(dir).filter((x) => x.endsWith('-judge-adjudications.jsonl')
+        || x.endsWith('-step8-alert-decisions.jsonl'))) {
+        const run = f.replace(/-(?:judge-adjudications|step8-alert-decisions)\.jsonl$/, '');
         const fatal = readFileSync(join(dir, f), 'utf8').split('\n')
           .filter((l) => l.includes('"confirmed_fatal"')).length;
-        if (fatal && !runsWithRows.has(run)) holes.push({ run, confirmed_fatal: fatal });
+        if (fatal) fatalByRun.set(run, (fatalByRun.get(run) ?? 0) + fatal);
       }
     }
+    const holes = [...fatalByRun.entries()]
+      .filter(([run]) => !runsWithRows.has(run))
+      .map(([run, confirmed_fatal]) => ({ run, confirmed_fatal }));
     out.coverage = { runs_with_fatal_and_no_rows: holes };
   }
   console.log(asJson ? JSON.stringify(out, null, 2) : Object.entries(out).map(([k, v]) =>
@@ -470,11 +475,13 @@ if (cmd === 'render') {
 if (cmd === 'check') {
   const run = opt('run');
   const adjPath = opt('adjudications');
+  const readerDecisionsPath = opt('reader-decisions');
   const closurePath = opt('closure');
   if (!run || !adjPath) { console.error('check needs --run and --adjudications'); process.exit(2); }
   const rows = loadLedger();
   const mine = rows.filter((r) => r.run === run);
   const errs = validate(rows, run);
+  const references = (r) => (r.adjudication_ref ?? []).filter((ref) => ref && typeof ref === 'object');
 
   // (a) exact-hash bijection: every confirmed_fatal adjudication row appears in
   // EXACTLY ONE ledger row's adjudication_ref — the anti-double-count clause.
@@ -489,7 +496,6 @@ if (cmd === 'check') {
       // not an ownership key. Prefer exact structured references; fall back to
       // old item-only references only when no exact owner exists, preserving
       // pre-contract ledgers without letting them double-own a current row.
-      const references = (r) => (r.adjudication_ref ?? []).filter((ref) => ref && typeof ref === 'object');
       const sameItem = (r, ref) => a.item_sha256 ? ref.item_sha256 === a.item_sha256 : r.subject === a.id;
       const exactOwners = mine.filter((r) => references(r).some((ref) => sameItem(r, ref)
         && (!ref.id || ref.id === a.id)
@@ -501,6 +507,21 @@ if (cmd === 'check') {
       const owners = exactOwners.length ? exactOwners : legacyOwners;
       if (owners.length === 0) errs.push(`confirmed_fatal on ${a.id} (${a.model ?? '?'}) has no ledger row — the defect the adjudicator confirmed was never recorded`);
       if (owners.length > 1) errs.push(`confirmed_fatal on ${a.id} appears in ${owners.length} rows (${owners.map((o) => o.defect_id).join(', ')}) — one defect, one row`);
+    }
+  }
+
+  // Step-7 reader warnings may independently license fatal repairs. They use
+  // alert ids rather than judge tuples, but carry the same one-defect/one-row
+  // obligation and exact pre-edit item guard.
+  if (readerDecisionsPath && existsSync(readerDecisionsPath)) {
+    const fatals = readFileSync(readerDecisionsPath, 'utf8').split('\n').filter(Boolean)
+      .map((l) => { try { return JSON.parse(l); } catch { return null; } })
+      .filter((a) => a?.outcome === 'confirmed_fatal');
+    for (const a of fatals) {
+      const owners = mine.filter((r) => references(r).some((ref) =>
+        ref.alert_id === a.alert_id && ref.item === a.item && ref.item_sha256 === a.item_sha256));
+      if (owners.length === 0) errs.push(`confirmed_fatal reader warning ${a.alert_id} on ${a.item} has no ledger row — the defect the adjudicator confirmed was never recorded`);
+      if (owners.length > 1) errs.push(`confirmed_fatal reader warning ${a.alert_id} on ${a.item} appears in ${owners.length} rows (${owners.map((o) => o.defect_id).join(', ')}) — one defect, one row`);
     }
   }
 

@@ -82,7 +82,7 @@ test('Step 10 mechanically reconciles and renders every fatal row', () => {
     const report = readFileSync(join(root, 'research', 'demo-step10-report.md'), 'utf8');
     assert.equal((report.match(/demo-D001/g) ?? []).length, 1);
     assert.equal((report.match(/demo-D002/g) ?? []).length, 1);
-    assert.match(report, /after the 2-cycle cap/,
+    assert.match(report, /after the 1-rejudge cap/,
       'the report must derive the executable Step-8 cap instead of retaining stale prose');
     assert.doesNotMatch(report, /three-round cap/);
     result = runTool(root, 'check');

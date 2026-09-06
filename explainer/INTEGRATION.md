@@ -202,10 +202,10 @@ results. So if the checker's rule changes, change `stratify()` and the film
 re-derives itself; and if you edit a step's `cites`, the phases move on their
 own, exactly as they would on disk.
 
-**The judge lanes.** Both pages name them **DeepSeek V4 Pro** and **Claude
-Opus 5** (owner instruction, 2026-08-05; second lane renamed 2026-08-23). Note
-that this is `JUDGE_LINEUP=`
-`deepseek+opus`, the production lineup used by `tools/judge.mts` and
-`tools/judge-sweep.mjs`. If the default moves, the lanes are named in one place each:
-`M.laneA` / `M.laneB` plus the step-7 narration in `build-workflow.html`, and
-`actorSlot()` plus `finding()` in `authoring-and-repair.html`.
+**The verification lanes.** Both pages show the current step-7 split: stateless
+Terra item judges and read-only Terra whole-group readers. The production model
+binding lives in `tools/models.mjs`; `tools/judge.mts` and
+`tools/judge-sweep.mjs` consume that registry. If the binding moves, update the
+lane names in `M.laneA` / `M.laneB` and the step-7 narration in
+`build-workflow.html`, plus `actorSlot()` and `finding()` in
+`authoring-and-repair.html`.

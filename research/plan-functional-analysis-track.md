@@ -1409,7 +1409,7 @@ really lands in $C_0$.
 11. `rem-linear-dugundji-extension-remains-topological` (remark, L/NS) — exact theorem and its paracompactness/choice seam.
 12. `ex-c-zero-of-a-locally-compact-space` — evaluations identify $X$ with $\Delta(C_0(X))$, including a noncompact example where the algebra has no unit.
 13. `ex-unitization-corresponds-to-one-point-compactification` — $\widetilde{C_0(X)}\cong C(X^+)$ and the added character is evaluation at infinity.
-14. `thm-wiener-lemma-for-absolutely-convergent-fourier-series` — if a continuous function on the circle has absolutely summable Fourier coefficients and vanishes nowhere, its reciprocal also has absolutely summable Fourier coefficients; prove it from invertibility in $\ell^1(\mathbb Z)$ and the character computation.
+14. `rem-wiener-lemma-is-developed-on-the-fourier-analysis-track` (remark) — point to FR-3's circle-specific theorem as an application of the character computation, without duplicating its statement or proof on this examples page.
 
 ### FA-19 — Continuous functional calculus for self-adjoint and normal operators
 
@@ -2698,7 +2698,7 @@ machine-auditable.
 | Mu §11.2 | `def-isometry-coisometry-and-partial-isometry`; `thm-partial-isometry-characterizations` |
 | Mu §11.6 | `def-numerical-range-and-numerical-radius`; `thm-numerical-radius-is-an-equivalent-operator-norm` |
 | Mu §13.1 | `def-point-continuous-and-residual-spectrum`; `def-approximate-point-and-compression-spectrum`; `lem-relations-among-the-five-spectral-parts`; `thm-boundary-of-spectrum-lies-in-approximate-point-spectrum` |
-| Mu §19.2 | `thm-wiener-lemma-for-absolutely-convergent-fourier-series` |
+| Mu §19.2 | transferred to FR-3 `thm-wiener-lemma-for-absolutely-convergent-fourier-series`; FA-18 retains only a non-load-bearing cross-track remark |
 | Mu §A.2 | `thm-unconditional-convergence-equivalences` |
 | Mu §B.2.1 | `lem-dvoretzky-rogers-finite-block-estimate`; `thm-dvoretzky-rogers`; `cor-absolute-and-unconditional-convergence-agree-universally-iff-finite-dimensional` |
 | Mu §B.12.1 | `thm-toeplitz-hausdorff` |

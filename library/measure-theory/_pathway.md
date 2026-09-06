@@ -23,21 +23,19 @@ parts:
       - the-duality-of-lp-and-lq
       - the-maximal-function-and-lebesgue-differentiation
       - differentiation-of-monotone-functions-and-the-vitali-covering-theorem
+      - absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus
 ---
 
 ## sigma-algebras-and-borel-sets
 
-A sigma-algebra is the closure needed for countable additivity, and outer measure plus
-Caratheodory build Lebesgue measure, measurable functions, and integration. Convergence
-theorems, product and signed measures, Radon-Nikodym/Lebesgue decomposition, the $L^p$
-inequalities, density, convolution, mollifiers, and the duality of $L^p$ with $L^q$ turn
-that calculus into an analytic one. The maximal-function page brings it back to pointwise
-control: Vitali covering yields the Hardy-Littlewood weak $(1,1)$ estimate,
-interpolation gives $L^p$ boundedness, and those estimates drive Lebesgue
-differentiation, almost-everywhere Lebesgue points and density points, nicely shrinking
-differentiation bases, differentiation of measures, and the $L^1$ fundamental theorem of
-calculus. The final page supplies a one-dimensional Vitali route in detail: Dini derivatives
-and the rising-sun argument give almost-everywhere differentiability for monotone functions,
-fine interval covers characterize null sets, and the jump, absolutely continuous, and
-singular parts clarify both the sharp derivative bounds and the distinction between bounded
-variation and absolute continuity.
+A sigma-algebra supplies the closure for countable additivity; outer measure and
+Caratheodory build Lebesgue measure, measurable functions, and integration. Convergence,
+products and signed measures, Radon--Nikodym decomposition, the $L^p$ inequalities,
+density, convolution, and $L^p$--$L^q$ duality make this an analytic calculus. Vitali
+covering and the maximal function give weak $(1,1)$ and $L^p$ estimates, Lebesgue and density
+points, differentiation of measures, and the $L^1$ FTC. Dini derivatives, rising suns, fine
+covers, and the jump/absolutely-continuous/singular decomposition distinguish bounded
+variation from absolute continuity. Absolute continuity is the sharp Newton--Leibniz class:
+its derivative is integrable and its indefinite integral recovers the function.
+Banach--Zarecki adds continuity, bounded variation, and property $(N)$; integration by parts
+and increasing absolutely-continuous substitution hold, but arbitrary composition need not.

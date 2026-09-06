@@ -1,0 +1,9 @@
+# FA terminal evidence — queue position 23
+
+Disposition: repaired. Source status: familiar.
+
+Read current item, balanced Ext definition and full right-derived cohomological delta theorem, projective horseshoe and cohomology-connecting naturality, batch-8 Ext page/coverage conventions, proof contract, Sol adjudication and both Terra rejections. The original wrong-exactness argument is correctly repaired: Hom_A(-,N) is a left exact covariant functor on Aop, where supplied projective resolutions become injective resolutions. This gives the correct reversed sequence Mdoubleprime,M,Mprime and degree-n to n+1 boundary. The explicit enough/supplied/DC hypotheses suffice.
+
+The final Terra rejection is valid: the fixed-functor delta theorem alone does not state naturality in the coefficient N. Added a direct verification with a single projective horseshoe. Its Hom sequence is short exact because it is split degreewise; postcomposition by N→Nprime gives a ladder of such sequences and the published connecting naturality theorem makes the boundary squares commute. The horseshoe-to-supplied comparison acts by precomposition and commutes with that postcomposition, so transport preserves the squares. Thus the proof covers the coefficient variance separately from the sequence variance and includes the boundary out of Hom in degree zero. Zero objects cause no exceptions.
+
+This standard horseshoe and cohomology argument is familiar and was checked directly against the complete local dependencies; no external verification was needed. Updated this queued proof, manifest dependency list, and batch/merged contracts, removing the obsolete claim that Hom is right exact. No dependency was edited; statement and balance convention remain unchanged. Focused precheck precedes recording. Next action after the receipt is position 24; no mathematical obligation remains open.

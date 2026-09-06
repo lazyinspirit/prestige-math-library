@@ -81,9 +81,15 @@ at `high` reasoning effort.
 provider isolation, session handling, and output capture. The current judge
 lineup is the singleton `gpt-5.6-terra` lane. Following GPT-5.4's retirement
 from Codex with ChatGPT sign-in, ordinary agentic and secondary lanes use
-`gpt-5.6-terra`; Step-5 authoring, Step-6 readers, and all Step-9/10 agent
-dispatches use its `high` profile, while Step-6 refuters and Step-7 group
-readers use `xhigh`. Step-8 adjudication remains pinned to `gpt-5.6-sol`.
+`gpt-5.6-terra`; Step-5 authoring, Step-6 readers and refuters, Step-7 group
+readers, and all Step-9/10 agent dispatches use its `high` profile. Group Alpha
+review and adjudication use `gpt-5.6-sol` at `high`; Step-8 fatal adjudication
+remains on Sol at `xhigh`. Exhausted Step-8 final adjudication uses
+`gpt-6-astra` at `medium`.
+
+Usage or rate limits do not authorize changing these model assignments. Keep
+the configured lineup and report the provider blocker; any model substitution
+requires an explicit owner instruction.
 
 | Role | Build responsibility | Evidence |
 |---|---|---|
@@ -179,9 +185,8 @@ stream. Long or noisy agent runs therefore retain startup metadata and final
 diagnostics without risking a V8 string-limit crash before their result receipt
 is written; an explicit marker records any omitted middle output.
 
-Every agent uses a 200,000-token automatic compaction threshold counting total
-active context, except Step-8 `final-adjudicator`, which retains the model's
-default compaction behavior. Fresh and resumed dispatches use the same policy;
+Every agent, including Step-8 `final-adjudicator`, uses a 200,000-token automatic
+compaction threshold counting total active context. Fresh and resumed dispatches use the same policy;
 the nominal model window is unchanged. Stateless judges also receive the setting.
 This is a trigger, not a hard request-size ceiling: a large tool result can
 overshoot it. Agents read bounded chunks without skipping required mathematics,
@@ -278,14 +283,21 @@ Step-7 group Alphas still read their entire assigned groups against frozen text
 and emit schema-checked digests. Step 8 starts a fresh Sol adjudication from the
 mechanically rendered task and that durable digest; it does not replay the
 reader transcript. A failed digest gate rereads only the named bad groups.
+The initial Step-8 scope gate validates and routes reader warnings while allowing
+their dispositions to remain pending, because the owning group Alphas are the
+actors that write those dispositions. The strict scope gate runs again after
+adjudication and then requires every warning to have a valid owning-group answer.
 Write scope remains with the owning group, while cross-group discoveries become
-alerts requiring the owner's group disposition.
+alerts requiring the owner's group disposition. Every reader concern and alert,
+not only judge rejections, is a mechanically checked Sol adjudication
+obligation. A reader warning confirmed fatal on exact pre-edit bytes licenses
+its owning Sol group adjudicator to repair the item.
 
 Step-8 adjudicators have web search enabled. Whenever their mathematics is
 uncertain, their task requires them to verify the point against original
 sources and record the exact source support before deciding or repairing it.
 
-Each rejection has an exact item/model/context-hash outcome:
+Each judge rejection has an exact item/model/context-hash outcome:
 `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`. Only a confirmed
 fatal authorizes a Step-8 content edit; the other outcomes close without
 content, contract, impact, or judge changes. An obvious published-item error
@@ -298,20 +310,18 @@ retains the full battery output and assignment map; each prompt identifies its
 path and hash. Filtering prompt context never changes routing or whole-level gates.
 
 `8-preflight` closes non-judge integrity before paid rejudgment. `8-rejudge`
-targets only repaired or stale items and closes only with no stale verdict,
-unadjudicated rejection, or open fatal. The durable receipt caps each item at
-two Step-8 frozen-context cycles; there is never a third judge cycle. When the
-second cycle is again confirmed fatal, the owning group Alpha adjudicates and
-repairs it before escalation. The engine then starts one fresh Final
-Adjudicator per affected group: an independent Sol agent at xhigh reasoning with
-web search enabled. Its frozen queue is ordered, and the terminal recorder
+targets only items repaired by the initial Sol adjudicator. Each repaired item
+receives exactly one paid Terra rejudge. A Terra rejection routes directly to
+one fresh Final Adjudicator per affected group: an independent Astra agent at
+medium reasoning with web search enabled. It never returns to Sol and receives
+no further judge call. Its frozen queue is ordered, and the terminal recorder
 refuses item N until items 1 through N-1 have current exact-hash resolutions.
 For each item the FA follows the library's adopted conventions, verifies any
 unfamiliar mathematics against authoritative web sources, and either accepts
-Alpha's repair or makes and checks an independent repair. The resulting
+the current Sol repair or makes and checks an independent final repair. The resulting
 exact-hash terminal resolution is closure evidence, not a fabricated judge
-verdict or pass stamp. An exhausted item not licensed by two confirmed-fatal
-Alpha repair cycles remains an explicit owner/session intervention blocker.
+verdict or pass stamp. A paid Terra rejudge that produces no current verdict
+remains an explicit owner/session intervention blocker rather than being retried.
 `8-final` has no repair hook, making post-budget currency failures visible.
 The terminal audit verifies each Final Adjudicator queue against its historical
 rows. Resealing an earlier item in a later queue does not erase evidence that an

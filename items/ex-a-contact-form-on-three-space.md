@@ -1,0 +1,42 @@
+---
+id: ex-a-contact-form-on-three-space
+kind: example
+title: "A contact form on three-space"
+status: draft
+origin: pipeline
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [cor-codimension-one-frobenius-criterion]
+justified_by: []
+proof_strategy: direct
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-06
+sources:
+  scraped: []
+  references:
+    - title: "John M. Lee, Introduction to Smooth Manifolds, 2nd ed."
+      url: "https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf"
+---
+
+## Statement
+
+For $\alpha=dz-x\,dy$ on $\mathbb R^3$, $\alpha\wedge d\alpha=-dx\wedge dy\wedge dz\ne0$, so $\ker\alpha$ is not integrable.
+
+## Facts & Assumptions
+
+**Given:** The manifolds, forms, vector fields, maps, and coordinates explicitly named in the statement.
+
+[F1] The preceding result states that For a nowhere-zero one-form $\alpha$, the hyperplane distribution $\ker\alpha$ is integrable if and only if $\alpha\wedge d\alpha=0$. ([[cor-codimension-one-frobenius-criterion]]).
+
+## Verification
+
+**Proof technique:** direct.
+
+1.1 For $\alpha=dz-x\,dy$, $d\alpha=-dx\wedge dy$. [F1, given]
+
+2.1 Thus $\alpha\wedge d\alpha=-dx\wedge dy\wedge dz\ne0$, and the codimension-one criterion says $\ker\alpha$ is not integrable. [step 1.1] ∎

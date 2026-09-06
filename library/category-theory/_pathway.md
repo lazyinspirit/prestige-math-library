@@ -31,6 +31,7 @@ parts:
       - braided-and-symmetric-monoidal-categories
       - duality-and-rigidity-in-monoidal-categories
       - enriched-categories
+      - tensor-and-fusion-categories
 ---
 
 ## categories-and-yoneda
@@ -54,15 +55,14 @@ completion then supply the standard structural consequences.
 
 ## reflections-and-monads
 
-Reflective subcategories and the adjoint functor theorems explain when limits, solution
-sets, and size hypotheses force left adjoints, and monads, comonads, and Beck recast that
-adjunction data as algebraic structure. Abelian categories then supply kernels, cokernels,
-exactness, Grothendieck generators, and the diagram lemmas for homological arguments,
-while monoidal, closed, braided, and symmetric structures organize tensor products,
-coherence, internal homs, and commutativity constraints. Duality and rigidity complete the
-tensor branch: dual objects induce tensor adjunctions, rigid categories support duals of
-morphisms and the Drinfeld morphism, and pivotal, spherical, and ribbon data refine trace
-and dimension into categorical invariants. Enrichment then retains this structure in a
-monoidal base rather than merely in sets: enriched functors and transformations, the
-enriched Yoneda lemma, tensors, cotensors, weighted limits, change of base, and enriched
-adjunctions show how ordinary categorical constructions acquire a hom-object-valued form.
+Reflective subcategories and adjoint functor theorems produce left adjoints; monads,
+comonads, and Beck encode that data algebraically. Abelian categories supply kernels,
+cokernels, exactness, generators, and diagram lemmas, while monoidal, closed, braided, and
+symmetric structures organize tensor products, coherence, internal homs, and commutativity.
+Duality and rigidity give tensor adjunctions, dual morphisms, and pivotal, spherical, and
+ribbon refinements of trace and dimension. Enrichment transfers these constructions to a
+monoidal base through enriched Yoneda, tensors, cotensors, weighted limits, and adjunctions.
+Finally, finite rigid $k$-linear abelian multitensor categories have exact tensoring; finite
+semisimplicity gives multifusion categories, and a simple unit gives fusion categories. Their
+Grothendieck rings encode fusion rules and duality's anti-involution, distinguishing a fusion
+unit from a possibly split multifusion unit.

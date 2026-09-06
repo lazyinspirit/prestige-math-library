@@ -15,7 +15,7 @@ import { spawn } from 'node:child_process';
 // shadowed there and silently settled the promise instead of building a path.
 import { dirname, join, relative, resolve, resolve as pathResolve } from 'node:path';
 import { homedir } from 'node:os';
-import { REPO, deepseekEnvFile } from './paths.mjs';
+import { REPO } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
 import { validateCodexOutputSchema } from './codex-output-schema.mjs';
 import { findRollout, readDispatchUsage } from './dispatch-usage.mjs';
@@ -63,7 +63,7 @@ const ROLES = Object.freeze({
   // Nine group lanes cover the full 27-batch ceiling while retaining the
   // <=3-batches-per-Alpha attention bound. Lead-Alpha stages still declare one
   // unit and remain serial; this number is throughput, not shared-file safety.
-  alpha:        { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 9, web: true, why: 'group Alpha, <=3 batches each; nine groups cover the 27-batch ceiling' },
+  alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: 9, web: true, why: 'Sol-high group Alpha, <=3 batches each; nine groups cover the 27-batch ceiling' },
   // TWO NARROWER ALPHA ROLES (owner, 2026-08-24). Effort and model are ROLE
   // properties, so a stage that wants either to differ needs its own role —
   // exactly as `mechanic` has been a separate role at `medium` since 2026-08-14
@@ -89,10 +89,10 @@ const ROLES = Object.freeze({
   // source of irrelevant context while the read-only sandbox and structured
   // response preserve the final readiness receipt.
   'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'xhigh', cap: 1, web: false, requiresTask: true, why: 'Step-10 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
-  // `alpha-adjudicate` — step 8 ONLY (owner, 2026-08-24). gpt-5.6-sol at xhigh,
-  // the SAME adjudicator every past run used, so frontier-18's confirmed_fatal
-  // counts stay comparable with frontiers 15-17 even though its authors are
-  // the pre-migration Alpha model.
+  // `alpha-adjudicate` — step 8 ONLY (owner, 2026-08-24). The active
+  // adjudication lane is Sol; the registry keeps the model choice centralized
+  // so an exhausted provider lane can be changed once without stranding every
+  // later repair and adjudication stage.
   //
   // Step 8 is partitioned by the same group assignment, so this cap tracks the
   // nine group-Alpha lanes. A lower value would silently serialize disjoint
@@ -106,21 +106,20 @@ const ROLES = Object.freeze({
   // would, which is why the task file says append and never rewrite.
   //
   // Step 8 is the sharpest role in the build: a `false_positive` adjudication
-  // silently discards a real defect and no later gate re-examines it. Keeping it
-  // on the model with the longest measured track record here is quality control,
-  // not conservatism.
-  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 9, web: true, why: 'step-8 fatal-only adjudication, one per group Alpha; held on Sol so fatal counts stay comparable across runs' },
-  // `final-adjudicator` — the independent Step-8 close after an item has used
-  // both frozen judge contexts and the owning group Alpha has made the second
-  // fatal repair.  It is intentionally a fresh Sol conversation rather than a
-  // resume of the Alpha: independence is the point of the escalation.  Extra-high
+  // silently discards a real defect and no later gate re-examines it. It keeps
+  // the highest effort supported by the active adjudication lane.
+  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 9, web: true, why: 'step-8 fatal-only adjudication, one Sol lane per group Alpha' },
+  // `final-adjudicator` — the independent Step-8 close after the owning group
+  // Alpha's initial repair receives a rejecting Terra rejudge. It is
+  // intentionally a fresh Astra conversation rather than a
+  // resume of the Alpha: independence is the point of the escalation. Medium
   // reasoning and web search are both owner requirements; the task queue and
   // terminal-resolution recorder make its one-item-at-a-time discipline
   // mechanical rather than aspirational.
-  'final-adjudicator': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 9, web: true, requiresTask: true, why: 'Step-8 final adjudication after two fatal contexts; one independent Sol-xhigh agent per affected group, with authoritative web verification' },
+  'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: 9, web: true, requiresTask: true, why: 'Step-8 final adjudication after the one paid Terra rejudge; one independent Astra-medium agent per affected group, with authoritative web verification' },
   // `alpha-group-read` — the step-7 pass that reads a group's A/B pairs while the
   // judges are still sweeping (owner, 2026-08-25). Step 7 applies the Terra
-  // xhigh profile; the durable digest hands its findings to a fresh Sol xhigh
+  // high profile; the durable digest hands its findings to a fresh Sol xhigh
   // adjudicator at Step 8.
   //
   // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 7 judges a frozen text; an
@@ -140,7 +139,7 @@ const ROLES = Object.freeze({
   //
   // No web: everything it reads is on disk. Sourcing belongs to the Beta that
   // authored the page, not to a reader of it.
-  'alpha-group-read': { ...lane('adjudication'), sandbox: 'read-only', effort: 'xhigh', cap: 9, why: 'step-7 whole-group read; one read-only lane per group, handed to step 8 by compact digest' },
+  'alpha-group-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 9, why: 'Terra-high step-7 whole-group read; one read-only lane per group, handed to step 8 by compact digest' },
   // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
   refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: 27, why: 'one independent read-only refuter per batch; returns evidence, never edits' },
 
@@ -170,8 +169,8 @@ const ROLES = Object.freeze({
   // records for the build lanes before 2026-08-11.
   scaffolder:   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'one per subject track; owns exactly one prose scaffold file' },
 
-  // `mechanic` (owner, 2026-08-14): "use Terra instead of Sol for tasks
-  // requiring less reasoning" — for work whose difficulty is bookkeeping rather
+  // `mechanic` (owner, 2026-08-14): use the secondary lane for tasks
+  // requiring less reasoning — work whose difficulty is bookkeeping rather
   // than mathematics: applying an already adjudicated amendment, collecting
   // entries into a table, sweeping ids, reformatting. The judgment has already
   // been made by the time this lane runs.
@@ -300,7 +299,7 @@ const spec = Object.freeze({
   requestedEffort: ROLES[role].effort ?? 'xhigh',
   ...profileSpec,
   profile: profileName,
-  autoCompactTokenLimit: role === 'final-adjudicator' ? null : 200_000,
+  autoCompactTokenLimit: 200_000,
 });
 const compactionArgs = spec.autoCompactTokenLimit == null ? [] : [
   '-c', `model_auto_compact_token_limit=${spec.autoCompactTokenLimit}`,
@@ -632,48 +631,6 @@ let temporaryHome = null;
 // rollout a later `codex exec resume` re-enters.
 let persistentHome = null;
 let codexAuthPaths = null;
-let providerEnvironment = {};
-
-const deepseekKey = () => {
-  if (process.env.DEEPSEEK_API_KEY) return process.env.DEEPSEEK_API_KEY;
-  const file = deepseekEnvFile();
-  if (!file || !existsSync(file)) return null;
-  const line = readFileSync(file, 'utf8').split(/\r?\n/)
-    .find((candidate) => /^(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*\S/.test(candidate));
-  return line
-    ? line.replace(/^(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*/, '')
-      .replace(/^['"]|['"]\s*$/g, '').trim()
-    : null;
-};
-
-const configureProviderHome = (activeHome) => {
-  if (spec.provider !== 'deepseek') return;
-  const key = deepseekKey();
-  if (!key) throw new Error(`no DEEPSEEK_API_KEY in env or ${deepseekEnvFile()}`);
-  const catalog = join(activeHome, 'models.json');
-  const config = join(activeHome, 'config.toml');
-  // Exact DeepSeek Codex catalog entry vendored from the official setup script:
-  // https://cdn.deepseek.com/api-docs/codex-deepseek-setup-en.sh
-  copyFileSync(join(REPO, 'tools', 'deepseek-models.json'), catalog);
-  chmodSync(catalog, 0o600);
-  writeFileSync(config, [
-    `model = "${spec.model}"`,
-    'model_provider = "deepseek"',
-    'preferred_auth_method = "apikey"',
-    'forced_login_method = "api"',
-    `model_reasoning_effort = "${spec.effort}"`,
-    `model_catalog_json = ${JSON.stringify(catalog)}`,
-    '',
-    '[model_providers.deepseek]',
-    'name = "deepseek"',
-    'base_url = "https://api.deepseek.com/"',
-    'wire_api = "responses"',
-    'env_key = "DEEPSEEK_API_KEY"',
-    '',
-  ].join('\n'));
-  chmodSync(config, 0o600);
-  providerEnvironment = { DEEPSEEK_API_KEY: key };
-};
 /** The codex conversation this dispatch created, or null for a non-codex lane.
  *
  *  Two sources, in order. codex announces `session id: <uuid>` on stderr at
@@ -733,15 +690,11 @@ const result = await new Promise((resolve) => {
   }
   const activeHome = persistentHome ?? temporaryHome;
   try {
-    if (spec.provider === 'openai') {
-      const sourceAuth = join(codexHome, 'auth.json');
-      codexAuthPaths = { source: sourceAuth, temporary: join(activeHome, 'auth.json') };
-      if (existsSync(sourceAuth)) {
-        copyFileSync(sourceAuth, join(activeHome, 'auth.json'));
-        chmodSync(join(activeHome, 'auth.json'), 0o600);
-      }
-    } else {
-      configureProviderHome(activeHome);
+    const sourceAuth = join(codexHome, 'auth.json');
+    codexAuthPaths = { source: sourceAuth, temporary: join(activeHome, 'auth.json') };
+    if (existsSync(sourceAuth)) {
+      copyFileSync(sourceAuth, join(activeHome, 'auth.json'));
+      chmodSync(join(activeHome, 'auth.json'), 0o600);
     }
   } catch (error) {
     const stderr = String(error?.message ?? error);
@@ -755,7 +708,7 @@ const result = await new Promise((resolve) => {
   const child = spawn(bin, args, {
     cwd: REPO,
     stdio: ['pipe', 'pipe', 'pipe'],
-    env: { ...process.env, ...extraEnv, ...providerEnvironment },
+    env: { ...process.env, ...extraEnv },
   });
 
   const stdout = boundedOutput();
@@ -830,7 +783,7 @@ const attestContext = () => {
 const contextAttestation = attestContext();
 if (contextAttestation && !contextAttestation.ok) {
   result.code = 1;
-  result.stderr += `\nDeepSeek context attestation failed: ${contextAttestation.error}`;
+  result.stderr += `\nContext attestation failed: ${contextAttestation.error}`;
 }
 if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true }); } catch { /* best-effort */ } }
 

@@ -97,6 +97,38 @@ test('one adjudication owned by two rows is a double count', () => {
   assert.match(r.stderr, /one defect, one row/);
 });
 
+test('a confirmed-fatal Step-7 reader warning has exactly one defect-ledger row', () => {
+  const decision = { alert_id: 's8a-reader-1', item: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' };
+  const missing = fixture([], []);
+  writeFileSync(join(missing, 'reader.jsonl'), `${JSON.stringify(decision)}\n`);
+  const absent = check(missing, ['--reader-decisions', join(missing, 'reader.jsonl')]);
+  assert.notEqual(absent.status, 0);
+  assert.match(absent.stderr, /reader warning .* never recorded/);
+
+  const exactRef = { alert_id: decision.alert_id, item: decision.item, item_sha256: decision.item_sha256 };
+  const exact = fixture([row({ adjudication_ref: [exactRef] })], []);
+  writeFileSync(join(exact, 'reader.jsonl'), `${JSON.stringify(decision)}\n`);
+  assert.equal(check(exact, ['--reader-decisions', join(exact, 'reader.jsonl')]).status, 0);
+
+  const duplicate = fixture([row({ adjudication_ref: [exactRef] }),
+    row({ defect_id: 'r9-D002', adjudication_ref: [exactRef] })], []);
+  writeFileSync(join(duplicate, 'reader.jsonl'), `${JSON.stringify(decision)}\n`);
+  const doubled = check(duplicate, ['--reader-decisions', join(duplicate, 'reader.jsonl')]);
+  assert.notEqual(doubled.status, 0);
+  assert.match(doubled.stderr, /one defect, one row/);
+});
+
+test('coverage reports a run whose only confirmed fatal came from a Step-7 reader', () => {
+  const dir = fixture([], []);
+  writeFileSync(join(dir, 'research', 'r9-step8-alert-decisions.jsonl'),
+    `${JSON.stringify({ alert_id: 's8a-reader-1', item: 'thm-x', outcome: 'confirmed_fatal' })}\n`);
+  const result = spawnSync(process.execPath, [TOOL, 'stats', '--coverage', '--json'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).coverage.runs_with_fatal_and_no_rows,
+    [{ run: 'r9', confirmed_fatal: 1 }]);
+});
+
 test('two models may record different defects on the same item version', () => {
   const context = 'ctx-1';
   const terra = { id: 'thm-x', model: 'gpt-5.6-terra', context_sha256: context,

@@ -69,6 +69,25 @@ function manifestPages() {
   return batches;
 }
 
+/** Published items under an active Step-6 repair claim stay in the reader's
+ * dependency scope after the repair correctly returns them to draft. Without
+ * this durable ownership evidence, the routing check forgets the finding it is
+ * supposed to certify as soon as `status: published` is removed. */
+function claimedPublishedIds() {
+  if (!existsSync(publishedClaimsPath)) return new Set();
+  try {
+    return new Set(readFileSync(publishedClaimsPath, 'utf8')
+      .split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line))
+      .filter((row) => row?.version === 1 && row?.run === run
+        && typeof row?.id === 'string' && /^[a-f0-9]{64}$/.test(row?.pre_sha256 ?? ''))
+      .map((row) => row.id));
+  } catch {
+    // The later published-claim validation owns the precise malformed-row
+    // diagnostic. An unreadable claim file must not widen reader scope here.
+    return new Set();
+  }
+}
+
 function groups() {
   const raw = readJson(R('research', `${run}-alpha-groups.json`), 'Alpha group assignment');
   const rows = Array.isArray(raw) ? raw : raw.groups ?? [];
@@ -286,6 +305,7 @@ function normalizeRefuterFindings(findings, batch, openedSet, reportError) {
 function publishedDependencies(batchIds, allRunIds) {
   const Y = yaml();
   const owners = new Map();
+  const claimed = claimedPublishedIds();
   for (const consumer of batchIds) {
     const queue = [consumer];
     const seen = new Set();
@@ -306,7 +326,7 @@ function publishedDependencies(batchIds, allRunIds) {
         if (!existsSync(targetPath)) continue;
         let targetItem = {};
         try { targetItem = Y.parse(split(readFileSync(targetPath, 'utf8')).fm) ?? {}; } catch { continue; }
-        if (targetItem.status !== 'published') continue;
+        if (targetItem.status !== 'published' && !claimed.has(target)) continue;
         if (!owners.has(target)) owners.set(target, new Set());
         owners.get(target).add(consumer);
         queue.push(target);
@@ -314,6 +334,23 @@ function publishedDependencies(batchIds, allRunIds) {
     }
   }
   return owners;
+}
+
+/** A claimed published repair is a frozen Step-6 obligation even if later
+ * closure work removes the consumer's dependency on the withdrawn draft.
+ * The split already validated the original edge; the claim and the detailed
+ * receipt checks below keep that historical binding exact after repair. */
+function preserveClaimedPublishedBindings(published, scope) {
+  const claimed = claimedPublishedIds();
+  for (const finding of scope.reader_findings ?? []) {
+    if (finding?.subject_type !== 'published-dependency'
+      || !claimed.has(finding.id)
+      || typeof finding.consumer_id !== 'string'
+      || !finding.consumer_id.trim()) continue;
+    if (!published.has(finding.id)) published.set(finding.id, new Set());
+    published.get(finding.id).add(finding.consumer_id);
+  }
+  return published;
 }
 
 /** Run one mechanical Step-6 subcommand without a shell. These composite
@@ -632,7 +669,8 @@ if (command === 'check') {
           if (!Array.isArray(report.findings)) reportError('findings must be an array');
           if (typeof report.coverage_note !== 'string' || !report.coverage_note.trim()) reportError('coverage_note is empty');
           const allRunIds = new Set(Object.values(manifests).flat());
-          const published = publishedDependencies(derived.manifestPost, allRunIds);
+          const published = preserveClaimedPublishedBindings(
+            publishedDependencies(derived.manifestPost, allRunIds), scope);
           const normalized = normalizeFindings(Array.isArray(report.findings) ? report.findings : [], batch,
             new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys()]), reportError, 'reader');
           const stored = (scope.reader_findings ?? []).map(({

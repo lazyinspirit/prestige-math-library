@@ -1,11 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { stages } from '../stages/mathlib.mts';
-import { MODEL_PROFILE_NAMES, MODEL_PROFILES } from '../../models.mjs';
+import { MODELS, MODEL_PROFILE_NAMES, MODEL_PROFILES } from '../../models.mjs';
 
 const REPO = fileURLToPath(new URL('../../..', import.meta.url)).replace(/\/$/, '');
 const ctx: any = {
@@ -25,21 +26,15 @@ test('the tracked dispatcher argv forwards stage-selected profiles', () => {
 });
 
 test('registered owner profiles name the exact models, efforts, and windows', () => {
-  const deepseek = MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekXhigh1m];
-  assert.equal(deepseek.model, 'deepseek-v4-pro');
-  assert.equal(deepseek.requestedEffort, 'xhigh');
-  assert.equal(deepseek.effort, 'max');
-  assert.equal(deepseek.contextWindow, 1_048_576);
-  assert.equal(deepseek.attestContext, true);
-
   const terraHigh = MODEL_PROFILES[MODEL_PROFILE_NAMES.terraHigh];
   assert.equal(terraHigh.model, 'gpt-5.6-terra');
   assert.equal(terraHigh.effort, 'high');
   assert.equal(terraHigh.contextWindow, 872_000);
 
-  const refuter = MODEL_PROFILES[MODEL_PROFILE_NAMES.terraXhigh];
-  assert.equal(refuter.model, 'gpt-5.6-terra');
-  assert.equal(refuter.effort, 'xhigh');
+  const liveCompat = MODEL_PROFILES['gpt-5.6-terra-xhigh'];
+  assert.equal(liveCompat.model, 'gpt-5.6-terra');
+  assert.equal(liveCompat.effort, 'high');
+  assert.equal(liveCompat.requestedEffort, 'high');
 });
 
 test('steps 5, 6, and 7 select the requested stage-specific profiles', () => {
@@ -53,15 +48,38 @@ test('steps 5, 6, and 7 select the requested stage-specific profiles', () => {
   assert.equal(selected(readStage, readStage.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.terraHigh);
 
   const refuteStage = stage('6a-refute');
-  assert.equal(selected(refuteStage, refuteStage.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.terraXhigh);
+  assert.equal(selected(refuteStage, refuteStage.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.terraHigh);
 
   const judgeStage = stage('7-judge');
   const plans = judgeStage.plan(ctx, judgeStage.units(ctx));
   for (const plan of plans.filter((candidate: any) => candidate.role === 'alpha-group-read')) {
-    assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.terraXhigh);
+    assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.terraHigh);
   }
   assert.equal(selected(judgeStage, plans.find((candidate: any) => candidate.role === 'tool')), undefined,
-    'the Terra judge tool is not a Step-7 reader agent');
+    'the judge tool is not a Step-7 reader agent');
+});
+
+test('group Alpha resolves to Sol high', () => {
+  const result = spawnSync('node', ['tools/dispatch.mjs',
+    '--role', 'alpha', '--brief', 'briefs/alpha.md', '--label', 'alpha-model-test',
+    '--run', 'alpha-model-test', '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const row = JSON.parse(result.stdout);
+  assert.equal(row.model, MODELS.sol.id);
+  assert.equal(row.requested_effort, 'high');
+  assert.equal(row.provider_effort, 'high');
+});
+
+test('Step-8 fatal group adjudicator uses Sol xhigh', () => {
+  const result = spawnSync('node', ['tools/dispatch.mjs',
+    '--role', 'alpha-adjudicate', '--brief', 'briefs/alpha.md',
+    '--label', 'step8-alpha-model-test', '--run', 'step8-alpha-model-test',
+    '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const row = JSON.parse(result.stdout);
+  assert.equal(row.model, MODELS.sol.id);
+  assert.equal(row.requested_effort, 'xhigh');
+  assert.equal(row.provider_effort, 'xhigh');
 });
 
 test('every model-backed Step 9 and Step 10 dispatch inherits Terra high, including repairs', () => {
@@ -74,5 +92,5 @@ test('every model-backed Step 9 and Step 10 dispatch inherits Terra high, includ
       `${s.id} changed a deterministic tool job into a model call`);
   }
   assert.equal(selected(stage('8-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }), undefined,
-    'Step 8 must retain its existing Sol adjudicator');
+    'Step 8 must retain its dedicated adjudication role');
 });

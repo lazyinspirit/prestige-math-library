@@ -1,0 +1,430 @@
+[
+  {
+    "order": 631,
+    "id": "boolean-circuits-and-nonuniform-complexity",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Boolean Circuits and Nonuniform Complexity",
+    "companion": "boolean-circuits-and-nonuniform-complexity-examples",
+    "requires": [
+      "the-cook-levin-theorem",
+      "finite-counting-and-binomial-coefficients"
+    ],
+    "items": [
+      {
+        "id": "def-boolean-circuit-size-depth-fanin-and-basis",
+        "kind": "definition",
+        "title": "Boolean circuits: basis, fan-in, size, and depth",
+        "strategy": "Fix finite directed acyclic Boolean circuits with input nodes, constants, NOT gates, and fan-in-two AND/OR gates. Define size as the number of non-input gates and depth as the longest input-to-output gate path, while recording the constant-factor equivalence of the usual fixed finite bases.",
+        "deps": []
+      },
+      {
+        "id": "def-circuit-family-and-p-poly",
+        "kind": "definition",
+        "title": "Circuit families and P/poly",
+        "strategy": "Define a family as one circuit for each input length, with no effectiveness requirement, and define P/poly by polynomial circuit size. Separate this nonuniform quantifier order from a single machine that constructs circuits.",
+        "deps": [
+          "def-boolean-circuit-size-depth-fanin-and-basis"
+        ]
+      },
+      {
+        "id": "thm-p-is-contained-in-p-poly",
+        "kind": "theorem",
+        "title": "Every polynomial-time language has polynomial-size circuits",
+        "strategy": "Unroll a fixed polynomial-time computation into a layered tableau circuit. Bound the number of local-update gates and use the fixed basis conversion only after the polynomial size bound is established; no circuit-generator claim is inferred from this containment.",
+        "deps": [
+          "def-boolean-circuit-size-depth-fanin-and-basis",
+          "def-circuit-family-and-p-poly",
+          "def-p"
+        ]
+      },
+      {
+        "id": "def-polynomial-advice-machine",
+        "kind": "definition",
+        "title": "Polynomial advice for a deterministic machine",
+        "strategy": "Define a length-indexed advice string a_n of polynomial length supplied to a deterministic polynomial-time machine on every n-bit input. Make explicit that advice depends only on n and need not be computable from n.",
+        "deps": []
+      },
+      {
+        "id": "thm-p-poly-equals-p-with-polynomial-advice",
+        "kind": "theorem",
+        "title": "P/poly equals polynomial time with polynomial advice",
+        "strategy": "For circuit families, encode the length-n circuit as advice and evaluate its gates in topological order. Conversely, hardwire the finitely many advice bits into a circuit simulating the advised machine, charging the advice length and the simulation separately.",
+        "deps": [
+          "def-circuit-family-and-p-poly",
+          "def-polynomial-advice-machine"
+        ]
+      },
+      {
+        "id": "thm-undecidable-languages-exist-in-p-poly",
+        "kind": "theorem",
+        "title": "Some undecidable languages have polynomial-size circuits",
+        "strategy": "Choose an undecidable unary language and, for each length, use a constant-output circuit giving that one membership bit. Prove undecidability by the standard diagonal/countability argument rather than confusing nonuniform existence with an effective circuit construction.",
+        "deps": [
+          "def-circuit-family-and-p-poly"
+        ]
+      },
+      {
+        "id": "def-formula-and-branching-program",
+        "kind": "definition",
+        "title": "Boolean formulas and deterministic branching programs",
+        "strategy": "Define a formula as a circuit of fan-out one and a deterministic branching program as an acyclic labelled query graph with 0/1 sinks. State the distinct size measures so later comparisons do not identify the models.",
+        "deps": [
+          "def-boolean-circuit-size-depth-fanin-and-basis"
+        ]
+      },
+      {
+        "id": "def-ac-zero-nc-one-and-nc",
+        "kind": "definition",
+        "title": "AC0, NC1, and NC under a stated uniformity convention",
+        "strategy": "Define AC0 using polynomial size, constant depth, and unbounded-fan-in AND/OR/NOT; define NC1 and NC using polynomial-size bounded-fan-in circuits of logarithmic and polylogarithmic depth. State within the item the logspace-uniform circuit-description convention used for the ensuing containment, without asserting it for arbitrary P/poly families.",
+        "deps": [
+          "def-boolean-circuit-size-depth-fanin-and-basis"
+        ]
+      },
+      {
+        "id": "prop-nc-one-is-contained-in-l-and-l-in-nc-two",
+        "kind": "proposition",
+        "title": "NC1 is contained in L, and L is contained in NC2",
+        "strategy": "Evaluate a log-depth bounded-fan-in circuit by a depth-first traversal retaining a logarithmic-size path and gate address. For the reverse inclusion, encode reachability between configurations by repeated squaring, specify a uniform indexing scheme, and bound depth by O(log^2 n). The proposition states the needed read-only-input definition of L inline.",
+        "deps": [
+          "def-ac-zero-nc-one-and-nc"
+        ]
+      },
+      {
+        "id": "lem-counting-circuits-of-bounded-size",
+        "kind": "lemma",
+        "title": "Counting bounded-size Boolean circuits",
+        "strategy": "Encode each of s topologically ordered gates by its type and its at most two predecessors among n+s available wires. Multiply the choices, absorb constants, and obtain at most 2^{O(s log(n+s))} functions represented by circuits of size s.",
+        "deps": [
+          "def-boolean-circuit-size-depth-fanin-and-basis",
+          "thm-product-rule"
+        ]
+      },
+      {
+        "id": "thm-shannon-almost-all-functions-require-exponential-circuits",
+        "kind": "theorem",
+        "title": "Almost all Boolean functions require exponential circuit size",
+        "strategy": "Compare the bounded-circuit count with the 2^{2^n} Boolean functions on n inputs. Choose a concrete c>0 so size at most c2^n/n represents a vanishing fraction, and distinguish this existential lower bound from an explicit lower-bound construction.",
+        "deps": [
+          "lem-counting-circuits-of-bounded-size",
+          "thm-cardinality-of-a-set-of-functions"
+        ]
+      },
+      {
+        "id": "def-circuit-sat",
+        "kind": "definition",
+        "title": "Circuit satisfiability",
+        "strategy": "Define CircuitSAT for a finite encoded circuit with a designated output gate: accept exactly when some assignment to its input nodes makes that output one. Fix the encoding as a directed acyclic gate list so the certificate size and verifier are unambiguous.",
+        "deps": [
+          "def-boolean-circuit-size-depth-fanin-and-basis"
+        ]
+      },
+      {
+        "id": "thm-circuit-sat-is-np-complete",
+        "kind": "theorem",
+        "title": "CircuitSAT is NP-complete",
+        "strategy": "Verify a guessed input assignment by evaluating the circuit in topological order. For hardness, transform a Cook--Levin formula to a circuit gate-by-gate, prove preservation of satisfiability and polynomial encoding size, and state the reduction direction explicitly.",
+        "deps": [
+          "def-circuit-sat",
+          "thm-cook-levin-sat-is-np-complete",
+          "def-polynomial-time-many-one-reduction",
+          "def-np-hard-and-np-complete"
+        ]
+      },
+      {
+        "id": "thm-karp-lipton-collapse",
+        "kind": "theorem",
+        "title": "The Karp--Lipton collapse",
+        "strategy": "Assume NP is contained in P/poly, use a candidate polynomial-size SAT circuit as existential information, and universally test its claimed correctness on formulas before simulating the hierarchy quantifiers. Define PH and Sigma_2^p in the theorem statement, then conclude PH = Sigma_2^p with the hypothesis and quantifier order visible.",
+        "deps": [
+          "def-circuit-family-and-p-poly",
+          "thm-p-poly-equals-p-with-polynomial-advice",
+          "thm-circuit-sat-is-np-complete"
+        ]
+      },
+      {
+        "id": "fs-polynomial-size-implies-uniform-generation",
+        "kind": "false-statement",
+        "title": "Polynomial-size circuits imply a uniform polynomial-time generator",
+        "strategy": "Mark the inference false: the circuit family quantifies separately over input lengths and may encode an undecidable unary language. Identify uniform generation as an additional algorithmic requirement, not a consequence of a size bound.",
+        "deps": [
+          "def-circuit-family-and-p-poly",
+          "thm-undecidable-languages-exist-in-p-poly"
+        ]
+      },
+      {
+        "id": "fs-shannon-counting-gives-an-explicit-hard-function",
+        "kind": "false-statement",
+        "title": "Shannon counting gives an explicit circuit-hard function",
+        "strategy": "Mark the inference false: counting proves that hard truth tables exist but supplies neither a computable description nor a way to recognise one. Contrast the cardinality argument with the separate explicit lower-bound problem.",
+        "deps": [
+          "lem-counting-circuits-of-bounded-size",
+          "thm-shannon-almost-all-functions-require-exponential-circuits"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 632,
+    "id": "boolean-circuits-and-nonuniform-complexity-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Boolean Circuits and Nonuniform Complexity: Examples and Counterexamples",
+    "requires": [
+      "boolean-circuits-and-nonuniform-complexity"
+    ],
+    "items": [
+      {
+        "id": "ex-p-poly-equals-p-with-polynomial-advice",
+        "kind": "example",
+        "title": "Hardwiring a length-indexed advice string",
+        "strategy": "For a small advised machine, replace each of its advice-bit reads by a constant gate and trace one input through the resulting circuit. Then encode the same circuit as advice and evaluate its gate list, displaying both directions of the equivalence on the same finite instance.",
+        "deps": [
+          "thm-p-poly-equals-p-with-polynomial-advice"
+        ]
+      },
+      {
+        "id": "ex-karp-lipton-collapse",
+        "kind": "example",
+        "title": "A Sigma_2 verification of a candidate SAT circuit",
+        "strategy": "Write the existential choice of a circuit description followed by the universal challenge formula and the deterministic check that the description agrees with satisfiability. Use the display to show why a circuit merely correct on selected examples would not suffice.",
+        "deps": [
+          "thm-karp-lipton-collapse"
+        ]
+      },
+      {
+        "id": "cex-polynomial-size-implies-uniform-generation",
+        "kind": "counterexample",
+        "title": "Unary circuits for an undecidable language are not uniformly generated",
+        "strategy": "Let the single circuit at length n output the n-th bit of an undecidable unary language. Each circuit has constant size, but a uniform generator would decide that language by constructing the circuit and evaluating it on 1^n.",
+        "deps": [
+          "thm-undecidable-languages-exist-in-p-poly",
+          "fs-polynomial-size-implies-uniform-generation"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 637,
+    "id": "counting-complexity-and-sharpp",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Counting Complexity and Sharp-P",
+    "companion": "counting-complexity-and-sharpp-examples",
+    "requires": [
+      "randomized-complexity-and-amplification",
+      "the-cook-levin-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-sharpp-and-gap-p-functions",
+        "kind": "definition",
+        "title": "Sharp-P and Gap-P functions",
+        "strategy": "Define #P functions as accepting-path counts of polynomial-time nondeterministic machines and Gap-P functions as accepting minus rejecting path counts. Fix binary branching and binary output encodings as conventions, so multiplicities and signs are well defined.",
+        "deps": []
+      },
+      {
+        "id": "def-number-sat",
+        "kind": "definition",
+        "title": "NumberSAT",
+        "strategy": "Define NumberSAT on an encoded Boolean formula with its declared variable list as the exact number of satisfying assignments. State that unused variables remain part of the declared list, preventing accidental changes to the count under an encoding rewrite.",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat"
+        ]
+      },
+      {
+        "id": "prop-number-sat-is-in-sharpp",
+        "kind": "proposition",
+        "title": "NumberSAT belongs to Sharp-P",
+        "strategy": "Use one nondeterministic binary choice for each declared variable and accept exactly the satisfying assignments. Give the one-to-one correspondence between computation paths and assignments, including malformed-formula rejection.",
+        "deps": [
+          "def-sharpp-and-gap-p-functions",
+          "def-number-sat"
+        ]
+      },
+      {
+        "id": "def-parsimonious-reduction",
+        "kind": "definition",
+        "title": "Parsimonious reductions between counting functions",
+        "strategy": "Define a polynomial-time map f from instances of one counting problem to another to be parsimonious when the two output counts are exactly equal on every instance. Contrast this equality with ordinary decision many-one reduction in the statement.",
+        "deps": []
+      },
+      {
+        "id": "lem-cook-levin-can-be-made-parsimonious",
+        "kind": "lemma",
+        "title": "The Cook--Levin construction can be made parsimonious",
+        "strategy": "Use a tableau encoding whose well-formedness variables are uniquely fixed by an accepting computation, and use equivalence clauses rather than merely equisatisfiable existential extensions. Prove a bijection between accepting paths of the source machine and satisfying assignments of the constructed formula, then retain the polynomial-time map bound.",
+        "deps": [
+          "def-parsimonious-reduction",
+          "def-number-sat",
+          "def-bounded-computation-tableau",
+          "lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs",
+          "lem-cook-levin-map-is-polynomial-time"
+        ]
+      },
+      {
+        "id": "thm-number-sat-is-sharpp-complete",
+        "kind": "theorem",
+        "title": "NumberSAT is Sharp-P-complete under parsimonious reductions",
+        "strategy": "Combine membership with the parsimonious Cook--Levin map for an arbitrary #P machine. Keep the source machine, input, accepting-path count, formula, and its satisfying-assignment count in one equality chain.",
+        "deps": [
+          "def-sharpp-and-gap-p-functions",
+          "def-number-sat",
+          "def-parsimonious-reduction",
+          "prop-number-sat-is-in-sharpp",
+          "lem-cook-levin-can-be-made-parsimonious"
+        ]
+      },
+      {
+        "id": "def-fp-function-class",
+        "kind": "definition",
+        "title": "The nonnegative function class FP",
+        "strategy": "For this page, define FP to mean total nonnegative integer-valued functions whose binary representations are computable in deterministic polynomial time. Record this codomain convention explicitly, since arbitrary signed FP functions cannot literally be #P path counts.",
+        "deps": []
+      },
+      {
+        "id": "prop-fp-is-contained-in-sharpp",
+        "kind": "proposition",
+        "title": "FP is contained in Sharp-P",
+        "strategy": "On input x, compute f(x) in binary and nondeterministically select one of exactly f(x) accepting branches by comparing a guessed binary integer with f(x). Account for the power-of-two padding branches and reject the excess branches.",
+        "deps": [
+          "def-sharpp-and-gap-p-functions",
+          "def-fp-function-class"
+        ]
+      },
+      {
+        "id": "prop-sharpp-is-closed-under-sum-and-product",
+        "kind": "proposition",
+        "title": "Sharp-P is closed under sum and product",
+        "strategy": "For sums, make a leading tagged nondeterministic choice of machine; for products, run the first machine and then independently run the second along every surviving branch. Prove the resulting accepting-path counts by finite addition and multiplication.",
+        "deps": [
+          "def-sharpp-and-gap-p-functions"
+        ]
+      },
+      {
+        "id": "def-majority-sat",
+        "kind": "definition",
+        "title": "MajoritySAT",
+        "strategy": "Define MajoritySAT to ask whether a formula with n declared variables has strictly more than 2^{n-1} satisfying assignments. Make the strict threshold explicit, including the n=0 convention.",
+        "deps": [
+          "def-number-sat"
+        ]
+      },
+      {
+        "id": "thm-pp-is-sign-testing-gap-p",
+        "kind": "theorem",
+        "title": "PP is strict sign testing for Gap-P",
+        "strategy": "Translate a PP machine's majority condition into the positivity of accepting paths minus rejecting paths. Conversely normalise a Gap-P witness to a common polynomial binary-branching bound and build a PP machine whose strict majority is equivalent to positive gap.",
+        "deps": [
+          "def-sharpp-and-gap-p-functions",
+          "def-rp-corp-zpp-bpp-and-pp"
+        ]
+      },
+      {
+        "id": "cor-majority-sat-is-pp-complete",
+        "kind": "corollary",
+        "title": "MajoritySAT is PP-complete",
+        "strategy": "Membership uses the uniformly guessed assignment. For hardness, apply the parsimonious Cook--Levin map to a PP machine padded to a fixed number of binary choices, so the strict majority threshold is preserved exactly.",
+        "deps": [
+          "def-majority-sat",
+          "thm-pp-is-sign-testing-gap-p",
+          "lem-cook-levin-can-be-made-parsimonious"
+        ]
+      },
+      {
+        "id": "thm-pp-is-closed-under-complement",
+        "kind": "theorem",
+        "title": "PP is closed under complement",
+        "strategy": "Negate the Gap-P witness and use strict sign testing to exchange positive and negative gaps; resolve the zero-gap case by the standard one-path offset construction before applying the characterization.",
+        "deps": [
+          "def-sharpp-and-gap-p-functions",
+          "thm-pp-is-sign-testing-gap-p"
+        ]
+      },
+      {
+        "id": "def-p-with-a-sharpp-oracle",
+        "kind": "definition",
+        "title": "Polynomial time with a Sharp-P oracle",
+        "strategy": "Define P^#P using an oracle that returns the binary value of a fixed #P function on each query, with polynomial query length and polynomially many adaptive queries. Distinguish this function oracle from a yes/no language oracle.",
+        "deps": [
+          "def-p",
+          "def-sharpp-and-gap-p-functions"
+        ]
+      },
+      {
+        "id": "prop-np-is-contained-in-p-sharpp",
+        "kind": "proposition",
+        "title": "NP is contained in P with a Sharp-P oracle",
+        "strategy": "For a language in NP, use the #P function counting accepting verifier witnesses and query whether its returned integer is positive. Alternatively route through the parsimonious NumberSAT construction; state why exact binary output permits the zero test in polynomial time.",
+        "deps": [
+          "def-p-with-a-sharpp-oracle",
+          "def-sharpp-and-gap-p-functions",
+          "thm-number-sat-is-sharpp-complete"
+        ]
+      },
+      {
+        "id": "fs-sharpp-is-a-language-class",
+        "kind": "false-statement",
+        "title": "Sharp-P is a language class",
+        "strategy": "Mark the statement false under the page convention: #P members map inputs to nonnegative integers, whereas a language has Boolean membership. Use NumberSAT to exhibit the categorical mismatch and name its associated decision language separately.",
+        "deps": [
+          "def-sharpp-and-gap-p-functions",
+          "def-number-sat"
+        ]
+      },
+      {
+        "id": "fs-every-many-one-reduction-is-parsimonious",
+        "kind": "false-statement",
+        "title": "Every decision many-one reduction is parsimonious",
+        "strategy": "Mark the statement false by adding a fresh unused variable to a SAT formula: satisfiability is preserved by a polynomial-time many-one map while the satisfying-assignment count doubles. Contrast decision preservation with exact count preservation.",
+        "deps": [
+          "def-polynomial-time-many-one-reduction",
+          "def-parsimonious-reduction",
+          "def-number-sat"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 638,
+    "id": "counting-complexity-and-sharpp-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Counting Complexity and Sharp-P: Examples and Counterexamples",
+    "requires": [
+      "counting-complexity-and-sharpp"
+    ],
+    "items": [
+      {
+        "id": "ex-cook-levin-can-be-made-parsimonious",
+        "kind": "example",
+        "title": "A two-branch computation and its parsimonious tableau formula",
+        "strategy": "Display a machine with two accepting paths, identify the two legal tableaux, and show that the selected exact tableau encoding has exactly two satisfying assignments. Point out which auxiliary-variable convention preserves uniqueness.",
+        "deps": [
+          "lem-cook-levin-can-be-made-parsimonious"
+        ]
+      },
+      {
+        "id": "ex-np-is-contained-in-p-sharpp",
+        "kind": "example",
+        "title": "Deciding satisfiability by a NumberSAT oracle query",
+        "strategy": "Query the exact NumberSAT value of a small formula and decide satisfiability by testing whether the returned binary integer is nonzero. Contrast that one query with the exponentially many assignments it summarizes.",
+        "deps": [
+          "def-number-sat",
+          "prop-np-is-contained-in-p-sharpp"
+        ]
+      },
+      {
+        "id": "cex-sharpp-is-a-language-class",
+        "kind": "counterexample",
+        "title": "NumberSAT is not a Boolean membership predicate",
+        "strategy": "Evaluate NumberSAT on two formulas with different positive counts and observe that neither output is a truth value. The associated SAT language records only whether the count is nonzero, so it is a different object.",
+        "deps": [
+          "def-number-sat",
+          "fs-sharpp-is-a-language-class"
+        ]
+      }
+    ]
+  }
+]

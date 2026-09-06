@@ -1,0 +1,18 @@
+# FA evidence — queue b/13
+
+Decision: accepted-after-review. Source status: familiar.
+Item: `prop-injective-ext-is-contravariant-in-the-first-and-covariant-in-the-second-variable`.
+
+I read all three direct dependencies in full, both Terra rejections, Sol's adjudication and current repair, and the batch-8 contract. The statement now carries DC and supplied injective data, fixing the original defect. The final rejection observes that the independence lemma's interface directly supplies equality on cohomology rather than stating a homotopy. That equality is already exactly the conclusion required in step 2.1. Moreover the full cited lemma explicitly constructs the homotopy in its F1/step 1.1. Thus the explanatory homotopy wording is true and the interface already licenses choice independence; no missing mathematical conclusion remains.
+
+Independent verification: take the additive functor F=Hom(M,-) in `lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension`. Its exact DC/data hypotheses match. Precomposition by a:M'→M commutes with the differential f↦d_I f and reverses arrows. The supplied-data comparison-existence lemma lifts b:N→N'; postcomposition gives a cochain map. The independence lemma equates the cohomology maps of any two such lifts. Composites and identities lift the corresponding composites and identities, so independence establishes the functor laws. Pre- and postcomposition commute literally, giving the bifunctor law. For degree q in the Ext definition's domain (q≥0), these are the stated maps; Hom(M,I(N)) itself makes sense for any first object, and only the second object needs an I-resolution. Degree zero and zero maps give the same formulas without exception. No global simultaneous choice of comparison maps is required.
+
+This familiar additive Hom/comparison argument needs no external verification. Exact local source locators: the two published supplied-injective comparison lemmas listed in deps and `def-ext-via-an-injective-resolution-of-the-second-variable`. The A-page's separate supplied Ext_I notation is preserved; no balance or projective hypothesis has been smuggled in. The current two-step contract matches the body; no separate risk_review applies. Current item/dependency bytes remain unchanged, and no licence, judge verdict or pass stamp is created.
+
+Next action: focused precheck, record current acceptance, then position 14 only after recorder acceptance.
+
+Context refresh after position 15: the peer vanishing statement now explicitly fixes the abelian category, supplied I on D, and both arguments in D. This does not change any comparison, variance, or projective-vanishing argument used here; it is not a direct dependency of this item. Rechecked the unchanged proof against the same local conventions. Reseal the same decision because page-peer statement hashing changed.
+
+Position 16 peer-context refresh: the projective Ext bifunctor now explicitly assumes its datum on all objects of A. This only supplies the missing domain hypothesis of an existing peer statement; the comparison/vanishing arguments reviewed here already use supplied resolutions for their arguments and are unchanged. Own item bytes are unchanged. Reseal the same decision.
+
+Context refresh after position 17: The peer balance/LES assertion now explicitly supplies the common resolution hypotheses and identifies the horseshoe connecting maps. The earlier comparison, variance and positive-vanishing proofs do not use this proposition; their arguments remain valid under the previously checked hypotheses. Own item bytes are unchanged. Reseal the same decision.

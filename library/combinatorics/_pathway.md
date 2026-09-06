@@ -69,6 +69,7 @@ parts:
       - generalized-niceness-and-reduction-outcomes
       - property-star-and-comb-outcomes
       - from-generalized-niceness-to-erdos-hajnal
+      - the-structural-criterion-for-property-star
 ---
 
 ## counting
@@ -129,17 +130,14 @@ degree and gives the five colour theorem.
 
 ## probability
 
-A finite probability space makes expectation a counting tool, and the probabilistic method
-turns that into homogeneous sets, induced-copy estimates, sparse-pair decompositions, and
-the structural alternatives that drive the Erdos-Hajnal program. Modules, substitutions,
-quotient blockades, pure pairs, stars, combs, iterative restrictions, and sparsification
-then convert those witnesses into explicit clique-or-stable-set structure for classes from
-the bull and $C_5$ through the small-graph and six-vertex prime cases. The closing
-reduction layer packages generalized niceness, blockade thinning, and anticonnected
-thinnings into four-outcome, three-outcome, and iterated restricted-sparsification lemmas
-that force either the target restricted subgraph or a polynomial-sized homogeneous set.
-Property (*) makes the relevant comb trigger explicit; together with leaf reducibility it
-produces the constant-scale alternatives and then generalized niceness. Rödl initialization
-removes the initial restriction, while the final page upgrades the resulting restricted or
-blockade outcomes to the Erdos-Hajnal property, using complement invariance to return from
-the complement-free formulation to the original forbidden family.
+Finite probability makes expectation a tool for homogeneous sets, induced-copy
+estimates, sparse pairs, and Erdős--Hajnal alternatives. Modules, substitutions, blockades,
+pure pairs, stars, combs, restrictions, sparsification give clique-or-stable-set
+structure for the bull and $C_5$. Generalized niceness and thinning yield restricted-subgraph
+or polynomial homogeneous-set alternatives; leaf reducibility, Rödl initialization,
+complement invariance return to the forbidden family.
+The structural criterion supplies its precise input. Each relevant comb block has an
+$\mathcal F_1$-free part and a pure blockade with $\mathcal F_2$-free pattern: a large first
+part gives a homogeneous set and a wide transversal gives a pure blockade. Otherwise,
+integral geometric layers of a decreasing partition yield a wide layer or contradict the
+large $X$-part, proving the three property (*) outcomes with floor-safe constants.

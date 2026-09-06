@@ -123,8 +123,8 @@ const C = {
   beta:         "#4aa8ff",   // blue   — scaffolds and authors
   alpha:        "#a78bfa",   // violet — audits and adjudicates
   reader:       "#22d3ee",   // cyan   — independent readers and refuters
-  judgeA:       "#ffd23f",   // yellow — DeepSeek lane
-  judgeB:       "#3ddc84",   // green  — second judge lane (Opus since 2026-08-23)
+  judgeA:       "#ffd23f",   // yellow — stateless Terra item judge
+  judgeB:       "#3ddc84",   // green  — Terra whole-group reader
   gate:         "#f7b955",   // amber  — a gate still running
   ok:           "#3ddc84",
   bad:          "#ff5c5c",
@@ -485,9 +485,9 @@ function itemHead(t, a) {
   const preCol = pre.indexOf("pass") > 0 ? C.ok : pre.indexOf("REPAIR") > 0 ? C.warn : C.faint;
   let vx = 60;
   vx += chip(pre, vx, 312, { color: preCol, size: 20, mono: true, alpha: kv }) + 10;
-  const jud = t > T.stamp ? "judge: pass · deepseek + terra"
+  const jud = t > T.stamp ? "judge: pass · terra"
     : t >= T.insert ? "judge: — · voided by the repair"
-      : t > T.reject ? "judge: reject · deepseek" : "judge: —";
+      : t > T.reject ? "judge: reject · terra" : "judge: —";
   const judCol = t > T.stamp ? C.ok : t >= T.insert ? C.faint : t > T.reject ? C.bad : C.faint;
   chip(jud, vx, 312, { color: judCol, size: 20, mono: true, alpha: kv });
 }
@@ -710,15 +710,15 @@ function actorSlot(t, board) {
     panel(SLOT.x, SLOT.y, SLOT.w, 34, { r: 10, alpha: aj, fill: C.panelDeep, stroke: C.edgeSoft, lw: 1.4 });
     text("frozen · sha256 " + (again ? "3b9d…7e" : "a4f1…9c"), SLOT.x + 15, SLOT.y + 17,
       { size: 17, weight: 600, mono: true, color: rgba(C.ink, 0.82), alpha: aj });
-    text(again ? "this item only" : "one hash, both lanes", SLOT.x + SLOT.w - 15, SLOT.y + 17,
+    text(again ? "this item only" : "frozen corpus, independent reads", SLOT.x + SLOT.w - 15, SLOT.y + 17,
       { size: 16, weight: 600, color: C.faint, align: "right", alpha: aj });
     const ly = SLOT.y + 44, lh = SLOT.h - 44, lw2 = (SLOT.w - 14) / 2;
     const busy = again ? A(t, T.rj, 0.5) * (1 - A(t, T.rjDone, 0.5)) : A(t, T.lanes, 0.6) * (1 - A(t, T.laneVerdict, 0.6));
     const vk = again ? A(t, T.rjDone, 0.5) : A(t, T.laneVerdict, 0.5);
-    laneCard(SLOT.x, ly, lw2, lh, "DeepSeek V4 Pro", C.judgeA, aj,
-      { busy: busy, seed: 11, vk: vk, verdict: again ? "pass" : "reject", sub: "direct API · xhigh" });
-    laneCard(SLOT.x + lw2 + 14, ly, lw2, lh, "Claude Opus 5", C.judgeB, aj,
-      { busy: busy, seed: 71, vk: vk, verdict: "pass", sub: "fresh · read-only" });
+    laneCard(SLOT.x, ly, lw2, lh, "Terra item judge", C.judgeA, aj,
+      { busy: busy, seed: 11, vk: vk, verdict: again ? "pass" : "reject", sub: "stateless · read-only" });
+    laneCard(SLOT.x + lw2 + 14, ly, lw2, lh, "Terra group reader", C.judgeB, aj,
+      { busy: busy, seed: 71, vk: vk, verdict: "pass", sub: "whole-group · read-only" });
   }
   /* acts 4 and 5 — Alpha */
   const a4 = board * A(t, T.alphaIn - 0.4, 0.6) * (1 - A(t, T.rj - 1.0, 0.6));
@@ -762,7 +762,7 @@ function finding(t, a) {
     r: 16, alpha: k, fill: "#150b0e", stroke: rgba(C.bad, 0.55), lw: 1.8,
     glow: pulse(t, T.reject, 1.6) > 0.1 ? C.bad : null, glowSize: 18,
   });
-  chip("deepseek-v4-pro", x + 15, y + 26, { size: 16, mono: true, h: 26, color: C.judgeA, alpha: k });
+  chip("gpt-5.6-terra", x + 15, y + 26, { size: 16, mono: true, h: 26, color: C.judgeA, alpha: k });
   text("reject", x + w - 15, y + 26, { size: 19, weight: 700, mono: true, color: C.bad, align: "right", alpha: k });
   text("4.1 concludes for every n ≥ 1,", x + 15, y + 66, { size: 22, weight: 600, color: C.ink, alpha: k });
   text("but only n ≥ N is discharged.", x + 15, y + 98, { size: 22, weight: 600, color: C.ink, alpha: k });

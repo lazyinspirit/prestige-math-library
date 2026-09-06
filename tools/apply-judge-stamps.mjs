@@ -179,6 +179,17 @@ const contextHash = (id) => {
 // mapping immediately before `sources:` instead of silently skipping a licensed
 // pass. Frontmatter only; the mathematical body is never touched.
 const writeBlock = (text, block) => {
+  const inlineJudge = `judge: {model: "${models.join(' + ')}", verdict: pass, date: ${today}}`;
+  // Flow-style YAML is common in older authored items. Keep its original
+  // bytes and append the stamp inside the same mapping; a second top-level
+  // `verification` key makes the renderer drop the item. The second pattern
+  // also heals duplicate keys written by the former fallback on re-apply.
+  const duplicatedInline = /^(verification:\s*\{[^{}\n]*)(\})\nverification:\n {2}judge:\n(?: {4}.*\n)*/m;
+  if (duplicatedInline.test(text)) {
+    return text.replace(duplicatedInline, `$1, ${inlineJudge}$2\n`);
+  }
+  const inline = /^(verification:\s*\{[^{}\n]*)(\})\s*$/m;
+  if (inline.test(text)) return text.replace(inline, `$1, ${inlineJudge}$2`);
   const existing = /^ {2}judge:\n(?: {4}.*\n)*/m;
   if (existing.test(text)) return text.replace(existing, block);
   const precheck = /^( {2}precheck: .*\n)/m;
@@ -187,6 +198,13 @@ const writeBlock = (text, block) => {
   if (verification.test(text)) return text.replace(verification, `$&${block}`);
   const sources = /^sources:\n/m;
   if (sources.test(text)) return text.replace(sources, `verification:\n${block}sources:\n`);
+  // Some authored examples have neither a precheck nor sources. They still
+  // have valid YAML frontmatter and a current configured-judge pass, so the
+  // absence of those optional mappings must not make stamping impossible.
+  const frontmatterEnd = text.indexOf('\n---\n', 4);
+  if (frontmatterEnd >= 0) {
+    return `${text.slice(0, frontmatterEnd)}\nverification:\n${block}${text.slice(frontmatterEnd + 1)}`;
+  }
   return null;
 };
 
@@ -208,7 +226,11 @@ const result = {
 const judgeBlockRe = /^ {2}judge:\n(?: {4}.*\n)*/m;
 const hasCurrentPassBlock = (text) => {
   const m = text.match(judgeBlockRe);
-  return Boolean(m) && m[0].includes(`model: "${models.join(' + ')}"`) && m[0].includes('verdict: pass');
+  if (Boolean(m) && m[0].includes(`model: "${models.join(' + ')}"`) && m[0].includes('verdict: pass')) return true;
+  const inline = text.match(/^verification:\s*\{[^\n]*judge:\s*\{([^{}\n]*)\}[^\n]*\}\s*$/m);
+  return Boolean(inline)
+    && inline[1].includes(`model: "${models.join(' + ')}"`)
+    && inline[1].includes('verdict: pass');
 };
 const problems = [];
 for (const message of terminalParsed.errors) problems.push(`terminal resolution: ${message}`);

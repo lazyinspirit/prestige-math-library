@@ -245,3 +245,34 @@ export const stages = [${body || `{
   assert.equal(ex.stages[0].label, 'edited', 'a table that cannot fail is never loaded');
   assert.ok(notifications.some((n) => n.kind === 'stages-reload-refused'));
 });
+
+test('an edited watched stage dependency hot-reloads through the root table', async () => {
+  const fx = fixture();
+  const stagesDir = join(fx.repo, 'stages');
+  mkdirSync(stagesDir, { recursive: true });
+  const stagesFile = join(stagesDir, 'main.mts');
+  const dependencyFile = join(stagesDir, 'part.mts');
+  const table = `
+import { statSync } from 'node:fs';
+const partUrl = new URL('./part.mts', import.meta.url);
+const { label } = await import(partUrl.href + '?v=' + statSync(partUrl).mtimeMs);
+export const stages = [{
+  id: 's1', label, units: () => ['1'], pattern: /^worker-/, concurrency: 1,
+  plan: () => [], gates: () => [{ id: 'g', argv: ['true'] }],
+}];
+`;
+  writeFileSync(dependencyFile, `export const label = 'original';\n`);
+  writeFileSync(stagesFile, table);
+  const first = await import(`${stagesFile}?v=first`);
+  const { ex, notifications } = makeExecutor(fx, first.stages, {
+    stagesPath: stagesFile,
+    stagesWatch: [stagesFile, dependencyFile],
+  });
+  assert.equal(ex.stages[0].label, 'original');
+
+  writeFileSync(dependencyFile, `export const label = 'edited dependency';\n`);
+  utimesSync(dependencyFile, new Date(), new Date(Date.now() + 5_000));
+  await ex.maybeReloadStages();
+  assert.equal(ex.stages[0].label, 'edited dependency');
+  assert.ok(notifications.some((n) => n.kind === 'stages-reloaded'));
+});

@@ -1,0 +1,19 @@
+# FA evidence — queue b/2
+
+Decision: repaired. Source status: familiar. Item: `cor-ext-can-be-computed-from-any-projective-resolution-of-the-first-variable`.
+
+I read the current statement/proof, its original direct dependency statements/proofs, the published projective comparison-existence and comparison-uniqueness results, the batch-8 proof contract, both Terra rejections, and Sol's exact adjudication. The A/B context, manifest and batch-8 notes reviewed at position 1 apply here too: balanced Ext is introduced after its comparison theorems and resolutions are supplied data. No separate item risk_review is prescribed by the manifest. The original rejection's missing Dependent Choice hypothesis was correctly repaired by Sol. The final rejection identifies a remaining genuine citation/argument gap: pointwise homotopy equivalence does not itself state comparison uniqueness for different lifts or naturality for morphisms of objects.
+
+I independently supplied the needed proof. Choose a_M:Q(M)→P(M) lifting the identity, so contravariant Hom sends Hom(P,N) to Hom(Q,N), in the required direction. Reverse comparisons give homotopy inverses. For a chain homotopy h, the induced cochain homotopy is s^n(f)=f h_(n-1), with s^0=0, so the cochain identity holds also at degree zero. For u:M'→M the maps P(u)a_M' and a_MQ(u) have identical augmentation u and are homotopic by the explicitly cited uniqueness theorem. This is the naturality square after contravariant Hom. Postcomposition in N commutes on the nose. Independence and functor laws follow from the same uniqueness, without choosing comparison maps over a proper class. Zero objects and degree zero are included.
+
+This elementary comparison/homotopy mathematics is familiar enough not to require external verification. No external URL was used as independent evidence. Source and dependency locators are the item files named here: `def-balanced-ext-bifunctor`, `def-ext-via-a-projective-resolution-of-the-first-variable`, `thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object`, `thm-projective-comparison-map-exists`, and `thm-projective-comparison-maps-are-unique-up-to-chain-homotopy`. Both comparison theorems require DC, retained in the statement and Given.
+
+Updated only this item's body/dependencies, its batch-8 manifest dependencies, and its batch/merged proof-contract steps. No dependency was edited and no prerequisite licence is needed. Focused precheck passed: 1 checked, 0 failing. The newly cited dependencies are published earlier A-page results and introduce no backwards cycle. No pass stamp or judge verdict was created.
+
+Next action: record the exact repaired bytes; begin queue position 3 only after recorder acceptance.
+
+Context refresh after position 15: the peer vanishing statement now explicitly fixes the abelian category, supplied I on D, and both arguments in D. This does not change any comparison, variance, or projective-vanishing argument used here; it is not a direct dependency of this item. Rechecked the unchanged proof against the same local conventions. Reseal the same decision because page-peer statement hashing changed.
+
+Position 16 peer-context refresh: the projective Ext bifunctor now explicitly assumes its datum on all objects of A. This only supplies the missing domain hypothesis of an existing peer statement; the comparison/vanishing arguments reviewed here already use supplied resolutions for their arguments and are unchanged. Own item bytes are unchanged. Reseal the same decision.
+
+Context refresh after position 17: The peer balance/LES assertion now explicitly supplies the common resolution hypotheses and identifies the horseshoe connecting maps. The earlier comparison, variance and positive-vanishing proofs do not use this proposition; their arguments remain valid under the previously checked hypotheses. Own item bytes are unchanged. Reseal the same decision.

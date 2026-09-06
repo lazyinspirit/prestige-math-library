@@ -101,9 +101,9 @@ bound, so it is shortest.
 - At step 3, the orchestrator verifies and decides recommendations before
   authoring. Step 9 is the scope-denial sweep and continues without a pause;
   at the end of step 10, record the required grouped fatal-error report and
-  pause short of owner audit or publication. At step 7, run DeepSeek v4 Pro and
-  a fresh Claude Opus 5 session in parallel on identical skeptical A/B and dependency context,
-  then compare their findings at step 10.
+  pause short of owner audit or publication. At step 7, run one stateless Terra
+  judge per item while the read-only Terra whole-group readers inspect the same
+  frozen corpus; route any findings through the step-8 adjudication ledger.
 - Before beginning a cycle, rerun `node tools/validate-plan.mjs
   research/plan-spec.json` and regenerate `research/BUILD-LEVELS.md` after any
   plan change. Recompute this schedule if a `requires` edge or page status

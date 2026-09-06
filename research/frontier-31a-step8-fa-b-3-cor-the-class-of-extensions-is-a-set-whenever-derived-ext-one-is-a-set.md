@@ -1,0 +1,24 @@
+# FA evidence — queue b/3
+
+Decision: repaired. Source status: verified.
+Item: `cor-the-class-of-extensions-is-a-set-whenever-derived-ext-one-is-a-set`.
+
+The final Terra objection is correct. Sol restored the resolution assumptions, but the cited group-isomorphism theorem expressly assumes that extension classes form a set. It cannot discharge its own hypothesis. I read that full dependency and independently checked the three underlying classification lemmas. None of their statements requires a set of extension classes. The representation lemma needs a projective presentation; the supplied resolution gives one by taking the kernel of its degree-zero augmentation. The equality/equivalence lemma supplies injectivity, and the equivalent-extensions lemma supplies descent. The balanced hypotheses include the DC used by these comparisons.
+
+Repair: replace the circular dependency with `def-balanced-ext-bifunctor`, `lem-equivalent-extensions-have-the-same-ext-class`, `lem-every-ext-one-class-is-represented-by-an-extension`, and `lem-two-extensions-with-the-same-ext-class-are-equivalent`. Use the already given set S=Ext^1(M,N) as the set of labels, assigning delta_e(1_M) to each individual extension. The first and third lemmas prove that two labels agree exactly on equivalent diagrams. The second proves every label occurs. This constructs the set realization without ever forming a proper-class quotient or selecting representatives simultaneously. It is explicitly not a claim that a literal equivalence class of diagrams is itself a set.
+
+Conventions checked: `research/plan-homological-algebra-track.md`, HA-9 items 12–17 (lines 1860–1883), requires an explicit smallness discharge, with no silent proper-class quotient. Batch-8 notes and manifest preserve extensions of M by N as 0→N→E→M→0. The current definition of equivalence and the surrounding false statement on automatic smallness were read. The original contract's claim that any bijective collection is a set was inadequate for literal proper classes. Both batch and merged contracts now track the explicit set-realization argument; manifest dependencies were updated for this item. No separate item risk_review was present.
+
+External verification:
+- https://stacks.math.columbia.edu/tag/010I — Section 12.6, definitions 12.6.1–12.6.2 and the following size discussion, read in full. Confirms endpoint-preserving extension morphisms and that set-smallness needs justification outside small-category conventions.
+- https://stacks.math.columbia.edu/tag/06XP — Section 13.27, Lemmas 13.27.2, 13.27.5 and 13.27.6, including the complete proof of 13.27.5 through its closing paragraph. Confirms resolution computation, representation of every Ext element, and equality of classes exactly for equivalent extensions. Its derived-category machinery is corroboration only; the local repair uses the previously proved resolution lemmas and does not introduce that machinery as an unproved local dependency.
+
+Validation: focused precheck passed (1 checked, 0 failing). Dependencies all precede this corollary on its A-page chain. No dependency item was edited, so no prerequisite licence was required. No judge verdict or pass stamp created.
+
+Next action: record current bytes; start position 4 only after recorder acceptance.
+
+Context refresh at position 7: repairing the finite-cyclic Baer example changed a peer Example interface in the A/B context hash. This corollary and all its direct dependencies are unchanged. I checked that the new example uses a finite set of four-element group structures, which is consistent with this corollary's set-realization convention and supplies no new prerequisite. The repaired decision is unchanged and is resealed to satisfy the current-context predecessor gate.
+
+Context refresh after position 21: The higher-Yoneda comparison now explicitly uses Ext_P in the projective case and Ext_I in the injective case, with the same lifted terminal cocycle. Earlier Ext-one size and finite Baer calculations are independent of the higher theorem. For the product item, rechecked that its lifts a_i and b_i are precisely the new step 1.1 lifts, and its composite cocycle a t_p is unchanged; no multiplicativity or balance hypothesis has been imported. Thus the earlier decisions survive the changed peer/dependency interface. Own item bytes are unchanged. Reseal the same decision.
+
+Context refresh after position 27: The Yoneda product now explicitly composes two degree-zero morphisms and proves all mixed-degree associativity cases by endpoint pullback/pushout maps. The degree-zero actions already used in position 18 are precisely these actions; its cocycle computation and the comparison in position 21 are unchanged. Earlier extension-size, finite Baer-sum, and semisimple/global-dimension arguments do not depend on this product proof. Rechecked those uses against the explicit convention. Own item bytes are unchanged. Reseal the same decision.

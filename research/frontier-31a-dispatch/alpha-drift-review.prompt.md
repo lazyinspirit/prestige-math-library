@@ -1,0 +1,129 @@
+# Alpha prerequisite-drift review
+
+The task names the run, evidence, and report. Review each A page it assigns
+against the design and the current `research/plan-spec.json`: decide whether
+the design needs a prerequisite absent from that page's declared closure.
+Treat candidate names in the evidence as a reading list, not findings; read the
+design passage itself.
+
+For every assigned A page, write exactly one task-format `VERDICT:` line in its
+own `### <page-id>` report section. The report must use one of the task's
+canonical verdicts: `no-drift`, `drift-applied`, `drift-minted`,
+`drift-reordered`, `drift-rescoped`, or `drift-blocked`. Include the required
+page ids and orders exactly as the task specifies. The gate verifies the report
+against the current spec, not against an assertion in prose.
+
+Apply a genuine backward prerequisite by editing `requires` and validating the
+spec. Resolve a forward prerequisite by changing order so the resulting edge is
+backward. When the prerequisite is absent from the spec, add the required A
+page and its companion with a buildable order, then use `drift-minted`. If more
+than three pages must be minted, rescope to the prerequisite pairs instead;
+the replacement set may contain at most 27 pairs. `drift-blocked` stops the
+run, so use it only when no authorised resolution exists.
+
+Your writable scope is `research/plan-spec.json` and the task-named drift
+report. Do not write manifests, covers, scope ledgers, task files, or content:
+`tools/drift-apply.mjs` materialises minted and rescoped verdicts. Run
+
+```sh
+node tools/validate-plan.mjs research/plan-spec.json
+```
+
+after every spec edit. Do not request permissions.
+
+
+---
+
+# This dispatch
+
+run: frontier-31a
+role: alpha
+label: drift-review
+covers: drift
+output: research/frontier-31a-alpha-step0-drift.md
+
+## Step-0 prerequisite drift review — run `frontier-31a`
+
+A track design states what a page needs; `plan-spec.json` declares it. When
+they disagree the scaffold is built against the design and step 4 fails with
+`undeclared-prereq` — after the citation has been written. Caught here it is a
+one-line spec edit.
+
+This is a reading task and it is given to you rather than to a regex because
+three mechanical versions each failed differently. Real drift is usually in
+prose that never writes a `requires` line: on frontier-14 the topology design
+called a metric-only restriction "forced, not stylistic" *because the
+compactness page was unbuilt* — and it had since published. On frontier-15,
+step 0 found a design (§II.8 of the algebra track) that had re-routed a whole
+proof through pages the spec never declared. No parser reaches either.
+
+**Evidence assembled for you:** `research/frontier-31a-drift-evidence.json`
+
+Per page it gives the declared `requires`, the full transitive spec closure,
+every design-document line mentioning the page, and every plan page id
+appearing near those lines that is NOT already in the closure. The last list is
+raw and noisy on purpose — it is a reading list, not a finding list. Read the
+design section it points into, not just the evidence.
+
+### What to do with a finding
+
+- **Backward edge** (the missing prerequisite has a LOWER `order`): apply it
+  yourself — edit that page's `requires` in `research/plan-spec.json`, run
+  `node tools/validate-plan.mjs research/plan-spec.json`, record the exact edit.
+- **Higher-order target:** close it by REORDERING (owner, 2026-08-24). Edit
+  `order` so the edge points backward, revalidate, record `drift-reordered`.
+- **Target not in the spec at all:** MINT it (owner, 2026-08-24). Add the A page
+  and its `-examples` companion to `plan-spec.json`, placed so every edge stays
+  backward, and record `drift-minted`.
+- **Buildability after a finding:** each retained A and B page must still have
+  strictly more than 95% of its same-category `requires` available.
+  A<->B partner and cross-category edges do not serialize the frontier.
+  This run explicitly counts lower-order dependencies carried by its own scope ledger as available.
+  If an edit would put a page at or below 95%, drop the
+  original pair and record `drift-rescoped`, naming the dependency pairs to
+  build instead — at most 27 pairs total.
+
+You run BEFORE any Beta, so all three cost one Alpha pass and no authored work.
+
+### Report contract — the gate parses this
+
+Write `research/frontier-31a-alpha-step0-drift.md`, one section per A page:
+
+    ### <a-page-id>
+    ...what you read: doc, section, the design's stated prerequisites...
+    VERDICT: no-drift
+    VERDICT: drift-applied — added <page-id> (order N)[, ...]
+    VERDICT: drift-minted — <page-id> (order N)[, ...]
+    VERDICT: drift-reordered — <page-id> (order OLD -> NEW)[, ...]
+    VERDICT: drift-rescoped — build <page-id> (order N)[, ...] instead
+    VERDICT: drift-blocked — <the exact edge, and which of the three you tried>
+
+Exactly one VERDICT line per section. `tools/drift-review-check.mjs` fails the
+stage on a missing section, a malformed verdict, or any drift-blocked.
+`drift-blocked` is now a LAST RESORT, not the routine answer to an ordering
+question: reordering, minting and rescoping are yours.
+
+Edit `plan-spec.json` and write the report. NOT manifests, NOT the scope ledger —
+`tools/drift-apply.mjs` derives those from your verdicts.
+
+**No permission prompts of any kind**, including inside an `&&` chain.
+
+
+## Mathematical context continuity
+
+Read exact task paths first. Search current owned artifacts before historical runs;
+exclude dispatch logs from routine content searches. Fetch complete relevant source
+sections and dependency statements, using bounded output chunks. A truncated result
+is not evidence of absence; continue reading until the required argument is complete.
+Do not dump entire ledgers, source books, or repository-wide search results into context.
+
+For writing roles, after each completed item update the task-authorized notes or report with the
+current item IDs, exact claim and conventions, source paths/URLs and locators,
+dependency IDs, decisions, validation results, unresolved obligations, and next action.
+Automatic compaction can occur mid-proof. After compaction or handoff, reread the
+current item, relevant dependency statements, source passages, and these obligations
+before continuing a proof or repair. A summary is a navigation aid, never a substitute
+for mathematical evidence. If a hypothesis or source qualification cannot be
+recovered, record the blocker rather than infer it. Preserve all independent reviews
+and exact-hash gates. Never mark an unfinished obligation complete to save context.
+Checkpoint only in the task-authorized notes/report; do not create transcripts or alter other owners’ artifacts.

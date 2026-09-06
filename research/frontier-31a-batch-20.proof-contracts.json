@@ -1,0 +1,1706 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+    "lem-negative-gradient-energy-identity",
+    "cor-nonconstant-negative-gradient-trajectories-strictly-decrease-the-function",
+    "prop-every-morse-function-admits-a-complete-gradient-like-field-on-a-closed-manifold",
+    "lem-precompact-trajectory-tail-limit-sets-are-nonempty-compact-connected-and-flow-invariant",
+    "lem-a-limit-point-of-a-gradient-trajectory-is-critical",
+    "lem-a-compact-morse-trajectory-has-single-critical-alpha-and-omega-limits",
+    "lem-morse-trajectories-have-positive-energy-drop",
+    "thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point",
+    "thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces",
+    "lem-stable-and-unstable-manifolds-are-flow-invariant",
+    "cor-a-gradient-flow-has-no-nonconstant-periodic-or-recurrent-orbits",
+    "prop-proper-morse-slabs-give-complete-connecting-trajectories",
+    "ex-negative-gradient-lines-for-a-quadratic-morse-function",
+    "ex-meridian-trajectories-for-height-on-the-sphere",
+    "ex-gradient-flow-on-the-torus-morse-function",
+    "cex-positive-gradient-reverses-stable-and-unstable-dimensions",
+    "cex-an-incomplete-gradient-flow-on-a-noncompact-manifold"
+  ],
+  "contracts": {
+    "lem-riemannian-gradient-vanishes-exactly-at-critical-points": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "The high risk is the reverse implication in the iff. The current proof uses the metric identity for every tangent vector and then tests against the gradient itself; positive definiteness forces the gradient to vanish, while the forward implication is immediate."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-riemannian-gradient-of-a-smooth-function",
+          "source_section": "Definition",
+          "quote": "The **Riemannian gradient** of $f$ is the smooth vector field",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-critical-point-and-critical-value-of-a-smooth-function",
+          "source_section": "Definition",
+          "quote": "The point $p$ is a **critical point** of $f$ when $df_p=0$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-gradient",
+          "claim": "A zero gradient has zero differential.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "zero-differential",
+          "claim": "Positive definiteness makes a vector orthogonal to all vectors zero.",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "criticality",
+          "claim": "The two implications are the critical-point characterization.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is pointwise and has no indexing family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 checks the zero-gradient case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Riemannian gradient vanishes exactly at the critical points has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A Riemannian metric is positive definite, not degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Riemannian gradient vanishes exactly at the critical points: step 1.1 handles the forward implication by if grad_g f(x)=0, then [F1] gives df_x(v)=g_x(0,v)=0 for every v, so df_x=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Riemannian gradient vanishes exactly at the critical points: step 1.2 handles the reverse implication by conversely, if df_x=0, then [F1] gives g_x(grad_g f(x),v)=0 for every v. Taking v=grad_g f(x) and using positive definiteness gives grad_g f(x)=0."
+        }
+      ]
+    },
+    "lem-negative-gradient-energy-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negative-gradient-trajectory-of-a-morse-function",
+          "source_section": "Definition",
+          "quote": "A **negative-gradient trajectory** is a maximal integral curve",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-riemannian-gradient-of-a-smooth-function",
+          "source_section": "Definition",
+          "quote": "The **Riemannian gradient** of $f$ is the",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-differentials-of-smooth-maps",
+          "source_section": "Statement",
+          "quote": "then $d(G\\circ F)_p=dG_{F(p)}\\circ dF_p$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "chain-rule",
+          "claim": "Differentiate the composite.",
+          "step": "1.1",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "substitution",
+          "claim": "Insert the trajectory equation and metric duality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "norm",
+          "claim": "Recognize the metric norm square.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A trajectory domain is an interval containing the given time."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 permits a zero gradient and zero derivative."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A negative-gradient trajectory satisfies the energy identity has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The metric is Riemannian and hence nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement restricts the identity to every time in the maximal interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is an identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is an identity, not an equivalence."
+        }
+      ]
+    },
+    "cor-nonconstant-negative-gradient-trajectories-strictly-decrease-the-function": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-negative-gradient-energy-identity",
+          "source_section": "Statement",
+          "quote": "No compactness or completeness is assumed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+          "source_section": "Statement",
+          "quote": "$\\operatorname{grad}_g f(x)=0$ if and only if $x$ is a critical point",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-unique-maximal-integral-curve-through-each-point",
+          "source_section": "Statement",
+          "quote": "there is a unique maximal integral curve",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-competitor",
+          "claim": "A critical point yields the constant integral curve.",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "exclude-critical",
+          "claim": "Uniqueness excludes a critical point on a nonconstant curve.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "strict-energy",
+          "claim": "Nonzero gradient makes the energy derivative negative.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A trajectory has a nonempty interval domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the possible zero vector field value."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No counting parameter occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 excludes the degenerate constant trajectory by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint limit is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is one-way strict descent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is one-way strict descent."
+        }
+      ]
+    },
+    "prop-every-morse-function-admits-a-complete-gradient-like-field-on-a-closed-manifold": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "The high risk is preserving both strict descent and the exact Morse-coordinate model during patching, then proving completeness. Disjoint nested critical neighborhoods and cutoffs preserve the prescribed models; convex combinations preserve df(X)<0 off the critical set; compactness of the closed manifold makes the resulting smooth field complete."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points",
+          "source_section": "Statement",
+          "quote": "then $f$ has only finitely many critical points",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-every-smooth-vector-field-on-a-compact-manifold-is-complete",
+          "source_section": "Statement",
+          "quote": "Every smooth vector field on a compact manifold is complete",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-downward-gradient-like-vector-field",
+          "source_section": "Definition",
+          "quote": "A smooth vector field $X$ is **downward gradient-like for $f$** if both conditions hold",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "local-models",
+          "claim": "Choose disjoint critical neighborhoods and prescribe the model.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "patch",
+          "claim": "Patch descending fields while preserving the local models.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "complete",
+          "claim": "Compactness makes the patched field complete.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A closed manifold may be empty, where the empty field trivially satisfies the assertion; the construction concerns its finite critical set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 prescribes the zero value at each critical point through the local model."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 works for a singleton critical set."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Morse hypothesis excludes degenerate critical points."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No trajectory endpoint is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 makes only finitely many neighborhood choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is existence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is existence, not an equivalence."
+        }
+      ]
+    },
+    "lem-precompact-trajectory-tail-limit-sets-are-nonempty-compact-connected-and-flow-invariant": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "The high risk is nonemptiness and full flow invariance, especially because the ambient maximal flow is initially local. Nested nonempty connected tail closures inside the compact closure give a nonempty compact connected intersection. Uniform local existence near that compact closure justifies the small-time continuity argument in step 3.1; iteration inside the limit set gives every fixed time and applying -s gives equality."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "finite subcover",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fundamental-theorem-on-flows",
+          "source_section": "Statement",
+          "quote": "the map $\\Phi:\\mathcal D\\to M$ is smooth",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nested-tails",
+          "claim": "Tail closures are decreasing nonempty connected compact subsets.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "intersection",
+          "claim": "Compactness proves nonemptiness and preserves connectedness.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "invariance",
+          "claim": "Flow translation preserves the limiting intersection.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "alpha",
+          "claim": "Reverse time for the negative tail.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 rules out an empty tail-limit set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter is present."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 includes a tail closure with one-point image."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result is topological and has no nondegeneracy hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 separately treats the negative end."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-subcover contradiction chooses no member from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "lem-a-limit-point-of-a-gradient-trajectory-is-critical": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-precompact-trajectory-tail-limit-sets-are-nonempty-compact-connected-and-flow-invariant",
+          "source_section": "Statement",
+          "quote": "is nonempty, compact, connected, and invariant",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-negative-gradient-energy-identity",
+          "source_section": "Statement",
+          "quote": "No compactness or completeness is assumed",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+          "source_section": "Statement",
+          "quote": "if and only if $x$ is a critical point of $f$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-value",
+          "claim": "Monotonicity gives a limiting and constant value on the limit set.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "noncritical-drop",
+          "claim": "A noncritical point produces a strict short-time drop.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "invariant-contradiction",
+          "claim": "Invariance contradicts constancy of the limit-set value.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim is conditional on a nonempty limit set, supplied by precompactness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 distinguishes a nonzero gradient from a critical point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 also applies when the invariant limit set is a singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Morse nondegeneracy is not used in this lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 treats both alpha and omega tails."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection is made from the limit set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way implication."
+        }
+      ]
+    },
+    "lem-a-compact-morse-trajectory-has-single-critical-alpha-and-omega-limits": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "The critical risk is upgrading nonempty tail-limit sets to actual single endpoint limits in both time directions. Compactness gives complete trajectories and precompact tails, the gradient argument puts each connected limit set in the finite discrete critical set, and the final subsequence contradiction correctly upgrades each singleton limit set to convergence."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-every-smooth-vector-field-on-a-compact-manifold-is-complete",
+          "source_section": "Statement",
+          "quote": "Every smooth vector field on a compact manifold is complete",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-precompact-trajectory-tail-limit-sets-are-nonempty-compact-connected-and-flow-invariant",
+          "source_section": "Statement",
+          "quote": "is nonempty, compact, connected, and invariant",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-a-limit-point-of-a-gradient-trajectory-is-critical",
+          "source_section": "Statement",
+          "quote": "is a critical point of $f$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points",
+          "source_section": "Statement",
+          "quote": "has only finitely many critical points",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "full",
+          "claim": "Completeness supplies a full trajectory.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "critical-limits",
+          "claim": "Tail-limit sets are connected sets of critical points.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "singletons",
+          "claim": "Finiteness and discreteness force singleton connected limit sets.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "convergence",
+          "claim": "A singleton limit set gives convergence.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 gets nonempty limit sets."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numerical zero case occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 proves each limit set has one point."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Morse hypothesis already excludes degenerate critical points."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 proves both time-end limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A negative-gradient trajectory on a compact Morse manifold has single critical alpha and omega limits uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not an equivalence."
+        }
+      ]
+    },
+    "lem-morse-trajectories-have-positive-energy-drop": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "The high risk is passage to both infinite endpoints and strict positivity. The defining endpoint limits and continuity of f give the finite energy identity in the improper limit, while nonconstancy plus the no-critical-point-on-a-nonconstant-orbit lemma makes f strictly decrease and excludes zero drop."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-morse-trajectory-from-p-to-q",
+          "source_section": "Definition",
+          "quote": "nonconstant full trajectory of $-\\operatorname{grad}_g f$ with\n\n$$ \\lim_{t\\to-\\infty}\\gamma(t)=p\\qquad\\text{and}\\qquad\\lim_{t\\to\\infty}\\gamma(t)=q. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-negative-gradient-energy-identity",
+          "source_section": "Statement",
+          "quote": "No compactness or completeness is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-nonconstant-negative-gradient-trajectories-strictly-decrease-the-function",
+          "source_section": "Statement",
+          "quote": "then $(f\\circ\\gamma)'(t)<0$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-energy",
+          "claim": "Integrate the energy identity on a finite interval.",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "limit",
+          "claim": "Pass to the prescribed endpoints.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "positive",
+          "claim": "Strict descent makes the energy drop positive.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A Morse trajectory is a full nonconstant curve."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 excludes zero total drop for a nonconstant trajectory."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Morse trajectories have a positive energy drop has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition requires a Morse trajectory."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 passes to both prescribed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Morse trajectories have a positive energy drop uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is an equality and positivity assertion, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is an equality and positivity assertion, not an iff."
+        }
+      ]
+    },
+    "thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-downward-gradient-like-vector-field",
+          "source_section": "Definition",
+          "quote": "Thus the field is the negative Euclidean gradient",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nondegenerate-critical-point-nullity-index-and-coindex",
+          "source_section": "Definition",
+          "quote": "The **index** of $p$ for $f$ is the largest dimension",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "linear-flow",
+          "claim": "Solve the diagonal linear ODE.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "limit-disks",
+          "claim": "Read forward and backward local convergence from exponentials.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "dimensions",
+          "claim": "Identify the Hessian-sign dimensions.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A critical point and its local coordinate ball are given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes the zero coordinate solution at the critical point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 permits index or coindex one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Morse critical point is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 treats forward and backward time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary choice is required after coordinates are given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem describes local sets, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem describes local sets, not an iff."
+        }
+      ]
+    },
+    "thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point",
+          "source_section": "Statement",
+          "quote": "the local unstable and stable manifolds are respectively",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stable-and-unstable-sets-of-a-critical-point",
+          "source_section": "Definition",
+          "quote": "These definitions use the descending flow of $X$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fundamental-theorem-on-flows",
+          "source_section": "Statement",
+          "quote": "$\\Phi$ is the unique maximal local flow",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "eventual-local",
+          "claim": "Every convergent orbit eventually enters its local disk.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "exhaustion",
+          "claim": "Flow images exhaust the global stable and unstable sets.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "immersed",
+          "claim": "Compatible transported disks give immersed Euclidean manifolds.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each stable or unstable set contains its critical point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 permits a zero-dimensional stable or unstable manifold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 permits a one-dimensional disk exhaustion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The critical point is Morse and nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 uses the relevant forward or backward limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The exhaustion is defined by all flow images, not chosen representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a manifold conclusion, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a manifold conclusion, not an iff."
+        }
+      ]
+    },
+    "lem-stable-and-unstable-manifolds-are-flow-invariant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stable-and-unstable-sets-of-a-critical-point",
+          "source_section": "Definition",
+          "quote": "These definitions use the descending flow of $X$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fundamental-theorem-on-flows",
+          "source_section": "Statement",
+          "quote": "the map $\\Phi:\\mathcal D\\to M$ is smooth",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "one-inclusion",
+          "claim": "Time translation preserves each limiting condition.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "reverse",
+          "claim": "Use the inverse time translation.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "equality",
+          "claim": "Combine the inclusions.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each set contains the critical point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes the time $s=0$ translation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality parameter appears."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No Hessian degeneracy is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 treats both positive and negative time limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is equality, not a stated iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is equality, not a stated iff."
+        }
+      ]
+    },
+    "cor-a-gradient-flow-has-no-nonconstant-periodic-or-recurrent-orbits": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-nonconstant-negative-gradient-trajectories-strictly-decrease-the-function",
+          "source_section": "Statement",
+          "quote": "then $(f\\circ\\gamma)'(t)<0$ for every $t\\in I$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "periodic",
+          "claim": "A period contradicts strict decrease.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "return-bound",
+          "claim": "A recurrent subsequence stays below an earlier value.",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "continuity-contradiction",
+          "claim": "The returning values must also converge to the initial value.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a given nonconstant orbit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 excludes the zero-period alternative through nonconstancy."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A downward gradient flow has no nonconstant periodic or recurrent orbit has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "statement explicitly excludes the constant critical orbit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint limits are asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a negative consequence, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a negative consequence, not an iff."
+        }
+      ]
+    },
+    "prop-proper-morse-slabs-give-complete-connecting-trajectories": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "The critical risk is accidentally claiming global completeness from properness alone. The statement expressly assumes the whole maximal trajectory remains in one compact slab; a finite local-flow cover gives a uniform extension time at either finite endpoint, contradicting maximality. The consequence retains the separate trapping hypothesis."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-proper-smooth-function-and-compact-morse-slab",
+          "source_section": "Definition",
+          "quote": "a **compact Morse slab** when it is compact",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-negative-gradient-energy-identity",
+          "source_section": "Statement",
+          "quote": "No compactness or completeness is assumed",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves",
+          "source_section": "Statement",
+          "quote": "Then there exist $h>0$, an open neighbourhood $U$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-unique-maximal-integral-curve-through-each-point",
+          "source_section": "Statement",
+          "quote": "there is a unique maximal integral curve",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "uniform-time",
+          "claim": "A finite cover of the compact slab yields a positive local time bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "right-extend",
+          "claim": "A finite right endpoint contradicts maximality.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "both-ends",
+          "claim": "Repeat at the left end and record monotone trapping.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A trajectory image is nonempty once an initial point is given."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero numerical case is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 allows a one-chart finite cover."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No critical-point nondegeneracy is used in the continuation argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1 exclude both finite endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Compactness supplies a finite cover; no arbitrary choice function is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is conditional sufficiency, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is conditional sufficiency, not an iff."
+        }
+      ]
+    },
+    "ex-negative-gradient-lines-for-a-quadratic-morse-function": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "solve",
+          "claim": "Solve the two diagonal ODEs and read the coordinate disks.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "energy",
+          "claim": "Differentiate the quadratic along the solution.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Euclidean model has an initial point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes the origin."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 covers one-dimensional coordinate factors."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The displayed quadratic is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 gives both time directions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The formulas make no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a calculation, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a calculation, not an iff."
+        }
+      ]
+    },
+    "ex-meridian-trajectories-for-height-on-the-sphere": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "field",
+          "claim": "Project the ambient gradient to the tangent plane.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "meridians",
+          "claim": "Use the conserved longitude and decreasing height.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sphere is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes the two zero-field poles."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Meridian trajectories for height on the sphere has no free cardinality-one, one-dimensional, or unit-valued parameter requiring a distinct proof branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The height critical points are nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 identifies north and south endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Meridian trajectories for height on the sphere uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Meridian trajectories for height on the sphere makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Meridian trajectories for height on the sphere makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ]
+    },
+    "ex-gradient-flow-on-the-torus-morse-function": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "The high risk is the moduli count for trajectories away from invariant coordinate circles. The separated scalar equations have two choices of circle arc in each coordinate, giving four components; within each component two integration constants modulo common time translation leave one real parameter. The critical set, Hessian indices, and endpoint directions were also checked explicitly."
+      },
+      "citations": [],
+      "derivations": [
+        {
+          "id": "critical-data",
+          "claim": "Compute the differential, Hessian, critical points, and indices.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "separatrices",
+          "claim": "Use the separated equations to identify invariant circles, the four arc-choice components, and the one-parameter quotient in each component.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The torus is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 lists the zeroes of the gradient."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality boundary is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 computes nonzero Hessian eigenvalues at all critical points."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 identifies maximum and minimum limits on both coordinate arcs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Gradient flow for a Morse function on the flat torus makes a one-directional assertion rather than a biconditional, so there is no iff-forward branch to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Gradient flow for a Morse function on the flat torus makes a one-directional assertion rather than a biconditional, so there is no iff-reverse branch to prove."
+        }
+      ]
+    },
+    "cex-positive-gradient-reverses-stable-and-unstable-dimensions": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "opposite-flow",
+          "claim": "Solve the positive-gradient diagonal equations.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "reverse-labels",
+          "claim": "Read the stable and unstable coordinate spaces from the exponentials.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model has an initial point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes the origin."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 allows one-dimensional coordinate factors."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The quadratic is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 compares forward and backward limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Using the positive gradient reverses the stable and unstable dimensions uses supplied objects or explicit constructions and does not select from an otherwise unspecified merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a counterexample, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a counterexample, not an iff."
+        }
+      ]
+    },
+    "cex-an-incomplete-gradient-flow-on-a-noncompact-manifold": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "vector-field",
+          "claim": "Differentiate the cubic and form its negative gradient.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "blowup",
+          "claim": "Solve the scalar ODE and identify its finite blow-up time.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample chooses an initial point $x_0>0$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 records the zero of the vector field at the origin."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "counterexample text explicitly notes it is not a Morse example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 exhibits the finite positive endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The explicit solution makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal claim rather than proving an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal claim rather than proving an iff."
+        }
+      ]
+    }
+  }
+}

@@ -214,14 +214,14 @@ not from a display-sized tail. At Step 6, a reviewed risk-report residue fans
 out by the existing Alpha-group ownership: disjoint groups repair in parallel,
 while each named item keeps its independent three-try budget.
 
-Step 8 keeps its durable ceiling of two frozen judge contexts per item. If the
-second rejection is confirmed fatal, the owning group Alpha gets the complete
-second adjudication-and-repair pass. Once that repaired text is current but the
-judge budget is exhausted, `8-rejudge` dispatches one fresh `final-adjudicator`
-per affected group. That role is fixed to Sol at xhigh reasoning with web search;
+Step 8 sends every Step-7 judge rejection and reader warning through the owning
+Sol-xhigh group adjudicator. Each repaired item receives one paid Terra rejudge.
+A Terra rejection then goes directly to one fresh `final-adjudicator` per
+affected group, with no second Sol pass and no further judge call. That role is
+fixed to Astra at medium reasoning with web search;
 its generated frozen queue enforces one-item-at-a-time work by refusing to
-record item N before every predecessor. Each FA independently accepts Alpha's
-repair or repairs it, follows library conventions, and records authoritative
+record item N before every predecessor. Each FA independently adjudicates the
+Terra rejection, accepts the current Sol repair or repairs it, follows library conventions, and records authoritative
 source URLs whenever it had to verify unfamiliar mathematics. Its exact-hash
 terminal receipt can close judge coverage but cannot create a judge verdict or
 pass stamp.
@@ -229,8 +229,8 @@ pass stamp.
 ## Portability
 
 Dispatch receipts include observed token usage and request peaks extracted before
-temporary session cleanup. Agents compact at 200k total active-context tokens,
-except Step-8 final adjudicators, whose model defaults remain in effect. Prompts
+temporary session cleanup. Every agent, including Step-8 final adjudicators,
+compacts at 200k total active-context tokens. Prompts
 require durable mathematical checkpoints for writing roles and evidence rereads
 after compaction; read-only roles preserve their no-write boundary. This threshold
 does not guarantee requests remain below 272k. Step-8 repair envelopes filter
@@ -303,7 +303,7 @@ the engine against a fake pipeline whose agents are scripts, and prove the
 retried exactly once and then blocks, that a vacuous gate stops the run, that
 pause holds and resume releases, that a restart does not redo finished work, and
 that a stage asking a model for mechanical work is refused at dispatch.
-The Step-8 tests additionally pin one Sol/xhigh, web-enabled FA per affected
+The Step-8 tests additionally pin one Astra/medium, web-enabled FA per affected
 group, deterministic serial queues, out-of-order receipt refusal, and terminal
 closure without a fabricated judge verdict.
 
@@ -360,6 +360,11 @@ backed. It only appeared when the gate first ran across all batches at once.
 `bin/watchdog.sh <repo>` restarts a dead engine every 60s. State is durable, so
 a restart resumes rather than repeats. `autopilot stop` writes a marker the
 watchdog honours — without it, stopping is impossible, because the two fight.
+
+An active controller also watches every `.mts` module in its stage-table
+directory. A validated edit to either the root table or a composed stage module
+is loaded at the next tick with an independent cache version; changing
+`mathlib.step6.mts` therefore does not require a controller restart.
 
 ## Layout
 

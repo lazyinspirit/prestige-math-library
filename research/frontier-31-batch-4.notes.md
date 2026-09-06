@@ -1,0 +1,98 @@
+# frontier-31 batch 4 — scaffold notes
+
+## Scope, design check, and checkpoint
+
+- Task-owned files only: `frontier-31-batch-4.pages.json`, this notes file, and `frontier-31-batch-4.coverage.json`.
+- Design read: `research/plan-probability-track.md`, PT-3 at lines 435–513. It specifies the cylinder/premeasure route, a countable arbitrary-measurable-space product theorem, arbitrary-index standard-Borel Kolmogorov extension, uniqueness only on the cylinder sigma-algebra, and exactly the eight companion examples scaffolded below.
+- Spec check: `research/plan-spec.json` gives order `288.101`, the same A/B ids, and the same two A prerequisites as the design: `independence-borel-cantelli-and-zero-one-laws-examples` and `complete-metrizability-and-baire`. There is no design/spec drift to adjudicate.
+- Controller observation, not changed here: the live `.autopilot` status reported an older `frontier-23` run while this task explicitly assigns `frontier-31`. This is preserved as a run-state discrepancy; no workflow state was modified.
+- Checkpoint: all 21 A and 8 B item ids below are newly scaffolded and were unused when checked against current owned artifacts and existing `items/`. The A page has 21 items, so it is below the mandatory 60-item split threshold. Next action after this checkpoint is the listed batch validators.
+
+## Conventions and proof boundary
+
+1. For an index set `I` and measurable spaces `(E_i, E_i)`, a finite-coordinate cylinder is `pi_F^-1(A)` for finite `F subset I` and `A` in the finite product sigma-algebra. The union of such cylinders is an algebra; rectangle cylinders are retained as a smaller pi-system for uniqueness arguments.
+2. A finite-dimensional family is indexed by finite coordinate sets and is compatible both under coordinate projection and reordering. This is stronger than agreement of one-dimensional marginals.
+3. `thm-countable-product-of-probability-spaces` is deliberately only the product-marginal theorem for a countable sequence of arbitrary measurable probability spaces. It is not an arbitrary-index or general-consistent-FDD theorem.
+4. A standard Borel space is a measurable space measurably isomorphic to the Borel space of a Polish space; no particular Polish topology is made part of the datum.
+5. For process comparisons, equality of all finite-dimensional laws, modification, and indistinguishability are distinct. The fixed-time equality event uses a measurable diagonal. Indistinguishability is formulated as one measurable null exceptional set, avoiding an unlicensed uncountable intersection.
+6. The arbitrary-index theorem produces and uniquely determines a measure only on the cylinder/product sigma-algebra. It makes no claim about every subset of the path space or every path functional.
+7. The planned arbitrary-index proof follows the design: compact inner approximation, a compact finite-intersection/diagonal argument, and Caratheodory extension. The design calls this the BPI/ultrafilter route. The existing library item `thm-tychonoff` is scoped with full AC, so its use is a documented choice-strength seam to resolve explicitly when authoring, not a silent strengthening of the design.
+
+## Sources actually read and harvested
+
+All were opened as full-text HTTP(S) documents through the research browser; the coverage file contains every source-owned heading or named result read and its disposition. The command-line fetch stamps are recorded below as environment-blocked rather than invented.
+
+| Treatment and exact URL | Exact range read | Source support retained |
+| --- | --- | --- |
+| Durrett, *Probability: Theory and Examples*, 5e — https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf | Contents PDF pp. 4, 8; §2.1.4 printed pp. 52–55/PDF pp. 59–62; Appendix A.3 printed pp. 464–466/PDF pp. 471–473 | Textbook support for countable `R^N` extension, independent construction, independent coordinates, and the continuity-at-empty-cylinder lemma. Its stated scope is only countable real coordinates. |
+| Biskup, *MATH 275D notes*, Ch. 2 — https://math.ucla.edu/~biskup/275d.1.25f/PDFs/ch2.pdf | §2 PDF pp. 0–6: §2.1 pp. 0–1, §2.2 pp. 1–5, §2.3 pp. 5–6 | Main complete proof template: FDD consistency, standard Borel, cylinder algebra, inner regularity, finite standard-Borel products, decreasing-cylinder continuity, extension, uniqueness, and the modification example. The stated theorem has one common standard-Borel state space. |
+| Shalizi, *36-754 Lecture 2: Building Processes* — https://www.stat.cmu.edu/~cshalizi/754/notes/lecture-02.pdf | Chapter 2 PDF pp. 3–5, Theorem 27 through Theorem 29 proof | Independent treatment with an arbitrary-index family of varying Borel coordinate spaces. The countable-cylinder proof makes the countable-coordinate dependence boundary explicit; it is terse and is supplemented by Biskup's fuller proof. |
+| Kajino, *Probability Theory*, §3.6 — https://www.kurims.kyoto-u.ac.jp/~nkajino/lectures/2011/Prob2011/Prob2011.pdf | §3.6 printed pp. 96–99/PDF pp. 100–104, through final proof before Exercises | Independent countable arbitrary-measurable-space product proof, including cylinder algebra, countable additivity, Bernoulli product, and coordinate independence. |
+| Varadhan, *Probability Theory*, Ch. 1 — https://math.nyu.edu/~varadhan/course/PROB.ch1.pdf | §1.5 PDF pp. 17–18, including Definition 1.11 and Exercise 1.21 | Product sigma-field and field-of-rectangles formulation. |
+| Varadhan, *Probability Theory*, Ch. 4 — https://math.nyu.edu/~varadhan/course/PROB.ch4.pdf | §4.4 PDF pp. 15–17 through Remark 4.8 | Consistent history laws and the precise warning that Kolmogorov hypotheses differ from Ionescu--Tulcea's kernel construction; kernel material is deferred to PT-15. |
+| Aldous--Chewi, *Stat 205B notes*, Lecture 9 — https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf | Lecture 9 PDF pp. 35–37, §§9.1–9.3 through Theorem 9.3 proof | Direct later use of Kolmogorov extension in general Borel Markov-chain construction. Conditional independence, splice, and kernels have the explicit deferred destination `markov-kernels-and-markov-chains`. |
+
+## Dependency rationale
+
+The scaffold uses existing, published foundations rather than assuming them silently: `def-measurable-space`, `def-product-sigma-algebra-and-finite-product-sigma-algebras`, `def-algebra-of-subsets`, `def-premeasure-on-an-algebra`, `def-pi-system`, `def-generated-sigma-algebra`, `def-probability-measure`, `def-random-element-and-real-random-variable`, `def-law-or-distribution-of-a-random-element`, `def-independent-random-elements`, `def-polish-space`, and `def-compact-space`.
+
+The extension chain explicitly invokes `thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique` only for its finite-product measure input, `thm-continuity-from-above-for-measures`, `thm-caratheodory-extension-theorem`, and `thm-dynkin-pi-lambda`. The arbitrary-index compactness step is visibly dependent on `thm-tychonoff`. Thus neither a product measure nor a uniqueness theorem is taken as an unstated background fact.
+
+## A-page item checkpoint
+
+Each row records the planned exact claim, the complete manifest dependency list, and its immediate source/proof basis.
+
+| Item | Exact planned claim; source/proof basis | `deps` |
+| --- | --- | --- |
+| `def-coordinate-maps-and-cylinder-sigma-algebra` | Defines finite-coordinate projections, cylinders, and names the already-defined product/cylinder sigma-algebra; Kajino Def. 3.64, Varadhan §1.5. | `def-measurable-space`, `def-product-sigma-algebra-and-finite-product-sigma-algebras` |
+| `lem-finite-coordinate-cylinders-form-a-pi-system` | Intersections lift to the finite union of supports; Kajino's cylinder construction. | `def-coordinate-maps-and-cylinder-sigma-algebra`, `def-pi-system` |
+| `lem-finite-coordinate-cylinder-sets-form-an-algebra` | All finite-coordinate measurable cylinders close under complement and finite union; Biskup Lem. 2.6, Kajino proof, Varadhan Ex. 1.21. | `def-coordinate-maps-and-cylinder-sigma-algebra`, `def-algebra-of-subsets` |
+| `def-consistent-family-of-finite-dimensional-distributions` | Defines projection and permutation consistency of finite laws; Biskup Def. 2.2, Shalizi Thm. 29. | `def-probability-measure`, `def-product-sigma-algebra-and-finite-product-sigma-algebras` |
+| `lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined` | Consistency gives presentation-independent values and finite additivity on the cylinder algebra; Biskup Lem. 2.6. | `def-consistent-family-of-finite-dimensional-distributions`, `lem-finite-coordinate-cylinder-sets-form-an-algebra`, `def-premeasure-on-an-algebra` |
+| `lem-countable-product-cylinder-premeasure-is-countably-additive` | Proves continuity at empty and then the countable premeasure condition for countable arbitrary measurable products; Kajino §3.6, Durrett Lem. A.3.3 as the real-coordinate check. | `lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined`, `thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique`, `thm-continuity-from-above-for-measures` |
+| `thm-countable-product-of-probability-spaces` | Existence and cylinder-sigma uniqueness of countable product probability measures over arbitrary measurable spaces; Kajino Thm. 3.65, Durrett Thms. 2.1.21/A.3.1, Shalizi Thm. 27. | `def-coordinate-maps-and-cylinder-sigma-algebra`, `lem-finite-coordinate-cylinders-form-a-pi-system`, `lem-countable-product-cylinder-premeasure-is-countably-additive`, `thm-caratheodory-extension-theorem`, `thm-dynkin-pi-lambda` |
+| `cor-coordinate-random-elements-on-a-countable-product-are-independent` | Coordinate maps have their prescribed laws and are independent; Durrett Ex. A.3.2, Kajino Prop. 3.67. | `thm-countable-product-of-probability-spaces`, `def-coordinate-maps-and-cylinder-sigma-algebra`, `def-independent-random-elements` |
+| `cor-countable-independent-copies-exist` | Canonical countable product supplies i.i.d. copies of any prescribed law; Durrett §2.1.4. | `cor-coordinate-random-elements-on-a-countable-product-are-independent`, `def-law-or-distribution-of-a-random-element` |
+| `def-stochastic-process-and-finite-dimensional-distributions` | Defines varying-coordinate process and ordered finite-dimensional laws; Biskup Def. 2.1. | `def-random-element-and-real-random-variable`, `def-consistent-family-of-finite-dimensional-distributions` |
+| `def-law-modification-and-indistinguishability-of-processes` | Separates FDD law, fixed-time modification, and one-null-set indistinguishability; Biskup §2.3 supplies the counterexample context. | `def-stochastic-process-and-finite-dimensional-distributions`, `def-law-or-distribution-of-a-random-element`, `def-product-sigma-algebra-and-finite-product-sigma-algebras` |
+| `def-standard-borel-space` | Defines standard Borel via a Polish Borel presentation; Biskup Def. 2.3. | `def-measurable-space`, `def-polish-space` |
+| `lem-finite-products-of-standard-borel-spaces-are-standard-borel` | Establishes finite-product closure needed for finite FDDs; Biskup Lem. 2.8. | `def-standard-borel-space`, `def-product-sigma-algebra-and-finite-product-sigma-algebras` |
+| `thm-borel-probability-measures-on-polish-spaces-are-inner-regular` | Gives compact inner approximation for finite Borel measures on Polish spaces; Biskup Lem. 2.7. | `def-polish-space`, `def-probability-measure`, `def-compact-space` |
+| `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces` | Extends any compatible finite family over arbitrary index set of standard Borel coordinates, uniquely on the cylinder sigma-algebra; Shalizi Thm. 29 gives varying-coordinate scope and Biskup Thm. 2.4/Prop. 2.9 the compact proof. | `def-coordinate-maps-and-cylinder-sigma-algebra`, `lem-finite-coordinate-cylinders-form-a-pi-system`, `lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined`, `def-consistent-family-of-finite-dimensional-distributions`, `def-standard-borel-space`, `lem-finite-products-of-standard-borel-spaces-are-standard-borel`, `thm-borel-probability-measures-on-polish-spaces-are-inner-regular`, `thm-tychonoff`, `thm-caratheodory-extension-theorem`, `thm-dynkin-pi-lambda` |
+| `cor-arbitrary-product-measure-for-standard-borel-probability-spaces` | Applies the extension theorem to finite products of given coordinate marginals. | `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces`, `def-consistent-family-of-finite-dimensional-distributions`, `thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique` |
+| `cor-canonical-process-realizes-consistent-finite-dimensional-laws` | Coordinate process under the extension measure has the designated FDDs; Biskup proof after Thm. 2.4. | `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces`, `def-coordinate-maps-and-cylinder-sigma-algebra`, `def-stochastic-process-and-finite-dimensional-distributions` |
+| `thm-a-process-law-on-cylinder-space-is-determined-by-finite-dimensional-distributions` | Agreement on cylinder pi-system gives equality on its generated sigma-algebra; Biskup Cor. 2.13. | `def-stochastic-process-and-finite-dimensional-distributions`, `def-coordinate-maps-and-cylinder-sigma-algebra`, `lem-finite-coordinate-cylinders-form-a-pi-system`, `thm-dynkin-pi-lambda` |
+| `lem-cylinder-sigma-events-depend-on-countably-many-coordinates` | Every cylinder-measurable event is determined by a countable set of coordinates; direct generated-sigma proof, mirrored by Shalizi's countable-cylinder proof. | `def-coordinate-maps-and-cylinder-sigma-algebra`, `def-generated-sigma-algebra` |
+| `rem-cylinder-sigma-algebra-versus-full-product-power-set` | Records the measurable path-space boundary without an unsupported cardinality claim. | `def-coordinate-maps-and-cylinder-sigma-algebra`, `lem-cylinder-sigma-events-depend-on-countably-many-coordinates` |
+| `rem-kolmogorov-extension-state-space-boundary` | Contrasts countable arbitrary-measurable product with arbitrary-index standard-Borel extension and defers kernels. | `thm-countable-product-of-probability-spaces`, `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces` |
+
+## B-page item checkpoint
+
+| Item | Exact planned claim; source/proof basis | `deps` |
+| --- | --- | --- |
+| `ex-infinite-coin-toss-space` | Countable fair-Bernoulli product with finite cylinder probabilities; Kajino Ex. 3.66. | `thm-countable-product-of-probability-spaces`, `cor-coordinate-random-elements-on-a-countable-product-are-independent` |
+| `ex-iid-sequence-with-a-prescribed-law` | Canonical independent copies with a supplied common law. | `cor-countable-independent-copies-exist` |
+| `ex-independent-but-not-identically-distributed-coordinate-sequence` | Product coordinates are independent although chosen Bernoulli marginals differ. | `cor-coordinate-random-elements-on-a-countable-product-are-independent`, `def-law-or-distribution-of-a-random-element` |
+| `ex-canonical-random-walk-from-product-increments` | Partial sums of canonical independent fair increments form the random walk. | `ex-infinite-coin-toss-space`, `def-stochastic-process-and-finite-dimensional-distributions` |
+| `ex-uncountable-bernoulli-coordinate-process` | Arbitrary-index fair-Bernoulli FDDs realize on cylinder sigma-algebra. | `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces`, `cor-canonical-process-realizes-consistent-finite-dimensional-laws` |
+| `cex-modification-need-not-be-indistinguishable` | `Y_t=1_{U=t}` modifies zero process but cannot agree off one null set; Biskup's §2.3 example. | `def-law-modification-and-indistinguishability-of-processes`, `ex-uniform-random-variable-on-zero-one` |
+| `cex-consistent-marginals-alone-do-not-specify-joint-laws` | Equal fair bits versus independent fair bits share one-dimensional marginals but have different two-dimensional laws. | `def-consistent-family-of-finite-dimensional-distributions`, `def-stochastic-process-and-finite-dimensional-distributions` |
+| `cex-a-noncylinder-path-functional-may-fail-measurability` | On uncountable Bernoulli paths, the event “uncountably many coordinates equal one” cannot depend on only countably many coordinates and is not cylinder measurable. | `ex-uncountable-bernoulli-coordinate-process`, `lem-cylinder-sigma-events-depend-on-countably-many-coordinates`, `def-random-element-and-real-random-variable` |
+
+## Known limits and authoring obligations
+
+- Durrett's two extension statements read here are for countable real-coordinate families. They are evidence for the countable route, never evidence for the final varying-space arbitrary-index theorem.
+- Biskup supplies the full compactness argument but phrases its theorem for one common standard-Borel state space. Shalizi Theorem 29 supplies the target's heterogeneous Borel-coordinate statement, but its countable-cylinder construction is more compressed. The authored theorem must combine only these verified scopes and make the coordinate reindexing explicit.
+- The countable and arbitrary-index routes must remain separate: do not claim a countable arbitrary-measurable-space theorem for all compatible FDDs merely because the product-marginal theorem holds.
+- Before proof authoring, resolve the BPI/full-AC compactness seam in the item sources and proof facts. Do not cite `thm-tychonoff` as though it discharged a BPI-only statement while it currently declares AC.
+- In the modification definition and counterexample, retain the measurable-diagonal qualification. In the nonmeasurable functional example, prove nonmeasurability through countable-coordinate dependence, not by assuming a product sigma-algebra is a power set.
+- All source headings have a disposition in the coverage file. The Markov-kernel material is deferred with destination `markov-kernels-and-markov-chains`; it was not silently removed from the harvest.
+
+## Validation checkpoint
+
+- PASS — `node tools/coverage-checklist.mjs --require-destination research/frontier-31-batch-4.coverage.json`: 1 A page, 57 harvested headings/results, 0 errors, 0 warnings.
+- PASS — `node tools/content-policy.mjs --manifest-only research/frontier-31-batch-4.pages.json`: 29 scoped items, 0 errors, 0 warnings.
+- PASS — `node tools/validate-plan.mjs research/plan-spec.json`: the plan reports its page order, item dependencies, B-page dependencies, and ids as consistent. Its verbose output was captured only for inspection; no plan artifact was changed.
+- EXTERNAL WHOLE-RUN FAILURE — the required whole-run manifest-only content-policy invocation reports six missing dependencies in another batch's group-homology scaffold (`def-group-homology-as-a-derived-functor`, `def-group-cohomology-as-a-derived-functor`, and `thm-universal-coefficient-theorem-for-cohomology-over-a-pid`). They are outside this batch's authorized files; this batch has no such error.
+- ENVIRONMENT-BLOCKED — `source-fetch-check --stamp` attempted all seven URLs and each failed before HTTP with `EAI_AGAIN`; a repeat gave the same result. `url-sweep` likewise reported curl DNS failures for all seven. The research browser had already fetched each complete PDF and supplied the locators above, so the issue is the command-line sandbox resolver, not a sourced claim that a document is unavailable.
+- Consequently, `source-backing --require-verified` is red only because the liveness file has seven resolver failures and no durable fetch stamps can be written. No source row, harvested result, or scaffold item was removed to make that gate green. Pending external condition: run source-fetch/liveness in a networked runner or restore this runner's DNS, then stamp and re-run source-backing.
