@@ -43,8 +43,10 @@ wrongly in `DEFERRED.md` §0.
 | `plan-r-specific-pages.md` | The R-specific topology / continuity / R^n pages, which stand alongside the general ones by owner decision |
 | `plan-choice-and-ultrafilters-page.md` | **Ready to author.** The minimal set theory for Tychonoff and the ultrafilter lemma; ordinal-free via Bourbaki-Witt |
 | `plan-first-draft-superseded.md` | The original 13-pair draft, kept for provenance only |
-| **`plan-spec.json`** | **The machine-checked stack.** All 132 pages (64 A + 64 B + the 4 already published) in strict reading order, each with its declared page-level prerequisites. `node tools/validate-plan.mjs research/plan-spec.json` proves the whole design acyclic. Regenerate with `node research/gen-spec.mjs` |
-| `gen-spec.mjs` | Generator for the above, so 132 pages stay free of copy-paste drift. Edit this, not the JSON |
+| `plan-set-theory-completion-track.md` | **Current Foundations completion scaffold.** Thirty-one A/B pairs from logic and rank through forcing, choiceless models, large cardinals, set-theoretic topology, PCF and continuum combinatorics; includes a clause-level destination for every result on `deferred-set-theory-beyond-choice` |
+| `set-theory-completion-source-audit.md` | Four independent source sweeps, verified endpoints, axiom-strength cautions, one fatal published-description defect, and the unresolved/open claims that future authoring must not overstate |
+| **`plan-spec.json`** | **The accumulated machine-checked stack and canonical frontier input.** Every page has a unique order and declared page-level prerequisites. `node tools/validate-plan.mjs research/plan-spec.json` checks acyclicity, order and transitive reduction; `tools/autopilot/src/frontier.mts` reads this JSON directly |
+| `gen-spec.mjs` | Historical bootstrap for the original 129-page Real Analysis + Topology stack. It does not round-trip later appended tracks and must not be run to regenerate the accumulated `plan-spec.json` |
 
 ### How the spec stays honest while it is incomplete
 
@@ -93,6 +95,9 @@ neighbourhood filter. Say so in the item.
 
 ## What is deliberately out of scope
 
-See `../DEFERRED.md`. Measure theory, functional analysis, forcing/large
-cardinals, and algebraic topology are deferred to future sessions, with every
-affected result logged there rather than dropped.
+The set-theory completion scaffold now plans forcing, inner models, symmetric
+models and the large-cardinal machinery required by the set-theory deferred
+catalogue; none is authored merely because it is planned. Specialist inner
+model/determinacy programs remain bounded in that scaffold. Consult the current
+track plans and `library/not-proved-here/` rather than the historical
+`DEFERRED.md` boundary when deciding whether a result has actually been proved.
