@@ -2,7 +2,7 @@
 id: fs-the-two-tor-constructions-are-equal-by-definition
 title: "The two resolution constructions of Tor are not equal by definition"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

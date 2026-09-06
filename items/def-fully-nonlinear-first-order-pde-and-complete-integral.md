@@ -2,7 +2,7 @@
 id: def-fully-nonlinear-first-order-pde-and-complete-integral
 kind: definition
 title: "Fully nonlinear first-order PDEs and complete integrals"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-linear-semilinear-quasilinear-and-fully-nonlinear-pde]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

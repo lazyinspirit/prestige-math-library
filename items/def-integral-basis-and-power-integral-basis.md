@@ -2,13 +2,14 @@
 id: def-integral-basis-and-power-integral-basis
 kind: definition
 title: "Integral and power integral bases"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-order-in-a-number-field]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

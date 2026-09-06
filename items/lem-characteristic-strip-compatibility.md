@@ -2,7 +2,7 @@
 id: lem-characteristic-strip-compatibility
 kind: lemma
 title: "Compatibility of a characteristic strip with Cauchy data"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-semilinear-and-quasilinear-first-order-cauchy-problems, thm-chain-rule-for-total-derivatives]
 justified_by: []
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "First order PDE: The Methods of Characteristics"

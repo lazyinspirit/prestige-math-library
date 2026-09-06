@@ -2,7 +2,7 @@
 id: thm-localisation-and-flat-base-change-of-regular-sequences
 kind: theorem
 title: "Localisation And Faithfully Flat Base Change Of Regular Sequences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-sequence-on-a-module, thm-localisation-of-modules-is-exact, def-flat-and-faithfully-flat-modules-and-ring-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

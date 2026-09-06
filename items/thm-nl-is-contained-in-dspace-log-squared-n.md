@@ -2,14 +2,17 @@
 id: thm-nl-is-contained-in-dspace-log-squared-n
 kind: theorem
 title: "NL is contained in read-only-input DWORKSPACE(log-squared n)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-l-and-nl, def-read-only-input-workspace-classes, thm-read-only-input-savitch-simulation]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 3.12"

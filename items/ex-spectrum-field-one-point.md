@@ -2,13 +2,16 @@
 id: ex-spectrum-field-one-point
 kind: example
 title: "The spectrum of a field is a one-point affine scheme"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-affine-scheme-spectrum, def-field, def-prime-and-maximal-ideals, thm-stalk-structure-sheaf-prime-localization, def-residue-field-scheme-point, thm-global-sections-affine-scheme]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Section 26.5"

@@ -2,13 +2,14 @@
 id: def-split-extension-class
 kind: definition
 title: "The split extension class"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extension-of-an-object-by-an-object-in-an-abelian-category, def-split-short-exact-sequence-in-an-abelian-category]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

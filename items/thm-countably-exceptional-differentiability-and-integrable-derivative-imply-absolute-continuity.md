@@ -2,7 +2,7 @@
 id: thm-countably-exceptional-differentiability-and-integrable-derivative-imply-absolute-continuity
 kind: theorem
 title: "Countably exceptional differentiability and integrable derivative imply absolute continuity"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-dependent-choice, thm-banach-zarecki-characterisation-of-absolute-continuity, lem-luzin-property-n-gives-an-integral-growth-estimate, lem-countable-sets-are-null, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

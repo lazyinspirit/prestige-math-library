@@ -2,14 +2,16 @@
 id: cor-homology-of-spheres
 kind: corollary
 title: "Homology of spheres"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-simplicial-and-singular-homology-agree-for-simplicial-complexes, cor-the-simplex-has-zero-reduced-simplicial-homology, def-zero-simplex-augmentation-and-reduced-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Example 2.23"

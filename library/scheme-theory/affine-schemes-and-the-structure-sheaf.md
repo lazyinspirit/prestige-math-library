@@ -1,7 +1,7 @@
 ---
 page: affine-schemes-and-the-structure-sheaf
 title: "Affine Schemes and the Structure Sheaf"
-status: draft
+status: published
 items: [def-affine-scheme-spectrum, def-structure-presheaf-on-basic-opens, lem-structure-presheaf-basic-open-well-defined, thm-structure-sheaf-affine-scheme, thm-sections-basic-open-affine-scheme, thm-stalk-structure-sheaf-prime-localization, cor-spectrum-with-structure-sheaf-locally-ringed, def-residue-field-scheme-point, thm-global-sections-affine-scheme, lem-spectrum-localization-open-immersion, def-affine-scheme, def-morphism-affine-schemes-from-ring-map, lem-spectrum-map-stalk-homomorphisms-local, thm-affine-scheme-ring-anti-equivalence, cor-affine-scheme-isomorphism-ring-isomorphism, def-closed-point-scheme, lem-classical-points-inside-affine-scheme, def-generic-point-irreducible-closed-subset, thm-spectrum-sober, def-reduced-affine-scheme, def-integral-affine-scheme, def-nonreduced-infinitesimal-thickening-affine, def-functor-of-points-affine-scheme, thm-affine-schemes-determined-by-functor-of-points, def-dual-numbers-scheme, lem-basic-opens-quasi-compact, cor-affine-scheme-quasi-compact, rem-spec-contravariance-and-points]
 examples: []
 ---

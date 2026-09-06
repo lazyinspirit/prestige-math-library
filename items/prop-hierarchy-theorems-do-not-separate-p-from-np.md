@@ -2,14 +2,16 @@
 id: prop-hierarchy-theorems-do-not-separate-p-from-np
 kind: proposition
 title: "Hierarchy theorems do not separate P from NP"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-deterministic-time-hierarchy, thm-nondeterministic-time-hierarchy, def-p, def-np-by-verifiers, thm-verifier-and-nondeterministic-definitions-of-np-agree]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Chapter 3"

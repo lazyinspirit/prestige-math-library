@@ -2,7 +2,7 @@
 id: fs-tor-one-of-r-mod-i-and-m-is-always-the-i-torsion-submodule-of-m
 title: "Tor one of R modulo I and M is not always the I-torsion submodule of M"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-tor-one-of-a-cyclic-abelian-group-detects-n-torsion", "def-balanced-tor-bifunctor"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

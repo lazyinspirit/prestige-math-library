@@ -2,13 +2,15 @@
 id: ex-iid-sequence-with-a-prescribed-law
 kind: example
 title: "An i.i.d. sequence with a prescribed law"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-product-of-probability-spaces, cor-coordinate-random-elements-on-a-countable-product-are-independent, def-countable-choice, def-dependent-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, Section 2.1.4"

@@ -2,7 +2,7 @@
 id: lem-the-bar-differential-is-group-equivariant-and-squares-to-zero
 kind: lemma
 title: "The bar differential is equivariant and squares to zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-unnormalized-homogeneous-bar-resolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

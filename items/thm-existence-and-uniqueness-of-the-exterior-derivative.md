@@ -2,7 +2,7 @@
 id: thm-existence-and-uniqueness-of-the-exterior-derivative
 kind: theorem
 title: "Existence and uniqueness of the exterior derivative"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-exterior-derivative-of-a-function-is-its-differential, thm-the-exter
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

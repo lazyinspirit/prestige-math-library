@@ -2,7 +2,7 @@
 id: lem-finite-products-of-standard-borel-spaces-are-standard-borel
 kind: lemma
 title: "Finite products of standard Borel spaces are standard Borel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-standard-borel-space, def-product-sigma-algebra-and-finite-product-sigma-algebras]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

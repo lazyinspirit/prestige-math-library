@@ -2,7 +2,7 @@
 id: cor-finite-codimensional-subspaces-are-complemented
 kind: corollary
 title: Closed finite-codimensional subspaces are complemented
-status: draft
+status: published
 origin: pipeline
 deps: [def-quotient-seminorm, thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed, thm-coordinate-map-for-a-finite-dimensional-normed-space, def-complemented-subspace, thm-complemented-subspace-iff-range-of-a-bounded-projection]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

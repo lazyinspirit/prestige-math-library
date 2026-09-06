@@ -2,13 +2,14 @@
 id: def-p-local-subgroup
 kind: definition
 title: "p-local subgroup"
-status: draft
+status: published
 origin: pipeline
 deps: [def-normalizer-of-a-subgroup]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

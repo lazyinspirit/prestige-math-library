@@ -2,7 +2,7 @@
 id: thm-homogeneous-and-inhomogeneous-group-cochains-are-isomorphic-complexes
 kind: theorem
 title: "Homogeneous and inhomogeneous cochains agree"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-unnormalized-homogeneous-bar-resolution, def-inhomogeneous-group-cochains, lem-the-inhomogeneous-group-cochain-differential-squares-to-zero]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

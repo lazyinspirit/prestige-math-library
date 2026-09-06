@@ -2,14 +2,16 @@
 id: ex-time-diagonal-language-respects-its-budget
 kind: example
 title: "Budgeting a time-diagonal language"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [lem-time-diagonal-language-respects-its-budget, thm-deterministic-time-hierarchy]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, §3.1"

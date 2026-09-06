@@ -2,7 +2,7 @@
 id: ex-weak-dimension-and-global-dimension-for-a-field-and-the-integers
 title: "Weak and global dimension for a field and the integers"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-the-integers-have-weak-and-global-dimension-one", "thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

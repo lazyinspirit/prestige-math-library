@@ -1,7 +1,7 @@
 ---
 page: the-arithmetical-hierarchy-and-posts-theorem-examples
 title: "The Arithmetical Hierarchy and Post's Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-sigma-one-sets-are-exactly-ce-sets, ex-shoenfield-limit-lemma, cex-sigma-n-and-pi-n-are-disjoint]
 ---

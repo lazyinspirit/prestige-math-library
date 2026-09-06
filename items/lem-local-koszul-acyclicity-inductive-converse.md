@@ -2,7 +2,7 @@
 id: lem-local-koszul-acyclicity-inductive-converse
 kind: lemma
 title: "Local Koszul Acyclicity Inductive Converse"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-koszul-mapping-cone-homology-exact-sequence, def-regular-sequence-on-a-module, def-local-ring, def-noetherian-ring, def-noetherian-module, def-generated-cyclic-finitely-generated-and-free-modules, thm-nakayama-lemma]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

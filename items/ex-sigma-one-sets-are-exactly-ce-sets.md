@@ -2,7 +2,7 @@
 id: ex-sigma-one-sets-are-exactly-ce-sets
 kind: example
 title: "Reading a c.e. definition as a Sigma_1^0 formula"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-sigma-one-sets-are-exactly-ce-sets, thm-halting-is-sigma-one-complete]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

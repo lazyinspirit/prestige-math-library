@@ -2,7 +2,7 @@
 id: cor-codimension-one-frobenius-criterion
 kind: corollary
 title: "The codimension-one Frobenius criterion"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-pfaffian-frobenius-criterion, thm-frobenius-local-coordinate-theorem]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

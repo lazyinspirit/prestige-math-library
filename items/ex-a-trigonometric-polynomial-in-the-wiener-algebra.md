@@ -2,7 +2,7 @@
 id: ex-a-trigonometric-polynomial-in-the-wiener-algebra
 kind: example
 title: "A trigonometric polynomial in the Wiener algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-wiener-algebra-of-the-circle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

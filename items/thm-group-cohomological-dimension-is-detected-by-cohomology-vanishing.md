@@ -2,7 +2,7 @@
 id: thm-group-cohomological-dimension-is-detected-by-cohomology-vanishing
 kind: theorem
 title: "Cohomological dimension is detected by vanishing"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-cohomology-as-a-derived-functor, def-cohomological-dimension-of-a-group, thm-projective-dimension-at-most-n-iff-higher-ext-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

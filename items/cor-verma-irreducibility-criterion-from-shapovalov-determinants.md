@@ -2,7 +2,7 @@
 id: cor-verma-irreducibility-criterion-from-shapovalov-determinants
 kind: corollary
 title: "The Verma irreducibility criterion from Shapovalov determinants"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-the-shapovalov-radical-is-the-maximal-submodule, thm-shapovalov-determinant-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

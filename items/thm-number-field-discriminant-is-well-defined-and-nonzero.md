@@ -2,12 +2,14 @@
 id: thm-number-field-discriminant-is-well-defined-and-nonzero
 kind: theorem
 title: "Number-field discriminant is well-defined and nonzero"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [thm-ring-of-integers-free-of-rank-degree, lem-discriminant-change-of-basis, thm-discriminant-as-an-embedding-determinant, cor-trace-and-norm-of-an-algebraic-integer]
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Milne, Proposition 2.27"

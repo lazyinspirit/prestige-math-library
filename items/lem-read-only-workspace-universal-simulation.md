@@ -2,14 +2,16 @@
 id: lem-read-only-workspace-universal-simulation
 kind: lemma
 title: "Universal simulation preserves read-only work space up to constants"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-read-only-input-workspace-classes, lem-effective-enumeration-of-clocked-machines]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Remark 4.2"

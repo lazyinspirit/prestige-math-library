@@ -2,7 +2,7 @@
 id: ex-lie-derivative-of-the-euclidean-metric-under-dilations
 kind: example
 title: "Lie derivative of the Euclidean metric under dilations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-coordinate-formula-for-the-lie-derivative-of-a-covariant-tensor]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

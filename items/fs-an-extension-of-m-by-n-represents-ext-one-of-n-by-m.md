@@ -2,7 +2,7 @@
 id: fs-an-extension-of-m-by-n-represents-ext-one-of-n-by-m
 kind: false-statement
 title: "FALSE: an extension of M by N represents Ext one of N by M"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-extension-of-an-object-by-an-object-in-an-abelian-category, thm-yoneda-ext-one-is-naturally-isomorphic-to-derived-ext-one]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

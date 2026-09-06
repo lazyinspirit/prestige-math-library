@@ -2,13 +2,14 @@
 id: cor-ring-of-integers-is-a-dedekind-domain
 kind: corollary
 title: "Rings of integers are Dedekind domains"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [def-axiom-of-choice, def-ring-of-integers-of-a-number-field, def-dedekind-domain, cor-integral-closure-of-a-dedekind-domain-in-a-finite-separable-extension]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

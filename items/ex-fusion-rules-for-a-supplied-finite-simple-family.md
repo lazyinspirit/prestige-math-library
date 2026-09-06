@@ -2,13 +2,15 @@
 id: ex-fusion-rules-for-a-supplied-finite-simple-family
 kind: example
 title: "Fusion rules for a supplied finite simple family"
-status: draft
+status: published
 origin: pipeline
 deps: [ex-finite-dimensional-vector-spaces-form-a-fusion-category, def-fusion-rules]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, Remark 4.5.3"

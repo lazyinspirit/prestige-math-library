@@ -2,7 +2,7 @@
 id: fs-balance-of-ext-requires-the-spectral-sequence-pages
 kind: false-statement
 title: "FALSE: balance of Ext requires spectral-sequence pages"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-acyclic-assembly-by-exact-columns, lem-acyclic-assembly-by-exact-rows, thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

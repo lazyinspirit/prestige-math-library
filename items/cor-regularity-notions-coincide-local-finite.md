@@ -2,7 +2,7 @@
 id: cor-regularity-notions-coincide-local-finite
 kind: corollary
 title: "Regularity Notions Coincide Local Finite"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-local-koszul-acyclicity-iff-regular-sequence, lem-koszul-regular-implies-h-one-regular, lem-h-one-regular-local-implies-koszul-regular]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-distinct-verma-weight-spaces-are-shapovalov-orthogonal
 kind: lemma
 title: "Distinct Verma weight spaces are Shapovalov-orthogonal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chevalley-contravariant-form, thm-existence-and-uniqueness-of-the-shapovalov-form]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

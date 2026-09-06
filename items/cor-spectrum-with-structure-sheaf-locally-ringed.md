@@ -2,13 +2,16 @@
 id: cor-spectrum-with-structure-sheaf-locally-ringed
 kind: corollary
 title: "Spec A with its structure sheaf is a locally ringed space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-stalk-structure-sheaf-prime-localization, thm-localisation-at-a-prime-is-local, def-locally-ringed-space]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Definition 26.5.3"

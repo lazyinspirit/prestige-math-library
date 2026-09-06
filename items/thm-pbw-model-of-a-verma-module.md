@@ -2,7 +2,7 @@
 id: thm-pbw-model-of-a-verma-module
 kind: theorem
 title: "The PBW model of a Verma module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-verma-module, thm-triangular-decomposition-from-a-chosen-positive-root-system, thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

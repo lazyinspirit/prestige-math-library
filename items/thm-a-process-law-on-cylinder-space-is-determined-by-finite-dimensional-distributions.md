@@ -2,7 +2,7 @@
 id: thm-a-process-law-on-cylinder-space-is-determined-by-finite-dimensional-distributions
 kind: theorem
 title: "Finite-dimensional distributions determine a process law on the cylinder sigma-algebra"
-status: draft
+status: published
 origin: pipeline
 deps: [def-stochastic-process-and-finite-dimensional-distributions, def-coordinate-maps-and-cylinder-sigma-algebra, lem-finite-coordinate-cylinders-form-a-pi-system, thm-dynkin-pi-lambda]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

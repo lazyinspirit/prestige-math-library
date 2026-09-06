@@ -2,13 +2,14 @@
 id: def-generalized-fitting-subgroup
 kind: definition
 title: "The generalized Fitting subgroup"
-status: draft
+status: published
 origin: pipeline
 deps: [def-fitting-subgroup-of-a-finite-group, def-quasisimple-group-component-and-layer]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

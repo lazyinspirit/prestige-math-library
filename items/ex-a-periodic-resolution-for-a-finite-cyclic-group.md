@@ -2,7 +2,7 @@
 id: ex-a-periodic-resolution-for-a-finite-cyclic-group
 kind: example
 title: "A periodic resolution for a finite cyclic group"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-integral-group-ring-module-and-trivial-module-convention]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

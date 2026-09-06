@@ -2,7 +2,7 @@
 id: cor-the-class-of-extensions-is-a-set-whenever-derived-ext-one-is-a-set
 kind: corollary
 title: "Extension classes form a set whenever derived Ext one does"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-balanced-ext-bifunctor, lem-equivalent-extensions-have-the-same-ext-class, lem-every-ext-one-class-is-represented-by-an-extension, lem-two-extensions-with-the-same-ext-class-are-equivalent]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

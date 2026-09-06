@@ -2,7 +2,7 @@
 id: fs-pullback-of-a-compactly-supported-form-is-always-compactly-supported
 kind: false-statement
 title: "Pullback of a compactly supported form is always compactly supported"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-pullback-of-a-differential-form, def-smooth-section-local-section-and
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-the-cohomology-universal-coefficient-extension-map
 title: "The cohomological universal-coefficient extension map"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid", "lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free", "def-balanced-ext-bifunctor"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

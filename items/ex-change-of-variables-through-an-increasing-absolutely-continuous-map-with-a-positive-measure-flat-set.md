@@ -2,7 +2,7 @@
 id: ex-change-of-variables-through-an-increasing-absolutely-continuous-map-with-a-positive-measure-flat-set
 kind: example
 title: "Change of variables through an increasing AC map with a positive-measure flat set"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-dependent-choice, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-first-fundamental-theorem-of-calculus-for-l-one, thm-change-of-variables-for-an-increasing-absolutely-continuous-function]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

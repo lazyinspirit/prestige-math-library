@@ -2,7 +2,7 @@
 id: ex-cohomology-of-a-finite-cyclic-group-from-the-periodic-resolution
 kind: example
 title: "Cohomology of a finite cyclic group"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-cohomology-as-a-derived-functor, ex-a-periodic-resolution-for-a-finite-cyclic-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,15 @@
 id: def-logspace-uniform-circuit-family
 kind: definition
 title: "A logspace-uniform Boolean circuit family"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-l-and-nl]
-verification: {precheck: n/a}
+verification:
+  audited: 2026-09-06
+  precheck: n/a
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Definition 6.5"

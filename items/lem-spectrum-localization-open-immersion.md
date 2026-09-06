@@ -2,13 +2,16 @@
 id: lem-spectrum-localization-open-immersion
 kind: lemma
 title: "A principal localization identifies its spectrum with a distinguished open"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-sections-basic-open-affine-scheme, cor-principal-localisation-spectrum-is-distinguished-open, thm-prime-spectrum-of-a-localisation-bijection, def-morphism-locally-ringed-spaces]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.6.6"

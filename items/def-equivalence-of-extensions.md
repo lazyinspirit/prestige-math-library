@@ -2,13 +2,14 @@
 id: def-equivalence-of-extensions
 kind: definition
 title: "Equivalence of extensions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extension-of-an-object-by-an-object-in-an-abelian-category]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

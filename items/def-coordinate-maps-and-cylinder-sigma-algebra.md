@@ -2,13 +2,14 @@
 id: def-coordinate-maps-and-cylinder-sigma-algebra
 kind: definition
 title: "Coordinate maps, finite-coordinate cylinders, and the cylinder $\\sigma$-algebra"
-status: draft
+status: published
 origin: pipeline
 deps: [def-measurable-space, def-product-sigma-algebra-and-finite-product-sigma-algebras, def-generated-sigma-algebra]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

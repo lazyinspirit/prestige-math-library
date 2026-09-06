@@ -2,7 +2,7 @@
 id: cor-local-koszul-acyclicity-iff-regular-sequence
 kind: corollary
 title: "Local Koszul Acyclicity Iff Regular Sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-koszul-acyclicity-characterises-local-regular-sequences]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

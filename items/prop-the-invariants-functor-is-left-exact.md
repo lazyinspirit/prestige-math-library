@@ -2,7 +2,7 @@
 id: prop-the-invariants-functor-is-left-exact
 kind: proposition
 title: "The invariants functor is left exact"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-invariants-are-hom-from-the-trivial-group-ring-module, thm-hom-functors-are-left-exact]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-positive-group-cohomology-of-the-trivial-group-vanishes
 kind: lemma
 title: "Positive cohomology of the trivial group vanishes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-normalized-cochains-compute-group-cohomology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-sum-of-all-proper-submodules-of-a-verma-module-is-proper
 kind: lemma
 title: "The sum of all proper Verma submodules is proper"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-proper-verma-submodule-misses-the-highest-weight-line, prop-weights-of-a-verma-module-lie-below-lambda]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

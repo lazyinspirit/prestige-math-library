@@ -2,14 +2,16 @@
 id: thm-deterministic-time-hierarchy
 kind: theorem
 title: "The deterministic time hierarchy theorem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [lem-time-diagonal-language-respects-its-budget, def-dtime-ntime-dspace-and-nspace, def-asymptotic-resource-comparison]
 proof_strategy: contradiction
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 3.1"

@@ -2,13 +2,14 @@
 id: def-hopf-formula-quotient
 kind: definition
 title: "Hopf-formula quotient"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-hopf-formula-subgroups-are-normal-and-the-quotient-exists]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

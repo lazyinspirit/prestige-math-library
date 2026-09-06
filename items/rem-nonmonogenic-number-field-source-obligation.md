@@ -2,12 +2,13 @@
 id: rem-nonmonogenic-number-field-source-obligation
 kind: remark
 title: "Nonmonogenic example source obligation"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

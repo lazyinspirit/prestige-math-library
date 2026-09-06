@@ -2,7 +2,7 @@
 id: cex-modification-need-not-be-indistinguishable
 kind: counterexample
 title: "A modification need not be indistinguishable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-law-modification-and-indistinguishability-of-processes, thm-lebesgue-measure-of-a-box-of-every-kind]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

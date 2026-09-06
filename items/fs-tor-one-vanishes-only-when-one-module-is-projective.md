@@ -2,7 +2,7 @@
 id: fs-tor-one-vanishes-only-when-one-module-is-projective
 title: "Vanishing Tor one does not require a projective factor"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-a-left-module-is-flat-exactly-when-tor-one-with-every-right-module-vanishes"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

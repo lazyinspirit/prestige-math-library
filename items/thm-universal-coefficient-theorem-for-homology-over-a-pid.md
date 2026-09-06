@@ -2,7 +2,7 @@
 id: thm-universal-coefficient-theorem-for-homology-over-a-pid
 title: "The universal coefficient theorem for homology over a PID"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-the-universal-coefficient-edge-map-for-homology-is-well-defined", "lem-the-universal-coefficient-tor-obstruction-map-for-homology", "lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

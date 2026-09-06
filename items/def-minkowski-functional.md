@@ -2,13 +2,14 @@
 id: def-minkowski-functional
 kind: definition
 title: Minkowski functional of an absorbing set
-status: draft
+status: published
 origin: pipeline
 deps: [def-absorbing-balanced-and-absolutely-convex-set]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

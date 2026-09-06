@@ -2,7 +2,7 @@
 id: thm-kunneth-theorem-for-free-complexes-over-a-pid
 title: "The Kunneth theorem for free complexes over a PID"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-the-kunneth-cross-product-map-is-well-defined-and-natural", "lem-the-kunneth-tor-map", "lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free", "def-tensor-product-total-complex-of-chain-complexes"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

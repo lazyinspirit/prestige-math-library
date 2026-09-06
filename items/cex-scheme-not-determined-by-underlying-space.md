@@ -2,13 +2,16 @@
 id: cex-scheme-not-determined-by-underlying-space
 kind: counterexample
 title: "A scheme is not determined by its underlying topological space"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [ex-spectrum-field-one-point, ex-dual-numbers-one-point-nonreduced, def-reduced-affine-scheme]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "James S. Milne, Algebraic Geometry, 10.28"

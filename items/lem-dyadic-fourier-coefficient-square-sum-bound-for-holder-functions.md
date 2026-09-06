@@ -2,7 +2,7 @@
 id: lem-dyadic-fourier-coefficient-square-sum-bound-for-holder-functions
 kind: lemma
 title: "A dyadic Fourier-coefficient square-sum bound for Hölder functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

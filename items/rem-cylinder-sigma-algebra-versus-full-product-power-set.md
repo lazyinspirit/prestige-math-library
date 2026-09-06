@@ -2,13 +2,14 @@
 id: rem-cylinder-sigma-algebra-versus-full-product-power-set
 kind: remark
 title: "The cylinder sigma-algebra need not be the full path-space power set"
-status: draft
+status: published
 origin: pipeline
 deps: [def-coordinate-maps-and-cylinder-sigma-algebra, lem-cylinder-sigma-events-depend-on-countably-many-coordinates]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

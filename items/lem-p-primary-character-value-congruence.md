@@ -2,11 +2,12 @@
 id: lem-p-primary-character-value-congruence
 kind: lemma
 title: $p$-primary congruence for integer-valued cyclotomic character combinations
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups, def-virtual-character-and-character-ring-of-a-finite-group, thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -40,4 +41,4 @@ $$\chi(g)\equiv\chi(g_{p'})\pmod p.$$
 
 $$\chi(g)^{p^n}-\chi(g_{p'})^{p^n} \equiv\sum_i a_i^{p^n} (\psi_i(g)^{p^n}-\psi_i(g_{p'})^{p^n})=0.$$
 
-3.1 Both character values are integers.  The power basis $1,\zeta_{|G|},\ldots,\zeta_{|G|}^{\varphi(|G|)-1}$ makes $\mathbb Z\cdot1$ a direct summand of $A$, so $pA\cap\mathbb Z=p\mathbb Z$. Fermat's congruence then gives $\chi(g)\equiv\chi(g)^{p^n}\equiv \chi(g_{p'})^{p^n}\equiv\chi(g_{p'})\pmod p$. $\square$ [step 2.1, algebra]
+3.1 Both character values are integers.  The power basis $1,\zeta_{|G|},\ldots,\zeta_{|G|}^{\varphi(|G|)-1}$ makes $\mathbb Z\cdot1$ a direct summand of $A$, so $pA\cap\mathbb Z=p\mathbb Z$. Fermat's congruence then gives $\chi(g)\equiv\chi(g)^{p^n}\equiv \chi(g_{p'})^{p^n}\equiv\chi(g_{p'})\pmod p$. ∎ [step 2.1, algebra]

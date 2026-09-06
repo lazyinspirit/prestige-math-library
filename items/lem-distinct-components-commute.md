@@ -2,7 +2,7 @@
 id: lem-distinct-components-commute
 kind: lemma
 title: "Distinct components commute"
-status: draft
+status: published
 origin: pipeline
 deps: [def-quasisimple-group-component-and-layer]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

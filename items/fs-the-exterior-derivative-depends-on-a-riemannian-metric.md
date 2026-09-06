@@ -2,7 +2,7 @@
 id: fs-the-exterior-derivative-depends-on-a-riemannian-metric
 kind: false-statement
 title: "The exterior derivative depends on a Riemannian metric"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-exterior-derivative-by-the-invariant-vector-field-formula]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

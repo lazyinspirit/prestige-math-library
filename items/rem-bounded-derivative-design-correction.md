@@ -2,13 +2,14 @@
 id: rem-bounded-derivative-design-correction
 kind: remark
 title: "Bounded-derivative design correction"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-bounded-derivative-implies-lipschitz, thm-c1-lipschitz-ac-bv-hierarchy]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

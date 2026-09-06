@@ -2,7 +2,7 @@
 id: fs-every-finite-k-linear-abelian-category-is-semisimple
 kind: false-statement
 title: "Every finite k-linear abelian category is semisimple"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-k-linear-abelian-category, def-semisimple-object-and-semisimple-abelian-category]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

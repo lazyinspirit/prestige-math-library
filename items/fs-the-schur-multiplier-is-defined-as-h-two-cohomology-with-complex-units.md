@@ -2,7 +2,7 @@
 id: fs-the-schur-multiplier-is-defined-as-h-two-cohomology-with-complex-units
 kind: false-statement
 title: "Multiplier defined as H²(G,C×)"
-status: draft
+status: published
 origin: pipeline
 deps: [def-schur-multiplier-of-a-group, thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

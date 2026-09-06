@@ -2,11 +2,12 @@
 id: prop-faithful-irreducible-character-is-induced-from-a-proper-inertia-subgroup
 kind: proposition
 title: A faithful irreducible is induced from a proper inertia subgroup
-status: draft
+status: published
 origin: pipeline
 deps: [def-supersolvable-groups-and-monomial-characters, def-subrepresentation-and-irreducible-representation, def-induced-character-of-a-complex-representation, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order, thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -36,4 +37,4 @@ irreducible representation of a proper inertia subgroup of $G$.
 
 1.1 Complete reducibility decomposes $V|_A$ into its linear weight spaces. The translates of the $\lambda$-weight space are the weight spaces in its $G$-orbit, and their direct sum is $V$ by irreducibility. [F1, given]
 
-2.1 If the inertia group $G_\lambda$ were $G$, every $a\in A$ would act by a scalar on $V$; faithfulness would then make $A$ central, contrary to hypothesis. Thus $G_\lambda<G$, and the direct sum of its translates identifies $V$ with the induction of its $\lambda$-isotypical component. $\square$ [step 1.1]
+2.1 If the inertia group $G_\lambda$ were $G$, every $a\in A$ would act by a scalar on $V$; faithfulness would then make $A$ central, contrary to hypothesis. Thus $G_\lambda<G$, and the direct sum of its translates identifies $V$ with the induction of its $\lambda$-isotypical component. ∎ [step 1.1]

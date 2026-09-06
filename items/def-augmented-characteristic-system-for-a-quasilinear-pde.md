@@ -2,7 +2,7 @@
 id: def-augmented-characteristic-system-for-a-quasilinear-pde
 kind: definition
 title: "The augmented characteristic system for a quasilinear first-order PDE"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-semilinear-and-quasilinear-first-order-cauchy-problems]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

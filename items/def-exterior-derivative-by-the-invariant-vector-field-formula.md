@@ -2,7 +2,7 @@
 id: def-exterior-derivative-by-the-invariant-vector-field-formula
 kind: definition
 title: "The exterior derivative by the invariant vector-field formula"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-smooth-differential-k-form, def-lie-bracket-of-smooth-vector-fields, prop-coordinate-formula-for-the-lie-bracket]
 justified_by: [lem-the-invariant-exterior-derivative-formula-is-c-infinity-multilinear]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

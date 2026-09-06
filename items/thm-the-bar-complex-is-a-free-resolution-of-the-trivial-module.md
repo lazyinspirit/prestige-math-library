@@ -2,7 +2,7 @@
 id: thm-the-bar-complex-is-a-free-resolution-of-the-trivial-module
 kind: theorem
 title: "The bar complex is a free resolution of the trivial module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-unnormalized-homogeneous-bar-resolution, lem-the-bar-differential-is-
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-hom-double-complex-of-a-projective-and-an-injective-resolution
 kind: definition
 title: "The Hom double complex of projective and injective resolutions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-ext-via-an-injective-resolution-of-the-second-variable, def-ext-via-a-projective-resolution-of-the-first-variable]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

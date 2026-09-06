@@ -2,14 +2,16 @@
 id: cor-suspension-isomorphism-in-reduced-singular-homology
 kind: corollary
 title: "Suspension isomorphism in reduced singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-mayer-vietoris-sequence-in-singular-homology, def-zero-simplex-augmentation-and-reduced-singular-homology, cor-contractible-nonempty-spaces-have-the-homology-of-a-point, def-adjunction-cone-suspension, thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "J. P. May, A Concise Course in Algebraic Topology, §14.3"

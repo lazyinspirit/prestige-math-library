@@ -1,7 +1,7 @@
 ---
 page: logarithmic-space-nl-and-reachability
 title: "Logarithmic Space, NL, and Reachability"
-status: draft
+status: published
 items: [def-read-only-input-logspace-machine, def-l-and-nl, lem-logspace-machines-have-polynomially-many-configurations, def-logspace-many-one-reduction, lem-logspace-reductions-compose, def-directed-st-connectivity, thm-directed-st-connectivity-is-nl-complete, thm-read-only-input-savitch-simulation, thm-nl-is-contained-in-dspace-log-squared-n, def-inductive-reachable-vertex-count, lem-reachability-count-is-verifiable-in-nl, lem-nonreachability-has-an-inductive-counting-certificate, thm-immerman-szelepcsenyi-nl-equals-conl, cor-nspace-is-closed-under-complement-above-logspace, def-logspace-uniform-circuit-family, def-p-complete-under-logspace-reductions, lem-polynomial-time-computations-have-logspace-uniform-circuits, thm-circuit-value-is-p-complete, fs-nl-equals-conl-follows-by-state-swapping]
 examples: []
 ---

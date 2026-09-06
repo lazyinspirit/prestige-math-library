@@ -1,7 +1,7 @@
 ---
 page: number-fields-rings-of-integers-and-discriminants-examples
 title: "Number Fields Rings of Integers and Discriminants — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-ring-of-integers-of-q, ex-gaussian-and-eisenstein-integer-bases, ex-ring-of-integers-of-q-sqrt-five, ex-pure-cubic-power-basis, ex-nonmaximal-quadratic-order, ex-index-obstructs-naive-polynomial-factorization, rem-nonmonogenic-number-field-source-obligation]
 ---

@@ -2,10 +2,12 @@
 id: lem-hyperelementary-permutation-subring-reduction
 kind: lemma
 title: Hyperelementary permutation subring reduction
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups, lem-elementary-and-hyperelementary-subgroups-are-subgroup-closed, def-induction-ideal-of-a-family-of-subgroups, thm-mackey-double-coset-formula-for-restricting-an-induced-character, thm-transitivity-of-induction-for-finite-groups]
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: Wen-Wei Li, Yanqi Lake Lectures on Algebra I, Lemma 14.3.3
@@ -29,4 +31,4 @@ Let $\mathcal H'$ be the $p$-hyperelementary subgroups of $G$, for all primes $p
 
 1.1 Mackey's formula expresses $\operatorname{Res}_H^G\operatorname{Ind}_K^G1_K$ as a sum of permutation characters induced from $H\cap xKx^{-1}$. Those intersections are hyperelementary by subgroup closure, and induction back to $G$ shows that products of the displayed generators stay in $P(\mathcal H')$. [F1, given]
 
-2.1 If $1_H\in I_{\mathcal E}(H)$, transitivity puts $\operatorname{Ind}_H^G1_H$ in $I_{\mathcal E}(G)$. Apply this to every summand of a relation for $1_G$ in $P(\mathcal H')$. $\square$ [step 1.1]
+2.1 If $1_H\in I_{\mathcal E}(H)$, transitivity puts $\operatorname{Ind}_H^G1_H$ in $I_{\mathcal E}(G)$. Apply this to every summand of a relation for $1_G$ in $P(\mathcal H')$. ∎ [step 1.1]

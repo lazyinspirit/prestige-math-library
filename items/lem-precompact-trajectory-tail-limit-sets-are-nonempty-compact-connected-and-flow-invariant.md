@@ -2,7 +2,7 @@
 id: lem-precompact-trajectory-tail-limit-sets-are-nonempty-compact-connected-and-flow-invariant
 kind: lemma
 title: "Precompact trajectory tails have nonempty compact connected flow-invariant limit sets"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-negative-gradient-trajectory-of-a-morse-function, def-compact-space, thm-fundamental-theorem-on-flows]
 justified_by: []
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Liviu I. Nicolaescu, An Invitation to Morse Theory, Lemma 2.4.1"

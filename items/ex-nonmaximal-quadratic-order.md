@@ -2,7 +2,7 @@
 id: ex-nonmaximal-quadratic-order
 kind: example
 title: "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-order-in-a-number-field, ex-ring-of-integers-of-q-sqrt-five, cor-order-index-discriminant-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cex-consistent-marginals-alone-do-not-specify-joint-laws
 kind: counterexample
 title: "One-dimensional marginals alone do not specify a joint law"
-status: draft
+status: published
 origin: pipeline
 deps: [def-consistent-family-of-finite-dimensional-distributions, def-stochastic-process-and-finite-dimensional-distributions]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

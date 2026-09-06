@@ -2,7 +2,7 @@
 id: cor-hopf-formula-is-independent-of-the-free-presentation
 kind: corollary
 title: "Hopf formula is presentation-independent"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-hopf-formula-for-the-schur-multiplier]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

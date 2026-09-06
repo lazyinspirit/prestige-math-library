@@ -2,13 +2,16 @@
 id: thm-global-sections-affine-scheme
 kind: theorem
 title: "Global functions on Spec A recover A"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-sections-basic-open-affine-scheme]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.5.4"

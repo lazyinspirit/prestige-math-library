@@ -2,7 +2,7 @@
 id: fs-freeness-of-chain-groups-can-be-dropped-from-the-classical-kunneth-statement
 title: "Freeness of chain groups cannot simply be dropped from the classical Kunneth statement"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kunneth-theorem-for-free-complexes-over-a-pid"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

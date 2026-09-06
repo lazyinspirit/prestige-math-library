@@ -2,7 +2,7 @@
 id: thm-long-exact-ext-sequence-in-the-first-variable
 kind: theorem
 title: "The long exact Ext sequence in the first variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-balanced-ext-bifunctor, thm-right-derived-functors-form-a-cohomological-delta-functor, thm-horseshoe-lemma-for-projective-resolutions, thm-naturality-of-the-cohomology-connecting-morphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

@@ -2,12 +2,14 @@
 id: def-universal-central-extension
 kind: definition
 title: "Universal central extension"
-status: draft
+status: published
 origin: pipeline
 deps: [def-central-and-stem-extensions]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-06
 sources:
   scraped: []
   references:

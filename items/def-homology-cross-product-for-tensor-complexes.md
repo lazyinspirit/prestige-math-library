@@ -2,7 +2,7 @@
 id: def-homology-cross-product-for-tensor-complexes
 title: "The homology cross product for tensor complexes"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tensor-product-total-complex-of-chain-complexes", "def-homology-object-of-a-chain-complex"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
 ---
 

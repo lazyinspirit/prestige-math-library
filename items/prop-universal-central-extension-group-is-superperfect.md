@@ -2,7 +2,7 @@
 id: prop-universal-central-extension-group-is-superperfect
 kind: proposition
 title: "Universal central extension groups are superperfect"
-status: draft
+status: published
 origin: pipeline
 deps: [def-superperfect-group, thm-free-presentation-construction-has-the-universal-property, cor-kernel-of-the-universal-central-extension-is-the-schur-multiplier]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://math.mit.edu/~hrm/palestine/weibel/06-group_homology_and_cohomology.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

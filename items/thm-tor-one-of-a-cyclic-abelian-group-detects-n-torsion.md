@@ -2,7 +2,7 @@
 id: thm-tor-one-of-a-cyclic-abelian-group-detects-n-torsion
 title: "Tor one of a cyclic abelian group detects n-torsion"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-balanced-tor-bifunctor", "def-projective-resolution-in-an-abelian-category"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

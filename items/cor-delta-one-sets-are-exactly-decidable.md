@@ -2,7 +2,7 @@
 id: cor-delta-one-sets-are-exactly-decidable
 kind: corollary
 title: "Delta_1^0 sets are exactly the decidable sets"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sigma-n-pi-n-and-delta-n-sets, thm-sigma-one-sets-are-exactly-ce-sets, def-decidable-and-recognizable-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

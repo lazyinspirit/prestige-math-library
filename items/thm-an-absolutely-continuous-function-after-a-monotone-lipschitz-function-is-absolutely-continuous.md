@@ -2,7 +2,7 @@
 id: thm-an-absolutely-continuous-function-after-a-monotone-lipschitz-function-is-absolutely-continuous
 kind: theorem
 title: "An absolutely continuous function after a monotone Lipschitz function is absolutely continuous"
-status: draft
+status: published
 origin: pipeline
 deps: [def-absolutely-continuous-function]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

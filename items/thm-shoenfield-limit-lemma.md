@@ -2,7 +2,7 @@
 id: thm-shoenfield-limit-lemma
 kind: theorem
 title: "Shoenfield's limit lemma"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-limit-computable-function, def-relative-computability-and-enumerability, thm-posts-theorem, lem-oracle-computation-has-a-finite-query-witness]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   references:

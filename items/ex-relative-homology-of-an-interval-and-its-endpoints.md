@@ -2,14 +2,17 @@
 id: ex-relative-homology-of-an-interval-and-its-endpoints
 kind: example
 title: "Relative homology of an interval and its endpoints"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-long-exact-sequence-of-a-pair-in-singular-homology, def-relative-homology-connecting-homomorphism-on-cycles]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.1"

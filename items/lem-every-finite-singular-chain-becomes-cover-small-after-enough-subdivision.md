@@ -2,14 +2,16 @@
 id: lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision
 kind: lemma
 title: "Finite chains eventually become cover-small"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cover-small-singular-chain-subcomplex, thm-barycentric-subdivision-is-a-chain-map, lem-mesh-of-iterated-barycentric-subdivision-tends-to-zero, thm-lebesgue-number-lemma]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Proposition 2.21"

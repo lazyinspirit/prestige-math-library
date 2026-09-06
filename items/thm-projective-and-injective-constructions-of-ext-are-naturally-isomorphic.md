@@ -2,7 +2,7 @@
 id: thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic
 kind: theorem
 title: "Projective and injective constructions of Ext agree for supplied resolutions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ext-via-an-injective-resolution-of-the-second-variable, def-ext-via-a-projective-resolution-of-the-first-variable, def-direct-sum-total-complex-on-finite-diagonals, lem-acyclic-assembly-by-exact-columns, lem-acyclic-assembly-by-exact-rows, lem-hom-from-a-projective-object-makes-the-injective-resolution-columns-exact, lem-hom-into-an-injective-object-makes-the-projective-resolution-rows-exact]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

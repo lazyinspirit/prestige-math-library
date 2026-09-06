@@ -2,13 +2,14 @@
 id: def-fusion-and-multifusion-category
 kind: definition
 title: "Fusion and multifusion categories"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-k-linear-abelian-category, def-semisimple-object-and-semisimple-abelian-category, def-tensor-and-multitensor-category]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

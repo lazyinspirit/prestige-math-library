@@ -2,10 +2,12 @@
 id: cor-elementary-local-integrality-criterion
 kind: corollary
 title: Elementary local generalized-character criterion
-status: draft
+status: published
 origin: pipeline
 deps: [thm-brauer-induction, prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings, def-virtual-character-and-character-ring-of-a-finite-group]
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: Wen-Wei Li, Yanqi Lake Lectures on Algebra I, Corollary 14.4.1
@@ -29,4 +31,4 @@ Let $F\subseteq\mathbb C$ be a characteristic-zero splitting field for $G$. A cl
 
 1.1 The forward implication is restriction stability. For the converse, choose the Brauer relation $1_G=\sum_i n_i\operatorname{Ind}_{H_i}^G\lambda_i$. [F1, given]
 
-2.1 Pointwise multiplication and the projection formula give $f=\sum_i n_i\operatorname{Ind}_{H_i}^G(\lambda_i f|_{H_i})$. Each inner product is in $R(H_i)$, so the right side is in $R(G)$. $\square$ [step 1.1]
+2.1 Pointwise multiplication and the projection formula give $f=\sum_i n_i\operatorname{Ind}_{H_i}^G(\lambda_i f|_{H_i})$. Each inner product is in $R(H_i)$, so the right side is in $R(G)$. ∎ [step 1.1]

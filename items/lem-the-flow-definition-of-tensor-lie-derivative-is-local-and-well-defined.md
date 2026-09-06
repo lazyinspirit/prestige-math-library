@@ -2,7 +2,7 @@
 id: lem-the-flow-definition-of-tensor-lie-derivative-is-local-and-well-defined
 kind: lemma
 title: "The flow definition of tensor Lie derivative is local and well-defined"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lie-derivative-of-a-tensor-field, thm-fundamental-theorem-on-flows]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

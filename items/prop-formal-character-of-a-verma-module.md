@@ -2,13 +2,15 @@
 id: prop-formal-character-of-a-verma-module
 kind: proposition
 title: "The formal character of a Verma module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-pbw-model-of-a-verma-module, prop-weights-of-a-verma-module-lie-below-lambda]
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Pavel Etingof, Representations of Lie Groups, §15.1"

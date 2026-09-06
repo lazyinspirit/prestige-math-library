@@ -2,7 +2,7 @@
 id: fs-every-central-extension-is-a-stem-extension
 kind: false-statement
 title: "Every central extension is stem"
-status: draft
+status: published
 origin: pipeline
 deps: [def-central-and-stem-extensions]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

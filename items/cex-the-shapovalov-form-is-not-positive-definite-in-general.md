@@ -2,7 +2,7 @@
 id: cex-the-shapovalov-form-is-not-positive-definite-in-general
 kind: counterexample
 title: "The Shapovalov form need not be positive on its real PBW span"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [ex-sl2-shapovalov-norm-product]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-minimal-free-resolution-over-a-local-ring
 kind: definition
 title: "Minimal Free Resolution Over A Local Ring"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-local-ring, def-chain-complex-in-an-abelian-category, def-free-module-on-a-set-and-standard-basis, def-generated-cyclic-finitely-generated-and-free-modules]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

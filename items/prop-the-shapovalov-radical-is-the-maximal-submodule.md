@@ -2,7 +2,7 @@
 id: prop-the-shapovalov-radical-is-the-maximal-submodule
 kind: proposition
 title: "The Shapovalov radical is the maximal submodule"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-existence-and-uniqueness-of-the-shapovalov-form, thm-verma-module-has-a-unique-simple-quotient]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

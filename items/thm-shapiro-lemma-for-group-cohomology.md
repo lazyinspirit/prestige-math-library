@@ -2,7 +2,7 @@
 id: thm-shapiro-lemma-for-group-cohomology
 kind: theorem
 title: "Shapiro lemma for group cohomology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-cohomology-as-a-derived-functor, thm-induction-is-left-adjoint-and-coinduction-right-adjoint-to-restriction, lem-the-group-ring-is-free-over-a-subgroup-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

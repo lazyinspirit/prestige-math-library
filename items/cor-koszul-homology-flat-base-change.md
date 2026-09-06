@@ -2,7 +2,7 @@
 id: cor-koszul-homology-flat-base-change
 kind: corollary
 title: "Koszul Homology Flat Base Change"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-koszul-complex-flat-base-change, def-flat-and-faithfully-flat-modules-and-ring-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

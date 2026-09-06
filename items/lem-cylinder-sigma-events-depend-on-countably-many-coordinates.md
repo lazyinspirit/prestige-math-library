@@ -2,7 +2,7 @@
 id: lem-cylinder-sigma-events-depend-on-countably-many-coordinates
 kind: lemma
 title: "Assuming countable choice, cylinder-measurable events depend on only countably many coordinates"
-status: draft
+status: published
 origin: pipeline
 deps: [def-coordinate-maps-and-cylinder-sigma-algebra, def-generated-sigma-algebra, def-countable-choice, thm-countable-union-of-countable]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-ext-can-be-computed-from-any-injective-resolution-of-the-second-variable
 kind: corollary
 title: "Ext can be computed from any injective resolution of the second variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-injective-comparison-map-exists, thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy, def-balanced-ext-bifunctor, def-ext-via-an-injective-resolution-of-the-second-variable, thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

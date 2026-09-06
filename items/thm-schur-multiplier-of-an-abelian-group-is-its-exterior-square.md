@@ -2,7 +2,7 @@
 id: thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square
 kind: theorem
 title: "Multiplier of an abelian group"
-status: draft
+status: published
 origin: pipeline
 deps: [def-schur-multiplier-of-a-group, def-exterior-square-of-an-abelian-group, lem-exterior-square-has-the-alternating-universal-property]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

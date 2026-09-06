@@ -2,7 +2,7 @@
 id: thm-halting-is-sigma-one-complete
 kind: theorem
 title: "The halting set is Sigma_1^0-complete"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-arithmetical-level-completeness, def-universal-and-acceptable-numbering, thm-sigma-one-sets-are-exactly-ce-sets]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: rem-kolmogorov-extension-state-space-boundary
 kind: remark
 title: "State-space and index-set boundaries of the two extension routes"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-product-of-probability-spaces, thm-kolmogorov-extension-for-standard-borel-coordinate-spaces]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

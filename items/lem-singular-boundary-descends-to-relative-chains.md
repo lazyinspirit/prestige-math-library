@@ -2,7 +2,7 @@
 id: lem-singular-boundary-descends-to-relative-chains
 kind: lemma
 title: "Boundary on relative chains"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-chain-complex-of-a-pair, thm-the-singular-boundary-squares-to-zero]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   references:

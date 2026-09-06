@@ -2,14 +2,16 @@
 id: thm-immerman-szelepcsenyi-nl-equals-conl
 kind: theorem
 title: "Immerman-Szelepcsényi theorem: NL equals coNL"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-read-only-input-logspace-machine, def-read-only-input-workspace-classes, def-l-and-nl, lem-nonreachability-has-an-inductive-counting-certificate]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 3.18"

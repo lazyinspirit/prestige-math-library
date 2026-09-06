@@ -2,13 +2,14 @@
 id: def-law-modification-and-indistinguishability-of-processes
 kind: definition
 title: "Process law, modification, and indistinguishability"
-status: draft
+status: published
 origin: pipeline
 deps: [def-stochastic-process-and-finite-dimensional-distributions, def-law-or-distribution-of-a-random-element, def-product-sigma-algebra-and-finite-product-sigma-algebras]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

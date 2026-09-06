@@ -2,13 +2,16 @@
 id: thm-affine-scheme-ring-anti-equivalence
 kind: theorem
 title: "Affine schemes are contravariantly equivalent to commutative rings"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-affine-scheme, def-morphism-affine-schemes-from-ring-map, lem-spectrum-map-stalk-homomorphisms-local, thm-global-sections-affine-scheme, thm-sections-basic-open-affine-scheme]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemmas 26.6.4 and 26.6.5"

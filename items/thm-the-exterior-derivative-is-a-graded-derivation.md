@@ -2,7 +2,7 @@
 id: thm-the-exterior-derivative-is-a-graded-derivation
 kind: theorem
 title: "The exterior derivative is a graded derivation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-local-coordinate-formula-for-the-exterior-derivative, def-graded-deri
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

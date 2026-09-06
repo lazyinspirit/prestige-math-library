@@ -2,7 +2,7 @@
 id: ex-semilinear-characteristics-with-logistic-growth
 kind: example
 title: "Semilinear characteristics with logistic growth"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-semilinear-and-quasilinear-first-order-cauchy-problems, def-augmented-characteristic-system-for-a-quasilinear-pde, lem-characteristic-solution-satisfies-the-quasilinear-pde]
 justified_by: []
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "First order PDE: The Methods of Characteristics"

@@ -2,13 +2,14 @@
 id: def-relative-singular-homology
 kind: definition
 title: "Relative singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-singular-chain-complex-of-a-pair, lem-singular-boundary-descends-to-relative-chains]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

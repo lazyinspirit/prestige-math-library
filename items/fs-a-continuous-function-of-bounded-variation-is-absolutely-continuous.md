@@ -2,7 +2,7 @@
 id: fs-a-continuous-function-of-bounded-variation-is-absolutely-continuous
 kind: false-statement
 title: "A continuous function of bounded variation is absolutely continuous"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, thm-absolutely-continuous-functions-have-luzin-property-n]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

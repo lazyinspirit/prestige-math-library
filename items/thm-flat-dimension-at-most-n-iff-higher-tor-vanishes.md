@@ -2,7 +2,7 @@
 id: thm-flat-dimension-at-most-n-iff-higher-tor-vanishes
 title: "Flat dimension at most n is equivalent to the prescribed higher Tor vanishing"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-flat-dimension-of-a-module", "prop-tor-dimension-shifting", "def-balanced-tor-bifunctor", "thm-a-left-module-is-flat-exactly-when-tor-one-with-every-right-module-vanishes", "thm-long-exact-tor-sequence-in-the-left-module-variable"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

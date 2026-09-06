@@ -2,7 +2,7 @@
 id: lem-a-wide-integral-geometric-layer-forces-a-property-star-blockade
 kind: lemma
 title: "A wide integral geometric layer forces the complete-or-anticomplete property-(*) blockade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

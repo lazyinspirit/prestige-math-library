@@ -2,12 +2,13 @@
 id: def-morphism-affine-schemes-from-ring-map
 kind: definition
 title: "The map of affine spectra induced by a ring homomorphism"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-affine-scheme, thm-prime-spectrum-map-by-contraction, thm-universal-property-of-localisation, def-morphism-locally-ringed-spaces]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

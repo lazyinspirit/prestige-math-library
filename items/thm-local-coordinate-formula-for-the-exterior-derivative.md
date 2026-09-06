@@ -2,7 +2,7 @@
 id: thm-local-coordinate-formula-for-the-exterior-derivative
 kind: theorem
 title: "The local coordinate formula for the exterior derivative"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-exterior-derivative-by-the-invariant-vector-field-formula, prop-the-e
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

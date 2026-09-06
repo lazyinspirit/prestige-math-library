@@ -2,13 +2,14 @@
 id: def-koszul-regular-and-h-one-regular-sequences
 kind: definition
 title: "Koszul Regular And H One Regular Sequences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-koszul-complex-of-a-sequence-with-coefficients, def-homology-object-of-a-chain-complex]
 verification:
+  audited: 2026-09-06
   precheck: n/a
 sources:
   scraped: []

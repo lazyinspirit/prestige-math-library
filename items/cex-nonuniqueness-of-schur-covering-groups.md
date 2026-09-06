@@ -2,7 +2,7 @@
 id: cex-nonuniqueness-of-schur-covering-groups
 kind: counterexample
 title: "Nonuniqueness of Schur covers"
-status: draft
+status: published
 origin: pipeline
 deps: [def-schur-covering-group-of-a-finite-group, thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

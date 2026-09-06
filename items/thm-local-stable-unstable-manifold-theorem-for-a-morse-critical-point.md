@@ -2,7 +2,7 @@
 id: thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point
 kind: theorem
 title: "Local stable and unstable manifolds at a Morse critical point"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-downward-gradient-like-vector-field, def-stable-and-unstable-sets-of-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-dirichlet-l-trivial-zeros
 kind: corollary
 title: "Parity-forced trivial zeros"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-primitive-dirichlet-l-analytic-continuation, thm-gamma-meromorphic-continuation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

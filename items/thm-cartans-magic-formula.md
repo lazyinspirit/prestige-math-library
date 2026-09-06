@@ -2,7 +2,7 @@
 id: thm-cartans-magic-formula
 kind: theorem
 title: "Cartan's magic formula"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-exterior-derivative-by-the-invariant-vector-field-formula, prop-exter
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

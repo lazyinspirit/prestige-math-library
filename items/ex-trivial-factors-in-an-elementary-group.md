@@ -2,11 +2,12 @@
 id: ex-trivial-factors-in-an-elementary-group
 kind: example
 title: Trivial factors in an elementary group
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -34,4 +35,4 @@ For every prime $p$, every finite $p$-group is $p$-elementary by taking $C=1$; e
 
 1.1 The order $1$ is prime to every prime, and it is also $p^0$. [F1, given]
 
-2.1 Therefore each displayed choice satisfies both factor conditions in the definition, including the simultaneous trivial-factor case. $\square$ [step 1.1]
+2.1 Therefore each displayed choice satisfies both factor conditions in the definition, including the simultaneous trivial-factor case. ∎ [step 1.1]

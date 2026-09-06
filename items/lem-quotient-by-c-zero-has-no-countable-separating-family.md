@@ -2,7 +2,7 @@
 id: lem-quotient-by-c-zero-has-no-countable-separating-family
 kind: lemma
 title: The quotient ell-infinity/c_0 has no countable separating family
-status: draft
+status: published
 origin: pipeline
 deps: [lem-c-zero-is-a-closed-subspace-of-ell-infinity, lem-uncountable-almost-disjoint-family-on-natural-numbers, def-quotient-seminorm, thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed, def-dual-space-of-a-normed-space, thm-countable-union-of-countable]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

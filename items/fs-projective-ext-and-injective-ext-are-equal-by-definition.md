@@ -2,7 +2,7 @@
 id: fs-projective-ext-and-injective-ext-are-equal-by-definition
 kind: false-statement
 title: "FALSE: projective and injective Ext are equal by definition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ext-via-an-injective-resolution-of-the-second-variable, def-ext-via-a-projective-resolution-of-the-first-variable, thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

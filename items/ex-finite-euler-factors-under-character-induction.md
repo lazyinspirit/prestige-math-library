@@ -2,7 +2,7 @@
 id: ex-finite-euler-factors-under-character-induction
 kind: example
 title: "Finite Euler factor from modulus 4 to 12"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-induced-dirichlet-l-finite-euler-factors]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-lie-derivatives-are-natural-for-related-vector-fields
 kind: proposition
 title: "Lie derivatives are natural for related vector fields"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-the-exterior-derivative-commutes-with-pullback, def-lie-derivative-of
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

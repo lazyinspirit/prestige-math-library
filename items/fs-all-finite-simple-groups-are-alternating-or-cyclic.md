@@ -2,7 +2,7 @@
 id: fs-all-finite-simple-groups-are-alternating-or-cyclic
 kind: false-statement
 title: "All finite simple groups are alternating or cyclic"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

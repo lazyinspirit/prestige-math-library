@@ -2,14 +2,17 @@
 id: thm-barycentric-subdivision-is-a-chain-map
 kind: theorem
 title: "Barycentric subdivision is a chain map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-barycentric-subdivision-chain-operator, def-barycenter-and-affine-cone-on-a-singular-chain]
 proof_strategy: induction
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Proposition 2.21"

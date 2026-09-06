@@ -2,7 +2,7 @@
 id: cex-a-nonnatural-choice-of-uct-splitting
 title: "A nonnatural choice of universal-coefficient splitting"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: ["cex-the-universal-coefficient-splitting-cannot-in-general-be-chosen-naturally"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

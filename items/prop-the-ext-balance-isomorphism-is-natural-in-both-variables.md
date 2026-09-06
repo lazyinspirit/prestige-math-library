@@ -2,7 +2,7 @@
 id: prop-the-ext-balance-isomorphism-is-natural-in-both-variables
 kind: proposition
 title: "The Ext balance isomorphism is natural in both variables"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic, lem-the-ext-balance-isomorphism-is-independent-of-resolution-comparison-data, prop-injective-ext-is-contravariant-in-the-first-and-covariant-in-the-second-variable, prop-projective-ext-is-contravariant-in-the-first-and-covariant-in-the-second-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions
 kind: theorem
 title: "Fundamental theorem of calculus for absolutely continuous functions"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-countable-choice, def-dependent-choice, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-first-fundamental-theorem-of-calculus-for-l-one, thm-absolutely-continuous-functions-have-integrable-derivatives, thm-an-absolutely-continuous-function-with-zero-derivative-almost-everywhere-is-constant]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

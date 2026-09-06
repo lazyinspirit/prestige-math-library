@@ -2,13 +2,15 @@
 id: ex-spectrum-integers-generic-and-closed-points
 kind: example
 title: "Spec Z has one generic point and closed prime-number points"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-closed-point-scheme, def-generic-point-irreducible-closed-subset, thm-spectrum-sober, thm-well-ordering-principle, thm-division-algorithm-in-z, thm-quotient-is-domain-iff-ideal-prime, thm-z-mod-p-is-a-field, thm-int-comm-ring]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "James S. Milne, Algebraic Geometry, 10.24"

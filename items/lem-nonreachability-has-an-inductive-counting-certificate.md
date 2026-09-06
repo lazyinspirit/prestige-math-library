@@ -2,14 +2,17 @@
 id: lem-nonreachability-has-an-inductive-counting-certificate
 kind: lemma
 title: "Nonreachability has an inductive counting certificate"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-inductive-reachable-vertex-count, lem-reachability-count-is-verifiable-in-nl]
 proof_strategy: induction
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, §3.4.2"

@@ -2,7 +2,7 @@
 id: cex-luzin-property-n-does-not-imply-absolute-continuity
 kind: counterexample
 title: "Luzin's property $(N)$ does not imply absolute continuity"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-luzin-property-n-on-a-compact-interval, thm-banach-zarecki-characterisation-of-absolute-continuity]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

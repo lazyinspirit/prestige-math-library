@@ -2,7 +2,7 @@
 id: ex-gradient-flow-on-the-torus-morse-function
 kind: example
 title: "Gradient flow for a Morse function on the flat torus"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: []
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

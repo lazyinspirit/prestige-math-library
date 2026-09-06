@@ -2,7 +2,7 @@
 id: ex-schur-multiplier-of-a-finite-abelian-group
 kind: example
 title: "Multiplier of a finite abelian group"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square, thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

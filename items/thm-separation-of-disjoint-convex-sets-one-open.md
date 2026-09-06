@@ -2,7 +2,7 @@
 id: thm-separation-of-disjoint-convex-sets-one-open
 kind: theorem
 title: Separation of disjoint convex sets when one is open
-status: draft
+status: published
 origin: pipeline
 deps: [thm-separation-of-an-open-convex-set-and-a-point, def-weak-and-strict-separation]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

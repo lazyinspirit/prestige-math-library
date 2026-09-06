@@ -2,7 +2,7 @@
 id: thm-submodules-of-free-modules-over-a-pid-are-free
 title: "A submodule of an arbitrary-rank free module over a PID is free"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-principal-ideal-domain", "cor-every-vector-space-has-a-basis", "thm-free-modules-are-projective-with-choice-boundary"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,11 +2,12 @@
 id: ex-elementary-and-hyperelementary-small-groups
 kind: example
 title: Small elementary and hyperelementary groups
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups, def-external-semidirect-product]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -34,4 +35,4 @@ For distinct primes $p,q$, $C_{pq}\cong C_q\times C_p$ is $p$-elementary. For od
 
 1.1 In each case the first factor is cyclic of order prime to the displayed prime and the second is a $p$-group. [F1, given]
 
-2.1 Directness is equivalent to trivial conjugation; the reflections in $S_3$ invert $C_3$, and the chosen action of $C_3$ on $C_7$ is nontrivial, establishing the two non-elementary assertions. $\square$ [step 1.1]
+2.1 Directness is equivalent to trivial conjugation; the reflections in $S_3$ invert $C_3$, and the chosen action of $C_3$ on $C_7$ is nontrivial, establishing the two non-elementary assertions. ∎ [step 1.1]

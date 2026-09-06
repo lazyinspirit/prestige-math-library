@@ -2,13 +2,16 @@
 id: ex-dual-numbers-one-point-nonreduced
 kind: example
 title: "Dual numbers give a one-point nonreduced affine scheme"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-dual-numbers-scheme, ex-spectrum-field-one-point, def-reduced-affine-scheme, cor-prime-spectrum-insensitive-to-nilpotents, def-residue-field-scheme-point]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "James S. Milne, Algebraic Geometry, 10.28"

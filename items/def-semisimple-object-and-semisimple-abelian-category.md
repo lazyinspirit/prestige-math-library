@@ -2,13 +2,14 @@
 id: def-semisimple-object-and-semisimple-abelian-category
 kind: definition
 title: "Semisimple objects and semisimple abelian categories"
-status: draft
+status: published
 origin: pipeline
 deps: [def-abelian-category, def-simple-object]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

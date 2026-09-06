@@ -2,7 +2,7 @@
 id: thm-the-tensor-product-in-a-multitensor-category-is-biexact
 kind: theorem
 title: "Tensor product in a multitensor category is biexact"
-status: draft
+status: published
 origin: pipeline
 deps: [def-tensor-and-multitensor-category, thm-duality-yields-adjunctions-of-tensoring-functors, thm-right-adjoints-preserve-limits, cor-left-adjoints-preserve-colimits, thm-an-additive-functor-is-exact-exactly-when-it-preserves-kernels-and-cokernels]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

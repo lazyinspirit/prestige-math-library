@@ -2,7 +2,7 @@
 id: cex-two-closed-convex-sets-need-not-be-strongly-separated
 kind: counterexample
 title: Two closed convex sets can have no strong separator
-status: draft
+status: published
 origin: pipeline
 deps: [def-weak-and-strict-separation, thm-derivative-of-exponential, cor-differentiable-implies-continuous, thm-exponential-two-point-convexity, thm-exponential-is-strictly-increasing]
 proof_strategy: direct
@@ -11,6 +11,8 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: Gerald Teschl, Topics in Real and Functional Analysis, Problem 5.2

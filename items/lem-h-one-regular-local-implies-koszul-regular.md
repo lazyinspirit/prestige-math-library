@@ -2,7 +2,7 @@
 id: lem-h-one-regular-local-implies-koszul-regular
 kind: lemma
 title: "H One Regular Local Implies Koszul Regular"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-koszul-regular-and-h-one-regular-sequences, lem-local-koszul-h-one-detects-first-regularity-failure, cor-local-koszul-acyclicity-iff-regular-sequence, thm-nakayama-lemma]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

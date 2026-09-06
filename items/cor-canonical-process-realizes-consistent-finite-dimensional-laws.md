@@ -2,7 +2,7 @@
 id: cor-canonical-process-realizes-consistent-finite-dimensional-laws
 kind: corollary
 title: "The canonical coordinate process realizes consistent finite-dimensional laws"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-kolmogorov-extension-for-standard-borel-coordinate-spaces, def-coordinate-maps-and-cylinder-sigma-algebra, def-stochastic-process-and-finite-dimensional-distributions]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

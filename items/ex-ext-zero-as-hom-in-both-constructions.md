@@ -2,7 +2,7 @@
 id: ex-ext-zero-as-hom-in-both-constructions
 kind: example
 title: "Ext zero as Hom in both constructions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

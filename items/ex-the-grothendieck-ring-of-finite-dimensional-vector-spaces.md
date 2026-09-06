@@ -2,13 +2,15 @@
 id: ex-the-grothendieck-ring-of-finite-dimensional-vector-spaces
 kind: example
 title: "The Grothendieck ring of finite-dimensional vector spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [ex-finite-dimensional-vector-spaces-form-a-fusion-category, def-grothendieck-ring-of-a-tensor-category]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, Example 4.1.2"

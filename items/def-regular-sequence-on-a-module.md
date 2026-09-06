@@ -2,13 +2,14 @@
 id: def-regular-sequence-on-a-module
 kind: definition
 title: "Regular Sequence On A Module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-annihilator-and-torsion-of-a-module, def-quotient-module]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

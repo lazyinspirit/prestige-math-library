@@ -2,7 +2,7 @@
 id: def-baer-sum-of-extension-classes
 kind: definition
 title: "The Baer sum of extension classes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-pullback-and-pushout-of-an-extension, def-biproduct]
 justified_by: [lem-baer-sum-of-short-exact-sequence-classes-is-independent-of-representatives]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

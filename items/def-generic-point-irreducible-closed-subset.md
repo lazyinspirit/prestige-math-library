@@ -2,12 +2,13 @@
 id: def-generic-point-irreducible-closed-subset
 kind: definition
 title: "Generic points of irreducible closed subsets"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-affine-scheme, def-irreducible-topological-space-and-subset, thm-irreducible-closed-subsets-and-prime-ideals, lem-closure-of-a-point-is-its-vanishing-set]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

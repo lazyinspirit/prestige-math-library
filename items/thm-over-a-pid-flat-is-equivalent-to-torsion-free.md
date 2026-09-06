@@ -2,7 +2,7 @@
 id: thm-over-a-pid-flat-is-equivalent-to-torsion-free
 title: "Over a principal ideal domain flatness is equivalent to torsion-freeness"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-principal-ideal-domain", "prop-torsion-free-abelian-groups-are-flat", "def-left-and-right-flat-modules-over-an-arbitrary-ring"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

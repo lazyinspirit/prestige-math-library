@@ -2,7 +2,7 @@
 id: prop-relative-homology-is-functorial-for-maps-of-pairs
 kind: proposition
 title: "Functoriality of relative homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-relative-singular-homology, def-induced-singular-chain-map, lem-induced-singular-chain-maps-commute-with-boundaries]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

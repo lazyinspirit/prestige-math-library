@@ -2,7 +2,7 @@
 id: ex-exterior-derivatives-of-coordinate-one-forms
 kind: example
 title: "Exterior derivatives of coordinate one-forms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-local-coordinate-formula-for-the-exterior-derivative]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

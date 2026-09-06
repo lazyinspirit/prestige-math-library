@@ -2,12 +2,14 @@
 id: def-universal-central-extension-from-a-free-presentation
 kind: definition
 title: "Free-presentation universal extension"
-status: draft
+status: published
 origin: pipeline
 deps: [def-perfect-group, def-free-presentation-kernel-data, lem-hopf-formula-subgroups-are-normal-and-the-quotient-exists]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-06
 sources:
   scraped: []
   references:

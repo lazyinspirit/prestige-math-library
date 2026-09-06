@@ -2,7 +2,7 @@
 id: fs-continuity-almost-everywhere-differentiability-and-an-integrable-derivative-imply-newton-leibniz
 kind: false-statement
 title: "Continuity, almost-everywhere differentiability, and an integrable derivative imply Newton--Leibniz"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

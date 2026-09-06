@@ -2,7 +2,7 @@
 id: ex-trivial-zeros-of-a-dirichlet-l-function
 kind: example
 title: "Trivial zeros of the beta function"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-dirichlet-l-trivial-zeros, ex-gauss-sum-for-chi-four]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-the-mathieu-groups-among-the-sporadics
 kind: example
 title: "The Mathieu groups among the sporadics"
-status: draft
+status: published
 origin: pipeline
 deps: [rem-the-twenty-six-sporadic-simple-groups]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: thm-basic-koszul-homology
 kind: theorem
 title: "Basic Koszul Homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-one-element-koszul-homology, lem-koszul-differential-coordinate-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

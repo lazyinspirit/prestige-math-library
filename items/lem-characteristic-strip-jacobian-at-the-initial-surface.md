@@ -2,7 +2,7 @@
 id: lem-characteristic-strip-jacobian-at-the-initial-surface
 kind: lemma
 title: "Jacobian of a characteristic strip at its initial surface"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-augmented-characteristic-system-for-a-quasilinear-pde, lem-local-solv
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

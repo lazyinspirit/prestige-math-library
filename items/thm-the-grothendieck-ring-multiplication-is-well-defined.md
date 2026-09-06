@@ -2,7 +2,7 @@
 id: thm-the-grothendieck-ring-multiplication-is-well-defined
 kind: theorem
 title: "Grothendieck-ring multiplication is well-defined"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-the-tensor-product-in-a-multitensor-category-is-biexact, def-grothendieck-ring-of-a-tensor-category]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

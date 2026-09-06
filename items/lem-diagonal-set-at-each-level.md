@@ -2,7 +2,7 @@
 id: lem-diagonal-set-at-each-level
 kind: lemma
 title: "A diagonal set at each arithmetical level"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-relative-computability-and-enumerability, thm-posts-theorem]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

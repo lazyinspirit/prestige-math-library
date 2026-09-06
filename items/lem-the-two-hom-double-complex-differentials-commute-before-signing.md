@@ -2,7 +2,7 @@
 id: lem-the-two-hom-double-complex-differentials-commute-before-signing
 kind: lemma
 title: "The two Hom double-complex differentials commute before signing"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hom-double-complex-of-a-projective-and-an-injective-resolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

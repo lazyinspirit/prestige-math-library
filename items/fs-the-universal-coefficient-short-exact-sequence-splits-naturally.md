@@ -2,7 +2,7 @@
 id: fs-the-universal-coefficient-short-exact-sequence-splits-naturally
 kind: false-statement
 title: "Universal coefficients split naturally"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two, prop-schur-multiplier-of-a-cyclic-group-is-trivial, thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square, lem-exterior-square-has-the-alternating-universal-property, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.jhu.edu/~jmb/note/uctcoh.pdf
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

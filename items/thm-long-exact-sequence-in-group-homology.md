@@ -2,7 +2,7 @@
 id: thm-long-exact-sequence-in-group-homology
 kind: theorem
 title: "Long exact sequence in group homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-homology-as-a-derived-functor, thm-left-derived-functors-form-a-homological-delta-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-closed-constant-rank-one-forms-define-integrable-hyperplane-fields
 kind: proposition
 title: "Closed constant-rank one-forms define integrable hyperplane fields"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-codimension-one-frobenius-criterion, def-integrable-distribution]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

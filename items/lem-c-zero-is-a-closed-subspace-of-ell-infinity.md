@@ -2,13 +2,15 @@
 id: lem-c-zero-is-a-closed-subspace-of-ell-infinity
 kind: lemma
 title: c_0 is a closed subspace of ell-infinity
-status: draft
+status: published
 origin: pipeline
 deps: [def-c-zero-and-ell-infinity, def-metric-topology]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: Piotr Hajlasz, Functional Analysis, §10.5

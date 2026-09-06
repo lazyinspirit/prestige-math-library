@@ -2,7 +2,7 @@
 id: lem-every-ext-one-class-is-represented-by-an-extension
 kind: lemma
 title: "Every Ext-one class is represented by an extension"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-balanced-ext-bifunctor, def-class-of-an-extension-in-derived-ext-one, def-pullback-and-pushout-of-an-extension, thm-ext-dimension-shifting-in-the-first-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

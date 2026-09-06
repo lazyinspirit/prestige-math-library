@@ -2,13 +2,14 @@
 id: def-group-homology-as-a-derived-functor
 kind: definition
 title: "Group homology as a derived functor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [prop-the-coinvariants-functor-is-right-exact, def-left-derived-object-relative-to-projective-resolution-data, def-supplied-projective-resolution-datum, thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

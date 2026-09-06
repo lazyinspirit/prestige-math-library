@@ -2,7 +2,7 @@
 id: thm-naturality-of-the-long-exact-sequence-of-a-pair
 kind: theorem
 title: "Naturality of the pair long exact sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-long-exact-sequence-of-a-pair-in-singular-homology, prop-relative-homology-is-functorial-for-maps-of-pairs, cor-the-long-exact-homology-sequence-is-natural]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-positive-ext-does-not-vanish-for-an-injective-first-variable
 kind: counterexample
 title: "Positive Ext need not vanish for an injective first variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

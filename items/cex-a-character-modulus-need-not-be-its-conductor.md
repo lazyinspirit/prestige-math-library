@@ -2,7 +2,7 @@
 id: cex-a-character-modulus-need-not-be-its-conductor
 kind: counterexample
 title: "A modulus need not be a conductor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-induced-dirichlet-character, thm-dirichlet-character-primitive-induction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-positive-degree-integral-homology-of-a-finite-group-is-order-torsion
 kind: lemma
 title: "Positive-degree homology of a finite group is order-torsion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-group-homology-as-a-derived-functor]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://math.mit.edu/~hrm/palestine/weibel/06-group_homology_and_cohomology.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

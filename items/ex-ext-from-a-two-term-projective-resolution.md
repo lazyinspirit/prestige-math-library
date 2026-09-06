@@ -2,7 +2,7 @@
 id: ex-ext-from-a-two-term-projective-resolution
 kind: example
 title: "Ext from a two-term projective resolution"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ext-via-a-projective-resolution-of-the-first-variable, cor-ext-can-be-computed-from-any-projective-resolution-of-the-first-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

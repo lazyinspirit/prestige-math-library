@@ -2,10 +2,11 @@
 id: def-p-elementary-and-p-hyperelementary-finite-groups
 kind: definition
 title: $p$-elementary and $p$-hyperelementary finite groups
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-p-group, def-generated-subgroup, def-external-semidirect-product]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: cor-order-index-discriminant-formula
 kind: corollary
 title: "Order-index discriminant formula"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-orders-have-integral-bases-and-finite-index, lem-discriminant-change-of-basis, thm-number-field-discriminant-is-well-defined-and-nonzero]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

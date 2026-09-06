@@ -2,7 +2,7 @@
 id: thm-pfaffian-frobenius-criterion
 kind: theorem
 title: "The Pfaffian Frobenius criterion"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-differential-ideal-in-the-algebra-of-forms, lem-annihilator-ideal-of-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

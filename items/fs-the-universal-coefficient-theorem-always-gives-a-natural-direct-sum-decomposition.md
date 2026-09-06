@@ -2,7 +2,7 @@
 id: fs-the-universal-coefficient-theorem-always-gives-a-natural-direct-sum-decomposition
 title: "The universal coefficient theorem does not always give a natural direct-sum decomposition"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-the-homology-universal-coefficient-sequence-splits-nonnaturally", "cex-the-universal-coefficient-splitting-cannot-in-general-be-chosen-naturally"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

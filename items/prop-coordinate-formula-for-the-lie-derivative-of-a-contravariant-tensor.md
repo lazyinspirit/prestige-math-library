@@ -2,7 +2,7 @@
 id: prop-coordinate-formula-for-the-lie-derivative-of-a-contravariant-tensor
 kind: proposition
 title: "The coordinate formula for the Lie derivative of a contravariant tensor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-lie-derivative-is-a-derivation-of-the-tensor-algebra, prop-lie-deriva
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

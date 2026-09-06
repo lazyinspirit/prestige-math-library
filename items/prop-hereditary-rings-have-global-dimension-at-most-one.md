@@ -2,7 +2,7 @@
 id: prop-hereditary-rings-have-global-dimension-at-most-one
 kind: proposition
 title: "Hereditary rings have global dimension at most one"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-and-right-global-dimension-of-a-ring, def-projective-dimension-of-an-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

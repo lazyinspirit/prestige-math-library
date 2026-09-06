@@ -2,13 +2,14 @@
 id: def-limit-computable-function
 kind: definition
 title: "Limit-computable functions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-computable-and-partial-computable-function]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

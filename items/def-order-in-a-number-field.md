@@ -2,13 +2,14 @@
 id: def-order-in-a-number-field
 kind: definition
 title: "Order in a number field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-ring-of-integers-of-a-number-field, def-number-field]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

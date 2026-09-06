@@ -2,7 +2,7 @@
 id: fs-the-second-generation-cfsg-proof-is-complete-as-of-2026
 kind: false-statement
 title: "The second-generation CFSG proof is complete as of 2026"
-status: draft
+status: published
 origin: pipeline
 deps: [rem-status-of-the-second-generation-proof]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://ems.press/content/serial-article-files/51362?nt=1
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-absolutely-continuous-functions-have-luzin-property-n
 kind: theorem
 title: "Absolutely continuous functions have Luzin's property $(N)$"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-luzin-property-n-on-a-compact-interval, def-absolutely-continuous-function, thm-lebesgue-outer-regularity-for-arbitrary-subsets]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   references:

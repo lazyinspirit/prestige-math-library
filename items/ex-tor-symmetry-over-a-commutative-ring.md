@@ -2,7 +2,7 @@
 id: ex-tor-symmetry-over-a-commutative-ring
 title: "Tor symmetry over a commutative ring"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-tor-symmetry-over-a-commutative-ring"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-finite-coordinate-cylinders-form-a-pi-system
 kind: lemma
 title: "Finite-coordinate cylinders form a $\\pi$-system"
-status: draft
+status: published
 origin: pipeline
 deps: [def-coordinate-maps-and-cylinder-sigma-algebra, def-pi-system]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

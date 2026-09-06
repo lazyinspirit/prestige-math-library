@@ -2,13 +2,14 @@
 id: def-indefinite-lebesgue-integral-on-a-compact-interval
 kind: definition
 title: "Indefinite Lebesgue integral on a compact interval"
-status: draft
+status: published
 origin: pipeline
 deps: [def-integrable-real-and-complex-functions-and-their-integrals, def-integral-over-a-measurable-set]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,11 +2,12 @@
 id: lem-elementary-detection-at-a-fixed-element
 kind: lemma
 title: Elementary detection at a fixed element
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups, def-induction-ideal-of-a-family-of-subgroups, lem-induction-ideal-of-a-subgroup-family-is-an-ideal, lem-p-primary-character-value-congruence, lem-cyclic-generator-class-functions-by-moebius-inversion, def-sylow-p-subgroup, thm-frobenius-formula-for-induced-characters]
 proof_strategy: construct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -52,4 +53,4 @@ $$\bigl(\operatorname{Ind}_{H_r}^G\psi_r\bigr)(r_0) =\delta_{r,r_0}\frac{|C_G(r)
 
 5.1 Assume first that $n\ge1$ and put $e=p^{n-1}(p-1)$. Euler's congruence gives $\psi(g)^e\equiv1\pmod {p^n}$ for every $g$. Hence the integer-valued class function $l(\psi^e-1_G)$ is pointwise divisible by $|G|$. The cyclic-generator identity [[lem-cyclic-generator-class-functions-by-moebius-inversion]], followed by the projection formula, shows that $|G|$ times any integer-valued class function belongs to the $A$-span of inductions from cyclic subgroups. Those subgroups are $p$-elementary, so $l(\psi^e-1_G)$ lies in the $A$-scalar extension of $I_{\mathcal E_p}(G)$. The same is true of $l\psi^e$ by [F3] and step 1.1. Subtraction puts $l1_G$ in that scalar extension. [F3, step 1.1, step 4.1, algebra]
 
-6.1 The cyclotomic ring $A$ is a finite free $\mathbb Z$-module and $A/\mathbb Z$ is torsion-free, so choose a $\mathbb Z$-basis of $A$ containing $1$. Expand the relation from step 5.1 in this basis and take its coefficient of $1$. Since all inducing characters there lie in integral character rings, this yields $l1_G\in I_{\mathcal E_p}(G)$. If $n=0$, then $l=|G|$ and the same integral relation follows directly from the cyclic-generator identity; cyclic subgroups are $p$-elementary in this case. $\square$ [step 5.1, algebra]
+6.1 The cyclotomic ring $A$ is a finite free $\mathbb Z$-module and $A/\mathbb Z$ is torsion-free, so choose a $\mathbb Z$-basis of $A$ containing $1$. Expand the relation from step 5.1 in this basis and take its coefficient of $1$. Since all inducing characters there lie in integral character rings, this yields $l1_G\in I_{\mathcal E_p}(G)$. If $n=0$, then $l=|G|$ and the same integral relation follows directly from the cyclic-generator identity; cyclic subgroups are $p$-elementary in this case. ∎ [step 5.1, algebra]

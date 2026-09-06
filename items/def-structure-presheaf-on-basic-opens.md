@@ -2,12 +2,13 @@
 id: def-structure-presheaf-on-basic-opens
 kind: definition
 title: "The localization presheaf on distinguished opens"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-affine-scheme-spectrum, def-principal-distinguished-subset-of-spectrum, def-multiplicative-subset-and-localisation, thm-universal-property-of-localisation]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

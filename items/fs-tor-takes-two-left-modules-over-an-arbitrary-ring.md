@@ -2,7 +2,7 @@
 id: fs-tor-takes-two-left-modules-over-an-arbitrary-ring
 title: "Tor does not take two left modules over an arbitrary ring without extra bimodule structure"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tor-by-resolving-the-left-module"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

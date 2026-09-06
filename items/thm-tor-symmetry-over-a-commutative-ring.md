@@ -2,7 +2,7 @@
 id: thm-tor-symmetry-over-a-commutative-ring
 title: "Tor is symmetric over a commutative ring"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-balanced-tor-bifunctor", "def-tor-by-resolving-the-left-module", "def-tor-by-resolving-the-right-module", "thm-symmetry-and-associativity-over-a-commutative-ring"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

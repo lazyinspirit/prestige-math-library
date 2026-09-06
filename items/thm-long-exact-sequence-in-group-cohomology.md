@@ -2,7 +2,7 @@
 id: thm-long-exact-sequence-in-group-cohomology
 kind: theorem
 title: "Long exact sequence in group cohomology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-cohomology-as-a-derived-functor, thm-right-derived-functors-form-a-cohomological-delta-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

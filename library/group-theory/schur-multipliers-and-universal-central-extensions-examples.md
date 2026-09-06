@@ -1,7 +1,7 @@
 ---
 page: schur-multipliers-and-universal-central-extensions-examples
 title: "Schur Multipliers and Universal Central Extensions — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-schur-multiplier-of-a-cyclic-group, ex-schur-multiplier-of-a-finite-abelian-group, ex-the-binary-icosahedral-cover-of-a-five, ex-hopf-formula-from-a-one-relator-presentation, ex-a-stem-extension-that-is-not-universal, cex-nonuniqueness-of-schur-covering-groups]
 ---

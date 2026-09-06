@@ -2,7 +2,7 @@
 id: ex-independent-but-not-identically-distributed-coordinate-sequence
 kind: example
 title: "Independent but non-identically distributed coordinates"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-coordinate-random-elements-on-a-countable-product-are-independent, def-law-or-distribution-of-a-random-element]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

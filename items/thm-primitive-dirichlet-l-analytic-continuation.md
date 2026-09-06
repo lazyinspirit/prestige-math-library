@@ -2,7 +2,7 @@
 id: thm-primitive-dirichlet-l-analytic-continuation
 kind: theorem
 title: "Analytic continuation of primitive Dirichlet L-functions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-completed-dirichlet-l-function, lem-fourier-transform-of-a-gaussian, thm-twisted-poisson-summation, thm-riemann-zeta-meromorphic-continuation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

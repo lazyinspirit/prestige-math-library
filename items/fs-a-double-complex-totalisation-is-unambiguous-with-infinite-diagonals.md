@@ -2,7 +2,7 @@
 id: fs-a-double-complex-totalisation-is-unambiguous-with-infinite-diagonals
 kind: false-statement
 title: "FALSE: double-complex totalisation is unambiguous with infinite diagonals"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-direct-sum-total-complex-on-finite-diagonals]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

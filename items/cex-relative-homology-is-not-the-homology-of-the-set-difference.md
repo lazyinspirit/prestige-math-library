@@ -2,14 +2,17 @@
 id: cex-relative-homology-is-not-the-homology-of-the-set-difference
 kind: counterexample
 title: "Relative homology is not homology of the set difference"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [ex-relative-homology-of-a-disk-and-its-boundary, prop-singular-homology-is-invariant-under-deformation-retracts]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.1 exercises"

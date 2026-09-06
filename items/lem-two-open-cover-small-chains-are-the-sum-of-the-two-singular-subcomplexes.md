@@ -2,14 +2,17 @@
 id: lem-two-open-cover-small-chains-are-the-sum-of-the-two-singular-subcomplexes
 kind: lemma
 title: "Cover-small chains for a two-open cover"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cover-small-singular-chain-subcomplex]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.2"

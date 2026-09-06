@@ -2,7 +2,7 @@
 id: thm-change-of-variables-for-an-increasing-absolutely-continuous-function
 kind: theorem
 title: "Change of variables for an increasing absolutely continuous function"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-countable-choice, def-dependent-choice, def-indefinite-lebesgue-integral-on-a-compact-interval, thm-absolutely-continuous-functions-have-luzin-property-n, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-monotone-class, thm-monotone-convergence-for-the-integral, thm-lebesgue-outer-regularity-for-arbitrary-subsets]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

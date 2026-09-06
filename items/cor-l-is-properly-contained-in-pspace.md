@@ -2,14 +2,17 @@
 id: cor-l-is-properly-contained-in-pspace
 kind: corollary
 title: "L is properly contained in PSPACE"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-read-only-workspace-space-hierarchy, lem-read-only-workspace-simulates-in-all-tapes-space, def-pspace-and-npspace]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Definition 4.5"

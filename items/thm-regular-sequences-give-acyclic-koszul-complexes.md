@@ -2,7 +2,7 @@
 id: thm-regular-sequences-give-acyclic-koszul-complexes
 kind: theorem
 title: "Regular Sequences Give Acyclic Koszul Complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-regular-sequence-koszul-acyclicity-induction, lem-regular-one-element-koszul-acyclicity, cor-empty-koszul-complex-is-the-coefficient-module, def-regular-sequence-on-a-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

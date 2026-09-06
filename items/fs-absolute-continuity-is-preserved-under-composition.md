@@ -2,7 +2,7 @@
 id: fs-absolute-continuity-is-preserved-under-composition
 kind: false-statement
 title: "Absolute continuity is preserved under composition"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-c1-lipschitz-ac-bv-hierarchy]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

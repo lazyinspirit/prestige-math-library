@@ -2,7 +2,7 @@
 id: lem-no-property-star-outcome-forces-a-small-structural-block-partition
 kind: lemma
 title: "Failure of the first and third property-(*) outcomes forces one small-block structural partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

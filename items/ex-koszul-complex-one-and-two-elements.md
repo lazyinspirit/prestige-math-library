@@ -2,7 +2,7 @@
 id: ex-koszul-complex-one-and-two-elements
 kind: example
 title: "Koszul Complex One And Two Elements"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-basic-koszul-homology, lem-one-element-koszul-complex, lem-koszul-differential-coordinate-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

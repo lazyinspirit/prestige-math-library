@@ -2,7 +2,7 @@
 id: thm-generalized-fitting-subgroup-contains-its-centralizer
 kind: theorem
 title: "The generalized Fitting subgroup contains its centralizer"
-status: draft
+status: published
 origin: pipeline
 deps: [def-generalized-fitting-subgroup, lem-distinct-components-commute, lem-centralizer-of-a-normal-subgroup-is-normal, thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

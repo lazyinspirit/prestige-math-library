@@ -2,13 +2,14 @@
 id: rem-objectwise-double-dual-isomorphisms-do-not-supply-a-pivotal-structure
 kind: remark
 title: "Objectwise double-dual isomorphisms do not supply a pivotal structure"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-left-and-right-dual-objects-are-isomorphic-in-a-semisimple-multitensor-category, def-pivotal-structure]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

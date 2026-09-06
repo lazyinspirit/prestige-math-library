@@ -2,7 +2,7 @@
 id: fs-the-grothendieck-ring-of-a-tensor-category-is-always-commutative
 kind: false-statement
 title: "The Grothendieck ring of a tensor category is always commutative"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-duality-induces-an-anti-involution-on-the-grothendieck-ring]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

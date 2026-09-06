@@ -2,7 +2,7 @@
 id: ex-even-and-odd-character-theta-kernels
 kind: example
 title: "Even and odd theta kernels"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-twisted-poisson-summation, thm-primitive-dirichlet-l-functional-equation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

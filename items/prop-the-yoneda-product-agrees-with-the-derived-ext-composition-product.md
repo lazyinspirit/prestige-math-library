@@ -2,7 +2,7 @@
 id: prop-the-yoneda-product-agrees-with-the-derived-ext-composition-product
 kind: proposition
 title: "The Yoneda product agrees with derived Ext composition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-yoneda-product-is-associative-and-unital, thm-higher-yoneda-ext-agrees-with-derived-ext]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

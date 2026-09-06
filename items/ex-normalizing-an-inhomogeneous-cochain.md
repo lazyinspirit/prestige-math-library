@@ -2,7 +2,7 @@
 id: ex-normalizing-an-inhomogeneous-cochain
 kind: example
 title: "Normalizing an inhomogeneous cochain"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-inhomogeneous-group-cochains, cor-normalized-cochains-compute-group-cohomology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

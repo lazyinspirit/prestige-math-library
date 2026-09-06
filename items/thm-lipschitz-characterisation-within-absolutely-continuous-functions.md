@@ -2,7 +2,7 @@
 id: thm-lipschitz-characterisation-within-absolutely-continuous-functions
 kind: theorem
 title: "Lipschitz characterisation within absolutely continuous functions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-dependent-choice, thm-c1-lipschitz-ac-bv-hierarchy, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-corestriction-is-independent-of-the-coset-representatives
 kind: lemma
 title: "Corestriction is independent of coset representatives"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-restriction-and-corestriction-on-group-cohomology, cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

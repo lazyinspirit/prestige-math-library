@@ -2,7 +2,7 @@
 id: prop-projective-ext-is-contravariant-in-the-first-and-covariant-in-the-second-variable
 kind: proposition
 title: "Projective-resolution Ext has the stated bifunctor variance"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ext-via-a-projective-resolution-of-the-first-variable, lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

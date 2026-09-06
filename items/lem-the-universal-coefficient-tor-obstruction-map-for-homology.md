@@ -2,7 +2,7 @@
 id: lem-the-universal-coefficient-tor-obstruction-map-for-homology
 title: "The homological universal-coefficient Tor obstruction map"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid", "lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free", "def-balanced-tor-bifunctor"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

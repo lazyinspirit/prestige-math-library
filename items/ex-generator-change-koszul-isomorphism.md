@@ -2,7 +2,7 @@
 id: ex-generator-change-koszul-isomorphism
 kind: example
 title: "Generator Change Koszul Isomorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-koszul-generator-matrix-chain-map, cor-koszul-complex-invariant-under-invertible-generator-change]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

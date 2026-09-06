@@ -2,13 +2,16 @@
 id: def-directed-st-connectivity
 kind: definition
 title: "Directed s-t connectivity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-multigraph-loop-and-digraph, def-directed-walk-trail-path-cycle-and-strong-connectivity]
-verification: {precheck: n/a, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: n/a
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Harvard CS 221, Lecture 5, Definition 1"

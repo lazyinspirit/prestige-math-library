@@ -2,7 +2,7 @@
 id: prop-every-morse-function-admits-a-complete-gradient-like-field-on-a-closed-manifold
 kind: proposition
 title: "Every Morse function admits a complete downward gradient-like field on a closed manifold"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-downward-gradient-like-vector-field, def-morse-function-and-excellent
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,14 +2,16 @@
 id: thm-cover-small-inclusion-is-a-chain-homotopy-equivalence
 kind: theorem
 title: "The cover-small inclusion is a chain homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-cover-small-singular-chains-compute-singular-homology, lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision, thm-barycentric-subdivision-is-chain-homotopic-to-the-identity, def-barycentric-subdivision-chain-operator, def-barycentric-subdivision-prism-homotopy]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Proposition 2.21"

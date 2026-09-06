@@ -2,9 +2,11 @@
 id: def-supersolvable-groups-and-monomial-characters
 kind: definition
 title: Supersolvable groups and monomial characters
-status: draft
+status: published
 origin: pipeline
 deps: [def-normal-subgroup, def-quotient-group, def-subrepresentation-and-irreducible-representation, def-induced-character-of-a-complex-representation]
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: Tammo tom Dieck, Representation Theory, Section 4.3

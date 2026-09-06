@@ -2,10 +2,12 @@
 id: lem-nonabelian-supersolvable-group-has-a-noncentral-normal-abelian-subgroup
 kind: lemma
 title: A nonabelian supersolvable group has a noncentral normal abelian subgroup
-status: draft
+status: published
 origin: pipeline
 deps: [def-supersolvable-groups-and-monomial-characters, def-normal-subgroup, def-quotient-group]
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: Tammo tom Dieck, Representation Theory, Lemma 4.3.3
@@ -29,4 +31,4 @@ Every nonabelian finite supersolvable group has an abelian normal subgroup that 
 
 1.1 Let $i$ be maximal with $G_i$ abelian. If $i=r$, $G$ is abelian, so $i<r$. By maximality there is $g\in G$ not commuting with some $a\in G_i$. [F1, given]
 
-2.1 Since $G_i\triangleleft G$, it is an abelian normal subgroup, while the chosen $g,a$ show that it is not central. $\square$ [step 1.1]
+2.1 Since $G_i\triangleleft G$, it is an abelian normal subgroup, while the chosen $g,a$ show that it is not central. ∎ [step 1.1]

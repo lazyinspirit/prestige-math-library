@@ -2,13 +2,14 @@
 id: thm-discriminant-as-an-embedding-determinant
 kind: theorem
 title: "Embedding determinant formula"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [def-discriminant-of-a-number-field-basis-and-order, thm-field-norm-and-trace-by-embeddings, thm-dedekind-linear-independence-of-characters]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

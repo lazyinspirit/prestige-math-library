@@ -2,7 +2,7 @@
 id: ex-cohomological-dimension-of-the-trivial-group-and-of-an-infinite-cyclic-group
 kind: example
 title: 'Cohomological dimensions of $1$ and $\mathbb Z$'
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cohomological-dimension-of-a-group, thm-group-cohomological-dimension-is-detected-by-cohomology-vanishing]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-koszul-resolution-betti-table-complete-intersection
 kind: example
 title: "Koszul Resolution Betti Table Complete Intersection"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-complete-intersection-betti-numbers-binomial, lem-koszul-resolution-minimality-maximal-ideal-sequence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

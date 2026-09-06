@@ -2,7 +2,7 @@
 id: def-balanced-tor-bifunctor
 title: "The balanced Tor bifunctor"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic", "prop-the-tor-balance-isomorphism-is-natural-and-coherent-under-change-of-resolutions"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

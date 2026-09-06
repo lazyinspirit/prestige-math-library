@@ -2,7 +2,7 @@
 id: lem-open-convex-set-recovered-from-its-gauge
 kind: lemma
 title: An open convex neighbourhood is recovered from its gauge
-status: draft
+status: published
 origin: pipeline
 deps: [def-minkowski-functional, lem-minkowski-functional-is-sublinear, def-norm-and-normed-space]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

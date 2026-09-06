@@ -2,13 +2,16 @@
 id: ex-spectrum-product-ring-disjoint-union
 kind: example
 title: "The spectrum of a product ring is a disjoint union"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-affine-scheme, def-morphism-affine-schemes-from-ring-map, def-product-ring, def-prime-and-maximal-ideals, thm-stalk-structure-sheaf-prime-localization]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.6.8"

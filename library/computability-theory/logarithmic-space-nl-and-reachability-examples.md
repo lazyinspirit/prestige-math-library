@@ -1,7 +1,7 @@
 ---
 page: logarithmic-space-nl-and-reachability-examples
 title: "Logarithmic Space, NL, and Reachability: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-logspace-reductions-compose, ex-circuit-value-is-p-complete, cex-nl-equals-conl-follows-by-state-swapping]
 ---

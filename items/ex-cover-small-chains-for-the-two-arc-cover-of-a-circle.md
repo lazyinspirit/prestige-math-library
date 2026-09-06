@@ -2,14 +2,16 @@
 id: ex-cover-small-chains-for-the-two-arc-cover-of-a-circle
 kind: example
 title: "Cover-small chains for the two-arc cover of a circle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cover-small-singular-chain-subcomplex, lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision, def-mayer-vietoris-connecting-class]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.2"

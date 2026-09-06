@@ -2,7 +2,7 @@
 id: rem-cauchy-kovalevskaya-proof-boundary
 kind: remark
 title: "The proof boundary of Cauchy–Kovalevskaya"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-cauchy-kovalevskaya-theorem-for-a-noncharacteristic-analytic-cauchy-problem]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

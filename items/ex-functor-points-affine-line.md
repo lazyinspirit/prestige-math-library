@@ -2,13 +2,15 @@
 id: ex-functor-points-affine-line
 kind: example
 title: "The functor of points of the affine line"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-functor-of-points-affine-scheme, thm-universal-property-of-a-polynomial-ring, def-algebra-over-a-commutative-ring]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "James S. Milne, Algebraic Geometry, 10.81"

@@ -2,7 +2,7 @@
 id: cex-gauge-of-a-nonbalanced-set-is-not-a-seminorm
 kind: counterexample
 title: A gauge of a nonbalanced set need not be a seminorm
-status: draft
+status: published
 origin: pipeline
 deps: [def-minkowski-functional, lem-minkowski-functional-is-sublinear]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-hopf-formula-for-the-schur-multiplier
 kind: theorem
 title: "Hopf formula for the Schur multiplier"
-status: draft
+status: published
 origin: pipeline
 deps: [def-schur-multiplier-of-a-group, def-hopf-formula-quotient, lem-five-term-homology-sequence-for-a-free-presentation]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

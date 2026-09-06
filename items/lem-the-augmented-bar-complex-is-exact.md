@@ -2,7 +2,7 @@
 id: lem-the-augmented-bar-complex-is-exact
 kind: lemma
 title: "The augmented bar complex is exact"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-the-bar-differential-is-group-equivariant-and-squares-to-zero, def-bar-augmentation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

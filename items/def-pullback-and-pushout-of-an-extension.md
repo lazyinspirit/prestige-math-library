@@ -2,13 +2,14 @@
 id: def-pullback-and-pushout-of-an-extension
 kind: definition
 title: "Pullback and pushout of an extension"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extension-of-an-object-by-an-object-in-an-abelian-category, def-pullbacks-and-pushouts, lem-pullbacks-of-monomorphisms-are-monomorphisms-and-pushouts-of-epimorphisms-are-epimorphisms]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

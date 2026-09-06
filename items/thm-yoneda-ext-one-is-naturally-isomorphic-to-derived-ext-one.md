@@ -2,7 +2,7 @@
 id: thm-yoneda-ext-one-is-naturally-isomorphic-to-derived-ext-one
 kind: theorem
 title: "Yoneda Ext one is naturally isomorphic to derived Ext one"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-balanced-ext-bifunctor, thm-baer-sum-makes-extension-classes-an-abelian-group, prop-extension-classes-are-contravariant-in-the-quotient-and-covariant-in-the-subobject, lem-equivalent-extensions-have-the-same-ext-class, lem-every-ext-one-class-is-represented-by-an-extension, lem-two-extensions-with-the-same-ext-class-are-equivalent]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

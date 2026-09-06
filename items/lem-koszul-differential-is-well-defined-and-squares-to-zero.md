@@ -2,7 +2,7 @@
 id: lem-koszul-differential-is-well-defined-and-squares-to-zero
 kind: lemma
 title: "Koszul Differential Is Well Defined And Squares To Zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-koszul-complex-of-a-sequence-with-coefficients, lem-koszul-differential-coordinate-formula, lem-koszul-differential-square-pairwise-cancellation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

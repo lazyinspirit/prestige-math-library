@@ -2,7 +2,7 @@
 id: thm-long-exact-sequence-of-a-pair-in-singular-homology
 kind: theorem
 title: "Long exact sequence of a pair"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-relative-singular-homology, thm-long-exact-sequence-in-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-index-obstructs-naive-polynomial-factorization
 kind: example
 title: "Index 2 obstructs reading factorisation from Z[sqrt 5] modulo 2"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [ex-nonmaximal-quadratic-order, cor-order-index-discriminant-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

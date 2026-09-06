@@ -2,7 +2,7 @@
 id: thm-clearing-denominators-for-an-algebraic-number
 kind: theorem
 title: "Clearing denominators for an algebraic number"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-number-field, def-ring-of-integers-of-a-number-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

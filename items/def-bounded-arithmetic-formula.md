@@ -2,13 +2,14 @@
 id: def-bounded-arithmetic-formula
 kind: definition
 title: "Bounded arithmetic formulas"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-primitive-recursive-function]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,16 @@
 id: def-inductive-reachable-vertex-count
 kind: definition
 title: "Inductive counts of reachable vertices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-directed-st-connectivity]
-verification: {precheck: n/a, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: n/a
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, §3.4.2"

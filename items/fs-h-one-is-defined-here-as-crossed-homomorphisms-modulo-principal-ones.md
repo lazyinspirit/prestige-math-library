@@ -2,13 +2,15 @@
 id: fs-h-one-is-defined-here-as-crossed-homomorphisms-modulo-principal-ones
 kind: false-statement
 title: "This page defines $H^1$ by crossed homomorphisms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-group-cohomology-as-a-derived-functor]
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   scraped: []
   references:

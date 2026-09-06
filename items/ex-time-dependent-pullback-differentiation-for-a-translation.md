@@ -2,7 +2,7 @@
 id: ex-time-dependent-pullback-differentiation-for-a-translation
 kind: example
 title: "Time-dependent pullback differentiation for a translation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-differentiation-of-a-pulled-back-form-along-a-time-dependent-flow]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

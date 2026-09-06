@@ -2,7 +2,7 @@
 id: prop-positive-tor-vanishes-when-the-resolved-variable-is-projective
 title: "Positive Tor vanishes when the resolved variable is projective"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tor-by-resolving-the-left-module", "def-tor-by-resolving-the-right-module"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

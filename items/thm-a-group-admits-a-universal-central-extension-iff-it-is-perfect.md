@@ -2,7 +2,7 @@
 id: thm-a-group-admits-a-universal-central-extension-iff-it-is-perfect
 kind: theorem
 title: "Existence criterion for universal central extensions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-perfect-group, def-universal-central-extension, def-free-presentation-kernel-data]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-koszul-homology-after-localisation
 kind: example
 title: "Koszul Homology After Localisation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-koszul-homology-localises]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: ex-gaussian-and-eisenstein-integer-bases
 kind: example
 title: "Gaussian and Eisenstein integral bases"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-ring-of-integers-of-a-quadratic-field, cor-discriminant-of-a-quadratic-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

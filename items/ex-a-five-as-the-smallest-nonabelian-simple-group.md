@@ -2,7 +2,7 @@
 id: ex-a-five-as-the-smallest-nonabelian-simple-group
 kind: example
 title: "A5 as the smallest nonabelian simple group"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-alternating-group-is-simple-for-n-at-least-five]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

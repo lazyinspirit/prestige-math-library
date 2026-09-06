@@ -2,7 +2,7 @@
 id: thm-primitive-gauss-sum-norm
 kind: theorem
 title: "Norm of a primitive Gauss sum"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-gauss-sum-dirichlet-character, lem-primitive-gauss-sum-twist]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

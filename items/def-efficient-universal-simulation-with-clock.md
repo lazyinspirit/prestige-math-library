@@ -2,13 +2,14 @@
 id: def-efficient-universal-simulation-with-clock
 kind: definition
 title: "An efficient universal simulation with a clock"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-effective-encoding-of-turing-machines, def-time-and-space-constructible-function, def-dtime-ntime-dspace-and-nspace]
 verification:
+  audited: 2026-09-06
   precheck: n/a
 sources:
   references:

@@ -2,7 +2,7 @@
 id: prop-finite-groups-have-torsion-annihilation-in-positive-cohomology
 kind: proposition
 title: "Finite groups annihilate positive cohomology by their order"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-restriction-corestriction-composite-is-multiplication-by-the-index, lem-positive-group-cohomology-of-the-trivial-group-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

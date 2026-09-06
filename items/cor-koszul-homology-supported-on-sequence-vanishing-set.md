@@ -2,7 +2,7 @@
 id: cor-koszul-homology-supported-on-sequence-vanishing-set
 kind: corollary
 title: "Koszul Homology Supported On Sequence Vanishing Set"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-sequence-ideal-annihilates-koszul-homology, def-support-of-a-module, lem-support-membership-by-annihilator]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

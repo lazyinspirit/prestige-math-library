@@ -2,7 +2,7 @@
 id: thm-dirac-comb-is-fourier-invariant
 kind: theorem
 title: "Poisson summation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

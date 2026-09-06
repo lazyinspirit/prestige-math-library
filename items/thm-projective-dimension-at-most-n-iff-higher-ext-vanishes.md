@@ -2,7 +2,7 @@
 id: thm-projective-dimension-at-most-n-iff-higher-ext-vanishes
 kind: theorem
 title: "Projective dimension at most n iff higher Ext vanishes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-balanced-ext-bifunctor, thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective, thm-ext-dimension-shifting-in-the-first-variable, prop-positive-ext-vanishes-on-a-projective-first-variable, thm-projective-object-characterisations, def-ext-via-a-projective-resolution-of-the-first-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

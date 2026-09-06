@@ -2,7 +2,7 @@
 id: ex-a-contact-form-on-three-space
 kind: example
 title: "A contact form on three-space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-codimension-one-frobenius-criterion]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

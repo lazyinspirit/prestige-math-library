@@ -2,7 +2,7 @@
 id: rem-cauchy-kovalevskaya-theorem-for-a-noncharacteristic-analytic-cauchy-problem
 kind: remark
 title: "Cauchy–Kovalevskaya for a noncharacteristic analytic Cauchy problem"
-status: draft
+status: published
 origin: pipeline
 proved_here: false
 provenance:
@@ -11,6 +11,11 @@ provenance:
 deps: []
 justified_by: []
 verification:
+  audited: 2026-09-06
+  sources_checked:
+    date: 2026-09-06
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   references:

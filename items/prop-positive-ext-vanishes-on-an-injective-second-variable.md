@@ -2,7 +2,7 @@
 id: prop-positive-ext-vanishes-on-an-injective-second-variable
 kind: proposition
 title: "Positive injective-resolution Ext vanishes on an injective second variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ext-via-an-injective-resolution-of-the-second-variable, prop-positive-right-derived-functors-vanish-on-injective-objects]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

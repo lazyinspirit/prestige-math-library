@@ -2,7 +2,7 @@
 id: prop-a-morphism-of-extensions-is-an-isomorphism
 kind: proposition
 title: "A morphism of extensions is an isomorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-equivalence-of-extensions, thm-short-five-lemma-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-the-inhomogeneous-group-cochain-differential-squares-to-zero
 kind: lemma
 title: "The inhomogeneous cochain differential squares to zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-inhomogeneous-group-cochains]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

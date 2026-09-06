@@ -2,11 +2,12 @@
 id: ex-brauer-induction-for-s3
 kind: example
 title: Brauer induction for $S_3$
-status: draft
+status: published
 origin: pipeline
 deps: [thm-brauer-induction, def-p-elementary-and-p-hyperelementary-finite-groups, thm-frobenius-formula-for-induced-characters]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -36,4 +37,4 @@ $$1_{S_3}=\operatorname{Ind}_T^{S_3}1_T-\operatorname{Ind}_A^{S_3}\omega,\qquad\
 
 1.1 Frobenius' formula gives $\operatorname{Ind}_T1_T=1+\rho$, $\operatorname{Ind}_T\operatorname{sgn}_T=\epsilon+\rho$, and $\operatorname{Ind}_A\omega=\rho$ by evaluating on those three classes. [F1, given]
 
-2.1 Subtract the final equality from the first two. Both $T$ and $A$ are elementary, so these are integral Brauer-induction expressions. $\square$ [step 1.1]
+2.1 Subtract the final equality from the first two. Both $T$ and $A$ are elementary, so these are integral Brauer-induction expressions. ∎ [step 1.1]

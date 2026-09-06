@@ -2,7 +2,7 @@
 id: thm-functoriality-base-change-and-generator-change-for-koszul-complexes
 kind: theorem
 title: "Functoriality Base Change And Generator Change For Koszul Complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-koszul-complex-localises-termwise, lem-koszul-complex-flat-base-change, cor-koszul-homology-flat-base-change, lem-koszul-generator-matrix-chain-map, cor-koszul-complex-invariant-under-invertible-generator-change]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

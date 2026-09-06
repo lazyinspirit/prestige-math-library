@@ -2,7 +2,7 @@
 id: lem-two-extensions-with-the-same-ext-class-are-equivalent
 kind: lemma
 title: "Two extensions with the same Ext class are equivalent"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-balanced-ext-bifunctor, def-class-of-an-extension-in-derived-ext-one, lem-equivalent-extensions-have-the-same-ext-class, lem-every-ext-one-class-is-represented-by-an-extension, def-pullback-and-pushout-of-an-extension]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

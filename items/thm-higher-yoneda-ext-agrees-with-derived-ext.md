@@ -2,7 +2,7 @@
 id: thm-higher-yoneda-ext-agrees-with-derived-ext
 kind: theorem
 title: "Higher Yoneda Ext agrees with derived Ext"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-n-fold-yoneda-extension, def-equivalence-of-n-fold-extensions, def-ext-via-a-projective-resolution-of-the-first-variable, def-ext-via-an-injective-resolution-of-the-second-variable, thm-projective-object-characterisations, cor-the-pushout-of-a-monomorphism-is-a-monomorphism, thm-projective-comparison-map-exists, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

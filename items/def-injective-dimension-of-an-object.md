@@ -2,13 +2,14 @@
 id: def-injective-dimension-of-an-object
 kind: definition
 title: "Injective dimension of an object"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-injective-resolution-in-an-abelian-category, def-length-of-a-resolution]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-the-universal-coefficient-splitting-cannot-in-general-be-chosen-naturally
 title: "A universal-coefficient splitting cannot in general be chosen naturally"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-the-homology-universal-coefficient-sequence-splits-nonnaturally"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

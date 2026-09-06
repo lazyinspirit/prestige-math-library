@@ -2,7 +2,7 @@
 id: cor-projective-dimension-is-the-largest-nondegenerate-ext-degree-when-finite
 kind: corollary
 title: "Finite projective dimension is the largest nonzero Ext degree"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-dimension-at-most-n-iff-higher-ext-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

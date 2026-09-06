@@ -2,7 +2,7 @@
 id: thm-groups-of-finite-integral-cohomological-dimension-are-torsion-free
 kind: theorem
 title: "Finite integral cohomological dimension implies torsion-free"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cohomological-dimension-of-a-group, thm-group-cohomological-dimension-is-detected-by-cohomology-vanishing, lem-the-group-ring-is-free-over-a-subgroup-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

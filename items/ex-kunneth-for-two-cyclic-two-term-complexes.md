@@ -2,7 +2,7 @@
 id: ex-kunneth-for-two-cyclic-two-term-complexes
 title: "Kunneth for two cyclic two-term complexes"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kunneth-theorem-for-free-complexes-over-a-pid", "thm-tor-of-two-cyclic-abelian-groups"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

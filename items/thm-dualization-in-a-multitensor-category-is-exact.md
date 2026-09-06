@@ -2,7 +2,7 @@
 id: thm-dualization-in-a-multitensor-category-is-exact
 kind: theorem
 title: "Dualization in a multitensor category is exact"
-status: draft
+status: published
 origin: pipeline
 deps: [def-tensor-and-multitensor-category, thm-left-duality-is-a-contravariant-antimonoidal-functor, thm-an-equivalence-between-abelian-categories-is-exact]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

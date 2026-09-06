@@ -2,7 +2,7 @@
 id: thm-tor-of-two-cyclic-abelian-groups
 title: "Tor one of two cyclic abelian groups is cyclic of gcd order"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-tor-one-of-a-cyclic-abelian-group-detects-n-torsion"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

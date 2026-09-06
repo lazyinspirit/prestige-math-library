@@ -2,14 +2,17 @@
 id: lem-space-bounded-universal-simulation
 kind: lemma
 title: "Space-bounded universal simulation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-efficient-universal-simulation-with-clock, def-dtime-ntime-dspace-and-nspace, def-time-and-space-constructible-function]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, §3.2"

@@ -2,7 +2,7 @@
 id: def-lagrange-charpit-characteristic-system
 kind: definition
 title: "The Lagrange–Charpit characteristic system"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-fully-nonlinear-first-order-pde-and-complete-integral]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

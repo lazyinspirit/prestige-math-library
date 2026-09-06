@@ -2,7 +2,7 @@
 id: lem-koszul-generator-contraction-homotopy
 kind: lemma
 title: "Koszul Generator Contraction Homotopy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-koszul-complex-of-a-sequence-with-coefficients, lem-exterior-multiplication-koszul-sign-rule, def-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

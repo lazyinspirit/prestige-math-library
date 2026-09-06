@@ -2,7 +2,7 @@
 id: lem-uncountable-almost-disjoint-family-on-natural-numbers
 kind: lemma
 title: An uncountable almost-disjoint family of subsets of the naturals
-status: draft
+status: published
 origin: pipeline
 deps: [cor-irrationals-uncountable, lem-q-and-irrationals-dense-r, thm-rationals-countable, thm-well-ordering-principle, def-countable]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

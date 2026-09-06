@@ -2,13 +2,14 @@
 id: cor-squarefree-power-basis-discriminant-gives-ring-of-integers
 kind: corollary
 title: "Squarefree power discriminant criterion"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-power-basis-discriminant-is-polynomial-discriminant, cor-order-index-discriminant-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-each-tor-construction-is-covariant-in-both-variables
 title: "Each resolution-defined Tor construction is covariant in both variables"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tor-by-resolving-the-left-module", "def-tor-by-resolving-the-right-module", "thm-projective-comparison-map-exists", "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

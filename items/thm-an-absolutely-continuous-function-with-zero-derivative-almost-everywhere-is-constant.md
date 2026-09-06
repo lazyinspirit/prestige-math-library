@@ -2,7 +2,7 @@
 id: thm-an-absolutely-continuous-function-with-zero-derivative-almost-everywhere-is-constant
 kind: theorem
 title: "An absolutely continuous function with zero derivative almost everywhere is constant"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-dependent-choice, def-absolutely-continuous-function, thm-vitali-covering-theorem-for-fine-covers-on-the-line]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

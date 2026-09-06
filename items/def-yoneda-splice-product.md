@@ -2,13 +2,14 @@
 id: def-yoneda-splice-product
 kind: definition
 title: "The Yoneda splice product"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-n-fold-yoneda-extension]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,14 +2,17 @@
 id: ex-first-barycentric-subdivision-of-a-triangle
 kind: example
 title: "First barycentric subdivision of a triangle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-barycentric-subdivision-chain-operator, thm-barycentric-subdivision-is-a-chain-map]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Proposition 2.21"

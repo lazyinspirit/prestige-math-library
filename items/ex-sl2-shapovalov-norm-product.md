@@ -2,7 +2,7 @@
 id: ex-sl2-shapovalov-norm-product
 kind: example
 title: "The sl2 Shapovalov norm product"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-existence-and-uniqueness-of-the-shapovalov-form, ex-sl2-verma-action-in-the-pbw-basis]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

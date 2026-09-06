@@ -2,7 +2,7 @@
 id: lem-the-ext-balance-isomorphism-is-independent-of-resolution-comparison-data
 kind: lemma
 title: "The Ext balance isomorphism is independent of resolution comparison data"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy, thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

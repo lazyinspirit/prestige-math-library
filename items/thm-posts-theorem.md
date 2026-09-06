@@ -2,7 +2,7 @@
 id: thm-posts-theorem
 kind: theorem
 title: "Post's theorem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sigma-n-pi-n-and-delta-n-sets, def-relative-computability-and-enumerability, lem-oracle-computation-has-a-finite-query-witness, thm-sigma-one-sets-are-exactly-ce-sets]
 proof_strategy: induction
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

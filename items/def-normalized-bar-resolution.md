@@ -2,12 +2,14 @@
 id: def-normalized-bar-resolution
 kind: definition
 title: "The normalized homogeneous bar complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-unnormalized-homogeneous-bar-resolution]
+verification:
+  audited: 2026-09-06
 sources:
   scraped: []
   references:

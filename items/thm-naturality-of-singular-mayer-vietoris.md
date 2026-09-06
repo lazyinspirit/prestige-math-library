@@ -2,14 +2,16 @@
 id: thm-naturality-of-singular-mayer-vietoris
 kind: theorem
 title: "Naturality of singular Mayer–Vietoris"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-mayer-vietoris-sequence-in-singular-homology, lem-the-mayer-vietoris-connector-is-independent-of-small-chain-decomposition, cor-the-long-exact-homology-sequence-is-natural, thm-cover-small-singular-chains-compute-singular-homology, thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.2"

@@ -2,7 +2,7 @@
 id: ex-tor-detects-n-torsion
 title: "Tor detects n-torsion"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-tor-one-of-a-cyclic-abelian-group-detects-n-torsion"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

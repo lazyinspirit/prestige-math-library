@@ -2,7 +2,7 @@
 id: cor-lie-derivative-commutes-with-the-exterior-derivative
 kind: corollary
 title: "Lie derivative commutes with the exterior derivative"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-the-exterior-derivative-squares-to-zero, thm-cartans-magic-formula]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

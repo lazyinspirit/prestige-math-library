@@ -2,13 +2,14 @@
 id: def-shapovalov-determinant-on-a-weight-space
 kind: definition
 title: "The Shapovalov determinant on a weight space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-existence-and-uniqueness-of-the-shapovalov-form, lem-distinct-verma-weight-spaces-are-shapovalov-orthogonal, prop-weights-of-a-verma-module-lie-below-lambda]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

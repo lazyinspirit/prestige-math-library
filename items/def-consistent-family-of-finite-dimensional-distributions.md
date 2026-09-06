@@ -2,12 +2,14 @@
 id: def-consistent-family-of-finite-dimensional-distributions
 kind: definition
 title: "A consistent family of finite-dimensional distributions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-probability-measure, def-product-sigma-algebra-and-finite-product-sigma-algebras, def-coordinate-maps-and-cylinder-sigma-algebra]
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Biskup, MATH 275D notes, Definition 2.2"

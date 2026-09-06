@@ -2,7 +2,7 @@
 id: lem-koszul-resolution-minimality-maximal-ideal-sequence
 kind: lemma
 title: "Koszul Resolution Minimality Maximal Ideal Sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-koszul-complex-resolves-a-regular-quotient, def-minimal-free-resolution-over-a-local-ring, lem-koszul-differential-coordinate-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

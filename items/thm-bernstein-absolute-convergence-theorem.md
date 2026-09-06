@@ -2,7 +2,7 @@
 id: thm-bernstein-absolute-convergence-theorem
 kind: theorem
 title: "Bernstein's absolute-convergence theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-wiener-algebra-of-the-circle, lem-ltwo-fourier-decay-implies-absolute-convergence-by-cauchy-schwarz, lem-holder-fourier-coefficients-have-weighted-ltwo-decay]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

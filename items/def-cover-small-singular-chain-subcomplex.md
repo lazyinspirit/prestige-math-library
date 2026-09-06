@@ -2,13 +2,14 @@
 id: def-cover-small-singular-chain-subcomplex
 kind: definition
 title: "Cover-small singular chains"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-singular-chain-complex-and-singular-homology]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

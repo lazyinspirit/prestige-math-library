@@ -2,7 +2,7 @@
 id: lem-homogeneous-sets-in-pure-blockade-patterns-lift-to-homogeneous-blockades
 kind: lemma
 title: "Homogeneous sets in pure-blockade patterns lift to complete or anticomplete blockades"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

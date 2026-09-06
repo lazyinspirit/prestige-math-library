@@ -2,7 +2,7 @@
 id: prop-modules-over-a-field-are-projective-flat-and-injective
 title: "Modules over a field are projective, flat, and injective"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-field", "cor-every-vector-space-has-a-basis", "cor-free-modules-are-projective-and-flat", "thm-injective-modules-over-a-pid-are-exactly-divisible"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

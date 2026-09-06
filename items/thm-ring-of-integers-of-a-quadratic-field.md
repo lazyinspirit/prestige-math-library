@@ -2,13 +2,14 @@
 id: thm-ring-of-integers-of-a-quadratic-field
 kind: theorem
 title: "Integers in a quadratic field"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [def-ring-of-integers-of-a-number-field, cor-algebraic-integer-minimal-polynomial-criterion, cor-trace-and-norm-of-an-algebraic-integer]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

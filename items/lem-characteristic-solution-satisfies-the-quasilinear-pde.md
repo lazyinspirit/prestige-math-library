@@ -2,7 +2,7 @@
 id: lem-characteristic-solution-satisfies-the-quasilinear-pde
 kind: lemma
 title: "The inverse-projected characteristic graph satisfies the quasilinear PDE"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-local-quasilinear-cauchy-problem-by-characteristics, thm-chain-rule-f
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

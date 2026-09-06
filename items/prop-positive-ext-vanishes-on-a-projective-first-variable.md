@@ -2,7 +2,7 @@
 id: prop-positive-ext-vanishes-on-a-projective-first-variable
 kind: proposition
 title: "Positive projective-resolution Ext vanishes on a projective first variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ext-via-a-projective-resolution-of-the-first-variable, prop-positive-right-derived-functors-vanish-on-injective-objects]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

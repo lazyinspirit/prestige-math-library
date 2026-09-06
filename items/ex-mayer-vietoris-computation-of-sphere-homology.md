@@ -2,14 +2,16 @@
 id: ex-mayer-vietoris-computation-of-sphere-homology
 kind: example
 title: "Mayer–Vietoris computation of sphere homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-mayer-vietoris-sequence-in-singular-homology, cor-contractible-nonempty-spaces-have-the-homology-of-a-point, def-zero-simplex-augmentation-and-reduced-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Example 2.46"

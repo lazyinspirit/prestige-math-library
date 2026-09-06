@@ -2,7 +2,7 @@
 id: lem-the-columns-of-the-augmented-tensor-double-complex-are-exact
 title: "The augmented fixed-q rows of the tensor double complex are exact"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tensor-double-complex-of-two-projective-resolutions", "lem-projective-modules-are-flat-over-an-arbitrary-ring"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-projective-dimension-of-an-object
 kind: definition
 title: "Projective dimension of an object"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-projective-resolution-in-an-abelian-category, def-length-of-a-resolution]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

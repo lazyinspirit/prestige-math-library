@@ -2,7 +2,7 @@
 id: fs-shapiro-lemma-needs-no-distinction-between-induction-and-coinduction
 kind: false-statement
 title: "Shapiro lemma needs no induction/coinduction distinction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-shapiro-lemma-for-group-cohomology, thm-shapiro-lemma-for-group-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

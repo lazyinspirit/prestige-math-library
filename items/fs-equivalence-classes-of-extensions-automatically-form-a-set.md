@@ -2,7 +2,7 @@
 id: fs-equivalence-classes-of-extensions-automatically-form-a-set
 kind: false-statement
 title: "FALSE: extension classes automatically form a set"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-the-class-of-extensions-is-a-set-whenever-derived-ext-one-is-a-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

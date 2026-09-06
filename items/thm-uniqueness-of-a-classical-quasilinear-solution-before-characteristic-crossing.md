@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-a-classical-quasilinear-solution-before-characteristic-crossing
 kind: theorem
 title: "Uniqueness of a classical quasilinear solution before characteristic crossing"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-quasilinear-solution-lifts-to-characteristics, lem-characteristic-sol
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

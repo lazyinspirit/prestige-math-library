@@ -2,7 +2,7 @@
 id: prop-global-dimension-zero-characterises-semisimple-module-categories
 kind: proposition
 title: "Global dimension zero characterises semisimple module categories"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-and-right-global-dimension-of-a-ring, thm-equivalent-characterizations-of-semisimple-rings]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

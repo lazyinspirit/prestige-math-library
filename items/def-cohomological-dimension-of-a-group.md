@@ -2,13 +2,14 @@
 id: def-cohomological-dimension-of-a-group
 kind: definition
 title: "Integral cohomological dimension"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-integral-group-ring-module-and-trivial-module-convention, def-projective-module]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

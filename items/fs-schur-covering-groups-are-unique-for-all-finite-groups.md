@@ -2,7 +2,7 @@
 id: fs-schur-covering-groups-are-unique-for-all-finite-groups
 kind: false-statement
 title: "All finite Schur covers are unique"
-status: draft
+status: published
 origin: pipeline
 deps: [def-schur-covering-group-of-a-finite-group, thm-existence-of-schur-covering-groups-for-finite-groups]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

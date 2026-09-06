@@ -2,7 +2,7 @@
 id: thm-the-exterior-derivative-squares-to-zero
 kind: theorem
 title: "The exterior derivative squares to zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-the-exterior-derivative-is-local, thm-local-coordinate-formula-for-t
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

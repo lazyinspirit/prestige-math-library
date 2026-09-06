@@ -2,12 +2,13 @@
 id: def-dual-numbers-scheme
 kind: definition
 title: "The affine scheme of dual numbers"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-affine-scheme, def-polynomial-ring-over-a-commutative-ring, def-quotient-ring]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: thm-power-basis-discriminant-is-polynomial-discriminant
 kind: theorem
 title: "Power-basis and polynomial discriminants"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [thm-discriminant-as-an-embedding-determinant, cor-algebraic-integer-minimal-polynomial-criterion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cex-x-squared-sine-one-over-x-squared-is-differentiable-everywhere-but-not-absolutely-continuous
 kind: counterexample
 title: '$x^2\sin(1/x^2)$ is differentiable everywhere but not absolutely continuous'
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-c1-lipschitz-ac-bv-hierarchy]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

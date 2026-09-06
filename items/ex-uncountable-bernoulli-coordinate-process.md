@@ -2,7 +2,7 @@
 id: ex-uncountable-bernoulli-coordinate-process
 kind: example
 title: "An uncountable Bernoulli coordinate process"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-kolmogorov-extension-for-standard-borel-coordinate-spaces, cor-canonical-process-realizes-consistent-finite-dimensional-laws]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

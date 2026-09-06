@@ -2,7 +2,7 @@
 id: lem-schur-multiplier-of-a-finite-group-is-finite
 kind: lemma
 title: "Multiplier of a finite group is finite"
-status: draft
+status: published
 origin: pipeline
 deps: [def-schur-multiplier-of-a-group, lem-every-finite-group-is-finitely-presented, cor-schur-multiplier-of-a-finitely-presented-group-is-finitely-generated, lem-positive-degree-integral-homology-of-a-finite-group-is-order-torsion]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

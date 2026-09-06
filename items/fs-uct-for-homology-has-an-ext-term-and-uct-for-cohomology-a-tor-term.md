@@ -2,7 +2,7 @@
 id: fs-uct-for-homology-has-an-ext-term-and-uct-for-cohomology-a-tor-term
 title: "The homological and cohomological UCT correction terms are not reversed"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-universal-coefficient-theorem-for-homology-over-a-pid", "thm-universal-coefficient-theorem-for-cohomology-over-a-pid"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

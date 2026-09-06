@@ -2,12 +2,13 @@
 id: rem-spec-contravariance-and-points
 kind: remark
 title: "Contravariance reverses coordinates and scheme points are not only classical points"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-affine-scheme-ring-anti-equivalence, def-closed-point-scheme, def-generic-point-irreducible-closed-subset, def-residue-field-scheme-point]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

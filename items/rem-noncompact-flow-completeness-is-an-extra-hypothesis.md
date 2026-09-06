@@ -2,7 +2,7 @@
 id: rem-noncompact-flow-completeness-is-an-extra-hypothesis
 kind: remark
 title: "Completeness of a gradient flow is an extra hypothesis on a noncompact manifold"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-proper-morse-slabs-give-complete-connecting-trajectories, def-complete-vector-field]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

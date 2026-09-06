@@ -2,7 +2,7 @@
 id: ex-a-flat-nonprojective-module
 title: "A flat nonprojective module"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["def-left-and-right-flat-modules-over-an-arbitrary-ring", "fs-flat-modules-have-projective-dimension-zero"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

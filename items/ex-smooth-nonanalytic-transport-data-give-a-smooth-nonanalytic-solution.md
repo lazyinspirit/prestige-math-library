@@ -2,7 +2,7 @@
 id: ex-smooth-nonanalytic-transport-data-give-a-smooth-nonanalytic-solution
 kind: example
 title: "Smooth nonanalytic transport data give a smooth nonanalytic solution"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-semilinear-and-quasilinear-first-order-cauchy-problems, lem-character
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

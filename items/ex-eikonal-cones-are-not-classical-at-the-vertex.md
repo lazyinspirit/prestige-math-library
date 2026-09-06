@@ -2,7 +2,7 @@
 id: ex-eikonal-cones-are-not-classical-at-the-vertex
 kind: example
 title: "Eikonal cones are not classical at the vertex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-fully-nonlinear-first-order-pde-and-complete-integral]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

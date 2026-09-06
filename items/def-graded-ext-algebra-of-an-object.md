@@ -2,13 +2,14 @@
 id: def-graded-ext-algebra-of-an-object
 kind: definition
 title: "The graded Ext algebra of an object"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [prop-the-yoneda-product-agrees-with-the-derived-ext-composition-product]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: rem-characteristics-do-not-select-a-post-crossing-weak-solution
 kind: remark
 title: "Characteristics do not select a post-crossing weak solution"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-characteristic-crossing-and-caustic-for-first-order-pde]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

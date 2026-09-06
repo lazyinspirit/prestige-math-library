@@ -2,7 +2,7 @@
 id: fs-every-absolutely-continuous-function-is-lipschitz
 kind: false-statement
 title: "Every absolutely continuous function is Lipschitz"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

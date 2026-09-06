@@ -2,13 +2,14 @@
 id: def-class-of-an-extension-in-derived-ext-one
 kind: definition
 title: "The derived Ext-one class of an extension"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extension-of-an-object-by-an-object-in-an-abelian-category, def-balanced-ext-bifunctor, thm-long-exact-ext-sequence-in-the-second-variable]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

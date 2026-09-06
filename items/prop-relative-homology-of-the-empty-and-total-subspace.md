@@ -2,7 +2,7 @@
 id: prop-relative-homology-of-the-empty-and-total-subspace
 kind: proposition
 title: "Relative homology for the empty and total subspace"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-relative-singular-homology, def-singular-chain-complex-and-singular-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   references:

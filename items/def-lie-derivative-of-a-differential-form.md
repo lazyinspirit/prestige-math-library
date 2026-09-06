@@ -2,7 +2,7 @@
 id: def-lie-derivative-of-a-differential-form
 kind: definition
 title: "The Lie derivative of a differential form"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-lie-derivative-of-a-tensor-field, def-smooth-differential-k-form]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

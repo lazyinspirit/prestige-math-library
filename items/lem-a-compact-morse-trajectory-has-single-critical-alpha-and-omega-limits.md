@@ -2,7 +2,7 @@
 id: lem-a-compact-morse-trajectory-has-single-critical-alpha-and-omega-limits
 kind: lemma
 title: "A negative-gradient trajectory on a compact Morse manifold has single critical alpha and omega limits"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-precompact-trajectory-tail-limit-sets-are-nonempty-compact-connected-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

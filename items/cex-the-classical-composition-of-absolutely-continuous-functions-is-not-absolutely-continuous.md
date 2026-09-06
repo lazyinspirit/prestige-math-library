@@ -2,7 +2,7 @@
 id: cex-the-classical-composition-of-absolutely-continuous-functions-is-not-absolutely-continuous
 kind: counterexample
 title: "A classical composition of absolutely continuous functions is not absolutely continuous"
-status: draft
+status: published
 origin: pipeline
 deps: [cex-the-composition-of-two-absolutely-continuous-functions-need-not-be-absolutely-continuous]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-periodic-ltwo-weak-derivative
 kind: definition
 title: "Periodic L2 weak derivative on the circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

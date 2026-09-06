@@ -2,7 +2,7 @@
 id: lem-koszul-differential-square-pairwise-cancellation
 kind: lemma
 title: "Koszul Differential Square Pairwise Cancellation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-koszul-differential-coordinate-formula, lem-exterior-multiplication-koszul-sign-rule]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

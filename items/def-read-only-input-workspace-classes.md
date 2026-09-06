@@ -2,13 +2,16 @@
 id: def-read-only-input-workspace-classes
 kind: definition
 title: "Read-only-input work-space classes and constructibility"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-asymptotic-resource-comparison, def-multitape-and-nondeterministic-machines]
-verification: {precheck: n/a, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: n/a
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Definition 4.1 and Remark 4.2"

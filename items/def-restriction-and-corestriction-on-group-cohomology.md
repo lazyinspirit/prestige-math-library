@@ -2,12 +2,14 @@
 id: def-restriction-and-corestriction-on-group-cohomology
 kind: definition
 title: "Restriction and corestriction in group cohomology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-group-cohomology-as-a-derived-functor, def-restriction-induction-and-coinduction-for-group-modules, thm-induction-is-left-adjoint-and-coinduction-right-adjoint-to-restriction, lem-the-group-ring-is-free-over-a-subgroup-ring, thm-effaceable-cohomological-delta-functors-are-universal, prop-positive-right-derived-functors-are-effaceable-by-injectives]
+verification:
+  audited: 2026-09-06
 sources:
   scraped: []
   references:

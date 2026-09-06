@@ -2,7 +2,7 @@
 id: def-flat-dimension-of-a-module
 title: "The flat dimension of a module"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-left-and-right-flat-modules-over-an-arbitrary-ring"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

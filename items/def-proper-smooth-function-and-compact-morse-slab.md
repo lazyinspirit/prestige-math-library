@@ -2,7 +2,7 @@
 id: def-proper-smooth-function-and-compact-morse-slab
 kind: definition
 title: "Proper smooth functions and compact Morse slabs"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-compact-space, def-continuous-map-top]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

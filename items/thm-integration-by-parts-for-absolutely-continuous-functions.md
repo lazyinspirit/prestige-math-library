@@ -2,7 +2,7 @@
 id: thm-integration-by-parts-for-absolutely-continuous-functions
 kind: theorem
 title: "Integration by parts for absolutely continuous functions"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-countable-choice, def-dependent-choice, lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-the-unit-object-of-a-tensor-category-is-simple
 kind: theorem
 title: "The unit object of a tensor category is simple"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-the-unit-object-of-a-multitensor-category-is-semisimple, def-tensor-and-multitensor-category]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

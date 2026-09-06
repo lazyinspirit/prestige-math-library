@@ -2,13 +2,14 @@
 id: def-koszul-complex-of-a-sequence-with-coefficients
 kind: definition
 title: "Koszul Complex Of A Sequence With Coefficients"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-exterior-algebra-of-a-finite-free-module, def-tensor-product-of-modules-by-generators-and-relations, def-chain-complex-in-an-abelian-category]
 verification:
+  audited: 2026-09-06
   precheck: n/a
 sources:
   scraped: []

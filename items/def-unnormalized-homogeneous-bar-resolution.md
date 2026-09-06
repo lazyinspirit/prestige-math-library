@@ -2,13 +2,14 @@
 id: def-unnormalized-homogeneous-bar-resolution
 kind: definition
 title: "The augmented unnormalized homogeneous bar complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-integral-group-ring-module-and-trivial-module-convention]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-existence-of-schur-covering-groups-for-finite-groups
 kind: theorem
 title: "Existence of Schur covering groups"
-status: draft
+status: published
 origin: pipeline
 deps: [def-schur-covering-group-of-a-finite-group, lem-every-finite-group-is-finitely-presented, thm-hopf-formula-for-the-schur-multiplier, lem-schur-multiplier-of-a-finite-group-is-finite]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-finite-coordinate-cylinder-sets-form-an-algebra
 kind: lemma
 title: "Finite-coordinate cylinder sets form an algebra"
-status: draft
+status: published
 origin: pipeline
 deps: [def-coordinate-maps-and-cylinder-sigma-algebra, def-algebra-of-subsets]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

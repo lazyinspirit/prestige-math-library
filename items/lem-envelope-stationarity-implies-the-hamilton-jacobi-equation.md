@@ -2,7 +2,7 @@
 id: lem-envelope-stationarity-implies-the-hamilton-jacobi-equation
 kind: lemma
 title: "A nondegenerate stationary envelope solves the Hamilton–Jacobi equation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-fully-nonlinear-first-order-pde-and-complete-integral, thm-euclidean-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

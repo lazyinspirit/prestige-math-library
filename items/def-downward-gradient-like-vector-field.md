@@ -2,7 +2,7 @@
 id: def-downward-gradient-like-vector-field
 kind: definition
 title: "Downward gradient-like vector fields for a Morse function"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-morse-function-and-excellent-morse-function, def-smooth-vector-field-as-a-tangent-bundle-section]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

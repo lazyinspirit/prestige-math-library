@@ -2,13 +2,16 @@
 id: lem-structure-presheaf-basic-open-well-defined
 kind: lemma
 title: "Localization sections are independent of a distinguished-open presentation"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-structure-presheaf-on-basic-opens, lem-distinguished-opens-cover-every-open, lem-distinguished-open-refinement-at-a-point, lem-spectrum-compactness-open-cover-to-unit-ideal, cor-nilradical-as-intersection-of-primes, thm-universal-property-of-localisation]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.5.1"

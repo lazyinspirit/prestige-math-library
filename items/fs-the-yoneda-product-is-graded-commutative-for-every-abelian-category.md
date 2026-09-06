@@ -2,7 +2,7 @@
 id: fs-the-yoneda-product-is-graded-commutative-for-every-abelian-category
 kind: false-statement
 title: "FALSE: the Yoneda product is graded commutative for every abelian category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-yoneda-product-is-associative-and-unital, def-graded-ext-algebra-of-an-object, thm-free-modules-are-projective-with-choice-boundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

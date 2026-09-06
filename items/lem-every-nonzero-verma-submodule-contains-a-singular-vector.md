@@ -2,7 +2,7 @@
 id: lem-every-nonzero-verma-submodule-contains-a-singular-vector
 kind: lemma
 title: "Every nonzero Verma submodule contains a singular vector"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-weights-of-a-verma-module-lie-below-lambda, def-highest-weight-vector-and-cyclic-highest-weight-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

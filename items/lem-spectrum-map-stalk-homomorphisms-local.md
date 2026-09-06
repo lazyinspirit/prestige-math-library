@@ -2,13 +2,16 @@
 id: lem-spectrum-map-stalk-homomorphisms-local
 kind: lemma
 title: "The stalk maps induced by a ring map are local"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-morphism-affine-schemes-from-ring-map, thm-stalk-structure-sheaf-prime-localization, thm-localisation-at-a-prime-is-local, def-morphism-locally-ringed-spaces]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.6.4"

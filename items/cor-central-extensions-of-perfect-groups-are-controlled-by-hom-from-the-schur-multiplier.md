@@ -2,7 +2,7 @@
 id: cor-central-extensions-of-perfect-groups-are-controlled-by-hom-from-the-schur-multiplier
 kind: corollary
 title: "Central extensions of perfect groups"
-status: draft
+status: published
 origin: pipeline
 deps: [def-perfect-group, thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

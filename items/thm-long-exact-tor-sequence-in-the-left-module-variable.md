@@ -2,7 +2,7 @@
 id: thm-long-exact-tor-sequence-in-the-left-module-variable
 title: "The long exact Tor sequence in the left-module variable"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-balanced-tor-bifunctor", "thm-horseshoe-lemma-for-projective-resolutions", "thm-long-exact-sequence-in-homology"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

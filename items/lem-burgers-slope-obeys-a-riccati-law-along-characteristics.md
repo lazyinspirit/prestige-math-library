@@ -2,7 +2,7 @@
 id: lem-burgers-slope-obeys-a-riccati-law-along-characteristics
 kind: lemma
 title: "The Burgers slope obeys a Riccati law along characteristics"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [lem-characteristic-solution-satisfies-the-quasilinear-pde, thm-chain-rule-for-total-derivatives]
 justified_by: []
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Part III: Analysis of Partial Differential Equations"

@@ -2,7 +2,7 @@
 id: cor-dirichlet-l-root-number-unit-modulus
 kind: corollary
 title: "Unit modulus of the Dirichlet root number"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-primitive-dirichlet-l-functional-equation, thm-primitive-gauss-sum-norm]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

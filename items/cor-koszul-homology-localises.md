@@ -2,7 +2,7 @@
 id: cor-koszul-homology-localises
 kind: corollary
 title: "Koszul Homology Localises"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-koszul-complex-localises-termwise, thm-localisation-of-modules-is-exact]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

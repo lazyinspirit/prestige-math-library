@@ -2,13 +2,16 @@
 id: thm-spectrum-sober
 kind: theorem
 title: "Every irreducible closed subset of an affine spectrum has a unique generic point"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-generic-point-irreducible-closed-subset, thm-irreducible-closed-subsets-and-prime-ideals, cor-spectrum-is-t-zero]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Section 10.26"

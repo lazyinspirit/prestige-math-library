@@ -2,7 +2,7 @@
 id: fs-left-and-right-global-dimension-are-equal-by-definition
 kind: false-statement
 title: "FALSE: left and right global dimensions are equal by definition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-and-right-global-dimension-of-a-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

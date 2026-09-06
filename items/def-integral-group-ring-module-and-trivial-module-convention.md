@@ -2,13 +2,14 @@
 id: def-integral-group-ring-module-and-trivial-module-convention
 kind: definition
 title: "Integral group modules and the trivial module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-group-ring, def-augmentation-map-and-augmentation-ideal-of-a-group-ring, thm-group-actions-and-group-ring-modules-correspond]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

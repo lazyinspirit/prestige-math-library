@@ -2,7 +2,7 @@
 id: ex-regular-sequence-powers-and-permutation
 kind: example
 title: "Regular Sequence Powers And Permutation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-positive-powers-of-a-regular-sequence-remain-regular, cor-regular-sequences-permutable-local]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

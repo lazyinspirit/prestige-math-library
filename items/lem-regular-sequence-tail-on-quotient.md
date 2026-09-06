@@ -2,7 +2,7 @@
 id: lem-regular-sequence-tail-on-quotient
 kind: lemma
 title: "Regular Sequence Tail On Quotient"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-sequence-on-a-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

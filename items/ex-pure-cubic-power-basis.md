@@ -2,7 +2,7 @@
 id: ex-pure-cubic-power-basis
 kind: example
 title: "A pure cubic power basis: why the squarefree-discriminant certificate does not apply"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-power-basis-discriminant-is-polynomial-discriminant, cor-squarefree-power-basis-discriminant-gives-ring-of-integers]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

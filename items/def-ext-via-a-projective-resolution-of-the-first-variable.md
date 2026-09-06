@@ -2,13 +2,14 @@
 id: def-ext-via-a-projective-resolution-of-the-first-variable
 kind: definition
 title: "Ext via a projective resolution of the first variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-supplied-projective-resolution-datum]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

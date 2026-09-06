@@ -2,7 +2,7 @@
 id: ex-curl-and-divergence-encoded-by-the-exterior-derivative
 kind: example
 title: "Curl and divergence encoded by the exterior derivative"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-local-coordinate-formula-for-the-exterior-derivative]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

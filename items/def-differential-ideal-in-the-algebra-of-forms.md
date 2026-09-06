@@ -2,7 +2,7 @@
 id: def-differential-ideal-in-the-algebra-of-forms
 kind: definition
 title: "A differential ideal in the algebra of forms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-exterior-derivative-is-a-graded-derivation]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

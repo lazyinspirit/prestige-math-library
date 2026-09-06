@@ -2,13 +2,14 @@
 id: def-parity-dirichlet-character
 kind: definition
 title: "Parity of a Dirichlet character"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-dirichlet-character-modulo-q]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-ext-one-of-z-mod-n-by-an-abelian-group-as-extension-classes
 kind: example
 title: "Ext one of Z modulo n by an abelian group as extension classes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-group-cohomology-as-a-derived-functor
 kind: definition
 title: "Group cohomology as a derived functor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-the-invariants-functor-is-left-exact, thm-invariants-are-hom-from-the-trivial-group-ring-module, def-right-derived-object-relative-to-injective-resolution-data, def-supplied-injective-resolution-datum, thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]
 landmark: true
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

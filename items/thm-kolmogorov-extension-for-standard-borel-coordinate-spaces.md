@@ -2,7 +2,7 @@
 id: thm-kolmogorov-extension-for-standard-borel-coordinate-spaces
 kind: theorem
 title: "Assuming the Axiom of Choice, Kolmogorov extension for arbitrary families of standard Borel coordinate spaces"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-coordinate-maps-and-cylinder-sigma-algebra, lem-finite-coordinate-cylinders-form-a-pi-system, lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined, def-consistent-family-of-finite-dimensional-distributions, def-standard-borel-space, lem-finite-products-of-standard-borel-spaces-are-standard-borel, thm-borel-probability-measures-on-polish-spaces-are-inner-regular, thm-compact-implies-the-other-compactness-forms, def-axiom-of-choice, def-countable-choice, thm-caratheodory-extension-theorem, thm-dynkin-pi-lambda]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

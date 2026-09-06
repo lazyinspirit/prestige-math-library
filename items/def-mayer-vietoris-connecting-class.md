@@ -2,13 +2,15 @@
 id: def-mayer-vietoris-connecting-class
 kind: definition
 title: "Mayer–Vietoris connecting class"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-mayer-vietoris-sequence-in-singular-homology]
 justified_by: [lem-the-mayer-vietoris-connector-is-independent-of-small-chain-decomposition]
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.2"

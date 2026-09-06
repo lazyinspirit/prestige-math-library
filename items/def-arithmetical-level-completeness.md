@@ -2,13 +2,14 @@
 id: def-arithmetical-level-completeness
 kind: definition
 title: "Completeness at an arithmetical level"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-sigma-n-pi-n-and-delta-n-sets, def-computable-many-one-reduction]
 verification:
+  audited: 2026-09-06
   precheck: n/a
 sources:
   references:

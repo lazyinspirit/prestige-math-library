@@ -2,7 +2,7 @@
 id: ex-gauges-of-norm-balls-and-ellipsoids
 kind: example
 title: Gauges of norm balls and finite-dimensional ellipsoids
-status: draft
+status: published
 origin: pipeline
 deps: [def-minkowski-functional, lem-balanced-gauge-is-a-seminorm]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

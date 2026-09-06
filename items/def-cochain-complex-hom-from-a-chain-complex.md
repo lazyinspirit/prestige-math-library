@@ -2,7 +2,7 @@
 id: def-cochain-complex-hom-from-a-chain-complex
 title: "The Hom cochain complex of a chain complex"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-chain-complex-in-an-abelian-category", "def-cochain-complex-in-an-abelian-category"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
 ---
 

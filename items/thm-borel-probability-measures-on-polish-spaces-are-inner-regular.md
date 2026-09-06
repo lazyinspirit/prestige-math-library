@@ -2,13 +2,15 @@
 id: thm-borel-probability-measures-on-polish-spaces-are-inner-regular
 kind: theorem
 title: "Assuming countable choice, Borel probability measures on Polish spaces are inner regular"
-status: draft
+status: published
 origin: pipeline
 deps: [def-polish-space, def-probability-measure, def-borel-sigma-algebra, lem-countable-iff-surjection-from-n, def-metric-ball, def-totally-bounded, thm-metric-open-set-algebra, thm-continuity-from-below-for-measures, thm-finite-and-countable-subadditivity-of-measures, prop-measure-of-a-set-difference, thm-complete-subspace-iff-closed, thm-complete-and-totally-bounded-implies-compact, thm-dynkin-pi-lambda, def-countable-choice, def-compact-space]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Biskup, MATH 275D notes, Lemma 2.7"

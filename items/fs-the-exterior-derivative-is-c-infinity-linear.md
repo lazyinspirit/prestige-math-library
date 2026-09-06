@@ -2,7 +2,7 @@
 id: fs-the-exterior-derivative-is-c-infinity-linear
 kind: false-statement
 title: 'The exterior derivative is $C^\infty$-linear'
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-the-exterior-derivative-is-a-graded-derivation]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

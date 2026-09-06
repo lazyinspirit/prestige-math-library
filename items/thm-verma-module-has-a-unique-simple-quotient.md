@@ -2,7 +2,7 @@
 id: thm-verma-module-has-a-unique-simple-quotient
 kind: theorem
 title: "A Verma module has a unique simple quotient"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-sum-of-all-proper-submodules-of-a-verma-module-is-proper]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

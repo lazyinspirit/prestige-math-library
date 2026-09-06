@@ -2,13 +2,14 @@
 id: cex-continuity-does-not-imply-absolute-fourier-convergence
 kind: counterexample
 title: "Continuity does not imply absolute Fourier convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-the-kunneth-short-exact-sequence-has-a-canonical-splitting
 title: "The Kunneth short exact sequence has no generally canonical splitting"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-the-kunneth-sequence-splits-nonnaturally"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

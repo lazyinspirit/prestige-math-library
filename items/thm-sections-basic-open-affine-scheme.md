@@ -2,13 +2,16 @@
 id: thm-sections-basic-open-affine-scheme
 kind: theorem
 title: "Sections and restrictions on distinguished opens of an affine scheme"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-structure-sheaf-affine-scheme, def-principal-distinguished-subset-of-spectrum, thm-universal-property-of-localisation]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.5.4"

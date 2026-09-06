@@ -2,7 +2,7 @@
 id: thm-shapovalov-determinant-formula
 kind: theorem
 title: "The Shapovalov determinant formula"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-shapovalov-determinant-on-a-weight-space, def-weyl-vector-rho-for-a-chosen-positive-system, def-root-reflections-and-the-weyl-group-action, prop-casimir-eigenvalue-on-a-highest-weight-module, prop-the-shapovalov-radical-is-the-maximal-submodule, lem-every-nonzero-verma-submodule-contains-a-singular-vector, thm-universal-property-of-verma-modules, thm-pbw-model-of-a-verma-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

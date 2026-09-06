@@ -2,14 +2,17 @@
 id: thm-directed-st-connectivity-is-nl-complete
 kind: theorem
 title: "Directed s-t connectivity is NL-complete"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-l-and-nl, lem-logspace-machines-have-polynomially-many-configurations, def-logspace-many-one-reduction, def-directed-st-connectivity]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 3.16"

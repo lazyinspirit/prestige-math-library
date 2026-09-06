@@ -2,14 +2,17 @@
 id: thm-circuit-value-is-p-complete
 kind: theorem
 title: "Circuit Value is P-complete"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-p-complete-under-logspace-reductions, lem-polynomial-time-computations-have-logspace-uniform-circuits]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 6.27"

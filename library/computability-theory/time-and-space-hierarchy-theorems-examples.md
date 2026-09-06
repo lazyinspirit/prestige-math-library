@@ -1,7 +1,7 @@
 ---
 page: time-and-space-hierarchy-theorems-examples
 title: "Time and Space Hierarchy Theorems: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-time-diagonal-language-respects-its-budget, ex-hierarchy-theorems-do-not-separate-p-from-np, cex-unrestricted-diagonalization-respects-any-bound]
 ---

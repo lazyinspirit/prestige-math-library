@@ -2,7 +2,7 @@
 id: ex-a-closed-uncomplemented-subspace
 kind: example
 title: A closed uncomplemented subspace
-status: draft
+status: published
 origin: pipeline
 deps: [lem-c-zero-is-a-closed-subspace-of-ell-infinity, thm-c-zero-is-not-complemented-in-ell-infinity]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

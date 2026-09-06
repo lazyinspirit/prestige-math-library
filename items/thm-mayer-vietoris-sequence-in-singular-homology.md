@@ -2,14 +2,17 @@
 id: thm-mayer-vietoris-sequence-in-singular-homology
 kind: theorem
 title: "Mayer–Vietoris sequence in singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence, thm-cover-small-singular-chains-compute-singular-homology, thm-long-exact-sequence-in-homology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.2"

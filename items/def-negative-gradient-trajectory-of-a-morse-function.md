@@ -2,7 +2,7 @@
 id: def-negative-gradient-trajectory-of-a-morse-function
 kind: definition
 title: "Negative-gradient trajectories of a Morse function"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemannian-gradient-of-a-smooth-function, def-morse-function-and-excellent-morse-function, def-integral-curve-of-a-vector-field]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

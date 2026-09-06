@@ -2,13 +2,16 @@
 id: ex-spectrum-zero-ring-empty
 kind: example
 title: "The zero ring has empty spectrum"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-affine-scheme-spectrum, def-prime-and-maximal-ideals, thm-global-sections-affine-scheme]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.5.4"

@@ -2,7 +2,7 @@
 id: lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined
 kind: lemma
 title: "Consistent finite-dimensional laws define a well-defined finitely additive cylinder law"
-status: draft
+status: published
 origin: pipeline
 deps: [def-consistent-family-of-finite-dimensional-distributions, lem-finite-coordinate-cylinder-sets-form-an-algebra]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

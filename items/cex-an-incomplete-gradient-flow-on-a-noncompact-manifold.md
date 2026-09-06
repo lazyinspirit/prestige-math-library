@@ -2,7 +2,7 @@
 id: cex-an-incomplete-gradient-flow-on-a-noncompact-manifold
 kind: counterexample
 title: "A gradient flow on a noncompact manifold can be incomplete"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: []
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-nonpermutable-regular-sequence
 kind: example
 title: "Nonpermutable Regular Sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-sequence-on-a-module, thm-regularity-notions-and-permutation-invariance-local]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

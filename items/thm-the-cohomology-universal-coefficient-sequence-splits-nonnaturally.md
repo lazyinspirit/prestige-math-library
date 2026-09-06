@@ -2,7 +2,7 @@
 id: thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally
 title: "The cohomology universal-coefficient sequence splits nonnaturally"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-universal-coefficient-theorem-for-cohomology-over-a-pid", "lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free", "lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid", "thm-free-modules-are-projective-with-choice-boundary"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

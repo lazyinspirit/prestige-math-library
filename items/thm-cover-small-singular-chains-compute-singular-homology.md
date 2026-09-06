@@ -2,14 +2,16 @@
 id: thm-cover-small-singular-chains-compute-singular-homology
 kind: theorem
 title: "Cover-small chains compute singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cover-small-singular-chain-subcomplex, lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision, thm-barycentric-subdivision-is-chain-homotopic-to-the-identity]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Proposition 2.21"

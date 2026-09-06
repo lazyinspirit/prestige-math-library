@@ -2,13 +2,14 @@
 id: def-sigma-n-pi-n-and-delta-n-sets
 kind: definition
 title: "The classes Sigma_n^0, Pi_n^0, and Delta_n^0"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-bounded-arithmetic-formula]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

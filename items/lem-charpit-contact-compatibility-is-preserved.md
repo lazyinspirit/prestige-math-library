@@ -2,7 +2,7 @@
 id: lem-charpit-contact-compatibility-is-preserved
 kind: lemma
 title: "Charpit contact compatibility is preserved"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lagrange-charpit-characteristic-system, lem-charpit-flow-preserves-th
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

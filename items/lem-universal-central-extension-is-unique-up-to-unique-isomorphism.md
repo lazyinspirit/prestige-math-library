@@ -2,7 +2,7 @@
 id: lem-universal-central-extension-is-unique-up-to-unique-isomorphism
 kind: lemma
 title: "Uniqueness of universal central extensions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-universal-central-extension]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

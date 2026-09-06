@@ -2,7 +2,7 @@
 id: ex-an-a2-verma-weight-space-of-dimension-two
 kind: example
 title: "A two-dimensional A2 Verma weight space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-verma-module, thm-pbw-model-of-a-verma-module, thm-existence-and-uniqueness-of-the-shapovalov-form]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

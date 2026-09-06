@@ -2,7 +2,7 @@
 id: thm-absolutely-continuous-functions-have-integrable-derivatives
 kind: theorem
 title: "Absolutely continuous functions have integrable derivatives"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-absolutely-continuous-function, thm-c1-lipschitz-ac-bv-hierarchy, thm-jordan-decomposition-for-bv-functions, thm-the-derivative-of-an-increasing-function-is-measurable-integrable-and-bounded-by-its-total-increase]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

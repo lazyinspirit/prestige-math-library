@@ -2,7 +2,7 @@
 id: lem-chain-rule-for-an-indefinite-integral-after-an-absolutely-continuous-composition
 kind: lemma
 title: "Chain rule for an indefinite integral after an absolutely continuous composition"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-dependent-choice, def-indefinite-lebesgue-integral-on-a-compact-interval, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-first-fundamental-theorem-of-calculus-for-l-one, thm-absolutely-continuous-functions-have-luzin-property-n, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   references:

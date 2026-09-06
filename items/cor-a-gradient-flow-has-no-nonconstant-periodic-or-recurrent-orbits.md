@@ -2,7 +2,7 @@
 id: cor-a-gradient-flow-has-no-nonconstant-periodic-or-recurrent-orbits
 kind: corollary
 title: "A downward gradient flow has no nonconstant periodic or recurrent orbit"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-nonconstant-negative-gradient-trajectories-strictly-decrease-the-func
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

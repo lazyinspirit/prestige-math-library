@@ -2,7 +2,7 @@
 id: prop-tor-dimension-shifting
 title: "Tor admits dimension shifting in either variable"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-long-exact-tor-sequence-in-the-left-module-variable", "thm-long-exact-tor-sequence-in-the-right-module-variable", "prop-positive-tor-vanishes-when-the-resolved-variable-is-projective"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

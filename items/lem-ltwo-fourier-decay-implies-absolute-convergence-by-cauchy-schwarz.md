@@ -2,7 +2,7 @@
 id: lem-ltwo-fourier-decay-implies-absolute-convergence-by-cauchy-schwarz
 kind: lemma
 title: "Weighted ell-2 decay implies absolute convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

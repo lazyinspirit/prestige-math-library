@@ -2,7 +2,7 @@
 id: ex-an-integrable-pfaffian-equation-with-a-local-first-integral
 kind: example
 title: "An integrable Pfaffian equation with a local first integral"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-pfaffian-frobenius-criterion, cor-frobenius-local-first-integrals]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

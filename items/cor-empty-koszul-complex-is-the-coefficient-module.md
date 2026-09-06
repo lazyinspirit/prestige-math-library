@@ -2,7 +2,7 @@
 id: cor-empty-koszul-complex-is-the-coefficient-module
 kind: corollary
 title: "Empty Koszul Complex Is The Coefficient Module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-koszul-complex-of-a-sequence-with-coefficients]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

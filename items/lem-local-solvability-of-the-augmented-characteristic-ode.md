@@ -2,7 +2,7 @@
 id: lem-local-solvability-of-the-augmented-characteristic-ode
 kind: lemma
 title: "Local solvability and C1 parameter dependence for the augmented characteristic ODE"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-augmented-characteristic-system-for-a-quasilinear-pde, thm-smooth-dep
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

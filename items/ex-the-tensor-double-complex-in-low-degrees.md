@@ -2,7 +2,7 @@
 id: ex-the-tensor-double-complex-in-low-degrees
 title: "The tensor double complex in low degrees"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tensor-double-complex-of-two-projective-resolutions"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

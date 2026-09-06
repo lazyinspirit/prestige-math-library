@@ -2,7 +2,7 @@
 id: fs-h-two-is-defined-here-as-equivalence-classes-of-group-extensions
 kind: false-statement
 title: "This page defines $H^2$ by group extensions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-cohomology-as-a-derived-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

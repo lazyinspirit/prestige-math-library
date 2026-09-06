@@ -2,7 +2,7 @@
 id: cor-evaluation-is-monic-and-coevaluation-is-epic-for-nonzero-objects
 kind: corollary
 title: "Evaluation is epic and coevaluation monic for nonzero objects"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-the-unit-object-of-a-tensor-category-is-simple]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

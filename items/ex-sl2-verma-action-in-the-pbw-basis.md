@@ -2,7 +2,7 @@
 id: ex-sl2-verma-action-in-the-pbw-basis
 kind: example
 title: "The sl2 Verma action in the PBW basis"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-verma-module, thm-pbw-model-of-a-verma-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cex-a-nonproper-pullback-destroys-compact-support
 kind: counterexample
 title: "A nonproper pullback destroys compact support"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-pullback-of-a-differential-form, def-smooth-section-local-section-and
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

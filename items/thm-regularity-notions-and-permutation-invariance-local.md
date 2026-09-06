@@ -2,7 +2,7 @@
 id: thm-regularity-notions-and-permutation-invariance-local
 kind: theorem
 title: "Regularity Notions And Permutation Invariance Local"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-regularity-notions-coincide-local-finite, cor-regular-sequences-permutable-local]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

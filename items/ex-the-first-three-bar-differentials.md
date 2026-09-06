@@ -2,7 +2,7 @@
 id: ex-the-first-three-bar-differentials
 kind: example
 title: "The first bar differentials"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-unnormalized-homogeneous-bar-resolution, lem-the-bar-differential-is-group-equivariant-and-squares-to-zero, def-bar-augmentation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

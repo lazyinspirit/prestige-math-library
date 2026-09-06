@@ -2,7 +2,7 @@
 id: ex-the-angular-one-form-has-no-global-potential
 kind: example
 title: "The angular one-form has no global potential"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [ex-the-angular-one-form-on-the-punctured-plane-is-closed]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-archimedean-embeddings-and-number-field-signature
 kind: definition
 title: "Archimedean embeddings and signature"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-number-field, def-f-homomorphisms-and-embeddings-of-field-extensions]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

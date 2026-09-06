@@ -2,13 +2,14 @@
 id: def-total-variation-function-on-a-compact-interval
 kind: definition
 title: "Total-variation function on a compact interval"
-status: draft
+status: published
 origin: pipeline
 deps: [def-bounded-variation-and-total-variation]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
 sources:
   references:

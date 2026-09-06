@@ -2,14 +2,17 @@
 id: lem-reachability-count-is-verifiable-in-nl
 kind: lemma
 title: "A reachable-vertex count is verifiable in NL"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-l-and-nl, def-directed-st-connectivity, def-inductive-reachable-vertex-count]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, §3.4.2"

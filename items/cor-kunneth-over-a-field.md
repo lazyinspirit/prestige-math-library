@@ -2,7 +2,7 @@
 id: cor-kunneth-over-a-field
 title: "Kunneth over a field"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kunneth-theorem-for-free-complexes-over-a-pid", "prop-modules-over-a-field-are-projective-flat-and-injective"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

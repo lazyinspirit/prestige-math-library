@@ -2,7 +2,7 @@
 id: lem-primitive-gauss-sum-twist
 kind: lemma
 title: "Primitive Gauss-sum twist"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-gauss-sum-dirichlet-character, def-primitive-dirichlet-character-and-conductor]
 proof_strategy: cases
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

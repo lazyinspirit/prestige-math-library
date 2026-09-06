@@ -2,12 +2,14 @@
 id: def-c-zero-and-ell-infinity
 kind: definition
 title: The sequence spaces c_0 and ell-infinity
-status: draft
+status: published
 origin: pipeline
 deps: [def-norm-and-normed-space, def-sequence]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: Piotr Hajlasz, Functional Analysis, §10.5

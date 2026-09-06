@@ -2,7 +2,7 @@
 id: lem-five-term-homology-sequence-for-a-free-presentation
 kind: lemma
 title: "Low-degree sequence of a free presentation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-free-presentation-kernel-data, def-group-homology-as-a-derived-functor]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

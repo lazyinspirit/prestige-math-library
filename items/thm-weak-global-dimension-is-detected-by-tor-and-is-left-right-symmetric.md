@@ -2,7 +2,7 @@
 id: thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric
 title: "Weak global dimension is Tor-detected and left-right symmetric"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-left-and-right-weak-global-dimension", "thm-flat-dimension-at-most-n-iff-higher-tor-vanishes", "thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic", "def-balanced-tor-bifunctor", "def-opposite-ring", "thm-universal-property-of-module-tensor-products"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

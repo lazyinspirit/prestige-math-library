@@ -2,7 +2,7 @@
 id: thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two
 kind: theorem
 title: "Universal coefficients in degree two"
-status: draft
+status: published
 origin: pipeline
 deps: [def-schur-multiplier-of-a-group, def-group-cohomology-as-a-derived-functor, thm-universal-coefficient-theorem-for-cohomology-over-a-pid, thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

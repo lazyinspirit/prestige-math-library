@@ -2,7 +2,7 @@
 id: thm-global-dimension-is-the-supremum-of-nondegenerate-ext-degrees
 kind: theorem
 title: "Global dimension is the supremum of nonzero Ext degrees"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-global-dimension-of-an-abelian-category, thm-projective-dimension-at-most-n-iff-higher-ext-vanishes, thm-injective-dimension-at-most-n-iff-higher-ext-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

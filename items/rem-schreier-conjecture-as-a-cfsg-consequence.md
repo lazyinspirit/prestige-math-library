@@ -2,13 +2,14 @@
 id: rem-schreier-conjecture-as-a-cfsg-consequence
 kind: remark
 title: "Schreier’s conjecture as a CFSG consequence"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

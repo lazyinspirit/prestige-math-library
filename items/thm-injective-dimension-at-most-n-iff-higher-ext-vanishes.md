@@ -2,7 +2,7 @@
 id: thm-injective-dimension-at-most-n-iff-higher-ext-vanishes
 kind: theorem
 title: "Injective dimension at most n iff higher Ext vanishes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-injective-dimension-of-an-object, thm-ext-dimension-shifting-in-the-second-variable, prop-positive-ext-vanishes-on-an-injective-second-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

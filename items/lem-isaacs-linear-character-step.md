@@ -2,11 +2,12 @@
 id: lem-isaacs-linear-character-step
 kind: lemma
 title: Isaacs' linear-character step
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups, thm-p-group-fixed-point-congruence, def-external-semidirect-product]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -34,4 +35,4 @@ Suppose $G=N\rtimes P$, where $N$ has order prime to $p$ and $P$ is a $p$-group.
 
 1.1 The fibre is $P$-stable by invariance and has cardinality $|\ker\lambda|$, a divisor of $|N|$ and hence prime to $p$. The fixed-point congruence supplies a $P$-fixed element in that fibre. [F1, given]
 
-2.1 A fixed element lies in $C_N(P)\subseteq\ker\lambda$, so its character value is $1$. Since the fibre has that same value, $\lambda(\nu)=1$; as $\nu$ was arbitrary, $\lambda$ is trivial. $\square$ [step 1.1]
+2.1 A fixed element lies in $C_N(P)\subseteq\ker\lambda$, so its character value is $1$. Since the fibre has that same value, $\lambda(\nu)=1$; as $\nu$ was arbitrary, $\lambda$ is trivial. ∎ [step 1.1]

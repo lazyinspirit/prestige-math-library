@@ -2,7 +2,7 @@
 id: lem-yoneda-splicing-is-well-defined-on-equivalence-classes
 kind: lemma
 title: "Yoneda splicing is well-defined on equivalence classes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-equivalence-of-n-fold-extensions, def-yoneda-splice-product]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

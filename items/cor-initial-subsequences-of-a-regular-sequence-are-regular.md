@@ -2,7 +2,7 @@
 id: cor-initial-subsequences-of-a-regular-sequence-are-regular
 kind: corollary
 title: "Initial Subsequences Of A Regular Sequence Are Regular"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-regular-sequence-tail-on-quotient]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

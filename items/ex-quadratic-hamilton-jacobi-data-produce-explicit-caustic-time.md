@@ -2,7 +2,7 @@
 id: ex-quadratic-hamilton-jacobi-data-produce-explicit-caustic-time
 kind: example
 title: "Quadratic Hamilton–Jacobi data produce an explicit caustic time"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-characteristic-crossing-and-caustic-for-first-order-pde, lem-charpit-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

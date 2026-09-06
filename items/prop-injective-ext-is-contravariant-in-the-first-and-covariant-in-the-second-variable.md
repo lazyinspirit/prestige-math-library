@@ -2,7 +2,7 @@
 id: prop-injective-ext-is-contravariant-in-the-first-and-covariant-in-the-second-variable
 kind: proposition
 title: "Injective-resolution Ext has the stated bifunctor variance"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ext-via-an-injective-resolution-of-the-second-variable, lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions, lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

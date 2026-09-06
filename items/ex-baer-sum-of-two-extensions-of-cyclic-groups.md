@@ -2,7 +2,7 @@
 id: ex-baer-sum-of-two-extensions-of-cyclic-groups
 kind: example
 title: "Baer sum of two extensions of cyclic groups"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

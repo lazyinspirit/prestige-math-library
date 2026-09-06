@@ -2,7 +2,7 @@
 id: fs-the-bar-contracting-homotopy-is-group-equivariant
 kind: false-statement
 title: "The bar contracting homotopy is group-equivariant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-the-augmented-bar-complex-is-exact, thm-the-bar-complex-is-a-free-resolution-of-the-trivial-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

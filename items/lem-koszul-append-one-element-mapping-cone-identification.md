@@ -2,7 +2,7 @@
 id: lem-koszul-append-one-element-mapping-cone-identification
 kind: lemma
 title: "Koszul Append One Element Mapping Cone Identification"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-koszul-complex-concatenation-tensor-isomorphism, def-mapping-cone-of-a-chain-map]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

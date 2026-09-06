@@ -2,7 +2,7 @@
 id: thm-differentiation-of-a-pulled-back-form-along-a-time-dependent-flow
 kind: theorem
 title: "Differentiation of a pulled-back form along a time-dependent flow"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lie-derivative-of-a-differential-form, def-time-dependent-vector-fiel
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

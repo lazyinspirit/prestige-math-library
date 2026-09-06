@@ -2,13 +2,14 @@
 id: rem-two-results-called-mazurs-lemma
 kind: remark
 title: Two results called Mazur's lemma
-status: draft
+status: published
 origin: pipeline
 deps: [thm-mazur-weak-and-norm-closure-of-convex-sets]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

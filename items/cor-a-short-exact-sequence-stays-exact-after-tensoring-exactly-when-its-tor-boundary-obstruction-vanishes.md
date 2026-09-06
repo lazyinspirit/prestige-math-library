@@ -2,7 +2,7 @@
 id: cor-a-short-exact-sequence-stays-exact-after-tensoring-exactly-when-its-tor-boundary-obstruction-vanishes
 title: "The Tor boundary is exactly the obstruction to left exactness after tensoring a fixed short exact sequence"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-long-exact-tor-sequence-in-the-left-module-variable"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-positive-ext-vanishes-whenever-either-variable-is-injective
 kind: false-statement
 title: "FALSE: positive Ext vanishes whenever either variable is injective"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-positive-ext-vanishes-on-an-injective-second-variable, prop-positive-ext-vanishes-on-a-projective-first-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

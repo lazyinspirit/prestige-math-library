@@ -2,7 +2,7 @@
 id: thm-c-zero-is-not-complemented-in-ell-infinity
 kind: theorem
 title: c_0 is not complemented in ell-infinity
-status: draft
+status: published
 origin: pipeline
 deps: [def-c-zero-and-ell-infinity, lem-c-zero-is-a-closed-subspace-of-ell-infinity, lem-quotient-by-c-zero-has-no-countable-separating-family, def-complemented-subspace, thm-complemented-subspace-iff-range-of-a-bounded-projection, def-quotient-seminorm]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

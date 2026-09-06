@@ -2,7 +2,7 @@
 id: lem-regular-one-element-koszul-acyclicity
 kind: lemma
 title: "Regular One Element Koszul Acyclicity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-one-element-koszul-homology, def-regular-sequence-on-a-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-kunneth-over-a-pid-is-always-a-tensor-product-isomorphism
 title: "Kunneth over a PID is not always a tensor-product isomorphism"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kunneth-theorem-for-free-complexes-over-a-pid"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

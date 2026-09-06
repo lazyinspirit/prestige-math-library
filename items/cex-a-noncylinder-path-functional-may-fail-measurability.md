@@ -2,7 +2,7 @@
 id: cex-a-noncylinder-path-functional-may-fail-measurability
 kind: counterexample
 title: "A noncylinder path functional may fail to be measurable"
-status: draft
+status: published
 origin: pipeline
 deps: [ex-uncountable-bernoulli-coordinate-process, lem-cylinder-sigma-events-depend-on-countably-many-coordinates, def-random-element-and-real-random-variable, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

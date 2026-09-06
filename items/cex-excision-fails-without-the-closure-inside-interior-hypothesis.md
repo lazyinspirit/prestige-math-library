@@ -2,14 +2,17 @@
 id: cex-excision-fails-without-the-closure-inside-interior-hypothesis
 kind: counterexample
 title: "Excision fails without closure inside interior"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-excision-for-singular-homology, thm-long-exact-sequence-of-a-pair-in-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Theorem 2.20"

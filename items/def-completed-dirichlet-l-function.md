@@ -2,13 +2,14 @@
 id: def-completed-dirichlet-l-function
 kind: definition
 title: "Completed primitive Dirichlet L-function"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-dirichlet-l-function, def-parity-dirichlet-character]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

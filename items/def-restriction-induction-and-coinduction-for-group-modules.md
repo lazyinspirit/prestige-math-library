@@ -2,13 +2,14 @@
 id: def-restriction-induction-and-coinduction-for-group-modules
 kind: definition
 title: "Restriction, induction, and coinduction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-integral-group-ring-module-and-trivial-module-convention, def-restriction-and-extension-of-scalars, def-tensor-product-of-modules-by-generators-and-relations]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

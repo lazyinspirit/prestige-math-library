@@ -2,7 +2,7 @@
 id: lem-discriminant-change-of-basis
 kind: lemma
 title: "Change of basis for discriminants"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-discriminant-of-a-number-field-basis-and-order]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-kunneth-when-one-homology-family-is-flat
 title: "Kunneth when one homology family is flat"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kunneth-theorem-for-free-complexes-over-a-pid", "thm-a-left-module-is-flat-exactly-when-tor-one-with-every-right-module-vanishes"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

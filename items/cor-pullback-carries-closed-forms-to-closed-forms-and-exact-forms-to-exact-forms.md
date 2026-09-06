@@ -2,7 +2,7 @@
 id: cor-pullback-carries-closed-forms-to-closed-forms-and-exact-forms-to-exact-forms
 kind: corollary
 title: "Pullback carries closed forms to closed forms and exact forms to exact forms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-the-exterior-derivative-commutes-with-pullback]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

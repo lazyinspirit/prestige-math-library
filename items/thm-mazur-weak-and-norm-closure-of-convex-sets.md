@@ -2,7 +2,7 @@
 id: thm-mazur-weak-and-norm-closure-of-convex-sets
 kind: theorem
 title: "Mazur theorem: weak and norm closure agree for convex sets"
-status: draft
+status: published
 origin: pipeline
 deps: [def-dual-space-of-a-normed-space, cor-closed-convex-set-is-an-intersection-of-closed-half-spaces, thm-separation-of-disjoint-convex-sets-one-open, def-weak-and-strict-separation]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

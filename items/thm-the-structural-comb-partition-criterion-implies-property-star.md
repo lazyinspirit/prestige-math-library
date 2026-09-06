@@ -2,7 +2,7 @@
 id: thm-the-structural-comb-partition-criterion-implies-property-star
 kind: theorem
 title: "The structural comb-partition criterion implies property (*)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

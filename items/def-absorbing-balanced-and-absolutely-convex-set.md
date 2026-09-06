@@ -2,13 +2,14 @@
 id: def-absorbing-balanced-and-absolutely-convex-set
 kind: definition
 title: Absorbing, balanced, and absolutely convex sets
-status: draft
+status: published
 origin: pipeline
 deps: [def-norm-and-normed-space, rem-real-and-complex-normed-space-convention]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

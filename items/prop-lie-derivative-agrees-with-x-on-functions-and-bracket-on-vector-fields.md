@@ -2,7 +2,7 @@
 id: prop-lie-derivative-agrees-with-x-on-functions-and-bracket-on-vector-fields
 kind: proposition
 title: "Tensor Lie derivative agrees with $X$ on functions and bracket on vector fields"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lie-derivative-of-a-tensor-field, def-lie-derivative-of-a-function, t
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

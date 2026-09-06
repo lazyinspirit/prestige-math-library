@@ -2,7 +2,7 @@
 id: thm-induction-is-left-adjoint-and-coinduction-right-adjoint-to-restriction
 kind: theorem
 title: "Induction and coinduction are the two adjoints"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-restriction-induction-and-coinduction-for-group-modules, thm-coextension-of-scalars-is-right-adjoint-to-restriction-of-scalars]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

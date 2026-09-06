@@ -2,13 +2,16 @@
 id: ex-basic-open-affine-line
 kind: example
 title: "A basic open of the affine line"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-spectrum-localization-open-immersion, def-polynomial-ring-over-a-commutative-ring]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.6.6"

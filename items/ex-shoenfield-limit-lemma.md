@@ -2,7 +2,7 @@
 id: ex-shoenfield-limit-lemma
 kind: example
 title: "A limit approximation computed from the halting oracle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-limit-computable-function, thm-shoenfield-limit-lemma]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

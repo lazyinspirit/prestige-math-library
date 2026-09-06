@@ -2,7 +2,7 @@
 id: lem-exterior-algebra-basis-monomials
 kind: lemma
 title: "Exterior Algebra Basis Monomials"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-exterior-algebra-of-a-finite-free-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

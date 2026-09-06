@@ -2,7 +2,7 @@
 id: cor-ext-can-be-computed-from-any-projective-resolution-of-the-first-variable
 kind: corollary
 title: "Ext can be computed from any projective resolution of the first variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-comparison-map-exists, thm-projective-comparison-maps-are-unique-up-to-chain-homotopy, def-balanced-ext-bifunctor, def-ext-via-a-projective-resolution-of-the-first-variable, thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

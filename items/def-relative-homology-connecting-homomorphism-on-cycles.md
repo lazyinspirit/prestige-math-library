@@ -2,13 +2,14 @@
 id: def-relative-homology-connecting-homomorphism-on-cycles
 kind: definition
 title: "Relative connecting homomorphism on cycles"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-long-exact-sequence-of-a-pair-in-singular-homology]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

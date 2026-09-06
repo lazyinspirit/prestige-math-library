@@ -2,7 +2,7 @@
 id: lem-stable-and-unstable-manifolds-are-flow-invariant
 kind: lemma
 title: "Stable and unstable manifolds are flow invariant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-stable-and-unstable-sets-of-a-critical-point, thm-fundamental-theorem-on-flows]
 justified_by: []
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, §13.2"

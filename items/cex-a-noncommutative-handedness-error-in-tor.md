@@ -2,7 +2,7 @@
 id: cex-a-noncommutative-handedness-error-in-tor
 title: "A noncommutative handedness error in Tor"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: ["fs-tor-takes-two-left-modules-over-an-arbitrary-ring"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

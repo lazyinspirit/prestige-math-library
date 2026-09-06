@@ -2,7 +2,7 @@
 id: thm-left-and-right-dual-objects-are-isomorphic-in-a-semisimple-multitensor-category
 kind: theorem
 title: "Left and right dual objects are isomorphic in a semisimple multitensor category"
-status: draft
+status: published
 origin: pipeline
 deps: [def-fusion-and-multifusion-category, def-left-dual-and-right-dual-object, thm-dualization-in-a-multitensor-category-is-exact]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

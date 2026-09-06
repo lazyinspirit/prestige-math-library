@@ -2,13 +2,16 @@
 id: cex-nonclosed-scheme-point-no-k-valued-coordinate
 kind: counterexample
 title: "The generic point of the affine line has no relative k-valued coordinate"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-residue-field-scheme-point, def-generic-point-irreducible-closed-subset, def-polynomial-ring-over-a-commutative-ring, thm-field-of-fractions-is-a-field-and-the-domain-embeds, def-algebra-over-a-commutative-ring, thm-quotient-is-domain-iff-ideal-prime]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "James S. Milne, Algebraic Geometry, 10.83"

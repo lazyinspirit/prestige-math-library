@@ -2,7 +2,7 @@
 id: lem-luzin-property-n-gives-an-integral-growth-estimate
 kind: lemma
 title: "Luzin's property $(N)$ gives an integral growth estimate"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-luzin-property-n-on-a-compact-interval, def-integrable-real-and-complex-functions-and-their-integrals, thm-lebesgue-outer-regularity-for-arbitrary-subsets]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

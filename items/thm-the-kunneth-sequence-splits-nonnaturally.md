@@ -2,7 +2,7 @@
 id: thm-the-kunneth-sequence-splits-nonnaturally
 title: "The Kunneth sequence splits nonnaturally"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kunneth-theorem-for-free-complexes-over-a-pid"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

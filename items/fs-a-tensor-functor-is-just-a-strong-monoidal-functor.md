@@ -2,7 +2,7 @@
 id: fs-a-tensor-functor-is-just-a-strong-monoidal-functor
 kind: false-statement
 title: "A tensor functor is just a strong monoidal functor"
-status: draft
+status: published
 origin: pipeline
 deps: [def-tensor-functor-between-tensor-categories, def-lax-strong-and-strict-monoidal-functor]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

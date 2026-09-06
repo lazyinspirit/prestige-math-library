@@ -2,7 +2,7 @@
 id: cor-one-ltwo-derivative-implies-an-absolutely-convergent-fourier-series
 kind: corollary
 title: "One ell-2 weak derivative implies an absolutely convergent Fourier series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-ltwo-fourier-decay-implies-absolute-convergence-by-cauchy-schwarz, lem-fourier-coefficients-of-a-periodic-weak-derivative]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

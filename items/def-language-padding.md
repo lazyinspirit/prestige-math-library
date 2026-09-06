@@ -2,13 +2,16 @@
 id: def-language-padding
 kind: definition
 title: "Language padding"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
-verification: {precheck: n/a, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: n/a
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Sebastiaan Terwijn, Complexity Theory, Exercise 3.5.2(a)"

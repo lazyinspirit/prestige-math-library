@@ -2,7 +2,7 @@
 id: def-morse-trajectory-from-p-to-q
 kind: definition
 title: "A Morse trajectory from one critical point to another"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-negative-gradient-trajectory-of-a-morse-function, lem-a-compact-morse-trajectory-has-single-critical-alpha-and-omega-limits]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

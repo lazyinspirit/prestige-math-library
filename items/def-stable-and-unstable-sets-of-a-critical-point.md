@@ -2,7 +2,7 @@
 id: def-stable-and-unstable-sets-of-a-critical-point
 kind: definition
 title: "Stable and unstable sets of a critical point"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-downward-gradient-like-vector-field, def-local-and-global-flow]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: cex-cyclic-subgroups-do-not-give-integral-induction-in-general
 kind: counterexample
 title: Cyclic subgroups do not suffice for integral induction
-status: draft
+status: published
 origin: pipeline
 deps: [def-cyclic-induction-subgroup, def-virtual-character-and-character-ring-of-a-finite-group, thm-frobenius-formula-for-induced-characters]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -36,4 +37,4 @@ Take $G=A_5$. The trivial character $1_G$ is not in the integral cyclic inductio
 
 1.1 If $K\leq A_5$ is cyclic and $\lambda$ is linear, then $\operatorname{Ind}_K^{A_5}\lambda(1)=[A_5:K]$, which is respectively $60,30,20,$ or $12$. [F1, given]
 
-2.1 Every integral combination of such induced characters has even degree at $1$, whereas $1_G(1)=1$. Thus $1_G$ cannot be such a combination. $\square$ [step 1.1]
+2.1 Every integral combination of such induced characters has even degree at $1$, whereas $1_G(1)=1$. Thus $1_G$ cannot be such a combination. ∎ [step 1.1]

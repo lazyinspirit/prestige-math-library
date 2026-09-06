@@ -2,13 +2,14 @@
 id: rem-sharp-and-classical-fundamental-theorems-of-calculus-agreement
 kind: remark
 title: "Sharp and classical fundamental theorems of calculus agree"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-ftc-first-part, thm-ftc-second-part]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

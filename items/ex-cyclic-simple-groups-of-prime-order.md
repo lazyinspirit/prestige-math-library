@@ -2,7 +2,7 @@
 id: ex-cyclic-simple-groups-of-prime-order
 kind: example
 title: "Cyclic simple groups of prime order"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-prime-order-group-is-cyclic, def-simple-group]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

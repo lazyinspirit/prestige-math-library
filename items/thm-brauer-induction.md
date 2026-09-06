@@ -2,11 +2,12 @@
 id: thm-brauer-induction
 kind: theorem
 title: Brauer induction
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups, def-induction-ideal-of-a-family-of-subgroups, lem-induction-ideal-of-a-subgroup-family-is-an-ideal, lem-elementary-detection-at-a-fixed-element, lem-p-elementary-characters-are-induced-from-linear-characters, thm-transitivity-of-induction-for-finite-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -44,4 +45,4 @@ For every finite group $G$, every complex virtual character of $G$ is an integra
 
 2.1 By [F2], every $\chi\in R(G)$ satisfies $\chi=\chi 1_G\in I_{\mathcal E}(G)$. Thus it is an integral sum of characters $\operatorname{Ind}_H^G\theta$ with $H$ elementary and $\theta\in R(H)$. [F2, step 1.1]
 
-3.1 By [F3], each such $\theta$ is an integral combination of characters induced from linear characters of elementary subgroups $K\le H$. Transitivity [F4] changes $\operatorname{Ind}_H^G\operatorname{Ind}_K^H\lambda$ into $\operatorname{Ind}_K^G\lambda$, which is exactly the claimed form. $\square$ [F3, F4, step 2.1]
+3.1 By [F3], each such $\theta$ is an integral combination of characters induced from linear characters of elementary subgroups $K\le H$. Transitivity [F4] changes $\operatorname{Ind}_H^G\operatorname{Ind}_K^H\lambda$ into $\operatorname{Ind}_K^G\lambda$, which is exactly the claimed form. ∎ [F3, F4, step 2.1]

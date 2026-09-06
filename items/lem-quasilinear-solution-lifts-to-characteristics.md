@@ -2,7 +2,7 @@
 id: lem-quasilinear-solution-lifts-to-characteristics
 kind: lemma
 title: "A quasilinear solution lifts to augmented characteristics"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-augmented-characteristic-system-for-a-quasilinear-pde, thm-chain-rule-for-total-derivatives]
 justified_by: []
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "First order PDE: The Methods of Characteristics"

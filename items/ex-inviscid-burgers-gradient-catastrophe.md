@@ -2,7 +2,7 @@
 id: ex-inviscid-burgers-gradient-catastrophe
 kind: example
 title: "Inviscid Burgers gradient catastrophe"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-burgers-slope-obeys-a-riccati-law-along-characteristics, thm-inviscid
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

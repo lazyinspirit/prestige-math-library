@@ -2,7 +2,7 @@
 id: fs-luzin-property-n-implies-absolute-continuity
 kind: false-statement
 title: "Luzin's property $(N)$ implies absolute continuity"
-status: draft
+status: published
 origin: pipeline
 deps: [def-luzin-property-n-on-a-compact-interval, thm-c1-lipschitz-ac-bv-hierarchy]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

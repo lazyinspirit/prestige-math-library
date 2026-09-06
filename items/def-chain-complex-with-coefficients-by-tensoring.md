@@ -2,7 +2,7 @@
 id: def-chain-complex-with-coefficients-by-tensoring
 title: "A chain complex with coefficients obtained by tensoring"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tensor-product-total-complex-of-chain-complexes", "def-chain-complex-in-an-abelian-category"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

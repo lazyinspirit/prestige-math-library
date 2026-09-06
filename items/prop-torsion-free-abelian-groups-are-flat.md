@@ -2,7 +2,7 @@
 id: prop-torsion-free-abelian-groups-are-flat
 title: "Torsion-free abelian groups are flat"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-left-and-right-flat-modules-over-an-arbitrary-ring", "thm-a-right-module-is-flat-exactly-when-tor-one-with-every-left-module-vanishes", "thm-tor-one-of-a-cyclic-abelian-group-detects-n-torsion"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

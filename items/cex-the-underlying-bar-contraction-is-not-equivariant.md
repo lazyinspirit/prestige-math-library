@@ -2,7 +2,7 @@
 id: cex-the-underlying-bar-contraction-is-not-equivariant
 kind: counterexample
 title: "The underlying bar contraction is not equivariant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-the-augmented-bar-complex-is-exact]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

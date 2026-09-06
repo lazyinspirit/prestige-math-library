@@ -2,7 +2,7 @@
 id: def-tensor-product-total-complex-of-chain-complexes
 title: "The tensor product of a right and a left chain complex is totalized on finite diagonals with the Koszul differential"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-chain-complex-in-an-abelian-category", "def-tensor-product-of-modules-by-generators-and-relations"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

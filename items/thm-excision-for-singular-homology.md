@@ -2,14 +2,16 @@
 id: thm-excision-for-singular-homology
 kind: theorem
 title: "Excision for singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-cover-small-inclusion-is-a-chain-homotopy-equivalence, def-relative-singular-homology, prop-relative-homology-is-functorial-for-maps-of-pairs]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Theorem 2.20"

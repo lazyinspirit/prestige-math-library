@@ -2,7 +2,7 @@
 id: ex-canonical-random-walk-from-product-increments
 kind: example
 title: "A canonical random walk from product increments"
-status: draft
+status: published
 origin: pipeline
 deps: [ex-infinite-coin-toss-space, def-stochastic-process-and-finite-dimensional-distributions]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-baer-sum-makes-extension-classes-an-abelian-group
 kind: theorem
 title: "Baer sum makes extension classes an abelian group"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-split-extension-class, def-baer-sum-of-extension-classes, lem-baer-sum-of-short-exact-sequence-classes-is-independent-of-representatives, thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

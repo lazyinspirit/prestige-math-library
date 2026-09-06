@@ -2,7 +2,7 @@
 id: lem-ext-one-of-z-mod-n-by-z-is-z-mod-n
 kind: lemma
 title: "Ext one of Z modulo n by Z is Z modulo n"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-balanced-ext-bifunctor, cor-ext-can-be-computed-from-any-projective-resolution-of-the-first-variable, thm-free-modules-are-projective-with-choice-boundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

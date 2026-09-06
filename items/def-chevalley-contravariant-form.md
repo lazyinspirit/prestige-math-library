@@ -2,13 +2,14 @@
 id: def-chevalley-contravariant-form
 kind: definition
 title: "Chevalley-contravariant forms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-triangular-decomposition-from-a-chosen-positive-root-system, def-highest-weight-vector-and-cyclic-highest-weight-module]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

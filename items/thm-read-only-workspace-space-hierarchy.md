@@ -2,14 +2,17 @@
 id: thm-read-only-workspace-space-hierarchy
 kind: theorem
 title: "The read-only-workspace space hierarchy theorem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-read-only-input-workspace-classes, lem-effective-enumeration-of-clocked-machines, lem-read-only-workspace-universal-simulation, lem-read-only-workspace-diagonal-machine-halts, def-asymptotic-resource-comparison]
 proof_strategy: contradiction
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 3.2"

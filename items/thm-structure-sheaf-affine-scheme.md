@@ -2,13 +2,16 @@
 id: thm-structure-sheaf-affine-scheme
 kind: theorem
 title: "The localization construction extends to the structure sheaf on Spec A"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-affine-scheme-spectrum, def-structure-presheaf-on-basic-opens, lem-structure-presheaf-basic-open-well-defined]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Definition 26.5.3"

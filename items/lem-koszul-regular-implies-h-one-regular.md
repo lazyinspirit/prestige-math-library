@@ -2,7 +2,7 @@
 id: lem-koszul-regular-implies-h-one-regular
 kind: lemma
 title: "Koszul Regular Implies H One Regular"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-koszul-regular-and-h-one-regular-sequences]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,14 +2,16 @@
 id: ex-circuit-value-is-p-complete
 kind: example
 title: "A small computation tableau compiled to Circuit Value"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [lem-polynomial-time-computations-have-logspace-uniform-circuits, thm-circuit-value-is-p-complete]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 6.7 and Theorem 6.27"

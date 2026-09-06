@@ -2,11 +2,12 @@
 id: thm-finite-supersolvable-groups-are-monomial
 kind: theorem
 title: Finite supersolvable groups are monomial
-status: draft
+status: published
 origin: pipeline
 deps: [def-supersolvable-groups-and-monomial-characters, prop-faithful-irreducible-character-is-induced-from-a-proper-inertia-subgroup, lem-nonabelian-supersolvable-group-has-a-noncentral-normal-abelian-subgroup, lem-monomiality-lifts-along-a-quotient, thm-transitivity-of-induction-for-finite-groups, thm-a-finite-group-is-abelian-iff-all-its-irreducible-complex-characters-have-degree-one]
 proof_strategy: induction
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -34,4 +35,4 @@ Every finite supersolvable group is monomial.
 
 1.1 Induct on $|G|$. The trivial group is the base case. If $G$ is abelian, $\chi$ is linear. If $\ker\chi\ne1$, then $G/\ker\chi$ is supersolvable of smaller order and the quotient lemma makes $\chi$ monomial. [F1, given, base, ih]
 
-2.1 Otherwise $\chi$ is faithful. A nonabelian $G$ has a noncentral normal abelian subgroup, so the proper-inertia proposition writes $\chi=\operatorname{Ind}_H^G\theta$ with $H<G$ and $\theta\in\operatorname{Irr}(H)$. Intersecting a supersolvable series with $H$ and deleting repeated terms makes $H$ supersolvable; by the induction hypothesis, $\theta$ is induced from a linear character, and transitivity makes $\chi$ so induced. $\square$ [step 1.1, discharge-induction]
+2.1 Otherwise $\chi$ is faithful. A nonabelian $G$ has a noncentral normal abelian subgroup, so the proper-inertia proposition writes $\chi=\operatorname{Ind}_H^G\theta$ with $H<G$ and $\theta\in\operatorname{Irr}(H)$. Intersecting a supersolvable series with $H$ and deleting repeated terms makes $H$ supersolvable; by the induction hypothesis, $\theta$ is induced from a linear character, and transitivity makes $\chi$ so induced. ∎ [step 1.1, discharge-induction]

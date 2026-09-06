@@ -2,7 +2,7 @@
 id: lem-morse-trajectories-have-positive-energy-drop
 kind: lemma
 title: "Morse trajectories have a positive energy drop"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-morse-trajectory-from-p-to-q, lem-negative-gradient-energy-identity, 
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

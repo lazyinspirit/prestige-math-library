@@ -2,7 +2,7 @@
 id: def-projective-space-points
 kind: definition
 title: "projective space points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "Michael Artin, Algebraic Geometry, Chapter 3"
       url: "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: cex-the-bernstein-holder-one-half-endpoint-can-fail
 kind: counterexample
 title: "The Bernstein Hölder-one-half endpoint can fail"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

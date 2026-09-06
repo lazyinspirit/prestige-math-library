@@ -2,7 +2,7 @@
 id: ex-a-large-y-part-in-a-structural-comb-partition
 kind: example
 title: "A large Y-part in a structural comb partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

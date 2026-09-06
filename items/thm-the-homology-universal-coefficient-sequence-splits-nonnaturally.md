@@ -2,7 +2,7 @@
 id: thm-the-homology-universal-coefficient-sequence-splits-nonnaturally
 title: "The homology universal-coefficient sequence splits nonnaturally"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-universal-coefficient-theorem-for-homology-over-a-pid"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

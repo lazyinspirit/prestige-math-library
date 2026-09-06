@@ -2,13 +2,14 @@
 id: def-tensor-and-multitensor-category
 kind: definition
 title: "Tensor and multitensor categories"
-status: draft
+status: published
 origin: pipeline
 deps: [def-locally-finite-k-linear-abelian-category, def-monoidal-category, def-rigid-object-and-rigid-monoidal-category]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

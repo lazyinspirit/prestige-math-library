@@ -2,7 +2,7 @@
 id: fs-ext-is-covariant-in-both-variables
 kind: false-statement
 title: "FALSE: Ext is covariant in both variables"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-injective-ext-is-contravariant-in-the-first-and-covariant-in-the-second-variable, prop-projective-ext-is-contravariant-in-the-first-and-covariant-in-the-second-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-primitive-ancestors-of-small-characters
 kind: example
 title: "Primitive ancestors of small characters"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dirichlet-character-primitive-induction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

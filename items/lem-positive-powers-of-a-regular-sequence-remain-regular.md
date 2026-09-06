@@ -2,7 +2,7 @@
 id: lem-positive-powers-of-a-regular-sequence-remain-regular
 kind: lemma
 title: "Positive Powers Of A Regular Sequence Remain Regular"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-regular-sequences-permutable-local, def-regular-sequence-on-a-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

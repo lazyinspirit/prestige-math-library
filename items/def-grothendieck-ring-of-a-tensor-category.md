@@ -2,13 +2,14 @@
 id: def-grothendieck-ring-of-a-tensor-category
 kind: definition
 title: "The Grothendieck ring of a tensor category"
-status: draft
+status: published
 origin: pipeline
 deps: [def-tensor-and-multitensor-category, def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

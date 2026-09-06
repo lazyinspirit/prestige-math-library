@@ -2,13 +2,14 @@
 id: def-locally-finite-k-linear-abelian-category
 kind: definition
 title: "Locally finite k-linear abelian categories"
-status: draft
+status: published
 origin: pipeline
 deps: [def-k-linear-category-and-k-linear-functor, def-abelian-category, def-object-of-finite-length, def-small-locally-small-and-large-category]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

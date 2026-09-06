@@ -2,7 +2,7 @@
 id: thm-closed-hyperplanes-are-kernels-of-nonzero-functionals
 kind: theorem
 title: Closed hyperplanes are kernels of nonzero functionals
-status: draft
+status: published
 origin: pipeline
 deps: [def-linear-hyperplane, thm-geometric-hahn-banach-for-subspaces, def-dual-space-of-a-normed-space, def-metric-topology]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

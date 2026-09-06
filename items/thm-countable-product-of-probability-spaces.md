@@ -2,7 +2,7 @@
 id: thm-countable-product-of-probability-spaces
 kind: theorem
 title: "Assuming countable and dependent choice, countable products of arbitrary probability spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-coordinate-maps-and-cylinder-sigma-algebra, lem-finite-coordinate-cylinders-form-a-pi-system, lem-countable-product-cylinder-premeasure-is-countably-additive, thm-caratheodory-extension-theorem, def-countable-choice, def-dependent-choice, thm-dynkin-pi-lambda]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

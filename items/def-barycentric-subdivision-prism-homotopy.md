@@ -2,12 +2,14 @@
 id: def-barycentric-subdivision-prism-homotopy
 kind: definition
 title: "Subdivision prism homotopy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-barycentric-subdivision-chain-operator, def-barycenter-and-affine-cone-on-a-singular-chain]
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Proposition 2.21"

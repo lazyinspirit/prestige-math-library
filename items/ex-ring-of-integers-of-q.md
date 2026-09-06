@@ -2,13 +2,14 @@
 id: ex-ring-of-integers-of-q
 kind: example
 title: "Integers of Q"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-ring-of-integers-of-a-number-field, thm-number-field-discriminant-is-well-defined-and-nonzero]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

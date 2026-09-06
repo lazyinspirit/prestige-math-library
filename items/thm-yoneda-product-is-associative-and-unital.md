@@ -2,7 +2,7 @@
 id: thm-yoneda-product-is-associative-and-unital
 kind: theorem
 title: "The Yoneda product is associative and unital"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-yoneda-splicing-is-well-defined-on-equivalence-classes, def-yoneda-splice-product, def-equivalence-of-n-fold-extensions, thm-the-pullback-of-an-epimorphism-is-an-epimorphism, cor-the-pushout-of-a-monomorphism-is-a-monomorphism, thm-short-five-lemma-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

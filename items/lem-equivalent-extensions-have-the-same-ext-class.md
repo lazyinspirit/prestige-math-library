@@ -2,7 +2,7 @@
 id: lem-equivalent-extensions-have-the-same-ext-class
 kind: lemma
 title: "Equivalent extensions have the same Ext class"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-class-of-an-extension-in-derived-ext-one, def-equivalence-of-extensions, thm-long-exact-ext-sequence-in-the-second-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

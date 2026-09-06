@@ -2,14 +2,17 @@
 id: lem-the-mayer-vietoris-connector-is-independent-of-small-chain-decomposition
 kind: lemma
 title: "Well-definedness of the Mayer–Vietoris connector"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-mayer-vietoris-connecting-class, thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.2"

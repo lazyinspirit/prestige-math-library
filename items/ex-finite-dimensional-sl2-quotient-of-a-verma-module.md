@@ -2,7 +2,7 @@
 id: ex-finite-dimensional-sl2-quotient-of-a-verma-module
 kind: example
 title: "The finite-dimensional sl2 quotient of a Verma module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-verma-module-has-a-unique-simple-quotient, ex-sl2-verma-action-in-the-pbw-basis, ex-sl2-reducible-and-generic-verma-modules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-induced-dirichlet-l-finite-euler-factors
 kind: theorem
 title: "Finite Euler factors under character induction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dirichlet-character-primitive-induction, def-dirichlet-l-function, thm-dirichlet-l-euler-product]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

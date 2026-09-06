@@ -2,7 +2,7 @@
 id: lem-fourier-transform-of-a-gaussian
 kind: lemma
 title: "Fourier transform of a Gaussian"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-gaussian-integral, thm-differentiation-under-dominated-improper-multiple-integrals]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

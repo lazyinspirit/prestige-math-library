@@ -2,7 +2,7 @@
 id: ex-uct-cohomology-of-a-two-term-free-complex
 title: "Universal-coefficient cohomology of a two-term free complex"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-universal-coefficient-theorem-for-cohomology-over-a-pid"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,15 @@
 id: thm-affine-schemes-determined-by-functor-of-points
 kind: theorem
 title: "An affine scheme is determined by its functor of points"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-functor-of-points-affine-scheme, thm-yoneda-lemma-is-natural-in-both-variables, cor-affine-scheme-isomorphism-ring-isomorphism]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "James S. Milne, Algebraic Geometry, 10.82--10.83"

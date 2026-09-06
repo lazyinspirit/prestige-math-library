@@ -2,13 +2,14 @@
 id: cor-discriminant-of-a-quadratic-field
 kind: corollary
 title: "Discriminant of a quadratic field"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-ring-of-integers-of-a-quadratic-field, def-discriminant-of-a-number-field-basis-and-order]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

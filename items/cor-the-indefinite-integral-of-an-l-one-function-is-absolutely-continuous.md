@@ -2,7 +2,7 @@
 id: cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous
 kind: corollary
 title: "The indefinite integral of an $L^1$ function is absolutely continuous"
-status: draft
+status: published
 origin: pipeline
 deps: [def-indefinite-lebesgue-integral-on-a-compact-interval, thm-absolute-continuity-of-the-integral]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

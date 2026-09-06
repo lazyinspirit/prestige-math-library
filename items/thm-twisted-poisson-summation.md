@@ -2,7 +2,7 @@
 id: thm-twisted-poisson-summation
 kind: theorem
 title: "Twisted Poisson summation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-primitive-gauss-sum-twist, thm-dirac-comb-is-fourier-invariant]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

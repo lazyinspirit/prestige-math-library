@@ -2,7 +2,7 @@
 id: thm-universal-coefficient-theorem-for-cohomology-over-a-pid
 title: "The universal coefficient theorem for cohomology over a PID"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-evaluation-map-from-cohomology-to-hom-of-homology", "lem-the-cohomology-universal-coefficient-extension-map", "lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

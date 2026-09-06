@@ -2,7 +2,7 @@
 id: prop-cartan-commutator-identities
 kind: proposition
 title: "Cartan commutator identities"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-cartans-magic-formula, cor-lie-derivative-commutes-with-the-exterior-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

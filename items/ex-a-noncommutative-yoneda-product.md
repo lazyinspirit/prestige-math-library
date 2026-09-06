@@ -2,7 +2,7 @@
 id: ex-a-noncommutative-yoneda-product
 kind: example
 title: "A noncommutative Yoneda product"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-orders-have-integral-bases-and-finite-index
 kind: theorem
 title: "Orders have integral bases and finite index"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-order-in-a-number-field, def-integral-basis-and-power-integral-basis, thm-ring-of-integers-free-of-rank-degree, thm-simultaneous-basis-theorem-for-pid-submodules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

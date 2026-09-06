@@ -2,7 +2,7 @@
 id: ex-inviscid-burgers-rarefying-data
 kind: example
 title: "Rarefying inviscid Burgers data"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-inviscid-burgers-characteristic-formula-and-first-crossing-time]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

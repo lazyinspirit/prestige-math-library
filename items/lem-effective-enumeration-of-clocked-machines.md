@@ -2,14 +2,16 @@
 id: lem-effective-enumeration-of-clocked-machines
 kind: lemma
 title: "Effective enumeration of clocked machines"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-efficient-universal-simulation-with-clock, def-effective-encoding-of-turing-machines]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Chapter 3"

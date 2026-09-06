@@ -2,12 +2,13 @@
 id: def-residue-field-scheme-point
 kind: definition
 title: "The residue field at a point of an affine scheme"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [cor-spectrum-with-structure-sheaf-locally-ringed, thm-stalk-structure-sheaf-prime-localization, cor-residue-field-of-a-localisation-at-a-prime]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

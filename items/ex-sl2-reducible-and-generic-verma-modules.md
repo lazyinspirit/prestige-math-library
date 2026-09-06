@@ -2,7 +2,7 @@
 id: ex-sl2-reducible-and-generic-verma-modules
 kind: example
 title: "Reducible and generic sl2 Verma modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-verma-irreducibility-criterion-from-shapovalov-determinants, ex-sl2-verma-action-in-the-pbw-basis]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

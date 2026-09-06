@@ -2,11 +2,13 @@
 id: def-integral-affine-scheme
 kind: definition
 title: "Integral affine schemes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-irreducible-topological-space-and-subset, def-reduced-affine-scheme, def-zero-divisor-and-integral-domain, thm-irreducible-closed-subsets-and-prime-ideals]
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "James S. Milne, Algebraic Geometry, 10.28"

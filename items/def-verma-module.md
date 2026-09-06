@@ -2,13 +2,14 @@
 id: def-verma-module
 kind: definition
 title: "Verma modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-universal-enveloping-algebra-as-a-tensor-quotient, def-one-dimensional-borel-module-of-weight-lambda]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

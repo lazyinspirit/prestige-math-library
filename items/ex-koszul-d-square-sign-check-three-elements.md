@@ -2,7 +2,7 @@
 id: ex-koszul-d-square-sign-check-three-elements
 kind: example
 title: "Koszul D Square Sign Check Three Elements"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-koszul-differential-coordinate-formula, lem-koszul-differential-square-pairwise-cancellation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

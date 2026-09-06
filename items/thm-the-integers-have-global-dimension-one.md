@@ -2,7 +2,7 @@
 id: thm-the-integers-have-global-dimension-one
 kind: theorem
 title: "The integers have global dimension one"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-and-right-global-dimension-of-a-ring, lem-subgroups-of-free-abelian-groups-are-free, thm-projective-dimension-at-most-n-iff-higher-ext-vanishes, lem-ext-one-of-z-mod-n-by-z-is-z-mod-n]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

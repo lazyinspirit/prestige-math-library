@@ -2,11 +2,12 @@
 id: lem-elementary-and-hyperelementary-subgroups-are-subgroup-closed
 kind: lemma
 title: Subgroups of elementary and hyperelementary groups
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups, lem-subgroups-of-finite-p-groups-are-p-groups, thm-sylow-first-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -34,4 +35,4 @@ Every subgroup of a finite $p$-elementary group is $p$-elementary, and every sub
 
 1.1 Put $C_H=H\cap C$. It is cyclic, normal in $H$, and $H/C_H$ embeds in $G/C\cong P$; hence it is a $p$-group. A Sylow $p$-subgroup $P_H$ of $H$ maps isomorphically onto $H/C_H$, because its image has the full $p$-power order and $C_H$ has order prime to $p$. [F1, given]
 
-2.1 Thus $H=C_H\rtimes P_H$. If $G=C\times P$, its Sylow $p$-subgroup is unique, so $P_H=H\cap P$ and it commutes with $C_H$; consequently $H=C_H\times P_H$. $\square$ [step 1.1]
+2.1 Thus $H=C_H\rtimes P_H$. If $G=C\times P$, its Sylow $p$-subgroup is unique, so $P_H=H\cap P$ and it commutes with $C_H$; consequently $H=C_H\times P_H$. ∎ [step 1.1]

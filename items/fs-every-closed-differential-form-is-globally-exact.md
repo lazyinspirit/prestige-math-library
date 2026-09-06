@@ -2,7 +2,7 @@
 id: fs-every-closed-differential-form-is-globally-exact
 kind: false-statement
 title: "Every closed differential form is globally exact"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-local-coordinate-formula-for-the-exterior-derivative]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

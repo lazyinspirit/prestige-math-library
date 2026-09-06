@@ -2,7 +2,7 @@
 id: fs-every-group-has-a-universal-central-extension
 kind: false-statement
 title: "Every group has a universal central extension"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-a-group-admits-a-universal-central-extension-iff-it-is-perfect]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

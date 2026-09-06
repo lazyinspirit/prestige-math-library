@@ -2,7 +2,7 @@
 id: prop-the-exterior-derivative-is-local
 kind: proposition
 title: "The exterior derivative is local"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-exterior-derivative-by-the-invariant-vector-field-formula, lem-the-in
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

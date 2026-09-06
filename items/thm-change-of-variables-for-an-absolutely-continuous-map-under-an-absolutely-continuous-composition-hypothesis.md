@@ -2,7 +2,7 @@
 id: thm-change-of-variables-for-an-absolutely-continuous-map-under-an-absolutely-continuous-composition-hypothesis
 kind: theorem
 title: "Change of variables for an absolutely continuous map under an absolutely continuous composition hypothesis"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-dependent-choice, lem-chain-rule-for-an-indefinite-integral-after-an-absolutely-continuous-composition, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

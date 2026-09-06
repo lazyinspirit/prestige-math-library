@@ -2,7 +2,7 @@
 id: lem-the-relative-connecting-map-is-independent-of-lift-and-representative
 kind: lemma
 title: "Well-definedness of the relative connector"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-relative-homology-connecting-homomorphism-on-cycles, def-relative-singular-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

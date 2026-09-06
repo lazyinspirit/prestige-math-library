@@ -2,7 +2,7 @@
 id: def-riemannian-gradient-of-a-smooth-function
 kind: definition
 title: "The Riemannian gradient is the metric dual of the differential"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian, def-differential-of-a-smooth-real-valued-function, def-smooth-vector-field-as-a-tangent-bundle-section]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

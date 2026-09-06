@@ -2,7 +2,7 @@
 id: cor-density-characterised-by-annihilator-zero
 kind: corollary
 title: Density is characterized by a zero annihilator
-status: draft
+status: published
 origin: pipeline
 deps: [cor-annihilator-detects-closure]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

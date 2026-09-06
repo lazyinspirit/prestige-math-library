@@ -2,7 +2,7 @@
 id: prop-lie-derivative-of-forms-is-a-degree-zero-graded-derivation
 kind: proposition
 title: "Lie derivative of forms is a degree-zero graded derivation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lie-derivative-of-a-differential-form, thm-lie-derivative-is-a-deriva
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

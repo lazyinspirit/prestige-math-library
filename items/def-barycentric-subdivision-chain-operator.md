@@ -2,13 +2,14 @@
 id: def-barycentric-subdivision-chain-operator
 kind: definition
 title: "Barycentric subdivision operator"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-barycenter-and-affine-cone-on-a-singular-chain, def-singular-boundary-operator]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

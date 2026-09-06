@@ -2,7 +2,7 @@
 id: thm-ring-of-integers-free-of-rank-degree
 kind: theorem
 title: "The ring of integers has rank the degree"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ring-of-integers-of-a-number-field, def-number-field, thm-finite-integral-closure-in-a-finite-separable-extension, cor-submodules-of-finite-free-pid-modules-are-free, thm-clearing-denominators-for-an-algebraic-number]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

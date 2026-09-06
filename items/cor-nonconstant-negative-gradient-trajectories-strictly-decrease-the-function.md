@@ -2,7 +2,7 @@
 id: cor-nonconstant-negative-gradient-trajectories-strictly-decrease-the-function
 kind: corollary
 title: "Nonconstant negative-gradient trajectories strictly decrease the function"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-negative-gradient-energy-identity, lem-riemannian-gradient-vanishes-e
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

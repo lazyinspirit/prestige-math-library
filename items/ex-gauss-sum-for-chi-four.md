@@ -2,7 +2,7 @@
 id: ex-gauss-sum-for-chi-four
 kind: example
 title: "Gauss sum for the character modulo 4"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-gauss-sum-dirichlet-character, thm-primitive-gauss-sum-norm, def-parity-dirichlet-character]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

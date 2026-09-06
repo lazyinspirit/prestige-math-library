@@ -2,7 +2,7 @@
 id: ex-finite-dimensional-vector-spaces-form-a-fusion-category
 kind: example
 title: "Finite-dimensional vector spaces form a fusion category"
-status: draft
+status: published
 origin: pipeline
 deps: [def-fusion-and-multifusion-category, thm-modules-over-a-commutative-ring-form-a-monoidal-category, thm-finite-dimensional-vector-spaces-are-rigid]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

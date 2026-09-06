@@ -2,7 +2,7 @@
 id: fs-group-cohomology-is-the-derived-functor-of-coinvariants
 kind: false-statement
 title: "Group cohomology is the derived functor of coinvariants"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-cohomology-as-a-derived-functor, def-group-homology-as-a-derived-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-the-binary-icosahedral-cover-of-a-five
 kind: example
 title: "Binary icosahedral cover of A5"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-a-group-admits-a-universal-central-extension-iff-it-is-perfect, cor-kernel-of-the-universal-central-extension-is-the-schur-multiplier]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://math.mit.edu/~hrm/palestine/weibel/06-group_homology_and_cohomology.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

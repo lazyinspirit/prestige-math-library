@@ -2,7 +2,7 @@
 id: lem-the-kunneth-tor-map
 title: "The Kunneth Tor map"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid, lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free, thm-free-modules-are-projective-with-choice-boundary, def-balanced-tor-bifunctor, thm-long-exact-sequence-in-homology, cor-the-long-exact-homology-sequence-is-natural]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

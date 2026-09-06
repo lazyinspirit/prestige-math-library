@@ -2,13 +2,14 @@
 id: def-left-and-right-global-dimension-of-a-ring
 kind: definition
 title: "Left and right global dimension of a ring"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-projective-dimension-of-an-object, def-opposite-ring]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

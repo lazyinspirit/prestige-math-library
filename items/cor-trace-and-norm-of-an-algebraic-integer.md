@@ -2,7 +2,7 @@
 id: cor-trace-and-norm-of-an-algebraic-integer
 kind: corollary
 title: "Trace and norm of an algebraic integer"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-algebraic-integer-minimal-polynomial-criterion, def-field-norm-and-trace, thm-field-norm-and-trace-by-embeddings]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

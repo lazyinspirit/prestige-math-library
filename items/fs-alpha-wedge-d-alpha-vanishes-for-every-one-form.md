@@ -2,7 +2,7 @@
 id: fs-alpha-wedge-d-alpha-vanishes-for-every-one-form
 kind: false-statement
 title: '$\alpha\wedge d\alpha$ vanishes for every one-form'
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-codimension-one-frobenius-criterion]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

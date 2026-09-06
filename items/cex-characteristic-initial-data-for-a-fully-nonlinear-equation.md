@@ -2,7 +2,7 @@
 id: cex-characteristic-initial-data-for-a-fully-nonlinear-equation
 kind: counterexample
 title: "Characteristic initial data need not determine a fully nonlinear solution"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-fully-nonlinear-first-order-pde-and-complete-integral, def-lagrange-c
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,15 @@
 id: def-semilinear-and-quasilinear-first-order-cauchy-problems
 kind: definition
 title: "Semilinear and quasilinear first-order Cauchy problems on a parametrised hypersurface"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-linear-semilinear-quasilinear-and-fully-nonlinear-pde, def-noncharacteristic-first-order-cauchy-surface]
 justified_by: []
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Part I: Explicit methods — Lecture notes for MA342H"

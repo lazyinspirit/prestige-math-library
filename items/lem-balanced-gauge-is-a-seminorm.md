@@ -2,7 +2,7 @@
 id: lem-balanced-gauge-is-a-seminorm
 kind: lemma
 title: The gauge of an absolutely convex absorbing set is a seminorm
-status: draft
+status: published
 origin: pipeline
 deps: [def-absorbing-balanced-and-absolutely-convex-set, def-minkowski-functional, lem-minkowski-functional-is-sublinear]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

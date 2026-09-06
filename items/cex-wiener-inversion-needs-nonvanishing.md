@@ -2,7 +2,7 @@
 id: cex-wiener-inversion-needs-nonvanishing
 kind: counterexample
 title: "Wiener inversion needs nonvanishing"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-wiener-algebra-of-the-circle, lem-absolutely-summable-fourier-coefficients-give-uniform-convergence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-normalized-cochains-compute-group-cohomology
 kind: corollary
 title: "Normalized cochains compute group cohomology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-bar-cochain-complex-computes-derived-group-cohomology, thm-normalized-and-unnormalized-bar-complexes-are-chain-homotopy-equivalent]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

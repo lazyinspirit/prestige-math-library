@@ -2,7 +2,7 @@
 id: ex-a-suzuki-group-family-entry
 kind: example
 title: "A Suzuki group family entry"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

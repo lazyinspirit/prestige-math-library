@@ -2,7 +2,7 @@
 id: prop-a-tensor-field-is-invariant-under-a-flow-if-and-only-if-its-lie-derivative-vanishes
 kind: proposition
 title: "A tensor field is flow-invariant exactly when its Lie derivative vanishes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lie-derivative-of-a-tensor-field, lem-the-flow-definition-of-tensor-l
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

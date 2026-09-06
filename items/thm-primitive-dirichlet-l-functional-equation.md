@@ -2,7 +2,7 @@
 id: thm-primitive-dirichlet-l-functional-equation
 kind: theorem
 title: "Functional equation for primitive Dirichlet L-functions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-primitive-dirichlet-l-analytic-continuation, def-completed-dirichlet-l-function, lem-fourier-transform-of-a-gaussian, thm-twisted-poisson-summation, thm-primitive-gauss-sum-norm]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

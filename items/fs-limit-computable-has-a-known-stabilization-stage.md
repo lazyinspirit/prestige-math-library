@@ -2,7 +2,7 @@
 id: fs-limit-computable-has-a-known-stabilization-stage
 kind: false-statement
 title: "False: a limit-computable function has a known stabilization stage"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-limit-computable-function, thm-shoenfield-limit-lemma, thm-halting-is-recognizable-and-undecidable]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

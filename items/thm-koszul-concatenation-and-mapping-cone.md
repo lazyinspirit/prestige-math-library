@@ -2,7 +2,7 @@
 id: thm-koszul-concatenation-and-mapping-cone
 kind: theorem
 title: "Koszul Concatenation And Mapping Cone"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-koszul-complex-concatenation-tensor-isomorphism, lem-koszul-append-one-element-mapping-cone-identification, lem-koszul-mapping-cone-homology-exact-sequence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

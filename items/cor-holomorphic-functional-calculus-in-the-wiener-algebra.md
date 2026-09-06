@@ -2,7 +2,7 @@
 id: cor-holomorphic-functional-calculus-in-the-wiener-algebra
 kind: corollary
 title: "Holomorphic functional calculus in the Wiener algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-wiener-algebra-is-a-banach-algebra, thm-wiener-lemma-for-absolutely-c
 forward_refs: [thm-global-cauchy-integral-formula-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

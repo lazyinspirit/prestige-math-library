@@ -2,7 +2,7 @@
 id: ex-a-wide-transversal-in-four-structural-comb-partitions
 kind: example
 title: "A wide transversal in four structural comb partitions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

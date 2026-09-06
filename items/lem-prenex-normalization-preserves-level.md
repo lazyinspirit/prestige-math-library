@@ -2,7 +2,7 @@
 id: lem-prenex-normalization-preserves-level
 kind: lemma
 title: "Prenex normalization preserves the arithmetical level"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-bounded-arithmetic-formula, def-sigma-n-pi-n-and-delta-n-sets, lem-bounded-quantifiers-preserve-primitive-recursiveness]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

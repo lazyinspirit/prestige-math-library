@@ -2,7 +2,7 @@
 id: prop-the-exterior-derivative-does-not-enlarge-support
 kind: proposition
 title: "The exterior derivative does not enlarge support"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-the-exterior-derivative-is-local, def-smooth-section-local-section-a
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

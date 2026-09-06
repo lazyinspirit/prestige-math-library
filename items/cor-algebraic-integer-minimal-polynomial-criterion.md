@@ -2,13 +2,15 @@
 id: cor-algebraic-integer-minimal-polynomial-criterion
 kind: corollary
 title: "Minimal-polynomial criterion for algebraic integers"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-ring-of-integers-of-a-number-field, def-integral-ring-extension, thm-integrality-and-finite-module-equivalences]
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Milne, Proposition 2.11"

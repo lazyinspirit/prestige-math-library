@@ -2,12 +2,14 @@
 id: def-one-dimensional-borel-module-of-weight-lambda
 kind: definition
 title: "The one-dimensional Borel module of weight lambda"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-triangular-decomposition-from-a-chosen-positive-root-system]
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Pavel Etingof, Lie Groups and Lie Algebras I & II, Remark 25.8"

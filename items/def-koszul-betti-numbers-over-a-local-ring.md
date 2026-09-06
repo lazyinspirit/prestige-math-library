@@ -2,13 +2,14 @@
 id: def-koszul-betti-numbers-over-a-local-ring
 kind: definition
 title: "Koszul Betti Numbers Over A Local Ring"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-minimal-free-resolution-over-a-local-ring, def-exterior-algebra-of-a-finite-free-module]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

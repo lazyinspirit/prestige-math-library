@@ -2,7 +2,7 @@
 id: ex-psl-two-seven-and-a-low-rank-coincidence
 kind: example
 title: "PSL(2,7) and a low-rank family entry"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

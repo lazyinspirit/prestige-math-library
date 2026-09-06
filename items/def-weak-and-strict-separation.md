@@ -2,13 +2,14 @@
 id: def-weak-and-strict-separation
 kind: definition
 title: Weak, strict, and strong separation
-status: draft
+status: published
 origin: pipeline
 deps: [def-dual-space-of-a-normed-space, rem-real-and-complex-normed-space-convention]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

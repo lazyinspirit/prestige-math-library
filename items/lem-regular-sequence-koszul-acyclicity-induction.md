@@ -2,7 +2,7 @@
 id: lem-regular-sequence-koszul-acyclicity-induction
 kind: lemma
 title: "Regular Sequence Koszul Acyclicity Induction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-basic-koszul-homology, lem-koszul-mapping-cone-homology-exact-sequence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

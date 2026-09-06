@@ -2,14 +2,16 @@
 id: lem-polynomial-time-computations-have-logspace-uniform-circuits
 kind: lemma
 title: "Polynomial-time computations have logspace-uniform circuit families"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-dtime-ntime-dspace-and-nspace, def-logspace-uniform-circuit-family]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 6.7"

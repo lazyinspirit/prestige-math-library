@@ -2,7 +2,7 @@
 id: lem-baer-sum-of-short-exact-sequence-classes-is-independent-of-representatives
 kind: lemma
 title: "The Baer sum is independent of representatives"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-baer-sum-of-extension-classes, lem-pullback-and-pushout-descend-to-extension-classes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

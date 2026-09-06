@@ -2,7 +2,7 @@
 id: ex-empty-and-unit-koszul-boundaries
 kind: example
 title: "Empty And Unit Koszul Boundaries"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-empty-koszul-complex-is-the-coefficient-module, cor-one-element-koszul-homology, def-regular-sequence-on-a-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

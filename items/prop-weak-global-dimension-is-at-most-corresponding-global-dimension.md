@@ -2,7 +2,7 @@
 id: prop-weak-global-dimension-is-at-most-corresponding-global-dimension
 title: "Weak global dimension is at most the corresponding global dimension"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-left-and-right-weak-global-dimension", "lem-projective-modules-are-flat-over-an-arbitrary-ring", "def-left-and-right-global-dimension-of-a-ring"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

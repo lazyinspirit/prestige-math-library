@@ -2,7 +2,7 @@
 id: lem-acyclic-assembly-by-exact-rows
 kind: lemma
 title: "Acyclic assembly by exact rows"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-direct-sum-total-complex-on-finite-diagonals, lem-acyclic-assembly-by-exact-columns]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

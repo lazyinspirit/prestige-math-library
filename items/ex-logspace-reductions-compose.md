@@ -2,14 +2,16 @@
 id: ex-logspace-reductions-compose
 kind: example
 title: "Composing two logspace reductions through a virtual tape"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-logspace-many-one-reduction, lem-logspace-reductions-compose]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Figure 3.3"

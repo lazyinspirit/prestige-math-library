@@ -2,7 +2,7 @@
 id: prop-semisimple-rings-have-vanishing-positive-tor-and-ext
 title: "Semisimple rings have vanishing positive Tor and Ext"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-balanced-tor-bifunctor", "thm-equivalent-characterizations-of-semisimple-rings", "def-balanced-ext-bifunctor"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

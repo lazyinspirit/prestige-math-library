@@ -2,7 +2,7 @@
 id: lem-subgroups-of-free-abelian-groups-are-free
 kind: lemma
 title: "Subgroups of free abelian groups are free"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-free-module-on-a-set-and-standard-basis, cor-submodules-of-finite-free-pid-modules-are-free]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

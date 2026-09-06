@@ -2,7 +2,7 @@
 id: thm-wiener-algebra-is-a-banach-algebra
 kind: theorem
 title: "The Wiener algebra is a unital commutative Banach algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-wiener-algebra-of-the-circle, lem-absolutely-summable-fourier-coefficients-give-uniform-convergence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

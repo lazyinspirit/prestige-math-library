@@ -2,7 +2,7 @@
 id: lem-the-group-ring-is-free-over-a-subgroup-ring
 kind: lemma
 title: "The group ring is free over a subgroup ring"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-restriction-induction-and-coinduction-for-group-modules, def-subgroup]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-characteristic-crossing-and-caustic-for-first-order-pde
 kind: definition
 title: "Characteristic crossing and caustic for a first-order PDE"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-augmented-characteristic-system-for-a-quasilinear-pde, lem-local-solvability-of-the-augmented-characteristic-ode]
 justified_by: []
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

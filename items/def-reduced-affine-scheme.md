@@ -2,12 +2,13 @@
 id: def-reduced-affine-scheme
 kind: definition
 title: "Reduced affine schemes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-affine-scheme, def-nilradical-and-reduced-ring, cor-affine-scheme-isomorphism-ring-isomorphism]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

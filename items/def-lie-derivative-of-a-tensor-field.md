@@ -2,7 +2,7 @@
 id: def-lie-derivative-of-a-tensor-field
 kind: definition
 title: "The Lie derivative of a tensor field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-local-and-global-flow, def-pullback-of-a-covariant-tensor-field, def-smooth-tensor-field]
 justified_by: [lem-the-flow-definition-of-tensor-lie-derivative-is-local-and-well-defined]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

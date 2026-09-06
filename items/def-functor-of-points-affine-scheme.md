@@ -2,12 +2,13 @@
 id: def-functor-of-points-affine-scheme
 kind: definition
 title: "The functor of points of an affine scheme"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-affine-scheme, thm-affine-scheme-ring-anti-equivalence, def-functor-and-contravariant-functor]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

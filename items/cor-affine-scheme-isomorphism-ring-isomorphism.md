@@ -2,13 +2,16 @@
 id: cor-affine-scheme-isomorphism-ring-isomorphism
 kind: corollary
 title: "Affine-scheme isomorphisms are exactly coordinate-ring isomorphisms in reverse direction"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-affine-scheme-ring-anti-equivalence]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.6.5"

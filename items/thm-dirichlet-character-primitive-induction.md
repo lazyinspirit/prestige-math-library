@@ -2,7 +2,7 @@
 id: thm-dirichlet-character-primitive-induction
 kind: theorem
 title: "Unique primitive ancestor of a Dirichlet character"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-induced-dirichlet-character, def-primitive-dirichlet-character-and-conductor, thm-chinese-remainder-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

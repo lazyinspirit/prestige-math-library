@@ -2,13 +2,14 @@
 id: def-bar-augmentation
 kind: definition
 title: "Bar augmentation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-unnormalized-homogeneous-bar-resolution, def-integral-group-ring-module-and-trivial-module-convention]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

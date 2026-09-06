@@ -2,14 +2,17 @@
 id: cor-p-is-properly-contained-in-exp
 kind: corollary
 title: "P is properly contained in EXP"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-deterministic-time-hierarchy, def-p, def-exp-and-nexp]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Sebastiaan Terwijn, Complexity Theory, §2.2"

@@ -2,7 +2,7 @@
 id: thm-the-unit-object-of-a-multitensor-category-is-semisimple
 kind: theorem
 title: "The unit object of a multitensor category is semisimple"
-status: draft
+status: published
 origin: pipeline
 deps: [def-tensor-and-multitensor-category, def-semisimple-object-and-semisimple-abelian-category, def-simple-object, def-object-of-finite-length, thm-the-tensor-product-in-a-multitensor-category-is-biexact, thm-dualization-in-a-multitensor-category-is-exact, thm-images-commute-with-tensor-products-in-a-multitensor-category]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

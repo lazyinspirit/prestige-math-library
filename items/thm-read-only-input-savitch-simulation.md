@@ -2,14 +2,17 @@
 id: thm-read-only-input-savitch-simulation
 kind: theorem
 title: "Savitch simulation into read-only-input deterministic work space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-read-only-input-logspace-machine, def-read-only-input-workspace-classes, lem-logspace-machines-have-polynomially-many-configurations]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 3.12"

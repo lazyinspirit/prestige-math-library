@@ -2,7 +2,7 @@
 id: lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid
 title: "The cycle-boundary short exact sequences for a free complex over a PID"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-chain-complex-in-an-abelian-category", "def-homology-object-of-a-chain-complex", "def-principal-ideal-domain"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

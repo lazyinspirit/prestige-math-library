@@ -2,7 +2,7 @@
 id: thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic
 title: "The left and right projective constructions of Tor are naturally isomorphic"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tor-by-resolving-the-left-module", "def-tor-by-resolving-the-right-module", "lem-the-rows-of-the-augmented-tensor-double-complex-are-exact", "lem-the-columns-of-the-augmented-tensor-double-complex-are-exact", "def-tensor-double-complex-of-two-projective-resolutions", "thm-projective-comparison-map-exists", "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy", "thm-long-exact-sequence-in-homology"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

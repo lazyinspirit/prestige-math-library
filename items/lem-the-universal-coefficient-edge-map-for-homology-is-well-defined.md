@@ -2,7 +2,7 @@
 id: lem-the-universal-coefficient-edge-map-for-homology-is-well-defined
 title: "The homological universal-coefficient edge map is well defined"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-chain-complex-with-coefficients-by-tensoring", "def-homology-object-of-a-chain-complex"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

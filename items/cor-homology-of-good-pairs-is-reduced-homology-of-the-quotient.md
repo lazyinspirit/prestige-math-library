@@ -2,14 +2,17 @@
 id: cor-homology-of-good-pairs-is-reduced-homology-of-the-quotient
 kind: corollary
 title: "Good pairs and quotient reduced homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-excision-for-singular-homology, thm-long-exact-sequence-of-a-pair-in-singular-homology, def-zero-simplex-augmentation-and-reduced-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Proposition 2.22"

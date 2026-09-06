@@ -2,7 +2,7 @@
 id: cor-arbitrary-product-measure-for-standard-borel-probability-spaces
 kind: corollary
 title: "Arbitrary products of standard Borel probability spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-kolmogorov-extension-for-standard-borel-coordinate-spaces, def-consistent-family-of-finite-dimensional-distributions, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

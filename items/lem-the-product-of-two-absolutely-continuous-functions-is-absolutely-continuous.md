@@ -2,7 +2,7 @@
 id: lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous
 kind: lemma
 title: "The product of two absolutely continuous functions is absolutely continuous"
-status: draft
+status: published
 origin: pipeline
 deps: [def-absolutely-continuous-function]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

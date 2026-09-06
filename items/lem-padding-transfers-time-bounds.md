@@ -2,14 +2,16 @@
 id: lem-padding-transfers-time-bounds
 kind: lemma
 title: "Padding transfers time bounds"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-language-padding, def-dtime-ntime-dspace-and-nspace]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Sebastiaan Terwijn, Complexity Theory, Exercise 3.5.2(a)"

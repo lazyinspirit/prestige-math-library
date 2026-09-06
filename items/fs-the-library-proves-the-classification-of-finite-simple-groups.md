@@ -2,7 +2,7 @@
 id: fs-the-library-proves-the-classification-of-finite-simple-groups
 kind: false-statement
 title: "The library proves CFSG"
-status: draft
+status: published
 origin: pipeline
 deps: [rem-classification-of-finite-simple-groups]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

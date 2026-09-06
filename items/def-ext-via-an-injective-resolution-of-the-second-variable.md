@@ -2,13 +2,14 @@
 id: def-ext-via-an-injective-resolution-of-the-second-variable
 kind: definition
 title: "Ext via an injective resolution of the second variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-supplied-injective-resolution-datum]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

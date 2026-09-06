@@ -2,7 +2,7 @@
 id: lem-riemannian-gradient-vanishes-exactly-at-critical-points
 kind: lemma
 title: "The Riemannian gradient vanishes exactly at the critical points"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-riemannian-gradient-of-a-smooth-function, def-critical-point-and-crit
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

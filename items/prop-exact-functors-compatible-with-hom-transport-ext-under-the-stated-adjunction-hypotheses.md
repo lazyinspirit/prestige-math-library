@@ -2,7 +2,7 @@
 id: prop-exact-functors-compatible-with-hom-transport-ext-under-the-stated-adjunction-hypotheses
 kind: proposition
 title: "Exact functors compatible with Hom transport Ext under stated adjunction hypotheses"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-balanced-ext-bifunctor, def-exact-functor-between-abelian-categories, thm-the-adjunction-hom-set-bijection-under-local-smallness]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

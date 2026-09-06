@@ -2,7 +2,7 @@
 id: ex-cartans-formula-for-a-coordinate-vector-field
 kind: example
 title: "Cartan's formula for a coordinate vector field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-cartans-magic-formula]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

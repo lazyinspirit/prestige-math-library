@@ -2,11 +2,12 @@
 id: lem-induction-ideal-of-a-subgroup-family-is-an-ideal
 kind: lemma
 title: The induction subgroup is an ideal
-status: draft
+status: published
 origin: pipeline
 deps: [def-induction-ideal-of-a-family-of-subgroups, prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -34,4 +35,4 @@ For every family $\mathcal F$ of subgroups of a finite group $G$, $I_{\mathcal F
 
 1.1 The projection formula gives $\operatorname{Ind}_H^G\theta\cdot\chi=\operatorname{Ind}_H^G(\theta\cdot\operatorname{Res}_H^G\chi)$. [F1, given]
 
-2.1 Its right side is one of the defining summands of $I_{\mathcal F}(G)$; additivity handles finite sums and additive inverses, so multiplication by every $\chi$ preserves the subgroup. $\square$ [step 1.1]
+2.1 Its right side is one of the defining summands of $I_{\mathcal F}(G)$; additivity handles finite sums and additive inverses, so multiplication by every $\chi$ preserves the subgroup. ∎ [step 1.1]

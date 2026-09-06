@@ -2,7 +2,7 @@
 id: ex-a-matrix-multifusion-category-with-nonsimple-unit
 kind: example
 title: "A matrix multifusion category with nonsimple unit"
-status: draft
+status: published
 origin: pipeline
 deps: [def-fusion-and-multifusion-category, ex-finite-dimensional-vector-spaces-form-a-fusion-category]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

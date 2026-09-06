@@ -2,7 +2,7 @@
 id: lem-pullback-and-pushout-descend-to-extension-classes
 kind: lemma
 title: "Pullback and pushout descend to extension classes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-pullback-and-pushout-of-an-extension, prop-a-morphism-of-extensions-is-an-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

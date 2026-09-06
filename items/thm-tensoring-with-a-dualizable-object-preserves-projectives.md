@@ -2,7 +2,7 @@
 id: thm-tensoring-with-a-dualizable-object-preserves-projectives
 kind: theorem
 title: "Tensoring with a dualizable object preserves projectives"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-the-tensor-product-in-a-multitensor-category-is-biexact, def-projective-object, thm-duality-yields-adjunctions-of-tensoring-functors]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

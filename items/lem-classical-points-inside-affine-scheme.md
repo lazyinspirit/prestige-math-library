@@ -2,13 +2,15 @@
 id: lem-classical-points-inside-affine-scheme
 kind: lemma
 title: "Classical k-points give closed points over an algebraically closed field"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-closed-point-scheme, def-algebraically-closed-field, cor-affine-algebra-maximal-ideals-as-points-over-algebraically-closed-field]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "James S. Milne, Algebraic Geometry, 10.24"

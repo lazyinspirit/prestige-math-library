@@ -2,7 +2,7 @@
 id: prop-the-tor-balance-isomorphism-is-natural-and-coherent-under-change-of-resolutions
 title: "The Tor balance isomorphism is natural and coherent under a change of resolutions"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic", "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-the-hom-cochain-differential-squares-to-zero
 title: "The Hom cochain differential squares to zero"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-cochain-complex-hom-from-a-chain-complex"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

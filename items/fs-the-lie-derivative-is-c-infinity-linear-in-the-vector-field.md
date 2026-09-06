@@ -2,7 +2,7 @@
 id: fs-the-lie-derivative-is-c-infinity-linear-in-the-vector-field
 kind: false-statement
 title: 'The Lie derivative is $C^\infty$-linear in the vector field'
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-cartans-magic-formula]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

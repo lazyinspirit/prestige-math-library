@@ -2,13 +2,14 @@
 id: def-ring-of-integers-of-a-number-field
 kind: definition
 title: "Ring of integers"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-number-field, def-integral-closure-and-integrally-closed-domain]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

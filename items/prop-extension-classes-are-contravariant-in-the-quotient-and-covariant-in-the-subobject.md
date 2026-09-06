@@ -2,7 +2,7 @@
 id: prop-extension-classes-are-contravariant-in-the-quotient-and-covariant-in-the-subobject
 kind: proposition
 title: "Extension classes are contravariant in the quotient and covariant in the subobject"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-pullback-and-pushout-descend-to-extension-classes, thm-baer-sum-makes-extension-classes-an-abelian-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

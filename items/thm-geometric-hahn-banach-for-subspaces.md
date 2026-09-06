@@ -2,7 +2,7 @@
 id: thm-geometric-hahn-banach-for-subspaces
 kind: theorem
 title: Geometric Hahn--Banach theorem for subspaces
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-annihilator-of-a-subspace, thm-norm-preserving-extension-from-any-subspace, thm-metric-closure-characterisation, def-normed-subspace]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

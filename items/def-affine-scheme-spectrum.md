@@ -2,12 +2,13 @@
 id: def-affine-scheme-spectrum
 kind: definition
 title: "The underlying space of an affine spectrum"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-prime-spectrum-and-vanishing-sets, def-principal-distinguished-subset-of-spectrum, def-ringed-space, def-locally-ringed-space]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

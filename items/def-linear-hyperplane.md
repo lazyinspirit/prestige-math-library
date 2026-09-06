@@ -2,12 +2,14 @@
 id: def-linear-hyperplane
 kind: definition
 title: Linear hyperplane
-status: draft
+status: published
 origin: pipeline
 deps: [def-linear-subspace, def-quotient-vector-space-and-canonical-projection, def-dimension]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: Theo Buehler and Dietmar Salamon, Functional Analysis, Definition 2.46

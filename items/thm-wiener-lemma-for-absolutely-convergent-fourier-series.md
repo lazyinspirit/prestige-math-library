@@ -2,7 +2,7 @@
 id: thm-wiener-lemma-for-absolutely-convergent-fourier-series
 kind: theorem
 title: "Wiener's lemma for absolutely convergent Fourier series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-wiener-algebra-is-a-banach-algebra, lem-absolutely-summable-fourier-coefficients-give-uniform-convergence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

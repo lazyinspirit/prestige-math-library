@@ -1,7 +1,7 @@
 ---
 page: primitive-dirichlet-l-functions-and-functional-equations
 title: "Primitive Dirichlet L Functions and Functional Equations"
-status: draft
+status: published
 items: [def-induced-dirichlet-character, def-primitive-dirichlet-character-and-conductor, thm-dirichlet-character-primitive-induction, thm-induced-dirichlet-l-finite-euler-factors, def-gauss-sum-dirichlet-character, lem-primitive-gauss-sum-twist, thm-primitive-gauss-sum-norm, def-parity-dirichlet-character, lem-fourier-transform-of-a-gaussian, thm-dirac-comb-is-fourier-invariant, thm-twisted-poisson-summation, def-completed-dirichlet-l-function, thm-primitive-dirichlet-l-analytic-continuation, thm-primitive-dirichlet-l-functional-equation, cor-dirichlet-l-root-number-unit-modulus, cor-dirichlet-l-trivial-zeros]
 examples: []
 ---

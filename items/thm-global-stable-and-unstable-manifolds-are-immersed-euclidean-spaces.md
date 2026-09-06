@@ -2,7 +2,7 @@
 id: thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces
 kind: theorem
 title: "Global stable and unstable manifolds are immersed Euclidean spaces"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point, de
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

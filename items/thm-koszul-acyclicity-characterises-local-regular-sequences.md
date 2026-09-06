@@ -2,7 +2,7 @@
 id: thm-koszul-acyclicity-characterises-local-regular-sequences
 kind: theorem
 title: "Koszul Acyclicity Characterises Local Regular Sequences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-regular-sequences-give-acyclic-koszul-complexes, lem-local-koszul-acyclicity-inductive-converse]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

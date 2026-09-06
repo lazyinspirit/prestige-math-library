@@ -2,7 +2,7 @@
 id: fs-lie-derivative-and-interior-product-commute-for-all-vector-fields
 kind: false-statement
 title: "Lie derivative and interior product commute for all vector fields"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-cartan-commutator-identities]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

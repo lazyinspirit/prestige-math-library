@@ -2,12 +2,14 @@
 id: def-barycenter-and-affine-cone-on-a-singular-chain
 kind: definition
 title: "Barycenter and affine cone"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-singular-simplex-and-singular-chain-group-with-coefficients, def-singular-boundary-operator]
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Proposition 2.21"

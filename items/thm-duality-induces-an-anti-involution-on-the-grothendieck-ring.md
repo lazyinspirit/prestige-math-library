@@ -2,7 +2,7 @@
 id: thm-duality-induces-an-anti-involution-on-the-grothendieck-ring
 kind: theorem
 title: "Duality induces an anti-isomorphism on the Grothendieck ring"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-dualization-in-a-multitensor-category-is-exact, thm-left-duality-is-a-contravariant-antimonoidal-functor, def-grothendieck-ring-of-a-tensor-category]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

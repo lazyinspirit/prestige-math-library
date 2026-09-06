@@ -2,14 +2,17 @@
 id: thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence
 kind: theorem
 title: "Short exact chain Mayer–Vietoris sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-two-open-cover-small-chains-are-the-sum-of-the-two-singular-subcomplexes]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.2"

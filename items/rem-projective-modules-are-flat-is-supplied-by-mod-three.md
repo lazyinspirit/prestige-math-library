@@ -2,7 +2,7 @@
 id: rem-projective-modules-are-flat-is-supplied-by-mod-three
 title: "The earlier flatness page is the commutative specialization; this page records the arbitrary-handed version used in balance"
 kind: remark
-status: draft
+status: published
 origin: pipeline
 deps: ["def-flat-and-faithfully-flat-modules-and-ring-maps", "thm-projective-modules-are-flat", "lem-projective-modules-are-flat-over-an-arbitrary-ring"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

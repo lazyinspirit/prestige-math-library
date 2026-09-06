@@ -2,7 +2,7 @@
 id: thm-totality-is-pi-two-complete
 kind: theorem
 title: "The totality set is Pi_2^0-complete"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sigma-n-pi-n-and-delta-n-sets, def-arithmetical-level-completeness, def-kleene-t-predicate-and-output-function, thm-smn-parameter-theorem, def-computable-many-one-reduction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   references:

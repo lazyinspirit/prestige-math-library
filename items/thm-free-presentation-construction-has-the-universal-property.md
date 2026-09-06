@@ -2,7 +2,7 @@
 id: thm-free-presentation-construction-has-the-universal-property
 kind: theorem
 title: "Free-presentation construction is universal"
-status: draft
+status: published
 origin: pipeline
 deps: [def-universal-central-extension-from-a-free-presentation, lem-free-presentation-construction-is-a-central-extension, def-universal-central-extension, def-perfect-group]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: def-singular-chain-complex-of-a-pair
 kind: definition
 title: "Relative singular chain complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-singular-chain-complex-and-singular-homology]
 justified_by: [lem-singular-boundary-descends-to-relative-chains]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

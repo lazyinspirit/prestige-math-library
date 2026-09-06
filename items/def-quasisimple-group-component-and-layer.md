@@ -2,13 +2,14 @@
 id: def-quasisimple-group-component-and-layer
 kind: definition
 title: "Quasisimple groups, components, and the layer"
-status: draft
+status: published
 origin: pipeline
 deps: [def-simple-group, def-commutator-and-commutator-subgroup, def-subnormal-normal-series-refinement-and-equivalence]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

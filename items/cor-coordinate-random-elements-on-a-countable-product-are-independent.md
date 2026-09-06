@@ -2,7 +2,7 @@
 id: cor-coordinate-random-elements-on-a-countable-product-are-independent
 kind: corollary
 title: "Coordinate random elements of a countable product are independent"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-product-of-probability-spaces, def-coordinate-maps-and-cylinder-sigma-algebra, def-independent-random-elements]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

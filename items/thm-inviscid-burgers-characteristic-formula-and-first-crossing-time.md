@@ -2,7 +2,7 @@
 id: thm-inviscid-burgers-characteristic-formula-and-first-crossing-time
 kind: theorem
 title: "Inviscid Burgers characteristic formula and first crossing time"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-characteristic-crossing-and-caustic-for-first-order-pde, lem-burgers-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

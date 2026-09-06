@@ -2,7 +2,7 @@
 id: thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective
 kind: theorem
 title: "Projective dimension at most n iff the nth syzygy is projective"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-dimension-of-an-object, def-syzygy-and-cosyzygy-relative-to-a-resolution, thm-schanuel-lemma-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

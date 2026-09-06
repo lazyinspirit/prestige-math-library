@@ -2,7 +2,7 @@
 id: def-evaluation-map-from-cohomology-to-hom-of-homology
 title: "The evaluation map from cohomology to Hom of homology"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-cochain-complex-hom-from-a-chain-complex", "def-homology-object-of-a-chain-complex"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   precheck: n/a
 ---
 

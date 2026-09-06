@@ -2,7 +2,7 @@
 id: fs-projective-dimension-is-the-length-of-any-projective-resolution
 kind: false-statement
 title: "FALSE: projective dimension is the length of any projective resolution"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-projective-dimension-of-an-object, thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

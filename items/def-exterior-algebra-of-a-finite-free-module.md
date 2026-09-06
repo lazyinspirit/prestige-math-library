@@ -2,13 +2,14 @@
 id: def-exterior-algebra-of-a-finite-free-module
 kind: definition
 title: "Exterior Algebra Of A Finite Free Module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-free-module-on-a-set-and-standard-basis]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

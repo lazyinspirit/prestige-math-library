@@ -2,13 +2,14 @@
 id: def-direct-sum-total-complex-on-finite-diagonals
 kind: definition
 title: "The direct-sum total complex on finite diagonals"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-hom-double-complex-of-a-projective-and-an-injective-resolution, lem-the-two-hom-double-complex-differentials-commute-before-signing]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

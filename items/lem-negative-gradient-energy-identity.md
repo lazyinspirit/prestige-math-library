@@ -2,7 +2,7 @@
 id: lem-negative-gradient-energy-identity
 kind: lemma
 title: "A negative-gradient trajectory satisfies the energy identity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-negative-gradient-trajectory-of-a-morse-function, def-riemannian-grad
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

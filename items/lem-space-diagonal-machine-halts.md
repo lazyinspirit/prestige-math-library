@@ -2,14 +2,17 @@
 id: lem-space-diagonal-machine-halts
 kind: lemma
 title: "The space-diagonal machine halts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [lem-space-bounded-universal-simulation, lem-space-bounded-machines-have-exponentially-many-configurations, def-time-and-space-constructible-function]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Sebastiaan Terwijn, Complexity Theory, §2.3"

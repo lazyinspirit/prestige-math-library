@@ -2,7 +2,7 @@
 id: fs-every-rigid-k-linear-abelian-monoidal-category-is-a-tensor-category
 kind: false-statement
 title: "Every rigid k-linear abelian monoidal category is a tensor category"
-status: draft
+status: published
 origin: pipeline
 deps: [def-tensor-and-multitensor-category, def-rigid-object-and-rigid-monoidal-category]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

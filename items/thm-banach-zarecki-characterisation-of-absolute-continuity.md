@@ -2,7 +2,7 @@
 id: thm-banach-zarecki-characterisation-of-absolute-continuity
 kind: theorem
 title: "Banach--Zarecki characterisation of absolute continuity"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-countable-choice, def-luzin-property-n-on-a-compact-interval, def-bounded-variation-and-total-variation, thm-jordan-decomposition-for-bv-functions, thm-bv-functions-are-differentiable-almost-everywhere, thm-the-derivative-of-an-increasing-function-is-measurable-integrable-and-bounded-by-its-total-increase, thm-absolutely-continuous-functions-have-luzin-property-n, lem-luzin-property-n-gives-an-integral-growth-estimate, thm-absolute-continuity-of-the-integral]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   references:

@@ -2,11 +2,12 @@
 id: lem-p-elementary-characters-are-induced-from-linear-characters
 kind: lemma
 title: Characters of elementary groups are induced from linear characters
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups, lem-p-elementary-groups-are-supersolvable, thm-finite-supersolvable-groups-are-monomial, def-virtual-character-and-character-ring-of-a-finite-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -34,4 +35,4 @@ Every virtual character of a finite $p$-elementary group is an integral linear c
 
 1.1 The elementary-group lemma makes $E$ supersolvable, and the monomiality theorem writes every irreducible constituent of $\xi$ as an induction of a linear character. [F1, given]
 
-2.1 Add the resulting expressions with the integral multiplicities defining the virtual character $\xi$. $\square$ [step 1.1]
+2.1 Add the resulting expressions with the integral multiplicities defining the virtual character $\xi$. ∎ [step 1.1]

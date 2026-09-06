@@ -2,13 +2,16 @@
 id: def-read-only-input-logspace-machine
 kind: definition
 title: "A read-only-input logarithmic-space machine"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-dtime-ntime-dspace-and-nspace]
-verification: {precheck: n/a, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: n/a
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, §3.1 and §3.4.1"

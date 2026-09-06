@@ -2,14 +2,17 @@
 id: cor-nspace-is-closed-under-complement-above-logspace
 kind: corollary
 title: "Read-only-input nondeterministic work space is closed under complement above logarithmic space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-immerman-szelepcsenyi-nl-equals-conl]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Corollary 3.19"

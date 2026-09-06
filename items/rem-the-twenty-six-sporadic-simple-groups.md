@@ -2,13 +2,14 @@
 id: rem-the-twenty-six-sporadic-simple-groups
 kind: remark
 title: "The twenty-six sporadic simple groups"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

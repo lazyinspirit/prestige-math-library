@@ -2,7 +2,7 @@
 id: lem-koszul-differential-coordinate-formula
 kind: lemma
 title: "Koszul Differential Coordinate Formula"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-koszul-complex-of-a-sequence-with-coefficients, lem-exterior-algebra-basis-monomials]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-successive-small-integral-geometric-layers-contradict-a-large-x-part
 kind: lemma
 title: "Successive small integral geometric layers contradict a large X-part"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

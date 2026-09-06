@@ -2,12 +2,13 @@
 id: def-nonreduced-infinitesimal-thickening-affine
 kind: definition
 title: "An affine nilpotent thickening"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-affine-scheme, def-morphism-affine-schemes-from-ring-map, cor-prime-spectrum-insensitive-to-nilpotents, def-nilradical-and-reduced-ring, thm-prime-spectrum-of-a-quotient-bijection]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

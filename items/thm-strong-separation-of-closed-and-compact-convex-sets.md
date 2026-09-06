@@ -2,7 +2,7 @@
 id: thm-strong-separation-of-closed-and-compact-convex-sets
 kind: theorem
 title: Strong separation of a closed and a compact convex set
-status: draft
+status: published
 origin: pipeline
 deps: [thm-separation-of-disjoint-convex-sets-one-open, def-weak-and-strict-separation, lem-distance-to-set-is-lipschitz, thm-extreme-value-metric, def-metric-compactness]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

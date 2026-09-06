@@ -2,7 +2,7 @@
 id: thm-total-variation-function-of-an-absolutely-continuous-function
 kind: theorem
 title: "Total-variation function of an absolutely continuous function"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-dependent-choice, def-total-variation-function-on-a-compact-interval, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-first-fundamental-theorem-of-calculus-for-l-one, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

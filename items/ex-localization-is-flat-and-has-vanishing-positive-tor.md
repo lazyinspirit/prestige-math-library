@@ -2,7 +2,7 @@
 id: ex-localization-is-flat-and-has-vanishing-positive-tor
 title: "Localization is flat and has vanishing positive Tor"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-a-left-module-is-flat-exactly-when-tor-one-with-every-right-module-vanishes", "def-left-and-right-flat-modules-over-an-arbitrary-ring"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

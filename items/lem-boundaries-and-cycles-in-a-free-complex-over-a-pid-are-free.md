@@ -2,7 +2,7 @@
 id: lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free
 title: "Boundaries and cycles in a free complex over a PID are free"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid", "thm-submodules-of-free-modules-over-a-pid-are-free"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

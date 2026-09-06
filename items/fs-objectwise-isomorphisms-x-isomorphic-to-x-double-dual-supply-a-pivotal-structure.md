@@ -2,7 +2,7 @@
 id: fs-objectwise-isomorphisms-x-isomorphic-to-x-double-dual-supply-a-pivotal-structure
 kind: false-statement
 title: "Objectwise isomorphisms X isomorphic to its double dual supply a pivotal structure"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-left-and-right-dual-objects-are-isomorphic-in-a-semisimple-multitensor-category, rem-objectwise-double-dual-isomorphisms-do-not-supply-a-pivotal-structure]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

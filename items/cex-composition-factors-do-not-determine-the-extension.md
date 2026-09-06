@@ -2,7 +2,7 @@
 id: cex-composition-factors-do-not-determine-the-extension
 kind: counterexample
 title: "Composition factors do not determine the extension"
-status: draft
+status: published
 origin: pipeline
 deps: [def-composition-series-composition-factors-and-length, def-external-direct-product-of-groups]
 provenance:
@@ -15,6 +15,7 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

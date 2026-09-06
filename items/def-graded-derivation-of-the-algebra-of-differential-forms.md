@@ -2,13 +2,15 @@
 id: def-graded-derivation-of-the-algebra-of-differential-forms
 kind: definition
 title: "A graded derivation of the algebra of differential forms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-smooth-differential-k-form, prop-differential-forms-form-a-graded-commutative-algebra]
 justified_by: []
+verification:
+  audited: 2026-09-06
 sources:
   scraped: []
   references:

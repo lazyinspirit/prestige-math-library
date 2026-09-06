@@ -2,13 +2,14 @@
 id: def-relative-computability-and-enumerability
 kind: definition
 title: "Relative computability and relative enumerability"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-turing-reduction, def-universal-and-acceptable-numbering]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

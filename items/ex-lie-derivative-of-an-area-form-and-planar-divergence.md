@@ -2,7 +2,7 @@
 id: ex-lie-derivative-of-an-area-form-and-planar-divergence
 kind: example
 title: "Lie derivative of an area form and planar divergence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-cartans-magic-formula, thm-local-coordinate-formula-for-the-exterior-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-proper-morse-slabs-give-complete-connecting-trajectories
 kind: proposition
 title: "Proper Morse slabs prevent finite-time escape of connecting trajectories"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-proper-smooth-function-and-compact-morse-slab, def-negative-gradient-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

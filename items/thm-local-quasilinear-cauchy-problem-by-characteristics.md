@@ -2,7 +2,7 @@
 id: thm-local-quasilinear-cauchy-problem-by-characteristics
 kind: theorem
 title: "Local quasilinear characteristic graph construction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-semilinear-and-quasilinear-first-order-cauchy-problems, def-augmented
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

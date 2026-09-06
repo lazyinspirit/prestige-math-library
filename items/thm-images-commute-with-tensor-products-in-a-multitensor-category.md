@@ -2,7 +2,7 @@
 id: thm-images-commute-with-tensor-products-in-a-multitensor-category
 kind: theorem
 title: "Images commute with tensor products in a multitensor category"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-the-tensor-product-in-a-multitensor-category-is-biexact, def-image-and-coimage-in-a-category-with-kernels-and-cokernels]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

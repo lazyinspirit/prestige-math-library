@@ -2,7 +2,7 @@
 id: ex-distance-to-a-subspace-via-annihilating-functionals
 kind: example
 title: Distance to a subspace via annihilating functionals
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-annihilator-of-a-subspace, thm-norm-preserving-extension-from-any-subspace]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

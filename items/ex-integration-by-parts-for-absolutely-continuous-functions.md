@@ -2,7 +2,7 @@
 id: ex-integration-by-parts-for-absolutely-continuous-functions
 kind: example
 title: "Integration by parts for absolutely continuous functions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-dependent-choice, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-integration-by-parts-for-absolutely-continuous-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

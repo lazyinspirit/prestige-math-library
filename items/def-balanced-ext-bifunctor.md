@@ -2,13 +2,14 @@
 id: def-balanced-ext-bifunctor
 kind: definition
 title: "The balanced Ext bifunctor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic, lem-the-ext-balance-isomorphism-is-independent-of-resolution-comparison-data, prop-the-ext-balance-isomorphism-is-natural-in-both-variables, prop-the-ext-balance-isomorphisms-satisfy-change-of-resolution-cocycle-laws]
 verification:
+  audited: 2026-09-06
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

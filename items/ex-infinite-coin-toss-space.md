@@ -2,7 +2,7 @@
 id: ex-infinite-coin-toss-space
 kind: example
 title: "The infinite fair-coin-toss space"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-product-of-probability-spaces, cor-coordinate-random-elements-on-a-countable-product-are-independent, def-countable-choice, def-dependent-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-restriction-corestriction-composite-is-multiplication-by-the-index
 kind: theorem
 title: "Corestriction after restriction multiplies by the index"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-restriction-and-corestriction-on-group-cohomology, lem-corestriction-is-independent-of-the-coset-representatives, cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

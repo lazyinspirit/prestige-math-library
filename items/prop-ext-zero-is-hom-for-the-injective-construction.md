@@ -2,7 +2,7 @@
 id: prop-ext-zero-is-hom-for-the-injective-construction
 kind: proposition
 title: "The degree-zero injective construction of Ext is Hom"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ext-via-an-injective-resolution-of-the-second-variable, thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor, lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions, lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

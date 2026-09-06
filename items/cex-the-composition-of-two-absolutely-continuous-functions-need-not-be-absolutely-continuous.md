@@ -2,7 +2,7 @@
 id: cex-the-composition-of-two-absolutely-continuous-functions-need-not-be-absolutely-continuous
 kind: counterexample
 title: "The composition of two absolutely continuous functions need not be absolutely continuous"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-dependent-choice, def-absolutely-continuous-function, cor-bounded-derivative-implies-lipschitz, thm-c1-lipschitz-ac-bv-hierarchy, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

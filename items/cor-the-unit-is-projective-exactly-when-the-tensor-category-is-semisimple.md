@@ -2,7 +2,7 @@
 id: cor-the-unit-is-projective-exactly-when-the-tensor-category-is-semisimple
 kind: corollary
 title: "The unit is projective exactly when the tensor category is semisimple"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-tensoring-with-a-dualizable-object-preserves-projectives, def-semisimple-object-and-semisimple-abelian-category]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-exterior-derivative-of-a-function-is-its-differential
 kind: proposition
 title: "The exterior derivative of a function is its differential"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-exterior-derivative-by-the-invariant-vector-field-formula, def-global
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

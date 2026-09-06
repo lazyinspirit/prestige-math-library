@@ -2,7 +2,7 @@
 id: ex-ring-of-integers-of-q-sqrt-five
 kind: example
 title: "The integral basis and discriminant of Q(sqrt 5)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-ring-of-integers-of-a-quadratic-field, cor-discriminant-of-a-quadratic-field, cor-order-index-discriminant-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

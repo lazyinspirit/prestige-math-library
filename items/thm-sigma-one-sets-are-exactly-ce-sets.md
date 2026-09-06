@@ -2,7 +2,7 @@
 id: thm-sigma-one-sets-are-exactly-ce-sets
 kind: theorem
 title: "Sigma_1^0 sets are exactly the computably enumerable sets"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sigma-n-pi-n-and-delta-n-sets, def-computable-and-partial-computable-function, def-decidable-and-recognizable-language, thm-kleene-normal-form]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-tor-is-symmetric-over-every-noncommutative-ring
 title: "Tor is not symmetric as a typed expression over every noncommutative ring"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-tor-symmetry-over-a-commutative-ring", "def-tor-by-resolving-the-left-module"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

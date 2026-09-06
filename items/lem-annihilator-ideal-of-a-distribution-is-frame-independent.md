@@ -2,7 +2,7 @@
 id: lem-annihilator-ideal-of-a-distribution-is-frame-independent
 kind: lemma
 title: "The annihilator ideal of a distribution is frame-independent"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-differential-ideal-in-the-algebra-of-forms, def-annihilator-bundle-of
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

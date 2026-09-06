@@ -2,7 +2,7 @@
 id: lem-countable-product-cylinder-premeasure-is-countably-additive
 kind: lemma
 title: "The countable-product cylinder premeasure is countably additive"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, def-product-measure-on-sigma-finite-spaces, prop-sigma-finite-section-measure-functions-are-measurable, thm-continuity-from-above-for-measures, def-countable-choice, thm-countable-union-of-countable, def-dependent-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

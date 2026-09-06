@@ -2,7 +2,7 @@
 id: cex-two-equivalent-higher-extensions-with-no-single-isomorphism-of-middle-terms
 kind: counterexample
 title: "Equivalent higher extensions need not have one middle-term isomorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

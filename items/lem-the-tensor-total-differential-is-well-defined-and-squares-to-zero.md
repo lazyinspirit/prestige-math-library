@@ -2,7 +2,7 @@
 id: lem-the-tensor-total-differential-is-well-defined-and-squares-to-zero
 title: "The tensor-total differential is balanced, well defined, and squares to zero"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tensor-product-total-complex-of-chain-complexes", "def-balanced-and-bilinear-maps"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

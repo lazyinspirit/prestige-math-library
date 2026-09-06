@@ -2,7 +2,7 @@
 id: lem-hom-into-an-injective-object-makes-the-projective-resolution-rows-exact
 kind: lemma
 title: "Hom into an injective makes projective-resolution rows exact"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hom-double-complex-of-a-projective-and-an-injective-resolution, thm-injective-object-characterisations]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

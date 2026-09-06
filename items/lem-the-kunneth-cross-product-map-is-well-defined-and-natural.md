@@ -2,7 +2,7 @@
 id: lem-the-kunneth-cross-product-map-is-well-defined-and-natural
 title: "The Kunneth cross-product map is well defined and natural"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-homology-cross-product-for-tensor-complexes"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

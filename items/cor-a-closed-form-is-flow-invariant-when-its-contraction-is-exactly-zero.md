@@ -2,7 +2,7 @@
 id: cor-a-closed-form-is-flow-invariant-when-its-contraction-is-exactly-zero
 kind: corollary
 title: "A closed form is flow-invariant when its contraction is zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-cartans-magic-formula, prop-a-tensor-field-is-invariant-under-a-flow-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

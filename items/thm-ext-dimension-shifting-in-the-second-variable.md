@@ -2,7 +2,7 @@
 id: thm-ext-dimension-shifting-in-the-second-variable
 kind: theorem
 title: "Ext dimension shifting in the second variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-long-exact-ext-sequence-in-the-second-variable, prop-positive-ext-vanishes-on-an-injective-second-variable, def-syzygy-and-cosyzygy-relative-to-a-resolution]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

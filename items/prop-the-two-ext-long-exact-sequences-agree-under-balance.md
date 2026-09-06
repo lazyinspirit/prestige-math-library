@@ -2,7 +2,7 @@
 id: prop-the-two-ext-long-exact-sequences-agree-under-balance
 kind: proposition
 title: "The two Ext long exact sequences agree under balance"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic, prop-the-ext-balance-isomorphism-is-natural-in-both-variables, thm-long-exact-ext-sequence-in-the-second-variable, thm-long-exact-ext-sequence-in-the-first-variable, thm-horseshoe-lemma-for-projective-resolutions, thm-horseshoe-lemma-for-injective-resolutions, thm-right-derived-functors-form-a-cohomological-delta-functor, thm-naturality-of-the-cohomology-connecting-morphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
 sources:
   scraped: []

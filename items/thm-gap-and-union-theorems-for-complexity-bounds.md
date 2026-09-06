@@ -2,14 +2,17 @@
 id: thm-gap-and-union-theorems-for-complexity-bounds
 kind: theorem
 title: "Gap and union theorems for abstract complexity bounds"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-computable-and-partial-computable-function]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Sebastiaan Terwijn, Complexity Theory, Theorem 5.6.1"

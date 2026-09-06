@@ -2,7 +2,7 @@
 id: cex-gauss-sum-sign-is-not-canonical-without-conventions
 kind: counterexample
 title: "Gauss-sum phase requires a convention"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [ex-gauss-sum-for-chi-four]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

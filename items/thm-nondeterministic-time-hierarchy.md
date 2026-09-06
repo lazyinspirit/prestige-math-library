@@ -2,14 +2,16 @@
 id: thm-nondeterministic-time-hierarchy
 kind: theorem
 title: "The nondeterministic time hierarchy theorem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-efficient-universal-simulation-with-clock, lem-effective-enumeration-of-clocked-machines, def-time-and-space-constructible-function, def-dtime-ntime-dspace-and-nspace]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Section 3.3, Theorem 3.3"

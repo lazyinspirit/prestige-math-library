@@ -2,14 +2,16 @@
 id: thm-simplicial-and-singular-homology-agree-for-simplicial-complexes
 kind: theorem
 title: "Simplicial and singular homology agree"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-simplicial-to-singular-chains-commute-with-boundaries, cor-the-simplex-has-zero-reduced-simplicial-homology, thm-five-lemma-for-a-morphism-of-long-exact-sequences]
 proof_strategy: induction
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-06
+  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Theorem 2.27"

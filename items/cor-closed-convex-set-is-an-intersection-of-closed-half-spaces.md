@@ -2,7 +2,7 @@
 id: cor-closed-convex-set-is-an-intersection-of-closed-half-spaces
 kind: corollary
 title: A closed convex set is an intersection of closed half-spaces
-status: draft
+status: published
 origin: pipeline
 deps: [thm-separation-of-disjoint-convex-sets-one-open, def-weak-and-strict-separation, def-metric-topology]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

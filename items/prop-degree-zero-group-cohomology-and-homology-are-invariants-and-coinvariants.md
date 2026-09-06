@@ -2,13 +2,15 @@
 id: prop-degree-zero-group-cohomology-and-homology-are-invariants-and-coinvariants
 kind: proposition
 title: "Degree-zero group (co)homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-group-cohomology-as-a-derived-functor, def-group-homology-as-a-derived-functor, thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor, thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor]
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   scraped: []
   references:

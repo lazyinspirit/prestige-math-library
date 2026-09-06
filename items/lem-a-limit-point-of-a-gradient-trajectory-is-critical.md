@@ -2,7 +2,7 @@
 id: lem-a-limit-point-of-a-gradient-trajectory-is-critical
 kind: lemma
 title: "Every precompact end-limit point of a negative-gradient trajectory is critical"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-precompact-trajectory-tail-limit-sets-are-nonempty-compact-connected-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

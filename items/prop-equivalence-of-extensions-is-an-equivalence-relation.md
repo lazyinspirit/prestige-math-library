@@ -2,7 +2,7 @@
 id: prop-equivalence-of-extensions-is-an-equivalence-relation
 kind: proposition
 title: "Equivalence of extensions is an equivalence relation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-equivalence-of-extensions, prop-a-morphism-of-extensions-is-an-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: rem-classification-of-finite-simple-groups
 kind: remark
 title: "Classification of finite simple groups"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -20,6 +20,11 @@ external_dependency:
   local_proof_attempt: "The external proof is not reproduced in this orientation page."
   necessity: "This landmark is not a dependency target and records the page boundary."
 verification:
+  audited: 2026-09-06
+  sources_checked:
+    date: 2026-09-06
+    scope: citations
+    by: session-audit
   precheck: n/a
 ---
 

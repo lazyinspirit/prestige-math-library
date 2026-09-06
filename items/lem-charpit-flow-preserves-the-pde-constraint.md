@@ -2,7 +2,7 @@
 id: lem-charpit-flow-preserves-the-pde-constraint
 kind: lemma
 title: "The Charpit flow preserves the PDE constraint"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lagrange-charpit-characteristic-system, thm-chain-rule-for-total-deri
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

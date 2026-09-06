@@ -2,14 +2,17 @@
 id: ex-mayer-vietoris-computation-of-the-torus-first-homology
 kind: example
 title: "Mayer–Vietoris computation of first homology of the torus"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-mayer-vietoris-sequence-in-singular-homology, cor-homology-of-spheres, prop-singular-homology-is-invariant-under-deformation-retracts]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-06
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.2"

@@ -2,7 +2,7 @@
 id: lem-holder-fourier-coefficients-have-weighted-ltwo-decay
 kind: lemma
 title: "Hölder Fourier coefficients have subcritical weighted ell-2 decay"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-dyadic-fourier-coefficient-square-sum-bound-for-holder-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

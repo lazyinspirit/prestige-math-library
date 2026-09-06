@@ -2,7 +2,7 @@
 id: lem-regular-sequence-permutation-adjacent-swap
 kind: lemma
 title: "Regular Sequence Permutation Adjacent Swap"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-sequence-on-a-module, cor-local-koszul-acyclicity-iff-regular-sequence, cor-koszul-complex-invariant-under-invertible-generator-change]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

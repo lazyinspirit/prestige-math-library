@@ -2,7 +2,7 @@
 id: thm-local-fully-nonlinear-cauchy-problem-by-charpit
 kind: theorem
 title: "Local fully nonlinear Charpit graph construction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-fully-nonlinear-first-order-pde-and-complete-integral, def-lagrange-charpit-characteristic-system, lem-charpit-flow-preserves-the-pde-constraint, lem-charpit-contact-compatibility-is-preserved, thm-continuous-dependence-of-odes-on-initial-data-and-parameters, thm-c1-dependence-of-solutions-on-initial-data, thm-euclidean-inverse-function-theorem]
 justified_by: []
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   references:
     - title: "Part I: Explicit methods — Lecture notes for MA342H"

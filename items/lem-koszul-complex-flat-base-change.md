@@ -2,7 +2,7 @@
 id: lem-koszul-complex-flat-base-change
 kind: lemma
 title: "Koszul Complex Flat Base Change"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-koszul-complex-of-a-sequence-with-coefficients, def-flat-and-faithfully-flat-modules-and-ring-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

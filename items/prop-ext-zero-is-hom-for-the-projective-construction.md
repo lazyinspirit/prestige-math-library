@@ -2,7 +2,7 @@
 id: prop-ext-zero-is-hom-for-the-projective-construction
 kind: proposition
 title: "The degree-zero projective construction of Ext is Hom"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ext-via-a-projective-resolution-of-the-first-variable, thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

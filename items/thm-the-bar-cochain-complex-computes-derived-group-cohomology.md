@@ -2,7 +2,7 @@
 id: thm-the-bar-cochain-complex-computes-derived-group-cohomology
 kind: theorem
 title: "The bar cochain complex computes group cohomology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-group-cohomology-as-a-derived-functor, thm-the-bar-complex-is-a-free-resolution-of-the-trivial-module, thm-homogeneous-and-inhomogeneous-group-cochains-are-isomorphic-complexes, def-hom-double-complex-of-a-projective-and-an-injective-resolution, lem-the-two-hom-double-complex-differentials-commute-before-signing, def-direct-sum-total-complex-on-finite-diagonals, lem-acyclic-assembly-by-exact-columns, lem-acyclic-assembly-by-exact-rows, lem-hom-from-a-projective-object-makes-the-injective-resolution-columns-exact, lem-hom-into-an-injective-object-makes-the-projective-resolution-rows-exact]
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-06
 sources:
   scraped: []
   references:

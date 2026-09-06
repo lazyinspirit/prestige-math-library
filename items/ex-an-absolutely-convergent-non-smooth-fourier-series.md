@@ -2,7 +2,7 @@
 id: ex-an-absolutely-convergent-non-smooth-fourier-series
 kind: example
 title: "An absolutely convergent Fourier series that is not twice continuously differentiable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-wiener-algebra-of-the-circle, thm-riemann-lebesgue-lemma-for-fourier-coefficients]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

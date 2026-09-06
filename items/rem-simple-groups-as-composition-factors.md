@@ -2,13 +2,14 @@
 id: rem-simple-groups-as-composition-factors
 kind: remark
 title: "Simple groups as composition factors"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-jordan-holder-theorem-for-groups]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

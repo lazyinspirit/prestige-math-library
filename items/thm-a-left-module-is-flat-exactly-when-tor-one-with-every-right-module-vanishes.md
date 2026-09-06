@@ -2,7 +2,7 @@
 id: thm-a-left-module-is-flat-exactly-when-tor-one-with-every-right-module-vanishes
 title: "A left module is flat exactly when Tor one against every right module vanishes"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-left-and-right-flat-modules-over-an-arbitrary-ring", "def-tor-by-resolving-the-right-module", "thm-horseshoe-lemma-for-projective-resolutions", "thm-long-exact-sequence-in-homology", "def-balanced-tor-bifunctor", "thm-universal-property-of-module-tensor-products"]
 proof_strategy: direct
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-06
   precheck: pass
 ---
 

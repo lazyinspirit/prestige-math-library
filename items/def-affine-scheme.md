@@ -2,12 +2,13 @@
 id: def-affine-scheme
 kind: definition
 title: "Affine schemes and their coordinate rings"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-affine-scheme-spectrum, cor-spectrum-with-structure-sheaf-locally-ringed, thm-global-sections-affine-scheme]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

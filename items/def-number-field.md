@@ -2,13 +2,14 @@
 id: def-number-field
 kind: definition
 title: "Number field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extension-degree-and-finite-extension]
 verification:
+  audited: 2026-09-06
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

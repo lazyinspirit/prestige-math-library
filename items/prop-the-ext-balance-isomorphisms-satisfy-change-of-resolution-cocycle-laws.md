@@ -2,7 +2,7 @@
 id: prop-the-ext-balance-isomorphisms-satisfy-change-of-resolution-cocycle-laws
 kind: proposition
 title: "Ext balance isomorphisms satisfy change-of-resolution cocycle laws"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-the-ext-balance-isomorphism-is-independent-of-resolution-comparison-data, prop-the-ext-balance-isomorphism-is-natural-in-both-variables]
 proof_strategy: direct
 verification:
+  audited: 2026-09-06
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
