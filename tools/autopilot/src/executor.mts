@@ -1741,6 +1741,7 @@ export class Executor {
     let ticks = 0;
     for (;;) {
       if (this.signal?.aborted) return 'aborted';
+      const version = this.stateVersion;
       const r = await this.tick();
       if (r === 'done' || r === 'stopped') return r;
       if (r === 'blocked') {
@@ -1762,7 +1763,18 @@ export class Executor {
       }
       ticks += 1;
       if (ticks >= maxTicks) return 'working';
-      await sleep(pollMs, this.signal);
+      // Drain completed boundaries immediately; keep the polling fallback for
+      // controls and adopted processes, whose completion has no local promise.
+      if (r === 'working' && !this.state.paused
+        && (this.stateVersion !== version
+          || this.currentStage().stage?.id !== this.state.data.stage)) continue;
+      const wait = new AbortController();
+      try {
+        await Promise.race([
+          sleep(pollMs, this.signal ? AbortSignal.any([this.signal, wait.signal]) : wait.signal),
+          ...[...this.inflight.values()].map(({ promise }) => promise),
+        ]);
+      } finally { wait.abort(); }
     }
   }
 }

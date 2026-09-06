@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -45,6 +45,25 @@ test('one bad id is reported without discarding a good neighbour', async () => {
   assert.equal(rows[0].id, good);
   assert.equal(rows[1].ok, false);
   assert.match((rows[1] as any).error, /could not build current judge context/);
+});
+
+test('hash misses share corpus loads across bounded chunks and preserve duplicate order', async () => {
+  const cwd = mkdtempSync(join(tmpdir(), 'context-batch-'));
+  mkdirSync(join(cwd, 'tools'));
+  writeFileSync(join(cwd, 'tools', 'judge.mts'), `
+import { appendFileSync } from 'node:fs';
+const ids = process.argv.at(-1).split(',');
+appendFileSync('calls.jsonl', JSON.stringify(ids) + '\\n');
+console.log(JSON.stringify({contexts: Object.fromEntries(ids.map(id => [id, {
+  context_sha256: 'a'.repeat(64), item_sha256: 'b'.repeat(64)
+}]))}));
+`);
+  const ids = Array.from({ length: 130 }, (_, i) => 'item-' + (i % 129));
+  const rows = await buildCurrentContextHashes(ids, { cwd, concurrency: 2 });
+  assert.deepEqual(rows.map((r: any) => r.id), ids);
+  assert.ok(rows.every((r: any) => r.ok));
+  const calls = readFileSync(join(cwd, 'calls.jsonl'), 'utf8').trim().split('\n').map((line) => JSON.parse(line));
+  assert.deepEqual(calls.map((c: any[]) => c.length).sort((a, b) => a - b), [2, 64, 64]);
 });
 
 test('the local hash pool refuses an unsafe concurrency override', async () => {

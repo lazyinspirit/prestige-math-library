@@ -65,7 +65,10 @@ notice something.
 Intervention is **read, never awaited**. The engine polls a small JSON file each
 tick; an owner who never touches it changes nothing, and one who writes to it
 gets an action at the next tick. Nothing in the design can block on a human
-being at the keyboard.
+being at the keyboard. Local dispatch completion wakes the engine immediately,
+including a completion that arrives during a tick. Completed boundaries advance
+without waiting for the polling interval; paused and blocked states retain their
+polling wait.
 
 ## How completion is decided
 
@@ -267,7 +270,11 @@ compacts at 200k total active-context tokens. Prompts
 require durable mathematical checkpoints for writing roles and evidence rereads
 after compaction; read-only roles preserve their no-write boundary. This threshold
 does not guarantee requests remain below 272k. Step-8 repair envelopes filter
-unrelated diagnostics while retaining full shared evidence on disk. See
+unrelated diagnostics while retaining full shared evidence on disk. Preflight and
+close assign all remaining findings together after mechanical repairs, route
+unknown ownership to one serial reviewer, and stop unchanged repair retries.
+Context-hash cache misses share corpus reads in bounded 64-item chunks using
+the canonical judge prompt builder, with per-item fallback on failure. See
 `WORKFLOW.md` for accounting limits and the continuity protocol.
 
 The platform-specific surface is **one config value**, an argv array:

@@ -74,6 +74,54 @@ const gatedStage = (fx: any, gates: any[], hooks: any = {}) => [{
   ...hooks,
 }];
 
+test('run wakes on child completion and drains a completed boundary without polling', async () => {
+  const fx = fixture();
+  const stages = ['first', 'second'].map((id) => ({
+    id, label: id, units: () => ['1'], pattern: new RegExp(`^tool-${id}\\.result\\.json$`),
+    plan: () => [{ role: 'tool', label: id, job: 'bookkeeping-mechanical', covers: ['1'],
+      argv: ['node', '-e', 'setTimeout(() => {}, 20)'] }],
+    gates: () => [loggingGate(fx, id)],
+  }));
+  const { ex } = makeExecutor(fx, stages);
+  const tick = ex.tick.bind(ex);
+  ex.tick = async () => {
+    const result = await tick();
+    if (ex.state.data.stage === 'second')
+      await Promise.all([...ex.inflight.values()].map(({ promise }) => promise));
+    return result;
+  };
+  const abort = new AbortController();
+  ex.signal = abort.signal;
+  const timer = setTimeout(() => abort.abort(), 5000);
+  try {
+    assert.equal(await ex.run({ pollMs: 60_000 }), 'done');
+    assert.deepEqual(gateRuns(fx), ['first', 'second']);
+    assert.equal(ex.inflight.size, 0);
+  } finally { clearTimeout(timer); }
+});
+
+test('paused engine retains its polling wait even at a completed boundary', async () => {
+  const fx = fixture();
+  cover(fx, 'worker', 'a1', ['1']);
+  const { ex } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'g1')]));
+  ex.state.paused = true;
+  let ticks = 0;
+  const tick = ex.tick.bind(ex);
+  ex.tick = async () => { ticks++; return tick(); };
+  await ex.run({ pollMs: 40, maxTicks: 2 });
+  assert.equal(ticks, 2);
+  assert.deepEqual(gateRuns(fx), []);
+});
+
+test('invalid stage tables hold on the polling clock instead of spinning', async () => {
+  const fx = fixture();
+  const { ex } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'g1')]));
+  ex.specProblems = [{ stage: 's1', message: 'invalid fixture' }] as any;
+  const started = Date.now();
+  await ex.run({ pollMs: 40, maxTicks: 3 });
+  assert.ok(Date.now() - started >= 70, 'both blocked ticks must wait');
+});
+
 test('a failed battery does not re-run until a state-changing event', async () => {
   const fx = fixture();
   cover(fx, 'worker', 'a1', ['1']);

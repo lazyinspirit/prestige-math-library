@@ -249,6 +249,37 @@ test('contract residue cannot consume rejudge budget and is routed at Step-8 clo
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('Step-8 repair removes mechanically handled owners and serializes unknown scope', async () => {
+  for (const stageId of ['8-preflight', '8-close']) {
+    const repo = groupedFixture();
+    writeFileSync(join(repo, 'tools', 'splice-plan.mjs'), 'process.exit(0);\n');
+    writeFileSync(join(repo, 'tools', 'manifest-deps.mjs'),
+      'console.error("ERROR invalid-deps [thm-demo-y]"); process.exit(1);\n');
+    const stage: any = stages.find((s: any) => s.id === stageId);
+    const started: any[] = [];
+    const ctx = { run: 'demo', repo };
+    const executor = { start: (_s: any, plan: any) => started.push(plan) };
+    await stage.onGateFailure({ ctx, executor, stage, round: 1, failure: {
+      id: 'splice-verify', output: '[thm-demo-x]', advisory: [
+        { id: 'manifest-deps', output: 'ERROR invalid-deps [thm-demo-y]' },
+        { id: 'risk-report', output: 'ERROR risk-review-missing [thm-demo-y]' },
+      ],
+    } });
+    assert.equal(started.length, 1);
+    assert.match(started[0].label, /-b-1$/);
+    const before = stage.repairFingerprint(ctx);
+    writeFileSync(join(repo, 'research', 'demo-step8-alert-decisions.jsonl'), '{"decision":"updated"}\n');
+    assert.notEqual(stage.repairFingerprint(ctx), before, 'cognitive decisions rearm repair');
+    started.length = 0;
+    await stage.onGateFailure({ ctx, executor, stage, round: 2, failure: {
+      id: 'risk-report', output: 'ERROR risk-review-missing [lem-unowned-fixture]',
+    } });
+    assert.equal(started.length, 1);
+    assert.match(started[0].label, /review/);
+    rmSync(repo, { recursive: true, force: true });
+  }
+});
+
 test('Step-8 close routes boundary-audit item summaries to their exact owners', async () => {
   const repo = groupedFixture();
   const started: any[] = [];

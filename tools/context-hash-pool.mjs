@@ -1,7 +1,6 @@
-// Build the exact frozen-prompt hashes used by the judge, with bounded local
-// parallelism. This changes only scheduling: every item still runs the canonical
-// `judge.mts --context-hash` path, so the bytes and hashes are identical to the
-// former serial callers.
+// Build exact frozen-prompt hashes in bounded chunks. The canonical judge
+// --context-hashes path shares a corpus read across each chunk; a failed chunk
+// falls back to individual builds so malformed items cannot hide healthy ones.
 
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, renameSync, writeFileSync } from 'node:fs';
@@ -29,7 +28,9 @@ function configuredConcurrency(requested) {
 function buildOne(id, { cwd, env, loader, timeoutMs }) {
   return new Promise((resolve) => {
     const child = spawn(process.execPath,
-      ['--import', loader, 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
+      ['--import', loader, 'tools/judge.mts', ...(Array.isArray(id)
+        ? ['--context-hashes', id.join(',')]
+        : [`items/${id}.md`, '--context-hash'])],
       { cwd, env, stdio: ['ignore', 'pipe', 'pipe'] });
     const stdout = [];
     const stderr = [];
@@ -74,6 +75,15 @@ function buildOne(id, { cwd, env, loader, timeoutMs }) {
       try { row = JSON.parse(out); }
       catch (cause) {
         finish({ ok: false, id, error: `${id}: malformed current context hash output — ${cause.message}` });
+        return;
+      }
+      if (Array.isArray(id)) {
+        const rows = id.map((key) => ({ ok: true, id: key,
+          context: row.contexts?.[key]?.context_sha256,
+          item: row.contexts?.[key]?.item_sha256 }));
+        if (rows.every((entry) => /^[a-f0-9]{64}$/.test(entry.context ?? '')
+          && /^[a-f0-9]{64}$/.test(entry.item ?? ''))) finish({ ok: true, rows });
+        else finish({ ok: false, error: 'malformed batch context hashes' });
         return;
       }
       if (row.id !== id || typeof row.context_sha256 !== 'string') {
@@ -144,17 +154,22 @@ export async function buildCurrentContextHashes(ids, options = {}) {
     } catch { /* rebuild an unreadable or stale cache */ }
   }
   const results = new Array(ordered.length);
+  const missing = ordered.map((id, index) => ({ id, index })).filter(({ id, index }) => {
+    const cached = cachedRows.get(id);
+    if (cached) results[index] = { ok: true, ...cached };
+    return !cached;
+  });
   let next = 0;
 
   const worker = async () => {
     for (;;) {
-      const index = next;
-      next += 1;
-      if (index >= ordered.length) return;
-      const cached = cachedRows.get(ordered[index]);
-      results[index] = cached
-        ? { ok: true, id: cached.id, context: cached.context, item: cached.item }
-        : await buildOne(ordered[index], { cwd, env, loader, timeoutMs });
+      const chunk = missing.slice(next, next += 64);
+      if (!chunk.length) return;
+      const batch = await buildOne(chunk.map(({ id }) => id), { cwd, env, loader, timeoutMs });
+      // A malformed/missing item must not discard its healthy neighbours.
+      for (const [offset, { id, index }] of chunk.entries()) results[index] = batch.ok
+        ? batch.rows[offset]
+        : await buildOne(id, { cwd, env, loader, timeoutMs });
     }
   };
   await Promise.all(Array.from({ length: concurrency }, worker));

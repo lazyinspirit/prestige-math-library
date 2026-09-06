@@ -149,7 +149,9 @@ group never starts while an earlier group still has a dispatch in flight.
 
 Concurrency is the minimum of stage capacity, optional global capacity, and the
 shared role capacity across a pipeline; the dispatcher enforces role slots too.
-Starts are staggered by three seconds by default. The executor uses argv with
+Starts are staggered by three seconds by default. Child completion wakes the
+executor, and completed stage boundaries advance immediately. Polling remains
+the fallback for external processes and controls. The executor uses argv with
 `shell:false` and kills a timed-out dispatch process group after its grace
 period. It adopts a live external dispatch only when its run, result pattern,
 and covers match the current stage, then reconciles its eventual result into
@@ -300,8 +302,10 @@ current verdict from the configured set; retained rows for unselected sets are
 evidence, not coverage.
 
 When stamp verification needs pair-context hashes, `judge.mts` computes the
-requested set in one process and one corpus read instead of reloading the
-repository in a subprocess for every item.
+requested set in one process and one corpus read. The shared context-hash pool
+also batches cache misses into chunks of at most 64 items, under its existing
+process cap. Failed chunks fall back to individual builds. Both paths use the
+same prompt builder and preserve exact hashes and per-item failure reporting.
 
 Step-7 group Alphas still read their entire assigned groups against frozen text
 and emit schema-checked digests. Step 8 starts a fresh Sol adjudication from the
@@ -332,6 +336,11 @@ Step-8 repair prompts carry complete diagnostic records relevant to their owner,
 including cross-owner references and ambiguous records. One shared evidence file
 retains the full battery output and assignment map; each prompt identifies its
 path and hash. Filtering prompt context never changes routing or whole-level gates.
+At Step-8 preflight and close, successful mechanical repairs are removed from
+cognitive assignments individually, even when another mechanical repair fails.
+Unknown ownership routes to one serial reviewer. Repeated identical failures
+after a repair that changed no corpus, contracts, decisions or tooling stop
+before another agent call. The complete final battery remains mandatory.
 
 `8-preflight` closes non-judge integrity before paid rejudgment. `8-rejudge`
 targets only items repaired by the initial Sol adjudicator. Each repaired item

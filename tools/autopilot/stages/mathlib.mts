@@ -495,7 +495,7 @@ const OUTAGE_CLASSIFIERS: Record<string, (ctx: any, startedAt: string) => string
  *                 `fetch-check-...: <page>: <url>` lines, or a bare URL); the
  *                 caller may route the residue to a scouting dispatch.
  *  'unhandled'  — no table entry for any of the failing gates. */
-export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [] }: any): Promise<{ outcome: string; stderr?: string; reason?: string }> => {
+export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [] }: any): Promise<{ outcome: string; stderr?: string; reason?: string; handledIds?: string[] }> => {
   const excluded = new Set((excludeGateIds ?? []).map(String));
   const failing = [failure, ...(failure?.advisory ?? [])].filter((f: any) => f?.id);
   const handled = failing.filter((f: any) => !excluded.has(String(f.id)) && MECHANICAL_REPAIRS[f.id]);
@@ -503,6 +503,7 @@ export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [] }: an
 
   const { spawnSync } = await import('node:child_process');
   const residues: string[] = [];
+  const handledIds: string[] = [];
   for (const f of handled) {
     const declared = MECHANICAL_REPAIRS[f.id](ctx);
     // One gate may own several repairs, run in order, most-preferred first.
@@ -532,9 +533,10 @@ export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [] }: an
     // defects on different rows — and stopping at the first would reinstate
     // exactly the starvation this loop exists to end.
     if (r.status !== 0) residues.push((r.stderr || r.stdout || '').trim());
+    else handledIds.push(f.id);
   }
-  if (residues.length) return { outcome: 'residual', stderr: residues.join('\n') };
-  return { outcome: 'clean' };
+  if (residues.length) return { outcome: 'residual', stderr: residues.join('\n'), handledIds };
+  return { outcome: 'clean', handledIds };
 };
 
 /** Owner instruction (2026-08-17): when a source cannot be fetched or
@@ -1117,13 +1119,11 @@ function step8RepairAssignments(ctx: any, ids: string[]): Array<{ id: string; sc
 }
 
 /** Resolve Step-8 repair owners without treating a published item as an unknown
- * run item. Unknown ids still fan out loudly under `step8Owners`' contract. */
+ * run item. Unknown ownership requires one serial reviewer. */
 function step8RepairOwners(ctx: any, ids: string[]): Array<string | null> {
   const assignments = step8RepairAssignments(ctx, ids);
+  if (assignments.some((row) => row.scope === 'unknown')) return [null];
   const known = new Set(assignments.map((row) => row.owner).filter(Boolean) as string[]);
-  if (assignments.some((row) => row.scope === 'unknown'))
-    for (const owner of step8Owners(ctx, assignments.filter((row) => row.scope === 'unknown').map((row) => row.id)))
-      if (owner) known.add(owner);
   const labels = alphaGroups(ctx).map((group: any) => String(group.label));
   const ordered = labels.filter((label) => known.has(label));
   if (ordered.length) return ordered;
@@ -1133,6 +1133,17 @@ function step8RepairOwners(ctx: any, ids: string[]): Array<string | null> {
 function resolveStep8Task(ctx: any, task: string | string[]): string {
   const candidates = Array.isArray(task) ? task : [task];
   return candidates.find((candidate) => existsSync(R(ctx, candidate))) ?? candidates[candidates.length - 1];
+}
+
+function step8RepairFingerprint(ctx: any): string {
+  const hash = createHash('sha256').update(repairFingerprint(ctx));
+  for (const suffix of ['judge-adjudications.jsonl', 'step8-alert-decisions.jsonl',
+    'step8-cross-group.jsonl', 'step8-published-repairs.jsonl',
+    'step8-owner-prerequisite-repairs.jsonl', 'step8-terminal-resolutions.jsonl']) {
+    const path = R(ctx, `research/${ctx.run}-${suffix}`);
+    hash.update(existsSync(path) ? readFileSync(path) : '<missing>');
+  }
+  return hash.digest('hex');
 }
 
 /** Materialise the exact evidence a Step-8 repair dispatch owns. Event-log
@@ -2758,6 +2769,8 @@ export const stages = [
   // cycles, and its final text is what the judges then receive.
   {
     id: '8-preflight',
+    batchRepairs: true,
+    repairFingerprint: step8RepairFingerprint,
     label: 'verify Step-8 repairs before rejudge',
     units: () => ['all'],
     pattern: resultPattern('tool', 'step8-preflight'),
@@ -2794,9 +2807,9 @@ export const stages = [
       // verdicts before that decision merely makes them stale again.
       const mechanical = await mechanicalRepair({ ctx, failure, excludeGateIds: ['judge-closure'] });
       if (mechanical.outcome === 'outage') return { outage: { reason: mechanical.reason! } };
-      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id);
-      const needsAgent = failures.some((entry: any) => entry.id === 'judge-closure' || !MECHANICAL_REPAIRS[entry.id]);
-      if (mechanical.outcome === 'clean' && !needsAgent) return;
+      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id
+        && !mechanical.handledIds?.includes(entry.id));
+      if (!failures.length) return;
       refreshStep8Scope(ctx);
       const closure = failures.some((entry: any) => entry.id === 'judge-closure') ? readClosure(ctx) : null;
       const routeEvidence = {
@@ -2995,6 +3008,8 @@ export const stages = [
   // already closed.
   {
     id: '8-close',
+    batchRepairs: true,
+    repairFingerprint: step8RepairFingerprint,
     label: 'final Step-8 integrity closure',
     units: () => ['all'],
     pattern: resultPattern('tool', 'step8-close-scope'),
@@ -3021,9 +3036,9 @@ export const stages = [
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
       const mechanical = await mechanicalRepair({ ctx, failure });
       if (mechanical.outcome === 'outage') return { outage: { reason: mechanical.reason! } };
-      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id);
-      const needsAgent = failures.some((entry: any) => !MECHANICAL_REPAIRS[entry.id]);
-      if (mechanical.outcome === 'clean' && !needsAgent) return;
+      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id
+        && !mechanical.handledIds?.includes(entry.id));
+      if (!failures.length) return;
       refreshStep8Scope(ctx);
       const named = itemsFromGateFailure({
         output: `${failures.map((entry: any) => `${entry.output ?? ''}\n${entry.why ?? ''}`).join('\n')}\n${mechanical.stderr ?? ''}`,
