@@ -214,7 +214,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
   for (const digest of readAllDigests()) {
     const from = String(digest.group ?? '');
     for (const raw of includeConcerns ? (digest.concerns ?? []) : []) {
-      const owner = index.itemOwner.get(raw.id)?.group;
+      const owner = (index.itemOwner.get(raw.id) ?? index.pageOwner.get(raw.id))?.group;
       const alert = {
         version: 1,
         source: 'step7-read',
@@ -884,7 +884,9 @@ for (const alert of alertReceipt.alerts) {
   }
   if (decision.outcome === 'confirmed_fatal') {
     const path = R('items', `${alert.item}.md`);
-    if (alert.source !== 'step7-read') {
+    if (!index.itemOwner.has(alert.item)) {
+      problems.push(`${alert.alert_id}: page warning cannot license an item repair; identify the affected item or escalate the page defect`);
+    } else if (alert.source !== 'step7-read') {
       problems.push(`${alert.alert_id}: only a Step-7 reader warning may directly license a fatal repair`);
     } else if (!/^[a-f0-9]{64}$/.test(String(decision.item_sha256 ?? ''))
       || !/^[a-f0-9]{64}$/.test(String(decision.post_sha256 ?? ''))

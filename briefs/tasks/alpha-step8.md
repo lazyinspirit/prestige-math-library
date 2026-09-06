@@ -30,6 +30,12 @@ defect-ledger row whose structured `adjudication_ref` contains this `alert_id`,
 licence; later cross-group alerts raised while
 adjudicating a judge rejection still require a targeted judge rejection.
 
+A warning may name an owned page, for example a missing prerequisite page.
+Read the page and its declared prerequisites and retain an explicit disposition.
+A page warning grants no item-edit authority: identify the affected item and its
+fatal evidence, or report an unresolved page defect with
+`confirmed_fatal_unlicensed`. Never dismiss it merely because it names a page.
+
 Every `confirmed_fatal` row must also set `defect_type` to exactly one of
 `logic`, `dependency_citation`, or `other`. Descriptive defect-ledger subclasses
 such as `invalid-inference`, `false-claim`, or `ill-typed-construction` are not

@@ -471,7 +471,7 @@ function withFixtureRun(files: Record<string, unknown>, body: (run: string) => v
   }
 }
 
-test('every Step-7 reader concern becomes an owning-group Step-8 decision', () => {
+for (const subject of ['thm-demo-one', 'page-demo']) test(`Step-7 concern on ${subject} requires an owning-group decision`, () => {
   withFixtureRun({
     'alpha-groups.json': [{ label: 'a', covers: ['1'] }],
     'batch-1.pages.json': [{
@@ -483,7 +483,7 @@ test('every Step-7 reader concern becomes an owning-group Step-8 decision', () =
       conventions: [{ convention: 'Demo convention', fixed_by: 'thm-demo-one', matters_for: ['thm-demo-one'] }],
       load_bearing: [{ id: 'thm-demo-one', statement: 'Demo statement', used_by: [] }],
       published_dependencies: [],
-      concerns: [{ id: 'thm-demo-one', concern: 'The endpoint case is not justified.', severity: 'would-be-fatal' }],
+      concerns: [{ id: subject, concern: 'The endpoint case is not justified.', severity: 'would-be-fatal' }],
       alerts: [], seams_checked: [],
     },
   }, (run) => {
@@ -506,12 +506,20 @@ test('every Step-7 reader concern becomes an owning-group Step-8 decision', () =
       assert.match(`${unanswered.stdout}${unanswered.stderr}`, /has no owning-group disposition/);
       writeFileSync(generated[7], `${JSON.stringify({
         version: 1, alert_id: alerts[0].alert_id, from_group: 'a', owning_group: 'a',
-        item: 'thm-demo-one', outcome: 'nonfatal',
+        item: subject, outcome: 'nonfatal',
         rationale: 'The concern is presentational and the written statement remains mathematically valid.',
         at: new Date().toISOString(),
       })}\n`);
       const answered = check(run);
       assert.equal(answered.status, 0, `${answered.stdout}${answered.stderr}`);
+      if (subject === 'page-demo') {
+        const decision = JSON.parse(readFileSync(generated[7], 'utf8'));
+        writeFileSync(generated[7], JSON.stringify({ ...decision, outcome: 'confirmed_fatal',
+          defect_type: 'dependency_citation', item_sha256: 'a'.repeat(64), post_sha256: 'b'.repeat(64) }) + '\n');
+        const fatal = check(run);
+        assert.notEqual(fatal.status, 0);
+        assert.match(`${fatal.stdout}${fatal.stderr}`, /page warning cannot license/);
+      }
     } finally {
       for (const path of generated) rmSync(path, { force: true });
     }

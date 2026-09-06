@@ -320,6 +320,9 @@ alerts requiring the owner's group disposition. Every reader concern and alert,
 not only judge rejections, is a mechanically checked Sol adjudication
 obligation. A reader warning confirmed fatal on exact pre-edit bytes licenses
 its owning Sol group adjudicator to repair the item.
+Owned-page concerns also route to their group for an explicit disposition.
+They cannot directly license an item repair; an unresolved page defect remains
+blocked until its actual scope and remedy are established.
 
 Step-8 adjudicators have web search enabled. Whenever their mathematics is
 uncertain, their task requires them to verify the point against original
