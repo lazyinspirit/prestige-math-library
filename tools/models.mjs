@@ -27,6 +27,7 @@ export const MODELS = Object.freeze({
 // Stage-scoped overrides. A role still owns its sandbox, web access and cap;
 // a profile changes only the model/provider, reasoning tier and context window.
 export const MODEL_PROFILE_NAMES = Object.freeze({
+  astraMedium: 'gpt-6-astra-medium',
   terraHigh: 'gpt-5.6-terra-high',
 });
 
@@ -37,6 +38,10 @@ export const MODEL_PROFILE_NAMES = Object.freeze({
 const LIVE_TERRA_XHIGH_COMPAT = 'gpt-5.6-terra-xhigh';
 
 export const MODEL_PROFILES = Object.freeze({
+  [MODEL_PROFILE_NAMES.astraMedium]: Object.freeze({
+    model: MODELS.astra.id, runner: MODELS.astra.runner, family: MODELS.astra.family,
+    provider: 'openai', effort: 'medium', requestedEffort: 'medium', contextWindow: 1_000_000,
+  }),
   [MODEL_PROFILE_NAMES.terraHigh]: Object.freeze({
     model: MODELS.terra.id,
     runner: MODELS.terra.runner,

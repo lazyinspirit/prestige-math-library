@@ -3139,6 +3139,9 @@ export const stages = [
     // Alpha can never race the files that define its scope.
     plan: (ctx, pending) => {
       if (!pending.length) return [];
+      const restart = R(ctx, `research/${ctx.run}-step9-restart.json`);
+      if (existsSync(restart) && JSON.parse(readFileSync(restart, 'utf8')).controller_pid === process.pid)
+        throw new Error('Owner-requested controller restart at Step 9 is pending; no Step-9 work has launched');
       if (!step9ScopePrepared(ctx)) return [{
         role: 'tool', label: 'step9-scope-prepare', job: 'bookkeeping-mechanical', covers: [],
         argv: ['node', 'tools/scope-decisions.mjs', 'prepare', '--run', ctx.run,
@@ -3718,7 +3721,9 @@ export const stages = [
 // fall back to their role's ordinary lane. Tool plans remain deterministic.
 for (const stage of stages) {
   if (/^(?:9|10)-/.test(stage.id)) {
-    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : TERRA_HIGH;
+    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined
+      : stage.id === '9-scope' && plan.role === 'alpha' && plan.label === 'step9-lead'
+        ? MODEL_PROFILE_NAMES.astraMedium : TERRA_HIGH;
   }
 }
 

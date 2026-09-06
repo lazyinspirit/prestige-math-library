@@ -82,7 +82,9 @@ provider isolation, session handling, and output capture. The current judge
 lineup is the singleton `gpt-5.6-terra` lane. Following GPT-5.4's retirement
 from Codex with ChatGPT sign-in, ordinary agentic and secondary lanes use
 `gpt-5.6-terra`; Step-5 authoring, Step-6 readers and refuters, Step-7 group
-readers, and all Step-9/10 agent dispatches use its `high` profile. Group Alpha
+readers, and Step-9/10 agent dispatches use its `high` profile, except the
+Step-9 Lead Alpha (`step9-lead`), which uses `gpt-6-astra` at `medium`.
+Group Alpha
 review and adjudication use `gpt-5.6-sol` at `high`; Step-8 fatal adjudication
 remains on Sol at `xhigh`. Exhausted Step-8 final adjudication uses
 `gpt-6-astra` at `medium`.
@@ -440,6 +442,10 @@ active work and state available for later adoption. `retry` re-arms failed or
 unfinished lanes and unfinished repair accounting after intervention, but cannot
 extend the durable per-item judge-cycle cap. `skip` is an owner action that
 marks a stage complete and waives its assurance.
+
+An owner-requested Step-9 restart can be bound to the old controller PID in
+`research/<run>-step9-restart.json`. That controller holds before any Step-9
+dispatch; after it exits, a fresh controller continues with the saved evidence.
 
 ## Step-10 boundary
 

@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -17,6 +18,18 @@ const ctx: any = {
 const stage = (id: string): any => stages.find((candidate: any) => candidate.id === id);
 const selected = (s: any, plan: any): string | undefined => plan.profile
   ?? (typeof s.modelProfile === 'function' ? s.modelProfile(plan) : s.modelProfile);
+
+test('Step 9 restart request blocks the old controller before dispatch and admits its replacement', () => {
+  const repo = mkdtempSync(join(tmpdir(), 'step9-restart-'));
+  mkdirSync(join(repo, 'research'));
+  const path = join(repo, 'research/demo-step9-restart.json');
+  try {
+    writeFileSync(path, JSON.stringify({ controller_pid: process.pid }));
+    assert.throws(() => stage('9-scope').plan({ repo, run: 'demo' }, ['all']), /restart.*pending/);
+    writeFileSync(path, JSON.stringify({ controller_pid: process.pid + 1 }));
+    assert.equal(stage('9-scope').plan({ repo, run: 'demo' }, ['all'])[0].label, 'step9-scope-prepare');
+  } finally { rmSync(repo, { recursive: true, force: true }); }
+});
 
 test('the tracked dispatcher argv forwards stage-selected profiles', () => {
   const config = JSON.parse(readFileSync(join(REPO, 'autopilot.config.json'), 'utf8'));
@@ -82,7 +95,7 @@ test('Step-8 fatal group adjudicator uses Sol xhigh', () => {
   assert.equal(row.provider_effort, 'xhigh');
 });
 
-test('every model-backed Step 9 and Step 10 dispatch inherits Terra high, including repairs', () => {
+test('only Step 9 Lead Alpha uses Astra medium; other late-stage agents retain Terra high', () => {
   for (const s of stages.filter((candidate: any) => /^(?:9|10)-/.test(candidate.id))) {
     for (const role of ['alpha', 'alpha-high', 'alpha-report', 'beta']) {
       assert.equal(selected(s, { role, job: 'audit' }), MODEL_PROFILE_NAMES.terraHigh,
@@ -93,4 +106,9 @@ test('every model-backed Step 9 and Step 10 dispatch inherits Terra high, includ
   }
   assert.equal(selected(stage('8-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }), undefined,
     'Step 8 must retain its dedicated adjudication role');
+  assert.equal(selected(stage('9-scope'), { role: 'alpha', label: 'step9-lead', job: 'audit' }),
+    MODEL_PROFILE_NAMES.astraMedium);
+  const profile = MODEL_PROFILES[MODEL_PROFILE_NAMES.astraMedium];
+  assert.equal(profile.model, MODELS.astra.id);
+  assert.equal(profile.effort, 'medium');
 });
