@@ -289,8 +289,11 @@ deferred, not deleted.
     published adjunction machinery.** Not commissioned; the torus is handled
     as a product, not a polygon-with-identifications.
 12. **CH/GCH proved either way; GCH $\Rightarrow$ AC.** Independence facts
-    stay ‡ on `deferred-set-theory-beyond-choice` per the axiom exemption;
-    ST-2 states, cites, never proves.
+    remain ‡ until the new Foundations completion track is authored. They are
+    now licensed, not erased: `plan-set-theory-completion-track.md` SET-6 proves
+    GCH $\Rightarrow$ AC in ZF, SET-11/12 proves the constructible-universe
+    direction, and SET-13--15 proves the forcing direction with a separate
+    formal relative-consistency transfer. ST-2 still states and cites only.
 13. **The cofinality FUNCTION $\operatorname{cf}(\alpha)$, and regularity or
     singularity of $\omega_1$.** ST-1 defines only *cofinal subset of an
     ordinal*, which is all its boundedness theorem needs. The function and the
@@ -319,18 +322,22 @@ deferred, not deleted.
     phase-format, so refuting them would use ‡ material as a proof step. The
     self-contained-scope rule allows independence facts about AC as MENTIONS
     only. Both survive as sentences in `rem-cardinal-arithmetic-choice-ledger`,
-    which mentions the ‡ records through `external_refs`. Licensed by: a track
-    that develops forcing, which is out of scope by construction.
+    which mentions the ‡ records through `external_refs`. Licensed by:
+    SET-11--15 and SET-31 of `plan-set-theory-completion-track.md`; the `fs-`
+    items may be minted only after those proof destinations publish.
 18. **The Suslin line and Suslin trees, and Martin's axiom.** They stay ‡ on
     `deferred-set-theory-beyond-choice` and `open-problems-and-research-frontier`.
     247 supplies cofinality and 253 supplies the order topology of a linearly
     ordered set, but the ccc arguments additionally need separability and the
     countable chain condition, which are `countability-axioms-and-cardinal-
-    functions` (spec order 273). Licensed by: page 273.
+    functions` (spec order 273). Licensed by: that topology page plus SET-8/9
+    and SET-15--17 of `plan-set-theory-completion-track.md`.
 19. **Cardinal invariants of the continuum**, and any statement of the form
     "$\mathfrak{b}$, $\mathfrak{d}$, $\mathfrak{c}$ satisfy ...". Not
     commissioned; 247 proves the one ZFC constraint that was asked for,
-    $\operatorname{cf}(2^{\aleph_0}) > \aleph_0$. Licensed by: a dedicated page.
+    $\operatorname{cf}(2^{\aleph_0}) > \aleph_0$. Licensed by: SET-31,
+    `eastons-theorem-and-cardinal-invariants-of-the-continuum`, in the new
+    Foundations completion scaffold.
 
 ---
 
