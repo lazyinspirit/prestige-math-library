@@ -2,7 +2,7 @@
 id: prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold
 kind: proposition
 title: "An oriented transverse normal bundle orients an embedded submanifold"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -28,16 +25,22 @@ sources:
 
 ## Statement
 
-For an embedded submanifold, any two of the orientations of the ambient tangent bundle, tangent bundle, and transverse normal bundle determine the third.
+Assume $\mathrm{AC}_\omega$. For an embedded submanifold, any two of the orientations of the ambient tangent bundle, tangent bundle, and transverse normal bundle determine the third.
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** The axiom $\mathrm{AC}_\omega$, an embedded submanifold $S\subseteq M$, and orientations of any two among $TM|_S$, $TS$, and the normal bundle $\nu S$.
+
+[L1] Under $\mathrm{AC}_\omega$, the normal bundle is a smooth vector bundle ([[prop-normal-and-conormal-bundles-are-smooth-vector-bundles]]).
+
+[L2] Its fibre is the quotient $\nu_pS=T_pM/T_pS$ ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]).
+
+[L3] An orientation is a positive ray in the one-dimensional determinant line ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The exact sequence $0\to TS\to TM|_S\to\nu S\to0$ gives an ordered determinant isomorphism $\det(TM|_S)\cong\det(TS)\otimes\det(\nu S)$. [given]
+1.1 By [L1] and [L2], $0\to TS\to TM|_S\to\nu S\to0$ is an exact sequence of smooth vector bundles. Local frames of $TS$ extended to frames of $TM|_S$ give the ordered smooth determinant-line isomorphism $\det(TM|_S)\cong\det(TS)\otimes\det(\nu S)$. [given, L1, L2, construct]
 
-2.1 Tensoring or solving for either one-dimensional ray proves each of the three determinations. [step 1.1] ∎
+2.1 Under this isomorphism, [L3] turns any two selected positive rays into a unique third ray: tensor the tangent and normal rays to obtain the ambient ray, or choose the unique tangent or normal ray whose tensor product is the prescribed ambient ray. Smoothness is local in the adapted frames, so each resulting ray field is an orientation. [L3, step 1.1] ∎

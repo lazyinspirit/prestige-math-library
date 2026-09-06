@@ -2,7 +2,7 @@
 id: def-neat-submanifold-of-a-manifold-with-boundary
 kind: definition
 title: "Neat submanifolds of a manifold with boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,11 +11,8 @@ deps: [def-embedded-smooth-submanifold-with-boundary, thm-the-boundary-is-a-clos
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:

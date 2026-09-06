@@ -2,7 +2,7 @@
 id: prop-orientations-and-positive-basis-classes-agree-in-positive-dimension
 kind: proposition
 title: "Orientations and positive basis classes agree in positive dimension"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,14 @@ For $\dim V=n>0$, determinant-line rays are in bijection with positive-basis equ
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** A finite-dimensional real vector space $V$ of dimension $n$.
+
+[L1] An orientation of $V$ is a positive ray in $\det V=\Lambda^nV$, including either ray of $\mathbb R=\Lambda^0V$ when $n=0$ ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The wedge of an ordered basis is nonzero in $\det V$, and changing basis multiplies it by its determinant. [given]
+1.1 The wedge of an ordered basis is nonzero in $\det V$, and changing basis multiplies it by the determinant of the change-of-basis matrix. [given, L1, algebra]
 
-2.1 Thus two bases determine the same ray exactly when their change determinant is positive. In dimension zero the empty wedge is $+1$, leaving the negative ray unrepresented. [step 1.1] ∎
+2.1 Thus two bases determine the same ray exactly when their change determinant is positive. When $n=0$, the unique empty wedge is $+1$, so it represents only the positive one of the two rays in [L1]. [L1, step 1.1] ∎

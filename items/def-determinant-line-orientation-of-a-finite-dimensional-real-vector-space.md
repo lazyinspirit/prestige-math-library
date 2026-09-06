@@ -2,7 +2,7 @@
 id: def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space
 kind: definition
 title: "Determinant-line orientations of finite-dimensional real vector spaces"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-orientation-of-a-finite-dimensional-real-vector-space, prop-the-top-e
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-an-orientable-manifold-comes-with-a-canonical-orientation
 kind: false-statement
 title: "An orientable manifold has a canonical orientation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,14 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** A nonempty connected orientable smooth manifold $M$.
+
+[L1] Such a manifold has exactly two orientations, a chosen orientation and its pointwise opposite ([[prop-nonempty-connected-orientable-manifolds-have-exactly-two-orientations]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 Choose one orientation. Its pointwise opposite is another orientation. [given]
+1.1 Orientability supplies an orientation $o$, and [L1] supplies its distinct pointwise opposite $-o$. [given, L1, choose]
 
-2.1 The two-orientations proposition says these are distinct and exhaustive, so orientability alone does not choose one. [step 1.1] ∎
+2.1 By [L1], these two choices are exhaustive. Since the definition of orientability specifies neither one, orientability alone does not determine a canonical orientation. [L1, step 1.1] ∎

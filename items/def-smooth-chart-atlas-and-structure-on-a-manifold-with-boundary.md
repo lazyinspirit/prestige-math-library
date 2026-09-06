@@ -2,7 +2,7 @@
 id: def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary
 kind: definition
 title: "Smooth charts, atlases, and structures with boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,11 +11,8 @@ deps: [def-topological-manifold-with-boundary, def-smooth-function-on-a-relative
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:

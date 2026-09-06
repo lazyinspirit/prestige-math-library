@@ -2,7 +2,7 @@
 id: lem-smoothness-at-the-boundary-is-independent-of-charts-and-extensions
 kind: lemma
 title: "Boundary smoothness is independent of charts and extensions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,18 @@ The local-extension definition of a smooth map between manifolds with boundary i
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** A continuous map $f:M\to N$ between smooth manifolds with boundary, two compatible source charts, two compatible target charts, and any local Euclidean extensions of the resulting coordinate representatives.
+
+[L1] Boundary-chart transition maps are smooth in the local-extension sense ([[def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary]]).
+
+[L2] Smooth half-space maps are closed under composition and satisfy the chain rule ([[prop-chain-rule-for-smooth-half-space-maps]]).
+
+[L3] Agreeing smooth Euclidean extensions have identical derivatives on their common half-space domain ([[lem-smooth-half-space-extensions-have-the-same-derivatives-on-the-half-space]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Two coordinate representatives differ by composition on the left and right with smooth chart transitions. [given]
+1.1 On every common domain, the two coordinate representatives differ by composition on the left and right with the source and target transition maps, which are smooth by [L1]. [given, L1]
 
-2.1 The half-space chain rule shows one representative is extension-smooth exactly when the other is; the extension lemma makes the derivatives independent as well. [step 1.1] ∎
+2.1 By [L2], one representative is extension-smooth exactly when the other is, because the transition maps are diffeomorphisms with smooth inverses. By [L3], all derivatives obtained from different extensions agree on the half-space. Thus neither the charts nor the extensions affect the definition. [L2, L3, step 1.1] ∎

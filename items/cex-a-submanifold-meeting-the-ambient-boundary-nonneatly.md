@@ -2,7 +2,7 @@
 id: cex-a-submanifold-meeting-the-ambient-boundary-nonneatly
 kind: counterexample
 title: "A submanifold meeting the ambient boundary nonneatly"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,16 @@ In $M=[0,\infty)\times\mathbb R$, the embedded interval $S=\{0\}\times[-1,1]$ is
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** The standard manifold with boundary $M=[0,\infty)\times\mathbb R$ and the subset $S=\{0\}\times[-1,1]$, supplied with the smooth structure transported from $[-1,1]$ by $s\mapsto(0,s)$.
+
+[L1] An embedded submanifold with boundary is a subset carrying a manifold-with-boundary structure for which inclusion into the ambient manifold is a smooth embedding ([[def-embedded-smooth-submanifold-with-boundary]]).
+
+[L2] Neatness requires both $S\cap\partial M=\partial S$ and transversality to $\partial M$ ([[def-neat-submanifold-of-a-manifold-with-boundary]]).
 
 ## Counterexample
 
 **Proof technique:** direct.
 
-1.1 It is an embedded submanifold with boundary $\partial S=\{(0,-1),(0,1)\}$. [given]
+1.1 The parametrization $[-1,1]\to S$, $s\mapsto(0,s)$, is a diffeomorphism onto $S$ with its subspace topology, and its derivative $v\mapsto(0,v)$ is injective. Thus the inclusion is a smooth embedding, so [L1] makes $S$ an embedded submanifold with boundary $\partial S=\{(0,-1),(0,1)\}$. [given, L1, construct, algebra]
 
-2.1 But $S\cap\partial M=S$, not $\partial S$, so the defining equality for neatness fails. [step 1.1] ∎
+2.1 Since $\partial M=\{0\}\times\mathbb R$, one has $S\cap\partial M=S$, which is not the two-point set $\partial S$. The equality required by [L2] therefore fails, so $S$ is not neat (independently of the transversality condition). [given, L2, step 1.1, algebra] ∎

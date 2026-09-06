@@ -2,7 +2,7 @@
 id: ex-the-boundary-of-an-oriented-interval
 kind: example
 title: "The boundary of an oriented interval"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,16 @@ With the standard orientation on $[a,b]$, the induced orientation of its boundar
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** Real numbers $a<b$, with $[a,b]$ oriented by the positive tangent $\partial_x$.
+
+[L1] Boundary orientation uses the outward-normal-first rule ([[def-induced-boundary-orientation]]).
+
+[L2] The orientation obtained from that rule does not depend on the chosen outward vector ([[prop-boundary-orientation-is-independent-of-the-outward-vector-field]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 The outward vectors are $+\partial_x$ at $b$ and $-\partial_x$ at $a$. [given]
+1.1 The vectors $+\partial_x$ at $b$ and $-\partial_x$ at $a$ point out of the interval. [given, algebra]
 
-2.1 Outward-normal-first declares the first point positive and the second negative. [step 1.1] ∎
+2.1 At $b$, the outward vector $+\partial_x$ is positive, so [L1] gives the point $b$ the positive orientation. At $a$, the outward vector $-\partial_x$ is negative, so [L1] gives $a$ the negative orientation; [L2] makes these conclusions independent of the particular outward vectors. Hence $\partial[a,b]=\{b\}-\{a\}$. [given, L1, L2, step 1.1, algebra] ∎

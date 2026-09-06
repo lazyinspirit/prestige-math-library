@@ -2,7 +2,7 @@
 id: cor-diffeomorphisms-preserve-interior-and-boundary
 kind: corollary
 title: "Diffeomorphisms preserve interior and boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,16 @@ Every diffeomorphism of manifolds with boundary maps $\partial M$ onto $\partial
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** A diffeomorphism $F:M\to N$ between smooth manifolds with boundary.
+
+[L1] A smooth diffeomorphism between relatively open half-space sets preserves their face and relative interior ([[thm-smooth-invariance-of-manifold-boundary]]).
+
+[L2] Smoothness between manifolds with boundary is tested in boundary charts ([[def-smooth-map-between-manifolds-with-boundary]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 In boundary charts its representative and inverse are smooth half-space diffeomorphisms. [given]
+1.1 By [L2], every coordinate representative of $F$ and its inverse in boundary charts is a smooth half-space diffeomorphism. [given, L2]
 
-2.1 Boundary invariance applied in those charts gives both asserted equalities. [step 1.1] ∎
+2.1 Applying [L1] to those representatives shows that $F$ maps boundary points exactly to boundary points and interior points exactly to interior points. Bijectivity then gives $F(\partial M)=\partial N$ and $F(\operatorname{Int}M)=\operatorname{Int}N$. [L1, step 1.1] ∎

@@ -2,21 +2,18 @@
 id: thm-boundary-submanifolds-of-a-boundaryless-manifold-have-half-slice-charts
 kind: theorem
 title: "Boundary submanifolds of a boundaryless manifold have half-slice charts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-embedded-smooth-submanifold-with-boundary, def-smooth-immersion-and-embedding-for-manifolds-with-boundary, thm-constant-rank-theorem-for-manifolds]
+deps: [def-embedded-smooth-submanifold-with-boundary, def-smooth-immersion-and-embedding-for-manifolds-with-boundary, thm-constant-rank-theorem-for-manifolds, def-smooth-function-on-a-relatively-open-subset-of-a-half-space]
 justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,14 +29,20 @@ If $S^k$ is an embedded manifold with boundary in a boundaryless $n$-manifold, t
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** A smooth embedding $i:S^k\hookrightarrow M^n$, where $S$ is a manifold with boundary and $M$ is boundaryless, and a point $p\in S$.
+
+[L1] The differential of a smooth embedding of manifolds with boundary is injective on the full tangent space ([[def-smooth-immersion-and-embedding-for-manifolds-with-boundary]]).
+
+[L2] A smooth half-space map admits a smooth Euclidean extension near each point ([[def-smooth-function-on-a-relatively-open-subset-of-a-half-space]]).
+
+[L3] A rank-$k$ smooth map from a $k$-manifold has local coordinates in which it is $u\mapsto(u,0)$ ([[thm-constant-rank-theorem-for-manifolds]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 At an interior point apply the constant-rank theorem to the embedding. At a boundary point, choose boundary coordinates $x$ on $S$ and ordinary ambient coordinates, and smoothly extend the resulting coordinate embedding from the source half-space to a map $\widetilde F$ on an open subset of $\mathbb R^k$. Extension-independent derivatives and injectivity of the embedding differential show that $\widetilde F$ has rank $k$ after shrinking. [given]
+1.1 At an interior point, [L1] and [L3] give an ordinary slice chart. At a boundary point, choose boundary coordinates $x$ on $S$ and ordinary ambient coordinates. By [L2], extend the coordinate embedding to a smooth map $\widetilde F$ on an open subset of $\mathbb R^k$. Its derivative at the boundary point equals the injective differential from [L1], so after shrinking an invertible $k\times k$ minor stays nonzero and $\widetilde F$ has constant rank $k$. [given, L1, L2, L3]
 
-2.1 Apply [[thm-constant-rank-theorem-for-manifolds]] to $\widetilde F$. In the resulting source coordinates $u=\alpha(x)$ and target coordinates $(u,w)$, it has the form $u\mapsto(u,0)$. The source change $\alpha$ need not preserve the face, but it can be absorbed into the target chart: postcompose that chart with the local diffeomorphism $$(u,w)\longmapsto(\alpha^{-1}(u),w).$$ In the new target coordinates, $\widetilde F(x)=(x,0)$ in the original boundary coordinates. [step 1.1]
+2.1 Apply [L3] to $\widetilde F$. In the resulting source coordinates $u=\alpha(x)$ and target coordinates $(u,w)$, it has the form $u\mapsto(u,0)$. The source change $\alpha$ need not preserve the face, but it can be absorbed into the target chart: postcompose that chart with the local diffeomorphism $$(u,w)\longmapsto(\alpha^{-1}(u),w).$$ In the new target coordinates, $\widetilde F(x)=(x,0)$ in the original boundary coordinates. [L3, step 1.1]
 
 3.1 Restricting $x$ back to the source half-space now gives $$S=\{x^{k+1}=\cdots=x^n=0,\ x^k\ge0\}$$ near the boundary point, while step 1.1 gives the ordinary slice at interior points. [step 2.1] ∎

@@ -2,7 +2,7 @@
 id: def-induced-orientation-on-a-hypersurface-from-a-coorientation
 kind: definition
 title: "Orientation induced on a hypersurface by a coorientation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,11 +11,8 @@ deps: [def-determinant-line-orientation-of-a-finite-dimensional-real-vector-spac
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:

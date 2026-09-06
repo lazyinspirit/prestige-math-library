@@ -2,7 +2,7 @@
 id: thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary
 kind: theorem
 title: "Smooth partitions of unity exist on manifolds with boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   scraped: []

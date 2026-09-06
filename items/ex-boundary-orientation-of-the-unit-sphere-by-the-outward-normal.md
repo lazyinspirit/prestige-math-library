@@ -2,21 +2,18 @@
 id: ex-boundary-orientation-of-the-unit-sphere-by-the-outward-normal
 kind: example
 title: "Boundary orientation of the unit sphere by the outward normal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-induced-orientation-on-a-hypersurface-from-a-coorientation, def-induced-boundary-orientation, prop-boundary-orientation-is-independent-of-the-outward-vector-field, ex-the-closed-ball-and-its-sphere-boundary]
+deps: [def-induced-boundary-orientation, prop-boundary-orientation-is-independent-of-the-outward-vector-field, ex-the-closed-ball-and-its-sphere-boundary]
 justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,18 @@ For $n\ge1$, the boundary orientation of $S^{n-1}=\partial B^n$ is the standard 
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** An integer $n\ge1$, the closed unit ball $B^n\subset\mathbb R^n$ with the orientation induced by the standard ordered basis of $\mathbb R^n$, and its boundary $S^{n-1}$.
+
+[L1] The induced boundary orientation is outward-normal-first ([[def-induced-boundary-orientation]]).
+
+[L2] The boundary of $B^n$ is $S^{n-1}$ ([[ex-the-closed-ball-and-its-sphere-boundary]]).
+
+[L3] The standard oriented interval satisfies $\partial[-1,1]=\{1\}-\{-1\}$ ([[prop-boundary-orientation-is-independent-of-the-outward-vector-field]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 The outward normal of the ball at $u$ is the radial vector $u$. [given]
+1.1 At $u\in S^{n-1}$, the radial vector $u$ points outward from $B^n$. [given, L2]
 
-2.1 The boundary rule declares a tangent determinant positive precisely when $(u,v_1,\ldots,v_{n-1})$ is positive in $\mathbb R^n$, which is the standard sphere convention. [step 1.1] ∎
+2.1 If $n=1$, then $B^1=[-1,1]$ and [L3] gives the positive determinant ray at $1$ and the negative determinant ray at $-1$, exactly as the outward vectors $1$ and $-1$ require under [L1]. If $n\ge2$, a tangent basis $(v_1,\ldots,v_{n-1})$ is positive precisely when $(u,v_1,\ldots,v_{n-1})$ is positive in the standard orientation of $\mathbb R^n$. Thus in every case the boundary orientation is the standard hypersurface orientation cooriented by the radial outward normal. [given, L1, L3, step 1.1, algebra] ∎

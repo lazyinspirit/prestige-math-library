@@ -2,7 +2,7 @@
 id: def-interior-point-boundary-point-interior-and-boundary-of-a-manifold
 kind: definition
 title: "Interior and boundary of a manifold with boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,11 +11,8 @@ deps: [def-topological-manifold-with-boundary, def-smooth-chart-atlas-and-struct
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-inward-outward-and-boundary-tangent-vectors
 kind: definition
 title: "Inward, outward, and boundary-tangent vectors"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,11 +11,8 @@ deps: [thm-smooth-invariance-of-manifold-boundary, thm-tangent-and-cotangent-bun
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:

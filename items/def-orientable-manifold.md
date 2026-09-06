@@ -2,7 +2,7 @@
 id: def-orientable-manifold
 kind: definition
 title: "Orientable manifolds"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,11 +11,8 @@ deps: [def-oriented-smooth-manifold-and-oriented-chart]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:

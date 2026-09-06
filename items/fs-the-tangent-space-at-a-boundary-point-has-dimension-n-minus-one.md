@@ -2,7 +2,7 @@
 id: fs-the-tangent-space-at-a-boundary-point-has-dimension-n-minus-one
 kind: false-statement
 title: "The tangent space at a boundary point has dimension n-1"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,16 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** An $n$-dimensional smooth manifold $M$ with boundary and a point $p\in\partial M$.
+
+[L1] Boundary-germ derivations form an $n$-dimensional tangent space at every point ([[thm-tangent-and-cotangent-bundles-extend-over-a-manifold-boundary]]).
+
+[L2] For $n\ge1$, $T_p\partial M$ is the boundary-tangent hyperplane in $T_pM$ ([[prop-tangent-space-of-the-boundary-is-the-boundary-tangent-hyperplane]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 Boundary-germ derivations have all $n$ coordinate derivations. [given]
+1.1 By [L1], the $n$ coordinate derivations form a basis of the full tangent space $T_pM$. [given, L1]
 
-2.1 The last-coordinate-zero span is the proper boundary tangent hyperplane, not the full tangent space. [step 1.1] ∎
+2.1 By [L2], only the last-coordinate-zero span is $T_p\partial M$, an $(n-1)$-dimensional hyperplane when $n\ge1$. Thus the false statement confuses the boundary tangent space with the full tangent space. [L2, step 1.1] ∎

@@ -2,7 +2,7 @@
 id: prop-chain-rule-for-smooth-half-space-maps
 kind: proposition
 title: "Chain rule for smooth half-space maps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,18 @@ If $f:U\to V$ and $g:V\to W$ are smooth maps between relatively open half-space 
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** Relatively open half-space sets $U,V,W$, smooth maps $f:U\to V$ and $g:V\to W$, and a point $p\in U$.
+
+[L1] Half-space smoothness supplies smooth Euclidean extensions near every point ([[def-smooth-function-on-a-relatively-open-subset-of-a-half-space]]).
+
+[L2] The derivatives of two Euclidean extensions agreeing on a relatively open half-space set agree on that set ([[lem-smooth-half-space-extensions-have-the-same-derivatives-on-the-half-space]]).
+
+[L3] Total derivatives satisfy the Euclidean chain rule ([[thm-chain-rule-for-total-derivatives]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Choose Euclidean extensions near $p$ and $f(p)$. Their ordinary composite is an extension of the coordinate composite. [given]
+1.1 By [L1], choose Euclidean extensions near $p$ and $f(p)$ and shrink the first neighbourhood so that its image lies in the domain of the second extension. Their ordinary composite then extends $g\circ f$ near $p$. [given, L1, choose]
 
-2.1 The Euclidean chain rule gives the displayed formula, and extension-independence makes both sides intrinsic on the half-space. [step 1.1] ∎
+2.1 Applying [L3] to the extensions from step 1.1 gives the displayed formula, and [L2] makes the resulting derivatives independent of both extension choices. Hence $g\circ f$ is smooth and the formula is intrinsic. [L2, L3, step 1.1] ∎

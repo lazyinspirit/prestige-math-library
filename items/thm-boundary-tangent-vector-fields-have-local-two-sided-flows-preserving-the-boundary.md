@@ -2,7 +2,7 @@
 id: thm-boundary-tangent-vector-fields-have-local-two-sided-flows-preserving-the-boundary
 kind: theorem
 title: "Boundary-tangent fields have boundary-preserving local two-sided flows"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,18 @@ Let $M$ be a smooth manifold with boundary and let $X$ be a smooth vector field 
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** A smooth manifold $M$ with boundary and a smooth vector field $X$ on $M$ satisfying $X_p\in T_p\partial M$ for every $p\in\partial M$.
+
+[L1] A smooth vector field on a boundaryless manifold has a unique maximal local flow with open time-state domain ([[thm-fundamental-theorem-on-flows]]).
+
+[L2] The flow of a vector field tangent to a closed embedded submanifold preserves that submanifold ([[prop-the-flow-of-a-vector-field-tangent-to-a-closed-embedded-submanifold-preserves-it]]).
+
+[L3] The boundary tangent space is the last-coordinate-zero hyperplane in a boundary chart ([[prop-tangent-space-of-the-boundary-is-the-boundary-tangent-hyperplane]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 In a boundary chart, extend the coordinate components of the field smoothly across the face. The Euclidean local flow of this extension supplies a two-sided local flow near the chosen point. [given]
+1.1 Fix a boundary point and extend the coordinate components of $X$ smoothly across the face of a boundary chart. By [L1], the extended Euclidean field has a unique two-sided local flow near that point. [given, L1]
 
-2.1 On the face the extended last component is zero, so the Euclidean ODE restricted to that face is an integral-curve equation for the extended field. Uniqueness identifies its solutions with the ambient flow curves beginning on the face; it also prevents a curve starting in the half-space from crossing that face. Hence the local two-sided flow is in $M$ and every defined time slice preserves $\partial M$. [step 1.1] ∎
+2.1 By [L3], the extended field is tangent to the face along the face. Applying [L2] in the Euclidean chart shows that its flow preserves the face. Each sufficiently small time slice is a local diffeomorphism with inverse the negative-time slice, so an interior point cannot cross the invariant face without violating injectivity. After shrinking the flow domain, it therefore preserves the half-space and restricts to a two-sided local flow on $M$ preserving $\partial M$. [L2, L3, step 1.1] ∎

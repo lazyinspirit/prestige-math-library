@@ -2,7 +2,7 @@
 id: fs-the-boundary-orientation-is-given-by-inward-normal-first
 kind: false-statement
 title: "Boundary orientation is inward-normal-first"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,16 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** The library's induced boundary-orientation convention and the standard orientation on an interval $[a,b]$.
+
+[L1] The induced boundary orientation is defined by placing an outward normal first ([[def-induced-boundary-orientation]]).
+
+[L2] For the standard orientation on $[a,b]$, this convention gives $\partial[a,b]=\{b\}-\{a\}$ ([[prop-boundary-orientation-is-independent-of-the-outward-vector-field]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 At the endpoints of an oriented interval, outward-normal-first gives $\{b\}-\{a\}$. [given]
+1.1 By [L2], outward-normal-first gives the positive sign at $b$ and the negative sign at $a$. [given, L2]
 
-2.1 Replacing outward by inward reverses each determinant ray, so it gives the opposite convention. [step 1.1] ∎
+2.1 At each endpoint the inward normal is the negative of the outward normal. By [L1], replacing the first vector by its negative reverses the induced zero-dimensional determinant ray, so inward-normal-first gives the opposite orientation. [L1, step 1.1, algebra] ∎

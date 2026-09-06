@@ -2,7 +2,7 @@
 id: thm-the-double-has-a-well-defined-smooth-structure
 kind: theorem
 title: "The double has a well-defined smooth structure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   scraped: []

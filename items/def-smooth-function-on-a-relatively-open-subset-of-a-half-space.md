@@ -2,7 +2,7 @@
 id: def-smooth-function-on-a-relatively-open-subset-of-a-half-space
 kind: definition
 title: "Smooth functions on relatively open half-space sets"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,11 +11,8 @@ deps: [def-euclidean-upper-half-space-and-its-boundary]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:

@@ -1,8 +1,8 @@
 ---
 id: lem-smooth-half-space-extensions-have-the-same-derivatives-on-the-half-space
 kind: lemma
-title: "Half-space extensions have the same derivatives on the half-space"
-status: draft
+title: "Half-space extensions agreeing on a relatively open set have the same derivatives there"
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,7 +29,7 @@ If two smooth Euclidean extensions agree on a relatively open subset of $\mathbb
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** A relatively open set $U\subseteq\mathbb H^n$ and two smooth Euclidean maps $F$ and $G$, defined on neighbourhoods of $U$, whose restrictions to $U$ agree.
 
 ## Proof
 

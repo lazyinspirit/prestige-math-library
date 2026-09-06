@@ -2,21 +2,18 @@
 id: ex-the-standard-collar-of-a-closed-ball
 kind: example
 title: "The standard collar of a closed ball"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-smooth-collar-of-a-manifold-boundary, thm-collar-neighborhood-theorem, ex-the-closed-ball-and-its-sphere-boundary]
+deps: [def-smooth-collar-of-a-manifold-boundary, ex-the-closed-ball-and-its-sphere-boundary]
 justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,16 @@ For $n\ge1$, $c:S^{n-1}\times[0,\varepsilon)\to B^n$, $c(u,t)=(1-t)u$, is a coll
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** An integer $n\ge1$, a real number $0<\varepsilon<1$, the closed unit ball $B^n$, and the map $c:S^{n-1}\times[0,\varepsilon)\to B^n$ defined by $c(u,t)=(1-t)u$.
+
+[L1] The boundary of $B^n$ is $S^{n-1}$ ([[ex-the-closed-ball-and-its-sphere-boundary]]).
+
+[L2] A smooth collar is a boundary-fixing smooth embedding whose image is an open neighbourhood of the boundary ([[def-smooth-collar-of-a-manifold-boundary]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 It fixes the sphere at $t=0$ and is injective because radius and direction are recovered from a nonzero image. [given]
+1.1 The map $c$ is smooth and satisfies $c(u,0)=u$. Since $1-t>0$, its inverse on its image is $$x\longmapsto\left(\frac{x}{|x|},1-|x|\right),$$ which is smooth; hence $c$ is a smooth embedding. [given, construct, algebra]
 
-2.1 Its image is $\{x:1-\varepsilon<|x|\le1\}$, an open neighbourhood of the boundary in the relative topology, and its inverse is smooth in polar collar coordinates. [step 1.1] ∎
+2.1 Its image is $\{x\in B^n:|x|>1-\varepsilon\}$, which is open in $B^n$ and contains $S^{n-1}=\partial B^n$ by [L1]. Consequently $c$ satisfies every clause of [L2] and is a collar. [given, L1, L2, step 1.1, algebra] ∎

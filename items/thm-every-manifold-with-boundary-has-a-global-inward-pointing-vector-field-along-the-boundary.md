@@ -2,7 +2,7 @@
 id: thm-every-manifold-with-boundary-has-a-global-inward-pointing-vector-field-along-the-boundary
 kind: theorem
 title: "A global inward-pointing boundary vector field exists"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:

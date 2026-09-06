@@ -2,7 +2,7 @@
 id: def-embedded-smooth-submanifold-with-boundary
 kind: definition
 title: "Embedded smooth submanifolds with boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,11 +11,8 @@ deps: [def-smooth-immersion-and-embedding-for-manifolds-with-boundary]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:

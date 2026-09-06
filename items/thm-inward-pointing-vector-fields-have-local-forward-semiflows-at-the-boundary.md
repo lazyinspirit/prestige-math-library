@@ -2,7 +2,7 @@
 id: thm-inward-pointing-vector-fields-have-local-forward-semiflows-at-the-boundary
 kind: theorem
 title: "Inward-pointing fields have local forward semiflows at the boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,16 @@ Let $M$ be a smooth manifold with boundary and let $X$ be a smooth vector field 
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** A smooth manifold $M$ with boundary, a smooth vector field $X$ that is inward at every boundary point, and a chosen point $p\in\partial M$.
+
+[L1] In a boundary chart, an inward vector has positive last coordinate ([[def-inward-outward-and-boundary-tangent-vectors]]).
+
+[L2] A smooth vector field on a boundaryless manifold has a unique smooth local flow ([[thm-fundamental-theorem-on-flows]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 In a boundary chart, extend the coordinate components of the given field across the face and take its Euclidean local flow. At the chosen boundary point its normal component is positive. [given]
+1.1 Extend the coordinate components of $X$ across the face of a boundary chart at $p$. By [L2] the extension has a Euclidean local flow, and by [L1] its last component is positive at $p$. [given, L1, L2]
 
-2.1 After shrinking, that normal component remains positive whenever the extended flow is near the face. A curve starting with nonnegative normal coordinate cannot first cross to a negative one: at a first zero its normal derivative would be positive. Thus a sufficiently small forward flow remains in $M$, as asserted. [step 1.1] ∎
+2.1 By continuity, shrink to an ambient coordinate neighbourhood $W$ on which the last component of the extended field is at least some $c>0$, and shrink the initial neighbourhood and time so that all relevant trajectories remain in $W$. Let $h(t)$ be the last coordinate of a forward trajectory with $h(0)\ge0$. If $h(t_1)<0$ for some $t_1>0$, let $\tau$ be the largest zero of $h$ in $[0,t_1]$; it exists by continuity. Then $h<0$ on $(\tau,t_1]$, while $h'(t)\ge c$ there, so the one-variable mean-value theorem gives $h(t_1)-h(\tau)>0$, contradicting $h(t_1)<0=h(\tau)$. Thus the restricted forward flow remains in $M$; no analogous negative-time conclusion follows. [given, step 1.1, algebra] ∎

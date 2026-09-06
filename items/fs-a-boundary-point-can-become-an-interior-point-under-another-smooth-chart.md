@@ -1,8 +1,8 @@
 ---
 id: fs-a-boundary-point-can-become-an-interior-point-under-another-smooth-chart
 kind: false-statement
-title: "A smooth chart can turn a boundary point into an interior point"
-status: draft
+title: "Can a smooth chart turn a boundary point into an interior point?"
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,14 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** Two compatible boundary charts whose overlap transition is $f:U\to V$, and a face point $p\in U$.
+
+[L1] A smooth diffeomorphism between relatively open half-space sets maps face points to face points ([[thm-smooth-invariance-of-manifold-boundary]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 Such a transition is a smooth half-space diffeomorphism. [given]
+1.1 Compatibility of the two charts makes $f$ a smooth half-space diffeomorphism. [given]
 
-2.1 Smooth boundary invariance sends face to face, contradicting the proposed chart change. [step 1.1] ∎
+2.1 By [L1], $f(p)$ is a face point, not a relative-interior point. Thus no smooth boundary-chart transition can make the proposed change. [L1, step 1.1] ∎

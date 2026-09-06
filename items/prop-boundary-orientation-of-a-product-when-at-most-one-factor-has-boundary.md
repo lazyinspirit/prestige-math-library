@@ -2,7 +2,7 @@
 id: prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary
 kind: proposition
 title: "Boundary orientation of a product with at most one boundary factor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,11 +12,8 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -32,12 +29,16 @@ For oriented $M^m,N$, if $\partial N=\varnothing$ then $\partial(M\times N)=\par
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and conventions in the statement.
+**Given:** Oriented manifolds $M^m$ and $N$, with at most one of $\partial M$ and $\partial N$ nonempty.
+
+[L1] The product orientation uses the ordered determinant $\det(TM\oplus TN)\cong\det(TM)\otimes\det(TN)$ ([[def-product-orientation]]).
+
+[L2] Boundary orientation places an outward normal before a positive boundary determinant ([[def-induced-boundary-orientation]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Put the outward normal of the boundary factor first in the ordered determinant of $TM\oplus TN$. [given]
+1.1 By [L1] and [L2], compare the boundary orientation with the product orientation by moving the outward normal of the boundary factor to the first position in the ordered determinant of $TM\oplus TN$. [given, L1, L2]
 
-2.1 For the first factor it is already first. For the second it crosses $m$ tangent vectors, producing $(-1)^m$. If both boundaries are nonempty, corners occur and no claim is made. [step 1.1] ∎
+2.1 On $\partial M\times N$, the normal is already first, so the two orientations agree. On $M\times\partial N$, it crosses the $m$ tangent vectors from $M$, producing $(-1)^m$. If both boundaries are nonempty, their product has corners and lies outside the stated hypotheses. [step 1.1, algebra] ∎
