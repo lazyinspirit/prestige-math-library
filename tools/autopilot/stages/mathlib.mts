@@ -725,7 +725,7 @@ export const dispatchScaffoldPolicyFixes = ({ ctx, executor, stage, round, failu
     executor.start(stage, {
       role: 'beta',
       label: `policy-fix-${round}-b${batch}`,
-      job: 'remediation',
+      job: 'scaffolding',
       covers: [batch],
       brief: 'briefs/beta-scaffold.md',
       task: 'briefs/beta-scaffold-policy-fix.md',

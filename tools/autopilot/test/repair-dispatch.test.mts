@@ -688,7 +688,7 @@ test('Stage-1 scaffold-policy errors route to the owning Beta before advisory so
   assert.equal(started.length, 1);
   assert.deepEqual(started[0].covers, ['12']);
   assert.equal(started[0].label, 'policy-fix-1-b12');
-  assert.equal(started[0].job, 'remediation');
+  assert.equal(started[0].job, 'scaffolding');
   assert.equal(started[0].task, 'briefs/beta-scaffold-policy-fix.md');
 
   started.length = 0;
