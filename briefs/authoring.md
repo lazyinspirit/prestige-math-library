@@ -29,6 +29,13 @@ mathematical content in text and equations, not only in a diagram. Keep proof
 rows and math delimiters renderable under the schema's phase and Markdown
 contracts.
 
+For every piece of mathematics that is unfamiliar to you, search the web and
+verify the exact claim against authoritative sources before writing or relying
+on it. This is mandatory for unfamiliar definitions, theorems, proof steps,
+examples, and counterexamples. Prefer original papers, author-hosted books or
+lecture notes, and official reference works, and keep the resulting source and
+provenance records exact.
+
 Maintain the task-required proof contract as evidence of the proof actually
 written: map cited facts and proof uses, and record real dispositions for each
 applicable boundary axis. A bounded finite-smoke check can find a

@@ -1,6 +1,6 @@
 ---
 name: foundations
-title: Foundations
+title: Set Theory
 status: published
 ---
 

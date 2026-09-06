@@ -50,10 +50,13 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(liveCompat.requestedEffort, 'high');
 });
 
-test('steps 5, 6, and 7 select the requested stage-specific profiles', () => {
+test('Step 5 authors use Astra medium while Steps 6 and 7 retain Terra high', () => {
   const authorStage = stage('5-author');
   const author = authorStage.plan(ctx, ['1'])[0];
-  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.terraHigh);
+  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.astraMedium);
+  assert.equal(selected(authorStage, {
+    role: 'beta', job: 'authoring', label: 'author-recover-1-1',
+  }), MODEL_PROFILE_NAMES.astraMedium, 'Step 5 recovery authors use the same profile');
   assert.equal(selected(authorStage, { role: 'alpha', job: 'adjudication' }), undefined,
     'Step 5 changes authoring agents, not its gate-adjudication Alpha');
 
@@ -95,7 +98,7 @@ test('Step-8 fatal group adjudicator uses Sol xhigh', () => {
   assert.equal(row.provider_effort, 'xhigh');
 });
 
-test('only Step 9 Lead Alpha uses Astra medium; other late-stage agents retain Terra high', () => {
+test('Step 9 Lead Alpha alone uses Astra medium among late-stage agents', () => {
   for (const s of stages.filter((candidate: any) => /^(?:9|10)-/.test(candidate.id))) {
     for (const role of ['alpha', 'alpha-high', 'alpha-report', 'beta']) {
       assert.equal(selected(s, { role, job: 'audit' }), MODEL_PROFILE_NAMES.terraHigh,
@@ -111,4 +114,11 @@ test('only Step 9 Lead Alpha uses Astra medium; other late-stage agents retain T
   const profile = MODEL_PROFILES[MODEL_PROFILE_NAMES.astraMedium];
   assert.equal(profile.model, MODELS.astra.id);
   assert.equal(profile.effort, 'medium');
+});
+
+test('the shared Step-5 authoring brief mandates authoritative web verification', () => {
+  const source = readFileSync(join(REPO, 'briefs/authoring.md'), 'utf8');
+  assert.match(source, /every piece of mathematics that is unfamiliar/i);
+  assert.match(source, /search the web/i);
+  assert.match(source, /authoritative sources/i);
 });

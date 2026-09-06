@@ -177,8 +177,9 @@ const ROLES = Object.freeze({
   //
   // TWO THINGS THIS LANE MAY NEVER DO, and both are load-bearing:
   //
-  // 1. **Author mathematical content.** Item authoring stays on `beta`, at the
-  //    authoring effort. A `medium` lane must not become a cheap author.
+  // 1. **Author mathematical content.** Item authoring stays on Step 5's
+  //    explicitly selected `beta` authoring profile; this mechanical role must
+  //    not become an author.
   // 2. **Produce anything its judge lane will later judge.** A model reviewing
   //    its own output is self-agreement, not corroboration.
   //
