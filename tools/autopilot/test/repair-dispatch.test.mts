@@ -280,6 +280,28 @@ test('Step-8 repair removes mechanically handled owners and serializes unknown s
   }
 });
 
+test('preflight retains original fatal licences after live rejection closure; frozen close does not', async () => {
+  const repo = groupedFixture();
+  const row = { id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64),
+    item_sha256: 'b'.repeat(64), outcome: 'confirmed_fatal' };
+  const put = (suffix: string, value: any) => writeFileSync(join(repo, 'research', `demo-${suffix}`), JSON.stringify(value) + '\n');
+  put('judge.jsonl', { ...row, keep: false });
+  put('judge-adjudications.jsonl', row);
+  put('touches.json', { snapshots: [{ label: 'pre-step8', hashes: { 'thm-demo-x': 'b'.repeat(16) } }] });
+  for (const id of ['8-preflight', '8-close']) {
+    const stage: any = stages.find((s: any) => s.id === id);
+    const plans: any[] = [];
+    await stage.onGateFailure({ ctx: { run: 'demo', repo }, stage, round: 1,
+      executor: { start: (_s: any, p: any) => plans.push(p) },
+      failure: { id: 'rendercheck', output: 'ERROR rendering [thm-demo-x]' } });
+    const text = readFileSync(join(repo, plans[0].task[0]), 'utf8');
+    const envelope = JSON.parse(text.match(/```json\n([\s\S]*?)\n```/)![1]);
+    assert.deepEqual(envelope.live_tuples, []);
+    assert.deepEqual(envelope.fatal_repair_licences, id === '8-preflight' ? [row] : []);
+  }
+  rmSync(repo, { recursive: true, force: true });
+});
+
 test('Step-8 close routes boundary-audit item summaries to their exact owners', async () => {
   const repo = groupedFixture();
   const started: any[] = [];

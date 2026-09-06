@@ -24,6 +24,7 @@ import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
+import { loadStep8JudgeEvidence } from '../../step8-evidence.mjs';
 import { repairGateBatch, repairFingerprint } from './step56-repairs.mts';
 
 // Version the composed Step-6 module independently. The executor watches both
@@ -1163,6 +1164,18 @@ function writeStep8RepairEnvelope({ ctx, stage, round, group, mode, failures, me
     ...((publishedClosure?.open_fatal_rows ?? []).map((row) => ({ ...row, scope: 'published', status: 'open_fatal' }))),
   ];
   const assignedIds = new Set(assigned.map((row) => row.id));
+  let repairLicences: any[] = [];
+  if (mode === 'preflight' && !hasHistoricalRejudgeCutover(ctx) && existsSync(R(ctx, touchesPath(ctx)))) {
+    const touches = JSON.parse(readFileSync(R(ctx, touchesPath(ctx)), 'utf8'));
+    const baseline = [...(touches.snapshots ?? [])].reverse().find((row: any) => row.label === 'pre-step8');
+    const evidence = loadStep8JudgeEvidence(R(ctx, `research/${ctx.run}-judge.jsonl`),
+      R(ctx, `research/${ctx.run}-judge-adjudications.jsonl`));
+    if (evidence.errors.length) throw new Error(evidence.errors.join('\n'));
+    repairLicences = [...evidence.answers.values()].map((entry: any) => entry.row)
+      .filter((row: any) => assignedIds.has(row.id) && row.outcome === 'confirmed_fatal'
+        && /^[a-f0-9]{64}$/.test(row.item_sha256 ?? '')
+        && baseline?.hashes?.[row.id] === shortHash(row.item_sha256));
+  }
   const knownIds = new Set(assignments.map((row) => row.id));
   const complete = {
     run: ctx.run, stage: stage.id, round,
@@ -1199,6 +1212,7 @@ function writeStep8RepairEnvelope({ ctx, stage, round, group, mode, failures, me
     mechanical_residue: String(mechanicalStderr ?? ''),
     live_items: assigned,
     assigned_items: assigned,
+    fatal_repair_licences: repairLicences,
     live_tuples: tupleRows.filter((row: any) => assignedIds.has(String(row.id))),
   };
   const baseTask = resolveStep8Task(ctx, task);

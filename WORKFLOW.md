@@ -346,6 +346,10 @@ cognitive assignments individually, even when another mechanical repair fails.
 Unknown ownership routes to one serial reviewer. Repeated identical failures
 after a repair that changed no corpus, contracts, decisions or tooling stop
 before another agent call. The complete final battery remains mandatory.
+Preflight envelopes retain validated original fatal adjudications bound to the
+pre-Step-8 baseline. A repaired item awaiting rejudge may have no live rejection
+tuple, but its original licence still permits completing the assigned repair.
+The later frozen close stage receives no such item-edit licence.
 
 `8-preflight` closes non-judge integrity before paid rejudgment. `8-rejudge`
 targets only items repaired by the initial Sol adjudicator. Each repaired item
