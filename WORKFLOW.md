@@ -221,6 +221,10 @@ mint a prerequisite pair, or rescope. The following `1-drift-apply` stage
 always runs `drift-apply.mjs`, mechanically repacking manifests and
 regenerating the scope ledger and task files from the reviewed spec before any
 Beta starts; even a same-scope edge or order edit is therefore materialized.
+For a deliberately resumed same-scope checkpoint, it instead preserves saved
+item arrays and batch identities while refreshing plan-owned metadata and the
+derived artifacts. A mint or rescope still refuses populated manifests because
+that scope change can detach or destroy saved Beta work.
 Ledger regeneration preserves the plan-time `--allow-in-run-dependencies`
 opt-in, so an explicitly approved earlier-prerequisite chain remains valid.
 

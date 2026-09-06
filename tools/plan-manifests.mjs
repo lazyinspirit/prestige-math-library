@@ -104,6 +104,39 @@ export function scaffoldedManifests(repo, run) {
   return populated;
 }
 
+/** Refresh plan-owned page metadata without changing batch identities or Beta items.
+ *
+ * This is the checkpoint-resume counterpart to `writeManifests`. A resumed run
+ * may already have valid scaffold work while its new drift review adds only
+ * edges or changes order values. Repacking would detach that work from its
+ * durable batch receipts; replacing `items` would destroy it. Scope-changing
+ * mint/rescope decisions are deliberately not handled here.
+ */
+export function syncManifestsPreservingItems(repo, run) {
+  const spec = loadPlan(repo);
+  const byId = new Map(spec.pages.map((p) => [p.id, p]));
+  const written = [];
+  for (let batch = 1; ; batch += 1) {
+    const path = join(repo, 'research', `${run}-batch-${batch}.pages.json`);
+    if (!existsSync(path)) break;
+    const prior = JSON.parse(readFileSync(path, 'utf8'));
+    if (!Array.isArray(prior)) throw new Error(`manifest ${path} is not an array`);
+    const entries = prior.map((page) => {
+      const current = byId.get(page?.id);
+      if (!current) throw new Error(`manifest ${path} names page ${page?.id ?? '(missing id)'}, absent from plan-spec.json`);
+      const entry = {};
+      for (const key of MANIFEST_KEYS) {
+        if (key === 'items') entry.items = Array.isArray(page.items) ? page.items : [];
+        else if (key in current) entry[key] = current[key];
+      }
+      return entry;
+    });
+    writeFileSync(path, JSON.stringify(entries, null, 2) + '\n');
+    written.push({ batch, path, pages: entries.map((entry) => entry.id) });
+  }
+  return written;
+}
+
 /** Write the step-0 batch manifests, with empty item lists for the Betas.
  *
  *  REFUSES to overwrite a manifest that already carries items. `plan` is a

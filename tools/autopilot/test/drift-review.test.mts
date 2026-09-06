@@ -14,7 +14,7 @@
 // live namespace; a fixture the engine can read is an input, not a fixture.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -378,6 +378,81 @@ test('ordinary applied edges and reorders materialize instead of becoming a no-o
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /would sync demo onto 1 pair/);
   assert.doesNotMatch(result.stdout, /nothing to materialise/);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('same-scope drift sync preserves saved Beta items and batch identity', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'drift-resume-'));
+  mkdirSync(join(dir, 'research'));
+  mkdirSync(join(dir, 'tools'));
+  const a = {
+    order: 20, id: 'alpha-page', title: 'Alpha', kind: 'A', category: 'demo',
+    companion: 'alpha-page-examples', requires: ['gamma-page'], items: [],
+  };
+  const b = {
+    order: 21, id: 'alpha-page-examples', title: 'Alpha examples', kind: 'B', category: 'demo',
+    companion: 'alpha-page', requires: ['alpha-page'], items: [],
+  };
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify({ pages: [a, b] }, null, 2));
+  writeFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), JSON.stringify([
+    { ...a, order: 10, requires: [], items: [{ id: 'saved-item', kind: 'definition', deps: [] }] },
+    b,
+  ], null, 2));
+  writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), [
+    '### alpha-page',
+    'VERDICT: drift-applied — added gamma-page (order 5)',
+  ].join('\n'));
+  writeFileSync(join(dir, 'tools', 'manifest-integrity.mjs'), 'console.log("LEDGER_OK");\n');
+  writeFileSync(join(dir, 'tools', 'run-tasks.mjs'), 'console.log("TASKS_OK");\n');
+
+  const result = spawnSync(process.execPath, [APPLY, '--run', 'demo'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /preserving saved Beta items and batch identities/);
+  const manifest = JSON.parse(readFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), 'utf8'));
+  assert.equal(manifest[0].order, 20);
+  assert.deepEqual(manifest[0].requires, ['gamma-page']);
+  assert.deepEqual(manifest[0].items, [{ id: 'saved-item', kind: 'definition', deps: [] }]);
+  assert.equal(manifest[0].id, 'alpha-page');
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('scope-changing drift still refuses saved Beta work', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'drift-resume-scope-'));
+  mkdirSync(join(dir, 'research'));
+  const pages = [
+    {
+      order: 20, id: 'alpha-page', title: 'Alpha', kind: 'A', category: 'demo',
+      companion: 'alpha-page-examples', requires: [], items: [],
+    },
+    {
+      order: 21, id: 'alpha-page-examples', title: 'Alpha examples', kind: 'B', category: 'demo',
+      companion: 'alpha-page', requires: ['alpha-page'], items: [],
+    },
+    {
+      order: 5, id: 'delta-page', title: 'Delta', kind: 'A', category: 'demo',
+      companion: 'delta-page-examples', requires: [], items: [],
+    },
+    {
+      order: 6, id: 'delta-page-examples', title: 'Delta examples', kind: 'B', category: 'demo',
+      companion: 'delta-page', requires: ['delta-page'], items: [],
+    },
+  ];
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify({ pages }, null, 2));
+  writeFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), JSON.stringify([
+    { ...pages[0], items: [{ id: 'saved-item' }] }, pages[1],
+  ], null, 2));
+  writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), [
+    '### alpha-page',
+    'VERDICT: drift-minted — added delta-page (order 5)',
+  ].join('\n'));
+
+  const result = spawnSync(process.execPath, [APPLY, '--run', 'demo'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /drift-apply-scaffolded/);
+  const manifest = JSON.parse(readFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), 'utf8'));
+  assert.equal(manifest[0].items[0].id, 'saved-item');
   rmSync(dir, { recursive: true, force: true });
 });
 

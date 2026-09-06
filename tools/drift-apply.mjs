@@ -16,17 +16,22 @@
 // bookkeeping. If the report says nothing to apply, this exits 0 having done
 // nothing, so it is safe as an unconditional repair step.
 //
-// WHAT IT REFUSES. It will not touch a run whose manifests already carry a
-// Beta's items: rescoping a scaffolded run destroys authored work, and the
-// scope ledger regenerated afterwards would CONFIRM the loss. Stage `1-drift`
-// exists so that this always runs before any Beta starts; the guard is for the
-// case where the stage order is changed and this assumption quietly stops
-// holding.
+// WHAT IT REFUSES. It will not mint or rescope a run whose manifests already
+// carry a Beta's items: either operation can detach authored work from its
+// batch receipt or destroy it. A same-scope sync is safe for a deliberately
+// resumed checkpoint: it preserves batch identities and item arrays while
+// refreshing only plan-owned metadata such as `requires` and `order`.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { packBatches, writeManifests, scaffoldedManifests, loadPlan } from './plan-manifests.mjs';
+import {
+  packBatches,
+  writeManifests,
+  scaffoldedManifests,
+  syncManifestsPreservingItems,
+  loadPlan,
+} from './plan-manifests.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
@@ -116,14 +121,6 @@ if (errors.length) {
   process.exit(1);
 }
 
-const populated = scaffoldedManifests(repo, run);
-if (populated.length) {
-  console.error(`ERROR drift-apply-scaffolded: ${populated.length} manifest(s) already carry authored items `
-    + `(${populated[0]}${populated.length > 1 ? ', …' : ''}). The drift decision must be applied before any Beta runs; `
-    + 'stage `1-drift` exists to guarantee that ordering.');
-  process.exit(1);
-}
-
 // ---- apply --------------------------------------------------------------
 const existingBatches = () => {
   const out = [];
@@ -184,6 +181,14 @@ if (rescopeTo.size) {
   finalPairs = [...existingPairs];
 }
 
+const populated = scaffoldedManifests(repo, run);
+if (populated.length && mode !== 'sync') {
+  console.error(`ERROR drift-apply-scaffolded: ${populated.length} manifest(s) already carry authored items `
+    + `(${populated[0]}${populated.length > 1 ? ', …' : ''}). A ${mode} decision changes run scope and cannot be `
+    + 'applied over saved Beta work; preserve or explicitly tear down that work before replanning.');
+  process.exit(1);
+}
+
 if (dryRun) {
   console.log(`drift-apply --dry-run: would ${mode} ${run} onto ${finalPairs.length} pair(s): ${finalPairs.join(', ')}`);
   for (const d of dropped) console.log(`  would drop ${d.dropped} — its prerequisite ${d.for} is built in its place`);
@@ -199,11 +204,17 @@ for (const d of dropped) {
 // because `1-drift` runs before the first Beta dispatch. Manifests beyond the
 // new count are emptied rather than left, because `batches()` reads the
 // directory and a stale file is a phantom batch the engine would try to cover.
-const groups = packBatches(repo, finalPairs, { cap });
-for (const i of existingBatches()) {
-  if (i > groups.length) writeFileSync(join(repo, 'research', `${run}-batch-${i}.pages.json`), '[]\n');
+let written;
+if (populated.length) {
+  written = syncManifestsPreservingItems(repo, run);
+  console.log(`  preserving saved Beta items and batch identities in ${populated.length} scaffolded manifest(s)`);
+} else {
+  const groups = packBatches(repo, finalPairs, { cap });
+  for (const i of existingBatches()) {
+    if (i > groups.length) writeFileSync(join(repo, 'research', `${run}-batch-${i}.pages.json`), '[]\n');
+  }
+  written = writeManifests(repo, run, groups, { force: true, startAt: 1 });
 }
-const written = writeManifests(repo, run, groups, { force: true, startAt: 1 });
 
 for (const w of written) console.log(`  batch ${w.batch}: ${w.pages.join(', ')}`);
 

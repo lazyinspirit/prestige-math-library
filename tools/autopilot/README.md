@@ -190,6 +190,10 @@ The prerequisite-drift review is followed by the mechanical
 `1-drift-apply` barrier. It rewrites manifests, the scope ledger, and generated
 tasks from the reviewed plan before scaffolding, including when the review only
 added edges or reordered existing pages and did not mint or rescope anything.
+For a deliberately resumed same-scope checkpoint, it keeps saved item arrays
+and batch identities while syncing plan metadata and derived artifacts. A mint
+or rescope still refuses populated manifests because that scope change can
+detach or destroy the saved Beta work.
 
 `src/spec.mts` refuses a pipelined stage with no `role`, a non-function `cohort`,
 and a pipeline name reused non-contiguously — which would silently mean two
