@@ -134,3 +134,63 @@ test('publication readiness seals protected inputs without rejecting expected re
     assert.match(result.stderr, /protected_tree_(?:files|sha256) is stale/);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
+
+test('readiness permits historical publication but rejects publication during the run', () => {
+  for (const priorStatus of ['published', 'draft', 'renamed']) {
+    const root = fixture();
+    const git = (...args: string[]) => {
+      const result = spawnSync('git', args, { cwd: root, encoding: 'utf8', env: {
+        ...process.env, GIT_AUTHOR_DATE: '2000-01-01T00:00:00Z', GIT_COMMITTER_DATE: '2000-01-01T00:00:00Z',
+      } });
+      assert.equal(result.status, 0, result.stderr);
+      return result.stdout.trim();
+    };
+    try {
+      const file = join(root, 'items', 'thm-a.md');
+      const original = readFileSync(file, 'utf8');
+      writeFileSync(file, original.replace('status: draft', `status: ${priorStatus === 'renamed' ? 'published' : priorStatus}`)
+        .replace('id: thm-a', priorStatus === 'renamed' ? 'page: thm-a\nid: thm-old' : 'id: thm-a'));
+      git('init', '-q');
+      git('add', '.');
+      git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'baseline');
+      const baseline = git('rev-parse', 'HEAD');
+      const ledger = join(root, 'research', 'demo-scope-ledger.json');
+      writeFileSync(ledger, JSON.stringify({ ...JSON.parse(readFileSync(ledger, 'utf8')), baseline_commit: baseline }));
+      writeFileSync(file, original.replace('status: draft', 'status: published'));
+      const result = runReadiness(root, '--write');
+      assert.equal(result.status, priorStatus === 'published' ? 0 : 1, result.stderr);
+      if (priorStatus === 'published') {
+        assert.equal(JSON.parse(readFileSync(join(root, 'research', 'demo-publication-readiness.json'), 'utf8')).published_baseline_commit, baseline);
+        assert.equal(runReadiness(root, '--verify').status, 0);
+        writeFileSync(ledger, JSON.stringify({ ...JSON.parse(readFileSync(ledger, 'utf8')), baseline_commit: 'invalid' }));
+        assert.equal(runReadiness(root, '--write').status, 1, 'missing historical anchor must fail closed');
+      } else assert.match(result.stderr, /expected status:draft/);
+    } finally { rmSync(root, { recursive: true, force: true }); }
+  }
+});
+
+test('scope creation pins Git HEAD and refresh preserves the original baseline', () => {
+  const root = fixture();
+  const git = (...args: string[]) => spawnSync('git', args, { cwd: root, encoding: 'utf8' });
+  try {
+    assert.equal(git('init', '-q').status, 0);
+    assert.equal(git('add', '.').status, 0);
+    assert.equal(git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'baseline').status, 0);
+    const baseline = git('rev-parse', 'HEAD').stdout.trim();
+    const path = join(root, 'research', 'fresh-scope-ledger.json');
+    writeFileSync(join(root, 'research', 'fresh-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', kind: 'A', items: [] }]));
+    const writeLedger = () => spawnSync(process.execPath, [join(REPO, 'tools', 'manifest-integrity.mjs'),
+      '--run', 'fresh', '--write-ledger', '--force'], { cwd: root, encoding: 'utf8' });
+    assert.equal(writeLedger().status, 0);
+    assert.equal(JSON.parse(readFileSync(path, 'utf8')).baseline_commit, baseline);
+    assert.equal(git('add', '.').status, 0);
+    assert.equal(git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'later').status, 0);
+    assert.equal(writeLedger().status, 0);
+    assert.equal(JSON.parse(readFileSync(path, 'utf8')).baseline_commit, baseline);
+    const legacy = JSON.parse(readFileSync(path, 'utf8'));
+    delete legacy.baseline_commit;
+    writeFileSync(path, JSON.stringify(legacy));
+    assert.equal(writeLedger().status, 0);
+    assert.equal(JSON.parse(readFileSync(path, 'utf8')).baseline_commit, null, 'legacy refresh must not silently authorize current publication');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});

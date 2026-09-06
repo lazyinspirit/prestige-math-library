@@ -31,6 +31,7 @@
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const argv = process.argv.slice(2);
 const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d; };
@@ -70,9 +71,12 @@ if (write) {
     console.error('  Pass --force only for a deliberate re-baseline, on the record.');
     process.exit(2);
   }
+  const previous = existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf8')) : null;
+  const head = previous ? null : spawnSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' });
   const ledger = {
     run,
     written: new Date().toISOString(),
+    baseline_commit: previous ? previous.baseline_commit ?? null : head?.status === 0 ? head.stdout.trim() : null,
     note: 'Every page this run owes. A page here that is absent from every manifest later is scope loss, not a disposition.',
     allow_in_run_dependencies: argv.includes('--allow-in-run-dependencies'),
     pages: [...current.entries()].map(([id, v]) => ({ id, kind: v.kind, batch: v.batch })).sort((a, b) => a.id.localeCompare(b.id)),

@@ -77,10 +77,25 @@ if (!blockers.length && write) {
 
 let scope;
 try { scope = runScope(run, root); } catch (error) { blockers.push(String(error.message ?? error)); }
+// Reused published files retain owner-approved status; new publication still
+// fails. The scope pins an exact pre-run commit; dates cannot establish history.
+const git = (...args) => spawnSync('git', args, { cwd: root, encoding: 'utf8' });
+const baseline = scope && JSON.parse(readFileSync(join(root, scope.ledger), 'utf8')).baseline_commit;
+const publishedBaseline = typeof baseline === 'string' && /^[a-f0-9]{40,64}$/.test(baseline)
+  && git('merge-base', '--is-ancestor', baseline, 'HEAD').status === 0 ? baseline : null;
 if (scope) {
   for (const row of [...scope.pages, ...scope.items]) {
     const { frontmatter } = splitFrontmatter(readFileSync(join(root, row.file), 'utf8'));
     const status = frontmatter.match(/^status:\s*(\S+)\s*$/m)?.[1];
+    if (status === 'published' && publishedBaseline) {
+      const prior = git('show', `${publishedBaseline}:${row.file}`);
+      if (prior.status === 0) {
+        const fm = splitFrontmatter(prior.stdout).frontmatter;
+        const key = row.file.startsWith('items/') ? 'id' : 'page';
+        const identity = fm.match(new RegExp(`^${key}:\\s*([^\\n]+?)\\s*$`, 'm'))?.[1]?.replace(/^['"]|['"]$/g, '');
+        if (identity === row.id && /^status:\s*published\s*$/m.test(fm)) continue;
+      }
+    }
     if (status !== 'draft') blockers.push(`${row.file}: expected status:draft pending owner approval, found ${status ?? 'missing'}`);
   }
 }
@@ -95,6 +110,7 @@ const expected = {
   workflow_owned_blockers: blockers,
   content_sha256: scope ? runContentHash(run, root) : null,
   input_sha256: inputHashes,
+  published_baseline_commit: publishedBaseline,
   ...treeReceipt,
   owner_actions_remaining: ['personal mathematical audit', 'deliberate status:published changes', 'push/deployment'],
 };
@@ -105,7 +121,7 @@ if (write) {
   if (!existsSync(receiptPath)) blockers.push(`missing ${receiptRel}`);
   else {
     const saved = JSON.parse(readFileSync(receiptPath, 'utf8'));
-    for (const key of ['schema', 'run', 'verdict', 'content_sha256', 'protected_tree_files', 'protected_tree_sha256']) {
+    for (const key of ['schema', 'run', 'verdict', 'content_sha256', 'published_baseline_commit', 'protected_tree_files', 'protected_tree_sha256']) {
       if (saved[key] !== expected[key]) blockers.push(`${receiptRel}: ${key} is stale`);
     }
     if (JSON.stringify(saved.input_sha256) !== JSON.stringify(expected.input_sha256)) blockers.push(`${receiptRel}: input hashes are stale`);

@@ -457,8 +457,14 @@ dispatch; after it exits, a fresh controller continues with the saved evidence.
 
 Step 10 serially closes terminal contracts/ledger, pathways, stamps, final
 readiness, reconciled evidence, protected-tree reporting, obligations, and the
-main-branch close-out commit. `publication-ready.mjs` requires all run items to
-remain `status: draft` and seals the final protected-tree hash. Runtime state
+main-branch close-out commit. `publication-ready.mjs` requires new run content to
+remain `status: draft` and seals the final protected-tree hash. Reused pages/items
+may retain `published` only when the same identity was published at the exact
+`baseline_commit` pinned by initial scope-ledger creation and preserved on refresh.
+The commit must be an ancestor of HEAD; the receipt records and verifies it.
+Legacy runs require explicit historical-baseline recovery, never a date guess.
+Missing history fails closed for published files. This exception neither publishes new
+content nor waives mathematical, impact or coverage checks. Runtime state
 directories named `.autopilot` or `.autopilot-*` are excluded from both Step 10
 tree seals because their event and status files continue changing while the
 sealed content is verified.
