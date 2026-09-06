@@ -2,13 +2,14 @@
 id: thm-gluing-affine-schemes
 kind: theorem
 title: "Gluing affine schemes along compatible open isomorphisms"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-affine-scheme, def-gluing-datum-sheaves, thm-gluing-ringed-and-locally-ringed-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

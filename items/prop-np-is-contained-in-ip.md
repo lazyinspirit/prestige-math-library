@@ -2,7 +2,7 @@
 id: prop-np-is-contained-in-ip
 kind: proposition
 title: "NP is contained in IP"
-status: draft
+status: published
 origin: session
 deps: [def-ip, def-np-by-verifiers]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

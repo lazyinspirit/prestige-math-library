@@ -2,7 +2,7 @@
 id: lem-localisation-of-cohen-macaulay-module-depth-dimension-equality
 title: Localization preserves the Cohen--Macaulay depth--dimension equality
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-cohen-macaulay-local-module-and-ring, lem-depth-localisation-inequality, cor-depth-of-a-finite-local-module-at-most-its-dimension]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

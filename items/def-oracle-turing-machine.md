@@ -2,13 +2,14 @@
 id: def-oracle-turing-machine
 kind: definition
 title: "Oracle Turing machines"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-relative-computability-and-enumerability]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

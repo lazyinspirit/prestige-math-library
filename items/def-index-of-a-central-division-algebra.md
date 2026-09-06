@@ -2,13 +2,14 @@
 id: def-index-of-a-central-division-algebra
 kind: definition
 title: "Index of a central division algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-division-ring, def-extension-degree-and-finite-extension]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

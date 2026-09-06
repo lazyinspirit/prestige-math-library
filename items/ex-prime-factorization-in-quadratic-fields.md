@@ -2,7 +2,9 @@
 id: ex-prime-factorization-in-quadratic-fields
 kind: example
 title: "Prime factorisation in quadratic fields"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [thm-fundamental-identity-for-primes-in-number-fields, def-split-inert-ramified-and-unramified-prime]
 proof_strategy: direct

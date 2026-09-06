@@ -2,13 +2,14 @@
 id: def-triangulated-category-axiom-tr-four-octahedral
 kind: definition
 title: "Triangulated-category axiom TR4 (octahedral)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-distinguished-triangle, def-morphism-and-isomorphism-of-triangles, def-rotation-of-a-triangle]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,12 +2,13 @@
 id: def-closed-immersion-schemes
 kind: definition
 title: "Closed immersions of schemes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-morphism-of-schemes, def-ideal-sheaf]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

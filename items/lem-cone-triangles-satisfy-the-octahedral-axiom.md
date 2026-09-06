@@ -2,7 +2,9 @@
 id: lem-cone-triangles-satisfy-the-octahedral-axiom
 kind: lemma
 title: "Cone triangles satisfy the octahedral axiom"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

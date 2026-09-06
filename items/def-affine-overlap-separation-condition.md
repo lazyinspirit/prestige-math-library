@@ -2,12 +2,13 @@
 id: def-affine-overlap-separation-condition
 kind: definition
 title: "Affine-overlap separation condition"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-scheme-over-base, def-affine-open-subscheme, def-section-restriction-and-global-section, thm-tensor-product-of-algebras-over-a-commutative-ring]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

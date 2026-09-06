@@ -2,7 +2,7 @@
 id: lem-a-nonzero-verma-homomorphism-is-injective
 kind: lemma
 title: "A nonzero homomorphism between Verma modules is injective"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-pbw-model-of-a-verma-module, lem-enveloping-algebra-of-the-negative-nilpotent-lie-algebra-is-a-domain]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-every-triangulated-subcategory-is-thick
 kind: false-statement
 title: "Every triangulated subcategory is thick"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-triangulated-subcategory, def-thick-subcategory, def-zero-and-stalk-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-unparametrized-morse-trajectory-moduli-space
 kind: definition
 title: "Unparametrized Morse trajectory moduli space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-parametrized-morse-trajectory-space, lem-time-translation-acts-freely-on-nonconstant-trajectories]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

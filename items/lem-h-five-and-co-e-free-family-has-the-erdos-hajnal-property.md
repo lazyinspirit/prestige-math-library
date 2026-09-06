@@ -2,7 +2,7 @@
 id: lem-h-five-and-co-e-free-family-has-the-erdos-hajnal-property
 kind: lemma
 title: "The family consisting of $H_5$ and co-$E$ has the Erdős–Hajnal property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-h-zero-through-h-five, def-e-graph-and-co-e-graph, def-h-free-and-family-free-graph, def-erdos-hajnal-property-and-constant, cor-the-h-zero-graph-has-the-erdos-hajnal-property, cor-the-five-vertex-path-and-its-complement-have-the-erdos-hajnal-property, prop-erdos-hajnal-property-passes-to-hereditary-subclasses]
 proof_strategy: induction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

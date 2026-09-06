@@ -2,7 +2,9 @@
 id: lem-protocol-value-is-computable-in-polynomial-space
 kind: lemma
 title: "A polynomial-round protocol value is computable in polynomial space"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: session
 deps: [def-protocol-game-tree-and-value, lem-optimal-prover-may-be-deterministic, def-pspace-and-npspace]
 proof_strategy: direct

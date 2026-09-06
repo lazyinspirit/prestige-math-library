@@ -2,12 +2,13 @@
 id: ex-closed-subscheme-double-origin-point
 kind: example
 title: "Two infinitesimal structures at the origin"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [thm-affine-closed-immersions-quotient-rings, def-closed-immersion-schemes]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

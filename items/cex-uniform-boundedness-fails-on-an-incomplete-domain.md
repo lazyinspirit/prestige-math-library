@@ -2,14 +2,17 @@
 id: cex-uniform-boundedness-fails-on-an-incomplete-domain
 kind: counterexample
 title: "Uniform boundedness fails on the incomplete space c_00"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-bounded-linear-operator, def-operator-norm]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources: {references: [{title: "Buhler--Salamon, Functional Analysis, Example 2.6", url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"}]}
 ---
 ## Statement refuted

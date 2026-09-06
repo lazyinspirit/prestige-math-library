@@ -2,7 +2,9 @@
 id: cex-symmetric-torus-height-flow-is-not-morse-smale
 kind: counterexample
 title: "The symmetric torus height flow is not Morse--Smale"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-perron-kernel
 kind: lemma
 title: "The symmetric Perron kernel"
-status: draft
+status: published
 origin: pipeline
 deps: []
 proof_strategy: contour
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

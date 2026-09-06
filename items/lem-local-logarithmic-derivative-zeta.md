@@ -2,7 +2,9 @@
 id: lem-local-logarithmic-derivative-zeta
 kind: lemma
 title: "A local formula for the logarithmic derivative of zeta"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [def-riemann-zeta-zero-counting, thm-hadamard-product-for-riemann-xi, cor-zeta-zero-count-unit-interval, thm-trivial-zeros-and-critical-strip, def-riemann-xi-function, thm-stirling-formula-gamma, thm-von-mangoldt-logarithmic-derivative-zeta]
 proof_strategy: direct

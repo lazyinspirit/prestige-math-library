@@ -2,13 +2,14 @@
 id: def-jantzen-deformation-and-filtration-of-a-verma-module
 kind: definition
 title: "The Jantzen deformation and filtration of a Verma module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-existence-and-uniqueness-of-the-shapovalov-form, def-weyl-vector-rho-for-a-chosen-positive-system, thm-pbw-model-of-a-verma-module]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

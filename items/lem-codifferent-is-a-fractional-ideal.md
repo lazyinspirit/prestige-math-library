@@ -2,7 +2,7 @@
 id: lem-codifferent-is-a-fractional-ideal
 kind: lemma
 title: "The codifferent is a fractional ideal"
-status: draft
+status: published
 origin: pipeline
 deps: [def-trace-dual-and-codifferent-of-a-number-field, def-fractional-ideal]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,14 +2,17 @@
 id: thm-banach-steinhaus-dichotomy
 kind: theorem
 title: "Baire dichotomy for a pointwise-defined family of bounded linear operators"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-bounded-linear-operator, def-operator-norm, thm-baire-category-for-complete-metric-spaces, thm-uniform-boundedness-principle]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Teschl, Topics in Real and Functional Analysis, Theorem 4.3"

@@ -2,7 +2,7 @@
 id: cor-projective-variety-product-exists
 kind: corollary
 title: Products of nonempty projective varieties exist as projective varieties
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, §5g and 6.26
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

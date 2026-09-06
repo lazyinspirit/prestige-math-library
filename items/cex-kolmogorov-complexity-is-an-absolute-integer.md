@@ -2,7 +2,7 @@
 id: cex-kolmogorov-complexity-is-an-absolute-integer
 kind: counterexample
 title: "Changing an optimal machine changes finite-string complexity"
-status: draft
+status: published
 origin: session
 deps: [fs-kolmogorov-complexity-is-an-absolute-integer]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

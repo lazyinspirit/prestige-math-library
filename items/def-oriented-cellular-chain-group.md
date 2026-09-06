@@ -2,13 +2,16 @@
 id: def-oriented-cellular-chain-group
 kind: definition
 title: Oriented cellular chain group
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-relative-homology-of-consecutive-cw-skeleta]
-verification: {precheck: n/a, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: n/a
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Section 2.2

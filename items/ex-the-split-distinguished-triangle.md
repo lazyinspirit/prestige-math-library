@@ -2,7 +2,7 @@
 id: ex-the-split-distinguished-triangle
 kind: example
 title: "The split distinguished triangle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-zero-and-split-triangles-are-distinguished, prop-a-distinguished-triangle-splits-exactly-when-one-connecting-map-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

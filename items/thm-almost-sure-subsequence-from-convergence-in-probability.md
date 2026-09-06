@@ -2,7 +2,7 @@
 id: thm-almost-sure-subsequence-from-convergence-in-probability
 kind: theorem
 title: "An almost-surely convergent subsequence from convergence in probability"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "S. Roch, Lecture 3: Modes of convergence, Theorem 3.12"
       url: "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes3.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 

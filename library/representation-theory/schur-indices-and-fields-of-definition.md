@@ -1,7 +1,7 @@
 ---
 page: schur-indices-and-fields-of-definition
 title: "Schur Indices and Fields of Definition"
-status: draft
+status: published
 items: [def-character-field-and-field-of-definition, def-galois-conjugate-representation, lem-base-change-of-intertwiner-spaces, lem-galois-conjugates-have-equal-scalar-extension-multiplicity, thm-scalar-extension-of-an-irreducible-finite-group-representation, lem-character-field-is-the-stabilizer-fixed-field, def-endomorphism-division-algebra-of-an-irreducible, thm-absolute-irreducibility-via-the-endomorphism-division-algebra, def-schur-index-of-an-irreducible-character, lem-schur-index-is-independent-of-the-chosen-splitting-field, thm-character-of-an-irreducible-over-a-nonsplitting-field, cor-schur-index-divides-the-representation-degree, def-index-of-a-central-division-algebra, thm-schur-index-equals-division-algebra-index, thm-schur-index-as-minimal-realization-multiplicity]
 examples: []
 ---

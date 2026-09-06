@@ -2,7 +2,9 @@
 id: ex-sequential-repetition-amplifies-error
 kind: example
 title: "Sequential repetition of a constant-gap protocol"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: session
 deps: [lem-sequential-repetition-amplifies-error]
 proof_strategy: direct

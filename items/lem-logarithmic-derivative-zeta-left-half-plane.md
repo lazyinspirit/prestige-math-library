@@ -2,7 +2,7 @@
 id: lem-logarithmic-derivative-zeta-left-half-plane
 kind: lemma
 title: "A left-half-plane bound for the logarithmic derivative of zeta"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-riemann-zeta-functional-equation, thm-stirling-formula-gamma]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

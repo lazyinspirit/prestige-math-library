@@ -2,13 +2,14 @@
 id: def-conditional-kolmogorov-complexity
 kind: definition
 title: "Conditional Kolmogorov complexity"
-status: draft
+status: published
 origin: session
 deps: [def-description-machine-and-plain-kolmogorov-complexity, def-effective-binary-encoding-and-decoder]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

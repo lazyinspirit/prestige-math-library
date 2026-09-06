@@ -2,7 +2,7 @@
 id: ex-sl2-verma-embedding-chain
 kind: example
 title: "The sl2 Verma embedding chain"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-simple-reflection-embedding-of-verma-modules, thm-bgg-verma-homomorphism-criterion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

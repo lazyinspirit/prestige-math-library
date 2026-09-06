@@ -2,13 +2,14 @@
 id: def-galois-conjugate-representation
 kind: definition
 title: "Galois conjugates of a representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-finite-galois-extension-and-galois-group, def-restriction-and-extension-of-scalars, def-finite-dimensional-representation-of-a-group-over-a-field]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

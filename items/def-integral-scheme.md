@@ -2,12 +2,13 @@
 id: def-integral-scheme
 kind: definition
 title: "Integral schemes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-scheme, def-reduction-of-scheme, def-irreducible-topological-space-and-subset, def-affine-open-subscheme]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

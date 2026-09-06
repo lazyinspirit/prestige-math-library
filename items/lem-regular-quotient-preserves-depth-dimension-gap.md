@@ -2,7 +2,7 @@
 id: lem-regular-quotient-preserves-depth-dimension-gap
 title: A regular parameter quotient preserves the depth--dimension gap
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [lem-depth-quotient-by-regular-element, lem-parameter-dimension-drop-is-exact, thm-dimension-and-parameters-for-modules]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

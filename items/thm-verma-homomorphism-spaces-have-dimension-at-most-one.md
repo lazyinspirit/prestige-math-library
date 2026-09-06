@@ -2,7 +2,7 @@
 id: thm-verma-homomorphism-spaces-have-dimension-at-most-one
 kind: theorem
 title: "Homomorphism spaces between Verma modules have dimension at most one"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-every-verma-module-contains-a-simple-verma-submodule, lem-homomorphisms-from-a-simple-verma-module-have-dimension-at-most-one, lem-a-nonzero-verma-homomorphism-is-injective]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

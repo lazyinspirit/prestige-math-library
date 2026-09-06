@@ -2,7 +2,7 @@
 id: lem-ext-depth-shift-across-a-regular-element
 title: The first nonzero Ext shifts across a regular element
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-sequence-on-a-module, lem-ext-depth-zero-identifies-annihilated-elements, thm-long-exact-ext-sequence-in-the-second-variable]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 ## Statement

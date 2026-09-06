@@ -2,7 +2,7 @@
 id: prop-np-is-contained-in-p-sharpp
 kind: proposition
 title: "NP is contained in P with a Sharp-P oracle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-with-a-sharpp-oracle, def-sharpp-and-gap-p-functions, thm-number-sat-is-sharpp-complete]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: lem-polynomial-extension-depth-increases-by-one
 title: A polynomial variable increases depth by one
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-sequence-on-a-module, lem-depth-quotient-by-regular-element, thm-dimension-of-a-polynomial-ring-over-a-noetherian-ring]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

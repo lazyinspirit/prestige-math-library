@@ -2,7 +2,7 @@
 id: prop-verma-composition-multiplicities-are-finite
 kind: proposition
 title: "Verma composition multiplicities are finite"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-verma-composition-factor-has-the-same-central-character, cor-central-characters-are-dot-weyl-orbits, prop-casimir-eigenvalue-on-a-highest-weight-module, prop-weights-of-a-verma-module-lie-below-lambda]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

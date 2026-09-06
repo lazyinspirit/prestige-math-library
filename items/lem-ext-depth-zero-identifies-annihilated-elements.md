@@ -2,7 +2,7 @@
 id: lem-ext-depth-zero-identifies-annihilated-elements
 title: Ext degree zero identifies ideal-annihilated elements
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-balanced-ext-bifunctor]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

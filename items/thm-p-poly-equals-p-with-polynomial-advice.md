@@ -2,7 +2,7 @@
 id: thm-p-poly-equals-p-with-polynomial-advice
 kind: theorem
 title: "P/poly equals polynomial time with polynomial advice"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-circuit-family-and-p-poly, def-polynomial-advice-machine, thm-p-is-contained-in-p-poly]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

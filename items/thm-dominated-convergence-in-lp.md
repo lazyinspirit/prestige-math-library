@@ -2,7 +2,7 @@
 id: thm-dominated-convergence-in-lp
 kind: theorem
 title: "Dominated convergence in $L^p$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Theorem 1.5.8"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

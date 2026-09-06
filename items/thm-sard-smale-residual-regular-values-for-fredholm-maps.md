@@ -2,7 +2,7 @@
 id: thm-sard-smale-residual-regular-values-for-fredholm-maps
 kind: theorem
 title: "Sard--Smale residual regular values for Fredholm maps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-fredholm-maps-and-regular-values-on-countable-banach-manifolds, def-nowhere-dense-meagre-and-residual-subsets, thm-morse-sard-for-euclidean-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

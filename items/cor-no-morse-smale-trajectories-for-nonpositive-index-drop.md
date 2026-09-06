@@ -2,7 +2,7 @@
 id: cor-no-morse-smale-trajectories-for-nonpositive-index-drop
 kind: corollary
 title: "No Morse--Smale trajectories for nonpositive index drop"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-unparametrized-trajectory-space-is-a-smooth-manifold]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

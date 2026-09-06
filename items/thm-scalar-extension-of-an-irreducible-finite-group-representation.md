@@ -2,7 +2,7 @@
 id: thm-scalar-extension-of-an-irreducible-finite-group-representation
 kind: theorem
 title: "Scalar extension of an irreducible finite-group representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-splitting-field-for-a-finite-group, def-galois-conjugate-representation, lem-base-change-of-intertwiner-spaces, lem-galois-conjugates-have-equal-scalar-extension-multiplicity, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

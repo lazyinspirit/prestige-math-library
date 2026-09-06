@@ -2,7 +2,7 @@
 id: lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set
 kind: lemma
 title: "LCH Urysohn cutoff"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-compact-support-c-c-and-c-zero-on-an-lch-space, lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure, thm-urysohn-lemma]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

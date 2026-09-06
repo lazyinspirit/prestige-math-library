@@ -2,14 +2,17 @@
 id: thm-uniform-boundedness-principle
 kind: theorem
 title: "Uniform boundedness principle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-bounded-linear-operator, def-operator-norm, thm-baire-category-for-complete-metric-spaces]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Buhler--Salamon, Functional Analysis, Theorem 2.1"

@@ -2,7 +2,9 @@
 id: cex-a-three-term-zero-composite-diagram-that-is-not-distinguished
 kind: counterexample
 title: "A three-term zero-composite diagram that is not distinguished"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

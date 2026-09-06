@@ -2,7 +2,7 @@
 id: thm-rmk-representing-measure-is-inner-regular-on-open-sets
 kind: theorem
 title: "The RMK representing measure is inner regular on open sets"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-rmk-open-sets-are-caratheodory-measurable, lem-rmk-compact-set-formula-and-local-finiteness, def-radon-measure-on-an-lch-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

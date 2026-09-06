@@ -2,7 +2,7 @@
 id: cor-completion-preserves-cohen-macaulayness-two-directions
 title: Completion preserves Cohen--Macaulayness in both directions
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [def-cohen-macaulay-local-module-and-ring, lem-completion-reflects-depth, thm-completion-preserves-dimension-and-hilbert-samuel-data]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://stacks.math.columbia.edu/download/algebra.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

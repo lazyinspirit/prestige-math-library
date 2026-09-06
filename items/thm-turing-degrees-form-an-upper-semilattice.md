@@ -2,7 +2,7 @@
 id: thm-turing-degrees-form-an-upper-semilattice
 kind: theorem
 title: "Turing degrees form an upper semilattice"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-turing-degree-and-degree-order, lem-degree-order-is-representative-independent, def-tagged-join-of-oracles]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

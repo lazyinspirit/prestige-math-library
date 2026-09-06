@@ -2,13 +2,14 @@
 id: cex-closed-subset-does-not-determine-closed-subscheme
 kind: counterexample
 title: "A closed subset has many scheme structures"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [thm-affine-closed-immersions-quotient-rings, rem-topological-versus-scheme-theoretic-subspace]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

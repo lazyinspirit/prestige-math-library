@@ -2,12 +2,13 @@
 id: def-quasi-compact-and-quasi-separated-morphism
 kind: definition
 title: "Quasi-compact and quasi-separated morphisms"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-morphism-of-schemes, def-quasi-compact-and-quasi-separated-scheme, def-affine-open-subscheme]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

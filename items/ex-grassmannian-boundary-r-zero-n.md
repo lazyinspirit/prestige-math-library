@@ -2,7 +2,7 @@
 id: ex-grassmannian-boundary-r-zero-n
 kind: example
 title: The boundary Grassmannians Gr(0,V) and Gr(dim V,V)
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, §6m Grassmann varieties
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

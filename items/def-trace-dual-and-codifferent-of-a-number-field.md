@@ -2,13 +2,14 @@
 id: def-trace-dual-and-codifferent-of-a-number-field
 kind: definition
 title: "Trace duals and the codifferent"
-status: draft
+status: published
 origin: pipeline
 deps: [def-fractional-ideal, lem-trace-pairing-for-a-finite-separable-extension]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

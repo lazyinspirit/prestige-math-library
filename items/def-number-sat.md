@@ -2,13 +2,14 @@
 id: def-number-sat
 kind: definition
 title: "NumberSAT"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-boolean-formula-cnf-and-sat]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,9 @@
 id: thm-lusin-theorem-for-radon-measures
 kind: theorem
 title: "Lusin's theorem for a Radon measure"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

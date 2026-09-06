@@ -2,7 +2,7 @@
 id: cex-one-centred-ball-mean-identity-does-not-force-harmonicity
 kind: counterexample
 title: "One centred ball-mean identity does not force harmonicity"
-status: draft
+status: published
 origin: pipeline
 deps: [def-ball-average-operator-on-r-n, thm-polar-coordinates-formula-for-lebesgue-measure]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

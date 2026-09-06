@@ -2,13 +2,14 @@
 id: def-interactive-proof-transcript-round-and-strategy
 kind: definition
 title: "Interactive-proof transcripts, rounds, and prover strategies"
-status: draft
+status: published
 origin: session
 deps: [def-probabilistic-polynomial-time-machine]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

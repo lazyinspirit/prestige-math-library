@@ -2,7 +2,7 @@
 id: thm-regular-quotients-and-cohen-macaulayness
 title: Regular quotients and Cohen--Macaulayness
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [cor-regular-quotient-cohen-macaulay-equivalence]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

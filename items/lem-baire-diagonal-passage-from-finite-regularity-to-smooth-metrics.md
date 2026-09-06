@@ -2,7 +2,9 @@
 id: lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics
 kind: lemma
 title: "Baire diagonal passage from finite regularity to smooth metrics"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -49,4 +51,4 @@ Assume dependent choice. Let $M$ be a closed smooth finite-dimensional manifold 
 
 5.1 The smooth symmetric tensors on compact $M$ form a separable complete metrizable space under their countable derivative seminorms; positivity is an open condition. Hence $\mathcal G^\infty$ is second countable and completely metrizable (an open subset admits an equivalent complete metric). Choose countably many neighbourhoods $U_i$ as above and closed sets $V_i\subset U_i\cap\mathcal G^\infty$ whose interiors cover $\mathcal G^\infty$. This is obtained by taking sufficiently small closed balls from a countable metric basis. For each $i,j,k$, set $$ O_{ijk}=(\mathcal G^\infty\setminus V_i)\cup(T_{i,jk}\cap\mathcal G^\infty). $$ These sets are open and dense by steps 2.1 and 4.1. [step 2.1, step 4.1, given]
 
-6.1 By [F3] and dependent choice, $\bigcap_{i,j,k}O_{ijk}$ is dense and residual. Any metric in this intersection belongs to some $V_i$, hence satisfies every $T_{i,jk}$ and therefore the global pair transversality by step 2.1. The complement of the desired set is consequently contained in a countable union of closed nowhere dense sets, so the desired set itself is residual. Together with step 1.2 this covers all ordered pairs. [F3, step 1.2, step 2.1, step 5.1] ∎ 
+6.1 By [F3] and dependent choice, $\bigcap_{i,j,k}O_{ijk}$ is dense and residual. Any metric in this intersection belongs to some $V_i$, hence satisfies every $T_{i,jk}$ and therefore the global pair transversality by step 2.1. The complement of the desired set is consequently contained in a countable union of closed nowhere dense sets, so the desired set itself is residual. Together with step 1.2 this covers all ordered pairs. [F3, step 1.2, step 2.1, step 5.1] ∎

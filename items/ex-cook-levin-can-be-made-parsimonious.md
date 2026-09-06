@@ -2,7 +2,7 @@
 id: ex-cook-levin-can-be-made-parsimonious
 kind: example
 title: "A two-branch computation and its parsimonious tableau formula"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-cook-levin-can-be-made-parsimonious]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: lem-most-strings-are-incompressible
 kind: lemma
 title: "Most finite strings are incompressible"
-status: draft
+status: published
 origin: session
 deps: [def-description-machine-and-plain-kolmogorov-complexity, def-finite-probability-space-and-event]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

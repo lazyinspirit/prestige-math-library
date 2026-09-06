@@ -2,7 +2,7 @@
 id: ex-dedekind-kummer-in-a-cubic-field
 kind: example
 title: "Dedekind--Kummer in a cubic field"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-dedekind-kummer-prime-factorisation]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

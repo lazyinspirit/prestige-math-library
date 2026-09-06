@@ -2,13 +2,14 @@
 id: rem-rmk-functional-analysis-uses
 kind: remark
 title: "Functional-analysis uses of the RMK forms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

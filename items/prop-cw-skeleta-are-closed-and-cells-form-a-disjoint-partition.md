@@ -2,14 +2,17 @@
 id: prop-cw-skeleta-are-closed-and-cells-form-a-disjoint-partition
 kind: proposition
 title: CW skeleta are closed and cells form a disjoint partition
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-skeleta-cw-subcomplex-and-relative-cw-complex, lem-the-interior-of-an-attached-cell-embeds-openly-in-its-closure]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Chapter 0

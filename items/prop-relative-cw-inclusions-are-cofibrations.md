@@ -2,14 +2,16 @@
 id: prop-relative-cw-inclusions-are-cofibrations
 kind: proposition
 title: Relative CW inclusions are cofibrations
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-skeleta-cw-subcomplex-and-relative-cw-complex]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-07
+  precheck: pass
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Proposition 0.16

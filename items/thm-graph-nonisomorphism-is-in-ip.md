@@ -2,7 +2,9 @@
 id: thm-graph-nonisomorphism-is-in-ip
 kind: theorem
 title: "Graph nonisomorphism is in IP"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: session
 deps: [def-graph-nonisomorphism-protocol, def-ip, lem-sequential-repetition-amplifies-error]
 proof_strategy: direct

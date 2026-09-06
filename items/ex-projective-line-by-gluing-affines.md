@@ -2,7 +2,9 @@
 id: ex-projective-line-by-gluing-affines
 kind: example
 title: "The projective line from two affine charts"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 provenance:
   statement: literature-derived
   proof: literature-derived

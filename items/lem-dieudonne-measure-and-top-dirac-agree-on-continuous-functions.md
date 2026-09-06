@@ -2,7 +2,7 @@
 id: lem-dieudonne-measure-and-top-dirac-agree-on-continuous-functions
 kind: lemma
 title: "The Dieudonne measure and top-point Dirac mass agree on continuous functions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, thm-dieudonne-club-set-function-is-a-borel-measure, lem-continuous-functions-on-omega-one-plus-one-are-eventually-constant, def-dirac-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

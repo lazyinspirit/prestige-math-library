@@ -2,7 +2,7 @@
 id: ex-p-poly-equals-p-with-polynomial-advice
 kind: example
 title: "Hardwiring a length-indexed advice string"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-p-poly-equals-p-with-polynomial-advice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

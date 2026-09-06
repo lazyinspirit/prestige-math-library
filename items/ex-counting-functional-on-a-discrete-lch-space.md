@@ -2,7 +2,7 @@
 id: ex-counting-functional-on-a-discrete-lch-space
 kind: example
 title: "Counting measure represents finite-support summation on a discrete LCH space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-rmk-positive-functional-is-integration-against-its-representing-measure, def-counting-measure, prop-counting-measure-is-a-measure, def-nonnegative-lebesgue-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

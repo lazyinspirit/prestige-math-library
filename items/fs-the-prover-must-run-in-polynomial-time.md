@@ -2,7 +2,7 @@
 id: fs-the-prover-must-run-in-polynomial-time
 kind: false-statement
 title: "False: the prover must run in polynomial time"
-status: draft
+status: published
 origin: session
 deps: [def-interactive-proof-transcript-round-and-strategy]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

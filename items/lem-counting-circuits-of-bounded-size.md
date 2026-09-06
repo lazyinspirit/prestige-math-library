@@ -2,7 +2,7 @@
 id: lem-counting-circuits-of-bounded-size
 kind: lemma
 title: "Counting bounded-size Boolean circuits"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-boolean-circuit-size-depth-fanin-and-basis, thm-product-rule]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

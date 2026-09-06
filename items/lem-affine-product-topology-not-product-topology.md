@@ -2,7 +2,7 @@
 id: lem-affine-product-topology-not-product-topology
 kind: lemma
 title: The Zariski topology on an affine product is generally not the product topology
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: MIT 18.725 Algebraic Geometry, Lecture 7, Remarks 10 and 12
       url: https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 

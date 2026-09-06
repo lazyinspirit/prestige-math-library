@@ -2,7 +2,7 @@
 id: prop-a-map-is-zero-exactly-when-the-corresponding-representable-map-vanishes
 kind: proposition
 title: "A map is zero exactly when the corresponding representable map vanishes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-triangulated-category, thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

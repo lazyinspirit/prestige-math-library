@@ -2,7 +2,7 @@
 id: lem-veronese-map-well-defined-closed-immersion
 kind: lemma
 title: The Veronese map is a well-defined closed immersion
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, 6.23
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

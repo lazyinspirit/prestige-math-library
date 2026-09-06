@@ -2,7 +2,9 @@
 id: lem-universal-martin-lof-test-exists
 kind: lemma
 title: "A universal Martin-Löf test exists"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: session
 deps: [def-martin-lof-test-and-random-sequence, def-universal-and-acceptable-numbering]
 proof_strategy: direct

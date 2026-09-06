@@ -2,7 +2,7 @@
 id: cex-dieudonne-borel-measure-on-omega-one-plus-one-is-not-regular
 kind: counterexample
 title: "The Dieudonne Borel measure on [0, omega_1] is not regular"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, thm-dieudonne-club-set-function-is-a-borel-measure, thm-ordinal-spaces-and-compactness, fs-every-finite-borel-measure-on-a-compact-hausdorff-space-is-regular]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

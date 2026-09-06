@@ -2,7 +2,7 @@
 id: lem-evaluation-on-a-regular-level-identifies-unparametrized-trajectories
 kind: lemma
 title: "A regular level identifies unparametrized trajectories"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-unparametrized-morse-trajectory-moduli-space, def-parametrized-morse-trajectory-space, def-downward-gradient-like-vector-field, thm-a-regular-level-set-is-an-embedded-submanifold, thm-fundamental-theorem-on-flows]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

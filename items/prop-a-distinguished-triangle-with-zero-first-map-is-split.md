@@ -2,7 +2,7 @@
 id: prop-a-distinguished-triangle-with-zero-first-map-is-split
 kind: proposition
 title: "A distinguished triangle with zero first map is split"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-long-exact-hom-sequences-of-a-distinguished-triangle, prop-a-map-is-zero-exactly-when-the-corresponding-representable-map-vanishes, prop-zero-and-split-triangles-are-distinguished, def-split-monomorphism-and-split-epimorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

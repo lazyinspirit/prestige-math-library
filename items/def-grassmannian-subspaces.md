@@ -2,7 +2,7 @@
 id: def-grassmannian-subspaces
 kind: definition
 title: The Grassmannian of r-dimensional subspaces of a finite-dimensional vector space
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: MIT 18.725 Algebraic Geometry, Lecture 4, Example 4
       url: https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf
 verification:
+  audited: 2026-09-07
   precheck: n/a
 ---
 

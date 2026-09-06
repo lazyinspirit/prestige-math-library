@@ -2,7 +2,7 @@
 id: lem-diagonal-affine-variety-cut-out-by-coordinate-differences
 kind: lemma
 title: The affine diagonal is cut out by coordinate differences
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, §§5h--5i
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,14 +2,17 @@
 id: cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex
 kind: corollary
 title: The image of a compact space lies in a finite CW subcomplex
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells, def-skeleta-cw-subcomplex-and-relative-cw-complex]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Appendix A

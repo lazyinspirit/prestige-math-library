@@ -2,7 +2,9 @@
 id: thm-number-field-integral-ideal-factorisation-in-zf
 kind: theorem
 title: "Integral ideal factorisation in a number field, in ZF"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [lem-nonzero-number-field-ideal-has-finite-quotient, thm-chinese-remainder-theorem-for-comaximal-ideals]
 proof_strategy: constructive

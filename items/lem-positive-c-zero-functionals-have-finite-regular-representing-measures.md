@@ -2,7 +2,7 @@
 id: lem-positive-c-zero-functionals-have-finite-regular-representing-measures
 kind: lemma
 title: "Positive C_0(X) functionals have finite regular representing measures"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-compact-support-c-c-and-c-zero-on-an-lch-space, def-regular-borel-measure-on-an-lch-space, thm-rmk-positive-functional-is-integration-against-its-representing-measure, thm-rmk-uniqueness-among-radon-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

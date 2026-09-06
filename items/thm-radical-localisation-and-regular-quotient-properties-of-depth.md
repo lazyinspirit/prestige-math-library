@@ -2,7 +2,7 @@
 id: thm-radical-localisation-and-regular-quotient-properties-of-depth
 title: Radical, localization, and regular-quotient properties of depth
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [cor-depth-depends-only-on-radical, lem-depth-quotient-by-regular-element, lem-depth-localisation-inequality]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-rmk-compact-set-formula-and-local-finiteness
 kind: lemma
 title: "Compact-set formula and local finiteness of the RMK measure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-rmk-open-sets-are-caratheodory-measurable, lem-rmk-functional-outer-content-is-well-defined, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

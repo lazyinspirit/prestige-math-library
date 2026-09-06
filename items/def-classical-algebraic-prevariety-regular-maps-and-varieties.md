@@ -2,12 +2,13 @@
 id: def-classical-algebraic-prevariety-regular-maps-and-varieties
 kind: definition
 title: "Classical algebraic prevarieties, regular maps, and varieties"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-algebraically-closed-field, def-affine-algebraic-set, def-ringed-space, def-morphism-ringed-spaces, def-irreducible-topological-space-and-subset]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

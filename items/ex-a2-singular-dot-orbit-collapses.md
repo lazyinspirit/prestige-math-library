@@ -2,7 +2,7 @@
 id: ex-a2-singular-dot-orbit-collapses
 kind: example
 title: "A singular A2 dot orbit collapses"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-strong-linkage-order-on-weights]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

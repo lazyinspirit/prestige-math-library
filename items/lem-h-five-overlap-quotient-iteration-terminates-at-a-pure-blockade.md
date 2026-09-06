@@ -2,7 +2,7 @@
 id: lem-h-five-overlap-quotient-iteration-terminates-at-a-pure-blockade
 kind: lemma
 title: "Iterated mixed quotients of an $H_5$-overlap blockade terminate at a pure blockade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-h-five-overlap-blockade-and-iterated-mixed-quotients, def-blockade-length-and-width, def-quotient-blockade-by-mixed-block-reachability, lem-mixed-block-reachability-is-an-equivalence-relation, thm-well-ordering-principle]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

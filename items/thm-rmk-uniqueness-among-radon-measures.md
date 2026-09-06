@@ -2,7 +2,7 @@
 id: thm-rmk-uniqueness-among-radon-measures
 kind: theorem
 title: "Uniqueness of the RMK representing measure among Radon measures"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-rmk-positive-functional-is-integration-against-its-representing-measure, def-radon-measure-on-an-lch-space, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

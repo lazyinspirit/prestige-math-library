@@ -2,13 +2,14 @@
 id: def-category-with-translation
 kind: definition
 title: "Category with translation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-additive-category]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -25,4 +26,3 @@ A **category with translation** is an additive category $\mathcal T$ together
 with a specified additive autoequivalence $[1]:\mathcal T\to\mathcal T$ and a
 specified quasi-inverse $[-1]$. Write $X[n]$ for the iterated translates,
 using the chosen coherence isomorphisms $[n][m]\cong[n+m]$.
-

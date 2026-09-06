@@ -2,7 +2,7 @@
 id: ex-radial-harmonic-functions-away-from-the-origin
 kind: example
 title: "Radial harmonic functions away from the origin"
-status: draft
+status: published
 origin: pipeline
 deps: [def-laplacian-of-a-c2-function]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-homological-functor-on-a-triangulated-category
 kind: definition
 title: "Homological functor on a triangulated category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangulated-category, def-additive-functor, def-abelian-category]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -25,4 +26,3 @@ For a triangulated category $\mathcal T$ and abelian category $\mathcal A$, an
 additive covariant functor $H:\mathcal T\to\mathcal A$ is **homological** if
 $H(X)\to H(Y)\to H(Z)$ is exact for every distinguished triangle. TR2 then
 gives the long exact continuation through all translates.
-

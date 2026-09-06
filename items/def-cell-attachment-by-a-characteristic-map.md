@@ -2,13 +2,16 @@
 id: def-cell-attachment-by-a-characteristic-map
 kind: definition
 title: Cell attachment by a characteristic map
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
-verification: {precheck: n/a, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: n/a
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Chapter 0

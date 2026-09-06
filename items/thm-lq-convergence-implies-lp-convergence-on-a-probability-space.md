@@ -2,7 +2,7 @@
 id: thm-lq-convergence-implies-lp-convergence-on-a-probability-space
 kind: theorem
 title: "$L^q$ convergence implies $L^p$ convergence on a probability space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "S. Roch, Lecture 3: Modes of convergence, Theorem 3.12"
       url: "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes3.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

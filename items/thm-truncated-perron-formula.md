@@ -2,7 +2,7 @@
 id: thm-truncated-perron-formula
 kind: theorem
 title: "A truncated Perron formula"
-status: draft
+status: published
 origin: pipeline
 deps: [def-starred-summatory-function, lem-truncated-perron-kernel]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

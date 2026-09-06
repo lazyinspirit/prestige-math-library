@@ -2,14 +2,17 @@
 id: thm-closability-sequential-criterion
 kind: theorem
 title: "Sequential criterion for closability"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-closable-linear-operator, def-metric-interior-closure-boundary, def-dependent-choice]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources: {references: [{title: "Buhler--Salamon, Functional Analysis, Lemma 2.26", url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"}]}
 ---
 ## Statement

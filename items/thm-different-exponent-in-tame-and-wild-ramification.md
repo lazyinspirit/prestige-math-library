@@ -2,7 +2,7 @@
 id: thm-different-exponent-in-tame-and-wild-ramification
 kind: theorem
 title: "Different exponents in tame and wild ramification"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-prime-support-of-the-different-is-ramification, def-tame-and-wild-ramification]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

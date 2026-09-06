@@ -2,13 +2,14 @@
 id: def-formula-and-branching-program
 kind: definition
 title: "Boolean formulas and deterministic branching programs"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-boolean-circuit-size-depth-fanin-and-basis]
 verification:
+  audited: 2026-09-07
   precheck: n/a
 sources:
   references:

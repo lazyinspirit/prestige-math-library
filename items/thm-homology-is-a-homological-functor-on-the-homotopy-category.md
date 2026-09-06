@@ -2,7 +2,7 @@
 id: thm-homology-is-a-homological-functor-on-the-homotopy-category
 kind: theorem
 title: "Homology is a homological functor on the homotopy category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-homotopy-category-of-an-abelian-category-is-triangulated, def-homological-functor-on-a-triangulated-category, thm-homology-factors-uniquely-through-the-homotopy-category, thm-the-cone-long-exact-sequence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-distributional-harmonicity-removes-an-apparent-corner
 kind: example
 title: "Distributional harmonicity removes an apparent interior corner"
-status: draft
+status: published
 origin: pipeline
 deps: [def-distributional-harmonicity-and-poisson-equation-in-rn, thm-weyl-lemma-for-the-laplacian]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

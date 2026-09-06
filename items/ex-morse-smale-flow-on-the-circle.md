@@ -2,7 +2,7 @@
 id: ex-morse-smale-flow-on-the-circle
 kind: example
 title: "A Morse--Smale flow on the circle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-morse-smale-pair, thm-unparametrized-trajectory-space-is-a-smooth-manifold, prop-index-one-trajectory-spaces-are-zero-dimensional]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

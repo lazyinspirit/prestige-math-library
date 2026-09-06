@@ -2,7 +2,7 @@
 id: prop-index-two-trajectory-spaces-are-one-dimensional
 kind: proposition
 title: "Index-two trajectory spaces are one-dimensional"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-unparametrized-trajectory-space-is-a-smooth-manifold]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

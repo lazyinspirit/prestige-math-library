@@ -2,7 +2,7 @@
 id: thm-undecidable-languages-exist-in-p-poly
 kind: theorem
 title: "Some undecidable languages have polynomial-size circuits"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-circuit-family-and-p-poly, thm-halting-is-recognizable-and-undecidable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

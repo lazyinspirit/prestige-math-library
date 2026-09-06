@@ -2,7 +2,7 @@
 id: lem-truncated-perron-kernel
 kind: lemma
 title: "The truncated Perron kernel"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-perron-kernel]
 proof_strategy: contour
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

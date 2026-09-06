@@ -1,7 +1,7 @@
 ---
 page: interactive-proof-systems-and-public-coins-examples
 title: "Interactive Proof Systems and Public Coins: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-sequential-repetition-amplifies-error, ex-graph-nonisomorphism-is-in-ip, cex-soundness-quantifies-only-over-honest-provers]
 ---

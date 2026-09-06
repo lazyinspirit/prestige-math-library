@@ -2,7 +2,9 @@
 id: thm-dedekind-kummer-prime-factorisation
 kind: theorem
 title: "Dedekind--Kummer prime factorisation"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [def-prime-above-and-residue-degree, def-ramification-index, def-integral-basis-and-power-integral-basis, thm-number-field-integral-ideal-factorisation-in-zf]
 proof_strategy: direct

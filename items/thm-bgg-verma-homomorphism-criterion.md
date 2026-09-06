@@ -2,7 +2,7 @@
 id: thm-bgg-verma-homomorphism-criterion
 kind: theorem
 title: "The BGG criterion for homomorphisms between Verma modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-verma-embedding-for-an-arbitrary-positive-root, def-strong-linkage-order-on-weights, lem-verma-embedding-implies-strong-linkage]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,12 +2,13 @@
 id: def-variety-scheme-theoretic
 kind: definition
 title: "Scheme-theoretic varieties"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-integral-scheme, def-locally-finite-type-and-finite-type-morphism, def-scheme-over-base, def-affine-overlap-separation-condition]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

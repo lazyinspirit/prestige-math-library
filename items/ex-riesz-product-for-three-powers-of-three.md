@@ -2,7 +2,7 @@
 id: ex-riesz-product-for-three-powers-of-three
 kind: example
 title: "A Riesz product for three powers of three"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [lem-riesz-product-for-a-hadamard-lacunary-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

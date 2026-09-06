@@ -2,12 +2,13 @@
 id: ex-affine-n-space-over-arbitrary-base
 kind: example
 title: "Affine n-space over an arbitrary base"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [def-scheme-over-base, def-locally-finite-type-and-finite-type-morphism, lem-finite-type-local-on-source-and-target]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

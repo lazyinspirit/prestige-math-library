@@ -2,13 +2,14 @@
 id: rem-triangulated-sign-convention
 kind: remark
 title: "The triangulated rotation-sign convention"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-rotation-of-a-triangle, def-triangulated-category]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

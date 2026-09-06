@@ -2,7 +2,7 @@
 id: lem-sequential-repetition-amplifies-error
 kind: lemma
 title: "Sequential repetition amplifies completeness and soundness gaps"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-and-soundness, lem-chernoff-bound-for-bernoulli-trials]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

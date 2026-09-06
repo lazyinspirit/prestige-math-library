@@ -2,7 +2,7 @@
 id: thm-schur-index-as-minimal-realization-multiplicity
 kind: theorem
 title: "Schur index as minimal realization multiplicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-character-field-and-field-of-definition, def-schur-index-of-an-irreducible-character, thm-scalar-extension-of-an-irreducible-finite-group-representation, thm-schur-index-equals-division-algebra-index, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order, thm-complex-representations-are-determined-by-their-characters]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

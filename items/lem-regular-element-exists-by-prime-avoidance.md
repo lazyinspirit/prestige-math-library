@@ -2,7 +2,7 @@
 id: lem-regular-element-exists-by-prime-avoidance
 title: A regular element exists by prime avoidance
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-associated-prime-of-a-module, thm-existence-of-associated-primes, thm-finiteness-of-associated-primes, lem-zero-divisor-annihilator-contained-in-associated-prime, lem-finite-prime-avoidance]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

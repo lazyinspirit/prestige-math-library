@@ -2,7 +2,7 @@
 id: ex-the-thick-subcategory-of-acyclic-complexes
 kind: example
 title: "The thick subcategory of acyclic complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-the-full-subcategory-of-acyclic-complexes-is-thick-in-the-homotopy-category, prop-a-quasi-isomorphism-has-an-acyclic-cone-in-the-triangulated-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

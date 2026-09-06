@@ -2,7 +2,7 @@
 id: thm-strong-linkage-principle-for-verma-modules
 kind: theorem
 title: "The strong linkage principle for Verma modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-strong-linkage-order-on-weights, prop-verma-composition-multiplicities-are-finite, lem-first-jantzen-filtration-term-is-the-verma-maximal-submodule, thm-jantzen-sum-formula-for-a-verma-module]
 proof_strategy: induction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

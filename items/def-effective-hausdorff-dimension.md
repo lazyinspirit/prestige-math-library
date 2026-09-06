@@ -2,13 +2,14 @@
 id: def-effective-hausdorff-dimension
 kind: definition
 title: "Effective Hausdorff dimension"
-status: draft
+status: published
 origin: session
 deps: [def-effectively-open-set-in-cantor-space]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

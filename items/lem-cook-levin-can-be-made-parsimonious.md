@@ -2,7 +2,7 @@
 id: lem-cook-levin-can-be-made-parsimonious
 kind: lemma
 title: "The Cook--Levin construction can be made parsimonious"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-parsimonious-reduction, def-number-sat, def-bounded-computation-tableau, lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs, lem-cook-levin-map-is-polynomial-time]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

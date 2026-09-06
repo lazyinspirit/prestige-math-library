@@ -2,7 +2,7 @@
 id: cex-harmonic-on-a-punctured-domain-need-not-extend
 kind: counterexample
 title: "Harmonic on a punctured domain need not extend"
-status: draft
+status: published
 origin: pipeline
 deps: [ex-radial-harmonic-functions-away-from-the-origin]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-slutsky-for-real-random-variables
 kind: theorem
 title: "Slutsky's theorem for real random variables"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Section 3.2, Exercises 3.2.12--3.2.14"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 

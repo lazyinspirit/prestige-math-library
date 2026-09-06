@@ -1,7 +1,7 @@
 ---
 page: schur-indices-and-fields-of-definition-examples
 title: "Schur Indices and Fields of Definition — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-galois-conjugate-characters-of-c3, ex-s3-is-split-over-the-rationals, ex-quaternion-character-has-schur-index-two, ex-trivial-character-has-schur-index-one]
 ---

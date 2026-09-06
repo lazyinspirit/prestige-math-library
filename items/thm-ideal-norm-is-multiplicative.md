@@ -2,7 +2,9 @@
 id: thm-ideal-norm-is-multiplicative
 kind: theorem
 title: "Ideal norm is multiplicative"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [def-absolute-norm-of-an-ideal, lem-nonzero-number-field-ideal-has-finite-quotient, thm-number-field-integral-ideal-factorisation-in-zf]
 proof_strategy: direct

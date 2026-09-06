@@ -2,13 +2,14 @@
 id: def-spherical-averages-and-local-ball-means-in-rn
 kind: definition
 title: "Spherical averages and local ball means in Rn"
-status: draft
+status: published
 origin: pipeline
 deps: [def-ball-average-operator-on-r-n, def-polar-surface-measure-on-the-unit-sphere, thm-polar-coordinates-formula-for-lebesgue-measure]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

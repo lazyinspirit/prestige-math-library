@@ -2,7 +2,7 @@
 id: ex-riemann-integral-functional-is-represented-by-interval-lebesgue-measure
 kind: example
 title: "The Riemann integral functional is represented by Lebesgue measure on an interval"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, thm-rmk-positive-functional-is-integration-against-its-representing-measure, thm-rmk-uniqueness-among-radon-measures, thm-lebesgue-measure-is-a-radon-measure-on-rn, lem-compactly-supported-riemann-integral-is-well-defined, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

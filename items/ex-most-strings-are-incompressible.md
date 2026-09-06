@@ -2,7 +2,7 @@
 id: ex-most-strings-are-incompressible
 kind: example
 title: "Counting incompressible strings of a fixed length"
-status: draft
+status: published
 origin: session
 deps: [lem-most-strings-are-incompressible]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

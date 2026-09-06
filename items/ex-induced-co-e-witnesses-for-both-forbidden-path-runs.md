@@ -2,7 +2,7 @@
 id: ex-induced-co-e-witnesses-for-both-forbidden-path-runs
 kind: example
 title: "The two induced co-$E$ witnesses behind the forbidden path runs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-e-graph-and-co-e-graph, def-graph-walk-trail-path-and-cycle, lem-co-e-free-mixed-vertices-on-an-induced-path-avoid-two-nonneighbours-and-three-neighbours]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-every-oracle-is-strictly-below-its-jump
 kind: theorem
 title: "Every oracle is strictly below its jump"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-turing-jump, def-oracle-turing-machine]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

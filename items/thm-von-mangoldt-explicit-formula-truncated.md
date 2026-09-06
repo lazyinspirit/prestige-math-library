@@ -2,7 +2,7 @@
 id: thm-von-mangoldt-explicit-formula-truncated
 kind: theorem
 title: "The truncated von Mangoldt explicit formula"
-status: draft
+status: published
 origin: pipeline
 deps: [def-half-weighted-chebyshev-psi, thm-truncated-perron-formula, cor-zeta-zero-count-unit-interval, lem-local-logarithmic-derivative-zeta, lem-logarithmic-derivative-zeta-left-half-plane, lem-von-mangoldt-explicit-formula-residues]
 proof_strategy: contour
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

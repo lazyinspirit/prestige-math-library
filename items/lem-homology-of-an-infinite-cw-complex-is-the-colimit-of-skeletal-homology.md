@@ -2,14 +2,17 @@
 id: lem-homology-of-an-infinite-cw-complex-is-the-colimit-of-skeletal-homology
 kind: lemma
 title: Homology of an infinite CW complex is the colimit of skeletal homology
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells, cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex, def-singular-chain-complex-and-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Appendix A

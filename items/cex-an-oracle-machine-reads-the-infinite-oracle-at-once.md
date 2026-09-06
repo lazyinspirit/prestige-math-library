@@ -2,7 +2,7 @@
 id: cex-an-oracle-machine-reads-the-infinite-oracle-at-once
 kind: counterexample
 title: "A finite oracle-query transcript"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [fs-an-oracle-machine-reads-the-infinite-oracle-at-once, lem-oracle-computation-has-a-finite-query-witness]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

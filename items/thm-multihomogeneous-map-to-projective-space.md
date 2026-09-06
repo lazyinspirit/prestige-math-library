@@ -2,7 +2,7 @@
 id: thm-multihomogeneous-map-to-projective-space
 kind: theorem
 title: Fixed-multidegree forms define maps from products to projective space
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, §6i homogeneous maps and the Segre map
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 

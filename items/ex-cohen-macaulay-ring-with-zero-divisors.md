@@ -2,7 +2,7 @@
 id: ex-cohen-macaulay-ring-with-zero-divisors
 title: A Cohen--Macaulay ring with zero divisors
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-regular-quotients-and-cohen-macaulayness, cor-one-regular-system-of-parameters-implies-cohen-macaulay]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

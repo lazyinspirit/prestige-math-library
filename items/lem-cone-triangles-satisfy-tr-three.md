@@ -2,7 +2,7 @@
 id: lem-cone-triangles-satisfy-tr-three
 kind: lemma
 title: "Cone triangles satisfy TR3"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-distinguished-cone-triangle-in-the-homotopy-category, def-triangulated-category-axiom-tr-three]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

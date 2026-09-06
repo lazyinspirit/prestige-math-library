@@ -2,13 +2,14 @@
 id: def-description-machine-and-plain-kolmogorov-complexity
 kind: definition
 title: "Description machines and plain Kolmogorov complexity"
-status: draft
+status: published
 origin: session
 deps: [def-computable-and-partial-computable-function, def-computation-alphabet-and-word-convention]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

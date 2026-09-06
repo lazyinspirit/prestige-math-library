@@ -2,7 +2,7 @@
 id: ex-real-and-imaginary-parts-of-holomorphic-monomials
 kind: example
 title: "Real and imaginary parts of holomorphic monomials"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-complex-polynomials-and-rational-functions-are-holomorphic, thm-c2-holomorphic-components-are-harmonic]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

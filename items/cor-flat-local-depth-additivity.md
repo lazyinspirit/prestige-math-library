@@ -2,7 +2,7 @@
 id: cor-flat-local-depth-additivity
 title: Depth is additive for a flat local homomorphism
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [def-depth-with-respect-to-an-ideal, lem-flat-local-depth-formula-regular-sequence-split, lem-depth-quotient-by-regular-element, thm-depth-zero-associated-prime-criterion]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://stacks.math.columbia.edu/tag/0338
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

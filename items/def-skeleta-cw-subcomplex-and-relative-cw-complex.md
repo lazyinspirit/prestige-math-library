@@ -2,13 +2,16 @@
 id: def-skeleta-cw-subcomplex-and-relative-cw-complex
 kind: definition
 title: Skeleta, CW subcomplexes, and relative CW complexes
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-cw-complex-with-closure-finiteness-and-weak-topology]
-verification: {precheck: n/a, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: n/a
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: J. Peter May, A Concise Course in Algebraic Topology, Chapter 10

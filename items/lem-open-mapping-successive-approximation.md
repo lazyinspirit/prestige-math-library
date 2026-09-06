@@ -2,14 +2,17 @@
 id: lem-open-mapping-successive-approximation
 kind: lemma
 title: "Successive approximation turns a closure-ball inclusion into an actual preimage"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-open-mapping-ball-closure-step, thm-banach-series-criterion, thm-bounded-linear-operator-equivalences]
 proof_strategy: constructive
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources: {references: [{title: "Buhler--Salamon, Functional Analysis, Lemma 2.10", url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"}]}
 ---
 

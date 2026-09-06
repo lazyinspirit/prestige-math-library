@@ -2,7 +2,7 @@
 id: thm-principal-ideal-norm-is-absolute-field-norm
 kind: theorem
 title: "The norm of a principal integral ideal"
-status: draft
+status: published
 origin: pipeline
 deps: [def-absolute-norm-of-an-ideal, lem-nonzero-number-field-ideal-has-finite-quotient, cor-trace-and-norm-of-an-algebraic-integer]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

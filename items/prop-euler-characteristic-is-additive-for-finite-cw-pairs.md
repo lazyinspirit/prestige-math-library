@@ -2,14 +2,16 @@
 id: prop-euler-characteristic-is-additive-for-finite-cw-pairs
 kind: proposition
 title: Euler characteristic is additive for finite CW pairs
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-euler-characteristic-of-a-finite-cw-complex, def-skeleta-cw-subcomplex-and-relative-cw-complex]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-07
+  precheck: pass
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Section 2.2

@@ -2,7 +2,7 @@
 id: cex-soundness-quantifies-only-over-honest-provers
 kind: counterexample
 title: "A cheating-prover witness to the soundness quantifier"
-status: draft
+status: published
 origin: session
 deps: [fs-soundness-quantifies-only-over-honest-provers]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

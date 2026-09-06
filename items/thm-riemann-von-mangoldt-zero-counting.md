@@ -2,7 +2,9 @@
 id: thm-riemann-von-mangoldt-zero-counting
 kind: theorem
 title: "The Riemann--von Mangoldt zero count"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [def-riemann-zeta-zero-counting, def-riemann-xi-function, thm-completed-riemann-zeta-functional-equation, thm-argument-principle-null-homologous-cycle, thm-stirling-formula-gamma, thm-hadamard-product-for-riemann-xi, thm-trivial-zeros-and-critical-strip, thm-von-mangoldt-logarithmic-derivative-zeta]
 proof_strategy: contour

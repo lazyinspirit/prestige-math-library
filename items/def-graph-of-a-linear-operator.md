@@ -2,7 +2,7 @@
 id: def-graph-of-a-linear-operator
 kind: definition
 title: "The graph of a linear operator with a linear domain"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-linear-subspace, def-product-norms-on-finitely-many-normed-spaces]
 sources: {references: [{title: "Buhler--Salamon, Functional Analysis, Section 2.2.2", url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"}]}
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

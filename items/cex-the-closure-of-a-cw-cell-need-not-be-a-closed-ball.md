@@ -2,14 +2,17 @@
 id: cex-the-closure-of-a-cw-cell-need-not-be-a-closed-ball
 kind: counterexample
 title: The closure of a CW cell need not be a closed ball
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cell-attachment-by-a-characteristic-map, lem-the-interior-of-an-attached-cell-embeds-openly-in-its-closure]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Chapter 0

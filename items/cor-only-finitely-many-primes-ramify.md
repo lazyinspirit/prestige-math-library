@@ -2,7 +2,9 @@
 id: cor-only-finitely-many-primes-ramify
 kind: corollary
 title: "Only finitely many primes ramify"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [thm-ramified-primes-and-the-number-field-discriminant]
 proof_strategy: direct

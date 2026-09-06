@@ -2,7 +2,7 @@
 id: lem-purity-on-every-h-five-propagates-along-an-overlap-class
 kind: lemma
 title: "Purity on every induced $H_5$ propagates along an $H_5$-overlap class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-h-five-overlap-chain-relation-in-a-comb-block, def-edges-between-sets-and-pure-mixed-pairs]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,14 +2,17 @@
 id: cex-the-hawaiian-earring-is-not-a-cw-complex-with-its-circle-cells
 kind: counterexample
 title: The Hawaiian earring is not a CW complex with its punctured circles as cells
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Appendix A

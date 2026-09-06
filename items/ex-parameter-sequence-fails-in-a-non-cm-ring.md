@@ -2,7 +2,7 @@
 id: ex-parameter-sequence-fails-in-a-non-cm-ring
 title: A parameter sequence that fails in a non-Cohen--Macaulay ring
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-depth-zero-associated-prime-criterion, ex-non-cohen-macaulay-local-ring]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

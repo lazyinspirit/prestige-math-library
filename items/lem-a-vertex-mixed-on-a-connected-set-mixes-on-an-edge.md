@@ -2,7 +2,7 @@
 id: lem-a-vertex-mixed-on-a-connected-set-mixes-on-an-edge
 kind: lemma
 title: "A vertex mixed on a connected set has opposite adjacency on some edge of that set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-connected-graph-and-connected-component, def-graph-walk-trail-path-and-cycle, def-edges-between-sets-and-pure-mixed-pairs]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

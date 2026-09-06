@@ -2,7 +2,7 @@
 id: prop-lebesgue-stieltjes-and-lch-radon-conventions-agree-on-r
 kind: proposition
 title: "Lebesgue--Stieltjes regularity agrees with the LCH Radon convention on R"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, def-radon-measure-on-an-lch-space, def-borel-measure-finite-on-compact-sets-on-r, thm-existence-of-the-lebesgue-stieltjes-measure, thm-lebesgue-stieltjes-measures-are-regular-on-r]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

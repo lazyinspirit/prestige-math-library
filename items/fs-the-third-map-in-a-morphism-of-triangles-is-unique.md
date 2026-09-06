@@ -2,7 +2,7 @@
 id: fs-the-third-map-in-a-morphism-of-triangles-is-unique
 kind: false-statement
 title: "The third map in a morphism of triangles is unique"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-triangulated-category-axiom-tr-three, def-zero-and-stalk-complex, def-standard-cone-triangle-in-the-homotopy-category, thm-the-homotopy-category-of-an-abelian-category-is-triangulated]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

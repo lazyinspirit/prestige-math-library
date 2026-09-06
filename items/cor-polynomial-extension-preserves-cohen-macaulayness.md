@@ -2,7 +2,7 @@
 id: cor-polynomial-extension-preserves-cohen-macaulayness
 title: Polynomial extension preserves Cohen--Macaulayness
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [def-maximal-and-global-cohen-macaulay-modules, thm-localisation-and-flat-base-change-of-regular-sequences, thm-depth-bounded-by-support-dimension, thm-dimension-and-parameters-for-modules, cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module]
 proof_strategy: direct
@@ -16,6 +16,7 @@ sources:
     - title: Stacks Project, Lemma 10.103.13
       url: https://stacks.math.columbia.edu/tag/0AAI
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 ## Statement

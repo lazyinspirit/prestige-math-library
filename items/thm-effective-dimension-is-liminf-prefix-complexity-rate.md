@@ -2,7 +2,7 @@
 id: thm-effective-dimension-is-liminf-prefix-complexity-rate
 kind: theorem
 title: "Effective dimension is the liminf prefix-complexity rate"
-status: draft
+status: published
 origin: session
 deps: [def-effective-hausdorff-dimension, def-prefix-free-machine-and-prefix-complexity, thm-kraft-inequality, thm-invariance-for-prefix-complexity]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

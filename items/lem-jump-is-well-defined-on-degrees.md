@@ -2,7 +2,7 @@
 id: lem-jump-is-well-defined-on-degrees
 kind: lemma
 title: "The jump is well-defined on degrees"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-turing-degree-and-degree-order, def-turing-jump, def-turing-reducibility-and-equivalence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

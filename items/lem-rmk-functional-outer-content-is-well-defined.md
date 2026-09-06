@@ -2,7 +2,7 @@
 id: lem-rmk-functional-outer-content-is-well-defined
 kind: lemma
 title: "The RMK functional outer content is well defined"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cutoff-relation-f-prec-u, def-positive-linear-functional-on-c-c, lem-positive-linear-functionals-on-c-c-are-monotone, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, lem-finite-lch-partition-of-unity-near-a-compact-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

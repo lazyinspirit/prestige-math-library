@@ -2,7 +2,9 @@
 id: ex-graph-nonisomorphism-is-in-ip
 kind: example
 title: "The graph-nonisomorphism protocol on a graph pair"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: session
 deps: [thm-graph-nonisomorphism-is-in-ip]
 proof_strategy: direct

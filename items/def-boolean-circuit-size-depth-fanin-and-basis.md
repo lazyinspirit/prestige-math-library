@@ -2,13 +2,14 @@
 id: def-boolean-circuit-size-depth-fanin-and-basis
 kind: definition
 title: "Boolean circuits: basis, fan-in, size, and depth"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,14 +2,17 @@
 id: cor-equivalent-complete-norms-from-one-sided-comparison
 kind: corollary
 title: "A one-sided comparison of two complete norms makes them equivalent"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-banach-space, def-equivalent-norms, def-bounded-linear-operator, thm-bounded-inverse-theorem]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources: {references: [{title: "Teschl, Topics in Real and Functional Analysis, Theorem 4.6", url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"}]}
 ---
 ## Statement

@@ -2,13 +2,14 @@
 id: rem-morse-smale-residuality-does-not-assert-simultaneous-genericity-for-all-data
 kind: remark
 title: "Morse--Smale residuality does not assert simultaneous genericity for all data"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-morse-smale-metrics-are-residual-for-a-fixed-morse-function, thm-relative-morse-smale-perturbation-of-a-gradient-like-field]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

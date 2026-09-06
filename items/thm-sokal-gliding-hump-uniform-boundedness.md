@@ -2,14 +2,17 @@
 id: thm-sokal-gliding-hump-uniform-boundedness
 kind: theorem
 title: "Sokal's gliding-hump proof of uniform boundedness"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-sokal-local-operator-norm-lower-bound, def-banach-space, def-operator-norm, def-countable-choice, def-dependent-choice]
 proof_strategy: constructive
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources: {references: [{title: "Sokal, A Really Simple Elementary Proof of the Uniform Boundedness Theorem, pp. 1--3", url: "https://staff.fnwi.uva.nl/r.p.stevenson/1005.1585.pdf"}]}
 ---
 

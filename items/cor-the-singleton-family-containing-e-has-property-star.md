@@ -2,7 +2,7 @@
 id: cor-the-singleton-family-containing-e-has-property-star
 kind: corollary
 title: "The singleton family $\\{E\\}$ has property (*)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-special-vertex-local-structural-partition-criterion-implies-property-star, lem-h-five-and-co-e-free-family-has-the-erdos-hajnal-property, thm-co-e-free-comb-blocks-admit-an-h-five-co-e-structural-partition, def-property-star-for-a-finite-family, def-e-graph-and-co-e-graph, def-h-free-and-family-free-graph, def-graph-isomorphism-and-complement]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: thm-morphisms-into-affine-scheme-global-sections
 kind: theorem
 title: "Morphisms to an affine scheme and global sections"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-morphism-of-schemes, def-affine-scheme, thm-global-sections-affine-scheme, thm-affine-scheme-ring-anti-equivalence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-symmetry-of-information-up-to-logarithmic-terms
 kind: theorem
 title: "Symmetry of information up to logarithmic terms"
-status: draft
+status: published
 origin: session
 deps: [def-conditional-kolmogorov-complexity, thm-invariance-theorem-for-plain-complexity, lem-basic-conditional-complexity-inequalities]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: cex-finite-type-not-finite-presentation-nonnoetherian-base
 kind: counterexample
 title: "Finite type need not mean finite presentation"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [def-locally-finite-type-and-finite-type-morphism, def-locally-finite-presentation-morphism, def-affine-scheme]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

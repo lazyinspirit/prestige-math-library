@@ -2,13 +2,14 @@
 id: def-fp-function-class
 kind: definition
 title: "The nonnegative function class FP"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"
@@ -25,4 +26,3 @@ sources:
 ## Definition
 
 On this page FP is the class of total nonnegative integer-valued functions whose binary outputs are computable in deterministic polynomial time.
-

@@ -2,7 +2,9 @@
 id: def-ramification-index
 kind: definition
 title: "Ramification index"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [thm-number-field-integral-ideal-factorisation-in-zf, def-prime-above-and-residue-degree, thm-ring-of-integers-free-of-rank-degree]
 provenance:

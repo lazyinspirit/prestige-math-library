@@ -2,7 +2,7 @@
 id: thm-completion-preserves-cohen-macaulayness
 title: Completion preserves Cohen--Macaulayness
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [cor-completion-preserves-cohen-macaulayness-two-directions]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://stacks.math.columbia.edu/download/algebra.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

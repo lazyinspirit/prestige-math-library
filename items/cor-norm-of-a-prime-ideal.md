@@ -2,7 +2,7 @@
 id: cor-norm-of-a-prime-ideal
 kind: corollary
 title: "The norm of a prime ideal"
-status: draft
+status: published
 origin: pipeline
 deps: [def-absolute-norm-of-an-ideal, lem-nonzero-number-field-ideal-has-finite-quotient, def-finite-field-and-its-order]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

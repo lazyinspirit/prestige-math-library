@@ -2,7 +2,7 @@
 id: thm-representable-hom-functors-on-a-triangulated-category-are-homological-or-cohomological
 kind: theorem
 title: "Representable Hom functors on a triangulated category are homological or cohomological"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-triangulated-category, def-homological-functor-on-a-triangulated-category, def-cohomological-functor-on-a-triangulated-category, def-triangulated-category-axiom-tr-one, def-triangulated-category-axiom-tr-two, def-triangulated-category-axiom-tr-three, thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

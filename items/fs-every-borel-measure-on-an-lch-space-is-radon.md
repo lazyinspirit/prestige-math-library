@@ -2,7 +2,7 @@
 id: fs-every-borel-measure-on-an-lch-space-is-radon
 kind: false-statement
 title: "Every Borel measure on an LCH space is Radon"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dieudonne-club-set-function-is-a-borel-measure, thm-ordinal-spaces-and-compactness, def-radon-measure-on-an-lch-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

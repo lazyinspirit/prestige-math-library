@@ -2,13 +2,14 @@
 id: def-rotation-of-a-triangle
 kind: definition
 title: "Rotation of a triangle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangle-in-a-category-with-translation]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

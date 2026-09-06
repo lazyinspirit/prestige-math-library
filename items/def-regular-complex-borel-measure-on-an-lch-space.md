@@ -2,13 +2,14 @@
 id: def-regular-complex-borel-measure-on-an-lch-space
 kind: definition
 title: "Regular complex Borel measures"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-regular-borel-measure-on-an-lch-space, def-complex-measure, def-total-variation-of-a-signed-or-complex-measure]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

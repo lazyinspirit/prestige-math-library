@@ -2,7 +2,7 @@
 id: lem-depth-at-a-prime-bounded-by-local-dimension
 title: Depth at a prime is bounded by local support dimension
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-sequence-on-a-module, thm-dimension-and-parameters-for-modules, thm-krull-height-theorem, thm-depth-equals-maximal-regular-sequence-length]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 ## Statement

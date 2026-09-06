@@ -2,7 +2,7 @@
 id: thm-c-c-is-dense-in-l-p-for-radon-measures
 kind: theorem
 title: "C_c(X) is dense in L^p(mu) for a Radon measure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-radon-measure-on-an-lch-space, def-compact-support-c-c-and-c-zero-on-an-lch-space, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p, def-l-p-space-as-a-quotient-by-null-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

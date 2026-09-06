@@ -2,13 +2,14 @@
 id: def-sharpp-and-gap-p-functions
 kind: definition
 title: "Sharp-P and Gap-P functions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"
@@ -25,4 +26,3 @@ sources:
 ## Definition
 
 A #P function maps each input to the number of accepting paths of a binary-branching polynomial-time nondeterministic machine. A GapP function is accepting paths minus rejecting paths of such a machine. Function values are represented in binary.
-

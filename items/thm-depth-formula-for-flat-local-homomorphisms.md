@@ -2,7 +2,7 @@
 id: thm-depth-formula-for-flat-local-homomorphisms
 title: The depth formula for flat local homomorphisms
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [cor-flat-local-depth-additivity, cor-flat-local-cohen-macaulay-fibre-criterion]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://stacks.math.columbia.edu/download/algebra.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

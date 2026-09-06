@@ -2,7 +2,7 @@
 id: lem-associated-prime-after-power-regular-quotient
 title: A prime minimal over an associated prime plus one element becomes associated after a power quotient
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-associated-prime-of-a-module, lem-associated-prime-equivalent-cyclic-embedding, thm-artin-rees-lemma, thm-minimal-support-primes-are-associated]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

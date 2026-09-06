@@ -2,7 +2,7 @@
 id: cex-right-continuous-psi-has-the-wrong-perron-endpoint
 kind: counterexample
 title: "Right-continuous psi has the wrong Perron endpoint"
-status: draft
+status: published
 origin: pipeline
 deps: [def-half-weighted-chebyshev-psi, def-chebyshev-psi-function]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-riesz-product-for-a-hadamard-lacunary-set
 kind: lemma
 title: "Riesz-product witnesses for a Hadamard-lacunary set"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hadamard-lacunary-sequence-and-lacunary-trigonometric-series, lem-hadamard-gaps-bound-additive-representations]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

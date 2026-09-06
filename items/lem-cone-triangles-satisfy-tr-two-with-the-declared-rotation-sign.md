@@ -2,7 +2,7 @@
 id: lem-cone-triangles-satisfy-tr-two-with-the-declared-rotation-sign
 kind: lemma
 title: "Cone triangles satisfy TR2 with the declared rotation sign"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-distinguished-cone-triangle-in-the-homotopy-category, def-rotation-of-a-triangle, thm-the-cone-of-an-identity-map-is-contractible, def-triangulated-category-axiom-tr-two]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

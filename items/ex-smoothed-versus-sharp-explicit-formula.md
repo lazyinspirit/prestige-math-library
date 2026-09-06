@@ -2,7 +2,7 @@
 id: ex-smoothed-versus-sharp-explicit-formula
 kind: example
 title: "Smoothed versus sharp explicit formulas"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-von-mangoldt-explicit-formula-smoothed, thm-von-mangoldt-explicit-formula-truncated]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

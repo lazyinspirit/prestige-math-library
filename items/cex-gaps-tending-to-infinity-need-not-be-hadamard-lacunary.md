@@ -2,7 +2,7 @@
 id: cex-gaps-tending-to-infinity-need-not-be-hadamard-lacunary
 kind: counterexample
 title: "Gaps tending to infinity need not be Hadamard-lacunary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-hadamard-lacunary-sequence-and-lacunary-trigonometric-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-every-verma-module-contains-a-simple-verma-submodule
 kind: lemma
 title: "Every Verma module contains a simple Verma submodule"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-nonzero-verma-homomorphism-is-injective, lem-every-nonzero-verma-submodule-contains-a-singular-vector, prop-casimir-eigenvalue-on-a-highest-weight-module, prop-weights-of-a-verma-module-lie-below-lambda]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

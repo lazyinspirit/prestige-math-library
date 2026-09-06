@@ -2,7 +2,7 @@
 id: ex-a-bipartite-four-tooth-comb-has-the-co-e-structural-partition
 kind: example
 title: "A bipartite four-tooth comb has the co-$E$ structural partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-e-graph-and-co-e-graph, def-comb-in-a-graph, thm-co-e-free-comb-blocks-admit-an-h-five-co-e-structural-partition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

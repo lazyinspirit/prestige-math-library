@@ -1,7 +1,7 @@
 ---
 page: kolmogorov-complexity-and-algorithmic-randomness-examples
 title: "Kolmogorov Complexity and Algorithmic Randomness: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-most-strings-are-incompressible, ex-effective-dimension-is-liminf-prefix-complexity-rate, cex-kolmogorov-complexity-is-an-absolute-integer]
 ---

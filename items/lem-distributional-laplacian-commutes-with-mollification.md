@@ -2,7 +2,7 @@
 id: lem-distributional-laplacian-commutes-with-mollification
 kind: lemma
 title: "The distributional Laplacian commutes with local mollification"
-status: draft
+status: published
 origin: pipeline
 deps: [def-distributional-harmonicity-and-poisson-equation-in-rn, def-radial-mollifier-family-in-rn]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,14 +2,16 @@
 id: cex-closed-graph-fails-without-completeness
 kind: counterexample
 title: "A closed everywhere-defined graph need not be bounded without completeness"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [cex-open-mapping-fails-without-completeness, def-graph-of-a-linear-operator]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-07
+  precheck: pass
 sources: {references: [{title: "Buhler--Salamon, Functional Analysis, Example 2.22", url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"}]}
 ---
 ## Statement refuted

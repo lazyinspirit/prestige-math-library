@@ -2,7 +2,7 @@
 id: lem-a-verma-composition-factor-has-the-same-central-character
 kind: lemma
 title: "A Verma composition factor has the same central character"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-central-character-of-a-lie-algebra-module, lem-central-action-on-a-cyclic-highest-weight-module-is-scalar, thm-verma-module-has-a-unique-simple-quotient]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

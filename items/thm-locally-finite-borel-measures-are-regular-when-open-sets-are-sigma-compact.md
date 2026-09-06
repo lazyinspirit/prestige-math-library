@@ -2,7 +2,9 @@
 id: thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact
 kind: theorem
 title: "Sigma-compact open sets make locally finite Borel measures regular"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

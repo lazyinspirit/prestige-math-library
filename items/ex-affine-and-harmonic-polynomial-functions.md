@@ -2,7 +2,7 @@
 id: ex-affine-and-harmonic-polynomial-functions
 kind: example
 title: "Affine functions and mixed quadratic monomials are harmonic"
-status: draft
+status: published
 origin: pipeline
 deps: [def-laplacian-of-a-c2-function]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

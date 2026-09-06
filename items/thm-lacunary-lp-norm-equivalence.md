@@ -2,7 +2,7 @@
 id: thm-lacunary-lp-norm-equivalence
 kind: theorem
 title: "L-p norm equivalence for finite Hadamard-lacunary sums"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-finite-lacunary-fourier-sums-have-their-coefficient-ell-two-norm, lem-hadamard-gaps-bound-additive-representations, thm-holder-inequality-for-integrals]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

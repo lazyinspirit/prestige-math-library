@@ -2,7 +2,7 @@
 id: def-incidence-correspondence-varieties
 kind: definition
 title: Incidence correspondence loci
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, §§5g and 6m
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: n/a
 ---
 

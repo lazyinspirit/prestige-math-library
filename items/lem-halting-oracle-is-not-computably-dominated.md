@@ -2,7 +2,7 @@
 id: lem-halting-oracle-is-not-computably-dominated
 kind: lemma
 title: "The halting oracle is not computably dominated"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-computably-dominated-oracle, def-turing-jump, thm-kleenes-second-recursion-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

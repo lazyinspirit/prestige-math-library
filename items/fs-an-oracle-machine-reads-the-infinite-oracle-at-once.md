@@ -2,7 +2,7 @@
 id: fs-an-oracle-machine-reads-the-infinite-oracle-at-once
 kind: false-statement
 title: "An oracle machine reads the infinite oracle at once"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-oracle-turing-machine, lem-oracle-computation-has-a-finite-query-witness]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

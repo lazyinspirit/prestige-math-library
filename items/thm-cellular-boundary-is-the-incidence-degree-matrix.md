@@ -2,14 +2,16 @@
 id: thm-cellular-boundary-is-the-incidence-degree-matrix
 kind: theorem
 title: Cellular boundary is the incidence degree matrix
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cellular-boundary-from-three-consecutive-skeleta, def-incidence-number-of-two-cw-cells, def-oriented-cellular-chain-group]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-07
+  precheck: pass
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Section 2.2

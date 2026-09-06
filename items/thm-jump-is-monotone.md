@@ -2,7 +2,7 @@
 id: thm-jump-is-monotone
 kind: theorem
 title: "The jump is monotone"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-turing-jump, def-turing-reducibility-and-equivalence, lem-jump-is-well-defined-on-degrees]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

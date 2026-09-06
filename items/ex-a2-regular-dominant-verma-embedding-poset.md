@@ -2,7 +2,7 @@
 id: ex-a2-regular-dominant-verma-embedding-poset
 kind: example
 title: "The A2 regular integral-dominant Verma embedding poset"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-strong-linkage-order-on-weights, thm-bgg-verma-homomorphism-criterion, def-bruhat-order-on-the-symmetric-group, lem-a-nonzero-verma-homomorphism-is-injective]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

@@ -2,13 +2,14 @@
 id: def-exact-functor-between-triangulated-categories
 kind: definition
 title: "Exact functor between triangulated categories"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangulated-category, def-additive-functor, def-natural-isomorphism]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -25,4 +26,3 @@ An **exact functor** $(F,\xi):\mathcal T\to\mathcal T'$ is an additive functor
 with a specified natural isomorphism $\xi_X:F(X[1])\xrightarrow\sim F(X)[1]$
 such that every distinguished $X\to Y\to Z\xrightarrow hX[1]$ has distinguished
 image $F(X)\to F(Y)\to F(Z)\xrightarrow{\xi_XF(h)}F(X)[1]$.
-

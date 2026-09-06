@@ -2,7 +2,7 @@
 id: lem-character-field-is-the-stabilizer-fixed-field
 kind: lemma
 title: "The character field is the stabilizer fixed field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-character-field-and-field-of-definition, def-galois-conjugate-representation, thm-scalar-extension-of-an-irreducible-finite-group-representation, thm-complex-representations-are-determined-by-their-characters, def-fixed-field-of-an-automorphism-group, thm-fundamental-theorem-of-finite-galois-theory]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

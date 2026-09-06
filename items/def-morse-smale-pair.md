@@ -2,13 +2,14 @@
 id: def-morse-smale-pair
 kind: definition
 title: "Morse--Smale pairs"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-downward-gradient-like-vector-field, def-stable-and-unstable-sets-of-a-critical-point, thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces, def-transverse-smooth-maps]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

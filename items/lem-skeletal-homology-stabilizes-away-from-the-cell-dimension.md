@@ -2,14 +2,17 @@
 id: lem-skeletal-homology-stabilizes-away-from-the-cell-dimension
 kind: lemma
 title: Skeletal homology stabilizes away from the cell dimension
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-relative-homology-of-consecutive-cw-skeleta, thm-long-exact-sequence-of-a-pair-in-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Section 2.2

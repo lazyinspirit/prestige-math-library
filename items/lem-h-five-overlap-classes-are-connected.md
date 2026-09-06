@@ -2,7 +2,7 @@
 id: lem-h-five-overlap-classes-are-connected
 kind: lemma
 title: "Every $H_5$-overlap class is connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-h-five-overlap-chain-relation-in-a-comb-block, def-h-zero-through-h-five, def-connected-graph-and-connected-component]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

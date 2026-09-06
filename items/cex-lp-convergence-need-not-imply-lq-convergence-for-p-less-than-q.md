@@ -2,7 +2,7 @@
 id: cex-lp-convergence-need-not-imply-lq-convergence-for-p-less-than-q
 kind: counterexample
 title: "$L^p$ convergence need not imply $L^q$ convergence when $p<q$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "S. Roch, Lecture 3: Modes of convergence, Example 3.11"
       url: "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes3.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

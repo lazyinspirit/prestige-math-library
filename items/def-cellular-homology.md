@@ -2,13 +2,15 @@
 id: def-cellular-homology
 kind: definition
 title: Cellular homology
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-oriented-cellular-chain-group, def-cellular-boundary-from-three-consecutive-skeleta, lem-the-cellular-boundary-squares-to-zero]
-verification: {precheck: n/a}
+verification:
+  audited: 2026-09-07
+  precheck: n/a
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Section 2.2

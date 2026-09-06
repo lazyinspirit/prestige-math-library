@@ -2,7 +2,7 @@
 id: def-plucker-coordinates
 kind: definition
 title: Plucker coordinates and the Plucker map
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, Remark 6.34
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

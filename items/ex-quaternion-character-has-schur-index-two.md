@@ -2,7 +2,7 @@
 id: ex-quaternion-character-has-schur-index-two
 kind: example
 title: "The faithful quaternion character has Schur index two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-quaternion-group-of-order-eight, def-character-of-a-complex-representation, def-schur-index-of-an-irreducible-character, thm-character-of-an-irreducible-over-a-nonsplitting-field, thm-schur-index-equals-division-algebra-index]
 proof_strategy: computation
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

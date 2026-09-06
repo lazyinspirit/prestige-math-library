@@ -2,13 +2,14 @@
 id: lem-finite-type-local-on-source-and-target
 kind: lemma
 title: "Finite type is affine-local on source and target"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-locally-finite-type-and-finite-type-morphism, def-quasi-compact-and-quasi-separated-scheme, cor-affine-scheme-quasi-compact, lem-intersection-affine-opens-covered-principal-opens, def-finite-type-and-module-finite-algebras]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-split-inert-ramified-and-unramified-prime
 kind: definition
 title: "Splitting and ramification terminology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-prime-above-and-residue-degree, def-ramification-index, thm-fundamental-identity-for-primes-in-number-fields]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

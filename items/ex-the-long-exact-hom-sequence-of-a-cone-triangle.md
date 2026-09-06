@@ -2,7 +2,7 @@
 id: ex-the-long-exact-hom-sequence-of-a-cone-triangle
 kind: example
 title: "The long exact Hom sequence of a cone triangle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-long-exact-hom-sequences-of-a-distinguished-triangle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

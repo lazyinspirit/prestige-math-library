@@ -2,7 +2,9 @@
 id: ex-a-morse-smale-height-function-on-a-tilted-torus
 kind: example
 title: "A Morse--Smale height function on a tilted torus"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

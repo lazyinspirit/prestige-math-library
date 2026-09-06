@@ -2,7 +2,7 @@
 id: ex-regular-level-slices-for-unparametrized-trajectories
 kind: example
 title: "Regular-level slices for unparametrized trajectories"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-evaluation-on-a-regular-level-identifies-unparametrized-trajectories, thm-unparametrized-trajectory-space-is-a-smooth-manifold]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

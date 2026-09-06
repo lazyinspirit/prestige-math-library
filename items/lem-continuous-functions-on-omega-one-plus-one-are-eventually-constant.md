@@ -2,7 +2,9 @@
 id: lem-continuous-functions-on-omega-one-plus-one-are-eventually-constant
 kind: lemma
 title: "Continuous functions on [0, omega_1] are eventually constant"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

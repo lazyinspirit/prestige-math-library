@@ -2,7 +2,7 @@
 id: cor-depth-zero-iff-ideal-contained-in-an-associated-prime
 title: Depth zero and associated primes
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [def-depth-with-respect-to-an-ideal, lem-regular-element-exists-by-prime-avoidance]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

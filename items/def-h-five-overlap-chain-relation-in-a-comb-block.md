@@ -2,13 +2,14 @@
 id: def-h-five-overlap-chain-relation-in-a-comb-block
 kind: definition
 title: "The $H_5$-overlap-chain relation in one comb block"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-h-zero-through-h-five, def-comb-in-a-graph]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

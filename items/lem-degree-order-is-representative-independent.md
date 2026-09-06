@@ -2,7 +2,7 @@
 id: lem-degree-order-is-representative-independent
 kind: lemma
 title: "The degree order is representative-independent"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-turing-degree-and-degree-order, lem-turing-reducibility-is-a-preorder]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

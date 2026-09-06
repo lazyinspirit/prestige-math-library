@@ -2,7 +2,7 @@
 id: cor-zero-dimensional-local-modules-are-cohen-macaulay
 title: Zero-dimensional finite local modules are Cohen--Macaulay
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [def-cohen-macaulay-local-module-and-ring, cor-depth-of-a-finite-local-module-at-most-its-dimension]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,12 +2,13 @@
 id: def-irreducible-component-scheme
 kind: definition
 title: "Irreducible components as schemes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-scheme, def-reduction-of-scheme, def-irreducible-topological-space-and-subset]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

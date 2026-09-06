@@ -2,14 +2,17 @@
 id: cor-separately-continuous-bilinear-map-on-banach-spaces-is-jointly-continuous
 kind: corollary
 title: "A separately continuous bilinear map on Banach spaces is jointly continuous"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-bounded-bilinear-map, thm-uniform-boundedness-principle, thm-bounded-bilinear-map-equivalences]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources: {references: [{title: "Buhler--Salamon, Functional Analysis, Corollary 2.7", url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"}]}
 ---
 ## Statement

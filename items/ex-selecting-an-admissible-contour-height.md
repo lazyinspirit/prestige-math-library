@@ -2,7 +2,7 @@
 id: ex-selecting-an-admissible-contour-height
 kind: example
 title: "Selecting an admissible contour height"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-zeta-zero-count-unit-interval]
 proof_strategy: constructive
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

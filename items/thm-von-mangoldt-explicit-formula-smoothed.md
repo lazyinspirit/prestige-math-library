@@ -2,7 +2,9 @@
 id: thm-von-mangoldt-explicit-formula-smoothed
 kind: theorem
 title: "A smoothed von Mangoldt explicit formula"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [def-von-mangoldt-function, lem-local-logarithmic-derivative-zeta, lem-logarithmic-derivative-zeta-left-half-plane, lem-von-mangoldt-explicit-formula-residues, cor-zeta-zero-count-unit-interval, thm-trivial-zeros-and-critical-strip, thm-riemann-zeta-continuation-to-the-right-half-plane, thm-gamma-weierstrass-product, thm-euler-mascheroni-constant-and-harmonic-asymptotic, thm-riemann-zeta-functional-equation, thm-von-mangoldt-logarithmic-derivative-zeta, thm-residue-theorem-null-homologous-cycle]
 proof_strategy: contour

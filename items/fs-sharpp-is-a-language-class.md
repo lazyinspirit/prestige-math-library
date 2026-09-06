@@ -2,7 +2,7 @@
 id: fs-sharpp-is-a-language-class
 kind: false-statement
 title: "Sharp-P is a language class"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sharpp-and-gap-p-functions, def-number-sat]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

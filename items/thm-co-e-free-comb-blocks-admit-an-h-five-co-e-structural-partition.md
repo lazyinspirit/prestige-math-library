@@ -2,7 +2,7 @@
 id: thm-co-e-free-comb-blocks-admit-an-h-five-co-e-structural-partition
 kind: theorem
 title: "A special-vertex comb in a co-$E$-free graph admits the $\\{H_5,\\mathrm{co}\\text{-}E\\}$ structural partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-h-five-and-co-e-free-family-has-the-erdos-hajnal-property, def-h-five-overlap-chain-relation-in-a-comb-block, def-h-five-overlap-blockade-and-iterated-mixed-quotients, lem-h-five-overlap-quotient-iteration-terminates-at-a-pure-blockade, lem-co-e-free-external-purity-survives-h-five-overlap-quotients, lem-terminal-h-five-overlap-quotient-pattern-is-h-five-and-co-e-free, def-comb-in-a-graph, def-h-free-and-family-free-graph, def-e-graph-and-co-e-graph, def-h-zero-through-h-five, def-edges-between-sets-and-pure-mixed-pairs]
 proof_strategy: cases
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

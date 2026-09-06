@@ -2,13 +2,14 @@
 id: def-graph-nonisomorphism-protocol
 kind: definition
 title: "The graph-nonisomorphism interactive protocol"
-status: draft
+status: published
 origin: session
 deps: [def-interactive-proof-transcript-round-and-strategy]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

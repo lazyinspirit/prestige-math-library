@@ -2,7 +2,7 @@
 id: prop-a-quasi-isomorphism-has-an-acyclic-cone-in-the-triangulated-language
 kind: proposition
 title: "A quasi-isomorphism has an acyclic cone in the triangulated language"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-standard-cone-triangle-in-the-homotopy-category, def-quasi-isomorphism, thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

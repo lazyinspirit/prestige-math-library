@@ -2,7 +2,7 @@
 id: lem-nonzero-number-field-ideal-has-finite-quotient
 kind: lemma
 title: "A nonzero number-field ideal has finite quotient"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ring-of-integers-free-of-rank-degree]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

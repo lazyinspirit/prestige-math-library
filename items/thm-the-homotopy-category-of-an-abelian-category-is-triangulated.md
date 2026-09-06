@@ -2,7 +2,7 @@
 id: thm-the-homotopy-category-of-an-abelian-category-is-triangulated
 kind: theorem
 title: "The homotopy category of an abelian category is triangulated"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-homotopy-category-of-chain-complexes, thm-the-homotopy-category-is-additive, thm-shift-is-an-additive-autoequivalence-of-the-complex-and-homotopy-categories, def-distinguished-cone-triangle-in-the-homotopy-category, lem-cone-triangles-satisfy-tr-one, lem-cone-triangles-satisfy-tr-two-with-the-declared-rotation-sign, lem-cone-triangles-satisfy-tr-three, lem-cone-triangles-satisfy-the-octahedral-axiom]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

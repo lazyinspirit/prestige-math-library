@@ -2,7 +2,7 @@
 id: thm-different-of-a-monogenic-number-field
 kind: theorem
 title: "The different in the monogenic case"
-status: draft
+status: published
 origin: pipeline
 deps: [def-different-of-a-number-field, def-integral-basis-and-power-integral-basis]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

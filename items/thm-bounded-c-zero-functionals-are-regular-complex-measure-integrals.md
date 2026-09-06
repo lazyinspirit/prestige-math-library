@@ -2,7 +2,7 @@
 id: thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals
 kind: theorem
 title: "The bounded complex dual of C_0(X) is regular complex measures"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-complex-borel-measure-on-an-lch-space, lem-positive-c-zero-functionals-have-finite-regular-representing-measures, lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals, thm-total-variation-is-a-measure, def-integration-against-a-signed-or-complex-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

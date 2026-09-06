@@ -2,7 +2,7 @@
 id: lem-terminal-h-five-overlap-quotient-pattern-is-h-five-and-co-e-free
 kind: lemma
 title: "The pattern of the terminal $H_5$-overlap quotient is $\\{H_5,\\mathrm{co}\\text{-}E\\}$-free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-h-five-overlap-blockade-and-iterated-mixed-quotients, lem-h-five-overlap-quotient-iteration-terminates-at-a-pure-blockade, def-pattern-graph-of-a-pure-blockade, def-h-zero-through-h-five, def-e-graph-and-co-e-graph, def-edges-between-sets-and-pure-mixed-pairs]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

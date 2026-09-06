@@ -2,7 +2,7 @@
 id: lem-maximal-regular-sequence-stops-at-associated-prime
 title: A maximal regular sequence stops at an associated prime
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-sequence-on-a-module, cor-depth-zero-iff-ideal-contained-in-an-associated-prime]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

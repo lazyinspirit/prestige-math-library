@@ -2,7 +2,7 @@
 id: thm-circuit-sat-is-np-complete
 kind: theorem
 title: "CircuitSAT is NP-complete"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-circuit-sat, thm-cook-levin-sat-is-np-complete, def-polynomial-time-many-one-reduction, def-np-hard-and-np-complete]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

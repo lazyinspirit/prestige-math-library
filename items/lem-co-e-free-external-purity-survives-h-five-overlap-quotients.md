@@ -2,7 +2,7 @@
 id: lem-co-e-free-external-purity-survives-h-five-overlap-quotients
 kind: lemma
 title: "In a special-vertex comb of a co-$E$-free graph, vertices in other comb blocks remain pure to every $H_5$-overlap quotient block"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-co-e-free-mixed-vertices-on-an-induced-path-avoid-two-nonneighbours-and-three-neighbours, lem-co-e-free-complete-nonedge-pairs-are-pure-to-induced-h-five-graphs, lem-h-five-overlap-classes-are-connected, lem-purity-on-every-h-five-propagates-along-an-overlap-class, def-h-five-overlap-blockade-and-iterated-mixed-quotients, lem-h-five-overlap-quotient-iteration-terminates-at-a-pure-blockade, lem-a-vertex-mixed-on-a-connected-set-mixes-on-an-edge, lem-quotient-blocks-preserve-connectedness-and-anticonnectedness, lem-a-quotient-mixed-block-witness-descends-to-two-member-blocks, def-comb-in-a-graph, def-e-graph-and-co-e-graph, def-h-zero-through-h-five, def-edges-between-sets-and-pure-mixed-pairs]
 proof_strategy: induction
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

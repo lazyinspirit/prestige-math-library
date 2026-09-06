@@ -2,7 +2,9 @@
 id: cor-discriminant-valuation-from-different-exponents
 kind: corollary
 title: "Discriminant valuations from different exponents"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [thm-discriminant-is-the-norm-of-the-different, thm-ideal-norm-is-multiplicative, def-prime-ideal-valuations-on-fractional-ideals]
 proof_strategy: direct

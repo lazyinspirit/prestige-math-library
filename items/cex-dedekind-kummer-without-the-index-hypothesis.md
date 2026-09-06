@@ -2,7 +2,7 @@
 id: cex-dedekind-kummer-without-the-index-hypothesis
 kind: counterexample
 title: "Dedekind--Kummer without the index hypothesis"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-dedekind-kummer-prime-factorisation, cor-order-index-discriminant-formula]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

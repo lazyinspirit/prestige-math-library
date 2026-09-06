@@ -2,7 +2,7 @@
 id: prop-a-natural-isomorphism-of-exact-functors-respects-triangles-under-the-translation-compatibility
 kind: proposition
 title: "A translation-compatible natural isomorphism of exact functors respects triangles"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-exact-functor-between-triangulated-categories, def-natural-isomorphism, def-morphism-and-isomorphism-of-triangles]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

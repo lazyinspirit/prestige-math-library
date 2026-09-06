@@ -2,7 +2,7 @@
 id: cor-fourier-series-supported-on-a-sidon-set-and-continuous-has-ell-one-coefficients
 kind: corollary
 title: "A continuous Fourier series supported on a Sidon set has ell-one coefficients"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sidon-set-in-the-integer-dual, lem-fejer-kernel-is-a-positive-approximate-identity, thm-fejer-uniform-convergence-for-continuous-periodic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

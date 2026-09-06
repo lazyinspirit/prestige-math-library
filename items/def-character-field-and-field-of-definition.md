@@ -2,13 +2,14 @@
 id: def-character-field-and-field-of-definition
 kind: definition
 title: "Character fields and fields of definition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-character-of-a-complex-representation, def-finite-dimensional-representation-of-a-group-over-a-field, def-intertwiner-equivalent-and-faithful-representations, def-field-extension-generated-subfields-and-simple-extension]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

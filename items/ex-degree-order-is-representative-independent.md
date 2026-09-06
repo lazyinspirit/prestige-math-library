@@ -2,7 +2,7 @@
 id: ex-degree-order-is-representative-independent
 kind: example
 title: "Changing representatives of a degree comparison"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-turing-degree-and-degree-order, lem-degree-order-is-representative-independent]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

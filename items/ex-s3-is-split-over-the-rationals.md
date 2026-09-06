@@ -2,7 +2,7 @@
 id: ex-s3-is-split-over-the-rationals
 kind: example
 title: "$S_3$ is split over the rationals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-finite-symmetric-group-and-permutation-notation, def-sign-representation-and-restriction-of-a-representation, def-trivial-regular-and-permutation-representations, thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order, def-splitting-field-for-a-finite-group]
 proof_strategy: computation
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

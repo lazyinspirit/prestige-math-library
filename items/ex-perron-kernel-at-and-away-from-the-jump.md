@@ -2,7 +2,7 @@
 id: ex-perron-kernel-at-and-away-from-the-jump
 kind: example
 title: "Perron's kernel at and away from its jump"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-perron-kernel, lem-truncated-perron-kernel]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

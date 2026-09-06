@@ -2,7 +2,7 @@
 id: cor-grassmannian-smooth-irreducible-dimension
 kind: corollary
 title: The Grassmannian is smooth, irreducible, and has dimension r(n-r)
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, Remarks 6.32 and 6.33
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: thm-weyl-lemma-for-the-laplacian
 kind: theorem
 title: "Weyl's lemma for the Laplacian"
-status: draft
+status: published
 origin: pipeline
 deps: [def-distributional-harmonicity-and-poisson-equation-in-rn, cor-ball-mean-value-property-for-harmonic-functions, lem-radial-mollification-fixes-local-mean-value-functions, lem-distributional-laplacian-commutes-with-mollification]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-polynomial-size-implies-uniform-generation
 kind: counterexample
 title: "Unary circuits for an undecidable language are not uniformly generated"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-undecidable-languages-exist-in-p-poly, fs-polynomial-size-implies-uniform-generation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

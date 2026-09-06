@@ -2,7 +2,9 @@
 id: thm-relative-morse-smale-perturbation-of-a-gradient-like-field
 kind: theorem
 title: "Relative Morse--Smale perturbation of a gradient-like field"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

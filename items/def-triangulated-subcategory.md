@@ -2,13 +2,14 @@
 id: def-triangulated-subcategory
 kind: definition
 title: "Triangulated subcategory"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangulated-category, def-exact-functor-between-triangulated-categories]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -26,4 +27,3 @@ closed under $[1]$ and $[-1]$ such that, with the inherited distinguished
 triangles, it satisfies the triangulated axioms. Equivalently in this full
 setting it is closed under the two-out-of-three operation on distinguished
 triangles.
-

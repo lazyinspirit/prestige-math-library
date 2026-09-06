@@ -2,7 +2,7 @@
 id: thm-limits-in-probability-are-unique-almost-surely
 kind: theorem
 title: "Limits in probability are unique almost surely"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "S. Roch, Lecture 3: Modes of convergence, Section 1.3"
       url: "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes3.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

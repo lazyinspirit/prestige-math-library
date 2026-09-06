@@ -2,13 +2,16 @@
 id: def-cellular-boundary-from-three-consecutive-skeleta
 kind: definition
 title: Cellular boundary from three consecutive skeleta
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-oriented-cellular-chain-group, thm-long-exact-sequence-of-a-pair-in-singular-homology]
-verification: {precheck: n/a, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: n/a
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Section 2.2

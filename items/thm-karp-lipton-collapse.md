@@ -2,7 +2,7 @@
 id: thm-karp-lipton-collapse
 kind: theorem
 title: "The Karp--Lipton collapse"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-circuit-family-and-p-poly]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

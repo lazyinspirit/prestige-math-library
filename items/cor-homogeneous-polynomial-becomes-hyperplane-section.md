@@ -2,7 +2,7 @@
 id: cor-homogeneous-polynomial-becomes-hyperplane-section
 kind: corollary
 title: A degree-d homogeneous equation becomes a hyperplane section under Veronese
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, 6.24
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-one-regular-system-of-parameters-implies-cohen-macaulay
 title: One regular system of parameters implies Cohen--Macaulayness
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [def-cohen-macaulay-local-module-and-ring, thm-dimension-and-parameters-for-modules, thm-depth-bounded-by-support-dimension]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 ## Statement

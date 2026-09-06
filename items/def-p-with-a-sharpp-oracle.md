@@ -2,13 +2,14 @@
 id: def-p-with-a-sharpp-oracle
 kind: definition
 title: "Polynomial time with a Sharp-P oracle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-p, def-sharpp-and-gap-p-functions, thm-number-sat-is-sharpp-complete]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

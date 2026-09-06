@@ -2,13 +2,14 @@
 id: def-compact-support-c-c-and-c-zero-on-an-lch-space
 kind: definition
 title: "Compact support, $C_c(X)$, and $C_0(X)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-locally-compact-space, def-hausdorff-space, def-compact-space]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

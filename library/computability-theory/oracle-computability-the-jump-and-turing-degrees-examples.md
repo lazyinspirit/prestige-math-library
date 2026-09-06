@@ -1,7 +1,7 @@
 ---
 page: oracle-computability-the-jump-and-turing-degrees-examples
 title: "Oracle Computability, the Jump, and Turing Degrees: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-degree-order-is-representative-independent, ex-some-turing-reductions-are-not-truth-table-reductions, cex-an-oracle-machine-reads-the-infinite-oracle-at-once]
 ---

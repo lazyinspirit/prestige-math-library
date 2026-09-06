@@ -2,7 +2,9 @@
 id: lem-hashing-commits-public-randomness
 kind: lemma
 title: "Pairwise-independent hashing controls fibre size"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: session
 deps: [def-private-coin-public-coin-and-arthur-merlin-protocol, def-pairwise-independent-hash-family]
 proof_strategy: direct

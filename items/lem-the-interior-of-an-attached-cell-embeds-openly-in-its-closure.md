@@ -2,14 +2,17 @@
 id: lem-the-interior-of-an-attached-cell-embeds-openly-in-its-closure
 kind: lemma
 title: The interior of an attached cell embeds openly in its closure
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cell-attachment-by-a-characteristic-map]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Chapter 0

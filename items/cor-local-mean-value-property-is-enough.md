@@ -2,7 +2,7 @@
 id: cor-local-mean-value-property-is-enough
 kind: corollary
 title: "A pointwise local ball mean property is enough"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-continuous-mean-value-functions-are-harmonic]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

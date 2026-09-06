@@ -2,7 +2,7 @@
 id: thm-absolute-irreducibility-via-the-endomorphism-division-algebra
 kind: theorem
 title: "Absolute irreducibility via the endomorphism division algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-endomorphism-division-algebra-of-an-irreducible, lem-base-change-of-intertwiner-spaces, thm-scalar-extension-of-an-irreducible-finite-group-representation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

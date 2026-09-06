@@ -2,7 +2,7 @@
 id: ex-locally-integrable-density-functional-is-represented-by-g-dlambda
 kind: example
 title: "A locally integrable density functional is represented by g dlambda"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, def-second-countable-space, thm-rmk-positive-functional-is-integration-against-its-representing-measure, thm-rmk-uniqueness-among-radon-measures, def-locally-integrable-function-on-r-n, def-measure-with-density, thm-lebesgue-measure-is-a-radon-measure-on-rn, cor-rn-is-locally-compact-and-sigma-compact, thm-rational-points-and-boxes-in-rn, cor-second-countable-lch-locally-finite-borel-measures-are-regular]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: thm-scheme-theoretic-image-quasi-compact-morphism
 kind: theorem
 title: "Scheme-theoretic image of a quasi-compact morphism"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-scheme-theoretic-image, def-quasi-compact-and-quasi-separated-morphism, def-quasi-coherent-ideal-sheaf, thm-quasi-coherent-ideal-closed-subscheme-correspondence, lem-morphism-schemes-local-on-source-target]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

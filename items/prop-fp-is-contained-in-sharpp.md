@@ -2,7 +2,7 @@
 id: prop-fp-is-contained-in-sharpp
 kind: proposition
 title: "FP is contained in Sharp-P"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sharpp-and-gap-p-functions, def-fp-function-class]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

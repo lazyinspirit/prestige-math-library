@@ -2,7 +2,7 @@
 id: thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic
 kind: theorem
 title: "Locally uniform limits of harmonic functions are harmonic"
-status: draft
+status: published
 origin: pipeline
 deps: [def-spherical-averages-and-local-ball-means-in-rn, cor-ball-mean-value-property-for-harmonic-functions, thm-continuous-mean-value-functions-are-harmonic]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

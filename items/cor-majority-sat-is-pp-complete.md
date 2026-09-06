@@ -2,7 +2,7 @@
 id: cor-majority-sat-is-pp-complete
 kind: corollary
 title: "MajoritySAT is PP-complete"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-majority-sat, thm-pp-is-sign-testing-gap-p, lem-cook-levin-can-be-made-parsimonious]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

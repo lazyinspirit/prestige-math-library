@@ -2,7 +2,7 @@
 id: thm-p-is-contained-in-p-poly
 kind: theorem
 title: "Every polynomial-time language has polynomial-size circuits"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-boolean-circuit-size-depth-fanin-and-basis, def-circuit-family-and-p-poly, def-p]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-zeta-zero-count-unit-interval
 kind: corollary
 title: "A unit-interval bound for zeta zeros"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-riemann-von-mangoldt-zero-counting]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

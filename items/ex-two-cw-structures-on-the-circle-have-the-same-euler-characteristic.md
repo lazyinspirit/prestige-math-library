@@ -2,14 +2,16 @@
 id: ex-two-cw-structures-on-the-circle-have-the-same-euler-characteristic
 kind: example
 title: Two CW structures on the circle have the same Euler characteristic
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-euler-characteristic-of-a-finite-cw-complex, thm-euler-poincare-formula-for-finite-cw-complexes]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-07
+  precheck: pass
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Theorem 2.44

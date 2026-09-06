@@ -2,13 +2,14 @@
 id: rem-ambient-orientability-is-not-required-for-morse-smale-transversality
 kind: remark
 title: "Ambient orientability is not required for Morse--Smale transversality"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-morse-smale-pair, thm-unparametrized-trajectory-space-is-a-smooth-manifold]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

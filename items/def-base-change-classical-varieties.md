@@ -2,7 +2,7 @@
 id: def-base-change-classical-varieties
 kind: definition
 title: Base change of classical varieties when the pullback exists
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, §5i Fibred products and Notes 5.32
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

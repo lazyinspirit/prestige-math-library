@@ -2,13 +2,14 @@
 id: def-turing-degree-and-degree-order
 kind: definition
 title: "Turing degrees and their order"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-turing-reducibility-and-equivalence, lem-turing-reducibility-is-a-preorder]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

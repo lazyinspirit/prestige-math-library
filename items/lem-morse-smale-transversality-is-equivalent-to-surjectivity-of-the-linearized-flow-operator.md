@@ -2,7 +2,7 @@
 id: lem-morse-smale-transversality-is-equivalent-to-surjectivity-of-the-linearized-flow-operator
 kind: lemma
 title: "Morse--Smale transversality and surjectivity of the linearized flow operator"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-morse-smale-pair, def-parametrized-morse-trajectory-space, prop-parametrized-morse-trajectory-space-is-a-manifold, def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian, thm-a-riemannian-metric-has-a-unique-levi-civita-connection-on-the-cotangent-bundle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

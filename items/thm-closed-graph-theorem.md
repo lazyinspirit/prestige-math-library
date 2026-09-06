@@ -2,14 +2,17 @@
 id: thm-closed-graph-theorem
 kind: theorem
 title: "Closed graph theorem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-graph-of-a-linear-operator, thm-bounded-inverse-theorem, lem-closed-subspace-of-a-banach-space-is-banach, thm-finite-products-of-banach-spaces-are-banach]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources: {references: [{title: "Buhler--Salamon, Functional Analysis, Theorem 2.20", url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"}]}
 ---
 ## Statement

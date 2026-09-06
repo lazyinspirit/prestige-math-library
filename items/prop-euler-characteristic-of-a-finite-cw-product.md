@@ -2,14 +2,17 @@
 id: prop-euler-characteristic-of-a-finite-cw-product
 kind: proposition
 title: Euler characteristic of a finite CW product
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-euler-characteristic-of-a-finite-cw-complex]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: J. Peter May, A Concise Course in Algebraic Topology, Chapter 10

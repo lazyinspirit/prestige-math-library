@@ -2,7 +2,7 @@
 id: lem-verma-embedding-implies-strong-linkage
 kind: lemma
 title: "A Verma embedding implies strong linkage"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-nonzero-verma-homomorphism-is-injective, thm-strong-linkage-principle-for-verma-modules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

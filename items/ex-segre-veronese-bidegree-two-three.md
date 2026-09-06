@@ -2,7 +2,7 @@
 id: ex-segre-veronese-bidegree-two-three
 kind: example
 title: A bidegree (2,3) Segre-Veronese embedding
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, 6.23 and 6.26
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

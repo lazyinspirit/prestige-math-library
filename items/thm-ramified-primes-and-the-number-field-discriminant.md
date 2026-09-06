@@ -2,7 +2,7 @@
 id: thm-ramified-primes-and-the-number-field-discriminant
 kind: theorem
 title: "Ramification is detected by the number-field discriminant"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fundamental-identity-for-primes-in-number-fields, thm-number-field-discriminant-is-well-defined-and-nonzero]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

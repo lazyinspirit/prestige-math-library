@@ -2,7 +2,7 @@
 id: thm-hadamard-lacunary-sets-are-sidon
 kind: theorem
 title: "Hadamard-lacunary sets are Sidon"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sidon-set-in-the-integer-dual, lem-riesz-product-for-a-hadamard-lacunary-set, thm-holder-inequality-for-integrals]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

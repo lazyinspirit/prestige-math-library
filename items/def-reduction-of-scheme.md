@@ -2,12 +2,13 @@
 id: def-reduction-of-scheme
 kind: definition
 title: "The reduction of a scheme"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-scheme, def-ideal-sheaf, def-reduced-affine-scheme]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

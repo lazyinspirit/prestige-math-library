@@ -2,7 +2,9 @@
 id: fs-inner-regularity-on-open-sets-implies-inner-regularity-on-all-borel-sets
 kind: false-statement
 title: "Inner regularity on open sets implies inner regularity on all Borel sets"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

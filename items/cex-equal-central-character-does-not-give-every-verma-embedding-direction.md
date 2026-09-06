@@ -2,7 +2,7 @@
 id: cex-equal-central-character-does-not-give-every-verma-embedding-direction
 kind: counterexample
 title: "Equal central character does not give every Verma embedding direction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-central-characters-are-dot-weyl-orbits, thm-bgg-verma-homomorphism-criterion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

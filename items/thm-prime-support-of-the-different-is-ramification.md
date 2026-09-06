@@ -2,7 +2,7 @@
 id: thm-prime-support-of-the-different-is-ramification
 kind: theorem
 title: "The prime support of the different is ramification"
-status: draft
+status: published
 origin: pipeline
 deps: [def-different-of-a-number-field, def-ramification-index, def-prime-ideal-valuations-on-fractional-ideals]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

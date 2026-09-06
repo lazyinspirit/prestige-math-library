@@ -2,7 +2,7 @@
 id: fs-cones-form-a-functor-in-every-triangulated-category
 kind: false-statement
 title: "Cones form a functor in every triangulated category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-the-cone-object-of-a-map-is-unique-up-to-nonunique-isomorphism, def-triangulated-category-axiom-tr-three]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

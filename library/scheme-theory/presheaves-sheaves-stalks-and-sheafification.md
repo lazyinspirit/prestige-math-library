@@ -1,7 +1,7 @@
 ---
 page: presheaves-sheaves-stalks-and-sheafification
 title: "Presheaves Sheaves Stalks and Sheafification"
-status: draft
+status: published
 items: [def-open-set-category-topological-space,
         def-presheaf-on-topological-space,
         def-section-restriction-and-global-section,

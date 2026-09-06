@@ -2,7 +2,7 @@
 id: ex-non-cohen-macaulay-local-ring
 title: A non-Cohen--Macaulay local quotient
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-depth-zero-associated-prime-criterion, thm-depth-bounded-by-support-dimension]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

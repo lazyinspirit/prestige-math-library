@@ -2,13 +2,14 @@
 id: def-private-coin-public-coin-and-arthur-merlin-protocol
 kind: definition
 title: "Private-coin, public-coin, and Arthur--Merlin protocols"
-status: draft
+status: published
 origin: session
 deps: [def-ip]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

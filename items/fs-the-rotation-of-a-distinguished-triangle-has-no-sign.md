@@ -2,7 +2,7 @@
 id: fs-the-rotation-of-a-distinguished-triangle-has-no-sign
 kind: false-statement
 title: "The rotation of a distinguished triangle has no sign"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-rotation-of-a-triangle, rem-triangulated-sign-convention]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

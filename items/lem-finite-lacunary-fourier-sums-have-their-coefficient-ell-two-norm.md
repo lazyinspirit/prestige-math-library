@@ -2,7 +2,7 @@
 id: lem-finite-lacunary-fourier-sums-have-their-coefficient-ell-two-norm
 kind: lemma
 title: "Finite lacunary Fourier sums have their coefficient ell-two norm"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hadamard-lacunary-sequence-and-lacunary-trigonometric-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

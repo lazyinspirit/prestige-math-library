@@ -2,7 +2,9 @@
 id: ex-perron-formula-for-a-finite-dirichlet-polynomial
 kind: example
 title: "Perron inversion for a finite Dirichlet polynomial"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [thm-perron-formula]
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: ex-the-cone-triangle-of-multiplication-by-m
 kind: example
 title: "The cone triangle of multiplication by m"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-mapping-cone-of-a-chain-map, def-standard-cone-triangle-in-the-homotopy-category, def-zero-and-stalk-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

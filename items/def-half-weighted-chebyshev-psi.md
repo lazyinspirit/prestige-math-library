@@ -2,13 +2,14 @@
 id: def-half-weighted-chebyshev-psi
 kind: definition
 title: "The half-weighted Chebyshev function"
-status: draft
+status: published
 origin: pipeline
 deps: [def-von-mangoldt-function, def-chebyshev-psi-function]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

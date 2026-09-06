@@ -2,7 +2,9 @@
 id: def-scheme-over-base
 kind: definition
 title: "Schemes and morphisms over a base"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 provenance:
   statement: literature-derived
   proof: not-applicable

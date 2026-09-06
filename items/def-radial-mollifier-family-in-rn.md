@@ -2,13 +2,14 @@
 id: def-radial-mollifier-family-in-rn
 kind: definition
 title: "A radial mollifier family in Rn"
-status: draft
+status: published
 origin: pipeline
 deps: [def-mollifier-family-generated-by-a-unit-mass-smooth-bump]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

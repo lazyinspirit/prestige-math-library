@@ -2,7 +2,7 @@
 id: lem-cohen-macaulay-parameter-first-element-regular
 title: The first parameter of a Cohen--Macaulay module is regular
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-cohen-macaulay-local-module-and-ring, thm-dimension-and-parameters-for-modules, lem-associated-primes-of-cohen-macaulay-module-have-full-dimension]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

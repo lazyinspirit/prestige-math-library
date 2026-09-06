@@ -2,7 +2,7 @@
 id: fs-kolmogorov-complexity-is-an-absolute-integer
 kind: false-statement
 title: "False: Kolmogorov complexity is an absolute integer"
-status: draft
+status: published
 origin: session
 deps: [thm-invariance-theorem-for-plain-complexity]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

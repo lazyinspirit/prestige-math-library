@@ -2,7 +2,7 @@
 id: lem-finite-lch-partition-of-unity-near-a-compact-set
 kind: lemma
 title: "A finite compactly supported partition of unity near a compact set"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-compact-support-c-c-and-c-zero-on-an-lch-space, def-cutoff-relation-f-prec-u, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, cor-compact-hausdorff-partitions-of-unity]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

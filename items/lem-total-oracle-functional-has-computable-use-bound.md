@@ -2,7 +2,7 @@
 id: lem-total-oracle-functional-has-computable-use-bound
 kind: lemma
 title: "An everywhere-total functional has a computable use bound"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-truth-table-reduction, lem-oracle-computation-has-a-finite-query-witness]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-fredholm-maps-and-regular-values-on-countable-banach-manifolds
 kind: definition
 title: "Fredholm maps and regular values on countable-base Banach manifolds"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

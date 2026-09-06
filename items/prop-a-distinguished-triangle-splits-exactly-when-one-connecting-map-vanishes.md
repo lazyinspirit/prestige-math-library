@@ -2,7 +2,7 @@
 id: prop-a-distinguished-triangle-splits-exactly-when-one-connecting-map-vanishes
 kind: proposition
 title: "A distinguished triangle is split up to rotation exactly when one map vanishes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-a-distinguished-triangle-with-zero-first-map-is-split, prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations, def-split-monomorphism-and-split-epimorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

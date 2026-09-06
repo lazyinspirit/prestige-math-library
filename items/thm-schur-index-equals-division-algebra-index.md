@@ -2,7 +2,7 @@
 id: thm-schur-index-equals-division-algebra-index
 kind: theorem
 title: "The Schur index equals the division-algebra index"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-index-of-a-central-division-algebra, def-endomorphism-division-algebra-of-an-irreducible, def-schur-index-of-an-irreducible-character, lem-character-field-is-the-stabilizer-fixed-field, thm-scalar-extension-of-an-irreducible-finite-group-representation, def-splitting-field-for-a-finite-group, lem-base-change-of-intertwiner-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

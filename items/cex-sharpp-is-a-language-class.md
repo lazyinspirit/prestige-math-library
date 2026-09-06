@@ -2,7 +2,7 @@
 id: cex-sharpp-is-a-language-class
 kind: counterexample
 title: "NumberSAT is not a Boolean membership predicate"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-number-sat, fs-sharpp-is-a-language-class]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

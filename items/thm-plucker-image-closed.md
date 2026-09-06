@@ -2,7 +2,7 @@
 id: thm-plucker-image-closed
 kind: theorem
 title: The Plucker image is a closed projective algebraic set
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: MIT 18.725 Algebraic Geometry, Lecture 4, Theorem 4.1
       url: https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-strong-linkage-order-on-weights
 kind: definition
 title: "The strong linkage order on weights"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-root-reflections-and-the-weyl-group-action, def-weyl-vector-rho-for-a-chosen-positive-system]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

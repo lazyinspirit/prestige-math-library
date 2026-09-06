@@ -2,7 +2,7 @@
 id: cex-an-unordered-infinite-zero-sum-is-not-a-formula
 kind: counterexample
 title: "An unordered infinite zero sum is not an explicit formula"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-von-mangoldt-explicit-formula-smoothed, thm-von-mangoldt-explicit-formula-truncated]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

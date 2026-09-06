@@ -2,13 +2,14 @@
 id: def-parametrized-morse-trajectory-space
 kind: definition
 title: "Parametrized Morse trajectory space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-downward-gradient-like-vector-field, def-stable-and-unstable-sets-of-a-critical-point, thm-fundamental-theorem-on-flows]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

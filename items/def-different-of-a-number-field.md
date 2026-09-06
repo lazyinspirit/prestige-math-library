@@ -2,7 +2,9 @@
 id: def-different-of-a-number-field
 kind: definition
 title: "The different of a number field"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [lem-codifferent-is-a-fractional-ideal, def-invertible-fractional-ideal, thm-number-field-integral-ideal-factorisation-in-zf, cor-trace-and-norm-of-an-algebraic-integer]
 provenance:

@@ -2,7 +2,7 @@
 id: prop-the-cone-object-of-a-map-is-unique-up-to-nonunique-isomorphism
 kind: proposition
 title: "The cone object of a map is unique up to nonunique isomorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-triangulated-category, def-triangulated-category-axiom-tr-one, def-triangulated-category-axiom-tr-three, prop-two-isomorphism-components-of-a-morphism-of-triangles-force-the-third]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

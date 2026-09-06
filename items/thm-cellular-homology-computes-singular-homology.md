@@ -2,14 +2,16 @@
 id: thm-cellular-homology-computes-singular-homology
 kind: theorem
 title: Cellular homology computes singular homology
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cellular-homology, lem-skeletal-homology-stabilizes-away-from-the-cell-dimension, lem-homology-of-an-infinite-cw-complex-is-the-colimit-of-skeletal-homology, def-cellular-boundary-from-three-consecutive-skeleta, thm-relative-homology-of-consecutive-cw-skeleta, thm-long-exact-sequence-of-a-pair-in-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-07
+  precheck: pass
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Theorem 2.35

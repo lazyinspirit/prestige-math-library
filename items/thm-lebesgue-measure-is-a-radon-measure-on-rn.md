@@ -2,7 +2,7 @@
 id: thm-lebesgue-measure-is-a-radon-measure-on-rn
 kind: theorem
 title: "Lebesgue measure is a Radon measure on R^n"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, def-radon-measure-on-an-lch-space, cor-rn-is-locally-compact-and-sigma-compact, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, thm-lebesgue-outer-regularity-for-arbitrary-subsets, thm-lebesgue-inner-regularity-by-closed-and-compact-sets]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

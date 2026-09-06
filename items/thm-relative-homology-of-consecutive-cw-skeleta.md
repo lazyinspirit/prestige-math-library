@@ -2,14 +2,17 @@
 id: thm-relative-homology-of-consecutive-cw-skeleta
 kind: theorem
 title: Relative homology of consecutive CW skeleta
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-skeleta-cw-subcomplex-and-relative-cw-complex, prop-cw-skeleta-are-closed-and-cells-form-a-disjoint-partition, lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells, thm-excision-for-singular-homology, cor-homology-of-good-pairs-is-reduced-homology-of-the-quotient, cor-homology-of-spheres]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Section 2.2

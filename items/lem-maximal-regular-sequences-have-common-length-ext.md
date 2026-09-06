@@ -2,7 +2,7 @@
 id: lem-maximal-regular-sequences-have-common-length-ext
 title: Maximal regular sequences have a common Ext length
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [lem-maximal-regular-sequence-stops-at-associated-prime, lem-ext-depth-zero-identifies-annihilated-elements, lem-ext-depth-shift-across-a-regular-element]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 ## Statement

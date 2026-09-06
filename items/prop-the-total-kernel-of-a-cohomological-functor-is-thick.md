@@ -2,7 +2,7 @@
 id: prop-the-total-kernel-of-a-cohomological-functor-is-thick
 kind: proposition
 title: "The total kernel of a cohomological functor is thick"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-thick-subcategory, def-cohomological-functor-on-a-triangulated-category, def-split-monomorphism-and-split-epimorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

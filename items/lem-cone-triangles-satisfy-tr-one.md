@@ -2,7 +2,7 @@
 id: lem-cone-triangles-satisfy-tr-one
 kind: lemma
 title: "Cone triangles satisfy TR1"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-distinguished-cone-triangle-in-the-homotopy-category, def-standard-cone-triangle-in-the-homotopy-category, thm-the-cone-of-an-identity-map-is-contractible, def-triangulated-category-axiom-tr-one]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

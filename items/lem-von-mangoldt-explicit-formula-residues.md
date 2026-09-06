@@ -2,7 +2,7 @@
 id: lem-von-mangoldt-explicit-formula-residues
 kind: lemma
 title: "Residues in the von Mangoldt contour shift"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-riemann-zeta-meromorphic-continuation, thm-von-mangoldt-logarithmic-derivative-zeta, thm-trivial-zeros-and-critical-strip, thm-riemann-zeta-functional-equation, thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane, thm-gamma-meromorphic-continuation, cor-gamma-function-has-no-zeros]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

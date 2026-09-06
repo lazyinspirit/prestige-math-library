@@ -2,12 +2,13 @@
 id: def-locally-finite-type-and-finite-type-morphism
 kind: definition
 title: "Locally finite type and finite type morphisms"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-morphism-of-schemes, def-affine-open-subscheme, def-finite-type-and-module-finite-algebras]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

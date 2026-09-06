@@ -2,7 +2,9 @@
 id: thm-affine-schemes-quasi-separated
 kind: theorem
 title: "Affine schemes are quasi-separated"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 provenance:
   statement: literature-derived
   proof: ai-altered

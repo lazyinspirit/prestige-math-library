@@ -2,13 +2,14 @@
 id: lem-morphism-schemes-local-on-source-target
 kind: lemma
 title: "Morphisms of schemes are local on compatible open covers"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-morphism-of-schemes, def-affine-open-subscheme, thm-gluing-ringed-and-locally-ringed-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

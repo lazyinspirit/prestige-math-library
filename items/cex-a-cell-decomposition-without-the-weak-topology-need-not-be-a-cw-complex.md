@@ -2,14 +2,17 @@
 id: cex-a-cell-decomposition-without-the-weak-topology-need-not-be-a-cw-complex
 kind: counterexample
 title: A cell decomposition without the weak topology need not be a CW complex
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cw-complex-with-closure-finiteness-and-weak-topology, prop-a-cw-complex-is-the-colimit-of-its-skeleta-in-the-weak-topology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Chapter 0

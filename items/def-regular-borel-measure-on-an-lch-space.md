@@ -2,13 +2,14 @@
 id: def-regular-borel-measure-on-an-lch-space
 kind: definition
 title: "Regular Borel measure on an LCH space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-radon-measure-on-an-lch-space]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

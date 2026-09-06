@@ -2,13 +2,14 @@
 id: def-computably-dominated-oracle
 kind: definition
 title: "Computably dominated oracles"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-turing-reducibility-and-equivalence]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

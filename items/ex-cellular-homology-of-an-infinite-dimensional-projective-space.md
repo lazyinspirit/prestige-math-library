@@ -2,14 +2,17 @@
 id: ex-cellular-homology-of-an-infinite-dimensional-projective-space
 kind: example
 title: Cellular homology of an infinite-dimensional projective space
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [ex-cellular-homology-of-real-projective-space, lem-homology-of-an-infinite-cw-complex-is-the-colimit-of-skeletal-homology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Example 2.42

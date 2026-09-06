@@ -2,13 +2,14 @@
 id: def-ac-zero-nc-one-and-nc
 kind: definition
 title: "AC0, NC1, and NC under a stated uniformity convention"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-boolean-circuit-size-depth-fanin-and-basis, def-logspace-uniform-circuit-family]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

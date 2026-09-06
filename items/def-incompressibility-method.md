@@ -2,13 +2,14 @@
 id: def-incompressibility-method
 kind: definition
 title: "The incompressibility method"
-status: draft
+status: published
 origin: session
 deps: [lem-most-strings-are-incompressible, def-conditional-kolmogorov-complexity]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

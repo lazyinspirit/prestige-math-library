@@ -2,14 +2,16 @@
 id: thm-open-mapping-theorem
 kind: theorem
 title: "Open mapping theorem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [lem-open-mapping-successive-approximation, def-bounded-linear-operator]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-07
+  precheck: pass
 sources: {references: [{title: "Buhler--Salamon, Functional Analysis, Theorem 2.8", url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"}]}
 ---
 

@@ -2,14 +2,17 @@
 id: thm-euler-poincare-formula-for-finite-cw-complexes
 kind: theorem
 title: Euler–Poincare formula for finite CW complexes
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-euler-characteristic-of-a-finite-cw-complex, def-cellular-homology, thm-cellular-homology-computes-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Theorem 2.44

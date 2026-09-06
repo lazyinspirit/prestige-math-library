@@ -2,7 +2,7 @@
 id: lem-schur-index-is-independent-of-the-chosen-splitting-field
 kind: lemma
 title: "The Schur index is independent of the splitting field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-schur-index-of-an-irreducible-character, lem-base-change-of-intertwiner-spaces, thm-scalar-extension-of-an-irreducible-finite-group-representation, cor-change-of-rings-for-extension-of-scalars, cor-cyclotomic-field-splits-a-finite-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

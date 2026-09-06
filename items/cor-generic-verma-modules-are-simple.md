@@ -2,7 +2,7 @@
 id: cor-generic-verma-modules-are-simple
 kind: corollary
 title: "Generic Verma modules are simple"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-verma-irreducibility-criterion-from-shapovalov-determinants]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

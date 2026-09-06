@@ -2,13 +2,14 @@
 id: def-martin-lof-test-and-random-sequence
 kind: definition
 title: "Martin-Löf tests and random sequences"
-status: draft
+status: published
 origin: session
 deps: [def-effectively-open-set-in-cantor-space]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

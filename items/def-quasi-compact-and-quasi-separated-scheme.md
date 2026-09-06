@@ -2,12 +2,13 @@
 id: def-quasi-compact-and-quasi-separated-scheme
 kind: definition
 title: "Quasi-compact and quasi-separated schemes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-scheme, def-affine-open-subscheme]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

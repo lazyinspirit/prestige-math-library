@@ -2,7 +2,7 @@
 id: lem-segre-map-well-defined-injective
 kind: lemma
 title: The Segre map is well defined and injective
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, The Segre map, §6i
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

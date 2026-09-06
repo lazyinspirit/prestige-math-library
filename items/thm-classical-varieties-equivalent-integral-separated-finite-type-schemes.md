@@ -2,7 +2,9 @@
 id: thm-classical-varieties-equivalent-integral-separated-finite-type-schemes
 kind: theorem
 title: "Irreducible classical varieties and integral separated finite-type schemes"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 provenance:
   statement: literature-derived
   proof: ai-altered

@@ -2,7 +2,7 @@
 id: thm-verma-embedding-for-an-arbitrary-positive-root
 kind: theorem
 title: "Verma embedding for an arbitrary positive root"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-simple-reflection-embedding-of-verma-modules, def-root-reflections-and-the-weyl-group-action, def-weyl-vector-rho-for-a-chosen-positive-system]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

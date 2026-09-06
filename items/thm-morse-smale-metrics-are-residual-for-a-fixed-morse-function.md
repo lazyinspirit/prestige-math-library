@@ -2,7 +2,7 @@
 id: thm-morse-smale-metrics-are-residual-for-a-fixed-morse-function
 kind: theorem
 title: "Morse--Smale metrics are residual for a fixed Morse function"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-morse-smale-pair, def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian, def-nowhere-dense-meagre-and-residual-subsets, thm-sard-smale-residual-regular-values-for-fredholm-maps, lem-universal-metric-trajectory-projection-is-fredholm, lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-schur-index-of-an-irreducible-character
 kind: definition
 title: "The Schur index of an irreducible character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-character-field-and-field-of-definition, thm-scalar-extension-of-an-irreducible-finite-group-representation, lem-character-field-is-the-stabilizer-fixed-field, cor-cyclotomic-field-splits-a-finite-group]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

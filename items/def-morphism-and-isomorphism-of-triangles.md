@@ -2,13 +2,14 @@
 id: def-morphism-and-isomorphism-of-triangles
 kind: definition
 title: "Morphism and isomorphism of triangles"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangle-in-a-category-with-translation]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -24,4 +25,3 @@ sources:
 A morphism from $(X,Y,Z,f,g,h)$ to $(X',Y',Z',f',g',h')$ is a triple
 $(a,b,c)$ with $bf=f'a$, $cg=g'b$, and $a[1]h=h'c$. It is an
 **isomorphism of triangles** when $a,b,c$ are isomorphisms.
-

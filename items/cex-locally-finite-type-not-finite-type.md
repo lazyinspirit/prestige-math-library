@@ -2,13 +2,14 @@
 id: cex-locally-finite-type-not-finite-type
 kind: counterexample
 title: "An infinite disjoint union is locally but not globally finite type"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [def-locally-finite-type-and-finite-type-morphism, def-quasi-compact-and-quasi-separated-morphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

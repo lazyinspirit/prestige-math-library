@@ -2,7 +2,7 @@
 id: lem-universal-metric-trajectory-projection-is-fredholm
 kind: lemma
 title: "The universal metric--trajectory projection is Fredholm"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-parametrized-morse-trajectory-space, def-fredholm-maps-and-regular-values-on-countable-banach-manifolds, def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian, lem-morse-smale-transversality-is-equivalent-to-surjectivity-of-the-linearized-flow-operator]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

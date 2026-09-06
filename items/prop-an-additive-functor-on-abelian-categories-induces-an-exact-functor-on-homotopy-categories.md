@@ -2,7 +2,7 @@
 id: prop-an-additive-functor-on-abelian-categories-induces-an-exact-functor-on-homotopy-categories
 kind: proposition
 title: "An additive functor on abelian categories induces an exact functor on homotopy categories"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-exact-functor-between-triangulated-categories, thm-the-homotopy-category-of-an-abelian-category-is-triangulated, prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps, def-standard-cone-triangle-in-the-homotopy-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

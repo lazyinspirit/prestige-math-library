@@ -1,7 +1,7 @@
 ---
 page: radon-measures-and-the-riesz-markov-kakutani-theorem-examples
 title: "Radon Measures and the Riesz Markov Kakutani Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-riemann-integral-functional-is-represented-by-interval-lebesgue-measure, ex-point-evaluation-functional-is-represented-by-a-dirac-measure, ex-locally-integrable-density-functional-is-represented-by-g-dlambda, ex-lebesgue-stieltjes-functional-is-represented-by-its-stieltjes-measure, ex-counting-functional-on-a-discrete-lch-space, cex-dieudonne-borel-measure-on-omega-one-plus-one-is-not-regular, cex-distinct-borel-measures-can-represent-the-same-c-c-functional]
 ---

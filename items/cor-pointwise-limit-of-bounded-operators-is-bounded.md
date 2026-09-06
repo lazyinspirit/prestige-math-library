@@ -2,14 +2,16 @@
 id: cor-pointwise-limit-of-bounded-operators-is-bounded
 kind: corollary
 title: "A pointwise limit of bounded operators is bounded with the liminf norm bound"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-uniform-boundedness-principle, def-bounded-linear-operator, def-operator-norm]
 proof_strategy: direct
-verification: {precheck: pass}
+verification:
+  audited: 2026-09-07
+  precheck: pass
 sources:
   references:
     - title: "Buhler--Salamon, Functional Analysis, Theorem 2.5"

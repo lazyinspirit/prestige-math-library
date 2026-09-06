@@ -2,7 +2,7 @@
 id: fs-degree-join-is-set-union
 kind: false-statement
 title: "Degree join is set union"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-tagged-join-of-oracles, thm-turing-degrees-form-an-upper-semilattice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

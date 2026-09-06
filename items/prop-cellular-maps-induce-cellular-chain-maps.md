@@ -2,14 +2,17 @@
 id: prop-cellular-maps-induce-cellular-chain-maps
 kind: proposition
 title: Cellular maps induce cellular chain maps
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cellular-homology, def-skeleta-cw-subcomplex-and-relative-cw-complex, thm-cellular-homology-computes-singular-homology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Section 2.2

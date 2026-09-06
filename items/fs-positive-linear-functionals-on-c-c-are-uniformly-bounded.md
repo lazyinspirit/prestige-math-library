@@ -2,7 +2,7 @@
 id: fs-positive-linear-functionals-on-c-c-are-uniformly-bounded
 kind: false-statement
 title: "Every positive linear functional on C_c(X) is uniformly sup-norm bounded"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-lebesgue-measure-is-a-radon-measure-on-rn, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, def-positive-linear-functional-on-c-c]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

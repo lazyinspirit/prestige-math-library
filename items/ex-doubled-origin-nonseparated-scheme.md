@@ -2,12 +2,13 @@
 id: ex-doubled-origin-nonseparated-scheme
 kind: example
 title: "The affine line with doubled origin"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [thm-gluing-affine-schemes, def-open-immersion-schemes]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

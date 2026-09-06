@@ -2,7 +2,7 @@
 id: cor-second-countable-lch-locally-finite-borel-measures-are-regular
 kind: corollary
 title: "Locally finite Borel measures on second-countable LCH spaces are regular"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact, def-second-countable-space, lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

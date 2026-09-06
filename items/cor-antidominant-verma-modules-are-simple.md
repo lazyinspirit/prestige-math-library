@@ -2,7 +2,7 @@
 id: cor-antidominant-verma-modules-are-simple
 kind: corollary
 title: "Antidominant regular Verma modules are simple"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-strong-linkage-order-on-weights, lem-every-nonzero-verma-submodule-contains-a-singular-vector, thm-universal-property-of-verma-modules, lem-a-nonzero-verma-homomorphism-is-injective, lem-verma-embedding-implies-strong-linkage]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

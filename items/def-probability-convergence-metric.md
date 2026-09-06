@@ -2,7 +2,7 @@
 id: def-probability-convergence-metric
 kind: definition
 title: "A metric for convergence in probability"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Exercise 3.2.8 (comparison metric)"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

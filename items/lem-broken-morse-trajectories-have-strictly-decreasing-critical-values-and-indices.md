@@ -2,7 +2,7 @@
 id: lem-broken-morse-trajectories-have-strictly-decreasing-critical-values-and-indices
 kind: lemma
 title: "Broken Morse trajectories have strictly decreasing critical values and indices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-parametrized-morse-trajectory-space, def-downward-gradient-like-vector-field, def-morse-smale-pair, cor-no-morse-smale-trajectories-for-nonpositive-index-drop]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

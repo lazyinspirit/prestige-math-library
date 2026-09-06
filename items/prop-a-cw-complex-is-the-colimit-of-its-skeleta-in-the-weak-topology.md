@@ -2,14 +2,17 @@
 id: prop-a-cw-complex-is-the-colimit-of-its-skeleta-in-the-weak-topology
 kind: proposition
 title: A CW complex is the colimit of its skeleta in the weak topology
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-skeleta-cw-subcomplex-and-relative-cw-complex, def-cw-complex-with-closure-finiteness-and-weak-topology]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: J. Peter May, A Concise Course in Algebraic Topology, Chapter 10

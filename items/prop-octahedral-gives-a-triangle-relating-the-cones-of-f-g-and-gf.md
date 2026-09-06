@@ -2,7 +2,7 @@
 id: prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf
 kind: proposition
 title: "The octahedral axiom gives a triangle relating the cones of f, g, and gf"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-triangulated-category, def-triangulated-category-axiom-tr-four-octahedral, prop-the-cone-object-of-a-map-is-unique-up-to-nonunique-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

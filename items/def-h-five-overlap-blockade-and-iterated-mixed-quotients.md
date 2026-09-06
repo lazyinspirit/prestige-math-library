@@ -2,13 +2,14 @@
 id: def-h-five-overlap-blockade-and-iterated-mixed-quotients
 kind: definition
 title: "The $H_5$-overlap blockade and its iterated mixed quotients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-h-five-overlap-chain-relation-in-a-comb-block, def-quotient-blockade-by-mixed-block-reachability]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

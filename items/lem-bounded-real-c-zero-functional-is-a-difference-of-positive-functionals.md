@@ -2,7 +2,7 @@
 id: lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals
 kind: lemma
 title: "A bounded real C_0(X) functional is a difference of positive functionals"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-compact-support-c-c-and-c-zero-on-an-lch-space, lem-positive-c-zero-functionals-have-finite-regular-representing-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

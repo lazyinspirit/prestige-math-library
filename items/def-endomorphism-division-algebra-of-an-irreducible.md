@@ -2,13 +2,14 @@
 id: def-endomorphism-division-algebra-of-an-irreducible
 kind: definition
 title: "The endomorphism division algebra of an irreducible representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-intertwiner-equivalent-and-faithful-representations, def-subrepresentation-and-irreducible-representation, cor-schurs-lemma-for-irreducible-representations, def-division-ring]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

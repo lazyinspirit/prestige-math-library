@@ -2,7 +2,7 @@
 id: lem-basic-conditional-complexity-inequalities
 kind: lemma
 title: "Basic conditional-complexity inequalities"
-status: draft
+status: published
 origin: session
 deps: [def-conditional-kolmogorov-complexity, def-description-machine-and-plain-kolmogorov-complexity, thm-invariance-theorem-for-plain-complexity]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

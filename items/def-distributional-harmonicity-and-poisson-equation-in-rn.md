@@ -2,7 +2,9 @@
 id: def-distributional-harmonicity-and-poisson-equation-in-rn
 kind: definition
 title: "Distributional harmonicity and Poisson's equation on an open subset of Rn"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [def-laplacian-of-a-c2-function]
 provenance:

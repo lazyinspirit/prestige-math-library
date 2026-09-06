@@ -2,7 +2,7 @@
 id: thm-character-of-an-irreducible-over-a-nonsplitting-field
 kind: theorem
 title: "Character formula over a nonsplitting field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-schur-index-of-an-irreducible-character, lem-schur-index-is-independent-of-the-chosen-splitting-field, thm-scalar-extension-of-an-irreducible-finite-group-representation, lem-character-field-is-the-stabilizer-fixed-field, thm-characters-of-direct-sums-tensor-products-and-duals]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

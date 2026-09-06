@@ -2,14 +2,17 @@
 id: thm-relative-cellular-homology-computes-relative-singular-homology
 kind: theorem
 title: Relative cellular homology computes relative singular homology
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-cellular-homology-computes-singular-homology, thm-relative-homology-of-consecutive-cw-skeleta, def-skeleta-cw-subcomplex-and-relative-cw-complex, cor-homology-of-good-pairs-is-reduced-homology-of-the-quotient]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: J. Peter May, A Concise Course in Algebraic Topology, Chapter 13

@@ -2,7 +2,7 @@
 id: thm-shannon-almost-all-functions-require-exponential-circuits
 kind: theorem
 title: "Almost all Boolean functions require exponential circuit size"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-counting-circuits-of-bounded-size, thm-cardinality-of-a-set-of-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

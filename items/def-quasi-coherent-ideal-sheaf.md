@@ -2,12 +2,13 @@
 id: def-quasi-coherent-ideal-sheaf
 kind: definition
 title: "Quasi-coherent ideal sheaves"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-ideal-sheaf, def-affine-open-subscheme]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-lebesgue-stieltjes-functional-is-represented-by-its-stieltjes-measure
 kind: example
 title: "A Lebesgue--Stieltjes functional is represented by its Stieltjes measure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-rmk-positive-functional-is-integration-against-its-representing-measure, thm-existence-of-the-lebesgue-stieltjes-measure, prop-lebesgue-stieltjes-and-lch-radon-conventions-agree-on-r]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

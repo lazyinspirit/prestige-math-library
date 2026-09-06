@@ -2,13 +2,14 @@
 id: def-optimal-description-machine
 kind: definition
 title: "Optimal description machines"
-status: draft
+status: published
 origin: session
 deps: [def-description-machine-and-plain-kolmogorov-complexity]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-zero-dimensional-rings-cohen-macaulay
 title: A zero-dimensional local ring is Cohen--Macaulay
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [cor-zero-dimensional-local-modules-are-cohen-macaulay]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-parameter-sequence-regular-in-a-hypersurface
 title: A parameter sequence regular in a hypersurface
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-parameters-and-regular-sequences-in-cohen-macaulay-modules, ex-depth-of-a-hypersurface]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

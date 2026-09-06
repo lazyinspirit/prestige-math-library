@@ -2,13 +2,14 @@
 id: thm-reduction-universal-property
 kind: theorem
 title: "Universal property of scheme reduction"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-reduction-of-scheme, def-morphism-of-schemes, lem-morphism-schemes-local-on-source-target]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

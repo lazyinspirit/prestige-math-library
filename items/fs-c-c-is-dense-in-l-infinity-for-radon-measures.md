@@ -2,7 +2,7 @@
 id: fs-c-c-is-dense-in-l-infinity-for-radon-measures
 kind: false-statement
 title: "C_c(X) is dense in L^infinity(mu) for every Radon measure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-lebesgue-measure-is-a-radon-measure-on-rn, thm-c-c-is-dense-in-l-p-for-radon-measures, def-compact-support-c-c-and-c-zero-on-an-lch-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

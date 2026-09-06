@@ -2,7 +2,7 @@
 id: thm-number-sat-is-sharpp-complete
 kind: theorem
 title: "NumberSAT is Sharp-P-complete under parsimonious reductions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sharpp-and-gap-p-functions, def-number-sat, def-parsimonious-reduction, prop-number-sat-is-in-sharpp, lem-cook-levin-can-be-made-parsimonious]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-depth-quotient-by-regular-element
 title: Depth drops by one after quotienting by a regular element
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-sequence-on-a-module, cor-depth-as-first-nonzero-ext, lem-ext-depth-shift-across-a-regular-element]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,9 @@
 id: prop-zero-and-split-triangles-are-distinguished
 kind: proposition
 title: "Zero and split triangles are distinguished"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: thm-special-vertex-local-structural-partition-criterion-implies-property-star
 kind: theorem
 title: "The special-vertex-local structural-partition criterion implies property (*)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-property-star-for-a-finite-family, def-erdos-hajnal-property-and-constant, def-h-free-and-family-free-graph, def-graph-isomorphism-and-complement, def-comb-in-a-graph, def-blockade-length-and-width, def-complete-anticomplete-pure-and-x-sparse-blockades, def-pattern-graph-of-a-pure-blockade, def-integral-geometric-layers-of-a-decreasing-block-partition, def-real-power, thm-real-power-laws, thm-natural-logarithm-laws, thm-exponential-is-strictly-increasing, def-structural-comb-partition-hypothesis, thm-geometric-series]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

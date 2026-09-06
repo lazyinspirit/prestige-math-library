@@ -2,13 +2,14 @@
 id: thm-quasi-coherent-ideal-closed-subscheme-correspondence
 kind: theorem
 title: "Quasi-coherent ideals and closed subschemes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-quasi-coherent-ideal-sheaf, def-closed-immersion-schemes, thm-affine-closed-immersions-quotient-rings]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

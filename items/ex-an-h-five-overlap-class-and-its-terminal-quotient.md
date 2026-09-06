@@ -2,7 +2,7 @@
 id: ex-an-h-five-overlap-class-and-its-terminal-quotient
 kind: example
 title: "An $H_5$-overlap class and its terminal quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-h-zero-through-h-five, def-h-five-overlap-chain-relation-in-a-comb-block, def-h-five-overlap-blockade-and-iterated-mixed-quotients, lem-h-five-overlap-quotient-iteration-terminates-at-a-pure-blockade]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

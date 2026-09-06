@@ -2,7 +2,7 @@
 id: lem-plucker-map-well-defined-injective
 kind: lemma
 title: The Plucker map is well defined and injective
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, Proposition 6.29 and Remark 6.34
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

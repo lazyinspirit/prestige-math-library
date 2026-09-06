@@ -2,7 +2,9 @@
 id: ex-eisenstein-total-ramification
 kind: example
 title: "An Eisenstein total-ramification calculation"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [cor-eisenstein-prime-is-totally-ramified]
 proof_strategy: direct

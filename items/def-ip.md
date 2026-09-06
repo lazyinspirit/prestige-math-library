@@ -2,13 +2,14 @@
 id: def-ip
 kind: definition
 title: "The class IP"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-and-soundness, def-probabilistic-polynomial-time-machine]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

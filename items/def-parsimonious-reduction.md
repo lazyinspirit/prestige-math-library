@@ -2,13 +2,14 @@
 id: def-parsimonious-reduction
 kind: definition
 title: "Parsimonious reductions between counting functions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"
@@ -25,4 +26,3 @@ sources:
 ## Definition
 
 A parsimonious reduction f to g is a polynomial-time map r with f(x)=g(r(x)) for every input x. This exact count equality is stronger than a decision many-one reduction, which preserves only nonzeroness.
-

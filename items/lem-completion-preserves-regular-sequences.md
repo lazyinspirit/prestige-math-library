@@ -2,7 +2,7 @@
 id: lem-completion-preserves-regular-sequences
 title: Completion preserves regular sequences
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-sequence-on-a-module, thm-flatness-of-noetherian-completion, thm-faithful-flatness-of-jacobson-adic-completion]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://stacks.math.columbia.edu/download/algebra.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

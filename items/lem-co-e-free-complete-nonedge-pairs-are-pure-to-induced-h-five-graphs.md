@@ -2,7 +2,7 @@
 id: lem-co-e-free-complete-nonedge-pairs-are-pure-to-induced-h-five-graphs
 kind: lemma
 title: "Relative to a complete nonedge pair in a co-$E$-free graph, every one-sided vertex is pure to an induced $H_5$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-co-e-free-mixed-vertices-on-an-induced-path-avoid-two-nonneighbours-and-three-neighbours, def-h-zero-through-h-five, def-e-graph-and-co-e-graph, def-graph-walk-trail-path-and-cycle, def-edges-between-sets-and-pure-mixed-pairs]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

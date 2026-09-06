@@ -2,7 +2,7 @@
 id: cex-almost-sure-convergence-does-not-imply-convergence-of-expectations
 kind: counterexample
 title: "Almost-sure convergence does not imply convergence of expectations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "S. Roch, Lecture 3: Modes of convergence, Example 3.11"
       url: "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes3.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

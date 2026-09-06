@@ -2,7 +2,7 @@
 id: ex-powers-of-two-form-a-hadamard-lacunary-sequence
 kind: example
 title: "The powers of two form a Hadamard-lacunary sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-hadamard-lacunary-sequence-and-lacunary-trigonometric-series]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

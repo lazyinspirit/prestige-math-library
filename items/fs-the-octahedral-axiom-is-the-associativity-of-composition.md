@@ -2,7 +2,7 @@
 id: fs-the-octahedral-axiom-is-the-associativity-of-composition
 kind: false-statement
 title: "The octahedral axiom is the associativity of composition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-triangulated-category-axiom-tr-four-octahedral, prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

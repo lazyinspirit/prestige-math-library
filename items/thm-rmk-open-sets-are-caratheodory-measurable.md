@@ -2,7 +2,7 @@
 id: thm-rmk-open-sets-are-caratheodory-measurable
 kind: theorem
 title: "Open sets are Caratheodory measurable for the RMK outer measure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-rmk-functional-outer-content-is-an-outer-measure, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, thm-caratheodory-outer-measure-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

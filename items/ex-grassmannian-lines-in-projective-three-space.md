@@ -2,7 +2,7 @@
 id: ex-grassmannian-lines-in-projective-three-space
 kind: example
 title: Lines in P3 and the Klein quadric Gr(2,4)
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: MIT 18.725 Algebraic Geometry, Lecture 4, Example 5
       url: https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

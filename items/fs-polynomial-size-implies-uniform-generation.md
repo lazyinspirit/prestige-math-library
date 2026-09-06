@@ -2,7 +2,7 @@
 id: fs-polynomial-size-implies-uniform-generation
 kind: false-statement
 title: "Polynomial-size circuits imply a uniform polynomial-time generator"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-circuit-family-and-p-poly, thm-undecidable-languages-exist-in-p-poly]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

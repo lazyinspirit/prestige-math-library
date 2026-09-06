@@ -2,7 +2,7 @@
 id: lem-positive-linear-functionals-on-c-c-are-monotone
 kind: lemma
 title: "A positive linear functional on $C_c(X)$ is monotone"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-positive-linear-functional-on-c-c]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

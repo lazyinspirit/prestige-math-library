@@ -2,7 +2,7 @@
 id: ex-np-is-contained-in-p-sharpp
 kind: example
 title: "Deciding satisfiability by a NumberSAT oracle query"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-number-sat, prop-np-is-contained-in-p-sharpp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

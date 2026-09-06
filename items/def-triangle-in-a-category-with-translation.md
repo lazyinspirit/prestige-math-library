@@ -2,13 +2,14 @@
 id: def-triangle-in-a-category-with-translation
 kind: definition
 title: "Triangle in a category with translation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-category-with-translation]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -24,4 +25,3 @@ sources:
 In a category with translation, a **triangle** is data
 $$X\xrightarrow fY\xrightarrow gZ\xrightarrow hX[1].$$
 Thus the three objects and all three displayed morphisms are part of the data.
-

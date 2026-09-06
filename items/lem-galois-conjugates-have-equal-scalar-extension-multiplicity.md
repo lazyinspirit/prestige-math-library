@@ -2,7 +2,7 @@
 id: lem-galois-conjugates-have-equal-scalar-extension-multiplicity
 kind: lemma
 title: "Galois conjugates have equal scalar-extension multiplicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-galois-conjugate-representation, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

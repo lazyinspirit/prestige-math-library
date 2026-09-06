@@ -2,7 +2,7 @@
 id: thm-kraft-inequality
 kind: theorem
 title: "Kraft inequality and effective prefix-code allocation"
-status: draft
+status: published
 origin: session
 deps: [def-prefix-free-machine-and-prefix-complexity]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

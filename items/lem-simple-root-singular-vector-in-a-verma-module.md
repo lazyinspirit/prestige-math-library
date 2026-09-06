@@ -2,7 +2,7 @@
 id: lem-simple-root-singular-vector-in-a-verma-module
 kind: lemma
 title: "The simple-root singular vector in a Verma module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-verma-module, thm-pbw-model-of-a-verma-module, def-root-reflections-and-the-weyl-group-action, def-weyl-vector-rho-for-a-chosen-positive-system, prop-opposite-root-spaces-bracket-to-the-killing-dual-line]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

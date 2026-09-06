@@ -2,13 +2,14 @@
 id: def-distinguished-triangle
 kind: definition
 title: "Distinguished triangle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangle-in-a-category-with-translation]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -25,4 +26,3 @@ Given a category with translation, a **distinguished triangle** is a triangle
 belonging to a specified class $\Delta$. The requirements on $\Delta$ are the
 four axioms stated next; only after those axioms are imposed may it also be
 called an exact triangle.
-

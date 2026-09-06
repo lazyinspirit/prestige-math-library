@@ -2,13 +2,14 @@
 id: def-standard-cone-triangle-in-the-homotopy-category
 kind: definition
 title: "Standard cone triangle in the homotopy category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-homotopy-category-of-chain-complexes, def-cone-triangle-of-a-chain-map]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

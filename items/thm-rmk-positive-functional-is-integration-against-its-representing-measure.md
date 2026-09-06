@@ -2,7 +2,7 @@
 id: thm-rmk-positive-functional-is-integration-against-its-representing-measure
 kind: theorem
 title: "Positive functionals on C_c(X) are integration against a Radon measure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-rmk-representing-measure-is-inner-regular-on-open-sets, lem-rmk-compact-set-formula-and-local-finiteness, lem-finite-lch-partition-of-unity-near-a-compact-set, thm-caratheodory-outer-measure-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

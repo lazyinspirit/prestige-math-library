@@ -2,7 +2,7 @@
 id: ex-von-mangoldt-residue-table
 kind: example
 title: "The von Mangoldt residue table"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-von-mangoldt-explicit-formula-residues]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

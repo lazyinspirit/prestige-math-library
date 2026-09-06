@@ -2,7 +2,7 @@
 id: thm-probability-convergence-is-metrized-by-d-zero
 kind: theorem
 title: "Convergence in probability is metrized by $d_0$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Exercise 3.2.8 (comparison metric)"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

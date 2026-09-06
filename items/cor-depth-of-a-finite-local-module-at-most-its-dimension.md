@@ -2,7 +2,7 @@
 id: cor-depth-of-a-finite-local-module-at-most-its-dimension
 title: A finite local module has depth at most its dimension
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [lem-depth-at-a-prime-bounded-by-local-dimension]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

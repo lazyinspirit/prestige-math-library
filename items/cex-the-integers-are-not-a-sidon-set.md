@@ -2,7 +2,7 @@
 id: cex-the-integers-are-not-a-sidon-set
 kind: counterexample
 title: "The integers are not a Sidon set"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sidon-set-in-the-integer-dual]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

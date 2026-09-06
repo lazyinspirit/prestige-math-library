@@ -2,7 +2,7 @@
 id: cex-nonintegral-reflection-does-not-produce-a-singular-power
 kind: counterexample
 title: "A nonintegral reflection does not produce a singular power"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-verma-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

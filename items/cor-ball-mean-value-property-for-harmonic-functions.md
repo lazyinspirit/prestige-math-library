@@ -2,7 +2,7 @@
 id: cor-ball-mean-value-property-for-harmonic-functions
 kind: corollary
 title: "Ball mean-value property for harmonic functions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-spherical-averages-and-local-ball-means-in-rn, lem-sphere-and-ball-measures-scale, thm-spherical-mean-value-property-for-harmonic-functions]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-an-octahedron-for-two-composable-maps-of-stalk-complexes
 kind: example
 title: "An octahedron for two composable maps of stalk complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf, lem-the-three-cone-calculation-for-a-composite-chain-map, def-zero-and-stalk-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-rmk-representing-measure-is-unique-among-all-borel-measures
 kind: false-statement
 title: "An RMK functional determines every Borel representing measure uniquely"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-rmk-uniqueness-among-radon-measures, lem-dieudonne-measure-and-top-dirac-agree-on-continuous-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

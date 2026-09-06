@@ -2,7 +2,7 @@
 id: lem-homomorphisms-from-a-simple-verma-module-have-dimension-at-most-one
 kind: lemma
 title: "Homomorphisms from a simple Verma module have dimension at most one"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-nonzero-verma-homomorphism-is-injective, prop-formal-character-of-a-verma-module]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

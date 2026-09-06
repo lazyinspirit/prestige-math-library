@@ -2,7 +2,7 @@
 id: thm-jantzen-sum-formula-for-a-verma-module
 kind: theorem
 title: "The Jantzen sum formula for a Verma module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-jantzen-deformation-and-filtration-of-a-verma-module, thm-shapovalov-determinant-formula, prop-formal-character-of-a-verma-module]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

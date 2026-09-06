@@ -2,7 +2,7 @@
 id: ex-galois-conjugate-characters-of-c3
 kind: example
 title: "The two nontrivial characters of $C_3$ form one rational representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group, def-character-of-a-complex-representation, def-schur-index-of-an-irreducible-character, thm-character-of-an-irreducible-over-a-nonsplitting-field]
 proof_strategy: computation
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

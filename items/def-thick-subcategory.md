@@ -2,13 +2,14 @@
 id: def-thick-subcategory
 kind: definition
 title: "Thick subcategory"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangulated-subcategory, def-split-monomorphism-and-split-epimorphism]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

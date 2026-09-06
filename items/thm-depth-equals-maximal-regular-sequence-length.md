@@ -2,7 +2,7 @@
 id: thm-depth-equals-maximal-regular-sequence-length
 title: Depth equals the maximal regular-sequence length
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [def-depth-with-respect-to-an-ideal, cor-depth-as-first-nonzero-ext, lem-maximal-regular-sequences-have-common-length-ext]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

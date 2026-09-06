@@ -2,13 +2,14 @@
 id: def-cohomological-functor-on-a-triangulated-category
 kind: definition
 title: "Cohomological functor on a triangulated category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangulated-category, def-functor-and-contravariant-functor, def-abelian-category]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -25,4 +26,3 @@ An additive contravariant functor $H:\mathcal T^{\mathrm{op}}\to\mathcal A$
 is **cohomological** if its corresponding functor to $\mathcal A^{\mathrm{op}}$
 is homological. Equivalently, a distinguished triangle induces the oppositely
 oriented long exact sequence of its values and their translates.
-

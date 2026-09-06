@@ -2,7 +2,7 @@
 id: thm-dieudonne-club-set-function-is-a-borel-measure
 kind: theorem
 title: "The Dieudonne club-set function is a Borel measure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, lem-countable-intersections-of-club-subsets-of-omega-one-are-club, def-borel-sigma-algebra, def-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

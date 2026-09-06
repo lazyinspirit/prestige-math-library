@@ -2,7 +2,7 @@
 id: cor-lacunary-series-lp-membership-is-coefficient-ell-two
 kind: corollary
 title: "L-p convergence of a lacunary series is equivalent to ell-two coefficients"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-lacunary-lp-norm-equivalence, thm-riesz-fischer-completeness-of-l-p, thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

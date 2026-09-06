@@ -2,13 +2,14 @@
 id: thm-affine-closed-immersions-quotient-rings
 kind: theorem
 title: "Closed immersions into affine schemes are quotient spectra"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-closed-immersion-schemes, def-affine-scheme, thm-affine-scheme-ring-anti-equivalence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

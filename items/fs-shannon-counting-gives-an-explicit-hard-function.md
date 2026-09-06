@@ -2,7 +2,7 @@
 id: fs-shannon-counting-gives-an-explicit-hard-function
 kind: false-statement
 title: "Shannon counting gives an efficiently explicit circuit-hard function"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-counting-circuits-of-bounded-size, thm-shannon-almost-all-functions-require-exponential-circuits]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-radial-derivative-of-a-spherical-average
 kind: lemma
 title: "Radial derivative of a spherical average"
-status: draft
+status: published
 origin: pipeline
 deps: [def-spherical-averages-and-local-ball-means-in-rn, lem-sphere-and-ball-measures-scale, thm-polar-coordinates-formula-for-lebesgue-measure]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

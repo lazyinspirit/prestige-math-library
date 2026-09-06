@@ -2,13 +2,14 @@
 id: lem-open-immersion-monomorphism
 kind: lemma
 title: "Open immersions are monomorphisms"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-open-immersion-schemes, def-morphism-of-schemes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

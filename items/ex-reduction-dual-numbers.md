@@ -2,12 +2,13 @@
 id: ex-reduction-dual-numbers
 kind: example
 title: "Reduction of the dual-number point"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: literature-derived
 deps: [def-reduction-of-scheme, def-reduced-affine-scheme]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

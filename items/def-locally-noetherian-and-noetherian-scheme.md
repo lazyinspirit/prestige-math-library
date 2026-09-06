@@ -2,12 +2,13 @@
 id: def-locally-noetherian-and-noetherian-scheme
 kind: definition
 title: "Locally Noetherian and Noetherian schemes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-scheme, def-affine-open-subscheme, def-noetherian-ring-and-module]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

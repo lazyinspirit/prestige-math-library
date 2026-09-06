@@ -2,7 +2,7 @@
 id: cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module
 title: Every system of parameters is regular in a Cohen--Macaulay module
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [lem-cohen-macaulay-parameter-sequence-induction]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

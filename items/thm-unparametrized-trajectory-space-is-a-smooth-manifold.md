@@ -2,7 +2,9 @@
 id: thm-unparametrized-trajectory-space-is-a-smooth-manifold
 kind: theorem
 title: "The unparametrized trajectory space is a smooth manifold"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived

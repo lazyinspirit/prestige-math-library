@@ -2,7 +2,7 @@
 id: thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence
 kind: theorem
 title: "Uniform integrability plus convergence in probability implies $L^1$ convergence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Theorem 4.6.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

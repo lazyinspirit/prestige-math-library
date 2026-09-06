@@ -2,7 +2,9 @@
 id: ex-cyclotomic-different-preview
 kind: example
 title: "A cyclotomic different preview"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [thm-different-of-a-monogenic-number-field, def-cyclotomic-extension, prop-prime-power-cyclotomic-polynomials-and-the-eisenstein-translate]
 proof_strategy: direct

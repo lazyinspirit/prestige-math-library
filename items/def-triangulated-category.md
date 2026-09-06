@@ -2,7 +2,7 @@
 id: def-triangulated-category
 kind: definition
 title: "Triangulated category"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 deps: [def-category-with-translation, def-distinguished-triangle, def-triangulated-category-axiom-tr-one, def-triangulated-category-axiom-tr-two, def-triangulated-category-axiom-tr-three, def-triangulated-category-axiom-tr-four-octahedral]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -26,4 +27,3 @@ A **triangulated category** is a category with translation $(\mathcal T,[1])$
 and a class $\Delta$ of distinguished triangles satisfying TR1, TR2, TR3, and
 TR4. Both the translation and the class $\Delta$ are specified structure, not
 properties inferred from the underlying additive category.
-

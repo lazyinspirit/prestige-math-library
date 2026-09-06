@@ -2,7 +2,7 @@
 id: prop-nc-one-is-contained-in-l-and-l-in-nc-two
 kind: proposition
 title: "NC1 is contained in L, and L is contained in NC2"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ac-zero-nc-one-and-nc, def-l-and-nl]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

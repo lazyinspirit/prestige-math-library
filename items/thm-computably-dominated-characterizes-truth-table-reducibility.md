@@ -2,7 +2,7 @@
 id: thm-computably-dominated-characterizes-truth-table-reducibility
 kind: theorem
 title: "Computable domination characterizes truth-table reducibility"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-computably-dominated-oracle, def-truth-table-reduction, def-turing-reducibility-and-equivalence, lem-total-oracle-functional-has-computable-use-bound]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

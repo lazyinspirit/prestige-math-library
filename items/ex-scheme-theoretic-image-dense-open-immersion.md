@@ -2,13 +2,14 @@
 id: ex-scheme-theoretic-image-dense-open-immersion
 kind: example
 title: "The scheme-theoretic image of a dense open immersion"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-scheme-theoretic-image, def-integral-scheme, def-open-immersion-schemes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

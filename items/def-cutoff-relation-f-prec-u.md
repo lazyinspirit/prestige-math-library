@@ -2,13 +2,14 @@
 id: def-cutoff-relation-f-prec-u
 kind: definition
 title: "The compactly supported cutoff relation $f\\prec U$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-compact-support-c-c-and-c-zero-on-an-lch-space]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

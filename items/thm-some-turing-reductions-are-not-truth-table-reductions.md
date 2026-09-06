@@ -2,7 +2,7 @@
 id: thm-some-turing-reductions-are-not-truth-table-reductions
 kind: theorem
 title: "Some Turing reductions are not truth-table reductions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-halting-oracle-is-not-computably-dominated, thm-computably-dominated-characterizes-truth-table-reducibility, prop-truth-table-implies-turing-reduction]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

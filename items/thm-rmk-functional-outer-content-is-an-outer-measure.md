@@ -2,7 +2,7 @@
 id: thm-rmk-functional-outer-content-is-an-outer-measure
 kind: theorem
 title: "The RMK functional outer content is an outer measure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-rmk-functional-outer-content-is-well-defined, lem-finite-lch-partition-of-unity-near-a-compact-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

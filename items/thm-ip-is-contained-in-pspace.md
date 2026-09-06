@@ -2,7 +2,7 @@
 id: thm-ip-is-contained-in-pspace
 kind: theorem
 title: "IP is contained in PSPACE"
-status: draft
+status: published
 origin: session
 deps: [def-ip, lem-protocol-value-is-computable-in-polynomial-space]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

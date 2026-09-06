@@ -2,7 +2,7 @@
 id: prop-the-full-subcategory-of-acyclic-complexes-is-thick-in-the-homotopy-category
 kind: proposition
 title: "The full subcategory of acyclic complexes is thick in the homotopy category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-thick-subcategory, def-homotopy-category-of-chain-complexes, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex, thm-the-cone-long-exact-sequence, prop-finite-biproducts-of-complexes-are-computed-degreewise]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

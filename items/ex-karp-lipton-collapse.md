@@ -2,7 +2,7 @@
 id: ex-karp-lipton-collapse
 kind: example
 title: "A Sigma_2 verification of a candidate SAT circuit"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-karp-lipton-collapse]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

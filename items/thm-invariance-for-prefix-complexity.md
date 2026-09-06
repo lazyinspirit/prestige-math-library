@@ -2,7 +2,7 @@
 id: thm-invariance-for-prefix-complexity
 kind: theorem
 title: "Invariance theorem for prefix complexity"
-status: draft
+status: published
 origin: session
 deps: [def-prefix-free-machine-and-prefix-complexity, def-universal-and-acceptable-numbering]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

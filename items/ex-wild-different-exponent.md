@@ -2,7 +2,7 @@
 id: ex-wild-different-exponent
 kind: example
 title: "A wild different exponent"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-different-exponent-in-tame-and-wild-ramification]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

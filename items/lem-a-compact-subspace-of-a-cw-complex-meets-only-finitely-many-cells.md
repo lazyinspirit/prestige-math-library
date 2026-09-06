@@ -2,14 +2,17 @@
 id: lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells
 kind: lemma
 title: A compact subspace of a CW complex meets only finitely many cells
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-cw-complex-with-closure-finiteness-and-weak-topology, prop-cw-skeleta-are-closed-and-cells-form-a-disjoint-partition]
 proof_strategy: contradiction
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Appendix A, Proposition A.1

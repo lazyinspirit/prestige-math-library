@@ -2,13 +2,14 @@
 id: def-radon-measure-on-an-lch-space
 kind: definition
 title: "Radon measure on an LCH space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-borel-sigma-algebra, def-measure, def-compact-space]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

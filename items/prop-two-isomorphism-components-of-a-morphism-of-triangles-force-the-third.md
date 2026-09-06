@@ -2,7 +2,7 @@
 id: prop-two-isomorphism-components-of-a-morphism-of-triangles-force-the-third
 kind: proposition
 title: "Two isomorphism components of a morphism of triangles force the third"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-triangulated-five-lemma, prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

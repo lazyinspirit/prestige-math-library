@@ -2,7 +2,7 @@
 id: thm-associated-primes-of-cohen-macaulay-modules
 title: Associated primes of Cohen--Macaulay modules
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [lem-associated-primes-of-cohen-macaulay-module-have-full-dimension, cor-cohen-macaulay-modules-have-no-embedded-associated-primes]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-quadratic-veronese-conic
 kind: example
 title: The quadratic Veronese image of P1 is a plane conic
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, 6.23--6.24
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

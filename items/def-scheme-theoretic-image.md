@@ -2,12 +2,13 @@
 id: def-scheme-theoretic-image
 kind: definition
 title: "Scheme-theoretic image"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-morphism-of-schemes, def-closed-immersion-schemes]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

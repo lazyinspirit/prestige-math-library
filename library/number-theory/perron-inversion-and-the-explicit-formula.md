@@ -1,7 +1,7 @@
 ---
 page: perron-inversion-and-the-explicit-formula
 title: "Perron Inversion and the Explicit Formula"
-status: draft
+status: published
 items: [def-starred-summatory-function, lem-perron-kernel, lem-truncated-perron-kernel, thm-perron-formula, thm-truncated-perron-formula, def-half-weighted-chebyshev-psi, def-riemann-zeta-zero-counting, thm-riemann-von-mangoldt-zero-counting, cor-zeta-zero-count-unit-interval, lem-local-logarithmic-derivative-zeta, lem-logarithmic-derivative-zeta-left-half-plane, lem-von-mangoldt-explicit-formula-residues, thm-von-mangoldt-explicit-formula-smoothed, thm-von-mangoldt-explicit-formula-truncated]
 examples: []
 ---

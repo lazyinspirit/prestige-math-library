@@ -2,7 +2,7 @@
 id: lem-countable-intersections-of-club-subsets-of-omega-one-are-club
 kind: lemma
 title: "Countable intersections of club subsets of omega_1 are club"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable-choice, def-first-uncountable-ordinal, def-order-topology-on-an-ordinal, thm-countable-subsets-of-omega-one-are-bounded]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

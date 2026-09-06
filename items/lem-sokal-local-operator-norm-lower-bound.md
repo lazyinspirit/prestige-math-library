@@ -2,14 +2,17 @@
 id: lem-sokal-local-operator-norm-lower-bound
 kind: lemma
 title: "A nonzero bounded linear operator is large on one of two nearby points"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-bounded-linear-operator, def-operator-norm]
 proof_strategy: direct
-verification: {precheck: pass, judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}}
+verification:
+  audited: 2026-09-07
+  precheck: pass
+  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Sokal, A Really Simple Elementary Proof of the Uniform Boundedness Theorem, p. 1"

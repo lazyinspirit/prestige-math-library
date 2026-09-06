@@ -2,7 +2,7 @@
 id: cor-schur-index-divides-the-representation-degree
 kind: corollary
 title: "The Schur index divides the representation degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-character-of-an-irreducible-over-a-nonsplitting-field, def-schur-index-of-an-irreducible-character]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

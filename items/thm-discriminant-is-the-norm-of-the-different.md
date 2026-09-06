@@ -2,7 +2,9 @@
 id: thm-discriminant-is-the-norm-of-the-different
 kind: theorem
 title: "The discriminant is the norm of the different"
-status: draft
+status: published
+verification:
+  audited: 2026-09-07
 origin: pipeline
 deps: [def-different-of-a-number-field, def-absolute-norm-of-an-ideal, thm-number-field-discriminant-is-well-defined-and-nonzero]
 proof_strategy: direct

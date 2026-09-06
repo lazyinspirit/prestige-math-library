@@ -2,7 +2,7 @@
 id: lem-base-change-of-intertwiner-spaces
 kind: lemma
 title: "Base change for intertwiner spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-restriction-and-extension-of-scalars, def-intertwiner-equivalent-and-faithful-representations, def-finite-dimensional-representation-of-a-group-over-a-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

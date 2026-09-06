@@ -2,13 +2,14 @@
 id: def-distinguished-cone-triangle-in-the-homotopy-category
 kind: definition
 title: "Distinguished cone triangle in the homotopy category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-standard-cone-triangle-in-the-homotopy-category, def-morphism-and-isomorphism-of-triangles]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

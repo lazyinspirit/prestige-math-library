@@ -2,7 +2,7 @@
 id: cex-nonuniqueness-of-a-tr-three-completion
 kind: counterexample
 title: "Nonuniqueness of a TR3 completion"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-the-third-map-in-a-morphism-of-triangles-is-unique, def-triangulated-category-axiom-tr-three]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

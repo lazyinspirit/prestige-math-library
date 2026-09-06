@@ -2,13 +2,14 @@
 id: lem-intersection-affine-opens-covered-principal-opens
 kind: lemma
 title: "Intersections of affine opens admit principal affine covers"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-affine-open-subscheme, lem-spectrum-localization-open-immersion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-some-turing-reductions-are-not-truth-table-reductions
 kind: example
 title: "A Turing reduction without a truth table"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-some-turing-reductions-are-not-truth-table-reductions, def-truth-table-reduction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

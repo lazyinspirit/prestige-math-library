@@ -2,7 +2,7 @@
 id: thm-ramification-and-residue-degrees-in-towers
 kind: theorem
 title: "Ramification and residue degrees in towers"
-status: draft
+status: published
 origin: pipeline
 deps: [def-prime-above-and-residue-degree, def-ramification-index]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-tagged-join-of-oracles
 kind: definition
 title: "Tagged join of oracles"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-oracle-turing-machine]
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

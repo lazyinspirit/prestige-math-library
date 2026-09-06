@@ -2,7 +2,7 @@
 id: cor-uniform-integrability-characterizes-l1-convergence-under-probability-convergence
 kind: corollary
 title: "Uniform integrability characterizes $L^1$ convergence under probability convergence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Theorem 4.6.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

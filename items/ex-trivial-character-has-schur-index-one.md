@@ -2,7 +2,7 @@
 id: ex-trivial-character-has-schur-index-one
 kind: example
 title: "The trivial character has Schur index one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-character-of-a-complex-representation, def-schur-index-of-an-irreducible-character, thm-schur-index-as-minimal-realization-multiplicity]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

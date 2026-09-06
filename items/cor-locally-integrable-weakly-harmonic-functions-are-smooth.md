@@ -2,7 +2,7 @@
 id: cor-locally-integrable-weakly-harmonic-functions-are-smooth
 kind: corollary
 title: "Locally integrable weakly harmonic functions are smooth"
-status: draft
+status: published
 origin: pipeline
 deps: [def-distributional-harmonicity-and-poisson-equation-in-rn, thm-weyl-lemma-for-the-laplacian]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

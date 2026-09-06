@@ -2,7 +2,7 @@
 id: thm-continuous-mean-value-functions-are-harmonic
 kind: theorem
 title: "Continuous ball-mean-value functions are harmonic"
-status: draft
+status: published
 origin: pipeline
 deps: [def-laplacian-of-a-c2-function, def-spherical-averages-and-local-ball-means-in-rn, lem-radial-mollification-fixes-local-mean-value-functions, cor-second-order-taylor-expansion-with-the-hessian]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

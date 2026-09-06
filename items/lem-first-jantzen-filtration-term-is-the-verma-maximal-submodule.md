@@ -2,7 +2,7 @@
 id: lem-first-jantzen-filtration-term-is-the-verma-maximal-submodule
 kind: lemma
 title: "The first Jantzen filtration term is the maximal Verma submodule"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-jantzen-deformation-and-filtration-of-a-verma-module, prop-the-shapovalov-radical-is-the-maximal-submodule]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

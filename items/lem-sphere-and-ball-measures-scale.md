@@ -2,7 +2,7 @@
 id: lem-sphere-and-ball-measures-scale
 kind: lemma
 title: "Sphere and ball measures scale in Rn"
-status: draft
+status: published
 origin: pipeline
 deps: [def-spherical-averages-and-local-ball-means-in-rn, thm-polar-coordinates-formula-for-lebesgue-measure]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   precheck: pass
 sources:
   references:

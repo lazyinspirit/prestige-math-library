@@ -2,7 +2,7 @@
 id: lem-depth-localisation-inequality
 title: Localization gives the stated depth inequality
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [lem-depth-bounded-by-associated-prime-quotient-dimension, lem-finite-prime-avoidance, lem-zero-divisor-annihilator-contained-in-associated-prime, lem-depth-quotient-by-regular-element]
 proof_strategy: direct
@@ -14,6 +14,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

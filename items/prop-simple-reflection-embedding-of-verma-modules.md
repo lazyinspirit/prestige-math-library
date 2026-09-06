@@ -2,7 +2,7 @@
 id: prop-simple-reflection-embedding-of-verma-modules
 kind: proposition
 title: "Simple-reflection embeddings of Verma modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-simple-root-singular-vector-in-a-verma-module, thm-universal-property-of-verma-modules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-positive-linear-functional-on-c-c
 kind: definition
 title: "Positive linear functionals on $C_c(X)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-compact-support-c-c-and-c-zero-on-an-lch-space]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

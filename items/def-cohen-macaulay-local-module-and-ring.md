@@ -2,7 +2,7 @@
 id: def-cohen-macaulay-local-module-and-ring
 title: Cohen--Macaulay local modules and rings
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: [def-depth-with-respect-to-an-ideal, def-support-of-a-module]
 provenance:
@@ -13,6 +13,7 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
+  audited: 2026-09-07
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

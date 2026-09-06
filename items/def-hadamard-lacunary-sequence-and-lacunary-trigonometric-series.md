@@ -2,13 +2,14 @@
 id: def-hadamard-lacunary-sequence-and-lacunary-trigonometric-series
 kind: definition
 title: "Hadamard-lacunary sequences and lacunary trigonometric series"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-a-probability-convergent-sequence-with-a-prescribed-fast-as-subsequence
 kind: example
 title: "A probability-convergent sequence with a prescribed fast almost-sure subsequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ sources:
     - title: "S. Roch, Lecture 3: Modes of convergence, Theorem 3.12"
       url: "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes3.pdf"
 verification:
+  audited: 2026-09-07
   precheck: pass
 ---
 
