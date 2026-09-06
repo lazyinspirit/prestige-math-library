@@ -150,6 +150,38 @@ test('blockers dedupe on stage+key even when the message text varies', () => {
   assert.equal(ex.state.data.blockers.length, 2);
 });
 
+test('batch repair receives all failures once, budgets each, and stops unchanged retries', async () => {
+  const fx = fixture();
+  cover(fx, 'worker', 'a1', ['1']);
+  const calls: any[] = [];
+  let fingerprint = 'original';
+  const { ex } = makeExecutor(fx, gatedStage(fx, [
+    loggingGate(fx, 'g-first', { ok: false }), loggingGate(fx, 'g-second', { ok: false }),
+  ], { batchRepairs: true, perItemFixBudget: 3, repairFingerprint: () => fingerprint,
+    onGateFailure: ({ failure }: any) => { calls.push(failure); } }));
+  await ex.tick();
+  assert.equal(calls.length, 1);
+  assert.deepEqual(calls[0].advisory.map((entry: any) => entry.id), ['g-second']);
+  assert.equal(Object.keys(ex.state.data.gateAttempts).length, 2);
+  await ex.tick();
+  assert.equal(calls.length, 1, 'identical failed inputs cannot buy a second repair');
+  fingerprint = 'edited'; ex.bumpState();
+  await ex.tick();
+  assert.equal(calls.length, 2, 'a relevant edit permits another attempt');
+});
+
+test('partial artifact recovery retains its budget even when content is unchanged', async () => {
+  const fx = fixture();
+  let calls = 0;
+  const stages = gatedStage(fx, [], { batchRepairs: true, perItemFixBudget: 3,
+    repairFingerprint: () => 'same-content', onGateFailure: () => { calls++; } });
+  const { ex } = makeExecutor(fx, stages);
+  const failure = {id:'stage-stalemate',ok:false,units:['1'],why:'missing output'};
+  await (ex as any).spendRepairRound(stages[0], failure, ex.ctx(), 'partial recovery');
+  await (ex as any).spendRepairRound(stages[0], failure, ex.ctx(), 'partial recovery');
+  assert.equal(calls, 2);
+});
+
 test('retry re-arms the repair loop, not just the lanes', () => {
   const fx = fixture();
   const { ex, notifications } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'g1')]));

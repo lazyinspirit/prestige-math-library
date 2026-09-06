@@ -40,18 +40,19 @@ test('the active stage table contains the rebuilt Step 6 in order', async () => 
   const active = await import('../stages/mathlib.mts');
   const ids = active.stages.map((stage: any) => stage.id);
   const expected = ['6a-baseline', '6a-read', '6a-split', '6a-refute', '6a-collect',
-    '6b-adjudicate', '6b-baseline', '6c-edges', '6c-cross', '6d-close'];
+    '6b-prepare', '6b-adjudicate', '6b-baseline', '6c-edges', '6c-cross', '6d-close'];
   assert.deepEqual(ids.slice(ids.indexOf('6a-baseline'), ids.indexOf('6d-close') + 1), expected);
 });
 
 test('every per-batch stage overlaps and waits only for its own batch', () => {
-  for (const id of ['6a-baseline', '6a-read', '6a-split', '6a-refute', '6a-collect', '6b-adjudicate']) {
+  for (const id of ['6a-baseline', '6a-read', '6a-split', '6a-refute', '6a-collect']) {
     assert.equal(byId(id).pipeline, 'read', `${id} must stay in the read pipeline`);
   }
   for (const id of ['6a-baseline', '6a-split', '6a-refute', '6a-collect']) {
     assert.deepEqual(byId(id).cohort({}, '2'), ['2'], `${id} must not wait on sibling batches`);
   }
   assert.deepEqual(byId('6b-adjudicate').cohort({}, '1'), ['1', '2']);
+  assert.equal(byId('6b-adjudicate').pipeline, undefined);
 });
 
 test('refuter collection precedes Alpha and all outputs are gated', () => {
@@ -581,6 +582,56 @@ test('exact refuter findings, Alpha decisions, and ledger rows close end to end'
     assert.notEqual(missing.status, 0);
     assert.match(missing.stderr, /decision-missing|ledger-unowned/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('a gate repair of a reader-untouched item creates an independent pre-6b obligation', () => {
+  const fx = fixture();
+  try {
+    prepareSplit(fx);
+    writeFileSync(join(fx.root, 'research', 'r-refute-1.json'), JSON.stringify({
+      batch: '1', opened: [...fx.ids, 'p'], not_opened: [], flagged: [], coverage_note: 'all read',
+    }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    const frozen = readFileSync(join(fx.root, 'research', 'r-step6-hash-1-post.json'), 'utf8');
+    const item = join(fx.root, 'items', 'lem-ordinary-item.md');
+    writeFileSync(item, readFileSync(item, 'utf8') + '\nGate repair.\n');
+    fx.run('pre-6b', '--run', 'r');
+    assert.equal(readFileSync(join(fx.root, 'research', 'r-step6-hash-1-post.json'), 'utf8'), frozen);
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), '');
+    writeFileSync(join(fx.root, 'research', 'r-alpha-a-6b-decisions.json'), JSON.stringify({ version: 1, run: 'r', group: 'a', decisions: [] }));
+    const result = fx.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /post-reader:1:lem-ordinary-item/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('post-reader page order is bound by the stabilized decision hash', () => {
+  const fx = fixture();
+  try {
+    prepareSplit(fx);
+    writeFileSync(join(fx.root, 'research', 'r-refute-1.json'), JSON.stringify({
+      batch: '1', opened: [...fx.ids, 'p'], not_opened: [], flagged: [], coverage_note: 'all read',
+    }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    const manifestPath = join(fx.root, 'research', 'r-batch-1.pages.json');
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    manifest[0].items.reverse(); writeFileSync(manifestPath, JSON.stringify(manifest));
+    fx.run('pre-6b', '--run', 'r');
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), [
+      {defect_id:'r-D1',run:'r',subject:'thm-touched-high-risk',caught_at_stage:'6a-read',severity:'nonfatal',disposition:'fixed'},
+      {defect_id:'r-D2',run:'r',subject:'p',caught_at_stage:'6b-adjudicate',severity:'nonfatal',disposition:'fixed'},
+    ].map((row) => JSON.stringify(row)).join('\n')+'\n');
+    writeFileSync(join(fx.root, 'research', 'r-alpha-a-6b-decisions.json'), JSON.stringify({version:1,run:'r',group:'a',decisions:[
+      {obligation:'touched:1:thm-touched-high-risk',id:'thm-touched-high-risk',route:'touched',verdict:'accepted_repair',defect_ids:['r-D1'],evidence:'checked'},
+      {obligation:'post-reader:1:p',id:'p',route:'page',verdict:'accepted_repair',defect_ids:['r-D2'],evidence:'checked order'},
+    ]}));
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.run('check','--run','r','--phase','adjudicate'), /0 error/);
+    manifest[0].items.reverse(); writeFileSync(manifestPath, JSON.stringify(manifest));
+    const result = fx.attempt('check','--run','r','--phase','adjudicate');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /decision-stale|decision-not-applied/);
+  } finally { rmSync(fx.root,{recursive:true,force:true}); }
 });
 
 test('adjudicate accepts the same legacy reader batch label that split routed', () => {

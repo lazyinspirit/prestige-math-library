@@ -135,7 +135,7 @@ while its siblings are still at stage k. The shipped table declares two:
 | group | stages | ends at |
 |---|---|---|
 | `scaffold` | `3-review` → `3-fix` → `3-recheck` | the `4-splice` barrier |
-| `read` | `5-author` → `6a-read` → `6b-adjudicate` | the `6b-baseline` barrier |
+| `read` | `5-author` → `6a-baseline` → `6a-read` → `6a-split` → `6a-refute` → `6a-collect` | the `6b-prepare` barrier |
 
 Everything else — `1-scaffold`, `2-assign`, all three touch snapshots, the
 splice, the cross-level audit, the judge sweep, step 8, step 9 and the report —
@@ -151,11 +151,11 @@ assignment stage exists precisely to overrule, so a group spanning `1-scaffold �
 3-review` would hold each batch for the wrong siblings. `2-assign` also needs
 every batch's manifest to partition anything. The pipeline starts after it.
 
-The `read` group joins at `6b-baseline` rather than at `6c-cross` because that
-snapshot is the `--to` endpoint of the 6c impact window and must capture text
-that has already passed the group's gates. Stage order gives that for nothing: no
-member of a group is done until the join's gates are green, and the snapshot
-stage is later, so it always photographs gated text.
+The read group clears its complete Step-5 battery before `6b-prepare` freezes
+stabilized inputs. Independent 6B adjudication is a separate barrier, followed
+immediately by its final snapshot. Gate repairs therefore reach Alpha before
+its decisions are finalized. Original reader/refuter evidence stays frozen;
+the pre-6b comparison adds explicit obligations for later changes.
 
 Three things per-unit progression is **not** allowed to relax:
 
@@ -167,10 +167,9 @@ Three things per-unit progression is **not** allowed to relax:
   invocation per batch, while scaffold policy receives all batch manifests in
   one invocation so legal same-run cross-batch dependencies resolve; both run
   only at the drained level join, never at a per-unit transition. The price is
-  stated where it is paid: step 5's repo-wide,
-  content-policy item-mode and contract gates no longer run before the readers,
-  because inside a group there is no drained moment between authoring and
-  reading. They run on the same text at the join, before `6b-baseline` and 6c.
+  stated where it is paid: the full battery runs at the drained join before 6B.
+  Additional scoped author checks run before each reader baseline and preserve
+  author/reader overlap; they never replace the full level checks.
 - **Lane caps.** `concurrency` bounds a stage, and serially that bounds the lane
   too because only one stage is live. In a group it stops doing so: `3-review`
   and `3-recheck` are both Alphas. A pipelined stage must therefore declare
@@ -217,6 +216,14 @@ and a pipeline name reused non-contiguously — which would silently mean two
 groups rather than one.
 
 ### A failing gate can dispatch its own repair
+
+Steps 5 and 6B repair the complete battery failure set in one wave. Related
+findings go to one writer per Alpha group; an unscoped failure uses a serial
+writer because its write set cannot be proven disjoint. Mechanical repairs run
+first, then the remaining cognitive failures are assigned together. Each
+gate/carrier keeps three tries. A repeated failure with unchanged corpus,
+contracts and tooling stops after a no-op repair. The full battery verifies
+every completed wave, so no partial result clears a stage.
 
 `onGateFailure` and `fixRounds` existed from the start: declared in the types,
 called by the executor, implemented by no stage and read by nothing. A failing

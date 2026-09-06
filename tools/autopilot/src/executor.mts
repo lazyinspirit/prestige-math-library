@@ -1624,10 +1624,27 @@ export class Executor {
     const blockerKeysBefore = new Set(this.state.data.blockers
       .map((blocker: any) => blocker.key ?? blocker.message));
     let repairFailure = failure;
+    const failures = stage.batchRepairs
+      ? [failure, ...(failure.advisory ?? []).filter((entry) => !entry.stage || entry.stage === stage.id)]
+      : [failure];
+    // Missing-output recovery has its own per-unit budget and may legitimately
+    // produce only one of several required artifacts in a pass.
+    const fingerprint = failure.id === 'stage-stalemate' ? undefined : stage.repairFingerprint?.(ctx);
+    const signature = JSON.stringify(failures.map(({ id, output, why }) => [id, output, why]));
+    const previous = (st as any).lastRepairInputs;
+    if (fingerprint && previous?.fingerprint === fingerprint && previous?.signature === signature) {
+      this.state.addBlocker(stage.id, `stage ${stage.id}: repair changed no relevant inputs and the same gate failures remain; inspect the detector or repair authority`, 'repair-no-progress');
+      return 'none';
+    }
     if (perItem > 0) {
       if (st.backoffUntil && new Date(st.backoffUntil).getTime() > Date.now()) return 'waiting';
-      const { live, spent } = this.chargeItems(stage, failure, perItem);
-      repairFailure = { ...failure, liveItems: live, exhaustedItems: spent };
+      const charged = failures.map((entry) => {
+        const { live, spent } = this.chargeItems(stage, entry, perItem);
+        return { ...entry, liveItems: live, exhaustedItems: spent };
+      });
+      const live = charged.flatMap((entry) => entry.liveItems);
+      const spent = charged.flatMap((entry) => entry.exhaustedItems);
+      repairFailure = { ...charged[0], advisory: stage.batchRepairs ? charged.slice(1) : failure.advisory };
       // Every item this gate names has burned its tries: nothing left to try,
       // and the blockers raised above name each one.
       if (!live.length) {
@@ -1701,13 +1718,17 @@ export class Executor {
         this.state.data.blockers = this.state.data.blockers.filter((blocker: any) => {
           const key = blocker.key ?? blocker.message;
           return blockerKeysBefore.has(key)
-            || !String(key).startsWith(`item:${stage.id}:${failure.id}:`);
+            || !failures.some((entry) => String(key).startsWith(`item:${stage.id}:${entry.id}:`));
         });
         this.state.save();
         this.reporter.notify('repair-preflight',
           `${stage.id}: repair fan-out failed launch preflight; repair budget refunded until the named blocker is fixed`);
         return 'preflight-blocked';
       }
+    }
+    if (!hookFailed && !report?.outage && fingerprint) {
+      (st as any).lastRepairInputs = { fingerprint, signature };
+      this.state.save();
     }
     // A repair round is a state-changing event whatever it did — it ran tools,
     // dispatched lanes, or set a clock — so the next battery must be live.

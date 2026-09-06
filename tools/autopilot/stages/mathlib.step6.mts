@@ -5,6 +5,8 @@ import { inspectLegacyStep6Cutover } from '../../step6-cutover-lib.mjs';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+import { repairGateBatch, repairFingerprint } from './step56-repairs.mts';
+import { authorInputs } from '../../author-check.mts';
 
 const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
 
@@ -229,21 +231,38 @@ export function step6Stages(d: any) {
     {
       id: '6a-baseline',
       label: 'per-batch pre-reader hash (mechanical)',
+      modelProfile: (plan: any) => plan.role === 'beta' ? TERRA_HIGH : undefined,
       pipeline: 'read',
       role: 'tool',
       units: introducedBatches,
-      pattern: introducedPattern(resultPattern('tool', 'hash-pre-\\d+')),
+      pattern: introducedPattern(resultPattern('tool', 'hash-pre-\\d+(?:-[a-f0-9]+)?')),
       labelFor: (unit: string) => `hash-pre-${unit}`,
       artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
         `research/${ctx.run}-step6-hash-${unit}-pre.json`),
       concurrency: 27,
       cohort: solo,
-      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
-        role: 'tool', label: `hash-pre-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
-        argv: ['node', 'tools/step6-scope.mjs', 'hash', '--run', ctx.run,
-          '--batch', String(unit), '--label', 'pre'],
-        timeout: 600,
-      }))),
+      maxAttempts: 1,
+      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => {
+        const diagnostic = `research/${ctx.run}-author-check-${unit}.json`;
+        let suffix = '';
+        if (existsSync(join(ctx.repo, diagnostic))) {
+          const fingerprint = authorInputs(ctx.repo, ctx.run, unit).fingerprint;
+          suffix = `-${fingerprint.slice(0,12)}`;
+          const report = JSON.parse(readFileSync(join(ctx.repo, diagnostic), 'utf8'));
+          if (!report.ok && report.fingerprint === fingerprint) {
+            const task = `research/${ctx.run}-author-check-${unit}.task.md`;
+            writeFileSync(join(ctx.repo, task), `Repair batch ${unit} using every finding in ${diagnostic}. Work only on this batch's items, pages, manifest and contract. Preserve its scope. Run focused checks and explain any detector defect; do not edit tools.\n`);
+            return { role: 'beta', label: `author-check-repair-${unit}-${report.fingerprint.slice(0,12)}`,
+              job: 'authoring', covers: [unit], brief: 'briefs/authoring.md', task, timeout: 3600 };
+          }
+        }
+        return {
+          role: 'tool', label: `hash-pre-${unit}${suffix}`, job: 'bookkeeping-mechanical', covers: [unit],
+          argv: ['node', 'tools/step6-scope.mjs', 'hash', '--run', ctx.run,
+            '--batch', String(unit), '--label', 'pre', '--validate-author'],
+          timeout: 600,
+        };
+      })),
       gatesWaived: 'The hash artifact is validated when split consumes it; a missing or malformed baseline makes split fail rather than guessing a route.',
     },
     {
@@ -271,7 +290,7 @@ export function step6Stages(d: any) {
         resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
         timeout: 14400,
       }))),
-      gatesWaived: 'Readers may repair items; the full repository, contract, routing, and ledger battery runs once at the read-pipeline join after every group Alpha has adjudicated.',
+      gatesWaived: 'Readers may repair items. The full Step-5 battery clears the read-pipeline join before independent 6B adjudication and its reviewed closure battery.',
     },
     {
       id: '6a-split',
@@ -364,9 +383,20 @@ export function step6Stages(d: any) {
       gatesWaived: 'Collect exits nonzero unless opened and not_opened exactly partition the computed refuter scope and not_opened is empty; its successful result is the gate for this mechanical stage.',
     },
     {
+      id: '6b-prepare',
+      label: 'freeze stabilized input for independent group adjudication',
+      units: () => ['all'],
+      pattern: introducedPattern(resultPattern('tool', 'prepare-6b')),
+      artifacts: (ctx: any) => hasLegacyStep6Cutover(ctx) ? `research/${ctx.run}-step6-cutover.json`
+        : batches(ctx).map((batch: string) => `research/${ctx.run}-step6-hash-${batch}-pre-6b.json`),
+      concurrency: 1,
+      plan: (ctx: any) => introducedPlan(ctx, () => [{ role: 'tool', label: 'prepare-6b', job: 'bookkeeping-mechanical', covers: ['all'],
+        argv: ['node', 'tools/step6-scope.mjs', 'pre-6b', '--run', ctx.run], timeout: 600 }]),
+      gatesWaived: 'Runs only after the complete read-pipeline battery clears. Its snapshots add explicit 6b obligations for subsequent gate repairs without replacing reader/refuter evidence.',
+    },
+    {
       id: '6b-adjudicate',
       label: 'group Alpha adjudication of touched items and refuter findings',
-      pipeline: 'read',
       role: 'alpha',
       units: batches,
       pattern: resultPattern('alpha', '6b-[a-z]+'),
@@ -393,7 +423,11 @@ export function step6Stages(d: any) {
         ...contractGates(ctx, { reviewed: true }), decisionStampGate(ctx), routingGate(ctx, 'adjudicate'),
       ],
       perItemFixBudget: 3,
-      onGateFailure: (args: any) => handleGateFailure(args, '6b'),
+      batchRepairs: true,
+      repairFingerprint,
+      onGateFailure: (args: any) => args.failure.id === 'stage-stalemate'
+        ? handleGateFailure(args, '6b')
+        : repairGateBatch(args, { alphaGroups, MECHANICAL_REPAIRS, mechanicalRepair }),
     },
     {
       id: '6b-baseline',

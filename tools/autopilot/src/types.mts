@@ -87,6 +87,7 @@ export interface GateResult {
   checked?: number;
   code?: number | null;
   output?: string;
+  advisory?: Array<GateResult & { stage?: string }>;
   /** Per-(gate,item) repair routing. Present only while a stage hook runs. */
   liveItems?: string[];
   exhaustedItems?: string[];
@@ -193,6 +194,10 @@ export interface Stage {
    *  Leave it unset to keep the original stage-wide `maxFixRounds` behaviour —
    *  that is what every stage outside step 6 still does. */
   perItemFixBudget?: number;
+  /** Repair every failure in this stage's battery in one ownership-aware wave. */
+  batchRepairs?: boolean;
+  /** Semantic inputs only; excludes dispatch logs and generated gate reports. */
+  repairFingerprint?: (ctx: Ctx) => string;
 }
 
 /** What a repair hook may report back about the round it just ran. */

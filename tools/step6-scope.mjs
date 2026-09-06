@@ -396,10 +396,22 @@ if (command === 'post-6b') {
   process.exit(0);
 }
 
+if (command === 'pre-6b') {
+  const batches = Object.keys(manifestItems());
+  if (!batches.length) fail('step6-scope: no batches to stabilize', 1);
+  for (const batch of batches) {
+    runChecked(selfCommand('hash', '--batch', batch, '--label', 'pre-6b'), `batch ${batch} stabilized snapshot`);
+  }
+  process.exit(0);
+}
+
 if (command === 'hash') {
   const batch = requireBatch();
   const label = option('label');
-  if (!['pre', 'post', 'post-6b'].includes(label)) fail('step6-scope: --label must be pre, post, or post-6b');
+  if (label === 'pre' && argv.includes('--validate-author')) {
+    runChecked([R('tools', 'tsx-run.mjs'), R('tools', 'author-check.mts'), run, batch], `batch ${batch} author checks`);
+  }
+  if (!['pre', 'post', 'pre-6b', 'post-6b'].includes(label)) fail('step6-scope: unsupported hash label');
   const ids = manifestItems()[batch];
   if (!ids) fail(`step6-scope: no manifest for batch ${batch}`);
   const pages = manifestPages()[batch] ?? [];
@@ -573,6 +585,21 @@ if (command === 'collect') {
   process.exit(0);
 }
 
+function stabilizedObligations(batch, scope) {
+  if (!existsSync(hashPath(batch, 'pre-6b'))) return [];
+  const reader = readJson(hashPath(batch, 'post'), `batch ${batch} reader snapshot`);
+  const stabilized = readJson(hashPath(batch, 'pre-6b'), `batch ${batch} stabilized snapshot`);
+  const errors = hashSnapshotErrors(stabilized, batch, 'pre-6b');
+  if (errors.length) fail(`batch ${batch} stabilized snapshot: ${errors.join('; ')}`, 1);
+  const delta = expectedSplit(reader, stabilized);
+  return [...delta.touched, ...delta.pagesTouched]
+    .filter((id) => !(scope.touched ?? []).includes(id) && !(scope.pages_touched ?? []).includes(id))
+    .map((id) => ({ obligation: `post-reader:${batch}:${id}`, id, batch, stabilized: true,
+      added: delta.added.includes(id),
+      route: delta.pagesTouched.includes(id) ? 'page' : 'touched',
+      order_anchor: delta.pageOrderAnchors[id] }));
+}
+
 if (command === 'stamp') {
   const assignment = groups();
   const manifests = manifestItems();
@@ -582,6 +609,7 @@ if (command === 'stamp') {
     const expected = new Map();
     for (const batch of group.covers) {
       const scope = readJson(scopePath(batch), `batch ${batch} scope`);
+      for (const target of stabilizedObligations(batch, scope)) expected.set(target.obligation, target);
       for (const id of scope.touched ?? []) expected.set(`touched:${batch}:${id}`, {
         obligation: `touched:${batch}:${id}`, id, batch, route: 'touched', added: (scope.added ?? []).includes(id),
       });
@@ -758,6 +786,7 @@ if (command === 'check') {
           obligation: `page:${batch}:${id}`, id, batch, route: 'page',
           order_anchor: scope.page_order_anchors?.[id] ?? [],
         });
+        owed.push(...stabilizedObligations(batch, scope));
         for (const finding of scope.reader_findings ?? []) {
           ownableSubjects.add(finding.id);
           owed.push({ ...finding, route: 'reader' });
@@ -883,8 +912,8 @@ if (command === 'check') {
               error('decision-stale', `[${decision.id}] ${decision.obligation} subject_sha256 does not match the current item, contract, manifest, or page carrier`);
             }
             if (target && ['touched', 'page'].includes(target.route)) {
-              const pre = readJson(hashPath(target.batch, 'pre'), `batch ${target.batch} pre-reader hash`);
-              const post = readJson(hashPath(target.batch, 'post'), `batch ${target.batch} post-reader hash`);
+              const pre = readJson(hashPath(target.batch, target.stabilized ? 'post' : 'pre'), `batch ${target.batch} earlier hash`);
+              const post = readJson(hashPath(target.batch, target.stabilized ? 'pre-6b' : 'post'), `batch ${target.batch} later hash`);
               const preRaw = target.route === 'page' ? pre.page_hashes?.[target.id] : pre.hashes?.[target.id];
               const postRaw = target.route === 'page' ? post.page_hashes?.[target.id] : post.hashes?.[target.id];
               const preValue = target.route === 'page' ? pageCarrier(preRaw, target.order_anchor) : preRaw;

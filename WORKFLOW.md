@@ -55,8 +55,8 @@ use a fresh `--state-dir` for another run.
 
 ## Conceptual steps and stage IDs
 
-Stage IDs are operational rather than conceptual. The current table has 49
-stages.
+Stage IDs are operational rather than conceptual; the table below maps them to
+the build's conceptual steps.
 
 | Step | Actual stages | Closure |
 |---|---|---|
@@ -66,7 +66,7 @@ stages.
 | 3 — scaffold closure | `3-review` → `3-fix` → `3-recheck` | Group Alpha review, owned-Beta remediation, and one sufficient verdict per pair. |
 | 4 — materialize | `4-splice`, `4-baseline` | The splice tool alone transcribes IDs; edge refusals are adjudicated before the pre-author touch snapshot. |
 | 5 — author | `5-author` | Batches are authored; its whole-level gates run at the read-pipeline join. |
-| 6 — independent closure | `6a-baseline`, `6a-read`, `6a-split`, `6a-refute`, `6a-collect`, `6b-adjudicate`, `6b-baseline`, `6c-edges`, `6c-cross`, `6d-close` | Independent readers, mechanically scoped refuters, group decisions, lead cross-group closure, and a hash-bound Step-6 receipt. |
+| 6 — independent closure | `6a-baseline`, `6a-read`, `6a-split`, `6a-refute`, `6a-collect`, `6b-prepare`, `6b-adjudicate`, `6b-baseline`, `6c-edges`, `6c-cross`, `6d-close` | Independent readers, scoped refuters, stabilization before group decisions, cross-group closure, and a hash-bound Step-6 receipt. |
 | 7 — frozen judgment | `7-scope`, `7-judge` | Group partition, full skeptical sweep, and read-only group digests. |
 | 8 — fatal repair/certification | `8-baseline`, `8-scope`, `8-adjudicate`, `8-preflight`, `8-rejudge`, `8-close`, `8-final`, `8-freeze` | Licensed repair, integrity before targeted judgment, bounded judge cycles, final exact currency, and snapshot. |
 | 9 — delta/impact/receipts | `9-scope`, `9-scope-render`, `9-scope-freeze`, `9-changes-judge`, `9-close`, `9-changes-stamp`, `9-receipt` | Changed denial decisions, exact mathematical recertification, impact closure, then whole-level and spine receipts. |
@@ -129,7 +129,18 @@ Only two contiguous groups pipeline by unit:
 
 - `scaffold`: `3-review` → `3-fix` → `3-recheck`.
 - `read`: `5-author` → `6a-baseline` → `6a-read` → `6a-split` →
-  `6a-refute` → `6a-collect` → `6b-adjudicate`.
+  `6a-refute` → `6a-collect`.
+
+Before each pre-reader baseline, scoped precheck, rendering, provenance and
+strict contract checks run together. A failure returns the complete diagnostic
+set to that batch's Beta; the reader cannot start until all four pass and the
+baseline exists. An unchanged failed repair does not receive a fresh attempt.
+
+The full Step-5 battery clears at the read-pipeline join before `6b-prepare`
+freezes the stabilized files. Step 6B runs as a separate barrier. Its Alphas
+independently review both the original reader/refuter obligations and additional
+`post-reader:<batch>:<id>` changes from join repairs. Original audit snapshots
+and findings remain intact. The full reviewed battery still gates 6B completion.
 
 A unit can enter a pipeline successor after its own predecessor; a group Alpha
 waits for its full cohort. Every pipeline member's gates wait for the drained
@@ -160,8 +171,10 @@ pattern resolvers, non-contiguous pipelines, or a pipelined stage lacking its
 role/cohort contract. Each stage needs nonempty gates or an explanatory
 `gatesWaived`; the terminal stage cannot waive. A gate with no argv, absent
 required inputs, an empty declared list, or unreadable/too-small liveness
-evidence fails. Gates run in order, stop at the first failure, and record later
-reachable failures as advisory evidence. Network-signature failures get one
+evidence fails. Gates run in order and collect every reachable failure. At Steps
+5 and 6B, the complete failure set drives one repair wave, with one writer per
+Alpha group when scopes are disjoint and a single writer for unscoped failures.
+Other stages retain their existing primary/advisory repair policy. Network-signature failures get one
 gate retry; an unchanged failed battery is not rerun until an event, altered
 dispatch directory, expired outage backoff, or explicit retry can change it.
 
@@ -358,6 +371,13 @@ A failed plan stops at its configured/stage attempt limit and becomes a
 labelled blocker. Gate repair hooks are bounded by `maxFixRounds`; Step 6 instead
 has three tries per named gate/item. Covered work with a missing artifact becomes
 the same bounded `stage-stalemate` failure.
+
+Steps 5 and 6B give each gate/carrier three repair attempts across batched waves.
+Identical diagnostics against unchanged corpus, contract and tooling inputs stop
+immediately after a no-op repair; changing a log or report cannot buy another
+model call. Mechanical repairs execute before cognitive assignments, and all
+remaining findings reach the same repair wave. The complete battery runs again
+after the wave; there is no weakened or cached final pass.
 
 Step-6 artifact-owner recovery dispatches declare empty coverage: they repair
 the malformed or missing reader/refuter/contract input, then the pending split

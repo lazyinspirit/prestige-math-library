@@ -447,7 +447,7 @@ test('the mathlib table declares exactly two overlap groups, over exactly these 
   assert.deepEqual([...byPipeline.keys()].sort(), ['read', 'scaffold']);
   assert.deepEqual(byPipeline.get('scaffold'), ['3-review', '3-fix', '3-recheck']);
   assert.deepEqual(byPipeline.get('read'), ['5-author', '6a-baseline', '6a-read',
-    '6a-split', '6a-refute', '6a-collect', '6b-adjudicate']);
+    '6a-split', '6a-refute', '6a-collect']);
 });
 
 test('the do-not-relax stages are still barriers', async () => {
@@ -504,8 +504,10 @@ test("the read group's join runs before the snapshot that closes the impact wind
   const lastRead = Math.max(...readMembers.map((id: string) => ids.indexOf(id)));
   assert.ok(ids.indexOf('6b-baseline') > lastRead,
     'the post-6b snapshot must come after every member of the read group');
-  assert.equal(mod.stages[lastRead + 1].id, '6b-baseline',
-    'and immediately after, so nothing edits items between the join and the snapshot');
+  assert.equal(mod.stages[lastRead + 1].id, '6b-prepare');
+  assert.equal(mod.stages[lastRead + 2].id, '6b-adjudicate');
+  assert.equal(mod.stages[ids.indexOf('6b-adjudicate') + 1].id, '6b-baseline',
+    'the final snapshot immediately follows gated independent adjudication');
 });
 
 test('every pipelined stage in the shipped table names a dispatcher lane', async () => {

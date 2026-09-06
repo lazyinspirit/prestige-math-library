@@ -1,9 +1,10 @@
 # Step 6 gate repair
 
-The generated repair task supplies the primary gate, live ids, exhausted ids,
-output, and advisory failures. Reproduce only the primary gate on the current
-tree; do not revisit exhausted ids or treat advisory failures as this dispatch's
-scope.
+The generated repair task defines your authority. A Step-6B batch envelope
+assigns every listed gate finding on your owned carriers in one wave. A single
+gate task (including Step 6C) assigns its primary gate and live ids; its advisory
+failures remain context only. Never revisit exhausted ids or another group's
+carriers. Reproduce the assigned checks on the current tree.
 
 For each live finding, repair a confirmed in-scope defect or document a
 false-positive with the governing rule and exact evidence. Update only records

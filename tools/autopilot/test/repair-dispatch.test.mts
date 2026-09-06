@@ -520,28 +520,19 @@ test('an unfetchable source routes a scouting Beta per owning batch', async () =
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('a candidate-detector failure at the read join dispatches the contract-audit Alpha', async () => {
-  const s5: any = stages.find((s: any) => s.id === '5-author');
-  const started: any[] = [];
-  const executor = { start: (_s: any, p: any) => started.push(p) };
-  await s5.onGateFailure({ ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s5, round: 1, failure: { id: 'boundary-audit', why: '' } });
-  await s5.onGateFailure({ ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s5, round: 2, failure: { id: 'citation-fidelity', why: '' } });
-  assert.equal(started.length, 2);
-  assert.ok(started.every((p) => p.job === 'adjudication'));
-  assert.ok(started.every((p) => String(p.task).includes('contract-audit')),
-    'the three contract detectors keep their own task, which names the tools to re-run');
-
-  // STRUCTURAL FAILURES NO LONGER DEAD-END (owner, 2026-08-24). This asserted
-  // `started.length` stayed 2 — a `proof-contract` failure fell through to the
-  // blocker path deliberately. That choice is reversed: on frontier-18 the same
-  // fall-through shape produced three blockers in one run, and a stage that
-  // stops without a read costs a person more than an Alpha that reads and
-  // reports "this one is yours". It routes to the GENERAL task, not the
-  // contract-detector one, and that task forbids narrowing a detector to pass.
-  await s5.onGateFailure({ ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s5, round: 2, failure: { id: 'proof-contract', why: '' } });
-  assert.equal(started.length, 3);
-  assert.match(started[2].label, /^gate-adjudication-proof-contract-2$/);
-  assert.ok(String(started[2].task).includes('gate-adjudication'));
+test('contract detector and structural failures reach one complete repair assignment', async () => {
+  const repo = fixtureRepo();
+  try {
+    const stage: any = stages.find((s: any) => s.id === '5-author');
+    const started: any[] = [];
+    await stage.onGateFailure({ ctx: { run: 'demo', repo }, stage, round: 1,
+      executor: { start: (_s: any, plan: any) => started.push(plan) },
+      failure: { id: 'boundary-audit', advisory: [{ id: 'citation-fidelity' }, { id: 'proof-contract' }] } });
+    assert.equal(started.length, 1);
+    assert.equal(started[0].job, 'adjudication');
+    const evidence = JSON.parse(readFileSync(join(repo, 'research/demo-5-author-gate-batch-1.json'), 'utf8'));
+    assert.deepEqual(evidence.failures.map((entry: any) => entry.id), ['boundary-audit', 'citation-fidelity', 'proof-contract']);
+  } finally { rmSync(repo, { recursive: true, force: true }); }
 });
 
 test('boundary-audit respects an Alpha-upheld row and reports it', () => {
@@ -806,18 +797,21 @@ test('the splice-verify repair updates per batch, because --update needs --batch
 
 // Stage 5 enumerated three gate ids and fell through for everything else, so a
 // failure that HAS a mechanical repair burned rounds dispatching nothing.
-test('stage 5 runs a mechanical repair for any gate that has one', async () => {
+test('stage 5 includes unresolved mechanical residue in the repair envelope', async () => {
   const repo = fixtureRepo();
   writeFileSync(join(repo, 'research', 'demo-batch-1.pages.json'), '[]');
   const s5: any = stages.find((s: any) => s.id === '5-author');
   // splice-verify has a table entry: it must be repaired, never dispatched to
   // the contract-audit Alpha, which is for candidate detector reads.
+  const mechanicalPlans: any[] = [];
   await s5.onGateFailure({
     ctx: { run: 'demo', repo },
-    executor: { start: () => { throw new Error('a mechanical repair must not dispatch an Alpha'); } },
+    executor: { start: (_s: any, p: any) => mechanicalPlans.push(p) },
     stage: s5, round: 1,
     failure: { id: 'splice-verify', why: '' },
   });
+  assert.equal(mechanicalPlans.length, 1);
+  assert.match(readFileSync(join(repo, 'research/demo-5-author-gate-batch-1.json'), 'utf8'), /Mechanical residue/);
   // and a detector failure still routes to the Alpha
   const started: any[] = [];
   await s5.onGateFailure({
@@ -827,7 +821,7 @@ test('stage 5 runs a mechanical repair for any gate that has one', async () => {
     failure: { id: 'citation-fidelity', why: '' },
   });
   assert.equal(started.length, 1);
-  assert.match(started[0].task[0], /alpha-contract-audit\.task\.md$/);
+  assert.match(readFileSync(join(repo, started[0].task), 'utf8'), /boundary\/citation candidates/);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -854,7 +848,7 @@ test('step 5 routes an undeclared-prereq to the edge-adjudication lane', async (
   });
   assert.equal(started.length, 1, 'the edge must reach a lane, not fall through');
   assert.equal(started[0].job, 'adjudication');
-  assert.match(started[0].task[0], /alpha-step4\.task\.md$/);
+  assert.match(readFileSync(join(repo, started[0].task), 'utf8'), /alpha-step6-edge\.md/);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -881,9 +875,8 @@ test('step 5 routes a validate-plan failure of another class to gate adjudicatio
   assert.equal(started.length, 1, 'an unrouted gate failure must reach an Alpha, not a bare return');
   assert.equal(started[0].role, 'alpha');
   assert.equal(started[0].job, 'adjudication');
-  assert.match(started[0].label, /^gate-adjudication-validate-plan-1$/);
-  assert.ok(String(started[0].task).includes('gate-adjudication'),
-    'must use the general gate-adjudication task, not the contract-detector one');
+  assert.equal(started[0].label, 'gate-batch-1-all');
+  assert.match(readFileSync(join(repo, 'research/demo-5-author-gate-batch-1.json'), 'utf8'), /validate-plan/);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -899,7 +892,7 @@ test('an unknown gate id still reaches an Alpha — the route is a default, not 
     failure: { id: 'some-gate-invented-next-year', why: 'FAIL' },
   }).then(() => {
     assert.equal(started.length, 1);
-    assert.match(started[0].label, /^gate-adjudication-some-gate-invented-next-year-2$/);
+    assert.equal(started[0].label, 'gate-batch-2-all');
   });
 });
 

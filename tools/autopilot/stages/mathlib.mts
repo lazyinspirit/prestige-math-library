@@ -24,6 +24,7 @@ import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
+import { repairGateBatch, repairFingerprint } from './step56-repairs.mts';
 
 // Version the composed Step-6 module independently. The executor watches both
 // files and re-imports this root when either changes; the query prevents Node's
@@ -2088,123 +2089,24 @@ export const stages = [
     // split the audit carries at A4 versus A6.
     gates: (ctx) => [...repoWide(ctx), planGate(), policyItemGate(ctx),
       ...contractGates(ctx, { reviewed: false })],
-    // The candidate detectors' residue is a HUMAN READ by contract — their
-    // own summary line says so — and the read is an Alpha's, at step 6,
-    // before the text freezes. The first live join flagged two boundary rows
-    // on one fs- item ("equivalent" naming a categorical predicate, not a
-    // biconditional) and the failure dead-ended: candidate-typed judgment
-    // with no routed lane, the same family as the source scouts and the
-    // splice adjudication. One round dispatches the contract-audit Alpha; it
-    // fixes a row that is genuinely wrong, or upholds it on the record
-    // (`reviewed: {upheld, by, reason}`), which the detector then respects.
-    // Structural gate failures (merge, strict, smoke, liveness) stay
-    // blockers — those are tool or authoring defects, not candidate reads.
-    // gate-liveness joins the routed set for exactly one of its probes: a
-    // finite-smoke vacuity (0 checks over a full level) is either registry
-    // inapplicability or author under-selection, and telling those apart —
-    // then SELECTING the applicable checks with their asserts excerpts — is
-    // a read of the mathematics. This level carries Sylow, unit groups and
-    // poset-category limit claims, all squarely inside the registry, so the
-    // floor held correctly on 0/324.
-    //
-    // This is the 22-gate Step-5/6 join, and primary failures surface one at a
-    // time. Frontier 21 repaired rendercheck, splice currency, and one contract
-    // quote in three successful rounds, then falsely exhausted before the newly
-    // exposed boundary review could receive its first routed read. Keep the
-    // loop bounded, but budget for sequential distinct gates at this join.
-    // Frontier 28 needed depcheck, rendercheck, two splice synchronisations,
-    // contract quote repair, and contract-detector review in one join; eight
-    // rounds left no room for a truthful residual from the detector audit.
-    maxFixRounds: 10,
-    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      // Artifact accounting now keeps a partial zero-exit author covered but
-      // incomplete. Resume exactly the batches whose required contracts,
-      // manifest-declared pages, or manifest-declared items never landed. The
-      // executor names only covered, artifact-incomplete units that are no
-      // longer active, so one slow ordinary author cannot suppress or duplicate
-      // recovery for its completed siblings.
+    batchRepairs: true,
+    repairFingerprint,
+    perItemFixBudget: 3,
+    onGateFailure: async (args: any) => {
+      const { ctx, failure, executor, stage, round } = args;
       if (failure.id === 'stage-stalemate') {
-        const requested = Array.isArray(failure.units) ? failure.units.map(String) : batches(ctx).map(String);
-        const missing = requested.filter((u: any) =>
-          authorArtifacts(ctx, u).some((path) => !existsSync(join(ctx.repo, path))));
-        for (const u of missing) {
+        for (const unit of (failure.units ?? batches(ctx)).map(String)) {
+          if (authorArtifacts(ctx, unit).every((path) => existsSync(join(ctx.repo, path)))) continue;
           executor.start(stage, {
-            role: 'beta', label: `author-recover-${u}-${round}`,
-            job: 'authoring', covers: [u], brief: 'briefs/authoring.md',
-            task: [`research/${ctx.run}-beta-${u}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
+            role: 'beta', label: `author-recover-${unit}-${round}`,
+            job: 'authoring', covers: [unit], brief: 'briefs/authoring.md',
+            task: [`research/${ctx.run}-beta-${unit}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
             timeout: 21600,
           });
         }
         return;
       }
-      // A FAILURE WITH A MECHANICAL REPAIR TAKES IT FIRST, whatever its id.
-      // `splice-verify` fails here as a matter of course: the 6b Alphas add
-      // and repair items under their step-6 licence, so the manifests move
-      // ahead of the plan and the currency check says so — correctly. It is
-      // not a candidate read and it has no Alpha; it has a transcription.
-      // This hook enumerated three ids, so it fell straight through, three
-      // rounds were spent dispatching nothing, and the run reported "did not
-      // clear" for a repair it never ran. Third instance of that shape today.
-      if (MECHANICAL_REPAIRS[failure.id]) {
-        const repair = await mechanicalRepair({ ctx, failure });
-        if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
-        return;   // the battery re-verifies; a residue fails the gate again, honestly
-      }
-      // An edge decision reaches the same lane it does at step 4. A 6b Alpha
-      // repairing an item under its step-6 licence can introduce a dependency
-      // its page does not declare, long after the splice; frontier-16 did,
-      // once, and it fell through here for want of a route.
-      if (await isEdgeDecision({ ctx, failure })) {
-        dispatchEdgeAdjudication({ ctx, executor, stage, round });
-        return;
-      }
-      // THE CONTRACT DETECTORS have their own task, because it names the three
-      // tools to re-run. Everything else gets the general route below.
-      if (['boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) {
-        executor.start(stage, {
-          role: 'alpha',
-          label: `contract-audit-${round}`,
-          job: 'adjudication',
-          covers: [],
-          brief: 'briefs/alpha.md',
-          task: [`research/${ctx.run}-alpha-contract-audit.task.md`],
-          timeout: 3600,
-        });
-        return;
-      }
-
-      // DEFAULT ROUTE, NOT AN ALLOW-LIST (owner, 2026-08-24). This line used to
-      // read `if (!['boundary-audit','citation-fidelity','gate-liveness']
-      // .includes(failure.id)) return;` — so any other failing gate fell through
-      // to a bare return, the round budget was spent re-running an identical
-      // failure, and the run reported "did not clear" for a repair it never ran.
-      //
-      // frontier-18 produced THREE blockers of exactly that shape in one run:
-      // `depcheck` (one typo'd id in a deps array), `rendercheck` (37 items of
-      // `$$` split across source lines) and `content-policy-items` (a notation
-      // detector firing wider than the rule it enforces). All three were
-      // adjudicable from disk by an Alpha; none needed a person, and the third
-      // still needed one only for the part that is genuinely the owner's — the
-      // scope of an owner-written rule.
-      //
-      // The comment two hooks above already recorded this shape ("This hook
-      // enumerated three ids, so it fell straight through") and closed it only
-      // for the mechanical case. An allow-list of failures worth routing is a
-      // list that is always one entry short of the next incident.
-      //
-      // A gate failure is a FINDING. The Alpha adjudicates it, repairs what is
-      // genuinely wrong, and reports a false positive as a false positive — the
-      // task is explicit that narrowing a detector to clear a run is never its
-      // call.
-      executor.start(stage, {
-        role: 'alpha',
-        label: `gate-adjudication-${failure.id}-${round}`,
-        job: 'adjudication',
-        covers: [],
-        brief: 'briefs/alpha.md',
-        task: [`research/${ctx.run}-alpha-gate-adjudication.task.md`],
-        timeout: 3600,
-      });
+      return repairGateBatch(args, { alphaGroups, MECHANICAL_REPAIRS, mechanicalRepair });
     },
   },
 
