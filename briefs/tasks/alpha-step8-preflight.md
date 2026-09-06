@@ -16,8 +16,11 @@ rejections to the pre-Step-8 baseline even after a repair makes their verdicts
 stale. Empty `live_tuples` does not revoke these licences. Use them only to
 complete the assigned repair; do not readjudicate settled findings.
 You may also correct a documentary contract, manifest, impact or verification
-record to match the current proof. Do not edit a nonfatal or false-positive item, broaden
-the scope, run a judge sweep, or run a workflow transition.
+record to match the current proof. A licensed fatal repair may add fully proved
+missing-dependency lemmas under the Step-8 adjudication instructions, including
+their page, manifest, contract, and scope registrations. Do not otherwise
+broaden scope, edit a nonfatal or false-positive item, run a judge sweep, or run
+a workflow transition.
 
 Preserve append-only ledgers and return the gate, ids, licensing rows, changed
 files, targeted checks, and blocker. This task applies before `8-rejudge`; a

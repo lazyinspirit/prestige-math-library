@@ -25,7 +25,9 @@ path rather than repairing it yourself.
 Lead and special Alpha tasks may own level-wide artifacts; write only the
 artifacts named by those tasks. Never rename an established item id. Do not
 write judge verdicts or stamps. Published content, scope changes, deletion,
-and reading-order changes require the exact task-authorised protocol; otherwise
+and reading-order changes require the exact task-authorised protocol. Step-8
+adjudicators may add fully proved missing-dependency lemmas and register them
+on their owned pages under the Step-8 task's explicit exception; otherwise
 report the issue without changing it.
 
 ## Review and repair standard

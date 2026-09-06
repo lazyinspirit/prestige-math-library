@@ -35,7 +35,20 @@ For each queued item choose exactly one outcome:
 - `repaired`: independently correct the item and all directly required local
   contracts/metadata, then run focused checks before recording the decision.
 
-If an independent repair must also change a run-local direct dependency, that
+You may add and author new lemma items for genuinely missing dependencies of
+the queued fatal repair, including supporting chains of new lemmas. Prove
+each lemma fully and apply the authoritative-source verification rule above.
+Cite the lemmas in their consumers' `deps` and proofs. Place them on an owned
+page before their consumers and update the page, owning batch manifest and
+proof contract, and Step-8 scope group item list and `by_item` entries. Record
+the missing dependency and consuming repair in the FA evidence file. This
+scope addition is authorized and needs no pre-existing rejection for the new
+lemma. The engine must certify each new lemma through normal coverage and its
+first targeted judgment; this does not authorize a third judgment of the
+already rejudged consumer. Do not fabricate a verdict or terminal resolution
+for the new lemma.
+
+If an independent repair must also change an existing run-local direct dependency, that
 dependency edit needs its own exact guard licence. Append one version-1
 `owner-prerequisite-repair` JSON row to
 `research/<run>-step8-owner-prerequisite-repairs.jsonl` with

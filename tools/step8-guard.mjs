@@ -44,6 +44,7 @@ import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemHashJudge, shortHash } from './item-hash.mjs';
 import { parseTerminalResolutions } from './step8-terminal-resolution.mjs';
 import { loadStep8JudgeEvidence, rejectionKey } from './step8-evidence.mjs';
+import { permittedNewLemmas } from './step8-new-lemmas.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const ITEMS = join(REPO, 'items');
@@ -440,9 +441,20 @@ for (const id of changed) {
     'excludes only the `judge:` sub-block, will never match and reads here as an unlicensed edit.', id);
 }
 
-// Creation and deletion are Step-6 powers. A warning here silently granted a
-// power Step 8 explicitly does not have, so both are hard failures.
-for (const id of created) error('step8-creation', `${id}: created since "${baselineLabel}"; adding results is not licensed at Step 8`, id);
+// Both initial and final adjudicators may author missing dependency lemmas
+// for a licensed fatal repair, including a chain of supporting new lemmas.
+// This does not authorize unrelated results or edits to existing dependencies.
+const licensedConsumers = changed.filter((id) =>
+  !errors.some((entry) => entry.id === id) && (
+    fatalLicences.get(id)?.has(baseline.hashes[id])
+    || readerFatalLicences.get(id)?.has(baseline.hashes[id])
+    || publishedLicences.get(id)?.has(baseline.hashes[id])
+    || ownerPrerequisiteLicences.get(id)?.has(baseline.hashes[id])
+    || terminalParsed.latest.get(id)?.item_sha256 === itemHashJudge(readFileSync(join(ITEMS, `${id}.md`), 'utf8'))));
+const newLemmas = permittedNewLemmas({ created, licensedConsumers,
+  readItem: (id) => readFileSync(join(ITEMS, `${id}.md`), 'utf8') });
+for (const id of created) if (!newLemmas.has(id)) error('step8-creation',
+  `${id}: a new Step-8 item must be a dependency lemma used by a licensed fatal repair`, id);
 for (const id of deleted) error('step8-deletion', `${id}: removed since "${baselineLabel}"; deleting results is not licensed at Step 8`, id);
 
 // ---- report -----------------------------------------------------------------

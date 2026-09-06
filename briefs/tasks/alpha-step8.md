@@ -18,6 +18,17 @@ with the required tuple, pre-edit guard `item_sha256`, and outcome. Only
 contract, impact, or judge changes. The engine rejudges exactly changed items
 against the configured judge set.
 
+You may add and author new lemma items when a licensed fatal repair needs a
+genuinely missing dependency. Prove each lemma fully, verify unfamiliar or
+uncertain mathematics against authoritative sources, and cite it in the
+consumer's `deps` and proof. Supporting chains of new lemmas are permitted.
+Place the lemmas on an owned page before their consumers and update that page,
+the owning batch manifest and proof contract, and the Step-8 scope's group item
+list and `by_item` entries. Record the missing dependency and its consuming
+fatal repair in your report. This is an authorized scope addition; do not
+invent a rejection or adjudication for a new lemma. New lemmas enter the
+engine's normal coverage and targeted judgment checks.
+
 Every entry under **Step-7 reader warnings** also requires an owning-group
 decision in `research/{{run}}-step8-alert-decisions.jsonl`. Use `not_defect` or
 `nonfatal` when no content change is warranted, and `covered_by_rejection` when

@@ -328,6 +328,15 @@ blocked until its actual scope and remedy are established.
 Unlicensed page warnings return to their owning group for scope review; they
 never dispatch the item judge against a nonexistent page-named item file.
 
+Initial and final Step-8 adjudicators may author new lemmas for genuinely
+missing dependencies of a licensed fatal repair, including supporting lemma
+chains. Register them before their consumers on owned pages and in the batch
+manifest, proof contract, and Step-8 group scope. The guard permits these
+creations when the new lemma dependency chain reaches a licensed repaired
+consumer; unrelated creations and deletions remain prohibited. Each new lemma
+must receive normal coverage and its first targeted judgment. No fictitious
+prior rejection is required, and no extra rejudge of the consumer is licensed.
+
 Step-8 adjudicators have web search enabled. Whenever their mathematics is
 uncertain, their task requires them to verify the point against original
 sources and record the exact source support before deciding or repairing it.
