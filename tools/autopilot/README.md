@@ -195,6 +195,12 @@ and batch identities while syncing plan metadata and derived artifacts. A mint
 or rescope still refuses populated manifests because that scope change can
 detach or destroy the saved Beta work.
 
+At the Step-4 splice, an empty manifest page may reuse a nonempty canonical
+plan inventory only when every listed item file already exists. The tool copies
+those exact same-page entries into the manifest and records them separately as
+reused scope; this keeps later authoring, reading, judging, and final coverage
+non-vacuous while refusing partial reuse or plan erasure.
+
 `src/spec.mts` refuses a pipelined stage with no `role`, a non-function `cohort`,
 and a pipeline name reused non-contiguously — which would silently mean two
 groups rather than one.

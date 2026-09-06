@@ -222,13 +222,33 @@ for (const b of batchList) {
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
   const spliced = [];
   const unchanged = [];
+  const hydrated = [];
 
   for (const page of manifest) {
     const target = byId.get(page.id);
     if (!target) { problems.push(`${page.id}: not in plan-spec.json`); continue; }
 
-    const want = page.items ?? [];
+    let want = page.items ?? [];
     const have = target.items ?? [];
+    let reusedFromPlan = false;
+
+    // A page may enter a later run because one previously published item was
+    // repaired back to draft. Its canonical plan and item files then already
+    // carry the complete inventory, while a scaffold correctly mints no
+    // duplicate ids. Reuse that exact inventory in the run manifest so the
+    // author/reader/judge/coverage stages audit the repaired page instead of
+    // either erasing the plan or silently certifying an empty scope.
+    if (!want.length && have.length) {
+      const existingIds = have.map(idOf);
+      const allOnDisk = existingIds.every((id) => existsSync(`items/${id}.md`));
+      if (allOnDisk) {
+        page.items = JSON.parse(JSON.stringify(have));
+        want = page.items;
+        reusedFromPlan = true;
+        hydrated.push({ page: page.id, items: want.length });
+        console.log(`splice-plan: HYDRATING ${page.id} from its existing same-page plan inventory — ${want.length} item(s)`);
+      }
+    }
 
     let itemsChanged = !have.length && want.length > 0;
     if (have.length) {
@@ -290,11 +310,11 @@ for (const b of batchList) {
     if (itemsChanged || requiresChanged) {
       spliced.push({ page: page.id, items: want.length, nextItems: want,
         nextRequires: [...manifestReq], requiresChanged });
-    } else {
+    } else if (!reusedFromPlan) {
       unchanged.push(page.id);
     }
   }
-  perBatch.push({ batch: b, spliced, unchanged });
+  perBatch.push({ batch: b, manifestPath, manifest, spliced, unchanged, hydrated });
 }
 
 // Project only complete batches into memory before global validation. No file
@@ -333,13 +353,18 @@ if (problems.length) {
 if (!dryRun && perBatch.some((x) => !refusingBatches.has(String(x.batch)) && x.spliced.length)) {
   writeFileSync(specPath, JSON.stringify(spec, null, 2) + '\n');
 }
+if (!dryRun) for (const entry of perBatch) {
+  if (!refusingBatches.has(String(entry.batch)) && entry.hydrated.length) {
+    writeFileSync(entry.manifestPath, JSON.stringify(entry.manifest, null, 2) + '\n');
+  }
+}
 // The refusals artifact is written EVERY run, empty or not, so the gate can
 // tell "no refusals" from "the splice never ran".
 if (!dryRun) {
   writeFileSync(`research/${run}-splice-refusals.json`, JSON.stringify({ run, refusals }, null, 2) + '\n');
 }
 
-for (const { batch: b, spliced, unchanged } of perBatch) {
+for (const { batch: b, spliced, unchanged, hydrated } of perBatch) {
   if (refusingBatches.has(String(b))) {
     const held = refusals.filter((r) => r.batch === String(b));
     console.log(`splice-plan: batch ${b} WITHHELD — ${held.length} requires edge(s) await adjudication`);
@@ -350,14 +375,16 @@ for (const { batch: b, spliced, unchanged } of perBatch) {
     run, step: 4, batch: Number(b),
     spliced_by: 'tools/splice-plan.mjs (mechanical)',
     pages_spliced: spliced.map(({ page, items, requiresChanged }) => ({ page, items, requires_reconciled: requiresChanged })),
+    pages_reused_from_plan: hydrated,
     pages_already_correct: unchanged,
     item_count: spliced.reduce((n, s) => n + s.items, 0),
+    reused_item_count: hydrated.reduce((n, page) => n + page.items, 0),
     size_ceiling: SIZE_CEILING,
     duplicate_ids: 0,
     status: 'complete',
   };
   if (!dryRun) writeFileSync(`research/${run}-splice-${b}.json`, JSON.stringify(receipt, null, 2) + '\n');
-  console.log(`splice-plan: batch ${b} — ${spliced.length} page(s) spliced, ${unchanged.length} already correct, ${receipt.item_count} item(s)`);
+  console.log(`splice-plan: batch ${b} — ${spliced.length} page(s) spliced, ${hydrated.length} reused, ${unchanged.length} already correct, ${receipt.item_count} new item(s), ${receipt.reused_item_count} reused item(s)`);
 }
 
 if (failOnRefusal && refusals.length) {

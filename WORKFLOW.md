@@ -228,6 +228,13 @@ that scope change can detach or destroy saved Beta work.
 Ledger regeneration preserves the plan-time `--allow-in-run-dependencies`
 opt-in, so an explicitly approved earlier-prerequisite chain remains valid.
 
+At Step 4, an empty run page whose canonical plan inventory already exists
+entirely in `items/` is a reuse scope, not permission to erase that inventory.
+The splice tool copies the exact same-page plan entries into the manifest and
+records their reused count, so all later author, reader, judge, and coverage
+stages include the existing content. It still refuses a partial or missing-file
+inventory.
+
 Source gates require harvest dispositions, fetch-verification stamps, live URLs,
 and source backing for each authored result. URL recovery precedes replacement;
 only redundant dead backing may be retired automatically. A source problem that

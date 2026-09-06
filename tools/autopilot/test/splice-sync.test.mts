@@ -105,6 +105,35 @@ test('--update applies a licensed manifest change to the plan, loudly', () => {
   assert.equal(again.status, 0, 'after --update the scopes must agree');
 });
 
+test('an empty run page reuses its complete same-page plan inventory when every item exists', () => {
+  const dir = fixture([], ['lem-a', 'thm-b']);
+  mkdirSync(join(dir, 'items'));
+  writeFileSync(join(dir, 'items', 'lem-a.md'), '---\nid: lem-a\nstatus: published\n---\n');
+  writeFileSync(join(dir, 'items', 'thm-b.md'), '---\nid: thm-b\nstatus: draft\n---\n');
+
+  const result = run(dir, ['--run', 'r9', '--batch', '1']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /HYDRATING demo-page/);
+  const manifest = JSON.parse(readFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), 'utf8'));
+  assert.deepEqual(manifest[0].items, ['lem-a', 'thm-b']);
+  const receipt = JSON.parse(readFileSync(join(dir, 'research', 'r9-splice-1.json'), 'utf8'));
+  assert.deepEqual(receipt.pages_reused_from_plan, [{ page: 'demo-page', items: 2 }]);
+  assert.equal(receipt.reused_item_count, 2);
+  assert.equal(run(dir, ['--run', 'r9', '--verify']).status, 0,
+    'the reused page must enter every later manifest-scoped audit');
+});
+
+test('an empty manifest cannot reuse a plan inventory with missing item files', () => {
+  const dir = fixture([], ['lem-a', 'thm-missing']);
+  mkdirSync(join(dir, 'items'));
+  writeFileSync(join(dir, 'items', 'lem-a.md'), '---\nid: lem-a\nstatus: published\n---\n');
+  const result = run(dir, ['--run', 'r9', '--batch', '1']);
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /already has 2 item\(s\).*manifest's 0/);
+  const manifest = JSON.parse(readFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), 'utf8'));
+  assert.deepEqual(manifest[0].items, [], 'partial reuse must never rewrite the manifest');
+});
+
 test('Step 6 reconciliation copies an adjudicated manifest requires change exactly', () => {
   const dir = fixture(['lem-a'], ['lem-a']);
   const manifestPath = join(dir, 'research', 'r9-batch-1.pages.json');
