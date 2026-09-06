@@ -1,10 +1,22 @@
 # Set theory completion: four-researcher source audit
 
 Date: 2026-09-07. Four independent `gpt-5.6-terra` researchers at high
-reasoning inspected the published Foundations pages, all 22 items on
-`deferred-set-theory-beyond-choice`, and authoritative web sources. They made
-no corpus edits. This file preserves their actionable reports for the prose
-scaffold and future Step-1 source work.
+reasoning inspected the published Foundations pages and all 22 items on
+`deferred-set-theory-beyond-choice`. They made no corpus edits. This file
+preserves their actionable reports for the prose scaffold and future Step-1
+source work.
+
+**Research-process limitation.** Sweeps A--C returned verified textbook or
+university-note endpoints as well as primary papers. Sweep D returned a strong
+primary-paper audit but did not identify in its report which textbook or
+lecture notes it had searched. Two attempts to continue that same researcher
+failed because its collaboration thread was no longer available. Therefore the
+fourth researcher's separate textbook/lecture-note requirement is **unverified**,
+not silently claimed complete. Gary Gruenhage's Auburn MH 7550 *Set Theoretic
+Topology* notes (<https://webhome.auburn.edu/~gruengf/7550/7550.14pfs.pdf>) and
+Oxford's C1.3 Analytic Topology course materials
+(<https://courses.maths.ox.ac.uk/course/section.php?id=1514>) are leads for the
+next source pass, not fourth-researcher-verified evidence in this audit.
 
 This is not a claim that every linked text has already been harvested into a
 future run. It records endpoints verified during planning. The normal full-text
