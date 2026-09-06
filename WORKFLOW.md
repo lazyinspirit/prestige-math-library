@@ -392,6 +392,12 @@ arrays are normalized mechanically at the Step-1/3 scaffold joins and again
 before the Step-9 receipt, so the whole-level audit does not spend an Alpha call
 repairing syntax; malformed dependency values remain hard errors.
 
+The Step-9 receipt reviewer reconciles proof-bearing manifest scope, including
+reused items, against batch contracts before attesting coverage. Missing contract
+evidence requires a full proof/interface read and the unchanged strict contract,
+risk, boundary and citation checks; this does not license mathematical edits.
+Receipt checks include exact-context verification and Step-8 terminal resolutions.
+
 ## Repairs, outages, and controls
 
 A failed plan stops at its configured/stage attempt limit and becomes a
