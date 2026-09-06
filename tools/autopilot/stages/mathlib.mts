@@ -1628,6 +1628,9 @@ export const stages = [
   {
     id: '1-scaffold',
     label: 'Beta scaffolding',
+    modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'scaffolding'
+      ? MODEL_PROFILE_NAMES.astraMedium
+      : undefined,
     // Not pipelined: the stage after it is the assignment barrier. See the note
     // above — a cohort computed before `2-assign` is computed from a fallback
     // that the assignment exists to overrule.

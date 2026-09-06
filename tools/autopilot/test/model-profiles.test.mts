@@ -75,6 +75,18 @@ test('Step 5 authors use Astra medium while Steps 6 and 7 retain Terra high', ()
     'the judge tool is not a Step-7 reader agent');
 });
 
+test('Step 1 scaffolders and scaffold repairers use Astra medium', () => {
+  const scaffoldStage = stage('1-scaffold');
+  const scaffold = scaffoldStage.plan(ctx, ['1'])[0];
+  assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.astraMedium);
+  assert.equal(selected(scaffoldStage, {
+    role: 'beta', job: 'scaffolding', label: 'policy-fix-1-b1',
+  }), MODEL_PROFILE_NAMES.astraMedium, 'Step 1 scaffold repairers use the same profile');
+  assert.equal(selected(scaffoldStage, {
+    role: 'beta', job: 'scouting', label: 'source-scout-1-b1',
+  }), undefined, 'source scouting is not a Step 1 scaffolding dispatch');
+});
+
 test('group Alpha resolves to Sol high', () => {
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'alpha', '--brief', 'briefs/alpha.md', '--label', 'alpha-model-test',
@@ -118,6 +130,13 @@ test('Step 9 Lead Alpha alone uses Astra medium among late-stage agents', () => 
 
 test('the shared Step-5 authoring brief mandates authoritative web verification', () => {
   const source = readFileSync(join(REPO, 'briefs/authoring.md'), 'utf8');
+  assert.match(source, /every piece of mathematics that is unfamiliar/i);
+  assert.match(source, /search the web/i);
+  assert.match(source, /authoritative sources/i);
+});
+
+test('the shared Step-1 scaffolding brief mandates authoritative web verification', () => {
+  const source = readFileSync(join(REPO, 'briefs/beta-scaffold.md'), 'utf8');
   assert.match(source, /every piece of mathematics that is unfamiliar/i);
   assert.match(source, /search the web/i);
   assert.match(source, /authoritative sources/i);

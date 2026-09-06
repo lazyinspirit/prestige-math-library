@@ -13,6 +13,14 @@ with the schema's kind prefixes; do not silently duplicate an existing claim.
 Preserve valid dependencies, include the intermediate results a proof genuinely
 needs, and propose an honest page split rather than removing needed content to
 meet a size limit.
+
+For every piece of mathematics that is unfamiliar to you, search the web and
+verify the exact claim against authoritative sources before adding or relying
+on it. This is mandatory for unfamiliar definitions, results, dependencies,
+examples, counterexamples, and proposed proof strategies. Prefer original
+papers, author-hosted books or lecture notes, and official reference works, and
+record the exact URL, locator, and support in the batch evidence.
+
 Every manifest item object must carry an explicit `deps` array; write `deps: []`
 when the item has no planned dependencies.
 

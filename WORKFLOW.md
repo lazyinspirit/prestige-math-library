@@ -82,8 +82,9 @@ provider isolation, session handling, and output capture. The current judge
 lineup is the singleton `gpt-5.6-terra` lane. Following GPT-5.4's retirement
 from Codex with ChatGPT sign-in, ordinary agentic and secondary lanes use
 `gpt-5.6-terra`; Step-6 readers and refuters, Step-7 group readers, and
-Step-9/10 agent dispatches use its `high` profile. Step-5 authoring and the
-Step-9 Lead Alpha (`step9-lead`) use `gpt-6-astra` at `medium`.
+Step-9/10 agent dispatches use its `high` profile. Step-1 scaffolding,
+Step-5 authoring, and the Step-9 Lead Alpha (`step9-lead`) use `gpt-6-astra`
+at `medium`.
 Group Alpha
 review and adjudication use `gpt-5.6-sol` at `high`; Step-8 fatal adjudication
 remains on Sol at `xhigh`. Exhausted Step-8 final adjudication uses
