@@ -302,6 +302,22 @@ test('preflight retains original fatal licences after live rejection closure; fr
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('passing risk inventory does not expand the Step-8 repair assignment', async () => {
+  const repo = groupedFixture();
+  const stage: any = stages.find((s: any) => s.id === '8-preflight');
+  const plans: any[] = [];
+  await stage.onGateFailure({ ctx: { run: 'demo', repo }, stage, round: 1,
+    executor: { start: (_s: any, p: any) => plans.push(p) }, failure: {
+      id: 'risk-report', output: 'ORDINARY 1 [thm-demo-y] no signals\nERROR risk-review-missing [thm-demo-x]: review required',
+    } });
+  assert.deepEqual(plans.map(p => p.label), ['step8-preflight-a-1']);
+  const text = readFileSync(join(repo, plans[0].task[0]), 'utf8');
+  const envelope = JSON.parse(text.match(/```json\n([\s\S]*?)\n```/)![1]);
+  assert.deepEqual(envelope.assigned_items.map((r: any) => r.id), ['thm-demo-x']);
+  assert.match(readFileSync(join(repo, envelope.full_evidence), 'utf8'), /thm-demo-y/);
+  rmSync(repo, { recursive: true, force: true });
+});
+
 test('Step-8 close routes boundary-audit item summaries to their exact owners', async () => {
   const repo = groupedFixture();
   const started: any[] = [];

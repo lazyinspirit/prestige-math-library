@@ -979,7 +979,11 @@ function readPublishedClosure(ctx): ReturnType<typeof readClosure> {
 
 /** Item ids printed by the standard `ERROR code [item-id]:` gate grammar. */
 function itemsFromGateFailure(failure: any): string[] {
-  const text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
+  let text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
+  // Risk reports list every passing item before their ERROR records. Those
+  // inventory rows are context, not repair subjects.
+  const errors = text.split(/\r?\n/).filter((line) => /^\s*ERROR\b/.test(line));
+  if (errors.length) text = errors.join('\n');
   const grammar = '[a-z][a-z0-9]*(?:-[a-z0-9]+){2,}';
   const itemGrammar = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)+';
   const itemSummaryIds = [...text.matchAll(/^\s*items:\s*(.*)$/gmi)]
