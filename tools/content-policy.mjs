@@ -15,6 +15,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { referenceUrls } from './content-policy-lib.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -135,22 +136,6 @@ function list(fm, key) {
     }
   }
   return [];
-}
-function referenceUrls(fm) {
-  // Support both the normal block form and YAML's inline flow form.  We only
-  // need stable URLs here, so a small, deliberately constrained reader is
-  // preferable to silently accepting an unrecorded source.
-  const lines = fm.split(/\r?\n/);
-  const index = lines.findIndex((line) => /^\s{2}references:\s*/.test(line));
-  if (index < 0) return [];
-  const block = [lines[index].replace(/^\s{2}references:\s*/, '')];
-  for (let cursor = index + 1; cursor < lines.length; cursor += 1) {
-    const line = lines[cursor];
-    if (line.trim() && !/^\s{4,}/.test(line)) break;
-    block.push(line);
-  }
-  return [...block.join('\n').matchAll(/\burl:\s*("[^"]+"|'[^']+'|[^,\]}\n]+)/g)]
-    .map((match) => match[1].trim().replace(/^['"]|['"]$/g, ''));
 }
 function readBatch(path) {
   try {

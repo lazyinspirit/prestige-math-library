@@ -208,6 +208,10 @@ batch-pinned correction task even though the recovery dispatch deliberately
 declares empty coverage; the mechanical collector alone covers the batch after
 the corrected report passes.
 
+The item provenance gate accepts `sources.references` in either YAML block or
+flow form. It still searches only that references member, so an unrelated URL
+elsewhere in `sources` cannot satisfy a literature-backed provenance claim.
+
 `src/spec.mts` refuses a pipelined stage with no `role`, a non-function `cohort`,
 and a pipeline name reused non-contiguously — which would silently mean two
 groups rather than one.
