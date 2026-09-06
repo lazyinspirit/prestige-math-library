@@ -63,35 +63,36 @@ mathematics merely to control frontier selection.
 | SET-4 | `well-founded-relations-rank-and-the-cumulative-hierarchy` | published ordinals/transfinite recursion |
 | SET-5 | `reflection-absoluteness-and-elementary-submodels` | SET-2, SET-4 |
 | SET-6 | `weak-choice-principles-and-sierpinskis-theorem` | published cardinal arithmetic; filters/ultrafilters |
-| SET-7 | `boolean-algebras-stone-duality-and-the-prime-ideal-theorem` | published filters/ultrafilters |
+| SET-7 | `boolean-algebras-stone-duality-and-the-prime-ideal-theorem` | SET-2; published compactness (whose closure contains filters/ultrafilters) |
 | SET-8 | `club-stationary-sets-and-pressing-down` | published cardinal arithmetic/cofinality |
 | SET-9 | `set-theoretic-trees-delta-systems-and-diamond` | SET-8 |
-| SET-10 | `borel-analytic-sets-perfect-sets-and-determinacy` | SET-4; published countability |
+| SET-10 | `borel-analytic-sets-perfect-sets-and-determinacy` | SET-4; published complete metrizability and Lebesgue measure (both already reach countability) |
 | SET-11 | `the-constructible-hierarchy-and-inner-models` | SET-5 |
 | SET-12 | `condensation-gch-and-diamond-in-l` | SET-11, SET-9, SET-3 |
 | SET-13 | `forcing-orders-names-and-generic-extensions` | SET-5, SET-7 |
 | SET-14 | `the-forcing-theorem-and-formal-consistency-transfer` | SET-13, SET-3 |
 | SET-15 | `preservation-cohen-forcing-and-the-continuum` | SET-14, SET-9 |
-| SET-16 | `finite-support-iterations-and-martins-axiom` | SET-15 |
-| SET-17 | `suslin-trees-lines-algebras-and-independence` | SET-16, SET-12 |
-| SET-18 | `permutation-models-and-transfer-to-zf` | SET-5, SET-6 |
-| SET-19 | `symmetric-extensions-and-basic-choice-failure-models` | SET-14, SET-18, SET-12 |
+| SET-16 | `finite-support-iterations-and-martins-axiom` | SET-15; published Baire/category and Lebesgue-measure pages |
+| SET-17 | `suslin-trees-lines-algebras-and-independence` | SET-16, SET-12 (SET-16's topology closure supplies countability/cardinal functions) |
+| SET-18 | `permutation-models-and-transfer-to-zf` | SET-14, SET-6 |
+| SET-19 | `symmetric-extensions-and-basic-choice-failure-models` | SET-18, SET-12 |
 | SET-20 | `symmetric-collapse-and-ultrafilter-free-models` | SET-19, SET-15 |
 | SET-21 | `halpern-lauchli-and-bpi-without-choice` | SET-20 |
 | SET-22 | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | SET-21; published complete-metrizability/Baire page (whose closure includes compactness, Urysohn and paracompactness) |
-| SET-23 | `large-cardinals-measures-and-elementary-embeddings` | SET-4, SET-7, SET-8 |
+| SET-23 | `large-cardinals-measures-and-elementary-embeddings` | SET-5, SET-7, SET-8 |
 | SET-24 | `solovays-model-and-regularity-of-all-sets-of-reals` | SET-23, SET-20, SET-10 |
 | SET-25 | `shelahs-baire-property-model-and-inner-model-lower-bounds` | SET-24, SET-16 |
 | SET-26 | `prikry-forcing-and-gitiks-singular-cardinal-model` | SET-23, SET-20 |
-| SET-27 | `proper-forcing-countable-support-iterations-and-pfa` | SET-16 |
-| SET-28 | `normal-moore-spaces-pmea-and-consistency-strength` | SET-27, SET-25, SET-22 |
-| SET-29 | `minimal-walks-oscillation-and-l-and-s-spaces` | SET-27, SET-12 |
+| SET-27 | `proper-forcing-countable-support-iterations-and-pfa` | SET-16, SET-23 |
+| SET-28 | `normal-moore-spaces-pmea-and-consistency-strength` | SET-27, SET-25, SET-22; published product measure |
+| SET-29 | `minimal-walks-oscillation-and-l-and-s-spaces` | SET-27, SET-12 (SET-27 already reaches the needed topology pages) |
 | SET-30 | `pcf-scales-and-zfc-dowker-spaces` | SET-8; published paracompactness page (whose closure includes productive separation) |
 | SET-31 | `eastons-theorem-and-cardinal-invariants-of-the-continuum` | SET-16 |
 
-No B page is a dependency target. `SET-1`, `SET-4`, `SET-6`, `SET-7` and
-`SET-8` are genuinely independent roots over published Foundations; SET-10
-waits for SET-4 because its tree ranks use the cumulative hierarchy.
+No B page is a dependency target. `SET-1`, `SET-4`, `SET-6` and `SET-8` are
+genuinely independent roots over published Foundations. SET-7 waits for the
+countable completeness machinery it generalizes; SET-10 waits for SET-4
+because its tree ranks use the cumulative hierarchy.
 
 ### B-companion contract
 
@@ -183,14 +184,18 @@ for the universe.
 ## SET-2. Deduction, Soundness, Completeness, and Compactness
 
 **Items.** Formal derivations; proof from a theory; consistency; deduction
-theorem; soundness; Henkin constants and term models; Lindenbaum completion;
-truth lemma for the term model; Gödel completeness; compactness; upward and
-downward Löwenheim--Skolem; elementary embeddings and the Tarski--Vaught test;
-Skolem hulls; nonstandard models; `fs-categorical-first-order-zf`.
+theorem and soundness for set-sized languages; for **countable languages**,
+Henkin constants and term models, Lindenbaum completion, the term-model truth
+lemma, Gödel completeness, compactness, and upward/downward Löwenheim--Skolem;
+elementary embeddings and the Tarski--Vaught test; countable Skolem hulls;
+nonstandard models; `fs-categorical-first-order-zf`.
 
-**Proof spine.** The Henkin construction is coded and its choices are canonical
-least codes. Compactness and Löwenheim--Skolem are corollaries only after the
-model existence theorem.
+**Proof spine.** The countable-language Henkin construction is coded and its
+choices are canonical least natural-number codes. This is sufficient for the
+language of set theory. Arbitrary well-orderable languages require an explicit
+well-order/choice hypothesis; arbitrary-language compactness and its BPI
+strength are proved only on SET-7. Compactness and Löwenheim--Skolem are
+corollaries only after the applicable model-existence theorem.
 
 ## SET-3. Arithmetization, Incompleteness, and Relative Consistency
 
@@ -249,8 +254,9 @@ sets, not the aleph equation that presupposes well-orderability.
 homomorphisms and quotients; Boolean completion and regular-open algebra;
 Stone space of ultrafilters; clopen representation; Stone duality; BPI
 equivalent forms; compactness of Stone spaces; compact Hausdorff Tychonoff
-equivalent to BPI; forcing preorders, separative quotients and complete Boolean
-algebras; `fs-bpi-is-ac`.
+equivalent to BPI; arbitrary-language compactness from BPI and the converse
+coding, with countable-language completeness cited from SET-2; forcing
+preorders, separative quotients and complete Boolean algebras; `fs-bpi-is-ac`.
 
 **Proof spine.** Algebraic filters and forcing filters remain distinct. The
 Stone representation gives the exact bridge later used by Boolean-valued
@@ -271,10 +277,14 @@ item; regularity of the ambient cardinal is never omitted.
 
 **Items.** Trees, height, levels, branches and antichains; `kappa`-trees;
 König's lemma; Aronszajn and Suslin trees; tree property; normal and splitting
-trees; Delta-system lemma; ccc products and specialization; diamond, clubsuit
-and square; diamond from `V=L`; diamond builds a Suslin tree; Kurepa line/tree
+trees; Delta-system lemma; ccc products and specialization; definitions of
+diamond, clubsuit and square; diamond builds a Suslin tree; Kurepa line/tree
 interface; partition relations and Ramsey/Erdős--Rado orientation;
 Halpern--Läuchli finite-tree statement; `fs-every-omega-one-tree-has-a-cofinal-branch`.
+
+**Dependency boundary.** This page does **not** prove `V=L -> diamond`.
+SET-12 proves that implication from constructibility and may then cite this
+page's earlier theorem `diamond ->` “a Suslin tree exists.”
 
 ## SET-10. Borel and Analytic Sets, Perfect Sets, and Determinacy
 
@@ -403,6 +413,8 @@ limits of transfer; the second Fraenkel socks model; transfer of “a countable
 family of pairs has no choice function”; `fs-a-zfa-model-is-a-zf-model`.
 
 **Target.** Proves `rem-fraenkel-socks-model`, including the atom-to-ZF step.
+The Jech--Sochor proof uses the forcing theorem from SET-14; it is not inferred
+from permutation-model syntax alone.
 
 ## SET-19. Symmetric Extensions and Basic Choice-Failure Models
 

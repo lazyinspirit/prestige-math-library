@@ -242,3 +242,11 @@ dropped.
 5. The clause-level ledger in `plan-set-theory-completion-track.md` is the
    exhaustive completion criterion; item count or page publication alone is
    never enough.
+6. SET-2 proves completeness/compactness only for the countable language needed
+   by set theory; SET-7 owns arbitrary-language compactness and its BPI cost.
+7. SET-9 defines diamond and proves diamond gives a Suslin tree; only SET-12,
+   after constructibility, proves `V=L -> diamond`.
+8. SET-27 depends on SET-23 before using Laver preparation, supercompactness or
+   the relative consistency of PFA. SET-7, SET-10, SET-16, SET-28 and SET-29
+   also carry the published topology/measure prerequisites their promised
+   proofs actually use.
