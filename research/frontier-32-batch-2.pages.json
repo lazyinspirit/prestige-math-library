@@ -49,6 +49,7 @@
         "id": "lem-sequential-repetition-amplifies-error",
         "kind": "lemma",
         "title": "Sequential repetition amplifies completeness and soundness gaps",
+        "strategy": "Run fresh verifier coins in each sequential copy and accept by a stated threshold. For completeness, the honest prover gives independent Bernoulli successes and the recorded Chernoff bound applies. For soundness against an adaptive prover, condition on every prior transcript: each next-copy success probability is still at most s, so an exponential-moment induction gives the same binomial upper-tail bound without falsely asserting independence of the cheating outcomes.",
         "deps": [
           "def-completeness-and-soundness",
           "lem-chernoff-bound-for-bernoulli-trials"
@@ -65,11 +66,12 @@
       {
         "id": "lem-hashing-commits-public-randomness",
         "kind": "lemma",
-        "title": "Pairwise-independent hashing commits public randomness",
+        "title": "Pairwise-independent hashing controls fibre size",
         "deps": [
           "def-private-coin-public-coin-and-arthur-merlin-protocol",
           "def-pairwise-independent-hash-family"
-        ]
+        ],
+        "strategy": "Compute the fibre-count mean and variance. Prove that accepting a valid preimage has probability at most 1/4 for mean at most 1/4 and at least 3/4 for mean at least 4; state explicit efficient-sampling and membership hypotheses for the public-coin implementation."
       },
       {
         "id": "thm-private-coin-ip-equals-public-coin-ip",
@@ -104,7 +106,8 @@
           "def-protocol-game-tree-and-value",
           "lem-optimal-prover-may-be-deterministic",
           "def-pspace-and-npspace"
-        ]
+        ],
+        "strategy": "Count compatible padded random tapes and recursively compute the optimal accepting count using public-message sums and prover-response maxima. Bound all integer accumulators by 2^r, output a binary numerator/denominator pair, and decide rational thresholds in PSPACE by cross multiplication."
       },
       {
         "id": "thm-ip-is-contained-in-pspace",
@@ -265,6 +268,7 @@
         "id": "def-prefix-free-machine-and-prefix-complexity",
         "kind": "definition",
         "title": "Prefix-free machines and prefix complexity",
+        "strategy": "Define a prefix-free description machine M and its relative complexity K_M(x), with infinity when no description exists. Do not yet write an unqualified K or assume an optimal prefix machine; reserve that convention until the following invariance theorem constructs one.",
         "deps": [
           "def-description-machine-and-plain-kolmogorov-complexity"
         ]
@@ -281,8 +285,10 @@
         "id": "thm-invariance-for-prefix-complexity",
         "kind": "theorem",
         "title": "Invariance theorem for prefix complexity",
+        "strategy": "Use the acceptable effective numbering to enumerate prefix-free description machines through a syntactic prefix-preserving presentation. Give each machine index a fixed self-delimiting code and let U(code(e)p)=M_e(p); the combined domain is prefix-free and K_U(x)<=K_{M_e}(x)+|code(e)|. Only after this construction fix K=K_U.",
         "deps": [
-          "def-prefix-free-machine-and-prefix-complexity"
+          "def-prefix-free-machine-and-prefix-complexity",
+          "def-universal-and-acceptable-numbering"
         ]
       },
       {
@@ -292,8 +298,10 @@
         "deps": [
           "def-conditional-kolmogorov-complexity",
           "def-prefix-free-machine-and-prefix-complexity",
-          "thm-kraft-inequality"
-        ]
+          "thm-kraft-inequality",
+          "thm-invariance-for-prefix-complexity"
+        ],
+        "strategy": "For finite strings x,y, prove C(x,y)=C(x|y)+C(y)+O(log(C(x)+2)+log(C(y)+2)) by the counting and self-delimiting-index argument of Shen's Theorem 11, and then swap x and y to obtain symmetry up to logarithmic terms. Keep plain C distinct from prefix K; prefix-free coding and Kraft allocation supply the self-delimiting bookkeeping, while the chosen optimal prefix machine is licensed by its preceding invariance theorem."
       },
       {
         "id": "def-incompressibility-method",
@@ -316,7 +324,7 @@
       {
         "id": "def-martin-lof-test-and-random-sequence",
         "kind": "definition",
-        "title": "Martin-Löf tests and random sequences",
+        "title": "Martin-L\u00f6f tests and random sequences",
         "deps": [
           "def-effectively-open-set-in-cantor-space"
         ]
@@ -324,7 +332,7 @@
       {
         "id": "lem-universal-martin-lof-test-exists",
         "kind": "lemma",
-        "title": "A universal Martin-Löf test exists",
+        "title": "A universal Martin-L\u00f6f test exists",
         "deps": [
           "def-martin-lof-test-and-random-sequence",
           "def-universal-and-acceptable-numbering"
@@ -333,12 +341,13 @@
       {
         "id": "thm-levin-schnorr-characterization",
         "kind": "theorem",
-        "title": "Levin--Schnorr characterization of Martin-Löf randomness",
+        "title": "Levin--Schnorr characterization of Martin-L\u00f6f randomness",
         "deps": [
           "def-martin-lof-test-and-random-sequence",
           "lem-universal-martin-lof-test-exists",
           "def-prefix-free-machine-and-prefix-complexity",
-          "thm-kraft-inequality"
+          "thm-kraft-inequality",
+          "thm-invariance-for-prefix-complexity"
         ]
       },
       {
@@ -352,7 +361,7 @@
       {
         "id": "thm-martin-lof-randomness-implies-computable-randomness",
         "kind": "theorem",
-        "title": "Martin-Löf randomness implies computable randomness",
+        "title": "Martin-L\u00f6f randomness implies computable randomness",
         "deps": [
           "def-martin-lof-test-and-random-sequence",
           "def-computable-martingale"
@@ -373,7 +382,8 @@
         "deps": [
           "def-effective-hausdorff-dimension",
           "def-prefix-free-machine-and-prefix-complexity",
-          "thm-kraft-inequality"
+          "thm-kraft-inequality",
+          "thm-invariance-for-prefix-complexity"
         ]
       },
       {

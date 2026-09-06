@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 8ebb08a276e8 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 0807ce759705 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 6432 |
-| now mechanically prevented | 255 |
+| defects caught before publication | 7031 |
+| now mechanically prevented | 256 |
 | escaped to publication | 1 |
 | still open | 27 |
 
@@ -535,6 +535,40 @@
 | arithmetic-error |  | 1 |  |  |  |
 | frontmatter-schema |  | 1 |  |  |  |
 | citation-misattributed |  |  |  |  | 1 |
+
+## frontier-32 — 599 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross | 8-adjudicate | 9-scope |
+|---|---|---|---|---|---|
+| ill-formed | 51 | 68 |  |  |  |
+| invalid-inference | 20 | 1 |  | 31 |  |
+| reader-repair | 49 |  |  |  |  |
+| citation-missing |  |  |  | 49 |  |
+| contract-mismatch | 38 | 1 | 1 | 1 |  |
+| missing-hypothesis | 10 | 1 |  | 27 |  |
+| other |  | 29 | 9 |  |  |
+| unlicensed-inference | 25 | 1 |  |  |  |
+| citation-inaccurate | 20 | 1 |  | 4 |  |
+| frontmatter-schema | 20 |  |  |  |  |
+| false-or-overstrong-statement | 5 | 2 |  | 11 |  |
+| ill-typed-construction |  |  |  | 18 |  |
+| missing-choice-scope | 2 | 7 |  | 7 |  |
+| ill-typed-claim | 2 | 2 |  | 10 |  |
+| unsupported-inference | 7 | 1 |  | 4 |  |
+| missing-case | 9 |  |  | 2 |  |
+| undefined-notation | 4 |  |  | 6 |  |
+| false-claim | 8 | 1 |  | 1 |  |
+| citation-inflated |  |  |  | 6 | 1 |
+| invalid-witness | 1 | 1 |  | 4 |  |
+| false-or-overstrong-title |  | 1 |  | 4 |  |
+| arithmetic-error |  | 1 |  | 2 |  |
+| false-computation | 1 | 1 | 1 |  |  |
+| overstrong-title-or-statement |  | 2 |  |  |  |
+| citation-truncated |  |  |  | 2 |  |
+| unsupported-universal-property |  |  |  | 2 |  |
+| false-boundary-disposition | 1 |  |  |  |  |
+| artifact-overwritten |  |  | 1 |  |  |
+| citation-corrupted |  |  |  | 1 |  |
 
 ## pre-frontier-13 — 3 row(s)
 

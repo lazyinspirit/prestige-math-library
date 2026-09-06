@@ -1,0 +1,17 @@
+# FA terminal evidence — queue e, position 5
+
+Decision: accepted-after-review. Read the item; all three direct dependencies in full, including the published three-cone proof rather than only its statement; the standard cone triangle and arrow-homotopy-equivalence interfaces; the triangulated A/B pages, batch-8 signed homological conventions, manifest/coverage, proof contract and boundary risk material; Alpha's exact adjudication/repair and both Terra rejections.
+
+The final rejection is not a mathematical defect in the current text. Step 1.1 explicitly refers to the displayed calculation in the dependency's proof, and that proof really does display Theta_n(e,c,d,c')=((e,d+f(c)),(c,c')). The dependency statement alone omits this formula, but the actual cited lemma does not. Its differential convention is the same as this page's homological cone convention. The current repair also supplies the needed r and s formulas locally, rather than merely asserting the existence of some equivalence.
+
+Independent component check: on Cone(alpha), the differential sends (e,c,d,c') to (d_E e+gf(c)+g(d), -d_C c+c', -d_D d-f(c'), d_C c'). Hence r(e,c,d,c')=(e,d+f(c)) and s(e,d)=(e,0,d,0) commute with differentials, rs=1, and the degree-one map H(e,c,d,c')=(0,0,0,c) satisfies dH+Hd=1-sr. This proves the exact homotopy equivalence used in step 1.1, including its coordinates, without trusting an unspecified equivalence.
+
+The two transport identities are r j_alpha=beta and q_alpha s=j_f[1] q_g; both follow by substituting the displayed tuples. Because sr is the identity in K(A), they produce an isomorphism of triangles. The other faces commute: alpha j_f=j_gf g, q_gf alpha=q_f, beta j_gf=j_g, and q_g beta=f[1] q_gf. Thus the fourth arrow is the positive composite j_f[1] q_g required by the current TR4 definition. This agrees with the adopted left-rotation sign -f[1]; no sign was inferred from an abstract cone equivalence.
+
+The usual isomorphic-replacement reduction is valid here. Any distinguished triangle over a chosen first map is identified with its standard cone triangle over the same endpoints: a homotopy-commuting square of representatives induces the upper-triangular cone map, and homotopy equivalences on the endpoints give a homotopy equivalence on cones. For additive categories this can also be checked by applying Hom(T,-) complexes and their degreewise split cone sequences, then using exactness and Yoneda in K(A). Transporting the displayed octahedron along these triangle isomorphisms yields TR4 for the arbitrary chosen distinguished triangles, with the typed final composite preserved. No cone functor on K(A) is asserted. Zero maps, zero complexes and identities satisfy the same component identities.
+
+External source verification: opened https://stacks.math.columbia.edu/tag/014P, Lemma 13.10.2 and Proposition 13.10.3, including the TR4 proof. They support the typed fourth-face composite and reduction to convenient triangle representatives. Stacks uses a cohomological cone convention with final -p; the homological signs above were checked directly against the local dependency rather than copied across conventions.
+
+Validation: focused precheck passed; strict batch proof-contract check passed with zero errors/warnings. Current item bytes are accepted unchanged. No dependency edit, judge verdict, pass stamp, or further judge call.
+
+Obligations: none for position 5. Next: record acceptance, then begin position 6.

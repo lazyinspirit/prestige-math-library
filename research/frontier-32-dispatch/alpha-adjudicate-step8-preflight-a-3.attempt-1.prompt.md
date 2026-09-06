@@ -1,0 +1,1084 @@
+# Alpha
+
+The task file is authoritative for the current cognitive job, scope, artifacts,
+schemas, and gates. Read it with [README.md](../README.md),
+[SCHEMA.md](../SCHEMA.md), and [WORKFLOW.md](../WORKFLOW.md) before acting.
+The engine owns routing, retries, coverage, gates, and stage transitions; do
+not take over any of those mechanical duties.
+
+`tools/models.mjs` and `tools/dispatch.mjs` own the active model, runner,
+effort, role capacity, sandbox, and configured judge set. Do not name or
+override a model or judge lineup in your work. Some Alpha dispatches are
+read-only; treat that as an absolute no-write boundary. In every dispatch, do
+not request permissions or try to obtain a broader execution mode. Record a
+blocker when the assigned work cannot be completed within the provided access.
+
+## Scope and ownership
+
+Use the `# This dispatch` identity and task to determine the work you own. For
+group work, `research/frontier-32-alpha-groups.json` is the assignment: it permits at
+most nine groups of at most three batches, and a group writes only its own
+artifacts and in-flight content. Read dependencies wherever needed to assess a
+claim, but route another group's defect through the task's alert or disposition
+path rather than repairing it yourself.
+
+Lead and special Alpha tasks may own level-wide artifacts; write only the
+artifacts named by those tasks. Never rename an established item id. Do not
+write judge verdicts or stamps. Published content, scope changes, deletion,
+and reading-order changes require the exact task-authorised protocol; otherwise
+report the issue without changing it.
+
+## Review and repair standard
+
+Check the mathematical claim as written, not a charitable reconstruction.
+Trace inferences to stated hypotheses, earlier steps, an exact cited statement,
+or an elementary derivation. Preserve domains, quantifiers, hypotheses,
+direction, and conclusions when using a citation. Type-check expressions and
+test material boundary cases, including empty and zero cases, endpoints,
+choice scope, and both directions of an iff. Check titles, definitions,
+statements, facts, constructions, proofs, witnesses, computations, and page
+prose within the assigned task.
+
+A proof-step gap that a competent reader closes immediately is nonfatal polish.
+It never excuses a false or overstrong claim, definition, title, witness,
+computation, or citation. Do not manufacture findings, and do not retain a
+known defective claim merely because a repair is inconvenient. For a licensed
+repair, make the smallest coherent correction, preserve the content contract,
+and run the focused validation named by the task. A material rewrite invalidates
+its prior `verification.judge` record.
+
+## Judge and evidence discipline
+
+Judge coverage is current only for the model set and exact frozen context that
+`tools/models.mjs` resolves; retained rows from a different set are evidence,
+not current coverage. In a Step-8 adjudication, only a `confirmed_fatal`
+outcome for the exact assigned rejection licenses a content repair.
+`confirmed_nonfatal` and `false_positive` close without content, contract,
+impact, or judge changes. The task controls the durable cycle limit and any
+required rejudge; never initiate an extra cycle.
+
+Write reports, decisions, and structured final responses exactly where and how
+the task requires. Use the prescribed append interface for shared JSONL
+ledgers. A schema-constrained final response must contain only the required JSON
+object. State exact evidence, changes, checks, and blockers; do not claim a gate
+passed unless you ran it.
+
+
+---
+
+# This dispatch
+
+run: frontier-32
+role: alpha-adjudicate
+label: step8-preflight-a-3
+
+# Exact Step-8 repair envelope — 8-preflight, round 3
+
+The JSON envelope below is the authority for this dispatch. It contains every failing gate from the battery,
+complete relevant diagnostic records, exact current rejection tuples, and explicit run/published ownership.
+The full_evidence file retains the original untruncated battery output and all ownership assignments.
+Read its relevant sections if a diagnostic is ambiguous; do not infer absence from this scoped view.
+Act only on `assigned_items` and `live_tuples`; do not substitute the latest event-log row.
+
+```json
+{
+  "version": 1,
+  "run": "frontier-32",
+  "stage": "8-preflight",
+  "round": 3,
+  "mode": "preflight",
+  "group": "a",
+  "full_evidence": "research/frontier-32-8-preflight-repair-evidence-3-62fc9959a02345adc947e2750e8eaa846c64f6873afec8b546b2c39e5575bbf0.json",
+  "full_evidence_sha256": "62fc9959a02345adc947e2750e8eaa846c64f6873afec8b546b2c39e5575bbf0",
+  "failures": [
+    {
+      "id": "risk-report",
+      "stage": "8-preflight",
+      "why": "ERROR risk-review-missing [lem-local-logarithmic-derivative-zeta]: lem-local-logarithmic-derivative-zeta is high risk and lacks a complete Alpha risk_review",
+      "output": "MODERATE 3 [thm-p-is-contained-in-p-poly] 1:3 cited facts; 2:boundary-sensitive language\nMODERATE 3 [thm-p-poly-equals-p-with-polynomial-advice] 1:3 cited facts; 2:analytic limiting/completeness language\nHIGH 5 [thm-undecidable-languages-exist-in-p-poly] 1:2 cited facts; 2:existence, choice, uniqueness, or well-definedness; 2:boundary-sensitive language\nMODERATE 3 [prop-nc-one-is-contained-in-l-and-l-in-nc-two] 1:2 cited facts; 2:boundary-sensitive language\nORDINARY 1 [lem-counting-circuits-of-bounded-size] 1:2 cited facts\nORDINARY 1 [thm-shannon-almost-all-functions-require-exponential-circuits] 1:2 cited facts\nCRITICAL 9 [thm-circuit-sat-is-np-complete] 2:4 declared dependencies; 2:4 cited facts; 3:biconditional / both-direction claim; 2:boundary-sensitive language\nHIGH 7 [thm-karp-lipton-collapse] 3:biconditional / both-direction claim; 2:existence, choice, uniqueness, or well-definedness; 2:boundary-sensitive language\nMODERATE 3 [fs-polynomial-size-implies-uniform-generation] 1:2 cited facts; 2:boundary-sensitive language\nMODERATE 3 [fs-shannon-counting-gives-an-explicit-hard-function] 1:2 cited facts; 2:boundary-sensitive language\nORDINARY 2 [ex-p-poly-equals-p-with-polynomial-advice] 2:boundary-sensitive language\nORDINARY 2 [ex-karp-lipton-collapse] 2:existence, choice, uniqueness, or well-definedness\nORDINARY 2 [cex-polynomial-size-implies-uniform-generation] 2:boundary-sensitive language\nORDINARY 2 [prop-number-sat-is-in-sharpp] 2:boundary-sensitive language\nCRITICAL 9 [lem-cook-levin-can-be-made-parsimonious] 2:5 declared dependencies; 2:4 cited facts; 3:biconditional / both-direction claim; 2:boundary-sensitive language\nMODERATE 4 [thm-number-sat-is-sharpp-complete] 2:5 declared dependencies; 2:4 cited facts\nHIGH 6 [prop-fp-is-contained-in-sharpp] 1:2 cited facts; 3:biconditional / both-direction claim; 2:boundary-sensitive language\nORDINARY 2 [prop-sharpp-is-closed-under-sum-and-product] 2:boundary-sensitive language\nHIGH 6 [thm-pp-is-sign-testing-gap-p] 1:2 cited facts; 3:biconditional / both-direction claim; 2:boundary-sensitive language\nHIGH 6 [cor-majority-sat-is-pp-complete] 1:3 cited facts; 3:biconditional / both-direction claim; 2:boundary-sensitive language\nHIGH 6 [thm-pp-is-closed-under-complement] 1:2 cited facts; 3:biconditional / both-direction claim; 2:boundary-sensitive language\nMODERATE 4 [prop-np-is-contained-in-p-sharpp] 1:2 cited facts; 3:biconditional / both-direction claim\nORDINARY 0 [fs-sharpp-is-a-language-class] no signals\nHIGH 6 [fs-every-many-one-reduction-is-parsimonious] 1:3 cited facts; 3:biconditional / both-direction claim; 2:boundary-sensitive language\nORDINARY 2 [ex-cook-levin-can-be-made-parsimonious] 2:boundary-sensitive language\nORDINARY 2 [ex-np-is-contained-in-p-sharpp] 2:boundary-sensitive language\nORDINARY 0 [cex-sharpp-is-a-language-class] no signals\nORDINARY 0 [thm-graph-nonisomorphism-is-in-ip] no signals\nHIGH 6 [thm-invariance-theorem-for-plain-complexity] 2:existence, choice, uniqueness, or well-definedness; 2:boundary-sensitive language; 2:analytic limiting/completeness language\nORDINARY 2 [lem-most-strings-are-incompressible] 2:boundary-sensitive language\nORDINARY 2 [thm-kolmogorov-complexity-is-not-computable] 2:analytic limiting/completeness language\nORDINARY 2 [lem-hashing-commits-public-randomness] 2:boundary-sensitive language\nORDINARY 0 [thm-private-coin-ip-equals-public-coin-ip] no signals\nORDINARY 2 [fs-kolmogorov-complexity-is-an-absolute-integer] 2:boundary-sensitive language\nORDINARY 2 [thm-martin-lof-randomness-implies-computable-randomness] 2:induction, recursion, or minimality\nORDINARY 0 [lem-turing-reducibility-is-a-preorder] no signals\nHIGH 5 [lem-degree-order-is-representative-independent] 3:biconditional / both-direction claim; 2:existence, choice, uniqueness, or well-definedness\nORDINARY 0 [thm-turing-degrees-form-an-upper-semilattice] no signals\nHIGH 5 [lem-jump-is-well-defined-on-degrees] 3:biconditional / both-direction claim; 2:existence, choice, uniqueness, or well-definedness\nMODERATE 3 [thm-every-oracle-is-strictly-below-its-jump] 3:biconditional / both-direction claim\nMODERATE 3 [thm-jump-is-monotone] 3:biconditional / both-direction claim\nHIGH 5 [thm-relative-halting-is-oracle-ce-complete] 3:biconditional / both-direction claim; 2:boundary-sensitive language\nMODERATE 3 [cor-finite-jumps-match-arithmetical-levels] 3:biconditional / both-direction claim\nORDINARY 0 [lem-total-oracle-functional-has-computable-use-bound] no signals\nORDINARY 0 [prop-truth-table-implies-turing-reduction] no signals\nORDINARY 2 [lem-halting-oracle-is-not-computably-dominated] 2:induction, recursion, or minimality\nMODERATE 3 [thm-computably-dominated-characterizes-truth-table-reducibility] 2:4 declared dependencies; 1:8 numbered proof steps\nORDINARY 0 [thm-some-turing-reductions-are-not-truth-table-reductions] no signals\nORDINARY 2 [fs-an-oracle-machine-reads-the-infinite-oracle-at-once] 2:boundary-sensitive language\nORDINARY 0 [fs-degree-join-is-set-union] no signals\nHIGH 5 [ex-degree-order-is-representative-independent] 3:biconditional / both-direction claim; 2:boundary-sensitive language\nORDINARY 2 [ex-some-turing-reductions-are-not-truth-table-reductions] 2:boundary-sensitive language\nORDINARY 0 [cex-an-oracle-machine-reads-the-infinite-oracle-at-once] no signals\nrisk-report: 2 error(s), 478 item(s) routed",
+      "named_ids": [
+        "thm-p-is-contained-in-p-poly",
+        "thm-p-poly-equals-p-with-polynomial-advice",
+        "thm-undecidable-languages-exist-in-p-poly",
+        "prop-nc-one-is-contained-in-l-and-l-in-nc-two",
+        "lem-counting-circuits-of-bounded-size",
+        "thm-shannon-almost-all-functions-require-exponential-circuits",
+        "thm-circuit-sat-is-np-complete",
+        "thm-karp-lipton-collapse",
+        "fs-polynomial-size-implies-uniform-generation",
+        "fs-shannon-counting-gives-an-explicit-hard-function",
+        "ex-p-poly-equals-p-with-polynomial-advice",
+        "ex-karp-lipton-collapse",
+        "cex-polynomial-size-implies-uniform-generation",
+        "prop-number-sat-is-in-sharpp",
+        "lem-cook-levin-can-be-made-parsimonious",
+        "thm-number-sat-is-sharpp-complete",
+        "prop-fp-is-contained-in-sharpp",
+        "prop-sharpp-is-closed-under-sum-and-product",
+        "thm-pp-is-sign-testing-gap-p",
+        "cor-majority-sat-is-pp-complete",
+        "thm-pp-is-closed-under-complement",
+        "prop-np-is-contained-in-p-sharpp",
+        "fs-sharpp-is-a-language-class",
+        "fs-every-many-one-reduction-is-parsimonious",
+        "ex-cook-levin-can-be-made-parsimonious",
+        "ex-np-is-contained-in-p-sharpp",
+        "cex-sharpp-is-a-language-class",
+        "thm-graph-nonisomorphism-is-in-ip",
+        "thm-invariance-theorem-for-plain-complexity",
+        "lem-most-strings-are-incompressible",
+        "thm-kolmogorov-complexity-is-not-computable",
+        "lem-hashing-commits-public-randomness",
+        "thm-private-coin-ip-equals-public-coin-ip",
+        "fs-kolmogorov-complexity-is-an-absolute-integer",
+        "thm-martin-lof-randomness-implies-computable-randomness",
+        "lem-turing-reducibility-is-a-preorder",
+        "lem-degree-order-is-representative-independent",
+        "thm-turing-degrees-form-an-upper-semilattice",
+        "lem-jump-is-well-defined-on-degrees",
+        "thm-every-oracle-is-strictly-below-its-jump",
+        "thm-jump-is-monotone",
+        "thm-relative-halting-is-oracle-ce-complete",
+        "cor-finite-jumps-match-arithmetical-levels",
+        "lem-total-oracle-functional-has-computable-use-bound",
+        "prop-truth-table-implies-turing-reduction",
+        "lem-halting-oracle-is-not-computably-dominated",
+        "thm-computably-dominated-characterizes-truth-table-reducibility",
+        "thm-some-turing-reductions-are-not-truth-table-reductions",
+        "fs-an-oracle-machine-reads-the-infinite-oracle-at-once",
+        "fs-degree-join-is-set-union",
+        "ex-degree-order-is-representative-independent",
+        "ex-some-turing-reductions-are-not-truth-table-reductions",
+        "cex-an-oracle-machine-reads-the-infinite-oracle-at-once"
+      ]
+    }
+  ],
+  "mechanical_residue": "",
+  "live_items": [
+    {
+      "id": "thm-p-is-contained-in-p-poly",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-p-poly-equals-p-with-polynomial-advice",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-undecidable-languages-exist-in-p-poly",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-nc-one-is-contained-in-l-and-l-in-nc-two",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-counting-circuits-of-bounded-size",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-shannon-almost-all-functions-require-exponential-circuits",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-circuit-sat-is-np-complete",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-karp-lipton-collapse",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-polynomial-size-implies-uniform-generation",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-shannon-counting-gives-an-explicit-hard-function",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-p-poly-equals-p-with-polynomial-advice",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-karp-lipton-collapse",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cex-polynomial-size-implies-uniform-generation",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-number-sat-is-in-sharpp",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-cook-levin-can-be-made-parsimonious",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-number-sat-is-sharpp-complete",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-fp-is-contained-in-sharpp",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-sharpp-is-closed-under-sum-and-product",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-pp-is-sign-testing-gap-p",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cor-majority-sat-is-pp-complete",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-pp-is-closed-under-complement",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-np-is-contained-in-p-sharpp",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-sharpp-is-a-language-class",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-every-many-one-reduction-is-parsimonious",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-cook-levin-can-be-made-parsimonious",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-np-is-contained-in-p-sharpp",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cex-sharpp-is-a-language-class",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-graph-nonisomorphism-is-in-ip",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-invariance-theorem-for-plain-complexity",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-most-strings-are-incompressible",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-kolmogorov-complexity-is-not-computable",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-hashing-commits-public-randomness",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-private-coin-ip-equals-public-coin-ip",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-kolmogorov-complexity-is-an-absolute-integer",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-martin-lof-randomness-implies-computable-randomness",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-turing-reducibility-is-a-preorder",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-degree-order-is-representative-independent",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-turing-degrees-form-an-upper-semilattice",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-jump-is-well-defined-on-degrees",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-every-oracle-is-strictly-below-its-jump",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-jump-is-monotone",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-relative-halting-is-oracle-ce-complete",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cor-finite-jumps-match-arithmetical-levels",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-total-oracle-functional-has-computable-use-bound",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-truth-table-implies-turing-reduction",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-halting-oracle-is-not-computably-dominated",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-computably-dominated-characterizes-truth-table-reducibility",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-some-turing-reductions-are-not-truth-table-reductions",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-an-oracle-machine-reads-the-infinite-oracle-at-once",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-degree-join-is-set-union",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-degree-order-is-representative-independent",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-some-turing-reductions-are-not-truth-table-reductions",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cex-an-oracle-machine-reads-the-infinite-oracle-at-once",
+      "scope": "run",
+      "owner": "a"
+    }
+  ],
+  "assigned_items": [
+    {
+      "id": "thm-p-is-contained-in-p-poly",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-p-poly-equals-p-with-polynomial-advice",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-undecidable-languages-exist-in-p-poly",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-nc-one-is-contained-in-l-and-l-in-nc-two",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-counting-circuits-of-bounded-size",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-shannon-almost-all-functions-require-exponential-circuits",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-circuit-sat-is-np-complete",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-karp-lipton-collapse",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-polynomial-size-implies-uniform-generation",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-shannon-counting-gives-an-explicit-hard-function",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-p-poly-equals-p-with-polynomial-advice",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-karp-lipton-collapse",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cex-polynomial-size-implies-uniform-generation",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-number-sat-is-in-sharpp",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-cook-levin-can-be-made-parsimonious",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-number-sat-is-sharpp-complete",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-fp-is-contained-in-sharpp",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-sharpp-is-closed-under-sum-and-product",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-pp-is-sign-testing-gap-p",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cor-majority-sat-is-pp-complete",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-pp-is-closed-under-complement",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-np-is-contained-in-p-sharpp",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-sharpp-is-a-language-class",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-every-many-one-reduction-is-parsimonious",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-cook-levin-can-be-made-parsimonious",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-np-is-contained-in-p-sharpp",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cex-sharpp-is-a-language-class",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-graph-nonisomorphism-is-in-ip",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-invariance-theorem-for-plain-complexity",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-most-strings-are-incompressible",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-kolmogorov-complexity-is-not-computable",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-hashing-commits-public-randomness",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-private-coin-ip-equals-public-coin-ip",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-kolmogorov-complexity-is-an-absolute-integer",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-martin-lof-randomness-implies-computable-randomness",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-turing-reducibility-is-a-preorder",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-degree-order-is-representative-independent",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-turing-degrees-form-an-upper-semilattice",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-jump-is-well-defined-on-degrees",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-every-oracle-is-strictly-below-its-jump",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-jump-is-monotone",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-relative-halting-is-oracle-ce-complete",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cor-finite-jumps-match-arithmetical-levels",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-total-oracle-functional-has-computable-use-bound",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "prop-truth-table-implies-turing-reduction",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "lem-halting-oracle-is-not-computably-dominated",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-computably-dominated-characterizes-truth-table-reducibility",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "thm-some-turing-reductions-are-not-truth-table-reductions",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-an-oracle-machine-reads-the-infinite-oracle-at-once",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "fs-degree-join-is-set-union",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-degree-order-is-representative-independent",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "ex-some-turing-reductions-are-not-truth-table-reductions",
+      "scope": "run",
+      "owner": "a"
+    },
+    {
+      "id": "cex-an-oracle-machine-reads-the-infinite-oracle-at-once",
+      "scope": "run",
+      "owner": "a"
+    }
+  ],
+  "fatal_repair_licences": [
+    {
+      "id": "ex-degree-order-is-representative-independent",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "09bac1d078937988e6497b4175432dbb86842a5a701bc2b2b744a0852f0f516e",
+      "item_sha256": "ee7eb5d587cb63cfe39d717303346210adf1b17e42b0561749cd66c463c8f8a1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Replaced notation that conflicted with the jump operation by distinct representative symbols."
+    },
+    {
+      "id": "ex-p-poly-equals-p-with-polynomial-advice",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "ecd5f96a1b2db7f5bfad9257aecfe7f020cf031cd58b415f4cc4620791a34d2d",
+      "item_sha256": "520f17624315ca84c347b288bfb6335516fd10a9c57ee72dc43c87591221a53a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Restored the unused declared input to the encoded two-input example circuit."
+    },
+    {
+      "id": "fs-shannon-counting-gives-an-explicit-hard-function",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "24e7d89ff7a50a631347bbae9924d4f856acdb773e447a3a3d088e2c16348a5e",
+      "item_sha256": "2ad451a58e6aafcf302fc1f2e860b6b2515d9c69d021e6cd88753cf59bec95b3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Narrowed explicitness to polynomial-time evaluability and accounted for brute-force computable choice."
+    },
+    {
+      "id": "lem-cook-levin-can-be-made-parsimonious",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "a5b6cc8e42b84015487a24249812dd5f6e55d9f785e195d39478c2d75b1a2587",
+      "item_sha256": "918f374a37d3f431b417c8f3950a6e9fcfc08c2a261f5d5fe9fbfcbbf8f610ca",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Inserted a path-bijective one-tape normalization and a clock satisfying the tableau hypotheses."
+    },
+    {
+      "id": "lem-hashing-commits-public-randomness",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "e7e0f8cccb1859f6a2a08ada28fe9364c790527fcccd8cc9a7c4c72a793ad2df",
+      "item_sha256": "dfb7f59fcf91699eb7c1a7f4114089721c14eedda3bfa521446d7c03f480f670",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Aligned the title with the fibre-size statement actually proved."
+    },
+    {
+      "id": "thm-computably-dominated-characterizes-truth-table-reducibility",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "95e392b19db158897965f04a0e356b0da7b00b49d6a41ad941c11702ea4eca96",
+      "item_sha256": "33a9002629f387d7783504a63df3e58c673f5a811d73cbdda65c07b707d51efc",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Inserted the canonical natural-output representation, bounded-computation theorem, and finite maximum construction."
+    },
+    {
+      "id": "thm-every-oracle-is-strictly-below-its-jump",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "096a4b04128649d1dd7a486b78e53bc588ee059dbbb78fc05fe9f566355edc84",
+      "item_sha256": "eba0c2be99033e63202fabcdc0ad8d6fdd03ac1df065a0349f2944dd155d4aef",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Replaced unsupported relativized s-m-n with the explicit oracle compiler and a diagonal program."
+    },
+    {
+      "id": "thm-karp-lipton-collapse",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "8ab1ede83b7997b6ea413aeff3a7751567957cee4c89388b9937a1257fc19bc5",
+      "item_sha256": "c7c00238fe45ffff819149367b39a39d20ef998bdf9a8e38416a5670f391cbea",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Built search circuits for the prefix-extension language, avoiding a false witness-preservation inference."
+    },
+    {
+      "id": "thm-p-poly-equals-p-with-polynomial-advice",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "c49dc5481ae57a2a8c1a020cff87425d644a307ecab6580e3b63c6459e92316c",
+      "item_sha256": "c03527bc6b32dcdf586ddb3a9dcc55a009813ab157693d8098af8d66c7812c27",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Hardwired the original unpadded advice in the circuit for the encoded pair’s actual length."
+    },
+    {
+      "id": "thm-relative-halting-is-oracle-ce-complete",
+      "model": "gpt-5.6-terra",
+      "context_sha256": "62aa27edc8b44b83f5128ae20562588a5eaa61e65f521bc08c9911b52d44e7fc",
+      "item_sha256": "c45463ecfa4577b62e03654750af0fb3d091a8e5bfb2d8738c33b24b68395f2a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "group": "a",
+      "at": "2026-09-06T10:43:29.000Z",
+      "note": "Used the oracle syntax’s total hardwiring compiler and proved the exact reduction equivalence."
+    }
+  ],
+  "live_tuples": []
+}
+```
+
+---
+
+# Step 8 adjudication — group **a**, run `frontier-32`
+
+You are the group Alpha for batches **1**, **2**, **19**: 5 A/B pair(s), 10 page(s), 109 item(s), 0 open rejection(s) over 0 item(s).
+
+This is a fresh adjudication context. The durable digest below carries the
+findings from the rejection-blind whole-group reading at step 7 without
+replaying that reader's transcript. Nothing from step 3, step 6, or another
+group is assumed.
+Everything below is
+derived from disk by `tools/step8-scope.mjs`; no line of it is a judgement
+about mathematics.
+
+## What you recorded at step 7
+
+`research/frontier-32-alpha-a-step8-context.json` is what a group Alpha for this group wrote during step 7,
+while the judges were still sweeping and no verdict existed. It records the
+conventions your pages fix, which items the rest lean on, which published
+dependencies were actually opened, and what already looked thin.
+
+**Its `concerns` list is evidence, not decoration.** Each entry was found with
+nobody suggesting where to look. A judge rejection landing at the same place is
+two independent readings agreeing and should be very hard to call a
+`false_positive`; a rejection landing nowhere near any of them is not thereby
+wrong, but it is the case to read most carefully against the text.
+
+It is notes, not authority. Where it and the item files disagree, the files win.
+
+## Read scope, write scope
+
+**Read the entire assigned group and anything it cites.** `items/` holds every published item and
+every item this run has built, and your sandbox is the repository root. Open
+anything a rejection touches — a published dependency, another group's page,
+a definition three levels down. Adjudicating a citation objection without
+opening the cited item is exactly what the refuter rule forbids.
+
+**You may write only inside your own group.** A `confirmed_fatal` licenses a
+repair to an item in the batches listed above. If a rejection's real defect
+lies in an item owned by another group, do not repair it: record the finding
+in `research/frontier-32-step8-cross-group.jsonl` as
+`{from_group, item, owning_group, finding, severity, source_rejection:{id,model,context_sha256}}`
+and adjudicate your own rejection on what is true. The source tuple is
+provenance only; it cannot license a repair to the target. The gate routes a
+stable alert to the owning group, and a finding nobody answers fails the stage.
+
+## Your pages
+
+| batch | page | kind | category | order | requires |
+|---|---|---|---|---|---|
+| 1 | `boolean-circuits-and-nonuniform-complexity` | A | computability-theory | 631 | `the-cook-levin-theorem`, `finite-counting-and-binomial-coefficients`, `logarithmic-space-nl-and-reachability` |
+| 1 | `boolean-circuits-and-nonuniform-complexity-examples` | B | computability-theory | 632 | `boolean-circuits-and-nonuniform-complexity` |
+| 1 | `counting-complexity-and-sharpp` | A | computability-theory | 637 | `randomized-complexity-and-amplification`, `the-cook-levin-theorem` |
+| 1 | `counting-complexity-and-sharpp-examples` | B | computability-theory | 638 | `counting-complexity-and-sharpp` |
+| 2 | `interactive-proof-systems-and-public-coins` | A | computability-theory | 639 | `randomized-complexity-and-amplification`, `space-complexity-savitch-and-tqbf` |
+| 2 | `interactive-proof-systems-and-public-coins-examples` | B | computability-theory | 640 | `interactive-proof-systems-and-public-coins` |
+| 2 | `kolmogorov-complexity-and-algorithmic-randomness` | A | computability-theory | 653 | `acceptable-numberings-smn-and-the-recursion-theorem`, `randomized-complexity-and-amplification`, `finite-probability-spaces-and-random-variables` |
+| 2 | `kolmogorov-complexity-and-algorithmic-randomness-examples` | B | computability-theory | 654 | `kolmogorov-complexity-and-algorithmic-randomness` |
+| 19 | `oracle-computability-the-jump-and-turing-degrees` | A | computability-theory | 615 | `the-arithmetical-hierarchy-and-posts-theorem` |
+| 19 | `oracle-computability-the-jump-and-turing-degrees-examples` | B | computability-theory | 616 | `oracle-computability-the-jump-and-turing-degrees` |
+
+## Your content, in full
+
+Every item you own. This is the inventory, not the mathematics — open the
+files under `items/` for that.
+
+### `boolean-circuits-and-nonuniform-complexity` — Boolean Circuits and Nonuniform Complexity (16 item(s))
+
+- `def-boolean-circuit-size-depth-fanin-and-basis` · definition — Boolean circuits: basis, fan-in, size, and depth
+- `def-circuit-family-and-p-poly` · definition — Circuit families and P/poly
+- `thm-p-is-contained-in-p-poly` · theorem — Every polynomial-time language has polynomial-size circuits
+- `def-polynomial-advice-machine` · definition — Polynomial advice for a deterministic machine
+- `thm-p-poly-equals-p-with-polynomial-advice` · theorem — P/poly equals polynomial time with polynomial advice
+- `thm-undecidable-languages-exist-in-p-poly` · theorem — Some undecidable languages have polynomial-size circuits
+- `def-formula-and-branching-program` · definition — Boolean formulas and deterministic branching programs
+- `def-ac-zero-nc-one-and-nc` · definition — AC0, NC1, and NC under a stated uniformity convention
+- `prop-nc-one-is-contained-in-l-and-l-in-nc-two` · proposition — NC1 is contained in L, and L is contained in NC2
+- `lem-counting-circuits-of-bounded-size` · lemma — Counting bounded-size Boolean circuits
+- `thm-shannon-almost-all-functions-require-exponential-circuits` · theorem — Almost all Boolean functions require exponential circuit size
+- `def-circuit-sat` · definition — Circuit satisfiability
+- `thm-circuit-sat-is-np-complete` · theorem — CircuitSAT is NP-complete
+- `thm-karp-lipton-collapse` · theorem — The Karp--Lipton collapse
+- `fs-polynomial-size-implies-uniform-generation` · false-statement — Polynomial-size circuits imply a uniform polynomial-time generator
+- `fs-shannon-counting-gives-an-explicit-hard-function` · false-statement — Shannon counting gives an explicit circuit-hard function
+
+### `boolean-circuits-and-nonuniform-complexity-examples` — Boolean Circuits and Nonuniform Complexity: Examples and Counterexamples (3 item(s))
+
+- `ex-p-poly-equals-p-with-polynomial-advice` · example — Hardwiring a length-indexed advice string
+- `ex-karp-lipton-collapse` · example — A Sigma_2 verification of a candidate SAT circuit
+- `cex-polynomial-size-implies-uniform-generation` · counterexample — Unary circuits for an undecidable language are not uniformly generated
+
+### `counting-complexity-and-sharpp` — Counting Complexity and Sharp-P (17 item(s))
+
+- `def-sharpp-and-gap-p-functions` · definition — Sharp-P and Gap-P functions
+- `def-number-sat` · definition — NumberSAT
+- `prop-number-sat-is-in-sharpp` · proposition — NumberSAT belongs to Sharp-P
+- `def-parsimonious-reduction` · definition — Parsimonious reductions between counting functions
+- `lem-cook-levin-can-be-made-parsimonious` · lemma — The Cook--Levin construction can be made parsimonious
+- `thm-number-sat-is-sharpp-complete` · theorem — NumberSAT is Sharp-P-complete under parsimonious reductions
+- `def-fp-function-class` · definition — The nonnegative function class FP
+- `prop-fp-is-contained-in-sharpp` · proposition — FP is contained in Sharp-P
+- `prop-sharpp-is-closed-under-sum-and-product` · proposition — Sharp-P is closed under sum and product
+- `def-majority-sat` · definition — MajoritySAT
+- `thm-pp-is-sign-testing-gap-p` · theorem — PP is strict sign testing for Gap-P
+- `cor-majority-sat-is-pp-complete` · corollary — MajoritySAT is PP-complete
+- `thm-pp-is-closed-under-complement` · theorem — PP is closed under complement
+- `def-p-with-a-sharpp-oracle` · definition — Polynomial time with a Sharp-P oracle
+- `prop-np-is-contained-in-p-sharpp` · proposition — NP is contained in P with a Sharp-P oracle
+- `fs-sharpp-is-a-language-class` · false-statement — Sharp-P is a language class
+- `fs-every-many-one-reduction-is-parsimonious` · false-statement — Every decision many-one reduction is parsimonious
+
+### `counting-complexity-and-sharpp-examples` — Counting Complexity and Sharp-P: Examples and Counterexamples (3 item(s))
+
+- `ex-cook-levin-can-be-made-parsimonious` · example — A two-branch computation and its parsimonious tableau formula
+- `ex-np-is-contained-in-p-sharpp` · example — Deciding satisfiability by a NumberSAT oracle query
+- `cex-sharpp-is-a-language-class` · counterexample — NumberSAT is not a Boolean membership predicate
+
+### `interactive-proof-systems-and-public-coins` — Interactive Proof Systems and Public Coins (16 item(s))
+
+- `def-interactive-proof-transcript-round-and-strategy` · definition — Interactive-proof transcripts, rounds, and prover strategies
+- `def-completeness-and-soundness` · definition — Completeness and soundness of an interactive protocol
+- `def-ip` · definition — The class IP
+- `prop-np-is-contained-in-ip` · proposition — NP is contained in IP
+- `lem-sequential-repetition-amplifies-error` · lemma — Sequential repetition amplifies completeness and soundness gaps
+- `def-private-coin-public-coin-and-arthur-merlin-protocol` · definition — Private-coin, public-coin, and Arthur--Merlin protocols
+- `lem-hashing-commits-public-randomness` · lemma — Pairwise-independent hashing commits public randomness
+- `thm-private-coin-ip-equals-public-coin-ip` · theorem — Private-coin IP equals public-coin IP
+- `def-protocol-game-tree-and-value` · definition — Protocol game trees and their values
+- `lem-optimal-prover-may-be-deterministic` · lemma — An optimal prover may be deterministic
+- `lem-protocol-value-is-computable-in-polynomial-space` · lemma — A polynomial-round protocol value is computable in polynomial space
+- `thm-ip-is-contained-in-pspace` · theorem — IP is contained in PSPACE
+- `def-graph-nonisomorphism-protocol` · definition — The graph-nonisomorphism interactive protocol
+- `thm-graph-nonisomorphism-is-in-ip` · theorem — Graph nonisomorphism is in IP
+- `fs-soundness-quantifies-only-over-honest-provers` · false-statement — False: soundness quantifies only over honest provers
+- `fs-the-prover-must-run-in-polynomial-time` · false-statement — False: the prover must run in polynomial time
+
+### `interactive-proof-systems-and-public-coins-examples` — Interactive Proof Systems and Public Coins: Examples and Counterexamples (3 item(s))
+
+- `ex-sequential-repetition-amplifies-error` · example — Sequential repetition of a constant-gap protocol
+- `ex-graph-nonisomorphism-is-in-ip` · example — The graph-nonisomorphism protocol on a graph pair
+- `cex-soundness-quantifies-only-over-honest-provers` · counterexample — A cheating-prover witness to the soundness quantifier
+
+### `kolmogorov-complexity-and-algorithmic-randomness` — Kolmogorov Complexity and Algorithmic Randomness (22 item(s))
+
+- `def-description-machine-and-plain-kolmogorov-complexity` · definition — Description machines and plain Kolmogorov complexity
+- `def-optimal-description-machine` · definition — Optimal description machines
+- `thm-invariance-theorem-for-plain-complexity` · theorem — Invariance theorem for plain Kolmogorov complexity
+- `lem-most-strings-are-incompressible` · lemma — Most finite strings are incompressible
+- `thm-kolmogorov-complexity-is-not-computable` · theorem — Kolmogorov complexity is not computable
+- `def-conditional-kolmogorov-complexity` · definition — Conditional Kolmogorov complexity
+- `lem-basic-conditional-complexity-inequalities` · lemma — Basic conditional-complexity inequalities
+- `def-prefix-free-machine-and-prefix-complexity` · definition — Prefix-free machines and prefix complexity
+- `thm-kraft-inequality` · theorem — Kraft inequality and effective prefix-code allocation
+- `thm-invariance-for-prefix-complexity` · theorem — Invariance theorem for prefix complexity
+- `thm-symmetry-of-information-up-to-logarithmic-terms` · theorem — Symmetry of information up to logarithmic terms
+- `def-incompressibility-method` · definition — The incompressibility method
+- `def-effectively-open-set-in-cantor-space` · definition — Effectively open sets in Cantor space
+- `def-martin-lof-test-and-random-sequence` · definition — Martin-Löf tests and random sequences
+- `lem-universal-martin-lof-test-exists` · lemma — A universal Martin-Löf test exists
+- `thm-levin-schnorr-characterization` · theorem — Levin--Schnorr characterization of Martin-Löf randomness
+- `def-computable-martingale` · definition — Computable martingales on binary strings
+- `thm-martin-lof-randomness-implies-computable-randomness` · theorem — Martin-Löf randomness implies computable randomness
+- `def-effective-hausdorff-dimension` · definition — Effective Hausdorff dimension
+- `thm-effective-dimension-is-liminf-prefix-complexity-rate` · theorem — Effective dimension is the liminf prefix-complexity rate
+- `fs-kolmogorov-complexity-is-an-absolute-integer` · false-statement — False: Kolmogorov complexity is an absolute integer
+- `fs-normality-implies-algorithmic-randomness` · false-statement — False: normality implies algorithmic randomness
+
+### `kolmogorov-complexity-and-algorithmic-randomness-examples` — Kolmogorov Complexity and Algorithmic Randomness: Examples and Counterexamples (3 item(s))
+
+- `ex-most-strings-are-incompressible` · example — Counting incompressible strings of a fixed length
+- `ex-effective-dimension-is-liminf-prefix-complexity-rate` · example — An effective-dimension calculation from prefix complexity
+- `cex-kolmogorov-complexity-is-an-absolute-integer` · counterexample — Changing an optimal machine changes finite-string complexity
+
+### `oracle-computability-the-jump-and-turing-degrees` — Oracle Computability, the Jump, and Turing Degrees (23 item(s))
+
+- `def-oracle-turing-machine` · definition
+- `def-turing-reducibility-and-equivalence` · definition
+- `lem-turing-reducibility-is-a-preorder` · lemma
+- `def-turing-degree-and-degree-order` · definition
+- `lem-degree-order-is-representative-independent` · lemma
+- `def-tagged-join-of-oracles` · definition
+- `thm-turing-degrees-form-an-upper-semilattice` · theorem
+- `def-turing-jump` · definition
+- `lem-jump-is-well-defined-on-degrees` · lemma
+- `thm-every-oracle-is-strictly-below-its-jump` · theorem
+- `thm-jump-is-monotone` · theorem
+- `def-oracle-ce-completeness` · definition
+- `thm-relative-halting-is-oracle-ce-complete` · theorem
+- `cor-finite-jumps-match-arithmetical-levels` · corollary
+- `def-truth-table-reduction` · definition
+- `lem-total-oracle-functional-has-computable-use-bound` · lemma
+- `prop-truth-table-implies-turing-reduction` · proposition
+- `def-computably-dominated-oracle` · definition
+- `lem-halting-oracle-is-not-computably-dominated` · lemma
+- `thm-computably-dominated-characterizes-truth-table-reducibility` · theorem
+- `thm-some-turing-reductions-are-not-truth-table-reductions` · theorem
+- `fs-an-oracle-machine-reads-the-infinite-oracle-at-once` · false-statement
+- `fs-degree-join-is-set-union` · false-statement
+
+### `oracle-computability-the-jump-and-turing-degrees-examples` — Oracle Computability, the Jump, and Turing Degrees: Examples and Counterexamples (3 item(s))
+
+- `ex-degree-order-is-representative-independent` · example
+- `ex-some-turing-reductions-are-not-truth-table-reductions` · example
+- `cex-an-oracle-machine-reads-the-infinite-oracle-at-once` · counterexample
+
+## Your seams
+
+**No dependency edge crosses your group boundary.** Every `requires` your
+pages declare points inside your own batches or at published content. A
+cross-group finding is therefore unexpected here; if you record one, say
+what made you look.
+
+## Step-7 reader warnings
+
+2 warning(s) a Step-7 reader recorded in items you own.
+They were read-only and could not repair or adjudicate them. You own these decisions.
+
+- **s8a-24fff07f65ed1393974a6566 · `thm-levin-schnorr-characterization`** (from group a, would-be-fatal) — Proof step 1.1 says that K(X↾n)<n-c for infinitely many n, for one fixed c, yields a Martin-Löf test witnessing nonrandomness. A fixed deficiency only supplies a cover with one fixed measure scale; the Levin--Schnorr contrapositive needs unbounded deficiencies (with correctly shifted test levels). As written, the two proof directions do not establish the stated iff.
+- **s8a-c8e9361232de61bf9cbc2169 · `thm-computably-dominated-characterizes-truth-table-reducibility`** (from group a, would-be-fatal) — In reverse-direction step 1.2, the hypothesis and def-truth-table-reduction yield a bit-valued functional for a set Y, but the proof immediately asserts an everywhere-total natural-valued functional Ψ computing an arbitrary X-computable function f on every oracle. Under the stated definition this does not follow without the canonical coding/time-bound construction; naively searching a coded graph may fail to halt on other oracles. The cited source's proof uses a bounded computation theorem at this point, which is absent here.
+
+Append one owning-group disposition per warning to `research/frontier-32-step8-alert-decisions.jsonl`.
+A Step-7 reader warning may be adjudicated `confirmed_fatal` and repaired with exact
+pre/post guard hashes. A later Step-8 cross-group alert still requires a real targeted
+judge rejection; never reuse its source rejection as target evidence.
+
+## Your rejections
+
+**None open at render time.** That is a real outcome, not an error: Terra
+may have passed every item you own. Verify it against
+`research/frontier-32-judge.jsonl` yourself before reporting nothing to do —
+a rejection recorded after this file was rendered is still yours.
+
+---
+
+# Step 8 — targeted repair-integrity review, `frontier-32`
+
+The generated repair envelope above is authoritative. It supplies every failed
+gate with full output, the exact live ids and rejection tuples, and each id's
+run or published scope. Work only on `assigned_items`, using the live tuples
+and retained fatal repair licences as evidence. Rerun focused checks where supported.
+
+Resolve every assigned finding in this pass, keeping the existing mathematics
+and detail except where an exact fatal licence requires correction. A serial
+reviewer must establish ownership before editing an ambiguous record. If the
+detector or repair authority is wrong, report the cause; unchanged retries stop.
+
+Complete a repair already licensed by an exact `confirmed_fatal` adjudication,
+including the envelope's `fatal_repair_licences`. These bind validated original
+rejections to the pre-Step-8 baseline even after a repair makes their verdicts
+stale. Empty `live_tuples` does not revoke these licences. Use them only to
+complete the assigned repair; do not readjudicate settled findings.
+You may also correct a documentary contract, manifest, impact or verification
+record to match the current proof. Do not edit a nonfatal or false-positive item, broaden
+the scope, run a judge sweep, or run a workflow transition.
+
+Preserve append-only ledgers and return the gate, ids, licensing rows, changed
+files, targeted checks, and blocker. This task applies before `8-rejudge`; a
+frozen-cutover dispatch uses the Step-8 close task instead.
+
+
+## Mathematical context continuity
+
+Read exact task paths first. Search current owned artifacts before historical runs;
+exclude dispatch logs from routine content searches. Fetch complete relevant source
+sections and dependency statements, using bounded output chunks. A truncated result
+is not evidence of absence; continue reading until the required argument is complete.
+Do not dump entire ledgers, source books, or repository-wide search results into context.
+
+For writing roles, after each completed item update the task-authorized notes or report with the
+current item IDs, exact claim and conventions, source paths/URLs and locators,
+dependency IDs, decisions, validation results, unresolved obligations, and next action.
+Automatic compaction can occur mid-proof. After compaction or handoff, reread the
+current item, relevant dependency statements, source passages, and these obligations
+before continuing a proof or repair. A summary is a navigation aid, never a substitute
+for mathematical evidence. If a hypothesis or source qualification cannot be
+recovered, record the blocker rather than infer it. Preserve all independent reviews
+and exact-hash gates. Never mark an unfinished obligation complete to save context.
+Checkpoint only in the task-authorized notes/report; do not create transcripts or alter other owners’ artifacts.

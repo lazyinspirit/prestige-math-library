@@ -70,6 +70,7 @@ parts:
       - property-star-and-comb-outcomes
       - from-generalized-niceness-to-erdos-hajnal
       - the-structural-criterion-for-property-star
+      - co-e-free-comb-structure
 ---
 
 ## counting
@@ -130,14 +131,12 @@ degree and gives the five colour theorem.
 
 ## probability
 
-Finite probability makes expectation a tool for homogeneous sets, induced-copy
-estimates, sparse pairs, and Erdős--Hajnal alternatives. Modules, substitutions, blockades,
-pure pairs, stars, combs, restrictions, sparsification give clique-or-stable-set
-structure for the bull and $C_5$. Generalized niceness and thinning yield restricted-subgraph
-or polynomial homogeneous-set alternatives; leaf reducibility, Rödl initialization,
-complement invariance return to the forbidden family.
-The structural criterion supplies its precise input. Each relevant comb block has an
-$\mathcal F_1$-free part and a pure blockade with $\mathcal F_2$-free pattern: a large first
-part gives a homogeneous set and a wide transversal gives a pure blockade. Otherwise,
-integral geometric layers of a decreasing partition yield a wide layer or contradict the
-large $X$-part, proving the three property (*) outcomes with floor-safe constants.
+Finite probability and expectation turn density into witnesses for homogeneous sets,
+induced-copy estimates, sparse pairs, and Erdős--Hajnal alternatives. Modules,
+substitutions, blockades, pure pairs, stars, combs, restriction, and sparsification develop
+clique-or-stable-set structure for the bull and $C_5$, while generalized niceness, thinning,
+leaf reducibility, Rödl initialization, and complement invariance return to the forbidden
+family. The co-$E$-free comb construction makes the local criterion concrete: overlap
+quotients split each $H_5$ comb block into a $\{H_5,\operatorname{co}\text{-}E\}$-free part
+and a pure blockade with that forbidden pattern. Together with the Erdős--Hajnal property for
+this pair, the special-vertex criterion yields property $(*)$ for $\{E\}$.

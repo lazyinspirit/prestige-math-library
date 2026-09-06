@@ -8,7 +8,8 @@
     "companion": "boolean-circuits-and-nonuniform-complexity-examples",
     "requires": [
       "the-cook-levin-theorem",
-      "finite-counting-and-binomial-coefficients"
+      "finite-counting-and-binomial-coefficients",
+      "logarithmic-space-nl-and-reachability"
     ],
     "items": [
       {
@@ -52,14 +53,15 @@
         "strategy": "For circuit families, encode the length-n circuit as advice and evaluate its gates in topological order. Conversely, hardwire the finitely many advice bits into a circuit simulating the advised machine, charging the advice length and the simulation separately.",
         "deps": [
           "def-circuit-family-and-p-poly",
-          "def-polynomial-advice-machine"
+          "def-polynomial-advice-machine",
+          "thm-p-is-contained-in-p-poly"
         ]
       },
       {
         "id": "thm-undecidable-languages-exist-in-p-poly",
         "kind": "theorem",
         "title": "Some undecidable languages have polynomial-size circuits",
-        "strategy": "Choose an undecidable unary language and, for each length, use a constant-output circuit giving that one membership bit. Prove undecidability by the standard diagonal/countability argument rather than confusing nonuniform existence with an effective circuit construction.",
+        "strategy": "Choose an undecidable tally language U and form the binary length language L={x : 1^{|x|} is in U}. For each length n, a constant-output circuit gives the single bit U(1^n), while restricting a decider for L to inputs 1^n would decide U. This preserves undecidability without confusing nonuniform existence with an effective circuit construction.",
         "deps": [
           "def-circuit-family-and-p-poly"
         ]
@@ -68,7 +70,7 @@
         "id": "def-formula-and-branching-program",
         "kind": "definition",
         "title": "Boolean formulas and deterministic branching programs",
-        "strategy": "Define a formula as a circuit of fan-out one and a deterministic branching program as an acyclic labelled query graph with 0/1 sinks. State the distinct size measures so later comparisons do not identify the models.",
+        "strategy": "Define a formula as a rooted tree with repeated variable or constant leaves permitted, counting connective gates and constant occurrences but not variable leaves. Define a deterministic branching program as a finite acyclic query graph with bit-labelled outgoing edges and 0/1 sinks, measured by vertices.",
         "deps": [
           "def-boolean-circuit-size-depth-fanin-and-basis"
         ]
@@ -79,16 +81,18 @@
         "title": "AC0, NC1, and NC under a stated uniformity convention",
         "strategy": "Define AC0 using polynomial size, constant depth, and unbounded-fan-in AND/OR/NOT; define NC1 and NC using polynomial-size bounded-fan-in circuits of logarithmic and polylogarithmic depth. State within the item the logspace-uniform circuit-description convention used for the ensuing containment, without asserting it for arbitrary P/poly families.",
         "deps": [
-          "def-boolean-circuit-size-depth-fanin-and-basis"
+          "def-boolean-circuit-size-depth-fanin-and-basis",
+          "def-logspace-uniform-circuit-family"
         ]
       },
       {
         "id": "prop-nc-one-is-contained-in-l-and-l-in-nc-two",
         "kind": "proposition",
         "title": "NC1 is contained in L, and L is contained in NC2",
-        "strategy": "Evaluate a log-depth bounded-fan-in circuit by a depth-first traversal retaining a logarithmic-size path and gate address. For the reverse inclusion, encode reachability between configurations by repeated squaring, specify a uniform indexing scheme, and bound depth by O(log^2 n). The proposition states the needed read-only-input definition of L inline.",
+        "strategy": "Evaluate a log-depth bounded-fan-in circuit in logarithmic space by storing one O(log n)-bit child-choice path and recomputing the current gate address from the output gate whenever a value is needed; do not store a logarithmic stack of gate addresses. For the reverse inclusion, encode reachability between the polynomially many configurations of a logspace machine by repeated squaring, specify a logspace-uniform indexing scheme, and bound depth by O(log^2 n).",
         "deps": [
-          "def-ac-zero-nc-one-and-nc"
+          "def-ac-zero-nc-one-and-nc",
+          "def-l-and-nl"
         ]
       },
       {
@@ -136,11 +140,9 @@
         "id": "thm-karp-lipton-collapse",
         "kind": "theorem",
         "title": "The Karp--Lipton collapse",
-        "strategy": "Assume NP is contained in P/poly, use a candidate polynomial-size SAT circuit as existential information, and universally test its claimed correctness on formulas before simulating the hierarchy quantifiers. Define PH and Sigma_2^p in the theorem statement, then conclude PH = Sigma_2^p with the hypothesis and quantifier order visible.",
+        "strategy": "Assume NP is contained in P/poly and use SAT self-reducibility to obtain a polynomial-size circuit that outputs a satisfying assignment whenever one exists. For a Pi_2 predicate, reduce each existential tail at (x,y) to a formula f(x,y), then express membership as the existence of one polynomial-size search circuit C such that, for every y, C(f(x,y)) outputs an assignment satisfying f(x,y). The deterministic predicate checks only the displayed assignment, not the globally uncheckable claim that C decides SAT. Define PH and Sigma_2^p in the statement and conclude PH = Sigma_2^p with the hypothesis and quantifier order visible.",
         "deps": [
-          "def-circuit-family-and-p-poly",
-          "thm-p-poly-equals-p-with-polynomial-advice",
-          "thm-circuit-sat-is-np-complete"
+          "def-circuit-family-and-p-poly"
         ]
       },
       {
@@ -188,7 +190,7 @@
         "id": "ex-karp-lipton-collapse",
         "kind": "example",
         "title": "A Sigma_2 verification of a candidate SAT circuit",
-        "strategy": "Write the existential choice of a circuit description followed by the universal challenge formula and the deterministic check that the description agrees with satisfiability. Use the display to show why a circuit merely correct on selected examples would not suffice.",
+        "strategy": "For a concrete Pi_2 predicate, display the existential choice of a polynomial-size SAT search circuit C followed by the universal y and the deterministic check that C(f(x,y)) is a satisfying assignment of f(x,y). Emphasize that the check verifies the supplied witness locally and never attempts to certify global agreement with satisfiability.",
         "deps": [
           "thm-karp-lipton-collapse"
         ]
@@ -197,7 +199,7 @@
         "id": "cex-polynomial-size-implies-uniform-generation",
         "kind": "counterexample",
         "title": "Unary circuits for an undecidable language are not uniformly generated",
-        "strategy": "Let the single circuit at length n output the n-th bit of an undecidable unary language. Each circuit has constant size, but a uniform generator would decide that language by constructing the circuit and evaluating it on 1^n.",
+        "strategy": "For an undecidable tally language U, let the circuit at length n be the constant bit indicating whether 1^n is in U, so the resulting binary length language has constant-size circuits. A uniform generator would decide U by constructing that circuit and evaluating it on 1^n.",
         "deps": [
           "thm-undecidable-languages-exist-in-p-poly",
           "fs-polynomial-size-implies-uniform-generation"
@@ -254,7 +256,7 @@
         "id": "lem-cook-levin-can-be-made-parsimonious",
         "kind": "lemma",
         "title": "The Cook--Levin construction can be made parsimonious",
-        "strategy": "Use a tableau encoding whose well-formedness variables are uniquely fixed by an accepting computation, and use equivalence clauses rather than merely equisatisfiable existential extensions. Prove a bijection between accepting paths of the source machine and satisfying assignments of the constructed formula, then retain the polynomial-time map bound.",
+        "strategy": "Use a path-bijective one-tape simulator with transition-specific intermediate states. Construct the one-hot tableau formula and its complete lexicographically ordered variable list with no auxiliary variables. Prove inverse maps between accepting tagged paths and satisfying assignments and polynomial construction time.",
         "deps": [
           "def-parsimonious-reduction",
           "def-number-sat",
@@ -325,7 +327,7 @@
         "id": "cor-majority-sat-is-pp-complete",
         "kind": "corollary",
         "title": "MajoritySAT is PP-complete",
-        "strategy": "Membership uses the uniformly guessed assignment. For hardness, apply the parsimonious Cook--Levin map to a PP machine padded to a fixed number of binary choices, so the strict majority threshold is preserved exactly.",
+        "strategy": "Membership guesses the declared assignment uniformly. For hardness, normalize the PP machine to exactly 2^p paths with a accepting paths, and use parsimonious Cook--Levin to obtain a formula phi on q declared variables with #phi=a, padding by forced variables so q>=p. Introduce a selector z and a polynomial-size comparison formula T on those q variables with exactly 2^q-2^{p-1} satisfying assignments; then theta=(not z and phi) or (z and T) has a+2^q-2^{p-1} satisfying assignments out of 2^{q+1}, which is a strict majority exactly when a>2^{p-1}.",
         "deps": [
           "def-majority-sat",
           "thm-pp-is-sign-testing-gap-p",
@@ -336,7 +338,7 @@
         "id": "thm-pp-is-closed-under-complement",
         "kind": "theorem",
         "title": "PP is closed under complement",
-        "strategy": "Negate the Gap-P witness and use strict sign testing to exchange positive and negative gaps; resolve the zero-gap case by the standard one-path offset construction before applying the characterization.",
+        "strategy": "If L={x:g(x)>0} for an integer-valued Gap-P function g, then its complement is {x:g(x)<=0}={x:1-g(x)>0}. Show directly that Gap-P is closed under negation and addition of the constant-one gap, then apply strict sign testing; the offset handles the zero case exactly.",
         "deps": [
           "def-sharpp-and-gap-p-functions",
           "thm-pp-is-sign-testing-gap-p"

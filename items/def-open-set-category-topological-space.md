@@ -8,6 +8,10 @@ provenance:
   proof: not-applicable
 deps: [def-category, def-topological-space]
 verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-06
   audited: 2026-09-04
 sources:
   scraped: []

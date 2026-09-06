@@ -10,6 +10,10 @@ deps: [def-sheaf-on-topological-space, def-topology-basis-subbasis]
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-06
 sources:
   scraped: []
   references:

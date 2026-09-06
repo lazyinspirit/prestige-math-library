@@ -1,0 +1,9 @@
+---
+page: cw-complexes-and-cellular-homology
+title: Cw Complexes and Cellular Homology
+status: draft
+items: [def-cell-attachment-by-a-characteristic-map, lem-the-interior-of-an-attached-cell-embeds-openly-in-its-closure, def-cw-complex-with-closure-finiteness-and-weak-topology, def-skeleta-cw-subcomplex-and-relative-cw-complex, prop-cw-skeleta-are-closed-and-cells-form-a-disjoint-partition, lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells, cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex, prop-relative-cw-inclusions-are-cofibrations, prop-a-cw-complex-is-the-colimit-of-its-skeleta-in-the-weak-topology, thm-relative-homology-of-consecutive-cw-skeleta, def-oriented-cellular-chain-group, def-cellular-boundary-from-three-consecutive-skeleta, lem-the-cellular-boundary-squares-to-zero, def-cellular-homology, lem-skeletal-homology-stabilizes-away-from-the-cell-dimension, lem-homology-of-an-infinite-cw-complex-is-the-colimit-of-skeletal-homology, thm-cellular-homology-computes-singular-homology, thm-relative-cellular-homology-computes-relative-singular-homology, def-incidence-number-of-two-cw-cells, thm-cellular-boundary-is-the-incidence-degree-matrix, prop-cellular-maps-induce-cellular-chain-maps, cor-a-cw-complex-with-no-cells-in-adjacent-dimensions-has-zero-cellular-boundary, def-euler-characteristic-of-a-finite-cw-complex, thm-euler-poincare-formula-for-finite-cw-complexes, prop-euler-characteristic-is-additive-for-finite-cw-pairs, prop-euler-characteristic-of-a-finite-cw-product]
+examples: []
+---
+
+A CW decomposition gives a filtration whose consecutive relative homology groups are free on cells.  Subcomplexes contain the full closure of every cell they contain, and in dimension one the cellular boundary records terminal vertex minus initial vertex.  The resulting cellular complex computes singular homology, including for infinite complexes and CW pairs.

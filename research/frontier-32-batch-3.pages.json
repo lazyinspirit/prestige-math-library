@@ -1,0 +1,509 @@
+[
+  {
+    "order": 288.039,
+    "id": "radon-measures-and-the-riesz-markov-kakutani-theorem",
+    "kind": "A",
+    "category": "measure-theory",
+    "title": "Radon Measures and the Riesz Markov Kakutani Theorem",
+    "companion": "radon-measures-and-the-riesz-markov-kakutani-theorem-examples",
+    "requires": [
+      "absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus-examples",
+      "partitions-of-unity-and-paracompactness"
+    ],
+    "items": [
+      {
+        "id": "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+        "kind": "definition",
+        "title": "Compact support, C_c(X), and C_0(X) on a locally compact Hausdorff space",
+        "strategy": "For an LCH space X, define supp(f) as the closure of {x : f(x) != 0}, define C_c(X) by compact support, and define C_0(X) by vanishing outside a compact set up to every epsilon. State the real-valued convention for positive functionals and the complex-valued convention used later for C_0(X).",
+        "deps": [
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "def-compact-space"
+        ]
+      },
+      {
+        "id": "def-cutoff-relation-f-prec-u",
+        "kind": "definition",
+        "title": "The compactly supported cutoff relation f prec U",
+        "strategy": "For U open, define f prec U to mean f belongs to C_c(X), 0 <= f <= 1, and supp(f) is contained in U. Keep this relation distinct from ordinary pointwise domination, since it is the admissible class in the RMK outer-content formula.",
+        "deps": [
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space"
+        ]
+      },
+      {
+        "id": "def-positive-linear-functional-on-c-c",
+        "kind": "definition",
+        "title": "Positive linear functionals on C_c(X)",
+        "strategy": "Define a positive real linear functional Lambda on C_c(X) by Lambda(f) >= 0 whenever f >= 0 pointwise. State explicitly that positivity is first a real C_c(X) notion; the bounded complex C_0(X) theorem is a later, separate landmark.",
+        "deps": [
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space"
+        ]
+      },
+      {
+        "id": "def-radon-measure-on-an-lch-space",
+        "kind": "definition",
+        "title": "Radon measure on a locally compact Hausdorff space",
+        "strategy": "Fix the page convention: a Radon Borel measure is finite on compact sets, outer regular on every Borel set, and inner regular on open sets. Record that this is the convention called regular in Cohn, and do not use it for the stronger all-Borel inner-regularity property.",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-measure",
+          "def-compact-space"
+        ]
+      },
+      {
+        "id": "def-regular-borel-measure-on-an-lch-space",
+        "kind": "definition",
+        "title": "Regular Borel measure on a locally compact Hausdorff space",
+        "strategy": "Define a regular Borel measure here to be a Radon measure that is inner regular on every Borel set, including sets of infinite measure. Contrast this strong convention with the preceding weak-Radon convention and state both approximation formulas.",
+        "deps": [
+          "def-radon-measure-on-an-lch-space"
+        ]
+      },
+      {
+        "id": "def-regular-complex-borel-measure-on-an-lch-space",
+        "kind": "definition",
+        "title": "Regular complex Borel measures",
+        "strategy": "Define a complex Borel measure mu to be regular when its total variation |mu| is a regular Borel measure in the page's strong convention. Retain total variation rather than a pointwise notion of regularity, because it is what controls the C_0 dual norm.",
+        "deps": [
+          "def-regular-borel-measure-on-an-lch-space",
+          "def-complex-measure",
+          "def-total-variation-of-a-signed-or-complex-measure"
+        ]
+      },
+      {
+        "id": "lem-positive-linear-functionals-on-c-c-are-monotone",
+        "kind": "lemma",
+        "title": "A positive linear functional on C_c(X) is monotone",
+        "strategy": "For f <= g, apply positivity to g-f and use linearity to obtain Lambda(f) <= Lambda(g). Record the compact-support closure under subtraction so the argument is internal to C_c(X).",
+        "deps": [
+          "def-positive-linear-functional-on-c-c"
+        ]
+      },
+      {
+        "id": "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+        "kind": "lemma",
+        "title": "LCH Urysohn cutoff for a compact set inside an open set",
+        "strategy": "Given compact K inside open U in an LCH space, first choose V with K subset V subset closure(V) subset U and compact closure. Apply the published Urysohn lemma on the compact Hausdorff closure(V), extend by zero, and verify chi_K <= f <= chi_U with f in C_c(X).",
+        "deps": [
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "thm-urysohn-lemma"
+        ]
+      },
+      {
+        "id": "lem-finite-lch-partition-of-unity-near-a-compact-set",
+        "kind": "lemma",
+        "title": "A finite compactly supported partition of unity near a compact set",
+        "strategy": "For a compact K covered by finitely many open U_i, shrink around K, form cutoff functions supported in U_i, and normalize their positive sum on a neighbourhood of K. Extend the normalized functions by zero only after proving the denominator is bounded away from zero there; retain nonnegativity and compact supports.",
+        "deps": [
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-cutoff-relation-f-prec-u",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "cor-compact-hausdorff-partitions-of-unity"
+        ]
+      },
+      {
+        "id": "lem-rmk-functional-outer-content-is-well-defined",
+        "kind": "lemma",
+        "title": "The RMK functional outer content is well defined",
+        "strategy": "For a positive Lambda define rho(U)=sup{Lambda(f): f prec U} on open U and mu^*(E)=inf{rho(V): V open, E subset V}. Prove rho is monotone and use U itself plus monotonicity over all open supersets to obtain mu^*(U)=rho(U), including the empty and infinite cases.",
+        "deps": [
+          "def-cutoff-relation-f-prec-u",
+          "def-positive-linear-functional-on-c-c",
+          "lem-positive-linear-functionals-on-c-c-are-monotone",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "lem-finite-lch-partition-of-unity-near-a-compact-set"
+        ]
+      },
+      {
+        "id": "thm-rmk-functional-outer-content-is-an-outer-measure",
+        "kind": "theorem",
+        "title": "The RMK functional outer content is an outer measure",
+        "strategy": "Prove mu^*(empty)=0 and monotonicity directly. For a countable cover, first choose open supersets within epsilon of the infimum, then use a compactly supported test function and its compact support to reduce to finitely many cover members, decompose it with the LCH partition lemma, and pass epsilon to zero.",
+        "deps": [
+          "lem-rmk-functional-outer-content-is-well-defined",
+          "lem-finite-lch-partition-of-unity-near-a-compact-set"
+        ]
+      },
+      {
+        "id": "thm-rmk-open-sets-are-caratheodory-measurable",
+        "kind": "theorem",
+        "title": "Open sets are Caratheodory measurable for the RMK outer measure",
+        "strategy": "For an arbitrary E and open U, obtain the hard inequality mu^*(E) >= mu^*(E intersect U)+mu^*(E minus U) by separating a compactly supported test function into pieces on U and its complement, with an epsilon cutoff at the boundary. Invoke Caratheodory only after all open sets have been proved measurable, then name the resulting complete sigma-algebra containing the Borel sets.",
+        "deps": [
+          "thm-rmk-functional-outer-content-is-an-outer-measure",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "thm-caratheodory-outer-measure-theorem"
+        ]
+      },
+      {
+        "id": "lem-rmk-compact-set-formula-and-local-finiteness",
+        "kind": "lemma",
+        "title": "Compact-set formula and local finiteness of the RMK measure",
+        "strategy": "For compact K, prove mu(K)=inf{Lambda(f): f in C_c(X), chi_K <= f} by sandwiching open supersets with cutoff functions. A single compactly supported cutoff that is one on K then gives mu(K)<infinity, separating this local finiteness argument from later global finiteness claims.",
+        "deps": [
+          "thm-rmk-open-sets-are-caratheodory-measurable",
+          "lem-rmk-functional-outer-content-is-well-defined",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set"
+        ]
+      },
+      {
+        "id": "thm-rmk-representing-measure-is-inner-regular-on-open-sets",
+        "kind": "theorem",
+        "title": "The RMK representing measure is inner regular on open sets",
+        "strategy": "For open U, use the definition of rho(U) and compact support of every admissible f to obtain the compact lower approximation; use the compact-set formula for the reverse bound. Combine outer regularity built into mu^* with the preceding local-finiteness lemma to conclude that the constructed Borel restriction is Radon in this page's convention.",
+        "deps": [
+          "thm-rmk-open-sets-are-caratheodory-measurable",
+          "lem-rmk-compact-set-formula-and-local-finiteness",
+          "def-radon-measure-on-an-lch-space"
+        ]
+      },
+      {
+        "id": "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+        "kind": "theorem",
+        "title": "Positive functionals on C_c(X) are integration against a Radon measure",
+        "strategy": "For f >= 0, decompose f into finitely many clipped epsilon-layers. Sandwich both Lambda and the integral of every layer between the measures of adjacent compact level sets, telescope the error, and send epsilon to zero. Extend by positive and negative parts.",
+        "deps": [
+          "thm-rmk-representing-measure-is-inner-regular-on-open-sets",
+          "lem-rmk-compact-set-formula-and-local-finiteness",
+          "lem-finite-lch-partition-of-unity-near-a-compact-set",
+          "thm-caratheodory-outer-measure-theorem"
+        ]
+      },
+      {
+        "id": "thm-rmk-uniqueness-among-radon-measures",
+        "kind": "theorem",
+        "title": "Uniqueness of the RMK representing measure among Radon measures",
+        "strategy": "If two Radon measures have the same C_c integrals, use cutoffs to identify their values on compact sets and inner/outer regularity to identify every Borel set. State the class of measures in the conclusion explicitly, since equality on C_c alone does not identify arbitrary Borel measures on a non-sigma-compact space.",
+        "deps": [
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "def-radon-measure-on-an-lch-space",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set"
+        ]
+      },
+      {
+        "id": "thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact",
+        "kind": "theorem",
+        "title": "Sigma-compact open sets make locally finite Borel measures regular",
+        "strategy": "Assume every open subset of an LCH space is sigma-compact. Exhaust an open set by compact sets to obtain inner regularity there; combine it with the outer-regularisation/finite-set argument to obtain inner regularity on every Borel set. State the resulting measure as both Radon and regular in the page's stronger convention.",
+        "deps": [
+          "def-radon-measure-on-an-lch-space",
+          "def-regular-borel-measure-on-an-lch-space",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space"
+        ]
+      },
+      {
+        "id": "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+        "kind": "corollary",
+        "title": "Locally finite Borel measures on second-countable LCH spaces are regular",
+        "strategy": "Derive sigma-compactness of every open subspace from a countable base and the compact-closure basis, then apply the preceding regularity theorem. Do not infer this conclusion from local finiteness alone on arbitrary LCH spaces.",
+        "deps": [
+          "thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact",
+          "def-second-countable-space",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-measure-is-a-radon-measure-on-rn",
+        "kind": "theorem",
+        "title": "Lebesgue measure is a Radon measure on R^n",
+        "strategy": "Reconcile the existing Euclidean outer and inner regularity theorems with the LCH definition: compact sets are bounded and hence finite, arbitrary subsets have outer regularity, and Borel sets have compact inner approximation. Make the agreement with the page's Radon convention explicit rather than merely citing Euclidean regularity.",
+        "deps": [
+          "def-radon-measure-on-an-lch-space",
+          "cor-rn-is-locally-compact-and-sigma-compact",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-lebesgue-outer-regularity-for-arbitrary-subsets",
+          "thm-lebesgue-inner-regularity-by-closed-and-compact-sets"
+        ]
+      },
+      {
+        "id": "prop-lebesgue-stieltjes-and-lch-radon-conventions-agree-on-r",
+        "kind": "proposition",
+        "title": "Lebesgue--Stieltjes regularity agrees with the LCH Radon convention on R",
+        "strategy": "Compare the existing R-specific finite-on-compacts and regularity statements with the page's three Radon clauses. Conclude that a Lebesgue--Stieltjes measure is Radon on R without silently replacing its Borel sigma-algebra or its endpoint conventions.",
+        "deps": [
+          "def-radon-measure-on-an-lch-space",
+          "def-borel-measure-finite-on-compact-sets-on-r",
+          "thm-existence-of-the-lebesgue-stieltjes-measure",
+          "thm-lebesgue-stieltjes-measures-are-regular-on-r"
+        ]
+      },
+      {
+        "id": "thm-lusin-theorem-for-radon-measures",
+        "kind": "theorem",
+        "title": "Lusin's theorem for a Radon measure",
+        "strategy": "For a finite-measure Borel set and a finite almost-everywhere measurable function, partition bounded value ranges into successively finer finite Borel cells and choose compact cores of their inverse images. Intersect the finite compact unions, control the discarded measure by a summable error budget, and prove continuity from vanishing cell diameters.",
+        "deps": [
+          "def-radon-measure-on-an-lch-space",
+          "lem-finite-lch-partition-of-unity-near-a-compact-set"
+        ]
+      },
+      {
+        "id": "thm-c-c-is-dense-in-l-p-for-radon-measures",
+        "kind": "theorem",
+        "title": "C_c(X) is dense in L^p(mu) for a Radon measure",
+        "strategy": "For 1 <= p < infinity, first truncate an L^p function to finite-measure support and bounded range, approximate its level sets from inside by compact sets and outside by open sets, and replace indicators by LCH cutoffs. Sum the finite approximation and take the L^p error to zero. Keep L^infinity outside the theorem and flag its failure separately.",
+        "deps": [
+          "def-radon-measure-on-an-lch-space",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p",
+          "def-l-p-space-as-a-quotient-by-null-functions"
+        ]
+      },
+      {
+        "id": "lem-positive-c-zero-functionals-have-finite-regular-representing-measures",
+        "kind": "lemma",
+        "title": "Positive C_0(X) functionals have finite regular representing measures",
+        "strategy": "Restrict a bounded positive C_0 functional to C_c(X), apply positive RMK, and bound every compact mass by the functional norm. Inner regularity on X gives finite total mass; uniform density of C_c in C_0 extends the representation and yields the norm identity, while finite complements give strong regularity.",
+        "deps": [
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-regular-borel-measure-on-an-lch-space",
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "thm-rmk-uniqueness-among-radon-measures"
+        ]
+      },
+      {
+        "id": "lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals",
+        "kind": "lemma",
+        "title": "A bounded real C_0(X) functional is a difference of positive functionals",
+        "strategy": "Construct the positive and negative lattice functionals using the norm-constrained order interval, prove additivity rather than merely homogeneity, and show their difference is the original bounded real functional. This is the Jordan-type functional bridge required before invoking positive representation twice.",
+        "deps": [
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "lem-positive-c-zero-functionals-have-finite-regular-representing-measures"
+        ]
+      },
+    {
+      "id": "thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals",
+      "kind": "theorem",
+      "title": "The bounded complex dual of C_0(X) is regular complex measures",
+      "strategy": "Apply the real positive-decomposition lemma to real and imaginary parts, assemble the signed and complex representing measures, and prove uniqueness through the real theorem. Conversely integrate against a regular complex measure, prove the sup-norm bound by total variation, and identify the least bound with |mu|(X).",
+      "deps": [
+        "def-regular-complex-borel-measure-on-an-lch-space",
+        "lem-positive-c-zero-functionals-have-finite-regular-representing-measures",
+        "lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals",
+        "thm-total-variation-is-a-measure",
+        "def-integration-against-a-signed-or-complex-measure"
+      ]
+    },
+    {
+      "id": "rem-rmk-functional-analysis-uses",
+      "kind": "remark",
+      "title": "Functional-analysis uses of the Riesz--Markov--Kakutani theorem",
+      "strategy": "Record this orientation-only receipt without adding a theorem or a dependency edge: FA-9 uses the positive representation form for probability-measure extreme points, FA-18 uses the compact/C_0 form in commutative Gelfand theory, and FA-20 obtains scalar and complex measures from its positive-functional construction. State that this page remains the unique mathematical supplier of all three forms.",
+      "deps": []
+    },
+    {
+      "id": "lem-countable-intersections-of-club-subsets-of-omega-one-are-club",
+        "kind": "lemma",
+        "title": "Countable intersections of club subsets of omega_1 are club",
+        "strategy": "Define closed unbounded subsets in the order topology on omega_1 and diagonalise through countably many unbounded sets using successive choices and their countable supremum. Use the published boundedness of countable subsets to keep the constructed limit ordinal below omega_1, and separately verify closedness.",
+        "deps": [
+          "def-countable-choice",
+          "def-first-uncountable-ordinal",
+          "def-order-topology-on-an-ordinal",
+          "thm-countable-subsets-of-omega-one-are-bounded"
+        ]
+      },
+      {
+        "id": "thm-dieudonne-club-set-function-is-a-borel-measure",
+        "kind": "theorem",
+        "title": "The Dieudonne club-set function is a Borel measure",
+        "strategy": "On the countable ordinals Y=omega_1, assign one to a Borel set containing a closed unbounded subset and zero otherwise. Use the club-intersection lemma to prove countable additivity, then state the extension to [0,omega_1] by restriction to Y. Keep the Borel domain and the 0/1 rule explicit.",
+        "deps": [
+          "def-countable-choice",
+          "lem-countable-intersections-of-club-subsets-of-omega-one-are-club",
+          "def-borel-sigma-algebra",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "lem-continuous-functions-on-omega-one-plus-one-are-eventually-constant",
+        "kind": "lemma",
+        "title": "Continuous functions on [0, omega_1] are eventually constant",
+        "strategy": "For a continuous real or complex function at omega_1, choose for each 1/n a terminal interval on which the value is within 1/n of f(omega_1), take the countable supremum of the endpoints, and conclude exact constancy on the remaining tail. State the countable-choice use inherited from the ordinal boundedness result.",
+        "deps": [
+          "def-countable-choice",
+          "def-first-uncountable-ordinal",
+          "def-order-topology-on-an-ordinal",
+          "thm-countable-subsets-of-omega-one-are-bounded"
+        ]
+      },
+      {
+        "id": "lem-dieudonne-measure-and-top-dirac-agree-on-continuous-functions",
+        "kind": "lemma",
+        "title": "The Dieudonne measure and top-point Dirac mass agree on continuous functions",
+        "strategy": "Use eventual constancy to show that every continuous f has the same Dieudonne integral as its terminal value f(omega_1), then identify that value with integration against delta_{omega_1}. Keep this equality restricted to continuous functions; it is not equality of Borel measures.",
+        "deps": [
+          "thm-dieudonne-club-set-function-is-a-borel-measure",
+          "lem-continuous-functions-on-omega-one-plus-one-are-eventually-constant",
+          "def-dirac-measure"
+        ]
+      },
+      {
+        "id": "fs-every-borel-measure-on-an-lch-space-is-radon",
+        "kind": "false-statement",
+        "title": "Every Borel measure on an LCH space is Radon",
+        "strategy": "Refute the claim on the compact Hausdorff ordinal space [0,omega_1] with the Dieudonne club-set measure. Identify an open/Borel set whose measure cannot be recovered from compact subsets, so local compactness and compact finiteness cannot be substituted for the Radon approximation hypotheses.",
+        "deps": [
+          "thm-dieudonne-club-set-function-is-a-borel-measure",
+          "thm-ordinal-spaces-and-compactness",
+          "def-radon-measure-on-an-lch-space"
+        ]
+      },
+      {
+        "id": "fs-rmk-representing-measure-is-unique-among-all-borel-measures",
+        "kind": "false-statement",
+        "title": "An RMK functional determines every Borel representing measure uniquely",
+        "strategy": "Refute the unqualified claim with the Dieudonne Borel measure and delta_{omega_1}: they give equal integrals on C_c([0,omega_1])=C([0,omega_1]) but differ on Borel sets. Contrast this with the preceding uniqueness theorem, whose Radon hypothesis supplies the missing regularity.",
+        "deps": [
+          "thm-rmk-uniqueness-among-radon-measures",
+          "lem-dieudonne-measure-and-top-dirac-agree-on-continuous-functions"
+        ]
+      },
+      {
+        "id": "fs-positive-linear-functionals-on-c-c-are-uniformly-bounded",
+        "kind": "false-statement",
+        "title": "Every positive linear functional on C_c(X) is uniformly sup-norm bounded",
+        "strategy": "On R, use Lambda(f)=integral f dlambda and cutoffs equal to one on larger compact intervals. Their sup norms stay one while their Lambda values diverge, showing that positivity on C_c gives only local bounds; the global boundedness assertion belongs to C_0(X).",
+        "deps": [
+          "thm-lebesgue-measure-is-a-radon-measure-on-rn",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "def-positive-linear-functional-on-c-c"
+        ]
+      },
+      {
+        "id": "fs-inner-regularity-on-open-sets-implies-inner-regularity-on-all-borel-sets",
+        "kind": "false-statement",
+        "title": "Inner regularity on open sets implies inner regularity on all Borel sets",
+        "strategy": "Refute the unrestricted implication with the standard locally compact wedge-space measure: start from the locally finite inner-regular atomic measure, outer-regularise it, and verify that the resulting measure agrees on open and compact sets but gives the axis infinite measure while every compact subset of the axis has measure zero. State that sigma-finiteness or sigma-compact-open hypotheses are the missing route to the strong conclusion.",
+        "deps": [
+          "def-radon-measure-on-an-lch-space",
+          "def-regular-borel-measure-on-an-lch-space"
+        ]
+      },
+      {
+        "id": "fs-every-finite-borel-measure-on-a-compact-hausdorff-space-is-regular",
+        "kind": "false-statement",
+        "title": "Every finite Borel measure on a compact Hausdorff space is regular",
+        "strategy": "Use the finite Dieudonne club-set measure on [0,omega_1] to refute the assertion. Separate compact Hausdorff from compact metric: the latter has the advertised regularity theorem, whereas compactness alone does not repair the failed approximation.",
+        "deps": [
+          "thm-dieudonne-club-set-function-is-a-borel-measure",
+          "thm-ordinal-spaces-and-compactness",
+          "def-regular-borel-measure-on-an-lch-space"
+        ]
+      },
+      {
+        "id": "fs-c-c-is-dense-in-l-infinity-for-radon-measures",
+        "kind": "false-statement",
+        "title": "C_c(X) is dense in L^infinity(mu) for every Radon measure",
+        "strategy": "On R with Lebesgue measure, the constant-one L^infinity class remains distance one from every compactly supported continuous function, since that function vanishes outside a compact set. Contrast the essential-supremum obstruction with the 1 <= p < infinity density theorem.",
+        "deps": [
+          "thm-lebesgue-measure-is-a-radon-measure-on-rn",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.04,
+    "id": "radon-measures-and-the-riesz-markov-kakutani-theorem-examples",
+    "kind": "B",
+    "category": "measure-theory",
+    "title": "Radon Measures and the Riesz Markov Kakutani Theorem — Examples",
+    "companion": "radon-measures-and-the-riesz-markov-kakutani-theorem",
+    "requires": [
+      "radon-measures-and-the-riesz-markov-kakutani-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-riemann-integral-functional-is-represented-by-interval-lebesgue-measure",
+        "kind": "example",
+        "title": "The Riemann integral functional is represented by Lebesgue measure on an interval",
+        "strategy": "Work directly on the compact space [a,b], where C_c([a,b])=C([a,b]). Use equality of the Riemann and Lebesgue integrals for continuous functions to identify the representing measure as restricted Lebesgue measure, without a zero extension at the endpoints.",
+        "deps": [
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "thm-lebesgue-measure-is-a-radon-measure-on-rn",
+          "lem-compactly-supported-riemann-integral-is-well-defined",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ]
+      },
+      {
+        "id": "ex-point-evaluation-functional-is-represented-by-a-dirac-measure",
+        "kind": "example",
+        "title": "Point evaluation is represented by a Dirac measure",
+        "strategy": "For x in an LCH space, verify positivity of f mapsto f(x), identify its representing measure as delta_x by direct integration, and invoke RMK uniqueness only within its Radon class. The computation fixes the orientation of the evaluation functional.",
+        "deps": [
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-nonnegative-lebesgue-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral"
+        ]
+      },
+      {
+        "id": "ex-locally-integrable-density-functional-is-represented-by-g-dlambda",
+        "kind": "example",
+        "title": "A locally integrable density functional is represented by g dlambda",
+        "strategy": "For nonnegative locally integrable g on R^n, verify that f mapsto integral f g dlambda is finite on C_c, linear, and positive. Identify the resulting Radon measure as the existing density measure and explain why local, rather than global, integrability is enough for C_c.",
+        "deps": [
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "def-locally-integrable-function-on-r-n",
+          "def-measure-with-density",
+          "thm-lebesgue-measure-is-a-radon-measure-on-rn"
+        ]
+      },
+      {
+        "id": "ex-lebesgue-stieltjes-functional-is-represented-by-its-stieltjes-measure",
+        "kind": "example",
+        "title": "A Lebesgue--Stieltjes functional is represented by its Stieltjes measure",
+        "strategy": "Start with an increasing right-continuous integrator and form f mapsto integral f dmu_F on C_c(R). Check positivity and local finiteness, then use the R-specific convention proposition to identify mu_F as the RMK representing Radon measure without changing endpoint conventions.",
+        "deps": [
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "thm-existence-of-the-lebesgue-stieltjes-measure",
+          "prop-lebesgue-stieltjes-and-lch-radon-conventions-agree-on-r"
+        ]
+      },
+      {
+        "id": "ex-counting-functional-on-a-discrete-lch-space",
+        "kind": "example",
+        "title": "Counting measure represents finite-support summation on a discrete LCH space",
+        "strategy": "On a discrete LCH space, identify C_c with finite-support functions and show that f mapsto sum_x f(x) is positive. Calculate its representing measure on singletons as counting measure and retain the possibly infinite total mass as the C_c, not C_0, phenomenon.",
+        "deps": [
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "def-counting-measure",
+          "prop-counting-measure-is-a-measure",
+          "def-nonnegative-lebesgue-integral",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-monotone-convergence-for-the-integral"
+        ]
+      },
+      {
+        "id": "cex-dieudonne-borel-measure-on-omega-one-plus-one-is-not-regular",
+        "kind": "counterexample",
+        "title": "The Dieudonne Borel measure on [0, omega_1] is not regular",
+        "strategy": "Work through the club-set rule on the compact ordinal space, exhibit the Borel/open approximation failure, and verify that the measure is finite. This is the concrete witness for why compact Hausdorff cannot replace compact metric in the regularity statement.",
+        "deps": [
+          "thm-dieudonne-club-set-function-is-a-borel-measure",
+          "thm-ordinal-spaces-and-compactness",
+          "fs-every-finite-borel-measure-on-a-compact-hausdorff-space-is-regular"
+        ]
+      },
+      {
+        "id": "cex-distinct-borel-measures-can-represent-the-same-c-c-functional",
+        "kind": "counterexample",
+        "title": "Distinct Borel measures can represent the same C_c functional",
+        "strategy": "Compare the Dieudonne measure and delta_{omega_1} on [0,omega_1]. Use eventual constancy to calculate equal integrals for each continuous compactly supported function, then name a Borel set on which the two measures differ; this makes the uniqueness hypothesis failure visible.",
+        "deps": [
+          "lem-dieudonne-measure-and-top-dirac-agree-on-continuous-functions",
+          "fs-rmk-representing-measure-is-unique-among-all-borel-measures",
+          "cex-dieudonne-borel-measure-on-omega-one-plus-one-is-not-regular"
+        ]
+      }
+    ]
+  }
+]

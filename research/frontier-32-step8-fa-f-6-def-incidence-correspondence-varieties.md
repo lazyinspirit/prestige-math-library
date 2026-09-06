@@ -1,0 +1,11 @@
+# FA terminal evidence — item 6
+
+Disposition: repaired. Source status: familiar.
+
+Read the definition and all four direct dependency bodies (including the already-recorded repaired Grassmannian corollary), the following incidence-closedness lemma for promised scope, products A/B pages and conventions, batch-11 manifest, initial and final Terra rejection rows, and Alpha adjudication. This definition has no proof contract in either batch or aggregate map, and no separate proof-risk record; its risk is construction domain and terminology.
+
+Alpha correctly changed 'varieties' to 'loci' and supplied the ambient-product construction, avoiding an unsupported irreducibility assertion. Terra's remaining objection is valid: arbitrary V and dimensions include empty Grassmannians or P(0), outside the cited nonempty-projective-product theorem. The repaired domain is an n-dimensional V over the page's algebraically closed k with n>=1, 0<=r<=n, and 0<=a<=b<=n. Every ambient factor is now a nonempty projective variety by the Grassmannian corollary and ordinary projective-space convention, so the product theorem applies. Incidence itself is only a subset with projections; at r=0 it is empty, which is allowed for a locus. At r=n it is the whole point factor; containment at a=0 or a=b also has its usual literal meaning. No assertion that an empty locus is a variety is made.
+
+This is familiar finite-dimensional subspace geometry and checking the domains of the cited constructions; no external verification was needed. Aligned the manifest title and dependency list. No proof contract is required for this definition. No dependency body was edited and no licence is needed. Batch-11 content policy passed, 33 scoped items, no errors or warnings. No judge pass stamp was created. No unresolved obligation remains. Next: reseal prior same-page contexts changed by this definition, record, then item 7.
+
+Reseal during item 7: the product-definition interface now explicitly fixes objects (affine or projective classical algebraic sets) and regular k-maps. The constructions used here have projective factors and give the required regular factorization for all those test objects. The existing proof/domain remains valid; no additional repair is needed.

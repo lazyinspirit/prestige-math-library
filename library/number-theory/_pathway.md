@@ -19,6 +19,7 @@ parts:
       - number-fields-rings-of-integers-and-discriminants
       - dirichlet-series-and-euler-products
       - absolute-values-completions-and-p-adic-numbers
+      - prime-ideal-decomposition-ramification-and-the-different
   - part: quadratic-residues
     title: "Quadratic residues and reciprocity"
     pages:
@@ -28,6 +29,7 @@ parts:
       - lagrange-four-square-theorem
       - average-orders-divisor-sums-and-representation-counts
       - chebyshev-bounds-and-mertens-theorems
+      - perron-inversion-and-the-explicit-formula
       - hilbert-symbols-and-the-quadratic-local-global-principle
       - dirichlet-characters-l-functions-and-primes-in-progressions
       - primitive-dirichlet-l-functions-and-functional-equations
@@ -48,28 +50,27 @@ solubility decidable by a finite search.
 
 ## congruences-and-unit-groups
 
-Congruences modulo $n$ give quotient-ring arithmetic: the Chinese remainder theorem splits
-moduli, Euler's totient counts units, and primitive roots describe the cyclic prime-modulus
-case. Positive-definite binary quadratic forms bring discriminants, unimodular equivalence,
-and Gauss reduction into the same language, while arithmetic functions and Dirichlet
-convolution organize multiplicative information. For finite $K/\mathbb Q$, its maximal
-order $\mathcal O_K$ is a free $\mathbb Z$-module of rank $[K:\mathbb Q]$ and other orders
-have finite index. Trace, norm, and the embedding matrix define discriminants; squared
-change-of-basis determinants give a nonzero field invariant, quadratic formulas, integral
-bases, signatures, and the Dedekind property. Dirichlet series supply Euler products and
-logarithmic derivatives, while completions build $\mathbb Q_p$ and $\mathbb Z_p$ with digit
-expansions and Hensel-style lifting.
+Congruences modulo $n$ give quotient-ring arithmetic: the Chinese remainder theorem, Euler's
+totient, and primitive roots describe the cyclic prime-modulus case. Quadratic forms and
+arithmetic functions organize discriminants and multiplicative
+information. For finite $K/\mathbb Q$,
+$\mathcal O_K$ is a free $\mathbb Z$-module; trace, norm, embeddings, and discriminants lead to
+the Dedekind property. Every integral ideal factors uniquely into prime ideals,
+with ramification and residue degrees satisfying the fundamental identity. Dedekind--Kummer
+reads this factorization from a monogenic minimal polynomial away from the index, while the
+inverse trace dual defines the different: its prime support detects ramification, and its
+exponent is $e-1$ precisely in the tame case. Dirichlet series and completions supply Euler
+products, logarithmic derivatives, $\mathbb Q_p$, and $\mathbb Z_p$.
 
 ## quadratic-residues
 
 Quadratic residues are controlled by the Legendre symbol, Euler's criterion, Gauss's lemma,
-reciprocity, and the Jacobi symbol. Those tools also settle sums of squares, including
-$4^a(8m+7)$ and Lagrange's theorem. Average orders of $\tau$, $\sigma$, and $\varphi$, the
-density of coprime pairs, and the mean order of $r_2$ lead to Chebyshev and Mertens
-estimates, Bertrand's postulate, divergence of $\sum 1/p$, and the vanishing Euler product.
-Hilbert symbols reduce rational quadratic-form isotropy to $\mathbb R$ and $\mathbb Q_p$,
-culminating in Hasse--Minkowski. Dirichlet characters and $L$-functions isolate residue
-classes. At the conductor, primitive characters, Gauss sums, parity, and twisted Poisson
-summation yield analytic continuation and
-$\Lambda(s,\chi)=\varepsilon(\chi)\Lambda(1-s,\overline\chi)$ with its root number and
-trivial zeros; the primitive principal character modulo $1$ is the zeta exception.
+reciprocity, and the Jacobi symbol; these tools also settle the two- and four-square problems.
+Average orders of $\tau$, $\sigma$, and $\varphi$, coprime-pair density, and the mean order of
+$r_2$ lead to Chebyshev and Mertens estimates and Bertrand's postulate. Symmetric Perron
+inversion recovers a starred summatory function, so the sharp
+formula for the half-weighted $\psi_0$ has a finite truncated zero sum and an error term;
+smoothing instead gives an absolutely convergent zero sum. Hilbert symbols reduce rational
+quadratic-form isotropy to $\mathbb R$ and $\mathbb Q_p$, culminating in Hasse--Minkowski.
+Dirichlet characters, primitive conductors, Gauss sums, and twisted Poisson summation give
+analytic continuation and the functional equation for primitive $L$-functions.

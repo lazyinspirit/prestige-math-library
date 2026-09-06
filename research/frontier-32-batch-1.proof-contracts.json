@@ -1,0 +1,2707 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-p-is-contained-in-p-poly",
+    "thm-p-poly-equals-p-with-polynomial-advice",
+    "thm-undecidable-languages-exist-in-p-poly",
+    "prop-nc-one-is-contained-in-l-and-l-in-nc-two",
+    "lem-counting-circuits-of-bounded-size",
+    "thm-shannon-almost-all-functions-require-exponential-circuits",
+    "thm-circuit-sat-is-np-complete",
+    "thm-karp-lipton-collapse",
+    "fs-polynomial-size-implies-uniform-generation",
+    "fs-shannon-counting-gives-an-explicit-hard-function",
+    "ex-p-poly-equals-p-with-polynomial-advice",
+    "ex-karp-lipton-collapse",
+    "cex-polynomial-size-implies-uniform-generation",
+    "prop-number-sat-is-in-sharpp",
+    "lem-cook-levin-can-be-made-parsimonious",
+    "thm-number-sat-is-sharpp-complete",
+    "prop-fp-is-contained-in-sharpp",
+    "prop-sharpp-is-closed-under-sum-and-product",
+    "thm-pp-is-sign-testing-gap-p",
+    "cor-majority-sat-is-pp-complete",
+    "thm-pp-is-closed-under-complement",
+    "prop-np-is-contained-in-p-sharpp",
+    "fs-sharpp-is-a-language-class",
+    "fs-every-many-one-reduction-is-parsimonious",
+    "ex-cook-levin-can-be-made-parsimonious",
+    "ex-np-is-contained-in-p-sharpp",
+    "cex-sharpp-is-a-language-class"
+  ],
+  "contracts": {
+    "thm-p-is-contained-in-p-poly": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-p",
+          "source_section": "Definition",
+          "quote": "The class **P** is\n$$ P:=\\bigcup_{k\\ge 1}\\operatorname{DTIME}(n^k). $$\n\nThus a language belongs to $P$ exactly when some deterministic Turing machine\ndecides it in time bounded by a polynomial in the input length.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-circuit-family-and-p-poly",
+          "source_section": "Definition",
+          "quote": "A circuit family is a sequence (C_n) with exactly n inputs at length n. It recognizes L if C_n(x)=1 exactly when x belongs to L for every n-bit x. P/poly contains exactly the languages recognized by families with polynomial size; no algorithm that constructs C_n from n is required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-boolean-circuit-size-depth-fanin-and-basis",
+          "source_section": "Definition",
+          "quote": "A Boolean circuit on $n$ inputs is a finite directed acyclic graph with inputs\n$x_1,\\ldots,x_n$, constants $0$ and $1$, and NOT, AND, and OR gates; AND and\nOR have fan-in two, while NOT has fan-in one. One node is designated as the\n**output**. The circuit's value is the value at that node after evaluating the\ngraph in topological order. Its **size** is its number of non-input gates, and\nits **depth** is the largest number of non-input gates on a directed path\nending at the output (a path may begin at an input or a constant).\n\nIf two fixed finite bounded-arity bases can simulate every gate (and every\nconstant) of one another by fixed finite circuits, then changing between them\ncosts only constant factors in size and depth. In particular this holds for\nany two such functionally complete bases with simulable constants. No such\nclaim is made for an arbitrary finite basis that may fail to express one of\nthe Boolean operations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an input length $n$. Encode a configuration of $M$ by the state, head position, and the $O(p(n))$ tape cells that can be visited in $p(n)$ steps. Each bit of the next configuration depends on only a constant-size neighbourhood of the current configuration, so it is computed by a constant-size Boolean subcircuit. Pad halting configurations so that this update is defined through time $p(n)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Wire $p(n)$ copies of the update layer in sequence, initialize the first layer from the $n$ input bits, and read the accepting-state bit in the final layer. There are $O(p(n))$ encoded bits per layer and $p(n)$ layers, so the resulting circuit $C_n$ has $O(p(n)^2)$ gates. Replacing its fixed local basis by the page basis changes this bound only by a constant factor.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $x\\in\\{0,1\\}^n$, $C_n(x)=1$ exactly when $M$ accepts $x$. Thus $(C_n)$ is a polynomial-size family recognizing $L$, as required by [L2]. The construction proves existence of each $C_n$ and does not assert a uniform generator.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For Every polynomial-time language has polynomial-size circuits, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Every polynomial-time language has polynomial-size circuits, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Every polynomial-time language has polynomial-size circuits, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Every polynomial-time language has polynomial-size circuits, the collapsed-configuration analysis is handled in step 3.1: For every $x\\in\\{0,1\\}^n$, $C_n(x)=1$ exactly when $M$ accepts $x$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Every polynomial-time language has polynomial-size circuits, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Every polynomial-time language has polynomial-size circuits, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Every polynomial-time language has polynomial-size circuits, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Every polynomial-time language has polynomial-size circuits, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "thm-p-poly-equals-p-with-polynomial-advice": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-circuit-family-and-p-poly",
+          "source_section": "Definition",
+          "quote": "A circuit family is a sequence (C_n) with exactly n inputs at length n. It recognizes L if C_n(x)=1 exactly when x belongs to L for every n-bit x. P/poly contains exactly the languages recognized by families with polynomial size; no algorithm that constructs C_n from n is required.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-polynomial-advice-machine",
+          "source_section": "Definition",
+          "quote": "An advised polynomial-time machine consists of a deterministic polynomial-time machine M and strings a_n of polynomial length. On each n-bit input x it receives (x,a_n), and accepts exactly the intended language. The string is length-indexed and need not be computable from n.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-p-is-contained-in-p-poly",
+          "source_section": "Statement",
+          "quote": "Every polynomial-time language belongs to $\\mathrm{P/poly}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $(C_n)$ has size at most $p(n)$. Encode $C_n$ as a topologically ordered gate list: each of its at most $p(n)$ records contains a constant-size gate tag and at most two indices of $O(\\log(n+p(n)))$ bits. This is polynomial advice. A fixed evaluator scans the list in topological order and computes $C_n(x)$ in polynomial time, so [L2] gives an advised decider.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $M(x,a_n)$ run in polynomial time with $|a_n|\\le p(n)$; pad every $a_n$ to length $p(n)$. The language of pairs $B=\\{(x,a):M(x,a)=1\\}$ is in $\\mathrm P$, so [L3] supplies polynomial-size circuits for $B$. At length $n$, take the appropriate pair-input circuit and replace its advice inputs by the constants of $a_n$. The remaining $n$-input circuit has polynomial size and agrees with $M(x,a_n)$ on every $x$ of length $n$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 proves the circuit-to-advice inclusion and step 1.2 proves the advice-to-circuit inclusion, including the advice-length and simulation-size bounds.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For P/poly equals polynomial time with polynomial advice, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For P/poly equals polynomial time with polynomial advice, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For P/poly equals polynomial time with polynomial advice, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For P/poly equals polynomial time with polynomial advice, the collapsed-configuration analysis is handled in step 2.1: Step 1.1 proves the circuit-to-advice inclusion and step 1.2 proves the advice-to-circuit inclusion, including the advice-length and simulation-size bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For P/poly equals polynomial time with polynomial advice, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For P/poly equals polynomial time with polynomial advice, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For P/poly equals polynomial time with polynomial advice, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For P/poly equals polynomial time with polynomial advice, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "thm-undecidable-languages-exist-in-p-poly": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-halting-is-recognizable-and-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $HALT_{TM}$ of [[def-halting-problem]] is recognizable but not\ndecidable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-circuit-family-and-p-poly",
+          "source_section": "Definition",
+          "quote": "A circuit family is a sequence (C_n) with exactly n inputs at length n. It recognizes L if C_n(x)=1 exactly when x belongs to L for every n-bit x. P/poly contains exactly the languages recognized by families with polynomial size; no algorithm that constructs C_n from n is required.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $H=\\{n:M_n(n)\\text{ halts}\\}$ and form the tally language $U=\\{1^n:n\\in H\\}$. A decider for $U$ would decide $H$ by mapping $n$ to $1^n$, so $U$ is undecidable by [L1]. Define the binary length language $L=\\{x:1^{|x|}\\in U\\}$. If $L$ were decidable, its decider restricted to $1^n$ would decide $U$; hence $L$ is undecidable.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $n$, choose $C_n$ to be the constant-one circuit if $1^n\\in U$, and the constant-zero circuit otherwise. Then for every $x\\in\\{0,1\\}^n$, $C_n(x)=1$ exactly when $x\\in L$. The circuits have constant size, and their non-effective length-by-length choice is permitted by [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $L$ is both undecidable and recognized by a polynomial-size circuit family.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For Some undecidable languages have polynomial-size circuits, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Some undecidable languages have polynomial-size circuits, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Some undecidable languages have polynomial-size circuits, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Some undecidable languages have polynomial-size circuits, the collapsed-configuration analysis is handled in step 2.1: For each $n$, choose $C_n$ to be the constant-one circuit if $1^n\\in U$, and the constant-zero circuit otherwise."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Some undecidable languages have polynomial-size circuits, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Some undecidable languages have polynomial-size circuits, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Some undecidable languages have polynomial-size circuits, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Some undecidable languages have polynomial-size circuits, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "group-alpha-6b-a",
+        "notes": "The risk is the nonconstructive choice of a lengthwise bit together with the claim that the resulting tally language is undecidable. The current proof removes that ambiguity: it defines H(n) as the bounded halting predicate, places either 0^n or no length-n string in L accordingly, uses a one-gate constant circuit at every length, and reduces the ordinary halting set to membership of 0^n. The definition covers n=0 and requires no uniform generation of the circuit family."
+      }
+    },
+    "prop-nc-one-is-contained-in-l-and-l-in-nc-two": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ac-zero-nc-one-and-nc",
+          "source_section": "Definition",
+          "quote": "All families in this definition are logspace-uniform. For bounded-fan-in\nfamilies this means exactly the query interface of\n[[def-logspace-uniform-circuit-family]]. For an unbounded-fan-in gate, the\nsame interface is extended by a fan-in query and by predecessor queries\n$(v,j)$ that return the $j$-th predecessor of gate $v$ (or report that\n$j$ is out of range); the transducer must answer all such queries in\nlogarithmic space.\n\n$\\mathrm{AC}^0$ has polynomial size, constant depth, unbounded-fan-in AND/OR,\nand NOT gates. $\\mathrm{NC}^1$ has polynomial size, bounded fan-in, and\nlogarithmic depth. $\\mathrm{NC}$ is the union of polynomial-size\nbounded-fan-in families of polylogarithmic depth. This convention does not\nconstrain arbitrary $\\mathrm{P/poly}$ families.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-l-and-nl",
+          "source_section": "Definition",
+          "quote": "For a function $s$, let $\\mathrm{NWORKSPACE}(s(n))$ denote the languages\ndecided by nondeterministic read-only-input machines using $O(s(n))$ work\ncells. Thus\n$$ \\mathrm L:=\\mathrm{DWORKSPACE}(\\log_2(n+2)),\\qquad \\mathrm{NL}:=\\mathrm{NWORKSPACE}(\\log_2(n+2)). $$\nHere $\\mathrm{DWORKSPACE}$ is exactly the local uncharged-input class of\n[[def-read-only-input-workspace-classes]]. The names L and NL below never\nsilently mean the library's all-tapes $\\mathrm{DSPACE}$ and $\\mathrm{NSPACE}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $C_n$ have depth $d=O(\\log n)$. Evaluate its output by a depth-first walk. Store the current root-to-gate child-choice word (at most $d$ bits), a constant amount of traversal state per *current* level encoded in that word, and $O(\\log n)$ counters. Whenever a gate address is needed, recompute it from the output by replaying the stored choices, using logspace uniformity to obtain each gate record. This uses $O(\\log n)$ space; bounded fan-in lets the walk combine the child values. Thus $\\mathrm{NC}^1\\subseteq\\mathrm L$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $M$ be a logspace decider. On inputs of length $n$ it has polynomially many configurations, each indexed with $O(\\log n)$ bits, and its start, accepting, and one-step adjacency predicates are logspace uniform. Boolean matrix squaring computes paths of length at most $2^i$ from those predicates. There are $O(\\log n)$ squarings, and each Boolean matrix product has bounded-fan-in depth $O(\\log n)$ and polynomial size, so start-to-accept reachability has depth $O(\\log^2 n)$ and polynomial size. The gate indices and wiring are generated in logspace from $(n,i,u,v)$. Hence $\\mathrm L\\subseteq\\mathrm{NC}^2$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two simulations prove both stated containments without storing a logarithmic stack of logarithmic-size gate addresses.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For NC1 is contained in L, and L is contained in NC2, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For NC1 is contained in L, and L is contained in NC2, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For NC1 is contained in L, and L is contained in NC2, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For NC1 is contained in L, and L is contained in NC2, the collapsed-configuration analysis is handled in step 2.1: The two simulations prove both stated containments without storing a logarithmic stack of logarithmic-size gate addresses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For NC1 is contained in L, and L is contained in NC2, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For NC1 is contained in L, and L is contained in NC2, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For NC1 is contained in L, and L is contained in NC2, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For NC1 is contained in L, and L is contained in NC2, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "lem-counting-circuits-of-bounded-size": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-boolean-circuit-size-depth-fanin-and-basis",
+          "source_section": "Definition",
+          "quote": "A Boolean circuit on $n$ inputs is a finite directed acyclic graph with inputs\n$x_1,\\ldots,x_n$, constants $0$ and $1$, and NOT, AND, and OR gates; AND and\nOR have fan-in two, while NOT has fan-in one. One node is designated as the\n**output**. The circuit's value is the value at that node after evaluating the\ngraph in topological order. Its **size** is its number of non-input gates, and\nits **depth** is the largest number of non-input gates on a directed path\nending at the output (a path may begin at an input or a constant).\n\nIf two fixed finite bounded-arity bases can simulate every gate (and every\nconstant) of one another by fixed finite circuits, then changing between them\ncosts only constant factors in size and depth. In particular this holds for\nany two such functionally complete bases with simulable constants. No such\nclaim is made for an arbitrary finite basis that may fail to express one of\nthe Boolean operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "1. If $A$ and $B$ are finite then $A \\times B$ is finite and\n   $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. Let $m \\in \\mathbb{N}$ and let $A_0, \\dots, A_{m-1}$ be finite sets. Write\n   $$\\prod_{i<m} A_i := \\{\\, f : f \\text{ is a function with domain } m \\text{ and } f(i) \\in A_i \\text{ for every } i < m \\,\\}.$$\n   Then $\\prod_{i<m} A_i$ is finite and\n   $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$, the\n   right-hand product being the $\\mathbb{N}$-valued one of\n   [[def-nat-finite-sum-and-product]].\n\nAt $m = 0$ clause 2 reads $\\big\\lvert\\prod_{i<0} A_i\\big\\rvert = 1$: there is\nexactly one function with domain $\\varnothing$, the empty function, and the empty\nproduct is $1$. Both sides are computed, not stipulated.\n\n```tikz\n\\begin{tikzpicture}[x=1.45cm,y=0.9cm]\n  \\node at (0,2.45) {$a_0$};\n  \\node at (1,2.45) {$a_1$};\n  \\node at (2,2.45) {$a_2$};\n  \\node at (-1.1,1.5) {$b_0$};\n  \\node at (-1.1,0.5) {$b_1$};\n  \\draw (-0.5,0) rectangle (2.5,2);\n  \\draw (0.5,0) -- (0.5,2);\n  \\draw (1.5,0) -- (1.5,2);\n  \\draw (-0.5,1) -- (2.5,1);\n  \\node at (0,1.5) {$(a_0,b_0)$};\n  \\node at (1,1.5) {$(a_1,b_0)$};\n  \\node at (2,1.5) {$(a_2,b_0)$};\n  \\node at (0,0.5) {$(a_0,b_1)$};\n  \\node at (1,0.5) {$(a_1,b_1)$};\n  \\node at (2,0.5) {$(a_2,b_1)$};\n  \\node at (1,-0.6) {$|A\\times B|=3\\cdot2=6$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A topologically numbered gate has at most a fixed number $b$ of type choices and at most two input-wire indices among at most $n+s$ available wires. Thus each gate record has at most $b(n+s)^2$ possibilities; choosing an output wire adds at most $n+s$ possibilities.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], circuits with exactly $r\\le s$ gates therefore number at most $(n+s)[b(n+s)^2]^r$. Summing over $0\\le r\\le s$ gives at most $(s+1)(n+s)[b(n+s)^2]^s=2^{O(s\\log(n+s))}$ because $s\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Distinct encodings may compute the same function, so this circuit count is also an upper bound on the number of represented Boolean functions.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For Counting bounded-size Boolean circuits, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Counting bounded-size Boolean circuits, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Counting bounded-size Boolean circuits, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Counting bounded-size Boolean circuits, the collapsed-configuration analysis is handled in step 3.1: Distinct encodings may compute the same function, so this circuit count is also an upper bound on the number of represented Boolean functions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Counting bounded-size Boolean circuits, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Counting bounded-size Boolean circuits, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Counting bounded-size Boolean circuits, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Counting bounded-size Boolean circuits, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "thm-shannon-almost-all-functions-require-exponential-circuits": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-counting-circuits-of-bounded-size",
+          "source_section": "Statement",
+          "quote": "For $n,s\\ge1$, the number of Boolean functions on $n$ inputs computed by\ncircuits of size at most $s$ over the fixed page basis is at most\n$$2^{O(s\\log(n+s))}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $s=\\lfloor2^n/(10n)\\rfloor$ and let $b$ be the fixed number of available gate types. The explicit encoding in [L1] gives at most $$ (s+1)(n+s)\\bigl(b(n+s)^2\\bigr)^s $$ circuits. Since $b$ is constant, for all sufficiently large $n$ the base-two logarithm is at most $s(2n+O(1))+O(n)<2^n/3$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Dividing the resulting bound $2^{2^n/3}$ by the total $2^{2^n}$ from [L2] gives at most $2^{-2\\cdot2^n/3}$, which tends to $0$. Hence a uniformly random truth table has size greater than $2^n/(10n)$ with probability tending to $1$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This is an existence-and-density argument over truth tables; it does not select or compute an explicit hard family.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For Almost all Boolean functions require exponential circuit size, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Almost all Boolean functions require exponential circuit size, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Almost all Boolean functions require exponential circuit size, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Almost all Boolean functions require exponential circuit size, the collapsed-configuration analysis is handled in step 3.1: This is an existence-and-density argument over truth tables;"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Almost all Boolean functions require exponential circuit size, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Almost all Boolean functions require exponential circuit size, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Almost all Boolean functions require exponential circuit size, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Almost all Boolean functions require exponential circuit size, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "thm-circuit-sat-is-np-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-circuit-sat",
+          "source_section": "Definition",
+          "quote": "CircuitSAT consists of well-formed finite topologically numbered Boolean gate lists with a designated output for which some input assignment makes that output one; malformed lists are rejected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cook-levin-sat-is-np-complete",
+          "source_section": "Statement",
+          "quote": "The satisfiability language $SAT$ is NP-complete.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-np-hard-and-np-complete",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\{0,1\\}^*$ be a language.\n\n- $C$ is **NP-hard** when for every language $L\\in NP$ one has $L\\le_p C$.\n- $C$ is **NP-complete** when $C$ is NP-hard and $C\\in NP$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A verifier first rejects a malformed list. Otherwise it guesses one bit for every input gate, evaluates the gates in topological order, and accepts iff the designated output is $1$. Its time is polynomial in the list length, so $\\mathrm{CircuitSAT}\\in\\mathrm{NP}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Given a Boolean formula $\\varphi$, create one circuit input for each variable and one circuit gate for each connective, ordered from leaves toward the root; designate the root gate as output. This map is polynomial time and produces a circuit $C_\\varphi$ satisfying $C_\\varphi(a)=\\varphi(a)$ for every assignment $a$. Therefore $\\varphi\\in\\mathrm{SAT}$ iff $C_\\varphi\\in\\mathrm{CircuitSAT}$, so [L2] and [L3] give NP-hardness.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Combining membership from step 1.1 with hardness from step 1.2 proves NP-completeness by [L4].",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For CircuitSAT is NP-complete, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For CircuitSAT is NP-complete, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For CircuitSAT is NP-complete, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For CircuitSAT is NP-complete, the collapsed-configuration analysis is handled in step 2.1: Combining membership from step 1.1 with hardness from step 1.2 proves NP-completeness by [L4]."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For CircuitSAT is NP-complete, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For CircuitSAT is NP-complete, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For CircuitSAT is NP-complete, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For CircuitSAT is NP-complete, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "group-alpha-6b-a",
+        "notes": "The risk is that NP-completeness needs both a well-formed verifier and an iff-preserving reduction, including malformed encodings. The current proof first rejects malformed gate lists and otherwise guesses only circuit-input values and evaluates the topological gate list. Its SAT reduction creates one gate per connective and proves C_phi(a)=phi(a) for every assignment, so satisfiability is preserved in both directions and membership plus hardness are both established."
+      }
+    },
+    "thm-karp-lipton-collapse": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-circuit-family-and-p-poly",
+          "source_section": "Definition",
+          "quote": "A circuit family is a sequence (C_n) with exactly n inputs at length n. It recognizes L if C_n(x)=1 exactly when x belongs to L for every n-bit x. P/poly contains exactly the languages recognized by families with polynomial size; no algorithm that constructs C_n from n is required.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $R(x,y,z)$ be any polynomial-time predicate with polynomially bounded $z$, and form the NP language $$E_R=\\{\\langle x,y,w\\rangle:\\text{some extension }z\\succeq w \\text{ satisfies }R(x,y,z)\\}.$$ By the hypothesis, $E_R$ has polynomial-size decision circuits. Successively querying whether the current prefix has a satisfying extension, first with a $0$ appended and then with a $1$ appended, composes polynomially many copies of these decision circuits into a polynomial-size search circuit. On input $(x,y)$ for which some witness exists, it outputs an actual $z$ satisfying $R(x,y,z)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $L\\in\\Pi_2^p$, so $x\\in L\\iff\\forall y\\,\\exists z\\,R(x,y,z)$. For each fixed input length, step 1.1 supplies a single polynomial-size search circuit $C$ which works for every pair $(x,y)$ of the relevant padded lengths. Therefore $$ x\\in L\\iff\\exists C\\ \\forall y\\; R\\bigl(x,y,C(x,y)\\bigr). $$ If $x\\in L$, choose the search circuit from step 1.1; conversely, any circuit satisfying the right side supplies the required witness for every $y$. The predicate merely evaluates $C$ and checks $R$, so it is polynomial-time and the right side is a $\\Sigma_2^p$ formula.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $\\Pi_2^p\\subseteq\\Sigma_2^p$; the reverse containment after complementing gives equality of the second levels. Replacing each inner $\\Pi_2^p$ block of a higher alternating formula by its $\\Sigma_2^p$ form and merging adjacent existential and universal blocks inductively collapses every constant-alternation level to $\\Sigma_2^p$. Consequently $\\mathrm{PH}=\\Sigma_2^p$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For The Karp--Lipton collapse, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For The Karp--Lipton collapse, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For The Karp--Lipton collapse, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For The Karp--Lipton collapse, the collapsed-configuration analysis is handled in step 3.1: Thus $\\Pi_2^p\\subseteq\\Sigma_2^p$;"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For The Karp--Lipton collapse, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For The Karp--Lipton collapse, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that the search circuit from step 1.1 supplies a witness for every universally quantified y when x is in L."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that any circuit satisfying the displayed universal predicate supplies the witnesses required for x to be in L."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "group-alpha-6b-a",
+        "notes": "The risk is the quantifier alternation in the Karp--Lipton collapse and the need for one circuit to produce witnesses for every universally quantified y. Step 1.1 applies the hypothesis directly to the NP prefix-extension language E_R and composes its length-indexed decision circuits into a search circuit; step 2.1 existentially quantifies that circuit and verifies only R(x,y,C(x,y)). Complementation gives equality of the second level and the standard induction collapses PH; no CircuitSAT or advice-equivalence fact is used."
+      }
+    },
+    "fs-polynomial-size-implies-uniform-generation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-circuit-family-and-p-poly",
+          "source_section": "Definition",
+          "quote": "A circuit family is a sequence (C_n) with exactly n inputs at length n. It recognizes L if C_n(x)=1 exactly when x belongs to L for every n-bit x. P/poly contains exactly the languages recognized by families with polynomial size; no algorithm that constructs C_n from n is required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-undecidable-languages-exist-in-p-poly",
+          "source_section": "Statement",
+          "quote": "There is an undecidable language in $\\mathrm{P/poly}$; indeed, one can choose a\nlanguage having constant-size circuits at every input length.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $(C_n)$ be the constant-size family for the undecidable length language from [L2]. If a polynomial-time generator $G$ output $C_n$ on input $1^n$, then on any word $x$ one could compute $G(1^{|x|})$ and evaluate that constant- size circuit on $x$ in polynomial time.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The resulting algorithm would decide the language, contradicting its undecidability. Hence this polynomial-size family has no such generator.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The size condition in [L1] is therefore strictly nonuniform; effective generation is an additional hypothesis.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 evaluates the generated length-zero circuit on the empty input exactly as it does every other length."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Polynomial-size circuits imply a uniform polynomial-time generator, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Polynomial-size circuits imply a uniform polynomial-time generator, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Polynomial-size circuits imply a uniform polynomial-time generator, the collapsed-configuration analysis is handled in step 3.1: The size condition in [L1] is therefore strictly nonuniform;"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Polynomial-size circuits imply a uniform polynomial-time generator, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Polynomial-size circuits imply a uniform polynomial-time generator, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Polynomial-size circuits imply a uniform polynomial-time generator, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Polynomial-size circuits imply a uniform polynomial-time generator, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "fs-shannon-counting-gives-an-explicit-hard-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-counting-circuits-of-bounded-size",
+          "source_section": "Statement",
+          "quote": "For $n,s\\ge1$, the number of Boolean functions on $n$ inputs computed by\ncircuits of size at most $s$ over the fixed page basis is at most\n$$2^{O(s\\log(n+s))}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-shannon-almost-all-functions-require-exponential-circuits",
+          "source_section": "Statement",
+          "quote": "As $n\\to\\infty$, the proportion of Boolean functions on $n$ variables having\ncircuit size at most $2^n/(10n)$ tends to $0$. In particular, almost all\nBoolean functions require circuit size $\\Omega(2^n/n)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The argument in [L1] and [L2] compares two cardinalities and concludes that the complement of the set of small-circuit truth tables is nonempty (and large). None of its inequalities selects a member of that complement or gives an algorithm computing the selected truth table from $n$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Consequently the counting proof establishes existential hardness but does not, by itself, specify a hard function family. Producing an explicit family requires an additional construction and lower-bound argument absent from the count.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This distinction refutes the claim that the Shannon counting argument itself supplies an explicit hard function.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 distinguishes lengthwise existence from a uniformly selected family; no empty-family inference is used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Shannon counting gives an explicit circuit-hard function, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Shannon counting gives an explicit circuit-hard function, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Shannon counting gives an explicit circuit-hard function, the collapsed-configuration analysis is handled in step 3.1: This distinction refutes the claim that the Shannon counting argument itself supplies an explicit hard function."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Shannon counting gives an explicit circuit-hard function, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Shannon counting gives an explicit circuit-hard function, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Shannon counting gives an explicit circuit-hard function, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Shannon counting gives an explicit circuit-hard function, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "ex-p-poly-equals-p-with-polynomial-advice": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-p-poly-equals-p-with-polynomial-advice",
+          "source_section": "Statement",
+          "quote": "$\\mathrm{P/poly}$ is exactly the class of languages decided in polynomial time\nwith polynomial-length advice.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Replacing the advice wire by the constant $1$ turns the XOR gate into a NOT gate on $x_1$; the unused input $x_2$ remains an input wire. On $00$, both $M(00,1)$ and $C_2(00)$ output $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely encode $C_2$ by the topological list ``input $x_1$; NOT that wire; designate it as output.'' A fixed evaluator given this list as advice returns $1$ on $00$ and, for every two-bit $x$, returns $\\neg x_1$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The same finite instance therefore exhibits both hardwiring and circuit- encoding directions of [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For Hardwiring a length-indexed advice string, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Hardwiring a length-indexed advice string, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Hardwiring a length-indexed advice string, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Hardwiring a length-indexed advice string, the collapsed-configuration analysis is handled in step 3.1: The same finite instance therefore exhibits both hardwiring and circuit- encoding directions of [L1]."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Hardwiring a length-indexed advice string, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Hardwiring a length-indexed advice string, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Hardwiring a length-indexed advice string, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Hardwiring a length-indexed advice string, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "ex-karp-lipton-collapse": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-karp-lipton-collapse",
+          "source_section": "Statement",
+          "quote": "If $\\mathrm{NP}\\subseteq\\mathrm{P/poly}$, then the polynomial hierarchy\ncollapses to its second level:\n$$\\mathrm{PH}=\\Sigma_2^p.$$\nHere $\\Sigma_2^p$ consists of languages expressible as\n$x\\in L\\iff\\exists u\\,\\forall v\\,R(x,u,v)$ for a polynomial-time predicate\n$R$ and polynomially bounded strings; $\\Pi_2^p$ reverses the two quantifiers,\nand $\\mathrm{PH}$ is the union of the constant-alternation levels.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a fixed $y$, let $F_y(z)=\\bigwedge_{i=1}^m(z_i\\leftrightarrow y_i)$. The identity circuit has size $O(m)$ and outputs $C(y)=y$, so $F_y(C(y))=1$ for every $y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Hence the predicate has the $\\Sigma_2^p$ certificate form $\\exists C\\,\\forall y\\;F_y(C(y))=1$. The deterministic check evaluates only the displayed assignment $C(y)$ in $F_y$; it does not try to verify a global claim that $C$ decides satisfiability.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This is the finite local-verification pattern used in the Karp--Lipton argument of [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For A Sigma_2 verification of a candidate SAT circuit, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For A Sigma_2 verification of a candidate SAT circuit, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For A Sigma_2 verification of a candidate SAT circuit, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For A Sigma_2 verification of a candidate SAT circuit, the collapsed-configuration analysis is handled in step 3.1: This is the finite local-verification pattern used in the Karp--Lipton argument of [L1]."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For A Sigma_2 verification of a candidate SAT circuit, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For A Sigma_2 verification of a candidate SAT circuit, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For A Sigma_2 verification of a candidate SAT circuit, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For A Sigma_2 verification of a candidate SAT circuit, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "cex-polynomial-size-implies-uniform-generation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-undecidable-languages-exist-in-p-poly",
+          "source_section": "Statement",
+          "quote": "There is an undecidable language in $\\mathrm{P/poly}$; indeed, one can choose a\nlanguage having constant-size circuits at every input length.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], $L$ is undecidable and the chosen $C_n$ computes $L$ on every $n$-bit input. Each $C_n$ is one constant-output gate.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If an algorithm $G$ generated $C_n$ from $1^n$ in polynomial time, then on input $1^n$ we could run $G$, evaluate its output circuit on $1^n$, and answer whether $n\\in H$. This would decide the diagonal halting set, contrary to [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus the displayed constant-size family is the promised concrete counterexample to uniform generation.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 defines the constant circuit at every length, including n=0 and its sole empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Unary circuits for an undecidable language are not uniformly generated, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Unary circuits for an undecidable language are not uniformly generated, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Unary circuits for an undecidable language are not uniformly generated, the collapsed-configuration analysis is handled in step 3.1: Thus the displayed constant-size family is the promised concrete counterexample to uniform generation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Unary circuits for an undecidable language are not uniformly generated, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Unary circuits for an undecidable language are not uniformly generated, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Unary circuits for an undecidable language are not uniformly generated, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Unary circuits for an undecidable language are not uniformly generated, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "prop-number-sat-is-in-sharpp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sharpp-and-gap-p-functions",
+          "source_section": "Definition",
+          "quote": "A #P function maps each input to the number of accepting paths of a binary-branching polynomial-time nondeterministic machine. A GapP function is accepting paths minus rejecting paths of such a machine. Function values are represented in binary.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First check the formula syntax and declared-variable list deterministically; on malformed input reject without making a nondeterministic choice. On a valid input with $n$ declared variables, make exactly $n$ binary choices, interpret them in the declared order as an assignment, evaluate the formula, and accept exactly when it is true.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The $2^n$ computation paths are in bijection with the $2^n$ declared assignments, and a path accepts exactly when its assignment satisfies the formula. At $n=0$ there is one path, corresponding to the empty assignment; malformed input has no accepting path. Thus the accepting-path count is exactly $\\mathrm{NumberSAT}(\\varphi)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The machine runs in polynomial time, so its counting function belongs to $\\#\\mathrm P$ by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For NumberSAT belongs to Sharp-P, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For NumberSAT belongs to Sharp-P, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For NumberSAT belongs to Sharp-P, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For NumberSAT belongs to Sharp-P, the collapsed-configuration analysis is handled in step 2.1: The $2^n$ computation paths are in bijection with the $2^n$ declared assignments, and a path accepts exactly when its assignment satisfies the formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For NumberSAT belongs to Sharp-P, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For NumberSAT belongs to Sharp-P, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For NumberSAT belongs to Sharp-P, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For NumberSAT belongs to Sharp-P, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "lem-cook-levin-can-be-made-parsimonious": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-computation-tableau",
+          "source_section": "Definition",
+          "quote": "Fix a nondeterministic one-tape Turing machine $N$ and an input word $w$.\nSuppose $T\\ge |w|$, every branch of $N$ on $w$ halts within $T$ steps, and no\nbranch visits a tape cell beyond position $T$. A **bounded computation\ntableau** for $N$ on $w$ is a\n$(T+1)\\times(T+1)$ array whose rows encode one computation branch of $N$ on\n$w$, padded after halting if necessary:\n\n- row $0$ is the initial configuration on input $w$,\n- each later row is obtained from the previous row by one legal transition of\n  $N$, or else repeats the previous row unchanged when that previous row is\n  already halting,\n- and each row contains exactly one distinguished state-tagged tape symbol,\n  marking the head position and current state.\n\nThe tableau is **accepting** when some row is an accepting configuration.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs",
+          "source_section": "Statement",
+          "quote": "Fix a nondeterministic one-tape machine $N$, an input $w$, and a bound\n$T\\ge |w|$ such that every branch of $N$ on $w$ halts within $T$ steps and\nnever visits a tape cell beyond position $T$. Let\n$$ \\psi_{N,w}:=\\psi_{\\mathrm{cell}}\\land\\psi_{\\mathrm{start}}\\land\\psi_{\\mathrm{move}}\\land\\psi_{\\mathrm{accept}} $$\nbe the standard Cook-Levin formula built from the tableau variables. Then\n$\\psi_{N,w}$ is satisfiable if and only if there exists an accepting bounded\ncomputation tableau for $N$ on $w$ of height and width $T+1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cook-levin-map-is-polynomial-time",
+          "source_section": "Statement",
+          "quote": "For a fixed nondeterministic polynomial-time machine $N$, the map sending an\ninput $w$ to the Cook-Levin formula $\\psi_{N,w}$ is computable in polynomial\ntime.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-parsimonious-reduction",
+          "source_section": "Definition",
+          "quote": "A parsimonious reduction f to g is a polynomial-time map r with f(x)=g(r(x)) for every input x. This exact count equality is stronger than a decision many-one reduction, which preserves only nonzeroness.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-number-sat",
+          "source_section": "Definition",
+          "quote": "An input to $\\mathrm{NumberSAT}$ is well formed when it encodes a Boolean\nformula $\\varphi$ together with an ordered list\n$(x_1,\\ldots,x_n)$ of distinct variables and every variable occurring in\n$\\varphi$ appears in that list. Its value is the exact number of assignments\n$a:\\{x_1,\\ldots,x_n\\}\\to\\{0,1\\}$ that satisfy $\\varphi$. Declared variables\ncount even when unused, so the count ranges over all $2^n$ assignments to the\nlist. Every input not having this form is malformed and has value zero.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Replace $N$ by a fixed one-tape simulator $N^*$. Between two transitions of $N$, the simulator's sweeps are deterministic; at an original nondeterministic transition it makes exactly the same tagged choice as $N$. Each such choice first enters a distinct intermediate state labelled by its transition tag, before deterministically executing that transition; these states are part of the recorded configuration. Even choices with the same eventual successor therefore give different tableau rows. Erasing the deterministic simulation steps and reading these tags is a bijection between accepting paths. The standard multitape-to-one-tape simulation has polynomial slowdown. Choose a polynomial $T(n)\\ge n+1$ bounding both its running time and every tape position it can visit, and pad every halted branch to time $T(n)$. This supplies all hypotheses of [L1]--[L3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use one-hot tableau variables for the symbol (including the tagged state) in every time-cell position. The initial-row, exactly-one-symbol, local-transition, and accepting constraints use only those variables. Take their conjunction as $\\varphi_{N,x}$ without introducing auxiliary variables. Let $V_{N,x}$ list every cell variable $X_{t,c,a}$ once, in lexicographic order of time, cell, and a fixed order on the simulator alphabet. Output the encoded pair $(\\varphi_{N,x},V_{N,x})$, which is well formed for NumberSAT.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L5",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "An accepting path fixes every cell of its padded tableau and therefore one truth value for every tableau variable. Every declared variable is such a cell variable, so none contributes a free choice. Conversely, any satisfying assignment gives exactly one legal accepting tableau by [L2], and the retained choice tags recover exactly one accepting path of $N^*$, hence exactly one accepting path of $N$ by step 1.1. These maps are inverse, so $$\\#\\operatorname{acc}_N(x)=\\mathrm{NumberSAT}(\\varphi_{N,x},V_{N,x}).$$",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The tableau has polynomial dimensions, its local constraints have polynomial total size, and [L3] supplies the polynomial-time construction. Enumerating the polynomially many declared variable names in the specified order also takes polynomial time. Together with the exact equality in step 3.1, [L4] proves parsimony.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For The Cook--Levin construction can be made parsimonious, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For The Cook--Levin construction can be made parsimonious, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For The Cook--Levin construction can be made parsimonious, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For The Cook--Levin construction can be made parsimonious, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        },
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses T at least n+1, so empty input still has a nonempty tableau."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives no satisfiers when there are no accepting paths."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 gives one satisfying assignment for a single accepting path."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 distinguish choices with identical eventual successors by intermediate tag states and pad halted branches uniquely."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "final-adjudicator-a",
+        "notes": "Transition-specific intermediate states distinguish merged choices. Deterministic simulation and repeated halting rows preserve paths. The output includes the ordered list of all one-hot cell variables and no auxiliaries or free padding variables. Exact one-hot assignments and tagged accepting paths are inverse maps."
+      }
+    },
+    "thm-number-sat-is-sharpp-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sharpp-and-gap-p-functions",
+          "source_section": "Definition",
+          "quote": "A #P function maps each input to the number of accepting paths of a binary-branching polynomial-time nondeterministic machine. A GapP function is accepting paths minus rejecting paths of such a machine. Function values are represented in binary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-number-sat-is-in-sharpp",
+          "source_section": "Statement",
+          "quote": "$\\mathrm{NumberSAT}$ belongs to $\\#\\mathrm P$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cook-levin-can-be-made-parsimonious",
+          "source_section": "Statement",
+          "quote": "For every fixed polynomial-time nondeterministic machine $N$, one can compute\nin polynomial time a formula $\\varphi_{N,x}$ together with an ordered list\n$V_{N,x}$ of all its declared variables, whose satisfying assignments are\nin bijection with the accepting computation paths of $N$ on $x$. Consequently\n$x\\mapsto(\\varphi_{N,x},V_{N,x})$ is a parsimonious reduction from the accepting-path\ncount of $N$ to $\\mathrm{NumberSAT}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-parsimonious-reduction",
+          "source_section": "Definition",
+          "quote": "A parsimonious reduction f to g is a polynomial-time map r with f(x)=g(r(x)) for every input x. This exact count equality is stronger than a decision many-one reduction, which preserves only nonzeroness.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a machine $N$ with $f(x)=\\#\\operatorname{acc}_N(x)$ as supplied by [L1]. Apply [L3] to compute the formula $r(x)=\\varphi_{N,x}$ in polynomial time.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every input $x$, the bijection in [L3] gives the exact chain $$ f(x)=\\#\\operatorname{acc}_N(x) =\\#\\operatorname{sat}(\\varphi_{N,x}) =\\mathrm{NumberSAT}(r(x)). $$ Thus $r$ is a parsimonious reduction by [L4].",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $f$ was arbitrary, step 2.1 proves $\\#\\mathrm P$-hardness, and [L2] proves membership.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is Sharp-P-complete under parsimonious reductions, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is Sharp-P-complete under parsimonious reductions, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is Sharp-P-complete under parsimonious reductions, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For NumberSAT is Sharp-P-complete under parsimonious reductions, the collapsed-configuration analysis is handled in step 3.1: Since $f$ was arbitrary, step 2.1 proves $\\#\\mathrm P$-hardness, and [L2] proves membership."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is Sharp-P-complete under parsimonious reductions, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is Sharp-P-complete under parsimonious reductions, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is Sharp-P-complete under parsimonious reductions, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is Sharp-P-complete under parsimonious reductions, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "prop-fp-is-contained-in-sharpp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-fp-function-class",
+          "source_section": "Definition",
+          "quote": "On this page FP is the class of total nonnegative integer-valued functions whose binary outputs are computable in deterministic polynomial time.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-sharpp-and-gap-p-functions",
+          "source_section": "Definition",
+          "quote": "A #P function maps each input to the number of accepting paths of a binary-branching polynomial-time nondeterministic machine. A GapP function is accepting paths minus rejecting paths of such a machine. Function values are represented in binary.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On input $x$, compute $m=f(x)$ using [L1] and let $k=\\max(1,|\\operatorname{bin}(m)|)$. Make exactly $k$ binary nondeterministic choices, producing one path for every integer $u\\in[0,2^k)$. Accept iff $u<m$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Exactly the $m$ values $u=0,\\ldots,m-1$ accept; all power-of-two padding values reject. This remains correct at $m=0$, when no path accepts. The output length and hence $k$ are polynomially bounded by the running time in [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The constructed machine runs in polynomial time and has accepting-path count $f(x)$, so $f\\in\\#\\mathrm P$ by [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For FP is contained in Sharp-P, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For FP is contained in Sharp-P, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For FP is contained in Sharp-P, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For FP is contained in Sharp-P, the collapsed-configuration analysis is handled in step 3.1: The constructed machine runs in polynomial time and has accepting-path count $f(x)$, so $f\\in\\#\\mathrm P$ by [L2]."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For FP is contained in Sharp-P, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For FP is contained in Sharp-P, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For FP is contained in Sharp-P, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For FP is contained in Sharp-P, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "group-alpha-6b-a",
+        "notes": "The risk is representing an arbitrary binary FP output as a path count without assuming the output is positive or overlooking the zero case. The proof computes m=f(x), chooses a polynomial output-width k, and accepts precisely the k-bit guesses u with u<m. There are exactly m such strings when 0<=m<2^k; in particular m=0 yields no accepting paths. Runtime and branching width remain polynomial."
+      }
+    },
+    "prop-sharpp-is-closed-under-sum-and-product": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sharpp-and-gap-p-functions",
+          "source_section": "Definition",
+          "quote": "A #P function maps each input to the number of accepting paths of a binary-branching polynomial-time nondeterministic machine. A GapP function is accepting paths minus rejecting paths of such a machine. Function values are represented in binary.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the sum, make one initial binary choice. On its $0$ branch simulate $M_f(x)$ and on its $1$ branch simulate $M_g(x)$. The accepting paths are a disjoint tagged union, so their number is $f(x)+g(x)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the product, simulate $M_f(x)$; after each accepting path, independently simulate $M_g(x)$, while every rejecting $M_f$ path rejects. Each of the $f(x)$ accepting first-stage paths has exactly $g(x)$ accepting continuations, so the total is $f(x)g(x)$. This also covers either count being zero.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both composite machines run in polynomial time, so [L1] puts their two counting functions in $\\#\\mathrm P$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is closed under sum and product, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is closed under sum and product, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is closed under sum and product, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Sharp-P is closed under sum and product, the collapsed-configuration analysis is handled in step 1.2: For the product, simulate $M_f(x)$;"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is closed under sum and product, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is closed under sum and product, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is closed under sum and product, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is closed under sum and product, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "thm-pp-is-sign-testing-gap-p": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sharpp-and-gap-p-functions",
+          "source_section": "Definition",
+          "quote": "A #P function maps each input to the number of accepting paths of a binary-branching polynomial-time nondeterministic machine. A GapP function is accepting paths minus rejecting paths of such a machine. Function values are represented in binary.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-rp-corp-zpp-bpp-and-pp",
+          "source_section": "Definition",
+          "quote": "Let $L$ be a language. Each bounded-error class below is defined by the\nexistence of a probabilistic polynomial-time machine $M$ satisfying the stated\nconditions on every input $x$.\n\n- $L$ lies in **RP** when there exists such an $M$ for which:\n  - if $x\\notin L$, then $M$ rejects with probability $1$;\n  - if $x\\in L$, then $M$ accepts with probability at least $1/2$.\n\n- $L$ lies in **coRP** when there exists such an $M$ for which:\n  - if $x\\in L$, then $M$ accepts with probability $1$;\n  - if $x\\notin L$, then $M$ rejects with probability at least $1/2$.\n\n- $L$ lies in **BPP** when there exists such an $M$ for which:\n  - if $x\\in L$, then $M$ accepts with probability at least $2/3$;\n  - if $x\\notin L$, then $M$ rejects with probability at least $2/3$.\n\n- $L$ lies in **PP** when there exists such an $M$ for which:\n  - if $x\\in L$, then $M$ accepts with probability strictly greater than $1/2$;\n  - if $x\\notin L$, then $M$ accepts with probability at most $1/2$.\n\n- $L$ lies in **ZPP** when there is a probabilistic algorithm that always\n  outputs the correct yes/no answer and whose expected runtime is polynomial in\n  the input length.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let a PP machine use exactly $p(|x|)$ random bits, padding unused bits if necessary, and let $a(x)$ and $r(x)$ be its accepting and rejecting choice- string counts. Then $g=a-r$ is in GapP by [L1], and $g(x)>0$ exactly when $a(x)>2^{p(|x|)-1}$, the strict PP condition in [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely write $g=f-h$ with $f,h\\in\\#\\mathrm P$. Normalize their machines to guess the same $p(|x|)$-bit string, rejecting invalid encodings, so each has exactly $2^p$ total paths. Construct a machine with one leading choice: on branch $0$ run the machine for $f$ with its labels unchanged; on branch $1$ run the machine for $h$ with accept and reject exchanged. It has $f(x)+(2^p-h(x))$ accepting paths out of $2^{p+1}$, a strict majority exactly when $f(x)-h(x)>0$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove the two implications, including the strict zero boundary.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For PP is strict sign testing for Gap-P, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For PP is strict sign testing for Gap-P, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For PP is strict sign testing for Gap-P, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For PP is strict sign testing for Gap-P, the collapsed-configuration analysis is handled in step 2.1: Steps 1.1 and 1.2 prove the two implications, including the strict zero boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For PP is strict sign testing for Gap-P, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For PP is strict sign testing for Gap-P, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves the PP-to-positive-GapP implication and includes the strict tie boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.2 constructs a PP machine from a positive-GapP witness and rejects exactly when the gap is zero."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "group-alpha-6b-a",
+        "notes": "The risk is the strict threshold and especially the g(x)=0 endpoint in both directions. From a normalized PP machine, accepting minus rejecting paths is positive exactly above one half. Conversely, equal-width #P machines for f and h are combined by retaining f labels and swapping h labels, producing f+(2^p-h) acceptances out of 2^(p+1). This is a strict majority iff f-h>0, and equality gives rejection as required."
+      }
+    },
+    "cor-majority-sat-is-pp-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-majority-sat",
+          "source_section": "Definition",
+          "quote": "MajoritySAT asks whether NumberSAT(phi)>2^(n-1), where n is the declared-variable count. At n=0 this is equivalent to the empty assignment satisfying phi.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pp-is-sign-testing-gap-p",
+          "source_section": "Statement",
+          "quote": "A language $L$ lies in $\\mathrm{PP}$ if and only if there is a\n$g\\in\\mathrm{GapP}$ such that\n$$x\\in L\\iff g(x)>0.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cook-levin-can-be-made-parsimonious",
+          "source_section": "Statement",
+          "quote": "For every fixed polynomial-time nondeterministic machine $N$, one can compute\nin polynomial time a formula $\\varphi_{N,x}$ together with an ordered list\n$V_{N,x}$ of all its declared variables, whose satisfying assignments are\nin bijection with the accepting computation paths of $N$ on $x$. Consequently\n$x\\mapsto(\\varphi_{N,x},V_{N,x})$ is a parsimonious reduction from the accepting-path\ncount of $N$ to $\\mathrm{NumberSAT}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On a well-formed formula with $n$ declared variables, a probabilistic machine chooses the $n$ assignment bits uniformly and accepts exactly on a satisfying assignment. Its acceptance probability is $\\mathrm{NumberSAT}(\\varphi)/2^n$, so [L1] gives membership in PP; for $n=0$ the unique random string is the empty assignment.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For hardness, normalize a PP machine to $2^{p}$ paths with $p\\ge1$, $a$ of them accepting. By [L3] obtain a formula $\\varphi$ with exactly $a$ satisfying assignments. Add uniquely forced variables until its declared count $q$ obeys $q\\ge p$, preserving its count. For $u=(u_{q-1},\\ldots,u_0)$ let $T(u)=u_{q-1}\\lor\\cdots\\lor u_{p-1}$; exactly $2^q-2^{p-1}$ assignments satisfy $T$. With a fresh selector $z$, put $$\\theta=(\\neg z\\land\\varphi)\\lor(z\\land T).$$ Then $$\\#\\theta=a+2^q-2^{p-1}>2^q \\iff a>2^{p-1}.$$ The formula and its declared list are produced in polynomial time.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 is a membership-preserving reduction from every PP language to MajoritySAT, and step 1.1 gives membership; hence MajoritySAT is PP-complete.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For MajoritySAT is PP-complete, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For MajoritySAT is PP-complete, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For MajoritySAT is PP-complete, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For MajoritySAT is PP-complete, the collapsed-configuration analysis is handled in step 1.1: On a well-formed formula with $n$ declared variables, a probabilistic machine chooses the $n$ assignment bits uniformly and accepts exactly on a satisfying assignment."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For MajoritySAT is PP-complete, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For MajoritySAT is PP-complete, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For MajoritySAT is PP-complete, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For MajoritySAT is PP-complete, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "group-alpha-6b-a",
+        "notes": "The risk is aligning a parsimonious Cook--Levin count with the strict half threshold when the produced formula has a different number of declared variables. The proof pads only with uniquely forced variables, chooses p>=1, and adds a selector whose second branch contributes exactly 2^q-2^(p-1) assignments. Thus the new formula has a strict majority exactly when the original machine has a>2^(p-1) accepting paths; the membership proof also handles the n=0 empty assignment."
+      }
+    },
+    "thm-pp-is-closed-under-complement": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sharpp-and-gap-p-functions",
+          "source_section": "Definition",
+          "quote": "A #P function maps each input to the number of accepting paths of a binary-branching polynomial-time nondeterministic machine. A GapP function is accepting paths minus rejecting paths of such a machine. Function values are represented in binary.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pp-is-sign-testing-gap-p",
+          "source_section": "Statement",
+          "quote": "A language $L$ lies in $\\mathrm{PP}$ if and only if there is a\n$g\\in\\mathrm{GapP}$ such that\n$$x\\in L\\iff g(x)>0.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], choose $g\\in\\mathrm{GapP}$ with $L=\\{x:g(x)>0\\}$. Since $g$ is integer-valued, $$x\\notin L\\iff g(x)\\le0\\iff1-g(x)>0.$$",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $g$ is witnessed by a machine, exchanging its accepting and rejecting labels witnesses $-g$ in GapP. A deterministic accepting machine witnesses the constant-one gap, and a leading tagged branch adds two gap functions. Hence $1-g\\in\\mathrm{GapP}$ by [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [L2] to $1-g$ shows that $\\overline L\\in\\mathrm{PP}$. The added $1$ is exactly what turns the non-strict condition $g\\le0$ into strict positivity, including $g=0$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For PP is closed under complement, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For PP is closed under complement, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For PP is closed under complement, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For PP is closed under complement, the collapsed-configuration analysis is handled in step 3.1: Applying [L2] to $1-g$ shows that $\\overline L\\in\\mathrm{PP}$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For PP is closed under complement, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For PP is closed under complement, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For PP is closed under complement, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For PP is closed under complement, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "group-alpha-6b-a",
+        "notes": "The risk is that simply negating a strict-majority machine mishandles ties. The current proof uses the GapP sign characterization and the integer-valued transform h=1-g. For every integer g, g<=0 iff 1-g>0, including the tie g=0; GapP closure under negation and the constant-one function then supplies the required witness for the complement."
+      }
+    },
+    "prop-np-is-contained-in-p-sharpp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-p-with-a-sharpp-oracle",
+          "source_section": "Definition",
+          "quote": "$\\mathrm{P}^{\\#\\mathrm P}$ is deterministic polynomial time with oracle\naccess to the fixed $\\#\\mathrm P$-complete function $\\mathrm{NumberSAT}$ of\n[[thm-number-sat-is-sharpp-complete]]. The machine may make polynomially many\nadaptive queries of polynomial length, each answered by the binary expansion\nof the integer value rather than by a membership bit. Equivalently, one may\nuse any fixed $\\#\\mathrm P$ function complete under polynomial-time\nparsimonious reductions; completeness makes the resulting class independent\nof that choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-sharpp-and-gap-p-functions",
+          "source_section": "Definition",
+          "quote": "A #P function maps each input to the number of accepting paths of a binary-branching polynomial-time nondeterministic machine. A GapP function is accepting paths minus rejecting paths of such a machine. Function values are represented in binary.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $h(x)=|\\{y\\in\\{0,1\\}^{p(|x|)}:R(x,y)=1\\}|$. A nondeterministic machine guesses the $p(|x|)$ bits and accepts exactly when $R$ does, so $h\\in\\#\\mathrm P$ by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A deterministic polynomial-time oracle machine makes the single query $h(x)$ and accepts iff the returned binary integer is nonzero. The answer has at most $p(|x|)+1$ bits, and $h(x)>0$ exactly when an NP witness exists.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This oracle machine decides $L$, proving the containment.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For NP is contained in P with a Sharp-P oracle, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For NP is contained in P with a Sharp-P oracle, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For NP is contained in P with a Sharp-P oracle, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For NP is contained in P with a Sharp-P oracle, the collapsed-configuration analysis is handled in step 3.1: This oracle machine decides $L$, proving the containment."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For NP is contained in P with a Sharp-P oracle, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For NP is contained in P with a Sharp-P oracle, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For NP is contained in P with a Sharp-P oracle, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For NP is contained in P with a Sharp-P oracle, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "fs-sharpp-is-a-language-class": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sharpp-and-gap-p-functions",
+          "source_section": "Definition",
+          "quote": "A #P function maps each input to the number of accepting paths of a binary-branching polynomial-time nondeterministic machine. A GapP function is accepting paths minus rejecting paths of such a machine. Function values are represented in binary.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By direct enumeration, $\\mathrm{NumberSAT}(\\varphi)=3$ and $\\mathrm{NumberSAT}(\\psi)=2$. NumberSAT is a $\\#\\mathrm P$ function, while neither $2$ nor $3$ is a Boolean membership value.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The associated decision language SAT retains only the predicate $\\mathrm{NumberSAT}(\\theta)>0$; it answers yes on both displayed formulas and forgets their distinct counts.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus, under [L1], $\\#\\mathrm P$ is a numerical function class rather than a language class.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is a language class, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is a language class, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is a language class, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Sharp-P is a language class, the collapsed-configuration analysis is handled in step 3.1: Thus, under [L1], $\\#\\mathrm P$ is a numerical function class rather than a language class."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is a language class, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is a language class, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is a language class, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Sharp-P is a language class, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "fs-every-many-one-reduction-is-parsimonious": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-time-many-one-reduction",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\Sigma^*$ and $B\\subseteq\\Gamma^*$ be languages over finite\nalphabets. A **polynomial-time many-one reduction** from $A$ to $B$ is a total\nfunction\n$$ f:\\Sigma^*\\to\\Gamma^* $$\nsuch that:\n\n- $f$ is computable by a deterministic Turing machine in polynomial time, and\n- for every $x\\in\\Sigma^*$,\n  $$ x\\in A\\iff f(x)\\in B. $$\n\nWhen such an $f$ exists, write\n$$ A\\le_p B. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-parsimonious-reduction",
+          "source_section": "Definition",
+          "quote": "A parsimonious reduction f to g is a polynomial-time map r with f(x)=g(r(x)) for every input x. This exact count equality is stronger than a decision many-one reduction, which preserves only nonzeroness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-number-sat",
+          "source_section": "Definition",
+          "quote": "An input to $\\mathrm{NumberSAT}$ is well formed when it encodes a Boolean\nformula $\\varphi$ together with an ordered list\n$(x_1,\\ldots,x_n)$ of distinct variables and every variable occurring in\n$\\varphi$ appears in that list. Its value is the exact number of assignments\n$a:\\{x_1,\\ldots,x_n\\}\\to\\{0,1\\}$ that satisfy $\\varphi$. Declared variables\ncount even when unused, so the count ranges over all $2^n$ assignments to the\nlist. Every input not having this form is malformed and has value zero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $r(\\theta)=\\theta\\land(y\\lor\\neg y)$ and declare $y$ in addition to the original variables. The map is polynomial time, and $\\theta$ is satisfiable iff $r(\\theta)$ is satisfiable, so it is a SAT-to-SAT many-one reduction by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each satisfying assignment of $\\theta$ has exactly two extensions, one for each value of $y$. Hence [L3] gives $\\mathrm{NumberSAT}(r(\\theta))=2\\mathrm{NumberSAT}(\\theta)$. For the concrete input $\\theta=x_1$, the counts are $1$ and $2$, so the map is not parsimonious under [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This one polynomial-time decision reduction refutes the universal claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For Every decision many-one reduction is parsimonious, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Every decision many-one reduction is parsimonious, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Every decision many-one reduction is parsimonious, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Every decision many-one reduction is parsimonious, the collapsed-configuration analysis is handled in step 3.1: This one polynomial-time decision reduction refutes the universal claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Every decision many-one reduction is parsimonious, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Every decision many-one reduction is parsimonious, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Every decision many-one reduction is parsimonious, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Every decision many-one reduction is parsimonious, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "group-alpha-6b-a",
+        "notes": "The risk is confusing Boolean membership preservation with preservation of witness counts. The current counterexample maps theta to theta AND (y OR NOT y) with fresh y. It preserves satisfiability in both directions and is polynomial time, yet every satisfying assignment has exactly two extensions. The explicit theta=x_1 instance has counts one and two, so it conclusively separates many-one from parsimonious reduction."
+      }
+    },
+    "ex-cook-levin-can-be-made-parsimonious": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cook-levin-can-be-made-parsimonious",
+          "source_section": "Statement",
+          "quote": "For every fixed polynomial-time nondeterministic machine $N$, one can compute\nin polynomial time a formula $\\varphi_{N,x}$ together with an ordered list\n$V_{N,x}$ of all its declared variables, whose satisfying assignments are\nin bijection with the accepting computation paths of $N$ on $x$. Consequently\n$x\\mapsto(\\varphi_{N,x},V_{N,x})$ is a parsimonious reduction from the accepting-path\ncount of $N$ to $\\mathrm{NumberSAT}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The paths are ``start $\\xrightarrow{0}$ accept-with-tag-$0$'' and ``start $\\xrightarrow{1}$ accept-with-tag-$1$''. Padding repeats the final configuration, so these give two and only two legal accepting tableaux.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the exact encoding of [L1], the tableau variables are uniquely fixed by one of these tableaux and every auxiliary variable is constrained by a biconditional with the subformula it names. Equivalently, after eliminating those uniquely determined variables, the formula is the tautology $b\\lor\\neg b$ with declared variable $b$. Its two assignments correspond bijectively to the two paths.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the source accepting-path count and the formula's satisfying- assignment count are both exactly $2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For A two-branch computation and its parsimonious tableau formula, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For A two-branch computation and its parsimonious tableau formula, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For A two-branch computation and its parsimonious tableau formula, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For A two-branch computation and its parsimonious tableau formula, the collapsed-configuration analysis is handled in step 3.1: Therefore the source accepting-path count and the formula's satisfying- assignment count are both exactly $2$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For A two-branch computation and its parsimonious tableau formula, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For A two-branch computation and its parsimonious tableau formula, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For A two-branch computation and its parsimonious tableau formula, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For A two-branch computation and its parsimonious tableau formula, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "ex-np-is-contained-in-p-sharpp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-number-sat",
+          "source_section": "Definition",
+          "quote": "An input to $\\mathrm{NumberSAT}$ is well formed when it encodes a Boolean\nformula $\\varphi$ together with an ordered list\n$(x_1,\\ldots,x_n)$ of distinct variables and every variable occurring in\n$\\varphi$ appears in that list. Its value is the exact number of assignments\n$a:\\{x_1,\\ldots,x_n\\}\\to\\{0,1\\}$ that satisfy $\\varphi$. Declared variables\ncount even when unused, so the count ranges over all $2^n$ assignments to the\nlist. Every input not having this form is malformed and has value zero.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The formula is equivalent to $y$: the assignments $(0,1)$ and $(1,1)$ satisfy it, while $(0,0)$ and $(1,0)$ do not. Thus [L1] gives $\\mathrm{NumberSAT}(\\varphi)=2$, returned as $10_2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Testing the returned integer against zero accepts, which is correct because the displayed satisfying assignments exist. The single exact query summarizes all four assignments.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This is the promised finite instance of the $\\mathrm{NP}\\subseteq \\mathrm P^{\\#\\mathrm P}$ route.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For Deciding satisfiability by a NumberSAT oracle query, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For Deciding satisfiability by a NumberSAT oracle query, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For Deciding satisfiability by a NumberSAT oracle query, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Deciding satisfiability by a NumberSAT oracle query, the collapsed-configuration analysis is handled in step 2.1: Testing the returned integer against zero accepts, which is correct because the displayed satisfying assignments exist."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For Deciding satisfiability by a NumberSAT oracle query, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For Deciding satisfiability by a NumberSAT oracle query, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For Deciding satisfiability by a NumberSAT oracle query, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For Deciding satisfiability by a NumberSAT oracle query, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    },
+    "cex-sharpp-is-a-language-class": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-number-sat",
+          "source_section": "Definition",
+          "quote": "An input to $\\mathrm{NumberSAT}$ is well formed when it encodes a Boolean\nformula $\\varphi$ together with an ordered list\n$(x_1,\\ldots,x_n)$ of distinct variables and every variable occurring in\n$\\varphi$ appears in that list. Its value is the exact number of assignments\n$a:\\{x_1,\\ldots,x_n\\}\\to\\{0,1\\}$ that satisfy $\\varphi$. Declared variables\ncount even when unused, so the count ranges over all $2^n$ assignments to the\nlist. Every input not having this form is malformed and has value zero.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Exactly three assignments satisfy $x\\lor y$. Exactly the two assignments with unequal bits satisfy $(x\\lor y)\\land(\\neg x\\lor\\neg y)$. Hence [L1] gives outputs $3$ and $2$, neither in the Boolean codomain $\\{0,1\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both counts are positive, so the associated SAT predicate maps both inputs to yes. It therefore discards information that NumberSAT retains.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "These explicit values show that NumberSAT is a numerical function, not a Boolean membership predicate.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is not a Boolean membership predicate, the nullary-input analysis is not applicable: the claim fixes its objects directly and does not quantify over an arbitrary possibly empty indexing collection or empty aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is not a Boolean membership predicate, the additive-identity analysis is not applicable: the claim has no freely varying divisor, size, or scalar whose allowed zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is not a Boolean membership predicate, the unit-value analysis is not applicable: the claim has no unit-valued parameter or singleton base case that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For NumberSAT is not a Boolean membership predicate, the collapsed-configuration analysis is handled in step 3.1: These explicit values show that NumberSAT is a numerical function, not a Boolean membership predicate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is not a Boolean membership predicate, the boundary-value analysis is not applicable: the claim has no interval or limiting parameter with an omitted boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is not a Boolean membership predicate, the witness-selection analysis is not applicable: the proof makes no selection from an arbitrary nonempty family; its data are given or its witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is not a Boolean membership predicate, the necessity-direction analysis is not applicable: the statement is not biconditional, so it has no separate necessity implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For NumberSAT is not a Boolean membership predicate, the sufficiency-direction analysis is not applicable: the statement is not biconditional, so it has no separate sufficiency implication."
+        }
+      ]
+    }
+  }
+}

@@ -4,6 +4,15 @@ Work only on the dispatched group. For every batch, read its
 `research/<run>-step6-scope-<i>.json`, reader report and findings JSON, refuter
 report, current carrier, and cited dependencies.
 
+Compare each post-reader hash snapshot with `research/<run>-step6-hash-<i>-pre-6b.json`.
+The latter freezes repairs made by the full gate battery before this adjudication.
+For a changed carrier already routed as touched/page, decide its complete current
+state and use `amended_repair` when it differs from the reader result.
+For each other changed carrier, write `post-reader:<i>:<id>` with route `touched`
+(item) or `page`; compare against the post-reader and pre-6b snapshots for the
+accepted/amended/reverted verdict. Read these repairs independently and record
+the same evidence and ledger accountability as other repair obligations.
+
 Before closing the group, run `tools/risk-report.mjs` on each owned batch
 contract without `--require-reviewed`. For every item reported HIGH or CRITICAL,
 read the current proof and relevant reader/refuter and citation evidence, then

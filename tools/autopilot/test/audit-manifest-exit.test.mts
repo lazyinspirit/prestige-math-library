@@ -61,6 +61,24 @@ function runFixture(root: string, file: string) {
   });
 }
 
+/** Exercise stdout as the engine sees it: a pipe carrying enough relationship
+ * lines to exceed Node's immediately writable buffer. A forced process.exit()
+ * can otherwise discard the terminal liveness summary on a clean run. */
+function largeOutputFixture(repetitions = 4_000) {
+  const root = mkdtempSync(join(tmpdir(), 'am-large-output-'));
+  mkdirSync(join(root, 'tools'), { recursive: true });
+  mkdirSync(join(root, 'items'), { recursive: true });
+  mkdirSync(join(root, 'library', 'demo'), { recursive: true });
+  copyFileSync(TOOL, join(root, 'tools', 'audit-manifest.mjs'));
+  const deps = Array.from({ length: repetitions }, () => '  - thm-target').join('\n');
+  writeFileSync(join(root, 'items', 'thm-source.md'), `---\nid: thm-source\nstatus: draft\ndeps:\n${deps}\n---\n`);
+  writeFileSync(join(root, 'items', 'thm-target.md'), `---\nid: thm-target\nstatus: published\n---\n`);
+  writeFileSync(join(root, 'library', 'demo', 'target-page.md'), `---\npage: target-page\nstatus: published\nitems: [thm-target]\n---\n`);
+  const file = join(root, 'demo-batch-1.pages.json');
+  writeFileSync(file, JSON.stringify([{ id: 'source-page', items: [{ id: 'thm-source' }] }]));
+  return { root, file, repetitions };
+}
+
 test('a manifest naming a nonexistent item exits 1', () => {
   const { dir, file } = manifest([{
     id: 'demo-page',
@@ -104,6 +122,15 @@ test('the summary line carries the count the engine liveness probe reads', () =>
   assert.ok(m, `no liveness-readable summary line\n${r.stdout}${r.stderr}`);
   assert.ok(Number(m![1]) >= 1, 'the probe must see at least one manifest item');
   rmSync(dir, { recursive: true, force: true });
+});
+
+test('a large piped manifest flushes its terminal liveness summary', () => {
+  const { root, file, repetitions } = largeOutputFixture();
+  const r = runFixture(root, file);
+  assert.equal(r.status, 0, `${r.stdout}${r.stderr}`);
+  assert.match(r.stdout + r.stderr,
+    new RegExp(`audit-manifest: ${repetitions} relationship\\(s\\) over 1 item\\(s\\) in 1 batch\\(es\\); 0 defect\\(s\\)$`));
+  rmSync(root, { recursive: true, force: true });
 });
 
 test('an empty manifest reports zero items, so the liveness probe fails it', () => {

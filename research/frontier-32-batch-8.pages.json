@@ -1,0 +1,605 @@
+[
+  {
+    "order": 365.061,
+    "id": "triangulated-categories",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Triangulated Categories",
+    "companion": "triangulated-categories-examples",
+    "requires": [
+      "group-cohomology-as-a-derived-functor-examples"
+    ],
+    "items": [
+      {
+        "id": "def-category-with-translation",
+        "kind": "definition",
+        "title": "Category with translation",
+        "strategy": "Define an additive category equipped with a specified additive autoequivalence [1] and a specified quasi-inverse [-1]; do not derive either choice from an equivalence class of functors.",
+        "deps": [
+          "def-additive-category"
+        ]
+      },
+      {
+        "id": "def-triangle-in-a-category-with-translation",
+        "kind": "definition",
+        "title": "Triangle in a category with translation",
+        "strategy": "Define a triangle as X to Y to Z to X[1], retaining all three objects and all three displayed morphisms as data.",
+        "deps": [
+          "def-category-with-translation"
+        ]
+      },
+      {
+        "id": "def-morphism-and-isomorphism-of-triangles",
+        "kind": "definition",
+        "title": "Morphism and isomorphism of triangles",
+        "strategy": "Require three maps and all three commuting squares, including the square into the translated first object; define an isomorphism componentwise.",
+        "deps": [
+          "def-triangle-in-a-category-with-translation"
+        ]
+      },
+      {
+        "id": "def-rotation-of-a-triangle",
+        "kind": "definition",
+        "title": "Rotation of a triangle",
+        "strategy": "Fix left rotation as Y to Z to X[1] to -f[1] Y[1], and define the inverse rotation using the supplied quasi-inverse so every later sign has one convention.",
+        "deps": [
+          "def-triangle-in-a-category-with-translation"
+        ]
+      },
+      {
+        "id": "def-distinguished-triangle",
+        "kind": "definition",
+        "title": "Distinguished triangle",
+        "strategy": "Specify a class of triangles intended to satisfy the Verdier axioms, reserving the synonym exact triangle until those axioms have been imposed.",
+        "deps": [
+          "def-triangle-in-a-category-with-translation"
+        ]
+      },
+      {
+        "id": "def-triangulated-category-axiom-tr-one",
+        "kind": "definition",
+        "title": "Triangulated-category axiom TR1",
+        "strategy": "State closure under isomorphism, completion of every map to a distinguished triangle, and the identity triangle X to X to 0 to X[1].",
+        "deps": [
+          "def-distinguished-triangle",
+          "def-morphism-and-isomorphism-of-triangles"
+        ]
+      },
+      {
+        "id": "def-triangulated-category-axiom-tr-two",
+        "kind": "definition",
+        "title": "Triangulated-category axiom TR2",
+        "strategy": "State that a triangle is distinguished exactly when its declared signed left rotation is distinguished.",
+        "deps": [
+          "def-distinguished-triangle",
+          "def-rotation-of-a-triangle"
+        ]
+      },
+      {
+        "id": "def-triangulated-category-axiom-tr-three",
+        "kind": "definition",
+        "title": "Triangulated-category axiom TR3",
+        "strategy": "State completion of a commutative square on first maps to a morphism of triangles, explicitly asserting existence without a uniqueness clause.",
+        "deps": [
+          "def-distinguished-triangle",
+          "def-morphism-and-isomorphism-of-triangles"
+        ]
+      },
+      {
+        "id": "def-triangulated-category-axiom-tr-four-octahedral",
+        "kind": "definition",
+        "title": "Triangulated-category axiom TR4 (octahedral)",
+        "strategy": "For composable maps and chosen distinguished triangles for each map and their composite, state the typed octahedron, its fourth distinguished face, and its signed commutativity conditions.",
+        "deps": [
+          "def-distinguished-triangle",
+          "def-morphism-and-isomorphism-of-triangles",
+          "def-rotation-of-a-triangle"
+        ]
+      },
+      {
+        "id": "def-triangulated-category",
+        "kind": "definition",
+        "title": "Triangulated category",
+        "strategy": "Package a category with translation and a distinguished class satisfying TR1 through TR4, retaining the class and translation as specified structure.",
+        "deps": [
+          "def-category-with-translation",
+          "def-distinguished-triangle",
+          "def-triangulated-category-axiom-tr-one",
+          "def-triangulated-category-axiom-tr-two",
+          "def-triangulated-category-axiom-tr-three",
+          "def-triangulated-category-axiom-tr-four-octahedral"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "rem-triangulated-sign-convention",
+        "kind": "remark",
+        "title": "The triangulated rotation-sign convention",
+        "strategy": "Record that the library places the minus sign on the final map of left rotation, and translate every imported cone and long-exact-Hom formula to this convention.",
+        "deps": [
+          "def-rotation-of-a-triangle",
+          "def-triangulated-category"
+        ]
+      },
+      {
+        "id": "prop-zero-and-split-triangles-are-distinguished",
+        "kind": "proposition",
+        "title": "Zero and split triangles are distinguished",
+        "strategy": "Rotate the identity triangle to obtain the zero triangle, derive finite-biproduct closure by the TR3 matrix argument and representable exactness, and take the biproduct of identity and zero triangles.",
+        "deps": [
+          "def-triangulated-category",
+          "def-biproduct",
+          "def-triangulated-category-axiom-tr-one",
+          "def-triangulated-category-axiom-tr-two",
+          "def-triangulated-category-axiom-tr-three"
+        ]
+      },
+      {
+        "id": "prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations",
+        "kind": "proposition",
+        "title": "Distinguished triangles are closed under shifts and both rotations",
+        "strategy": "Iterate TR2 three times to obtain the positive translate up to the prescribed signs, use the equivalence in both directions for every integral shift, and identify inverse rotation.",
+        "deps": [
+          "def-triangulated-category",
+          "def-triangulated-category-axiom-tr-two",
+          "def-rotation-of-a-triangle"
+        ]
+      },
+      {
+        "id": "def-homological-functor-on-a-triangulated-category",
+        "kind": "definition",
+        "title": "Homological functor on a triangulated category",
+        "strategy": "Define an additive covariant functor to an abelian category by exactness on each distinguished triangle, and display the shifted long exact continuation.",
+        "deps": [
+          "def-triangulated-category",
+          "def-additive-functor",
+          "def-abelian-category"
+        ]
+      },
+      {
+        "id": "def-cohomological-functor-on-a-triangulated-category",
+        "kind": "definition",
+        "title": "Cohomological functor on a triangulated category",
+        "strategy": "Define an additive contravariant functor by the oppositely oriented exact sequence and make the translated long continuation explicit.",
+        "deps": [
+          "def-triangulated-category",
+          "def-functor-and-contravariant-functor",
+          "def-abelian-category"
+        ]
+      },
+      {
+        "id": "thm-representable-hom-functors-on-a-triangulated-category-are-homological-or-cohomological",
+        "kind": "theorem",
+        "title": "Representable Hom functors on a triangulated category are homological or cohomological",
+        "strategy": "Use TR1 to compare with the zero triangle, TR3 to factor any map killed by the next arrow, and rotation to obtain exactness at every translated term; pass to the opposite category for the contravariant variance.",
+        "deps": [
+          "def-triangulated-category",
+          "def-homological-functor-on-a-triangulated-category",
+          "def-cohomological-functor-on-a-triangulated-category",
+          "def-triangulated-category-axiom-tr-one",
+          "def-triangulated-category-axiom-tr-two",
+          "def-triangulated-category-axiom-tr-three",
+          "thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-long-exact-hom-sequences-of-a-distinguished-triangle",
+        "kind": "theorem",
+        "title": "Long exact Hom sequences of a distinguished triangle",
+        "strategy": "Apply the two representable functors to a distinguished triangle and print both variances with all shifts and the rotation-sign convention visible.",
+        "deps": [
+          "def-triangulated-category",
+          "thm-representable-hom-functors-on-a-triangulated-category-are-homological-or-cohomological",
+          "prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations"
+        ]
+      },
+      {
+        "id": "cor-triangulated-five-lemma",
+        "kind": "corollary",
+        "title": "The triangulated five lemma",
+        "strategy": "Apply Hom from an arbitrary object to the morphism of distinguished triangles, use the established long exact sequences and the five lemma, then invoke the representable zero-detection argument.",
+        "deps": [
+          "thm-long-exact-hom-sequences-of-a-distinguished-triangle",
+          "thm-five-lemma-for-a-morphism-of-long-exact-sequences"
+        ]
+      },
+      {
+        "id": "prop-two-isomorphism-components-of-a-morphism-of-triangles-force-the-third",
+        "kind": "proposition",
+        "title": "Two isomorphism components of a morphism of triangles force the third",
+        "strategy": "Apply the triangulated five lemma after rotating as necessary so that the unknown component occupies the five-lemma position.",
+        "deps": [
+          "cor-triangulated-five-lemma",
+          "prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations"
+        ]
+      },
+      {
+        "id": "prop-a-map-is-zero-exactly-when-the-corresponding-representable-map-vanishes",
+        "kind": "proposition",
+        "title": "A map is zero exactly when the corresponding representable map vanishes",
+        "strategy": "Evaluate the natural transformation induced by a map at the identity of its source for the converse, and use composition for the forward implication.",
+        "deps": [
+          "def-triangulated-category",
+          "thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups"
+        ]
+      },
+      {
+        "id": "prop-a-distinguished-triangle-with-zero-first-map-is-split",
+        "kind": "proposition",
+        "title": "A distinguished triangle with zero first map is split",
+        "strategy": "Use representable exactness to obtain a section and a preliminary retraction, correct the latter by t-ts h so its cross term vanishes, and verify the two biproduct matrices are inverse.",
+        "deps": [
+          "thm-long-exact-hom-sequences-of-a-distinguished-triangle",
+          "prop-a-map-is-zero-exactly-when-the-corresponding-representable-map-vanishes",
+          "prop-zero-and-split-triangles-are-distinguished",
+          "def-split-monomorphism-and-split-epimorphism"
+        ]
+      },
+      {
+        "id": "prop-a-distinguished-triangle-splits-exactly-when-one-connecting-map-vanishes",
+        "kind": "proposition",
+        "title": "A distinguished triangle splits exactly when one connecting map vanishes",
+        "strategy": "Rotate the triangle to reduce each possible vanishing map to the first-map case, and translate the resulting splitting into equivalent section and retraction conditions.",
+        "deps": [
+          "prop-a-distinguished-triangle-with-zero-first-map-is-split",
+          "prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations",
+          "def-split-monomorphism-and-split-epimorphism"
+        ]
+      },
+      {
+        "id": "prop-the-cone-object-of-a-map-is-unique-up-to-nonunique-isomorphism",
+        "kind": "proposition",
+        "title": "The cone object of a map is unique up to nonunique isomorphism",
+        "strategy": "Use TR3 to obtain a morphism between two completions of the same first map and the two-isomorphisms proposition to make its third component invertible; retain no claim of canonical choice or uniqueness.",
+        "deps": [
+          "def-triangulated-category",
+          "def-triangulated-category-axiom-tr-one",
+          "def-triangulated-category-axiom-tr-three",
+          "prop-two-isomorphism-components-of-a-morphism-of-triangles-force-the-third"
+        ]
+      },
+      {
+        "id": "prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf",
+        "kind": "proposition",
+        "title": "The octahedral axiom gives a triangle relating the cones of f, g, and gf",
+        "strategy": "Choose distinguished triangles for f, g, and their composite, then read the fourth distinguished face of TR4 as the triangle relating the three cone objects.",
+        "deps": [
+          "def-triangulated-category",
+          "def-triangulated-category-axiom-tr-four-octahedral",
+          "prop-the-cone-object-of-a-map-is-unique-up-to-nonunique-isomorphism"
+        ]
+      },
+      {
+        "id": "def-exact-functor-between-triangulated-categories",
+        "kind": "definition",
+        "title": "Exact functor between triangulated categories",
+        "strategy": "Define an additive functor equipped with a specified natural translation isomorphism which carries distinguished triangles to distinguished triangles, including compatibility at the final arrow.",
+        "deps": [
+          "def-triangulated-category",
+          "def-additive-functor",
+          "def-natural-isomorphism"
+        ]
+      },
+      {
+        "id": "prop-a-natural-isomorphism-of-exact-functors-respects-triangles-under-the-translation-compatibility",
+        "kind": "proposition",
+        "title": "A translation-compatible natural isomorphism of exact functors respects triangles",
+        "strategy": "Use naturality on the first two arrows and the stipulated compatibility with the translation isomorphisms to verify the final square, hence a morphism of image triangles.",
+        "deps": [
+          "def-exact-functor-between-triangulated-categories",
+          "def-natural-isomorphism",
+          "def-morphism-and-isomorphism-of-triangles"
+        ]
+      },
+      {
+        "id": "def-triangulated-subcategory",
+        "kind": "definition",
+        "title": "Triangulated subcategory",
+        "strategy": "Define a full additive subcategory closed under translations and two-out-of-three on distinguished triangles, with the inherited distinguished class made explicit.",
+        "deps": [
+          "def-triangulated-category",
+          "def-exact-functor-between-triangulated-categories"
+        ]
+      },
+      {
+        "id": "def-thick-subcategory",
+        "kind": "definition",
+        "title": "Thick subcategory",
+        "strategy": "Define a thick subcategory as a triangulated subcategory also closed under direct summands, spelling this out as closure under a section-retraction pair.",
+        "deps": [
+          "def-triangulated-subcategory",
+          "def-split-monomorphism-and-split-epimorphism"
+        ]
+      },
+      {
+        "id": "prop-the-total-kernel-of-a-cohomological-functor-is-thick",
+        "kind": "proposition",
+        "title": "The total kernel of a cohomological functor is thick",
+        "strategy": "For objects whose every translate is annihilated, use the long exact sequence for two-out-of-three and additivity to show every retract of an annihilated object is annihilated.",
+        "deps": [
+          "def-thick-subcategory",
+          "def-cohomological-functor-on-a-triangulated-category",
+          "def-split-monomorphism-and-split-epimorphism"
+        ]
+      },
+      {
+        "id": "prop-the-full-subcategory-of-acyclic-complexes-is-thick-in-the-homotopy-category",
+        "kind": "proposition",
+        "title": "The full subcategory of acyclic complexes is thick in the homotopy category",
+        "strategy": "Use the cone long exact sequence for two-out-of-three, shift-invariance of homology, and degreewise finite biproducts to show acyclic complexes form a thick subcategory of K(A).",
+        "deps": [
+          "def-thick-subcategory",
+          "def-homotopy-category-of-chain-complexes",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex",
+          "thm-the-cone-long-exact-sequence",
+          "prop-finite-biproducts-of-complexes-are-computed-degreewise"
+        ]
+      },
+      {
+        "id": "def-standard-cone-triangle-in-the-homotopy-category",
+        "kind": "definition",
+        "title": "Standard cone triangle in the homotopy category",
+        "strategy": "Pass the established chain-level cone triangle to K(A), translating its final map to the fixed [1] convention and preserving the declared sign.",
+        "deps": [
+          "def-homotopy-category-of-chain-complexes",
+          "def-cone-triangle-of-a-chain-map",
+          "thm-shift-is-an-additive-autoequivalence-of-the-complex-and-homotopy-categories"
+        ]
+      },
+      {
+        "id": "def-distinguished-cone-triangle-in-the-homotopy-category",
+        "kind": "definition",
+        "title": "Distinguished cone triangle in the homotopy category",
+        "strategy": "Declare a triangle in K(A) distinguished when it is isomorphic to a standard cone triangle, so the definition is invariant under the quotient by homotopy.",
+        "deps": [
+          "def-standard-cone-triangle-in-the-homotopy-category",
+          "def-morphism-and-isomorphism-of-triangles"
+        ]
+      },
+      {
+        "id": "lem-cone-triangles-satisfy-tr-one",
+        "kind": "lemma",
+        "title": "Cone triangles satisfy TR1",
+        "strategy": "Complete each chain map with its cone and show the identity cone is contractible, hence zero in K(A); then use isomorphism closure from the definition.",
+        "deps": [
+          "def-distinguished-cone-triangle-in-the-homotopy-category",
+          "def-standard-cone-triangle-in-the-homotopy-category",
+          "thm-the-cone-of-an-identity-map-is-contractible",
+          "def-triangulated-category-axiom-tr-one"
+        ]
+      },
+      {
+        "id": "lem-cone-triangles-satisfy-tr-two-with-the-declared-rotation-sign",
+        "kind": "lemma",
+        "title": "Cone triangles satisfy TR2 with the declared rotation sign",
+        "strategy": "Compute the cone of the cone inclusion, split off the contractible identity cone, and identify the remaining projection and connecting map with the signed left rotation.",
+        "deps": [
+          "def-distinguished-cone-triangle-in-the-homotopy-category",
+          "def-rotation-of-a-triangle",
+          "thm-the-cone-of-an-identity-map-is-contractible",
+          "def-triangulated-category-axiom-tr-two"
+        ]
+      },
+      {
+        "id": "lem-cone-triangles-satisfy-tr-three",
+        "kind": "lemma",
+        "title": "Cone triangles satisfy TR3",
+        "strategy": "Represent a homotopy-commutative square by chain maps and a specified homotopy, insert that homotopy as the off-diagonal cone-map entry, and verify the triangle squares in the homotopy category.",
+        "deps": [
+          "def-distinguished-cone-triangle-in-the-homotopy-category",
+          "def-triangulated-category-axiom-tr-three"
+        ]
+      },
+      {
+        "id": "lem-cone-triangles-satisfy-the-octahedral-axiom",
+        "kind": "lemma",
+        "title": "Cone triangles satisfy the octahedral axiom",
+        "strategy": "Use the explicit three-cone matrices for composable chain maps, verify their chain maps and homotopy equivalence, and identify the fourth face with the signed standard cone triangle.",
+        "deps": [
+          "def-distinguished-cone-triangle-in-the-homotopy-category",
+          "lem-the-three-cone-calculation-for-a-composite-chain-map",
+          "def-triangulated-category-axiom-tr-four-octahedral"
+        ]
+      },
+      {
+        "id": "thm-the-homotopy-category-of-an-abelian-category-is-triangulated",
+        "kind": "theorem",
+        "title": "The homotopy category of an abelian category is triangulated",
+        "strategy": "Combine the inherited shift autoequivalence, the cone-triangle distinguished class, and the four separately proved TR1--TR4 lemmas.",
+        "deps": [
+          "def-homotopy-category-of-chain-complexes",
+          "thm-the-homotopy-category-is-additive",
+          "thm-shift-is-an-additive-autoequivalence-of-the-complex-and-homotopy-categories",
+          "def-distinguished-cone-triangle-in-the-homotopy-category",
+          "lem-cone-triangles-satisfy-tr-one",
+          "lem-cone-triangles-satisfy-tr-two-with-the-declared-rotation-sign",
+          "lem-cone-triangles-satisfy-tr-three",
+          "lem-cone-triangles-satisfy-the-octahedral-axiom"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-homology-is-a-homological-functor-on-the-homotopy-category",
+        "kind": "theorem",
+        "title": "Homology is a homological functor on the homotopy category",
+        "strategy": "Identify the long exact sequence of a standard cone triangle with the existing cone sequence and its connector, then transport exactness along isomorphisms of triangles.",
+        "deps": [
+          "thm-the-homotopy-category-of-an-abelian-category-is-triangulated",
+          "def-homological-functor-on-a-triangulated-category",
+          "thm-homology-factors-uniquely-through-the-homotopy-category",
+          "thm-the-cone-long-exact-sequence",
+          "prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign"
+        ]
+      },
+      {
+        "id": "prop-an-additive-functor-on-abelian-categories-induces-an-exact-functor-on-homotopy-categories",
+        "kind": "proposition",
+        "title": "An additive functor on abelian categories induces an exact functor on homotopy categories",
+        "strategy": "Apply the additive functor degreewise, use preservation of finite biproducts and zero morphisms to compare cones and shifts, and obtain the required translation isomorphism and image-triangle property without assuming abelian exactness.",
+        "deps": [
+          "def-exact-functor-between-triangulated-categories",
+          "thm-the-homotopy-category-of-an-abelian-category-is-triangulated",
+          "prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps",
+          "def-standard-cone-triangle-in-the-homotopy-category"
+        ]
+      },
+      {
+        "id": "prop-a-quasi-isomorphism-has-an-acyclic-cone-in-the-triangulated-language",
+        "kind": "proposition",
+        "title": "A quasi-isomorphism has an acyclic cone in the triangulated language",
+        "strategy": "Invoke the established chain-level cone criterion and reinterpret its cone as the third object of the standard distinguished triangle in K(A).",
+        "deps": [
+          "def-standard-cone-triangle-in-the-homotopy-category",
+          "def-quasi-isomorphism",
+          "thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex"
+        ]
+      },
+      {
+        "id": "fs-the-third-map-in-a-morphism-of-triangles-is-unique",
+        "kind": "false-statement",
+        "title": "The third map in a morphism of triangles is unique",
+        "strategy": "Refute the asserted uniqueness by separating TR3's existence clause from uniqueness and constructing two distinct completions of one zero square.",
+        "deps": [
+          "def-triangulated-category-axiom-tr-three"
+        ]
+      },
+      {
+        "id": "fs-cones-form-a-functor-in-every-triangulated-category",
+        "kind": "false-statement",
+        "title": "Cones form a functor in every triangulated category",
+        "strategy": "Refute by observing that TR1 and TR3 provide cone objects and comparison maps only noncanonically; a functorial choice needs additional enhancement data.",
+        "deps": [
+          "prop-the-cone-object-of-a-map-is-unique-up-to-nonunique-isomorphism",
+          "def-triangulated-category-axiom-tr-three"
+        ]
+      },
+      {
+        "id": "fs-a-triangle-is-distinguished-whenever-the-three-composites-vanish",
+        "kind": "false-statement",
+        "title": "A triangle is distinguished whenever the three composites vanish",
+        "strategy": "Refute with a concrete zero-composite triangle in K(A) that is not isomorphic to any standard cone triangle, showing that vanishing composites are only necessary.",
+        "deps": [
+          "def-distinguished-cone-triangle-in-the-homotopy-category",
+          "thm-the-homotopy-category-of-an-abelian-category-is-triangulated"
+        ]
+      },
+      {
+        "id": "fs-the-octahedral-axiom-is-the-associativity-of-composition",
+        "kind": "false-statement",
+        "title": "The octahedral axiom is the associativity of composition",
+        "strategy": "Refute by reading TR4 as a comparison between chosen cone triangles of f, g, and gf, rather than the ordinary category axiom for composing arrows.",
+        "deps": [
+          "def-triangulated-category-axiom-tr-four-octahedral",
+          "prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf"
+        ]
+      },
+      {
+        "id": "fs-every-triangulated-subcategory-is-thick",
+        "kind": "false-statement",
+        "title": "Every triangulated subcategory is thick",
+        "strategy": "In the bounded homotopy category of finitely generated free abelian groups, take the full subcategory of complexes with even Euler characteristic. Verify shift and triangle two-out-of-three closure from the cone formula, then observe that the even-Euler object Z[0] direct-sum Z[0] has the odd-Euler summand Z[0], so this triangulated subcategory is not thick.",
+        "deps": [
+          "def-triangulated-subcategory",
+          "def-thick-subcategory",
+          "def-zero-and-stalk-complex"
+        ]
+      },
+      {
+        "id": "fs-the-rotation-of-a-distinguished-triangle-has-no-sign",
+        "kind": "false-statement",
+        "title": "The rotation of a distinguished triangle has no sign",
+        "strategy": "Refute against the fixed convention: the final arrow of the left rotation is -f[1], and omitting it conflicts with the chosen cone and long-exact-Hom signs.",
+        "deps": [
+          "def-rotation-of-a-triangle",
+          "rem-triangulated-sign-convention"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 365.062,
+    "id": "triangulated-categories-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Triangulated Categories — Examples",
+    "companion": "triangulated-categories",
+    "requires": [
+      "triangulated-categories"
+    ],
+    "items": [
+      {
+        "id": "ex-the-split-distinguished-triangle",
+        "kind": "example",
+        "title": "The split distinguished triangle",
+        "strategy": "Write the canonical biproduct maps for X and Y and check the split-triangle criterion together with the declared zero connecting morphism.",
+        "deps": [
+          "prop-zero-and-split-triangles-are-distinguished",
+          "prop-a-distinguished-triangle-splits-exactly-when-one-connecting-map-vanishes"
+        ]
+      },
+      {
+        "id": "ex-the-cone-triangle-of-multiplication-by-m",
+        "kind": "example",
+        "title": "The cone triangle of multiplication by m",
+        "strategy": "Take multiplication by a nonzero integer m on a stalk complex, write its cone and its three maps, and recognize the resulting standard distinguished triangle in K(Ab).",
+        "deps": [
+          "def-standard-cone-triangle-in-the-homotopy-category",
+          "def-zero-and-stalk-complex"
+        ]
+      },
+      {
+        "id": "ex-the-long-exact-hom-sequence-of-a-cone-triangle",
+        "kind": "example",
+        "title": "The long exact Hom sequence of a cone triangle",
+        "strategy": "Apply Hom from a fixed stalk complex to the multiplication-by-m cone triangle and display consecutive maps, including the shifted connecting morphism.",
+        "deps": [
+          "thm-long-exact-hom-sequences-of-a-distinguished-triangle"
+        ]
+      },
+      {
+        "id": "ex-an-octahedron-for-two-composable-maps-of-stalk-complexes",
+        "kind": "example",
+        "title": "An octahedron for two composable maps of stalk complexes",
+        "strategy": "Use multiplication by m and n on stalk complexes, identify the three cone triangles for m, n, and nm, and exhibit the fourth octahedral face through the concrete three-cone construction.",
+        "deps": [
+          "prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf",
+          "lem-the-three-cone-calculation-for-a-composite-chain-map",
+          "def-zero-and-stalk-complex"
+        ]
+      },
+      {
+        "id": "ex-the-thick-subcategory-of-acyclic-complexes",
+        "kind": "example",
+        "title": "The thick subcategory of acyclic complexes",
+        "strategy": "Apply the established thickness proposition to an acyclic cone triangle and identify the shifts and direct summands that remain acyclic.",
+        "deps": [
+          "prop-the-full-subcategory-of-acyclic-complexes-is-thick-in-the-homotopy-category",
+          "prop-a-quasi-isomorphism-has-an-acyclic-cone-in-the-triangulated-language"
+        ]
+      },
+      {
+        "id": "cex-a-three-term-zero-composite-diagram-that-is-not-distinguished",
+        "kind": "counterexample",
+        "title": "A three-term zero-composite diagram that is not distinguished",
+        "strategy": "Use stalk complexes to form a triangle with all three composites zero, then compare the noncontractible cone obstruction to show it cannot be a standard distinguished triangle.",
+        "deps": [
+          "fs-a-triangle-is-distinguished-whenever-the-three-composites-vanish",
+          "def-zero-and-stalk-complex",
+          "def-distinguished-cone-triangle-in-the-homotopy-category"
+        ]
+      },
+      {
+        "id": "cex-nonuniqueness-of-a-tr-three-completion",
+        "kind": "counterexample",
+        "title": "Nonuniqueness of a TR3 completion",
+        "strategy": "Choose a split triangle with a nonzero compatible endomorphism in the third component and construct two distinct completions of the same first square.",
+        "deps": [
+          "fs-the-third-map-in-a-morphism-of-triangles-is-unique",
+          "def-triangulated-category-axiom-tr-three"
+        ]
+      }
+    ]
+  }
+]

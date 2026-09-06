@@ -6,7 +6,7 @@ status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-sheaf-on-topological-space, def-presheaf-of-groups-rings-modules, def-germ-of-section]
+deps: [def-sheaf-on-topological-space, def-presheaf-of-groups-rings-modules, def-germ-of-section, lem-germ-equivalence-relation]
 proof_strategy: direct
 verification:
   audited: 2026-09-04
@@ -34,14 +34,14 @@ $$s=0\text{ in }\mathcal F(U)\qquad\Longleftrightarrow\qquad s_x=0\text{ in }\ma
 
 [L1] A sheaf is determined by local agreement of sections on an open cover ([[def-sheaf-on-topological-space]]).
 
-[F2] The germ $s_x$ is the class of $s$ in the stalk at $x$ ([[def-germ-of-section]]).
+[F2] The germ $s_x$ is the class of $s$ in the stalk at $x$ ([[def-germ-of-section]]). Here $0_x$ (also written $0$ in $\mathcal F_x$) denotes the germ of an identity section. This is independent of the neighbourhood used: any two identity sections restrict to the identity on their intersection by [F1], and so have the same germ. No group operation on the stalk is needed for this notation.
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $s=0$ in $\mathcal F(U)$, then for every $x\in U$ the induced germ is $s_x=0_x$ because the stalk map respects restriction and the zero section by [F1] and [F2]. [F1, F2]
+1.1 If $s=0$ in $\mathcal F(U)$, then for every $x\in U$ the induced germ is $s_x=0_x$ by the definition of $0_x$ in [F2]. [F1, F2]
 
-1.2 Assume $s_x=0$ for every $x\in U$. Fix $x\in U$. By [F2], equality of germs means that there exists an open neighbourhood $V_x\subseteq U$ of $x$ such that $s|_{V_x}=0|_{V_x}$. The sets $V_x$ cover $U$. [F2, given]
+1.2 Assume $s_x=0$ for every $x\in U$. Fix $x\in U$. By `lem-germ-equivalence-relation`, equality of the two germ classes means that their representatives agree on some open neighbourhood $V_x\subseteq U$ of $x$, so $s|_{V_x}=0|_{V_x}$. The sets $V_x$ cover $U$. [F2, given]
 
-2.1 On the open cover $\{V_x\}_{x\in U}$, the sections $s$ and $0$ have the same restriction by step 1.2. Locality in [L1] therefore gives $s=0$ in $\mathcal F(U)$. Together with step 1.1, this proves both directions. [L1, step 1.1, step 1.2] ∎
+2.1 On the open cover $\{V_x\}_{x\in U}$, the sections $s$ and $0$ have the same restriction by step 1.2. Locality in [L1] therefore gives $s=0$ in $\mathcal F(U)$. For $U=\varnothing$, this uses the empty cover, which is included in [L1]. Together with step 1.1, this proves both directions. [L1, step 1.1, step 1.2] ∎

@@ -1,0 +1,17 @@
+# Final adjudicator evidence — queue position 1
+
+Item: `ex-an-h-five-overlap-class-and-its-terminal-quotient`; run frontier-32, group g, round 1. Decision: **repaired**. Source status: **familiar**.
+
+I independently read the current item and all four direct dependencies (`def-h-zero-through-h-five`, `def-h-five-overlap-chain-relation-in-a-comb-block`, `def-h-five-overlap-blockade-and-iterated-mixed-quotients`, `lem-h-five-overlap-quotient-iteration-terminates-at-a-pure-blockade`), plus the published comb, blockade, mixed-reachability, quotient, and pure-blockade definitions. I checked both co-e-free-comb-structure page files, the item's batch-13 manifest strategy, batch-13 notes and coverage conventions, its batch and aggregate proof contracts including risk_review, the refuter/reader records, group-g Step-8 context, Alpha's item-1 adjudication in frontier-32-alpha-step8-g.md, and both rejection rows in frontier-32-judge.jsonl.
+
+The first rejection correctly required a comb block; Alpha supplied one. Such a comb exists: take the displayed 21-vertex graph and adjoin one tooth complete to it, giving a one-tooth comb. No co-E-free or special-vertex hypothesis is imposed by this example or by the overlap definitions. The page context must not silently import the stronger hypotheses of its separate structural theorem.
+
+The final Terra rejection (context c875b16644dbba0ecf7d856fdfe3e0ceb703b6597f4ba4e411d389b88f784bc0) is correct about the type of F1: the defining relation is on vertices, not copies. Although the intended result is true, the current dependency restatement needed correction. F1 now states exactly the vertex-chain rule. For every pair d,d' in B_i, the sequence d,v_1,d' lies in X_i=B_i and each consecutive pair belongs to one of the two specified induced H_5 copies. Repetitions may be omitted; the reflexive case is allowed. Hence there is exactly one overlap class. Other possible induced copies cannot split that class or enlarge X_i beyond B_i.
+
+The quotient calculation is now explicit: the ordered initial blockade is (B_i); its only reachability class is {B_i}; taking its union gives B_i again. Pairwise purity is vacuous. Thus every iterate is the same blockade, terminal from the initial stage. Connectedness, mentioned in the manifest, also follows because each H_5 is connected and both meet at v_1; the terminal computation does not need a separate connectedness premise.
+
+This is familiar elementary finite-graph and equivalence-relation mathematics, checked directly against the complete local definitions. No external verification was needed or claimed. The existing bibliographic reference is retained as provenance, not treated as independently fetched FA evidence.
+
+Only this item and its two corresponding derivation records in the batch and aggregate proof-contract files were changed. Existing independent risk and review records were preserved. No dependency was edited, so no prerequisite-repair licence is needed. The manifest already prescribes the precise repaired computation and requires no change.
+
+Validation: focused precheck passed (1/1); rendercheck passed (1 file); strict batch proof-contract check passed (15/15, zero errors or warnings). No mathematical obligations remain for this item. Next action: record the repaired exact bytes using the supplied terminal recorder, then begin queue position 2. This evidence is a terminal adjudication, not a judge pass stamp.

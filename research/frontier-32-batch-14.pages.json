@@ -1,0 +1,252 @@
+[
+  {
+    "order": 458.003,
+    "id": "harmonic-functions-and-mean-values-in-rn",
+    "kind": "A",
+    "category": "pde",
+    "title": "Harmonic Functions and Mean Values in Rn",
+    "companion": "harmonic-functions-and-mean-values-in-rn-examples",
+    "requires": [
+      "quasilinear-characteristics-and-cauchy-kovalevskaya-examples",
+      "the-divergence-theorem-and-classical-stokes",
+      "the-maximal-function-and-lebesgue-differentiation"
+    ],
+    "items": [
+      {
+        "id": "def-distributional-harmonicity-and-poisson-equation-in-rn",
+        "kind": "definition",
+        "title": "Distributional harmonicity and Poisson's equation on an open subset of Rn",
+        "strategy": "Reuse the published classical Laplacian and harmonicity convention, then define test functions, distributions, their derivatives, and the distributional Poisson equation locally on an open set. Keep the classical and distributional solution classes distinct.",
+        "deps": [
+          "def-laplacian-of-a-c2-function"
+        ]
+      },
+      {
+        "id": "def-spherical-averages-and-local-ball-means-in-rn",
+        "kind": "definition",
+        "title": "Spherical averages and local ball means in Rn",
+        "strategy": "Use the published polar surface measure to define translated and dilated spherical averages. Extend the published whole-space ball-average notation only to compactly contained balls of an open domain, and define the spherical and ball mean-value properties there.",
+        "deps": [
+          "def-ball-average-operator-on-r-n",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ]
+      },
+      {
+        "id": "lem-sphere-and-ball-measures-scale",
+        "kind": "lemma",
+        "title": "Surface and volume measures of Euclidean spheres and balls scale with radius",
+        "strategy": "Apply the polar-coordinate formula to radial indicator functions. This gives the finite positive sphere factor, the r^(n-1) surface scaling, and the r^n/n ball-volume formula without borrowing a general divergence theorem.",
+        "deps": [
+          "def-spherical-averages-and-local-ball-means-in-rn",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ]
+      },
+      {
+        "id": "lem-radial-derivative-of-a-spherical-average",
+        "kind": "lemma",
+        "title": "The radial derivative of a spherical average",
+        "strategy": "Differentiate the unit-sphere parametrized average under the integral sign, integrate the radial derivative using polar coordinates, and obtain M_u'(r)=r times the ball average of Delta u divided by n. The proof must not invoke the later general divergence theorem.",
+        "deps": [
+          "def-spherical-averages-and-local-ball-means-in-rn",
+          "lem-sphere-and-ball-measures-scale",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ]
+      },
+      {
+        "id": "thm-spherical-mean-value-property-for-harmonic-functions",
+        "kind": "theorem",
+        "title": "Harmonic functions equal their spherical averages",
+        "strategy": "Apply the radial-derivative identity to a C^2 harmonic function. The spherical mean is constant in the radius and its limit at radius zero is the centre value.",
+        "deps": [
+          "def-laplacian-of-a-c2-function",
+          "def-spherical-averages-and-local-ball-means-in-rn",
+          "lem-radial-derivative-of-a-spherical-average"
+        ]
+      },
+      {
+        "id": "cor-ball-mean-value-property-for-harmonic-functions",
+        "kind": "corollary",
+        "title": "Harmonic functions equal their ball averages",
+        "strategy": "Radially integrate the spherical mean identity and divide by the ball volume established from polar coordinates.",
+        "deps": [
+          "def-spherical-averages-and-local-ball-means-in-rn",
+          "lem-sphere-and-ball-measures-scale",
+          "thm-spherical-mean-value-property-for-harmonic-functions"
+        ]
+      },
+      {
+        "id": "def-radial-mollifier-family-in-rn",
+        "kind": "definition",
+        "title": "A radial mollifier family in Rn",
+        "strategy": "Specialize the published unit-mass smooth-bump construction to a nonnegative radial bump, record its radial profile and rescaling, and make the compact support and unit-mass conventions available to the two mollification arguments.",
+        "deps": [
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump"
+        ]
+      },
+      {
+        "id": "lem-radial-mollification-fixes-local-mean-value-functions",
+        "kind": "lemma",
+        "title": "Radial mollification fixes a function with the local ball mean-value property",
+        "strategy": "Use polar coordinates to express convolution with a radial unit-mass mollifier as a weighted integral of centred spherical means, obtain those spherical means from the local ball property, and use the mass normalization. State the shrunken-domain condition explicitly.",
+        "deps": [
+          "def-radial-mollifier-family-in-rn",
+          "def-spherical-averages-and-local-ball-means-in-rn",
+          "lem-sphere-and-ball-measures-scale"
+        ]
+      },
+      {
+        "id": "thm-continuous-mean-value-functions-are-harmonic",
+        "kind": "theorem",
+        "title": "A continuous function with the ball mean-value property is harmonic",
+        "strategy": "Use radial mollification to identify the function with smooth regularizations on shrunken domains. For that smooth function derive the exact small-ball expansion u(x)+r^2 Delta u(x)/(2(n+2))+o(r^2), so the ball mean identity forces Delta u=0.",
+        "deps": [
+          "def-laplacian-of-a-c2-function",
+          "def-spherical-averages-and-local-ball-means-in-rn",
+          "lem-radial-mollification-fixes-local-mean-value-functions",
+          "cor-second-order-taylor-expansion-with-the-hessian"
+        ]
+      },
+      {
+        "id": "cor-local-mean-value-property-is-enough",
+        "kind": "corollary",
+        "title": "The local ball mean-value property already implies harmonicity",
+        "strategy": "At each point choose a radius on which all centred ball averages agree. The small-ball argument in the converse theorem is then local, so it applies on that neighbourhood and yields Delta u=0 at the chosen point.",
+        "deps": [
+          "thm-continuous-mean-value-functions-are-harmonic"
+        ]
+      },
+      {
+        "id": "lem-distributional-laplacian-commutes-with-mollification",
+        "kind": "lemma",
+        "title": "The distributional Laplacian commutes with mollification on shrunken domains",
+        "strategy": "Define the local convolution by translating the compactly supported kernel inside the open set. Pair against an arbitrary test function, use Fubini and the distributional derivative definition, and verify the support margin before concluding Delta(T*rho_epsilon)=(Delta T)*rho_epsilon.",
+        "deps": [
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "def-radial-mollifier-family-in-rn"
+        ]
+      },
+      {
+        "id": "thm-weyl-lemma-for-the-laplacian",
+        "kind": "theorem",
+        "title": "Weyl's lemma for the Laplacian",
+        "strategy": "Mollify a distributionally harmonic distribution on nested shrunken domains; the commutation lemma makes every regularization classically harmonic. Radial mollification fixes each regularization, so double convolution makes the regularizations agree on overlaps and yields one smooth harmonic representative; prove uniqueness through equality of induced distributions and continuity.",
+        "deps": [
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "cor-ball-mean-value-property-for-harmonic-functions",
+          "lem-radial-mollification-fixes-local-mean-value-functions",
+          "lem-distributional-laplacian-commutes-with-mollification"
+        ]
+      },
+      {
+        "id": "cor-locally-integrable-weakly-harmonic-functions-are-smooth",
+        "kind": "corollary",
+        "title": "A locally integrable weakly harmonic function has a smooth harmonic representative",
+        "strategy": "Embed the locally integrable function as a regular distribution and apply Weyl's lemma; use uniqueness of regular distributions to state the almost-everywhere representative convention precisely.",
+        "deps": [
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "thm-weyl-lemma-for-the-laplacian"
+        ]
+      },
+      {
+        "id": "lem-derivatives-of-harmonic-functions-are-harmonic",
+        "kind": "lemma",
+        "title": "Derivatives of harmonic functions are harmonic",
+        "strategy": "For a smooth harmonic representative commute constant-coefficient partial derivatives with the Laplacian. Then use Weyl's lemma to identify every distributional derivative of a distributionally harmonic distribution with the corresponding smooth harmonic derivative.",
+        "deps": [
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "thm-weyl-lemma-for-the-laplacian"
+        ]
+      },
+      {
+        "id": "thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic",
+        "kind": "theorem",
+        "title": "Locally uniform limits of harmonic functions are harmonic",
+        "strategy": "Fix a compactly contained ball, pass its ball-average identity through uniform convergence on the closed ball, and invoke the continuous mean-value converse. Do not differentiate the limiting sequence.",
+        "deps": [
+          "def-spherical-averages-and-local-ball-means-in-rn",
+          "cor-ball-mean-value-property-for-harmonic-functions",
+          "thm-continuous-mean-value-functions-are-harmonic"
+        ]
+      },
+      {
+        "id": "rem-plane-harmonic-theory-is-owned-by-complex-analysis",
+        "kind": "remark",
+        "title": "Plane-specific harmonic theory remains owned by complex analysis",
+        "strategy": "Record that the dimension-uniform real-variable results include n=2, while the sharper holomorphic disc, Perron, and conformal-invariance treatments remain linked to their published complex-analysis items rather than being restated or reproved here.",
+        "deps": []
+      }
+    ]
+  },
+  {
+    "order": 458.004,
+    "id": "harmonic-functions-and-mean-values-in-rn-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Harmonic Functions and Mean Values in Rn — Examples",
+    "companion": "harmonic-functions-and-mean-values-in-rn",
+    "requires": [
+      "harmonic-functions-and-mean-values-in-rn",
+      "complex-differentiability-and-cauchy-riemann"
+    ],
+    "items": [
+      {
+        "id": "ex-affine-and-harmonic-polynomial-functions",
+        "kind": "example",
+        "title": "Affine functions and mixed quadratic monomials are harmonic",
+        "strategy": "Differentiate affine functions and x_i x_j for distinct indices twice, showing that every diagonal second derivative is zero. State the dimension and distinct-index hypotheses.",
+        "deps": [
+          "def-laplacian-of-a-c2-function"
+        ]
+      },
+      {
+        "id": "ex-real-and-imaginary-parts-of-holomorphic-monomials",
+        "kind": "example",
+        "title": "The real and imaginary parts of holomorphic monomials",
+        "strategy": "For selected monomials z^m, identify both real and imaginary polynomial components and link to the published holomorphic-components theorem. This is a cross-reference to plane theory, not a new proof of its general results.",
+        "deps": [
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "thm-c2-holomorphic-components-are-harmonic"
+        ]
+      },
+      {
+        "id": "ex-radial-harmonic-functions-away-from-the-origin",
+        "kind": "example",
+        "title": "Radial harmonic functions away from the origin",
+        "strategy": "For u(x)=U(|x|) away from zero compute Delta u=U''+(n-1)U'/r, solve the resulting ODE, and separate the logarithmic n=2 family from the r^(2-n) n>=3 family.",
+        "deps": [
+          "def-laplacian-of-a-c2-function"
+        ]
+      },
+      {
+        "id": "cex-harmonic-on-a-punctured-domain-need-not-extend",
+        "kind": "counterexample",
+        "title": "A harmonic function on a punctured domain need not extend across the puncture",
+        "strategy": "Use the radial logarithmic or power singular family from the preceding example. Its blow-up at the deleted point prevents any continuous, hence harmonic, extension; state the n=2 and n>=3 cases separately.",
+        "deps": [
+          "ex-radial-harmonic-functions-away-from-the-origin"
+        ]
+      },
+      {
+        "id": "cex-one-centred-ball-mean-identity-does-not-force-harmonicity",
+        "kind": "counterexample",
+        "title": "One centred ball-mean identity does not force harmonicity",
+        "strategy": "For a prescribed B_R(0), integrate |x|^2 and |x|^4 by polar coordinates to verify u(0)=the ball average for the stated quartic, then compute its nonzero Laplacian. This directly checked generated counterexample is non-load-bearing.",
+        "deps": [
+          "def-ball-average-operator-on-r-n",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ]
+      },
+      {
+        "id": "ex-distributional-harmonicity-removes-an-apparent-corner",
+        "kind": "example",
+        "title": "Distributional harmonicity removes an apparent interior corner",
+        "strategy": "Contrast the candidate corner |x_1|, whose distributional Laplacian has a hyperplane-supported singular term, with Weyl's conclusion that a genuinely distributionally harmonic locally integrable function has a smooth representative. No unproved removable-corner criterion is used.",
+        "deps": [
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "thm-weyl-lemma-for-the-laplacian"
+        ]
+      }
+    ]
+  }
+]

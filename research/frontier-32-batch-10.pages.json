@@ -1,0 +1,380 @@
+[
+  {
+    "order": 366.007,
+    "id": "cw-complexes-and-cellular-homology",
+    "kind": "A",
+    "category": "algebraic-topology",
+    "title": "Cw Complexes and Cellular Homology",
+    "companion": "cw-complexes-and-cellular-homology-examples",
+    "requires": [
+      "relative-homology-excision-and-mayer-vietoris-examples"
+    ],
+    "items": [
+      {
+        "id": "def-cell-attachment-by-a-characteristic-map",
+        "kind": "definition",
+        "title": "Cell attachment by a characteristic map",
+        "deps": [],
+        "strategy": "Define the adjunction-space quotient X union_f D^n, including the n=0 convention S^{-1}=empty, and name its characteristic map and open cell."
+      },
+      {
+        "id": "lem-the-interior-of-an-attached-cell-embeds-openly-in-its-closure",
+        "kind": "lemma",
+        "title": "The interior of an attached cell embeds openly in its closure",
+        "deps": [
+          "def-cell-attachment-by-a-characteristic-map"
+        ],
+        "strategy": "Use the quotient relation to show no interior points are identified, then distinguish the embedded open cell from the possibly nonembedded closed-cell image."
+      },
+      {
+        "id": "def-cw-complex-with-closure-finiteness-and-weak-topology",
+        "kind": "definition",
+        "title": "CW complex with closure finiteness and weak topology",
+        "deps": [
+          "def-cell-attachment-by-a-characteristic-map"
+        ],
+        "strategy": "Define a CW decomposition through characteristic cells, closure finiteness, and the weak topology tested on closed-cell closures; neither clause is suppressed for infinite complexes."
+      },
+      {
+        "id": "def-skeleta-cw-subcomplex-and-relative-cw-complex",
+        "kind": "definition",
+        "title": "Skeleta, CW subcomplexes, and relative CW complexes",
+        "deps": [
+          "def-cw-complex-with-closure-finiteness-and-weak-topology"
+        ],
+        "strategy": "Define skeleta and require a CW subcomplex to contain the entire closure of every open cell it contains; define relative CW attachment from that subcomplex."
+      },
+      {
+        "id": "prop-cw-skeleta-are-closed-and-cells-form-a-disjoint-partition",
+        "kind": "proposition",
+        "title": "CW skeleta are closed and cells form a disjoint partition",
+        "deps": [
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex",
+          "lem-the-interior-of-an-attached-cell-embeds-openly-in-its-closure"
+        ],
+        "strategy": "Test each skeleton on every characteristic disk, using induction on cell dimension for the boundary preimage, then use the open-cell partition for the skeletal difference."
+      },
+      {
+        "id": "lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells",
+        "kind": "lemma",
+        "title": "A compact subspace of a CW complex meets only finitely many cells",
+        "deps": [
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "prop-cw-skeleta-are-closed-and-cells-form-a-disjoint-partition"
+        ],
+        "strategy": "If infinitely many cells are met, use closure finiteness and the weak topology to construct an open cover of the compact set with no finite subcover."
+      },
+      {
+        "id": "cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex",
+        "kind": "corollary",
+        "title": "The image of a compact space lies in a finite CW subcomplex",
+        "deps": [
+          "lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells",
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex"
+        ],
+        "strategy": "Take the finitely many cells meeting the image and their finitely many closure faces to form the required finite subcomplex."
+      },
+      {
+        "id": "prop-relative-cw-inclusions-are-cofibrations",
+        "kind": "proposition",
+        "title": "Relative CW inclusions are cofibrations",
+        "deps": [
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex"
+        ],
+        "strategy": "Extend a prescribed homotopy one attached disk at a time and use the weak topology to assemble the extensions, giving the homotopy extension property."
+      },
+      {
+        "id": "prop-a-cw-complex-is-the-colimit-of-its-skeleta-in-the-weak-topology",
+        "kind": "proposition",
+        "title": "A CW complex is the colimit of its skeleta in the weak topology",
+        "deps": [
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex",
+          "def-cw-complex-with-closure-finiteness-and-weak-topology"
+        ],
+        "strategy": "Translate the weak-topology clause from closed-cell closures to skeleta and prove the stated continuity criterion."
+      },
+      {
+        "id": "thm-relative-homology-of-consecutive-cw-skeleta",
+        "kind": "theorem",
+        "title": "Relative homology of consecutive CW skeleta",
+        "deps": [
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex",
+          "prop-cw-skeleta-are-closed-and-cells-form-a-disjoint-partition",
+          "lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells",
+          "thm-excision-for-singular-homology",
+          "cor-homology-of-good-pairs-is-reduced-homology-of-the-quotient",
+          "cor-homology-of-spheres"
+        ],
+        "strategy": "Collapse the lower skeleton to a wedge of spheres, use compact-image finite-cell support to obtain a direct sum for an infinite wedge, and treat n=0 and the empty-cell case separately."
+      },
+      {
+        "id": "def-oriented-cellular-chain-group",
+        "kind": "definition",
+        "title": "Oriented cellular chain group",
+        "deps": [
+          "thm-relative-homology-of-consecutive-cw-skeleta"
+        ],
+        "strategy": "Define C_n^cell(X;G)=H_n(X^n,X^(n-1);G) and fix generators from orientations of characteristic disks."
+      },
+      {
+        "id": "def-cellular-boundary-from-three-consecutive-skeleta",
+        "kind": "definition",
+        "title": "Cellular boundary from three consecutive skeleta",
+        "deps": [
+          "def-oriented-cellular-chain-group",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology"
+        ],
+        "strategy": "Define d_n as the triple connecting map followed by the relative quotient map, with one displayed sign convention."
+      },
+      {
+        "id": "lem-the-cellular-boundary-squares-to-zero",
+        "kind": "lemma",
+        "title": "The cellular boundary squares to zero",
+        "deps": [
+          "def-cellular-boundary-from-three-consecutive-skeleta",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology"
+        ],
+        "strategy": "Read two consecutive connecting-and-quotient composites in the exact triple-of-skeleta diagram; exactness makes their composite zero."
+      },
+      {
+        "id": "def-cellular-homology",
+        "kind": "definition",
+        "title": "Cellular homology",
+        "deps": [
+          "def-oriented-cellular-chain-group",
+          "lem-the-cellular-boundary-squares-to-zero"
+        ],
+        "strategy": "Define cellular homology as the homology of the completed cellular chain complex, with zero groups in negative degrees."
+      },
+      {
+        "id": "lem-skeletal-homology-stabilizes-away-from-the-cell-dimension",
+        "kind": "lemma",
+        "title": "Skeletal homology stabilizes away from the cell dimension",
+        "deps": [
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology"
+        ],
+        "strategy": "Use the long exact sequence of (X^(n+1),X^n) and the concentration of its relative homology in degree n+1."
+      },
+      {
+        "id": "lem-homology-of-an-infinite-cw-complex-is-the-colimit-of-skeletal-homology",
+        "kind": "lemma",
+        "title": "Homology of an infinite CW complex is the colimit of skeletal homology",
+        "deps": [
+          "lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells",
+          "cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex",
+          "def-singular-chain-complex-and-singular-homology"
+        ],
+        "strategy": "Place each finite singular cycle and bounding chain in a finite subcomplex, proving both surjectivity and injectivity of the skeletal colimit map."
+      },
+      {
+        "id": "thm-cellular-homology-computes-singular-homology",
+        "kind": "theorem",
+        "title": "Cellular homology computes singular homology",
+        "deps": [
+          "def-cellular-homology",
+          "lem-skeletal-homology-stabilizes-away-from-the-cell-dimension",
+          "lem-homology-of-an-infinite-cw-complex-is-the-colimit-of-skeletal-homology",
+          "def-cellular-boundary-from-three-consecutive-skeleta",
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology"
+        ],
+        "strategy": "Identify cycles and boundaries in the stable skeletal exact sequences with kernels and images of d, then use the finite-support colimit lemma for the infinite-dimensional case."
+      },
+      {
+        "id": "thm-relative-cellular-homology-computes-relative-singular-homology",
+        "kind": "theorem",
+        "title": "Relative cellular homology computes relative singular homology",
+        "deps": [
+          "thm-cellular-homology-computes-singular-homology",
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex",
+          "prop-relative-cw-inclusions-are-cofibrations",
+          "cor-homology-of-good-pairs-is-reduced-homology-of-the-quotient"
+        ],
+        "strategy": "For nonempty A pass to the quotient CW complex X/A, identify the reduced cellular complex with the quotient cellular complex, and use the good-pair quotient theorem; handle empty A by the absolute theorem."
+      },
+      {
+        "id": "def-incidence-number-of-two-cw-cells",
+        "kind": "definition",
+        "title": "Incidence number of two CW cells",
+        "deps": [
+          "def-oriented-cellular-chain-group",
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex"
+        ],
+        "strategy": "Use the quotient degree for n at least two and define the n=1 coefficient separately as terminal-vertex multiplicity minus initial-vertex multiplicity."
+      },
+      {
+        "id": "thm-cellular-boundary-is-the-incidence-degree-matrix",
+        "kind": "theorem",
+        "title": "Cellular boundary is the incidence degree matrix",
+        "deps": [
+          "def-cellular-boundary-from-three-consecutive-skeleta",
+          "def-incidence-number-of-two-cw-cells",
+          "def-oriented-cellular-chain-group"
+        ],
+        "strategy": "Project the triple connecting map to each cell summand, use quotient degrees in dimensions at least two and the endpoint boundary in dimension one, and sum the coefficients."
+      },
+      {
+        "id": "prop-cellular-maps-induce-cellular-chain-maps",
+        "kind": "proposition",
+        "title": "Cellular maps induce cellular chain maps",
+        "deps": [
+          "def-cellular-homology",
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex",
+          "thm-cellular-homology-computes-singular-homology"
+        ],
+        "strategy": "Use a map preserving skeleta to obtain compatible maps of relative groups, then commute the triple connectors to prove the chain-map relation and singular compatibility."
+      },
+      {
+        "id": "cor-a-cw-complex-with-no-cells-in-adjacent-dimensions-has-zero-cellular-boundary",
+        "kind": "corollary",
+        "title": "A CW complex with no cells in adjacent dimensions has zero cellular boundary",
+        "deps": [
+          "def-cellular-homology",
+          "thm-cellular-homology-computes-singular-homology"
+        ],
+        "strategy": "For every degree, either the source or target cellular group is zero, so every differential vanishes and the displayed homology follows."
+      },
+      {
+        "id": "def-euler-characteristic-of-a-finite-cw-complex",
+        "kind": "definition",
+        "title": "Euler characteristic of a finite CW complex",
+        "deps": [],
+        "strategy": "Define chi(X) as the alternating sum of the finite cell counts and state the finite-CW qualification explicitly."
+      },
+      {
+        "id": "thm-euler-poincare-formula-for-finite-cw-complexes",
+        "kind": "theorem",
+        "title": "Euler–Poincare formula for finite CW complexes",
+        "deps": [
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "def-cellular-homology",
+          "thm-cellular-homology-computes-singular-homology"
+        ],
+        "strategy": "Apply rank-nullity to the finite free cellular complex so boundary ranks cancel in the alternating sum, then transfer from cellular to singular homology."
+      },
+      {
+        "id": "prop-euler-characteristic-is-additive-for-finite-cw-pairs",
+        "kind": "proposition",
+        "title": "Euler characteristic is additive for finite CW pairs",
+        "deps": [
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex"
+        ],
+        "strategy": "Partition the cells of X into those of the finite subcomplex A and those outside it, then account for the quotient basepoint convention."
+      },
+      {
+        "id": "prop-euler-characteristic-of-a-finite-cw-product",
+        "kind": "proposition",
+        "title": "Euler characteristic of a finite CW product",
+        "deps": [
+          "def-euler-characteristic-of-a-finite-cw-complex"
+        ],
+        "strategy": "Use product cells indexed by pairs of cells and factor the finite double alternating sum into the product of the two Euler characteristics."
+      }
+    ]
+  },
+  {
+    "order": 366.008,
+    "id": "cw-complexes-and-cellular-homology-examples",
+    "kind": "B",
+    "category": "algebraic-topology",
+    "title": "Cw Complexes and Cellular Homology — Examples",
+    "companion": "cw-complexes-and-cellular-homology",
+    "requires": [
+      "cw-complexes-and-cellular-homology"
+    ],
+    "items": [
+      {
+        "id": "ex-cellular-homology-of-real-projective-space",
+        "kind": "example",
+        "title": "Cellular homology of real projective space",
+        "deps": [
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "thm-cellular-homology-computes-singular-homology"
+        ],
+        "strategy": "Use the one-cell-per-dimension structure and the incidence number 1+(-1)^n, then compute kernels and images including the zero-dimensional and top-dimensional cases."
+      },
+      {
+        "id": "ex-cellular-homology-and-ring-independent-groups-of-complex-projective-space",
+        "kind": "example",
+        "title": "Cellular homology and ring-independent groups of complex projective space",
+        "deps": [
+          "cor-a-cw-complex-with-no-cells-in-adjacent-dimensions-has-zero-cellular-boundary",
+          "thm-cellular-homology-computes-singular-homology"
+        ],
+        "strategy": "Use the single even-dimensional cell in each degree to compute the additive groups over the stated coefficient ring without asserting the future cup-product structure."
+      },
+      {
+        "id": "ex-cellular-boundary-matrix-of-a-closed-orientable-surface",
+        "kind": "example",
+        "title": "Cellular boundary matrix of a closed orientable surface",
+        "deps": [
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "thm-cellular-homology-computes-singular-homology"
+        ],
+        "strategy": "Abelianize the standard polygon attaching word, show each one-cell coefficient cancels, and calculate the resulting integral homology."
+      },
+      {
+        "id": "ex-cellular-homology-of-a-lens-space",
+        "kind": "example",
+        "title": "Cellular homology of a lens space",
+        "deps": [
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "thm-cellular-homology-computes-singular-homology"
+        ],
+        "strategy": "Write the four-term cellular complex of the standard lens-space CW structure and isolate the multiplication-by-p differential that produces torsion."
+      },
+      {
+        "id": "ex-cellular-homology-of-an-infinite-dimensional-projective-space",
+        "kind": "example",
+        "title": "Cellular homology of an infinite-dimensional projective space",
+        "deps": [
+          "lem-homology-of-an-infinite-cw-complex-is-the-colimit-of-skeletal-homology",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix"
+        ],
+        "strategy": "Compute in finite projective skeleta in each fixed degree and pass to the colimit, keeping the infinite-dimensional justification visible."
+      },
+      {
+        "id": "ex-two-cw-structures-on-the-circle-have-the-same-euler-characteristic",
+        "kind": "example",
+        "title": "Two CW structures on the circle have the same Euler characteristic",
+        "deps": [
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "thm-euler-poincare-formula-for-finite-cw-complexes"
+        ],
+        "strategy": "Compare the one-vertex/one-edge and subdivided structures directly, then identify their common value with the homological formula."
+      },
+      {
+        "id": "cex-the-closure-of-a-cw-cell-need-not-be-a-closed-ball",
+        "kind": "counterexample",
+        "title": "The closure of a CW cell need not be a closed ball",
+        "deps": [
+          "def-cell-attachment-by-a-characteristic-map",
+          "lem-the-interior-of-an-attached-cell-embeds-openly-in-its-closure"
+        ],
+        "strategy": "Attach one 1-cell to one 0-cell with both boundary points identified and distinguish its quotient closure from a closed interval."
+      },
+      {
+        "id": "cex-a-cell-decomposition-without-the-weak-topology-need-not-be-a-cw-complex",
+        "kind": "counterexample",
+        "title": "A cell decomposition without the weak topology need not be a CW complex",
+        "deps": [
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "prop-a-cw-complex-is-the-colimit-of-its-skeleta-in-the-weak-topology"
+        ],
+        "strategy": "Give the source-standard infinite-wedge variant with a strictly finer ambient topology, and exhibit the set whose cellwise tests pass while ambient closure fails."
+      },
+      {
+        "id": "cex-the-hawaiian-earring-is-not-a-cw-complex-with-its-circle-cells",
+        "kind": "counterexample",
+        "title": "The Hawaiian earring is not a CW complex with its punctured circles as cells",
+        "deps": [
+          "lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells"
+        ],
+        "strategy": "Treat each punctured circle as the proposed open one-cell and use compactness plus the finite-cell-intersection lemma to contradict the CW property."
+      }
+    ]
+  }
+]

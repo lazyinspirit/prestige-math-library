@@ -14,7 +14,7 @@ verification:
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
-    date: 2026-09-04
+    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -25,7 +25,8 @@ sources:
 ## Statement
 
 Let $\mathcal F$ be a presheaf on a topological space $X$ and let $x\in X$.
-For pairs $(U,s)$ and $(V,t)$ with $x\in U\cap V$, define
+For open neighbourhoods $U,V$ of $x$ and sections
+$s\in\mathcal F(U)$, $t\in\mathcal F(V)$, define
 $$(U,s)\sim_x(V,t)$$
 when there exists an open neighbourhood $W$ of $x$ with
 $W\subseteq U\cap V$ and
@@ -36,11 +37,9 @@ Then $\sim_x$ is an equivalence relation.
 
 **Given:** A presheaf $\mathcal F$ on $X$ and a point $x\in X$.
 
-[F1] The stalk is built from pairs $(U,s)$ modulo equality on a smaller
-neighbourhood of $x$ ([[def-stalk-of-presheaf]]).
+[F1] The stalk is built from pairs $(U,s)$ modulo equality on a smaller neighbourhood of $x$ ([[def-stalk-of-presheaf]]).
 
-[F2] An equivalence relation is one that is reflexive, symmetric, and
-transitive ([[def-equivalence-relation]]).
+[F2] An equivalence relation is one that is reflexive, symmetric, and transitive ([[def-equivalence-relation]]).
 
 ## Proof
 

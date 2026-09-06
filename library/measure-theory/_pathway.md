@@ -22,20 +22,19 @@ parts:
       - density-separability-and-convolution-in-lp
       - the-duality-of-lp-and-lq
       - the-maximal-function-and-lebesgue-differentiation
+      - radon-measures-and-the-riesz-markov-kakutani-theorem
       - differentiation-of-monotone-functions-and-the-vitali-covering-theorem
       - absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus
 ---
 
 ## sigma-algebras-and-borel-sets
 
-A sigma-algebra supplies the closure for countable additivity; outer measure and
-Caratheodory build Lebesgue measure, measurable functions, and integration. Convergence,
-products and signed measures, Radon--Nikodym decomposition, the $L^p$ inequalities,
-density, convolution, and $L^p$--$L^q$ duality make this an analytic calculus. Vitali
-covering and the maximal function give weak $(1,1)$ and $L^p$ estimates, Lebesgue and density
-points, differentiation of measures, and the $L^1$ FTC. Dini derivatives, rising suns, fine
-covers, and the jump/absolutely-continuous/singular decomposition distinguish bounded
-variation from absolute continuity. Absolute continuity is the sharp Newton--Leibniz class:
-its derivative is integrable and its indefinite integral recovers the function.
-Banach--Zarecki adds continuity, bounded variation, and property $(N)$; integration by parts
-and increasing absolutely-continuous substitution hold, but arbitrary composition need not.
+A sigma-algebra supplies the closure for countable additivity; outer measure and Carathéodory
+build Lebesgue measure, measurable functions, and integration. Convergence, products, signed
+measures, Radon--Nikodym decomposition, the $L^p$ inequalities, density, convolution, and
+$L^p$--$L^q$ duality make this an analytic calculus. On a locally compact Hausdorff space, a
+positive functional on $C_c$ is integration against a unique Radon measure, while the bounded
+complex dual of $C_0$ is given by finite regular complex Borel measures. The ordinal examples
+show why Radon, all-Borel regularity, and uniqueness among arbitrary Borel measures must not be
+conflated. Vitali covering, maximal estimates, and differentiation lead to the $L^1$ FTC;
+Banach--Zarecki identifies the sharp Newton--Leibniz class and its qualified substitution rules.

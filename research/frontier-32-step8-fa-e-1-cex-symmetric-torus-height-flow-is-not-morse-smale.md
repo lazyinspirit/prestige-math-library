@@ -1,0 +1,22 @@
+# FA terminal evidence — queue e, position 1
+
+Decision: repaired. Independently read the current item, both direct dependencies, the normalized downward-gradient-like definition, stable-manifold and transversality interfaces, both batch-18 pages, the manifest entry, coverage and batch notes, the batch and aggregate proof contracts/risk review, both Terra rejection records, and Alpha's adjudication and repair note. The first repair fixes the unspecified metric but does not establish that the height is Morse. Terra's final rejection is valid.
+
+The replacement parametrizes the upright ring torus explicitly. With A=R+r cos(v)>0, the induced metric is diag(A²,r²), and the height differential vanishes exactly when cos(u)=0 and sin(v)=0. The diagonal Hessian entries -A sin(u), -r cos(v) sin(u) are nonzero at all four points, proving nondegeneracy of both extrema as well as both saddles. The negative-gradient equations are calculated directly. Compactness ensures completeness. The invariant inner equator has a strictly increasing u branch from the upper saddle to the lower saddle. The scalar transverse equation near each endpoint excludes any off-equator backward/forward-converging branch. Thus both relevant tangent lines coincide and cannot span a surface tangent plane. This proves the stated metric counterexample without treating a pictorial separatrix as an assumption.
+
+A further direct-interface defect required editing `def-morse-smale-pair`: arbitrary metric gradients need not have the exact local eigenvalues ±2 imposed by `def-downward-gradient-like-vector-field`. The metric definition is now a separate version, using the same all-pairs transversality condition and explicit flow-limit meanings. No indirect dependency was edited. The exact baseline/current guard hashes and direct-edge licence are in `research/frontier-32-step8-owner-prerequisite-repairs.jsonl`.
+
+External verification was needed for the source's torus geometry and the metric/normalized-field convention. Full underlying PDF passages were opened:
+
+- https://audin.pages.math.unistra.fr/livres/audin-damian-en.pdf — §2.2.a, printed pp. 36–37, Figure 2.10, and Example 2.2.4, printed p. 40: induced Euclidean metric, shared saddle arcs, and failed Smale transversality. §2.2.b gives the all-pairs condition. The coordinate/Hessian proof above is independently calculated.
+- https://www3.nd.edu/~lnicolae/Morse2nd.pdf — Definition 2.4.8 and Remark 2.4.9, printed p. 58: gradient-like Morse–Smale pairs and exclusion of nonconstant equal-index connections by transversality. This supports retaining that field convention while separating the metric version supported by Audin–Damian.
+
+Validation: focused precheck passed (one proof, no failures); strict batch proof-contract check passed (1/1, zero errors/warnings). Both current contract copies were synchronized with the actual proof and concrete boundary/risk analysis. No judge call or pass stamp was created.
+
+Obligations: none remaining for this item. Next action: record these exact bytes, then begin queue position 2 only after recorder acceptance.
+
+Receipt refresh while closing position 3: the judge context includes sibling interfaces. The explicit tilted-torus statement changed that context, although this counterexample and its dependencies are unchanged. Rechecked the two interfaces: epsilon=0 has the saddle connection; 0<epsilon<1/2 excludes it by an invariant strip. The counterexample's mathematical decision remains repaired. Reseal solely to bind the current sibling context; this is not a new judge verdict.
+
+Context refresh at position 4: the Baire lemma now explicitly states its closed finite-dimensional manifold and fixed-Morse-function hypotheses. This sibling interface is compatible with this compact embedded torus. Item and direct dependency bytes remain as independently checked above.
+
+Final sibling-context review: queue position 8 now states the relative field theorem for sufficiently small fixed critical balls inside larger Morse charts, with distinct critical values, and proves it by descending stable destinations. Its coverage no longer imports the stronger arbitrary prescribed-zero-region metric theorem. This is consistent with the batch-18 page conventions. The present item does not use that relative theorem in its proof; its mathematical decision and item bytes remain unchanged. Refreshing this receipt binds it to the final sibling statements after the authorized sequential repairs.

@@ -26,7 +26,9 @@
 // pass. A gate that cannot fail is decorative, and the engine reads exit codes,
 // not prose. The summary line at the end is what the gate's liveness probe
 // reads, so a run over an empty or mis-selected manifest set cannot pass as a
-// clean audit either.
+// clean audit either. Do not force process.exit() after printing it: when the
+// gate captures stdout through a pipe, that can discard buffered output before
+// the liveness probe sees the terminal summary.
 
 import { readFileSync, readdirSync, statSync, existsSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
@@ -212,4 +214,6 @@ for (const e of defects) {
 }
 say(`audit-manifest: ${edges.length} relationship(s) over ${itemBatch.size} item(s) `
   + `in ${batches.size} batch(es); ${defects.length} defect(s)`);
-process.exit(defects.length ? 1 : 0);
+// Assigning exitCode preserves the intended status while allowing stdout and
+// stderr to drain. process.exit() can truncate this verbose gate's piped output.
+process.exitCode = defects.length ? 1 : 0;

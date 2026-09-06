@@ -1,0 +1,742 @@
+[
+  {
+    "order": 365.903,
+    "id": "depth-and-cohen-macaulay-modules",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Depth and Cohen Macaulay Modules",
+    "companion": "depth-and-cohen-macaulay-modules-examples",
+    "requires": [
+      "koszul-complexes-and-regular-sequences-examples",
+      "ext-and-balanced-resolutions"
+    ],
+    "items": [
+      {
+        "id": "def-depth-with-respect-to-an-ideal",
+        "kind": "definition",
+        "title": "Depth with respect to an ideal",
+        "strategy": "For a finite module define I-depth as the supremum of lengths of M-regular sequences in I, fixing the IM=M and zero-module values as infinity; local depth uses the maximal ideal.",
+        "deps": [
+          "def-regular-sequence-on-a-module"
+        ]
+      },
+      {
+        "id": "lem-depth-infinity-when-ideal-acts-surjectively",
+        "kind": "lemma",
+        "title": "Depth is infinite when the ideal acts surjectively",
+        "strategy": "Unpack the infinity convention for IM=M, then use Nakayama to exclude this case for a finite nonzero local module and a proper ideal in its maximal ideal.",
+        "deps": [
+          "def-depth-with-respect-to-an-ideal",
+          "thm-nakayama-lemma"
+        ]
+      },
+      {
+        "id": "lem-regular-element-exists-by-prime-avoidance",
+        "kind": "lemma",
+        "title": "A regular element exists by prime avoidance",
+        "strategy": "For IM != M, identify zero divisors on a nonzero finite module through associated primes, use their finiteness and finite prime avoidance to choose an element of I outside their union, and check its quotient remains nonzero.",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "thm-existence-of-associated-primes",
+          "thm-finiteness-of-associated-primes",
+          "lem-zero-divisor-annihilator-contained-in-associated-prime",
+          "lem-finite-prime-avoidance"
+        ]
+      },
+      {
+        "id": "cor-depth-zero-iff-ideal-contained-in-an-associated-prime",
+        "kind": "corollary",
+        "title": "Depth zero and associated primes",
+        "strategy": "Translate depth zero into absence of an M-regular element in I and apply the prime-avoidance lemma in both directions.",
+        "deps": [
+          "def-depth-with-respect-to-an-ideal",
+          "lem-regular-element-exists-by-prime-avoidance"
+        ]
+      },
+      {
+        "id": "thm-depth-zero-associated-prime-criterion",
+        "kind": "theorem",
+        "title": "The local depth-zero associated-prime criterion",
+        "strategy": "Specialize the ideal criterion to the maximal ideal of a Noetherian local ring, retaining finite and nonzero-module hypotheses.",
+        "deps": [
+          "cor-depth-zero-iff-ideal-contained-in-an-associated-prime"
+        ]
+      },
+      {
+        "id": "lem-maximal-regular-sequence-stops-at-associated-prime",
+        "kind": "lemma",
+        "title": "A maximal regular sequence stops at an associated prime",
+        "strategy": "Apply the depth-zero associated-prime criterion to the terminal quotient, obtaining both the obstruction to extension and its converse.",
+        "deps": [
+          "def-regular-sequence-on-a-module",
+          "cor-depth-zero-iff-ideal-contained-in-an-associated-prime"
+        ]
+      },
+      {
+        "id": "lem-ext-depth-zero-identifies-annihilated-elements",
+        "kind": "lemma",
+        "title": "Ext degree zero identifies ideal-annihilated elements",
+        "strategy": "Evaluate Hom_R(R/I,M) at one modulo I to identify it with (0:_M I), making nonvanishing the degree-zero obstruction.",
+        "deps": [
+          "def-balanced-ext-bifunctor"
+        ]
+      },
+      {
+        "id": "lem-ext-depth-shift-across-a-regular-element",
+        "kind": "lemma",
+        "title": "The first nonzero Ext shifts across a regular element",
+        "strategy": "Apply Ext_R(R/I,-) to 0 to M to M to M/xM to 0; x in I acts as zero on Ext, so exactness gives the shift through the first nonzero degree.",
+        "deps": [
+          "def-regular-sequence-on-a-module",
+          "lem-ext-depth-zero-identifies-annihilated-elements",
+          "thm-long-exact-ext-sequence-in-the-second-variable"
+        ]
+      },
+      {
+        "id": "lem-maximal-regular-sequences-have-common-length-ext",
+        "kind": "lemma",
+        "title": "Maximal regular sequences have a common Ext length",
+        "strategy": "Iterate the Ext shift to a terminal depth-zero quotient, making each maximal length equal to the same first nonzero Ext degree.",
+        "deps": [
+          "lem-maximal-regular-sequence-stops-at-associated-prime",
+          "lem-ext-depth-zero-identifies-annihilated-elements",
+          "lem-ext-depth-shift-across-a-regular-element"
+        ]
+      },
+      {
+        "id": "cor-depth-as-first-nonzero-ext",
+        "kind": "corollary",
+        "title": "Depth as the first nonzero Ext degree",
+        "strategy": "Compare the regular-sequence definition with the common Ext length, retaining the infinity case when every relevant Ext group vanishes.",
+        "deps": [
+          "def-depth-with-respect-to-an-ideal",
+          "lem-maximal-regular-sequences-have-common-length-ext"
+        ]
+      },
+      {
+        "id": "thm-depth-equals-maximal-regular-sequence-length",
+        "kind": "theorem",
+        "title": "Depth equals the maximal regular-sequence length",
+        "strategy": "Package the comparison for finite modules over a Noetherian ring and state the common-length maximal-sequence conclusion in the local/Jacobson setting.",
+        "deps": [
+          "def-depth-with-respect-to-an-ideal",
+          "cor-depth-as-first-nonzero-ext"
+        ]
+      },
+      {
+        "id": "lem-depth-radical-invariance-via-ext",
+        "kind": "lemma",
+        "title": "Radical invariance of first nonzero Ext",
+        "strategy": "Use powers witnessing equal radicals and finite quotient filtrations to compare the Ext-vanishing ranges for I and J.",
+        "deps": [
+          "cor-depth-as-first-nonzero-ext"
+        ]
+      },
+      {
+        "id": "cor-depth-depends-only-on-radical",
+        "kind": "corollary",
+        "title": "Depth depends only on the radical of the ideal",
+        "strategy": "Translate the equality of first nonzero Ext degrees for equal radicals back into equality of depths.",
+        "deps": [
+          "lem-depth-radical-invariance-via-ext"
+        ]
+      },
+      {
+        "id": "lem-depth-quotient-by-regular-element",
+        "kind": "lemma",
+        "title": "Depth drops by one after quotienting by a regular element",
+        "strategy": "Use the regular-element Ext shift, including the convention boundary cases, to prove depth_I(M/xM)=depth_I(M)-1.",
+        "deps": [
+          "def-regular-sequence-on-a-module",
+          "cor-depth-as-first-nonzero-ext",
+          "lem-ext-depth-shift-across-a-regular-element"
+        ]
+      },
+      {
+        "id": "lem-associated-prime-after-power-regular-quotient",
+        "kind": "lemma",
+        "title": "A prime minimal over an associated prime plus one element becomes associated after a power quotient",
+        "strategy": "Embed N = R/p in M, apply Artin--Rees to choose n with N intersect x^nM contained in xN, and use the induced injection of N/(N intersect x^nM) into M/x^nM together with its quotient onto R/(p+(x)) to make every prime minimal over p+(x) minimal in the relevant support and hence associated to M/x^nM.",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "lem-associated-prime-equivalent-cyclic-embedding",
+          "thm-artin-rees-lemma",
+          "thm-minimal-support-primes-are-associated"
+        ]
+      },
+      {
+        "id": "lem-depth-bounded-by-associated-prime-quotient-dimension",
+        "kind": "lemma",
+        "title": "Depth is bounded by the quotient dimension at every associated prime",
+        "strategy": "Follow Stacks Lemma 10.72.9: induct on depth, choose a regular x, choose q minimal over p+(x) with dim(R/q)=dim(R/p)-1, use the power-quotient associated-prime lemma, and apply the regular-power depth drop to M/x^nM, including the depth-zero and depth-one base cases.",
+        "deps": [
+          "lem-associated-prime-after-power-regular-quotient",
+          "lem-regular-element-exists-by-prime-avoidance",
+          "lem-depth-quotient-by-regular-element",
+          "thm-krull-principal-ideal-theorem"
+        ]
+      },
+      {
+        "id": "lem-depth-localisation-inequality",
+        "kind": "lemma",
+        "title": "Localization gives the stated depth inequality",
+        "strategy": "For a prime p prove depth(M_p)+dim(R/p) >= depth(M) as in Stacks Lemma 10.72.10. If the inequality is not immediate, the associated-prime quotient-dimension bound and finite prime avoidance produce an M-regular element x in p; quotient by x and induct on depth, treating M_p=0 with the infinity convention.",
+        "deps": [
+          "lem-depth-bounded-by-associated-prime-quotient-dimension",
+          "lem-finite-prime-avoidance",
+          "lem-zero-divisor-annihilator-contained-in-associated-prime",
+          "lem-depth-quotient-by-regular-element"
+        ]
+      },
+      {
+        "id": "thm-radical-localisation-and-regular-quotient-properties-of-depth",
+        "kind": "theorem",
+        "title": "Radical, localization, and regular-quotient properties of depth",
+        "strategy": "State the source-qualified radical, localization, and one-step quotient results as a synthesis of the focused preceding results rather than a duplicate proof package.",
+        "deps": [
+          "cor-depth-depends-only-on-radical",
+          "lem-depth-quotient-by-regular-element",
+          "lem-depth-localisation-inequality"
+        ]
+      },
+      {
+        "id": "lem-depth-lemma-lower-bound-middle",
+        "kind": "lemma",
+        "title": "The middle lower bound in the Depth Lemma",
+        "strategy": "Read the Ext vanishing range for the middle term from the long exact Ext sequence of a short exact sequence.",
+        "deps": [
+          "cor-depth-as-first-nonzero-ext",
+          "thm-long-exact-ext-sequence-in-the-second-variable"
+        ]
+      },
+      {
+        "id": "lem-depth-lemma-lower-bound-left",
+        "kind": "lemma",
+        "title": "The left lower bound in the Depth Lemma",
+        "strategy": "Inspect adjacent Ext terms to convert their vanishing range into the lower bound for the left term.",
+        "deps": [
+          "cor-depth-as-first-nonzero-ext",
+          "thm-long-exact-ext-sequence-in-the-second-variable"
+        ]
+      },
+      {
+        "id": "lem-depth-lemma-lower-bound-right",
+        "kind": "lemma",
+        "title": "The right lower bound in the Depth Lemma",
+        "strategy": "Use the remaining adjacent Ext terms to derive the lower bound for the quotient term, with its one-degree shift explicit.",
+        "deps": [
+          "cor-depth-as-first-nonzero-ext",
+          "thm-long-exact-ext-sequence-in-the-second-variable"
+        ]
+      },
+      {
+        "id": "thm-depth-lemma",
+        "kind": "theorem",
+        "title": "The three Depth Lemma inequalities",
+        "strategy": "Assemble the three focused Ext-vanishing inequalities for a short exact sequence, preserving term order and plus/minus-one shifts.",
+        "deps": [
+          "lem-depth-lemma-lower-bound-middle",
+          "lem-depth-lemma-lower-bound-left",
+          "lem-depth-lemma-lower-bound-right"
+        ]
+      },
+      {
+        "id": "cor-depth-lemma-unequal-depth-equalities",
+        "kind": "corollary",
+        "title": "Unequal-depth equalities in a short exact sequence",
+        "strategy": "Combine pairs of Depth Lemma inequalities in the standard strict-depth ranges and identify the third depth only after checking the minimum is strict.",
+        "deps": [
+          "thm-depth-lemma"
+        ]
+      },
+      {
+        "id": "lem-koszul-depth-first-nonzero-cohomology",
+        "kind": "lemma",
+        "title": "Depth from first nonzero Koszul cohomology",
+        "strategy": "Use finite dimension from the height theorem, induction on depth, the finite associated-prime/prime-avoidance depth-zero case, regular-element shifts, and finite-free Koszul self-duality to identify first cohomology and complementary last homology with depth.",
+        "deps": [
+          "def-depth-with-respect-to-an-ideal",
+          "def-koszul-complex-of-a-sequence-with-coefficients",
+          "thm-regular-sequences-give-acyclic-koszul-complexes",
+          "thm-finiteness-of-associated-primes",
+          "lem-zero-divisor-annihilator-contained-in-associated-prime",
+          "lem-finite-prime-avoidance",
+          "thm-krull-height-theorem"
+        ]
+      },
+      {
+        "id": "cor-depth-bounded-by-number-of-ideal-generators",
+        "kind": "corollary",
+        "title": "Depth is bounded by the number of ideal generators",
+        "strategy": "The n-generator Koszul complex has no degrees beyond n, and M/IM nonzero excludes the infinity convention.",
+        "deps": [
+          "lem-koszul-depth-first-nonzero-cohomology"
+        ]
+      },
+      {
+        "id": "thm-koszul-characterisation-of-depth",
+        "kind": "theorem",
+        "title": "The Koszul characterization of depth",
+        "strategy": "State the first-nonzero-cohomology and last-nonzero-homology formulations with their source convention and finiteness hypotheses.",
+        "deps": [
+          "lem-koszul-depth-first-nonzero-cohomology"
+        ]
+      },
+      {
+        "id": "lem-depth-at-a-prime-bounded-by-local-dimension",
+        "kind": "lemma",
+        "title": "Depth at a prime is bounded by local support dimension",
+        "strategy": "Each regular element gives a strict support-dimension descent via the principal ideal theorem; compare sequence length with local support dimension.",
+        "deps": [
+          "def-regular-sequence-on-a-module",
+          "thm-dimension-and-parameters-for-modules",
+          "thm-krull-height-theorem",
+          "thm-depth-equals-maximal-regular-sequence-length"
+        ]
+      },
+      {
+        "id": "cor-depth-of-a-finite-local-module-at-most-its-dimension",
+        "kind": "corollary",
+        "title": "A finite local module has depth at most its dimension",
+        "strategy": "Specialize the local-prime bound at the maximal ideal using the support-dimension convention.",
+        "deps": [
+          "lem-depth-at-a-prime-bounded-by-local-dimension"
+        ]
+      },
+      {
+        "id": "thm-depth-bounded-by-support-dimension",
+        "kind": "theorem",
+        "title": "Depth is bounded by support dimension",
+        "strategy": "Record the finite nonzero local-module inequality in support-dimension form, separating its zero-module convention.",
+        "deps": [
+          "cor-depth-of-a-finite-local-module-at-most-its-dimension"
+        ]
+      },
+      {
+        "id": "def-cohen-macaulay-local-module-and-ring",
+        "kind": "definition",
+        "title": "Cohen--Macaulay local modules and rings",
+        "strategy": "Define a nonzero finite local module to be Cohen--Macaulay exactly when local depth equals support dimension, and a local ring by applying this to itself.",
+        "deps": [
+          "def-depth-with-respect-to-an-ideal",
+          "def-support-of-a-module"
+        ]
+      },
+      {
+        "id": "def-maximal-and-global-cohen-macaulay-modules",
+        "kind": "definition",
+        "title": "Maximal and global Cohen--Macaulay modules",
+        "strategy": "Define maximal Cohen--Macaulay by equality with the ring dimension and global Cohen--Macaulayness by localization at every support prime; record the zero-module convention.",
+        "deps": [
+          "def-cohen-macaulay-local-module-and-ring"
+        ]
+      },
+      {
+        "id": "cor-zero-dimensional-local-modules-are-cohen-macaulay",
+        "kind": "corollary",
+        "title": "Zero-dimensional finite local modules are Cohen--Macaulay",
+        "strategy": "The depth upper bound and nonnegative regular-sequence definition force both invariants to equal zero.",
+        "deps": [
+          "def-cohen-macaulay-local-module-and-ring",
+          "cor-depth-of-a-finite-local-module-at-most-its-dimension"
+        ]
+      },
+      {
+        "id": "lem-regular-quotient-preserves-depth-dimension-gap",
+        "kind": "lemma",
+        "title": "A regular parameter quotient preserves the depth--dimension gap",
+        "strategy": "Combine the one-step depth quotient formula with exact parameter dimension drop, retaining the parameter and nonzerodivisor hypotheses.",
+        "deps": [
+          "lem-depth-quotient-by-regular-element",
+          "lem-parameter-dimension-drop-is-exact"
+        ]
+      },
+      {
+        "id": "cor-regular-quotient-cohen-macaulay-equivalence",
+        "kind": "corollary",
+        "title": "Cohen--Macaulayness and a regular parameter quotient",
+        "strategy": "Subtract one from both invariants in the gap lemma to prove the two-way equivalence under its stated hypotheses.",
+        "deps": [
+          "def-cohen-macaulay-local-module-and-ring",
+          "lem-regular-quotient-preserves-depth-dimension-gap"
+        ]
+      },
+      {
+        "id": "thm-regular-quotients-and-cohen-macaulayness",
+        "kind": "theorem",
+        "title": "Regular quotients and Cohen--Macaulayness",
+        "strategy": "Iterate the one-step equivalence along a regular parameter sequence, retaining properness and finite-module qualifications.",
+        "deps": [
+          "cor-regular-quotient-cohen-macaulay-equivalence"
+        ]
+      },
+      {
+        "id": "lem-associated-primes-of-cohen-macaulay-module-have-full-dimension",
+        "kind": "lemma",
+        "title": "Associated primes of a Cohen--Macaulay module have full dimension",
+        "strategy": "For p in Ass(M), apply the associated-prime depth bound depth(M) <= dim(R/p); combine Cohen--Macaulay equality depth(M)=dim Supp(M) with the reverse inequality dim(R/p) <= dim Supp(M).",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "def-cohen-macaulay-local-module-and-ring",
+          "lem-depth-bounded-by-associated-prime-quotient-dimension"
+        ]
+      },
+      {
+        "id": "cor-cohen-macaulay-modules-have-no-embedded-associated-primes",
+        "kind": "corollary",
+        "title": "Cohen--Macaulay modules have no embedded associated primes",
+        "strategy": "Use the full-dimension equality to rule out strict containment above a smaller support prime.",
+        "deps": [
+          "lem-associated-primes-of-cohen-macaulay-module-have-full-dimension"
+        ]
+      },
+      {
+        "id": "thm-associated-primes-of-cohen-macaulay-modules",
+        "kind": "theorem",
+        "title": "Associated primes of Cohen--Macaulay modules",
+        "strategy": "Package the full quotient-dimension conclusion, minimality in support, and absence of embedded associated primes.",
+        "deps": [
+          "lem-associated-primes-of-cohen-macaulay-module-have-full-dimension",
+          "cor-cohen-macaulay-modules-have-no-embedded-associated-primes"
+        ]
+      },
+      {
+        "id": "lem-cohen-macaulay-parameter-first-element-regular",
+        "kind": "lemma",
+        "title": "The first parameter of a Cohen--Macaulay module is regular",
+        "strategy": "A first parameter avoids all associated primes of full dimension, so the associated-prime criterion makes it a nonzerodivisor.",
+        "deps": [
+          "def-cohen-macaulay-local-module-and-ring",
+          "thm-dimension-and-parameters-for-modules",
+          "lem-associated-primes-of-cohen-macaulay-module-have-full-dimension"
+        ]
+      },
+      {
+        "id": "lem-cohen-macaulay-parameter-sequence-induction",
+        "kind": "lemma",
+        "title": "Induction along a Cohen--Macaulay parameter sequence",
+        "strategy": "After the first parameter is regular, use the regular-quotient equivalence and parameter dimension drop to identify the remaining tuple as a parameter system on the quotient.",
+        "deps": [
+          "lem-cohen-macaulay-parameter-first-element-regular",
+          "cor-regular-quotient-cohen-macaulay-equivalence",
+          "thm-dimension-and-parameters-for-modules"
+        ]
+      },
+      {
+        "id": "cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module",
+        "kind": "corollary",
+        "title": "Every system of parameters is regular in a Cohen--Macaulay module",
+        "strategy": "Apply the parameter induction to the full system and retain the terminal nonzero quotient condition.",
+        "deps": [
+          "lem-cohen-macaulay-parameter-sequence-induction"
+        ]
+      },
+      {
+        "id": "cor-one-regular-system-of-parameters-implies-cohen-macaulay",
+        "kind": "corollary",
+        "title": "One regular system of parameters implies Cohen--Macaulayness",
+        "strategy": "A regular system has length equal to support dimension, furnishing a depth lower bound matching the general upper bound.",
+        "deps": [
+          "def-cohen-macaulay-local-module-and-ring",
+          "thm-dimension-and-parameters-for-modules",
+          "thm-depth-bounded-by-support-dimension"
+        ]
+      },
+      {
+        "id": "thm-parameters-and-regular-sequences-in-cohen-macaulay-modules",
+        "kind": "theorem",
+        "title": "Parameters and regular sequences in Cohen--Macaulay modules",
+        "strategy": "State both directions: every parameter system in a nonzero finite Cohen--Macaulay local module is regular, and a regular parameter system forces Cohen--Macaulayness.",
+        "deps": [
+          "cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module",
+          "cor-one-regular-system-of-parameters-implies-cohen-macaulay"
+        ]
+      },
+      {
+        "id": "lem-localisation-of-cohen-macaulay-module-depth-dimension-equality",
+        "kind": "lemma",
+        "title": "Localization preserves the Cohen--Macaulay depth--dimension equality",
+        "strategy": "Follow Stacks Lemma 10.103.11. Induct along a maximal prime chain from p to the local maximal ideal, reduce to a saturated one-step inclusion, combine depth(M_p)+dim(R/p) >= depth(M) with the one-step support-dimension drop, and close with the general depth upper bound; treat M_p=0 separately.",
+        "deps": [
+          "def-cohen-macaulay-local-module-and-ring",
+          "lem-depth-localisation-inequality",
+          "cor-depth-of-a-finite-local-module-at-most-its-dimension"
+        ]
+      },
+      {
+        "id": "cor-cohen-macaulayness-localises",
+        "kind": "corollary",
+        "title": "Cohen--Macaulayness localizes",
+        "strategy": "Apply the localized equality at every support prime and then invoke the global Cohen--Macaulay convention.",
+        "deps": [
+          "def-maximal-and-global-cohen-macaulay-modules",
+          "lem-localisation-of-cohen-macaulay-module-depth-dimension-equality"
+        ]
+      },
+      {
+        "id": "thm-localisation-of-cohen-macaulay-modules",
+        "kind": "theorem",
+        "title": "Localization of Cohen--Macaulay modules",
+        "strategy": "State the finite Noetherian localization theorem in local and global forms, distinguishing support primes from zero localizations.",
+        "deps": [
+          "cor-cohen-macaulayness-localises"
+        ]
+      },
+      {
+        "id": "lem-polynomial-extension-depth-increases-by-one",
+        "kind": "lemma",
+        "title": "A polynomial variable increases depth by one",
+        "strategy": "Prove coefficientwise that x is regular on M[x], identify its quotient by x with M, and apply the one-step depth formula after localization.",
+        "deps": [
+          "def-regular-sequence-on-a-module",
+          "lem-depth-quotient-by-regular-element"
+        ]
+      },
+      {
+        "id": "cor-polynomial-extension-preserves-cohen-macaulayness",
+        "kind": "corollary",
+        "title": "Polynomial extension preserves Cohen--Macaulayness",
+        "strategy": "At a polynomial prime compare the one-variable depth and support-dimension increments, then iterate variables.",
+        "deps": [
+          "def-maximal-and-global-cohen-macaulay-modules",
+          "thm-localisation-and-flat-base-change-of-regular-sequences",
+          "thm-depth-bounded-by-support-dimension",
+          "thm-dimension-and-parameters-for-modules",
+          "cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module"
+        ]
+      },
+      {
+        "id": "thm-polynomial-extension-of-cohen-macaulay-rings",
+        "kind": "theorem",
+        "title": "Polynomial extensions of Cohen--Macaulay rings",
+        "strategy": "Specialize the module result to the ring module and state the global localization convention for finitely many variables.",
+        "deps": [
+          "cor-polynomial-extension-preserves-cohen-macaulayness"
+        ]
+      },
+      {
+        "id": "lem-completion-preserves-regular-sequences",
+        "kind": "lemma",
+        "title": "Completion preserves regular sequences",
+        "strategy": "Use flat completion to preserve injections and faithful flatness to preserve nonzero terminal quotients for finite modules.",
+        "deps": [
+          "def-regular-sequence-on-a-module",
+          "thm-flatness-of-noetherian-completion",
+          "thm-faithful-flatness-of-jacobson-adic-completion"
+        ]
+      },
+      {
+        "id": "lem-completion-reflects-depth",
+        "kind": "lemma",
+        "title": "Completion reflects depth",
+        "strategy": "Use flat base change for Ext from the residue field and faithful flatness to preserve the first nonzero Ext degree, including the infinity case.",
+        "deps": [
+          "def-depth-with-respect-to-an-ideal",
+          "cor-depth-as-first-nonzero-ext",
+          "lem-completion-preserves-regular-sequences",
+          "thm-faithful-flatness-of-jacobson-adic-completion"
+        ]
+      },
+      {
+        "id": "cor-completion-preserves-cohen-macaulayness-two-directions",
+        "kind": "corollary",
+        "title": "Completion preserves Cohen--Macaulayness in both directions",
+        "strategy": "Use equality of depths from reflection and equality of support dimensions under completion to prove the local-ring and finite-module equivalence.",
+        "deps": [
+          "def-cohen-macaulay-local-module-and-ring",
+          "lem-completion-reflects-depth",
+          "thm-completion-preserves-dimension-and-hilbert-samuel-data"
+        ]
+      },
+      {
+        "id": "thm-completion-preserves-cohen-macaulayness",
+        "kind": "theorem",
+        "title": "Completion preserves Cohen--Macaulayness",
+        "strategy": "Package the two-way completion theorem with its Noetherian local, finite-module, and completion-ideal hypotheses.",
+        "deps": [
+          "cor-completion-preserves-cohen-macaulayness-two-directions"
+        ]
+      },
+      {
+        "id": "lem-flat-local-depth-formula-regular-sequence-split",
+        "kind": "lemma",
+        "title": "A flat local map splits regular sequences into base and fibre parts",
+        "strategy": "For a flat local map, base-change a regular sequence from the source and then lift a regular closed-fibre sequence, verifying regularity one quotient at a time.",
+        "deps": [
+          "def-flat-and-faithfully-flat-modules-and-ring-maps",
+          "def-regular-sequence-on-a-module",
+          "thm-localisation-and-flat-base-change-of-regular-sequences"
+        ]
+      },
+      {
+        "id": "cor-flat-local-depth-additivity",
+        "kind": "corollary",
+        "title": "Depth is additive for a flat local homomorphism",
+        "strategy": "The split sequence gives one bound; the Ext/Koszul vanishing characterization gives the reverse under the exact Noetherian and closed-fibre hypotheses.",
+        "deps": [
+          "def-depth-with-respect-to-an-ideal",
+          "lem-flat-local-depth-formula-regular-sequence-split",
+          "lem-koszul-depth-first-nonzero-cohomology"
+        ]
+      },
+      {
+        "id": "cor-flat-local-cohen-macaulay-fibre-criterion",
+        "kind": "corollary",
+        "title": "The flat-local Cohen--Macaulay fibre criterion",
+        "strategy": "Under the source-stated dimension-formula hypotheses, compare additive depth and dimension formulas to obtain the iff criterion for base, fibre, and target.",
+        "deps": [
+          "def-cohen-macaulay-local-module-and-ring",
+          "cor-flat-local-depth-additivity"
+        ]
+      },
+      {
+        "id": "thm-depth-formula-for-flat-local-homomorphisms",
+        "kind": "theorem",
+        "title": "The depth formula for flat local homomorphisms",
+        "strategy": "State depth additivity and the Cohen--Macaulay consequence separately for a flat local homomorphism of Noetherian local rings and its closed fibre; do not add a finite-type hypothesis absent from Stacks Lemmas 10.163.2--10.163.3.",
+        "deps": [
+          "cor-flat-local-depth-additivity",
+          "cor-flat-local-cohen-macaulay-fibre-criterion"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 365.904,
+    "id": "depth-and-cohen-macaulay-modules-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Depth and Cohen Macaulay Modules \u2014 Examples",
+    "companion": "depth-and-cohen-macaulay-modules",
+    "requires": [
+      "depth-and-cohen-macaulay-modules"
+    ],
+    "items": [
+      {
+        "id": "ex-zero-dimensional-rings-cohen-macaulay",
+        "kind": "example",
+        "title": "A zero-dimensional local ring is Cohen--Macaulay",
+        "strategy": "For a nonzero zero-dimensional Noetherian local ring calculate that support dimension and depth are both zero, then apply the definition.",
+        "deps": [
+          "cor-zero-dimensional-local-modules-are-cohen-macaulay"
+        ]
+      },
+      {
+        "id": "ex-polynomial-rings-cohen-macaulay",
+        "kind": "example",
+        "title": "Polynomial rings are Cohen--Macaulay",
+        "strategy": "Start from a field and iterate the polynomial-extension theorem, displaying the local regular sequence given by the variables.",
+        "deps": [
+          "thm-polynomial-extension-of-cohen-macaulay-rings"
+        ]
+      },
+      {
+        "id": "ex-non-cohen-macaulay-local-ring",
+        "kind": "example",
+        "title": "A non-Cohen--Macaulay local quotient",
+        "strategy": "Compute a standard non-equidimensional local quotient's support dimension and use an associated-prime obstruction to force a smaller depth.",
+        "deps": [
+          "thm-depth-zero-associated-prime-criterion",
+          "thm-depth-bounded-by-support-dimension"
+        ]
+      },
+      {
+        "id": "ex-cohen-macaulay-ring-with-zero-divisors",
+        "kind": "example",
+        "title": "A Cohen--Macaulay ring with zero divisors",
+        "strategy": "Use a hypersurface quotient by a nonzerodivisor to verify Cohen--Macaulayness while displaying nonzero zero divisors, separating the condition from being a domain or reduced.",
+        "deps": [
+          "thm-regular-quotients-and-cohen-macaulayness"
+        ]
+      },
+      {
+        "id": "ex-maximal-cohen-macaulay-module",
+        "kind": "example",
+        "title": "A nonfree maximal Cohen--Macaulay module",
+        "strategy": "Present a standard module over a singular hypersurface, compute its depth from a regular sequence, compare it with ring dimension, and separately show it is not free.",
+        "deps": [
+          "def-maximal-and-global-cohen-macaulay-modules",
+          "thm-regular-quotients-and-cohen-macaulayness"
+        ]
+      },
+      {
+        "id": "ex-depth-of-a-hypersurface",
+        "kind": "example",
+        "title": "Depth of a hypersurface quotient",
+        "strategy": "Start with a regular local ring and a nonzero regular element, verify regularity, and calculate the one-step depth drop.",
+        "deps": [
+          "lem-depth-quotient-by-regular-element"
+        ]
+      },
+      {
+        "id": "ex-depth-of-a-union-of-planes",
+        "kind": "example",
+        "title": "Depth of a union of planes",
+        "strategy": "Use the coordinate-ring short exact sequence for a union of planes, calculate the other depths, and invoke the correctly oriented Depth Lemma inequality.",
+        "deps": [
+          "thm-depth-lemma"
+        ]
+      },
+      {
+        "id": "ex-depth-infinity-zero-module-convention",
+        "kind": "example",
+        "title": "The zero-module and surjective-ideal depth conventions",
+        "strategy": "Evaluate the regular-sequence and Ext formulations for the zero module and for IM=M, checking every infinity against the adopted convention.",
+        "deps": [
+          "def-depth-with-respect-to-an-ideal",
+          "lem-depth-infinity-when-ideal-acts-surjectively"
+        ]
+      },
+      {
+        "id": "ex-depth-lemma-three-inequalities",
+        "kind": "example",
+        "title": "Three sharp Depth Lemma inequalities",
+        "strategy": "Work through three short exact sequences chosen so that each Depth Lemma lower bound is attained, tracking the term that realizes its minimum.",
+        "deps": [
+          "thm-depth-lemma",
+          "cor-depth-lemma-unequal-depth-equalities"
+        ]
+      },
+      {
+        "id": "ex-parameter-sequence-regular-in-a-hypersurface",
+        "kind": "example",
+        "title": "A parameter sequence regular in a hypersurface",
+        "strategy": "Choose a full parameter system in a hypersurface local ring and verify successive nonzerodivisors by the Cohen--Macaulay parameter theorem.",
+        "deps": [
+          "thm-parameters-and-regular-sequences-in-cohen-macaulay-modules",
+          "ex-depth-of-a-hypersurface"
+        ]
+      },
+      {
+        "id": "ex-parameter-sequence-fails-in-a-non-cm-ring",
+        "kind": "example",
+        "title": "A parameter sequence that fails in a non-Cohen--Macaulay ring",
+        "strategy": "In a reducible local quotient choose a parameter in an associated prime, prove it is a zero divisor, and calculate the depth gap.",
+        "deps": [
+          "thm-depth-zero-associated-prime-criterion",
+          "ex-non-cohen-macaulay-local-ring"
+        ]
+      },
+      {
+        "id": "ex-cohen-macaulay-associated-primes-unmixed",
+        "kind": "example",
+        "title": "Associated primes are unmixed in a Cohen--Macaulay example",
+        "strategy": "Compute associated primes of a Cohen--Macaulay hypersurface with zero divisors and verify that every quotient has the full dimension required by the theorem.",
+        "deps": [
+          "thm-associated-primes-of-cohen-macaulay-modules",
+          "ex-cohen-macaulay-ring-with-zero-divisors"
+        ]
+      },
+      {
+        "id": "ex-completion-depth-computation",
+        "kind": "example",
+        "title": "A depth computation before and after completion",
+        "strategy": "Use the same finite regular sequence in a small local quotient and its completion, calculate depth on both sides, and identify faithful flatness preserving the conclusion.",
+        "deps": [
+          "thm-completion-preserves-cohen-macaulayness",
+          "lem-completion-reflects-depth"
+        ]
+      }
+    ]
+  }
+]

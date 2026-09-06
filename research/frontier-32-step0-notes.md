@@ -6,7 +6,7 @@ is a judgement about mathematics.
 
 ## Scope
 
-4 A/B pair(s), 8 pages, 2 batch(es).
+23 A/B pair(s), 46 pages, 19 batch(es).
 
 | batch | pair | category | order | design |
 |---|---|---|---|---|
@@ -14,6 +14,25 @@ is a judgement about mathematics.
 | 1 | `counting-complexity-and-sharpp` | computability-theory | 637 | `research/plan-computability-theory-track.md` L1199 |
 | 2 | `interactive-proof-systems-and-public-coins` | computability-theory | 639 | `research/plan-computability-theory-track.md` L1240 |
 | 2 | `kolmogorov-complexity-and-algorithmic-randomness` | computability-theory | 653 | `research/plan-computability-theory-track.md` L1501 |
+| 3 | `radon-measures-and-the-riesz-markov-kakutani-theorem` | measure-theory | 288.039 | `research/plan-measure-theory-track.md` L3581 |
+| 4 | `the-baire-principles-of-functional-analysis` | functional-analysis | 288.057 | `research/plan-functional-analysis-track.md` L573 |
+| 5 | `modes-of-convergence-for-random-variables` | probability | 288.103 | `research/plan-probability-track.md` L491 |
+| 6 | `lacunary-fourier-series-and-sidon-sets` | fourier-analysis | 288.14014 | `research/plan-fourier-analysis-track.md` L24 |
+| 7 | `perron-inversion-and-the-explicit-formula` | number-theory | 348.013 | `research/plan-number-theory-track.md` L1350 |
+| 7 | `prime-ideal-decomposition-ramification-and-the-different` | number-theory | 365.913 | `research/plan-number-theory-track.md` L1719 |
+| 8 | `triangulated-categories` | homological-algebra | 365.061 | `research/plan-homological-algebra-track.md` L291 |
+| 9 | `depth-and-cohen-macaulay-modules` | commutative-algebra | 365.903 | `research/plan-commutative-algebra-track.md` L1363 |
+| 10 | `cw-complexes-and-cellular-homology` | algebraic-topology | 366.007 | `research/plan-algebraic-topology-track.md` L587 |
+| 11 | `products-segre-and-veronese-embeddings-and-grassmannians` | algebraic-geometry | 366.047 | `research/plan-algebraic-geometry-track.md` L260 |
+| 12 | `presheaves-sheaves-stalks-and-sheafification` | scheme-theory | 366.057 | `research/plan-algebraic-geometry-track.md` L545 |
+| 12 | `schemes-subschemes-and-morphisms-locally-of-finite-type` | scheme-theory | 366.063 | `research/plan-algebraic-geometry-track.md` L720 |
+| 13 | `co-e-free-comb-structure` | combinatorics | 437 | `research/plan-combinatorics-and-categories.md` L3918 |
+| 14 | `harmonic-functions-and-mean-values-in-rn` | pde | 458.003 | `research/plan-pde-track.md` L18 |
+| 15 | `manifolds-with-boundary-collars-and-orientations` | differential-geometry | 467 | `research/plan-differential-geometry-track.md` L3170 |
+| 16 | `homomorphisms-between-verma-modules-and-linkage` | lie-theory | 510.005 | `research/plan-representation-theory-lie-track.md` L147 |
+| 17 | `schur-indices-and-fields-of-definition` | representation-theory | 510.035 | `research/plan-representation-theory-groups-track.md` L305 |
+| 18 | `stable-unstable-manifolds-and-morse-smale-transversality` | differential-topology | 523 | `research/plan-differential-topology-track.md` L437 |
+| 19 | `oracle-computability-the-jump-and-turing-degrees` | computability-theory | 615 | `research/plan-computability-theory-track.md` L795 |
 
 ## Design-vs-spec drift
 

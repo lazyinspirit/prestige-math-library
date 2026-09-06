@@ -8,11 +8,15 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [def-germ-of-section, lem-morphisms-of-sheaves-determined-by-stalks]
+deps: [def-germ-of-section, lem-germ-equivalence-relation, lem-morphisms-of-sheaves-determined-by-stalks]
 proof_strategy: direct
 verification:
   audited: 2026-09-04
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -33,11 +37,9 @@ $U$, then they are equal.
 
 **Given:** Continuous functions $f,g:U\to\mathbb R$ on an open set $U$.
 
-[F1] The germ of a section records equality on some neighbourhood of the point
-([[def-germ-of-section]]).
+[F1] Two germ representatives are equal exactly when they agree on a smaller neighbourhood ([[lem-germ-equivalence-relation]]).
 
-[L1] Sheaf morphisms are determined by stalk maps
-([[lem-morphisms-of-sheaves-determined-by-stalks]]).
+[L1] Sheaf morphisms are determined by stalk maps ([[lem-morphisms-of-sheaves-determined-by-stalks]]).
 
 ## Verification
 
