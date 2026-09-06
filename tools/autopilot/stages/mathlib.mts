@@ -2224,28 +2224,53 @@ export const stages = [
         plan: (ctx: any, pending: string[]) => {
           if (hasLegacyStep6Cutover(ctx)) return entry.plan(ctx, pending);
           return pending.map((unit: string) => {
+            const scopePath = join(ctx.repo, 'research',
+              `${ctx.run}-step6-scope-${unit}.json`);
             let malformed = false;
             try {
-              const scope = JSON.parse(readFileSync(join(ctx.repo, 'research',
-                `${ctx.run}-step6-scope-${unit}.json`), 'utf8'));
+              const scope = JSON.parse(readFileSync(scopePath, 'utf8'));
               const report = JSON.parse(readFileSync(join(ctx.repo, 'research',
                 `${ctx.run}-refute-${unit}.json`), 'utf8'));
               const expected = new Set((scope?.refuter_scope ?? []).map(String));
               const opened = (report?.opened ?? []).map(String);
               const notOpened = (report?.not_opened ?? []).map(String);
               const actual = new Set([...opened, ...notOpened]);
+              const openedSet = new Set(opened);
               malformed = !Array.isArray(report?.opened) || !Array.isArray(report?.not_opened)
+                || !Array.isArray(report?.flagged)
                 || expected.size !== actual.size
                 || [...expected].some((id) => !actual.has(id))
-                || notOpened.length > 0;
+                || notOpened.length > 0
+                || (report?.flagged ?? []).some((finding: any) =>
+                  typeof finding?.id !== 'string' || !openedSet.has(finding.id));
             } catch { malformed = true; }
             if (malformed) {
+              const recoveryTask = `research/${ctx.run}-refuter-recover-${unit}.task.md`;
+              const recoveryText = [
+                '# Step 6 refuter routing-artifact correction',
+                '',
+                `Correct research/${ctx.run}-refute-${unit}.json for batch ${unit}.`,
+                `Read research/${ctx.run}-step6-scope-${unit}.json and audit exactly its frozen \`refuter_scope\`.`,
+                `Set the top-level \`batch\` field to exactly "${unit}".`,
+                '\`opened\` must contain every frozen refuter-scope id exactly once; set \`not_opened\` to \`[]\`.',
+                'Preserve every genuine finding whose exact item or page id is in that frozen scope.',
+                'Remove findings on reader-touched or otherwise out-of-scope carriers; those are not refuter obligations.',
+                'Do not widen the scope to the whole manifest and do not edit library content or any other artifact.',
+                'Write the corrected schema-conforming JSON to the same named result artifact.',
+                '',
+              ].join('\n');
+              // Stage-table validation plans against deliberately incomplete
+              // synthetic repositories. A real recovery has the frozen scope;
+              // avoid making pure descriptor inspection create repo artifacts.
+              if (existsSync(scopePath)) {
+                writeFileSync(join(ctx.repo, recoveryTask), recoveryText);
+              }
               return {
                 role: 'refuter', label: `refute-recover-${unit}`,
                 // Recovery repairs the input artifact. Only the following
                 // collect tool may cover this mechanical stage.
                 job: 'refutation', covers: [], brief: 'briefs/refuter.md',
-                task: 'briefs/tasks/refuter-untouched.md',
+                task: recoveryTask,
                 outputSchema: 'briefs/schemas/refute-report.json',
                 resultArtifact: `research/${ctx.run}-refute-${unit}.json`,
                 timeout: 10800,

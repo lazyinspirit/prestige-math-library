@@ -201,6 +201,13 @@ those exact same-page entries into the manifest and records them separately as
 reused scope; this keeps later authoring, reading, judging, and final coverage
 non-vacuous while refusing partial reuse or plan erasure.
 
+Step-6 refuter recovery validates both halves of the frozen routing contract:
+`opened`/`not_opened` must partition the exact `refuter_scope`, and every
+finding must name an opened carrier. A malformed report receives a generated,
+batch-pinned correction task even though the recovery dispatch deliberately
+declares empty coverage; the mechanical collector alone covers the batch after
+the corrected report passes.
+
 `src/spec.mts` refuses a pipelined stage with no `role`, a non-function `cohort`,
 and a pipeline name reused non-contiguously — which would silently mean two
 groups rather than one.

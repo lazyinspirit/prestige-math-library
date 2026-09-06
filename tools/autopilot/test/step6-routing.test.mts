@@ -125,6 +125,36 @@ test('split routes invented carrier ids and wrong batch identity to reader recov
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
+test('collect routes out-of-scope refuter findings to a batch-pinned recovery', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'step6-refuter-carrier-'));
+  try {
+    mkdirSync(join(root, 'research'), { recursive: true });
+    writeFileSync(join(root, 'research', 'r-step6-scope-8.json'), JSON.stringify({
+      refuter_scope: ['assigned-item', 'assigned-page'],
+    }));
+    writeFileSync(join(root, 'research', 'r-refute-8.json'), JSON.stringify({
+      batch: '8',
+      opened: ['assigned-item', 'assigned-page'],
+      not_opened: [],
+      flagged: [{ id: 'reader-touched-item' }],
+      coverage_note: 'The exact frozen scope was opened.',
+    }));
+    const active = await import('../stages/mathlib.mts');
+    const collectStage: any = active.stages.find((stage: any) => stage.id === '6a-collect');
+    const plan = collectStage.plan({ run: 'r', repo: root,
+      dispatchDir: join(root, 'dispatch') }, ['8'])[0];
+    assert.equal(plan.role, 'refuter');
+    assert.equal(plan.label, 'refute-recover-8');
+    assert.deepEqual(plan.covers, []);
+    assert.equal(plan.task, 'research/r-refuter-recover-8.task.md');
+    assert.equal(plan.resultArtifact, 'research/r-refute-8.json');
+    const generated = readFileSync(join(root, plan.task), 'utf8');
+    assert.match(generated, /batch 8/);
+    assert.match(generated, /exactly its frozen `refuter_scope`/);
+    assert.equal(generated.includes('<i>'), false);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
 test('gate repair dispatch embeds the canonical protocol in its generated task', async () => {
   for (const edge of [false, true]) {
     const root = mkdtempSync(join(tmpdir(), 'step6-gate-task-'));

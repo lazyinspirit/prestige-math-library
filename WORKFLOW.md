@@ -363,7 +363,11 @@ Step-6 artifact-owner recovery dispatches declare empty coverage: they repair
 the malformed or missing reader/refuter/contract input, then the pending split
 or collect tool runs and alone covers the mechanical stage. This keeps a
 successful recovery result from stranding the stage with its output artifact
-still unmaterialized.
+still unmaterialized. Refuter recovery is pinned to the affected batch with a
+generated task: its `opened` set must equal the frozen `refuter_scope`, and any
+finding whose carrier is outside that set is treated as malformed routing data.
+This prevents a reader-repaired item from leaking into the untouched refuter
+lane and prevents an empty-coverage recovery dispatch from losing its batch.
 
 A repair hook performs a mechanical fix when one exists and otherwise dispatches
 the responsible cognitive role. Its full fan-out passes launch preflight before
