@@ -405,6 +405,24 @@ function groupedFixture() {
   return repo;
 }
 
+test('unlicensed page warnings return to the owner without buying an item judge call', async () => {
+  const repo = groupedFixture();
+  writeFileSync(join(repo, 'research', 'demo-step8-alerts.json'), JSON.stringify({ alerts: [
+    { alert_id: 'page-warning', item: 'page-demo', owning_group: 'a', from_group: 'a', source: 'step7-read' },
+  ] }));
+  writeFileSync(join(repo, 'research', 'demo-step8-alert-decisions.jsonl'), JSON.stringify({
+    alert_id: 'page-warning', outcome: 'confirmed_fatal_unlicensed',
+  }) + '\n');
+  const stage: any = stages.find((s: any) => s.id === '8-adjudicate');
+  const started: any[] = [];
+  await stage.onGateFailure({ ctx: { run: 'demo', repo }, stage, round: 1,
+    executor: { start: (_s: any, p: any) => started.push(p) }, failure: { id: 'step8-scope' } });
+  assert.equal(started.length, 1);
+  assert.equal(started[0].label, 'cross-group-a-round-1');
+  assert.equal(started[0].role, 'alpha-adjudicate');
+  rmSync(repo, { recursive: true, force: true });
+});
+
 test('step 8 routes an open fatal back to the group that owns the item', async () => {
   const repo = groupedFixture();
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({

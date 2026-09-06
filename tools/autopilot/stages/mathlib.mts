@@ -1261,7 +1261,9 @@ function readOpenAlerts(ctx): Array<{ alert_id: string; item: string; owning_gro
         const judgeStarted = cycles.some((cycle: any) => cycle.kind === 'alert'
           && (cycle.items ?? []).includes(alert.item)
           && String(cycle.started_at ?? '') >= String(decision.at ?? ''));
-        return [{ ...alert, needs_judge: true, judge_started: judgeStarted }];
+        // Owned-page warnings require scope review, never a judge call on a
+        // nonexistent item file. The strict scope gate keeps them open.
+        return [{ ...alert, needs_judge: existsSync(R(ctx, `items/${alert.item}.md`)), judge_started: judgeStarted }];
       }
       return [];
     });

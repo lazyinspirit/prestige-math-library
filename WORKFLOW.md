@@ -323,6 +323,8 @@ its owning Sol group adjudicator to repair the item.
 Owned-page concerns also route to their group for an explicit disposition.
 They cannot directly license an item repair; an unresolved page defect remains
 blocked until its actual scope and remedy are established.
+Unlicensed page warnings return to their owning group for scope review; they
+never dispatch the item judge against a nonexistent page-named item file.
 
 Step-8 adjudicators have web search enabled. Whenever their mathematics is
 uncertain, their task requires them to verify the point against original

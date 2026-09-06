@@ -32,6 +32,9 @@ adjudicating a judge rejection still require a targeted judge rejection.
 
 A warning may name an owned page, for example a missing prerequisite page.
 Read the page and its declared prerequisites and retain an explicit disposition.
+The frontier policy permits unbuilt cross-category prerequisites. Check actual
+item dependencies and citations before classifying such an absence as fatal;
+the scheduling allowance does not excuse a missing fact used in a proof.
 A page warning grants no item-edit authority: identify the affected item and its
 fatal evidence, or report an unresolved page defect with
 `confirmed_fatal_unlicensed`. Never dismiss it merely because it names a page.
