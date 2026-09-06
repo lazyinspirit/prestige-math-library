@@ -376,6 +376,10 @@ whose mathematics or pair context actually changed.
 Step 9 extracts the exact post-Step-8 mathematical delta, judges and
 adjudicates it, then applies its stamps. The final stamp stage verifies every
 scoped item; a stamp records a current pass, not an adjudicated rejection.
+An explicitly scoped supervising review may accompany the Step-9 denial review
+in `research/<run>-step9-mathematical-review.task.md`. Its draft repairs enter
+the same exact delta certification; a blocking obligation remains open until
+that certification is verified. It grants no Step-8 repair or self-judging power.
 The generated `verification.judge` block is excluded from both the stamped
 item's attestation hash and any whole-source fallback used for a sibling's pair
 interface, so applying stamps cannot invalidate current judge or terminal
