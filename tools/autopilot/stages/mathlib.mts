@@ -2093,7 +2093,7 @@ export const stages = [
     id: '5-author',
     label: 'authoring',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'authoring'
-      ? MODEL_PROFILE_NAMES.astraMedium
+      ? MODEL_PROFILE_NAMES.solHigh
       : undefined,
     // THE LARGEST WIN. A batch whose authoring is finished starts its reader
     // while the other batches are still being written: authors run to six hours
