@@ -2,7 +2,7 @@
 id: lem-compatible-well-founded-recursion-attempts
 kind: lemma
 title: "Compatible recursion attempts"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-induction-on-well-founded-relations", "lem-finite-predecessor-closure-is-a-set"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

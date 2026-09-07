@@ -2,7 +2,7 @@
 id: thm-diagonal-intersection-of-clubs
 kind: theorem
 title: "The diagonal intersection of clubs is club"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-diagonal-club-intersection", "thm-small-intersections-of-clubs", "lem-closure-points-on-regular-cardinals"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

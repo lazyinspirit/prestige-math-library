@@ -2,7 +2,7 @@
 id: cor-universe-is-the-class-union-of-its-stages
 kind: corollary
 title: "The universe is the class union of its stages"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-membership-rank-and-hierarchy-levels"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -35,4 +36,3 @@ In ZF every set $x$ belongs to $V_{\operatorname{rank}(x)+1}$. Consequently $V=\
 1.1 For $\rho=\operatorname{rank}(x)$, the ordinal inequality $\rho<\rho+1$ and the membership characterization give $x\in V_{\rho+1}$. [F1]
 
 2.1 Every member of a stage is a set, and step 1.1 gives a stage containing every set. Thus the two class descriptions agree. Neither statement asserts that their collection is a set. [step 1.1] ∎
-

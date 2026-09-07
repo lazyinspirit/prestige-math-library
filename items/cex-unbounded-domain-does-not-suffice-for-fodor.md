@@ -2,7 +2,7 @@
 id: cex-unbounded-domain-does-not-suffice-for-fodor
 kind: counterexample
 title: "An unbounded regressive domain without a stationary fibre"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-fodor-pressing-down", "def-regressive-function-on-ordinals"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

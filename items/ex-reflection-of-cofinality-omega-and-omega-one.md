@@ -2,7 +2,7 @@
 id: ex-reflection-of-cofinality-omega-and-omega-one
 kind: example
 title: "A trace computation for cofinality strata"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-cofinality-strata-and-stationary-trace", "thm-regular-cofinality-strata-are-stationary"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

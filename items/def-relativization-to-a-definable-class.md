@@ -2,13 +2,14 @@
 id: def-relativization-to-a-definable-class
 kind: definition
 title: "Relativization to sets and definable classes"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-capture-avoiding-substitution"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

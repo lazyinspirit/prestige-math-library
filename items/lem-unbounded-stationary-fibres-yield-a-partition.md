@@ -2,7 +2,7 @@
 id: lem-unbounded-stationary-fibres-yield-a-partition
 kind: lemma
 title: "Unboundedly many stationary fibres yield a partition"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-fodor-pressing-down", "prop-basic-stationary-set-calculus"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-limit-points-of-unbounded-sets
 kind: lemma
 title: "Limit points of an unbounded set form a club"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-closure-points-on-regular-cardinals"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

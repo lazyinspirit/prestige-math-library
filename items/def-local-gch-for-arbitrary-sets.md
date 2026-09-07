@@ -2,13 +2,14 @@
 id: def-local-gch-for-arbitrary-sets
 kind: definition
 title: "Local GCH for arbitrary sets"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-equinumerous", "thm-cantor-powerset"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,15 @@
 id: thm-elementary-initial-segments-form-a-club
 kind: theorem
 title: "Elementary initial segments form a club"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-skolem-witness-closure-on-a-cardinal", "lem-closure-points-on-regular-cardinals", "thm-cofinality-basics"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct argument
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Kamensky, Theorem 1.4.7 with complete proof, p.7"

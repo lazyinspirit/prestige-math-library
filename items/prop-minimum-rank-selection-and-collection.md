@@ -2,7 +2,7 @@
 id: prop-minimum-rank-selection-and-collection
 kind: proposition
 title: "Minimum-rank selection and Collection"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-membership-rank-and-hierarchy-levels"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -37,4 +38,3 @@ In ZF every nonempty definable class $C$ has a least member-rank $\alpha$, and $
 2.1 Given the Collection premise, for each $x\in a$ the class of witnesses has a unique least rank $\alpha_x$ by step 1.1. Replacement collects these ordinals; set $\gamma=\sup\{\alpha_x+1:x\in a\}$. The stage $V_\gamma$ contains at least one witness for each $x$, because the witnesses of its minimum rank lie in $V_{\alpha_x+1}\subseteq V_\gamma$. Thus $b=V_\gamma$ suffices. For $a=\varnothing$, take $\gamma=0$. [F1, step 1.1]
 
 3.1 Conversely assume Separation and Collection, and let $\phi$ be functional on the set $a$. Collection supplies a set $b$ containing a witness for each $x\in a$. Separation gives $\{y\in b:\exists x\in a\ \phi(x,y)\}$. Uniqueness ensures every value of $\phi$ occurs in this set and that every member is such a value, which is the Replacement conclusion. This direction does not use rank or a prior application of Replacement. [given] ∎
-

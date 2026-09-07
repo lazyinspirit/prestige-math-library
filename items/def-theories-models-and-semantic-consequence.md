@@ -2,13 +2,14 @@
 id: def-theories-models-and-semantic-consequence
 kind: definition
 title: "Theories, models and semantic consequence"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-satisfaction-coincidence"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

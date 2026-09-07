@@ -2,13 +2,14 @@
 id: def-grothendieck-universe-closure-convention
 kind: definition
 title: "Grothendieck universe closure convention"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-transitive-closure-minimality"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

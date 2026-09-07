@@ -2,7 +2,7 @@
 id: prop-hereditarily-finite-sets-are-v-omega
 kind: proposition
 title: "H_omega equals V_omega"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-h-kappa-is-a-transitive-set", "def-cumulative-hierarchy-stages"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -39,4 +40,3 @@ In ZF, $H_\omega=V_\omega$. These are exactly the sets whose root-inclusive tran
 1.2 Every $V_n$ is finite by natural induction. $V_0$ is empty. If $V_n$ has $m$ elements, membership bits relative to a finite enumeration biject its power set with the length-$m$ binary words. Those form a finite set: for zero length there is one word, and appending either bit doubles the previous finite number. Thus $V_{n+1}$ is finite. [F2]
 
 2.1 If $x\in V_\omega$, choose $n<\omega$ with $x\in V_n$. The finite transitive set $V_n$ contains $x$ as an element, hence contains $\operatorname{TC}(\{x\})$ by minimality. That closure is finite, so $x\in H_\omega$. Together with step 1.1 this proves equality. [F1, F2, step 1.2] ∎
-

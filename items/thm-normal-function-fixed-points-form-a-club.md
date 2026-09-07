@@ -2,13 +2,15 @@
 id: thm-normal-function-fixed-points-form-a-club
 kind: theorem
 title: "Fixed points of a normal function form a club"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-normal-ordinal-function", "thm-cofinality-basics", "thm-recursion"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct argument
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Welch, Lemma 2.13, p.21; live original reread"

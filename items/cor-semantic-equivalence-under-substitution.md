@@ -2,7 +2,7 @@
 id: cor-semantic-equivalence-under-substitution
 kind: corollary
 title: "Semantic equivalence is preserved by substitution"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-capture-avoiding-substitution"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -35,4 +36,3 @@ If $\phi$ and $\psi$ have the same truth at every assignment in every $L$-struct
 1.1 Fix a structure and assignment $s$ and put $b=\llbracket t\rrbracket_s$. The two substituted formulas have the truth values of $\phi$ and $\psi$ at the same assignment $s[x:=b]$. The hypothesis applies at this assignment, so they agree. [F1]
 
 2.1 If $\llbracket t\rrbracket_s=\llbracket u\rrbracket_s$, the updated assignments are literally equal. Apply the substitution identity once for each term to obtain equality of the two truth values. [F1] ∎
-

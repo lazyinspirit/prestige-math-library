@@ -2,7 +2,7 @@
 id: lem-unique-parsing-of-set-coded-syntax
 kind: lemma
 title: "Unique parsing of finite syntax"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-set-coded-terms-and-formulas", "thm-strong-induction"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

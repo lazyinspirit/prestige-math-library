@@ -2,7 +2,7 @@
 id: lem-bounded-hierarchy-for-the-multiple-choice-argument
 kind: lemma
 title: "A bounded hierarchy for the multiple-choice argument"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-cumulative-hierarchy-stages", "prop-cumulative-hierarchy-transitivity-and-growth", "thm-foundation-equivalent-to-hierarchy-exhaustion", "lem-omega-least-limit-ordinal", "def-ordinal-addition", "thm-ordinal-arithmetic-monotonicity"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

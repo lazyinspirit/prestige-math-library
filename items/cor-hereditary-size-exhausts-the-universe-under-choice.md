@@ -2,7 +2,7 @@
 id: cor-hereditary-size-exhausts-the-universe-under-choice
 kind: corollary
 title: "Hereditary size exhausts V under Choice"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-h-kappa-is-a-transitive-set", "thm-well-ordering-theorem", "thm-hartogs"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -39,4 +40,3 @@ Assume ZFC. For every set $x$ there is an infinite initial ordinal $\kappa$ with
 1.1 Let $T=\operatorname{TC}(\{x\})$. By the well-ordering theorem and AC, $T$ is well-orderable and has an ordinal order type $\alpha$. Set $\delta=\alpha\cup\omega$, an infinite ordinal into which $T$ injects. [F1, F2]
 
 2.1 Let $\kappa$ be the Hartogs number of $\delta$. It is initial: a bijection with any smaller ordinal would combine with an injection of that smaller ordinal into $\delta$ to contradict its defining noninjection. Also $\delta<\kappa$, since every ordinal at most $\delta$ injects into $\delta$. Thus $\kappa$ is infinite and the injection $T\hookrightarrow\delta<\kappa$ witnesses $x\in H_\kappa$. [F1, F3, step 1.1] ∎
-

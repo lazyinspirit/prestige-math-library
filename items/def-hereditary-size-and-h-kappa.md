@@ -2,13 +2,14 @@
 id: def-hereditary-size-and-h-kappa
 kind: definition
 title: "Hereditary size and H_kappa"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-transitive-closure-minimality", "def-cardinal"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

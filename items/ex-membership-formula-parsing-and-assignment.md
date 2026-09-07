@@ -2,7 +2,7 @@
 id: ex-membership-formula-parsing-and-assignment
 kind: example
 title: "Parsing and evaluating a membership formula"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-satisfaction-coincidence"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -35,4 +36,3 @@ In the membership structure on $M=\{0,1\}$, where $0=\varnothing$ and $1=\{0\}$,
 1.1 The outer code is $(\mathsf{exists},v_1,(\mathsf{rel},\in,(\mathsf{var},v_1),(\mathsf{var},v_0)))$. The body has both variables free; the outer binder removes $v_1$. By coincidence all other assignment values are irrelevant. [F1]
 
 2.1 The only membership pair in $M^2$ is $(0,1)$. For value $0$ at $v_0$, neither candidate witness is a member of $0$. For value $1$, witness $0$ works. These are the two asserted truth values. [step 1.1, given] ∎
-

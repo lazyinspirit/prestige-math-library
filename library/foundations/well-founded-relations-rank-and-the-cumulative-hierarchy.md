@@ -1,7 +1,7 @@
 ---
 page: well-founded-relations-rank-and-the-cumulative-hierarchy
 title: "Well-Founded Relations, Rank, and the Cumulative Hierarchy"
-status: draft
+status: published
 items: ["def-well-founded-setlike-relations", "def-accessible-pointed-membership-graphs", "lem-finite-predecessor-closure-is-a-set", "thm-induction-on-well-founded-relations", "lem-compatible-well-founded-recursion-attempts", "thm-recursion-on-well-founded-setlike-relations", "def-transitive-closure-of-a-set", "prop-transitive-closure-minimality", "def-rank-of-a-well-founded-relation", "prop-ordinal-ranking-characterizes-well-foundedness", "prop-well-foundedness-and-descending-sequences", "def-cumulative-hierarchy-stages", "prop-cumulative-hierarchy-transitivity-and-growth", "thm-foundation-equivalent-to-hierarchy-exhaustion", "def-membership-rank-of-a-set", "thm-membership-rank-and-hierarchy-levels", "cor-universe-is-the-class-union-of-its-stages", "prop-ranks-of-ordinals-and-hierarchy-stages", "def-extensional-relation-and-collapse-map", "lem-extensional-collapse-is-injective", "thm-mostowski-collapse-for-extensional-relations", "cor-well-founded-pointed-graphs-have-unique-decorations", "prop-minimum-rank-selection-and-collection", "def-hereditary-size-and-h-kappa", "lem-small-transitive-sets-have-small-ranks", "thm-h-kappa-is-a-transitive-set", "cor-hereditary-size-exhausts-the-universe-under-choice", "prop-hereditarily-finite-sets-are-v-omega", "def-grothendieck-universe-closure-convention", "rem-grothendieck-universe-orientation"]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: lem-local-gch-absorbs-sums-and-squares
 kind: lemma
 title: "Local GCH absorbs sums and squares"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-local-gch-for-arbitrary-sets", "thm-halbeisen-shelah-no-powerset-sequence-injection", "thm-dedekind-infinite-iff-countable-subset", "thm-schroder-bernstein"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

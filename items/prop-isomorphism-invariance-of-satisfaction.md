@@ -2,7 +2,7 @@
 id: prop-isomorphism-invariance-of-satisfaction
 kind: proposition
 title: "Isomorphisms preserve satisfaction"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-set-structure-satisfaction-recursion", "def-set-structures-and-variable-assignments"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -39,4 +40,3 @@ For any homomorphism $h:\mathcal M\to\mathcal N$, term $t$ and assignment $s$, $
 2.1 The term identity and strong preservation give equivalence for relation atoms. For equality atoms, the term identity gives the forward direction; injectivity gives the reverse direction when $h$ is an isomorphism. Negation and conjunction preserve these equivalences. [F1, F2, step 1.1]
 
 3.1 A witness $a\in M$ is sent to $h(a)\in N$, and $h\circ(s[x:=a])=(h\circ s)[x:=h(a)]$. Conversely, for a witness $b\in N$, surjectivity supplies one $a$ with $h(a)=b$. The induction hypothesis on the quantified body then transfers witnesses in both directions. Thus formula induction proves both asserted scopes, with injectivity needed precisely for equality. [F1, F2, step 2.1] ∎
-

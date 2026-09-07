@@ -2,13 +2,14 @@
 id: def-extensional-relation-and-collapse-map
 kind: definition
 title: "Extensional relations and collapse maps"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-recursion-on-well-founded-setlike-relations"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

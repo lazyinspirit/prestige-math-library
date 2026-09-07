@@ -2,7 +2,7 @@
 id: cex-truth-at-one-assignment-does-not-survive-substitution
 kind: counterexample
 title: "Agreement at one assignment is insufficient"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-formula-substitution-satisfaction"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -35,4 +36,3 @@ False claim: if two formulas agree at one assignment, they still agree there aft
 1.1 At $s$, the formulas $x=y$ and $y=y$ are both true. The constant $c$ has no variables, so is free for $x$ in each formula. The free-for identity evaluates substitution by changing $s(x)$ to $1$. [F1]
 
 2.1 After substitution the formulas are $c=y$ and $y=y$. Their truth values are respectively false ($1\ne0$) and true ($0=0$). The original agreement at $s$ imposes no agreement at the updated assignment, which is exactly the missing hypothesis. [F1, step 1.1] ∎
-

@@ -2,13 +2,14 @@
 id: def-cofinality-strata-and-stationary-trace
 kind: definition
 title: "Cofinality strata, trace, and reflection"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-club-filter-and-nonstationary-ideal", "def-cofinality"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-ordinal-ranking-characterizes-well-foundedness
 kind: proposition
 title: "Ordinal rankings characterize well-foundedness"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-rank-of-a-well-founded-relation"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -37,4 +38,3 @@ A definable setlike relation $R$ on $X$ is well-founded if and only if there is 
 1.2 Conversely, for a nonempty set $A\subseteq X$, Replacement makes $r[A]$ a nonempty set of ordinals. It has a least element: choose one value $\alpha$ and minimize within the set of values at most $\alpha$, using the well-order of $\alpha+1$. A preimage $a\in A$ of that least value has no predecessor in $A$, since a predecessor would have smaller rank. [given]
 
 2.1 Finally well-founded induction gives $\rho_R(x)\le r(x)$. If it holds at all $yRx$, then $\rho_R(y)+1\le r(y)+1\le r(x)$ for all such $y$, and taking the ordinal supremum gives the desired bound at $x$. The empty supremum is zero. [F1, step 1.2] ∎
-

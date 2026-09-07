@@ -2,7 +2,7 @@
 id: lem-formula-substitution-satisfaction
 kind: lemma
 title: "Free-for substitution commutes with satisfaction"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-term-substitution-denotation", "lem-satisfaction-coincidence"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -43,4 +44,3 @@ $$\mathcal M,s\models\phi[t/x]\iff\mathcal M,s[x:=\llbracket t\rrbracket_s]\mode
 1.3 Otherwise $y\ne x$ and $x\in\operatorname{FV}(\psi)$. The free-for hypothesis gives $y\notin\operatorname{FV}(t)$ and the free-for condition in $\psi$. For each $a\in M$, coincidence makes $\llbracket t\rrbracket_{s[y:=a]}=b$. The two distinct-variable updates commute: $s[y:=a][x:=b]=s[x:=b][y:=a]$. Applying the induction hypothesis to $\psi$ at $s[y:=a]$ therefore gives the same truth at each witness $a$ on both sides. [F1, F2]
 
 2.1 Existential quantification over these pointwise equivalent assertions proves both directions for $\exists y\psi$. The cases above exhaust its possibilities, so structural induction gives the result for every formula. [step 1.1, step 1.2, step 1.3] ∎
-

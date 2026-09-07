@@ -2,13 +2,14 @@
 id: def-multiple-and-dependent-multiple-choice
 kind: definition
 title: "Multiple choice and dependent multiple choice"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dependent-choice", "def-choice-for-pairs-and-countable-finite-choice"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

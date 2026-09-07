@@ -2,7 +2,7 @@
 id: thm-stationarity-via-elementary-initial-segments
 kind: theorem
 title: "Stationarity characterized by elementary initial segments"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-elementary-initial-segments-form-a-club", "def-club-filter-and-nonstationary-ideal"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

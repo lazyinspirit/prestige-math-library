@@ -2,7 +2,7 @@
 id: thm-choice-implies-dependent-implies-countable-choice
 kind: theorem
 title: "AC implies DC implies countable choice"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-axiom-of-choice", "def-dependent-choice", "def-countable-choice", "thm-recursion", "lem-finite-choice", "def-choice-for-pairs-and-countable-finite-choice"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

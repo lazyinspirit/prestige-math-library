@@ -2,7 +2,7 @@
 id: lem-local-gch-hartogs-dichotomy
 kind: lemma
 title: "The local-GCH Hartogs dichotomy"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-local-gch-absorbs-sums-and-squares", "lem-powerset-fibres-force-well-orderability", "thm-hartogs", "thm-hessenberg", "thm-schroder-bernstein"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

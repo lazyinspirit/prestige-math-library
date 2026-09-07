@@ -2,7 +2,7 @@
 id: thm-multiple-choice-equivalent-to-choice-in-zf
 kind: theorem
 title: "Multiple choice is equivalent to AC in ZF"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-antichains-well-order-linearly-ordered-sets", "lem-bounded-hierarchy-for-the-multiple-choice-argument", "thm-hartogs", "thm-transfinite-recursion", "def-axiom-of-choice"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

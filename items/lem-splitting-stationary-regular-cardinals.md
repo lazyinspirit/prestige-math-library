@@ -2,7 +2,7 @@
 id: lem-splitting-stationary-regular-cardinals
 kind: lemma
 title: "Splitting a stationary set concentrated on regular cardinals"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-stationary-set-minus-its-trace", "thm-diagonal-intersection-of-clubs", "lem-closure-points-on-regular-cardinals", "thm-clubs-and-normal-enumerations", "lem-unbounded-stationary-fibres-yield-a-partition"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

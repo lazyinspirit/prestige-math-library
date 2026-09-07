@@ -2,7 +2,7 @@
 id: thm-dedekind-infinite-iff-countable-subset
 kind: theorem
 title: "Dedekind infinitude is equivalent to a countable subset"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dedekind-infinite-set", "thm-recursion", "thm-hartogs"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

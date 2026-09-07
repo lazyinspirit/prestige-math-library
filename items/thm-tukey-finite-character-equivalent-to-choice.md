@@ -2,13 +2,15 @@
 id: thm-tukey-finite-character-equivalent-to-choice
 kind: theorem
 title: "Tukey finite character is equivalent to AC"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-families-of-finite-character", "thm-zorn", "def-axiom-of-choice", "lem-finite-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct argument
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Jech, The Axiom of Choice, Theorem 2.1, pp.10–11"

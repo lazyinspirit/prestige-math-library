@@ -2,13 +2,14 @@
 id: rem-square-and-club-guessing-orientation
 kind: remark
 title: "Square and club-guessing orientation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-cofinality-strata-and-stationary-trace", "def-normal-ordinal-function"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

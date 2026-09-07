@@ -2,7 +2,7 @@
 id: ex-weak-choice-implication-map
 kind: example
 title: "A choice-strength implication map"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-choice-implies-dependent-implies-countable-choice", "thm-dependent-choice-and-finite-multiple-selections", "thm-multiple-choice-equivalent-to-choice-in-zf"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

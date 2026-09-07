@@ -2,7 +2,7 @@
 id: lem-splitting-stationary-sets-of-fixed-cofinality
 kind: lemma
 title: "Splitting stationary sets of fixed smaller cofinality"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-fodor-pressing-down", "def-cofinality-strata-and-stationary-trace", "thm-small-intersections-of-clubs", "lem-unbounded-stationary-fibres-yield-a-partition"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

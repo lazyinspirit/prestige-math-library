@@ -2,7 +2,7 @@
 id: lem-satisfaction-coincidence
 kind: lemma
 title: "Coincidence for term values and satisfaction"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-set-structure-satisfaction-recursion", "def-free-variables-and-syntactic-substitution"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -39,4 +40,3 @@ Assignments agreeing on $\operatorname{FV}(e)$ give equal denotations when $e$ i
 2.1 For equality and relation atoms use step 1.1; negation and conjunction preserve equality of truth values by their clauses. At $\exists x\psi$, if $s,s'$ agree on $\operatorname{FV}(\psi)\setminus\{x\}$, then for each $b\in M$ their updates at $x$ agree on $\operatorname{FV}(\psi)$. The induction hypothesis identifies truth for each witness in both directions. [F1, F2, step 1.1]
 
 3.1 Reducts have the same carrier, update assignments and witness range, so the identical atom, Boolean and existential argument proves reduct invariance. For a sentence the agreement condition is empty. A finite free-variable assignment extends to all variables by one fixed element of the nonempty carrier, and any two extensions agree on the free variables. [F1, step 2.1] ∎
-

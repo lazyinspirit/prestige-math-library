@@ -2,7 +2,7 @@
 id: thm-set-structure-satisfaction-recursion
 kind: theorem
 title: "Existence and uniqueness of set satisfaction"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-term-denotation-in-a-set-structure"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -45,4 +46,3 @@ The set is uniformly first-order definable from $L$ and the structure data.
 2.1 On truth subsets use complement in $S$, intersection, and for binder $x$ the operation $Q_x(B)=\{s\in S:\exists b\in M\ s[x:=b]\in B\}$. These are total operations on the set $\mathcal P(S)$. The structural recursion used to define denotation also applies to formulas with atoms as leaves, giving truth sets $B_\phi$. [F1, step 1.1, construct]
 
 3.1 Separate $\{(\phi,s):s\in B_\phi\}$ inside $\operatorname{Form}_L\times S$. The displayed clauses follow directly from the operations. Any rival satisfies the same atomic and constructor rules, so structural induction forces equality of all truth sets. All operations and the assertion of existence of the unique recursive evaluation are first-order formulas on sets with parameters $L,\mathcal M$; this yields uniform definability. [step 1.1, step 2.1] ∎
-

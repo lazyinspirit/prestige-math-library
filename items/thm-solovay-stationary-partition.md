@@ -2,7 +2,7 @@
 id: thm-solovay-stationary-partition
 kind: theorem
 title: "Solovay’s stationary partition theorem"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-splitting-stationary-sets-of-fixed-cofinality", "lem-splitting-stationary-regular-cardinals", "thm-fodor-pressing-down", "prop-basic-stationary-set-calculus"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

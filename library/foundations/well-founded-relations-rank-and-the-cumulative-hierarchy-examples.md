@@ -1,7 +1,7 @@
 ---
 page: well-founded-relations-rank-and-the-cumulative-hierarchy-examples
 title: "Well-Founded Relations, Rank, and the Cumulative Hierarchy: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: ["ex-first-hierarchy-stages-and-ranks", "ex-collapse-of-a-nontransitive-well-founded-relation", "cex-extensionality-is-needed-for-injective-collapse", "ex-singleton-rank-and-hereditary-size", "fs-v-is-a-set"]
 ---

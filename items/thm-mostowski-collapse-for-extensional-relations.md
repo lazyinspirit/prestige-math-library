@@ -2,7 +2,7 @@
 id: thm-mostowski-collapse-for-extensional-relations
 kind: theorem
 title: "Mostowski collapse for extensional relations"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-extensional-collapse-is-injective", "def-extensional-relation-and-collapse-map"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

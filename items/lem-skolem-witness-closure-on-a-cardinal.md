@@ -2,7 +2,7 @@
 id: lem-skolem-witness-closure-on-a-cardinal
 kind: lemma
 title: "Skolem witness closure on a cardinal"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-hessenberg", "thm-recursion", "def-set-signature-and-finite-syntax-strings", "thm-structural-recursion-on-set-coded-syntax", "def-set-structures-and-variable-assignments", "thm-set-structure-satisfaction-recursion"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-fodor-pressing-down
 kind: theorem
 title: "Fodor’s pressing-down lemma"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-regressive-function-on-ordinals", "def-club-filter-and-nonstationary-ideal", "thm-diagonal-intersection-of-clubs", "prop-basic-stationary-set-calculus"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

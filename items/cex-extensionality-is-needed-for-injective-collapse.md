@@ -2,7 +2,7 @@
 id: cex-extensionality-is-needed-for-injective-collapse
 kind: counterexample
 title: "Extensionality is needed for injective collapse"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-extensional-relation-and-collapse-map"]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -37,4 +38,3 @@ False claim: every well-founded relation has an injective collapse. Let $X=\{a,b
 1.1 Every member of every nonempty subset of $X$ is minimal, so $R$ is well-founded and setlike. Its two predecessor sets are both empty, so it is not extensional. [F1]
 
 2.1 The collapse rule gives $\pi(a)=\varnothing=\pi(b)$, because both predecessor images are empty. Thus the collapse exists but is not injective. [F1, step 1.1] ∎
-

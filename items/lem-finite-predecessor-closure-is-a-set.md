@@ -2,7 +2,7 @@
 id: lem-finite-predecessor-closure-is-a-set
 kind: lemma
 title: "Finite predecessor closures are sets"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-well-founded-setlike-relations", "thm-transfinite-recursion"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -39,4 +40,3 @@ For every setlike relation $R$ on a definable class $X$ and $x\in X$, there is a
 2.1 Let $C(x)=\bigcup_{n\in\omega}C_n$, a set by Replacement and Union. It contains $x$ and is predecessor-closed: if $y\in C_n$ and $zRy$, then $z\in C_{n+1}$. Conversely any predecessor-closed set containing $x$ contains every $C_n$ by natural induction, hence contains $C(x)$. [step 1.1]
 
 3.1 Induction on $n$ says $C_n$ consists exactly of the nodes reached in at most $n$ steps: the successor construction either keeps a node or appends one predecessor edge. Taking the union proves the finite-path description. [step 1.1, step 2.1] ∎
-

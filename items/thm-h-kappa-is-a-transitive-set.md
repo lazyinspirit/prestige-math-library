@@ -2,7 +2,7 @@
 id: thm-h-kappa-is-a-transitive-set
 kind: theorem
 title: "H_kappa is a transitive subset of V_kappa"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-small-transitive-sets-have-small-ranks", "thm-membership-rank-and-hierarchy-levels"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -39,4 +40,3 @@ In ZF, for every infinite initial ordinal $\kappa$, $H_\kappa$ is a transitive s
 2.1 If $y\in x\in H_\kappa$, the transitive set $\operatorname{TC}(\{x\})$ contains $y$, and hence contains $\operatorname{TC}(\{y\})$ by minimality. Restrict the same witnessing injection to this smaller closure. Thus $y\in H_\kappa$, proving transitivity. [F1, step 1.1]
 
 3.1 If $\kappa\le\mu$, any witnessing ordinal $\lambda<\kappa$ also satisfies $\lambda<\mu$. The same injection proves $x\in H_\mu$. [F1] ∎
-

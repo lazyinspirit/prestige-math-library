@@ -2,7 +2,7 @@
 id: prop-cumulative-hierarchy-transitivity-and-growth
 kind: proposition
 title: "Transitivity and growth of hierarchy stages"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-cumulative-hierarchy-stages", "thm-transfinite-induction"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -39,4 +40,3 @@ In ZF without Foundation, every $V_\alpha$ is transitive and $\alpha\le\beta$ im
 2.1 A second induction gives $V_\alpha\cap\operatorname{Ord}=\alpha$. At zero both are empty. An ordinal $\gamma$ lies in $V_{\beta+1}$ iff $\gamma\subseteq V_\beta$, iff all its ordinal members belong to $\beta$, iff $\gamma\le\beta$; thus the intersection is $\beta+1$. At a nonzero limit the intersection is the union of the earlier ordinal intersections, namely the limit itself. [F1, F2, step 1.1]
 
 3.1 Consequently $\alpha\subseteq V_\alpha$ but $\alpha\notin V_\alpha$, and hence $\alpha\in V_{\alpha+1}$. Also $V_\alpha\subseteq V_\alpha$ gives $V_\alpha\in V_{\alpha+1}$. To exclude $V_\alpha\in V_\alpha$, observe that any $u\in V_\alpha$ is a subset of some $V_\beta$ with $\beta<\alpha$: this holds at successors directly, at limits by passing to an earlier stage, and at zero vacuously. If $u=V_\alpha$, then $\alpha\subseteq V_\alpha\subseteq V_\beta$, making $\alpha\in V_{\beta+1}\subseteq V_\alpha$, a contradiction. [F1, step 1.1, step 2.1] ∎
-

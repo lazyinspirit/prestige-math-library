@@ -2,7 +2,7 @@
 id: thm-dependent-choice-detects-non-well-orders
 kind: theorem
 title: "DC detects non-well-orders by descending sequences"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dependent-choice", "def-well-order"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

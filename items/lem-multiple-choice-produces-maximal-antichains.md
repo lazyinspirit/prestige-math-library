@@ -2,7 +2,7 @@
 id: lem-multiple-choice-produces-maximal-antichains
 kind: lemma
 title: "Multiple choice produces maximal antichains"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-multiple-and-dependent-multiple-choice", "thm-transfinite-recursion", "thm-hartogs"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

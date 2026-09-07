@@ -2,7 +2,7 @@
 id: cex-variable-capture-changes-satisfaction
 kind: counterexample
 title: "Variable capture changes satisfaction"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-capture-avoiding-substitution"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -35,4 +36,3 @@ False claim: replacing free occurrences by a variable without first avoiding cap
 1.1 In $M=\{\varnothing,\{\varnothing\}\}$ with restricted membership, take $s(v_2)=\{\varnothing\}$. The intended substitution truth, supplied by capture-avoiding substitution, is the truth of $\phi$ after setting $v_1$ to $s(v_2)$. It is true, with witness $\varnothing$. [F1]
 
 2.1 Naive replacement gives $\exists v_2(v_2\in v_2)$, false since neither carrier element belongs to itself. Renaming the binder to $v_3$ first gives $\exists v_3(v_3\in v_2)$, true at the displayed assignment. Thus the naive operation changes the required truth value. [step 1.1, given] ∎
-

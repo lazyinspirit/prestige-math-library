@@ -2,13 +2,14 @@
 id: def-normal-filter-on-a-regular-cardinal
 kind: definition
 title: "Normal filters on a regular cardinal"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-diagonal-club-intersection", "def-club-filter-and-nonstationary-ideal"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

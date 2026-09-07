@@ -2,13 +2,14 @@
 id: def-membership-rank-of-a-set
 kind: definition
 title: "Membership rank under Foundation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-rank-of-a-well-founded-relation", "thm-foundation-equivalent-to-hierarchy-exhaustion"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

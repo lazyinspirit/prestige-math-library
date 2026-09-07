@@ -2,13 +2,15 @@
 id: ex-finite-character-partial-choice-graphs
 kind: example
 title: "Partial choice graphs have finite character"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-tukey-finite-character-equivalent-to-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct argument
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Jech, Theorem 2.1, Tukey implies AC, p.11"

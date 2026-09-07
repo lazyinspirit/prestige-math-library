@@ -1,7 +1,7 @@
 ---
 page: club-stationary-sets-and-pressing-down-examples
 title: "Club, Stationary Sets, and Pressing Down: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: ["ex-club-tails-limits-and-diagonal", "ex-stationary-cofinality-strata", "cex-unbounded-domain-does-not-suffice-for-fodor", "ex-transfinite-subway-pressing-down", "ex-reflection-of-cofinality-omega-and-omega-one", "fs-countable-intersections-of-clubs-are-always-club", "ex-normal-function-fixed-points-at-omega-one"]
 ---

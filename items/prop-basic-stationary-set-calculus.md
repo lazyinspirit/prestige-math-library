@@ -2,7 +2,7 @@
 id: prop-basic-stationary-set-calculus
 kind: proposition
 title: "Basic stationary-set calculus"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-club-filter-and-nonstationary-ideal"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-singleton-rank-and-hereditary-size
 kind: example
 title: "A singleton can have large rank and hereditary size"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-hereditary-size-and-h-kappa", "prop-ranks-of-ordinals-and-hierarchy-stages"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -37,4 +38,3 @@ For every infinite ordinal $\alpha$, the singleton $s=\{\alpha\}$ has rank $\alp
 1.1 The ordinal-rank formula and membership-rank equation give $\operatorname{rank}(s)=\sup\{\operatorname{rank}(\alpha)+1\}=\alpha+1$. Its only element is $\alpha$, so its cardinality is one. [F2]
 
 2.1 Starting from $\{s\}$, transitive closure contains $s$, then $\alpha\in s$, and then all $\beta\in\alpha$. If $\alpha=\kappa$ and this closure injected into $\lambda<\kappa$, restriction would inject $\kappa$ into $\lambda$, impossible for an initial ordinal: the image subset of $\lambda$ has order type at most $\lambda$ and is equinumerous with $\kappa$. Thus the defining witness for $H_\kappa$ cannot exist. [F1, step 1.1] ∎
-

@@ -2,7 +2,7 @@
 id: ex-relativizing-to-the-empty-class
 kind: example
 title: "Relativization to the empty class"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-relativization-to-a-definable-class"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -35,4 +36,3 @@ For $C=\{z:z\ne z\}$, the relativization of $\exists x(x=x)$ is false and that o
 1.1 The existential relativization is $\exists x(x\ne x\land x=x)$. Its matrix is false at every set, so it has no witness. [F1]
 
 2.1 The universal relativization is $\forall x(x\ne x\to x=x)$. Its antecedent is always false, so it is true. These computations concern guarded formulas; the nonempty-carrier convention remains in force. [F1] ∎
-

@@ -2,7 +2,7 @@
 id: ex-first-hierarchy-stages-and-ranks
 kind: example
 title: "First hierarchy stages and their ranks"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-ranks-of-ordinals-and-hierarchy-stages"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -35,4 +36,3 @@ The first hierarchy stages are $V_0=\varnothing$, $V_1=\{\varnothing\}$ and $V_2
 1.1 Unfolding the empty stage and two power sets gives the displayed sets. The rank-of-stages formula gives $\operatorname{rank}(V_i)=i$ for $i=0,1,2$. [F1]
 
 2.1 The membership-rank equation gives $\operatorname{rank}(\{\{\varnothing\}\})=\operatorname{rank}(\{\varnothing\})+1=2$. This singleton omits $\varnothing$, while the ordinal $2=\{\varnothing,\{\varnothing\}\}$ contains it. Equal ranks therefore do not identify sets. [F1, step 1.1] ∎
-

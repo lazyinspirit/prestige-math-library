@@ -2,13 +2,15 @@
 id: ex-transfinite-subway-pressing-down
 kind: example
 title: "The transfinite subway argument"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-fodor-pressing-down", "prop-basic-stationary-set-calculus"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct argument
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Vasey, Example 15.2, pp.82–83"

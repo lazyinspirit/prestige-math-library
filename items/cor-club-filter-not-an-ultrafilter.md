@@ -2,7 +2,7 @@
 id: cor-club-filter-not-an-ultrafilter
 kind: corollary
 title: "The club filter is never an ultrafilter"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-solovay-stationary-partition", "def-club-filter-and-nonstationary-ideal"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

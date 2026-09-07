@@ -2,7 +2,7 @@
 id: thm-countable-choice-gives-countable-subsets
 kind: theorem
 title: "Countable choice gives countable subsets of infinite sets"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-dedekind-infinite-iff-countable-subset", "lem-finite-choice", "thm-n-cross-n-countable"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

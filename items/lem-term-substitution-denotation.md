@@ -2,7 +2,7 @@
 id: lem-term-substitution-denotation
 kind: lemma
 title: "Term substitution commutes with evaluation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-term-denotation-in-a-set-structure", "def-free-variables-and-syntactic-substitution"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -37,4 +38,3 @@ For any terms $u,t$, variable $x$, structure $\mathcal M$ and assignment $s$, pu
 1.1 If $u=x$, both sides equal $b$. If $u$ is another variable, the update leaves its value unchanged. If $u$ is a constant, both sides are its interpretation. These cover all leaves, including when $t$ itself contains $x$. [F1, F2]
 
 2.1 At $u=f(u_1,\ldots,u_n)$, substitution acts on its arguments. The induction hypothesis identifies every argument value on the two sides, and applying the same total function $f^{\mathcal M}$ gives the displayed equality. Constructor induction completes the proof. [F1, F2, step 1.1] ∎
-

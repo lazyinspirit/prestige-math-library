@@ -2,13 +2,14 @@
 id: def-term-denotation-in-a-set-structure
 kind: definition
 title: "Term denotation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-set-structures-and-variable-assignments", "thm-structural-recursion-on-set-coded-syntax"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

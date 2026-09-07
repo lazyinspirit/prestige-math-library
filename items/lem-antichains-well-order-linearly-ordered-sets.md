@@ -2,7 +2,7 @@
 id: lem-antichains-well-order-linearly-ordered-sets
 kind: lemma
 title: "Maximal antichains well-order linearly ordered sets"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-multiple-choice-produces-maximal-antichains", "thm-hartogs", "thm-transfinite-recursion"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

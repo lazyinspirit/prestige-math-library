@@ -2,7 +2,7 @@
 id: ex-countable-choice-spent-on-enumerations
 kind: example
 title: "Where countable-union proofs spend choice"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-countable-union-of-countable", "def-countable-choice", "thm-r-uncountable", "thm-n-cross-n-countable"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

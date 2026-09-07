@@ -2,7 +2,7 @@
 id: thm-foundation-equivalent-to-hierarchy-exhaustion
 kind: theorem
 title: "Equivalent forms of Foundation"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-cumulative-hierarchy-transitivity-and-growth", "prop-transitive-closure-minimality", "thm-induction-on-well-founded-relations"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -43,4 +44,3 @@ Over ZF without Foundation the following are equivalent: (i) every nonempty set 
 1.3 Under (ii), prove (iii) by membership induction. If each $y\in x$ lies in a stage, it has a unique least stage index $h(y)$, found by minimizing below any witness. Replacement collects these indices; let $\beta=\sup\{h(y):y\in x\}$. Nesting puts every $y\in x$ in $V_\beta$, so $x\in V_{\beta+1}$. For $x=\varnothing$ the supremum is zero and the same conclusion holds. [F1]
 
 2.1 Assume (iii) and let $a$ be nonempty. The least stage index $h(x)$ exists for each $x\in a$; it is a successor $\beta+1$, since zero is empty and a limit is a union. If $y\in x$, then $x\in V_{\beta+1}$ implies $y\in V_\beta$, hence $h(y)\le\beta<h(x)$. Minimize $h$ on the set $a$ using Replacement. A member $x$ of least height has $x\cap a=\varnothing$, proving Foundation. These heights were defined from stages alone, without membership rank. [F1] ∎
-

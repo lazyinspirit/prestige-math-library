@@ -2,13 +2,14 @@
 id: def-free-variables-and-syntactic-substitution
 kind: definition
 title: "Free variables and free-for substitution"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-structural-recursion-on-set-coded-syntax"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

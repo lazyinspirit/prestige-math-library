@@ -1,7 +1,7 @@
 ---
 page: weak-choice-principles-and-sierpinskis-theorem-examples
 title: "Weak Choice Principles and Sierpiński's Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: ["ex-weak-choice-implication-map", "ex-countable-choice-spent-on-enumerations", "ex-dependent-choice-partial-tuples", "ex-finite-character-partial-choice-graphs", "ex-local-gch-at-omega-and-its-power-set", "fs-gch-on-alephs-is-a-choice-free-formulation"]
 ---

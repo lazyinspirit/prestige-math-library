@@ -2,13 +2,14 @@
 id: def-stationary-antichains-modulo-nonstationary
 kind: definition
 title: "Stationary antichains modulo the nonstationary ideal"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-club-filter-and-nonstationary-ideal"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

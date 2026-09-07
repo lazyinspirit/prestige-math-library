@@ -2,7 +2,7 @@
 id: fs-v-is-a-set
 kind: false-statement
 title: "V is a set"
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-universe-is-the-class-union-of-its-stages", "def-membership-rank-of-a-set"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -37,4 +38,3 @@ False statement: the class $V$ of all sets is itself a set. Equivalently, there 
 1.1 Suppose a set $U$ contains every set. In particular it contains itself, since $U$ is a set. Under ZF its membership rank is an ordinal, and the strict membership-rank inequality gives $\operatorname{rank}(U)<\operatorname{rank}(U)$. [F2]
 
 2.1 An ordinal cannot be strictly below itself, so such $U$ does not exist. The class-union assertion about the hierarchy states only that every set belongs to some stage, and therefore does not supply a set U to evade this contradiction. [F1, step 1.1] ∎
-

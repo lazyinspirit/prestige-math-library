@@ -2,7 +2,7 @@
 id: prop-capture-avoiding-substitution
 kind: proposition
 title: "Canonical capture-avoiding substitution"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-fresh-bound-variable-renaming", "lem-formula-substitution-satisfaction"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

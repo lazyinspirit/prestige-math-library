@@ -2,13 +2,14 @@
 id: def-transitive-closure-of-a-set
 kind: definition
 title: "Transitive closure of a set"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-finite-predecessor-closure-is-a-set"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

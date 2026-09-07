@@ -2,7 +2,7 @@
 id: thm-dependent-choice-and-finite-multiple-selections
 kind: theorem
 title: "DC and finite multiple selections"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-multiple-and-dependent-multiple-choice", "def-choice-for-pairs-and-countable-finite-choice", "lem-starting-point-free-dependent-choice", "thm-choice-implies-dependent-implies-countable-choice", "thm-recursion"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-structural-recursion-on-set-coded-syntax
 kind: theorem
 title: "Structural induction and recursion on syntax"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-unique-parsing-of-set-coded-syntax", "thm-recursion", "thm-strong-induction"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -41,4 +42,3 @@ Constructor induction is valid for the term and formula sets: a property true of
 1.2 Let $D$ be the expression set and use the state set $B=\omega\times\mathcal P(D\times A)$. Start with $(0,\varnothing)$. For a state $(n,h)$ whose second component is the correct evaluation of expressions of length at most $n$, extend $h$ to all expressions of length $n+1$ using the prescribed operations and shorter child values. Leaves use their supplied values. On any other state set the successor state to $(n+1,\varnothing)$, making the rule a total set function $B\to B$. Parsing gives a unique value at every newly added expression. [F1, construct]
 
 2.1 Natural recursion in $B$ gives the state sequence. Induction on $n$ shows only correct states are reached and their graphs extend one another. Their union is a set function with domain $D$ obeying the rules. Any other evaluation agrees on leaves and then on a constructor whenever it agrees on its children, so step 1.1 proves uniqueness. The state definition uses only the given parameters, proving uniformity. [F2, step 1.1, step 1.2] ∎
-

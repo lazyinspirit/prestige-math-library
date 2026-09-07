@@ -2,7 +2,7 @@
 id: thm-induction-on-well-founded-relations
 kind: theorem
 title: "Induction on well-founded setlike relations"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-finite-predecessor-closure-is-a-set"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -35,4 +36,3 @@ Let $R$ be well-founded and setlike on a definable class $X$. If a definable pro
 1.1 If there is a counterexample $x$, take its predecessor-closed set $C(x)$ and separate the nonempty set $B=\{y\in C(x):\neg P(y)\}$. Well-foundedness gives a minimal $b\in B$. [F1, given]
 
 2.1 Every predecessor of $b$ belongs to $C(x)$, and none belongs to $B$ by minimality. Hence all satisfy $P$. Progressiveness gives $P(b)$, contrary to $b\in B$. Therefore no counterexample exists. [step 1.1, given] ∎
-

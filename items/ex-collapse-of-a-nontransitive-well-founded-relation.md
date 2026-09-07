@@ -2,7 +2,7 @@
 id: ex-collapse-of-a-nontransitive-well-founded-relation
 kind: example
 title: "Collapsing a relation that is not transitive"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-mostowski-collapse-for-extensional-relations"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -35,4 +36,3 @@ Take distinct nodes $a,b,c$ and $R=\{(a,b),(b,c)\}$. This relation is well-found
 1.1 The predecessor sets are respectively $\varnothing,\{a\},\{b\}$, which are distinct. In any nonempty subset of the nodes, the first present node in the list $a,b,c$ has no predecessor in that subset, proving well-foundedness. Yet $aRb$ and $bRc$ hold while $aRc$ does not. [given]
 
 2.1 The collapse equation successively gives the three displayed values. Its range is transitive: the members of $\{\varnothing\}$ and of $\{\{\varnothing\}\}$ are already in that range. The collapse theorem makes this the unique isomorphism to a transitive membership structure. [F1, step 1.1] ∎
-

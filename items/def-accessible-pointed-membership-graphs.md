@@ -2,13 +2,14 @@
 id: def-accessible-pointed-membership-graphs
 kind: definition
 title: "Accessible pointed membership graphs"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-well-founded-setlike-relations"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-stationary-cofinality-strata
 kind: example
 title: "Cofinality strata and stationary costationary sets"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-regular-cofinality-strata-are-stationary", "cor-club-filter-not-an-ultrafilter", "thm-hessenberg", "thm-countable-union-of-countable"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

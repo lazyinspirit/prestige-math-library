@@ -2,7 +2,7 @@
 id: lem-closure-points-on-regular-cardinals
 kind: lemma
 title: "Closure points form a club"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-club-subsets-of-ordinals", "thm-cofinality-basics", "thm-recursion"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

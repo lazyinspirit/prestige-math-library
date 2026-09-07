@@ -2,7 +2,7 @@
 id: ex-normal-function-fixed-points-at-omega-one
 kind: example
 title: "Normal functions and fixed points at omega-one"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-normal-function-fixed-points-form-a-club", "thm-clubs-and-normal-enumerations", "def-ordinal-multiplication", "def-ordinal-exponentiation", "thm-ordinal-multiplication-associative-and-left-distributive", "thm-countable-union-of-countable"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

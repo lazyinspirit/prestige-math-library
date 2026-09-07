@@ -2,7 +2,7 @@
 id: thm-membership-rank-and-hierarchy-levels
 kind: theorem
 title: "Rank characterizes hierarchy membership"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-membership-rank-of-a-set", "prop-cumulative-hierarchy-transitivity-and-growth"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -43,4 +44,3 @@ Thus $\operatorname{rank}(x)$ is the least $\alpha$ with $x\subseteq V_\alpha$, 
 2.1 At a nonzero limit $\lambda$, membership means membership in some $V_\beta$ with $\beta<\lambda$. By induction this implies rank below $\lambda$. Conversely if $\rho=\operatorname{rank}(x)<\lambda$, then $\rho+1<\lambda$ and induction puts $x$ in $V_{\rho+1}$, hence in $V_\lambda$. [F1, F2, step 1.1]
 
 3.1 Now $x\subseteq V_\alpha$ iff each $y\in x$ has rank below $\alpha$, iff the supremum of their successor ranks is at most $\alpha$. This proves the subset equivalence. Taking $\alpha=\operatorname{rank}(x)$ gives the least-stage assertion; applying membership at $\alpha+1$ and at $\alpha$ gives the successor-shell assertion. [F1, step 1.1, step 2.1] ∎
-

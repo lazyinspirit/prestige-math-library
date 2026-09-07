@@ -2,7 +2,7 @@
 id: thm-specker-two-local-gch
 kind: theorem
 title: "Specker’s two-local-GCH theorem"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-local-gch-hartogs-dichotomy", "lem-hartogs-iterated-powerset-bounds", "lem-local-gch-absorbs-sums-and-squares"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

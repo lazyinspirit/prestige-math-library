@@ -2,13 +2,14 @@
 id: def-set-coded-terms-and-formulas
 kind: definition
 title: "Terms and formulas as finite set codes"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-set-signature-and-finite-syntax-strings", "thm-recursion"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

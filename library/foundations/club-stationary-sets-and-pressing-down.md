@@ -1,7 +1,7 @@
 ---
 page: club-stationary-sets-and-pressing-down
 title: "Club, Stationary Sets, and Pressing Down"
-status: draft
+status: published
 items: ["def-club-subsets-of-ordinals", "lem-closure-points-on-regular-cardinals", "lem-limit-points-of-unbounded-sets", "thm-small-intersections-of-clubs", "def-club-filter-and-nonstationary-ideal", "prop-basic-stationary-set-calculus", "def-diagonal-club-intersection", "thm-diagonal-intersection-of-clubs", "def-regressive-function-on-ordinals", "thm-fodor-pressing-down", "def-normal-filter-on-a-regular-cardinal", "thm-normality-and-positive-pressing-down", "cor-club-filter-is-least-normal-tail-filter", "def-normal-ordinal-function", "thm-clubs-and-normal-enumerations", "thm-normal-function-fixed-points-form-a-club", "def-cofinality-strata-and-stationary-trace", "thm-regular-cofinality-strata-are-stationary", "lem-stationary-set-minus-its-trace", "lem-unbounded-stationary-fibres-yield-a-partition", "lem-splitting-stationary-sets-of-fixed-cofinality", "lem-splitting-stationary-regular-cardinals", "thm-solovay-stationary-partition", "cor-club-filter-not-an-ultrafilter", "def-stationary-antichains-modulo-nonstationary", "lem-skolem-witness-closure-on-a-cardinal", "thm-elementary-initial-segments-form-a-club", "thm-stationarity-via-elementary-initial-segments", "rem-square-and-club-guessing-orientation"]
 examples: []
 ---

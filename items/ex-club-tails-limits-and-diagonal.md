@@ -2,7 +2,7 @@
 id: ex-club-tails-limits-and-diagonal
 kind: example
 title: "Tails, limits, and diagonal intersection"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-diagonal-intersection-of-clubs", "def-club-subsets-of-ordinals"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

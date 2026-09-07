@@ -2,13 +2,14 @@
 id: def-well-founded-setlike-relations
 kind: definition
 title: "Well-founded and setlike relations"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-ordinal"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

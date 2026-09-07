@@ -2,7 +2,7 @@
 id: thm-recursion-on-well-founded-setlike-relations
 kind: theorem
 title: "Recursion on well-founded setlike relations"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-compatible-well-founded-recursion-attempts"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -41,4 +42,3 @@ Every restriction of $F$ to a set subset of $X$ is a set function. Parameters in
 2.1 Define $F(x)=u$ if some set-domain attempt contains $(x,u)$. Existence follows from step 1.1 and uniqueness from compatibility of attempts. For each set $A\subseteq X$, Replacement applied to this functional definition makes $F\restriction A$ a set. A cone attempt agrees with $F$ at $x$ and all its predecessors, proving the recursion equation. [F1, step 1.1]
 
 3.1 Any rival definable function obeying the equation agrees with $F$ at a point whenever it agrees at all predecessors. Well-founded induction proves equality everywhere. Every definition just used quantifies over set attempts, so it is a first-order definition with the original parameters. [F1, step 2.1] ∎
-

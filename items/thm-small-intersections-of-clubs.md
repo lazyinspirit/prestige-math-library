@@ -2,7 +2,7 @@
 id: thm-small-intersections-of-clubs
 kind: theorem
 title: "Intersections of fewer than the cofinality many clubs"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-closure-points-on-regular-cardinals", "def-club-subsets-of-ordinals", "thm-cofinality-basics"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

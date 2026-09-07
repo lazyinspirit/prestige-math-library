@@ -2,13 +2,14 @@
 id: rem-grothendieck-universe-orientation
 kind: remark
 title: "Grothendieck universes and relative size"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-grothendieck-universe-closure-convention", "prop-ranks-of-ordinals-and-hierarchy-stages"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

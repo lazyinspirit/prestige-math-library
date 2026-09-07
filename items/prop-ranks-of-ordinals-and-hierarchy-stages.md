@@ -2,7 +2,7 @@
 id: prop-ranks-of-ordinals-and-hierarchy-stages
 kind: proposition
 title: "Ranks of ordinals and hierarchy stages"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-membership-rank-and-hierarchy-levels", "prop-cumulative-hierarchy-transitivity-and-growth"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

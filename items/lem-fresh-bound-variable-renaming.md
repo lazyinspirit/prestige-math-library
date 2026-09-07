@@ -2,7 +2,7 @@
 id: lem-fresh-bound-variable-renaming
 kind: lemma
 title: "Fresh bound-variable renaming preserves truth"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-formula-substitution-satisfaction"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -37,4 +38,3 @@ If $z\ne y$ is absent from $\operatorname{Var}(\psi)$, then $z$ is free for $y$ 
 2.1 Since $z$ is absent from $\psi$, coincidence (as used in the free-for lemma) removes the update at $z$ when evaluating $\psi$. The last assignment therefore gives the same truth as $s[y:=a]$. Quantifying over the same $a\in M$ proves the claimed equivalence. Inner binders for $y$ were untouched by the raw substitution rule. [F1, step 1.1]
 
 3.1 A finite set of variable indices is bounded in $\omega$, by induction over its finite listing and taking successive maxima. There is an index outside it, and the least such index is uniquely specified by the natural order. This proves the fresh-variable assertion without choosing from a family of sets. [given] ∎
-

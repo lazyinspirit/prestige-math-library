@@ -2,7 +2,7 @@
 id: thm-halbeisen-shelah-no-powerset-sequence-injection
 kind: theorem
 title: "No injection of a power set into finite sequences"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-canonical-sequence-coding-for-well-orders", "thm-hartogs", "thm-transfinite-recursion", "thm-cantor-powerset"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

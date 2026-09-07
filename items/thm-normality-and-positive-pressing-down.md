@@ -2,7 +2,7 @@
 id: thm-normality-and-positive-pressing-down
 kind: theorem
 title: "Normality is equivalent to positive pressing down"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-normal-filter-on-a-regular-cardinal", "def-regressive-function-on-ordinals"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

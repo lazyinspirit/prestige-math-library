@@ -2,13 +2,14 @@
 id: def-rank-of-a-well-founded-relation
 kind: definition
 title: "Ordinal rank of a well-founded relation"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-recursion-on-well-founded-setlike-relations", "lem-ordinal-basics"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

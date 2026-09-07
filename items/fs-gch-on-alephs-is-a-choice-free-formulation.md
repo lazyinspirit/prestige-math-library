@@ -2,7 +2,7 @@
 id: fs-gch-on-alephs-is-a-choice-free-formulation
 kind: false-statement
 title: "The aleph equation carries no well-orderability assertion"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-local-gch-for-arbitrary-sets", "thm-sierpinski-arbitrary-set-gch-implies-choice"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

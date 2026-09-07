@@ -2,7 +2,7 @@
 id: cor-well-founded-pointed-graphs-have-unique-decorations
 kind: corollary
 title: "Well-founded pointed graphs have unique decorations"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-accessible-pointed-membership-graphs", "def-extensional-relation-and-collapse-map", "prop-transitive-closure-minimality", "thm-mostowski-collapse-for-extensional-relations"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -43,4 +44,3 @@ Every well-founded accessible pointed graph $(X,R,r)$ has a unique decoration $d
 2.1 Every node $x$ is reached from $r$ by a finite predecessor path. Along this path the decoration of each next node is a member of the decoration of the preceding node. Transitivity therefore puts $d(x)$ in $\operatorname{TC}(\{d(r)\})$, starting with the root itself at path length zero. This gives the reverse inclusion. [F1, F3, step 1.1]
 
 3.1 When $R$ is extensional, Mostowski collapse makes the same decoration an isomorphism, unique among isomorphisms onto transitive targets. Step 2.1 identifies that target explicitly. [F4, step 2.1] ∎
-

@@ -2,7 +2,7 @@
 id: prop-transitive-closure-minimality
 kind: proposition
 title: "Minimality and closure laws of TC"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transitive-closure-of-a-set"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -37,4 +38,3 @@ For every set $a$, $\operatorname{TC}(a)$ is transitive, contains $a$ as a subse
 2.1 If $a\subseteq T$ and $T$ is transitive, induction gives $a_n\subseteq T$: the successor follows from $\bigcup a_n\subseteq\bigcup T\subseteq T$. Union over $n$ proves minimality. [F1, step 1.1]
 
 3.1 For $a\subseteq b$, the transitive set $\operatorname{TC}(b)$ contains $a$, so minimality proves monotonicity. Applying minimality with $T=\operatorname{TC}(a)$ gives one idempotence inclusion and step 1.1 gives the other. Finally $a\in\{a\}\subseteq\operatorname{TC}(\{a\})$. [step 1.1, step 2.1] ∎
-

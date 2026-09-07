@@ -2,7 +2,7 @@
 id: lem-stationary-set-minus-its-trace
 kind: lemma
 title: "Removing the trace preserves a stationary remainder"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-cofinality-strata-and-stationary-trace", "lem-limit-points-of-unbounded-sets", "prop-basic-stationary-set-calculus"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

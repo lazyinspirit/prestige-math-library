@@ -2,7 +2,7 @@
 id: thm-relativization-and-set-satisfaction
 kind: theorem
 title: "Relativization agrees with induced set satisfaction"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-relativization-to-a-definable-class", "thm-set-structure-satisfaction-recursion"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -39,4 +40,3 @@ For every nonempty set $M$, let $\mathcal M=(M,\in\!\restriction M^2)$ be its me
 2.1 Negation and conjunction preserve the inductive equivalences. For $\exists x\psi$, the ambient guard $x\in M$ ranges over exactly the same witnesses $b\in M$ as the satisfaction clause, and the induction hypothesis applies at $s[x:=b]$. This proves both directions for quantifiers and hence all formulas. The parameter for $M$ cannot be captured because the construction uses fresh binders. [F1, F2, step 1.1]
 
 3.1 The argument used only restriction of membership and equality, never transitivity. Replacing the set guard by a fixed defining formula for a class still makes a separate ambient formula at each syntactic step; it does not assemble a truth relation with proper-class assignment domain. [F1, step 2.1] ∎
-

@@ -2,7 +2,7 @@
 id: ex-dependent-choice-partial-tuples
 kind: example
 title: "Dependent choices as extending partial tuples"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-choice-implies-dependent-implies-countable-choice", "lem-starting-point-free-dependent-choice"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

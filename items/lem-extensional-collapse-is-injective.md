@@ -2,7 +2,7 @@
 id: lem-extensional-collapse-is-injective
 kind: lemma
 title: "An extensional collapse is injective"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-extensional-relation-and-collapse-map", "def-rank-of-a-well-founded-relation"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -37,4 +38,3 @@ For a well-founded setlike extensional relation $R$ on a definable class $X$, it
 1.1 Prove by transfinite induction on $\alpha$ that any $x,y$ with $\max(\rho_R(x),\rho_R(y))=\alpha$ and $\pi(x)=\pi(y)$ are equal. For any $uRx$, the collapse equation supplies $vRy$ with $\pi(u)=\pi(v)$. Both predecessor ranks are smaller than their respective parent ranks, so their maximum is strictly below $\alpha$. The induction hypothesis gives $u=v$. [F1, F2]
 
 2.1 It follows that every predecessor of $x$ is a predecessor of $y$. Interchanging $x,y$ proves the reverse inclusion; extensionality gives $x=y$. At rank zero both predecessor sets are empty and the same extensionality step applies without invoking an induction hypothesis. Every pair of ranks has an ordinal maximum, so the induction covers all pairs. [F1, F2, step 1.1] ∎
-

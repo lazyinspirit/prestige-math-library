@@ -2,7 +2,7 @@
 id: fs-v-has-a-definable-truth-predicate
 kind: false-statement
 title: "V has a definable truth predicate"
-status: draft
+status: published
 origin: pipeline
 deps: ["rem-tarski-truth-definition-interface", "prop-capture-avoiding-substitution"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -41,4 +42,3 @@ The displayed universal demand is a scheme of biconditionals for the proposed $T
 1.1 Fix a proposed $T,t$. Rename bound variables and use capture-avoiding simultaneous replacement of its four free slots to form the pure membership formula $\psi(x,y)=\neg T(x,x,y,y)$. This notation means slot replacement in $T$, not an added predicate symbol. Its only possible free variables are $x,y$, and its finite code $q=\ulcorner\psi\urcorner$ is a set. [F1, F2]
 
 2.1 The demanded instance for this $\psi$, $r=q$ and $s=t$ gives $\psi(q,t)\iff T(q,q,t,t)$. The definition of $\psi$ gives $\psi(q,t)\iff\neg T(q,q,t,t)$. Therefore that one instance equates a proposition with its negation, which is impossible in classical logic. This refutes every proposed $T,t$ without a sentence-only arithmetization theorem. [step 1.1, F1] ∎
-

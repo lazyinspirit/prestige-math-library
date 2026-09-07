@@ -2,7 +2,7 @@
 id: cor-club-filter-is-least-normal-tail-filter
 kind: corollary
 title: "The club filter is the least normal tail filter"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-diagonal-intersection-of-clubs", "thm-normality-and-positive-pressing-down", "def-club-filter-and-nonstationary-ideal"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct argument
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

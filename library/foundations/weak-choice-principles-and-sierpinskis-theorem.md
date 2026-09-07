@@ -1,7 +1,7 @@
 ---
 page: weak-choice-principles-and-sierpinskis-theorem
 title: "Weak Choice Principles and Sierpiński's Theorem"
-status: draft
+status: published
 items: ["def-choice-for-pairs-and-countable-finite-choice", "def-multiple-and-dependent-multiple-choice", "thm-choice-implies-dependent-implies-countable-choice", "lem-starting-point-free-dependent-choice", "thm-dependent-choice-and-finite-multiple-selections", "def-families-of-finite-character", "thm-tukey-finite-character-equivalent-to-choice", "lem-multiple-choice-produces-maximal-antichains", "lem-antichains-well-order-linearly-ordered-sets", "lem-bounded-hierarchy-for-the-multiple-choice-argument", "thm-multiple-choice-equivalent-to-choice-in-zf", "def-dedekind-infinite-set", "thm-dedekind-infinite-iff-countable-subset", "thm-countable-choice-gives-countable-subsets", "cor-countable-choice-and-omega-one-cofinality", "thm-dependent-choice-detects-non-well-orders", "def-local-gch-for-arbitrary-sets", "lem-canonical-sequence-coding-for-well-orders", "thm-halbeisen-shelah-no-powerset-sequence-injection", "lem-local-gch-absorbs-sums-and-squares", "lem-hartogs-iterated-powerset-bounds", "lem-powerset-fibres-force-well-orderability", "lem-local-gch-hartogs-dichotomy", "thm-specker-two-local-gch", "thm-sierpinski-arbitrary-set-gch-implies-choice"]
 examples: []
 ---
