@@ -1,70 +1,53 @@
 # Prestige Math Library
 
-The Prestige Math Library is the Markdown corpus and validation tooling used by
-the Prestige Intelligence application's `/library`. Its production renderer and
-web server are in the separate `prestige-intelligence` checkout, located by
-`tools/paths.mjs` and configured to read this checkout through
-`MATH_LIBRARY_DIR`.
+Markdown content and validation tools for Prestige Intelligence's `/library`.
+`items/` holds shared mathematical items; `library/` arranges them into pages,
+categories, and reading pathways.
 
-## Source and document map
+Read [CLAUDE.md](CLAUDE.md) before working here. Use
+[SCHEMA.md](SCHEMA.md) for content, [WORKFLOW.md](WORKFLOW.md) for builds,
+and [articles/README.md](articles/README.md) for narrative articles.
+Executable tools and configuration determine current behavior.
 
-`items/` is the canonical source for mathematical item bodies. `library/`
-places those items in category pages and, where present, reading pathways.
+## Layout
 
-| Need | Start here |
-| --- | --- |
-| Item/page contract | [SCHEMA.md](SCHEMA.md) |
-| Build and publication runbook | [WORKFLOW.md](WORKFLOW.md) |
-| Repository operating rules | [CLAUDE.md](CLAUDE.md) |
-| Article-specific contract | [articles/README.md](articles/README.md) |
+| Path | Purpose |
+|---|---|
+| `items/`, `library/` | Canonical content |
+| `articles/` | Narrative articles linking library items |
+| `briefs/`, `briefs/tasks/` | Agent briefs and templates for generated run tasks |
+| `research/` | Designs, manifests, generated tasks, reviews, and receipts |
+| `tools/` | Validators, planning, dispatch, and publication tools |
+| `tools/autopilot/` | TypeScript workflow engine, stage definitions, and tests |
+| `.autopilot/` | Ignored runtime state; each selected state directory belongs to one run |
+| `explainer/` | Standalone HTML explainers and video helper |
+| `Handover-prompts/` | Historical instructions, not live state |
+| `.claude/` | Agent settings; local settings are ignored |
 
-The executable tools and configuration are authoritative for current behaviour;
-documentation describes their intended contract.
+Verify active runs against their state directory and Git history.
+Historical `research/*RESUME.md` files are not current status.
+Change generators or templates instead of hand-editing generated run artifacts.
 
-## Repository map
+## Commands
 
-- `.claude/` — shared agent-tool settings; `settings.local.json` is ignored
-  machine-local configuration.
-- `.autopilot/` — ignored runtime state, logs, control file, reports, and
-  persisted sessions for the current build driver. Do not edit it as content.
-- `articles/` — narrative “Rabbit holes” Markdown that links into library
-  items; it has a separate contract and checker.
-- `briefs/` — reusable role briefs and task templates. `briefs/tasks/` is the
-  source for per-run task files rendered into `research/`.
-- `explainer/` — self-contained HTML explainers and their video-render helper.
-- `Handover-prompts/` — retained prompts from earlier sessions; historical
-  context, not live run state.
-- `research/` — design inputs, run manifests, generated task material,
-  receipts, and retained build evidence. Dated run artefacts document
-  history; change their generating template or tool rather than hand-editing
-  generated output.
-- `tools/` — Node-based validators, render checks, planning utilities, and
-  dispatch helpers. Some use the app checkout's parser, TypeScript loader, or
-  precheck implementation through `tools/paths.mjs`.
-- `tools/autopilot/` — TypeScript control plane for the staged build: CLI,
-  stage definitions, runtime implementation, and its test suite.
-
-## Safe entry points
-
-Read `CLAUDE.md` before changing the corpus or tooling. For focused work, use
-the contract named in the table above rather than inferring rules from old run
-artefacts.
+Run from this repository's root:
 
 ```bash
-# Inspect the current build state without steering it.
-(cd tools/autopilot && node --import tsx bin/autopilot.mts status --repo ../..)
+# Replace RUN with the run name and use its actual state directory.
+node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts status --run RUN --state-dir .autopilot/RUN
 
-# Validate the item/page graph.
 node tools/depcheck.mjs --quiet
-
-# Validate all narrative articles.
+node tools/tsx-run.mjs tools/precheck.mts items/ID.md
 node tools/tsx-run.mjs tools/articlecheck.mts
-
-# Preview the static explainers only.
 node explainer/serve.mjs
 ```
 
-For an item proof-format check, run
-`node tools/tsx-run.mjs tools/precheck.mts [items/file.md ...]`; omit file
-arguments to check the full item corpus. Consult [WORKFLOW.md](WORKFLOW.md)
-before creating, starting, pausing, or otherwise steering a build.
+Omitting precheck's item paths checks all proof-bearing items. Batch authors
+must supply their explicit item paths. Read WORKFLOW before steering a build.
+
+The renderer and server live in the separate `prestige-intelligence` checkout.
+[tools/paths.mjs](tools/paths.mjs) locates it; set `PRESTIGE_APP_DIR` if needed.
+The app uses `MATH_LIBRARY_DIR` to locate this content. TypeScript tools use
+`tools/tsx-run.mjs`, which selects the app's loader or a global TypeScript
+fallback. Rendering and proof checks also need the app's parser/dependencies
+and normative `worker/src/precheck.ts`.

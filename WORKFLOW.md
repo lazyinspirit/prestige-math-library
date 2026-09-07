@@ -1,503 +1,292 @@
-# Build and operations reference
+# Build and operations
 
-This is the active TypeScript/autopilot build reference. The source of truth is
-`tools/autopilot/`: `src/` is the engine, `stages/mathlib.mts` and
-`stages/mathlib.step6.mts` are the live build table, and `bin/autopilot.mts`
-is the CLI. Code wins over this file. Read [README.md](README.md) for repository
-and provenance rules and [SCHEMA.md](SCHEMA.md) for page/item contracts.
+[CLAUDE.md](CLAUDE.md) defines repository rules; [SCHEMA.md](SCHEMA.md) defines
+content. The TypeScript engine in `tools/autopilot/src/` owns dispatch,
+retries, checks, and transitions. Agents perform assigned mathematical work;
+there is no LLM orchestrator. Stage definitions in
+[mathlib.mts](tools/autopilot/stages/mathlib.mts) and
+[mathlib.step6.mts](tools/autopilot/stages/mathlib.step6.mts) are authoritative.
 
-This runbook covers the new-content build.
+## Commands and run identity
 
-## Commands
-
-In this repository, `autopilot` means:
-
-```bash
-node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts
-```
-
-`frontier` reads `status:` from page files, not Git history, to return the full
-A/B dependency schedule. Its strict wave view shows how publishing one pair can
-unlock later pairs. `frontier --next` instead computes the permanent bounded
-next-run set across every unfinished planned pair, regardless of category. A
-pair qualifies only when both its A page and its B page independently have
-strictly more than 95% of their same-category `requires` already published;
-exactly 95% fails and zero same-category dependencies qualifies. A<->B partner
-edges and cross-category edges are excluded from each page's denominator, so
-categories remain independent frontier roots. Qualifying pairs are capped in
-deterministic plan order and unpublished prerequisites are not pulled into the
-same run. `plan --pairs next` uses the same selector and is capped at the
-pipeline's 27-pair ceiling. The read-only preview may use a larger explicit
-`--max-pairs`. `plan` and the Stage-1 drift gate enforce the same threshold;
-an explicit pair list may use `--allow-in-run-dependencies` when every missing
-same-category prerequisite is an earlier pair in that same run. The scope
-ledger records that narrow exception, and Stage 1 rechecks it; it does not alter
-`frontier --next`. `--allow-unbuildable` records an intentional stage-1 stop.
-Planning writes
-batch manifests, covers, the immutable scope ledger, generated task files, and
-drift-review inputs.
+Run from the repository root. In the examples, define this shell helper and
+replace RUN with the actual run name:
 
 ```bash
-autopilot frontier [--categories category-a,category-b]
-autopilot frontier --next [--max-pairs 27]
-autopilot plan --run <run> --pairs <a-page-id,...> [--allow-in-run-dependencies]
-autopilot plan --run <run> --pairs next [--max-pairs 27]
-autopilot doctor --run <run>
-autopilot start --run <run> --detach
-autopilot status [--run <run>]
+autopilot() { node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts "$@"; }
+
+autopilot frontier
+autopilot frontier --next --max-pairs 27
+autopilot plan --run RUN --pairs next --max-pairs 27 --state-dir .autopilot/RUN
+autopilot doctor --run RUN --state-dir .autopilot/RUN
+autopilot start --run RUN --state-dir .autopilot/RUN --detach
+autopilot status --run RUN --state-dir .autopilot/RUN
 ```
 
-`start` validates the stage table and runs `doctor` before it detaches. It then
-drives stages 1–10 without an LLM orchestrator. The detached log is
-`.autopilot/autopilot.log`; `tools/autopilot/bin/watchdog.sh` may restart a
-non-stopped, incomplete engine. `.autopilot/` is a single-run state directory;
-use a fresh `--state-dir` for another run.
+Use the same `--state-dir` for every command targeting a run. Its default is
+`.autopilot`; each state directory belongs to one run. An old root state file
+or historical RESUME document may describe a different run. Verify the run
+against the controller's command line/lock, state files, and Git history.
 
-## Conceptual steps and stage IDs
+`start` validates the stages and runs doctor before dispatching. Doctor checks
+command flags, tasks, placeholders, output schemas, scope, attempt arguments,
+defect coverage, and judge-runner launch. It does not establish account quota
+or mathematical correctness.
 
-Stage IDs are operational rather than conceptual; the table below maps them to
-the build's conceptual steps.
+The selected state directory contains:
 
-| Step | Actual stages | Closure |
+| File | Purpose |
+|---|---|
+| `state.json` | Attempts, stage/check timestamps, repair budgets, blockers, pause state |
+| `events.jsonl` | Append-only events |
+| `status.md` | Latest report; use `status` to recompute completion |
+| `autopilot.log` | Detached controller output |
+| `control.json` | Next control command, consumed by the controller |
+| `controller.lock` | Controller ownership |
+| `stopped` | Stop marker respected by the watchdog |
+
+The bundled `bin/watchdog.sh` only targets the default `.autopilot` directory
+and detects controllers without distinguishing runs. Do not use it for a
+custom state directory or multiple concurrent runs.
+
+### Selection and planning
+
+`frontier` shows dependency waves from page publication status; it accepts
+`--categories`. `frontier --next` selects unfinished pairs across categories
+in plan order. Both A and B pages must independently have strictly more than
+95% of same-category prerequisites published. Zero prerequisites qualify;
+exactly 95% does not. Partner A/B edges and cross-category edges are excluded.
+
+Planning caps the run at 27 pairs; preview can use a larger explicit cap.
+Selection does not pull unpublished prerequisites into the run.
+For an explicit `--pairs a-page-id,...` list, `--allow-in-run-dependencies`
+permits missing prerequisites supplied by earlier pairs in that run. The scope
+ledger records this exception and drift review rechecks it.
+`--allow-unbuildable` records an intentional stop at Stage 1.
+
+Planning generates manifests, covers, scope, tasks, and drift inputs.
+Drift review may change prerequisite edges, order, or scope; `1-drift-apply`
+materializes approved changes before scaffolding. Same-scope checkpoint recovery
+preserves populated inventories and batch identities. Scope-changing recovery
+refuses populated manifests. Use generators rather than editing their outputs;
+`tools/run-tasks.mjs --run RUN` rewrites generic tasks from `briefs/tasks/`.
+
+## Steps and stages
+
+| Step | Stage IDs | Required result |
 |---|---|---|
-| 0 — select/plan | `frontier`, `plan`, `1-drift`, `1-drift-apply` | Fixed scope, Alpha's gated prerequisite-drift review, then mechanical manifest/task synchronization before any Beta starts. |
-| 1 — scaffold | `1-scaffold` | Beta source/scaffold work with scope, plan, harvest, source liveness/backing/fetch, and policy gates. |
-| 2 — assign | `2-assign` | A partitioning Alpha groups batches; `alpha-groups.mjs` requires full, disjoint coverage and groups of at most three batches. |
-| 3 — scaffold closure | `3-review` → `3-fix` → `3-recheck` | Group Alpha review, owned-Beta remediation, and one sufficient verdict per pair. |
-| 4 — materialize | `4-splice`, `4-baseline` | The splice tool alone transcribes IDs; edge refusals are adjudicated before the pre-author touch snapshot. |
-| 5 — author | `5-author` | Batches are authored; its whole-level gates run at the read-pipeline join. |
-| 6 — independent closure | `6a-baseline`, `6a-read`, `6a-split`, `6a-refute`, `6a-collect`, `6b-prepare`, `6b-adjudicate`, `6b-baseline`, `6c-edges`, `6c-cross`, `6d-close` | Independent readers, scoped refuters, stabilization before group decisions, cross-group closure, and a hash-bound Step-6 receipt. |
-| 7 — frozen judgment | `7-scope`, `7-judge` | Group partition, full skeptical sweep, and read-only group digests. |
-| 8 — fatal repair/certification | `8-baseline`, `8-scope`, `8-adjudicate`, `8-preflight`, `8-rejudge`, `8-close`, `8-final`, `8-freeze` | Licensed repair, integrity before targeted judgment, bounded judge cycles, final exact currency, and snapshot. |
-| 9 — delta/impact/receipts | `9-scope`, `9-scope-render`, `9-scope-freeze`, `9-changes-judge`, `9-close`, `9-changes-stamp`, `9-receipt` | Changed denial decisions, exact mathematical recertification, impact closure, then whole-level and spine receipts. |
-| 10 — readiness/close | `10-contract-close`, `10-snapshot-v2`, `10-pathway-sync-v2`, `10-pathway-seed-v2`, `10-pathway-author-v2`, `10-stamps-v2`, `10-readiness-v2`, `10-evidence-v2`, `10-report-baseline-v2`, `10-owner-report-v2`, `10-owner-report-render-v2`, `10-close-v2` | Terminal ledger, pathways, stamps, readiness, evidence, read-only report, obligations, and close-out commit in serial order. |
+| 0 — plan | `1-drift`, `1-drift-apply` | Reviewed prerequisites and synchronized scope/tasks |
+| 1 — scaffold | `1-scaffold` | Source-backed manifests, coverage, and fetch evidence |
+| 2 — assign | `2-assign` | Disjoint Alpha groups covering every batch, at most three batches each |
+| 3 — review | `3-review`, `3-fix`, `3-recheck` | Sufficient verdict for every pair |
+| 4 — materialize | `4-splice`, `4-baseline` | Synchronized item inventory and pre-author snapshot |
+| 5 — author | `5-author` | All items/pages/contracts; full checks pass at the Step 6A join |
+| 6A — read | `6a-baseline`, `6a-read`, `6a-split`, `6a-refute`, `6a-collect` | Independent reading, refutation, and routed findings |
+| 6B–D — close | `6b-prepare`, `6b-adjudicate`, `6b-baseline`, `6c-edges`, `6c-cross`, `6d-close` | Group/cross-group resolution, impact evidence, Step 6 receipt |
+| 7 — judge | `7-scope`, `7-judge` | Frozen-text judgments and group reader digests |
+| 8 — repair | `8-baseline`, `8-scope`, `8-adjudicate`, `8-preflight`, `8-rejudge`, `8-close`, `8-final`, `8-freeze` | Authorized fatal repairs and current certification |
+| 9 — certify changes | `9-scope`, `9-scope-render`, `9-scope-freeze`, `9-changes-judge`, `9-close`, `9-changes-stamp`, `9-receipt` | Decline review, changed-content judgment, impact and coverage receipts |
+| 10 — close run | `10-contract-close`, `10-snapshot-v2`, `10-pathway-sync-v2`, `10-pathway-seed-v2`, `10-pathway-author-v2`, `10-stamps-v2`, `10-readiness-v2`, `10-evidence-v2`, `10-report-baseline-v2`, `10-owner-report-v2`, `10-owner-report-render-v2`, `10-close-v2` | Contracts, pathways, stamps, readiness, report, obligations, commit |
 
-## Ownership
+## Roles, models, and limits
 
-`tools/models.mjs` owns model IDs, runners, stage-selectable profiles, and
-judge-lineup resolution. Step 2's partitioning Alpha runs on `gpt-5.6-terra`
-at `high` reasoning effort.
-`tools/dispatch.mjs` owns role caps, effort, web access, sandbox enforcement,
-provider isolation, session handling, and output capture. The current judge
-lineup is the singleton `gpt-5.6-terra` lane. Following GPT-5.4's retirement
-from Codex with ChatGPT sign-in, ordinary agentic and secondary lanes use
-`gpt-5.6-terra`; Step-6 readers and refuters, Step-7 group readers, and
-Step-9/10 agent dispatches use its `high` profile. Step-1 scaffolding and the
-Step-9 Lead Alpha (`step9-lead`) use `gpt-6-astra` at `medium`. Step-5
-authoring uses `gpt-5.6-sol` at `high`.
-Its brief and task distinguish scaffold strategies from completed arguments,
-require concrete witnesses and step-specific citation/contract evidence, and
-separate structural check results from unresolved mathematical obligations.
-Authoring receives a compact continuity reminder; checkpoints and source rereads
-remain required after compaction.
-Group Alpha
-review and adjudication use `gpt-5.6-sol` at `high`; Step-8 fatal adjudication
-remains on Sol at `xhigh`. Exhausted Step-8 final adjudication uses
-`gpt-6-astra` at `medium`.
+[tools/models.mjs](tools/models.mjs) owns model IDs and profiles;
+[tools/dispatch.mjs](tools/dispatch.mjs) owns role defaults, permissions,
+web access, sessions, and output capture. Stage profiles override role defaults.
 
-Usage or rate limits do not authorize changing these model assignments. Keep
-the configured lineup and report the provider blocker; any model substitution
-requires an explicit owner instruction.
+| Assignment | Configured model / effort |
+|---|---|
+| Step 1 scaffolding; Step 9 `step9-lead` | Astra / medium |
+| Step 5 authors and author recovery | Sol / high |
+| Group Alpha (`alpha`) | Sol / high |
+| Step 8 adjudication | Sol / xhigh |
+| Step 8 final adjudication | Astra / medium |
+| Step 2 partition; Step 3 `alpha-high` recheck; Step 6 readers/refuters; Step 7 group readers; other Step 9/10 agents | Terra / high |
+| Item judge | Terra / xhigh |
 
-| Role | Build responsibility | Evidence |
-|---|---|---|
-| Beta | Scaffold, source repair, and author its batch. | Manifests, coverage, contracts, authored files. |
-| Reader | Audit a foreign batch. | Report and structured findings. |
-| Refuter | Read-only review of reader-untouched and high/critical-risk items. | Scoped structured refutation. |
-| Group Alpha | Step-3 review/recheck, Step-6 decisions, Step-7 reading, and Step-8 adjudication for assigned batches. | Namespaced decisions/reports and exact adjudications. |
-| Lead Alpha | Step-6 cross-group closure, Step-9 scope work, and level receipts. | Cross-edge, scope, audit, and spine receipts. |
-| Special Alpha roles | Partition, narrower recheck/pathway work, fatal adjudication, or final read-only interpretation. | Stage-declared artifact. |
-| Tool stage | All disk-deterministic transition, routing, checking, receipt, stamp, report, and commit work. | Command result plus declared artifact. |
-| Judge | Frozen-text verdicts only. | Judge ledger, current context/item hashes, closure. |
+Other dispatches use their role defaults; for example, unprofiled Beta uses
+Terra xhigh. Consult the stage-selected profile, not a role name alone.
+Rate limits do not authorize a model change; substitution requires an owner
+instruction.
 
-`src/roles.mts` requires every agent dispatch to name a cognitive `job` and
-refuses mechanical jobs such as transition, coverage, gate running, retry
-arithmetic, or batching. The engine, not an agent, decides pending work,
-dispatches, gate outcomes, and stage transitions.
+Betas own their batches; readers audit another batch; refuters are read-only.
+Group Alphas resolve assigned findings; Lead Alpha handles cross-group work
+and receipts. Judges return frozen-text verdicts. Tools own mechanical work.
+Every agent dispatch must declare a supported mathematical/review `job`.
 
-## Engine and gate semantics
+Stage batch capacity is 27; group capacity is nine. Actual concurrency also
+obeys role slots and the configured global limit, currently **24** in
+`autopilot.config.json`. The judge sweep has a separate pool capped at 27.
+Whole-run writes and ordered snapshots/receipts are serial.
+Dispatch starts are staggered by three seconds; completion wakes the engine.
+Controls/external work use the configured 30-second polling fallback.
+Configured reports are every ten minutes. Supervisors also check every ten
+minutes and intervene only on blockers or repairs that fail to finish.
 
-A stage declares units, a result pattern, a plan, artifacts, and gates.
-Completion requires successful matching dispatches whose `covers` union contains
-every owed unit, every declared artifact exists, and the gates passed. An
-`ok:false`, malformed, unmatched, or artifact-less result covers nothing.
-`coversMap` only annotates compatible older/external results.
+Agents and judges currently compact at **200,000 total context tokens**.
+This is a trigger, not a hard ceiling. Read complete relevant arguments in
+bounded chunks. Writing agents checkpoint completed items in assigned notes;
+after compaction, reread current proofs, dependencies, sources, and open
+obligations. Read-only roles reread their supplied evidence and write no
+checkpoints.
 
-Disk is authoritative. `state.json` is an atomically written cache of attempts,
-stage timestamps, repair accounting, blockers, and pause state; completion is
-always recomputed from artifacts. `events.jsonl` is append-only history and
-`status.md` is the replaceable current report. `status` also observes eligible
-external dispatches rather than reporting only this process's children.
+Dispatch receipts retain observed input, cached input, output, request peaks,
+requests above 272k, and compactions. Cached input is part of input; missing
+telemetry is unavailable, not zero. These counters are not billing estimates.
+Logs retain bounded beginnings/ends with truncation markers.
 
-Verbose gate output is retained as a bounded head and tail in `events.jsonl`,
-preserving summaries and terminal diagnostics without allowing a per-item
-checker to add megabytes to one event.
+## Completion and checks
 
-Only two contiguous groups pipeline by unit:
+A stage clears only when successful matching results cover every unit,
+required artifacts exist, and its gates pass. Process exit alone is insufficient.
+The engine recomputes coverage from disk, adopts compatible live dispatches,
+and reconciles their eventual receipts.
+Legacy results may use `coversMap`; when no result declares coverage, the
+coverage helper falls back to a result count. Artifact and gate checks still apply.
 
-- `scaffold`: `3-review` → `3-fix` → `3-recheck`.
-- `read`: `5-author` → `6a-baseline` → `6a-read` → `6a-split` →
-  `6a-refute` → `6a-collect`.
+Only these stage groups overlap by batch:
 
-Before each pre-reader baseline, scoped precheck, rendering, provenance and
-strict contract checks run together. A failure returns the complete diagnostic
-set to that batch's Beta; the reader cannot start until all four pass and the
-baseline exists. An unchanged failed repair does not receive a fresh attempt.
+- `3-review → 3-fix → 3-recheck`
+- `5-author → 6a-baseline → 6a-read → 6a-split → 6a-refute → 6a-collect`
 
-The full Step-5 battery clears at the read-pipeline join before `6b-prepare`
-freezes the stabilized files. Step 6B runs as a separate barrier. Its Alphas
-independently review both the original reader/refuter obligations and additional
-`post-reader:<batch>:<id>` changes from join repairs. Original audit snapshots
-and findings remain intact. The full reviewed battery still gates 6B completion.
+A successor waits for its batch; group Alpha waits for its whole group.
+Whole-run gates wait for the pipeline to drain. Other stages are barriers.
+Before each reader baseline, the batch must pass precheck, render, provenance,
+and strict contract checks. Failures return together to its Beta.
 
-A unit can enter a pipeline successor after its own predecessor; a group Alpha
-waits for its full cohort. Every pipeline member's gates wait for the drained
-group and run once over the level. All other stages are barriers, so a later
-group never starts while an earlier group still has a dispatch in flight.
+The complete Step 5 checks pass before `6b-prepare` freezes stabilized files.
+Step 6B reviews original findings plus `post-reader:<batch>:<id>` changes
+from join repairs; original review evidence is preserved.
+Refutation covers reader-untouched and high/critical-risk items.
+Group Alpha must supply item-specific `risk_review` for every high/critical item.
 
-Concurrency is the minimum of stage capacity, optional global capacity, and the
-shared role capacity across a pipeline; the dispatcher enforces role slots too.
-Starts are staggered by three seconds by default. Child completion wakes the
-executor, and completed stage boundaries advance immediately. Polling remains
-the fallback for external processes and controls. The executor uses argv with
-`shell:false` and kills a timed-out dispatch process group after its grace
-period. It adopts a live external dispatch only when its run, result pattern,
-and covers match the current stage, then reconciles its eventual result into
-state.
+Checks cover plan/scope/splice consistency, dependencies, forward/external
+references, rendering, prose, sources, pathways, provenance, contracts,
+finite smoke tests, risk, boundaries, citation fidelity, and evidence liveness.
+Passing structural checks or finite tests does not prove mathematics.
 
-The run-level and batch widths are 27. Thus `1-scaffold`, `3-fix`, `5-author`,
-and the per-batch Step-6 baseline/read/split/refute/collect stages can expose
-all 27 independent batches without an engine-imposed second wave. Group work
-keeps the stricter three-batches-per-Alpha attention bound, so a 27-batch run
-admits at most nine groups and the Step-3, Step-6b, Step-7 reader, and Step-8
-group lanes are capped at nine. `7-judge` admits those nine readers plus its
-one sweep controller, while the sweep has its own 27-call Terra pool.
-Whole-level writers, snapshots, ledger mutators, receipts, and other ordering
-barriers remain serial because their lower caps are correctness constraints
-rather than throughput defaults.
+Source gates require harvest dispositions, fetched source evidence, live URLs,
+and result backing. Recover URLs before replacing sources. Missing full text
+blocks source closure; a source-scouting Beta handles work needing judgment.
 
-`src/spec.mts` rejects duplicate IDs, missing units/plan/pattern, invalid
-pattern resolvers, non-contiguous pipelines, or a pipelined stage lacking its
-role/cohort contract. Each stage needs nonempty gates or an explanatory
-`gatesWaived`; the terminal stage cannot waive. A gate with no argv, absent
-required inputs, an empty declared list, or unreadable/too-small liveness
-evidence fails. Gates run in order and collect every reachable failure. At Steps
-5 and 6B, the complete failure set drives one repair wave, with one writer per
-Alpha group when scopes are disjoint and a single writer for unscoped failures.
-Other stages retain their existing primary/advisory repair policy. Network-signature failures get one
-gate retry; an unchanged failed battery is not rerun until an event, altered
-dispatch directory, expired outage backoff, or explicit retry can change it.
+Splicing preserves an existing complete same-page inventory when a run
+manifest is empty; partial or missing inventories fail. Manifest items require
+explicit `deps` arrays, normalized mechanically when absent.
+Proof contracts recognize `deps`, `justified_by`, and `forward_refs`;
+forward references still require their own ordering/cycle checks.
 
-## Dispatch and preflight
+Snapshots track `pre-author → post-6b`, `post-6b → current`, and
+`post-step8 → Step 9`. Impact receipts account for downstream consumers.
+Every confirmed fatal requires one compatible row in
+`research/defect-ledger.jsonl`; Step 10 renders `DEFECT-LEDGER.md` and
+requires no open rows.
 
-Plans are typed argv, never shell strings. Before each primary or repair fan-out,
-`Executor.preflightPlan` resolves inputs, rejects unresolved identity
-placeholders and shell tool plans, checks the cognitive job, and runs the exact
-repository dispatcher with `--dry-run`. The dry run validates role selection,
-assembled prompt/task, output schema, and output path before a model attempt is
-spent.
-
-The engine supplies run, covers, unit, output artifact, and attempt number.
-`dispatch.mjs` atomically reserves an attempt-specific prompt/log/result suffix,
-keeps the unsuffixed names as latest-result compatibility paths, and limits
-structured output artifacts to `research/`. Read-only enforcement is role and
-runner specific; inspect it with:
-
-Dispatch stdout and stderr capture is bounded to the beginning and end of each
-stream. Long or noisy agent runs therefore retain startup metadata and final
-diagnostics without risking a V8 string-limit crash before their result receipt
-is written; an explicit marker records any omitted middle output.
-
-Every agent, including Step-8 `final-adjudicator`, uses a 200,000-token automatic
-compaction threshold counting total active context. Fresh and resumed dispatches use the same policy;
-the nominal model window is unchanged. Stateless judges also receive the setting.
-This is a trigger, not a hard request-size ceiling: a large tool result can
-overshoot it. Agents read bounded chunks without skipping required mathematics,
-checkpoint completed items in authorized artifacts, and reread the current proof,
-dependencies, source passages, and unresolved obligations after compaction.
-Read-only roles never write checkpoints; their durable inputs remain authoritative.
-
-Before deleting an isolated session home, the dispatcher extracts token counters
-into `token_usage`: dispatch input, cached-input (a subset of input), output,
-observed request count, peak request input, requests above 272k, and compactions.
-Resumed sessions subtract the earlier session baseline; repeated rate-limit token
-events are deduplicated. Missing telemetry is reported as unavailable, not zero.
-These observed counters do not establish actual billing or include unreported
-requests. No transcript is retained by this extraction.
+## Repairs and controls
 
 ```bash
-node tools/dispatch.mjs --check-read-only
+autopilot pause --state-dir .autopilot/RUN
+autopilot resume --state-dir .autopilot/RUN
+autopilot report --state-dir .autopilot/RUN
+autopilot retry --state-dir .autopilot/RUN
+autopilot retry --unit 3 --state-dir .autopilot/RUN
+autopilot stop --state-dir .autopilot/RUN
 ```
 
-`autopilot doctor --run <run>` verifies the live stage specification, flags
-against tools, generated brief/task availability, identity placeholders, output
-schemas, scope ledger, exact `--attempt` argv plumbing, current-run
-defect-ledger coverage, and configured judge-runner reachability. `start` runs
-this check unconditionally.
+- `pause`: stop new dispatches; active work continues.
+- `resume`: clear pause/stop marker. It does not launch a dead controller.
+- `retry`: re-arm failed/unfinished dispatches and unfinished repair budgets
+  after intervention; completed work remains covered. It cannot extend the
+  lifetime judge cap. `--unit` filters dispatch resets, but unfinished-stage
+  repair-budget resets are not unit-scoped.
+- `stop`: exit the controller, leaving active work available for adoption.
+- `skip --stage ID`: owner-only waiver of that stage's assurance.
 
-## Build gates and evidence
+To restart, stop the controller, verify it exited, then issue `resume` and
+`start --run RUN --state-dir .autopilot/RUN --detach`. Wait for resume to be
+consumed before sending retry: control.json holds one command, not a queue.
+Controller locking rejects duplicate starts.
 
-The scope ledger is checked repeatedly, so a promised page cannot disappear.
-`validate-plan.mjs` checks plan order/shape; splice verification keeps plan and
-batch manifests aligned. The drift reviewer may add a backward edge, reorder,
-mint a prerequisite pair, or rescope. The following `1-drift-apply` stage
-always runs `drift-apply.mjs`, mechanically repacking manifests and
-regenerating the scope ledger and task files from the reviewed spec before any
-Beta starts; even a same-scope edge or order edit is therefore materialized.
-For a deliberately resumed same-scope checkpoint, it instead preserves saved
-item arrays and batch identities while refreshing plan-owned metadata and the
-derived artifacts. A mint or rescope still refuses populated manifests because
-that scope change can detach or destroy saved Beta work.
-Ledger regeneration preserves the plan-time `--allow-in-run-dependencies`
-opt-in, so an explicitly approved earlier-prerequisite chain remains valid.
+Stage files hot-reload after validation; completed stage order cannot change.
+Configuration and imported model-registry changes require a controller restart.
+Prompts already supplied to agents do not change; task-template edits require
+regeneration for existing runs.
 
-At Step 4, an empty run page whose canonical plan inventory already exists
-entirely in `items/` is a reuse scope, not permission to erase that inventory.
-The splice tool copies the exact same-page plan entries into the manifest and
-records their reused count, so all later author, reader, judge, and coverage
-stages include the existing content. It still refuses a partial or missing-file
-inventory.
+Launch preflight validates the complete dispatch arguments before any repair
+group starts. Deterministic launch errors restore repair budgets.
+Stages require gates or an explicit `gatesWaived` explanation; terminal gates
+cannot be waived by the stage definition.
 
-Source gates require harvest dispositions, fetch-verification stamps, live URLs,
-and source backing for each authored result. URL recovery precedes replacement;
-only redundant dead backing may be retired automatically. A source problem that
-requires judgment routes to a source-scouting Beta.
+Failed dispatches stop at the stage/configured attempt limit (default config:
+three). Missing artifacts become bounded `stage-stalemate` repairs.
+Steps 5 and 6B repair all failures together, with three attempts per gate/item;
+other stages use their declared budgets. Mechanical fixes run first, then
+non-overlapping Alpha groups, or one reviewer for unknown ownership.
+Identical failures after a repair that changed no relevant inputs stop further
+calls. Final checks remain mandatory.
 
-The repository battery runs precheck, dependency, forward/external reference,
-render, prose, dependency-source, pathway, scope, and splice checks.
-`content-policy.mjs` checks manifest capacity before authoring and scoped item
-policy afterwards, including provenance and external-dependency records.
+Step 6 artifact recovery repairs inputs with empty coverage; the split/collect
+tool must still run. Refuter recovery must match its exact frozen scope.
+A repair hook reporting an external outage refunds its round and defaults to
+20-minute backoff. This does not guarantee that every failed provider dispatch
+is recognized as an outage; inspect its result and log.
 
-Proof-bearing items have per-batch contracts that merge before this fixed
-battery: strict proof contract, finite smoke, risk report, boundary audit,
-citation fidelity, and gate liveness. Finite smoke is a bounded counterexample
-search, never a general proof. Step 6 requires Alpha risk review, sends
-high/critical-risk and reader-untouched items to refutation, and verifies exact
-refuter scope coverage. Each 6b group Alpha must write complete, item-specific
-`risk_review` records for every high/critical item in its owned batches before
-the reviewed gate runs. If residue remains, the engine retains the gate's full
-failure output, charges every named item in the same battery, and repairs the
-set in parallel by owning Alpha group rather than revealing a truncated tail in
-serial waves.
+## Judgment and repair authority
 
-The strict proof-contract citation check recognises all three schema declaration
-routes: `deps`, `justified_by`, and `forward_refs`. Forward citations remain
-subject to the separate ordering and closure rules enforced by `fwdcheck`.
+Step 7 judges each item independently with the full item, direct-dependency
+interfaces, and A/B-pair interfaces. Sibling proofs are judged separately.
+Verdicts bind to item/model/context hashes. Old-model records or changed hashes
+do not cover current judgment. The sweep stops new launches on rate limits.
 
-Touch snapshots define `pre-author → post-6b`, `post-6b → current`, and
-`post-step8 → Step-9` impact windows. Impact receipts require dispositions for
-downstream consumers. `6d-close` freezes the Step-6 artifacts, routing,
-published-repair handoff, and ledger hashes.
+Step 7 group readers produce frozen digests. Step 8 starts fresh adjudicators
+from those digests and generated tasks. Every reader concern, cross-group alert,
+and judge rejection requires an owning-group disposition; page concerns cannot
+license unrelated item repairs.
 
-Every confirmed fatal has exactly one row in
-`research/defect-ledger.jsonl`; the ledger gate rejects missing, duplicate, or
-incompatible closure entries. Step 10 mechanically renders
-`research/DEFECT-LEDGER.md` and its terminal gate permits no open ledger row.
+Rejection outcomes are `confirmed_fatal`, `confirmed_nonfatal`, or
+`false_positive`. Only confirmed fatal findings authorize mathematical repair.
+Published-item repairs require their separate evidence and targeted verdict.
+Verify uncertain mathematics against authoritative sources before deciding.
 
-## Frozen judge lifecycle
+A licensed repair may add necessary supporting lemmas, registered before
+consumers in pages, manifests, contracts, and group scope. Their dependency
+chains must reach the licensed consumer. Each new lemma needs its first
+engine-managed judgment; this does not grant another consumer rejudge.
 
-The configured judge set is resolved only through `tools/models.mjs`. Every
-item receives one stateless, ephemeral xhigh call from each configured judge.
-The call contains the full target item, compact interfaces for direct
-dependencies, and compact statement/definition/example/remarks interfaces for
-the complete A/B pair; sibling proofs are judged only in their own calls. This
-retains pair-aware checking without repeatedly sending every sibling proof or
-accumulating earlier item turns. `judge-sweep.mjs` runs up to 27 Terra calls,
-stops launching work immediately on a usage/rate-limit signature, and resumes
-safely from the append-only hash-attested ledger. Codex JSON events supply real
-input, cached-input, and output token telemetry. Every scoped item needs a
-current verdict from the configured set; retained rows for unselected sets are
-evidence, not coverage.
+`8-preflight` closes integrity checks before rejudging and retains the original
+fatal repair authority. Frozen close stages do not inherit that edit authority.
+Repair tasks retain complete relevant diagnostics and evidence hashes.
+Unknown ownership gets one reviewer; repeated unchanged failures stop.
 
-When stamp verification needs pair-context hashes, `judge.mts` computes the
-requested set in one process and one corpus read. The shared context-hash pool
-also batches cache misses into chunks of at most 64 items, under its existing
-process cap. Failed chunks fall back to individual builds. Both paths use the
-same prompt builder and preserve exact hashes and per-item failure reporting.
+Each initially repaired item receives **one paid Terra rejudge**.
+Rejection goes to a fresh Astra final adjudicator, which accepts or independently
+repairs the item without another consumer judge call. A missing current verdict
+after that paid attempt requires intervention, not a second attempt.
+Final adjudicators resolve their frozen queues in order, recording exact-hash
+terminal resolutions. These are closure evidence, not judge pass stamps.
+`8-final` has no repair hook.
 
-Step-7 group Alphas still read their entire assigned groups against frozen text
-and emit schema-checked digests. Step 8 starts a fresh Sol adjudication from the
-mechanically rendered task and that durable digest; it does not replay the
-reader transcript. A failed digest gate rereads only the named bad groups.
-The initial Step-8 scope gate validates and routes reader warnings while allowing
-their dispositions to remain pending, because the owning group Alphas are the
-actors that write those dispositions. The strict scope gate runs again after
-adjudication and then requires every warning to have a valid owning-group answer.
-Write scope remains with the owning group, while cross-group discoveries become
-alerts requiring the owner's group disposition. Every reader concern and alert,
-not only judge rejections, is a mechanically checked Sol adjudication
-obligation. A reader warning confirmed fatal on exact pre-edit bytes licenses
-its owning Sol group adjudicator to repair the item.
-Owned-page concerns also route to their group for an explicit disposition.
-They cannot directly license an item repair; an unresolved page defect remains
-blocked until its actual scope and remedy are established.
-Unlicensed page warnings return to their owning group for scope review; they
-never dispatch the item judge against a nonexistent page-named item file.
+Step 9 reviews declined scope, judges the post-Step-8 mathematical changes,
+closes impact obligations, and applies current pass stamps. Any separately
+authorized mathematical review enters the same certification.
+Receipt review includes reused items and missing contracts; contract recovery
+requires reading the proof and passing the full checks, not editing mathematics.
+Generated judge stamps are excluded from the corresponding attestation hashes.
 
-Initial and final Step-8 adjudicators may author new lemmas for genuinely
-missing dependencies of a licensed fatal repair, including supporting lemma
-chains. Register them before their consumers on owned pages and in the batch
-manifest, proof contract, and Step-8 group scope. The guard permits these
-creations when the new lemma dependency chain reaches a licensed repaired
-consumer; unrelated creations and deletions remain prohibited. Each new lemma
-must receive normal coverage and its first targeted judgment. No fictitious
-prior rejection is required, and no extra rejudge of the consumer is licensed.
+## Final readiness and publication
 
-Step-8 adjudicators have web search enabled. Whenever their mathematics is
-uncertain, their task requires them to verify the point against original
-sources and record the exact source support before deciding or repairing it.
+Step 10 closes contracts, ledger, pathways, stamps, readiness, evidence, report,
+obligations, and commit in order. New content must remain draft.
+Reused published content may retain its status only if the same identity was
+published at the scope ledger's pinned `baseline_commit`, an ancestor of HEAD.
+Missing historical evidence blocks readiness.
 
-Each judge rejection has an exact item/model/context-hash outcome:
-`confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`. Only a confirmed
-fatal authorizes a Step-8 content edit; the other outcomes close without
-content, contract, impact, or judge changes. An obvious published-item error
-uses its separate evidence-bound repair path and needs a targeted current
-verdict.
+Readiness and report receipts bind to the protected tree; runtime directories
+named `.autopilot` or `.autopilot-*` are excluded. Do not edit protected files
+between readiness and close-out. The report agent reads only the reconciled
+evidence packet; tools render counts and the complete fatal ledger.
 
-Step-8 repair prompts carry complete diagnostic records relevant to their owner,
-including cross-owner references and ambiguous records. One shared evidence file
-retains the full battery output and assignment map; each prompt identifies its
-path and hash. Filtering prompt context never changes routing or whole-level gates.
-At Step-8 preflight and close, successful mechanical repairs are removed from
-cognitive assignments individually, even when another mechanical repair fails.
-Unknown ownership routes to one serial reviewer. Repeated identical failures
-after a repair that changed no corpus, contracts, decisions or tooling stop
-before another agent call. The complete final battery remains mandatory.
-When a detector supplies explicit ERROR records, repair ownership is extracted
-from those records; passing inventory rows do not create repair assignments.
-The shared evidence file still retains the complete detector output.
-Preflight envelopes retain validated original fatal adjudications bound to the
-pre-Step-8 baseline. A repaired item awaiting rejudge may have no live rejection
-tuple, but its original licence still permits completing the assigned repair.
-The later frozen close stage receives no such item-edit licence.
-
-`8-preflight` closes non-judge integrity before paid rejudgment. `8-rejudge`
-targets only items repaired by the initial Sol adjudicator. Each repaired item
-receives exactly one paid Terra rejudge. A Terra rejection routes directly to
-one fresh Final Adjudicator per affected group: an independent Astra agent at
-medium reasoning with web search enabled. It never returns to Sol and receives
-no further judge call. Its frozen queue is ordered, and the terminal recorder
-refuses item N until items 1 through N-1 have current exact-hash resolutions.
-For each item the FA follows the library's adopted conventions, verifies any
-unfamiliar mathematics against authoritative web sources, and either accepts
-the current Sol repair or makes and checks an independent final repair. The resulting
-exact-hash terminal resolution is closure evidence, not a fabricated judge
-verdict or pass stamp. A paid Terra rejudge that produces no current verdict
-remains an explicit owner/session intervention blocker rather than being retried.
-`8-final` has no repair hook, making post-budget currency failures visible.
-The terminal audit verifies each Final Adjudicator queue against its historical
-rows. Resealing an earlier item in a later queue does not erase evidence that an
-older queue ran in order; current hashes independently invalidate any later item
-whose mathematics or pair context actually changed.
-
-Step 9 extracts the exact post-Step-8 mathematical delta, judges and
-adjudicates it, then applies its stamps. The final stamp stage verifies every
-scoped item; a stamp records a current pass, not an adjudicated rejection.
-An explicitly scoped supervising review may accompany the Step-9 denial review
-in `research/<run>-step9-mathematical-review.task.md`. Its draft repairs enter
-the same exact delta certification; a blocking obligation remains open until
-that certification is verified. It grants no Step-8 repair or self-judging power.
-The generated `verification.judge` block is excluded from both the stamped
-item's attestation hash and any whole-source fallback used for a sibling's pair
-interface, so applying stamps cannot invalidate current judge or terminal
-resolution context.
-
-Every scaffold manifest item must carry an explicit `deps` array. Missing empty
-arrays are normalized mechanically at the Step-1/3 scaffold joins and again
-before the Step-9 receipt, so the whole-level audit does not spend an Alpha call
-repairing syntax; malformed dependency values remain hard errors.
-
-The Step-9 receipt reviewer reconciles proof-bearing manifest scope, including
-reused items, against batch contracts before attesting coverage. Missing contract
-evidence requires a full proof/interface read and the unchanged strict contract,
-risk, boundary and citation checks; this does not license mathematical edits.
-Receipt checks include exact-context verification and Step-8 terminal resolutions.
-
-## Repairs, outages, and controls
-
-A failed plan stops at its configured/stage attempt limit and becomes a
-labelled blocker. Gate repair hooks are bounded by `maxFixRounds`; Step 6 instead
-has three tries per named gate/item. Covered work with a missing artifact becomes
-the same bounded `stage-stalemate` failure.
-
-Steps 5 and 6B give each gate/carrier three repair attempts across batched waves.
-Identical diagnostics against unchanged corpus, contract and tooling inputs stop
-immediately after a no-op repair; changing a log or report cannot buy another
-model call. Mechanical repairs execute before cognitive assignments, and all
-remaining findings reach the same repair wave. The complete battery runs again
-after the wave; there is no weakened or cached final pass.
-
-Step-6 artifact-owner recovery dispatches declare empty coverage: they repair
-the malformed or missing reader/refuter/contract input, then the pending split
-or collect tool runs and alone covers the mechanical stage. This keeps a
-successful recovery result from stranding the stage with its output artifact
-still unmaterialized. Refuter recovery is pinned to the affected batch with a
-generated task: its `opened` set must equal the frozen `refuter_scope`, and any
-finding whose carrier is outside that set is treated as malformed routing data.
-This prevents a reader-repaired item from leaking into the untouched refuter
-lane and prevents an empty-coverage recovery dispatch from losing its batch.
-
-A repair hook performs a mechanical fix when one exists and otherwise dispatches
-the responsible cognitive role. Its full fan-out passes launch preflight before
-any sibling starts; a deterministic launch error restores the round/item budget.
-At the Step-1 join, a primary scaffold-policy failure is routed to its owning
-Beta before advisory source work, so mixed batteries cannot spend every repair
-round on later URL findings while leaving the original dependency defect open.
-An external outage refunds its round and schedules a 20-minute default backoff
-or a hook-supplied time, so an unavailable provider is not treated as failed
-mathematics.
-
-Controls are consumed from `.autopilot/control.json` rather than awaited:
-
-```bash
-autopilot pause
-autopilot resume
-autopilot report
-autopilot retry [--unit <unit>]
-autopilot skip --stage <stage-id>
-autopilot stop
-```
-
-`pause` blocks new dispatches but leaves active ones running. `stop` leaves
-active work and state available for later adoption. `retry` re-arms failed or
-unfinished lanes and unfinished repair accounting after intervention, but cannot
-extend the durable per-item judge-cycle cap. `skip` is an owner action that
-marks a stage complete and waives its assurance.
-
-An owner-requested Step-9 restart can be bound to the old controller PID in
-`research/<run>-step9-restart.json`. That controller holds before any Step-9
-dispatch; after it exits, a fresh controller continues with the saved evidence.
-
-## Step-10 boundary
-
-Step 10 serially closes terminal contracts/ledger, pathways, stamps, final
-readiness, reconciled evidence, protected-tree reporting, obligations, and the
-main-branch close-out commit. `publication-ready.mjs` requires new run content to
-remain `status: draft` and seals the final protected-tree hash. Reused pages/items
-may retain `published` only when the same identity was published at the exact
-`baseline_commit` pinned by initial scope-ledger creation and preserved on refresh.
-The commit must be an ancestor of HEAD; the receipt records and verifies it.
-Legacy runs require explicit historical-baseline recovery, never a date guess.
-Missing history fails closed for published files. This exception neither publishes new
-content nor waives mathematical, impact or coverage checks. Runtime state
-directories named `.autopilot` or `.autopilot-*` are excluded from both Step 10
-tree seals because their event and status files continue changing while the
-sealed content is verified.
-
-Final readiness performs one complete level-coverage scan. That scan includes
-configured-judge closure, so a second judge-only scan is not run.
-
-`step10-report.mjs evidence` reconciles readiness, judge/adjudication, defect,
-touch, and pathway artifacts into a hash-bound packet. The read-only reporting
-role can interpret only that packet; mechanical rendering supplies the factual
-counts and fatal rows. The report-integrity receipt stops any protected-tree
-mutation between readiness and close-out.
-
-`10-close-v2` calls `run-commit.mjs` on `main` and gates terminal obligations,
-integrity, readiness, and a clean tree. The command writes its successful result
-receipt before staging and includes it in the same commit, avoiding a
-receipt-only repair pass and second commit. It neither pushes nor changes
-`status:`.
-Only the owner may perform the personal final audit, deliberate
-`status: published` change, and push/deployment; engine completion is therefore
-`publishable pending owner approval`, never publication.
+`10-close-v2` calls `tools/run-commit.mjs` on main, includes its final receipt
+in the close-out commit, and requires clean-tree and terminal checks.
+It does not publish or push. Completion means **publishable pending owner
+approval**: the owner performs the personal audit, publication status changes,
+and push/deployment.
