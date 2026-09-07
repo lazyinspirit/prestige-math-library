@@ -279,7 +279,7 @@ records exactly where the line falls.
 | # | dropped | why | what would license it |
 |---|---|---|---|
 | 1 | **Hahn–Banach, the open mapping and closed graph theorems, Banach–Alaoglu, weak and weak\* topologies, reflexivity** | SEAMS §4 gives all of these to `functional-analysis`, which lands strictly **above** this track. They are unavailable, not merely unowned. | the `functional-analysis` block. Every proof route in this track was chosen to avoid them; §4 is the ledger of where that cost something. |
-| 2 | **Hilbert space theory**: orthonormal bases, the Riesz representation $H^*\cong H$, the projection theorem in the abstract | `functional-analysis` owns them and lands above. | as row 1. **Partial**: MT-23 needs *one* Hilbert-space fact, the orthogonal decomposition of $L^2$ along a closed subspace, and builds exactly that one by hand from the parallelogram law and a minimising sequence, scoped to $L^2(\mu)$ and named as such. See §D6. |
+| 2 | **Hilbert space theory**: orthonormal bases, the Riesz representation $H^*\cong H$, the projection theorem in the abstract | `functional-analysis` owns them and lands above. | as row 1. **Local exceptions only**: MT-21b proves the closed-subspace projection and compact-intertwiner facts it needs, scoped to $L^2(\mu)$; MT-23 reuses that projection interface for its mean theorem. Neither claims the abstract theory. See §D6. |
 | 3 | **The Fourier transform, Fourier series, Plancherel, the Riemann–Lebesgue lemma, Paley–Wiener** | SEAMS §4: `functional-analysis`, and it lands above. | the `functional-analysis` block. **Consequence recorded**: `rem-riesz-fischer` on the ‡ catalogue asserts "$L^2$ is isomorphic to $\ell^2$ through Fourier coefficients"; MT-14 proves the completeness half and **not** the Fourier half, and §7 says so. |
 | 4 | **Sobolev spaces, weak derivatives, distributions** | SEAMS §4: `pde` and `functional-analysis`. | those tracks. |
 | 5 | **Kolmogorov's extension theorem and infinite product measures; conditional expectation; martingales; weak convergence of measures and tightness; characteristic functions; the CLT** | SEAMS §4: `probability-theory`. | that track. **Partial**: MT-11 builds **finite** products, which is exactly what the remit assigns and exactly what `probability-theory` will need as its base case. The countably infinite product on $\{0,1\}^{\mathbb{N}}$ is used by MT-22 as an *example* built by hand from Carathéodory, not as a general theorem — see §D8. |
@@ -381,29 +381,34 @@ $\lVert\cdot\rVert_p$ a norm in the sense of the published
 and the (N1) axiom of the published definition fails, so the library would
 contain a "norm" that is not one.
 
-**D6. MT-23 builds the one Hilbert-space fact it needs, by hand, scoped to
-$L^2$.** Von Neumann's mean ergodic theorem is normally the statement that the
-$L^2$ averages converge to the orthogonal projection onto the invariant subspace,
-and orthogonal projection is `functional-analysis` vocabulary landing above this
-track. Two honest routes exist and this track takes the second:
+**D6. The two earlier $L^2$ interfaces are built by hand, never imported from
+functional analysis.**  Both the Chacon spectral criterion at MT-21b and von
+Neumann's mean theorem at MT-23 need that $L^2$ averages converge to the
+orthogonal projection onto a closed invariant subspace.  The abstract projection
+theorem is `functional-analysis` vocabulary landing above this track.  Two honest
+routes exist and this track takes the second:
 
 - prove Birkhoff first (Garsia's maximal-ergodic-theorem proof is *purely
   measure-theoretic* and uses no inner product at all) and deduce mean
   convergence in $L^1$ and $L^p$ from Birkhoff plus the Vitali convergence
   theorem of MT-10;
-- **and additionally** prove the $L^2$ statement in its classical form, building
-  the single fact it needs — a nonempty closed convex subset of $L^2(\mu)$ has a
-  unique element of least norm, hence $L^2 = M \oplus M^\perp$ for closed
-  subspaces $M$ — from the parallelogram law and completeness (Riesz–Fischer,
-  MT-14). That is three lemmas, all elementary, all stated about $L^2(\mu)$
-  specifically and never about an abstract Hilbert space.
+- **and additionally** prove the $L^2$ statement in its classical form at MT-21b:
+  a nonempty closed convex subset of $L^2(\mu)$ has a unique element of least norm,
+  hence $L^2=M\oplus M^\perp$ for closed subspaces $M$, from the parallelogram law
+  and completeness (Riesz--Fischer, MT-14).  The same local block proves the
+  bounded/compact square-integrable-kernel and finite-dimensional eigenspace steps
+  needed to turn a compact intertwiner into a unitary eigenfunction.  MT-23 consumes
+  the projection/averaging interface; it does not mint a second proof.  Every result
+  remains stated about $L^2(\mu)$ specifically and never about an abstract Hilbert
+  space.
 
-`functional-analysis` then re-proves the general Hilbert-space projection theorem
-and adds the agreement remark; §8 amendment 2 records that obligation. **If
-reversed** (i.e. if the $L^2$ statement is dropped): von Neumann's theorem
-disappears from a track whose remit names it, which the owner's rule forbids —
-"dropping an important result for want of a definition or lemma that could have
-been written is no longer a permitted disposition".
+`functional-analysis` later re-proves the general Hilbert-space projection and
+compact-operator theorems and adds the agreement remarks; §8 amendment 2 records
+that obligation. **If reversed** (i.e. if either local interface is dropped): the
+Chacon witness has no earlier spectral closure and von Neumann's theorem disappears
+from a track whose remit names it, which the owner's rule forbids — "dropping an
+important result for want of a definition or lemma that could have been written is
+no longer a permitted disposition".
 
 **D7. Radon–Nikodym is proved by the Hahn-decomposition exhaustion, not by von
 Neumann's Hilbert-space trick.** Von Neumann's proof is shorter and is the one
@@ -1160,7 +1165,7 @@ dispositioned as blocks, because SEAMS §4 assigns every one of them to another 
 | **Ch. 17** §17.1 — 17.1 Rem, **17.2 Prop (partitions of unity)** | `included` — MT-20's topological lemmas (well-definedness #32), checked against the published `cor-compact-hausdorff-partitions-of-unity` |
 | **Ch. 17** §§17.2–17.3 — **17.3 Thm (Riesz representation)**, 17.4 Ex (the Riemann integral as a positive functional), 17.5 Rem ($C_0$), **17.6 Prop (regularity)** | `included` — MT-20. Bass proves it for a **compact metric** $X$; MT-20 states the LCH version, so Bass is the special case and Folland ch. 7 is the general backing. 17.4 is MT-20's headline B-page example. |
 | **Ch. 17** §17.4 — 17.7 Prop (decomposition of a bounded functional), **17.8 Thm (signed Riesz representation)** | `included` — MT-20's bounded version, stated concretely per §8 seam 2 |
-| **Ch. 18** *Banach spaces*, **Ch. 19** *Hilbert spaces* | `out-of-scope` — SEAMS §4: `functional-analysis`; §2 rows 1–2. **Exception**: 19.2 *Subspaces* (the projection theorem) is the general form of the three $L^2$ lemmas MT-23 builds by hand (§D6), and §8 amendment 1b records the agreement that track owes. |
+| **Ch. 18** *Banach spaces*, **Ch. 19** *Hilbert spaces* | `out-of-scope` — SEAMS §4: `functional-analysis`; §2 rows 1–2. **Local exception**: 19.2 *Subspaces* is the general form of MT-21b's scoped $L^2$ projection lemma, which MT-23 reuses (§D6); §8 amendment 1b records the agreement the later track owes. |
 | **Ch. 20** *Topology* (§§20.1–20.14, incl. Tychonoff, Urysohn, Tietze, LCH, Stone–Čech, Ascoli–Arzelà, Stone–Weierstrass) | `already-published` — the entire published topology band, orders 243–287 (§1.3); this track cites and re-mints none of it |
 | **Ch. 21** *Probability* (§§21.1–21.12) | `out-of-scope` — `probability-theory`; §2 row 5. §21.4's strong law is MT-23's Birkhoff theorem specialised (§8 amendment 3d). |
 | **Ch. 22** *Harmonic functions*, **Ch. 23** *Sobolev spaces* | `out-of-scope` — SEAMS §4: `pde` (and the plane theory `complex-analysis`); §2 row 4 |
@@ -3049,8 +3054,8 @@ Hölder, and equivalent to the log-convexity of $p\mapsto\log\lVert f\rVert_p$.
 $\lVert f\rVert_p\to\lVert f\rVert_\infty$ as $p\to\infty$ whenever $f\in L^r$ for
 some $r<\infty$ (and the hypothesis is necessary). **The parallelogram law in
 $L^2$**: $\lVert f+g\rVert_2^2+\lVert f-g\rVert_2^2 = 2\lVert f\rVert_2^2+
-2\lVert g\rVert_2^2$ — proved here, cheap, and it is the single fact MT-23 builds
-its $L^2$ decomposition on (§D6).
+2\lVert g\rVert_2^2$ — proved here, cheap, and it is the local input to MT-21b's
+closed-subspace decomposition and MT-23's reuse of it (§D6).
 *The range $0<p<1$*, three items and no more: $\lVert\cdot\rVert_p$ is **not**
 subadditive; $d(f,g):=\int\lvert f-g\rvert^p d\mu$ **is** a complete translation-invariant
 metric; and the reverse inequality $\lVert f+g\rVert_p\ge\lVert f\rVert_p+
@@ -3795,43 +3800,251 @@ notion to refer to, without claiming to prove its value.
 
 ---
 
+## MT-21a. Measure-Preserving Systems and Mixing Criteria
+
+**Proposed A/B pair, inserted before recurrence (orders 288.0421/288.0422).**
+The slugs are `measure-preserving-systems-and-mixing-criteria` and
+`measure-preserving-systems-and-mixing-criteria-examples`; this is now a prose
+scaffold, not a declaration that either page or its items has already been
+harvested into a manifest.  It owns the common language needed by recurrence and
+by the Chacon construction.  Thus the stable identities below are **moved in
+concept** from the current recurrence batch inventory; a future manifest splice
+must move, rather than copy, their statements, dependency arrays, source rows and
+proof strategies.
+
+`requires`: MT-1--MT-4, MT-7--MT-8, MT-14, MT-17; concretely the already-earlier
+measure-space and measurable-map definitions, $\sigma$-finite $\pi$-system
+uniqueness, completion, simple approximation, monotone convergence, $L^p$ quotient
+and norm facts, finite-measure algebra approximation, and $L^2$ Cauchy--Schwarz.
+Neither recurrence, inducing, Kac, a later functional-analysis page, nor a recorded
+catalogue remark is a prerequisite.
+
+**A inventory, in proof order (18 moved stable IDs).**
+
+1. `def-measure-preserving-transformation-and-system`
+2. `def-invertible-measure-preserving-system`
+3. `thm-measure-preservation-on-a-generating-pi-system`
+4. `prop-measure-preserving-compositions-iterates-and-completions`
+5. `thm-integrals-are-invariant-under-measure-preserving-maps`
+6. `def-koopman-operator-on-l-p`
+7. `thm-koopman-operator-is-a-linear-isometry-on-l-p`
+8. `def-strict-and-mod-null-invariant-sigma-algebras`
+9. `prop-invariant-families-are-sigma-algebras`
+10. `lem-mod-null-invariant-sets-have-strictly-invariant-representatives`
+11. `def-ergodic-measure-preserving-system`
+12. `thm-ergodicity-and-invariant-functions`
+13. `prop-ergodic-positive-sets-sweep-out-almost-every-point`
+14. `def-strong-and-weak-mixing`
+15. `thm-mixing-implies-weak-mixing-implies-ergodicity`
+16. `lem-finite-measure-sets-are-approximable-by-a-generating-algebra`
+17. `thm-mixing-is-checkable-on-a-generating-pi-system`
+18. `prop-mixing-correlations-extend-to-l-two`
+
+The direct predecessor interfaces are part of the move: in particular items 3, 5,
+7, 10, 12, 15, 17 and 18 retain the exact dependency arrays recorded in
+`frontier-34-batch-1.pages.json`; no weaker finite-dimensional projection theorem
+may be substituted for the last item's $L^2$ approximation argument.  The proof
+order is material: the absolute value stays **inside** the weak-mixing Ces\`aro
+mean, and the $L^2$ correlation formulation follows the set formulation rather
+than redefining it.
+
+**B inventory, in proof order (three new stable IDs).**
+
+1. `ex-two-point-preserving-permutation` — compute preservation directly from
+   `def-measure-preserving-transformation-and-system`.
+2. `cex-identity-on-two-points-is-not-ergodic` — exhibit a nontrivial invariant
+   set and depend on `def-ergodic-measure-preserving-system`.
+3. `ex-koopman-on-a-finite-probability-space` — calculate the pullback matrix and
+   verify its isometry using `def-koopman-operator-on-l-p` and
+   `thm-koopman-operator-is-a-linear-isometry-on-l-p`.
+
+These B items illustrate only this A page.  They do not prove a spectral criterion,
+do not supply Chacon, and must not be made a back edge from the next A page.
+
+**Source locators and boundaries.**  Read Einsiedler--Ward (E--W), §2.1,
+pp.13--16 (preservation, pullback integrals and Koopman); Proposition 2.14,
+pp.23--25 (strict/mod-null invariance and ergodicity); §§2.4 and 2.7,
+pp.28--29 and 49--53 (Koopman and mixing); and Sarig, Propositions 1.1--1.3,
+pp.5--7.  The generating-$\pi$-system test retains its increasing finite-measure
+exhaustion hypothesis; preservation always means inverse-image preservation; and
+ergodicity is a property of $(T,\mu)$.  This pair stops at the implication chain
+and its $L^2$ reformulation.  It does **not** assert either converse, invoke Fourier
+analysis, give an abstract Hilbert projection theorem, or construct a rank-one map.
+
+---
+
+## MT-21b. Weak Mixing and the Chacon Transformation
+
+**Proposed A/B pair, inserted after MT-21a and before recurrence (orders
+288.0423/288.0424).**  The slugs are `weak-mixing-and-the-chacon-transformation`
+and `weak-mixing-and-the-chacon-transformation-examples`.  This pair is the only
+intended earlier supplier for the retained false statement
+`fs-weak-mixing-implies-strong-mixing`; it is deliberately a proof obligation,
+not a claim that the currently missing Chacon item exists.
+
+`requires`: MT-21a A and B; MT-11's product measure/Fubini material; MT-14's
+Riesz--Fischer completeness and parallelogram law; the earlier Lebesgue measure and
+regularity pages; and the elementary finite-dimensional complex eigenvalue result.
+It must build the listed $L^2$ facts locally, before using them.  It may not depend
+on the later `hilbert-space-geometry-and-riesz-representation` (288.071), later
+`compact-operators-and-riesz-schauder-theory` (288.075), the finite-dimensional
+published nearest-point theorem, `rem-compact-operators`, recurrence, or a deferred
+catalogue page.
+
+The spectral equivalence is scoped to completed **Lebesgue probability spaces**
+(the setting of the rank-one construction), not asserted here as a source-free
+general theorem for an arbitrary probability algebra.  The absolute-Ces\`aro
+definition from MT-21a remains the library definition; the local criterion must
+prove its equivalence in this stated setting.
+
+**A inventory, in proof order (17 IDs).**
+
+1. `def-unitary-eigenfunction-for-a-probability-system`
+2. `lem-closed-l-two-subspaces-have-orthogonal-projections`
+3. `lem-hilbert-cesaro-averages-converge-to-the-fixed-subspace`
+4. `lem-square-integrable-kernels-define-bounded-compact-integral-operators`
+5. `lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner`
+6. `lem-nonzero-positive-compact-operators-have-positive-finite-dimensional-eigenspaces`
+7. `lem-compact-intertwiners-produce-finite-dimensional-invariant-subspaces`
+8. `lem-nonzero-finite-dimensional-complex-invariant-subspaces-have-unitary-eigenvectors`
+9. `thm-weak-mixing-is-equivalent-to-absence-of-nonconstant-eigenfunctions`
+10. `def-chacon-three-cut-one-spacer-towers`
+11. `lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets`
+12. `lem-chacon-levels-approximate-measurable-sets`
+13. `thm-chacon-transformation-is-ergodic`
+14. `lem-chacon-eigenfunctions-are-constant`
+15. `lem-chacon-tower-height-correlations-obstruct-mixing`
+16. `thm-chacon-transformation-is-weakly-mixing-but-not-mixing`
+17. `fs-weak-mixing-implies-strong-mixing`
+
+Items 2--8 are non-optional local closure, not decorative names.  Item 2 proves the
+nearest-point/projection result for a **closed subspace of $L^2(\mu)$**, from
+Riesz--Fischer and the parallelogram-law minimizing-sequence argument.  Item 3 then
+identifies the Ces\`aro limit for a unitary pullback.  Item 4 proves, from the
+square-integrable kernel estimate and finite-rank-kernel approximation, that the
+relevant integral operator is bounded and compact; item 5 proves the intertwining
+identity.  A nonzero compact operator need not itself have a nonzero eigenvalue:
+item 6 must apply the compact self-adjoint argument to $K^*K$ and produce a positive
+nonzero finite-dimensional eigenspace.  Item 7 proves that this eigenspace is
+unitary-invariant, and item 8 supplies an eigenvector for the unitary restriction.
+Only after those steps may item 9 convert ``no nonconstant complex
+$L^2$ eigenfunction'' into the **absolute-Ces\`aro** definition in item 14 of
+MT-21a.  A proof that states only the usual non-absolute or product-ergodicity
+version has not supplied this interface.
+
+For items 9--15 use the three-cut, one-spacer rank-one construction on the unit
+interval: $h_0=1$ and $h_{r+1}=3h_r+1$, hence
+$h_r=(3^{r+1}-1)/2$.  The partial level maps are compatible on the union of the
+towers; their domain and range complements have Lebesgue measure zero, so the
+result is an invertible probability-preserving transformation **modulo null sets**,
+not an everywhere-defined interval bijection.  Tower levels must approximate all
+measurable sets in measure before they are used for ergodicity or correlations.
+The eigenfunction argument must prove constancy, and the obstruction item must give
+a measurable set and a tower-height subsequence whose correlations do not tend to
+the product.  The final theorem depends on both, and item 17 depends on that final
+theorem rather than repeating or hiding the witness.
+
+**B inventory, in proof order.**
+
+1. `ex-first-three-chacon-tower-heights`
+2. `ex-chacon-spacer-measure-budget`
+3. `cex-chacon-correlation-subsequence-prevents-mixing`
+
+The first checks $1,4,13$ (and the recurrence $h_{r+1}=3h_r+1$); the second checks
+that the discarded/spacer budget tends to zero in the chosen normalization; the
+third is the explicit correlation computation licensed by item 14.  None is a
+substitute for the spectral proof or a recurrence theorem.
+
+**Source locators and boundaries.**  Sarig, *Lecture Notes on Ergodic Theory*,
+Definition 3.5 and Theorem 3.2, pp.91--92, and Problems 3.8--3.10, pp.99--101,
+give the spectral convention and Chacon construction/problem route.  Katok--
+Thouvenot, *Spectral Properties and Combinatorial Constructions in Ergodic Theory*,
+§5.2.3, printed pp.696--697 (PDF pp.48--49), gives the cutting-and-stacking and
+Theorem 5.12 proof paragraph.  These locators support the construction and the
+eigenfunction/correlation arguments; they do not erase the local proof interfaces
+in items 2--9.  The pair neither claims strong mixing nor invokes a later abstract
+spectral theorem.  Its source harvest and complete transitive dependency audit
+remain required before it is emitted as a manifest supplier.
+
+---
+
 ## MT-22. Measure-Preserving Transformations and Poincaré Recurrence
 
-`requires`: MT-8, MT-2, MT-4, MT-17, MT-3, `compactness`,
+`requires`: MT-21a, MT-21b, MT-8, MT-2, MT-4, MT-17, MT-3, `compactness`,
 `the-topology-of-euclidean-space`, `sequences-and-limits`
 
-**DEFS.** A **measure-preserving transformation** $T$ of $(X,\mathcal{A},\mu)$
-($T^{-1}\mathcal{A}\subseteq\mathcal{A}$ and $\mu(T^{-1}E)=\mu(E)$); a
-**measure-preserving system**; **invertible** and **non-invertible** systems; the
-**invariant $\sigma$-algebra** $\mathcal{I}:=\{E:T^{-1}E=E\}$ and its mod-null
-variant $\mathcal{I}':=\{E:\mu(T^{-1}E\triangle E)=0\}$ (well-definedness #35);
-**ergodic**; **(strongly) mixing** and **weakly mixing**; the **Koopman operator**
-$U_Tf:=f\circ T$; the **first-return time** $n_E$ and the **induced transformation**
-$T_E$.
+**Inventory boundary.**  MT-21a owns the 18 systems/mixing IDs above and MT-21b
+owns the Chacon witness and the stable
+`fs-weak-mixing-implies-strong-mixing`.  They are not redeclared here.  This pair
+begins with stable item 19 of the current batch A inventory, except that its former
+item 45 moves with the Chacon supplier; its B page retains its ten existing stable
+IDs in the exact order listed below.  The future manifest splice must move that
+material and leave the three A inventories disjoint.
 
-**THMS.** $T$ is measure preserving as soon as $\mu(T^{-1}P)=\mu(P)$ for every $P$ in
-a **$\pi$-system generating $\mathcal{A}$** with the $\sigma$-finiteness condition of
-MT-2's uniqueness theorem (**landmark** — this is what makes every example on the
-page checkable, and without it each verification is an uncountable computation).
-$U_T$ is a linear isometry of $L^p(\mu)$ for every $1\le p\le\infty$, and
-$\int f\circ T\,d\mu=\int f\,d\mu$ for $f\ge0$ measurable and for $f\in\mathcal{L}^1$
-(proved through simple functions). $\mathcal{I}$ and $\mathcal{I}'$ are
-$\sigma$-algebras, they are **different**, and **they define the same notion of
-ergodicity** (well-definedness #35, **landmark**; the literature uses both and a
-proof that cites the wrong one is a real defect — the bridge is that every
-$\mathcal{I}'$ set differs from an $\mathcal{I}$ set by a null set). $T$ is ergodic
-iff every $T$-invariant measurable $f$ is constant a.e. iff every $f$ with
-$f\circ T=f$ a.e. is constant a.e. **Poincaré recurrence** (**landmark**): if
+**A inventory, in proof order (30 retained stable IDs).**
+
+`lem-no-return-sets-have-null-preimage-towers`;
+`thm-poincare-recurrence-for-finite-measure-preserving-systems`;
+`cor-topological-poincare-recurrence-on-second-countable-spaces`;
+`def-first-return-time-and-induced-transformation`;
+`prop-first-return-time-and-induced-map-are-measurable`;
+`thm-induced-transformation-preserves-the-restricted-measure`;
+`prop-inducing-preserves-ergodicity`; `thm-kac-return-time-formula`;
+`thm-kac-integral-formula-for-excursions`; `def-circle-rotation-and-doubling-map`;
+`prop-circle-rotations-preserve-lebesgue-measure`;
+`lem-irrational-circle-orbits-are-dense`;
+`thm-circle-rotation-is-ergodic-iff-angle-is-irrational`;
+`prop-doubling-map-preserves-lebesgue-measure`;
+`thm-doubling-map-is-ergodic-for-lebesgue-measure`;
+`prop-doubling-map-is-strongly-mixing`;
+`def-binary-sequence-cylinders-and-fair-coin-content`;
+`lem-binary-sequence-space-is-compact-without-tychonoff`;
+`lem-fair-coin-cylinder-content-is-a-premeasure`;
+`thm-fair-coin-measure-on-binary-sequences`;
+`thm-fair-coin-one-sided-shift-is-measure-preserving-and-mixing`;
+`lem-continuous-functions-on-a-compact-metric-space-have-a-countable-dense-family`;
+`lem-borel-probability-sequences-on-compact-metric-spaces-have-integral-convergent-subsequences`;
+`thm-krylov-bogolyubov-for-nonempty-compact-metric-spaces`;
+`fs-measure-preserving-transformations-are-invertible`;
+`fs-ergodicity-implies-strong-mixing`;
+`fs-poincare-recurrence-without-finite-total-measure`;
+`fs-ergodicity-forces-only-empty-and-full-invariant-sets`;
+`fs-ergodicity-forces-every-orbit-dense`; and
+`fs-continuous-invariant-functions-characterize-measure-ergodicity`.
+
+**B inventory, in proof order (10 retained stable IDs).**
+
+`ex-rational-rotation-invariant-set`;
+`ex-doubling-dyadic-preimage-computation`;
+`ex-fair-coin-cylinder-measures-tabulated`;
+`ex-doubling-recurrence-to-a-dyadic-interval`;
+`ex-kac-mean-return-to-a-half-circle`;
+`cex-mod-null-invariance-is-not-strict-invariance`;
+`cex-doubling-ergodicity-depends-on-the-invariant-measure`;
+`cex-irrational-rotation-is-not-weakly-mixing`;
+`cex-kac-formula-needs-ergodicity`; and
+`ex-gauss-map-preserves-gauss-measure`.
+
+The retained circle/doubling/shift items depend on MT-21a's moved preservation,
+ergodicity, mixing and generator criteria; `cex-irrational-rotation-is-not-weakly-
+mixing` uses its $L^2$-correlation extension; and no retained item depends on a
+later functional-analysis supplier.  The recurrence-specific items depend only on
+the earlier systems material and the stated finite-measure/topological hypotheses.
+
+**DEFS.** The **first-return time** $n_E$ and the **induced transformation** $T_E$;
+all system, invariance, ergodicity, mixing and Koopman definitions are imported from
+MT-21a with their stable IDs.
+
+**THMS.** **Poincaré recurrence** (**landmark**): if
 $\mu(X)<\infty$ and $\mu(E)>0$ then $\mu$-a.e. point of $E$ satisfies $T^kx\in E$ for
 **infinitely many** $k\ge1$; the finiteness is necessary (translation on
 $\mathbb{R}$). The topological corollary on a second-countable space: a.e. point is
 recurrent. The induced transformation $T_E$ is measure preserving on $E$ for an
 ergodic $T$ (via recurrence, so $n_E<\infty$ a.e.). **Kac's formula** (**landmark**):
 for an ergodic $T$ on a probability space and $\mu(E)>0$,
-$\int_E n_E\,d\mu = 1$, so the mean return time to $E$ is $1/\mu(E)$. Mixing
-$\Rightarrow$ weakly mixing $\Rightarrow$ ergodic, with both converses false; and
-mixing is checkable on a generating $\pi$-system, which is again what makes the shift
-verifiable.
+$\int_E n_E\,d\mu = 1$, so the mean return time to $E$ is $1/\mu(E)$.  The mixing
+implication chain and its two false converses are supplied earlier by MT-21a and
+MT-21b; this page uses their generator criterion when it verifies the shift.
 **The Krylov–Bogolyubov existence theorem** (**landmark**; Royden–Fitzpatrick §22.4,
 added on the strength of the source harvest): a continuous map on a compact metric
 space has at least one invariant Borel probability measure — proved by taking a
@@ -3925,14 +4138,12 @@ ergodic and $\mu(X)<\infty$ then $A_nf\to\frac{1}{\mu(X)}\int f\,d\mu$ a.e. and 
 $L^1$ — the statement everything else cites. The $L^p$ mean ergodic theorem for
 $1\le p<\infty$, from Birkhoff plus Vitali.
 **Von Neumann's mean ergodic theorem in $L^2$** (**landmark**): $A_nf\to Pf$ in
-$L^2$, where $P$ is the orthogonal projection of $L^2(\mu)$ onto $M$ — with the three
-$L^2$ facts built **by hand and scoped to $L^2(\mu)$** (§D6, three items): the
-parallelogram law (MT-14), a nonempty closed convex $C\subseteq L^2$ has a unique
-element of least norm (a minimising sequence is Cauchy by the parallelogram law and
-converges by Riesz–Fischer), and hence $L^2=M\oplus M^\perp$ for a closed subspace
-$M$. Then the classical two-line argument: $M^\perp$ is the closure of
-$\{g-g\circ T\}$ and $A_n$ kills it. `functional-analysis` re-proves the general
-projection theorem and adds the agreement remark (§8 amendment 1b).
+$L^2$, where $P$ is the orthogonal projection of $L^2(\mu)$ onto $M$.  It consumes
+MT-21b's locally proved closed-subspace projection and Hilbert-Ces\`aro interfaces
+(§D6), which are scoped to $L^2(\mu)$ and not an imported abstract Hilbert theorem.
+Then the classical two-line argument says that $M^\perp$ is the closure of
+$\{g-g\circ T\}$ and $A_n$ kills it. `functional-analysis` later re-proves the
+general projection theorem and adds the agreement remark (§8 amendment 1b).
 **Unique ergodicity** (**landmark**): for a continuous $T$ on a compact metric $X$,
 $T$ has exactly one invariant Borel probability measure iff $A_nf\to\int f\,d\mu$
 **uniformly** for every $f\in C(X)$; and **the irrational rotation is uniquely

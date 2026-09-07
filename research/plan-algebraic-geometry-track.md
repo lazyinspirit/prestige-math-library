@@ -23,7 +23,8 @@ re-proving it. The last six pairs return to geometry through coherent sheaves,
 cohomology, divisors, smooth proper curves, Riemann--Roch, Serre duality, and
 blowups.
 
-There are **26 A/B pairs** (`AV-1`--`AV-26`). All mathematical-content rows
+There are **27 A/B pairs** (`AV-1`--`AV-26`, with the inserted prerequisite
+pair `AV-5a`). All mathematical-content rows
 state component provenance separately for statement and proof. Definitions and
 examples without a proof component use `not-applicable`; statements for which
 the future author must supply a proof use `literature-derived` or `ai-altered`
@@ -365,6 +366,105 @@ pp. 108--119.
 **Ownership trap.** Chain/height theorems, Noether normalization, and the
 algebraic proof of generic freeness are not AV items. The page turns them into
 geometric statements and cites the owning algebra pages.
+
+---
+
+## AV-5a. Algebraic differentials, separability, and smooth local presentations
+
+**Page identities and placement.** This prerequisite pair is
+`algebraic-differentials-separability-and-smooth-local-presentations` (A,
+proposed order 366.0581) and
+`algebraic-differentials-separability-and-smooth-local-presentations-examples`
+(B, proposed order 366.0582). It is placed immediately after the AV-5 B page
+and before AV-6. These are prose-scaffold placements only: this file does not
+reserve orders or alter the machine plan.
+
+**A-page role and exact boundary.** Supply the minimum algebraic field-change,
+Kähler-differential, separability, and local smooth-presentation machinery
+used by AV-6. The A page `requires`:
+`dimension-constructible-images-and-dimensions-of-fibres-examples`,
+`regular-local-rings-and-homological-dimension`,
+`flatness-and-faithful-flatness`, `tor-flatness-and-global-dimension`, and
+`algebraic-closure-embeddings-and-separability`. The B page requires this A
+page only and is a dependency leaf: none of its computations supplies a proof
+to AV-6. Later fibre products/base change (366.065), the broader K\"ahler
+differentials page (366.071), and smooth/étale morphisms (366.073) must
+reuse this earlier pair; they are not forward suppliers for it. Properness,
+global sheaves of differentials, formal completions, and étale applications
+remain later owners.
+
+**Source locators and proof boundary.** The authoritative check is the Stacks
+Project: Algebra Lemma 10.99.7, tag
+[00MK](https://stacks.math.columbia.edu/tag/00MK), for the required local
+flatness criterion; Lemmas 10.140.4--10.140.5, tags
+[00TU](https://stacks.math.columbia.edu/tag/00TU) and
+[00TV](https://stacks.math.columbia.edu/tag/00TV), for the separable-residue
+cotangent comparison and its regularity application; Definition 10.137.5 and
+Lemma 10.137.6, tags [00T6](https://stacks.math.columbia.edu/tag/00T6) and
+[00T7](https://stacks.math.columbia.edu/tag/00T7), for standard-smooth
+presentations; and Algebra \S\S10.131, 10.166 together with More on Algebra
+\S15.42 (tag [07BY](https://stacks.math.columbia.edu/tag/07BY)) for
+differentials and geometric regularity. Vakil, Chs. 23 and 25, pp. 473--566,
+is the independent full treatment. These are source locators, not unproved
+external dependencies: each listed A theorem needs its local proof and the
+explicit dependencies below.
+
+In particular, the proof of `lem-ag-local-flatness-regular-parameters` must
+prove the finite-**S**-module statement
+\(\operatorname{Tor}_1^R(R/\mathfrak m_R,M)=0\Rightarrow M\) is \(R\)-flat
+for a local map of Noetherian local rings \(R\to S\) and finite \(S\)-module
+\(M\); it may not silently impose that \(M\) is finite over \(R\). Its proof
+first propagates Tor vanishing to finite-length \(R\)-modules, then compares
+\(I\), \(\mathfrak m^n\), and \(I+\mathfrak m^n\); Artin--Rees and Krull
+intersection kill the remaining kernel inside arbitrarily high
+\(\mathfrak mS\)-powers of the finite \(S\)-module \(I\otimes_RM\). This is
+the route in 00MK. Lemma 10.99.15, tag
+[00MP](https://stacks.math.columbia.edu/tag/00MP), is explicitly **not** a
+substitute: it assumes \(M\) is already \(R\)-flat before concluding
+\(S\)-flatness, so it cannot establish the missing flatness step.
+
+### Proposed A-page inventory (21 items, proof order)
+
+| id | kind | statement and proof obligation | explicit dependencies | statement provenance | proof provenance |
+|---|---|---|---|---|---|
+| `def-ag-universal-algebraic-differentials` | def | Define \(\Omega_{B/A}\) from symbols \(db\), modulo additivity, Leibniz, and \(d(a)=0\) for \(a\in A\). | `def-commutative-ring`, `def-left-and-right-modules` | literature-derived | not-applicable |
+| `lem-ag-differentials-universal-property` | lem | Prove \(\operatorname{Hom}_B(\Omega_{B/A},M)\cong\operatorname{Der}_A(B,M)\), naturally in \(M\). | `def-ag-universal-algebraic-differentials` | literature-derived | ai-altered |
+| `lem-ag-polynomial-quotient-differentials` | lem | For a polynomial quotient, identify \(\Omega\) with the free coordinate module modulo all \(df\), and prove the conormal right-exact sequence. | `lem-ag-differentials-universal-property`, `thm-right-exactness-of-tensor-products` | literature-derived | ai-altered |
+| `lem-ag-differentials-localization-base-change` | lem | Prove localization and genuine tensor base change for differentials; distinguish both from arbitrary algebra-map functoriality. | `lem-ag-polynomial-quotient-differentials`, `thm-localisation-of-modules-is-tensor-product`, `thm-coproduct-property-of-tensor-products-of-commutative-algebras` | literature-derived | ai-altered |
+| `lem-ag-differentials-transitivity` | lem | Prove \(C\otimes_B\Omega_{B/A}\to\Omega_{C/A}\to\Omega_{C/B}\to0\), stating that left injectivity is not automatic. | `lem-ag-differentials-universal-property`, `thm-right-exactness-of-tensor-products` | literature-derived | ai-altered |
+| `def-ag-separating-transcendence-basis` | def | Define a transcendence basis whose residual algebraic extension is finite separable. | `def-finitely-generated-field-extension`, `def-separable-elements-and-separable-extensions` | literature-derived | not-applicable |
+| `thm-ag-separating-transcendence-basis-perfect-field` | thm | Every finitely generated extension of a perfect field has a separating basis; prove the characteristic-\(p\) \(p\)-basis argument, not merely separability of algebraic extensions. | `def-ag-separating-transcendence-basis`, `thm-perfect-field-characterizations`, `cor-algebraic-extensions-of-perfect-fields-are-separable`, `thm-primitive-element-theorem-for-finite-separable-extensions` | literature-derived | ai-altered |
+| `thm-ag-field-differentials-separable-rank` | thm | For a separably generated field extension, show basis differentials form a basis of \(\Omega\); in characteristic zero towers, prove injectivity of the left transitivity map after scalar extension by extending derivations. | `thm-ag-separating-transcendence-basis-perfect-field`, `lem-ag-differentials-transitivity`, `lem-ag-differentials-localization-base-change`, `thm-primitive-element-theorem-for-finite-separable-extensions` | literature-derived | ai-altered |
+| `lem-ag-separable-residue-cotangent-sequence` | lem | At a closed point of a finite-type \(k\)-algebra with finite separable residue field, prove the precise sequence comparing \(\mathfrak m/\mathfrak m^2\) and \(\Omega\otimes\kappa\). | `thm-ag-field-differentials-separable-rank`, `lem-ag-polynomial-quotient-differentials`, `lem-ag-differentials-transitivity` | literature-derived | ai-altered |
+| `thm-ag-field-extension-of-schemes` | thm | Construct \(X_K\) by affine tensor products and gluing; verify scheme-theoretic fibres and repeated field-extension compatibility. | `thm-gluing-affine-schemes`, `thm-coproduct-property-of-tensor-products-of-commutative-algebras`, `thm-localisation-of-modules-is-tensor-product`, `thm-affine-scheme-ring-anti-equivalence` | literature-derived | ai-altered |
+| `def-ag-standard-smooth-algebra` | def | Define a localized polynomial quotient by \(c\) equations with an invertible \(c\times c\) Jacobian minor, including \(c=0\). | `lem-ag-polynomial-quotient-differentials` | literature-derived | not-applicable |
+| `lem-ag-local-flatness-regular-parameters` | lem | Prove the finite-\(S\)-module local flatness criterion above, then its regular-parameter application used by submersion; do not assume \(R\)-finiteness or pre-existing \(R\)-flatness. | `thm-long-exact-tor-sequence-in-the-left-module-variable`, `thm-flatness-criteria-by-injections-and-ideals`, `thm-artin-rees-lemma`, `thm-krull-intersection-theorem`, `lem-regular-local-quotient-by-parameter-is-regular`, `lem-regular-local-residue-field-koszul-resolution`, `def-koszul-complex-of-a-sequence-with-coefficients`, `thm-regular-sequences-give-acyclic-koszul-complexes`, `def-tor-by-resolving-the-right-module` | literature-derived | ai-altered |
+| `lem-ag-standard-smooth-flatness` | lem | Prove a standard smooth presentation is flat and finitely presented over its base using the preceding finite-\(S\)-module criterion. | `def-ag-standard-smooth-algebra`, `lem-ag-local-flatness-regular-parameters` | literature-derived | ai-altered |
+| `lem-ag-standard-smooth-regular-geometric-fibres` | lem | Show invertible minors persist after every field extension and prove regularity and the correct dimension of every local fibre ring. | `lem-ag-standard-smooth-flatness`, `lem-ag-separable-residue-cotangent-sequence`, `def-embedding-dimension-and-regular-local-ring`, `lem-regular-local-quotient-by-parameter-is-regular` | literature-derived | ai-altered |
+| `lem-ag-geometric-regularity-field-tests` | lem | Prove the finite purely inseparable-extension test, finite-type approximation, and faithfully flat descent of regularity actually needed here. | `thm-ag-field-extension-of-schemes`, `lem-ag-standard-smooth-regular-geometric-fibres`, `lem-ag-separable-residue-cotangent-sequence`, `thm-faithfully-flat-descent-of-flatness` | literature-derived | ai-altered |
+| `thm-ag-geometric-regularity-perfect-base` | thm | A regular finite-type algebra over a perfect field remains regular after every field extension. | `lem-ag-geometric-regularity-field-tests`, `thm-perfect-field-characterizations` | literature-derived | ai-altered |
+| `thm-ag-perfect-field-jacobian-regularity` | thm | Prove the closed-point Jacobian test over a perfect field with separable residue fields; extend local smooth charts to every point, establish openness, and include reduced component/density transfer. | `thm-ag-geometric-regularity-perfect-base`, `lem-ag-separable-residue-cotangent-sequence`, `thm-ag-separating-transcendence-basis-perfect-field`, `thm-generic-fibre-dimension`, `lem-dimension-finite-union-components` | literature-derived | ai-altered |
+| `lem-ag-geometrically-regular-fibres-local-presentation` | lem | Prove finite presentation plus flatness plus geometrically regular fibres yields local standard smooth presentations. The converse alone is inadequate. | `lem-ag-local-flatness-regular-parameters`, `lem-ag-standard-smooth-regular-geometric-fibres`, `lem-regular-local-regular-quotient-ideal-is-parameter-generated` | literature-derived | ai-altered |
+| `thm-ag-standard-smooth-geometric-regularity` | thm | Establish the local-presentation / finite-presentation-flat-geometrically-regular-fibre equivalence; over a field, identify it with geometric regularity. | `lem-ag-standard-smooth-flatness`, `lem-ag-standard-smooth-regular-geometric-fibres`, `lem-ag-geometrically-regular-fibres-local-presentation` | literature-derived | ai-altered |
+| `thm-ag-standard-smooth-base-change-composition` | thm | Prove arbitrary base-change and composition stability using tensor presentations and block Jacobian minors. | `def-ag-standard-smooth-algebra`, `thm-ag-field-extension-of-schemes`, `lem-ag-differentials-localization-base-change` | literature-derived | ai-altered |
+| `thm-ag-submersion-criterion-standard-smooth` | thm | Between smooth finite-type spaces at rational points, prove cotangent injectivity iff local smoothness; prove fibre-ideal generation, flatness, and fibre dimension. | `thm-ag-standard-smooth-geometric-regularity`, `lem-ag-local-flatness-regular-parameters`, `lem-regular-local-regular-quotient-ideal-is-parameter-generated`, `lem-regular-local-quotient-by-parameter-is-regular`, `thm-generic-fibre-dimension` | literature-derived | ai-altered |
+
+### Proposed B-page inventory (7 dependency leaves, proof order)
+
+| id | kind | statement and purpose | explicit A-only dependencies | statement provenance | proof provenance |
+|---|---|---|---|---|---|
+| `ex-ag-differentials-polynomial-and-hypersurface` | ex | Compute \(\Omega_{k[x,y]/(y^2-x^3)/k}\) and its hypersurface relation. | `lem-ag-polynomial-quotient-differentials` | literature-derived | not-applicable |
+| `cex-ag-differentials-arbitrary-map-is-not-base-change` | cex | Refute arbitrary-map base change: \(k[x]\to k\) kills \(dx\). | `lem-ag-differentials-localization-base-change` | literature-derived | not-applicable |
+| `ex-ag-separable-and-inseparable-field-differentials` | ex | Compare a finite separable field algebra with \(k[t]/(t^p-a)\). | `thm-ag-field-differentials-separable-rank`, `lem-ag-polynomial-quotient-differentials` | literature-derived | not-applicable |
+| `ex-ag-standard-smooth-hypersurface-chart` | ex | Localize a hypersurface where one partial derivative is invertible. | `def-ag-standard-smooth-algebra`, `thm-ag-standard-smooth-geometric-regularity` | literature-derived | not-applicable |
+| `ex-ag-field-change-inseparable-thickening` | ex | After adjoining a \(p\)th root, obtain \(K[u]/(u^p)\). | `thm-ag-field-extension-of-schemes`, `lem-ag-polynomial-quotient-differentials` | literature-derived | not-applicable |
+| `cex-ag-regular-factors-product-not-regular` | cex | For nontrivial finite purely inseparable \(L/k\), show \(L\otimes_kL\) is nonreduced although both factors are fields. | `thm-ag-field-extension-of-schemes` | literature-derived | not-applicable |
+| `ex-ag-projection-submersion-parameters` | ex | For coordinate projection, verify independent pulled-back parameters, expected fibre dimension, and a standard smooth presentation. | `thm-ag-submersion-criterion-standard-smooth` | literature-derived | not-applicable |
+
+**Consumer seam.** AV-6 must require this B page (or an equivalent explicit
+backward path) before using any of the 21 A items. Until plan reconciliation
+makes that path real and proves its supplier closure, AV-6 remains blocked;
+the scaffold does not certify publication or replace a source-backed proof.
 
 ---
 
@@ -1670,7 +1770,7 @@ but no fixed pagination, so section/tag ranges are exact locators.
 |---|---|---|---|
 | V | Ravi Vakil, [*Foundations of Algebraic Geometry* / early author-hosted *Rising Sea* draft](https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf) | Ch. 3 §§3.1--3.7 pp. 59--80; Chs. 4--11 §§4.1--11.3 pp. 85--246; Chs. 12--20 §§12.1--20.8 pp. 249--430; Ch. 21 §§21.1--21.9 pp. 431--460; Ch. 23 §§23.1--23.5 pp. 473--499; Ch. 24 §§24.4--24.5 pp. 514--518; Chs. 25--27 §§25.1--27.6 pp. 519--579 | Full author-hosted scheme treatment. The PDF is a complete early public draft, not a publisher preview. |
 | M | J. S. Milne, [*Algebraic Geometry* v6.10](https://www.jmilne.org/math/CourseNotes/AG.pdf), with official [course-note supplements](https://www.jmilne.org/math/CourseNotes/ag.html) | Main Ch. 2 §§a--m pp. 36--58; Ch. 3 §§a--l pp. 59--80; Ch. 4 §§a--j pp. 81--99; Ch. 5 §§a--r pp. 100--129; Ch. 6 §§a--q pp. 130--160; Ch. 7 §§a--h pp. 161--175; Ch. 8 §§a--h pp. 176--197; Ch. 9 §§a--f pp. 198--220. AG10 §§a--p pp. 2--38; AG12 pp. 1--9; AG13 pp. 1--8; AG14 pp. 1--3 | Full author-hosted classical treatment plus scheme/divisor/coherent supplements; explicit author copyright and personal-copy permission. |
-| S | [The Stacks Project](https://stacks.math.columbia.edu/browse) | *Sheaves on Spaces* §§6.2--6.33; *Cohomology of Sheaves* §§20.2--20.15, 20.20, 20.30--20.31; *Schemes* §§26.2--26.24; *Constructions* §§27.2--27.21; *Properties* §§28.2--28.26; *Morphisms* §§29.2--29.45; *Cohomology of Schemes* §§30.2--30.19; *Divisors* §§31.13--31.36; *Varieties* §§33.2--33.44; *More on Morphisms* §§37.16--37.18; *Étale Morphisms* §§41.11--41.18; *Algebraic Curves* §§53.2--53.13 | Full open canonical scheme reference, read by stable chapter/section tags. |
+| S | [The Stacks Project](https://stacks.math.columbia.edu/browse) | *Algebra* §§10.99, 10.131, 10.137, 10.140, 10.166 (in particular tags 00MK, 00T6, 00T7, 00TU, 00TV); *Sheaves on Spaces* §§6.2--6.33; *Cohomology of Sheaves* §§20.2--20.15, 20.20, 20.30--20.31; *Schemes* §§26.2--26.24; *Constructions* §§27.2--27.21; *Properties* §§28.2--28.26; *Morphisms* §§29.2--29.45; *Cohomology of Schemes* §§30.2--30.19; *Divisors* §§31.13--31.36; *Varieties* §§33.2--33.44; *More on Morphisms* §§37.16--37.18; *Étale Morphisms* §§41.11--41.18; *Algebraic Curves* §§53.2--53.13 | Full open canonical scheme reference, read by stable chapter/section tags. |
 | GZ | Jiahui Gao and Shouwu Zhang, [*Lectures on Algebraic Geometry*](https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf) | Ch. 2 §§2.1--2.5 pp. 14--19; Ch. 3 §§3.1--3.8 pp. 20--38; Ch. 4 §§4.1--4.5 pp. 39--48; Ch. 5 §§5.1--5.6 pp. 49--63; Ch. 6 §§6.1--6.6 pp. 64--81; Ch. 7 §§7.1--7.5 pp. 82--93; Ch. 8 §§8.1--8.7 pp. 95--106 (harvested but mostly declined) | Complete author/institution-hosted scheme and curve treatment. |
 | A | Michael Artin, [MIT 18.721 *Introduction to Algebraic Geometry*](https://math.mit.edu/classes/18.721/ag-jul20.pdf) | Ch. 1 §§1.1--1.11 PDF pp. 4--35; Ch. 2 §§2.1--2.8 pp. 36--57; Ch. 3 §§3.1--3.6 pp. 58--79; Ch. 4 §§4.1--4.8 pp. 80--101; Ch. 5 §§5.1--5.8 pp. 102--119; Ch. 6 §§6.1--6.8 pp. 120--139; Ch. 7 §§7.1--7.8 pp. 140--159; Ch. 8 §§8.1--8.8 pp. 160--178 | Complete institutional classical-variety/curve course notes. |
 | F | William Fulton, [*Algebraic Curves*](https://www.math.lsa.umich.edu/~wfulton/CurveBook.pdf) | Ch. 4 §§4.1--4.4 pp. 43--52; Ch. 5 §§5.1--5.6 pp. 53--66; Ch. 6 §§6.1--6.6 pp. 67--80; Ch. 7 §§7.1--7.4 pp. 81--96; Ch. 8 §§8.1--8.6 pp. 97--112 | Complete curve-specific author-released electronic edition; this is the required concrete curve treatment. |
@@ -1708,6 +1808,7 @@ auditable without inference.
 | AV-3 | M Ch. 6 §§a--i pp. 130--146 | Ar Ch. 2 §§2.1--2.5 pp. 15--22 | A Ch. 3 §§3.1--3.2, 3.4 pp. 58--72 |
 | AV-4 | V Ch. 10 §§10.1--10.3 pp. 207--218; Ch. 17 §17.5 pp. 352--357 | A Ch. 3 §§3.3, 3.6 pp. 62--79 | B L3--4 pp. 6--13 |
 | AV-5 | M Ch. 5 §§j--m pp. 117--123; Ch. 9 §§a--c pp. 198--210 | Ar Ch. 4 §§4.1--4.3 pp. 30--33 | A Ch. 4 §§4.5--4.7 pp. 91--98; Ch. 5 §§5.4--5.8 pp. 108--119 |
+| AV-5a | S *Algebra* 10.99.7 (00MK), 10.131, 10.137.5--.6 (00T6/00T7), 10.140.4--.5 (00TU/00TV), 10.166; *More on Algebra* 15.42 (07BY) | V Ch. 23 §§23.1--23.5 pp. 473--499; Ch. 25 §§25.1--25.10 pp. 519--552 | M AG10 §§f--g pp. 16--21 and AG14 pp. 1--3; 00MP is recorded only as the excluded already-\(R\)-flat fibre criterion. |
 | AV-6 | M Ch. 4 §§a--j pp. 81--99 | Ar Ch. 5 §§5.1--5.4 pp. 34--40 | V Ch. 13 §§13.1--13.6 pp. 265--288 |
 | AV-7 | M Ch. 8 §§a--g pp. 176--194 | A Ch. 4 §§4.2--4.7 pp. 82--98 | V Ch. 10 §§10.5--10.6 pp. 222--230 |
 | AV-8 | F Ch. 5 §§5.1--5.6 pp. 53--66 | A Ch. 1 §§1.3--1.10 pp. 9--34 | B L15--16 pp. 35--40 |
@@ -1730,7 +1831,7 @@ auditable without inference.
 | AV-25 | V Ch. 27 §§27.1--27.6 pp. 567--579 | B L24--25 pp. 55--62 | F Ch. 8 §§8.4--8.6 pp. 104--112; GZ Ch. 7 §§7.4--7.5 pp. 89--93 |
 | AV-26 | V Ch. 19 §§19.1--19.4 pp. 379--395 | M Ch. 8 §h pp. 194--197 | B L9 pp. 23--25; S *Divisors* §§31.33--31.36, *More on Morphisms* §§37.16--37.18 |
 
-**Matrix result:** 26/26 rows have at least two independent full treatments;
+**Matrix result:** 27/27 rows have at least two independent full treatments;
 there are no dash cells and no pair propped up by a preview or passing mention.
 
 ## Convention audit
@@ -2241,18 +2342,18 @@ dispatch.
 | measurement | verified result | counting rule |
 |---|---:|---|
 | file-state before this lane | 0 proposed items | `research/plan-algebraic-geometry-track.md` did not exist on disk or in the tracked tree at preflight. |
-| file-state after this lane | 990 distinct proposed item ids | Count item-inventory rows whose first cell is an id beginning `def-`, `lem-`, `thm-`, `cor-`, `rem-`, `ex-`, or `cex-`; sort unique. There are 990 rows and 990 unique ids. |
-| A-page items | 748 | Same rule, restricted to A inventories. |
-| B-page dependency leaves | 242 | Same rule, restricted to B inventories. |
-| A/B pairs | 26 | Headings `AV-1` through `AV-26`, with no gap or duplicate. |
+| file-state after this lane | 1018 distinct proposed item ids | Count item-inventory rows whose first cell is an id beginning `def-`, `lem-`, `thm-`, `cor-`, `rem-`, `ex-`, or `cex-`; sort unique. There are 1018 rows and 1018 unique ids. |
+| A-page items | 769 | Same rule, restricted to A inventories. |
+| B-page dependency leaves | 249 | Same rule, restricted to B inventories. |
+| A/B pairs | 27 | Headings `AV-1` through `AV-26`, plus inserted `AV-5a`, with no duplicate. |
 | included heading dispositions | 266 | Table rows matching an exact `[included]` disposition in the canonical crosswalk. Duplicate headings in non-harvest verification sources are not double-counted; every one of these 266 rows names at least one actual proposed id. |
-| decomposition ratio | **990 / 266 = 3.72×** | Proposed item ids divided by included canonical heading dispositions. This denominator measures section-level source headings, not chapters and not repeated synonyms from every corroborating book. |
+| decomposition ratio | **1018 / 266 = 3.83×** | Proposed item ids divided by included canonical heading dispositions. This denominator measures section-level source headings, not chapters and not repeated synonyms from every corroborating book. |
 | largest A page | **AV-23, 36 items** | Actual inventory-row count, not its prose declaration. |
 | A pages over 60 | 0 | No split was required; splitting would have manufactured extra page boundaries. |
 | independent full treatments | 10 | V, M, S, GZ, A, F, B, T, Ar, K. Tong is excluded only from AV-25's duality cell, not from the corpus. |
 | independent full-source hosts | 9 | `math.stanford.edu`, `www.jmilne.org`, `stacks.math.columbia.edu`, `web.math.princeton.edu`, `math.mit.edu`, `www.math.lsa.umich.edu`, `ocw.mit.edu`, `www.math.u-bordeaux.fr`, `www.math.purdue.edu`. |
-| source-matrix coverage | 26/26 pairs with at least 2 treatments | Count of AV rows in the per-pair matrix; no dash cell. |
-| component-provenance coverage | 990/990 rows | 956 `literature-derived` statements with adapted or nonapplicable/not-supplied proofs, plus 34 `ai-generated` statements. All 34 generated statements are B-page leaves with `not-applicable` proof and no dependency use. |
+| source-matrix coverage | 27/27 pairs with at least 2 treatments | Count of AV rows in the per-pair matrix; no dash cell. |
+| component-provenance coverage | 1018/1018 rows | 984 `literature-derived` statements with adapted or nonapplicable/not-supplied proofs, plus 34 `ai-generated` statements. All 34 generated statements are B-page leaves with `not-applicable` proof and no dependency use. |
 | duplicate proposed ids | 0 | Sorted duplicate scan. |
 | collisions with live item filenames or any string in `plan-spec.json` | 0 | Exact-string comparison against both disk inventories. |
 | crosswalk references to nonexistent proposed ids | 0 | Exact comparison of every backticked item id on an `[included]` row against the 990 inventory ids. |

@@ -22,14 +22,16 @@ complexes, regular sequences, and depth belong to `commutative-algebra`.
 ## 0. Summary for the orchestrator
 
 **Track `homological-algebra`: the original seventeen-pair commission is complete;
+one prerequisite-repair pair is now additionally scaffolded;
 the owner-authorised 2026-09-07 shared enrichment is reviewed, with the combined
 consumer-track splice pending.**
 Sections HA-18–HA-24 below add shared foundations for the braid-group and
 symmetric-group representation scaffolds. They are future prose plans, not
 authored or certified mathematics. Historical statements about six empty
 placeholders describe the original commission, not current disk status.
-This file scaffolds seventeen A/B pairs where the live spec has six planned
-pairs, all six with empty `items` arrays. The expansion is mathematical rather
+This file scaffolds the original seventeen A/B pairs plus one narrowly scoped
+prerequisite-repair pair, where the live spec has six planned pairs, all six
+with empty `items` arrays. The expansion is mathematical rather
 than cosmetic: it keeps every A page at or below the owner's 60-item ceiling,
 separates constructions from comparison and universality proofs, and gives
 convergence hypotheses a page of their own.
@@ -49,6 +51,7 @@ convergence hypotheses a page of their own.
 | `HA-9` | `yoneda-extensions-and-homological-dimension` | split from `ext-and-tor` | 43 |
 | `HA-10` | `tor-flatness-and-global-dimension` | split from `ext-and-tor` | 39 |
 | `HA-11` | `universal-coefficients-and-kunneth-theorems` | new graduate continuation | 30 |
+| `HA-11a` | `kunneth-exactness-and-splittings-over-principal-ideal-domains` | prerequisite repair between HA-11 and HA-12 | 4 |
 | `HA-12` | `group-cohomology-as-a-derived-functor` | required seam to `group-theory` | 41 |
 | `HA-13` | `triangulated-categories` | new graduate continuation | 46 |
 | `HA-14` | `derived-categories` | new graduate continuation | 53 |
@@ -63,8 +66,9 @@ affected. The four kept planned ids retain their companions. Every new A page
 has the same-id `-examples` companion, and every B page is a leaf.
 
 **Owner-authorised 2026-08-14: APPLIED.** The two empty omnibus ids and their
-companions are retired, and the table above is the new HA-1--HA-17 order. No
-published page or immutable item id moves.
+companions are retired, and the table above is the HA-1--HA-17 order with the
+interposed HA-11a prerequisite repair. No published page or immutable item id
+moves.
 
 ### Full texts obtained and source corpus
 
@@ -114,7 +118,8 @@ least one with a harvestable contents list.
 
 Section §27 records all ten amendments owed: repoint the retained chain page
 to the finished abelian/exactness pages; retire the two empty omnibus page ids
-and splice the seventeen pairs; obtain stable tensor/flat/bimodule ids from
+and splice the original seventeen pairs plus the HA-11a prerequisite repair;
+obtain stable tensor/flat/bimodule ids from
 abstract algebra; use the fixed RT-1 group-algebra page, cite group theory's
 fixed `GT-9` extension page in `HA-17`, and hand the derived $H^n(G,M)$ ids to
 `GT-21`--`GT-23`; move `differential-geometry`'s anchor to the final companion
@@ -307,8 +312,13 @@ scope denial (§26), not a hidden hypothesis.
 
 ### 3.6 Page metadata boundary
 
-All seventeen A pages and their examples companions remain in the existing
-`category-theory` plan category used by the six empty homological-algebra
+All eighteen A pages and their examples companions remain in the existing
+order, but the internal construction order is non-negotiable. The operations
+that form an object precede the maps out of it; the maps precede comparison;
+comparison precedes independence; and independence precedes functoriality.
+This keeps a later theorem from becoming the hidden definition of an earlier
+one.
+This scaffold uses the `category-theory` plan category used by the six empty homological-algebra
 placeholders. The track name `homological-algebra` is an orchestration label,
 not a licence to invent a new schema category. A pages have layout `A`, their
 companions layout `B`, and only the A pages may be dependency targets.
@@ -355,6 +365,7 @@ A page and is a leaf.
 | `HA-9` | `ext-and-balanced-resolutions`, `projective-and-injective-resolutions`, `chain-conditions-and-semisimple-modules` |
 | `HA-10` | `ext-and-balanced-resolutions`, `yoneda-extensions-and-homological-dimension`, `tensor-products-of-modules`, `chain-conditions-and-semisimple-modules` |
 | `HA-11` | `tor-flatness-and-global-dimension`, `ext-and-balanced-resolutions`, `long-exact-sequences-in-homology` |
+| `HA-11a` | `universal-coefficients-and-kunneth-theorems` |
 | `HA-12` | `ext-and-balanced-resolutions`, `tor-flatness-and-global-dimension`, `the-group-algebra-and-representations` |
 | `HA-13` | `mapping-cones-cylinders-and-chain-triangles`, `long-exact-sequences-in-homology` |
 | `HA-14` | `triangulated-categories`, `derived-functors`, `yoneda-extensions-and-homological-dimension`, `tor-flatness-and-global-dimension` |
@@ -2320,6 +2331,182 @@ is built and its representative independence checked before exactness. The
 splitting proofs choose complements/lifts and are therefore isolated from the
 natural short exact sequences. The Künneth theorem must state boundedness or a
 local finiteness condition ensuring the chosen direct-sum totalisation.
+
+**Forward references: NONE.**
+
+---
+
+## HA-11a. Kunneth Exactness and Splittings over Principal Ideal Domains
+
+**page id** `kunneth-exactness-and-splittings-over-principal-ideal-domains`
+
+**placement** A 365.0581, after
+`universal-coefficients-and-kunneth-theorems-examples` (365.058) and before
+`group-cohomology-as-a-derived-functor` (365.059)
+
+**`requires`** `universal-coefficients-and-kunneth-theorems`
+
+This repair page supplies the arbitrary-PID local proof interface required by
+the later singular-cohomology Kunneth consumers. It does not replace or weaken
+the existing HA-11 theorem: the existing published splitting item is only
+stated for free abelian complexes, whereas this page proves the indicated
+sequence and existence of a section for nonnegative complexes of free modules
+over every PID. The point is not that the classical conclusion was doubtful;
+it is that the consumer needs a proof-bearing supplier with these exact
+hypotheses.
+
+Throughout this pair assume the Axiom of Choice, let $R$ be a commutative PID,
+and let $C,D$ be nonnegative chain complexes of free $R$-modules. The tensor
+total complex is the direct-sum totalisation with
+$d(c\otimes d)=d_Cc\otimes d+(-1)^{|c|}c\otimes d_Dd$. Thus each degree has a
+finite diagonal, all displayed indices are nonnegative, and an empty sum is
+zero. `Tor` means the balanced $\operatorname{Tor}^R_1$ in the order fixed by
+HA-10 (the PID is commutative, so the displayed symmetry is legitimate).
+
+### A-page items, in dependency order
+
+1. `lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces` —
+   **lemma** `[LA]`.
+   **Dependencies:**
+   `lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free`,
+   `thm-free-modules-are-projective-with-choice-boundary`,
+   `lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid`.
+   For every $n$, choose a section of the epimorphism
+   $C_n\twoheadrightarrow B_{n-1}C$. It gives
+   $C_n\cong Z_nC\oplus B_{n-1}C$, and in these coordinates the actual
+   differential is $(z,b)\mapsto b\in Z_{n-1}C$, via the inclusion
+   $B_{n-1}C\hookrightarrow Z_{n-1}C$. Record the zero-differential
+   cycle/boundary complexes and the two-term free presentations
+   $B_nC\hookrightarrow Z_nC\twoheadrightarrow H_nC$ (and similarly for
+   $D$). The lemma must not claim that $B_nC$ is a direct summand of $Z_nC$:
+   that is neither needed nor generally true.
+
+2. `lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel` —
+   **lemma** `[LA]`.
+   **Dependencies:**
+   `lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces`,
+   `def-balanced-tor-bifunctor`,
+   `def-tensor-product-total-complex-of-chain-complexes`,
+   `lem-the-kunneth-tor-map`.
+   Tensor the cycle-boundary presentation of one complex with the other and
+   take its homology long exact sequence. Compute, degree by degree, that the
+   connecting morphism is induced by
+   $B_pC\hookrightarrow Z_pC$ (with the total-complex sign written before
+   reindexing), and that its kernel and cokernel are respectively
+   $\operatorname{Tor}^R_1(H_pC,H_qD)$ and $H_pC\otimes_RH_qD$. Match the
+   quotient with the already-defined natural Tor map and the injection with
+   the cycle-tensor cross product; do not identify an abstract isomorphic map
+   as the existing interface without this check.
+
+3. `thm-pid-kunneth-exactness-from-cycle-boundary-presentations` —
+   **theorem** `[LA]`.
+   **Dependencies:**
+   `lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel`,
+   `lem-the-kunneth-cross-product-map-is-well-defined-and-natural`,
+   `lem-the-kunneth-tor-map`.
+   For every $n\geq0$, prove locally the natural short exact sequence
+   \[
+   0\longrightarrow\bigoplus_{p+q=n}H_p(C)\otimes_RH_q(D)
+   \longrightarrow H_n(C\otimes_RD)
+   \longrightarrow\bigoplus_{p+q=n-1}\operatorname{Tor}^R_1(H_p(C),H_q(D))
+   \longrightarrow0.
+   \]
+   The left arrow is $[z]\otimes[w]\mapsto[z\otimes w]$ and the right arrow
+   is the established Tor quotient. Prove exactness by the kernel/cokernel
+   calculation in item 2, including the identification of the kernel of that
+   quotient with the image of this particular cross product. The proof may not
+   appeal to `thm-kunneth-theorem-for-free-complexes-over-a-pid`, since that
+   would leave the required local proof interface unbuilt. Naturality is in
+   chain maps of both complexes; it belongs to this exact sequence, not to a
+   subsequently chosen decomposition.
+
+4. `thm-pid-kunneth-splitting-from-cycle-boundary-presentations` —
+   **theorem** `[LA]`.
+   **Dependencies:**
+   `thm-pid-kunneth-exactness-from-cycle-boundary-presentations`,
+   `lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces`.
+   From the selected degreewise retractions $C_n\twoheadrightarrow Z_nC$ and
+   $D_n\twoheadrightarrow Z_nD$, form chain maps
+   $\pi_C:C\to H(C)$ and $\pi_D:D\to H(D)$ by passing a projected cycle to
+   its homology class. The induced map on $H_n(C\otimes_RD)$ retracts the
+   tensor cross-product injection. Its kernel therefore maps isomorphically to
+   the Tor quotient of item 3, whose inverse supplies an $R$-linear section.
+   Check both composites explicitly. The section depends on the chosen
+   retractions, so this theorem asserts existence after choices and no natural
+   choice. It does **not** claim that no natural splitting can exist in every
+   restricted situation; that stronger negative statement needs its own
+   naturality-obstruction witness.
+
+### B page — `kunneth-exactness-and-splittings-over-principal-ideal-domains-examples`
+
+**placement** B 365.0582, companion to HA-11a
+
+**`requires`** `kunneth-exactness-and-splittings-over-principal-ideal-domains`
+
+1. `ex-pid-polynomial-ring-kunneth-tor-class` — **example** `[AA]`.
+   **Dependencies:**
+   `thm-pid-kunneth-exactness-from-cycle-boundary-presentations`,
+   `thm-pid-kunneth-splitting-from-cycle-boundary-presentations`.
+   Let $R=k[t]$ and take $C=D=(R\xrightarrow{t}R)$ in degrees $1,0$. Compute
+   $H_0(C\otimes_RD)\cong R/(t)$,
+   $H_1(C\otimes_RD)\cong R/(t)$, and $H_2(C\otimes_RD)=0$. In degree one,
+   the cycle $e_1\otimes e_0-e_0\otimes e_1$ represents the Tor class and
+   its image under the quotient is the generator of
+   $\operatorname{Tor}^R_1(R/(t),R/(t))\cong R/(t)$. This is a genuinely
+   non-$\mathbb Z$ PID calculation and checks the sign convention.
+
+2. `ex-pid-kunneth-over-a-field-has-no-tor-correction` — **example** `[AA]`.
+   **Dependencies:**
+   `thm-pid-kunneth-exactness-from-cycle-boundary-presentations`,
+   `prop-modules-over-a-field-are-projective-flat-and-injective`.
+   For two explicitly displayed zero-differential complexes supported in
+   degrees $0$ and $1$, list every tensor generator in degrees $0,1,2$ and
+   identify it with its homology class. Since every field module is flat,
+   every Tor quotient is zero and the cross-product map is the resulting
+   natural isomorphism. This example must distinguish the natural isomorphism
+   caused by vanishing Tor from the noncanonical splitting in item 4.
+
+### Sources and exact locators
+
+- **Tammo tom Dieck, _Algebraic Topology_, §11.10, Theorem 11.10.1 and proof,
+  printed pp. 310–311.** The full proof uses the cycle and boundary complexes,
+  identifies the long-exact-sequence kernel/cokernel with the Tor and tensor
+  terms, and constructs the retraction from chosen cycle retractions.
+- **Greg Friedman, _Singular Intersection Homology_, §6.4.5 “Algebra of the
+  algebraic Kunneth theorem”, printed pp. 314–319, especially (6.11)–(6.13)
+  and “Splitting” on pp. 317–318.** Independent full treatment of the same
+  decomposition, signs, Tor presentation, and choice-dependent projection
+  (in the stated projective/Dedekind setting, specialised here to free PID
+  modules).
+- **Charles A. Weibel, _An Introduction to Homological Algebra_, §3.6,
+  Theorems 3.6.1–3.6.3, printed pp. 87–88.** Confirms the classical sequence
+  and its scope, but is orientation only for this repair: the local proof
+  above must not cite it in place of the constructed arbitrary-PID interface.
+
+### Proof strategy and naturality boundary
+
+The first three items make the natural maps before selecting any complement.
+Choice is used precisely to obtain arbitrary-rank freeness/projectivity and
+the degreewise sections; it is not hidden in the exactness or naturality
+claim. The final theorem uses those sections only to build a retraction of the
+left-hand cross-product injection and hence a section of the Tor quotient.
+Consequently maps of complexes commute with the short exact sequence but need
+not commute with the chosen section. No chain-product, cochain-product, cup
+product, or topological Eilenberg--Zilber comparison is supplied here.
+
+### Consumer interface and scope boundary
+
+When materialised, the algebraic-topology page
+`singular-cohomology-and-coefficient-theorems` must add
+`kunneth-exactness-and-splittings-over-principal-ideal-domains` as a direct
+requirement while retaining its existing direct requirement
+`homology-axioms-degree-and-classical-applications-examples`. Its topological
+Kunneth exactness and splitting items then depend respectively on
+`thm-pid-kunneth-exactness-from-cycle-boundary-presentations` and
+`thm-pid-kunneth-splitting-from-cycle-boundary-presentations`. This pair
+supplies no Eilenberg--Zilber equivalence; the consumer's earlier specialised
+shuffle comparison remains its separate prerequisite, so no backward edge to
+AT-7 is introduced.
 
 **Forward references: NONE.**
 

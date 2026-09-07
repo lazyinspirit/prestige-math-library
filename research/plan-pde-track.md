@@ -9,7 +9,9 @@
 
 ## Summary for the orchestrator
 
-**Owned block.** Twenty-six A/B pairs are scaffolded, in this dependency order:
+**Owned block.** Twenty-seven A/B pairs are scaffolded, in this dependency
+order. `PDE-14F` is the Fourier--Sobolev bridge inserted between the stable
+PDE-14 and PDE-15 labels:
 
 | relative label | A page | subject |
 |---|---|---|
@@ -27,6 +29,7 @@
 | PDE-12 | `smooth-approximation-and-sobolev-extension` | Meyers--Serrin approximation, mollification, extension operators |
 | PDE-13 | `sobolev-traces-and-zero-boundary-values` | traces, fractional boundary spaces, $W^{1,p}_0$ |
 | PDE-14 | `sobolev-poincare-and-morrey-inequalities` | Sobolev, Poincaré, Morrey and critical embeddings |
+| PDE-14F | `bessel-potential-completions-and-real-order-sobolev-spaces` | Japanese-bracket multipliers and real-order $H^s$ completions |
 | PDE-15 | `rellich-kondrachov-and-sobolev-compactness` | translation compactness and Rellich--Kondrachov |
 | PDE-16 | `lax-milgram-and-weak-elliptic-solutions` | bounded coercive forms, Lax--Milgram, weak Dirichlet problems |
 | PDE-17 | `fredholm-elliptic-problems-and-the-elliptic-spectrum` | Gårding, elliptic Fredholm alternative, compact resolvent, eigenvalues |
@@ -101,7 +104,8 @@ theorem and from $H^s$ notation to later pseudodifferential analysis, if any,
 belong only in `rem-` items and never in `deps`.
 
 **Scope denials.** The block deliberately excludes: plane-only harmonic theory
-(owned by `complex-analysis`); general distributions/Fourier analysis and
+(owned by `complex-analysis`); general distributions/Fourier analysis beyond
+the explicit PDE-14F bridge and
 abstract Fredholm/spectral theory (owned by `functional-analysis`); general
 Stokes on manifolds (owned by `differential-geometry`); geometric measure
 theory and rough-boundary trace theory; systems of conservation laws;
@@ -297,9 +301,10 @@ PDE-1 -> PDE-2
                        |
                        +------> PDE-9 -> PDE-10
 
-MT/FA predecessors -> PDE-11 -> PDE-12 -> PDE-13 -> PDE-14 -> PDE-15
-                                              |          |
-                                              +------> PDE-16 -> PDE-17
+MT/FA predecessors -> PDE-11 -> PDE-12 -> PDE-13 -> PDE-14 -> PDE-14F
+                                              |             |
+                                              |             +-> Fourier multiplier pages
+                                              +----------------> PDE-15 -> PDE-16 -> PDE-17
                                                            |       |
                                                            +-> PDE-18 -> PDE-19 -> PDE-20
 
@@ -437,6 +442,13 @@ Equations*, University of Illinois, 2020.** Complete graduate notes:
 Read: Chapter 3 “Sobolev spaces,” Chapter 4 “Weak solutions of elliptic PDE”
 and Chapter 5 “Regularity of weak solutions,” including the named sections
 listed in §11.
+
+**[DY] Semyon Dyatlov, *Lecture Notes for 18.155: Distributions, Elliptic
+Regularity, and Applications to PDEs*, MIT, 2022.** Complete author-hosted
+notes: <https://math.mit.edu/~dyatlov/18.155/155-notes.pdf>. Read: §§11.1--11.2,
+Exercise 11.3, and §12.1 through Proposition 12.7. These sections prove the
+Schwartz-multiplier input and develop the Fourier definition and basic
+properties of $H^s(\mathbb R^n)$ for every real $s$.
 
 **[ACM] Luigi Ambrosio, Alessandro Carlotto and Annalisa Massaccesi,
 *Lectures on Elliptic Partial Differential Equations*.** Full open text and
@@ -1301,6 +1313,56 @@ domain; no universal domain constant is implied.
 
 ---
 
+## PDE-14F. Bessel-Potential Completions and Real-Order Sobolev Spaces
+
+**A page:** `bessel-potential-completions-and-real-order-sobolev-spaces`
+
+**B page:** `bessel-potential-completions-and-real-order-sobolev-spaces-examples`
+**Requires:** PDE-11 and PDE-14; FA-1 `normed-and-banach-spaces`; FA-23
+`schwartz-space-and-the-plancherel-theorem`; FA-25
+`tempered-distributions-and-the-fourier-transform`. The companion requires the
+A page. No Fourier-multiplier page is a prerequisite.
+
+### A-page items, in dependency order
+
+1. `lem-japanese-bracket-powers-preserve-schwartz-space` (lemma; **L/A**) — For every $s\in\mathbb R$, multiplication by $\langle\xi\rangle^s=(1+|\xi|^2)^{s/2}$ and by its reciprocal maps $\mathcal S(\mathbb R^n)$ continuously to itself; prove the required polynomial derivative bounds.
+2. `def-bessel-potential-pre-hilbert-norm-on-schwartz-space` (definition; **L/NA**) — Set $\|u\|_{H^s}=\|\langle\xi\rangle^s\widehat u\|_2$ on $\mathcal S(\mathbb R^n)$, with the repository's fixed Fourier normalisation.
+3. `lem-bessel-potential-norm-is-positive-definite` (lemma; **L/A**) — Plancherel and Fourier injectivity show that the preceding seminorm vanishes only at zero.
+4. `lem-weighted-fourier-images-of-schwartz-functions-are-dense-in-ltwo` (lemma; **L/A**) — Approximate in $L^2$ by compactly supported smooth functions and apply $\langle\xi\rangle^{-s}$ before inverse Fourier transformation.
+5. `def-real-order-bessel-potential-sobolev-space` (definition; **L/NA**) — Define $H^s(\mathbb R^n)$ as the norm completion of the preceding Schwartz pre-Hilbert space.
+6. `thm-bessel-potential-completions-embed-in-tempered-distributions` (theorem; **L/A**) — The weighted Fourier isometry identifies a completion class with a unique $g\in L^2$ and sends it to $\mathcal F^{-1}(\langle\xi\rangle^{-s}g)\in\mathcal S'$; prove independence of the Cauchy representative and injectivity.
+7. `cor-bessel-potential-spaces-are-hilbert-and-complete` (corollary; **L/A**) — Transport the $L^2$ inner product through the isometry and identify the resulting norm with the defining completion norm.
+8. `thm-bessel-potential-space-has-the-weighted-tempered-distribution-characterisation` (theorem; **L/A**) — Prove that the embedded image is exactly the tempered distributions $u$ for which $\langle\xi\rangle^s\widehat u\in L^2$.
+
+### B-page companion
+
+1. `ex-zero-order-bessel-completion-is-ltwo` (example; **L/A**) — Plancherel and Schwartz density identify $H^0(\mathbb R^n)$ canonically with $L^2(\mathbb R^n)$, including the normalisation constant.
+2. `ex-schwartz-functions-in-every-bessel-potential-completion` (example; **L/A**) — The Japanese-bracket lemma makes the defining norm finite for every Schwartz function and every real order.
+
+### Sources and proof architecture
+
+**Primary backing:** [DY] Exercise 11.3 and §§12.1.1--12.1.2, especially
+Definition 12.3 and the density statement following it. FA-23 and FA-25 own the
+Fourier, Plancherel, Schwartz and tempered-distribution machinery; this pair
+proves only the completion bridge that their later Fourier-analysis consumer
+needs.
+
+**Hard proof obligations.** Item 1 is proved locally from derivative estimates,
+not imported as an exercise. Item 4 proves density rather than assuming the
+weighted Fourier image is all of $L^2$. Item 6 constructs the map from
+completion classes, proves it is representative-independent, and proves
+injectivity before $H^s$ notation is used as a subspace of $\mathcal S'$.
+
+**Well-definedness and choice.** Multiplication of a tempered distribution by
+$\langle\xi\rangle^{-s}$ is licensed by item 1. The $L^2$ representative in
+item 6 defines a tempered distribution by Cauchy--Schwarz against Schwartz
+test functions. The abstract completion uses exactly the countable-choice or
+dependent-choice cost already stated by
+`thm-metric-completion-carries-a-unique-banach-space-structure`; no stronger
+choice principle is hidden here.
+
+---
+
 ## PDE-15. Rellich--Kondrachov and Sobolev Compactness
 
 **A page:** `rellich-kondrachov-and-sobolev-compactness`  
@@ -2014,6 +2076,7 @@ The proposed A-page item counts are:
 | PDE-1--PDE-5 | 20, 17, 14, 15, 20 |
 | PDE-6--PDE-10 | 13, 14, 14, 14, 14 |
 | PDE-11--PDE-15 | 19, 14, 13, 15, 11 |
+| PDE-14F | 8 |
 | PDE-16--PDE-20 | 17, 16, 16, 16, 14 |
 | PDE-21--PDE-26 | 15, 12, 20, 12, 21, 21 |
 
@@ -2797,6 +2860,7 @@ lecture-note set with a harvestable TOC.
 | PDE-7--PDE-8 | [E] §2.3; [T] Chapter 6; [H] Chapters 5--6; [I] Chapter 3; [MITPDE] Lecture 5 |
 | PDE-9--PDE-10 | [E] §2.4; [T] Chapter 7; [I] Chapters 2/9; [MITPDE] Lectures 10--14 |
 | PDE-11--PDE-15 | [E] Chapter 5; [K] Chapters 1--3; [H] Chapter 3; [L] Chapter 3; [B] Chapters 8--9 |
+| PDE-14F | [DY] Exercise 11.3 and §§12.1.1--12.1.2; [L] Chapter 3 |
 | PDE-16--PDE-17 | [H] Chapter 4; [L] Chapters 3--4; [B] Chapter 9; [T] Chapter 10; [LS] Chapters 4--6/9 |
 | PDE-18--PDE-20 | [E] §§6.3--6.4; [H] §§4.11--4.13; [L] Chapter 5; [ACM] Chapter 2; [S] Chapters II/IV |
 | PDE-21--PDE-22 | [E] Chapter 8; [T] Chapter 13; [ACM] Chapter 1; [CV] Chapters 4/7 |
