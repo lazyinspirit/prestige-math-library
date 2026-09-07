@@ -50,19 +50,32 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(liveCompat.requestedEffort, 'high');
 });
 
-test('Step 5 authors use Sol high while Steps 6 and 7 retain Terra high', () => {
+test('Step 5 authors and author recovery use Astra medium while Steps 6 and 7 retain Terra high', () => {
   const authorStage = stage('5-author');
   const author = authorStage.plan(ctx, ['1'])[0];
-  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.solHigh);
+  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.astraMedium);
   assert.equal(selected(authorStage, {
     role: 'beta', job: 'authoring', label: 'author-recover-1-1',
-  }), MODEL_PROFILE_NAMES.solHigh, 'Step 5 recovery authors use the same profile');
+  }), MODEL_PROFILE_NAMES.astraMedium, 'Step 5 recovery authors use the same profile');
   assert.equal(selected(authorStage, { role: 'alpha', job: 'adjudication' }), undefined,
     'Step 5 changes authoring agents, not its gate-adjudication Alpha');
 
-  const solHigh = MODEL_PROFILES[MODEL_PROFILE_NAMES.solHigh];
-  assert.equal(solHigh.model, 'gpt-5.6-sol');
-  assert.equal(solHigh.effort, 'high');
+  const astraMedium = MODEL_PROFILES[MODEL_PROFILE_NAMES.astraMedium];
+  assert.equal(astraMedium.model, 'gpt-6-astra');
+  assert.equal(astraMedium.effort, 'medium');
+
+  const baselineStage = stage('6a-baseline');
+  assert.equal(selected(baselineStage, {
+    role: 'beta', job: 'authoring', label: 'author-check-repair-1-deadbeef',
+  }), MODEL_PROFILE_NAMES.astraMedium, 'pre-reader author-check repair uses the author profile');
+
+  const splitStage = stage('6a-split');
+  assert.equal(selected(splitStage, {
+    role: 'beta', job: 'authoring', label: 'author-recover-1',
+  }), MODEL_PROFILE_NAMES.astraMedium, 'missing-contract author recovery uses the author profile');
+  assert.equal(selected(splitStage, {
+    role: 'reader', job: 'audit', label: 'reader-recover-1',
+  }), MODEL_PROFILE_NAMES.terraHigh, 'reader recovery retains the reader profile');
 
   const readStage = stage('6a-read');
   assert.equal(selected(readStage, readStage.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.terraHigh);

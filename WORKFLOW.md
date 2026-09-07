@@ -97,7 +97,7 @@ web access, sessions, and output capture. Stage profiles override role defaults.
 | Assignment | Configured model / effort |
 |---|---|
 | Step 1 scaffolding; Step 9 `step9-lead` | Astra / medium |
-| Step 5 authors and author recovery | Sol / high |
+| Step 5 authors and author recovery | Astra / medium |
 | Group Alpha (`alpha`) | Sol / high |
 | Step 8 adjudication | Sol / xhigh |
 | Step 8 final adjudication | Astra / medium |

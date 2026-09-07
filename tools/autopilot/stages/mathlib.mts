@@ -37,6 +37,7 @@ const { hasLegacyStep6Cutover, step6Stages } = await import(
 );
 
 const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
+const ASTRA_MEDIUM = MODEL_PROFILE_NAMES.astraMedium;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -2098,7 +2099,7 @@ export const stages = [
     id: '5-author',
     label: 'authoring',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'authoring'
-      ? MODEL_PROFILE_NAMES.solHigh
+      ? ASTRA_MEDIUM
       : undefined,
     // THE LARGEST WIN. A batch whose authoring is finished starts its reader
     // while the other batches are still being written: authors run to six hours

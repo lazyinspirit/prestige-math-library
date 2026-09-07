@@ -9,6 +9,7 @@ import { repairGateBatch, repairFingerprint } from './step56-repairs.mts';
 import { authorInputs } from '../../author-check.mts';
 
 const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
+const ASTRA_MEDIUM = MODEL_PROFILE_NAMES.astraMedium;
 
 /** A completed legacy run skips only stage ids introduced by this cutover.
  * The receipt is write-once and bound to its gate timestamps and artifacts;
@@ -231,7 +232,7 @@ export function step6Stages(d: any) {
     {
       id: '6a-baseline',
       label: 'per-batch pre-reader hash (mechanical)',
-      modelProfile: (plan: any) => plan.role === 'beta' ? TERRA_HIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'beta' ? ASTRA_MEDIUM : undefined,
       pipeline: 'read',
       role: 'tool',
       units: introducedBatches,
@@ -295,9 +296,9 @@ export function step6Stages(d: any) {
     {
       id: '6a-split',
       label: 'compute touched and untouched items (mechanical)',
-      modelProfile: (plan: any) => ['reader', 'beta'].includes(plan.role)
-        ? TERRA_HIGH
-        : undefined,
+      modelProfile: (plan: any) => plan.role === 'beta'
+        ? ASTRA_MEDIUM
+        : plan.role === 'reader' ? TERRA_HIGH : undefined,
       pipeline: 'read',
       role: 'tool',
       units: introducedBatches,
