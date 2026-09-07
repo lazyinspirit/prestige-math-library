@@ -69,10 +69,9 @@ for (const f of verdictFiles) {
       errors.push(`verdict-shape: ${f}: ${row.page} needs verdict \`sufficient\` or \`insufficient\`, got ${JSON.stringify(row.verdict)}`);
       continue;
     }
-    // An `insufficient` with nothing named is not a finding anybody can act on.
-    // "Could be deeper" is exactly what the step-3 brief forbids.
+    // An `insufficient` with nothing named is not actionable.
     if (row.verdict === 'insufficient' && !(Array.isArray(row.missing) && row.missing.length)) {
-      errors.push(`verdict-shape: ${f}: ${row.page} is insufficient but names no missing result; say which result and which source carries it`);
+      errors.push(`verdict-shape: ${f}: ${row.page} is insufficient but names no exact defect and required repair`);
       continue;
     }
     verdicts.set(row.page, { ...row, by: f });

@@ -1,18 +1,18 @@
-> The dispatch block supplies batch `<i>`; a generated batch task, when present,
-supplies its pages, order, prerequisites, and design locations.
+> The dispatch supplies batch `<i>`. A generated task supplies its pages,
+prerequisites, and design locations.
 
 # Step 1 — scaffold batch `<i>`, `{{run}}`
 
-Read the batch manifest, generated task, design section, and plan. Create or
-update only the batch manifest, coverage, and notes with source-backed,
-dependency-closed scaffold records. Record a design/plan conflict in the notes
-and follow the current plan; the drift stage owns its disposition.
+Read the generated task, batch manifest, coverage, notes, design sections, and
+current plan. Write only the batch manifest, coverage, and notes. The current
+plan controls a design conflict; record the conflict without inventing a
+compromise.
 
-For each source range, record its headings and a disposition for every harvested
-result. A source replacement must be a verified same text or a reharvested,
-faithfully indexed different treatment. Split an A page over the plan limit
-instead of dropping scope.
+Build every A/B pair to full source and dependency closure. Add every missing
+definition, lemma, or theorem that fits the pair. If closure requires a new
+A/B pair, record the complete proposed pair and leave the consumer blocked
+until an authorized writer adds it to the prose scaffold and plan.
 
-Run the batch coverage checklist, whole-run manifest-only content policy,
-`validate-plan`, and URL recovery/liveness check. Leave exact failed-source or
-scope blockers in the batch notes.
+Run the batch coverage checklist, whole-run `manifest-deps`, manifest-only
+content policy, `validate-plan`, `extcheck`, URL liveness, source backing, and
+source fetch checks. Record every failure in the batch notes.

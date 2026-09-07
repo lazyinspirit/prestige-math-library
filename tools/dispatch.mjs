@@ -342,16 +342,18 @@ if (taskPath) {
   prompt += `\n\n---\n\n# This dispatch\n\n${identity}\n`;
 }
 
-prompt += pathResolve(resolveFile(briefPath)) === join(REPO, 'briefs/authoring.md')
-  ? `\n\n## Context continuity\n\nRead complete relevant source passages in bounded chunks; truncated output is incomplete
+const resolvedBrief = pathResolve(resolveFile(briefPath));
+if (resolvedBrief === join(REPO, 'briefs/authoring.md')) {
+  prompt += `\n\n## Context continuity\n\nRead complete relevant source passages in bounded chunks; truncated output is incomplete
 evidence. Prefer current owned files; avoid historical runs and dispatch logs.
 After each item, checkpoint in the assigned notes: IDs, exact claim/conventions,
 source locators, dependencies, decisions, checks, open gaps, and next action.
 Context may compact mid-proof. Resume by rereading those notes, the current item,
 dependency statements, and source passages. Never infer a missing hypothesis from
 a summary. Preserve independent reviews; report unrecoverable evidence as a blocker.
-Use only task-authorized notes; do not create transcripts.\n`
-  : `\n\n## Mathematical context continuity\n\nRead exact task paths first. Search current owned artifacts before historical runs;
+Use only task-authorized notes; do not create transcripts.\n`;
+} else if (resolvedBrief !== join(REPO, 'briefs/beta-scaffold.md')) {
+  prompt += `\n\n## Mathematical context continuity\n\nRead exact task paths first. Search current owned artifacts before historical runs;
 exclude dispatch logs from routine content searches. Fetch complete relevant source
 sections and dependency statements, using bounded output chunks. A truncated result
 is not evidence of absence; continue reading until the required argument is complete.
@@ -367,6 +369,7 @@ for mathematical evidence. If a hypothesis or source qualification cannot be
 recovered, record the blocker rather than infer it. Preserve all independent reviews
 and exact-hash gates. Never mark an unfinished obligation complete to save context.
 ${spec.sandbox === 'read-only' ? 'This role is read-only: do not write checkpoints or extra files. Use the task-provided durable evidence and reread it after compaction; return only the required response format.' : 'Checkpoint only in the task-authorized notes/report; do not create transcripts or alter other owners’ artifacts.'}\n`;
+}
 
 // Render the complete assembled prompt, including the task. An EMPTY value
 // means "not pinned", never "erase the placeholder": the engine passes

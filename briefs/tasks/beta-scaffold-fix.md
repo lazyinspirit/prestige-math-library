@@ -1,15 +1,19 @@
-> The dispatch block supplies batch `<i>`.
+> The dispatch supplies batch `<i>`.
 
 # Post-recheck scaffold repair — batch `<i>`, `{{run}}`
 
 Read `research/{{run}}-scaffold-closure.json` and take only `work[]` entries
-whose pages belong to batch `<i>` in the scope ledger. Apply or push back on
-each listed finding in this batch's manifest, coverage, and notes.
+whose pages belong to batch `<i>`. Resolve each finding in this batch's
+manifest, coverage, and notes, or rebut it with exact mathematical and source
+evidence. Add every missing definition, lemma, theorem, and backward dependency.
 
-Every added scaffold item needs its coverage disposition, locator, and current
-fetch-verified backing. Run the batch coverage checklist, whole-run
-manifest-only content policy, and `validate-plan`.
+If closure requires a new A/B pair, specify it completely and keep the consumer
+blocked until the authorized plan writer adds it to the prose scaffold and
+plan. Every added item needs a coverage disposition, locator, and current
+fetch-verified backing.
 
-Append `## Scaffold-fix round` to the batch notes with each finding id,
-disposition, evidence, and change. Do not edit the plan, items, library, or
-another batch.
+Append `## Scaffold-fix round` to the batch notes with each finding ID,
+disposition, evidence, change, and remaining blocker. Run the batch coverage
+checklist, whole-run `manifest-deps`, manifest-only content policy,
+`validate-plan`, `extcheck`, and affected source checks. Do not edit shared plan
+files, items, published pages, or another batch.

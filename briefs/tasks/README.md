@@ -9,6 +9,9 @@ and focused gate work. Role-wide conduct and mathematical standards belong in
 the dispatched role brief; run-specific page data belongs in generated tasks,
 batch manifests, scope receipts, and the plan.
 
+Step 1 and Step 3 share `briefs/beta-scaffold.md`; the filename is retained for
+compatibility, but the brief applies to Beta and Alpha scaffold roles.
+
 `run-tasks.mjs` replaces only these placeholders:
 
 | placeholder | rendered value |

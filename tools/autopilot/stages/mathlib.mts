@@ -136,6 +136,7 @@ const alphaCohort = (ctx: any, u: string): string[] =>
   alphaGroups(ctx).find((g: any) => g.covers.map(String).includes(String(u)))?.covers.map(String) ?? [String(u)];
 
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
+const extGate = () => gate('extcheck', ['node', 'tools/extcheck.mjs']);
 
 /** Gates that apply to the whole repository, re-run at several stages because
  *  authoring and repair both change items on disk.
@@ -149,7 +150,7 @@ const repoWide = (ctx, { pendingAuditOk = false }: { pendingAuditOk?: boolean } 
   }),
   gate('depcheck', ['node', 'tools/depcheck.mjs', ...(pendingAuditOk ? ['--pending-audit-ok'] : [])]),
   gate('fwdcheck', ['node', 'tools/fwdcheck.mjs']),
-  gate('extcheck', ['node', 'tools/extcheck.mjs']),
+  extGate(),
   gate('rendercheck', ['node', 'tools/rendercheck.mjs']),
   // gates.mjs listed these two as gates of record at steps 5/6/9/10 and
   // 2/5/6/10; this table — the only one that runs — carried neither.
@@ -1669,7 +1670,7 @@ export const stages = [
     // `driftGate` stays on this stage as well as on `1-drift`. It is cheap, and
     // it is the check that a scope change applied upstream is still true of the
     // manifests the Betas actually scaffolded against.
-    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
+    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate(), extGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
 
     // Failures at this join with a MECHANICAL_REPAIRS entry — the archive
     // swap, the full-text stamp — are repaired by code, one round each; see
@@ -1767,7 +1768,7 @@ export const stages = [
         label: `step3-${g.label}`,
       job: 'audit',
         covers: g.covers,
-        brief: "briefs/alpha.md",
+        brief: "briefs/beta-scaffold.md",
         task: [`research/${ctx.run}-alpha-${g.label}.task.md`, `research/${ctx.run}-alpha-group.task.md`],
         timeout: 10800,
       }));
@@ -1838,7 +1839,7 @@ export const stages = [
         label: `recheck-${g.label}`,
       job: 'adjudication',
         covers: g.covers,
-        brief: "briefs/alpha.md",
+        brief: "briefs/beta-scaffold.md",
         task: [`research/${ctx.run}-alpha-${g.label}-recheck.task.md`, `research/${ctx.run}-alpha-group-recheck.task.md`],
         timeout: 7200,
       })),
@@ -1851,7 +1852,7 @@ export const stages = [
     // the MECHANICAL_REPAIRS table swaps recorded snapshots and stamps
     // unstamped sources; only an unrecoverable or unfetchable source reaches
     // the fix loop below, as scouting work for the owning Beta.
-    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx, { requireSufficient: true }),
+    gates: (ctx) => [scopeGate(ctx), planGate(), extGate(), scaffoldGate(ctx, { requireSufficient: true }),
       manifestDepsGate(ctx), scopeDecisionsGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
     // Still thin after the re-check is another fix round, not an advance. Bounded
     // for the same reason the judge loop is: a scaffold that will not converge is
@@ -1934,7 +1935,7 @@ export const stages = [
             label: `scaffold-recheck-${round}-${group.label}`,
             job: 'adjudication',
             covers: group.covers,
-            brief: 'briefs/alpha.md',
+            brief: 'briefs/beta-scaffold.md',
             task: [`research/${ctx.run}-alpha-${group.label}-recheck.task.md`, `research/${ctx.run}-alpha-group-recheck.task.md`],
             timeout: 7200,
           });

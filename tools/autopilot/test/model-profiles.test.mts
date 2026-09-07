@@ -139,9 +139,22 @@ test('the shared Step-5 authoring brief mandates authoritative web verification'
   assert.match(source, /authoritative sources/i);
 });
 
-test('the shared Step-1 scaffolding brief mandates authoritative web verification', () => {
+test('the shared Step-1/3 scaffold brief mandates research and complete dependency closure', () => {
   const source = readFileSync(join(REPO, 'briefs/beta-scaffold.md'), 'utf8');
-  assert.match(source, /every piece of mathematics that is unfamiliar/i);
+  assert.match(source, /every piece of mathematics unfamiliar/i);
   assert.match(source, /search the web/i);
   assert.match(source, /authoritative sources/i);
+  assert.match(source, /complete transitive closure/i);
+  assert.match(source, /no missing,[\s\S]*inadequate[\s\S]*dependency/i);
+  assert.match(source, /definition, lemma, or theorem/i);
+  assert.match(source, /prerequisite A\/B pair/i);
+  assert.match(source, /deferred-set-theory-beyond-choice/i);
+});
+
+test('every Step-1/3 scaffold lane receives the shared scaffold brief', () => {
+  for (const id of ['1-scaffold', '3-review', '3-fix', '3-recheck']) {
+    const plans = stage(id).plan(ctx, ['1']);
+    assert.ok(plans.length, `${id} produced no plan`);
+    for (const plan of plans) assert.equal(plan.brief, 'briefs/beta-scaffold.md', `${id}/${plan.label}`);
+  }
 });

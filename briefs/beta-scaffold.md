@@ -1,47 +1,58 @@
-# Beta scaffolding and source repair
+# Scaffold contract
 
-The task determines whether this dispatch scaffolds, repairs a scaffold, scouts
-a source, or re-harvests evidence. It names the batch, writable artifacts, and
-required validators. Work only in that batch's task-authorised files; do not
-modify plan structure, another batch, workflow state, or published content.
-Do not request permissions.
+The task defines scope, writable files, outputs, and checks. Read it with
+`CLAUDE.md`, `SCHEMA.md`, `WORKFLOW.md`, the assigned designs, the current plan,
+and the owned evidence. Write only authorized files. Do not modify published
+content or request broader access.
 
-Read the assigned design and source material rather than treating either as a
-summary to paraphrase. A scaffold is a dependency-closed, source-grounded plan
-for the mathematics that will actually be authored. Use stable, unused item ids
-with the schema's kind prefixes; do not silently duplicate an existing claim.
-Preserve valid dependencies, include the intermediate results a proof genuinely
-needs, and propose an honest page split rather than removing needed content to
-meet a size limit.
+## Dependencies
 
-For every piece of mathematics that is unfamiliar to you, search the web and
-verify the exact claim against authoritative sources before adding or relying
-on it. This is mandatory for unfamiliar definitions, results, dependencies,
-examples, counterexamples, and proposed proof strategies. Prefer original
-papers, author-hosted books or lecture notes, and official reference works, and
-record the exact URL, locator, and support in the batch evidence.
+A scaffold is ready only when every claim can be proved from its hypotheses and
+earlier local results. Audit the complete transitive closure of page `requires`
+and item `deps` through the plan, all run manifests, and published items. For
+each dependency, verify its exact statement, hypotheses, direction,
+conventions, axiom strength, and use in the proposed proof. A resolving ID is
+not enough. There must be no missing, circular, forward, or inadequate
+dependency.
 
-Every manifest item object must carry an explicit `deps` array; write `deps: []`
-when the item has no planned dependencies.
+Add every needed definition, lemma, or theorem in proof order. The owner
+authorizes new prerequisite A/B pairs when closure requires them. Add each pair
+to the authorized prose scaffold and plan. If those files are not writable,
+record its title, category, placement, prerequisites, and A/B item inventories
+as a fatal finding. The consumer remains blocked until the pair is added. Never
+drop or weaken useful mathematics to pass a check. Split an A page above the
+plan limit; never pad.
+Use stable, unused, correctly prefixed item IDs and explicit `deps` arrays,
+including `deps: []`.
 
-For every assigned A page, maintain the required coverage harvest: independent
-sources, including an eligible primary treatment; an HTTP(S) URL and exact
-locator for each source read; the source's own relevant headings or results;
-and a concrete disposition for every harvested result. An `included` or
-`inline` result must name the scaffolded item that carries it. A deferred or
-out-of-scope result needs the destination or reason required by the task. Do
-not treat a source citation as evidence that its contents were read.
+No Foundations page or item may directly or transitively reach
+`deferred-set-theory-beyond-choice` or any item recorded there through
+`requires`, `deps`, `justified_by`, or load-bearing `forward_refs`. The
+catalogue is a target ledger, never a supplier. `external_refs` may provide
+orientation only. Prove replacements from earlier local machinery. Every
+violation is fatal and unpublishable.
 
-## URL discipline
+## Sources
 
-Fetch-verify each recorded source. When a URL fails, first recover an alternate
-live URL or complete archive copy of the same document. Re-source only when the
-same text is unavailable; then re-read the replacement, rewrite its harvest and
-locators faithfully, and preserve `original_url` provenance. Never retain a
-harvest row attributed to text you did not verify. A source repair must not
-remove a result merely to clear a source gate.
+Search the web for every piece of mathematics unfamiliar to you and verify it
+against authoritative sources before using or approving it. This includes
+definitions, results, dependencies, examples, counterexamples, proof routes,
+and scope decisions. Prefer primary papers, author-hosted books or notes, and
+official references. Read the complete relevant text. Abstracts, snippets,
+citations, and truncated passages are not evidence. Missing full text is a
+blocker.
 
-Use [SCHEMA.md](../SCHEMA.md) for the proposed item and page contracts. Record
-source support, dependency rationale, conventions, proposed proof strategy, and
-known limits in the task-named notes. The task's validators, not a prose claim,
-decide whether the batch is ready.
+For each A page, use at least two independent treatments, including a textbook,
+monograph, or full lecture-note set. Record each source's URL, exact locator,
+relevant headings or named results, and support. Give every harvested result a
+disposition. Link included or inline results to item IDs; give deferred results
+a valid destination and out-of-scope results a specific reason.
+
+Fetch-verify every source. Prefer another live or archived copy of the same
+text. A different treatment must be read and reharvested with new locators and
+contents; retain `original_url`. Never remove mathematics to clear a source
+check.
+
+Record exact changes, evidence, dependency paths, checks, and blockers in the
+named artifact. Report only checks you ran. After a handoff or context reset,
+reread the current scaffold, dependencies, sources, and open obligations.

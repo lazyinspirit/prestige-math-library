@@ -60,3 +60,13 @@ test('scaffold policy resolves same-run cross-batch dependencies at the level jo
     assert.ok(policy[0].liveness, `${id} scaffold policy needs a non-empty scope floor`);
   }
 });
+
+test('both scaffold closure joins enforce the recorded-not-proved boundary', async () => {
+  const mod = await import('../stages/mathlib.mts');
+  const ctx = { run: 'frontier-14', repo: REPO };
+  for (const id of ['1-scaffold', '3-recheck']) {
+    const st = mod.stages.find((s: any) => s.id === id);
+    assert.ok(st.gates(ctx).some((g: any) => g.id === 'extcheck'),
+      `${id} does not run extcheck before accepting a scaffold`);
+  }
+});
