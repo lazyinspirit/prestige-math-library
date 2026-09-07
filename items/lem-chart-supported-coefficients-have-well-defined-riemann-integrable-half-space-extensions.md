@@ -2,13 +2,14 @@
 id: lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions
 title: "Riemann-integrable half-space extensions of chart coefficients"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-compactly-supported-differential-form", "cor-smooth-functions-and-tensor-fields-extend-locally-across-the-boundary", "lem-smooth-extension-from-a-closed-neighbourhood", "thm-lebesgue-criterion-in-rn", "def-null-and-content-zero-in-rn", "cor-archimedean-reciprocal", "lem-compactly-supported-riemann-integral-is-well-defined"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-normed-vector-space-over-an-absolutely-valued-field
 title: "Normed vector space over an absolutely valued field"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: [def-multiplicative-absolute-value-on-a-field]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

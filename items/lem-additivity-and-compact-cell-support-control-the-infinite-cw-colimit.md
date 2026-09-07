@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Theorem 3F.8 pp.314–315"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT%2B.pdf"
       locator: "Theorem 3F.8 pp.314–315"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Split the telescope into odd and even cylinder subcomplexes, with intersection the disjoint union of stages. MV and arbitrary additivity identify the overlap map with 1-shift after reindexing; its injectivity kills the next boundary and its cokernel is the colimit. Transfer through the explicit telescope homotopy equivalence. Combine with finite-dimensional finite support, and use compact images to prove continuous-map naturality of the finite-subcomplex colimit."
 ---

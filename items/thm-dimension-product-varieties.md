@@ -6,11 +6,13 @@ deps: ["thm-dimension-equals-transcendence-degree", "lem-classical-variety-noeth
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Milne Proposition 5.35, §5j"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Glue products of affine charts on their open overlaps by the universal property; separatedness follows from equalizers on product charts. Irreducible affine products have domain coordinate rings. Tensor two normalization polynomial subalgebras; their tensor injects over k and the full tensor is finite over it. Use trdeg and pass to component products. For reducible affine factors the evaluation proof gives the reduced tensor coordinate ring: a tensor vanishing at every pair is zero by linear independence and Nullstellensatz. Glue these chart products, then use the finitely many irreducible component products."
 ---

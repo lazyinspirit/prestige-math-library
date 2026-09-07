@@ -2,13 +2,14 @@
 id: cor-distance-to-subspace-by-annihilating-functionals
 kind: corollary
 title: "Distance to a closed subspace via unit annihilators"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-dual-of-a-quotient-is-the-annihilator", "thm-canonical-bidual-map-is-an-isometry"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

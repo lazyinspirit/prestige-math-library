@@ -4,6 +4,7 @@ kind: "theorem"
 title: "serre normality criterion"
 deps: ["def-normal-noetherian-ring", "cor-serre-normality-criterion-two-directions", "lem-serre-r-zero-s-one-characterises-reducedness", "lem-reduced-noetherian-total-fractions-and-normal-components", "lem-depth-two-excludes-finite-punctured-extension", "thm-one-dimensional-regular-local-rings-are-dvrs", "thm-valuation-ring-is-integrally-closed", "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number", "thm-dimension-at-most-embedding-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

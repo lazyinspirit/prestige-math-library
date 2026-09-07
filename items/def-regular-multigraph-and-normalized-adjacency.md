@@ -2,13 +2,14 @@
 id: def-regular-multigraph-and-normalized-adjacency
 kind: definition
 title: "Regular multigraph and normalized adjacency"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

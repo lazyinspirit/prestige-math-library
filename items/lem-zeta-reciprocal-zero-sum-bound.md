@@ -2,13 +2,14 @@
 id: lem-zeta-reciprocal-zero-sum-bound
 title: "Zeta reciprocal zero sum bound"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [cor-zeta-zero-count-unit-interval, def-riemann-zeta-zero-counting, thm-hadamard-product-for-riemann-xi]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

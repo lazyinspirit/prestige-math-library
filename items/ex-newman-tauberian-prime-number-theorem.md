@@ -2,7 +2,7 @@
 id: ex-newman-tauberian-prime-number-theorem
 title: "Newman tauberian prime number theorem"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [lem-dirichlet-character-chebyshev-laplace-transform, thm-newman-zagier-tauberian-theorem, lem-monotone-chebyshev-tauberian-desmoothing, cor-prime-number-theorem]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

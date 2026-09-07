@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Cohomology of derived hom is ext"
 deps: ["def-derived-hom-in-the-bounded-setting", "thm-ext-is-hom-in-the-derived-category"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

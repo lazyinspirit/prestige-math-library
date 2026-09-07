@@ -4,6 +4,7 @@ kind: "lemma"
 title: "regular element reduction preserves minimal resolution"
 deps: ["lem-finite-local-modules-admit-minimal-free-resolutions", "lem-projective-dimension-from-last-nonzero-betti-number", "def-balanced-tor-bifunctor", "thm-tor-symmetry-over-a-commutative-ring", "thm-nakayama-lemma"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

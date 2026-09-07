@@ -2,13 +2,14 @@
 id: cex-transpose-range-need-not-be-norm-dense
 kind: counterexample
 title: "The transpose of an injective map need not have norm-dense range"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "thm-dual-of-c0-is-ell-one", "cor-ell-p-duality-by-counting-measure", "lem-finite-truncations-are-dense-in-c0-and-ell-one", "lem-c-zero-is-a-closed-subspace-of-ell-infinity", "def-annihilator-and-preannihilator"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

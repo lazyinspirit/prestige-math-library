@@ -2,13 +2,14 @@
 id: cor-orders-of-decomposition-and-inertia-groups
 title: "Orders of decomposition and inertia groups"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [thm-decomposition-inertia-exact-sequence, thm-decomposition-group-and-completion, thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

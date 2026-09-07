@@ -2,13 +2,14 @@
 id: lem-irreducible-polynomial-coefficients-in-a-complete-valuation-ring
 title: "Irreducible polynomial coefficients in a complete valuation ring"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [lem-hensel-factor-lifting-over-a-complete-valued-field]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

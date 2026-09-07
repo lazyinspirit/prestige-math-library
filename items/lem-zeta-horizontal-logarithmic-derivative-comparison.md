@@ -2,13 +2,14 @@
 id: lem-zeta-horizontal-logarithmic-derivative-comparison
 title: "Zeta horizontal logarithmic derivative comparison"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [thm-riemann-zeta-classical-zero-free-region, lem-local-logarithmic-derivative-zeta, lem-zeta-logarithmic-derivative-zero-bound, thm-von-mangoldt-logarithmic-derivative-zeta]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

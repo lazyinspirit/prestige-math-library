@@ -2,13 +2,14 @@
 id: "lem-fibre-product-unique-canonical-isomorphism"
 kind: "lemma"
 title: "Uniqueness of the fibre product"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-fibre-product-schemes-universal-property"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

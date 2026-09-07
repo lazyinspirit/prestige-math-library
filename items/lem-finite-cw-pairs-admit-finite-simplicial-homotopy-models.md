@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Theorem 2C.5, construction and proof pp.182–184"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Theorem 2C.5, construction and proof pp.182–184"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Build Hatcher simplicial M(f) over each simplex by coning M(f restricted to boundary), retaining the target and barycentrically subdivided domain. Contractibility plus the previous HEP lemma supplies the retraction, then adjust its endpoint to f. Build C(f) by adjoining the cone on the domain. First model A, then attach the finitely many cells of X outside A; keep both A-models in the common double-cylinder construction. Check every retraction preserves the designated subpair. This proves the pair version rather than assuming that separate models for X and A are compatible."
 ---

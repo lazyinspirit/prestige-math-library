@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Existence of the bounded below right total derived functor"
 deps: ["def-right-total-derived-functor-on-the-bounded-below-derived-category", "prop-morphisms-into-a-homotopically-injective-complex-need-no-roof", "prop-an-additive-functor-on-abelian-categories-induces-an-exact-functor-on-homotopy-categories"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

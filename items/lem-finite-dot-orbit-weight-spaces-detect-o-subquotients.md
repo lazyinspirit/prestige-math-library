@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Finite weight-space detection of subquotients"
 deps: ["thm-category-o-is-abelian-and-extension-closed", "lem-n-plus-invariants-exist-in-every-nonzero-o-module", "cor-central-characters-are-dot-weyl-orbits", "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar", "lem-generalized-central-character-submodules-are-direct-summands", "prop-equivalent-support-description-of-category-o", "lem-harish-chandra-projection-computes-highest-weight-scalars"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "A singular vector gives a highest-weight cyclic submodule with scalar character equal to chi_lambda. Harish-Chandra identifies its highest label in the finite orbit. Weight-space exactness forces a positive detector increment at every strict chain step"
 ---

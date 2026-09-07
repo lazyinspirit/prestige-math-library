@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Hausdorff measure is an outer measure"
 deps: ["def-hausdorff-measure", "def-outer-measure", "def-countable-choice", "def-nonnegative-extended-series"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

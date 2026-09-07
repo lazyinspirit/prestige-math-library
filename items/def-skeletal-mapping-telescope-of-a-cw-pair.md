@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, 14§6, telescope construction pp.114–116"
       url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
       locator: "14§6, telescope construction pp.114–116"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

@@ -2,7 +2,7 @@
 id: prop-np-and-conp-are-the-first-levels
 kind: proposition
 title: "Np and conp are the first levels"
-status: draft
+status: published
 origin: pipeline
 deps: [def-polynomial-hierarchy-levels, def-np-by-verifiers, def-conp]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

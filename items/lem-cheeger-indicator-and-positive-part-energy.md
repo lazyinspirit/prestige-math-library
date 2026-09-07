@@ -2,7 +2,7 @@
 id: lem-cheeger-indicator-and-positive-part-energy
 kind: lemma
 title: "Cheeger indicator and positive part energy"
-status: draft
+status: published
 origin: pipeline
 deps: [def-spectral-edge-and-vertex-expansion, cor-rayleigh-quotient-extreme-eigenvalue-characterisation]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: the-polynomial-hierarchy-and-relativization-examples
 title: "The Polynomial Hierarchy and Relativization: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-np-and-conp-are-the-first-levels, ex-relativization-alone-cannot-resolve-p-versus-np, cex-relativized-separations-prove-unrelativized-separations, ex-promise-oracle-off-promise-answers]
 ---

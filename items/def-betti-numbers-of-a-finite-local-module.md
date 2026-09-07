@@ -4,6 +4,7 @@ kind: "definition"
 title: "betti numbers of a finite local module"
 deps: ["def-balanced-tor-bifunctor", "lem-finite-local-modules-admit-minimal-free-resolutions", "def-koszul-betti-numbers-over-a-local-ring"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

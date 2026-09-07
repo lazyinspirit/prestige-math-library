@@ -2,7 +2,7 @@
 id: lem-co-bird-free-separated-anticonnected-blocks-forbid-forward-mixing
 title: "A separated anticonnected block pair forbids mixing in one direction"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-co-bird-free-edge-plus-isolate-witness-obstruction", "lem-a-vertex-mixed-on-an-anticonnected-set-yields-opposite-adjacency-on-a-nonedge", "def-edges-between-sets-and-pure-mixed-pairs"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Finite adjacency analysis and structural deduction"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

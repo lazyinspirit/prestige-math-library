@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, §2C, Lemma 2C.2 and Theorem 2C.1, pp.177–179"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "§2C, Lemma 2C.2 and Theorem 2C.1, pp.177–179"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Prove the open-star criterion, choose stars for vertices in L from Q and then extend their open preimages to a neighbourhood of L. Finiteness and a Lebesgue number make all sufficiently small stars subordinate, with these constrained choices at L. The straight-line homotopy stays in a common target simplex and in Q on L. This is the finite-pair specialization, not cellular approximation."
 ---

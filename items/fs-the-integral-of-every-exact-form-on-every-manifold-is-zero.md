@@ -2,13 +2,14 @@
 id: fs-the-integral-of-every-exact-form-on-every-manifold-is-zero
 title: "False: all exact forms integrate to zero everywhere"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-general-stokes-theorem", "cor-fundamental-theorem-of-calculus-from-stokes"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

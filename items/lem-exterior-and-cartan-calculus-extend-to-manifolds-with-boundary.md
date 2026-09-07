@@ -2,12 +2,14 @@
 id: lem-exterior-and-cartan-calculus-extend-to-manifolds-with-boundary
 title: "Form calculus extends locally across a manifold boundary"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-smooth-functions-and-tensor-fields-extend-locally-across-the-boundary", "lem-smooth-half-space-extensions-have-the-same-derivatives-on-the-half-space", "thm-local-coordinate-formula-for-the-exterior-derivative", "thm-the-exterior-derivative-commutes-with-pullback", "thm-the-exterior-derivative-is-a-graded-derivation", "thm-cartans-magic-formula", "prop-the-exterior-derivative-does-not-enlarge-support"]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Lee Stokes proof pp.412–414 and published extension/calculus dependencies"

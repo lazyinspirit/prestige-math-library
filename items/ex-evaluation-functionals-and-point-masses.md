@@ -2,13 +2,14 @@
 id: ex-evaluation-functionals-and-point-masses
 kind: example
 title: "Evaluation functionals and point masses"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

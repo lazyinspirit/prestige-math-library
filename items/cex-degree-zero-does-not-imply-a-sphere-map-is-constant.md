@@ -6,12 +6,14 @@ deps: ["thm-global-sphere-degree-is-the-sum-of-local-degrees", "prop-degree-of-i
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Hatcher, Algebraic Topology, Example 2.31, p.136 (signed fold variation)"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Example 2.31, p.136 (signed fold variation)"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Pinch two disjoint disks and fold one quotient with local sign +1 and the other with sign -1; outside both disks map to the basepoint. The local-degree sum is zero while each disk quotient surjects. This says nothing against the later nullhomotopy classification."
 ---

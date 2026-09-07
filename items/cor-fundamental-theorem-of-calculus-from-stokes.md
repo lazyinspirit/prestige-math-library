@@ -2,13 +2,14 @@
 id: cor-fundamental-theorem-of-calculus-from-stokes
 title: "Stokes agrees with the fundamental theorem of calculus"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-general-stokes-theorem", "thm-newton-leibniz-with-interior-derivative"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "false-statement"
 title: "Hausdorff measure is countably additive on every subset"
 deps: ["thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line", "thm-a-vitali-set-is-not-lebesgue-measurable", "def-caratheodory-measurable-set"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

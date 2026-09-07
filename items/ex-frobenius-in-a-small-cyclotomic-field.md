@@ -2,13 +2,14 @@
 id: ex-frobenius-in-a-small-cyclotomic-field
 title: "Frobenius in a small cyclotomic field"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-frobenius-cycle-type-and-prime-splitting, thm-frobenius-order-is-residue-degree, cor-galois-prime-decomposition-efg, thm-eisenstein-irreducibility-criterion, def-discriminant-of-a-monic-polynomial]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

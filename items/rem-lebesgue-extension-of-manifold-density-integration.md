@@ -2,13 +2,14 @@
 id: rem-lebesgue-extension-of-manifold-density-integration
 title: "The separate measurable extension of density integration"
 kind: remark
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-density-integration-is-defined-without-an-orientation"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

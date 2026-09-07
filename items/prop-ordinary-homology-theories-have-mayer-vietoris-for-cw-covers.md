@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -22,7 +23,7 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, 14§5, first Mayer–Vietoris theorem pp.112–113"
       url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
       locator: "14§5, first Mayer–Vietoris theorem pp.112–113"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Derive the relative excision isomorphism and compare the two pair LES; prove the every-third-vertical-isomorphism diagram chase from Miller inline. Handle relative covers by quotient/triple exactness. No singular-chain construction is used."
 ---

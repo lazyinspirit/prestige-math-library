@@ -2,13 +2,14 @@
 id: lem-closed-range-iff-quotient-estimate
 kind: lemma
 title: "Closed range is equivalent to a quotient estimate"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "thm-quotient-of-banach-by-closed-subspace-is-banach", "thm-universal-property-of-the-normed-quotient", "lem-closed-subspace-of-a-banach-space-is-banach", "thm-bounded-inverse-theorem", "thm-bounded-below-iff-injective-with-closed-range"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

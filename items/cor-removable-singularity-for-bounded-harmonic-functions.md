@@ -2,7 +2,7 @@
 id: cor-removable-singularity-for-bounded-harmonic-functions
 kind: corollary
 title: "Removable singularity for bounded harmonic functions"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-smooth-sphere-data-have-a-harmonic-replacement, thm-comparison-principle-for-classical-subharmonic-functions, cor-ball-mean-value-property-for-harmonic-functions, thm-continuous-mean-value-functions-are-harmonic]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

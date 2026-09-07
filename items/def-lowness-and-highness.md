@@ -2,13 +2,14 @@
 id: def-lowness-and-highness
 kind: definition
 title: "Lowness and highness"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-quantifier-and-oracle-characterizations-of-ph, def-relativized-complexity-class]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

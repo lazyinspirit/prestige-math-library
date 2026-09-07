@@ -2,13 +2,14 @@
 id: rem-lp-duality-in-abstract-language
 kind: remark
 title: "The published Lp duality theorem in abstract notation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dual-space-of-a-normed-space", "thm-sigma-finite-duality-for-bounded-functionals-on-l-p", "cor-ell-p-duality-by-counting-measure"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

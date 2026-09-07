@@ -2,13 +2,14 @@
 id: lem-one-sided-maximal-inequality-for-symmetric-independent-sums
 title: "One-sided maximal inequality for symmetric independent sums"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symmetric-real-random-variable", "def-partial-sums-and-sample-means", "thm-grouping-independent-sigma-algebras", "lem-measurable-functions-preserve-independence", "thm-independent-random-elements-have-product-joint-law"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

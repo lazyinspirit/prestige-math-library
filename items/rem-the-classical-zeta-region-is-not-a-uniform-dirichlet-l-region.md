@@ -2,13 +2,14 @@
 id: rem-the-classical-zeta-region-is-not-a-uniform-dirichlet-l-region
 title: "The classical zeta region is not a uniform dirichlet l region"
 kind: remark
-status: draft
+status: published
 origin: pipeline
 deps: [thm-riemann-zeta-classical-zero-free-region, thm-prime-number-theorem-arithmetic-progressions]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

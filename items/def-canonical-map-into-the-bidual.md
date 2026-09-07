@@ -2,13 +2,14 @@
 id: def-canonical-map-into-the-bidual
 kind: definition
 title: "The canonical evaluation map into the bidual"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dual-space-of-a-normed-space"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

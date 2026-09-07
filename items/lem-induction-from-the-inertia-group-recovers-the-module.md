@@ -2,13 +2,14 @@
 id: "lem-induction-from-the-inertia-group-recovers-the-module"
 kind: "lemma"
 title: "Reconstruction from the inertia component"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-normal-isotypical-component-is-inertia-stable", "lem-normal-restriction-constituents-form-one-conjugacy-orbit", "prop-induced-module-decomposes-over-a-left-transversal", "thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules", "lem-normal-isotypical-components-are-permuted-by-translation"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

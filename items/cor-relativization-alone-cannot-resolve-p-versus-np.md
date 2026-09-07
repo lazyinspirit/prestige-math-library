@@ -2,7 +2,7 @@
 id: cor-relativization-alone-cannot-resolve-p-versus-np
 kind: corollary
 title: "Relativization alone cannot resolve p versus np"
-status: draft
+status: published
 origin: pipeline
 deps: [def-relativizing-proof-technique, thm-an-oracle-separates-p-from-np, thm-an-oracle-collapses-p-and-np]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

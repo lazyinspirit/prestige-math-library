@@ -2,13 +2,14 @@
 id: "ex-clifford-theory-for-s3-over-a3"
 kind: "example"
 title: "Clifford correspondence for A3 in S3"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-clifford-correspondence", "cor-normal-subgroup-induction-irreducibility-criterion", "thm-gallagher-correspondence-for-an-extendible-character"]
 provenance:
   statement: ai-generated
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

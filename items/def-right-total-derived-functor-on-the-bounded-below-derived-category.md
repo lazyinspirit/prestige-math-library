@@ -4,6 +4,7 @@ kind: "definition"
 title: "Right total derived functor on the bounded below derived category"
 deps: ["thm-injective-complexes-model-the-bounded-below-derived-category", "def-additive-functor"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 justified_by: ["thm-existence-of-the-bounded-below-right-total-derived-functor"]
 ---

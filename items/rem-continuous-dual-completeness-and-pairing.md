@@ -2,13 +2,14 @@
 id: rem-continuous-dual-completeness-and-pairing
 kind: remark
 title: "The continuous dual, its completeness, and evaluation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dual-space-of-a-normed-space", "thm-bounded-operator-space-is-banach"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

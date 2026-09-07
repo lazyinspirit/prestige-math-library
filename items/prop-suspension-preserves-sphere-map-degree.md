@@ -6,12 +6,14 @@ deps: ["def-degree-of-a-self-map-of-an-oriented-sphere", "cor-suspension-isomorp
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Hatcher, Algebraic Topology, Proposition 2.33, p.137"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Proposition 2.33, p.137"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use the natural suspension square. Specify the unreduced two-cone suspension already used by the library, whose sphere is S^(n+1)."
 ---

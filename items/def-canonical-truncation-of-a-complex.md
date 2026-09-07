@@ -4,6 +4,7 @@ kind: "definition"
 title: "Canonical truncation of a complex"
 deps: ["def-brutal-truncation-of-a-complex", "def-cohomology-object-of-a-cochain-complex"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 justified_by: ["lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology"]
 ---

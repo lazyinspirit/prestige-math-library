@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Verma and finite-dimensional weight modules belong to O"
 deps: ["def-bgg-category-o", "prop-equivalent-support-description-of-category-o", "prop-weights-of-a-verma-module-lie-below-lambda", "thm-verma-module-has-a-unique-simple-quotient"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use the Verma PBW cone; finite-dimensional weight modules satisfy all three axioms directly"
 ---

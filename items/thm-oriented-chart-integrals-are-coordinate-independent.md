@@ -2,13 +2,14 @@
 id: thm-oriented-chart-integrals-are-coordinate-independent
 title: "Coordinate independence of chart integrals"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-integral-of-an-oriented-chart-supported-top-form", "lem-half-space-chart-transitions-extend-locally-to-side-preserving-diffeomorphisms", "cor-change-of-variables-for-compactly-supported-functions", "prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges", "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary", "lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

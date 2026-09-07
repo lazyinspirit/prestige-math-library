@@ -2,13 +2,14 @@
 id: lem-uniqueness-of-an-extended-complete-field-absolute-value
 title: "Uniqueness of an extended complete field absolute value"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

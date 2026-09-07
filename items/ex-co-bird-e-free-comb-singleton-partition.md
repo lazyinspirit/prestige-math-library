@@ -2,7 +2,7 @@
 id: ex-co-bird-e-free-comb-singleton-partition
 title: "The no-E-copy boundary case of the comb partition"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-co-bird-free-comb-blocks-admit-an-e-free-structural-partition", "def-comb-in-a-graph", "def-e-graph-and-co-e-graph", "def-bird-graph-and-co-bird-graph"]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: "Finite adjacency analysis and structural deduction"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Axioms for Homology, pp.160–161"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Axioms for Homology, pp.160–161"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

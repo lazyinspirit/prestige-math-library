@@ -2,13 +2,14 @@
 id: "rem-fibre-is-scheme-not-point-set"
 kind: "remark"
 title: "What the underlying fibre set forgets"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-points-of-fibre-primes-over-point", "lem-scheme-fibre-stalk-quotient", "lem-points-of-scheme-fibre-product-residue-tensors"]
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Canonical truncation is a complex and has the claimed cohomology"
 deps: ["def-canonical-truncation-of-a-complex"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

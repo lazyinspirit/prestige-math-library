@@ -2,7 +2,7 @@
 id: lem-co-bird-free-external-purity-survives-e-overlap-quotients
 title: "External purity survives every E overlap quotient"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-co-bird-free-complete-nonedge-pairs-are-pure-to-induced-e-graphs", "lem-purity-on-every-e-propagates-along-an-overlap-class", "def-e-overlap-blockade-and-iterated-mixed-quotients", "lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade", "lem-co-bird-free-separated-anticonnected-blocks-forbid-forward-mixing", "lem-a-vertex-mixed-on-a-quotient-block-yields-opposite-adjacency-on-two-member-blocks", "lem-a-quotient-mixed-block-witness-descends-to-two-member-blocks", "def-comb-in-a-graph"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: induction
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

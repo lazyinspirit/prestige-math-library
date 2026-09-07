@@ -2,13 +2,14 @@
 id: ex-change-of-variables-on-the-oriented-circle
 title: "Change of variables on an oriented circle"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-change-of-variables-for-oriented-manifold-diffeomorphisms", "prop-integration-of-top-forms-by-finite-parametrizations"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

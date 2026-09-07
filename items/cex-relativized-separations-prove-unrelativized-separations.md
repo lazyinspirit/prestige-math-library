@@ -2,13 +2,15 @@
 id: cex-relativized-separations-prove-unrelativized-separations
 kind: counterexample
 title: "Relativized separations prove unrelativized separations"
-status: draft
+status: published
 origin: pipeline
 deps: [fs-relativized-separations-prove-unrelativized-separations]
 provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Arora–Barak, Computational Complexity, 2007 draft; §3.5, pp71–72."

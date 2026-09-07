@@ -3,6 +3,8 @@ id: "ex-a-generic-sl2-block-is-semisimple"
 kind: "example"
 title: "Nonintegral sl2 central characters split into two simple blocks"
 deps: ["thm-central-character-summands-split-into-linkage-blocks", "lem-verma-self-extensions-in-category-o-split", "prop-hom-spaces-in-category-o-are-finite-dimensional", "cor-verma-irreducibility-criterion-from-shapovalov-determinants", "def-generalized-central-character-subcategory-of-o", "thm-simple-objects-of-category-o-are-highest-weight-modules", "lem-harish-chandra-projection-computes-highest-weight-scalars", "cor-central-characters-are-dot-weyl-orbits", "thm-every-category-o-object-has-finite-length"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "§15.1 Example 15.8, p.81"
@@ -10,7 +12,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

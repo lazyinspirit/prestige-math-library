@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Noetherianity of the enveloping algebra"
 deps: ["thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra", "thm-hilbert-basis-theorem"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Lift finite homogeneous generators of gr(I) in the polynomial algebra gr U(g), subtract leading symbols and induct on degree; same proof for right ideals"
 ---

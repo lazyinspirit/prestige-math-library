@@ -2,13 +2,14 @@
 id: rem-oracle-and-promise-conventions-are-distinct
 kind: remark
 title: "Oracle and promise conventions are distinct"
-status: draft
+status: published
 origin: pipeline
 deps: [def-relativized-complexity-class, def-promise-preserving-reduction]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

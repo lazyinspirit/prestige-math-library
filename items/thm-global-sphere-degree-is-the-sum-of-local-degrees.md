@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Proposition 2.30, p.136"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Proposition 2.30, p.136"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use the commuting global/relative/local square; the incoming global class is diagonal and the outgoing map adds the local multiples. Treat the empty fibre with the omitted-point lemma."
 ---

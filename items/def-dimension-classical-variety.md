@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne §5j p.115 and §3c Note 3.13 p.63; local-dimension convention prescribed by AV-5 design"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

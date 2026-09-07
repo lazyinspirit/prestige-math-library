@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Theorem 4.59 homology argument, printed pp.399–401 (in chapter 4); alternative simplicial route specified in notes"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf"
       locator: "Theorem 4.59 homology argument, printed pp.399–401 (in chapter 4); alternative simplicial route specified in notes"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Apply finite CW comparison with singular coefficients G; on simplicial sphere chains the fundamental cycle gives the tensor G generator and the same integer action. Do not invoke the homotopy classification of sphere maps."
 ---

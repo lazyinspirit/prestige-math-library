@@ -2,13 +2,14 @@
 id: def-reflexive-banach-space
 kind: definition
 title: "Reflexivity is surjectivity of the canonical map"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-canonical-map-into-the-bidual", "thm-canonical-bidual-map-is-an-isometry", "def-banach-space"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

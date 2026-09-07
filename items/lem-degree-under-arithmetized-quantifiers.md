@@ -2,7 +2,7 @@
 id: lem-degree-under-arithmetized-quantifiers
 kind: lemma
 title: "Degree under Boolean elimination operators"
-status: draft
+status: published
 origin: pipeline
 deps: [def-arithmetization-of-a-boolean-formula]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

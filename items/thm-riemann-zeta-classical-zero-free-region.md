@@ -2,13 +2,14 @@
 id: thm-riemann-zeta-classical-zero-free-region
 title: "Riemann zeta classical zero free region"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [lem-zeta-logarithmic-derivative-zero-bound, lem-zeta-three-four-one-logarithmic-derivative-inequality, thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane, thm-riemann-zeta-continuation-to-the-right-half-plane]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

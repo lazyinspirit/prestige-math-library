@@ -2,13 +2,14 @@
 id: def-one-density-on-a-finite-dimensional-real-vector-space
 title: "A signed one-density on a real vector space"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-the-top-exterior-power-is-one-dimensional"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "example"
 title: "A Sierpinski gasket computed by hand"
 deps: ["thm-hausdorff-mass-distribution-principle", "thm-hausdorff-dimension-critical-exponent", "thm-geometric-series", "thm-lebesgue-measure-of-a-box-of-every-kind", "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

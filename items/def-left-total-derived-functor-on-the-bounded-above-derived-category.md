@@ -4,6 +4,7 @@ kind: "definition"
 title: "Left total derived functor on the bounded above derived category"
 deps: ["thm-projective-complexes-model-the-bounded-above-derived-category", "def-additive-functor"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 justified_by: ["thm-existence-of-the-bounded-above-left-total-derived-functor"]
 ---

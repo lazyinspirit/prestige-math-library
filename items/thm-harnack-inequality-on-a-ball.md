@@ -2,7 +2,7 @@
 id: thm-harnack-inequality-on-a-ball
 kind: theorem
 title: "Harnack inequality on a ball"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-ball-mean-value-property-for-harmonic-functions, lem-sphere-and-ball-measures-scale]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

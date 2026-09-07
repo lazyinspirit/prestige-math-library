@@ -2,13 +2,14 @@
 id: prop-the-absolute-value-of-a-top-form-is-a-density
 title: "Absolute value of a top form as a density"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-density-bundle-and-smooth-density"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: thm-decomposition-inertia-exact-sequence
 title: "Decomposition inertia exact sequence"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lifting-residue-frobenius-by-galois-conjugates, thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group, def-inertia-group-of-a-prime]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

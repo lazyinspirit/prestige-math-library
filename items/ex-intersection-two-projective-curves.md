@@ -7,6 +7,7 @@ provenance:
   statement: "ai-generated"
   proof: "ai-generated"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 generation:
   role: "example"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Compute the two displayed equations; for irreducible distinct curves any positive-dimensional component would equal both curves."
 ---

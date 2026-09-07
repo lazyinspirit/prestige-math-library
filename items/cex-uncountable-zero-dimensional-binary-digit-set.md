@@ -4,6 +4,7 @@ kind: "counterexample"
 title: "An uncountable compact set can have dimension zero"
 deps: ["prop-binary-digit-restriction-hausdorff-dimension", "thm-hausdorff-dimension-critical-exponent"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

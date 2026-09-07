@@ -2,13 +2,14 @@
 id: "def-affine-morphism-schemes"
 kind: "definition"
 title: "Affine morphisms"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-morphism-of-schemes", "def-affine-open-subscheme"]
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

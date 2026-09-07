@@ -2,7 +2,7 @@
 id: lem-constant-vector-is-a-top-eigenvector
 kind: lemma
 title: "Constant vector is a top eigenvector"
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-multigraph-and-normalized-adjacency, cor-real-spectral-theorem-for-self-adjoint-endomorphisms]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

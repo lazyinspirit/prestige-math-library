@@ -2,7 +2,7 @@
 id: prop-expander-walk-hits-bad-edges
 kind: proposition
 title: "Expander walk hits bad edges"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-expander-walk-bad-edge-return, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

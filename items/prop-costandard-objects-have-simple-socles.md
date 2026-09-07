@@ -3,6 +3,8 @@ id: "prop-costandard-objects-have-simple-socles"
 kind: "proposition"
 title: "The simple socle of a costandard object"
 deps: ["prop-restricted-duality-is-an-exact-involution-on-category-o", "thm-verma-module-has-a-unique-simple-quotient", "def-standard-and-costandard-objects-in-category-o"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Lecture 8 §3 Corollary 3.13, p.5"
@@ -10,7 +12,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Dualize the unique maximal Verma submodule; every simple submodule dualizes to the unique simple quotient"
 ---

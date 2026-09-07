@@ -4,6 +4,7 @@ kind: "counterexample"
 title: "Finite weight spaces alone do not give category O"
 deps: ["def-bgg-category-o", "prop-equivalent-support-description-of-category-o", "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ provenance:
   proof: "ai-generated"
 generation:
   role: "counterexample"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Construct induction from the negative Borel by the same PBW argument with e and f exchanged"
 ---

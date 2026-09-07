@@ -2,7 +2,7 @@
 id: lem-terminal-e-overlap-quotient-pattern-is-e-free
 title: "The terminal E overlap pattern is E-free"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade", "def-e-overlap-blockade-and-iterated-mixed-quotients", "def-e-overlap-chain-relation-in-a-comb-block", "def-pattern-graph-of-a-pure-blockade", "def-e-graph-and-co-e-graph"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Finite adjacency analysis and structural deduction"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

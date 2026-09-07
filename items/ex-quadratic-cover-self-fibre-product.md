@@ -2,13 +2,14 @@
 id: "ex-quadratic-cover-self-fibre-product"
 kind: "example"
 title: "The self fibre product of the quadratic cover"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-affine-fibre-product-tensor-ring", "lem-tensor-ring-presentations-for-base-change"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

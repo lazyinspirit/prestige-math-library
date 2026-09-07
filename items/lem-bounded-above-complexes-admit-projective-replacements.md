@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Bounded above complexes admit projective replacements"
 deps: ["lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology", "def-a-category-with-enough-projectives-and-with-enough-injectives", "thm-the-pullback-of-an-epimorphism-is-an-epimorphism", "def-dependent-choice"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

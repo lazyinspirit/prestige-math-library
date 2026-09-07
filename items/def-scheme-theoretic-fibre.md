@@ -2,13 +2,14 @@
 id: "def-scheme-theoretic-fibre"
 kind: "definition"
 title: "Scheme-theoretic fibre"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-base-change-morphism-schemes", "lem-field-valued-points-of-schemes"]
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

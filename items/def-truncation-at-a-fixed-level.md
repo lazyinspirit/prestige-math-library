@@ -2,12 +2,14 @@
 id: def-truncation-at-a-fixed-level
 title: "Zero truncation at a positive level"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-random-element-and-real-random-variable", "thm-arithmetic-and-lattice-operations-preserve-measurability"]
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Section 2.2.3, p. 62"

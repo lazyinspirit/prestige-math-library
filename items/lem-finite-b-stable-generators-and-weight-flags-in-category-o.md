@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Finite Borel-stable generators and weight flags"
 deps: ["def-bgg-category-o"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Replace finitely many generators by their weight components and U(n+) spans; maximal weights give invariant lines and induction on dim E gives the flag"
 ---

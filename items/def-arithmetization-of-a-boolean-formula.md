@@ -2,13 +2,14 @@
 id: def-arithmetization-of-a-boolean-formula
 kind: definition
 title: "Arithmetization of Boolean formulas"
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-formula-cnf-and-sat, def-field, def-multivariate-polynomial-ring-by-iteration]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

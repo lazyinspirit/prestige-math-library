@@ -2,13 +2,14 @@
 id: thm-kolmogorov-convergence-criterion
 title: "Kolmogorov convergence criterion"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kolmogorov-maximal-inequality", "def-almost-sure-convergence-of-a-random-series", "thm-series-cauchy-criterion", "thm-continuity-from-below-for-measures", "thm-continuity-from-above-for-measures", "lem-variance-and-covariance-identities-for-random-variables", "thm-riesz-fischer-completeness-of-l-p", "thm-lp-convergence-implies-convergence-in-probability", "thm-almost-sure-convergence-implies-convergence-in-probability", "thm-limits-in-probability-are-unique-almost-surely"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

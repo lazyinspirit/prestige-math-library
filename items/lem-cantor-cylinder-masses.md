@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Cantor basic intervals have their expected masses"
 deps: ["def-cantor-measure", "prop-cantor-measure-is-a-singular-atomless-probability-measure", "thm-cantor-function-properties", "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures", "thm-cantor-set-ternary-description", "def-cantor-function"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

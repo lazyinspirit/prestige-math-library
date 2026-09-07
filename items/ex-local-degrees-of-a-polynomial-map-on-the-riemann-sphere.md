@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Lebl, Guide to Cultivating Complex Analysis, Theorem 5.1.3 and Exercise 1.3.9"
       url: "https://jirilebl.github.io/ca/ca.pdf"
       locator: "§1.3 stereographic construction and Exercises 1.3.1–1.3.9, pp.19–20; Lemma 5.1.1 and Definition 5.1.2, pp.122–123; Theorem 5.1.3 p.123 read as a stronger comparison, not used."
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Construct the sphere model inline: inverse stereographic coordinates send z to (2 Re(z),2 Im(z),|z|^2-1)/(1+|z|^2), and infinity to the north pole; verify continuity and inverse. Use the orientation for which the finite complex coordinate is positive; the infinity coordinate w=1/z has transition derivative multiplication by -1/z^2, hence positive real determinant, or verify its local sign by rotation and positive dilation. Polynomial division gives P(z)-P(a)=(z-a)^m q(z), q(a)!=0. Shrink until |q(z)-q(a)|<|q(a)|, so the straight-line homotopy of q to q(a) never vanishes; this is a homotopy of punctured local pairs to q(a)(z-a)^m. The pair LES identifies its local H_2 action with the angular power map on H_1 of a small circle. Compute the m positive local angular contributions inline, without depending on another B item. At infinity, 1/P(1/w)=w^d/(a_d+a_(d-1)w+...+a_0 w^d), so the same nonvanishing-factor argument gives local degree d. The leading-term growth bound proves extension at infinity. The published polynomial root-multiplicity theorem gives total finite-fibre multiplicity d, and the local-degree sum gives global degree d. This retains all multiplicity conclusions without a holomorphic normal-form or rational-map prerequisite."
 ---

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Left total derived functor is independent up to a unique augmentation-compatible natural isomorphism"
 deps: ["def-left-total-derived-functor-on-the-bounded-above-derived-category", "prop-morphisms-from-a-homotopically-projective-complex-need-no-roof"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -2,13 +2,14 @@
 id: "cor-base-change-finite-type-and-products"
 kind: "corollary"
 title: "Finite type under base change and products over a field"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-base-change-locally-finite-type-presentation", "lem-base-change-quasi-compact-morphisms", "lem-tensor-ring-presentations-for-base-change"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

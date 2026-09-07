@@ -2,13 +2,14 @@
 id: "thm-affine-fibre-product-tensor-ring"
 kind: "theorem"
 title: "Affine fibre products are spectra of tensor products"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-fibre-product-schemes-universal-property", "thm-morphisms-into-affine-scheme-global-sections", "thm-coproduct-property-of-tensor-products-of-commutative-algebras"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

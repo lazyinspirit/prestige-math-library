@@ -2,13 +2,14 @@
 id: ex-dual-of-a-finite-dimensional-space
 kind: example
 title: "Finite-dimensional duals and matrix transposes"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "thm-dual-family-is-a-basis-in-finite-dimension", "cor-linear-maps-with-finite-dimensional-domain-are-bounded"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

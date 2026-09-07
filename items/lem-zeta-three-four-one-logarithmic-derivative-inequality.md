@@ -2,13 +2,14 @@
 id: lem-zeta-three-four-one-logarithmic-derivative-inequality
 title: "Zeta three four one logarithmic derivative inequality"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [thm-von-mangoldt-logarithmic-derivative-zeta]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

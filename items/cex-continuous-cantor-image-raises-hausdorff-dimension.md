@@ -4,6 +4,7 @@ kind: "counterexample"
 title: "A continuous image can raise Hausdorff dimension"
 deps: ["thm-cantor-function-properties", "cor-cantor-function-is-continuous", "thm-cantor-set-hausdorff-dimension-and-exact-measure", "cor-euclidean-hausdorff-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

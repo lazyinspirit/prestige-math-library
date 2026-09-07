@@ -2,13 +2,14 @@
 id: "lem-base-extension-field-coordinate-ring"
 kind: "lemma"
 title: "Affine charts after extension of the ground field"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-base-change-morphism-schemes", "thm-fibre-products-of-schemes-exist", "lem-tensor-ring-presentations-for-base-change"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

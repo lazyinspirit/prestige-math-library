@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Finite-dimensional tensoring preserves O"
 deps: ["def-bgg-category-o", "prop-equivalent-support-description-of-category-o", "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Tensor basis of E with weight generators of M; induct on PBW degree using x(e tensor m)=xe tensor m+e tensor xm to establish finite generation. Support is a finite translate union; exactness holds over C"
 ---

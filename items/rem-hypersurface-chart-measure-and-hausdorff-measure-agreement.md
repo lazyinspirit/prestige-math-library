@@ -4,6 +4,7 @@ kind: "remark"
 title: "Chart surface measure and Hausdorff measure: a boundary of scope"
 deps: ["def-hausdorff-measure", "thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

@@ -2,13 +2,14 @@
 id: def-linearity-test
 kind: definition
 title: "The BLR linearity test over F_2"
-status: draft
+status: published
 origin: pipeline
 deps: [def-field]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

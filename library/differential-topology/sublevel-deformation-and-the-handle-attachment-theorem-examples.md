@@ -1,7 +1,7 @@
 ---
 page: "sublevel-deformation-and-the-handle-attachment-theorem-examples"
 title: "Sublevel Deformation and the Handle Attachment Theorem — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-sublevels-of-height-on-the-sphere", "ex-torus-from-one-handle-of-each-index", "ex-a-one-handle-joins-components-or-adds-a-tunnel", "ex-simultaneous-handles-at-a-repeated-critical-value", "cex-a-critical-point-free-noncompact-band-need-not-be-a-global-product", "ex-relative-homology-of-a-handle-by-excision"]
 ---

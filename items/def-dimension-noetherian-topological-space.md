@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne §3l Definition 3.39 and §2m Definition 2.48"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

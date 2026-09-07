@@ -2,13 +2,14 @@
 id: lem-kronecker-summation-lemma
 title: "Kronecker summation lemma"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-abel-summation-by-parts", "thm-series-cauchy-criterion"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

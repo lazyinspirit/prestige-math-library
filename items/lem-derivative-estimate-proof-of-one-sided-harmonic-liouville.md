@@ -2,7 +2,7 @@
 id: lem-derivative-estimate-proof-of-one-sided-harmonic-liouville
 kind: lemma
 title: "Derivative estimate proof of one sided harmonic liouville"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-smooth-sphere-data-have-a-harmonic-replacement, lem-derivatives-of-harmonic-functions-are-harmonic, cor-ball-mean-value-property-for-harmonic-functions, thm-continuous-mean-value-functions-are-harmonic]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

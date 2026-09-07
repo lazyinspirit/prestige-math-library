@@ -2,13 +2,14 @@
 id: cor-independent-nonidentical-finite-variance-strong-law
 title: "Strong law for independent nonidentical variables"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kolmogorov-strong-law-under-summable-normalized-variances"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

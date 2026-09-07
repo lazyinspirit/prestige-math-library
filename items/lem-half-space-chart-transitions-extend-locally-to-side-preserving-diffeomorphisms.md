@@ -2,13 +2,14 @@
 id: lem-half-space-chart-transitions-extend-locally-to-side-preserving-diffeomorphisms
 title: "Local side-preserving extensions of half-space transitions"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-smooth-invariance-of-manifold-boundary", "prop-chain-rule-for-smooth-half-space-maps", "lem-smooth-half-space-extensions-have-the-same-derivatives-on-the-half-space", "thm-euclidean-inverse-function-theorem", "thm-newton-leibniz-with-interior-derivative"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

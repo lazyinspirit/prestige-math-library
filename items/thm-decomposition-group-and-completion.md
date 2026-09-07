@@ -2,13 +2,14 @@
 id: thm-decomposition-group-and-completion
 title: "Decomposition group and completion"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [def-decomposition-group-of-a-prime, lem-number-field-completions-as-local-polynomial-factors, thm-galois-action-on-primes-above-a-prime-is-transitive, cor-galois-prime-decomposition-efg, thm-orbit-stabilizer]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

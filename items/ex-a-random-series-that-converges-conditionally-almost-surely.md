@@ -2,13 +2,14 @@
 id: ex-a-random-series-that-converges-conditionally-almost-surely
 title: "Almost-sure conditional convergence"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kolmogorov-three-series-theorem", "cor-countable-independent-copies-exist", "thm-p-series-real-exponents", "thm-alternating-series-test"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

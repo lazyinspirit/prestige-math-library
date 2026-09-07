@@ -2,7 +2,7 @@
 id: lem-cheeger-sweep-and-layer-cake
 kind: lemma
 title: "Cheeger sweep and layer cake"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-cheeger-indicator-and-positive-part-energy, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

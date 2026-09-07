@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, 15§2, definition of C_n and d, p.119"
       url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
       locator: "15§2, definition of C_n and d, p.119"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use quotient wedges, arbitrary additivity, and exactness of triples. Do not yet identify the integer incidence action for an arbitrary h."
 ---

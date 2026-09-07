@@ -2,13 +2,14 @@
 id: "ex-product-affine-lines-plane"
 kind: "example"
 title: "The affine plane and the pair of generic points"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-affine-fibre-product-tensor-ring", "lem-points-of-scheme-fibre-product-residue-tensors"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

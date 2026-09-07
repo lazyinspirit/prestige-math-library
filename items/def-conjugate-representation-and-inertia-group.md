@@ -2,13 +2,14 @@
 id: "def-conjugate-representation-and-inertia-group"
 kind: "definition"
 title: "Inertia group and characters lying above a normal type"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-conjugate-representation-and-conjugate-character", "def-normal-subgroup", "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

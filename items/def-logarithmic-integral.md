@@ -2,13 +2,14 @@
 id: def-logarithmic-integral
 title: "Logarithmic integral"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

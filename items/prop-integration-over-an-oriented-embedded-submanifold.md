@@ -2,13 +2,14 @@
 id: prop-integration-over-an-oriented-embedded-submanifold
 title: "Integration on an oriented embedded submanifold"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-change-of-variables-for-oriented-manifold-diffeomorphisms", "def-embedded-smooth-submanifold-with-boundary", "def-pullback-of-a-differential-form"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

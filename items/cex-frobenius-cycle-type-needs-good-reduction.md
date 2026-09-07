@@ -2,13 +2,14 @@
 id: cex-frobenius-cycle-type-needs-good-reduction
 title: "Frobenius cycle type needs good reduction"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: [thm-frobenius-cycle-type-and-prime-splitting, thm-dedekind-kummer-prime-factorisation, thm-ramified-primes-and-the-number-field-discriminant, thm-ring-of-integers-of-a-quadratic-field, thm-power-basis-discriminant-is-polynomial-discriminant]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

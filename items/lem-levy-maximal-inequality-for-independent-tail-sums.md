@@ -2,13 +2,14 @@
 id: lem-levy-maximal-inequality-for-independent-tail-sums
 title: "Levy maximal bound from uniform tail bounds"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-partial-sums-and-sample-means", "def-independent-random-elements", "thm-grouping-independent-sigma-algebras", "thm-arithmetic-and-lattice-operations-preserve-measurability"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

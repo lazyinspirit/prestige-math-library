@@ -2,13 +2,14 @@
 id: def-relativized-complexity-class
 kind: definition
 title: "Relativized complexity class"
-status: draft
+status: published
 origin: pipeline
 deps: [def-p, def-np-by-verifiers, def-polynomial-hierarchy-levels]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

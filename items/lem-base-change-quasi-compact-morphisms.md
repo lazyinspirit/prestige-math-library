@@ -2,13 +2,14 @@
 id: "lem-base-change-quasi-compact-morphisms"
 kind: "lemma"
 title: "Quasi-compactness is local on the target and survives base change"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-quasi-compact-and-quasi-separated-morphism", "cor-affine-scheme-quasi-compact", "thm-fibre-products-of-schemes-exist"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

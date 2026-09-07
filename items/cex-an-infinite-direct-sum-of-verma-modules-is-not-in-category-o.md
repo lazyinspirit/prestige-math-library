@@ -4,6 +4,7 @@ kind: "counterexample"
 title: "Finite weight spaces and bounded support do not replace finite generation"
 deps: ["def-bgg-category-o", "prop-weights-of-a-verma-module-lie-below-lambda"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ provenance:
   proof: "ai-generated"
 generation:
   role: "counterexample"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Any finite set of vectors lies in finitely many direct summands, which form a proper submodule; count n=0,...,k for the weight dimension"
 ---

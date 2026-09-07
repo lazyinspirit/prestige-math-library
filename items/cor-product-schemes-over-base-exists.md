@@ -2,13 +2,14 @@
 id: "cor-product-schemes-over-base-exists"
 kind: "corollary"
 title: "Products and initial and terminal S-schemes"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-fibre-products-of-schemes-exist", "def-scheme-over-base"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

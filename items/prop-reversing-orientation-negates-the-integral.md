@@ -2,13 +2,14 @@
 id: prop-reversing-orientation-negates-the-integral
 title: "Orientation reversal changes the integral sign"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

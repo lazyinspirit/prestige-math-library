@@ -2,13 +2,14 @@
 id: "lem-graph-as-pullback-diagonal"
 kind: "lemma"
 title: "The graph is a pullback of the diagonal"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-graph-morphism-over-base", "def-diagonal-morphism-scheme", "lem-fibre-product-unique-canonical-isomorphism"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

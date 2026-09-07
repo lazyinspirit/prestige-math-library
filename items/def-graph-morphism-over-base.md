@@ -2,13 +2,14 @@
 id: "def-graph-morphism-over-base"
 kind: "definition"
 title: "The graph morphism over a base"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-fibre-products-of-schemes-exist", "def-scheme-over-base"]
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

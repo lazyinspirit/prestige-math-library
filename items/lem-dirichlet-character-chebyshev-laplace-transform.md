@@ -2,13 +2,14 @@
 id: lem-dirichlet-character-chebyshev-laplace-transform
 title: "Dirichlet character chebyshev laplace transform"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [thm-dirichlet-l-euler-product, thm-dirichlet-series-summatory-integral, thm-chebyshev-theta-linear-bounds, lem-chebyshev-functions-prime-power-comparison, thm-dirichlet-l-nonzero-at-one, thm-dirichlet-l-nonvanishing-line-one, thm-nonprincipal-dirichlet-l-holomorphic-right-half-plane, thm-principal-dirichlet-l-factorization, thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

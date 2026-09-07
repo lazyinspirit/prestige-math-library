@@ -4,6 +4,7 @@ kind: "example"
 title: "dvrs as regular local rings"
 deps: ["thm-one-dimensional-regular-local-rings-are-dvrs", "thm-associated-graded-ring-of-a-regular-local-ring"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-generated
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 generation:
   role: example

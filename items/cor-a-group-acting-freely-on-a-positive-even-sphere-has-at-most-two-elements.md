@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Proposition 2.29, p.135"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Proposition 2.29, p.135"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "The degree homomorphism to {+1,-1} has trivial kernel because every nonidentity group element has no fixed point and hence degree -1. The antipodal action realizes the nontrivial case."
 ---

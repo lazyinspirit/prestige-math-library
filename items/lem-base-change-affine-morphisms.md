@@ -2,12 +2,14 @@
 id: "lem-base-change-affine-morphisms"
 kind: "lemma"
 title: "Base change and composition of affine morphisms"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-affine-morphism-schemes", "lem-affine-morphism-local-on-target", "thm-affine-fibre-product-tensor-ring", "lem-fibre-product-open-restriction", "thm-affine-closed-immersions-quotient-rings", "lem-base-change-quasi-compact-morphisms"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Stacks 29.11.8–10"

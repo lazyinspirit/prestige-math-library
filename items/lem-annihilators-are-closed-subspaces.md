@@ -2,13 +2,14 @@
 id: lem-annihilators-are-closed-subspaces
 kind: lemma
 title: "Annihilators and preannihilators are norm closed"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-annihilator-and-preannihilator", "def-dual-space-of-a-normed-space"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

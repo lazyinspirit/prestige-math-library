@@ -4,6 +4,7 @@ kind: "lemma"
 title: "The sharp interval bound for Cantor measure"
 deps: ["lem-cantor-cylinder-masses", "thm-real-power-continuity-and-derivatives", "thm-continuity-from-below-for-measures", "prop-cantor-measure-is-a-singular-atomless-probability-measure"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

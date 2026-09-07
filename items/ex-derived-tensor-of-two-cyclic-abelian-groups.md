@@ -3,6 +3,7 @@ id: "ex-derived-tensor-of-two-cyclic-abelian-groups"
 kind: "example"
 deps: ["def-derived-tensor-product-in-the-bounded-above-setting", "prop-homology-of-the-derived-tensor-product-is-tor"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -14,7 +15,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne Theorem 6.43, printed p.156"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Apply the affine principal result to the cone. A positive-degree homogeneous element is not a unit in the cone ring; dimension >=1 of the intersection rules out only the vertex. Transfer purity on punctured-cone charts."
 ---

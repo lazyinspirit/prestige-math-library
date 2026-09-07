@@ -2,13 +2,14 @@
 id: def-promise-preserving-reduction
 kind: definition
 title: "Promise preserving reduction"
-status: draft
+status: published
 origin: pipeline
 deps: [def-promise-problem]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

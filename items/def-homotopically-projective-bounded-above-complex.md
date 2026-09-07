@@ -4,6 +4,7 @@ kind: "definition"
 title: "Homotopically projective bounded above complex"
 deps: ["def-hom-complex-of-chain-complexes", "thm-hom-in-the-homotopy-category-is-zero-degree-homology-of-the-hom-complex", "def-bounded-bounded-below-and-bounded-above-complex"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

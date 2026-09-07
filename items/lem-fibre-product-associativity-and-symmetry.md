@@ -2,13 +2,14 @@
 id: "lem-fibre-product-associativity-and-symmetry"
 kind: "lemma"
 title: "Symmetry, associativity and units"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-fibre-products-of-schemes-exist", "lem-fibre-product-unique-canonical-isomorphism"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

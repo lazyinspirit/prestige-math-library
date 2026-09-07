@@ -2,13 +2,14 @@
 id: rem-maximum-principles-need-domain-and-boundary-hypotheses
 kind: remark
 title: "Maximum principles need domain and boundary hypotheses"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-weak-maximum-principle-for-the-laplacian, thm-strong-maximum-principle-for-harmonic-functions, thm-hopf-boundary-point-lemma-for-the-laplacian, thm-maximum-principle-with-limsup-control-at-infinity]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

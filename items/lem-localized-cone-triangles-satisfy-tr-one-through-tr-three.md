@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Localized cone triangles satisfy tr one through tr three"
 deps: ["def-derived-category-of-an-abelian-category", "lem-addition-of-roofs-makes-an-additive-localization", "lem-finite-roof-squares-and-composable-pairs-can-be-cleared", "thm-the-homotopy-category-of-an-abelian-category-is-triangulated", "thm-homology-is-a-homological-functor-on-the-homotopy-category", "thm-five-lemma-in-an-abelian-category"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

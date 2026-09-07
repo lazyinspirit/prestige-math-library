@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne Corollaries 3.43–3.44, pp.76–77"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "On an affine chart meeting Z choose a nonzero function vanishing on Z. Maximality forces Z to be a component of its zero set after taking closure. Apply the principal theorem. Successive maximal inclusions drop dimension by one, and a minimal member is a closed point."
 ---

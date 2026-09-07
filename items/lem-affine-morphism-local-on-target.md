@@ -2,13 +2,14 @@
 id: "lem-affine-morphism-local-on-target"
 kind: "lemma"
 title: "Affineness is local on the target"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-affine-morphism-schemes", "lem-affineness-from-unit-generating-global-sections", "lem-spectrum-localization-open-immersion", "cor-affine-scheme-quasi-compact", "thm-proper-ideal-contained-in-maximal-ideal"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

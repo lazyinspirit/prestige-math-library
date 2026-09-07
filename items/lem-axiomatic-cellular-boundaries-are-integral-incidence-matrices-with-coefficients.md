@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, 15§2, first theorem and arbitrary-coefficient paragraph p.119"
       url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
       locator: "15§2, first theorem and arbitrary-coefficient paragraph p.119"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Project the attaching boundary onto each target cell sphere and use natural suspension/cofiber boundaries and the sphere-action lemma. Arbitrary additivity gives column-finite direct sums. This supplies the coefficient-matrix step missing from a bare five-lemma proof."
 ---

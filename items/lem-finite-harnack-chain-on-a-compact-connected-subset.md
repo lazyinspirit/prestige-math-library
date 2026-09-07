@@ -2,7 +2,7 @@
 id: lem-finite-harnack-chain-on-a-compact-connected-subset
 kind: lemma
 title: "Finite harnack chain on a compact connected subset"
-status: draft
+status: published
 origin: pipeline
 deps: [def-connected-space, thm-heine-borel-rn]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

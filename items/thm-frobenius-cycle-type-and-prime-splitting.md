@@ -2,13 +2,14 @@
 id: thm-frobenius-cycle-type-and-prime-splitting
 title: "Frobenius cycle type and prime splitting"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [lem-good-polynomial-reduction-kills-inertia, thm-unramified-frobenius-element-exists-uniquely, thm-frobenius-elements-above-a-prime-are-conjugate, thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

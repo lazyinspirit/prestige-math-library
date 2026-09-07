@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Central-character summands refine into linkage blocks"
 deps: ["def-integral-weyl-group-of-a-weight", "lem-integral-reflection-orbits-are-linkage-equivalence-classes", "lem-extensions-between-distinct-o-linkage-classes-split", "lem-o-modules-split-across-separated-simple-classes", "thm-verma-embedding-for-an-arbitrary-positive-root", "thm-verma-module-has-a-unique-simple-quotient", "cor-central-characters-are-dot-weyl-orbits"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use the splitting lemma for existence. For indecomposability, an integral reflection with nonzero pairing gives an embedding in one direction; the containing Verma is indecomposable by its unique highest line. Its two simple labels therefore belong to the same categorical summand. Iterate generators; zero pairing is a fixed point"
 ---

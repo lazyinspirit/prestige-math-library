@@ -2,13 +2,14 @@
 id: thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement
 title: "Independence of atlas, partition and refinement"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold", "lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form", "thm-oriented-chart-integrals-are-coordinate-independent"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: "hausdorff-measure-and-hausdorff-dimension"
 title: "Hausdorff Measure and Hausdorff Dimension"
-status: "draft"
+status: published
 items: ["def-extended-diameter-for-hausdorff-covers", "def-hausdorff-content-at-scale-delta", "lem-hausdorff-scale-monotonicity-and-limit", "def-hausdorff-measure", "thm-hausdorff-measure-is-an-outer-measure", "thm-hausdorff-measure-is-metric-and-borel-measurable", "prop-zero-dimensional-hausdorff-measure-counts", "thm-hausdorff-measure-has-borel-hulls", "prop-finite-hausdorff-measurable-sets-have-borel-cores", "prop-hausdorff-content-and-measure-have-the-same-null-sets", "thm-hausdorff-measure-under-lipschitz-maps", "cor-hausdorff-measure-under-similarities", "lem-hausdorff-exponent-comparison", "def-hausdorff-dimension", "thm-hausdorff-dimension-critical-exponent", "thm-hausdorff-dimension-is-countably-stable", "cor-lipschitz-maps-do-not-increase-hausdorff-dimension", "lem-euclidean-cube-bounds-for-hausdorff-measure", "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line", "thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure", "cor-euclidean-hausdorff-dimension", "thm-hausdorff-mass-distribution-principle", "lem-cantor-cylinder-masses", "lem-sharp-cantor-interval-mass-bound", "thm-cantor-set-hausdorff-dimension-and-exact-measure", "def-binary-digit-restriction-set", "prop-binary-digit-restriction-hausdorff-dimension", "rem-critical-hausdorff-measure-can-be-zero-finite-or-infinite", "rem-hausdorff-cover-conventions-and-normalisation", "rem-hypersurface-chart-measure-and-hausdorff-measure-agreement", "rem-hausdorff-dimension-orients-the-weierstrass-graph"]
 examples: []
 ---

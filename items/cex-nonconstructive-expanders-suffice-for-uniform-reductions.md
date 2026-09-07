@@ -2,7 +2,7 @@
 id: cex-nonconstructive-expanders-suffice-for-uniform-reductions
 kind: counterexample
 title: "Nonconstructive expanders suffice for uniform reductions"
-status: draft
+status: published
 origin: pipeline
 deps: [fs-nonconstructive-expanders-suffice-for-uniform-reductions, lem-expander-size-adjustment-and-laziness]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Theorem 3F.8 proof pp.314–315"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT%2B.pdf"
       locator: "Theorem 3F.8 proof pp.314–315"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Injectivity follows recursively from the lowest coordinate of a finite-support vector. The cokernel imposes precisely the generating relations of the colimit; no injectivity of u_i is assumed."
 ---

@@ -4,6 +4,7 @@ kind: "example"
 title: "betti numbers residue field regular ring"
 deps: ["lem-regular-local-residue-field-koszul-resolution", "cor-betti-number-is-rank-in-minimal-resolution", "cor-regular-local-residue-field-projective-dimension-dimension", "thm-dimension-at-most-embedding-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-generated
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 generation:
   role: example

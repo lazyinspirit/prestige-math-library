@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Hausdorff measure is Borel regular"
 deps: ["thm-hausdorff-measure-is-metric-and-borel-measurable", "prop-zero-dimensional-hausdorff-measure-counts", "def-countable-choice"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

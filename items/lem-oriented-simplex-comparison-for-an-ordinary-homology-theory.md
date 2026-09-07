@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, §2C, Theorem 2C.1 setting, pp.177–179"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "§2C, Theorem 2C.1 setting, pp.177–179"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Define the relative class of an ordered simplex recursively by its boundary and base coefficient; prove adjacent transpositions reverse it. The relative boundary lands in the alternating sum of face classes by naturality/excision. Degenerate simplicial images factor through a lower-dimensional simplex. Compare the resulting explicit complex with published simplicial/singular homology; no tensor-exactness assumption on G."
 ---

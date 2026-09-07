@@ -1,7 +1,7 @@
 ---
 page: integration-of-forms-and-the-general-stokes-theorem-examples
 title: "Integration of Forms and the General Stokes Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-integrating-a-compactly-supported-form-in-two-overlapping-charts", "ex-orientation-reversal-under-reflection", "ex-integration-of-a-density-on-the-mobius-band", "ex-stokes-on-an-oriented-interval", "ex-greens-theorem-on-a-planar-disk", "ex-classical-stokes-on-an-oriented-graph-surface", "ex-divergence-theorem-on-a-euclidean-ball", "ex-the-angular-form-has-period-two-pi", "ex-exact-top-form-with-nonzero-integral-on-a-manifold-with-boundary", "cex-a-noncompactly-supported-form-with-divergent-chart-integral", "cex-opposite-boundary-orientation-gives-the-wrong-sign-in-stokes", "ex-change-of-variables-on-the-oriented-circle"]
 ---

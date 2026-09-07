@@ -2,7 +2,7 @@
 id: lem-blr-acceptance-fourier-identity
 kind: lemma
 title: "The cubic Fourier identity for BLR"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-boolean-cube-fourier-inversion-and-parseval]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

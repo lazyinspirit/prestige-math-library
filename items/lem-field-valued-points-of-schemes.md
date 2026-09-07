@@ -2,13 +2,14 @@
 id: "lem-field-valued-points-of-schemes"
 kind: "lemma"
 title: "Field-valued points and local-ring points"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-residue-field-scheme-point", "thm-morphisms-into-affine-scheme-global-sections", "lem-local-homomorphism-residue-field-map", "thm-tensor-product-basis-from-bases", "thm-proper-ideal-contained-in-maximal-ideal"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

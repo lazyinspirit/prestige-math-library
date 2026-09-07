@@ -2,13 +2,14 @@
 id: lem-independent-copy-symmetrization-tail-bounds
 title: "Tail comparisons under independent-copy symmetrization"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-symmetrization-for-independent-random-series", "thm-continuity-from-below-for-measures"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

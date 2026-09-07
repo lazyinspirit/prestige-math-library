@@ -2,7 +2,7 @@
 id: ex-existence-and-uniqueness-of-multilinear-extension
 kind: example
 title: "Interpolating a two-bit table over F_5"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-existence-and-uniqueness-of-multilinear-extension]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

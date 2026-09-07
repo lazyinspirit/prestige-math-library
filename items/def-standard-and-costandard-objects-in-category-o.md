@@ -4,6 +4,7 @@ kind: "definition"
 title: "Standard and costandard objects"
 deps: ["prop-restricted-duality-is-an-exact-involution-on-category-o", "def-verma-module"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

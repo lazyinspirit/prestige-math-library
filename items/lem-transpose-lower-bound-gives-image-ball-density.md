@@ -2,13 +2,14 @@
 id: lem-transpose-lower-bound-gives-image-ball-density
 kind: lemma
 title: "A lower bound for the transpose forces a dense image of a ball"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "lem-transpose-is-bounded-and-has-the-same-norm", "thm-strong-separation-of-closed-and-compact-convex-sets"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

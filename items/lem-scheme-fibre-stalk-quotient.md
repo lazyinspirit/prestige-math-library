@@ -2,13 +2,14 @@
 id: "lem-scheme-fibre-stalk-quotient"
 kind: "lemma"
 title: "Stalks of the scheme-theoretic fibre"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-points-of-fibre-primes-over-point", "thm-affine-fibre-coordinate-ring", "thm-stalk-structure-sheaf-prime-localization"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

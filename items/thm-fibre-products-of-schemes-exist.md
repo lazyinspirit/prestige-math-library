@@ -2,13 +2,14 @@
 id: "thm-fibre-products-of-schemes-exist"
 kind: "theorem"
 title: "Existence of all scheme fibre products"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-affine-fibre-product-tensor-ring", "lem-fibre-products-glue-over-open-covers"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

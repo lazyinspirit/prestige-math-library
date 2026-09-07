@@ -2,7 +2,7 @@
 id: lem-expander-walk-bad-edge-return
 kind: lemma
 title: "Expander walk bad edge return"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-expander-walk-contraction]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

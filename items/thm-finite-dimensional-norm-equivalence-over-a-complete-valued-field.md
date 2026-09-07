@@ -2,13 +2,14 @@
 id: thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field
 title: "Finite dimensional norm equivalence over a complete valued field"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [def-normed-vector-space-over-an-absolutely-valued-field]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

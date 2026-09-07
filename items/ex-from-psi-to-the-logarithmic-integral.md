@@ -2,7 +2,7 @@
 id: ex-from-psi-to-the-logarithmic-integral
 title: "From psi to the logarithmic integral"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-chebyshev-psi-prime-number-theorem-error, lem-chebyshev-functions-prime-power-comparison, lem-prime-counting-chebyshev-partial-summation, def-logarithmic-integral]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

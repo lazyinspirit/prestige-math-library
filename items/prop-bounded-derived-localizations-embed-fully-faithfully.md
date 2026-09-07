@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Bounded derived localizations embed fully faithfully"
 deps: ["lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology", "def-derived-category-of-an-abelian-category", "thm-the-derived-category-inherits-a-triangulated-structure"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

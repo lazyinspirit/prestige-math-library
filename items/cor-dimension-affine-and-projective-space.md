@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Arapura Example 4.1.1"
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Polynomial fraction field has transcendence basis the coordinates; standard projective affine cover gives the second assertion."
 ---

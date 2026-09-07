@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Splitting a bounded complex by vanishing higher Ext"
 deps: ["thm-ext-is-hom-in-the-derived-category", "thm-canonical-truncations-fit-a-distinguished-triangle", "prop-yoneda-product-is-composition-in-the-derived-category", "thm-long-exact-hom-sequences-of-a-distinguished-triangle", "prop-zero-and-split-triangles-are-distinguished", "prop-two-isomorphism-components-of-a-morphism-of-triangles-force-the-third"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

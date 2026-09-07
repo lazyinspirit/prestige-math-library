@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Local degree construction, pp.135–136"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Local degree construction, pp.135–136"
-status: "draft"
+status: published
 origin: "pipeline"
 justified_by: ["lem-local-sphere-orientations-and-finite-puncture-excision"]
 ---

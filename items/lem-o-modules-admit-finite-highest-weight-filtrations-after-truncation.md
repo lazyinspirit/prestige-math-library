@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Finite filtrations by highest-weight quotients"
 deps: ["lem-finite-b-stable-generators-and-weight-flags-in-category-o", "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra", "thm-universal-property-of-verma-modules", "thm-category-o-is-abelian-and-extension-closed"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Induce the finite b-flag: PBW makes U(g) free as a right U(b)-module, so induction is exact. Map the resulting flag into M and delete repeated images. No truncation hypothesis or claim that M itself has a Verma flag"
 ---

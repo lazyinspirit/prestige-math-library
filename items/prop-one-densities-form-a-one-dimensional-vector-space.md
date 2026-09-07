@@ -2,13 +2,14 @@
 id: prop-one-densities-form-a-one-dimensional-vector-space
 title: "The density line and its positive cone"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-one-density-on-a-finite-dimensional-real-vector-space"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

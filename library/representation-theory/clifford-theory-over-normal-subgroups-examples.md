@@ -1,7 +1,7 @@
 ---
 page: clifford-theory-over-normal-subgroups-examples
 title: "Clifford Theory over Normal Subgroups — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-clifford-theory-for-s3-over-a3", "ex-gallagher-correspondence-for-a-direct-product", "ex-clifford-boundaries-n-equals-one-and-n-equals-g"]
 ---

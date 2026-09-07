@@ -2,13 +2,14 @@
 id: "lem-fibre-products-glue-over-open-covers"
 kind: "lemma"
 title: "Gluing fibre products along open covers"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-fibre-product-open-restriction", "lem-fibre-product-unique-canonical-isomorphism", "thm-gluing-affine-schemes", "lem-morphism-schemes-local-on-source-target"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-density-bundle-and-smooth-density
 title: "Density bundle and smooth density fields"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-one-densities-form-a-one-dimensional-vector-space", "thm-vector-bundle-construction-from-a-smooth-cocycle"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

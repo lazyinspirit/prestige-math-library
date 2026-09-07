@@ -2,13 +2,14 @@
 id: ex-truncated-centering-weak-law-with-infinite-mean
 title: "An infinite-mean law requiring diverging centering"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-truncated-centering-criterion-for-an-iid-weak-law", "cor-countable-independent-copies-exist", "cor-layer-cake-formulas-for-random-variables", "thm-probability-law-and-distribution-function-correspondence"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

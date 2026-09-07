@@ -2,13 +2,14 @@
 id: lem-transpose-range-membership-by-domination
 kind: lemma
 title: "Membership in the transpose range by an operator estimate"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "thm-norm-preserving-extension-from-any-subspace"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

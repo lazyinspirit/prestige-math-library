@@ -2,13 +2,14 @@
 id: thm-decomposition-and-inertia-in-towers
 title: "Decomposition and inertia in towers"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [thm-conjugacy-of-decomposition-and-inertia-groups, thm-galois-action-on-primes-above-a-prime-is-transitive, cor-orders-of-decomposition-and-inertia-groups, thm-ramification-and-residue-degrees-in-towers, thm-normal-subgroups-and-quotients-in-the-galois-correspondence]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

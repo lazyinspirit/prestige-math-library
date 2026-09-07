@@ -4,6 +4,7 @@ kind: "false-statement"
 title: "Dimensions add under unions"
 deps: ["thm-hausdorff-dimension-is-countably-stable", "cor-euclidean-hausdorff-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

@@ -2,13 +2,14 @@
 id: thm-dual-of-c0-is-ell-one
 kind: theorem
 title: "The continuous dual of c0 is ell-one"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dual-space-of-a-normed-space", "def-c-zero-and-ell-infinity", "lem-finite-truncations-are-dense-in-c0-and-ell-one"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

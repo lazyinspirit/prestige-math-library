@@ -7,13 +7,14 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
     date: 2026-09-07
 sources:
   references: [{title: 'Laugesen, Harmonic Analysis Lecture Notes', url: 'https://arxiv.org/pdf/0903.3845', locator: 'ch. 8, Theorem 8.2 proof pp. 48–49; ch. 9, Example 9.3 pp. 54–55'}, {title: 'Grafakos, Classical Fourier Analysis, third edition', url: 'https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf', locator: '§3.4.3, Proposition 3.4.6 proof, p. 211, harmonic-sum lower estimate'}]
-status: draft
+status: published
 origin: pipeline
 proof_strategy: 'Upper bound by the convolution integral. For the lower bound use the real continuous test f_delta(u)=D_N(x0-u)/max(delta,|D_N(x0-u)|). Its norm is at most one and the integral differs from integral |D_N| by at most delta. No discontinuous sign function is admitted as a continuous test. Include the necessary lower-bound calculation inline: for m=0,...,N-1 integrate over [(m+1/6)/(2N+1),(m+5/6)/(2N+1)] where |sin((2N+1)pi t)|>=1/2 and sin(pi t)<=pi t. Sum the resulting logarithms, bounded below by a constant times sum_{m=0}^{N-1}1/(m+1). This is explicitly reused mathematical content because the published Lebesgue-constant item is B-homed and unavailable as a logical target; do not mint a second growth theorem.'
 ---

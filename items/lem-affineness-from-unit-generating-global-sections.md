@@ -2,13 +2,14 @@
 id: "lem-affineness-from-unit-generating-global-sections"
 kind: "lemma"
 title: "Affineness from a finite principal cover"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-morphisms-into-affine-scheme-global-sections", "thm-sections-basic-open-affine-scheme", "thm-localisation-of-modules-is-exact", "thm-sheaf-equalizer-condition"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

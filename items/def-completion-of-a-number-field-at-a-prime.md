@@ -2,13 +2,14 @@
 id: def-completion-of-a-number-field-at-a-prime
 title: "Completion of a number field at a prime"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: [thm-number-field-places-classification, thm-completion-of-an-absolutely-valued-field, def-ramification-index, def-prime-above-and-residue-degree]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

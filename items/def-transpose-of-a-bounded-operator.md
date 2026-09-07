@@ -2,13 +2,14 @@
 id: def-transpose-of-a-bounded-operator
 kind: definition
 title: "The transpose of a bounded operator"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dual-space-of-a-normed-space", "lem-composition-operator-norm-inequality"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

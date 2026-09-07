@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
     - title: "Milne §5j finite components and §9b fibres"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "A zero-dimensional irreducible chart has no proper irreducible closed subset; each closed point must be the whole component. Conversely finite T1 spaces have only singleton irreducible subsets."
 ---

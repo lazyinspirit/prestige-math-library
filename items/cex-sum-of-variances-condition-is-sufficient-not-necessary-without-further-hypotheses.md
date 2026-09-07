@@ -2,7 +2,7 @@
 id: cex-sum-of-variances-condition-is-sufficient-not-necessary-without-further-hypotheses
 title: "Summable untruncated variances are not necessary"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-first-borel-cantelli-lemma-for-events", "cor-coordinate-random-elements-on-a-countable-product-are-independent", "thm-countable-product-of-probability-spaces", "thm-p-series-real-exponents", "def-almost-sure-convergence-of-a-random-series"]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

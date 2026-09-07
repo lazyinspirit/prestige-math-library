@@ -2,13 +2,14 @@
 id: ex-decomposition-inertia-in-a-quadratic-field
 title: "Decomposition inertia in a quadratic field"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [cor-galois-prime-decomposition-efg, cor-orders-of-decomposition-and-inertia-groups, thm-frobenius-order-is-residue-degree]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

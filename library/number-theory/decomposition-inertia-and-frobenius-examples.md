@@ -1,7 +1,7 @@
 ---
 page: decomposition-inertia-and-frobenius-examples
 title: "Decomposition Inertia and Frobenius — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-decomposition-inertia-in-a-quadratic-field, ex-gaussian-and-eisenstein-frobenius, ex-frobenius-in-a-small-cyclotomic-field, ex-nonabelian-frobenius-conjugacy-class, ex-decomposition-groups-in-a-tower, cex-ramified-frobenius-has-no-canonical-lift, cex-frobenius-cycle-type-needs-good-reduction]
 ---

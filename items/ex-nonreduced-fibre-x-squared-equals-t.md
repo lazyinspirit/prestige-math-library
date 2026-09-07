@@ -2,13 +2,14 @@
 id: "ex-nonreduced-fibre-x-squared-equals-t"
 kind: "example"
 title: "Quadratic fibres over rational points and the generic point"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-affine-fibre-coordinate-ring", "lem-tensor-ring-presentations-for-base-change", "thm-chinese-remainder-theorem-for-comaximal-ideals"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: cor-kolmogorov-two-series-sufficiency
 title: "Kolmogorov two-series sufficiency"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kolmogorov-convergence-criterion", "def-almost-sure-convergence-of-a-random-series", "lem-measurable-functions-preserve-independence", "lem-variance-and-covariance-identities-for-random-variables"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

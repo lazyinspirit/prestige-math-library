@@ -4,6 +4,7 @@ kind: "definition"
 title: "Derived hom in the bounded setting"
 deps: ["thm-projective-complexes-model-the-bounded-above-derived-category", "thm-injective-complexes-model-the-bounded-below-derived-category", "prop-morphisms-from-a-homotopically-projective-complex-need-no-roof", "prop-morphisms-into-a-homotopically-injective-complex-need-no-roof", "def-hom-complex-of-chain-complexes"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

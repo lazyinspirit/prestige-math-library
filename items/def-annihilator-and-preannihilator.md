@@ -2,13 +2,14 @@
 id: def-annihilator-and-preannihilator
 kind: definition
 title: "Annihilator notation and the preannihilator"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dual-space-of-a-normed-space", "def-continuous-annihilator-of-a-subspace"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

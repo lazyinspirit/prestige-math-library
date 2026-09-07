@@ -4,6 +4,7 @@ kind: "theorem"
 title: "regular local rings are normal"
 deps: ["lem-regular-local-domain-induction", "cor-regular-local-ring-satisfies-r-one", "cor-regular-local-ring-satisfies-s-two", "thm-serre-normality-criterion", "thm-localisation-and-polynomial-extension-of-regular-rings", "lem-reduced-noetherian-total-fractions-and-normal-components"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

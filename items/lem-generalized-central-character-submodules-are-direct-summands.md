@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Generalized central-character summands"
 deps: ["lem-the-center-has-finite-dimensional-image-on-an-o-object", "def-generalized-central-character-subcategory-of-o", "thm-category-o-is-abelian-and-extension-closed"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Prove the elementary simultaneous generalized-eigenspace decomposition of a finite-dimensional commutative algebra in its regular representation; polynomial spectral idempotents sum to 1. Their images acting on M are g-submodules. Nilpotence of the local maximal ideal follows from finite simultaneous triangularization"
 ---

@@ -4,6 +4,7 @@ kind: "example"
 title: "The rationals are dense but have dimension zero"
 deps: ["thm-hausdorff-dimension-is-countably-stable", "cor-euclidean-hausdorff-dimension", "lem-q-and-irrationals-dense-r", "thm-rationals-countable"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

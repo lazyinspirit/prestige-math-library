@@ -4,6 +4,7 @@ kind: "corollary"
 title: "Duality preserves linkage blocks and block orthogonality"
 deps: ["thm-central-character-summands-split-into-linkage-blocks", "prop-restricted-duality-is-an-exact-involution-on-category-o", "def-chevalley-contravariant-form"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Duality preserves simple factors. A contravariant form induces a module map to the restricted dual because different weights are orthogonal. Hom between distinct block parts vanishes"
 ---

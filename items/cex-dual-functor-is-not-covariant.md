@@ -2,13 +2,14 @@
 id: cex-dual-functor-is-not-covariant
 kind: counterexample
 title: "The dual construction reverses arrows"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "lem-transpose-reverses-composition"]
 provenance:
   statement: ai-generated
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

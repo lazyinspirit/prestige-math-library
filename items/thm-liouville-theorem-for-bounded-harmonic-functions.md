@@ -2,7 +2,7 @@
 id: thm-liouville-theorem-for-bounded-harmonic-functions
 kind: theorem
 title: "Liouville theorem for bounded harmonic functions"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-harnack-inequality-on-a-ball]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

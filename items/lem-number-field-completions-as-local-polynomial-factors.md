@@ -2,13 +2,14 @@
 id: lem-number-field-completions-as-local-polynomial-factors
 title: "Number field completions as local polynomial factors"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-completion-of-a-number-field-at-a-prime, thm-number-field-places-classification, thm-unique-extension-of-a-nonarchimedean-absolute-value, thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field, thm-primitive-element-theorem-for-finite-separable-extensions, thm-chinese-remainder-theorem-for-comaximal-ideals, thm-field-norm-and-trace-agree-with-operator-determinant-and-trace]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: thm-dual-of-a-closed-subspace-is-a-dual-quotient
 kind: theorem
 title: "The dual of a closed subspace is a dual quotient"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-annihilator-and-preannihilator", "lem-annihilators-are-closed-subspaces", "thm-universal-property-of-the-normed-quotient", "thm-norm-preserving-extension-from-any-subspace"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

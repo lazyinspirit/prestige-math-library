@@ -2,13 +2,14 @@
 id: lem-canonical-map-is-natural
 kind: lemma
 title: "The canonical map is natural"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-canonical-map-into-the-bidual", "def-transpose-of-a-bounded-operator", "lem-transpose-is-bounded-and-has-the-same-norm"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

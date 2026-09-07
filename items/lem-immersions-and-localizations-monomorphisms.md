@@ -2,13 +2,14 @@
 id: "lem-immersions-and-localizations-monomorphisms"
 kind: "lemma"
 title: "Immersions and affine localizations are monomorphisms"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-open-immersion-monomorphism", "thm-morphisms-into-affine-scheme-global-sections", "thm-affine-closed-immersions-quotient-rings", "lem-morphism-schemes-local-on-source-target"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

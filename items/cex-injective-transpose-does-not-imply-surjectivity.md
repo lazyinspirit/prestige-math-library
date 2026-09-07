@@ -2,13 +2,14 @@
 id: cex-injective-transpose-does-not-imply-surjectivity
 kind: counterexample
 title: "Injective transpose does not imply surjectivity"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "cor-ell-p-duality-by-counting-measure", "rem-ell-p-is-l-p-of-counting-measure"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: "lem-base-change-open-closed-immersions"
 kind: "lemma"
 title: "Base change of immersions"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-base-change-morphism-schemes", "lem-fibre-product-open-restriction", "lem-tensor-ring-presentations-for-base-change", "thm-affine-closed-immersions-quotient-rings"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

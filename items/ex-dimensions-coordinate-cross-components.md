@@ -7,6 +7,7 @@ provenance:
   statement: "ai-generated"
   proof: "ai-generated"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
 generation:
   role: "example"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Factor xy; compute both components and use finite-union dimension."
 ---

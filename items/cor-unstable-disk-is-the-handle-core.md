@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       title: "Benedetti, Lectures on Differential Topology"
     - url: "https://www3.nd.edu/~lnicolae/Morse2nd.pdf"
       title: "Nicolaescu, An Invitation to Morse Theory"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "local unstable disk and transport"
 ---

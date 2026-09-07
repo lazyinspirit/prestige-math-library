@@ -2,13 +2,14 @@
 id: thm-khinchin-weak-law-for-iid-integrable-variables
 title: "Khinchin weak law for integrable IID variables"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-identically-distributed-and-iid-random-variables", "def-partial-sums-and-sample-means", "def-truncation-at-a-fixed-level", "cor-iid-finite-variance-weak-law", "lem-measurable-functions-preserve-independence", "thm-dominated-convergence", "cor-markov-inequality-for-random-variables", "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r", "cor-expectation-linearity-monotonicity-and-modulus-bound"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

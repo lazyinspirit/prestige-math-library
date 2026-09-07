@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
     - title: "Arapura Example 4.2.4, p.32"
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Solve u=x and v=xy; the image is dense but contains no neighborhood of the origin, so is not locally closed."
 ---

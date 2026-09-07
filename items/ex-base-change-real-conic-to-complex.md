@@ -2,13 +2,14 @@
 id: "ex-base-change-real-conic-to-complex"
 kind: "example"
 title: "A real conic acquires complex points"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-field-valued-points-of-schemes", "lem-base-extension-field-coordinate-ring", "lem-tensor-ring-presentations-for-base-change"]
 provenance:
   statement: "ai-generated"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -14,7 +15,7 @@ verification:
 sources:
   references: [{title: 'Grafakos, Classical Fourier Analysis, third edition', url: 'https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf', locator: '§4.2.1, Theorem 4.2.1 and (4.2.13), pp. 255–261'}, {title: 'Laugesen, Harmonic Analysis Lecture Notes', url: 'https://arxiv.org/pdf/0903.3845', locator: 'ch. 8, Theorem 8.7 and omitted-proof discussion, pp. 51–52'}]
 external_refs: [rem-kolmogorov-lone-fourier-series-diverges-almost-everywhere, rem-carleson-hunt-almost-everywhere-convergence]
-status: draft
+status: published
 origin: pipeline
 ---
 

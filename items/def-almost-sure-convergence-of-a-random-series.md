@@ -2,13 +2,14 @@
 id: def-almost-sure-convergence-of-a-random-series
 title: "Almost-sure convergence of a random series"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-partial-sums-and-sample-means", "def-almost-sure-convergence-of-random-variables", "thm-series-cauchy-criterion", "thm-arithmetic-and-lattice-operations-preserve-measurability", "cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event", "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

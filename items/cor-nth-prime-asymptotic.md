@@ -2,7 +2,7 @@
 id: cor-nth-prime-asymptotic
 title: "Nth prime asymptotic"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [cor-prime-number-theorem]
 provenance:
@@ -10,6 +10,8 @@ provenance:
   proof: ai-altered
 generation:
   role: direct-corollary
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "\u00a76.2, Theorem 6.9 and equation (6.15), monotone inversion consequence"

@@ -2,13 +2,14 @@
 id: def-multilinear-extension
 kind: definition
 title: "Multilinear extension of a Boolean-cube table"
-status: draft
+status: published
 origin: pipeline
 deps: [def-field, def-multivariate-polynomial-ring-by-iteration]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

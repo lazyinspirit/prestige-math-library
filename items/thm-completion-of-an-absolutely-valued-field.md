@@ -2,13 +2,14 @@
 id: thm-completion-of-an-absolutely-valued-field
 title: "Completion of an absolutely valued field"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [def-multiplicative-absolute-value-on-a-field, thm-metric-completion-exists, thm-metric-completion-unique]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

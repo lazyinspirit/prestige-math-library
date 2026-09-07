@@ -2,13 +2,14 @@
 id: thm-prime-number-theorem-logarithmic-integral
 title: "Prime number theorem logarithmic integral"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [cor-chebyshev-theta-prime-number-theorem-error, def-logarithmic-integral, lem-prime-counting-chebyshev-partial-summation]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

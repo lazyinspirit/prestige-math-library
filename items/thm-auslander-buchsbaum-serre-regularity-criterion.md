@@ -4,6 +4,7 @@ kind: "theorem"
 title: "auslander buchsbaum serre regularity criterion"
 deps: ["lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension", "cor-regular-local-residue-field-projective-dimension-dimension", "lem-local-global-dimension-equals-residue-field-projective-dimension", "thm-auslander-buchsbaum-formula", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-nakayama-lemma"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

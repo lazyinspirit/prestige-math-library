@@ -3,6 +3,8 @@ id: "thm-the-derived-category-inherits-a-triangulated-structure"
 kind: "theorem"
 title: "The derived category inherits a triangulated structure"
 deps: ["lem-localized-cone-triangles-satisfy-tr-one-through-tr-three", "lem-localized-cone-triangles-satisfy-the-octahedral-axiom", "def-exact-functor-between-triangulated-categories", "prop-cohomology-factors-through-the-derived-category", "thm-the-cone-long-exact-sequence", "lem-addition-of-roofs-makes-an-additive-localization"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - url: "https://stacks.math.columbia.edu/tag/05R1"
@@ -11,7 +13,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 landmark: true
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -2,7 +2,7 @@
 id: def-e-overlap-chain-relation-in-a-comb-block
 title: "E overlap chains inside one comb block"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-e-graph-and-co-e-graph", "def-comb-in-a-graph"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 justified_by: [lem-e-overlap-classes-form-an-anticonnected-partition]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

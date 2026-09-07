@@ -2,13 +2,14 @@
 id: prop-divergence-satisfies-the-product-rule
 title: "Product rule for volume-form divergence"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-divergence-is-well-defined-and-has-the-coordinate-formula"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "proposition"
 title: "The support description of category O with finite generation"
 deps: ["def-bgg-category-o", "lem-finite-b-stable-generators-and-weight-flags-in-category-o", "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra", "prop-weights-of-a-verma-module-lie-below-lambda"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Forward: PBW applied to finite E. Reverse: PBW monomials raising a fixed weight have bounded total root height in each cone, hence only finitely many monomials can act nontrivially; no finite-dimensional-weight hypothesis is needed for this direction"
 ---

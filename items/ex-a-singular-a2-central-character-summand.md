@@ -4,6 +4,7 @@ kind: "example"
 title: "A singular integral A2 central-character summand"
 deps: ["thm-central-character-summands-split-into-linkage-blocks", "def-integral-weyl-group-of-a-weight", "cor-central-characters-are-dot-weyl-orbits", "def-root-reflections-and-the-weyl-group-action"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "In fundamental coordinates use s1(a,b)=(-a,a+b), s2(a,b)=(a+b,-b), subtract rho=(1,1); W_lambda=W. This is a labels/stabilizer calculation, not a claim about all composition multiplicities"
 ---

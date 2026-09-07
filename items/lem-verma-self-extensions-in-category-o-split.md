@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Verma self-extensions in O split"
 deps: ["thm-category-o-is-abelian-and-extension-closed", "thm-universal-property-of-verma-modules", "prop-weights-of-a-verma-module-lie-below-lambda"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Lift the top vector as an actual weight vector; E has no weights above lambda, so the lift is singular and induces a section"
 ---

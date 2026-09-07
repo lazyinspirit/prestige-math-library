@@ -2,7 +2,7 @@
 id: def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold
 title: "Integral of a compactly supported top form"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-oriented-chart-integrals-are-coordinate-independent", "lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form", "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary"]
 justified_by: ["thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement"]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

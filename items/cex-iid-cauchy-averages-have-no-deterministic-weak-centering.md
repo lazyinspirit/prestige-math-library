@@ -2,13 +2,14 @@
 id: cex-iid-cauchy-averages-have-no-deterministic-weak-centering
 title: "Cauchy averages admit no deterministic weak centering"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-truncated-centering-criterion-for-an-iid-weak-law", "cor-countable-independent-copies-exist", "def-law-or-distribution-of-a-random-element", "thm-probability-law-and-distribution-function-correspondence"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

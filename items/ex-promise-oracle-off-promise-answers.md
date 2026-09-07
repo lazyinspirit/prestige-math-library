@@ -2,7 +2,7 @@
 id: ex-promise-oracle-off-promise-answers
 kind: example
 title: "Promise oracle off promise answers"
-status: draft
+status: published
 origin: pipeline
 deps: [def-promise-preserving-reduction, rem-oracle-and-promise-conventions-are-distinct]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

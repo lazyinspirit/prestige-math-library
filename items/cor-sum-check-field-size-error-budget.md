@@ -2,7 +2,7 @@
 id: cor-sum-check-field-size-error-budget
 kind: corollary
 title: "Choosing a sum-check error budget"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-sum-check-soundness]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

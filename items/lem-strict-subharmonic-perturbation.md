@@ -2,7 +2,7 @@
 id: lem-strict-subharmonic-perturbation
 kind: lemma
 title: "Strict subharmonic perturbation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-subharmonic-and-superharmonic-functions-in-rn]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

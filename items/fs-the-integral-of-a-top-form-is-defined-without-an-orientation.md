@@ -2,13 +2,14 @@
 id: fs-the-integral-of-a-top-form-is-defined-without-an-orientation
 title: "False: top-form integration needs no orientation"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-reversing-orientation-negates-the-integral", "def-integral-of-an-oriented-chart-supported-top-form"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

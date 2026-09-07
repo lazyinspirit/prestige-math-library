@@ -2,13 +2,14 @@
 id: lem-monotone-chebyshev-tauberian-desmoothing
 title: "Monotone chebyshev tauberian desmoothing"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [thm-cauchy-criterion-for-improper-integrals]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

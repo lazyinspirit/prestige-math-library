@@ -2,7 +2,7 @@
 id: def-divergence-relative-to-a-volume-form
 title: "Divergence relative to a volume form"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-volume-form-on-an-oriented-manifold", "lem-exterior-and-cartan-calculus-extend-to-manifolds-with-boundary"]
 justified_by: ["prop-divergence-is-well-defined-and-has-the-coordinate-formula"]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

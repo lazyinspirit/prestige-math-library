@@ -3,6 +3,8 @@ id: "prop-yoneda-product-is-composition-in-the-derived-category"
 kind: "proposition"
 title: "Yoneda product is composition in the derived category"
 deps: ["thm-ext-is-hom-in-the-derived-category", "thm-canonical-truncations-fit-a-distinguished-triangle", "thm-higher-yoneda-ext-agrees-with-derived-ext", "thm-long-exact-hom-sequences-of-a-distinguished-triangle"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - url: "https://stacks.math.columbia.edu/tag/06XP"
@@ -10,7 +12,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

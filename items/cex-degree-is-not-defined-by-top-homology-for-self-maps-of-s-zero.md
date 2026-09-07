@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Degree opening paragraph, p.134, excludes n=0"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Degree opening paragraph, p.134, excludes n=0"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Print the identity, swap and two constant matrices in the point basis, and their actions on the difference generator. Exclude only the stated unreduced definition, not every possible notion of degree."
 ---

@@ -2,7 +2,7 @@
 id: thm-co-bird-free-comb-blocks-admit-an-e-free-structural-partition
 title: "A special-vertex co-Bird-free comb admits an E-free structural partition"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-e-overlap-chain-relation-in-a-comb-block", "lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade", "lem-terminal-e-overlap-quotient-pattern-is-e-free", "lem-co-bird-free-external-purity-survives-e-overlap-quotients", "def-comb-in-a-graph", "def-h-free-and-family-free-graph", "def-e-graph-and-co-e-graph", "def-bird-graph-and-co-bird-graph"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Finite adjacency analysis and structural deduction"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

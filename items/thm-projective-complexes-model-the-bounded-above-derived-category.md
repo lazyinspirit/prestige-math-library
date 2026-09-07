@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Projective complexes model the bounded above derived category"
 deps: ["thm-a-bounded-above-complex-of-projectives-is-homotopically-projective", "prop-morphisms-from-a-homotopically-projective-complex-need-no-roof", "lem-bounded-above-complexes-admit-projective-replacements", "prop-bounded-derived-localizations-embed-fully-faithfully"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 landmark: true
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

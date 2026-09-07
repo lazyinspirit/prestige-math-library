@@ -4,6 +4,7 @@ kind: "remark"
 title: "Dimension leaves the critical measure undetermined"
 deps: ["prop-binary-digit-restriction-hausdorff-dimension", "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line", "cor-euclidean-hausdorff-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

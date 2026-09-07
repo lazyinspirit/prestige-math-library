@@ -2,13 +2,14 @@
 id: thm-independent-series-probability-and-almost-sure-convergence-agree
 title: "Convergence in probability and almost surely agree for independent series"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-levy-maximal-inequality-for-independent-tail-sums", "def-almost-sure-convergence-of-a-random-series", "def-convergence-in-probability", "thm-continuity-from-below-for-measures", "thm-continuity-from-above-for-measures", "thm-series-cauchy-criterion", "thm-almost-sure-convergence-implies-convergence-in-probability", "thm-limits-in-probability-are-unique-almost-surely", "lem-cauchy-in-probability-sequences-have-a-measurable-limit"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

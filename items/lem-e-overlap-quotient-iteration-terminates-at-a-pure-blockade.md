@@ -2,7 +2,7 @@
 id: lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade
 title: "E overlap quotients terminate at a pure blockade"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-e-overlap-blockade-and-iterated-mixed-quotients", "lem-quotient-blocks-preserve-connectedness-and-anticonnectedness", "thm-well-ordering-principle"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Finite adjacency analysis and structural deduction"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Restricted duality is exact and involutive on O"
 deps: ["def-restricted-dual-of-a-weight-module", "lem-simple-highest-weight-modules-are-restricted-self-dual", "thm-every-category-o-object-has-finite-length", "thm-category-o-is-abelian-and-extension-closed", "thm-jordan-holder-theorem-in-an-abelian-category", "thm-simple-objects-of-category-o-are-highest-weight-modules"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Dualize each finite weight space to prove exactness and biduality in the larger weight category. Dualize a finite composition series; its factors are the same simples. Qualified extension closure proves finite generation and membership in O without circularly assuming it"
 ---

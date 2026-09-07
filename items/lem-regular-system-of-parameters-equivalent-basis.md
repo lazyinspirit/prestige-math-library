@@ -4,6 +4,7 @@ kind: "lemma"
 title: "regular system of parameters equivalent basis"
 deps: ["def-regular-system-of-parameters", "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number", "cor-nakayama-generators-modulo-an-ideal"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

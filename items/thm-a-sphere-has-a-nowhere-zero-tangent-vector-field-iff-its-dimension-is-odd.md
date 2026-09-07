@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Theorem 2.28, p.135"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Theorem 2.28, p.135"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Combine the two established directions; no differentiability is needed."
 ---

@@ -2,7 +2,7 @@
 id: ex-sum-check-three-variable-transcript
 kind: example
 title: "A complete sum-check transcript over F_101"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sum-check-instance-and-protocol, thm-sum-check-soundness]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

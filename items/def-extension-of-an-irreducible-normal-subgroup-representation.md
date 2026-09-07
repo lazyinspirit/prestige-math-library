@@ -2,13 +2,14 @@
 id: "def-extension-of-an-irreducible-normal-subgroup-representation"
 kind: "definition"
 title: "An extension of a normal subgroup representation"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-finite-dimensional-representation-of-a-group-over-a-field", "def-sign-representation-and-restriction-of-a-representation", "prop-representations-with-kernel-containing-a-normal-subgroup-factor-through-the-quotient"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

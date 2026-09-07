@@ -4,6 +4,7 @@ kind: "lemma"
 title: "auslander buchsbaum base case free module"
 deps: ["def-projective-dimension-of-an-object", "thm-finite-flat-modules-over-local-rings-are-free", "lem-projective-modules-are-flat-over-an-arbitrary-ring", "cor-depth-as-first-nonzero-ext"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

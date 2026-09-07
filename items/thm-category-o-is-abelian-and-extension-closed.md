@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Category O is abelian and extension closed among weight modules"
 deps: ["def-bgg-category-o", "prop-equivalent-support-description-of-category-o", "lem-enveloping-algebra-is-left-and-right-noetherian", "thm-modules-over-a-ring-form-an-abelian-category", "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra", "def-verma-module"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Submodule finite generation follows by the elementary finite-free-module induction over a left Noetherian ring; subquotients inherit weight decomposition. For extensions lift generators, take union of supports, and apply the qualified support equivalence. An induced rank-two Borel Jordan extension proves the middle-term weight hypothesis is essential"
 ---

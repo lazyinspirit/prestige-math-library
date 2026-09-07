@@ -4,6 +4,7 @@ kind: "definition"
 title: "Derived tensor product in the bounded above setting"
 deps: ["thm-existence-of-the-bounded-above-left-total-derived-functor", "lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms", "def-tensor-product-total-complex-of-chain-complexes", "thm-module-categories-have-enough-projectives", "lem-projective-modules-are-flat-over-an-arbitrary-ring"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

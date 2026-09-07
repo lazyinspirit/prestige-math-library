@@ -4,6 +4,7 @@ kind: "theorem"
 title: "quotient and lifting regularity across a regular element"
 deps: ["lem-regular-local-quotient-by-parameter-is-regular", "thm-dimension-at-most-embedding-dimension", "thm-dimension-as-minimal-number-of-radical-generators", "thm-zero-divisors-on-a-module", "lem-regular-local-domain-induction", "thm-minimal-support-primes-are-associated"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

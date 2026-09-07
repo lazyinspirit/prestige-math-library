@@ -2,7 +2,7 @@
 id: ex-optimizing-the-prime-number-theorem-contour-height
 title: "Optimizing the prime number theorem contour height"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-chebyshev-psi-prime-number-theorem-error, lem-zeta-explicit-formula-zero-free-error-balance]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

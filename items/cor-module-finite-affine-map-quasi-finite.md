@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne Proposition 8.28 and Lemma 8.29, p.185"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Each fibre has coordinate ring a quotient of a finite-dimensional k-algebra. Distinct maximal ideals are pairwise comaximal; the elementary Chinese remainder construction makes the number of them at most the vector-space dimension. Include that finite-ideal CRT argument inline."
 ---

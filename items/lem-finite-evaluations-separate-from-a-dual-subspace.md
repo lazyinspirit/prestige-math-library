@@ -2,13 +2,14 @@
 id: lem-finite-evaluations-separate-from-a-dual-subspace
 kind: lemma
 title: "Finite evaluations separate a functional from a dual subspace"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-annihilator-and-preannihilator", "cor-finite-dimensional-subspaces-are-closed", "thm-geometric-hahn-banach-for-subspaces"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

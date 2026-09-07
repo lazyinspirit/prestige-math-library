@@ -4,6 +4,7 @@ kind: "remark"
 title: "Orientation for the published Weierstrass graph remark"
 deps: ["def-hausdorff-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 external_refs: ["rem-weierstrass-graph-hausdorff-dimension"]
 ---

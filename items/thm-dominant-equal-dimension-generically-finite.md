@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Arapura Lemma 4.1.3 and Corollary 4.2.2"
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "A finitely generated algebraic field extension is finite; generic dimension zero is equivalent to finite fibres. State inseparable extensions are allowed and do not identify geometric fibre cardinality with degree."
 ---

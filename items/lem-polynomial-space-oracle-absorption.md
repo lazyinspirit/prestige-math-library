@@ -2,13 +2,15 @@
 id: lem-polynomial-space-oracle-absorption
 kind: lemma
 title: "Polynomial space oracle absorption"
-status: draft
+status: published
 origin: pipeline
 deps: [def-relativized-complexity-class, def-pspace-and-npspace, thm-tqbf-is-pspace-complete]
 provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Arora–Barak, Computational Complexity, 2007 draft; §3.5 Claim3.8(3), pp70–71, adapted from EXP-complete to the established PSPACE-complete TQBF oracle."

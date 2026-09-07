@@ -4,6 +4,7 @@ kind: "example"
 title: "The regular integral sl2 block"
 deps: ["thm-central-character-summands-split-into-linkage-blocks", "prop-restricted-duality-is-an-exact-involution-on-category-o", "prop-costandard-objects-have-simple-socles", "prop-simple-reflection-embedding-of-verma-modules", "thm-verma-module-has-a-unique-simple-quotient", "cor-verma-irreducibility-criterion-from-shapovalov-determinants", "prop-weights-of-a-verma-module-lie-below-lambda", "lem-simple-highest-weight-modules-are-restricted-self-dual", "def-standard-and-costandard-objects-in-category-o"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Verify using the sl2 PBW action, weight dimensions and duality; indecomposability proves nonsplitting"
 ---

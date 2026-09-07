@@ -2,13 +2,14 @@
 id: thm-bipolar-closure-for-linear-subspaces
 kind: theorem
 title: "Double annihilators give norm and weak-star closures"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-weak-star-topology", "def-annihilator-and-preannihilator", "lem-finite-evaluations-separate-from-a-dual-subspace", "cor-annihilator-detects-closure"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

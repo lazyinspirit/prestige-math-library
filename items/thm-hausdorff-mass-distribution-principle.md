@@ -4,6 +4,7 @@ kind: "theorem"
 title: "The mass distribution principle"
 deps: ["def-hausdorff-measure", "thm-hausdorff-dimension-critical-exponent", "def-outer-measure", "def-measure"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ provenance:
   proof: ai-altered
 landmark: true
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

@@ -2,13 +2,14 @@
 id: "def-fibre-product-schemes-universal-property"
 kind: "definition"
 title: "Fibre product of schemes"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-morphism-of-schemes"]
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

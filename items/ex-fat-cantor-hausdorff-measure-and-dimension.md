@@ -4,6 +4,7 @@ kind: "example"
 title: "The fat Cantor set has positive length and dimension one"
 deps: ["def-fat-cantor-set", "thm-fat-cantor-set-has-positive-measure", "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line", "thm-hausdorff-dimension-critical-exponent", "thm-continuity-from-above-for-measures"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

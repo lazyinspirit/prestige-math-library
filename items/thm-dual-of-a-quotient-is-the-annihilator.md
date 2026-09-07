@@ -2,13 +2,14 @@
 id: thm-dual-of-a-quotient-is-the-annihilator
 kind: theorem
 title: "The dual of a quotient is its annihilator"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dual-space-of-a-normed-space", "def-annihilator-and-preannihilator", "thm-universal-property-of-the-normed-quotient"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

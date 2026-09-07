@@ -4,6 +4,7 @@ kind: "lemma"
 title: "finite residue field projective dimension forces depth equals dimension"
 deps: ["thm-auslander-buchsbaum-formula", "lem-positive-depth-ring-has-regular-minimal-generator", "lem-residue-field-splits-off-reduced-maximal-ideal", "thm-quotient-and-lifting-regularity-across-a-regular-element", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "lem-depth-quotient-by-regular-element"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

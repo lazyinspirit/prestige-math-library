@@ -2,7 +2,7 @@
 id: ex-weak-law-for-independent-nonidentical-variables
 title: "A nonidentical Bernoulli weak law"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-chebyshev-weak-law-for-uncorrelated-arrays", "cor-coordinate-random-elements-on-a-countable-product-are-independent", "thm-countable-product-of-probability-spaces", "lem-bernoulli-and-binomial-mean-and-variance", "thm-factorization-of-expectations-for-independent-variables"]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

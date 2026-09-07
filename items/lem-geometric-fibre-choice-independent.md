@@ -2,13 +2,14 @@
 id: "lem-geometric-fibre-choice-independent"
 kind: "lemma"
 title: "Independence of the chosen algebraic closure"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-geometric-fibre", "cor-algebraic-closures-are-isomorphic-over-the-base", "lem-base-change-composition"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-explicit-polynomial-time-constant-degree-expanders-exist
 kind: corollary
 title: "Explicit polynomial time constant degree expanders exist"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-expander-size-adjustment-and-laziness]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: prop-linearity-and-additivity-of-integration-over-disjoint-oriented-components
 title: "Linearity and additivity of the form integral"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement", "thm-multidimensional-integral-properties"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

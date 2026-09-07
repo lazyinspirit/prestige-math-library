@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, 15§2, pp.119–120"
       url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
       locator: "15§2, pp.119–120"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Pass the finite-CW comparisons through finite-subcomplex colimits. Every continuous map takes a finite subcomplex into a finite subcomplex, so the extension is natural for all maps, not just cellular maps. Uniqueness and boundary compatibility follow on each finite support."
 ---

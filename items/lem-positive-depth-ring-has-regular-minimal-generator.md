@@ -4,6 +4,7 @@ kind: "lemma"
 title: "positive depth ring has regular minimal generator"
 deps: ["thm-depth-zero-associated-prime-criterion", "thm-finiteness-of-associated-primes", "thm-zero-divisors-on-a-module", "lem-finite-prime-avoidance", "thm-nakayama-lemma"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

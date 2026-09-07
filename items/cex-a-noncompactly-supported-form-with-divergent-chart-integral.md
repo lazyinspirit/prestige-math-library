@@ -2,13 +2,14 @@
 id: cex-a-noncompactly-supported-form-with-divergent-chart-integral
 title: "A noncompactly supported form whose integral diverges"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: ["def-integral-of-an-oriented-chart-supported-top-form"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

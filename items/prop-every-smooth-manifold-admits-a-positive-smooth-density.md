@@ -2,13 +2,14 @@
 id: prop-every-smooth-manifold-admits-a-positive-smooth-density
 title: "Existence of positive smooth densities"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-density-bundle-and-smooth-density", "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

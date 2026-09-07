@@ -6,11 +6,13 @@ deps: ["lem-local-morse-sublevel-pair-is-a-handle-pair", "lem-adapted-descending
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - url: "https://poisson.phc.dm.unipi.it/~camponovo/1907.10297%20%281%29.pdf"
       title: "Benedetti, Lectures on Differential Topology"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "flow transport"
 ---

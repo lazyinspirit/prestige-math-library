@@ -2,13 +2,14 @@
 id: cor-greens-theorem-from-general-stokes
 title: "General Stokes agrees with both planar Green formulas"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-general-stokes-theorem", "cor-greens-theorem-in-circulation-form", "cor-the-planar-divergence-theorem-flux-form-of-greens-theorem", "prop-integration-of-top-forms-by-finite-parametrizations"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

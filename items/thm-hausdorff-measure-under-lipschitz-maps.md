@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Lipschitz maps control Hausdorff measure"
 deps: ["def-hausdorff-measure", "prop-zero-dimensional-hausdorff-measure-counts", "def-lipschitz-holder-contraction"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ provenance:
   proof: ai-altered
 landmark: true
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

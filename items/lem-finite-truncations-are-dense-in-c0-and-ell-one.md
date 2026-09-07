@@ -2,13 +2,14 @@
 id: lem-finite-truncations-are-dense-in-c0-and-ell-one
 kind: lemma
 title: "Finite truncations approximate null and summable sequences"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-c-zero-and-ell-infinity", "rem-ell-p-is-l-p-of-counting-measure"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "flat local ascent of regularity"
 deps: ["thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-quotient-and-lifting-regularity-across-a-regular-element", "def-flat-and-faithfully-flat-modules-and-ring-maps", "thm-auslander-buchsbaum-serre-regularity-criterion", "lem-finite-local-modules-admit-minimal-free-resolutions", "lem-projective-dimension-from-last-nonzero-betti-number"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

@@ -2,13 +2,14 @@
 id: "lem-normal-restriction-constituents-form-one-conjugacy-orbit"
 kind: "lemma"
 title: "Normal restriction has one orbit of constituents"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-normal-isotypical-components-are-permuted-by-translation"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

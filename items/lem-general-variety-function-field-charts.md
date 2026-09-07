@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne §§5j–k pp.115–116"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Any two affine charts meet; inside their intersection choose a nonempty affine chart using a principal-open basis. Use the affine field comparison and cocycle compatibility. Restrict a dominant map to nonempty affine charts; density follows by continuity and density of the source chart."
 ---

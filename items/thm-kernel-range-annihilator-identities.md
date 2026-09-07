@@ -2,13 +2,14 @@
 id: thm-kernel-range-annihilator-identities
 kind: theorem
 title: "Kernel-range identities and the weak-star closure of the transpose range"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-elementary-kernel-range-annihilator-identities", "def-weak-star-topology", "thm-bipolar-closure-for-linear-subspaces"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

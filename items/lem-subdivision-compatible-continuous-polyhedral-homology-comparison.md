@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Theorem 2C.1 and proof, pp.177–179"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Theorem 2C.1 and proof, pp.177–179"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "For the identity from the old triangulation to its subdivision, each old skeleton lies in the new skeleton. Show the relative class of an old simplex maps to the sum of its consistently oriented subdivided simplices: induction on dimension identifies the boundary, and injectivity of the relative-simplex boundary fixes the class (dimension zero is the coefficient map). Apply the skeletal exact diagram. Then replace a continuous map by a simplicial approximation; homotopy invariance proves naturality and independence of all choices."
 ---

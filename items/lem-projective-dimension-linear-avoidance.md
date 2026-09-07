@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne Proposition 6.48 and Lemma 6.49"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Over infinite k choose hyperplanes avoiding the finitely many components and lower dimension successively. The union of finitely many proper dual linear subspaces cannot be the full dual: their defining linear forms have nonzero product. The converse is the intersection theorem."
 ---

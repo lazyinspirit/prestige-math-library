@@ -2,7 +2,7 @@
 id: lem-purity-on-every-e-propagates-along-an-overlap-class
 title: "Purity propagates through E overlap chains"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-e-overlap-chain-relation-in-a-comb-block", "def-edges-between-sets-and-pure-mixed-pairs"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Finite adjacency analysis and structural deduction"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: lem-newman-damped-contour-estimates
 title: "Newman damped contour estimates"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [thm-cauchy-integral-formula-circle]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

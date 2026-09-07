@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Hausdorff measure is metric and measures every Borel set"
 deps: ["thm-hausdorff-measure-is-an-outer-measure", "def-metric-outer-measure", "thm-borel-sets-are-caratheodory-measurable-for-metric-outer-measures", "thm-caratheodory-outer-measure-theorem"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ provenance:
   proof: ai-altered
 landmark: true
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

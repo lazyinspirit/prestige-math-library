@@ -2,7 +2,7 @@
 id: thm-general-stokes-theorem
 title: "The general Stokes theorem"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-half-space-stokes-for-a-compactly-supported-form", "lem-partition-localization-of-stokes", "thm-change-of-variables-for-oriented-manifold-diffeomorphisms", "prop-integration-over-an-oriented-embedded-submanifold", "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold"]
 landmark: true
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

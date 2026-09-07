@@ -2,13 +2,14 @@
 id: "lem-fibre-after-base-change"
 kind: "lemma"
 title: "Fibres after base change"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-scheme-theoretic-fibre", "lem-base-change-composition", "lem-field-valued-points-of-schemes"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

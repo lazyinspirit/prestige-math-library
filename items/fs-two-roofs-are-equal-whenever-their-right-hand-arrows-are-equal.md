@@ -3,6 +3,7 @@ id: "fs-two-roofs-are-equal-whenever-their-right-hand-arrows-are-equal"
 kind: "false-statement"
 deps: ["thm-the-calculus-of-fractions-constructs-the-localization", "prop-cohomology-factors-through-the-derived-category"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -14,7 +15,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

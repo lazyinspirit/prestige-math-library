@@ -2,13 +2,14 @@
 id: ex-annihilator-of-a-coordinate-subspace
 kind: example
 title: "The annihilator of a coordinate subspace"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-annihilator-and-preannihilator", "thm-dual-of-c0-is-ell-one"]
 provenance:
   statement: ai-generated
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

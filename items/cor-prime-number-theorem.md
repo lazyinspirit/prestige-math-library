@@ -2,13 +2,14 @@
 id: cor-prime-number-theorem
 title: "Prime number theorem"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [thm-prime-number-theorem-logarithmic-integral, lem-logarithmic-integral-asymptotic-expansion, lem-prime-counting-chebyshev-partial-summation, lem-chebyshev-functions-prime-power-comparison]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

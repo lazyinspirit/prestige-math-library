@@ -2,13 +2,14 @@
 id: cor-a-closed-oriented-manifold-has-no-top-form-with-nonzero-integral-that-is-exact
 title: "Nonzero total integral obstructs exactness on a closed manifold"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero", "prop-positive-compactly-supported-top-forms-have-positive-integral"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

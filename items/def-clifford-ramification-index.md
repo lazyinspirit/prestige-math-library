@@ -2,13 +2,14 @@
 id: "def-clifford-ramification-index"
 kind: "definition"
 title: "Clifford ramification index"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-clifford-homogeneous-restriction-formula", "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product", "thm-character-inner-product-computes-intertwiner-dimension"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

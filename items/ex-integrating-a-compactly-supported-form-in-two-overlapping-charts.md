@@ -2,13 +2,14 @@
 id: ex-integrating-a-compactly-supported-form-in-two-overlapping-charts
 title: "Partition weights in two overlapping charts"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement", "def-integral-of-an-oriented-chart-supported-top-form"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

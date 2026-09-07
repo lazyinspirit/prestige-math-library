@@ -2,7 +2,7 @@
 id: lem-sum-check-perfect-completeness
 kind: lemma
 title: "Perfect completeness of sum-check"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sum-check-instance-and-protocol]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

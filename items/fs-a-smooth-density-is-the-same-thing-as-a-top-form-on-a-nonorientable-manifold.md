@@ -2,13 +2,14 @@
 id: fs-a-smooth-density-is-the-same-thing-as-a-top-form-on-a-nonorientable-manifold
 title: "False: densities and top forms coincide on nonorientable manifolds"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["def-density-bundle-and-smooth-density", "prop-every-smooth-manifold-admits-a-positive-smooth-density", "thm-orientability-is-equivalent-to-a-nowhere-vanishing-top-form"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

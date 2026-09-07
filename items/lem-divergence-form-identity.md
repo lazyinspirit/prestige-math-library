@@ -2,13 +2,14 @@
 id: lem-divergence-form-identity
 title: "Divergence as an exterior derivative"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-divergence-relative-to-a-volume-form", "lem-exterior-and-cartan-calculus-extend-to-manifolds-with-boundary"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: lem-largest-summand-bound-for-symmetric-independent-variables
 title: "Largest-summand bound for independent symmetric variables"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symmetric-real-random-variable", "def-partial-sums-and-sample-means", "thm-independent-random-elements-have-product-joint-law", "thm-arithmetic-and-lattice-operations-preserve-measurability"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

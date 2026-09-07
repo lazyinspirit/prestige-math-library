@@ -6,11 +6,13 @@ deps: ["def-fibre-dimension-at-point-classical", "cor-dimension-affine-and-proje
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Milne Example 9.10, pp.201–202"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "At a fixed y row elimination identifies the kernel with affine space of dimension n-rank. The rank bound is equivalent to vanishing minors; prove that equivalence using a largest invertible minor and elimination. Equations define W in affine charts of Y times A^n."
 ---

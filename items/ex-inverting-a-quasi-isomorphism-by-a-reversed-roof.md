@@ -3,6 +3,7 @@ id: "ex-inverting-a-quasi-isomorphism-by-a-reversed-roof"
 kind: "example"
 deps: ["prop-the-localization-functor-sends-quasi-isomorphisms-to-isomorphisms"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -14,7 +15,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -2,13 +2,14 @@
 id: ex-gaussian-and-eisenstein-frobenius
 title: "Gaussian and eisenstein frobenius"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-frobenius-cycle-type-and-prime-splitting, ex-decomposition-inertia-in-a-quadratic-field, thm-multiplicative-group-of-a-finite-field-is-cyclic, thm-ring-of-integers-of-a-quadratic-field]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

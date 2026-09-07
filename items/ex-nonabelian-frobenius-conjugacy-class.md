@@ -2,13 +2,14 @@
 id: ex-nonabelian-frobenius-conjugacy-class
 title: "Nonabelian frobenius conjugacy class"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-frobenius-cycle-type-and-prime-splitting, thm-frobenius-elements-above-a-prime-are-conjugate, thm-eisenstein-irreducibility-criterion]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

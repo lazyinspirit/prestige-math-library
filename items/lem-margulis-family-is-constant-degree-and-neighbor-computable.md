@@ -2,7 +2,7 @@
 id: lem-margulis-family-is-constant-degree-and-neighbor-computable
 kind: lemma
 title: "Margulis family is constant degree and neighbor computable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-margulis-gabber-galil-graph]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

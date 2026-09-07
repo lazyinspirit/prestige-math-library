@@ -4,6 +4,7 @@ kind: "definition"
 title: "Derived category of an abelian category"
 deps: ["thm-the-calculus-of-fractions-constructs-the-localization", "lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category", "def-cochain-complex-in-an-abelian-category", "def-bounded-bounded-below-and-bounded-above-complex"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 landmark: true
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

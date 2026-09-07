@@ -2,7 +2,7 @@
 id: thm-expander-mixing-lemma
 kind: theorem
 title: "Expander mixing lemma"
-status: draft
+status: published
 origin: pipeline
 deps: [def-spectral-edge-and-vertex-expansion, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

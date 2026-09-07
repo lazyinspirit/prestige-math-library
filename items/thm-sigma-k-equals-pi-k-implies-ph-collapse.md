@@ -2,7 +2,7 @@
 id: thm-sigma-k-equals-pi-k-implies-ph-collapse
 kind: theorem
 title: "Sigma k equals pi k implies ph collapse"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-collapse-at-one-level-propagates]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne Theorem 9.7"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Reduce to locally closed irreducible source pieces and affine charts. Find a nonempty open in the image closure using the affine open-image lemma; remove its inverse image and use Noetherian induction on proper closed subsets. Finite unions finish."
 ---

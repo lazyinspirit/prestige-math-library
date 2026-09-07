@@ -4,6 +4,7 @@ kind: "lemma"
 title: "regular local residue field koszul resolution"
 deps: ["thm-regular-local-rings-are-domains-and-cohen-macaulay", "cor-koszul-complex-resolves-a-regular-quotient", "lem-minimal-free-resolution-differentials-land-in-maximal-ideal"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

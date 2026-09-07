@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Elementary lower and upper bounds on a unit cube"
 deps: ["def-hausdorff-measure", "def-lebesgue-outer-measure", "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume", "thm-lebesgue-measure-of-a-box-of-every-kind", "thm-real-power-laws"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

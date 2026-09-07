@@ -4,6 +4,7 @@ kind: "lemma"
 title: "global dimension is detected on cyclic modules"
 deps: ["def-left-and-right-global-dimension-of-a-ring", "thm-baer-criterion-for-injective-modules", "thm-injective-dimension-at-most-n-iff-higher-ext-vanishes", "thm-projective-dimension-at-most-n-iff-higher-ext-vanishes", "thm-ext-dimension-shifting-in-the-second-variable", "thm-module-categories-have-enough-injectives"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

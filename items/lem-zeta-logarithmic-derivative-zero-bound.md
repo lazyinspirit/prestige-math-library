@@ -2,13 +2,14 @@
 id: lem-zeta-logarithmic-derivative-zero-bound
 title: "Zeta logarithmic derivative zero bound"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [thm-hadamard-product-for-riemann-xi, def-riemann-xi-function, thm-stirling-formula-gamma, thm-cauchy-integral-formula-higher-derivatives, cor-zeta-zero-count-unit-interval, thm-trivial-zeros-and-critical-strip]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

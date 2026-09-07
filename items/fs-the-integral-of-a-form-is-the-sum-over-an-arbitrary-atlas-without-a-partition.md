@@ -2,13 +2,14 @@
 id: fs-the-integral-of-a-form-is-the-sum-over-an-arbitrary-atlas-without-a-partition
 title: "False: summing unweighted atlas integrals is valid"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement", "prop-positive-compactly-supported-top-forms-have-positive-integral"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

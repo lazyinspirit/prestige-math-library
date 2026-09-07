@@ -2,13 +2,14 @@
 id: thm-unique-extension-of-a-nonarchimedean-absolute-value
 title: "Unique extension of a nonarchimedean absolute value"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [lem-uniqueness-of-an-extended-complete-field-absolute-value, lem-irreducible-polynomial-coefficients-in-a-complete-valuation-ring, thm-basic-laws-for-field-norm-and-trace, thm-field-norm-and-trace-agree-with-operator-determinant-and-trace]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

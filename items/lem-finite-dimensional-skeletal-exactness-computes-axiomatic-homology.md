@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, 15§2, second theorem and full exact-diagram proof, pp.119–120"
       url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
       locator: "15§2, second theorem and full exact-diagram proof, pp.119–120"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Induct on dimension to prove vanishing above dimension and stabilization below the attaching dimension. In the three-skeleton diagram send x to the class of rho(y) for any skeletal lift y; check existence, independence, inverse and pair-boundary compatibility. Stop the stabilization at the finite top dimension; no colimit assertion is used here."
 ---

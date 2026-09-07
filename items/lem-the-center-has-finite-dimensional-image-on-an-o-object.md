@@ -4,6 +4,7 @@ kind: "lemma"
 title: "The center has finite-dimensional image on each O-object"
 deps: ["prop-equivalent-support-description-of-category-o", "def-bgg-category-o"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Take the finite sum of full weight spaces containing chosen generators. It is Z-stable and finite dimensional; restriction embeds the image algebra in End(E), since a central element killing E kills its U(g)-span"
 ---

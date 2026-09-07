@@ -3,6 +3,7 @@ id: "fs-the-derived-category-is-the-same-category-as-the-homotopy-category"
 kind: "false-statement"
 deps: ["prop-a-complex-is-zero-in-the-derived-category-exactly-when-it-is-acyclic", "fs-every-acyclic-complex-is-contractible"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -14,7 +15,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

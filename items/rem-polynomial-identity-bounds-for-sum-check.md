@@ -2,13 +2,14 @@
 id: rem-polynomial-identity-bounds-for-sum-check
 kind: remark
 title: "Existing polynomial identity bounds"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-root-bound-for-polynomials-over-a-domain, thm-schwartz-zippel-lemma]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

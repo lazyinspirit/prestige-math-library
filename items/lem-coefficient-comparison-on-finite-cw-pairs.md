@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Theorem 2C.5 pp.182–184; Axioms for Homology p.161"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Theorem 2C.5 pp.182–184; Axioms for Homology p.161"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Compare each theory with simplicial chains using the specified coefficients and transport along a finite simplicial homotopy model. Independence and continuous naturality follow by comparing two models via their homotopy equivalences and the continuous polyhedral comparison. A normalized natural morphism is forced on relative simplices by boundaries, then on the exact diagram, proving uniqueness."
 ---

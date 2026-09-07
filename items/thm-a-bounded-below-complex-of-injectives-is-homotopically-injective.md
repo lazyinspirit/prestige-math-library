@@ -4,6 +4,7 @@ kind: "theorem"
 title: "A bounded below complex of injectives is homotopically injective"
 deps: ["def-homotopically-injective-bounded-below-complex", "def-injective-object", "def-dependent-choice"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

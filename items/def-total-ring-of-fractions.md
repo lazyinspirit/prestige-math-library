@@ -4,6 +4,7 @@ kind: "definition"
 title: "total ring of fractions"
 deps: ["def-multiplicative-subset-and-localisation"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

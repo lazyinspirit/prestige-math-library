@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, §2.3 Exercise 2, p.165"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "§2.3 Exercise 2, p.165"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Construct boundary maps by shifting the graded family of ordinary connecting maps; finite lost end coordinates vanish in product/sum. Prove exactness of the product/sum functor on graded abelian groups by coordinate lifting and finite-support corrections, rather than asserting that quotients of theories are exact. On finite-dimensional CW pairs only finitely many reduced degrees occur, so E=0. On the infinite wedge its value is product Z/direct-sum Z, nonzero via the all-ones class, while E of each sphere is zero. Pass to pairs by the quotient formulation. This is an explicit counterexample to replacing arbitrary by finite additivity."
 ---

@@ -3,6 +3,8 @@ id: "thm-ext-is-hom-in-the-derived-category"
 kind: "theorem"
 title: "Ext is hom in the derived category"
 deps: ["prop-morphisms-from-a-homotopically-projective-complex-need-no-roof", "prop-morphisms-into-a-homotopically-injective-complex-need-no-roof", "thm-a-bounded-above-complex-of-projectives-is-homotopically-projective", "thm-a-bounded-below-complex-of-injectives-is-homotopically-injective", "thm-hom-in-the-homotopy-category-is-zero-degree-homology-of-the-hom-complex", "def-ext-via-a-projective-resolution-of-the-first-variable", "def-ext-via-an-injective-resolution-of-the-second-variable"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
@@ -11,7 +13,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 landmark: true
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

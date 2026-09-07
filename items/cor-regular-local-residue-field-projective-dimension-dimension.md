@@ -4,6 +4,7 @@ kind: "corollary"
 title: "regular local residue field projective dimension dimension"
 deps: ["lem-regular-local-residue-field-koszul-resolution", "lem-projective-dimension-from-last-nonzero-betti-number", "cor-betti-number-is-rank-in-minimal-resolution", "cor-complete-intersection-betti-numbers-binomial"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

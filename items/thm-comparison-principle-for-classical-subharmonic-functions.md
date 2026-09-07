@@ -2,7 +2,7 @@
 id: thm-comparison-principle-for-classical-subharmonic-functions
 kind: theorem
 title: "Comparison principle for classical subharmonic functions"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-weak-maximum-principle-for-the-laplacian]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

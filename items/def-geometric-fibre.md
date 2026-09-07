@@ -2,13 +2,14 @@
 id: "def-geometric-fibre"
 kind: "definition"
 title: "Geometric fibres and geometric points"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-scheme-theoretic-fibre", "lem-base-extension-field-coordinate-ring", "def-algebraic-closure"]
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

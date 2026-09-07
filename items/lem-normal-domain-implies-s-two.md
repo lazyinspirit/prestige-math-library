@@ -4,6 +4,7 @@ kind: "lemma"
 title: "normal domain implies s two"
 deps: ["def-serre-r-k-and-s-k-conditions", "thm-normality-is-local-for-domains", "thm-depth-zero-associated-prime-criterion", "lem-depth-quotient-by-regular-element", "thm-krull-height-theorem"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

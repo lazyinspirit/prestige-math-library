@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Degree property (g), p.134"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Degree property (g), p.134"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "The vector (1-t)f(x)-tx never vanishes: a zero at an interior t would force f(x)=x by equal norms. Normalize to homotope f to the antipodal map."
 ---

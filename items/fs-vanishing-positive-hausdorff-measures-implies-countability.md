@@ -4,6 +4,7 @@ kind: "false-statement"
 title: "Vanishing at all positive exponents forces countability"
 deps: ["cex-uncountable-zero-dimensional-binary-digit-set"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

@@ -3,6 +3,8 @@ id: "prop-finite-hausdorff-measurable-sets-have-borel-cores"
 kind: "proposition"
 title: "Borel cores of sigma-finite Hausdorff measurable sets"
 deps: ["thm-hausdorff-measure-has-borel-hulls", "thm-continuity-from-below-for-measures"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: Fremlin, Measure Theory, 264F(c)
@@ -13,7 +15,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

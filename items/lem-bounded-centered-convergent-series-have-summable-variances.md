@@ -2,13 +2,14 @@
 id: lem-bounded-centered-convergent-series-have-summable-variances
 title: "Bounded centered convergent series have summable variances"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-almost-sure-convergence-of-a-random-series", "def-partial-sums-and-sample-means", "def-independent-random-elements", "thm-grouping-independent-sigma-algebras", "thm-factorization-of-expectations-for-independent-variables", "lem-variance-and-covariance-identities-for-random-variables", "thm-continuity-from-below-for-measures", "cor-expectation-linearity-monotonicity-and-modulus-bound"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

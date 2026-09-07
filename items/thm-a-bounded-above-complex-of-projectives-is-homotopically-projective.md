@@ -4,6 +4,7 @@ kind: "theorem"
 title: "A bounded above complex of projectives is homotopically projective"
 deps: ["def-homotopically-projective-bounded-above-complex", "def-projective-object", "def-dependent-choice"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

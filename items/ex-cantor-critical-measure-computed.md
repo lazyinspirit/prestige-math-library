@@ -4,6 +4,7 @@ kind: "example"
 title: "The ordinary Cantor set at its critical exponent"
 deps: ["thm-cantor-set-hausdorff-dimension-and-exact-measure", "lem-hausdorff-exponent-comparison"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

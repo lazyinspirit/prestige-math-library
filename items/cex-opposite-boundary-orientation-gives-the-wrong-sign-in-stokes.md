@@ -2,13 +2,14 @@
 id: cex-opposite-boundary-orientation-gives-the-wrong-sign-in-stokes
 title: "The wrong boundary sign in the half-space computation"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-half-space-stokes-for-a-compactly-supported-form"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

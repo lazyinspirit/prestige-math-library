@@ -2,7 +2,7 @@
 id: thm-strong-maximum-principle-for-harmonic-functions
 kind: theorem
 title: "Strong maximum principle for harmonic functions"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-ball-mean-value-property-for-harmonic-functions, def-connected-space]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

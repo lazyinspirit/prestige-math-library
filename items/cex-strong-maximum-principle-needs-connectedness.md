@@ -2,7 +2,7 @@
 id: cex-strong-maximum-principle-needs-connectedness
 kind: counterexample
 title: "Strong maximum principle needs connectedness"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-strong-maximum-principle-for-harmonic-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

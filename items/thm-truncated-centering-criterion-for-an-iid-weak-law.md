@@ -2,13 +2,14 @@
 id: thm-truncated-centering-criterion-for-an-iid-weak-law
 title: "Exact tail criterion for a truncated-centered IID weak law"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-identically-distributed-and-iid-random-variables", "lem-symmetrization-for-independent-random-series", "lem-independent-copy-symmetrization-tail-bounds", "lem-one-sided-maximal-inequality-for-symmetric-independent-sums", "thm-truncation-weak-law-for-independent-arrays", "lem-vanishing-tail-control-implies-small-truncated-second-moment", "def-convergence-in-probability", "thm-finite-and-countable-subadditivity-of-measures", "lem-largest-summand-bound-for-symmetric-independent-variables"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

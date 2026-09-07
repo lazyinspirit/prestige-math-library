@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne Corollary 6.47"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use affine cones in A^(n+1); their intersection contains the vertex and has dimension at least dim X+dim Y-n+1. This is positive under the nonemptiness hypothesis. Use cone charts for the component bound."
 ---

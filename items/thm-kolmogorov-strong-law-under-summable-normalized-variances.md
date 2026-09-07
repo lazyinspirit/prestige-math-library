@@ -2,13 +2,14 @@
 id: thm-kolmogorov-strong-law-under-summable-normalized-variances
 title: "Strong law under summable normalized variances"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kolmogorov-convergence-criterion", "lem-kronecker-summation-lemma", "lem-measurable-functions-preserve-independence", "lem-variance-and-covariance-identities-for-random-variables", "def-partial-sums-and-sample-means", "thm-integral-test-for-series"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

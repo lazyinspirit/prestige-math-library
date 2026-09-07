@@ -2,7 +2,7 @@
 id: prop-elementary-high-low-identities
 kind: proposition
 title: "Elementary high low identities"
-status: draft
+status: published
 origin: pipeline
 deps: [def-lowness-and-highness, prop-np-and-conp-are-the-first-levels, lem-ph-adaptive-oracle-transcript-normal-form]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

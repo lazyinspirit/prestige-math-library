@@ -3,6 +3,8 @@ id: "lem-projective-dimension-from-last-nonzero-betti-number"
 kind: "lemma"
 title: "projective dimension from last nonzero betti number"
 deps: ["cor-betti-number-is-rank-in-minimal-resolution", "lem-minimal-free-resolution-reduces-to-zero-differential", "def-projective-dimension-of-an-object", "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective", "thm-finite-flat-modules-over-local-rings-are-free", "lem-projective-modules-are-flat-over-an-arbitrary-ring", "thm-nakayama-lemma", "def-balanced-tor-bifunctor", "lem-finite-local-modules-admit-minimal-free-resolutions"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Corollary 12.29, p.121"
@@ -10,7 +12,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

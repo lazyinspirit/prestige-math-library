@@ -2,13 +2,14 @@
 id: ex-classical-stokes-on-an-oriented-graph-surface
 title: "Surface Stokes on a graph disk"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-classical-three-dimensional-stokes-theorem", "prop-integration-of-top-forms-by-finite-parametrizations"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

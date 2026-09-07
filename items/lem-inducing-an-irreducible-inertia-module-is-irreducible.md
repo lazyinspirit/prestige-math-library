@@ -2,13 +2,14 @@
 id: "lem-inducing-an-irreducible-inertia-module-is-irreducible"
 kind: "lemma"
 title: "Induction of an inertia constituent is irreducible"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-normal-restriction-constituents-form-one-conjugacy-orbit", "lem-normal-isotypical-components-are-permuted-by-translation", "prop-induced-module-decomposes-over-a-left-transversal", "thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

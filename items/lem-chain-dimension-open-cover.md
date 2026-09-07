@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne §3l chain interpretation; §5j p.115"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "A chain meets any open meeting its smallest member in a strict chain: nonempty opens of an irreducible space are dense. Conversely take closures of chains in an open; closure intersected with the open recovers each member."
 ---

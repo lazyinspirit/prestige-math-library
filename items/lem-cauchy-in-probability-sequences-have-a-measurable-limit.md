@@ -2,13 +2,14 @@
 id: lem-cauchy-in-probability-sequences-have-a-measurable-limit
 title: "Cauchy sequences in probability have a measurable limit"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-convergence-in-probability", "cor-first-borel-cantelli-lemma-for-events", "thm-series-cauchy-criterion", "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable", "thm-almost-sure-convergence-implies-convergence-in-probability", "thm-finite-and-countable-subadditivity-of-measures"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

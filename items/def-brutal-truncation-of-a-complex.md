@@ -4,6 +4,7 @@ kind: "definition"
 title: "Brutal truncation of a complex"
 deps: ["def-cochain-complex-in-an-abelian-category"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

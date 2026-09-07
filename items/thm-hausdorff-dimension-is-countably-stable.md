@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Hausdorff dimension is monotone and countably stable"
 deps: ["thm-hausdorff-dimension-critical-exponent", "thm-hausdorff-measure-is-an-outer-measure", "prop-zero-dimensional-hausdorff-measure-counts"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

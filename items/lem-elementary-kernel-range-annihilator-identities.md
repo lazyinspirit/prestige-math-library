@@ -2,13 +2,14 @@
 id: lem-elementary-kernel-range-annihilator-identities
 kind: lemma
 title: "Elementary kernel and range annihilator identities"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "def-annihilator-and-preannihilator", "cor-annihilator-detects-closure", "thm-dual-norms-every-vector"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

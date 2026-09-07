@@ -2,7 +2,7 @@
 id: ex-decomposition-groups-in-a-tower
 title: "Decomposition groups in a tower"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [ex-frobenius-in-a-small-cyclotomic-field, thm-decomposition-and-inertia-in-towers, cor-frobenius-compatibility-in-finite-towers]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

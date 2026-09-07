@@ -4,6 +4,7 @@ kind: "definition"
 title: "The Grothendieck group and character of O"
 deps: ["thm-category-o-is-abelian-and-extension-closed", "prop-equivalent-support-description-of-category-o"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

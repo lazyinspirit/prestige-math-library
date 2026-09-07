@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Generalized central-character decomposition of O"
 deps: ["lem-generalized-central-character-submodules-are-direct-summands"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Central idempotents commute with maps; use a common finite image algebra for a short exact sequence to prove exactness componentwise"
 ---

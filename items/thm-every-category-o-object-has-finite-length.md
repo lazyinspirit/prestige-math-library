@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Every object of O has finite length"
 deps: ["lem-finite-dot-orbit-weight-spaces-detect-o-subquotients", "thm-category-o-decomposes-by-generalized-central-character", "prop-equivalent-support-description-of-category-o", "lem-n-plus-invariants-exist-in-every-nonzero-o-module", "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Sum the finite detector bounds over central summands. Refine a chain until no refinement is possible; the bound forces finite termination and all factors are simple"
 ---

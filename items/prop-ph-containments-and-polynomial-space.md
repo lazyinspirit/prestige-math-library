@@ -2,7 +2,7 @@
 id: prop-ph-containments-and-polynomial-space
 kind: proposition
 title: "Ph containments and polynomial space"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-quantifier-and-oracle-characterizations-of-ph, lem-ph-quantifier-block-closure, def-pspace-and-npspace]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

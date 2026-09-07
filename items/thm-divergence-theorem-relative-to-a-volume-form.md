@@ -2,13 +2,14 @@
 id: thm-divergence-theorem-relative-to-a-volume-form
 title: "Divergence theorem for a volume form"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-divergence-form-identity", "thm-general-stokes-theorem"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

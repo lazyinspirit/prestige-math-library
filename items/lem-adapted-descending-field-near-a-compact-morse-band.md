@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       title: "Nicolaescu, An Invitation to Morse Theory"
     - url: "https://poisson.phc.dm.unipi.it/~camponovo/1907.10297%20%281%29.pdf"
       title: "Benedetti, Lectures on Differential Topology"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "patch local fields"
 ---

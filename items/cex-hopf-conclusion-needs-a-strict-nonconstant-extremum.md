@@ -2,7 +2,7 @@
 id: cex-hopf-conclusion-needs-a-strict-nonconstant-extremum
 kind: counterexample
 title: "Hopf conclusion needs a strict nonconstant extremum"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-hopf-boundary-point-lemma-for-the-laplacian]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

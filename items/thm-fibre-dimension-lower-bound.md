@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
     - title: "Milne Theorem 9.9(b), lower-bound proof, p.203"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Cut y out locally by dim Y functions, pull back and apply the equation bound on affine source charts meeting the chosen fibre component."
 ---

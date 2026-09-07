@@ -2,7 +2,7 @@
 id: lem-fourier-analysis-of-margulis-adjacency
 kind: lemma
 title: "Fourier analysis of margulis adjacency"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-finite-torus-fourier-orthogonality-and-affine-change, def-margulis-gabber-galil-graph, lem-margulis-family-is-constant-degree-and-neighbor-computable]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

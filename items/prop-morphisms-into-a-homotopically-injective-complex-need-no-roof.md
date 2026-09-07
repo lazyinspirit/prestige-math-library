@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Morphisms into a homotopically injective complex need no roof"
 deps: ["def-homotopically-injective-bounded-below-complex", "def-derived-category-of-an-abelian-category", "thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic", "thm-long-exact-hom-sequences-of-a-distinguished-triangle"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

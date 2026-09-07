@@ -2,7 +2,7 @@
 id: lem-ph-adaptive-oracle-transcript-normal-form
 kind: lemma
 title: "Ph adaptive oracle transcript normal form"
-status: draft
+status: published
 origin: pipeline
 deps: [def-relativized-complexity-class, lem-ph-quantifier-block-closure]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

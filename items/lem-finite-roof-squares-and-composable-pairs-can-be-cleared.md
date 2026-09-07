@@ -3,6 +3,8 @@ id: "lem-finite-roof-squares-and-composable-pairs-can-be-cleared"
 kind: "lemma"
 title: "Finite roof squares and composable pairs can be cleared"
 deps: ["lem-composition-of-roofs-is-well-defined", "thm-the-calculus-of-fractions-constructs-the-localization"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - url: "https://stacks.math.columbia.edu/tag/05R1"
@@ -12,7 +14,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

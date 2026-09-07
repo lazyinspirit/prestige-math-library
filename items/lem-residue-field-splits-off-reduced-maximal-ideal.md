@@ -4,6 +4,7 @@ kind: "lemma"
 title: "residue field splits off reduced maximal ideal"
 deps: ["lem-regular-element-reduction-preserves-minimal-resolution", "lem-auslander-buchsbaum-syzygy-projective-dimension", "thm-projective-dimension-at-most-n-iff-higher-ext-vanishes"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

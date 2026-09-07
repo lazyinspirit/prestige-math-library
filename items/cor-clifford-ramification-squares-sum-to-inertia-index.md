@@ -2,13 +2,14 @@
 id: "cor-clifford-ramification-squares-sum-to-inertia-index"
 kind: "corollary"
 title: "Ramification indices account for the inertia quotient"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-clifford-correspondence", "def-clifford-ramification-index", "cor-normal-subgroup-induction-irreducibility-criterion", "cor-frobenius-reciprocity-for-complex-characters", "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product", "cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

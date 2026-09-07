@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne Proposition 9.11"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "First remove the closed images of all nondominating components. A component dominating Y has dimension <=dim Y+r by generic fibres. At least one such component has equality since otherwise on a common nonempty open all component intersections have smaller dimension than the irreducible fibre. Its fibre intersections have dimension >=r everywhere by the lower bound, so contain every fibre, forcing that component to be X."
 ---

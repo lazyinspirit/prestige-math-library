@@ -2,13 +2,14 @@
 id: "lem-normal-isotypical-components-are-permuted-by-translation"
 kind: "lemma"
 title: "Translation permutes normal isotypical components"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-conjugate-representation-and-inertia-group", "cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order", "thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

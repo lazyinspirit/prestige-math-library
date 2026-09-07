@@ -2,7 +2,7 @@
 id: lem-e-overlap-classes-form-an-anticonnected-partition
 title: "E overlap classes form an anticonnected partition"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-e-overlap-chain-relation-in-a-comb-block", "def-anticonnected-graph-and-anticonnected-component", "def-e-graph-and-co-e-graph"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Finite adjacency analysis and structural deduction"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

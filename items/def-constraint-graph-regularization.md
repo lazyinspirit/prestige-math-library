@@ -2,13 +2,14 @@
 id: def-constraint-graph-regularization
 kind: definition
 title: "Constraint graph regularization"
-status: draft
+status: published
 origin: pipeline
 deps: [def-constraint-graph-and-labeling-value, lem-expander-size-adjustment-and-laziness]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

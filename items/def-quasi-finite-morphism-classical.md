@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
     - title: "Arapura Corollary 4.2.2, p.31"
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

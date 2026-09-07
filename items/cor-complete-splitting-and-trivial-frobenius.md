@@ -2,13 +2,14 @@
 id: cor-complete-splitting-and-trivial-frobenius
 title: "Complete splitting and trivial frobenius"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [thm-frobenius-order-is-residue-degree, cor-galois-prime-decomposition-efg]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

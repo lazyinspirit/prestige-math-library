@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, 14§3, suspension corollaries, p.109; 15§2 p.120"
       url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
       locator: "14§3, suspension corollaries, p.109; 15§2 p.120"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use the cone LES and natural suspension repeatedly, starting with h_0(S^0,one point)=G. Negative-degree vanishing follows by dimension, not by imposing an extra connective axiom."
 ---

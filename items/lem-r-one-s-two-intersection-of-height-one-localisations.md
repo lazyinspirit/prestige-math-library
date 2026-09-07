@@ -4,6 +4,7 @@ kind: "lemma"
 title: "r one s two intersection of height one localisations"
 deps: ["def-serre-r-k-and-s-k-conditions", "thm-lasker-noether-primary-decomposition", "lem-associated-primes-from-a-minimal-primary-decomposition", "lem-depth-quotient-by-regular-element", "thm-depth-zero-associated-prime-criterion", "thm-associated-primes-localise", "thm-existence-of-associated-primes"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

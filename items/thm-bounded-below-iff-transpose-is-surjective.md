@@ -2,13 +2,14 @@
 id: thm-bounded-below-iff-transpose-is-surjective
 kind: theorem
 title: "Bounded below is equivalent to surjectivity of the transpose"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-banach-closed-range-theorem", "lem-elementary-kernel-range-annihilator-identities", "lem-transpose-range-membership-by-domination", "thm-bounded-below-iff-injective-with-closed-range"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

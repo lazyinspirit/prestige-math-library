@@ -2,13 +2,14 @@
 id: "lem-diagonal-base-change-identification"
 kind: "lemma"
 title: "The diagonal commutes with base change"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-diagonal-morphism-scheme", "lem-base-change-composition", "lem-fibre-product-associativity-and-symmetry"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

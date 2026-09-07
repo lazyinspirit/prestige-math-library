@@ -2,13 +2,14 @@
 id: "lem-isotypical-evaluation-and-subspaces-of-multiplicity-spaces"
 kind: "lemma"
 title: "Isotypical evaluation and multiplicity subspaces"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order", "cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars", "def-tensor-product-of-complex-representations", "thm-universal-property-of-module-tensor-products"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

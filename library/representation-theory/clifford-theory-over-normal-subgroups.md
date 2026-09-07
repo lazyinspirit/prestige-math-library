@@ -1,7 +1,7 @@
 ---
 page: clifford-theory-over-normal-subgroups
 title: "Clifford Theory over Normal Subgroups"
-status: draft
+status: published
 items: ["def-conjugate-representation-and-inertia-group", "lem-normal-isotypical-components-are-permuted-by-translation", "lem-normal-restriction-constituents-form-one-conjugacy-orbit", "thm-clifford-homogeneous-restriction-formula", "def-clifford-ramification-index", "lem-normal-isotypical-component-is-inertia-stable", "lem-induction-from-the-inertia-group-recovers-the-module", "lem-inducing-an-irreducible-inertia-module-is-irreducible", "thm-clifford-correspondence", "cor-normal-subgroup-induction-irreducibility-criterion", "cor-clifford-ramification-squares-sum-to-inertia-index", "def-extension-of-an-irreducible-normal-subgroup-representation", "lem-isotypical-evaluation-and-subspaces-of-multiplicity-spaces", "thm-gallagher-correspondence-for-an-extendible-character"]
 examples: []
 ---

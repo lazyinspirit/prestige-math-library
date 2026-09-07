@@ -2,13 +2,14 @@
 id: cor-frobenius-compatibility-in-finite-towers
 title: "Frobenius compatibility in finite towers"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [thm-decomposition-and-inertia-in-towers, thm-unramified-frobenius-element-exists-uniquely, thm-ramification-and-residue-degrees-in-towers]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

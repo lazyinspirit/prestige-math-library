@@ -2,13 +2,14 @@
 id: def-margulis-gabber-galil-graph
 kind: definition
 title: "Margulis gabber galil graph"
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-multigraph-and-normalized-adjacency]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

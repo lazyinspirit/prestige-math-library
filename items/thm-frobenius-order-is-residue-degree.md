@@ -2,13 +2,14 @@
 id: thm-frobenius-order-is-residue-degree
 title: "Frobenius order is residue degree"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [def-arithmetic-frobenius-coset, thm-unramified-frobenius-element-exists-uniquely, thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

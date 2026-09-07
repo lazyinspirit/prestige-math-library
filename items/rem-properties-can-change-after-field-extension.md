@@ -2,13 +2,14 @@
 id: "rem-properties-can-change-after-field-extension"
 kind: "remark"
 title: "Why geometric properties differ from ordinary ones"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-base-extension-field-coordinate-ring", "lem-tensor-ring-presentations-for-base-change", "thm-chinese-remainder-theorem-for-comaximal-ideals"]
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

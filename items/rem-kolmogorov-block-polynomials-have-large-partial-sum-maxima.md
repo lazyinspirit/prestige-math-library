@@ -17,9 +17,13 @@ external_dependency:
   exact_statement: For each integer M>=1 there are a nonnegative trigonometric polynomial g_M with ||g_M||_1=1 and a measurable A_M with m(A_M)>1-2^(-M), such that inf over x in A_M of sup_{N>=1}|S_N g_M(x)|>2^M.
   local_proof_attempt: Read the Kronecker proof, atomic probability measures and finite-maximal truncation followed by Fejer smoothing. This requires its rational-independence construction and uniform phase approximation; the design explicitly withholds this multi-lemma proof. No fabricated short proof or logical edge to an unproved lemma is planned.
   necessity: Required by FR-5’s explicit literature boundary; retained for mathematical scope without making an unproved result a logical prerequisite.
-status: draft
+status: published
 origin: pipeline
 verification:
+  sources_checked:
+    date: 2026-09-07
+    scope: citations
+    by: session-audit
   precheck: n/a
 ---
 

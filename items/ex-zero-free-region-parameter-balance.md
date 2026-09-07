@@ -2,7 +2,7 @@
 id: ex-zero-free-region-parameter-balance
 title: "Zero free region parameter balance"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-riemann-zeta-classical-zero-free-region]
 provenance:
@@ -10,6 +10,8 @@ provenance:
   proof: ai-altered
 generation:
   role: example
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Theorem 6.6 proof"

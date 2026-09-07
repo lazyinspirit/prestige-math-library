@@ -2,7 +2,7 @@
 id: cor-uniqueness-for-the-classical-dirichlet-problem
 kind: corollary
 title: "Uniqueness for the classical dirichlet problem"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-comparison-principle-for-classical-subharmonic-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

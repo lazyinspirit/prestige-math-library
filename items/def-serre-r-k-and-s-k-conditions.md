@@ -4,6 +4,7 @@ kind: "definition"
 title: "serre r k and s k conditions"
 deps: ["def-embedding-dimension-and-regular-local-ring", "def-depth-with-respect-to-an-ideal", "def-height-of-a-prime-ideal"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

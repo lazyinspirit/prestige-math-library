@@ -2,13 +2,14 @@
 id: cor-galois-prime-decomposition-efg
 title: "Galois prime decomposition efg"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [thm-galois-action-on-primes-above-a-prime-is-transitive, thm-fundamental-identity-for-primes-in-number-fields]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "theorem"
 title: "The heart of the canonical t structure is equivalent to the original abelian category"
 deps: ["thm-the-canonical-pair-is-a-t-structure", "lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 landmark: true
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

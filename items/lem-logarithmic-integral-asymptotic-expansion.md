@@ -2,13 +2,14 @@
 id: lem-logarithmic-integral-asymptotic-expansion
 title: "Logarithmic integral asymptotic expansion"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-logarithmic-integral]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

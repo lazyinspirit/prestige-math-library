@@ -4,6 +4,7 @@ kind: "lemma"
 title: "auslander buchsbaum projective dimension one"
 deps: ["lem-minimal-free-matrix-induces-zero-on-residue-ext", "lem-projective-dimension-from-last-nonzero-betti-number", "lem-finite-local-modules-admit-minimal-free-resolutions", "cor-depth-as-first-nonzero-ext", "thm-long-exact-ext-sequence-in-the-second-variable"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

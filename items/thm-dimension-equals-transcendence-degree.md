@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
     - title: "Arapura §4.1, p.30"
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Every affine chart has the same fraction field; invoke the established algebraic dimension theorem and the open-cover chain lemma. No new algebraic normalization proof."
 ---

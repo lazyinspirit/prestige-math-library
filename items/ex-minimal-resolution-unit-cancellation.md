@@ -4,6 +4,7 @@ kind: "example"
 title: "minimal resolution unit cancellation"
 deps: ["lem-minimal-free-resolution-differentials-land-in-maximal-ideal"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-generated
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 generation:
   role: example

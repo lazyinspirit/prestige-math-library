@@ -2,13 +2,14 @@
 id: def-volume-form-on-an-oriented-manifold
 title: "Positive volume form on an oriented manifold"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-oriented-smooth-manifold-and-oriented-chart", "thm-orientability-is-equivalent-to-a-nowhere-vanishing-top-form"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

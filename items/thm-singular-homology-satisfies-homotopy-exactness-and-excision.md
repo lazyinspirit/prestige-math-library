@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Axioms for Homology, pp.160–162"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Axioms for Homology, pp.160–162"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Package published proofs; obtain subcomplex excision by CW collars/mapping cylinders and the open excision theorem, spelling out the neighbourhood replacement. Pair homotopy invariance also follows from absolute invariance and the natural pair LES."
 ---

@@ -2,13 +2,14 @@
 id: ex-integration-of-a-density-on-the-mobius-band
 title: "A density integral on the Mobius band"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-density-integration-is-defined-without-an-orientation", "prop-density-pullback-under-local-diffeomorphisms"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

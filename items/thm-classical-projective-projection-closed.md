@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne Theorem 7.22, pp.164–165"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Work over affine Y. For a fibre outside the image choose degree d with all monomials in the specialized ideal. The degree-d quotient is a finite A-module M with M/m_y M=0. Local Nakayama gives M_m_y=0; finite generators yield a neighborhood where M vanishes. All higher degrees vanish there, so all its fibres are empty. No proper-morphism theorem is imported."
 ---

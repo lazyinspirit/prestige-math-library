@@ -1,7 +1,7 @@
 ---
 page: classical-zero-free-region-and-the-prime-number-theorem-examples
 title: "Classical Zero Free Region and the Prime Number Theorem — Examples"
-status: draft
+status: published
 items: [rem-the-classical-zeta-region-is-not-a-uniform-dirichlet-l-region]
 examples: [ex-the-three-four-one-trigonometric-inequality, ex-zero-free-region-parameter-balance, ex-optimizing-the-prime-number-theorem-contour-height, ex-from-psi-to-the-logarithmic-integral, ex-newman-tauberian-prime-number-theorem, ex-prime-number-theorem-in-a-small-progression, cex-dirichlet-density-alone-does-not-give-a-counting-asymptotic]
 ---

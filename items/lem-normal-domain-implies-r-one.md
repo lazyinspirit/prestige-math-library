@@ -4,6 +4,7 @@ kind: "lemma"
 title: "normal domain implies r one"
 deps: ["def-serre-r-k-and-s-k-conditions", "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr", "thm-one-dimensional-regular-local-rings-are-dvrs"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

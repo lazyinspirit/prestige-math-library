@@ -1,7 +1,7 @@
 ---
 page: "sublevel-deformation-and-the-handle-attachment-theorem"
 title: "Sublevel Deformation and the Handle Attachment Theorem"
-status: "draft"
+status: published
 items: ["def-closed-sublevel-and-level-set-of-a-smooth-function", "lem-normalized-gradient-crosses-a-compact-regular-band-in-controlled-time", "thm-regular-interval-diffeomorphism", "cor-regular-sublevels-are-diffeomorphic", "prop-deformation-lemma-for-a-critical-point-free-slab", "def-k-handle-core-cocore-attaching-region-and-belt-sphere", "def-attaching-a-smooth-handle-with-corner-rounding", "lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism", "lem-adapted-descending-field-near-a-compact-morse-band", "lem-local-critical-value-lowering-preserves-the-upper-sublevel", "lem-local-morse-sublevel-pair-is-a-handle-pair", "lem-gradient-flow-identifies-the-local-and-global-attaching-regions", "thm-one-critical-point-handle-attachment", "cor-unstable-disk-is-the-handle-core", "cor-one-critical-point-cell-attachment-homotopy-type", "lem-relative-homology-of-the-standard-handle-pair", "cor-relative-homology-of-a-single-handle-pair", "prop-simultaneous-attachment-at-a-morse-critical-value", "cor-index-zero-handles-create-components", "cor-index-n-handles-cap-boundary-spheres", "rem-compact-critical-band-is-the-local-handle-theorem-hypothesis"]
 examples: []
 ---

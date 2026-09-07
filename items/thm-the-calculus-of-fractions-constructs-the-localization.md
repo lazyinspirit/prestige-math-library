@@ -4,6 +4,7 @@ kind: "theorem"
 title: "The calculus of fractions constructs the localization"
 deps: ["def-localization-of-a-category-at-a-class-of-morphisms", "lem-composition-of-roofs-is-well-defined"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 landmark: true
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

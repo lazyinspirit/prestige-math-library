@@ -4,6 +4,7 @@ kind: "definition"
 title: "The integral Weyl group of a weight"
 deps: ["def-root-reflections-and-the-weyl-group-action", "def-weyl-vector-rho-for-a-chosen-positive-system"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

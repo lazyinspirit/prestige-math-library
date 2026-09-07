@@ -2,13 +2,14 @@
 id: lem-zeta-explicit-formula-zero-free-error-balance
 title: "Zeta explicit formula zero free error balance"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [thm-von-mangoldt-explicit-formula-truncated, thm-riemann-zeta-classical-zero-free-region, lem-zeta-reciprocal-zero-sum-bound, def-half-weighted-chebyshev-psi]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

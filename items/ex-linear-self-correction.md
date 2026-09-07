@@ -2,7 +2,7 @@
 id: ex-linear-self-correction
 kind: example
 title: "Correcting one corrupted table entry"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-linear-self-correction]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

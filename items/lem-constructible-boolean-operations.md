@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne §9a p.200, paragraph preceding Proposition 9.6"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Distribute finite unions and intersections; complement of U intersect Z is (X minus U) union (X minus Z). Do not copy the displayed complement formula in the PDF literally."
 ---

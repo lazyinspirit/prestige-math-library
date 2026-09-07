@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Example 2.31, p.136"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Example 2.31, p.136"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "For |d| positive pinch the complement of interiors of |d| disjoint disks to a point and fold each disk quotient by an orientation-preserving or reversing homeomorphism. A value away from the pinch point has exactly |d| local contributions of the chosen sign. For d=0 use a constant. This is existence, not classification."
 ---

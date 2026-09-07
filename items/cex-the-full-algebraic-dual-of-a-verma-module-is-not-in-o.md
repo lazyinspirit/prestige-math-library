@@ -4,6 +4,7 @@ kind: "counterexample"
 title: "The full algebraic Verma dual is too large"
 deps: ["def-restricted-dual-of-a-weight-module", "def-verma-module", "prop-weights-of-a-verma-module-lie-below-lambda"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Choose f with f(f^n v)=1 for all n. No nonzero polynomial in h kills f because it would vanish at every distinct lambda-2n; hence f has infinite-dimensional h-orbit"
 ---

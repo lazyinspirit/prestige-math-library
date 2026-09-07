@@ -4,6 +4,7 @@ kind: "lemma"
 title: "regular local regular quotient ideal is parameter generated"
 deps: ["lem-regular-local-quotient-by-parameter-is-regular", "lem-regular-local-domain-induction", "lem-regular-system-of-parameters-equivalent-basis"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

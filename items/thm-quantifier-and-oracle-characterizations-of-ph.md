@@ -2,7 +2,7 @@
 id: thm-quantifier-and-oracle-characterizations-of-ph
 kind: theorem
 title: "Quantifier and oracle characterizations of ph"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-ph-adaptive-oracle-transcript-normal-form, thm-bounded-alternation-qbf-is-level-complete, prop-np-and-conp-are-the-first-levels]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

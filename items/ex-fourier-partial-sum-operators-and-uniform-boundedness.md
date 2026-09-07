@@ -7,13 +7,14 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
     date: 2026-09-07
 sources:
   references: [{title: 'Laugesen, Harmonic Analysis Lecture Notes', url: 'https://arxiv.org/pdf/0903.3845', locator: 'ch. 8, Theorem 8.2 pp. 48–49, with published Banach–Steinhaus dichotomy'}]
-status: draft
+status: published
 origin: pipeline
 proof_strategy: Apply the published Baire dichotomy to T_N f=S_N f(0). Explain the closed periodic subspace as for the A-page witness and display the set as intersection_m union_N {f:|T_N f|>m}. Do not replace residuality in function space by a claim about almost every point of the torus. The unbounded functional norms are now part of the preceding norm lemma, so no B-page dependency is used.
 ---

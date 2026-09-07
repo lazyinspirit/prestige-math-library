@@ -2,7 +2,7 @@
 id: cex-unbounded-punctured-harmonic-singularity-is-not-removable
 kind: counterexample
 title: "Unbounded punctured harmonic singularity is not removable"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-removable-singularity-for-bounded-harmonic-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

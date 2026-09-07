@@ -2,7 +2,7 @@
 id: lem-standard-containments-relativize
 kind: lemma
 title: "Standard containments relativize"
-status: draft
+status: published
 origin: pipeline
 deps: [def-relativized-complexity-class, thm-quantifier-and-oracle-characterizations-of-ph, prop-ph-containments-and-polynomial-space]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

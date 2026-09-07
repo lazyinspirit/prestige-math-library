@@ -2,13 +2,14 @@
 id: ex-adjoint-of-the-right-and-left-shifts
 kind: example
 title: "Transposes of the right and left shifts"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "thm-dual-of-c0-is-ell-one", "thm-complex-dual-of-ell-one-is-ell-infinity", "cor-ell-p-duality-by-counting-measure"]
 provenance:
   statement: ai-generated
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

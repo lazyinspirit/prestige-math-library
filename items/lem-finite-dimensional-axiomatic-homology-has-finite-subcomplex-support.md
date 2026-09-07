@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Lemma 2.34 p.138, finite support reasoning"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Lemma 2.34 p.138, finite support reasoning"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Cellular chains are direct sums. Each cycle and each boundary witness has finite support contained, by closure finiteness, in a finite subcomplex. Use the natural skeletal isomorphism for subcomplex inclusions. Compact images will subsequently ensure compatibility under continuous maps; singular-chain support is not being assumed for h."
 ---

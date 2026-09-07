@@ -2,13 +2,14 @@
 id: cor-zeta-zero-count-near-the-one-line
 title: "Zeta zero count near the one line"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [thm-riemann-zeta-classical-zero-free-region, lem-zeta-logarithmic-derivative-zero-bound, thm-von-mangoldt-logarithmic-derivative-zeta, cor-zeta-zero-count-unit-interval]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "finite local modules admit minimal free resolutions"
 deps: ["def-minimal-free-resolution-over-a-local-ring", "cor-minimal-generators-over-a-local-ring", "thm-nakayama-lemma", "thm-equivalent-characterizations-of-noetherian-modules"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

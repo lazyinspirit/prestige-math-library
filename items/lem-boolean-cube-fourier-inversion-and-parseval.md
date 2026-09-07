@@ -2,7 +2,7 @@
 id: lem-boolean-cube-fourier-inversion-and-parseval
 kind: lemma
 title: "Character orthogonality, inversion and Parseval"
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-cube-fourier-coefficients]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

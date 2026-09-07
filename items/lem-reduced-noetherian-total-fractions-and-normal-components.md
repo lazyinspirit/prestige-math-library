@@ -4,6 +4,7 @@ kind: "lemma"
 title: "reduced noetherian total fractions and normal components"
 deps: ["def-total-ring-of-fractions", "def-normal-noetherian-ring", "thm-noetherian-ring-has-finitely-many-minimal-primes", "cor-radical-ideals-as-intersections-of-minimal-primes-noetherian", "thm-normality-is-local-for-domains", "thm-chinese-remainder-theorem-for-comaximal-ideals", "lem-finite-prime-avoidance"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

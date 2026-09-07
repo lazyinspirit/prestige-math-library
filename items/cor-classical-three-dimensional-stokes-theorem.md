@@ -2,13 +2,14 @@
 id: cor-classical-three-dimensional-stokes-theorem
 title: "Agreement of general and classical surface Stokes"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-general-stokes-theorem", "prop-integration-over-an-oriented-embedded-submanifold", "prop-integration-of-top-forms-by-finite-parametrizations", "thm-the-classical-stokes-theorem-for-a-c2-surface-patch", "def-divergence-and-curl-of-a-c1-vector-field"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

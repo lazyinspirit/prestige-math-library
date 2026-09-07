@@ -4,6 +4,7 @@ kind: "example"
 title: "cusp local ring not regular"
 deps: ["thm-quotient-and-lifting-regularity-across-a-regular-element", "lem-associated-graded-polynomial-surjection", "thm-dimension-at-most-embedding-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-generated
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 generation:
   role: example

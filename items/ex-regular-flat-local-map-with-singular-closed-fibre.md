@@ -4,6 +4,7 @@ kind: "example"
 title: "regular flat local map with singular closed fibre"
 deps: ["thm-localisation-and-polynomial-extension-of-regular-rings", "def-embedding-dimension-and-regular-local-ring"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-generated
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 generation:
   role: example

@@ -18,9 +18,13 @@ external_dependency:
   local_proof_attempt: Read the full summation construction through (4.2.13). It depends on the unsupplied polynomial lemma. The design explicitly keeps the entire Kolmogorov theorem external, so the polynomial lemma is an external mention, never a deps edge.
   necessity: Required by FR-5’s explicit literature boundary; retained for mathematical scope without making an unproved result a logical prerequisite.
 external_refs: [rem-kolmogorov-block-polynomials-have-large-partial-sum-maxima]
-status: draft
+status: published
 origin: pipeline
 verification:
+  sources_checked:
+    date: 2026-09-07
+    scope: citations
+    by: session-audit
   precheck: n/a
 ---
 

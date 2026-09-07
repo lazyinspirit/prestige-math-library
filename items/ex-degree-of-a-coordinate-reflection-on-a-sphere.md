@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Degree property (e), p.134"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Degree property (e), p.134"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use a symmetric simplex boundary and swap its two opposite vertices; print the cycle/sign calculation rather than simply repeating the proposition."
 ---

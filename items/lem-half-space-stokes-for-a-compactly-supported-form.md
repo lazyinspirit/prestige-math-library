@@ -2,13 +2,14 @@
 id: lem-half-space-stokes-for-a-compactly-supported-form
 title: "Compact-support Stokes on the upper half-space"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-euclidean-stokes-for-a-compactly-supported-form", "def-induced-boundary-orientation", "def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold", "prop-integration-over-an-oriented-embedded-submanifold"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

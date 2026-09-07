@@ -2,13 +2,14 @@
 id: ex-greens-theorem-on-a-planar-disk
 title: "Green circulation and flux on a disk"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-greens-theorem-from-general-stokes", "prop-integration-of-top-forms-by-finite-parametrizations"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

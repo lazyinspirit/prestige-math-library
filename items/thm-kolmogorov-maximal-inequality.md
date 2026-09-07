@@ -2,13 +2,14 @@
 id: thm-kolmogorov-maximal-inequality
 title: "Kolmogorov maximal inequality"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-partial-sums-and-sample-means", "def-independent-random-elements", "def-moments-variance-and-covariance", "thm-grouping-independent-sigma-algebras", "thm-factorization-of-expectations-for-independent-variables", "lem-variance-and-covariance-identities-for-random-variables", "thm-arithmetic-and-lattice-operations-preserve-measurability"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-arithmetized-formula-counting-sum
 kind: proposition
 title: "Verifying formula counts over a supplied field"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-arithmetization-agrees-on-boolean-inputs, lem-formula-arithmetization-degree-and-evaluation-cost, thm-sum-check-soundness, lem-sum-check-verifier-is-polynomial-time-given-point-evaluation]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

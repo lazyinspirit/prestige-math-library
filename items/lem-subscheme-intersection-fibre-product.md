@@ -2,13 +2,14 @@
 id: "lem-subscheme-intersection-fibre-product"
 kind: "lemma"
 title: "Intersections of subschemes"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-scheme-theoretic-inverse-image-subscheme", "lem-tensor-ring-presentations-for-base-change", "lem-fibre-product-associativity-and-symmetry"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

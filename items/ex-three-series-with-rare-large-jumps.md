@@ -2,7 +2,7 @@
 id: ex-three-series-with-rare-large-jumps
 title: "The three series impose separate conditions"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kolmogorov-three-series-theorem", "cor-second-borel-cantelli-lemma-under-pairwise-independence", "thm-p-series-real-exponents", "cor-coordinate-random-elements-on-a-countable-product-are-independent", "thm-countable-product-of-probability-spaces"]
 provenance:
@@ -10,6 +10,8 @@ provenance:
   proof: ai-generated
 generation:
   role: example
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Theorem 3.12, pp. 66\u201368, direct specializations"

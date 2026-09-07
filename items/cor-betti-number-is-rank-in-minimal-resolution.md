@@ -4,6 +4,7 @@ kind: "corollary"
 title: "betti number is rank in minimal resolution"
 deps: ["def-betti-numbers-of-a-finite-local-module", "lem-minimal-free-resolution-reduces-to-zero-differential"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

@@ -2,13 +2,14 @@
 id: def-sum-check-instance-and-protocol
 kind: definition
 title: "Sum-check with explicit degree bounds"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-field-and-its-order, def-completeness-and-soundness, def-multivariate-polynomial-ring-by-iteration]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

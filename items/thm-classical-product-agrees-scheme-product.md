@@ -2,13 +2,14 @@
 id: "thm-classical-product-agrees-scheme-product"
 kind: "theorem"
 title: "Classical products and scheme products"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-affine-variety-product-coordinate-ring", "thm-classical-varieties-equivalent-integral-separated-finite-type-schemes", "thm-fibre-products-of-schemes-exist", "lem-fibre-product-open-restriction"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

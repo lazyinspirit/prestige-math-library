@@ -2,13 +2,14 @@
 id: thm-newman-zagier-tauberian-theorem
 title: "Newman zagier tauberian theorem"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [lem-newman-damped-contour-estimates, thm-residue-theorem-null-homologous-cycle, thm-dominated-convergence]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

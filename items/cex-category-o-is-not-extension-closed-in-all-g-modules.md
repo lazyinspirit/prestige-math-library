@@ -4,6 +4,7 @@ kind: "counterexample"
 title: "An ambient extension can leave category O"
 deps: ["def-bgg-category-o", "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra", "def-verma-module"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "PBW freeness makes induction exact and preserves the nonzero Jordan pair in degree zero; therefore h-semisimplicity fails"
 ---

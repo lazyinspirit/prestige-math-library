@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Injective complexes model the bounded below derived category"
 deps: ["thm-a-bounded-below-complex-of-injectives-is-homotopically-injective", "prop-morphisms-into-a-homotopically-injective-complex-need-no-roof", "lem-bounded-below-complexes-admit-injective-replacements", "prop-bounded-derived-localizations-embed-fully-faithfully"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 landmark: true
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

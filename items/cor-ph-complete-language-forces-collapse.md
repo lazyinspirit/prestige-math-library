@@ -2,7 +2,7 @@
 id: cor-ph-complete-language-forces-collapse
 kind: corollary
 title: "Ph complete language forces collapse"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-ph-quantifier-block-closure, thm-sigma-k-equals-pi-k-implies-ph-collapse, thm-tqbf-is-pspace-complete]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

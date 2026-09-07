@@ -2,13 +2,14 @@
 id: cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero
 title: "A compactly supported primitive has zero total derivative integral"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-general-stokes-theorem"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

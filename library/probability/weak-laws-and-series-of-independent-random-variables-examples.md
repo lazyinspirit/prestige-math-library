@@ -1,7 +1,7 @@
 ---
 page: weak-laws-and-series-of-independent-random-variables-examples
 title: "Weak Laws and Series of Independent Random Variables — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-weak-law-for-bernoulli-sample-means", "ex-weak-law-for-independent-nonidentical-variables", "ex-rademacher-series-convergence-threshold", "ex-a-random-series-that-converges-conditionally-almost-surely", "ex-three-series-with-rare-large-jumps", "cex-weak-law-can-fail-without-tail-control", "cex-sum-of-variances-condition-is-sufficient-not-necessary-without-further-hypotheses", "cex-iid-cauchy-averages-have-no-deterministic-weak-centering", "ex-truncated-centering-weak-law-with-infinite-mean"]
 ---

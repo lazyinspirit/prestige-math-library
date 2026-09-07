@@ -2,13 +2,14 @@
 id: lem-lifting-residue-frobenius-by-galois-conjugates
 title: "Lifting residue frobenius by galois conjugates"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-inertia-group-of-a-prime, thm-chinese-remainder-theorem-for-comaximal-ideals, thm-multiplicative-group-of-a-finite-field-is-cyclic, thm-decomposition-group-and-completion]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

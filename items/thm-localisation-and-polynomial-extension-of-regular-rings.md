@@ -4,6 +4,7 @@ kind: "theorem"
 title: "localisation and polynomial extension of regular rings"
 deps: ["cor-localisations-of-regular-local-rings-are-regular", "def-regular-noetherian-ring", "lem-flat-local-ascent-of-regularity", "lem-polynomial-local-regularity-fibre-step", "cor-finite-variable-polynomial-ring-noetherian", "thm-localisation-of-modules-is-exact", "cor-finite-flat-noetherian-modules-are-projective", "thm-flatness-is-local", "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective", "lem-global-dimension-is-detected-on-cyclic-modules", "lem-dedekind-localisation-at-nonzero-prime-is-dvr", "lem-projective-modules-are-flat-over-an-arbitrary-ring", "thm-auslander-buchsbaum-serre-regularity-criterion"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

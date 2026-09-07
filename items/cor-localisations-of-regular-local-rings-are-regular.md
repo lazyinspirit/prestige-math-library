@@ -4,6 +4,7 @@ kind: "corollary"
 title: "localisations of regular local rings are regular"
 deps: ["thm-auslander-buchsbaum-serre-regularity-criterion", "thm-localisation-of-modules-is-exact", "lem-height-equals-local-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

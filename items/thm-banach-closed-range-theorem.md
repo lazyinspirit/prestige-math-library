@@ -2,13 +2,14 @@
 id: thm-banach-closed-range-theorem
 kind: theorem
 title: "Banach closed-range theorem"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-closed-range-iff-quotient-estimate", "lem-transpose-range-membership-by-domination", "thm-surjective-iff-transpose-is-bounded-below", "lem-elementary-kernel-range-annihilator-identities", "thm-dual-of-a-closed-subspace-is-a-dual-quotient", "cor-distance-to-annihilator-is-restriction-norm", "lem-annihilators-are-closed-subspaces", "lem-transpose-is-bounded-and-has-the-same-norm", "thm-bounded-operator-space-is-banach", "lem-closed-subspace-of-a-banach-space-is-banach"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

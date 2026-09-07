@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Canonical truncations fit a distinguished triangle"
 deps: ["lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology", "thm-the-derived-category-inherits-a-triangulated-structure", "thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic", "thm-long-exact-sequence-in-homology"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

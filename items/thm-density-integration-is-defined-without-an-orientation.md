@@ -2,13 +2,14 @@
 id: thm-density-integration-is-defined-without-an-orientation
 title: "Orientation-free density integration and its properties"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-integral-of-a-compactly-supported-smooth-density", "prop-density-pullback-under-local-diffeomorphisms", "thm-oriented-chart-integrals-are-coordinate-independent", "lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form", "thm-multidimensional-integral-properties", "prop-integration-of-top-forms-by-finite-parametrizations"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

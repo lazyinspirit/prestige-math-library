@@ -3,6 +3,7 @@ id: "ex-an-acyclic-complex-that-becomes-zero-in-d-but-not-in-k"
 kind: "example"
 deps: ["prop-a-complex-is-zero-in-the-derived-category-exactly-when-it-is-acyclic"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -14,7 +15,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -2,13 +2,14 @@
 id: "lem-normal-isotypical-component-is-inertia-stable"
 kind: "lemma"
 title: "The stabilizer of a nonzero isotypical component"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-normal-isotypical-components-are-permuted-by-translation"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

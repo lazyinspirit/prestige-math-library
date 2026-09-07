@@ -2,7 +2,7 @@
 id: cex-sum-check-computes-all-exponential-summands
 kind: counterexample
 title: "One point evaluation for an exponentially large cube"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sum-check-instance-and-protocol, lem-sum-check-verifier-is-polynomial-time-given-point-evaluation, thm-sum-check-soundness]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

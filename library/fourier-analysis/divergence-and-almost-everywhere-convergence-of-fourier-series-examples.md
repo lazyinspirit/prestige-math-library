@@ -1,7 +1,7 @@
 ---
 page: divergence-and-almost-everywhere-convergence-of-fourier-series-examples
 title: Divergence and Almost Everywhere Convergence of Fourier Series — Examples
-status: draft
+status: published
 items: []
 examples: [ex-fourier-partial-sum-operators-and-uniform-boundedness, cex-continuous-fourier-series-need-not-converge-everywhere, rem-lone-fourier-series-can-diverge-almost-everywhere, cex-carleson-maximal-operator-is-not-strong-type-one-one]
 ---

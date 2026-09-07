@@ -1,7 +1,7 @@
 ---
 page: "maximum-principles-harnack-and-liouville-in-rn"
 title: "Maximum Principles Harnack and Liouville in Rn"
-status: "draft"
+status: published
 items: ["def-subharmonic-and-superharmonic-functions-in-rn", "lem-strict-subharmonic-perturbation", "thm-weak-maximum-principle-for-the-laplacian", "cor-weak-minimum-principle-for-the-laplacian", "thm-comparison-principle-for-classical-subharmonic-functions", "lem-classical-subharmonic-mean-value-inequalities", "thm-strong-maximum-principle-for-classical-subharmonic-functions", "thm-strong-maximum-principle-for-harmonic-functions", "cor-nonnegative-harmonic-function-with-an-interior-zero-vanishes", "cor-uniqueness-for-the-classical-dirichlet-problem", "cor-poisson-supremum-estimate-from-a-quadratic-barrier", "def-interior-sphere-condition-and-sphere-normal", "lem-interior-sphere-barrier-for-the-laplacian", "thm-hopf-boundary-point-lemma-for-the-laplacian", "thm-harnack-inequality-on-a-ball", "lem-finite-harnack-chain-on-a-compact-connected-subset", "cor-harnack-inequality-on-compact-subsets", "thm-harnack-convergence-principle", "lem-smooth-sphere-data-have-a-harmonic-replacement", "lem-derivative-estimate-proof-of-one-sided-harmonic-liouville", "thm-liouville-theorem-for-bounded-harmonic-functions", "cor-positive-entire-harmonic-functions-are-constant", "cor-entire-harmonic-functions-with-bounded-gradient-are-affine", "cor-removable-singularity-for-bounded-harmonic-functions", "thm-maximum-principle-with-limsup-control-at-infinity", "rem-maximum-principles-need-domain-and-boundary-hypotheses"]
 examples: []
 ---

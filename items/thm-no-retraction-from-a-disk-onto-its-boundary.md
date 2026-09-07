@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Miller, Algebraic Topology I lecture notes, Theorem 10.7 proof, p.24"
       url: "https://ocw.mit.edu/courses/18-905-algebraic-topology-i-fall-2016/b4baa933e22d1c947d32588333336164_MIT18_905F16_lec10.pdf"
       locator: "Theorem 10.7 proof, p.24"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "A retraction would split the boundary inclusion on reduced H_(n-1), but the intermediate disk group is zero and the sphere group is Z. Use reduced H_0 when n=1."
 ---

@@ -2,7 +2,7 @@
 id: lem-formula-arithmetization-degree-and-evaluation-cost
 kind: lemma
 title: "Formula degree and point-evaluation cost"
-status: draft
+status: published
 origin: pipeline
 deps: [def-arithmetization-of-a-boolean-formula]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: induction
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

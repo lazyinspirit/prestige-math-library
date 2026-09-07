@@ -3,6 +3,7 @@ id: "fs-a-derived-functor-is-canonical-without-supplied-replacement-data"
 kind: "false-statement"
 deps: ["def-left-total-derived-functor-on-the-bounded-above-derived-category", "lem-left-total-derived-functor-is-independent-of-the-supplied-projective-replacement-up-to-unique-natural-isomorphism", "def-contractible-complex"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -14,7 +15,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

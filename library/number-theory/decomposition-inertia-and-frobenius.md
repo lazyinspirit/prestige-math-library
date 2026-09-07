@@ -1,7 +1,7 @@
 ---
 page: decomposition-inertia-and-frobenius
 title: "Decomposition Inertia and Frobenius"
-status: draft
+status: published
 items: [thm-completion-of-an-absolutely-valued-field, def-normed-vector-space-over-an-absolutely-valued-field, thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field, lem-uniqueness-of-an-extended-complete-field-absolute-value, lem-hensel-factor-lifting-over-a-complete-valued-field, lem-irreducible-polynomial-coefficients-in-a-complete-valuation-ring, thm-unique-extension-of-a-nonarchimedean-absolute-value, thm-number-field-places-classification, def-completion-of-a-number-field-at-a-prime, lem-number-field-completions-as-local-polynomial-factors, thm-galois-action-on-primes-above-a-prime-is-transitive, cor-galois-prime-decomposition-efg, def-decomposition-group-of-a-prime, thm-decomposition-group-and-completion, def-inertia-group-of-a-prime, lem-lifting-residue-frobenius-by-galois-conjugates, thm-decomposition-inertia-exact-sequence, cor-orders-of-decomposition-and-inertia-groups, thm-conjugacy-of-decomposition-and-inertia-groups, thm-decomposition-and-inertia-in-towers, thm-decomposition-and-inertia-fixed-fields, def-arithmetic-frobenius-coset, thm-unramified-frobenius-element-exists-uniquely, thm-frobenius-elements-above-a-prime-are-conjugate, thm-frobenius-order-is-residue-degree, cor-complete-splitting-and-trivial-frobenius, cor-frobenius-compatibility-in-finite-towers, lem-good-polynomial-reduction-kills-inertia, thm-frobenius-cycle-type-and-prime-splitting]
 examples: []
 ---

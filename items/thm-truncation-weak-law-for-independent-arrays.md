@@ -2,13 +2,14 @@
 id: thm-truncation-weak-law-for-independent-arrays
 title: "Truncation weak law for independent arrays"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-truncation-at-a-fixed-level", "thm-chebyshev-weak-law-for-uncorrelated-arrays", "lem-measurable-functions-preserve-independence", "def-convergence-in-probability", "thm-finite-and-countable-subadditivity-of-measures", "thm-factorization-of-expectations-for-independent-variables"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

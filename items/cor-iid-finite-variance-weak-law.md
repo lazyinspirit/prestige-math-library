@@ -2,13 +2,14 @@
 id: cor-iid-finite-variance-weak-law
 title: "IID finite-variance weak law"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["def-identically-distributed-and-iid-random-variables", "thm-chebyshev-weak-law-for-uncorrelated-arrays", "thm-factorization-of-expectations-for-independent-variables"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

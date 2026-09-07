@@ -2,7 +2,7 @@
 id: def-e-overlap-blockade-and-iterated-mixed-quotients
 title: "The E overlap blockade and mixed quotient sequence"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-e-overlap-classes-form-an-anticonnected-partition", "def-quotient-blockade-by-mixed-block-reachability"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 justified_by: [lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

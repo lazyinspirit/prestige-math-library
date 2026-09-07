@@ -2,13 +2,14 @@
 id: "cor-normal-subgroup-induction-irreducibility-criterion"
 kind: "corollary"
 title: "Normal subgroup induction criterion"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-conjugate-representation-and-inertia-group", "prop-induced-module-decomposes-over-a-left-transversal", "cor-frobenius-reciprocity-for-complex-characters", "cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one", "cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars", "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

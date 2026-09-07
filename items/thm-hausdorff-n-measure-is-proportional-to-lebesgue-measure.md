@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Euclidean Hausdorff measure is proportional to Lebesgue measure"
 deps: ["lem-euclidean-cube-bounds-for-hausdorff-measure", "cor-hausdorff-measure-under-similarities", "thm-hausdorff-measure-is-metric-and-borel-measurable", "thm-hausdorff-measure-has-borel-hulls", "thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure", "cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls", "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ provenance:
   proof: ai-altered
 landmark: true
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

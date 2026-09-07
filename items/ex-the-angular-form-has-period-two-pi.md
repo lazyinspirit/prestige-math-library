@@ -2,13 +2,14 @@
 id: ex-the-angular-form-has-period-two-pi
 title: "The angular period and the obstruction to bounding"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-a-nonzero-period-obstructs-exactness-and-bounding", "prop-integration-of-top-forms-by-finite-parametrizations"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

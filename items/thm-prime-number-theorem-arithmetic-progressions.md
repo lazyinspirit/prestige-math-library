@@ -2,13 +2,14 @@
 id: thm-prime-number-theorem-arithmetic-progressions
 title: "Prime number theorem arithmetic progressions"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [lem-dirichlet-character-chebyshev-laplace-transform, thm-newman-zagier-tauberian-theorem, thm-dirichlet-character-orthogonality, lem-monotone-chebyshev-tauberian-desmoothing, lem-chebyshev-functions-prime-power-comparison, lem-prime-counting-chebyshev-partial-summation, lem-logarithmic-integral-asymptotic-expansion]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

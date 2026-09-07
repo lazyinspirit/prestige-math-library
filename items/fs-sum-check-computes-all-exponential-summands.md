@@ -2,13 +2,15 @@
 id: fs-sum-check-computes-all-exponential-summands
 kind: false-statement
 title: "False: the sum-check verifier enumerates the cube"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sum-check-instance-and-protocol, lem-sum-check-verifier-is-polynomial-time-given-point-evaluation]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct calculation
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Justin Thaler, Proofs, Arguments, and Zero-Knowledge (2023), \u00a74.1 pp.33\u201338"

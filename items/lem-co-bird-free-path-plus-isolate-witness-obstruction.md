@@ -2,7 +2,7 @@
 id: lem-co-bird-free-path-plus-isolate-witness-obstruction
 title: "The path-plus-isolate co-Bird obstruction"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-bird-graph-and-co-bird-graph", "def-edges-between-sets-and-pure-mixed-pairs", "def-h-free-and-family-free-graph"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Finite adjacency analysis and structural deduction"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

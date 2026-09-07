@@ -4,6 +4,7 @@ kind: "theorem"
 title: "One-dimensional Hausdorff measure on the line is Lebesgue outer measure"
 deps: ["lem-euclidean-cube-bounds-for-hausdorff-measure", "def-lebesgue-outer-measure", "def-hausdorff-measure"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

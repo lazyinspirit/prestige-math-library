@@ -2,7 +2,7 @@
 id: thm-weak-maximum-principle-for-the-laplacian
 kind: theorem
 title: "Weak maximum principle for the laplacian"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-strict-subharmonic-perturbation, thm-heine-borel-rn, thm-extreme-value-metric]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: lem-vanishing-tail-control-implies-small-truncated-second-moment
 title: "Vanishing tail control bounds truncated second moments"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-truncation-at-a-fixed-level", "thm-layer-cake-formula-for-l-p-powers"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: thm-conjugacy-of-decomposition-and-inertia-groups
 title: "Conjugacy of decomposition and inertia groups"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [def-inertia-group-of-a-prime]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -7,13 +7,14 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
     date: 2026-09-07
 sources:
   references: [{title: 'Laugesen, Harmonic Analysis Lecture Notes', url: 'https://arxiv.org/pdf/0903.3845', locator: 'ch. 9, Example 9.4, p. 55'}]
-status: draft
+status: published
 origin: pipeline
 proof_strategy: Choose N with ||D_N||_1>A+1. For f=F_K, finite Fourier sums give S_N F_K=F_K*D_N=sigma_K D_N -> D_N uniformly as K grows. Hence ||C F_K||_1>=||S_N F_K||_1>A for large K while ||F_K||_1=1. This supplies a local endpoint counterexample without using Kolmogorov as a hidden logical prerequisite. As an inline consequence under DC, ||S_N:L1->L1||>=||D_N||_1 is unbounded, so Riesz–Fischer completeness and uniform boundedness give an integrable h with sup_N||S_N h||_1=infinity. Check each S_N is bounded by the convolution integral and Tonelli. This norm consequence is distinct from a.e. divergence.
 ---

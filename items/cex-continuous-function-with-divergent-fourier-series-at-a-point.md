@@ -7,13 +7,14 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
     date: 2026-09-07
 sources:
   references: [{title: 'Grafakos, Classical Fourier Analysis, third edition', url: 'https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf', locator: '§3.4.3, Proposition 3.4.6(a), pp. 210–211'}]
-status: draft
+status: published
 origin: pipeline
 proof_strategy: 'Work on the closed subspace {f in C([0,1],R): f(0)=f(1)}; completeness follows from the published real C(K) theorem and preservation of endpoint equality under uniform limits. Apply uniform boundedness contrapositively to the evaluation functionals from the norm lemma. Carry DC explicitly. This is the single canonical du Bois-Reymond witness. Include the harvested localization observation: a function vanishing near x0 satisfies the published Dini criterion with s=0, so the divergent witness cannot do so.'
 ---

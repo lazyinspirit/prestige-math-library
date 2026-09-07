@@ -4,6 +4,7 @@ kind: "definition"
 title: "Unnormalised Hausdorff measure"
 deps: ["def-hausdorff-content-at-scale-delta", "lem-hausdorff-scale-monotonicity-and-limit"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 justified_by: ["thm-hausdorff-measure-is-an-outer-measure"]
 ---

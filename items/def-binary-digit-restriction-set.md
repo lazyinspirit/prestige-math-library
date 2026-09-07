@@ -4,6 +4,7 @@ kind: "definition"
 title: "Sets defined by permitted binary digit positions"
 deps: ["thm-geometric-series", "def-series", "def-countable"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

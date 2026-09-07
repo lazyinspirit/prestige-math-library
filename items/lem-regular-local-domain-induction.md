@@ -4,6 +4,7 @@ kind: "lemma"
 title: "regular local domain induction"
 deps: ["thm-associated-graded-ring-of-a-regular-local-ring", "thm-krull-intersection-theorem"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

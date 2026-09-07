@@ -2,12 +2,14 @@
 id: prop-positive-compactly-supported-top-forms-have-positive-integral
 title: "Positivity of the oriented integral"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-linearity-and-additivity-of-integration-over-disjoint-oriented-components", "thm-multidimensional-integral-properties"]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Lee Proposition 16.6(c), pp.407–408 (nonnegative version by the same proof)"

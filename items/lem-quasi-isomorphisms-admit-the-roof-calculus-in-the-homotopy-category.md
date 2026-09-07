@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Quasi isomorphisms admit the roof calculus in the homotopy category"
 deps: ["def-multiplicative-system-in-a-category", "prop-quasi-isomorphisms-contain-identities-and-are-closed-under-composition", "thm-two-out-of-three-for-quasi-isomorphisms", "thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism", "thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic", "thm-the-homotopy-category-of-an-abelian-category-is-triangulated", "thm-long-exact-hom-sequences-of-a-distinguished-triangle", "thm-homology-is-a-homological-functor-on-the-homotopy-category"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

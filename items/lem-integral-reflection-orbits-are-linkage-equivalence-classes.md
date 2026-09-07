@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Integral reflection linkage is an equivalence relation"
 deps: ["def-integral-weyl-group-of-a-weight", "def-strong-linkage-order-on-weights"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Pairing after reflection differs by an integral Cartan multiple of the integral pairing. This proves invariance under generators; reverse the reflection word for equivalence. Strong linkage stays in this class"
 ---

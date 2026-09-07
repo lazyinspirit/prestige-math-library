@@ -2,7 +2,7 @@
 id: cex-weak-law-can-fail-without-tail-control
 title: "A macroscopic row term defeats averaging"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-chebyshev-weak-law-for-uncorrelated-arrays", "def-convergence-in-probability", "cor-countable-independent-copies-exist"]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

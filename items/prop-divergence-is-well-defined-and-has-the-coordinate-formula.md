@@ -2,13 +2,14 @@
 id: prop-divergence-is-well-defined-and-has-the-coordinate-formula
 title: "Coordinate formula and well-definedness of divergence"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-divergence-relative-to-a-volume-form", "thm-local-coordinate-formula-for-the-exterior-derivative"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

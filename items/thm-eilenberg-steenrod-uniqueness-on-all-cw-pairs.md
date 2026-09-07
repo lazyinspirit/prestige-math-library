@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Axioms for Homology p.161"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Axioms for Homology p.161"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Extend the finite-dimensional comparison over skeleta and then use finite-subcomplex support for naturality under arbitrary maps. Check compatibility with pair LES and the prescribed coefficient map. Arbitrary additivity is used in the telescope step."
 ---

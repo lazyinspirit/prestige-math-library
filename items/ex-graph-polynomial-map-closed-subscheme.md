@@ -2,13 +2,14 @@
 id: "ex-graph-polynomial-map-closed-subscheme"
 kind: "example"
 title: "The ideal of a polynomial graph"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-graph-morphism-over-base", "lem-graph-as-pullback-diagonal", "thm-affine-closed-immersions-quotient-rings", "lem-tensor-ring-presentations-for-base-change"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Composition of roofs is well defined"
 deps: ["lem-roof-equivalence-is-an-equivalence-relation", "def-multiplicative-system-in-a-category"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

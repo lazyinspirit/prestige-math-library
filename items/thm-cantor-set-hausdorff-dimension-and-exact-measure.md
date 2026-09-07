@@ -3,6 +3,8 @@ id: "thm-cantor-set-hausdorff-dimension-and-exact-measure"
 kind: "theorem"
 title: "The Cantor set has dimension log 2 / log 3 and critical measure one"
 deps: ["lem-sharp-cantor-interval-mass-bound", "thm-hausdorff-mass-distribution-principle", "thm-hausdorff-dimension-critical-exponent", "thm-cantor-set-ternary-description", "thm-real-power-laws", "prop-cantor-measure-is-a-singular-atomless-probability-measure", "def-cantor-measure", "thm-existence-of-the-lebesgue-stieltjes-measure"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: Fremlin, Measure Theory, 264J
@@ -14,7 +16,7 @@ provenance:
   proof: ai-altered
 landmark: true
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

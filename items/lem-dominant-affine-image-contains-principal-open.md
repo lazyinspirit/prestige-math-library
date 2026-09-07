@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
     - title: "Vakil Theorem 12.4.1 proof, pp.354–356"
       url: https://math.stanford.edu/~vakil/216blog/FOAGjul2724public.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Above y in D(a), choose a maximal ideal (m_y,t_1,...,t_r) of the polynomial subalgebra. Lying over gives a prime upstairs; the integral residue domain over k is a field equal to k. Thus it represents a classical point over y."
 ---

@@ -4,6 +4,7 @@ kind: "false-statement"
 title: "Critical Hausdorff measure is always finite and positive"
 deps: ["cex-dimension-one-binary-digit-set-with-zero-length", "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line", "cor-euclidean-hausdorff-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

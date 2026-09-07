@@ -2,13 +2,14 @@
 id: thm-chebyshev-weak-law-for-uncorrelated-arrays
 title: "Chebyshev weak law for uncorrelated arrays"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-partial-sums-and-sample-means", "def-moments-variance-and-covariance", "lem-variance-and-covariance-identities-for-random-variables", "cor-chebyshev-inequality-for-random-variables", "def-convergence-in-probability", "def-convergence-in-lp-for-random-variables", "cor-expectation-linearity-monotonicity-and-modulus-bound"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

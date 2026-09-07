@@ -4,6 +4,7 @@ kind: "example"
 title: "Cohen–Macaulayness over a finite regular local base"
 deps: ["thm-auslander-buchsbaum-formula", "thm-auslander-buchsbaum-serre-regularity-criterion", "cor-dimension-preserved-by-integral-extensions", "cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module", "cor-one-regular-system-of-parameters-implies-cohen-macaulay", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-depth-bounded-by-support-dimension", "thm-nakayama-lemma"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

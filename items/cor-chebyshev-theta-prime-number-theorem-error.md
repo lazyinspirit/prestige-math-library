@@ -2,13 +2,14 @@
 id: cor-chebyshev-theta-prime-number-theorem-error
 title: "Chebyshev theta prime number theorem error"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: [thm-chebyshev-psi-prime-number-theorem-error, lem-chebyshev-functions-prime-power-comparison]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

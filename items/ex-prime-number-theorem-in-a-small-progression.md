@@ -2,7 +2,7 @@
 id: ex-prime-number-theorem-in-a-small-progression
 title: "Prime number theorem in a small progression"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [thm-prime-number-theorem-arithmetic-progressions, thm-dirichlet-character-orthogonality]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

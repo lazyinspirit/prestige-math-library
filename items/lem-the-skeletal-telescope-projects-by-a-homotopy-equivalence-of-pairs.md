@@ -6,6 +6,8 @@ deps: ["def-skeletal-mapping-telescope-of-a-cw-pair", "prop-relative-cw-inclusio
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Hatcher, Algebraic Topology, Lemma 2.34, complete telescope deformation pp.138–139"
@@ -14,7 +16,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Proposition 0.16 p.15 and Theorem A.6 p.524"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "Proposition 0.16 p.15 and Theorem A.6 p.524"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Collapse cell prisms in descending dimension, with times accumulating at zero, to obtain compatible filtered slab retractions. Then concatenate slab retractions with times accumulating at one; finite skeleta become stationary. Preserve the subcomplex A throughout."
 ---

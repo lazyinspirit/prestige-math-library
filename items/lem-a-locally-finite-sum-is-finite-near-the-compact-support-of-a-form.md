@@ -2,13 +2,14 @@
 id: lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form
 title: "Local finiteness near compact support"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-compactly-supported-differential-form", "def-smooth-partition-of-unity-subordinate-to-an-open-cover", "lem-compactness-of-a-subspace-is-ambient"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-constraint-cloud-rounding-and-loop-counts
 kind: example
 title: "Constraint cloud rounding and loop counts"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-regularization-preserves-value-quantitatively, lem-constraint-expander-overlay]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

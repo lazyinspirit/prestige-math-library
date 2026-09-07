@@ -2,13 +2,14 @@
 id: lem-partition-localization-of-stokes
 title: "Localization of Stokes by a partition of unity"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-exterior-and-cartan-calculus-extend-to-manifolds-with-boundary", "lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form", "prop-linearity-and-additivity-of-integration-over-disjoint-oriented-components", "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary", "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

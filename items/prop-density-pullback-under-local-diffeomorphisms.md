@@ -2,13 +2,14 @@
 id: prop-density-pullback-under-local-diffeomorphisms
 title: "Pullback of densities by local diffeomorphisms"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-density-bundle-and-smooth-density"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

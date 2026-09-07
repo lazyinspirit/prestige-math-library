@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Digit-position density determines Hausdorff dimension"
 deps: ["def-binary-digit-restriction-set", "thm-hausdorff-mass-distribution-principle", "thm-hausdorff-dimension-critical-exponent", "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line", "thm-lebesgue-measure-of-a-box-of-every-kind", "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable", "thm-geometric-series", "thm-heine-borel-characterisation-r", "thm-cantor-set-ternary-description"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

@@ -2,13 +2,14 @@
 id: ex-rademacher-series-convergence-threshold
 title: "Rademacher-series threshold"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-kolmogorov-three-series-theorem", "cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event", "cor-countable-independent-copies-exist", "thm-p-series-real-exponents"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

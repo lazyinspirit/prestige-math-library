@@ -4,6 +4,7 @@ kind: "theorem"
 title: "one dimensional regular local rings are dvrs"
 deps: ["lem-regular-local-domain-induction", "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number", "thm-equivalent-characterisations-of-a-dvr", "thm-krull-intersection-theorem"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

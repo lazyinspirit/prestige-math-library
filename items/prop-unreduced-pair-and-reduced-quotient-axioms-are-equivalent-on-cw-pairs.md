@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Axioms for Homology, pp.160–162"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Axioms for Homology, pp.160–162"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use topological mapping cylinder and cone constructions explicitly; HEP identifies cofibers with quotients. Derive the pair LES and CW excision from reduced cofiber exactness using mapping-cone quotients, and the converse by pair exactness. Establish triple exactness here for subsequent skeletal diagrams. Include natural suspension and boundary-as-desuspension of the cofiber map; no weak-equivalence axiom outside CW pairs."
 ---

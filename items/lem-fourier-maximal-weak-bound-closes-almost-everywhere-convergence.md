@@ -7,13 +7,14 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
     date: 2026-09-07
 sources:
   references: [{title: 'Laugesen, Harmonic Analysis Lecture Notes', url: 'https://arxiv.org/pdf/0903.3845', locator: 'Theorem 6.4 and Remark 6.5, p. 37 (specialized to Fourier sums and p=q)'}]
-status: draft
+status: published
 origin: pipeline
 proof_strategy: Take the explicit polynomial approximants Q_j=sigma_j f, which tend to f in Lp. Orthogonality of finite characters gives S_N Q_j=Q_j for large N. Thus limsup_N |S_N f-f| <= C(f-Q_j)+|f-Q_j|. Bound the measure where this exceeds 2 lambda by (A+1)lambda^(-p)||f-Q_j||_p^p, let j grow, then take lambda=1/m. Include measurability of the limsup and countable null union inline.
 ---

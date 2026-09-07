@@ -2,13 +2,14 @@
 id: lem-good-polynomial-reduction-kills-inertia
 title: "Good polynomial reduction kills inertia"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-discriminant-of-a-monic-polynomial, def-inertia-group-of-a-prime, cor-orders-of-decomposition-and-inertia-groups]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

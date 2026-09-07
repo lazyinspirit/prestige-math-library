@@ -2,13 +2,14 @@
 id: thm-decomposition-and-inertia-fixed-fields
 title: "Decomposition and inertia fixed fields"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [thm-decomposition-inertia-exact-sequence, cor-orders-of-decomposition-and-inertia-groups, thm-ramification-and-residue-degrees-in-towers, thm-normal-subgroups-and-quotients-in-the-galois-correspondence, thm-galois-action-on-primes-above-a-prime-is-transitive]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

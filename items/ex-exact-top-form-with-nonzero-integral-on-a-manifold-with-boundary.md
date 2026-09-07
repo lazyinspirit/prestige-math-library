@@ -2,12 +2,14 @@
 id: ex-exact-top-form-with-nonzero-integral-on-a-manifold-with-boundary
 title: "An exact top form with nonzero integral on a disk"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-general-stokes-theorem", "prop-integration-of-top-forms-by-finite-parametrizations"]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Lee Theorem 16.11 and Corollary 16.14"

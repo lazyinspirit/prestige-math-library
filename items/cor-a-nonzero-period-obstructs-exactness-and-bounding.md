@@ -2,13 +2,14 @@
 id: cor-a-nonzero-period-obstructs-exactness-and-bounding
 title: "A nonzero period obstructs exactness and bounding"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero", "cor-closed-compactly-supported-forms-integrate-to-zero-on-boundaries", "prop-integration-over-an-oriented-embedded-submanifold", "lem-exterior-and-cartan-calculus-extend-to-manifolds-with-boundary"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

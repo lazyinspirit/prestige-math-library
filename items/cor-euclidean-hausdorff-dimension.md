@@ -4,6 +4,7 @@ kind: "corollary"
 title: "Euclidean space and positive-volume sets have their Euclidean dimension"
 deps: ["thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure", "thm-hausdorff-dimension-is-countably-stable", "thm-hausdorff-dimension-critical-exponent"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

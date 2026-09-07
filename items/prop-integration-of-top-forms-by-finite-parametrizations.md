@@ -2,13 +2,14 @@
 id: prop-integration-of-top-forms-by-finite-parametrizations
 title: "Computing form integrals by finite parametrizations"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-integration-over-an-oriented-embedded-submanifold", "prop-linearity-and-additivity-of-integration-over-disjoint-oriented-components", "lem-c-one-images-of-content-zero-compact-sets-have-content-zero", "lem-integral-additivity-over-a-content-zero-almost-partition", "thm-change-of-variables-for-compact-jordan-sets"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

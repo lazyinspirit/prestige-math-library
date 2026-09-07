@@ -3,6 +3,8 @@ id: "prop-classical-derived-functors-are-the-cohomology-objects-of-the-total-der
 kind: "proposition"
 title: "Classical derived functors are the cohomology objects of the total derived functor"
 deps: ["thm-existence-of-the-bounded-above-left-total-derived-functor", "thm-existence-of-the-bounded-below-right-total-derived-functor", "def-left-derived-object-relative-to-projective-resolution-data", "def-right-derived-object-relative-to-injective-resolution-data", "thm-horseshoe-lemma-for-projective-resolutions", "thm-horseshoe-lemma-for-injective-resolutions", "thm-derived-functors-are-universal-delta-functors", "prop-total-derived-functors-send-distinguished-triangles-to-distinguished-triangles", "thm-the-opposite-of-an-abelian-category-is-abelian", "lem-bounded-above-complexes-admit-projective-replacements", "lem-bounded-below-complexes-admit-injective-replacements", "thm-canonical-truncations-fit-a-distinguished-triangle"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
@@ -10,7 +12,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

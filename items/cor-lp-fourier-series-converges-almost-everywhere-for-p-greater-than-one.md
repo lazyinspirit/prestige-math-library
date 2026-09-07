@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -14,7 +15,7 @@ verification:
 sources:
   references: [{title: 'Laugesen, Harmonic Analysis Lecture Notes', url: 'https://arxiv.org/pdf/0903.3845', locator: 'ch. 8, p. 52, closure route after Theorem 8.7'}]
 external_refs: [rem-carleson-hunt-almost-everywhere-convergence]
-status: draft
+status: published
 origin: pipeline
 proof_strategy: Apply Chebyshev to |Cg|^p to obtain the weak estimate with A=C_p^p, then apply the proved weak-bound lemma. State the estimate as a hypothesis; the external Carleson–Hunt record is a bibliographic mention only, not a discharged local assumption.
 ---

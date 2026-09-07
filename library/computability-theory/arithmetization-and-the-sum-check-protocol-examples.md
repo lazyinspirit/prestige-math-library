@@ -1,7 +1,7 @@
 ---
 page: arithmetization-and-the-sum-check-protocol-examples
 title: "Arithmetization and the Sum-Check Protocol: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-existence-and-uniqueness-of-multilinear-extension, ex-sum-check-three-variable-transcript, ex-linear-self-correction, cex-sum-check-computes-all-exponential-summands]
 ---

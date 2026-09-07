@@ -4,6 +4,7 @@ kind: "definition"
 title: "embedding dimension and regular local ring"
 deps: ["def-local-ring", "def-noetherian-ring", "def-krull-dimension-of-a-ring"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

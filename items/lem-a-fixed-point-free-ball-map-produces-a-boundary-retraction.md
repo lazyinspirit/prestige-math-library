@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Miller, Algebraic Topology I lecture notes, Theorem 10.7 proof, p.24"
       url: "https://ocw.mit.edu/courses/18-905-algebraic-topology-i-fall-2016/b4baa933e22d1c947d32588333336164_MIT18_905F16_lec10.pdf"
       locator: "Theorem 10.7 proof, p.24"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Put v=x-f(x), a=<f(x),v>. The boundary point is f(x)+t v with t=(-a+sqrt(a^2+(1-|f(x)|^2)|v|^2))/|v|^2. Prove v!=0, the chosen root t>=1, continuity on the compact ball, and t=1 when x is on the boundary. This extends the published dimension-two lemma."
 ---

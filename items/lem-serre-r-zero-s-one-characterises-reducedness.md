@@ -4,6 +4,7 @@ kind: "lemma"
 title: "serre r zero s one characterises reducedness"
 deps: ["def-serre-r-k-and-s-k-conditions", "thm-depth-zero-associated-prime-criterion", "thm-zero-divisors-on-a-module", "thm-existence-of-associated-primes", "thm-noetherian-ring-has-finitely-many-minimal-primes", "cor-radical-ideals-as-intersections-of-minimal-primes-noetherian", "thm-associated-primes-localise", "lem-finite-prime-avoidance", "thm-minimal-support-primes-are-associated"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

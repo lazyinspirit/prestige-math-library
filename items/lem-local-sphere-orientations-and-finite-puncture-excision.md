@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Local-degree diagram and Proposition 2.30 proof, pp.135–136"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Local-degree diagram and Proposition 2.30 proof, pp.135–136"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Use contractibility of a once-punctured sphere and the pair LES, including reduced H_0 for n=1. Excision to disjoint small balls identifies the finite-puncture group. Coordinate projections are inclusions of pairs and send the global class to its restricted local generator; nested excision proves independence."
 ---

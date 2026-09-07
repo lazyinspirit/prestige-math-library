@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Simple and standard bases of K0(O)"
 deps: ["def-grothendieck-group-and-character-of-category-o", "thm-every-category-o-object-has-finite-length", "thm-jordan-holder-theorem-in-an-abelian-category", "cor-central-characters-are-dot-weyl-orbits", "thm-verma-module-has-a-unique-simple-quotient", "prop-weights-of-a-verma-module-lie-below-lambda", "thm-simple-objects-of-category-o-are-highest-weight-modules", "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Jordan–Holder gives the simple basis and additive multiplicities. Restrict to the finite dot orbit, order by positive-root order; M(lambda) has top multiplicity one and other labels strictly lower. Invert a finite unitriangular integral matrix; take direct sum over central characters"
 ---

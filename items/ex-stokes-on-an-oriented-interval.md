@@ -2,13 +2,14 @@
 id: ex-stokes-on-an-oriented-interval
 title: "Stokes on an interval with both endpoint chart signs"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-fundamental-theorem-of-calculus-from-stokes", "lem-half-space-stokes-for-a-compactly-supported-form"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

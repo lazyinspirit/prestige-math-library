@@ -2,7 +2,7 @@
 id: thm-sum-check-soundness
 kind: theorem
 title: "Adaptive-prover soundness of sum-check"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-first-false-round-is-caught-by-root-bound]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct calculation
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

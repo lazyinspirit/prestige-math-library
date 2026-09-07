@@ -1,7 +1,7 @@
 ---
 page: "fibre-products-base-change-and-scheme-theoretic-fibres-examples"
 title: "Fibre Products Base Change and Scheme Theoretic Fibres — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-fibre-family-xy-equals-t", "ex-nonreduced-fibre-x-squared-equals-t", "ex-base-change-real-conic-to-complex", "cex-domain-tensor-algebraic-closure-reducible", "ex-product-affine-lines-plane", "ex-fibre-closed-immersion", "ex-graph-polynomial-map-closed-subscheme", "cex-set-theoretic-fibre-loses-multiplicity", "ex-empty-fibre-tensor-zero-ring", "cex-purely-inseparable-base-change-nonreduced", "ex-quadratic-cover-self-fibre-product"]
 ---

@@ -2,13 +2,14 @@
 id: lem-hensel-factor-lifting-over-a-complete-valued-field
 title: "Hensel factor lifting over a complete valued field"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: [def-multiplicative-absolute-value-on-a-field]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

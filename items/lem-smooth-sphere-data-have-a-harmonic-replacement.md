@@ -2,7 +2,7 @@
 id: lem-smooth-sphere-data-have-a-harmonic-replacement
 kind: lemma
 title: "Smooth sphere data have a harmonic replacement"
-status: draft
+status: published
 origin: pipeline
 deps: [def-laplacian-of-a-c2-function, lem-sphere-and-ball-measures-scale, thm-spherical-mean-value-property-for-harmonic-functions, cor-uniqueness-for-the-classical-dirichlet-problem, thm-dominated-convergence]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

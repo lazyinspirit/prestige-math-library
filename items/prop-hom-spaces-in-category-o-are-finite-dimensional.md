@@ -3,6 +3,8 @@ id: "prop-hom-spaces-in-category-o-are-finite-dimensional"
 kind: "proposition"
 title: "Finite-dimensional Hom spaces in O"
 deps: ["def-bgg-category-o", "prop-equivalent-support-description-of-category-o", "thm-simple-objects-of-category-o-are-highest-weight-modules", "thm-universal-property-of-verma-modules"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Lecture 6 §2 Proposition 2.6 and Lemma 2.7, p.6"
@@ -10,7 +12,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "A map is determined by finitely many weight generators, whose images lie in finite-dimensional weight spaces; a simple highest-weight module has one-dimensional highest line"
 ---

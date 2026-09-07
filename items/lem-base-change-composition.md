@@ -2,13 +2,14 @@
 id: "lem-base-change-composition"
 kind: "lemma"
 title: "Iterated base change"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-base-change-morphism-schemes", "lem-fibre-product-associativity-and-symmetry"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

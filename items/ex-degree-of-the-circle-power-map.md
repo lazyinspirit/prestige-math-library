@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Example 2.32, p.137"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Example 2.32, p.137"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "For d>0 a regular value has d points, each locally an increasing angular homeomorphism. For d<0 compose with complex conjugation/reflection; for zero use the constant map."
 ---

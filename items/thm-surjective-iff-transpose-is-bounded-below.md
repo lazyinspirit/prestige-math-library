@@ -2,13 +2,14 @@
 id: thm-surjective-iff-transpose-is-bounded-below
 kind: theorem
 title: "Surjectivity is equivalent to a lower bound for the transpose"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-transpose-lower-bound-gives-image-ball-density", "lem-open-mapping-successive-approximation", "cor-open-mapping-quantitative-form"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

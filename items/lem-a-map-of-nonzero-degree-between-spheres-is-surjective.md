@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Degree property (b), p.134"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Degree property (b), p.134"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "If a point is omitted, give the stereographic homeomorphism of its complement with R^n and linear contraction; the top homology map factors through zero."
 ---

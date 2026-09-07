@@ -2,13 +2,14 @@
 id: def-subharmonic-and-superharmonic-functions-in-rn
 kind: definition
 title: "Subharmonic and superharmonic functions in rn"
-status: draft
+status: published
 origin: pipeline
 deps: [def-laplacian-of-a-c2-function]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

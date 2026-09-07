@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Vakil Class 38 Exercise 3.B and its preceding proof, pp.4–5"
       url: https://math.stanford.edu/~vakil/0708-216/216class38.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "For r<=0 this is the closed image. For 1<=r<=N, if dim X_y<r choose an (N-r)-plane avoiding that fibre. Its intersection with X has closed projection missing y, and over the complementary neighborhood every fibre still avoids the plane and has dimension <r. For r>N the locus is empty."
 ---

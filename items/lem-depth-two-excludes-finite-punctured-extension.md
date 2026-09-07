@@ -4,6 +4,7 @@ kind: "lemma"
 title: "depth two excludes finite punctured extension"
 deps: ["def-total-ring-of-fractions", "thm-depth-lemma", "thm-depth-zero-associated-prime-criterion", "thm-support-and-annihilator-of-a-finite-module", "thm-nakayama-lemma"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

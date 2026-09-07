@@ -4,6 +4,7 @@ kind: "lemma"
 title: "regular local quotient by parameter is regular"
 deps: ["lem-regular-system-of-parameters-equivalent-basis", "thm-dimension-at-most-embedding-dimension", "thm-dimension-as-minimal-number-of-radical-generators"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

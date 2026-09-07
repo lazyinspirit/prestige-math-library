@@ -2,13 +2,14 @@
 id: ex-weak-law-for-bernoulli-sample-means
 title: "Bernoulli sample frequencies"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-iid-finite-variance-weak-law", "def-bernoulli-and-binomial-random-variables", "lem-bernoulli-and-binomial-mean-and-variance", "cor-countable-independent-copies-exist"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

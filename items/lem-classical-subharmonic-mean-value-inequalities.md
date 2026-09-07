@@ -2,7 +2,7 @@
 id: lem-classical-subharmonic-mean-value-inequalities
 kind: lemma
 title: "Classical subharmonic mean value inequalities"
-status: draft
+status: published
 origin: pipeline
 deps: [def-subharmonic-and-superharmonic-functions-in-rn, lem-radial-derivative-of-a-spherical-average, thm-polar-coordinates-formula-for-lebesgue-measure]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

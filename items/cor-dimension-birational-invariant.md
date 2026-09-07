@@ -6,11 +6,13 @@ deps: ["lem-dimension-nonempty-open-subset", "thm-birational-equivalence-functio
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Milne §5l, Proposition 5.39, p.117"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Apply open invariance to common isomorphic opens. The affine birational theorem applies after restricting both sides to affine charts."
 ---

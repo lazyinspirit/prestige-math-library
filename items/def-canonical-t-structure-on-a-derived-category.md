@@ -4,6 +4,7 @@ kind: "definition"
 title: "Canonical t structure on a derived category"
 deps: ["thm-the-derived-category-inherits-a-triangulated-structure", "prop-cohomology-factors-through-the-derived-category"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 justified_by: ["thm-the-canonical-pair-is-a-t-structure"]
 ---

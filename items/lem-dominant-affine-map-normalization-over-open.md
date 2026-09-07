@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Vakil Theorem 12.4.1 proof, pp.354–356 (July 27 2024)"
       url: https://math.stanford.edu/~vakil/216blog/FOAGjul2724public.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Apply the algebra supplier to k[X] tensor_k[Y] k(Y); clear denominators of the normalization elements and monic equations of the finite set of algebra generators. Finitely many denominators suffice. Algebraic normalization itself remains owned by the algebra page."
 ---

@@ -2,13 +2,14 @@
 id: "cex-set-theoretic-fibre-loses-multiplicity"
 kind: "counterexample"
 title: "Equal fibre points can have different multiplicities"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-affine-fibre-coordinate-ring", "thm-affine-scheme-ring-anti-equivalence"]
 provenance:
   statement: "ai-generated"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

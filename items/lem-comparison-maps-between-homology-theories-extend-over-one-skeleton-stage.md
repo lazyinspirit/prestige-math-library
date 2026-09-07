@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Miller, Algebraic Topology I lecture notes, Proposition 9.6, opening p.22"
       url: "https://ocw.mit.edu/courses/18-905-algebraic-topology-i-fall-2016/b4baa933e22d1c947d32588333336164_MIT18_905F16_lec10.pdf"
       locator: "Proposition 9.6, opening p.22"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Apply the five lemma to five consecutive terms in the commuting pair LES. This propagates invertibility of constructed maps; it does not construct a natural transformation from an abstract coefficient isomorphism."
 ---

@@ -2,13 +2,14 @@
 id: "ex-gallagher-correspondence-for-a-direct-product"
 kind: "example"
 title: "Gallagher correspondence for a direct product"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-gallagher-correspondence-for-an-extendible-character"]
 provenance:
   statement: ai-generated
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

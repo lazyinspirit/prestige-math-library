@@ -3,6 +3,7 @@ id: "fs-an-unbounded-total-derived-functor-exists-from-enough-injectives-alone"
 kind: "false-statement"
 deps: ["def-homotopically-injective-bounded-below-complex", "def-right-total-derived-functor-on-the-bounded-below-derived-category", "thm-baer-criterion-for-injective-modules"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -14,7 +15,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

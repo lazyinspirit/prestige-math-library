@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Propositions 0.18–0.19 and Corollary 0.20, complete proofs pp.16–17"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT%2B.pdf"
       locator: "Propositions 0.18–0.19 and Corollary 0.20, complete proofs pp.16–17"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Prove the relative inverse lemma inline: extend the inverse homotopy to make it fix A; cancel the retraced restriction by an HEP homotopy of homotopies. Apply to the inclusion. For attachment invariance use the homotopy attaching cylinder and its two relative deformation retractions."
 ---

@@ -2,13 +2,14 @@
 id: cor-distance-to-annihilator-is-restriction-norm
 kind: corollary
 title: "Distance to an annihilator is the restriction norm"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-dual-of-a-closed-subspace-is-a-dual-quotient"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

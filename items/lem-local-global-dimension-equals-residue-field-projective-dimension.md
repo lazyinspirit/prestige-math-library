@@ -4,6 +4,7 @@ kind: "lemma"
 title: "local global dimension equals residue field projective dimension"
 deps: ["lem-global-dimension-is-detected-on-cyclic-modules", "lem-projective-dimension-from-last-nonzero-betti-number", "thm-tor-symmetry-over-a-commutative-ring"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

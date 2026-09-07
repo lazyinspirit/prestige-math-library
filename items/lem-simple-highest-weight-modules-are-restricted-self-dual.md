@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Restricted self-duality of simple highest-weight modules"
 deps: ["def-restricted-dual-of-a-weight-module", "thm-verma-module-has-a-unique-simple-quotient", "prop-weights-of-a-verma-module-lie-below-lambda", "thm-universal-property-of-verma-modules"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "On finite weight spaces annihilators turn a proper nonzero submodule of the dual into a proper nonzero submodule of L. Hence dual is simple. Its highest line has weight lambda, so the universal property identifies it with L(lambda)"
 ---

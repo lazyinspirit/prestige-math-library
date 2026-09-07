@@ -2,13 +2,14 @@
 id: "lem-base-change-locally-finite-type-presentation"
 kind: "lemma"
 title: "Local finiteness conditions under base change"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-locally-finite-type-and-finite-type-morphism", "def-locally-finite-presentation-morphism", "lem-tensor-ring-presentations-for-base-change", "thm-fibre-products-of-schemes-exist"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

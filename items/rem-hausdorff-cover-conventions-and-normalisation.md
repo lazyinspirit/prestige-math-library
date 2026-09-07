@@ -14,7 +14,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 proved_here: false
 external_dependency:
@@ -23,6 +23,10 @@ external_dependency:
   local_proof_attempt: Coordinate-box covers prove 1 <= c_n <= n^(n/2), and Borel uniqueness proves proportionality. These estimates do not identify the sharp constant; that requires the isodiametric inequality. The cover-family comparison proves comparability, not a strict-inequality example.
   necessity: Scope orientation only; neither the sharp factor nor strict spherical inequality is a dependency or used in an assigned proof.
 verification:
+  sources_checked:
+    date: 2026-09-07
+    scope: citations
+    by: session-audit
   precheck: n/a
 ---
 

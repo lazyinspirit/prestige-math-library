@@ -3,6 +3,8 @@ id: "prop-hausdorff-content-and-measure-have-the-same-null-sets"
 kind: "proposition"
 title: "Content and measure have the same null sets"
 deps: ["def-hausdorff-measure", "prop-zero-dimensional-hausdorff-measure-counts"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: Bishop–Peres Proposition 1.2.6; Fremlin 264Xa
@@ -11,7 +13,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

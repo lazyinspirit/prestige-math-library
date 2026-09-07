@@ -2,13 +2,14 @@
 id: "thm-gallagher-correspondence-for-an-extendible-character"
 kind: "theorem"
 title: "Gallagher correspondence for an extendible type"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-extension-of-an-irreducible-normal-subgroup-representation", "lem-isotypical-evaluation-and-subspaces-of-multiplicity-spaces", "thm-clifford-correspondence", "def-clifford-ramification-index", "prop-representations-with-kernel-containing-a-normal-subgroup-factor-through-the-quotient", "thm-characters-of-direct-sums-tensor-products-and-duals", "lem-normal-restriction-constituents-form-one-conjugacy-orbit"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

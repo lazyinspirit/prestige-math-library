@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Increasing the exponent past finite measure gives zero"
 deps: ["def-hausdorff-measure", "thm-real-power-laws"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

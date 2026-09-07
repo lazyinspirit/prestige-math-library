@@ -4,6 +4,7 @@ kind: "theorem"
 title: "associated graded ring of a regular local ring"
 deps: ["lem-associated-graded-polynomial-surjection", "lem-regular-local-graded-surjection-has-zero-kernel", "thm-hilbert-samuel-dimension-theorem"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

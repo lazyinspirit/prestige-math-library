@@ -2,13 +2,14 @@
 id: def-promise-problem
 kind: definition
 title: "Promise problem"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

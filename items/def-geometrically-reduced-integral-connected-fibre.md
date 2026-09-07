@@ -2,13 +2,14 @@
 id: "def-geometrically-reduced-integral-connected-fibre"
 kind: "definition"
 title: "Geometric properties of fibres"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-geometric-fibre", "lem-geometric-fibre-choice-independent", "def-integral-scheme", "def-connected-space", "def-reduction-of-scheme"]
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

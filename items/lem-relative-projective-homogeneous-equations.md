@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Milne §6q Lemma 6.51(a,b), p.158"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Homogenize equations on each standard chart and multiply by suitable powers of its distinguished coordinate to extend the vanishing to other charts; finite generation follows from Hilbert basis. For empty fibres use affine Nullstellensatz on the cone to obtain powers of all T_i, hence all monomials of sufficiently high degree."
 ---

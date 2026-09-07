@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "Miller, Algebraic Topology I lecture notes, Definition 11.1, p.26"
       url: "https://ocw.mit.edu/courses/18-905-algebraic-topology-i-fall-2016/64c56d8bcc2967c1d289a61c959f3095_MIT18_905F16_lec11.pdf"
       locator: "Definition 11.1, p.26"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Evaluate any putative equivalence at the point; Z and Z/2 are not isomorphic."
 ---

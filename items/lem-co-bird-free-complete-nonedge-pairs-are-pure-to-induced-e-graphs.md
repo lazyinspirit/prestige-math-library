@@ -2,7 +2,7 @@
 id: lem-co-bird-free-complete-nonedge-pairs-are-pure-to-induced-e-graphs
 title: "Complete nonedge pairs force purity on induced E graphs"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-co-bird-free-e-mixed-vertices-are-pure-on-terminal-edges", "lem-co-bird-free-edge-plus-isolate-witness-obstruction", "lem-co-bird-free-path-plus-isolate-witness-obstruction", "def-e-graph-and-co-e-graph", "def-comb-in-a-graph"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Finite adjacency analysis and structural deduction"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

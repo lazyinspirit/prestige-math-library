@@ -2,13 +2,14 @@
 id: "lem-affine-fibre-product-projections-stalk-maps"
 kind: "lemma"
 title: "Projections on primes, stalks and residue fields"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-affine-fibre-product-tensor-ring", "thm-stalk-structure-sheaf-prime-localization", "lem-spectrum-map-stalk-homomorphisms-local"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

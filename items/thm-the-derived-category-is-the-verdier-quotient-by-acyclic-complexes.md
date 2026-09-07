@@ -4,6 +4,7 @@ kind: "theorem"
 title: "The derived category is the verdier quotient by acyclic complexes"
 deps: ["thm-the-derived-category-inherits-a-triangulated-structure", "prop-a-complex-is-zero-in-the-derived-category-exactly-when-it-is-acyclic", "thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic", "prop-the-full-subcategory-of-acyclic-complexes-is-thick-in-the-homotopy-category", "thm-long-exact-hom-sequences-of-a-distinguished-triangle"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

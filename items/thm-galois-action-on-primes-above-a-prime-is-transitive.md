@@ -2,13 +2,14 @@
 id: thm-galois-action-on-primes-above-a-prime-is-transitive
 title: "Galois action on primes above a prime is transitive"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [thm-chinese-remainder-theorem-for-comaximal-ideals, thm-number-field-integral-ideal-factorisation-in-zf, thm-field-norm-and-trace-by-embeddings]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

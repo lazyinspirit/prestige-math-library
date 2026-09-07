@@ -2,12 +2,14 @@
 id: cor-transpose-preserves-invertibility
 kind: corollary
 title: "Invertibility and the inverse of the transpose"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-surjective-iff-transpose-is-bounded-below", "thm-bounded-below-iff-transpose-is-surjective", "lem-transpose-reverses-composition", "lem-transpose-is-bounded-and-has-the-same-norm", "thm-bounded-inverse-theorem", "thm-bounded-operator-space-is-banach"]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Corollary 4.18, p.182"

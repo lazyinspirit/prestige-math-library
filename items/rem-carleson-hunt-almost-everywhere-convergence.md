@@ -17,9 +17,13 @@ external_dependency:
   exact_statement: For each 1<p<infinity there is a finite C_p such that ||Cf||_p <= C_p||f||_p for every f in Lp(T). Consequently S_N f(x)->f(x) almost everywhere. Carleson established p=2 and Hunt the full open range.
   local_proof_attempt: The dense-polynomial closure is isolated locally in the weak-bound lemma. It cannot supply the missing maximal estimate. Read Lacey §3’s size, density and tree machinery and §7’s opening; FR-5 explicitly keeps the deep estimate external.
   necessity: Required by FR-5’s explicit literature boundary; retained for mathematical scope without making an unproved result a logical prerequisite.
-status: draft
+status: published
 origin: pipeline
 verification:
+  sources_checked:
+    date: 2026-09-07
+    scope: citations
+    by: session-audit
   precheck: n/a
 ---
 

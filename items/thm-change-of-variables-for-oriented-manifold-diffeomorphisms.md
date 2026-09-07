@@ -2,13 +2,14 @@
 id: thm-change-of-variables-for-oriented-manifold-diffeomorphisms
 title: "Change of variables on oriented manifolds"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement", "prop-reversing-orientation-negates-the-integral", "prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-harnack-inequality-on-compact-subsets
 kind: corollary
 title: "Harnack inequality on compact subsets"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-harnack-inequality-on-a-ball, lem-finite-harnack-chain-on-a-compact-connected-subset, cor-nonnegative-harmonic-function-with-an-interior-zero-vanishes]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

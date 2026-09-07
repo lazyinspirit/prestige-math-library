@@ -2,12 +2,14 @@
 id: thm-number-field-places-classification
 title: "Number field places classification"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [thm-completion-of-an-absolutely-valued-field, thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field, lem-uniqueness-of-an-extended-complete-field-absolute-value, thm-ostrowskis-theorem-for-the-rationals, thm-equivalent-field-absolute-values-characterisation, cor-ring-of-integers-is-a-dedekind-domain, lem-dedekind-localisation-at-nonzero-prime-is-dvr, thm-fundamental-theorem-of-algebra-liouville-proof, def-ring-of-integers-of-a-number-field, cor-norm-of-a-prime-ideal]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "\u00a77, Corollary 7.3 and preceding normalization, pp.15\u201316; Milne Theorem 7.14"

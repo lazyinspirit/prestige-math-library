@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, 14§4, pp.110–111, CW-pair formulation"
       url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
       locator: "14§4, pp.110–111, CW-pair formulation"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

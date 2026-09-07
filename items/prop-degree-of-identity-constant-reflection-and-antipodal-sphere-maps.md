@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Degree properties (a),(e),(f) and (b), pp.134–135"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Degree properties (a),(e),(f) and (b), pp.134–135"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "For reflection use the oriented boundary of a symmetric simplex (or the two-arc circle computation followed by suspension); swapping two vertices reverses the fundamental cycle. Coordinate reflections are conjugate by orthogonal coordinate changes, and the antipodal is their product."
 ---

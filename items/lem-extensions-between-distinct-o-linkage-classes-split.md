@@ -3,6 +3,8 @@ id: "lem-extensions-between-distinct-o-linkage-classes-split"
 kind: "lemma"
 title: "Simple extensions cannot cross linkage classes"
 deps: ["prop-restricted-duality-is-an-exact-involution-on-category-o", "thm-universal-property-of-verma-modules", "thm-strong-linkage-principle-for-verma-modules", "lem-integral-reflection-orbits-are-linkage-equivalence-classes", "thm-verma-module-has-a-unique-simple-quotient"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "§1.13 pp.30–32 and §4.9 p.83, decomposed proof route"
@@ -10,7 +12,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Orient the extension by duality so quotient highest weight lambda is not strictly below submodule highest weight mu. Lift its highest vector as a weight vector; higher weights are absent, so it is singular. The generated highest-weight submodule either splits off or equals the nonsplit length-two extension. The latter makes L(mu) a Verma factor, forcing linkage"
 ---

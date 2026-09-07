@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Splitting finite-length modules across separated simple classes"
 deps: ["thm-every-category-o-object-has-finite-length", "thm-jordan-holder-theorem-in-an-abelian-category", "thm-category-o-is-abelian-and-extension-closed"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-generated"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Induct on kernel length via quotient pushouts, then quotient length via pullbacks and retractions; construct part summands by retractions and prove uniqueness by Hom vanishing"
 ---

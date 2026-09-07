@@ -4,6 +4,7 @@ kind: "example"
 title: "localised polynomial ring regular"
 deps: ["thm-localisation-and-polynomial-extension-of-regular-rings", "thm-dimension-at-most-embedding-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-generated
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 generation:
   role: example

@@ -2,7 +2,7 @@
 id: thm-harnack-convergence-principle
 kind: theorem
 title: "Harnack convergence principle"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-harnack-inequality-on-compact-subsets, thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

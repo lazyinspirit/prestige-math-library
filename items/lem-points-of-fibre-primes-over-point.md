@@ -2,13 +2,14 @@
 id: "lem-points-of-fibre-primes-over-point"
 kind: "lemma"
 title: "Points and topology of a fibre"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-affine-fibre-coordinate-ring", "lem-fibre-product-open-restriction", "lem-localisation-spectrum-map-homeomorphism-onto-image", "thm-prime-spectrum-of-a-quotient-bijection"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

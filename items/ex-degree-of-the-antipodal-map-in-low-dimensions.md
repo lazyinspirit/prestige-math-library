@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Hatcher, Algebraic Topology, Degree property (f) and Theorem 2.28, pp.134–135"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
       locator: "Degree property (f) and Theorem 2.28, pp.134–135"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Compute the number of coordinate reflections in each ambient dimension and relate the odd-dimensional cases to x -> ix."
 ---

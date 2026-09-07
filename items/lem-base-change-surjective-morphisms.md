@@ -2,13 +2,14 @@
 id: "lem-base-change-surjective-morphisms"
 kind: "lemma"
 title: "Surjectivity survives arbitrary base change"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-points-of-scheme-fibre-product-residue-tensors", "thm-tensor-product-basis-from-bases", "thm-proper-ideal-contained-in-maximal-ideal"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

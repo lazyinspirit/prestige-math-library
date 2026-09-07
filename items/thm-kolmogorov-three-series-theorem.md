@@ -2,13 +2,14 @@
 id: thm-kolmogorov-three-series-theorem
 title: "Kolmogorov three-series theorem"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-almost-sure-convergence-of-a-random-series", "def-truncation-at-a-fixed-level", "lem-three-series-necessity-for-truncated-means-and-variances", "cor-kolmogorov-two-series-sufficiency", "cor-first-borel-cantelli-lemma-for-events", "lem-measurable-functions-preserve-independence", "lem-series-tail-invariance"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

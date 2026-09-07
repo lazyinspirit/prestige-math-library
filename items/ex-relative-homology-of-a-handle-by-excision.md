@@ -6,11 +6,13 @@ deps: ["cor-relative-homology-of-a-single-handle-pair", "lem-relative-homology-o
 provenance:
   statement: "ai-generated"
   proof: "ai-altered"
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - url: "https://audin.pages.math.unistra.fr/livres/audin-damian-en.pdf"
       title: "Audin–Damian, Morse Theory and Floer Homology"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "finite relative calculation"
 generation:

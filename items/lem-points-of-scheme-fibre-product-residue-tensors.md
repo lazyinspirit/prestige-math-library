@@ -2,13 +2,14 @@
 id: "lem-points-of-scheme-fibre-product-residue-tensors"
 kind: "lemma"
 title: "Points of a fibre product via residue-field tensors"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-field-valued-points-of-schemes", "lem-affine-fibre-product-projections-stalk-maps", "lem-tensor-ring-presentations-for-base-change", "thm-fibre-products-of-schemes-exist"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

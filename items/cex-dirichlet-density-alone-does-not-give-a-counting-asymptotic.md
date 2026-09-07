@@ -2,13 +2,14 @@
 id: cex-dirichlet-density-alone-does-not-give-a-counting-asymptotic
 title: "Dirichlet density alone does not give a counting asymptotic"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: [thm-riemann-zeta-continuation-to-the-right-half-plane, thm-euler-product-for-riemann-zeta, thm-primes-residue-class-dirichlet-density, cor-prime-number-theorem, thm-chebyshev-psi-prime-number-theorem-error]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

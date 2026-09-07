@@ -2,7 +2,7 @@
 id: thm-an-oracle-separates-p-from-np
 kind: theorem
 title: "An oracle separates p from np"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-oracle-diagonalization-finite-extension]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

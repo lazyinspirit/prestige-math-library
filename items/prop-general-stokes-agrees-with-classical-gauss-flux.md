@@ -2,12 +2,14 @@
 id: prop-general-stokes-agrees-with-classical-gauss-flux
 title: "Agreement with classical Gauss flux in Euclidean space"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-divergence-theorem-relative-to-a-volume-form", "prop-integration-of-top-forms-by-finite-parametrizations", "thm-the-divergence-theorem-for-an-elementary-solid-region", "def-oriented-unit-normal-and-flux-of-a-surface-patch", "lem-divergence-form-identity", "def-simple-solid-region-in-a-coordinate-direction", "thm-jordan-boundary-criterion"]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - title: "Lee Lemma 16.30 and Theorem 16.32, pp.423–424"

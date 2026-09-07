@@ -4,6 +4,7 @@ kind: "lemma"
 title: "regular local graded surjection has zero kernel"
 deps: ["lem-associated-graded-polynomial-surjection", "thm-hilbert-samuel-dimension-theorem", "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

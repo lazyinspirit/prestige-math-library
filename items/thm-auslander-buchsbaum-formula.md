@@ -4,6 +4,7 @@ kind: "theorem"
 title: "auslander buchsbaum formula"
 deps: ["lem-auslander-buchsbaum-base-case-free-module", "lem-auslander-buchsbaum-projective-dimension-one", "lem-auslander-buchsbaum-syzygy-projective-dimension", "lem-auslander-buchsbaum-first-syzygy-depth"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

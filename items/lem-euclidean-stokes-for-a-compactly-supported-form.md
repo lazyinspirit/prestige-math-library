@@ -2,13 +2,14 @@
 id: lem-euclidean-stokes-for-a-compactly-supported-form
 title: "Compact-support Stokes on Euclidean space"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-integral-of-an-oriented-chart-supported-top-form", "lem-exterior-and-cartan-calculus-extend-to-manifolds-with-boundary", "cor-repeated-riemann-integrals-on-rectangles", "thm-newton-leibniz-with-interior-derivative"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

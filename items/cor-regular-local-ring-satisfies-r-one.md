@@ -4,6 +4,7 @@ kind: "corollary"
 title: "regular local ring satisfies r one"
 deps: ["def-serre-r-k-and-s-k-conditions", "cor-localisations-of-regular-local-rings-are-regular", "thm-one-dimensional-regular-local-rings-are-dvrs", "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

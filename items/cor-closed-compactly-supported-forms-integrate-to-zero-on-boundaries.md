@@ -2,13 +2,14 @@
 id: cor-closed-compactly-supported-forms-integrate-to-zero-on-boundaries
 title: "Closed forms have zero boundary integral"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-general-stokes-theorem"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

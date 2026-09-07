@@ -2,13 +2,14 @@
 id: "ex-clifford-boundaries-n-equals-one-and-n-equals-g"
 kind: "example"
 title: "Boundary normal subgroups in Clifford theory"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-clifford-correspondence", "def-clifford-ramification-index", "thm-gallagher-correspondence-for-an-extendible-character"]
 provenance:
   statement: ai-generated
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

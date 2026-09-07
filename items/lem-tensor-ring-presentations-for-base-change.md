@@ -2,13 +2,14 @@
 id: "lem-tensor-ring-presentations-for-base-change"
 kind: "lemma"
 title: "Presentations and localization under base extension"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-coproduct-property-of-tensor-products-of-commutative-algebras", "cor-tensor-product-with-a-quotient-ring", "thm-localisation-of-modules-is-tensor-product"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

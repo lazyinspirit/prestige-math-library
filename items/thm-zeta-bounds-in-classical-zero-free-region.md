@@ -2,13 +2,14 @@
 id: thm-zeta-bounds-in-classical-zero-free-region
 title: "Zeta bounds in classical zero free region"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [lem-zeta-horizontal-logarithmic-derivative-comparison, thm-riemann-zeta-classical-zero-free-region, thm-euler-product-for-riemann-zeta, thm-riemann-zeta-continuation-to-the-right-half-plane]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

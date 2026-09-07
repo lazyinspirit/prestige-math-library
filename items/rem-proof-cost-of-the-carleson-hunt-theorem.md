@@ -6,10 +6,12 @@ deps: []
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-07
 sources:
   references: [{title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations', url: 'https://arxiv.org/pdf/math/0307008', locator: '§3 before §3.1, pp. 11–14; §7 opening and §7.2 opening through (7.9), pp. 24–26'}]
 external_refs: [rem-carleson-hunt-almost-everywhere-convergence]
-status: draft
+status: published
 origin: pipeline
 ---
 

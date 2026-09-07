@@ -2,13 +2,14 @@
 id: cor-dense-range-iff-transpose-is-injective
 kind: corollary
 title: "Dense range is equivalent to injectivity of the transpose"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-elementary-kernel-range-annihilator-identities"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

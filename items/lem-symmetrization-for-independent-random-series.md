@@ -2,13 +2,14 @@
 id: lem-symmetrization-for-independent-random-series
 title: "Independent-copy symmetrization of random series"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-independent-random-elements", "def-symmetric-real-random-variable", "def-almost-sure-convergence-of-a-random-series", "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique", "thm-grouping-independent-sigma-algebras", "lem-measurable-functions-preserve-independence", "thm-factorization-of-expectations-for-independent-variables", "lem-variance-and-covariance-identities-for-random-variables"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

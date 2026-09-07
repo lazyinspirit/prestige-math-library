@@ -2,13 +2,14 @@
 id: lem-transpose-is-bounded-and-has-the-same-norm
 kind: lemma
 title: "The transpose is bounded with the same norm"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator", "thm-dual-norms-every-vector"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

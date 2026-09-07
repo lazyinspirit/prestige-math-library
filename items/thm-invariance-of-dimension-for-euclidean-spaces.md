@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: "Miller, Algebraic Topology I lecture notes, Corollaries 10.5 and 10.6, pp.23–24"
       url: "https://ocw.mit.edu/courses/18-905-algebraic-topology-i-fall-2016/b4baa933e22d1c947d32588333336164_MIT18_905F16_lec10.pdf"
       locator: "Corollaries 10.5 and 10.6, pp.23–24"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Separate dimension zero by cardinality. Puncture corresponding points, translate to zero, and exhibit the radial strong deformation retraction R^k minus {0} -> S^(k-1). Reduced integral homology is supported in exactly degree k-1, including k=1. Do not use invariance of domain."
 ---

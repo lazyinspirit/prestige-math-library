@@ -2,13 +2,14 @@
 id: thm-frobenius-elements-above-a-prime-are-conjugate
 title: "Frobenius elements above a prime are conjugate"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: [thm-unramified-frobenius-element-exists-uniquely, thm-conjugacy-of-decomposition-and-inertia-groups, thm-galois-action-on-primes-above-a-prime-is-transitive]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

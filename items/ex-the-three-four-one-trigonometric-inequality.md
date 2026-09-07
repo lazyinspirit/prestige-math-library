@@ -2,7 +2,7 @@
 id: ex-the-three-four-one-trigonometric-inequality
 title: "The three four one trigonometric inequality"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: [lem-zeta-three-four-one-logarithmic-derivative-inequality]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

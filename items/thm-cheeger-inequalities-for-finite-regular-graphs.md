@@ -2,7 +2,7 @@
 id: thm-cheeger-inequalities-for-finite-regular-graphs
 kind: theorem
 title: "Cheeger inequalities for finite regular graphs"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-cheeger-sweep-and-layer-cake]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

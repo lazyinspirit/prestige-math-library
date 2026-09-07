@@ -2,13 +2,14 @@
 id: ex-divergence-theorem-on-a-euclidean-ball
 title: "Volume-form divergence on the Euclidean ball"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-general-stokes-agrees-with-classical-gauss-flux", "prop-integration-of-top-forms-by-finite-parametrizations"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

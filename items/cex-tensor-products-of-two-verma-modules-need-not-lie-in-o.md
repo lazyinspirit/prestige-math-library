@@ -4,6 +4,7 @@ kind: "counterexample"
 title: "O is not closed under arbitrary tensor products"
 deps: ["def-bgg-category-o", "lem-o-modules-admit-finite-highest-weight-filtrations-after-truncation", "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Identify underlying space with C[x,y], with f multiplication by x+y. It is not finite over C[x+y], since quotient by x+y has infinite dimension. O-objects are finite over U(n-) by the finite induced flag lemma; derive contradiction"
 ---

@@ -2,7 +2,7 @@
 id: cex-ramified-frobenius-has-no-canonical-lift
 title: "Ramified frobenius has no canonical lift"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: [ex-gaussian-and-eisenstein-frobenius, def-arithmetic-frobenius-coset]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

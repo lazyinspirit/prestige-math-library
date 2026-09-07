@@ -2,13 +2,14 @@
 id: "thm-clifford-homogeneous-restriction-formula"
 kind: "theorem"
 title: "Clifford restriction formula"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-normal-restriction-constituents-form-one-conjugacy-orbit", "thm-characters-of-direct-sums-tensor-products-and-duals"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

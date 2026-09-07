@@ -2,13 +2,14 @@
 id: def-integral-of-an-oriented-chart-supported-top-form
 title: "Chart integral with its orientation sign"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions", "def-oriented-smooth-manifold-and-oriented-chart", "def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space", "def-support-and-compactly-supported-riemann-integral-in-rn"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "corollary"
 title: "serre normality criterion two directions"
 deps: ["lem-normal-domain-implies-r-one", "lem-normal-domain-implies-s-two", "lem-r-one-s-two-integral-element-membership", "thm-one-dimensional-regular-local-rings-are-dvrs", "thm-normality-is-local-for-domains"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

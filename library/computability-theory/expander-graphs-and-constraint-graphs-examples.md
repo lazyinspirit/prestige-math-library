@@ -1,7 +1,7 @@
 ---
 page: expander-graphs-and-constraint-graphs-examples
 title: "Expander Graphs and Constraint Graphs: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-expander-mixing-lemma, ex-expander-walk-hits-dense-bad-sets, cex-nonconstructive-expanders-suffice-for-uniform-reductions, ex-constraint-cloud-rounding-and-loop-counts]
 ---

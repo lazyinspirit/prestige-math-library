@@ -2,13 +2,14 @@
 id: "lem-fibre-product-open-restriction"
 kind: "lemma"
 title: "Restricting fibre products to open subschemes"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-fibre-product-schemes-universal-property", "def-open-immersion-schemes", "lem-open-immersion-monomorphism", "lem-fibre-product-unique-canonical-isomorphism"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

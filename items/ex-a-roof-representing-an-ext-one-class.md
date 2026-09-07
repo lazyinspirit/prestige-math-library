@@ -2,6 +2,8 @@
 id: "ex-a-roof-representing-an-ext-one-class"
 kind: "example"
 deps: ["thm-ext-is-hom-in-the-derived-category", "thm-higher-yoneda-ext-agrees-with-derived-ext"]
+verification:
+  audited: 2026-09-07
 sources:
   references:
     - url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
@@ -9,7 +11,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

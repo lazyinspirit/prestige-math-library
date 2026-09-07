@@ -4,6 +4,7 @@ kind: "theorem"
 title: "regular local rings are domains and cohen macaulay"
 deps: ["lem-regular-local-domain-induction", "lem-regular-local-parameter-is-nonzerodivisor", "lem-regular-local-quotient-by-parameter-is-regular", "def-cohen-macaulay-local-module-and-ring", "def-regular-sequence-on-a-module", "def-depth-with-respect-to-an-ideal", "thm-depth-bounded-by-support-dimension"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
 ---

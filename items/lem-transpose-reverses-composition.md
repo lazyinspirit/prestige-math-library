@@ -2,13 +2,14 @@
 id: lem-transpose-reverses-composition
 kind: lemma
 title: "Transposition reverses composition"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-transpose-of-a-bounded-operator"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

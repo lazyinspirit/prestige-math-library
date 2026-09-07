@@ -2,13 +2,14 @@
 id: lem-three-series-necessity-for-truncated-means-and-variances
 title: "Necessity of the truncated mean and variance conditions"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-symmetrization-for-independent-random-series", "lem-bounded-centered-convergent-series-have-summable-variances", "thm-kolmogorov-convergence-criterion", "def-truncation-at-a-fixed-level", "cor-first-borel-cantelli-lemma-for-events", "cor-second-borel-cantelli-lemma-under-pairwise-independence", "lem-measurable-functions-preserve-independence", "lem-series-tail-invariance"]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

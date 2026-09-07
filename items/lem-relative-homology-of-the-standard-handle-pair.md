@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       title: "Nicolaescu, An Invitation to Morse Theory"
     - url: "https://audin.pages.math.unistra.fr/livres/audin-damian-en.pdf"
       title: "Audin–Damian, Morse Theory and Floer Homology"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "contraction of pairs and exact sequence"
 ---

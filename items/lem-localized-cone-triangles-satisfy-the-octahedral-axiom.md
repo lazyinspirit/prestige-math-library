@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Localized cone triangles satisfy the octahedral axiom"
 deps: ["lem-localized-cone-triangles-satisfy-tr-one-through-tr-three", "lem-finite-roof-squares-and-composable-pairs-can-be-cleared", "prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf", "thm-the-homotopy-category-of-an-abelian-category-is-triangulated"]
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -2,13 +2,14 @@
 id: "ex-fibre-closed-immersion"
 kind: "example"
 title: "A closed-immersion fibre is one residue point or empty"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-affine-fibre-coordinate-ring", "lem-tensor-ring-presentations-for-base-change"]
 provenance:
   statement: "ai-generated"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

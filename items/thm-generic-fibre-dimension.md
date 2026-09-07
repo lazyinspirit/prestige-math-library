@@ -7,6 +7,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://math.stanford.edu/~vakil/216blog/FOAGjul2724public.pdf
     - title: "Arapura Theorem 4.2.1, p.31"
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "Cover the inverse image of an affine target chart by finitely many nonempty affine source charts, each still dominant. Normalize each over a principal open and intersect these base opens. Fibre component coordinate rings are integral over quotients of polynomial rings in r variables, so their transcendence degrees are <=r. The lower bound makes every component exactly r; affine chart coverage handles the whole fibre."
 ---

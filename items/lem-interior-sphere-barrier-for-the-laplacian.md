@@ -2,7 +2,7 @@
 id: lem-interior-sphere-barrier-for-the-laplacian
 kind: lemma
 title: "Interior sphere barrier for the laplacian"
-status: draft
+status: published
 origin: pipeline
 deps: [def-subharmonic-and-superharmonic-functions-in-rn, def-interior-sphere-condition-and-sphere-normal]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

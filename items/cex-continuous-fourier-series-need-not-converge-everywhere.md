@@ -7,13 +7,14 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
     date: 2026-09-07
 sources:
   references: [{title: 'Laugesen, Harmonic Analysis Lecture Notes', url: 'https://arxiv.org/pdf/0903.3845', locator: 'ch. 8, Theorem 8.2 pp. 48–49; published FR-1 Fejer theorem'}]
-status: draft
+status: published
 origin: pipeline
 proof_strategy: Use the single A-page witness and apply the published uniform Fejer theorem. Refute the inference from uniform Cesaro convergence to ordinary pointwise convergence. Do not repeat the A-page existence claim under a second theorem label.
 ---
