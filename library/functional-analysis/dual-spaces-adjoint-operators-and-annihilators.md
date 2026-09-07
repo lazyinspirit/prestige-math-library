@@ -1,0 +1,9 @@
+---
+page: "dual-spaces-adjoint-operators-and-annihilators"
+title: "Dual Spaces Adjoint Operators and Annihilators"
+status: "draft"
+items: ["rem-continuous-dual-completeness-and-pairing", "def-annihilator-and-preannihilator", "lem-annihilators-are-closed-subspaces", "thm-dual-of-a-quotient-is-the-annihilator", "thm-dual-of-a-closed-subspace-is-a-dual-quotient", "cor-distance-to-annihilator-is-restriction-norm", "def-transpose-of-a-bounded-operator", "lem-transpose-is-bounded-and-has-the-same-norm", "lem-transpose-reverses-composition", "lem-elementary-kernel-range-annihilator-identities", "cor-dense-range-iff-transpose-is-injective", "def-canonical-map-into-the-bidual", "thm-canonical-bidual-map-is-an-isometry", "cor-distance-to-subspace-by-annihilating-functionals", "lem-canonical-map-is-natural", "def-reflexive-banach-space", "lem-transpose-range-membership-by-domination", "lem-closed-range-iff-quotient-estimate", "lem-transpose-lower-bound-gives-image-ball-density", "thm-surjective-iff-transpose-is-bounded-below", "thm-banach-closed-range-theorem", "thm-bounded-below-iff-transpose-is-surjective", "cor-transpose-preserves-invertibility", "lem-finite-truncations-are-dense-in-c0-and-ell-one", "thm-dual-of-c0-is-ell-one", "thm-complex-dual-of-ell-one-is-ell-infinity", "rem-lp-duality-in-abstract-language", "def-weak-star-topology", "lem-finite-evaluations-separate-from-a-dual-subspace", "thm-bipolar-closure-for-linear-subspaces", "thm-kernel-range-annihilator-identities"]
+examples: []
+---
+
+Continuous linear functionals turn quotient spaces into annihilators and subspaces into dual quotients. We develop the transpose through evaluation, prove the Banach closed-range criteria, and distinguish norm closure from weak-star closure. Throughout, functionals are linear over the ambient real or complex field, the pairing is bilinear, and sequence indices start at zero. The classical sequence duals make these constructions concrete.

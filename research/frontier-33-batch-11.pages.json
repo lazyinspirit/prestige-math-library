@@ -1,0 +1,224 @@
+[
+  {
+    "order": 439,
+    "id": "co-bird-free-comb-structure",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Comb Structure in co-Bird-Free Graphs",
+    "companion": "co-bird-free-comb-structure-examples",
+    "requires": [
+      "co-e-free-comb-structure"
+    ],
+    "items": [
+      {
+        "id": "lem-co-bird-free-edge-plus-isolate-witness-obstruction",
+        "kind": "lemma",
+        "title": "The edge-plus-isolate co-Bird obstruction",
+        "deps": [
+          "def-bird-graph-and-co-bird-graph",
+          "def-edges-between-sets-and-pure-mixed-pairs",
+          "def-h-free-and-family-free-graph"
+        ],
+        "strategy": "Label H by edge ab and isolate c, with ua an edge and ub,uc nonedges. List exactly the nine edges xa,xb,xc,ya,yb,yc,xu,ua,ab on x,y,u,a,b,c and identify their complement with Bird."
+      },
+      {
+        "id": "lem-co-bird-free-path-plus-isolate-witness-obstruction",
+        "kind": "lemma",
+        "title": "The path-plus-isolate co-Bird obstruction",
+        "deps": [
+          "def-bird-graph-and-co-bird-graph",
+          "def-edges-between-sets-and-pure-mixed-pairs",
+          "def-h-free-and-family-free-graph"
+        ],
+        "strategy": "Use path a-b-c and isolate d with N(u) on H equal to {b,c,d}. On y,u,a,b,c,d the edges are ya,yb,yc,yd,ub,uc,ud,ab,bc; identify co-Bird and check all six remaining pairs are nonedges."
+      },
+      {
+        "id": "lem-co-bird-free-e-mixed-vertices-are-pure-on-terminal-edges",
+        "kind": "lemma",
+        "title": "A mixed vertex on E is pure on both terminal edges",
+        "deps": [
+          "lem-co-bird-free-edge-plus-isolate-witness-obstruction",
+          "lem-co-bird-free-path-plus-isolate-witness-obstruction",
+          "def-e-graph-and-co-e-graph"
+        ],
+        "strategy": "If u mixes on p1p2, the edge-plus-isolate obstruction forces q,p4,p5 to be neighbours. In the up1 case the path-plus-isolate test on {p1,p3,p4,p5} forces up3 and the test on {p2,p3,q,p5} contradicts it. In the up2 case {p1,p3,q} forces up3, then {p1,p2,p3,p5} contradicts the second obstruction. Reflect the path for p4p5."
+      },
+      {
+        "id": "lem-co-bird-free-complete-nonedge-pairs-are-pure-to-induced-e-graphs",
+        "kind": "lemma",
+        "title": "Complete nonedge pairs force purity on induced E graphs",
+        "deps": [
+          "lem-co-bird-free-e-mixed-vertices-are-pure-on-terminal-edges",
+          "lem-co-bird-free-edge-plus-isolate-witness-obstruction",
+          "lem-co-bird-free-path-plus-isolate-witness-obstruction",
+          "def-e-graph-and-co-e-graph",
+          "def-comb-in-a-graph"
+        ],
+        "strategy": "First if u is complete or anticomplete to P5 use {q,p3,p4,p1} or {p1,p3,q} to force the matching q adjacency. Otherwise terminal-edge purity reduces to both terminal pairs complete, both anticomplete, or opposite. The first two contradict the tests {p1,p2,p3,p5} and {p2,p3,p5}; in the opposite case force up3, then force uq absent using {p1,q,p3,p4}, contradict {p3,q,p5}. Substitute (x,y)=(v,a_i)."
+      },
+      {
+        "id": "def-e-overlap-chain-relation-in-a-comb-block",
+        "kind": "definition",
+        "title": "E overlap chains inside one comb block",
+        "deps": [
+          "def-e-graph-and-co-e-graph",
+          "def-comb-in-a-graph"
+        ]
+      },
+      {
+        "id": "lem-e-overlap-classes-form-an-anticonnected-partition",
+        "kind": "lemma",
+        "title": "E overlap classes form an anticonnected partition",
+        "deps": [
+          "def-e-overlap-chain-relation-in-a-comb-block",
+          "def-anticonnected-graph-and-anticonnected-component",
+          "def-e-graph-and-co-e-graph"
+        ],
+        "strategy": "Reflexivity uses zero-length chains, symmetry reverses chains and transitivity concatenates them. The complement of E is connected: p1 reaches p3,p4,p5,q directly and p2 via p4. Successive E copies along a chain overlap, so paths in their complements join through common vertices."
+      },
+      {
+        "id": "lem-purity-on-every-e-propagates-along-an-overlap-class",
+        "kind": "lemma",
+        "title": "Purity propagates through E overlap chains",
+        "deps": [
+          "def-e-overlap-chain-relation-in-a-comb-block",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ],
+        "strategy": "Copies sharing a vertex must have the same complete/anticomplete label. Propagate this label along the chain and note every vertex of X lies in a copy."
+      },
+      {
+        "id": "def-e-overlap-blockade-and-iterated-mixed-quotients",
+        "kind": "definition",
+        "title": "The E overlap blockade and mixed quotient sequence",
+        "deps": [
+          "lem-e-overlap-classes-form-an-anticonnected-partition",
+          "def-quotient-blockade-by-mixed-block-reachability"
+        ]
+      },
+      {
+        "id": "lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade",
+        "kind": "lemma",
+        "title": "E overlap quotients terminate at a pure blockade",
+        "deps": [
+          "def-e-overlap-blockade-and-iterated-mixed-quotients",
+          "lem-quotient-blocks-preserve-connectedness-and-anticonnectedness",
+          "thm-well-ordering-principle"
+        ],
+        "strategy": "A mixed pair belongs to one nontrivial reachability class, strictly decreasing the positive block count. A fixed stage has no mixed pair. Apply the earlier quotient connectivity lemma in the complement at each stage, retaining the coarsening invariant."
+      },
+      {
+        "id": "lem-co-bird-free-separated-anticonnected-blocks-forbid-forward-mixing",
+        "kind": "lemma",
+        "title": "A separated anticonnected block pair forbids mixing in one direction",
+        "deps": [
+          "lem-co-bird-free-edge-plus-isolate-witness-obstruction",
+          "lem-a-vertex-mixed-on-an-anticonnected-set-yields-opposite-adjacency-on-a-nonedge",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ],
+        "strategy": "A mixed b1 in D1 has opposite adjacency to a nonedge b2,b2-prime in D2 by the earlier anticonnected witness lemma. Thus H={b1,b2,b2-prime} is edge-plus-isolate and z violates the first obstruction."
+      },
+      {
+        "id": "lem-co-bird-free-external-purity-survives-e-overlap-quotients",
+        "kind": "lemma",
+        "title": "External purity survives every E overlap quotient",
+        "deps": [
+          "lem-co-bird-free-complete-nonedge-pairs-are-pure-to-induced-e-graphs",
+          "lem-purity-on-every-e-propagates-along-an-overlap-class",
+          "def-e-overlap-blockade-and-iterated-mixed-quotients",
+          "lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade",
+          "lem-co-bird-free-separated-anticonnected-blocks-forbid-forward-mixing",
+          "lem-a-vertex-mixed-on-a-quotient-block-yields-opposite-adjacency-on-two-member-blocks",
+          "lem-a-quotient-mixed-block-witness-descends-to-two-member-blocks",
+          "def-comb-in-a-graph"
+        ],
+        "strategy": "Induct on the stage. Initial purity follows from E purity and overlap propagation. A later mixed outside vertex yields two mixed previous blocks on which its adjacency differs. Begin with x=v,y=a_i,z=u. The no-forward-mixing lemma supplies the no-mixing hypothesis of Lemma 6.2 at each descent. That lemma reduces the level, preserving outside distinct vertices, xy nonedge and all completeness relations. At L1 no-forward-mixing plus mixedness produces u2 in A2 mixed on A1. Apply E purity with (x,y,u)=(y-prime,z-prime,u2) and then overlap propagation, contradiction."
+      },
+      {
+        "id": "lem-terminal-e-overlap-quotient-pattern-is-e-free",
+        "kind": "lemma",
+        "title": "The terminal E overlap pattern is E-free",
+      "deps": [
+        "lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade",
+        "def-e-overlap-blockade-and-iterated-mixed-quotients",
+        "def-e-overlap-chain-relation-in-a-comb-block",
+          "def-pattern-graph-of-a-pure-blockade",
+          "def-e-graph-and-co-e-graph"
+        ],
+        "strategy": "Choose one representative from each of six supposed pattern vertices. Purity lifts every edge and nonedge to an induced E in B_i. Those six representatives were all in one initial E-overlap class, whereas they lie in six distinct terminal blocks; coarsening forbids this."
+      },
+      {
+        "id": "thm-co-bird-free-comb-blocks-admit-an-e-free-structural-partition",
+        "kind": "theorem",
+        "title": "A special-vertex co-Bird-free comb admits an E-free structural partition",
+        "deps": [
+          "def-e-overlap-chain-relation-in-a-comb-block",
+          "lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade",
+          "lem-terminal-e-overlap-quotient-pattern-is-e-free",
+          "lem-co-bird-free-external-purity-survives-e-overlap-quotients",
+          "def-comb-in-a-graph",
+          "def-h-free-and-family-free-graph",
+          "def-e-graph-and-co-e-graph",
+          "def-bird-graph-and-co-bird-graph"
+        ],
+        "strategy": "If overlap support is nonempty, take X to be that support and its terminal quotient as the partition. Y contains no E by definition. Use terminal purity, E-free pattern and external purity. If B_i contains no E, choose b in nonempty B_i and set X={b}, Y=B_i minus {b}; the singleton partition has all required properties. This proves only the special-vertex structural statement, not an unrestricted-comb or EH conclusion."
+      }
+    ]
+  },
+  {
+    "order": 440,
+    "id": "co-bird-free-comb-structure-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Comb Structure in co-Bird-Free Graphs \u2014 Examples",
+    "companion": "co-bird-free-comb-structure",
+    "requires": [
+      "co-bird-free-comb-structure"
+    ],
+    "items": [
+      {
+        "id": "ex-co-bird-edge-plus-isolate-adjacency-witness",
+        "kind": "example",
+        "title": "The first co-Bird witness by adjacency",
+        "deps": [
+          "lem-co-bird-free-edge-plus-isolate-witness-obstruction",
+          "def-bird-graph-and-co-bird-graph"
+        ],
+        "strategy": "Check all 15 pairs. Map the listed vertices to (w,y,x1,z,x3,x2) in the published Bird labels; the nine listed edges correspond exactly to co-Bird edges."
+      },
+      {
+        "id": "ex-co-bird-path-plus-isolate-adjacency-witness",
+        "kind": "example",
+        "title": "The second co-Bird witness by adjacency",
+        "deps": [
+          "lem-co-bird-free-path-plus-isolate-witness-obstruction",
+          "def-bird-graph-and-co-bird-graph"
+        ],
+        "strategy": "Check all 15 pairs and the same target order (w,y,x1,z,x3,x2). Relate the missing endpoint adjacency to the path-plus-isolate obstruction."
+      },
+      {
+        "id": "ex-co-bird-e-neighbourhood-case-table",
+        "kind": "example",
+        "title": "All E neighbourhood patterns under a complete nonedge pair",
+        "deps": [
+          "lem-co-bird-free-edge-plus-isolate-witness-obstruction",
+          "lem-co-bird-free-path-plus-isolate-witness-obstruction",
+          "lem-co-bird-free-complete-nonedge-pairs-are-pure-to-induced-e-graphs",
+          "def-e-graph-and-co-e-graph"
+        ],
+        "strategy": "Group by the terminal-edge case proof; give for every mixed subset one explicit induced P2+P1 or P3+P1 and the forbidden adjacency pattern. Independently enumerate all 64 subsets as a verification aid; masks 0 and 63 are the only survivors."
+      },
+      {
+        "id": "ex-co-bird-e-free-comb-singleton-partition",
+        "kind": "example",
+        "title": "The no-E-copy boundary case of the comb partition",
+        "deps": [
+          "thm-co-bird-free-comb-blocks-admit-an-e-free-structural-partition",
+          "def-comb-in-a-graph",
+          "def-e-graph-and-co-e-graph",
+          "def-bird-graph-and-co-bird-graph"
+        ],
+        "strategy": "Verify the graph is co-Bird-free by its order three, the comb and v adjacencies, and the E-free one-vertex pattern. This illustrates why the theorem uses a singleton in the empty-overlap case."
+      }
+    ]
+  }
+]

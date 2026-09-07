@@ -1,0 +1,1501 @@
+[
+  {
+    "order": 366.057,
+    "id": "dimension-constructible-images-and-dimensions-of-fibres",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Dimension Constructible Images and Dimensions of Fibres",
+    "companion": "dimension-constructible-images-and-dimensions-of-fibres-examples",
+    "requires": [
+      "schemes-subschemes-and-morphisms-locally-of-finite-type-examples",
+      "zariski-topology-on-prime-spectra"
+    ],
+    "items": [
+      {
+        "id": "def-dimension-noetherian-topological-space",
+        "kind": "definition",
+        "title": "Chain dimension and the empty-space convention",
+        "statement": "For a Noetherian topological space $T$, define $\\dim T$ as the supremum of the lengths $s$ of strict chains $Z_0\\subsetneq\\cdots\\subsetneq Z_s$ of nonempty irreducible closed subsets of $T$. Thus a one-member chain has length zero. Set $\\dim\\varnothing=-\\infty$, and allow $\\dim T=+\\infty$. The supremum of an empty family of dimensions is $-\\infty$.",
+        "deps": [
+          "def-noetherian-topological-space",
+          "def-irreducible-topological-space-and-subset"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §3l Definition 3.39 and §2m Definition 2.48",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "lem-dimension-finite-union-components",
+        "kind": "lemma",
+        "title": "Dimension of a finite closed union",
+        "statement": "If a Noetherian space $T$ is a finite union of closed subsets $T_1,\\ldots,T_m$, then $\\dim T=\\max_i\\dim T_i$. For $m=0$ both sides are $-\\infty$.",
+        "deps": [
+          "def-dimension-noetherian-topological-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §2m 2.49 p.54: maximum over irreducible components",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Every irreducible closed subset lies in one member of a finite closed cover; apply to the largest term of a chain.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-chain-dimension-open-cover",
+        "kind": "lemma",
+        "title": "Dimension can be computed on an open cover",
+        "statement": "For every open cover $T=\\bigcup_{i\\in I}U_i$ of a Noetherian space, $\\dim T=\\sup_i\\dim U_i$, with empty supremum $-\\infty$.",
+        "deps": [
+          "def-dimension-noetherian-topological-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §3l chain interpretation; §5j p.115",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "A chain meets any open meeting its smallest member in a strict chain: nonempty opens of an irreducible space are dense. Conversely take closures of chains in an open; closure intersected with the open recovers each member.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-classical-variety-noetherian-components",
+        "kind": "lemma",
+        "title": "Classical varieties have finite irreducible decompositions",
+        "statement": "Every classical variety is Noetherian and has finitely many irreducible components. Every open or closed subvariety has a finite affine cover.",
+        "deps": [
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-noetherian-topological-space",
+          "lem-algebraic-set-finite-irreducible-components",
+          "thm-hilbert-basis-theorem"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §5j p.115",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Restrict descending closed chains to a finite affine cover; use the affine component decompositions and take closures. Noetherian spaces have quasi-compact open subsets, proved by ascending-open stabilization.",
+        "status": "draft"
+      },
+      {
+        "id": "def-dimension-classical-variety",
+        "kind": "definition",
+        "title": "Global and local dimension of classical varieties",
+        "statement": "For a classical variety $X$, let $\\dim X$ be its chain dimension. If $X_1,\\ldots,X_m$ are its irreducible components and $x\\in X$ is a closed point, define $\\dim_xX=\\max_{x\\in X_i}\\dim X_i$. The indexing family is nonempty. Say that $X$ has pure dimension $d$ if every irreducible component has dimension $d$; the condition on components is vacuous for the empty variety, whose dimension is nevertheless $-\\infty$.",
+        "deps": [
+          "def-dimension-noetherian-topological-space",
+          "lem-dimension-finite-union-components",
+          "lem-classical-variety-noetherian-components"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §5j p.115 and §3c Note 3.13 p.63; local-dimension convention prescribed by AV-5 design",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-affine-variety-dimension-coordinate-ring",
+        "kind": "theorem",
+        "title": "Affine geometric dimension equals ring dimension",
+        "statement": "For a nonempty affine algebraic set $X$, $\\dim X=\\dim k[X]$, where the right side is Krull dimension. For this comparison only, extend ring dimension to the zero ring by $\\dim(0)=-\\infty$; then the equality also holds for $X=\\varnothing$.",
+        "deps": [
+          "def-dimension-classical-variety",
+          "thm-affine-nullstellensatz-correspondence",
+          "def-krull-dimension-of-a-ring"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Definition 3.39 and chain/prime dictionary §3l",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "The Nullstellensatz reverses chains between irreducible closed subsets and prime ideals of k[X]. Handle the zero ring separately.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-general-variety-function-field-charts",
+        "kind": "lemma",
+        "title": "Function fields and dominant pullbacks on general varieties",
+        "statement": "For irreducible classical $X$, the fraction fields of all nonempty affine charts identify canonically; denote the resulting field by $k(X)$. A dominant morphism $f:X\\to Y$ between irreducible classical varieties induces an injection $f^*:k(Y)\\hookrightarrow k(X)$. Dominant means that the image is dense.",
+        "deps": [
+          "lem-classical-variety-noetherian-components",
+          "thm-function-field-independent-affine-open",
+          "lem-dominant-map-pullback-function-fields"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §§5j–k pp.115–116",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Any two affine charts meet; inside their intersection choose a nonempty affine chart using a principal-open basis. Use the affine field comparison and cocycle compatibility. Restrict a dominant map to nonempty affine charts; density follows by continuity and density of the source chart.",
+        "status": "draft"
+      },
+      {
+        "id": "thm-dimension-equals-transcendence-degree",
+        "kind": "theorem",
+        "title": "Dimension equals transcendence degree",
+        "statement": "If $X$ is an irreducible classical variety, then $\\dim X=\\operatorname{trdeg}_k k(X)<\\infty$.",
+        "deps": [
+          "thm-affine-variety-dimension-coordinate-ring",
+          "lem-general-variety-function-field-charts",
+          "lem-chain-dimension-open-cover",
+          "thm-affine-domain-dimension-transcendence-degree"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §5j, p.115",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Arapura §4.1, p.30",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Every affine chart has the same fraction field; invoke the established algebraic dimension theorem and the open-cover chain lemma. No new algebraic normalization proof.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-dimension-nonempty-open-subset",
+        "kind": "lemma",
+        "title": "Nonempty opens preserve irreducible dimension",
+        "statement": "If $U$ is a nonempty open of an irreducible classical variety $X$, then $\\dim U=\\dim X$. Every proper closed subvariety $Z\\subsetneq X$ has $\\dim Z<\\dim X$.",
+        "deps": [
+          "thm-dimension-equals-transcendence-degree",
+          "lem-general-variety-function-field-charts",
+          "def-dimension-classical-variety"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §5j p.115",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Use identical function fields for open invariance; a chain in a proper irreducible closed subset extends by X, then use finite components.",
+        "status": "draft"
+      },
+      {
+        "id": "cor-dimension-affine-and-projective-space",
+        "kind": "corollary",
+        "title": "Affine and projective n-space have dimension n",
+        "statement": "For every integer $n\\ge0$, $\\dim\\mathbf A_k^n=\\dim\\mathbf P_k^n=n$.",
+        "deps": [
+          "thm-dimension-equals-transcendence-degree",
+          "lem-chain-dimension-open-cover",
+          "lem-standard-projective-opens-are-affine-spaces"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arapura Example 4.1.1",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Polynomial fraction field has transcendence basis the coordinates; standard projective affine cover gives the second assertion.",
+        "status": "draft"
+      },
+      {
+        "id": "cor-dimension-birational-invariant",
+        "kind": "corollary",
+        "title": "Dimension is birationally invariant",
+        "statement": "Birational irreducible classical varieties have equal dimension. In particular, if $U\\subseteq X$ and $V\\subseteq Y$ are nonempty open subvarieties and $U\\cong V$, then $\\dim X=\\dim Y$.",
+        "deps": [
+          "lem-dimension-nonempty-open-subset",
+          "thm-birational-equivalence-function-fields",
+          "lem-general-variety-function-field-charts"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §5l, Proposition 5.39, p.117",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Apply open invariance to common isomorphic opens. The affine birational theorem applies after restricting both sides to affine charts.",
+        "status": "draft"
+      },
+      {
+        "id": "thm-dimension-product-varieties",
+        "kind": "theorem",
+        "title": "Dimensions add under products",
+        "statement": "Products of nonempty classical varieties exist in the category of classical varieties, and $\\dim(X\\times_kY)=\\dim X+\\dim Y$. If both factors are irreducible, their product is irreducible.",
+        "deps": [
+          "thm-dimension-equals-transcendence-degree",
+          "lem-classical-variety-noetherian-components",
+          "lem-dimension-finite-union-components",
+          "lem-chain-dimension-open-cover",
+          "thm-affine-variety-product-coordinate-ring",
+          "def-product-varieties-universal-property",
+          "cor-noether-normalisation-module-finiteness"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Proposition 5.35, §5j",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Glue products of affine charts on their open overlaps by the universal property; separatedness follows from equalizers on product charts. Irreducible affine products have domain coordinate rings. Tensor two normalization polynomial subalgebras; their tensor injects over k and the full tensor is finite over it. Use trdeg and pass to component products. For reducible affine factors the evaluation proof gives the reduced tensor coordinate ring: a tensor vanishing at every pair is zero by linear independence and Nullstellensatz. Glue these chart products, then use the finitely many irreducible component products.",
+        "status": "draft"
+      },
+      {
+        "id": "def-codimension-irreducible-subvariety",
+        "kind": "definition",
+        "title": "Codimension of an irreducible closed subvariety",
+        "statement": "For a nonempty irreducible closed subvariety $Z$ of an irreducible classical variety $X$, define $\\operatorname{codim}_X Z=\\dim X-\\dim Z$. These are finite integers. In a reducible ambient variety a difference of global dimensions must not be substituted for the height of a local prime; the containing component matters.",
+        "deps": [
+          "def-dimension-classical-variety"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §3l and §5j",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-principal-subvariety-codimension-one",
+        "kind": "theorem",
+        "title": "A nontrivial principal section has pure codimension one",
+        "statement": "Let $X$ be irreducible affine and $0\\ne f\\in k[X]$ be a nonunit. Then $V_X(f)$ is nonempty and every irreducible component has dimension $\\dim X-1$, hence codimension one.",
+        "deps": [
+          "thm-affine-variety-dimension-coordinate-ring",
+          "def-codimension-irreducible-subvariety",
+          "thm-krull-principal-ideal-theorem",
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "thm-affine-nullstellensatz-correspondence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Theorem 3.42, p.76",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Arapura Theorem 4.1.6, p.31; restricted to irreducible X",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Minimal primes over (f) have height <=1 by PIT and >0 since the ring is a domain. Height-plus-quotient gives the exact dimension; a proper ideal lies in a maximal ideal.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-variety-equations-dimension-bound",
+        "kind": "lemma",
+        "title": "r equations lower dimension by at most r",
+        "statement": "Let $X$ be an irreducible classical variety of dimension $n$, and let $f_1,\\ldots,f_r$ be global regular functions, with $r\\ge0$. Every nonempty irreducible component $Z$ of their common zero set has $\\dim Z\\ge n-r$.",
+        "deps": [
+          "thm-affine-variety-dimension-coordinate-ring",
+          "lem-dimension-nonempty-open-subset",
+          "thm-krull-height-theorem",
+          "cor-height-plus-quotient-dimension-affine-domain"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Corollary 3.45",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Choose an affine chart meeting the component away from the other components, apply height and the affine dimension formula; r=0 is immediate.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-dimension-local-ring-codimension-closure",
+        "kind": "lemma",
+        "title": "Closed-point local dimension equals ambient irreducible dimension",
+        "statement": "If $X$ is an irreducible classical variety and $x$ is a closed point, then $\\dim\\mathcal O_{X,x}=\\dim X=\\operatorname{codim}_X\\{x\\}$.",
+        "deps": [
+          "thm-dimension-equals-transcendence-degree",
+          "def-codimension-irreducible-subvariety",
+          "thm-local-ring-affine-variety-localization",
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "def-height-of-a-prime-ideal"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §3l, chain-height interpretation",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Choose an affine chart at x; quotient by its maximal ideal is k and has dimension zero. Apply the height formula and the local-ring identification. Inherit Choice where used by suppliers.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-classical-point-cut-out-by-dimension-many-functions",
+        "kind": "lemma",
+        "title": "A point is locally cut out by dim X functions",
+        "statement": "If $X$ is irreducible of dimension $n$ and $x\\in X$ is a closed point, there are an affine neighborhood $U$ of $x$ and $n$ regular functions on $U$ whose common zero set is exactly $\\{x\\}$.",
+        "deps": [
+          "lem-dimension-local-ring-codimension-closure",
+          "thm-krull-height-theorem-converse",
+          "lem-classical-variety-noetherian-components"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Proposition 3.47 specialized to a point",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Choose local parameters using the algebra supplier, clear denominators, then remove finitely many unwanted components of the zero set. Each unwanted component avoids x because x is already a minimal component.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-zero-dimensional-classical-variety-finite",
+        "kind": "lemma",
+        "title": "Zero-dimensional varieties are finite sets",
+        "statement": "A classical variety $X$ has $\\dim X\\le0$ if and only if its underlying set is finite. The empty set is included. A nonempty irreducible variety of dimension zero is one point.",
+        "deps": [
+          "def-dimension-classical-variety",
+          "lem-classical-variety-noetherian-components",
+          "thm-affine-variety-dimension-coordinate-ring",
+          "thm-affine-nullstellensatz-correspondence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arapura §4.1 opening, p.30",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            },
+            {
+              "title": "Milne §5j finite components and §9b fibres",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "A zero-dimensional irreducible chart has no proper irreducible closed subset; each closed point must be the whole component. Conversely finite T1 spaces have only singleton irreducible subsets.",
+        "status": "draft"
+      },
+      {
+        "id": "cor-maximal-chains-irreducible-variety-dimension",
+        "kind": "corollary",
+        "title": "Maximal chains in an irreducible variety",
+        "statement": "In an irreducible classical variety $X$, a maximal proper nonempty irreducible closed subset $Z$ has codimension one. Every maximal chain of nonempty irreducible closed subsets has length $\\dim X$.",
+        "deps": [
+          "thm-principal-subvariety-codimension-one",
+          "lem-dimension-nonempty-open-subset",
+          "lem-classical-variety-noetherian-components",
+          "lem-zero-dimensional-classical-variety-finite",
+          "def-codimension-irreducible-subvariety"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Corollaries 3.43–3.44, pp.76–77",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "On an affine chart meeting Z choose a nonzero function vanishing on Z. Maximality forces Z to be a component of its zero set after taking closure. Apply the principal theorem. Successive maximal inclusions drop dimension by one, and a minimal member is a closed point.",
+        "status": "draft"
+      },
+      {
+        "id": "def-constructible-subset-variety",
+        "kind": "definition",
+        "title": "Locally closed and constructible subsets",
+        "statement": "A subset $S$ of a classical variety $X$ is locally closed if $S=U\\cap Z$ for some open $U\\subseteq X$ and closed $Z\\subseteq X$. A subset is constructible if it is a finite union of locally closed subsets. The empty union is allowed, so $\\varnothing$ is constructible.",
+        "deps": [
+          "lem-classical-variety-noetherian-components"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §9a p.200",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "lem-constructible-boolean-operations",
+        "kind": "lemma",
+        "title": "Constructible subsets form a Boolean algebra",
+        "statement": "Constructible subsets are closed under finite unions, finite intersections and complements. If $C$ is constructible in $X$ and $S\\subseteq X$ is any subspace, $C\\cap S$ is constructible in $S$. If $S$ is locally closed and $C$ is constructible in $S$, then $C$ is constructible in $X$.",
+        "deps": [
+          "def-constructible-subset-variety"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §9a p.200, paragraph preceding Proposition 9.6",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Distribute finite unions and intersections; complement of U intersect Z is (X minus U) union (X minus Z). Do not copy the displayed complement formula in the PDF literally.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-constructible-dense-contains-open",
+        "kind": "lemma",
+        "title": "Dense constructible subsets contain an open",
+        "statement": "If a constructible subset $C\\subseteq X$ has nonempty irreducible closure $Z$, then $C$ contains a nonempty open subset of $Z$.",
+        "deps": [
+          "def-constructible-subset-variety"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Proposition 9.6",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Use the finite locally closed decomposition; irreducibility forces one closed factor to contain the closure, and its open factor meets it.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-dominant-affine-map-normalization-over-open",
+        "kind": "lemma",
+        "title": "A dominant affine map factors finitely over relative affine space after shrinking the base",
+        "statement": "Let $f:X\\to Y$ be dominant between irreducible affine varieties, put $A=k[Y]\\subseteq B=k[X]$, and let $r=\\operatorname{trdeg}_{k(Y)}k(X)$. There are $0\\ne a\\in A$ and elements $t_1,\\ldots,t_r\\in B_a$, algebraically independent over $A_a$, such that $B_a$ is module-finite over $A_a[t_1,\\ldots,t_r]$.",
+        "deps": [
+          "lem-general-variety-function-field-charts",
+          "cor-noether-normalisation-module-finiteness",
+          "thm-coordinate-ring-principal-open"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil Theorem 12.4.1 proof, pp.354–356 (July 27 2024)",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGjul2724public.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Apply the algebra supplier to k[X] tensor_k[Y] k(Y); clear denominators of the normalization elements and monic equations of the finite set of algebra generators. Finitely many denominators suffice. Algebraic normalization itself remains owned by the algebra page.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-dominant-affine-image-contains-principal-open",
+        "kind": "lemma",
+        "title": "Dominant affine images contain a principal open",
+        "statement": "The image of a dominant morphism $f:X\\to Y$ between irreducible affine varieties contains a nonempty principal open subset of $Y$.",
+        "deps": [
+          "lem-dominant-affine-map-normalization-over-open",
+          "thm-lying-over",
+          "thm-affine-nullstellensatz-correspondence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Theorem 9.1, p.198",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Vakil Theorem 12.4.1 proof, pp.354–356",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGjul2724public.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Above y in D(a), choose a maximal ideal (m_y,t_1,...,t_r) of the polynomial subalgebra. Lying over gives a prime upstairs; the integral residue domain over k is a field equal to k. Thus it represents a classical point over y.",
+        "status": "draft"
+      },
+      {
+        "id": "thm-chevalley-constructible-image-varieties",
+        "kind": "theorem",
+        "title": "Chevalley: images of constructible sets are constructible",
+        "statement": "Every morphism $f:X\\to Y$ of classical varieties sends every constructible subset of $X$ to a constructible subset of $Y$. In particular $f(X)$ is constructible.",
+        "deps": [
+          "def-constructible-subset-variety",
+          "lem-constructible-boolean-operations",
+          "lem-constructible-dense-contains-open",
+          "lem-dominant-affine-image-contains-principal-open",
+          "lem-classical-variety-noetherian-components"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Theorem 9.7",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Reduce to locally closed irreducible source pieces and affine charts. Find a nonempty open in the image closure using the affine open-image lemma; remove its inverse image and use Noetherian induction on proper closed subsets. Finite unions finish.",
+        "status": "draft"
+      },
+      {
+        "id": "cor-dominant-morphism-image-contains-open",
+        "kind": "corollary",
+        "title": "A dominant image contains a dense open",
+        "statement": "If $f:X\\to Y$ is a dominant morphism of classical varieties and $Y$ is irreducible, then $f(X)$ contains a nonempty open subset of $Y$. The source need not be irreducible.",
+        "deps": [
+          "thm-chevalley-constructible-image-varieties",
+          "lem-constructible-dense-contains-open",
+          "lem-general-variety-function-field-charts"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Theorem 9.1 and Proposition 9.6",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Combine constructibility of the image and the dense-constructible lemma.",
+        "status": "draft"
+      },
+      {
+        "id": "def-fibre-dimension-at-point-classical",
+        "kind": "definition",
+        "title": "Reduced closed-point fibres and their dimension",
+        "statement": "For a morphism $f:X\\to Y$ of classical varieties and a closed point $y\\in Y$, let $X_y=f^{-1}(y)$ have its reduced closed-subvariety structure. Its dimension is the chain dimension, with $\\dim X_y=-\\infty$ if the fibre is empty. On affine charts $V\\subseteq Y$ containing $y$ and $U\\subseteq f^{-1}(V)$, writing $A=k[V]$ and $B=k[U]$, the fibre chart has coordinate ring $B/\\sqrt{\\mathfrak m_yB}$. Here general morphisms have the locally ringed-space meaning; the earlier affine morphism definition applies to the restrictions $U\\to V$.",
+        "deps": [
+          "def-dimension-classical-variety",
+          "def-morphism-classical-varieties",
+          "thm-affine-nullstellensatz-correspondence",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arapura §4.2, pp.31–32",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            },
+            {
+              "title": "Milne §9b, pp.201–204",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-fibre-dimension-lower-bound",
+        "kind": "theorem",
+        "title": "Every fibre component has the expected lower bound",
+        "statement": "For a dominant morphism $f:X\\to Y$ between irreducible classical varieties and every closed point $y\\in Y$, each nonempty irreducible component $Z$ of $X_y$ satisfies $\\dim Z\\ge\\dim X-\\dim Y$. No bound is asserted for an empty fibre.",
+        "deps": [
+          "def-fibre-dimension-at-point-classical",
+          "lem-classical-point-cut-out-by-dimension-many-functions",
+          "lem-variety-equations-dimension-bound",
+          "lem-dimension-nonempty-open-subset",
+          "lem-general-variety-function-field-charts"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arapura Theorem 4.2.1, p.31",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            },
+            {
+              "title": "Milne Theorem 9.9(b), lower-bound proof, p.203",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Cut y out locally by dim Y functions, pull back and apply the equation bound on affine source charts meeting the chosen fibre component.",
+        "status": "draft"
+      },
+      {
+        "id": "thm-generic-fibre-dimension",
+        "kind": "theorem",
+        "title": "Fibres have pure expected dimension over a dense open",
+        "statement": "For a dominant morphism $f:X\\to Y$ between irreducible classical varieties, there is a nonempty open $U\\subseteq Y$, contained in $f(X)$, such that every $X_y$ with $y\\in U$ is nonempty and has pure dimension $r=\\dim X-\\dim Y$.",
+        "deps": [
+          "thm-fibre-dimension-lower-bound",
+          "lem-dominant-affine-map-normalization-over-open",
+          "lem-dominant-affine-image-contains-principal-open",
+          "lem-classical-variety-noetherian-components",
+          "lem-chain-dimension-open-cover",
+          "cor-transcendence-degree-tower-additivity",
+          "thm-affine-domain-dimension-transcendence-degree",
+          "lem-dimension-nonempty-open-subset",
+          "thm-dimension-equals-transcendence-degree",
+          "lem-general-variety-function-field-charts"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil Theorem 12.4.1 and Corollary 12.4.2, pp.354–356",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGjul2724public.pdf"
+            },
+            {
+              "title": "Arapura Theorem 4.2.1, p.31",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Cover the inverse image of an affine target chart by finitely many nonempty affine source charts, each still dominant. Normalize each over a principal open and intersect these base opens. Fibre component coordinate rings are integral over quotients of polynomial rings in r variables, so their transcendence degrees are <=r. The lower bound makes every component exactly r; affine chart coverage handles the whole fibre.",
+        "status": "draft"
+      },
+      {
+        "id": "cor-dimension-of-image-plus-generic-fibre",
+        "kind": "corollary",
+        "title": "Image dimension and the generic fibre formula",
+        "statement": "For an irreducible classical variety $X$ and morphism $f:X\\to Y$, the reduced closure $Z=\\overline{f(X)}$ is irreducible and $\\dim X=\\dim Z+r$, where $r$ is the common dimension of the nonempty fibres on a nonempty open of $Z$. For arbitrary nonempty $X$ with components $X_i$, $\\dim X=\\max_i(\\dim\\overline{f(X_i)}+r_i)$, with a separately chosen generic open and relative dimension $r_i$ for each $X_i$. For empty $X$ use the empty maximum $-\\infty$.",
+        "deps": [
+          "thm-generic-fibre-dimension",
+          "lem-dimension-finite-union-components",
+          "lem-classical-variety-noetherian-components"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §9b opening and Theorem 9.9",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Apply the dominant theorem to X to Z; for reducible source apply it component by component. Do not use a single generic fibre over the full image for a reducible source.",
+        "status": "draft"
+      },
+      {
+        "id": "def-quasi-finite-morphism-classical",
+        "kind": "definition",
+        "title": "Quasi-finite classical morphisms",
+        "statement": "A morphism $f:X\\to Y$ of classical varieties is quasi-finite if every closed-point fibre $X_y$ is a finite set; empty fibres are allowed. Classical morphisms here are of finite type: for an affine target chart and an affine source chart above it, any finite set of $k$-algebra generators of the source ring also generates it over the target ring. The inverse image has a finite affine cover because it is an open of a Noetherian variety.",
+        "deps": [
+          "def-fibre-dimension-at-point-classical"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §8c Quasi-finite maps, p.185",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Arapura Corollary 4.2.2, p.31",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-dominant-equal-dimension-generically-finite",
+        "kind": "theorem",
+        "title": "Equal dimension is equivalent to generic quasi-finiteness",
+        "statement": "For a dominant morphism $f:X\\to Y$ of irreducible classical varieties, the following are equivalent: $\\dim X=\\dim Y$; the extension $k(Y)\\subseteq k(X)$ is finite; and $f^{-1}(U)\\to U$ is quasi-finite for some nonempty target open $U$. Inseparable extensions are allowed.",
+        "deps": [
+          "thm-generic-fibre-dimension",
+          "lem-zero-dimensional-classical-variety-finite",
+          "def-quasi-finite-morphism-classical",
+          "lem-general-variety-function-field-charts",
+          "cor-transcendence-degree-tower-additivity",
+          "thm-dimension-equals-transcendence-degree"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arapura Lemma 4.1.3 and Corollary 4.2.2",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "A finitely generated algebraic field extension is finite; generic dimension zero is equivalent to finite fibres. State inseparable extensions are allowed and do not identify geometric fibre cardinality with degree.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-affine-intersection-dimension-bound",
+        "kind": "lemma",
+        "title": "Affine intersection bound via the diagonal",
+        "statement": "For irreducible closed $X,Y\\subseteq\\mathbf A_k^n$, every nonempty irreducible component $Z$ of $X\\cap Y$ satisfies $\\dim Z\\ge\\dim X+\\dim Y-n$.",
+        "deps": [
+          "thm-dimension-product-varieties",
+          "lem-variety-equations-dimension-bound",
+          "lem-diagonal-affine-variety-cut-out-by-coordinate-differences"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Proposition 5.36",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Identify intersection with the locus of n coordinate differences on irreducible X times Y; apply the equation bound.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-affine-cone-dimension-projective-variety",
+        "kind": "lemma",
+        "title": "A nonempty projective cone raises dimension by one",
+        "statement": "If $X\\subseteq\\mathbf P_k^N$ is a nonempty projective algebraic set, then $\\dim C(X)=\\dim X+1$. Over $X_i=X\\cap D_+(T_i)$, the locus $C(X)\\cap D(T_i)$ is isomorphic to $X_i\\times\\mathbf G_m$. If $X$ is irreducible, so is $C(X)$.",
+        "deps": [
+          "thm-dimension-product-varieties",
+          "cor-dimension-affine-and-projective-space",
+          "lem-dimension-nonempty-open-subset",
+          "lem-dimension-finite-union-components",
+          "def-affine-cone-projective-set",
+          "lem-projective-variety-cone-irreducible"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §6p proof of Theorem 6.43 and Corollary 6.47",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Use (point,nonzero scaling) as inverse chart coordinates; then take components, whose cones contain the vertex in their closure.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-projective-hypersurface-dimension-drop",
+        "kind": "lemma",
+        "title": "Nontrivial projective hypersurface sections",
+        "statement": "Let $X\\subseteq\\mathbf P_k^N$ be irreducible of dimension $d\\ge1$. If $f$ is homogeneous of positive degree and does not vanish identically on $X$, then $X\\cap V_+(f)$ is nonempty and every irreducible component has dimension $d-1$.",
+        "deps": [
+          "lem-affine-cone-dimension-projective-variety",
+          "thm-principal-subvariety-codimension-one",
+          "lem-dimension-nonempty-open-subset"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Theorem 6.43, printed p.156",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Apply the affine principal result to the cone. A positive-degree homogeneous element is not a unit in the cone ring; dimension >=1 of the intersection rules out only the vertex. Transfer purity on punctured-cone charts.",
+        "status": "draft"
+      },
+      {
+        "id": "cor-projective-equations-dimension-bound",
+        "kind": "corollary",
+        "title": "Several homogeneous equations in projective space",
+        "statement": "Let $X\\subseteq\\mathbf P_k^N$ be irreducible of dimension $d$, and let $f_1,\\ldots,f_r$ be homogeneous polynomials of positive degree, with $r\\ge0$. Every nonempty component of $X\\cap V_+(f_1,\\ldots,f_r)$ has dimension at least $d-r$. If $d\\ge r$, this common zero set is nonempty.",
+        "deps": [
+          "lem-projective-hypersurface-dimension-drop",
+          "lem-variety-equations-dimension-bound",
+          "lem-affine-cone-dimension-projective-variety",
+          "lem-dimension-finite-union-components",
+          "lem-dimension-nonempty-open-subset"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Corollary 6.44, p.156",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Apply the affine equations bound on the cone and subtract one on nonvertex components. If d>=r, all cone components have positive dimension, so cannot be just the vertex.",
+        "status": "draft"
+      },
+      {
+        "id": "thm-dimension-theorem-intersection-projective",
+        "kind": "theorem",
+        "title": "Projective intersection dimension and nonemptiness",
+        "statement": "Let $X,Y\\subseteq\\mathbf P_k^n$ be irreducible closed subvarieties. Every nonempty irreducible component $Z$ of $X\\cap Y$ satisfies $\\dim Z\\ge\\dim X+\\dim Y-n$. If $\\dim X+\\dim Y\\ge n$, then $X\\cap Y\\ne\\varnothing$.",
+        "deps": [
+          "lem-affine-cone-dimension-projective-variety",
+          "lem-affine-intersection-dimension-bound",
+          "lem-dimension-nonempty-open-subset"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Corollary 6.47",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Use affine cones in A^(n+1); their intersection contains the vertex and has dimension at least dim X+dim Y-n+1. This is positive under the nonemptiness hypothesis. Use cone charts for the component bound.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-projective-dimension-linear-avoidance",
+        "kind": "lemma",
+        "title": "Dimension is detected by avoiding linear subspaces",
+        "statement": "For a closed subset $Z\\subseteq\\mathbf P_k^N$ and integer $0\\le r\\le N$, $\\dim Z<r$ if and only if some projective linear subspace of dimension $N-r$ is disjoint from $Z$.",
+        "deps": [
+          "lem-projective-hypersurface-dimension-drop",
+          "thm-dimension-theorem-intersection-projective",
+          "lem-dimension-finite-union-components",
+          "cor-dimension-affine-and-projective-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Proposition 6.48 and Lemma 6.49",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Over infinite k choose hyperplanes avoiding the finitely many components and lower dimension successively. The union of finitely many proper dual linear subspaces cannot be the full dual: their defining linear forms have nonzero product. The converse is the intersection theorem.",
+        "status": "draft"
+      },
+      {
+        "id": "lem-relative-projective-homogeneous-equations",
+        "kind": "lemma",
+        "title": "Projective space over a classical base and homogeneous closed loci",
+        "statement": "For a classical variety $Y$ and $N\\ge0$, $Y\\times\\mathbf P_k^N$ exists with its standard product charts. If $Y$ is affine with $A=k[Y]$, its closed subsets are precisely the zero loci of finitely generated homogeneous ideals of $A[T_0,\\ldots,T_N]$. For such an ideal $I$ and $y\\in Y$, the fibre is empty if and only if the specialized ideal $I(y)\\subseteq k[T_0,\\ldots,T_N]$ contains every monomial of some positive degree $d$.",
+        "deps": [
+          "thm-dimension-product-varieties",
+          "thm-hilbert-basis-theorem",
+          "thm-affine-nullstellensatz-correspondence",
+          "lem-standard-projective-opens-are-affine-spaces"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §6q Lemma 6.51(a,b), p.158",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Homogenize equations on each standard chart and multiply by suitable powers of its distinguished coordinate to extend the vanishing to other charts; finite generation follows from Hilbert basis. For empty fibres use affine Nullstellensatz on the cone to obtain powers of all T_i, hence all monomials of sufficiently high degree.",
+        "status": "draft"
+      },
+      {
+        "id": "thm-classical-projective-projection-closed",
+        "kind": "theorem",
+        "title": "Projection from projective space over a variety is closed",
+        "statement": "For every classical variety $Y$ and $N\\ge0$, the projection $p:Y\\times\\mathbf P_k^N\\to Y$ is a closed map.",
+        "deps": [
+          "lem-relative-projective-homogeneous-equations",
+          "thm-nakayama-lemma"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Theorem 7.22, pp.164–165",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Work over affine Y. For a fibre outside the image choose degree d with all monomials in the specialized ideal. The degree-d quotient is a finite A-module M with M/m_y M=0. Local Nakayama gives M_m_y=0; finite generators yield a neighborhood where M vanishes. All higher degrees vanish there, so all its fibres are empty. No proper-morphism theorem is imported.",
+        "status": "draft"
+      },
+      {
+        "id": "def-projective-morphism-classical",
+        "kind": "definition",
+        "title": "Projective classical morphisms",
+        "statement": "A morphism $f:X\\to Y$ of classical varieties is projective here if there is an integer $N\\ge0$ and a factorization $X\\hookrightarrow Y\\times\\mathbf P_k^N\\to Y$ in which the first map is a closed immersion and the second is projection. A closed immersion in this classical setting is an isomorphism onto a reduced closed subvariety. Morphisms have the general locally ringed-space meaning, checked on affine charts.",
+        "deps": [
+          "lem-relative-projective-homogeneous-equations",
+          "def-morphism-classical-varieties",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil Class 38 §3, proof of Theorem 3.1",
+              "url": "https://math.stanford.edu/~vakil/0708-216/216class38.pdf"
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-upper-semicontinuity-fibre-dimension-projective",
+        "kind": "theorem",
+        "title": "Projective fibre dimension is upper semicontinuous",
+        "statement": "For a projective morphism $f:X\\to Y$ of classical varieties, the set $E_r=\\{y\\in Y:\\dim X_y\\ge r\\}$ is closed for every integer $r$. Neither irreducibility nor surjectivity is required, and empty fibres have dimension $-\\infty$.",
+        "deps": [
+          "def-projective-morphism-classical",
+          "def-fibre-dimension-at-point-classical",
+          "thm-classical-projective-projection-closed",
+          "lem-projective-dimension-linear-avoidance"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil Class 38 Exercise 3.B and its preceding proof, pp.4–5",
+              "url": "https://math.stanford.edu/~vakil/0708-216/216class38.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "For r<=0 this is the closed image. For 1<=r<=N, if dim X_y<r choose an (N-r)-plane avoiding that fibre. Its intersection with X has closed projection missing y, and over the complementary neighborhood every fibre still avoids the plane and has dimension <r. For r>N the locus is empty.",
+        "status": "draft"
+      },
+      {
+        "id": "cor-closed-family-irreducible-equal-dimensional-fibres",
+        "kind": "corollary",
+        "title": "Closed families with irreducible equal-dimensional fibres",
+        "statement": "Let $f:X\\to Y$ be a closed surjective morphism of classical varieties with $Y$ irreducible. If every fibre is irreducible of one fixed dimension $r$, then $X$ is irreducible and $\\dim X=\\dim Y+r$.",
+        "deps": [
+          "thm-generic-fibre-dimension",
+          "thm-fibre-dimension-lower-bound",
+          "lem-classical-variety-noetherian-components",
+          "lem-dimension-finite-union-components"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Proposition 9.11",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "First remove the closed images of all nondominating components. A component dominating Y has dimension <=dim Y+r by generic fibres. At least one such component has equality since otherwise on a common nonempty open all component intersections have smaller dimension than the irreducible fibre. Its fibre intersections have dimension >=r everywhere by the lower bound, so contain every fibre, forcing that component to be X.",
+        "status": "draft"
+      },
+      {
+        "id": "def-module-finite-affine-classical-map",
+        "kind": "definition",
+        "title": "Module-finite affine maps for the quasi-finite comparison",
+        "statement": "For affine classical algebraic sets $X,Y$, call a morphism $f:X\\to Y$ module-finite if $k[X]$, via pullback, is a finitely generated $k[Y]$-module. This is the affine module criterion. Empty affine sets are allowed, with zero coordinate ring; the definition does not assert a global affine-preimage criterion for arbitrary varieties.",
+        "deps": [
+          "thm-affine-morphisms-coordinate-ring-anti-equivalence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §8c Definition 8.17, affine case, p.181",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "cor-module-finite-affine-map-quasi-finite",
+        "kind": "corollary",
+        "title": "Module-finite affine maps have finite fibres",
+        "statement": "Every module-finite morphism between affine classical algebraic sets is quasi-finite.",
+        "deps": [
+          "def-module-finite-affine-classical-map",
+          "def-quasi-finite-morphism-classical",
+          "def-fibre-dimension-at-point-classical",
+          "thm-affine-nullstellensatz-correspondence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Proposition 8.28 and Lemma 8.29, p.185",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Each fibre has coordinate ring a quotient of a finite-dimensional k-algebra. Distinct maximal ideals are pairwise comaximal; the elementary Chinese remainder construction makes the number of them at most the vector-space dimension. Include that finite-ideal CRT argument inline.",
+        "status": "draft"
+      },
+      {
+        "id": "rem-equidimensionality-hypotheses",
+        "kind": "remark",
+        "title": "Hypotheses and conventions in dimension theory",
+        "statement": "All varieties in this page are classical varieties over algebraically closed $k$, under Choice. The lower fibre bound and the pure generic fibre theorem require irreducible source and target. For reducible sources the image-dimension formula is a maximum over components, with separate image closures and generic dimensions. Projective upper semicontinuity permits reducible sources, reducible targets and empty fibres. It is not asserted here for arbitrary morphisms. Local dimension at a closed point counts dimensions of components through that point; it is not the dimension of its residue field, nor the dimension of a local ring at a generic scheme point. A generically finite map may induce an inseparable field extension; the number of reduced fibre points need not equal that field degree.",
+        "deps": [
+          "thm-fibre-dimension-lower-bound",
+          "thm-generic-fibre-dimension",
+          "thm-upper-semicontinuity-fibre-dimension-projective",
+          "cor-dimension-of-image-plus-generic-fibre",
+          "lem-dimension-local-ring-codimension-closure",
+          "thm-dominant-equal-dimension-generically-finite"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §§5j, 9b; qualifications explained in the local theorems",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Arapura Chapter 4, §§4.1–4.2",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "status": "draft"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "order": 366.058,
+    "id": "dimension-constructible-images-and-dimensions-of-fibres-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Dimension Constructible Images and Dimensions of Fibres — Examples",
+    "companion": "dimension-constructible-images-and-dimensions-of-fibres",
+    "requires": [
+      "dimension-constructible-images-and-dimensions-of-fibres"
+    ],
+    "items": [
+      {
+        "id": "ex-dimensions-coordinate-cross-components",
+        "kind": "example",
+        "title": "The coordinate cross has two one-dimensional components",
+        "statement": "The coordinate cross $C=V(xy)\\subseteq\\mathbf A_k^2$ has two irreducible components, both affine lines. Its global dimension is one, and $\\dim_p C=1$ at every closed point, including the origin.",
+        "deps": [
+          "lem-dimension-finite-union-components",
+          "def-dimension-classical-variety",
+          "cor-dimension-affine-and-projective-space"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arapura §4.1, hypersurface dimension background; coordinate-cross computation supplied here",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Factor xy; compute both components and use finite-union dimension.",
+        "generation": {
+          "role": "example"
+        },
+        "status": "draft"
+      },
+      {
+        "id": "ex-fibres-hyperbola-projection",
+        "kind": "example",
+        "title": "Elementary fibres: empty, points, and affine lines",
+        "statement": "For $H=V(xy-1)\\subseteq\\mathbf A_k^2$, projection $H\\to\\mathbf A_k^1$ onto $x$ has fibre $\\{(a,a^{-1})\\}$ when $a\\ne0$ and empty fibre at $a=0$. Their dimensions are zero and $-\\infty$ respectively. By contrast, every fibre of $\\mathbf A^2\\to\\mathbf A^1$, $(x,y)\\mapsto x$, is an affine line of dimension one.",
+        "deps": [
+          "def-fibre-dimension-at-point-classical",
+          "cor-dimension-affine-and-projective-space"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Example 8.30, p.185; full-plane comparison computed here",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Solve the equations and exhibit explicit affine-coordinate inverses.",
+        "generation": {
+          "role": "example"
+        },
+        "status": "draft"
+      },
+      {
+        "id": "ex-family-hyperbolas-degenerate-fibre",
+        "kind": "example",
+        "title": "The family xy=t has constant dimension and a reducible special fibre",
+        "statement": "For the morphism $V(xy-t)\\subseteq\\mathbf A_k^3\\to\\mathbf A_k^1$, $(x,y,t)\\mapsto t$, the fibre at $a\\ne0$ is $\\mathbf G_m$, whereas the fibre at zero is the coordinate cross. Every fibre is nonempty of pure dimension one.",
+        "deps": [
+          "thm-principal-subvariety-codimension-one",
+          "cor-dimension-affine-and-projective-space",
+          "lem-dimension-nonempty-open-subset",
+          "lem-dimension-finite-union-components",
+          "def-fibre-dimension-at-point-classical"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Theorem 3.42, p.76, dimension background; polynomial-family computation supplied here",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Eliminate t; for nonzero t solve y=t/x, and for zero factor xy.",
+        "generation": {
+          "role": "example"
+        },
+        "status": "draft"
+      },
+      {
+        "id": "ex-fibre-dimension-jump",
+        "kind": "example",
+        "title": "The map (x,y) to (x,xy) has a jumping fibre",
+        "statement": "The morphism $f:\\mathbf A_k^2\\to\\mathbf A_k^2$, $(x,y)\\mapsto(u,v)=(x,xy)$, has image $D(u)\\cup\\{(0,0)\\}$. Its fibres are one point when $u\\ne0$, an affine line over $(0,0)$, and empty over $(0,v)$ with $v\\ne0$. The image is constructible and is not locally closed.",
+        "deps": [
+          "def-fibre-dimension-at-point-classical",
+          "def-constructible-subset-variety",
+          "cor-dimension-affine-and-projective-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Chapter 9 introduction, p.198",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Arapura Example 4.2.4, p.32",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Solve u=x and v=xy; the image is dense but contains no neighborhood of the origin, so is not locally closed.",
+        "status": "draft"
+      },
+      {
+        "id": "cex-image-morphism-not-closed",
+        "kind": "counterexample",
+        "title": "A morphism image need not be closed",
+        "statement": "False claim: every regular morphism of classical varieties has closed image.",
+        "deps": [
+          "def-constructible-subset-variety",
+          "def-fibre-dimension-at-point-classical"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Example 7.2",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Coordinate solution gives image D(x); a nonzero polynomial cannot vanish on this infinite set without vanishing everywhere.",
+        "status": "draft"
+      },
+      {
+        "id": "cex-finite-fibres-not-finite-morphism",
+        "kind": "counterexample",
+        "title": "Finite fibres do not imply a module-finite map",
+        "statement": "False claim: a morphism of affine classical varieties with finite fibres must be module-finite.",
+        "deps": [
+          "def-quasi-finite-morphism-classical",
+          "def-module-finite-affine-classical-map",
+          "def-fibre-dimension-at-point-classical"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne §8c Quasi-finite maps; affine open immersion comparison",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "A finite list of Laurent polynomials has bounded negative exponents; its k[t]-span cannot contain all t^-m. Equivalently t^-1 is not integral over k[t].",
+        "status": "draft"
+      },
+      {
+        "id": "ex-intersection-two-projective-curves",
+        "kind": "example",
+        "title": "Plane curves meet; common components change the dimension",
+        "statement": "Two distinct lines in $\\mathbf P_k^2$ intersect in one point. The reducible curves $V_+(XY)$ and $V_+(XZ)$ intersect in the line $X=0$ together with the point $[1:0:0]$. In contrast, two distinct irreducible projective plane curves have a nonempty finite intersection.",
+        "deps": [
+          "thm-dimension-theorem-intersection-projective",
+          "lem-dimension-finite-union-components",
+          "cor-dimension-affine-and-projective-space",
+          "lem-dimension-nonempty-open-subset"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Corollary 6.47, p.156; explicit line and reducible-curve computations supplied here",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Compute the two displayed equations; for irreducible distinct curves any positive-dimensional component would equal both curves.",
+        "generation": {
+          "role": "example"
+        },
+        "status": "draft"
+      },
+      {
+        "id": "cex-dimension-empty-set-minus-infinity-needed",
+        "kind": "counterexample",
+        "title": "Dimension zero for the empty set loses the empty-fibre distinction",
+        "statement": "Incompatibility to refute: adopt $\\dim\\varnothing=0$ while retaining the assertion $\\dim T\\ge0$ if and only if $T\\ne\\varnothing$. The convention $\\dim\\varnothing=-\\infty$ makes that assertion, and the empty maximum, literal; no uniqueness among all possible dimension conventions is claimed.",
+        "deps": [
+          "def-dimension-noetherian-topological-space",
+          "def-fibre-dimension-at-point-classical"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Definition 2.48, p.54, chain dimension background; empty-convention compatibility checked here",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Compare the absent chain in the empty set with the length-zero chain at a point.",
+        "generation": {
+          "role": "counterexample"
+        },
+        "status": "draft"
+      },
+      {
+        "id": "cex-affine-intersection-bound-singular-ambient",
+        "kind": "counterexample",
+        "title": "The ambient affine-space hypothesis matters",
+        "statement": "False claim: for irreducible closed subsets $P,Q$ of any irreducible classical ambient variety $W$, every nonempty component of $P\\cap Q$ has dimension at least $\\dim P+\\dim Q-\\dim W$.",
+        "deps": [
+          "thm-principal-subvariety-codimension-one",
+          "cor-dimension-affine-and-projective-space",
+          "lem-affine-intersection-dimension-bound"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Remark 5.37(b)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "Compute the plane intersection and ambient hypersurface dimension; 0<2+2-3.",
+        "status": "draft"
+      },
+      {
+        "id": "ex-linear-system-fibre-dimension-rank-loci",
+        "kind": "example",
+        "title": "Fibre dimensions of a family of homogeneous linear systems",
+        "statement": "Let $A(y)$ be an $m\\times n$ matrix of regular functions on a classical variety $Y$, with $m,n\\ge0$, and $W=\\{(y,x)\\in Y\\times\\mathbf A^n:A(y)x=0\\}$. Then $\\dim W_y=n-\\operatorname{rank}A(y)$. For every integer $r$, the locus $\\{y:\\dim W_y\\ge r\\}$ is closed: it is all of $Y$ for $r\\le0$, empty for $r>n$, and otherwise is cut out by the minors of size $n-r+1$, with an absent family of minors imposing no conditions. No irreducibility or global dimension formula for $W$ is asserted.",
+        "deps": [
+          "def-fibre-dimension-at-point-classical",
+          "cor-dimension-affine-and-projective-space",
+          "thm-dimension-product-varieties"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne Example 9.10, pp.201–202",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "At a fixed y row elimination identifies the kernel with affine space of dimension n-rank. The rank bound is equivalent to vanishing minors; prove that equivalence using a largest invertible minor and elimination. Equations define W in affine charts of Y times A^n.",
+        "status": "draft"
+      }
+    ],
+    "status": "draft"
+  }
+]

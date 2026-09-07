@@ -1,0 +1,1023 @@
+[
+  {
+    "order": 288.105,
+    "id": "weak-laws-and-series-of-independent-random-variables",
+    "kind": "A",
+    "category": "probability",
+    "title": "Weak Laws and Series of Independent Random Variables",
+    "companion": "weak-laws-and-series-of-independent-random-variables-examples",
+    "requires": [
+      "modes-of-convergence-for-random-variables-examples"
+    ],
+    "items": [
+      {
+        "id": "def-identically-distributed-and-iid-random-variables",
+        "kind": "definition",
+        "title": "Identical distribution and IID families",
+        "deps": [
+          "def-independent-random-elements",
+          "def-law-or-distribution-of-a-random-element"
+        ],
+        "statement": "A family is identically distributed if every marginal law is the same; it is IID if it is also mutually independent.",
+        "strategy": "Define using established laws and independence, with no moment hypothesis.",
+        "sources": {
+          "references": [
+            {
+              "title": "Section 2.2.1, p. 58, IID paragraph",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-partial-sums-and-sample-means",
+        "kind": "definition",
+        "title": "Partial sums, row sums and sample means",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-finite-sum"
+        ],
+        "statement": "S_0=0, S_n=sum_{k=1}^n X_k, and sample mean S_n/n for n>=1. For a finite row of length r_n use S_n=sum_{k=1}^{r_n}X_{n,k}.",
+        "strategy": "Finite measurable arithmetic makes each quantity a random variable; no independence or moments are implicit.",
+        "sources": {
+          "references": [
+            {
+              "title": "Section 2.2.2, p. 59, opening row-sum notation",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-chebyshev-weak-law-for-uncorrelated-arrays",
+        "kind": "theorem",
+        "title": "Chebyshev weak law for uncorrelated arrays",
+        "deps": [
+          "def-partial-sums-and-sample-means",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "cor-chebyshev-inequality-for-random-variables",
+          "def-convergence-in-probability",
+          "def-convergence-in-lp-for-random-variables",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "statement": "For finite square-integrable pairwise uncorrelated rows and b_n>0, if sum_k Var(X_{n,k})/b_n^2 ->0, then (S_n-E S_n)/b_n ->0 in L2 and probability. No independence between rows is required.",
+        "strategy": "Expand the finite centered square using covariance bilinearity, cancel off-diagonal terms, then apply Chebyshev.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorems 2.2.1, 2.2.3 and 2.2.6, pp. 56\u201359",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cor-iid-finite-variance-weak-law",
+        "kind": "corollary",
+        "title": "IID finite-variance weak law",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-chebyshev-weak-law-for-uncorrelated-arrays",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "statement": "For IID square-integrable X_k with mean mu and variance sigma^2, E|S_n/n-mu|^2=sigma^2/n and S_n/n ->mu in probability.",
+        "strategy": "Independence factors mixed moments; apply row variance with b_n=n.",
+        "sources": {
+          "references": [
+            {
+              "title": "Section 2.2.1, p. 58",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Theorem 3.2, pp. 55\u201356",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-truncation-at-a-fixed-level",
+        "kind": "definition",
+        "title": "Zero truncation at a positive level",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "statement": "For A>0 set X^(A)=X 1_{|X|<=A}. This is measurable and bounded by A; every finite moment exists.",
+        "strategy": "Borel threshold events and measurable arithmetic establish the definition; boundedness on a probability space establishes integrability inline.",
+        "sources": {
+          "references": [
+            {
+              "title": "Section 2.2.3, p. 62",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-khinchin-weak-law-for-iid-integrable-variables",
+        "kind": "theorem",
+        "title": "Khinchin weak law for integrable IID variables",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-partial-sums-and-sample-means",
+          "def-truncation-at-a-fixed-level",
+          "cor-iid-finite-variance-weak-law",
+          "lem-measurable-functions-preserve-independence",
+          "thm-dominated-convergence",
+          "cor-markov-inequality-for-random-variables",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "statement": "If X_k are IID and E|X_1|<infinity, then S_n/n -> E X_1 in L1 and in probability.",
+        "strategy": "For fixed A, the centered truncated average has L1 norm at most its L2 norm, tending to zero. The residual centered average has L1 norm at most 2 E[|X_1|1_{|X_1|>A}]. Let n then A tend to infinity; Markov gives probability convergence.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 3.3, first proof, pp. 56\u201357",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            },
+            {
+              "title": "Theorem 2.2.14, pp. 64\u201365",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-almost-sure-convergence-of-a-random-series",
+        "kind": "definition",
+        "title": "Almost-sure convergence of a random series",
+        "deps": [
+          "def-partial-sums-and-sample-means",
+          "def-almost-sure-convergence-of-random-variables",
+          "thm-series-cauchy-criterion",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
+        ],
+        "statement": "The series sum_{n>=1} X_n converges almost surely when its real partial sums converge on a measurable event of probability one. Its convergence event is the countable Cauchy event and belongs to the tail sigma-algebra, regardless of independence; under independence its probability is zero or one.",
+        "strategy": "Spell out the countable Cauchy event using tolerances 1/r, and use the existing tail-event proof without minting a duplicate theorem. The finite limit extended by zero on the complement is measurable by measurable limits. Inline tail examples: limsup {X_n in B_n} is tail measurable; a finite change has vanishing effect on S_n/c_n if c_n>0 tends to infinity, whereas it can change the unnormalized limsup sign.",
+        "sources": {
+          "references": [
+            {
+              "title": "Section 2.5, Example 2.5.2 p. 81 and series convention p. 84",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Section 3.4 opening, p. 61",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-kolmogorov-maximal-inequality",
+        "kind": "theorem",
+        "title": "Kolmogorov maximal inequality",
+        "deps": [
+          "def-partial-sums-and-sample-means",
+          "def-independent-random-elements",
+          "def-moments-variance-and-covariance",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "statement": "For independent centered square-integrable X_1,...,X_n and lambda>0, P(max_{1<=k<=n}|S_k|>=lambda)<=Var(S_n)/lambda^2.",
+        "strategy": "Disjoint first-crossing events A_k belong to sigma(X_1,...,X_k). Factor E[1_{A_k}S_k(S_n-S_k)]=0 using grouping and integrability. Sum E[1_{A_k}S_n^2]>=lambda^2 P(A_k).",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.5.5, p. 84",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Lemma 3.7, p. 62",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-kolmogorov-convergence-criterion",
+        "kind": "theorem",
+        "title": "Kolmogorov convergence criterion",
+        "deps": [
+          "thm-kolmogorov-maximal-inequality",
+          "def-almost-sure-convergence-of-a-random-series",
+          "thm-series-cauchy-criterion",
+          "thm-continuity-from-below-for-measures",
+          "thm-continuity-from-above-for-measures",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-lp-convergence-implies-convergence-in-probability",
+          "thm-almost-sure-convergence-implies-convergence-in-probability",
+          "thm-limits-in-probability-are-unique-almost-surely"
+        ],
+        "statement": "For independent centered square-integrable X_n, sum Var(X_n)<infinity implies convergence of sum X_n almost surely and in L2 to the same finite random variable.",
+        "strategy": "Maximal inequality bounds the supremum of each tail by the variance tail. For w_m=sup_{i,j>=m}|S_i-S_j| use its monotonicity and rational tolerances to obtain one a.s. Cauchy event. L2 completeness supplies an L2 limit; uniqueness of probability limits identifies it.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.5.6, pp. 84\u201385",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Theorem 3.10, pp. 65\u201366; L2 strengthening uses published completeness",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cor-kolmogorov-two-series-sufficiency",
+        "kind": "corollary",
+        "title": "Kolmogorov two-series sufficiency",
+        "deps": [
+          "thm-kolmogorov-convergence-criterion",
+          "def-almost-sure-convergence-of-a-random-series",
+          "lem-measurable-functions-preserve-independence",
+          "lem-variance-and-covariance-identities-for-random-variables"
+        ],
+        "statement": "For independent square-integrable X_n, if sum E X_n converges in R and sum Var(X_n)<infinity, then sum X_n converges almost surely (also in L2).",
+        "strategy": "Apply the centered criterion and add the convergent deterministic series.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 3.11, p. 66",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-symmetric-real-random-variable",
+        "kind": "definition",
+        "title": "Symmetric real random variables",
+        "deps": [
+          "def-law-or-distribution-of-a-random-element"
+        ],
+        "statement": "A real random variable X is symmetric if X and -X have the same law. Symmetry does not imply existence of its expectation.",
+        "strategy": "Use equality of measures, so atoms cause no distribution-function boundary ambiguity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Appendix A, Definition 4.16, p. 9",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes4.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-symmetrization-for-independent-random-series",
+        "kind": "lemma",
+        "title": "Independent-copy symmetrization of random series",
+        "deps": [
+          "def-independent-random-elements",
+          "def-symmetric-real-random-variable",
+          "def-almost-sure-convergence-of-a-random-series",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-grouping-independent-sigma-algebras",
+          "lem-measurable-functions-preserve-independence",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "lem-variance-and-covariance-identities-for-random-variables"
+        ],
+        "statement": "On the product of a probability space with itself, X_n(omega) and X_n(omega-prime) form two independent copies of the whole independent sequence. Z_n=X_n-X_n-prime are independent and symmetric. A.s. convergence of sum X_n implies that of sum Z_n. If |X_n|<=A then |Z_n|<=2A, E Z_n=0 and Var(Z_n)=2 Var(X_n).",
+        "strategy": "The product rectangle formula gives the independent copies; grouping gives independence of coordinate pairs and exchange of the two coordinates gives symmetry. Intersect the two probability-one convergence events. No converse without centering is claimed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 3.12 necessity, p. 67",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            },
+            {
+              "title": "Appendix A, Example 4.17, p. 9",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes4.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-bounded-centered-convergent-series-have-summable-variances",
+        "kind": "lemma",
+        "title": "Bounded centered convergent series have summable variances",
+        "deps": [
+          "def-almost-sure-convergence-of-a-random-series",
+          "def-partial-sums-and-sample-means",
+          "def-independent-random-elements",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-continuity-from-below-for-measures",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "statement": "If independent centered X_n obey |X_n|<=C for one finite C and sum X_n converges a.s., then sum Var(X_n)<infinity.",
+        "strategy": "Choose l and delta>0 with P(sup_k|S_k|<=l)>=delta. Set F_n={max_{k<=n}|S_k|<=l}, F_0=Omega. The stopped integral identity gives delta Var(X_n)<=E[S_n^2;F_n]-E[S_{n-1}^2;F_{n-1}]+(l+C)^2 P(F_{n-1} minus F_n). Telescope: delta sum_{k<=n}Var(X_k)<=l^2+(l+C)^2. This uses no stopping-time theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lemma 3.13 and complete proof, pp. 67\u201368",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-three-series-necessity-for-truncated-means-and-variances",
+        "kind": "lemma",
+        "title": "Necessity of the truncated mean and variance conditions",
+        "deps": [
+          "lem-symmetrization-for-independent-random-series",
+          "lem-bounded-centered-convergent-series-have-summable-variances",
+          "thm-kolmogorov-convergence-criterion",
+          "def-truncation-at-a-fixed-level",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "cor-second-borel-cantelli-lemma-under-pairwise-independence",
+          "lem-measurable-functions-preserve-independence",
+          "lem-series-tail-invariance"
+        ],
+        "statement": "If independent X_n have sum X_n convergent a.s., then for every A>0, sum P(|X_n|>A)<infinity, sum Var(X_n^(A))<infinity and sum E X_n^(A) converges.",
+        "strategy": "Terms tend to zero; BC2 forces the probability series to converge. Truncated and original sums differ finitely a.s. Symmetrize the bounded truncations and apply the bounded-centered lemma, then the centered convergence criterion. Subtract the two convergent series to recover the deterministic means.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 3.12 necessity and Lemma 3.13, pp. 67\u201368",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-kolmogorov-three-series-theorem",
+        "kind": "theorem",
+        "title": "Kolmogorov three-series theorem",
+        "deps": [
+          "def-almost-sure-convergence-of-a-random-series",
+          "def-truncation-at-a-fixed-level",
+          "lem-three-series-necessity-for-truncated-means-and-variances",
+          "cor-kolmogorov-two-series-sufficiency",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "lem-measurable-functions-preserve-independence",
+          "lem-series-tail-invariance"
+        ],
+        "statement": "For independent real X_n and A>0, sum X_n converges a.s. iff sum P(|X_n|>A)<infinity, sum E X_n^(A) converges, and sum Var(X_n^(A))<infinity. The conditions hold for one A>0 iff they hold for every A>0.",
+        "strategy": "Sufficiency: two-series for bounded truncations plus BC1 and finite-change invariance. Necessity is the preceding direct symmetrization lemma for arbitrary A. Form all numerical series after fixed truncation, never subtract infinite expectations.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.5.8, p. 85",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Theorem 3.12, pp. 66\u201368",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-kronecker-summation-lemma",
+        "kind": "lemma",
+        "title": "Kronecker summation lemma",
+        "deps": [
+          "lem-abel-summation-by-parts",
+          "thm-series-cauchy-criterion"
+        ],
+        "statement": "If 0<b_n is nondecreasing with b_n ->infinity and sum x_n/b_n converges, then (sum_{k<=n}x_k)/b_n ->0.",
+        "strategy": "Apply Abel summation to convergent partial sums t_n of x_n/b_n. Put b_0=t_0=0. The weights (b_k-b_{k-1})/b_n are nonnegative and sum to one; split at a fixed index to show their average of t_{k-1} tends to lim t_n.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.5.9 and full proof, pp. 85\u201386",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-kolmogorov-strong-law-under-summable-normalized-variances",
+        "kind": "theorem",
+        "title": "Strong law under summable normalized variances",
+        "deps": [
+          "thm-kolmogorov-convergence-criterion",
+          "lem-kronecker-summation-lemma",
+          "lem-measurable-functions-preserve-independence",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "def-partial-sums-and-sample-means",
+          "thm-integral-test-for-series"
+        ],
+        "statement": "For independent square-integrable X_n and 0<b_n nondecreasing tending to infinity, sum Var(X_n)/b_n^2<infinity implies b_n^-1 sum_{k<=n}(X_k-E X_k)->0 a.s.",
+        "strategy": "Apply the centered convergence criterion to (X_n-E X_n)/b_n, then apply Kronecker pointwise on its probability-one event. State square integrability explicitly instead of mentioning only finite means. Inline rate example: for IID centered L2 variables, b_n=sqrt(n)(log n)^(1/2+epsilon) for n>=2 gives a summable variance series by the integral test, hence S_n/b_n ->0 a.s.; choose the first positive normalizer to preserve monotonicity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorems 2.5.6 and 2.5.9; proof of Theorem 2.5.11, pp. 84\u201387",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cor-independent-nonidentical-finite-variance-strong-law",
+        "kind": "corollary",
+        "title": "Strong law for independent nonidentical variables",
+        "deps": [
+          "thm-kolmogorov-strong-law-under-summable-normalized-variances"
+        ],
+        "statement": "For independent square-integrable X_n with sum Var(X_n)/n^2<infinity, (S_n-E S_n)/n ->0 a.s.",
+        "strategy": "Specialize the normalizer to n; no common law or common mean is needed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorems 2.5.6 and 2.5.9, pp. 84\u201386",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-one-sided-maximal-inequality-for-symmetric-independent-sums",
+        "kind": "lemma",
+        "title": "One-sided maximal inequality for symmetric independent sums",
+        "deps": [
+          "def-symmetric-real-random-variable",
+          "def-partial-sums-and-sample-means",
+          "thm-grouping-independent-sigma-algebras",
+          "lem-measurable-functions-preserve-independence",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "statement": "If independent summands are symmetric, then for every real a, P(max_{1<=k<=n} S_k>a)<=2 P(S_n>a). Consequently P(max_{k<=n}|S_k|>t)<=2 P(|S_n|>t) for t>0.",
+        "strategy": "On the first crossing of a at k, the unused tail is independent and symmetric, so has probability at least 1/2 to be nonnegative. Apply the result also to -S and sum for the two-sided bound. No moment hypotheses.",
+        "sources": {
+          "references": [
+            {
+              "title": "Section 2.2, Lemma 5.13 and proof, p. 8",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes5.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-independent-copy-symmetrization-tail-bounds",
+        "kind": "lemma",
+        "title": "Tail comparisons under independent-copy symmetrization",
+        "deps": [
+          "lem-symmetrization-for-independent-random-series",
+          "thm-continuity-from-below-for-measures"
+        ],
+        "statement": "For an independent copy X-prime of real X, P(|X-X-prime|>t)<=2P(|X|>t/2). If M>=0 satisfies P(|X|<=M)>=1/2, then P(|X-X-prime|>t)>=P(|X|>t+M)/2 for t>0; such an M always exists.",
+        "strategy": "Triangle inequality gives the upper bound. The independent event {|X|>t+M, |X-prime|<=M} gives the lower bound. Continuity from below on [-M,M] supplies M. This symmetric interval variant of the median estimate avoids adding median machinery.",
+        "sources": {
+          "references": [
+            {
+              "title": "Appendix A, Lemma 4.18 and proof, pp. 9\u201310; symmetric-interval variant",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes4.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-truncation-weak-law-for-independent-arrays",
+        "kind": "theorem",
+        "title": "Truncation weak law for independent arrays",
+        "deps": [
+          "def-truncation-at-a-fixed-level",
+          "thm-chebyshev-weak-law-for-uncorrelated-arrays",
+          "lem-measurable-functions-preserve-independence",
+          "def-convergence-in-probability",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "statement": "For independent finite rows X_{n,k}, b_n>0 tending to infinity, set Y_{n,k}=X_{n,k}1_{|X_{n,k}|<=b_n}. If sum_k P(|X_{n,k}|>b_n)->0 and b_n^-2 sum_k Var(Y_{n,k})->0, then (sum_k X_{n,k}-sum_k E Y_{n,k})/b_n ->0 in probability.",
+        "strategy": "Union bound controls the event on which any truncation differs; the uncorrelated-array law controls centered truncated sums. No dependence condition between rows.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.2.11, pp. 62\u201363; second-moment sufficient form",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Section 2.1, Theorem 4.8 and proof, p. 4; variance form",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes4.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-vanishing-tail-control-implies-small-truncated-second-moment",
+        "kind": "lemma",
+        "title": "Vanishing tail control bounds truncated second moments",
+        "deps": [
+          "def-truncation-at-a-fixed-level",
+          "thm-layer-cake-formula-for-l-p-powers"
+        ],
+        "statement": "For real X, n P(|X|>n)->0 implies x P(|X|>x)->0 as real x->infinity and E[X^2 1_{|X|<=n}]/n ->0. Also, E|X|^p<infinity for every 0<p<1.",
+        "strategy": "Use the integer part and monotonicity of tail probabilities. The layer-cake bound E[X^2 1_{|X|<=n}]<=2 integral_0^n t P(|X|>t)dt and a fixed-prefix/vanishing-tail split prove the limit. For 0<p<1, apply layer cake and bound the large-t integrand by a constant times t^(p-2).",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.2.12 proof with Lemma 2.2.13, pp. 63\u201364",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-largest-summand-bound-for-symmetric-independent-variables",
+        "kind": "lemma",
+        "title": "Largest-summand bound for independent symmetric variables",
+        "deps": [
+          "def-symmetric-real-random-variable",
+          "def-partial-sums-and-sample-means",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "statement": "For independent symmetric real Y_1,...,Y_n, t>0 and S_n=sum Y_k, P(|S_n|>=t)>=P(max_k|Y_k|>=t)/2; the same comparison holds with strict inequalities. For IID Y_k and p=P(|Y_1|>t), this gives P(|S_n|>t)>=(1-(1-p)^n)/2>=(1-exp(-np))/2.",
+        "strategy": "Partition by the least index j with largest absolute summand. Its selection event depends only on magnitudes and is invariant under flipping coordinate j. Independence and symmetry make the joint law invariant under that flip. For R=sum_{k!=j}Y_k, at least one of |R+Y_j| and |R-Y_j| is >=|Y_j|. Integrate on the selection event, then sum over j. Handle strict thresholds directly; do not copy the source sign error or its atom-sensitive CDF shorthand.",
+        "sources": {
+          "references": [
+            {
+              "title": "Roch Note 4, Appendix A, Lemma 4.19 and proof, p. 10",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes4.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-truncated-centering-criterion-for-an-iid-weak-law",
+        "kind": "theorem",
+        "title": "Exact tail criterion for a truncated-centered IID weak law",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-symmetrization-for-independent-random-series",
+          "lem-independent-copy-symmetrization-tail-bounds",
+          "lem-one-sided-maximal-inequality-for-symmetric-independent-sums",
+          "thm-truncation-weak-law-for-independent-arrays",
+          "lem-vanishing-tail-control-implies-small-truncated-second-moment",
+          "def-convergence-in-probability",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "lem-largest-summand-bound-for-symmetric-independent-variables"
+        ],
+        "statement": "For IID real X_n there exist real constants mu_n such that S_n/n-mu_n ->0 in probability iff n P(|X_1|>n)->0. When this holds mu_n=E[X_1 1_{|X_1|<=n}] works. No convergence or finiteness of the untruncated mean is asserted.",
+        "strategy": "Sufficiency follows from the truncated array law and second-moment bound. Necessity: copy the centered sum, so T_n/n=sum(X_k-X_k-prime)/n ->0. The largest-summand lemma gives P(|T_n|>epsilon n)>=(1-exp(-n P(|X_1-X_1-prime|>epsilon n)))/2, hence n times that tail tends to zero. The independent-copy lower tail comparison with fixed M and epsilon<1 then yields n P(|X_1|>n)->0. The one-sided maximal inequality supplies an alternate check using max|Z_k|<=2 max|T_k|. No CLT or characteristic functions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 4.4, pp. 2\u20135 and Appendix A, pp. 9\u201311",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes4.pdf"
+            },
+            {
+              "title": "Theorem 2.2.12 and necessity remark, pp. 63\u201364",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Lemma 5.13, p. 8",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes5.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-levy-maximal-inequality-for-independent-tail-sums",
+        "kind": "lemma",
+        "title": "Levy maximal bound from uniform tail bounds",
+        "deps": [
+          "def-partial-sums-and-sample-means",
+          "def-independent-random-elements",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "statement": "For independent X_1,...,X_n, l>0 and 0<=delta<1, if P(|sum_{j=i}^n X_j|>=l/2)<=delta for every i=1,...,n, then P(max_{k<=n}|S_k|>=l)<=delta/(1-delta).",
+        "strategy": "Partition by first crossing l. On a crossing with |S_n|<=l/2 the remaining tail has magnitude at least l/2; independence bounds that event by delta times the crossing probability. The complementary final-tail event has probability at most delta.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lemma 3.8 and proof, pp. 62\u201363",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-cauchy-in-probability-sequences-have-a-measurable-limit",
+        "kind": "lemma",
+        "title": "Cauchy sequences in probability have a measurable limit",
+        "deps": [
+          "def-convergence-in-probability",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "thm-series-cauchy-criterion",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-almost-sure-convergence-implies-convergence-in-probability",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "statement": "If real random variables Y_n on one probability space satisfy: for every epsilon,eta>0 there is N such that P(|Y_n-Y_m|>epsilon)<eta for all n,m>=N, then Y_n converges in probability to a finite measurable random variable Y.",
+        "strategy": "Choose strictly increasing least indices n_k so that all pairs beyond n_k have probability at most 2^-k of separation exceeding 2^-k. BC1 gives eventual summability of the selected successive differences, so the subsequence converges a.s. by completeness of R. Extend its finite limit by zero off its measurable convergence event. Triangle and union bounds, first taking k large and then n>=n_k, show convergence of the entire sequence in probability.",
+        "sources": {
+          "references": [
+            {
+              "title": "Varadhan, Chapter 3, Exercise 3.11, p. 65",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-independent-series-probability-and-almost-sure-convergence-agree",
+        "kind": "theorem",
+        "title": "Convergence in probability and almost surely agree for independent series",
+        "deps": [
+          "lem-levy-maximal-inequality-for-independent-tail-sums",
+          "def-almost-sure-convergence-of-a-random-series",
+          "def-convergence-in-probability",
+          "thm-continuity-from-below-for-measures",
+          "thm-continuity-from-above-for-measures",
+          "thm-series-cauchy-criterion",
+          "thm-almost-sure-convergence-implies-convergence-in-probability",
+          "thm-limits-in-probability-are-unique-almost-surely",
+          "lem-cauchy-in-probability-sequences-have-a-measurable-limit"
+        ],
+        "statement": "For partial sums of a series of independent real random variables, convergence in probability to a finite random variable is equivalent to almost-sure convergence; the limits agree a.s. Equivalently, the partial sums are Cauchy in probability.",
+        "strategy": "Probability convergence makes all sufficiently late increments uniformly small in probability. Apply the preceding maximal bound to finite tail blocks, pass to the infinite supremum, and use decreasing Cauchy oscillations. Identify limits by uniqueness. Distribution-only convergence is deferred to the characteristic-function page. The preceding completeness lemma makes the Cauchy-in-probability formulation equivalent to convergence in probability.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 3.9, implication (ii) to (iii), pp. 63\u201365",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.106,
+    "id": "weak-laws-and-series-of-independent-random-variables-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Weak Laws and Series of Independent Random Variables \u2014 Examples",
+    "companion": "weak-laws-and-series-of-independent-random-variables",
+    "requires": [
+      "weak-laws-and-series-of-independent-random-variables"
+    ],
+    "items": [
+      {
+        "id": "ex-weak-law-for-bernoulli-sample-means",
+        "kind": "example",
+        "title": "Bernoulli sample frequencies",
+        "deps": [
+          "cor-iid-finite-variance-weak-law",
+          "def-bernoulli-and-binomial-random-variables",
+          "lem-bernoulli-and-binomial-mean-and-variance",
+          "cor-countable-independent-copies-exist"
+        ],
+        "statement": "For IID Bernoulli(p), S_n/n ->p in probability with P(|S_n/n-p|>=epsilon)<=p(1-p)/(n epsilon^2), including p=0 and p=1.",
+        "strategy": "Use the published Bernoulli moments and Chebyshev; the established countable product supplies a common-space infinite sequence.",
+        "sources": {
+          "references": [
+            {
+              "title": "Section 3.2 opening calculation, pp. 54\u201355",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-weak-law-for-independent-nonidentical-variables",
+        "kind": "example",
+        "title": "A nonidentical Bernoulli weak law",
+        "deps": [
+          "thm-chebyshev-weak-law-for-uncorrelated-arrays",
+          "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "thm-countable-product-of-probability-spaces",
+          "lem-bernoulli-and-binomial-mean-and-variance",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "statement": "Independent Bernoulli variables with p_k=1/4 for odd k and 3/4 for even k satisfy S_n/n ->1/2 in probability; centered variance is 3/(16n).",
+        "strategy": "Compute the deterministic mean average and the sum of variances; apply the row law. Existence uses varying Bernoulli factors.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.2.6, p. 59, direct example",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-rademacher-series-convergence-threshold",
+        "kind": "example",
+        "title": "Rademacher-series threshold",
+        "deps": [
+          "thm-kolmogorov-three-series-theorem",
+          "cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event",
+          "cor-countable-independent-copies-exist",
+          "thm-p-series-real-exponents"
+        ],
+        "statement": "For independent fair signs epsilon_n and real alpha, sum epsilon_n n^-alpha converges a.s. exactly when alpha>1/2; if alpha<=1/2 it diverges a.s. Absolute convergence occurs exactly when alpha>1.",
+        "strategy": "For alpha>0 eventually truncation leaves the terms unchanged, with zero means and variances n^-2alpha. For alpha<=0 the terms fail to tend to zero. Three-series plus the existing zero-one result gives a.s. divergence.",
+        "sources": {
+          "references": [
+            {
+              "title": "Example 2.5.7, p. 85",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-a-random-series-that-converges-conditionally-almost-surely",
+        "kind": "example",
+        "title": "Almost-sure conditional convergence",
+        "deps": [
+          "thm-kolmogorov-three-series-theorem",
+          "cor-countable-independent-copies-exist",
+          "thm-p-series-real-exponents",
+          "thm-alternating-series-test"
+        ],
+        "statement": "The random harmonic series sum epsilon_n/n with independent fair signs converges almost surely but its absolute series diverges at every sample point.",
+        "strategy": "Apply three-series at A=1 and the p-series criterion separately to the squares and absolute values; no dependency on a generated example. Inline contrast: the deterministic harmonic series diverges, whereas its alternating version converges by the published alternating-series test.",
+        "sources": {
+          "references": [
+            {
+              "title": "Example 2.5.7, p. 85",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Examples 5.1 and 5.3, pp. 1\u20132",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes5.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-three-series-with-rare-large-jumps",
+        "kind": "example",
+        "title": "The three series impose separate conditions",
+        "deps": [
+          "thm-kolmogorov-three-series-theorem",
+          "cor-second-borel-cantelli-lemma-under-pairwise-independence",
+          "thm-p-series-real-exponents",
+          "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "thm-countable-product-of-probability-spaces"
+        ],
+        "statement": "At cutoff A=1, three independent-sequence constructions each violate only one condition: (i) X_n=2 with probability 1/n and zero otherwise (n>=2), so both truncated series vanish; (ii) X_n=1/n deterministically, so only the mean series diverges; (iii) X_n=epsilon_n/sqrt(n), so only the variance series diverges.",
+        "strategy": "Compute all three numerical series for each case, including the cutoff endpoint. BC2 or three-series gives failure of convergence. These are direct diagnostic instances of the exact theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 3.12, pp. 66\u201368, direct specializations",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            },
+            {
+              "title": "Example 2.5.7, p. 85, variance obstruction",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-weak-law-can-fail-without-tail-control",
+        "kind": "counterexample",
+        "title": "A macroscopic row term defeats averaging",
+        "deps": [
+          "thm-chebyshev-weak-law-for-uncorrelated-arrays",
+          "def-convergence-in-probability",
+          "cor-countable-independent-copies-exist"
+        ],
+        "statement": "For each row let X_{n,1}=n epsilon_n with epsilon_n a fair sign and all other n-1 entries zero. Every row is independent and centered, but S_n/n is a fair sign and does not tend to zero in probability.",
+        "strategy": "P(|S_n/n|>1/2)=1 and normalized row variance equals one. Explicitly this is an array example, not a counterexample to an IID integrable law.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.2.6, p. 59, direct counterexample when its variance condition fails",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-sum-of-variances-condition-is-sufficient-not-necessary-without-further-hypotheses",
+        "kind": "counterexample",
+        "title": "Summable untruncated variances are not necessary",
+        "deps": [
+          "cor-first-borel-cantelli-lemma-for-events",
+          "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "thm-countable-product-of-probability-spaces",
+          "thm-p-series-real-exponents",
+          "def-almost-sure-convergence-of-a-random-series"
+        ],
+        "statement": "For n>=2 let independent X_n take n and -n with probabilities 1/(2n^2) each and zero otherwise. Then E X_n=0 and Var(X_n)=1, but sum X_n converges absolutely a.s.",
+        "strategy": "Sum P(X_n!=0)=sum n^-2<infinity gives only finitely many nonzero terms a.s.; nevertheless the variance sum diverges. This repairs the design deterministic witness, which has zero variances and cannot prove the claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "Borel\u2013Cantelli Lemma 3.4, pp. 58\u201359; Theorem 3.12 fixed-truncation conditions, pp. 66\u201368, direct counterexample",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-iid-cauchy-averages-have-no-deterministic-weak-centering",
+        "kind": "counterexample",
+        "title": "Cauchy averages admit no deterministic weak centering",
+        "deps": [
+          "thm-truncated-centering-criterion-for-an-iid-weak-law",
+          "cor-countable-independent-copies-exist",
+          "def-law-or-distribution-of-a-random-element",
+          "thm-probability-law-and-distribution-function-correspondence"
+        ],
+        "statement": "For IID variables with density 1/(pi(1+x^2)), no real sequence mu_n makes S_n/n-mu_n ->0 in probability.",
+        "strategy": "The density integrates to one by arctangent; elementary integral bounds give n P(|X|>n)->2/pi. Apply the necessity theorem without characteristic functions or stable-law identities.",
+        "sources": {
+          "references": [
+            {
+              "title": "Example 2.2.15, p. 65",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-truncated-centering-weak-law-with-infinite-mean",
+        "kind": "example",
+        "title": "An infinite-mean law requiring diverging centering",
+        "deps": [
+          "thm-truncated-centering-criterion-for-an-iid-weak-law",
+          "cor-countable-independent-copies-exist",
+          "cor-layer-cake-formulas-for-random-variables",
+          "thm-probability-law-and-distribution-function-correspondence"
+        ],
+        "statement": "Let X>=e have survival P(X>x)=1/(x log x) for x>=e, including an atom of mass 1-1/e at e. Then E X=infinity, nP(X>n)->0 and the IID sample mean minus mu_n converges in probability to zero, where for n>=e, mu_n=e+log log n-1/log n. Inline family comparison: replacing log x by (log x)^alpha, alpha>=0, gives infinite second moment for every alpha, finite first moment exactly for alpha>1, and the deterministic-centering weak law exactly for alpha>0.",
+        "strategy": "Verify the distribution, integrate the survival, and use E[X1_{X<=n}]=integral_0^n P(X>t)dt-nP(X>n). Retain the atom correction omitted in the source displayed truncated integral; the asymptotic is mu_n~log log n.",
+        "sources": {
+          "references": [
+            {
+              "title": "Example 4.7, pp. 3\u20134, alpha=1 with endpoint correction",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes4.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  }
+]

@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 0807ce759705 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ bdb8b8112c7f by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 7031 |
-| now mechanically prevented | 256 |
+| defects caught before publication | 7704 |
+| now mechanically prevented | 261 |
 | escaped to publication | 1 |
 | still open | 27 |
 
@@ -569,6 +569,32 @@
 | false-boundary-disposition | 1 |  |  |  |  |
 | artifact-overwritten |  |  | 1 |  |  |
 | citation-corrupted |  |  |  | 1 |  |
+
+## frontier-33 — 673 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross | 8-adjudicate |
+|---|---|---|---|---|
+| contract-mismatch | 6 | 561 |  |  |
+| missing-hypothesis | 1 | 1 |  | 23 |
+| citation-missing |  |  |  | 22 |
+| frontmatter-schema | 2 | 8 | 1 |  |
+| citation-inaccurate | 7 |  |  |  |
+| ill-typed-claim |  |  |  | 6 |
+| invalid-inference |  |  |  | 6 |
+| undefined-notation |  |  |  | 5 |
+| false-or-overstrong-title |  |  |  | 4 |
+| reader-repair |  | 3 |  |  |
+| false-or-overstrong-statement |  |  |  | 3 |
+| unlicensed-inference | 2 |  |  |  |
+| false-boundary-disposition |  | 2 |  |  |
+| arithmetic-error |  |  |  | 2 |
+| citation-inflated |  |  |  | 2 |
+| ill-formed | 1 |  |  |  |
+| overstrong-title-or-statement | 1 |  |  |  |
+| ill-typed-construction | 1 |  |  |  |
+| false-claim | 1 |  |  |  |
+| missing-map |  |  |  | 1 |
+| unsupported-inference |  |  |  | 1 |
 
 ## pre-frontier-13 — 3 row(s)
 

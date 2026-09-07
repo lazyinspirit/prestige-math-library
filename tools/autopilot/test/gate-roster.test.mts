@@ -76,3 +76,27 @@ test('prosecheck and depsource run at every repo-wide gate point', async () => {
     }
   }
 });
+
+test('only Step 6c opens the routed published-repair audit window', async () => {
+  const mod = await import('../stages/mathlib.mts');
+  const ctx = { run: 'frontier-14', repo: REPO };
+  const argvFor = (id: string) => {
+    const st = mod.stages.find((s: any) => s.id === id);
+    return st.gates(ctx)
+      .map((g: any) => ({ id: g.id, argv: typeof g.argv === 'function' ? g.argv() : g.argv }));
+  };
+
+  const step6 = argvFor('6c-cross');
+  const routingIndex = step6.findIndex((g: any) => g.id === 'step6-routing-final');
+  const depcheckIndex = step6.findIndex((g: any) => g.id === 'depcheck');
+  assert.ok(routingIndex >= 0 && routingIndex < depcheckIndex,
+    'Step 6c must validate the exact repair handoff before opening the audit window');
+  assert.ok(step6[depcheckIndex].argv.includes('--pending-audit-ok'),
+    'Step 6c depcheck does not permit its routed repairs to await independent certification');
+
+  for (const id of ['5-author', '9-scope', '10-readiness-v2']) {
+    const depcheck = argvFor(id).find((g: any) => g.id === 'depcheck');
+    assert.ok(depcheck && !depcheck.argv.includes('--pending-audit-ok'),
+      `${id} incorrectly weakens the published-audit invariant`);
+  }
+});

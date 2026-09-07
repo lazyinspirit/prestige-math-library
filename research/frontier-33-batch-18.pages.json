@@ -1,0 +1,605 @@
+[
+  {
+    "order": 641,
+    "id": "arithmetization-and-the-sum-check-protocol",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Arithmetization and the Sum-Check Protocol",
+    "companion": "arithmetization-and-the-sum-check-protocol-examples",
+    "requires": [
+      "interactive-proof-systems-and-public-coins",
+      "algebraic-extensions-degree-and-finite-fields",
+      "the-cook-levin-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-arithmetization-of-a-boolean-formula",
+        "kind": "definition",
+        "title": "Arithmetization of Boolean formulas",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat",
+          "def-field",
+          "def-multivariate-polynomial-ring-by-iteration"
+        ],
+        "statement": "Over a field F, map constants and variables identically, NOT u to 1-u, AND to uv, OR to u+v-uv. Retain the expression tree; do not expand into monomials.",
+        "strategy": "Recursive construction on formula syntax.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§8.5.1, printed p.158 (PDF p.174)"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-arithmetization-agrees-on-boolean-inputs",
+        "kind": "lemma",
+        "title": "Arithmetization preserves Boolean values",
+        "deps": [
+          "def-arithmetization-of-a-boolean-formula"
+        ],
+        "statement": "For every Boolean assignment, the arithmetized formula has exactly the original 0/1 value in F.",
+        "strategy": "Check the three gate truth tables, then structural induction.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§8.5.1, p.158"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-formula-arithmetization-degree-and-evaluation-cost",
+        "kind": "lemma",
+        "title": "Formula degree and point-evaluation cost",
+        "deps": [
+          "def-arithmetization-of-a-boolean-formula"
+        ],
+        "statement": "For a formula with s syntax nodes and t_i occurrences of variable i, its polynomial has individual degree at most t_i and total degree at most sum t_i. Point evaluation takes O(s) field operations.",
+        "strategy": "Induct on the expression tree. Addition takes maximum degree, multiplication adds degree bounds; evaluate nodes once. Constants and the zero polynomial satisfy the upper bounds.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§8.5.1, p.158, 3CNF construction generalized by the same gate induction"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-multilinear-extension",
+        "kind": "definition",
+        "title": "Multilinear extension of a Boolean-cube table",
+        "deps": [
+          "def-field",
+          "def-multivariate-polynomial-ring-by-iteration"
+        ],
+        "statement": "An extension of f:{0,1}^n to F is a formal polynomial agreeing with f on the cube; multilinear means degree at most one in every variable. No uniqueness presumed in the definition.",
+        "strategy": "Define the extension relation; theorem below discharges existence and uniqueness.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "§3.5, Definition 3.4 and Fact 3.5, pp.28–29"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-existence-and-uniqueness-of-multilinear-extension",
+        "kind": "theorem",
+        "title": "Boolean-cube interpolation",
+        "deps": [
+          "def-multilinear-extension"
+        ],
+        "statement": "Every table f:{0,1}^n→F has unique multilinear extension sum_b f(b) product_i [b_i X_i+(1-b_i)(1-X_i)]. Includes n=0 and characteristic two.",
+        "strategy": "The product basis is a delta function on cube vertices. For uniqueness induct using h=(1-X_n)h|0+X_n h|1; zero restrictions imply h=0. Existing polynomial-reduction uniqueness is not reminted.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "§3.5, Fact 3.5 and Lemma 3.6, pp.29–30"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-multilinear-extension-streaming-evaluation",
+        "kind": "lemma",
+        "title": "Streaming evaluation from a full cube table",
+        "deps": [
+          "thm-existence-and-uniqueness-of-multilinear-extension"
+        ],
+        "statement": "For a field F and table f:{0,1}^n→F, given all N=2^n indexed values, evaluate the extension at r∈F^n in O(nN) field operations and O(n) field-element storage in one pass (n≥1).",
+        "strategy": "Accumulate each weighted basis term; store r and one accumulator. This is exponential in n, not an efficient oracle for a succinctly specified table.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "Lemma 3.7, pp.30–31"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-multilinear-extension-table-evaluation",
+        "kind": "lemma",
+        "title": "Linear-time evaluation from a full cube table",
+        "deps": [
+          "thm-existence-and-uniqueness-of-multilinear-extension"
+        ],
+        "statement": "For a field F, given the full table f:{0,1}^n→F and r∈F^n, evaluate in O(2^n) field operations and O(2^n+n) storage.",
+        "strategy": "Build basis weights by doubling a prefix table and multiplying by 1-r_i or r_i, then take the finite weighted sum. Geometric sum bounds the work.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "Lemma 3.8, pp.31–32"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-degree-under-arithmetized-quantifiers",
+        "kind": "lemma",
+        "title": "Degree under Boolean elimination operators",
+        "deps": [
+          "def-arithmetization-of-a-boolean-formula"
+        ],
+        "statement": "Write p_b=p|X_i=b. Summation p_0+p_1 preserves remaining individual degree upper bounds; universal product p_0 p_1 and Boolean existential p_0+p_1-p_0p_1 at most double them. Product and Boolean existential have the correct 0/1 semantics; summation is a counting operator, not Boolean OR in arbitrary characteristic.",
+        "strategy": "Degree arithmetic and the already specified AND/OR gates. Repeated products can yield exponential degrees; no claim of efficient quantified-formula verification here.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§8.5.1 p.158 and §8.5.3 opening degree-growth paragraph p.160"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "rem-polynomial-identity-bounds-for-sum-check",
+        "kind": "remark",
+        "title": "Existing polynomial identity bounds",
+        "deps": [
+          "thm-root-bound-for-polynomials-over-a-domain",
+          "thm-schwartz-zippel-lemma"
+        ],
+        "statement": "Recall the univariate root bound and multivariate total-degree bound d/|S| for nonempty finite S. Apply them to differences of formal polynomials; total and individual degrees are distinct.",
+        "strategy": "Reuse established item IDs, not the design placeholders thm-polynomial-root-bound or thm-schwartz-zippel-multivariate-form. Explain why sum-check only needs the univariate theorem.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "§3.4, Lemma 3.3, p.28"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-sum-check-instance-and-protocol",
+        "kind": "definition",
+        "title": "Sum-check with explicit degree bounds",
+        "deps": [
+          "def-finite-field-and-its-order",
+          "def-completeness-and-soundness",
+          "def-multivariate-polynomial-ring-by-iteration"
+        ],
+        "statement": "Input: fixed g in n≥1 variables over finite F, trusted individual bounds d_i, claimed H, and trusted point evaluation. Round i receives at most d_i+1 coefficients, checks h_i(0)+h_i(1)=current claim, then draws fresh uniform r_i and updates claim to h_i(r_i). Final comparison is with independently evaluated g(r). Reject malformed messages.",
+        "strategy": "State coefficient representation, message-before-challenge timing and all n rounds, including n=1. Honest h_i is the partial cube sum. H is an input, not an extra counted prover message.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "§4.1 protocol box pp.33–36"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-sum-check-perfect-completeness",
+        "kind": "lemma",
+        "title": "Perfect completeness of sum-check",
+        "deps": [
+          "def-sum-check-instance-and-protocol"
+        ],
+        "statement": "For true H, the honest partial-sum polynomials satisfy every degree, consistency and terminal check for every challenge sequence.",
+        "strategy": "Finite-sum invariant; substitution and summation cannot increase individual degree.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "Proposition 4.1, p.36"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-first-false-round-is-caught-by-root-bound",
+        "kind": "lemma",
+        "title": "A false sum-check claim rarely becomes true",
+        "deps": [
+          "def-sum-check-instance-and-protocol",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "statement": "Conditioned on any past transcript with a false current claim, either checks reject immediately or the next scalar claim is true with probability at most min(1,d_i/|F|).",
+        "strategy": "Consistency forces h_i to differ from the true partial-sum polynomial. Both degrees ≤d_i and the new challenge is independent of the past; apply root bound to their difference. Becoming true is the exceptional event, not necessarily immediate detection of every false polynomial.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "Proposition 4.1 non-inductive proof, pp.36–37"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-sum-check-soundness",
+        "kind": "theorem",
+        "title": "Adaptive-prover soundness of sum-check",
+        "deps": [
+          "lem-first-false-round-is-caught-by-root-bound"
+        ],
+        "statement": "For false H, every adaptive prover is accepted with probability at most min(1,sum_i d_i/|F|), hence at most nd/|F| for d_i≤d.",
+        "strategy": "If accepted, an initially false claim must first become true before the trusted terminal equality. Sum the conditional bad-event bounds over n rounds. Fix prover coins or condition on its messages; no independence of round failures is asserted.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "Proposition 4.1 non-inductive proof, pp.36–37"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-sum-check-verifier-is-polynomial-time-given-point-evaluation",
+        "kind": "lemma",
+        "title": "Sum-check verifier resources",
+        "deps": [
+          "def-sum-check-instance-and-protocol"
+        ],
+        "statement": "For n≥1 and D=sum_i(d_i+1), a well-formed transcript uses at most D prover field elements and an arbitrary streamed execution at most D+1; the verifier uses O(D) field operations plus at most one point evaluation, at most n verifier field elements, and at most n samples/rounds. A full execution has n samples/rounds and one terminal evaluation. With b-bit encodings and field-operation cost A(b), bit work is O(D(A(b)+b)) plus evaluation/sampling. Efficient indexed rejection sampling uses expected O(ceil(log2|F|)) bits per sample; for a bijective b-bit encoding with |F|=2^b it uses exactly nb bits.",
+        "strategy": "Stop after the first excess coefficient, use Horner evaluation at 0,1,r_i, and sum message lengths. Polynomial time is conditional on polynomial D, b, evaluator and sampler; the last challenge need not be sent. Uniform sampling has expected O(b) random bits by rejection, or exactly nb random bits total if |F|=2^b.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "§4.1 Discussion of costs, Table 4.1 and Remark 4.2, pp.37–39"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-sum-check-field-size-error-budget",
+        "kind": "corollary",
+        "title": "Choosing a sum-check error budget",
+        "deps": [
+          "thm-sum-check-soundness"
+        ],
+        "statement": "For ε>0, a supplied field with |F|≥(sum_i d_i)/ε yields soundness at most ε.",
+        "strategy": "Substitute in the soundness bound; field construction is not silently included.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "Proposition 4.1 and degree/field-size discussion pp.35–38"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "prop-arithmetized-formula-counting-sum",
+        "kind": "proposition",
+        "title": "Verifying formula counts over a supplied field",
+        "deps": [
+          "lem-arithmetization-agrees-on-boolean-inputs",
+          "lem-formula-arithmetization-degree-and-evaluation-cost",
+          "thm-sum-check-soundness",
+          "lem-sum-check-verifier-is-polynomial-time-given-point-evaluation"
+        ],
+        "statement": "For n≥1 and a formula with s nodes and variable occurrence counts t_i, its cube sum equals the satisfying-assignment count in F. Sum-check has perfect completeness, error at most min(1,sum_i t_i/|F|), and O(s+n) verifier field operations. For a supplied prime field F_p with p>2^n and 0≤K≤2^n, equality of the field sum and K is equivalent to equality of the integer count and K.",
+        "strategy": "Sum Boolean values, use the occurrence bounds and formula-tree evaluator; injectivity for counts below p gives exactness. Large extension-field cardinality alone does not prevent characteristic wraparound.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§8.5.1–8.5.2, Theorem 8.18 proof pp.158–160 (field supplied variant)"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-linearity-test",
+        "kind": "definition",
+        "title": "The BLR linearity test over F_2",
+        "deps": [
+          "def-field"
+        ],
+        "statement": "For fixed f:F_2^n→F_2, choose independent uniform x,y and accept iff f(x)+f(y)=f(x+y). Distance is fraction of disagreements; linear functions are a·x, with no affine constant.",
+        "strategy": "Define dot products mod 2 and the three-query test; random bits cost 2n. Include the Walsh-Hadamard truth-table encoding as terminology.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§18.4.1, Definition 18.22, pp.363–364"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-boolean-cube-fourier-coefficients",
+        "kind": "definition",
+        "title": "Characters and normalized Fourier coefficients",
+        "deps": [
+          "def-linearity-test"
+        ],
+        "statement": "For real h on F_2^n define χ_a(x)=(-1)^(a·x) and hhat(a)=2^-n sum_x h(x)χ_a(x).",
+        "strategy": "Finite sums only; expectation is the uniform arithmetic mean. Distinguish real signs from arithmetic mod 2.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§19.3.1, pp.388–389"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-boolean-cube-fourier-inversion-and-parseval",
+        "kind": "lemma",
+        "title": "Character orthogonality, inversion and Parseval",
+        "deps": [
+          "def-boolean-cube-fourier-coefficients"
+        ],
+        "statement": "Uniform averages satisfy E χ_aχ_b=1 if a=b and 0 otherwise; h=sum_a hhat(a)χ_a; E hk=sum_a hhat(a) khat(a). In particular E h²=sum_a hhat(a)². Distinct linear Boolean functions disagree on exactly half the cube.",
+        "strategy": "Pair x with x+e_j for a nonzero character. Sum characters over a to get the point delta identity, hence inversion; expand finite sums for Parseval and half-distance. No analytic Fourier theorem assumed.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§19.3.1 and Lemma 19.7 pp.388–389; §18.4.1 p.363"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-blr-acceptance-fourier-identity",
+        "kind": "lemma",
+        "title": "The cubic Fourier identity for BLR",
+        "deps": [
+          "lem-boolean-cube-fourier-inversion-and-parseval"
+        ],
+        "statement": "For h=(-1)^f and BLR acceptance probability α, 2α-1=E h(x)h(y)h(x+y)=sum_a hhat(a)^3.",
+        "strategy": "Expand three finite Fourier sums; character multiplication and independence kill all terms except equal indices.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "Theorem 19.9 proof pp.390–391"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-blr-linearity-test-soundness",
+        "kind": "theorem",
+        "title": "BLR acceptance implies agreement with a linear function",
+        "deps": [
+          "lem-blr-acceptance-fourier-identity",
+          "lem-boolean-cube-fourier-inversion-and-parseval"
+        ],
+        "statement": "If BLR accepts with probability at least ρ>1/2, some linear a·x agrees with f on at least a ρ fraction. Equivalently rejection ε<1/2 guarantees distance at most ε. Linear functions have perfect completeness. Repeating the test k times independently rejects any function at distance greater than δ (0<δ<1/2) with probability at least 1-(1-δ)^k.",
+        "strategy": "Parseval gives sum hhat²=1, so cubic sum≤max hhat; translate correlation at least 2ρ-1 into agreement at least ρ. Keep the signed maximum, not absolute value, to obtain linear rather than affine agreement. For repetition, multiply independent acceptance probabilities, each at most 1-δ.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "Theorems 18.23 and 19.9, pp.364 and 390–391"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-self-correction-of-a-noisy-linear-function",
+        "kind": "definition",
+        "title": "Two-query linear self-correction",
+        "deps": [
+          "def-linearity-test"
+        ],
+        "statement": "For requested x and fixed oracle f, choose uniform y and output f(y)+f(x+y) over F_2.",
+        "strategy": "This is pointwise correction with random queries, not an assertion that f(x) is already correct.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§18.4.1 Local decoding of Walsh-Hadamard code pp.364–365"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-linear-self-correction",
+        "kind": "theorem",
+        "title": "Pointwise correctness under less than quarter noise",
+        "deps": [
+          "def-self-correction-of-a-noisy-linear-function",
+          "lem-boolean-cube-fourier-inversion-and-parseval"
+        ],
+        "statement": "If f has distance δ<1/4 from a linear ℓ, ℓ is unique and at every fixed x the corrector outputs ℓ(x) with probability at least 1-2δ>1/2. Uses two queries and n random bits.",
+        "strategy": "Half-distance plus triangle inequality proves uniqueness. Each queried location is marginally uniform, so union bound ≤2δ; when both are uncorrupted, linearity proves the answer. Do not assume the two locations independent.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§18.4.1 Local decoding pp.364–365"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "fs-sum-check-computes-all-exponential-summands",
+        "kind": "false-statement",
+        "title": "False: the sum-check verifier enumerates the cube",
+        "deps": [
+          "def-sum-check-instance-and-protocol",
+          "lem-sum-check-verifier-is-polynomial-time-given-point-evaluation"
+        ],
+        "statement": "False assertion: a sum-check verifier must evaluate g separately at all 2^n Boolean points.",
+        "strategy": "Refute with the protocol resource theorem: one trusted point evaluation suffices; the prover may perform exponential work.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "§4.1 pp.33–38"
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 642,
+    "id": "arithmetization-and-the-sum-check-protocol-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Arithmetization and the Sum-Check Protocol: Examples and Counterexamples",
+    "requires": [
+      "arithmetization-and-the-sum-check-protocol"
+    ],
+    "items": [
+      {
+        "id": "ex-existence-and-uniqueness-of-multilinear-extension",
+        "kind": "example",
+        "title": "Interpolating a two-bit table over F_5",
+        "deps": [
+          "thm-existence-and-uniqueness-of-multilinear-extension"
+        ],
+        "statement": "For table f(0,0)=1,f(0,1)=2,f(1,0)=1,f(1,1)=4 over F_5, extension is 1+Y+2XY; evaluate at (2,3) to obtain 1 mod 5.",
+        "strategy": "Expand the four Lagrange terms and check vertices and the requested value.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "Figure 3.2 p.31"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-sum-check-three-variable-transcript",
+        "kind": "example",
+        "title": "A complete sum-check transcript over F_101",
+        "deps": [
+          "def-sum-check-instance-and-protocol",
+          "thm-sum-check-soundness"
+        ],
+        "statement": "For g=2X³+XZ+YZ over F_101, H=12 and challenges 2,3,6 yield honest messages 8X³+2X+1, 34+Y, 16+5Z. Final value is 46.",
+        "strategy": "Verify consistency 12,69,37 and final equality 46, all modulo 101; degree vector (3,1,1) gives error ≤5/101.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "§4.1 Example Execution pp.36–37"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-linear-self-correction",
+        "kind": "example",
+        "title": "Correcting one corrupted table entry",
+        "deps": [
+          "thm-linear-self-correction"
+        ],
+        "statement": "On F_2^3 take ℓ(x)=x_1 and corrupt only f(0). At each nonzero requested x, exactly y=0,x fail; success is 6/8. At x=0 the corrector always returns 0.",
+        "strategy": "Enumerate the two bad query positions; compare δ=1/8 and bound 1-2δ=3/4. This is a concrete specialization of the source construction.",
+        "sources": [
+          {
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "§18.4.1 Local decoding pp.364–365"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-sum-check-computes-all-exponential-summands",
+        "kind": "counterexample",
+        "title": "One point evaluation for an exponentially large cube",
+        "deps": [
+          "def-sum-check-instance-and-protocol",
+          "lem-sum-check-verifier-is-polynomial-time-given-point-evaluation",
+          "thm-sum-check-soundness"
+        ],
+        "statement": "Let g=product_i X_i over a supplied finite field. The cube has 2^n points and sum 1, while the sum-check verifier uses one n-multiplication evaluation and O(n) field work.",
+        "strategy": "Check the unique nonzero Boolean summand and use degree bounds d_i=1; error ≤n/|F|. The example is about the verifier, not prover runtime.",
+        "sources": [
+          {
+            "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf",
+            "locator": "§4.1 protocol and resource analysis pp.33–38"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

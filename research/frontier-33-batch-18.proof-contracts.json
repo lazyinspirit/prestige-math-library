@@ -1,0 +1,1959 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-arithmetization-agrees-on-boolean-inputs",
+    "lem-formula-arithmetization-degree-and-evaluation-cost",
+    "thm-existence-and-uniqueness-of-multilinear-extension",
+    "lem-multilinear-extension-streaming-evaluation",
+    "lem-multilinear-extension-table-evaluation",
+    "lem-degree-under-arithmetized-quantifiers",
+    "lem-sum-check-perfect-completeness",
+    "lem-first-false-round-is-caught-by-root-bound",
+    "thm-sum-check-soundness",
+    "lem-sum-check-verifier-is-polynomial-time-given-point-evaluation",
+    "cor-sum-check-field-size-error-budget",
+    "prop-arithmetized-formula-counting-sum",
+    "lem-boolean-cube-fourier-inversion-and-parseval",
+    "lem-blr-acceptance-fourier-identity",
+    "thm-blr-linearity-test-soundness",
+    "thm-linear-self-correction",
+    "fs-sum-check-computes-all-exponential-summands",
+    "ex-existence-and-uniqueness-of-multilinear-extension",
+    "ex-sum-check-three-variable-transcript",
+    "ex-linear-self-correction",
+    "cex-sum-check-computes-all-exponential-summands"
+  ],
+  "contracts": {
+    "lem-arithmetization-agrees-on-boolean-inputs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arithmetization-of-a-boolean-formula",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field and let $\\varphi$ be a Boolean formula on variables $x_1,\\ldots,x_n$, with $n\\geq0$. Use the syntax of [[def-boolean-formula-cnf-and-sat]], with binary AND and OR. Its **arithmetization** is the formal polynomial $P_\\varphi\\in F[X_1,\\ldots,X_n]$ defined recursively by\n$$P_\\bot=0,\\quad P_\\top=1,\\quad P_{x_i}=X_i,\\quad P_{\\neg\\psi}=1-P_\\psi,$$\n$$P_{\\psi\\land\\theta}=P_\\psi P_\\theta,\\qquad P_{\\psi\\lor\\theta}=P_\\psi+P_\\theta-P_\\psi P_\\theta.$$\nHere field and polynomial ring mean [[def-field]] and [[def-multivariate-polynomial-ring-by-iteration]]. Retain the original formula tree with these gate operations; a gate can use its two already computed child values more than once. Expanding into monomials is unnecessary. Boolean false and true are identified with the distinct field elements $0$ and $1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Constants and variable leaves have their prescribed Boolean values by the recursive construction. This includes a constant formula on the singleton cube $\\{0,1\\}^0$.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "For inputs $u=0,1$, $1-u$ gives respectively $1,0$. For input pairs $(0,0),(0,1),(1,0),(1,1)$, the product $uv$ gives $0,0,0,1$, and $u+v-uv$ gives $0,1,1,1$. These computations hold also in characteristic two.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "Assume each immediate subformula has the correct value. The gate calculations then give the correct value for its parent. This proves the parent implication, including when its value is zero or one.",
+          "inputs": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "3.1",
+          "claim": "Starting at the leaves and applying the parent implication up the finite formula tree proves agreement for the whole formula, including formulas that are identically false or true.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include false constants."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include true constants and one-variable formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 works in characteristic two."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 checks both Boolean inputs of each gate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No element is chosen from an auxiliary set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem arithmetization agrees on boolean inputs, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem arithmetization agrees on boolean inputs, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "lem-formula-arithmetization-degree-and-evaluation-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arithmetization-of-a-boolean-formula",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field and let $\\varphi$ be a Boolean formula on variables $x_1,\\ldots,x_n$, with $n\\geq0$. Use the syntax of [[def-boolean-formula-cnf-and-sat]], with binary AND and OR. Its **arithmetization** is the formal polynomial $P_\\varphi\\in F[X_1,\\ldots,X_n]$ defined recursively by\n$$P_\\bot=0,\\quad P_\\top=1,\\quad P_{x_i}=X_i,\\quad P_{\\neg\\psi}=1-P_\\psi,$$\n$$P_{\\psi\\land\\theta}=P_\\psi P_\\theta,\\qquad P_{\\psi\\lor\\theta}=P_\\psi+P_\\theta-P_\\psi P_\\theta.$$\nHere field and polynomial ring mean [[def-field]] and [[def-multivariate-polynomial-ring-by-iteration]]. Retain the original formula tree with these gate operations; a gate can use its two already computed child values more than once. Expanding into monomials is unnecessary. Boolean false and true are identified with the distinct field elements $0$ and $1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For a constant leaf all degree bounds are zero; for a variable leaf the individual bound is one in that variable and zero otherwise, and the total bound is one. Each leaf needs no arithmetic operation.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "Assume the bounds for the children. Subtracting a polynomial from $1$ does not raise any nonnegative degree bound. At a binary gate with child bounds $a,b$ (individual or total), the product has bound $a+b$ and the sum has bound $\\max(a,b)\\leq a+b$. Thus AND and OR obey the sum of the child occurrence bounds, even if coefficients cancel or a child is zero.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "Occurrence counts add over child trees, so the preceding leaf and parent argument proves all degree bounds by structural induction. A bottom-up evaluator visits each syntax node once and applies at most a fixed number of operations to its stored child values; the OR gate reuses those values. Hence its field-operation count is $O(s)$. This includes variable-free formulas and unused variables.",
+          "inputs": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes zero polynomials and cancellation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles a single leaf."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes unused variables with t_i=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-set choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem formula arithmetization degree and evaluation cost, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem formula arithmetization degree and evaluation cost, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "thm-existence-and-uniqueness-of-multilinear-extension": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "HIGH risk is existence and formal-polynomial uniqueness in dimension zero and characteristic two. The product basis is multilinear and Kronecker on Boolean vertices; a vanishing multilinear polynomial decomposes as A+X_nB and induction forces A=B=0. The n=0 empty product and singleton table are explicit, and no characteristic-dependent division is used."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multilinear-extension",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\geq0$, and let $f:\\{0,1\\}^n\\to F$ be a table. An **extension** of $f$ is a formal polynomial $p\\in F[X_1,\\ldots,X_n]$ satisfying $p(b)=f(b)$ for every Boolean vector $b$. It is **multilinear** if every monomial has exponent at most one in each variable; the zero polynomial is included. Fields and formal polynomial rings are as in [[def-field]] and [[def-multivariate-polynomial-ring-by-iteration]].\n\nFor $n=0$, the cube contains the empty tuple, and a polynomial in no variables is a field constant. This definition specifies an extension relation; existence and uniqueness are separate assertions.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Each factor in $\\lambda_b$ is $X_i$ when $b_i=1$ and $1-X_i$ when $b_i=0$. Hence $\\lambda_b$ is multilinear. At a Boolean vector $c$, every factor equals one if $c=b$; if $c\\ne b$, a differing coordinate supplies a zero factor. Thus $\\lambda_b(c)$ is one for $b=c$ and zero otherwise.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The displayed finite sum is multilinear and takes value $f(c)$ at $c$. When $n=0$ it is the single constant $f(())$. In particular the zero table extends to zero and the constant-one table extends to one.",
+          "inputs": [
+            "1.1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "1.2",
+          "claim": "For uniqueness consider a multilinear polynomial $h$ vanishing at all Boolean vertices. In dimension zero it is a constant with value zero, hence is zero. For positive dimension assume the assertion in dimension $n-1$ and write $h=A+X_nB$ with $A,B$ multilinear in the other variables. Its restrictions $h_0=A$ and $h_1=A+B$ vanish on that smaller cube, so both are zero by the induction hypothesis.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "3.1",
+          "claim": "The formal identity $h=(1-X_n)h_0+X_nh_1$ gives $h=0$. Induction proves the vanishing assertion in every dimension; applying it to the difference of two extensions proves uniqueness. All identities used only field addition and multiplication, with $0\\ne1$, so characteristic two is included.",
+          "inputs": [
+            "2.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1–1.2 handle the empty tuple."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 handle zero table and zero difference."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles constant-one table; step 1.2 includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes characteristic two and formal uniqueness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks all Boolean vertices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The sum ranges over all vertices; no choice is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm existence and uniqueness of multilinear extension, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm existence and uniqueness of multilinear extension, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "lem-multilinear-extension-streaming-evaluation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-existence-and-uniqueness-of-multilinear-extension",
+          "source_section": "Statement",
+          "quote": "For every field $F$, $n\\geq0$, and table $f:\\{0,1\\}^n\\to F$, there is exactly one multilinear extension. It is\n$$\\widetilde f(X)=\\sum_{b\\in\\{0,1\\}^n} f(b)\\lambda_b(X),\\qquad \\lambda_b(X)=\\prod_{i=1}^n\\bigl(b_iX_i+(1-b_i)(1-X_i)\\bigr).$$\nAn empty product is $1$. Equality and uniqueness are for formal polynomials, including in characteristic two.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For each record compute $w_b=\\prod_i(b_ir_i+(1-b_i)(1-r_i))$ and add $f(b)w_b$ to an accumulator initially zero. The interpolation formula says that after all records the accumulator equals $\\widetilde f(r)$. This uses no divisions, even if a weight or table entry is zero.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Computing each weight costs $O(n)$ operations; multiplying by its table value and accumulating costs $O(1)$. There are $N$ records. Store $r$, the accumulator, the current value and one running product, using $n+O(1)=O(n)$ field elements since $n\\geq1$. Endpoints $r_i=0,1$ and $n=1$ require the same procedure. The work bound is exponential in $n$ and gives no polynomial-time evaluator from a succinct table specification.",
+          "inputs": [
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires n≥1 and all 2^n indexed records."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes zero weights and entries."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In lem multilinear extension streaming evaluation, step 2.1 includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses no division; cancellation is allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 covers r_i=0 and r_i=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The algorithm processes every supplied record; there is no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem multilinear extension streaming evaluation, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem multilinear extension streaming evaluation, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "lem-multilinear-extension-table-evaluation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-existence-and-uniqueness-of-multilinear-extension",
+          "source_section": "Statement",
+          "quote": "For every field $F$, $n\\geq0$, and table $f:\\{0,1\\}^n\\to F$, there is exactly one multilinear extension. It is\n$$\\widetilde f(X)=\\sum_{b\\in\\{0,1\\}^n} f(b)\\lambda_b(X),\\qquad \\lambda_b(X)=\\prod_{i=1}^n\\bigl(b_iX_i+(1-b_i)(1-X_i)\\bigr).$$\nAn empty product is $1$. Equality and uniqueness are for formal polynomials, including in characteristic two.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Start with the one-entry array $W_0(())=1$. At stage $i$, replace each entry $W_{i-1}(b)$ by entries $W_i(b,0)=W_{i-1}(b)(1-r_i)$ and $W_i(b,1)=W_{i-1}(b)r_i$. After stage $i$ each entry is the product of the appropriate first $i$ factors, directly by this recurrence. This remains valid for zero or unit coordinates.",
+          "inputs": [
+            "given hypotheses and field/finite-sum arithmetic"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "After stage $n$, return $\\sum_b f(b)W_n(b)$. The weights equal the interpolation basis evaluated at $r$, so this is $\\widetilde f(r)$. Zero tables or zero weights need no separate treatment.",
+          "inputs": [
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The weight construction costs $O(\\sum_{i=1}^n2^i)=O(2^n)$ operations, and the final weighted sum costs $O(2^n)$. Holding the table, two successive weight arrays and $r$ uses $O(2^n+n)$ storage. For $n=0$, return the sole table entry; for $n=1$, the construction returns $(1-r_1)f(0)+r_1f(1)$. The input still has $2^n$ values.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 covers n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero table."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 computes n=1 explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 permit vanishing weights."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 permits zero and unit coordinates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The recurrence enumerates every prefix and requires no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem multilinear extension table evaluation, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem multilinear extension table evaluation, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "lem-degree-under-arithmetized-quantifiers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arithmetization-of-a-boolean-formula",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field and let $\\varphi$ be a Boolean formula on variables $x_1,\\ldots,x_n$, with $n\\geq0$. Use the syntax of [[def-boolean-formula-cnf-and-sat]], with binary AND and OR. Its **arithmetization** is the formal polynomial $P_\\varphi\\in F[X_1,\\ldots,X_n]$ defined recursively by\n$$P_\\bot=0,\\quad P_\\top=1,\\quad P_{x_i}=X_i,\\quad P_{\\neg\\psi}=1-P_\\psi,$$\n$$P_{\\psi\\land\\theta}=P_\\psi P_\\theta,\\qquad P_{\\psi\\lor\\theta}=P_\\psi+P_\\theta-P_\\psi P_\\theta.$$\nHere field and polynomial ring mean [[def-field]] and [[def-multivariate-polynomial-ring-by-iteration]]. Retain the original formula tree with these gate operations; a gate can use its two already computed child values more than once. Expanding into monomials is unnecessary. Boolean false and true are identified with the distinct field elements $0$ and $1$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Substituting $0$ or $1$ for $X_i$ does not increase any exponent in another variable. Addition preserves the maximum of the remaining bounds and multiplication adds them. Thus the sum has bound $d_j$ and both expressions containing a product have bound $2d_j$, including when a restriction vanishes or $d_j=0$.",
+          "inputs": [
+            "given hypotheses and field/finite-sum arithmetic"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "At any remaining Boolean assignment, put $u=p_0$ and $v=p_1$; by hypothesis $u,v\\in\\{0,1\\}$. The AND and OR gate formulas give $uv$ and $u+v-uv$ as the universal and existential truth values. The sum instead gives $2$ when both inputs are one: in characteristic two this is zero, and in other characteristics it is not one. When $n=1$, these are simply operations on two constants.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "Actual exponential growth is possible: start with $p=Y$ and eliminate $k$ other variables absent from $p$ using the product operator. Each elimination squares the current polynomial, leaving the formal polynomial $Y^{2^k}$. Hence degree growth is not merely a loose bound.",
+          "inputs": [
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Eliminating a variable requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers zero restrictions and d_j=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 includes n=1 and unit gate values."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 cover characteristic two and absent eliminated variables."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the Boolean truth values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No auxiliary nonempty-set choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem degree under arithmetized quantifiers, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem degree under arithmetized quantifiers, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "lem-sum-check-perfect-completeness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sum-check-instance-and-protocol",
+          "source_section": "Definition",
+          "quote": "A **sum-check instance** consists of a supplied finite field $F$, a fixed formal polynomial $g\\in F[X_1,\\ldots,X_n]$ with $n\\geq1$, trusted nonnegative integer individual degree bounds $d_i$ satisfying $\\deg_{X_i}g\\leq d_i$ for every $i$, a claimed value $H\\in F$, and trusted access to point evaluation of that same $g$ on $F^n$. Zero polynomials satisfy every nonnegative bound. The claim is\n$$H=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nThe field order is as in [[def-finite-field-and-its-order]], the formal ring as in [[def-multivariate-polynomial-ring-by-iteration]], and correctness uses the honest/universal-strategy quantifiers of [[def-completeness-and-soundness]].\n\nSet $C_0=H$. For each $i=1,\\ldots,n$, in this order:\n\n1. Receive a coefficient list $(a_0,\\ldots,a_m)$ specifying $h_i(T)=\\sum_{j=0}^m a_jT^j$, with $0\\leq m\\leq d_i$. Reject a missing, malformed, non-field, or overlength message. The single coefficient $0$ represents zero; trailing zero coefficients are allowed up to the length cap.\n2. Check $h_i(0)+h_i(1)=C_{i-1}$; reject on failure.\n3. Only after that message is fixed and checked, draw a fresh independent uniform $r_i\\in F$ and put $C_i=h_i(r_i)$. Send $r_i$ to the prover if $i<n$; sending it when $i=n$ is optional.\n\nFinally compute $g(r_1,\\ldots,r_n)$ through the trusted evaluator and accept exactly when it equals $C_n$ and every earlier check passed. In particular $n=1$ still has a coefficient message, a fresh challenge, and a terminal comparison. The evaluator's answer is not an unchecked prover assertion.\n\nFor a fixed challenge prefix, the honest round polynomial is\n$$q_i(T)=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_{i-1},T,b).$$\nThe cube of dimension zero has one empty tuple, so $q_n(T)=g(r_1,\\ldots,r_{n-1},T)$. Write\n$$S_i=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_i,b),\\qquad S_0=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nA scalar claim at stage $i$ is **true** when $C_i=S_i$. The honest prover sends $h_i=q_i$. The input $H$ is not counted as an additional prover message.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use $q_i,S_i,C_i$ from the protocol. Substitution and finite summation cannot raise the degree in the unspecialized variable, so $q_i$ has degree at most $d_i$ and can be sent in the permitted coefficient format, including when $q_i=0$ or $d_i=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Splitting the remaining cube by coordinate $i$ gives $q_i(0)+q_i(1)=S_{i-1}$, while substitution gives $q_i(r_i)=S_i$. Initially $C_0=H=S_0$. If $C_{i-1}=S_{i-1}$ and $h_i=q_i$, the consistency check passes and the update gives $C_i=S_i$. Hence this equality propagates through every round.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the end $S_n=g(r_1,\\ldots,r_n)$, since the remaining cube contains the empty tuple. Thus the terminal check passes. For $n=1$ the same argument uses $q_1=g$. It also covers all-zero or constant polynomials, challenges $0$ or $1$, and characteristic two without any division.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the empty remaining cube; n=0 protocols are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes q_i=0 and d_i=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes n=1 and constant polynomials."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes characteristic two."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 includes challenges 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This assertion holds for every challenge sequence; no existential choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem sum check perfect completeness, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem sum check perfect completeness, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "lem-first-false-round-is-caught-by-root-bound": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "HIGH risk is conditioning against an adaptive randomized prover. On each reached positive-probability transcript and fixed well-formed message, consistency against a false scalar claim makes h_i-q_i a nonzero polynomial of degree at most d_i; the fresh challenge is then uniform, so the root bound applies. Averaging over prover coins, d_i=0, i=n, n=1, and small fields are all handled."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sum-check-instance-and-protocol",
+          "source_section": "Definition",
+          "quote": "A **sum-check instance** consists of a supplied finite field $F$, a fixed formal polynomial $g\\in F[X_1,\\ldots,X_n]$ with $n\\geq1$, trusted nonnegative integer individual degree bounds $d_i$ satisfying $\\deg_{X_i}g\\leq d_i$ for every $i$, a claimed value $H\\in F$, and trusted access to point evaluation of that same $g$ on $F^n$. Zero polynomials satisfy every nonnegative bound. The claim is\n$$H=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nThe field order is as in [[def-finite-field-and-its-order]], the formal ring as in [[def-multivariate-polynomial-ring-by-iteration]], and correctness uses the honest/universal-strategy quantifiers of [[def-completeness-and-soundness]].\n\nSet $C_0=H$. For each $i=1,\\ldots,n$, in this order:\n\n1. Receive a coefficient list $(a_0,\\ldots,a_m)$ specifying $h_i(T)=\\sum_{j=0}^m a_jT^j$, with $0\\leq m\\leq d_i$. Reject a missing, malformed, non-field, or overlength message. The single coefficient $0$ represents zero; trailing zero coefficients are allowed up to the length cap.\n2. Check $h_i(0)+h_i(1)=C_{i-1}$; reject on failure.\n3. Only after that message is fixed and checked, draw a fresh independent uniform $r_i\\in F$ and put $C_i=h_i(r_i)$. Send $r_i$ to the prover if $i<n$; sending it when $i=n$ is optional.\n\nFinally compute $g(r_1,\\ldots,r_n)$ through the trusted evaluator and accept exactly when it equals $C_n$ and every earlier check passed. In particular $n=1$ still has a coefficient message, a fresh challenge, and a terminal comparison. The evaluator's answer is not an unchecked prover assertion.\n\nFor a fixed challenge prefix, the honest round polynomial is\n$$q_i(T)=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_{i-1},T,b).$$\nThe cube of dimension zero has one empty tuple, so $q_n(T)=g(r_1,\\ldots,r_{n-1},T)$. Write\n$$S_i=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_i,b),\\qquad S_0=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nA scalar claim at stage $i$ is **true** when $C_i=S_i$. The honest prover sends $h_i=q_i$. The input $H$ is not counted as an additional prover message.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-root-bound-for-polynomials-over-a-domain",
+          "source_section": "Statement",
+          "quote": "Let $D$ be an integral domain. A nonzero polynomial $f\\in D[x]$ of degree $n$ has at most $n$ distinct roots in $D$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $q_i(T)$ be the true partial sum at the fixed prefix. Its degree is at most $d_i$ because specialization and addition preserve degree upper bounds, and $q_i(0)+q_i(1)=S_{i-1}$. Any well-formed consistent $h_i$ instead has $h_i(0)+h_i(1)=C_{i-1}\\ne S_{i-1}$, so $h_i-q_i$ is a nonzero formal polynomial of degree at most $d_i$. Messages failing these checks reject immediately.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A field is an integral domain, since $ab=0$ with $a\\ne0$ implies $b=a^{-1}ab=0$. Apply the root bound to $h_i-q_i$: it has at most $d_i$ roots in $F$. The next scalar is true precisely if $h_i(r_i)=q_i(r_i)$, because $S_i=q_i(r_i)$. The fresh $r_i$ is uniform even after conditioning on the fixed message, so this probability is at most $\\min(1,d_i/|F|)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The bound holds for each allowed message, so averaging its conditional probability over any prover randomness preserves it. If $d_i=0$, the nonzero difference is constant and the probability is zero; if $d_i\\geq|F|$, the cap at one is merely trivial. The argument includes $i=n$, $n=1$, characteristic two, and challenges $0,1$. A false updated claim need not be detected in this round; only its becoming true is the exceptional event bounded here.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a reached positive-probability transcript and n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers d_i=0; step 1.1 proves the difference is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In lem first false round is caught by root bound, step 3.1 includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 covers large degrees and characteristic two."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the last round and challenges 0,1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 samples from a field, which contains distinct 0 and 1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem first false round is caught by root bound, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem first false round is caught by root bound, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "thm-sum-check-soundness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-first-false-round-is-caught-by-root-bound",
+          "source_section": "Statement",
+          "quote": "At any round $i\\in\\{1,\\ldots,n\\}$ of sum-check, condition on a reached past transcript of positive probability for which $C_{i-1}\\ne S_{i-1}$. If the next message fails its format or consistency check it is rejected. Otherwise, conditioned also on the prover's fixed message, the probability that the updated claim becomes true is at most $\\min(1,d_i/|F|)$. The same upper bound holds after averaging over a randomized choice of message. Fresh verifier randomness is drawn after the message.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Let $B_i$ be the event that the protocol reaches round $i$ with all earlier scalar claims false, passes that round’s message checks, and its updated scalar claim becomes true. For each positive-probability prefix with those earlier claims false, the one-round lemma bounds the conditional probability of this transition by $d_i/|F|$. Averaging over prefixes (and messages) gives $\\Pr(B_i)\\leq d_i/|F|$.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Acceptance forces the final scalar claim to equal the trusted value $g(r)$, hence to be true. The initial claim is false. There is therefore a first transition from false to true, so acceptance is contained in $\\bigcup_{i=1}^n B_i$. Pointwise, the indicator of this union is at most the sum of its event indicators; averaging gives acceptance probability at most $\\sum_i d_i/|F|$. This requires no independence between the $B_i$.",
+          "inputs": [
+            "1.1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Probabilities are also at most one, giving the stated cap, and $\\sum_i d_i\\leq nd$ gives the uniform-degree bound. The reasoning works for $n=1$ and for zero degree bounds (all-zero bounds force zero acceptance of a false claim). Randomized adaptive strategies were already covered by conditional averaging.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The protocol has n≥1; it has no zero-round instance.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha gate-batch-1-all",
+            "reason": "The protocol explicitly assumes n at least one, so its rounds and the union of first-false-round events are nonempty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles all-zero degree bounds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes n=1 and the probability cap one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 cover adaptive randomized strategies and vacuous large-degree bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the terminal transition; step 3.1 caps probability at one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite field is nonempty by hypothesis; the proof does not select a special challenge."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm sum check soundness, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm sum check soundness, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "lem-sum-check-verifier-is-polynomial-time-given-point-evaluation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sum-check-instance-and-protocol",
+          "source_section": "Definition",
+          "quote": "A **sum-check instance** consists of a supplied finite field $F$, a fixed formal polynomial $g\\in F[X_1,\\ldots,X_n]$ with $n\\geq1$, trusted nonnegative integer individual degree bounds $d_i$ satisfying $\\deg_{X_i}g\\leq d_i$ for every $i$, a claimed value $H\\in F$, and trusted access to point evaluation of that same $g$ on $F^n$. Zero polynomials satisfy every nonnegative bound. The claim is\n$$H=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nThe field order is as in [[def-finite-field-and-its-order]], the formal ring as in [[def-multivariate-polynomial-ring-by-iteration]], and correctness uses the honest/universal-strategy quantifiers of [[def-completeness-and-soundness]].\n\nSet $C_0=H$. For each $i=1,\\ldots,n$, in this order:\n\n1. Receive a coefficient list $(a_0,\\ldots,a_m)$ specifying $h_i(T)=\\sum_{j=0}^m a_jT^j$, with $0\\leq m\\leq d_i$. Reject a missing, malformed, non-field, or overlength message. The single coefficient $0$ represents zero; trailing zero coefficients are allowed up to the length cap.\n2. Check $h_i(0)+h_i(1)=C_{i-1}$; reject on failure.\n3. Only after that message is fixed and checked, draw a fresh independent uniform $r_i\\in F$ and put $C_i=h_i(r_i)$. Send $r_i$ to the prover if $i<n$; sending it when $i=n$ is optional.\n\nFinally compute $g(r_1,\\ldots,r_n)$ through the trusted evaluator and accept exactly when it equals $C_n$ and every earlier check passed. In particular $n=1$ still has a coefficient message, a fresh challenge, and a terminal comparison. The evaluator's answer is not an unchecked prover assertion.\n\nFor a fixed challenge prefix, the honest round polynomial is\n$$q_i(T)=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_{i-1},T,b).$$\nThe cube of dimension zero has one empty tuple, so $q_n(T)=g(r_1,\\ldots,r_{n-1},T)$. Write\n$$S_i=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_i,b),\\qquad S_0=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nA scalar claim at stage $i$ is **true** when $C_i=S_i$. The honest prover sends $h_i=q_i$. The input $H$ is not counted as an additional prover message.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+      "claim": "At round $i$ a well-formed coefficient list has at most $d_i+1$ entries. Under streaming reception, read at most $d_i+2$ field elements and reject immediately upon receiving the first excess coefficient; an explicit valid length prefix can make this detection cheaper. For a well-formed list, evaluate $h_i$ at $0,1,r_i$ by the recurrence $v\\leftarrow Tv+a_j$ from highest coefficient downwards. Each evaluation costs $O(d_i+1)$ field operations, also for a zero or constant message.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+      "claim": "Summing the per-round work for a well-formed transcript gives $O(D)$ operations and at most $D$ received field elements. If the first overlength message occurs in round $i$, the earlier rounds contribute at most $\\sum_{j<i}(d_j+1)$ elements and that round contributes at most $d_i+2$, for a total at most $D+1$; other malformed messages stop no later. The protocol uses one fresh sample per completed round and sends at most one field element per round; the last need not be sent. It makes its only call to $g$ at the terminal comparison. Encoding checks and reading cost $O(Db)$, and arithmetic costs $O(DA(b))$; adding evaluation and sampling costs gives the stated bit bound. This includes $n=1$ and every zero bound $d_i=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For indexed sampling put $c=\\lceil\\log_2 q\\rceil$. Draw $c$ fair bits as an integer $J$ and retry if $J\\geq q$. The acceptance probability is $q/2^c>1/2$ (or one if $q$ is a power of two), and conditional on acceptance every valid index has probability $1/q$. The expected number of trials is $\\sum_{k\\geq0}(1-q/2^c)^k=2^c/q<2$. Thus expected random-bit use is less than $2c$ per sample; for $q=2^b$ every trial succeeds and exactly $nb$ bits suffice for all rounds. Efficient index conversion is part of the sampling assumption, not a consequence of arbitrary encodings.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There are n≥1 rounds, and a field has at least two elements.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha gate-batch-1-all",
+            "reason": "The sum-check instance has n at least one, hence the verifier executes at least one round over a nonempty field."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 cover constant/zero messages and zero degree bounds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes n=1 and one terminal evaluation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 distinguishes indexed sampling from arbitrary representations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 covers powers of two where rejection probability is zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 samples from q≥2 valid indices with positive acceptance probability."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem sum check verifier is polynomial time given point evaluation, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem sum check verifier is polynomial time given point evaluation, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "cor-sum-check-field-size-error-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-sum-check-soundness",
+          "source_section": "Statement",
+          "quote": "Fix a sum-check instance over a finite field $F$, with $n\\geq1$, trusted individual bounds $d_1,\\ldots,d_n$, trusted evaluation, and false initial claim $H\\ne\\sum_b g(b)$. For every adaptive prover strategy the acceptance probability is at most\n$$\\min\\left(1,\\frac{\\sum_{i=1}^n d_i}{|F|}\\right).$$\nIn particular it is at most $nd/|F|$ if all $d_i\\leq d$. A randomized prover is allowed; its coins are independent of future verifier challenges.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The soundness theorem bounds the false-claim acceptance probability by $\\min(1,\\sum_i d_i/|F|)$.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Since $|F|>0$ and $\\varepsilon>0$, the size hypothesis implies $\\sum_i d_i/|F|\\leq\\varepsilon$. Combining gives the result, including $\\sum_i d_i=0$ (zero error) and $\\varepsilon\\geq1$ (a possibly trivial guarantee). Equality in the field-size inequality is allowed.",
+          "inputs": [
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Sum-check requires n≥1; no empty protocol is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes zero total degree."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes epsilon=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a trivial error budget at least one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes equality in the size bound; epsilon=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The field is supplied, not chosen or constructed in this corollary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For cor sum check field size error budget, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For cor sum check field size error budget, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "prop-arithmetized-formula-counting-sum": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "CRITICAL risk is the integer-to-field iff and verifier-cost claim. Boolean agreement makes the sum M times one, occurrence counts give valid individual degrees with total at most s, and the tree evaluator plus message work is O(s+n). In a supplied prime field p>2^n, equality of images forces p to divide K-M with absolute value below p; extension-field size without large characteristic is correctly excluded."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-arithmetization-agrees-on-boolean-inputs",
+          "source_section": "Statement",
+          "quote": "For every field $F$, Boolean formula $\\varphi$ on $n\\geq0$ variables and assignment $a\\in\\{0,1\\}^n$, $P_\\varphi(a)$ equals the Boolean value of $\\varphi(a)$, embedded as $0$ or $1$ in $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-formula-arithmetization-degree-and-evaluation-cost",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi$ be a formula with $s\\geq1$ syntax nodes on $n\\geq0$ variables, and let $t_i$ count the leaves labelled $x_i$. Then $P_\\varphi$ has individual degree at most $t_i$ in $X_i$ and total degree at most $\\sum_i t_i$. The bounds include the zero polynomial (which satisfies every nonnegative degree upper bound). At any supplied point, $P_\\varphi$ can be evaluated with $O(s)$ field operations.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sum-check-soundness",
+          "source_section": "Statement",
+          "quote": "Fix a sum-check instance over a finite field $F$, with $n\\geq1$, trusted individual bounds $d_1,\\ldots,d_n$, trusted evaluation, and false initial claim $H\\ne\\sum_b g(b)$. For every adaptive prover strategy the acceptance probability is at most\n$$\\min\\left(1,\\frac{\\sum_{i=1}^n d_i}{|F|}\\right).$$\nIn particular it is at most $nd/|F|$ if all $d_i\\leq d$. A randomized prover is allowed; its coins are independent of future verifier challenges.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-sum-check-verifier-is-polynomial-time-given-point-evaluation",
+          "source_section": "Statement",
+          "quote": "In sum-check with $n\\geq1$, put $D=\\sum_{i=1}^n(d_i+1)$. An execution uses at most $D$ prover field elements, at most $n$ verifier field elements, $n$ independent uniform field samples on a full execution, and $n$ rounds. The verifier uses $O(D)$ field operations plus at most one trusted point evaluation; a full execution reaching the terminal check uses exactly one such evaluation. Early rejection may shorten these costs. Coefficient lists may be zero-padded to attain the $D$ bound.\n\nWith supplied $b$-bit field representations, efficient encoding checks and field operations of bit cost at most $A(b)$, the bit work is $O(D(A(b)+b))$ plus trusted evaluation and sampling costs. Polynomial time is conditional on polynomial bounds for these quantities and $D$. With an efficient bijective indexing of field elements by $\\{0,\\ldots,q-1\\}$, $q=|F|$, rejection sampling uses expected $O(\\lceil\\log_2 q\\rceil)$ random bits per sample. If $q=2^b$ with such a $b$-bit encoding, a full execution uses exactly $nb$ random bits.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Each satisfying Boolean input contributes $1_F$ and each other input contributes $0_F$ by Boolean agreement. Adding the $2^n$ values gives $M1_F$, including $M=0$ and $M=2^n$.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "The formula degree lemma supplies the individual bounds $t_i$ and an $O(s)$ point evaluator. Since $\\sum_i t_i\\leq s$, we have $D=n+\\sum_i t_i\\leq n+s$; the verifier resource lemma therefore gives $O(s+n)$ field operations including that evaluator.",
+          "inputs": [
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "The soundness theorem gives the stated false-claim error bound with $d_i=t_i$. For a true claim the honest partial sums have these degree bounds, their values at $0,1$ sum to the preceding true value, and their value at each challenge is the next true value. Starting from $M1_F$, these identities propagate to the terminal value, so every honest execution accepts.",
+          "inputs": [
+            "F3",
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "3.1",
+          "claim": "If $K=M$, their field images are equal, proving the reverse implication. Conversely, equality of the images in $\\mathbb F_p$ implies $p$ divides $K-M$. As $|K-M|\\leq2^n<p$, the only possible multiple is zero, so $K=M$. This includes both allowed endpoints for each count. In a field of characteristic $p$ the integer image depends on reduction modulo $p$, regardless of the field cardinality; for example a constant-one formula on one variable has count two and field sum zero in characteristic two.",
+          "inputs": [
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sum-check application assumes n≥1; a formula always has at least one syntax node.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha gate-batch-1-all",
+            "reason": "The application assumes n at least one, making the Boolean cube nonempty, and a formula has at least one syntax node."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 include no satisfying assignments and unused variables."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 include one variable; constant formulas obey the same bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 explains characteristic wraparound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks K,M=0 or 2^n with strict p>2^n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite field is supplied, not constructed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves field equality implies K=M and proves K=M implies field equality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves field equality implies K=M and proves K=M implies field equality."
+        }
+      ]
+    },
+    "lem-boolean-cube-fourier-inversion-and-parseval": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-boolean-cube-fourier-coefficients",
+          "source_section": "Definition",
+          "quote": "Use the cube and dot product of [[def-linearity-test]]. For $a,x\\in\\mathbb F_2^n$, $n\\geq0$, the real-valued **character** is $\\chi_a(x)=(-1)^{a\\cdot x}$. For $h:\\mathbb F_2^n\\to\\mathbb R$, define\n$$\\widehat h(a)=\\mathbb E_x h(x)\\chi_a(x)=2^{-n}\\sum_{x\\in\\mathbb F_2^n}h(x)\\chi_a(x).$$\nThe expectation symbol is just the uniform arithmetic mean. Products, sums of coefficients, and these averages are in $\\mathbb R$; only the dot product and vector addition are modulo two. In particular $\\chi_0=1$ and $\\widehat h(0)$ is the mean of $h$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "From the definitions, $\\chi_a\\chi_b=\\chi_{a+b}$ and $\\chi_a(x+y)=\\chi_a(x)\\chi_a(y)$. If $a=b$, their product is one everywhere. If $a\\ne b$, some coordinate $j$ of $a+b$ equals one. Pair $x$ with $x+e_j$: the pairing is a fixed-point-free involution and reverses the sign of $\\chi_{a+b}$. Its sum is zero. This proves orthogonality.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For fixed $x,y$, sum $\\chi_a(x)\\chi_a(y)=\\chi_a(x+y)$ over $a$. If $x=y$, this sum is $2^n$. Otherwise pair $a$ with $a+e_j$ at a nonzero coordinate of $x+y$ to get zero. Thus $\\sum_a\\chi_a(x)\\chi_a(y)=2^n\\mathbf1_{x=y}$. Substituting the coefficient definition gives $\\sum_a\\widehat h(a)\\chi_a(x)=2^{-n}\\sum_y h(y)\\sum_a\\chi_a(y)\\chi_a(x)=h(x)$.",
+          "inputs": [
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Expand both $h$ and $k$ by the preceding identity and average their product. All sums are finite, so rearrangement gives $\\mathbb E hk=\\sum_{a,b}\\widehat h(a)\\widehat k(b)\\mathbb E\\chi_a\\chi_b=\\sum_a\\widehat h(a)\\widehat k(a)$. Taking $k=h$ proves Parseval, also when either function is zero.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "For $a\\ne b$, the character $\\chi_{a+b}$ is one where $\\ell_a=\\ell_b$ and minus one where they differ. Its zero mean therefore forces equal counts of agreement and disagreement. For $n=0$, there are no distinct indices; the sole character is one and every displayed Fourier identity is an equality of one-term sums. For $n=1$, the pairing interchanges the two cube points.",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 includes n=0 and the singleton cube."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero functions; step 1.1 includes the zero character index."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 covers n=1 and the constant-one character."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 treats the absence of distinct indices at n=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 select a coordinate only after proving the vector is nonzero."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem boolean cube fourier inversion and parseval, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem boolean cube fourier inversion and parseval, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "lem-blr-acceptance-fourier-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-boolean-cube-fourier-inversion-and-parseval",
+          "source_section": "Statement",
+          "quote": "For $n\\geq0$, real functions $h,k$ on $\\mathbb F_2^n$ and the normalized characters and coefficients,\n$$\\mathbb E_x\\chi_a(x)\\chi_b(x)=\\begin{cases}1&a=b,\\\\0&a\\ne b,\\end{cases}\\qquad h(x)=\\sum_a\\widehat h(a)\\chi_a(x),$$\n$$\\mathbb E_x h(x)k(x)=\\sum_a\\widehat h(a)\\widehat k(a),\\qquad \\mathbb E_xh(x)^2=\\sum_a\\widehat h(a)^2.$$\nAny two distinct linear Boolean functions $\\ell_a,\\ell_b$ disagree on exactly half the cube.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The product $h(x)h(y)h(x+y)$ is one exactly when $f(x)+f(y)+f(x+y)=0$ modulo two, and minus one otherwise. Thus its expectation is $\\alpha-(1-\\alpha)=2\\alpha-1$, including $\\alpha=0,1$.",
+          "inputs": [
+            "given hypotheses and field/finite-sum arithmetic"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "Apply Fourier inversion to each of the three factors. The expectation of the resulting finite sum is $\\sum_{a,b,c}\\widehat h(a)\\widehat h(b)\\widehat h(c)\\mathbb E_{x,y}\\chi_a(x)\\chi_b(y)\\chi_c(x+y)$.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "Using $\\chi_c(x+y)=\\chi_c(x)\\chi_c(y)$ and independence of $x,y$, each expectation factors as $(\\mathbb E_x\\chi_a(x)\\chi_c(x))(\\mathbb E_y\\chi_b(y)\\chi_c(y))$. Orthogonality makes this one exactly when $a=b=c$ and zero otherwise. The sum is therefore $\\sum_a\\widehat h(a)^3$, as asserted. This is also valid for $n=0$, where every sum has one term, and for constant $f$, where $h$ is the constant sign $1$ or $-1$.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In lem blr acceptance fourier identity, step 2.1 checks n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes f=0 and step 1.1 includes alpha=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes constant f=1 and step 1.1 includes alpha=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles constant functions and singleton cubes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats both acceptance endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both points are uniformly sampled from a cube with 2^n≥1 points."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem blr acceptance fourier identity, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem blr acceptance fourier identity, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "thm-blr-linearity-test-soundness": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "HIGH risk is the signed Fourier maximum and equivalence of acceptance and distance formulations. Parseval gives sum of squared coefficients one, so the cubic sum is bounded by the signed maximum coefficient; the BLR identity then yields agreement at least the actual acceptance probability. Perfect completeness, n=0, rho=1, epsilon=0, and independent k-fold repetition including k=0 are explicit."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-blr-acceptance-fourier-identity",
+          "source_section": "Statement",
+          "quote": "For a fixed $f:\\mathbb F_2^n\\to\\mathbb F_2$, $n\\geq0$, put $h(x)=(-1)^{f(x)}$. If the BLR acceptance probability is $\\alpha$, then\n$$2\\alpha-1=\\mathbb E_{x,y}h(x)h(y)h(x+y)=\\sum_{a\\in\\mathbb F_2^n}\\widehat h(a)^3,$$\nwhere $x,y$ are independent uniform points and the Fourier coefficients are real and normalized.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-boolean-cube-fourier-inversion-and-parseval",
+          "source_section": "Statement",
+          "quote": "For $n\\geq0$, real functions $h,k$ on $\\mathbb F_2^n$ and the normalized characters and coefficients,\n$$\\mathbb E_x\\chi_a(x)\\chi_b(x)=\\begin{cases}1&a=b,\\\\0&a\\ne b,\\end{cases}\\qquad h(x)=\\sum_a\\widehat h(a)\\chi_a(x),$$\n$$\\mathbb E_x h(x)k(x)=\\sum_a\\widehat h(a)\\widehat k(a),\\qquad \\mathbb E_xh(x)^2=\\sum_a\\widehat h(a)^2.$$\nAny two distinct linear Boolean functions $\\ell_a,\\ell_b$ disagree on exactly half the cube.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Put $h=(-1)^f$ and $M=\\max_a\\widehat h(a)$. The finite nonempty index set has $2^n$ elements, so a maximizing index exists. Parseval and $h^2=1$ give $\\sum_a\\widehat h(a)^2=1$. Hence $\\sum_a\\widehat h(a)^3\\leq M\\sum_a\\widehat h(a)^2=M$, since each coefficient is at most $M$ and every square is nonnegative. This is a signed maximum, not a maximum absolute value.",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "If $\\alpha$ is the actual acceptance probability, the cubic identity gives $M\\geq2\\alpha-1\\geq2\\rho-1$. At a maximizing index $a$, $\\widehat h(a)=\\mathbb E(-1)^{f(x)+a\\cdot x}=2\\Pr[f(x)=a\\cdot x]-1$. Therefore agreement is at least $\\rho$. Substituting $\\rho=1-\\varepsilon$ proves the rejection formulation; conversely setting $\\varepsilon=1-\\rho$ in that formulation gives the agreement formulation. These are equivalent parametrizations of a guarantee, not a claim that distance determines acceptance exactly.",
+          "inputs": [
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "For $f=\\ell_a$, distributivity modulo two gives $\\ell_a(x)+\\ell_a(y)=\\ell_a(x+y)$ for every pair, so completeness is perfect. This includes $a=0$ and the sole linear function in dimension zero. At $\\rho=1$ or $\\varepsilon=0$, the guarantee in the previous step likewise gives exact agreement.",
+          "inputs": [
+            "2.1"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "If $f$ is farther than $\\delta$ from every linear function, its acceptance probability cannot exceed $1-\\delta$: otherwise it is greater than $1/2$, and step 2.1 applied with $\\rho=\\alpha$ would give distance at most $1-\\alpha<\\delta$. Independent trials of a fixed function have all-accept probability $\\alpha^k\\leq(1-\\delta)^k$. Taking complements proves the repetition bound. For $k=0$ the always-accept empty repetition has rejection probability zero, equal to the bound; for $k=1$ this is the single-test bound.",
+          "inputs": [
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 includes n=0; step 4.1 includes k=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero linear function and epsilon=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes k=1 and step 3.1 rho=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a signed maximum to recover a linear function, and step 3.1 covers the singleton cube."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 respect rho>1/2 and 0<delta<1/2 and include rho=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 establishes a finite nonempty coefficient set before taking its maximum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly proves both parameter translations for the equivalent formulations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly proves both parameter translations for the equivalent formulations."
+        }
+      ]
+    },
+    "thm-linear-self-correction": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "HIGH risk is uniqueness and two-query success without assuming query independence. Triangle counting and exact half-distance of distinct linear functions prove uniqueness below 1/4. Each translated query is marginally uniform, so a union bound gives failure at most 2delta; linearity gives the requested value. The x=0 coincident-query case, n=0, zero noise, and excluded quarter endpoint are checked."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-correction-of-a-noisy-linear-function",
+          "source_section": "Definition",
+          "quote": "For fixed oracle $f:\\mathbb F_2^n\\to\\mathbb F_2$, $n\\geq0$, and a requested point $x$, the **two-query self-corrector** chooses uniform $y\\in\\mathbb F_2^n$ and returns\n$$\\operatorname{Corr}_f(x;y)=f(y)+f(x+y)\\quad\\text{in }\\mathbb F_2.$$\nIt uses $n$ random bits and two oracle calls, possibly at the same location. Linearity and distance have the conventions of [[def-linearity-test]]. Correctness will require proximity of the fixed oracle to a linear function. This procedure does not assume that the original value $f(x)$ is correct.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-boolean-cube-fourier-inversion-and-parseval",
+          "source_section": "Statement",
+          "quote": "For $n\\geq0$, real functions $h,k$ on $\\mathbb F_2^n$ and the normalized characters and coefficients,\n$$\\mathbb E_x\\chi_a(x)\\chi_b(x)=\\begin{cases}1&a=b,\\\\0&a\\ne b,\\end{cases}\\qquad h(x)=\\sum_a\\widehat h(a)\\chi_a(x),$$\n$$\\mathbb E_x h(x)k(x)=\\sum_a\\widehat h(a)\\widehat k(a),\\qquad \\mathbb E_xh(x)^2=\\sum_a\\widehat h(a)^2.$$\nAny two distinct linear Boolean functions $\\ell_a,\\ell_b$ disagree on exactly half the cube.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "If another linear function $m\\ne\\ell$ had distance less than $1/4$ from $f$, each point where $\\ell\\ne m$ would be a disagreement of at least one of them with $f$. Counting these points gives $\\operatorname{dist}(\\ell,m)\\leq\\operatorname{dist}(\\ell,f)+\\operatorname{dist}(f,m)<1/2$, contradicting their exact half-distance. Thus the nearby linear function is unique.",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "Let $E=\\{z:f(z)\\ne\\ell(z)\\}$, of size $\\delta2^n$. For fixed $x$, both $y$ and $x+y$ are uniform, since translation is a bijection. Thus each event $y\\in E$, $x+y\\in E$ has probability $\\delta$. The indicator of their union is at most their indicator sum, so with probability at least $1-2\\delta$ neither event occurs. Independence of these two locations is unnecessary.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "On that event the output is $\\ell(y)+\\ell(x+y)=\\ell(x)$ by linearity. The sampling and calls are exactly those of the corrector. For $x=0$, the two queried values are identical and their sum is always zero, which equals $\\ell(0)$. For $n=0$, the hypothesis forces $\\delta=0$ on the singleton cube; the same algorithm uses zero random bits. Zero noise gives success one for every point; the excluded endpoint $\\delta=1/4$ would give only the lower bound one half.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In thm linear self correction, step 2.1 includes n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers x=0 and zero noise."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 include n=1 with the same counting argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 explicitly handle coincident and dependent query locations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 records why the strict quarter-noise endpoint is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Uniform sampling uses the nonempty cube, and no choice of a special good point is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm linear self correction, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm linear self correction, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "fs-sum-check-computes-all-exponential-summands": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sum-check-instance-and-protocol",
+          "source_section": "Definition",
+          "quote": "A **sum-check instance** consists of a supplied finite field $F$, a fixed formal polynomial $g\\in F[X_1,\\ldots,X_n]$ with $n\\geq1$, trusted nonnegative integer individual degree bounds $d_i$ satisfying $\\deg_{X_i}g\\leq d_i$ for every $i$, a claimed value $H\\in F$, and trusted access to point evaluation of that same $g$ on $F^n$. Zero polynomials satisfy every nonnegative bound. The claim is\n$$H=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nThe field order is as in [[def-finite-field-and-its-order]], the formal ring as in [[def-multivariate-polynomial-ring-by-iteration]], and correctness uses the honest/universal-strategy quantifiers of [[def-completeness-and-soundness]].\n\nSet $C_0=H$. For each $i=1,\\ldots,n$, in this order:\n\n1. Receive a coefficient list $(a_0,\\ldots,a_m)$ specifying $h_i(T)=\\sum_{j=0}^m a_jT^j$, with $0\\leq m\\leq d_i$. Reject a missing, malformed, non-field, or overlength message. The single coefficient $0$ represents zero; trailing zero coefficients are allowed up to the length cap.\n2. Check $h_i(0)+h_i(1)=C_{i-1}$; reject on failure.\n3. Only after that message is fixed and checked, draw a fresh independent uniform $r_i\\in F$ and put $C_i=h_i(r_i)$. Send $r_i$ to the prover if $i<n$; sending it when $i=n$ is optional.\n\nFinally compute $g(r_1,\\ldots,r_n)$ through the trusted evaluator and accept exactly when it equals $C_n$ and every earlier check passed. In particular $n=1$ still has a coefficient message, a fresh challenge, and a terminal comparison. The evaluator's answer is not an unchecked prover assertion.\n\nFor a fixed challenge prefix, the honest round polynomial is\n$$q_i(T)=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_{i-1},T,b).$$\nThe cube of dimension zero has one empty tuple, so $q_n(T)=g(r_1,\\ldots,r_{n-1},T)$. Write\n$$S_i=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_i,b),\\qquad S_0=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nA scalar claim at stage $i$ is **true** when $C_i=S_i$. The honest prover sends $h_i=q_i$. The input $H$ is not counted as an additional prover message.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sum-check-verifier-is-polynomial-time-given-point-evaluation",
+          "source_section": "Statement",
+          "quote": "In sum-check with $n\\geq1$, put $D=\\sum_{i=1}^n(d_i+1)$. An execution uses at most $D$ prover field elements, at most $n$ verifier field elements, $n$ independent uniform field samples on a full execution, and $n$ rounds. The verifier uses $O(D)$ field operations plus at most one trusted point evaluation; a full execution reaching the terminal check uses exactly one such evaluation. Early rejection may shorten these costs. Coefficient lists may be zero-padded to attain the $D$ bound.\n\nWith supplied $b$-bit field representations, efficient encoding checks and field operations of bit cost at most $A(b)$, the bit work is $O(D(A(b)+b))$ plus trusted evaluation and sampling costs. Polynomial time is conditional on polynomial bounds for these quantities and $D$. With an efficient bijective indexing of field elements by $\\{0,\\ldots,q-1\\}$, $q=|F|$, rejection sampling uses expected $O(\\lceil\\log_2 q\\rceil)$ random bits per sample. If $q=2^b$ with such a $b$-bit encoding, a full execution uses exactly $nb$ random bits.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The protocol performs coefficient checks and evaluations of the received univariate messages; its only trusted evaluation of $g$ is at the final challenge vector. The resource bound is $O(D)$ field operations plus that single evaluation, for a complete execution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a concrete family take $g=\\prod_{i=1}^nX_i$, $n\\geq1$, and $d_i=1$. A trusted evaluator starts at one and multiplies the $n$ coordinates, so it costs at most $n$ multiplications. Since $D=2n$, verifier work is $O(n)$, with one evaluation of $g$, not separate evaluations at the $2^n>1$ vertices. The cube sum is one because only the all-one vertex contributes; this includes n=1 and fields of characteristic two. This refutes the asserted necessity. The prover and the trusted evaluator in other instances may have much larger costs.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refuting family assumes n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes vertices with zero coordinates and their zero contributions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes n=1 and sum one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes characteristic two and separates evaluator cost."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 computes all Boolean endpoint contributions symbolically."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The family and evaluator are explicit; no existential choice is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For fs sum check computes all exponential summands, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For fs sum check computes all exponential summands, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "ex-existence-and-uniqueness-of-multilinear-extension": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "HIGH risk is the finite-field interpolation computation and uniqueness invocation. Expanding the four basis terms gives 1+Y+2XY, its four Boolean values match the table, and the cited theorem supplies formal uniqueness. Evaluation at (2,3) is 16, hence one modulo five; every Boolean endpoint is checked."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-existence-and-uniqueness-of-multilinear-extension",
+          "source_section": "Statement",
+          "quote": "For every field $F$, $n\\geq0$, and table $f:\\{0,1\\}^n\\to F$, there is exactly one multilinear extension. It is\n$$\\widetilde f(X)=\\sum_{b\\in\\{0,1\\}^n} f(b)\\lambda_b(X),\\qquad \\lambda_b(X)=\\prod_{i=1}^n\\bigl(b_iX_i+(1-b_i)(1-X_i)\\bigr).$$\nAn empty product is $1$. Equality and uniqueness are for formal polynomials, including in characteristic two.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The interpolation formula gives $(1-X)(1-Y)+2(1-X)Y+X(1-Y)+4XY$. Expanding and combining coefficients yields $1+Y+2XY$, which has degree at most one in each variable.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Its values at $(0,0),(0,1),(1,0),(1,1)$ are respectively $1,2,1,4$, so it agrees with the table; uniqueness follows from the interpolation theorem. At $(2,3)$ its integer expression is $1+3+2\\cdot2\\cdot3=16$, which reduces to one modulo five.",
+          "inputs": [
+            "F1",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a specified two-variable, four-entry table."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks every vertex with a zero coordinate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the unit-coordinate vertices and the answer one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The field and table are fixed; no degenerate parameter family is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks all four Boolean endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The field, table and requested point are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex existence and uniqueness of multilinear extension, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex existence and uniqueness of multilinear extension, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "ex-sum-check-three-variable-transcript": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-g",
+        "notes": "HIGH risk is the multiround arithmetic and the separation between one transcript and probabilistic soundness. Direct partial sums give h1=8X^3+2X+1, h2=34+Y, h3=16+5Z with claims 69, 37, and 46; all endpoint, degree, and terminal checks hold modulo 101. The 5/101 bound is invoked only for fresh random challenges against arbitrary false claims."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sum-check-instance-and-protocol",
+          "source_section": "Definition",
+          "quote": "A **sum-check instance** consists of a supplied finite field $F$, a fixed formal polynomial $g\\in F[X_1,\\ldots,X_n]$ with $n\\geq1$, trusted nonnegative integer individual degree bounds $d_i$ satisfying $\\deg_{X_i}g\\leq d_i$ for every $i$, a claimed value $H\\in F$, and trusted access to point evaluation of that same $g$ on $F^n$. Zero polynomials satisfy every nonnegative bound. The claim is\n$$H=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nThe field order is as in [[def-finite-field-and-its-order]], the formal ring as in [[def-multivariate-polynomial-ring-by-iteration]], and correctness uses the honest/universal-strategy quantifiers of [[def-completeness-and-soundness]].\n\nSet $C_0=H$. For each $i=1,\\ldots,n$, in this order:\n\n1. Receive a coefficient list $(a_0,\\ldots,a_m)$ specifying $h_i(T)=\\sum_{j=0}^m a_jT^j$, with $0\\leq m\\leq d_i$. Reject a missing, malformed, non-field, or overlength message. The single coefficient $0$ represents zero; trailing zero coefficients are allowed up to the length cap.\n2. Check $h_i(0)+h_i(1)=C_{i-1}$; reject on failure.\n3. Only after that message is fixed and checked, draw a fresh independent uniform $r_i\\in F$ and put $C_i=h_i(r_i)$. Send $r_i$ to the prover if $i<n$; sending it when $i=n$ is optional.\n\nFinally compute $g(r_1,\\ldots,r_n)$ through the trusted evaluator and accept exactly when it equals $C_n$ and every earlier check passed. In particular $n=1$ still has a coefficient message, a fresh challenge, and a terminal comparison. The evaluator's answer is not an unchecked prover assertion.\n\nFor a fixed challenge prefix, the honest round polynomial is\n$$q_i(T)=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_{i-1},T,b).$$\nThe cube of dimension zero has one empty tuple, so $q_n(T)=g(r_1,\\ldots,r_{n-1},T)$. Write\n$$S_i=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_i,b),\\qquad S_0=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nA scalar claim at stage $i$ is **true** when $C_i=S_i$. The honest prover sends $h_i=q_i$. The input $H$ is not counted as an additional prover message.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sum-check-soundness",
+          "source_section": "Statement",
+          "quote": "Fix a sum-check instance over a finite field $F$, with $n\\geq1$, trusted individual bounds $d_1,\\ldots,d_n$, trusted evaluation, and false initial claim $H\\ne\\sum_b g(b)$. For every adaptive prover strategy the acceptance probability is at most\n$$\\min\\left(1,\\frac{\\sum_{i=1}^n d_i}{|F|}\\right).$$\nIn particular it is at most $nd/|F|$ if all $d_i\\leq d$. A randomized prover is allowed; its coins are independent of future verifier challenges.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Sum $g$ over Boolean $Y,Z$ to obtain $q_1(X)=8X^3+2X+1$. Then $q_1(0)+q_1(1)=1+11=12$ and $q_1(2)=64+4+1=69$. This also computes the cube sum by splitting over $X$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After $r_1=2$, sum $g(2,Y,Z)$ over $Z=0,1$: $q_2(Y)=16+(16+2+Y)=34+Y$. Its endpoint sum is $34+35=69$, and its value at $r_2=3$ is $37$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With that prefix $q_3(Z)=g(2,3,Z)=16+5Z$. Its endpoint sum is $16+21=37$. At $r_3=6$ its value is $46$, also $g(2,3,6)=16+12+18=46$. The coefficient lists have lengths $4,2,2$ and the degrees meet $(3,1,1)$, so all checks pass modulo 101.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any false initial claim the soundness theorem applies to the fixed polynomial and trusted degree bounds, giving error at most $(3+1+1)/101=5/101$ over fresh independent challenges. It asserts this for all adaptive provers, separately from the honest transcript just computed.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has exactly three variables and three rounds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 check each polynomial at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 check each polynomial at one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example has fixed field and degree vector; no limiting or collapsed family is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 check all consistency endpoints and the terminal comparison."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The field and challenge sequence are explicit; step 4.1 separately uses random challenges."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex sum check three variable transcript, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex sum check three variable transcript, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "ex-linear-self-correction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-linear-self-correction",
+          "source_section": "Statement",
+          "quote": "Let $n\\geq0$ and suppose a fixed $f:\\mathbb F_2^n\\to\\mathbb F_2$ has distance $\\delta<1/4$ from a linear function $\\ell$. Then $\\ell$ is the unique linear function at distance less than $1/4$ from $f$. At every fixed requested point $x$, the two-query corrector outputs $\\ell(x)$ with probability at least $1-2\\delta>1/2$, using two oracle calls and $n$ random bits.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "There are eight cube points, with precisely the zero point corrupted, so $\\delta=1/8<1/4$. The self-correction theorem gives a unique nearby linear function and success at least $1-2\\delta=3/4$ at each point.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For fixed $x\\ne0$, the query $y$ is corrupted exactly when $y=0$, and the query $x+y$ is corrupted exactly when $y=x$. These are distinct seeds. At either seed exactly one summand is flipped, so the output is wrong; at the other six seeds neither is flipped and linearity gives the right answer. At $x=0$, the sum $f(y)+f(y)$ is zero for every seed, equal to $\\ell(0)$. Thus the lower bound is attained for nonzero requests and exceeded for the zero request.",
+          "inputs": [
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The table has exactly eight entries on a three-dimensional cube."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 separately checks the zero requested point and zero seed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the single corrupted entry."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats coincident queries at x=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The noise fraction is the fixed interior value 1/8; no noise endpoint is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The table, corruption and seed cases are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex linear self correction, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex linear self correction, this statement asserts no equivalence."
+        }
+      ]
+    },
+    "cex-sum-check-computes-all-exponential-summands": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sum-check-instance-and-protocol",
+          "source_section": "Definition",
+          "quote": "A **sum-check instance** consists of a supplied finite field $F$, a fixed formal polynomial $g\\in F[X_1,\\ldots,X_n]$ with $n\\geq1$, trusted nonnegative integer individual degree bounds $d_i$ satisfying $\\deg_{X_i}g\\leq d_i$ for every $i$, a claimed value $H\\in F$, and trusted access to point evaluation of that same $g$ on $F^n$. Zero polynomials satisfy every nonnegative bound. The claim is\n$$H=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nThe field order is as in [[def-finite-field-and-its-order]], the formal ring as in [[def-multivariate-polynomial-ring-by-iteration]], and correctness uses the honest/universal-strategy quantifiers of [[def-completeness-and-soundness]].\n\nSet $C_0=H$. For each $i=1,\\ldots,n$, in this order:\n\n1. Receive a coefficient list $(a_0,\\ldots,a_m)$ specifying $h_i(T)=\\sum_{j=0}^m a_jT^j$, with $0\\leq m\\leq d_i$. Reject a missing, malformed, non-field, or overlength message. The single coefficient $0$ represents zero; trailing zero coefficients are allowed up to the length cap.\n2. Check $h_i(0)+h_i(1)=C_{i-1}$; reject on failure.\n3. Only after that message is fixed and checked, draw a fresh independent uniform $r_i\\in F$ and put $C_i=h_i(r_i)$. Send $r_i$ to the prover if $i<n$; sending it when $i=n$ is optional.\n\nFinally compute $g(r_1,\\ldots,r_n)$ through the trusted evaluator and accept exactly when it equals $C_n$ and every earlier check passed. In particular $n=1$ still has a coefficient message, a fresh challenge, and a terminal comparison. The evaluator's answer is not an unchecked prover assertion.\n\nFor a fixed challenge prefix, the honest round polynomial is\n$$q_i(T)=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_{i-1},T,b).$$\nThe cube of dimension zero has one empty tuple, so $q_n(T)=g(r_1,\\ldots,r_{n-1},T)$. Write\n$$S_i=\\sum_{b\\in\\{0,1\\}^{n-i}}g(r_1,\\ldots,r_i,b),\\qquad S_0=\\sum_{b\\in\\{0,1\\}^n}g(b).$$\nA scalar claim at stage $i$ is **true** when $C_i=S_i$. The honest prover sends $h_i=q_i$. The input $H$ is not counted as an additional prover message.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sum-check-verifier-is-polynomial-time-given-point-evaluation",
+          "source_section": "Statement",
+          "quote": "In sum-check with $n\\geq1$, put $D=\\sum_{i=1}^n(d_i+1)$. An execution uses at most $D$ prover field elements, at most $n$ verifier field elements, $n$ independent uniform field samples on a full execution, and $n$ rounds. The verifier uses $O(D)$ field operations plus at most one trusted point evaluation; a full execution reaching the terminal check uses exactly one such evaluation. Early rejection may shorten these costs. Coefficient lists may be zero-padded to attain the $D$ bound.\n\nWith supplied $b$-bit field representations, efficient encoding checks and field operations of bit cost at most $A(b)$, the bit work is $O(D(A(b)+b))$ plus trusted evaluation and sampling costs. Polynomial time is conditional on polynomial bounds for these quantities and $D$. With an efficient bijective indexing of field elements by $\\{0,\\ldots,q-1\\}$, $q=|F|$, rejection sampling uses expected $O(\\lceil\\log_2 q\\rceil)$ random bits per sample. If $q=2^b$ with such a $b$-bit encoding, a full execution uses exactly $nb$ random bits.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sum-check-soundness",
+          "source_section": "Statement",
+          "quote": "Fix a sum-check instance over a finite field $F$, with $n\\geq1$, trusted individual bounds $d_1,\\ldots,d_n$, trusted evaluation, and false initial claim $H\\ne\\sum_b g(b)$. For every adaptive prover strategy the acceptance probability is at most\n$$\\min\\left(1,\\frac{\\sum_{i=1}^n d_i}{|F|}\\right).$$\nIn particular it is at most $nd/|F|$ if all $d_i\\leq d$. A randomized prover is allowed; its coins are independent of future verifier challenges.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At the all-one vertex the product equals one, and at every other Boolean vertex a zero coordinate makes it zero. Hence the cube sum is one. There are two independent choices per coordinate, giving $2^n$ vertices, also when $n=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The specified protocol uses one terminal evaluation. Implement it by multiplying the $n$ supplied coordinates starting from one, at a cost of at most $n$ multiplications. Here $D=\\sum_i(1+1)=2n$, so the resource lemma bounds all verifier field work, including this evaluation, by $O(n)$. Zeros among the challenge coordinates simply make the product zero, without any division.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The soundness theorem gives the stated false-claim bound from $\\sum_i d_i=n$, including the cap at one when the field is small. Thus the verifier does not need $2^n$ separate evaluations of $g$. The claim concerns verifier work with a supplied evaluator and imposes no general efficiency assertion on the prover.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example family is restricted to n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 handle zero Boolean and challenge coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes n=1 and cube sum one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers small fields with a trivial probability bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates all Boolean vertex types; step 2.1 caps at one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The polynomial and evaluator are explicit; the finite field is supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For cex sum check computes all exponential summands, this statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For cex sum check computes all exponential summands, this statement asserts no equivalence."
+        }
+      ]
+    }
+  }
+}

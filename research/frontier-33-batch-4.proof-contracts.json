@@ -1,0 +1,862 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+    "cex-continuous-function-with-divergent-fourier-series-at-a-point",
+    "lem-fourier-maximal-weak-bound-closes-almost-everywhere-convergence",
+    "cor-lp-fourier-series-converges-almost-everywhere-for-p-greater-than-one",
+    "ex-fourier-partial-sum-operators-and-uniform-boundedness",
+    "cex-continuous-fourier-series-need-not-converge-everywhere",
+    "cex-carleson-maximal-operator-is-not-strong-type-one-one"
+  ],
+  "contracts": {
+    "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fourier-partial-sums-are-dirichlet-convolutions",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a one-period integrable function on $\\mathbb R$. Then for every\n$N \\ge 0$ and every $x \\in \\mathbb R$,\n\n$$S_Nf(x) = \\int_0^1 f(x-t)D_N(t)\\,dt = (f*D_N)(x).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dirichlet-and-fejer-kernels",
+          "source_section": "Definition",
+          "quote": "For $N \\ge 0$, the **Dirichlet kernel** on $\\mathbb T$ is\n\n$$D_N(t) := \\sum_{|k| \\le N} e_k(t).$$\n\nThe **Fejer kernel** is the arithmetic mean\n\n$$F_N(t) := \\frac{1}{N+1}\\sum_{j=0}^N D_j(t).$$\n\nEquivalently,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt),$$\n\nso $D_N$ is real-valued and even. Also\n\n$$\\int_0^1 D_N(t)\\,dt = 1,$$\n\nbecause every nonconstant character has integral $0$ over one period.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThis supremum is finite because every bound $C$ for $T$ also bounds the set on\nthe right by $C$.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "source_section": "Statement",
+          "quote": "For every integer $N \\ge 0$,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt).$$\n\nIf $t \\notin \\mathbb Z$, then\n\n$$D_N(t) = \\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$\n\nIf $m \\in \\mathbb Z$, then $D_N(m)=2N+1$. In particular $D_N$ is even and\n\n$$|D_N(t)| \\le 2N+1 \\qquad (t \\in \\mathbb R),$$\n\nwhile for $t \\notin \\mathbb Z$,\n\n$$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Put $L_N=\\int_0^1|D_N(t)|\\,dt$. The convolution formula gives $|S_Nf(x)|\\le L_N\\|f\\|_\\infty$ for every $x$. Finite Fourier sums are linear and continuous as functions of $x$, so both maps in the statement are bounded linear maps and $\\|T_{N,x_0}\\|\\le\\|S_N\\|\\le L_N$.",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "For $N\\ge1$ and $0\\le j\\le N-1$, set $a_j=(j+1/6)/(2N+1)$ and $b_j=(j+5/6)/(2N+1)$. These disjoint intervals lie in $(0,1/2)$. On them $|\\sin((2N+1)\\pi t)|\\ge1/2$ and $0<\\sin(\\pi t)\\le\\pi t$, so $L_N\\ge\\frac{1}{2\\pi}\\sum_{j=0}^{N-1}\\int_{a_j}^{b_j}dt/t$. Each integral is at least $(b_j-a_j)/b_j=\\frac{2/3}{j+5/6}\\ge\\frac{2}{3(j+1)}$.",
+          "inputs": [
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For $\\delta>0$ define $f_\\delta(u)=D_N(x_0-u)/\\max\\{\\delta,|D_N(x_0-u)|\\}$. The denominator is positive, so this is a real continuous periodic function with norm at most one, also admissible in the complex space. Writing $a=|D_N(x_0-u)|$, we have $0\\le a-a^2/\\max\\{\\delta,a\\}\\le\\delta$. Changing variables in the periodic integral yields $0\\le L_N-T_{N,x_0}f_\\delta\\le\\delta$. Thus $\\|T_{N,x_0}\\|\\ge L_N-\\delta$ for every $\\delta>0$, proving both norm identities. Zeros of the kernel cause no discontinuity in this test.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Consequently $L_N\\ge\\frac{1}{3\\pi}\\sum_{j=1}^N1/j\\ge\\frac{1}{3\\pi}\\int_1^{N+1}dt/t=\\frac{1}{3\\pi}\\log(N+1)$. For $N=0$, $D_0=1$ and both norms equal one by the already proved identities (the test $f=1$ attains the value). This covers the initial index and proves the asserted unboundedness.",
+          "inputs": [
+            "F2",
+            "2.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats N=0 and D_0=1; step 1.1 includes the zero input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 is valid for N=1 with its single interval; step 3.1 tests the constant one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 controls zeros of D_N by a positive denominator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses intervals strictly inside (0,1/2); step 3.1 handles the initial index."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 gives explicit continuous unit-ball tests for each delta; no selection axiom is used."
+        },
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the fixed nonempty torus and the unit ball contains zero; no empty-domain parameter occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts norm identities and a lower bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no biconditional to reverse."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: norm equality on continuous functions cannot use the discontinuous sign of D_N, and the logarithmic estimate has endpoint-sensitive intervals. The continuous f_delta tests attain the L1 norm in the limit, while the displayed subinterval calculation is valid for every N>=1 and N=0 is separate."
+      }
+    },
+    "cex-continuous-function-with-divergent-fourier-series-at-a-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+          "source_section": "Statement",
+          "quote": "On $\\mathbb T=\\mathbb R/\\mathbb Z$ with Haar mass one, for each integer $N\\ge0$ and each prescribed $x_0\\in\\mathbb T$, let $T_{N,x_0}f=S_Nf(x_0)$. Over either $\\mathbb R$ or $\\mathbb C$, on the continuous periodic functions with supremum norm,\n\n$$\\|T_{N,x_0}\\|=\\|S_N:C(\\mathbb T)\\to C(\\mathbb T)\\|=\\int_{\\mathbb T}|D_N(t)|\\,dm(t).$$\n\nFor $N\\ge1$ these norms are at least $\\frac{1}{3\\pi}\\log(N+1)$, and hence are unbounded as $N\\to\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-uniform-boundedness-principle",
+          "source_section": "Statement",
+          "quote": "Assume DC. Let $X$ be a Banach space, $Y$ a normed space, and let $\\mathcal F$ be a family of bounded linear operators $X\\to Y$ ([[def-bounded-linear-operator]]). If $\\sup_{T\\in\\mathcal F}\\|Tx\\|<\\infty$ for every $x\\in X$, then $\\sup_{T\\in\\mathcal F}\\|T\\|<\\infty$, where the norm is [[def-operator-norm]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space. Every member of\n$C(K,\\mathbb{R})$ is bounded, so the supremum metric\n\n$$d_\\infty(f,g):=\\sup_{x\\in K}|f(x)-g(x)|$$\n\nis defined on $C(K,\\mathbb{R})$. With this metric,\n$C(K,\\mathbb{R})$ is complete.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dini-pointwise-convergence-criterion-for-fourier-series",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $f$ be a one-period integrable function, let $x,s\\in\\mathbb R$, and assume\nthere is $\\delta\\in(0,1/2)$ such that\n\n$$\\int_0^\\delta \\frac{|f(x+t)+f(x-t)-2s|}{t}\\,dt<\\infty.$$\n\nThen\n\n$$S_Nf(x)\\to s \\qquad \\text{as } N\\to\\infty.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Let $X=\\{f\\in C([0,1],\\mathbb R):f(0)=f(1)\\}$ with the supremum norm. The interval is nonempty and compact, so a Cauchy sequence in $X$ has a continuous uniform limit by the completeness theorem. Its endpoint values remain equal, since $|f(0)-f(1)|\\le2\\|f-f_j\\|_\\infty$ for every approximating member $f_j$. Thus $X$ is a real Banach space, identified isometrically with the real continuous periodic functions.",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Define $T_N:X\\to\\mathbb R$ by $T_Nf=S_Nf(x_0)$. These maps are real-valued bounded linear functionals, and $\\sup_N\\|T_N\\|=\\infty$. If all $f\\in X$ had $\\sup_N|T_Nf|<\\infty$, uniform boundedness on this Banach space would make the operator norms uniformly bounded. Hence there exists a real $f\\in X$ with $\\sup_N|T_Nf|=\\infty$. Every individual value is finite, so this sequence cannot converge.",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For this witness, vanishing on any neighborhood of $x_0$ is impossible: if it vanished there, choose $0<\\delta<1/2$ within that neighborhood. The Dini integral with $s=0$ would be zero, giving $S_Nf(x_0)\\to0$. DC supplies the countable choice assumed by that criterion. This contradicts the unboundedness in step 2.1 and proves the stated localization observation.",
+          "inputs": [
+            "2.1",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 requires an unbounded sequence, so the zero function is not the witness; x_0=0 is allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies endpoints 0 and 1; the constant one belongs to X but cannot be the witness in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 excludes a witness vanishing near its prescribed bad point."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 preserves equal endpoint values; step 3.1 chooses delta strictly below 1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 check the nonempty compact interval and invoke uniform boundedness under the stated DC."
+        },
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter x_0 lies in the fixed nonempty torus; no empty space is quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an existential refutation of a universal convergence claim, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse equivalence is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: uniform boundedness requires a Banach domain over the correct scalar field and DC. The periodic real subspace is proved closed and complete, the evaluation norms are unbounded, and the Dini observation uses its exact choice hypothesis."
+      }
+    },
+    "lem-fourier-maximal-weak-bound-closes-almost-everywhere-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-carleson-maximal-partial-sum-operator",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb T=\\mathbb R/\\mathbb Z$ with Haar measure $m(\\mathbb T)=1$ and the negative-sign Fourier coefficients and symmetric partial sums of [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]. For $f\\in L^1(\\mathbb T)$ define the **Carleson maximal partial-sum operator** by\n\n$$Cf(x):=\\sup_{N\\in\\mathbb Z_{\\ge0}}|S_Nf(x)|\\in[0,\\infty].$$\n\nEach coefficient is a finite integral independent of the representative of $f$, and each $S_Nf$ is a continuous trigonometric polynomial. Thus $C$ depends only on the $L^1$ class, at every point. For every real $a$, the set $\\{Cf>a\\}=\\bigcup_{N\\ge0}\\{|S_Nf|>a\\}$ is measurable.\n\nLinearity of finite Fourier sums gives $C(f+g)\\le Cf+Cg$ and $C(af)=|a|Cf$ for nonzero scalars $a$. Also $C0=0$; with $0\\cdot\\infty:=0$ the homogeneity identity holds for $a=0$ as well. This is sublinearity with extended nonnegative values. Including $N=0$ retains the constant Fourier coefficient.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fejer-convergence-in-lp",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1\\le p<\\infty$, and let $f:\\mathbb R\\to\\mathbb C$ be one-periodic with\n$f|_{[0,1]}\\in L^p([0,1])$. Then\n\n$$\\|\\sigma_Nf-f\\|_{L^p([0,1])}\\longrightarrow0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then\n$$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Use a finite-valued measurable representative of $f$, changing it on a null set if needed. It is integrable since $|f|\\le1+|f|^p$ and the torus has mass one. Set $Q_j=\\sigma_jf=(j+1)^{-1}\\sum_{r=0}^jS_rf$. These are explicit polynomials and $\\|f-Q_j\\|_p\\to0$. Integrating $e^{2\\pi i(k-\\ell)x}$ over $[0,1]$ gives one for $k=\\ell$ and zero otherwise, so $S_NQ_j=Q_j$ whenever $N\\ge j$, including constants and the zero polynomial.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The extended function $H(x)=\\limsup_{N\\to\\infty}|S_Nf(x)-f(x)|$ is measurable: a limsup is a countable infimum of countable suprema of measurable functions. For each $j$ and $N\\ge j$, linearity and the triangle inequality give $|S_Nf-f|\\le|S_N(f-Q_j)|+|f-Q_j|$. Hence $H\\le C(f-Q_j)+|f-Q_j|$.",
+          "inputs": [
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For every $\\lambda>0$, the set $\\{H>2\\lambda\\}$ is contained in $\\{C(f-Q_j)>\\lambda\\}\\cup\\{|f-Q_j|>\\lambda\\}$. Apply the assumed weak estimate to the first set and the integral inequality to $h=|f-Q_j|^p$, $t=\\lambda^p$, for the second. The latter strict superlevel set is contained in $\\{h\\ge\\lambda^p\\}$. Subadditivity yields $m\\{H>2\\lambda\\}\\le(A+1)\\lambda^{-p}\\|f-Q_j\\|_p^p$.",
+          "inputs": [
+            "F3",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Let $j\\to\\infty$ with $\\lambda$ fixed. The right side tends to zero, so $m\\{H>2\\lambda\\}=0$. Because $H\\ge0$, $\\{H>0\\}=\\bigcup_{r=1}^\\infty\\{H>2/r\\}$ has measure at most the sum of these zero measures, hence zero. Outside it the nonnegative errors have limsup zero and therefore tend to zero. Changing the representative alters the conclusion on only a null set. This proves convergence almost everywhere, including $p=1$ whenever its hypothesized weak estimate holds.",
+          "inputs": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 remains valid when any superlevel set is empty, with measure zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 include f=0 and exact polynomial approximation; A=0 requires no division by A."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 include p=1 and constant polynomials."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 allow an initially infinite limsup and force it to zero almost everywhere."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly retains p=1 conditionally; steps 1.1 and 3.1 require finite p and positive lambda."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses explicit Fejer polynomials and the cited convergence theorem under countable choice; step 4.1 uses the explicit thresholds 2/r."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an implication from a weak bound to convergence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Almost-everywhere convergence is not asserted to imply the quantitative bound."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: the closure argument needs measurable limsup, dense polynomial approximants, and countable null unions. Fejer means provide explicit Lp approximants, S_NQ_j=Q_j for N>=j, and the weak plus Chebyshev bounds force the limsup to zero for all 1<=p<infinity."
+      }
+    },
+    "cor-lp-fourier-series-converges-almost-everywhere-for-p-greater-than-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fourier-maximal-weak-bound-closes-almost-everywhere-convergence",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and fix $1\\le p<\\infty$. On the period-one torus with normalized Haar measure, suppose a finite constant $A\\ge0$ satisfies\n\n$$m\\{Cg>\\lambda\\}\\le A\\lambda^{-p}\\|g\\|_p^p\\qquad(g\\in L^p(\\mathbb T),\\ \\lambda>0).$$\n\nThen for every $f\\in L^p(\\mathbb T)$, $S_Nf(x)\\to f(x)$ almost everywhere. The conclusion holds for any measurable representative of $f$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then\n$$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For $g\\in L^p$ and $\\lambda>0$, apply the integral inequality to the nonnegative measurable function $(Cg)^p$ at $t=\\lambda^p$. The assumed norm bound makes its integral finite and yields $m\\{Cg>\\lambda\\}\\le\\lambda^{-p}\\int(Cg)^p\\,dm\\le C_p^p\\lambda^{-p}\\|g\\|_p^p$.",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Thus the weak estimate holds for every $g$ and every positive threshold with finite $A=C_p^p\\ge0$. The fixed exponent is within $1\\le p<\\infty$ and countable choice is given, so the maximal convergence principle proves the assertion for every $f$.",
+          "inputs": [
+            "F1",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 allows empty superlevel sets with measure zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers g=0 and C_p=0 without division by either."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the lemma whose lower exponent endpoint is one, while this statement fixes p>1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 makes the extended maximal function finite almost everywhere through the explicit norm assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use lambda>0 and finite p; neither p=1 nor p=infinity is asserted in this corollary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly retains countable choice required by the convergence lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only the strong-bound-to-convergence implication is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No quantitative estimate is deduced from qualitative convergence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: the deep Carleson-Hunt estimate must remain an explicit hypothesis. Chebyshev converts that stated strong bound to the required weak bound with A=C_p^p, and the local lemma supplies convergence without pretending to prove the external theorem."
+      }
+    },
+    "ex-fourier-partial-sum-operators-and-uniform-boundedness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+          "source_section": "Statement",
+          "quote": "On $\\mathbb T=\\mathbb R/\\mathbb Z$ with Haar mass one, for each integer $N\\ge0$ and each prescribed $x_0\\in\\mathbb T$, let $T_{N,x_0}f=S_Nf(x_0)$. Over either $\\mathbb R$ or $\\mathbb C$, on the continuous periodic functions with supremum norm,\n\n$$\\|T_{N,x_0}\\|=\\|S_N:C(\\mathbb T)\\to C(\\mathbb T)\\|=\\int_{\\mathbb T}|D_N(t)|\\,dm(t).$$\n\nFor $N\\ge1$ these norms are at least $\\frac{1}{3\\pi}\\log(N+1)$, and hence are unbounded as $N\\to\\infty$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha gate-batch-1-all",
+            "reason": "The N at least zero clause scopes the norm identity; unboundedness is a family conclusion from the cited N at least one lower bound, so the restatement does not widen the source."
+          }
+        },
+        {
+          "fact": "F2",
+          "source": "thm-banach-steinhaus-dichotomy",
+          "source_section": "Statement",
+          "quote": "Assume DC. Let $X$ be Banach, $Y$ normed, and $\\mathcal F\\subseteq\\mathcal B(X,Y)$ ([[def-bounded-linear-operator]]). Either $\\sup_{T\\in\\mathcal F}\\|T\\|<\\infty$ ([[def-operator-norm]]), or\n\n$$S:=\\{x\\in X:\\sup_{T\\in\\mathcal F}\\|Tx\\|=\\infty\\}$$\n\nis a dense $G_\\delta$ subset of $X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space. Every member of\n$C(K,\\mathbb{R})$ is bounded, so the supremum metric\n\n$$d_\\infty(f,g):=\\sup_{x\\in K}|f(x)-g(x)|$$\n\nis defined on $C(K,\\mathbb{R})$. With this metric,\n$C(K,\\mathbb{R})$ is complete.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Real continuous periodic functions identify isometrically with $X=\\{f\\in C([0,1],\\mathbb R):f(0)=f(1)\\}$. A Cauchy sequence has a continuous uniform limit by completeness on the nonempty compact interval. Endpoint equality passes to that limit because evaluation at either endpoint changes by at most the uniform error. Hence $X$ is Banach.",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The family $T_N:X\\to\\mathbb R$ consists of bounded linear maps, with unbounded operator norms. The bounded-norm alternative in the dichotomy is therefore excluded; its other alternative says precisely that $\\mathcal U$ is dense and $G_\\delta$ in $X$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Explicitly, $\\mathcal U=\\bigcap_{r=1}^\\infty\\bigcup_{N=0}^\\infty\\{f\\in X:|T_Nf|>r\\}$. Each inner set is open by continuity of $T_N$, and the displayed membership condition is exactly unboundedness of the sequence of finite values. Thus the topology in this conclusion is topology on a space of functions; it asserts no full-measure set of points of the torus for any fixed function.",
+          "inputs": [
+            "F1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 proves density in the nonempty Banach space X, so the resulting set is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 excludes the zero function from the unboundedness set; the evaluation point zero is expressly used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the unit interval and preserves its endpoints; step 3.1 starts thresholds at r=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 verify a genuine Banach space and unbounded functional norms before invoking the dichotomy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 enforces f(0)=f(1), so the designated zero is the torus seam."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses exactly the stated DC assumption in the dichotomy."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The main assertion is residuality, not a biconditional theorem; the set equality is directly explained in step 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence between residuality and pointwise spatial measure is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: residual unboundedness is in function space and depends on the full operator-norm family. The periodic subspace is Banach, the cited norm identity covers N>=0 and its N>=1 lower bound makes the family unbounded, so Banach-Steinhaus gives exactly the displayed dense G_delta."
+      }
+    },
+    "cex-continuous-fourier-series-need-not-converge-everywhere": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cex-continuous-function-with-divergent-fourier-series-at-a-point",
+          "source_section": "Statement refuted",
+          "quote": "Continuity of a one-periodic real function guarantees convergence of its Fourier series at a prescribed point.\n\nMore precisely, assume DC. For every $x_0\\in\\mathbb T$ there exists $f\\in C(\\mathbb T,\\mathbb R)$ such that\n\n$$\\sup_{N\\ge0}|S_Nf(x_0)|=\\infty.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fejer-uniform-convergence-for-continuous-periodic-functions",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R\\to\\mathbb C$ be one-periodic and continuous. Then\n\n$$\\sup_{x\\in\\mathbb R}|\\sigma_Nf(x)-f(x)|\\longrightarrow0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Apply the prescribed-point witness with $x_0=0$. It supplies a real continuous periodic $f$ whose finite partial-sum values at zero form an unbounded sequence. Such an $f$ is nonzero, and this sequence cannot converge to a finite value.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Regard the same real $f$ as complex-valued. It meets the continuity and periodicity hypotheses of uniform Fejer convergence, so $\\|\\sigma_Nf-f\\|_\\infty\\to0$. Thus the Cesaro averages $\\sigma_Nf=(N+1)^{-1}\\sum_{j=0}^NS_jf$ converge uniformly while the ordinary sums at zero diverge unboundedly. Both properties hold for the single function from step 1.1, refuting the claimed implication.",
+          "inputs": [
+            "1.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses x_0=0 and explains why f is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 has denominator N+1, which is one at N=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 produces unbounded finite partial-sum values, not merely failure to identify a limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use a continuous periodic witness, including agreement at the endpoints of a period."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 retains DC for the existence result and uses one witness for both conclusions."
+        },
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness is on the fixed nonempty torus; there is no empty-domain parameter."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a single implication from Cesaro to ordinary convergence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse implication is not a claim of this item."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: one witness must simultaneously have uniform Fejer convergence and divergent ordinary sums. The prescribed-point continuous witness has unbounded sums at zero, while the cited Fejer theorem applies to that same function and does not imply ordinary convergence."
+      }
+    },
+    "cex-carleson-maximal-operator-is-not-strong-type-one-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-carleson-maximal-partial-sum-operator",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb T=\\mathbb R/\\mathbb Z$ with Haar measure $m(\\mathbb T)=1$ and the negative-sign Fourier coefficients and symmetric partial sums of [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]. For $f\\in L^1(\\mathbb T)$ define the **Carleson maximal partial-sum operator** by\n\n$$Cf(x):=\\sup_{N\\in\\mathbb Z_{\\ge0}}|S_Nf(x)|\\in[0,\\infty].$$\n\nEach coefficient is a finite integral independent of the representative of $f$, and each $S_Nf$ is a continuous trigonometric polynomial. Thus $C$ depends only on the $L^1$ class, at every point. For every real $a$, the set $\\{Cf>a\\}=\\bigcup_{N\\ge0}\\{|S_Nf|>a\\}$ is measurable.\n\nLinearity of finite Fourier sums gives $C(f+g)\\le Cf+Cg$ and $C(af)=|a|Cf$ for nonzero scalars $a$. Also $C0=0$; with $0\\cdot\\infty:=0$ the homogeneity identity holds for $a=0$ as well. This is sublinearity with extended nonnegative values. Including $N=0$ retains the constant Fourier coefficient.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "source_section": "Statement",
+          "quote": "For every $N \\ge 0$, the Fejer kernel satisfies\n\n$$F_N(t)=\\frac{1}{N+1}\\left|\\sum_{j=0}^N e_j(t)\\right|^2.$$\n\nHence, for $t \\notin \\mathbb Z$,\n\n$$F_N(t)=\\frac{1}{N+1}\\left(\\frac{\\sin((N+1)\\pi t)}{\\sin(\\pi t)}\\right)^2,$$\n\nso $F_N(t)\\ge0$ for all $t$, $\\int_0^1F_N(t)\\,dt=1$, and for every\n$\\delta\\in(0,1/2]$,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\le \\frac{1}{(N+1)\\sin^2(\\pi\\delta)}.$$\n\nIn particular,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\longrightarrow 0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fejer-uniform-convergence-for-continuous-periodic-functions",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R\\to\\mathbb C$ be one-periodic and continuous. Then\n\n$$\\sup_{x\\in\\mathbb R}|\\sigma_Nf(x)-f(x)|\\longrightarrow0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fourier-partial-sums-are-dirichlet-convolutions",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a one-period integrable function on $\\mathbb R$. Then for every\n$N \\ge 0$ and every $x \\in \\mathbb R$,\n\n$$S_Nf(x) = \\int_0^1 f(x-t)D_N(t)\\,dt = (f*D_N)(x).$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+          "source_section": "Statement",
+          "quote": "On $\\mathbb T=\\mathbb R/\\mathbb Z$ with Haar mass one, for each integer $N\\ge0$ and each prescribed $x_0\\in\\mathbb T$, let $T_{N,x_0}f=S_Nf(x_0)$. Over either $\\mathbb R$ or $\\mathbb C$, on the continuous periodic functions with supremum norm,\n\n$$\\|T_{N,x_0}\\|=\\|S_N:C(\\mathbb T)\\to C(\\mathbb T)\\|=\\int_{\\mathbb T}|D_N(t)|\\,dm(t).$$\n\nFor $N\\ge1$ these norms are at least $\\frac{1}{3\\pi}\\log(N+1)$, and hence are unbounded as $N\\to\\infty$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-riesz-fischer-completeness-of-l-p",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1\\le p\\le\\infty$. Then\n$L^p(\\mu)$, with the norm of\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], is\ncomplete. Equivalently, the metric induced by that norm is a complete metric in\nthe sense of [[def-complete-metric-space]].\n\nMoreover, if a sequence in $L^p(\\mu)$ converges in norm, then some subsequence\nadmits measurable representatives converging almost everywhere in the sense of\n[[def-convergence-almost-everywhere-relative-to-a-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-uniform-boundedness-principle",
+          "source_section": "Statement",
+          "quote": "Assume DC. Let $X$ be a Banach space, $Y$ a normed space, and let $\\mathcal F$ be a family of bounded linear operators $X\\to Y$ ([[def-bounded-linear-operator]]). If $\\sup_{T\\in\\mathcal F}\\|Tx\\|<\\infty$ for every $x\\in X$, then $\\sup_{T\\in\\mathcal F}\\|T\\|<\\infty$, where the norm is [[def-operator-norm]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Choose an integer $N\\ge1$ with $\\|D_N\\|_1>A+1$, possible from the logarithmic lower bound. For each $K\\ge0$, the function $F_K$ is a real nonnegative trigonometric polynomial of $L^1$ norm one.",
+          "inputs": [
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Expanding the square formula for $F_K$ gives coefficient $1-|k|/(K+1)$ for $|k|\\le K$ and zero otherwise. Orthogonality of finite characters therefore gives $S_NF_K=F_K*D_N=\\sigma_KD_N$: either side has coefficient $1-|k|/(K+1)$ for $|k|\\le\\min\\{K,N\\}$ and zero elsewhere. Since $D_N$ is continuous, $\\|S_NF_K-D_N\\|_\\infty\\to0$ as $K\\to\\infty$, with $N$ fixed.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "For the additional consequence, let $h$ be a real integrable periodic representative. The convolution formula, after a periodic change of variables, gives $|S_Nh(x)|\\le\\int_0^1|h(u)||D_N(x-u)|\\,du$. The integrand is product-measurable: $h(u)$ depends on one coordinate and $D_N(x-u)$ is continuous. Both measure spaces are finite, so Tonelli and translation invariance give $\\|S_Nh\\|_1\\le\\int_0^1|h(u)|\\int_0^1|D_N(x-u)|\\,dx\\,du=\\|D_N\\|_1\\|h\\|_1$. Thus $S_N$ is a bounded real linear operator on real $L^1$.",
+          "inputs": [
+            "F4",
+            "F8"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Choose $K$ large enough that this uniform error is less than one. The measure has mass one, so $\\|S_NF_K\\|_1\\ge\\|D_N\\|_1-\\|S_NF_K-D_N\\|_1>A$. Since $CF_K\\ge|S_NF_K|$, the polynomial $f=F_K$ is the required witness. Its maximal function is finite and bounded: when the partial-sum index is at least $K$, the partial sum equals $F_K$, so only finitely many distinct continuous polynomials enter its supremum. Thus the strict norm inequality is an ordinary finite integral, not an artifact of an infinite value.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "For each fixed $N$, step 1.2 and the unit-norm tests $F_K$ imply $\\|S_N:L^1(\\mathbb T,\\mathbb R)\\to L^1(\\mathbb T,\\mathbb R)\\|\\ge\\lim_{K\\to\\infty}\\|S_NF_K\\|_1=\\|D_N\\|_1$. These operator norms are consequently unbounded.",
+          "inputs": [
+            "1.2",
+            "F2",
+            "F5",
+            "1.3"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Now assume DC. Real $L^1$ is Banach by completeness. If $\\sup_N\\|S_Nh\\|_1$ were finite for each $h$, uniform boundedness would contradict step 2.2. Therefore some real integrable $h$ has unbounded $L^1$ norms of its partial sums. This is a norm-divergence conclusion and does not assert almost-everywhere divergence.",
+          "inputs": [
+            "2.2",
+            "F6",
+            "F7",
+            "1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 includes h=0; the norm-one polynomial in step 1.1 excludes a zero witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves integral one; step 2.1 uses Haar mass one and an error below one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies that CF_K is a bounded finite maximum, so the failure occurs even for polynomials."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 prove failure at p=1 for any positive A; no positive-p interpolation inference is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 require only single integer choices; step 3.1 explicitly introduces DC for its separate Banach-space consequence."
+        },
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the fixed nonempty torus and the witnesses have mass one; no empty-domain case occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item disproves a uniform estimate with witnesses and states one further consequence, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from norm divergence to spatial almost-everywhere divergence is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Risk reviewed: the endpoint counterexample and the additional norm-divergence consequence use several limits and operator spaces. Fejer kernels approximate fixed D_N uniformly, preserve L1 norm one, and force ||CF_K||_1 large; Tonelli proves each S_N is L1-bounded before uniform boundedness is applied under DC."
+      }
+    }
+  }
+}

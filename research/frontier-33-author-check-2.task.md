@@ -1,0 +1,1 @@
+Repair batch 2 using every finding in research/frontier-33-author-check-2.json. Work only on this batch's items, pages, manifest and contract. Preserve its scope. Run focused checks and explain any detector defect; do not edit tools.

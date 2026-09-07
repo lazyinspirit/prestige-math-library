@@ -45,14 +45,14 @@ import { sectionText } from './facts-block.mjs';
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const asJson = process.argv.includes('--json');
 const quiet = process.argv.includes('--quiet');
-// --pending-audit-ok: demote `published-unaudited` to a warning. The ONE caller
-// is the audit workflow's A4 gate (tools/gates.mjs), and only because A4 is the
-// step that legitimately creates the class: a materially repaired published item
-// loses its obsolete `audited` stamp there, and the no-self-certification rule
-// means only A6's independent reading may replace it. A4 is therefore the single
-// window in which a published item is knowingly unverified. Everywhere else —
-// including A6, where an EMPTY published-unaudited class is the load-bearing
-// check that every A4 repair got certified — the class stays a hard error.
+// --pending-audit-ok: demote `published-unaudited` to a warning. This is allowed
+// only in bounded pre-certification windows: audit A4 (tools/gates.mjs), or
+// autopilot Step 6c after its final routing gate has validated the exact,
+// hash-bound published-repair handoff to Step 8. A material repair loses its
+// obsolete `audited` stamp, and the no-self-certification rule means only the
+// later independent reading may replace it. Everywhere else — including the
+// certification closure, where an EMPTY published-unaudited class is the
+// load-bearing check — the class stays a hard error.
 const pendingAuditOk = process.argv.includes('--pending-audit-ok');
 
 const PREFIX_OF_KIND = {

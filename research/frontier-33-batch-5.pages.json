@@ -1,0 +1,1015 @@
+[
+  {
+    "order": 348.015,
+    "id": "classical-zero-free-region-and-the-prime-number-theorem",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Classical Zero Free Region and the Prime Number Theorem",
+    "companion": "classical-zero-free-region-and-the-prime-number-theorem-examples",
+    "requires": [
+      "perron-inversion-and-the-explicit-formula-examples"
+    ],
+    "items": [
+      {
+        "id": "lem-zeta-logarithmic-derivative-zero-bound",
+        "kind": "lemma",
+        "deps": [
+          "thm-hadamard-product-for-riemann-xi",
+          "def-riemann-xi-function",
+          "thm-stirling-formula-gamma",
+          "thm-cauchy-integral-formula-higher-derivatives",
+          "cor-zeta-zero-count-unit-interval",
+          "thm-trivial-zeros-and-critical-strip"
+        ],
+        "statement": "For xi(s)=s(s-1)pi^(-s/2)Gamma(s/2)zeta(s)/2 with Hadamard constant B, zeta'/zeta=B+sum_rho(1/(s-rho)+1/rho)-1/(s-1)+(log pi)/2-Gamma'(1+s/2)/(2Gamma(1+s/2)). Interpret meromorphically and sum nontrivial zeros with multiplicity using the convergent genus-one terms. For -1<=sigma<=2, |t|>=3 away from zeros, Re(zeta'/zeta)=sum_rho Re(1/(s-rho))-(log|t|)/2+O(1), the real sum converging absolutely.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-zeroes.html",
+          "locator": "\u00a78.3, Hadamard calculation in proof of Theorem 8.8"
+        },
+        "proof_plan": "Differentiate the locally normally convergent logarithmic product; control Gamma log derivative by Cauchy estimates on Stirling remainder in a wider sector. Absorb sum Re(1/rho) and bounded pole terms only in the high-height real-part assertion. Correct the source Gamma argument; this strengthens the published local formula rather than duplicating it."
+      },
+      {
+        "id": "lem-zeta-three-four-one-logarithmic-derivative-inequality",
+        "kind": "lemma",
+        "deps": [
+          "thm-von-mangoldt-logarithmic-derivative-zeta"
+        ],
+        "statement": "For sigma>1 and real t, -3 zeta'/zeta(sigma)-4 Re(zeta'/zeta(sigma+it))-Re(zeta'/zeta(sigma+2it))>=0.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "\u00a76.1, proof of Theorem 6.6 invoking Lemma 6.5"
+        },
+        "proof_plan": "Expand 3+4cos u+cos(2u)=2(1+cos u)^2 against the absolutely convergent nonnegative von Mangoldt coefficients. Needed on A; B only works the identity explicitly."
+      },
+      {
+        "id": "thm-riemann-zeta-classical-zero-free-region",
+        "kind": "theorem",
+        "deps": [
+          "lem-zeta-logarithmic-derivative-zero-bound",
+          "lem-zeta-three-four-one-logarithmic-derivative-inequality",
+          "thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane",
+          "thm-riemann-zeta-continuation-to-the-right-half-plane"
+        ],
+        "statement": "There is an absolute c0>0 such that zeta has no zero in sigma>=1-c0/log(|t|+2); its pole at 1 is not a zero.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.6, pp.172\u2013173"
+        },
+        "proof_plan": "At a hypothetical beta+i gamma use positivity of every real zero term at sigma>1, obtaining 4/(sigma-beta)<=3/(sigma-1)+C log(|gamma|+2). Choose sigma-1=a/log with a sufficiently small, then exclude beta too close to 1. Compactness on bounded heights uses the previously established line and (s-1)zeta near its pole."
+      },
+      {
+        "id": "lem-zeta-horizontal-logarithmic-derivative-comparison",
+        "kind": "lemma",
+        "deps": [
+          "thm-riemann-zeta-classical-zero-free-region",
+          "lem-local-logarithmic-derivative-zeta",
+          "lem-zeta-logarithmic-derivative-zero-bound",
+          "thm-von-mangoldt-logarithmic-derivative-zeta"
+        ],
+        "statement": "For a sufficiently narrow fixed fraction of the classical region and |t|>=3, |zeta'/zeta(sigma+it)|=O(log(|t|+2)), uniformly up to sigma=2; the same bound holds for sigma>=2.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.7, equations (6.9)\u2013(6.11), pp.174\u2013175"
+        },
+        "proof_plan": "Compare with s1=1+1/log(|t|+2)+it. Bound the sum of positive Re(1/(s1-rho)) by O(log t). For local zeros, distance comparison and horizontal length give |1/(s-rho)-1/(s1-rho)|<=C Re(1/(s1-rho)); the remaining local-formula error is O(log t). Extend through zero ordinates by continuity. Euler series handles sigma beyond s1."
+      },
+      {
+        "id": "thm-zeta-bounds-in-classical-zero-free-region",
+        "kind": "theorem",
+        "deps": [
+          "lem-zeta-horizontal-logarithmic-derivative-comparison",
+          "thm-riemann-zeta-classical-zero-free-region",
+          "thm-euler-product-for-riemann-zeta",
+          "thm-riemann-zeta-continuation-to-the-right-half-plane"
+        ],
+        "statement": "There are 0<c2<c1<c0 and C>0: for |t|>=3 and sigma>=1-c1/log(|t|+2), |zeta'/zeta(s)|<=C log^2(|t|+2) (indeed O(log)); in the c2 region |1/zeta(s)|<=C log(|t|+2). For |t|<=3 and 1-c2/log(|t|+2)<=sigma<=2, zeta'/zeta(s)+1/(s-1)=O(1) and 1/zeta(s)=O(|s-1|), with removable interpretations at 1.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.7, pp.174\u2013175"
+        },
+        "proof_plan": "Integrate the stronger O(log t) derivative over a horizontal length O(1/log t) from s1; Euler logarithm there is <=log log(|t|+2)+O(1). Compactness gives the explicitly pole-subtracted low-height bounds. Mere s!=1 is not a uniform pole exclusion."
+      },
+      {
+        "id": "cor-zeta-zero-count-near-the-one-line",
+        "kind": "corollary",
+        "deps": [
+          "thm-riemann-zeta-classical-zero-free-region",
+          "lem-zeta-logarithmic-derivative-zero-bound",
+          "thm-von-mangoldt-logarithmic-derivative-zeta",
+          "cor-zeta-zero-count-unit-interval"
+        ],
+        "statement": "For real t and 0<r<=3/4, the number n(r;t) of zeros in |rho-(1+it)|<=r, with multiplicity, is O(r log(|t|+2)).",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.8, p.175"
+        },
+        "proof_plan": "For r below a suitable constant/log(|t|+2) the region is empty. Otherwise, for r<=1/6 and high t, evaluate the positive real-part zero sum at 1+r+it: each counted zero contributes >=1/(5r) and the whole sum is O(1/r+log t). For r>=1/6 use the published unit-interval zero count; bounded t is compact and the zero-free region bounds r below whenever any zero is counted."
+      },
+      {
+        "id": "lem-zeta-reciprocal-zero-sum-bound",
+        "kind": "lemma",
+        "deps": [
+          "cor-zeta-zero-count-unit-interval",
+          "def-riemann-zeta-zero-counting",
+          "thm-hadamard-product-for-riemann-xi"
+        ],
+        "statement": "For T>=2, sum over nontrivial zeros with 0<|Im rho|<=T of 1/|rho| is O(log^2 T), with multiplicity. The same bound holds on adjoining the finitely many real nontrivial zeros, if any; xi(0)!=0 excludes a zero denominator.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/part-2-4.html",
+          "locator": "\u00a77.2, proof of Theorem 7.7 after Theorem 7.6"
+        },
+        "proof_plan": "Separate finitely many |Im rho|<=1; sum O(log(n+2)/n) over positive and negative unit ordinate bands. Never use the cancelling signed sum 1/Im rho."
+      },
+      {
+        "id": "lem-zeta-explicit-formula-zero-free-error-balance",
+        "kind": "lemma",
+        "deps": [
+          "thm-von-mangoldt-explicit-formula-truncated",
+          "thm-riemann-zeta-classical-zero-free-region",
+          "lem-zeta-reciprocal-zero-sum-bound",
+          "def-half-weighted-chebyshev-psi"
+        ],
+        "statement": "For x>=2 and admissible finite T>=3, the truncated explicit formula and the classical region imply psi(x)-x=O(x exp(-c0 log(x)/log(T+2)) log^2 T+x log^2(xT)/T+log x), after harmless adjustment of absolute constants.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/part-2-4.html",
+          "locator": "\u00a77.2, proof of Theorem 7.7"
+        },
+        "proof_plan": "Bound each x^rho using beta<=1-c0/log(T+2), sum reciprocal absolute values, and use min<=1 in the supplied truncation error. The half-weight jump costs at most log x/2. If height must avoid ordinates choose a non-ordinate in [T,T+1]; bounded finiteness suffices."
+      },
+      {
+        "id": "thm-chebyshev-psi-prime-number-theorem-error",
+        "kind": "theorem",
+        "deps": [
+          "lem-zeta-explicit-formula-zero-free-error-balance",
+          "thm-zeta-bounds-in-classical-zero-free-region"
+        ],
+        "statement": "For some absolute c>0, psi(x)=x+O(x exp(-c sqrt(log x))) for x>=2.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.9, pp.179\u2013181; independently Kedlaya Theorem 7.7"
+        },
+        "proof_plan": "Set log T=A sqrt(log x) after displaying every error, with fixed sufficiently small A>0, and absorb polynomial logarithms by decreasing c. Explain the equivalent Perron rectangle uses sigma1=1-c1/log T, so crosses only the proved zero-free region; its vertical error is O(x^sigma1 log^2 T), horizontal error O(x log^2(xT)/T). The finite-zero estimate supplies the main proof, with no infinite unsmoothed zero sum."
+      },
+      {
+        "id": "cor-chebyshev-theta-prime-number-theorem-error",
+        "kind": "corollary",
+        "deps": [
+          "thm-chebyshev-psi-prime-number-theorem-error",
+          "lem-chebyshev-functions-prime-power-comparison"
+        ],
+        "statement": "For some absolute c>0, theta(x)=x+O(x exp(-c sqrt(log x))).",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.9, equation (6.13), pp.179\u2013181"
+        },
+        "proof_plan": "Subtract the published prime-power comparison; its O(sqrt x log x) bound is absorbed."
+      },
+      {
+        "id": "def-logarithmic-integral",
+        "kind": "definition",
+        "deps": [],
+        "statement": "For x>=2 define Li(x)=integral from 2 to x of dt/log t; Li(2)=0.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "\u00a76.2, equation (6.14), p.179"
+        },
+        "proof_plan": "Fix the lower endpoint; no principal value across 1."
+      },
+      {
+        "id": "lem-logarithmic-integral-asymptotic-expansion",
+        "kind": "lemma",
+        "deps": [
+          "def-logarithmic-integral"
+        ],
+        "statement": "For fixed integer m>=1, Li(x)=sum_{j=0}^{m-1} j! x/log^(j+1)(x)+O_m(x/log^(m+1)(x)) as x tends to infinity.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "\u00a76.2, equation (6.15), pp.179\u2013180"
+        },
+        "proof_plan": "Integrate by parts m times, retain finite lower-end constants, and split the remainder integral at sqrt x."
+      },
+      {
+        "id": "thm-prime-number-theorem-logarithmic-integral",
+        "kind": "theorem",
+        "deps": [
+          "cor-chebyshev-theta-prime-number-theorem-error",
+          "def-logarithmic-integral",
+          "lem-prime-counting-chebyshev-partial-summation"
+        ],
+        "statement": "For some absolute c>0, pi(x)=Li(x)+O(x exp(-c sqrt(log x))).",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.9, equation (6.14) and proof, pp.179\u2013181"
+        },
+        "proof_plan": "Substitute theta=t+E(t) in the exact Abel identity; the main term differs from Li by 2/log2. Split the error integral at sqrt x and decrease c."
+      },
+      {
+        "id": "cor-prime-number-theorem",
+        "kind": "corollary",
+        "deps": [
+          "thm-prime-number-theorem-logarithmic-integral",
+          "lem-logarithmic-integral-asymptotic-expansion",
+          "lem-prime-counting-chebyshev-partial-summation",
+          "lem-chebyshev-functions-prime-power-comparison"
+        ],
+        "statement": "pi(x)~x/log x, theta(x)~x, and psi(x)~x; these three asymptotic assertions are equivalent.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-pnt.html",
+          "locator": "\u00a71.3, Lemma 1.7"
+        },
+        "proof_plan": "For the converse pi to theta use Abel summation theta=pi log x-integral_2^x pi(t)/t dt and an epsilon split; do not claim equivalence from definitions alone."
+      },
+      {
+        "id": "cor-nth-prime-asymptotic",
+        "kind": "corollary",
+        "deps": [
+          "cor-prime-number-theorem"
+        ],
+        "statement": "For the n-th prime p_n, p_n~n log n.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "\u00a76.2, Theorem 6.9 and equation (6.15), monotone inversion consequence"
+        },
+        "proof_plan": "Use n=pi(p_n), first obtain log p_n/log n->1, then invert with two-sided epsilon bounds. This is an explicit elementary consequence of the read counting result."
+      },
+      {
+        "id": "lem-newman-damped-contour-estimates",
+        "kind": "lemma",
+        "deps": [
+          "thm-cauchy-integral-formula-circle"
+        ],
+        "statement": "Let |f|<=B on [0,infinity), g its Laplace transform, and g_T its truncation. For radius R, the integrals of (g-g_T)e^(Tz)(1+z^2/R^2)/z over the right semicircle and of g_T e^(Tz)(1+z^2/R^2)/z over the left semicircle have absolute values at most 2pi B/R each.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-pnt.html",
+          "locator": "\u00a71.4, proof of Theorem 1.8, right and left semicircle estimates"
+        },
+        "proof_plan": "The right tail is <=B exp(-T Re z)/Re z; the left truncated transform is <=B(exp(-T Re z)-1)/(-Re z). On |z|=R, |(1+z^2/R^2)/z|=2|Re z|/R^2; integrate arc length pi R. Endpoint values interpreted by limits."
+      },
+      {
+        "id": "thm-newman-zagier-tauberian-theorem",
+        "kind": "theorem",
+        "deps": [
+          "lem-newman-damped-contour-estimates",
+          "thm-residue-theorem-null-homologous-cycle",
+          "thm-dominated-convergence"
+        ],
+        "statement": "For bounded locally Lebesgue-integrable f:[0,infinity)->C, if g(s)=integral_0^infinity f(t)e^(-st)dt extends holomorphically to an open set containing Re s>=0, then integral_0^infinity f(t)dt converges to g(0).",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-pnt.html",
+          "locator": "\u00a71.4, Theorem 1.8 and its complete proof"
+        },
+        "proof_plan": "For each finite R take a contour with right semicircle and a thin left path in the continuation neighborhood. Residues compare g(0) with g_T(0). Deform the entire g_T left integral to a left semicircle; the remaining g left-path integral tends to zero by dominated convergence. Obtain limsup_T |g(0)-g_T(0)|<=2B/R, then R->infinity. Prove holomorphy of the finite transform by differentiation under a bounded finite integral."
+      },
+      {
+        "id": "lem-monotone-chebyshev-tauberian-desmoothing",
+        "kind": "lemma",
+        "deps": [
+          "thm-cauchy-criterion-for-improper-integrals"
+        ],
+        "statement": "Let A:[1,infinity)->[0,infinity) be nondecreasing and locally integrable, with A(x)=O(x), and let a>=0. If integral_1^infinity (A(x)-ax)/x^2 dx converges, then A(x)/x->a.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-pnt.html",
+          "locator": "\u00a71.3, monotonicity argument preceding \u00a71.4"
+        },
+        "proof_plan": "Use vanishing tail integrals over [x,lambda x] and [x/lambda,x] to squeeze A(x)/x between a log(lambda)/(lambda-1) and a lambda log(lambda)/(lambda-1), then lambda down to 1. These estimates work for a=0; no differentiability is required."
+      },
+      {
+        "id": "lem-dirichlet-character-chebyshev-laplace-transform",
+        "kind": "lemma",
+        "deps": [
+          "thm-dirichlet-l-euler-product",
+          "thm-dirichlet-series-summatory-integral",
+          "thm-chebyshev-theta-linear-bounds",
+          "lem-chebyshev-functions-prime-power-comparison",
+          "thm-dirichlet-l-nonzero-at-one",
+          "thm-dirichlet-l-nonvanishing-line-one",
+          "thm-nonprincipal-dirichlet-l-holomorphic-right-half-plane",
+          "thm-principal-dirichlet-l-factorization",
+          "thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane"
+        ],
+        "statement": "For a fixed character chi mod q put Psi_chi(x)=sum_{n<=x}chi(n)Lambda(n) and delta_chi=1 for the principal character, 0 otherwise. The bounded function e^(-t)Psi_chi(e^t)-delta_chi has Laplace transform -L'(s+1,chi)/((s+1)L(s+1,chi))-delta_chi/s, holomorphic across Re s=0 after removing the principal singularity.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-primes-in-ap.html",
+          "locator": "\u00a74.4, proof of Theorem 4.12"
+        },
+        "proof_plan": "Differentiate the normally convergent Euler logarithm to obtain -L'/L=sum chi(n)Lambda(n)n^-w, then use the summatory integral and x=e^t. At s=0 the principal simple pole cancels delta/s; elsewhere use both nonvanishing-at-one and line-one theorems. The finite Euler factors have no zeros on Re w=1. Retain the factor (s+1) omitted in the source last paragraph."
+      },
+      {
+        "id": "thm-prime-number-theorem-arithmetic-progressions",
+        "kind": "theorem",
+        "deps": [
+          "lem-dirichlet-character-chebyshev-laplace-transform",
+          "thm-newman-zagier-tauberian-theorem",
+          "thm-dirichlet-character-orthogonality",
+          "lem-monotone-chebyshev-tauberian-desmoothing",
+          "lem-chebyshev-functions-prime-power-comparison",
+          "lem-prime-counting-chebyshev-partial-summation",
+          "lem-logarithmic-integral-asymptotic-expansion"
+        ],
+        "statement": "For each fixed integer q>=1 and gcd(a,q)=1, psi(x;q,a)~x/phi(q), theta(x;q,a)~x/phi(q), and pi(x;q,a)~Li(x)/phi(q).",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-primes-in-ap.html",
+          "locator": "\u00a74.4, Theorem 4.12 and proof"
+        },
+        "proof_plan": "Apply Newman characterwise and sum the convergent integrals by finite orthogonality. Only then apply desmoothing to the nonnegative monotone residue-class psi. Prime powers contribute at most the global comparison; repeat Abel summation for the class. Constants/neighborhoods may depend on q; q=1 included."
+      }
+    ]
+  },
+  {
+    "order": 348.016,
+    "id": "classical-zero-free-region-and-the-prime-number-theorem-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Classical Zero Free Region and the Prime Number Theorem \u2014 Examples",
+    "companion": "classical-zero-free-region-and-the-prime-number-theorem",
+    "requires": [
+      "classical-zero-free-region-and-the-prime-number-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-the-three-four-one-trigonometric-inequality",
+        "kind": "example",
+        "deps": [
+          "lem-zeta-three-four-one-logarithmic-derivative-inequality"
+        ],
+        "statement": "Expand the positive square and its Lambda(n)n^-sigma coefficients at t log n.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.6 proof"
+        },
+        "proof_plan": "Compute the three shifted real parts explicitly."
+      },
+      {
+        "id": "ex-zero-free-region-parameter-balance",
+        "kind": "example",
+        "deps": [
+          "thm-riemann-zeta-classical-zero-free-region"
+        ],
+        "statement": "Given the comparison constant C, choose delta=1/(2C log(|gamma|+2)) and derive 1-beta>=1/(14C log(|gamma|+2)) in the high-height argument.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.6 proof"
+        },
+        "proof_plan": "Keep the constants 3,4,7 visible and identify the separate compact-height step."
+      },
+      {
+        "id": "ex-optimizing-the-prime-number-theorem-contour-height",
+        "kind": "example",
+        "deps": [
+          "thm-chebyshev-psi-prime-number-theorem-error",
+          "lem-zeta-explicit-formula-zero-free-error-balance"
+        ],
+        "statement": "Evaluate the finite-zero, truncation, horizontal and vertical error estimates at T=exp(A sqrt(log x)).",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.9 proof"
+        },
+        "proof_plan": "Display exponential rates c0/A and A; absorb log powers only after choosing a fixed A."
+      },
+      {
+        "id": "ex-from-psi-to-the-logarithmic-integral",
+        "kind": "example",
+        "deps": [
+          "thm-chebyshev-psi-prime-number-theorem-error",
+          "lem-chebyshev-functions-prime-power-comparison",
+          "lem-prime-counting-chebyshev-partial-summation",
+          "def-logarithmic-integral"
+        ],
+        "statement": "Carry the psi estimate through theta to pi, retaining the endpoint constant 2/log2.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "Theorem 6.9 proof"
+        },
+        "proof_plan": "Work both error integrals with a split at sqrt x."
+      },
+      {
+        "id": "ex-newman-tauberian-prime-number-theorem",
+        "kind": "example",
+        "deps": [
+          "lem-dirichlet-character-chebyshev-laplace-transform",
+          "thm-newman-zagier-tauberian-theorem",
+          "lem-monotone-chebyshev-tauberian-desmoothing",
+          "cor-prime-number-theorem"
+        ],
+        "statement": "For f(t)=e^-t psi(e^t)-1 verify its transform -zeta'(s+1)/((s+1)zeta(s+1))-1/s and recover psi(x)~x.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-pnt.html",
+          "locator": "\u00a7\u00a71.3\u20131.4"
+        },
+        "proof_plan": "Use q=1 transform and desmoothing; the proof does not use the quantitative zero-free-region theorem."
+      },
+      {
+        "id": "ex-prime-number-theorem-in-a-small-progression",
+        "kind": "example",
+        "deps": [
+          "thm-prime-number-theorem-arithmetic-progressions",
+          "thm-dirichlet-character-orthogonality"
+        ],
+        "statement": "For q=4 compute psi(x;4,1)=(Psi_chi0(x)+Psi_chi4(x))/2 and psi(x;4,3)=(Psi_chi0(x)-Psi_chi4(x))/2; each prime count is asymptotic to Li(x)/2.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-primes-in-ap.html",
+          "locator": "\u00a74.4, Theorem 4.12"
+        },
+        "proof_plan": "List the two characters on 1 and 3; Psi_chi0=psi-sum_{2^k<=x}log2 and the correction is O(log x)."
+      },
+      {
+        "id": "cex-dirichlet-density-alone-does-not-give-a-counting-asymptotic",
+        "kind": "counterexample",
+        "deps": [
+          "thm-riemann-zeta-continuation-to-the-right-half-plane",
+          "thm-euler-product-for-riemann-zeta",
+          "thm-primes-residue-class-dirichlet-density",
+          "cor-prime-number-theorem",
+          "thm-chebyshev-psi-prime-number-theorem-error"
+        ],
+        "statement": "The positive integers with first decimal digit 1 have Dirichlet density log(2)/log(10), but counting ratios have distinct subsequential limits 1/9 and 5/9. Thus weighted density alone cannot supply an ordinary counting asymptotic. The analogous set of primes with first digit 1 has the same relative Dirichlet density and the same two relative counting subsequential limits.",
+        "source": {
+          "url": "https://kskedlaya.org/ant/chap-primes-in-ap.html",
+          "locator": "\u00a74.2 Definitions 4.3\u20134.4, Example 4.5; Exercise 4.5.3"
+        },
+        "proof_plan": "Use S=union_k [10^k,2*10^k) intersect N. Compare each Dirichlet block to its integral with uniformly bounded total error; (s-1)sum_S n^-s tends to log2/log10 by a geometric series. Count at 10^m and 2*10^m. State this is an integer-set counterexample to the inference, not a failure of the AP theorem. State finite additivity and zero contribution of finite sets directly from finite sums of limits. For the prime normalization expand log zeta: prime powers of exponent >=2 contribute O(1), giving sum_p p^-s=log(1/(s-1))+O(1). Cite the published progression density result solely to explain the gap the Tauberian theorem fills. For the prime variant, the established quantitative PNT and partial summation replace the prime series by integral w(log x)x^-s/log x dx with O(1) error as s decreases to1, where w is the periodic indicator of [0,log2) modulo log10. The primitive of w-log2/log10 is bounded, so integration by parts leaves the mean times log(1/(s-1))+O(1). Summing the final finitely many decade blocks using PNT and bounding earlier blocks gives relative counts 1/9 and5/9 at the two endpoints; control the early blocks before taking the endpoint limit."
+      },
+      {
+        "id": "rem-the-classical-zeta-region-is-not-a-uniform-dirichlet-l-region",
+        "kind": "remark",
+        "deps": [
+          "thm-riemann-zeta-classical-zero-free-region",
+          "thm-prime-number-theorem-arithmetic-progressions"
+        ],
+        "statement": "The zeta proof and fixed-q progression theorem establish no error bound uniform in growing q; no existence of exceptional real zeros is asserted.",
+        "source": {
+          "url": "https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf",
+          "locator": "\u00a76.1.1, paragraph following Exercise 4, p.176"
+        },
+        "proof_plan": "Explain dependence of continuation neighborhoods and constants on the character. Correct the design cex kind to a scope remark; absence of a proved uniform theorem is not a counterexample."
+      }
+    ]
+  },
+  {
+    "order": 365.915,
+    "id": "decomposition-inertia-and-frobenius",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Decomposition Inertia and Frobenius",
+    "companion": "decomposition-inertia-and-frobenius-examples",
+    "requires": [
+      "prime-ideal-decomposition-ramification-and-the-different-examples"
+    ],
+    "items": [
+      {
+        "id": "thm-completion-of-an-absolutely-valued-field",
+        "kind": "theorem",
+        "deps": [
+          "def-multiplicative-absolute-value-on-a-field",
+          "thm-metric-completion-exists",
+          "thm-metric-completion-unique"
+        ],
+        "statement": "The metric completion of an absolutely valued field F has a unique compatible complete valued field structure, with dense isometric F and the universal property for isometric field maps into complete fields. In the nonarchimedean case it preserves the value group and the residue field.",
+        "source": {
+          "url": "https://math.stanford.edu/~conrad/676Page/handouts/ostrowski.pdf",
+          "locator": "\u00a75, Definitions 5.1\u20135.2 and Theorem 5.3, pp.8\u20139"
+        },
+        "proof_plan": "Extend addition/product on Cauchy sequences; a nonzero limit has representatives bounded away from zero so inverses are Cauchy. For nonarchimedean values, close enough nonzero elements have exactly the same value. Approximation within distance <1 proves the residue map surjective; its kernel is the original maximal ideal. Inherit the published general metric-completion choice assumption explicitly; do not label this generic construction ZF."
+      },
+      {
+        "id": "def-normed-vector-space-over-an-absolutely-valued-field",
+        "kind": "definition",
+        "deps": [
+          "def-multiplicative-absolute-value-on-a-field"
+        ],
+        "statement": "A norm on an F-vector space is positive definite, satisfies ||av||=|a| ||v|| and ||v+w||<=||v||+||w||; F may have any multiplicative absolute value, including a nonarchimedean or trivial one.",
+        "source": {
+          "url": "https://math.stanford.edu/~conrad/676Page/handouts/ostrowski.pdf",
+          "locator": "\u00a75, Definition 5.4, p.9"
+        },
+        "proof_plan": "Define the induced metric; do not silently use the library definition restricted to real/complex scalars."
+      },
+      {
+        "id": "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field",
+        "kind": "theorem",
+        "deps": [
+          "def-normed-vector-space-over-an-absolutely-valued-field"
+        ],
+        "statement": "For a finite-dimensional normed vector space over a complete absolutely valued field, every norm is bounded above and below by positive multiples of any coordinate sup norm. The space is complete and its linear subspaces are closed.",
+        "source": {
+          "url": "https://math.stanford.edu/~conrad/676Page/handouts/ostrowski.pdf",
+          "locator": "\u00a75, Theorem 5.5 and proof, p.9"
+        },
+        "proof_plan": "Induct on dimension. Proper subspaces are complete and hence closed; quotient norms by coordinate hyperplanes bound each coordinate functional below. The upper bound is the triangle inequality on a fixed finite basis. Prove the quotient metric and complete-subspace-is-closed facts inline; no compact unit sphere assumption."
+      },
+      {
+        "id": "lem-uniqueness-of-an-extended-complete-field-absolute-value",
+        "kind": "lemma",
+        "deps": [
+          "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field"
+        ],
+        "statement": "Two absolute values extending a fixed absolute value on a complete field F to a finite extension E are equal; an extension, if it exists, makes E complete.",
+        "source": {
+          "url": "https://math.stanford.edu/~conrad/676Page/handouts/ostrowski.pdf",
+          "locator": "\u00a76, Lemma 6.1, pp.10\u201311"
+        },
+        "proof_plan": "View both as F-vector-space norms, compare by constants, apply the comparison to x^n and take nth roots. Completeness follows from norm equivalence. This avoids the design suggestion that density alone proves uniqueness in a nontrivial finite extension."
+      },
+      {
+        "id": "lem-hensel-factor-lifting-over-a-complete-valued-field",
+        "kind": "lemma",
+        "deps": [
+          "def-multiplicative-absolute-value-on-a-field"
+        ],
+        "statement": "Let F be complete nonarchimedean with valuation ring A and residue field k. If g in A[T] has nonzero reduction h0 H0 with h0 monic and gcd(h0,H0)=1, then g=hH with h monic reducing to h0 and H reducing to H0. The polynomial g need not be monic and the valuation need not be discrete. In particular a simple residue root of a monic polynomial lifts uniquely to a simple root in A.",
+        "source": {
+          "url": "https://math.stanford.edu/~conrad/676Page/handouts/ostrowski.pdf",
+          "locator": "\u00a76, Theorem 6.5 and full proof, pp.12\u201313"
+        },
+        "proof_plan": "Lift the finite coefficient data and Bezout relation; choose 0<|pi|<1 dominating all initial errors. Work with I=(pi), for which I^n is |x|<=|pi|^n. Solve corrections qH+Qh modulo I, using division by monic h to keep deg q<deg h0 and deg Q<=deg g-deg h0. Use the initially fixed lifted Bezout polynomials at every stage: compute q as the monic remainder of -rho times the fixed Bezout multiplier, and Q as a monic-division quotient. This gives deterministic corrections over A, so no sequence of fresh representative choices is used. Pass to complete coefficient limits. Trivial absolute value is immediate. For the simple-root consequence lift the factor T-a_bar; the complementary factor stays nonzero on that residue class, proving uniqueness and simplicity."
+      },
+      {
+        "id": "lem-irreducible-polynomial-coefficients-in-a-complete-valuation-ring",
+        "kind": "lemma",
+        "deps": [
+          "lem-hensel-factor-lifting-over-a-complete-valued-field"
+        ],
+        "statement": "If a monic irreducible f in F[T], F complete nonarchimedean, has |f(0)|<=1, then every coefficient of f has absolute value <=1.",
+        "source": {
+          "url": "https://math.stanford.edu/~conrad/676Page/handouts/ostrowski.pdf",
+          "locator": "\u00a76, proof of Theorem 6.4, p.11"
+        },
+        "proof_plan": "If a coefficient has maximal value >1, divide by it; the reduced polynomial has zero constant term, nonzero intermediate term and lowered degree. Factor reduction as T^r H0 with H0(0)!=0; Hensel gives a proper positive-degree factor over F, contradiction. This is why nonmonic lifting was needed."
+      },
+      {
+        "id": "thm-unique-extension-of-a-nonarchimedean-absolute-value",
+        "kind": "theorem",
+        "deps": [
+          "lem-uniqueness-of-an-extended-complete-field-absolute-value",
+          "lem-irreducible-polynomial-coefficients-in-a-complete-valuation-ring",
+          "thm-basic-laws-for-field-norm-and-trace",
+          "thm-field-norm-and-trace-agree-with-operator-determinant-and-trace"
+        ],
+        "statement": "For any finite field extension L/K with K complete nonarchimedean, |x|_L=|N_{L/K}(x)|_K^(1/[L:K]) is the unique extending absolute value and L is complete. Separability and discreteness are not assumed; the trivial valuation case is included.",
+        "source": {
+          "url": "https://math.stanford.edu/~conrad/676Page/handouts/ostrowski.pdf",
+          "locator": "\u00a76, Lemma 6.1 and Theorem 6.4, pp.10\u201311; Milne Theorem 7.38 for discrete separable specialization"
+        },
+        "proof_plan": "Norm multiplicativity and scalar formula give all axioms but triangle. Reduce |x+1|<=1 for |x|<=1 by the norm tower to K(x); its norm is the constant coefficient of its minimal polynomial. The coefficient lemma gives |f(-1)|<=1, hence triangle. Uniqueness/completeness follow from the separate norm lemma. Inseparable extensions need no normal closure."
+      },
+      {
+        "id": "thm-number-field-places-classification",
+        "kind": "theorem",
+        "deps": [
+          "thm-completion-of-an-absolutely-valued-field",
+          "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field",
+          "lem-uniqueness-of-an-extended-complete-field-absolute-value",
+          "thm-ostrowskis-theorem-for-the-rationals",
+          "thm-equivalent-field-absolute-values-characterisation",
+          "lem-dedekind-localisation-at-nonzero-prime-is-dvr",
+          "thm-fundamental-theorem-of-algebra-liouville-proof",
+          "def-ring-of-integers-of-a-number-field",
+          "cor-norm-of-a-prime-ideal"
+        ],
+        "statement": "Assume the Axiom of Choice. Places of a number field K mean equivalence classes of nontrivial absolute values. They consist of real embeddings, conjugate pairs of nonreal complex embeddings, and one nonarchimedean place for each nonzero prime P of $\\mathcal O_K$. A finite representative is\n$$|x|_P=(NP)^{-\\operatorname{ord}_P x}.$$\nIf P lies above a rational prime p, this restricts on $\\mathbb Q$ to $|\\cdot|_p^{ef}$, with $e=\\operatorname{ord}_P(p)$ and $NP=p^f$.",
+        "source": {
+          "url": "https://math.stanford.edu/~conrad/676Page/handouts/ostrowski.pdf",
+          "locator": "\u00a77, Corollary 7.3 and preceding normalization, pp.15\u201316; Milne Theorem 7.14"
+        },
+        "proof_plan": "A nontrivial absolute value on an algebraic extension cannot restrict trivially: use the minimal equation and its inverse. In the finite case integral equations bound O_K by 1; elements of value <1 form a nonzero prime P, units outside P have value1, and the DVR localization gives its valuation power. For archimedean values the completion contains R with a power of its absolute value; the image of R tensor K is finite dimensional, complete and dense, hence the whole completion. FTA makes this R or C; uniqueness of extensions identifies the ordinary absolute value power and embeddings up to conjugation. No general Gelfand\u2013Mazur theorem or class-group finiteness is required."
+      },
+      {
+        "id": "def-completion-of-a-number-field-at-a-prime",
+        "kind": "definition",
+        "deps": [
+          "thm-number-field-places-classification",
+          "thm-completion-of-an-absolutely-valued-field",
+          "def-ramification-index",
+          "def-prime-above-and-residue-degree"
+        ],
+        "statement": "For a nonzero prime P of O_K define K_P as the completion at |x|_P=(N P)^(-ord_P x). Its valuation ring has residue field O_K/P. In a relative extension P|p, use |.|_P^(1/(e f)) when an absolute value literally extending the normalized |.|_p is required.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 7, Theorem 7.38 and Remark 7.39; Chapter 8, Proposition 8.2"
+        },
+        "proof_plan": "The relative formula N P=(N p)^f and ord_P|K=e ord_p fixes the exponent ef; completions have the same topology for positive powers and need no uniformizer choice."
+      },
+      {
+        "id": "lem-number-field-completions-as-local-polynomial-factors",
+        "kind": "lemma",
+        "deps": [
+          "def-completion-of-a-number-field-at-a-prime",
+          "thm-unique-extension-of-a-nonarchimedean-absolute-value",
+          "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field",
+          "thm-primitive-element-theorem-for-finite-separable-extensions",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "thm-field-norm-and-trace-agree-with-operator-determinant-and-trace"
+        ],
+        "statement": "If L=K(alpha) is a finite separable number-field extension with minimal polynomial F and p a finite prime of K, factor F into distinct monic irreducibles F_i over K_p. Then L tensor_K K_p is the product of K_p[T]/(F_i), and these factors are precisely L_P for P|p. In particular sum_{P|p}[L_P:K_p]=[L:K]. Under this product, N_{L/K}(x)=product_P N_{L_P/K_p}(x) and Tr_{L/K}(x)=sum_P Tr_{L_P/K_p}(x), interpreted in K_p.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Propositions 8.1\u20138.2, pp.135\u2013136; Conrad Lemma 7.2, pp.14\u201315"
+        },
+        "proof_plan": "Polynomial CRT gives the finite product. Each factor carries its unique extending value, and L is dense by coefficient approximation. Conversely the image of K_p tensor L in any L_P is finite dimensional, complete and dense, hence surjective onto a factor. Different factors induce inequivalent values: equality would give a K_p-isometry fixing alpha, forcing identical minimal polynomials. Classification labels the factors by primes. The multiplication matrix after scalar extension is block diagonal on the factors; determinant and trace give the displayed identities."
+      },
+      {
+        "id": "thm-galois-action-on-primes-above-a-prime-is-transitive",
+        "kind": "theorem",
+        "deps": [
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "thm-number-field-integral-ideal-factorisation-in-zf",
+          "thm-field-norm-and-trace-by-embeddings"
+        ],
+        "statement": "Gal(L/K) acts transitively on primes of O_L above any fixed nonzero p of O_K when L/K is finite Galois.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.2, Theorem 9.2.2 proof, pp.101\u2013102"
+        },
+        "proof_plan": "If two prime orbits existed, CRT chooses alpha zero on the first and one on the second. The product of its finitely many Galois conjugates is an integral base element lying in p from the first orbit, but congruent to1 at the second orbit. Contradiction. This is finite prime avoidance made explicit."
+      },
+      {
+        "id": "cor-galois-prime-decomposition-efg",
+        "kind": "corollary",
+        "deps": [
+          "thm-galois-action-on-primes-above-a-prime-is-transitive",
+          "thm-fundamental-identity-for-primes-in-number-fields"
+        ],
+        "statement": "In a finite Galois extension all primes above p have common ramification index e and residue degree f; with g primes, efg=[L:K].",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.2, Theorem 9.2.2"
+        },
+        "proof_plan": "Automorphisms preserve exponents in ideal factorization and identify residue fields; substitute in sum ef."
+      },
+      {
+        "id": "def-decomposition-group-of-a-prime",
+        "kind": "definition",
+        "deps": [
+          "def-prime-above-and-residue-degree"
+        ],
+        "statement": "For a fixed P|p in finite Galois L/K define D(P/p)={sigma in Gal(L/K):sigma P=P}.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.3, Definition 9.3.1, p.104"
+        },
+        "proof_plan": "It is the stabilizer subgroup; the chosen prime is part of the notation."
+      },
+      {
+        "id": "thm-decomposition-group-and-completion",
+        "kind": "theorem",
+        "deps": [
+          "def-decomposition-group-of-a-prime",
+          "lem-number-field-completions-as-local-polynomial-factors",
+          "cor-galois-prime-decomposition-efg",
+          "thm-orbit-stabilizer"
+        ],
+        "statement": "For finite Galois L/K and P|p, L_P/K_p is finite Galois and continuous extension/restriction gives a canonical isomorphism D(P/p) with Gal(L_P/K_p); its degree is e f.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Proposition 8.10, p.139"
+        },
+        "proof_plan": "Stabilizers preserve the extending valuation, hence extend continuously. A local embedding sends alpha to a root of the global polynomial, all of whose roots lie in L by normality; restriction thus belongs to Gal(L/K) and preserves P by uniqueness of the local absolute value. This proves normality and the inverse maps. Orbit-stabilizer gives |D|=[L:K]/g=ef."
+      },
+      {
+        "id": "def-inertia-group-of-a-prime",
+        "kind": "definition",
+        "deps": [
+          "def-decomposition-group-of-a-prime",
+          "thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group"
+        ],
+        "statement": "For fixed P|p the stabilizer acts on kappa(P)=O_L/P fixing kappa(p); inertia I(P/p) is the kernel of this residue action.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.3.2, Definition 9.3.6 and Proposition 9.3.8, p.106"
+        },
+        "proof_plan": "Reduction is well-defined precisely because P is stabilized; equivalently sigma(a)-a belongs to P for all a in O_L."
+      },
+      {
+        "id": "lem-lifting-residue-frobenius-by-galois-conjugates",
+        "kind": "lemma",
+        "deps": [
+          "def-inertia-group-of-a-prime",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "thm-multiplicative-group-of-a-finite-field-is-cyclic",
+          "thm-decomposition-group-and-completion"
+        ],
+        "statement": "There exists an element of D(P/p) inducing a->a^(N p) on kappa(P).",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Frobenius element, footnote 1 on p.141; Stein Theorem 9.3.5"
+        },
+        "proof_plan": "Use CRT to choose alpha generating kappa(P)^times and zero at the other primes. The orbit polynomial product_sigma(T-sigma alpha) has base integral coefficients; modulo P the q-power of alpha is another root, so equals sigma alpha for some sigma. Its nonzero reduction forces sigma P=P. Agreement on the multiplicative generator proves the whole residue action. Completion preserves this residue map by the local correspondence."
+      },
+      {
+        "id": "thm-decomposition-inertia-exact-sequence",
+        "kind": "theorem",
+        "deps": [
+          "lem-lifting-residue-frobenius-by-galois-conjugates",
+          "thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group",
+          "def-inertia-group-of-a-prime"
+        ],
+        "statement": "For finite Galois L/K and fixed P|p there is an exact sequence 1->I(P/p)->D(P/p)->Gal(kappa(P)/kappa(p))->1.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.3.2, Theorem 9.3.5 (not design locator 9.3.2), p.106"
+        },
+        "proof_plan": "The residue Galois group is cyclic generated by the lifted power map. Its kernel is the defined inertia subgroup."
+      },
+      {
+        "id": "cor-orders-of-decomposition-and-inertia-groups",
+        "kind": "corollary",
+        "deps": [
+          "thm-decomposition-inertia-exact-sequence",
+          "thm-decomposition-group-and-completion",
+          "thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group"
+        ],
+        "statement": "For a finite Galois extension, |D|=ef, |I|=e, and |D/I|=f. In particular P is unramified exactly when I is trivial.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.3.2, Corollary 9.3.7, p.106"
+        },
+        "proof_plan": "Take finite group orders in the exact sequence; finite residue extensions are separable."
+      },
+      {
+        "id": "thm-conjugacy-of-decomposition-and-inertia-groups",
+        "kind": "theorem",
+        "deps": [
+          "def-inertia-group-of-a-prime"
+        ],
+        "statement": "If sigma P=Pprime, then D(Pprime/p)=sigma D(P/p)sigma^-1 and I(Pprime/p)=sigma I(P/p)sigma^-1, with the residue actions transported by sigma.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.3, Lemma 9.3.2, p.104"
+        },
+        "proof_plan": "Conjugate stabilizers and reduce sigma tau sigma^-1 on residue representatives."
+      },
+      {
+        "id": "thm-decomposition-and-inertia-in-towers",
+        "kind": "theorem",
+        "deps": [
+          "thm-conjugacy-of-decomposition-and-inertia-groups",
+          "thm-galois-action-on-primes-above-a-prime-is-transitive",
+          "cor-orders-of-decomposition-and-inertia-groups",
+          "thm-ramification-and-residue-degrees-in-towers",
+          "thm-normal-subgroups-and-quotients-in-the-galois-correspondence"
+        ],
+        "statement": "For M/L/K with M/K and L/K finite Galois and Q|P|p, D(Q/P)=D(Q/p) intersect Gal(M/L), and likewise for I. Restriction gives exact sequences 1->D(Q/P)->D(Q/p)->D(P/p)->1 and 1->I(Q/P)->I(Q/p)->I(P/p)->1.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Proposition 8.13, p.141"
+        },
+        "proof_plan": "Kernels follow from definitions. Lift an automorphism of L and adjust by Gal(M/L) using transitivity to stabilize Q. Inertia restriction lands in inertia; its image has size e(M/K)/e(M/L)=e(L/K), hence is onto. The intersection statements hold more generally, but the quotient assertions require L/K Galois."
+      },
+      {
+        "id": "thm-decomposition-and-inertia-fixed-fields",
+        "kind": "theorem",
+        "deps": [
+          "thm-decomposition-inertia-exact-sequence",
+          "cor-orders-of-decomposition-and-inertia-groups",
+          "thm-ramification-and-residue-degrees-in-towers",
+          "thm-normal-subgroups-and-quotients-in-the-galois-correspondence",
+          "thm-galois-action-on-primes-above-a-prime-is-transitive"
+        ],
+        "statement": "Put E=L^D and U=L^I for fixed P|p in finite Galois L/K. P is the unique prime above its contraction to E; that contracted prime has e=f=1 over p. U/E is cyclic of degree f and is unramified at the distinguished primes; L/U is totally ramified there of degree e. The base prime splits completely in E/K if D is normal; this is not asserted for nonnormal E/K. Moreover E is the smallest intermediate field F for which P is the only prime above P intersect O_F.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Proposition 8.11, p.140; Stein Propositions 9.3.3\u20139.3.4, pp.104\u2013105"
+        },
+        "proof_plan": "Apply transitivity in L/E with group D fixing P, then order formulas and multiplicativity; I normal in D gives U/E cyclic. Intersections show the inertia in L/U is all I, so residue degree1. Explicitly correct Stein 9.3.4: e=f=1 for one contracted prime need not mean every prime splits in nonnormal E/K. If P is unique over its contraction to F, Gal(L/F) fixes P, so Gal(L/F)<=D and E<=F."
+      },
+      {
+        "id": "def-arithmetic-frobenius-coset",
+        "kind": "definition",
+        "deps": [
+          "thm-decomposition-inertia-exact-sequence"
+        ],
+        "statement": "Arithmetic Frobenius at P/p is the unique element of D(P/p)/I(P/p) inducing x->x^(N p) on kappa(P). Its inverse is geometric Frobenius.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Frobenius element, p.141"
+        },
+        "proof_plan": "The exact sequence identifies the quotient with the finite residue Galois group; this defines a coset even at ramified primes."
+      },
+      {
+        "id": "thm-unramified-frobenius-element-exists-uniquely",
+        "kind": "theorem",
+        "deps": [
+          "def-arithmetic-frobenius-coset",
+          "cor-orders-of-decomposition-and-inertia-groups"
+        ],
+        "statement": "If e(P/p)=1, the arithmetic Frobenius coset has a unique lift Frob_P in D(P/p), characterized by Frob_P(a)=a^(N p) modulo P for every a in O_L.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Frobenius element, pp.141\u2013142"
+        },
+        "proof_plan": "Inertia is trivial; invert the residue isomorphism. At ramified primes retain only the coset."
+      },
+      {
+        "id": "thm-frobenius-elements-above-a-prime-are-conjugate",
+        "kind": "theorem",
+        "deps": [
+          "thm-unramified-frobenius-element-exists-uniquely",
+          "thm-conjugacy-of-decomposition-and-inertia-groups",
+          "thm-galois-action-on-primes-above-a-prime-is-transitive"
+        ],
+        "statement": "For unramified p and sigma P=Pprime, Frob_Pprime=sigma Frob_P sigma^-1; thus p determines a conjugacy class, an element independent of P in the abelian case.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Proposition 8.14; Stein Proposition 9.4.1"
+        },
+        "proof_plan": "Conjugation commutes with the q-power map after transporting residue fields; use uniqueness."
+      },
+      {
+        "id": "thm-frobenius-order-is-residue-degree",
+        "kind": "theorem",
+        "deps": [
+          "def-arithmetic-frobenius-coset",
+          "thm-unramified-frobenius-element-exists-uniquely",
+          "thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group"
+        ],
+        "statement": "Arithmetic Frobenius has order f(P/p) in D/I and, when unramified, in D.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Frobenius element, p.142"
+        },
+        "proof_plan": "Transfer the order of finite-field Frobenius through the residue isomorphism."
+      },
+      {
+        "id": "cor-complete-splitting-and-trivial-frobenius",
+        "kind": "corollary",
+        "deps": [
+          "thm-frobenius-order-is-residue-degree",
+          "cor-galois-prime-decomposition-efg"
+        ],
+        "statement": "An unramified prime in a finite Galois extension splits completely if and only if its Frobenius conjugacy class is the identity.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, p.142, paragraph after Proposition 8.14"
+        },
+        "proof_plan": "With e=1, identity means f=1, hence g=[L:K]."
+      },
+      {
+        "id": "cor-frobenius-compatibility-in-finite-towers",
+        "kind": "corollary",
+        "deps": [
+          "thm-decomposition-and-inertia-in-towers",
+          "thm-unramified-frobenius-element-exists-uniquely",
+          "thm-ramification-and-residue-degrees-in-towers"
+        ],
+        "statement": "In a Galois tower M/L/K unramified at Q|P|p, Frob(Q/p) restricts to Frob(P/p), and Frob(Q/P)=Frob(Q/p)^f(P/p). In an unramified compositum the two restriction Frobenius elements determine the compositum Frobenius.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Propositions 8.15\u20138.17, p.142"
+        },
+        "proof_plan": "Compare q-powers and q^f-powers in the residue fields. Restriction to both constituent fields is injective on the compositum Galois group; assume the compositum prime unramified rather than importing unramified-base-change theory."
+      },
+      {
+        "id": "lem-good-polynomial-reduction-kills-inertia",
+        "kind": "lemma",
+        "deps": [
+          "def-discriminant-of-a-monic-polynomial",
+          "def-inertia-group-of-a-prime",
+          "cor-orders-of-decomposition-and-inertia-groups"
+        ],
+        "statement": "Let F in Z[T] be monic separable with splitting field L. If p does not divide disc(F), all integral roots have distinct reductions at every P|p, and I(P/p) is trivial; hence p is unramified in L.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Proposition 8.21 and Theorem 8.23 proof, pp.144\u2013145"
+        },
+        "proof_plan": "The discriminant is the product of squared root differences. If p does not divide it no two reductions coincide. Inertia permutes roots while fixing their reductions, so fixes each root and therefore the splitting field. This supplies the usually implicit unramifiedness step."
+      },
+      {
+        "id": "thm-frobenius-cycle-type-and-prime-splitting",
+        "kind": "theorem",
+        "deps": [
+          "lem-good-polynomial-reduction-kills-inertia",
+          "thm-frobenius-elements-above-a-prime-are-conjugate",
+          "thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group"
+        ],
+        "statement": "For monic separable F in Z[T] with splitting field L and p not dividing disc(F), p is unramified in L, F mod p is squarefree, and its irreducible factor degrees are the cycle lengths of arithmetic Frobenius on the roots of F.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Proposition 8.21, Corollary 8.22, Theorem 8.23, pp.144\u2013145"
+        },
+        "proof_plan": "Reduction is a bijection of the root sets compatible with Frobenius. Prove inline that the orbit product over a q-power orbit is its irreducible minimal polynomial over F_q, by the fixed field and root count. Distinct primes conjugate the permutation and preserve its cycle type."
+      }
+    ]
+  },
+  {
+    "order": 365.916,
+    "id": "decomposition-inertia-and-frobenius-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Decomposition Inertia and Frobenius \u2014 Examples",
+    "companion": "decomposition-inertia-and-frobenius",
+    "requires": [
+      "decomposition-inertia-and-frobenius"
+    ],
+    "items": [
+      {
+        "id": "ex-decomposition-inertia-in-a-quadratic-field",
+        "kind": "example",
+        "deps": [
+          "cor-galois-prime-decomposition-efg",
+          "cor-orders-of-decomposition-and-inertia-groups",
+          "thm-frobenius-order-is-residue-degree"
+        ],
+        "statement": "For a quadratic Galois field, compute split (e,f,g)=(1,1,2), inert (1,2,1), and ramified (2,1,1) cases with D, I and residue Frobenius.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.2.1 and \u00a79.3.2"
+        },
+        "proof_plan": "Use the unique subgroups of C2: D=1 for split, D=C2,I=1 for inert, D=I=C2 for ramified."
+      },
+      {
+        "id": "ex-gaussian-and-eisenstein-frobenius",
+        "kind": "example",
+        "deps": [
+          "thm-frobenius-cycle-type-and-prime-splitting",
+          "ex-decomposition-inertia-in-a-quadratic-field",
+          "thm-multiplicative-group-of-a-finite-field-is-cyclic",
+          "thm-ring-of-integers-of-a-quadratic-field"
+        ],
+        "statement": "In Q(i), odd primes split/inert according as p=1/3 mod4, with arithmetic Frobenius i->i^p; 2 ramifies. In Q(zeta3), p!=3 split/inert according as p=1/2 mod3, with zeta3->zeta3^p; 3 ramifies.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Examples 8.18\u20138.19, pp.142\u2013143"
+        },
+        "proof_plan": "Check X^2+1 and X^2+X+1 using cyclic finite-field units; exceptional primes factor by (1+i)^2 and (1-zeta3)^2 up to units. Give integral bases by the quadratic integral equation, not a later cyclotomic theorem."
+      },
+      {
+        "id": "ex-frobenius-in-a-small-cyclotomic-field",
+        "kind": "example",
+        "deps": [
+          "thm-frobenius-cycle-type-and-prime-splitting",
+          "thm-frobenius-order-is-residue-degree",
+          "cor-galois-prime-decomposition-efg",
+          "thm-eisenstein-irreducibility-criterion",
+          "def-discriminant-of-a-monic-polynomial"
+        ],
+        "statement": "In Q(zeta5), Gal=C4 via zeta5->zeta5^a. For p!=5 Frobenius is exponent p mod5; p=2 has order4 and is inert.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Example 8.18, p.143"
+        },
+        "proof_plan": "Prove Phi5 irreducible by Eisenstein after X->X+1, list four embeddings, compute disc(Phi5)=5^3 by derivatives, and reduce the power map. This explicit n=5 calculation does not require NT-24."
+      },
+      {
+        "id": "ex-nonabelian-frobenius-conjugacy-class",
+        "kind": "example",
+        "deps": [
+          "thm-frobenius-cycle-type-and-prime-splitting",
+          "thm-frobenius-elements-above-a-prime-are-conjugate",
+          "thm-eisenstein-irreducibility-criterion"
+        ],
+        "statement": "For the splitting field of X^3-2, Gal=S3. Modulo5, X^3-2=(X+2)(X^2+3X+4), the quadratic irreducible, so primes above5 give all three distinct conjugate transpositions as Frobenius.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.2.2, cube root of two; Milne Theorem 8.23"
+        },
+        "proof_plan": "Establish degree6 by irreducibility of X^3-2 and adjoining nonreal zeta3 to its real cubic field; the faithful action on three roots is S3. Check quadratic discriminant3 mod5 nonsquare and global polynomial discriminant -108. Transitivity gives every conjugate."
+      },
+      {
+        "id": "ex-decomposition-groups-in-a-tower",
+        "kind": "example",
+        "deps": [
+          "ex-frobenius-in-a-small-cyclotomic-field",
+          "thm-decomposition-and-inertia-in-towers",
+          "cor-frobenius-compatibility-in-finite-towers"
+        ],
+        "statement": "For M=Q(zeta5), L=Q(sqrt5), K=Q, and p=2, the unique primes have e=1, residue degrees4 in M/K and2 in each step. D groups give 1->C2->C4->C2->1; all inertia groups are trivial.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 8, Propositions 8.13 and 8.15\u20138.16; Example 8.18"
+        },
+        "proof_plan": "Show zeta5+zeta5^-1 has minimal polynomial T^2+T-1 and generates Q(sqrt5); restricting exponent2 has order2, and the relative Frobenius is its square."
+      },
+      {
+        "id": "cex-ramified-frobenius-has-no-canonical-lift",
+        "kind": "counterexample",
+        "deps": [
+          "ex-gaussian-and-eisenstein-frobenius",
+          "def-arithmetic-frobenius-coset"
+        ],
+        "statement": "At 2 in Q(i), D=I=C2 and D/I is trivial; both identity and conjugation lift the same arithmetic residue Frobenius. Thus the residue congruence does not specify a unique element at a ramified prime.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.3.2 and \u00a79.4, unramified qualification"
+        },
+        "proof_plan": "Compute residue field F2 at (1+i), then list both lifts. Refute uniqueness from residue data, without a stronger unsupported claim that no auxiliary convention can select a lift."
+      },
+      {
+        "id": "cex-frobenius-cycle-type-needs-good-reduction",
+        "kind": "counterexample",
+        "deps": [
+          "thm-frobenius-cycle-type-and-prime-splitting",
+          "thm-dedekind-kummer-prime-factorisation",
+          "thm-ramified-primes-and-the-number-field-discriminant",
+          "thm-ring-of-integers-of-a-quadratic-field",
+          "thm-power-basis-discriminant-is-polynomial-discriminant"
+        ],
+        "statement": "For F=X^2-5 at p=2 the reduction is (X+1)^2, yet Q(sqrt5) is unramified and inert at2. Factor multiplicities from this bad generator do not encode Frobenius cycles; the integral generator (1+sqrt5)/2 has irreducible reduction X^2+X+1.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "\u00a79.2.1, Q(sqrt5) example, pp.102\u2013103; Milne Theorem 8.23 qualification"
+        },
+        "proof_plan": "Verify O_K=Z[(1+sqrt5)/2] and d_K=5 by the quadratic integrality calculation; index of Z[sqrt5] is2 and disc(X^2-5)=20. Contrast the ramified X^2+1 example at2."
+      }
+    ]
+  }
+]

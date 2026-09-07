@@ -11,17 +11,16 @@ parts:
       - the-analytic-hahn-banach-theorem
       - the-baire-principles-of-functional-analysis
       - geometric-hahn-banach-and-convex-separation
+      - dual-spaces-adjoint-operators-and-annihilators
 ---
 
 ## foundations
 
 The track separates linear normed-space structure from Banach completeness. Closed subspaces,
-products, series, and completion provide ambient constructions; bounded maps, quotient norms,
-openness, quotients, and complemented kernels or ranges develop operator theory. In finite
-dimension all norms are equivalent and maps are bounded, while Riesz's lemma witnesses
-infinite-dimensional noncompactness. Under DC, Baire category turns pointwise bounded families
-of bounded operators into uniform norm bounds and supports the open-mapping, bounded-inverse,
-and closed-graph theorems; the gliding-hump alternative records why completeness cannot simply
-be dropped. Hahn--Banach supplies norming functionals and separation, whose geometric form uses
-the Minkowski gauge; annihilators then detect closure, density, hyperplanes, and convex weak
-versus norm closure.
+products, series, and completion provide ambient constructions; bounded maps and quotient norms
+develop operator theory. Finite-dimensional norm equivalence, Riesz's lemma, and, under DC,
+Baire category lead to the open-mapping, bounded-inverse, and closed-graph theorems.
+Hahn--Banach supplies norming functionals and separation through the Minkowski gauge. The
+dual-spaces page identifies quotients and subspaces through annihilators, develops the
+transpose and canonical bidual map, proves Banach closed-range criteria, and distinguishes norm
+from weak-star closure through the classical duals of $c_0$ and $\ell^1$.

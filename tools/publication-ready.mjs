@@ -86,7 +86,10 @@ const publishedBaseline = typeof baseline === 'string' && /^[a-f0-9]{40,64}$/.te
 if (scope) {
   for (const row of [...scope.pages, ...scope.items]) {
     const { frontmatter } = splitFrontmatter(readFileSync(join(root, row.file), 'utf8'));
-    const status = frontmatter.match(/^status:\s*(\S+)\s*$/m)?.[1];
+    // YAML permits either a plain or quoted scalar here. Authoring templates
+    // use both forms, so compare the decoded scalar rather than its spelling.
+    const status = frontmatter.match(/^status:\s*(\S+)\s*$/m)?.[1]
+      ?.replace(/^['"]|['"]$/g, '');
     if (status === 'published' && publishedBaseline) {
       const prior = git('show', `${publishedBaseline}:${row.file}`);
       if (prior.status === 0) {

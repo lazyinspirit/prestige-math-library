@@ -1,0 +1,423 @@
+[
+  {
+    "order": 288.14018,
+    "id": "divergence-and-almost-everywhere-convergence-of-fourier-series",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "Divergence and Almost Everywhere Convergence of Fourier Series",
+    "companion": "divergence-and-almost-everywhere-convergence-of-fourier-series-examples",
+    "requires": [
+      "lacunary-fourier-series-and-sidon-sets-examples"
+    ],
+    "items": [
+      {
+        "id": "def-carleson-maximal-partial-sum-operator",
+        "kind": "definition",
+        "title": "Carleson maximal partial-sum operator",
+        "statement": "For f in L1(T), define Cf(x)=sup over integers N>=0 of |S_N f(x)| in [0,infinity]. Each S_N is a continuous polynomial depending only on the L1 class; hence C is measurable and sublinear.",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution"
+        ],
+        "strategy": "Define the countable supremum; measurability and sublinearity follow directly from finite Fourier sums. Use period one and normalized Haar measure.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "ch. 8, pp. 51–52, Theorem 8.7 discussion"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+        "kind": "lemma",
+        "title": "Fourier partial-sum operator norm equals the Lebesgue constant",
+        "statement": "For every N>=0 and every prescribed x0 in T, both the functional f -> S_N f(x0) on C(T) and S_N:C(T)->C(T) have norm integral_T |D_N|. This holds for real or complex continuous functions. These norms are unbounded as N tends to infinity; more precisely they are at least c log(N+1) for some absolute c>0 and N>=1.",
+        "deps": [
+          "lem-fourier-partial-sums-are-dirichlet-convolutions",
+          "def-dirichlet-and-fejer-kernels",
+          "def-operator-norm",
+          "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel"
+        ],
+        "strategy": "Upper bound by the convolution integral. For the lower bound use the real continuous test f_delta(u)=D_N(x0-u)/max(delta,|D_N(x0-u)|). Its norm is at most one and the integral differs from integral |D_N| by at most delta. No discontinuous sign function is admitted as a continuous test. Include the necessary lower-bound calculation inline: for m=0,...,N-1 integrate over [(m+1/6)/(2N+1),(m+5/6)/(2N+1)] where |sin((2N+1)pi t)|>=1/2 and sin(pi t)<=pi t. Sum the resulting logarithms, bounded below by a constant times sum_{m=0}^{N-1}1/(m+1). This is explicitly reused mathematical content because the published Lebesgue-constant item is B-homed and unavailable as a logical target; do not mint a second growth theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "ch. 8, Theorem 8.2 proof pp. 48–49; ch. 9, Example 9.3 pp. 54–55"
+            },
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§3.4.3, Proposition 3.4.6 proof, p. 211, harmonic-sum lower estimate"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-continuous-function-with-divergent-fourier-series-at-a-point",
+        "kind": "counterexample",
+        "title": "A continuous function with divergent Fourier series at a prescribed point",
+        "statement": "Assume DC. For every x0 in T there exists a real continuous periodic f with sup_N |S_N f(x0)|=infinity.",
+        "deps": [
+          "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+          "thm-uniform-boundedness-principle",
+          "thm-c-k-complete-in-the-sup-metric",
+          "thm-dini-pointwise-convergence-criterion-for-fourier-series"
+        ],
+        "strategy": "Work on the closed subspace {f in C([0,1],R): f(0)=f(1)}; completeness follows from the published real C(K) theorem and preservation of endpoint equality under uniform limits. Apply uniform boundedness contrapositively to the evaluation functionals from the norm lemma. Carry DC explicitly. This is the single canonical du Bois-Reymond witness. Include the harvested localization observation: a function vanishing near x0 satisfies the published Dini criterion with s=0, so the divergent witness cannot do so.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§3.4.3, Proposition 3.4.6(a), pp. 210–211"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fourier-maximal-weak-bound-closes-almost-everywhere-convergence",
+        "kind": "lemma",
+        "title": "A weak maximal bound implies almost-everywhere Fourier convergence",
+        "statement": "Assume countable choice. Fix 1<=p<infinity. If a finite A satisfies m{Cg>lambda} <= A lambda^(-p) ||g||_p^p for every g in Lp(T) and lambda>0, then S_N f -> f almost everywhere for every f in Lp(T).",
+        "deps": [
+          "def-carleson-maximal-partial-sum-operator",
+          "thm-fejer-convergence-in-lp",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "strategy": "Take the explicit polynomial approximants Q_j=sigma_j f, which tend to f in Lp. Orthogonality of finite characters gives S_N Q_j=Q_j for large N. Thus limsup_N |S_N f-f| <= C(f-Q_j)+|f-Q_j|. Bound the measure where this exceeds 2 lambda by (A+1)lambda^(-p)||f-Q_j||_p^p, let j grow, then take lambda=1/m. Include measurability of the limsup and countable null union inline.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Theorem 6.4 and Remark 6.5, p. 37 (specialized to Fourier sums and p=q)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-kolmogorov-block-polynomials-have-large-partial-sum-maxima",
+        "kind": "remark",
+        "title": "Kolmogorov polynomial blocks — recorded construction lemma",
+        "statement": "For each integer M>=1 there are a nonnegative trigonometric polynomial g_M with ||g_M||_1=1 and a measurable A_M with m(A_M)>1-2^(-M), such that inf over x in A_M of sup_{N>=1}|S_N g_M(x)|>2^M.",
+        "deps": [
+          "def-carleson-maximal-partial-sum-operator"
+        ],
+        "strategy": "Record the exact integer version of Grafakos Lemma 4.2.4; nonnegativity is supplied by its Fejer-smoothed positive measure construction. The word block does not assert disjoint frequency support. Explain the source’s Kronecker alignment and probability-measure lemmas as unproved construction costs, not available local facts.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§4.2.1, Lemmas 4.2.2–4.2.4, pp. 255–259, especially (4.2.6)"
+            }
+          ]
+        },
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "external_dependency": {
+          "source_url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+          "exact_statement": "For each integer M>=1 there are a nonnegative trigonometric polynomial g_M with ||g_M||_1=1 and a measurable A_M with m(A_M)>1-2^(-M), such that inf over x in A_M of sup_{N>=1}|S_N g_M(x)|>2^M.",
+          "local_proof_attempt": "Read the Kronecker proof, atomic probability measures and finite-maximal truncation followed by Fejer smoothing. This requires its rational-independence construction and uniform phase approximation; the design explicitly withholds this multi-lemma proof. No fabricated short proof or logical edge to an unproved lemma is planned.",
+          "necessity": "Required by FR-5’s explicit literature boundary; retained for mathematical scope without making an unproved result a logical prerequisite."
+        }
+      },
+      {
+        "id": "rem-kolmogorov-lone-fourier-series-diverges-almost-everywhere",
+        "kind": "remark",
+        "title": "Kolmogorov almost-everywhere divergence — recorded theorem",
+        "statement": "There exists f in L1(T) for which sup_{N>=0}|S_N f(x)|=infinity for almost every x. In particular the Fourier series diverges almost everywhere.",
+        "deps": [
+          "def-carleson-maximal-partial-sum-operator"
+        ],
+        "strategy": "Record the almost-everywhere assertion proved by Grafakos (4.2.13); do not replace it by everywhere divergence. Describe the weighted sum of polynomials and separate early-term and tail control as source architecture, not a local proof.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§4.2.1, Theorem 4.2.1 and (4.2.7)–(4.2.13), pp. 255–261"
+            }
+          ]
+        },
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "external_dependency": {
+          "source_url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+          "exact_statement": "There exists f in L1(T) for which sup_{N>=0}|S_N f(x)|=infinity for almost every x. In particular the Fourier series diverges almost everywhere.",
+          "local_proof_attempt": "Read the full summation construction through (4.2.13). It depends on the unsupplied polynomial lemma. The design explicitly keeps the entire Kolmogorov theorem external, so the polynomial lemma is an external mention, never a deps edge.",
+          "necessity": "Required by FR-5’s explicit literature boundary; retained for mathematical scope without making an unproved result a logical prerequisite."
+        },
+        "external_refs": [
+          "rem-kolmogorov-block-polynomials-have-large-partial-sum-maxima"
+        ]
+      },
+      {
+        "id": "rem-carleson-hunt-almost-everywhere-convergence",
+        "kind": "remark",
+        "title": "Carleson–Hunt maximal bound and almost-everywhere convergence — recorded theorem",
+        "statement": "For each 1<p<infinity there is a finite C_p such that ||Cf||_p <= C_p||f||_p for every f in Lp(T). Consequently S_N f(x)->f(x) almost everywhere. Carleson established p=2 and Hunt the full open range.",
+        "deps": [
+          "def-carleson-maximal-partial-sum-operator"
+        ],
+        "strategy": "State both the maximal estimate and convergence consequence; p=1 is excluded. This is recorded literature, with no local time-frequency proof. Do not mistake sup_N ||S_N f||_p for ||sup_N |S_N f|||_p.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "ch. 8, Theorem 8.7 and omitted-proof discussion, pp. 51–52"
+            }
+          ]
+        },
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "external_dependency": {
+          "source_url": "https://arxiv.org/pdf/0903.3845",
+          "exact_statement": "For each 1<p<infinity there is a finite C_p such that ||Cf||_p <= C_p||f||_p for every f in Lp(T). Consequently S_N f(x)->f(x) almost everywhere. Carleson established p=2 and Hunt the full open range.",
+          "local_proof_attempt": "The dense-polynomial closure is isolated locally in the weak-bound lemma. It cannot supply the missing maximal estimate. Read Lacey §3’s size, density and tree machinery and §7’s opening; FR-5 explicitly keeps the deep estimate external.",
+          "necessity": "Required by FR-5’s explicit literature boundary; retained for mathematical scope without making an unproved result a logical prerequisite."
+        }
+      },
+      {
+        "id": "cor-lp-fourier-series-converges-almost-everywhere-for-p-greater-than-one",
+        "kind": "corollary",
+        "title": "Almost-everywhere convergence from the Carleson–Hunt estimate",
+        "statement": "Assume countable choice and fix 1<p<infinity. Under the explicit hypothesis that ||Cg||_p<=C_p||g||_p for all g in Lp(T), every f in Lp(T) has S_N f->f almost everywhere.",
+        "deps": [
+          "lem-fourier-maximal-weak-bound-closes-almost-everywhere-convergence",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "strategy": "Apply Chebyshev to |Cg|^p to obtain the weak estimate with A=C_p^p, then apply the proved weak-bound lemma. State the estimate as a hypothesis; the external Carleson–Hunt record is a bibliographic mention only, not a discharged local assumption.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "ch. 8, p. 52, closure route after Theorem 8.7"
+            }
+          ]
+        },
+        "external_refs": [
+          "rem-carleson-hunt-almost-everywhere-convergence"
+        ]
+      },
+      {
+        "id": "rem-proof-cost-of-the-carleson-hunt-theorem",
+        "kind": "remark",
+        "title": "What the Carleson–Hunt proof requires",
+        "statement": "In the Lacey–Thiele route, a time-frequency decomposition leads to trees and separate density, size and tree estimates; balancing the scales gives a summable series. The Lp extension uses exceptional-set control. These mechanisms have not been proved on this page.",
+        "deps": [],
+        "strategy": "Give a sourced proof roadmap only. Specify one proof route, not a claim that all possible proofs must have this architecture. Lacey uses a real-line model; no real-line-to-torus transference theorem is claimed locally.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "§3 before §3.1, pp. 11–14; §7 opening and §7.2 opening through (7.9), pp. 24–26"
+            }
+          ]
+        },
+        "external_refs": [
+          "rem-carleson-hunt-almost-everywhere-convergence"
+        ]
+      },
+      {
+        "id": "rem-the-lone-endpoint-is-excluded-from-carleson-hunt",
+        "kind": "remark",
+        "title": "The L1 endpoint is excluded",
+        "statement": "Assume countable choice. The recorded Kolmogorov result rules out almost-everywhere convergence for all L1 functions and, by the proved conditional maximal principle, rules out a weak (1,1) Carleson bound. Strong (1,1) would imply weak (1,1). This paragraph is an interpretation of the recorded theorem, not an independently proved endpoint theorem.",
+        "deps": [
+          "lem-fourier-maximal-weak-bound-closes-almost-everywhere-convergence",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "strategy": "Keep the dependence on the unproved existence statement visible in prose and external_refs. Compare pointwise failure for continuous functions with almost-everywhere failure in L1 without conflating them.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "ch. 8, Theorems 8.1 and 8.7 endpoint discussion, pp. 47 and 51–52"
+            }
+          ]
+        },
+        "external_refs": [
+          "rem-kolmogorov-lone-fourier-series-diverges-almost-everywhere",
+          "rem-carleson-hunt-almost-everywhere-convergence"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.1402,
+    "id": "divergence-and-almost-everywhere-convergence-of-fourier-series-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "Divergence and Almost Everywhere Convergence of Fourier Series — Examples",
+    "companion": "divergence-and-almost-everywhere-convergence-of-fourier-series",
+    "requires": [
+      "divergence-and-almost-everywhere-convergence-of-fourier-series"
+    ],
+    "items": [
+      {
+        "id": "ex-fourier-partial-sum-operators-and-uniform-boundedness",
+        "kind": "example",
+        "title": "A residual set of continuous functions has unbounded partial sums at zero",
+        "statement": "Assume DC. In the real Banach space C(T), the set {f: sup_N |S_N f(0)|=infinity} is a dense G_delta.",
+        "deps": [
+          "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+          "thm-banach-steinhaus-dichotomy",
+          "thm-c-k-complete-in-the-sup-metric"
+        ],
+        "strategy": "Apply the published Baire dichotomy to T_N f=S_N f(0). Explain the closed periodic subspace as for the A-page witness and display the set as intersection_m union_N {f:|T_N f|>m}. Do not replace residuality in function space by a claim about almost every point of the torus. The unbounded functional norms are now part of the preceding norm lemma, so no B-page dependency is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "ch. 8, Theorem 8.2 pp. 48–49, with published Banach–Steinhaus dichotomy"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-continuous-fourier-series-need-not-converge-everywhere",
+        "kind": "counterexample",
+        "title": "Uniform Fejer convergence can coexist with divergent ordinary partial sums",
+        "statement": "Assume DC. There is a real continuous periodic f whose Fejer means converge uniformly to f but whose ordinary Fourier sums are unbounded at zero.",
+        "deps": [
+          "cex-continuous-function-with-divergent-fourier-series-at-a-point",
+          "thm-fejer-uniform-convergence-for-continuous-periodic-functions"
+        ],
+        "strategy": "Use the single A-page witness and apply the published uniform Fejer theorem. Refute the inference from uniform Cesaro convergence to ordinary pointwise convergence. Do not repeat the A-page existence claim under a second theorem label.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "ch. 8, Theorem 8.2 pp. 48–49; published FR-1 Fejer theorem"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-lone-fourier-series-can-diverge-almost-everywhere",
+        "kind": "remark",
+        "title": "Reading the Kolmogorov example at the endpoint",
+        "statement": "For the recorded Kolmogorov witness, its L1 membership is compatible with almost-everywhere divergence. Comparing the two recorded theorems shows that this witness cannot belong to any Lp(T) with p>1. No formula or local verification of that witness is supplied.",
+        "deps": [],
+        "strategy": "Interpret the same external witness rather than minting a duplicate unproved counterexample. The exclusion from each Lp is a comparison of external assertions, explicitly labeled as such.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§4.2.1, Theorem 4.2.1 and (4.2.13), pp. 255–261"
+            },
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "ch. 8, Theorem 8.7 and omitted-proof discussion, pp. 51–52"
+            }
+          ]
+        },
+        "external_refs": [
+          "rem-kolmogorov-lone-fourier-series-diverges-almost-everywhere",
+          "rem-carleson-hunt-almost-everywhere-convergence"
+        ]
+      },
+      {
+        "id": "cex-carleson-maximal-operator-is-not-strong-type-one-one",
+        "kind": "counterexample",
+        "title": "The Carleson maximal operator is not strong type (1,1)",
+        "statement": "For every A>0 there is a nonnegative trigonometric polynomial f with ||f||_1=1 and ||Cf||_1>A. Thus no uniform strong (1,1) estimate exists.",
+        "deps": [
+          "def-carleson-maximal-partial-sum-operator",
+          "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "thm-fejer-uniform-convergence-for-continuous-periodic-functions",
+          "lem-fourier-partial-sums-are-dirichlet-convolutions",
+          "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-uniform-boundedness-principle",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "strategy": "Choose N with ||D_N||_1>A+1. For f=F_K, finite Fourier sums give S_N F_K=F_K*D_N=sigma_K D_N -> D_N uniformly as K grows. Hence ||C F_K||_1>=||S_N F_K||_1>A for large K while ||F_K||_1=1. This supplies a local endpoint counterexample without using Kolmogorov as a hidden logical prerequisite. As an inline consequence under DC, ||S_N:L1->L1||>=||D_N||_1 is unbounded, so Riesz–Fischer completeness and uniform boundedness give an integrable h with sup_N||S_N h||_1=infinity. Check each S_N is bounded by the convolution integral and Tonelli. This norm consequence is distinct from a.e. divergence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "ch. 9, Example 9.4, p. 55"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

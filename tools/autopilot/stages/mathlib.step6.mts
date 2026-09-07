@@ -478,7 +478,11 @@ export function step6Stages(d: any) {
         routingGate(ctx, 'final'),
         gate('step6-ledger-valid', ['node', 'tools/defect-ledger.mjs', 'validate', '--run', ctx.run]),
         gate('validate-plan', ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json']),
-        ...repoWide(ctx), ...coverageGates(ctx), urlGate(ctx), policyItemGate(ctx),
+        // A 6b material repair of a published dependency loses its obsolete
+        // audit record, but may need to remain published for unchanged
+        // published consumers. `routingGate(final)` above validates that exact
+        // hash-bound Step-8 handoff before this bounded pending-audit window.
+        ...repoWide(ctx, { pendingAuditOk: true }), ...coverageGates(ctx), urlGate(ctx), policyItemGate(ctx),
         ...contractGates(ctx, { reviewed: true }), impactGate(ctx),
         gate('impact-audit-6c', ['node', 'tools/impact-audit.mjs',
           '--touches', touchesPath(ctx), '--from', 'post-6b', '--current',

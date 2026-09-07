@@ -1,0 +1,809 @@
+# Step-6 Alpha
+
+The task determines whether this is group adjudication, cross-group closure, or
+a named repair. It owns the exact queue, writable artifacts, verdict schema,
+and focused gates. Read it first, then verify all reader, refuter, detector,
+and prior-retry evidence against the current files; a report is evidence, not a
+verdict.
+
+Work only in the task's live scope. A group Alpha writes only for its assigned
+batches; the 6c lead handles only computed cross-group work; a repair dispatch
+handles only the live ids it names. You may open dependencies outside that
+scope to test a claim. Do not rerun independent readers or refuters, dispatch
+new work, decide a stage transition, or edit an item that belongs to another
+group unless the task's published-content protocol expressly permits it.
+
+Apply the mathematical standard throughout: check the written claim, all
+hypotheses and quantifiers, exact cited statements, typing and well-formedness,
+and relevant empty, zero, endpoint, choice, and iff cases. A short
+proof-step omission may be nonfatal only when a competent reader can supply it
+immediately; it never excuses a defective claim, definition, title, witness,
+computation, or citation. When uncertain, consult authoritative sources rather
+than infer from memory.
+
+For a confirmed defect, make the smallest coherent repair the task licenses
+and update every affected contract, manifest, provenance, and stale
+verification record. Preserve stable item ids. Run the task's focused checks;
+after a material item edit, reflow and precheck it unless the task explicitly
+supersedes those commands. A proposed withdrawal remains present until the
+task's authorised lead disposition.
+
+Write every required decision and defect outcome through the task-specified
+append-only interface. Do not rewrite shared ledgers or invent a defect row for
+a purely mechanical failure. A clean decision needs evidence; an unresolved
+case is a named blocker.
+
+You neither judge nor stamp. The configured judge set and its current-coverage
+rules are resolved by `tools/models.mjs`; do not hard-code, substitute, or
+self-certify a judge outcome. Do not request permissions.
+
+
+---
+
+# This dispatch
+
+run: frontier-33
+role: alpha
+label: 6c-gate-depcheck-1
+
+# Step 6c repair — depcheck
+
+This file is the authority for repair cycle 1.
+Primary gate: `depcheck`
+Reason: FAIL
+Owning Alpha group: (repository-scoped or mixed)
+Live item ids: `ex-the-galois-group-of-f-eight-over-f-two`, `ex-the-subfield-lattice-of-the-field-of-order-two-to-the-twelve`, `ex-the-monic-irreducible-cubics-over-f-two-and-the-divisor-sum-identity`, `ex-the-frobenius-conjugates-of-a-generator-of-f-sixteen`, `ex-a-normal-basis-of-f-eight-over-f-two`, `ex-a-normal-basis-of-the-complex-numbers-over-the-reals`, `fs-every-basis-of-a-finite-field-over-a-subfield-is-a-normal-basis`, `ex-the-first-twelve-cyclotomic-polynomials`, `ex-eisenstein-applied-to-the-translate-of-the-seventh-cyclotomic-polynomial`, `ex-the-fifth-cyclotomic-polynomial-splits-into-linear-factors-over-f-eleven`, `ex-the-seventh-cyclotomic-polynomial-factors-into-two-cubics-over-f-two`, `ex-the-galois-group-of-the-twelfth-cyclotomic-field-and-its-quadratic-subfields`, `ex-roots-of-unity-in-characteristic-three`, `cex-an-intersection-of-cyclotomic-extensions-larger-than-the-gcd-case`, `fs-the-coefficients-of-every-cyclotomic-polynomial-lie-in-minus-one-zero-and-one`, `fs-the-cyclotomic-polynomial-is-irreducible-over-every-field`, `fs-the-group-of-n-th-roots-of-unity-has-n-elements-in-every-field`, `fs-every-finite-abelian-group-is-the-galois-group-of-a-cyclotomic-field`, `ex-a-cyclic-cubic-field-inside-the-seventh-cyclotomic-field`, `ex-binary-words-as-sequences-of-two-atoms`, `ex-compositions-of-four-from-sequences`, `ex-partitions-with-parts-at-most-three`, `ex-plane-trees-with-at-most-four-vertices`, `ex-binary-necklaces-of-length-six-in-two-colours`, `ex-truncation-iteration-for-a-recursive-specification`, `cex-an-infinite-level-is-not-a-combinatorial-class`, `cex-a-non-disjoint-union-does-not-satisfy-the-sum-rule`, `cex-a-product-without-unique-factorisation-does-not-satisfy-the-product-rule`, `fs-sequence-construction-with-a-size-zero-object`, `fs-multiset-product-exists-for-every-coefficient-sequence`, `ex-the-lemma-three-five-parameter-choice-on-a-large-graph`, `ex-a-complete-four-blockade-gives-a-four-vertex-clique`, `ex-a-large-epsilon-restricted-induced-subgraph-gives-a-polynomial-clique-or-stable-set`, `ex-monotone-lattice-paths-from-the-origin-to-three-two`, `ex-the-five-dyck-paths-of-semilength-three`, `ex-the-three-catalan-families-matched-at-semilength-three`, `ex-the-reflection-bijection-on-a-concrete-path`, `ex-the-ballot-problem-with-three-and-two-votes`, `ex-the-cycle-lemma-on-a-word-of-length-seven`, `ex-catalan-numbers-to-six-computed-two-ways`, `ex-the-fourteen-triangulations-of-a-convex-hexagon`, `ex-the-first-coefficients-of-the-catalan-generating-function`, `ex-non-intersecting-path-pairs-by-a-two-by-two-determinant`, `ex-the-tail-swap-involution-on-an-intersecting-pair`, `fs-the-central-binomial-quotient-is-an-integer-only-for-small-n`, `fs-monotone-paths-weakly-below-the-diagonal-are-half-of-all-monotone-paths`, `fs-the-catalan-numbers-satisfy-a-constant-coefficient-linear-recurrence`, `cex-a-map-between-two-catalan-families-that-is-not-injective`, `cex-a-step-set-for-which-the-reflection-argument-fails`, `ex-an-oddtown-family-on-four-points`, `ex-an-eventown-family-of-maximum-size`, `ex-the-nonuniform-fisher-bound-on-the-seven-lines-of-the-fano-plane`, `ex-graham-pollak-for-the-complete-graph-on-four-vertices`, `ex-a-family-of-vc-dimension-two-attaining-the-sauer-shelah-bound`, `ex-the-inclusion-matrix-of-points-against-pairs-on-four-points`, `ex-cauchy-davenport-in-the-integers-modulo-seven`, `ex-the-combinatorial-nullstellensatz-on-a-two-variable-polynomial`, `ex-the-nonuniform-intersection-bound-on-the-pairs-in-four-points`, `ex-covering-the-cube-minus-the-origin-with-n-hyperplanes`, `fs-the-oddtown-bound-can-be-improved-to-n-minus-one`, `fs-fisher-inequality-holds-over-the-two-element-field`, `fs-a-family-of-vc-dimension-d-has-at-most-n-to-the-d-members`, `fs-the-standard-bilinear-form-on-the-two-element-field-is-an-inner-product`, `fs-the-combinatorial-nullstellensatz-holds-without-the-top-coefficient-hypothesis`, `cex-incidence-vectors-dependent-over-the-two-element-field-and-independent-over-the-reals`, `cex-cauchy-davenport-fails-for-a-composite-modulus`, `cex-a-nonzero-polynomial-vanishing-on-a-grid-of-exactly-its-degree`, `ex-s-four-statistics-table`, `ex-lehmer-code-and-q-factorial-for-s-four`, `ex-foata-transformation-on-three-one-four-two`, `ex-a-four-two-computed-three-ways`, `ex-weak-and-bruhat-orders-in-s-three`, `cex-same-descent-set-different-inversion-number`, `cex-eulerian-statistic-need-not-be-mahonian`, `fs-major-index-equals-inversion-number-pointwise`, `ex-the-singleton-family-p-three-is-viral`, `ex-a-family-containing-k-one-is-vacuously-viral`, `cex-polynomial-rodl-does-not-force-the-whole-graph-to-be-restricted`, `cex-the-empty-family-is-not-erdos-hajnal`, `ex-a-four-tooth-comb-with-a-special-vertex-triggers-property-star`, `ex-the-third-outcome-of-property-star-gives-a-pure-four-blockade`, `ex-the-square-root-rescaling-in-lemma-four-four`, `ex-the-epsilon-to-five-d-substitution-in-lemma-four-five-one`, `ex-polynomial-algebras-are-faithfully-flat`, `ex-localisations-not-faithfully-flat`, `ex-fraction-field-flat-not-projective`, `ex-flat-idempotent-quotient`, `ex-nonflat-quotient-module`, `ex-faithfully-flat-principal-open-cover`, `ex-finite-flat-module-over-a-local-ring`, `ex-hilbert-series-of-a-polynomial-ring`, `ex-associated-graded-of-a-local-ring`, `ex-artin-rees-intersection`, `ex-krull-intersection-in-a-local-domain`, `ex-hilbert-samuel-polynomial-of-a-dvr`, `ex-hilbert-samuel-multiplicity-of-a-plane-curve`, `ex-hilbert-samuel-finite-length-case`, `ex-cosets-of-q-in-r-and-the-vitali-translates-on-unit-interval`, `ex-the-homeomorphism-x-plus-cx-carries-the-cantor-set-to-a-measure-one-compact-set`, `cex-a-vitali-set`, `cex-a-bernstein-set`, `cex-two-disjoint-nonmeasurable-sets-can-have-a-measurable-union`, `cex-a-proper-subgroup-of-r-can-be-nonmeasurable`, `fs-every-subset-of-r-is-lebesgue-measurable`, `fs-continuous-images-of-lebesgue-measurable-subsets-of-r-are-lebesgue-measurable`, `fs-continuous-preimages-of-lebesgue-measurable-subsets-of-r-are-lebesgue-measurable`, `fs-a-dense-set-of-outer-measure-zero-and-a-dense-set-of-full-inner-measure-cannot-coexist`, `fs-a-nonmeasurable-set-can-be-constructed-without-the-axiom-of-choice`, `cex-rudin-bounded-spikes-are-not-equicontinuous`, `cex-constant-functions-are-equicontinuous-not-pointwise-bounded`, `cex-noncompact-domain-breaks-arzela-ascoli`, `ex-bernstein-polynomials-of-the-square-function`, `ex-distance-functions-form-a-compact-family-in-c01`, `cex-even-polynomial-algebra-is-not-dense`, `cex-separating-algebra-without-constants-is-not-dense`, `def-integers`, `lem-int-equivalence`, `def-int-operations`, `lem-int-add-well-defined`, `lem-int-mul-well-defined`, `thm-int-comm-ring`, `def-int-order`, `thm-int-ordered-ring`, `lem-int-cancellation`, `lem-nat-embeds-int`, `def-rationals`, `lem-rat-equivalence`, `def-rat-operations`, `lem-rat-ops-well-defined`, `lem-rat-inverse-well-defined`, `thm-rat-field`, `def-rat-order`, `lem-rat-positive-denominator`, `thm-rat-ordered-field`, `lem-int-embeds-rat`, `lem-rat-archimedean`, `fs-sqrt2-rational`, `cex-peano-unequal-mixed-partials`, `cex-peano-surface-linewise-minimum-without-an-extremum`, `cex-smooth-linewise-minimum-without-an-extremum`, `cex-unique-critical-point-is-a-nonglobal-strict-local-minimum`, `ex-monkey-saddle`, `cex-zero-hessian-does-not-classify-a-critical-point`, `ex-second-order-multivariable-taylor-polynomial-computed`, `ex-lagrange-multiplier-on-an-affine-graph`, `cex-lagrange-multiplier-rule-needs-a-regular-constraint`, `ex-ascoli-on-a-finite-discrete-domain`, `ex-compact-families-of-constant-maps`, `cex-boundedness-does-not-replace-pointwise-relative-compactness`, `ex-translated-tent-functions-converge-in-the-compact-open-topology`, `ex-compact-affine-interpolation-family`, `cex-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality`, `cex-a-nonnatural-choice-of-connecting-maps-does-not-form-a-delta-functor`, `cex-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language`, `cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor`, `cex-np-means-not-polynomial`, `cex-undecidable-means-no-instance-can-be-answered`, `cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero`, `cor-adapted-classes-compute-derived-functors`, `cor-busy-beaver-is-not-computable`, `cor-derived-long-exact-sequence`, `cor-dfas-and-nfas-recognize-the-same-languages`, `cor-effective-enumeration-of-turing-machines`, `cor-nonhalting-is-not-recognizable`, `cor-regular-languages-are-closed-under-boolean-operations`, `cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic`, `def-acyclic-object-for-a-left-exact-functor`, `def-acyclic-object-for-a-right-exact-functor`, `def-alphabet-homomorphism-and-induced-word-map`, `def-ambiguity-and-inherent-ambiguity`, `def-balanced-derived-bifunctor`, `def-busy-beaver-function`, `def-chomsky-normal-form`, `def-cohomological-delta-functor`, `def-computable-and-partial-computable-function`, `def-computation-alphabet-and-word-convention`, `def-connecting-map-for-left-derived-functors`, `def-conp`, `def-context-free-grammar`, `def-decidable-and-recognizable-language`, `def-deterministic-finite-automaton`, `def-deterministic-one-tape-turing-machine`, `def-dfa-acceptance-and-recognized-language`, `def-dtime-ntime-dspace-and-nspace`, `def-effaceable-cohomological-delta-functor-in-positive-degrees`, `def-effaceable-homological-delta-functor-in-positive-degrees`, `def-effective-binary-encoding-and-decoder`, `def-effective-encoding-of-turing-machines`, `def-exp-and-nexp`, `def-extended-dfa-transition-function`, `def-f-acyclic-resolution`, `def-greibach-normal-form`, `def-halting-computation-and-divergence`, `def-halting-problem`, `def-homological-delta-functor`, `def-instance-size-under-an-encoding`, `def-language-boolean-operations`, `def-language-concatenation-powers-and-kleene-star`, `def-language-generated-by-a-cfg`, `def-language-over-an-alphabet`, `def-language-recognized-and-decided`, `def-left-derived-map-relative-to-resolution-data`, `def-left-derived-object-relative-to-projective-resolution-data`, `def-leftmost-and-rightmost-derivation`, `def-morphism-of-cohomological-delta-functors`, `def-morphism-of-homological-delta-functors`, `def-multitape-and-nondeterministic-machines`, `def-nfa-acceptance-and-recognized-language`, `def-nfa-with-epsilon-moves`, `def-nondeterministic-accepting-computation`, `def-np-by-verifiers`, `def-np-hard-and-np-complete`, `def-nullable-generating-and-reachable-variable`, `def-one-step-and-reflexive-transitive-derivation`, `def-one-step-configuration-relation`, `def-p`, `def-parse-tree-and-yield`, `def-partial-function-computed-by-a-machine`, `def-polynomial-time-many-one-reduction`, `def-polynomially-balanced-verifier`, `def-reachable-dfa-state`, `def-regular-language-by-dfa-recognition`, `def-right-derived-map-relative-to-resolution-data`, `def-right-derived-object-relative-to-injective-resolution-data`, `def-search-version-of-an-np-relation`, `def-supplied-injective-resolution-datum`, `def-supplied-projective-resolution-datum`, `def-tape-finite-support-convention`, `def-turing-machine-acceptance-problem`, `def-turing-machine-configuration`, `def-universal-delta-functor`, `def-universal-turing-machine`, `def-word-and-language-reversal`, `def-worst-case-time-and-space-complexity`, `ex-a-contravariant-functor-derived-via-the-opposite-category`, `ex-an-acyclic-resolution-that-is-not-an-injective-resolution`, `ex-cfl-closure-under-union-concatenation-star-and-homomorphism`, `ex-diagonal-self-application-machine`, `ex-elimination-of-useless-symbols`, `ex-extended-dfa-transition-respects-concatenation`, `ex-extending-a-degree-zero-natural-transformation`, `ex-extending-a-published-prefix-automaton-to-a-factor-avoidance-dfa`, `ex-homology-as-a-homological-delta-functor`, `ex-independence-of-two-comparison-lifts-on-homology`, `ex-machine-equivalence-is-undecidable`, `ex-np-is-contained-in-pspace-and-pspace-in-exp`, `ex-one-dimension-shift-along-a-projective-presentation`, `ex-one-dimension-shift-along-an-injective-copresentation`, `ex-p-is-contained-in-np-intersection-conp`, `ex-the-left-derived-functors-of-an-exact-functor`, `ex-the-right-derived-functors-of-hom-from-a-fixed-object`, `ex-the-trivial-delta-functor-of-an-exact-functor`, `ex-two-resolution-data-and-their-change-isomorphism`, `ex-two-universal-delta-functors-and-their-unique-isomorphism`, `fs-a-degree-zero-natural-transformation-between-delta-functors-always-extends`, `fs-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality`, `fs-an-acyclic-resolution-is-the-same-thing-as-an-injective-resolution`, `fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself`, `fs-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language`, `fs-any-sequence-of-functors-with-long-exact-sequences-is-a-delta-functor`, `fs-cnf-preserves-epsilon-without-an-exception`, `fs-complementing-a-dfa-complements-its-transition-graph`, `fs-derived-functors-in-two-variables-are-automatically-balanced`, `fs-diagonalization-needs-literal-source-self-reading`, `fs-effaceability-means-every-positive-value-is-zero`, `fs-enough-projectives-implies-a-canonical-resolution-for-every-object`, `fs-np-complete-means-known-not-in-p`, `fs-np-means-not-polynomial`, `fs-the-definition-of-a-derived-map-may-depend-on-the-chosen-comparison-lift`, `fs-the-horseshoe-connecting-map-is-independent-without-a-comparison-proof`, `fs-undecidable-means-no-instance-can-be-answered`, `fs-universality-removes-the-need-for-supplied-resolution-data`, `lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions`, `lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions`, `lem-diagonal-self-application-machine`, `lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle`, `lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle`, `lem-extend-a-degree-zero-transformation-through-one-dimension-shift`, `lem-extended-dfa-transition-respects-concatenation`, `lem-finite-tuples-admit-effective-prefix-free-encodings`, `lem-gnf-left-recursion-elimination-preserves-language`, `lem-gnf-substitution-step-preserves-language`, `lem-horseshoe-gives-a-short-exact-sequence-after-applying-a-right-exact-functor`, `lem-machine-encoding-is-injective-and-decodable`, `lem-multitape-simulation-has-quadratic-time-overhead`, `lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects`, `lem-polynomial-reductions-compose`, `lem-removing-unreachable-states-preserves-language`, `lem-step-by-step-interpreter-for-machine-codes`, `lem-the-change-of-projective-resolution-isomorphisms-are-natural`, `lem-the-effacement-extension-commutes-with-connecting-morphisms`, `lem-the-effacement-extension-is-independent-of-the-effacing-morphism`, `lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension`, `lem-the-induced-homology-map-is-independent-of-the-comparison-lift`, `lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts`, `lem-time-at-least-input-length-permits-complete-input-reading`, `prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied`, `prop-a-natural-transformation-induces-natural-transformations-of-left-derived-functors`, `prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors`, `prop-an-exact-base-functor-has-the-trivial-universal-delta-functor`, `prop-an-exact-functor-has-vanishing-positive-derived-functors`, `prop-an-np-complete-language-in-p-implies-p-equals-np`, `prop-change-of-injective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws`, `prop-change-of-projective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws`, `prop-contravariant-derived-functors-are-derived-on-the-opposite-category`, `prop-derived-functors-commute-with-finite-biproducts`, `prop-every-finite-language-is-regular`, `prop-left-derived-maps-preserve-composition`, `prop-left-derived-maps-preserve-identities`, `prop-machine-descriptions-form-a-decidable-language`, `prop-natural-transformations-of-base-functors-give-morphisms-of-derived-delta-functors`, `prop-negative-derived-degrees-vanish-for-one-sided-resolutions`, `prop-np-is-contained-in-pspace-and-pspace-in-exp`, `prop-p-is-contained-in-np-intersection-conp`, `prop-polynomially-related-encodings-preserve-polynomial-size`, `prop-positive-left-derived-functors-are-effaceable-by-projectives`, `prop-positive-left-derived-functors-vanish-on-projective-objects`, `prop-positive-right-derived-functors-are-effaceable-by-injectives`, `prop-positive-right-derived-functors-vanish-on-injective-objects`, `prop-published-prefix-automata-extend-to-factor-avoidance-dfas`, `prop-satellites-give-the-first-derived-functor`, `rem-derived-functors-are-well-defined-relative-to-supplied-resolution-data`, `rem-universality-is-the-construction-independence-principle`, `thm-acyclic-resolution-theorem-for-left-derived-functors`, `thm-acyclic-resolution-theorem-for-right-derived-functors`, `thm-an-unrecognizable-language-exists`, `thm-busy-beaver-dominates-every-total-computable-function`, `thm-cfl-closure-under-union-concatenation-star-and-homomorphism`, `thm-chomsky-normal-form`, `thm-complementing-accept-states-complements-the-language`, `thm-decidable-iff-language-and-complement-are-recognizable`, `thm-derivation-parse-tree-correspondence`, `thm-derived-functors-are-universal-delta-functors`, `thm-dfa-for-language-difference`, `thm-effaceable-cohomological-delta-functors-are-universal`, `thm-effaceable-homological-delta-functors-are-universal`, `thm-elimination-of-epsilon-productions`, `thm-elimination-of-unit-productions`, `thm-elimination-of-useless-symbols`, `thm-existence-and-uniqueness-of-extended-dfa-transition`, `thm-existence-of-a-universal-turing-machine`, `thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex`, `thm-greibach-normal-form`, `thm-halting-is-recognizable-and-undecidable`, `thm-leaf-deletion-preserves-virality-of-a-finite-family`, `thm-left-derived-functors-form-a-homological-delta-functor`, `thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic`, `thm-left-derived-functors-relative-to-supplied-data-are-additive-functors`, `thm-machine-acceptance-is-recognizable`, `thm-machine-acceptance-is-undecidable`, `thm-machine-equivalence-is-undecidable`, `thm-multitape-machines-have-one-tape-simulations`, `thm-polynomial-reductions-transfer-p-np-and-conp-membership`, `thm-product-dfa-for-union-and-intersection`, `thm-right-derived-functors-form-a-cohomological-delta-functor`, `thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic`, `thm-right-derived-functors-relative-to-supplied-data-are-additive-functors`, `thm-sat-search-reduces-to-sat-decision`, `thm-subset-construction-preserves-language`, `thm-totality-is-not-recognizable`, `thm-verifier-and-nondeterministic-definitions-of-np-agree`, `thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor`, `thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor`, `ex-cardinal-functions-of-the-lower-limit-line`, `ex-the-cardinality-of-the-continuum`, `cex-dirichlet-is-nowhere-continuous`, `lem-sequential-characterisation-of-closure-r`, `thm-sequential-criterion-for-continuity`, `cex-indicator-of-a-fat-cantor-set-is-not-integrable`, `ex-indicator-of-the-cantor-set-is-integrable-with-integral-zero`, `cex-limit-differs-from-the-value`, `cex-composition-of-limits-fails`, `cex-nested-open-intervals-empty`, `ex-nested-intervals-single-point`, `cex-ordered-field-not-archimedean`, `cor-rational-function-field-as-a-fraction-field`, `cex-psi-of-one-over-x-has-no-limit-at-zero`, `lem-limit-implies-local-boundedness`, `cex-the-one-norm-comes-from-no-inner-product`, `rem-rn-conventions-and-scope`, `cor-bolzano-weierstrass-in-rn`, `rem-compactness-choice-ledger-metric`, `cor-boundedness-theorem-r`, `thm-compactness-is-necessary-for-evt-and-uniform-continuity`, `cor-cauchy-product-absolute`, `thm-dirichlet-rearrangement`, `cor-cesaro-matrix-is-regular`, `thm-cesaro-mean-theorem`, `cor-continuous-extension-from-a-dense-subset-r`, `cor-countably-many-discontinuities-integrable`, `thm-cantor-set-properties`, `cor-expectation-agrees-with-the-finite-weighted-sum`, `def-expectation-of-a-nonnegative-or-integrable-random-variable`, `cor-holomorphic-functional-calculus-in-the-wiener-algebra`, `thm-global-cauchy-integral-formula-homology`, `cor-no-function-is-continuous-exactly-on-q`, `thm-dirichlet-and-thomae-continuity-sets`, `cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings`, `def-axiom-of-choice`, `cor-stolz-cesaro-zero-over-zero`, `thm-stolz-cesaro`, `cor-unconditional-iff-absolute-in-r`, `rem-rearrangement-in-higher-dimensions`, `ex-cauchy-complete-not-complete-field`, `fs-nested-intervals-implies-lub`, `ex-rayleigh-quotient-iteration-on-a-two-by-two-symmetric-matrix`, `def-rayleigh-quotient-iteration`, `fs-continuity-implies-uniform-continuity`, `thm-heine-cantor-metric`, `fs-equivalent-metrics-share-cauchy-sequences`, `def-metric-convergence`, `fs-heine-borel-holds-in-every-normed-space`, `thm-all-norms-on-rn-are-equivalent`, `fs-integrability-is-equivalent-to-a-nowhere-dense-discontinuity-set`, `thm-lebesgue-criterion`, `fs-limit-equals-value`, `thm-composition-of-function-limits`, `lem-additive-is-q-linear`, `fs-additive-implies-linear`, `lem-bw-implies-archimedean`, `fs-cauchy-complete-implies-lub`, `lem-bw-implies-cauchy-complete`, `lem-cauchy-complete-and-archimedean-imply-mct`, `thm-laurent-cauchy-complete`, `lem-mct-implies-archimedean`, `lem-laurent-non-archimedean`, `lem-content-zero-implies-null`, `thm-compact-null-is-content-zero`, `lem-elementary-sets-admit-compact-inner-and-open-outer-approximations`, `def-metric-compactness`, `lem-finite-circle-wedge-open-cover`, `cor-seifert-van-kampen-simply-connected-overlap`, `lem-finite-interval-cover-total-length`, `lem-nondegenerate-interval-is-not-null`, `thm-fat-cantor-set-has-positive-measure`, `fs-null-implies-content-zero`, `lem-function-limit-preserves-order`, `fs-function-limit-preserves-strict-inequality`, `lem-limit-is-local`, `lem-function-limit-unique`, `fs-limit-unique-at-every-point-of-the-domain`, `fs-limit-exists-implies-bounded-on-the-domain`, `rem-where-the-archimedean-hypothesis-is-needed`, `lem-mct-implies-lub`, `lem-metric-convergent-implies-cauchy`, `fs-cauchy-implies-convergent-in-every-metric-space`, `lem-nth-term-test`, `fs-nth-term-test-converse`, `lem-real-and-metric-notions-agree`, `thm-continuous-image-of-a-compact-set-r`, `thm-extreme-value-r`, `thm-heine-cantor-r`, `thm-continuous-image-of-a-compact-space-is-compact`, `thm-extreme-value-metric`, `thm-heine-borel-characterisation-r`, `thm-compact-iff-sequentially-compact-r`, `lem-sign-preservation-near-a-limit`, `thm-algebra-of-function-limits`, `lem-simple-continued-fraction-convergents-and-cylinders`, `thm-simple-continued-fractions-parametrise-the-irrationals`, `rem-riemann-stieltjes-conventions-and-scope`, `def-real-power`, `thm-abel-dini`, `fs-universal-comparison-series`, `thm-sequential-criterion-for-function-limits`, `rem-heine-criterion-choice-cost`, `thm-algebra-of-limits`, `thm-arzela-ascoli-for-real-ck`, `def-countable-choice`, `def-dependent-choice`, `thm-banach-fixed-point`, `cor-banach-error-estimates`, `thm-cantor-function-properties`, `def-monotone-sequence`, `fs-cesaro-converse`, `thm-compact-subset-is-closed-and-bounded`, `fs-closed-and-bounded-implies-compact-in-every-metric-space`, `thm-heine-borel-rn`, `thm-complete-and-totally-bounded-implies-compact`, `thm-completeness-equivalences`, `fs-naive-composition-of-limits`, `thm-continuity-iff-oscillation-zero`, `lem-oscillation-superlevel-sets-are-closed`, `thm-discontinuity-set-is-f-sigma`, `thm-continuity-preimage-characterisation`, `def-isometry-and-metric-embedding`, `thm-continuous-inverse`, `thm-connected-subsets-of-r-are-intervals`, `thm-diagram-area-agrees-with-algebraic-relator-area`, `lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group`, `thm-dirichlet-test`, `thm-alternating-series-test`, `thm-double-series-fubini`, `fs-iterated-double-sums-always-agree`, `thm-fermat-interior-extremum`, `fs-vanishing-derivative-forbids-strict-increase`, `thm-grouping-of-series`, `fs-grouping-can-be-undone`, `thm-infinite-product-criterion`, `rem-sums-proved-to-exist-but-not-evaluated`, `thm-intermediate-value`, `cex-evt-and-ivt-fail-over-a-non-complete-field`, `thm-mean-value-inequality`, `thm-norm-inequality-for-the-vector-valued-integral`, `cor-vector-valued-ftc-and-lipschitz-bound`, `thm-mertens`, `fs-cauchy-product-of-convergent-series-converges`, `thm-metric-compactness-equivalences`, `thm-monotone-implies-integrable`, `thm-monotone-with-prescribed-discontinuity-set`, `thm-monotonicity-of-the-integral`, `fs-nonnegative-integrable-with-zero-integral-vanishes`, `thm-nonnegative-continuous-with-zero-integral-vanishes`, `thm-perfect-set-uncountable-r`, `thm-plane-dual-exists-and-double-dual-recovers-primal`, `def-plane-graph-face-and-boundary`, `thm-riemann-series-theorem`, `cor-sequential-criterion-for-nonexistence`, `def-tensor-product-total-complex-of-chain-complexes`
+Exhausted item ids — do not repair or re-review: (none)
+
+Repair only the live ids. Reproduce the primary gate from the current tree.
+Advisory failures are context only; they receive their own gate budget if they become primary.
+
+
+## Primary gate output
+
+```text
+depcheck: 15423 items (14098 published), 900 pages
+
+page dependency depth (0 = no prerequisites):
+   0  acceptable-numberings-smn-and-the-recursion-theorem   0 items  <- (none)
+   0  acceptable-numberings-smn-and-the-recursion-theorem-examples   0 items  <- (none)
+   0  affine-algebraic-sets-and-coordinate-rings       0 items  <- (none)
+   0  affine-algebraic-sets-and-coordinate-rings-examples   0 items  <- (none)
+   0  computable-reductions-and-rices-theorem          0 items  <- (none)
+   0  computable-reductions-and-rices-theorem-examples   0 items  <- (none)
+   0  context-free-grammars-and-normal-forms           0 items  <- (none)
+   0  context-free-grammars-and-normal-forms-examples   0 items  <- (none)
+   0  context-free-pumping-ogden-and-parsing           0 items  <- (none)
+   0  context-free-pumping-ogden-and-parsing-examples   0 items  <- (none)
+   0  counting-complexity-and-sharpp                  17 items  <- (none)
+   0  decidable-recognizable-and-enumerable-languages   0 items  <- (none)
+   0  decidable-recognizable-and-enumerable-languages-examples   0 items  <- (none)
+   0  deferred-algebraic-topology                     17 items  <- (none)
+   0  deferred-functional-analysis                    33 items  <- (none)
+   0  deferred-measure-and-integration                29 items  <- (none)
+   0  deferred-set-theory-beyond-choice               22 items  <- (none)
+   0  delta-functors-and-universality                  0 items  <- (none)
+   0  delta-functors-and-universality-examples         0 items  <- (none)
+   0  derived-functors                                 0 items  <- (none)
+   0  derived-functors-examples                        0 items  <- (none)
+   0  deterministic-finite-automata-and-regular-languages   0 items  <- (none)
+   0  deterministic-finite-automata-and-regular-languages-examples   0 items  <- (none)
+   0  diagonalization-and-the-halting-problem          0 items  <- (none)
+   0  diagonalization-and-the-halting-problem-examples   0 items  <- (none)
+   0  formal-languages-encodings-and-decision-problems   0 items  <- (none)
+   0  formal-languages-encodings-and-decision-problems-examples   0 items  <- (none)
+   0  gradient-like-vector-fields-and-morse-trajectories-examples   5 items  <- (none)
+   0  harish-chandra-isomorphism-casimir-and-central-characters  45 items  <- (none)
+   0  interactive-proof-systems-and-public-coins      16 items  <- (none)
+   0  morphisms-local-rings-and-rational-maps-of-affine-varieties   0 items  <- (none)
+   0  morphisms-local-rings-and-rational-maps-of-affine-varieties-examples   0 items  <- (none)
+   0  myhill-nerode-theory-and-dfa-minimization        0 items  <- (none)
+   0  myhill-nerode-theory-and-dfa-minimization-examples   0 items  <- (none)
+   0  nondeterministic-finite-automata-and-subset-construction   0 items  <- (none)
+   0  nondeterministic-finite-automata-and-subset-construction-examples   0 items  <- (none)
+   0  p-np-conp-and-polynomial-reductions              0 items  <- (none)
+   0  p-np-conp-and-polynomial-reductions-examples     0 items  <- (none)
+   0  post-correspondence-and-language-undecidability   0 items  <- (none)
+   0  post-correspondence-and-language-undecidability-examples   0 items  <- (none)
+   0  primitive-recursive-and-partial-computable-functions   0 items  <- (none)
+   0  primitive-recursive-and-partial-computable-functions-examples   0 items  <- (none)
+   0  pushdown-automata-and-context-free-languages     0 items  <- (none)
+   0  pushdown-automata-and-context-free-languages-examples   0 items  <- (none)
+   0  randomized-complexity-and-amplification          0 items  <- (none)
+   0  randomized-complexity-and-amplification-examples   0 items  <- (none)
+   0  regular-expressions-and-kleenes-theorem          0 items  <- (none)
+   0  regular-expressions-and-kleenes-theorem-examples   0 items  <- (none)
+   0  resource-bounds-and-machine-invariance           0 items  <- (none)
+   0  resource-bounds-and-machine-invariance-examples   0 items  <- (none)
+   0  robust-machine-models-and-universal-computation   0 items  <- (none)
+   0  robust-machine-models-and-universal-computation-examples   0 items  <- (none)
+   0  space-complexity-savitch-and-tqbf                0 items  <- (none)
+   0  space-complexity-savitch-and-tqbf-examples       0 items  <- (none)
+   0  the-arithmetical-hierarchy-and-posts-theorem    18 items  <- (none)
+   0  the-cook-levin-theorem                           0 items  <- (none)
+   0  the-cook-levin-theorem-examples                  0 items  <- (none)
+   0  the-zfc-axioms-and-basic-set-constructions      39 items  <- (none)
+   0  time-and-space-hierarchy-theorems               20 items  <- (none)
+   0  turing-machines-configurations-and-computation   0 items  <- (none)
+   0  turing-machines-configurations-and-computation-examples   0 items  <- (none)
+   1  counting-complexity-and-sharpp-examples          3 items  <- counting-complexity-and-sharpp
+   1  harish-chandra-isomorphism-casimir-and-central-characters-examples   6 items  <- harish-chandra-isomorphism-casimir-and-central-characters
+   1  interactive-proof-systems-and-public-coins-examples   3 items  <- interactive-proof-systems-and-public-coins
+   1  open-problems-and-research-frontier             13 items  <- deferred-set-theory-beyond-choice
+   1  oracle-computability-the-jump-and-turing-degrees  23 items  <- the-arithmetical-hierarchy-and-posts-theorem
+   1  relations-functions-and-quotients               39 items  <- the-zfc-axioms-and-basic-set-constructions
+   1  the-arithmetical-hierarchy-and-posts-theorem-examples   3 items  <- the-arithmetical-hierarchy-and-posts-theorem
+   1  the-zfc-axioms-and-basic-set-constructions-examples  10 items  <- the-zfc-axioms-and-basic-set-constructions
+   1  time-and-space-hierarchy-theorems-examples       3 items  <- time-and-space-hierarchy-theorems
+   1  verma-modules-and-shapovalov-forms              17 items  <- harish-chandra-isomorphism-casimir-and-central-characters
+   2  construction-of-the-natural-numbers             39 items  <- relations-functions-and-quotients, the-zfc-axioms-and-basic-set-constructions
+   2  homomorphisms-between-verma-modules-and-linkage  20 items  <- verma-modules-and-shapovalov-forms, harish-chandra-isomorphism-casimir-and-central-characters
+   2  oracle-computability-the-jump-and-turing-degrees-examples   3 items  <- oracle-computability-the-jump-and-turing-degrees, the-arithmetical-hierarchy-and-posts-theorem
+   2  relations-functions-and-quotients-examples      10 items  <- relations-functions-and-quotients, the-zfc-axioms-and-basic-set-constructions, deferred-set-theory-beyond-choice
+   2  verma-modules-and-shapovalov-forms-examples      6 items  <- verma-modules-and-shapovalov-forms
+   3  construction-of-r-via-cauchy-sequences          40 items  <- construction-of-the-natural-numbers
+   3  formal-set-theoretic-syntax-structures-and-satisfaction  19 items  <- construction-of-the-natural-numbers
+   3  order-zorn-and-the-axiom-of-choice              21 items  <- relations-functions-and-quotients, construction-of-the-natural-numbers, deferred-set-theory-beyond-choice
+   4  construction-of-r-via-dedekind-cuts             39 items  <- construction-of-the-natural-numbers, construction-of-r-via-cauchy-sequences
+   4  filters-and-ultrafilters                        12 items  <- the-zfc-axioms-and-basic-set-constructions, construction-of-the-natural-numbers, order-zorn-and-the-axiom-of-choice, relations-functions-and-quotients, deferred-set-theory-beyond-choice
+   4  formal-set-theoretic-syntax-structures-and-satisfaction-examples   5 items  <- formal-set-theoretic-syntax-structures-and-satisfaction
+   4  order-zorn-and-the-axiom-of-choice-examples      8 items  <- order-zorn-and-the-axiom-of-choice, relations-functions-and-quotients, construction-of-the-natural-numbers, deferred-set-theory-beyond-choice
+   5  filters-and-ultrafilters-examples                8 items  <- filters-and-ultrafilters, construction-of-the-natural-numbers
+   5  foundations-of-the-real-numbers                 43 items  <- construction-of-the-natural-numbers, construction-of-r-via-cauchy-sequences, construction-of-r-via-dedekind-cuts
+   6  suprema-and-infima                              17 items  <- foundations-of-the-real-numbers, construction-of-the-natural-numbers
+   7  countability-and-uncountability                 21 items  <- relations-functions-and-quotients, construction-of-the-natural-numbers, foundations-of-the-real-numbers, suprema-and-infima, construction-of-r-via-cauchy-sequences, deferred-set-theory-beyond-choice
+   7  roots-and-rational-powers                       22 items  <- construction-of-the-natural-numbers, foundations-of-the-real-numbers, construction-of-r-via-cauchy-sequences, suprema-and-infima
+   7  suprema-and-infima-examples                      8 items  <- suprema-and-infima, foundations-of-the-real-numbers, construction-of-r-via-cauchy-sequences
+   8  finite-counting-and-binomial-coefficients       26 items  <- countability-and-uncountability, relations-functions-and-quotients, construction-of-the-natural-numbers, roots-and-rational-powers, foundations-of-the-real-numbers
+   8  monoids-groups-and-subgroups                    27 items  <- relations-functions-and-quotients, the-zfc-axioms-and-basic-set-constructions, construction-of-the-natural-numbers, countability-and-uncountability, construction-of-r-via-cauchy-sequences
+   8  sequences-and-limits                            18 items  <- construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, foundations-of-the-real-numbers, suprema-and-infima, countability-and-uncountability
+   9  divisibility-gcd-and-bezout                     26 items  <- construction-of-r-via-cauchy-sequences, monoids-groups-and-subgroups, construction-of-the-natural-numbers, relations-functions-and-quotients
+   9  finite-counting-and-binomial-coefficients-examples  14 items  <- finite-counting-and-binomial-coefficients, foundations-of-the-real-numbers, construction-of-the-natural-numbers, countability-and-uncountability, relations-functions-and-quotients, roots-and-rational-powers
+   9  inclusion-exclusion-and-the-pigeonhole-principle  21 items  <- finite-counting-and-binomial-coefficients, relations-functions-and-quotients, roots-and-rational-powers, countability-and-uncountability, foundations-of-the-real-numbers, construction-of-the-natural-numbers
+   9  monoids-groups-and-subgroups-examples           11 items  <- foundations-of-the-real-numbers, monoids-groups-and-subgroups, construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, relations-functions-and-quotients, countability-and-uncountability
+   9  monotone-sequences-and-cauchy-completeness      20 items  <- foundations-of-the-real-numbers, construction-of-r-via-cauchy-sequences, suprema-and-infima, sequences-and-limits, construction-of-the-natural-numbers, roots-and-rational-powers
+  10  chains-antichains-sperner-and-dilworth          32 items  <- relations-functions-and-quotients, order-zorn-and-the-axiom-of-choice, finite-counting-and-binomial-coefficients, construction-of-the-natural-numbers, inclusion-exclusion-and-the-pigeonhole-principle
+  10  divisibility-gcd-and-bezout-examples             9 items  <- divisibility-gcd-and-bezout, monoids-groups-and-subgroups, construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers
+  10  formal-laurent-series-field                     11 items  <- construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, construction-of-the-natural-numbers, sequences-and-limits, monotone-sequences-and-cauchy-completeness
+  10  graphs-walks-and-connectivity                   37 items  <- finite-counting-and-binomial-coefficients, relations-functions-and-quotients, construction-of-the-natural-numbers, inclusion-exclusion-and-the-pigeonhole-principle
+  10  inclusion-exclusion-and-the-pigeonhole-principle-examples  10 items  <- inclusion-exclusion-and-the-pigeonhole-principle, finite-counting-and-binomial-coefficients, foundations-of-the-real-numbers, roots-and-rational-powers, relations-functions-and-quotients, construction-of-the-natural-numbers, countability-and-uncountability
+  10  limsup-and-subsequential-limits                 23 items  <- construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, sequences-and-limits, relations-functions-and-quotients, order-zorn-and-the-axiom-of-choice, suprema-and-infima, monotone-sequences-and-cauchy-completeness, construction-of-the-natural-numbers, roots-and-rational-powers
+  10  metric-spaces                                   28 items  <- construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, suprema-and-infima, monotone-sequences-and-cauchy-completeness, construction-of-the-natural-numbers, roots-and-rational-powers, sequences-and-limits, countability-and-uncountability, relations-functions-and-quotients
+  10  monotone-sequences-and-cauchy-completeness-examples  11 items  <- monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, sequences-and-limits, construction-of-the-natural-numbers, roots-and-rational-powers, construction-of-r-via-cauchy-sequences, suprema-and-infima
+  10  primes-and-the-fundamental-theorem-of-arithmetic  18 items  <- divisibility-gcd-and-bezout, construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, monoids-groups-and-subgroups, countability-and-uncountability, relations-functions-and-quotients, foundations-of-the-real-numbers
+  10  regular-continued-fractions-and-diophantine-approximation  19 items  <- construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, divisibility-gcd-and-bezout, foundations-of-the-real-numbers, monoids-groups-and-subgroups
+  10  rings-subrings-and-integral-domains             28 items  <- monoids-groups-and-subgroups, construction-of-the-natural-numbers, construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, countability-and-uncountability, relations-functions-and-quotients, divisibility-gcd-and-bezout, finite-counting-and-binomial-coefficients
+  11  chains-antichains-sperner-and-dilworth-examples   8 items  <- chains-antichains-sperner-and-dilworth, primes-and-the-fundamental-theorem-of-arithmetic, finite-counting-and-binomial-coefficients
+  11  classical-np-completeness-reductions            19 items  <- graphs-walks-and-connectivity, finite-counting-and-binomial-coefficients
+  11  completeness-and-uniform-continuity             24 items  <- metric-spaces, sequences-and-limits, construction-of-r-via-cauchy-sequences, suprema-and-infima, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, countability-and-uncountability, roots-and-rational-powers, construction-of-the-natural-numbers, relations-functions-and-quotients
+  11  congruences-and-the-chinese-remainder-theorem   23 items  <- divisibility-gcd-and-bezout, relations-functions-and-quotients, construction-of-r-via-cauchy-sequences, monoids-groups-and-subgroups, construction-of-the-natural-numbers, finite-counting-and-binomial-coefficients, foundations-of-the-real-numbers, primes-and-the-fundamental-theorem-of-arithmetic, inclusion-exclusion-and-the-pigeonhole-principle
+  11  equivalent-forms-of-completeness                21 items  <- formal-laurent-series-field, foundations-of-the-real-numbers, order-zorn-and-the-axiom-of-choice, sequences-and-limits, construction-of-the-natural-numbers, roots-and-rational-powers, construction-of-r-via-cauchy-sequences, monotone-sequences-and-cauchy-completeness, suprema-and-infima
+  11  eulerian-and-hamiltonian-graphs                 22 items  <- graphs-walks-and-connectivity, finite-counting-and-binomial-coefficients, construction-of-the-natural-numbers
+  11  finite-probability-spaces-and-random-variables  37 items  <- relations-functions-and-quotients, finite-counting-and-binomial-coefficients, roots-and-rational-powers, construction-of-r-via-cauchy-sequences, rings-subrings-and-integral-domains, suprema-and-infima, foundations-of-the-real-numbers
+  11  graph-colouring                                  6 items  <- graphs-walks-and-connectivity, construction-of-the-natural-numbers, finite-counting-and-binomial-coefficients, countability-and-uncountability
+  11  graphs-walks-and-connectivity-examples           8 items  <- graphs-walks-and-connectivity, finite-counting-and-binomial-coefficients
+  11  incidence-algebras-and-mobius-inversion         24 items  <- relations-functions-and-quotients, countability-and-uncountability, finite-counting-and-binomial-coefficients, rings-subrings-and-integral-domains, construction-of-the-natural-numbers, monoids-groups-and-subgroups, construction-of-r-via-cauchy-sequences, chains-antichains-sperner-and-dilworth, roots-and-rational-powers, inclusion-exclusion-and-the-pigeonhole-principle, order-zorn-and-the-axiom-of-choice, divisibility-gcd-and-bezout, primes-and-the-fundamental-theorem-of-arithmetic
+  11  induced-subgraphs-and-hereditary-graph-classes  23 items  <- graphs-walks-and-connectivity, relations-functions-and-quotients, finite-counting-and-binomial-coefficients, construction-of-the-natural-numbers
+  11  limsup-and-subsequential-limits-examples         9 items  <- limsup-and-subsequential-limits, monotone-sequences-and-cauchy-completeness, sequences-and-limits, order-zorn-and-the-axiom-of-choice, relations-functions-and-quotients, foundations-of-the-real-numbers, construction-of-the-natural-numbers, construction-of-r-via-cauchy-sequences, roots-and-rational-powers
+  11  metric-spaces-examples                          12 items  <- metric-spaces, roots-and-rational-powers, suprema-and-infima, foundations-of-the-real-numbers, sequences-and-limits, construction-of-the-natural-numbers, primes-and-the-fundamental-theorem-of-arithmetic, construction-of-r-via-cauchy-sequences, monotone-sequences-and-cauchy-completeness, relations-functions-and-quotients
+  11  pell-equations-and-generalized-pell-orbits      17 items  <- regular-continued-fractions-and-diophantine-approximation
+  11  primes-and-the-fundamental-theorem-of-arithmetic-examples   9 items  <- primes-and-the-fundamental-theorem-of-arithmetic, divisibility-gcd-and-bezout, monoids-groups-and-subgroups, construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, foundations-of-the-real-numbers, finite-counting-and-binomial-coefficients, countability-and-uncountability, relations-functions-and-quotients
+  11  regular-continued-fractions-and-diophantine-approximation-examples   8 items  <- regular-continued-fractions-and-diophantine-approximation, divisibility-gcd-and-bezout
+  11  rings-subrings-and-integral-domains-examples    10 items  <- rings-subrings-and-integral-domains, construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, monoids-groups-and-subgroups, divisibility-gcd-and-bezout, construction-of-the-natural-numbers, finite-counting-and-binomial-coefficients
+  11  series-and-nonnegative-tests                    25 items  <- roots-and-rational-powers, sequences-and-limits, construction-of-r-via-cauchy-sequences, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, construction-of-the-natural-numbers, suprema-and-infima, limsup-and-subsequential-limits
+  11  topological-spaces-and-continuity               26 items  <- relations-functions-and-quotients, countability-and-uncountability, construction-of-the-natural-numbers, sequences-and-limits, metric-spaces, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers
+  11  topology-of-r                                   22 items  <- construction-of-r-via-cauchy-sequences, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, suprema-and-infima, sequences-and-limits, countability-and-uncountability, relations-functions-and-quotients, construction-of-the-natural-numbers, metric-spaces
+  11  trees-forests-and-spanning-trees                27 items  <- graphs-walks-and-connectivity, finite-counting-and-binomial-coefficients, construction-of-the-natural-numbers, countability-and-uncountability, relations-functions-and-quotients, construction-of-r-via-cauchy-sequences, suprema-and-infima
+  11  vector-spaces-and-subspaces                     17 items  <- foundations-of-the-real-numbers, monoids-groups-and-subgroups, construction-of-the-natural-numbers, countability-and-uncountability, rings-subrings-and-integral-domains
+  12  absolute-convergence-and-rearrangement          26 items  <- series-and-nonnegative-tests, foundations-of-the-real-numbers, construction-of-r-via-cauchy-sequences, suprema-and-infima, sequences-and-limits, roots-and-rational-powers, construction-of-the-natural-numbers, monotone-sequences-and-cauchy-completeness, relations-functions-and-quotients, limsup-and-subsequential-limits, countability-and-uncountability
+  12  classical-np-completeness-reductions-examples    3 items  <- classical-np-completeness-reductions
+  12  compactness-in-metric-spaces                    26 items  <- relations-functions-and-quotients, countability-and-uncountability, sequences-and-limits, construction-of-the-natural-numbers, metric-spaces, order-zorn-and-the-axiom-of-choice, suprema-and-infima, filters-and-ultrafilters, completeness-and-uniform-continuity, foundations-of-the-real-numbers, roots-and-rational-powers, monotone-sequences-and-cauchy-completeness, construction-of-r-via-cauchy-sequences
+  12  completeness-and-uniform-continuity-examples    12 items  <- completeness-and-uniform-continuity, construction-of-r-via-cauchy-sequences, metric-spaces, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, sequences-and-limits, roots-and-rational-powers, countability-and-uncountability, suprema-and-infima, construction-of-the-natural-numbers, relations-functions-and-quotients
+  12  congruences-and-the-chinese-remainder-theorem-examples  10 items  <- congruences-and-the-chinese-remainder-theorem, divisibility-gcd-and-bezout, monoids-groups-and-subgroups, primes-and-the-fundamental-theorem-of-arithmetic, foundations-of-the-real-numbers
+  12  cosets-and-lagranges-theorem                    15 items  <- monoids-groups-and-subgroups, relations-functions-and-quotients, countability-and-uncountability, finite-counting-and-binomial-coefficients, divisibility-gcd-and-bezout, construction-of-r-via-cauchy-sequences, primes-and-the-fundamental-theorem-of-arithmetic, construction-of-the-natural-numbers, congruences-and-the-chinese-remainder-theorem
+  12  eulerian-and-hamiltonian-graphs-examples         9 items  <- eulerian-and-hamiltonian-graphs, graphs-walks-and-connectivity
+  12  finite-probability-spaces-and-random-variables-examples  11 items  <- finite-probability-spaces-and-random-variables
+  12  graph-colouring-examples                         2 items  <- graph-colouring, graphs-walks-and-connectivity
+  12  incidence-algebras-and-mobius-inversion-examples   8 items  <- incidence-algebras-and-mobius-inversion, chains-antichains-sperner-and-dilworth, congruences-and-the-chinese-remainder-theorem, countability-and-uncountability, construction-of-the-natural-numbers
+  12  induced-subgraphs-and-hereditary-graph-classes-examples  12 items  <- induced-subgraphs-and-hereditary-graph-classes, graphs-walks-and-connectivity
+  12  kolmogorov-complexity-and-algorithmic-randomness  22 items  <- finite-probability-spaces-and-random-variables
+  12  limits-of-real-functions                        21 items  <- topology-of-r, monotone-sequences-and-cauchy-completeness, construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, sequences-and-limits, suprema-and-infima, construction-of-the-natural-numbers, countability-and-uncountability
+  12  linear-independence-bases-and-dimension         20 items  <- vector-spaces-and-subspaces, foundations-of-the-real-numbers, monoids-groups-and-subgroups, construction-of-the-natural-numbers, countability-and-uncountability, relations-functions-and-quotients, order-zorn-and-the-axiom-of-choice, rings-subrings-and-integral-domains
+  12  logarithmic-space-nl-and-reachability           19 items  <- time-and-space-hierarchy-theorems, graphs-walks-and-connectivity, eulerian-and-hamiltonian-graphs
+  12  matchings-covers-menger-and-network-flows       26 items  <- graphs-walks-and-connectivity, finite-counting-and-binomial-coefficients, relations-functions-and-quotients, construction-of-the-natural-numbers, eulerian-and-hamiltonian-graphs, rings-subrings-and-integral-domains
+  12  pell-equations-and-generalized-pell-orbits-examples   9 items  <- pell-equations-and-generalized-pell-orbits, regular-continued-fractions-and-diophantine-approximation
+  12  series-and-nonnegative-tests-examples           12 items  <- series-and-nonnegative-tests, construction-of-the-natural-numbers, roots-and-rational-powers, foundations-of-the-real-numbers, monotone-sequences-and-cauchy-completeness, suprema-and-infima, construction-of-r-via-cauchy-sequences, limsup-and-subsequential-limits, sequences-and-limits
+  12  subspaces-products-and-quotients                24 items  <- topological-spaces-and-continuity, metric-spaces, countability-and-uncountability, relations-functions-and-quotients, order-zorn-and-the-axiom-of-choice, foundations-of-the-real-numbers, roots-and-rational-powers, monotone-sequences-and-cauchy-completeness, suprema-and-infima
+  12  topological-spaces-and-continuity-examples      14 items  <- topological-spaces-and-continuity, countability-and-uncountability, relations-functions-and-quotients, construction-of-r-via-cauchy-sequences, monotone-sequences-and-cauchy-completeness, metric-spaces, foundations-of-the-real-numbers, suprema-and-infima, construction-of-the-natural-numbers
+  12  topology-of-r-examples                          11 items  <- topology-of-r, monotone-sequences-and-cauchy-completeness, construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, suprema-and-infima, construction-of-the-natural-numbers, countability-and-uncountability
+  12  trees-forests-and-spanning-trees-examples       12 items  <- trees-forests-and-spanning-trees, graphs-walks-and-connectivity
+  12  vector-spaces-and-subspaces-examples             8 items  <- vector-spaces-and-subspaces, rings-subrings-and-integral-domains, foundations-of-the-real-numbers, construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, countability-and-uncountability, monoids-groups-and-subgroups
+  13  absolute-convergence-and-rearrangement-examples  14 items  <- absolute-convergence-and-rearrangement, series-and-nonnegative-tests, monotone-sequences-and-cauchy-completeness, roots-and-rational-powers, foundations-of-the-real-numbers, sequences-and-limits, construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, relations-functions-and-quotients, suprema-and-infima
+  13  boolean-circuits-and-nonuniform-complexity      16 items  <- logarithmic-space-nl-and-reachability, finite-counting-and-binomial-coefficients
+  13  cantor-set-baire-and-measure-zero               24 items  <- topology-of-r, countability-and-uncountability, monotone-sequences-and-cauchy-completeness, relations-functions-and-quotients, construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, series-and-nonnegative-tests, roots-and-rational-powers, foundations-of-the-real-numbers, suprema-and-infima, sequences-and-limits, deferred-set-theory-beyond-choice, compactness-in-metric-spaces
+  13  compactness-in-metric-spaces-examples           11 items  <- metric-spaces, compactness-in-metric-spaces, completeness-and-uniform-continuity, countability-and-uncountability, order-zorn-and-the-axiom-of-choice, roots-and-rational-powers, construction-of-the-natural-numbers, foundations-of-the-real-numbers, sequences-and-limits, monotone-sequences-and-cauchy-completeness, suprema-and-infima, relations-functions-and-quotients
+  13  continuity-ivt-evt-and-uniform-continuity       21 items  <- limits-of-real-functions, topology-of-r, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, countability-and-uncountability, sequences-and-limits, construction-of-r-via-cauchy-sequences, suprema-and-infima, roots-and-rational-powers, construction-of-the-natural-numbers, metric-spaces, completeness-and-uniform-continuity, compactness-in-metric-spaces
+  13  cosets-and-lagranges-theorem-examples            8 items  <- cosets-and-lagranges-theorem, divisibility-gcd-and-bezout, congruences-and-the-chinese-remainder-theorem, construction-of-r-via-cauchy-sequences, monoids-groups-and-subgroups, countability-and-uncountability, relations-functions-and-quotients
+  13  kolmogorov-complexity-and-algorithmic-randomness-examples   3 items  <- kolmogorov-complexity-and-algorithmic-randomness
+  13  limits-of-real-functions-examples               12 items  <- limits-of-real-functions, topology-of-r, roots-and-rational-powers, construction-of-the-natural-numbers, foundations-of-the-real-numbers, suprema-and-infima, monotone-sequences-and-cauchy-completeness, construction-of-r-via-cauchy-sequences, sequences-and-limits
+  13  linear-independence-bases-and-dimension-examples   8 items  <- linear-independence-bases-and-dimension, vector-spaces-and-subspaces, monoids-groups-and-subgroups, foundations-of-the-real-numbers, construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, countability-and-uncountability, relations-functions-and-quotients, rings-subrings-and-integral-domains
+  13  linear-maps-rank-nullity-and-quotient-spaces     7 items  <- vector-spaces-and-subspaces, foundations-of-the-real-numbers, relations-functions-and-quotients, linear-independence-bases-and-dimension, monoids-groups-and-subgroups, construction-of-the-natural-numbers, finite-counting-and-binomial-coefficients
+  13  logarithmic-space-nl-and-reachability-examples   3 items  <- logarithmic-space-nl-and-reachability
+  13  matchings-covers-menger-and-network-flows-examples   6 items  <- matchings-covers-menger-and-network-flows, graphs-walks-and-connectivity
+  13  normal-subgroups-and-quotient-groups            18 items  <- monoids-groups-and-subgroups, cosets-and-lagranges-theorem, relations-functions-and-quotients, construction-of-r-via-cauchy-sequences, congruences-and-the-chinese-remainder-theorem
+  13  ordinals-and-transfinite-recursion              23 items  <- relations-functions-and-quotients, order-zorn-and-the-axiom-of-choice, construction-of-the-natural-numbers, the-zfc-axioms-and-basic-set-constructions, countability-and-uncountability, linear-independence-bases-and-dimension, deferred-set-theory-beyond-choice, compactness-in-metric-spaces
+  13  ramsey-theory                                   21 items  <- countability-and-uncountability, construction-of-the-natural-numbers, finite-counting-and-binomial-coefficients, graphs-walks-and-connectivity, inclusion-exclusion-and-the-pigeonhole-principle, roots-and-rational-powers, limits-of-real-functions, relations-functions-and-quotients
+  14  boolean-circuits-and-nonuniform-complexity-examples   3 items  <- boolean-circuits-and-nonuniform-complexity
+  14  cantor-set-baire-and-measure-zero-examples      12 items  <- cantor-set-baire-and-measure-zero, countability-and-uncountability, series-and-nonnegative-tests, monotone-sequences-and-cauchy-completeness, roots-and-rational-powers, topology-of-r, construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, sequences-and-limits, relations-functions-and-quotients
+  14  continuity-ivt-evt-and-uniform-continuity-examples  10 items  <- metric-spaces, continuity-ivt-evt-and-uniform-continuity, completeness-and-uniform-continuity, limits-of-real-functions, construction-of-r-via-cauchy-sequences, suprema-and-infima, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, topology-of-r, sequences-and-limits, roots-and-rational-powers
+  14  extremal-graph-theory                           20 items  <- graphs-walks-and-connectivity, finite-counting-and-binomial-coefficients, graph-colouring, ramsey-theory, inclusion-exclusion-and-the-pigeonhole-principle, monotone-sequences-and-cauchy-completeness
+  14  group-homomorphisms-and-the-isomorphism-theorems  20 items  <- monoids-groups-and-subgroups, relations-functions-and-quotients, normal-subgroups-and-quotient-groups, cosets-and-lagranges-theorem
+  14  linear-maps-rank-nullity-and-quotient-spaces-examples   1 items  <- vector-spaces-and-subspaces, linear-maps-rank-nullity-and-quotient-spaces, relations-functions-and-quotients, foundations-of-the-real-numbers, construction-of-the-natural-numbers
+  14  matrices-and-the-matrix-of-a-linear-map         32 items  <- vector-spaces-and-subspaces, rings-subrings-and-integral-domains, foundations-of-the-real-numbers, linear-maps-rank-nullity-and-quotient-spaces, relations-functions-and-quotients, linear-independence-bases-and-dimension, finite-counting-and-binomial-coefficients
+  14  monotone-functions-and-discontinuities          32 items  <- foundations-of-the-real-numbers, construction-of-r-via-cauchy-sequences, monotone-sequences-and-cauchy-completeness, sequences-and-limits, relations-functions-and-quotients, limits-of-real-functions, topology-of-r, suprema-and-infima, continuity-ivt-evt-and-uniform-continuity, countability-and-uncountability, construction-of-the-natural-numbers, series-and-nonnegative-tests, roots-and-rational-powers, cantor-set-baire-and-measure-zero, limsup-and-subsequential-limits, divisibility-gcd-and-bezout, rings-subrings-and-integral-domains, metric-spaces, vector-spaces-and-subspaces, linear-independence-bases-and-dimension, order-zorn-and-the-axiom-of-choice
+  14  normal-subgroups-and-quotient-groups-examples    5 items  <- normal-subgroups-and-quotient-groups, monoids-groups-and-subgroups, cosets-and-lagranges-theorem, congruences-and-the-chinese-remainder-theorem
+  14  ordinal-arithmetic                              28 items  <- ordinals-and-transfinite-recursion, construction-of-the-natural-numbers, countability-and-uncountability, relations-functions-and-quotients
+  14  ramsey-theory-examples                           8 items  <- ramsey-theory, inclusion-exclusion-and-the-pigeonhole-principle, graphs-walks-and-connectivity, construction-of-the-natural-numbers, sequences-and-limits, construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers
+  14  subspaces-products-and-quotients-examples       13 items  <- subspaces-products-and-quotients, metric-spaces, topological-spaces-and-continuity, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, suprema-and-infima, cantor-set-baire-and-measure-zero, series-and-nonnegative-tests, roots-and-rational-powers, sequences-and-limits, construction-of-the-natural-numbers, construction-of-r-via-cauchy-sequences, limits-of-real-functions, countability-and-uncountability, relations-functions-and-quotients
+  14  the-polynomial-hierarchy-and-relativization     25 items  <- logarithmic-space-nl-and-reachability, boolean-circuits-and-nonuniform-complexity
+  14  well-founded-relations-rank-and-the-cumulative-hierarchy  30 items  <- ordinals-and-transfinite-recursion
+  15  cardinal-arithmetic-and-cofinality              26 items  <- ordinals-and-transfinite-recursion, countability-and-uncountability, relations-functions-and-quotients, ordinal-arithmetic, finite-counting-and-binomial-coefficients, construction-of-the-natural-numbers
+  15  connectedness                                   28 items  <- relations-functions-and-quotients, topological-spaces-and-continuity, monotone-sequences-and-cauchy-completeness, order-zorn-and-the-axiom-of-choice, construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, metric-spaces, topology-of-r, suprema-and-infima, subspaces-products-and-quotients, construction-of-the-natural-numbers, countability-and-uncountability, ordinal-arithmetic, ordinals-and-transfinite-recursion
+  15  cyclic-groups-and-direct-products                6 items  <- monoids-groups-and-subgroups, finite-counting-and-binomial-coefficients, divisibility-gcd-and-bezout, construction-of-r-via-cauchy-sequences, construction-of-the-natural-numbers, group-homomorphisms-and-the-isomorphism-theorems, normal-subgroups-and-quotient-groups
+  15  extremal-graph-theory-examples                   9 items  <- extremal-graph-theory, graphs-walks-and-connectivity, ramsey-theory, graph-colouring
+  15  free-groups-and-presentations                   32 items  <- construction-of-the-natural-numbers, monoids-groups-and-subgroups, normal-subgroups-and-quotient-groups, group-homomorphisms-and-the-isomorphism-theorems, relations-functions-and-quotients, finite-counting-and-binomial-coefficients, roots-and-rational-powers, cosets-and-lagranges-theorem
+  15  gaussian-elimination-and-row-reduction          29 items  <- vector-spaces-and-subspaces, foundations-of-the-real-numbers, matrices-and-the-matrix-of-a-linear-map, construction-of-the-natural-numbers, linear-independence-bases-and-dimension, linear-maps-rank-nullity-and-quotient-spaces, finite-counting-and-binomial-coefficients, countability-and-uncountability, construction-of-r-via-cauchy-sequences
+  15  group-actions-and-cayleys-theorem               37 items  <- monoids-groups-and-subgroups, relations-functions-and-quotients, group-homomorphisms-and-the-isomorphism-theorems, cosets-and-lagranges-theorem, finite-counting-and-binomial-coefficients, normal-subgroups-and-quotient-groups, primes-and-the-fundamental-theorem-of-arithmetic, congruences-and-the-chinese-remainder-theorem, divisibility-gcd-and-bezout, inclusion-exclusion-and-the-pigeonhole-principle
+  15  group-homomorphisms-and-the-isomorphism-theorems-examples   5 items  <- group-homomorphisms-and-the-isomorphism-theorems, normal-subgroups-and-quotient-groups, monoids-groups-and-subgroups, construction-of-r-via-cauchy-sequences, relations-functions-and-quotients
+  15  ideals-and-quotient-rings                       24 items  <- rings-subrings-and-integral-domains, monoids-groups-and-subgroups, group-homomorphisms-and-the-isomorphism-theorems, normal-subgroups-and-quotient-groups, cosets-and-lagranges-theorem, congruences-and-the-chinese-remainder-theorem, construction-of-r-via-cauchy-sequences, order-zorn-and-the-axiom-of-choice, foundations-of-the-real-numbers, relations-functions-and-quotients
+  15  matrices-and-the-matrix-of-a-linear-map-examples   7 items  <- matrices-and-the-matrix-of-a-linear-map, construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers
+  15  monotone-functions-and-discontinuities-examples  11 items  <- monotone-functions-and-discontinuities, topology-of-r, construction-of-r-via-cauchy-sequences, limits-of-real-functions, foundations-of-the-real-numbers, countability-and-uncountability, series-and-nonnegative-tests, relations-functions-and-quotients, monotone-sequences-and-cauchy-completeness, roots-and-rational-powers, continuity-ivt-evt-and-uniform-continuity, cantor-set-baire-and-measure-zero, suprema-and-infima, sequences-and-limits, vector-spaces-and-subspaces, metric-spaces, order-zorn-and-the-axiom-of-choice
+  15  ordinal-arithmetic-examples                      8 items  <- ordinal-arithmetic, ordinals-and-transfinite-recursion, construction-of-the-natural-numbers, countability-and-uncountability
+  15  positive-definite-binary-quadratic-forms-and-reduction  23 items  <- divisibility-gcd-and-bezout, congruences-and-the-chinese-remainder-theorem, matrices-and-the-matrix-of-a-linear-map, construction-of-the-natural-numbers
+  15  the-derivative-and-mean-value-theorems          19 items  <- limits-of-real-functions, topology-of-r, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, continuity-ivt-evt-and-uniform-continuity, roots-and-rational-powers, construction-of-the-natural-numbers, monotone-functions-and-discontinuities, relations-functions-and-quotients, suprema-and-infima, completeness-and-uniform-continuity
+  15  the-polynomial-hierarchy-and-relativization-examples   4 items  <- the-polynomial-hierarchy-and-relativization
+  15  the-riemann-integral                            18 items  <- monotone-sequences-and-cauchy-completeness, roots-and-rational-powers, suprema-and-infima, construction-of-the-natural-numbers, foundations-of-the-real-numbers, sequences-and-limits, relations-functions-and-quotients, monotone-functions-and-discontinuities, limsup-and-subsequential-limits, order-zorn-and-the-axiom-of-choice, continuity-ivt-evt-and-uniform-continuity, topology-of-r, cantor-set-baire-and-measure-zero, countability-and-uncountability, limits-of-real-functions, construction-of-r-via-cauchy-sequences
+  15  well-founded-relations-rank-and-the-cumulative-hierarchy-examples   5 items  <- well-founded-relations-rank-and-the-cumulative-hierarchy
+  16  cardinal-arithmetic-and-cofinality-examples      8 items  <- cardinal-arithmetic-and-cofinality, countability-and-uncountability, ordinals-and-transfinite-recursion, relations-functions-and-quotients, construction-of-the-natural-numbers, cantor-set-baire-and-measure-zero, foundations-of-the-real-numbers, construction-of-r-via-cauchy-sequences, sequences-and-limits, ordinal-arithmetic
+  16  cayley-graphs-word-metrics-and-quasi-isometry   60 items  <- graphs-walks-and-connectivity, construction-of-the-natural-numbers, metric-spaces, finite-counting-and-binomial-coefficients, foundations-of-the-real-numbers, monoids-groups-and-subgroups, free-groups-and-presentations, group-actions-and-cayleys-theorem, group-homomorphisms-and-the-isomorphism-theorems, completeness-and-uniform-continuity, relations-functions-and-quotients, order-zorn-and-the-axiom-of-choice, cosets-and-lagranges-theorem, normal-subgroups-and-quotient-groups, limits-of-real-functions
+  16  club-stationary-sets-and-pressing-down          29 items  <- cardinal-arithmetic-and-cofinality, construction-of-the-natural-numbers, ordinals-and-transfinite-recursion
+  16  compactness                                     31 items  <- topological-spaces-and-continuity, countability-and-uncountability, compactness-in-metric-spaces, order-zorn-and-the-axiom-of-choice, metric-spaces, subspaces-products-and-quotients, filters-and-ultrafilters, foundations-of-the-real-numbers, construction-of-r-via-cauchy-sequences, suprema-and-infima, monotone-sequences-and-cauchy-completeness, construction-of-the-natural-numbers, relations-functions-and-quotients, sequences-and-limits, connectedness, ordinals-and-transfinite-recursion, ordinal-arithmetic, topology-of-r
+  16  cyclic-groups-and-direct-products-examples       2 items  <- cyclic-groups-and-direct-products, monoids-groups-and-subgroups, normal-subgroups-and-quotient-groups, congruences-and-the-chinese-remainder-theorem, group-homomorphisms-and-the-isomorphism-theorems
+  16  darboux-lhopital-and-taylor                     20 items  <- the-derivative-and-mean-value-theorems, continuity-ivt-evt-and-uniform-continuity, limits-of-real-functions, construction-of-the-natural-numbers, finite-counting-and-binomial-coefficients, roots-and-rational-powers, foundations-of-the-real-numbers, topology-of-r, monotone-sequences-and-cauchy-completeness, monotone-functions-and-discontinuities, limsup-and-subsequential-limits
+  16  euclidean-domains-pids-and-unique-factorisation   7 items  <- rings-subrings-and-integral-domains, monoids-groups-and-subgroups, construction-of-the-natural-numbers, ideals-and-quotient-rings
+  16  free-groups-and-presentations-examples          12 items  <- free-groups-and-presentations, monoids-groups-and-subgroups, congruences-and-the-chinese-remainder-theorem, construction-of-the-natural-numbers, finite-counting-and-binomial-coefficients, cyclic-groups-and-direct-products, construction-of-r-via-cauchy-sequences
+  16  free-products-and-amalgamation                  27 items  <- monoids-groups-and-subgroups, construction-of-the-natural-numbers, normal-subgroups-and-quotient-groups, group-homomorphisms-and-the-isomorphism-theorems, free-groups-and-presentations, cosets-and-lagranges-theorem, relations-functions-and-quotients
+  16  gaussian-elimination-and-row-reduction-examples   9 items  <- gaussian-elimination-and-row-reduction, construction-of-r-via-cauchy-sequences, matrices-and-the-matrix-of-a-linear-map, congruences-and-the-chinese-remainder-theorem
+  16  group-actions-and-cayleys-theorem-examples      17 items  <- group-actions-and-cayleys-theorem, monoids-groups-and-subgroups, normal-subgroups-and-quotient-groups, congruences-and-the-chinese-remainder-theorem, finite-counting-and-binomial-coefficients, cosets-and-lagranges-theorem, group-homomorphisms-and-the-isomorphism-theorems
+  16  ideals-and-quotient-rings-examples               6 items  <- ideals-and-quotient-rings, construction-of-r-via-cauchy-sequences, primes-and-the-fundamental-theorem-of-arithmetic, congruences-and-the-chinese-remainder-theorem, rings-subrings-and-integral-domains
+  16  modules-and-module-homomorphisms                14 items  <- rings-subrings-and-integral-domains, monoids-groups-and-subgroups, ideals-and-quotient-rings, normal-subgroups-and-quotient-groups, relations-functions-and-quotients, group-homomorphisms-and-the-isomorphism-theorems, cosets-and-lagranges-theorem
+  16  properties-of-the-integral-and-the-working-ftc  20 items  <- the-riemann-integral, suprema-and-infima, monotone-sequences-and-cauchy-completeness, roots-and-rational-powers, foundations-of-the-real-numbers, construction-of-the-natural-numbers, countability-and-uncountability, continuity-ivt-evt-and-uniform-continuity, topology-of-r, monotone-functions-and-discontinuities, completeness-and-uniform-continuity, metric-spaces, the-derivative-and-mean-value-theorems, limits-of-real-functions, absolute-convergence-and-rearrangement, series-and-nonnegative-tests, sequences-and-limits
+  16  symmetric-groups-and-the-sign-homomorphism      14 items  <- monoids-groups-and-subgroups, construction-of-the-natural-numbers, finite-counting-and-binomial-coefficients, group-actions-and-cayleys-theorem, construction-of-r-via-cauchy-sequences, group-homomorphisms-and-the-isomorphism-theorems
+  16  the-derivative-and-mean-value-theorems-examples  10 items  <- the-derivative-and-mean-value-theorems, roots-and-rational-powers, foundations-of-the-real-numbers, topology-of-r, limits-of-real-functions, continuity-ivt-evt-and-uniform-continuity, monotone-sequences-and-cauchy-completeness, monotone-functions-and-discontinuities, relations-functions-and-quotients, suprema-and-infima, completeness-and-uniform-continuity
+  16  the-gauge-integral-and-cousins-lemma            18 items  <- the-riemann-integral, monotone-sequences-and-cauchy-completeness, roots-and-rational-powers, countability-and-uncountability, the-derivative-and-mean-value-theorems, foundations-of-the-real-numbers, construction-of-the-natural-numbers, limits-of-real-functions
+  16  the-riemann-integral-examples                   10 items  <- the-riemann-integral, roots-and-rational-powers, construction-of-the-natural-numbers, foundations-of-the-real-numbers, continuity-ivt-evt-and-uniform-continuity, monotone-sequences-and-cauchy-completeness, suprema-and-infima, limits-of-real-functions, monotone-functions-and-discontinuities, cantor-set-baire-and-measure-zero, topology-of-r, countability-and-uncountability, sequences-and-limits, construction-of-r-via-cauchy-sequences
+  16  the-structure-of-finite-abelian-groups          27 items  <- normal-subgroups-and-quotient-groups, monoids-groups-and-subgroups, cyclic-groups-and-direct-products, group-homomorphisms-and-the-isomorphism-theorems, construction-of-the-natural-numbers, cosets-and-lagranges-theorem, primes-and-the-fundamental-theorem-of-arithmetic, divisibility-gcd-and-bezout, congruences-and-the-chinese-remainder-theorem, finite-counting-and-binomial-coefficients
+  16  weak-choice-principles-and-sierpinskis-theorem  26 items  <- countability-and-uncountability, relations-functions-and-quotients, compactness-in-metric-spaces, construction-of-the-natural-numbers, order-zorn-and-the-axiom-of-choice, ordinals-and-transfinite-recursion, the-zfc-axioms-and-basic-set-constructions, cardinal-arithmetic-and-cofinality, ordinal-arithmetic
+  17  bounded-variation-and-riemann-stieltjes         33 items  <- the-riemann-integral, roots-and-rational-powers, suprema-and-infima, foundations-of-the-real-numbers, monotone-sequences-and-cauchy-completeness, monotone-functions-and-discontinuities, limits-of-real-functions, continuity-ivt-evt-and-uniform-continuity, series-and-nonnegative-tests, sequences-and-limits, properties-of-the-integral-and-the-working-ftc, the-derivative-and-mean-value-theorems, completeness-and-uniform-continuity, construction-of-r-via-cauchy-sequences, absolute-convergence-and-rearrangement, countability-and-uncountability, topology-of-r
+  17  club-stationary-sets-and-pressing-down-examples   7 items  <- club-stationary-sets-and-pressing-down, cardinal-arithmetic-and-cofinality, countability-and-uncountability, ordinal-arithmetic
+  17  compactness-examples                             8 items  <- foundations-of-the-real-numbers, compactness, topological-spaces-and-continuity, countability-and-uncountability, subspaces-products-and-quotients, construction-of-the-natural-numbers, cantor-set-baire-and-measure-zero, compactness-in-metric-spaces, monotone-sequences-and-cauchy-completeness, metric-spaces, topology-of-r, ordinal-arithmetic, ordinals-and-transfinite-recursion, continuity-ivt-evt-and-uniform-continuity, construction-of-r-via-cauchy-sequences, connectedness, suprema-and-infima, order-zorn-and-the-axiom-of-choice
+  17  conjugacy-and-simplicity-in-the-symmetric-groups  18 items  <- monoids-groups-and-subgroups, symmetric-groups-and-the-sign-homomorphism, group-actions-and-cayleys-theorem, finite-counting-and-binomial-coefficients, cosets-and-lagranges-theorem, normal-subgroups-and-quotient-groups
+  17  convexity                                       19 items  <- monotone-sequences-and-cauchy-completeness, continuity-ivt-evt-and-uniform-continuity, completeness-and-uniform-continuity, limits-of-real-functions, the-derivative-and-mean-value-theorems, monotone-functions-and-discontinuities, darboux-lhopital-and-taylor, construction-of-the-natural-numbers, roots-and-rational-powers, foundations-of-the-real-numbers, relations-functions-and-quotients
+  17  countability-axioms-and-cardinal-functions      35 items  <- topological-spaces-and-continuity, countability-and-uncountability, ordinals-and-transfinite-recursion, cardinal-arithmetic-and-cofinality, relations-functions-and-quotients, compactness, metric-spaces, subspaces-products-and-quotients, construction-of-r-via-cauchy-sequences, order-zorn-and-the-axiom-of-choice, monotone-sequences-and-cauchy-completeness
+  17  darboux-lhopital-and-taylor-examples             8 items  <- limits-of-real-functions, darboux-lhopital-and-taylor, the-derivative-and-mean-value-theorems, roots-and-rational-powers, foundations-of-the-real-numbers, monotone-functions-and-discontinuities, finite-counting-and-binomial-coefficients, construction-of-the-natural-numbers
+  17  decision-problems-for-finitely-presented-groups  27 items  <- free-groups-and-presentations, free-products-and-amalgamation
+  17  euclidean-domains-pids-and-unique-factorisation-examples   1 items  <- euclidean-domains-pids-and-unique-factorisation, rings-subrings-and-integral-domains, construction-of-r-via-cauchy-sequences, divisibility-gcd-and-bezout
+  17  free-products-and-amalgamation-examples          8 items  <- free-products-and-amalgamation, normal-subgroups-and-quotient-groups, cyclic-groups-and-direct-products, free-groups-and-presentations, group-homomorphisms-and-the-isomorphism-theorems
+  17  function-space-topologies                       24 items  <- subspaces-products-and-quotients, topological-spaces-and-continuity, construction-of-the-natural-numbers, suprema-and-infima, foundations-of-the-real-numbers, metric-spaces, compactness-in-metric-spaces, compactness, construction-of-r-via-cauchy-sequences, completeness-and-uniform-continuity, relations-functions-and-quotients, monotone-sequences-and-cauchy-completeness, sequences-and-limits, vector-spaces-and-subspaces, countability-and-uncountability
+  17  hnn-extensions-and-brittons-lemma               23 items  <- monoids-groups-and-subgroups, free-groups-and-presentations, free-products-and-amalgamation, normal-subgroups-and-quotient-groups, group-homomorphisms-and-the-isomorphism-theorems, cosets-and-lagranges-theorem, countability-and-uncountability
+  17  improper-integrals                              25 items  <- limits-of-real-functions, properties-of-the-integral-and-the-working-ftc, the-riemann-integral, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, sequences-and-limits, construction-of-r-via-cauchy-sequences, suprema-and-infima, series-and-nonnegative-tests, roots-and-rational-powers, the-derivative-and-mean-value-theorems, monotone-functions-and-discontinuities, continuity-ivt-evt-and-uniform-continuity
+  17  modules-and-module-homomorphisms-examples        2 items  <- modules-and-module-homomorphisms, congruences-and-the-chinese-remainder-theorem, construction-of-r-via-cauchy-sequences, ideals-and-quotient-rings, rings-subrings-and-integral-domains
+  17  nets-and-filters                                28 items  <- relations-functions-and-quotients, topological-spaces-and-continuity, subspaces-products-and-quotients, filters-and-ultrafilters, compactness, countability-and-uncountability, sequences-and-limits
+  17  polynomial-rings-and-roots                      44 items  <- rings-subrings-and-integral-domains, construction-of-the-natural-numbers, foundations-of-the-real-numbers, euclidean-domains-pids-and-unique-factorisation, ideals-and-quotient-rings, monoids-groups-and-subgroups, finite-counting-and-binomial-coefficients, the-structure-of-finite-abelian-groups, construction-of-r-via-cauchy-sequences, divisibility-gcd-and-bezout, primes-and-the-fundamental-theorem-of-arithmetic, congruences-and-the-chinese-remainder-theorem
+  17  properties-of-the-integral-and-the-working-ftc-examples  13 items  <- properties-of-the-integral-and-the-working-ftc, the-derivative-and-mean-value-theorems, continuity-ivt-evt-and-uniform-continuity, the-riemann-integral, roots-and-rational-powers, foundations-of-the-real-numbers, monotone-sequences-and-cauchy-completeness, monotone-functions-and-discontinuities, suprema-and-infima, series-and-nonnegative-tests, construction-of-r-via-cauchy-sequences, relations-functions-and-quotients, limits-of-real-functions, topology-of-r, cantor-set-baire-and-measure-zero, countability-and-uncountability, sequences-and-limits, metric-spaces
+  17  rn-as-a-normed-space                            22 items  <- vector-spaces-and-subspaces, linear-maps-rank-nullity-and-quotient-spaces, metric-spaces, foundations-of-the-real-numbers, linear-independence-bases-and-dimension, roots-and-rational-powers, construction-of-the-natural-numbers, countability-and-uncountability, suprema-and-infima, completeness-and-uniform-continuity, compactness-in-metric-spaces, sequences-and-limits, construction-of-r-via-cauchy-sequences, monotone-sequences-and-cauchy-completeness, continuity-ivt-evt-and-uniform-continuity, limits-of-real-functions, topology-of-r, order-zorn-and-the-axiom-of-choice, the-derivative-and-mean-value-theorems, the-riemann-integral, properties-of-the-integral-and-the-working-ftc, monotone-functions-and-discontinuities, series-and-nonnegative-tests, absolute-convergence-and-rearrangement, relations-functions-and-quotients
+  17  separation-axioms                               28 items  <- topological-spaces-and-continuity, countability-and-uncountability, subspaces-products-and-quotients, cantor-set-baire-and-measure-zero, topology-of-r, metric-spaces, monotone-sequences-and-cauchy-completeness, foundations-of-the-real-numbers, construction-of-the-natural-numbers, suprema-and-infima, ordinals-and-transfinite-recursion, connectedness, compactness
+  17  simplicial-trees-and-group-actions              25 items  <- cayley-graphs-word-metrics-and-quasi-isometry, trees-forests-and-spanning-trees, group-actions-and-cayleys-theorem, monoids-groups-and-subgroups
+  17  subgroups-of-free-groups-and-schreier-rewriting  21 items  <- cosets-and-lagranges-theorem, free-groups-and-presentations, relations-functions-and-quotients, countability-and-uncountability, group-homomorphisms-and-the-isomorphism-theorems, normal-subgroups-and-quotient-groups, free-products-and-amalgamation
+  17  symmetric-groups-and-the-sign-homomorphism-examples   7 items  <- monoids-groups-and-subgroups, symmetric-groups-and-the-sign-homomorphism, finite-counting-and-binomial-coefficients, normal-subgroups-and-quotient-groups, cosets-and-lagranges-theorem
+  17  the-structure-of-finite-abelian-groups-examples   8 items  <- the-structure-of-finite-abelian-groups, congruences-and-the-chinese-remainder-theorem, normal-subgroups-and-quotient-groups, cyclic-groups-and-direct-products, primes-and-the-fundamental-theorem-of-arithmetic, construction-of-r-via-cauchy-sequences, monoids-groups-and-subgroups, finite-counting-and-binomial-coefficients
+  17  uniform-convergence-of-functions                19 items  <- vector-spaces-and-subspaces, construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers, monotone-sequences-and-cauchy-completeness, series-and-nonnegative-tests, suprema-and-infima, metric-spaces, completeness-and-uniform-continuity, compactness-in-metric-spaces, properties-of-the-integral-and-the-working-ftc, the-riemann-integral, roots-and-rational-powers, continuity-ivt-evt-and-uniform-continuity, the-derivative-and-mean-value-theorems, limits-of-real-functions, topology-of-r, absolute-convergence-and-rearrangement, order-zorn-and-the-axiom-of-choice, construction-of-the-natural-numbers
+  17  weak-choice-principles-and-sierpinskis-theorem-examples   6 items  <- weak-choice-principles-and-sierpinskis-theorem, countability-and-uncountability, ordinals-and-transfinite-recursion, ordinal-arithmetic
+  18  approximation-and-compactness-in-ck             29 items  <- uniform-convergence-of-functions, compactness-in-metric-spaces, completeness-and-uniform-continuity, countability-and-uncountability, roots-and-rational-powers, finite-counting-and-binomial-coefficients, metric-spaces, foundations-of-the-real-numbers, monotone-sequences-and-cauchy-completeness, the-derivative-and-mean-value-theorems, limits-of-real-functions
+  18  arc-length-and-rectifiable-curves               15 items  <- rn-as-a-normed-space, the-riemann-integral, foundations-of-the-real-numbers, limsup-and-subsequential-limits, bounded-variation-and-riemann-stieltjes, linear-independence-bases-and-dimension, monotone-functions-and-discontinuities, completeness-and-uniform-continuity, metric-spaces, uniform-convergence-of-functions, continuity-ivt-evt-and-uniform-continuity, the-derivative-and-mean-value-theorems, properties-of-the-integral-and-the-working-ftc
+  18  bounded-variation-and-riemann-stieltjes-examples  12 items  <- bounded-variation-and-riemann-stieltjes, foundations-of-the-real-numbers, the-derivative-and-mean-value-theorems, completeness-and-uniform-continuity, roots-and-rational-powers, cantor-set-baire-and-measure-zero, monotone-functions-and-discontinuities, monotone-sequences-and-cauchy-completeness, metric-spaces, continuity-ivt-evt-and-uniform-continuity, construction-of-r-via-cauchy-sequences, limits-of-real-functions, the-riemann-integral, series-and-nonnegative-tests, suprema-and-infima, properties-of-the-integral-and-the-working-ftc, sequences-and-limits
+  18  composition-series-and-solvable-groups          27 items  <- normal-subgroups-and-quotient-groups, group-homomorphisms-and-the-isomorphism-theorems, conjugacy-and
+
+[autopilot truncated 248300 characters from the middle of this gate output; reproduce the primary gate on the current tree for the complete diagnostics]
+
+-for-s-four" appears on both permutation-statistics-inversions-and-eulerian-numbers-examples and permutation-statistics-inversions-and-eulerian-numbers
+  [multi-home] "ex-foata-transformation-on-three-one-four-two" appears on both permutation-statistics-inversions-and-eulerian-numbers-examples and permutation-statistics-inversions-and-eulerian-numbers
+  [multi-home] "ex-a-four-two-computed-three-ways" appears on both permutation-statistics-inversions-and-eulerian-numbers-examples and permutation-statistics-inversions-and-eulerian-numbers
+  [multi-home] "ex-weak-and-bruhat-orders-in-s-three" appears on both permutation-statistics-inversions-and-eulerian-numbers-examples and permutation-statistics-inversions-and-eulerian-numbers
+  [multi-home] "cex-same-descent-set-different-inversion-number" appears on both permutation-statistics-inversions-and-eulerian-numbers-examples and permutation-statistics-inversions-and-eulerian-numbers
+  [multi-home] "cex-eulerian-statistic-need-not-be-mahonian" appears on both permutation-statistics-inversions-and-eulerian-numbers-examples and permutation-statistics-inversions-and-eulerian-numbers
+  [multi-home] "fs-major-index-equals-inversion-number-pointwise" appears on both permutation-statistics-inversions-and-eulerian-numbers-examples and permutation-statistics-inversions-and-eulerian-numbers
+  [multi-home] "ex-the-singleton-family-p-three-is-viral" appears on both polynomial-rodl-and-viral-equivalence-examples and polynomial-rodl-and-viral-equivalence
+  [multi-home] "ex-a-family-containing-k-one-is-vacuously-viral" appears on both polynomial-rodl-and-viral-equivalence-examples and polynomial-rodl-and-viral-equivalence
+  [multi-home] "cex-polynomial-rodl-does-not-force-the-whole-graph-to-be-restricted" appears on both polynomial-rodl-and-viral-equivalence-examples and polynomial-rodl-and-viral-equivalence
+  [multi-home] "cex-the-empty-family-is-not-erdos-hajnal" appears on both polynomial-rodl-and-viral-equivalence-examples and polynomial-rodl-and-viral-equivalence
+  [multi-home] "ex-a-four-tooth-comb-with-a-special-vertex-triggers-property-star" appears on both property-star-and-comb-outcomes-examples and property-star-and-comb-outcomes
+  [multi-home] "ex-the-third-outcome-of-property-star-gives-a-pure-four-blockade" appears on both property-star-and-comb-outcomes-examples and property-star-and-comb-outcomes
+  [multi-home] "ex-the-square-root-rescaling-in-lemma-four-four" appears on both property-star-and-comb-outcomes-examples and property-star-and-comb-outcomes
+  [multi-home] "ex-the-epsilon-to-five-d-substitution-in-lemma-four-five-one" appears on both property-star-and-comb-outcomes-examples and property-star-and-comb-outcomes
+  [multi-home] "ex-polynomial-algebras-are-faithfully-flat" appears on both flatness-and-faithful-flatness-examples and flatness-and-faithful-flatness
+  [multi-home] "ex-localisations-not-faithfully-flat" appears on both flatness-and-faithful-flatness-examples and flatness-and-faithful-flatness
+  [multi-home] "ex-fraction-field-flat-not-projective" appears on both flatness-and-faithful-flatness-examples and flatness-and-faithful-flatness
+  [multi-home] "ex-flat-idempotent-quotient" appears on both flatness-and-faithful-flatness-examples and flatness-and-faithful-flatness
+  [multi-home] "ex-nonflat-quotient-module" appears on both flatness-and-faithful-flatness-examples and flatness-and-faithful-flatness
+  [multi-home] "ex-faithfully-flat-principal-open-cover" appears on both flatness-and-faithful-flatness-examples and flatness-and-faithful-flatness
+  [multi-home] "ex-finite-flat-module-over-a-local-ring" appears on both flatness-and-faithful-flatness-examples and flatness-and-faithful-flatness
+  [multi-home] "ex-hilbert-series-of-a-polynomial-ring" appears on both rees-modules-artin-rees-and-hilbert-samuel-theory-examples and rees-modules-artin-rees-and-hilbert-samuel-theory
+  [multi-home] "ex-associated-graded-of-a-local-ring" appears on both rees-modules-artin-rees-and-hilbert-samuel-theory-examples and rees-modules-artin-rees-and-hilbert-samuel-theory
+  [multi-home] "ex-artin-rees-intersection" appears on both rees-modules-artin-rees-and-hilbert-samuel-theory-examples and rees-modules-artin-rees-and-hilbert-samuel-theory
+  [multi-home] "ex-krull-intersection-in-a-local-domain" appears on both rees-modules-artin-rees-and-hilbert-samuel-theory-examples and rees-modules-artin-rees-and-hilbert-samuel-theory
+  [multi-home] "ex-hilbert-samuel-polynomial-of-a-dvr" appears on both rees-modules-artin-rees-and-hilbert-samuel-theory-examples and rees-modules-artin-rees-and-hilbert-samuel-theory
+  [multi-home] "ex-hilbert-samuel-multiplicity-of-a-plane-curve" appears on both rees-modules-artin-rees-and-hilbert-samuel-theory-examples and rees-modules-artin-rees-and-hilbert-samuel-theory
+  [multi-home] "ex-hilbert-samuel-finite-length-case" appears on both rees-modules-artin-rees-and-hilbert-samuel-theory-examples and rees-modules-artin-rees-and-hilbert-samuel-theory
+  [multi-home] "ex-cosets-of-q-in-r-and-the-vitali-translates-on-unit-interval" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "ex-the-homeomorphism-x-plus-cx-carries-the-cantor-set-to-a-measure-one-compact-set" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "cex-a-vitali-set" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "cex-a-bernstein-set" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "cex-two-disjoint-nonmeasurable-sets-can-have-a-measurable-union" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "cex-a-proper-subgroup-of-r-can-be-nonmeasurable" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "fs-every-subset-of-r-is-lebesgue-measurable" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "fs-continuous-images-of-lebesgue-measurable-subsets-of-r-are-lebesgue-measurable" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "fs-continuous-preimages-of-lebesgue-measurable-subsets-of-r-are-lebesgue-measurable" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "fs-a-dense-set-of-outer-measure-zero-and-a-dense-set-of-full-inner-measure-cannot-coexist" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "fs-a-nonmeasurable-set-can-be-constructed-without-the-axiom-of-choice" appears on both non-measurable-sets-and-the-cost-of-choice-examples and non-measurable-sets-and-the-cost-of-choice
+  [multi-home] "cex-rudin-bounded-spikes-are-not-equicontinuous" appears on both approximation-and-compactness-in-ck-examples and approximation-and-compactness-in-ck
+  [multi-home] "cex-constant-functions-are-equicontinuous-not-pointwise-bounded" appears on both approximation-and-compactness-in-ck-examples and approximation-and-compactness-in-ck
+  [multi-home] "cex-noncompact-domain-breaks-arzela-ascoli" appears on both approximation-and-compactness-in-ck-examples and approximation-and-compactness-in-ck
+  [multi-home] "ex-bernstein-polynomials-of-the-square-function" appears on both approximation-and-compactness-in-ck-examples and approximation-and-compactness-in-ck
+  [multi-home] "ex-distance-functions-form-a-compact-family-in-c01" appears on both approximation-and-compactness-in-ck-examples and approximation-and-compactness-in-ck
+  [multi-home] "cex-even-polynomial-algebra-is-not-dense" appears on both approximation-and-compactness-in-ck-examples and approximation-and-compactness-in-ck
+  [multi-home] "cex-separating-algebra-without-constants-is-not-dense" appears on both approximation-and-compactness-in-ck-examples and approximation-and-compactness-in-ck
+  [multi-home] "def-integers" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-int-equivalence" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "def-int-operations" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-int-add-well-defined" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-int-mul-well-defined" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "thm-int-comm-ring" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "def-int-order" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "thm-int-ordered-ring" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-int-cancellation" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-nat-embeds-int" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "def-rationals" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-rat-equivalence" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "def-rat-operations" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-rat-ops-well-defined" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-rat-inverse-well-defined" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "thm-rat-field" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "def-rat-order" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-rat-positive-denominator" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "thm-rat-ordered-field" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-int-embeds-rat" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "lem-rat-archimedean" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "fs-sqrt2-rational" appears on both construction-of-r-via-cauchy-sequences and construction-of-r-via-dedekind-cuts
+  [multi-home] "cex-peano-unequal-mixed-partials" appears on both mixed-partials-taylor-and-extrema-examples and mixed-partials-taylor-and-extrema
+  [multi-home] "cex-peano-surface-linewise-minimum-without-an-extremum" appears on both mixed-partials-taylor-and-extrema-examples and mixed-partials-taylor-and-extrema
+  [multi-home] "cex-smooth-linewise-minimum-without-an-extremum" appears on both mixed-partials-taylor-and-extrema-examples and mixed-partials-taylor-and-extrema
+  [multi-home] "cex-unique-critical-point-is-a-nonglobal-strict-local-minimum" appears on both mixed-partials-taylor-and-extrema-examples and mixed-partials-taylor-and-extrema
+  [multi-home] "ex-monkey-saddle" appears on both mixed-partials-taylor-and-extrema-examples and mixed-partials-taylor-and-extrema
+  [multi-home] "cex-zero-hessian-does-not-classify-a-critical-point" appears on both mixed-partials-taylor-and-extrema-examples and mixed-partials-taylor-and-extrema
+  [multi-home] "ex-second-order-multivariable-taylor-polynomial-computed" appears on both mixed-partials-taylor-and-extrema-examples and mixed-partials-taylor-and-extrema
+  [multi-home] "ex-lagrange-multiplier-on-an-affine-graph" appears on both mixed-partials-taylor-and-extrema-examples and mixed-partials-taylor-and-extrema
+  [multi-home] "cex-lagrange-multiplier-rule-needs-a-regular-constraint" appears on both mixed-partials-taylor-and-extrema-examples and mixed-partials-taylor-and-extrema
+  [multi-home] "ex-ascoli-on-a-finite-discrete-domain" appears on both ascoli-arzela-examples and ascoli-arzela
+  [multi-home] "ex-compact-families-of-constant-maps" appears on both ascoli-arzela-examples and ascoli-arzela
+  [multi-home] "cex-boundedness-does-not-replace-pointwise-relative-compactness" appears on both ascoli-arzela-examples and ascoli-arzela
+  [multi-home] "ex-translated-tent-functions-converge-in-the-compact-open-topology" appears on both ascoli-arzela-examples and ascoli-arzela
+  [multi-home] "ex-compact-affine-interpolation-family" appears on both ascoli-arzela-examples and ascoli-arzela
+  [orphan] cex-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cex-a-nonnatural-choice-of-connecting-maps-does-not-form-a-delta-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cex-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cex-np-means-not-polynomial is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cex-undecidable-means-no-instance-can-be-answered is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cor-adapted-classes-compute-derived-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cor-busy-beaver-is-not-computable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cor-derived-long-exact-sequence is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cor-dfas-and-nfas-recognize-the-same-languages is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cor-effective-enumeration-of-turing-machines is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cor-nonhalting-is-not-recognizable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cor-regular-languages-are-closed-under-boolean-operations is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-acyclic-object-for-a-left-exact-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-acyclic-object-for-a-right-exact-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-alphabet-homomorphism-and-induced-word-map is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-ambiguity-and-inherent-ambiguity is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-balanced-derived-bifunctor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-busy-beaver-function is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-chomsky-normal-form is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-cohomological-delta-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-computable-and-partial-computable-function is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-computation-alphabet-and-word-convention is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-connecting-map-for-left-derived-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-conp is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-context-free-grammar is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-decidable-and-recognizable-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-deterministic-finite-automaton is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-deterministic-one-tape-turing-machine is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-dfa-acceptance-and-recognized-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-dtime-ntime-dspace-and-nspace is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-effaceable-cohomological-delta-functor-in-positive-degrees is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-effaceable-homological-delta-functor-in-positive-degrees is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-effective-binary-encoding-and-decoder is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-effective-encoding-of-turing-machines is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-exp-and-nexp is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-extended-dfa-transition-function is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-f-acyclic-resolution is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-greibach-normal-form is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-halting-computation-and-divergence is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-halting-problem is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-homological-delta-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-instance-size-under-an-encoding is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-language-boolean-operations is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-language-concatenation-powers-and-kleene-star is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-language-generated-by-a-cfg is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-language-over-an-alphabet is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-language-recognized-and-decided is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-left-derived-map-relative-to-resolution-data is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-left-derived-object-relative-to-projective-resolution-data is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-leftmost-and-rightmost-derivation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-morphism-of-cohomological-delta-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-morphism-of-homological-delta-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-multitape-and-nondeterministic-machines is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-nfa-acceptance-and-recognized-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-nfa-with-epsilon-moves is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-nondeterministic-accepting-computation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-np-by-verifiers is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-np-hard-and-np-complete is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-nullable-generating-and-reachable-variable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-one-step-and-reflexive-transitive-derivation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-one-step-configuration-relation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-p is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-parse-tree-and-yield is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-partial-function-computed-by-a-machine is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-polynomial-time-many-one-reduction is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-polynomially-balanced-verifier is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-reachable-dfa-state is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-regular-language-by-dfa-recognition is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-right-derived-map-relative-to-resolution-data is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-right-derived-object-relative-to-injective-resolution-data is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-search-version-of-an-np-relation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-supplied-injective-resolution-datum is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-supplied-projective-resolution-datum is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-tape-finite-support-convention is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-turing-machine-acceptance-problem is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-turing-machine-configuration is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-universal-delta-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-universal-turing-machine is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-word-and-language-reversal is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] def-worst-case-time-and-space-complexity is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-a-contravariant-functor-derived-via-the-opposite-category is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-an-acyclic-resolution-that-is-not-an-injective-resolution is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-cfl-closure-under-union-concatenation-star-and-homomorphism is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-diagonal-self-application-machine is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-elimination-of-useless-symbols is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-extended-dfa-transition-respects-concatenation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-extending-a-degree-zero-natural-transformation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-extending-a-published-prefix-automaton-to-a-factor-avoidance-dfa is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-homology-as-a-homological-delta-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-independence-of-two-comparison-lifts-on-homology is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-machine-equivalence-is-undecidable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-np-is-contained-in-pspace-and-pspace-in-exp is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-one-dimension-shift-along-a-projective-presentation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-one-dimension-shift-along-an-injective-copresentation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-p-is-contained-in-np-intersection-conp is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-the-left-derived-functors-of-an-exact-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-the-right-derived-functors-of-hom-from-a-fixed-object is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-the-trivial-delta-functor-of-an-exact-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-two-resolution-data-and-their-change-isomorphism is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] ex-two-universal-delta-functors-and-their-unique-isomorphism is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-a-degree-zero-natural-transformation-between-delta-functors-always-extends is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-an-acyclic-resolution-is-the-same-thing-as-an-injective-resolution is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-any-sequence-of-functors-with-long-exact-sequences-is-a-delta-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-cnf-preserves-epsilon-without-an-exception is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-complementing-a-dfa-complements-its-transition-graph is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-derived-functors-in-two-variables-are-automatically-balanced is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-diagonalization-needs-literal-source-self-reading is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-effaceability-means-every-positive-value-is-zero is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-enough-projectives-implies-a-canonical-resolution-for-every-object is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-np-complete-means-known-not-in-p is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-np-means-not-polynomial is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-the-definition-of-a-derived-map-may-depend-on-the-chosen-comparison-lift is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-the-horseshoe-connecting-map-is-independent-without-a-comparison-proof is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-undecidable-means-no-instance-can-be-answered is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] fs-universality-removes-the-need-for-supplied-resolution-data is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-diagonal-self-application-machine is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-extend-a-degree-zero-transformation-through-one-dimension-shift is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-extended-dfa-transition-respects-concatenation is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-finite-tuples-admit-effective-prefix-free-encodings is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-gnf-left-recursion-elimination-preserves-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-gnf-substitution-step-preserves-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-horseshoe-gives-a-short-exact-sequence-after-applying-a-right-exact-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-machine-encoding-is-injective-and-decodable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-multitape-simulation-has-quadratic-time-overhead is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-polynomial-reductions-compose is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-removing-unreachable-states-preserves-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-step-by-step-interpreter-for-machine-codes is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-the-change-of-projective-resolution-isomorphisms-are-natural is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-the-effacement-extension-commutes-with-connecting-morphisms is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-the-effacement-extension-is-independent-of-the-effacing-morphism is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-the-induced-homology-map-is-independent-of-the-comparison-lift is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] lem-time-at-least-input-length-permits-complete-input-reading is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-a-natural-transformation-induces-natural-transformations-of-left-derived-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-an-exact-base-functor-has-the-trivial-universal-delta-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-an-exact-functor-has-vanishing-positive-derived-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-an-np-complete-language-in-p-implies-p-equals-np is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-change-of-injective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-change-of-projective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-contravariant-derived-functors-are-derived-on-the-opposite-category is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-derived-functors-commute-with-finite-biproducts is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-every-finite-language-is-regular is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-left-derived-maps-preserve-composition is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-left-derived-maps-preserve-identities is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-machine-descriptions-form-a-decidable-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-natural-transformations-of-base-functors-give-morphisms-of-derived-delta-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-negative-derived-degrees-vanish-for-one-sided-resolutions is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-np-is-contained-in-pspace-and-pspace-in-exp is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-p-is-contained-in-np-intersection-conp is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-polynomially-related-encodings-preserve-polynomial-size is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-positive-left-derived-functors-are-effaceable-by-projectives is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-positive-left-derived-functors-vanish-on-projective-objects is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-positive-right-derived-functors-are-effaceable-by-injectives is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-positive-right-derived-functors-vanish-on-injective-objects is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-published-prefix-automata-extend-to-factor-avoidance-dfas is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] prop-satellites-give-the-first-derived-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] rem-derived-functors-are-well-defined-relative-to-supplied-resolution-data is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] rem-universality-is-the-construction-independence-principle is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-acyclic-resolution-theorem-for-left-derived-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-acyclic-resolution-theorem-for-right-derived-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-an-unrecognizable-language-exists is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-busy-beaver-dominates-every-total-computable-function is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-cfl-closure-under-union-concatenation-star-and-homomorphism is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-chomsky-normal-form is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-complementing-accept-states-complements-the-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-decidable-iff-language-and-complement-are-recognizable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-derivation-parse-tree-correspondence is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-derived-functors-are-universal-delta-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-dfa-for-language-difference is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-effaceable-cohomological-delta-functors-are-universal is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-effaceable-homological-delta-functors-are-universal is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-elimination-of-epsilon-productions is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-elimination-of-unit-productions is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-elimination-of-useless-symbols is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-existence-and-uniqueness-of-extended-dfa-transition is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-existence-of-a-universal-turing-machine is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-greibach-normal-form is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-halting-is-recognizable-and-undecidable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-leaf-deletion-preserves-virality-of-a-finite-family is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-left-derived-functors-form-a-homological-delta-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-left-derived-functors-relative-to-supplied-data-are-additive-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-machine-acceptance-is-recognizable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-machine-acceptance-is-undecidable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-machine-equivalence-is-undecidable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-multitape-machines-have-one-tape-simulations is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-polynomial-reductions-transfer-p-np-and-conp-membership is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-product-dfa-for-union-and-intersection is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-right-derived-functors-form-a-cohomological-delta-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-right-derived-functors-relative-to-supplied-data-are-additive-functors is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-sat-search-reduces-to-sat-decision is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-subset-construction-preserves-language is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-totality-is-not-recognizable is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-verifier-and-nondeterministic-definitions-of-np-agree is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [orphan] thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor is published but appears on no page (dropped from page-level Prerequisites)
+  [b-leaf-legacy] items/ex-cardinal-functions-of-the-lower-limit-line.md: grandfathered B-page dependency "ex-the-cardinality-of-the-continuum" — Published legacy example dependency. It remains visible as a warning until its continuum-cardinality argument is moved to an A-page result or written inline under a separately audited content change.
+  [cited-not-in-deps] items/cex-dirichlet-is-nowhere-continuous.md: cites "lem-sequential-characterisation-of-closure-r" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cex-dirichlet-is-nowhere-continuous.md: cites "thm-sequential-criterion-for-continuity" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cex-indicator-of-a-fat-cantor-set-is-not-integrable.md: cites "ex-indicator-of-the-cantor-set-is-integrable-with-integral-zero" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cex-limit-differs-from-the-value.md: cites "cex-composition-of-limits-fails" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cex-nested-open-intervals-empty.md: cites "ex-nested-intervals-single-point" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cex-ordered-field-not-archimedean.md: cites "cor-rational-function-field-as-a-fraction-field" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cex-psi-of-one-over-x-has-no-limit-at-zero.md: cites "lem-limit-implies-local-boundedness" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cex-the-one-norm-comes-from-no-inner-product.md: cites "rem-rn-conventions-and-scope" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-bolzano-weierstrass-in-rn.md: cites "rem-compactness-choice-ledger-metric" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-boundedness-theorem-r.md: cites "thm-compactness-is-necessary-for-evt-and-uniform-continuity" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-cauchy-product-absolute.md: cites "thm-dirichlet-rearrangement" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-cesaro-matrix-is-regular.md: cites "thm-cesaro-mean-theorem" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-continuous-extension-from-a-dense-subset-r.md: cites "cor-boundedness-theorem-r" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-countably-many-discontinuities-integrable.md: cites "thm-cantor-set-properties" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-expectation-agrees-with-the-finite-weighted-sum.md: cites "def-expectation-of-a-nonnegative-or-integrable-random-variable" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-holomorphic-functional-calculus-in-the-wiener-algebra.md: cites "thm-global-cauchy-integral-formula-homology" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-no-function-is-continuous-exactly-on-q.md: cites "thm-dirichlet-and-thomae-continuity-sets" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings.md: cites "def-axiom-of-choice" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-stolz-cesaro-zero-over-zero.md: cites "thm-stolz-cesaro" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/cor-unconditional-iff-absolute-in-r.md: cites "rem-rearrangement-in-higher-dimensions" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/ex-cauchy-complete-not-complete-field.md: cites "fs-nested-intervals-implies-lub" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/ex-rayleigh-quotient-iteration-on-a-two-by-two-symmetric-matrix.md: cites "def-rayleigh-quotient-iteration" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/fs-continuity-implies-uniform-continuity.md: cites "thm-heine-cantor-metric" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/fs-continuity-implies-uniform-continuity.md: cites "thm-compactness-is-necessary-for-evt-and-uniform-continuity" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/fs-equivalent-metrics-share-cauchy-sequences.md: cites "def-metric-convergence" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/fs-heine-borel-holds-in-every-normed-space.md: cites "thm-all-norms-on-rn-are-equivalent" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/fs-integrability-is-equivalent-to-a-nowhere-dense-discontinuity-set.md: cites "thm-lebesgue-criterion" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/fs-limit-equals-value.md: cites "thm-composition-of-function-limits" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-additive-is-q-linear.md: cites "fs-additive-implies-linear" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-bw-implies-archimedean.md: cites "fs-nested-intervals-implies-lub" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-bw-implies-archimedean.md: cites "fs-cauchy-complete-implies-lub" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-bw-implies-cauchy-complete.md: cites "lem-bw-implies-archimedean" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-cauchy-complete-and-archimedean-imply-mct.md: cites "thm-laurent-cauchy-complete" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-cauchy-complete-and-archimedean-imply-mct.md: cites "lem-mct-implies-archimedean" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-cauchy-complete-and-archimedean-imply-mct.md: cites "lem-laurent-non-archimedean" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-content-zero-implies-null.md: cites "thm-compact-null-is-content-zero" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-elementary-sets-admit-compact-inner-and-open-outer-approximations.md: cites "def-metric-compactness" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-finite-circle-wedge-open-cover.md: cites "cor-seifert-van-kampen-simply-connected-overlap" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-finite-interval-cover-total-length.md: cites "lem-nondegenerate-interval-is-not-null" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-finite-interval-cover-total-length.md: cites "thm-cantor-set-properties" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-finite-interval-cover-total-length.md: cites "thm-fat-cantor-set-has-positive-measure" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-finite-interval-cover-total-length.md: cites "fs-null-implies-content-zero" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-function-limit-preserves-order.md: cites "fs-function-limit-preserves-strict-inequality" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-function-limit-preserves-order.md: cites "lem-limit-is-local" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-function-limit-unique.md: cites "fs-limit-unique-at-every-point-of-the-domain" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-limit-implies-local-boundedness.md: cites "fs-limit-exists-implies-bounded-on-the-domain" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-mct-implies-archimedean.md: cites "lem-cauchy-complete-and-archimedean-imply-mct" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-mct-implies-archimedean.md: cites "rem-where-the-archimedean-hypothesis-is-needed" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-mct-implies-lub.md: cites "lem-mct-implies-archimedean" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-metric-convergent-implies-cauchy.md: cites "fs-cauchy-implies-convergent-in-every-metric-space" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-nth-term-test.md: cites "fs-nth-term-test-converse" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-real-and-metric-notions-agree.md: cites "thm-continuous-image-of-a-compact-set-r" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-real-and-metric-notions-agree.md: cites "thm-extreme-value-r" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-real-and-metric-notions-agree.md: cites "thm-heine-cantor-r" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-real-and-metric-notions-agree.md: cites "thm-continuous-image-of-a-compact-space-is-compact" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-real-and-metric-notions-agree.md: cites "thm-extreme-value-metric" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-real-and-metric-notions-agree.md: cites "thm-heine-cantor-metric" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-real-and-metric-notions-agree.md: cites "thm-heine-borel-characterisation-r" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-real-and-metric-notions-agree.md: cites "thm-compact-iff-sequentially-compact-r" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-sign-preservation-near-a-limit.md: cites "thm-algebra-of-function-limits" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/lem-simple-continued-fraction-convergents-and-cylinders.md: cites "thm-simple-continued-fractions-parametrise-the-irrationals" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/rem-riemann-stieltjes-conventions-and-scope.md: cites "def-real-power" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-abel-dini.md: cites "fs-universal-comparison-series" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-algebra-of-function-limits.md: cites "thm-sequential-criterion-for-function-limits" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-algebra-of-function-limits.md: cites "rem-heine-criterion-choice-cost" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-algebra-of-function-limits.md: cites "thm-algebra-of-limits" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-arzela-ascoli-for-real-ck.md: cites "def-countable-choice" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-arzela-ascoli-for-real-ck.md: cites "def-dependent-choice" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-banach-fixed-point.md: cites "cor-banach-error-estimates" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-cantor-function-properties.md: cites "def-monotone-sequence" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-cesaro-mean-theorem.md: cites "fs-cesaro-converse" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-compact-null-is-content-zero.md: cites "lem-nondegenerate-interval-is-not-null" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-compact-subset-is-closed-and-bounded.md: cites "fs-closed-and-bounded-implies-compact-in-every-metric-space" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-compact-subset-is-closed-and-bounded.md: cites "thm-heine-borel-rn" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-complete-and-totally-bounded-implies-compact.md: cites "def-dependent-choice" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-completeness-equivalences.md: cites "fs-nested-intervals-implies-lub" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-completeness-equivalences.md: cites "fs-cauchy-complete-implies-lub" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-composition-of-function-limits.md: cites "fs-naive-composition-of-limits" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-continuity-iff-oscillation-zero.md: cites "lem-oscillation-superlevel-sets-are-closed" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-continuity-iff-oscillation-zero.md: cites "thm-discontinuity-set-is-f-sigma" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-continuity-preimage-characterisation.md: cites "def-isometry-and-metric-embedding" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-continuity-preimage-characterisation.md: cites "lem-real-and-metric-notions-agree" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-continuous-image-of-a-compact-set-r.md: cites "thm-continuous-image-of-a-compact-space-is-compact" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-continuous-image-of-a-compact-set-r.md: cites "lem-real-and-metric-notions-agree" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-continuous-inverse.md: cites "thm-connected-subsets-of-r-are-intervals" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-diagram-area-agrees-with-algebraic-relator-area.md: cites "lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-dirichlet-test.md: cites "thm-alternating-series-test" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-double-series-fubini.md: cites "fs-iterated-double-sums-always-agree" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-extreme-value-r.md: cites "thm-extreme-value-metric" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-extreme-value-r.md: cites "lem-real-and-metric-notions-agree" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-fermat-interior-extremum.md: cites "fs-vanishing-derivative-forbids-strict-increase" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-grouping-of-series.md: cites "fs-grouping-can-be-undone" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-heine-borel-rn.md: cites "thm-complete-and-totally-bounded-implies-compact" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-heine-cantor-r.md: cites "thm-heine-cantor-metric" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-infinite-product-criterion.md: cites "rem-sums-proved-to-exist-but-not-evaluated" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-intermediate-value.md: cites "cex-evt-and-ivt-fail-over-a-non-complete-field" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-mean-value-inequality.md: cites "thm-norm-inequality-for-the-vector-valued-integral" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-mean-value-inequality.md: cites "cor-vector-valued-ftc-and-lipschitz-bound" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-mertens.md: cites "cor-cauchy-product-absolute" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-mertens.md: cites "fs-cauchy-product-of-convergent-series-converges" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-metric-compactness-equivalences.md: cites "rem-compactness-choice-ledger-metric" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-monotone-implies-integrable.md: cites "thm-monotone-with-prescribed-discontinuity-set" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-monotonicity-of-the-integral.md: cites "fs-nonnegative-integrable-with-zero-integral-vanishes" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-monotonicity-of-the-integral.md: cites "thm-nonnegative-continuous-with-zero-integral-vanishes" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-nonnegative-continuous-with-zero-integral-vanishes.md: cites "fs-nonnegative-integrable-with-zero-integral-vanishes" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-perfect-set-uncountable-r.md: cites "def-dependent-choice" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-plane-dual-exists-and-double-dual-recovers-primal.md: cites "def-plane-graph-face-and-boundary" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-riemann-series-theorem.md: cites "thm-dirichlet-rearrangement" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-sequential-criterion-for-function-limits.md: cites "rem-heine-criterion-choice-cost" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-sequential-criterion-for-function-limits.md: cites "lem-sequential-characterisation-of-closure-r" in Statement/Facts but it is not in deps
+  [cited-not-in-deps] items/thm-sequential-criterion-for-function-limits.md: cites "cor-sequential-criterion-for-nonexistence" in Statement/Facts but it is not in deps
+
+1 ERROR(s):
+  [published-unaudited] items/def-tensor-product-total-complex-of-chain-complexes.md: status published but neither verification.audited nor verification.verified is set
+
+FAIL
+
+```
+
+## Advisory failures
+
+```json
+[]
+```
+
+## Canonical repair protocol
+
+# Step 6 gate repair
+
+The generated repair task defines your authority. A Step-6B batch envelope
+assigns every listed gate finding on your owned carriers in one wave. A single
+gate task (including Step 6C) assigns its primary gate and live ids; its advisory
+failures remain context only. Never revisit exhausted ids or another group's
+carriers. Reproduce the assigned checks on the current tree.
+
+For each live finding, repair a confirmed in-scope defect or document a
+false-positive with the governing rule and exact evidence. Update only records
+made stale by a confirmed repair. An unscoped mechanical failure may be fixed at
+its repository cause; do not invent an item or ledger row for it.
+
+When `risk-report` is primary, every live id needs an actual mathematical read
+and a complete, item-specific `risk_review` in its owning batch contract. Use
+scoped `--items` invocations while working. The generated task is already
+partitioned by Alpha group; do not inspect or write another group's carriers.
+A missing review is not itself a defect-ledger row, though a defect found during
+that review follows the normal repair and ledger protocol.
+
+At 6b, append one `route:"gate"` supplemental decision per concrete defect to
+the owning group's decisions file and its matching ledger row. At 6c, append the
+required `kind:"gate"` verdict and current carrier hash to
+`research/frontier-33-6c-verdicts.jsonl`; also record the changed item/page verdict.
+Extend prior retry artifacts and report the current gate result.
+
+# Step 6c — cross-batch audit and closure
+
+Read `research/frontier-33-cross-group-edges.json`, the post-6b carriers, and every
+listed citing/cited item or structural change. An empty computed list is valid.
+
+Append one evidence-bearing current-hash row per edge, forward reference,
+addition, removal, item, page, or gate outcome to
+`research/frontier-33-6c-verdicts.jsonl`; use the exact kind and verdict vocabulary
+accepted by `tools/cross-group-edges.mjs`. Obtain a current carrier hash with
+`node tools/cross-group-edges.mjs carrier --run frontier-33 --id ITEM_ID` after edits.
+
+Clean outcomes use `defect_ids:[]`. Every repair, strike, drop, removal, or
+reversion names one closed, uniquely owned `6c-cross` ledger row. Restore a
+pre-existing removal before deciding it; a page addition, removal, or
+reading-order change is an owner blocker unless the active task explicitly
+grants that authority.
+
+Write `research/frontier-33-alpha-6c.md` with the evidence, disposition, edits, and
+remaining blocker for each computed obligation. The closure gates rederive
+edges, validate verdict currency and ledger ownership, and run the Step-6 gate
+battery.
+
+
+
+## Mathematical context continuity
+
+Read exact task paths first. Search current owned artifacts before historical runs;
+exclude dispatch logs from routine content searches. Fetch complete relevant source
+sections and dependency statements, using bounded output chunks. A truncated result
+is not evidence of absence; continue reading until the required argument is complete.
+Do not dump entire ledgers, source books, or repository-wide search results into context.
+
+For writing roles, after each completed item update the task-authorized notes or report with the
+current item IDs, exact claim and conventions, source paths/URLs and locators,
+dependency IDs, decisions, validation results, unresolved obligations, and next action.
+Automatic compaction can occur mid-proof. After compaction or handoff, reread the
+current item, relevant dependency statements, source passages, and these obligations
+before continuing a proof or repair. A summary is a navigation aid, never a substitute
+for mathematical evidence. If a hypothesis or source qualification cannot be
+recovered, record the blocker rather than infer it. Preserve all independent reviews
+and exact-hash gates. Never mark an unfinished obligation complete to save context.
+Checkpoint only in the task-authorized notes/report; do not create transcripts or alter other owners’ artifacts.

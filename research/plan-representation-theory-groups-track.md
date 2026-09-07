@@ -705,6 +705,11 @@ formula.
 | `def-reverse-row-deletion` (definition) | Define reverse bumping from a removable box. | Constructs an actual inverse, not merely an injectivity count. | literature-derived | not-applicable |
 | `lem-row-insertion-and-reverse-deletion-are-inverse` (lemma) | Each operation undoes the other in both directions. | Closes bijectivity. | literature-derived | literature-derived |
 | `thm-robinson-schensted-correspondence` (theorem) | Permutations in $S_n$ correspond bijectively to pairs of standard tableaux of the same shape. | Supplies the requested RSK core in the permutation case. | literature-derived | literature-derived |
+| `lem-first-row-insertion-basic-subsequences` (lemma) | Letters entering a fixed first-row position form a decreasing subsequence; each entry at position $j>1$ has an earlier smaller predecessor at position $j-1$. | Gives both bounds for longest increasing subsequences. | literature-derived | literature-derived |
+| `def-column-insertion-for-distinct-letters` (definition) | Transpose row insertion to define column insertion. | Supplies the reversal argument. | literature-derived | not-applicable |
+| `lem-row-and-column-insertion-commute` (lemma) | For distinct letters absent from $T$, $(x\to T)\leftarrow y=x\to(T\leftarrow y)$. | Prove by deleting the largest letter and checking its possible displaced positions. | literature-derived | literature-derived |
+| `lem-word-reversal-transposes-the-insertion-tableau` (lemma) | Reversing a distinct-letter word transposes its insertion tableau. | Induct using commuting row/column insertion; no corresponding assertion for the recording tableau. | literature-derived | literature-derived |
+| `thm-schensted-longest-increasing-and-decreasing-subsequence-theorem` (theorem) | If a permutation has RS shape $\lambda$, its longest increasing and decreasing subsequences have lengths $\lambda_1$ and $\lambda'_1$, respectively; both lengths are zero for the empty permutation. | Uses the basic-subsequence lemma and reversal; supplies the SYMR Plancherel tail bounds. | literature-derived | literature-derived |
 | `thm-rsk-correspondence-for-two-line-arrays` (theorem) | The row-insertion construction extends to the source's lexicographically ordered two-line arrays and semistandard tableaux. | Includes RSK rather than only the RS permutation special case. | literature-derived | literature-derived |
 | `cor-rsk-symmetry-under-inversion` (corollary) | For permutations, $P(w^{-1})=Q(w)$ and $Q(w^{-1})=P(w)$. | Records the fundamental symmetry used in involution counting. | literature-derived | literature-derived |
 | `cor-sum-of-squares-of-standard-tableau-numbers` (corollary) | $\sum_{\lambda\vdash n}(f^\lambda)^2=n!$. | Agrees with the regular-representation dimension count and independently checks RG-9. | literature-derived | literature-derived |
@@ -714,6 +719,18 @@ formula.
 recursion, including the empty product.  For RSK, prove termination, standardness,
 and the two-sided inverse algorithm before calling the construction a
 bijection.  Do not derive RSK merely by comparing finite cardinalities.
+
+**2026-09-07 dependency enrichment.** The five Schensted rows above are owned
+here, not duplicated in SYMR. Read C. Schensted, [*Longest Increasing and
+Decreasing Subsequences*](https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf),
+Part I, pp. 179–188 (PDF pages 1–10), especially Lemmas 4–7 and Theorems 1–2.
+The complete 13-page article is cached at
+`scratchpad/source-cache/homological-algebra-enrichment/schensted-1961.pdf`,
+SHA-256 `43b255a106be86158a32cba0fc617a5008356ff8cfee6dc521d4a059fa333d8a`.
+The commutation proof must enumerate the largest-letter displacement cases,
+including coincident new-box positions; a bare appeal to tableau symmetry
+does not supply that proof. RG-11 now proposes twenty A items. Its existing
+page prerequisites suffice; no new page or live item is created here.
 
 **B page:** `the-hook-length-formula-and-rsk-correspondence-examples`
 

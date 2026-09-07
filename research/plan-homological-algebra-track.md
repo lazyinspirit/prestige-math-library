@@ -21,7 +21,13 @@ complexes, regular sequences, and depth belong to `commutative-algebra`.
 
 ## 0. Summary for the orchestrator
 
-**Track `homological-algebra`, wave 2, run `subjects-01`. This scaffold is complete.**
+**Track `homological-algebra`: the original seventeen-pair commission is complete;
+the owner-authorised 2026-09-07 shared enrichment is reviewed, with the combined
+consumer-track splice pending.**
+Sections HA-18–HA-24 below add shared foundations for the braid-group and
+symmetric-group representation scaffolds. They are future prose plans, not
+authored or certified mathematics. Historical statements about six empty
+placeholders describe the original commission, not current disk status.
 This file scaffolds seventeen A/B pairs where the live spec has six planned
 pairs, all six with empty `items` arrays. The expansion is mathematical rather
 than cosmetic: it keeps every A page at or below the owner's 60-item ceiling,
@@ -137,7 +143,8 @@ The scope denials in §26 are: de Rham theory; Koszul complexes, regular
 sequences, depth, and Auslander–Buchsbaum–Serre; sheaf/Čech and local
 cohomology; derived inverse limits and derived completion; change-of-rings
 spectral sequences; relative homological algebra and cotorsion/model structures;
-Hochschild, cyclic, and André–Quillen theories; Tate and profinite/Galois
+cyclic and André–Quillen theories beyond the new classical Hochschild core;
+Tate and profinite/Galois
 cohomology; low-degree group-theoretic interpretations, Schur multipliers,
 universal central extensions, Hopf's formula, and the free-group dimension
 calculation; Leray–Serre and Eilenberg–Moore spectral sequences;
@@ -4308,7 +4315,7 @@ track can recover it from the stated licence.
 | derived inverse limits beyond the countable $\lim^1$ convergence obstruction | require inverse/pro systems, Mittag–Leffler conditions, exact products, and $R^n\!\lim$ | a derived-limits page after category limits and AB4* |
 | change-of-rings spectral sequences | require a developed restriction/extension/coextension-of-scalars package and ring-specific flat/projective hypotheses | an algebra/change-of-rings sequel using `HA-17` |
 | relative homological algebra, cotorsion pairs, model structures from them | replace all epimorphisms/injectives by a chosen proper class and need completeness of cotorsion pairs | a relative/model homological algebra track |
-| Hochschild, cyclic, and André–Quillen (co)homology | require enveloping algebras, simplicial resolutions, dg algebras, and algebra-specific products | dedicated noncommutative/derived algebra tracks |
+| cyclic and André–Quillen theories; general dg-algebra Hochschild theory | cyclic operators/mixed complexes, cotangent or dg resolutions need separate development; ordinary Hochschild homology of field-algebras and its bounded bimodule-complex applications are now included in HA-22–HA-23 | a noncommutative/derived algebra sequel after the new Hochschild core |
 | Tate cohomology and complete resolutions | extend degrees negatively and require complete projective resolutions/self-injective finite-group machinery | a group-cohomology sequel after modular representation theory |
 | profinite/Galois cohomology | cochains must be continuous and coefficients topological/discrete; inverse limits and Galois theory are essential | a Galois/profinite track after topology and number theory |
 | Schur multipliers, $H^2$ as group extensions, $H^1$ as crossed homomorphisms/complements | these are group-theoretic interpretations explicitly assigned away by the seam contract | `group-theory`, citing `def-group-cohomology-as-a-derived-functor` |
@@ -4462,3 +4469,387 @@ they are not licences to point a spine theorem forward.
 - The file contains no absolute order claim, no build artifact, no authored
   item, no status mutation, and no write instruction outside this prose
   scaffold.
+
+---
+
+# Shared foundations enrichment — owner commission 2026-09-07
+
+This continuation supplies actual dependencies requested by the braid and
+symmetric-group leads. It does not change existing HA-1–HA-17 item identities
+or the running build. The six new A pages below have `-examples` companions;
+each companion requires its A page only and remains a leaf. Their category is
+`homological-algebra`. Integration into the live plan is pending the combined
+dependency review. No new source is represented as a complete textbook merely
+because one complete chapter was obtained.
+
+The sources and exact read ranges are recorded at the end of this continuation.
+Every definition is `LN`, every proof-bearing A row is `LA` unless marked
+`LL`, and B examples are `AA`: these codes have precisely the component
+meanings in §4. Each table's final column gives the mathematical proof route,
+not permission to replace a proof by a citation. All local row references are
+backward; cross-page references name suppliers. General Koszul machinery stays
+with commutative algebra. No new page depends on either new representation
+track, so the shared foundations cannot create a braid–symmetric cycle.
+
+## HA-18. Graded Bimodules and Tensor Functors
+
+**page id** `graded-bimodules-and-tensor-functors`
+
+**requires** `tensor-products-of-modules`, `free-modules-and-exact-sequences`,
+`abelian-categories`,
+`subobject-lattices-generators-and-the-grothendieck-axioms`,
+`rees-modules-artin-rees-and-hilbert-samuel-theory`.
+
+This page extends the published commutative grading convention to associative
+graded algebras and bimodules. It develops degree-preserving maps and tensor
+functors before any complexes, quantum groups, or categorical actions appear.
+
+Its second part separates exactness from preservation of projectives. Flatness
+on the tensoring side controls exactness; projectivity on the output side
+controls images of projectives. Neither condition implies the other.
+
+| row | proposed item id | statement, dependencies, and proof route |
+|---|---|---|
+| 18.1 | `def-graded-ring-module-bimodule-and-internal-shift` | Over a commutative ground ring k placed in degree zero, take unital associative Z-graded k-algebras with degree-zero unit, graded k-central left/right/bimodules, and degree-zero maps; internal shift `M{r}_d=M_{d-r}`. On the published commutative case, `{r}=(-r)` relative to `def-graded-ring-and-graded-module`. Internal grading is not super parity. Uses `def-algebra-over-a-commutative-ring`, `def-bimodule`. KS §2a, §2c. |
+| 18.2 | `lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise` | The category of graded modules and degree-zero maps is abelian. Restrict ordinary kernels/images to homogeneous components, check induced quotient actions, and verify coimage→image degreewise; uses 18.1, `def-abelian-category`, and ordinary module isomorphism theorems. |
+| 18.3 | `def-graded-balanced-tensor-product-and-homogeneous-hom` | Grade the existing balanced quotient by total internal degree; define `Hom_d(P,M)` as A-linear maps raising degree by d and `HOM=direct sum_d Hom_d`. HOM consists of finite sums of homogeneous maps, not automatically all ungraded maps; degree-zero morphisms are Hom_0. No parity signs are inserted in multiplication merely from this grading. Uses 18.1 and the existing tensor universal property. |
+| 18.4 | `lem-graded-balanced-tensor-and-shift-isomorphisms` | Homogeneous balancing relations preserve degree; associativity, units, and `M{r} tensor N{s}=(M tensor N){r+s}` descend from the existing balanced maps. Check degrees and inverses; uses 18.3 and `thm-associativity-of-balanced-tensor-products`. |
+| 18.5 | `def-finitely-generated-graded-projective-module` | Apply `def-projective-object` to the degree-zero category; the finite variant is required also to be finitely generated. Row 18.6 proves its finite graded-free-summand characterization. |
+| 18.6 | `thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules` | A homogeneous generating family gives a graded free epimorphism; projectivity splits it. Conversely graded free modules lift homogeneous generators and direct summands inherit lifting. Uses 18.2 and 18.5. |
+| 18.7 | `thm-bimodule-tensor-exactness-and-projective-preservation` | For a B–A bimodule M, `M tensor_A -` is exact if M is right-A-flat. It sends finite projective left A-modules to finite projective left B-modules if M is finite projective on the LEFT B side. Prove the first by flatness and the second by applying tensor to split finite-free presentations. Graded version uses homogeneous presentations from 18.6. |
+| 18.8 | `thm-graded-bimodule-tensor-hom-adjunction` | `Hom_B(M tensor_A X,Y)=Hom_A(X,Hom_B(M,Y))`, with `(a f)(m)=f(ma)` and the degree-zero/graded-Hom versions explicitly distinguished. Curry balanced maps and check degrees, naturality, and inverse maps. Uses 18.3 and `thm-hom-tensor-adjunction-for-modules`. |
+| 18.9 | `prop-restriction-and-extension-of-scalars-on-graded-module-categories` | For a degree-zero algebra map A→B, restriction is exact and extension is its left adjoint. Extension is exact when B is right-A-flat and always preserves finite graded projectives, since it sends a summand of finite shifted copies of A to the corresponding summand of copies of B. Restriction preserves finite graded projectives when B is finite graded projective left A. Use 18.7–18.8 and inherit the ungraded scalar-change definitions. |
+
+**B inventory:** `ex-internal-shift-versus-a-change-of-degree` computes
+`k[x]{2}` against the published twist; `ex-right-flat-bimodule-with-nonprojective-output`
+takes A=k, B=k[epsilon]/(epsilon²), M=k; `ex-left-projective-bimodule-with-nonexact-tensor`
+takes B=k, A=k[epsilon]/(epsilon²), M=k and tensors the nonsplit simple extension.
+The latter two witnesses isolate the two hypotheses in 18.7. Each contains the
+explicit module action, exact sequence, and resulting map, not just a label.
+
+**Source control:** Kleshchev 2009 §2.2 (general graded categories, shifts and
+homogeneous Hom); KS §2a–§2c; existing tensor/flatness/projectivity items;
+Stacks 00JL for the commutative grading dictionary. **Forward references: NONE.**
+
+## HA-19. Grothendieck Groups and Graded Cartan Pairings
+
+**page id** `grothendieck-groups-and-graded-cartan-pairings`
+
+**requires** `graded-bimodules-and-tensor-functors`,
+`subobject-lattices-generators-and-the-grothendieck-axioms`,
+`exactness-and-the-member-calculus`,
+`modular-representations-and-projective-covers`.
+
+This page distinguishes short-exact-sequence Grothendieck groups from split
+Grothendieck groups of projectives. No tensor-category structure is assumed.
+The existing tensor-category Grothendieck ring is a specialization, not a
+supplier for a nonexistent monoidal structure on every module category.
+
+The projective/simple pairing and functorial maps provide the linear algebra
+needed for Hecke and KLR categorification. The Cartan map is not silently
+declared an isomorphism. Finite-dimensional algebra results already published
+on the modular-representation page are inherited under their exact IDs;
+their general statements are used without importing group-specific claims.
+
+| row | proposed item id | statement, dependencies, and proof route |
+|---|---|---|
+| 19.1 | `def-grothendieck-group-of-an-essentially-small-abelian-category` | Fix a small skeleton (or universe-relative small category) and quotient the free abelian group on isomorphism classes by short-exact-sequence relations; denote it G0 when distinguishing projective K0. No global class-sized free group. Stacks 02MT. |
+| 19.2 | `def-split-grothendieck-group-of-an-additive-category` | Same smallness convention; impose only `[X direct-sum Y]=[X]+[Y]`. For finite projectives write K0(A). Weibel K-book II §§1–2. |
+| 19.3 | `thm-grothendieck-group-universal-properties-and-functoriality` | Additive invariants factoring through the specified relations factor uniquely. Exact functors induce G0 maps; additive functors induce split-K0 maps; naturally isomorphic functors give the same map. Prove on generators and relations using 19.1–19.2. |
+| 19.4 | `thm-finite-length-grothendieck-groups-have-simple-class-bases` | In an essentially small length category, simple classes form a free abelian basis. Composition multiplicities are well-defined by `thm-jordan-holder-theorem-in-an-abelian-category`, additive by splicing filtrations, and inverse to the class map. Uses 19.1, 19.3. |
+| 19.5 | `thm-finite-dimensional-algebra-projective-classes-form-a-split-k-zero-basis` | For a finite-dimensional algebra, one cover per simple gives the indecomposable-projective basis. Inherit `thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras` and `thm-krull-schmidt-for-finite-dimensional-kg-modules` (whose statement is for finite-dimensional algebras). Explain why a projective's simple top identifies its cover and why every finite projective decomposes; then group-complete the free commutative monoid. Uses 19.2. |
+| 19.6 | `def-graded-grothendieck-group-shift-module-and-cartan-map` | Internal shift defines `v[M]=[M{1}]` and its inverse on graded G0 and split K0. The inclusion of finite graded projectives in finite-dimensional graded modules gives the Cartan map when A is finite-dimensional. This definition makes no freeness or injectivity claim. Uses 18.1, 19.1–19.3. |
+| 19.7 | `lem-graded-fitting-decomposition-preserves-homogeneous-summands` | For a degree-zero endomorphism f of a finite-dimensional graded module, stabilized kernels/images are graded submodules and `M=ker(f^n) direct-sum im(f^n)`. Prove zero intersection using stabilization of ker(f^(2n)), then dimension equality. On a graded indecomposable, f is invertible or nilpotent, hence f or 1-f is invertible; the degree-zero endomorphism ring is local. This is the degree-preserving adaptation of the published Krull–Schmidt proof. |
+| 19.8 | `thm-graded-krull-schmidt-for-finite-dimensional-graded-modules` | Existence follows by dimension induction using graded summands. For uniqueness, decompose the identity of a first indecomposable through another decomposition; locality from 19.7 makes one composite invertible. The associated split injection has nonzero graded image in an indecomposable target, hence is an isomorphism. Cancel it using the resulting block isomorphism and induct. Uses 18.2, 19.7; no ungraded-isomorphism substitution. |
+| 19.9 | `lem-finite-dimensional-graded-algebras-have-graded-projective-covers` | For a finite-dimensional graded A-module X, choose homogeneous generators and a finite shifted-free surjection E→X. Among graded summands P of E surjecting onto X choose minimum dimension. If a graded N satisfies N+ker(p)=P, graded projectivity lifts p through N→X, giving degree-zero f:P→P with pf=p and image in N. Apply 19.7: im(f^n) still surjects onto X, so minimality forces ker(f^n)=0; hence N=P. Thus the kernel is graded-superfluous. For uniqueness, lift between two covers; superfluity makes both composites surjective, hence invertible in finite dimension. This explicitly adapts `thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras` using 18.6 and 19.7. |
+| 19.10 | `thm-graded-projective-and-simple-classes-have-shift-orbit-bases` | For finite-dimensional Z-graded A, covers of graded simples are indecomposable: in a decomposition a summand surjects to the simple and superfluity kills its complement. Conversely an indecomposable projective has a simple quotient; lifting to its cover and back, locality from 19.7 shows the projective is that cover. A homogeneous generator expresses every graded simple as a quotient of a shift of A, so finitely many shift orbits exhaust them. Extremal supported degree excludes periodic nonzero shifts. Now 19.4, 19.8–19.9 give finite bases over Z[v,v^-1]. No positivity of A's grading is assumed. |
+| 19.11 | `def-projective-simple-hom-pairing-on-grothendieck-groups` | Fix a field k and a finite-dimensional k-algebra A. Let P be finite projective and M finite-dimensional, and define `<[P],[M]>=dim_k Hom_A(P,M)`. In the graded categories use `<[P],[M]>=sum_d v^d dim_k Hom_d(P,M)`. Finiteness makes this a Laurent polynomial. Uses 18.3 and 19.1–19.2. |
+| 19.12 | `thm-projective-hom-pairing-is-additive-and-graded-sesquilinear` | Projectivity makes Hom(P,-) exact; Hom(-,M) is additive on split sums. Hence 19.11 descends. The graded convention gives `<P{r},M{s}>=v^(s-r)<P,M>`. Uses the published `thm-an-object-is-projective-exactly-when-hom-out-of-it-is-exact`. |
+| 19.13 | `thm-split-simple-projective-hom-pairing-has-dual-bases` | Assume End_A(S_i)=k in the ungraded case, or End_0(S_i)=k for every graded simple representative. Inherit the ungraded cover/top correspondence from `thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules` under its general finite-dimensional-algebra statement; for graded modules use 19.9–19.10. Factor maps from a cover through its simple head to get Hom(P_i,S_j)=k for matching representatives and 0 otherwise. A homogeneous map to a shifted simple can be nonzero only for the matching shift. Combine 19.5/19.10 and 19.12. Without splitting the diagonal is dim_k End(S_i), not necessarily 1. This perfect projective/simple pairing does NOT imply the projective/projective Cartan matrix is unimodular. |
+| 19.14 | `thm-adjoint-exact-functors-induce-adjoint-grothendieck-operators` | For F left adjoint G, both exact on the stated finite module categories and F preserving finite projectives, natural Hom adjunction gives `<F P,N>=<P,G N>`. The graded statement requires degree-compatible adjunction. Uses 18.8, 19.3, 19.12; tower-specific freeness and degree shifts remain the consuming track's obligations. |
+
+**B inventory:** `ex-cartan-map-for-the-dual-numbers` computes G0=Z[k],
+K0=Z[A], and `[A]→2[k]`; `ex-graded-dual-numbers-cartan-polynomial`
+with deg epsilon=2 computes `1+v²`; `ex-hom-pairing-over-a-nonsplit-field`
+takes A=C over k=R and obtains diagonal entry 2. These distinguish the Cartan
+map, the projective/simple pairing, and the splitting hypothesis.
+
+**Source control:** Stacks 02MT; Weibel K-book II §§1–2, §6; Kleshchev 2009
+§2.2 (graded groups and sesquilinear Cartan pairing); KS §2e.1;
+the exact existing projective-cover/Krull–Schmidt proofs, with graded adaptations
+explicitly `LA`. **Forward references: NONE.**
+
+## HA-20. Bounded Bimodule Complexes and Derived Tensor
+
+**page id** `bounded-bimodule-complexes-and-derived-tensor`
+
+**requires** `graded-bimodules-and-tensor-functors`, `derived-categories`.
+
+This page supplies the bounded, two-sided tensor machinery used by categorical
+braid actions. It reuses the ordinary complex, homotopy, cone and derived-tensor
+definitions, adding only grading and bimodule structures absent there.
+
+It proves functoriality at the homotopy level before passing to derived
+categories. Complexes projective on each side need not be projective over the
+enveloping algebra; that distinction is essential for subsequent Hochschild work.
+
+| row | proposed item id | statement, dependencies, and proof route |
+|---|---|---|
+| 20.1 | `def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization` | Cochain complex F of graded B–A bimodules with degree-zero internal differentials; F tensor_A G has total degree i+j and differential `d_F tensor 1+(-1)^i 1 tensor d_G`. Inherit/reindex `def-tensor-product-total-complex-of-chain-complexes`; no new definition of an ordinary chain complex. |
+| 20.2 | `lem-bimodule-tensor-totalization-respects-differentials-and-homotopies` | Outer actions commute with both differentials; the mixed terms in d² cancel. Tensor homotopies with the corresponding cochain sign, and check identities/composition. Uses 20.1 and the existing tensor-differential-square lemma. |
+| 20.3 | `thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility` | Finite diagonal reassociation gives natural chain isomorphisms, compatible with associator/unit diagrams. Tensor preserves cone triangles with the explicit cone signs. Uses 18.4, 20.2 and HA-3 cones. |
+| 20.4 | `thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor` | For bounded F with each term finite projective LEFT B and projective RIGHT A, tensor defines an exact functor `K^b(proj A)→K^b(proj B)`; right flatness also gives `D^b(A-Mod)→D^b(B-Mod)`. Prove the two assertions separately: 18.7 controls output projectives, the existing `lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms` controls localization. No finite-dimensional-output assertion without the required finite-dimensional bimodule hypothesis. |
+| 20.5 | `prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors` | Tensor supplied inverse chain maps and homotopies; resulting transformations are natural in the argument. Uses 20.2–20.4. |
+| 20.6 | `thm-inverse-bimodule-complexes-give-derived-tensor-equivalences` | If F and G have the stated two-sided projectivity and supplied homotopy equivalences `F tensor G≃B`, `G tensor F≃A`, their tensor functors are inverse equivalences. Uses 20.3–20.5. A collection of relation isomorphisms does not, by itself, prove coherence of a group action. |
+
+**B inventory:** `ex-two-term-tensor-complex-koszul-signs` writes all four
+terms and cancellations; `ex-left-and-right-projective-not-enveloping-projective`
+uses A=k[x] as its own bimodule, free on each side but the nonprojective
+A^e-module A^e/(x-y); `ex-contractible-bimodule-complex-induces-zero-functor`
+tensors the two-term identity complex and prints the contracting homotopy.
+
+**Source control:** KS §2c; Stacks 06XY (bounded-flat part) and 09LP
+(ordinary-algebra specialization); current HA-14 tensor and cone items.
+**Forward references: NONE.**
+
+## HA-21. Perfect Complexes and Triangulated Grothendieck Groups
+
+**page id** `perfect-complexes-and-triangulated-grothendieck-groups`
+
+**requires** `grothendieck-groups-and-graded-cartan-pairings`,
+`bounded-bimodule-complexes-and-derived-tensor`.
+
+This page reconciles three constructions often all denoted K0: split classes
+of projectives, exact-sequence classes of modules, and triangle classes of
+complexes. Each comparison has its own hypotheses and inverse map.
+
+It then shows how bounded tensor equivalences act on these groups. Homological
+shift acts by minus one; internal grading shift acts by the independent Laurent
+variable. A decategorification claim must say which group is being used.
+
+| row | proposed item id | statement, dependencies, and proof route |
+|---|---|---|
+| 21.1 | `def-perfect-complex-over-a-ring` | Object of D(A) represented by a bounded complex of finite projective modules; graded version uses 18.5. No claim that every bounded complex is perfect. |
+| 21.2 | `def-triangulated-grothendieck-group` | For an essentially small triangulated category, impose `[Y]=[X]+[Z]` for distinguished triangles X→Y→Z→X[1]. Stacks 0FCM. |
+| 21.3 | `lem-triangulated-k-zero-shifts-and-exact-functors` | The zero triangle gives `[X[1]]=-[X]`; exact functors respect relations and isomorphic functors induce the same map. Uses 21.2, cone/triangle axioms and 19.3's presentation argument. |
+| 21.4 | `lem-euler-class-of-a-bounded-projective-complex-is-homotopy-invariant` | Define the finite alternating sum in split K0. A bounded acyclic projective complex splits successively from an endpoint, giving zero Euler class. The cone of a quasi-isomorphism yields equality of Euler classes. Uses 19.2 and HA-14's projective no-roof theorem. |
+| 21.5 | `thm-perfect-complex-k-zero-agrees-with-projective-k-zero` | Degree-zero inclusion and Euler class are inverses. Brutal-truncation cone triangles express each bounded projective complex as its alternating sum. Uses 21.1–21.4. No finite global dimension assumption. Stacks 0FJG. |
+| 21.6 | `thm-abelian-k-zero-agrees-with-bounded-derived-k-zero` | `K0(D^b(C))=G0(C)` for an essentially small abelian category. The inverse is the finite alternating sum of cohomology classes. Prove additivity from the long exact cohomology sequence and surjectivity by truncations. Does NOT require enough projectives or finite global dimension. Uses 19.1, 21.2–21.3 and HA-14 truncations; Stacks 0FCM. |
+| 21.7 | `thm-finite-projective-resolution-hypotheses-identify-perfect-and-bounded-derived-categories` | For finitely generated modules over a left Noetherian ring of finite left global dimension, bounded complexes admit bounded finite-projective replacements. Use HA-14's bounded-above projective replacement; Noetherianity keeps the successive kernels finite, and the global-dimension bound makes a sufficiently remote syzygy projective, permitting truncation. HA-14 gives full faithfulness. This is the extra hypothesis needed to identify 21.5 with 21.6, not a hypothesis for either theorem separately. |
+| 21.8 | `thm-graded-tensor-equivalences-induce-laurent-linear-k-zero-actions` | Degree-compatible exact equivalences commuting with internal shifts induce invertible Z[v,v^-1]-linear maps. Relations holding up to natural isomorphism descend to genuine matrix relations. Uses 20.5–20.6, 19.6 and 21.3. Does not promote weak categorical action to coherent action. |
+
+**B inventory:** `ex-homological-and-internal-shifts-on-k-zero` computes
+`[P[1]{2}]=-v²[P]`; `ex-dual-numbers-simple-is-not-perfect` uses the
+explicit periodic epsilon-resolution (kernel=image=(epsilon)) to exhibit
+nonvanishing Tor in every positive degree; `ex-euler-class-of-a-two-term-cone`
+checks `[Cone(f)]=[Y]-[X]`. The periodic calculation supplies the witness,
+not a claim that bounded objects are automatically perfect.
+
+**Source control:** Stacks 0FCM, 0FJG; KS §§2c, 2e.1; current bounded
+projective replacement and homological dimension suppliers.
+**Forward references: NONE.**
+
+## HA-22. Hochschild Homology and Diagonal Koszul Resolutions
+
+**page id** `hochschild-homology-and-diagonal-koszul-resolutions`
+
+**requires** `graded-bimodules-and-tensor-functors`,
+`tor-flatness-and-global-dimension`, `koszul-complexes-and-regular-sequences`.
+
+This page develops ordinary Hochschild homology of associative algebras over a
+field, including its bar construction, Tor interpretation, naturality, and
+coefficient exact sequence. The field hypothesis makes the bar terms projective
+over the enveloping algebra; the general base-ring version needs its own
+flatness/projectivity distinctions and is not silently asserted.
+
+For polynomial algebras the diagonal Koszul resolution replaces the infinite
+bar resolution by an explicit finite complex. The general Koszul construction
+and regular-sequence theorem are inherited from commutative algebra, while
+the diagonal specialization and its Hochschild computation are owned here.
+
+| row | proposed item id | statement, dependencies, and proof route |
+|---|---|---|
+| 22.1 | `def-enveloping-algebra-and-bimodule-module-dictionary` | For a unital associative k-algebra A over a field, `A^e=A tensor_k A^op`; left action `(a tensor b^op)m=amb`, right action `m(a tensor b^op)=bma`. Check multiplication/order and the equivalence of k-central bimodules with left A^e-modules. Uses 18.1 and published algebra tensor/bimodule definitions. |
+| 22.2 | `def-two-sided-bar-resolution-of-an-associative-algebra` | `Bar_n(A)=A tensor A^(tensor n) tensor A`, n≥0, differential the alternating sum of adjacent multiplications and augmentation multiplication. State both outer actions. |
+| 22.3 | `lem-bar-differential-and-augmentation-form-a-complex` | Pair the two orders of multiplying adjacent slots to cancel in d²; augmentation kills d1. Uses 22.2 and associativity; handles n=0,1 explicitly. |
+| 22.4 | `thm-two-sided-bar-complex-is-an-enveloping-projective-resolution` | Insert the unit in the first slot to contract the augmented underlying k-complex. This contraction need NOT be A^e-linear. On the RIGHT A^e side used below, the free-term isomorphism `A^(tensor n) tensor_k A^e → Bar_n(A)` sends `(a1 tensor ... tensor an) tensor (a tensor b^op)` to `b tensor a1 tensor ... tensor an tensor a`. Check it against the right action `z(c tensor d^op)=dzc`. The analogous left-free model is A^e tensor_k A^(tensor n). A supplied k-basis of A induces the required tensor bases; with that data or the ambient AC convention, 22.3 yields a projective resolution on both sides. |
+| 22.5 | `def-hochschild-chain-complex-of-a-bimodule` | Use the unnormalized complex `C_n(A,M)=M tensor_k A^(tensor n)` with boundary `ma1 tensor ... + sum_(i=1)^(n-1)(-1)^i m tensor ...a_i a_(i+1)... +(-1)^n a_n m tensor a1 ... a_(n-1)`. Define HH_n as its homology, justified by 22.6. |
+| 22.6 | `lem-hochschild-chains-are-bar-tensor-chains` | Give Bar(A) the right A^e-action of 22.1 and identify `Bar(A) tensor_(A^e) M` with 22.5 by `(a0 tensor ... tensor a_(n+1)) tensor m → (a_(n+1) m a0) tensor a1 tensor ... tensor an`. Its inverse inserts units in both outer slots. Check balancing and the two end faces; the transported differential is 22.5, hence squares to zero. No A^e-projectivity of M is assumed. |
+| 22.7 | `thm-hochschild-homology-is-tor-over-the-enveloping-algebra` | `HH_n(A,M)=Tor_n^(A^e)(A,M)` with A a right A^e-module as in 22.1 and M left. Follows from 22.4–22.6 and balanced Tor. Weibel 9.1.3–9.1.5, specialized to a field. |
+| 22.8 | `thm-hochschild-homology-is-functorial-and-has-coefficient-long-exact-sequences` | Bimodule maps act on the M factor; exact coefficient sequences give exact chain sequences over a field and hence natural connecting maps. Uses 22.5–22.7 and HA-4. |
+| 22.9 | `prop-hochschild-degree-zero-is-bimodule-coinvariants` | `HH_0(A,M)=M/span_k{am-ma}` by the degree-one boundary; no ideal quotient is intended for a general bimodule. Uses 22.5. |
+| 22.10 | `def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring` | For R=k[x1,...,xn], let `u_i=x_i tensor 1-1 tensor x_i` in R^e and take the existing Koszul complex K(u;R^e). For homogeneous x_i of degree 2, each exterior generator has homological degree 1 and internal degree 2 so d has internal degree 0. Uses 22.1 and `def-koszul-complex-of-a-sequence-with-coefficients`. |
+| 22.11 | `lem-polynomial-diagonal-differences-form-a-regular-sequence` | Identify R^e with k[x1,...,xn,y1,...,yn]; successively substitute x_i=y_i. At each step the next monic difference is a non-zero-divisor and the quotient is a polynomial algebra. The final quotient is R; n=0 gives the empty sequence. Uses the existing regular-sequence definition. |
+| 22.12 | `thm-the-diagonal-koszul-complex-resolves-the-polynomial-ring` | Apply `thm-regular-sequences-give-acyclic-koszul-complexes` to 22.11 and the multiplication augmentation. Terms are finite free over R^e; rank in degree j is binomial(n,j). Uses 22.10–22.11 and the published exterior-basis lemma. |
+| 22.13 | `thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex` | For every R-bimodule M, HH_j(R,M) is homology of `M tensor exterior(theta_1,...,theta_n)` with differential summing signed `(x_i m-m x_i)` contractions. Compare the bar and Koszul projective resolutions using HA-5; comparison is natural on homology and preserves the internal grading using graded lifts. Uses 22.7, 22.12. |
+| 22.14 | `cor-polynomial-diagonal-bimodule-hochschild-homology` | For M=R the differential is zero, giving `HH_j(R,R)=R tensor exterior^j(k^n)` with the internal shifts of 22.10; it vanishes for j>n. This is the polynomial calculation, not an unsupported general smooth HKR theorem. Uses 22.13. |
+
+**B inventory:** `ex-hochschild-homology-of-the-ground-field` includes n=0;
+`ex-one-variable-diagonal-koszul-computation` gives HH0=k[x], HH1=k[x]{2};
+`ex-one-variable-twisted-bimodule-hochschild-computation` uses k=Q and
+M=R with right action x↦-x, so the differential is 2x and HH0=Q, HH1=0;
+`ex-two-variable-diagonal-koszul-signs` prints the three-term complex and
+cancels its two mixed products. These examples are dependency leaves.
+
+**Source control:** Weibel, HA §9.1, especially 9.1.1–9.1.5 and Exercise
+9.1.3 (printed pp.300–304); Khovanov 2006 pp.1–3; existing CA Koszul proofs.
+**Forward references: NONE.**
+
+## HA-23. Hochschild Hyperhomology and Cyclic Tensor Invariance
+
+**page id** `hochschild-hyperhomology-and-cyclic-tensor-invariance`
+
+**requires** `hochschild-homology-and-diagonal-koszul-resolutions`,
+`bounded-bimodule-complexes-and-derived-tensor`,
+`double-complexes-exact-couples-and-convergence`.
+
+This page distinguishes the total Hochschild homology of a bounded bimodule
+complex from taking Hochschild homology termwise and then taking complex
+cohomology. The second construction retains three gradings in the graded case;
+it is generally a spectral-sequence page, not the total homology.
+
+Cyclic tensor invariance is proved by a two-sided bar comparison with explicit
+projectivity and sign checks. It supplies the algebraic rotation needed by the
+braid track. Markov stabilization, writhe normalization, and link invariance
+are separate braid-specific theorems, not consequences asserted here.
+
+| row | proposed item id | statement, dependencies, and proof route |
+|---|---|---|
+| 23.1 | `def-hochschild-hyperhomology-of-a-bimodule-complex` | For bounded cochain F of A-bimodules over a field, totalize `C_j(A,F^i)` in cochain degree i-j, with `d_total=d_F+(-1)^i b`. Internal degree is preserved. Define hyperhomology from this total complex. Only total and internal gradings descend automatically; the i/j decomposition gives a filtration. |
+| 23.2 | `thm-hochschild-hyperhomology-is-resolution-independent` | Use the right-A^e bar resolution of A, reindexed in nonpositive degrees, which is bounded above projective and hence K-flat by the existing bounded-flat lemma. Tensoring preserves quasi-isomorphisms of F; comparisons between projective resolutions induce homotopy equivalences after tensoring. Uses 22.4–22.7, 20.2 and HA-5 comparison. |
+| 23.3 | `def-termwise-hochschild-homology-complex-and-iterated-homology` | The cochain complex `i↦HH_j(A,F^i)` has induced differential HH_j(d_F); define `H^i(HH_j(A,F))`. In the graded case retain i,j,internal degree separately. Uses 22.8, not 23.1 as an identification. |
+| 23.4 | `thm-termwise-hochschild-homology-respects-bimodule-chain-homotopies` | Apply the additive functor HH_j to the equality f-g=dh+hd; the induced equality is a cochain homotopy. Thus 23.3 is invariant under chain homotopy equivalence. It is not asserted invariant under all quasi-isomorphisms of bimodule complexes. |
+| 23.5 | `thm-termwise-hochschild-spectral-sequence-for-a-bounded-bimodule-complex` | Filter 23.1 so the first differential is b: `E1^(i,-j)=HH_j(A,F^i)`, `E2^(i,-j)=H^i(HH_j(A,F))`, abutting to hyperhomology in total degree i-j. Boundedness of i gives a finite filtration in each total degree; invoke HA-16's convergence theorem. Higher differentials and extension problems are not assumed zero. |
+| 23.6 | `lem-double-bar-comparison-for-cyclic-bimodule-tensor-products` | For field-algebras A,B, take M an A–B bimodule finite projective as a RIGHT B-module, and N a B–A bimodule finite projective as a RIGHT A-module. These are BPW's Rep-sided hypotheses. Compare `Bar(A) tensor_A (M tensor_B N)` with the double bar `Bar(A) tensor_A M tensor_B Bar(B) tensor_B N`. M's right-B flatness licenses the B-bar augmentation; the right-A projectivity of N and of M tensor_B N makes the outer A-bar terms projective on the needed enveloping side. Swap A,B for the other comparison. Take coinvariants after comparing these projective resolutions to obtain the natural chain-homotopy equivalences in BPW (3.37)–(3.39). No left projectivity is being inferred from right projectivity. |
+| 23.7 | `thm-derived-cyclicity-of-hochschild-hyperhomology` | For bounded complexes M of A–B bimodules termwise finite projective RIGHT B, and N of B–A bimodules termwise finite projective RIGHT A, obtain `HHhyper(A,M tensor_B^L N)≅HHhyper(B,N tensor_A^L M)`. Rotate the double-bar factors with the Koszul sign from their cochain/bar degrees; verify both bar boundaries and the M,N differentials, and that two rotations induce identity. Totalize finite complex directions using 20.3. Uses 23.2, 23.6; the stated right-side projectivity computes both derived tensors by ordinary total tensors. Left-side projectivity/finiteness is an additional condition only when invoking HA-20.4's projective-target functor. |
+| 23.8 | `thm-termwise-hochschild-cyclicity-for-bounded-projective-bimodule-complexes` | First apply the natural degree-j cyclicity of 23.6 to each pair M^i,N^l, then use `(-1)^(il)` when swapping the cochain directions. This gives an isomorphism on the iterated groups in 23.3. Check compatibility with induced differentials BEFORE taking their cohomology. It is a separate termwise result, not inferred from equality of the hyperhomology abutments. BPW §3.8.6. |
+
+**B inventory:** `ex-hochschild-bicomplex-total-and-separate-degrees`
+uses a two-term zero-differential complex over k[x] to label all i,j,internal
+components and the i-j diagonal; `ex-cyclic-tensor-coinvariants-of-matrix-bimodules`
+uses the k–Mat_n(k) Morita pair and checks the matrix-unit rotation;
+`ex-double-bar-rotation-sign-in-two-complex-degrees` takes one-dimensional
+factors in cochain degrees 1 and 1 and verifies the minus sign. None is a
+substitute for the general comparison/convergence proofs.
+
+**Source control:** BPW §§3.8.4–3.8.6, equations (3.36)–(3.44), printed
+pp.37–39; Khovanov 2006 pp.6–7; HA-16 finite-filtration convergence.
+**Forward references: NONE.**
+
+## HA-24. Homological Gaussian Elimination
+
+**page id** `homological-gaussian-elimination`
+
+**requires** `chain-homotopy-and-the-homotopy-category` (which already reaches
+`preadditive-and-additive-categories-and-biproducts`).
+
+This page supplies the generic cancellation theorem used when an invertible
+entry appears in a differential matrix. It is a theorem about complexes in an
+additive category: no abelian, linear, projective, finite-dimensional, or
+bounded hypothesis is needed. The published complex and homotopy definitions
+are phrased first for abelian categories, so row 24.1 explicitly records their
+additive-category extension before the elimination statement; it does not
+silently use kernels, homology objects, or exactness in that greater generality.
+The existing linear-algebra Gaussian page motivates the name but is not a
+proof supplier: here the entries are morphisms between possibly different
+objects, only the chosen block is invertible, and the output is a homotopy
+retract with a Schur-complement differential rather than a row-echelon matrix.
+
+Use the cochain convention throughout. At two adjacent degrees fix ordered
+biproduct decompositions
+`C^n=A direct-sum U`, `C^(n+1)=B direct-sum V`, and write
+
+`d^n = [[a,b],[c,phi]] : A direct-sum U -> B direct-sum V`,
+
+where rows name `B,V`, columns name `A,U`, and `phi:U->V` is an actual
+isomorphism. The reduced differential is
+`a-b phi^(-1)c:A->B`. For a homological, degree-lowering complex the same
+matrix formula applies after reindexing, and the contracting homotopy then has
+degree `+1` rather than `-1`. There is no extra Koszul sign in this block
+calculation.
+
+| row | proposed item id | statement, dependencies, and proof route |
+|---|---|---|
+| 24.1 | `def-complex-homotopy-and-contractibility-in-an-additive-category` | For an additive category A, define chain/cochain complexes, maps, degree `+1`/`-1` homotopies satisfying `f-g=dh+hd`, homotopy equivalence, and contractibility using zero morphisms only. Prove that finite biproducts are degreewise and identify these definitions with the published abelian-category special case. Uses `def-additive-category`, `thm-the-category-of-complexes-in-an-additive-category-is-additive`, `def-chain-homotopy`, and `def-contractible-complex`; no homology object is defined without kernels and cokernels. |
+| 24.2 | `def-invertible-differential-block-and-schur-complement-reduction` | Fix the ordered cochain block convention above. Retain every object outside degrees n,n+1, replace those degrees by A,B, retain the adjacent surviving blocks, and propose `dbar^n=a-b phi^(-1)c`. State the homological reindexing dictionary. Uses 24.1 and the published biproduct-matrix theorem. |
+| 24.3 | `lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block` | Put `L=[[1,-b phi^(-1)],[0,1]]` on `B direct-sum V` and `R=[[1,0],[-phi^(-1)c,1]]` on `A direct-sum U`. Multiply explicitly to get `L d^n R=diag(a-b phi^(-1)c,phi)`, and print `L^(-1),R^(-1)`. If `d^(n-1)=[p;q]` and `d^(n+1)=[r,s]`, use `d^2=0` to obtain `cp+phi q=0` and `rb+s phi=0`; after the basis changes the neighbour maps are `[p;0]` and `[r,0]`. This proves the proposed reduced arrows still square to zero, rather than assuming it from the Schur formula. Uses 24.2 and matrix composition. |
+| 24.4 | `thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex` | Define the chain isomorphism by `T^n=R^(-1)=[[1,0],[phi^(-1)c,1]]`, `T^(n+1)=L`, and identities elsewhere. Row 24.3 identifies the transformed complex with the direct sum of the reduced complex and `0->U --phi-> V->0`. Give the inverse matrices and contraction `phi^(-1):V->U` of the second summand. This is a chain isomorphism followed by deletion of a contractible summand, not an equality of the original and reduced complexes. Uses 24.3. |
+| 24.5 | `prop-homological-gaussian-elimination-gives-a-strong-deformation-retract` | For the original complex X and reduction Xbar, print `p^n=[1,0]`, `p^(n+1)=[1,-b phi^(-1)]`, `i^n=[1;-phi^(-1)c]`, and `i^(n+1)=[1;0]`, with identities elsewhere. Let only `h^(n+1):B direct-sum V->A direct-sum U` be nonzero, `h^(n+1)=[[0,0],[0,phi^(-1)]]`. Verify componentwise `pi=1`, `1-ip=dh+hd`, and the side conditions `ph=0`, `hi=0`, `h^2=0`. This fixes both map direction and signs and upgrades a bare homology comparison to chosen deformation-retract data. Uses 24.4. |
+| 24.6 | `cor-homological-gaussian-elimination-preserves-homotopy-type-and-homology` | The maps in 24.5 are a chain-homotopy equivalence in every additive category. When the ambient category is abelian so the published homology objects exist, they induce inverse homology isomorphisms. Do not infer an isomorphism of complexes before the contractible summand is split off. Uses 24.5 and the published homotopy-equivalence theorem. |
+| 24.7 | `thm-finite-iterated-homological-gaussian-elimination` | A finite sequence of cancellations is licensed when each selected block is invertible in the CURRENT Schur-complement complex. Compose retracts recursively by `(p,i,h)=(p_2 p_1,i_1 i_2,h_1+i_1 h_2 p_1)` and verify the retract identities and side conditions. Alternatively, any finite aggregate block `Phi:U->V` may be cancelled at once when `Phi` itself is invertible. Different valid choices yield complexes homotopy equivalent to the original, not canonically equal or generally identical to one another. Infinite cancellation is not asserted without termination or extra local-nilpotence/completeness data; even finiteness does not guarantee a smaller presentation. Uses 24.5. |
+| 24.8 | `prop-additive-functors-preserve-chosen-homological-gaussian-cancellations` | An additive functor preserves finite biproducts, negatives, isomorphisms and their inverses, so it carries the block formula, `p,i,h`, and the chosen cancellation to the corresponding cancellation of the image complex. Exactness is unnecessary for preservation of the homotopy equivalence; it is needed only for separate claims comparing pre-existing homology objects. Uses 24.4 and the published additive-functor suppliers. |
+| 24.9 | `prop-transfer-of-chain-maps-across-gaussian-reductions-and-naturality-limits` | For chosen retracts of X and Y, transfer a chain map f by `fbar=p_Y f i_X`; transfer a homotopy similarly. Identity transfers strictly, while `(g f)bar` and `gbar fbar` differ by the explicit null-homotopy obtained from `1-i_Y p_Y=d h_Y+h_Y d`. Thus transfer is functorial on homotopy classes, but not generally a strict functor on chain maps. It is strictly natural for morphisms preserving the chosen summands and commuting with the pivot/retract data. The construction depends on the decompositions and pivot, so no choice-free naturality or confluence theorem is claimed. Uses 24.5 and compatibility of homotopies with composition. |
+
+**B inventory:** `ex-a-two-by-two-unit-pivot-fixes-the-minus-schur-sign`
+uses the two-term rational complex with differential
+`[[1,1],[1,1]]`: cancelling the lower-right identity leaves zero, while the
+wrong plus sign leaves multiplication by two and destroys the homology.
+`ex-neighbouring-differentials-after-a-gaussian-basis-change` extends this to
+`k -> k^2 -> k^2 -> k` with maps `[1;-1]`, `[[1,1],[1,1]]`, and `[1,-1]`,
+and verifies all transformed neighbour blocks and both square-zero equations.
+`ex-two-finite-cancellation-orders-and-their-composite-retracts` reproduces the
+two adjacent noncomposable pivots of CMW Lemma A.2, calculates both finite
+orders, and limits the order-independence conclusion to that configuration.
+`cex-a-nonunit-differential-entry-cannot-be-gaussian-cancelled` uses
+`0 -> Z --2-> Z -> 0`: deleting the two terms would erase its `Z/2` homology,
+and the nonexistent inverse of 2 pinpoints the failed hypothesis.
+`cex-gaussian-reduction-is-not-strictly-natural-for-arbitrary-chain-maps`
+takes `X=Y direct-sum K` with both `Y` and `K` the identity two-term complex,
+cancels K, and uses the off-diagonal chain maps `f:Y->K`, `g:K->Y`.
+Their individual transfers are zero but the transfer of `gf` is `1_Y`, which
+is nonzero as a chain map though null-homotopic. This distinguishes strict
+chain-level naturality from functoriality in the homotopy category.
+
+**Source control:** Clark–Morrison–Walker, Appendix A.1, author PDF p.70
+(published p.1562), Lemma A.1 and its displayed projection/inclusion maps;
+Appendix A.2, author p.71 (published p.1563), only for its stated double-pivot
+configuration. Bar-Natan, *Fast Khovanov Homology Computations*, §4 Lemma 4.2
+and §5, printed p.5, for the original abstract lemma, direct-sum proof, and
+iteration caveat. **Forward references: NONE.**
+
+## Enrichment evidence and completion gates
+
+Primary texts retrieved 2026-09-07:
+
+| source | full text obtained and exact range consulted for this continuation |
+|---|---|
+| Weibel, *An Introduction to Homological Algebra*, chapter 9 | [MIT-hosted chapter PDF](https://math.mit.edu/~hrm/palestine/weibel/09-hochschild_and_cyclic_homology.pdf), 69 pages, entire chapter obtained; PDF pp.1–8 / printed pp.300–307 read. SHA-256 `5bf5c0971806b0bad3d13c7046807cadd88e1147a76117e0dc3fbb441046ec51`. Not a newly obtained full textbook and not claimed open-licensed. |
+| Khovanov, *Triply-graded link homology and Hochschild homology of Soergel bimodules*, arXiv:math/0510265v3 | [author article](https://arxiv.org/abs/math/0510265), complete PDF obtained; pp.1–7 read for this continuation. SHA-256 `548a0eece08bd967c0f4f44754210f765a970010d14e5ad97917668c7d9476a5`. Its theorem on link invariance is NOT an HA supplier and its proof sketch is not claimed to close the braid proof. |
+| Beliakova–Putyra–Wehrli, *Quantum Link Homology via Trace Functor I*, arXiv:1605.03523 | [author article](https://arxiv.org/abs/1605.03523), complete 85-page PDF obtained; PDF/printed pp.35–40 read, with §§3.8.4–3.8.6 pp.37–39 load-bearing. SHA-256 `3781e14d2bde557cf95aae6aae89238d816a81f5264407b19b7e81c1e5483ece`. No quantum/twisted extension is imported. |
+| Khovanov–Seidel, *Quivers, Floer cohomology, and braid group actions* | Existing braid full-text cache; introduction §1a, §2c (pp.10–11), §2e.1 (p.15) consulted here. Algebraic finite-global-dimension hypotheses are not generalized to arbitrary algebras. |
+| Kleshchev, *Representation theory of symmetric groups and related Hecke algebras*, arXiv:0909.4844v1 | [author survey](https://arxiv.org/abs/0909.4844), existing complete symmetric-group source cache; §2.2, printed pp.6–8 consulted here. General graded-module, shift, homogeneous-Hom, Grothendieck-group and sesquilinear-pairing definitions support HA-18/HA-19. The gradability/radical lemmas it cites are not substituted for the locally explicit graded-cover proof. SHA-256 `8685199608967fa7c479e4dd883990b716a6f708e71cf75f6ce4aba41c6f2cab`. |
+| Stacks Project | [abelian K-groups, 02MT](https://stacks.math.columbia.edu/tag/02MT); [triangulated K-groups, 0FCM](https://stacks.math.columbia.edu/tag/0FCM); [perfect K-groups, 0FJG](https://stacks.math.columbia.edu/tag/0FJG); [bounded-flat tensor, 06XY](https://stacks.math.columbia.edu/tag/06XY); [bimodule derived tensor, 09LP](https://stacks.math.columbia.edu/tag/09LP). Exact sections inspected; general unbounded replacement and dg-algebra scope are not imported. |
+| Weibel, *The K-book*, chapter II | [author-hosted chapter](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf), complete 106-page chapter obtained. PDF/printed pp.1–3, 6–8, 40–41, 45–48, 54–57, 65–67 inspected; load-bearing group completion §1, §2 projective classes, Definitions 6.1.1/6.2 and Universal Property 6.1.2, Proposition 6.6, Exercise 6.3, and Resolution Theorem 7.6. SHA-256 `529ea8a5853e9fa55279e7ad79047155409b10847bd924b56f708f0950ebc607`. This is a chapter, not another obtained full textbook. Graded-cover arguments are explicit adaptations of the published finite-dimensional cover/Fitting proofs, not claimed verbatim from this chapter. |
+| Clark–Morrison–Walker, *Fixing the functoriality of Khovanov homology* | [author-hosted complete article](https://tqft.net/papers/functoriality.pdf), 90 pages obtained and text extracted through the bibliography; Appendix A.1, author PDF p.70 / published p.1562, and Appendix A.2, author p.71 / published p.1563, read. Lemma A.1 supplies the explicit Gaussian projection/inclusion maps and strong-deformation-retract claim; Lemma A.2 supports only its displayed two-pivot configuration. SHA-256 `4465bb90b3e5093a4ffdb6a61af1311257d55277b692189d6c6a17451b91a10d`. |
+| Bar-Natan, *Fast Khovanov Homology Computations*, arXiv:math/0606318 | [author-hosted complete article](https://www.math.toronto.edu/~drorbn/papers/FastKh/FastKh.pdf), 13 pages obtained and text extracted through the references; §4 Lemma 4.2 and §5 on printed p.5 read. This is the original abstract additive-category formula and direct-sum proof; its iterative algorithm expressly gives no general simplification guarantee. SHA-256 `2a25680572244cd28995e6583c80508d9c82dc92cca4f44b7e1e3310573bbb5c`. |
+
+New PDF caches are under
+`/home/lazyinspirit/Projects/prestige-math-library/scratchpad/source-cache/homological-algebra-enrichment/`;
+KS is in the adjacent `braid-groups/` cache. Retrieved chapters/articles are
+source evidence, not a claim to have read every page. Heading dispositions in
+the actual read ranges: group completion, exact/split classes, finite-length
+bases, Cartan maps, finite Euler classes and finite-resolution comparisons are
+included in HA-19/HA-21; von Neumann regular rings, rank decompositions,
+equivariant bundles, Brauer/Witt groups, scheme localization, and the polynomial
+fundamental theorem for K-theory are deferred because neither consuming track
+uses them. Ordinary Hochschild/bar/Tor and the polynomial exercise
+are included in HA-22; low-degree cohomology/derivations and base-change extras
+are deferred (neither consuming scaffold uses them); Soergel/Rouquier/link
+sections are assigned to braid; twisted/quantum shadows and surface-bundle
+applications are deferred; generic cyclicity and termwise-versus-total homology
+are included in HA-23. Additive-category Gaussian cancellation, its full
+strong-retract maps, finite iteration, and naturality limits are included in
+HA-24; infinite perturbation series and matrix-factorization cancellation are
+deferred and are not used as hidden suppliers. General tensor categories,
+ordinary modules, and general Koszul regularity are inherited, never duplicated.
+
+The shared enrichment is **ready for the final combined planning splice**.
+Both leads' bounded independent reviews are closed: graded-cover/basis,
+right-enveloping-bar, tensor-side, cyclicity and spectral-index corrections
+were verified on disk. Exact-ID, supplier reachability, page-cycle, companion
+and new B-leaf checks pass; A inventory sizes are 9, 14, 6, 8, 14, 8, 9.
+The consumer scaffolds still have separate unresolved proof obligations, so
+this is not approval of those scaffolds or publication of mathematics.
+At their final splice, rerun identity/dependency/frontier-discovery checks on
+the combined inventory. Details are in `homological-algebra-enrichment/review.md`.
+No change of scope may hide an essential theorem or an unresolved dependency.

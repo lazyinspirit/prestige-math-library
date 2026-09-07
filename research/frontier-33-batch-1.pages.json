@@ -1,0 +1,1186 @@
+[
+  {
+    "order": 288.041,
+    "id": "hausdorff-measure-and-hausdorff-dimension",
+    "kind": "A",
+    "category": "measure-theory",
+    "title": "Hausdorff Measure and Hausdorff Dimension",
+    "companion": "hausdorff-measure-and-hausdorff-dimension-examples",
+    "requires": [
+      "radon-measures-and-the-riesz-markov-kakutani-theorem-examples"
+    ],
+    "items": [
+      {
+        "id": "def-extended-diameter-for-hausdorff-covers",
+        "kind": "definition",
+        "title": "Extended diameter for Hausdorff covers",
+        "deps": [
+          "def-metric-bounded-diameter",
+          "def-extended-reals"
+        ],
+        "statement": "For a metric space $(X,d)$ extend the diameter of [[def-metric-bounded-diameter]] to every subset $A\\subseteq X$ by\n\n$$\\operatorname{diam}A=\\begin{cases}0&A=\\varnothing,\\\\ \\sup\\{d(x,y):x,y\\in A\\}&A\\ne\\varnothing\\text{ and }A\\text{ bounded},\\\\+\\infty&A\\text{ unbounded}.\\end{cases}$$\n\nThe bounded nonempty branch is the existing real diameter; the infinite value belongs to [[def-extended-reals]]. A nonempty set has diameter zero exactly when it is a singleton: all its pairwise distances must be zero. No value of a point-to-empty-set distance is introduced.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264A, 264K",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-hausdorff-content-at-scale-delta",
+        "kind": "definition",
+        "title": "Hausdorff content at a prescribed scale",
+        "deps": [
+          "def-extended-diameter-for-hausdorff-covers",
+          "def-nonnegative-extended-series",
+          "def-real-power",
+          "lem-extended-reals-complete"
+        ],
+        "statement": "Let $(X,d)$ be a metric space, $A\\subseteq X$, $s\\in[0,\\infty)$ a finite real, and $0<\\delta\\le\\infty$. A cover is a finite or countably infinite family $(U_j)$ of nonempty arbitrary subsets of $X$, with $A\\subseteq\\bigcup_jU_j$ and $\\operatorname{diam}U_j\\le\\delta$. The empty family is permitted, and covers precisely the empty set. Define\n\n$$\\mathcal H^s_\\delta(A)=\\inf\\left\\{\\sum_j(\\operatorname{diam}U_j)^s:(U_j)\\text{ is such a cover}\\right\\}.$$\n\nUse [[def-extended-diameter-for-hausdorff-covers]] and the nonnegative extended sums of [[def-nonnegative-extended-series]]. For this covering cost only, define $r^0=1$ for every $r\\in[0,\\infty]$, including $0$ and $\\infty$; for $s>0$, use [[def-real-power]] at finite bases and set $\\infty^s=\\infty$. Thus a nonempty singleton costs one when $s=0$, and zero when $s>0$. Finite covers are not padded with empty sets.\n\nThe infimum is in $[0,\\infty]$, with $\\inf\\varnothing=\\infty$ when there is no admissible cover; existence follows from [[lem-extended-reals-complete]]. The empty sum is zero. The value $\\mathcal H^s_\\infty$ is called **Hausdorff content**; $\\mathcal H^s_\\delta$ for finite $\\delta$ is the scale approximation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres, Fractals in Probability and Analysis, §1.2 pp.4–6",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            },
+            {
+              "title": "Fremlin, Measure Theory, 264A,D(b),K",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-hausdorff-scale-monotonicity-and-limit",
+        "kind": "lemma",
+        "title": "The small-scale Hausdorff limit exists",
+        "deps": [
+          "def-hausdorff-content-at-scale-delta",
+          "lem-extended-reals-complete"
+        ],
+        "statement": "For $A\\subseteq B\\subseteq X$ and $0<\\eta\\le\\delta\\le\\infty$,\n\n$$\\mathcal H^s_\\delta(A)\\le\\mathcal H^s_\\delta(B),\\qquad \\mathcal H^s_\\delta(A)\\le\\mathcal H^s_\\eta(A).$$\n\nFor every metric space, every subset $A$, and every finite $s\\ge0$,\n\n$$\\sup_{0<\\delta<\\infty}\\mathcal H^s_\\delta(A)=\\lim_{k\\to\\infty}\\mathcal H^s_{2^{-k}}(A)\\in[0,\\infty].$$\n\nNo separability or existence of a countable small-scale cover is assumed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264D(d),264K",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-hausdorff-measure",
+        "kind": "definition",
+        "title": "Unnormalised Hausdorff measure",
+        "deps": [
+          "def-hausdorff-content-at-scale-delta",
+          "lem-hausdorff-scale-monotonicity-and-limit"
+        ],
+        "statement": "For every subset $A$ of a metric space and finite real $s\\ge0$, define the **unnormalised Hausdorff measure** by\n\n$$\\mathcal H^s(A)=\\sup_{0<\\delta<\\infty}\\mathcal H^s_\\delta(A)=\\lim_{k\\to\\infty}\\mathcal H^s_{2^{-k}}(A).$$\n\nThe scale functions use [[def-hausdorff-content-at-scale-delta]] and the limit exists by [[lem-hausdorff-scale-monotonicity-and-limit]]. The name here initially denotes a set function on all subsets. Its outer-measure axioms and the measure on its Carathéodory measurable domain are established below; no measurability of an arbitrary subset is built into the notation. No volume normalising factor is inserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264A–C,K",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "thm-hausdorff-measure-is-an-outer-measure"
+        ]
+      },
+      {
+        "id": "thm-hausdorff-measure-is-an-outer-measure",
+        "kind": "theorem",
+        "title": "Hausdorff measure is an outer measure",
+        "deps": [
+          "def-hausdorff-measure",
+          "def-outer-measure",
+          "def-countable-choice",
+          "def-nonnegative-extended-series"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For any metric space and finite $s\\ge0$, each $\\mathcal H^s_\\delta$, $0<\\delta\\le\\infty$, is an outer measure. So is $\\mathcal H^s$: it vanishes at $\\varnothing$, is monotone, and satisfies\n\n$$\\mathcal H^s\\left(\\bigcup_{j\\ge0}A_j\\right)\\le\\sum_{j\\ge0}\\mathcal H^s(A_j).$$",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264B and 264Xa",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hausdorff-measure-is-metric-and-borel-measurable",
+        "kind": "theorem",
+        "title": "Hausdorff measure is metric and measures every Borel set",
+        "deps": [
+          "thm-hausdorff-measure-is-an-outer-measure",
+          "def-metric-outer-measure",
+          "thm-borel-sets-are-caratheodory-measurable-for-metric-outer-measures",
+          "thm-caratheodory-outer-measure-theorem"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. On every metric space, $\\mathcal H^s$ is a metric outer measure for each finite $s\\ge0$. In particular, if nonempty $A,B$ have $d(A,B)>0$,\n\n$$\\mathcal H^s(A\\cup B)=\\mathcal H^s(A)+\\mathcal H^s(B).$$\n\nThe equality also holds if either set is empty. Every Borel set is Carathéodory measurable, and the restriction to the full Carathéodory sigma-algebra is a complete measure.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin, Measure Theory, 264C,E",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            },
+            {
+              "title": "Bishop–Peres, Theorem 1.2.4",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "landmark": true,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-zero-dimensional-hausdorff-measure-counts",
+        "kind": "proposition",
+        "title": "Zero-dimensional Hausdorff measure is counting measure",
+        "deps": [
+          "def-hausdorff-measure",
+          "thm-hausdorff-measure-is-metric-and-borel-measurable",
+          "def-counting-measure",
+          "def-hausdorff-content-at-scale-delta"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For every subset $A$ of a metric space, $\\mathcal H^0(A)=\\#A$ when $A$ is finite and $\\mathcal H^0(A)=\\infty$ otherwise. Every subset is $\\mathcal H^0$-measurable.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264D(b),264G(a)",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hausdorff-measure-has-borel-hulls",
+        "kind": "theorem",
+        "title": "Hausdorff measure is Borel regular",
+        "deps": [
+          "thm-hausdorff-measure-is-metric-and-borel-measurable",
+          "prop-zero-dimensional-hausdorff-measure-counts",
+          "def-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For every subset $A$ of a metric space and every finite $s\\ge0$ there is a Borel set $G\\supseteq A$ with $\\mathcal H^s(G)=\\mathcal H^s(A)$. Consequently\n\n$$\\mathcal H^s(A)=\\inf\\{\\mathcal H^s(B):A\\subseteq B,\\ B\\text{ Borel}\\},$$\n\nso this is also the outer measure induced by the Borel restriction. In Euclidean spaces $G$ may be chosen $G_\\delta$. This regularity assertion does not assert local finiteness.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin, Measure Theory, 264F(a,b),264K,264Xd,264Ye",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            },
+            {
+              "title": "Falconer, The Geometry of Fractal Sets, Theorem 1.6(a)",
+              "url": "https://www.ma.imperial.ac.uk/~jswlamb/M345PA46/F85%20chap%201.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-finite-hausdorff-measurable-sets-have-borel-cores",
+        "kind": "proposition",
+        "title": "Borel cores of sigma-finite Hausdorff measurable sets",
+        "deps": [
+          "thm-hausdorff-measure-has-borel-hulls",
+          "thm-continuity-from-below-for-measures"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $E$ be $\\mathcal H^s$-measurable and sigma-finite, where $s\\ge0$ is finite. There are Borel sets $E_-\\subseteq E\\subseteq E_+$ such that $\\mathcal H^s(E_+\\setminus E_-)=0$. If $E\\subseteq\\mathbb R^n$ has finite measure, it contains an $F_\\sigma$ set of equal measure; for every $\\varepsilon>0$ it contains a closed set $F$ with $\\mathcal H^s(E\\setminus F)<\\varepsilon$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin, Measure Theory, 264F(c)",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            },
+            {
+              "title": "Falconer, The Geometry of Fractal Sets, Theorem 1.6(b)",
+              "url": "https://www.ma.imperial.ac.uk/~jswlamb/M345PA46/F85%20chap%201.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-hausdorff-content-and-measure-have-the-same-null-sets",
+        "kind": "proposition",
+        "title": "Content and measure have the same null sets",
+        "deps": [
+          "def-hausdorff-measure",
+          "prop-zero-dimensional-hausdorff-measure-counts"
+        ],
+        "statement": "For a subset $A$ of any metric space and finite $s\\ge0$,\n\n$$\\mathcal H^s_\\infty(A)=0\\quad\\Longleftrightarrow\\quad(\\forall\\delta\\in(0,\\infty))\\ \\mathcal H^s_\\delta(A)=0\\quad\\Longleftrightarrow\\quad\\mathcal H^s(A)=0.$$\n\nThis is equality of null-set classes, not equality of the set functions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Proposition 1.2.6; Fremlin 264Xa",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hausdorff-measure-under-lipschitz-maps",
+        "kind": "theorem",
+        "title": "Lipschitz maps control Hausdorff measure",
+        "deps": [
+          "def-hausdorff-measure",
+          "prop-zero-dimensional-hausdorff-measure-counts",
+          "def-lipschitz-holder-contraction"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $f:D\\subseteq X\\to Y$ be an $L$-Lipschitz map between metric spaces and $A\\subseteq D$. For finite $s\\ge0$ and $L>0$,\n\n$$\\mathcal H^s(f(A))\\le L^s\\mathcal H^s(A).$$\n\nIf $L=0$, the image is empty or a singleton: $\\mathcal H^s(f(A))=0$ for $s>0$ and $\\mathcal H^0(f(A))\\le\\mathcal H^0(A)$. No product $0\\cdot\\infty$ is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin, Measure Theory, 264G,264Yj(i)",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            },
+            {
+              "title": "Falconer, The Geometry of Fractal Sets, Lemma 1.8",
+              "url": "https://www.ma.imperial.ac.uk/~jswlamb/M345PA46/F85%20chap%201.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "landmark": true,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-hausdorff-measure-under-similarities",
+        "kind": "corollary",
+        "title": "Similarities scale Hausdorff measure exactly",
+        "deps": [
+          "thm-hausdorff-measure-under-lipschitz-maps"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. If $f:D\\subseteq X\\to Y$ satisfies $d_Y(f(x),f(y))=c\\,d_X(x,y)$ for a finite constant $c>0$, then for every $A\\subseteq D$ and finite $s\\ge0$,\n\n$$\\mathcal H^s(f(A))=c^s\\mathcal H^s(A).$$\n\nThis includes isometries and Euclidean translations and dilations. The Hausdorff outer value of a subset of a metric subspace equals its value computed in the ambient metric space.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264G,264Yf(i),264Yj(i)",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-hausdorff-exponent-comparison",
+        "kind": "lemma",
+        "title": "Increasing the exponent past finite measure gives zero",
+        "deps": [
+          "def-hausdorff-measure",
+          "thm-real-power-laws"
+        ],
+        "statement": "For $0\\le s<t<\\infty$ and finite $\\delta>0$,\n\n$$\\mathcal H^t_\\delta(A)\\le\\delta^{t-s}\\mathcal H^s_\\delta(A).$$\n\nConsequently $\\mathcal H^s(A)<\\infty$ implies $\\mathcal H^t(A)=0$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Lemma 1.2.5; Fremlin 264Xe",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-hausdorff-dimension",
+        "kind": "definition",
+        "title": "Hausdorff dimension",
+        "deps": [
+          "def-hausdorff-measure",
+          "lem-extended-reals-complete"
+        ],
+        "statement": "For a subset $A$ of a metric space define\n\n$$\\dim_H A=\\inf\\{s\\in[0,\\infty):\\mathcal H^s(A)=0\\}\\in[0,\\infty].$$\n\nHere $\\mathcal H^s$ is [[def-hausdorff-measure]], $s$ always denotes a finite real exponent, and $\\inf\\varnothing=\\infty$, in the extended order of [[lem-extended-reals-complete]]. Thus $\\dim_H\\varnothing=0$. Dimension itself may be infinite, but no measure with exponent $\\infty$ is being defined. Any empty supremum over exponents below is taken in $[0,\\infty]$ and equals zero, not the empty supremum in the whole extended real line.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Definition 1.2.1 and Proposition 1.2.6",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "thm-hausdorff-dimension-critical-exponent"
+        ]
+      },
+      {
+        "id": "thm-hausdorff-dimension-critical-exponent",
+        "kind": "theorem",
+        "title": "Hausdorff dimension is the unique critical exponent",
+        "deps": [
+          "def-hausdorff-dimension",
+          "lem-hausdorff-exponent-comparison"
+        ],
+        "statement": "Write $d=\\dim_H A$. For finite exponents $s\\ge0$,\n\n$$s<d\\implies\\mathcal H^s(A)=\\infty,\\qquad s>d\\implies\\mathcal H^s(A)=0.$$\n\nMoreover\n\n$$d=\\inf\\{s\\ge0:\\mathcal H^s(A)<\\infty\\}=\\sup\\{s\\ge0:\\mathcal H^s(A)=\\infty\\},$$\n\nwhere all tested exponents are finite, $\\inf\\varnothing=\\infty$ and the supremum is in $[0,\\infty]$, so $\\sup\\varnothing=0$. If $0<\\mathcal H^s(A)<\\infty$, then $d=s$. The ray assertions impose no value at a finite critical exponent itself.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Proposition 1.2.6; Fremlin 264Yk",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "landmark": true,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hausdorff-dimension-is-countably-stable",
+        "kind": "theorem",
+        "title": "Hausdorff dimension is monotone and countably stable",
+        "deps": [
+          "thm-hausdorff-dimension-critical-exponent",
+          "thm-hausdorff-measure-is-an-outer-measure",
+          "prop-zero-dimensional-hausdorff-measure-counts"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For any countable family of subsets of a metric space,\n\n$$\\dim_H\\left(\\bigcup_{k\\ge0}A_k\\right)=\\sup_{k\\ge0}\\dim_H A_k.$$\n\nInclusion implies monotonicity of dimension. Every at most countable set, including the empty set, has dimension zero.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres §1.1 closing paragraph (p.3), Example 1.2.7, Exercise 1.6",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-lipschitz-maps-do-not-increase-hausdorff-dimension",
+        "kind": "corollary",
+        "title": "Lipschitz monotonicity and bi-Lipschitz invariance of dimension",
+        "deps": [
+          "thm-hausdorff-measure-under-lipschitz-maps",
+          "thm-hausdorff-dimension-critical-exponent"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. A Lipschitz map $f:D\\subseteq X\\to Y$ satisfies $\\dim_H f(A)\\le\\dim_H A$ for every $A\\subseteq D$. If $f$ is a bijection from $D$ onto $f(D)$ and there exist $0<a\\le b<\\infty$ with\n\n$$a\\,d_X(x,y)\\le d_Y(f(x),f(y))\\le b\\,d_X(x,y)\\quad(x,y\\in D),$$\n\nthen $\\dim_H f(A)=\\dim_H A$ (bi-Lipschitz invariance).",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264G,Yj(i),Yk; Falconer Lemma 1.8",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-euclidean-cube-bounds-for-hausdorff-measure",
+        "kind": "lemma",
+        "title": "Elementary lower and upper bounds on a unit cube",
+        "deps": [
+          "def-hausdorff-measure",
+          "def-lebesgue-outer-measure",
+          "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-real-power-laws"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For every integer $n\\ge1$ and $A\\subseteq\\mathbb R^n$ in the Euclidean metric,\n\n$$\\lambda_n^*(A)\\le\\mathcal H^n(A),\\qquad 1\\le\\mathcal H^n((0,1]^n)\\le n^{n/2}.$$\n\nOnly coordinate boxes, not the isodiametric inequality, are needed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Falconer §1.2 p.8 cube upper estimate; §1.4 pp.12–13 volume covers; Fremlin 264H(b)",
+              "url": "https://www.ma.ic.ac.uk/~jswlamb/M345PA46/F85%20chap%201.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line",
+        "kind": "theorem",
+        "title": "One-dimensional Hausdorff measure on the line is Lebesgue outer measure",
+        "deps": [
+          "lem-euclidean-cube-bounds-for-hausdorff-measure",
+          "def-lebesgue-outer-measure",
+          "def-hausdorff-measure"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For every $A\\subseteq\\mathbb R$,\n\n$$\\mathcal H^1(A)=\\lambda_1^*(A).$$\n\nConsequently their Carathéodory measurable domains and completed measures agree.",
+        "sources": {
+          "references": [
+            {
+              "title": "Falconer §1.4 p.12, immediately before Theorem 1.11",
+              "url": "https://www.ma.ic.ac.uk/~jswlamb/M345PA46/F85%20chap%201.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure",
+        "kind": "theorem",
+        "title": "Euclidean Hausdorff measure is proportional to Lebesgue measure",
+        "deps": [
+          "lem-euclidean-cube-bounds-for-hausdorff-measure",
+          "cor-hausdorff-measure-under-similarities",
+          "thm-hausdorff-measure-is-metric-and-borel-measurable",
+          "thm-hausdorff-measure-has-borel-hulls",
+          "thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure",
+          "cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls",
+          "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For each integer $n\\ge1$ there is a finite $c_n\\in[1,n^{n/2}]$ such that\n\n$$\\mathcal H^n(B)=c_n\\lambda_n(B)\\quad(B\\text{ Borel}),\\qquad \\mathcal H^n(A)=c_n\\lambda_n^*(A)\\quad(A\\subseteq\\mathbb R^n).$$\n\nHere $c_n=\\mathcal H^n((0,1]^n)$ and $c_1=1$. For $n\\ge2$ no exact identification of $c_n$ is proved here.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264I statement (weaker constant); design MT-21 prescribed uniqueness route",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "landmark": true,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-euclidean-hausdorff-dimension",
+        "kind": "corollary",
+        "title": "Euclidean space and positive-volume sets have their Euclidean dimension",
+        "deps": [
+          "thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure",
+          "thm-hausdorff-dimension-is-countably-stable",
+          "thm-hausdorff-dimension-critical-exponent"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For each integer $n\\ge1$, $\\dim_H\\mathbb R^n=n$ and every subset of $\\mathbb R^n$ has dimension at most $n$. Every $A\\subseteq\\mathbb R^n$ with $\\lambda_n^*(A)>0$ has dimension $n$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres §1.2 p.7 after Lemma 1.2.8; Falconer §1.2 p.8",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hausdorff-mass-distribution-principle",
+        "kind": "theorem",
+        "title": "The mass distribution principle",
+        "deps": [
+          "def-hausdorff-measure",
+          "thm-hausdorff-dimension-critical-exponent",
+          "def-outer-measure",
+          "def-measure"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $\\mu$ be a finite Borel measure on a metric space $X$ and define\n\n$$\\mu^*(E)=\\inf\\{\\mu(B):E\\subseteq B,\\ B\\text{ Borel}\\}.$$\n\nLet $A\\subseteq X$ have $\\mu^*(A)>0$, and let $s\\ge0$ be finite. If $C>0$ and $r_0>0$ satisfy $\\mu^*(U)\\le C(\\operatorname{diam}U)^s$ for every nonempty $U$ of diameter less than $r_0$, then\n\n$$\\mathcal H^s(A)\\ge\\mu^*(A)/C>0,\\qquad\\dim_H A\\ge s.$$\n\nFor Borel $A$, $\\mu^*(A)=\\mu(A)$. A bound $\\mu(B(x,r))\\le Cr^s$ for every open ball with $0<r<r_0$ implies the same diameter bound (with the same $C$) for sets of diameter less than $r_0$. At exponent zero the nonempty-set cost is one.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Lemma 1.2.8",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "landmark": true,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-cantor-cylinder-masses",
+        "kind": "lemma",
+        "title": "Cantor basic intervals have their expected masses",
+        "deps": [
+          "def-cantor-measure",
+          "prop-cantor-measure-is-a-singular-atomless-probability-measure",
+          "thm-cantor-function-properties",
+          "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures",
+          "thm-cantor-set-ternary-description",
+          "def-cantor-function"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For the middle-thirds Cantor set, a level-$m$ basic interval is\n\n$$I_b=\\left[\\sum_{j=1}^m2b_j3^{-j},\\ \\sum_{j=1}^m2b_j3^{-j}+3^{-m}\\right],\\qquad b_j\\in\\{0,1\\}.$$\n\nEvery such interval has Cantor measure $\\mu_c(I_b)=2^{-m}$, including $m=0$, where the interval is $[0,1]$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264J(a,d); Bishop–Peres Example 1.4.2 (uniform digits)",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-sharp-cantor-interval-mass-bound",
+        "kind": "lemma",
+        "title": "The sharp interval bound for Cantor measure",
+        "deps": [
+          "lem-cantor-cylinder-masses",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-continuity-from-below-for-measures",
+          "prop-cantor-measure-is-a-singular-atomless-probability-measure"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Set $s=\\log 2/\\log 3$. For every interval $I\\subseteq\\mathbb R$,\n\n$$\\mu_c(I)\\le(\\operatorname{diam}I)^s.$$\n\nIn particular, for every nonempty bounded $U\\subseteq\\mathbb R$, its induced Cantor outer measure satisfies $\\mu_c^*(U)\\le(\\operatorname{diam}U)^s$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin, Measure Theory, 264J(c,d), adapted from cylinder counts to the existing Cantor measure",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-cantor-set-hausdorff-dimension-and-exact-measure",
+        "kind": "theorem",
+        "title": "The Cantor set has dimension log 2 / log 3 and critical measure one",
+        "deps": [
+          "lem-sharp-cantor-interval-mass-bound",
+          "thm-hausdorff-mass-distribution-principle",
+          "thm-hausdorff-dimension-critical-exponent",
+          "thm-cantor-set-ternary-description",
+          "thm-real-power-laws",
+          "prop-cantor-measure-is-a-singular-atomless-probability-measure",
+          "def-cantor-measure",
+          "thm-existence-of-the-lebesgue-stieltjes-measure"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For the middle-thirds Cantor set $C$ and $s=\\log2/\\log3$,\n\n$$\\mathcal H^s(C)=1,\\qquad\\dim_H C=s.$$\n\nThese values use the unnormalised diameter-power convention.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin, Measure Theory, 264J",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            },
+            {
+              "title": "Hunter, Measure Theory, Theorem 2.34 and Example 2.37",
+              "url": "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "landmark": true,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-binary-digit-restriction-set",
+        "kind": "definition",
+        "title": "Sets defined by permitted binary digit positions",
+        "deps": [
+          "thm-geometric-series",
+          "def-series",
+          "def-countable"
+        ],
+        "statement": "Let $\\mathbb N_+=\\{1,2,\\ldots\\}$ and $S\\subseteq\\mathbb N_+$. Define the **binary digit restriction set**\n\n$$A_S=\\left\\{\\sum_{k=1}^{\\infty}a_k2^{-k}:a_k\\in\\{0,1\\},\\ a_k=0\\text{ if }k\\notin S\\right\\},\\qquad a_S(n)=\\#(S\\cap\\{1,\\ldots,n\\}).$$\n\nHere $n\\ge0$ and $a_S(0)=0$. The series is the positive-start-index series of [[def-series]], convergent since its tails are bounded by the geometric tails of [[thm-geometric-series]]. In particular $A_S\\subseteq[0,1]$ and $0\\in A_S$. The cardinality symbol uses [[def-countable]]. Membership requires the existence of an allowed expansion; points with two binary expansions are retained if either expansion is allowed. No choice of a preferred expansion is part of this definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Example 1.3.2 and Example 1.4.2",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-binary-digit-restriction-hausdorff-dimension",
+        "kind": "proposition",
+        "title": "Digit-position density determines Hausdorff dimension",
+        "deps": [
+          "def-binary-digit-restriction-set",
+          "thm-hausdorff-mass-distribution-principle",
+          "thm-hausdorff-dimension-critical-exponent",
+          "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-geometric-series",
+          "thm-heine-borel-characterisation-r",
+          "thm-cantor-set-ternary-description"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For every $S\\subseteq\\mathbb N_+$, the set $A_S$ is compact and\n\n$$\\dim_H A_S=\\liminf_{n\\to\\infty}\\frac{a_S(n)}n.$$\n\nIf $\\mathbb N_+\\setminus S$ is infinite, then $\\mathcal H^1(A_S)=\\lambda_1(A_S)=0$. If both $S$ and its complement are infinite, $A_S$ is uncountable. Finite $S$, including $S=\\varnothing$, gives a finite set of dimension zero.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Examples 1.3.2,1.4.2; §1.3 grid comparison",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-critical-hausdorff-measure-can-be-zero-finite-or-infinite",
+        "kind": "remark",
+        "title": "Dimension leaves the critical measure undetermined",
+        "deps": [
+          "prop-binary-digit-restriction-hausdorff-dimension",
+          "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line",
+          "cor-euclidean-hausdorff-dimension"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Dimension one permits all three critical-measure behaviours. For $S$ the positive nonsquares, $a_S(n)=n-\\lfloor\\sqrt n\\rfloor$, so [[prop-binary-digit-restriction-hausdorff-dimension]] gives $\\dim_H A_S=1$ and $\\mathcal H^1(A_S)=0$. On the other hand [[thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line]] gives $\\mathcal H^1([0,1])=1$ and $\\mathcal H^1(\\mathbb R)=\\infty$. Both sets have dimension one by [[cor-euclidean-hausdorff-dimension]], since they have positive Lebesgue measure. The critical exponent alone therefore specifies none of zero, finite positive, or infinite critical measure.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Proposition 1.2.6 and Example 1.4.2",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "rem-hausdorff-cover-conventions-and-normalisation",
+        "kind": "remark",
+        "title": "Content, spherical covers, and normalisation",
+        "deps": [
+          "prop-hausdorff-content-and-measure-have-the-same-null-sets",
+          "thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The covering convention matters. For the diameter-power definition, replacing nonempty covering sets by their closures leaves diameters unchanged, hence gives the same infimum even at a fixed scale. Open enlargement gives the same limiting measure for positive exponents, with scale and cost slack. Finite-scale content should not be confused with the limiting measure: [[prop-hausdorff-content-and-measure-have-the-same-null-sets]] establishes only their common null sets.\n\nIf $\\mathcal S^s$ denotes the analogous limiting infimum restricted to open metric balls, then for $s>0$,\n\n$$\\mathcal H^s(A)\\le\\mathcal S^s(A)\\le2^s\\mathcal H^s(A).$$\n\nFor the second inequality, enclose each nonempty cover member of diameter $d_j$ in a ball about one of its points, of radius slightly greater than $d_j$. Its diameter is at most twice that radius. Choose positive enlargements with summable cost error, including when $d_j=0$; the covering scale is increased by a factor tending to two and still tends to zero. Infimisation, vanishing cost error, and the small-scale limit give the inequality. The first inequality is inclusion of cover families. The ball-only convention is called spherical Hausdorff measure; equality with arbitrary-cover measure is not a general convention equivalence (Falconer §1.2).\n\n**Recorded, not proved here.** The sharper Euclidean identification for this unnormalised convention is\n\n$$c_n=\\frac{2^n}{\\lambda_n(B(0,1))}.$$\n\nFremlin 264H–I supplies the isodiametric argument and exact factor. The local theorem [[thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure]] proves proportionality and elementary bounds only. No proof or example here uses the displayed exact identification for $n\\ge2$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin, Measure Theory, 264D(a,b,d),264H–I",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            },
+            {
+              "title": "Bishop–Peres, §1.2 p.4, arbitrary versus ball covers",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            },
+            {
+              "title": "Falconer, The Geometry of Fractal Sets, §1.2 p.7, spherical convention",
+              "url": "https://www.ma.imperial.ac.uk/~jswlamb/M345PA46/F85%20chap%201.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "proved_here": false,
+        "external_dependency": {
+          "source_url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf",
+          "exact_statement": "For every integer n>=1 and every A subset R^n, unnormalised diameter-power Hausdorff measure satisfies H^n(A)=(2^n/lambda_n(B(0,1)))lambda_n^*(A).",
+          "local_proof_attempt": "Coordinate-box covers prove 1 <= c_n <= n^(n/2), and Borel uniqueness proves proportionality. These estimates do not identify the sharp constant; that requires the isodiametric inequality. The cover-family comparison proves comparability, not a strict-inequality example.",
+          "necessity": "Scope orientation only; neither the sharp factor nor strict spherical inequality is a dependency or used in an assigned proof."
+        }
+      },
+      {
+        "id": "rem-hypersurface-chart-measure-and-hausdorff-measure-agreement",
+        "kind": "remark",
+        "title": "Chart surface measure and Hausdorff measure: a boundary of scope",
+        "deps": [
+          "def-hausdorff-measure",
+          "thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure"
+        ],
+        "statement": "The definition [[def-hausdorff-measure]] provides a metric notion of size, and [[thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure]] relates its ambient-dimensional instance to Euclidean volume. The planned PDE applications may use chartwise $C^1$ change of variables already supplied by the integration track. Identifying chart-defined hypersurface measure with an appropriately normalised Hausdorff measure requires a further geometric-measure theorem. That identification belongs to a future treatment; it is not established or used here. Fremlin separates these topics between §§264 and 265.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin chapter 26 introduction and 265A opening; design geometric-measure receipt",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "rem-hausdorff-dimension-orients-the-weierstrass-graph",
+        "kind": "remark",
+        "title": "Orientation for the published Weierstrass graph remark",
+        "deps": [
+          "def-hausdorff-dimension"
+        ],
+        "statement": "The definition [[def-hausdorff-dimension]] now gives meaning to the dimension notation in the earlier orientation [[rem-weierstrass-graph-hausdorff-dimension]]. That external remark is mentioned only as a reading connection. No graph-dimension value, parameter range, or present state of the Weierstrass dimension problem is asserted or proved by this page.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres §1.2 p.9 Weierstrass discussion; design forward-reference receipt",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "external_refs": [
+          "rem-weierstrass-graph-hausdorff-dimension"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.042,
+    "id": "hausdorff-measure-and-hausdorff-dimension-examples",
+    "kind": "B",
+    "category": "measure-theory",
+    "title": "Hausdorff Measure and Hausdorff Dimension — Examples",
+    "companion": "hausdorff-measure-and-hausdorff-dimension",
+    "requires": [
+      "hausdorff-measure-and-hausdorff-dimension"
+    ],
+    "items": [
+      {
+        "id": "ex-cantor-critical-measure-computed",
+        "kind": "example",
+        "title": "The ordinary Cantor set at its critical exponent",
+        "deps": [
+          "thm-cantor-set-hausdorff-dimension-and-exact-measure",
+          "lem-hausdorff-exponent-comparison"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $C$ be the middle-thirds Cantor set and $s=\\log2/\\log3$. Its level-$m$ basic cover has $s$-cost exactly one. In the small-scale limit,\n\n$$\\mathcal H^s(C)=1,\\qquad\\dim_H C=s,\\qquad\\mathcal H^1(C)=0.$$",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264J",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-fat-cantor-hausdorff-measure-and-dimension",
+        "kind": "example",
+        "title": "The fat Cantor set has positive length and dimension one",
+        "deps": [
+          "def-fat-cantor-set",
+          "thm-fat-cantor-set-has-positive-measure",
+          "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line",
+          "thm-hausdorff-dimension-critical-exponent",
+          "thm-continuity-from-above-for-measures"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For the Smith–Volterra–Cantor set $S$,\n\n$$\\mathcal H^1(S)=\\lambda_1(S)=\\tfrac12,\\qquad\\dim_H S=1.$$",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres §1.2 p.7 positive-volume consequence; existing fat Cantor construction",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-line-segment-hausdorff-length",
+        "kind": "example",
+        "title": "A planar segment has Hausdorff measure equal to length",
+        "deps": [
+          "cor-hausdorff-measure-under-similarities",
+          "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line",
+          "thm-hausdorff-dimension-critical-exponent",
+          "thm-hausdorff-dimension-is-countably-stable"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For $p,q\\in\\mathbb R^2$, the segment $[p,q]=\\{(1-t)p+tq:0\\le t\\le1\\}$ satisfies\n\n$$\\mathcal H^1([p,q])=|p-q|.$$\n\nIts dimension is one when $p\\ne q$ and zero when $p=q$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264G; Falconer §1.4 p.12",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-lipschitz-graph-has-finite-hausdorff-length",
+        "kind": "example",
+        "title": "A Lipschitz graph has finite Hausdorff length",
+        "deps": [
+          "thm-hausdorff-measure-under-lipschitz-maps",
+          "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line",
+          "thm-hausdorff-dimension-critical-exponent"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. If $f:[0,1]\\to\\mathbb R$ is $L$-Lipschitz, $0\\le L<\\infty$, its graph $\\Gamma=\\{(x,f(x)):0\\le x\\le1\\}$ satisfies\n\n$$1\\le\\mathcal H^1(\\Gamma)\\le\\sqrt{1+L^2},\\qquad\\dim_H\\Gamma=1.$$",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264G and 264Xf(i) (specialised Lipschitz graph)",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-countable-dense-set-has-zero-hausdorff-dimension",
+        "kind": "example",
+        "title": "The rationals are dense but have dimension zero",
+        "deps": [
+          "thm-hausdorff-dimension-is-countably-stable",
+          "cor-euclidean-hausdorff-dimension",
+          "lem-q-and-irrationals-dense-r",
+          "thm-rationals-countable"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The set $D=\\mathbb Q\\cap[0,1]$ has $\\dim_H D=0$, although it is dense in $[0,1]$ and its closure has dimension one. Hausdorff dimension need not be preserved by taking closure.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Example 1.2.7 (countable nullity), specialised to Q",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-sierpinski-gasket-dimension-by-hand",
+        "kind": "example",
+        "title": "A Sierpinski gasket computed by hand",
+        "deps": [
+          "thm-hausdorff-mass-distribution-principle",
+          "thm-hausdorff-dimension-critical-exponent",
+          "thm-geometric-series",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $D=\\{(0,0),(1,0),(0,1)\\}$ and\n\n$$K=\\left\\{\\sum_{j=1}^{\\infty}2^{-j}d_j:d_j\\in D\\right\\}\\subseteq\\mathbb R^2,\\qquad s=\\frac{\\log3}{\\log2}.$$\n\nThen $0<\\mathcal H^s(K)<\\infty$ and $\\dim_H K=s$. No exact critical measure is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Example 1.3.4 pp.15–16",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-dimension-one-binary-digit-set-with-zero-length",
+        "kind": "counterexample",
+        "title": "A dimension-one set can have zero length",
+        "deps": [
+          "prop-binary-digit-restriction-hausdorff-dimension"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The implication “a compact subset of $\\mathbb R$ of Hausdorff dimension one has positive length” is false. Let $S=\\mathbb N_+\\setminus\\{k^2:k\\ge1\\}$. Then $A_S$ is compact, $\\dim_H A_S=1$, and $\\mathcal H^1(A_S)=\\lambda_1(A_S)=0$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Example 1.4.2, nonsquare-position specialisation",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-uncountable-zero-dimensional-binary-digit-set",
+        "kind": "counterexample",
+        "title": "An uncountable compact set can have dimension zero",
+        "deps": [
+          "prop-binary-digit-restriction-hausdorff-dimension",
+          "thm-hausdorff-dimension-critical-exponent"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The implication “Hausdorff dimension zero forces countability” is false. For $S=\\{k^2:k\\ge1\\}$, $A_S$ is compact and uncountable, yet $\\dim_H A_S=0$ and $\\mathcal H^t(A_S)=0$ for every finite $t>0$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Example 1.4.2, square-position specialisation",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-continuous-cantor-image-raises-hausdorff-dimension",
+        "kind": "counterexample",
+        "title": "A continuous image can raise Hausdorff dimension",
+        "deps": [
+          "thm-cantor-function-properties",
+          "cor-cantor-function-is-continuous",
+          "thm-cantor-set-hausdorff-dimension-and-exact-measure",
+          "cor-euclidean-hausdorff-dimension"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. A continuous image can have strictly larger Hausdorff dimension than its domain. The Cantor function restricted to $C$ maps $C$ continuously onto $[0,1]$, raising dimension from $\\log2/\\log3$ to one.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264J; published Cantor-function ternary/binary formula",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-hausdorff-measure-is-countably-additive-on-all-subsets",
+        "kind": "false-statement",
+        "title": "Hausdorff measure is countably additive on every subset",
+        "deps": [
+          "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line",
+          "thm-a-vitali-set-is-not-lebesgue-measurable",
+          "def-caratheodory-measurable-set"
+        ],
+        "statement": "Assume the Axiom of Choice. The assertion “$\\mathcal H^s$ is countably additive on every disjoint family of arbitrary subsets of $\\mathbb R^n$” is false, already for $n=s=1$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin 264C,I; existing Vitali theorem",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-hausdorff-dimension-of-union-is-the-sum",
+        "kind": "false-statement",
+        "title": "Dimensions add under unions",
+        "deps": [
+          "thm-hausdorff-dimension-is-countably-stable",
+          "cor-euclidean-hausdorff-dimension"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The assertion $\\dim_H(A\\cup B)=\\dim_H A+\\dim_H B$ for all subsets of a metric space is false, even for disjoint compact subsets of the line.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres §1.1 p.3 countable stability; Proposition 1.2.6",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-critical-hausdorff-measure-is-always-finite-positive",
+        "kind": "false-statement",
+        "title": "Critical Hausdorff measure is always finite and positive",
+        "deps": [
+          "cex-dimension-one-binary-digit-set-with-zero-length",
+          "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line",
+          "cor-euclidean-hausdorff-dimension"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The assertion “if $\\dim_H A=s<\\infty$, then $0<\\mathcal H^s(A)<\\infty$” is false. Both the lower and upper strict inequalities can fail at dimension one.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Proposition 1.2.6 and Example 1.4.2",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-continuous-injections-preserve-hausdorff-dimension",
+        "kind": "false-statement",
+        "title": "Continuous injections preserve Hausdorff dimension",
+        "deps": [
+          "def-hausdorff-content-at-scale-delta",
+          "thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line",
+          "thm-hausdorff-dimension-critical-exponent"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The assertion “continuous injections preserve Hausdorff dimension” is false even for a homeomorphism between compact metric spaces. On $I=[0,1]$, put $d(x,y)=|x-y|$ and $\\rho(x,y)=\\sqrt{|x-y|}$. The identity from $(I,d)$ to $(I,\\rho)$ is a homeomorphism, but the dimensions are one and two respectively.",
+        "sources": {
+          "references": [
+            {
+              "url": "https://arxiv.org/pdf/math/0302190",
+              "title": "Semmes §2.5 pp.31–32, snowflake metric and Hausdorff measure identity"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-zero-hausdorff-dimension-implies-countability",
+        "kind": "false-statement",
+        "title": "Dimension zero forces countability",
+        "deps": [
+          "cex-uncountable-zero-dimensional-binary-digit-set"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The assertion “every set of Hausdorff dimension zero is countable” is false.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Example 1.4.2, square-position specialisation",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-vanishing-positive-hausdorff-measures-implies-countability",
+        "kind": "false-statement",
+        "title": "Vanishing at all positive exponents forces countability",
+        "deps": [
+          "cex-uncountable-zero-dimensional-binary-digit-set"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The assertion “if $\\mathcal H^s(A)=0$ for every finite $s>0$, then $A$ is countable” is false.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bishop–Peres Example 1.4.2, square-position specialisation",
+              "url": "https://commack.math.stonybrook.edu/~bishop/fractalbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

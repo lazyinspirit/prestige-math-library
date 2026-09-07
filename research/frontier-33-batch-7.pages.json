@@ -1,0 +1,2021 @@
+[
+  {
+    "order": 365.905,
+    "id": "regular-local-rings-and-homological-dimension",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Regular Local Rings and Homological Dimension",
+    "companion": "regular-local-rings-and-homological-dimension-examples",
+    "requires": [
+      "depth-and-cohen-macaulay-modules-examples",
+      "tor-flatness-and-global-dimension"
+    ],
+    "items": [
+      {
+        "id": "def-embedding-dimension-and-regular-local-ring",
+        "kind": "definition",
+        "title": "embedding dimension and regular local ring",
+        "statement": "For a nonzero commutative Noetherian local ring $(R,\\mathfrak m,k)$, define $\\operatorname{edim}R=\\dim_k(\\mathfrak m/\\mathfrak m^2)$. The ring is **regular local** when $\\operatorname{edim}R=\\dim R$. The cotangent space is intrinsic, and is finite-dimensional because $\\mathfrak m$ is finitely generated.",
+        "deps": [
+          "def-local-ring",
+          "def-noetherian-ring",
+          "def-krull-dimension-of-a-ring"
+        ],
+        "strategy": "Intrinsic cotangent-space definition; no selected generators enter the invariant.",
+        "sources": {
+          "references": [
+            {
+              "title": "12.3\u201312.5, p.115",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number",
+        "kind": "lemma",
+        "title": "embedding dimension is minimal maximal ideal generator number",
+        "statement": "For a nonzero Noetherian local ring $(R,\\mathfrak m,k)$, $\\operatorname{edim}R$ is the least number of generators of $\\mathfrak m$.",
+        "deps": [
+          "def-embedding-dimension-and-regular-local-ring",
+          "cor-minimal-generators-over-a-local-ring",
+          "cor-nakayama-generators-modulo-an-ideal"
+        ],
+        "strategy": "Lift a residue basis, apply Nakayama; every generating set spans the cotangent space.",
+        "sources": {
+          "references": [
+            {
+              "title": "12.3, p.115",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-dimension-at-most-embedding-dimension",
+        "kind": "theorem",
+        "title": "dimension at most embedding dimension",
+        "statement": "Every nonzero commutative Noetherian local ring $R$ satisfies $\\dim R\\le\\operatorname{edim}R<\\infty$.",
+        "deps": [
+          "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number",
+          "thm-krull-height-theorem"
+        ],
+        "strategy": "Apply height to m. If edim=0, Nakayama gives m=0 and R is a field, treating the n=0 case separately.",
+        "sources": {
+          "references": [
+            {
+              "title": "Remark 12.4, p.115",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-regular-system-of-parameters",
+        "kind": "definition",
+        "title": "regular system of parameters",
+        "statement": "In a regular local ring $(R,\\mathfrak m,k)$ of dimension $d$, an ordered minimal generating tuple $(x_1,\\ldots,x_d)$ of $\\mathfrak m$ is a **regular system of parameters**. The tuple is empty when $d=0$. This definition concerns generators of the maximal ideal; the regular-sequence property is a theorem, not part of the definition.",
+        "deps": [
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-system-of-parameters-and-parameter-ideal"
+        ],
+        "strategy": "Regular system of parameters does not mean an arbitrary parameter ideal or a regular sequence by definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "12.5, p.115",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-regular-system-of-parameters-equivalent-basis",
+        "kind": "lemma",
+        "title": "regular system of parameters equivalent basis",
+        "statement": "Let $(R,\\mathfrak m,k)$ be a nonzero Noetherian local ring of dimension $d$, and let $\\mathbf x=(x_1,\\ldots,x_d)\\in\\mathfrak m^d$. Then $\\mathbf x$ is a regular system of parameters if and only if its classes form a $k$-basis of $\\mathfrak m/\\mathfrak m^2$. In particular every lift of a cotangent basis in a regular local ring generates $\\mathfrak m$ and is a system of parameters.",
+        "deps": [
+          "def-regular-system-of-parameters",
+          "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number",
+          "cor-nakayama-generators-modulo-an-ideal"
+        ],
+        "strategy": "Generation follows from Nakayama; equality of the length and dimension establishes regularity and the parameter property.",
+        "sources": {
+          "references": [
+            {
+              "title": "12.3\u201312.5, p.115",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-associated-graded-polynomial-surjection",
+        "kind": "lemma",
+        "title": "associated graded polynomial surjection",
+        "statement": "Let $(R,\\mathfrak m,k)$ be nonzero Noetherian local and let $x_1,\\ldots,x_e$ lift a basis of $\\mathfrak m/\\mathfrak m^2$. There is a surjective graded $k$-algebra map $\\phi:k[X_1,\\ldots,X_e]\\to\\operatorname{gr}_{\\mathfrak m}R$, determined by $X_i\\mapsto x_i+\\mathfrak m^2$, with every variable of degree one.",
+        "deps": [
+          "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number",
+          "def-associated-graded-ring-and-module"
+        ],
+        "strategy": "The degree-zero action factors through k; products of generators span each m^n/m^(n+1). Verify multiplicative grading and map independence once lifts are fixed.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.106.1, first proof paragraph",
+              "url": "https://stacks.math.columbia.edu/tag/00NN"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-regular-local-graded-surjection-has-zero-kernel",
+        "kind": "lemma",
+        "title": "regular local graded surjection has zero kernel",
+        "statement": "For the graded map $\\phi:k[X_1,\\ldots,X_e]\\twoheadrightarrow\\operatorname{gr}_{\\mathfrak m}R$ defined by a cotangent basis in a nonzero Noetherian local ring, if $e=\\dim R$, then $\\ker\\phi=0$.",
+        "deps": [
+          "lem-associated-graded-polynomial-surjection",
+          "thm-hilbert-samuel-dimension-theorem",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain"
+        ],
+        "strategy": "If a nonzero homogeneous relation f has degree a>0, multiplication by f in the polynomial domain is injective. Cumulative quotient dimensions are binom(n+e,e)-binom(n-a+e,e), of degree e-1, contradicting Hilbert\u2013Samuel degree e. e=0 is immediate.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.106.1 proof; Li Proposition 25.6",
+              "url": "https://stacks.math.columbia.edu/tag/00NN"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-associated-graded-ring-of-a-regular-local-ring",
+        "kind": "theorem",
+        "title": "associated graded ring of a regular local ring",
+        "statement": "If $(R,\\mathfrak m,k)$ is regular local of dimension $d$, any cotangent basis induces a graded isomorphism $k[X_1,\\ldots,X_d]\\cong\\operatorname{gr}_{\\mathfrak m}R$. Conversely, if the associated graded ring of a nonzero Noetherian local ring is isomorphic as a graded $k$-algebra to $k[X_1,\\ldots,X_d]$ with standard grading, then $R$ is regular of dimension $d$.",
+        "deps": [
+          "lem-associated-graded-polynomial-surjection",
+          "lem-regular-local-graded-surjection-has-zero-kernel",
+          "thm-hilbert-samuel-dimension-theorem"
+        ],
+        "strategy": "Combine injectivity and surjectivity; conversely use degree one for edim and cumulative binomial growth for dimension.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 25.6, p.67",
+              "url": "https://www.math.columbia.edu/~wenqili/commalg_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-regular-local-hilbert-samuel-multiplicity-one",
+        "kind": "corollary",
+        "title": "regular local hilbert samuel multiplicity one",
+        "statement": "For a regular local ring $(R,\\mathfrak m,k)$ of dimension $d$ and every integer $n\\ge0$, $\\ell_R(R/\\mathfrak m^{n+1})=\\binom{n+d}{d}$. Consequently $e_{\\mathfrak m}(R)=1$.",
+        "deps": [
+          "thm-associated-graded-ring-of-a-regular-local-ring",
+          "def-hilbert-samuel-multiplicity"
+        ],
+        "strategy": "Sum monomial counts, including d=0 where the length is one.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.106.1, monomial-count consequence",
+              "url": "https://stacks.math.columbia.edu/tag/00NN"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-regular-local-domain-induction",
+        "kind": "lemma",
+        "title": "regular local domain induction",
+        "statement": "Every regular local ring is an integral domain.",
+        "deps": [
+          "thm-associated-graded-ring-of-a-regular-local-ring",
+          "thm-krull-intersection-theorem"
+        ],
+        "strategy": "Use separatedness to take first nonzero initial forms of two nonzero elements. Their product cannot vanish in the graded polynomial domain. This is the design\u2019s initial-form route, despite the historical id ending induction.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.106.2",
+              "url": "https://stacks.math.columbia.edu/tag/00NN"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-regular-local-parameter-is-nonzerodivisor",
+        "kind": "lemma",
+        "title": "regular local parameter is nonzerodivisor",
+        "statement": "In a positive-dimensional regular local ring, every member of a regular system of parameters is a nonzerodivisor.",
+        "deps": [
+          "lem-regular-system-of-parameters-equivalent-basis",
+          "lem-regular-local-domain-induction"
+        ],
+        "strategy": "Its nonzero cotangent class makes the element nonzero; apply domain property. Equivalently lift injectivity of its initial form through separatedness.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.106.2\u201310.106.3",
+              "url": "https://stacks.math.columbia.edu/tag/00NN"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-regular-local-quotient-by-parameter-is-regular",
+        "kind": "lemma",
+        "title": "regular local quotient by parameter is regular",
+        "statement": "Let $(R,\\mathfrak m,k)$ be regular local of dimension $d$, and let $x\\in\\mathfrak m\\setminus\\mathfrak m^2$. Then $R/(x)$ is regular local, of dimension and embedding dimension $d-1$.",
+        "deps": [
+          "lem-regular-system-of-parameters-equivalent-basis",
+          "thm-dimension-at-most-embedding-dimension",
+          "thm-dimension-as-minimal-number-of-radical-generators"
+        ],
+        "strategy": "Remaining cotangent generators bound edim by d-1; lifting a parameter ideal from R/(x) shows dim R \u2264 dim R/(x)+1. Thus both inequalities are equalities.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 12.7, p.115",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-quotient-and-lifting-regularity-across-a-regular-element",
+        "kind": "theorem",
+        "title": "quotient and lifting regularity across a regular element",
+        "statement": "Let $(R,\\mathfrak m)$ be nonzero Noetherian local. If $x\\in\\mathfrak m$ is a nonzerodivisor and $R/(x)$ is regular, then $R$ is regular and $x\\notin\\mathfrak m^2$. For every nonzerodivisor $x\\in\\mathfrak m$, $\\dim(R/(x))=\\dim R-1$. If $R$ is regular and $0\\ne x\\in\\mathfrak m$, then $R/(x)$ is regular if and only if $x\\notin\\mathfrak m^2$.",
+        "deps": [
+          "lem-regular-local-quotient-by-parameter-is-regular",
+          "thm-dimension-at-most-embedding-dimension",
+          "thm-dimension-as-minimal-number-of-radical-generators",
+          "thm-zero-divisors-on-a-module",
+          "lem-regular-local-domain-induction",
+          "thm-minimal-support-primes-are-associated"
+        ],
+        "strategy": "Prove dim R/(x)=dim R-1: lift parameters for lower bound and extend quotient prime chains below a minimal prime containing x for upper bound. Lift maximal-ideal generators; count cotangent dimensions. This includes the needed dimension-drop argument locally.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 12.8 and Exercise 12.16, pp.116\u2013117",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+        "kind": "theorem",
+        "title": "regular local rings are domains and cohen macaulay",
+        "statement": "A regular local ring $R$ of dimension $d$ is a domain and Cohen\u2013Macaulay. For every regular system $(x_1,\\ldots,x_d)$, the tuple is $R$-regular and $R/(x_1,\\ldots,x_c)$ is regular local of dimension $d-c$ for all $0\\le c\\le d$.",
+        "deps": [
+          "lem-regular-local-domain-induction",
+          "lem-regular-local-parameter-is-nonzerodivisor",
+          "lem-regular-local-quotient-by-parameter-is-regular",
+          "def-cohen-macaulay-local-module-and-ring",
+          "def-regular-sequence-on-a-module",
+          "thm-depth-bounded-by-support-dimension"
+        ],
+        "strategy": "Induct through parameter quotients, retaining nonzero terminal residue field. The full sequence has length dim R, so depth equals dimension.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.106.2\u201310.106.3",
+              "url": "https://stacks.math.columbia.edu/tag/00NN"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-one-dimensional-regular-local-rings-are-dvrs",
+        "kind": "theorem",
+        "title": "one dimensional regular local rings are dvrs",
+        "statement": "A nonzero Noetherian local ring of dimension one is regular if and only if it is a discrete valuation ring. Fields are excluded from the term DVR.",
+        "deps": [
+          "lem-regular-local-domain-induction",
+          "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number",
+          "thm-equivalent-characterisations-of-a-dvr",
+          "thm-krull-intersection-theorem"
+        ],
+        "strategy": "Regularity makes m principal; use the local-domain DVR criterion. Conversely a DVR has principal nonzero maximal ideal. The published criterion requires a local PID, not merely principal maximal ideal: if m=(t), separatedness gives each nonzero a=t^n u with u a unit; choosing least valuation in a nonzero ideal shows it is generated by t^n. This supplies the missing PID bridge before applying that criterion.",
+        "sources": {
+          "references": [
+            {
+              "title": "Example 12.10, p.116",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-regular-local-regular-quotient-ideal-is-parameter-generated",
+        "kind": "lemma",
+        "title": "regular local regular quotient ideal is parameter generated",
+        "statement": "Let $(R,\\mathfrak m,k)$ be regular local of dimension $d$ and $I\\subseteq\\mathfrak m$. The following are equivalent: $R/I$ is regular; $I$ is generated by an initial part of a regular system of parameters; and $\\dim_k((I+\\mathfrak m^2)/\\mathfrak m^2)=d-\\dim(R/I)$.",
+        "deps": [
+          "lem-regular-local-quotient-by-parameter-is-regular",
+          "lem-regular-local-domain-induction",
+          "lem-regular-system-of-parameters-equivalent-basis"
+        ],
+        "strategy": "Choose a cotangent basis for (I+m\u00b2)/m\u00b2, quotient by its lifts, and compare dimensions. A nonzero ideal in the resulting finite-dimensional local domain strictly lowers dimension, by extending every quotient chain with (0).",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 12.13, pp.116\u2013117",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-finite-local-modules-admit-minimal-free-resolutions",
+        "kind": "lemma",
+        "title": "finite local modules admit minimal free resolutions",
+        "statement": "Every finite module $M$ over a nonzero Noetherian local ring $(R,\\mathfrak m,k)$ has an augmented resolution $\\cdots\\to F_1\\to F_0\\to M\\to0$ by finite-rank free modules, with $d_i(F_i)\\subseteq\\mathfrak mF_{i-1}$ for $i>0$. Such a resolution is called minimal; it need not be bounded. This extends the bounded terminology without changing it.",
+        "deps": [
+          "def-minimal-free-resolution-over-a-local-ring",
+          "cor-minimal-generators-over-a-local-ring",
+          "thm-nakayama-lemma",
+          "thm-equivalent-characterizations-of-noetherian-modules"
+        ],
+        "strategy": "Recursively choose minimal generators of each finite kernel. State degreewise finite versus bounded explicitly; extend the published finite-resolution terminology without redefining its finite case. DC suffices for infinite recursive choices.",
+        "sources": {
+          "references": [
+            {
+              "title": "Construction before Proposition 12.27, p.120",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-minimal-free-resolution-differentials-land-in-maximal-ideal",
+        "kind": "lemma",
+        "title": "minimal free resolution differentials land in maximal ideal",
+        "statement": "For an augmented degreewise finite free resolution over a nonzero Noetherian local ring $(R,\\mathfrak m)$, minimality means that every positive differential matrix has entries in $\\mathfrak m$. Equivalently no positive differential admits a unit pivot, or a nonzero two-term identity direct summand. A unit pivot can be cancelled without changing the resolved module.",
+        "deps": [
+          "lem-finite-local-modules-admit-minimal-free-resolutions"
+        ],
+        "strategy": "Pivot the unit to 1 and clear its row and column. Adjacent differentials vanish on that summand because d\u00b2=0. Conversely matrix entries in m cannot admit an identity summand.",
+        "sources": {
+          "references": [
+            {
+              "title": "Definition 1.49 and discussion after Lemma 1.50, pp.23\u201324",
+              "url": "https://jack-jeffries.github.io/UM/LCnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-minimal-free-resolution-reduces-to-zero-differential",
+        "kind": "lemma",
+        "title": "minimal free resolution reduces to zero differential",
+        "statement": "If $F_\\bullet\\to M$ is a minimal degreewise finite free resolution over $(R,\\mathfrak m,k)$, every differential of the unaugmented complex $k\\otimes_RF_\\bullet$ is zero.",
+        "deps": [
+          "lem-minimal-free-resolution-differentials-land-in-maximal-ideal",
+          "def-balanced-tor-bifunctor"
+        ],
+        "strategy": "Every coefficient in m maps to zero in k.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 12.27 proof, p.121",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-betti-numbers-of-a-finite-local-module",
+        "kind": "definition",
+        "title": "betti numbers of a finite local module",
+        "statement": "For a finite module $M$ over a nonzero Noetherian local ring $(R,\\mathfrak m,k)$ and an integer $i\\ge0$, its **Betti number** is $\\beta_i^R(M)=\\dim_k\\operatorname{Tor}_i^R(k,M)$. The action factors through $k$, and a degreewise finite free resolution makes this dimension finite. Tor is resolution-independent. This extends the Koszul rank notation: whenever a minimal Koszul resolution exists, the rank formula identifies these numbers with its Koszul Betti numbers. For $M=0$ all Betti numbers are zero.",
+        "deps": [
+          "def-balanced-tor-bifunctor",
+          "lem-finite-local-modules-admit-minimal-free-resolutions",
+          "def-koszul-betti-numbers-over-a-local-ring"
+        ],
+        "strategy": "The scalar action factors through k; the chosen finite free resolution makes the vector-space dimension finite. Definition uses resolution-independent Tor. This extends the existing Koszul-only rank notation; the rank theorem identifies \u03b2 with \u03b2^K whenever a minimal Koszul resolution exists.",
+        "sources": {
+          "references": [
+            {
+              "title": "Unnumbered Betti-number definition after Lemma 1.50, p.24",
+              "url": "https://jack-jeffries.github.io/UM/LCnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "cor-betti-number-is-rank-in-minimal-resolution",
+        "kind": "corollary",
+        "title": "betti number is rank in minimal resolution",
+        "statement": "For every minimal degreewise finite free resolution $F_\\bullet\\to M$ of a finite module over a nonzero Noetherian local ring, $\\beta_i^R(M)=\\operatorname{rank}_RF_i$ for all $i\\ge0$.",
+        "deps": [
+          "def-betti-numbers-of-a-finite-local-module",
+          "lem-minimal-free-resolution-reduces-to-zero-differential"
+        ],
+        "strategy": "The zero-differential residue complex computes Tor.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 12.27, pp.120\u2013121",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-minimal-free-resolutions-unique-up-to-chain-isomorphism",
+        "kind": "lemma",
+        "title": "minimal free resolutions unique up to chain isomorphism",
+        "statement": "Any two minimal degreewise finite free resolutions of a finite module over a nonzero Noetherian local ring are augmentation-preservingly chain-isomorphic, in general noncanonically. In particular their ranks agree in every degree.",
+        "deps": [
+          "cor-betti-number-is-rank-in-minimal-resolution",
+          "thm-projective-comparison-map-exists",
+          "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy",
+          "thm-nakayama-lemma"
+        ],
+        "strategy": "Comparison maps lifting the identity become inverse degreewise over k since residue homotopies have zero differentials. Nakayama gives surjectivity of each lift; equal finite ranks give invertibility by determinant.",
+        "sources": {
+          "references": [
+            {
+              "title": "Remark 12.28, p.121",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-projective-dimension-from-last-nonzero-betti-number",
+        "kind": "lemma",
+        "title": "projective dimension from last nonzero betti number",
+        "statement": "For a nonzero finite module $M$ over a nonzero Noetherian local ring, $\\operatorname{pd}_RM=\\sup\\{i\\ge0:\\beta_i^R(M)\\ne0\\}$, allowing infinity. For each integer $q\\ge0$, $\\operatorname{pd}_RM\\le q$ if and only if $\\operatorname{Tor}_{q+1}^R(k,M)=0$.",
+        "deps": [
+          "cor-betti-number-is-rank-in-minimal-resolution",
+          "lem-minimal-free-resolution-reduces-to-zero-differential",
+          "def-projective-dimension-of-an-object",
+          "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective",
+          "thm-finite-flat-modules-over-local-rings-are-free",
+          "lem-projective-modules-are-flat-over-an-arbitrary-ring",
+          "thm-nakayama-lemma",
+          "def-balanced-tor-bifunctor",
+          "lem-finite-local-modules-admit-minimal-free-resolutions"
+        ],
+        "strategy": "A vanishing F_(q+1) terminates the resolution; exactness and Nakayama prevent a later restart. A finite projective syzygy is free, so a finite projective resolution bounds Tor vanishing.",
+        "sources": {
+          "references": [
+            {
+              "title": "Corollary 12.29, p.121",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-auslander-buchsbaum-syzygy-projective-dimension",
+        "kind": "lemma",
+        "title": "auslander buchsbaum syzygy projective dimension",
+        "statement": "Let $0\\to K\\to F_0\\to M\\to0$ be the initial minimal presentation of a nonzero finite module over a nonzero Noetherian local ring. If $0<n=\\operatorname{pd}M<\\infty$, then $K\\ne0$ and $\\operatorname{pd}K=n-1$.",
+        "deps": [
+          "lem-projective-dimension-from-last-nonzero-betti-number"
+        ],
+        "strategy": "Truncate the minimal resolution; its last nonzero free module stays nonzero.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 12.31 proof, Case 3, p.122",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-auslander-buchsbaum-base-case-free-module",
+        "kind": "lemma",
+        "title": "auslander buchsbaum base case free module",
+        "statement": "If a nonzero finite module $M$ over a nonzero Noetherian local ring $R$ has projective dimension zero, then it is finite free of positive rank and $\\operatorname{depth}_RM=\\operatorname{depth}R$.",
+        "deps": [
+          "def-projective-dimension-of-an-object",
+          "thm-finite-flat-modules-over-local-rings-are-free",
+          "lem-projective-modules-are-flat-over-an-arbitrary-ring",
+          "cor-depth-as-first-nonzero-ext"
+        ],
+        "strategy": "Finite projective is flat and hence free; a positive finite direct sum of copies of R has the same first nonzero Ext degree.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 1.53, pd=0 case, p.24",
+              "url": "https://jack-jeffries.github.io/UM/LCnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-minimal-free-matrix-induces-zero-on-residue-ext",
+        "kind": "lemma",
+        "title": "minimal free matrix induces zero on residue ext",
+        "statement": "For a nonzero commutative Noetherian local ring $(R,\\mathfrak m,k)$, let $\\alpha:R^s\\to R^t$ be a map between finite free modules all of whose matrix entries lie in $\\mathfrak m$. Then $\\operatorname{Ext}^i_R(k,\\alpha)=0$ for every $i\\ge0$.",
+        "deps": [
+          "def-balanced-ext-bifunctor",
+          "thm-module-categories-have-enough-injectives"
+        ],
+        "strategy": "Take an injective resolution I of R; finite sums resolve both free modules and \u03b1 acts on Hom_R(k,I) through its entries, each of which annihilates that Hom complex.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 1.53 proof, Claim, p.25",
+              "url": "https://jack-jeffries.github.io/UM/LCnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-auslander-buchsbaum-projective-dimension-one",
+        "kind": "lemma",
+        "title": "auslander buchsbaum projective dimension one",
+        "statement": "If $M$ is a nonzero finite module of projective dimension one over a nonzero Noetherian local ring $R$, then $\\operatorname{depth}R\\ge1$ and $\\operatorname{depth}M=\\operatorname{depth}R-1$.",
+        "deps": [
+          "lem-minimal-free-matrix-induces-zero-on-residue-ext",
+          "lem-projective-dimension-from-last-nonzero-betti-number",
+          "cor-depth-as-first-nonzero-ext",
+          "thm-long-exact-ext-sequence-in-the-second-variable"
+        ],
+        "strategy": "Use a minimal 0\u2192R^s\u2192R^t\u2192M\u21920 with s>0. Depth R=0 contradicts injectivity on Hom(k,-); otherwise the first nonzero Ext term for M occurs one degree earlier. This is the exceptional case the Depth Lemma alone does not settle.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 1.53, pp.24\u201325",
+              "url": "https://jack-jeffries.github.io/UM/LCnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-auslander-buchsbaum-first-syzygy-depth",
+        "kind": "lemma",
+        "title": "auslander buchsbaum first syzygy depth",
+        "statement": "In a minimal presentation $0\\to K\\to F\\to M\\to0$ of a nonzero finite module over a nonzero Noetherian local ring, let $n=\\operatorname{pd}M\\ge2$ be finite. If $\\operatorname{depth}K=\\operatorname{depth}R-(n-1)$, then $\\operatorname{depth}M=\\operatorname{depth}K-1$.",
+        "deps": [
+          "lem-auslander-buchsbaum-syzygy-projective-dimension",
+          "thm-depth-lemma"
+        ],
+        "strategy": "This is an induction-step lemma: its displayed depth equality is an explicit hypothesis, not an appeal to AB. Since depth K<depth F, use the unequal-depth conclusion; depth K=0 would contradict the left inequality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 1.53, final induction step, p.25",
+              "url": "https://jack-jeffries.github.io/UM/LCnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-auslander-buchsbaum-formula",
+        "kind": "theorem",
+        "title": "auslander buchsbaum formula",
+        "statement": "For a nonzero finite module $M$ of finite projective dimension over a nonzero Noetherian local ring $R$, $\\operatorname{pd}_RM+\\operatorname{depth}_RM=\\operatorname{depth}R$. Consequently such an $M$ with $\\operatorname{depth}M=\\operatorname{depth}R$ is free.",
+        "deps": [
+          "lem-auslander-buchsbaum-base-case-free-module",
+          "lem-auslander-buchsbaum-projective-dimension-one",
+          "lem-auslander-buchsbaum-syzygy-projective-dimension",
+          "lem-auslander-buchsbaum-first-syzygy-depth"
+        ],
+        "strategy": "Induct on projective dimension, with zero and one handled separately. Apply the induction hypothesis to K and then the conditional syzygy-depth lemma.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 1.53, pp.24\u201325; Mustata 12.31",
+              "url": "https://jack-jeffries.github.io/UM/LCnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-global-dimension-is-detected-on-cyclic-modules",
+        "kind": "lemma",
+        "title": "global dimension is detected on cyclic modules",
+        "statement": "For a unital ring $R$, its left global dimension equals $\\sup_I\\operatorname{pd}_R(R/I)$ over all left ideals $I$, and equals the supremum of the injective dimensions of all left modules. The equalities allow infinity; in the commutative Noetherian case the cyclic modules are finite.",
+        "deps": [
+          "def-left-and-right-global-dimension-of-a-ring",
+          "thm-baer-criterion-for-injective-modules",
+          "thm-injective-dimension-at-most-n-iff-higher-ext-vanishes",
+          "thm-projective-dimension-at-most-n-iff-higher-ext-vanishes",
+          "thm-ext-dimension-shifting-in-the-second-variable",
+          "thm-module-categories-have-enough-injectives"
+        ],
+        "strategy": "For any N dimension-shift Ext^(n+1)(R/I,N) to Ext^1(R/I,C) for the nth injective cosyzygy C. Baer makes C injective, giving vanishing for arbitrary first arguments and hence all module projective dimensions \u2264n.",
+        "sources": {
+          "references": [
+            {
+              "title": "Propositions 12.24\u201312.25, p.120",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-local-global-dimension-equals-residue-field-projective-dimension",
+        "kind": "lemma",
+        "title": "local global dimension equals residue field projective dimension",
+        "statement": "For a nonzero Noetherian local ring $(R,\\mathfrak m,k)$, $\\operatorname{gldim}R=\\operatorname{pd}_Rk$, allowing infinity. If this common value is $n<\\infty$, every $R$-module has projective dimension at most $n$.",
+        "deps": [
+          "lem-global-dimension-is-detected-on-cyclic-modules",
+          "lem-projective-dimension-from-last-nonzero-betti-number",
+          "thm-tor-symmetry-over-a-commutative-ring"
+        ],
+        "strategy": "Compute Tor(k,M) using the finite resolution of k; minimal resolutions bound finite M, and cyclic detection passes the bound to arbitrary modules.",
+        "sources": {
+          "references": [
+            {
+              "title": "Corollary 12.30, p.121",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-positive-depth-ring-has-regular-minimal-generator",
+        "kind": "lemma",
+        "title": "positive depth ring has regular minimal generator",
+        "statement": "If a nonzero Noetherian local ring $(R,\\mathfrak m,k)$ has positive depth, then some $x\\in\\mathfrak m\\setminus\\mathfrak m^2$ is a nonzerodivisor. The residue field need not be infinite.",
+        "deps": [
+          "thm-depth-zero-associated-prime-criterion",
+          "thm-finiteness-of-associated-primes",
+          "thm-zero-divisors-on-a-module",
+          "lem-finite-prime-avoidance",
+          "thm-nakayama-lemma"
+        ],
+        "strategy": "Prove the one-arbitrary-ideal prime-avoidance variant locally: choose a\u2208m outside all associated primes. If a\u2208m\u00b2, choose b\u2208m\\m\u00b2. For each associated prime containing b choose c outside all those primes and inside every associated prime not containing b, using products and prime avoidance; then b+ac avoids all primes and remains outside m\u00b2. First retain only maximal-by-inclusion associated primes, an antichain. If b already avoids them take b. Otherwise obtain c as a product of elements in each prime not containing b and outside every prime containing b; antichain incomparability and prime avoidance justify the choices.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 12.33 proof, p.123; Lemma 5.1 variant",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-regular-element-reduction-preserves-minimal-resolution",
+        "kind": "lemma",
+        "title": "regular element reduction preserves minimal resolution",
+        "statement": "Let $(R,\\mathfrak m,k)$ be nonzero Noetherian local, let $M$ be a nonzero finite module, and let $x\\in\\mathfrak m$ be a nonzerodivisor on both $R$ and $M$. Reducing a minimal free resolution of $M$ modulo $x$ gives a minimal free resolution of $M/xM$ over $S=R/(x)$. Moreover $\\operatorname{pd}_S(M/xM)=\\operatorname{pd}_RM$, including infinity. For $M=0$ the zero-complex assertion also holds, with both projective dimensions zero.",
+        "deps": [
+          "lem-finite-local-modules-admit-minimal-free-resolutions",
+          "lem-projective-dimension-from-last-nonzero-betti-number",
+          "def-balanced-tor-bifunctor",
+          "thm-tor-symmetry-over-a-commutative-ring",
+          "thm-nakayama-lemma"
+        ],
+        "strategy": "Resolve R/(x) by the two-term multiplication complex. Its tensor with M has no positive homology, so the reduced resolution is exact. Ranks and minimality are unchanged.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lemma 12.32 and proof of 12.31 Case 2, p.122",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-residue-field-splits-off-reduced-maximal-ideal",
+        "kind": "lemma",
+        "title": "residue field splits off reduced maximal ideal",
+        "statement": "Let $(R,\\mathfrak m,k)$ be nonzero Noetherian local and $x\\in\\mathfrak m\\setminus\\mathfrak m^2$ a nonzerodivisor. Over $S=R/(x)$ the sequence $0\\to(x)/(x\\mathfrak m)\\to\\mathfrak m/x\\mathfrak m\\to\\mathfrak m/(x)\\to0$ splits, and $(x)/(x\\mathfrak m)\\cong k$. Consequently finite $\\operatorname{pd}_Rk$ implies finite $\\operatorname{pd}_Sk$.",
+        "deps": [
+          "lem-regular-element-reduction-preserves-minimal-resolution",
+          "lem-auslander-buchsbaum-syzygy-projective-dimension",
+          "thm-projective-dimension-at-most-n-iff-higher-ext-vanishes"
+        ],
+        "strategy": "A k-linear functional on m/m\u00b2 sending x to 1, composed with m/xm\u2192m/m\u00b2, retracts the injection k\u2192m/xm. Reduce a finite resolution of m; direct summands preserve finite pd by Ext.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 12.33 proof, p.123; Jeffries 1.60",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension",
+        "kind": "lemma",
+        "title": "finite residue field projective dimension forces depth equals dimension",
+        "statement": "If the residue field of a nonzero Noetherian local ring $R$ has finite projective dimension, then $R$ is regular and $\\operatorname{depth}R=\\dim R=\\operatorname{edim}R$.",
+        "deps": [
+          "thm-auslander-buchsbaum-formula",
+          "lem-positive-depth-ring-has-regular-minimal-generator",
+          "lem-residue-field-splits-off-reduced-maximal-ideal",
+          "thm-quotient-and-lifting-regularity-across-a-regular-element",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "lem-depth-quotient-by-regular-element"
+        ],
+        "strategy": "Induct on depth R. At depth zero AB makes k projective and finite free, forcing m=0. Otherwise choose x as above, use the split residue-field summand over R/(x), lower depth by one, and lift regularity. Do not replace this with a claim of unspecified top Koszul nonvanishing. Regard depth over R/(x) as depth of the same annihilated module over R: regular sequences act through their images, lift termwise, and preserve quotient nonvanishing.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 12.33, p.123",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-regular-local-residue-field-koszul-resolution",
+        "kind": "lemma",
+        "title": "regular local residue field koszul resolution",
+        "statement": "For a regular local ring $(R,\\mathfrak m,k)$ of dimension $d$, the Koszul complex on any regular system of parameters is a minimal free resolution of $k$ of length $d$.",
+        "deps": [
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "cor-koszul-complex-resolves-a-regular-quotient",
+          "lem-minimal-free-resolution-differentials-land-in-maximal-ideal"
+        ],
+        "strategy": "Regular sequence gives exactness; quotient is k; each differential coefficient lies in m. Exterior degree d has rank one, including the empty sequence d=0.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 12.33 forward proof, p.123",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-regular-local-residue-field-projective-dimension-dimension",
+        "kind": "corollary",
+        "title": "regular local residue field projective dimension dimension",
+        "statement": "For a regular local ring $(R,\\mathfrak m,k)$ of dimension $d$, $\\operatorname{pd}_Rk=d$ and $\\beta_i^R(k)=\\binom di$ for $0\\le i\\le d$, with $\\beta_i^R(k)=0$ for $i>d$.",
+        "deps": [
+          "lem-regular-local-residue-field-koszul-resolution",
+          "lem-projective-dimension-from-last-nonzero-betti-number",
+          "cor-betti-number-is-rank-in-minimal-resolution",
+          "cor-complete-intersection-betti-numbers-binomial"
+        ],
+        "strategy": "Compute exterior ranks, with nonzero top rank ensuring equality.",
+        "sources": {
+          "references": [
+            {
+              "title": "12.27 and 12.33, pp.121\u2013123",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-auslander-buchsbaum-serre-regularity-criterion",
+        "kind": "theorem",
+        "title": "auslander buchsbaum serre regularity criterion",
+        "statement": "For a nonzero Noetherian local ring $(R,\\mathfrak m,k)$ the following are equivalent: $R$ is regular; $\\operatorname{pd}_Rk<\\infty$; $\\operatorname{gldim}R<\\infty$; and every finite $R$-module has finite projective dimension. When these hold, $\\operatorname{gldim}R=\\operatorname{pd}_Rk=\\dim R$. A nonzero finite module over regular local $R$ is maximal Cohen\u2013Macaulay (depth $\\dim R$) if and only if it is free.",
+        "deps": [
+          "lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension",
+          "cor-regular-local-residue-field-projective-dimension-dimension",
+          "lem-local-global-dimension-equals-residue-field-projective-dimension",
+          "thm-auslander-buchsbaum-formula",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "thm-nakayama-lemma"
+        ],
+        "strategy": "Forward Koszul and arbitrary-module bound; converse from the finite-residue-field lemma. Include maximal Cohen\u2013Macaulay finite modules being free by AB. Inline freeness-lifting check (Stacks 10.106.5): if x\u2208m is regular on R and finite M and M/xM is free over R/(x), lift a basis to a surjection F\u2192M. Tor_1(M,R/(x))=0 makes its finite kernel K satisfy K/xK=0; Nakayama gives K=0.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 12.33 and Corollary 12.30, pp.121\u2013123",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-localisations-of-regular-local-rings-are-regular",
+        "kind": "corollary",
+        "title": "localisations of regular local rings are regular",
+        "statement": "Every prime localization $R_{\\mathfrak p}$ of a regular local ring $R$ is regular, and $\\operatorname{edim}R_{\\mathfrak p}=\\operatorname{ht}\\mathfrak p$.",
+        "deps": [
+          "thm-auslander-buchsbaum-serre-regularity-criterion",
+          "thm-localisation-of-modules-is-exact",
+          "lem-height-equals-local-dimension"
+        ],
+        "strategy": "Resolve the finite module R/p, localize the resolution at p, and apply ABS to the resulting residue field. This proves the design\u2019s embedding bound without any adapted-parameter assumption.",
+        "sources": {
+          "references": [
+            {
+              "title": "Corollary 12.34, p.123",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-regular-noetherian-ring",
+        "kind": "definition",
+        "title": "regular noetherian ring",
+        "statement": "A commutative Noetherian ring $R$ is **regular** if for every prime ideal $\\mathfrak p$, the local ring $R_{\\mathfrak p}$ is regular local. This includes the zero ring vacuously. The maximal-localization test is proved in the localization and polynomial-extension theorem.",
+        "deps": [
+          "def-embedding-dimension-and-regular-local-ring"
+        ],
+        "strategy": "The zero ring satisfies this vacuously. The equivalent maximal-localization test is proved in the polynomial/localization theorem, using the preceding localization result.",
+        "sources": {
+          "references": [
+            {
+              "title": "Definition 12.14 and Corollary 12.34",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-flat-local-ascent-of-regularity",
+        "kind": "lemma",
+        "title": "flat local ascent of regularity",
+        "statement": "For a flat local map $(R,\\mathfrak m)\\to(S,\\mathfrak n)$ of nonzero Noetherian local rings: if $R$ and $S/\\mathfrak mS$ are regular, then $S$ is regular. Conversely, regularity of $S$ implies regularity of $R$; it need not imply regularity of the closed fibre.",
+        "deps": [
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "thm-quotient-and-lifting-regularity-across-a-regular-element",
+          "def-flat-and-faithfully-flat-modules-and-ring-maps",
+          "thm-auslander-buchsbaum-serre-regularity-criterion",
+          "lem-finite-local-modules-admit-minimal-free-resolutions",
+          "lem-projective-dimension-from-last-nonzero-betti-number"
+        ],
+        "strategy": "Flatness transports injectivity successively along a regular parameter sequence of R, since all source exact sequences remain exact after tensoring. Quotient S by their images to obtain the regular closed fibre, then repeatedly lift regularity. No finite-as-R-module assumption. For descent tensor a minimal resolution of k_R with S. Flatness preserves exactness and locality makes every differential entry lie in n, so this is a minimal resolution of S/mS. Finite global dimension of S forces its terms to vanish above dim S. A finite free R-module whose scalar extension is zero has rank zero; the original resolution terminates and ABS gives regular R.",
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 12.40(i), p.124",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            },
+            {
+              "title": "Lemma 10.110.9 full proof (minimal-resolution version of its syzygy argument)",
+              "url": "https://stacks.math.columbia.edu/tag/00OF"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-polynomial-local-regularity-fibre-step",
+        "kind": "lemma",
+        "title": "polynomial local regularity fibre step",
+        "statement": "For a prime $\\mathfrak q\\subset R[t]$ with contraction $\\mathfrak p\\subset R$, the closed fibre of $R_{\\mathfrak p}\\to R[t]_{\\mathfrak q}$ is $k(\\mathfrak p)[t]$ localized at a prime. That prime is either zero, giving a field, or generated by an irreducible polynomial, giving a DVR. In both cases the fibre is regular.",
+        "deps": [
+          "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "thm-euclidean-domain-is-a-pid",
+          "cor-polynomial-ring-over-a-field-is-euclidean"
+        ],
+        "strategy": "Identify the localization/quotient explicitly. A polynomial ring in one variable over a field has Euclidean division; prove the principal maximal-ideal description in this proof if not reached by the cited PID result.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 12.36 proof, p.124",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-localisation-and-polynomial-extension-of-regular-rings",
+        "kind": "theorem",
+        "title": "localisation and polynomial extension of regular rings",
+        "statement": "Localizations and finite polynomial extensions of a commutative regular Noetherian ring are regular. Regularity can equivalently be tested at maximal ideals. For every nonzero such ring, $\\operatorname{gldim}R=\\dim R$, allowing infinity. More generally, for a finite module over any commutative Noetherian ring, projective dimension is the supremum of its prime-local projective dimensions. Dedekind domains and their finite polynomial extensions are regular.",
+        "deps": [
+          "cor-localisations-of-regular-local-rings-are-regular",
+          "def-regular-noetherian-ring",
+          "lem-flat-local-ascent-of-regularity",
+          "lem-polynomial-local-regularity-fibre-step",
+          "cor-finite-variable-polynomial-ring-noetherian",
+          "thm-localisation-of-modules-is-exact",
+          "cor-finite-flat-noetherian-modules-are-projective",
+          "thm-flatness-is-local",
+          "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective",
+          "lem-global-dimension-is-detected-on-cyclic-modules",
+          "lem-dedekind-localisation-at-nonzero-prime-is-dvr",
+          "lem-projective-modules-are-flat-over-an-arbitrary-ring",
+          "thm-auslander-buchsbaum-serre-regularity-criterion"
+        ],
+        "strategy": "For localization use a maximal ideal above a given prime and transitivity. Polynomial rings are free and hence flat; localize and apply regular-fibre ascent, then iterate variables. No finite-dimensional assumption on the global regular ring. For the global-dimension conclusion, pd_R(R/p) is at least pd_Rp(k(p))=ht p. For finite d=dim R, a finite module has finite syzygies; its d-th syzygy is projective at every prime by the local bound, hence flat locally and globally, hence finite projective. Cyclic detection extends the bound to arbitrary modules. If dimension is infinite the lower bounds suffice. The finite-module local projective-dimension equality holds for every Noetherian R, by exactly the finite-syzygy localization argument just given. For d=0 use M itself as the locally projective module rather than invoke the n\u22651 syzygy theorem. Dedekind domains are regular because their nonzero prime localizations are DVRs and their zero-prime localization is a field, so their finite polynomial extensions supply the other source example.",
+        "sources": {
+          "references": [
+            {
+              "title": "Corollary 12.34 and Proposition 12.36, pp.123\u2013124",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            },
+            {
+              "title": "Corollary 12.35, pp.123\u2013124",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-completion-preserves-embedding-dimension",
+        "kind": "lemma",
+        "title": "completion preserves embedding dimension",
+        "statement": "For a nonzero Noetherian local ring $(R,\\mathfrak m,k)$, its maximal-adic completion $\\widehat R$ has maximal ideal $\\widehat{\\mathfrak m}=\\mathfrak m\\widehat R$, residue field $k$, and a canonical isomorphism $\\mathfrak m/\\mathfrak m^2\\cong\\widehat{\\mathfrak m}/\\widehat{\\mathfrak m}^{,2}$. In particular their embedding dimensions agree.",
+        "deps": [
+          "def-embedding-dimension-and-regular-local-ring",
+          "thm-completion-of-a-noetherian-local-ring",
+          "cor-completion-commutes-with-finite-quotients-and-submodules"
+        ],
+        "strategy": "Identify the quotients by m and m\u00b2 and the induced maximal ideals, so the cotangent-space isomorphism is canonical.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lecture 25, completion properties (1), (5), (6), pp.68\u201369",
+              "url": "https://www.math.columbia.edu/~wenqili/commalg_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-completion-preserves-regular-local-rings",
+        "kind": "theorem",
+        "title": "completion preserves regular local rings",
+        "statement": "A nonzero Noetherian local ring $R$ is regular if and only if its maximal-adic completion $\\widehat R$ is regular.",
+        "deps": [
+          "lem-completion-preserves-embedding-dimension",
+          "thm-completion-preserves-dimension-and-hilbert-samuel-data"
+        ],
+        "strategy": "Compare the two intrinsic dimensions using the published completion theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lecture 25, property (6), p.69",
+              "url": "https://www.math.columbia.edu/~wenqili/commalg_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-normal-noetherian-ring",
+        "kind": "definition",
+        "title": "normal noetherian ring",
+        "statement": "A commutative Noetherian ring $R$ is **normal** if every prime localization $R_{\\mathfrak p}$ is an integrally closed domain. This is a local condition and does not require $R$ itself to be a domain. The zero ring satisfies it vacuously. For a domain, integrally closed means that every element of its fraction field integral over it belongs to it.",
+        "deps": [
+          "def-integral-closure-and-integrally-closed-domain"
+        ],
+        "strategy": "This includes finite products of normal domains and the zero ring; it does not mean the original ring is a domain.",
+        "sources": {
+          "references": [
+            {
+              "title": "Definition 8.34 and Remarks 8.35\u20138.36, p.56",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-serre-r-k-and-s-k-conditions",
+        "kind": "definition",
+        "title": "serre r k and s k conditions",
+        "statement": "For a commutative Noetherian ring $R$ and an integer $j\\ge0$, condition $(R_j)$ means that $R_{\\mathfrak p}$ is regular whenever $\\operatorname{ht}\\mathfrak p\\le j$. Condition $(S_j)$ means that $\\operatorname{depth}R_{\\mathfrak p}\\ge\\min\\{j,\\dim R_{\\mathfrak p}\\}$ for every prime $\\mathfrak p$. A finite module $M$ satisfies $(S_j)$ if $\\operatorname{depth}_{R_{\\mathfrak p}}M_{\\mathfrak p}\\ge\\min\\{j,\\dim\\operatorname{Supp}_{R_{\\mathfrak p}}M_{\\mathfrak p}\\}$ for every prime in its support. Outside the support the condition is vacuous, consistent with depth of the zero module being $+\\infty$ and the empty support having no nonnegative dimension. Thus the zero module satisfies all $(S_j)$ conditions, and the zero ring satisfies both families vacuously.",
+        "deps": [
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-depth-with-respect-to-an-ideal",
+          "def-height-of-a-prime-ideal"
+        ],
+        "strategy": "Quantify over all primes; preserve zero-module depth infinity and empty support convention.",
+        "sources": {
+          "references": [
+            {
+              "title": "Definition 10.157.1",
+              "url": "https://stacks.math.columbia.edu/tag/031O"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "cor-regular-local-ring-satisfies-r-one",
+        "kind": "corollary",
+        "title": "regular local ring satisfies r one",
+        "statement": "Every regular local ring satisfies $(R_1)$. Its height-zero localizations are fields, and its height-one localizations are DVRs.",
+        "deps": [
+          "def-serre-r-k-and-s-k-conditions",
+          "cor-localisations-of-regular-local-rings-are-regular",
+          "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number"
+        ],
+        "strategy": "Use dimension=height, the zero-dimensional regular case, and DVR equivalence.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.157.5, R1 implication",
+              "url": "https://stacks.math.columbia.edu/tag/031O"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-regular-local-ring-satisfies-s-two",
+        "kind": "corollary",
+        "title": "regular local ring satisfies s two",
+        "statement": "Every regular local ring satisfies $(S_j)$ for every integer $j\\ge0$, in particular $(S_2)$.",
+        "deps": [
+          "def-serre-r-k-and-s-k-conditions",
+          "cor-localisations-of-regular-local-rings-are-regular",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay"
+        ],
+        "strategy": "Each localized ring is regular and Cohen\u2013Macaulay, so local depth equals local dimension.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.157.5, S2 implication",
+              "url": "https://stacks.math.columbia.edu/tag/031O"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-normal-domain-implies-r-one",
+        "kind": "lemma",
+        "title": "normal domain implies r one",
+        "statement": "Every commutative Noetherian integrally closed domain satisfies $(R_1)$.",
+        "deps": [
+          "def-serre-r-k-and-s-k-conditions",
+          "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr",
+          "thm-one-dimensional-regular-local-rings-are-dvrs"
+        ],
+        "strategy": "Height-one localizations are DVRs; height zero is the fraction field.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.157.4 forward implication",
+              "url": "https://stacks.math.columbia.edu/tag/031O"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-normal-domain-implies-s-two",
+        "kind": "lemma",
+        "title": "normal domain implies s two",
+        "statement": "Every commutative Noetherian integrally closed domain satisfies $(S_2)$.",
+        "deps": [
+          "def-serre-r-k-and-s-k-conditions",
+          "thm-normality-is-local-for-domains",
+          "thm-depth-zero-associated-prime-criterion",
+          "lem-depth-quotient-by-regular-element",
+          "thm-krull-height-theorem"
+        ],
+        "strategy": "At height at least two choose nonzero a. If depth=1 choose b with m=(a:b), so u=b/a\u2209R and um\u2282R. If um\u2282m, apply the determinant trick on the finite faithful ideal m to make u integral, a contradiction. Otherwise some ut is a unit, making m=(t), contradicting height\u22652. Include the finite-matrix determinant argument explicitly.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lemma 8.40 proof, pp.56\u201357 (normal hypothesis required); 8.41",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-r-one-s-two-intersection-of-height-one-localisations",
+        "kind": "lemma",
+        "title": "r one s two intersection of height one localisations",
+        "statement": "If $R$ is a commutative Noetherian domain satisfying $(S_2)$, then inside its fraction field $K$ one has $R=\\bigcap_{\\operatorname{ht}\\mathfrak p=1}R_{\\mathfrak p}$. For a field the empty intersection is interpreted as $K=R$.",
+        "deps": [
+          "def-serre-r-k-and-s-k-conditions",
+          "thm-lasker-noether-primary-decomposition",
+          "lem-associated-primes-from-a-minimal-primary-decomposition",
+          "lem-depth-quotient-by-regular-element",
+          "thm-depth-zero-associated-prime-criterion",
+          "thm-associated-primes-localise",
+          "thm-existence-of-associated-primes"
+        ],
+        "strategy": "For nonzero denominator a, every associated prime of R/(a) has height one: local depth drop excludes heights\u22652, and a excludes height zero. A primary decomposition of (a) tests numerator membership at these primes.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 8.41 proof, pp.57\u201358; Stacks 10.157.6(1)\u2013(2)",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-r-one-s-two-integral-element-membership",
+        "kind": "lemma",
+        "title": "r one s two integral element membership",
+        "statement": "A commutative Noetherian $(S_2)$ domain whose height-one localizations are DVRs is integrally closed.",
+        "deps": [
+          "lem-r-one-s-two-intersection-of-height-one-localisations",
+          "thm-valuation-ring-is-integrally-closed"
+        ],
+        "strategy": "An integral fraction belongs to each DVR and hence to the intersection.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 8.41 final proof paragraph, p.58",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-serre-normality-criterion-two-directions",
+        "kind": "corollary",
+        "title": "serre normality criterion two directions",
+        "statement": "A commutative Noetherian domain is normal if and only if it satisfies $(R_1)$ and $(S_2)$. Equivalently its integral closedness is characterized by these two conditions.",
+        "deps": [
+          "lem-normal-domain-implies-r-one",
+          "lem-normal-domain-implies-s-two",
+          "lem-r-one-s-two-integral-element-membership",
+          "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "thm-normality-is-local-for-domains"
+        ],
+        "strategy": "Combine the forward conditions with the height-one intersection converse.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 8.41 and Lemma 8.40, pp.56\u201358",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-serre-r-zero-s-one-characterises-reducedness",
+        "kind": "lemma",
+        "title": "serre r zero s one characterises reducedness",
+        "statement": "For a finite module $M$ over a commutative Noetherian ring, $(S_1)$ is equivalent to every associated prime being minimal in $\\operatorname{Supp}M$. For the ring itself, this means no embedded associated primes. A commutative Noetherian ring is reduced if and only if it satisfies $(R_0)$ and $(S_1)$.",
+        "deps": [
+          "def-serre-r-k-and-s-k-conditions",
+          "thm-depth-zero-associated-prime-criterion",
+          "thm-zero-divisors-on-a-module",
+          "thm-existence-of-associated-primes",
+          "thm-noetherian-ring-has-finitely-many-minimal-primes",
+          "cor-radical-ideals-as-intersections-of-minimal-primes-noetherian",
+          "thm-associated-primes-localise",
+          "lem-finite-prime-avoidance",
+          "thm-minimal-support-primes-are-associated"
+        ],
+        "strategy": "Localize associated primes. Under R0 and S1 a nonzero nilpotent ideal has an associated prime which must be minimal, but localization there is a field, contradiction. Conversely a reduced ring embeds in its minimal-prime domains and has no embedded associated primes; verify this via a finite product of separating elements. The module version follows because an associated prime p is embedded exactly when Supp(M_p) has positive dimension; the localized associated-prime criterion identifies this with a depth-zero violation of S1.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.157.2\u201310.157.3",
+              "url": "https://stacks.math.columbia.edu/tag/031O"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-total-ring-of-fractions",
+        "kind": "definition",
+        "title": "total ring of fractions",
+        "statement": "For a nonzero commutative ring $R$, let $S$ be the set of its nonzerodivisors, meaning elements whose multiplication maps on $R$ are injective. Its **total ring of fractions** is $Q(R)=S^{-1}R$. The set $S$ is multiplicative since composites of injective multiplication maps are injective. The natural map $R\\to Q(R)$ is injective: $a/1=0$ implies $sa=0$ for some $s\\in S$, hence $a=0$. Set $Q(0)=0$. For a domain this recovers the fraction field; for a ring with zero divisors it need not be a field.",
+        "deps": [
+          "def-multiplicative-subset-and-localisation"
+        ],
+        "strategy": "Nonzerodivisors form a multiplicative set; the localization zero criterion gives injectivity. This is distinct from the fraction field for domains.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.37.16 proof, total fraction ring used there",
+              "url": "https://stacks.math.columbia.edu/tag/030C"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-reduced-noetherian-total-fractions-and-normal-components",
+        "kind": "lemma",
+        "title": "reduced noetherian total fractions and normal components",
+        "statement": "For a reduced commutative Noetherian ring $R$ with minimal primes $\\mathfrak p_1,\\ldots,\\mathfrak p_s$, there is a canonical isomorphism $Q(R)\\cong\\prod_{i=1}^s\\operatorname{Frac}(R/\\mathfrak p_i)$. The following are equivalent: $R$ is normal; $R$ is integrally closed in $Q(R)$; and $R$ is a finite product of normal domains. For $R=0$ this is the empty product.",
+        "deps": [
+          "def-total-ring-of-fractions",
+          "def-normal-noetherian-ring",
+          "thm-noetherian-ring-has-finitely-many-minimal-primes",
+          "cor-radical-ideals-as-intersections-of-minimal-primes-noetherian",
+          "thm-normality-is-local-for-domains",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "lem-finite-prime-avoidance"
+        ],
+        "strategy": "Prove zero divisors are the union of minimal primes using separating products; primes surviving localization are precisely those minimal primes by prime avoidance. The reduced zero-dimensional localization is a finite product of fields by CRT. If integrally closed it contains coordinate idempotents (roots of T\u00b2-T) and splits. Conversely normal localizations force disjoint minimal components; CRT and domain local normality finish. Treat R=0 as the empty-product case directly.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.37.16, full proof",
+              "url": "https://stacks.math.columbia.edu/tag/030C"
+            },
+            {
+              "title": "Lemma 10.25.4, full proof",
+              "url": "https://stacks.math.columbia.edu/tag/02LX"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-depth-two-excludes-finite-punctured-extension",
+        "kind": "lemma",
+        "title": "depth two excludes finite punctured extension",
+        "statement": "Let $(R,\\mathfrak m)$ be reduced Noetherian local with $\\operatorname{depth}R\\ge2$. If $R\\subseteq B\\subseteq Q(R)$ is a finite intermediate ring and $\\operatorname{Supp}_R(B/R)\\subseteq\\{\\mathfrak m\\}$, then $B=R$.",
+        "deps": [
+          "def-total-ring-of-fractions",
+          "thm-depth-lemma",
+          "thm-depth-zero-associated-prime-criterion",
+          "thm-support-and-annihilator-of-a-finite-module",
+          "thm-nakayama-lemma"
+        ],
+        "strategy": "Choose an R-regular element in m, which also acts injectively on Q(R) and B. Thus depth B\u22651, and the Depth Lemma gives depth(B/R)\u22651 unless zero. A nonzero finite module supported only at m has finite length and depth zero; prove by annihilator radical and a last nonzero power of m.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.119.2 last proof paragraph, restricted finite-extension rigidity",
+              "url": "https://stacks.math.columbia.edu/tag/0BHZ"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-serre-normality-criterion",
+        "kind": "theorem",
+        "title": "serre normality criterion",
+        "statement": "For every commutative Noetherian ring $R$, including rings with zero divisors and the zero ring, $R$ is normal if and only if it satisfies $(R_1)$ and $(S_2)$.",
+        "deps": [
+          "def-normal-noetherian-ring",
+          "cor-serre-normality-criterion-two-directions",
+          "lem-serre-r-zero-s-one-characterises-reducedness",
+          "lem-reduced-noetherian-total-fractions-and-normal-components",
+          "lem-depth-two-excludes-finite-punctured-extension",
+          "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "thm-valuation-ring-is-integrally-closed",
+          "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number",
+          "thm-dimension-at-most-embedding-dimension"
+        ],
+        "strategy": "Forward apply the domain criterion to localizations. Reverse first get reducedness. In a local ring induct on dimension: dimensions zero/one are field/DVR by R1. For integral u\u2208Q(R), B=R[u] is finite; every proper localization is normal by induction, so B/R is supported at m; rigidity gives B=R. Total-fraction idempotents now force the local ring to be a normal domain. Explain localized integral fractions in Q(R_p) by nonzerodivisor localization.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.157.4 complete proof, with 030C and 0BHZ",
+              "url": "https://stacks.math.columbia.edu/tag/031O"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-regular-local-rings-are-normal",
+        "kind": "theorem",
+        "title": "regular local rings are normal",
+        "statement": "Every regular local ring is an integrally closed domain. Every commutative regular Noetherian ring is normal and is a finite product of regular domains, with the zero ring corresponding to the empty product.",
+        "deps": [
+          "lem-regular-local-domain-induction",
+          "cor-regular-local-ring-satisfies-r-one",
+          "cor-regular-local-ring-satisfies-s-two",
+          "thm-serre-normality-criterion",
+          "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "lem-reduced-noetherian-total-fractions-and-normal-components"
+        ],
+        "strategy": "Apply Serre locally and the global definitions. No factoriality assertion is made. Applied after regular\u21d2normal, this also splits a regular Noetherian ring into regular domains, since every localization of a component is a localization of the product.",
+        "sources": {
+          "references": [
+            {
+              "title": "10.157.5",
+              "url": "https://stacks.math.columbia.edu/tag/031O"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 365.906,
+    "id": "regular-local-rings-and-homological-dimension-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Regular Local Rings and Homological Dimension \u2014 Examples",
+    "companion": "regular-local-rings-and-homological-dimension",
+    "requires": [
+      "regular-local-rings-and-homological-dimension"
+    ],
+    "items": [
+      {
+        "id": "ex-finite-regular-local-base-cohen-macaulay-freeness",
+        "kind": "example",
+        "title": "Cohen\u2013Macaulayness over a finite regular local base",
+        "statement": "Let $A\\hookrightarrow B$ be an injective finite local map of nonzero Noetherian local rings, with $A$ regular. Then $B$ is Cohen\u2013Macaulay if and only if it is free as an $A$-module.",
+        "deps": [
+          "thm-auslander-buchsbaum-formula",
+          "thm-auslander-buchsbaum-serre-regularity-criterion",
+          "cor-dimension-preserved-by-integral-extensions",
+          "cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module",
+          "cor-one-regular-system-of-parameters-implies-cohen-macaulay",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "thm-depth-bounded-by-support-dimension",
+          "thm-nakayama-lemma"
+        ],
+        "strategy": "Let d=dim A=dim B by integral dimension invariance. A regular parameter sequence generates m_A; its images are parameters in B since B/m_A B is finite-dimensional and local over k_A, hence Artinian with nilpotent maximal ideal (justify by the descending chain and Nakayama). If B is CM these parameters are B-regular, yielding depth_A B\u2265d; depth bound and AB over regular A give pd_A B=0, hence free. If B is free they are B-regular directly, so the parameter criterion gives CM. This exercise proves the full criterion and does not assume equality of depths under arbitrary ring maps.",
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 12.41, p.125",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            },
+            {
+              "title": "Corollary 1.63, p.27",
+              "url": "https://jack-jeffries.github.io/UM/LCnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-fields-as-regular-local-rings",
+        "kind": "example",
+        "title": "fields as regular local rings",
+        "statement": "Every field $k$ is regular local with dimension and embedding dimension zero. Conversely every zero-dimensional regular local ring is a field. Its regular system is empty and its residue field has a free resolution concentrated in degree zero.",
+        "deps": [
+          "def-embedding-dimension-and-regular-local-ring",
+          "thm-nakayama-lemma"
+        ],
+        "strategy": "For the converse m/m\u00b2=0 implies m=0 by Nakayama. The empty regular system and length-zero resolution include dimension zero.",
+        "sources": {
+          "references": [
+            {
+              "title": "Example 12.6, p.115",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-dvrs-as-regular-local-rings",
+        "kind": "example",
+        "title": "dvrs as regular local rings",
+        "statement": "A DVR $R$ with uniformizer $t$ and residue field $k$ is regular local of dimension one, with regular system $(t)$ and $\\operatorname{gr}_{(t)}R\\cong k[T]$.",
+        "deps": [
+          "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "thm-associated-graded-ring-of-a-regular-local-ring"
+        ],
+        "strategy": "Use m=(t), t\u2209m\u00b2; compute each graded piece by t-powers.",
+        "sources": {
+          "references": [
+            {
+              "title": "Example 12.10, p.116",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-localised-polynomial-ring-regular",
+        "kind": "example",
+        "title": "localised polynomial ring regular",
+        "statement": "For a field $k$ and integers $0\\le r\\le n$, the ring $R=k[x_1,\\ldots,x_n]_{(x_1,\\ldots,x_r)}$ is regular local of dimension $r$, with residue field $k(x_{r+1},\\ldots,x_n)$ and regular system $(x_1,\\ldots,x_r)$.",
+        "deps": [
+          "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "thm-dimension-at-most-embedding-dimension"
+        ],
+        "strategy": "The chain of coordinate primes gives height at least r, the r generators give at most r. Identify residue by inverting all nonzero polynomials in remaining variables.",
+        "sources": {
+          "references": [
+            {
+              "title": "Example 12.37, p.124",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-formal-power-series-ring-regular",
+        "kind": "example",
+        "title": "formal power series ring regular",
+        "statement": "For every field $k$ and integer $n\\ge0$, $k[\\![x_1,\\ldots,x_n]\\!]$ is a Noetherian regular local ring of dimension $n$, with maximal ideal generated by the variables and residue field $k$.",
+        "deps": [
+          "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "thm-completion-preserves-regular-local-rings",
+          "lem-completion-preserves-embedding-dimension",
+          "thm-completion-of-a-noetherian-local-ring",
+          "thm-completion-preserves-dimension-and-hilbert-samuel-data",
+          "thm-dimension-at-most-embedding-dimension"
+        ],
+        "strategy": "Define multivariable series as coefficients indexed by N^n and convolution (each coefficient is a finite sum); compatible degree truncations identify this ring with the maximal-adic completion of the coordinate local polynomial ring. This builds the multivariable construction rather than assuming the published univariate definition covers it.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lecture 25, Example 25.1 and completion properties (1),(5),(6), pp.68\u201369",
+              "url": "https://www.math.columbia.edu/~wenqili/commalg_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-dual-numbers-not-regular",
+        "kind": "example",
+        "title": "dual numbers not regular",
+        "statement": "For every field $k$, the dual-number ring $R=k[\\varepsilon]/(\\varepsilon^2)$ is local with $\\dim R=0$ and $\\operatorname{edim}R=1$, so is not regular.",
+        "deps": [
+          "def-embedding-dimension-and-regular-local-ring"
+        ],
+        "strategy": "Every prime contains \u03b5; a+b\u03b5 is a unit iff a\u22600. Thus m=(\u03b5), m\u00b2=0, and the cotangent dimension is one.",
+        "sources": {
+          "references": [
+            {
+              "title": "Definitions 12.3\u201312.5 and Example 12.6, p.115",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cusp-local-ring-not-regular",
+        "kind": "example",
+        "title": "cusp local ring not regular",
+        "statement": "For every field $k$, the cusp local ring $R=(k[x,y]/(y^2-x^3))_{(x,y)}$ has dimension one and embedding dimension two, hence is not regular.",
+        "deps": [
+          "thm-quotient-and-lifting-regularity-across-a-regular-element",
+          "lem-associated-graded-polynomial-surjection",
+          "thm-dimension-at-most-embedding-dimension"
+        ],
+        "strategy": "The affine quotient is finite free over k[x] with basis 1,y, hence integral of dimension one. The map to k[t], x\u21a6t\u00b2,y\u21a6t\u00b3 is injective: even and odd t-degrees in a(x)+yb(x) cannot cancel. Thus the chain (0)\u228am shows local dimension one. Since the defining equation is in (x,y)\u00b2, both cotangent classes survive independently.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lecture 25, Propositions 25.6\u201325.8, pp.67\u201368",
+              "url": "https://www.math.columbia.edu/~wenqili/commalg_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-betti-numbers-from-a-koszul-resolution",
+        "kind": "example",
+        "title": "betti numbers from a koszul resolution",
+        "statement": "For $R=k[x,y]_{(x,y)}$, the augmented complex $0\\to R\\xrightarrow{c\\mapsto(-yc,xc)}R^2\\xrightarrow{(a,b)\\mapsto xa+yb}R\\to k\\to0$ is a minimal free resolution. Thus $\\beta(k)=(1,2,1)$, with all higher Betti numbers zero.",
+        "deps": [
+          "lem-regular-local-residue-field-koszul-resolution",
+          "cor-betti-number-is-rank-in-minimal-resolution",
+          "thm-localisation-and-polynomial-extension-of-regular-rings"
+        ],
+        "strategy": "Write the two Koszul differentials and verify composition zero; parameter regularity gives exactness. All entries are in m, so tensoring with k yields the ranks.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 12.33 proof, p.123",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-residue-field-infinite-projective-dimension-singular",
+        "kind": "example",
+        "title": "residue field infinite projective dimension singular",
+        "statement": "For $R=k[\\varepsilon]/(\\varepsilon^2)$, its residue field $k$ has an infinite minimal free resolution with one copy of $R$ in every degree and every positive differential multiplication by $\\varepsilon$. Consequently $\\beta_i^R(k)=1$ for all $i\\ge0$ and $\\operatorname{pd}_Rk=\\infty$.",
+        "deps": [
+          "lem-projective-dimension-from-last-nonzero-betti-number",
+          "cor-betti-number-is-rank-in-minimal-resolution"
+        ],
+        "strategy": "Kernel and image of multiplication by \u03b5 are both (\u03b5); the augmentation kernel is also (\u03b5). Thus the infinite complex is exact and minimal, and Tor never vanishes.",
+        "sources": {
+          "references": [
+            {
+              "title": "Proposition 12.27 and Corollary 12.29, p.121",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-embedding-dimension-versus-dimension-node",
+        "kind": "example",
+        "title": "embedding dimension versus dimension node",
+        "statement": "For every field $k$, the split node $R=(k[x,y]/(xy))_{(x,y)}$ is reduced and has dimension one and embedding dimension two. It is neither a domain nor regular.",
+        "deps": [
+          "thm-dimension-at-most-embedding-dimension",
+          "def-embedding-dimension-and-regular-local-ring"
+        ],
+        "strategy": "Primes contain x or y, so branches have dimension one; (xy)=(x)\u2229(y) is radical. The quadratic equation produces no linear cotangent relation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lecture 25, Propositions 25.6\u201325.8, pp.67\u201368",
+              "url": "https://www.math.columbia.edu/~wenqili/commalg_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-associated-graded-polynomial-map-singular-kernel",
+        "kind": "example",
+        "title": "associated graded polynomial map singular kernel",
+        "statement": "For the cusp local ring $R=(k[x,y]/(y^2-x^3))_{(x,y)}$ with maximal ideal $\\mathfrak m$, the associated graded ring is $k[X,Y]/(Y^2)$. Thus the polynomial map defined by the cotangent classes has kernel exactly $(Y^2)$.",
+        "deps": [
+          "lem-associated-graded-polynomial-surjection",
+          "thm-associated-graded-ring-of-a-regular-local-ring"
+        ],
+        "strategy": "In the ambient coordinate regular local ring, initial(fg)=initial(f)initial(g) because its graded ring is a domain. For f=y\u00b2\u2212x\u00b3 the initial form is Y\u00b2, so the initial ideal of the principal ideal is (Y\u00b2), including localized multipliers whose denominators are units. Quotient graded pieces give the asserted kernel.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lecture 25, Proposition 25.6 and its graded-map proof, p.67",
+              "url": "https://www.math.columbia.edu/~wenqili/commalg_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-minimal-resolution-unit-cancellation",
+        "kind": "example",
+        "title": "minimal resolution unit cancellation",
+        "statement": "Over $R=k[x]_{(x)}$, the free resolution $0\\to R^2\\xrightarrow{\\operatorname{diag}(x,1)}R^2\\to R/(x)\\to0$, with augmentation $(a,b)\\mapsto a\\bmod x$, contracts to the minimal resolution $0\\to R\\xrightarrow{x}R\\to R/(x)\\to0$.",
+        "deps": [
+          "lem-minimal-free-resolution-differentials-land-in-maximal-ideal"
+        ],
+        "strategy": "The second-coordinate complex R --1\u2192 R is contractible. Remove it; the first-coordinate map is injective and its image is the augmentation kernel.",
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a712.2 minimal-resolution construction and Remark 12.28, pp.120\u2013121",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-betti-numbers-residue-field-regular-ring",
+        "kind": "example",
+        "title": "betti numbers residue field regular ring",
+        "statement": "For $R=k[x,y,z]_{(x,y,z)}$, the residue field has Betti numbers $(1,3,3,1)$ and projective dimension three.",
+        "deps": [
+          "lem-regular-local-residue-field-koszul-resolution",
+          "cor-betti-number-is-rank-in-minimal-resolution",
+          "cor-regular-local-residue-field-projective-dimension-dimension",
+          "thm-dimension-at-most-embedding-dimension"
+        ],
+        "strategy": "Use exterior bases in Koszul degrees 0,\u2026,3; all three variables belong to m, so this is minimal and the top rank is nonzero.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 12.33, p.123",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-auslander-buchsbaum-first-syzygy",
+        "kind": "example",
+        "title": "auslander buchsbaum first syzygy",
+        "statement": "For $R=k[x,y]_{(x,y)}$ with maximal ideal $\\mathfrak m$, $\\operatorname{pd}_Rk=2$, $\\operatorname{depth}_Rk=0$, and its first syzygy satisfies $\\operatorname{pd}_R\\mathfrak m=1$ and $\\operatorname{depth}_R\\mathfrak m=1$.",
+        "deps": [
+          "lem-auslander-buchsbaum-syzygy-projective-dimension",
+          "thm-auslander-buchsbaum-formula",
+          "cor-regular-local-residue-field-projective-dimension-dimension",
+          "thm-localisation-and-polynomial-extension-of-regular-rings"
+        ],
+        "strategy": "Truncate the explicit two-variable Koszul resolution to resolve m. Its length-one resolution is minimal; AB gives depth m=2\u22121. The socle criterion gives depth k=0.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 12.31 and Theorem 12.33, pp.121\u2013123",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-completion-regularity-invariance",
+        "kind": "example",
+        "title": "completion regularity invariance",
+        "statement": "The ring $R=k[x,y]_{(x,y)}$ and its completion $k[\\![x,y]\\!]$ both have dimension and embedding dimension two. For every $q\\ge1$, their quotients by the $q$th powers of the maximal ideals agree and have basis the monomials of total degree less than $q$.",
+        "deps": [
+          "lem-completion-preserves-embedding-dimension",
+          "thm-completion-preserves-regular-local-rings",
+          "thm-completion-of-a-noetherian-local-ring",
+          "thm-completion-preserves-dimension-and-hilbert-samuel-data",
+          "thm-dimension-at-most-embedding-dimension"
+        ],
+        "strategy": "Identify the quotient basis by monomials of total degree below q; for q=2 this identifies the cotangent basis; Hilbert\u2013Samuel dimension or the completion theorem establishes dimension independently.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lecture 25, Example 25.1 and property (6), pp.68\u201369",
+              "url": "https://www.math.columbia.edu/~wenqili/commalg_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-hypersurface-regularity-at-a-rational-point",
+        "kind": "example",
+        "title": "hypersurface regularity at a rational point",
+        "statement": "Let $k$ be any field, $a\\in k^n$, and $0\\ne f\\in k[x_1,\\ldots,x_n]$ with $f(a)=0$. The local hypersurface ring at $a$ is regular if and only if at least one formal partial derivative $\\partial f/\\partial x_i$ is nonzero at $a$.",
+        "deps": [
+          "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "thm-quotient-and-lifting-regularity-across-a-regular-element"
+        ],
+        "strategy": "Translate a to zero. The nonzero polynomial is a nonzerodivisor in the ambient regular local domain. Its linear part represents f mod m\u00b2; this is nonzero precisely when one formal partial derivative is nonzero. Apply the regular-element quotient criterion. This is only the rational-point hypersurface calculation, not a general smoothness criterion.",
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 12.17, p.117; rational-point calculation removes the unnecessary algebraic-closure hypothesis",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-regular-local-ambient-cover-minimal-dimension",
+        "kind": "example",
+        "title": "regular local ambient cover minimal dimension",
+        "statement": "If a nonzero Noetherian local ring $A$ is a quotient of at least one regular local ring, then the least dimension of a regular local ring surjecting onto $A$ is $\\operatorname{edim}A$.",
+        "deps": [
+          "lem-regular-local-regular-quotient-ideal-is-parameter-generated",
+          "lem-regular-local-quotient-by-parameter-is-regular",
+          "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number"
+        ],
+        "strategy": "For R\u2192A=R/I, cotangent surjectivity gives dim R\u2265edim A. Lift a basis of (I+m\u00b2)/m\u00b2 to elements of I and extend it to parameters of R. Quotient by just those parameter lifts to obtain a regular local cover of dimension edim A; no claim that A itself is regular.",
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 12.18, p.117",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-regular-flat-local-map-with-singular-closed-fibre",
+        "kind": "example",
+        "title": "regular flat local map with singular closed fibre",
+        "statement": "For every field $k$, the local map $k[s]_{(s)}\\to k[t]_{(t)}$, $s\\mapsto t^2$, is finite free of rank two between regular DVRs. Its closed fibre is $k[t]/(t^2)$ and is not regular.",
+        "deps": [
+          "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "def-embedding-dimension-and-regular-local-ring"
+        ],
+        "strategy": "k[t] is free with basis 1,t over k[s]. After localizing the base at (s), it has unique maximal ideal (t): modulo s the quotient is local, and finite integrality forces maximal ideals to contract to (s). It therefore equals k[t]_(t). Freeness gives flatness and the fibre is the dual numbers in every characteristic.",
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 12.40(iii), pp.124\u2013125",
+              "url": "https://websites.umich.edu/~mmustata/CAnotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

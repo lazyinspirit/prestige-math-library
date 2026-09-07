@@ -67,6 +67,7 @@ parts:
       - iterative-restriction-and-comb-extraction-lemmas
       - leaf-reducibility-and-wonderful-families
       - generalized-niceness-and-reduction-outcomes
+      - co-bird-free-comb-structure
       - property-star-and-comb-outcomes
       - from-generalized-niceness-to-erdos-hajnal
       - the-structural-criterion-for-property-star
@@ -136,7 +137,8 @@ induced-copy estimates, sparse pairs, and Erdős--Hajnal alternatives. Modules,
 substitutions, blockades, pure pairs, stars, combs, restriction, and sparsification develop
 clique-or-stable-set structure for the bull and $C_5$, while generalized niceness, thinning,
 leaf reducibility, Rödl initialization, and complement invariance return to the forbidden
-family. The co-$E$-free comb construction makes the local criterion concrete: overlap
-quotients split each $H_5$ comb block into a $\{H_5,\operatorname{co}\text{-}E\}$-free part
-and a pure blockade with that forbidden pattern. Together with the Erdős--Hajnal property for
-this pair, the special-vertex criterion yields property $(*)$ for $\{E\}$.
+family. In the co-bird-free comb setting, the added structural page turns local obstruction
+lemmas into an endpoint: overlapping induced $E$ copies yield anticonnected classes, and
+iterated mixed quotients end in a pure blockade with an $E$-free pattern. This supplies the
+local decomposition used with the relevant Erdős--Hajnal input and the special-vertex
+criterion to obtain property $(*)$ for $\{E\}$.

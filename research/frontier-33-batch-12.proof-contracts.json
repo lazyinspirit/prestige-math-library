@@ -1,0 +1,3312 @@
+{
+ "version": 1,
+ "scope": [
+  "lem-strict-subharmonic-perturbation",
+  "thm-weak-maximum-principle-for-the-laplacian",
+  "cor-weak-minimum-principle-for-the-laplacian",
+  "thm-comparison-principle-for-classical-subharmonic-functions",
+  "lem-classical-subharmonic-mean-value-inequalities",
+  "thm-strong-maximum-principle-for-classical-subharmonic-functions",
+  "thm-strong-maximum-principle-for-harmonic-functions",
+  "cor-nonnegative-harmonic-function-with-an-interior-zero-vanishes",
+  "cor-uniqueness-for-the-classical-dirichlet-problem",
+  "cor-poisson-supremum-estimate-from-a-quadratic-barrier",
+  "lem-interior-sphere-barrier-for-the-laplacian",
+  "thm-hopf-boundary-point-lemma-for-the-laplacian",
+  "thm-harnack-inequality-on-a-ball",
+  "lem-finite-harnack-chain-on-a-compact-connected-subset",
+  "cor-harnack-inequality-on-compact-subsets",
+  "thm-harnack-convergence-principle",
+  "lem-smooth-sphere-data-have-a-harmonic-replacement",
+  "lem-derivative-estimate-proof-of-one-sided-harmonic-liouville",
+  "thm-liouville-theorem-for-bounded-harmonic-functions",
+  "cor-positive-entire-harmonic-functions-are-constant",
+  "cor-entire-harmonic-functions-with-bounded-gradient-are-affine",
+  "cor-removable-singularity-for-bounded-harmonic-functions",
+  "thm-maximum-principle-with-limsup-control-at-infinity",
+  "ex-harmonic-function-attaining-only-boundary-extrema",
+  "ex-harnack-constant-from-the-poisson-kernel-ratio",
+  "cex-maximum-principle-fails-for-superharmonic-maxima",
+  "cex-weak-maximum-principle-needs-boundedness-or-control-at-infinity",
+  "cex-hopf-lemma-needs-a-boundary-geometry-hypothesis",
+  "cex-liouville-needs-one-sided-boundedness",
+  "cex-unbounded-punctured-harmonic-singularity-is-not-removable",
+  "cex-strong-maximum-principle-needs-connectedness",
+  "cex-hopf-conclusion-needs-a-strict-nonconstant-extremum",
+  "ex-subharmonic-quartic-and-harmonic-saddle"
+ ],
+ "contracts": {
+  "lem-strict-subharmonic-perturbation": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-subharmonic-and-superharmonic-functions-in-rn",
+     "source_section": "Definition",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and let $u:\\Omega\\to\\mathbb R$ belong to $C^2(\\Omega)$. With the Laplacian of [[def-laplacian-of-a-c2-function]], $u$ is **subharmonic** when $\\Delta u\\ge0$ at every point, and **superharmonic** when $\\Delta u\\le0$. Thus $u$ is harmonic exactly when both conditions hold, and $u$ is superharmonic exactly when $-u$ is subharmonic. Here a **domain** means a nonempty connected open set. This is the classical $C^2$ convention; the equivalence with local mean inequalities is established in the mean-inequality lemma.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "$\\partial_{ii}|x|^2=2$ for each of the $n$ coordinates. Therefore $\\Delta u_\\varepsilon=\\Delta u+2n\\varepsilon\\ge2n\\varepsilon>0$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "At an interior local maximum $q$, each restriction $t\\mapsto u_\\varepsilon(q+te_i)$ would have second derivative at zero at most zero. Summing would give $\\Delta u_\\varepsilon(q)\\le0$, incompatible with the strict positive value already obtained. Hence no such maximum exists.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The statement allows empty Omega; its universal point and ball assertions are then vacuous. Steps 1.1 onward apply whenever a point or ball is supplied."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Statement requires epsilon > 0; step 1.1 exhibits why epsilon = 0 does not give strictness."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For lem strict subharmonic perturbation, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 2.1 allows zero second derivatives at a degenerate local maximum and still excludes it."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "For lem strict subharmonic perturbation, there is no interval endpoint or boundary-trace conclusion in this statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For lem strict subharmonic perturbation, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For lem strict subharmonic perturbation, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For lem strict subharmonic perturbation, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "thm-weak-maximum-principle-for-the-laplacian": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-strict-subharmonic-perturbation",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, $\\Omega\\subseteq\\mathbb R^n$ be open, and $u\\in C^2(\\Omega)$ be subharmonic. For $\\varepsilon>0$, put $u_\\varepsilon(x)=u(x)+\\varepsilon|x|^2$. Then $\\Delta u_\\varepsilon\\ge2n\\varepsilon>0$, and $u_\\varepsilon$ has no interior local maximum.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-heine-borel-rn",
+     "source_section": "Statement",
+     "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-extreme-value-metric",
+     "source_section": "Statement",
+     "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Choose $R>0$ with $\\overline\\Omega\\subseteq\\overline B_R(0)$. The closure is nonempty compact. For each $\\varepsilon>0$, continuity makes $u_\\varepsilon=u+\\varepsilon|x|^2$ attain its maximum on that closure.",
+     "step": "1.1",
+     "inputs": [
+      "F2",
+      "F3",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "The maximizer cannot lie in $\\Omega$, so it lies in $\\partial\\Omega$. In particular the boundary is nonempty; it is closed and bounded, hence compact, and $m=\\max_{\\partial\\Omega}u$ exists.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "F3",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "For every $x\\in\\overline\\Omega$, $u(x)\\le u_\\varepsilon(x)\\le m+\\varepsilon R^2$. Letting $\\varepsilon\\downarrow0$ yields $u(x)\\le m$. Since a boundary maximizer belongs to the closure, equality of the maxima follows.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 use nonempty closure and prove nonempty boundary."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 3.1 permits u = 0 and constant functions."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For thm weak maximum principle for the laplacian, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 2.1 uses strict perturbation even for a degenerate maximum of u."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 3.1 includes every closure point, in particular the boundary."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 select maximizers only on nonempty compact sets."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For thm weak maximum principle for the laplacian, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For thm weak maximum principle for the laplacian, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is compactness and attainment on a possibly disconnected bounded open set, plus the epsilon endpoint. Steps 1.1–3.1 use the exact strict perturbation, Heine–Borel, and extreme-value statements, establish a nonempty compact boundary, and let epsilon decrease only after the uniform R bound. No boundary smoothness or connectedness is used."
+   }
+  },
+  "cor-weak-minimum-principle-for-the-laplacian": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-weak-maximum-principle-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open. If $u\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$ and $\\Delta u\\ge0$, then\n$$\\max_{\\overline\\Omega}u=\\max_{\\partial\\Omega}u.$$\nNo connectedness or boundary smoothness is required.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Put $v=-u$. It has the same regularity and $\\Delta v=-\\Delta u\\ge0$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Apply the weak maximum principle to $v$ and multiply its equality by $-1$. Maxima of $-u$ are negatives of minima of $u$, which proves the claimed equality.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cor weak minimum principle for the laplacian, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 include constant zero."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cor weak minimum principle for the laplacian, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cor weak minimum principle for the laplacian, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 identifies attained boundary and closure minima."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cor weak minimum principle for the laplacian, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cor weak minimum principle for the laplacian, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cor weak minimum principle for the laplacian, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "thm-comparison-principle-for-classical-subharmonic-functions": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-weak-maximum-principle-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open. If $u\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$ and $\\Delta u\\ge0$, then\n$$\\max_{\\overline\\Omega}u=\\max_{\\partial\\Omega}u.$$\nNo connectedness or boundary smoothness is required.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "The function $w=u-v$ is continuous on the closure, belongs to $C^2(\\Omega)$, and satisfies $\\Delta w\\ge0$ and $w\\le0$ on the boundary.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "The weak maximum principle gives $\\max_{\\overline\\Omega}w=\\max_{\\partial\\Omega}w\\le0$, exactly the required comparison.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For thm comparison principle for classical subharmonic functions, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 allows w = 0 and equality of both Laplacians."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For thm comparison principle for classical subharmonic functions, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For thm comparison principle for classical subharmonic functions, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 proves comparison on the full closure."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For thm comparison principle for classical subharmonic functions, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For thm comparison principle for classical subharmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For thm comparison principle for classical subharmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "lem-classical-subharmonic-mean-value-inequalities": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-subharmonic-and-superharmonic-functions-in-rn",
+     "source_section": "Definition",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and let $u:\\Omega\\to\\mathbb R$ belong to $C^2(\\Omega)$. With the Laplacian of [[def-laplacian-of-a-c2-function]], $u$ is **subharmonic** when $\\Delta u\\ge0$ at every point, and **superharmonic** when $\\Delta u\\le0$. Thus $u$ is harmonic exactly when both conditions hold, and $u$ is superharmonic exactly when $-u$ is subharmonic. Here a **domain** means a nonempty connected open set. This is the classical $C^2$ convention; the equivalence with local mean inequalities is established in the mean-inequality lemma.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-radial-derivative-of-a-spherical-average",
+     "source_section": "Statement",
+     "quote": "If $u\\in C^2(\\Omega)$, $B_r(x)\\Subset\\Omega$, and $m(t)=M_u(x,t)$, then $m'(r)=\\frac r n\\frac{1}{|B_r(x)|}\\int_{B_r(x)}\\Delta u(y)dy$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+     "uses": [
+      "2.1",
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Write $m(t)$ for the sphere average at $a$. The radial identity gives $m\\prime(t)=\\frac t n\\frac1{|B_t|}\\int_{B_t(a)}\\Delta u\\ge0$. Continuity gives $m(t)\\to u(a)$ as $t\\downarrow0$, so $m(r)\\ge u(a)$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-1-2",
+     "claim": "For the converse, two integrations of the one-variable fundamental theorem along $a+t\\theta$ give $u(a+r\\theta)=u(a)+r\\nabla u(a)\\cdot\\theta+r^2\\int_0^1(1-s)\\theta^TD^2u(a+sr\\theta)\\theta\\,ds$. The continuity of $D^2u$ makes its remainder after replacing the Hessian by $D^2u(a)$ uniformly $o(r^2)$ for unit $\\theta$. Reflection and permutation symmetry give sphere averages of $\\theta_i$ and $\\theta_i\\theta_j$ equal to zero for $i\\ne j$, and of $\\theta_i^2$ equal to $1/n$. Thus $m(r)=u(a)+r^2\\Delta u(a)/(2n)+o(r^2)$.",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Polar coordinates give the ball average $\\frac n{r^n}\\int_0^r t^{n-1}m(t)\\,dt\\ge u(a)$. For signed $u$, apply the nonnegative polar formula to its positive and negative parts on the bounded ball; both are bounded and integrable. Replacing $u$ by $-u$ proves both reversed inequalities.",
+     "step": "2.1",
+     "inputs": [
+      "F3",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "Integrating the expansion with the radial weights gives ball average $u(a)+r^2\\Delta u(a)/(2(n+2))+o(r^2)$. Either assumed mean inequality, divided by $r^2>0$ and followed by $r\\downarrow0$, forces $\\Delta u(a)\\ge0$. Negation gives the superharmonic converse.",
+     "step": "3.1",
+     "inputs": [
+      "F3",
+      "step 1.2",
+      "algebra",
+      "1.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The statement allows empty Omega; its universal point and ball assertions are then vacuous. Steps 1.1 onward apply whenever a point or ball is supplied."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 include Delta u = 0 and yield both equalities."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For lem classical subharmonic mean value inequalities, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For lem classical subharmonic mean value inequalities, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 3.1 treat the radius-zero limit; radius zero is not used as an averaging denominator."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For lem classical subharmonic mean value inequalities, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 prove both mean inequalities from the Laplacian sign."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Steps 1.2–3.1 prove each local mean condition implies the Laplacian sign."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is the iff, spherical/ball constants, signed integration, and the radius-zero limit. Steps 1.1–3.1 use the exact radial derivative and countable-choice polar formula, derive coefficients 1/(2n) and 1/(2(n+2)), split positive/negative parts, and prove both converse directions from sufficiently small positive radii."
+   }
+  },
+  "thm-strong-maximum-principle-for-classical-subharmonic-functions": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-classical-subharmonic-mean-value-inequalities",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Countable Choice, as in the cited polar-coordinate theorem. Let $n\\ge2$ and $u\\in C^2(\\Omega)$, where $\\Omega\\subseteq\\mathbb R^n$ is open. If $\\Delta u\\ge0$, then for every $\\overline B_r(a)\\subset\\Omega$, $r>0$,\n$$u(a)\\le\\frac1{|\\partial B_r|}\\int_{\\partial B_r(a)}u\\,dS,\\qquad u(a)\\le\\frac1{|B_r|}\\int_{B_r(a)}u\\,dx.$$\nBoth inequalities reverse for $\\Delta u\\le0$. Conversely, either family of local mean inequalities, for all sufficiently small radii at every center, implies the corresponding Laplacian inequality.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-connected-space",
+     "source_section": "Definition",
+     "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]).\n\n- A **separation** of $X$ is an ordered pair $(U, V)$ of **open**, **nonempty**,\n  **disjoint** subsets of $X$ with $U \\cup V = X$.\n- $X$ is **disconnected** when a separation of $X$ exists, and **connected** when\n  none does.\n- A subset $A \\subseteq X$ is a **connected subset** of $X$ when the space\n  $(A, \\mathcal{T}_A)$ is connected, $\\mathcal{T}_A$ being the subspace topology\n  ([[def-subspace-topology-top]]). \"Disconnected subset\" is read the same way.\n\nSince $U$ and $V$ are complementary in $X$, each of them is closed as well as\nopen; so a separation is the same thing as a partition of $X$ into two nonempty\nclopen pieces ([[def-topological-space]]). The **clopen** subsets of $X$ are\nthose that are both open and closed, and $\\varnothing$ and $X$ are always among\nthem.\n\n**The empty space and the one-point space are connected in this library.**\nNeither admits a separation: a separation requires two nonempty disjoint sets\nwhose union is the whole space, and neither $\\varnothing$ nor a singleton can be\nwritten as such a union. So both are connected under the definition above,\nwithout any special clause. **This is a live convention fork** and the competing\nchoice is recorded in [[rem-connectedness-conventions]]; nothing on this page\ndepends on which is taken except the reading of the word \"connected\" applied to\nthose two spaces.\n\n**Connectedness is a property of a space, not of an ambient pair.** The condition\nabove mentions only $(X,\\mathcal{T})$. When it is applied to $A \\subseteq X$ it\nis applied to the space $(A, \\mathcal{T}_A)$, so it does not change if $A$ is\nregarded as a subspace of some other space inducing the same topology on $A$; in\nparticular a subset of $A$ is connected as a subset of $A$ exactly when it is\nconnected as a subset of $X$, by transitivity of the subspace topology\n([[def-subspace-topology-top]]). This is why \"connected\" may be used of a subset\nwith no ambient space named.\n\n**Spelled out for a subset.** $A \\subseteq X$ is disconnected exactly when there\nare open $U, V \\subseteq X$ with\n\n$$A \\subseteq U \\cup V, \\qquad U \\cap A \\ne \\varnothing, \\qquad V \\cap A \\ne \\varnothing, \\qquad U \\cap V \\cap A = \\varnothing,$$\n\nbecause the open sets of $(A,\\mathcal{T}_A)$ are precisely the traces $U \\cap A$.\nNote the last condition: it asks $U$ and $V$ to be disjoint **on $A$**, not in\n$X$. Requiring $U \\cap V = \\varnothing$ outright is a strictly stronger demand\nand is a different notion.\n\n**The two-point discrete space.** Write $\\mathbf{2} := \\{0,1\\}$ with the discrete\ntopology ([[def-standard-topologies]]), in which every subset is open. A\nseparation of $X$ is the same datum as a surjective continuous map\n$X \\to \\mathbf{2}$ ([[def-continuous-map-top]]): given $(U,V)$, the map sending\n$U$ to $0$ and $V$ to $1$ is continuous because the preimage of each of the four\nopen subsets of $\\mathbf{2}$ is one of $\\varnothing$, $U$, $V$, $X$; given a\nsurjective continuous $\\chi : X \\to \\mathbf{2}$, the pair\n$(\\chi^{-1}[\\{0\\}], \\chi^{-1}[\\{1\\}])$ is a separation. This reformulation is\nproved as a theorem on this page and is recorded here only to name $\\mathbf{2}$.\n\n**Separated sets.** Two subsets $A_1, A_2 \\subseteq X$ are **separated in $X$**\nwhen\n\n$$\\overline{A_1} \\cap A_2 = \\varnothing \\qquad \\text{and} \\qquad A_1 \\cap \\overline{A_2} = \\varnothing,$$\n\nclosures taken in $X$ ([[def-interior-closure-boundary-top]],\n[[thm-closure-characterisation-top]]). Separated sets are disjoint, since\n$A_1 \\subseteq \\overline{A_1}$; the converse fails. This is verbatim the\ncondition [[def-connected-r]] uses on the real line, transported to an arbitrary\nspace, and the theorem relating it to the definition above is the next lemma on\nthis page.\n\n**Totally disconnected spaces, and the empty case.** The vocabulary for a space\nall of whose connected subsets are single points is fixed later on this page,\ntogether with the components; it is not defined here because it is stated in\nterms of components.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Put $M=u(a)$ and $E=\\{x\\in\\Omega:u(x)=M\\}$. This is nonempty and relatively closed by continuity.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "For $x\\in E$ choose $r>0$ with $\\overline B_r(x)\\subset\\Omega$. The ball mean inequality gives $\\int_{B_r(x)}(M-u)\\le0$, while the integrand is nonnegative. If it were positive at a point, continuity would give a positive lower bound on a smaller ball of positive volume, contradicting that integral inequality. Thus $u=M$ throughout $B_r(x)$, and $E$ is open.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "If $\\Omega\\setminus E$ were nonempty, it and $E$ would separate $\\Omega$ into disjoint nonempty relatively open sets. Connectedness therefore gives $E=\\Omega$.",
+     "step": "3.1",
+     "inputs": [
+      "F2",
+      "step 2.1",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for classical subharmonic functions, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1–3.1 allow M = 0 or u constant."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for classical subharmonic functions, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for classical subharmonic functions, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for classical subharmonic functions, there is no interval endpoint or boundary-trace conclusion in this statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 2.1 obtains a positive compactly contained radius from openness at a supplied maximum point."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for classical subharmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for classical subharmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is propagation from a single global maximum and use of connectedness. Steps 1.1–3.1 make the maximum set nonempty closed, use the exact ball mean inequality plus continuity to make it open, and then apply the cited connectedness definition. The radius choice is justified by openness and constant/zero functions remain valid."
+   }
+  },
+  "thm-strong-maximum-principle-for-harmonic-functions": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "cor-ball-mean-value-property-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Under [[thm-spherical-mean-value-property-for-harmonic-functions]], $u(x)=A_u(x,r)$ for every $B_r(x)\\Subset\\Omega$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-connected-space",
+     "source_section": "Definition",
+     "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]).\n\n- A **separation** of $X$ is an ordered pair $(U, V)$ of **open**, **nonempty**,\n  **disjoint** subsets of $X$ with $U \\cup V = X$.\n- $X$ is **disconnected** when a separation of $X$ exists, and **connected** when\n  none does.\n- A subset $A \\subseteq X$ is a **connected subset** of $X$ when the space\n  $(A, \\mathcal{T}_A)$ is connected, $\\mathcal{T}_A$ being the subspace topology\n  ([[def-subspace-topology-top]]). \"Disconnected subset\" is read the same way.\n\nSince $U$ and $V$ are complementary in $X$, each of them is closed as well as\nopen; so a separation is the same thing as a partition of $X$ into two nonempty\nclopen pieces ([[def-topological-space]]). The **clopen** subsets of $X$ are\nthose that are both open and closed, and $\\varnothing$ and $X$ are always among\nthem.\n\n**The empty space and the one-point space are connected in this library.**\nNeither admits a separation: a separation requires two nonempty disjoint sets\nwhose union is the whole space, and neither $\\varnothing$ nor a singleton can be\nwritten as such a union. So both are connected under the definition above,\nwithout any special clause. **This is a live convention fork** and the competing\nchoice is recorded in [[rem-connectedness-conventions]]; nothing on this page\ndepends on which is taken except the reading of the word \"connected\" applied to\nthose two spaces.\n\n**Connectedness is a property of a space, not of an ambient pair.** The condition\nabove mentions only $(X,\\mathcal{T})$. When it is applied to $A \\subseteq X$ it\nis applied to the space $(A, \\mathcal{T}_A)$, so it does not change if $A$ is\nregarded as a subspace of some other space inducing the same topology on $A$; in\nparticular a subset of $A$ is connected as a subset of $A$ exactly when it is\nconnected as a subset of $X$, by transitivity of the subspace topology\n([[def-subspace-topology-top]]). This is why \"connected\" may be used of a subset\nwith no ambient space named.\n\n**Spelled out for a subset.** $A \\subseteq X$ is disconnected exactly when there\nare open $U, V \\subseteq X$ with\n\n$$A \\subseteq U \\cup V, \\qquad U \\cap A \\ne \\varnothing, \\qquad V \\cap A \\ne \\varnothing, \\qquad U \\cap V \\cap A = \\varnothing,$$\n\nbecause the open sets of $(A,\\mathcal{T}_A)$ are precisely the traces $U \\cap A$.\nNote the last condition: it asks $U$ and $V$ to be disjoint **on $A$**, not in\n$X$. Requiring $U \\cap V = \\varnothing$ outright is a strictly stronger demand\nand is a different notion.\n\n**The two-point discrete space.** Write $\\mathbf{2} := \\{0,1\\}$ with the discrete\ntopology ([[def-standard-topologies]]), in which every subset is open. A\nseparation of $X$ is the same datum as a surjective continuous map\n$X \\to \\mathbf{2}$ ([[def-continuous-map-top]]): given $(U,V)$, the map sending\n$U$ to $0$ and $V$ to $1$ is continuous because the preimage of each of the four\nopen subsets of $\\mathbf{2}$ is one of $\\varnothing$, $U$, $V$, $X$; given a\nsurjective continuous $\\chi : X \\to \\mathbf{2}$, the pair\n$(\\chi^{-1}[\\{0\\}], \\chi^{-1}[\\{1\\}])$ is a separation. This reformulation is\nproved as a theorem on this page and is recorded here only to name $\\mathbf{2}$.\n\n**Separated sets.** Two subsets $A_1, A_2 \\subseteq X$ are **separated in $X$**\nwhen\n\n$$\\overline{A_1} \\cap A_2 = \\varnothing \\qquad \\text{and} \\qquad A_1 \\cap \\overline{A_2} = \\varnothing,$$\n\nclosures taken in $X$ ([[def-interior-closure-boundary-top]],\n[[thm-closure-characterisation-top]]). Separated sets are disjoint, since\n$A_1 \\subseteq \\overline{A_1}$; the converse fails. This is verbatim the\ncondition [[def-connected-r]] uses on the real line, transported to an arbitrary\nspace, and the theorem relating it to the definition above is the next lemma on\nthis page.\n\n**Totally disconnected spaces, and the empty case.** The vocabulary for a space\nall of whose connected subsets are single points is fixed later on this page,\ntogether with the components; it is not defined here because it is stated in\nterms of components.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "For an attained global maximum $M$, the set $E=\\{u=M\\}$ is nonempty and relatively closed. For $x\\in E$ take $\\overline B_r(x)\\subset\\Omega$. The ball mean property makes $\\int_{B_r(x)}(M-u)=0$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "The integrand is nonnegative and continuous. A positive value would make its integral positive on a small ball; hence it vanishes everywhere on this ball. Thus $E$ is open, and connectedness gives $E=\\Omega$.",
+     "step": "2.1",
+     "inputs": [
+      "F2",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "If the attained extremum is a minimum, apply the preceding argument to the harmonic function $-u$. Constancy of $-u$ is constancy of $u$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for harmonic functions, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1–3.1 allow a zero extremal value and constant functions."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for harmonic functions, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for harmonic functions, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for harmonic functions, there is no interval endpoint or boundary-trace conclusion in this statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.1 uses a positive interior radius supplied by openness."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for harmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For thm strong maximum principle for harmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cor-nonnegative-harmonic-function-with-an-interior-zero-vanishes": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-strong-maximum-principle-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a domain, and let $u\\in C^2(\\Omega)$ be harmonic. If $u$ attains a global maximum or a global minimum at a point of $\\Omega$, it is constant.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "If $u(a)=0$ at some $a\\in\\Omega$, it attains its global minimum there. The strong harmonic maximum/minimum principle makes it constant, hence identically zero.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "If there is no such point, nonnegativity forces $u(x)>0$ at every point. These alternatives exhaust the possibilities.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "given",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cor nonnegative harmonic function with an interior zero vanishes, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 proves the entire zero branch before any positive-value reasoning."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cor nonnegative harmonic function with an interior zero vanishes, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cor nonnegative harmonic function with an interior zero vanishes, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "For cor nonnegative harmonic function with an interior zero vanishes, there is no interval endpoint or boundary-trace conclusion in this statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cor nonnegative harmonic function with an interior zero vanishes, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cor nonnegative harmonic function with an interior zero vanishes, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cor nonnegative harmonic function with an interior zero vanishes, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cor-uniqueness-for-the-classical-dirichlet-problem": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-comparison-principle-for-classical-subharmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open, and let $u,v\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$. If $\\Delta u\\ge\\Delta v$ in $\\Omega$ and $u\\le v$ on $\\partial\\Omega$, then $u\\le v$ on $\\overline\\Omega$.",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Comparison applied to $(u,v)$ and then $(v,u)$ gives $u\\le v$ and $v\\le u$, respectively, proving uniqueness.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-1-2",
+     "claim": "For possibly different boundary values put $b=\\max_{\\partial\\Omega}|u-v|$. It is finite because the boundary is nonempty compact and the difference is continuous. Compare $u$ with $v+b$ and $v$ with $u+b$; their Laplacians agree. Hence $|u-v|\\le b$ on the closure.",
+     "step": "1.2",
+     "inputs": [
+      "F1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "For a sequence with common Laplacian, the bound just proved applies to every pair of terms. Uniformly convergent boundary traces are uniformly Cauchy, so the solutions are uniformly Cauchy on the closure. Completeness of the real numbers supplies the pointwise limit and the same Cauchy bound makes convergence uniform. The limit is continuous there, as follows by combining a uniform error bound with continuity of a fixed term.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "algebra",
+      "1.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cor uniqueness for the classical dirichlet problem, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1–1.2 handle zero boundary difference and zero source."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cor uniqueness for the classical dirichlet problem, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cor uniqueness for the classical dirichlet problem, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.2–2.1 control the entire closure."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.2 takes a maximum of a continuous function on nonempty compact boundary."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cor uniqueness for the classical dirichlet problem, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cor uniqueness for the classical dirichlet problem, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cor-poisson-supremum-estimate-from-a-quadratic-barrier": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-comparison-principle-for-classical-subharmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open, and let $u,v\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$. If $\\Delta u\\ge\\Delta v$ in $\\Omega$ and $u\\le v$ on $\\partial\\Omega$, then $u\\le v$ on $\\overline\\Omega$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Put $b=\\max_{\\partial\\Omega}|u|$ and $v(x)=b+\\frac{L}{2}(d^2-x_1^2)$. Since $0\\le x_1\\le d$ on the closure, $v\\ge b$ there, and $\\Delta v=-L\\le\\Delta u,\\Delta(-u)$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Both $u$ and $-u$ are at most $v$ on the boundary, so comparison gives $|u|\\le v\\le b+Ld^2/2$ on the closure.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cor poisson supremum estimate from a quadratic barrier, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 include L = 0 and b = 0 without division by either."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cor poisson supremum estimate from a quadratic barrier, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cor poisson supremum estimate from a quadratic barrier, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 includes both faces x_1 = 0 and x_1 = d."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.1 uses the attained finite boundary maximum; bounded nonempty openness ensures compact nonempty boundary."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cor poisson supremum estimate from a quadratic barrier, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cor poisson supremum estimate from a quadratic barrier, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "lem-interior-sphere-barrier-for-the-laplacian": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-subharmonic-and-superharmonic-functions-in-rn",
+     "source_section": "Definition",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and let $u:\\Omega\\to\\mathbb R$ belong to $C^2(\\Omega)$. With the Laplacian of [[def-laplacian-of-a-c2-function]], $u$ is **subharmonic** when $\\Delta u\\ge0$ at every point, and **superharmonic** when $\\Delta u\\le0$. Thus $u$ is harmonic exactly when both conditions hold, and $u$ is superharmonic exactly when $-u$ is subharmonic. Here a **domain** means a nonempty connected open set. This is the classical $C^2$ convention; the equivalence with local mean inequalities is established in the mean-inequality lemma.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-interior-sphere-condition-and-sphere-normal",
+     "source_section": "Definition",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and let $p\\in\\partial\\Omega$. An **interior tangent ball at $p$** is a ball $B_R(a)\\subset\\Omega$ with $R>0$ and $|p-a|=R$. Existence of such a ball is the **interior sphere condition**. Its supplied outward sphere direction is $\\nu=(p-a)/R$.\n\nFor a real function defined on $B_R(a)\\cup\\{p\\}$, the outward directional derivative, when the following finite limit exists, is\n$$\\partial_\\nu u(p)=\\lim_{t\\downarrow0}\\frac{u(p)-u(p-t\\nu)}t.$$\nThe points $p-t\\nu$ are in the ball for $0<t<2R$. This definition uses a specified sphere, without assuming a differentiable boundary or a normal field on all of $\\partial\\Omega$.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "The parameter $\\alpha$ is positive, so the denominator defining $c$ is positive. Substitution at radii $R/2$ and $R$ gives the two boundary values.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Writing $z=x-a$, Cartesian differentiation gives $\\partial_{ii}v=c(4\\alpha^2z_i^2-2\\alpha)e^{-\\alpha|z|^2}$ and hence $\\Delta v=2c\\alpha(2\\alpha|z|^2-n)e^{-\\alpha|z|^2}\\ge0$ on the closed annulus. This is subharmonicity.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "At $p$ on the outer sphere, the supplied direction is $\\nu=(p-a)/R$. The radial derivative gives $\\partial_\\nu v(p)=-2c\\alpha R e^{-\\alpha R^2}<0$, also equal to the one-sided quotient limit.",
+     "step": "3.1",
+     "inputs": [
+      "F2",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For lem interior sphere barrier for the laplacian, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 excludes alpha = 0 through alpha >= 2n/R^2."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.1 verifies exactly the normalized inner value 1."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For lem interior sphere barrier for the laplacian, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 allows alpha = 2n/R^2 and radius R/2; step 3.1 evaluates the outer endpoint R."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For lem interior sphere barrier for the laplacian, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For lem interior sphere barrier for the laplacian, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For lem interior sphere barrier for the laplacian, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is the exponential Laplacian sign, annular endpoints, and outward derivative convention. Steps 1.1–3.1 show c>0, compute Delta v=2c alpha(2 alpha |z|^2-n)e^{-alpha|z|^2} with the stated alpha threshold, verify both sphere values, and obtain the strictly negative one-sided outward derivative."
+   }
+  },
+  "thm-hopf-boundary-point-lemma-for-the-laplacian": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-interior-sphere-barrier-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, $R>0$, $a\\in\\mathbb R^n$ and $\\alpha\\ge2n/R^2$. Set\n$$c=(e^{-\\alpha R^2/4}-e^{-\\alpha R^2})^{-1},\\qquad v(x)=c(e^{-\\alpha|x-a|^2}-e^{-\\alpha R^2}).$$\nOn the annulus $R/2<|x-a|<R$, $v$ is subharmonic; it equals $1$ on the inner sphere and $0$ on the outer sphere. At every point of the outer sphere its outward sphere derivative is strictly negative.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-weak-maximum-principle-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open. If $u\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$ and $\\Delta u\\ge0$, then\n$$\\max_{\\overline\\Omega}u=\\max_{\\partial\\Omega}u.$$\nNo connectedness or boundary smoothness is required.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-heine-borel-rn",
+     "source_section": "Statement",
+     "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+     "uses": [
+      "2.2"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "thm-extreme-value-metric",
+     "source_section": "Statement",
+     "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+     "uses": [
+      "2.2"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "def-connected-space",
+     "source_section": "Definition",
+     "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]).\n\n- A **separation** of $X$ is an ordered pair $(U, V)$ of **open**, **nonempty**,\n  **disjoint** subsets of $X$ with $U \\cup V = X$.\n- $X$ is **disconnected** when a separation of $X$ exists, and **connected** when\n  none does.\n- A subset $A \\subseteq X$ is a **connected subset** of $X$ when the space\n  $(A, \\mathcal{T}_A)$ is connected, $\\mathcal{T}_A$ being the subspace topology\n  ([[def-subspace-topology-top]]). \"Disconnected subset\" is read the same way.\n\nSince $U$ and $V$ are complementary in $X$, each of them is closed as well as\nopen; so a separation is the same thing as a partition of $X$ into two nonempty\nclopen pieces ([[def-topological-space]]). The **clopen** subsets of $X$ are\nthose that are both open and closed, and $\\varnothing$ and $X$ are always among\nthem.\n\n**The empty space and the one-point space are connected in this library.**\nNeither admits a separation: a separation requires two nonempty disjoint sets\nwhose union is the whole space, and neither $\\varnothing$ nor a singleton can be\nwritten as such a union. So both are connected under the definition above,\nwithout any special clause. **This is a live convention fork** and the competing\nchoice is recorded in [[rem-connectedness-conventions]]; nothing on this page\ndepends on which is taken except the reading of the word \"connected\" applied to\nthose two spaces.\n\n**Connectedness is a property of a space, not of an ambient pair.** The condition\nabove mentions only $(X,\\mathcal{T})$. When it is applied to $A \\subseteq X$ it\nis applied to the space $(A, \\mathcal{T}_A)$, so it does not change if $A$ is\nregarded as a subspace of some other space inducing the same topology on $A$; in\nparticular a subset of $A$ is connected as a subset of $A$ exactly when it is\nconnected as a subset of $X$, by transitivity of the subspace topology\n([[def-subspace-topology-top]]). This is why \"connected\" may be used of a subset\nwith no ambient space named.\n\n**Spelled out for a subset.** $A \\subseteq X$ is disconnected exactly when there\nare open $U, V \\subseteq X$ with\n\n$$A \\subseteq U \\cup V, \\qquad U \\cap A \\ne \\varnothing, \\qquad V \\cap A \\ne \\varnothing, \\qquad U \\cap V \\cap A = \\varnothing,$$\n\nbecause the open sets of $(A,\\mathcal{T}_A)$ are precisely the traces $U \\cap A$.\nNote the last condition: it asks $U$ and $V$ to be disjoint **on $A$**, not in\n$X$. Requiring $U \\cap V = \\varnothing$ outright is a strictly stronger demand\nand is a different notion.\n\n**The two-point discrete space.** Write $\\mathbf{2} := \\{0,1\\}$ with the discrete\ntopology ([[def-standard-topologies]]), in which every subset is open. A\nseparation of $X$ is the same datum as a surjective continuous map\n$X \\to \\mathbf{2}$ ([[def-continuous-map-top]]): given $(U,V)$, the map sending\n$U$ to $0$ and $V$ to $1$ is continuous because the preimage of each of the four\nopen subsets of $\\mathbf{2}$ is one of $\\varnothing$, $U$, $V$, $X$; given a\nsurjective continuous $\\chi : X \\to \\mathbf{2}$, the pair\n$(\\chi^{-1}[\\{0\\}], \\chi^{-1}[\\{1\\}])$ is a separation. This reformulation is\nproved as a theorem on this page and is recorded here only to name $\\mathbf{2}$.\n\n**Separated sets.** Two subsets $A_1, A_2 \\subseteq X$ are **separated in $X$**\nwhen\n\n$$\\overline{A_1} \\cap A_2 = \\varnothing \\qquad \\text{and} \\qquad A_1 \\cap \\overline{A_2} = \\varnothing,$$\n\nclosures taken in $X$ ([[def-interior-closure-boundary-top]],\n[[thm-closure-characterisation-top]]). Separated sets are disjoint, since\n$A_1 \\subseteq \\overline{A_1}$; the converse fails. This is verbatim the\ncondition [[def-connected-r]] uses on the real line, transported to an arbitrary\nspace, and the theorem relating it to the definition above is the next lemma on\nthis page.\n\n**Totally disconnected spaces, and the empty case.** The vocabulary for a space\nall of whose connected subsets are single points is fixed later on this page,\ntogether with the components; it is not defined here because it is stated in\nterms of components.",
+     "uses": [
+      "1.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "On the compact inner sphere, continuity and strict inequality give $\\varepsilon=M-\\max_{|x-a|=R/2}u(x)>0$. Take the exponential barrier $v$, equal to one on that sphere and zero on the outer sphere.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-1-2",
+     "claim": "Here is the additional Hopf route to the strong subharmonic principle. Suppose $U$ is a domain and $f\\in C^2(U)$ satisfies $\\Delta f\\ge0$ and $f\\le M$ in $U$, and $E=\\{f=M\\}$ is nonempty but not all of $U$. It is relatively closed. Its complement $G$ is nonempty open, and some $y\\in E$ is a relative boundary point of $G$; otherwise $E$ and $G$ would separate $U$. Choose $d>0$ with $\\overline B_d(y)\\subset U$ and $x\\in G$ with $|x-y|<d/4$.",
+     "step": "1.2",
+     "inputs": [
+      "F5",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Continuity from inside the tangent ball gives $u\\le M$ on its entire outer sphere. On the annulus, $w=u+\\varepsilon v-M$ is subharmonic and continuous on the closure, and its values are at most zero on both boundary spheres. The weak maximum principle gives $w\\le0$ throughout the annulus.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-2-2",
+     "claim": "Set $r=\\inf_{z\\in E}|x-z|$. Openness of $G$ gives $r>0$, and $r\\le|x-y|<d/4$. A closest point $q\\in E$ exists: minimize distance on the nonempty compact set $E\\cap\\overline B_{d/2}(y)$; points of $E$ outside this set have distance from $x$ greater than $d/4$, so this also minimizes over all of $E$. The ball $B_r(x)$ lies in $G$, its closure lies in $U$, and $q$ is on its sphere.",
+     "step": "2.2",
+     "inputs": [
+      "F3",
+      "F4",
+      "step 1.2",
+      "algebra",
+      "1.2"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "For $0<t<R/2$, $u(p)-u(p-t\\nu)\\ge\\varepsilon v(p-t\\nu)$. Divide by $t>0$ and pass to the assumed finite limit: $\\partial_\\nu u(p)\\ge-\\varepsilon\\partial_\\nu v(p)>0$.",
+     "step": "3.1",
+     "inputs": [
+      "F1",
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    },
+    {
+     "id": "derive-4-1",
+     "claim": "Apply the boundary conclusion already proved in step 3.1 to $f$ on $G$, with this tangent ball and boundary point $q$. It gives a positive outward derivative. But $q\\in U$ is an interior maximum of the differentiable function $f$, so all its first derivatives are zero and this directional derivative is zero. Therefore $E=U$ and $f$ is constant. This alternative uses no mean inequality.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1",
+      "step 2.2",
+      "algebra",
+      "3.1",
+      "2.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For thm hopf boundary point lemma for the laplacian, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 requires a strictly positive gap; constant functions cannot satisfy u < M."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For thm hopf boundary point lemma for the laplacian, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For thm hopf boundary point lemma for the laplacian, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 2.1–3.1 use the full annular boundary and the one-sided derivative at p."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.1 selects the maximum on a nonempty compact inner sphere."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For thm hopf boundary point lemma for the laplacian, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For thm hopf boundary point lemma for the laplacian, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "CRITICAL risk is boundary geometry, strictness, sign orientation, and the auxiliary strong-principle route. Steps 1.1–3.1 choose a positive inner-sphere gap, apply the exact subharmonic barrier and weak maximum principle, and convert its negative outward derivative into positive derivative of u. Steps 1.2, 2.2, and 4.1 correctly construct a tangent ball inside the complement and cover the connectedness edge case."
+   }
+  },
+  "thm-harnack-inequality-on-a-ball": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "cor-ball-mean-value-property-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Under [[thm-spherical-mean-value-property-for-harmonic-functions]], $u(x)=A_u(x,r)$ for every $B_r(x)\\Subset\\Omega$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-sphere-and-ball-measures-scale",
+     "source_section": "Statement",
+     "quote": "For $n\\ge1$ and $r>0$, $|\\partial B_r|=\\omega_{n-1}r^{n-1}$ and $|B_r|=\\omega_{n-1}r^n/n$; both factors are finite and positive.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Fix $d=|x-a|$ and $d<s<R$. The closed ball of radius $s-d$ centered at $x$ lies in $B_R(a)$, and its open ball lies in $B_s(a)$. Nonnegativity and the ball mean property yield $u(x)\\le |B_{s-d}|^{-1}\\int_{B_s(a)}u=(s/(s-d))^n u(a)$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Let $s\\uparrow R$ to obtain the first inequality. It is also valid for $x=a$, with equality. No integral at radius $R$ is needed.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "For $|x-a|\\le r<R$, divide the segment from $a$ to $x$ into $m$ equal steps. Each has length at most $(R-r)/4$. Every segment point centers a ball of radius $\\rho=(R-r)/2$ inside $B_R(a)$. Apply the first inequality from each endpoint of a step to the other, using these radius-$\\rho$ balls: either value is at most $2^n$ times the other. Multiplying along the $m$ steps proves both comparisons with $C$. This uses no division by a value of $u$, so also covers $u(a)=0$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    },
+    {
+     "id": "derive-4-1",
+     "claim": "An additional consequence is Gantumur’s growth estimate. If an entire harmonic $u$ satisfies $u(x)\\ge-p(|x|)$ for a nonnegative nondecreasing function $p$, fix $r=|x|>0$ and apply the first inequality to $u+p(2r)\\ge0$ on $B_{2r}(0)$. It gives $u(x)\\le2^n(u(0)+p(2r))-p(2r)\\le2^n(u(0)+p(2r))$. At $x=0$ the sharper expression after subtracting $p(0)$ gives the same conclusion, since $u(0)+p(0)\\ge0$.",
+     "step": "4.1",
+     "inputs": [
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For thm harnack inequality on a ball, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 2.1–3.1 handle x = a, r = 0 and zero harmonic values without division; step 4.1 handles the growth estimate at zero."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 2.1 has comparison factor 1 at x = a."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For thm harnack inequality on a ball, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 pass through s < R; the statement excludes r = R."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 3.1 gives an explicit finite segment subdivision, independent of u."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For thm harnack inequality on a ball, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For thm harnack inequality on a ball, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is use of only interior balls, the explicit finite-chain constant, zero functions, and the R endpoint. Steps 1.1–2.1 derive the pointwise factor on radii s<R and pass to R without a boundary trace; step 3.1 uses balls of radius (R-r)/2 along an m-step segment and compares in both directions without dividing by u(a)."
+   }
+  },
+  "lem-finite-harnack-chain-on-a-compact-connected-subset": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-connected-space",
+     "source_section": "Definition",
+     "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]).\n\n- A **separation** of $X$ is an ordered pair $(U, V)$ of **open**, **nonempty**,\n  **disjoint** subsets of $X$ with $U \\cup V = X$.\n- $X$ is **disconnected** when a separation of $X$ exists, and **connected** when\n  none does.\n- A subset $A \\subseteq X$ is a **connected subset** of $X$ when the space\n  $(A, \\mathcal{T}_A)$ is connected, $\\mathcal{T}_A$ being the subspace topology\n  ([[def-subspace-topology-top]]). \"Disconnected subset\" is read the same way.\n\nSince $U$ and $V$ are complementary in $X$, each of them is closed as well as\nopen; so a separation is the same thing as a partition of $X$ into two nonempty\nclopen pieces ([[def-topological-space]]). The **clopen** subsets of $X$ are\nthose that are both open and closed, and $\\varnothing$ and $X$ are always among\nthem.\n\n**The empty space and the one-point space are connected in this library.**\nNeither admits a separation: a separation requires two nonempty disjoint sets\nwhose union is the whole space, and neither $\\varnothing$ nor a singleton can be\nwritten as such a union. So both are connected under the definition above,\nwithout any special clause. **This is a live convention fork** and the competing\nchoice is recorded in [[rem-connectedness-conventions]]; nothing on this page\ndepends on which is taken except the reading of the word \"connected\" applied to\nthose two spaces.\n\n**Connectedness is a property of a space, not of an ambient pair.** The condition\nabove mentions only $(X,\\mathcal{T})$. When it is applied to $A \\subseteq X$ it\nis applied to the space $(A, \\mathcal{T}_A)$, so it does not change if $A$ is\nregarded as a subspace of some other space inducing the same topology on $A$; in\nparticular a subset of $A$ is connected as a subset of $A$ exactly when it is\nconnected as a subset of $X$, by transitivity of the subspace topology\n([[def-subspace-topology-top]]). This is why \"connected\" may be used of a subset\nwith no ambient space named.\n\n**Spelled out for a subset.** $A \\subseteq X$ is disconnected exactly when there\nare open $U, V \\subseteq X$ with\n\n$$A \\subseteq U \\cup V, \\qquad U \\cap A \\ne \\varnothing, \\qquad V \\cap A \\ne \\varnothing, \\qquad U \\cap V \\cap A = \\varnothing,$$\n\nbecause the open sets of $(A,\\mathcal{T}_A)$ are precisely the traces $U \\cap A$.\nNote the last condition: it asks $U$ and $V$ to be disjoint **on $A$**, not in\n$X$. Requiring $U \\cap V = \\varnothing$ outright is a strictly stronger demand\nand is a different notion.\n\n**The two-point discrete space.** Write $\\mathbf{2} := \\{0,1\\}$ with the discrete\ntopology ([[def-standard-topologies]]), in which every subset is open. A\nseparation of $X$ is the same datum as a surjective continuous map\n$X \\to \\mathbf{2}$ ([[def-continuous-map-top]]): given $(U,V)$, the map sending\n$U$ to $0$ and $V$ to $1$ is continuous because the preimage of each of the four\nopen subsets of $\\mathbf{2}$ is one of $\\varnothing$, $U$, $V$, $X$; given a\nsurjective continuous $\\chi : X \\to \\mathbf{2}$, the pair\n$(\\chi^{-1}[\\{0\\}], \\chi^{-1}[\\{1\\}])$ is a separation. This reformulation is\nproved as a theorem on this page and is recorded here only to name $\\mathbf{2}$.\n\n**Separated sets.** Two subsets $A_1, A_2 \\subseteq X$ are **separated in $X$**\nwhen\n\n$$\\overline{A_1} \\cap A_2 = \\varnothing \\qquad \\text{and} \\qquad A_1 \\cap \\overline{A_2} = \\varnothing,$$\n\nclosures taken in $X$ ([[def-interior-closure-boundary-top]],\n[[thm-closure-characterisation-top]]). Separated sets are disjoint, since\n$A_1 \\subseteq \\overline{A_1}$; the converse fails. This is verbatim the\ncondition [[def-connected-r]] uses on the real line, transported to an arbitrary\nspace, and the theorem relating it to the definition above is the next lemma on\nthis page.\n\n**Totally disconnected spaces, and the empty case.** The vocabulary for a space\nall of whose connected subsets are single points is fixed later on this page,\ntogether with the components; it is not defined here because it is stated in\nterms of components.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-heine-borel-rn",
+     "source_section": "Statement",
+     "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Call a ball admissible if its radius is positive and its fourfold closed ball lies in $\\Omega$. Every point centers such a ball by openness. Fix one admissible base ball, using nonemptiness of $\\Omega$. Let $E$ be the union of all admissible balls joined to it by a finite sequence of overlapping admissible balls.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "The set $E$ is nonempty and open. If $x\\in\\Omega$ is a relative closure point of $E$, an admissible ball centered at $x$ meets $E$, hence meets a ball in one of the finite sequences. Appending the new ball proves it is in the reachable family and $x\\in E$. Thus $E$ is relatively closed, and connectedness implies $E=\\Omega$.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "Compactness gives a finite subcover of $K$ by admissible balls. Each selected ball meets a reachable ball by the preceding conclusion, and can be appended to a finite sequence from the base. Take the union of these finitely many finite sequences together with the base ball. The resulting finite family covers $K$ and its overlap graph is connected. If $K$ is empty, take just the base ball. All its fourfold closed balls are compact by Heine–Borel and remain in $\\Omega$.",
+     "step": "3.1",
+     "inputs": [
+      "F2",
+      "step 2.1",
+      "given",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 3.1 treats empty K with one base ball; nonempty Omega remains required."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "There is no independent zero-parameter specialization in this statement."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 3.1 permits a single-ball graph, including singleton K."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.1 makes each radius positive and never assumes K itself has interior or is path connected."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "For lem finite harnack chain on a compact connected subset, there is no interval endpoint or boundary-trace conclusion in this statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Steps 1.1–3.1 use a base point and finitely many chains after a finite subcover; the construction contains no infinite sequence of choices."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For lem finite harnack chain on a compact connected subset, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For lem finite harnack chain on a compact connected subset, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cor-harnack-inequality-on-compact-subsets": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-harnack-inequality-on-a-ball",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, $R>0$, and let $u\\ge0$ be harmonic on $B_R(a)\\subset\\mathbb R^n$. For every $x\\in B_R(a)$,\n$$u(x)\\le\\left(\\frac R{R-|x-a|}\\right)^n u(a).$$\nFor $0\\le r<R$, set $m=\\lceil4r/(R-r)\\rceil+1$ and $C=2^{nm}$. Then $C^{-1}u(a)\\le u(x)\\le Cu(a)$ whenever $|x-a|\\le r$. No trace on $\\partial B_R(a)$ is assumed.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-finite-harnack-chain-on-a-compact-connected-subset",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a domain, and let $K\\subset\\Omega$ be compact, possibly empty or disconnected. There is a finite nonempty family $\\{B_{r_j}(a_j)\\}_{j=1}^N$ covering $K$, with $r_j>0$ and $\\overline B_{4r_j}(a_j)\\subset\\Omega$, whose overlap graph is connected. An edge means that the two open balls intersect. The family depends only on $K$ and $\\Omega$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "cor-nonnegative-harmonic-function-with-an-interior-zero-vanishes",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and let $u\\ge0$ be harmonic on a domain $\\Omega\\subseteq\\mathbb R^n$. Then either $u\\equiv0$ or $u(x)>0$ for every $x\\in\\Omega$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "If $u$ has an interior zero, it vanishes throughout $\\Omega$, and the inequality is immediate. Otherwise it is strictly positive. Fix the finite admissible-ball family of the chain lemma, of size $N$, independently of $u$.",
+     "step": "1.1",
+     "inputs": [
+      "F2",
+      "F3",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "If $x,y\\in B_r(a)$ from this family, then $B_{3r}(y)\\subset B_{4r}(a)\\subset\\Omega$ and $|x-y|<2r$. Ball Harnack gives $u(x)\\le3^n u(y)$. Thus any two points of one of the small balls are comparable by the same constant.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "For $x,y\\in K$, connect balls containing them by a simple path in the finite connected graph, with at most $N$ vertices. Choose one point in each of its finitely many overlaps and apply the local comparison in successive balls. It gives $u(x)\\le3^{nN}u(y)$. Taking the supremum in $x$ and the infimum in $y$ proves the claim with $C=3^{nN}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The statement excludes empty K because it takes ordinary real extrema."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 discharges the identically zero case."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 3.1 permits x = y, singleton K and N = 1."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cor harnack inequality on compact subsets, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "For cor harnack inequality on compact subsets, there is no interval endpoint or boundary-trace conclusion in this statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 3.1 selects only finitely many overlap points in known nonempty intersections."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cor harnack inequality on compact subsets, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cor harnack inequality on compact subsets, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is disconnected K, the zero-function case, and chaining constants. Steps 1.1–3.1 first separate the identically-zero case, use the exact finite connected overlap cover independent of u, compare points within each ball by 3^n, and multiply along a simple graph path of at most N vertices. Nonempty compact K is retained."
+   }
+  },
+  "thm-harnack-convergence-principle": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "cor-harnack-inequality-on-compact-subsets",
+     "source_section": "Statement",
+     "quote": "For $n\\ge2$, a domain $\\Omega\\subseteq\\mathbb R^n$ and a nonempty compact $K\\subset\\Omega$, there is $C=C(K,\\Omega,n)\\ge1$ such that every nonnegative harmonic function $u$ on $\\Omega$ satisfies\n$$\\sup_Ku\\le C\\inf_Ku.$$\nThe compact set $K$ need not be connected.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic",
+     "source_section": "Statement",
+     "quote": "If harmonic $u_j$ converge locally uniformly on $\\Omega$ to $u$, then $u$ is harmonic.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "If no point has a bounded-above scalar sequence $u_j(x)$, each scalar sequence is increasing and unbounded above, hence tends to $+\\infty$. Otherwise fix $a\\in\\Omega$ at which it is bounded above; there $u_j(a)$ converges to a finite real number.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "For any nonempty compact $K\\subset\\Omega$, apply compact Harnack on $K\\cup\\{a\\}$ to the harmonic nonnegative difference $u_j-u_i$, $j\\ge i$. It yields $\\sup_K|u_j-u_i|\\le C(u_j(a)-u_i(a))$. The right side tends to zero as $i,j\\to\\infty$, uniformly in those indices.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "The real completeness property gives a pointwise limit, and the uniform Cauchy bound proves convergence uniformly on $K$. Empty compact sets impose no condition. Since $K$ was arbitrary, convergence is locally uniform and the harmonic-limit theorem makes the limit harmonic.",
+     "step": "3.1",
+     "inputs": [
+      "F2",
+      "step 2.1",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 3.1 treats empty compact sets as vacuous."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 allows u_j - u_i = 0, including stationary sequences."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 include singleton compact sets and the selected base point."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For thm harnack convergence principle, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 distinguishes a finite scalar limit from positive-infinity divergence."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.1 selects one point only in the bounded branch; step 2.1 adjoins it to each compact set."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For thm harnack convergence principle, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For thm harnack convergence principle, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is the exhaustive alternative and local-uniform Cauchy argument. Step 1.1 distinguishes pointwise divergence everywhere from one bounded base point; step 2.1 applies compact Harnack to nonnegative harmonic differences on K union {a}; step 3.1 uses real completeness and the exact locally-uniform harmonic-limit theorem, including empty compact sets."
+   }
+  },
+  "lem-smooth-sphere-data-have-a-harmonic-replacement": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-laplacian-of-a-c2-function",
+     "source_section": "Definition",
+     "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $f:U\\to\\mathbb R$ be $C^2$ in the sense of [[def-ck-and-multi-index-notation-in-several-variables]]. Then $\\nabla f$ is a $C^1$ field on $U$ by [[def-ck-euclidean-maps-and-diffeomorphisms]], since each of its components $\\partial_if$ has continuous first partial derivatives, so its divergence is defined; the **Laplacian** of $f$ is\n\n$$\\Delta f:=\\operatorname{div}\\nabla f=\\sum_{i<n}\\partial_i\\partial_if,$$\n\nwith the gradient of [[def-jacobian-matrix-and-gradient]] and the divergence of [[def-divergence-and-curl-of-a-c1-vector-field]]. A $C^2$ function with $\\Delta f=0$ on $U$ is called **harmonic** on $U$.\n\nFor a $C^2$ map $F=(F_0,\\ldots,F_{q-1}):U\\to\\mathbb R^q$, whose components are $C^2$ by [[def-ck-euclidean-maps-and-diffeomorphisms]], $\\Delta F$ is the field whose $i$th coordinate is $\\Delta F_i$. In the three-coordinate naming of this page, $\\Delta f=\\partial_x\\partial_xf+\\partial_y\\partial_yf+\\partial_z\\partial_zf$ and $\\Delta F=(\\Delta F_x,\\Delta F_y,\\Delta F_z)$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-sphere-and-ball-measures-scale",
+     "source_section": "Statement",
+     "quote": "For $n\\ge1$ and $r>0$, $|\\partial B_r|=\\omega_{n-1}r^{n-1}$ and $|B_r|=\\omega_{n-1}r^n/n$; both factors are finite and positive.",
+     "uses": [
+      "1.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-spherical-mean-value-property-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "If $u\\in C^2(\\Omega)$ and $\\Delta u=0$, then $u(x)=M_u(x,r)$ whenever $B_r(x)\\Subset\\Omega$.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "cor-uniqueness-for-the-classical-dirichlet-problem",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open. Two functions $u,v\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$ with $\\Delta u=\\Delta v$ in $\\Omega$ and $u=v$ on $\\partial\\Omega$ agree on $\\overline\\Omega$. Thus prescribed classical Poisson equation and Dirichlet data have at most one such solution. Moreover, for equal Laplacians,\n$$\\sup_{\\overline\\Omega}|u-v|\\le\\sup_{\\partial\\Omega}|u-v|.$$\nIn particular, a sequence of such solutions with a common Laplacian and uniformly convergent boundary traces converges uniformly on the closure.",
+     "uses": [
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "thm-dominated-convergence",
+     "source_section": "Statement",
+     "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Translate $a$ to zero. Put $q=|x-y|$, $A=R^2-|x|^2$, and $P(x,y)=Aq^{-n}/(R\\omega_{n-1})$, where $|y|=R$. The sphere has finite positive measure $\\omega_{n-1}R^{n-1}$. On compact interior sets $q$ is bounded away from zero; all $x$-derivatives of the kernel times bounded $g$ have a constant integrable majorant. The mean value theorem bounds their difference quotients likewise. Dominated convergence therefore permits differentiation of every order under the sphere integral and proves continuity of those derivatives.",
+     "step": "1.1",
+     "inputs": [
+      "F2",
+      "F5",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Cartesian differentiation gives $\\nabla q^{-n}=-n(x-y)q^{-n-2}$, $\\Delta q^{-n}=2nq^{-n-2}$ and $\\Delta A=-2n$. The product rule gives $\\Delta(Aq^{-n})=2nq^{-n-2}(A-q^2+2x\\cdot(x-y))=2nq^{-n-2}(R^2-|y|^2)=0$. Thus both $h$ and $I(x)=\\int P(x,y)\\,dS(y)$ are smooth harmonic functions.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "Rotation invariance of surface measure and the kernel makes $I$ constant on each sphere centered at zero. Its spherical mean equals $I(0)$ by harmonic mean values; since it is already constant on that sphere, $I(x)=I(0)$. At zero, $P(0,y)=1/(\\omega_{n-1}R^{n-1})$, so $I(0)=1$. Also $P>0$ in the ball.",
+     "step": "3.1",
+     "inputs": [
+      "F2",
+      "F3",
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    },
+    {
+     "id": "derive-4-1",
+     "claim": "Fix $p\\in\\partial B_R$. The mass identity gives $h(x)-g(p)=\\int P(x,y)(g(y)-g(p))\\,dS(y)$. For a given $\\varepsilon>0$, take $\\delta>0$ so that $|g(y)-g(p)|<\\varepsilon$ when $|y-p|<\\delta$. That part of the integral has absolute value at most $\\varepsilon$. On the remaining sphere, if $|x-p|<\\delta/2$, then $|x-y|\\ge\\delta/2$, and $P(x,y)\\le(R^2-|x|^2)/(R\\omega_{n-1}(\\delta/2)^n)$ uniformly tends to zero. The remaining integral is bounded by this supremum times $2\\|g\\|_\\infty|\\partial B_R|$. Thus $h(x)\\to g(p)$, proving continuity on the closed ball.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1",
+      "algebra",
+      "3.1"
+     ]
+    },
+    {
+     "id": "derive-5-1",
+     "claim": "Any two such harmonic replacements have identical boundary data on a bounded ball and are continuous on its closure, so classical Dirichlet uniqueness makes them equal. Translation restores the stated formula at $a$.",
+     "step": "5.1",
+     "inputs": [
+      "F4",
+      "step 4.1",
+      "4.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For lem smooth sphere data have a harmonic replacement, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 3.1 computes the center x = a explicitly; zero g yields zero h by the integral."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 3.1 proves unit kernel mass, so constant datum 1 gives h = 1."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For lem smooth sphere data have a harmonic replacement, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 4.1 proves the boundary limit without putting a boundary point into the singular kernel."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 4.1 obtains delta from continuity at a supplied sphere point."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For lem smooth sphere data have a harmonic replacement, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For lem smooth sphere data have a harmonic replacement, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "CRITICAL risk is kernel normalization, differentiation under the integral, harmonicity, boundary convergence, and uniqueness. Steps 1.1–5.1 supply compact interior majorants, compute the Laplacian exactly, normalize via spherical means, prove boundary convergence by near/far splitting, and invoke exact Dirichlet uniqueness. R>0 and positive finite sphere measure are explicit."
+   }
+  },
+  "lem-derivative-estimate-proof-of-one-sided-harmonic-liouville": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-smooth-sphere-data-have-a-harmonic-replacement",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, $a\\in\\mathbb R^n$, $R>0$, and $g\\in C^\\infty(\\partial B_R(a))$ be real. Write $\\omega_{n-1}=|S^{n-1}|$. There is a unique $h\\in C^\\infty(B_R(a))\\cap C(\\overline B_R(a))$ harmonic inside and equal to $g$ on the sphere. It is\n$$h(x)=\\int_{\\partial B_R(a)}\\frac{R^2-|x-a|^2}{R\\omega_{n-1}|x-y|^n}\\,g(y)\\,dS(y),\\qquad |x-a|<R.$$\nThe kernel is positive and has integral one at each interior point.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-derivatives-of-harmonic-functions-are-harmonic",
+     "source_section": "Statement",
+     "quote": "Every partial derivative of a smooth harmonic function is smooth harmonic. If $\\Delta T=0$, every distributional derivative of $T$ is induced by the corresponding smooth harmonic derivative.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "cor-ball-mean-value-property-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Under [[thm-spherical-mean-value-property-for-harmonic-functions]], $u(x)=A_u(x,r)$ for every $B_r(x)\\Subset\\Omega$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "thm-continuous-mean-value-functions-are-harmonic",
+     "source_section": "Statement",
+     "quote": "If $u\\in C(\\Omega)$ has the ball mean-value property, then $u\\in C^\\infty(\\Omega)$ and $\\Delta u=0$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "The ball mean property and the continuous mean-value theorem make $u$ smooth. Its partial derivatives are therefore harmonic by the smooth derivative lemma, whose smoothness hypothesis is now satisfied.",
+     "step": "1.1",
+     "inputs": [
+      "F2",
+      "F3",
+      "F4",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "On every sphere of radius $0<s<R$, the trace of $u$ is smooth. Harmonic replacement and uniqueness represent $u$ inside the smaller ball by this trace. Differentiate the kernel at its center and write $y=a+s\\theta$. It gives $\\nabla u(a)=\\frac n s\\frac1{|\\partial B_s|}\\int_{\\partial B_s(a)}u(y)\\theta\\,dS(y)$, while the undifferentiated center formula gives $u(a)=|\\partial B_s|^{-1}\\int_{\\partial B_s(a)}u$. Derivative passage is justified by the same compact-sphere bounds as in replacement.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "Taking vector norms and using $|\\theta|=1$ bounds the gradient by $(n/s)$ times the average of $|u|$. This is at most $nS/s$ in the bounded signed case, and exactly $nu(a)/s$ as an upper bound in the nonnegative case. Let $s\\uparrow R$ to obtain both estimates.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    },
+    {
+     "id": "derive-4-1",
+     "claim": "For a nonnegative entire harmonic function, the positive estimate holds at each fixed $a$ for every $R>0$. Let $R\\to\\infty$ to obtain $\\nabla u(a)=0$. This is also a second route to one-sided Liouville after shifting and, if necessary, negating the function.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1",
+      "algebra",
+      "3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For lem derivative estimate proof of one sided harmonic liouville, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 3.1 includes S = 0 or u(a) = 0 without dividing by either."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For lem derivative estimate proof of one sided harmonic liouville, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For lem derivative estimate proof of one sided harmonic liouville, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 2.1–3.1 use s < R before taking s up to R; step 4.1 takes R to infinity."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.1 uses any positive s < R, with no boundary trace at R required."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For lem derivative estimate proof of one sided harmonic liouville, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For lem derivative estimate proof of one sided harmonic liouville, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "CRITICAL risk is smoothness bootstrapping, differentiating the Poisson kernel, the s↑R endpoint, and absence of a finite supremum for u≥0. Steps 1.1–3.1 cite the exact mean-value smoothness and derivative facts and bound the center gradient by the sphere average; step 4.1 lets arbitrary finite R tend to infinity pointwise."
+   }
+  },
+  "thm-liouville-theorem-for-bounded-harmonic-functions": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-harnack-inequality-on-a-ball",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, $R>0$, and let $u\\ge0$ be harmonic on $B_R(a)\\subset\\mathbb R^n$. For every $x\\in B_R(a)$,\n$$u(x)\\le\\left(\\frac R{R-|x-a|}\\right)^n u(a).$$\nFor $0\\le r<R$, set $m=\\lceil4r/(R-r)\\rceil+1$ and $C=2^{nm}$. Then $C^{-1}u(a)\\le u(x)\\le Cu(a)$ whenever $|x-a|\\le r$. No trace on $\\partial B_R(a)$ is assumed.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "If $u\\ge b$, set $v=u-b$; if $u\\le b$, set $v=b-u$. In either situation $v$ is nonnegative and entire harmonic.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Fix $x,y\\in\\mathbb R^n$. For every $R>|x-y|$, ball Harnack at center $y$ gives $v(x)\\le(R/(R-|x-y|))^n v(y)$. Let $R\\to\\infty$ to obtain $v(x)\\le v(y)$. Interchanging $x,y$ gives equality. Therefore $v$, and hence $u$, is constant.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For thm liouville theorem for bounded harmonic functions, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 is valid even when v(y) = 0."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 2.1 takes the Harnack factor to 1."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For thm liouville theorem for bounded harmonic functions, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 uses arbitrarily large finite radii before the infinity limit."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For thm liouville theorem for bounded harmonic functions, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For thm liouville theorem for bounded harmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For thm liouville theorem for bounded harmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cor-positive-entire-harmonic-functions-are-constant": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-liouville-theorem-for-bounded-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and $u:\\mathbb R^n\\to\\mathbb R$ be harmonic. If $u$ is bounded above or bounded below on all of $\\mathbb R^n$, then $u$ is constant.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Nonnegativity is a global lower bound by the finite real number zero.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "The one-sided Liouville theorem therefore applies and yields constancy. The constant may be zero.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cor positive entire harmonic functions are constant, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 explicitly retain the zero function."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cor positive entire harmonic functions are constant, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cor positive entire harmonic functions are constant, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "For cor positive entire harmonic functions are constant, there is no interval endpoint or boundary-trace conclusion in this statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cor positive entire harmonic functions are constant, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cor positive entire harmonic functions are constant, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cor positive entire harmonic functions are constant, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cor-entire-harmonic-functions-with-bounded-gradient-are-affine": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-derivatives-of-harmonic-functions-are-harmonic",
+     "source_section": "Statement",
+     "quote": "Every partial derivative of a smooth harmonic function is smooth harmonic. If $\\Delta T=0$, every distributional derivative of $T$ is induced by the corresponding smooth harmonic derivative.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-liouville-theorem-for-bounded-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and $u:\\mathbb R^n\\to\\mathbb R$ be harmonic. If $u$ is bounded above or bounded below on all of $\\mathbb R^n$, then $u$ is constant.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "cor-ball-mean-value-property-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Under [[thm-spherical-mean-value-property-for-harmonic-functions]], $u(x)=A_u(x,r)$ for every $B_r(x)\\Subset\\Omega$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "thm-continuous-mean-value-functions-are-harmonic",
+     "source_section": "Statement",
+     "quote": "If $u\\in C(\\Omega)$ has the ball mean-value property, then $u\\in C^\\infty(\\Omega)$ and $\\Delta u=0$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "The ball mean property and the continuous mean-value theorem give smoothness of $u$. Each $\\partial_i u$ is therefore an entire harmonic function; boundedness of the gradient bounds its absolute value. Liouville makes it a constant $c_i$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "For fixed $x$, the fundamental theorem along the segment $t\\mapsto tx$ gives $u(x)-u(0)=\\int_0^1\\nabla u(tx)\\cdot x\\,dt=c\\cdot x$. Set $b=u(0)$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cor entire harmonic functions with bounded gradient are affine, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 includes c = 0 and b = 0."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cor entire harmonic functions with bounded gradient are affine, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cor entire harmonic functions with bounded gradient are affine, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 integrates the full segment from 0 to x, including x = 0."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cor entire harmonic functions with bounded gradient are affine, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cor entire harmonic functions with bounded gradient are affine, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cor entire harmonic functions with bounded gradient are affine, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is that the derivatives must themselves be entire harmonic and that a constant gradient yields a global affine formula. Step 1.1 obtains smoothness from the exact mean-value theorem, applies derivative harmonicity and one-sided Liouville to each bounded derivative, and step 2.1 integrates along the full segment from 0 to x, including x=0."
+   }
+  },
+  "cor-removable-singularity-for-bounded-harmonic-functions": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-smooth-sphere-data-have-a-harmonic-replacement",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, $a\\in\\mathbb R^n$, $R>0$, and $g\\in C^\\infty(\\partial B_R(a))$ be real. Write $\\omega_{n-1}=|S^{n-1}|$. There is a unique $h\\in C^\\infty(B_R(a))\\cap C(\\overline B_R(a))$ harmonic inside and equal to $g$ on the sphere. It is\n$$h(x)=\\int_{\\partial B_R(a)}\\frac{R^2-|x-a|^2}{R\\omega_{n-1}|x-y|^n}\\,g(y)\\,dS(y),\\qquad |x-a|<R.$$\nThe kernel is positive and has integral one at each interior point.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-comparison-principle-for-classical-subharmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open, and let $u,v\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$. If $\\Delta u\\ge\\Delta v$ in $\\Omega$ and $u\\le v$ on $\\partial\\Omega$, then $u\\le v$ on $\\overline\\Omega$.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "cor-ball-mean-value-property-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Under [[thm-spherical-mean-value-property-for-harmonic-functions]], $u(x)=A_u(x,r)$ for every $B_r(x)\\Subset\\Omega$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "thm-continuous-mean-value-functions-are-harmonic",
+     "source_section": "Statement",
+     "quote": "If $u\\in C(\\Omega)$ has the ball mean-value property, then $u\\in C^\\infty(\\Omega)$ and $\\Delta u=0$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Translate $p=0$ and choose $0<R<1$ so that $\\overline B_R\\subset\\Omega$. On the punctured domain, ball mean values and the smoothness theorem make $u$ smooth; its trace on $\\partial B_R$ is smooth. Let $h$ be its harmonic replacement on $B_R$, and $w=u-h$. Then $w$ is harmonic off zero and vanishes on the outer sphere. The replacement is bounded on the closed ball.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F3",
+      "F4",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "For $0<\\delta<R$, put $A_\\delta=\\max_{|x|=\\delta}|w(x)|$, a finite nonnegative number. On $\\delta<r=|x|<R$ take $\\phi_\\delta(x)=A_\\delta(\\delta/r)^{n-2}$ if $n\\ge3$, and $\\phi_\\delta(x)=A_\\delta\\log(R/r)/\\log(R/\\delta)$ if $n=2$. For radial $f$, differentiation of $\\partial_i f(r)=f\\prime(r)x_i/r$ gives $\\Delta f=f\\prime\\prime+(n-1)f\\prime/r$. Substitution proves $\\Delta\\phi_\\delta=0$ in both dimensions. Each barrier equals $A_\\delta$ on the inner sphere and is nonnegative on the outer sphere.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "Comparison on the bounded annulus applied separately to $w$ and $-w$ against $\\phi_\\delta$ yields $|w(x)|\\le\\phi_\\delta(x)$. In the bounded case $A_\\delta$ remains uniformly bounded for small $\\delta$. At fixed $x\\ne0$, the factor $\\delta^{n-2}$ tends to zero for $n\\ge3$, and the denominator $\\log(R/\\delta)$ tends to infinity for $n=2$. Thus $w(x)=0$.",
+     "step": "3.1",
+     "inputs": [
+      "F2",
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    },
+    {
+     "id": "derive-4-1",
+     "claim": "Under the stronger stated little-o hypotheses, $A_\\delta=o(\\delta^{2-n})$ or $A_\\delta=o(\\log(1/\\delta))$, because $h$ is bounded. The same barrier bound again tends to zero at each fixed nonzero $x$. Hence $u=h$ on the punctured ball in either case. Define $u(0)=h(0)$ and retain the original $u$ outside the ball; equality on their overlap proves harmonicity locally everywhere. Any continuous extension must have this value at zero, proving uniqueness.",
+     "step": "4.1",
+     "inputs": [
+      "step 1.1",
+      "step 3.1",
+      "algebra",
+      "1.1",
+      "3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cor removable singularity for bounded harmonic functions, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 4.1 defines the formerly missing value at p = 0; step 3.1 includes zero w."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The statement excludes n = 1, where the punctured interval has two independent components."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 2.1 requires 0 < delta < R, so the comparison annulus is nonempty."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 2.1–4.1 treat both annular boundaries and the delta-down-to-zero limit separately for n = 2 and n >= 3."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 choose an interior radius and maxima on nonempty compact spheres."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cor removable singularity for bounded harmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cor removable singularity for bounded harmonic functions, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "CRITICAL risk is the n=2 versus n≥3 barriers, signed comparison, little-o uniformity, and gluing at the puncture. Steps 1.1–4.1 construct the exact harmonic replacement, compare ±w on nonempty annuli, take the correct logarithmic/power limits, and define the unique missing value. The hypotheses exclude the dimension-one two-component failure."
+   }
+  },
+  "thm-maximum-principle-with-limsup-control-at-infinity": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-weak-maximum-principle-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open. If $u\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$ and $\\Delta u\\ge0$, then\n$$\\max_{\\overline\\Omega}u=\\max_{\\partial\\Omega}u.$$\nNo connectedness or boundary smoothness is required.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Fix $x\\in\\Omega$ and $\\varepsilon>0$, choose $R_0$ from the infinity hypothesis, and choose $R>\\max(R_0,|x|)$. The set $D=\\Omega\\cap B_R$ is bounded nonempty open; its boundary lies in $(\\partial\\Omega\\cap\\overline B_R)\\cup(\\overline\\Omega\\cap\\partial B_R)$.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "On the first part $u\\le M$. On the second part the infinity bound, extended from $\\Omega$ by continuity when necessary, gives $u\\le M+\\varepsilon$. The weak maximum principle on $D$ yields $u(x)\\le M+\\varepsilon$. Let $\\varepsilon\\downarrow0$; the original boundary inequality then also includes all closure points.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 remain valid for empty original boundary; D has a nonempty boundary."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 allows M = 0 and u = 0."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For thm maximum principle with limsup control at infinity, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For thm maximum principle with limsup control at infinity, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 control original boundary and artificial cut sphere before epsilon tends to zero."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.1 chooses a finite R larger than the specified finite bounds and containing the supplied x."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For thm maximum principle with limsup control at infinity, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For thm maximum principle with limsup control at infinity, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "ex-harmonic-function-attaining-only-boundary-extrema": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-weak-maximum-principle-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open. If $u\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$ and $\\Delta u\\ge0$, then\n$$\\max_{\\overline\\Omega}u=\\max_{\\partial\\Omega}u.$$\nNo connectedness or boundary smoothness is required.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-hopf-boundary-point-lemma-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and suppose $B_R(a)\\subset\\Omega$ is an interior tangent ball at $p\\in\\partial\\Omega$. Let $u\\in C^2(\\Omega)$ be subharmonic, with a continuous extension to $\\overline B_R(a)$, such that $u(x)<M$ for every $x\\in\\Omega$ and $u(p)=M$. If the finite derivative $\\partial_\\nu u(p)$ exists for $\\nu=(p-a)/R$, then $\\partial_\\nu u(p)>0$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Every second derivative of $u$ is zero, so $\\Delta u=0$. In the open ball, $|x_1|\\le|x|<1$. On its closure, equality $x_1=1$ forces $x=e_1$, and $x_1=-1$ forces $x=-e_1$. Thus the explicit extrema have exactly the boundary location allowed by the weak principle.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "The ball itself is an interior tangent ball at $e_1$, with outward direction $e_1$. The quotient $(u(e_1)-u(e_1-te_1))/t$ equals $1$ for $0<t<2$. It has a strictly positive limit, agreeing with Hopf since $u<1$ throughout the interior.",
+     "step": "2.1",
+     "inputs": [
+      "F2",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For ex harmonic function attaining only boundary extrema, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 has zero Laplacian everywhere."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 check the unit radius, maximum 1 and derivative 1."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For ex harmonic function attaining only boundary extrema, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 locates both boundary extrema; step 2.1 computes the one-sided limit."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For ex harmonic function attaining only boundary extrema, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For ex harmonic function attaining only boundary extrema, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For ex harmonic function attaining only boundary extrema, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is uniqueness of the two extrema and the outward derivative sign. Step 1.1 computes zero Laplacian and uses |x1|≤|x| to locate equality only at ±e1; step 2.1 uses the ball itself as the interior tangent ball and evaluates the one-sided quotient as exactly one. All n≥2 and boundary conventions agree."
+   }
+  },
+  "ex-harnack-constant-from-the-poisson-kernel-ratio": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-smooth-sphere-data-have-a-harmonic-replacement",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, $a\\in\\mathbb R^n$, $R>0$, and $g\\in C^\\infty(\\partial B_R(a))$ be real. Write $\\omega_{n-1}=|S^{n-1}|$. There is a unique $h\\in C^\\infty(B_R(a))\\cap C(\\overline B_R(a))$ harmonic inside and equal to $g$ on the sphere. It is\n$$h(x)=\\int_{\\partial B_R(a)}\\frac{R^2-|x-a|^2}{R\\omega_{n-1}|x-y|^n}\\,g(y)\\,dS(y),\\qquad |x-a|<R.$$\nThe kernel is positive and has integral one at each interior point.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-harnack-inequality-on-a-ball",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, $R>0$, and let $u\\ge0$ be harmonic on $B_R(a)\\subset\\mathbb R^n$. For every $x\\in B_R(a)$,\n$$u(x)\\le\\left(\\frac R{R-|x-a|}\\right)^n u(a).$$\nFor $0\\le r<R$, set $m=\\lceil4r/(R-r)\\rceil+1$ and $C=2^{nm}$. Then $C^{-1}u(a)\\le u(x)\\le Cu(a)$ whenever $|x-a|\\le r$. No trace on $\\partial B_R(a)$ is assumed.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "cor-ball-mean-value-property-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Under [[thm-spherical-mean-value-property-for-harmonic-functions]], $u(x)=A_u(x,r)$ for every $B_r(x)\\Subset\\Omega$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "thm-continuous-mean-value-functions-are-harmonic",
+     "source_section": "Statement",
+     "quote": "If $u\\in C(\\Omega)$ has the ball mean-value property, then $u\\in C^\\infty(\\Omega)$ and $\\Delta u=0$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "The ball mean property and continuous mean-value theorem give smoothness. Fix $|x|<s<R$. The smooth trace on $\\partial B_s$ and harmonic replacement represent $u$ by the kernel there; at the center the same formula gives $\\int_{\\partial B_s}u=\\omega_{n-1}s^{n-1}u(0)$.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F3",
+      "F4",
+      "given"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "For $|y|=s$, the inequalities $s-|x|\\le|x-y|\\le s+|x|$ bound the positive kernel above and below. Integrating against the nonnegative trace gives $\\frac{1-q}{(1+q)^{n-1}}u(0)\\le u(x)\\le\\frac{1+q}{(1-q)^{n-1}}u(0)$, where $q=|x|/s<1$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "Let $s\\uparrow R$ so $q\\to t<1$. This proves the two bounds. If $u(0)=0$, ball Harnack already gives $u\\equiv0$ on the ball, and both displayed inequalities are equalities. At $x=0$, both factors equal one.",
+     "step": "3.1",
+     "inputs": [
+      "F2",
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For ex harnack constant from the poisson kernel ratio, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 3.1 covers u(0) = 0 and x = 0."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 3.1 gives factors equal to 1 at the center; t = 1 is outside the statement."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For ex harnack constant from the poisson kernel ratio, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1–3.1 use inner radii s < R and exclude singular factor t = 1."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For ex harnack constant from the poisson kernel ratio, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For ex harnack constant from the poisson kernel ratio, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For ex harnack constant from the poisson kernel ratio, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "HIGH risk is deriving two-sided constants without boundary data at radius R. Steps 1.1–2.1 work on each inner sphere s<R, use the normalized positive Poisson kernel and distance bounds s±|x|, and step 3.1 passes s upward to R. The u(0)=0 and x=0 cases are separately and correctly resolved."
+   }
+  },
+  "cex-maximum-principle-fails-for-superharmonic-maxima": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-subharmonic-and-superharmonic-functions-in-rn",
+     "source_section": "Definition",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and let $u:\\Omega\\to\\mathbb R$ belong to $C^2(\\Omega)$. With the Laplacian of [[def-laplacian-of-a-c2-function]], $u$ is **subharmonic** when $\\Delta u\\ge0$ at every point, and **superharmonic** when $\\Delta u\\le0$. Thus $u$ is harmonic exactly when both conditions hold, and $u$ is superharmonic exactly when $-u$ is subharmonic. Here a **domain** means a nonempty connected open set. This is the classical $C^2$ convention; the equivalence with local mean inequalities is established in the mean-inequality lemma.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "$\\Delta u=-2n<0$, so $u$ is superharmonic, with the required regularity.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Its unique maximum on the closure is $u(0)=0$, while it is $-1$ at every boundary point. Thus a superharmonic maximum can be strictly interior.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cex maximum principle fails for superharmonic maxima, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 evaluates the maximum at the origin as zero."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cex maximum principle fails for superharmonic maxima, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cex maximum principle fails for superharmonic maxima, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 computes all boundary values as -1."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cex maximum principle fails for superharmonic maxima, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cex maximum principle fails for superharmonic maxima, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cex maximum principle fails for superharmonic maxima, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cex-weak-maximum-principle-needs-boundedness-or-control-at-infinity": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-weak-maximum-principle-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open. If $u\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$ and $\\Delta u\\ge0$, then\n$$\\max_{\\overline\\Omega}u=\\max_{\\partial\\Omega}u.$$\nNo connectedness or boundary smoothness is required.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "The half-space is open, connected and unbounded, with nonempty boundary $\\{x_n=0\\}$. The affine function is smooth on all of $\\mathbb R^n$, has Laplacian zero, and vanishes on that boundary.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "For every $t>0$, $u(te_n)=t>0$, and these values tend to infinity as $t\\to\\infty$. Hence the proposed interior bound fails. The bounded-open-set hypothesis of the weak maximum principle does not hold for this example.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 1.1 explicitly verifies nonempty boundary, so the failure is not an empty-boundary convention."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 verifies zero boundary data."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cex weak maximum principle needs boundedness or control at infinity, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cex weak maximum principle needs boundedness or control at infinity, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 shows failure of the matching limsup bound at infinity."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cex weak maximum principle needs boundedness or control at infinity, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cex weak maximum principle needs boundedness or control at infinity, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cex weak maximum principle needs boundedness or control at infinity, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cex-hopf-lemma-needs-a-boundary-geometry-hypothesis": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-interior-sphere-condition-and-sphere-normal",
+     "source_section": "Definition",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and let $p\\in\\partial\\Omega$. An **interior tangent ball at $p$** is a ball $B_R(a)\\subset\\Omega$ with $R>0$ and $|p-a|=R$. Existence of such a ball is the **interior sphere condition**. Its supplied outward sphere direction is $\\nu=(p-a)/R$.\n\nFor a real function defined on $B_R(a)\\cup\\{p\\}$, the outward directional derivative, when the following finite limit exists, is\n$$\\partial_\\nu u(p)=\\lim_{t\\downarrow0}\\frac{u(p)-u(p-t\\nu)}t.$$\nThe points $p-t\\nu$ are in the ball for $0<t<2R$. This definition uses a specified sphere, without assuming a differentiable boundary or a normal field on all of $\\partial\\Omega$.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-hopf-boundary-point-lemma-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and suppose $B_R(a)\\subset\\Omega$ is an interior tangent ball at $p\\in\\partial\\Omega$. Let $u\\in C^2(\\Omega)$ be subharmonic, with a continuous extension to $\\overline B_R(a)$, such that $u(x)<M$ for every $x\\in\\Omega$ and $u(p)=M$. If the finite derivative $\\partial_\\nu u(p)$ exists for $\\nu=(p-a)/R$, then $\\partial_\\nu u(p)>0$.",
+     "uses": [
+      "4.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "For a direct real differentiation check, use pairs written as complex numbers only for algebra: $z=x+iy$, $L=\\log r+i\\theta$, and $F=z/L=u+iv$ with $v=(y\\log r-x\\theta)/((\\log r)^2+\\theta^2)$. The derivatives $(\\log r)_x=x/r^2$, $(\\log r)_y=y/r^2$, $\\theta_x=-y/r^2$, $\\theta_y=x/r^2$ give $L_x=1/z$, $L_y=i/z$. The quotient rule gives $F_x=(L-1)/L^2$, $F_y=i(L-1)/L^2$. Equating real and imaginary parts yields $u_x=v_y$, $u_y=-v_x$. All functions are smooth for $x>0$, $r<1/2$, so commuting mixed real derivatives gives $\\Delta u=v_{yx}-v_{xy}=0$. No theorem about holomorphic functions is used.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-1-2",
+     "claim": "In polar coordinates the sign condition is $\\theta\\tan\\theta<-\\log r$ for $|\\theta|<\\pi/2$. The function $\\theta\\tan\\theta$ is even and strictly increasing from zero to infinity as $\\theta$ runs from zero to $\\pi/2$. Thus at each radius the permitted angles form an interval containing zero. Moving the angle to zero at fixed radius, and then moving along the positive axis, joins any two points by a path in $\\Omega$. In particular the open nonempty set is connected.",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "The bound $|u|\\le |F|=r/\\sqrt{(\\log r)^2+\\theta^2}\\le r/|\\log r|$ gives the continuous value zero at the origin. Away from the origin the formula is continuous on the closure; its other points cannot lie on $x=0$, since there the limiting numerator is $|y|\\pi/2>0$ for $y\\ne0$. Thus the full extension is continuous, and closure values are at most zero. Along the positive axis $u(t,0)=t/\\log t<0$, so $(u(0,0)-u(t,0))/t=-1/\\log t\\to0$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "algebra",
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "Any ball in $\\Omega\\subset\\{x>0\\}$ tangent at zero must have center $(b,0)$ and radius $b>0$: containment in the half-plane forces its center’s first coordinate to be at least its radius, while passage through zero makes that radius equal to the center’s Euclidean norm. For small $y>0$, the point $(y^2/b,y)$ is in this ball because its squared distance to $(b,0)$ is $b^2-y^2+y^4/b^2<b^2$. But at these points $(x\\log r+y\\theta)/y\\to\\pi/2>0$, since $x\\log r/y=(y/b)\\log r\\to0$ and $\\theta\\to\\pi/2$. For sufficiently small $y$ they have $r<1/2$ and $u>0$, so are not in $\\Omega$. This rules out every such ball.",
+     "step": "3.1",
+     "inputs": [
+      "F1",
+      "step 2.1",
+      "algebra",
+      "2.1"
+     ]
+    },
+    {
+     "id": "derive-4-1",
+     "claim": "The local zero-level boundary has angles $\\pm\\beta(r)$ determined by $\\beta\\tan\\beta=-\\log r$, so $\\beta\\to\\pi/2$ and $x/|y|=\\beta/(-\\log r)\\to0$. Its tangent at zero is therefore the vertical line, with outward side $-e_1$ because $\\Omega$ lies to the right. Step 2.1 computes the accessible derivative in precisely that direction as zero, despite the strict interior inequality. The interior sphere hypothesis in Hopf is the missing one.",
+     "step": "4.1",
+     "inputs": [
+      "F2",
+      "step 1.2",
+      "step 2.1",
+      "step 3.1",
+      "2.1",
+      "1.2",
+      "3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 1.2 exhibits the positive-axis segment in the domain."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 proves both the zero boundary value and zero derivative."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "This example is explicitly in dimension two; it makes no dimension-one geometry claim."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 3.1 rules out every positive-radius tangent ball, rather than treating a point as a ball."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 2.1–4.1 verify continuity, the accessible derivative and tangent at the origin."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 3.1 treats an arbitrary hypothesized tangent ball and constructs explicit excluded points."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cex hopf lemma needs a boundary geometry hypothesis, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cex hopf lemma needs a boundary geometry hypothesis, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-6b-b",
+    "notes": "CRITICAL risk is harmonicity of the explicit cusp function, connectedness, continuity at the origin, derivative direction, and exclusion of every tangent ball. Steps 1.1–4.1 verify Cauchy–Riemann derivatives directly, describe the connected angular sections, bound u by r/|log r|, construct points inside any proposed tangent ball with u>0, and compute the zero outward derivative."
+   }
+  },
+  "cex-liouville-needs-one-sided-boundedness": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-liouville-theorem-for-bounded-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$ and $u:\\mathbb R^n\\to\\mathbb R$ be harmonic. If $u$ is bounded above or bounded below on all of $\\mathbb R^n$, then $u$ is constant.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "All second derivatives vanish, so $u$ is entire harmonic, and $u(e_1)=1\\ne0=u(0)$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "As $t\\to\\infty$, $u(te_1)=t\\to\\infty$ and $u(-te_1)=-t\\to-\\infty$. Thus neither global one-sided boundedness hypothesis of Liouville is present, and constancy fails.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cex liouville needs one sided boundedness, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 uses u(0) = 0 to verify nonconstancy."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cex liouville needs one sided boundedness, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cex liouville needs one sided boundedness, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 checks divergence in both signs."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cex liouville needs one sided boundedness, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cex liouville needs one sided boundedness, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cex liouville needs one sided boundedness, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cex-unbounded-punctured-harmonic-singularity-is-not-removable": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "cor-removable-singularity-for-bounded-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open and $p\\in\\Omega$. If $u\\in C^2(\\Omega\\setminus\\{p\\})$ is harmonic and bounded in some punctured neighborhood of $p$, it has a unique harmonic extension to $\\Omega$. More generally the same conclusion holds under $u(x)=o(|x-p|^{2-n})$ for $n\\ge3$, or $u(x)=o(\\log(1/|x-p|))$ for $n=2$, as $x\\to p$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "For $r=|x|>0$, differentiating $f(r)$ gives $\\Delta f(r)=f\\prime\\prime(r)+(n-1)f\\prime(r)/r$. For $n=2$, $f\\prime=1/r$ and $f\\prime\\prime=-1/r^2$ cancel. For $n\\ge3$, $f\\prime=(2-n)r^{1-n}$ and $f\\prime\\prime=(2-n)(1-n)r^{-n}$ also cancel. Thus both profiles are harmonic away from zero.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "The logarithm tends to $-\\infty$ as $r\\downarrow0$, and the negative power tends to $+\\infty$. Continuity at zero would require a finite limit, so no harmonic extension exists. These profiles violate boundedness near the point and have ratio one to the critical profiles in the stronger little-o removability condition.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cex unbounded punctured harmonic singularity is not removable, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 analyzes the excluded origin and shows why a finite value cannot be assigned."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 2.1 computes ratio 1 rather than little-o relative to the critical profile."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cex unbounded punctured harmonic singularity is not removable, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 distinguish n = 2 from n >= 3 and examine the puncture limit."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cex unbounded punctured harmonic singularity is not removable, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cex unbounded punctured harmonic singularity is not removable, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cex unbounded punctured harmonic singularity is not removable, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cex-strong-maximum-principle-needs-connectedness": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-strong-maximum-principle-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a domain, and let $u\\in C^2(\\Omega)$ be harmonic. If $u$ attains a global maximum or a global minimum at a point of $\\Omega$, it is constant.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "The two open balls are disjoint, since their centers are distance three apart. Every point has a neighborhood on which $u$ is constant; consequently $u$ is smooth with $\\Delta u=0$ everywhere in $\\Omega$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "Every point of the first ball attains the global maximum $1$, whereas every point of the second has value $0$. Thus $u$ is not constant on $\\Omega$, which is disconnected. This is precisely the hypothesis absent from the strong theorem.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cex strong maximum principle needs connectedness, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 verify the zero value on the second component."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 2.1 verifies the attained maximum 1 on the first component."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.1 checks disjoint genuine open components, not merely points."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "For cex strong maximum principle needs connectedness, there is no interval endpoint or boundary-trace conclusion in this statement."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cex strong maximum principle needs connectedness, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cex strong maximum principle needs connectedness, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cex strong maximum principle needs connectedness, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "cex-hopf-conclusion-needs-a-strict-nonconstant-extremum": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-hopf-boundary-point-lemma-for-the-laplacian",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and suppose $B_R(a)\\subset\\Omega$ is an interior tangent ball at $p\\in\\partial\\Omega$. Let $u\\in C^2(\\Omega)$ be subharmonic, with a continuous extension to $\\overline B_R(a)$, such that $u(x)<M$ for every $x\\in\\Omega$ and $u(p)=M$. If the finite derivative $\\partial_\\nu u(p)$ exists for $\\nu=(p-a)/R$, then $\\partial_\\nu u(p)>0$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "The function is smooth with zero Laplacian and zero boundary values. At each $p\\in\\partial B_1$, the ball itself is an interior tangent ball and its outward direction is $p$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "For $0<t<2$, $(u(p)-u(p-tp))/t=0$, so the outward derivative is zero. The strict condition $u(x)<u(p)$ inside the domain, required by Hopf, fails; all its other stated conditions are satisfied.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "step 1.1",
+      "algebra",
+      "1.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For cex hopf conclusion needs a strict nonconstant extremum, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 explicitly compute the zero function and zero derivative."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "For cex hopf conclusion needs a strict nonconstant extremum, no cardinality-one or dimension-one specialization is asserted; the dimension convention is n >= 2."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For cex hopf conclusion needs a strict nonconstant extremum, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 computes the boundary derivative for every p on the sphere."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For cex hopf conclusion needs a strict nonconstant extremum, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For cex hopf conclusion needs a strict nonconstant extremum, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For cex hopf conclusion needs a strict nonconstant extremum, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  },
+  "ex-subharmonic-quartic-and-harmonic-saddle": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-subharmonic-and-superharmonic-functions-in-rn",
+     "source_section": "Definition",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and let $u:\\Omega\\to\\mathbb R$ belong to $C^2(\\Omega)$. With the Laplacian of [[def-laplacian-of-a-c2-function]], $u$ is **subharmonic** when $\\Delta u\\ge0$ at every point, and **superharmonic** when $\\Delta u\\le0$. Thus $u$ is harmonic exactly when both conditions hold, and $u$ is superharmonic exactly when $-u$ is subharmonic. Here a **domain** means a nonempty connected open set. This is the classical $C^2$ convention; the equivalence with local mean inequalities is established in the mean-inequality lemma.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-comparison-principle-for-classical-subharmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be bounded, nonempty and open, and let $u,v\\in C^2(\\Omega)\\cap C(\\overline\\Omega)$. If $\\Delta u\\ge\\Delta v$ in $\\Omega$ and $u\\le v$ on $\\partial\\Omega$, then $u\\le v$ on $\\overline\\Omega$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-strong-maximum-principle-for-harmonic-functions",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a domain, and let $u\\in C^2(\\Omega)$ be harmonic. If $u$ attains a global maximum or a global minimum at a point of $\\Omega$, it is constant.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "derive-1-1",
+     "claim": "Differentiation gives $\\partial_iq=4|x|^2x_i$ and $\\partial_{ii}q=8x_i^2+4|x|^2$, so $\\Delta q=4(n+2)|x|^2\\ge0$. It is subharmonic, with value one on the unit sphere.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "derive-2-1",
+     "claim": "The constant $h=1$ is harmonic, and $\\Delta q\\ge\\Delta h$ with equal boundary values. Comparison gives $q\\le h$ on the closed ball, also directly visible from $|x|\\le1$.",
+     "step": "2.1",
+     "inputs": [
+      "F2",
+      "step 1.1",
+      "1.1"
+     ]
+    },
+    {
+     "id": "derive-3-1",
+     "claim": "For $s$, the only nonzero pure second derivatives are $\\partial_{11}s=2$ and $\\partial_{22}s=-2$, so $\\Delta s=0$ and $\\nabla s(0)=0$. But $s(te_1)=t^2$ and $s(te_2)=-t^2$ for $0<|t|<1$, proving that zero is neither a local maximum nor a local minimum. There is no interior global extremum to which the strong theorem would apply.",
+     "step": "3.1",
+     "inputs": [
+      "F3",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "For ex subharmonic quartic and harmonic saddle, the statement assumes a nonempty open set or an explicitly supplied point/ball; no empty-domain extremum is asserted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 3.1 allow the quartic’s zero Laplacian at the origin and the saddle’s zero gradient."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 check boundary value and harmonic replacement 1."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "For ex subharmonic quartic and harmonic saddle, the statement assumes positive radii and genuine open sets; collapsed balls are outside its domain."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 3.1 tests both signs on arbitrarily short coordinate segments; step 2.1 includes the boundary."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "For ex subharmonic quartic and harmonic saddle, the displayed objects are supplied by the statement; the calculation makes no selection from an arbitrary family."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "For ex subharmonic quartic and harmonic saddle, the statement is an implication or an explicit construction, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "For ex subharmonic quartic and harmonic saddle, the statement is an implication or an explicit construction, not an equivalence."
+    }
+   ]
+  }
+ }
+}

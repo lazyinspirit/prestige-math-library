@@ -138,12 +138,16 @@ const alphaCohort = (ctx: any, u: string): string[] =>
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
 
 /** Gates that apply to the whole repository, re-run at several stages because
- *  authoring and repair both change items on disk. */
-const repoWide = (ctx) => [
+ *  authoring and repair both change items on disk.
+ *
+ *  `pendingAuditOk` belongs only to a bounded pre-certification window. The
+ *  caller must first validate the exact published-repair handoff; every other
+ *  repo-wide checkpoint keeps `published-unaudited` fatal. */
+const repoWide = (ctx, { pendingAuditOk = false }: { pendingAuditOk?: boolean } = {}) => [
   gate('precheck', ['node', 'tools/tsx-run.mjs', 'tools/precheck.mts'], {
     liveness: { pattern: /(\d+)\s+checked/.source, min: 1, unit: 'items checked' },
   }),
-  gate('depcheck', ['node', 'tools/depcheck.mjs']),
+  gate('depcheck', ['node', 'tools/depcheck.mjs', ...(pendingAuditOk ? ['--pending-audit-ok'] : [])]),
   gate('fwdcheck', ['node', 'tools/fwdcheck.mjs']),
   gate('extcheck', ['node', 'tools/extcheck.mjs']),
   gate('rendercheck', ['node', 'tools/rendercheck.mjs']),

@@ -1,0 +1,61 @@
+---
+id: thm-kolmogorov-convergence-criterion
+title: "Kolmogorov convergence criterion"
+kind: theorem
+status: draft
+origin: pipeline
+deps: ["thm-kolmogorov-maximal-inequality", "def-almost-sure-convergence-of-a-random-series", "thm-series-cauchy-criterion", "thm-continuity-from-below-for-measures", "thm-continuity-from-above-for-measures", "lem-variance-and-covariance-identities-for-random-variables", "thm-riesz-fischer-completeness-of-l-p", "thm-lp-convergence-implies-convergence-in-probability", "thm-almost-sure-convergence-implies-convergence-in-probability", "thm-limits-in-probability-are-unique-almost-surely"]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-07
+sources:
+  references:
+    - title: "Theorem 2.5.6, pp. 84\u201385"
+      url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
+    - title: "Theorem 3.10, pp. 65\u201366; L2 strengthening uses published completeness"
+      url: https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf
+proof_strategy: "Maximal inequality bounds the supremum of each tail by the variance tail. For w_m=sup_{i,j>=m}|S_i-S_j| use its monotonicity and rational tolerances to obtain one a.s. Cauchy event. L2 completeness supplies an L2 limit; uniqueness of probability limits identifies it."
+---
+
+## Statement
+
+For independent centered square-integrable real random variables $(X_n)_{n\ge1}$, if $\sum_{n\ge1}\operatorname{Var}(X_n)<\infty$, then $\sum_{n\ge1}X_n$ converges almost surely and in $L^2$ to the same finite real random variable.
+
+## Facts & Assumptions
+
+[F1] [[thm-kolmogorov-maximal-inequality]]: Let $X_1,\ldots,X_n$ be independent centered square-integrable real random variables, $n\ge1$, and $S_k=\sum_{j=1}^kX_j$. For every $\lambda>0$, $\mathbb P\left(\max_{1\le k\le n}|S_k|\ge\lambda\right)\le\frac{\operatorname{Var}(S_n)}{\lambda^2}=\frac{\sum_{j=1}^n\operatorname{Var}(X_j)}{\lambda^2}.$ Thus controlling the whole finite maximum costs no larger bound than controlling the final sum by Chebyshev.
+
+[F2] [[def-almost-sure-convergence-of-a-random-series]]: For real random variables $(X_n)_{n\ge1}$, the series $\sum_{n\ge1}X_n$ **converges almost surely** if its partial sums $S_n$ converge to a finite real limit on an event of probability one, as in def-almost-sure-convergence-of-random-variables. With $S_0=0$ from def-partial-sums-and-sample-means, its convergence event is $C=\bigcap_{r\ge1}\bigcup_{N\ge1}\bigcap_{j\ge i\ge N}\{|S_j-S_i|<1/r\}.$ This is exactly the real Cauchy condition, with the indexing of thm-series-cauchy-criterion shifted by one. Measurable arithmetic makes every event in this countable expression measurable. For any fixed $m$, the union over $N$ may be restricted to $N\ge m$; then each difference uses only $X_{m+1},X_{m+2},\ldots$. Thus $C$ is in the tail sigma-algebra, without assuming independence. Under independence, cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event gives $\mathbb P(C)\in\{0,1\}$. Set $S=\lim_n S_n$ on $C$ and $S=0$ off $C$. The functions $\mathbf1_C S_n$ converge everywhere to $S$, so thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable and thm-arithmetic-and-lattice-operations-preserve-measurability make $S$ measurable. For Borel sets $B_n$, the event $\{X_n\in B_n\text{ infinitely often}\}=\bigcap_m\bigcup_{n\ge m}\{X_n\in B_n\}$ is likewise tail measurable. Changing finitely many summands adds an eventually constant finite difference to $S_n$; divided by deterministic $c_n>0$ tending to infinity that difference tends to zero, so the normalized limsup is unchanged. The sign of the unnormalized limsup need not be unchanged: the all-zero sequence has limsup zero, while changing its first term to $1$ makes the limsup of partial sums equal to $1$.
+
+[F3] [[thm-series-cauchy-criterion]]: Let $(a_k)$ be a sequence of reals, with partial sums $s_n = \sum_{k<n} a_k$ (def-series). Then $\sum a_k$ converges **if and only if** $\text{for every real } \varepsilon > 0 \text{ there is } N \in \mathbb{N} \text{ such that } \Big| \sum_{k=m+1}^{n} a_k \Big| < \varepsilon \text{ for all } n > m \ge N .$ The block $\sum_{k=m+1}^{n} a_k$ is the finite sum $a_{m+1} + \dots + a_n$ of def-finite-sum, and it equals $s_{n+1} - s_{m+1}$. This is the Cauchy criterion transported from sequences to series. Its value is that it decides convergence without producing, or even naming, the sum.
+
+[F4] [[thm-continuity-from-below-for-measures]]: Let $(E_n)_{n\in\mathbb N}$ be an increasing sequence of measurable sets for a measure $\mu$, so $E_n\subseteq E_{n+1}$. Then $\mu\left(\bigcup_{n\in\mathbb N}E_n\right)=\sup_{n\in\mathbb N}\mu(E_n).$ No finiteness hypothesis is required.
+
+[F5] [[thm-continuity-from-above-for-measures]]: Let $(E_n)_{n\in\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\mu$. If $\mu(E_{n_0})<+\infty$ for some $n_0$, then $\mu\left(\bigcap_{n\in\mathbb N}E_n\right)=\inf_{n\in\mathbb N}\mu(E_n).$
+
+[F6] [[lem-variance-and-covariance-identities-for-random-variables]]: Let $X,Y$ be square-integrable real random variables on one probability space. Then $\operatorname{Var}(X)=\mathbb E[X^2]-\mathbb E[X]^2,$ $\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y].$ Moreover, covariance is symmetric and bilinear on finite linear combinations. On finite full-power-set probability spaces these formulas reduce to the published finite identities.
+
+[F7] [[thm-riesz-fischer-completeness-of-l-p]]: Let $(X,\mathcal A,\mu)$ be a measure space and let $1\le p\le\infty$. Then $L^p(\mu)$, with the norm of thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, is complete. Equivalently, the metric induced by that norm is a complete metric in the sense of def-complete-metric-space. Moreover, if a sequence in $L^p(\mu)$ converges in norm, then some subsequence admits measurable representatives converging almost everywhere in the sense of def-convergence-almost-everywhere-relative-to-a-measure.
+
+[F8] [[thm-lp-convergence-implies-convergence-in-probability]]: Let $1\le p<\infty$. If $X_n\to X$ in $L^p$, then $X_n\to X$ in probability.
+
+[F9] [[thm-almost-sure-convergence-implies-convergence-in-probability]]: If $X_n\to X$ almost surely, then $X_n\to X$ in probability.
+
+[F10] [[thm-limits-in-probability-are-unique-almost-surely]]: If $X_n\to X$ and $X_n\to Y$ in probability, then $X=Y$ almost surely.
+
+## Proof
+
+**Given:** The objects and hypotheses of the statement.
+
+1.1 Write $S_0=0$, $S_n=\sum_{k=1}^nX_k$, and $v_m=\sum_{k>m}\operatorname{Var}(X_k)$. Applying the maximal inequality to each block $X_{m+1},\ldots,X_N$ and then continuity from below gives $\mathbb P(\sup_{j\ge m}|S_j-S_m|>t)\le v_m/t^2$ for $t>0$. The strict supremum event is the increasing union of finite strict maximum events, each bounded by the corresponding non-strict estimate. [F1, F4, given]
+
+1.2 For $n>m$, the same variance expansion used in the maximal inequality gives $\mathbb E|S_n-S_m|^2=\sum_{k=m+1}^n\operatorname{Var}(X_k)\le v_m\to0$. Hence the classes of $S_n$ are Cauchy in $L^2$; completeness gives an $L^2$ limit class with a finite measurable representative $T_0$. Set $T=\operatorname{Re}T_0$. This is a finite measurable real variable, and $|S_n-T|\le|S_n-T_0|$ pointwise, so $S_n\to T$ in $L^2$ even if completeness was formulated over complex scalars. [F1, F6, F7, given]
+
+2.1 Let $w_m=\sup_{i,j\ge m}|S_i-S_j|$. Its strict level events are countable unions of measurable events and decrease with $m$. Since $w_m\le2\sup_{j\ge m}|S_j-S_m|$, continuity from above gives $\mathbb P(\bigcap_m\{w_m>2/r\})=0$ for every integer $r\ge1$. Outside the union of these null events, for each $r$ some $m$ has $w_m\le2/r$; this is the real Cauchy condition. Completeness supplies a finite limit, extended measurably by zero as in the series definition. [F5, F3, F2, step 1.1]
+
+3.1 The $L^2$ convergence gives convergence in probability to $T$, and the almost-sure convergence gives convergence in probability to the limit $S$ from the Cauchy event. Uniqueness gives $S=T$ almost surely. These arguments allow all variances to vanish and finite tails to be identically zero. [F8, F9, F10, step 2.1, step 1.2] ∎

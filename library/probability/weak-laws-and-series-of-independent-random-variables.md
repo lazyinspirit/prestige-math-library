@@ -1,0 +1,11 @@
+---
+page: weak-laws-and-series-of-independent-random-variables
+title: "Weak Laws and Series of Independent Random Variables"
+status: draft
+items: ["def-identically-distributed-and-iid-random-variables", "def-partial-sums-and-sample-means", "thm-chebyshev-weak-law-for-uncorrelated-arrays", "cor-iid-finite-variance-weak-law", "def-truncation-at-a-fixed-level", "thm-khinchin-weak-law-for-iid-integrable-variables", "def-almost-sure-convergence-of-a-random-series", "thm-kolmogorov-maximal-inequality", "thm-kolmogorov-convergence-criterion", "cor-kolmogorov-two-series-sufficiency", "def-symmetric-real-random-variable", "lem-symmetrization-for-independent-random-series", "lem-bounded-centered-convergent-series-have-summable-variances", "lem-three-series-necessity-for-truncated-means-and-variances", "thm-kolmogorov-three-series-theorem", "lem-kronecker-summation-lemma", "thm-kolmogorov-strong-law-under-summable-normalized-variances", "cor-independent-nonidentical-finite-variance-strong-law", "lem-one-sided-maximal-inequality-for-symmetric-independent-sums", "lem-independent-copy-symmetrization-tail-bounds", "thm-truncation-weak-law-for-independent-arrays", "lem-vanishing-tail-control-implies-small-truncated-second-moment", "lem-largest-summand-bound-for-symmetric-independent-variables", "thm-truncated-centering-criterion-for-an-iid-weak-law", "lem-levy-maximal-inequality-for-independent-tail-sums", "lem-cauchy-in-probability-sequences-have-a-measurable-limit", "thm-independent-series-probability-and-almost-sure-convergence-agree"]
+examples: []
+---
+
+Weak laws arise first from variance control and then from truncating large summands. For independent series, first-crossing inequalities turn tail control into almost-sure convergence; symmetrization gives the necessity half of the three-series theorem. Kronecker summation connects convergent random series to normalized strong laws. The final results characterize deterministic weak-law centering and show that probability and almost-sure convergence agree for independent partial sums.
+
+All variables are finite real measurable functions. Sums start at one with an empty initial sum of zero, truncation retains equality at its positive cutoff, and all almost-sure conclusions use one measurable probability-one event.
