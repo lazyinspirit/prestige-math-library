@@ -247,10 +247,15 @@ for (const file of files) {
         // pairs it names — anything else still fails.
         const move = rehomed.get(id);
         const licensed = move && move.to_page === page?.id;
-        // Audit scope is published content: every id has a file, by definition.
-        if (!auditMode && !licensed && items.has(id)) error('batch-item-already-exists', `${id} already has an item file and cannot be minted by this future batch`, id);
-        if (licensed && !items.has(id)) error('batch-rehome-missing-item', `${id} is declared a re-home but has no item file to move`, id);
         const priorHome = planHomes.get(id);
+        // A later run may revisit a draft page whose exact inventory already
+        // exists from an earlier run. That is same-page reuse, not a mint.
+        // Keep rejecting an existing id unless the canonical plan already
+        // assigns it to this exact page (or an owner licensed a re-home).
+        const samePageReuse = items.has(id) && priorHome === page?.id;
+        // Audit scope is published content: every id has a file, by definition.
+        if (!auditMode && !licensed && !samePageReuse && items.has(id)) error('batch-item-already-exists', `${id} already has an item file and cannot be minted by this future batch`, id);
+        if (licensed && !items.has(id)) error('batch-rehome-missing-item', `${id} is declared a re-home but has no item file to move`, id);
         if (priorHome && priorHome !== page?.id && !licensed) {
           error('batch-plan-id-collision', `${id} is already planned on ${priorHome}, not ${page?.id ?? '?'}`, id);
         }

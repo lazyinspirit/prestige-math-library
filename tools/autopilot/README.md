@@ -201,7 +201,9 @@ At the Step-4 splice, an empty manifest page may reuse a nonempty canonical
 plan inventory only when every listed item file already exists. The tool copies
 those exact same-page entries into the manifest and records them separately as
 reused scope; this keeps later authoring, reading, judging, and final coverage
-non-vacuous while refusing partial reuse or plan erasure.
+non-vacuous while refusing partial reuse or plan erasure. Manifest policy also
+accepts explicit existing IDs only at their canonical same-page plan home;
+existing IDs claimed by another page remain fatal collisions.
 
 Step-6 refuter recovery validates both halves of the frozen routing contract:
 `opened`/`not_opened` must partition the exact `refuter_scope`, and every

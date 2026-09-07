@@ -180,6 +180,10 @@ explicit `deps` arrays, normalized mechanically when absent.
 Proof contracts recognize `deps`, `justified_by`, and `forward_refs`;
 forward references still require their own ordering/cycle checks.
 
+Manifest policy accepts an existing item only when the canonical plan already
+homes it on that same page, or an owner-approved re-home receipt licenses the
+move. An existing ID claimed by another page remains a fatal collision.
+
 Snapshots track `pre-author → post-6b`, `post-6b → current`, and
 `post-step8 → Step 9`. Impact receipts account for downstream consumers.
 Every confirmed fatal requires one compatible row in
