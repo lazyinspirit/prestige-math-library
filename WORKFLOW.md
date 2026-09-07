@@ -85,6 +85,11 @@ from Codex with ChatGPT sign-in, ordinary agentic and secondary lanes use
 Step-9/10 agent dispatches use its `high` profile. Step-1 scaffolding and the
 Step-9 Lead Alpha (`step9-lead`) use `gpt-6-astra` at `medium`. Step-5
 authoring uses `gpt-5.6-sol` at `high`.
+Its brief and task distinguish scaffold strategies from completed arguments,
+require concrete witnesses and step-specific citation/contract evidence, and
+separate structural check results from unresolved mathematical obligations.
+Authoring receives a compact continuity reminder; checkpoints and source rereads
+remain required after compaction.
 Group Alpha
 review and adjudication use `gpt-5.6-sol` at `high`; Step-8 fatal adjudication
 remains on Sol at `xhigh`. Exhausted Step-8 final adjudication uses

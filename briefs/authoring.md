@@ -1,47 +1,61 @@
-# Beta authoring
+# Step 5 authoring
 
-The task defines your batch, input artifacts, output report, and required
-checks. Author only the in-flight items and page material assigned to that
-batch. Do not alter another batch, plan structure, workflow state, or published
-content. Do not judge, stamp, or request permissions.
+Complete every assigned item and page. Edit only your batch's draft content,
+contracts, and notes. Keep IDs stable; write pages at
+`library/<page.category>/<page.id>.md`. Do not change plans, workflow state,
+published content, or other batches; do not judge, stamp, or request permissions.
+If completing a proof needs a scope change, record the prerequisite and proposed
+change for the owning Alpha. Earlier scaffolding instructions do not authorize
+Step 5 to restructure the plan or drop promised content.
 
-Follow [SCHEMA.md](../SCHEMA.md) exactly. Keep item ids stable and correctly
-prefixed for their kinds; use only resolvable dependencies and the dedicated
-fields for well-definedness, forward references, and recorded-not-proved
-material. A generated statement is never a dependency target. A material
-change must keep its provenance, sources, generation data, proof strategy, and
-verification state truthful; remove a stale `verification.judge` record.
+Read `SCHEMA.md`. Keep kind prefixes, dependencies, provenance, sources,
+generation fields, proof strategy, and verification accurate. Remove stale judge
+stamps after material edits. Generated statements cannot be dependency targets;
+use the schema's fields for well-definedness, forward references, and results
+recorded without proof. Follow its proof layout and math delimiters; diagrams
+must supplement the written argument.
 
-Write every planned page directly at
-`library/<page.category>/<page.id>.md`. A prerequisite category does not own a
-later track: in particular, every functional-analysis A/B pair belongs under
-`library/functional-analysis/`, never under `library/real-analysis/`.
+## Write the argument
 
-Every page and item authored by the current run must remain `status: draft`.
-Publication is an owner action after the run closes; never create or change an
-in-flight artifact to `status: published`.
+Read the assigned design, Step 3 decisions, source passages, and current
+dependency statements. For every piece of mathematics that is unfamiliar,
+search the web and verify it against authoritative sources: original papers,
+author-hosted books or notes, or official references. Record exact locators.
 
-Write mathematics that establishes the stated claim. Check hypotheses,
-quantifiers, types, boundary cases, and both iff directions before committing a
-proof. Cite the proposition actually used, preserving its domain, hypotheses,
-direction, and conclusion; never use a citation to widen a weak result. Put
-mathematical content in text and equations, not only in a diagram. Keep proof
-rows and math delimiters renderable under the schema's phase and Markdown
-contracts.
+A scaffold's strategy describes work to do; it is not a proof. Derive each
+conclusion, checking hypotheses, quantifiers, types, and both iff directions.
+Scripts may format completed arguments, but must not turn strategy sentences
+into proof steps or generate generic proofs and contracts across items.
 
-For every piece of mathematics that is unfamiliar to you, search the web and
-verify the exact claim against authoritative sources before writing or relying
-on it. This is mandatory for unfamiliar definitions, theorems, proof steps,
-examples, and counterexamples. Prefer original papers, author-hosted books or
-lecture notes, and official reference works, and keep the resulting source and
-provenance records exact.
+Examples must display an instance and its calculation. Counterexamples must
+display a witness, verify the hypotheses, and show the failed conclusion.
 
-Maintain the task-required proof contract as evidence of the proof actually
-written: map cited facts and proof uses, and record real dispositions for each
-applicable boundary axis. A bounded finite-smoke check can find a
-counterexample; it is not a proof. If a claim fails an honest check, narrow it,
-remove it from the in-flight scaffold through the authorised path, or report a
-blocker—never fabricate supporting evidence.
+Mathematical examples below illustrate reasoning, not the full item schema:
 
-Use the task's focused validators and append the required factual report to the
-named batch notes. Do not claim success for checks you did not run.
+- Invalid: "Construct the inverse; verify its properties; therefore bijective."
+  Valid: "For f(x)=2x on R, set g(y)=y/2. Then g(f(x))=x and f(g(y))=y
+  for every real x,y, so g is a two-sided inverse."
+- Counterexample to "Every continuous real function is bounded":
+  "f(x)=x is continuous on R. For each M>0, x=M+1 gives |f(x)|>M."
+- Citation check: a definition of an inverse does not prove one exists.
+  Construct it, or cite an existence theorem and verify its hypotheses.
+
+Cite each fact at the step using it. Preserve the source's exact claim; explain
+why its hypotheses hold and how its conclusion yields your step. A matching
+quotation alone does not justify an inference.
+
+## Record evidence
+
+Write contracts from completed proofs. Map every step once, with its actual
+claim and inputs; map cited facts to exact source excerpts and their uses.
+For the inverse example, a row records "g(f(x))=x", inputs "f(x)=2x,
+g(y)=y/2, x in R", and the step performing the substitution—not "verify inverse".
+
+Address empty, zero, one, degenerate, endpoints, nonempty-choice, iff-forward,
+and iff-reverse. `checked` names the actual supporting step or statement;
+`not_applicable` gives an item-specific reason. Example: "zero: g(f(0))=0
+by step 1.1"; "endpoints: the domain R has no endpoints."
+
+Structural checks and finite tests do not prove mathematics. If an argument
+fails, report the exact gap and proposed remedy; never invent evidence or mark
+unfinished reasoning complete.

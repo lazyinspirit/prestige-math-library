@@ -342,7 +342,16 @@ if (taskPath) {
   prompt += `\n\n---\n\n# This dispatch\n\n${identity}\n`;
 }
 
-prompt += `\n\n## Mathematical context continuity\n\nRead exact task paths first. Search current owned artifacts before historical runs;
+prompt += pathResolve(resolveFile(briefPath)) === join(REPO, 'briefs/authoring.md')
+  ? `\n\n## Context continuity\n\nRead complete relevant source passages in bounded chunks; truncated output is incomplete
+evidence. Prefer current owned files; avoid historical runs and dispatch logs.
+After each item, checkpoint in the assigned notes: IDs, exact claim/conventions,
+source locators, dependencies, decisions, checks, open gaps, and next action.
+Context may compact mid-proof. Resume by rereading those notes, the current item,
+dependency statements, and source passages. Never infer a missing hypothesis from
+a summary. Preserve independent reviews; report unrecoverable evidence as a blocker.
+Use only task-authorized notes; do not create transcripts.\n`
+  : `\n\n## Mathematical context continuity\n\nRead exact task paths first. Search current owned artifacts before historical runs;
 exclude dispatch logs from routine content searches. Fetch complete relevant source
 sections and dependency statements, using bounded output chunks. A truncated result
 is not evidence of absence; continue reading until the required argument is complete.
