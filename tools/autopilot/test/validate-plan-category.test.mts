@@ -95,3 +95,112 @@ test('functional-analysis pages live in their own top-level category directory',
   assert.equal(good.status, 0, good.stdout + good.stderr);
   rmSync(goodRepo, { recursive: true, force: true });
 });
+
+test('foundations pages cannot require the Set Theory deferred catalogue', () => {
+  const repo = mkdtempSync(join(tmpdir(), 'validate-plan-set-boundary-'));
+  mkdirSync(join(repo, 'research'), { recursive: true });
+  mkdirSync(join(repo, 'items'));
+  mkdirSync(join(repo, 'library'));
+  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
+    {
+      order: 1, id: 'deferred-set-theory-beyond-choice', title: 'Deferred', kind: 'X',
+      category: 'not-proved-here', requires: [], items: [],
+    },
+    {
+      order: 2, id: 'set-foundation', title: 'Set foundation', kind: 'A',
+      category: 'foundations', companion: 'set-foundation-examples',
+      requires: ['deferred-set-theory-beyond-choice'], items: [],
+    },
+    {
+      order: 3, id: 'set-foundation-examples', title: 'Examples', kind: 'B',
+      category: 'foundations', companion: 'set-foundation',
+      requires: ['set-foundation'], items: [],
+    },
+  ] }, null, 2));
+
+  const result = run(repo);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.match(result.stdout + result.stderr, /\[set-theory-boundary\].*must build the recorded results/);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('foundations plans cannot hide a dependency on a deferred Set Theory item', () => {
+  const repo = mkdtempSync(join(tmpdir(), 'validate-plan-set-item-boundary-'));
+  mkdirSync(join(repo, 'research'), { recursive: true });
+  mkdirSync(join(repo, 'items'));
+  mkdirSync(join(repo, 'library', 'not-proved-here'), { recursive: true });
+  writeFileSync(join(repo, 'items', 'rem-deferred-result.md'), [
+    '---', 'id: rem-deferred-result', 'kind: remark', 'status: published',
+    'proved_here: false', 'deps: []', '---', '',
+  ].join('\n'));
+  writeFileSync(join(repo, 'items', 'lem-existing-middle.md'), [
+    '---', 'id: lem-existing-middle', 'kind: lemma', 'status: published',
+    'deps: [rem-deferred-result]', '---', '',
+  ].join('\n'));
+  writeFileSync(join(repo, 'library', 'not-proved-here', 'deferred-set-theory-beyond-choice.md'), [
+    '---', 'page: deferred-set-theory-beyond-choice', 'status: published',
+    'items: [rem-deferred-result]', 'examples: []', '---', '',
+  ].join('\n'));
+  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
+    {
+      order: 1, id: 'set-foundation', title: 'Set foundation', kind: 'A',
+      category: 'foundations', companion: 'set-foundation-examples', requires: [],
+      items: [{ id: 'thm-consumer', kind: 'theorem', deps: ['lem-existing-middle'] }],
+    },
+    {
+      order: 2, id: 'set-foundation-examples', title: 'Examples', kind: 'B',
+      category: 'foundations', companion: 'set-foundation',
+      requires: ['set-foundation'], items: [],
+    },
+  ] }, null, 2));
+
+  const result = run(repo);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.match(result.stdout + result.stderr, /\[set-theory-boundary\].*thm-consumer -> lem-existing-middle -> rem-deferred-result/);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('foundations plans inspect actual items on inherited P pages', () => {
+  const repo = mkdtempSync(join(tmpdir(), 'validate-plan-set-p-page-boundary-'));
+  mkdirSync(join(repo, 'research'), { recursive: true });
+  mkdirSync(join(repo, 'items'));
+  mkdirSync(join(repo, 'library', 'not-proved-here'), { recursive: true });
+  mkdirSync(join(repo, 'library', 'real-analysis'), { recursive: true });
+  writeFileSync(join(repo, 'items', 'rem-deferred-result.md'), [
+    '---', 'id: rem-deferred-result', 'kind: remark', 'status: published',
+    'proved_here: false', 'deps: []', '---', '',
+  ].join('\n'));
+  writeFileSync(join(repo, 'items', 'thm-published-supplier.md'), [
+    '---', 'id: thm-published-supplier', 'kind: theorem', 'status: published',
+    'deps: [rem-deferred-result]', '---', '',
+  ].join('\n'));
+  writeFileSync(join(repo, 'library', 'not-proved-here', 'deferred-set-theory-beyond-choice.md'), [
+    '---', 'page: deferred-set-theory-beyond-choice', 'status: published',
+    'items: [rem-deferred-result]', 'examples: []', '---', '',
+  ].join('\n'));
+  writeFileSync(join(repo, 'library', 'real-analysis', 'published-supplier.md'), [
+    '---', 'page: published-supplier', 'status: published',
+    'items: [thm-published-supplier]', 'examples: []', '---', '',
+  ].join('\n'));
+  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
+    {
+      order: 1, id: 'published-supplier', title: 'Published supplier', kind: 'P',
+      category: 'real-analysis', requires: [], items: [],
+    },
+    {
+      order: 2, id: 'set-foundation', title: 'Set foundation', kind: 'A',
+      category: 'foundations', companion: 'set-foundation-examples',
+      requires: ['published-supplier'], items: [],
+    },
+    {
+      order: 3, id: 'set-foundation-examples', title: 'Examples', kind: 'B',
+      category: 'foundations', companion: 'set-foundation',
+      requires: ['set-foundation'], items: [],
+    },
+  ] }, null, 2));
+
+  const result = run(repo);
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.match(result.stdout + result.stderr, /\[set-theory-boundary\].*thm-published-supplier -> rem-deferred-result/);
+  rmSync(repo, { recursive: true, force: true });
+});

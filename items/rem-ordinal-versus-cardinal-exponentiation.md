@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-ordinal-exponentiation, fs-the-ordinal-two-to-the-omega-is-uncountable, thm-cantor-powerset, thm-r-uncountable, def-cardinal, def-countable, rem-continuum-hypothesis]
+deps: [def-ordinal-exponentiation, fs-the-ordinal-two-to-the-omega-is-uncountable, thm-cantor-powerset, thm-r-uncountable, def-cardinal, def-countable]
 justified_by: []
 aliases: []
 landmark: false
@@ -78,12 +78,8 @@ elsewhere in this library it is inside a statement *about* cardinal arithmetic,
 never inside an ordinal computation; no page of the ordinal development uses it.
 
 **What else is nearby, and what it is not.** $\mathbb{R}$ is uncountable too
-([[thm-r-uncountable]]), by an argument that has nothing to do with power sets;
-and whether any set sits strictly between $\mathbb{N}$ and
-$\mathcal{P}(\mathbb{N})$ in size is the continuum hypothesis, independent of
-ZFC ([[rem-continuum-hypothesis]]). None of that is a statement about ordinal
-arithmetic, and none of it bears on the value $2^{\omega} = \omega$ proved on
-this page.
+([[thm-r-uncountable]]), by an argument that has nothing to do with power sets.
+Neither fact bears on the value $2^{\omega}=\omega$ proved on this page.
 
 **A rule of thumb that is safe here.** If the exponent is being used to index a
 transfinite recursion, the exponentiation is ordinal. If it is being used to

@@ -10,8 +10,7 @@ items: [def-equinumerous,
         thm-countable-union-of-countable, thm-rationals-countable,
         thm-cantor-powerset, thm-r-uncountable, cor-interval-uncountable,
         cor-irrationals-uncountable, rem-continuum-hypothesis]
-examples: [fs-countable-union-theorem-of-zf, fs-infinite-has-countable-subset-in-zf,
-           fs-uncountable-contains-interval]
+examples: [fs-uncountable-contains-interval]
 ---
 
 **Objective.** This page separates the infinite sets of analysis into those that

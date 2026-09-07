@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: []
 justified_by: []
-forward_refs: [def-axiom-of-choice, fs-zorn-provable-in-zf, rem-choice-ledger]
+forward_refs: [def-axiom-of-choice]
 aliases: []
 landmark: true
 short: "Con(ZF) implies Con(ZFC + GCH), via L"
@@ -47,9 +47,9 @@ of ZF yields a model of ZF + AC + GCH, the consistency of the second follows fro
 the consistency of the first.
 
 The conclusion is **relative**: it is an implication between consistency
-statements, and it is not, and cannot be, a proof that ZFC is consistent. By
-Gödel's second incompleteness theorem the consistency of ZF is not provable in
-ZF, so the hypothesis of the statement cannot be discharged here or anywhere.
+statements, not a proof that ZFC is consistent. If ZF is consistent, Gödel's
+second incompleteness theorem prevents ZF from proving its own consistency; a
+stronger metatheory may of course prove the antecedent.
 
 ## Remarks
 
@@ -65,14 +65,11 @@ ZF, so the hypothesis of the statement cannot be discharged here or anywhere.
   appears by stage $\omega_{\alpha+1}$ (giving GCH). That is an inner-model
   track, and this library has not built it.
 
-- **Why it matters here.** This is the half of the independence of choice that
-  says the Axiom of Choice is safe to assume: adding it to ZF cannot introduce a
-  contradiction that was not already there. Every result in the library proved
-  from [[def-axiom-of-choice]] leans on that reassurance, and the accounting in
-  [[rem-choice-ledger]] names this result as one of the two external facts it
-  quotes. Its partner, that ZF cannot prove the Axiom of Choice either, is
-  [[rem-cohen-forcing-ac-independent]] and is what
-  [[fs-zorn-provable-in-zf]] actually uses.
+- **Why it matters here.** This is the positive consistency half of the later
+  independence theorem. Results proved from [[def-axiom-of-choice]] do not use
+  this metatheorem as a premise; the constructibility track must establish it
+  from earlier local machinery before the catalogue can be retired. Its partner
+  is [[rem-cohen-forcing-ac-independent]].
 
 - **Conditional discipline.** The statement is never asserted unconditionally in
   this library. "ZF does not refute AC" is shorthand for the implication above,

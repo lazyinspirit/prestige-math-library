@@ -90,10 +90,9 @@ immediately above. Let $A$ be a set, and let $\approx$ be equinumerosity
   needs it in order to run: the infinitude of $\mathbb{Q}$, for instance, is
   obtained by exhibiting a bijection $\mathbb{Q} \approx \mathbb{N}$ directly
   ([[thm-rationals-countable]]) rather than by ruling out finiteness. It is used
-  where the two notions of infinity are compared
-  ([[fs-infinite-has-countable-subset-in-zf]]) and where the continuum hypothesis
-  is instantiated at $\mathbb{N}$ ([[rem-continuum-hypothesis]]), both of which
-  need $\mathbb{N}$ to be infinite as a fact rather than as a convention.
+  when the continuum hypothesis is instantiated at $\mathbb{N}$
+  ([[rem-continuum-hypothesis]]), where $\mathbb{N}$ must be infinite as a fact
+  rather than as a convention.
 
 - **$0$ and the empty set.** $0 = \varnothing$, and $A \approx 0$ holds exactly
   when $A = \varnothing$, so the empty set is finite. This matters in the proofs

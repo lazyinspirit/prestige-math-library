@@ -9,7 +9,6 @@ provenance:
   proof: ai-altered
 deps: [thm-zorn, def-axiom-of-choice, def-well-order, def-partial-order, def-initial-segment, def-upper-bound, def-maximal-element, def-chain]
 justified_by: []
-external_refs: [rem-cohen-forcing-ac-independent]
 aliases: [zermelo-well-ordering-theorem, thm-every-set-well-orderable]
 landmark: true
 short: "AC implies every set carries a well-order"
@@ -104,6 +103,6 @@ argument below.
 
 **Maximal, not greatest.** Zorn's lemma concludes that a maximal element exists, never that a greatest one does, and maximal does not imply greatest ([[fs-maximal-is-greatest]]). The argument is arranged so that maximality suffices: step 8.1 shows a maximal well-ordered piece cannot omit a point, because a point could always be appended on top.
 
-**The converse holds.** Every set being well orderable implies the Axiom of Choice ([[thm-well-ordering-implies-ac]]), so the two are equivalent over ZF, as is Zorn's lemma ([[cor-ac-iff-well-ordering]]). That the well-ordering theorem is not a theorem of ZF alone is recorded, conditionally on the consistency of ZF, in [[fs-every-set-well-orderable-in-zf]]; the external result that item quotes is Cohen's independence theorem ([[rem-cohen-forcing-ac-independent]]), which this library records with references and does not prove.
+**The converse holds.** Every set being well orderable implies the Axiom of Choice ([[thm-well-ordering-implies-ac]]), so the two are equivalent over ZF, as is Zorn's lemma ([[cor-ac-iff-well-ordering]]). This equivalence is all that the present proof uses; independence from ZF is a later theorem requiring additional machinery.
 
 **Zermelo 1904.** The original proof does not go through Zorn's lemma; it uses a choice function on $\mathcal{P}(X) \setminus \{\emptyset\}$ directly and builds the well-order by transfinite recursion ([[thm-transfinite-recursion]]), taking at each stage the chosen element of the set of points not yet used. That route is available here too, and it makes the use of choice even more visible: one choice function, consulted at every stage.

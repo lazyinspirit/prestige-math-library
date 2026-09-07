@@ -9,7 +9,6 @@ provenance:
   proof: ai-altered
 deps: [thm-well-ordering-theorem, thm-well-ordering-implies-ac, cor-ac-iff-zorn, def-axiom-of-choice]
 justified_by: []
-external_refs: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent]
 aliases: [cor-ac-zorn-well-ordering]
 landmark: false
 short: "AC $\\iff$ Zorn $\\iff$ every set is well orderable"
@@ -52,7 +51,7 @@ Over ZF the following three statements are equivalent:
 
 ## Facts & Assumptions
 
-**Given:** The axioms of ZF. Each implication below is itself a theorem of ZF, so what is established here is an **equivalence proved in ZF**, with no appeal to any further principle. Read it exactly that way: it says that ZF proves each of (1), (2), (3) to follow from the others, and it does **not** say that any of the three is itself a theorem of ZF. Which of them ZF proves outright is a separate, metamathematical question, and the answer, conditional on the consistency of ZF, is none of them; that is recorded among this page's false statements and in the remarks below.
+**Given:** The axioms of ZF. Each implication below is itself a theorem of ZF, so what is established here is an **equivalence proved in ZF**, with no appeal to any further principle. Read it exactly that way: ZF proves each of (1), (2), and (3) to follow from the others. The equivalence alone does not say that ZF proves any one of them outright.
 
 [L1] The Axiom of Choice implies that every set can be well ordered ([[thm-well-ordering-theorem]]).
 
@@ -80,8 +79,14 @@ Over ZF the following three statements are equivalent:
 
 **What this licenses.** Any later result may be proved with whichever of the three forms is convenient, at exactly the same cost. Applications that build an object stage by stage naturally use (3) through [[thm-transfinite-recursion]]; applications that maximise something naturally use (2); applications about products of nonempty sets use (1).
 
-**What is not proved here.** That any of the three is independent of ZF. That requires Gödel's constructible universe for the consistency of the Axiom of Choice with ZF ([[rem-godel-constructible-universe]]) and Cohen's forcing for the consistency of its negation ([[rem-cohen-forcing-ac-independent]]), neither of which this library contains: both are recorded with references and are not proved anywhere here. The honest conditional statements are [[fs-zorn-provable-in-zf]] and [[fs-every-set-well-orderable-in-zf]].
+**What is not proved here.** No independence conclusion follows from an
+equivalence proof. Establishing models in which the equivalent principles hold
+or fail belongs to the later constructibility, forcing, and symmetric-model
+pages and is not a premise of this item.
 
-**Strictly weaker principles get no information from this.** The equivalence says nothing about the ultrafilter lemma, dependent choice or countable choice. Each of those is, **if ZF is consistent**, strictly weaker than the Axiom of Choice: not provable in ZF, and not strong enough to recover AC. Those separations are external metamathematical results, established by forcing and by permutation models, quoted from references and proved nowhere in this library; the consistency hypothesis cannot be dropped and cannot be proved inside ZF. Every theorem in this library that uses one of the weaker principles must say which, and the ledger, with the sources, is [[rem-choice-ledger]].
+**Other principles get no information from this.** The equivalence says
+nothing about the ultrafilter lemma, dependent choice, or countable choice.
+Every theorem using one of those principles must state the actual hypothesis;
+the locally established implication ledger is [[rem-choice-ledger]].
 
 **Historical note.** Zermelo proved (1) implies (3) in 1904, Kuratowski and Zorn isolated (2) in 1922 and 1935, and the circle of equivalences was standard by the 1940s. The choice-free content of the theory of well-orders, by contrast, was settled earlier: Hartogs proved in 1915 that cardinal comparability implies (3), which is what makes [[thm-hartogs]] a choice-free theorem worth isolating.

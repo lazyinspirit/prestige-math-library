@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // extcheck.mjs — the "recorded but not proved here" gate.
 //
-//   node tools/extcheck.mjs [--ledger] [--json] [--quiet]
+//   node tools/extcheck.mjs [--ledger] [--json] [--quiet] [--repo DIR]
 //
 // Owner instruction, 2026-07-25: the deferred results of DEFERRED.md (measure
 // theory, functional analysis, set theory beyond choice, algebraic topology, the
@@ -51,6 +51,10 @@
 //   external-unused      an `external_refs` entry is never linked in the body,
 //                        so the declaration marks the item for nothing visible
 //
+//   foundations-deferred-dependency  an item homed on a Foundations page has
+//                        a deps/justified_by/forward_refs path to an item on
+//                        Set Theory Beyond Choice: Recorded, Not Proved Here
+//
 // WARNINGS
 //   unproved-on-published  a PUBLISHED item rests on unproved material (correct
 //                          and marked, but worth seeing every run)
@@ -66,7 +70,12 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
+const args = process.argv.slice(2);
+const argVal = (flag) => {
+  const i = args.indexOf(flag);
+  return i >= 0 ? args[i + 1] : undefined;
+};
+const REPO = argVal('--repo') ?? join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const asJson = process.argv.includes('--json');
 const quiet = process.argv.includes('--quiet');
 const writeLedger = process.argv.includes('--ledger');
@@ -118,6 +127,8 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     kind: scalar(fm, 'kind'),
     status: scalar(fm, 'status'),
     deps: list(fm, 'deps'),
+    justified: list(fm, 'justified_by'),
+    forward: list(fm, 'forward_refs'),
     externalRefs: list(fm, 'external_refs'),
     provedHere: scalar(fm, 'proved_here') !== 'false',
     precheck: nested(fm, 'verification', 'precheck'),
@@ -130,6 +141,115 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   for (const a of list(fm, 'aliases')) aliasTo.set(a, id);
 }
 const resolve = (x) => (items.has(x) ? x : aliasTo.get(x));
+
+// ------------------------------------- Set Theory bootstrapping hard boundary
+//
+// The Foundations track exists to replace the Set Theory deferred catalogue.
+// Its authored items may mention a deferred result through `external_refs` as
+// non-load-bearing orientation, but no logical or well-definedness path may
+// reach the catalogue. This is category-aware and transitive so an apparently
+// innocent dependency on an older orientation remark cannot launder the edge.
+
+const foundationsItems = new Set();
+const itemsOnLibraryPage = new Map();
+const plannedEdges = new Map();
+try {
+  const libraryRoot = join(REPO, 'library');
+  const walk = (dir, category) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) walk(path, category ?? entry.name);
+      else if (entry.name.endsWith('.md') && !entry.name.startsWith('_')) {
+        const { fm } = split(readFileSync(path, 'utf8'));
+        const pageId = scalar(fm, 'page') ?? basename(entry.name, '.md');
+        const pageItems = [...list(fm, 'items'), ...list(fm, 'examples')];
+        itemsOnLibraryPage.set(pageId, pageItems);
+        if (category === 'foundations') {
+          for (const id of pageItems) {
+            const r = resolve(id);
+            if (r) foundationsItems.add(r);
+          }
+        }
+      }
+    }
+  };
+  walk(libraryRoot);
+} catch { /* depcheck owns missing/malformed page diagnostics */ }
+try {
+  const plan = JSON.parse(readFileSync(join(REPO, 'research/plan-spec.json'), 'utf8'));
+  const pageById = new Map((plan.pages ?? []).map((page) => [page.id, page]));
+  for (const page of plan.pages ?? [])
+    for (const entry of [...(page.items ?? []), ...(page.examples ?? [])]) {
+      if (typeof entry === 'string') continue;
+      plannedEdges.set(entry.id, [
+        ...(entry.deps ?? []), ...(entry.justified_by ?? []),
+        ...(entry.forward_refs ?? []),
+      ]);
+    }
+  const consumedPages = new Set();
+  const collectPage = (id) => {
+    if (consumedPages.has(id)) return;
+    consumedPages.add(id);
+    for (const req of pageById.get(id)?.requires ?? []) collectPage(req);
+  };
+  for (const page of plan.pages ?? [])
+    if (page.category === 'foundations') collectPage(page.id);
+  for (const id of consumedPages) {
+    const page = pageById.get(id);
+    const roots = [
+      ...(itemsOnLibraryPage.get(id) ?? []),
+      ...(page?.items ?? []), ...(page?.examples ?? []),
+    ];
+    for (const entry of roots) {
+      const itemId = typeof entry === 'string' ? entry : entry?.id;
+      const r = resolve(itemId) ?? (plannedEdges.has(itemId) ? itemId : undefined);
+      if (r) foundationsItems.add(r);
+    }
+  }
+} catch { /* validate-plan owns missing/malformed plan diagnostics */ }
+
+const setTheoryDeferred = new Set();
+try {
+  const file = join(REPO, 'library/not-proved-here/deferred-set-theory-beyond-choice.md');
+  const { fm } = split(readFileSync(file, 'utf8'));
+  for (const id of [...list(fm, 'items'), ...list(fm, 'examples')]) {
+    const r = resolve(id);
+    if (r) setTheoryDeferred.add(r);
+  }
+} catch { /* depcheck owns missing/malformed page diagnostics */ }
+
+const deferredPathCache = new Map();
+const deferredVisiting = new Set();
+function deferredPath(id) {
+  const r = resolve(id) ?? (plannedEdges.has(id) ? id : undefined);
+  if (!r || deferredVisiting.has(r)) return null;
+  if (deferredPathCache.has(r)) return deferredPathCache.get(r);
+  if (setTheoryDeferred.has(r)) return [r];
+  deferredVisiting.add(r);
+  const it = items.get(r);
+  const edges = new Set([
+    ...(it?.deps ?? []), ...(it?.justified ?? []), ...(it?.forward ?? []),
+    ...(plannedEdges.get(r) ?? []),
+  ]);
+  for (const d of edges) {
+    const path = deferredPath(d);
+    if (path) {
+      const found = [r, ...path];
+      deferredVisiting.delete(r);
+      deferredPathCache.set(r, found);
+      return found;
+    }
+  }
+  deferredVisiting.delete(r);
+  deferredPathCache.set(r, null);
+  return null;
+}
+
+for (const id of [...foundationsItems].sort()) {
+  const path = deferredPath(id);
+  if (path)
+    err('foundations-deferred-dependency', `${items.get(id)?.file ?? `research/plan-spec.json#${id}`}: Foundations dependency path reaches Set Theory recorded-not-proved material: ${path.join(' -> ')}`);
+}
 
 // -------------------------------------------------------- shape of an unproved item
 

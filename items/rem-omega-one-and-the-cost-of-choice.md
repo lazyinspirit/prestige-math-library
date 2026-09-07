@@ -9,7 +9,6 @@ provenance:
   proof: not-applicable
 deps: [def-first-uncountable-ordinal, thm-hartogs, thm-omega-one-is-the-least-uncountable-ordinal, thm-countable-subsets-of-omega-one-are-bounded, def-countable-choice, thm-countable-union-of-countable, rem-choice-ledger]
 justified_by: []
-external_refs: [rem-feferman-levy-model]
 aliases: []
 landmark: false
 short: "what this page costs in choice, item by item"
@@ -68,33 +67,12 @@ exactly one step: the appeal to [[thm-countable-union-of-countable]], which
 selects one enumeration of each of countably many at most countable sets at
 once. Every consequence of the boundedness theorem inherits that cost, including
 the statement that no at most countable subset of $\omega_1$ is cofinal in it.
-$\mathrm{AC}_\omega$ is strictly weaker than the Axiom of Choice
-([[rem-choice-ledger]]), so those results may be neither relabelled choice free
-nor lumped in with the full-choice results of this library.
-
-**The hypothesis cannot simply be dropped.** It is consistent with ZF, granted
-the consistency of ZF, that $\omega_1$ is the supremum of an $\omega$-sequence
-of at most countable ordinals, so that the boundedness conclusion fails
-outright. The witness is the Feferman-Levy model
-([[rem-feferman-levy-model]]), a symmetric extension in which $\mathbb{R}$ is a
-countable union of countable sets and $\omega_1$ has countable cofinality. That
-model is quoted from its sources and is **not** proved in this library, which
-contains neither forcing nor symmetric extensions; it is recorded so that the
-hypothesis of the boundedness theorem is visibly load bearing rather than
-decorative.
-
-**What the model does not disturb.** $\omega_1$ still exists there, and is still
-uncountable, exactly because its existence is a ZF theorem. What fails is a
-statement about how $\omega_1$ is approached from below. So the split recorded
-above is not a technicality: the same object is available in ZF while some of
-its most useful structural properties are not.
+The exact $\mathrm{AC}_\omega$ hypothesis is therefore part of those results
+and may not be silently replaced by “choice-free” or by full AC. The local
+ledger [[rem-choice-ledger]] makes no unproved reverse-implication claim.
 
 **A standing warning for later pages.** Any argument that builds a counterexample
 on the ordinal space below $\omega_1$ and uses "a countable family of ordinals
 below $\omega_1$ has a bound below $\omega_1$" is spending
 $\mathrm{AC}_\omega$, whether or not it says so. Pages that use the boundedness
 theorem must carry the hypothesis forward into their own statements.
-
-**Conditional discipline.** Every independence claim above is relative to the
-consistency of ZF, and this library never asserts that the boundedness theorem
-is false, only that ZF alone cannot prove it.

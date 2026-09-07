@@ -25,8 +25,10 @@ boundary and are not silently presented as already covered.
 
 ## 0. Published baseline and non-negotiable boundary
 
-The existing Foundations pathway is read-only for this commission. It already
-publishes 279 placed items across six A/B pairs and two single pages:
+The existing Foundations pathway is the bootstrap base for this commission.
+Published orientation-only dependencies were repaired in September 2026 so
+that this base no longer reaches the deferred Set Theory catalogue through
+either page prerequisites or authored logical dependencies. It includes:
 
 - ZFC axioms and basic constructions; relations, functions, quotients and
   indexed products;
@@ -41,6 +43,13 @@ publishes 279 placed items across six A/B pairs and two single pages:
 The new track cites these results and begins where they stop. It does not
 redefine set, function, ordinal, cardinal, filter, or forcing filter as though
 the last were an ordinary set-theoretic filter.
+
+No Foundations page may directly or transitively require
+`deferred-set-theory-beyond-choice`, and no Foundations item may reach one of
+that page's items through `deps`, `justified_by`, or a load-bearing forward
+reference. The catalogue is a target ledger, never a supplier. A page may prove
+the same conclusion from earlier local machinery; that is the purpose of this
+track.
 
 No page may claim that ZF, ZFC, or a large-cardinal theory is consistent.
 Internal theorems, semantic model constructions, proof-theoretic
@@ -62,9 +71,9 @@ mathematics merely to control frontier selection.
 | SET-3 | `arithmetization-incompleteness-and-relative-consistency` | SET-2 |
 | SET-4 | `well-founded-relations-rank-and-the-cumulative-hierarchy` | published ordinals/transfinite recursion |
 | SET-5 | `reflection-absoluteness-and-elementary-submodels` | SET-2, SET-4 |
-| SET-6 | `weak-choice-principles-and-sierpinskis-theorem` | published cardinal arithmetic; filters/ultrafilters |
+| SET-6 | `weak-choice-principles-and-sierpinskis-theorem` | SET-4; published cardinal arithmetic, filters/ultrafilters, and metric compactness (for the already-homed DC interface) |
 | SET-7 | `boolean-algebras-stone-duality-and-the-prime-ideal-theorem` | SET-2; published compactness (whose closure contains filters/ultrafilters) |
-| SET-8 | `club-stationary-sets-and-pressing-down` | published cardinal arithmetic/cofinality |
+| SET-8 | `club-stationary-sets-and-pressing-down` | SET-1; published cardinal arithmetic/cofinality |
 | SET-9 | `set-theoretic-trees-delta-systems-and-diamond` | SET-8 |
 | SET-10 | `borel-analytic-sets-perfect-sets-and-determinacy` | SET-4; published complete metrizability and Lebesgue measure (both already reach countability) |
 | SET-11 | `the-constructible-hierarchy-and-inner-models` | SET-5 |
@@ -103,7 +112,7 @@ theory page. Step 1 must keep at least the following witnesses.
 |---|---|
 | SET-1--3 | parse/substitution computations; a nonstandard model; CTM-versus-consistency counterexample |
 | SET-4--5 | ranks and `V_alpha` computed; a nontransitive elementary submodel and its collapse |
-| SET-6--7 | implication/nonimplication diagram; finite Boolean algebras and Stone spaces |
+| SET-6--7 | proved implication diagram; finite Boolean algebras and Stone spaces (model-theoretic nonimplications wait for SET-18--21) |
 | SET-8--9 | club diagonal intersection, pressing down, Aronszajn/Suslin tree examples, Delta systems |
 | SET-10 | Borel codes, a closed-set tree, an analytic non-Borel set, determined open games |
 | SET-11--12 | early `L_alpha` stages, canonical constructible well-order, diamond prediction |
@@ -162,6 +171,9 @@ lemma.
 10. The published deferred remark is removed or rewritten only after every
     mathematical clause it owns has a proved destination and the owner approves
     the publication edit.
+11. Neither a page-level `requires` closure nor an item-level logical dependency
+    closure may reach the deferred Set Theory catalogue. This is a fatal gate,
+    not a prose convention.
 
 ---
 
@@ -241,8 +253,10 @@ is deferred to SET-7, where Boolean algebras exist; finite-character/Tukey
 forms; Dedekind-infinite versus
 having a countable subset; countable unions of countable sets; Hartogs bounds
 for arbitrary sets; Specker's two-local-GCH lemma; Sierpiński's theorem that
-the arbitrary-set GCH implies AC in ZF; non-implication ledger with each model
-destination; `fs-gch-on-alephs-is-a-choice-free-formulation`.
+the arbitrary-set GCH implies AC in ZF;
+`fs-gch-on-alephs-is-a-choice-free-formulation`. Reverse-implication and
+nonimplication claims are not recorded here; SET-18--21 must prove their model
+constructions before those claims enter Foundations.
 
 **Target.** This page proves every internal clause of
 `rem-gch-implies-ac`. The proof uses GCH on arbitrary sets and iterated power
@@ -654,9 +668,9 @@ claim-to-item map. Before publication, require:
 1. every non-status clause maps to a proof-bearing item on a published page;
 2. every mapped item passes proof, source, dependency and axiom-strength gates;
 3. every status-only clause has a dated primary-source audit;
-4. no proof-bearing target item has a `deps` or `justified_by` edge to the
-   deferred remark it is replacing (historical page-level provenance reachability
-   through already-published Foundations pages is not a proof dependency); and
+4. no Foundations page or item has any direct or transitive prerequisite path
+   to the deferred catalogue or one of its items; historical published paths
+   receive no exemption; and
 5. owner approval governs removal/rewording of the published deferred page.
 
 ## 5. Source-correction prerequisites already discovered

@@ -256,6 +256,18 @@ with published A pages, except `not-proved-here`.
 The renderer and rendercheck share the YAML parser. Relations and source lists
 are derived from the declared fields; do not maintain duplicate graph data.
 
+For the `foundations` category, `extcheck.mjs` also enforces the Set Theory
+bootstrapping boundary transitively: no authored dependency,
+`justified_by`, or load-bearing `forward_refs` path may reach an item on *Set
+Theory Beyond Choice: Recorded, Not Proved Here*. It checks items on each
+Foundations page and on every page in that page's planned `requires` closure,
+including planned items whose page file has not yet been written.
+`validate-plan.mjs` independently rejects both inherited page requirements and
+planned-item paths to the catalogue. These are hard publication failures. A
+proved replacement may share the mathematical conclusion, but it must be
+established entirely from earlier local machinery rather than cite the recorded
+item it replaces.
+
 ## 7. Schema changes
 
 Update the loader, validators, renderer consumers, tests, and affected content

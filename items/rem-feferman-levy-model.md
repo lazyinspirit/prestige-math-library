@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-cohen-forcing-ac-independent]
 justified_by: []
-forward_refs: [fs-countable-union-theorem-of-zf, thm-countable-union-of-countable, def-countable-choice, thm-r-uncountable, def-cardinal]
+forward_refs: [thm-countable-union-of-countable, def-countable-choice, thm-r-uncountable, def-cardinal]
 aliases: []
 landmark: true
 short: "omega_1 singular; R a countable union of countable sets"
@@ -65,11 +65,10 @@ can be chosen uniformly.
   cofinality computation in the symmetric model. Ordinal and cardinal arithmetic
   beyond [[def-cardinal]] is also needed to state the cofinality claim properly.
 
-- **Why it matters here.** Two library results lean on it directly. It is the
-  external fact behind [[fs-countable-union-theorem-of-zf]]: the countable union
-  theorem [[thm-countable-union-of-countable]] is proved here **from**
-  [[def-countable-choice]], and this model shows the hypothesis cannot be
-  dropped. It is also the standing warning attached to $\omega_1$: any
+- **Why it matters later.** The countable union theorem
+  [[thm-countable-union-of-countable]] is proved here **from**
+  [[def-countable-choice]]. Once this model is constructed locally, it will
+  show that the hypothesis cannot simply be dropped. It is also the standing warning attached to $\omega_1$: any
   counterexample built on the ordinal space $[0, \omega_1)$ and its sequential
   compactness is silently spending a choice principle, because in this model
   $\omega_1$ has countable cofinality and those arguments collapse. Note also

@@ -32,8 +32,7 @@ examples: [ex-cosets-of-q-in-r-and-the-vitali-translates-on-unit-interval,
            fs-every-subset-of-r-is-lebesgue-measurable,
            fs-continuous-images-of-lebesgue-measurable-subsets-of-r-are-lebesgue-measurable,
            fs-continuous-preimages-of-lebesgue-measurable-subsets-of-r-are-lebesgue-measurable,
-           fs-a-dense-set-of-outer-measure-zero-and-a-dense-set-of-full-inner-measure-cannot-coexist,
-           fs-a-nonmeasurable-set-can-be-constructed-without-the-axiom-of-choice]
+           fs-a-dense-set-of-outer-measure-zero-and-a-dense-set-of-full-inner-measure-cannot-coexist]
 ---
 
 Lebesgue outer measure, translation invariance, Steinhaus's theorem, the Cantor

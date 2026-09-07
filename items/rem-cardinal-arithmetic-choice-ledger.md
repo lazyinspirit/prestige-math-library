@@ -7,9 +7,8 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-cardinal, def-cardinal-arithmetic, lem-cardinality-of-a-well-orderable-set, lem-cardinal-operations-are-well-defined, thm-cardinal-arithmetic-agrees-with-finite-counting, thm-hessenberg, cor-cardinal-absorption, lem-successor-cardinal-exists, cor-the-aleph-and-beth-hierarchies-are-well-defined, def-aleph-and-beth-hierarchies, thm-every-infinite-cardinal-is-an-aleph, thm-cardinal-comparability-iff-ac, thm-tarski-square, def-cofinality, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-cardinal-power-set-and-cantor, def-infinite-cardinal-sum-and-product, thm-konig, cor-cofinality-of-a-cardinal-power, def-axiom-of-choice, def-countable-choice, rem-choice-ledger, rem-continuum-hypothesis]
+deps: [def-cardinal, def-cardinal-arithmetic, lem-cardinality-of-a-well-orderable-set, lem-cardinal-operations-are-well-defined, thm-cardinal-arithmetic-agrees-with-finite-counting, thm-hessenberg, cor-cardinal-absorption, lem-successor-cardinal-exists, cor-the-aleph-and-beth-hierarchies-are-well-defined, def-aleph-and-beth-hierarchies, thm-every-infinite-cardinal-is-an-aleph, thm-cardinal-comparability-iff-ac, thm-tarski-square, def-cofinality, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-cardinal-power-set-and-cantor, def-infinite-cardinal-sum-and-product, thm-konig, cor-cofinality-of-a-cardinal-power, def-axiom-of-choice, def-countable-choice, rem-choice-ledger]
 justified_by: []
-external_refs: [rem-independence-of-ch-and-gch, rem-gch-implies-ac, rem-gitik-all-uncountable-cardinals-singular]
 aliases: []
 landmark: false
 short: "ZF, AC, and what stays undecided"
@@ -87,28 +86,13 @@ Tarski's square law ([[thm-tarski-square]]). The first is recorded in
 page. Where an argument might have needed it, the ordinal structure supplied a
 canonical least element instead.
 
-**How far regularity can fail without choice.** That clause (b) above cannot be
-proved in ZF is recorded rather than proved here, and it is conditional:
-[[rem-gitik-all-uncountable-cardinals-singular]] states that, relative to a
-large-cardinal consistency hypothesis, there is a model of ZF in which **every**
-uncountable cardinal is singular. Granting that hypothesis, "successor cardinals
-are regular" is a consequence of choice and not a structural fact about
-cardinals, which is why clause (b) is stated with its hypothesis.
-
-**Where the continuum escapes ZFC.** The constraint proved here is
-$\operatorname{cf}(2^{\aleph_0}) > \aleph_0$
-([[cor-cofinality-of-a-cardinal-power]]), which excludes some candidate values
-for $2^{\aleph_0}$ and selects none. Whether $2^{\aleph_0} = \aleph_1$ is the
-continuum hypothesis, stated in [[rem-continuum-hypothesis]]; that ZFC proves
-neither it nor its negation, granted the consistency of ZFC, is recorded in
-[[rem-independence-of-ch-and-gch]] and is proved neither on this page nor on any
-page this one rests on. The
-generalised form is stronger than it looks: over ZF it implies the Axiom of
-Choice, a result of Sierpiński recorded in [[rem-gch-implies-ac]], and proved
-neither here nor on any page this one rests on.
+**What the hypotheses do and do not say.** The regularity results named above
+carry their choice hypotheses explicitly. This ledger records the proofs under
+those hypotheses; it makes no model-theoretic claim that the hypotheses are
+necessary. That lower-bound question belongs to the later choiceless-model
+development.
 
 **What this page therefore does and does not settle about $2^{\aleph_0}$.** It
 settles that $2^{\aleph_0}$ is an aleph, granted choice; that it is strictly
-above $\aleph_0$; and that its cofinality is uncountable. It settles nothing
-about which aleph it is, and no statement on this page or its companion asserts a
-value.
+above $\aleph_0$; and that its cofinality is uncountable. It proves no exact
+value and makes no independence claim.

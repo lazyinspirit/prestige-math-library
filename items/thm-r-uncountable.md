@@ -113,6 +113,8 @@ choice, silently and unnecessarily.
 
 - **The diagonal argument is not lost, only relocated.** [[thm-cantor-powerset]], proved earlier on this page, is Cantor's diagonal argument in a setting where it needs nothing but the Power Set and Separation axioms. What is unavailable here is only the *decimal* diagonal, and only because decimal expansions are infinite series.
 
-- **The choice-freeness matters beyond tidiness.** It is what lets [[fs-countable-union-theorem-of-zf]] draw a conclusion about ZF: since this theorem is proved in ZF alone, any model of ZF in which $\mathbb{R}$ is a countable union of countable sets is a model in which the countable-union theorem fails.
+- **The choice-freeness matters beyond tidiness.** The result remains available
+  as a local ZF theorem in later arguments, including arguments that separately
+  state a weak-choice hypothesis for assembling countable families.
 
 - **The argument gives more than the statement does.** Nothing above depends on the starting interval being $(0,1)$, so re-seeding the recursion inside a given interval shows that every nondegenerate interval, open or closed, is uncountable. That extension is [[cor-interval-uncountable]], next on this page, where it is proved rather than asserted.

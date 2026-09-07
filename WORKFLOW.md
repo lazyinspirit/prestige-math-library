@@ -165,6 +165,11 @@ references, rendering, prose, sources, pathways, provenance, contracts,
 finite smoke tests, risk, boundaries, citation fidelity, and evidence liveness.
 Passing structural checks or finite tests does not prove mathematics.
 
+The Set Theory completion track has an additional bootstrap gate. Foundations
+pages fail validation if their declared page prerequisites or authored logical
+dependencies reach `deferred-set-theory-beyond-choice`, even transitively. That
+catalogue is a target ledger, never a supplier page.
+
 Source gates require harvest dispositions, fetched source evidence, live URLs,
 and result backing. Recover URLs before replacing sources. Missing full text
 blocks source closure; a source-scouting Beta handles work needing judgment.

@@ -11,6 +11,5 @@ examples: [ex-a-relation-on-a-three-element-set-with-its-domain-range-inverse-an
            cex-a-symmetric-transitive-relation-that-is-not-reflexive,
            fs-symmetry-and-transitivity-imply-reflexivity,
            cex-the-image-of-an-intersection-is-smaller-than-the-intersection-of-the-images,
-           ex-a-nonempty-product-built-without-choice,
-           fs-every-surjection-has-a-right-inverse-in-zf]
+           ex-a-nonempty-product-built-without-choice]
 ---

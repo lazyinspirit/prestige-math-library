@@ -10,8 +10,7 @@ provenance:
 deps: [thm-vitali-sets-exist-under-choice-on-r-over-q,
        thm-bernstein-sets-exist-under-a-well-ordering-of-r,
        thm-a-free-ultrafilter-on-n-is-not-lebesgue-measurable,
-       rem-vitali-non-measurable-set, rem-solovay-model,
-       rem-shelah-inaccessible-and-the-baire-property, rem-choice-strengths]
+       rem-vitali-non-measurable-set, rem-choice-strengths]
 justified_by: []
 aliases: []
 landmark: false
@@ -53,8 +52,6 @@ one-directional. It proves what follows from **being given** a free ultrafilter,
 namely nonmeasurability; it does not produce a free ultrafilter. The existence
 cost is recorded elsewhere in [[rem-choice-strengths]].
 
-The published remarks [[rem-solovay-model]] and
-[[rem-shelah-inaccessible-and-the-baire-property]] explain why none of these
-pathologies can be read as consequences of ZF + DC alone: relative to the stated
-consistency hypotheses, ZF + DC can coexist with all sets of reals being
-measurable, and with all sets of reals having the Baire property.
+These are upper bounds supplied by the local constructions. The page makes no
+claim that any displayed hypothesis is weakest possible. Such lower bounds must
+wait until the Solovay and Shelah model constructions are proved locally.

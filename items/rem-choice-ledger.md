@@ -1,34 +1,23 @@
 ---
 id: rem-choice-ledger
 kind: remark
-title: "The choice ledger: what costs the Axiom of Choice and what does not"
+title: "The proved choice ledger: hypotheses, equivalences, and upper bounds"
 status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [cor-every-vector-space-has-a-basis, thm-every-independent-set-extends-to-a-basis, rem-godel-constructible-universe, rem-cohen-forcing-ac-independent, rem-schechter-kelley-tychonoff,
-       rem-feferman-no-free-ultrafilter-in-zf, rem-halpern-levy-bpi-not-ac, rem-cohen-first-model,
-       cor-ac-iff-well-ordering, cor-ac-iff-zorn, thm-hartogs, lem-well-order-comparability,
-       thm-zorn, thm-bourbaki-witt, def-chain, thm-well-ordering-theorem, def-cardinal,
-       def-dependent-choice]
+deps: [cor-every-vector-space-has-a-basis, thm-every-independent-set-extends-to-a-basis,
+       cor-ac-iff-well-ordering, cor-ac-iff-zorn, thm-hartogs,
+       lem-well-order-comparability, thm-zorn, thm-bourbaki-witt, def-chain,
+       thm-well-ordering-theorem, def-cardinal, def-axiom-of-choice,
+       def-countable-choice, def-dependent-choice]
 justified_by: []
-forward_refs: [thm-cardinal-comparability-iff-ac, thm-perfectly-normal-implies-completely-normal,
-               thm-urysohn-lemma, thm-tietze-extension-theorem,
-               lem-dependent-choice-along-a-sequence-of-relations,
-               thm-product-universal-property]
 aliases: [rem-choice-strength-ledger]
 landmark: false
-short: "equivalents, strictly weaker principles, choice-free substitutes"
+short: "proved equivalences and explicit choice hypotheses"
 verification:
   precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-03
-    scope: published-audit-targeted
-    context_sha256: d2b59e29f751321edaa884e639932b4c4734c5f461cd799d480315625e6328d4
-    item_sha256: 44b31cb0dd716639c3e5701d8bb2b9947c80f2b47aace30782104555d4470d4a
   verified:
     model: gpt-5.6-sol-codex-subscription
     verdict: certify
@@ -38,179 +27,45 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Axiom of choice (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
-    - title: "Boolean prime ideal theorem (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Boolean_prime_ideal_theorem"
-    - title: "Axiom of dependent choice (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
-    - title: "Axiom of countable choice (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
     - title: "The Axiom of Choice (Stanford Encyclopedia of Philosophy)"
       url: "https://plato.stanford.edu/entries/axiom-choice/"
-    - title: "Ultrafilter (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 
-This item is bookkeeping, not mathematics: it records what each statement in the
-neighbourhood of the Axiom of Choice actually costs, so that later pages can
-state honestly which of their theorems are choice-free. Nothing here is proved
-that is not proved elsewhere in the library, and everything cited without a
-link is flagged as such.
+This ledger records only conclusions established by local proofs. It separates
+an assumption actually used by an argument from a claim about the weakest
+possible assumption, which usually needs additional model theory.
 
-**Equivalent to the Axiom of Choice over ZF.**
+**Equivalent formulations proved over ZF.** The Axiom of Choice, Zorn's lemma,
+and the assertion that every set can be well ordered are equivalent by
+[[cor-ac-iff-zorn]] and [[cor-ac-iff-well-ordering]]. Thus a proof using any one
+of them may be translated into a proof using either of the others. This is an
+equivalence statement; it does not itself prove an independence result.
 
-- **Zorn's lemma** and **the well-ordering theorem**. Both equivalences are
-  proved in this library, in [[cor-ac-iff-zorn]] and
-  [[cor-ac-iff-well-ordering]]. Each of *these two statements* costs exactly the
-  Axiom of Choice, no more and no less. A theorem proved *with* one of them costs
-  at most the Axiom of Choice, which is an upper bound and not a lower one: the
-  theorem may well follow from something strictly weaker, and the ultrafilter
-  lemma below is exactly that case.
-- **Tychonoff's theorem**, that a product of compact spaces is compact. The
-  implication from the Axiom of Choice is the familiar one; the converse is
-  Kelley 1950. Not proved here, and worth a warning when it is: Kelley's
-  original argument needs a repair, supplied by Schechter, and without the
-  repair it yields only the Boolean prime ideal theorem
-  ([[rem-schechter-kelley-tychonoff]]).
-- **Every vector space has a basis.** The implication from the Axiom of Choice
-  is a routine application of Zorn's lemma, and it **is** proved here, in
-  [[cor-every-vector-space-has-a-basis]] by way of
-  [[thm-every-independent-set-extends-to-a-basis]]. The converse is a hard
-  theorem of Blass, 1984, which is **not** proved here and is quoted on the
-  authority of the references. The equivalence itself is
-  recorded in the library, in [[rem-hahn-banach-hamel-basis-open]], where it
-  fixes the upper endpoint of an open question about the strength of
-  Hahn-Banach.
-- **Cardinal comparability**, that for any two sets one injects into the other.
-  This is Hartogs 1915, and the full equivalence with the Axiom of Choice **is**
-  now proved here, in [[thm-cardinal-comparability-iff-ac]], by way of the
-  construction of [[thm-hartogs]].
+**Where the supplied proofs spend full choice.** [[thm-zorn]] uses
+[[def-axiom-of-choice]] to select a strict upper bound for every chain that has
+no maximal member. Its structural fixed-point core, [[thm-bourbaki-witt]], is
+choice-free. [[thm-well-ordering-theorem]] then obtains a well-order through
+Zorn. The proof that every vector space has a basis similarly extends an
+independent set by Zorn ([[thm-every-independent-set-extends-to-a-basis]],
+[[cor-every-vector-space-has-a-basis]]). These routes establish AC as a
+sufficient hypothesis; they do not establish that every consequence needs AC.
 
-**Strictly weaker than the Axiom of Choice.**
+**Weaker hypotheses remain distinct in this ledger.** Countable choice and
+dependent choice are separately stated principles ([[def-countable-choice]],
+[[def-dependent-choice]]). A theorem using one must carry that exact assumption
+in its statement and proof. This item does not assert any unproved reverse
+implication or nonimplication among them.
 
-Each of the following is a genuine choice principle: not provable in ZF
-(assuming ZF consistent), yet strictly weaker than the Axiom of Choice.
+**Choice-free substitutes.** [[thm-hartogs]] gives, for every set $A$, an
+ordinal that does not inject into $A$, without comparing arbitrary sets.
+[[lem-well-order-comparability]] compares already supplied well-orders without
+choosing well-orders for arbitrary sets. Transfinite induction and recursion
+likewise operate on a supplied well-order. These results are not weakened by
+the fact that assigning [[def-cardinal|$|A|$]] to an arbitrary set requires a
+well-orderability hypothesis.
 
-- **The ultrafilter lemma**, that every filter extends to an ultrafilter,
-  equivalently the **Boolean prime ideal theorem**. The Axiom of Choice implies
-  it, that implication being the one thing here this library does prove; it is
-  not provable in ZF (Feferman 1965,
-  [[rem-feferman-no-free-ultrafilter-in-zf]]), and it does not imply the Axiom
-  of Choice (Halpern and Levy 1971, [[rem-halpern-levy-bpi-not-ac]]). Both of
-  those are external results, recorded and not proved here. The proof given here
-  ([[thm-ultrafilter-lemma]]) runs through Zorn's lemma, so it pays full price
-  for a statement that costs strictly less: exactly the overpayment set out in
-  [[rem-choice-strengths]], and the reason a cost may not be read off a proof.
-- **Dependent choice (DC)**, that if every element of a nonempty set $X$ stands
-  in a relation $R$ to some element of $X$, then for **every** $a \in X$ there is a
-  **sequence** $(x_n)_{n \in \mathbb{N}}$ in $X$ with $x_0 = a$ and
-  $x_n \mathbin{R} x_{n+1}$ for every $n$ ([[def-dependent-choice]]). The
-  prescribed starting point belongs to the statement: deleting the clause
-  $x_0 = a$ gives a **formally weaker** principle, which that item records as an
-  immediate consequence and does not derive DC back from, so the two are not
-  interchangeable here. What DC delivers is an $\mathbb{N}$-indexed sequence, not a chain in this
-  library's sense ([[def-chain]], a totally ordered subset of a poset): $R$ need
-  not be an order at all, and the terms need not be distinct. Implied by the
-  Axiom of Choice, and implies countable choice; neither implication reverses,
-  which is a relative-consistency result and so holds under the standing
-  assumption that ZF is consistent. It
-  is the principle quietly used whenever a sequence is built by picking each term
-  in terms of the previous one. The two non-reversals are external results that
-  this library does not prove; it records them, with their sources, in
-  [[def-dependent-choice]].
-- **Countable choice ($\mathrm{AC}_\omega$)**, choice functions for countable
-  families. Implied by dependent choice, and still not a theorem of ZF: Cohen's
-  first model contains an infinite set of reals with no countably infinite subset
-  ([[rem-cohen-first-model]]), which is already a failure of
-  $\mathrm{AC}_\omega$.
-
-**These three are not ranked on a line, and none of them is "the weakest".** The
-only implications among them PROVABLE IN ZF are $\mathrm{DC} \Rightarrow \mathrm{AC}_\omega$
-and its consequences; the ultrafilter lemma is incomparable with dependent choice
-and with countable choice alike, neither implying nor implied by either. Every
-*non*-implication in that sentence is a relative-consistency result, quoted from
-the references and conditional on the consistency of ZF: what is established is
-that ZF, if consistent, does not prove the missing implications, never that they
-are outright false. Those
-incomparabilities are quoted from the references, not recorded here. So a theorem
-must be labelled with the principle it actually uses, never with a position on a
-scale, and a phrase like "the weakest of the three" is simply not available.
-
-**Choice-free, and deliberately so.**
-
-- **[[thm-hartogs]]**: for every set $A$ there is a least ordinal that does not
-  inject into $A$. This is the ZF substitute for cardinal comparability, and its
-  whole value is that it needs no choice.
-- **[[lem-well-order-comparability]]**: any two well-orders are comparable.
-  Comparability of arbitrary sets is equivalent to the Axiom of Choice;
-  comparability of well-orders is free.
-- Transfinite induction, transfinite recursion, the assignment of order types,
-  and the Burali-Forti theorem are all theorems of ZF. Transfinite recursion
-  spends Replacement, and that is the only axiom beyond the basic ones it needs;
-  the standard confusion on this point is recorded as
-  [[fs-transfinite-induction-needs-choice]].
-- Rigidity of well-orders ([[lem-well-order-rigid]]) is the structural reason for
-  all of this: the witnessing isomorphisms are unique, so they never have to be
-  chosen.
-
-**Where this library spends choice.**
-
-Full choice is spent at one step inside Zorn's lemma, and directly in some results
-that do not route through Zorn; more than one *result* assumes it, and there are a
-second and a third, weaker principle each assumed elsewhere. All four facts belong
-in the ledger.
-
-- **One step inside Zorn, and direct uses besides.** The Axiom of Choice is used at a single step of the
-  proof of Zorn's lemma ([[thm-zorn]]), to select a strict upper bound for every
-  chain at once; the fixed point theorem underlying it ([[thm-bourbaki-witt]]) is
-  choice-free. Most results in this library that assume full choice reach it
-  through that step, but not all: some apply the Axiom of Choice directly instead,
-  for example [[thm-product-universal-property]], which uses it to obtain a point
-  of an arbitrary product of nonempty sets without routing through Zorn's lemma.
-- **The results that assume full choice.** [[thm-zorn]] itself is the first of
-  them: its statement takes the Axiom of Choice as a standing hypothesis, which
-  is why the step above lives inside it. On this page: the well-ordering
-  theorem ([[thm-well-ordering-theorem]]), which takes the Axiom of Choice as a
-  hypothesis; and the **cardinality assignment** of [[def-cardinal]], which
-  assumes it in order to well order an arbitrary set. That last one is easy to
-  miss, because the *property* of being a cardinal is choice-free and only the
-  attachment of $|X|$ to an arbitrary $X$ is not. The two equivalences
-  [[cor-ac-iff-zorn]] and [[cor-ac-iff-well-ordering]] do **not** belong in this
-  list: each is proved in ZF outright and assumes no choice principle, saying
-  only that the statements it names imply one another. Elsewhere in the library,
-  [[thm-ultrafilter-lemma]] is proved through Zorn's lemma and so also pays full
-  price, although its statement costs strictly less; and the **Hausdorff maximal
-  principle**, that every poset has a maximal chain, is drawn from Zorn as a
-  consequence in [[ex-zorn-poset-of-chains]] and pays the same price, the
-  chain-completeness verified there being free.
-- **A weaker principle, spent separately.** [[thm-countable-union-of-countable]]
-  and [[thm-perfectly-normal-implies-completely-normal]] are each stated under
-  countable choice ([[def-countable-choice]]) and flag the one step that spends
-  it. That is **not** a use of the Axiom of Choice: $\mathrm{AC}_\omega$ is
-  strictly weaker, so neither theorem may be relabelled choice-free or lumped in
-  with the full-choice results above.
-- **A third principle below full AC.** [[thm-urysohn-lemma]] and
-  [[thm-tietze-extension-theorem]] are each stated under dependent choice
-  ([[def-dependent-choice]]), each applying dependent choice directly to a single
-  relation on stage-tagged states to build an $\mathbb{N}$-indexed sequence of
-  approximations; the standalone stagewise form
-  [[lem-dependent-choice-along-a-sequence-of-relations]] is a related construction
-  that neither theorem cites. DC implies $\mathrm{AC}_\omega$
-  and neither reverses (recorded above), so this is a third, distinct cost: not
-  the Axiom of Choice, and not interchangeable with the countable-choice results
-  either, even though DC happens to imply enough to reprove them.
-
-**What is not proved anywhere here.**
-
-The **independence** of the Axiom of Choice from ZF. Gödel's 1938 constructible
-universe shows ZF cannot refute it ([[rem-godel-constructible-universe]]);
-Cohen's 1963 forcing shows ZF cannot prove it
-([[rem-cohen-forcing-ac-independent]]). Both are external results requiring
-machinery this library does not yet contain, and both are conditional on the
-consistency of ZF. Every statement in
-the library that relies on them is written conditionally, as in
-[[fs-zorn-provable-in-zf]] and [[fs-every-set-well-orderable-in-zf]]. A reader
-who wants the unconditional version of those statements will not find it, here
-or anywhere.
+The later constructibility, forcing, Boolean-algebra, and symmetric-model pages
+are responsible for proving relative consistency and strictness claims. Until
+then, recorded external results are targets, never dependencies of this ledger
+or of any other Foundations item.

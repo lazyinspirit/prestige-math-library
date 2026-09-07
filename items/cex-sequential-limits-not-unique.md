@@ -98,6 +98,9 @@ $\mathbb{N}$ rather than extracting one from an arbitrary infinite set.
 
 - **Uniqueness of limits is a separation property, not a fact about sequences.** In both witnesses distinct points fail to have disjoint neighbourhoods: in the indiscrete topology the only neighbourhood of any point is the whole space, and in the cofinite topology on an infinite set any two nonempty open sets meet ([[ex-cofinite-topology]]). Where distinct points *are* separated by disjoint open sets — in particular in every metric space ([[thm-metric-hausdorff-separation]]) — the argument that a sequence cannot be eventually inside two disjoint sets restores uniqueness ([[lem-metric-limits-unique]]).
 
-- **Why claim 2 is stated for a given injective sequence.** Extracting an injective sequence from an arbitrary infinite set is exactly the statement "every infinite set has a countably infinite subset", which is not provable in ZF ([[fs-infinite-has-countable-subset-in-zf]]). Claim 3 avoids the issue by naming $\mathbb{N}$ and the identity sequence, for which injectivity is immediate.
+- **Why claim 2 is stated for a given injective sequence.** The proof uses the
+  sequence itself; infinitude of the underlying set supplies no canonical
+  enumeration. Claim 3 avoids any selection issue by naming $\mathbb{N}$ and
+  the identity sequence, for which injectivity is immediate.
 
 - **A sequence in the cofinite topology need not be injective to have many limits**, and need not have many limits if it is not: a constant sequence converges only to its value there, since singletons are closed. Injectivity is used in exactly one place, step 1.3, to make each finite set catch only finitely many indices.

@@ -20,7 +20,6 @@ sources:
       url: https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf
     - title: "Morillon, §2.1 Question 1, p.6"
       url: https://lim.univ-reunion.fr/staff/mar/mem-HDR.pdf
-external_refs: [rem-weak-choice-nonimplication-destinations]
 ---
 
 ## Example
@@ -42,7 +41,3 @@ In ZF the proved arrows are $\mathrm{AC}\iff\mathrm{MC}\Rightarrow\mathrm{DC}\Ri
 1.1 Insert the MC equivalence immediately beside AC, then concatenate the proved implications through the countable pair-choice endpoint. Keep arbitrary-family pair choice on its separately proved AC branch. [F1, F2]
 
 2.1 The finite-level description of DC requires both DMC and countable finite choice. Thus the displayed conjunction represents exactly the proved equivalence. [F3] ∎
-
-## Remarks
-
-Unproved reverse-arrow separations are recorded in [[rem-weak-choice-nonimplication-destinations]]. They are external orientation and are not inputs to this verification.

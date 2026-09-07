@@ -10,17 +10,13 @@ items: [def-chain, def-upper-bound, def-maximal-element,
         lem-successor-of-extremal, lem-sup-of-extremals, lem-all-extremal,
         lem-admissible-is-chain, thm-bourbaki-witt, thm-zorn,
         thm-zorn-implies-ac, cor-ac-iff-zorn]
-examples: [fs-zorn-provable-in-zf, fs-maximal-is-greatest]
+examples: [fs-maximal-is-greatest]
 ---
 
 Natural-number induction and recursive addition provide the background for
 finite choice: a selection from a family indexed by a natural number is built
-one value at a time. The metamathematical background separates internal
-derivations in ZF from independence results. Cohen's theorem, stated
-conditionally on the consistency of ZF, shows that the Axiom of Choice is not
-provable in ZF; it is cited as an external result rather than used in the proofs
-of the order-theoretic equivalences. These ingredients fix the logical scope of
-the development.
+one value at a time. The page proves implications and equivalences over ZF; it
+does not use an independence theorem to classify what ZF itself can prove.
 
 The development introduces chains, upper bounds, maximal elements and
 chain-complete posets over the partial orders it requires, and applies the

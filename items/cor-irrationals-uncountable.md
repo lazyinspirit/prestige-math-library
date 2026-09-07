@@ -99,4 +99,7 @@ not needed; see the remarks below.
 
 - The corollary is a statement about the *set* of irrationals only. It says nothing about any individual irrational, and it does not exhibit one; the library exhibits $\sqrt{2}$ separately ([[ex-sqrt-two-exists]], [[fs-sqrt2-rational]]).
 
-- Keeping the two-set union separate from the countable union is not pedantry. The countable case genuinely needs $\mathrm{AC}_\omega$ ([[thm-countable-union-of-countable]]) and is unprovable in ZF conditionally on the consistency of ZF, which is the honest form of [[fs-countable-union-theorem-of-zf]] and rests on an external independence result quoted there rather than proved; whereas this corollary, like [[thm-r-uncountable]] itself, is outright a theorem of ZF.
+- Keeping the two-set union separate from the countable union is not pedantry.
+  The supplied countable-union theorem explicitly assumes
+  $\mathrm{AC}_\omega$ ([[thm-countable-union-of-countable]]), whereas this
+  corollary, like [[thm-r-uncountable]] itself, is proved in ZF.

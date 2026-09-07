@@ -7,8 +7,11 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [rem-independence-of-ch-and-gch, rem-gch-implies-ac, thm-cantor-powerset, thm-r-uncountable, def-countable, def-equinumerous, lem-countable-iff-surjection-from-n, lem-pigeonhole, fs-infinite-has-countable-subset-in-zf]
+deps: [thm-cantor-powerset, thm-r-uncountable, def-countable, def-equinumerous, lem-countable-iff-surjection-from-n, lem-pigeonhole]
 justified_by: []
+external_refs: [rem-independence-of-ch-and-gch, rem-gch-implies-ac,
+                rem-godel-constructible-universe,
+                rem-cohen-forcing-ac-independent]
 aliases: [rem-ch]
 landmark: false
 short: "CH is independent of ZFC"
@@ -52,17 +55,13 @@ obvious next question is whether anything sits strictly in between.
 
 **Over ZFC** this is equivalent to: every uncountable subset of
 $\mathcal{P}(\mathbb{N})$ is equinumerous with $\mathcal{P}(\mathbb{N})$ itself.
-The qualification matters, and it is one of the few places on this page where a
-statement is not choice free. Passing from the displayed form to the subset form
-requires knowing that an uncountable $A \subseteq \mathcal{P}(\mathbb{N})$
-satisfies $\mathbb{N} \prec A$, that is, that $A$ has a countably infinite
-subset, and **that is not a theorem of ZF, granted the consistency of ZF**: this
-page records exactly that in [[fs-infinite-has-countable-subset-in-zf]], whose
-conclusion is conditional on the consistency of ZF and rests on an external
-independence result quoted there rather than proved. Over ZF that passage is
-therefore unavailable, so nothing here asserts the two forms to be equivalent,
-and only the displayed form is used below. Whether they genuinely come apart in some model of
-ZF is a further independence question, which this page neither settles nor uses.
+The qualification matters. Passing from the displayed form to the subset form
+uses choice to well order an uncountable
+$A\subseteq\mathcal P(\mathbb N)$ and obtain
+$\mathbb N\prec A$. Nothing here asserts that this passage is available in ZF;
+only the displayed form is used below. Determining the exact choiceless
+relationship between the formulations belongs to the later symmetric-model
+development.
 
 **CH is independent of ZFC** ([[rem-independence-of-ch-and-gch]]). Gödel (1938)
 showed that ZFC cannot refute it, by constructing the inner model $L$ of

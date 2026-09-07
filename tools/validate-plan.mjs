@@ -50,6 +50,8 @@
 //                         contract, including each A page's actual companion,
 //                         retain that category in both the plan and their
 //                         top-level `library/<category>/` location
+//  19. set-theory-boundary no Foundations page may directly or transitively
+//                         require the Set Theory recorded-not-proved catalogue
 //
 // Exit code 0 iff there are no hard errors.
 
@@ -63,6 +65,7 @@ const repo = argVal('--repo') ?? REPO;
 // 60, not 100 (owner, 2026-08-11). Overridable, but an override is a decision to
 // record in the run's notes, not a way past a page that should have been split.
 const maxItems = Number(argVal('--max-items') ?? 60);
+const SET_THEORY_DEFERRED_PAGE = 'deferred-set-theory-beyond-choice';
 if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE]');
 
 // --rehomed: the owner-approved RE-HOME receipt (see the `dup-id` note below).
@@ -101,14 +104,30 @@ const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 
 /** ids already published/drafted in the repo, plus their aliases */
 const existing = new Set();
+const canonicalExisting = new Map();
+const existingItemEdges = new Map();
+function frontmatterList(src, key) {
+  const match = src.match(new RegExp(`^${key}:\\s*\\[([\\s\\S]*?)\\]`, 'm'));
+  return match
+    ? match[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
+    : [];
+}
 try {
   for (const f of readdirSync(join(repo, 'items'))) {
     if (!f.endsWith('.md')) continue;
-    existing.add(f.slice(0, -3));
+    const id = f.slice(0, -3);
+    existing.add(id);
+    canonicalExisting.set(id, id);
     const src = readFileSync(join(repo, 'items', f), 'utf8');
-    const m = src.match(/^aliases:\s*\[([^\]]*)\]/m);
-    if (m) for (const a of m[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')))
-      if (a) existing.add(a);
+    existingItemEdges.set(id, [
+      ...frontmatterList(src, 'deps'),
+      ...frontmatterList(src, 'justified_by'),
+      ...frontmatterList(src, 'forward_refs'),
+    ]);
+    for (const a of frontmatterList(src, 'aliases')) {
+      existing.add(a);
+      canonicalExisting.set(a, id);
+    }
   }
 } catch (e) { console.error(`warning: could not read ${repo}/items (${e.code}); existing-id check is off`); }
 
@@ -187,6 +206,7 @@ for (const p of pages) {
 // but an EXISTING repo item used as a dep should also live on some published page.
 const publishedPageItems = new Set();
 const homePageOf = new Map();          // itemId -> the page id in library/ that lists it
+const itemsOnHomePage = new Map();     // pageId -> actual item ids, including P pages
 const pageLocationOf = new Map();      // pageId -> top-level category and relative file path
 try {
   const libraryRoot = join(repo, 'library');
@@ -199,13 +219,16 @@ try {
         const pageId = src.match(/^page:\s*(\S+)/m)?.[1] ?? e.name.slice(0, -3);
         const rel = relative(libraryRoot, fp);
         pageLocationOf.set(pageId, { category: rel.split(/[\\/]/)[0], file: rel });
+        const pageItems = [];
         for (const key of ['items', 'examples']) {
           const m = src.match(new RegExp(`^${key}:\\s*\\[([\\s\\S]*?)\\]`, 'm'));
           if (m) for (const id of m[1].split(',').map((s) => s.trim())) if (id) {
             publishedPageItems.add(id);
             if (!homePageOf.has(id)) homePageOf.set(id, pageId);
+            pageItems.push(id);
           }
         }
+        itemsOnHomePage.set(pageId, pageItems);
       }
     }
   };
@@ -381,10 +404,52 @@ function reqClosure(pid) {
   return out;
 }
 
+const deferredItemPathCache = new Map();
+function deferredItemPath(id, visiting = new Set()) {
+  const r = pageOfItem.has(id) ? id : (canonicalExisting.get(id) ?? id);
+  if (visiting.has(r)) return null;
+  if (deferredItemPathCache.has(r)) return deferredItemPathCache.get(r);
+  const home = pageOfItem.get(r)?.id ?? homePageOf.get(r);
+  if (home === SET_THEORY_DEFERRED_PAGE) return [r];
+  const edges = new Set([
+    ...(itemById.get(r)?.deps ?? []),
+    ...(existingItemEdges.get(r) ?? []),
+  ]);
+  if (!edges.size) return null;
+  visiting.add(r);
+  for (const d of edges) {
+    const path = deferredItemPath(d, visiting);
+    if (path) {
+      const found = [r, ...path];
+      visiting.delete(r);
+      deferredItemPathCache.set(r, found);
+      return found;
+    }
+  }
+  visiting.delete(r);
+  deferredItemPathCache.set(r, null);
+  return null;
+}
+
 for (const p of pages) {
   if ((p.forwardRefs ?? []).length && p.kind !== 'B')
     err('forward-whitelist', `page ${p.id} declares forwardRefs but is not a B page; only examples pages are leaves`);
   const closure = reqClosure(p.id);
+  if (p.category === 'foundations' && closure.has(SET_THEORY_DEFERRED_PAGE))
+    err('set-theory-boundary', `page ${p.id} transitively requires ${SET_THEORY_DEFERRED_PAGE}; Foundations must build the recorded results and may never consume that catalogue as a prerequisite`);
+  if (p.category === 'foundations') {
+    for (const consumedPageId of [p.id, ...closure]) {
+      const roots = new Set([
+        ...((pageById.get(consumedPageId)?.items ?? []).map((it) => it.id)),
+        ...(itemsOnHomePage.get(consumedPageId) ?? []),
+      ]);
+      for (const id of roots) {
+        const path = deferredItemPath(id);
+        if (path)
+          err('set-theory-boundary', `page ${p.id} consumes a planned item path to ${SET_THEORY_DEFERRED_PAGE}: ${path.join(' -> ')}`);
+      }
+    }
+  }
   for (const q of pageSucc(p.id))
     if (!closure.has(q) && !(p.forwardRefs ?? []).includes(q))
       err('undeclared-prereq', `page ${p.id} has an item depending on ${q}, which is NOT in the closure of its declared requires — either add it or drop the dependency`);

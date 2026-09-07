@@ -121,7 +121,8 @@ Axiom of Choice, so, under the standing assumption that ZF is consistent, no pro
 of it in ZF alone can exist; the exact form of
 that implication, and the correction of the classical derivation, are recorded in
 [[rem-schechter-kelley-tychonoff]], which this library states and does not prove.
-Where the ultrafilter lemma sits between the two is [[rem-choice-strengths]].
+The AC-based upper bound furnished by the local proof of the ultrafilter lemma
+is recorded in [[rem-choice-strengths]]; no lower-bound separation is used here.
 
 **Spending the Axiom of Countable Choice ([[def-countable-choice]]).** Claims 2
 and 4 of [[thm-compactness-variants-hierarchy]], each of which picks a point

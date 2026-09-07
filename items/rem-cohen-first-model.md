@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-cohen-forcing-ac-independent]
 justified_by: []
-forward_refs: [fs-infinite-has-countable-subset-in-zf, def-countable-choice, def-countable]
+forward_refs: [def-countable-choice, def-countable]
 aliases: []
 landmark: false
 short: "infinite but with no countably infinite subset"
@@ -60,14 +60,12 @@ countably infinite subset in the model.
   $\mathbb{N} \to A$ is hereditarily symmetric. That is the same forcing track
   named in [[rem-cohen-forcing-ac-independent]].
 
-- **Why it matters here.** It is the external fact that
-  [[fs-infinite-has-countable-subset-in-zf]] quotes. Without it, the natural
-  argument "$A$ is infinite, so pick $a_0$, then $a_1$, and so on" looks like a
-  ZF proof, and the failure is invisible: what the argument uses is a choice
-  principle ([[def-countable-choice]]), and this model is the witness that it
-  cannot be removed. It is also the reason this library defines finiteness by
-  equinumerosity with a natural number rather than by the Dedekind condition
-  ([[def-countable]]): the two definitions part company in ZF.
+- **Why it matters later.** The natural argument "$A$ is infinite, so pick
+  $a_0$, then $a_1$, and so on" uses a choice principle
+  ([[def-countable-choice]]). Once the symmetric-model construction is proved,
+  this model will witness that such an extraction is not available in ZF. It
+  also explains why [[def-countable]] keeps ordinary and Dedekind finiteness
+  distinct at the definitional level.
 
 - **Conditional discipline.** As always, the statement is an implication between
   consistency statements. This library never asserts that an infinite

@@ -26,9 +26,10 @@ const AB = (id, title, category, requires, opts = {}) => {
 };
 
 /** a page that RECORDS results this library does not prove (SCHEMA §3
- *  `proved_here: false`). Declared FIRST so it sits at the very start of plan
- *  order and any page may depend on it; it has no prerequisites of its own
- *  because it states results rather than deriving them. */
+ *  `proved_here: false`). Declared first for stable catalogue order; it has no
+ *  prerequisites because it states results rather than deriving them. The
+ *  Foundations track may never require its Set Theory catalogue: that track is
+ *  charged with proving the entries and `validate-plan` enforces the boundary. */
 const X = (id, title, items = []) =>
   pages.push({ order: ++ord, id, kind: 'X', category: 'not-proved-here', title, requires: [], items });
 
@@ -102,7 +103,6 @@ const F1A_ITEMS = [
   { id: 'thm-zorn', kind: 'theorem', deps: ['thm-bourbaki-witt', 'def-axiom-of-choice', 'def-maximal-element', 'def-upper-bound', 'def-chain'] },
   { id: 'thm-zorn-implies-ac', kind: 'theorem', deps: ['thm-zorn', 'def-choice-function', 'def-maximal-element'] },
   { id: 'cor-ac-iff-zorn', kind: 'corollary', deps: ['thm-zorn', 'thm-zorn-implies-ac'] },
-  { id: 'fs-zorn-provable-in-zf', kind: 'false-statement', deps: ['thm-zorn', 'cor-ac-iff-zorn', 'thm-zorn-implies-ac'] },
   { id: 'fs-maximal-is-greatest', kind: 'false-statement', deps: ['def-maximal-element', 'def-partial-order'] },
 ];
 
@@ -141,9 +141,9 @@ const F1B_B_ITEMS = [
 ];
 
 const F1 = AB('order-zorn-and-the-axiom-of-choice', "Order, Zorn's Lemma, and the Axiom of Choice",
-  'foundations', [NAT, XSET], { items: F1A_ITEMS, bItems: F1A_B_ITEMS });
+  'foundations', [NAT], { items: F1A_ITEMS, bItems: F1A_B_ITEMS });
 const F1B = AB('filters-and-ultrafilters', 'Filters and Ultrafilters',
-  'foundations', [F1, XSET], { items: F1B_ITEMS, bItems: F1B_B_ITEMS });
+  'foundations', [F1], { items: F1B_ITEMS, bItems: F1B_B_ITEMS });
 
 // ---------------------------------------------------------------- real analysis
 
@@ -245,8 +245,6 @@ const RA03_ITEMS = [
   { id: 'thm-cantor-powerset', kind: 'theorem', deps: ['def-injection-surjection-bijection', 'def-equinumerous'] },
   { id: 'thm-r-uncountable', kind: 'theorem', deps: ['def-countable', 'def-complete-ordered-field', 'thm-recursion', 'lem-sup-epsilon', 'lem-sup-unique', 'def-bounded-set', 'lem-countable-iff-surjection-from-n', 'lem-of-add-order'] },
   { id: 'cor-irrationals-uncountable', kind: 'corollary', deps: ['thm-r-uncountable', 'thm-rationals-countable', 'def-countable', 'lem-countable-iff-surjection-from-n'] },
-  { id: 'fs-countable-union-theorem-of-zf', kind: 'false-statement', deps: ['thm-countable-union-of-countable', 'def-countable-choice'] },
-  { id: 'fs-infinite-has-countable-subset-in-zf', kind: 'false-statement', deps: ['def-countable', 'def-countable-choice'] },
   { id: 'fs-uncountable-contains-interval', kind: 'false-statement', deps: ['cor-irrationals-uncountable', 'lem-rat-embeds-dense', 'def-countable'] },
   { id: 'rem-continuum-hypothesis', kind: 'remark', deps: ['thm-cantor-powerset', 'thm-r-uncountable'] },
 ];
@@ -1006,8 +1004,8 @@ const RA11_ITEMS = [
     strategy: 'direct',
     deps: ['thm-cantor-set-properties', 'thm-cantor-set-ternary-description', 'def-cantor-set', 'def-countable'] },
   { id: 'rem-baire-in-r-is-choice-free', kind: 'remark',
-    title: 'Why the nested-interval proof of Baire category in $\\mathbb{R}$ needs no choice, while the general complete-metric statement does',
-    deps: ['thm-baire-category-r', 'def-countable-choice', 'rem-baire-category-choice-strength', 'thm-nested-interval-property'] },
+    title: 'Why the nested-interval proof of Baire category in $\\mathbb{R}$ needs no choice',
+    deps: ['thm-baire-category-r', 'def-countable-choice', 'thm-nested-interval-property', 'thm-rationals-countable', 'lem-rat-embeds-dense', 'thm-well-ordering-principle', 'thm-recursion'] },
 ];
 
 const RA11_B_ITEMS = [
@@ -1174,7 +1172,7 @@ const RA12_B_ITEMS = [
 
 RA(1, 'suprema-and-infima', 'Suprema and Infima', [FND], { items: RA01_ITEMS, bItems: RA01_B_ITEMS });
 RA(2, 'roots-and-rational-powers', 'Roots, Rational Powers, and Classical Inequalities', [ra[1]], { items: RA02_ITEMS });
-RA(3, 'countability-and-uncountability', 'Countability and the Uncountability of R', [ra[1], F1, XSET], { items: RA03_ITEMS });
+RA(3, 'countability-and-uncountability', 'Countability and the Uncountability of R', [ra[1], F1], { items: RA03_ITEMS });
 RA(4, 'sequences-and-limits', 'Sequences and Limits', [ra[1]], { ...trigNote, items: RA04_ITEMS });
 RA(5, 'monotone-sequences-and-cauchy-completeness', 'Monotone Sequences, Bolzano–Weierstrass, and Cauchy Completeness', [ra[4], ra[2]], { items: RA05_ITEMS, bItems: RA05_B_ITEMS });
 
@@ -1520,13 +1518,12 @@ const F2A_ITEMS = [
   { id: 'cor-ac-iff-well-ordering', kind: 'corollary', deps: ['thm-well-ordering-theorem', 'thm-well-ordering-implies-ac', 'cor-ac-iff-zorn', 'def-axiom-of-choice'] },
   { id: 'def-cardinal', kind: 'definition', deps: ['def-ordinal', 'thm-well-ordering-theorem', 'thm-hartogs', 'lem-ordinal-trichotomy'] },
   { id: 'fs-ordinals-form-a-set', kind: 'false-statement', deps: ['thm-burali-forti', 'def-ordinal'] },
-  { id: 'fs-every-set-well-orderable-in-zf', kind: 'false-statement', deps: ['thm-well-ordering-theorem', 'cor-ac-iff-well-ordering', 'fs-zorn-provable-in-zf'] },
   { id: 'fs-transfinite-induction-needs-choice', kind: 'false-statement', deps: ['thm-transfinite-induction', 'thm-transfinite-recursion'] },
   { id: 'rem-choice-ledger', kind: 'remark', deps: ['cor-ac-iff-well-ordering', 'cor-ac-iff-zorn', 'thm-hartogs'] },
 ];
 
 const F2 = AB('ordinals-and-transfinite-recursion', 'Ordinals, Cardinals, and Transfinite Recursion',
-  'foundations', [F1, XSET], { items: F2A_ITEMS });
+  'foundations', [F1], { items: F2A_ITEMS });
 
 // ------------------------------------------------- general topology (T1-T3 are above)
 

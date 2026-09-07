@@ -46,11 +46,9 @@ examples: []
 
 This development starts from first-order logic with equality over a single
 binary relation symbol $\in$, in which every object of the domain is a set and
-the domain is nonempty; nothing mathematical is assumed before that. The one
-result taken from elsewhere is recorded rather than proved: neither the continuum
-hypothesis nor its generalisation is decided by these axioms
-([[rem-independence-of-ch-and-gch]]), and it is cited only to say what the Power
-Set axiom leaves open about the size of a power set.
+the domain is nonempty; nothing mathematical is assumed before that. No
+independence or model-construction result is used in stating the axioms or
+deriving the basic constructions.
 
 The ZF axioms are stated in that language, written without abbreviations
 wherever the usual formulation would need notation introduced further down. The

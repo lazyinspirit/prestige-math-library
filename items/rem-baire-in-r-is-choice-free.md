@@ -1,13 +1,13 @@
 ---
 id: rem-baire-in-r-is-choice-free
 kind: remark
-title: "Why the nested-interval proof of Baire category in $\\mathbb{R}$ needs no choice, while the general complete-metric statement does"
+title: "Why the nested-interval proof of Baire category in $\\mathbb{R}$ needs no choice"
 status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [thm-baire-category-r, rem-baire-category-choice-strength, def-countable-choice, def-dependent-choice, thm-nested-interval-property, thm-rationals-countable, lem-rat-embeds-dense, thm-well-ordering-principle, thm-recursion]
+deps: [thm-baire-category-r, def-countable-choice, thm-nested-interval-property, thm-rationals-countable, lem-rat-embeds-dense, thm-well-ordering-principle, thm-recursion]
 justified_by: []
 aliases: []
 landmark: false
@@ -44,30 +44,24 @@ whole construction is one application of [[thm-recursion]] to it. In particular
 the proof does not use countable choice ([[def-countable-choice]]), which the
 neighbouring measure-theoretic results on this page do use.
 
-**What the naive proof would spend, and why.** The textbook argument says: given
-the interval produced at stage $k$, *choose* an interval inside it meeting
-$U_{k+1}$, and repeat. Each choice is made from a nonempty set that depends on
-the previous choice, and it is made infinitely often. That pattern is not
-countable choice, which selects from a family fixed in advance; it is the axiom
-of dependent choice ([[def-dependent-choice]]). Replacing the choice by a canonical rule is the only edit
-the argument needs, and fixing an enumeration of a dense set in advance is what
-makes a canonical rule available.
+**What the naive proof leaves implicit.** The textbook argument says: given the
+interval produced at stage $k$, *choose* an interval inside it meeting
+$U_{k+1}$, and repeat. Each selection depends on the preceding one. The local
+proof makes no claim about the weakest axiom that would validate that pattern;
+it removes the issue by replacing every selection with a canonical rule. A
+fixed enumeration of a dense set is what makes that rule available.
 
-**What this does NOT establish.** It establishes nothing about the Baire category
-theorem for complete metric spaces in general. That statement is genuinely
-stronger, and how much stronger is recorded, with references and without proof,
-in [[rem-baire-category-choice-strength]]: over ZF the metric version is
-equivalent to dependent choice, whereas its restriction to spaces with a
-countable dense subset is a theorem of ZF, "a fixed countable dense set removes
-every choice from the construction". The proof of [[thm-baire-category-r]] is
-precisely that restricted argument, specialised to $\mathbb{R}$ with the
-rationals as the countable dense set. So the correct summary is:
+**What this does NOT establish.** It establishes nothing about the Baire
+category theorem for arbitrary complete metric spaces. The proof of
+[[thm-baire-category-r]] is a specialised argument using the fixed enumeration
+of the rationals; it does not supply a canonical dense sequence in a general
+space. So the correct summary is:
 
 - the statement proved here, for $\mathbb{R}$, needs no choice principle;
 - the general metric statement is not proved here at all, and is not a corollary
   of what is proved here;
-- the strength of that general statement over ZF is quoted from the literature in
-  [[rem-baire-category-choice-strength]], which this library does not prove.
+- the exact strength of the general statement over ZF waits for the later local
+  weak-choice and model-theoretic development.
 
 **Why the distinction is worth a separate item.** The two statements are
 routinely called by the same name, and a reader who has seen "Baire needs

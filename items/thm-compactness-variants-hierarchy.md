@@ -125,7 +125,10 @@ about the axiom it belongs to is asserted.
 
 ## Remarks
 
-**That an infinite set has a countably infinite subset is not a theorem of ZF**, which is what claim 3 pays dependent choice for ([[fs-infinite-has-countable-subset-in-zf]]). Claim 1(d), the part of claim 3 that speaks only about countably infinite subsets, is free of that cost and is proved in ZF.
+**The supplied proof of claim 3 pays dependent choice** to construct a
+countably infinite subset of the given infinite set. Claim 1(d), the part of
+claim 3 that begins with an already supplied countably infinite subset, is free
+of that cost and is proved in ZF. No lower-bound claim is used here.
 
 **Why claim 4 needs the singleton hypothesis and claim 1(c) does not.** A limit point of the set $A$ built at step 2.1 need not be one of the $x_n$ with large index unless the finitely many early terms can be cut away, and cutting them away is exactly what closedness of singletons permits. Without that hypothesis the implication fails, and the witness is worked on this page's companion, as `cex-limit-point-compact-without-countable-compactness`: a space in which every nonempty subset has a limit point, for the trivial reason that each point has a partner it cannot be separated from, and which has a countable open cover with no finite subcover.
 

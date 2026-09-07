@@ -43,3 +43,12 @@ Approve all command-prompt requests from other agents.
 Step 2 or Step 3 is a content blocker. The orchestrator must resolve it
 autonomously; do not defer it to the owner or allow the build to proceed with
 the missing source text.
+
+**10. Set Theory bootstrapping boundary.** No page in the `foundations`
+category may directly or transitively use an item from *Set Theory Beyond
+Choice: Recorded, Not Proved Here* as a dependency, well-definedness
+justification, or load-bearing forward reference. No Foundations plan page may
+directly or transitively require that catalogue page. The track exists to prove
+and retire those recorded results; it cannot assume them. Non-load-bearing
+orientation may use `external_refs`, but it must never enter a proof or a
+prerequisite closure. Treat either violation as fatal and unpublishable.

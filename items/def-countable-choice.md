@@ -99,16 +99,12 @@ countable family of nonempty sets ([[def-countable]]) has a choice function.
 
 - **Being an axiom, $\mathrm{AC}_\omega$ carries no well-definedness obligation**,
   which is why this item has no `justified_by`. Its role in this library is
-  bookkeeping: [[thm-countable-union-of-countable]] assumes it and flags the exact
-  step that spends it, and [[fs-countable-union-theorem-of-zf]] records that the
-  assumption cannot be removed.
+  bookkeeping: [[thm-countable-union-of-countable]] assumes it and flags the
+  exact step that spends it. Whether the assumption can be removed requires the
+  later symmetric-model development and is not inferred here.
 
 - Every result *proved* on this page other than
   [[thm-countable-union-of-countable]] is a theorem of ZF alone. In particular
   [[lem-subset-of-countable]], [[lem-countable-iff-surjection-from-n]],
   [[thm-schroder-bernstein]], [[thm-rationals-countable]], [[thm-cantor-powerset]]
-  and [[thm-r-uncountable]] are choice free, and each says so. The false
-  statements at the end of the page are not all of that kind, and the claim above
-  does not cover them: two of the three refute a ZF-provability claim only under
-  the hypothesis that ZF is consistent, quoting an external independence result
-  rather than proving it, and they say so in their own Facts.
+  and [[thm-r-uncountable]] are choice free, and each says so.

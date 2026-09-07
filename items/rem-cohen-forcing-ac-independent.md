@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-godel-constructible-universe]
 justified_by: []
-forward_refs: [def-axiom-of-choice, cor-ac-iff-zorn, fs-zorn-provable-in-zf, fs-every-set-well-orderable-in-zf, rem-choice-ledger]
+forward_refs: [cor-ac-iff-zorn]
 aliases: []
 landmark: true
 short: "Con(ZF) implies Con(ZF + not AC), by forcing"
@@ -63,12 +63,10 @@ proves everything.
   (Fraenkel-Mostowski permutation models) and transfers it to ZF by the
   Jech-Sochor embedding theorem. Neither route is in this library.
 
-- **Why it matters here.** This is the result that
-  [[fs-zorn-provable-in-zf]] and [[fs-every-set-well-orderable-in-zf]] quote when
-  they refuse to accept Zorn's lemma or the well-ordering theorem as theorems of
-  ZF: both are equivalent to the Axiom of Choice over ZF ([[cor-ac-iff-zorn]]),
-  so a ZF proof of either would be a ZF proof of [[def-axiom-of-choice]]. It is
-  also one of the two external facts recorded in [[rem-choice-ledger]].
+- **Why it matters here.** Zorn's lemma and the well-ordering theorem are each
+  equivalent to the Axiom of Choice over ZF ([[cor-ac-iff-zorn]]), so the later
+  forcing proof will transfer the same nonprovability conclusion to them. No
+  Foundations proof uses that conclusion as a premise.
 
 - **Conditional discipline.** "ZF does not prove AC" always abbreviates the
   implication above. Nothing in this library asserts the unconditional form,

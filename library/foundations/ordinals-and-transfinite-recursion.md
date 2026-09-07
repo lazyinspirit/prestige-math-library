@@ -10,8 +10,7 @@ items: [def-well-order, def-order-isomorphism, def-initial-segment,
         lem-omega-least-limit-ordinal, thm-hartogs,
         thm-well-ordering-theorem, thm-well-ordering-implies-ac,
         cor-ac-iff-well-ordering, def-cardinal, rem-choice-ledger]
-examples: [fs-ordinals-form-a-set, fs-every-set-well-orderable-in-zf,
-           fs-transfinite-induction-needs-choice]
+examples: [fs-ordinals-form-a-set, fs-transfinite-induction-needs-choice]
 ---
 
 Well-orders extend ordinary induction by giving every nonempty subset a least

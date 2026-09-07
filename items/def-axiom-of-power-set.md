@@ -9,7 +9,6 @@ provenance:
   proof: not-applicable
 deps: [def-language-of-set-theory]
 justified_by: []
-external_refs: [rem-independence-of-ch-and-gch]
 aliases: []
 landmark: true
 short: "Power Set"
@@ -57,8 +56,7 @@ trimming $y$ down to exactly those $z$ is a separate step, carried out at
   [[rem-which-axiom-each-construction-uses]] then records honestly that the power
   set costs Power Set *and* Separation.
 
-- **The axiom says nothing about size.** It asserts that a set collecting the
-  subsets of $x$ exists, and nothing about how many members that set has. How
-  large the power set of an infinite set is, is exactly the question the
-  continuum hypothesis asks, and that question is settled by neither ZF nor ZFC
-  ([[rem-independence-of-ch-and-gch]]).
+- **The axiom says nothing about cardinal arithmetic.** It asserts that a set
+  collecting the subsets of $x$ exists. Questions comparing the size of an
+  infinite set with intermediate sizes require later cardinal and model
+  theory; no such result is a premise here.

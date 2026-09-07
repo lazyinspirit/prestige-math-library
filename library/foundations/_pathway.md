@@ -11,8 +11,8 @@ parts:
     title: "The naturals, order and choice"
     pages:
       - construction-of-the-natural-numbers
-      - order-zorn-and-the-axiom-of-choice
       - formal-set-theoretic-syntax-structures-and-satisfaction
+      - order-zorn-and-the-axiom-of-choice
       - filters-and-ultrafilters
   - part: ordinals-and-cardinals
     title: "Ordinals and cardinals"
